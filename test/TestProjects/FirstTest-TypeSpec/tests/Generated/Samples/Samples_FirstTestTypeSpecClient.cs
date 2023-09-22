@@ -33,8 +33,11 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("requiredUnion").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
+            Console.WriteLine(result.GetProperty("requiredUnionOfLiteralString").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+            Console.WriteLine(result.GetProperty("requiredUnionOfLiteralInt").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
+            Console.WriteLine(result.GetProperty("requiredUnionOfLiteralFloat").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
             Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
@@ -53,8 +56,11 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("requiredUnion").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
+            Console.WriteLine(result.GetProperty("requiredUnionOfLiteralString").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+            Console.WriteLine(result.GetProperty("requiredUnionOfLiteralInt").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
+            Console.WriteLine(result.GetProperty("requiredUnionOfLiteralFloat").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
             Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
@@ -73,12 +79,18 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("requiredUnion").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
+            Console.WriteLine(result.GetProperty("requiredUnionOfLiteralString").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+            Console.WriteLine(result.GetProperty("requiredUnionOfLiteralInt").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
+            Console.WriteLine(result.GetProperty("requiredUnionOfLiteralFloat").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("optionalLiteralString").ToString());
+            Console.WriteLine(result.GetProperty("optionalUnionOfLiteralString").ToString());
             Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
+            Console.WriteLine(result.GetProperty("optionalUnionOfLiteralInt").ToString());
             Console.WriteLine(result.GetProperty("optionalLiteralFloat").ToString());
+            Console.WriteLine(result.GetProperty("optionalUnionOfLiteralFloat").ToString());
             Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
             Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
@@ -98,12 +110,18 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("requiredUnion").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
+            Console.WriteLine(result.GetProperty("requiredUnionOfLiteralString").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+            Console.WriteLine(result.GetProperty("requiredUnionOfLiteralInt").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
+            Console.WriteLine(result.GetProperty("requiredUnionOfLiteralFloat").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("optionalLiteralString").ToString());
+            Console.WriteLine(result.GetProperty("optionalUnionOfLiteralString").ToString());
             Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
+            Console.WriteLine(result.GetProperty("optionalUnionOfLiteralInt").ToString());
             Console.WriteLine(result.GetProperty("optionalLiteralFloat").ToString());
+            Console.WriteLine(result.GetProperty("optionalUnionOfLiteralFloat").ToString());
             Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
             Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
@@ -123,8 +141,11 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("requiredUnion").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
+            Console.WriteLine(result.GetProperty("requiredUnionOfLiteralString").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+            Console.WriteLine(result.GetProperty("requiredUnionOfLiteralInt").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
+            Console.WriteLine(result.GetProperty("requiredUnionOfLiteralFloat").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
             Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
@@ -143,8 +164,11 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("requiredUnion").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
+            Console.WriteLine(result.GetProperty("requiredUnionOfLiteralString").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+            Console.WriteLine(result.GetProperty("requiredUnionOfLiteralInt").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
+            Console.WriteLine(result.GetProperty("requiredUnionOfLiteralFloat").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
             Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
@@ -163,12 +187,18 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("requiredUnion").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
+            Console.WriteLine(result.GetProperty("requiredUnionOfLiteralString").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+            Console.WriteLine(result.GetProperty("requiredUnionOfLiteralInt").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
+            Console.WriteLine(result.GetProperty("requiredUnionOfLiteralFloat").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("optionalLiteralString").ToString());
+            Console.WriteLine(result.GetProperty("optionalUnionOfLiteralString").ToString());
             Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
+            Console.WriteLine(result.GetProperty("optionalUnionOfLiteralInt").ToString());
             Console.WriteLine(result.GetProperty("optionalLiteralFloat").ToString());
+            Console.WriteLine(result.GetProperty("optionalUnionOfLiteralFloat").ToString());
             Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
             Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
@@ -188,12 +218,18 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("requiredUnion").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
+            Console.WriteLine(result.GetProperty("requiredUnionOfLiteralString").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+            Console.WriteLine(result.GetProperty("requiredUnionOfLiteralInt").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
+            Console.WriteLine(result.GetProperty("requiredUnionOfLiteralFloat").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("optionalLiteralString").ToString());
+            Console.WriteLine(result.GetProperty("optionalUnionOfLiteralString").ToString());
             Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
+            Console.WriteLine(result.GetProperty("optionalUnionOfLiteralInt").ToString());
             Console.WriteLine(result.GetProperty("optionalLiteralFloat").ToString());
+            Console.WriteLine(result.GetProperty("optionalUnionOfLiteralFloat").ToString());
             Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
             Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
@@ -212,8 +248,11 @@ namespace FirstTestTypeSpec.Samples
                 name = "<name>",
                 requiredUnion = "<requiredUnion>",
                 requiredLiteralString = "accept",
+                requiredUnionOfLiteralString = "accept",
                 requiredLiteralInt = 123,
+                requiredUnionOfLiteralInt = 123,
                 requiredLiteralFloat = 1.23F,
+                requiredUnionOfLiteralFloat = 1.23F,
                 requiredLiteralBool = false,
                 requiredBadDescription = "<requiredBadDescription>",
                 requiredNullableList = new List<object>()
@@ -227,8 +266,11 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("requiredUnion").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
+            Console.WriteLine(result.GetProperty("requiredUnionOfLiteralString").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+            Console.WriteLine(result.GetProperty("requiredUnionOfLiteralInt").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
+            Console.WriteLine(result.GetProperty("requiredUnionOfLiteralFloat").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
             Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
@@ -246,8 +288,11 @@ namespace FirstTestTypeSpec.Samples
                 name = "<name>",
                 requiredUnion = "<requiredUnion>",
                 requiredLiteralString = "accept",
+                requiredUnionOfLiteralString = "accept",
                 requiredLiteralInt = 123,
+                requiredUnionOfLiteralInt = 123,
                 requiredLiteralFloat = 1.23F,
+                requiredUnionOfLiteralFloat = 1.23F,
                 requiredLiteralBool = false,
                 requiredBadDescription = "<requiredBadDescription>",
                 requiredNullableList = new List<object>()
@@ -261,8 +306,11 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("requiredUnion").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
+            Console.WriteLine(result.GetProperty("requiredUnionOfLiteralString").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+            Console.WriteLine(result.GetProperty("requiredUnionOfLiteralInt").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
+            Console.WriteLine(result.GetProperty("requiredUnionOfLiteralFloat").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
             Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
@@ -280,12 +328,18 @@ namespace FirstTestTypeSpec.Samples
                 name = "<name>",
                 requiredUnion = "<requiredUnion>",
                 requiredLiteralString = "accept",
+                requiredUnionOfLiteralString = "accept",
                 requiredLiteralInt = 123,
+                requiredUnionOfLiteralInt = 123,
                 requiredLiteralFloat = 1.23F,
+                requiredUnionOfLiteralFloat = 1.23F,
                 requiredLiteralBool = false,
                 optionalLiteralString = "reject",
+                optionalUnionOfLiteralString = "accept",
                 optionalLiteralInt = 456,
+                optionalUnionOfLiteralInt = 456,
                 optionalLiteralFloat = 4.56F,
+                optionalUnionOfLiteralFloat = 4.56F,
                 optionalLiteralBool = true,
                 requiredBadDescription = "<requiredBadDescription>",
                 optionalNullableList = new List<object>()
@@ -303,12 +357,18 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("requiredUnion").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
+            Console.WriteLine(result.GetProperty("requiredUnionOfLiteralString").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+            Console.WriteLine(result.GetProperty("requiredUnionOfLiteralInt").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
+            Console.WriteLine(result.GetProperty("requiredUnionOfLiteralFloat").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("optionalLiteralString").ToString());
+            Console.WriteLine(result.GetProperty("optionalUnionOfLiteralString").ToString());
             Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
+            Console.WriteLine(result.GetProperty("optionalUnionOfLiteralInt").ToString());
             Console.WriteLine(result.GetProperty("optionalLiteralFloat").ToString());
+            Console.WriteLine(result.GetProperty("optionalUnionOfLiteralFloat").ToString());
             Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
             Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
@@ -327,12 +387,18 @@ namespace FirstTestTypeSpec.Samples
                 name = "<name>",
                 requiredUnion = "<requiredUnion>",
                 requiredLiteralString = "accept",
+                requiredUnionOfLiteralString = "accept",
                 requiredLiteralInt = 123,
+                requiredUnionOfLiteralInt = 123,
                 requiredLiteralFloat = 1.23F,
+                requiredUnionOfLiteralFloat = 1.23F,
                 requiredLiteralBool = false,
                 optionalLiteralString = "reject",
+                optionalUnionOfLiteralString = "accept",
                 optionalLiteralInt = 456,
+                optionalUnionOfLiteralInt = 456,
                 optionalLiteralFloat = 4.56F,
+                optionalUnionOfLiteralFloat = 4.56F,
                 optionalLiteralBool = true,
                 requiredBadDescription = "<requiredBadDescription>",
                 optionalNullableList = new List<object>()
@@ -350,12 +416,18 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("requiredUnion").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
+            Console.WriteLine(result.GetProperty("requiredUnionOfLiteralString").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+            Console.WriteLine(result.GetProperty("requiredUnionOfLiteralInt").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
+            Console.WriteLine(result.GetProperty("requiredUnionOfLiteralFloat").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("optionalLiteralString").ToString());
+            Console.WriteLine(result.GetProperty("optionalUnionOfLiteralString").ToString());
             Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
+            Console.WriteLine(result.GetProperty("optionalUnionOfLiteralInt").ToString());
             Console.WriteLine(result.GetProperty("optionalLiteralFloat").ToString());
+            Console.WriteLine(result.GetProperty("optionalUnionOfLiteralFloat").ToString());
             Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
             Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
@@ -374,8 +446,11 @@ namespace FirstTestTypeSpec.Samples
                 name = "<name>",
                 requiredUnion = "<requiredUnion>",
                 requiredLiteralString = "accept",
+                requiredUnionOfLiteralString = "accept",
                 requiredLiteralInt = 123,
+                requiredUnionOfLiteralInt = 123,
                 requiredLiteralFloat = 1.23F,
+                requiredUnionOfLiteralFloat = 1.23F,
                 requiredLiteralBool = false,
                 requiredBadDescription = "<requiredBadDescription>",
                 requiredNullableList = new List<object>()
@@ -389,8 +464,11 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("requiredUnion").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
+            Console.WriteLine(result.GetProperty("requiredUnionOfLiteralString").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+            Console.WriteLine(result.GetProperty("requiredUnionOfLiteralInt").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
+            Console.WriteLine(result.GetProperty("requiredUnionOfLiteralFloat").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
             Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
@@ -408,8 +486,11 @@ namespace FirstTestTypeSpec.Samples
                 name = "<name>",
                 requiredUnion = "<requiredUnion>",
                 requiredLiteralString = "accept",
+                requiredUnionOfLiteralString = "accept",
                 requiredLiteralInt = 123,
+                requiredUnionOfLiteralInt = 123,
                 requiredLiteralFloat = 1.23F,
+                requiredUnionOfLiteralFloat = 1.23F,
                 requiredLiteralBool = false,
                 requiredBadDescription = "<requiredBadDescription>",
                 requiredNullableList = new List<object>()
@@ -423,8 +504,11 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("requiredUnion").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
+            Console.WriteLine(result.GetProperty("requiredUnionOfLiteralString").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+            Console.WriteLine(result.GetProperty("requiredUnionOfLiteralInt").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
+            Console.WriteLine(result.GetProperty("requiredUnionOfLiteralFloat").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
             Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
@@ -442,12 +526,18 @@ namespace FirstTestTypeSpec.Samples
                 name = "<name>",
                 requiredUnion = "<requiredUnion>",
                 requiredLiteralString = "accept",
+                requiredUnionOfLiteralString = "accept",
                 requiredLiteralInt = 123,
+                requiredUnionOfLiteralInt = 123,
                 requiredLiteralFloat = 1.23F,
+                requiredUnionOfLiteralFloat = 1.23F,
                 requiredLiteralBool = false,
                 optionalLiteralString = "reject",
+                optionalUnionOfLiteralString = "accept",
                 optionalLiteralInt = 456,
+                optionalUnionOfLiteralInt = 456,
                 optionalLiteralFloat = 4.56F,
+                optionalUnionOfLiteralFloat = 4.56F,
                 optionalLiteralBool = true,
                 requiredBadDescription = "<requiredBadDescription>",
                 optionalNullableList = new List<object>()
@@ -465,12 +555,18 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("requiredUnion").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
+            Console.WriteLine(result.GetProperty("requiredUnionOfLiteralString").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+            Console.WriteLine(result.GetProperty("requiredUnionOfLiteralInt").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
+            Console.WriteLine(result.GetProperty("requiredUnionOfLiteralFloat").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("optionalLiteralString").ToString());
+            Console.WriteLine(result.GetProperty("optionalUnionOfLiteralString").ToString());
             Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
+            Console.WriteLine(result.GetProperty("optionalUnionOfLiteralInt").ToString());
             Console.WriteLine(result.GetProperty("optionalLiteralFloat").ToString());
+            Console.WriteLine(result.GetProperty("optionalUnionOfLiteralFloat").ToString());
             Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
             Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
@@ -489,12 +585,18 @@ namespace FirstTestTypeSpec.Samples
                 name = "<name>",
                 requiredUnion = "<requiredUnion>",
                 requiredLiteralString = "accept",
+                requiredUnionOfLiteralString = "accept",
                 requiredLiteralInt = 123,
+                requiredUnionOfLiteralInt = 123,
                 requiredLiteralFloat = 1.23F,
+                requiredUnionOfLiteralFloat = 1.23F,
                 requiredLiteralBool = false,
                 optionalLiteralString = "reject",
+                optionalUnionOfLiteralString = "accept",
                 optionalLiteralInt = 456,
+                optionalUnionOfLiteralInt = 456,
                 optionalLiteralFloat = 4.56F,
+                optionalUnionOfLiteralFloat = 4.56F,
                 optionalLiteralBool = true,
                 requiredBadDescription = "<requiredBadDescription>",
                 optionalNullableList = new List<object>()
@@ -512,12 +614,18 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("requiredUnion").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
+            Console.WriteLine(result.GetProperty("requiredUnionOfLiteralString").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+            Console.WriteLine(result.GetProperty("requiredUnionOfLiteralInt").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
+            Console.WriteLine(result.GetProperty("requiredUnionOfLiteralFloat").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("optionalLiteralString").ToString());
+            Console.WriteLine(result.GetProperty("optionalUnionOfLiteralString").ToString());
             Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
+            Console.WriteLine(result.GetProperty("optionalUnionOfLiteralInt").ToString());
             Console.WriteLine(result.GetProperty("optionalLiteralFloat").ToString());
+            Console.WriteLine(result.GetProperty("optionalUnionOfLiteralFloat").ToString());
             Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
             Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
@@ -1009,8 +1117,11 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("requiredUnion").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
+            Console.WriteLine(result.GetProperty("requiredUnionOfLiteralString").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+            Console.WriteLine(result.GetProperty("requiredUnionOfLiteralInt").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
+            Console.WriteLine(result.GetProperty("requiredUnionOfLiteralFloat").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
             Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
@@ -1029,8 +1140,11 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("requiredUnion").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
+            Console.WriteLine(result.GetProperty("requiredUnionOfLiteralString").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+            Console.WriteLine(result.GetProperty("requiredUnionOfLiteralInt").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
+            Console.WriteLine(result.GetProperty("requiredUnionOfLiteralFloat").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
             Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
@@ -1049,12 +1163,18 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("requiredUnion").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
+            Console.WriteLine(result.GetProperty("requiredUnionOfLiteralString").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+            Console.WriteLine(result.GetProperty("requiredUnionOfLiteralInt").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
+            Console.WriteLine(result.GetProperty("requiredUnionOfLiteralFloat").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("optionalLiteralString").ToString());
+            Console.WriteLine(result.GetProperty("optionalUnionOfLiteralString").ToString());
             Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
+            Console.WriteLine(result.GetProperty("optionalUnionOfLiteralInt").ToString());
             Console.WriteLine(result.GetProperty("optionalLiteralFloat").ToString());
+            Console.WriteLine(result.GetProperty("optionalUnionOfLiteralFloat").ToString());
             Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
             Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
@@ -1074,12 +1194,18 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("requiredUnion").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
+            Console.WriteLine(result.GetProperty("requiredUnionOfLiteralString").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+            Console.WriteLine(result.GetProperty("requiredUnionOfLiteralInt").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
+            Console.WriteLine(result.GetProperty("requiredUnionOfLiteralFloat").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("optionalLiteralString").ToString());
+            Console.WriteLine(result.GetProperty("optionalUnionOfLiteralString").ToString());
             Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
+            Console.WriteLine(result.GetProperty("optionalUnionOfLiteralInt").ToString());
             Console.WriteLine(result.GetProperty("optionalLiteralFloat").ToString());
+            Console.WriteLine(result.GetProperty("optionalUnionOfLiteralFloat").ToString());
             Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
             Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
@@ -1110,8 +1236,11 @@ namespace FirstTestTypeSpec.Samples
                     name = "<name>",
                     requiredUnion = "<requiredUnion>",
                     requiredLiteralString = "accept",
+                    requiredUnionOfLiteralString = "accept",
                     requiredLiteralInt = 123,
+                    requiredUnionOfLiteralInt = 123,
                     requiredLiteralFloat = 1.23F,
+                    requiredUnionOfLiteralFloat = 1.23F,
                     requiredLiteralBool = false,
                     requiredBadDescription = "<requiredBadDescription>",
                     requiredNullableList = new List<object>()
@@ -1141,8 +1270,11 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnion").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralString").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnionOfLiteralString").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralInt").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnionOfLiteralInt").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralFloat").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnionOfLiteralFloat").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredBadDescription").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredNullableList")[0].ToString());
@@ -1178,8 +1310,11 @@ namespace FirstTestTypeSpec.Samples
                     name = "<name>",
                     requiredUnion = "<requiredUnion>",
                     requiredLiteralString = "accept",
+                    requiredUnionOfLiteralString = "accept",
                     requiredLiteralInt = 123,
+                    requiredUnionOfLiteralInt = 123,
                     requiredLiteralFloat = 1.23F,
+                    requiredUnionOfLiteralFloat = 1.23F,
                     requiredLiteralBool = false,
                     requiredBadDescription = "<requiredBadDescription>",
                     requiredNullableList = new List<object>()
@@ -1209,8 +1344,11 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnion").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralString").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnionOfLiteralString").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralInt").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnionOfLiteralInt").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralFloat").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnionOfLiteralFloat").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredBadDescription").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredNullableList")[0].ToString());
@@ -1246,12 +1384,18 @@ namespace FirstTestTypeSpec.Samples
                     name = "<name>",
                     requiredUnion = "<requiredUnion>",
                     requiredLiteralString = "accept",
+                    requiredUnionOfLiteralString = "accept",
                     requiredLiteralInt = 123,
+                    requiredUnionOfLiteralInt = 123,
                     requiredLiteralFloat = 1.23F,
+                    requiredUnionOfLiteralFloat = 1.23F,
                     requiredLiteralBool = false,
                     optionalLiteralString = "reject",
+                    optionalUnionOfLiteralString = "accept",
                     optionalLiteralInt = 456,
+                    optionalUnionOfLiteralInt = 456,
                     optionalLiteralFloat = 4.56F,
+                    optionalUnionOfLiteralFloat = 4.56F,
                     optionalLiteralBool = true,
                     requiredBadDescription = "<requiredBadDescription>",
                     optionalNullableList = new List<object>()
@@ -1311,12 +1455,18 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnion").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralString").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnionOfLiteralString").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralInt").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnionOfLiteralInt").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralFloat").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnionOfLiteralFloat").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalLiteralString").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalUnionOfLiteralString").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalLiteralInt").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalUnionOfLiteralInt").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalLiteralFloat").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalUnionOfLiteralFloat").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredBadDescription").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalNullableList")[0].ToString());
@@ -1365,12 +1515,18 @@ namespace FirstTestTypeSpec.Samples
                     name = "<name>",
                     requiredUnion = "<requiredUnion>",
                     requiredLiteralString = "accept",
+                    requiredUnionOfLiteralString = "accept",
                     requiredLiteralInt = 123,
+                    requiredUnionOfLiteralInt = 123,
                     requiredLiteralFloat = 1.23F,
+                    requiredUnionOfLiteralFloat = 1.23F,
                     requiredLiteralBool = false,
                     optionalLiteralString = "reject",
+                    optionalUnionOfLiteralString = "accept",
                     optionalLiteralInt = 456,
+                    optionalUnionOfLiteralInt = 456,
                     optionalLiteralFloat = 4.56F,
+                    optionalUnionOfLiteralFloat = 4.56F,
                     optionalLiteralBool = true,
                     requiredBadDescription = "<requiredBadDescription>",
                     optionalNullableList = new List<object>()
@@ -1430,12 +1586,18 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnion").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralString").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnionOfLiteralString").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralInt").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnionOfLiteralInt").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralFloat").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnionOfLiteralFloat").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalLiteralString").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalUnionOfLiteralString").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalLiteralInt").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalUnionOfLiteralInt").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalLiteralFloat").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalUnionOfLiteralFloat").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredBadDescription").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalNullableList")[0].ToString());
@@ -1484,8 +1646,11 @@ namespace FirstTestTypeSpec.Samples
                     name = "<name>",
                     requiredUnion = "<requiredUnion>",
                     requiredLiteralString = "accept",
+                    requiredUnionOfLiteralString = "accept",
                     requiredLiteralInt = 123,
+                    requiredUnionOfLiteralInt = 123,
                     requiredLiteralFloat = 1.23F,
+                    requiredUnionOfLiteralFloat = 1.23F,
                     requiredLiteralBool = false,
                     requiredBadDescription = "<requiredBadDescription>",
                     requiredNullableList = new List<object>()
@@ -1515,8 +1680,11 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnion").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralString").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnionOfLiteralString").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralInt").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnionOfLiteralInt").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralFloat").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnionOfLiteralFloat").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredBadDescription").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredNullableList")[0].ToString());
@@ -1552,8 +1720,11 @@ namespace FirstTestTypeSpec.Samples
                     name = "<name>",
                     requiredUnion = "<requiredUnion>",
                     requiredLiteralString = "accept",
+                    requiredUnionOfLiteralString = "accept",
                     requiredLiteralInt = 123,
+                    requiredUnionOfLiteralInt = 123,
                     requiredLiteralFloat = 1.23F,
+                    requiredUnionOfLiteralFloat = 1.23F,
                     requiredLiteralBool = false,
                     requiredBadDescription = "<requiredBadDescription>",
                     requiredNullableList = new List<object>()
@@ -1583,8 +1754,11 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnion").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralString").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnionOfLiteralString").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralInt").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnionOfLiteralInt").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralFloat").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnionOfLiteralFloat").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredBadDescription").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredNullableList")[0].ToString());
@@ -1620,12 +1794,18 @@ namespace FirstTestTypeSpec.Samples
                     name = "<name>",
                     requiredUnion = "<requiredUnion>",
                     requiredLiteralString = "accept",
+                    requiredUnionOfLiteralString = "accept",
                     requiredLiteralInt = 123,
+                    requiredUnionOfLiteralInt = 123,
                     requiredLiteralFloat = 1.23F,
+                    requiredUnionOfLiteralFloat = 1.23F,
                     requiredLiteralBool = false,
                     optionalLiteralString = "reject",
+                    optionalUnionOfLiteralString = "accept",
                     optionalLiteralInt = 456,
+                    optionalUnionOfLiteralInt = 456,
                     optionalLiteralFloat = 4.56F,
+                    optionalUnionOfLiteralFloat = 4.56F,
                     optionalLiteralBool = true,
                     requiredBadDescription = "<requiredBadDescription>",
                     optionalNullableList = new List<object>()
@@ -1685,12 +1865,18 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnion").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralString").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnionOfLiteralString").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralInt").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnionOfLiteralInt").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralFloat").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnionOfLiteralFloat").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalLiteralString").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalUnionOfLiteralString").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalLiteralInt").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalUnionOfLiteralInt").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalLiteralFloat").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalUnionOfLiteralFloat").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredBadDescription").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalNullableList")[0].ToString());
@@ -1739,12 +1925,18 @@ namespace FirstTestTypeSpec.Samples
                     name = "<name>",
                     requiredUnion = "<requiredUnion>",
                     requiredLiteralString = "accept",
+                    requiredUnionOfLiteralString = "accept",
                     requiredLiteralInt = 123,
+                    requiredUnionOfLiteralInt = 123,
                     requiredLiteralFloat = 1.23F,
+                    requiredUnionOfLiteralFloat = 1.23F,
                     requiredLiteralBool = false,
                     optionalLiteralString = "reject",
+                    optionalUnionOfLiteralString = "accept",
                     optionalLiteralInt = 456,
+                    optionalUnionOfLiteralInt = 456,
                     optionalLiteralFloat = 4.56F,
+                    optionalUnionOfLiteralFloat = 4.56F,
                     optionalLiteralBool = true,
                     requiredBadDescription = "<requiredBadDescription>",
                     optionalNullableList = new List<object>()
@@ -1804,12 +1996,18 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnion").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralString").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnionOfLiteralString").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralInt").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnionOfLiteralInt").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralFloat").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnionOfLiteralFloat").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalLiteralString").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalUnionOfLiteralString").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalLiteralInt").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalUnionOfLiteralInt").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalLiteralFloat").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalUnionOfLiteralFloat").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredBadDescription").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalNullableList")[0].ToString());
@@ -1847,8 +2045,11 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("requiredUnion").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
+            Console.WriteLine(result.GetProperty("requiredUnionOfLiteralString").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+            Console.WriteLine(result.GetProperty("requiredUnionOfLiteralInt").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
+            Console.WriteLine(result.GetProperty("requiredUnionOfLiteralFloat").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
             Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
@@ -1867,8 +2068,11 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("requiredUnion").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
+            Console.WriteLine(result.GetProperty("requiredUnionOfLiteralString").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+            Console.WriteLine(result.GetProperty("requiredUnionOfLiteralInt").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
+            Console.WriteLine(result.GetProperty("requiredUnionOfLiteralFloat").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
             Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
@@ -1887,12 +2091,18 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("requiredUnion").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
+            Console.WriteLine(result.GetProperty("requiredUnionOfLiteralString").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+            Console.WriteLine(result.GetProperty("requiredUnionOfLiteralInt").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
+            Console.WriteLine(result.GetProperty("requiredUnionOfLiteralFloat").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("optionalLiteralString").ToString());
+            Console.WriteLine(result.GetProperty("optionalUnionOfLiteralString").ToString());
             Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
+            Console.WriteLine(result.GetProperty("optionalUnionOfLiteralInt").ToString());
             Console.WriteLine(result.GetProperty("optionalLiteralFloat").ToString());
+            Console.WriteLine(result.GetProperty("optionalUnionOfLiteralFloat").ToString());
             Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
             Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
@@ -1912,12 +2122,18 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("requiredUnion").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
+            Console.WriteLine(result.GetProperty("requiredUnionOfLiteralString").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+            Console.WriteLine(result.GetProperty("requiredUnionOfLiteralInt").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
+            Console.WriteLine(result.GetProperty("requiredUnionOfLiteralFloat").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("optionalLiteralString").ToString());
+            Console.WriteLine(result.GetProperty("optionalUnionOfLiteralString").ToString());
             Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
+            Console.WriteLine(result.GetProperty("optionalUnionOfLiteralInt").ToString());
             Console.WriteLine(result.GetProperty("optionalLiteralFloat").ToString());
+            Console.WriteLine(result.GetProperty("optionalUnionOfLiteralFloat").ToString());
             Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
             Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
@@ -1936,8 +2152,11 @@ namespace FirstTestTypeSpec.Samples
                 name = "<name>",
                 requiredUnion = "<requiredUnion>",
                 requiredLiteralString = "accept",
+                requiredUnionOfLiteralString = "accept",
                 requiredLiteralInt = 123,
+                requiredUnionOfLiteralInt = 123,
                 requiredLiteralFloat = 1.23F,
+                requiredUnionOfLiteralFloat = 1.23F,
                 requiredLiteralBool = false,
                 requiredBadDescription = "<requiredBadDescription>",
                 requiredNullableList = new List<object>()
@@ -1951,8 +2170,11 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("requiredUnion").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
+            Console.WriteLine(result.GetProperty("requiredUnionOfLiteralString").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+            Console.WriteLine(result.GetProperty("requiredUnionOfLiteralInt").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
+            Console.WriteLine(result.GetProperty("requiredUnionOfLiteralFloat").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
             Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
@@ -1970,8 +2192,11 @@ namespace FirstTestTypeSpec.Samples
                 name = "<name>",
                 requiredUnion = "<requiredUnion>",
                 requiredLiteralString = "accept",
+                requiredUnionOfLiteralString = "accept",
                 requiredLiteralInt = 123,
+                requiredUnionOfLiteralInt = 123,
                 requiredLiteralFloat = 1.23F,
+                requiredUnionOfLiteralFloat = 1.23F,
                 requiredLiteralBool = false,
                 requiredBadDescription = "<requiredBadDescription>",
                 requiredNullableList = new List<object>()
@@ -1985,8 +2210,11 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("requiredUnion").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
+            Console.WriteLine(result.GetProperty("requiredUnionOfLiteralString").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+            Console.WriteLine(result.GetProperty("requiredUnionOfLiteralInt").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
+            Console.WriteLine(result.GetProperty("requiredUnionOfLiteralFloat").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
             Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
@@ -2004,12 +2232,18 @@ namespace FirstTestTypeSpec.Samples
                 name = "<name>",
                 requiredUnion = "<requiredUnion>",
                 requiredLiteralString = "accept",
+                requiredUnionOfLiteralString = "accept",
                 requiredLiteralInt = 123,
+                requiredUnionOfLiteralInt = 123,
                 requiredLiteralFloat = 1.23F,
+                requiredUnionOfLiteralFloat = 1.23F,
                 requiredLiteralBool = false,
                 optionalLiteralString = "reject",
+                optionalUnionOfLiteralString = "accept",
                 optionalLiteralInt = 456,
+                optionalUnionOfLiteralInt = 456,
                 optionalLiteralFloat = 4.56F,
+                optionalUnionOfLiteralFloat = 4.56F,
                 optionalLiteralBool = true,
                 requiredBadDescription = "<requiredBadDescription>",
                 optionalNullableList = new List<object>()
@@ -2027,12 +2261,18 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("requiredUnion").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
+            Console.WriteLine(result.GetProperty("requiredUnionOfLiteralString").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+            Console.WriteLine(result.GetProperty("requiredUnionOfLiteralInt").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
+            Console.WriteLine(result.GetProperty("requiredUnionOfLiteralFloat").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("optionalLiteralString").ToString());
+            Console.WriteLine(result.GetProperty("optionalUnionOfLiteralString").ToString());
             Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
+            Console.WriteLine(result.GetProperty("optionalUnionOfLiteralInt").ToString());
             Console.WriteLine(result.GetProperty("optionalLiteralFloat").ToString());
+            Console.WriteLine(result.GetProperty("optionalUnionOfLiteralFloat").ToString());
             Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
             Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
@@ -2051,12 +2291,18 @@ namespace FirstTestTypeSpec.Samples
                 name = "<name>",
                 requiredUnion = "<requiredUnion>",
                 requiredLiteralString = "accept",
+                requiredUnionOfLiteralString = "accept",
                 requiredLiteralInt = 123,
+                requiredUnionOfLiteralInt = 123,
                 requiredLiteralFloat = 1.23F,
+                requiredUnionOfLiteralFloat = 1.23F,
                 requiredLiteralBool = false,
                 optionalLiteralString = "reject",
+                optionalUnionOfLiteralString = "accept",
                 optionalLiteralInt = 456,
+                optionalUnionOfLiteralInt = 456,
                 optionalLiteralFloat = 4.56F,
+                optionalUnionOfLiteralFloat = 4.56F,
                 optionalLiteralBool = true,
                 requiredBadDescription = "<requiredBadDescription>",
                 optionalNullableList = new List<object>()
@@ -2074,12 +2320,18 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("requiredUnion").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
+            Console.WriteLine(result.GetProperty("requiredUnionOfLiteralString").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+            Console.WriteLine(result.GetProperty("requiredUnionOfLiteralInt").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
+            Console.WriteLine(result.GetProperty("requiredUnionOfLiteralFloat").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("optionalLiteralString").ToString());
+            Console.WriteLine(result.GetProperty("optionalUnionOfLiteralString").ToString());
             Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
+            Console.WriteLine(result.GetProperty("optionalUnionOfLiteralInt").ToString());
             Console.WriteLine(result.GetProperty("optionalLiteralFloat").ToString());
+            Console.WriteLine(result.GetProperty("optionalUnionOfLiteralFloat").ToString());
             Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
             Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
@@ -2099,8 +2351,11 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("requiredUnion").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
+            Console.WriteLine(result.GetProperty("requiredUnionOfLiteralString").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+            Console.WriteLine(result.GetProperty("requiredUnionOfLiteralInt").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
+            Console.WriteLine(result.GetProperty("requiredUnionOfLiteralFloat").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
             Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
@@ -2119,8 +2374,11 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("requiredUnion").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
+            Console.WriteLine(result.GetProperty("requiredUnionOfLiteralString").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+            Console.WriteLine(result.GetProperty("requiredUnionOfLiteralInt").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
+            Console.WriteLine(result.GetProperty("requiredUnionOfLiteralFloat").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
             Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
@@ -2139,12 +2397,18 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("requiredUnion").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
+            Console.WriteLine(result.GetProperty("requiredUnionOfLiteralString").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+            Console.WriteLine(result.GetProperty("requiredUnionOfLiteralInt").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
+            Console.WriteLine(result.GetProperty("requiredUnionOfLiteralFloat").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("optionalLiteralString").ToString());
+            Console.WriteLine(result.GetProperty("optionalUnionOfLiteralString").ToString());
             Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
+            Console.WriteLine(result.GetProperty("optionalUnionOfLiteralInt").ToString());
             Console.WriteLine(result.GetProperty("optionalLiteralFloat").ToString());
+            Console.WriteLine(result.GetProperty("optionalUnionOfLiteralFloat").ToString());
             Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
             Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
@@ -2164,12 +2428,18 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("requiredUnion").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
+            Console.WriteLine(result.GetProperty("requiredUnionOfLiteralString").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+            Console.WriteLine(result.GetProperty("requiredUnionOfLiteralInt").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
+            Console.WriteLine(result.GetProperty("requiredUnionOfLiteralFloat").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("optionalLiteralString").ToString());
+            Console.WriteLine(result.GetProperty("optionalUnionOfLiteralString").ToString());
             Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
+            Console.WriteLine(result.GetProperty("optionalUnionOfLiteralInt").ToString());
             Console.WriteLine(result.GetProperty("optionalLiteralFloat").ToString());
+            Console.WriteLine(result.GetProperty("optionalUnionOfLiteralFloat").ToString());
             Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
             Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());

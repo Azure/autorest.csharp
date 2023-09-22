@@ -88,23 +88,44 @@ model Thing {
     @doc("required literal string")
     requiredLiteralString: "accept";
 
+    @doc("required union of literal string")
+    requiredUnionOfLiteralString: "accept" | "reject";
+
     @doc("required literal int")
     requiredLiteralInt: 123;
+
+    @doc("required union of literal double")
+    requiredUnionOfLiteralInt: 123 | 456;
 
     @doc("required literal float")
     requiredLiteralFloat: 1.23;
 
+    @doc("required union of literal float")
+    requiredUnionOfLiteralFloat: 1.23 | 4.56;
+
     @doc("required literal bool")
     requiredLiteralBool: false;
+
+    // @doc("required union of literal bool")
+    // requiredUnionOfLiteralBool: false | true;
 
     @doc("optional literal string")
     optionalLiteralString?: "reject";
 
+    @doc("optional union of literal string")
+    optionalUnionOfLiteralString?: "accept" | "reject";
+
     @doc("optional literal int")
     optionalLiteralInt?: 456;
 
+    @doc("optional union of literal int")
+    optionalUnionOfLiteralInt?: 456 | 123;
+
     @doc("optional literal float")
     optionalLiteralFloat?: 4.56;
+
+    @doc("optional union of literal float")
+    optionalUnionOfLiteralFloat?: 4.56 | 1.23;
 
     @doc("optional literal bool")
     optionalLiteralBool?: true;

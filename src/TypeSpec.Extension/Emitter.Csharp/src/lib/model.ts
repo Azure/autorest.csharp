@@ -325,7 +325,7 @@ export function getInputType(
                 } as InputPrimitiveType;
         }
     } else if (type.kind === "Union") {
-        return getInputTypeForUnion(type);
+        return getInputTypeForUnion(type, literalTypeContext);
     } else {
         throw new Error(`Unsupported type ${type.kind}`);
     }
@@ -387,50 +387,68 @@ export function getInputType(
             Kind: builtInKind,
             IsNullable: false
         } as InputPrimitiveType;
-        const literalValue = getDefaultValue(type);
-        const newValueType = getLiteralValueType();
 
-        if (isInputEnumType(newValueType)) {
-            enums.set(newValueType.Name, newValueType);
+        // we will not wrap it if it comes from outside a model or it is a boolean
+        if (literalContext === undefined || rawValueType.Kind === "Boolean") {
+            return {
+                Name: "Literal",
+                LiteralValueType: rawValueType,
+                Value: getDefaultValue(type),
+                IsNullable: false
+            } as InputLiteralType;
         }
+
+        // otherwise we need to wrap this into an extensible enum
+        // we use the model name followed by the property name as the enum name to ensure it is unique
+        const enumValueType =
+            rawValueType.Kind === "String" ? "String" : "Float32";
+        const enumName = `${literalContext.ModelName}_${literalContext.PropertyName}`;
+        let extensibleEnumForLiteral = enums.get(enumName);
+        if (!extensibleEnumForLiteral) {
+            extensibleEnumForLiteral = getInputEnumTypeForLiteral(
+                enumValueType,
+                literalContext
+            );
+            enums.set(extensibleEnumForLiteral.Name, extensibleEnumForLiteral);
+        }
+        extensibleEnumForLiteral.AllowedValues.push(
+            getInputEnumTypeValueForLiteral(type)
+        );
 
         return {
             Name: "Literal",
-            LiteralValueType: newValueType,
-            Value: literalValue,
+            LiteralValueType: extensibleEnumForLiteral,
+            Value: getDefaultValue(type),
             IsNullable: false
         } as InputLiteralType;
+    }
 
-        function getLiteralValueType(): InputPrimitiveType | InputEnumType {
-            // we will not wrap it if it comes from outside a model or it is a boolean
-            if (literalContext === undefined || rawValueType.Kind === "Boolean")
-                return rawValueType;
+    function getInputEnumTypeForLiteral(
+        enumValueType: string,
+        literalContext: LiteralTypeContext
+    ): InputEnumType {
+        // we use the model name followed by the property name as the enum name to ensure it is unique
+        const enumName = `${literalContext.ModelName}_${literalContext.PropertyName}`;
+        return {
+            Name: enumName,
+            EnumValueType: enumValueType, //EnumValueType and  AllowedValues should be the first field after id and name, so that it can be corrected serialized.
+            AllowedValues: new Array<InputEnumTypeValue>(), // Fill in later
+            Namespace: literalContext.Namespace,
+            Accessibility: undefined,
+            Deprecated: undefined,
+            Description: `The ${enumName}`, // TODO -- what should we put here?
+            IsExtensible: true,
+            IsNullable: false
+        } as InputEnumType;
+    }
 
-            // otherwise we need to wrap this into an extensible enum
-            // we use the model name followed by the property name as the enum name to ensure it is unique
-            const enumName = `${literalContext.ModelName}_${literalContext.PropertyName}`;
-            const enumValueType =
-                rawValueType.Kind === "String" ? "String" : "Float32";
-            const allowValues: InputEnumTypeValue[] = [
-                {
-                    Name: literalValue.toString(),
-                    Value: literalValue,
-                    Description: literalValue.toString()
-                } as InputEnumTypeValue
-            ];
-            const enumType = {
-                Name: enumName,
-                EnumValueType: enumValueType, //EnumValueType and  AllowedValues should be the first field after id and name, so that it can be corrected serialized.
-                AllowedValues: allowValues,
-                Namespace: literalContext.Namespace,
-                Accessibility: undefined,
-                Deprecated: undefined,
-                Description: `The ${enumName}`, // TODO -- what should we put here?
-                IsExtensible: true,
-                IsNullable: false
-            } as InputEnumType;
-            return enumType;
-        }
+    function getInputEnumTypeValueForLiteral(type: Type): InputEnumTypeValue {
+        const literalValue = getDefaultValue(type);
+        return {
+            Name: literalValue.toString(),
+            Value: literalValue,
+            Description: literalValue.toString()
+        } as InputEnumTypeValue;
     }
 
     function getInputTypeForEnum(
@@ -731,17 +749,23 @@ export function getInputType(
         }
     }
 
-    function getInputTypeForUnion(union: Union): InputType {
+    function getInputTypeForUnion(
+        union: Union,
+        literalTypeContext?: LiteralTypeContext
+    ): InputType {
         let ItemTypes: InputType[] = [];
         const variants = Array.from(union.variants.values());
 
         let hasNullType = false;
+        let isUnionOfConstant = false;
+        let typeIfUnionOfConstant = undefined;
         for (const variant of variants) {
             const inputType = getInputType(
                 context,
                 getFormattedType(program, variant.type),
                 models,
-                enums
+                enums,
+                literalTypeContext
             );
             if (
                 inputType.Name === "Intrinsic" &&
@@ -750,7 +774,33 @@ export function getInputType(
                 hasNullType = true;
                 continue;
             }
+
+            if (
+                literalTypeContext &&
+                isInputLiteralType(inputType) &&
+                isInputEnumType(inputType.LiteralValueType)
+            ) {
+                isUnionOfConstant = true;
+                if (
+                    typeIfUnionOfConstant !== undefined &&
+                    typeIfUnionOfConstant !==
+                        inputType.LiteralValueType.EnumValueType
+                ) {
+                    throw new Error(
+                        `Items in union type of ${literalTypeContext.PropertyName} in ${literalTypeContext.ModelName} should be same.`
+                    );
+                }
+                typeIfUnionOfConstant =
+                    inputType.LiteralValueType.EnumValueType;
+                continue;
+            }
+
             ItemTypes.push(inputType);
+        }
+
+        if (isUnionOfConstant && literalTypeContext) {
+            const enumName = `${literalTypeContext.ModelName}_${literalTypeContext.PropertyName}`;
+            return enums.get(enumName)!;
         }
 
         if (hasNullType) {
@@ -915,14 +965,18 @@ export function getUsages(
             let usage = usagesMap.get(name);
             for (const prop of model.Properties) {
                 const type = prop.Type;
-                if (!isInputLiteralType(type)) continue;
-                // now type should be a literal type
-                // find its corresponding enum type
-                const literalValueType = type.LiteralValueType;
-                if (!isInputEnumType(literalValueType)) continue;
-                // now literalValueType should be an enum type
-                // apply the usage on this model to the usagesMap
-                appendUsage(literalValueType.Name, usage!);
+                // Case for property with literal type
+                if (
+                    isInputLiteralType(type) &&
+                    isInputEnumType(type.LiteralValueType)
+                ) {
+                    appendUsage(type.LiteralValueType.Name, usage!);
+                }
+
+                // Case for property with union of literal type
+                if (isInputEnumType(type)) {
+                    appendUsage(type.Name, usage!);
+                }
             }
         }
     }
