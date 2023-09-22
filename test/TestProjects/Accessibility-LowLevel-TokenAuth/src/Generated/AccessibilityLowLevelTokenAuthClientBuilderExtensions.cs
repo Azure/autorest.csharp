@@ -20,7 +20,7 @@ namespace Microsoft.Extensions.Azure
         public static IAzureClientBuilder<AccessibilityClient, AccessibilityClientOptions> AddAccessibilityClient<TBuilder>(this TBuilder builder, Uri endpoint)
         where TBuilder : IAzureClientFactoryBuilderWithCredential
         {
-            return builder.RegisterClientFactory<AccessibilityClient, AccessibilityClientOptions>((options, cred) => new AccessibilityClient(cred, endpoint, options));
+            return builder.RegisterClientFactory<AccessibilityClient, AccessibilityClientOptions>((options, cred) => new AccessibilityClient(endpoint, cred, options));
         }
 
         /// <summary> Registers a <see cref="AccessibilityClient"/> instance. </summary>

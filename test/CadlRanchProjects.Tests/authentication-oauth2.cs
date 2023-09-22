@@ -19,7 +19,7 @@ namespace CadlRanchProjects.Tests
         {
             var options = new OAuth2ClientOptions();
             options.AddPolicy(new MockBearerTokenAuthenticationPolicy(new MockCredential(), OAuth2Client.TokenScopes, options.Transport), HttpPipelinePosition.PerCall);
-            Response response = await new OAuth2Client(new MockCredential(), host, options).ValidAsync();
+            Response response = await new OAuth2Client(host, new MockCredential(), options).ValidAsync();
             Assert.AreEqual(204, response.Status);
         });
 
@@ -29,7 +29,7 @@ namespace CadlRanchProjects.Tests
             var options = new OAuth2ClientOptions();
             options.AddPolicy(new MockBearerTokenAuthenticationPolicy(new MockCredential(), OAuth2Client.TokenScopes, options.Transport), HttpPipelinePosition.PerCall);
 
-            var exception = Assert.ThrowsAsync<RequestFailedException>(() => new OAuth2Client(new MockCredential(), host, options).InvalidAsync());
+            var exception = Assert.ThrowsAsync<RequestFailedException>(() => new OAuth2Client(host, new MockCredential(), options).InvalidAsync());
             Assert.AreEqual(403, exception.Status);
             return Task.CompletedTask;
         });

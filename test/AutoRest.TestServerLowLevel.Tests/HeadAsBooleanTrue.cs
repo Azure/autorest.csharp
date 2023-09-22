@@ -15,7 +15,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task HttpSuccess200Head() => Test(async (host) =>
         {
-            var response = await new HttpSuccessClient(Key, host, null).Head200Async(new());
+            var response = await new HttpSuccessClient(host, Key, null).Head200Async(new());
             Assert.AreEqual(200, response.GetRawResponse().Status);
             Assert.AreEqual(true, response.Value);
         });
@@ -23,7 +23,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task HttpSuccess204Head() => Test(async (host) =>
         {
-            var response = await new HttpSuccessClient(Key, host, null).Head204Async(new());
+            var response = await new HttpSuccessClient(host, Key, null).Head204Async(new());
             Assert.AreEqual(204, response.GetRawResponse().Status);
             Assert.AreEqual(true, response.Value);
         });
@@ -31,7 +31,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task HttpSuccess404Head() => Test(async (host) =>
         {
-            var response = await new HttpSuccessClient(Key, host, null).Head404Async(new());
+            var response = await new HttpSuccessClient(host, Key, null).Head404Async(new());
             Assert.AreEqual(404, response.GetRawResponse().Status);
             Assert.AreEqual(false, response.Value);
         });
