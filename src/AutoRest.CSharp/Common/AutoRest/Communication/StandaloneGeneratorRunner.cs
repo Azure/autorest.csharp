@@ -23,7 +23,7 @@ namespace AutoRest.CSharp.AutoRest.Communication
         {
             string? projectPath = null;
             string outputPath;
-            string sampleOutputPath;
+            string generatedTestOutputPath;
             bool wasProjectPathPassedIn = options.ProjectPath is not null;
             if (options.Standalone is not null)
             {
@@ -35,7 +35,7 @@ namespace AutoRest.CSharp.AutoRest.Communication
                 projectPath = options.ProjectPath!;
                 outputPath = Path.Combine(projectPath, "Generated");
             }
-            sampleOutputPath = Path.Combine(outputPath, "..", "..", "tests", "Generated", "Samples");
+            generatedTestOutputPath = Path.Combine(outputPath, "..", "..", "tests", "Generated");
 
             var configurationPath = options.ConfigurationPath ?? Path.Combine(outputPath, "Configuration.json");
             LoadConfiguration(projectPath, outputPath, options.ExistingProjectFolder, File.ReadAllText(configurationPath));
@@ -74,7 +74,7 @@ namespace AutoRest.CSharp.AutoRest.Communication
             {
                 var keepFiles = new string[] { "CodeModel.yaml", "Configuration.json", "tspCodeModel.json" };
                 DeleteDirectory(outputPath, keepFiles);
-                DeleteDirectory(sampleOutputPath, keepFiles);
+                DeleteDirectory(generatedTestOutputPath, keepFiles);
             }
 
             await foreach (var file in workspace.GetGeneratedFilesAsync())

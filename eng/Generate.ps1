@@ -132,7 +132,7 @@ function Add-Directory ([string]$testName, [string]$directory, [boolean]$forTest
     $readmeConfigurationPath = Join-Path $directory "readme.md"
     $testArguments = $null
     if (Test-Path $readmeConfigurationPath) {
-        $testArguments = "--require=$readmeConfigurationPath --clear-output-folder=true"
+        $testArguments = "--require=$readmeConfigurationPath --clear-output-folder=true --generate-test-scaffolding=true"
     }
     else {
         $inputFile = Join-Path $directory "$testName.json"
@@ -146,7 +146,7 @@ function Add-Directory ([string]$testName, [string]$directory, [boolean]$forTest
     }
     else {
         if ($testName.EndsWith("TypeSpec")) {
-            Add-TypeSpec $testName $directory "" "--option @azure-tools/typespec-csharp.new-project=true" "-n"
+            Add-TypeSpec $testName $directory "" "--option @azure-tools/typespec-csharp.new-project=true --option @azure-tools/typespec-csharp.generate-test-scaffolding=true" "-n"
         }
         else {
             Add-Swagger $testName $directory $testArguments
@@ -234,14 +234,14 @@ if (!($Exclude -contains "Samples")) {
 
         if (Test-Path $sampleConfigurationPath) {
             # for swagger samples
-            Add-Swagger $sampleName $projectDirectory "--require=$sampleConfigurationPath --clear-output-folder=true"
+            Add-Swagger $sampleName $projectDirectory "--require=$sampleConfigurationPath --clear-output-folder=true --generate-test-scaffolding=true"
         }
         elseif (Test-Path $tspConfigPath) {
             # for typespec projects
             $tspMain = Join-Path $projectDirectory ".." "main.tsp"
             $tspClient = Join-Path $projectDirectory ".."  "client.tsp"
             $mainTspFile = if (Test-Path $tspClient) { Resolve-Path $tspClient } else { Resolve-Path $tspMain }
-            Add-TypeSpec $sampleName $projectDirectory $mainTspFile
+            Add-TypeSpec $sampleName $projectDirectory $mainTspFile "--option @azure-tools/typespec-csharp.generate-test-scaffolding=true"
         }
         else {
             throw "There is no tspconfig.yaml file or readme.md file found in sample project $sampleName"

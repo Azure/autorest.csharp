@@ -16,7 +16,7 @@ using NUnit.Framework;
 
 namespace Azure.Analytics.Purview.Account.Samples
 {
-    internal class Samples_PurviewAccountCollections
+    public class Samples_PurviewAccountCollections
     {
         [Test]
         [Ignore("Only validating compilation of examples")]

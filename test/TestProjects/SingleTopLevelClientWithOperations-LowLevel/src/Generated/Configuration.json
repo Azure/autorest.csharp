@@ -8,5 +8,6 @@
   ],
   "public-clients": true,
   "skip-csproj-packagereference": true,
-  "single-top-level-client": true
+  "single-top-level-client": true,
+  "generate-test-scaffolding": true
 }

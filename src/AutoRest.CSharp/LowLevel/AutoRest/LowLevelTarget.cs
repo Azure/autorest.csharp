@@ -55,16 +55,6 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                     project.AddGeneratedTestFile(clientExampleFilename, clientSampleWriter.ToString());
                     project.AddGeneratedDocFile($"Docs/{client.Type.Name}.xml", new XmlDocumentFile(clientExampleFilename, xmlDocWriter));
                 }
-
-                // write test cases
-                var clientTestProvider = library.GetTestForClient(client);
-                if (clientTestProvider != null)
-                {
-                    var clientTestFilename = $"../../tests/Generated/Tests/{clientTestProvider.Type.Name}.cs";
-                    var clientTestWriter = new DpgClientTestWriter(clientTestProvider);
-                    clientTestWriter.Write();
-                    project.AddGeneratedTestFile(clientTestFilename, clientTestWriter.ToString());
-                }
             }
 
             var optionsWriter = new CodeWriter();
@@ -83,13 +73,30 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 project.AddGeneratedFile($"{modelFactoryProvider.Type.Name}.cs", modelFactoryWriter.ToString());
             }
 
-            var testBaseWriter = new DpgTestBaseWriter(library.DpgTestBase);
-            testBaseWriter.Write();
-            project.AddGeneratedTestFile($"../../tests/Generated/Tests/{library.DpgTestBase.Type.Name}.cs", testBaseWriter.ToString());
+            if (Configuration.GenerateTestScaffolding)
+            {
+                // write test base and test env
+                var testBaseWriter = new DpgTestBaseWriter(library.DpgTestBase);
+                testBaseWriter.Write();
+                project.AddGeneratedTestFile($"../../tests/Generated/Tests/{library.DpgTestBase.Type.Name}.cs", testBaseWriter.ToString());
 
-            var testEnvWriter = new DpgTestEnvironmentWriter(library.DpgTestEnvironment);
-            testEnvWriter.Write();
-            project.AddGeneratedTestFile($"../../tests/Generated/Tests/{library.DpgTestEnvironment.Type.Name}.cs", testEnvWriter.ToString());
+                var testEnvWriter = new DpgTestEnvironmentWriter(library.DpgTestEnvironment);
+                testEnvWriter.Write();
+                project.AddGeneratedTestFile($"../../tests/Generated/Tests/{library.DpgTestEnvironment.Type.Name}.cs", testEnvWriter.ToString());
+
+                // write the client test files
+                foreach (var client in library.RestClients)
+                {
+                    var clientTestProvider = library.GetTestForClient(client);
+                    if (clientTestProvider != null)
+                    {
+                        var clientTestFilename = $"../../tests/Generated/Tests/{clientTestProvider.Type.Name}.cs";
+                        var clientTestWriter = new DpgClientTestWriter(clientTestProvider);
+                        clientTestWriter.Write();
+                        project.AddGeneratedTestFile(clientTestFilename, clientTestWriter.ToString());
+                    }
+                }
+            }
 
             await project.PostProcessAsync(new PostProcessor(
                 modelsToKeep: library.AccessOverriddenModels.ToImmutableHashSet(),
