@@ -17,32 +17,32 @@ namespace Microsoft.Extensions.Azure
     {
         /// <summary> Registers a <see cref="RequestConditionCollapseClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>
-        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="endpoint"> server parameter. </param>
-        public static IAzureClientBuilder<RequestConditionCollapseClient, CollapseRequestConditionsClientOptions> AddRequestConditionCollapseClient<TBuilder>(this TBuilder builder, AzureKeyCredential credential, Uri endpoint)
+        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
+        public static IAzureClientBuilder<RequestConditionCollapseClient, CollapseRequestConditionsClientOptions> AddRequestConditionCollapseClient<TBuilder>(this TBuilder builder, Uri endpoint, AzureKeyCredential credential)
         where TBuilder : IAzureClientFactoryBuilder
         {
-            return builder.RegisterClientFactory<RequestConditionCollapseClient, CollapseRequestConditionsClientOptions>((options) => new RequestConditionCollapseClient(credential, endpoint, options));
+            return builder.RegisterClientFactory<RequestConditionCollapseClient, CollapseRequestConditionsClientOptions>((options) => new RequestConditionCollapseClient(endpoint, credential, options));
         }
 
         /// <summary> Registers a <see cref="MatchConditionCollapseClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>
-        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="endpoint"> server parameter. </param>
-        public static IAzureClientBuilder<MatchConditionCollapseClient, CollapseRequestConditionsClientOptions> AddMatchConditionCollapseClient<TBuilder>(this TBuilder builder, AzureKeyCredential credential, Uri endpoint)
+        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
+        public static IAzureClientBuilder<MatchConditionCollapseClient, CollapseRequestConditionsClientOptions> AddMatchConditionCollapseClient<TBuilder>(this TBuilder builder, Uri endpoint, AzureKeyCredential credential)
         where TBuilder : IAzureClientFactoryBuilder
         {
-            return builder.RegisterClientFactory<MatchConditionCollapseClient, CollapseRequestConditionsClientOptions>((options) => new MatchConditionCollapseClient(credential, endpoint, options));
+            return builder.RegisterClientFactory<MatchConditionCollapseClient, CollapseRequestConditionsClientOptions>((options) => new MatchConditionCollapseClient(endpoint, credential, options));
         }
 
         /// <summary> Registers a <see cref="NonCollapseClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>
-        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="endpoint"> server parameter. </param>
-        public static IAzureClientBuilder<NonCollapseClient, CollapseRequestConditionsClientOptions> AddNonCollapseClient<TBuilder>(this TBuilder builder, AzureKeyCredential credential, Uri endpoint)
+        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
+        public static IAzureClientBuilder<NonCollapseClient, CollapseRequestConditionsClientOptions> AddNonCollapseClient<TBuilder>(this TBuilder builder, Uri endpoint, AzureKeyCredential credential)
         where TBuilder : IAzureClientFactoryBuilder
         {
-            return builder.RegisterClientFactory<NonCollapseClient, CollapseRequestConditionsClientOptions>((options) => new NonCollapseClient(credential, endpoint, options));
+            return builder.RegisterClientFactory<NonCollapseClient, CollapseRequestConditionsClientOptions>((options) => new NonCollapseClient(endpoint, credential, options));
         }
 
         /// <summary> Registers a <see cref="RequestConditionCollapseClient"/> instance. </summary>
