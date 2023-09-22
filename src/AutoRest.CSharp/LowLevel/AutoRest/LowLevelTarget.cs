@@ -1,6 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using System.Collections.Immutable;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using AutoRest.CSharp.Common.Generation.Writers;
@@ -91,6 +92,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             project.AddGeneratedTestFile($"../../tests/Generated/Tests/{library.DpgTestEnvironment.Type.Name}.cs", testEnvWriter.ToString());
 
             await project.PostProcessAsync(new PostProcessor(
+                modelsToKeep: library.AccessOverriddenModels.ToImmutableHashSet(),
                 modelFactoryFullName: modelFactoryProvider?.FullName,
                 aspExtensionClassName: library.AspDotNetExtension.FullName));
         }
