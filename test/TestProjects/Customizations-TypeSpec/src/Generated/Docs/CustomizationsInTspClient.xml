@@ -16,6 +16,7 @@ CustomizationsInTspClient client = new CustomizationsInTspClient();
 
 RootModel input = new RootModel()
 {
+    PropertyExtensibleEnum = ExtensibleEnumWithOperator.Monday,
     PropertyModelToRename = new RenamedModel(1234)
     {
         OptionalInt = 1234,
@@ -64,6 +65,7 @@ CustomizationsInTspClient client = new CustomizationsInTspClient();
 
 RootModel input = new RootModel()
 {
+    PropertyExtensibleEnum = ExtensibleEnumWithOperator.Monday,
     PropertyModelToRename = new RenamedModel(1234)
     {
         OptionalInt = 1234,
@@ -122,6 +124,7 @@ CustomizationsInTspClient client = new CustomizationsInTspClient();
 
 RequestContent content = RequestContent.Create(new
 {
+    propertyExtensibleEnum = "Monday",
     propertyModelToMakeInternal = new
     {
         requiredInt = 1234,
@@ -180,6 +183,7 @@ RequestContent content = RequestContent.Create(new
 Response response = await client.RoundTripAsync(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("propertyExtensibleEnum").ToString());
 Console.WriteLine(result.GetProperty("propertyModelToMakeInternal").GetProperty("requiredInt").ToString());
 Console.WriteLine(result.GetProperty("propertyModelToRename").GetProperty("requiredInt").ToString());
 Console.WriteLine(result.GetProperty("propertyModelToRename").GetProperty("optionalInt").ToString());
@@ -266,6 +270,7 @@ CustomizationsInTspClient client = new CustomizationsInTspClient();
 
 RequestContent content = RequestContent.Create(new
 {
+    propertyExtensibleEnum = "Monday",
     propertyModelToMakeInternal = new
     {
         requiredInt = 1234,
@@ -324,6 +329,7 @@ RequestContent content = RequestContent.Create(new
 Response response = client.RoundTrip(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("propertyExtensibleEnum").ToString());
 Console.WriteLine(result.GetProperty("propertyModelToMakeInternal").GetProperty("requiredInt").ToString());
 Console.WriteLine(result.GetProperty("propertyModelToRename").GetProperty("requiredInt").ToString());
 Console.WriteLine(result.GetProperty("propertyModelToRename").GetProperty("optionalInt").ToString());
