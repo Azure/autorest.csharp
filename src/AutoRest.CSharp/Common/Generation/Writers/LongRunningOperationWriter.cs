@@ -2,11 +2,10 @@
 // Licensed under the MIT License.
 
 using System;
-using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
-using AutoRest.CSharp.Common.Output.Models.KnownValueExpressions;
-using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
+using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
+using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using Autorest.CSharp.Core;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models.Requests;

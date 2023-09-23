@@ -6,8 +6,8 @@ using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Builders;
+using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models.Responses;
-using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input.Source;
@@ -157,7 +157,7 @@ namespace AutoRest.CSharp.Output.Models
         {
             return new Parameter(
                 "credential",
-                "A credential used to authenticate to an Azure Service.",
+                $"A credential used to authenticate to an Azure Service.",
                 type,
                 null,
                 Validation.AssertNotNull,
@@ -170,7 +170,7 @@ namespace AutoRest.CSharp.Output.Models
         private Parameter CreateOptionsParameter()
         {
             var clientOptionsType = ClientOptions.Type.WithNullable(true);
-            return new Parameter("options", "The options for configuring the client.", clientOptionsType, Constant.Default(clientOptionsType), Validation.None, Constant.NewInstanceOf(clientOptionsType).GetConstantFormattable());
+            return new Parameter("options", $"The options for configuring the client.", clientOptionsType, Constant.Default(clientOptionsType), Validation.None, Constant.NewInstanceOf(clientOptionsType).GetConstantFormattable());
         }
 
         private ConstructorSignature BuildSubClientInternalConstructor()
@@ -252,10 +252,10 @@ namespace AutoRest.CSharp.Output.Models
                 }
                 var ctor = new ConstructorSignature(
                     DefaultName,
-                    GetSummaryPortion(existingCtor.GetDocumentationCommentXml()),
+                    FormattableStringHelpers.FromString(GetSummaryPortion(existingCtor.GetDocumentationCommentXml())),
                     null,
                     modifiers,
-                    parameters.Select(p => new Parameter(p.Name, p.GetDocumentationCommentXml(), ((INamedTypeSymbol)p.Type).GetCSharpType(_typeFactory)!, null, Validation.None, null)).ToArray(),
+                    parameters.Select(p => new Parameter(p.Name, $"{p.GetDocumentationCommentXml()}", ((INamedTypeSymbol)p.Type).GetCSharpType(_typeFactory)!, null, Validation.None, null)).ToArray(),
                     null);
                 candidates.Add(ctor);
             }

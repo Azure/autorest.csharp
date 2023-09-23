@@ -14,7 +14,7 @@ using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Output.Models.Shared
 {
-    internal record Parameter(string Name, string? Description, CSharpType Type, Constant? DefaultValue, Validation Validation, FormattableString? Initializer, bool IsApiVersionParameter = false, bool IsResourceIdentifier = false, bool SkipUrlEncoding = false, RequestLocation RequestLocation = RequestLocation.None, bool IsPropertyBag = false)
+    internal record Parameter(string Name, FormattableString? Description, CSharpType Type, Constant? DefaultValue, Validation Validation, FormattableString? Initializer, bool IsApiVersionParameter = false, bool IsResourceIdentifier = false, bool SkipUrlEncoding = false, RequestLocation RequestLocation = RequestLocation.None, bool IsPropertyBag = false)
     {
         public CSharpAttribute[] Attributes { get; init; } = Array.Empty<CSharpAttribute>();
         public bool IsOptionalInSignature => DefaultValue != null;
@@ -73,17 +73,15 @@ namespace AutoRest.CSharp.Output.Models.Shared
             }
         }
 
-        public static string CreateDescription(InputParameter operationParameter, CSharpType type, IEnumerable<string>? values, Constant? defaultValue)
+        public static FormattableString CreateDescription(InputParameter operationParameter, CSharpType type, IEnumerable<string>? values, Constant? defaultValue = null)
         {
-            string description = string.IsNullOrWhiteSpace(operationParameter.Description)
-            // [TODO] "The String to use." is special cased to reduce amount of changes. Remove during cleanup
-                ? type.Equals(typeof(string)) ? "The String to use." : $"The {type.ToStringForDocs()} to use."
-                : BuilderHelpers.EscapeXmlDocDescription(operationParameter.Description);
-
+            FormattableString description = string.IsNullOrWhiteSpace(operationParameter.Description)
+                ? (FormattableString)$"The {operationParameter.Type.Name} to use."
+                : $"{BuilderHelpers.EscapeXmlDocDescription(operationParameter.Description)}";
             if (defaultValue != null)
             {
                 var defaultValueString = defaultValue?.Value is string s ? $"\"{s}\"" : $"{defaultValue?.Value}";
-                description = $"{description}{(description.EndsWith(".") ? "" : ".")} The default value is {defaultValueString}";
+                description = $"{description}{(description.ToString().EndsWith(".") ? "" : ".")} The default value is {defaultValueString}";
             }
 
             if (!type.IsFrameworkType || values == null)
@@ -92,7 +90,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
             }
 
             var allowedValues = string.Join(" | ", values.Select(v => $"\"{v}\""));
-            return $"{description}{(description.EndsWith(".") ? "" : ".")} Allowed values: {BuilderHelpers.EscapeXmlDocDescription(allowedValues)}";
+            return $"{description}{(description.ToString().EndsWith(".") ? "" : ".")} Allowed values: {BuilderHelpers.EscapeXmlDocDescription(allowedValues)}";
         }
 
         public static Validation GetValidation(CSharpType type, RequestLocation requestLocation, bool skipUrlEncoding)

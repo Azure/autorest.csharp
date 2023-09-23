@@ -138,9 +138,9 @@ namespace AutoRest.CSharp.Output.Models.Types
         public FormattableString PropertyDescription => _propertyDescription ??= CreatePropertyDescription();
         public Property? SchemaProperty { get; }
         public InputModelProperty? InputModelProperty { get; }
-        private string? _parameterDescription;
+        private FormattableString? _parameterDescription;
         private string _baseParameterDescription; // inherited type "FlattenedObjectTypeProperty" need to pass this value into the base constructor so that some appended information will not be appended again in the flattened property
-        public string ParameterDescription => _parameterDescription ??= _baseParameterDescription + BuilderHelpers.CreateDerivedTypesDescription(ValueType);
+        public FormattableString ParameterDescription => _parameterDescription ??= $"{_baseParameterDescription}{BuilderHelpers.CreateDerivedTypesDescription(ValueType)}";
 
         /// <summary>
         /// Gets or sets the value indicating whether nullable type of this property represents optionality of the value.

@@ -36,19 +36,19 @@ namespace header_LowLevel
         /// <summary> Initializes a new instance of HeaderClient. </summary>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
-        public HeaderClient(AzureKeyCredential credential) : this(credential, new Uri("http://localhost:3000"), new HeaderClientOptions())
+        public HeaderClient(AzureKeyCredential credential) : this(new Uri("http://localhost:3000"), credential, new HeaderClientOptions())
         {
         }
 
         /// <summary> Initializes a new instance of HeaderClient. </summary>
-        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="endpoint"> server parameter. </param>
+        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="options"> The options for configuring the client. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> or <paramref name="endpoint"/> is null. </exception>
-        public HeaderClient(AzureKeyCredential credential, Uri endpoint, HeaderClientOptions options)
+        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
+        public HeaderClient(Uri endpoint, AzureKeyCredential credential, HeaderClientOptions options)
         {
-            Argument.AssertNotNull(credential, nameof(credential));
             Argument.AssertNotNull(endpoint, nameof(endpoint));
+            Argument.AssertNotNull(credential, nameof(credential));
             options ??= new HeaderClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);

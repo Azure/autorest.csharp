@@ -17,7 +17,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         private CSharpType? _inheritsType;
         private ObjectTypeConstructor? _serializationConstructor;
         private ObjectTypeConstructor? _initializationConstructor;
-        private string? _description;
+        private FormattableString? _description;
         private ObjectTypeDiscriminator? _discriminator;
 
         protected ObjectType(BuildContext context)
@@ -40,7 +40,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public ObjectTypeConstructor InitializationConstructor => _initializationConstructor ??= BuildInitializationConstructor();
 
-        public string? Description => _description ??= CreateDescription() + CreateExtraDescriptionWithDiscriminator();
+        public FormattableString? Description => _description ??= $"{CreateDescription()}{CreateExtraDescriptionWithDiscriminator()}";
         public abstract ObjectTypeProperty? AdditionalPropertiesProperty { get; }
         protected abstract ObjectTypeConstructor BuildInitializationConstructor();
         protected abstract ObjectTypeConstructor BuildSerializationConstructor();
@@ -73,7 +73,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             " is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.",
             "The available derived classes include " };
 
-        public string CreateExtraDescriptionWithDiscriminator()
+        public FormattableString CreateExtraDescriptionWithDiscriminator()
         {
             if (Discriminator?.HasDescendants == true)
             {
@@ -83,10 +83,9 @@ namespace AutoRest.CSharp.Output.Models.Types
                     childrenList.Add($"<see cref=\"{implementation.Type.Implementation.Type.Name}\"/>");
                 }
 
-                return $"{System.Environment.NewLine}{DiscriminatorDescFixedPart[0]}<see cref=\"{Type.Name}\"/>{DiscriminatorDescFixedPart[1]}" +
-                    $"{System.Environment.NewLine}{DiscriminatorDescFixedPart[2]}{FormattableStringHelpers.Join(childrenList, ", ", " and ")}.";
+                return $"{System.Environment.NewLine}{DiscriminatorDescFixedPart[0]}<see cref=\"{Type.Name}\"/>{DiscriminatorDescFixedPart[1]}{System.Environment.NewLine}{DiscriminatorDescFixedPart[2]}{FormattableStringHelpers.Join(childrenList, ", ", " and ")}.";
             }
-            return string.Empty;
+            return $"";
         }
     }
 }

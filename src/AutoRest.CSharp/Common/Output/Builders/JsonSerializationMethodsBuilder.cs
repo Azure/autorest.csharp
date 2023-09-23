@@ -8,11 +8,11 @@ using System.Net;
 using System.Reflection;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
+using AutoRest.CSharp.Common.Output.Expressions.Statements;
+using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
-using AutoRest.CSharp.Common.Output.Models.KnownValueExpressions;
-using AutoRest.CSharp.Common.Output.Models.Statements;
 using AutoRest.CSharp.Common.Output.Models.Types;
-using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
@@ -48,7 +48,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
         {
             return new Method
             (
-                new MethodSignature("ToRequestContent", null, "Convert into a Utf8JsonRequestContent.", modifiers, typeof(RequestContent), null, Array.Empty<Parameter>()),
+                new MethodSignature("ToRequestContent", null, $"Convert into a Utf8JsonRequestContent.", modifiers, typeof(RequestContent), null, Array.Empty<Parameter>()),
                 new[]
                 {
                     Var("content", New.Utf8JsonRequestContent(), out var requestContent),
@@ -86,9 +86,13 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 }
                 else if (property.SerializedType is { IsNullable: true })
                 {
+                    var checkPropertyIsInitialized = TypeFactory.IsCollectionType(property.SerializedType) && property.IsRequired
+                        ? And(NotEqual(property.Value, Null), InvokeOptional.IsCollectionDefined(property.Value))
+                        : NotEqual(property.Value, Null);
+
                     yield return InvokeOptional.WrapInIsDefined(
                         property,
-                        new IfElseStatement(NotEqual(property.Value, Null),
+                        new IfElseStatement(checkPropertyIsInitialized,
                             WriteProperty(utf8JsonWriter, property),
                             utf8JsonWriter.WriteNull(property.SerializedName)
                         )
@@ -322,10 +326,10 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
         public static Method BuildFromResponse(SerializableObjectType type, MethodSignatureModifiers modifiers)
         {
-            var fromResponse = new Parameter("response", "The response to deserialize the model from.", new CSharpType(typeof(Response)), null, Validation.None, null);
+            var fromResponse = new Parameter("response", $"The response to deserialize the model from.", new CSharpType(typeof(Response)), null, Validation.None, null);
             return new Method
             (
-                new MethodSignature("FromResponse", null, "Deserializes the model from a raw response.", modifiers, type.Type, null, new[]{fromResponse}),
+                new MethodSignature("FromResponse", null, $"Deserializes the model from a raw response.", modifiers, type.Type, null, new[]{fromResponse}),
                 new MethodBodyStatement[]
                 {
                     UsingVar("document", JsonDocumentExpression.Parse(new ResponseExpression(fromResponse).Content), out var document),
@@ -383,7 +387,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             var additionalProperties = serialization.AdditionalProperties;
             if (additionalProperties != null)
             {
-                propertyVariables.Add(additionalProperties, new VariableReference(additionalProperties.ValueType, additionalProperties.SerializationConstructorParameterName));
+                propertyVariables.Add(additionalProperties, new VariableReference(additionalProperties.Value.Type, additionalProperties.SerializationConstructorParameterName));
             }
 
             bool isThisTheDefaultDerivedType = serialization.Type.Equals(serialization.Discriminator?.DefaultObjectType.Type);
@@ -500,24 +504,38 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
         private static MethodBodyStatement CreatePropertyNullCheckStatement(JsonPropertySerialization jsonPropertySerialization, JsonPropertyExpression jsonProperty, IReadOnlyDictionary<JsonPropertySerialization, VariableReference> propertyVariables, bool shouldTreatEmptyStringAsNull)
         {
-            if (jsonPropertySerialization.CustomSerializationMethodName is not null)
+            if (jsonPropertySerialization.CustomDeserializationMethodName is not null)
             {
                 // if we have the deserialization hook here, we do not need to do any check, all these checks should be taken care of by the hook
                 return new MethodBodyStatement();
             }
 
+            var checkEmptyProperty = GetCheckEmptyPropertyValueExpression(jsonProperty, jsonPropertySerialization, shouldTreatEmptyStringAsNull);
             var serializedType = jsonPropertySerialization.SerializedType;
             if (serializedType?.IsNullable == true)
             {
                 // we only assign null when it is not a collection if we have DeserializeNullCollectionAsNullValue configuration is off
                 // specially when it is required, we assign ChangeTrackingList because for optional lists we are already doing that
-                var propertyValueForNullValueKind = TypeFactory.IsCollectionType(serializedType) && !Configuration.DeserializeNullCollectionAsNullValue
-                    ? New.Instance(TypeFactory.GetPropertyImplementationType(serializedType))
-                    : Null;
-
-                return new IfStatement(GetCheckEmptyPropertyValueExpression(jsonProperty, jsonPropertySerialization, shouldTreatEmptyStringAsNull))
+                if (!TypeFactory.IsCollectionType(serializedType) || Configuration.DeserializeNullCollectionAsNullValue)
                 {
-                    Assign(propertyVariables[jsonPropertySerialization], propertyValueForNullValueKind),
+                    return new IfStatement(checkEmptyProperty)
+                    {
+                        Assign(propertyVariables[jsonPropertySerialization], Null),
+                        Continue
+                    };
+                }
+
+                if (jsonPropertySerialization.IsRequired)
+                {
+                    return new IfStatement(checkEmptyProperty)
+                    {
+                        Assign(propertyVariables[jsonPropertySerialization], New.Instance(TypeFactory.GetPropertyImplementationType(serializedType))),
+                        Continue
+                    };
+                }
+
+                return new IfStatement(checkEmptyProperty)
+                {
                     Continue
                 };
             }
@@ -528,13 +546,13 @@ namespace AutoRest.CSharp.Common.Output.Builders
             {
                 if (jsonPropertySerialization.PropertySerializations is null)
                 {
-                    return new IfStatement(GetCheckEmptyPropertyValueExpression(jsonProperty, jsonPropertySerialization, shouldTreatEmptyStringAsNull))
+                    return new IfStatement(checkEmptyProperty)
                     {
                         Continue
                     };
                 }
 
-                return new IfStatement(GetCheckEmptyPropertyValueExpression(jsonProperty, jsonPropertySerialization, shouldTreatEmptyStringAsNull))
+                return new IfStatement(checkEmptyProperty)
                 {
                     jsonProperty.ThrowNonNullablePropertyIsNull(),
                     Continue
@@ -753,13 +771,13 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
         private static ValueExpression GetOptional(PropertySerialization jsonPropertySerialization, TypedValueExpression variable)
         {
-            var targetType = jsonPropertySerialization.ValueType;
             var sourceType = variable.Type;
             if (!sourceType.IsFrameworkType || sourceType.FrameworkType != typeof(Azure.Core.Optional<>))
             {
                 return variable;
             }
 
+            var targetType = jsonPropertySerialization.Value.Type;
             if (TypeFactory.IsList(targetType))
             {
                 return InvokeOptional.ToList(variable);

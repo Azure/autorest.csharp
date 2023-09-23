@@ -214,18 +214,6 @@ namespace AutoRest.CSharp.Generation.Types
         internal static CSharpType FromSystemType(BuildContext context, Type type)
             => FromSystemType(type, context.DefaultNamespace, context.SourceInputModel);
 
-        public bool IsCollectionType()
-        {
-            if (!IsFrameworkType)
-                return false;
-
-            return FrameworkType.Equals(typeof(IList<>)) ||
-                FrameworkType.Equals(typeof(IEnumerable<>)) ||
-                FrameworkType == typeof(IReadOnlyList<>) ||
-                FrameworkType.Equals(typeof(IDictionary<,>)) ||
-                FrameworkType == typeof(IReadOnlyDictionary<,>);
-        }
-
         public bool TryCast<T>([MaybeNullWhen(false)] out T provider) where T : TypeProvider
         {
             provider = null;

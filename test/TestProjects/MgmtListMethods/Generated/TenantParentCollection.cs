@@ -327,6 +327,80 @@ namespace MgmtListMethods
             }
         }
 
+        /// <summary>
+        /// Tries to get details for this resource from the service.
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/providers/Microsoft.Tenant/tenantTests/{tenantTestName}/tenantParents/{tenantParentName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>TenantParents_Get</description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="tenantParentName"> Name. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="tenantParentName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="tenantParentName"/> is null. </exception>
+        public virtual async Task<NullableResponse<TenantParentResource>> GetIfExistsAsync(string tenantParentName, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNullOrEmpty(tenantParentName, nameof(tenantParentName));
+
+            using var scope = _tenantParentClientDiagnostics.CreateScope("TenantParentCollection.GetIfExists");
+            scope.Start();
+            try
+            {
+                var response = await _tenantParentRestClient.GetAsync(Id.Name, tenantParentName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                if (response.Value == null)
+                    return new NoValueResponse<TenantParentResource>(response.GetRawResponse());
+                return Response.FromValue(new TenantParentResource(Client, response.Value), response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Tries to get details for this resource from the service.
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/providers/Microsoft.Tenant/tenantTests/{tenantTestName}/tenantParents/{tenantParentName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>TenantParents_Get</description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="tenantParentName"> Name. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="tenantParentName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="tenantParentName"/> is null. </exception>
+        public virtual NullableResponse<TenantParentResource> GetIfExists(string tenantParentName, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNullOrEmpty(tenantParentName, nameof(tenantParentName));
+
+            using var scope = _tenantParentClientDiagnostics.CreateScope("TenantParentCollection.GetIfExists");
+            scope.Start();
+            try
+            {
+                var response = _tenantParentRestClient.Get(Id.Name, tenantParentName, cancellationToken: cancellationToken);
+                if (response.Value == null)
+                    return new NoValueResponse<TenantParentResource>(response.GetRawResponse());
+                return Response.FromValue(new TenantParentResource(Client, response.Value), response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
         IEnumerator<TenantParentResource> IEnumerable<TenantParentResource>.GetEnumerator()
         {
             return GetAll().GetEnumerator();

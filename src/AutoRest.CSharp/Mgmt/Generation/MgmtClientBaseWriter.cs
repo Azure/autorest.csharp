@@ -7,10 +7,10 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using AutoRest.CSharp.Common.Generation.Writers;
+using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
+using AutoRest.CSharp.Common.Output.Expressions.Statements;
+using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
-using AutoRest.CSharp.Common.Output.Models.KnownValueExpressions;
-using AutoRest.CSharp.Common.Output.Models.Statements;
-using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
@@ -622,8 +622,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 _writer.WriteMethodBodyStatement(DeclareNextPageRequestLocalFunction(restClient, nextPageMethod, nextPageRequestArguments, out nextPageRequest));
             }
 
-            var clientDiagnostics = new MemberExpression(null, clientDiagnosticsReference.Name);
-            var pipeline = new MemberExpression(null, "Pipeline");
+            var clientDiagnostics = new TypedMemberExpression(null, clientDiagnosticsReference.Name, clientDiagnosticsReference.Type);
+            var pipeline = new TypedMemberExpression(null, "Pipeline", typeof(HttpPipeline));
             var scopeName = diagnostic.ScopeName;
             var itemName = pagingMethod.ItemName;
             var nextLinkName = pagingMethod.NextLinkName;

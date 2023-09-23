@@ -6,13 +6,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Xml;
 using System.Xml.Linq;
+using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
+using AutoRest.CSharp.Common.Output.Expressions.Statements;
+using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
-using AutoRest.CSharp.Common.Output.Models.KnownValueExpressions;
-using AutoRest.CSharp.Common.Output.Models.Statements;
 using AutoRest.CSharp.Common.Output.Models.Types;
-using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Serialization;
 using AutoRest.CSharp.Output.Models.Serialization.Xml;
@@ -72,8 +71,13 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
         private static MethodBodyStatement WrapInNullCheck(PropertySerialization serialization, MethodBodyStatement statement)
         {
-            if (serialization.SerializedType is {IsNullable: true} && TypeFactory.IsCollectionType(serialization.SerializedType))
+            if (serialization.SerializedType is {IsNullable: true} serializedType)
             {
+                if (TypeFactory.IsCollectionType(serializedType) && serialization.IsRequired)
+                {
+                    return new IfElseStatement(And(NotEqual(serialization.Value, Null), InvokeOptional.IsCollectionDefined(serialization.Value)), statement, null);
+                }
+
                 return new IfElseStatement(NotEqual(serialization.Value, Null), statement, null);
             }
 
@@ -387,22 +391,22 @@ namespace AutoRest.CSharp.Common.Output.Builders
         {
             foreach (var attribute in element.Attributes)
             {
-                propertyVariables.Add(attribute, new VariableReference(attribute.ValueType, attribute.SerializationConstructorParameterName));
+                propertyVariables.Add(attribute, new VariableReference(attribute.Value.Type, attribute.SerializationConstructorParameterName));
             }
 
             foreach (var attribute in element.Elements)
             {
-                propertyVariables.Add(attribute, new VariableReference(attribute.ValueType, attribute.SerializationConstructorParameterName));
+                propertyVariables.Add(attribute, new VariableReference(attribute.Value.Type, attribute.SerializationConstructorParameterName));
             }
 
             foreach (var attribute in element.EmbeddedArrays)
             {
-                propertyVariables.Add(attribute, new VariableReference(attribute.ValueType, attribute.SerializationConstructorParameterName));
+                propertyVariables.Add(attribute, new VariableReference(attribute.Value.Type, attribute.SerializationConstructorParameterName));
             }
 
             if (element.ContentSerialization is {} contentSerialization)
             {
-                propertyVariables.Add(contentSerialization, new VariableReference(contentSerialization.ValueType, contentSerialization.SerializationConstructorParameterName));
+                propertyVariables.Add(contentSerialization, new VariableReference(contentSerialization.Value.Type, contentSerialization.SerializationConstructorParameterName));
             }
         }
     }

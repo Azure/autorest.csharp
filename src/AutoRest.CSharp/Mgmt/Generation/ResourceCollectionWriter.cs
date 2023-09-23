@@ -4,10 +4,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using AutoRest.CSharp.Common.Output.Models;
-using AutoRest.CSharp.Common.Output.Models.KnownValueExpressions;
-using AutoRest.CSharp.Common.Output.Models.Statements;
-using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
+using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
+using AutoRest.CSharp.Common.Output.Expressions.Statements;
+using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Mgmt.Output;
@@ -46,8 +45,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
             var allPossibleTypes = This.ResourceTypes.SelectMany(p => p.Value).Distinct();
 
             FormattableString validResourceType = allPossibleTypes.Count() == 1
-                ? validResourceType = GetResourceTypeExpression(allPossibleTypes.First())
-                : validResourceType = $"{typeof(Azure.Core.ResourceIdentifier)}.Root.ResourceType";
+                ? GetResourceTypeExpression(allPossibleTypes.First())
+                : $"{typeof(Azure.Core.ResourceIdentifier)}.Root.ResourceType";
             _writer.Line();
 
             if (allPossibleTypes.Count() == 1)

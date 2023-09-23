@@ -39,16 +39,18 @@ namespace MgmtDiscriminator.Models
         /// </param>
         /// <param name="pet">
         /// A pet
-        /// Please note <see cref="Pet"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
+        /// Please note <see cref="Models.Pet"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
         /// The available derived classes include <see cref="Cat"/> and <see cref="Dog"/>.
         /// </param>
-        internal DeliveryRuleProperties(int? order, DeliveryRuleCondition conditions, IList<DeliveryRuleAction> actions, IDictionary<string, DeliveryRuleAction> extraMappingInfo, Pet pet)
+        /// <param name="foo"> put a readonly property here so that this model will show up in the model factory. </param>
+        internal DeliveryRuleProperties(int? order, DeliveryRuleCondition conditions, IList<DeliveryRuleAction> actions, IDictionary<string, DeliveryRuleAction> extraMappingInfo, Pet pet, string foo)
         {
             Order = order;
             Conditions = conditions;
             Actions = actions;
             ExtraMappingInfo = extraMappingInfo;
             Pet = pet;
+            Foo = foo;
         }
 
         /// <summary> The order in which the rules are applied for the endpoint. Possible values {0,1,2,3,………}. A rule with a lesser order will be applied before a rule with a greater order. Rule with order 0 is a special rule. It does not require any condition and actions listed in it will always be applied. </summary>
@@ -73,9 +75,11 @@ namespace MgmtDiscriminator.Models
         public IDictionary<string, DeliveryRuleAction> ExtraMappingInfo { get; }
         /// <summary>
         /// A pet
-        /// Please note <see cref="Pet"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
+        /// Please note <see cref="Models.Pet"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
         /// The available derived classes include <see cref="Cat"/> and <see cref="Dog"/>.
         /// </summary>
         public Pet Pet { get; set; }
+        /// <summary> put a readonly property here so that this model will show up in the model factory. </summary>
+        public string Foo { get; }
     }
 }

@@ -320,6 +320,80 @@ namespace MgmtNoTypeReplacement
             }
         }
 
+        /// <summary>
+        /// Tries to get details for this resource from the service.
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/noTypeReplacementModel3s/{noTypeReplacementModel3sName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>NoTypeReplacementModel3s_Get</description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="noTypeReplacementModel3SName"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="noTypeReplacementModel3SName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="noTypeReplacementModel3SName"/> is null. </exception>
+        public virtual async Task<NullableResponse<NoTypeReplacementModel3Resource>> GetIfExistsAsync(string noTypeReplacementModel3SName, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNullOrEmpty(noTypeReplacementModel3SName, nameof(noTypeReplacementModel3SName));
+
+            using var scope = _noTypeReplacementModel3ClientDiagnostics.CreateScope("NoTypeReplacementModel3Collection.GetIfExists");
+            scope.Start();
+            try
+            {
+                var response = await _noTypeReplacementModel3RestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, noTypeReplacementModel3SName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                if (response.Value == null)
+                    return new NoValueResponse<NoTypeReplacementModel3Resource>(response.GetRawResponse());
+                return Response.FromValue(new NoTypeReplacementModel3Resource(Client, response.Value), response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Tries to get details for this resource from the service.
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/noTypeReplacementModel3s/{noTypeReplacementModel3sName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>NoTypeReplacementModel3s_Get</description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="noTypeReplacementModel3SName"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="noTypeReplacementModel3SName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="noTypeReplacementModel3SName"/> is null. </exception>
+        public virtual NullableResponse<NoTypeReplacementModel3Resource> GetIfExists(string noTypeReplacementModel3SName, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNullOrEmpty(noTypeReplacementModel3SName, nameof(noTypeReplacementModel3SName));
+
+            using var scope = _noTypeReplacementModel3ClientDiagnostics.CreateScope("NoTypeReplacementModel3Collection.GetIfExists");
+            scope.Start();
+            try
+            {
+                var response = _noTypeReplacementModel3RestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, noTypeReplacementModel3SName, cancellationToken: cancellationToken);
+                if (response.Value == null)
+                    return new NoValueResponse<NoTypeReplacementModel3Resource>(response.GetRawResponse());
+                return Response.FromValue(new NoTypeReplacementModel3Resource(Client, response.Value), response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
         IEnumerator<NoTypeReplacementModel3Resource> IEnumerable<NoTypeReplacementModel3Resource>.GetEnumerator()
         {
             return GetAll().GetEnumerator();

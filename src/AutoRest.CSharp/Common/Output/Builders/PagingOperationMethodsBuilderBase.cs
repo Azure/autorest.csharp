@@ -6,9 +6,9 @@ using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Builders;
+using AutoRest.CSharp.Common.Output.Expressions.Statements;
+using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
-using AutoRest.CSharp.Common.Output.Models.Statements;
-using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
@@ -20,7 +20,7 @@ namespace AutoRest.CSharp.Output.Models
 {
     internal abstract class PagingOperationMethodsBuilderBase : OperationMethodsBuilderBase
     {
-        private static readonly Parameter NextPageUrlParameter = new("nextLink", "The URL to the next page of results.", typeof(string), DefaultValue: null, Validation.AssertNotNull, null);
+        private static readonly Parameter NextPageUrlParameter = new("nextLink", $"The URL to the next page of results.", typeof(string), DefaultValue: null, Validation.AssertNotNull, null);
         private readonly StatusCodeSwitchBuilder _nextPageStatusCodeSwitchBuilder;
         private readonly string _clientName;
         private readonly string _clientNamespace;

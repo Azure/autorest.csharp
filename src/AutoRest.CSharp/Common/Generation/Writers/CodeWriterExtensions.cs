@@ -5,6 +5,9 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using AutoRest.CSharp.Common.Output.Builders;
+using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
+using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
@@ -14,15 +17,9 @@ using AutoRest.CSharp.Output.Models.Serialization.Xml;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
-using Azure;
 using AutoRest.CSharp.Common.Output.Models;
 using Azure.Core;
 using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
-using System.Text.Json;
-using AutoRest.CSharp.Common.Output.Builders;
-using AutoRest.CSharp.Common.Output.Models.KnownValueExpressions;
-using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
-
 namespace AutoRest.CSharp.Generation.Writers
 {
     internal static partial class CodeWriterExtensions
@@ -587,7 +584,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         public static IDisposable WriteCommonMethodWithoutValidation(this CodeWriter writer, MethodSignature signature, FormattableString? returnDescription, bool isAsync, bool isPublicType)
         {
-            writer.WriteXmlDocumentationSummary(signature.FormattableDescription);
+            writer.WriteXmlDocumentationSummary(signature.SummaryText);
             writer.WriteXmlDocumentationParameters(signature.Parameters);
             if (isPublicType)
             {

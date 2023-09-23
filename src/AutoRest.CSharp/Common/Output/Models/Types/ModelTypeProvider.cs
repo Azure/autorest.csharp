@@ -218,7 +218,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             //get base public ctor params
             GetConstructorParameters(Fields.PublicConstructorParameters, out var fullParameterList, out var parametersToPassToBase, true);
 
-            var summary = $"Initializes a new instance of {name}";
+            FormattableString summary = $"Initializes a new instance of {name}";
             var accessibility = IsAbstract
                 ? MethodSignatureModifiers.Protected
                 : _inputModelUsage.HasFlag(InputModelTypeUsage.Input)
@@ -261,7 +261,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 parametersToPassToBase = ctor.Signature.Parameters;
                 fullParameterList.AddRange(parametersToPassToBase);
             }
-            fullParameterList.AddRange(parameters.Select(p => p with {Description = p.Description + BuilderHelpers.CreateDerivedTypesDescription(p.Type)}));
+            fullParameterList.AddRange(parameters.Select(p => p with {Description = $"{p.Description}{BuilderHelpers.CreateDerivedTypesDescription(p.Type)}"}));
         }
 
         protected override ObjectTypeConstructor BuildInitializationConstructor()

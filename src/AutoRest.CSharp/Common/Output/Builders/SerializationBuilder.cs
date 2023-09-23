@@ -7,7 +7,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text.Json;
 using AutoRest.CSharp.Common.Input;
-using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
+using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
@@ -305,9 +305,8 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
             return new JsonPropertySerialization(
                 parameter.Name,
-                new MemberExpression(null, property.Declaration.Name),
+                new TypedMemberExpression(null, property.Declaration.Name, property.Declaration.Type),
                 serializedName,
-                property.Declaration.Type,
                 property.ValueType,
                 serialization,
                 isRequired,
@@ -327,7 +326,6 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 string.Empty,
                 value,
                 serializedName,
-                value.Type,
                 value.Type.IsNullable && optionalViaNullability ? value.Type.WithNullable(false) : value.Type,
                 valueSerialization,
                 inputModelProperty.IsRequired,
@@ -348,9 +346,8 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
             return new JsonPropertySerialization(
                 declaredName.ToVariableName(),
-                new MemberExpression(null, declaredName),
+                new TypedMemberExpression(null, declaredName, property.Declaration.Type),
                 serializedName,
-                property.Declaration.Type,
                 property.ValueType.IsNullable && property.OptionalViaNullability ? property.ValueType.WithNullable(false) : property.ValueType,
                 valueSerialization,
                 property.IsRequired,

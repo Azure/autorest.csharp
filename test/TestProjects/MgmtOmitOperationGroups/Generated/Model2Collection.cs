@@ -320,6 +320,80 @@ namespace MgmtOmitOperationGroups
             }
         }
 
+        /// <summary>
+        /// Tries to get details for this resource from the service.
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/model2s/{model2sName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Model2s_Get</description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="model2SName"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="model2SName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="model2SName"/> is null. </exception>
+        public virtual async Task<NullableResponse<Model2Resource>> GetIfExistsAsync(string model2SName, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNullOrEmpty(model2SName, nameof(model2SName));
+
+            using var scope = _model2ClientDiagnostics.CreateScope("Model2Collection.GetIfExists");
+            scope.Start();
+            try
+            {
+                var response = await _model2RestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, model2SName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                if (response.Value == null)
+                    return new NoValueResponse<Model2Resource>(response.GetRawResponse());
+                return Response.FromValue(new Model2Resource(Client, response.Value), response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Tries to get details for this resource from the service.
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/model2s/{model2sName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Model2s_Get</description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="model2SName"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="model2SName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="model2SName"/> is null. </exception>
+        public virtual NullableResponse<Model2Resource> GetIfExists(string model2SName, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNullOrEmpty(model2SName, nameof(model2SName));
+
+            using var scope = _model2ClientDiagnostics.CreateScope("Model2Collection.GetIfExists");
+            scope.Start();
+            try
+            {
+                var response = _model2RestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, model2SName, cancellationToken: cancellationToken);
+                if (response.Value == null)
+                    return new NoValueResponse<Model2Resource>(response.GetRawResponse());
+                return Response.FromValue(new Model2Resource(Client, response.Value), response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
         IEnumerator<Model2Resource> IEnumerable<Model2Resource>.GetEnumerator()
         {
             return GetAll().GetEnumerator();

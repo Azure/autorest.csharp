@@ -256,7 +256,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             return _scopeParameter with
             {
-                Description = _scopeParameter.Description + $" Expected resource type includes the following: {types.Join(", ", " or ")}"
+                Description = $"{_scopeParameter.Description} Expected resource type includes the following: {types.Join(", ", " or ")}"
             };
         }
     }

@@ -79,7 +79,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                     ? Validation.None
                     : Validation.AssertNotNull;
 
-                var parameter = new Parameter(parameterName, BuilderHelpers.EscapeXmlDocDescription(inputModelProperty.Description), field.Type, null, parameterValidation, null);
+                var parameter = new Parameter(parameterName, FormattableStringHelpers.FromString(BuilderHelpers.EscapeXmlDocDescription(inputModelProperty.Description)), field.Type, null, parameterValidation, null);
                 parametersToFields[parameter.Name] = field;
                 // all properties should be included in the serialization ctor
                 serializationParameters.Add(parameter with { Validation = Validation.None });
@@ -115,7 +115,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 var accessModifiers = existingMember is null ? Public : GetAccessModifiers(existingMember);
 
                 var additionalPropertiesField = new FieldDeclaration($"Additional Properties", accessModifiers | ReadOnly, type, declaration, null, false, true);
-                var additionalPropertiesParameter = new Parameter(name.ToVariableName(), "Additional Properties", type, null, Validation.None, null);
+                var additionalPropertiesParameter = new Parameter(name.ToVariableName(), $"Additional Properties", type, null, Validation.None, null);
 
                 fields.Add(additionalPropertiesField);
                 serializationParameters.Add(additionalPropertiesParameter);
@@ -146,7 +146,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                     // the serialization will be generated for this type and it might has issues if the type is not recognized properly.
                     // but customer could always use the `CodeGenMemberSerializationHooks` attribute to override those incorrect serialization/deserialization code.
                     var field = CreateFieldFromExisting(serializationMapping.ExistingMember, serializationMapping, typeof(object), inputModelProperty, typeFactory, false);
-                    var parameter = new Parameter(field.Name.FirstCharToLowerCase(), BuilderHelpers.EscapeXmlDocDescription(inputModelProperty.Description), field.Type, null, Validation.None, null);
+                    var parameter = new Parameter(field.Name.FirstCharToLowerCase(), FormattableStringHelpers.FromString(BuilderHelpers.EscapeXmlDocDescription(inputModelProperty.Description)), field.Type, null, Validation.None, null);
 
                     fields.Add(field);
                     fieldsToInputs[field] = inputModelProperty;
@@ -197,7 +197,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             var declaration = new CodeWriterDeclaration(fieldName);
             declaration.SetActualName(fieldName);
             return new FieldDeclaration(
-                $"{BuilderHelpers.EscapeXmlDocDescription(inputModelProperty.Description)}",
+                FormattableStringHelpers.FromString(BuilderHelpers.EscapeXmlDocDescription(inputModelProperty.Description)),
                 fieldModifiers,
                 originalType,
                 declaration,

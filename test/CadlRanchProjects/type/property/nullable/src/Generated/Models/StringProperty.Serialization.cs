@@ -7,7 +7,6 @@
 
 using System.Text.Json;
 using Azure;
-using Azure.Core;
 
 namespace _Type.Property.Nullable.Models
 {

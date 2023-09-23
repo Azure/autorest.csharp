@@ -16,6 +16,7 @@ namespace CustomizationsInTsp.Models
         }
 
         /// <summary> Initializes a new instance of RootModel. </summary>
+        /// <param name="propertyExtensibleEnum"> ExtensibleEnumWithOperator. </param>
         /// <param name="propertyModelToMakeInternal"> ModelToMakeInternal. </param>
         /// <param name="propertyModelToRename"> ModelToRename. </param>
         /// <param name="propertyModelToChangeNamespace"> ModelToChangeNamespace. </param>
@@ -25,8 +26,9 @@ namespace CustomizationsInTsp.Models
         /// <param name="propertyEnumToBeMadeExtensible"> EnumToBeMadeExtensible. </param>
         /// <param name="propertyModelToAddAdditionalSerializableProperty"> ModelToAddAdditionalSerializableProperty. </param>
         /// <param name="propertyToMoveToCustomization"> Enum type property to move to customization code. </param>
-        internal RootModel(ModelToMakeInternal propertyModelToMakeInternal, RenamedModel propertyModelToRename, ModelToChangeNamespace propertyModelToChangeNamespace, ModelWithCustomizedProperties propertyModelWithCustomizedProperties, RenamedEnum? propertyEnumToRename, EnumWithValueToRename? propertyEnumWithValueToRename, EnumToBeMadeExtensible? propertyEnumToBeMadeExtensible, ModelToAddAdditionalSerializableProperty propertyModelToAddAdditionalSerializableProperty, NormalEnum? propertyToMoveToCustomization)
+        internal RootModel(ExtensibleEnumWithOperator? propertyExtensibleEnum, ModelToMakeInternal propertyModelToMakeInternal, RenamedModel propertyModelToRename, ModelToChangeNamespace propertyModelToChangeNamespace, ModelWithCustomizedProperties propertyModelWithCustomizedProperties, RenamedEnum? propertyEnumToRename, EnumWithValueToRename? propertyEnumWithValueToRename, EnumToBeMadeExtensible? propertyEnumToBeMadeExtensible, ModelToAddAdditionalSerializableProperty propertyModelToAddAdditionalSerializableProperty, NormalEnum? propertyToMoveToCustomization)
         {
+            PropertyExtensibleEnum = propertyExtensibleEnum;
             PropertyModelToMakeInternal = propertyModelToMakeInternal;
             PropertyModelToRename = propertyModelToRename;
             PropertyModelToChangeNamespace = propertyModelToChangeNamespace;
@@ -37,6 +39,9 @@ namespace CustomizationsInTsp.Models
             PropertyModelToAddAdditionalSerializableProperty = propertyModelToAddAdditionalSerializableProperty;
             PropertyToMoveToCustomization = propertyToMoveToCustomization;
         }
+
+        /// <summary> ExtensibleEnumWithOperator. </summary>
+        public ExtensibleEnumWithOperator? PropertyExtensibleEnum { get; set; }
         /// <summary> ModelToRename. </summary>
         public RenamedModel PropertyModelToRename { get; set; }
         /// <summary> ModelToChangeNamespace. </summary>

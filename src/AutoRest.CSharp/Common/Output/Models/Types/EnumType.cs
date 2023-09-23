@@ -5,12 +5,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
+using AutoRest.CSharp.Common.Output.Expressions.Statements;
+using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
-using AutoRest.CSharp.Common.Output.Models.KnownValueExpressions;
-using AutoRest.CSharp.Common.Output.Models.Statements;
-using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Builders;
@@ -63,7 +62,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             ValueType = typeFactory.CreateType(input.EnumValueType);
             IsStringValueType = ValueType.Equals(typeof(string));
             IsIntValueType = ValueType.Equals(typeof(int)) || ValueType.Equals(typeof(long));
-            IsFloatValueType = ValueType.Equals(typeof(float));
+            IsFloatValueType = ValueType.Equals(typeof(float)) || ValueType.Equals(typeof(double));
             IsNumericValueType = IsIntValueType || IsFloatValueType;
 
             if (IsExtensible)

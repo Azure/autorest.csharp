@@ -6,8 +6,8 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Diagnostics;
 using System.Linq;
+using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
-using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
@@ -34,6 +34,8 @@ namespace AutoRest.CSharp.Mgmt.Models
     /// </summary>
     internal record MgmtRestOperation
     {
+        private static readonly string[] NullableResponseMethodNames = { "GetIfExists" };
+
         private bool? _isLongRunning;
 
         /// <summary>
@@ -119,7 +121,7 @@ namespace AutoRest.CSharp.Mgmt.Models
             _propertyBagName = propertyBagName;
             _isLongRunning = isLongRunning;
             Accessibility = method.Modifiers & (MethodSignatureModifiers.Public | MethodSignatureModifiers.Protected | MethodSignatureModifiers.Private | MethodSignatureModifiers.Internal);
-            Description = method.Description;
+            Description = method.Description?.ToString();
             ThrowIfNull = throwIfNull;
             Operation = operation;
             MethodName = method.Name;
@@ -556,8 +558,7 @@ namespace AutoRest.CSharp.Mgmt.Models
             if (InterimOperation is not null)
                 return InterimOperation.InterimType;
 
-
-            return IsLongRunningOperation ? originalType.WrapOperation(false) : originalType.WrapResponse(false);
+            return IsLongRunningOperation ? originalType.WrapOperation(false) : originalType.WrapResponse(isAsync: false, isNullable: NullableResponseMethodNames.Contains(OperationName));
         }
 
         private CSharpType? GetMgmtReturnType(CSharpType? originalType)

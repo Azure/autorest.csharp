@@ -34,7 +34,7 @@ namespace AutoRest.CSharp.Mgmt.Output.Models
             foreach (var parameter in _paramsToKeep)
             {
                 var inputParameter = _operation.Parameters.FirstOrDefault(p => string.Equals(p.Name, parameter.Name, StringComparison.OrdinalIgnoreCase));
-                var description = parameter.Description ?? $"The {parameter.Name}";
+                var description = parameter.Description?.ToString() ?? $"The {parameter.Name}";
                 var property = new InputModelProperty(parameter.Name, parameter.Name, description, inputParameter!.Type, parameter.DefaultValue == null ? null : inputParameter.DefaultValue, parameter.DefaultValue == null, false, false);
                 properties.Add(property);
             }

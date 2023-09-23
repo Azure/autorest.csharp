@@ -13,13 +13,13 @@ using System.Threading.Tasks;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Builders;
+using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
+using AutoRest.CSharp.Common.Output.Expressions.Statements;
+using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Common.Output.Models;
-using AutoRest.CSharp.Common.Output.Models.KnownValueExpressions;
-using AutoRest.CSharp.Common.Output.Models.Statements;
-using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Builders;
@@ -628,7 +628,7 @@ namespace AutoRest.CSharp.Generation.Writers
             var statements = new List<MethodBodyStatement>();
             foreach (var propertySerialization in propertiesToExplore)
             {
-                var propertyType = propertySerialization.ValueType;
+                var propertyType = propertySerialization.Value.Type;
                 if (visitedTypes.Contains(propertyType))
                 {
                     continue;

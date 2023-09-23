@@ -5,14 +5,15 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Output.Expressions.KnownCodeBlocks;
+using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
+using AutoRest.CSharp.Common.Output.Expressions.Statements;
+using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
-using AutoRest.CSharp.Common.Output.Models.KnownCodeBlocks;
-using AutoRest.CSharp.Common.Output.Models.KnownValueExpressions;
 using AutoRest.CSharp.Common.Output.Models.Responses;
-using AutoRest.CSharp.Common.Output.Models.Statements;
 using AutoRest.CSharp.Common.Output.Models.Types;
-using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Builders;
@@ -38,8 +39,8 @@ namespace AutoRest.CSharp.Common.Output.Builders
         private readonly string _clientName;
         private readonly string _clientNamespace;
 
-        private readonly string? _summary;
-        private readonly string? _description;
+        private readonly FormattableString? _summary;
+        private readonly FormattableString? _description;
         private readonly MethodSignatureModifiers _protocolAccessibility;
         private readonly MethodParametersBuilder _parametersBuilder;
         private readonly StatusCodeSwitchBuilder _statusCodeSwitchBuilder;
@@ -85,8 +86,8 @@ namespace AutoRest.CSharp.Common.Output.Builders
             ConvenienceMethodReturnType = _statusCodeSwitchBuilder.ClientConvenienceReturnType;
             ResponseClassifier = _statusCodeSwitchBuilder.ResponseClassifier;
 
-            _summary = Operation.Summary != null ? BuilderHelpers.EscapeXmlDocDescription(Operation.Summary) : null;
-            _description = BuilderHelpers.EscapeXmlDocDescription(Operation.Description);
+            _summary = FormattableStringHelpers.FromString(Operation.Summary != null ? BuilderHelpers.EscapeXmlDocDescription(Operation.Summary) : null);
+            _description = FormattableStringHelpers.FromString(BuilderHelpers.EscapeXmlDocDescription(Operation.Description));
             _protocolAccessibility = Operation.GenerateProtocolMethod ? GetAccessibility(Operation.Accessibility) : MethodSignatureModifiers.Internal;
             ConvenienceModifiers = GetAccessibility(Operation.Accessibility);
         }

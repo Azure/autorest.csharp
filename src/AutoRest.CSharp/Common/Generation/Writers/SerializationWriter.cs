@@ -2,24 +2,14 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using System.Xml;
-using System.Xml.Linq;
 using AutoRest.CSharp.Common.Output.Builders;
-using AutoRest.CSharp.Common.Output.Models;
-using AutoRest.CSharp.Common.Output.Models.KnownValueExpressions;
 using AutoRest.CSharp.Common.Output.Models.Types;
-using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Serialization.Json;
 using AutoRest.CSharp.Output.Models.Serialization.Xml;
 using AutoRest.CSharp.Output.Models.Types;
-using AutoRest.CSharp.Utilities;
-using Azure;
 using Azure.Core;
 
 namespace AutoRest.CSharp.Generation.Writers
@@ -127,14 +117,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private static void WriteXmlSerialize(CodeWriter writer, XmlObjectSerialization serialization)
         {
-            var xmlWriter = new VariableReference(typeof(XmlWriter), "writer");
-            var nameHint = new VariableReference(typeof(string), "nameHint");
-            writer.Append($"void {typeof(IXmlSerializable)}.{nameof(IXmlSerializable.Write)}({typeof(XmlWriter)} {xmlWriter.Declaration:D}, {typeof(string)} {nameHint.Declaration:D})");
-            using (writer.Scope())
-            {
-                writer.WriteMethodBodyStatement(XmlSerializationMethodsBuilder.SerializeExpression(new XmlWriterExpression(xmlWriter), serialization, new StringExpression(nameHint)).AsStatement());
-            }
-            writer.Line();
+            writer.WriteMethod(XmlSerializationMethodsBuilder.BuildXmlSerializableWrite(serialization));
         }
 
         public static void WriteEnumSerialization(CodeWriter writer, EnumType enumType)

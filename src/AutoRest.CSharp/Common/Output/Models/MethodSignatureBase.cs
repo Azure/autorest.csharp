@@ -3,15 +3,15 @@
 
 using System;
 using System.Collections.Generic;
+using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Output.Models.Shared;
-using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Output.Models
 {
-    internal abstract record MethodSignatureBase(string Name, string? Summary, string? Description, string? NonDocumentComment, MethodSignatureModifiers Modifiers, IReadOnlyList<Parameter> Parameters, IReadOnlyList<CSharpAttribute> Attributes)
+    internal abstract record MethodSignatureBase(string Name, FormattableString? Summary, FormattableString? Description, string? NonDocumentComment, MethodSignatureModifiers Modifiers, IReadOnlyList<Parameter> Parameters, IReadOnlyList<CSharpAttribute> Attributes)
     {
-        public string? SummaryText => Summary.IsNullOrEmpty() ? Description : Summary;
-        public string? DescriptionText => Summary.IsNullOrEmpty() || Description == Summary ? string.Empty : Description;
+        public FormattableString? SummaryText => Summary.IsNullOrEmpty() ? Description : Summary;
+        public FormattableString? DescriptionText => Summary.IsNullOrEmpty() || Description == Summary || Description?.ToString() == Summary?.ToString() ? $"" : Description;
     }
 
     [Flags]

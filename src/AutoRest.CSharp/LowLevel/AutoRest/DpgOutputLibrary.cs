@@ -28,6 +28,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         public IEnumerable<TypeProvider> AllModels { get; }
         public ModelFactoryTypeProvider? ModelFactory { get; }
         public AspDotNetExtensionTypeProvider AspDotNetExtension { get; }
+        public IReadOnlyList<string> AccessOverriddenModels { get; }
 
         public DpgOutputLibrary(InputNamespace rootNamespace, IReadOnlyList<DpgOutputLibraryBuilder.ClientInfo> topLevelClientInfos, ClientOptionsTypeProvider clientOptions, bool isTspInput, SourceInputModel? sourceInputModel)
         {
@@ -49,6 +50,11 @@ namespace AutoRest.CSharp.Output.Models.Types
             ClientOptions = clientOptions;
             ModelFactory = ModelFactoryTypeProvider.TryCreate(AllModels, sourceInputModel);
             AspDotNetExtension = new AspDotNetExtensionTypeProvider(RestClients, Configuration.Namespace, sourceInputModel);
+            AccessOverriddenModels = isTspInput
+                ? _enums.Where(e => e.Key.Accessibility is not null).Select(e => e.Value.Declaration.Name)
+                    .Concat(_models.Where(m => m.Key.Accessibility is not null).Select(e => e.Value.Declaration.Name))
+                    .ToList()
+                : Array.Empty<string>();
         }
 
         public override CSharpType ResolveEnum(InputEnumType enumType)
