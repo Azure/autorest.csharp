@@ -59,7 +59,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 TransformStore.Instance.AddTransformLog(
                     new TransformItem(MgmtConfiguration.ConfigName.OverrideOperationName, operation.OperationId!, name),
                     operation.GetFullSerializedName(),
-                    $"OverrideOperationName to {name} for {operation.OperationId}");
+                    $"OverrideOperationName to '{name}' for '{operation.OperationId}'");
                 return true;
             }
             return false;

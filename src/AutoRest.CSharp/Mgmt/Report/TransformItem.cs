@@ -9,7 +9,7 @@ namespace AutoRest.CSharp.Mgmt.Report
 {
     internal class TransformItem : IEquatable<TransformItem?>
     {
-        private const string SEP = "##";
+        private const string SEP = ">>";
 
         public TransformItem(string transformType, string key, bool isFromConfig, params string[] arguments)
         {

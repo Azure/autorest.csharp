@@ -45,11 +45,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                     if (Configuration.MgmtTestConfiguration is not null)
                         await MgmtTestTarget.ExecuteAsync(project, codeModel, sourceInputModel);
                 }
-                if (TransformStore.Instance.TransformLogs.Count > 0)
-                {
-                    project.AddPlainFiles("transform-logs.csv", TransformStore.Instance.LogsToCsv());
-                    project.AddPlainFiles("transform-usages.csv", TransformStore.Instance.UsagesToCsv());
-                }
+                project.AddPlainFiles("transform-report.txt", TransformStore.Instance.ToReport());
             }
             else
             {

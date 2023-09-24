@@ -5,20 +5,20 @@ namespace AutoRest.CSharp.Mgmt.Report
 {
     internal class TransformLog
     {
-        public TransformLog(TransformItem item, string targetFullSerializedName, string logMessage)
+        public TransformLog(int index, string targetFullSerializedName, string logMessage)
         {
-            Transformer = item;
+            Index = index;
             LogMessage = logMessage;
             TargetFullSerializedName = targetFullSerializedName;
         }
 
-        public TransformItem Transformer { get; }
+        public int Index { get; }
         public string LogMessage { get; }
         public string TargetFullSerializedName { get; }
 
         public override string ToString()
         {
-            return $"{Transformer}+{TargetFullSerializedName}=>{LogMessage}";
+            return $"[{Index}][{TargetFullSerializedName}]: {LogMessage}";
         }
     }
 }
