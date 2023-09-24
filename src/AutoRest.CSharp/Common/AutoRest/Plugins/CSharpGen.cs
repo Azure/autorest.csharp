@@ -47,7 +47,8 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 }
                 if (TransformStore.Instance.TransformLogs.Count > 0)
                 {
-                    project.AddGeneratedFile("transform-report.yaml", TransformStore.Instance.ToYaml());
+                    project.AddPlainFiles("transform-logs.csv", TransformStore.Instance.LogsToCsv());
+                    project.AddPlainFiles("transform-usages.csv", TransformStore.Instance.UsagesToCsv());
                 }
             }
             else

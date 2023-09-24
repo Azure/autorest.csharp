@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using YamlDotNet.Serialization;
 
 namespace AutoRest.CSharp.Mgmt.Report
 {
@@ -10,28 +11,35 @@ namespace AutoRest.CSharp.Mgmt.Report
     {
         private const string SEP = "##";
 
-        public TransformItem(string transformType, string key, params string[] arguments)
+        public TransformItem(string transformType, string key, bool isFromConfig, params string[] arguments)
         {
             TransformType = transformType;
             Key = key;
             Arguments = arguments;
+            IsFromConfig = isFromConfig;
+        }
+
+        public TransformItem(string transformType, string key, params string[] arguments)
+            : this(transformType, key, false, arguments)
+        {
         }
 
         public string TransformType { get; set; }
         public string Key { get; set; }
         public string[] Arguments { get; set; }
-        private string ArgumentsAsString
+        [YamlIgnore]
+        public string ArgumentsAsString
         {
             get { return string.Join(SEP, this.Arguments); }
         }
-        public bool FromConfig { get; set; } = true;
+        public bool IsFromConfig { get; set; }
 
         public override string ToString()
         {
-            var str = $"{TransformType}.{Key}";
+            var str = $"[{TransformType}] {Key}";
             if (this.Arguments.Length > 0)
-                str += ":" + string.Join("/", Arguments);
-            if (!this.FromConfig)
+                str += $":{this.ArgumentsAsString}";
+            if (!this.IsFromConfig)
                 str += "!";
             return str;
         }

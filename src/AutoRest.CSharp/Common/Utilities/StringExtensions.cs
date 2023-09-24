@@ -103,7 +103,7 @@ namespace AutoRest.CSharp.Utilities
             {
                 TransformStore.Instance.AddTransformLogForApplyChange(MgmtConfiguration.ConfigName.AcronymMapping, applyStep.MappingKey, applyStep.MappingValue.RawValue, $"Variables.{name}",
                     "ApplyAcronymMapping", tempName, applyStep.NewName.Name);
-                tempName = applyStep.NewName.Name;
+                tempName = applyStep.NewName.VariableName;
             });
 
             return ToCleanName(newName.VariableName, isCamelCase: false);

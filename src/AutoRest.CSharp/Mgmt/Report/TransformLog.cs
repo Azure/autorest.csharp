@@ -18,7 +18,7 @@ namespace AutoRest.CSharp.Mgmt.Report
 
         public override string ToString()
         {
-            return $"[{Transformer}]=>[{TargetFullSerializedName}]: {LogMessage}";
+            return $"{Transformer}+{TargetFullSerializedName}=>{LogMessage}";
         }
     }
 }

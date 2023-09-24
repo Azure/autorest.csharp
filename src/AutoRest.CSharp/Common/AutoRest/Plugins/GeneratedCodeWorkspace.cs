@@ -55,11 +55,13 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
         private Project _project;
         private Dictionary<string, XmlDocumentFile> _xmlDocFiles { get; }
+        private Dictionary<string, string> _plainFiles { get; }
 
         private GeneratedCodeWorkspace(Project generatedCodeProject)
         {
             _project = generatedCodeProject;
             _xmlDocFiles = new();
+            _plainFiles = new();
         }
 
         /// <summary>
@@ -90,6 +92,11 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         public void AddGeneratedDocFile(string name, XmlDocumentFile xmlDocument)
         {
             _xmlDocFiles.Add(name, xmlDocument);
+        }
+
+        public void AddPlainFiles(string name, string content)
+        {
+            _plainFiles.Add(name, content);
         }
 
         public async IAsyncEnumerable<(string Name, string Text)> GetGeneratedFilesAsync()
@@ -131,6 +138,11 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 var testDocument = generatedDocs[doc.TestFileName];
                 var content = await XmlFormatter.FormatAsync(xmlWriter, testDocument);
                 yield return (docName, content);
+            }
+
+            foreach (var (file, content) in _plainFiles)
+            {
+                yield return (file, content);
             }
         }
 

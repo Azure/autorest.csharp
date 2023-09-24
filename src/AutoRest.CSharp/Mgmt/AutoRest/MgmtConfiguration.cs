@@ -140,12 +140,12 @@ namespace AutoRest.CSharp.Input
             RequestPathToResourceType = DeserializeDictionary<string, string>(requestPathToResourceType);
             RequestPathToScopeResourceTypes = DeserializeDictionary<string, string[]>(requestPathToScopeResourceTypes);
             RequestPathToSingletonResource = DeserializeDictionary<string, string>(requestPathToSingletonResource);
-            OverrideOperationName = DeserializeDictionary<string, string>(overrideOperationName).AddToTransformerStore(ConfigName.OverrideOperationName);
-            RawAcronymMapping = DeserializeDictionary<string, string>(acronymMapping).AddToTransformerStore(ConfigName.AcronymMapping);
+            OverrideOperationName = DeserializeDictionary<string, string>(overrideOperationName).AddToTransformerStore(ConfigName.OverrideOperationName, fromConfig: true);
+            RawAcronymMapping = DeserializeDictionary<string, string>(acronymMapping).AddToTransformerStore(ConfigName.AcronymMapping, fromConfig: true);
             RenamePropertyBag = DeserializeDictionary<string, string>(renamePropertyBag);
-            FormatByNameRules = DeserializeDictionary<string, string>(formatByNameRules).AddToTransformerStore(ConfigName.FormatByNameRules);
-            RenameMapping = DeserializeDictionary<string, string>(renameMapping).AddToTransformerStore(ConfigName.RenameMapping);
-            ParameterRenameMapping = DeserializeDictionary<string, IReadOnlyDictionary<string, string>>(parameterRenameMapping).AddToTransformerStore(ConfigName.ParameterRenameMapping,(arg) => arg.Value.Select(valueKV => new TransformItem(arg.Type, arg.Key, valueKV.Key, valueKV.Value)));
+            FormatByNameRules = DeserializeDictionary<string, string>(formatByNameRules).AddToTransformerStore(ConfigName.FormatByNameRules, fromConfig: true);
+            RenameMapping = DeserializeDictionary<string, string>(renameMapping).AddToTransformerStore(ConfigName.RenameMapping, fromConfig: true);
+            ParameterRenameMapping = DeserializeDictionary<string, IReadOnlyDictionary<string, string>>(parameterRenameMapping).AddToTransformerStore(ConfigName.ParameterRenameMapping,(arg) => arg.Value.Select(valueKV => new TransformItem(arg.Type, arg.Key, true /*fromConfig*/, valueKV.Key, valueKV.Value)));
             IrregularPluralWords = DeserializeDictionary<string, string>(irregularPluralWords);
             PartialResources = DeserializeDictionary<string, string>(partialResources);
             try
@@ -168,16 +168,16 @@ namespace AutoRest.CSharp.Input
                 var mergeOperationsStrDict = DeserializeDictionary<string, string>(mergeOperations);
                 MergeOperations = mergeOperationsStrDict.ToDictionary(kv => kv.Key, kv => kv.Value.Split(";"));
             }
-            OperationGroupsToOmit = operationGroupsToOmit.AddToTransformerStore(ConfigName.OperationGroupsToOmit);
-            RequestPathIsNonResource = requestPathIsNonResource.AddToTransformerStore(ConfigName.RequestPathIsNonResource);
-            NoPropertyTypeReplacement = noPropertyTypeReplacement.AddToTransformerStore(ConfigName.NoPropertyTypeReplacement);
+            OperationGroupsToOmit = operationGroupsToOmit.AddToTransformerStore(ConfigName.OperationGroupsToOmit, fromConfig: true);
+            RequestPathIsNonResource = requestPathIsNonResource.AddToTransformerStore(ConfigName.RequestPathIsNonResource, fromConfig: true);
+            NoPropertyTypeReplacement = noPropertyTypeReplacement.AddToTransformerStore(ConfigName.NoPropertyTypeReplacement, fromConfig: true);
             ListException = listException;
             PromptedEnumValues = promptedEnumValues;
             KeepOrphanedModels = keepOrphanedModels;
-            KeepPluralEnums = keepPluralEnums.AddToTransformerStore(ConfigName.KeepPluralEnums);
-            KeepPluralResourceData = keepPluralResourceData.AddToTransformerStore(ConfigName.KeepPluralResourceData);
-            NoResourceSuffix = noResourceSuffix.AddToTransformerStore(ConfigName.NoResourceSuffix);
-            PrependRPPrefix = schemasToPrependRPPrefix.AddToTransformerStore(ConfigName.PrependRpPrefix);
+            KeepPluralEnums = keepPluralEnums.AddToTransformerStore(ConfigName.KeepPluralEnums, fromConfig: true);
+            KeepPluralResourceData = keepPluralResourceData.AddToTransformerStore(ConfigName.KeepPluralResourceData, fromConfig: true);
+            NoResourceSuffix = noResourceSuffix.AddToTransformerStore(ConfigName.NoResourceSuffix, fromConfig: true);
+            PrependRPPrefix = schemasToPrependRPPrefix.AddToTransformerStore(ConfigName.PrependRpPrefix, fromConfig: true);
             GenerateArmResourceExtensions = generateArmResourceExtensions;
             RawParameterizedScopes = parameterizedScopes;
             OperationsToSkipLroApiVersionOverride = operationsToSkipLroApiVersionOverride;
