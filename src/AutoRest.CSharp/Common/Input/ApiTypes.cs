@@ -3,6 +3,7 @@
 
 using System;
 using System.ServiceModel.Rest;
+using System.ServiceModel.Rest.Shared;
 using System.Threading.Tasks;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.Base;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
@@ -49,5 +50,9 @@ namespace AutoRest.CSharp.Common.Input
         public abstract string ClientDiagnosticsCreateScopeName { get; }
 
         public abstract Type ClientOptionsType { get; }
+
+        public abstract Type ArgumentType { get; }
+        public string AssertNotNullOrEmptyName => nameof(ClientUtilities.AssertNotNullOrEmpty);
+        public string AssertNotNullName => nameof(ClientUtilities.AssertNotNull);
     }
 }

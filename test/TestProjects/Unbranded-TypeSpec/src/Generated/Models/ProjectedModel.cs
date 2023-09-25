@@ -6,7 +6,7 @@
 #nullable disable
 
 using System;
-using Azure.Core;
+using System.ServiceModel.Rest.Shared;
 
 namespace UnbrandedTypeSpec.Models
 {
@@ -18,7 +18,7 @@ namespace UnbrandedTypeSpec.Models
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public ProjectedModel(string name)
         {
-            Argument.AssertNotNull(name, nameof(name));
+            ClientUtilities.AssertNotNull(name, nameof(name));
 
             Name = name;
         }

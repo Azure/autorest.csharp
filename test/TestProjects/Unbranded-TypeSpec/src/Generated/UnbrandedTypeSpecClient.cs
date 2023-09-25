@@ -8,6 +8,7 @@
 using System;
 using System.ServiceModel.Rest;
 using System.ServiceModel.Rest.Core.Pipeline;
+using System.ServiceModel.Rest.Shared;
 using System.ServiceModel.Rest.Shared.Core.Pipeline;
 using System.Threading;
 using System.Threading.Tasks;
@@ -54,8 +55,8 @@ namespace UnbrandedTypeSpec
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
         public UnbrandedTypeSpecClient(Uri endpoint, AzureKeyCredential credential, UnbrandedTypeSpecClientOptions options)
         {
-            Argument.AssertNotNull(endpoint, nameof(endpoint));
-            Argument.AssertNotNull(credential, nameof(credential));
+            ClientUtilities.AssertNotNull(endpoint, nameof(endpoint));
+            ClientUtilities.AssertNotNull(credential, nameof(credential));
             options ??= new UnbrandedTypeSpecClientOptions();
 
             ClientDiagnostics = new TelemetrySource(options, true);
@@ -229,7 +230,7 @@ namespace UnbrandedTypeSpec
         /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='PatchActionAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Result> PatchActionAsync(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            ClientUtilities.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateSpan("UnbrandedTypeSpecClient.PatchAction");
             scope.Start();
@@ -263,7 +264,7 @@ namespace UnbrandedTypeSpec
         /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='PatchAction(RequestContent,RequestContext)']/*" />
         public virtual Result PatchAction(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            ClientUtilities.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateSpan("UnbrandedTypeSpecClient.PatchAction");
             scope.Start();
@@ -286,7 +287,7 @@ namespace UnbrandedTypeSpec
         /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='AnonymousBodyAsync(Thing,CancellationToken)']/*" />
         internal virtual async Task<Result<Thing>> AnonymousBodyAsync(Thing thing, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(thing, nameof(thing));
+            ClientUtilities.AssertNotNull(thing, nameof(thing));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             Result response = await AnonymousBodyAsync(thing.ToRequestContent(), context).ConfigureAwait(false);
@@ -300,7 +301,7 @@ namespace UnbrandedTypeSpec
         /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='AnonymousBody(Thing,CancellationToken)']/*" />
         internal virtual Result<Thing> AnonymousBody(Thing thing, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(thing, nameof(thing));
+            ClientUtilities.AssertNotNull(thing, nameof(thing));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             Result response = AnonymousBody(thing.ToRequestContent(), context);
@@ -326,7 +327,7 @@ namespace UnbrandedTypeSpec
         /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='AnonymousBodyAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Result> AnonymousBodyAsync(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            ClientUtilities.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateSpan("UnbrandedTypeSpecClient.AnonymousBody");
             scope.Start();
@@ -361,7 +362,7 @@ namespace UnbrandedTypeSpec
         /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='AnonymousBody(RequestContent,RequestContext)']/*" />
         public virtual Result AnonymousBody(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            ClientUtilities.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateSpan("UnbrandedTypeSpecClient.AnonymousBody");
             scope.Start();
@@ -384,7 +385,7 @@ namespace UnbrandedTypeSpec
         /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='FriendlyModelAsync(Friend,CancellationToken)']/*" />
         public virtual async Task<Result<Friend>> FriendlyModelAsync(Friend notFriend, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(notFriend, nameof(notFriend));
+            ClientUtilities.AssertNotNull(notFriend, nameof(notFriend));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             Result response = await FriendlyModelAsync(notFriend.ToRequestContent(), context).ConfigureAwait(false);
@@ -398,7 +399,7 @@ namespace UnbrandedTypeSpec
         /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='FriendlyModel(Friend,CancellationToken)']/*" />
         public virtual Result<Friend> FriendlyModel(Friend notFriend, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(notFriend, nameof(notFriend));
+            ClientUtilities.AssertNotNull(notFriend, nameof(notFriend));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             Result response = FriendlyModel(notFriend.ToRequestContent(), context);
@@ -428,7 +429,7 @@ namespace UnbrandedTypeSpec
         /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='FriendlyModelAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Result> FriendlyModelAsync(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            ClientUtilities.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateSpan("UnbrandedTypeSpecClient.FriendlyModel");
             scope.Start();
@@ -467,7 +468,7 @@ namespace UnbrandedTypeSpec
         /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='FriendlyModel(RequestContent,RequestContext)']/*" />
         public virtual Result FriendlyModel(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            ClientUtilities.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateSpan("UnbrandedTypeSpecClient.FriendlyModel");
             scope.Start();
@@ -551,7 +552,7 @@ namespace UnbrandedTypeSpec
         /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='StringFormatAsync(Guid,ModelWithFormat,CancellationToken)']/*" />
         public virtual async Task<Result> StringFormatAsync(Guid subscriptionId, ModelWithFormat body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(body, nameof(body));
+            ClientUtilities.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             Result response = await StringFormatAsync(subscriptionId, body.ToRequestContent(), context).ConfigureAwait(false);
@@ -566,7 +567,7 @@ namespace UnbrandedTypeSpec
         /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='StringFormat(Guid,ModelWithFormat,CancellationToken)']/*" />
         public virtual Result StringFormat(Guid subscriptionId, ModelWithFormat body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(body, nameof(body));
+            ClientUtilities.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             Result response = StringFormat(subscriptionId, body.ToRequestContent(), context);
@@ -597,7 +598,7 @@ namespace UnbrandedTypeSpec
         /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='StringFormatAsync(Guid,RequestContent,RequestContext)']/*" />
         public virtual async Task<Result> StringFormatAsync(Guid subscriptionId, RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            ClientUtilities.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateSpan("UnbrandedTypeSpecClient.StringFormat");
             scope.Start();
@@ -637,7 +638,7 @@ namespace UnbrandedTypeSpec
         /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='StringFormat(Guid,RequestContent,RequestContext)']/*" />
         public virtual Result StringFormat(Guid subscriptionId, RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            ClientUtilities.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateSpan("UnbrandedTypeSpecClient.StringFormat");
             scope.Start();
@@ -660,7 +661,7 @@ namespace UnbrandedTypeSpec
         /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='ProjectedNameModelAsync(ProjectedModel,CancellationToken)']/*" />
         public virtual async Task<Result<ProjectedModel>> ProjectedNameModelAsync(ProjectedModel modelWithProjectedName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(modelWithProjectedName, nameof(modelWithProjectedName));
+            ClientUtilities.AssertNotNull(modelWithProjectedName, nameof(modelWithProjectedName));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             Result response = await ProjectedNameModelAsync(modelWithProjectedName.ToRequestContent(), context).ConfigureAwait(false);
@@ -674,7 +675,7 @@ namespace UnbrandedTypeSpec
         /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='ProjectedNameModel(ProjectedModel,CancellationToken)']/*" />
         public virtual Result<ProjectedModel> ProjectedNameModel(ProjectedModel modelWithProjectedName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(modelWithProjectedName, nameof(modelWithProjectedName));
+            ClientUtilities.AssertNotNull(modelWithProjectedName, nameof(modelWithProjectedName));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             Result response = ProjectedNameModel(modelWithProjectedName.ToRequestContent(), context);
@@ -704,7 +705,7 @@ namespace UnbrandedTypeSpec
         /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='ProjectedNameModelAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Result> ProjectedNameModelAsync(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            ClientUtilities.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateSpan("UnbrandedTypeSpecClient.ProjectedNameModel");
             scope.Start();
@@ -743,7 +744,7 @@ namespace UnbrandedTypeSpec
         /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='ProjectedNameModel(RequestContent,RequestContext)']/*" />
         public virtual Result ProjectedNameModel(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            ClientUtilities.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateSpan("UnbrandedTypeSpecClient.ProjectedNameModel");
             scope.Start();
@@ -841,7 +842,7 @@ namespace UnbrandedTypeSpec
         /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='HeadAsBooleanAsync(string,RequestContext)']/*" />
         public virtual async Task<Result<bool>> HeadAsBooleanAsync(string id, RequestContext context = null)
         {
-            Argument.AssertNotNullOrEmpty(id, nameof(id));
+            ClientUtilities.AssertNotNullOrEmpty(id, nameof(id));
 
             using var scope = ClientDiagnostics.CreateSpan("UnbrandedTypeSpecClient.HeadAsBoolean");
             scope.Start();
@@ -877,7 +878,7 @@ namespace UnbrandedTypeSpec
         /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='HeadAsBoolean(string,RequestContext)']/*" />
         public virtual Result<bool> HeadAsBoolean(string id, RequestContext context = null)
         {
-            Argument.AssertNotNullOrEmpty(id, nameof(id));
+            ClientUtilities.AssertNotNullOrEmpty(id, nameof(id));
 
             using var scope = ClientDiagnostics.CreateSpan("UnbrandedTypeSpecClient.HeadAsBoolean");
             scope.Start();
@@ -913,8 +914,8 @@ namespace UnbrandedTypeSpec
         /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='SayHiAsync(string,string,string,RequestContext)']/*" />
         public virtual async Task<Result> SayHiAsync(string headParameter, string queryParameter, string optionalQuery, RequestContext context)
         {
-            Argument.AssertNotNull(headParameter, nameof(headParameter));
-            Argument.AssertNotNull(queryParameter, nameof(queryParameter));
+            ClientUtilities.AssertNotNull(headParameter, nameof(headParameter));
+            ClientUtilities.AssertNotNull(queryParameter, nameof(queryParameter));
 
             using var scope = ClientDiagnostics.CreateSpan("UnbrandedTypeSpecClient.SayHi");
             scope.Start();
@@ -950,8 +951,8 @@ namespace UnbrandedTypeSpec
         /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='SayHi(string,string,string,RequestContext)']/*" />
         public virtual Result SayHi(string headParameter, string queryParameter, string optionalQuery, RequestContext context)
         {
-            Argument.AssertNotNull(headParameter, nameof(headParameter));
-            Argument.AssertNotNull(queryParameter, nameof(queryParameter));
+            ClientUtilities.AssertNotNull(headParameter, nameof(headParameter));
+            ClientUtilities.AssertNotNull(queryParameter, nameof(queryParameter));
 
             using var scope = ClientDiagnostics.CreateSpan("UnbrandedTypeSpecClient.SayHi");
             scope.Start();
@@ -977,9 +978,9 @@ namespace UnbrandedTypeSpec
         /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='HelloAgainAsync(string,string,RoundTripModel,CancellationToken)']/*" />
         internal virtual async Task<Result<RoundTripModel>> HelloAgainAsync(string p2, string p1, RoundTripModel action, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(p2, nameof(p2));
-            Argument.AssertNotNull(p1, nameof(p1));
-            Argument.AssertNotNull(action, nameof(action));
+            ClientUtilities.AssertNotNullOrEmpty(p2, nameof(p2));
+            ClientUtilities.AssertNotNull(p1, nameof(p1));
+            ClientUtilities.AssertNotNull(action, nameof(action));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             Result response = await HelloAgainAsync(p2, p1, action.ToRequestContent(), context).ConfigureAwait(false);
@@ -996,9 +997,9 @@ namespace UnbrandedTypeSpec
         /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='HelloAgain(string,string,RoundTripModel,CancellationToken)']/*" />
         internal virtual Result<RoundTripModel> HelloAgain(string p2, string p1, RoundTripModel action, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(p2, nameof(p2));
-            Argument.AssertNotNull(p1, nameof(p1));
-            Argument.AssertNotNull(action, nameof(action));
+            ClientUtilities.AssertNotNullOrEmpty(p2, nameof(p2));
+            ClientUtilities.AssertNotNull(p1, nameof(p1));
+            ClientUtilities.AssertNotNull(action, nameof(action));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             Result response = HelloAgain(p2, p1, action.ToRequestContent(), context);
@@ -1027,9 +1028,9 @@ namespace UnbrandedTypeSpec
         /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='HelloAgainAsync(string,string,RequestContent,RequestContext)']/*" />
         public virtual async Task<Result> HelloAgainAsync(string p2, string p1, RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNullOrEmpty(p2, nameof(p2));
-            Argument.AssertNotNull(p1, nameof(p1));
-            Argument.AssertNotNull(content, nameof(content));
+            ClientUtilities.AssertNotNullOrEmpty(p2, nameof(p2));
+            ClientUtilities.AssertNotNull(p1, nameof(p1));
+            ClientUtilities.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateSpan("UnbrandedTypeSpecClient.HelloAgain");
             scope.Start();
@@ -1067,9 +1068,9 @@ namespace UnbrandedTypeSpec
         /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='HelloAgain(string,string,RequestContent,RequestContext)']/*" />
         public virtual Result HelloAgain(string p2, string p1, RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNullOrEmpty(p2, nameof(p2));
-            Argument.AssertNotNull(p1, nameof(p1));
-            Argument.AssertNotNull(content, nameof(content));
+            ClientUtilities.AssertNotNullOrEmpty(p2, nameof(p2));
+            ClientUtilities.AssertNotNull(p1, nameof(p1));
+            ClientUtilities.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateSpan("UnbrandedTypeSpecClient.HelloAgain");
             scope.Start();
@@ -1106,9 +1107,9 @@ namespace UnbrandedTypeSpec
         /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='NoContentTypeAsync(string,string,RequestContent,RequestContext)']/*" />
         public virtual async Task<Result> NoContentTypeAsync(string p2, string p1, RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNullOrEmpty(p2, nameof(p2));
-            Argument.AssertNotNull(p1, nameof(p1));
-            Argument.AssertNotNull(content, nameof(content));
+            ClientUtilities.AssertNotNullOrEmpty(p2, nameof(p2));
+            ClientUtilities.AssertNotNull(p1, nameof(p1));
+            ClientUtilities.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateSpan("UnbrandedTypeSpecClient.NoContentType");
             scope.Start();
@@ -1145,9 +1146,9 @@ namespace UnbrandedTypeSpec
         /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='NoContentType(string,string,RequestContent,RequestContext)']/*" />
         public virtual Result NoContentType(string p2, string p1, RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNullOrEmpty(p2, nameof(p2));
-            Argument.AssertNotNull(p1, nameof(p1));
-            Argument.AssertNotNull(content, nameof(content));
+            ClientUtilities.AssertNotNullOrEmpty(p2, nameof(p2));
+            ClientUtilities.AssertNotNull(p1, nameof(p1));
+            ClientUtilities.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateSpan("UnbrandedTypeSpecClient.NoContentType");
             scope.Start();
@@ -1252,7 +1253,7 @@ namespace UnbrandedTypeSpec
         /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='CreateLiteralAsync(Thing,CancellationToken)']/*" />
         internal virtual async Task<Result<Thing>> CreateLiteralAsync(Thing body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(body, nameof(body));
+            ClientUtilities.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             Result response = await CreateLiteralAsync(body.ToRequestContent(), context).ConfigureAwait(false);
@@ -1266,7 +1267,7 @@ namespace UnbrandedTypeSpec
         /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='CreateLiteral(Thing,CancellationToken)']/*" />
         internal virtual Result<Thing> CreateLiteral(Thing body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(body, nameof(body));
+            ClientUtilities.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             Result response = CreateLiteral(body.ToRequestContent(), context);
@@ -1292,7 +1293,7 @@ namespace UnbrandedTypeSpec
         /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='CreateLiteralAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Result> CreateLiteralAsync(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            ClientUtilities.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateSpan("UnbrandedTypeSpecClient.CreateLiteral");
             scope.Start();
@@ -1327,7 +1328,7 @@ namespace UnbrandedTypeSpec
         /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='CreateLiteral(RequestContent,RequestContext)']/*" />
         public virtual Result CreateLiteral(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            ClientUtilities.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateSpan("UnbrandedTypeSpecClient.CreateLiteral");
             scope.Start();
@@ -1492,7 +1493,7 @@ namespace UnbrandedTypeSpec
         /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='InternalProtocolAsync(Thing,CancellationToken)']/*" />
         internal virtual async Task<Result<Thing>> InternalProtocolAsync(Thing body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(body, nameof(body));
+            ClientUtilities.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             Result response = await InternalProtocolAsync(body.ToRequestContent(), context).ConfigureAwait(false);
@@ -1506,7 +1507,7 @@ namespace UnbrandedTypeSpec
         /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='InternalProtocol(Thing,CancellationToken)']/*" />
         internal virtual Result<Thing> InternalProtocol(Thing body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(body, nameof(body));
+            ClientUtilities.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             Result response = InternalProtocol(body.ToRequestContent(), context);
@@ -1537,7 +1538,7 @@ namespace UnbrandedTypeSpec
         /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='InternalProtocolAsync(RequestContent,RequestContext)']/*" />
         internal virtual async Task<Result> InternalProtocolAsync(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            ClientUtilities.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateSpan("UnbrandedTypeSpecClient.InternalProtocol");
             scope.Start();
@@ -1577,7 +1578,7 @@ namespace UnbrandedTypeSpec
         /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='InternalProtocol(RequestContent,RequestContext)']/*" />
         internal virtual Result InternalProtocol(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            ClientUtilities.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateSpan("UnbrandedTypeSpecClient.InternalProtocol");
             scope.Start();

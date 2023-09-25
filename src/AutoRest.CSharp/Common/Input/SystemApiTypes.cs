@@ -4,6 +4,7 @@
 using System;
 using System.ServiceModel.Rest;
 using System.ServiceModel.Rest.Core.Pipeline;
+using System.ServiceModel.Rest.Shared;
 using System.ServiceModel.Rest.Shared.Core.Pipeline;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.Base;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.System;
@@ -42,5 +43,7 @@ namespace AutoRest.CSharp.Common.Input
         public override string ClientDiagnosticsCreateScopeName => nameof(TelemetrySource.CreateSpan);
 
         public override Type ClientOptionsType => typeof(PipelineOptions);
+
+        public override Type ArgumentType => typeof(ClientUtilities);
     }
 }
