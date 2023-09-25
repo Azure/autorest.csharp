@@ -51,7 +51,7 @@ namespace AutoRest.CSharp.Mgmt.Models
                 {
                     if (!AllowedRequestParameterOrigins.Contains(parameter.Origin ?? string.Empty))
                     {
-                        throw new InvalidOperationException($"{parameter.Language.Default.Name} should be method parameter for operation {operation.OperationId}");
+                        throw new InvalidOperationException($"'{parameter.Language.Default.Name}' with origin '{parameter.Origin}' should be method parameter for operation '{operation.OperationId}'");
                     }
                     parameters.Add(parameter);
                 }
