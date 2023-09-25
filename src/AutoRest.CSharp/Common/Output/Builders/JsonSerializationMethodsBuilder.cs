@@ -50,7 +50,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
         {
             return new Method
             (
-                new MethodSignature("ToRequestContent", null, $"Convert into a Utf8JsonRequestContent.", modifiers, typeof(RequestContent), null, Array.Empty<Parameter>()),
+                new MethodSignature(Configuration.ApiTypes.ToRequestContentName, null, $"Convert into a Utf8Json{Configuration.ApiTypes.RequestContentType.Name}.", modifiers, Configuration.ApiTypes.RequestContentType, null, Array.Empty<Parameter>()),
                 new[]
                 {
                     Var("content", New.Utf8JsonRequestContent(), out var requestContent),

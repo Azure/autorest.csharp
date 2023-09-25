@@ -45,5 +45,9 @@ namespace AutoRest.CSharp.Common.Input
         public override Type ArgumentType => typeof(Argument);
 
         public override Type RequestContextType => typeof(RequestContext);
+
+        public override Type RequestContentType => typeof(RequestContent);
+        public override string ToRequestContentName => "ToRequestContent";
+        public override string RequestContentCreateName => nameof(RequestContent.Create);
     }
 }

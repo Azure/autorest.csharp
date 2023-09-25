@@ -118,7 +118,7 @@ namespace AutoRest.CSharp.Generation.Writers
                         using (WriteValueNullCheck(writer, binaryBody.Value))
                         {
                             WriteHeaders(writer, clientMethod, request, content: true, fields);
-                            writer.Append($"{request}.Content = {typeof(RequestContent)}.Create(");
+                            writer.Append($"{request}.Content = {Configuration.ApiTypes.RequestContentType}.{Configuration.ApiTypes.RequestContentCreateName}(");
                             WriteConstantOrParameter(writer, binaryBody.Value);
                             writer.Line($");");
                         }
@@ -145,7 +145,7 @@ namespace AutoRest.CSharp.Generation.Writers
                                 case BinaryRequestBody binaryBody:
                                     using (WriteValueNullCheck(writer, binaryBody.Value))
                                     {
-                                        writer.Append($"{multipartContent}.Add({typeof(RequestContent)}.Create(");
+                                        writer.Append($"{multipartContent}.Add({Configuration.ApiTypes.RequestContentType}.{Configuration.ApiTypes.RequestContentCreateName}(");
                                         WriteConstantOrParameter(writer, binaryBody.Value);
                                         writer.Line($"), {bodyParameter.Name:L}, null);");
                                     }
@@ -162,7 +162,7 @@ namespace AutoRest.CSharp.Generation.Writers
                                     var collectionItemVariable = new CodeWriterDeclaration("value");
                                     using (writer.Scope($"foreach (var {collectionItemVariable:D} in {collectionBody.Value.Reference.Name})"))
                                     {
-                                        writer.Append($"{multipartContent}.Add({typeof(RequestContent)}.Create({collectionItemVariable}), {bodyParameter.Name:L}, null);");
+                                        writer.Append($"{multipartContent}.Add({Configuration.ApiTypes.RequestContentType}.{Configuration.ApiTypes.RequestContentCreateName}({collectionItemVariable}), {bodyParameter.Name:L}, null);");
                                     }
                                     break;
                                 default:

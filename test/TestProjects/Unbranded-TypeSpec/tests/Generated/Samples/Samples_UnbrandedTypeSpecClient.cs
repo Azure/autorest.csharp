@@ -8,10 +8,10 @@
 using System;
 using System.Collections.Generic;
 using System.ServiceModel.Rest;
+using System.ServiceModel.Rest.Core;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
-using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
 using UnbrandedTypeSpec;
@@ -217,7 +217,7 @@ namespace UnbrandedTypeSpec.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            RequestBody content = RequestBody.CreateFromStream(new
             {
                 name = "<name>",
                 requiredUnion = "<requiredUnion>",
@@ -252,7 +252,7 @@ namespace UnbrandedTypeSpec.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            RequestBody content = RequestBody.CreateFromStream(new
             {
                 name = "<name>",
                 requiredUnion = "<requiredUnion>",
@@ -287,7 +287,7 @@ namespace UnbrandedTypeSpec.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            RequestBody content = RequestBody.CreateFromStream(new
             {
                 name = "<name>",
                 requiredUnion = "<requiredUnion>",
@@ -335,7 +335,7 @@ namespace UnbrandedTypeSpec.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            RequestBody content = RequestBody.CreateFromStream(new
             {
                 name = "<name>",
                 requiredUnion = "<requiredUnion>",
@@ -383,7 +383,7 @@ namespace UnbrandedTypeSpec.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            RequestBody content = RequestBody.CreateFromStream(new
             {
                 name = "<name>",
                 requiredUnion = "<requiredUnion>",
@@ -418,7 +418,7 @@ namespace UnbrandedTypeSpec.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            RequestBody content = RequestBody.CreateFromStream(new
             {
                 name = "<name>",
                 requiredUnion = "<requiredUnion>",
@@ -453,7 +453,7 @@ namespace UnbrandedTypeSpec.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            RequestBody content = RequestBody.CreateFromStream(new
             {
                 name = "<name>",
                 requiredUnion = "<requiredUnion>",
@@ -501,7 +501,7 @@ namespace UnbrandedTypeSpec.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            RequestBody content = RequestBody.CreateFromStream(new
             {
                 name = "<name>",
                 requiredUnion = "<requiredUnion>",
@@ -549,7 +549,7 @@ namespace UnbrandedTypeSpec.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            RequestBody content = RequestBody.CreateFromStream(new
             {
                 name = "<name>",
             });
@@ -567,7 +567,7 @@ namespace UnbrandedTypeSpec.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            RequestBody content = RequestBody.CreateFromStream(new
             {
                 name = "<name>",
             });
@@ -609,7 +609,7 @@ namespace UnbrandedTypeSpec.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            RequestBody content = RequestBody.CreateFromStream(new
             {
                 name = "<name>",
             });
@@ -627,7 +627,7 @@ namespace UnbrandedTypeSpec.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            RequestBody content = RequestBody.CreateFromStream(new
             {
                 name = "<name>",
             });
@@ -717,7 +717,7 @@ namespace UnbrandedTypeSpec.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            RequestBody content = RequestBody.CreateFromStream(new
             {
                 sourceUrl = "http://localhost:3000",
                 guid = "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a",
@@ -734,7 +734,7 @@ namespace UnbrandedTypeSpec.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            RequestBody content = RequestBody.CreateFromStream(new
             {
                 sourceUrl = "http://localhost:3000",
                 guid = "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a",
@@ -777,7 +777,7 @@ namespace UnbrandedTypeSpec.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            RequestBody content = RequestBody.CreateFromStream(new
             {
                 sourceUrl = "http://localhost:3000",
                 guid = "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a",
@@ -794,7 +794,7 @@ namespace UnbrandedTypeSpec.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            RequestBody content = RequestBody.CreateFromStream(new
             {
                 sourceUrl = "http://localhost:3000",
                 guid = "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a",
@@ -837,7 +837,7 @@ namespace UnbrandedTypeSpec.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            RequestBody content = RequestBody.CreateFromStream(new
             {
                 name = "<name>",
             });
@@ -855,7 +855,7 @@ namespace UnbrandedTypeSpec.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            RequestBody content = RequestBody.CreateFromStream(new
             {
                 name = "<name>",
             });
@@ -897,7 +897,7 @@ namespace UnbrandedTypeSpec.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            RequestBody content = RequestBody.CreateFromStream(new
             {
                 name = "<name>",
             });
@@ -915,7 +915,7 @@ namespace UnbrandedTypeSpec.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            RequestBody content = RequestBody.CreateFromStream(new
             {
                 name = "<name>",
             });
@@ -1151,7 +1151,7 @@ namespace UnbrandedTypeSpec.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            RequestBody content = RequestBody.CreateFromStream(new
             {
                 requiredString = "<requiredString>",
                 requiredInt = 1234,
@@ -1220,7 +1220,7 @@ namespace UnbrandedTypeSpec.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            RequestBody content = RequestBody.CreateFromStream(new
             {
                 requiredString = "<requiredString>",
                 requiredInt = 1234,
@@ -1289,7 +1289,7 @@ namespace UnbrandedTypeSpec.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            RequestBody content = RequestBody.CreateFromStream(new
             {
                 requiredString = "<requiredString>",
                 requiredInt = 1234,
@@ -1409,7 +1409,7 @@ namespace UnbrandedTypeSpec.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            RequestBody content = RequestBody.CreateFromStream(new
             {
                 requiredString = "<requiredString>",
                 requiredInt = 1234,
@@ -1529,7 +1529,7 @@ namespace UnbrandedTypeSpec.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            RequestBody content = RequestBody.CreateFromStream(new
             {
                 requiredString = "<requiredString>",
                 requiredInt = 1234,
@@ -1598,7 +1598,7 @@ namespace UnbrandedTypeSpec.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            RequestBody content = RequestBody.CreateFromStream(new
             {
                 requiredString = "<requiredString>",
                 requiredInt = 1234,
@@ -1667,7 +1667,7 @@ namespace UnbrandedTypeSpec.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            RequestBody content = RequestBody.CreateFromStream(new
             {
                 requiredString = "<requiredString>",
                 requiredInt = 1234,
@@ -1787,7 +1787,7 @@ namespace UnbrandedTypeSpec.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            RequestBody content = RequestBody.CreateFromStream(new
             {
                 requiredString = "<requiredString>",
                 requiredInt = 1234,
@@ -2001,7 +2001,7 @@ namespace UnbrandedTypeSpec.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            RequestBody content = RequestBody.CreateFromStream(new
             {
                 name = "<name>",
                 requiredUnion = "<requiredUnion>",
@@ -2036,7 +2036,7 @@ namespace UnbrandedTypeSpec.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            RequestBody content = RequestBody.CreateFromStream(new
             {
                 name = "<name>",
                 requiredUnion = "<requiredUnion>",
@@ -2071,7 +2071,7 @@ namespace UnbrandedTypeSpec.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            RequestBody content = RequestBody.CreateFromStream(new
             {
                 name = "<name>",
                 requiredUnion = "<requiredUnion>",
@@ -2119,7 +2119,7 @@ namespace UnbrandedTypeSpec.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            RequestBody content = RequestBody.CreateFromStream(new
             {
                 name = "<name>",
                 requiredUnion = "<requiredUnion>",

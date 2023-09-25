@@ -54,7 +54,7 @@ namespace AutoRest.CSharp.LowLevel.Generation.Extensions
             }
 
             // handle RequestContent
-            if (frameworkType == typeof(RequestContent))
+            if (frameworkType == Configuration.ApiTypes.RequestContentType)
             {
                 return writer.AppendRequestContent(exampleValue);
             }
@@ -213,7 +213,7 @@ namespace AutoRest.CSharp.LowLevel.Generation.Extensions
             }
             else
             {
-                return writer.Append($"{typeof(RequestContent)}.Create(")
+                return writer.Append($"{Configuration.ApiTypes.RequestContentType}.{Configuration.ApiTypes.RequestContentCreateName}(")
                     .AppendFreeFormObject(value, true)
                     .AppendRaw(")");
             }

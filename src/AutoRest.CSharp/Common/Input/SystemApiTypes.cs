@@ -48,5 +48,9 @@ namespace AutoRest.CSharp.Common.Input
         public override Type ArgumentType => typeof(ClientUtilities);
 
         public override Type RequestContextType => typeof(PipelineOptions);
+
+        public override Type RequestContentType => typeof(RequestBody);
+        public override string ToRequestContentName => "ToRequestBody";
+        public override string RequestContentCreateName => nameof(RequestBody.CreateFromStream);
     }
 }
