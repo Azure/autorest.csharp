@@ -7,6 +7,7 @@ using System.ServiceModel.Rest.Core;
 using System.ServiceModel.Rest.Core.Pipeline;
 using System.ServiceModel.Rest.Shared;
 using System.ServiceModel.Rest.Shared.Core.Pipeline;
+using System.ServiceModel.Rest.Shared.Core.Serialization;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.Base;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.System;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
@@ -48,5 +49,8 @@ namespace AutoRest.CSharp.Common.Input
         public override Type ArgumentType => typeof(ClientUtilities);
 
         public override Type RequestContextType => typeof(PipelineOptions);
+
+        public override Type ChangeTrackingListType => typeof(OptionalList<>);
+        public override Type ChangeTrackingDictionaryType => typeof(OptionalDictionary<,>);
     }
 }

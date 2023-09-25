@@ -9,7 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.ServiceModel.Rest.Shared;
-using Azure.Core;
+using System.ServiceModel.Rest.Shared.Core.Serialization;
 
 namespace UnbrandedTypeSpec.Models
 {
@@ -41,15 +41,15 @@ namespace UnbrandedTypeSpec.Models
             RequiredCollection = requiredCollection.ToList();
             RequiredDictionary = requiredDictionary;
             RequiredModel = requiredModel;
-            IntExtensibleEnumCollection = new ChangeTrackingList<IntExtensibleEnum>();
-            FloatExtensibleEnumCollection = new ChangeTrackingList<FloatExtensibleEnum>();
-            FloatFixedEnumCollection = new ChangeTrackingList<FloatFixedEnum>();
-            IntFixedEnumCollection = new ChangeTrackingList<IntFixedEnum>();
+            IntExtensibleEnumCollection = new OptionalList<IntExtensibleEnum>();
+            FloatExtensibleEnumCollection = new OptionalList<FloatExtensibleEnum>();
+            FloatFixedEnumCollection = new OptionalList<FloatFixedEnum>();
+            IntFixedEnumCollection = new OptionalList<IntFixedEnum>();
             RequiredUnknown = requiredUnknown;
             RequiredRecordUnknown = requiredRecordUnknown;
-            OptionalRecordUnknown = new ChangeTrackingDictionary<string, BinaryData>();
-            ReadOnlyRequiredRecordUnknown = new ChangeTrackingDictionary<string, BinaryData>();
-            ReadOnlyOptionalRecordUnknown = new ChangeTrackingDictionary<string, BinaryData>();
+            OptionalRecordUnknown = new OptionalDictionary<string, BinaryData>();
+            ReadOnlyRequiredRecordUnknown = new OptionalDictionary<string, BinaryData>();
+            ReadOnlyOptionalRecordUnknown = new OptionalDictionary<string, BinaryData>();
             ModelWithRequiredNullable = modelWithRequiredNullable;
         }
 
