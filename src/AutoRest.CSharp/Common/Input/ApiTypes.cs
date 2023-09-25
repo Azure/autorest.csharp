@@ -4,6 +4,7 @@
 using System;
 using System.ServiceModel.Rest;
 using System.ServiceModel.Rest.Shared;
+using System.ServiceModel.Rest.Shared.Core.Serialization;
 using System.Threading.Tasks;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.Base;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
@@ -60,5 +61,14 @@ namespace AutoRest.CSharp.Common.Input
 
         public abstract Type ChangeTrackingListType { get; }
         public abstract Type ChangeTrackingDictionaryType { get; }
+
+        public abstract Type IUtf8JsonSerializableType { get; }
+        public string IUtf8JsonSerializableWriteName => nameof(IUtf8JsonWriteable.Write);
+
+        public abstract Type Utf8JsonWriterExtensionsType { get; }
+        public string Utf8JsonWriterExtensionsWriteObjectValueName => nameof(ModelSerializationExtensions.WriteObjectValue);
+        public string Utf8JsonWriterExtensionsWriteNumberValueName => nameof(ModelSerializationExtensions.WriteNumberValue);
+        public string Utf8JsonWriterExtensionsWriteStringValueName => nameof(ModelSerializationExtensions.WriteStringValue);
+        public string Utf8JsonWriterExtensionsWriteBase64StringValueName => nameof(ModelSerializationExtensions.WriteBase64StringValue);
     }
 }

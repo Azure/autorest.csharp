@@ -48,5 +48,9 @@ namespace AutoRest.CSharp.Common.Input
 
         public override Type ChangeTrackingListType => typeof(ChangeTrackingList<>);
         public override Type ChangeTrackingDictionaryType => typeof(ChangeTrackingDictionary<,>);
+
+        public override Type IUtf8JsonSerializableType => typeof(IUtf8JsonSerializable);
+
+        public override Type Utf8JsonWriterExtensionsType => typeof(Utf8JsonWriterExtensions);
     }
 }

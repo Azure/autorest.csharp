@@ -6,14 +6,15 @@
 #nullable disable
 
 using System.ServiceModel.Rest;
+using System.ServiceModel.Rest.Shared.Core.Serialization;
 using System.Text.Json;
 using Azure.Core;
 
 namespace UnbrandedTypeSpec.Models
 {
-    internal partial class ModelWithRequiredNullableProperties : IUtf8JsonSerializable
+    internal partial class ModelWithRequiredNullableProperties : IUtf8JsonWriteable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonWriteable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
             if (RequiredNullablePrimitive != null)
