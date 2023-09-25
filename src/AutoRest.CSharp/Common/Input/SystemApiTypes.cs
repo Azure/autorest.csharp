@@ -40,5 +40,7 @@ namespace AutoRest.CSharp.Common.Input
 
         public override Type ClientDiagnosticsType => typeof(TelemetrySource);
         public override string ClientDiagnosticsCreateScopeName => nameof(TelemetrySource.CreateSpan);
+
+        public override Type ClientOptionsType => typeof(PipelineOptions);
     }
 }

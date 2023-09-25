@@ -6,12 +6,12 @@
 #nullable disable
 
 using System;
-using Azure.Core;
+using System.ServiceModel.Rest;
 
 namespace UnbrandedTypeSpec
 {
     /// <summary> Client options for UnbrandedTypeSpecClient. </summary>
-    public partial class UnbrandedTypeSpecClientOptions : ClientOptions
+    public partial class UnbrandedTypeSpecClientOptions : PipelineOptions
     {
         private const ServiceVersion LatestVersion = ServiceVersion.V0_1_0;
 

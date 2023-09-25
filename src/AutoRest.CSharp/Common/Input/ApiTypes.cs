@@ -47,5 +47,7 @@ namespace AutoRest.CSharp.Common.Input
 
         public abstract Type ClientDiagnosticsType { get; }
         public abstract string ClientDiagnosticsCreateScopeName { get; }
+
+        public abstract Type ClientOptionsType { get; }
     }
 }

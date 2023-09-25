@@ -39,5 +39,7 @@ namespace AutoRest.CSharp.Common.Input
 
         public override Type ClientDiagnosticsType => typeof(ClientDiagnostics);
         public override string ClientDiagnosticsCreateScopeName => nameof(ClientDiagnostics.CreateScope);
+
+        public override Type ClientOptionsType => typeof(ClientOptions);
     }
 }

@@ -3,8 +3,8 @@
 
 using System;
 using System.Linq;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Output.Models.Types;
-using Azure.Core;
 
 namespace AutoRest.CSharp.Generation.Writers
 {
@@ -15,7 +15,7 @@ namespace AutoRest.CSharp.Generation.Writers
             using (writer.Namespace(clientOptions.Type.Namespace))
             {
                 writer.WriteXmlDocumentationSummary(clientOptions.Description);
-                using (writer.Scope($"{clientOptions.Declaration.Accessibility} partial class {clientOptions.Type.Name}: {typeof(ClientOptions)}"))
+                using (writer.Scope($"{clientOptions.Declaration.Accessibility} partial class {clientOptions.Type.Name}: {Configuration.ApiTypes.ClientOptionsType}"))
                 {
                     writer.Line($"private const ServiceVersion LatestVersion = ServiceVersion.{clientOptions.ApiVersions.Last().Name};");
                     writer.Line();
