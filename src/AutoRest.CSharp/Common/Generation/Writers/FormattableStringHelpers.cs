@@ -17,6 +17,12 @@ namespace AutoRest.CSharp.Generation.Writers
 {
     internal static class FormattableStringHelpers
     {
+        public static FormattableString? FromString(string? s) =>
+            s is null ? null : s.Length == 0 ? $"" : (FormattableString)$"{s}";
+
+        public static bool IsNullOrEmpty(this FormattableString? fs) =>
+            fs is null || string.IsNullOrEmpty(fs.Format) && fs.ArgumentCount == 0;
+
         public static bool IsEmpty(this FormattableString fs) =>
             string.IsNullOrEmpty(fs.Format) && fs.ArgumentCount == 0;
 

@@ -8,6 +8,7 @@ using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Input.Examples;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Serialization;
@@ -96,8 +97,8 @@ namespace AutoRest.CSharp.Output.Models
 
             var shouldRequestContextOptional = ShouldRequestContextOptional();
             var protocolMethodParameters = _orderedParameters.Select(p => p.Protocol).WhereNotNull().Select(p => p != KnownParameters.RequestContentNullable && !shouldRequestContextOptional ? p.ToRequired() : p).ToArray();
-            var protocolMethodModifiers = (Operation.GenerateProtocolMethod ? _restClientMethod.Accessibility : MethodSignatureModifiers.Internal) | Virtual;
-            var protocolMethodSignature = new MethodSignature(_restClientMethod.Name, $"{_restClientMethod.Summary}", $"{_restClientMethod.Description}", protocolMethodModifiers, _returnType.Protocol, null, protocolMethodParameters, protocolMethodAttributes);
+            var protocolMethodModifiers = (Operation.GenerateProtocolMethod ? _restClientMethod.Accessibility : Internal) | Virtual;
+            var protocolMethodSignature = new MethodSignature(_restClientMethod.Name, FormattableStringHelpers.FromString(_restClientMethod.Summary), FormattableStringHelpers.FromString(_restClientMethod.Description), protocolMethodModifiers, _returnType.Protocol, null, protocolMethodParameters, protocolMethodAttributes);
             var convenienceMethodInfo = ShouldGenerateConvenienceMethod();
             var convenienceMethod = BuildConvenienceMethod(shouldRequestContextOptional, convenienceMethodInfo);
 
@@ -372,7 +373,7 @@ namespace AutoRest.CSharp.Output.Models
                 accessibility &= ~Public; // removes public if any
                 accessibility |= Internal; // add internal
             }
-            var convenienceSignature = new MethodSignature(name, $"{_restClientMethod.Summary}", $"{_restClientMethod.Description}", accessibility, _returnType.Convenience, null, parameterList, attributes);
+            var convenienceSignature = new MethodSignature(name, FormattableStringHelpers.FromString(_restClientMethod.Summary), FormattableStringHelpers.FromString(_restClientMethod.Description), accessibility, _returnType.Convenience, null, parameterList, attributes);
             var diagnostic = name != _restClientMethod.Name ? new Diagnostic($"{_clientName}.{convenienceSignature.Name}") : null;
             return new ConvenienceMethod(convenienceSignature, protocolToConvenience, _returnType.ConvenienceResponseType, diagnostic, _protocolMethodPaging is not null, Operation.LongRunning is not null, Operation.Deprecated);
         }
@@ -590,7 +591,7 @@ namespace AutoRest.CSharp.Output.Models
                 return;
             }
 
-            var convenienceMethodParameter = BuildParameter(inputParameter);
+            var convenienceMethodParameter = BuildParameter(inputParameter, frameworkParameterType);
             var parameterChain = inputParameter.Location == RequestLocation.None
                 ? new ParameterChain(convenienceMethodParameter, null, null)
                 : new ParameterChain(convenienceMethodParameter, protocolMethodParameter, protocolMethodParameter);
