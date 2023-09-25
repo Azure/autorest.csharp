@@ -11,8 +11,8 @@ namespace AutoRest.CSharp.Generation.Writers
 {
     internal class DataPlaneResponseHeaderGroupWriter
     {
-        private const string ResponseParameter = "response";
-        private const string ResponseField = "_" + ResponseParameter;
+        private static readonly string ResponseParameter = Configuration.ApiTypes.ResponseParameterName;
+        private static readonly string ResponseField = "_" + ResponseParameter;
 
         public void WriteHeaderModel(CodeWriter writer, DataPlaneResponseHeaderGroupType responseHeaderGroup)
         {

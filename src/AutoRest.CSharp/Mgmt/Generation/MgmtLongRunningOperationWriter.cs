@@ -43,7 +43,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _responseType = isGeneric ? Configuration.ApiTypes.ResponseOfTType : Configuration.ApiTypes.ResponseType;
             _operationInternalType = isGeneric ? typeof(OperationInternal<>) : typeof(OperationInternal);
             _operationSourceString = isGeneric ? (FormattableString)$"{typeof(IOperationSource<>)} source, " : (FormattableString)$"";
-            _responseString = isGeneric ? $"response.{Configuration.ApiTypes.GetRawResponseName}(), response.Value" : "response";
+            _responseString = isGeneric ? $"{Configuration.ApiTypes.ResponseParameterName}.{Configuration.ApiTypes.GetRawResponseName}(), {Configuration.ApiTypes.ResponseParameterName}.Value" : $"{Configuration.ApiTypes.ResponseParameterName}";
             _sourceString = isGeneric ? "source, " : string.Empty;
         }
 
@@ -65,17 +65,17 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     }
                     _writer.Line();
 
-                    using (_writer.Scope($"internal {_name}({_responseType} response)"))
+                    using (_writer.Scope($"internal {_name}({_responseType} {Configuration.ApiTypes.ResponseParameterName})"))
                     {
                         _writer.Line($"_operation = {_operationInternalType}.Succeeded({_responseString});");
                     }
                     _writer.Line();
 
-                    using (_writer.Scope($"internal {_name}({_operationSourceString}{Configuration.ApiTypes.ClientDiagnosticsType} clientDiagnostics, {Configuration.ApiTypes.HttpPipelineType} pipeline, {typeof(Request)} request, {Configuration.ApiTypes.ResponseType} response, {typeof(OperationFinalStateVia)} finalStateVia, bool skipApiVersionOverride = false, string apiVersionOverrideValue = null)"))
+                    using (_writer.Scope($"internal {_name}({_operationSourceString}{Configuration.ApiTypes.ClientDiagnosticsType} clientDiagnostics, {Configuration.ApiTypes.HttpPipelineType} pipeline, {typeof(Request)} request, {Configuration.ApiTypes.ResponseType} {Configuration.ApiTypes.ResponseParameterName}, {typeof(OperationFinalStateVia)} finalStateVia, bool skipApiVersionOverride = false, string apiVersionOverrideValue = null)"))
                     {
                         var nextLinkOperation = new CodeWriterDeclaration("nextLinkOperation");
-                        _writer.Line($"var {nextLinkOperation:D} = {typeof(NextLinkOperationImplementation)}.{nameof(NextLinkOperationImplementation.Create)}({_sourceString}pipeline, request.Method, request.Uri.ToUri(), response, finalStateVia, skipApiVersionOverride, apiVersionOverrideValue);");
-                        _writer.Line($"_operation = new {_operationInternalType}({nextLinkOperation}, clientDiagnostics, response, {_name:L}, fallbackStrategy: new {typeof(SequentialDelayStrategy)}());");
+                        _writer.Line($"var {nextLinkOperation:D} = {typeof(NextLinkOperationImplementation)}.{nameof(NextLinkOperationImplementation.Create)}({_sourceString}pipeline, request.Method, request.Uri.ToUri(), {Configuration.ApiTypes.ResponseParameterName}, finalStateVia, skipApiVersionOverride, apiVersionOverrideValue);");
+                        _writer.Line($"_operation = new {_operationInternalType}({nextLinkOperation}, clientDiagnostics, {Configuration.ApiTypes.ResponseParameterName}, {_name:L}, fallbackStrategy: new {typeof(SequentialDelayStrategy)}());");
                     }
                     _writer.Line();
 

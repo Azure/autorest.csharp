@@ -56,13 +56,13 @@ namespace AutoRest.CSharp.Mgmt.Generation
             using (_writer.WriteDiagnosticScope(diagnostic, GetDiagnosticReference(clientOperation.OperationMappings.Values.First())))
             {
                 var operation = clientOperation.OperationMappings.Values.First();
-                var response = new CodeWriterDeclaration("response");
+                var response = new CodeWriterDeclaration(Configuration.ApiTypes.ResponseParameterName);
                 _writer
                     .Append($"var {response:D} = {GetAwait(async)} ")
                     .Append($"{GetRestClientName(operation)}.{CreateMethodName(operation.Method.Name, async)}(");
                 WriteArguments(_writer, clientOperation.ParameterMappings.Values.First());
                 _writer.Line($"cancellationToken: cancellationToken){GetConfigureAwait(async)};");
-                _writer.Line($"return Response.FromValue(response.Value != null, response.{Configuration.ApiTypes.GetRawResponseName}());");
+                _writer.Line($"return {Configuration.ApiTypes.ResponseType}.FromValue({Configuration.ApiTypes.ResponseParameterName}.Value != null, {Configuration.ApiTypes.ResponseParameterName}.{Configuration.ApiTypes.GetRawResponseName}());");
             }
         }
 
@@ -87,7 +87,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         private void WriteGetMethodBranch(CodeWriter writer, MgmtRestOperation operation, IEnumerable<ParameterMapping> parameterMappings, bool async)
         {
-            var response = new CodeWriterDeclaration("response");
+            var response = new CodeWriterDeclaration(Configuration.ApiTypes.ResponseParameterName);
             writer
                 .Append($"var {response:D} = {GetAwait(async)} ")
                 .Append($"{GetRestClientName(operation)}.{CreateMethodName(operation.Method.Name, async)}(");

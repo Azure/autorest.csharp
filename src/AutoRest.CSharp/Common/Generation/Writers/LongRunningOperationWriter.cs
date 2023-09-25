@@ -134,7 +134,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private void WriteConstructor(CodeWriter writer, LongRunningOperation operation, PagingResponseInfo? pagingResponse, CSharpType lroType, CSharpType helperType)
         {
-            writer.Append($"internal {lroType.Name}({Configuration.ApiTypes.ClientDiagnosticsType} clientDiagnostics, {Configuration.ApiTypes.HttpPipelineType} pipeline, {typeof(Request)} request, {Configuration.ApiTypes.ResponseType} response");
+            writer.Append($"internal {lroType.Name}({Configuration.ApiTypes.ClientDiagnosticsType} clientDiagnostics, {Configuration.ApiTypes.HttpPipelineType} pipeline, {typeof(Request)} request, {Configuration.ApiTypes.ResponseType} {Configuration.ApiTypes.ResponseParameterName}");
 
             if (pagingResponse != null)
             {
@@ -148,8 +148,8 @@ namespace AutoRest.CSharp.Generation.Writers
                 writer
                     .Append($"{GetNextLinkOperationType(operation)} {nextLinkOperationVariable:D} = {typeof(NextLinkOperationImplementation)}.{nameof(NextLinkOperationImplementation.Create)}(")
                     .AppendIf($"this, ", operation.ResultType != null)
-                    .Line($"pipeline, request.Method, request.Uri.ToUri(), response, {typeof(OperationFinalStateVia)}.{operation.FinalStateVia});")
-                    .Line($"_operation = new {helperType}(nextLinkOperation, clientDiagnostics, response, { operation.Diagnostics.ScopeName:L});");
+                    .Line($"pipeline, request.Method, request.Uri.ToUri(), {Configuration.ApiTypes.ResponseParameterName}, {typeof(OperationFinalStateVia)}.{operation.FinalStateVia});")
+                    .Line($"_operation = new {helperType}(nextLinkOperation, clientDiagnostics, {Configuration.ApiTypes.ResponseParameterName}, { operation.Diagnostics.ScopeName:L});");
 
                 if (pagingResponse != null)
                 {
@@ -194,7 +194,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private static void WriteCreateResult(CodeWriter writer, LongRunningOperation operation, PagingResponseInfo? pagingResponse, CSharpType resultType, CSharpType interfaceType)
         {
-            var responseVariable = new CodeWriterDeclaration("response");
+            var responseVariable = new CodeWriterDeclaration(Configuration.ApiTypes.ResponseParameterName);
             using (writer.Scope($"{resultType} {interfaceType}.CreateResult({Configuration.ApiTypes.ResponseType} {responseVariable:D}, {typeof(CancellationToken)} cancellationToken)"))
             {
                 WriteCreateResultBody(writer, operation, responseVariable, pagingResponse, resultType, false);
@@ -203,7 +203,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private static void WriteCreateResultAsync(CodeWriter writer, LongRunningOperation operation, PagingResponseInfo? pagingResponse, CSharpType resultType, CSharpType interfaceType)
         {
-            var responseVariable = new CodeWriterDeclaration("response");
+            var responseVariable = new CodeWriterDeclaration(Configuration.ApiTypes.ResponseParameterName);
             var asyncKeyword = pagingResponse == null && operation.ResultSerialization != null ? "async " : "";
             using (writer.Scope($"{asyncKeyword}{new CSharpType(typeof(ValueTask<>), resultType)} {interfaceType}.CreateResultAsync({Configuration.ApiTypes.ResponseType} {responseVariable:D}, {typeof(CancellationToken)} cancellationToken)"))
             {

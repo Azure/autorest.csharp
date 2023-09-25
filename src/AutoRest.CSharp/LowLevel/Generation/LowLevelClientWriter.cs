@@ -280,7 +280,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 // write whatever we need to convert the parameters
                 converter(_writer);
 
-                var responseVariable = new CodeWriterDeclaration("response");
+                var responseVariable = new CodeWriterDeclaration(Configuration.ApiTypes.ResponseParameterName);
                 _writer
                     .Append($"{clientMethod.ProtocolMethodSignature.ReturnType} {responseVariable:D} = ")
                     .WriteMethodCall(clientMethod.ProtocolMethodSignature, parameterValues, async)
@@ -342,7 +342,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 else
                 {
                     // Operation<BinaryData> response = [await] protocolMethod(parameters...)[.ConfigureAwait(false)];
-                    var responseVariable = new CodeWriterDeclaration("response");
+                    var responseVariable = new CodeWriterDeclaration(Configuration.ApiTypes.ResponseParameterName);
                     _writer
                         .Append($"{clientMethod.ProtocolMethodSignature.ReturnType} {responseVariable:D} = ")
                         .WriteMethodCall(clientMethod.ProtocolMethodSignature, parameterValues, async)

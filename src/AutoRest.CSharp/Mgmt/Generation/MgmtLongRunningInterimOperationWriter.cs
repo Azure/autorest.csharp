@@ -52,12 +52,12 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     }
                     _writer.Line();
 
-                    using (_writer.Scope($"internal {_interimOperation.TypeName}({_interimOperation.IOperationSourceType} source, {Configuration.ApiTypes.ClientDiagnosticsType} clientDiagnostics, {Configuration.ApiTypes.HttpPipelineType} pipeline, {typeof(Request)} request, {Configuration.ApiTypes.ResponseType} response, {typeof(OperationFinalStateVia)} finalStateVia)"))
+                    using (_writer.Scope($"internal {_interimOperation.TypeName}({_interimOperation.IOperationSourceType} source, {Configuration.ApiTypes.ClientDiagnosticsType} clientDiagnostics, {Configuration.ApiTypes.HttpPipelineType} pipeline, {typeof(Request)} request, {Configuration.ApiTypes.ResponseType} {Configuration.ApiTypes.ResponseParameterName}, {typeof(OperationFinalStateVia)} finalStateVia)"))
                     {
-                        _writer.Line($"_operation = new {_interimOperation.OperationType}(source, clientDiagnostics, pipeline, request, response, finalStateVia);");
+                        _writer.Line($"_operation = new {_interimOperation.OperationType}(source, clientDiagnostics, pipeline, request, {Configuration.ApiTypes.ResponseParameterName}, finalStateVia);");
                         _writer.Line($"_operationSource = source;");
                         _writer.Line($"_stateLock = new {_interimOperation.StateLockType}();");
-                        _writer.Line($"_interimResponse = response;");
+                        _writer.Line($"_interim{Configuration.ApiTypes.ResponseType.Name} = {Configuration.ApiTypes.ResponseParameterName};");
                     }
                     _writer.Line();
 

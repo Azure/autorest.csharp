@@ -73,8 +73,8 @@ namespace UnbrandedTypeSpec
         internal virtual async Task<Result<Thing>> TopActionAsync(DateTimeOffset action, CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
-            Result response = await TopActionAsync(action, context).ConfigureAwait(false);
-            return Result.FromValue(Thing.FromResult(response), response);
+            Result result = await TopActionAsync(action, context).ConfigureAwait(false);
+            return Result.FromValue(Thing.FromResult(result), result);
         }
 
         /// <summary> top level method. </summary>
@@ -84,8 +84,8 @@ namespace UnbrandedTypeSpec
         internal virtual Result<Thing> TopAction(DateTimeOffset action, CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
-            Result response = TopAction(action, context);
-            return Result.FromValue(Thing.FromResult(response), response);
+            Result result = TopAction(action, context);
+            return Result.FromValue(Thing.FromResult(result), result);
         }
 
         // The convenience method of this operation is made internal because this operation directly or indirectly uses a low confident type, for instance, unions, literal types with number values, etc.
@@ -290,8 +290,8 @@ namespace UnbrandedTypeSpec
             ClientUtilities.AssertNotNull(thing, nameof(thing));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Result response = await AnonymousBodyAsync(thing.ToRequestContent(), context).ConfigureAwait(false);
-            return Result.FromValue(Thing.FromResult(response), response);
+            Result result = await AnonymousBodyAsync(thing.ToRequestContent(), context).ConfigureAwait(false);
+            return Result.FromValue(Thing.FromResult(result), result);
         }
 
         /// <summary> body parameter without body decorator. </summary>
@@ -304,8 +304,8 @@ namespace UnbrandedTypeSpec
             ClientUtilities.AssertNotNull(thing, nameof(thing));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Result response = AnonymousBody(thing.ToRequestContent(), context);
-            return Result.FromValue(Thing.FromResult(response), response);
+            Result result = AnonymousBody(thing.ToRequestContent(), context);
+            return Result.FromValue(Thing.FromResult(result), result);
         }
 
         // The convenience method of this operation is made internal because this operation directly or indirectly uses a low confident type, for instance, unions, literal types with number values, etc.
@@ -388,8 +388,8 @@ namespace UnbrandedTypeSpec
             ClientUtilities.AssertNotNull(notFriend, nameof(notFriend));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Result response = await FriendlyModelAsync(notFriend.ToRequestContent(), context).ConfigureAwait(false);
-            return Result.FromValue(Friend.FromResult(response), response);
+            Result result = await FriendlyModelAsync(notFriend.ToRequestContent(), context).ConfigureAwait(false);
+            return Result.FromValue(Friend.FromResult(result), result);
         }
 
         /// <summary> Model can have its friendly name. </summary>
@@ -402,8 +402,8 @@ namespace UnbrandedTypeSpec
             ClientUtilities.AssertNotNull(notFriend, nameof(notFriend));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Result response = FriendlyModel(notFriend.ToRequestContent(), context);
-            return Result.FromValue(Friend.FromResult(response), response);
+            Result result = FriendlyModel(notFriend.ToRequestContent(), context);
+            return Result.FromValue(Friend.FromResult(result), result);
         }
 
         /// <summary>
@@ -555,8 +555,8 @@ namespace UnbrandedTypeSpec
             ClientUtilities.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Result response = await StringFormatAsync(subscriptionId, body.ToRequestContent(), context).ConfigureAwait(false);
-            return response;
+            Result result = await StringFormatAsync(subscriptionId, body.ToRequestContent(), context).ConfigureAwait(false);
+            return result;
         }
 
         /// <summary> parameter has string format. </summary>
@@ -570,8 +570,8 @@ namespace UnbrandedTypeSpec
             ClientUtilities.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Result response = StringFormat(subscriptionId, body.ToRequestContent(), context);
-            return response;
+            Result result = StringFormat(subscriptionId, body.ToRequestContent(), context);
+            return result;
         }
 
         /// <summary>
@@ -664,8 +664,8 @@ namespace UnbrandedTypeSpec
             ClientUtilities.AssertNotNull(modelWithProjectedName, nameof(modelWithProjectedName));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Result response = await ProjectedNameModelAsync(modelWithProjectedName.ToRequestContent(), context).ConfigureAwait(false);
-            return Result.FromValue(ProjectedModel.FromResult(response), response);
+            Result result = await ProjectedNameModelAsync(modelWithProjectedName.ToRequestContent(), context).ConfigureAwait(false);
+            return Result.FromValue(ProjectedModel.FromResult(result), result);
         }
 
         /// <summary> Model can have its projected name. </summary>
@@ -678,8 +678,8 @@ namespace UnbrandedTypeSpec
             ClientUtilities.AssertNotNull(modelWithProjectedName, nameof(modelWithProjectedName));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Result response = ProjectedNameModel(modelWithProjectedName.ToRequestContent(), context);
-            return Result.FromValue(ProjectedModel.FromResult(response), response);
+            Result result = ProjectedNameModel(modelWithProjectedName.ToRequestContent(), context);
+            return Result.FromValue(ProjectedModel.FromResult(result), result);
         }
 
         /// <summary>
@@ -983,8 +983,8 @@ namespace UnbrandedTypeSpec
             ClientUtilities.AssertNotNull(action, nameof(action));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Result response = await HelloAgainAsync(p2, p1, action.ToRequestContent(), context).ConfigureAwait(false);
-            return Result.FromValue(RoundTripModel.FromResult(response), response);
+            Result result = await HelloAgainAsync(p2, p1, action.ToRequestContent(), context).ConfigureAwait(false);
+            return Result.FromValue(RoundTripModel.FromResult(result), result);
         }
 
         /// <summary> Return hi again. </summary>
@@ -1002,8 +1002,8 @@ namespace UnbrandedTypeSpec
             ClientUtilities.AssertNotNull(action, nameof(action));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Result response = HelloAgain(p2, p1, action.ToRequestContent(), context);
-            return Result.FromValue(RoundTripModel.FromResult(response), response);
+            Result result = HelloAgain(p2, p1, action.ToRequestContent(), context);
+            return Result.FromValue(RoundTripModel.FromResult(result), result);
         }
 
         // The convenience method of this operation is made internal because this operation directly or indirectly uses a low confident type, for instance, unions, literal types with number values, etc.
@@ -1170,8 +1170,8 @@ namespace UnbrandedTypeSpec
         internal virtual async Task<Result<Thing>> HelloDemo2Async(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
-            Result response = await HelloDemo2Async(context).ConfigureAwait(false);
-            return Result.FromValue(Thing.FromResult(response), response);
+            Result result = await HelloDemo2Async(context).ConfigureAwait(false);
+            return Result.FromValue(Thing.FromResult(result), result);
         }
 
         /// <summary> Return hi in demo2. </summary>
@@ -1180,8 +1180,8 @@ namespace UnbrandedTypeSpec
         internal virtual Result<Thing> HelloDemo2(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
-            Result response = HelloDemo2(context);
-            return Result.FromValue(Thing.FromResult(response), response);
+            Result result = HelloDemo2(context);
+            return Result.FromValue(Thing.FromResult(result), result);
         }
 
         // The convenience method of this operation is made internal because this operation directly or indirectly uses a low confident type, for instance, unions, literal types with number values, etc.
@@ -1256,8 +1256,8 @@ namespace UnbrandedTypeSpec
             ClientUtilities.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Result response = await CreateLiteralAsync(body.ToRequestContent(), context).ConfigureAwait(false);
-            return Result.FromValue(Thing.FromResult(response), response);
+            Result result = await CreateLiteralAsync(body.ToRequestContent(), context).ConfigureAwait(false);
+            return Result.FromValue(Thing.FromResult(result), result);
         }
 
         /// <summary> Create with literal value. </summary>
@@ -1270,8 +1270,8 @@ namespace UnbrandedTypeSpec
             ClientUtilities.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Result response = CreateLiteral(body.ToRequestContent(), context);
-            return Result.FromValue(Thing.FromResult(response), response);
+            Result result = CreateLiteral(body.ToRequestContent(), context);
+            return Result.FromValue(Thing.FromResult(result), result);
         }
 
         // The convenience method of this operation is made internal because this operation directly or indirectly uses a low confident type, for instance, unions, literal types with number values, etc.
@@ -1350,8 +1350,8 @@ namespace UnbrandedTypeSpec
         internal virtual async Task<Result<Thing>> HelloLiteralAsync(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
-            Result response = await HelloLiteralAsync(context).ConfigureAwait(false);
-            return Result.FromValue(Thing.FromResult(response), response);
+            Result result = await HelloLiteralAsync(context).ConfigureAwait(false);
+            return Result.FromValue(Thing.FromResult(result), result);
         }
 
         /// <summary> Send literal parameters. </summary>
@@ -1360,8 +1360,8 @@ namespace UnbrandedTypeSpec
         internal virtual Result<Thing> HelloLiteral(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
-            Result response = HelloLiteral(context);
-            return Result.FromValue(Thing.FromResult(response), response);
+            Result result = HelloLiteral(context);
+            return Result.FromValue(Thing.FromResult(result), result);
         }
 
         // The convenience method of this operation is made internal because this operation directly or indirectly uses a low confident type, for instance, unions, literal types with number values, etc.
@@ -1496,8 +1496,8 @@ namespace UnbrandedTypeSpec
             ClientUtilities.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Result response = await InternalProtocolAsync(body.ToRequestContent(), context).ConfigureAwait(false);
-            return Result.FromValue(Thing.FromResult(response), response);
+            Result result = await InternalProtocolAsync(body.ToRequestContent(), context).ConfigureAwait(false);
+            return Result.FromValue(Thing.FromResult(result), result);
         }
 
         /// <summary> When set protocol false and convenient true, then the protocol method should be internal. </summary>
@@ -1510,8 +1510,8 @@ namespace UnbrandedTypeSpec
             ClientUtilities.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Result response = InternalProtocol(body.ToRequestContent(), context);
-            return Result.FromValue(Thing.FromResult(response), response);
+            Result result = InternalProtocol(body.ToRequestContent(), context);
+            return Result.FromValue(Thing.FromResult(result), result);
         }
 
         // The convenience method of this operation is made internal because this operation directly or indirectly uses a low confident type, for instance, unions, literal types with number values, etc.
@@ -1604,8 +1604,8 @@ namespace UnbrandedTypeSpec
             try
             {
                 RequestContext context = FromCancellationToken(cancellationToken);
-                Result response = await StillConvenientAsync(context).ConfigureAwait(false);
-                return response;
+                Result result = await StillConvenientAsync(context).ConfigureAwait(false);
+                return result;
             }
             catch (Exception e)
             {
@@ -1624,8 +1624,8 @@ namespace UnbrandedTypeSpec
             try
             {
                 RequestContext context = FromCancellationToken(cancellationToken);
-                Result response = StillConvenient(context);
-                return response;
+                Result result = StillConvenient(context);
+                return result;
             }
             catch (Exception e)
             {

@@ -388,7 +388,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Samples
                 if (returnType.IsFrameworkType && returnType.FrameworkType == typeof(NullableResponse<>))
                 {
                     var unwrappedReturnType = returnType.Arguments.First().WithNullable(true);
-                    var valueResponse = new CodeWriterVariableDeclaration("response", returnType);
+                    var valueResponse = new CodeWriterVariableDeclaration(Configuration.ApiTypes.ResponseParameterName, returnType);
                     _writer.AppendDeclaration(valueResponse).AppendRaw(" = ");
                     // write the method invocation
                     WriteOperationInvocation(instanceVar, parameters, sample);
@@ -406,7 +406,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Samples
                     // if the type inside Response<T> is a generic type, somehow the implicit convert Response<T> => T does not work, we have to explicitly unwrap it
                     if (unwrappedReturnType.IsGenericType)
                     {
-                        var valueResponse = new CodeWriterVariableDeclaration("response", returnType);
+                        var valueResponse = new CodeWriterVariableDeclaration(Configuration.ApiTypes.ResponseParameterName, returnType);
                         _writer.AppendDeclaration(valueResponse).AppendRaw(" = ");
                         // write the method invocation
                         WriteOperationInvocation(instanceVar, parameters, sample);

@@ -139,7 +139,7 @@ namespace AutoRest.CSharp.LowLevel.Generation
 
             if (sample.HasResponseBody)
             {
-                var responseData = new CodeWriterDeclaration("responseData");
+                var responseData = new CodeWriterDeclaration($"{Configuration.ApiTypes.ResponseParameterName}Data");
                 var typeOfResult = GetReturnType(methodSignature.ReturnType).Arguments.Single();
                 _writer.Line($"{typeOfResult} {responseData:D} = {operation}.Value;");
                 WriteNormalOperationResponse(sample, $"{responseData}", $"{responseData}.ToStream()");
@@ -168,7 +168,7 @@ namespace AutoRest.CSharp.LowLevel.Generation
             var parameters = WriteOperationInvocationParameters(sample, methodSignature.Parameters);
 
             var returnType = GetReturnType(methodSignature.ReturnType);
-            var response = new CodeWriterDeclaration("response");
+            var response = new CodeWriterDeclaration(Configuration.ApiTypes.ResponseParameterName);
 
             _writer.Append($"{returnType} {response:D} = ")
                 .AppendRawIf("await ", isAsync)
