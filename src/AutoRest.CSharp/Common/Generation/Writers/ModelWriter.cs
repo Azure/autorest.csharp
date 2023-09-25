@@ -16,8 +16,6 @@ namespace AutoRest.CSharp.Generation.Writers
 {
     internal class ModelWriter
     {
-        internal delegate void MethodBodyImplementation(CodeWriter codeWriter, ObjectType objectType);
-
         public void WriteModel(CodeWriter writer, TypeProvider model)
         {
             switch (model)
@@ -25,10 +23,10 @@ namespace AutoRest.CSharp.Generation.Writers
                 case ObjectType objectSchema:
                     WriteObjectSchema(writer, objectSchema);
                     break;
-                case EnumType e when e.IsExtensible:
+                case EnumType {IsExtensible: true} e:
                     WriteExtensibleEnum(writer, e);
                     break;
-                case EnumType e when !e.IsExtensible:
+                case EnumType {IsExtensible: false} e:
                     WriteEnum(writer, e);
                     break;
                 default:
