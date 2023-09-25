@@ -82,7 +82,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                 // find the extension if the resource type here is a framework type (when it is ResourceGroupResource, SubscriptionResource, etc) to ensure the ExtensionClient could property have the child resources
                 extensionDict.TryGetValue(resourceType, out var extensionForChildResources);
                 var extensionClient = resourceType.Equals(typeof(ArmClient)) ?
-                    new ArmClientExtensionClient(resourceType, operations, extensionForChildResources) :
+                    new ArmClientMockingExtension(resourceType, operations, extensionForChildResources) :
                     new MgmtMockingExtension(resourceType, operations, extensionForChildResources);
                 mockingExtensions.Add(extensionClient);
             }
