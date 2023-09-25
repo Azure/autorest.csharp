@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -35,10 +36,11 @@ namespace MgmtCustomizations.Models
         /// The size of the pet. This property here is mocking the following scenario:
         /// Despite in the swagger it has a type of string, in the real payload of this request, the service is actually sending using a number, therefore the type in this swagger here is wrong and we have to fix it using customization code.
         /// </param>
+        /// <param name="dateOfBirth"> Pet date of birth. </param>
         /// <returns> A new <see cref="Models.Pet"/> instance for mocking. </returns>
-        public static Pet Pet(string name = null, int size = default)
+        public static Pet Pet(string name = null, int size = default, DateTimeOffset? dateOfBirth = null)
         {
-            return new UnknownPet(default, name, size);
+            return new UnknownPet(default, name, size, dateOfBirth);
         }
 
         /// <summary> Initializes a new instance of Cat. </summary>
@@ -47,13 +49,14 @@ namespace MgmtCustomizations.Models
         /// The size of the pet. This property here is mocking the following scenario:
         /// Despite in the swagger it has a type of string, in the real payload of this request, the service is actually sending using a number, therefore the type in this swagger here is wrong and we have to fix it using customization code.
         /// </param>
+        /// <param name="dateOfBirth"> Pet date of birth. </param>
         /// <param name="sleep"> A cat can sleep. </param>
         /// <param name="jump"> A cat can jump. </param>
         /// <param name="meow"> A cat can meow. </param>
         /// <returns> A new <see cref="Models.Cat"/> instance for mocking. </returns>
-        public static Cat Cat(string name = null, int size = default, string sleep = null, string jump = null, string meow = null)
+        public static Cat Cat(string name = null, int size = default, DateTimeOffset? dateOfBirth = null, string sleep = null, string jump = null, string meow = null)
         {
-            return new Cat(PetKind.Cat, name, size, sleep, jump, meow);
+            return new Cat(PetKind.Cat, name, size, dateOfBirth, sleep, jump, meow);
         }
 
         /// <summary> Initializes a new instance of Dog. </summary>
@@ -62,13 +65,32 @@ namespace MgmtCustomizations.Models
         /// The size of the pet. This property here is mocking the following scenario:
         /// Despite in the swagger it has a type of string, in the real payload of this request, the service is actually sending using a number, therefore the type in this swagger here is wrong and we have to fix it using customization code.
         /// </param>
+        /// <param name="dateOfBirth"> Pet date of birth. </param>
         /// <param name="sleep"> A dog can sleep. </param>
         /// <param name="bark"> A dog can bark. </param>
         /// <param name="jump"> A dog can jump. </param>
         /// <returns> A new <see cref="Models.Dog"/> instance for mocking. </returns>
-        public static Dog Dog(string name = null, int size = default, string sleep = null, string bark = null, string jump = null)
+        public static Dog Dog(string name = null, int size = default, DateTimeOffset? dateOfBirth = null, string sleep = null, string bark = null, string jump = null)
         {
-            return new Dog(PetKind.Dog, name, size, sleep, bark, jump);
+            return new Dog(PetKind.Dog, name, size, dateOfBirth, sleep, bark, jump);
+        }
+
+        /// <summary>
+        /// <member name="M:MgmtCustomizations.Models.ArmMgmtCustomizationsModelFactory.Pet(System.String,System.Int32)">
+        ///     <summary> Initializes a new instance of Pet. </summary>
+        ///     <param name="name"> The name of the pet. </param>
+        ///     <param name="size">
+        ///     The size of the pet. This property here is mocking the following scenario:
+        ///     Despite in the swagger it has a type of string, in the real payload of this request, the service is actually sending using a number, therefore the type in this swagger here is wrong and we have to fix it using customization code.
+        ///     </param>
+        ///     <returns> A new <see cref="T:MgmtCustomizations.Models.Pet"/> instance for mocking. </returns>
+        /// </member>
+        ///
+        /// </summary>
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public static Pet Pet(string name, int size)
+        {
+            return Pet(name, size, default);
         }
 
         /// <summary>
@@ -87,7 +109,7 @@ namespace MgmtCustomizations.Models
         [EditorBrowsable(EditorBrowsableState.Never)]
         public static Cat Cat(string name, int size, string meow)
         {
-            return Cat(name, size, default, default, meow);
+            return Cat(name, size, default, default, default, meow);
         }
 
         /// <summary>
@@ -106,7 +128,7 @@ namespace MgmtCustomizations.Models
         [EditorBrowsable(EditorBrowsableState.Never)]
         public static Dog Dog(string name, int size, string bark)
         {
-            return Dog(name, size, default, bark, default);
+            return Dog(name, size, default, default, bark, default);
         }
     }
 }

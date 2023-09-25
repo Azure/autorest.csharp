@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 
 using System;
+using System.Diagnostics;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
@@ -16,6 +17,7 @@ using Microsoft.CodeAnalysis;
 
 namespace AutoRest.CSharp.Output.Models.Types
 {
+    [DebuggerDisplay("Name: {Declaration.Name}, Namespace: {Declaration.Namespace}")]
     internal abstract class TypeProvider
     {
         private readonly Lazy<INamedTypeSymbol?> _existingType;

@@ -273,7 +273,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         /// <returns></returns>
         public async Task PostProcessAsync(PostProcessor? postProcessor = null)
         {
-            postProcessor ??= new PostProcessor();
+            postProcessor ??= new PostProcessor(ImmutableHashSet<string>.Empty);
             switch (Configuration.UnreferencedTypesHandling)
             {
                 case Configuration.UnreferencedTypesHandlingOption.KeepAll:

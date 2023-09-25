@@ -1426,6 +1426,16 @@ schemas: !Schemas
           name: InstanceViewStatusMessage
           description: The detailed status message, including for alerts and error messages.
       protocol: !Protocols {}
+    - !StringSchema &ref_54
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: InstanceViewStatusTime
+          description: The time of the status.
+      protocol: !Protocols {}
     - !StringSchema &ref_216
       type: string
       apiVersions:
@@ -5067,17 +5077,6 @@ schemas: !Schemas
           description: The placement group in which the VM is running. If the VM is deallocated it will not have a placementGroupId.
       protocol: !Protocols {}
   dateTimes:
-    - !DateTimeSchema &ref_54
-      type: date-time
-      format: date-time
-      apiVersions:
-        - !ApiVersion 
-          version: '2020-06-01'
-      language: !Languages 
-        default:
-          name: InstanceViewStatusTime
-          description: The time of the status.
-      protocol: !Protocols {}
     - !DateTimeSchema &ref_211
       type: date-time
       format: date-time

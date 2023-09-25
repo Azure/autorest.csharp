@@ -19,7 +19,9 @@
         "authentication/union",
         "azure/core/basic",
         "azure/core/traits",
+        "azure/client-generator-core/access",
         "azure/client-generator-core/internal",
+        "azure/client-generator-core/usage",
         "encode/bytes",
         "encode/datetime",
         "encode/duration",
@@ -30,7 +32,8 @@
         "special-headers/repeatability",
         "special-words",
         "parameters/collection-format",
-        "parameters/spread"
+        "parameters/spread",
+        "parameters/body-optionality"
     ],
     "TestServerProjects": [
         "additionalProperties",

@@ -3642,7 +3642,6 @@
                 },
                 "time": {
                     "type": "string",
-                    "format": "date-time",
                     "description": "The time of the status."
                 }
             },

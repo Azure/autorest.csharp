@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
 
@@ -32,6 +33,11 @@ namespace MgmtCustomizations.Models
                 writer.WritePropertyName("size"u8);
                 SerializeSizeProperty(writer);
             }
+            if (Optional.IsDefined(DateOfBirth))
+            {
+                writer.WritePropertyName("dateOfBirth"u8);
+                SerializeDateOfBirthProperty(writer);
+            }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
             writer.WritePropertyName("dog"u8);
@@ -57,6 +63,7 @@ namespace MgmtCustomizations.Models
             PetKind kind = default;
             Optional<string> name = default;
             Optional<int> size = default;
+            Optional<DateTimeOffset> dateOfBirth = default;
             Optional<string> bark = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -83,6 +90,15 @@ namespace MgmtCustomizations.Models
                 if (property.NameEquals("size"u8))
                 {
                     DeserializeSizeProperty(property, ref size);
+                    continue;
+                }
+                if (property.NameEquals("dateOfBirth"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    dateOfBirth = property.Value.GetDateTimeOffset("O");
                     continue;
                 }
                 if (property.NameEquals("properties"u8))
@@ -115,7 +131,7 @@ namespace MgmtCustomizations.Models
                     continue;
                 }
             }
-            return new Dog(kind, name.Value, size, sleep.Value, bark.Value, jump.Value);
+            return new Dog(kind, name.Value, size, Optional.ToNullable(dateOfBirth), sleep.Value, bark.Value, jump.Value);
         }
     }
 }

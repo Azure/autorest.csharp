@@ -55,6 +55,7 @@ rename-mapping:
   LogAnalyticsOperationResult.content: -|any
   LogAnalyticsOperationResult.basePath: basePathUri|uri
   VirtualMachineScaleSetIPConfiguration.properties.ipAddresses: -|ip-address
+  InstanceViewStatus.time: -|date-time
 
 parameter-rename-mapping:
   Images_CreateOrUpdate:
