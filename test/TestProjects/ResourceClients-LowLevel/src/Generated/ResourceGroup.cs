@@ -41,15 +41,15 @@ namespace ResourceClients_LowLevel
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="keyCredential"> The key credential to copy. </param>
-        /// <param name="groupId"> Group identifier. </param>
         /// <param name="endpoint"> server parameter. </param>
-        internal ResourceGroup(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, AzureKeyCredential keyCredential, string groupId, Uri endpoint)
+        /// <param name="groupId"> Group identifier. </param>
+        internal ResourceGroup(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, AzureKeyCredential keyCredential, Uri endpoint, string groupId)
         {
             ClientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
             _keyCredential = keyCredential;
-            GroupId = groupId;
             _endpoint = endpoint;
+            GroupId = groupId;
         }
 
         /// <summary>
@@ -162,7 +162,7 @@ namespace ResourceClients_LowLevel
         {
             Argument.AssertNotNullOrEmpty(itemId, nameof(itemId));
 
-            return new Resource(ClientDiagnostics, _pipeline, _keyCredential, GroupId, itemId, _endpoint);
+            return new Resource(ClientDiagnostics, _pipeline, _keyCredential, _endpoint, GroupId, itemId);
         }
 
         internal HttpMessage CreateGetGroupRequest(RequestContext context)

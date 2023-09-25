@@ -5,10 +5,10 @@ using AutoRest.CSharp.Output.Models.Types;
 
 namespace AutoRest.CSharp.Output.Models.Serialization.Xml
 {
-    internal class XmlObjectArraySerialization : PropertySerialization
+    internal class XmlObjectArraySerialization : XmlPropertySerialization
     {
         public XmlObjectArraySerialization(ObjectTypeProperty property, XmlArraySerialization arraySerialization)
-            : base(property.Declaration.Name, property.Declaration.Name, property.Declaration.Type, property.ValueType, property.SchemaProperty?.Required ?? false, property.SchemaProperty?.ReadOnly ?? false)
+            : base(property.Declaration.Name, property)
         {
             ArraySerialization = arraySerialization;
         }

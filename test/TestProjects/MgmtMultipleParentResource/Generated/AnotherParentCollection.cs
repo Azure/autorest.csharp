@@ -330,6 +330,82 @@ namespace MgmtMultipleParentResource
             }
         }
 
+        /// <summary>
+        /// Tries to get details for this resource from the service.
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/anotherParents/{anotherName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>AnotherParents_Get</description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="anotherName"> The name of the virtual machine containing the run command. </param>
+        /// <param name="expand"> The expand expression to apply on the operation. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="anotherName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="anotherName"/> is null. </exception>
+        public virtual async Task<NullableResponse<AnotherParentResource>> GetIfExistsAsync(string anotherName, string expand = null, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNullOrEmpty(anotherName, nameof(anotherName));
+
+            using var scope = _anotherParentClientDiagnostics.CreateScope("AnotherParentCollection.GetIfExists");
+            scope.Start();
+            try
+            {
+                var response = await _anotherParentRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, anotherName, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
+                if (response.Value == null)
+                    return new NoValueResponse<AnotherParentResource>(response.GetRawResponse());
+                return Response.FromValue(new AnotherParentResource(Client, response.Value), response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Tries to get details for this resource from the service.
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/anotherParents/{anotherName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>AnotherParents_Get</description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="anotherName"> The name of the virtual machine containing the run command. </param>
+        /// <param name="expand"> The expand expression to apply on the operation. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="anotherName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="anotherName"/> is null. </exception>
+        public virtual NullableResponse<AnotherParentResource> GetIfExists(string anotherName, string expand = null, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNullOrEmpty(anotherName, nameof(anotherName));
+
+            using var scope = _anotherParentClientDiagnostics.CreateScope("AnotherParentCollection.GetIfExists");
+            scope.Start();
+            try
+            {
+                var response = _anotherParentRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, anotherName, expand, cancellationToken: cancellationToken);
+                if (response.Value == null)
+                    return new NoValueResponse<AnotherParentResource>(response.GetRawResponse());
+                return Response.FromValue(new AnotherParentResource(Client, response.Value), response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
         IEnumerator<AnotherParentResource> IEnumerable<AnotherParentResource>.GetEnumerator()
         {
             return GetAll().GetEnumerator();

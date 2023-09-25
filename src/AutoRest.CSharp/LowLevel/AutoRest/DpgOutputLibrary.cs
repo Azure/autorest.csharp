@@ -23,10 +23,24 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public TypeFactory TypeFactory { get; }
         public IEnumerable<EnumType> Enums => _enums.Values;
-        public IEnumerable<ModelTypeProvider> Models => _models.Values;
+        public IEnumerable<ModelTypeProvider> Models
+        {
+            get
+            {
+                // Skip the replaced model, e.g. the replaced ErrorResponse.
+                foreach (var (key, model) in _models)
+                {
+                    var type = TypeFactory.CreateType(key);
+                    if (type is { IsFrameworkType: false, Implementation: ModelTypeProvider implementation} && model == implementation)
+                    {
+                        yield return model;
+                    }
+                }
+            }
+        }
         public IReadOnlyList<LowLevelClient> RestClients { get; }
         public ClientOptionsTypeProvider ClientOptions { get; }
-        public IEnumerable<TypeProvider> AllModels => new List<TypeProvider>(_enums.Values).Concat(_models.Values);
+        public IEnumerable<TypeProvider> AllModels => new List<TypeProvider>(_enums.Values).Concat(Models);
 
         public DpgOutputLibrary(string libraryName, IReadOnlyDictionary<InputEnumType, EnumType> enums, IReadOnlyDictionary<InputModelType, ModelTypeProvider> models, IReadOnlyList<LowLevelClient> restClients, ClientOptionsTypeProvider clientOptions, bool isTspInput, SourceInputModel? sourceInputModel)
         {
@@ -39,6 +53,10 @@ namespace AutoRest.CSharp.Output.Models.Types
             RestClients = restClients;
             ClientOptions = clientOptions;
         }
+
+        private IEnumerable<string>? _accessOverriddenModels;
+        public IEnumerable<string> AccessOverriddenModels => _accessOverriddenModels ??= Enums.Where(e => e.IsAccessibilityOverridden).Select(e => e.Declaration.Name)
+            .Concat(Models.Where(m => m.IsAccessibilityOverridden).Select(m => m.Declaration.Name));
 
         private AspDotNetExtensionTypeProvider? _aspDotNetExtension;
         public AspDotNetExtensionTypeProvider AspDotNetExtension => _aspDotNetExtension ??= new AspDotNetExtensionTypeProvider(RestClients, Configuration.Namespace, _sourceInputModel);

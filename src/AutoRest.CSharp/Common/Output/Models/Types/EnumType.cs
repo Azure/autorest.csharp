@@ -38,6 +38,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             DefaultName = input.Name.ToCleanName();
             DefaultAccessibility = input.Accessibility ?? defaultAccessibility;
+            IsAccessibilityOverridden = input.Accessibility != null;
 
             var isExtensible = input.IsExtensible;
             if (ExistingType != null)
@@ -58,6 +59,8 @@ namespace AutoRest.CSharp.Output.Models.Types
             ValueType = typeFactory.CreateType(input.EnumValueType);
             IsStringValueType = ValueType.Equals(typeof(string));
             IsIntValueType = ValueType.Equals(typeof(int)) || ValueType.Equals(typeof(long));
+            IsFloatValueType = ValueType.Equals(typeof(float)) || ValueType.Equals(typeof(double));
+            IsNumericValueType = IsIntValueType || IsFloatValueType;
             SerializationMethodName = IsStringValueType && IsExtensible ? "ToString" : $"ToSerial{ValueType.Name.FirstCharToUpperCase()}";
 
             Description = input.Description;
@@ -65,14 +68,17 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public CSharpType ValueType { get; }
         public bool IsExtensible { get; }
-        public bool IsStringValueType { get; }
         public bool IsIntValueType { get; }
+        public bool IsFloatValueType { get; }
+        public bool IsStringValueType { get; }
+        public bool IsNumericValueType { get; }
         public string SerializationMethodName { get; }
 
         public string? Description { get; }
         protected override string DefaultName { get; }
         protected override string DefaultAccessibility { get; }
         protected override TypeKind TypeKind => IsExtensible ? TypeKind.Struct : TypeKind.Enum;
+        public bool IsAccessibilityOverridden { get; }
 
         public IList<EnumTypeValue> Values => _values ??= BuildValues();
 

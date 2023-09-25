@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
@@ -19,7 +20,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         private ObjectTypeConstructor? _serializationConstructor;
         private ObjectTypeConstructor? _initializationConstructor;
         private FormattableString? _description;
-        private IEnumerable<ModelMethodDefinition>? _methods;
+        private IEnumerable<Method>? _methods;
         private ObjectTypeDiscriminator? _discriminator;
 
         protected ObjectType(BuildContext context)
@@ -38,7 +39,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public CSharpType? Inherits => _inheritsType ??= CreateInheritedType();
         public ObjectTypeConstructor SerializationConstructor => _serializationConstructor ??= BuildSerializationConstructor();
-        public IEnumerable<ModelMethodDefinition> Methods => _methods ??= BuildMethods();
+        public IEnumerable<Method> Methods => _methods ??= BuildMethods();
         public ObjectTypeDiscriminator? Discriminator => _discriminator ??= BuildDiscriminator();
 
         public ObjectTypeConstructor InitializationConstructor => _initializationConstructor ??= BuildInitializationConstructor();
@@ -52,9 +53,9 @@ namespace AutoRest.CSharp.Output.Models.Types
         protected abstract FormattableString CreateDescription();
         public abstract bool IncludeConverter { get; }
 
-        protected virtual IEnumerable<ModelMethodDefinition> BuildMethods()
+        protected virtual IEnumerable<Method> BuildMethods()
         {
-            return Array.Empty<ModelMethodDefinition>();
+            return Array.Empty<Method>();
         }
 
         public IEnumerable<ObjectType> EnumerateHierarchy()

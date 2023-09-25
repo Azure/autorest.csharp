@@ -40,22 +40,22 @@ namespace SubClients_LowLevel
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="cachedParameter"/> or <paramref name="credential"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="cachedParameter"/> is an empty string, and was expected to be non-empty. </exception>
-        public RootClient(string cachedParameter, AzureKeyCredential credential) : this(cachedParameter, credential, new Uri("http://localhost:3000"), new RootClientOptions())
+        public RootClient(string cachedParameter, AzureKeyCredential credential) : this(new Uri("http://localhost:3000"), cachedParameter, credential, new RootClientOptions())
         {
         }
 
         /// <summary> Initializes a new instance of RootClient. </summary>
+        /// <param name="endpoint"> server parameter. </param>
         /// <param name="cachedParameter"> The String to use. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
-        /// <param name="endpoint"> server parameter. </param>
         /// <param name="options"> The options for configuring the client. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="cachedParameter"/>, <paramref name="credential"/> or <paramref name="endpoint"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/>, <paramref name="cachedParameter"/> or <paramref name="credential"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="cachedParameter"/> is an empty string, and was expected to be non-empty. </exception>
-        public RootClient(string cachedParameter, AzureKeyCredential credential, Uri endpoint, RootClientOptions options)
+        public RootClient(Uri endpoint, string cachedParameter, AzureKeyCredential credential, RootClientOptions options)
         {
+            Argument.AssertNotNull(endpoint, nameof(endpoint));
             Argument.AssertNotNullOrEmpty(cachedParameter, nameof(cachedParameter));
             Argument.AssertNotNull(credential, nameof(credential));
-            Argument.AssertNotNull(endpoint, nameof(endpoint));
             options ??= new RootClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);

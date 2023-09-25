@@ -624,9 +624,17 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\authentication\\union\\src\\Generated -n"
     },
+    "typespec-azure/client-generator-core/access": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\azure\\client-generator-core\\access\\src\\Generated -n"
+    },
     "typespec-azure/client-generator-core/internal": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\azure\\client-generator-core\\internal\\src\\Generated -n"
+    },
+    "typespec-azure/client-generator-core/usage": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\azure\\client-generator-core\\usage\\src\\Generated -n"
     },
     "typespec-azure/core/basic": {
       "commandName": "Project",
@@ -675,6 +683,10 @@
     "typespec-special-headers/client-request-id": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\special-headers\\client-request-id\\src\\Generated -n"
+    },
+    "typespec-special-headers/conditional-request": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\special-headers\\conditional-request\\src\\Generated -n"
     },
     "typespec-special-headers/repeatability": {
       "commandName": "Project",

@@ -38,19 +38,19 @@ namespace SingleTopLevelClientWithOperations_LowLevel
         /// <summary> Initializes a new instance of TopLevelClientWithOperationClient. </summary>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
-        public TopLevelClientWithOperationClient(AzureKeyCredential credential) : this(credential, new Uri("http://localhost:3000"), new TopLevelClientWithOperationClientOptions())
+        public TopLevelClientWithOperationClient(AzureKeyCredential credential) : this(new Uri("http://localhost:3000"), credential, new TopLevelClientWithOperationClientOptions())
         {
         }
 
         /// <summary> Initializes a new instance of TopLevelClientWithOperationClient. </summary>
-        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="endpoint"> server parameter. </param>
+        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="options"> The options for configuring the client. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> or <paramref name="endpoint"/> is null. </exception>
-        public TopLevelClientWithOperationClient(AzureKeyCredential credential, Uri endpoint, TopLevelClientWithOperationClientOptions options)
+        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
+        public TopLevelClientWithOperationClient(Uri endpoint, AzureKeyCredential credential, TopLevelClientWithOperationClientOptions options)
         {
-            Argument.AssertNotNull(credential, nameof(credential));
             Argument.AssertNotNull(endpoint, nameof(endpoint));
+            Argument.AssertNotNull(credential, nameof(credential));
             options ??= new TopLevelClientWithOperationClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
@@ -191,7 +191,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel
         {
             Argument.AssertNotNull(clientParameter, nameof(clientParameter));
 
-            return new Client4(ClientDiagnostics, _pipeline, _keyCredential, clientParameter, _endpoint);
+            return new Client4(ClientDiagnostics, _pipeline, _keyCredential, _endpoint, clientParameter);
         }
 
         internal HttpMessage CreateOperationRequest(RequestContext context)

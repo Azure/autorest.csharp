@@ -3,11 +3,6 @@
 
 import { isFixed } from "@azure-tools/typespec-azure-core";
 import {
-    SdkContext,
-    getClientType,
-    isInternal
-} from "@azure-tools/typespec-client-generator-core";
-import {
     EncodeData,
     Enum,
     EnumMember,
@@ -33,6 +28,8 @@ import {
     getVisibility,
     isArrayModelType,
     isRecordModelType,
+    isGlobalNamespace,
+    navigateTypesInNamespace,
     isVoidType,
     resolveUsages
 } from "@typespec/compiler";
@@ -65,12 +62,20 @@ import {
     InputUnionType,
     InputUnknownType,
     isInputEnumType,
-    isInputLiteralType
+    isInputLiteralType,
+    isInputModelType
 } from "../type/inputType.js";
 import { InputTypeKind } from "../type/inputTypeKind.js";
 import { LiteralTypeContext } from "../type/literalTypeContext.js";
 import { Usage } from "../type/usage.js";
 import { logger } from "./logger.js";
+import {
+    SdkContext,
+    getAccess,
+    getClientType,
+    getUsageOverride,
+    isInternal
+} from "@azure-tools/typespec-client-generator-core";
 import { capitalize, getModelName } from "./utils.js";
 /**
  * Map calType to csharp InputTypeKind
@@ -326,6 +331,12 @@ export function getInputType(
         }
     } else if (type.kind === "Union") {
         return getInputTypeForUnion(type, literalTypeContext);
+    } else if (type.kind === "Tuple") {
+        return {
+            Name: "Intrinsic",
+            Kind: "unknown",
+            IsNullable: false
+        } as InputUnknownType;
     } else {
         throw new Error(`Unsupported type ${type.kind}`);
     }
@@ -490,12 +501,13 @@ export function getInputType(
                 EnumValueType: enumValueType, //EnumValueType and  AllowedValues should be the first field after id and name, so that it can be corrected serialized.
                 AllowedValues: allowValues,
                 Namespace: getFullNamespaceString(e.namespace),
-                Accessibility: undefined, //TODO: need to add accessibility
+                Accessibility: getAccess(context, e),
                 Deprecated: getDeprecated(program, e),
                 Description: getDoc(program, e) ?? "",
                 IsExtensible: !isFixed(program, e),
                 IsNullable: false
             } as InputEnumType;
+            setUsage(context, e, enumType);
             if (addToCollection) enums.set(e.name, enumType);
         }
         return enumType;
@@ -552,7 +564,9 @@ export function getInputType(
             model = {
                 Name: name,
                 Namespace: getFullNamespaceString(m.namespace),
-                Accessibility: isInternal(context, m) ? "internal" : undefined,
+                Accessibility: isInternal(context, m)
+                    ? "internal"
+                    : getAccess(context, m),
                 Deprecated: getDeprecated(program, m),
                 Description: getDoc(program, m),
                 IsNullable: false,
@@ -562,6 +576,14 @@ export function getInputType(
                 Usage: Usage.None,
                 Properties: properties // DerivedModels should be the last assigned to model, if no derived models, properties should be the last
             } as InputModelType;
+            setUsage(context, m, model);
+            models.set(name, model);
+
+            // open generic type model which has un-instanced template parameter will not be generated. e.g.
+            // model GenericModel<T> { value: T }
+            if (m.isFinished) {
+                models.set(name, model);
+            }
 
             // open generic type model which has un-instanced template parameter will not be generated. e.g.
             // model GenericModel<T> { value: T }
@@ -659,6 +681,13 @@ export function getInputType(
                     enums,
                     literalTypeContext
                 );
+                if (
+                    model.Namespace === "Azure.Core.Foundations" &&
+                    model.Name === "Error" &&
+                    isInputModelType(inputType)
+                ) {
+                    inputType.Accessibility = undefined;
+                }
                 const inputProp = {
                     Name: name,
                     SerializedName: serializedName,
@@ -817,6 +846,21 @@ export function getInputType(
                   IsNullable: false
               } as InputUnionType)
             : ItemTypes[0];
+    }
+}
+
+function setUsage(
+    context: SdkContext,
+    source: Model | Enum,
+    target: InputModelType | InputEnumType
+) {
+    const sourceUsage = getUsageOverride(context, source);
+    if (sourceUsage === UsageFlags.Input) {
+        target.Usage = Usage.Input;
+    } else if (sourceUsage === UsageFlags.Output) {
+        target.Usage = Usage.Output;
+    } else if (sourceUsage === (UsageFlags.Input | UsageFlags.Output)) {
+        target.Usage = Usage.RoundTrip;
     }
 }
 
@@ -1047,4 +1091,30 @@ export function getFormattedType(program: Program, type: Type): FormattedType {
         format: format,
         encode: encodeData
     } as FormattedType;
+}
+
+// This is a temporary solution. After we uptake getAllModels we should delete this.
+export function navigateModels(
+    context: SdkContext,
+    namespace: Namespace,
+    models: Map<string, InputModelType>,
+    enums: Map<string, InputEnumType>
+) {
+    const computeModel = (x: Type) =>
+        getInputType(
+            context,
+            getFormattedType(context.program, x),
+            models,
+            enums
+        ) as any;
+    const skipSubNamespaces = isGlobalNamespace(context.program, namespace);
+    navigateTypesInNamespace(
+        namespace,
+        {
+            model: (x) =>
+                x.name !== "" && x.kind === "Model" && computeModel(x),
+            enum: computeModel
+        },
+        { skipSubNamespaces }
+    );
 }

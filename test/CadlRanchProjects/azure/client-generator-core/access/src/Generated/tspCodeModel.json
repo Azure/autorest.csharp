@@ -1,0 +1,1180 @@
+{
+ "$id": "1",
+ "Name": "_Specs_.Azure.ClientGenerator.Core.Access",
+ "Description": "Test for internal decorator.",
+ "ApiVersions": [
+  "1.0.0"
+ ],
+ "Enums": [],
+ "Models": [
+  {
+   "$id": "2",
+   "Name": "NoDecoratorModelInPublic",
+   "Namespace": "_Specs_.Azure.ClientGenerator.Core.Access.PublicOperation",
+   "Accessibility": "public",
+   "Description": "Used in a public operation, should be generated and exported.",
+   "IsNullable": false,
+   "Usage": "Output",
+   "Properties": [
+    {
+     "$id": "3",
+     "Name": "name",
+     "SerializedName": "name",
+     "Description": "",
+     "Type": {
+      "$id": "4",
+      "Name": "string",
+      "Kind": "String",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    }
+   ]
+  },
+  {
+   "$id": "5",
+   "Name": "PublicDecoratorModelInPublic",
+   "Namespace": "_Specs_.Azure.ClientGenerator.Core.Access.PublicOperation",
+   "Accessibility": "public",
+   "Description": "Used in a public operation, should be generated and exported.",
+   "IsNullable": false,
+   "Usage": "Output",
+   "Properties": [
+    {
+     "$id": "6",
+     "Name": "name",
+     "SerializedName": "name",
+     "Description": "",
+     "Type": {
+      "$id": "7",
+      "Name": "string",
+      "Kind": "String",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    }
+   ]
+  },
+  {
+   "$id": "8",
+   "Name": "NoDecoratorModelInInternal",
+   "Namespace": "_Specs_.Azure.ClientGenerator.Core.Access.InternalOperation",
+   "Accessibility": "internal",
+   "Description": "Used in an internal operation, should be generated but not exported.",
+   "IsNullable": false,
+   "Usage": "Output",
+   "Properties": [
+    {
+     "$id": "9",
+     "Name": "name",
+     "SerializedName": "name",
+     "Description": "",
+     "Type": {
+      "$id": "10",
+      "Name": "string",
+      "Kind": "String",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    }
+   ]
+  },
+  {
+   "$id": "11",
+   "Name": "InternalDecoratorModelInInternal",
+   "Namespace": "_Specs_.Azure.ClientGenerator.Core.Access.InternalOperation",
+   "Accessibility": "internal",
+   "Description": "Used in an internal operation, should be generated but not exported.",
+   "IsNullable": false,
+   "Usage": "Output",
+   "Properties": [
+    {
+     "$id": "12",
+     "Name": "name",
+     "SerializedName": "name",
+     "Description": "",
+     "Type": {
+      "$id": "13",
+      "Name": "string",
+      "Kind": "String",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    }
+   ]
+  },
+  {
+   "$id": "14",
+   "Name": "PublicDecoratorModelInInternal",
+   "Namespace": "_Specs_.Azure.ClientGenerator.Core.Access.InternalOperation",
+   "Accessibility": "public",
+   "Description": "Used in an internal operation but with public decorator, should be generated and exported.",
+   "IsNullable": false,
+   "Usage": "Output",
+   "Properties": [
+    {
+     "$id": "15",
+     "Name": "name",
+     "SerializedName": "name",
+     "Description": "",
+     "Type": {
+      "$id": "16",
+      "Name": "string",
+      "Kind": "String",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    }
+   ]
+  },
+  {
+   "$id": "17",
+   "Name": "SharedModel",
+   "Namespace": "_Specs_.Azure.ClientGenerator.Core.Access.SharedModelInOperation",
+   "Accessibility": "public",
+   "Description": "Used by both public and internal operation. It should be generated and exported.",
+   "IsNullable": false,
+   "Usage": "Output",
+   "Properties": [
+    {
+     "$id": "18",
+     "Name": "name",
+     "SerializedName": "name",
+     "Description": "",
+     "Type": {
+      "$id": "19",
+      "Name": "string",
+      "Kind": "String",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    }
+   ]
+  },
+  {
+   "$id": "20",
+   "Name": "BaseModel",
+   "Namespace": "_Specs_.Azure.ClientGenerator.Core.Access.RelativeModelInOperation",
+   "Accessibility": "internal",
+   "Description": "Used in internal operations, should be generated but not exported.",
+   "IsNullable": false,
+   "Usage": "None",
+   "Properties": [
+    {
+     "$id": "21",
+     "Name": "name",
+     "SerializedName": "name",
+     "Description": "",
+     "Type": {
+      "$id": "22",
+      "Name": "string",
+      "Kind": "String",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    }
+   ],
+   "DerivedModels": [
+    {
+     "$id": "23",
+     "Name": "OuterModel",
+     "Namespace": "_Specs_.Azure.ClientGenerator.Core.Access.RelativeModelInOperation",
+     "Accessibility": "internal",
+     "Description": "Used in internal operations, should be generated but not exported.",
+     "IsNullable": false,
+     "BaseModel": {
+      "$ref": "20"
+     },
+     "Usage": "None",
+     "Properties": [
+      {
+       "$id": "24",
+       "Name": "inner",
+       "SerializedName": "inner",
+       "Description": "",
+       "Type": {
+        "$id": "25",
+        "Name": "InnerModel",
+        "Namespace": "_Specs_.Azure.ClientGenerator.Core.Access.RelativeModelInOperation",
+        "Accessibility": "internal",
+        "Description": "Used in internal operations, should be generated but not exported.",
+        "IsNullable": false,
+        "Usage": "Output",
+        "Properties": [
+         {
+          "$id": "26",
+          "Name": "name",
+          "SerializedName": "name",
+          "Description": "",
+          "Type": {
+           "$id": "27",
+           "Name": "string",
+           "Kind": "String",
+           "IsNullable": false
+          },
+          "IsRequired": true,
+          "IsReadOnly": false
+         }
+        ]
+       },
+       "IsRequired": true,
+       "IsReadOnly": false
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "$id": "28",
+   "Name": "OuterModel",
+   "Namespace": "_Specs_.Azure.ClientGenerator.Core.Access.RelativeModelInOperation",
+   "Accessibility": "internal",
+   "Description": "Used in internal operations, should be generated but not exported.",
+   "IsNullable": false,
+   "BaseModel": {
+    "$ref": "20"
+   },
+   "Usage": "Output",
+   "Properties": [
+    {
+     "$id": "29",
+     "Name": "inner",
+     "SerializedName": "inner",
+     "Description": "",
+     "Type": {
+      "$ref": "25"
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    }
+   ]
+  },
+  {
+   "$ref": "25"
+  },
+  {
+   "$id": "30",
+   "Name": "AbstractModel",
+   "Namespace": "_Specs_.Azure.ClientGenerator.Core.Access.RelativeModelInOperation",
+   "Accessibility": "internal",
+   "Description": "Used in internal operations, should be generated but not exported.",
+   "IsNullable": false,
+   "DiscriminatorPropertyName": "kind",
+   "Usage": "Output",
+   "Properties": [
+    {
+     "$id": "31",
+     "Name": "kind",
+     "SerializedName": "kind",
+     "Description": "Discriminator",
+     "IsRequired": true,
+     "IsReadOnly": false,
+     "IsNullable": false,
+     "Type": {
+      "$id": "32",
+      "Name": "string",
+      "Kind": "String",
+      "IsNullable": false
+     },
+     "IsDiscriminator": true
+    },
+    {
+     "$id": "33",
+     "Name": "name",
+     "SerializedName": "name",
+     "Description": "",
+     "Type": {
+      "$id": "34",
+      "Name": "string",
+      "Kind": "String",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    }
+   ],
+   "DerivedModels": [
+    {
+     "$id": "35",
+     "Name": "RealModel",
+     "Namespace": "_Specs_.Azure.ClientGenerator.Core.Access.RelativeModelInOperation",
+     "Accessibility": "internal",
+     "Description": "Used in internal operations, should be generated but not exported.",
+     "IsNullable": false,
+     "DiscriminatorValue": "real",
+     "BaseModel": {
+      "$ref": "30"
+     },
+     "Usage": "Output",
+     "Properties": []
+    }
+   ]
+  },
+  {
+   "$ref": "35"
+  }
+ ],
+ "Clients": [
+  {
+   "$id": "36",
+   "Name": "AccessClient",
+   "Description": "",
+   "Operations": [],
+   "Protocol": {
+    "$id": "37"
+   },
+   "Creatable": true
+  },
+  {
+   "$id": "38",
+   "Name": "PublicOperation",
+   "Description": "",
+   "Operations": [
+    {
+     "$id": "39",
+     "Name": "noDecoratorInPublic",
+     "ResourceName": "PublicOperation",
+     "Accessibility": "public",
+     "Parameters": [
+      {
+       "$id": "40",
+       "Name": "host",
+       "NameInRequest": "host",
+       "Description": "TestServer endpoint",
+       "Type": {
+        "$id": "41",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Uri",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": true,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Client",
+       "DefaultValue": {
+        "$id": "42",
+        "Type": {
+         "$id": "43",
+         "Name": "String",
+         "Kind": "String",
+         "IsNullable": false
+        },
+        "Value": "http://localhost:3000"
+       }
+      },
+      {
+       "$id": "44",
+       "Name": "name",
+       "NameInRequest": "name",
+       "Type": {
+        "$id": "45",
+        "Name": "string",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Query",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "46",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "47",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "48",
+        "Type": {
+         "$ref": "47"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$id": "49",
+       "Name": "apiVersion",
+       "NameInRequest": "api-version",
+       "Description": "",
+       "Type": {
+        "$id": "50",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Query",
+       "IsRequired": true,
+       "IsApiVersion": true,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "IsResourceParameter": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Client",
+       "DefaultValue": {
+        "$id": "51",
+        "Type": {
+         "$id": "52",
+         "Name": "String",
+         "Kind": "String",
+         "IsNullable": false
+        },
+        "Value": "1.0.0"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "53",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "2"
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "None",
+     "Uri": "{host}",
+     "Path": "/azure/client-generator-core/access/publicOperation/noDecoratorInPublic",
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "54",
+     "Name": "publicDecoratorInPublic",
+     "ResourceName": "PublicOperation",
+     "Accessibility": "public",
+     "Parameters": [
+      {
+       "$ref": "40"
+      },
+      {
+       "$id": "55",
+       "Name": "name",
+       "NameInRequest": "name",
+       "Type": {
+        "$id": "56",
+        "Name": "string",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Query",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "57",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "58",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "59",
+        "Type": {
+         "$ref": "58"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$ref": "49"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "60",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "5"
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "None",
+     "Uri": "{host}",
+     "Path": "/azure/client-generator-core/access/publicOperation/publicDecoratorInPublic",
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    }
+   ],
+   "Protocol": {
+    "$id": "61"
+   },
+   "Creatable": false,
+   "Parent": "AccessClient"
+  },
+  {
+   "$id": "62",
+   "Name": "InternalOperation",
+   "Description": "",
+   "Operations": [
+    {
+     "$id": "63",
+     "Name": "noDecoratorInInternal",
+     "ResourceName": "InternalOperation",
+     "Accessibility": "internal",
+     "Parameters": [
+      {
+       "$ref": "40"
+      },
+      {
+       "$id": "64",
+       "Name": "name",
+       "NameInRequest": "name",
+       "Type": {
+        "$id": "65",
+        "Name": "string",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Query",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "66",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "67",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "68",
+        "Type": {
+         "$ref": "67"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$ref": "49"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "69",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "8"
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "None",
+     "Uri": "{host}",
+     "Path": "/azure/client-generator-core/access/internalOperation/noDecoratorInInternal",
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "70",
+     "Name": "internalDecoratorInInternal",
+     "ResourceName": "InternalOperation",
+     "Accessibility": "internal",
+     "Parameters": [
+      {
+       "$ref": "40"
+      },
+      {
+       "$id": "71",
+       "Name": "name",
+       "NameInRequest": "name",
+       "Type": {
+        "$id": "72",
+        "Name": "string",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Query",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "73",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "74",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "75",
+        "Type": {
+         "$ref": "74"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$ref": "49"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "76",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "11"
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "None",
+     "Uri": "{host}",
+     "Path": "/azure/client-generator-core/access/internalOperation/internalDecoratorInInternal",
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "77",
+     "Name": "publicDecoratorInInternal",
+     "ResourceName": "InternalOperation",
+     "Accessibility": "internal",
+     "Parameters": [
+      {
+       "$ref": "40"
+      },
+      {
+       "$id": "78",
+       "Name": "name",
+       "NameInRequest": "name",
+       "Type": {
+        "$id": "79",
+        "Name": "string",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Query",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "80",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "81",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "82",
+        "Type": {
+         "$ref": "81"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$ref": "49"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "83",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "14"
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "None",
+     "Uri": "{host}",
+     "Path": "/azure/client-generator-core/access/internalOperation/publicDecoratorInInternal",
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    }
+   ],
+   "Protocol": {
+    "$id": "84"
+   },
+   "Creatable": false,
+   "Parent": "AccessClient"
+  },
+  {
+   "$id": "85",
+   "Name": "SharedModelInOperation",
+   "Description": "",
+   "Operations": [
+    {
+     "$id": "86",
+     "Name": "public",
+     "ResourceName": "SharedModelInOperation",
+     "Accessibility": "public",
+     "Parameters": [
+      {
+       "$ref": "40"
+      },
+      {
+       "$id": "87",
+       "Name": "name",
+       "NameInRequest": "name",
+       "Type": {
+        "$id": "88",
+        "Name": "string",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Query",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "89",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "90",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "91",
+        "Type": {
+         "$ref": "90"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$ref": "49"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "92",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "17"
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "None",
+     "Uri": "{host}",
+     "Path": "/azure/client-generator-core/access/sharedModelInOperation/public",
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "93",
+     "Name": "internal",
+     "ResourceName": "SharedModelInOperation",
+     "Accessibility": "internal",
+     "Parameters": [
+      {
+       "$ref": "40"
+      },
+      {
+       "$id": "94",
+       "Name": "name",
+       "NameInRequest": "name",
+       "Type": {
+        "$id": "95",
+        "Name": "string",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Query",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "96",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "97",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "98",
+        "Type": {
+         "$ref": "97"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$ref": "49"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "99",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "17"
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "None",
+     "Uri": "{host}",
+     "Path": "/azure/client-generator-core/access/sharedModelInOperation/internal",
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    }
+   ],
+   "Protocol": {
+    "$id": "100"
+   },
+   "Creatable": false,
+   "Parent": "AccessClient"
+  },
+  {
+   "$id": "101",
+   "Name": "RelativeModelInOperation",
+   "Description": "",
+   "Operations": [
+    {
+     "$id": "102",
+     "Name": "operation",
+     "ResourceName": "RelativeModelInOperation",
+     "Description": "Expected query parameter: name=<any string>\nExpected response body:\n```json\n{\n  \"name\": <any string>,\n  \"inner\":\n  {\n    \"name\": <any string>\n  }\n}\n```",
+     "Accessibility": "internal",
+     "Parameters": [
+      {
+       "$ref": "40"
+      },
+      {
+       "$id": "103",
+       "Name": "name",
+       "NameInRequest": "name",
+       "Type": {
+        "$id": "104",
+        "Name": "string",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Query",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "105",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "106",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "107",
+        "Type": {
+         "$ref": "106"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$ref": "49"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "108",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "28"
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "None",
+     "Uri": "{host}",
+     "Path": "/azure/client-generator-core/access/relativeModelInOperation/operation",
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "109",
+     "Name": "discriminator",
+     "ResourceName": "RelativeModelInOperation",
+     "Description": "Expected query parameter: kind=<any string>\nExpected response body:\n```json\n{\n  \"name\": <any string>,\n  \"kind\": \"real\"\n}\n```",
+     "Accessibility": "internal",
+     "Parameters": [
+      {
+       "$ref": "40"
+      },
+      {
+       "$id": "110",
+       "Name": "kind",
+       "NameInRequest": "kind",
+       "Type": {
+        "$id": "111",
+        "Name": "string",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Query",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "112",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "113",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "114",
+        "Type": {
+         "$ref": "113"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$ref": "49"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "115",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "30"
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "None",
+     "Uri": "{host}",
+     "Path": "/azure/client-generator-core/access/relativeModelInOperation/discriminator",
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    }
+   ],
+   "Protocol": {
+    "$id": "116"
+   },
+   "Creatable": false,
+   "Parent": "AccessClient"
+  }
+ ]
+}
