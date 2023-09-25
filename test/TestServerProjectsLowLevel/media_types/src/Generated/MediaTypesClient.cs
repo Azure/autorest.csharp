@@ -36,19 +36,19 @@ namespace media_types_LowLevel
         /// <summary> Initializes a new instance of MediaTypesClient. </summary>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
-        public MediaTypesClient(AzureKeyCredential credential) : this(credential, new Uri("http://localhost:3000"), new MediaTypesClientOptions())
+        public MediaTypesClient(AzureKeyCredential credential) : this(new Uri("http://localhost:3000"), credential, new MediaTypesClientOptions())
         {
         }
 
         /// <summary> Initializes a new instance of MediaTypesClient. </summary>
-        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="endpoint"> server parameter. </param>
+        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="options"> The options for configuring the client. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> or <paramref name="endpoint"/> is null. </exception>
-        public MediaTypesClient(AzureKeyCredential credential, Uri endpoint, MediaTypesClientOptions options)
+        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
+        public MediaTypesClient(Uri endpoint, AzureKeyCredential credential, MediaTypesClientOptions options)
         {
-            Argument.AssertNotNull(credential, nameof(credential));
             Argument.AssertNotNull(endpoint, nameof(endpoint));
+            Argument.AssertNotNull(credential, nameof(credential));
             options ??= new MediaTypesClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);

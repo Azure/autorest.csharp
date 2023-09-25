@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System;
+
 namespace MgmtCustomizations.Models
 {
     /// <summary> The UnknownPet. </summary>
@@ -17,7 +19,8 @@ namespace MgmtCustomizations.Models
         /// The size of the pet. This property here is mocking the following scenario:
         /// Despite in the swagger it has a type of string, in the real payload of this request, the service is actually sending using a number, therefore the type in this swagger here is wrong and we have to fix it using customization code.
         /// </param>
-        internal UnknownPet(PetKind kind, string name, int size) : base(kind, name, size)
+        /// <param name="dateOfBirth"> Pet date of birth. </param>
+        internal UnknownPet(PetKind kind, string name, int size, DateTimeOffset? dateOfBirth) : base(kind, name, size, dateOfBirth)
         {
             Kind = kind;
         }

@@ -5,7 +5,7 @@ using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models;
-using AutoRest.CSharp.Output.Models.Serialization;
+using AutoRest.CSharp.Output.Models.Serialization.Json;
 using Azure.Core;
 using Azure.ResourceManager;
 using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
@@ -22,7 +22,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             Resource = resource;
             ArmClientField = new FieldDeclaration(FieldModifiers.Private | FieldModifiers.ReadOnly, typeof(ArmClient), "_client");
             ArmClientCtor = new ConstructorSignature(TypeName, null, null, Internal, new[] { MgmtTypeProvider.ArmClientParameter });
-            ResponseSerialization = new SerializationBuilder().Build(KnownMediaType.Json, schema, resource?.ResourceData.Type ?? returnType);
+            ResponseSerialization = SerializationBuilder.BuildSerialization(schema, resource?.ResourceData.Type ?? returnType, false);
         }
 
         public bool IsReturningResource => !ReturnType.IsFrameworkType && ReturnType.Implementation is Resource;
@@ -33,6 +33,6 @@ namespace AutoRest.CSharp.Mgmt.Output
         public FieldDeclaration ArmClientField { get; }
         public ConstructorSignature ArmClientCtor { get; }
         public string TypeName { get; }
-        public ObjectSerialization ResponseSerialization { get; }
+        public JsonSerialization ResponseSerialization { get; }
     }
 }

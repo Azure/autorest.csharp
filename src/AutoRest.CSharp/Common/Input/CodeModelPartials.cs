@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using AutoRest.CSharp.Output.Models.Responses;
 using AutoRest.CSharp.Utilities;
 using Azure.Core;
 using YamlDotNet.Serialization;
@@ -16,6 +15,9 @@ using YamlDotNet.Serialization;
 // ReSharper disable once CheckNamespace
 namespace AutoRest.CSharp.Input
 {
+    [DebuggerDisplay("Languages(Name: {Default.Name})")]
+    internal partial class Languages { }
+
     internal partial class Operation
     {
         // For some reason, booleans in dictionaries are deserialized as string instead of bool.

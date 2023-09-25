@@ -52,7 +52,7 @@ namespace AutoRest.CSharp.Utilities
             {
                 if (symbol.ConstructedFrom.SpecialType != SpecialType.System_Nullable_T)
                     return false;
-                return IsSameType((INamedTypeSymbol)symbol.TypeArguments.Single(), type.GetNonNullable());
+                return IsSameType((INamedTypeSymbol)symbol.TypeArguments.Single(), type.WithNullable(false));
             }
 
             if (symbol.ContainingNamespace.ToString() != type.Namespace || symbol.Name != type.Name || symbol.TypeArguments.Length != type.Arguments.Length)
