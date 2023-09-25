@@ -7,13 +7,13 @@
 
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
+using body_complex_LowLevel;
 
 namespace body_complex_LowLevel.Samples
 {
@@ -23,10 +23,23 @@ namespace body_complex_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetValid()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new InheritanceClient(credential);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            InheritanceClient client = new InheritanceClient(credential);
 
-            Response response = client.GetValid(new RequestContext());
+            Response response = client.GetValid(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetValid_Async()
+        {
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            InheritanceClient client = new InheritanceClient(credential);
+
+            Response response = await client.GetValidAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -36,10 +49,10 @@ namespace body_complex_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetValid_AllParameters()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new InheritanceClient(credential);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            InheritanceClient client = new InheritanceClient(credential);
 
-            Response response = client.GetValid(new RequestContext());
+            Response response = client.GetValid(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("breed").ToString());
@@ -53,25 +66,12 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetValid_Async()
-        {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new InheritanceClient(credential);
-
-            Response response = await client.GetValidAsync(new RequestContext());
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
         public async Task Example_GetValid_AllParameters_Async()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new InheritanceClient(credential);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            InheritanceClient client = new InheritanceClient(credential);
 
-            Response response = await client.GetValidAsync(new RequestContext());
+            Response response = await client.GetValidAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("breed").ToString());
@@ -87,38 +87,11 @@ namespace body_complex_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_PutValid()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new InheritanceClient(credential);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            InheritanceClient client = new InheritanceClient(credential);
 
-            var data = new { };
-
-            Response response = client.PutValid(RequestContent.Create(data));
-            Console.WriteLine(response.Status);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_PutValid_AllParameters()
-        {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new InheritanceClient(credential);
-
-            var data = new
-            {
-                breed = "<breed>",
-                color = "<color>",
-                hates = new[] {
-        new {
-            food = "<food>",
-            id = 1234,
-            name = "<name>",
-        }
-    },
-                id = 1234,
-                name = "<name>",
-            };
-
-            Response response = client.PutValid(RequestContent.Create(data));
+            RequestContent content = RequestContent.Create(new object());
+            Response response = client.PutValid(content);
             Console.WriteLine(response.Status);
         }
 
@@ -126,12 +99,38 @@ namespace body_complex_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_PutValid_Async()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new InheritanceClient(credential);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            InheritanceClient client = new InheritanceClient(credential);
 
-            var data = new { };
+            RequestContent content = RequestContent.Create(new object());
+            Response response = await client.PutValidAsync(content);
+            Console.WriteLine(response.Status);
+        }
 
-            Response response = await client.PutValidAsync(RequestContent.Create(data));
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_PutValid_AllParameters()
+        {
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            InheritanceClient client = new InheritanceClient(credential);
+
+            RequestContent content = RequestContent.Create(new
+            {
+                breed = "<breed>",
+                color = "<color>",
+                hates = new List<object>()
+{
+new
+{
+food = "<food>",
+id = 1234,
+name = "<name>",
+}
+},
+                id = 1234,
+                name = "<name>",
+            });
+            Response response = client.PutValid(content);
             Console.WriteLine(response.Status);
         }
 
@@ -139,25 +138,26 @@ namespace body_complex_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_PutValid_AllParameters_Async()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new InheritanceClient(credential);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            InheritanceClient client = new InheritanceClient(credential);
 
-            var data = new
+            RequestContent content = RequestContent.Create(new
             {
                 breed = "<breed>",
                 color = "<color>",
-                hates = new[] {
-        new {
-            food = "<food>",
-            id = 1234,
-            name = "<name>",
-        }
-    },
+                hates = new List<object>()
+{
+new
+{
+food = "<food>",
+id = 1234,
+name = "<name>",
+}
+},
                 id = 1234,
                 name = "<name>",
-            };
-
-            Response response = await client.PutValidAsync(RequestContent.Create(data));
+            });
+            Response response = await client.PutValidAsync(content);
             Console.WriteLine(response.Status);
         }
     }

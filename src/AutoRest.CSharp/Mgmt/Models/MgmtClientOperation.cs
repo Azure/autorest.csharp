@@ -6,6 +6,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models;
@@ -88,20 +89,20 @@ namespace AutoRest.CSharp.Mgmt.Models
         public string Name => _operations.First().Name;
 
         // TODO -- we need a better way to get the description of this
-        private string? _description;
-        public string Description => _description ??= BuildDescription();
+        private FormattableString? _description;
+        public FormattableString Description => _description ??= BuildDescription();
 
-        private string BuildDescription()
+        private FormattableString BuildDescription()
         {
-            var pathInformation = string.Join('\n', _operations.Select(operation =>
-                $@"<item>
+            var pathInformation = _operations.Select(operation =>
+                (FormattableString)$@"<item>
 <term>Request Path</term>
 <description>{operation.Operation.GetHttpPath()}</description>
 </item>
 <item>
 <term>Operation Id</term>
 <description>{operation.OperationId}</description>
-</item>"));
+</item>").ToArray().Join(Environment.NewLine);
             pathInformation = $@"<list type=""bullet"">
 {pathInformation}
 </list>";

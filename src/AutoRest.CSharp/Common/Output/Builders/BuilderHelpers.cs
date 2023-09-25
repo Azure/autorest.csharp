@@ -89,6 +89,11 @@ namespace AutoRest.CSharp.Output.Builders
                 _ => SerializationFormat.Duration_ISO8601
             },
 
+            _ when schema.Type == AllSchemaTypes.Duration => SerializationFormat.Duration_ISO8601,
+            _ when schema.Type == AllSchemaTypes.DateTime => SerializationFormat.DateTime_ISO8601,
+            _ when schema.Type == AllSchemaTypes.Date => SerializationFormat.DateTime_ISO8601,
+            _ when schema.Type == AllSchemaTypes.Time => SerializationFormat.DateTime_ISO8601,
+
             _ => schema.Extensions?.Format switch
             {
                 XMsFormat.DateTime => SerializationFormat.DateTime_ISO8601,
@@ -106,7 +111,7 @@ namespace AutoRest.CSharp.Output.Builders
         private const string EscapedQuote = "&quot;";
         public static string EscapeXmlDocDescription(string s)
         {
-            if (String.IsNullOrEmpty(s))
+            if (string.IsNullOrEmpty(s))
                 return s;
 
             var span = s.AsSpan();

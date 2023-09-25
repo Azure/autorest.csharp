@@ -340,7 +340,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             if (ObjectSchema.DiscriminatorValue != null)
             {
-                value = BuilderHelpers.ParseConstant(ObjectSchema.DiscriminatorValue, property.Declaration.Type.GetNonNullable());
+                value = BuilderHelpers.ParseConstant(ObjectSchema.DiscriminatorValue, property.Declaration.Type.WithNullable(false));
             }
 
             return new ObjectTypeDiscriminator(
@@ -624,9 +624,9 @@ namespace AutoRest.CSharp.Output.Models.Types
             return objectProperty != null;
         }
 
-        protected override string CreateDescription()
+        protected override FormattableString CreateDescription()
         {
-            return ObjectSchema.CreateDescription();
+            return $"{ObjectSchema.CreateDescription()}";
         }
 
         protected override bool EnsureHasJsonSerialization()

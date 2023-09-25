@@ -13,7 +13,6 @@ using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
-using AutoRest.CSharp.Utilities;
 using Azure.Core;
 using Azure.ResourceManager;
 using static AutoRest.CSharp.Mgmt.Decorator.ParameterMappingBuilder;
@@ -32,7 +31,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         private static readonly Parameter TagKeyParameter = new Parameter(
             "key",
-            "The key for the tag.",
+            $"The key for the tag.",
             typeof(string),
             null,
             ValidationType.AssertNotNull,
@@ -40,7 +39,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         private static readonly Parameter TagValueParameter = new Parameter(
             "value",
-            "The value for the tag.",
+            $"The value for the tag.",
             typeof(string),
             null,
             ValidationType.AssertNotNull,
@@ -48,7 +47,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         private static readonly Parameter TagSetParameter = new Parameter(
             "tags",
-            "The set of tags to use as replacement.",
+            $"The set of tags to use as replacement.",
             typeof(IDictionary<string, string>),
             null,
             ValidationType.AssertNotNull,

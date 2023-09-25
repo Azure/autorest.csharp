@@ -2,106 +2,172 @@
 <doc>
   <members>
     <member name="GetModelValueAsync(CancellationToken)">
-<example>
+      <example>
 This sample shows how to call GetModelValueAsync.
 <code><![CDATA[
-var client = new SpecialWordsClient().GetModelClient("1.0.0");
+Model client = new SpecialWordsClient().GetModelClient(apiVersion: "1.0.0");
 
-var result = await client.GetModelValueAsync();
+Response<BaseModel> response = await client.GetModelValueAsync();
 ]]></code>
-</example>
+This sample shows how to call GetModelValueAsync with all parameters.
+<code><![CDATA[
+Model client = new SpecialWordsClient().GetModelClient(apiVersion: "1.0.0");
+
+Response<BaseModel> response = await client.GetModelValueAsync();
+]]></code></example>
     </member>
     <member name="GetModelValue(CancellationToken)">
-<example>
+      <example>
 This sample shows how to call GetModelValue.
 <code><![CDATA[
-var client = new SpecialWordsClient().GetModelClient("1.0.0");
+Model client = new SpecialWordsClient().GetModelClient(apiVersion: "1.0.0");
 
-var result = client.GetModelValue();
+Response<BaseModel> response = client.GetModelValue();
 ]]></code>
-</example>
+This sample shows how to call GetModelValue with all parameters.
+<code><![CDATA[
+Model client = new SpecialWordsClient().GetModelClient(apiVersion: "1.0.0");
+
+Response<BaseModel> response = client.GetModelValue();
+]]></code></example>
     </member>
     <member name="GetModelAsync(RequestContext)">
-<example>
+      <example>
 This sample shows how to call GetModelAsync and parse the result.
 <code><![CDATA[
-var client = new SpecialWordsClient().GetModelClient("1.0.0");
+Model client = new SpecialWordsClient().GetModelClient(apiVersion: "1.0.0");
 
 Response response = await client.GetModelAsync();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("model.kind").ToString());
 ]]></code>
-</example>
+This sample shows how to call GetModelAsync with all request content and parse the result.
+<code><![CDATA[
+Model client = new SpecialWordsClient().GetModelClient(apiVersion: "1.0.0");
+
+Response response = await client.GetModelAsync();
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("model.kind").ToString());
+]]></code></example>
     </member>
     <member name="GetModel(RequestContext)">
-<example>
+      <example>
 This sample shows how to call GetModel and parse the result.
 <code><![CDATA[
-var client = new SpecialWordsClient().GetModelClient("1.0.0");
+Model client = new SpecialWordsClient().GetModelClient(apiVersion: "1.0.0");
 
 Response response = client.GetModel();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("model.kind").ToString());
 ]]></code>
-</example>
+This sample shows how to call GetModel with all request content and parse the result.
+<code><![CDATA[
+Model client = new SpecialWordsClient().GetModelClient(apiVersion: "1.0.0");
+
+Response response = client.GetModel();
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("model.kind").ToString());
+]]></code></example>
     </member>
     <member name="PutAsync(BaseModel,CancellationToken)">
-<example>
-This sample shows how to call PutAsync with required parameters.
+      <example>
+This sample shows how to call PutAsync.
 <code><![CDATA[
-var client = new SpecialWordsClient().GetModelClient("1.0.0");
+Model client = new SpecialWordsClient().GetModelClient(apiVersion: "1.0.0");
 
-var body = new DerivedModel("<derivedName>", "<for>");
-var result = await client.PutAsync(body);
+BaseModel body = new DerivedModel("<derived.name>", "<for>");
+Response response = await client.PutAsync(body);
+Console.WriteLine(response.Status);
 ]]></code>
-</example>
+This sample shows how to call PutAsync with all parameters.
+<code><![CDATA[
+Model client = new SpecialWordsClient().GetModelClient(apiVersion: "1.0.0");
+
+BaseModel body = new DerivedModel("<derived.name>", "<for>");
+Response response = await client.PutAsync(body);
+Console.WriteLine(response.Status);
+]]></code></example>
     </member>
     <member name="Put(BaseModel,CancellationToken)">
-<example>
-This sample shows how to call Put with required parameters.
+      <example>
+This sample shows how to call Put.
 <code><![CDATA[
-var client = new SpecialWordsClient().GetModelClient("1.0.0");
+Model client = new SpecialWordsClient().GetModelClient(apiVersion: "1.0.0");
 
-var body = new DerivedModel("<derivedName>", "<for>");
-var result = client.Put(body);
+BaseModel body = new DerivedModel("<derived.name>", "<for>");
+Response response = client.Put(body);
+Console.WriteLine(response.Status);
 ]]></code>
-</example>
+This sample shows how to call Put with all parameters.
+<code><![CDATA[
+Model client = new SpecialWordsClient().GetModelClient(apiVersion: "1.0.0");
+
+BaseModel body = new DerivedModel("<derived.name>", "<for>");
+Response response = client.Put(body);
+Console.WriteLine(response.Status);
+]]></code></example>
     </member>
     <member name="PutAsync(RequestContent,RequestContext)">
-<example>
-This sample shows how to call PutAsync with required request content.
+      <example>
+This sample shows how to call PutAsync.
 <code><![CDATA[
-var client = new SpecialWordsClient().GetModelClient("1.0.0");
+Model client = new SpecialWordsClient().GetModelClient(apiVersion: "1.0.0");
 
-var data = new {
-    derivedname = "<derived.name>",
-    @for = "<for>",
-    modelkind = "derived",
-};
-
-Response response = await client.PutAsync(RequestContent.Create(data));
+RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+{
+    ["derived.name"] = "<derived.name>",
+    ["for"] = "<for>",
+    ["model.kind"] = "derived",
+});
+Response response = await client.PutAsync(content);
 Console.WriteLine(response.Status);
 ]]></code>
-</example>
+This sample shows how to call PutAsync with all request content.
+<code><![CDATA[
+Model client = new SpecialWordsClient().GetModelClient(apiVersion: "1.0.0");
+
+RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+{
+    ["derived.name"] = "<derived.name>",
+    ["for"] = "<for>",
+    ["model.kind"] = "derived",
+});
+Response response = await client.PutAsync(content);
+Console.WriteLine(response.Status);
+]]></code></example>
     </member>
     <member name="Put(RequestContent,RequestContext)">
-<example>
-This sample shows how to call Put with required request content.
+      <example>
+This sample shows how to call Put.
 <code><![CDATA[
-var client = new SpecialWordsClient().GetModelClient("1.0.0");
+Model client = new SpecialWordsClient().GetModelClient(apiVersion: "1.0.0");
 
-var data = new {
-    derivedname = "<derived.name>",
-    @for = "<for>",
-    modelkind = "derived",
-};
-
-Response response = client.Put(RequestContent.Create(data));
+RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+{
+    ["derived.name"] = "<derived.name>",
+    ["for"] = "<for>",
+    ["model.kind"] = "derived",
+});
+Response response = client.Put(content);
 Console.WriteLine(response.Status);
 ]]></code>
-</example>
+This sample shows how to call Put with all request content.
+<code><![CDATA[
+Model client = new SpecialWordsClient().GetModelClient(apiVersion: "1.0.0");
+
+RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+{
+    ["derived.name"] = "<derived.name>",
+    ["for"] = "<for>",
+    ["model.kind"] = "derived",
+});
+Response response = client.Put(content);
+Console.WriteLine(response.Status);
+]]></code></example>
     </member>
   </members>
 </doc>

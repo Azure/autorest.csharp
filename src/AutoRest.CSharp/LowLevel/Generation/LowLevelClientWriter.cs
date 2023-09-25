@@ -13,11 +13,11 @@ using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Common.Output.Models.Responses;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
-using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
+using AutoRest.CSharp.Output.Samples.Models;
 using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.Core;
@@ -39,14 +39,12 @@ namespace AutoRest.CSharp.Generation.Writers
         private readonly CodeWriter _writer;
         private readonly XmlDocWriter _xmlDocWriter;
         private readonly LowLevelClient _client;
-        private readonly LowLevelExampleComposer _exampleComposer;
 
         public LowLevelClientWriter(CodeWriter writer, XmlDocWriter xmlDocWriter, LowLevelClient client)
         {
             _writer = writer;
             _xmlDocWriter = xmlDocWriter;
             _client = client;
-            _exampleComposer = new LowLevelExampleComposer(client);
         }
 
         public void WriteClient()
@@ -68,9 +66,10 @@ namespace AutoRest.CSharp.Generation.Writers
 
                         if (clientMethod.ConvenienceMethod is { } convenienceMethod)
                         {
-                            WriteConvenienceMethodDocumentationWithExternalXmlDoc(convenienceMethod, clientMethod.RequestMethod, true);
+                            var samples = clientMethod.Samples.Where(s => s.IsConvenienceSample);
+                            WriteConvenienceMethodDocumentationWithExternalXmlDoc(convenienceMethod, samples, true);
                             WriteConvenienceMethod(clientMethod, convenienceMethod, longRunning, pagingInfo, true);
-                            WriteConvenienceMethodDocumentationWithExternalXmlDoc(convenienceMethod, clientMethod.RequestMethod, false);
+                            WriteConvenienceMethodDocumentationWithExternalXmlDoc(convenienceMethod, samples, false);
                             WriteConvenienceMethod(clientMethod, convenienceMethod, longRunning, pagingInfo, false);
                         }
 
@@ -530,20 +529,20 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        private void WriteProtocolMethodDocumentationWithExternalXmlDoc(LowLevelClientMethod clientMethod, bool async)
+        private void WriteProtocolMethodDocumentationWithExternalXmlDoc(LowLevelClientMethod clientMethod, bool isAsync)
         {
-            var methodSignature = clientMethod.ProtocolMethodSignature.WithAsync(async);
+            var methodSignature = clientMethod.ProtocolMethodSignature.WithAsync(isAsync);
 
             WriteConvenienceMethodOmitReasonIfNecessary(clientMethod.ConvenienceMethodOmittingMessage);
 
-            WriteMethodDocumentation(_writer, methodSignature, clientMethod, async);
+            WriteMethodDocumentation(_writer, methodSignature, clientMethod, isAsync);
             var docRef = GetMethodSignatureString(methodSignature);
             _writer.Line($"/// <include file=\"Docs/{_client.Type.Name}.xml\" path=\"doc/members/member[@name='{docRef}']/*\" />");
-            using (_xmlDocWriter.CreateMember(docRef))
-            {
-                _xmlDocWriter.WriteXmlDocumentation("example", _exampleComposer.Compose(clientMethod, async));
-                WriteDocumentationRemarks(_xmlDocWriter.WriteXmlDocumentation, clientMethod.RequestMethod, clientMethod.PagingInfo != null, methodSignature, Array.Empty<FormattableString>(), false, false, false);
-            }
+
+            _xmlDocWriter.AddMember(docRef);
+            _xmlDocWriter.AddExamples(
+                clientMethod.Samples.Where(s => !s.IsConvenienceSample).Select(s => (s.GetSampleInformation(isAsync), s.GetExampleMethodSignature(isAsync).Name))
+                );
         }
 
         private void WriteConvenienceMethodOmitReasonIfNecessary(ConvenienceMethodOmittingMessage? message)
@@ -555,26 +554,26 @@ namespace AutoRest.CSharp.Generation.Writers
             _writer.Line($"// {message.Message}");
         }
 
-        private void WriteConvenienceMethodDocumentationWithExternalXmlDoc(ConvenienceMethod convenienceMethod, RestClientMethod restMethod, bool async)
+        private void WriteConvenienceMethodDocumentationWithExternalXmlDoc(ConvenienceMethod convenienceMethod, IEnumerable<DpgOperationSample> samples, bool isAsync)
         {
-            var methodSignature = convenienceMethod.Signature.WithAsync(async);
+            var methodSignature = convenienceMethod.Signature.WithAsync(isAsync);
 
             _writer.WriteMethodDocumentation(methodSignature);
-            _writer.WriteXmlDocumentation("remarks", $"{methodSignature.DescriptionText}");
+            _writer.WriteXmlDocumentation("remarks", methodSignature.DescriptionText);
             var docRef = GetMethodSignatureString(methodSignature);
             _writer.Line($"/// <include file=\"Docs/{_client.Type.Name}.xml\" path=\"doc/members/member[@name='{docRef}']/*\" />");
-            using (_xmlDocWriter.CreateMember(docRef))
-            {
-                _xmlDocWriter.WriteXmlDocumentation("example", _exampleComposer.Compose(convenienceMethod, async));
-                WriteDocumentationRemarks(_xmlDocWriter.WriteXmlDocumentation, restMethod, convenienceMethod.IsPageable, methodSignature, Array.Empty<FormattableString>(), false, false, false);
-            }
+
+            _xmlDocWriter.AddMember(docRef);
+            _xmlDocWriter.AddExamples(
+                samples.Select(s => (s.GetSampleInformation(isAsync), s.GetExampleMethodSignature(isAsync).Name))
+                );
         }
 
         private static string GetMethodSignatureString(MethodSignature signature)
         {
             var builder = new StringBuilder(signature.Name);
             builder.Append("(");
-            var paramList = signature.Parameters.Select(p => p.Type.ConvertParamNameForDocs());
+            var paramList = signature.Parameters.Select(p => p.Type.ToStringForDocs());
             builder.Append(string.Join(",", paramList));
             builder.Append(")");
             return builder.ToString();
@@ -606,12 +605,6 @@ namespace AutoRest.CSharp.Generation.Writers
             }
 
             return scope;
-        }
-
-        private static void WriteConvenienceMethodDocumentation(CodeWriter writer, MethodSignature convenienceMethod)
-        {
-            writer.WriteMethodDocumentation(convenienceMethod, $"{convenienceMethod.SummaryText}");
-            writer.WriteXmlDocumentation("remarks", $"{convenienceMethod.DescriptionText}");
         }
 
         private void WriteCancellationTokenToRequestContextMethod()
@@ -696,98 +689,6 @@ namespace AutoRest.CSharp.Generation.Writers
             codeWriter.WriteXmlDocumentationReturns(text);
         }
 
-        private static string BuildSchemaFromDocs(SchemaDocumentation[] docs)
-        {
-            var docDict = docs.ToDictionary(d => d.SchemaName, d => d);
-            var builder = new StringBuilder();
-            builder.AppendLine("{");
-            BuildSchemaFromDoc(builder, docs.First(), docDict, 2);
-            builder.AppendLine("}");
-            return builder.ToString();
-        }
-
-        //TODO: We should be able to deep link to the service schema documentation instead of creating our own.  Keeping this function here until we confirm
-        private static IReadOnlyList<FormattableString> CreateSchemaDocumentationRemarks(LowLevelClientMethod clientMethod, out bool hasRequestSchema, out bool hasResponseSchema)
-        {
-            var schemas = new List<FormattableString>();
-
-            hasRequestSchema = AddRequestOrResponseInputType(schemas, clientMethod.RequestBodyType, "Request Body");
-
-            if (clientMethod.PagingInfo != null && clientMethod.ResponseBodyType is InputModelType modelType)
-            {
-                var itemType = modelType.Properties.FirstOrDefault(p => p.Name == clientMethod.PagingInfo.ItemName)?.Type;
-                hasResponseSchema = AddRequestOrResponseSchema(schemas, itemType, "Response Body");
-            }
-            else
-            {
-                hasResponseSchema = AddRequestOrResponseInputType(schemas, clientMethod.ResponseBodyType, "Response Body");
-            }
-            return schemas;
-            static bool AddRequestOrResponseInputType(List<FormattableString> formattedSchemas, InputType? bodyType, string schemaName) =>
-                bodyType switch
-                {
-                    InputListType listType => AddRequestOrResponseInputType(formattedSchemas, listType.ElementType, schemaName),
-                    InputDictionaryType dictionaryType => AddRequestOrResponseInputType(formattedSchemas, dictionaryType.ValueType, schemaName),
-                    _ => AddRequestOrResponseSchema(formattedSchemas, bodyType, schemaName),
-                };
-
-            static bool AddRequestOrResponseSchema(List<FormattableString> formattedSchemas, InputType? type, string schemaName)
-            {
-                if (type is null)
-                {
-                    return false;
-                }
-
-                var schemasToAdd = new List<FormattableString>();
-                if (type is InputModelType { DerivedModels.Count: > 0 } modelType)
-                {
-                    var derivedModels = modelType.GetAllDerivedModels();
-                    if (derivedModels.Count > 1)
-                    {
-                        schemasToAdd.Add($"This method takes one of the JSON objects below as a payload. Please select a JSON object to view the schema for this.{Environment.NewLine}");
-                    }
-
-                    for (var index = 0; index < derivedModels.Count; index++)
-                    {
-                        var derivedModel = derivedModels[index];
-                        if (index == 1)
-                        {
-                            schemasToAdd.Add($"<details><summary>~+ {derivedModels.Count - 1} more JSON objects</summary>");
-                        }
-
-                        var docs = GetSchemaDocumentationsForSchema(derivedModel, $"{derivedModel.Name.ToCleanName()} {schemaName}");
-                        if (docs != null)
-                        {
-                            schemasToAdd.Add($"<details><summary>{derivedModel.Name.ToCleanName()}</summary>");
-                            schemasToAdd.Add($"Schema for <c>{derivedModel.Name.ToCleanName()}</c>:{Environment.NewLine}<code>{BuildSchemaFromDocs(docs)}</code>{Environment.NewLine}");
-                            schemasToAdd.Add($"</details>{Environment.NewLine}");
-                        }
-                    }
-                    if (derivedModels.Count > 1)
-                    {
-                        schemasToAdd.Add($"</details>{Environment.NewLine}");
-                    }
-                }
-                else
-                {
-                    var docs = GetSchemaDocumentationsForSchema(type, schemaName);
-                    if (docs != null)
-                    {
-                        schemasToAdd.Add($"Schema for <c>{type.Name.ToCleanName()}</c>:{Environment.NewLine}<code>{BuildSchemaFromDocs(docs)}</code>{Environment.NewLine}");
-                    }
-                }
-
-                if (schemasToAdd.Count > 0)
-                {
-                    formattedSchemas.Add($"{Environment.NewLine}{schemaName}:{Environment.NewLine}{Environment.NewLine}");
-                    formattedSchemas.AddRange(schemasToAdd);
-                    return true;
-                }
-
-                return false;
-            }
-        }
-
         //TODO: We should be able to deep link to the service schema documentation instead of creating our own.  Keeping this function here until we confirm
         private static void WriteDocumentationRemarks(Action<string, FormattableString?> writeXmlDocumentation, RestClientMethod requestMethod, bool isPagingMethod, MethodSignature methodSignature, IReadOnlyCollection<FormattableString> schemas, bool hasRequestRemarks, bool hasResponseRemarks, bool addDescription)
         {
@@ -826,7 +727,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 }
             }
 
-            if (addDescription && !methodSignature.DescriptionText.IsNullOrEmpty())
+            if (addDescription && !string.IsNullOrEmpty(methodSignature.DescriptionText?.ToString()))
             {
                 schemaDesription = $"{methodSignature.DescriptionText}{Environment.NewLine}{Environment.NewLine}{schemaDesription}";
             }
@@ -872,75 +773,6 @@ namespace AutoRest.CSharp.Generation.Writers
                         builder.AppendLine($"{rowType},{required}{description}");
                 }
             }
-        }
-
-        private static SchemaDocumentation[]? GetSchemaDocumentationsForSchema(InputType type, string schemaName)
-        {
-            // Visit each schema in the graph and for object schemas, collect information about all the properties.
-            var visitedSchema = new HashSet<string>();
-            var typesToExplore = new Queue<InputType>(new[] { type });
-            var documentationObjects = new List<(string SchemaName, List<SchemaDocumentation.DocumentationRow> Rows)>();
-
-            while (typesToExplore.Any())
-            {
-                InputType toExplore = typesToExplore.Dequeue();
-
-                if (visitedSchema.Contains(toExplore.Name))
-                {
-                    continue;
-                }
-
-                switch (toExplore)
-                {
-                    case InputModelType modelType:
-                        List<SchemaDocumentation.DocumentationRow> propertyDocumentation = new();
-
-                        // We must also include any properties introduced by our parent chain.
-                        foreach (InputModelType modelOrBase in modelType.GetSelfAndBaseModels())
-                        {
-                            foreach (InputModelProperty property in modelOrBase.Properties)
-                            {
-                                if (property.IsDiscriminator && property.Type is InputEnumType { IsExtensible: true } && modelType.DiscriminatorValue != null)
-                                {
-                                    propertyDocumentation.Add(new SchemaDocumentation.DocumentationRow(
-                                        property.SerializedName ?? property.Name,
-                                        modelType.DiscriminatorValue,
-                                        property.IsRequired,
-                                        BuilderHelpers.EscapeXmlDocDescription(property.Description)));
-
-                                    typesToExplore.Enqueue(property.Type);
-                                    continue;
-                                }
-
-                                propertyDocumentation.Add(new SchemaDocumentation.DocumentationRow(
-                                    property.SerializedName ?? property.Name,
-                                    BuilderHelpers.EscapeXmlDocDescription(StringifyTypeForTable(property.Type)),
-                                    property.IsRequired,
-                                    BuilderHelpers.EscapeXmlDocDescription(property.Description)));
-
-                                typesToExplore.Enqueue(property.Type);
-                            }
-                        }
-
-                        documentationObjects.Add(new(toExplore == type ? schemaName : BuilderHelpers.EscapeXmlDocDescription(StringifyTypeForTable(toExplore)), propertyDocumentation));
-                        break;
-                    case InputListType listType:
-                        typesToExplore.Enqueue(listType.ElementType);
-                        break;
-                    case InputDictionaryType dictionaryType:
-                        typesToExplore.Enqueue(dictionaryType.ValueType);
-                        break;
-                }
-
-                visitedSchema.Add(toExplore.Name);
-            }
-
-            if (!documentationObjects.Any())
-            {
-                return null;
-            }
-
-            return documentationObjects.Select(o => new SchemaDocumentation(o.SchemaName, o.Rows.ToArray())).ToArray();
         }
 
         private static string StringifyTypeForTable(InputType type)
