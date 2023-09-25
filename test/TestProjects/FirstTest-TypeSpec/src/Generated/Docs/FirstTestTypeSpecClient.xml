@@ -15,13 +15,6 @@ Response response = await client.TopActionAsync(DateTimeOffset.Parse("2022-05-10
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
-Console.WriteLine(result.GetProperty("requiredUnionOfLiteralString").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredUnionOfLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
-Console.WriteLine(result.GetProperty("requiredUnionOfLiteralFloat").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
 ]]></code>
@@ -35,20 +28,6 @@ Response response = await client.TopActionAsync(DateTimeOffset.Parse("2022-05-10
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
-Console.WriteLine(result.GetProperty("requiredUnionOfLiteralString").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredUnionOfLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
-Console.WriteLine(result.GetProperty("requiredUnionOfLiteralFloat").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
-Console.WriteLine(result.GetProperty("optionalLiteralString").ToString());
-Console.WriteLine(result.GetProperty("optionalUnionOfLiteralString").ToString());
-Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("optionalUnionOfLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("optionalLiteralFloat").ToString());
-Console.WriteLine(result.GetProperty("optionalUnionOfLiteralFloat").ToString());
-Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
 Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
@@ -66,13 +45,6 @@ Response response = client.TopAction(DateTimeOffset.Parse("2022-05-10T14:57:31.2
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
-Console.WriteLine(result.GetProperty("requiredUnionOfLiteralString").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredUnionOfLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
-Console.WriteLine(result.GetProperty("requiredUnionOfLiteralFloat").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
 ]]></code>
@@ -86,20 +58,6 @@ Response response = client.TopAction(DateTimeOffset.Parse("2022-05-10T14:57:31.2
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
-Console.WriteLine(result.GetProperty("requiredUnionOfLiteralString").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredUnionOfLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
-Console.WriteLine(result.GetProperty("requiredUnionOfLiteralFloat").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
-Console.WriteLine(result.GetProperty("optionalLiteralString").ToString());
-Console.WriteLine(result.GetProperty("optionalUnionOfLiteralString").ToString());
-Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("optionalUnionOfLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("optionalLiteralFloat").ToString());
-Console.WriteLine(result.GetProperty("optionalUnionOfLiteralFloat").ToString());
-Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
 Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
@@ -117,13 +75,6 @@ Response response = await client.TopAction2Async(null);
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
-Console.WriteLine(result.GetProperty("requiredUnionOfLiteralString").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredUnionOfLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
-Console.WriteLine(result.GetProperty("requiredUnionOfLiteralFloat").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
 ]]></code>
@@ -137,20 +88,6 @@ Response response = await client.TopAction2Async(null);
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
-Console.WriteLine(result.GetProperty("requiredUnionOfLiteralString").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredUnionOfLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
-Console.WriteLine(result.GetProperty("requiredUnionOfLiteralFloat").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
-Console.WriteLine(result.GetProperty("optionalLiteralString").ToString());
-Console.WriteLine(result.GetProperty("optionalUnionOfLiteralString").ToString());
-Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("optionalUnionOfLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("optionalLiteralFloat").ToString());
-Console.WriteLine(result.GetProperty("optionalUnionOfLiteralFloat").ToString());
-Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
 Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
@@ -168,13 +105,6 @@ Response response = client.TopAction2(null);
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
-Console.WriteLine(result.GetProperty("requiredUnionOfLiteralString").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredUnionOfLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
-Console.WriteLine(result.GetProperty("requiredUnionOfLiteralFloat").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
 ]]></code>
@@ -188,20 +118,6 @@ Response response = client.TopAction2(null);
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
-Console.WriteLine(result.GetProperty("requiredUnionOfLiteralString").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredUnionOfLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
-Console.WriteLine(result.GetProperty("requiredUnionOfLiteralFloat").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
-Console.WriteLine(result.GetProperty("optionalLiteralString").ToString());
-Console.WriteLine(result.GetProperty("optionalUnionOfLiteralString").ToString());
-Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("optionalUnionOfLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("optionalLiteralFloat").ToString());
-Console.WriteLine(result.GetProperty("optionalUnionOfLiteralFloat").ToString());
-Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
 Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
@@ -218,13 +134,6 @@ RequestContent content = RequestContent.Create(new
 {
     name = "<name>",
     requiredUnion = "<requiredUnion>",
-    requiredLiteralString = "accept",
-    requiredUnionOfLiteralString = "accept",
-    requiredLiteralInt = 123,
-    requiredUnionOfLiteralInt = 123,
-    requiredLiteralFloat = 1.23F,
-    requiredUnionOfLiteralFloat = 1.23F,
-    requiredLiteralBool = false,
     requiredBadDescription = "<requiredBadDescription>",
     requiredNullableList = new List<object>()
     {
@@ -236,13 +145,6 @@ Response response = await client.PatchActionAsync(content);
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
-Console.WriteLine(result.GetProperty("requiredUnionOfLiteralString").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredUnionOfLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
-Console.WriteLine(result.GetProperty("requiredUnionOfLiteralFloat").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
 ]]></code>
@@ -255,20 +157,6 @@ RequestContent content = RequestContent.Create(new
 {
     name = "<name>",
     requiredUnion = "<requiredUnion>",
-    requiredLiteralString = "accept",
-    requiredUnionOfLiteralString = "accept",
-    requiredLiteralInt = 123,
-    requiredUnionOfLiteralInt = 123,
-    requiredLiteralFloat = 1.23F,
-    requiredUnionOfLiteralFloat = 1.23F,
-    requiredLiteralBool = false,
-    optionalLiteralString = "reject",
-    optionalUnionOfLiteralString = "accept",
-    optionalLiteralInt = 456,
-    optionalUnionOfLiteralInt = 456,
-    optionalLiteralFloat = 4.56F,
-    optionalUnionOfLiteralFloat = 4.56F,
-    optionalLiteralBool = true,
     requiredBadDescription = "<requiredBadDescription>",
     optionalNullableList = new List<object>()
     {
@@ -284,20 +172,6 @@ Response response = await client.PatchActionAsync(content);
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
-Console.WriteLine(result.GetProperty("requiredUnionOfLiteralString").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredUnionOfLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
-Console.WriteLine(result.GetProperty("requiredUnionOfLiteralFloat").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
-Console.WriteLine(result.GetProperty("optionalLiteralString").ToString());
-Console.WriteLine(result.GetProperty("optionalUnionOfLiteralString").ToString());
-Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("optionalUnionOfLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("optionalLiteralFloat").ToString());
-Console.WriteLine(result.GetProperty("optionalUnionOfLiteralFloat").ToString());
-Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
 Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
@@ -314,13 +188,6 @@ RequestContent content = RequestContent.Create(new
 {
     name = "<name>",
     requiredUnion = "<requiredUnion>",
-    requiredLiteralString = "accept",
-    requiredUnionOfLiteralString = "accept",
-    requiredLiteralInt = 123,
-    requiredUnionOfLiteralInt = 123,
-    requiredLiteralFloat = 1.23F,
-    requiredUnionOfLiteralFloat = 1.23F,
-    requiredLiteralBool = false,
     requiredBadDescription = "<requiredBadDescription>",
     requiredNullableList = new List<object>()
     {
@@ -332,13 +199,6 @@ Response response = client.PatchAction(content);
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
-Console.WriteLine(result.GetProperty("requiredUnionOfLiteralString").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredUnionOfLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
-Console.WriteLine(result.GetProperty("requiredUnionOfLiteralFloat").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
 ]]></code>
@@ -351,20 +211,6 @@ RequestContent content = RequestContent.Create(new
 {
     name = "<name>",
     requiredUnion = "<requiredUnion>",
-    requiredLiteralString = "accept",
-    requiredUnionOfLiteralString = "accept",
-    requiredLiteralInt = 123,
-    requiredUnionOfLiteralInt = 123,
-    requiredLiteralFloat = 1.23F,
-    requiredUnionOfLiteralFloat = 1.23F,
-    requiredLiteralBool = false,
-    optionalLiteralString = "reject",
-    optionalUnionOfLiteralString = "accept",
-    optionalLiteralInt = 456,
-    optionalUnionOfLiteralInt = 456,
-    optionalLiteralFloat = 4.56F,
-    optionalUnionOfLiteralFloat = 4.56F,
-    optionalLiteralBool = true,
     requiredBadDescription = "<requiredBadDescription>",
     optionalNullableList = new List<object>()
     {
@@ -380,20 +226,6 @@ Response response = client.PatchAction(content);
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
-Console.WriteLine(result.GetProperty("requiredUnionOfLiteralString").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredUnionOfLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
-Console.WriteLine(result.GetProperty("requiredUnionOfLiteralFloat").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
-Console.WriteLine(result.GetProperty("optionalLiteralString").ToString());
-Console.WriteLine(result.GetProperty("optionalUnionOfLiteralString").ToString());
-Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("optionalUnionOfLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("optionalLiteralFloat").ToString());
-Console.WriteLine(result.GetProperty("optionalUnionOfLiteralFloat").ToString());
-Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
 Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
@@ -412,13 +244,6 @@ RequestContent content = RequestContent.Create(new
 {
     name = "<name>",
     requiredUnion = "<requiredUnion>",
-    requiredLiteralString = "accept",
-    requiredUnionOfLiteralString = "accept",
-    requiredLiteralInt = 123,
-    requiredUnionOfLiteralInt = 123,
-    requiredLiteralFloat = 1.23F,
-    requiredUnionOfLiteralFloat = 1.23F,
-    requiredLiteralBool = false,
     requiredBadDescription = "<requiredBadDescription>",
     requiredNullableList = new List<object>()
     {
@@ -430,13 +255,6 @@ Response response = await client.AnonymousBodyAsync(content);
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
-Console.WriteLine(result.GetProperty("requiredUnionOfLiteralString").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredUnionOfLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
-Console.WriteLine(result.GetProperty("requiredUnionOfLiteralFloat").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
 ]]></code>
@@ -449,20 +267,6 @@ RequestContent content = RequestContent.Create(new
 {
     name = "<name>",
     requiredUnion = "<requiredUnion>",
-    requiredLiteralString = "accept",
-    requiredUnionOfLiteralString = "accept",
-    requiredLiteralInt = 123,
-    requiredUnionOfLiteralInt = 123,
-    requiredLiteralFloat = 1.23F,
-    requiredUnionOfLiteralFloat = 1.23F,
-    requiredLiteralBool = false,
-    optionalLiteralString = "reject",
-    optionalUnionOfLiteralString = "accept",
-    optionalLiteralInt = 456,
-    optionalUnionOfLiteralInt = 456,
-    optionalLiteralFloat = 4.56F,
-    optionalUnionOfLiteralFloat = 4.56F,
-    optionalLiteralBool = true,
     requiredBadDescription = "<requiredBadDescription>",
     optionalNullableList = new List<object>()
     {
@@ -478,20 +282,6 @@ Response response = await client.AnonymousBodyAsync(content);
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
-Console.WriteLine(result.GetProperty("requiredUnionOfLiteralString").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredUnionOfLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
-Console.WriteLine(result.GetProperty("requiredUnionOfLiteralFloat").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
-Console.WriteLine(result.GetProperty("optionalLiteralString").ToString());
-Console.WriteLine(result.GetProperty("optionalUnionOfLiteralString").ToString());
-Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("optionalUnionOfLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("optionalLiteralFloat").ToString());
-Console.WriteLine(result.GetProperty("optionalUnionOfLiteralFloat").ToString());
-Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
 Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
@@ -508,13 +298,6 @@ RequestContent content = RequestContent.Create(new
 {
     name = "<name>",
     requiredUnion = "<requiredUnion>",
-    requiredLiteralString = "accept",
-    requiredUnionOfLiteralString = "accept",
-    requiredLiteralInt = 123,
-    requiredUnionOfLiteralInt = 123,
-    requiredLiteralFloat = 1.23F,
-    requiredUnionOfLiteralFloat = 1.23F,
-    requiredLiteralBool = false,
     requiredBadDescription = "<requiredBadDescription>",
     requiredNullableList = new List<object>()
     {
@@ -526,13 +309,6 @@ Response response = client.AnonymousBody(content);
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
-Console.WriteLine(result.GetProperty("requiredUnionOfLiteralString").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredUnionOfLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
-Console.WriteLine(result.GetProperty("requiredUnionOfLiteralFloat").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
 ]]></code>
@@ -545,20 +321,6 @@ RequestContent content = RequestContent.Create(new
 {
     name = "<name>",
     requiredUnion = "<requiredUnion>",
-    requiredLiteralString = "accept",
-    requiredUnionOfLiteralString = "accept",
-    requiredLiteralInt = 123,
-    requiredUnionOfLiteralInt = 123,
-    requiredLiteralFloat = 1.23F,
-    requiredUnionOfLiteralFloat = 1.23F,
-    requiredLiteralBool = false,
-    optionalLiteralString = "reject",
-    optionalUnionOfLiteralString = "accept",
-    optionalLiteralInt = 456,
-    optionalUnionOfLiteralInt = 456,
-    optionalLiteralFloat = 4.56F,
-    optionalUnionOfLiteralFloat = 4.56F,
-    optionalLiteralBool = true,
     requiredBadDescription = "<requiredBadDescription>",
     optionalNullableList = new List<object>()
     {
@@ -574,20 +336,6 @@ Response response = client.AnonymousBody(content);
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
-Console.WriteLine(result.GetProperty("requiredUnionOfLiteralString").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredUnionOfLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
-Console.WriteLine(result.GetProperty("requiredUnionOfLiteralFloat").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
-Console.WriteLine(result.GetProperty("optionalLiteralString").ToString());
-Console.WriteLine(result.GetProperty("optionalUnionOfLiteralString").ToString());
-Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("optionalUnionOfLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("optionalLiteralFloat").ToString());
-Console.WriteLine(result.GetProperty("optionalUnionOfLiteralFloat").ToString());
-Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
 Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
@@ -1023,13 +771,6 @@ Response response = await client.SayHiAsync("<headParameter>", "<queryParameter>
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
-Console.WriteLine(result.GetProperty("requiredUnionOfLiteralString").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredUnionOfLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
-Console.WriteLine(result.GetProperty("requiredUnionOfLiteralFloat").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
 ]]></code>
@@ -1043,20 +784,6 @@ Response response = await client.SayHiAsync("<headParameter>", "<queryParameter>
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
-Console.WriteLine(result.GetProperty("requiredUnionOfLiteralString").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredUnionOfLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
-Console.WriteLine(result.GetProperty("requiredUnionOfLiteralFloat").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
-Console.WriteLine(result.GetProperty("optionalLiteralString").ToString());
-Console.WriteLine(result.GetProperty("optionalUnionOfLiteralString").ToString());
-Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("optionalUnionOfLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("optionalLiteralFloat").ToString());
-Console.WriteLine(result.GetProperty("optionalUnionOfLiteralFloat").ToString());
-Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
 Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
@@ -1074,13 +801,6 @@ Response response = client.SayHi("<headParameter>", "<queryParameter>", null, nu
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
-Console.WriteLine(result.GetProperty("requiredUnionOfLiteralString").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredUnionOfLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
-Console.WriteLine(result.GetProperty("requiredUnionOfLiteralFloat").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
 ]]></code>
@@ -1094,20 +814,6 @@ Response response = client.SayHi("<headParameter>", "<queryParameter>", "<option
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
-Console.WriteLine(result.GetProperty("requiredUnionOfLiteralString").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredUnionOfLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
-Console.WriteLine(result.GetProperty("requiredUnionOfLiteralFloat").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
-Console.WriteLine(result.GetProperty("optionalLiteralString").ToString());
-Console.WriteLine(result.GetProperty("optionalUnionOfLiteralString").ToString());
-Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("optionalUnionOfLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("optionalLiteralFloat").ToString());
-Console.WriteLine(result.GetProperty("optionalUnionOfLiteralFloat").ToString());
-Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
 Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
@@ -1138,13 +844,6 @@ RequestContent content = RequestContent.Create(new
     {
         name = "<name>",
         requiredUnion = "<requiredUnion>",
-        requiredLiteralString = "accept",
-        requiredUnionOfLiteralString = "accept",
-        requiredLiteralInt = 123,
-        requiredUnionOfLiteralInt = 123,
-        requiredLiteralFloat = 1.23F,
-        requiredUnionOfLiteralFloat = 1.23F,
-        requiredLiteralBool = false,
         requiredBadDescription = "<requiredBadDescription>",
         requiredNullableList = new List<object>()
         {
@@ -1172,13 +871,6 @@ Console.WriteLine(result.GetProperty("requiredCollection")[0].ToString());
 Console.WriteLine(result.GetProperty("requiredDictionary").GetProperty("<key>").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnion").ToString());
-Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralString").ToString());
-Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnionOfLiteralString").ToString());
-Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnionOfLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralFloat").ToString());
-Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnionOfLiteralFloat").ToString());
-Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredBadDescription").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredNullableList")[0].ToString());
 Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
@@ -1209,20 +901,6 @@ RequestContent content = RequestContent.Create(new
     {
         name = "<name>",
         requiredUnion = "<requiredUnion>",
-        requiredLiteralString = "accept",
-        requiredUnionOfLiteralString = "accept",
-        requiredLiteralInt = 123,
-        requiredUnionOfLiteralInt = 123,
-        requiredLiteralFloat = 1.23F,
-        requiredUnionOfLiteralFloat = 1.23F,
-        requiredLiteralBool = false,
-        optionalLiteralString = "reject",
-        optionalUnionOfLiteralString = "accept",
-        optionalLiteralInt = 456,
-        optionalUnionOfLiteralInt = 456,
-        optionalLiteralFloat = 4.56F,
-        optionalUnionOfLiteralFloat = 4.56F,
-        optionalLiteralBool = true,
         requiredBadDescription = "<requiredBadDescription>",
         optionalNullableList = new List<object>()
         {
@@ -1280,20 +958,6 @@ Console.WriteLine(result.GetProperty("requiredCollection")[0].ToString());
 Console.WriteLine(result.GetProperty("requiredDictionary").GetProperty("<key>").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnion").ToString());
-Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralString").ToString());
-Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnionOfLiteralString").ToString());
-Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnionOfLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralFloat").ToString());
-Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnionOfLiteralFloat").ToString());
-Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralBool").ToString());
-Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalLiteralString").ToString());
-Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalUnionOfLiteralString").ToString());
-Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalUnionOfLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalLiteralFloat").ToString());
-Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalUnionOfLiteralFloat").ToString());
-Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredBadDescription").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalNullableList")[0].ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredNullableList")[0].ToString());
@@ -1340,13 +1004,6 @@ RequestContent content = RequestContent.Create(new
     {
         name = "<name>",
         requiredUnion = "<requiredUnion>",
-        requiredLiteralString = "accept",
-        requiredUnionOfLiteralString = "accept",
-        requiredLiteralInt = 123,
-        requiredUnionOfLiteralInt = 123,
-        requiredLiteralFloat = 1.23F,
-        requiredUnionOfLiteralFloat = 1.23F,
-        requiredLiteralBool = false,
         requiredBadDescription = "<requiredBadDescription>",
         requiredNullableList = new List<object>()
         {
@@ -1374,13 +1031,6 @@ Console.WriteLine(result.GetProperty("requiredCollection")[0].ToString());
 Console.WriteLine(result.GetProperty("requiredDictionary").GetProperty("<key>").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnion").ToString());
-Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralString").ToString());
-Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnionOfLiteralString").ToString());
-Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnionOfLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralFloat").ToString());
-Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnionOfLiteralFloat").ToString());
-Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredBadDescription").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredNullableList")[0].ToString());
 Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
@@ -1411,20 +1061,6 @@ RequestContent content = RequestContent.Create(new
     {
         name = "<name>",
         requiredUnion = "<requiredUnion>",
-        requiredLiteralString = "accept",
-        requiredUnionOfLiteralString = "accept",
-        requiredLiteralInt = 123,
-        requiredUnionOfLiteralInt = 123,
-        requiredLiteralFloat = 1.23F,
-        requiredUnionOfLiteralFloat = 1.23F,
-        requiredLiteralBool = false,
-        optionalLiteralString = "reject",
-        optionalUnionOfLiteralString = "accept",
-        optionalLiteralInt = 456,
-        optionalUnionOfLiteralInt = 456,
-        optionalLiteralFloat = 4.56F,
-        optionalUnionOfLiteralFloat = 4.56F,
-        optionalLiteralBool = true,
         requiredBadDescription = "<requiredBadDescription>",
         optionalNullableList = new List<object>()
         {
@@ -1482,20 +1118,6 @@ Console.WriteLine(result.GetProperty("requiredCollection")[0].ToString());
 Console.WriteLine(result.GetProperty("requiredDictionary").GetProperty("<key>").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnion").ToString());
-Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralString").ToString());
-Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnionOfLiteralString").ToString());
-Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnionOfLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralFloat").ToString());
-Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnionOfLiteralFloat").ToString());
-Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralBool").ToString());
-Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalLiteralString").ToString());
-Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalUnionOfLiteralString").ToString());
-Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalUnionOfLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalLiteralFloat").ToString());
-Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalUnionOfLiteralFloat").ToString());
-Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredBadDescription").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalNullableList")[0].ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredNullableList")[0].ToString());
@@ -1542,13 +1164,6 @@ RequestContent content = RequestContent.Create(new
     {
         name = "<name>",
         requiredUnion = "<requiredUnion>",
-        requiredLiteralString = "accept",
-        requiredUnionOfLiteralString = "accept",
-        requiredLiteralInt = 123,
-        requiredUnionOfLiteralInt = 123,
-        requiredLiteralFloat = 1.23F,
-        requiredUnionOfLiteralFloat = 1.23F,
-        requiredLiteralBool = false,
         requiredBadDescription = "<requiredBadDescription>",
         requiredNullableList = new List<object>()
         {
@@ -1576,13 +1191,6 @@ Console.WriteLine(result.GetProperty("requiredCollection")[0].ToString());
 Console.WriteLine(result.GetProperty("requiredDictionary").GetProperty("<key>").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnion").ToString());
-Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralString").ToString());
-Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnionOfLiteralString").ToString());
-Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnionOfLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralFloat").ToString());
-Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnionOfLiteralFloat").ToString());
-Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredBadDescription").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredNullableList")[0].ToString());
 Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
@@ -1613,20 +1221,6 @@ RequestContent content = RequestContent.Create(new
     {
         name = "<name>",
         requiredUnion = "<requiredUnion>",
-        requiredLiteralString = "accept",
-        requiredUnionOfLiteralString = "accept",
-        requiredLiteralInt = 123,
-        requiredUnionOfLiteralInt = 123,
-        requiredLiteralFloat = 1.23F,
-        requiredUnionOfLiteralFloat = 1.23F,
-        requiredLiteralBool = false,
-        optionalLiteralString = "reject",
-        optionalUnionOfLiteralString = "accept",
-        optionalLiteralInt = 456,
-        optionalUnionOfLiteralInt = 456,
-        optionalLiteralFloat = 4.56F,
-        optionalUnionOfLiteralFloat = 4.56F,
-        optionalLiteralBool = true,
         requiredBadDescription = "<requiredBadDescription>",
         optionalNullableList = new List<object>()
         {
@@ -1684,20 +1278,6 @@ Console.WriteLine(result.GetProperty("requiredCollection")[0].ToString());
 Console.WriteLine(result.GetProperty("requiredDictionary").GetProperty("<key>").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnion").ToString());
-Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralString").ToString());
-Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnionOfLiteralString").ToString());
-Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnionOfLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralFloat").ToString());
-Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnionOfLiteralFloat").ToString());
-Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralBool").ToString());
-Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalLiteralString").ToString());
-Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalUnionOfLiteralString").ToString());
-Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalUnionOfLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalLiteralFloat").ToString());
-Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalUnionOfLiteralFloat").ToString());
-Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredBadDescription").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalNullableList")[0].ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredNullableList")[0].ToString());
@@ -1744,13 +1324,6 @@ RequestContent content = RequestContent.Create(new
     {
         name = "<name>",
         requiredUnion = "<requiredUnion>",
-        requiredLiteralString = "accept",
-        requiredUnionOfLiteralString = "accept",
-        requiredLiteralInt = 123,
-        requiredUnionOfLiteralInt = 123,
-        requiredLiteralFloat = 1.23F,
-        requiredUnionOfLiteralFloat = 1.23F,
-        requiredLiteralBool = false,
         requiredBadDescription = "<requiredBadDescription>",
         requiredNullableList = new List<object>()
         {
@@ -1778,13 +1351,6 @@ Console.WriteLine(result.GetProperty("requiredCollection")[0].ToString());
 Console.WriteLine(result.GetProperty("requiredDictionary").GetProperty("<key>").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnion").ToString());
-Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralString").ToString());
-Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnionOfLiteralString").ToString());
-Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnionOfLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralFloat").ToString());
-Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnionOfLiteralFloat").ToString());
-Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredBadDescription").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredNullableList")[0].ToString());
 Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
@@ -1815,20 +1381,6 @@ RequestContent content = RequestContent.Create(new
     {
         name = "<name>",
         requiredUnion = "<requiredUnion>",
-        requiredLiteralString = "accept",
-        requiredUnionOfLiteralString = "accept",
-        requiredLiteralInt = 123,
-        requiredUnionOfLiteralInt = 123,
-        requiredLiteralFloat = 1.23F,
-        requiredUnionOfLiteralFloat = 1.23F,
-        requiredLiteralBool = false,
-        optionalLiteralString = "reject",
-        optionalUnionOfLiteralString = "accept",
-        optionalLiteralInt = 456,
-        optionalUnionOfLiteralInt = 456,
-        optionalLiteralFloat = 4.56F,
-        optionalUnionOfLiteralFloat = 4.56F,
-        optionalLiteralBool = true,
         requiredBadDescription = "<requiredBadDescription>",
         optionalNullableList = new List<object>()
         {
@@ -1886,20 +1438,6 @@ Console.WriteLine(result.GetProperty("requiredCollection")[0].ToString());
 Console.WriteLine(result.GetProperty("requiredDictionary").GetProperty("<key>").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnion").ToString());
-Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralString").ToString());
-Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnionOfLiteralString").ToString());
-Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnionOfLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralFloat").ToString());
-Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnionOfLiteralFloat").ToString());
-Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralBool").ToString());
-Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalLiteralString").ToString());
-Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalUnionOfLiteralString").ToString());
-Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalUnionOfLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalLiteralFloat").ToString());
-Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalUnionOfLiteralFloat").ToString());
-Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredBadDescription").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalNullableList")[0].ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredNullableList")[0].ToString());
@@ -1937,13 +1475,6 @@ Response response = await client.HelloDemo2Async(null);
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
-Console.WriteLine(result.GetProperty("requiredUnionOfLiteralString").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredUnionOfLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
-Console.WriteLine(result.GetProperty("requiredUnionOfLiteralFloat").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
 ]]></code>
@@ -1957,20 +1488,6 @@ Response response = await client.HelloDemo2Async(null);
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
-Console.WriteLine(result.GetProperty("requiredUnionOfLiteralString").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredUnionOfLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
-Console.WriteLine(result.GetProperty("requiredUnionOfLiteralFloat").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
-Console.WriteLine(result.GetProperty("optionalLiteralString").ToString());
-Console.WriteLine(result.GetProperty("optionalUnionOfLiteralString").ToString());
-Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("optionalUnionOfLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("optionalLiteralFloat").ToString());
-Console.WriteLine(result.GetProperty("optionalUnionOfLiteralFloat").ToString());
-Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
 Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
@@ -1988,13 +1505,6 @@ Response response = client.HelloDemo2(null);
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
-Console.WriteLine(result.GetProperty("requiredUnionOfLiteralString").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredUnionOfLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
-Console.WriteLine(result.GetProperty("requiredUnionOfLiteralFloat").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
 ]]></code>
@@ -2008,20 +1518,6 @@ Response response = client.HelloDemo2(null);
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
-Console.WriteLine(result.GetProperty("requiredUnionOfLiteralString").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredUnionOfLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
-Console.WriteLine(result.GetProperty("requiredUnionOfLiteralFloat").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
-Console.WriteLine(result.GetProperty("optionalLiteralString").ToString());
-Console.WriteLine(result.GetProperty("optionalUnionOfLiteralString").ToString());
-Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("optionalUnionOfLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("optionalLiteralFloat").ToString());
-Console.WriteLine(result.GetProperty("optionalUnionOfLiteralFloat").ToString());
-Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
 Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
@@ -2040,13 +1536,6 @@ RequestContent content = RequestContent.Create(new
 {
     name = "<name>",
     requiredUnion = "<requiredUnion>",
-    requiredLiteralString = "accept",
-    requiredUnionOfLiteralString = "accept",
-    requiredLiteralInt = 123,
-    requiredUnionOfLiteralInt = 123,
-    requiredLiteralFloat = 1.23F,
-    requiredUnionOfLiteralFloat = 1.23F,
-    requiredLiteralBool = false,
     requiredBadDescription = "<requiredBadDescription>",
     requiredNullableList = new List<object>()
     {
@@ -2058,13 +1547,6 @@ Response response = await client.CreateLiteralAsync(content);
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
-Console.WriteLine(result.GetProperty("requiredUnionOfLiteralString").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredUnionOfLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
-Console.WriteLine(result.GetProperty("requiredUnionOfLiteralFloat").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
 ]]></code>
@@ -2077,20 +1559,6 @@ RequestContent content = RequestContent.Create(new
 {
     name = "<name>",
     requiredUnion = "<requiredUnion>",
-    requiredLiteralString = "accept",
-    requiredUnionOfLiteralString = "accept",
-    requiredLiteralInt = 123,
-    requiredUnionOfLiteralInt = 123,
-    requiredLiteralFloat = 1.23F,
-    requiredUnionOfLiteralFloat = 1.23F,
-    requiredLiteralBool = false,
-    optionalLiteralString = "reject",
-    optionalUnionOfLiteralString = "accept",
-    optionalLiteralInt = 456,
-    optionalUnionOfLiteralInt = 456,
-    optionalLiteralFloat = 4.56F,
-    optionalUnionOfLiteralFloat = 4.56F,
-    optionalLiteralBool = true,
     requiredBadDescription = "<requiredBadDescription>",
     optionalNullableList = new List<object>()
     {
@@ -2106,20 +1574,6 @@ Response response = await client.CreateLiteralAsync(content);
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
-Console.WriteLine(result.GetProperty("requiredUnionOfLiteralString").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredUnionOfLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
-Console.WriteLine(result.GetProperty("requiredUnionOfLiteralFloat").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
-Console.WriteLine(result.GetProperty("optionalLiteralString").ToString());
-Console.WriteLine(result.GetProperty("optionalUnionOfLiteralString").ToString());
-Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("optionalUnionOfLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("optionalLiteralFloat").ToString());
-Console.WriteLine(result.GetProperty("optionalUnionOfLiteralFloat").ToString());
-Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
 Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
@@ -2136,13 +1590,6 @@ RequestContent content = RequestContent.Create(new
 {
     name = "<name>",
     requiredUnion = "<requiredUnion>",
-    requiredLiteralString = "accept",
-    requiredUnionOfLiteralString = "accept",
-    requiredLiteralInt = 123,
-    requiredUnionOfLiteralInt = 123,
-    requiredLiteralFloat = 1.23F,
-    requiredUnionOfLiteralFloat = 1.23F,
-    requiredLiteralBool = false,
     requiredBadDescription = "<requiredBadDescription>",
     requiredNullableList = new List<object>()
     {
@@ -2154,13 +1601,6 @@ Response response = client.CreateLiteral(content);
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
-Console.WriteLine(result.GetProperty("requiredUnionOfLiteralString").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredUnionOfLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
-Console.WriteLine(result.GetProperty("requiredUnionOfLiteralFloat").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
 ]]></code>
@@ -2173,20 +1613,6 @@ RequestContent content = RequestContent.Create(new
 {
     name = "<name>",
     requiredUnion = "<requiredUnion>",
-    requiredLiteralString = "accept",
-    requiredUnionOfLiteralString = "accept",
-    requiredLiteralInt = 123,
-    requiredUnionOfLiteralInt = 123,
-    requiredLiteralFloat = 1.23F,
-    requiredUnionOfLiteralFloat = 1.23F,
-    requiredLiteralBool = false,
-    optionalLiteralString = "reject",
-    optionalUnionOfLiteralString = "accept",
-    optionalLiteralInt = 456,
-    optionalUnionOfLiteralInt = 456,
-    optionalLiteralFloat = 4.56F,
-    optionalUnionOfLiteralFloat = 4.56F,
-    optionalLiteralBool = true,
     requiredBadDescription = "<requiredBadDescription>",
     optionalNullableList = new List<object>()
     {
@@ -2202,20 +1628,6 @@ Response response = client.CreateLiteral(content);
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
-Console.WriteLine(result.GetProperty("requiredUnionOfLiteralString").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredUnionOfLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
-Console.WriteLine(result.GetProperty("requiredUnionOfLiteralFloat").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
-Console.WriteLine(result.GetProperty("optionalLiteralString").ToString());
-Console.WriteLine(result.GetProperty("optionalUnionOfLiteralString").ToString());
-Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("optionalUnionOfLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("optionalLiteralFloat").ToString());
-Console.WriteLine(result.GetProperty("optionalUnionOfLiteralFloat").ToString());
-Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
 Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
@@ -2235,13 +1647,6 @@ Response response = await client.HelloLiteralAsync(null);
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
-Console.WriteLine(result.GetProperty("requiredUnionOfLiteralString").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredUnionOfLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
-Console.WriteLine(result.GetProperty("requiredUnionOfLiteralFloat").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
 ]]></code>
@@ -2255,20 +1660,6 @@ Response response = await client.HelloLiteralAsync(null);
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
-Console.WriteLine(result.GetProperty("requiredUnionOfLiteralString").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredUnionOfLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
-Console.WriteLine(result.GetProperty("requiredUnionOfLiteralFloat").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
-Console.WriteLine(result.GetProperty("optionalLiteralString").ToString());
-Console.WriteLine(result.GetProperty("optionalUnionOfLiteralString").ToString());
-Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("optionalUnionOfLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("optionalLiteralFloat").ToString());
-Console.WriteLine(result.GetProperty("optionalUnionOfLiteralFloat").ToString());
-Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
 Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
@@ -2286,13 +1677,6 @@ Response response = client.HelloLiteral(null);
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
-Console.WriteLine(result.GetProperty("requiredUnionOfLiteralString").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredUnionOfLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
-Console.WriteLine(result.GetProperty("requiredUnionOfLiteralFloat").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
 ]]></code>
@@ -2306,20 +1690,6 @@ Response response = client.HelloLiteral(null);
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
-Console.WriteLine(result.GetProperty("requiredUnionOfLiteralString").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredUnionOfLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
-Console.WriteLine(result.GetProperty("requiredUnionOfLiteralFloat").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
-Console.WriteLine(result.GetProperty("optionalLiteralString").ToString());
-Console.WriteLine(result.GetProperty("optionalUnionOfLiteralString").ToString());
-Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("optionalUnionOfLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("optionalLiteralFloat").ToString());
-Console.WriteLine(result.GetProperty("optionalUnionOfLiteralFloat").ToString());
-Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
 Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());

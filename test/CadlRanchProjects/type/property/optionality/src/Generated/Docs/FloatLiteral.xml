@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <members>
+    <member name="GetAllAsync(CancellationToken)" />
+    <member name="GetAll(CancellationToken)" />
+    <member name="GetAllAsync(RequestContext)">
+      <example>
+This sample shows how to call GetAllAsync and parse the result.
+<code><![CDATA[
+FloatLiteral client = new OptionalClient().GetFloatLiteralClient(apiVersion: "1.0.0");
+
+Response response = await client.GetAllAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
+]]></code>
+This sample shows how to call GetAllAsync with all parameters and parse the result.
+<code><![CDATA[
+FloatLiteral client = new OptionalClient().GetFloatLiteralClient(apiVersion: "1.0.0");
+
+Response response = await client.GetAllAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("property").ToString());
+]]></code></example>
+    </member>
+    <member name="GetAll(RequestContext)">
+      <example>
+This sample shows how to call GetAll and parse the result.
+<code><![CDATA[
+FloatLiteral client = new OptionalClient().GetFloatLiteralClient(apiVersion: "1.0.0");
+
+Response response = client.GetAll(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
+]]></code>
+This sample shows how to call GetAll with all parameters and parse the result.
+<code><![CDATA[
+FloatLiteral client = new OptionalClient().GetFloatLiteralClient(apiVersion: "1.0.0");
+
+Response response = client.GetAll(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("property").ToString());
+]]></code></example>
+    </member>
+    <member name="GetDefaultAsync(CancellationToken)" />
+    <member name="GetDefault(CancellationToken)" />
+    <member name="GetDefaultAsync(RequestContext)">
+      <example>
+This sample shows how to call GetDefaultAsync and parse the result.
+<code><![CDATA[
+FloatLiteral client = new OptionalClient().GetFloatLiteralClient(apiVersion: "1.0.0");
+
+Response response = await client.GetDefaultAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
+]]></code>
+This sample shows how to call GetDefaultAsync with all parameters and parse the result.
+<code><![CDATA[
+FloatLiteral client = new OptionalClient().GetFloatLiteralClient(apiVersion: "1.0.0");
+
+Response response = await client.GetDefaultAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("property").ToString());
+]]></code></example>
+    </member>
+    <member name="GetDefault(RequestContext)">
+      <example>
+This sample shows how to call GetDefault and parse the result.
+<code><![CDATA[
+FloatLiteral client = new OptionalClient().GetFloatLiteralClient(apiVersion: "1.0.0");
+
+Response response = client.GetDefault(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
+]]></code>
+This sample shows how to call GetDefault with all parameters and parse the result.
+<code><![CDATA[
+FloatLiteral client = new OptionalClient().GetFloatLiteralClient(apiVersion: "1.0.0");
+
+Response response = client.GetDefault(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("property").ToString());
+]]></code></example>
+    </member>
+    <member name="PutAllAsync(FloatLiteralProperty,CancellationToken)" />
+    <member name="PutAll(FloatLiteralProperty,CancellationToken)" />
+    <member name="PutAllAsync(RequestContent,RequestContext)">
+      <example>
+This sample shows how to call PutAllAsync.
+<code><![CDATA[
+FloatLiteral client = new OptionalClient().GetFloatLiteralClient(apiVersion: "1.0.0");
+
+RequestContent content = RequestContent.Create(new object());
+Response response = await client.PutAllAsync(content);
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call PutAllAsync with all request content.
+<code><![CDATA[
+FloatLiteral client = new OptionalClient().GetFloatLiteralClient(apiVersion: "1.0.0");
+
+RequestContent content = RequestContent.Create(new
+{
+    property = 1.2F,
+});
+Response response = await client.PutAllAsync(content);
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+    <member name="PutAll(RequestContent,RequestContext)">
+      <example>
+This sample shows how to call PutAll.
+<code><![CDATA[
+FloatLiteral client = new OptionalClient().GetFloatLiteralClient(apiVersion: "1.0.0");
+
+RequestContent content = RequestContent.Create(new object());
+Response response = client.PutAll(content);
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call PutAll with all request content.
+<code><![CDATA[
+FloatLiteral client = new OptionalClient().GetFloatLiteralClient(apiVersion: "1.0.0");
+
+RequestContent content = RequestContent.Create(new
+{
+    property = 1.2F,
+});
+Response response = client.PutAll(content);
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+    <member name="PutDefaultAsync(FloatLiteralProperty,CancellationToken)" />
+    <member name="PutDefault(FloatLiteralProperty,CancellationToken)" />
+    <member name="PutDefaultAsync(RequestContent,RequestContext)">
+      <example>
+This sample shows how to call PutDefaultAsync.
+<code><![CDATA[
+FloatLiteral client = new OptionalClient().GetFloatLiteralClient(apiVersion: "1.0.0");
+
+RequestContent content = RequestContent.Create(new object());
+Response response = await client.PutDefaultAsync(content);
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call PutDefaultAsync with all request content.
+<code><![CDATA[
+FloatLiteral client = new OptionalClient().GetFloatLiteralClient(apiVersion: "1.0.0");
+
+RequestContent content = RequestContent.Create(new
+{
+    property = 1.2F,
+});
+Response response = await client.PutDefaultAsync(content);
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+    <member name="PutDefault(RequestContent,RequestContext)">
+      <example>
+This sample shows how to call PutDefault.
+<code><![CDATA[
+FloatLiteral client = new OptionalClient().GetFloatLiteralClient(apiVersion: "1.0.0");
+
+RequestContent content = RequestContent.Create(new object());
+Response response = client.PutDefault(content);
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call PutDefault with all request content.
+<code><![CDATA[
+FloatLiteral client = new OptionalClient().GetFloatLiteralClient(apiVersion: "1.0.0");
+
+RequestContent content = RequestContent.Create(new
+{
+    property = 1.2F,
+});
+Response response = client.PutDefault(content);
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+  </members>
+</doc>

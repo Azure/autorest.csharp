@@ -21,55 +21,6 @@ namespace FirstTestTypeSpec.Models
             writer.WriteStringValue(Name);
             writer.WritePropertyName("requiredUnion"u8);
             writer.WriteObjectValue(RequiredUnion);
-            writer.WritePropertyName("requiredLiteralString"u8);
-            writer.WriteStringValue(RequiredLiteralString.ToString());
-            writer.WritePropertyName("requiredUnionOfLiteralString"u8);
-            writer.WriteStringValue(RequiredUnionOfLiteralString.ToString());
-            writer.WritePropertyName("requiredLiteralInt"u8);
-            writer.WriteNumberValue(RequiredLiteralInt.ToSerialInt32());
-            writer.WritePropertyName("requiredUnionOfLiteralInt"u8);
-            writer.WriteNumberValue(RequiredUnionOfLiteralInt.ToSerialInt32());
-            writer.WritePropertyName("requiredLiteralFloat"u8);
-            writer.WriteNumberValue(RequiredLiteralFloat.ToSerialSingle());
-            writer.WritePropertyName("requiredUnionOfLiteralFloat"u8);
-            writer.WriteNumberValue(RequiredUnionOfLiteralFloat.ToSerialSingle());
-            writer.WritePropertyName("requiredLiteralBool"u8);
-            writer.WriteBooleanValue(RequiredLiteralBool);
-            if (Optional.IsDefined(OptionalLiteralString))
-            {
-                writer.WritePropertyName("optionalLiteralString"u8);
-                writer.WriteStringValue(OptionalLiteralString.Value.ToString());
-            }
-            if (Optional.IsDefined(OptionalUnionOfLiteralString))
-            {
-                writer.WritePropertyName("optionalUnionOfLiteralString"u8);
-                writer.WriteStringValue(OptionalUnionOfLiteralString.Value.ToString());
-            }
-            if (Optional.IsDefined(OptionalLiteralInt))
-            {
-                writer.WritePropertyName("optionalLiteralInt"u8);
-                writer.WriteNumberValue(OptionalLiteralInt.Value.ToSerialInt32());
-            }
-            if (Optional.IsDefined(OptionalUnionOfLiteralInt))
-            {
-                writer.WritePropertyName("optionalUnionOfLiteralInt"u8);
-                writer.WriteNumberValue(OptionalUnionOfLiteralInt.Value.ToSerialInt32());
-            }
-            if (Optional.IsDefined(OptionalLiteralFloat))
-            {
-                writer.WritePropertyName("optionalLiteralFloat"u8);
-                writer.WriteNumberValue(OptionalLiteralFloat.Value.ToSerialSingle());
-            }
-            if (Optional.IsDefined(OptionalUnionOfLiteralFloat))
-            {
-                writer.WritePropertyName("optionalUnionOfLiteralFloat"u8);
-                writer.WriteNumberValue(OptionalUnionOfLiteralFloat.Value.ToSerialSingle());
-            }
-            if (Optional.IsDefined(OptionalLiteralBool))
-            {
-                writer.WritePropertyName("optionalLiteralBool"u8);
-                writer.WriteBooleanValue(OptionalLiteralBool.Value);
-            }
             writer.WritePropertyName("requiredBadDescription"u8);
             writer.WriteStringValue(RequiredBadDescription);
             if (Optional.IsCollectionDefined(OptionalNullableList))
@@ -114,20 +65,6 @@ namespace FirstTestTypeSpec.Models
             }
             string name = default;
             object requiredUnion = default;
-            ThingRequiredLiteralString requiredLiteralString = default;
-            ThingRequiredUnionOfLiteralString requiredUnionOfLiteralString = default;
-            ThingRequiredLiteralInt requiredLiteralInt = default;
-            ThingRequiredUnionOfLiteralInt requiredUnionOfLiteralInt = default;
-            ThingRequiredLiteralFloat requiredLiteralFloat = default;
-            ThingRequiredUnionOfLiteralFloat requiredUnionOfLiteralFloat = default;
-            bool requiredLiteralBool = default;
-            Optional<ThingOptionalLiteralString> optionalLiteralString = default;
-            Optional<ThingOptionalUnionOfLiteralString> optionalUnionOfLiteralString = default;
-            Optional<ThingOptionalLiteralInt> optionalLiteralInt = default;
-            Optional<ThingOptionalUnionOfLiteralInt> optionalUnionOfLiteralInt = default;
-            Optional<ThingOptionalLiteralFloat> optionalLiteralFloat = default;
-            Optional<ThingOptionalUnionOfLiteralFloat> optionalUnionOfLiteralFloat = default;
-            Optional<bool> optionalLiteralBool = default;
             string requiredBadDescription = default;
             Optional<IList<int>> optionalNullableList = default;
             IList<int> requiredNullableList = default;
@@ -141,104 +78,6 @@ namespace FirstTestTypeSpec.Models
                 if (property.NameEquals("requiredUnion"u8))
                 {
                     requiredUnion = property.Value.GetObject();
-                    continue;
-                }
-                if (property.NameEquals("requiredLiteralString"u8))
-                {
-                    requiredLiteralString = new ThingRequiredLiteralString(property.Value.GetString());
-                    continue;
-                }
-                if (property.NameEquals("requiredUnionOfLiteralString"u8))
-                {
-                    requiredUnionOfLiteralString = new ThingRequiredUnionOfLiteralString(property.Value.GetString());
-                    continue;
-                }
-                if (property.NameEquals("requiredLiteralInt"u8))
-                {
-                    requiredLiteralInt = new ThingRequiredLiteralInt(property.Value.GetInt32());
-                    continue;
-                }
-                if (property.NameEquals("requiredUnionOfLiteralInt"u8))
-                {
-                    requiredUnionOfLiteralInt = new ThingRequiredUnionOfLiteralInt(property.Value.GetInt32());
-                    continue;
-                }
-                if (property.NameEquals("requiredLiteralFloat"u8))
-                {
-                    requiredLiteralFloat = new ThingRequiredLiteralFloat(property.Value.GetSingle());
-                    continue;
-                }
-                if (property.NameEquals("requiredUnionOfLiteralFloat"u8))
-                {
-                    requiredUnionOfLiteralFloat = new ThingRequiredUnionOfLiteralFloat(property.Value.GetSingle());
-                    continue;
-                }
-                if (property.NameEquals("requiredLiteralBool"u8))
-                {
-                    requiredLiteralBool = property.Value.GetBoolean();
-                    continue;
-                }
-                if (property.NameEquals("optionalLiteralString"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    optionalLiteralString = new ThingOptionalLiteralString(property.Value.GetString());
-                    continue;
-                }
-                if (property.NameEquals("optionalUnionOfLiteralString"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    optionalUnionOfLiteralString = new ThingOptionalUnionOfLiteralString(property.Value.GetString());
-                    continue;
-                }
-                if (property.NameEquals("optionalLiteralInt"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    optionalLiteralInt = new ThingOptionalLiteralInt(property.Value.GetInt32());
-                    continue;
-                }
-                if (property.NameEquals("optionalUnionOfLiteralInt"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    optionalUnionOfLiteralInt = new ThingOptionalUnionOfLiteralInt(property.Value.GetInt32());
-                    continue;
-                }
-                if (property.NameEquals("optionalLiteralFloat"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    optionalLiteralFloat = new ThingOptionalLiteralFloat(property.Value.GetSingle());
-                    continue;
-                }
-                if (property.NameEquals("optionalUnionOfLiteralFloat"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    optionalUnionOfLiteralFloat = new ThingOptionalUnionOfLiteralFloat(property.Value.GetSingle());
-                    continue;
-                }
-                if (property.NameEquals("optionalLiteralBool"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    optionalLiteralBool = property.Value.GetBoolean();
                     continue;
                 }
                 if (property.NameEquals("requiredBadDescription"u8))
@@ -277,7 +116,7 @@ namespace FirstTestTypeSpec.Models
                     continue;
                 }
             }
-            return new Thing(name, requiredUnion, requiredLiteralString, requiredUnionOfLiteralString, requiredLiteralInt, requiredUnionOfLiteralInt, requiredLiteralFloat, requiredUnionOfLiteralFloat, requiredLiteralBool, Optional.ToNullable(optionalLiteralString), Optional.ToNullable(optionalUnionOfLiteralString), Optional.ToNullable(optionalLiteralInt), Optional.ToNullable(optionalUnionOfLiteralInt), Optional.ToNullable(optionalLiteralFloat), Optional.ToNullable(optionalUnionOfLiteralFloat), Optional.ToNullable(optionalLiteralBool), requiredBadDescription, Optional.ToList(optionalNullableList), requiredNullableList);
+            return new Thing(name, requiredUnion, requiredBadDescription, Optional.ToList(optionalNullableList), requiredNullableList);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>

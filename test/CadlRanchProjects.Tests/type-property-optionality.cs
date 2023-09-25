@@ -246,5 +246,201 @@ namespace CadlRanchProjects.Tests
             Response response = await new OptionalClient(host, null).GetRequiredAndOptionalClient().PutRequiredOnlyAsync(new RequiredAndOptionalProperty(42));
             Assert.AreEqual(204, response.Status);
         });
+
+        [Test]
+        public Task Type_Property_Optional_StringLiteral_getAll() => Test(async (host) =>
+        {
+            var response = await new OptionalClient(host, null).GetStringLiteralClient().GetAllAsync();
+            Assert.AreEqual("hello", response.Value.Property.ToString());
+        });
+
+        [Test]
+        public Task Type_Property_Optional_StringLiteral_getDefault() => Test(async (host) =>
+        {
+            var response = await new OptionalClient(host, null).GetStringLiteralClient().GetDefaultAsync();
+            Assert.IsNull(response.Value.Property);
+        });
+
+        [Test]
+        public Task Type_Property_Optional_StringLiteral_putAll() => Test(async (host) =>
+        {
+            var response = await new OptionalClient(host, null).GetStringLiteralClient().PutAllAsync(new StringLiteralProperty("hello"));
+            Assert.AreEqual(204, response.Status);
+        });
+
+        [Test]
+        public Task Type_Property_Optional_StringLiteral_putDefault() => Test(async (host) =>
+        {
+            var response = await new OptionalClient(host, null).GetStringLiteralClient().PutDefaultAsync(new StringLiteralProperty());
+            Assert.AreEqual(204, response.Status);
+        });
+
+        [Test]
+        public Task Type_Property_Optional_IntLiteral_getAll() => Test(async (host) =>
+        {
+            var response = await new OptionalClient(host, null).GetIntLiteralClient().GetAllAsync();
+            Assert.AreEqual(new IntLiteralPropertyProperty(1), response.Value.Property);
+        });
+
+        [Test]
+        public Task Type_Property_Optional_IntLiteral_getDefault() => Test(async (host) =>
+        {
+            var response = await new OptionalClient(host, null).GetIntLiteralClient().GetDefaultAsync();
+            Assert.IsNull(response.Value.Property);
+        });
+
+        [Test]
+        public Task Type_Property_Optional_IntLiteral_putAll() => Test(async (host) =>
+        {
+            var response = await new OptionalClient(host, null).GetIntLiteralClient().PutAllAsync(new IntLiteralProperty(1));
+            Assert.AreEqual(204, response.Status);
+        });
+
+        [Test]
+        public Task Type_Property_Optional_IntLiteral_putDefault() => Test(async (host) =>
+        {
+            var response = await new OptionalClient(host, null).GetIntLiteralClient().PutDefaultAsync(new IntLiteralProperty());
+            Assert.AreEqual(204, response.Status);
+        });
+
+        [Test]
+        public Task Type_Property_Optional_FloatLiteral_getAll() => Test(async (host) =>
+        {
+            var response = await new OptionalClient(host, null).GetFloatLiteralClient().GetAllAsync();
+            Assert.AreEqual(new FloatLiteralPropertyProperty(1.2f), response.Value.Property);
+        });
+
+        [Test]
+        public Task Type_Property_Optional_FloatLiteral_getDefault() => Test(async (host) =>
+        {
+            var response = await new OptionalClient(host, null).GetFloatLiteralClient().GetDefaultAsync();
+            Assert.IsNull(response.Value.Property);
+        });
+
+        [Test]
+        public Task Type_Property_Optional_FloatLiteral_putAll() => Test(async (host) =>
+        {
+            var response = await new OptionalClient(host, null).GetFloatLiteralClient().PutAllAsync(new FloatLiteralProperty(1.2f));
+            Assert.AreEqual(204, response.Status);
+        });
+
+        [Test]
+        public Task Type_Property_Optional_FloatLiteral_putDefault() => Test(async (host) =>
+        {
+            var response = await new OptionalClient(host, null).GetFloatLiteralClient().PutDefaultAsync(new FloatLiteralProperty());
+            Assert.AreEqual(204, response.Status);
+        });
+
+        [Test]
+        public Task Type_Property_Optional_BooleanLiteral_getAll() => Test(async (host) =>
+        {
+            var response = await new OptionalClient(host, null).GetBooleanLiteralClient().GetAllAsync();
+            Assert.AreEqual(true, response.Value.Property);
+        });
+
+        [Test]
+        public Task Type_Property_Optional_BooleanLiteral_getDefault() => Test(async (host) =>
+        {
+            var response = await new OptionalClient(host, null).GetBooleanLiteralClient().GetDefaultAsync();
+            Assert.IsNull(response.Value.Property);
+        });
+
+        [Test]
+        public Task Type_Property_Optional_BooleanLiteral_putAll() => Test(async (host) =>
+        {
+            var response = await new OptionalClient(host, null).GetBooleanLiteralClient().PutAllAsync(new BooleanLiteralProperty(true));
+            Assert.AreEqual(204, response.Status);
+        });
+
+        [Test]
+        public Task Type_Property_Optional_BooleanLiteral_putDefault() => Test(async (host) =>
+        {
+            var response = await new OptionalClient(host, null).GetBooleanLiteralClient().PutDefaultAsync(new BooleanLiteralProperty());
+            Assert.AreEqual(204, response.Status);
+        });
+
+        [Test]
+        public Task Type_Property_Optional_UnionStringLiteral_getAll() => Test(async (host) =>
+        {
+            var response = await new OptionalClient(host, null).GetUnionStringLiteralClient().GetAllAsync();
+            Assert.AreEqual("world", response.Value.Property.ToString());
+        });
+
+        [Test]
+        public Task Type_Property_Optional_UnionStringLiteral_getDefault() => Test(async (host) =>
+        {
+            var response = await new OptionalClient(host, null).GetUnionStringLiteralClient().GetDefaultAsync();
+            Assert.IsNull(response.Value.Property);
+        });
+
+        [Test]
+        public Task Type_Property_Optional_UnionStringLiteral_putAll() => Test(async (host) =>
+        {
+            var response = await new OptionalClient(host, null).GetUnionStringLiteralClient().PutAllAsync(new UnionStringLiteralProperty("world"));
+            Assert.AreEqual(204, response.Status);
+        });
+
+        [Test]
+        public Task Type_Property_Optional_UnionStringLiteral_putDefault() => Test(async (host) =>
+        {
+            var response = await new OptionalClient(host, null).GetUnionStringLiteralClient().PutDefaultAsync(new UnionStringLiteralProperty());
+            Assert.AreEqual(204, response.Status);
+        });
+
+        [Test]
+        public Task Type_Property_Optional_UnionIntLiteral_getAll() => Test(async (host) =>
+        {
+            var response = await new OptionalClient(host, null).GetUnionIntLiteralClient().GetAllAsync();
+            Assert.AreEqual(new UnionIntLiteralPropertyProperty(2), response.Value.Property);
+        });
+
+        [Test]
+        public Task Type_Property_Optional_UnionIntLiteral_getDefault() => Test(async (host) =>
+        {
+            var response = await new OptionalClient(host, null).GetUnionIntLiteralClient().GetDefaultAsync();
+            Assert.IsNull(response.Value.Property);
+        });
+
+        [Test]
+        public Task Type_Property_Optional_UnionIntLiteral_putAll() => Test(async (host) =>
+        {
+            var response = await new OptionalClient(host, null).GetUnionIntLiteralClient().PutAllAsync(new UnionIntLiteralProperty(2));
+            Assert.AreEqual(204, response.Status);
+        });
+
+        [Test]
+        public Task Type_Property_Optional_UnionIntLiteral_putDefault() => Test(async (host) =>
+        {
+            var response = await new OptionalClient(host, null).GetUnionIntLiteralClient().PutDefaultAsync(new UnionIntLiteralProperty());
+            Assert.AreEqual(204, response.Status);
+        });
+
+        [Test]
+        public Task Type_Property_Optional_UnionFloatLiteral_getAll() => Test(async (host) =>
+        {
+            var response = await new OptionalClient(host, null).GetUnionFloatLiteralClient().GetAllAsync();
+            Assert.AreEqual(new UnionFloatLiteralPropertyProperty(2.3f), response.Value.Property);
+        });
+
+        [Test]
+        public Task Type_Property_Optional_UnionFloatLiteral_getDefault() => Test(async (host) =>
+        {
+            var response = await new OptionalClient(host, null).GetUnionFloatLiteralClient().GetDefaultAsync();
+            Assert.IsNull(response.Value.Property);
+        });
+
+        [Test]
+        public Task Type_Property_Optional_UnionFloatLiteral_putAll() => Test(async (host) =>
+        {
+            var response = await new OptionalClient(host, null).GetUnionFloatLiteralClient().PutAllAsync(new UnionFloatLiteralProperty(2.3f));
+            Assert.AreEqual(204, response.Status);
+        });
+
+        [Test]
+        public Task Type_Property_Optional_UnionFloatLiteral_putDefault() => Test(async (host) =>
+        {
+            var response = await new OptionalClient(host, null).GetUnionFloatLiteralClient().PutDefaultAsync(new UnionFloatLiteralProperty());
+            Assert.AreEqual(204, response.Status);
+        });
     }
 }
