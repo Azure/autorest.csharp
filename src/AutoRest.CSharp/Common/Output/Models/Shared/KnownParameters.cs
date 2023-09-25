@@ -17,8 +17,8 @@ namespace AutoRest.CSharp.Output.Models.Shared
         private static readonly CSharpType RequestConditionsType = new(typeof(RequestConditions), true);
         private static readonly CSharpType RequestContentType = new(typeof(RequestContent));
         private static readonly CSharpType RequestContentNullableType = new(typeof(RequestContent), true);
-        private static readonly CSharpType RequestContextType = new(typeof(RequestContext));
-        private static readonly CSharpType RequestContextNullableType = new(typeof(RequestContext), true);
+        private static readonly CSharpType RequestContextType = new(Configuration.ApiTypes.RequestContextType);
+        private static readonly CSharpType RequestContextNullableType = new(Configuration.ApiTypes.RequestContextType, true);
 
         public static readonly Parameter ClientDiagnostics = new("clientDiagnostics", $"The handler for diagnostic messaging in the client.", new CSharpType(Configuration.ApiTypes.ClientDiagnosticsType), null, ValidationType.AssertNotNull, null);
         public static readonly Parameter Pipeline = new("pipeline", $"The HTTP pipeline for sending and receiving REST requests and responses", new CSharpType(Configuration.ApiTypes.HttpPipelineType), null, ValidationType.AssertNotNull, null);

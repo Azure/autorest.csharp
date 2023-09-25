@@ -14,7 +14,6 @@ using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
-using Azure;
 using Azure.Core;
 
 namespace AutoRest.CSharp.Generation.Writers
@@ -178,7 +177,7 @@ namespace AutoRest.CSharp.Generation.Writers
             var requestContextVariable = new CodeWriterDeclaration(KnownParameters.RequestContext.Name);
             if (parameters.Contains(KnownParameters.CancellationTokenParameter))
             {
-                writer.Line($"{KnownParameters.RequestContext.Type} {requestContextVariable:D} = {KnownParameters.CancellationTokenParameter.Name:I}.{nameof(CancellationToken.CanBeCanceled)} ? new {KnownParameters.RequestContext.Type} {{ {nameof(RequestContext.CancellationToken)} = {KnownParameters.CancellationTokenParameter.Name:I} }} : null;");
+                writer.Line($"{KnownParameters.RequestContext.Type} {requestContextVariable:D} = {KnownParameters.CancellationTokenParameter.Name:I}.{nameof(CancellationToken.CanBeCanceled)} ? new {KnownParameters.RequestContext.Type} {{ {Configuration.ApiTypes.CancellationTokenName} = {KnownParameters.CancellationTokenParameter.Name:I} }} : null;");
             }
             else
             {

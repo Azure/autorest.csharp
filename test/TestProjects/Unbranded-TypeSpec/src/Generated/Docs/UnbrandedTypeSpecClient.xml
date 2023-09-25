@@ -3,7 +3,7 @@
   <members>
     <member name="TopActionAsync(DateTimeOffset,CancellationToken)" />
     <member name="TopAction(DateTimeOffset,CancellationToken)" />
-    <member name="TopActionAsync(DateTimeOffset,RequestContext)">
+    <member name="TopActionAsync(DateTimeOffset,PipelineOptions)">
       <example>
 This sample shows how to call TopActionAsync and parse the result.
 <code><![CDATA[
@@ -47,7 +47,7 @@ Console.WriteLine(result0.GetProperty("optionalNullableList")[0].ToString());
 Console.WriteLine(result0.GetProperty("requiredNullableList")[0].ToString());
 ]]></code></example>
     </member>
-    <member name="TopAction(DateTimeOffset,RequestContext)">
+    <member name="TopAction(DateTimeOffset,PipelineOptions)">
       <example>
 This sample shows how to call TopAction and parse the result.
 <code><![CDATA[
@@ -91,7 +91,7 @@ Console.WriteLine(result0.GetProperty("optionalNullableList")[0].ToString());
 Console.WriteLine(result0.GetProperty("requiredNullableList")[0].ToString());
 ]]></code></example>
     </member>
-    <member name="TopAction2Async(RequestContext)">
+    <member name="TopAction2Async(PipelineOptions)">
       <example>
 This sample shows how to call TopAction2Async and parse the result.
 <code><![CDATA[
@@ -135,7 +135,7 @@ Console.WriteLine(result0.GetProperty("optionalNullableList")[0].ToString());
 Console.WriteLine(result0.GetProperty("requiredNullableList")[0].ToString());
 ]]></code></example>
     </member>
-    <member name="TopAction2(RequestContext)">
+    <member name="TopAction2(PipelineOptions)">
       <example>
 This sample shows how to call TopAction2 and parse the result.
 <code><![CDATA[
@@ -179,7 +179,7 @@ Console.WriteLine(result0.GetProperty("optionalNullableList")[0].ToString());
 Console.WriteLine(result0.GetProperty("requiredNullableList")[0].ToString());
 ]]></code></example>
     </member>
-    <member name="PatchActionAsync(RequestContent,RequestContext)">
+    <member name="PatchActionAsync(RequestContent,PipelineOptions)">
       <example>
 This sample shows how to call PatchActionAsync and parse the result.
 <code><![CDATA[
@@ -259,7 +259,7 @@ Console.WriteLine(result0.GetProperty("optionalNullableList")[0].ToString());
 Console.WriteLine(result0.GetProperty("requiredNullableList")[0].ToString());
 ]]></code></example>
     </member>
-    <member name="PatchAction(RequestContent,RequestContext)">
+    <member name="PatchAction(RequestContent,PipelineOptions)">
       <example>
 This sample shows how to call PatchAction and parse the result.
 <code><![CDATA[
@@ -341,7 +341,7 @@ Console.WriteLine(result0.GetProperty("requiredNullableList")[0].ToString());
     </member>
     <member name="AnonymousBodyAsync(Thing,CancellationToken)" />
     <member name="AnonymousBody(Thing,CancellationToken)" />
-    <member name="AnonymousBodyAsync(RequestContent,RequestContext)">
+    <member name="AnonymousBodyAsync(RequestContent,PipelineOptions)">
       <example>
 This sample shows how to call AnonymousBodyAsync and parse the result.
 <code><![CDATA[
@@ -421,7 +421,7 @@ Console.WriteLine(result0.GetProperty("optionalNullableList")[0].ToString());
 Console.WriteLine(result0.GetProperty("requiredNullableList")[0].ToString());
 ]]></code></example>
     </member>
-    <member name="AnonymousBody(RequestContent,RequestContext)">
+    <member name="AnonymousBody(RequestContent,PipelineOptions)">
       <example>
 This sample shows how to call AnonymousBody and parse the result.
 <code><![CDATA[
@@ -543,7 +543,7 @@ Friend notFriend = new Friend("<name>");
 Result<Friend> result = client.FriendlyModel(notFriend);
 ]]></code></example>
     </member>
-    <member name="FriendlyModelAsync(RequestContent,RequestContext)">
+    <member name="FriendlyModelAsync(RequestContent,PipelineOptions)">
       <example>
 This sample shows how to call FriendlyModelAsync and parse the result.
 <code><![CDATA[
@@ -576,7 +576,7 @@ JsonElement result0 = JsonDocument.Parse(result.ContentStream).RootElement;
 Console.WriteLine(result0.GetProperty("name").ToString());
 ]]></code></example>
     </member>
-    <member name="FriendlyModel(RequestContent,RequestContext)">
+    <member name="FriendlyModel(RequestContent,PipelineOptions)">
       <example>
 This sample shows how to call FriendlyModel and parse the result.
 <code><![CDATA[
@@ -609,7 +609,7 @@ JsonElement result0 = JsonDocument.Parse(result.ContentStream).RootElement;
 Console.WriteLine(result0.GetProperty("name").ToString());
 ]]></code></example>
     </member>
-    <member name="AddTimeHeaderAsync(RequestContext)">
+    <member name="AddTimeHeaderAsync(PipelineOptions)">
       <example>
 This sample shows how to call AddTimeHeaderAsync.
 <code><![CDATA[
@@ -630,7 +630,7 @@ Result result = await client.AddTimeHeaderAsync();
 Console.WriteLine(result.Status);
 ]]></code></example>
     </member>
-    <member name="AddTimeHeader(RequestContext)">
+    <member name="AddTimeHeader(PipelineOptions)">
       <example>
 This sample shows how to call AddTimeHeader.
 <code><![CDATA[
@@ -697,7 +697,7 @@ Result result = client.StringFormat(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4
 Console.WriteLine(result.Status);
 ]]></code></example>
     </member>
-    <member name="StringFormatAsync(Guid,RequestContent,RequestContext)">
+    <member name="StringFormatAsync(Guid,RequestContent,PipelineOptions)">
       <example>
 This sample shows how to call StringFormatAsync.
 <code><![CDATA[
@@ -728,7 +728,7 @@ Result result = await client.StringFormatAsync(Guid.Parse("73f411fe-4f43-4b4b-9c
 Console.WriteLine(result.Status);
 ]]></code></example>
     </member>
-    <member name="StringFormat(Guid,RequestContent,RequestContext)">
+    <member name="StringFormat(Guid,RequestContent,PipelineOptions)">
       <example>
 This sample shows how to call StringFormat.
 <code><![CDATA[
@@ -801,7 +801,7 @@ ProjectedModel modelWithProjectedName = new ProjectedModel("<name>");
 Result<ProjectedModel> result = client.ProjectedNameModel(modelWithProjectedName);
 ]]></code></example>
     </member>
-    <member name="ProjectedNameModelAsync(RequestContent,RequestContext)">
+    <member name="ProjectedNameModelAsync(RequestContent,PipelineOptions)">
       <example>
 This sample shows how to call ProjectedNameModelAsync and parse the result.
 <code><![CDATA[
@@ -834,7 +834,7 @@ JsonElement result0 = JsonDocument.Parse(result.ContentStream).RootElement;
 Console.WriteLine(result0.GetProperty("name").ToString());
 ]]></code></example>
     </member>
-    <member name="ProjectedNameModel(RequestContent,RequestContext)">
+    <member name="ProjectedNameModel(RequestContent,PipelineOptions)">
       <example>
 This sample shows how to call ProjectedNameModel and parse the result.
 <code><![CDATA[
@@ -867,7 +867,7 @@ JsonElement result0 = JsonDocument.Parse(result.ContentStream).RootElement;
 Console.WriteLine(result0.GetProperty("name").ToString());
 ]]></code></example>
     </member>
-    <member name="ReturnsAnonymousModelAsync(RequestContext)">
+    <member name="ReturnsAnonymousModelAsync(PipelineOptions)">
       <example>
 This sample shows how to call ReturnsAnonymousModelAsync and parse the result.
 <code><![CDATA[
@@ -890,7 +890,7 @@ Result result = await client.ReturnsAnonymousModelAsync(null);
 Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
-    <member name="ReturnsAnonymousModel(RequestContext)">
+    <member name="ReturnsAnonymousModel(PipelineOptions)">
       <example>
 This sample shows how to call ReturnsAnonymousModel and parse the result.
 <code><![CDATA[
@@ -913,7 +913,7 @@ Result result = client.ReturnsAnonymousModel(null);
 Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
-    <member name="HeadAsBooleanAsync(string,RequestContext)">
+    <member name="HeadAsBooleanAsync(string,PipelineOptions)">
       <example>
 This sample shows how to call HeadAsBooleanAsync.
 <code><![CDATA[
@@ -934,7 +934,7 @@ Result<bool> result = await client.HeadAsBooleanAsync("<id>");
 Console.WriteLine(result.GetRawResult().Status);
 ]]></code></example>
     </member>
-    <member name="HeadAsBoolean(string,RequestContext)">
+    <member name="HeadAsBoolean(string,PipelineOptions)">
       <example>
 This sample shows how to call HeadAsBoolean.
 <code><![CDATA[
@@ -955,7 +955,7 @@ Result<bool> result = client.HeadAsBoolean("<id>");
 Console.WriteLine(result.GetRawResult().Status);
 ]]></code></example>
     </member>
-    <member name="SayHiAsync(string,string,string,RequestContext)">
+    <member name="SayHiAsync(string,string,string,PipelineOptions)">
       <example>
 This sample shows how to call SayHiAsync and parse the result.
 <code><![CDATA[
@@ -999,7 +999,7 @@ Console.WriteLine(result0.GetProperty("optionalNullableList")[0].ToString());
 Console.WriteLine(result0.GetProperty("requiredNullableList")[0].ToString());
 ]]></code></example>
     </member>
-    <member name="SayHi(string,string,string,RequestContext)">
+    <member name="SayHi(string,string,string,PipelineOptions)">
       <example>
 This sample shows how to call SayHi and parse the result.
 <code><![CDATA[
@@ -1045,7 +1045,7 @@ Console.WriteLine(result0.GetProperty("requiredNullableList")[0].ToString());
     </member>
     <member name="HelloAgainAsync(string,string,RoundTripModel,CancellationToken)" />
     <member name="HelloAgain(string,string,RoundTripModel,CancellationToken)" />
-    <member name="HelloAgainAsync(string,string,RequestContent,RequestContext)">
+    <member name="HelloAgainAsync(string,string,RequestContent,PipelineOptions)">
       <example>
 This sample shows how to call HelloAgainAsync and parse the result.
 <code><![CDATA[
@@ -1231,7 +1231,7 @@ Console.WriteLine(result0.GetProperty("modelWithRequiredNullable").GetProperty("
 Console.WriteLine(result0.GetProperty("modelWithRequiredNullable").GetProperty("requiredFixedEnum").ToString());
 ]]></code></example>
     </member>
-    <member name="HelloAgain(string,string,RequestContent,RequestContext)">
+    <member name="HelloAgain(string,string,RequestContent,PipelineOptions)">
       <example>
 This sample shows how to call HelloAgain and parse the result.
 <code><![CDATA[
@@ -1417,7 +1417,7 @@ Console.WriteLine(result0.GetProperty("modelWithRequiredNullable").GetProperty("
 Console.WriteLine(result0.GetProperty("modelWithRequiredNullable").GetProperty("requiredFixedEnum").ToString());
 ]]></code></example>
     </member>
-    <member name="NoContentTypeAsync(string,string,RequestContent,RequestContext)">
+    <member name="NoContentTypeAsync(string,string,RequestContent,PipelineOptions)">
       <example>
 This sample shows how to call NoContentTypeAsync and parse the result.
 <code><![CDATA[
@@ -1603,7 +1603,7 @@ Console.WriteLine(result0.GetProperty("modelWithRequiredNullable").GetProperty("
 Console.WriteLine(result0.GetProperty("modelWithRequiredNullable").GetProperty("requiredFixedEnum").ToString());
 ]]></code></example>
     </member>
-    <member name="NoContentType(string,string,RequestContent,RequestContext)">
+    <member name="NoContentType(string,string,RequestContent,PipelineOptions)">
       <example>
 This sample shows how to call NoContentType and parse the result.
 <code><![CDATA[
@@ -1791,7 +1791,7 @@ Console.WriteLine(result0.GetProperty("modelWithRequiredNullable").GetProperty("
     </member>
     <member name="HelloDemo2Async(CancellationToken)" />
     <member name="HelloDemo2(CancellationToken)" />
-    <member name="HelloDemo2Async(RequestContext)">
+    <member name="HelloDemo2Async(PipelineOptions)">
       <example>
 This sample shows how to call HelloDemo2Async and parse the result.
 <code><![CDATA[
@@ -1835,7 +1835,7 @@ Console.WriteLine(result0.GetProperty("optionalNullableList")[0].ToString());
 Console.WriteLine(result0.GetProperty("requiredNullableList")[0].ToString());
 ]]></code></example>
     </member>
-    <member name="HelloDemo2(RequestContext)">
+    <member name="HelloDemo2(PipelineOptions)">
       <example>
 This sample shows how to call HelloDemo2 and parse the result.
 <code><![CDATA[
@@ -1881,7 +1881,7 @@ Console.WriteLine(result0.GetProperty("requiredNullableList")[0].ToString());
     </member>
     <member name="CreateLiteralAsync(Thing,CancellationToken)" />
     <member name="CreateLiteral(Thing,CancellationToken)" />
-    <member name="CreateLiteralAsync(RequestContent,RequestContext)">
+    <member name="CreateLiteralAsync(RequestContent,PipelineOptions)">
       <example>
 This sample shows how to call CreateLiteralAsync and parse the result.
 <code><![CDATA[
@@ -1961,7 +1961,7 @@ Console.WriteLine(result0.GetProperty("optionalNullableList")[0].ToString());
 Console.WriteLine(result0.GetProperty("requiredNullableList")[0].ToString());
 ]]></code></example>
     </member>
-    <member name="CreateLiteral(RequestContent,RequestContext)">
+    <member name="CreateLiteral(RequestContent,PipelineOptions)">
       <example>
 This sample shows how to call CreateLiteral and parse the result.
 <code><![CDATA[
@@ -2043,7 +2043,7 @@ Console.WriteLine(result0.GetProperty("requiredNullableList")[0].ToString());
     </member>
     <member name="HelloLiteralAsync(CancellationToken)" />
     <member name="HelloLiteral(CancellationToken)" />
-    <member name="HelloLiteralAsync(RequestContext)">
+    <member name="HelloLiteralAsync(PipelineOptions)">
       <example>
 This sample shows how to call HelloLiteralAsync and parse the result.
 <code><![CDATA[
@@ -2087,7 +2087,7 @@ Console.WriteLine(result0.GetProperty("optionalNullableList")[0].ToString());
 Console.WriteLine(result0.GetProperty("requiredNullableList")[0].ToString());
 ]]></code></example>
     </member>
-    <member name="HelloLiteral(RequestContext)">
+    <member name="HelloLiteral(PipelineOptions)">
       <example>
 This sample shows how to call HelloLiteral and parse the result.
 <code><![CDATA[
@@ -2131,7 +2131,7 @@ Console.WriteLine(result0.GetProperty("optionalNullableList")[0].ToString());
 Console.WriteLine(result0.GetProperty("requiredNullableList")[0].ToString());
 ]]></code></example>
     </member>
-    <member name="GetUnknownValueAsync(RequestContext)">
+    <member name="GetUnknownValueAsync(PipelineOptions)">
       <example>
 This sample shows how to call GetUnknownValueAsync and parse the result.
 <code><![CDATA[
@@ -2156,7 +2156,7 @@ JsonElement result0 = JsonDocument.Parse(result.ContentStream).RootElement;
 Console.WriteLine(result0.ToString());
 ]]></code></example>
     </member>
-    <member name="GetUnknownValue(RequestContext)">
+    <member name="GetUnknownValue(PipelineOptions)">
       <example>
 This sample shows how to call GetUnknownValue and parse the result.
 <code><![CDATA[
@@ -2183,11 +2183,11 @@ Console.WriteLine(result0.ToString());
     </member>
     <member name="InternalProtocolAsync(Thing,CancellationToken)" />
     <member name="InternalProtocol(Thing,CancellationToken)" />
-    <member name="InternalProtocolAsync(RequestContent,RequestContext)" />
-    <member name="InternalProtocol(RequestContent,RequestContext)" />
+    <member name="InternalProtocolAsync(RequestContent,PipelineOptions)" />
+    <member name="InternalProtocol(RequestContent,PipelineOptions)" />
     <member name="StillConvenientValueAsync(CancellationToken)" />
     <member name="StillConvenientValue(CancellationToken)" />
-    <member name="StillConvenientAsync(RequestContext)" />
-    <member name="StillConvenient(RequestContext)" />
+    <member name="StillConvenientAsync(PipelineOptions)" />
+    <member name="StillConvenient(PipelineOptions)" />
   </members>
 </doc>

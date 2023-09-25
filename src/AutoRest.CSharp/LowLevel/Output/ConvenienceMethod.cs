@@ -12,8 +12,6 @@ using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
-using Azure;
-using Azure.Core;
 
 namespace AutoRest.CSharp.Output.Models
 {
@@ -88,7 +86,7 @@ namespace AutoRest.CSharp.Output.Models
         // RequestContext context = FromCancellationToken(cancellationToken);
         private static void WriteCancellationTokenToRequestContext(CodeWriter writer, CodeWriterDeclaration contextVariable)
         {
-            writer.Line($"{typeof(RequestContext)} {contextVariable:D} = FromCancellationToken({KnownParameters.CancellationTokenParameter.Name});");
+            writer.Line($"{Configuration.ApiTypes.RequestContextType} {contextVariable:D} = FromCancellationToken({KnownParameters.CancellationTokenParameter.Name});");
         }
 
         public bool IsDeprecatedForExamples()

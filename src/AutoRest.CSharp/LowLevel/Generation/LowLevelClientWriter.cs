@@ -606,9 +606,9 @@ namespace AutoRest.CSharp.Generation.Writers
         private void WriteCancellationTokenToRequestContextMethod()
         {
             var defaultRequestContext = new CodeWriterDeclaration("DefaultRequestContext");
-            _writer.Line($"private static {typeof(RequestContext)} {defaultRequestContext:D} = new {typeof(RequestContext)}();");
+            _writer.Line($"private static {Configuration.ApiTypes.RequestContextType} {defaultRequestContext:D} = new {Configuration.ApiTypes.RequestContextType}();");
 
-            var methodSignature = new MethodSignature("FromCancellationToken", null, null, Internal | Static, typeof(RequestContext), null, new List<Parameter> { KnownParameters.CancellationTokenParameter });
+            var methodSignature = new MethodSignature("FromCancellationToken", null, null, Internal | Static, Configuration.ApiTypes.RequestContextType, null, new List<Parameter> { KnownParameters.CancellationTokenParameter });
             using (_writer.WriteMethodDeclaration(methodSignature))
             {
                 using (_writer.Scope($"if (!{KnownParameters.CancellationTokenParameter.Name}.{nameof(CancellationToken.CanBeCanceled)})"))
@@ -616,7 +616,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     _writer.Line($"return {defaultRequestContext:I};");
                 }
 
-                _writer.Line().Line($"return new {typeof(RequestContext)}() {{ CancellationToken = {KnownParameters.CancellationTokenParameter.Name} }};");
+                _writer.Line().Line($"return new {Configuration.ApiTypes.RequestContextType}() {{ CancellationToken = {KnownParameters.CancellationTokenParameter.Name} }};");
             }
             _writer.Line();
         }

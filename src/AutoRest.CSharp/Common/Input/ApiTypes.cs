@@ -54,5 +54,8 @@ namespace AutoRest.CSharp.Common.Input
         public abstract Type ArgumentType { get; }
         public string AssertNotNullOrEmptyName => nameof(ClientUtilities.AssertNotNullOrEmpty);
         public string AssertNotNullName => nameof(ClientUtilities.AssertNotNull);
+
+        public abstract Type RequestContextType { get; }
+        public string CancellationTokenName = nameof(PipelineOptions.CancellationToken);
     }
 }

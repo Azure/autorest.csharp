@@ -72,7 +72,7 @@ namespace UnbrandedTypeSpec
         /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='TopActionAsync(DateTimeOffset,CancellationToken)']/*" />
         internal virtual async Task<Result<Thing>> TopActionAsync(DateTimeOffset action, CancellationToken cancellationToken = default)
         {
-            RequestContext context = FromCancellationToken(cancellationToken);
+            PipelineOptions context = FromCancellationToken(cancellationToken);
             Result result = await TopActionAsync(action, context).ConfigureAwait(false);
             return Result.FromValue(Thing.FromResult(result), result);
         }
@@ -83,7 +83,7 @@ namespace UnbrandedTypeSpec
         /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='TopAction(DateTimeOffset,CancellationToken)']/*" />
         internal virtual Result<Thing> TopAction(DateTimeOffset action, CancellationToken cancellationToken = default)
         {
-            RequestContext context = FromCancellationToken(cancellationToken);
+            PipelineOptions context = FromCancellationToken(cancellationToken);
             Result result = TopAction(action, context);
             return Result.FromValue(Thing.FromResult(result), result);
         }
@@ -103,8 +103,8 @@ namespace UnbrandedTypeSpec
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='TopActionAsync(DateTimeOffset,RequestContext)']/*" />
-        public virtual async Task<Result> TopActionAsync(DateTimeOffset action, RequestContext context)
+        /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='TopActionAsync(DateTimeOffset,PipelineOptions)']/*" />
+        public virtual async Task<Result> TopActionAsync(DateTimeOffset action, PipelineOptions context)
         {
             using var scope = ClientDiagnostics.CreateSpan("UnbrandedTypeSpecClient.TopAction");
             scope.Start();
@@ -135,8 +135,8 @@ namespace UnbrandedTypeSpec
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='TopAction(DateTimeOffset,RequestContext)']/*" />
-        public virtual Result TopAction(DateTimeOffset action, RequestContext context)
+        /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='TopAction(DateTimeOffset,PipelineOptions)']/*" />
+        public virtual Result TopAction(DateTimeOffset action, PipelineOptions context)
         {
             using var scope = ClientDiagnostics.CreateSpan("UnbrandedTypeSpecClient.TopAction");
             scope.Start();
@@ -165,8 +165,8 @@ namespace UnbrandedTypeSpec
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='TopAction2Async(RequestContext)']/*" />
-        public virtual async Task<Result> TopAction2Async(RequestContext context)
+        /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='TopAction2Async(PipelineOptions)']/*" />
+        public virtual async Task<Result> TopAction2Async(PipelineOptions context)
         {
             using var scope = ClientDiagnostics.CreateSpan("UnbrandedTypeSpecClient.TopAction2");
             scope.Start();
@@ -195,8 +195,8 @@ namespace UnbrandedTypeSpec
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='TopAction2(RequestContext)']/*" />
-        public virtual Result TopAction2(RequestContext context)
+        /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='TopAction2(PipelineOptions)']/*" />
+        public virtual Result TopAction2(PipelineOptions context)
         {
             using var scope = ClientDiagnostics.CreateSpan("UnbrandedTypeSpecClient.TopAction2");
             scope.Start();
@@ -227,8 +227,8 @@ namespace UnbrandedTypeSpec
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='PatchActionAsync(RequestContent,RequestContext)']/*" />
-        public virtual async Task<Result> PatchActionAsync(RequestContent content, RequestContext context = null)
+        /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='PatchActionAsync(RequestContent,PipelineOptions)']/*" />
+        public virtual async Task<Result> PatchActionAsync(RequestContent content, PipelineOptions context = null)
         {
             ClientUtilities.AssertNotNull(content, nameof(content));
 
@@ -261,8 +261,8 @@ namespace UnbrandedTypeSpec
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='PatchAction(RequestContent,RequestContext)']/*" />
-        public virtual Result PatchAction(RequestContent content, RequestContext context = null)
+        /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='PatchAction(RequestContent,PipelineOptions)']/*" />
+        public virtual Result PatchAction(RequestContent content, PipelineOptions context = null)
         {
             ClientUtilities.AssertNotNull(content, nameof(content));
 
@@ -289,7 +289,7 @@ namespace UnbrandedTypeSpec
         {
             ClientUtilities.AssertNotNull(thing, nameof(thing));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
+            PipelineOptions context = FromCancellationToken(cancellationToken);
             Result result = await AnonymousBodyAsync(thing.ToRequestContent(), context).ConfigureAwait(false);
             return Result.FromValue(Thing.FromResult(result), result);
         }
@@ -303,7 +303,7 @@ namespace UnbrandedTypeSpec
         {
             ClientUtilities.AssertNotNull(thing, nameof(thing));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
+            PipelineOptions context = FromCancellationToken(cancellationToken);
             Result result = AnonymousBody(thing.ToRequestContent(), context);
             return Result.FromValue(Thing.FromResult(result), result);
         }
@@ -324,8 +324,8 @@ namespace UnbrandedTypeSpec
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='AnonymousBodyAsync(RequestContent,RequestContext)']/*" />
-        public virtual async Task<Result> AnonymousBodyAsync(RequestContent content, RequestContext context = null)
+        /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='AnonymousBodyAsync(RequestContent,PipelineOptions)']/*" />
+        public virtual async Task<Result> AnonymousBodyAsync(RequestContent content, PipelineOptions context = null)
         {
             ClientUtilities.AssertNotNull(content, nameof(content));
 
@@ -359,8 +359,8 @@ namespace UnbrandedTypeSpec
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='AnonymousBody(RequestContent,RequestContext)']/*" />
-        public virtual Result AnonymousBody(RequestContent content, RequestContext context = null)
+        /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='AnonymousBody(RequestContent,PipelineOptions)']/*" />
+        public virtual Result AnonymousBody(RequestContent content, PipelineOptions context = null)
         {
             ClientUtilities.AssertNotNull(content, nameof(content));
 
@@ -387,7 +387,7 @@ namespace UnbrandedTypeSpec
         {
             ClientUtilities.AssertNotNull(notFriend, nameof(notFriend));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
+            PipelineOptions context = FromCancellationToken(cancellationToken);
             Result result = await FriendlyModelAsync(notFriend.ToRequestContent(), context).ConfigureAwait(false);
             return Result.FromValue(Friend.FromResult(result), result);
         }
@@ -401,7 +401,7 @@ namespace UnbrandedTypeSpec
         {
             ClientUtilities.AssertNotNull(notFriend, nameof(notFriend));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
+            PipelineOptions context = FromCancellationToken(cancellationToken);
             Result result = FriendlyModel(notFriend.ToRequestContent(), context);
             return Result.FromValue(Friend.FromResult(result), result);
         }
@@ -426,8 +426,8 @@ namespace UnbrandedTypeSpec
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='FriendlyModelAsync(RequestContent,RequestContext)']/*" />
-        public virtual async Task<Result> FriendlyModelAsync(RequestContent content, RequestContext context = null)
+        /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='FriendlyModelAsync(RequestContent,PipelineOptions)']/*" />
+        public virtual async Task<Result> FriendlyModelAsync(RequestContent content, PipelineOptions context = null)
         {
             ClientUtilities.AssertNotNull(content, nameof(content));
 
@@ -465,8 +465,8 @@ namespace UnbrandedTypeSpec
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='FriendlyModel(RequestContent,RequestContext)']/*" />
-        public virtual Result FriendlyModel(RequestContent content, RequestContext context = null)
+        /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='FriendlyModel(RequestContent,PipelineOptions)']/*" />
+        public virtual Result FriendlyModel(RequestContent content, PipelineOptions context = null)
         {
             ClientUtilities.AssertNotNull(content, nameof(content));
 
@@ -497,8 +497,8 @@ namespace UnbrandedTypeSpec
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='AddTimeHeaderAsync(RequestContext)']/*" />
-        public virtual async Task<Result> AddTimeHeaderAsync(RequestContext context = null)
+        /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='AddTimeHeaderAsync(PipelineOptions)']/*" />
+        public virtual async Task<Result> AddTimeHeaderAsync(PipelineOptions context = null)
         {
             using var scope = ClientDiagnostics.CreateSpan("UnbrandedTypeSpecClient.AddTimeHeader");
             scope.Start();
@@ -527,8 +527,8 @@ namespace UnbrandedTypeSpec
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='AddTimeHeader(RequestContext)']/*" />
-        public virtual Result AddTimeHeader(RequestContext context = null)
+        /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='AddTimeHeader(PipelineOptions)']/*" />
+        public virtual Result AddTimeHeader(PipelineOptions context = null)
         {
             using var scope = ClientDiagnostics.CreateSpan("UnbrandedTypeSpecClient.AddTimeHeader");
             scope.Start();
@@ -554,7 +554,7 @@ namespace UnbrandedTypeSpec
         {
             ClientUtilities.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
+            PipelineOptions context = FromCancellationToken(cancellationToken);
             Result result = await StringFormatAsync(subscriptionId, body.ToRequestContent(), context).ConfigureAwait(false);
             return result;
         }
@@ -569,7 +569,7 @@ namespace UnbrandedTypeSpec
         {
             ClientUtilities.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
+            PipelineOptions context = FromCancellationToken(cancellationToken);
             Result result = StringFormat(subscriptionId, body.ToRequestContent(), context);
             return result;
         }
@@ -595,8 +595,8 @@ namespace UnbrandedTypeSpec
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='StringFormatAsync(Guid,RequestContent,RequestContext)']/*" />
-        public virtual async Task<Result> StringFormatAsync(Guid subscriptionId, RequestContent content, RequestContext context = null)
+        /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='StringFormatAsync(Guid,RequestContent,PipelineOptions)']/*" />
+        public virtual async Task<Result> StringFormatAsync(Guid subscriptionId, RequestContent content, PipelineOptions context = null)
         {
             ClientUtilities.AssertNotNull(content, nameof(content));
 
@@ -635,8 +635,8 @@ namespace UnbrandedTypeSpec
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='StringFormat(Guid,RequestContent,RequestContext)']/*" />
-        public virtual Result StringFormat(Guid subscriptionId, RequestContent content, RequestContext context = null)
+        /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='StringFormat(Guid,RequestContent,PipelineOptions)']/*" />
+        public virtual Result StringFormat(Guid subscriptionId, RequestContent content, PipelineOptions context = null)
         {
             ClientUtilities.AssertNotNull(content, nameof(content));
 
@@ -663,7 +663,7 @@ namespace UnbrandedTypeSpec
         {
             ClientUtilities.AssertNotNull(modelWithProjectedName, nameof(modelWithProjectedName));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
+            PipelineOptions context = FromCancellationToken(cancellationToken);
             Result result = await ProjectedNameModelAsync(modelWithProjectedName.ToRequestContent(), context).ConfigureAwait(false);
             return Result.FromValue(ProjectedModel.FromResult(result), result);
         }
@@ -677,7 +677,7 @@ namespace UnbrandedTypeSpec
         {
             ClientUtilities.AssertNotNull(modelWithProjectedName, nameof(modelWithProjectedName));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
+            PipelineOptions context = FromCancellationToken(cancellationToken);
             Result result = ProjectedNameModel(modelWithProjectedName.ToRequestContent(), context);
             return Result.FromValue(ProjectedModel.FromResult(result), result);
         }
@@ -702,8 +702,8 @@ namespace UnbrandedTypeSpec
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='ProjectedNameModelAsync(RequestContent,RequestContext)']/*" />
-        public virtual async Task<Result> ProjectedNameModelAsync(RequestContent content, RequestContext context = null)
+        /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='ProjectedNameModelAsync(RequestContent,PipelineOptions)']/*" />
+        public virtual async Task<Result> ProjectedNameModelAsync(RequestContent content, PipelineOptions context = null)
         {
             ClientUtilities.AssertNotNull(content, nameof(content));
 
@@ -741,8 +741,8 @@ namespace UnbrandedTypeSpec
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='ProjectedNameModel(RequestContent,RequestContext)']/*" />
-        public virtual Result ProjectedNameModel(RequestContent content, RequestContext context = null)
+        /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='ProjectedNameModel(RequestContent,PipelineOptions)']/*" />
+        public virtual Result ProjectedNameModel(RequestContent content, PipelineOptions context = null)
         {
             ClientUtilities.AssertNotNull(content, nameof(content));
 
@@ -774,8 +774,8 @@ namespace UnbrandedTypeSpec
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='ReturnsAnonymousModelAsync(RequestContext)']/*" />
-        public virtual async Task<Result> ReturnsAnonymousModelAsync(RequestContext context)
+        /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='ReturnsAnonymousModelAsync(PipelineOptions)']/*" />
+        public virtual async Task<Result> ReturnsAnonymousModelAsync(PipelineOptions context)
         {
             using var scope = ClientDiagnostics.CreateSpan("UnbrandedTypeSpecClient.ReturnsAnonymousModel");
             scope.Start();
@@ -805,8 +805,8 @@ namespace UnbrandedTypeSpec
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='ReturnsAnonymousModel(RequestContext)']/*" />
-        public virtual Result ReturnsAnonymousModel(RequestContext context)
+        /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='ReturnsAnonymousModel(PipelineOptions)']/*" />
+        public virtual Result ReturnsAnonymousModel(PipelineOptions context)
         {
             using var scope = ClientDiagnostics.CreateSpan("UnbrandedTypeSpecClient.ReturnsAnonymousModel");
             scope.Start();
@@ -839,8 +839,8 @@ namespace UnbrandedTypeSpec
         /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='HeadAsBooleanAsync(string,RequestContext)']/*" />
-        public virtual async Task<Result<bool>> HeadAsBooleanAsync(string id, RequestContext context = null)
+        /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='HeadAsBooleanAsync(string,PipelineOptions)']/*" />
+        public virtual async Task<Result<bool>> HeadAsBooleanAsync(string id, PipelineOptions context = null)
         {
             ClientUtilities.AssertNotNullOrEmpty(id, nameof(id));
 
@@ -875,8 +875,8 @@ namespace UnbrandedTypeSpec
         /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='HeadAsBoolean(string,RequestContext)']/*" />
-        public virtual Result<bool> HeadAsBoolean(string id, RequestContext context = null)
+        /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='HeadAsBoolean(string,PipelineOptions)']/*" />
+        public virtual Result<bool> HeadAsBoolean(string id, PipelineOptions context = null)
         {
             ClientUtilities.AssertNotNullOrEmpty(id, nameof(id));
 
@@ -911,8 +911,8 @@ namespace UnbrandedTypeSpec
         /// <exception cref="ArgumentNullException"> <paramref name="headParameter"/> or <paramref name="queryParameter"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='SayHiAsync(string,string,string,RequestContext)']/*" />
-        public virtual async Task<Result> SayHiAsync(string headParameter, string queryParameter, string optionalQuery, RequestContext context)
+        /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='SayHiAsync(string,string,string,PipelineOptions)']/*" />
+        public virtual async Task<Result> SayHiAsync(string headParameter, string queryParameter, string optionalQuery, PipelineOptions context)
         {
             ClientUtilities.AssertNotNull(headParameter, nameof(headParameter));
             ClientUtilities.AssertNotNull(queryParameter, nameof(queryParameter));
@@ -948,8 +948,8 @@ namespace UnbrandedTypeSpec
         /// <exception cref="ArgumentNullException"> <paramref name="headParameter"/> or <paramref name="queryParameter"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='SayHi(string,string,string,RequestContext)']/*" />
-        public virtual Result SayHi(string headParameter, string queryParameter, string optionalQuery, RequestContext context)
+        /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='SayHi(string,string,string,PipelineOptions)']/*" />
+        public virtual Result SayHi(string headParameter, string queryParameter, string optionalQuery, PipelineOptions context)
         {
             ClientUtilities.AssertNotNull(headParameter, nameof(headParameter));
             ClientUtilities.AssertNotNull(queryParameter, nameof(queryParameter));
@@ -982,7 +982,7 @@ namespace UnbrandedTypeSpec
             ClientUtilities.AssertNotNull(p1, nameof(p1));
             ClientUtilities.AssertNotNull(action, nameof(action));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
+            PipelineOptions context = FromCancellationToken(cancellationToken);
             Result result = await HelloAgainAsync(p2, p1, action.ToRequestContent(), context).ConfigureAwait(false);
             return Result.FromValue(RoundTripModel.FromResult(result), result);
         }
@@ -1001,7 +1001,7 @@ namespace UnbrandedTypeSpec
             ClientUtilities.AssertNotNull(p1, nameof(p1));
             ClientUtilities.AssertNotNull(action, nameof(action));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
+            PipelineOptions context = FromCancellationToken(cancellationToken);
             Result result = HelloAgain(p2, p1, action.ToRequestContent(), context);
             return Result.FromValue(RoundTripModel.FromResult(result), result);
         }
@@ -1025,8 +1025,8 @@ namespace UnbrandedTypeSpec
         /// <exception cref="ArgumentException"> <paramref name="p2"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='HelloAgainAsync(string,string,RequestContent,RequestContext)']/*" />
-        public virtual async Task<Result> HelloAgainAsync(string p2, string p1, RequestContent content, RequestContext context = null)
+        /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='HelloAgainAsync(string,string,RequestContent,PipelineOptions)']/*" />
+        public virtual async Task<Result> HelloAgainAsync(string p2, string p1, RequestContent content, PipelineOptions context = null)
         {
             ClientUtilities.AssertNotNullOrEmpty(p2, nameof(p2));
             ClientUtilities.AssertNotNull(p1, nameof(p1));
@@ -1065,8 +1065,8 @@ namespace UnbrandedTypeSpec
         /// <exception cref="ArgumentException"> <paramref name="p2"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='HelloAgain(string,string,RequestContent,RequestContext)']/*" />
-        public virtual Result HelloAgain(string p2, string p1, RequestContent content, RequestContext context = null)
+        /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='HelloAgain(string,string,RequestContent,PipelineOptions)']/*" />
+        public virtual Result HelloAgain(string p2, string p1, RequestContent content, PipelineOptions context = null)
         {
             ClientUtilities.AssertNotNullOrEmpty(p2, nameof(p2));
             ClientUtilities.AssertNotNull(p1, nameof(p1));
@@ -1104,8 +1104,8 @@ namespace UnbrandedTypeSpec
         /// <exception cref="ArgumentException"> <paramref name="p2"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='NoContentTypeAsync(string,string,RequestContent,RequestContext)']/*" />
-        public virtual async Task<Result> NoContentTypeAsync(string p2, string p1, RequestContent content, RequestContext context = null)
+        /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='NoContentTypeAsync(string,string,RequestContent,PipelineOptions)']/*" />
+        public virtual async Task<Result> NoContentTypeAsync(string p2, string p1, RequestContent content, PipelineOptions context = null)
         {
             ClientUtilities.AssertNotNullOrEmpty(p2, nameof(p2));
             ClientUtilities.AssertNotNull(p1, nameof(p1));
@@ -1143,8 +1143,8 @@ namespace UnbrandedTypeSpec
         /// <exception cref="ArgumentException"> <paramref name="p2"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='NoContentType(string,string,RequestContent,RequestContext)']/*" />
-        public virtual Result NoContentType(string p2, string p1, RequestContent content, RequestContext context = null)
+        /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='NoContentType(string,string,RequestContent,PipelineOptions)']/*" />
+        public virtual Result NoContentType(string p2, string p1, RequestContent content, PipelineOptions context = null)
         {
             ClientUtilities.AssertNotNullOrEmpty(p2, nameof(p2));
             ClientUtilities.AssertNotNull(p1, nameof(p1));
@@ -1169,7 +1169,7 @@ namespace UnbrandedTypeSpec
         /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='HelloDemo2Async(CancellationToken)']/*" />
         internal virtual async Task<Result<Thing>> HelloDemo2Async(CancellationToken cancellationToken = default)
         {
-            RequestContext context = FromCancellationToken(cancellationToken);
+            PipelineOptions context = FromCancellationToken(cancellationToken);
             Result result = await HelloDemo2Async(context).ConfigureAwait(false);
             return Result.FromValue(Thing.FromResult(result), result);
         }
@@ -1179,7 +1179,7 @@ namespace UnbrandedTypeSpec
         /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='HelloDemo2(CancellationToken)']/*" />
         internal virtual Result<Thing> HelloDemo2(CancellationToken cancellationToken = default)
         {
-            RequestContext context = FromCancellationToken(cancellationToken);
+            PipelineOptions context = FromCancellationToken(cancellationToken);
             Result result = HelloDemo2(context);
             return Result.FromValue(Thing.FromResult(result), result);
         }
@@ -1198,8 +1198,8 @@ namespace UnbrandedTypeSpec
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='HelloDemo2Async(RequestContext)']/*" />
-        public virtual async Task<Result> HelloDemo2Async(RequestContext context)
+        /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='HelloDemo2Async(PipelineOptions)']/*" />
+        public virtual async Task<Result> HelloDemo2Async(PipelineOptions context)
         {
             using var scope = ClientDiagnostics.CreateSpan("UnbrandedTypeSpecClient.HelloDemo2");
             scope.Start();
@@ -1229,8 +1229,8 @@ namespace UnbrandedTypeSpec
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='HelloDemo2(RequestContext)']/*" />
-        public virtual Result HelloDemo2(RequestContext context)
+        /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='HelloDemo2(PipelineOptions)']/*" />
+        public virtual Result HelloDemo2(PipelineOptions context)
         {
             using var scope = ClientDiagnostics.CreateSpan("UnbrandedTypeSpecClient.HelloDemo2");
             scope.Start();
@@ -1255,7 +1255,7 @@ namespace UnbrandedTypeSpec
         {
             ClientUtilities.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
+            PipelineOptions context = FromCancellationToken(cancellationToken);
             Result result = await CreateLiteralAsync(body.ToRequestContent(), context).ConfigureAwait(false);
             return Result.FromValue(Thing.FromResult(result), result);
         }
@@ -1269,7 +1269,7 @@ namespace UnbrandedTypeSpec
         {
             ClientUtilities.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
+            PipelineOptions context = FromCancellationToken(cancellationToken);
             Result result = CreateLiteral(body.ToRequestContent(), context);
             return Result.FromValue(Thing.FromResult(result), result);
         }
@@ -1290,8 +1290,8 @@ namespace UnbrandedTypeSpec
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='CreateLiteralAsync(RequestContent,RequestContext)']/*" />
-        public virtual async Task<Result> CreateLiteralAsync(RequestContent content, RequestContext context = null)
+        /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='CreateLiteralAsync(RequestContent,PipelineOptions)']/*" />
+        public virtual async Task<Result> CreateLiteralAsync(RequestContent content, PipelineOptions context = null)
         {
             ClientUtilities.AssertNotNull(content, nameof(content));
 
@@ -1325,8 +1325,8 @@ namespace UnbrandedTypeSpec
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='CreateLiteral(RequestContent,RequestContext)']/*" />
-        public virtual Result CreateLiteral(RequestContent content, RequestContext context = null)
+        /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='CreateLiteral(RequestContent,PipelineOptions)']/*" />
+        public virtual Result CreateLiteral(RequestContent content, PipelineOptions context = null)
         {
             ClientUtilities.AssertNotNull(content, nameof(content));
 
@@ -1349,7 +1349,7 @@ namespace UnbrandedTypeSpec
         /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='HelloLiteralAsync(CancellationToken)']/*" />
         internal virtual async Task<Result<Thing>> HelloLiteralAsync(CancellationToken cancellationToken = default)
         {
-            RequestContext context = FromCancellationToken(cancellationToken);
+            PipelineOptions context = FromCancellationToken(cancellationToken);
             Result result = await HelloLiteralAsync(context).ConfigureAwait(false);
             return Result.FromValue(Thing.FromResult(result), result);
         }
@@ -1359,7 +1359,7 @@ namespace UnbrandedTypeSpec
         /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='HelloLiteral(CancellationToken)']/*" />
         internal virtual Result<Thing> HelloLiteral(CancellationToken cancellationToken = default)
         {
-            RequestContext context = FromCancellationToken(cancellationToken);
+            PipelineOptions context = FromCancellationToken(cancellationToken);
             Result result = HelloLiteral(context);
             return Result.FromValue(Thing.FromResult(result), result);
         }
@@ -1378,8 +1378,8 @@ namespace UnbrandedTypeSpec
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='HelloLiteralAsync(RequestContext)']/*" />
-        public virtual async Task<Result> HelloLiteralAsync(RequestContext context)
+        /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='HelloLiteralAsync(PipelineOptions)']/*" />
+        public virtual async Task<Result> HelloLiteralAsync(PipelineOptions context)
         {
             using var scope = ClientDiagnostics.CreateSpan("UnbrandedTypeSpecClient.HelloLiteral");
             scope.Start();
@@ -1409,8 +1409,8 @@ namespace UnbrandedTypeSpec
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='HelloLiteral(RequestContext)']/*" />
-        public virtual Result HelloLiteral(RequestContext context)
+        /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='HelloLiteral(PipelineOptions)']/*" />
+        public virtual Result HelloLiteral(PipelineOptions context)
         {
             using var scope = ClientDiagnostics.CreateSpan("UnbrandedTypeSpecClient.HelloLiteral");
             scope.Start();
@@ -1439,8 +1439,8 @@ namespace UnbrandedTypeSpec
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='GetUnknownValueAsync(RequestContext)']/*" />
-        public virtual async Task<Result> GetUnknownValueAsync(RequestContext context)
+        /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='GetUnknownValueAsync(PipelineOptions)']/*" />
+        public virtual async Task<Result> GetUnknownValueAsync(PipelineOptions context)
         {
             using var scope = ClientDiagnostics.CreateSpan("UnbrandedTypeSpecClient.GetUnknownValue");
             scope.Start();
@@ -1469,8 +1469,8 @@ namespace UnbrandedTypeSpec
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='GetUnknownValue(RequestContext)']/*" />
-        public virtual Result GetUnknownValue(RequestContext context)
+        /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='GetUnknownValue(PipelineOptions)']/*" />
+        public virtual Result GetUnknownValue(PipelineOptions context)
         {
             using var scope = ClientDiagnostics.CreateSpan("UnbrandedTypeSpecClient.GetUnknownValue");
             scope.Start();
@@ -1495,7 +1495,7 @@ namespace UnbrandedTypeSpec
         {
             ClientUtilities.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
+            PipelineOptions context = FromCancellationToken(cancellationToken);
             Result result = await InternalProtocolAsync(body.ToRequestContent(), context).ConfigureAwait(false);
             return Result.FromValue(Thing.FromResult(result), result);
         }
@@ -1509,7 +1509,7 @@ namespace UnbrandedTypeSpec
         {
             ClientUtilities.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
+            PipelineOptions context = FromCancellationToken(cancellationToken);
             Result result = InternalProtocol(body.ToRequestContent(), context);
             return Result.FromValue(Thing.FromResult(result), result);
         }
@@ -1535,8 +1535,8 @@ namespace UnbrandedTypeSpec
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='InternalProtocolAsync(RequestContent,RequestContext)']/*" />
-        internal virtual async Task<Result> InternalProtocolAsync(RequestContent content, RequestContext context = null)
+        /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='InternalProtocolAsync(RequestContent,PipelineOptions)']/*" />
+        internal virtual async Task<Result> InternalProtocolAsync(RequestContent content, PipelineOptions context = null)
         {
             ClientUtilities.AssertNotNull(content, nameof(content));
 
@@ -1575,8 +1575,8 @@ namespace UnbrandedTypeSpec
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='InternalProtocol(RequestContent,RequestContext)']/*" />
-        internal virtual Result InternalProtocol(RequestContent content, RequestContext context = null)
+        /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='InternalProtocol(RequestContent,PipelineOptions)']/*" />
+        internal virtual Result InternalProtocol(RequestContent content, PipelineOptions context = null)
         {
             ClientUtilities.AssertNotNull(content, nameof(content));
 
@@ -1603,7 +1603,7 @@ namespace UnbrandedTypeSpec
             scope.Start();
             try
             {
-                RequestContext context = FromCancellationToken(cancellationToken);
+                PipelineOptions context = FromCancellationToken(cancellationToken);
                 Result result = await StillConvenientAsync(context).ConfigureAwait(false);
                 return result;
             }
@@ -1623,7 +1623,7 @@ namespace UnbrandedTypeSpec
             scope.Start();
             try
             {
-                RequestContext context = FromCancellationToken(cancellationToken);
+                PipelineOptions context = FromCancellationToken(cancellationToken);
                 Result result = StillConvenient(context);
                 return result;
             }
@@ -1647,8 +1647,8 @@ namespace UnbrandedTypeSpec
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='StillConvenientAsync(RequestContext)']/*" />
-        internal virtual async Task<Result> StillConvenientAsync(RequestContext context = null)
+        /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='StillConvenientAsync(PipelineOptions)']/*" />
+        internal virtual async Task<Result> StillConvenientAsync(PipelineOptions context = null)
         {
             using var scope = ClientDiagnostics.CreateSpan("UnbrandedTypeSpecClient.StillConvenient");
             scope.Start();
@@ -1677,8 +1677,8 @@ namespace UnbrandedTypeSpec
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='StillConvenient(RequestContext)']/*" />
-        internal virtual Result StillConvenient(RequestContext context = null)
+        /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='StillConvenient(PipelineOptions)']/*" />
+        internal virtual Result StillConvenient(PipelineOptions context = null)
         {
             using var scope = ClientDiagnostics.CreateSpan("UnbrandedTypeSpecClient.StillConvenient");
             scope.Start();
@@ -1694,7 +1694,7 @@ namespace UnbrandedTypeSpec
             }
         }
 
-        internal HttpMessage CreateTopActionRequest(DateTimeOffset action, RequestContext context)
+        internal HttpMessage CreateTopActionRequest(DateTimeOffset action, PipelineOptions context)
         {
             var message = new HttpMessage(_pipeline.CreateRestMessage(context, ResponseClassifier200));
             var request = message.Request;
@@ -1709,7 +1709,7 @@ namespace UnbrandedTypeSpec
             return message;
         }
 
-        internal HttpMessage CreateTopAction2Request(RequestContext context)
+        internal HttpMessage CreateTopAction2Request(PipelineOptions context)
         {
             var message = new HttpMessage(_pipeline.CreateRestMessage(context, ResponseClassifier200));
             var request = message.Request;
@@ -1723,7 +1723,7 @@ namespace UnbrandedTypeSpec
             return message;
         }
 
-        internal HttpMessage CreatePatchActionRequest(RequestContent content, RequestContext context)
+        internal HttpMessage CreatePatchActionRequest(RequestContent content, PipelineOptions context)
         {
             var message = new HttpMessage(_pipeline.CreateRestMessage(context, ResponseClassifier200));
             var request = message.Request;
@@ -1739,7 +1739,7 @@ namespace UnbrandedTypeSpec
             return message;
         }
 
-        internal HttpMessage CreateAnonymousBodyRequest(RequestContent content, RequestContext context)
+        internal HttpMessage CreateAnonymousBodyRequest(RequestContent content, PipelineOptions context)
         {
             var message = new HttpMessage(_pipeline.CreateRestMessage(context, ResponseClassifier200));
             var request = message.Request;
@@ -1755,7 +1755,7 @@ namespace UnbrandedTypeSpec
             return message;
         }
 
-        internal HttpMessage CreateFriendlyModelRequest(RequestContent content, RequestContext context)
+        internal HttpMessage CreateFriendlyModelRequest(RequestContent content, PipelineOptions context)
         {
             var message = new HttpMessage(_pipeline.CreateRestMessage(context, ResponseClassifier200));
             var request = message.Request;
@@ -1771,7 +1771,7 @@ namespace UnbrandedTypeSpec
             return message;
         }
 
-        internal HttpMessage CreateAddTimeHeaderRequest(RequestContext context)
+        internal HttpMessage CreateAddTimeHeaderRequest(PipelineOptions context)
         {
             var message = new HttpMessage(_pipeline.CreateRestMessage(context, ResponseClassifier204));
             var request = message.Request;
@@ -1786,7 +1786,7 @@ namespace UnbrandedTypeSpec
             return message;
         }
 
-        internal HttpMessage CreateStringFormatRequest(Guid subscriptionId, RequestContent content, RequestContext context)
+        internal HttpMessage CreateStringFormatRequest(Guid subscriptionId, RequestContent content, PipelineOptions context)
         {
             var message = new HttpMessage(_pipeline.CreateRestMessage(context, ResponseClassifier204));
             var request = message.Request;
@@ -1803,7 +1803,7 @@ namespace UnbrandedTypeSpec
             return message;
         }
 
-        internal HttpMessage CreateProjectedNameModelRequest(RequestContent content, RequestContext context)
+        internal HttpMessage CreateProjectedNameModelRequest(RequestContent content, PipelineOptions context)
         {
             var message = new HttpMessage(_pipeline.CreateRestMessage(context, ResponseClassifier200));
             var request = message.Request;
@@ -1819,7 +1819,7 @@ namespace UnbrandedTypeSpec
             return message;
         }
 
-        internal HttpMessage CreateReturnsAnonymousModelRequest(RequestContext context)
+        internal HttpMessage CreateReturnsAnonymousModelRequest(PipelineOptions context)
         {
             var message = new HttpMessage(_pipeline.CreateRestMessage(context, ResponseClassifier200));
             var request = message.Request;
@@ -1833,7 +1833,7 @@ namespace UnbrandedTypeSpec
             return message;
         }
 
-        internal HttpMessage CreateHeadAsBooleanRequest(string id, RequestContext context)
+        internal HttpMessage CreateHeadAsBooleanRequest(string id, PipelineOptions context)
         {
             var message = new HttpMessage(_pipeline.CreateRestMessage(context, ResponseClassifier200To300400To500));
             var request = message.Request;
@@ -1848,7 +1848,7 @@ namespace UnbrandedTypeSpec
             return message;
         }
 
-        internal HttpMessage CreateSayHiRequest(string headParameter, string queryParameter, string optionalQuery, RequestContext context)
+        internal HttpMessage CreateSayHiRequest(string headParameter, string queryParameter, string optionalQuery, PipelineOptions context)
         {
             var message = new HttpMessage(_pipeline.CreateRestMessage(context, ResponseClassifier200));
             var request = message.Request;
@@ -1868,7 +1868,7 @@ namespace UnbrandedTypeSpec
             return message;
         }
 
-        internal HttpMessage CreateHelloAgainRequest(string p2, string p1, RequestContent content, RequestContext context)
+        internal HttpMessage CreateHelloAgainRequest(string p2, string p1, RequestContent content, PipelineOptions context)
         {
             var message = new HttpMessage(_pipeline.CreateRestMessage(context, ResponseClassifier200));
             var request = message.Request;
@@ -1886,7 +1886,7 @@ namespace UnbrandedTypeSpec
             return message;
         }
 
-        internal HttpMessage CreateNoContentTypeRequest(string p2, string p1, RequestContent content, RequestContext context)
+        internal HttpMessage CreateNoContentTypeRequest(string p2, string p1, RequestContent content, PipelineOptions context)
         {
             var message = new HttpMessage(_pipeline.CreateRestMessage(context, ResponseClassifier200));
             var request = message.Request;
@@ -1904,7 +1904,7 @@ namespace UnbrandedTypeSpec
             return message;
         }
 
-        internal HttpMessage CreateHelloDemo2Request(RequestContext context)
+        internal HttpMessage CreateHelloDemo2Request(PipelineOptions context)
         {
             var message = new HttpMessage(_pipeline.CreateRestMessage(context, ResponseClassifier200));
             var request = message.Request;
@@ -1918,7 +1918,7 @@ namespace UnbrandedTypeSpec
             return message;
         }
 
-        internal HttpMessage CreateCreateLiteralRequest(RequestContent content, RequestContext context)
+        internal HttpMessage CreateCreateLiteralRequest(RequestContent content, PipelineOptions context)
         {
             var message = new HttpMessage(_pipeline.CreateRestMessage(context, ResponseClassifier200));
             var request = message.Request;
@@ -1934,7 +1934,7 @@ namespace UnbrandedTypeSpec
             return message;
         }
 
-        internal HttpMessage CreateHelloLiteralRequest(RequestContext context)
+        internal HttpMessage CreateHelloLiteralRequest(PipelineOptions context)
         {
             var message = new HttpMessage(_pipeline.CreateRestMessage(context, ResponseClassifier200));
             var request = message.Request;
@@ -1951,7 +1951,7 @@ namespace UnbrandedTypeSpec
             return message;
         }
 
-        internal HttpMessage CreateGetUnknownValueRequest(RequestContext context)
+        internal HttpMessage CreateGetUnknownValueRequest(PipelineOptions context)
         {
             var message = new HttpMessage(_pipeline.CreateRestMessage(context, ResponseClassifier200));
             var request = message.Request;
@@ -1965,7 +1965,7 @@ namespace UnbrandedTypeSpec
             return message;
         }
 
-        internal HttpMessage CreateInternalProtocolRequest(RequestContent content, RequestContext context)
+        internal HttpMessage CreateInternalProtocolRequest(RequestContent content, PipelineOptions context)
         {
             var message = new HttpMessage(_pipeline.CreateRestMessage(context, ResponseClassifier200));
             var request = message.Request;
@@ -1981,7 +1981,7 @@ namespace UnbrandedTypeSpec
             return message;
         }
 
-        internal HttpMessage CreateStillConvenientRequest(RequestContext context)
+        internal HttpMessage CreateStillConvenientRequest(PipelineOptions context)
         {
             var message = new HttpMessage(_pipeline.CreateRestMessage(context, ResponseClassifier204));
             var request = message.Request;
@@ -1995,15 +1995,15 @@ namespace UnbrandedTypeSpec
             return message;
         }
 
-        private static RequestContext DefaultRequestContext = new RequestContext();
-        internal static RequestContext FromCancellationToken(CancellationToken cancellationToken = default)
+        private static PipelineOptions DefaultRequestContext = new PipelineOptions();
+        internal static PipelineOptions FromCancellationToken(CancellationToken cancellationToken = default)
         {
             if (!cancellationToken.CanBeCanceled)
             {
                 return DefaultRequestContext;
             }
 
-            return new RequestContext() { CancellationToken = cancellationToken };
+            return new PipelineOptions() { CancellationToken = cancellationToken };
         }
 
         private static ResponseClassifier _responseClassifier200;
