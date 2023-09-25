@@ -36,19 +36,19 @@ namespace security_key_LowLevel
         /// <summary> Initializes a new instance of AutorestSecurityKeyClient. </summary>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
-        public AutorestSecurityKeyClient(AzureKeyCredential credential) : this(credential, new Uri("http://localhost:3000"), new AutorestSecurityKeyClientOptions())
+        public AutorestSecurityKeyClient(AzureKeyCredential credential) : this(new Uri("http://localhost:3000"), credential, new AutorestSecurityKeyClientOptions())
         {
         }
 
         /// <summary> Initializes a new instance of AutorestSecurityKeyClient. </summary>
-        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="endpoint"> server parameter. </param>
+        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="options"> The options for configuring the client. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> or <paramref name="endpoint"/> is null. </exception>
-        public AutorestSecurityKeyClient(AzureKeyCredential credential, Uri endpoint, AutorestSecurityKeyClientOptions options)
+        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
+        public AutorestSecurityKeyClient(Uri endpoint, AzureKeyCredential credential, AutorestSecurityKeyClientOptions options)
         {
-            Argument.AssertNotNull(credential, nameof(credential));
             Argument.AssertNotNull(endpoint, nameof(endpoint));
+            Argument.AssertNotNull(credential, nameof(credential));
             options ??= new AutorestSecurityKeyClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);

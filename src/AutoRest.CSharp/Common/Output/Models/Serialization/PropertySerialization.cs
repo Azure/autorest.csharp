@@ -1,31 +1,47 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
 
 namespace AutoRest.CSharp.Output.Models.Serialization
 {
     internal abstract class PropertySerialization
     {
-        public string PropertyName { get; }
+        /// <summary>
+        /// Name of the parameter in serialization constructor. Used in deserialization logic only
+        /// </summary>
+        public string SerializationConstructorParameterName { get;  }
+
+        /// <summary>
+        /// Value expression to be serialized. Used in serialization logic only.
+        /// </summary>
+        public TypedValueExpression Value { get; }
+
+        /// <summary>
+        /// Name of the property in serialized string
+        /// </summary>
         public string SerializedName { get; }
-        public CSharpType PropertyType { get; }
-        public CSharpType? ValueType { get; }
+        /// <summary>
+        /// 'Original' type of the serialized value
+        /// </summary>
+        public CSharpType? SerializedType { get; }
+
         public bool IsRequired { get; }
         public bool ShouldSkipSerialization { get; }
         public bool ShouldSkipDeserialization { get; }
 
-        protected PropertySerialization(string propertyName, string serializedName, CSharpType propertyType, CSharpType? valueType, bool isRequired, bool shouldSkipSerialization) :
-            this(propertyName, serializedName, propertyType, valueType, isRequired, shouldSkipSerialization, false)
+        protected PropertySerialization(string parameterName, TypedValueExpression value, string serializedName, CSharpType? serializedType, bool isRequired, bool shouldSkipSerialization) :
+            this(parameterName, value, serializedName, serializedType, isRequired, shouldSkipSerialization, false)
         {
         }
 
-        protected PropertySerialization(string propertyName, string serializedName, CSharpType propertyType, CSharpType? valueType, bool isRequired, bool shouldSkipSerialization, bool shouldSkipDeserialization)
+        protected PropertySerialization(string parameterName, TypedValueExpression value, string serializedName, CSharpType? serializedType, bool isRequired, bool shouldSkipSerialization, bool shouldSkipDeserialization)
         {
-            PropertyName = propertyName;
+            SerializationConstructorParameterName = parameterName;
+            Value = value;
             SerializedName = serializedName;
-            PropertyType = propertyType;
-            ValueType = valueType;
+            SerializedType = serializedType;
             IsRequired = isRequired;
             ShouldSkipSerialization = shouldSkipSerialization;
             ShouldSkipDeserialization = shouldSkipDeserialization;

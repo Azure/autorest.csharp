@@ -40,15 +40,15 @@ namespace SingleTopLevelClientWithOperations_LowLevel
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="keyCredential"> The key credential to copy. </param>
-        /// <param name="clientParameter"> The String to use. </param>
         /// <param name="endpoint"> server parameter. </param>
-        internal Client4(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, AzureKeyCredential keyCredential, string clientParameter, Uri endpoint)
+        /// <param name="clientParameter"> The String to use. </param>
+        internal Client4(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, AzureKeyCredential keyCredential, Uri endpoint, string clientParameter)
         {
             ClientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
             _keyCredential = keyCredential;
-            ClientParameter = clientParameter;
             _endpoint = endpoint;
+            ClientParameter = clientParameter;
         }
 
         /// <summary>
