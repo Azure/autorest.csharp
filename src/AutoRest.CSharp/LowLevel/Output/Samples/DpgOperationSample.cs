@@ -28,19 +28,18 @@ namespace AutoRest.CSharp.Output.Samples.Models
             Method = method;
             _inputClientParameterExamples = inputClientParameterExamples;
             _inputOperationExample = inputOperationExample;
-            ClientInvocationChain = GetClientInvocationChain(client);
             IsConvenienceSample = isConvenienceSample;
-            _exampleKey = exampleKey;
+            ExampleKey = exampleKey;
             _useAllParameters = exampleKey == ExampleMockValueBuilder.MockExampleAllParameterKey; // TODO -- only work around for the response usage building.
             _operationMethodSignature = isConvenienceSample ? method.ConvenienceMethod!.Signature : method.ProtocolMethodSignature;
         }
 
-        private readonly string _exampleKey;
-        private readonly bool _useAllParameters;
-        private readonly IEnumerable<InputParameterExample> _inputClientParameterExamples;
-        private readonly InputOperationExample _inputOperationExample;
-        private readonly MethodSignature _operationMethodSignature;
+        protected readonly bool _useAllParameters;
+        protected internal readonly IEnumerable<InputParameterExample> _inputClientParameterExamples;
+        protected internal readonly InputOperationExample _inputOperationExample;
+        protected readonly MethodSignature _operationMethodSignature;
 
+        public string ExampleKey { get; }
         public bool IsConvenienceSample { get; }
         public LowLevelClient Client { get; }
         public LowLevelClientMethod Method { get; }
@@ -51,15 +50,17 @@ namespace AutoRest.CSharp.Output.Samples.Models
 
         public bool IsPageable => IsConvenienceSample ? Method.ConvenienceMethod!.IsPageable : Method.PagingInfo != null;
 
-        public IReadOnlyList<MethodSignatureBase> ClientInvocationChain { get; }
+        private IReadOnlyList<MethodSignatureBase>? _clientInvocationChain;
+        public IReadOnlyList<MethodSignatureBase> ClientInvocationChain => _clientInvocationChain ??= GetClientInvocationChain();
 
         /// <summary>
         /// Get the methods to be called to get the client, it should be like `Client(...).GetXXClient(..).GetYYClient(..)`.
         /// It's composed of a constructor of non-subclient and a optional list of subclient factory methods.
         /// </summary>
         /// <returns></returns>
-        private static IReadOnlyList<MethodSignatureBase> GetClientInvocationChain(LowLevelClient client)
+        protected virtual IReadOnlyList<MethodSignatureBase> GetClientInvocationChain()
         {
+            var client = Client;
             var callChain = new Stack<MethodSignatureBase>();
             while (client.FactoryMethod != null)
             {
@@ -73,10 +74,10 @@ namespace AutoRest.CSharp.Output.Samples.Models
             }
             callChain.Push(client.GetEffectiveCtor()!);
 
-            return callChain.ToList();
+            return callChain.ToArray();
         }
 
-        private string GetMethodName(bool isAsync)
+        protected virtual string GetMethodName(bool isAsync)
         {
             var builder = new StringBuilder("Example_").Append(_operationMethodSignature.Name);
             if (_useAllParameters)
@@ -94,6 +95,8 @@ namespace AutoRest.CSharp.Output.Samples.Models
             return builder.ToString();
         }
 
+        protected virtual CSharpAttribute[] Attributes => new[] { new CSharpAttribute(typeof(TestAttribute)), new CSharpAttribute(typeof(IgnoreAttribute), "Only validating compilation of examples") };
+
         public MethodSignature GetExampleMethodSignature(bool isAsync) => new MethodSignature(
             GetMethodName(isAsync),
             null,
@@ -102,7 +105,7 @@ namespace AutoRest.CSharp.Output.Samples.Models
             isAsync ? typeof(Task) : (CSharpType?)null,
             null,
             Array.Empty<Parameter>(),
-            Attributes: new CSharpAttribute[] { new CSharpAttribute(typeof(TestAttribute)), new CSharpAttribute(typeof(IgnoreAttribute), "Only validating compilation of examples") });
+            Attributes: Attributes);
 
         private Dictionary<string, InputExampleParameterValue>? _parameterValueMapping;
         public Dictionary<string, InputExampleParameterValue> ParameterValueMapping => _parameterValueMapping ??= EnsureParameterValueMapping();
