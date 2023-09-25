@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Threading.Tasks;
 using AutoRest.TestServer.Tests.Infrastructure;
 using NUnit.Framework;
@@ -27,8 +28,8 @@ namespace CadlRanchProjects.Tests
             var response1 = await new ContentNegotiationClient(host, null).GetDifferentBodyClient().GetAvatarAsPngAsync();
             CollectionAssert.AreEqual(File.ReadAllBytes(SamplePngPath), response1.Value.ToArray());
 
-            //var response2 = await new ContentNegotiationClient(host, null).GetDifferentBodyClient().GetAvatarAsJsonAsync();
-            //CollectionAssert.AreEqual(File.ReadAllBytes(SamplePngPath), response2.Value.Content.ToArray());
+            var response2 = await new ContentNegotiationClient(host, null).GetDifferentBodyClient().GetAvatarAsJsonAsync();
+            CollectionAssert.AreEqual(File.ReadAllBytes(SamplePngPath), response2.Value.Content.ToArray());
         });
     }
 }
