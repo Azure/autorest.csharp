@@ -14,7 +14,7 @@ using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Output.Models.Shared
 {
-    internal record Parameter(string Name, FormattableString? Description, CSharpType Type, Constant? DefaultValue, Validation Validation, FormattableString? Initializer, bool IsApiVersionParameter = false, bool IsResourceIdentifier = false, bool SkipUrlEncoding = false, RequestLocation RequestLocation = RequestLocation.None, bool IsPropertyBag = false)
+    internal record Parameter(string Name, FormattableString? Description, CSharpType Type, Constant? DefaultValue, Validation Validation, FormattableString? Initializer, bool IsApiVersionParameter = false, bool IsResourceIdentifier = false, bool SkipUrlEncoding = false, bool IsEndpoint = false, RequestLocation RequestLocation = RequestLocation.None, bool IsPropertyBag = false)
     {
         public CSharpAttribute[] Attributes { get; init; } = Array.Empty<CSharpAttribute>();
         public bool IsOptionalInSignature => DefaultValue != null;
@@ -49,6 +49,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
                 IsApiVersionParameter: operationParameter.IsApiVersion,
                 IsResourceIdentifier: operationParameter.IsResourceParameter,
                 SkipUrlEncoding: operationParameter.SkipUrlEncoding,
+                IsEndpoint: operationParameter.IsEndpoint || requestLocation == RequestLocation.Uri && name == "endpoint",
                 RequestLocation: requestLocation);
         }
 

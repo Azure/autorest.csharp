@@ -992,7 +992,7 @@ namespace AutoRest.CSharp.Generation.Writers
             var clientConstructor = ClientInvocationChain[0].GetEffectiveCtor()!;
 
             ValueExpression? endpoint = null;
-            if (clientConstructor.Parameters.Any(p => p.Type.EqualsIgnoreNullable(UriType)))
+            if (clientConstructor.Parameters.Any(p => p.IsEndpoint && p.Type.EqualsIgnoreNullable(UriType)))
             {
                 statements.Add(Declare("endpoint", New.Uri($"<{GetEndpoint()}>"), out endpoint));
             }
@@ -1033,15 +1033,9 @@ namespace AutoRest.CSharp.Generation.Writers
             for (var i = 0; i < parameters.Count; i++)
             {
                 Parameter? parameter = parameters[i];
-                if (parameter.Type.EqualsIgnoreNullable(UriType))
+                if (parameter.IsEndpoint)
                 {
-                    parameterValues[i] = endpoint!;
-                }
-                else if (parameter.Name.Equals("endpoint", StringComparison.OrdinalIgnoreCase))
-                {
-                    // sometimes the endpoint parameter cannot be generated as Uri type, best efforts to guesss it
-                    // see: https://github.com/Azure/autorest/issues/4571
-                    parameterValues[i] = Literal($"<{GetEndpoint()}>");
+                    parameterValues[i] = parameter.Type.EqualsIgnoreNullable(UriType) ? endpoint! : Literal($"<{GetEndpoint()}>");
                 }
                 else if (parameter.Type.EqualsIgnoreNullable(KeyAuthType) || parameter.Type.EqualsIgnoreNullable(TokenAuthType))
                 {

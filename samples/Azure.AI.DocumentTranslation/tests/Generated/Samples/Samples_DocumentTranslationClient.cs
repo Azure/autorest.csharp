@@ -266,7 +266,7 @@ namespace Azure.AI.DocumentTranslation.Samples
         public void Example_CancelTranslation_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", credential);
+            DocumentTranslationClient client = new DocumentTranslationClient("<https://my-service.azure.com>", credential);
 
             Response response = client.CancelTranslation(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
 
@@ -295,7 +295,7 @@ namespace Azure.AI.DocumentTranslation.Samples
         public async Task Example_CancelTranslation_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", credential);
+            DocumentTranslationClient client = new DocumentTranslationClient("<https://my-service.azure.com>", credential);
 
             Response response = await client.CancelTranslationAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
 
@@ -324,7 +324,7 @@ namespace Azure.AI.DocumentTranslation.Samples
         public void Example_GetSupportedDocumentFormats()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", credential);
+            DocumentTranslationClient client = new DocumentTranslationClient("<https://my-service.azure.com>", credential);
 
             Response response = client.GetSupportedDocumentFormats();
 
@@ -339,7 +339,7 @@ namespace Azure.AI.DocumentTranslation.Samples
         public async Task Example_GetSupportedDocumentFormats_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", credential);
+            DocumentTranslationClient client = new DocumentTranslationClient("<https://my-service.azure.com>", credential);
 
             Response response = await client.GetSupportedDocumentFormatsAsync();
 
@@ -354,7 +354,7 @@ namespace Azure.AI.DocumentTranslation.Samples
         public void Example_GetSupportedDocumentFormats_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", credential);
+            DocumentTranslationClient client = new DocumentTranslationClient("<https://my-service.azure.com>", credential);
 
             Response response = client.GetSupportedDocumentFormats();
 
@@ -371,7 +371,7 @@ namespace Azure.AI.DocumentTranslation.Samples
         public async Task Example_GetSupportedDocumentFormats_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", credential);
+            DocumentTranslationClient client = new DocumentTranslationClient("<https://my-service.azure.com>", credential);
 
             Response response = await client.GetSupportedDocumentFormatsAsync();
 
@@ -388,7 +388,7 @@ namespace Azure.AI.DocumentTranslation.Samples
         public void Example_GetSupportedGlossaryFormats()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", credential);
+            DocumentTranslationClient client = new DocumentTranslationClient("<https://my-service.azure.com>", credential);
 
             Response response = client.GetSupportedGlossaryFormats();
 
@@ -403,7 +403,7 @@ namespace Azure.AI.DocumentTranslation.Samples
         public async Task Example_GetSupportedGlossaryFormats_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", credential);
+            DocumentTranslationClient client = new DocumentTranslationClient("<https://my-service.azure.com>", credential);
 
             Response response = await client.GetSupportedGlossaryFormatsAsync();
 
@@ -418,7 +418,7 @@ namespace Azure.AI.DocumentTranslation.Samples
         public void Example_GetSupportedGlossaryFormats_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", credential);
+            DocumentTranslationClient client = new DocumentTranslationClient("<https://my-service.azure.com>", credential);
 
             Response response = client.GetSupportedGlossaryFormats();
 
@@ -435,7 +435,7 @@ namespace Azure.AI.DocumentTranslation.Samples
         public async Task Example_GetSupportedGlossaryFormats_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", credential);
+            DocumentTranslationClient client = new DocumentTranslationClient("<https://my-service.azure.com>", credential);
 
             Response response = await client.GetSupportedGlossaryFormatsAsync();
 
@@ -452,7 +452,7 @@ namespace Azure.AI.DocumentTranslation.Samples
         public void Example_GetSupportedStorageSources()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", credential);
+            DocumentTranslationClient client = new DocumentTranslationClient("<https://my-service.azure.com>", credential);
 
             Response response = client.GetSupportedStorageSources();
 
@@ -465,7 +465,7 @@ namespace Azure.AI.DocumentTranslation.Samples
         public async Task Example_GetSupportedStorageSources_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", credential);
+            DocumentTranslationClient client = new DocumentTranslationClient("<https://my-service.azure.com>", credential);
 
             Response response = await client.GetSupportedStorageSourcesAsync();
 
@@ -478,7 +478,7 @@ namespace Azure.AI.DocumentTranslation.Samples
         public void Example_GetSupportedStorageSources_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", credential);
+            DocumentTranslationClient client = new DocumentTranslationClient("<https://my-service.azure.com>", credential);
 
             Response response = client.GetSupportedStorageSources();
 
@@ -491,7 +491,7 @@ namespace Azure.AI.DocumentTranslation.Samples
         public async Task Example_GetSupportedStorageSources_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", credential);
+            DocumentTranslationClient client = new DocumentTranslationClient("<https://my-service.azure.com>", credential);
 
             Response response = await client.GetSupportedStorageSourcesAsync();
 

@@ -69,7 +69,7 @@ namespace AutoRest.CSharp.Generation.Writers
             Document.Save(xmlWriter);
             xmlWriter.Flush();
             ReadOnlySpan<byte> buffer = memoryStream.GetBuffer();
-            return Encoding.UTF8.GetString(buffer.Slice(3)); // skip BOM from array
+            return Encoding.UTF8.GetString(buffer.Slice(0, (int)memoryStream.Length).Slice(3)); // skip BOM from array
         }
     }
 }
