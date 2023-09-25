@@ -4,6 +4,7 @@
 using System;
 using System.ServiceModel.Rest;
 using System.ServiceModel.Rest.Shared;
+using System.ServiceModel.Rest.Shared.Core.Serialization;
 using System.Threading.Tasks;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.Base;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
@@ -60,5 +61,12 @@ namespace AutoRest.CSharp.Common.Input
 
         public abstract Type ChangeTrackingListType { get; }
         public abstract Type ChangeTrackingDictionaryType { get; }
+
+        public abstract Type OptionalType { get; }
+        public string OptionalIsCollectionDefinedName => nameof(OptionalProperty.IsCollectionDefined);
+        public string OptionalIsDefinedName => nameof(OptionalProperty.IsDefined);
+        public string OptionalToDictionaryName => nameof(OptionalProperty.ToDictionary);
+        public string OptionalToListName => nameof(OptionalProperty.ToList);
+        public string OptionalToNullableName => nameof(OptionalProperty.ToNullable);
     }
 }

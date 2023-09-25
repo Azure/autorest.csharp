@@ -428,7 +428,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
                 WriteValueExpression(writer, value);
 
-                writer.Append($" != null && {typeof(Optional)}.{nameof(Optional.IsCollectionDefined)}(");
+                writer.Append($" != null && {Configuration.ApiTypes.OptionalType}.{Configuration.ApiTypes.OptionalIsCollectionDefinedName}(");
 
                 WriteValueExpression(writer, value);
 

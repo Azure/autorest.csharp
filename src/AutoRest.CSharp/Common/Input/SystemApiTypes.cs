@@ -52,5 +52,7 @@ namespace AutoRest.CSharp.Common.Input
 
         public override Type ChangeTrackingListType => typeof(OptionalList<>);
         public override Type ChangeTrackingDictionaryType => typeof(OptionalDictionary<,>);
+
+        public override Type OptionalType => typeof(OptionalProperty);
     }
 }
