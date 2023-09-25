@@ -3,6 +3,7 @@
 
 using System;
 using System.ServiceModel.Rest;
+using System.ServiceModel.Rest.Core;
 using System.ServiceModel.Rest.Core.Pipeline;
 using System.ServiceModel.Rest.Shared;
 using System.ServiceModel.Rest.Shared.Core.Pipeline;
@@ -36,8 +37,8 @@ namespace AutoRest.CSharp.Common.Input
             return $"new {typeof(HttpMessage)}(_pipeline.{Configuration.ApiTypes.HttpPipelineCreateMessageName}({context}";
         }
 
-        public override Type HttpMessageType => typeof(HttpMessage);
-        public override string HttpMessageResponseName => nameof(HttpMessage.Response);
+        public override Type HttpMessageType => typeof(RestMessage);
+        public override string HttpMessageResponseName => nameof(RestMessage.Result);
 
         public override Type ClientDiagnosticsType => typeof(TelemetrySource);
         public override string ClientDiagnosticsCreateScopeName => nameof(TelemetrySource.CreateSpan);

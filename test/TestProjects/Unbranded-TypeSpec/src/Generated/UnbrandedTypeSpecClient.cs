@@ -7,6 +7,7 @@
 
 using System;
 using System.ServiceModel.Rest;
+using System.ServiceModel.Rest.Core;
 using System.ServiceModel.Rest.Core.Pipeline;
 using System.ServiceModel.Rest.Shared;
 using System.ServiceModel.Rest.Shared.Core.Pipeline;
@@ -110,7 +111,7 @@ namespace UnbrandedTypeSpec
             scope.Start();
             try
             {
-                using HttpMessage message = CreateTopActionRequest(action, context);
+                using RestMessage message = CreateTopActionRequest(action, context);
                 return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -142,7 +143,7 @@ namespace UnbrandedTypeSpec
             scope.Start();
             try
             {
-                using HttpMessage message = CreateTopActionRequest(action, context);
+                using RestMessage message = CreateTopActionRequest(action, context);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
@@ -172,7 +173,7 @@ namespace UnbrandedTypeSpec
             scope.Start();
             try
             {
-                using HttpMessage message = CreateTopAction2Request(context);
+                using RestMessage message = CreateTopAction2Request(context);
                 return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -202,7 +203,7 @@ namespace UnbrandedTypeSpec
             scope.Start();
             try
             {
-                using HttpMessage message = CreateTopAction2Request(context);
+                using RestMessage message = CreateTopAction2Request(context);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
@@ -236,7 +237,7 @@ namespace UnbrandedTypeSpec
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePatchActionRequest(content, context);
+                using RestMessage message = CreatePatchActionRequest(content, context);
                 return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -270,7 +271,7 @@ namespace UnbrandedTypeSpec
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePatchActionRequest(content, context);
+                using RestMessage message = CreatePatchActionRequest(content, context);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
@@ -333,7 +334,7 @@ namespace UnbrandedTypeSpec
             scope.Start();
             try
             {
-                using HttpMessage message = CreateAnonymousBodyRequest(content, context);
+                using RestMessage message = CreateAnonymousBodyRequest(content, context);
                 return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -368,7 +369,7 @@ namespace UnbrandedTypeSpec
             scope.Start();
             try
             {
-                using HttpMessage message = CreateAnonymousBodyRequest(content, context);
+                using RestMessage message = CreateAnonymousBodyRequest(content, context);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
@@ -435,7 +436,7 @@ namespace UnbrandedTypeSpec
             scope.Start();
             try
             {
-                using HttpMessage message = CreateFriendlyModelRequest(content, context);
+                using RestMessage message = CreateFriendlyModelRequest(content, context);
                 return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -474,7 +475,7 @@ namespace UnbrandedTypeSpec
             scope.Start();
             try
             {
-                using HttpMessage message = CreateFriendlyModelRequest(content, context);
+                using RestMessage message = CreateFriendlyModelRequest(content, context);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
@@ -504,7 +505,7 @@ namespace UnbrandedTypeSpec
             scope.Start();
             try
             {
-                using HttpMessage message = CreateAddTimeHeaderRequest(context);
+                using RestMessage message = CreateAddTimeHeaderRequest(context);
                 return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -534,7 +535,7 @@ namespace UnbrandedTypeSpec
             scope.Start();
             try
             {
-                using HttpMessage message = CreateAddTimeHeaderRequest(context);
+                using RestMessage message = CreateAddTimeHeaderRequest(context);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
@@ -604,7 +605,7 @@ namespace UnbrandedTypeSpec
             scope.Start();
             try
             {
-                using HttpMessage message = CreateStringFormatRequest(subscriptionId, content, context);
+                using RestMessage message = CreateStringFormatRequest(subscriptionId, content, context);
                 return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -644,7 +645,7 @@ namespace UnbrandedTypeSpec
             scope.Start();
             try
             {
-                using HttpMessage message = CreateStringFormatRequest(subscriptionId, content, context);
+                using RestMessage message = CreateStringFormatRequest(subscriptionId, content, context);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
@@ -711,7 +712,7 @@ namespace UnbrandedTypeSpec
             scope.Start();
             try
             {
-                using HttpMessage message = CreateProjectedNameModelRequest(content, context);
+                using RestMessage message = CreateProjectedNameModelRequest(content, context);
                 return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -750,7 +751,7 @@ namespace UnbrandedTypeSpec
             scope.Start();
             try
             {
-                using HttpMessage message = CreateProjectedNameModelRequest(content, context);
+                using RestMessage message = CreateProjectedNameModelRequest(content, context);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
@@ -781,7 +782,7 @@ namespace UnbrandedTypeSpec
             scope.Start();
             try
             {
-                using HttpMessage message = CreateReturnsAnonymousModelRequest(context);
+                using RestMessage message = CreateReturnsAnonymousModelRequest(context);
                 return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -812,7 +813,7 @@ namespace UnbrandedTypeSpec
             scope.Start();
             try
             {
-                using HttpMessage message = CreateReturnsAnonymousModelRequest(context);
+                using RestMessage message = CreateReturnsAnonymousModelRequest(context);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
@@ -848,7 +849,7 @@ namespace UnbrandedTypeSpec
             scope.Start();
             try
             {
-                using HttpMessage message = CreateHeadAsBooleanRequest(id, context);
+                using RestMessage message = CreateHeadAsBooleanRequest(id, context);
                 return await _pipeline.ProcessHeadAsBoolMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -884,7 +885,7 @@ namespace UnbrandedTypeSpec
             scope.Start();
             try
             {
-                using HttpMessage message = CreateHeadAsBooleanRequest(id, context);
+                using RestMessage message = CreateHeadAsBooleanRequest(id, context);
                 return _pipeline.ProcessHeadAsBoolMessage(message, ClientDiagnostics, context);
             }
             catch (Exception e)
@@ -921,7 +922,7 @@ namespace UnbrandedTypeSpec
             scope.Start();
             try
             {
-                using HttpMessage message = CreateSayHiRequest(headParameter, queryParameter, optionalQuery, context);
+                using RestMessage message = CreateSayHiRequest(headParameter, queryParameter, optionalQuery, context);
                 return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -958,7 +959,7 @@ namespace UnbrandedTypeSpec
             scope.Start();
             try
             {
-                using HttpMessage message = CreateSayHiRequest(headParameter, queryParameter, optionalQuery, context);
+                using RestMessage message = CreateSayHiRequest(headParameter, queryParameter, optionalQuery, context);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
@@ -1036,7 +1037,7 @@ namespace UnbrandedTypeSpec
             scope.Start();
             try
             {
-                using HttpMessage message = CreateHelloAgainRequest(p2, p1, content, context);
+                using RestMessage message = CreateHelloAgainRequest(p2, p1, content, context);
                 return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -1076,7 +1077,7 @@ namespace UnbrandedTypeSpec
             scope.Start();
             try
             {
-                using HttpMessage message = CreateHelloAgainRequest(p2, p1, content, context);
+                using RestMessage message = CreateHelloAgainRequest(p2, p1, content, context);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
@@ -1115,7 +1116,7 @@ namespace UnbrandedTypeSpec
             scope.Start();
             try
             {
-                using HttpMessage message = CreateNoContentTypeRequest(p2, p1, content, context);
+                using RestMessage message = CreateNoContentTypeRequest(p2, p1, content, context);
                 return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -1154,7 +1155,7 @@ namespace UnbrandedTypeSpec
             scope.Start();
             try
             {
-                using HttpMessage message = CreateNoContentTypeRequest(p2, p1, content, context);
+                using RestMessage message = CreateNoContentTypeRequest(p2, p1, content, context);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
@@ -1205,7 +1206,7 @@ namespace UnbrandedTypeSpec
             scope.Start();
             try
             {
-                using HttpMessage message = CreateHelloDemo2Request(context);
+                using RestMessage message = CreateHelloDemo2Request(context);
                 return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -1236,7 +1237,7 @@ namespace UnbrandedTypeSpec
             scope.Start();
             try
             {
-                using HttpMessage message = CreateHelloDemo2Request(context);
+                using RestMessage message = CreateHelloDemo2Request(context);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
@@ -1299,7 +1300,7 @@ namespace UnbrandedTypeSpec
             scope.Start();
             try
             {
-                using HttpMessage message = CreateCreateLiteralRequest(content, context);
+                using RestMessage message = CreateCreateLiteralRequest(content, context);
                 return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -1334,7 +1335,7 @@ namespace UnbrandedTypeSpec
             scope.Start();
             try
             {
-                using HttpMessage message = CreateCreateLiteralRequest(content, context);
+                using RestMessage message = CreateCreateLiteralRequest(content, context);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
@@ -1385,7 +1386,7 @@ namespace UnbrandedTypeSpec
             scope.Start();
             try
             {
-                using HttpMessage message = CreateHelloLiteralRequest(context);
+                using RestMessage message = CreateHelloLiteralRequest(context);
                 return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -1416,7 +1417,7 @@ namespace UnbrandedTypeSpec
             scope.Start();
             try
             {
-                using HttpMessage message = CreateHelloLiteralRequest(context);
+                using RestMessage message = CreateHelloLiteralRequest(context);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
@@ -1446,7 +1447,7 @@ namespace UnbrandedTypeSpec
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetUnknownValueRequest(context);
+                using RestMessage message = CreateGetUnknownValueRequest(context);
                 return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -1476,7 +1477,7 @@ namespace UnbrandedTypeSpec
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetUnknownValueRequest(context);
+                using RestMessage message = CreateGetUnknownValueRequest(context);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
@@ -1544,7 +1545,7 @@ namespace UnbrandedTypeSpec
             scope.Start();
             try
             {
-                using HttpMessage message = CreateInternalProtocolRequest(content, context);
+                using RestMessage message = CreateInternalProtocolRequest(content, context);
                 return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -1584,7 +1585,7 @@ namespace UnbrandedTypeSpec
             scope.Start();
             try
             {
-                using HttpMessage message = CreateInternalProtocolRequest(content, context);
+                using RestMessage message = CreateInternalProtocolRequest(content, context);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
@@ -1654,7 +1655,7 @@ namespace UnbrandedTypeSpec
             scope.Start();
             try
             {
-                using HttpMessage message = CreateStillConvenientRequest(context);
+                using RestMessage message = CreateStillConvenientRequest(context);
                 return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -1684,7 +1685,7 @@ namespace UnbrandedTypeSpec
             scope.Start();
             try
             {
-                using HttpMessage message = CreateStillConvenientRequest(context);
+                using RestMessage message = CreateStillConvenientRequest(context);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
@@ -1694,7 +1695,7 @@ namespace UnbrandedTypeSpec
             }
         }
 
-        internal HttpMessage CreateTopActionRequest(DateTimeOffset action, PipelineOptions context)
+        internal RestMessage CreateTopActionRequest(DateTimeOffset action, PipelineOptions context)
         {
             var message = new HttpMessage(_pipeline.CreateRestMessage(context, ResponseClassifier200));
             var request = message.Request;
@@ -1709,7 +1710,7 @@ namespace UnbrandedTypeSpec
             return message;
         }
 
-        internal HttpMessage CreateTopAction2Request(PipelineOptions context)
+        internal RestMessage CreateTopAction2Request(PipelineOptions context)
         {
             var message = new HttpMessage(_pipeline.CreateRestMessage(context, ResponseClassifier200));
             var request = message.Request;
@@ -1723,7 +1724,7 @@ namespace UnbrandedTypeSpec
             return message;
         }
 
-        internal HttpMessage CreatePatchActionRequest(RequestContent content, PipelineOptions context)
+        internal RestMessage CreatePatchActionRequest(RequestContent content, PipelineOptions context)
         {
             var message = new HttpMessage(_pipeline.CreateRestMessage(context, ResponseClassifier200));
             var request = message.Request;
@@ -1739,7 +1740,7 @@ namespace UnbrandedTypeSpec
             return message;
         }
 
-        internal HttpMessage CreateAnonymousBodyRequest(RequestContent content, PipelineOptions context)
+        internal RestMessage CreateAnonymousBodyRequest(RequestContent content, PipelineOptions context)
         {
             var message = new HttpMessage(_pipeline.CreateRestMessage(context, ResponseClassifier200));
             var request = message.Request;
@@ -1755,7 +1756,7 @@ namespace UnbrandedTypeSpec
             return message;
         }
 
-        internal HttpMessage CreateFriendlyModelRequest(RequestContent content, PipelineOptions context)
+        internal RestMessage CreateFriendlyModelRequest(RequestContent content, PipelineOptions context)
         {
             var message = new HttpMessage(_pipeline.CreateRestMessage(context, ResponseClassifier200));
             var request = message.Request;
@@ -1771,7 +1772,7 @@ namespace UnbrandedTypeSpec
             return message;
         }
 
-        internal HttpMessage CreateAddTimeHeaderRequest(PipelineOptions context)
+        internal RestMessage CreateAddTimeHeaderRequest(PipelineOptions context)
         {
             var message = new HttpMessage(_pipeline.CreateRestMessage(context, ResponseClassifier204));
             var request = message.Request;
@@ -1786,7 +1787,7 @@ namespace UnbrandedTypeSpec
             return message;
         }
 
-        internal HttpMessage CreateStringFormatRequest(Guid subscriptionId, RequestContent content, PipelineOptions context)
+        internal RestMessage CreateStringFormatRequest(Guid subscriptionId, RequestContent content, PipelineOptions context)
         {
             var message = new HttpMessage(_pipeline.CreateRestMessage(context, ResponseClassifier204));
             var request = message.Request;
@@ -1803,7 +1804,7 @@ namespace UnbrandedTypeSpec
             return message;
         }
 
-        internal HttpMessage CreateProjectedNameModelRequest(RequestContent content, PipelineOptions context)
+        internal RestMessage CreateProjectedNameModelRequest(RequestContent content, PipelineOptions context)
         {
             var message = new HttpMessage(_pipeline.CreateRestMessage(context, ResponseClassifier200));
             var request = message.Request;
@@ -1819,7 +1820,7 @@ namespace UnbrandedTypeSpec
             return message;
         }
 
-        internal HttpMessage CreateReturnsAnonymousModelRequest(PipelineOptions context)
+        internal RestMessage CreateReturnsAnonymousModelRequest(PipelineOptions context)
         {
             var message = new HttpMessage(_pipeline.CreateRestMessage(context, ResponseClassifier200));
             var request = message.Request;
@@ -1833,7 +1834,7 @@ namespace UnbrandedTypeSpec
             return message;
         }
 
-        internal HttpMessage CreateHeadAsBooleanRequest(string id, PipelineOptions context)
+        internal RestMessage CreateHeadAsBooleanRequest(string id, PipelineOptions context)
         {
             var message = new HttpMessage(_pipeline.CreateRestMessage(context, ResponseClassifier200To300400To500));
             var request = message.Request;
@@ -1848,7 +1849,7 @@ namespace UnbrandedTypeSpec
             return message;
         }
 
-        internal HttpMessage CreateSayHiRequest(string headParameter, string queryParameter, string optionalQuery, PipelineOptions context)
+        internal RestMessage CreateSayHiRequest(string headParameter, string queryParameter, string optionalQuery, PipelineOptions context)
         {
             var message = new HttpMessage(_pipeline.CreateRestMessage(context, ResponseClassifier200));
             var request = message.Request;
@@ -1868,7 +1869,7 @@ namespace UnbrandedTypeSpec
             return message;
         }
 
-        internal HttpMessage CreateHelloAgainRequest(string p2, string p1, RequestContent content, PipelineOptions context)
+        internal RestMessage CreateHelloAgainRequest(string p2, string p1, RequestContent content, PipelineOptions context)
         {
             var message = new HttpMessage(_pipeline.CreateRestMessage(context, ResponseClassifier200));
             var request = message.Request;
@@ -1886,7 +1887,7 @@ namespace UnbrandedTypeSpec
             return message;
         }
 
-        internal HttpMessage CreateNoContentTypeRequest(string p2, string p1, RequestContent content, PipelineOptions context)
+        internal RestMessage CreateNoContentTypeRequest(string p2, string p1, RequestContent content, PipelineOptions context)
         {
             var message = new HttpMessage(_pipeline.CreateRestMessage(context, ResponseClassifier200));
             var request = message.Request;
@@ -1904,7 +1905,7 @@ namespace UnbrandedTypeSpec
             return message;
         }
 
-        internal HttpMessage CreateHelloDemo2Request(PipelineOptions context)
+        internal RestMessage CreateHelloDemo2Request(PipelineOptions context)
         {
             var message = new HttpMessage(_pipeline.CreateRestMessage(context, ResponseClassifier200));
             var request = message.Request;
@@ -1918,7 +1919,7 @@ namespace UnbrandedTypeSpec
             return message;
         }
 
-        internal HttpMessage CreateCreateLiteralRequest(RequestContent content, PipelineOptions context)
+        internal RestMessage CreateCreateLiteralRequest(RequestContent content, PipelineOptions context)
         {
             var message = new HttpMessage(_pipeline.CreateRestMessage(context, ResponseClassifier200));
             var request = message.Request;
@@ -1934,7 +1935,7 @@ namespace UnbrandedTypeSpec
             return message;
         }
 
-        internal HttpMessage CreateHelloLiteralRequest(PipelineOptions context)
+        internal RestMessage CreateHelloLiteralRequest(PipelineOptions context)
         {
             var message = new HttpMessage(_pipeline.CreateRestMessage(context, ResponseClassifier200));
             var request = message.Request;
@@ -1951,7 +1952,7 @@ namespace UnbrandedTypeSpec
             return message;
         }
 
-        internal HttpMessage CreateGetUnknownValueRequest(PipelineOptions context)
+        internal RestMessage CreateGetUnknownValueRequest(PipelineOptions context)
         {
             var message = new HttpMessage(_pipeline.CreateRestMessage(context, ResponseClassifier200));
             var request = message.Request;
@@ -1965,7 +1966,7 @@ namespace UnbrandedTypeSpec
             return message;
         }
 
-        internal HttpMessage CreateInternalProtocolRequest(RequestContent content, PipelineOptions context)
+        internal RestMessage CreateInternalProtocolRequest(RequestContent content, PipelineOptions context)
         {
             var message = new HttpMessage(_pipeline.CreateRestMessage(context, ResponseClassifier200));
             var request = message.Request;
@@ -1981,7 +1982,7 @@ namespace UnbrandedTypeSpec
             return message;
         }
 
-        internal HttpMessage CreateStillConvenientRequest(PipelineOptions context)
+        internal RestMessage CreateStillConvenientRequest(PipelineOptions context)
         {
             var message = new HttpMessage(_pipeline.CreateRestMessage(context, ResponseClassifier204));
             var request = message.Request;
@@ -2012,9 +2013,9 @@ namespace UnbrandedTypeSpec
         private static ResponseClassifier ResponseClassifier204 => _responseClassifier204 ??= new StatusCodeClassifier(stackalloc ushort[] { 204 });
         private sealed class ResponseClassifier200To300400To500Override : ResponseClassifier
         {
-            public override bool IsErrorResponse(HttpMessage message)
+            public override bool IsErrorResponse(RestMessage message)
             {
-                return message.Response.Status switch
+                return message.Result.Status switch
                 {
                     >= 200 and < 300 => false,
                     >= 400 and < 500 => false,
