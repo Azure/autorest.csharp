@@ -43,17 +43,17 @@ namespace ResourceClients_LowLevel
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="keyCredential"> The key credential to copy. </param>
+        /// <param name="endpoint"> server parameter. </param>
         /// <param name="groupId"> Group identifier. </param>
         /// <param name="itemId"> Item identifier. </param>
-        /// <param name="endpoint"> server parameter. </param>
-        internal Resource(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, AzureKeyCredential keyCredential, string groupId, string itemId, Uri endpoint)
+        internal Resource(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, AzureKeyCredential keyCredential, Uri endpoint, string groupId, string itemId)
         {
             ClientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
             _keyCredential = keyCredential;
+            _endpoint = endpoint;
             GroupId = groupId;
             ItemId = itemId;
-            _endpoint = endpoint;
         }
 
         /// <summary>

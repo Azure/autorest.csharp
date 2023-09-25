@@ -302,7 +302,7 @@ namespace ProtocolMethodsInRestClient
         /// <exception cref="ArgumentException"> <paramref name="resourceId"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual async Task<Response> DeleteAsync(string resourceId, ETag? ifMatch, RequestContext context)
+        public virtual async Task<Response> DeleteAsync(string resourceId, ETag? ifMatch = null, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(resourceId, nameof(resourceId));
 
@@ -337,7 +337,7 @@ namespace ProtocolMethodsInRestClient
         /// <exception cref="ArgumentException"> <paramref name="resourceId"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual Response Delete(string resourceId, ETag? ifMatch, RequestContext context)
+        public virtual Response Delete(string resourceId, ETag? ifMatch = null, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(resourceId, nameof(resourceId));
 

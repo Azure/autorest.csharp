@@ -31,6 +31,7 @@
         "server/path/multiple",
         "server/path/single",
         "special-headers/client-request-id",
+        "special-headers/conditional-request",
         "special-headers/repeatability",
         "special-words",
         "parameters/collection-format",

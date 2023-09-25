@@ -577,7 +577,7 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             var builder = new StringBuilder(signature.Name);
             builder.Append("(");
-            var paramList = signature.Parameters.Select(p => p.Type.ConvertParamNameForDocs());
+            var paramList = signature.Parameters.Select(p => p.Type.ToStringForDocs());
             builder.Append(string.Join(",", paramList));
             builder.Append(")");
             return builder.ToString();
@@ -609,12 +609,6 @@ namespace AutoRest.CSharp.Generation.Writers
             }
 
             return scope;
-        }
-
-        private static void WriteConvenienceMethodDocumentation(CodeWriter writer, MethodSignature convenienceMethod)
-        {
-            writer.WriteMethodDocumentation(convenienceMethod, convenienceMethod.SummaryText);
-            writer.WriteXmlDocumentation("remarks", convenienceMethod.DescriptionText);
         }
 
         private void WriteCancellationTokenToRequestContextMethod()

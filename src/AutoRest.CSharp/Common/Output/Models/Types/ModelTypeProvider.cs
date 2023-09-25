@@ -5,11 +5,12 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using System.Xml.Linq;
 using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Output.Builders;
+using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
+using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Builders;
@@ -18,21 +19,11 @@ using AutoRest.CSharp.Output.Models.Serialization.Json;
 using AutoRest.CSharp.Output.Models.Serialization.Xml;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Utilities;
-using Azure;
-using Azure.Core;
-using Microsoft.CodeAnalysis.CSharp;
-using static Azure.Core.HttpHeader;
 
 namespace AutoRest.CSharp.Output.Models.Types
 {
     internal sealed class ModelTypeProvider : SerializableObjectType
     {
-        private static readonly Parameter[] _fromResponseParameters = { new Parameter("response", $"The response to deserialize the model from.", new CSharpType(typeof(Response)), null, ValidationType.None, null) };
-        private MethodSignature FromResponseSignature => new MethodSignature("FromResponse", null, $"Deserializes the model from a raw response.", GetFromResponseModifiers(), Type, null, _fromResponseParameters);
-
-        private static readonly Parameter[] _toRequestContentParameters = Array.Empty<Parameter>();
-        private MethodSignature ToRequestContentSignature => new MethodSignature("ToRequestContent", null, $"Convert into a Utf8JsonRequestContent.", GetToRequestContentModifiers(), typeof(RequestContent), null, _toRequestContentParameters);
-
         private ModelTypeProviderFields? _fields;
         private ConstructorSignature? _publicConstructor;
         private ConstructorSignature? _serializationConstructor;
@@ -172,29 +163,41 @@ namespace AutoRest.CSharp.Output.Models.Types
             {
                 foreach (var property in objType.Properties)
                 {
-                    if (property.InputModelProperty is not { } inputModelProperty)
+                    if (property.InputModelProperty is not {} inputModelProperty)
                         continue;
 
                     var declaredName = property.Declaration.Name;
-                    var paramName = declaredName.ToVariableName();
-                    var serializedName = inputModelProperty.SerializedName ?? inputModelProperty.Name;
-                    var valueSerialization = SerializationBuilder.BuildJsonSerialization(inputModelProperty.Type, property.ValueType, false, property.SerializationFormat);
+                    var serializedName = inputModelProperty.SerializedName;
+                    var valueSerialization = SerializationBuilder.BuildJsonSerialization(inputModelProperty.Type, property.Declaration.Type, false, property.SerializationFormat);
 
                     yield return new JsonPropertySerialization(
-                        paramName,
-                        declaredName,
-                        property.SerializationMapping?.SerializationPath?.Last() ?? serializedName,
-                        property.Declaration.Type,
-                        property.ValueType,
+                        declaredName.ToVariableName(),
+                        new TypedMemberExpression(null, declaredName, property.Declaration.Type),
+                        serializedName,
+                        property.ValueType.IsNullable && property.OptionalViaNullability ? property.ValueType.WithNullable(false) : property.ValueType,
                         valueSerialization,
-                        inputModelProperty.IsRequired,
-                        inputModelProperty.IsReadOnly,
+                        property.IsRequired,
+                        ShouldSkipSerialization(property, inputModelProperty),
                         false,
-                        property.OptionalViaNullability,
-                        serializationValueHook: property.SerializationMapping?.SerializationValueHook,
-                        deserializationValueHook: property.SerializationMapping?.DeserializationValueHook);
+                        customSerializationMethodName: property.SerializationMapping?.SerializationValueHook,
+                        customDeserializationMethodName: property.SerializationMapping?.DeserializationValueHook);;
                 }
             }
+        }
+
+        private static bool ShouldSkipSerialization(ObjectTypeProperty property, InputModelProperty inputProperty)
+        {
+            if (inputProperty.IsDiscriminator)
+            {
+                return false;
+            }
+
+            if (property.InitializationValue is not null)
+            {
+                return false;
+            }
+
+            return inputProperty.IsReadOnly;
         }
 
         private void GetConstructorParameters(IEnumerable<Parameter> parameters, out List<Parameter> fullParameterList, out IEnumerable<Parameter> parametersToPassToBase, bool isInitializer, Func<Parameter, Parameter> creator)
@@ -354,7 +357,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             // Serialization uses field and property names that first need to verified for uniqueness
             // For that, FieldDeclaration instances must be written in the main partial class before JsonObjectSerialization is created for the serialization partial class
-            return new(Type, SerializationConstructorSignature, CreatePropertySerializations().ToArray(), null, Discriminator, false, EnsureIncludeSerializer(), EnsureIncludeDeserializer());
+            return new(Type, SerializationConstructorSignature.Parameters, CreatePropertySerializations().ToArray(), null, Discriminator, false);
         }
 
         protected override XmlObjectSerialization? EnsureXmlSerialization()
@@ -362,12 +365,12 @@ namespace AutoRest.CSharp.Output.Models.Types
             return null;
         }
 
-        protected override IEnumerable<ModelMethodDefinition> BuildMethods()
+        protected override IEnumerable<Method> BuildMethods()
         {
             if (EnsureIncludeDeserializer())
-                yield return new ModelMethodDefinition(FromResponseSignature, SerializationWriter.JsonFromResponseMethod);
+                yield return JsonSerializationMethodsBuilder.BuildFromResponse(this, GetFromResponseModifiers());
             if (EnsureIncludeSerializer())
-                yield return new ModelMethodDefinition(ToRequestContentSignature, SerializationWriter.JsonToRequestContentMethod);
+                yield return JsonSerializationMethodsBuilder.BuildToRequestContent(GetToRequestContentModifiers());
         }
 
         public ObjectTypeProperty GetPropertyBySerializedName(string serializedName, bool includeParents = false)

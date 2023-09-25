@@ -37,19 +37,19 @@ namespace BodyAndPath_LowLevel
         /// <summary> Initializes a new instance of BodyAndPathClient. </summary>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
-        public BodyAndPathClient(AzureKeyCredential credential) : this(credential, new Uri("http://localhost:3000"), new BodyAndPathClientOptions())
+        public BodyAndPathClient(AzureKeyCredential credential) : this(new Uri("http://localhost:3000"), credential, new BodyAndPathClientOptions())
         {
         }
 
         /// <summary> Initializes a new instance of BodyAndPathClient. </summary>
-        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="endpoint"> server parameter. </param>
+        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="options"> The options for configuring the client. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> or <paramref name="endpoint"/> is null. </exception>
-        public BodyAndPathClient(AzureKeyCredential credential, Uri endpoint, BodyAndPathClientOptions options)
+        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
+        public BodyAndPathClient(Uri endpoint, AzureKeyCredential credential, BodyAndPathClientOptions options)
         {
-            Argument.AssertNotNull(credential, nameof(credential));
             Argument.AssertNotNull(endpoint, nameof(endpoint));
+            Argument.AssertNotNull(credential, nameof(credential));
             options ??= new BodyAndPathClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
