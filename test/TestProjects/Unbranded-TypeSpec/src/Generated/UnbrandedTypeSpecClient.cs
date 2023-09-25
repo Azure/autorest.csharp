@@ -24,8 +24,6 @@ namespace UnbrandedTypeSpec
     {
         private const string AuthorizationHeader = "x-ms-api-key";
         private readonly AzureKeyCredential _keyCredential;
-        private static readonly string[] AuthorizationScopes = new string[] { "https://api.example.com/.default" };
-        private readonly TokenCredential _tokenCredential;
         private readonly MessagePipeline _pipeline;
         private readonly Uri _endpoint;
         private readonly string _apiVersion;
@@ -52,14 +50,6 @@ namespace UnbrandedTypeSpec
         /// <summary> Initializes a new instance of UnbrandedTypeSpecClient. </summary>
         /// <param name="endpoint"> The Uri to use. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
-        public UnbrandedTypeSpecClient(Uri endpoint, TokenCredential credential) : this(endpoint, credential, new UnbrandedTypeSpecClientOptions())
-        {
-        }
-
-        /// <summary> Initializes a new instance of UnbrandedTypeSpecClient. </summary>
-        /// <param name="endpoint"> The Uri to use. </param>
-        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
         public UnbrandedTypeSpecClient(Uri endpoint, AzureKeyCredential credential, UnbrandedTypeSpecClientOptions options)
@@ -71,24 +61,6 @@ namespace UnbrandedTypeSpec
             ClientDiagnostics = new TelemetrySource(options, true);
             _keyCredential = credential;
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
-            _endpoint = endpoint;
-            _apiVersion = options.Version;
-        }
-
-        /// <summary> Initializes a new instance of UnbrandedTypeSpecClient. </summary>
-        /// <param name="endpoint"> The Uri to use. </param>
-        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
-        /// <param name="options"> The options for configuring the client. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
-        public UnbrandedTypeSpecClient(Uri endpoint, TokenCredential credential, UnbrandedTypeSpecClientOptions options)
-        {
-            Argument.AssertNotNull(endpoint, nameof(endpoint));
-            Argument.AssertNotNull(credential, nameof(credential));
-            options ??= new UnbrandedTypeSpecClientOptions();
-
-            ClientDiagnostics = new TelemetrySource(options, true);
-            _tokenCredential = credential;
-            _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new BearerTokenAuthenticationPolicy(_tokenCredential, AuthorizationScopes) }, new ResponseClassifier());
             _endpoint = endpoint;
             _apiVersion = options.Version;
         }

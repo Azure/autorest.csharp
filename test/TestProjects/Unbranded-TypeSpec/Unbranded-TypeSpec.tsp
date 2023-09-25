@@ -16,17 +16,9 @@ import "@azure-tools/typespec-azure-core";
     }
 )
 @useAuth(
-    OAuth2Auth<[AuthFlow]> | ApiKeyAuth<ApiKeyLocation.header, "x-ms-api-key">
+    ApiKeyAuth<ApiKeyLocation.header, "x-ms-api-key">
 )
 namespace UnbrandedTypeSpec;
-
-@doc("The auth flow model")
-model AuthFlow {
-    type: OAuth2FlowType.clientCredentials;
-    tokenUrl: "https://api.example.com/oauth2/token";
-    refreshUrl: "https://api.example.com/oauth2/refresh";
-    scopes: ["https://api.example.com/.default"];
-}
 
 using TypeSpec.Http;
 using Azure.ClientGenerator.Core;

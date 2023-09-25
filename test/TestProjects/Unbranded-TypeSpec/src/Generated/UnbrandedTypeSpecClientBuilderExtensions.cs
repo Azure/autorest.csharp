@@ -27,15 +27,6 @@ namespace Microsoft.Extensions.Azure
 
         /// <summary> Registers a <see cref="UnbrandedTypeSpecClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>
-        /// <param name="endpoint"> The Uri to use. </param>
-        public static IAzureClientBuilder<UnbrandedTypeSpecClient, UnbrandedTypeSpecClientOptions> AddUnbrandedTypeSpecClient<TBuilder>(this TBuilder builder, Uri endpoint)
-        where TBuilder : IAzureClientFactoryBuilderWithCredential
-        {
-            return builder.RegisterClientFactory<UnbrandedTypeSpecClient, UnbrandedTypeSpecClientOptions>((options, cred) => new UnbrandedTypeSpecClient(endpoint, cred, options));
-        }
-
-        /// <summary> Registers a <see cref="UnbrandedTypeSpecClient"/> instance. </summary>
-        /// <param name="builder"> The builder to register with. </param>
         /// <param name="configuration"> The configuration values. </param>
         public static IAzureClientBuilder<UnbrandedTypeSpecClient, UnbrandedTypeSpecClientOptions> AddUnbrandedTypeSpecClient<TBuilder, TConfiguration>(this TBuilder builder, TConfiguration configuration)
         where TBuilder : IAzureClientFactoryBuilderWithConfiguration<TConfiguration>
