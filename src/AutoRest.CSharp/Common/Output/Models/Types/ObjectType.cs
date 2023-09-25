@@ -46,7 +46,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         protected abstract ObjectTypeConstructor BuildSerializationConstructor();
         protected abstract CSharpType? CreateInheritedType();
         protected abstract IEnumerable<ObjectTypeProperty> BuildProperties();
-        protected abstract string CreateDescription();
+        protected abstract FormattableString CreateDescription();
         public abstract bool IncludeConverter { get; }
 
         public IEnumerable<ObjectType> EnumerateHierarchy()

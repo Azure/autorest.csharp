@@ -7,6 +7,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
 
 namespace AutoRest.CSharp.Generation.Writers
@@ -19,6 +20,11 @@ namespace AutoRest.CSharp.Generation.Writers
             => crefType == null
                 ? writer.Line($"/// <inheritdoc />")
                 : writer.Line($"/// <inheritdoc cref=\"{crefType}\"/>");
+
+        public static CodeWriter WriteXmlDocumentationInclude(this CodeWriter writer, CSharpType type, string memberName)
+        {
+            return writer.Line($"/// <include file=\"Docs/{type.Name}.xml\" path=\"doc/members/member[@name='{memberName}']/*\" />");
+        }
 
         public static CodeWriter WriteXmlDocumentationSummary(this CodeWriter writer, FormattableString? text)
         {

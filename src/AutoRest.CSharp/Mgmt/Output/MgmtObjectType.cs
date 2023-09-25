@@ -259,9 +259,9 @@ namespace AutoRest.CSharp.Mgmt.Output
             return objectProperty;
         }
 
-        protected override string CreateDescription()
+        protected override FormattableString CreateDescription()
         {
-            return ObjectSchema.CreateDescription();
+            return $"{ObjectSchema.CreateDescription()}";
         }
     }
 }

@@ -38,7 +38,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             {
                 var codeWriter = new CodeWriter();
                 var xmlDocWriter = new XmlDocWriter();
-                var exampleComposer = new LowLevelExampleComposer(client, library.TypeFactory);
+                var exampleComposer = new ExampleComposer(client, library.TypeFactory);
                 var lowLevelClientWriter = new LowLevelClientWriter(codeWriter, xmlDocWriter, client, exampleComposer);
                 lowLevelClientWriter.WriteClient();
                 project.AddGeneratedFile($"{client.Type.Name}.cs", codeWriter.ToString());

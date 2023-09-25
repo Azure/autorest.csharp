@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace AutoRest.CSharp.Generation.Writers
 {
-    internal sealed class DebuggerCodeWriter : CodeWriter, IDisposable
+    internal sealed class DebuggerCodeWriter : CodeWriter
     {
         private readonly List<CodeWriterDeclaration> _declarations;
 
@@ -22,12 +22,13 @@ namespace AutoRest.CSharp.Generation.Writers
             return Declaration(declaration.ActualName);
         }
 
-        public void Dispose()
+        public override void Dispose()
         {
             foreach (var declaration in _declarations)
             {
                 declaration.SetDebuggerName(null);
             }
+            base.Dispose();
         }
 
         public override void Append(CodeWriterDeclaration declaration)

@@ -207,9 +207,9 @@ namespace AutoRest.CSharp.Output.Models.Types
             return signatures;
         }
 
-        protected override string CreateDescription()
+        protected override FormattableString CreateDescription()
         {
-            return _inputModel.Description ?? $"The {_inputModel.Name}.";
+            return string.IsNullOrEmpty(_inputModel.Description) ? (FormattableString)$"The {_inputModel.Name}." : $"{_inputModel.Description}";
         }
 
         private ConstructorSignature EnsurePublicConstructorSignature()
@@ -417,7 +417,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 if (model is { AdditionalPropertiesProperty: {} additionalProperties, _inputModel.InheritedDictionaryType: {} inheritedDictionaryType })
                 {
                     var dictionaryValueType = additionalProperties.Declaration.Type.Arguments[1];
-                    Debug.Assert(!dictionaryValueType.IsNullable, $"{typeof(JsonCodeWriterExtensions)} implicitly relies on {additionalProperties.Declaration.Name} dictionary value being non-nullable");
+                    Debug.Assert(!dictionaryValueType.IsNullable, $"{typeof(JsonSerializationMethodsBuilder)} implicitly relies on {additionalProperties.Declaration.Name} dictionary value being non-nullable");
 
                     var type = new CSharpType(typeof(Dictionary<,>), additionalProperties.Declaration.Type.Arguments);
                     var valueSerialization = SerializationBuilder.BuildJsonSerialization(inheritedDictionaryType.ValueType, dictionaryValueType, false);

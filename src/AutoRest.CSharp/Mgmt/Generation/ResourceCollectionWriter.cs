@@ -7,6 +7,7 @@ using System.Linq;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
+using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Mgmt.Output;
@@ -89,28 +90,19 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         private void WriteGetMethodBranch(CodeWriter writer, MgmtRestOperation operation, IReadOnlyList<ParameterMapping> parameterMappings, bool async)
         {
-            var responseVariable = new VariableReference(typeof(Response), "response");
-            writer
-                .Append($"var {responseVariable.Declaration:D} = {GetAwait(async)} ")
-                .Append($"{GetRestClientName(operation)}.{CreateMethodName(operation.MethodName, async)}(");
-            WriteArguments(writer, parameterMappings.SkipLast(1));
-            writer.Line($", cancellationToken: cancellationToken){GetConfigureAwait(async)};");
-
-            var response = new ResponseExpression(responseVariable);
-            var armResource = new ArmResourceExpression(response.Value);
             var returnType = operation.MgmtReturnType!;
+            var restClient = new MemberExpression(null, GetRestClientName(operation));
 
-            var statements = new List<MethodBodyStatement>
+            writer.WriteMethodBodyStatement(new[]
             {
-                new IfStatement(Equal(armResource, Null))
+                Var("response", new(restClient.Invoke(CreateMethodName(operation.MethodName, async), GetArguments(writer, parameterMappings.SkipLast(1)), async)), out ResponseExpression response),
+                new IfStatement(Equal(response.Value, Null))
                 {
-                    Return(ResponseExpression.FromValue(returnType, Null, response.GetRawResponse()))
+                    Return(New.Instance(new CSharpType(typeof(NoValueResponse<>), returnType), response.GetRawResponse()))
                 },
-                AssignResourceIdentifierIfNeeded(operation, armResource, parameterMappings),
-                Return(ResponseExpression.FromValue(New.Instance(returnType, new MemberExpression(null, ArmClientReference), armResource), response.GetRawResponse()))
-            };
-
-            writer.WriteMethodBodyStatement(statements);
+                AssignResourceIdentifierIfNeeded(operation, new(response.Value), parameterMappings),
+                Return(ResponseExpression.FromValue(New.Instance(returnType, new MemberExpression(null, ArmClientReference), response.Value), response.GetRawResponse()))
+            });
         }
 
         private MethodBodyStatement AssignResourceIdentifierIfNeeded(MgmtRestOperation operation, ArmResourceExpression armResource, IReadOnlyList<ParameterMapping> parameterMappings)

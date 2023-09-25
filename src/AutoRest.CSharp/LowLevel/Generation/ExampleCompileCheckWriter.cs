@@ -28,9 +28,9 @@ namespace AutoRest.CSharp.LowLevel.Generation
 
         private readonly LowLevelClient _client;
         private readonly CodeWriter _writer;
-        private readonly LowLevelExampleComposer _exampleComposer;
+        private readonly ExampleComposer _exampleComposer;
 
-        public ExampleCompileCheckWriter(LowLevelClient client, LowLevelExampleComposer exampleComposer)
+        public ExampleCompileCheckWriter(LowLevelClient client, ExampleComposer exampleComposer)
         {
             _client = client;
             _writer = new CodeWriter();
@@ -97,7 +97,7 @@ namespace AutoRest.CSharp.LowLevel.Generation
 
         private void WriteConvenienceTestCompilation(MethodSignature signature, bool isAsync, bool useAllParameters)
         {
-            var methodBody = _exampleComposer.ComposeConvenienceMethodExample(signature, isAsync);
+            var methodBody = _exampleComposer.ComposeConvenienceMethodExample(signature, useAllParameters, isAsync);
             var testMethodName = signature.WithAsync(false).Name;
             if (useAllParameters)
             {

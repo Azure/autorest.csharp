@@ -13,7 +13,7 @@ using Microsoft.CodeAnalysis.CSharp;
 
 namespace AutoRest.CSharp.Generation.Writers
 {
-    internal class CodeWriter
+    internal class CodeWriter : IDisposable
     {
         private readonly bool _appendTypeNameOnly;
         private const int DefaultLength = 1024;
@@ -35,6 +35,18 @@ namespace AutoRest.CSharp.Generation.Writers
 
             _scopes = new Stack<CodeWriterScope>();
             _scopes.Push(new CodeWriterScope(this, "", false));
+        }
+
+        public virtual void Dispose()
+        {
+            while (_scopes.TryPeek(out var scope))
+            {
+                scope.Dispose();
+            }
+
+            var builder = _builder;
+            _builder = Array.Empty<char>();
+            ArrayPool<char>.Shared.Return(builder);
         }
 
         public CodeWriterScope Scope(FormattableString line, string start = "{", string end = "}", bool newLine = true, CodeWriterScopeDeclarations? scopeDeclarations = null)

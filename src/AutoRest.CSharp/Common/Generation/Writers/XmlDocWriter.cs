@@ -3,8 +3,11 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
+using System.IO;
+using System.Linq;
 using System.Text;
+using System.Xml;
+using System.Xml.Linq;
 
 namespace AutoRest.CSharp.Generation.Writers
 {
@@ -13,108 +16,60 @@ namespace AutoRest.CSharp.Generation.Writers
     /// throught "// &lt;include&gt;" tag.
     /// For details, see: https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/language-specification/documentation-comments#d36-include
     /// </summary>
-    internal class XmlDocWriter : IFormatProvider, ICustomFormatter
+    internal class XmlDocWriter
     {
-        private IList<string> Members = new List<string>();
+        private readonly XElement _membersElement;
 
-        private StringBuilder? CurrentWriter;
-
-        /// <summary>
-        /// Write content of XML documentation.
-        /// </summary>
-        /// <param name="tag">Tag name</param>
-        /// <param name="text">Text context inside the given tag.</param>
-        /// <exception cref="InvalidOperationException">throws if this method is inovoked before <see cref="CreateMember(string)"/> is invoked.</exception>
-        public void WriteXmlDocumentation(string tag, FormattableString? text)
+        public XmlDocWriter()
         {
-            if (CurrentWriter == null)
-            {
-                throw new InvalidOperationException("Invoke 'CreateMember' first.");
-            }
-
-            // skip empty content
-            if (text == null || string.IsNullOrEmpty(text.ToString()))
-            {
-                return;
-            }
-
-            // we don't add the indentation of XML doucment contents, because that will be carried over to the final doc
-            CurrentWriter.Append($"<{tag}>\n");
-            CurrentWriter.Append(text.ToString(this));
-            CurrentWriter.Append($"\n</{tag}>\n");
+            _membersElement = new XElement("members");
+            Document = new XDocument(new XElement("doc", _membersElement));
         }
 
+        public IEnumerable<XElement> Members => _membersElement.Elements("member");
 
-        public object? GetFormat(Type? formatType)
+        public XDocument Document { get; }
+
+        private XElement? _lastMember = null;
+
+        public XmlDocWriter AddMember(string docRef)
         {
-            if (formatType == typeof(ICustomFormatter))
-            {
-                return this;
-            }
-            return null;
+            _lastMember = new XElement("member", new XAttribute("name", docRef));
+            _membersElement.Add(_lastMember);
+
+            return this;
         }
 
-        // a much simpler implementatoin of CodeWriter.Append(FormattableString)
-        // we only translate the necessary arguments in the formattable string
-        public string Format(string? format, object? arg, IFormatProvider? formatProvider)
+        public XmlDocWriter AddExamples(IEnumerable<(string ExampleInformation, string ExampleCode)> examples)
         {
-            switch (arg)
+            if (_lastMember != null && examples.Any())
             {
-                case FormattableString fs:
-                    return fs.ToString(formatProvider);
-                case IEnumerable<FormattableString> fss:
-                    var builder = new StringBuilder();
-                    foreach (var fs in fss)
-                    {
-                        builder.Append(fs.ToString(formatProvider));
-                    }
-                    return builder.ToString();
-                default:
-                    string? s = arg?.ToString();
-                    if (s == null)
-                    {
-                        throw new ArgumentNullException(format);
-                    }
-                    return s;
+                var exampleElement = new XElement("example");
+                foreach (var example in examples)
+                {
+                    exampleElement.Add
+                    (
+                        Environment.NewLine,
+                        example.ExampleInformation,
+                        Environment.NewLine,
+                        new XElement("code", new XCData(Environment.NewLine + example.ExampleCode))
+                    );
+                }
+                _lastMember.Add(exampleElement);
             }
+
+            return this;
         }
+
 
         public override string ToString()
         {
-            // generated XML document follows the "/doc/members/member[@name={method_signature}]" structure
-            // here we add indentation of high level tags, just for readability
-            var builder = new StringBuilder("<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<doc>\n  <members>\n");
-
-            foreach (var member in Members)
-            {
-                builder.Append(member);
-            }
-
-            builder.Append("  </members>\n</doc>");
-            return builder.ToString();
-        }
-
-        internal IDisposable CreateMember(string name)
-        {
-            return new Member(name, this);
-        }
-
-        // A <member> element
-        private class Member : IDisposable
-        {
-            private readonly XmlDocWriter writer;
-
-            internal Member(string name, XmlDocWriter writer)
-            {
-                this.writer = writer;
-                writer.CurrentWriter = new StringBuilder($"    <member name=\"{name}\">\n");
-            }
-
-            public void Dispose()
-            {
-                writer.CurrentWriter!.Append("    </member>\n");
-                writer.Members.Add(writer.CurrentWriter!.ToString());
-            }
+            using var memoryStream = new MemoryStream();
+            using var xmlWriter = XmlWriter.Create(memoryStream, new XmlWriterSettings { OmitXmlDeclaration = false, Indent = true });
+            Document.Save(xmlWriter);
+            xmlWriter.Flush();
+            ReadOnlySpan<byte> buffer = memoryStream.GetBuffer();
+            return Encoding.UTF8.GetString(buffer.Slice(3)); // skip BOM from array
         }
     }
 }

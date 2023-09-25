@@ -509,9 +509,11 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 {
                     return RequestContentExpression.FromDictionary(fromExpression);
                 }
+
+                return RequestContentExpression.Create(fromExpression);
             }
 
-            return RequestContentExpression.Create(fromExpression);
+            return fromExpression;
         }
 
         private static ValueExpression CreateConversion(ValueExpression fromExpression, TypeProvider fromTypeImplementation, CSharpType toType)

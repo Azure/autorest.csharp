@@ -858,7 +858,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
-        private static List<ValueExpression> GetArguments(CodeWriter writer, IEnumerable<ParameterMapping> mapping, bool passNullForOptionalParameters = false)
+        protected static List<ValueExpression> GetArguments(CodeWriter writer, IEnumerable<ParameterMapping> mapping, bool passNullForOptionalParameters = false)
         {
             var args = new List<ValueExpression>();
             foreach (var parameter in mapping)

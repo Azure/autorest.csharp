@@ -45,8 +45,6 @@ namespace AutoRest.CSharp.Generation.Writers
                 return;
             }
 
-            // [TODO]: This UseNamespace calls are needed to reduce the change footprint. Can be removed during cleanup phase
-            writer.UseNamespace("Azure.Core");
             using (writer.Namespace(declaration.Namespace))
             {
                 if (jsonSerialization is { IncludeConverter: true })

@@ -727,23 +727,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             return false;
         }
 
-        private struct RequestPathCollectionEqualityComparer : IEqualityComparer<IEnumerable<RequestPath>>
-        {
-            public bool Equals([AllowNull] IEnumerable<RequestPath> x, [AllowNull] IEnumerable<RequestPath> y)
-            {
-                if (x == null && y == null)
-                    return true;
-                if (x == null || y == null)
-                    return false;
-                return x.SequenceEqual(y);
-            }
-
-            public int GetHashCode([DisallowNull] IEnumerable<RequestPath> obj)
-            {
-                return obj.GetHashCode();
-            }
-        }
-
         public IEnumerable<Operation> GetChildOperations(RequestPath requestPath)
         {
             if (requestPath == RequestPath.Any)
