@@ -1,9 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
-// Licensed under the MIT License. See License.txt in the project root for license information.
+// Licensed under the MIT License. See Lic
 
-using System;
-using System.Collections.Generic;
-using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models.Types;
 
@@ -39,7 +37,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
                 TypeFactory.GetInputType(PackModel.Type),
                 null,
                 ShouldValidateParameter ? Validation.AssertNotNull : Validation.None,
-                ShouldValidateParameter ? (FormattableString?)null : $"new {PackModel.Type.Name}()") with { IsPropertyBag = true };
+                ShouldValidateParameter ? null : Snippets.New.Instance(PackModel.Type)) { IsPropertyBag = true };
         }
     }
 }

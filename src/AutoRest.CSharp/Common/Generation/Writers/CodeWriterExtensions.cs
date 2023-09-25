@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.Linq;
 using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
+using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models;
@@ -348,7 +349,8 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             if (parameter.Validation == Validation.None && parameter.Initializer != null)
             {
-                return writer.Line($"{parameter.Name:I} ??= {parameter.Initializer};");
+                writer.WriteMethodBodyStatement(new AssignValueStatement(parameter, parameter.Initializer, "??="));
+                return writer;
             }
 
             if (parameter.Validation.Type == ValidationType.AssertNull && parameter.Validation.Data is RequestConditionHeaders requestConditionFlag)

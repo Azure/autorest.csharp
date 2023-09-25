@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Utilities;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
@@ -531,7 +532,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                     .Where(p => p.Kind == InputOperationParameterKind.Client)
                     .GroupBy(p => p.Name)
                     .Select(g => RestClientBuilder.BuildConstructorParameter(g.First(), TypeFactory))
-                    .Select(p => p.IsApiVersionParameter ? p with { DefaultValue = Constant.Default(p.Type.WithNullable(true)), Initializer = p.DefaultValue?.GetConstantFormattable() } : p)
+                    .Select(p => p.IsApiVersionParameter ? p with { DefaultValue = Constant.Default(p.Type.WithNullable(true)), Initializer = p.DefaultValue is {} defaultValue ? new ConstantExpression(defaultValue) : null } : p)
                     .OrderBy(p => p.IsOptionalInSignature)
                     .ToList();
 

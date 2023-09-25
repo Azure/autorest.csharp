@@ -106,13 +106,15 @@ namespace AutoRest.CSharp.Output.Models
 
             if (Fields.CredentialFields.Count == 0)
             {
-                yield return CreatePrimaryConstructor(requiredParameters.Concat(optionalToRequired).ToArray());
+                /* order the constructor parameters as (endpoint, required parameters, optional parameters) */
+                yield return CreatePrimaryConstructor(requiredParameters.Concat(optionalToRequired).OrderBy(p => !p.IsEndpoint).ToArray());
             }
             else
             {
                 foreach (var credentialField in Fields.CredentialFields)
                 {
-                    yield return CreatePrimaryConstructor(requiredParameters.Append(CreateCredentialParameter(credentialField!.Type)).Concat(optionalToRequired).ToArray());
+                    /* order the constructor parameters as (endpoint, required parameters, credential, optional parameters) */
+                    yield return CreatePrimaryConstructor(requiredParameters.Append(CreateCredentialParameter(credentialField.Type)).Concat(optionalToRequired).OrderBy(p => !p.IsEndpoint).ToArray());
                 }
             }
         }
@@ -124,19 +126,36 @@ namespace AutoRest.CSharp.Output.Models
                 yield return CreateMockingConstructor();
             }
 
+            /* Construct the parameter arguments to call primitive constructor.
+             * In primitive constructor, the endpoint is the first parameter,
+             * so put the endpoint as the first parameter argument if the endpoint is optional parameter.
+             * */
             var optionalParametersArguments = optionalParameters
-                .Select(p => (ValueExpression)new FormattableStringToExpression(p.Initializer ?? p.Type.GetParameterInitializer(p.DefaultValue!.Value)!))
+                .Where(p => !p.IsEndpoint)
+                .Select(p => p.Initializer ?? Parameter.GetParameterInitializer(p.Type, p.DefaultValue!.Value)!)
                 .ToArray();
+
+            var optionalEndpoint = optionalParameters.FirstOrDefault(p => p.IsEndpoint);
+            var arguments = new List<ValueExpression>();
+            if (optionalEndpoint != null)
+            {
+                arguments.Add(optionalEndpoint.Initializer ?? Parameter.GetParameterInitializer(optionalEndpoint.Type, optionalEndpoint.DefaultValue!.Value)!);
+            }
+
+            arguments.AddRange(requiredParameters.Select(requiredParameter => (ValueExpression)requiredParameter));
 
             if (Fields.CredentialFields.Count == 0)
             {
-                yield return CreateSecondaryConstructor(requiredParameters, optionalParametersArguments);
+                var allArguments = arguments.Concat(optionalParametersArguments);
+                yield return CreateSecondaryConstructor(requiredParameters, allArguments.ToArray());
             }
             else
             {
                 foreach (var credentialField in Fields.CredentialFields)
                 {
-                    yield return CreateSecondaryConstructor(requiredParameters.Append(CreateCredentialParameter(credentialField!.Type)).ToArray(), optionalParametersArguments);
+                    var credentialParameter = CreateCredentialParameter(credentialField.Type);
+                    var allArguments = arguments.Append(credentialParameter).Concat(optionalParametersArguments);
+                    yield return CreateSecondaryConstructor(requiredParameters.Append(credentialParameter).ToArray(), allArguments.ToArray());
                 }
             }
         }
@@ -144,12 +163,8 @@ namespace AutoRest.CSharp.Output.Models
         private ConstructorSignature CreatePrimaryConstructor(IReadOnlyList<Parameter> parameters)
             => new(Declaration.Name, $"Initializes a new instance of {Declaration.Name}", null, Public, parameters);
 
-        private ConstructorSignature CreateSecondaryConstructor(IReadOnlyList<Parameter> parameters, ValueExpression[] optionalParametersArguments)
+        private ConstructorSignature CreateSecondaryConstructor(IReadOnlyList<Parameter> parameters, ValueExpression[] arguments)
         {
-            var arguments = parameters
-                .Select<Parameter, ValueExpression>(p => p)
-                .Concat(optionalParametersArguments)
-                .ToArray();
             return new(Declaration.Name, $"Initializes a new instance of {Declaration.Name}", null, Public, parameters, Initializer: new ConstructorInitializer(false, arguments));
         }
 
@@ -170,7 +185,7 @@ namespace AutoRest.CSharp.Output.Models
         private Parameter CreateOptionsParameter()
         {
             var clientOptionsType = ClientOptions.Type.WithNullable(true);
-            return new Parameter("options", $"The options for configuring the client.", clientOptionsType, Constant.Default(clientOptionsType), Validation.None, Constant.NewInstanceOf(clientOptionsType).GetConstantFormattable());
+            return new Parameter("options", $"The options for configuring the client.", clientOptionsType, Constant.Default(clientOptionsType), Validation.None, new ConstantExpression(Constant.NewInstanceOf(clientOptionsType)));
         }
 
         private ConstructorSignature BuildSubClientInternalConstructor()
@@ -209,7 +224,7 @@ namespace AutoRest.CSharp.Output.Models
 
         private IEnumerable<Parameter> GetSubClientFactoryMethodParameters()
             => new[] { KnownParameters.ClientDiagnostics, KnownParameters.Pipeline, KnownParameters.KeyAuth, KnownParameters.TokenAuth }
-                .Concat(RestClientBuilder.GetConstructorParameters(Parameters, null, includeAPIVersion: true))
+                .Concat(RestClientBuilder.GetConstructorParameters(Parameters, null, includeAPIVersion: true).OrderBy(p => !p.IsEndpoint))
                 .Where(p => Fields.GetFieldByParameter(p) != null);
 
         internal MethodSignatureBase? GetEffectiveCtor()

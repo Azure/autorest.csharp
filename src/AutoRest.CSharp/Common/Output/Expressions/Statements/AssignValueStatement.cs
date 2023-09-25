@@ -5,5 +5,5 @@ using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 
 namespace AutoRest.CSharp.Common.Output.Expressions.Statements
 {
-    internal record AssignValueStatement(ValueExpression To, ValueExpression From) : DeclarationStatement;
+    internal record AssignValueStatement(ValueExpression To, ValueExpression From, string Operator = " = ") : DeclarationStatement;
 }

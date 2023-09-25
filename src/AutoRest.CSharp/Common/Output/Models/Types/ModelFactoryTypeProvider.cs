@@ -219,7 +219,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                     Name = parameterName,
                     Type = inputType,
                     DefaultValue = overriddenDefaultValue ?? Constant.Default(inputType),
-                    Initializer = inputType.GetParameterInitializer(ctorParameter.DefaultValue)
+                    Initializer = Parameter.GetParameterInitializer(inputType, ctorParameter.DefaultValue)
                 };
 
                 methodParameters.Add(modelFactoryMethodParameter);

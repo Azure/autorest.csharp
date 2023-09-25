@@ -486,45 +486,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
         private static ValueExpression CreateConversion(Parameter fromParameter, Parameter toParameter)
         {
             ValueExpression fromExpression = NullConditional(fromParameter);
-            return fromParameter.Type.IsFrameworkType
-                ? CreateConversion(fromExpression, fromParameter.Type.FrameworkType, toParameter.Type)
-                : CreateConversion(fromExpression, fromParameter.Type.Implementation, toParameter.Type);
-        }
-
-        private static ValueExpression CreateConversion(ValueExpression fromExpression, Type fromFrameworkType, CSharpType toType)
-        {
-            if (toType.EqualsIgnoreNullable(typeof(RequestContent)))
-            {
-                if (fromFrameworkType == typeof(BinaryData) || fromFrameworkType == typeof(string))
-                {
-                    return fromExpression;
-                }
-
-                if (TypeFactory.IsList(fromFrameworkType))
-                {
-                    return RequestContentExpression.FromEnumerable(fromExpression);
-                }
-
-                if (TypeFactory.IsDictionary(fromFrameworkType))
-                {
-                    return RequestContentExpression.FromDictionary(fromExpression);
-                }
-
-                return RequestContentExpression.Create(fromExpression);
-            }
-
-            return fromExpression;
-        }
-
-        private static ValueExpression CreateConversion(ValueExpression fromExpression, TypeProvider fromTypeImplementation, CSharpType toType)
-        {
-            return fromTypeImplementation switch
-            {
-                EnumType enumType           when toType.EqualsIgnoreNullable(typeof(RequestContent)) => BinaryDataExpression.FromObjectAsJson(new EnumExpression(enumType, fromExpression).ToSerial()),
-                EnumType enumType           when toType.EqualsIgnoreNullable(typeof(string)) => new EnumExpression(enumType, fromExpression).ToSerial(),
-                SerializableObjectType type when toType.EqualsIgnoreNullable(typeof(RequestContent)) => new SerializableObjectTypeExpression(type, fromExpression).ToRequestContent(),
-                _ => fromExpression
-            };
+            return Parameter.CreateConversion(fromExpression, fromParameter.Type, toParameter.Type);
         }
 
         private IEnumerable<InputParameter> GetLegacySortedParameters()

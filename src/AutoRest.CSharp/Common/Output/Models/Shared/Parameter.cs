@@ -3,18 +3,21 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
+using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
+using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
-using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Builders;
+using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
+using Azure.Core;
 
 namespace AutoRest.CSharp.Output.Models.Shared
 {
-    internal record Parameter(string Name, FormattableString? Description, CSharpType Type, Constant? DefaultValue, Validation Validation, FormattableString? Initializer, bool IsApiVersionParameter = false, bool IsResourceIdentifier = false, bool SkipUrlEncoding = false, bool IsEndpoint = false, RequestLocation RequestLocation = RequestLocation.None, bool IsPropertyBag = false)
+    internal record Parameter(string Name, FormattableString? Description, CSharpType Type, Constant? DefaultValue, Validation Validation, ValueExpression? Initializer, bool IsApiVersionParameter = false, bool IsResourceIdentifier = false, bool SkipUrlEncoding = false, bool IsEndpoint = false, RequestLocation RequestLocation = RequestLocation.None, bool IsPropertyBag = false)
     {
         public CSharpAttribute[] Attributes { get; init; } = Array.Empty<CSharpAttribute>();
         public bool IsOptionalInSignature => DefaultValue != null;
@@ -31,7 +34,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
                 keepClientDefaultValue = true;
             }
 
-            CreateDefaultValue(ref type, typeFactory, operationParameter.DefaultValue, isConstant, isRequired, keepClientDefaultValue, out Constant? clientDefaultValue, out Constant? defaultValue, out FormattableString? initializer);
+            CreateDefaultValue(ref type, typeFactory, operationParameter.DefaultValue, isConstant, isRequired, keepClientDefaultValue, out Constant? clientDefaultValue, out Constant? defaultValue, out var initializer);
             var description = CreateDescription(operationParameter, type, (operationParameter.Type as InputEnumType)?.AllowedValues.Select(c => c.GetValueString()), keepClientDefaultValue ? null : clientDefaultValue);
 
             var validation = isRequired && initializer == null
@@ -53,7 +56,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
                 RequestLocation: requestLocation);
         }
 
-        public static void CreateDefaultValue(ref CSharpType type, TypeFactory typeFactory, InputConstant? inputDefaultValue, bool isConstant, bool isRequired, bool keepClientDefaultValue, out Constant? clientDefaultValue, out Constant? defaultValue, out FormattableString? initializer)
+        public static void CreateDefaultValue(ref CSharpType type, TypeFactory typeFactory, InputConstant? inputDefaultValue, bool isConstant, bool isRequired, bool keepClientDefaultValue, out Constant? clientDefaultValue, out Constant? defaultValue, out ValueExpression? initializer)
         {
             clientDefaultValue = inputDefaultValue != null ? BuilderHelpers.ParseConstant(inputDefaultValue.Value, typeFactory.CreateType(inputDefaultValue.Type)) : null;
             defaultValue = keepClientDefaultValue ? clientDefaultValue : null;
@@ -62,7 +65,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
 
             if (defaultValue != null && !isConstant && !TypeFactory.CanBeInitializedInline(type, defaultValue))
             {
-                initializer = type.GetParameterInitializer(defaultValue.Value);
+                initializer = GetParameterInitializer(type, defaultValue.Value);
                 type = type.WithNullable(true);
                 defaultValue = Constant.Default(type);
             }
@@ -72,6 +75,65 @@ namespace AutoRest.CSharp.Output.Models.Shared
                 type = type.WithNullable(true);
                 defaultValue = Constant.Default(type);
             }
+        }
+
+        public static ValueExpression? GetParameterInitializer(CSharpType parameterType, Constant? defaultValue)
+        {
+            if (TypeFactory.IsCollectionType(parameterType) && (defaultValue == null || TypeFactory.IsCollectionType(defaultValue.Value.Type)))
+            {
+                return new ConstantExpression(Constant.NewInstanceOf(TypeFactory.GetImplementationType(parameterType).WithNullable(false)));
+            }
+
+            if (defaultValue == null)
+            {
+                return null;
+            }
+
+            var constant = new ConstantExpression(defaultValue.Value);
+            return CreateConversion(constant, defaultValue.Value.Type, parameterType);
+        }
+
+        public static ValueExpression CreateConversion(ValueExpression fromExpression, CSharpType fromType, CSharpType toType)
+        {
+            return fromType.IsFrameworkType
+                ? CreateConversion(fromExpression, fromType.FrameworkType, toType)
+                : CreateConversion(fromExpression, fromType.Implementation, toType);
+        }
+
+        private static ValueExpression CreateConversion(ValueExpression fromExpression, Type fromFrameworkType, CSharpType toType)
+        {
+            if (toType.EqualsIgnoreNullable(typeof(RequestContent)))
+            {
+                if (fromFrameworkType == typeof(BinaryData) || fromFrameworkType == typeof(string))
+                {
+                    return fromExpression;
+                }
+
+                if (TypeFactory.IsList(fromFrameworkType))
+                {
+                    return RequestContentExpression.FromEnumerable(fromExpression);
+                }
+
+                if (TypeFactory.IsDictionary(fromFrameworkType))
+                {
+                    return RequestContentExpression.FromDictionary(fromExpression);
+                }
+
+                return RequestContentExpression.Create(fromExpression);
+            }
+
+            return fromExpression;
+        }
+
+        private static ValueExpression CreateConversion(ValueExpression fromExpression, TypeProvider fromTypeImplementation, CSharpType toType)
+        {
+            return fromTypeImplementation switch
+            {
+                EnumType enumType           when toType.EqualsIgnoreNullable(typeof(RequestContent)) => BinaryDataExpression.FromObjectAsJson(new EnumExpression(enumType, fromExpression).ToSerial()),
+                EnumType enumType           when toType.EqualsIgnoreNullable(typeof(string)) => new EnumExpression(enumType, fromExpression).ToSerial(),
+                SerializableObjectType type when toType.EqualsIgnoreNullable(typeof(RequestContent)) => new SerializableObjectTypeExpression(type, fromExpression).ToRequestContent(),
+                _ => fromExpression
+            };
         }
 
         public static FormattableString CreateDescription(InputParameter operationParameter, CSharpType type, IEnumerable<string>? values, Constant? defaultValue = null)

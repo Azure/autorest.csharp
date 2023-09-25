@@ -294,7 +294,6 @@ namespace AutoRest.CSharp.Generation.Writers
 
                 requestContent = new VariableReference(typeof(RequestContent), "content");
                 yield return Declare(requestContent, RequestContentExpression.Create(dataValueExpression));
-                yield return EmptyLine;
             }
 
             var arguments = signature.Parameters

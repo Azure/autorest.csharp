@@ -72,32 +72,6 @@ namespace AutoRest.CSharp.Generation.Writers
                 _ => FormattableStringFactory.Create(GetNamesForMethodCallFormat(count, 'I'), identifiers.ToArray<object>())
             };
 
-        public static FormattableString? GetParameterInitializer(this CSharpType parameterType, Constant? defaultValue)
-        {
-            if (TypeFactory.IsCollectionType(parameterType) && (defaultValue == null || TypeFactory.IsCollectionType(defaultValue.Value.Type)))
-            {
-                defaultValue = Constant.NewInstanceOf(TypeFactory.GetImplementationType(parameterType).WithNullable(false));
-            }
-
-            if (defaultValue == null)
-            {
-                return null;
-            }
-
-            var constantFormattable = GetConstantFormattable(defaultValue.Value);
-            var conversion = GetConversionMethod(defaultValue.Value.Type, parameterType);
-            return conversion == null ? constantFormattable : $"{constantFormattable}{conversion}";
-        }
-
-        public static string? GetConversionMethod(CSharpType fromType, CSharpType toType)
-            => fromType switch
-            {
-                { IsFrameworkType: false, Implementation: EnumType { IsExtensible: true } }  when toType.EqualsIgnoreNullable(typeof(string)) => ".ToString()",
-                { IsFrameworkType: false, Implementation: EnumType { IsExtensible: false } } when toType.EqualsIgnoreNullable(typeof(string)) => ".ToSerialString()",
-                { IsFrameworkType: false, Implementation: ModelTypeProvider }                when toType.EqualsIgnoreNullable(typeof(RequestContent)) => ".ToRequestContent()",
-                _ => null
-            };
-
         public static FormattableString GetReferenceOrConstantFormattable(this ReferenceOrConstant value)
             => value.IsConstant ? value.Constant.GetConstantFormattable() : value.Reference.GetReferenceFormattable();
 
