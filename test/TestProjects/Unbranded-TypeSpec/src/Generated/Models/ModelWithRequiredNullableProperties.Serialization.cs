@@ -5,7 +5,7 @@
 
 #nullable disable
 
-using System.ServiceModel.Rest;
+using System.ServiceModel.Rest.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -91,9 +91,9 @@ namespace UnbrandedTypeSpec.Models
             return new ModelWithRequiredNullableProperties(requiredNullablePrimitive, requiredExtensibleEnum, requiredFixedEnum);
         }
 
-        /// <summary> Deserializes the model from a raw result. </summary>
+        /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="result"> The result to deserialize the model from. </param>
-        internal static ModelWithRequiredNullableProperties FromResult(Result result)
+        internal static ModelWithRequiredNullableProperties FromResponse(PipelineResponse result)
         {
             using var document = JsonDocument.Parse(result.Content);
             return DeserializeModelWithRequiredNullableProperties(document.RootElement);

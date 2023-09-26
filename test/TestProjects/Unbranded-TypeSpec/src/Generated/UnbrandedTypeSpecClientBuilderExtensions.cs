@@ -6,7 +6,7 @@
 #nullable disable
 
 using System;
-using Azure;
+using System.ServiceModel.Rest;
 using Azure.Core.Extensions;
 using UnbrandedTypeSpec;
 
@@ -19,7 +19,7 @@ namespace Microsoft.Extensions.Azure
         /// <param name="builder"> The builder to register with. </param>
         /// <param name="endpoint"> The Uri to use. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
-        public static IAzureClientBuilder<UnbrandedTypeSpecClient, UnbrandedTypeSpecClientOptions> AddUnbrandedTypeSpecClient<TBuilder>(this TBuilder builder, Uri endpoint, AzureKeyCredential credential)
+        public static IAzureClientBuilder<UnbrandedTypeSpecClient, UnbrandedTypeSpecClientOptions> AddUnbrandedTypeSpecClient<TBuilder>(this TBuilder builder, Uri endpoint, KeyCredential credential)
         where TBuilder : IAzureClientFactoryBuilder
         {
             return builder.RegisterClientFactory<UnbrandedTypeSpecClient, UnbrandedTypeSpecClientOptions>((options) => new UnbrandedTypeSpecClient(endpoint, credential, options));

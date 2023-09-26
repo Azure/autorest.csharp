@@ -11,7 +11,7 @@ using System.ServiceModel.Rest;
 namespace UnbrandedTypeSpec
 {
     /// <summary> Client options for UnbrandedTypeSpecClient. </summary>
-    public partial class UnbrandedTypeSpecClientOptions : PipelineOptions
+    public partial class UnbrandedTypeSpecClientOptions : RequestOptions
     {
         private const ServiceVersion LatestVersion = ServiceVersion.V0_1_0;
 

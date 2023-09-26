@@ -22,7 +22,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
 
         public static readonly Parameter ClientDiagnostics = new("clientDiagnostics", $"The handler for diagnostic messaging in the client.", new CSharpType(Configuration.ApiTypes.ClientDiagnosticsType), null, ValidationType.AssertNotNull, null);
         public static readonly Parameter Pipeline = new("pipeline", $"The HTTP pipeline for sending and receiving REST requests and responses", new CSharpType(Configuration.ApiTypes.HttpPipelineType), null, ValidationType.AssertNotNull, null);
-        public static readonly Parameter KeyAuth = new("keyCredential", $"The key credential to copy", new CSharpType(typeof(AzureKeyCredential)), null, ValidationType.None, null);
+        public static readonly Parameter KeyAuth = new("keyCredential", $"The key credential to copy", new CSharpType(Configuration.ApiTypes.KeyCredentialType), null, ValidationType.None, null);
         public static readonly Parameter TokenAuth = new("tokenCredential", $"The token credential to copy", new CSharpType(typeof(TokenCredential)), null, ValidationType.None, null);
         public static readonly Parameter Endpoint = new("endpoint", $"Service endpoint", new CSharpType(typeof(Uri)), null, ValidationType.None, null, RequestLocation: RequestLocation.Uri);
 
