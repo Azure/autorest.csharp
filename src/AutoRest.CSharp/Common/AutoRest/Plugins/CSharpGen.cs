@@ -26,10 +26,6 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             //// TODO: get previous contract path from configuration
             //var previousContractPath = Path.GetFullPath(Path.Combine(Configuration.AbsoluteProjectFolder, "..", "..", "PreviousContract", Configuration.Namespace));
             var previousContractDllPath = @"C:\netstandard2.0\MgmtCustomizations.dll";
-            var previousContract = await GeneratedCodeWorkspace.CreatePreviousContractFromDll(previousContractDllPath).GetCompilationAsync();
-            var alltypes = previousContract.GlobalNamespace.GetTypeMembers();
-            var custom = (await project.GetCompilationAsync()).Assembly.GlobalNamespace.GetTypeMembers();
-            //var previousContract = GeneratedCodeWorkspace.CreatePreviousContractFromDll(@"C:\netstandard2.0\MgmtCustomizations.dll");
             var sourceInputModel = File.Exists(previousContractDllPath)
                 ? new SourceInputModel(await project.GetCompilationAsync(), previousContract: await GeneratedCodeWorkspace.CreatePreviousContractFromDll(previousContractDllPath).GetCompilationAsync())
                 : new SourceInputModel(await project.GetCompilationAsync());
