@@ -21,7 +21,7 @@ namespace UnbrandedTypeSpec
     /// <summary> This is a sample typespec project. </summary>
     public partial class UnbrandedTypeSpecClient
     {
-        private const string AuthorizationHeader = "x-ms-api-key";
+        private const string AuthorizationHeader = "my-api-key";
         private readonly KeyCredential _keyCredential;
         private readonly MessagePipeline _pipeline;
         private readonly Uri _endpoint;

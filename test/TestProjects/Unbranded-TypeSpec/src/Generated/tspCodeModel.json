@@ -3044,7 +3044,7 @@
   "$id": "317",
   "ApiKey": {
    "$id": "318",
-   "Name": "x-ms-api-key"
+   "Name": "my-api-key"
   }
  }
 }

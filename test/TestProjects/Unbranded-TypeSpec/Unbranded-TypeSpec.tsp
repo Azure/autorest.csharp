@@ -16,7 +16,7 @@ import "@azure-tools/typespec-azure-core";
     }
 )
 @useAuth(
-    ApiKeyAuth<ApiKeyLocation.header, "x-ms-api-key">
+    ApiKeyAuth<ApiKeyLocation.header, "my-api-key">
 )
 namespace UnbrandedTypeSpec;
 
