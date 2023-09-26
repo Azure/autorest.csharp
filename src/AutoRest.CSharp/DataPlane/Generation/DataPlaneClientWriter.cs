@@ -355,8 +355,7 @@ namespace AutoRest.CSharp.Generation.Writers
         private static ConstructorSignature BuildInternalConstructor(DataPlaneClient client)
         {
             var constructorParameters = new[]{KnownParameters.ClientDiagnostics, KnownParameters.Pipeline}.Union(client.RestClient.Parameters).ToArray();
-            var name = client.Declaration.Name;
-            return new ConstructorSignature(name, $"Initializes a new instance of {name}", null, MethodSignatureModifiers.Internal, constructorParameters);
+            return new ConstructorSignature(client.Type, $"Initializes a new instance of {client.Declaration.Name}", null, MethodSignatureModifiers.Internal, constructorParameters);
         }
     }
 }

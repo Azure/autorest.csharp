@@ -46,7 +46,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         private static void WriteClientCtor(CodeWriter writer, MgmtRestClient restClient)
         {
             var constructorParameters = restClient.Parameters;
-            var constructor = new ConstructorSignature(restClient.Type.Name, null, $"Initializes a new instance of {restClient.Type.Name}", MethodSignatureModifiers.Public, restClient.Parameters);
+            var constructor = new ConstructorSignature(restClient.Type, null, $"Initializes a new instance of {restClient.Type.Name}", MethodSignatureModifiers.Public, restClient.Parameters);
 
             writer.WriteMethodDocumentation(constructor);
             using (writer.WriteMethodDeclaration(constructor))

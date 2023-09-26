@@ -16,7 +16,6 @@ using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
-using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Utilities;
 using Azure.Core;
@@ -40,9 +39,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         public void Write()
         {
-            using (_writer.Namespace($"{MgmtContext.Context.DefaultNamespace}"))
+            using (_writer.Namespace($"{_opSource.Declaration.Namespace}"))
             {
-                using (_writer.Scope($"internal class {_opSource.TypeName} : {_opSource.Interface}"))
+                using (_writer.Scope($"{_opSource.Declaration.Accessibility} class {_opSource.Type:D} : {_opSource.Interface}"))
                 {
                     if (_opSource.IsReturningResource)
                     {
