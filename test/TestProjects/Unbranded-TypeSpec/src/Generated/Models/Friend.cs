@@ -6,7 +6,7 @@
 #nullable disable
 
 using System;
-using System.ServiceModel.Rest.Shared;
+using System.ServiceModel.Rest.Experimental;
 
 namespace UnbrandedTypeSpec.Models
 {

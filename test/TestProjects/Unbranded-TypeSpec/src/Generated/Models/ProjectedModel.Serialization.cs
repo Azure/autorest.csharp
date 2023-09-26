@@ -5,15 +5,15 @@
 
 #nullable disable
 
-using System.ServiceModel.Rest;
+using System.ServiceModel.Rest.Core;
+using System.ServiceModel.Rest.Experimental.Core.Serialization;
 using System.Text.Json;
-using Azure.Core;
 
 namespace UnbrandedTypeSpec.Models
 {
-    public partial class ProjectedModel : IUtf8JsonSerializable
+    public partial class ProjectedModel : IUtf8JsonWriteable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonWriteable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("name"u8);
@@ -39,18 +39,18 @@ namespace UnbrandedTypeSpec.Models
             return new ProjectedModel(name);
         }
 
-        /// <summary> Deserializes the model from a raw result. </summary>
+        /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="result"> The result to deserialize the model from. </param>
-        internal static ProjectedModel FromResult(Result result)
+        internal static ProjectedModel FromResponse(PipelineResponse result)
         {
             using var document = JsonDocument.Parse(result.Content);
             return DeserializeProjectedModel(document.RootElement);
         }
 
-        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
-        internal virtual RequestContent ToRequestContent()
+        /// <summary> Convert into a Utf8JsonRequestBody. </summary>
+        internal virtual RequestBody ToRequestBody()
         {
-            var content = new Utf8JsonRequestContent();
+            var content = new Utf8JsonRequestBody();
             content.JsonWriter.WriteObjectValue(this);
             return content;
         }

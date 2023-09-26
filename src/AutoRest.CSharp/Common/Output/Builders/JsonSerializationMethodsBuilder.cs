@@ -10,7 +10,6 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
-using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.Azure;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.Base;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
@@ -41,7 +40,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             var utf8JsonWriter = new Parameter("writer", null, typeof(Utf8JsonWriter), null, ValidationType.None, null);
             return new Method
             (
-                new MethodSignature(nameof(IUtf8JsonSerializable.Write), null, null, MethodSignatureModifiers.None, null, null, new[]{utf8JsonWriter}, ExplicitInterface: typeof(IUtf8JsonSerializable)),
+                new MethodSignature(Configuration.ApiTypes.IUtf8JsonSerializableWriteName, null, null, MethodSignatureModifiers.None, null, null, new[]{utf8JsonWriter}, ExplicitInterface: Configuration.ApiTypes.IUtf8JsonSerializableType),
                 WriteObject(new Utf8JsonWriterExpression(utf8JsonWriter), jsonObjectSerialization)
             );
         }
@@ -50,7 +49,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
         {
             return new Method
             (
-                new MethodSignature("ToRequestContent", null, $"Convert into a Utf8JsonRequestContent.", modifiers, typeof(RequestContent), null, Array.Empty<Parameter>()),
+                new MethodSignature(Configuration.ApiTypes.ToRequestContentName, null, $"Convert into a Utf8Json{Configuration.ApiTypes.RequestContentType.Name}.", modifiers, Configuration.ApiTypes.RequestContentType, null, Array.Empty<Parameter>()),
                 new[]
                 {
                     Var("content", New.Utf8JsonRequestContent(), out var requestContent),
@@ -328,13 +327,13 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
         public static Method BuildFromResponse(SerializableObjectType type, MethodSignatureModifiers modifiers)
         {
-            var fromResponse = new Parameter(Configuration.ApiTypes.ResponseParameterName, $"The {Configuration.ApiTypes.ResponseParameterName} to deserialize the model from.", new CSharpType(Configuration.ApiTypes.ResponseType), null, ValidationType.None, null);
+            var fromResponse = new Parameter(Configuration.ApiTypes.ResponseParameterName, $"The {Configuration.ApiTypes.ResponseParameterName} to deserialize the model from.", new CSharpType(Configuration.ApiTypes.FromResponseType), null, ValidationType.None, null);
             return new Method
             (
-                new MethodSignature(Configuration.ApiTypes.FromResponseName, null, $"Deserializes the model from a raw {Configuration.ApiTypes.ResponseParameterName}.", modifiers, type.Type, null, new[]{fromResponse}),
+                new MethodSignature(Configuration.ApiTypes.FromResponseName, null, $"Deserializes the model from a raw response.", modifiers, type.Type, null, new[]{fromResponse}),
                 new MethodBodyStatement[]
                 {
-                    UsingVar("document", JsonDocumentExpression.Parse(new ResponseExpression(fromResponse).Content), out var document),
+                    UsingVar("document", JsonDocumentExpression.Parse(Configuration.ApiTypes.GetFromResponseExpression(fromResponse).Content), out var document),
                     Return(SerializableObjectTypeExpression.Deserialize(type, document.RootElement))
                 }
             );

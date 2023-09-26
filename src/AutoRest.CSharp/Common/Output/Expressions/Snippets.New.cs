@@ -42,7 +42,7 @@ namespace AutoRest.CSharp.Common.Output.Models
             public static FormUrlEncodedContentExpression FormUrlEncodedContent() => new(Instance(typeof(FormUrlEncodedContent)));
             public static MultipartFormDataContentExpression MultipartFormDataContent() => new(Instance(typeof(MultipartFormDataContent)));
 
-            public static RawRequestUriBuilderExpression RawRequestUriBuilder() => new(Instance(typeof(RawRequestUriBuilder)));
+            public static BaseRawRequestUriBuilderExpression RawRequestUriBuilder() => Configuration.ApiTypes.GetRequestUriBuiilderExpression();
 
             public static RequestContextExpression RequestContext(CancellationTokenExpression cancellationToken)
                 => new(Instance(Configuration.ApiTypes.RequestContextType, new Dictionary<string, ValueExpression>{ [Configuration.ApiTypes.CancellationTokenName] = cancellationToken }));
@@ -57,7 +57,7 @@ namespace AutoRest.CSharp.Common.Output.Models
 
             public static TimeSpanExpression TimeSpan(int hours, int minutes, int seconds) => new(Instance(typeof(TimeSpan), Int(hours), Int(minutes), Int(seconds)));
             public static TypedValueExpression Uri(string uri) => Instance(typeof(Uri), Literal(uri));
-            public static Utf8JsonRequestContentExpression Utf8JsonRequestContent() => new(Instance(typeof(Utf8JsonRequestContent)));
+            public static BaseUtf8JsonRequestContentExpression Utf8JsonRequestContent() => Configuration.ApiTypes.GetUtf8JsonRequestContentExpression();
             public static XmlWriterContentExpression XmlWriterContent() => new(Instance(typeof(XmlWriterContent)));
 
             public static ValueExpression Anonymous(string key, ValueExpression value) => Anonymous(new Dictionary<string, ValueExpression>{[key] = value});

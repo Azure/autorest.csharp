@@ -8,11 +8,9 @@ namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.Base
 {
     internal abstract record BaseResponseExpression(CSharpType Type, ValueExpression Untyped) : TypedValueExpression(Type, Untyped)
     {
-        public abstract ValueExpression Status { get; }
         public abstract ValueExpression Value { get; }
-
-        public abstract StreamExpression ContentStream { get; }
         public abstract BinaryDataExpression Content { get; }
+        public abstract StreamExpression ContentStream { get; }
 
         public abstract BaseResponseExpression GetRawResponse();
 

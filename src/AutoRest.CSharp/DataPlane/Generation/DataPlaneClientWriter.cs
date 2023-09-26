@@ -13,7 +13,6 @@ using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using Azure;
 using Azure.Core;
-using Azure.Core.Pipeline;
 
 namespace AutoRest.CSharp.Generation.Writers
 {
@@ -137,7 +136,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
             if (library.Authentication.ApiKey != null)
             {
-                var ctorParams = client.GetClientConstructorParameters(typeof(AzureKeyCredential));
+                var ctorParams = client.GetClientConstructorParameters(Configuration.ApiTypes.KeyCredentialType);
                 writer.WriteXmlDocumentationSummary($"Initializes a new instance of {client.Type.Name}");
                 foreach (Parameter parameter in ctorParams)
                 {
@@ -159,7 +158,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
                     writer.Line($"{OptionsVariable} ??= new {clientOptionsName}();");
                     writer.Line($"{ClientDiagnosticsField.GetReferenceFormattable()} = new {Configuration.ApiTypes.ClientDiagnosticsType}({OptionsVariable});");
-                    writer.Line($"{PipelineField} = {typeof(HttpPipelineBuilder)}.Build({OptionsVariable}, new {typeof(AzureKeyCredentialPolicy)}({CredentialVariable}, \"{library.Authentication.ApiKey.Name}\"));");
+                    writer.Line(Configuration.ApiTypes.GetHttpPipelineKeyCredentialString(PipelineField, OptionsVariable, CredentialVariable, library.Authentication.ApiKey.Name));
                     writer.Append($"this.RestClient = new {client.RestClient.Type}(");
                     foreach (var parameter in client.RestClient.Parameters)
                     {
@@ -220,7 +219,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     writer.RemoveTrailingComma();
                     writer.Line($"}};");
 
-                    writer.Line($"{PipelineField} = {typeof(HttpPipelineBuilder)}.Build({OptionsVariable}, new {typeof(BearerTokenAuthenticationPolicy)}({CredentialVariable}, {scopesParam}));");
+                    writer.Line(Configuration.ApiTypes.GetHttpPipelineBearerString(PipelineField, OptionsVariable, CredentialVariable, scopesParam));
                     writer.Append($"this.RestClient = new {client.RestClient.Type}(");
                     foreach (var parameter in client.RestClient.Parameters)
                     {
@@ -338,7 +337,7 @@ namespace AutoRest.CSharp.Generation.Writers
                         writer.Append($"{parameter.Name}, ");
                     }
                     writer.RemoveTrailingComma();
-                    writer.Append($").Request, originalResponse");
+                    writer.Append($").{Configuration.ApiTypes.HttpMessageRequestName}, originalResponse");
 
                     var nextPageMethod = lroMethod.Operation.NextPageMethod;
                     if (nextPageMethod != null)

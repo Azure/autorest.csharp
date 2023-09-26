@@ -3,17 +3,17 @@
   <members>
     <member name="TopActionAsync(DateTimeOffset,CancellationToken)" />
     <member name="TopAction(DateTimeOffset,CancellationToken)" />
-    <member name="TopActionAsync(DateTimeOffset,PipelineOptions)">
+    <member name="TopActionAsync(DateTimeOffset,RequestOptions)">
       <example>
 This sample shows how to call TopActionAsync and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+KeyCredential credential = new KeyCredential("<key>");
 UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
 Result result = await client.TopActionAsync(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"), null);
 
-JsonElement result0 = JsonDocument.Parse(result.ContentStream).RootElement;
+JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
 Console.WriteLine(result0.GetProperty("name").ToString());
 Console.WriteLine(result0.GetProperty("requiredUnion").ToString());
 Console.WriteLine(result0.GetProperty("requiredLiteralString").ToString());
@@ -26,12 +26,12 @@ Console.WriteLine(result0.GetProperty("requiredNullableList")[0].ToString());
 This sample shows how to call TopActionAsync with all parameters and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+KeyCredential credential = new KeyCredential("<key>");
 UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
 Result result = await client.TopActionAsync(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"), null);
 
-JsonElement result0 = JsonDocument.Parse(result.ContentStream).RootElement;
+JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
 Console.WriteLine(result0.GetProperty("name").ToString());
 Console.WriteLine(result0.GetProperty("requiredUnion").ToString());
 Console.WriteLine(result0.GetProperty("requiredLiteralString").ToString());
@@ -47,17 +47,17 @@ Console.WriteLine(result0.GetProperty("optionalNullableList")[0].ToString());
 Console.WriteLine(result0.GetProperty("requiredNullableList")[0].ToString());
 ]]></code></example>
     </member>
-    <member name="TopAction(DateTimeOffset,PipelineOptions)">
+    <member name="TopAction(DateTimeOffset,RequestOptions)">
       <example>
 This sample shows how to call TopAction and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+KeyCredential credential = new KeyCredential("<key>");
 UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
 Result result = client.TopAction(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"), null);
 
-JsonElement result0 = JsonDocument.Parse(result.ContentStream).RootElement;
+JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
 Console.WriteLine(result0.GetProperty("name").ToString());
 Console.WriteLine(result0.GetProperty("requiredUnion").ToString());
 Console.WriteLine(result0.GetProperty("requiredLiteralString").ToString());
@@ -70,12 +70,12 @@ Console.WriteLine(result0.GetProperty("requiredNullableList")[0].ToString());
 This sample shows how to call TopAction with all parameters and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+KeyCredential credential = new KeyCredential("<key>");
 UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
 Result result = client.TopAction(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"), null);
 
-JsonElement result0 = JsonDocument.Parse(result.ContentStream).RootElement;
+JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
 Console.WriteLine(result0.GetProperty("name").ToString());
 Console.WriteLine(result0.GetProperty("requiredUnion").ToString());
 Console.WriteLine(result0.GetProperty("requiredLiteralString").ToString());
@@ -91,17 +91,17 @@ Console.WriteLine(result0.GetProperty("optionalNullableList")[0].ToString());
 Console.WriteLine(result0.GetProperty("requiredNullableList")[0].ToString());
 ]]></code></example>
     </member>
-    <member name="TopAction2Async(PipelineOptions)">
+    <member name="TopAction2Async(RequestOptions)">
       <example>
 This sample shows how to call TopAction2Async and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+KeyCredential credential = new KeyCredential("<key>");
 UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
 Result result = await client.TopAction2Async(null);
 
-JsonElement result0 = JsonDocument.Parse(result.ContentStream).RootElement;
+JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
 Console.WriteLine(result0.GetProperty("name").ToString());
 Console.WriteLine(result0.GetProperty("requiredUnion").ToString());
 Console.WriteLine(result0.GetProperty("requiredLiteralString").ToString());
@@ -114,12 +114,12 @@ Console.WriteLine(result0.GetProperty("requiredNullableList")[0].ToString());
 This sample shows how to call TopAction2Async with all parameters and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+KeyCredential credential = new KeyCredential("<key>");
 UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
 Result result = await client.TopAction2Async(null);
 
-JsonElement result0 = JsonDocument.Parse(result.ContentStream).RootElement;
+JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
 Console.WriteLine(result0.GetProperty("name").ToString());
 Console.WriteLine(result0.GetProperty("requiredUnion").ToString());
 Console.WriteLine(result0.GetProperty("requiredLiteralString").ToString());
@@ -135,17 +135,17 @@ Console.WriteLine(result0.GetProperty("optionalNullableList")[0].ToString());
 Console.WriteLine(result0.GetProperty("requiredNullableList")[0].ToString());
 ]]></code></example>
     </member>
-    <member name="TopAction2(PipelineOptions)">
+    <member name="TopAction2(RequestOptions)">
       <example>
 This sample shows how to call TopAction2 and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+KeyCredential credential = new KeyCredential("<key>");
 UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
 Result result = client.TopAction2(null);
 
-JsonElement result0 = JsonDocument.Parse(result.ContentStream).RootElement;
+JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
 Console.WriteLine(result0.GetProperty("name").ToString());
 Console.WriteLine(result0.GetProperty("requiredUnion").ToString());
 Console.WriteLine(result0.GetProperty("requiredLiteralString").ToString());
@@ -158,12 +158,12 @@ Console.WriteLine(result0.GetProperty("requiredNullableList")[0].ToString());
 This sample shows how to call TopAction2 with all parameters and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+KeyCredential credential = new KeyCredential("<key>");
 UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
 Result result = client.TopAction2(null);
 
-JsonElement result0 = JsonDocument.Parse(result.ContentStream).RootElement;
+JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
 Console.WriteLine(result0.GetProperty("name").ToString());
 Console.WriteLine(result0.GetProperty("requiredUnion").ToString());
 Console.WriteLine(result0.GetProperty("requiredLiteralString").ToString());
@@ -179,15 +179,15 @@ Console.WriteLine(result0.GetProperty("optionalNullableList")[0].ToString());
 Console.WriteLine(result0.GetProperty("requiredNullableList")[0].ToString());
 ]]></code></example>
     </member>
-    <member name="PatchActionAsync(RequestContent,PipelineOptions)">
+    <member name="PatchActionAsync(RequestBody,RequestOptions)">
       <example>
 This sample shows how to call PatchActionAsync and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+KeyCredential credential = new KeyCredential("<key>");
 UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-RequestContent content = RequestContent.Create(new
+RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
 {
     name = "<name>",
     requiredUnion = "<requiredUnion>",
@@ -200,10 +200,10 @@ RequestContent content = RequestContent.Create(new
     {
         1234
     },
-});
+}).ToStream());
 Result result = await client.PatchActionAsync(content);
 
-JsonElement result0 = JsonDocument.Parse(result.ContentStream).RootElement;
+JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
 Console.WriteLine(result0.GetProperty("name").ToString());
 Console.WriteLine(result0.GetProperty("requiredUnion").ToString());
 Console.WriteLine(result0.GetProperty("requiredLiteralString").ToString());
@@ -216,10 +216,10 @@ Console.WriteLine(result0.GetProperty("requiredNullableList")[0].ToString());
 This sample shows how to call PatchActionAsync with all request content and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+KeyCredential credential = new KeyCredential("<key>");
 UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-RequestContent content = RequestContent.Create(new
+RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
 {
     name = "<name>",
     requiredUnion = "<requiredUnion>",
@@ -240,10 +240,10 @@ RequestContent content = RequestContent.Create(new
     {
         1234
     },
-});
+}).ToStream());
 Result result = await client.PatchActionAsync(content);
 
-JsonElement result0 = JsonDocument.Parse(result.ContentStream).RootElement;
+JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
 Console.WriteLine(result0.GetProperty("name").ToString());
 Console.WriteLine(result0.GetProperty("requiredUnion").ToString());
 Console.WriteLine(result0.GetProperty("requiredLiteralString").ToString());
@@ -259,15 +259,15 @@ Console.WriteLine(result0.GetProperty("optionalNullableList")[0].ToString());
 Console.WriteLine(result0.GetProperty("requiredNullableList")[0].ToString());
 ]]></code></example>
     </member>
-    <member name="PatchAction(RequestContent,PipelineOptions)">
+    <member name="PatchAction(RequestBody,RequestOptions)">
       <example>
 This sample shows how to call PatchAction and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+KeyCredential credential = new KeyCredential("<key>");
 UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-RequestContent content = RequestContent.Create(new
+RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
 {
     name = "<name>",
     requiredUnion = "<requiredUnion>",
@@ -280,10 +280,10 @@ RequestContent content = RequestContent.Create(new
     {
         1234
     },
-});
+}).ToStream());
 Result result = client.PatchAction(content);
 
-JsonElement result0 = JsonDocument.Parse(result.ContentStream).RootElement;
+JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
 Console.WriteLine(result0.GetProperty("name").ToString());
 Console.WriteLine(result0.GetProperty("requiredUnion").ToString());
 Console.WriteLine(result0.GetProperty("requiredLiteralString").ToString());
@@ -296,10 +296,10 @@ Console.WriteLine(result0.GetProperty("requiredNullableList")[0].ToString());
 This sample shows how to call PatchAction with all request content and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+KeyCredential credential = new KeyCredential("<key>");
 UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-RequestContent content = RequestContent.Create(new
+RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
 {
     name = "<name>",
     requiredUnion = "<requiredUnion>",
@@ -320,10 +320,10 @@ RequestContent content = RequestContent.Create(new
     {
         1234
     },
-});
+}).ToStream());
 Result result = client.PatchAction(content);
 
-JsonElement result0 = JsonDocument.Parse(result.ContentStream).RootElement;
+JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
 Console.WriteLine(result0.GetProperty("name").ToString());
 Console.WriteLine(result0.GetProperty("requiredUnion").ToString());
 Console.WriteLine(result0.GetProperty("requiredLiteralString").ToString());
@@ -341,15 +341,15 @@ Console.WriteLine(result0.GetProperty("requiredNullableList")[0].ToString());
     </member>
     <member name="AnonymousBodyAsync(Thing,CancellationToken)" />
     <member name="AnonymousBody(Thing,CancellationToken)" />
-    <member name="AnonymousBodyAsync(RequestContent,PipelineOptions)">
+    <member name="AnonymousBodyAsync(RequestBody,RequestOptions)">
       <example>
 This sample shows how to call AnonymousBodyAsync and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+KeyCredential credential = new KeyCredential("<key>");
 UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-RequestContent content = RequestContent.Create(new
+RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
 {
     name = "<name>",
     requiredUnion = "<requiredUnion>",
@@ -362,10 +362,10 @@ RequestContent content = RequestContent.Create(new
     {
         1234
     },
-});
+}).ToStream());
 Result result = await client.AnonymousBodyAsync(content);
 
-JsonElement result0 = JsonDocument.Parse(result.ContentStream).RootElement;
+JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
 Console.WriteLine(result0.GetProperty("name").ToString());
 Console.WriteLine(result0.GetProperty("requiredUnion").ToString());
 Console.WriteLine(result0.GetProperty("requiredLiteralString").ToString());
@@ -378,10 +378,10 @@ Console.WriteLine(result0.GetProperty("requiredNullableList")[0].ToString());
 This sample shows how to call AnonymousBodyAsync with all request content and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+KeyCredential credential = new KeyCredential("<key>");
 UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-RequestContent content = RequestContent.Create(new
+RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
 {
     name = "<name>",
     requiredUnion = "<requiredUnion>",
@@ -402,10 +402,10 @@ RequestContent content = RequestContent.Create(new
     {
         1234
     },
-});
+}).ToStream());
 Result result = await client.AnonymousBodyAsync(content);
 
-JsonElement result0 = JsonDocument.Parse(result.ContentStream).RootElement;
+JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
 Console.WriteLine(result0.GetProperty("name").ToString());
 Console.WriteLine(result0.GetProperty("requiredUnion").ToString());
 Console.WriteLine(result0.GetProperty("requiredLiteralString").ToString());
@@ -421,15 +421,15 @@ Console.WriteLine(result0.GetProperty("optionalNullableList")[0].ToString());
 Console.WriteLine(result0.GetProperty("requiredNullableList")[0].ToString());
 ]]></code></example>
     </member>
-    <member name="AnonymousBody(RequestContent,PipelineOptions)">
+    <member name="AnonymousBody(RequestBody,RequestOptions)">
       <example>
 This sample shows how to call AnonymousBody and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+KeyCredential credential = new KeyCredential("<key>");
 UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-RequestContent content = RequestContent.Create(new
+RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
 {
     name = "<name>",
     requiredUnion = "<requiredUnion>",
@@ -442,10 +442,10 @@ RequestContent content = RequestContent.Create(new
     {
         1234
     },
-});
+}).ToStream());
 Result result = client.AnonymousBody(content);
 
-JsonElement result0 = JsonDocument.Parse(result.ContentStream).RootElement;
+JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
 Console.WriteLine(result0.GetProperty("name").ToString());
 Console.WriteLine(result0.GetProperty("requiredUnion").ToString());
 Console.WriteLine(result0.GetProperty("requiredLiteralString").ToString());
@@ -458,10 +458,10 @@ Console.WriteLine(result0.GetProperty("requiredNullableList")[0].ToString());
 This sample shows how to call AnonymousBody with all request content and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+KeyCredential credential = new KeyCredential("<key>");
 UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-RequestContent content = RequestContent.Create(new
+RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
 {
     name = "<name>",
     requiredUnion = "<requiredUnion>",
@@ -482,10 +482,10 @@ RequestContent content = RequestContent.Create(new
     {
         1234
     },
-});
+}).ToStream());
 Result result = client.AnonymousBody(content);
 
-JsonElement result0 = JsonDocument.Parse(result.ContentStream).RootElement;
+JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
 Console.WriteLine(result0.GetProperty("name").ToString());
 Console.WriteLine(result0.GetProperty("requiredUnion").ToString());
 Console.WriteLine(result0.GetProperty("requiredLiteralString").ToString());
@@ -506,7 +506,7 @@ Console.WriteLine(result0.GetProperty("requiredNullableList")[0].ToString());
 This sample shows how to call FriendlyModelAsync.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+KeyCredential credential = new KeyCredential("<key>");
 UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
 Friend notFriend = new Friend("<name>");
@@ -515,7 +515,7 @@ Result<Friend> result = await client.FriendlyModelAsync(notFriend);
 This sample shows how to call FriendlyModelAsync with all parameters.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+KeyCredential credential = new KeyCredential("<key>");
 UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
 Friend notFriend = new Friend("<name>");
@@ -527,7 +527,7 @@ Result<Friend> result = await client.FriendlyModelAsync(notFriend);
 This sample shows how to call FriendlyModel.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+KeyCredential credential = new KeyCredential("<key>");
 UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
 Friend notFriend = new Friend("<name>");
@@ -536,119 +536,119 @@ Result<Friend> result = client.FriendlyModel(notFriend);
 This sample shows how to call FriendlyModel with all parameters.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+KeyCredential credential = new KeyCredential("<key>");
 UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
 Friend notFriend = new Friend("<name>");
 Result<Friend> result = client.FriendlyModel(notFriend);
 ]]></code></example>
     </member>
-    <member name="FriendlyModelAsync(RequestContent,PipelineOptions)">
+    <member name="FriendlyModelAsync(RequestBody,RequestOptions)">
       <example>
 This sample shows how to call FriendlyModelAsync and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+KeyCredential credential = new KeyCredential("<key>");
 UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-RequestContent content = RequestContent.Create(new
+RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
 {
     name = "<name>",
-});
+}).ToStream());
 Result result = await client.FriendlyModelAsync(content);
 
-JsonElement result0 = JsonDocument.Parse(result.ContentStream).RootElement;
+JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
 Console.WriteLine(result0.GetProperty("name").ToString());
 ]]></code>
 This sample shows how to call FriendlyModelAsync with all request content and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+KeyCredential credential = new KeyCredential("<key>");
 UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-RequestContent content = RequestContent.Create(new
+RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
 {
     name = "<name>",
-});
+}).ToStream());
 Result result = await client.FriendlyModelAsync(content);
 
-JsonElement result0 = JsonDocument.Parse(result.ContentStream).RootElement;
+JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
 Console.WriteLine(result0.GetProperty("name").ToString());
 ]]></code></example>
     </member>
-    <member name="FriendlyModel(RequestContent,PipelineOptions)">
+    <member name="FriendlyModel(RequestBody,RequestOptions)">
       <example>
 This sample shows how to call FriendlyModel and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+KeyCredential credential = new KeyCredential("<key>");
 UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-RequestContent content = RequestContent.Create(new
+RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
 {
     name = "<name>",
-});
+}).ToStream());
 Result result = client.FriendlyModel(content);
 
-JsonElement result0 = JsonDocument.Parse(result.ContentStream).RootElement;
+JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
 Console.WriteLine(result0.GetProperty("name").ToString());
 ]]></code>
 This sample shows how to call FriendlyModel with all request content and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+KeyCredential credential = new KeyCredential("<key>");
 UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-RequestContent content = RequestContent.Create(new
+RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
 {
     name = "<name>",
-});
+}).ToStream());
 Result result = client.FriendlyModel(content);
 
-JsonElement result0 = JsonDocument.Parse(result.ContentStream).RootElement;
+JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
 Console.WriteLine(result0.GetProperty("name").ToString());
 ]]></code></example>
     </member>
-    <member name="AddTimeHeaderAsync(PipelineOptions)">
+    <member name="AddTimeHeaderAsync(RequestOptions)">
       <example>
 This sample shows how to call AddTimeHeaderAsync.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+KeyCredential credential = new KeyCredential("<key>");
 UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
 Result result = await client.AddTimeHeaderAsync();
-Console.WriteLine(result.Status);
+Console.WriteLine(result.GetRawResponse().Status);
 ]]></code>
 This sample shows how to call AddTimeHeaderAsync with all request content.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+KeyCredential credential = new KeyCredential("<key>");
 UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
 Result result = await client.AddTimeHeaderAsync();
-Console.WriteLine(result.Status);
+Console.WriteLine(result.GetRawResponse().Status);
 ]]></code></example>
     </member>
-    <member name="AddTimeHeader(PipelineOptions)">
+    <member name="AddTimeHeader(RequestOptions)">
       <example>
 This sample shows how to call AddTimeHeader.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+KeyCredential credential = new KeyCredential("<key>");
 UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
 Result result = client.AddTimeHeader();
-Console.WriteLine(result.Status);
+Console.WriteLine(result.GetRawResponse().Status);
 ]]></code>
 This sample shows how to call AddTimeHeader with all request content.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+KeyCredential credential = new KeyCredential("<key>");
 UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
 Result result = client.AddTimeHeader();
-Console.WriteLine(result.Status);
+Console.WriteLine(result.GetRawResponse().Status);
 ]]></code></example>
     </member>
     <member name="StringFormatAsync(Guid,ModelWithFormat,CancellationToken)">
@@ -656,22 +656,22 @@ Console.WriteLine(result.Status);
 This sample shows how to call StringFormatAsync.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+KeyCredential credential = new KeyCredential("<key>");
 UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
 ModelWithFormat body = new ModelWithFormat(new Uri("http://localhost:3000"), Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
 Result result = await client.StringFormatAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), body);
-Console.WriteLine(result.Status);
+Console.WriteLine(result.GetRawResponse().Status);
 ]]></code>
 This sample shows how to call StringFormatAsync with all parameters.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+KeyCredential credential = new KeyCredential("<key>");
 UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
 ModelWithFormat body = new ModelWithFormat(new Uri("http://localhost:3000"), Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
 Result result = await client.StringFormatAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), body);
-Console.WriteLine(result.Status);
+Console.WriteLine(result.GetRawResponse().Status);
 ]]></code></example>
     </member>
     <member name="StringFormat(Guid,ModelWithFormat,CancellationToken)">
@@ -679,84 +679,84 @@ Console.WriteLine(result.Status);
 This sample shows how to call StringFormat.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+KeyCredential credential = new KeyCredential("<key>");
 UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
 ModelWithFormat body = new ModelWithFormat(new Uri("http://localhost:3000"), Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
 Result result = client.StringFormat(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), body);
-Console.WriteLine(result.Status);
+Console.WriteLine(result.GetRawResponse().Status);
 ]]></code>
 This sample shows how to call StringFormat with all parameters.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+KeyCredential credential = new KeyCredential("<key>");
 UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
 ModelWithFormat body = new ModelWithFormat(new Uri("http://localhost:3000"), Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
 Result result = client.StringFormat(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), body);
-Console.WriteLine(result.Status);
+Console.WriteLine(result.GetRawResponse().Status);
 ]]></code></example>
     </member>
-    <member name="StringFormatAsync(Guid,RequestContent,PipelineOptions)">
+    <member name="StringFormatAsync(Guid,RequestBody,RequestOptions)">
       <example>
 This sample shows how to call StringFormatAsync.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+KeyCredential credential = new KeyCredential("<key>");
 UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-RequestContent content = RequestContent.Create(new
+RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
 {
     sourceUrl = "http://localhost:3000",
     guid = "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a",
-});
+}).ToStream());
 Result result = await client.StringFormatAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), content);
-Console.WriteLine(result.Status);
+Console.WriteLine(result.GetRawResponse().Status);
 ]]></code>
 This sample shows how to call StringFormatAsync with all parameters and request content.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+KeyCredential credential = new KeyCredential("<key>");
 UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-RequestContent content = RequestContent.Create(new
+RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
 {
     sourceUrl = "http://localhost:3000",
     guid = "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a",
-});
+}).ToStream());
 Result result = await client.StringFormatAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), content);
-Console.WriteLine(result.Status);
+Console.WriteLine(result.GetRawResponse().Status);
 ]]></code></example>
     </member>
-    <member name="StringFormat(Guid,RequestContent,PipelineOptions)">
+    <member name="StringFormat(Guid,RequestBody,RequestOptions)">
       <example>
 This sample shows how to call StringFormat.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+KeyCredential credential = new KeyCredential("<key>");
 UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-RequestContent content = RequestContent.Create(new
+RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
 {
     sourceUrl = "http://localhost:3000",
     guid = "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a",
-});
+}).ToStream());
 Result result = client.StringFormat(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), content);
-Console.WriteLine(result.Status);
+Console.WriteLine(result.GetRawResponse().Status);
 ]]></code>
 This sample shows how to call StringFormat with all parameters and request content.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+KeyCredential credential = new KeyCredential("<key>");
 UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-RequestContent content = RequestContent.Create(new
+RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
 {
     sourceUrl = "http://localhost:3000",
     guid = "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a",
-});
+}).ToStream());
 Result result = client.StringFormat(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), content);
-Console.WriteLine(result.Status);
+Console.WriteLine(result.GetRawResponse().Status);
 ]]></code></example>
     </member>
     <member name="ProjectedNameModelAsync(ProjectedModel,CancellationToken)">
@@ -764,7 +764,7 @@ Console.WriteLine(result.Status);
 This sample shows how to call ProjectedNameModelAsync.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+KeyCredential credential = new KeyCredential("<key>");
 UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
 ProjectedModel modelWithProjectedName = new ProjectedModel("<name>");
@@ -773,7 +773,7 @@ Result<ProjectedModel> result = await client.ProjectedNameModelAsync(modelWithPr
 This sample shows how to call ProjectedNameModelAsync with all parameters.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+KeyCredential credential = new KeyCredential("<key>");
 UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
 ProjectedModel modelWithProjectedName = new ProjectedModel("<name>");
@@ -785,7 +785,7 @@ Result<ProjectedModel> result = await client.ProjectedNameModelAsync(modelWithPr
 This sample shows how to call ProjectedNameModel.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+KeyCredential credential = new KeyCredential("<key>");
 UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
 ProjectedModel modelWithProjectedName = new ProjectedModel("<name>");
@@ -794,85 +794,85 @@ Result<ProjectedModel> result = client.ProjectedNameModel(modelWithProjectedName
 This sample shows how to call ProjectedNameModel with all parameters.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+KeyCredential credential = new KeyCredential("<key>");
 UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
 ProjectedModel modelWithProjectedName = new ProjectedModel("<name>");
 Result<ProjectedModel> result = client.ProjectedNameModel(modelWithProjectedName);
 ]]></code></example>
     </member>
-    <member name="ProjectedNameModelAsync(RequestContent,PipelineOptions)">
+    <member name="ProjectedNameModelAsync(RequestBody,RequestOptions)">
       <example>
 This sample shows how to call ProjectedNameModelAsync and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+KeyCredential credential = new KeyCredential("<key>");
 UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-RequestContent content = RequestContent.Create(new
+RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
 {
     name = "<name>",
-});
+}).ToStream());
 Result result = await client.ProjectedNameModelAsync(content);
 
-JsonElement result0 = JsonDocument.Parse(result.ContentStream).RootElement;
+JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
 Console.WriteLine(result0.GetProperty("name").ToString());
 ]]></code>
 This sample shows how to call ProjectedNameModelAsync with all request content and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+KeyCredential credential = new KeyCredential("<key>");
 UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-RequestContent content = RequestContent.Create(new
+RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
 {
     name = "<name>",
-});
+}).ToStream());
 Result result = await client.ProjectedNameModelAsync(content);
 
-JsonElement result0 = JsonDocument.Parse(result.ContentStream).RootElement;
+JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
 Console.WriteLine(result0.GetProperty("name").ToString());
 ]]></code></example>
     </member>
-    <member name="ProjectedNameModel(RequestContent,PipelineOptions)">
+    <member name="ProjectedNameModel(RequestBody,RequestOptions)">
       <example>
 This sample shows how to call ProjectedNameModel and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+KeyCredential credential = new KeyCredential("<key>");
 UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-RequestContent content = RequestContent.Create(new
+RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
 {
     name = "<name>",
-});
+}).ToStream());
 Result result = client.ProjectedNameModel(content);
 
-JsonElement result0 = JsonDocument.Parse(result.ContentStream).RootElement;
+JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
 Console.WriteLine(result0.GetProperty("name").ToString());
 ]]></code>
 This sample shows how to call ProjectedNameModel with all request content and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+KeyCredential credential = new KeyCredential("<key>");
 UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-RequestContent content = RequestContent.Create(new
+RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
 {
     name = "<name>",
-});
+}).ToStream());
 Result result = client.ProjectedNameModel(content);
 
-JsonElement result0 = JsonDocument.Parse(result.ContentStream).RootElement;
+JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
 Console.WriteLine(result0.GetProperty("name").ToString());
 ]]></code></example>
     </member>
-    <member name="ReturnsAnonymousModelAsync(PipelineOptions)">
+    <member name="ReturnsAnonymousModelAsync(RequestOptions)">
       <example>
 This sample shows how to call ReturnsAnonymousModelAsync and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+KeyCredential credential = new KeyCredential("<key>");
 UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
 Result result = await client.ReturnsAnonymousModelAsync(null);
@@ -882,7 +882,7 @@ Console.WriteLine(result.ToString());
 This sample shows how to call ReturnsAnonymousModelAsync with all parameters and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+KeyCredential credential = new KeyCredential("<key>");
 UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
 Result result = await client.ReturnsAnonymousModelAsync(null);
@@ -890,12 +890,12 @@ Result result = await client.ReturnsAnonymousModelAsync(null);
 Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
-    <member name="ReturnsAnonymousModel(PipelineOptions)">
+    <member name="ReturnsAnonymousModel(RequestOptions)">
       <example>
 This sample shows how to call ReturnsAnonymousModel and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+KeyCredential credential = new KeyCredential("<key>");
 UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
 Result result = client.ReturnsAnonymousModel(null);
@@ -905,7 +905,7 @@ Console.WriteLine(result.ToString());
 This sample shows how to call ReturnsAnonymousModel with all parameters and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+KeyCredential credential = new KeyCredential("<key>");
 UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
 Result result = client.ReturnsAnonymousModel(null);
@@ -913,59 +913,59 @@ Result result = client.ReturnsAnonymousModel(null);
 Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
-    <member name="HeadAsBooleanAsync(string,PipelineOptions)">
+    <member name="HeadAsBooleanAsync(string,RequestOptions)">
       <example>
 This sample shows how to call HeadAsBooleanAsync.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+KeyCredential credential = new KeyCredential("<key>");
 UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
 Result<bool> result = await client.HeadAsBooleanAsync("<id>");
-Console.WriteLine(result.GetRawResult().Status);
+Console.WriteLine(result.GetRawResponse().Status);
 ]]></code>
 This sample shows how to call HeadAsBooleanAsync with all parameters.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+KeyCredential credential = new KeyCredential("<key>");
 UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
 Result<bool> result = await client.HeadAsBooleanAsync("<id>");
-Console.WriteLine(result.GetRawResult().Status);
+Console.WriteLine(result.GetRawResponse().Status);
 ]]></code></example>
     </member>
-    <member name="HeadAsBoolean(string,PipelineOptions)">
+    <member name="HeadAsBoolean(string,RequestOptions)">
       <example>
 This sample shows how to call HeadAsBoolean.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+KeyCredential credential = new KeyCredential("<key>");
 UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
 Result<bool> result = client.HeadAsBoolean("<id>");
-Console.WriteLine(result.GetRawResult().Status);
+Console.WriteLine(result.GetRawResponse().Status);
 ]]></code>
 This sample shows how to call HeadAsBoolean with all parameters.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+KeyCredential credential = new KeyCredential("<key>");
 UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
 Result<bool> result = client.HeadAsBoolean("<id>");
-Console.WriteLine(result.GetRawResult().Status);
+Console.WriteLine(result.GetRawResponse().Status);
 ]]></code></example>
     </member>
-    <member name="SayHiAsync(string,string,string,PipelineOptions)">
+    <member name="SayHiAsync(string,string,string,RequestOptions)">
       <example>
 This sample shows how to call SayHiAsync and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+KeyCredential credential = new KeyCredential("<key>");
 UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
 Result result = await client.SayHiAsync("<headParameter>", "<queryParameter>", null, null);
 
-JsonElement result0 = JsonDocument.Parse(result.ContentStream).RootElement;
+JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
 Console.WriteLine(result0.GetProperty("name").ToString());
 Console.WriteLine(result0.GetProperty("requiredUnion").ToString());
 Console.WriteLine(result0.GetProperty("requiredLiteralString").ToString());
@@ -978,12 +978,12 @@ Console.WriteLine(result0.GetProperty("requiredNullableList")[0].ToString());
 This sample shows how to call SayHiAsync with all parameters and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+KeyCredential credential = new KeyCredential("<key>");
 UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
 Result result = await client.SayHiAsync("<headParameter>", "<queryParameter>", "<optionalQuery>", null);
 
-JsonElement result0 = JsonDocument.Parse(result.ContentStream).RootElement;
+JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
 Console.WriteLine(result0.GetProperty("name").ToString());
 Console.WriteLine(result0.GetProperty("requiredUnion").ToString());
 Console.WriteLine(result0.GetProperty("requiredLiteralString").ToString());
@@ -999,17 +999,17 @@ Console.WriteLine(result0.GetProperty("optionalNullableList")[0].ToString());
 Console.WriteLine(result0.GetProperty("requiredNullableList")[0].ToString());
 ]]></code></example>
     </member>
-    <member name="SayHi(string,string,string,PipelineOptions)">
+    <member name="SayHi(string,string,string,RequestOptions)">
       <example>
 This sample shows how to call SayHi and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+KeyCredential credential = new KeyCredential("<key>");
 UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
 Result result = client.SayHi("<headParameter>", "<queryParameter>", null, null);
 
-JsonElement result0 = JsonDocument.Parse(result.ContentStream).RootElement;
+JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
 Console.WriteLine(result0.GetProperty("name").ToString());
 Console.WriteLine(result0.GetProperty("requiredUnion").ToString());
 Console.WriteLine(result0.GetProperty("requiredLiteralString").ToString());
@@ -1022,12 +1022,12 @@ Console.WriteLine(result0.GetProperty("requiredNullableList")[0].ToString());
 This sample shows how to call SayHi with all parameters and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+KeyCredential credential = new KeyCredential("<key>");
 UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
 Result result = client.SayHi("<headParameter>", "<queryParameter>", "<optionalQuery>", null);
 
-JsonElement result0 = JsonDocument.Parse(result.ContentStream).RootElement;
+JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
 Console.WriteLine(result0.GetProperty("name").ToString());
 Console.WriteLine(result0.GetProperty("requiredUnion").ToString());
 Console.WriteLine(result0.GetProperty("requiredLiteralString").ToString());
@@ -1045,15 +1045,15 @@ Console.WriteLine(result0.GetProperty("requiredNullableList")[0].ToString());
     </member>
     <member name="HelloAgainAsync(string,string,RoundTripModel,CancellationToken)" />
     <member name="HelloAgain(string,string,RoundTripModel,CancellationToken)" />
-    <member name="HelloAgainAsync(string,string,RequestContent,PipelineOptions)">
+    <member name="HelloAgainAsync(string,string,RequestBody,RequestOptions)">
       <example>
 This sample shows how to call HelloAgainAsync and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+KeyCredential credential = new KeyCredential("<key>");
 UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-RequestContent content = RequestContent.Create(new
+RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
 {
     requiredString = "<requiredString>",
     requiredInt = 1234,
@@ -1090,10 +1090,10 @@ RequestContent content = RequestContent.Create(new
         requiredExtensibleEnum = "1",
         requiredFixedEnum = "1",
     },
-});
+}).ToStream());
 Result result = await client.HelloAgainAsync("<p2>", "<p1>", content);
 
-JsonElement result0 = JsonDocument.Parse(result.ContentStream).RootElement;
+JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
 Console.WriteLine(result0.GetProperty("requiredString").ToString());
 Console.WriteLine(result0.GetProperty("requiredInt").ToString());
 Console.WriteLine(result0.GetProperty("requiredCollection")[0].ToString());
@@ -1116,10 +1116,10 @@ Console.WriteLine(result0.GetProperty("modelWithRequiredNullable").GetProperty("
 This sample shows how to call HelloAgainAsync with all parameters and request content and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+KeyCredential credential = new KeyCredential("<key>");
 UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-RequestContent content = RequestContent.Create(new
+RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
 {
     requiredString = "<requiredString>",
     requiredInt = 1234,
@@ -1190,10 +1190,10 @@ RequestContent content = RequestContent.Create(new
         requiredExtensibleEnum = "1",
         requiredFixedEnum = "1",
     },
-});
+}).ToStream());
 Result result = await client.HelloAgainAsync("<p2>", "<p1>", content);
 
-JsonElement result0 = JsonDocument.Parse(result.ContentStream).RootElement;
+JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
 Console.WriteLine(result0.GetProperty("requiredString").ToString());
 Console.WriteLine(result0.GetProperty("requiredInt").ToString());
 Console.WriteLine(result0.GetProperty("requiredCollection")[0].ToString());
@@ -1231,15 +1231,15 @@ Console.WriteLine(result0.GetProperty("modelWithRequiredNullable").GetProperty("
 Console.WriteLine(result0.GetProperty("modelWithRequiredNullable").GetProperty("requiredFixedEnum").ToString());
 ]]></code></example>
     </member>
-    <member name="HelloAgain(string,string,RequestContent,PipelineOptions)">
+    <member name="HelloAgain(string,string,RequestBody,RequestOptions)">
       <example>
 This sample shows how to call HelloAgain and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+KeyCredential credential = new KeyCredential("<key>");
 UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-RequestContent content = RequestContent.Create(new
+RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
 {
     requiredString = "<requiredString>",
     requiredInt = 1234,
@@ -1276,10 +1276,10 @@ RequestContent content = RequestContent.Create(new
         requiredExtensibleEnum = "1",
         requiredFixedEnum = "1",
     },
-});
+}).ToStream());
 Result result = client.HelloAgain("<p2>", "<p1>", content);
 
-JsonElement result0 = JsonDocument.Parse(result.ContentStream).RootElement;
+JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
 Console.WriteLine(result0.GetProperty("requiredString").ToString());
 Console.WriteLine(result0.GetProperty("requiredInt").ToString());
 Console.WriteLine(result0.GetProperty("requiredCollection")[0].ToString());
@@ -1302,10 +1302,10 @@ Console.WriteLine(result0.GetProperty("modelWithRequiredNullable").GetProperty("
 This sample shows how to call HelloAgain with all parameters and request content and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+KeyCredential credential = new KeyCredential("<key>");
 UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-RequestContent content = RequestContent.Create(new
+RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
 {
     requiredString = "<requiredString>",
     requiredInt = 1234,
@@ -1376,10 +1376,10 @@ RequestContent content = RequestContent.Create(new
         requiredExtensibleEnum = "1",
         requiredFixedEnum = "1",
     },
-});
+}).ToStream());
 Result result = client.HelloAgain("<p2>", "<p1>", content);
 
-JsonElement result0 = JsonDocument.Parse(result.ContentStream).RootElement;
+JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
 Console.WriteLine(result0.GetProperty("requiredString").ToString());
 Console.WriteLine(result0.GetProperty("requiredInt").ToString());
 Console.WriteLine(result0.GetProperty("requiredCollection")[0].ToString());
@@ -1417,15 +1417,15 @@ Console.WriteLine(result0.GetProperty("modelWithRequiredNullable").GetProperty("
 Console.WriteLine(result0.GetProperty("modelWithRequiredNullable").GetProperty("requiredFixedEnum").ToString());
 ]]></code></example>
     </member>
-    <member name="NoContentTypeAsync(string,string,RequestContent,PipelineOptions)">
+    <member name="NoContentTypeAsync(string,string,RequestBody,RequestOptions)">
       <example>
 This sample shows how to call NoContentTypeAsync and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+KeyCredential credential = new KeyCredential("<key>");
 UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-RequestContent content = RequestContent.Create(new
+RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
 {
     requiredString = "<requiredString>",
     requiredInt = 1234,
@@ -1462,10 +1462,10 @@ RequestContent content = RequestContent.Create(new
         requiredExtensibleEnum = "1",
         requiredFixedEnum = "1",
     },
-});
+}).ToStream());
 Result result = await client.NoContentTypeAsync("<p2>", "<p1>", content);
 
-JsonElement result0 = JsonDocument.Parse(result.ContentStream).RootElement;
+JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
 Console.WriteLine(result0.GetProperty("requiredString").ToString());
 Console.WriteLine(result0.GetProperty("requiredInt").ToString());
 Console.WriteLine(result0.GetProperty("requiredCollection")[0].ToString());
@@ -1488,10 +1488,10 @@ Console.WriteLine(result0.GetProperty("modelWithRequiredNullable").GetProperty("
 This sample shows how to call NoContentTypeAsync with all parameters and request content and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+KeyCredential credential = new KeyCredential("<key>");
 UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-RequestContent content = RequestContent.Create(new
+RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
 {
     requiredString = "<requiredString>",
     requiredInt = 1234,
@@ -1562,10 +1562,10 @@ RequestContent content = RequestContent.Create(new
         requiredExtensibleEnum = "1",
         requiredFixedEnum = "1",
     },
-});
+}).ToStream());
 Result result = await client.NoContentTypeAsync("<p2>", "<p1>", content);
 
-JsonElement result0 = JsonDocument.Parse(result.ContentStream).RootElement;
+JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
 Console.WriteLine(result0.GetProperty("requiredString").ToString());
 Console.WriteLine(result0.GetProperty("requiredInt").ToString());
 Console.WriteLine(result0.GetProperty("requiredCollection")[0].ToString());
@@ -1603,15 +1603,15 @@ Console.WriteLine(result0.GetProperty("modelWithRequiredNullable").GetProperty("
 Console.WriteLine(result0.GetProperty("modelWithRequiredNullable").GetProperty("requiredFixedEnum").ToString());
 ]]></code></example>
     </member>
-    <member name="NoContentType(string,string,RequestContent,PipelineOptions)">
+    <member name="NoContentType(string,string,RequestBody,RequestOptions)">
       <example>
 This sample shows how to call NoContentType and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+KeyCredential credential = new KeyCredential("<key>");
 UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-RequestContent content = RequestContent.Create(new
+RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
 {
     requiredString = "<requiredString>",
     requiredInt = 1234,
@@ -1648,10 +1648,10 @@ RequestContent content = RequestContent.Create(new
         requiredExtensibleEnum = "1",
         requiredFixedEnum = "1",
     },
-});
+}).ToStream());
 Result result = client.NoContentType("<p2>", "<p1>", content);
 
-JsonElement result0 = JsonDocument.Parse(result.ContentStream).RootElement;
+JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
 Console.WriteLine(result0.GetProperty("requiredString").ToString());
 Console.WriteLine(result0.GetProperty("requiredInt").ToString());
 Console.WriteLine(result0.GetProperty("requiredCollection")[0].ToString());
@@ -1674,10 +1674,10 @@ Console.WriteLine(result0.GetProperty("modelWithRequiredNullable").GetProperty("
 This sample shows how to call NoContentType with all parameters and request content and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+KeyCredential credential = new KeyCredential("<key>");
 UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-RequestContent content = RequestContent.Create(new
+RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
 {
     requiredString = "<requiredString>",
     requiredInt = 1234,
@@ -1748,10 +1748,10 @@ RequestContent content = RequestContent.Create(new
         requiredExtensibleEnum = "1",
         requiredFixedEnum = "1",
     },
-});
+}).ToStream());
 Result result = client.NoContentType("<p2>", "<p1>", content);
 
-JsonElement result0 = JsonDocument.Parse(result.ContentStream).RootElement;
+JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
 Console.WriteLine(result0.GetProperty("requiredString").ToString());
 Console.WriteLine(result0.GetProperty("requiredInt").ToString());
 Console.WriteLine(result0.GetProperty("requiredCollection")[0].ToString());
@@ -1791,17 +1791,17 @@ Console.WriteLine(result0.GetProperty("modelWithRequiredNullable").GetProperty("
     </member>
     <member name="HelloDemo2Async(CancellationToken)" />
     <member name="HelloDemo2(CancellationToken)" />
-    <member name="HelloDemo2Async(PipelineOptions)">
+    <member name="HelloDemo2Async(RequestOptions)">
       <example>
 This sample shows how to call HelloDemo2Async and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+KeyCredential credential = new KeyCredential("<key>");
 UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
 Result result = await client.HelloDemo2Async(null);
 
-JsonElement result0 = JsonDocument.Parse(result.ContentStream).RootElement;
+JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
 Console.WriteLine(result0.GetProperty("name").ToString());
 Console.WriteLine(result0.GetProperty("requiredUnion").ToString());
 Console.WriteLine(result0.GetProperty("requiredLiteralString").ToString());
@@ -1814,12 +1814,12 @@ Console.WriteLine(result0.GetProperty("requiredNullableList")[0].ToString());
 This sample shows how to call HelloDemo2Async with all parameters and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+KeyCredential credential = new KeyCredential("<key>");
 UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
 Result result = await client.HelloDemo2Async(null);
 
-JsonElement result0 = JsonDocument.Parse(result.ContentStream).RootElement;
+JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
 Console.WriteLine(result0.GetProperty("name").ToString());
 Console.WriteLine(result0.GetProperty("requiredUnion").ToString());
 Console.WriteLine(result0.GetProperty("requiredLiteralString").ToString());
@@ -1835,17 +1835,17 @@ Console.WriteLine(result0.GetProperty("optionalNullableList")[0].ToString());
 Console.WriteLine(result0.GetProperty("requiredNullableList")[0].ToString());
 ]]></code></example>
     </member>
-    <member name="HelloDemo2(PipelineOptions)">
+    <member name="HelloDemo2(RequestOptions)">
       <example>
 This sample shows how to call HelloDemo2 and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+KeyCredential credential = new KeyCredential("<key>");
 UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
 Result result = client.HelloDemo2(null);
 
-JsonElement result0 = JsonDocument.Parse(result.ContentStream).RootElement;
+JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
 Console.WriteLine(result0.GetProperty("name").ToString());
 Console.WriteLine(result0.GetProperty("requiredUnion").ToString());
 Console.WriteLine(result0.GetProperty("requiredLiteralString").ToString());
@@ -1858,12 +1858,12 @@ Console.WriteLine(result0.GetProperty("requiredNullableList")[0].ToString());
 This sample shows how to call HelloDemo2 with all parameters and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+KeyCredential credential = new KeyCredential("<key>");
 UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
 Result result = client.HelloDemo2(null);
 
-JsonElement result0 = JsonDocument.Parse(result.ContentStream).RootElement;
+JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
 Console.WriteLine(result0.GetProperty("name").ToString());
 Console.WriteLine(result0.GetProperty("requiredUnion").ToString());
 Console.WriteLine(result0.GetProperty("requiredLiteralString").ToString());
@@ -1881,15 +1881,15 @@ Console.WriteLine(result0.GetProperty("requiredNullableList")[0].ToString());
     </member>
     <member name="CreateLiteralAsync(Thing,CancellationToken)" />
     <member name="CreateLiteral(Thing,CancellationToken)" />
-    <member name="CreateLiteralAsync(RequestContent,PipelineOptions)">
+    <member name="CreateLiteralAsync(RequestBody,RequestOptions)">
       <example>
 This sample shows how to call CreateLiteralAsync and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+KeyCredential credential = new KeyCredential("<key>");
 UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-RequestContent content = RequestContent.Create(new
+RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
 {
     name = "<name>",
     requiredUnion = "<requiredUnion>",
@@ -1902,10 +1902,10 @@ RequestContent content = RequestContent.Create(new
     {
         1234
     },
-});
+}).ToStream());
 Result result = await client.CreateLiteralAsync(content);
 
-JsonElement result0 = JsonDocument.Parse(result.ContentStream).RootElement;
+JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
 Console.WriteLine(result0.GetProperty("name").ToString());
 Console.WriteLine(result0.GetProperty("requiredUnion").ToString());
 Console.WriteLine(result0.GetProperty("requiredLiteralString").ToString());
@@ -1918,10 +1918,10 @@ Console.WriteLine(result0.GetProperty("requiredNullableList")[0].ToString());
 This sample shows how to call CreateLiteralAsync with all request content and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+KeyCredential credential = new KeyCredential("<key>");
 UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-RequestContent content = RequestContent.Create(new
+RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
 {
     name = "<name>",
     requiredUnion = "<requiredUnion>",
@@ -1942,10 +1942,10 @@ RequestContent content = RequestContent.Create(new
     {
         1234
     },
-});
+}).ToStream());
 Result result = await client.CreateLiteralAsync(content);
 
-JsonElement result0 = JsonDocument.Parse(result.ContentStream).RootElement;
+JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
 Console.WriteLine(result0.GetProperty("name").ToString());
 Console.WriteLine(result0.GetProperty("requiredUnion").ToString());
 Console.WriteLine(result0.GetProperty("requiredLiteralString").ToString());
@@ -1961,15 +1961,15 @@ Console.WriteLine(result0.GetProperty("optionalNullableList")[0].ToString());
 Console.WriteLine(result0.GetProperty("requiredNullableList")[0].ToString());
 ]]></code></example>
     </member>
-    <member name="CreateLiteral(RequestContent,PipelineOptions)">
+    <member name="CreateLiteral(RequestBody,RequestOptions)">
       <example>
 This sample shows how to call CreateLiteral and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+KeyCredential credential = new KeyCredential("<key>");
 UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-RequestContent content = RequestContent.Create(new
+RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
 {
     name = "<name>",
     requiredUnion = "<requiredUnion>",
@@ -1982,10 +1982,10 @@ RequestContent content = RequestContent.Create(new
     {
         1234
     },
-});
+}).ToStream());
 Result result = client.CreateLiteral(content);
 
-JsonElement result0 = JsonDocument.Parse(result.ContentStream).RootElement;
+JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
 Console.WriteLine(result0.GetProperty("name").ToString());
 Console.WriteLine(result0.GetProperty("requiredUnion").ToString());
 Console.WriteLine(result0.GetProperty("requiredLiteralString").ToString());
@@ -1998,10 +1998,10 @@ Console.WriteLine(result0.GetProperty("requiredNullableList")[0].ToString());
 This sample shows how to call CreateLiteral with all request content and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+KeyCredential credential = new KeyCredential("<key>");
 UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-RequestContent content = RequestContent.Create(new
+RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
 {
     name = "<name>",
     requiredUnion = "<requiredUnion>",
@@ -2022,10 +2022,10 @@ RequestContent content = RequestContent.Create(new
     {
         1234
     },
-});
+}).ToStream());
 Result result = client.CreateLiteral(content);
 
-JsonElement result0 = JsonDocument.Parse(result.ContentStream).RootElement;
+JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
 Console.WriteLine(result0.GetProperty("name").ToString());
 Console.WriteLine(result0.GetProperty("requiredUnion").ToString());
 Console.WriteLine(result0.GetProperty("requiredLiteralString").ToString());
@@ -2043,17 +2043,17 @@ Console.WriteLine(result0.GetProperty("requiredNullableList")[0].ToString());
     </member>
     <member name="HelloLiteralAsync(CancellationToken)" />
     <member name="HelloLiteral(CancellationToken)" />
-    <member name="HelloLiteralAsync(PipelineOptions)">
+    <member name="HelloLiteralAsync(RequestOptions)">
       <example>
 This sample shows how to call HelloLiteralAsync and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+KeyCredential credential = new KeyCredential("<key>");
 UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
 Result result = await client.HelloLiteralAsync(null);
 
-JsonElement result0 = JsonDocument.Parse(result.ContentStream).RootElement;
+JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
 Console.WriteLine(result0.GetProperty("name").ToString());
 Console.WriteLine(result0.GetProperty("requiredUnion").ToString());
 Console.WriteLine(result0.GetProperty("requiredLiteralString").ToString());
@@ -2066,12 +2066,12 @@ Console.WriteLine(result0.GetProperty("requiredNullableList")[0].ToString());
 This sample shows how to call HelloLiteralAsync with all parameters and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+KeyCredential credential = new KeyCredential("<key>");
 UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
 Result result = await client.HelloLiteralAsync(null);
 
-JsonElement result0 = JsonDocument.Parse(result.ContentStream).RootElement;
+JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
 Console.WriteLine(result0.GetProperty("name").ToString());
 Console.WriteLine(result0.GetProperty("requiredUnion").ToString());
 Console.WriteLine(result0.GetProperty("requiredLiteralString").ToString());
@@ -2087,17 +2087,17 @@ Console.WriteLine(result0.GetProperty("optionalNullableList")[0].ToString());
 Console.WriteLine(result0.GetProperty("requiredNullableList")[0].ToString());
 ]]></code></example>
     </member>
-    <member name="HelloLiteral(PipelineOptions)">
+    <member name="HelloLiteral(RequestOptions)">
       <example>
 This sample shows how to call HelloLiteral and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+KeyCredential credential = new KeyCredential("<key>");
 UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
 Result result = client.HelloLiteral(null);
 
-JsonElement result0 = JsonDocument.Parse(result.ContentStream).RootElement;
+JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
 Console.WriteLine(result0.GetProperty("name").ToString());
 Console.WriteLine(result0.GetProperty("requiredUnion").ToString());
 Console.WriteLine(result0.GetProperty("requiredLiteralString").ToString());
@@ -2110,12 +2110,12 @@ Console.WriteLine(result0.GetProperty("requiredNullableList")[0].ToString());
 This sample shows how to call HelloLiteral with all parameters and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+KeyCredential credential = new KeyCredential("<key>");
 UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
 Result result = client.HelloLiteral(null);
 
-JsonElement result0 = JsonDocument.Parse(result.ContentStream).RootElement;
+JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
 Console.WriteLine(result0.GetProperty("name").ToString());
 Console.WriteLine(result0.GetProperty("requiredUnion").ToString());
 Console.WriteLine(result0.GetProperty("requiredLiteralString").ToString());
@@ -2131,63 +2131,63 @@ Console.WriteLine(result0.GetProperty("optionalNullableList")[0].ToString());
 Console.WriteLine(result0.GetProperty("requiredNullableList")[0].ToString());
 ]]></code></example>
     </member>
-    <member name="GetUnknownValueAsync(PipelineOptions)">
+    <member name="GetUnknownValueAsync(RequestOptions)">
       <example>
 This sample shows how to call GetUnknownValueAsync and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+KeyCredential credential = new KeyCredential("<key>");
 UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
 Result result = await client.GetUnknownValueAsync(null);
 
-JsonElement result0 = JsonDocument.Parse(result.ContentStream).RootElement;
+JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
 Console.WriteLine(result0.ToString());
 ]]></code>
 This sample shows how to call GetUnknownValueAsync with all parameters and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+KeyCredential credential = new KeyCredential("<key>");
 UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
 Result result = await client.GetUnknownValueAsync(null);
 
-JsonElement result0 = JsonDocument.Parse(result.ContentStream).RootElement;
+JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
 Console.WriteLine(result0.ToString());
 ]]></code></example>
     </member>
-    <member name="GetUnknownValue(PipelineOptions)">
+    <member name="GetUnknownValue(RequestOptions)">
       <example>
 This sample shows how to call GetUnknownValue and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+KeyCredential credential = new KeyCredential("<key>");
 UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
 Result result = client.GetUnknownValue(null);
 
-JsonElement result0 = JsonDocument.Parse(result.ContentStream).RootElement;
+JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
 Console.WriteLine(result0.ToString());
 ]]></code>
 This sample shows how to call GetUnknownValue with all parameters and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+KeyCredential credential = new KeyCredential("<key>");
 UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
 Result result = client.GetUnknownValue(null);
 
-JsonElement result0 = JsonDocument.Parse(result.ContentStream).RootElement;
+JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
 Console.WriteLine(result0.ToString());
 ]]></code></example>
     </member>
     <member name="InternalProtocolAsync(Thing,CancellationToken)" />
     <member name="InternalProtocol(Thing,CancellationToken)" />
-    <member name="InternalProtocolAsync(RequestContent,PipelineOptions)" />
-    <member name="InternalProtocol(RequestContent,PipelineOptions)" />
+    <member name="InternalProtocolAsync(RequestBody,RequestOptions)" />
+    <member name="InternalProtocol(RequestBody,RequestOptions)" />
     <member name="StillConvenientValueAsync(CancellationToken)" />
     <member name="StillConvenientValue(CancellationToken)" />
-    <member name="StillConvenientAsync(PipelineOptions)" />
-    <member name="StillConvenient(PipelineOptions)" />
+    <member name="StillConvenientAsync(RequestOptions)" />
+    <member name="StillConvenient(RequestOptions)" />
   </members>
 </doc>

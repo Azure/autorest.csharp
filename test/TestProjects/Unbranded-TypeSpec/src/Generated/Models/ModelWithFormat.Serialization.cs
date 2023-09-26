@@ -5,14 +5,15 @@
 
 #nullable disable
 
+using System.ServiceModel.Rest.Core;
+using System.ServiceModel.Rest.Experimental.Core.Serialization;
 using System.Text.Json;
-using Azure.Core;
 
 namespace UnbrandedTypeSpec.Models
 {
-    public partial class ModelWithFormat : IUtf8JsonSerializable
+    public partial class ModelWithFormat : IUtf8JsonWriteable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonWriteable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("sourceUrl"u8);
@@ -22,10 +23,10 @@ namespace UnbrandedTypeSpec.Models
             writer.WriteEndObject();
         }
 
-        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
-        internal virtual RequestContent ToRequestContent()
+        /// <summary> Convert into a Utf8JsonRequestBody. </summary>
+        internal virtual RequestBody ToRequestBody()
         {
-            var content = new Utf8JsonRequestContent();
+            var content = new Utf8JsonRequestBody();
             content.JsonWriter.WriteObjectValue(this);
             return content;
         }

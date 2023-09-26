@@ -81,7 +81,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
                 foreach ((Parameter protocolParameter, Parameter? convenienceParameter, _) in convenienceMethod.ProtocolToConvenienceParameterConverters)
                 {
-                    if (protocolParameter.Type.EqualsIgnoreNullable(typeof(RequestContent)) &&
+                    if (protocolParameter.Type.EqualsIgnoreNullable(Configuration.ApiTypes.RequestContentType) &&
                         convenienceParameter is { Name: var fromName, Type: { IsFrameworkType: false, Implementation: ModelTypeProvider }, IsOptionalInSignature: var isOptional })
                     {
                         writer
@@ -212,7 +212,7 @@ namespace AutoRest.CSharp.Generation.Writers
             var parameters = new List<FormattableString>();
             foreach (var parameter in createRequestMethod.Parameters)
             {
-                if (parameter == KnownParameters.RequestContext || parameter == KnownParameters.RequestContextRequired || parameter.Name == "nextLink" || parameter.Type.EqualsIgnoreNullable(typeof(RequestContent)))
+                if (parameter == KnownParameters.RequestContext || parameter == KnownParameters.RequestContextRequired || parameter.Name == "nextLink" || parameter.Type.EqualsIgnoreNullable(Configuration.ApiTypes.RequestContentType))
                 {
                     parameters.Add($"{parameter.Name}");
                     continue;

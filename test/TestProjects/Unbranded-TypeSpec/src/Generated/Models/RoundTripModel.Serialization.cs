@@ -7,16 +7,16 @@
 
 using System;
 using System.Collections.Generic;
-using System.ServiceModel.Rest;
-using System.ServiceModel.Rest.Shared.Core.Serialization;
+using System.ServiceModel.Rest.Core;
+using System.ServiceModel.Rest.Experimental.Core.Serialization;
 using System.Text.Json;
 using Azure.Core;
 
 namespace UnbrandedTypeSpec.Models
 {
-    internal partial class RoundTripModel : IUtf8JsonSerializable
+    internal partial class RoundTripModel : IUtf8JsonWriteable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonWriteable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("requiredString"u8);
@@ -50,12 +50,12 @@ namespace UnbrandedTypeSpec.Models
             writer.WriteEndObject();
             writer.WritePropertyName("requiredModel"u8);
             writer.WriteObjectValue(RequiredModel);
-            if (OptionalProperty.IsDefined(IntExtensibleEnum))
+            if (Optional.IsDefined(IntExtensibleEnum))
             {
                 writer.WritePropertyName("intExtensibleEnum"u8);
                 writer.WriteNumberValue(IntExtensibleEnum.Value.ToSerialInt32());
             }
-            if (OptionalProperty.IsCollectionDefined(IntExtensibleEnumCollection))
+            if (Optional.IsCollectionDefined(IntExtensibleEnumCollection))
             {
                 writer.WritePropertyName("intExtensibleEnumCollection"u8);
                 writer.WriteStartArray();
@@ -65,12 +65,12 @@ namespace UnbrandedTypeSpec.Models
                 }
                 writer.WriteEndArray();
             }
-            if (OptionalProperty.IsDefined(FloatExtensibleEnum))
+            if (Optional.IsDefined(FloatExtensibleEnum))
             {
                 writer.WritePropertyName("floatExtensibleEnum"u8);
                 writer.WriteNumberValue(FloatExtensibleEnum.Value.ToSerialInt32());
             }
-            if (OptionalProperty.IsCollectionDefined(FloatExtensibleEnumCollection))
+            if (Optional.IsCollectionDefined(FloatExtensibleEnumCollection))
             {
                 writer.WritePropertyName("floatExtensibleEnumCollection"u8);
                 writer.WriteStartArray();
@@ -80,12 +80,12 @@ namespace UnbrandedTypeSpec.Models
                 }
                 writer.WriteEndArray();
             }
-            if (OptionalProperty.IsDefined(FloatFixedEnum))
+            if (Optional.IsDefined(FloatFixedEnum))
             {
                 writer.WritePropertyName("floatFixedEnum"u8);
                 writer.WriteNumberValue(FloatFixedEnum.Value.ToSerialSingle());
             }
-            if (OptionalProperty.IsCollectionDefined(FloatFixedEnumCollection))
+            if (Optional.IsCollectionDefined(FloatFixedEnumCollection))
             {
                 writer.WritePropertyName("floatFixedEnumCollection"u8);
                 writer.WriteStartArray();
@@ -95,12 +95,12 @@ namespace UnbrandedTypeSpec.Models
                 }
                 writer.WriteEndArray();
             }
-            if (OptionalProperty.IsDefined(IntFixedEnum))
+            if (Optional.IsDefined(IntFixedEnum))
             {
                 writer.WritePropertyName("intFixedEnum"u8);
                 writer.WriteNumberValue((int)IntFixedEnum.Value);
             }
-            if (OptionalProperty.IsCollectionDefined(IntFixedEnumCollection))
+            if (Optional.IsCollectionDefined(IntFixedEnumCollection))
             {
                 writer.WritePropertyName("intFixedEnumCollection"u8);
                 writer.WriteStartArray();
@@ -110,7 +110,7 @@ namespace UnbrandedTypeSpec.Models
                 }
                 writer.WriteEndArray();
             }
-            if (OptionalProperty.IsDefined(StringFixedEnum))
+            if (Optional.IsDefined(StringFixedEnum))
             {
                 if (StringFixedEnum != null)
                 {
@@ -128,7 +128,7 @@ namespace UnbrandedTypeSpec.Models
 #else
             JsonSerializer.Serialize(writer, JsonDocument.Parse(RequiredUnknown.ToString()).RootElement);
 #endif
-            if (OptionalProperty.IsDefined(OptionalUnknown))
+            if (Optional.IsDefined(OptionalUnknown))
             {
                 writer.WritePropertyName("optionalUnknown"u8);
 #if NET6_0_OR_GREATER
@@ -154,7 +154,7 @@ namespace UnbrandedTypeSpec.Models
 #endif
             }
             writer.WriteEndObject();
-            if (OptionalProperty.IsCollectionDefined(OptionalRecordUnknown))
+            if (Optional.IsCollectionDefined(OptionalRecordUnknown))
             {
                 writer.WritePropertyName("optionalRecordUnknown"u8);
                 writer.WriteStartObject();
@@ -455,21 +455,21 @@ namespace UnbrandedTypeSpec.Models
                     continue;
                 }
             }
-            return new RoundTripModel(requiredString, requiredInt, requiredCollection, requiredDictionary, requiredModel, OptionalProperty.ToNullable(intExtensibleEnum), OptionalProperty.ToList(intExtensibleEnumCollection), OptionalProperty.ToNullable(floatExtensibleEnum), OptionalProperty.ToList(floatExtensibleEnumCollection), OptionalProperty.ToNullable(floatFixedEnum), OptionalProperty.ToList(floatFixedEnumCollection), OptionalProperty.ToNullable(intFixedEnum), OptionalProperty.ToList(intFixedEnumCollection), OptionalProperty.ToNullable(stringFixedEnum), requiredUnknown, optionalUnknown.Value, requiredRecordUnknown, OptionalProperty.ToDictionary(optionalRecordUnknown), readOnlyRequiredRecordUnknown, OptionalProperty.ToDictionary(readOnlyOptionalRecordUnknown), modelWithRequiredNullable);
+            return new RoundTripModel(requiredString, requiredInt, requiredCollection, requiredDictionary, requiredModel, Optional.ToNullable(intExtensibleEnum), Optional.ToList(intExtensibleEnumCollection), Optional.ToNullable(floatExtensibleEnum), Optional.ToList(floatExtensibleEnumCollection), Optional.ToNullable(floatFixedEnum), Optional.ToList(floatFixedEnumCollection), Optional.ToNullable(intFixedEnum), Optional.ToList(intFixedEnumCollection), Optional.ToNullable(stringFixedEnum), requiredUnknown, optionalUnknown.Value, requiredRecordUnknown, Optional.ToDictionary(optionalRecordUnknown), readOnlyRequiredRecordUnknown, Optional.ToDictionary(readOnlyOptionalRecordUnknown), modelWithRequiredNullable);
         }
 
-        /// <summary> Deserializes the model from a raw result. </summary>
+        /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="result"> The result to deserialize the model from. </param>
-        internal static RoundTripModel FromResult(Result result)
+        internal static RoundTripModel FromResponse(PipelineResponse result)
         {
             using var document = JsonDocument.Parse(result.Content);
             return DeserializeRoundTripModel(document.RootElement);
         }
 
-        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
-        internal virtual RequestContent ToRequestContent()
+        /// <summary> Convert into a Utf8JsonRequestBody. </summary>
+        internal virtual RequestBody ToRequestBody()
         {
-            var content = new Utf8JsonRequestContent();
+            var content = new Utf8JsonRequestBody();
             content.JsonWriter.WriteObjectValue(this);
             return content;
         }

@@ -6,16 +6,16 @@
 #nullable disable
 
 using System.Collections.Generic;
-using System.ServiceModel.Rest;
-using System.ServiceModel.Rest.Shared.Core.Serialization;
+using System.ServiceModel.Rest.Core;
+using System.ServiceModel.Rest.Experimental.Core.Serialization;
 using System.Text.Json;
 using Azure.Core;
 
 namespace UnbrandedTypeSpec.Models
 {
-    internal partial class Thing : IUtf8JsonSerializable
+    internal partial class Thing : IUtf8JsonWriteable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonWriteable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("name"u8);
@@ -30,29 +30,29 @@ namespace UnbrandedTypeSpec.Models
             writer.WriteNumberValue(RequiredLiteralFloat.ToSerialSingle());
             writer.WritePropertyName("requiredLiteralBool"u8);
             writer.WriteBooleanValue(RequiredLiteralBool);
-            if (OptionalProperty.IsDefined(OptionalLiteralString))
+            if (Optional.IsDefined(OptionalLiteralString))
             {
                 writer.WritePropertyName("optionalLiteralString"u8);
                 writer.WriteStringValue(OptionalLiteralString.Value.ToString());
             }
-            if (OptionalProperty.IsDefined(OptionalLiteralInt))
+            if (Optional.IsDefined(OptionalLiteralInt))
             {
                 writer.WritePropertyName("optionalLiteralInt"u8);
                 writer.WriteNumberValue(OptionalLiteralInt.Value.ToSerialInt32());
             }
-            if (OptionalProperty.IsDefined(OptionalLiteralFloat))
+            if (Optional.IsDefined(OptionalLiteralFloat))
             {
                 writer.WritePropertyName("optionalLiteralFloat"u8);
                 writer.WriteNumberValue(OptionalLiteralFloat.Value.ToSerialSingle());
             }
-            if (OptionalProperty.IsDefined(OptionalLiteralBool))
+            if (Optional.IsDefined(OptionalLiteralBool))
             {
                 writer.WritePropertyName("optionalLiteralBool"u8);
                 writer.WriteBooleanValue(OptionalLiteralBool.Value);
             }
             writer.WritePropertyName("requiredBadDescription"u8);
             writer.WriteStringValue(RequiredBadDescription);
-            if (OptionalProperty.IsCollectionDefined(OptionalNullableList))
+            if (Optional.IsCollectionDefined(OptionalNullableList))
             {
                 if (OptionalNullableList != null)
                 {
@@ -69,7 +69,7 @@ namespace UnbrandedTypeSpec.Models
                     writer.WriteNull("optionalNullableList");
                 }
             }
-            if (RequiredNullableList != null && OptionalProperty.IsCollectionDefined(RequiredNullableList))
+            if (RequiredNullableList != null && Optional.IsCollectionDefined(RequiredNullableList))
             {
                 writer.WritePropertyName("requiredNullableList"u8);
                 writer.WriteStartArray();
@@ -209,21 +209,21 @@ namespace UnbrandedTypeSpec.Models
                     continue;
                 }
             }
-            return new Thing(name, requiredUnion, requiredLiteralString, requiredLiteralInt, requiredLiteralFloat, requiredLiteralBool, OptionalProperty.ToNullable(optionalLiteralString), OptionalProperty.ToNullable(optionalLiteralInt), OptionalProperty.ToNullable(optionalLiteralFloat), OptionalProperty.ToNullable(optionalLiteralBool), requiredBadDescription, OptionalProperty.ToList(optionalNullableList), requiredNullableList);
+            return new Thing(name, requiredUnion, requiredLiteralString, requiredLiteralInt, requiredLiteralFloat, requiredLiteralBool, Optional.ToNullable(optionalLiteralString), Optional.ToNullable(optionalLiteralInt), Optional.ToNullable(optionalLiteralFloat), Optional.ToNullable(optionalLiteralBool), requiredBadDescription, Optional.ToList(optionalNullableList), requiredNullableList);
         }
 
-        /// <summary> Deserializes the model from a raw result. </summary>
+        /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="result"> The result to deserialize the model from. </param>
-        internal static Thing FromResult(Result result)
+        internal static Thing FromResponse(PipelineResponse result)
         {
             using var document = JsonDocument.Parse(result.Content);
             return DeserializeThing(document.RootElement);
         }
 
-        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
-        internal virtual RequestContent ToRequestContent()
+        /// <summary> Convert into a Utf8JsonRequestBody. </summary>
+        internal virtual RequestBody ToRequestBody()
         {
-            var content = new Utf8JsonRequestContent();
+            var content = new Utf8JsonRequestBody();
             content.JsonWriter.WriteObjectValue(this);
             return content;
         }

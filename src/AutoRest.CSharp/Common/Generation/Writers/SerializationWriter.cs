@@ -2,17 +2,13 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using System.Xml;
-using System.Xml.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Serialization.Json;
 using AutoRest.CSharp.Output.Models.Serialization.Xml;
 using AutoRest.CSharp.Output.Models.Types;
@@ -50,7 +46,6 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 return;
             }
-
             using (writer.Namespace(declaration.Namespace))
             {
                 if (jsonSerialization is { IncludeConverter: true })
@@ -64,7 +59,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 {
                     writer
                         .AppendIf($": ", hasJson || hasXml)
-                        .AppendIf($"{typeof(IUtf8JsonSerializable)}, ", hasJson)
+                        .AppendIf($"{Configuration.ApiTypes.IUtf8JsonSerializableType}, ", hasJson)
                         .AppendIf($"{typeof(IXmlSerializable)}, ", hasXml)
                         .RemoveTrailingComma();
                 }
