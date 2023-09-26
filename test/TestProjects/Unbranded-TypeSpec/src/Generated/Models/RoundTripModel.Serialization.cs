@@ -7,7 +7,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.ServiceModel.Rest;
 using System.ServiceModel.Rest.Core;
 using System.Text.Json;
 using Azure.Core;
@@ -458,16 +457,16 @@ namespace UnbrandedTypeSpec.Models
             return new RoundTripModel(requiredString, requiredInt, requiredCollection, requiredDictionary, requiredModel, Optional.ToNullable(intExtensibleEnum), Optional.ToList(intExtensibleEnumCollection), Optional.ToNullable(floatExtensibleEnum), Optional.ToList(floatExtensibleEnumCollection), Optional.ToNullable(floatFixedEnum), Optional.ToList(floatFixedEnumCollection), Optional.ToNullable(intFixedEnum), Optional.ToList(intFixedEnumCollection), Optional.ToNullable(stringFixedEnum), requiredUnknown, optionalUnknown.Value, requiredRecordUnknown, Optional.ToDictionary(optionalRecordUnknown), readOnlyRequiredRecordUnknown, Optional.ToDictionary(readOnlyOptionalRecordUnknown), modelWithRequiredNullable);
         }
 
-        /// <summary> Deserializes the model from a raw result. </summary>
+        /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="result"> The result to deserialize the model from. </param>
-        internal static RoundTripModel FromResult(Result result)
+        internal static RoundTripModel FromResponse(PipelineResponse result)
         {
             using var document = JsonDocument.Parse(result.Content);
             return DeserializeRoundTripModel(document.RootElement);
         }
 
-        /// <summary> Convert into a Utf8JsonRequestBody. </summary>
-        internal virtual RequestBody ToRequestBody()
+        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
+        internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(this);

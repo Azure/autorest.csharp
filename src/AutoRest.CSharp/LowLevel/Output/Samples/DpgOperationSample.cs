@@ -220,7 +220,7 @@ namespace AutoRest.CSharp.Output.Samples.Models
             // handle credentials
             if (parameter.Type.EqualsIgnoreNullable(KnownParameters.KeyAuth.Type))
             {
-                result.Add(parameter.Name, new InputExampleParameterValue(parameter, $"new {typeof(AzureKeyCredential)}({"<key>":L})"));
+                result.Add(parameter.Name, new InputExampleParameterValue(parameter, $"new {Configuration.ApiTypes.KeyCredentialType}({"<key>":L})"));
                 return true;
             }
 

@@ -32,7 +32,8 @@ namespace AutoRest.CSharp.LowLevel.Generation
         public void Write()
         {
             // since our generator source code does not have the Azure.Identity dependency, we have to add this dependency separately
-            _writer.UseNamespace("Azure.Identity");
+            if (Configuration.ApiTypes is AzureApiTypes)
+                _writer.UseNamespace("Azure.Identity");
 
             using (_writer.Namespace($"{_client.Declaration.Namespace}.Samples"))
             {
@@ -177,12 +178,12 @@ namespace AutoRest.CSharp.LowLevel.Generation
             _writer.LineRaw(";");
 
             if (sample.HasResponseBody)
-                WriteNormalOperationResponse(sample, $"{response}", $"{response}.ContentStream");
+                WriteNormalOperationResponse(sample, $"{response}", $"{response}.{Configuration.ApiTypes.ContentStreamName}");
             else
             {
                 if (returnType.EqualsIgnoreNullable(Configuration.ApiTypes.ResponseType))
                 {
-                    _writer.ConsoleWriteLine($"{response}.Status");
+                    _writer.ConsoleWriteLine($"{response}.{Configuration.ApiTypes.StatusName}");
                 }
                 else
                 {
@@ -203,11 +204,11 @@ namespace AutoRest.CSharp.LowLevel.Generation
 
         private void WriteStreamResponse(FormattableString resultVar)
         {
-            using (_writer.Scope($"if ({resultVar}.ContentStream != null)"))
+            using (_writer.Scope($"if ({resultVar}.{Configuration.ApiTypes.ContentStreamName} != null)"))
             {
                 using (_writer.Scope($"using({typeof(Stream)} outFileStream = {typeof(File)}.{nameof(File.OpenWrite)}({"<filepath>":L}))"))
                 {
-                    _writer.Line($"{resultVar}.ContentStream.CopyTo(outFileStream);");
+                    _writer.Line($"{resultVar}.{Configuration.ApiTypes.ContentStreamName}.CopyTo(outFileStream);");
                 }
             }
         }

@@ -6,7 +6,6 @@
 #nullable disable
 
 using System.Collections.Generic;
-using System.ServiceModel.Rest;
 using System.ServiceModel.Rest.Core;
 using System.Text.Json;
 using Azure.Core;
@@ -212,16 +211,16 @@ namespace UnbrandedTypeSpec.Models
             return new Thing(name, requiredUnion, requiredLiteralString, requiredLiteralInt, requiredLiteralFloat, requiredLiteralBool, Optional.ToNullable(optionalLiteralString), Optional.ToNullable(optionalLiteralInt), Optional.ToNullable(optionalLiteralFloat), Optional.ToNullable(optionalLiteralBool), requiredBadDescription, Optional.ToList(optionalNullableList), requiredNullableList);
         }
 
-        /// <summary> Deserializes the model from a raw result. </summary>
+        /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="result"> The result to deserialize the model from. </param>
-        internal static Thing FromResult(Result result)
+        internal static Thing FromResponse(PipelineResponse result)
         {
             using var document = JsonDocument.Parse(result.Content);
             return DeserializeThing(document.RootElement);
         }
 
-        /// <summary> Convert into a Utf8JsonRequestBody. </summary>
-        internal virtual RequestBody ToRequestBody()
+        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
+        internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(this);

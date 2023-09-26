@@ -19,7 +19,6 @@ using AutoRest.CSharp.Output.Samples.Models;
 using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.Core;
-using Azure.Core.Pipeline;
 using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 using Operation = Azure.Operation;
 using StatusCodes = AutoRest.CSharp.Output.Models.Responses.StatusCodes;
@@ -205,8 +204,8 @@ namespace AutoRest.CSharp.Generation.Writers
                 var clientOptionsParameter = signature.Parameters.Last(p => p.Type.EqualsIgnoreNullable(_client.ClientOptions.Type));
                 _writer.Line($"{_client.Fields.ClientDiagnosticsProperty.Name:I} = new {_client.Fields.ClientDiagnosticsProperty.Type}({clientOptionsParameter.Name:I}, true);");
 
-                FormattableString perCallPolicies = $"Array.Empty<{typeof(HttpPipelinePolicy)}>()";
-                FormattableString perRetryPolicies = $"Array.Empty<{typeof(HttpPipelinePolicy)}>()";
+                FormattableString perCallPolicies = $"Array.Empty<{Configuration.ApiTypes.HttpPipelinePolicyType}>()";
+                FormattableString perRetryPolicies = $"Array.Empty<{Configuration.ApiTypes.HttpPipelinePolicyType}>()";
 
                 var credentialParameter = signature.Parameters.FirstOrDefault(p => p.Name == "credential");
                 if (credentialParameter != null)
@@ -216,19 +215,19 @@ namespace AutoRest.CSharp.Generation.Writers
                     {
                         var fieldName = credentialField.Name;
                         _writer.Line($"{fieldName:I} = {credentialParameter.Name:I};");
-                        if (credentialField.Type.Equals(typeof(AzureKeyCredential)))
+                        if (credentialField.Type.Equals(Configuration.ApiTypes.KeyCredentialType))
                         {
                             string prefixString = _client.Fields.AuthorizationApiKeyPrefixConstant != null ? $", {_client.Fields.AuthorizationApiKeyPrefixConstant.Name}" : "";
-                            perRetryPolicies = $"new {typeof(HttpPipelinePolicy)}[] {{new {typeof(AzureKeyCredentialPolicy)}({fieldName:I}, {_client.Fields.AuthorizationHeaderConstant!.Name}{prefixString})}}";
+                            perRetryPolicies = $"new {Configuration.ApiTypes.HttpPipelinePolicyType}[] {{new {Configuration.ApiTypes.KeyCredentialPolicyType}({fieldName:I}, {_client.Fields.AuthorizationHeaderConstant!.Name}{prefixString})}}";
                         }
                         else if (credentialField.Type.Equals(typeof(TokenCredential)))
                         {
-                            perRetryPolicies = $"new {typeof(HttpPipelinePolicy)}[] {{new {typeof(BearerTokenAuthenticationPolicy)}({fieldName:I}, {_client.Fields.ScopesConstant!.Name})}}";
+                            perRetryPolicies = $"new {Configuration.ApiTypes.HttpPipelinePolicyType}[] {{new {Configuration.ApiTypes.BearerAuthenticationPolicyType}({fieldName:I}, {_client.Fields.ScopesConstant!.Name})}}";
                         }
                     }
                 }
 
-                _writer.Line($"{_client.Fields.PipelineField.Name:I} = {typeof(HttpPipelineBuilder)}.{nameof(HttpPipelineBuilder.Build)}({clientOptionsParameter.Name:I}, {perCallPolicies}, {perRetryPolicies}, new {typeof(ResponseClassifier)}());");
+                _writer.Line(Configuration.ApiTypes.GetHttpPipelineClassifierString(_client.Fields.PipelineField.Name, clientOptionsParameter.Name, perCallPolicies, perRetryPolicies));
 
                 foreach (var parameter in _client.Parameters)
                 {
@@ -281,6 +280,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 converter(_writer);
 
                 var responseVariable = new CodeWriterDeclaration(Configuration.ApiTypes.ResponseParameterName);
+                string rawResponseVariable = Configuration.ApiTypes.GetRawResponseString(responseVariable.RequestedName);
                 _writer
                     .Append($"{clientMethod.ProtocolMethodSignature.ReturnType} {responseVariable:D} = ")
                     .WriteMethodCall(clientMethod.ProtocolMethodSignature, parameterValues, async)
@@ -300,20 +300,20 @@ namespace AutoRest.CSharp.Generation.Writers
                     string declaredTypeName = enumType.Declaration.Name;
                     if (enumType.IsExtensible)
                     {
-                        _writer.Line($"return {Configuration.ApiTypes.ResponseType}.{Configuration.ApiTypes.FromValueName}(new {declaredTypeName}({responseVariable:I}.Content.ToObjectFromJson<{enumType.ValueType}>()), {responseVariable:I});");
+                        _writer.Line($"return {Configuration.ApiTypes.ResponseType}.{Configuration.ApiTypes.FromValueName}(new {declaredTypeName}({rawResponseVariable}.Content.ToObjectFromJson<{enumType.ValueType}>()), {rawResponseVariable});");
                     }
                     else
                     {
-                        _writer.Line($"return {Configuration.ApiTypes.ResponseType}.{Configuration.ApiTypes.FromValueName}({responseVariable:I}.Content.ToObjectFromJson<{enumType.ValueType}>().To{declaredTypeName}(), {responseVariable:I});");
+                        _writer.Line($"return {Configuration.ApiTypes.ResponseType}.{Configuration.ApiTypes.FromValueName}({rawResponseVariable}.Content.ToObjectFromJson<{enumType.ValueType}>().To{declaredTypeName}(), {rawResponseVariable});");
                     }
                 }
                 else if (responseType.IsFrameworkType)
                 {
-                    _writer.Line($"return {Configuration.ApiTypes.ResponseType}.{Configuration.ApiTypes.FromValueName}({responseVariable:I}.Content.ToObjectFromJson<{responseType}>(), {responseVariable:I});");
+                    _writer.Line($"return {Configuration.ApiTypes.ResponseType}.{Configuration.ApiTypes.FromValueName}({rawResponseVariable}.Content.ToObjectFromJson<{responseType}>(), {rawResponseVariable});");
                 }
                 else
                 {
-                    _writer.Line($"return {Configuration.ApiTypes.ResponseType}.{Configuration.ApiTypes.FromValueName}({responseType}.{Configuration.ApiTypes.FromResponseName}({responseVariable:I}), {responseVariable:I});");
+                    _writer.Line($"return {Configuration.ApiTypes.ResponseType}.{Configuration.ApiTypes.FromValueName}({responseType}.{Configuration.ApiTypes.FromResponseName}({rawResponseVariable}), {rawResponseVariable});");
                 }
             }
             _writer.Line();
@@ -421,7 +421,15 @@ namespace AutoRest.CSharp.Generation.Writers
                         ? (FormattableString)$"{messageVariable}, {fields.ClientDiagnosticsProperty.Name}, {KnownParameters.RequestContext.Name:I}"
                         : (FormattableString)$"{messageVariable}, {KnownParameters.RequestContext.Name:I}";
 
-                    writer.AppendRaw("return ").WriteMethodCall(async, $"{fields.PipelineField.Name:I}.{methodName}", paramString);
+                    if (headAsBoolean && !Configuration.IsBranded)
+                    {
+                        writer.Append($"var {Configuration.ApiTypes.ResponseParameterName} = ").WriteMethodCall(async, $"{fields.PipelineField.Name:I}.{methodName}", paramString).Line($";");
+                        writer.Line($"return {Configuration.ApiTypes.ResponseType}.{Configuration.ApiTypes.FromValueName}({Configuration.ApiTypes.ResponseParameterName}.Value, {Configuration.ApiTypes.ResponseParameterName}.{Configuration.ApiTypes.GetRawResponseName}());");
+                    }
+                    else
+                    {
+                        writer.Append(Configuration.ApiTypes.ProtocolReturnStartString).WriteMethodCall(async, $"{fields.PipelineField.Name:I}.{methodName}", paramString).Line(Configuration.ApiTypes.ProtocolReturnEndString);
+                    }
                 }
             }
             writer.Line();
@@ -490,7 +498,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 {
                     using (writer.Scope($"public override bool {nameof(ResponseClassifier.IsErrorResponse)}({Configuration.ApiTypes.HttpMessageType} message)"))
                     {
-                        using (writer.Scope($"return message.{Configuration.ApiTypes.HttpMessageResponseName}.{Configuration.ApiTypes.StatusName} switch", end: "};"))
+                        using (writer.Scope($"return message.{Configuration.ApiTypes.HttpMessageResponseName}.{Configuration.ApiTypes.HttpMessageResponseStatusName} switch", end: "};"))
                         {
                             foreach (var statusCode in statusCodes)
                             {

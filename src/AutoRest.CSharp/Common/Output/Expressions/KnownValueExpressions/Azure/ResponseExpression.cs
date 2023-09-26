@@ -10,11 +10,9 @@ namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.Azure
 {
     internal sealed record ResponseExpression(ValueExpression Untyped) : BaseResponseExpression(typeof(Response), Untyped)
     {
-        public override ValueExpression Status => Property(nameof(Response.Status));
         public override ValueExpression Value => Property(nameof(Response<object>.Value));
-
-        public override StreamExpression ContentStream => new(Property(nameof(Response.ContentStream)));
         public override BinaryDataExpression Content => new(Property(nameof(Response.Content)));
+        public override StreamExpression ContentStream => new(Property(nameof(Response.ContentStream)));
 
         public override BaseResponseExpression FromValue(ValueExpression value)
             => new ResponseExpression(new InvokeStaticMethodExpression(typeof(Response), nameof(Response.FromValue), new[] { value, this }));

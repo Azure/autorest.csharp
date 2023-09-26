@@ -127,12 +127,12 @@ namespace AutoRest.CSharp.Generation.Types
             {
                 if (IsList(type))
                 {
-                    return new CSharpType(typeof(ChangeTrackingList<>), type.Arguments);
+                    return new CSharpType(Configuration.ApiTypes.ChangeTrackingListType, type.Arguments);
                 }
 
                 if (IsDictionary(type))
                 {
-                    return new CSharpType(typeof(ChangeTrackingDictionary<,>), type.Arguments);
+                    return new CSharpType(Configuration.ApiTypes.ChangeTrackingDictionaryType, type.Arguments);
                 }
             }
 

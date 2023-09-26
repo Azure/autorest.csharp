@@ -8,8 +8,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.ServiceModel.Rest.Shared;
-using Azure.Core;
+using System.ServiceModel.Rest.Experimental;
+using System.ServiceModel.Rest.Experimental.Core.Serialization;
 
 namespace UnbrandedTypeSpec.Models
 {
@@ -31,7 +31,7 @@ namespace UnbrandedTypeSpec.Models
             Name = name;
             RequiredUnion = requiredUnion;
             RequiredBadDescription = requiredBadDescription;
-            OptionalNullableList = new ChangeTrackingList<int>();
+            OptionalNullableList = new OptionalList<int>();
             RequiredNullableList = requiredNullableList?.ToList();
         }
 
