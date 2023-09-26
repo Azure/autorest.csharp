@@ -40,7 +40,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             var utf8JsonWriter = new Parameter("writer", null, typeof(Utf8JsonWriter), null, ValidationType.None, null);
             return new Method
             (
-                new MethodSignature(nameof(IUtf8JsonSerializable.Write), null, null, MethodSignatureModifiers.None, null, null, new[]{utf8JsonWriter}, ExplicitInterface: typeof(IUtf8JsonSerializable)),
+                new MethodSignature(Configuration.ApiTypes.IUtf8JsonSerializableWriteName, null, null, MethodSignatureModifiers.None, null, null, new[]{utf8JsonWriter}, ExplicitInterface: Configuration.ApiTypes.IUtf8JsonSerializableType),
                 WriteObject(new Utf8JsonWriterExpression(utf8JsonWriter), jsonObjectSerialization)
             );
         }

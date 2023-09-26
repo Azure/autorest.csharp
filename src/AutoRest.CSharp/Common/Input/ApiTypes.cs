@@ -5,6 +5,7 @@ using System;
 using System.ServiceModel.Rest;
 using System.ServiceModel.Rest.Core;
 using System.ServiceModel.Rest.Experimental;
+using System.ServiceModel.Rest.Experimental.Core.Serialization;
 using System.Threading.Tasks;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.Base;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
@@ -103,5 +104,16 @@ namespace AutoRest.CSharp.Common.Input
         public abstract string RequestContentCreateName { get; }
 
         public abstract BaseRawRequestUriBuilderExpression GetRequestUriBuiilderExpression(ValueExpression? valueExpression = null);
+
+        public abstract Type IUtf8JsonSerializableType { get; }
+        public string IUtf8JsonSerializableWriteName => nameof(IUtf8JsonWriteable.Write);
+
+        public abstract Type Utf8JsonWriterExtensionsType { get; }
+        public string Utf8JsonWriterExtensionsWriteObjectValueName => nameof(ModelSerializationExtensions.WriteObjectValue);
+        public string Utf8JsonWriterExtensionsWriteNumberValueName => nameof(ModelSerializationExtensions.WriteNumberValue);
+        public string Utf8JsonWriterExtensionsWriteStringValueName => nameof(ModelSerializationExtensions.WriteStringValue);
+        public string Utf8JsonWriterExtensionsWriteBase64StringValueName => nameof(ModelSerializationExtensions.WriteBase64StringValue);
+
+        public abstract BaseUtf8JsonRequestContentExpression GetUtf8JsonRequestContentExpression(ValueExpression? untyped = null);
     }
 }

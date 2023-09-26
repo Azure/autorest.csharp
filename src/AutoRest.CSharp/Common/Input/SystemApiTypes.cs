@@ -8,6 +8,7 @@ using System.ServiceModel.Rest.Experimental;
 using System.ServiceModel.Rest.Experimental.Core;
 using System.ServiceModel.Rest.Experimental.Core.Pipeline;
 using System.ServiceModel.Rest.Experimental.Core.Serialization;
+using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.Azure;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.Base;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.System;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
@@ -87,5 +88,12 @@ namespace AutoRest.CSharp.Common.Input
 
         public override BaseRawRequestUriBuilderExpression GetRequestUriBuiilderExpression(ValueExpression? valueExpression = null)
             => new RequestUriExpression(valueExpression ?? Snippets.New.Instance(typeof(RequestUri)));
+
+        public override Type IUtf8JsonSerializableType => typeof(IUtf8JsonWriteable);
+
+        public override Type Utf8JsonWriterExtensionsType => typeof(ModelSerializationExtensions);
+
+        public override BaseUtf8JsonRequestContentExpression GetUtf8JsonRequestContentExpression(ValueExpression? untyped = null)
+            => new Utf8JsonRequestBodyExpression(untyped ?? Snippets.New.Instance(typeof(Utf8JsonRequestBody)));
     }
 }

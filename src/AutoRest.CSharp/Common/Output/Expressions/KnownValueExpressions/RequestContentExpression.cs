@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 
 using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.Base;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using Azure.Core;
 
@@ -16,7 +17,7 @@ namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions
         public static implicit operator RequestContentExpression(FormUrlEncodedContentExpression formUrlEncodedContent) => new(formUrlEncodedContent.Untyped);
         public static implicit operator RequestContentExpression(MultipartFormDataContentExpression multipartFormDataContent) => new(multipartFormDataContent.Untyped);
         public static implicit operator RequestContentExpression(StringRequestContentExpression stringRequestContentExpression) => new(stringRequestContentExpression.Untyped);
-        public static implicit operator RequestContentExpression(Utf8JsonRequestContentExpression utf8JsonRequestContent) => new(utf8JsonRequestContent.Untyped);
+        public static implicit operator RequestContentExpression(BaseUtf8JsonRequestContentExpression utf8JsonRequestContent) => new(utf8JsonRequestContent.Untyped);
         public static implicit operator RequestContentExpression(XmlWriterContentExpression xmlWriterContent) => new(xmlWriterContent.Untyped);
     }
 }

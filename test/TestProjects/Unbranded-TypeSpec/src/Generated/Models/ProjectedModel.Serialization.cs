@@ -6,14 +6,14 @@
 #nullable disable
 
 using System.ServiceModel.Rest.Core;
+using System.ServiceModel.Rest.Experimental.Core.Serialization;
 using System.Text.Json;
-using Azure.Core;
 
 namespace UnbrandedTypeSpec.Models
 {
-    public partial class ProjectedModel : IUtf8JsonSerializable
+    public partial class ProjectedModel : IUtf8JsonWriteable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonWriteable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("name"u8);
@@ -50,7 +50,7 @@ namespace UnbrandedTypeSpec.Models
         /// <summary> Convert into a Utf8JsonRequestBody. </summary>
         internal virtual RequestBody ToRequestBody()
         {
-            var content = new Utf8JsonRequestContent();
+            var content = new Utf8JsonRequestBody();
             content.JsonWriter.WriteObjectValue(this);
             return content;
         }

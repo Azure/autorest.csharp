@@ -83,5 +83,12 @@ namespace AutoRest.CSharp.Common.Input
 
         public override BaseRawRequestUriBuilderExpression GetRequestUriBuiilderExpression(ValueExpression? valueExpression = null)
             => new RawRequestUriBuilderExpression(valueExpression ?? Snippets.New.Instance(typeof(RawRequestUriBuilder)));
+
+        public override Type IUtf8JsonSerializableType => typeof(IUtf8JsonSerializable);
+
+        public override Type Utf8JsonWriterExtensionsType => typeof(Utf8JsonWriterExtensions);
+
+        public override BaseUtf8JsonRequestContentExpression GetUtf8JsonRequestContentExpression(ValueExpression? untyped = null)
+            => new Utf8JsonRequestContentExpression(untyped ?? Snippets.New.Instance(typeof(Utf8JsonRequestContent)));
     }
 }
