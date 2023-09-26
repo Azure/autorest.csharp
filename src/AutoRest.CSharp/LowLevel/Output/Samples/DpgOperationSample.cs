@@ -85,18 +85,20 @@ namespace AutoRest.CSharp.Output.Samples.Models
         {
             foreach (var parameter in parameters)
             {
-                // for some parameters, we will never write them, such as RequestContext/CancellationToken, unless they are required
-                if (IsHiddenParameter(parameter))
-                    continue;
-
                 ValueExpression parameterExpression;
                 if (ParameterValueMapping.TryGetValue(parameter.Name, out var exampleValue))
                 {
+                    // if we could get an example value out of the map, we just use it.
                     parameterExpression = ExampleValueSnippets.GetExpression(exampleValue, parameter.SerializationFormat);
                 }
                 else
                 {
-                    // we should not abuse `default` because it might cause ambigious calls which leads to compilation errors
+                    // if we cannot get an example value out of the map, we should skip it, unless it is required
+                    // in the required case, we should return the default value of the type.
+                    // but we should not abuse `default` because it might cause ambigious calls which leads to compilation errors
+                    if (parameter.IsOptionalInSignature)
+                        continue;
+
                     parameterExpression = parameter.Type.IsValueType && !parameter.Type.IsNullable ? Snippets.Default : Snippets.Null;
                 }
                 if (IsInlineParameter(parameter))
@@ -342,16 +344,6 @@ namespace AutoRest.CSharp.Output.Samples.Models
                 return false;
 
             return true;
-        }
-
-        private bool IsHiddenParameter(Parameter parameter)
-        {
-            // we could never hide a required parameter
-            if (!parameter.IsOptionalInSignature)
-                return false;
-
-            // we only hide a parameter when it is optional RequestContext or CancellationToken
-            return parameter == KnownParameters.RequestContext || parameter == KnownParameters.CancellationTokenParameter;
         }
 
         private InputExampleValue GetBodyParameterValue()

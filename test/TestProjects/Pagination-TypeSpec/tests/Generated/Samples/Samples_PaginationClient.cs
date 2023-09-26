@@ -179,7 +179,7 @@ namespace Pagination.Samples
             TokenCredential credential = new DefaultAzureCredential();
             PaginationClient client = new PaginationClient(endpoint, credential);
 
-            foreach (DimensionValueListItem item in client.GetMetricDimensionValues("<testRunId>", "<name>", "<metricNamespace>", null, null, null))
+            foreach (DimensionValueListItem item in client.GetMetricDimensionValues("<testRunId>", "<name>", "<metricNamespace>"))
             {
             }
         }
@@ -192,7 +192,7 @@ namespace Pagination.Samples
             TokenCredential credential = new DefaultAzureCredential();
             PaginationClient client = new PaginationClient(endpoint, credential);
 
-            await foreach (DimensionValueListItem item in client.GetMetricDimensionValuesAsync("<testRunId>", "<name>", "<metricNamespace>", null, null, null))
+            await foreach (DimensionValueListItem item in client.GetMetricDimensionValuesAsync("<testRunId>", "<name>", "<metricNamespace>"))
             {
             }
         }
@@ -491,7 +491,7 @@ namespace Pagination.Samples
             TokenCredential credential = new DefaultAzureCredential();
             PaginationClient client = new PaginationClient(endpoint, credential);
 
-            foreach (TextBlockItem item in client.GetTextBlocklistItems("<blocklistName>", null, null, null))
+            foreach (TextBlockItem item in client.GetTextBlocklistItems("<blocklistName>"))
             {
             }
         }
@@ -504,7 +504,7 @@ namespace Pagination.Samples
             TokenCredential credential = new DefaultAzureCredential();
             PaginationClient client = new PaginationClient(endpoint, credential);
 
-            await foreach (TextBlockItem item in client.GetTextBlocklistItemsAsync("<blocklistName>", null, null, null))
+            await foreach (TextBlockItem item in client.GetTextBlocklistItemsAsync("<blocklistName>"))
             {
             }
         }
