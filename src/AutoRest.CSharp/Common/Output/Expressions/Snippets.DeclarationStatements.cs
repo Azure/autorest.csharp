@@ -4,6 +4,7 @@
 using System;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
+using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.Azure;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.Base;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
@@ -77,8 +78,8 @@ namespace AutoRest.CSharp.Common.Output.Models
         public static DeclarationStatement Var(string name, OperationExpression value, out OperationExpression variable)
             => Var(name, value, d => new OperationExpression(d), out variable);
 
-        public static DeclarationStatement Var(string name, RawRequestUriBuilderExpression value, out RawRequestUriBuilderExpression variable)
-            => Var(name, value, d => new RawRequestUriBuilderExpression(d), out variable);
+        public static DeclarationStatement Var(string name, BaseRawRequestUriBuilderExpression value, out BaseRawRequestUriBuilderExpression variable)
+            => Var(name, value, d => Configuration.ApiTypes.GetRequestUriBuiilderExpression(d), out variable);
 
         public static DeclarationStatement Var(string name, RequestExpression value, out RequestExpression variable)
             => Var(name, value, d => new RequestExpression(d), out variable);
@@ -86,8 +87,8 @@ namespace AutoRest.CSharp.Common.Output.Models
         public static DeclarationStatement Var(string name, BaseResponseExpression value, out BaseResponseExpression variable)
             => Var(name, value, d => Configuration.ApiTypes.GetResponseExpression(d), out variable);
 
-        public static DeclarationStatement Var(string name, Utf8JsonRequestContentExpression value, out Utf8JsonRequestContentExpression variable)
-            => Var(name, value, d => new Utf8JsonRequestContentExpression(d), out variable);
+        public static DeclarationStatement Var(string name, BaseUtf8JsonRequestContentExpression value, out BaseUtf8JsonRequestContentExpression variable)
+            => Var(name, value, d => Configuration.ApiTypes.GetUtf8JsonRequestContentExpression(d), out variable);
 
         public static DeclarationStatement Var(string name, Utf8JsonWriterExpression value, out Utf8JsonWriterExpression variable)
             => Var(name, value, d => new Utf8JsonWriterExpression(d), out variable);

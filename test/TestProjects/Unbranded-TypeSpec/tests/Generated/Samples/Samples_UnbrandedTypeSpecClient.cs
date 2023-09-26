@@ -8,11 +8,9 @@
 using System;
 using System.Collections.Generic;
 using System.ServiceModel.Rest;
+using System.ServiceModel.Rest.Core;
 using System.Text.Json;
 using System.Threading.Tasks;
-using Azure;
-using Azure.Core;
-using Azure.Identity;
 using NUnit.Framework;
 using UnbrandedTypeSpec;
 using UnbrandedTypeSpec.Models;
@@ -26,12 +24,12 @@ namespace UnbrandedTypeSpec.Samples
         public void Example_TopAction()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            KeyCredential credential = new KeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
             Result result = client.TopAction(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"), null);
 
-            JsonElement result0 = JsonDocument.Parse(result.ContentStream).RootElement;
+            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
             Console.WriteLine(result0.GetProperty("name").ToString());
             Console.WriteLine(result0.GetProperty("requiredUnion").ToString());
             Console.WriteLine(result0.GetProperty("requiredLiteralString").ToString());
@@ -47,12 +45,12 @@ namespace UnbrandedTypeSpec.Samples
         public async Task Example_TopAction_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            KeyCredential credential = new KeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
             Result result = await client.TopActionAsync(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"), null);
 
-            JsonElement result0 = JsonDocument.Parse(result.ContentStream).RootElement;
+            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
             Console.WriteLine(result0.GetProperty("name").ToString());
             Console.WriteLine(result0.GetProperty("requiredUnion").ToString());
             Console.WriteLine(result0.GetProperty("requiredLiteralString").ToString());
@@ -68,12 +66,12 @@ namespace UnbrandedTypeSpec.Samples
         public void Example_TopAction_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            KeyCredential credential = new KeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
             Result result = client.TopAction(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"), null);
 
-            JsonElement result0 = JsonDocument.Parse(result.ContentStream).RootElement;
+            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
             Console.WriteLine(result0.GetProperty("name").ToString());
             Console.WriteLine(result0.GetProperty("requiredUnion").ToString());
             Console.WriteLine(result0.GetProperty("requiredLiteralString").ToString());
@@ -94,12 +92,12 @@ namespace UnbrandedTypeSpec.Samples
         public async Task Example_TopAction_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            KeyCredential credential = new KeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
             Result result = await client.TopActionAsync(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"), null);
 
-            JsonElement result0 = JsonDocument.Parse(result.ContentStream).RootElement;
+            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
             Console.WriteLine(result0.GetProperty("name").ToString());
             Console.WriteLine(result0.GetProperty("requiredUnion").ToString());
             Console.WriteLine(result0.GetProperty("requiredLiteralString").ToString());
@@ -120,12 +118,12 @@ namespace UnbrandedTypeSpec.Samples
         public void Example_TopAction2()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            KeyCredential credential = new KeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
             Result result = client.TopAction2(null);
 
-            JsonElement result0 = JsonDocument.Parse(result.ContentStream).RootElement;
+            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
             Console.WriteLine(result0.GetProperty("name").ToString());
             Console.WriteLine(result0.GetProperty("requiredUnion").ToString());
             Console.WriteLine(result0.GetProperty("requiredLiteralString").ToString());
@@ -141,12 +139,12 @@ namespace UnbrandedTypeSpec.Samples
         public async Task Example_TopAction2_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            KeyCredential credential = new KeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
             Result result = await client.TopAction2Async(null);
 
-            JsonElement result0 = JsonDocument.Parse(result.ContentStream).RootElement;
+            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
             Console.WriteLine(result0.GetProperty("name").ToString());
             Console.WriteLine(result0.GetProperty("requiredUnion").ToString());
             Console.WriteLine(result0.GetProperty("requiredLiteralString").ToString());
@@ -162,12 +160,12 @@ namespace UnbrandedTypeSpec.Samples
         public void Example_TopAction2_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            KeyCredential credential = new KeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
             Result result = client.TopAction2(null);
 
-            JsonElement result0 = JsonDocument.Parse(result.ContentStream).RootElement;
+            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
             Console.WriteLine(result0.GetProperty("name").ToString());
             Console.WriteLine(result0.GetProperty("requiredUnion").ToString());
             Console.WriteLine(result0.GetProperty("requiredLiteralString").ToString());
@@ -188,12 +186,12 @@ namespace UnbrandedTypeSpec.Samples
         public async Task Example_TopAction2_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            KeyCredential credential = new KeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
             Result result = await client.TopAction2Async(null);
 
-            JsonElement result0 = JsonDocument.Parse(result.ContentStream).RootElement;
+            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
             Console.WriteLine(result0.GetProperty("name").ToString());
             Console.WriteLine(result0.GetProperty("requiredUnion").ToString());
             Console.WriteLine(result0.GetProperty("requiredLiteralString").ToString());
@@ -214,10 +212,10 @@ namespace UnbrandedTypeSpec.Samples
         public void Example_PatchAction()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            KeyCredential credential = new KeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
             {
                 name = "<name>",
                 requiredUnion = "<requiredUnion>",
@@ -230,10 +228,10 @@ namespace UnbrandedTypeSpec.Samples
 {
 1234
 },
-            });
+            }).ToStream());
             Result result = client.PatchAction(content);
 
-            JsonElement result0 = JsonDocument.Parse(result.ContentStream).RootElement;
+            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
             Console.WriteLine(result0.GetProperty("name").ToString());
             Console.WriteLine(result0.GetProperty("requiredUnion").ToString());
             Console.WriteLine(result0.GetProperty("requiredLiteralString").ToString());
@@ -249,10 +247,10 @@ namespace UnbrandedTypeSpec.Samples
         public async Task Example_PatchAction_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            KeyCredential credential = new KeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
             {
                 name = "<name>",
                 requiredUnion = "<requiredUnion>",
@@ -265,10 +263,10 @@ namespace UnbrandedTypeSpec.Samples
 {
 1234
 },
-            });
+            }).ToStream());
             Result result = await client.PatchActionAsync(content);
 
-            JsonElement result0 = JsonDocument.Parse(result.ContentStream).RootElement;
+            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
             Console.WriteLine(result0.GetProperty("name").ToString());
             Console.WriteLine(result0.GetProperty("requiredUnion").ToString());
             Console.WriteLine(result0.GetProperty("requiredLiteralString").ToString());
@@ -284,10 +282,10 @@ namespace UnbrandedTypeSpec.Samples
         public void Example_PatchAction_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            KeyCredential credential = new KeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
             {
                 name = "<name>",
                 requiredUnion = "<requiredUnion>",
@@ -308,10 +306,10 @@ namespace UnbrandedTypeSpec.Samples
 {
 1234
 },
-            });
+            }).ToStream());
             Result result = client.PatchAction(content);
 
-            JsonElement result0 = JsonDocument.Parse(result.ContentStream).RootElement;
+            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
             Console.WriteLine(result0.GetProperty("name").ToString());
             Console.WriteLine(result0.GetProperty("requiredUnion").ToString());
             Console.WriteLine(result0.GetProperty("requiredLiteralString").ToString());
@@ -332,10 +330,10 @@ namespace UnbrandedTypeSpec.Samples
         public async Task Example_PatchAction_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            KeyCredential credential = new KeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
             {
                 name = "<name>",
                 requiredUnion = "<requiredUnion>",
@@ -356,10 +354,10 @@ namespace UnbrandedTypeSpec.Samples
 {
 1234
 },
-            });
+            }).ToStream());
             Result result = await client.PatchActionAsync(content);
 
-            JsonElement result0 = JsonDocument.Parse(result.ContentStream).RootElement;
+            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
             Console.WriteLine(result0.GetProperty("name").ToString());
             Console.WriteLine(result0.GetProperty("requiredUnion").ToString());
             Console.WriteLine(result0.GetProperty("requiredLiteralString").ToString());
@@ -380,10 +378,10 @@ namespace UnbrandedTypeSpec.Samples
         public void Example_AnonymousBody()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            KeyCredential credential = new KeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
             {
                 name = "<name>",
                 requiredUnion = "<requiredUnion>",
@@ -396,10 +394,10 @@ namespace UnbrandedTypeSpec.Samples
 {
 1234
 },
-            });
+            }).ToStream());
             Result result = client.AnonymousBody(content);
 
-            JsonElement result0 = JsonDocument.Parse(result.ContentStream).RootElement;
+            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
             Console.WriteLine(result0.GetProperty("name").ToString());
             Console.WriteLine(result0.GetProperty("requiredUnion").ToString());
             Console.WriteLine(result0.GetProperty("requiredLiteralString").ToString());
@@ -415,10 +413,10 @@ namespace UnbrandedTypeSpec.Samples
         public async Task Example_AnonymousBody_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            KeyCredential credential = new KeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
             {
                 name = "<name>",
                 requiredUnion = "<requiredUnion>",
@@ -431,10 +429,10 @@ namespace UnbrandedTypeSpec.Samples
 {
 1234
 },
-            });
+            }).ToStream());
             Result result = await client.AnonymousBodyAsync(content);
 
-            JsonElement result0 = JsonDocument.Parse(result.ContentStream).RootElement;
+            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
             Console.WriteLine(result0.GetProperty("name").ToString());
             Console.WriteLine(result0.GetProperty("requiredUnion").ToString());
             Console.WriteLine(result0.GetProperty("requiredLiteralString").ToString());
@@ -450,10 +448,10 @@ namespace UnbrandedTypeSpec.Samples
         public void Example_AnonymousBody_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            KeyCredential credential = new KeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
             {
                 name = "<name>",
                 requiredUnion = "<requiredUnion>",
@@ -474,10 +472,10 @@ namespace UnbrandedTypeSpec.Samples
 {
 1234
 },
-            });
+            }).ToStream());
             Result result = client.AnonymousBody(content);
 
-            JsonElement result0 = JsonDocument.Parse(result.ContentStream).RootElement;
+            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
             Console.WriteLine(result0.GetProperty("name").ToString());
             Console.WriteLine(result0.GetProperty("requiredUnion").ToString());
             Console.WriteLine(result0.GetProperty("requiredLiteralString").ToString());
@@ -498,10 +496,10 @@ namespace UnbrandedTypeSpec.Samples
         public async Task Example_AnonymousBody_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            KeyCredential credential = new KeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
             {
                 name = "<name>",
                 requiredUnion = "<requiredUnion>",
@@ -522,10 +520,10 @@ namespace UnbrandedTypeSpec.Samples
 {
 1234
 },
-            });
+            }).ToStream());
             Result result = await client.AnonymousBodyAsync(content);
 
-            JsonElement result0 = JsonDocument.Parse(result.ContentStream).RootElement;
+            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
             Console.WriteLine(result0.GetProperty("name").ToString());
             Console.WriteLine(result0.GetProperty("requiredUnion").ToString());
             Console.WriteLine(result0.GetProperty("requiredLiteralString").ToString());
@@ -546,16 +544,16 @@ namespace UnbrandedTypeSpec.Samples
         public void Example_FriendlyModel()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            KeyCredential credential = new KeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
             {
                 name = "<name>",
-            });
+            }).ToStream());
             Result result = client.FriendlyModel(content);
 
-            JsonElement result0 = JsonDocument.Parse(result.ContentStream).RootElement;
+            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
             Console.WriteLine(result0.GetProperty("name").ToString());
         }
 
@@ -564,16 +562,16 @@ namespace UnbrandedTypeSpec.Samples
         public async Task Example_FriendlyModel_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            KeyCredential credential = new KeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
             {
                 name = "<name>",
-            });
+            }).ToStream());
             Result result = await client.FriendlyModelAsync(content);
 
-            JsonElement result0 = JsonDocument.Parse(result.ContentStream).RootElement;
+            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
             Console.WriteLine(result0.GetProperty("name").ToString());
         }
 
@@ -582,7 +580,7 @@ namespace UnbrandedTypeSpec.Samples
         public void Example_FriendlyModel_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            KeyCredential credential = new KeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
             Friend notFriend = new Friend("<name>");
@@ -594,7 +592,7 @@ namespace UnbrandedTypeSpec.Samples
         public async Task Example_FriendlyModel_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            KeyCredential credential = new KeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
             Friend notFriend = new Friend("<name>");
@@ -606,16 +604,16 @@ namespace UnbrandedTypeSpec.Samples
         public void Example_FriendlyModel_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            KeyCredential credential = new KeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
             {
                 name = "<name>",
-            });
+            }).ToStream());
             Result result = client.FriendlyModel(content);
 
-            JsonElement result0 = JsonDocument.Parse(result.ContentStream).RootElement;
+            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
             Console.WriteLine(result0.GetProperty("name").ToString());
         }
 
@@ -624,16 +622,16 @@ namespace UnbrandedTypeSpec.Samples
         public async Task Example_FriendlyModel_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            KeyCredential credential = new KeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
             {
                 name = "<name>",
-            });
+            }).ToStream());
             Result result = await client.FriendlyModelAsync(content);
 
-            JsonElement result0 = JsonDocument.Parse(result.ContentStream).RootElement;
+            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
             Console.WriteLine(result0.GetProperty("name").ToString());
         }
 
@@ -642,7 +640,7 @@ namespace UnbrandedTypeSpec.Samples
         public void Example_FriendlyModel_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            KeyCredential credential = new KeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
             Friend notFriend = new Friend("<name>");
@@ -654,7 +652,7 @@ namespace UnbrandedTypeSpec.Samples
         public async Task Example_FriendlyModel_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            KeyCredential credential = new KeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
             Friend notFriend = new Friend("<name>");
@@ -666,11 +664,11 @@ namespace UnbrandedTypeSpec.Samples
         public void Example_AddTimeHeader()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            KeyCredential credential = new KeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
             Result result = client.AddTimeHeader();
-            Console.WriteLine(result.Status);
+            Console.WriteLine(result.GetRawResponse().Status);
         }
 
         [Test]
@@ -678,11 +676,11 @@ namespace UnbrandedTypeSpec.Samples
         public async Task Example_AddTimeHeader_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            KeyCredential credential = new KeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
             Result result = await client.AddTimeHeaderAsync();
-            Console.WriteLine(result.Status);
+            Console.WriteLine(result.GetRawResponse().Status);
         }
 
         [Test]
@@ -690,11 +688,11 @@ namespace UnbrandedTypeSpec.Samples
         public void Example_AddTimeHeader_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            KeyCredential credential = new KeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
             Result result = client.AddTimeHeader();
-            Console.WriteLine(result.Status);
+            Console.WriteLine(result.GetRawResponse().Status);
         }
 
         [Test]
@@ -702,11 +700,11 @@ namespace UnbrandedTypeSpec.Samples
         public async Task Example_AddTimeHeader_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            KeyCredential credential = new KeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
             Result result = await client.AddTimeHeaderAsync();
-            Console.WriteLine(result.Status);
+            Console.WriteLine(result.GetRawResponse().Status);
         }
 
         [Test]
@@ -714,16 +712,16 @@ namespace UnbrandedTypeSpec.Samples
         public void Example_StringFormat()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            KeyCredential credential = new KeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
             {
                 sourceUrl = "http://localhost:3000",
                 guid = "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a",
-            });
+            }).ToStream());
             Result result = client.StringFormat(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), content);
-            Console.WriteLine(result.Status);
+            Console.WriteLine(result.GetRawResponse().Status);
         }
 
         [Test]
@@ -731,16 +729,16 @@ namespace UnbrandedTypeSpec.Samples
         public async Task Example_StringFormat_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            KeyCredential credential = new KeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
             {
                 sourceUrl = "http://localhost:3000",
                 guid = "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a",
-            });
+            }).ToStream());
             Result result = await client.StringFormatAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), content);
-            Console.WriteLine(result.Status);
+            Console.WriteLine(result.GetRawResponse().Status);
         }
 
         [Test]
@@ -748,12 +746,12 @@ namespace UnbrandedTypeSpec.Samples
         public void Example_StringFormat_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            KeyCredential credential = new KeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
             ModelWithFormat body = new ModelWithFormat(new Uri("http://localhost:3000"), Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
             Result result = client.StringFormat(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), body);
-            Console.WriteLine(result.Status);
+            Console.WriteLine(result.GetRawResponse().Status);
         }
 
         [Test]
@@ -761,12 +759,12 @@ namespace UnbrandedTypeSpec.Samples
         public async Task Example_StringFormat_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            KeyCredential credential = new KeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
             ModelWithFormat body = new ModelWithFormat(new Uri("http://localhost:3000"), Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
             Result result = await client.StringFormatAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), body);
-            Console.WriteLine(result.Status);
+            Console.WriteLine(result.GetRawResponse().Status);
         }
 
         [Test]
@@ -774,16 +772,16 @@ namespace UnbrandedTypeSpec.Samples
         public void Example_StringFormat_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            KeyCredential credential = new KeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
             {
                 sourceUrl = "http://localhost:3000",
                 guid = "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a",
-            });
+            }).ToStream());
             Result result = client.StringFormat(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), content);
-            Console.WriteLine(result.Status);
+            Console.WriteLine(result.GetRawResponse().Status);
         }
 
         [Test]
@@ -791,16 +789,16 @@ namespace UnbrandedTypeSpec.Samples
         public async Task Example_StringFormat_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            KeyCredential credential = new KeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
             {
                 sourceUrl = "http://localhost:3000",
                 guid = "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a",
-            });
+            }).ToStream());
             Result result = await client.StringFormatAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), content);
-            Console.WriteLine(result.Status);
+            Console.WriteLine(result.GetRawResponse().Status);
         }
 
         [Test]
@@ -808,12 +806,12 @@ namespace UnbrandedTypeSpec.Samples
         public void Example_StringFormat_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            KeyCredential credential = new KeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
             ModelWithFormat body = new ModelWithFormat(new Uri("http://localhost:3000"), Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
             Result result = client.StringFormat(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), body);
-            Console.WriteLine(result.Status);
+            Console.WriteLine(result.GetRawResponse().Status);
         }
 
         [Test]
@@ -821,12 +819,12 @@ namespace UnbrandedTypeSpec.Samples
         public async Task Example_StringFormat_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            KeyCredential credential = new KeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
             ModelWithFormat body = new ModelWithFormat(new Uri("http://localhost:3000"), Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
             Result result = await client.StringFormatAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), body);
-            Console.WriteLine(result.Status);
+            Console.WriteLine(result.GetRawResponse().Status);
         }
 
         [Test]
@@ -834,16 +832,16 @@ namespace UnbrandedTypeSpec.Samples
         public void Example_ProjectedNameModel()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            KeyCredential credential = new KeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
             {
                 name = "<name>",
-            });
+            }).ToStream());
             Result result = client.ProjectedNameModel(content);
 
-            JsonElement result0 = JsonDocument.Parse(result.ContentStream).RootElement;
+            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
             Console.WriteLine(result0.GetProperty("name").ToString());
         }
 
@@ -852,16 +850,16 @@ namespace UnbrandedTypeSpec.Samples
         public async Task Example_ProjectedNameModel_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            KeyCredential credential = new KeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
             {
                 name = "<name>",
-            });
+            }).ToStream());
             Result result = await client.ProjectedNameModelAsync(content);
 
-            JsonElement result0 = JsonDocument.Parse(result.ContentStream).RootElement;
+            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
             Console.WriteLine(result0.GetProperty("name").ToString());
         }
 
@@ -870,7 +868,7 @@ namespace UnbrandedTypeSpec.Samples
         public void Example_ProjectedNameModel_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            KeyCredential credential = new KeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
             ProjectedModel modelWithProjectedName = new ProjectedModel("<name>");
@@ -882,7 +880,7 @@ namespace UnbrandedTypeSpec.Samples
         public async Task Example_ProjectedNameModel_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            KeyCredential credential = new KeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
             ProjectedModel modelWithProjectedName = new ProjectedModel("<name>");
@@ -894,16 +892,16 @@ namespace UnbrandedTypeSpec.Samples
         public void Example_ProjectedNameModel_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            KeyCredential credential = new KeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
             {
                 name = "<name>",
-            });
+            }).ToStream());
             Result result = client.ProjectedNameModel(content);
 
-            JsonElement result0 = JsonDocument.Parse(result.ContentStream).RootElement;
+            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
             Console.WriteLine(result0.GetProperty("name").ToString());
         }
 
@@ -912,16 +910,16 @@ namespace UnbrandedTypeSpec.Samples
         public async Task Example_ProjectedNameModel_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            KeyCredential credential = new KeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
             {
                 name = "<name>",
-            });
+            }).ToStream());
             Result result = await client.ProjectedNameModelAsync(content);
 
-            JsonElement result0 = JsonDocument.Parse(result.ContentStream).RootElement;
+            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
             Console.WriteLine(result0.GetProperty("name").ToString());
         }
 
@@ -930,7 +928,7 @@ namespace UnbrandedTypeSpec.Samples
         public void Example_ProjectedNameModel_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            KeyCredential credential = new KeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
             ProjectedModel modelWithProjectedName = new ProjectedModel("<name>");
@@ -942,7 +940,7 @@ namespace UnbrandedTypeSpec.Samples
         public async Task Example_ProjectedNameModel_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            KeyCredential credential = new KeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
             ProjectedModel modelWithProjectedName = new ProjectedModel("<name>");
@@ -954,7 +952,7 @@ namespace UnbrandedTypeSpec.Samples
         public void Example_ReturnsAnonymousModel()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            KeyCredential credential = new KeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
             Result result = client.ReturnsAnonymousModel(null);
@@ -967,7 +965,7 @@ namespace UnbrandedTypeSpec.Samples
         public async Task Example_ReturnsAnonymousModel_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            KeyCredential credential = new KeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
             Result result = await client.ReturnsAnonymousModelAsync(null);
@@ -980,7 +978,7 @@ namespace UnbrandedTypeSpec.Samples
         public void Example_ReturnsAnonymousModel_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            KeyCredential credential = new KeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
             Result result = client.ReturnsAnonymousModel(null);
@@ -993,7 +991,7 @@ namespace UnbrandedTypeSpec.Samples
         public async Task Example_ReturnsAnonymousModel_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            KeyCredential credential = new KeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
             Result result = await client.ReturnsAnonymousModelAsync(null);
@@ -1006,11 +1004,11 @@ namespace UnbrandedTypeSpec.Samples
         public void Example_HeadAsBoolean()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            KeyCredential credential = new KeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
             Result<bool> result = client.HeadAsBoolean("<id>");
-            Console.WriteLine(result.GetRawResult().Status);
+            Console.WriteLine(result.GetRawResponse().Status);
         }
 
         [Test]
@@ -1018,11 +1016,11 @@ namespace UnbrandedTypeSpec.Samples
         public async Task Example_HeadAsBoolean_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            KeyCredential credential = new KeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
             Result<bool> result = await client.HeadAsBooleanAsync("<id>");
-            Console.WriteLine(result.GetRawResult().Status);
+            Console.WriteLine(result.GetRawResponse().Status);
         }
 
         [Test]
@@ -1030,11 +1028,11 @@ namespace UnbrandedTypeSpec.Samples
         public void Example_HeadAsBoolean_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            KeyCredential credential = new KeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
             Result<bool> result = client.HeadAsBoolean("<id>");
-            Console.WriteLine(result.GetRawResult().Status);
+            Console.WriteLine(result.GetRawResponse().Status);
         }
 
         [Test]
@@ -1042,11 +1040,11 @@ namespace UnbrandedTypeSpec.Samples
         public async Task Example_HeadAsBoolean_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            KeyCredential credential = new KeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
             Result<bool> result = await client.HeadAsBooleanAsync("<id>");
-            Console.WriteLine(result.GetRawResult().Status);
+            Console.WriteLine(result.GetRawResponse().Status);
         }
 
         [Test]
@@ -1054,12 +1052,12 @@ namespace UnbrandedTypeSpec.Samples
         public void Example_SayHi()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            KeyCredential credential = new KeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
             Result result = client.SayHi("<headParameter>", "<queryParameter>", null, null);
 
-            JsonElement result0 = JsonDocument.Parse(result.ContentStream).RootElement;
+            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
             Console.WriteLine(result0.GetProperty("name").ToString());
             Console.WriteLine(result0.GetProperty("requiredUnion").ToString());
             Console.WriteLine(result0.GetProperty("requiredLiteralString").ToString());
@@ -1075,12 +1073,12 @@ namespace UnbrandedTypeSpec.Samples
         public async Task Example_SayHi_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            KeyCredential credential = new KeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
             Result result = await client.SayHiAsync("<headParameter>", "<queryParameter>", null, null);
 
-            JsonElement result0 = JsonDocument.Parse(result.ContentStream).RootElement;
+            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
             Console.WriteLine(result0.GetProperty("name").ToString());
             Console.WriteLine(result0.GetProperty("requiredUnion").ToString());
             Console.WriteLine(result0.GetProperty("requiredLiteralString").ToString());
@@ -1096,12 +1094,12 @@ namespace UnbrandedTypeSpec.Samples
         public void Example_SayHi_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            KeyCredential credential = new KeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
             Result result = client.SayHi("<headParameter>", "<queryParameter>", "<optionalQuery>", null);
 
-            JsonElement result0 = JsonDocument.Parse(result.ContentStream).RootElement;
+            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
             Console.WriteLine(result0.GetProperty("name").ToString());
             Console.WriteLine(result0.GetProperty("requiredUnion").ToString());
             Console.WriteLine(result0.GetProperty("requiredLiteralString").ToString());
@@ -1122,12 +1120,12 @@ namespace UnbrandedTypeSpec.Samples
         public async Task Example_SayHi_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            KeyCredential credential = new KeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
             Result result = await client.SayHiAsync("<headParameter>", "<queryParameter>", "<optionalQuery>", null);
 
-            JsonElement result0 = JsonDocument.Parse(result.ContentStream).RootElement;
+            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
             Console.WriteLine(result0.GetProperty("name").ToString());
             Console.WriteLine(result0.GetProperty("requiredUnion").ToString());
             Console.WriteLine(result0.GetProperty("requiredLiteralString").ToString());
@@ -1148,10 +1146,10 @@ namespace UnbrandedTypeSpec.Samples
         public void Example_HelloAgain()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            KeyCredential credential = new KeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
             {
                 requiredString = "<requiredString>",
                 requiredInt = 1234,
@@ -1188,10 +1186,10 @@ namespace UnbrandedTypeSpec.Samples
                     requiredExtensibleEnum = "1",
                     requiredFixedEnum = "1",
                 },
-            });
+            }).ToStream());
             Result result = client.HelloAgain("<p2>", "<p1>", content);
 
-            JsonElement result0 = JsonDocument.Parse(result.ContentStream).RootElement;
+            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
             Console.WriteLine(result0.GetProperty("requiredString").ToString());
             Console.WriteLine(result0.GetProperty("requiredInt").ToString());
             Console.WriteLine(result0.GetProperty("requiredCollection")[0].ToString());
@@ -1217,10 +1215,10 @@ namespace UnbrandedTypeSpec.Samples
         public async Task Example_HelloAgain_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            KeyCredential credential = new KeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
             {
                 requiredString = "<requiredString>",
                 requiredInt = 1234,
@@ -1257,10 +1255,10 @@ namespace UnbrandedTypeSpec.Samples
                     requiredExtensibleEnum = "1",
                     requiredFixedEnum = "1",
                 },
-            });
+            }).ToStream());
             Result result = await client.HelloAgainAsync("<p2>", "<p1>", content);
 
-            JsonElement result0 = JsonDocument.Parse(result.ContentStream).RootElement;
+            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
             Console.WriteLine(result0.GetProperty("requiredString").ToString());
             Console.WriteLine(result0.GetProperty("requiredInt").ToString());
             Console.WriteLine(result0.GetProperty("requiredCollection")[0].ToString());
@@ -1286,10 +1284,10 @@ namespace UnbrandedTypeSpec.Samples
         public void Example_HelloAgain_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            KeyCredential credential = new KeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
             {
                 requiredString = "<requiredString>",
                 requiredInt = 1234,
@@ -1360,10 +1358,10 @@ namespace UnbrandedTypeSpec.Samples
                     requiredExtensibleEnum = "1",
                     requiredFixedEnum = "1",
                 },
-            });
+            }).ToStream());
             Result result = client.HelloAgain("<p2>", "<p1>", content);
 
-            JsonElement result0 = JsonDocument.Parse(result.ContentStream).RootElement;
+            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
             Console.WriteLine(result0.GetProperty("requiredString").ToString());
             Console.WriteLine(result0.GetProperty("requiredInt").ToString());
             Console.WriteLine(result0.GetProperty("requiredCollection")[0].ToString());
@@ -1406,10 +1404,10 @@ namespace UnbrandedTypeSpec.Samples
         public async Task Example_HelloAgain_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            KeyCredential credential = new KeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
             {
                 requiredString = "<requiredString>",
                 requiredInt = 1234,
@@ -1480,10 +1478,10 @@ namespace UnbrandedTypeSpec.Samples
                     requiredExtensibleEnum = "1",
                     requiredFixedEnum = "1",
                 },
-            });
+            }).ToStream());
             Result result = await client.HelloAgainAsync("<p2>", "<p1>", content);
 
-            JsonElement result0 = JsonDocument.Parse(result.ContentStream).RootElement;
+            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
             Console.WriteLine(result0.GetProperty("requiredString").ToString());
             Console.WriteLine(result0.GetProperty("requiredInt").ToString());
             Console.WriteLine(result0.GetProperty("requiredCollection")[0].ToString());
@@ -1526,10 +1524,10 @@ namespace UnbrandedTypeSpec.Samples
         public void Example_NoContentType()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            KeyCredential credential = new KeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
             {
                 requiredString = "<requiredString>",
                 requiredInt = 1234,
@@ -1566,10 +1564,10 @@ namespace UnbrandedTypeSpec.Samples
                     requiredExtensibleEnum = "1",
                     requiredFixedEnum = "1",
                 },
-            });
+            }).ToStream());
             Result result = client.NoContentType("<p2>", "<p1>", content);
 
-            JsonElement result0 = JsonDocument.Parse(result.ContentStream).RootElement;
+            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
             Console.WriteLine(result0.GetProperty("requiredString").ToString());
             Console.WriteLine(result0.GetProperty("requiredInt").ToString());
             Console.WriteLine(result0.GetProperty("requiredCollection")[0].ToString());
@@ -1595,10 +1593,10 @@ namespace UnbrandedTypeSpec.Samples
         public async Task Example_NoContentType_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            KeyCredential credential = new KeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
             {
                 requiredString = "<requiredString>",
                 requiredInt = 1234,
@@ -1635,10 +1633,10 @@ namespace UnbrandedTypeSpec.Samples
                     requiredExtensibleEnum = "1",
                     requiredFixedEnum = "1",
                 },
-            });
+            }).ToStream());
             Result result = await client.NoContentTypeAsync("<p2>", "<p1>", content);
 
-            JsonElement result0 = JsonDocument.Parse(result.ContentStream).RootElement;
+            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
             Console.WriteLine(result0.GetProperty("requiredString").ToString());
             Console.WriteLine(result0.GetProperty("requiredInt").ToString());
             Console.WriteLine(result0.GetProperty("requiredCollection")[0].ToString());
@@ -1664,10 +1662,10 @@ namespace UnbrandedTypeSpec.Samples
         public void Example_NoContentType_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            KeyCredential credential = new KeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
             {
                 requiredString = "<requiredString>",
                 requiredInt = 1234,
@@ -1738,10 +1736,10 @@ namespace UnbrandedTypeSpec.Samples
                     requiredExtensibleEnum = "1",
                     requiredFixedEnum = "1",
                 },
-            });
+            }).ToStream());
             Result result = client.NoContentType("<p2>", "<p1>", content);
 
-            JsonElement result0 = JsonDocument.Parse(result.ContentStream).RootElement;
+            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
             Console.WriteLine(result0.GetProperty("requiredString").ToString());
             Console.WriteLine(result0.GetProperty("requiredInt").ToString());
             Console.WriteLine(result0.GetProperty("requiredCollection")[0].ToString());
@@ -1784,10 +1782,10 @@ namespace UnbrandedTypeSpec.Samples
         public async Task Example_NoContentType_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            KeyCredential credential = new KeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
             {
                 requiredString = "<requiredString>",
                 requiredInt = 1234,
@@ -1858,10 +1856,10 @@ namespace UnbrandedTypeSpec.Samples
                     requiredExtensibleEnum = "1",
                     requiredFixedEnum = "1",
                 },
-            });
+            }).ToStream());
             Result result = await client.NoContentTypeAsync("<p2>", "<p1>", content);
 
-            JsonElement result0 = JsonDocument.Parse(result.ContentStream).RootElement;
+            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
             Console.WriteLine(result0.GetProperty("requiredString").ToString());
             Console.WriteLine(result0.GetProperty("requiredInt").ToString());
             Console.WriteLine(result0.GetProperty("requiredCollection")[0].ToString());
@@ -1904,12 +1902,12 @@ namespace UnbrandedTypeSpec.Samples
         public void Example_HelloDemo2()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            KeyCredential credential = new KeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
             Result result = client.HelloDemo2(null);
 
-            JsonElement result0 = JsonDocument.Parse(result.ContentStream).RootElement;
+            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
             Console.WriteLine(result0.GetProperty("name").ToString());
             Console.WriteLine(result0.GetProperty("requiredUnion").ToString());
             Console.WriteLine(result0.GetProperty("requiredLiteralString").ToString());
@@ -1925,12 +1923,12 @@ namespace UnbrandedTypeSpec.Samples
         public async Task Example_HelloDemo2_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            KeyCredential credential = new KeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
             Result result = await client.HelloDemo2Async(null);
 
-            JsonElement result0 = JsonDocument.Parse(result.ContentStream).RootElement;
+            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
             Console.WriteLine(result0.GetProperty("name").ToString());
             Console.WriteLine(result0.GetProperty("requiredUnion").ToString());
             Console.WriteLine(result0.GetProperty("requiredLiteralString").ToString());
@@ -1946,12 +1944,12 @@ namespace UnbrandedTypeSpec.Samples
         public void Example_HelloDemo2_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            KeyCredential credential = new KeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
             Result result = client.HelloDemo2(null);
 
-            JsonElement result0 = JsonDocument.Parse(result.ContentStream).RootElement;
+            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
             Console.WriteLine(result0.GetProperty("name").ToString());
             Console.WriteLine(result0.GetProperty("requiredUnion").ToString());
             Console.WriteLine(result0.GetProperty("requiredLiteralString").ToString());
@@ -1972,12 +1970,12 @@ namespace UnbrandedTypeSpec.Samples
         public async Task Example_HelloDemo2_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            KeyCredential credential = new KeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
             Result result = await client.HelloDemo2Async(null);
 
-            JsonElement result0 = JsonDocument.Parse(result.ContentStream).RootElement;
+            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
             Console.WriteLine(result0.GetProperty("name").ToString());
             Console.WriteLine(result0.GetProperty("requiredUnion").ToString());
             Console.WriteLine(result0.GetProperty("requiredLiteralString").ToString());
@@ -1998,10 +1996,10 @@ namespace UnbrandedTypeSpec.Samples
         public void Example_CreateLiteral()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            KeyCredential credential = new KeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
             {
                 name = "<name>",
                 requiredUnion = "<requiredUnion>",
@@ -2014,10 +2012,10 @@ namespace UnbrandedTypeSpec.Samples
 {
 1234
 },
-            });
+            }).ToStream());
             Result result = client.CreateLiteral(content);
 
-            JsonElement result0 = JsonDocument.Parse(result.ContentStream).RootElement;
+            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
             Console.WriteLine(result0.GetProperty("name").ToString());
             Console.WriteLine(result0.GetProperty("requiredUnion").ToString());
             Console.WriteLine(result0.GetProperty("requiredLiteralString").ToString());
@@ -2033,10 +2031,10 @@ namespace UnbrandedTypeSpec.Samples
         public async Task Example_CreateLiteral_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            KeyCredential credential = new KeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
             {
                 name = "<name>",
                 requiredUnion = "<requiredUnion>",
@@ -2049,10 +2047,10 @@ namespace UnbrandedTypeSpec.Samples
 {
 1234
 },
-            });
+            }).ToStream());
             Result result = await client.CreateLiteralAsync(content);
 
-            JsonElement result0 = JsonDocument.Parse(result.ContentStream).RootElement;
+            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
             Console.WriteLine(result0.GetProperty("name").ToString());
             Console.WriteLine(result0.GetProperty("requiredUnion").ToString());
             Console.WriteLine(result0.GetProperty("requiredLiteralString").ToString());
@@ -2068,10 +2066,10 @@ namespace UnbrandedTypeSpec.Samples
         public void Example_CreateLiteral_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            KeyCredential credential = new KeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
             {
                 name = "<name>",
                 requiredUnion = "<requiredUnion>",
@@ -2092,10 +2090,10 @@ namespace UnbrandedTypeSpec.Samples
 {
 1234
 },
-            });
+            }).ToStream());
             Result result = client.CreateLiteral(content);
 
-            JsonElement result0 = JsonDocument.Parse(result.ContentStream).RootElement;
+            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
             Console.WriteLine(result0.GetProperty("name").ToString());
             Console.WriteLine(result0.GetProperty("requiredUnion").ToString());
             Console.WriteLine(result0.GetProperty("requiredLiteralString").ToString());
@@ -2116,10 +2114,10 @@ namespace UnbrandedTypeSpec.Samples
         public async Task Example_CreateLiteral_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            KeyCredential credential = new KeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
             {
                 name = "<name>",
                 requiredUnion = "<requiredUnion>",
@@ -2140,10 +2138,10 @@ namespace UnbrandedTypeSpec.Samples
 {
 1234
 },
-            });
+            }).ToStream());
             Result result = await client.CreateLiteralAsync(content);
 
-            JsonElement result0 = JsonDocument.Parse(result.ContentStream).RootElement;
+            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
             Console.WriteLine(result0.GetProperty("name").ToString());
             Console.WriteLine(result0.GetProperty("requiredUnion").ToString());
             Console.WriteLine(result0.GetProperty("requiredLiteralString").ToString());
@@ -2164,12 +2162,12 @@ namespace UnbrandedTypeSpec.Samples
         public void Example_HelloLiteral()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            KeyCredential credential = new KeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
             Result result = client.HelloLiteral(null);
 
-            JsonElement result0 = JsonDocument.Parse(result.ContentStream).RootElement;
+            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
             Console.WriteLine(result0.GetProperty("name").ToString());
             Console.WriteLine(result0.GetProperty("requiredUnion").ToString());
             Console.WriteLine(result0.GetProperty("requiredLiteralString").ToString());
@@ -2185,12 +2183,12 @@ namespace UnbrandedTypeSpec.Samples
         public async Task Example_HelloLiteral_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            KeyCredential credential = new KeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
             Result result = await client.HelloLiteralAsync(null);
 
-            JsonElement result0 = JsonDocument.Parse(result.ContentStream).RootElement;
+            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
             Console.WriteLine(result0.GetProperty("name").ToString());
             Console.WriteLine(result0.GetProperty("requiredUnion").ToString());
             Console.WriteLine(result0.GetProperty("requiredLiteralString").ToString());
@@ -2206,12 +2204,12 @@ namespace UnbrandedTypeSpec.Samples
         public void Example_HelloLiteral_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            KeyCredential credential = new KeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
             Result result = client.HelloLiteral(null);
 
-            JsonElement result0 = JsonDocument.Parse(result.ContentStream).RootElement;
+            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
             Console.WriteLine(result0.GetProperty("name").ToString());
             Console.WriteLine(result0.GetProperty("requiredUnion").ToString());
             Console.WriteLine(result0.GetProperty("requiredLiteralString").ToString());
@@ -2232,12 +2230,12 @@ namespace UnbrandedTypeSpec.Samples
         public async Task Example_HelloLiteral_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            KeyCredential credential = new KeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
             Result result = await client.HelloLiteralAsync(null);
 
-            JsonElement result0 = JsonDocument.Parse(result.ContentStream).RootElement;
+            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
             Console.WriteLine(result0.GetProperty("name").ToString());
             Console.WriteLine(result0.GetProperty("requiredUnion").ToString());
             Console.WriteLine(result0.GetProperty("requiredLiteralString").ToString());
@@ -2258,12 +2256,12 @@ namespace UnbrandedTypeSpec.Samples
         public void Example_GetUnknownValue()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            KeyCredential credential = new KeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
             Result result = client.GetUnknownValue(null);
 
-            JsonElement result0 = JsonDocument.Parse(result.ContentStream).RootElement;
+            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
             Console.WriteLine(result0.ToString());
         }
 
@@ -2272,12 +2270,12 @@ namespace UnbrandedTypeSpec.Samples
         public async Task Example_GetUnknownValue_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            KeyCredential credential = new KeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
             Result result = await client.GetUnknownValueAsync(null);
 
-            JsonElement result0 = JsonDocument.Parse(result.ContentStream).RootElement;
+            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
             Console.WriteLine(result0.ToString());
         }
 
@@ -2286,12 +2284,12 @@ namespace UnbrandedTypeSpec.Samples
         public void Example_GetUnknownValue_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            KeyCredential credential = new KeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
             Result result = client.GetUnknownValue(null);
 
-            JsonElement result0 = JsonDocument.Parse(result.ContentStream).RootElement;
+            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
             Console.WriteLine(result0.ToString());
         }
 
@@ -2300,12 +2298,12 @@ namespace UnbrandedTypeSpec.Samples
         public async Task Example_GetUnknownValue_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            KeyCredential credential = new KeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
             Result result = await client.GetUnknownValueAsync(null);
 
-            JsonElement result0 = JsonDocument.Parse(result.ContentStream).RootElement;
+            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
             Console.WriteLine(result0.ToString());
         }
     }

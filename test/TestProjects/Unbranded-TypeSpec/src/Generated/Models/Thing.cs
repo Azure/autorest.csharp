@@ -8,8 +8,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.ServiceModel.Rest.Shared;
-using System.ServiceModel.Rest.Shared.Core.Serialization;
+using System.ServiceModel.Rest.Experimental;
+using System.ServiceModel.Rest.Experimental.Core.Serialization;
 
 namespace UnbrandedTypeSpec.Models
 {

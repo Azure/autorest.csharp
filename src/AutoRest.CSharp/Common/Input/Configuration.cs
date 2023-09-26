@@ -211,6 +211,7 @@ namespace AutoRest.CSharp.Common.Input
 
         private static ApiTypes? _apiTypes;
         public static ApiTypes ApiTypes => _apiTypes ?? new AzureApiTypes();
+        public static bool IsBranded => ApiTypes is AzureApiTypes;
 
         public static bool ShouldTreatBase64AsBinaryData { get; private set; }
 

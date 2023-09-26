@@ -17,7 +17,6 @@ using AutoRest.CSharp.Output.Models.Serialization.Json;
 using AutoRest.CSharp.Output.Models.Serialization.Xml;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
-using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.Core;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
@@ -46,7 +45,9 @@ namespace AutoRest.CSharp.Generation.Writers
                 var request = new CodeWriterDeclaration("request");
                 var uri = new CodeWriterDeclaration("uri");
 
-                var extraCloseParen = Configuration.ApiTypes is AzureApiTypes ? string.Empty : ")";
+                //var extraCloseParen = Configuration.ApiTypes is AzureApiTypes ? string.Empty : ")";
+                var extraCloseParen = string.Empty;
+
                 if (clientMethod.Parameters.Contains(KnownParameters.RequestContext))
                 {
                     writer.Append($"var {message:D} = {Configuration.ApiTypes.GetHttpPipelineCreateMessageFormat(true)}");
@@ -61,16 +62,16 @@ namespace AutoRest.CSharp.Generation.Writers
                     writer.Line($"var {message:D} = {Configuration.ApiTypes.GetHttpPipelineCreateMessageFormat(false)}){extraCloseParen};");
                 }
 
-                writer.Line($"var {request:D} = {message}.Request;");
+                writer.Line($"var {request:D} = {message}.{Configuration.ApiTypes.HttpMessageRequestName};");
 
                 var method = clientMethod.Request.HttpMethod;
                 if (!clientMethod.BufferResponse)
                 {
                     writer.Line($"{message}.BufferResponse = false;");
                 }
-                writer.Line($"{request}.Method = {typeof(RequestMethod)}.{method.ToRequestMethodName()};");
+                writer.Line(Configuration.ApiTypes.GetSetMethodString(request.RequestedName, method.Method));
 
-                writer.Line($"var {uri:D} = new RawRequestUriBuilder();");
+                writer.Line($"var {uri:D} = new {Configuration.ApiTypes.GetRequestUriBuiilderExpression().Type}();");
                 foreach (var segment in clientMethod.Request.PathSegments)
                 {
                     var value = GetFieldReference(fields, segment.Value);
@@ -96,7 +97,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     WriteQueryParameter(writer, uri, queryParameter, fields, clientParameters);
                 }
 
-                writer.Line($"{request}.Uri = {uri};");
+                writer.Line(Configuration.ApiTypes.GetSetUriString(request.RequestedName, uri.RequestedName));
 
                 WriteHeaders(writer, clientMethod, request, content: false, fields);
 
@@ -104,7 +105,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 {
                     case RequestContentRequestBody body:
                         WriteHeaders(writer, clientMethod, request, content: true, fields);
-                        writer.Line($"{request}.Content = {body.Parameter.Name};");
+                        writer.Line(Configuration.ApiTypes.GetSetContentString(request.RequestedName, body.Parameter.Name));
                         break;
                     case SchemaRequestBody body:
                         using (WriteValueNullCheck(writer, body.Value))
@@ -118,7 +119,7 @@ namespace AutoRest.CSharp.Generation.Writers
                         using (WriteValueNullCheck(writer, binaryBody.Value))
                         {
                             WriteHeaders(writer, clientMethod, request, content: true, fields);
-                            writer.Append($"{request}.Content = {typeof(RequestContent)}.Create(");
+                            writer.Append($"{request}.Content = {Configuration.ApiTypes.RequestContentType}.{Configuration.ApiTypes.RequestContentCreateName}(");
                             WriteConstantOrParameter(writer, binaryBody.Value);
                             writer.Line($");");
                         }
@@ -145,7 +146,7 @@ namespace AutoRest.CSharp.Generation.Writers
                                 case BinaryRequestBody binaryBody:
                                     using (WriteValueNullCheck(writer, binaryBody.Value))
                                     {
-                                        writer.Append($"{multipartContent}.Add({typeof(RequestContent)}.Create(");
+                                        writer.Append($"{multipartContent}.Add({Configuration.ApiTypes.RequestContentType}.{Configuration.ApiTypes.RequestContentCreateName}(");
                                         WriteConstantOrParameter(writer, binaryBody.Value);
                                         writer.Line($"), {bodyParameter.Name:L}, null);");
                                     }
@@ -162,7 +163,7 @@ namespace AutoRest.CSharp.Generation.Writers
                                     var collectionItemVariable = new CodeWriterDeclaration("value");
                                     using (writer.Scope($"foreach (var {collectionItemVariable:D} in {collectionBody.Value.Reference.Name})"))
                                     {
-                                        writer.Append($"{multipartContent}.Add({typeof(RequestContent)}.Create({collectionItemVariable}), {bodyParameter.Name:L}, null);");
+                                        writer.Append($"{multipartContent}.Add({Configuration.ApiTypes.RequestContentType}.{Configuration.ApiTypes.RequestContentCreateName}({collectionItemVariable}), {bodyParameter.Name:L}, null);");
                                     }
                                     break;
                                 default:
@@ -243,7 +244,7 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 if (header.IsContentHeader == content)
                 {
-                    WriteHeader(writer, request, header, fields);
+                    Configuration.ApiTypes.WriteHeaderMethod(writer, request, header, fields);
                 }
             }
         }
@@ -281,7 +282,7 @@ namespace AutoRest.CSharp.Generation.Writers
             };
         }
 
-        private static void WriteHeader(CodeWriter writer, CodeWriterDeclaration request, RequestHeader header, ClientFields? fields)
+        internal static void WriteHeader(CodeWriter writer, CodeWriterDeclaration request, RequestHeader header, ClientFields? fields)
         {
             string? delimiter = header.Delimiter;
             string method = delimiter != null
@@ -294,7 +295,8 @@ namespace AutoRest.CSharp.Generation.Writers
                 if (value.Type.Equals(typeof(MatchConditions)) || value.Type.Equals(typeof(RequestConditions)))
                 {
                     writer.Append($"{request}.Headers.{method}(");
-                } else
+                }
+                else
                 {
                     writer.Append($"{request}.Headers.{method}({header.Name:L}, ");
                 }
@@ -317,12 +319,42 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
+        internal static void WriteHeaderSystem(CodeWriter writer, CodeWriterDeclaration request, RequestHeader header, ClientFields? fields)
+        {
+            string? delimiter = header.Delimiter;
+
+            var value = GetFieldReference(fields, header.Value);
+            using (WriteValueNullCheck(writer, value))
+            {
+                writer.Append($"{request}.SetHeaderValue({header.Name:L}, ");
+                WriteConstantOrParameter(writer, value, enumAsString: true);
+                var formatSpecifier = header.Format.ToFormatSpecifier();
+                if (formatSpecifier != null)
+                {
+                    writer.Append($".ToString({formatSpecifier:L})");
+                }
+                writer.Line($");");
+            }
+        }
+
         private static void WritePathSegment(CodeWriter writer, CodeWriterDeclaration uri, PathSegment segment, ReferenceOrConstant value, string? methodName = null)
         {
             methodName ??= segment.IsRaw ? "AppendRaw" : "AppendPath";
             writer.Append($"{uri}.{methodName}(");
             WriteConstantOrParameter(writer, value, enumAsString: !segment.IsRaw || TypeFactory.IsExtendableEnum(value.Type));
-            WriteSerializationFormat(writer, segment.Format);
+            if (!Configuration.IsBranded)
+            {
+                if (value.Type.IsFrameworkType && value.Type.FrameworkType != typeof(string))
+                {
+                    writer.Append($".ToString(");
+                    WriteSerializationFormat(writer, segment.Format);
+                    writer.AppendRaw(")");
+                }
+            }
+            else
+            {
+                WriteSerializationFormat(writer, segment.Format);
+            }
             writer.Line($", {segment.Escape:L});");
         }
 
@@ -351,7 +383,7 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             if (constantOrReference.IsConstant)
             {
-                return constantOrReference.Constant.GetConstantFormattable();
+                return constantOrReference.Constant.GetConstantFormattable(!Configuration.IsBranded);
             }
 
             if (!ignoreNullability && constantOrReference.Type.IsNullable && constantOrReference.Type.IsValueType)
@@ -372,7 +404,14 @@ namespace AutoRest.CSharp.Generation.Writers
             var formatSpecifier = format.ToFormatSpecifier();
             if (formatSpecifier != null)
             {
-                writer.Append($", {formatSpecifier:L}");
+                if (Configuration.IsBranded)
+                {
+                    writer.Append($", {formatSpecifier:L}");
+                }
+                else
+                {
+                    writer.Append($"{formatSpecifier:L}");
+                }
             }
         }
 
