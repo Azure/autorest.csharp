@@ -76,59 +76,43 @@ namespace MgmtCustomizations.Models
         }
 
         /// <summary>
-        /// <member name="M:MgmtCustomizations.Models.ArmMgmtCustomizationsModelFactory.Pet(System.String,System.Int32)">
-        ///     <summary> Initializes a new instance of Pet. </summary>
-        ///     <param name="name"> The name of the pet. </param>
-        ///     <param name="size">
-        ///     The size of the pet. This property here is mocking the following scenario:
-        ///     Despite in the swagger it has a type of string, in the real payload of this request, the service is actually sending using a number, therefore the type in this swagger here is wrong and we have to fix it using customization code.
-        ///     </param>
-        ///     <returns> A new <see cref="T:MgmtCustomizations.Models.Pet"/> instance for mocking. </returns>
-        /// </member>
-        ///
-        /// </summary>
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        public static Pet Pet(string name, int size)
-        {
-            return Pet(name, size, default);
-        }
-
-        /// <summary>
-        /// <member name="M:MgmtCustomizations.Models.ArmMgmtCustomizationsModelFactory.Cat(System.String,System.Int32,System.String)">
+        /// <member name="M:MgmtCustomizations.Models.ArmMgmtCustomizationsModelFactory.Cat(System.String,System.Int32,System.Nullable{System.DateTimeOffset},System.String)">
         ///     <summary> Initializes a new instance of Cat. </summary>
         ///     <param name="name"> The name of the pet. </param>
         ///     <param name="size">
         ///     The size of the pet. This property here is mocking the following scenario:
         ///     Despite in the swagger it has a type of string, in the real payload of this request, the service is actually sending using a number, therefore the type in this swagger here is wrong and we have to fix it using customization code.
         ///     </param>
+        ///     <param name="dateOfBirth"> Pet date of birth. </param>
         ///     <param name="meow"> A cat can meow. </param>
         ///     <returns> A new <see cref="T:MgmtCustomizations.Models.Cat"/> instance for mocking. </returns>
         /// </member>
         ///
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static Cat Cat(string name, int size, string meow)
+        public static Cat Cat(string name, int size, DateTimeOffset? dateOfBirth, string meow)
         {
-            return Cat(name, size, default, default, default, meow);
+            return Cat(name, size, dateOfBirth, default, default, meow);
         }
 
         /// <summary>
-        /// <member name="M:MgmtCustomizations.Models.ArmMgmtCustomizationsModelFactory.Dog(System.String,System.Int32,System.String)">
+        /// <member name="M:MgmtCustomizations.Models.ArmMgmtCustomizationsModelFactory.Dog(System.String,System.Int32,System.Nullable{System.DateTimeOffset},System.String)">
         ///     <summary> Initializes a new instance of Dog. </summary>
         ///     <param name="name"> The name of the pet. </param>
         ///     <param name="size">
         ///     The size of the pet. This property here is mocking the following scenario:
         ///     Despite in the swagger it has a type of string, in the real payload of this request, the service is actually sending using a number, therefore the type in this swagger here is wrong and we have to fix it using customization code.
         ///     </param>
+        ///     <param name="dateOfBirth"> Pet date of birth. </param>
         ///     <param name="bark"> A dog can bark. </param>
         ///     <returns> A new <see cref="T:MgmtCustomizations.Models.Dog"/> instance for mocking. </returns>
         /// </member>
         ///
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static Dog Dog(string name, int size, string bark)
+        public static Dog Dog(string name, int size, DateTimeOffset? dateOfBirth, string bark)
         {
-            return Dog(name, size, default, default, bark, default);
+            return Dog(name, size, dateOfBirth, default, bark, default);
         }
     }
 }
