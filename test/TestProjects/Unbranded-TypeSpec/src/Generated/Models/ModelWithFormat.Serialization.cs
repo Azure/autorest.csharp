@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System.ServiceModel.Rest.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -22,8 +23,8 @@ namespace UnbrandedTypeSpec.Models
             writer.WriteEndObject();
         }
 
-        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
-        internal virtual RequestContent ToRequestContent()
+        /// <summary> Convert into a Utf8JsonRequestBody. </summary>
+        internal virtual RequestBody ToRequestBody()
         {
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(this);

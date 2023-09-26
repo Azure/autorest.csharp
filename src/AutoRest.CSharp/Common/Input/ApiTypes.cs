@@ -97,5 +97,9 @@ namespace AutoRest.CSharp.Common.Input
         public abstract Action<CodeWriter, CodeWriterDeclaration, RequestHeader, ClientFields?> WriteHeaderMethod { get; }
 
         public abstract FormattableString GetSetContentString(string requestName, string contentName);
+
+        public abstract Type RequestContentType { get; }
+        public abstract string ToRequestContentName { get; }
+        public abstract string RequestContentCreateName { get; }
     }
 }

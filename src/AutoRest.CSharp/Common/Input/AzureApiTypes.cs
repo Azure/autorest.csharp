@@ -8,7 +8,6 @@ using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
-using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.Core;
@@ -76,5 +75,9 @@ namespace AutoRest.CSharp.Common.Input
 
         public override FormattableString GetSetContentString(string requestName, string contentName)
             => $"{requestName}.Content = {contentName};";
+
+        public override Type RequestContentType => typeof(RequestContent);
+        public override string ToRequestContentName => "ToRequestContent";
+        public override string RequestContentCreateName => nameof(RequestContent.Create);
     }
 }
