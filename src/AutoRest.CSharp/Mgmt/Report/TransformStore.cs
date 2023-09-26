@@ -18,6 +18,12 @@ namespace AutoRest.CSharp.Mgmt.Report
         {
         }
 
+        public void Reset()
+        {
+            this._transformItemDict = new Dictionary<TransformItem, List<TransformLog>>();
+            this._logIndex = 0;
+        }
+
         public void AddTransformer(TransformItem item)
         {
             this._transformItemDict.Add(item, new List<TransformLog>());
