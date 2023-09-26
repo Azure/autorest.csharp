@@ -3,7 +3,5 @@
 
 namespace AutoRest.CSharp.Common.Output.Expressions.ValueExpressions
 {
-    internal sealed record LiteralExpression(object Value) : ValueExpression
-    {
-    }
+    internal record LiteralExpression(object Value) : ValueExpression;
 }

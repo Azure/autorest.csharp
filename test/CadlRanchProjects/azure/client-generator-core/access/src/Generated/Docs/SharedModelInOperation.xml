@@ -5,13 +5,13 @@
       <example>
 This sample shows how to call PublicAsync.
 <code><![CDATA[
-SharedModelInOperation client = new AccessClient().GetSharedModelInOperationClient("1.0.0");
+SharedModelInOperation client = new AccessClient().GetSharedModelInOperationClient(apiVersion: "1.0.0");
 
 Response<SharedModel> response = await client.PublicAsync("<name>");
 ]]></code>
 This sample shows how to call PublicAsync with all parameters.
 <code><![CDATA[
-SharedModelInOperation client = new AccessClient().GetSharedModelInOperationClient("1.0.0");
+SharedModelInOperation client = new AccessClient().GetSharedModelInOperationClient(apiVersion: "1.0.0");
 
 Response<SharedModel> response = await client.PublicAsync("<name>");
 ]]></code></example>
@@ -20,13 +20,13 @@ Response<SharedModel> response = await client.PublicAsync("<name>");
       <example>
 This sample shows how to call Public.
 <code><![CDATA[
-SharedModelInOperation client = new AccessClient().GetSharedModelInOperationClient("1.0.0");
+SharedModelInOperation client = new AccessClient().GetSharedModelInOperationClient(apiVersion: "1.0.0");
 
 Response<SharedModel> response = client.Public("<name>");
 ]]></code>
 This sample shows how to call Public with all parameters.
 <code><![CDATA[
-SharedModelInOperation client = new AccessClient().GetSharedModelInOperationClient("1.0.0");
+SharedModelInOperation client = new AccessClient().GetSharedModelInOperationClient(apiVersion: "1.0.0");
 
 Response<SharedModel> response = client.Public("<name>");
 ]]></code></example>
@@ -35,7 +35,7 @@ Response<SharedModel> response = client.Public("<name>");
       <example>
 This sample shows how to call PublicAsync and parse the result.
 <code><![CDATA[
-SharedModelInOperation client = new AccessClient().GetSharedModelInOperationClient("1.0.0");
+SharedModelInOperation client = new AccessClient().GetSharedModelInOperationClient(apiVersion: "1.0.0");
 
 Response response = await client.PublicAsync("<name>", null);
 
@@ -44,13 +44,13 @@ Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code>
 This sample shows how to call PublicAsync.
 <code><![CDATA[
-SharedModelInOperation client = new AccessClient().GetSharedModelInOperationClient("1.0.0");
+SharedModelInOperation client = new AccessClient().GetSharedModelInOperationClient(apiVersion: "1.0.0");
 
 Response<SharedModel> response = await client.PublicAsync("<name>");
 ]]></code>
 This sample shows how to call PublicAsync with all parameters and parse the result.
 <code><![CDATA[
-SharedModelInOperation client = new AccessClient().GetSharedModelInOperationClient("1.0.0");
+SharedModelInOperation client = new AccessClient().GetSharedModelInOperationClient(apiVersion: "1.0.0");
 
 Response response = await client.PublicAsync("<name>", null);
 
@@ -59,7 +59,7 @@ Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code>
 This sample shows how to call PublicAsync with all parameters.
 <code><![CDATA[
-SharedModelInOperation client = new AccessClient().GetSharedModelInOperationClient("1.0.0");
+SharedModelInOperation client = new AccessClient().GetSharedModelInOperationClient(apiVersion: "1.0.0");
 
 Response<SharedModel> response = await client.PublicAsync("<name>");
 ]]></code></example>
@@ -68,7 +68,7 @@ Response<SharedModel> response = await client.PublicAsync("<name>");
       <example>
 This sample shows how to call Public and parse the result.
 <code><![CDATA[
-SharedModelInOperation client = new AccessClient().GetSharedModelInOperationClient("1.0.0");
+SharedModelInOperation client = new AccessClient().GetSharedModelInOperationClient(apiVersion: "1.0.0");
 
 Response response = client.Public("<name>", null);
 
@@ -77,13 +77,13 @@ Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code>
 This sample shows how to call Public.
 <code><![CDATA[
-SharedModelInOperation client = new AccessClient().GetSharedModelInOperationClient("1.0.0");
+SharedModelInOperation client = new AccessClient().GetSharedModelInOperationClient(apiVersion: "1.0.0");
 
 Response<SharedModel> response = client.Public("<name>");
 ]]></code>
 This sample shows how to call Public with all parameters and parse the result.
 <code><![CDATA[
-SharedModelInOperation client = new AccessClient().GetSharedModelInOperationClient("1.0.0");
+SharedModelInOperation client = new AccessClient().GetSharedModelInOperationClient(apiVersion: "1.0.0");
 
 Response response = client.Public("<name>", null);
 
@@ -92,7 +92,7 @@ Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code>
 This sample shows how to call Public with all parameters.
 <code><![CDATA[
-SharedModelInOperation client = new AccessClient().GetSharedModelInOperationClient("1.0.0");
+SharedModelInOperation client = new AccessClient().GetSharedModelInOperationClient(apiVersion: "1.0.0");
 
 Response<SharedModel> response = client.Public("<name>");
 ]]></code></example>

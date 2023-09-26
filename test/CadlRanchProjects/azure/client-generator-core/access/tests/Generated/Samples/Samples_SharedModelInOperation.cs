@@ -22,7 +22,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Public()
         {
-            SharedModelInOperation client = new AccessClient().GetSharedModelInOperationClient("1.0.0");
+            SharedModelInOperation client = new AccessClient().GetSharedModelInOperationClient(apiVersion: "1.0.0");
 
             Response response = client.Public("<name>", null);
 
@@ -34,7 +34,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Public_Async()
         {
-            SharedModelInOperation client = new AccessClient().GetSharedModelInOperationClient("1.0.0");
+            SharedModelInOperation client = new AccessClient().GetSharedModelInOperationClient(apiVersion: "1.0.0");
 
             Response response = await client.PublicAsync("<name>", null);
 
@@ -46,7 +46,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Public_Convenience()
         {
-            SharedModelInOperation client = new AccessClient().GetSharedModelInOperationClient("1.0.0");
+            SharedModelInOperation client = new AccessClient().GetSharedModelInOperationClient(apiVersion: "1.0.0");
 
             Response<SharedModel> response = client.Public("<name>");
         }
@@ -55,7 +55,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Public_Convenience_Async()
         {
-            SharedModelInOperation client = new AccessClient().GetSharedModelInOperationClient("1.0.0");
+            SharedModelInOperation client = new AccessClient().GetSharedModelInOperationClient(apiVersion: "1.0.0");
 
             Response<SharedModel> response = await client.PublicAsync("<name>");
         }
@@ -64,7 +64,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Public_AllParameters()
         {
-            SharedModelInOperation client = new AccessClient().GetSharedModelInOperationClient("1.0.0");
+            SharedModelInOperation client = new AccessClient().GetSharedModelInOperationClient(apiVersion: "1.0.0");
 
             Response response = client.Public("<name>", null);
 
@@ -76,7 +76,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Public_AllParameters_Async()
         {
-            SharedModelInOperation client = new AccessClient().GetSharedModelInOperationClient("1.0.0");
+            SharedModelInOperation client = new AccessClient().GetSharedModelInOperationClient(apiVersion: "1.0.0");
 
             Response response = await client.PublicAsync("<name>", null);
 
@@ -88,7 +88,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Public_AllParameters_Convenience()
         {
-            SharedModelInOperation client = new AccessClient().GetSharedModelInOperationClient("1.0.0");
+            SharedModelInOperation client = new AccessClient().GetSharedModelInOperationClient(apiVersion: "1.0.0");
 
             Response<SharedModel> response = client.Public("<name>");
         }
@@ -97,7 +97,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Public_AllParameters_Convenience_Async()
         {
-            SharedModelInOperation client = new AccessClient().GetSharedModelInOperationClient("1.0.0");
+            SharedModelInOperation client = new AccessClient().GetSharedModelInOperationClient(apiVersion: "1.0.0");
 
             Response<SharedModel> response = await client.PublicAsync("<name>");
         }

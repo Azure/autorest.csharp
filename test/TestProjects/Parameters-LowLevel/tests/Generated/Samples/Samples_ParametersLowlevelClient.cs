@@ -422,7 +422,7 @@ namespace Parameters_LowLevel.Samples
                 Code = "<Code>",
                 Status = "<Status>",
             });
-            Response response = client.OptionalPathBodyParametersWithMixedSequence(default, "<name>", 1234, default, content, 1234);
+            Response response = client.OptionalPathBodyParametersWithMixedSequence(default, "<name>", 1234, default, content, top: 1234);
 
             Console.WriteLine(response.Status);
         }
@@ -439,7 +439,7 @@ namespace Parameters_LowLevel.Samples
                 Code = "<Code>",
                 Status = "<Status>",
             });
-            Response response = await client.OptionalPathBodyParametersWithMixedSequenceAsync(default, "<name>", 1234, default, content, 1234);
+            Response response = await client.OptionalPathBodyParametersWithMixedSequenceAsync(default, "<name>", 1234, default, content, top: 1234);
 
             Console.WriteLine(response.Status);
         }

@@ -240,9 +240,6 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             switch (expression)
             {
-                case LiteralExpression literalExpression:
-                    writer.Literal(literalExpression.Value);
-                    break;
                 case CastExpression cast:
                     writer.Append($"({cast.Type})");
                     writer.WriteValueExpression(cast.Inner);
@@ -545,6 +542,10 @@ namespace AutoRest.CSharp.Generation.Writers
                     writer.AppendRaw(" : ");
                     writer.WriteValueExpression(ternary.Alternative);
                     break;
+                case PositionalParameterReference(var parameterName, var value):
+                    writer.Append($"{parameterName}: ");
+                    writer.WriteValueExpression(value);
+                    break;
                 case ParameterReference parameterReference:
                     writer.Append($"{parameterReference.Parameter.Name:I}");
                     break;
@@ -572,6 +573,9 @@ namespace AutoRest.CSharp.Generation.Writers
                     break;
                 case StringLiteralExpression(var literal, false):
                     writer.Literal(literal);
+                    break;
+                case LiteralExpression literalExpression:
+                    writer.Literal(literalExpression.Value);
                     break;
             }
 

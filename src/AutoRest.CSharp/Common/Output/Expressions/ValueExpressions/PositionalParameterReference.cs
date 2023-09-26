@@ -3,5 +3,5 @@
 
 namespace AutoRest.CSharp.Common.Output.Expressions.ValueExpressions
 {
-    internal record StringLiteralExpression(string Literal, bool U8) : LiteralExpression(Literal);
+    internal record PositionalParameterReference(string ParameterName, ValueExpression ParameterValue) : ValueExpression;
 }

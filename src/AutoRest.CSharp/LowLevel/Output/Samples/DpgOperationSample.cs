@@ -89,7 +89,7 @@ namespace AutoRest.CSharp.Output.Samples.Models
                 if (ParameterValueMapping.TryGetValue(parameter.Name, out var exampleValue))
                 {
                     // if we could get an example value out of the map, we just use it.
-                    parameterExpression = ExampleValueSnippets.GetExpression(exampleValue, parameter.SerializationFormat);
+                    parameterExpression = ExampleValueSnippets.GetExpression(parameter, exampleValue);
                 }
                 else
                 {

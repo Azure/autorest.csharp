@@ -1887,7 +1887,7 @@ new VariableValues("<variable>", new string[]{"<timestamps>"}, new float[]{123.4
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
-            foreach (AnomalyDetectionModel item in client.GetMultivariateModels(1234, 1234))
+            foreach (AnomalyDetectionModel item in client.GetMultivariateModels(skip: 1234, maxCount: 1234))
             {
             }
         }
@@ -1900,7 +1900,7 @@ new VariableValues("<variable>", new string[]{"<timestamps>"}, new float[]{123.4
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
-            await foreach (AnomalyDetectionModel item in client.GetMultivariateModelsAsync(1234, 1234))
+            await foreach (AnomalyDetectionModel item in client.GetMultivariateModelsAsync(skip: 1234, maxCount: 1234))
             {
             }
         }

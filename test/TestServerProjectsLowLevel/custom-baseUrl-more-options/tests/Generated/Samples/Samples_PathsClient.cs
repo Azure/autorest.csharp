@@ -47,7 +47,7 @@ namespace custom_baseUrl_more_options_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient("host", "<SubscriptionId>", credential);
 
-            Response response = client.GetEmpty("<vault>", "<secret>", "<keyName>", "<keyVersion>");
+            Response response = client.GetEmpty("<vault>", "<secret>", "<keyName>", keyVersion: "<keyVersion>");
 
             Console.WriteLine(response.Status);
         }
@@ -59,7 +59,7 @@ namespace custom_baseUrl_more_options_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient("host", "<SubscriptionId>", credential);
 
-            Response response = await client.GetEmptyAsync("<vault>", "<secret>", "<keyName>", "<keyVersion>");
+            Response response = await client.GetEmptyAsync("<vault>", "<secret>", "<keyName>", keyVersion: "<keyVersion>");
 
             Console.WriteLine(response.Status);
         }

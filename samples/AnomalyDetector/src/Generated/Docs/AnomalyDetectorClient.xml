@@ -2095,7 +2095,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
-await foreach (AnomalyDetectionModel item in client.GetMultivariateModelsAsync(1234, 1234))
+await foreach (AnomalyDetectionModel item in client.GetMultivariateModelsAsync(skip: 1234, maxCount: 1234))
 {
 }
 ]]></code></example>
@@ -2118,7 +2118,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
-foreach (AnomalyDetectionModel item in client.GetMultivariateModels(1234, 1234))
+foreach (AnomalyDetectionModel item in client.GetMultivariateModels(skip: 1234, maxCount: 1234))
 {
 }
 ]]></code></example>
@@ -2190,7 +2190,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
-await foreach (AnomalyDetectionModel item in client.GetMultivariateModelsAsync(1234, 1234))
+await foreach (AnomalyDetectionModel item in client.GetMultivariateModelsAsync(skip: 1234, maxCount: 1234))
 {
 }
 ]]></code></example>
@@ -2262,7 +2262,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
-foreach (AnomalyDetectionModel item in client.GetMultivariateModels(1234, 1234))
+foreach (AnomalyDetectionModel item in client.GetMultivariateModels(skip: 1234, maxCount: 1234))
 {
 }
 ]]></code></example>

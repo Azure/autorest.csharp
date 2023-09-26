@@ -111,7 +111,7 @@ This sample shows how to call ConvenienceOptionalBeforeRequiredAsync with all pa
 ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
 Model required = new Model("<id>");
-Response response = await client.ConvenienceOptionalBeforeRequiredAsync(required, 1234);
+Response response = await client.ConvenienceOptionalBeforeRequiredAsync(required, optional: 1234);
 ]]></code></example>
     </member>
     <member name="ConvenienceOptionalBeforeRequired(Model,int?,CancellationToken)">
@@ -128,7 +128,7 @@ This sample shows how to call ConvenienceOptionalBeforeRequired with all paramet
 ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
 Model required = new Model("<id>");
-Response response = client.ConvenienceOptionalBeforeRequired(required, 1234);
+Response response = client.ConvenienceOptionalBeforeRequired(required, optional: 1234);
 ]]></code></example>
     </member>
     <member name="ConvenienceOptionalBeforeRequiredAsync(RequestContent,int?,RequestContext)">
@@ -160,7 +160,7 @@ RequestContent content = RequestContent.Create(new
 {
     id = "<id>",
 });
-Response response = await client.ConvenienceOptionalBeforeRequiredAsync(content, 1234);
+Response response = await client.ConvenienceOptionalBeforeRequiredAsync(content, optional: 1234);
 
 Console.WriteLine(response.Status);
 ]]></code>
@@ -169,7 +169,7 @@ This sample shows how to call ConvenienceOptionalBeforeRequiredAsync with all pa
 ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
 Model required = new Model("<id>");
-Response response = await client.ConvenienceOptionalBeforeRequiredAsync(required, 1234);
+Response response = await client.ConvenienceOptionalBeforeRequiredAsync(required, optional: 1234);
 ]]></code></example>
     </member>
     <member name="ConvenienceOptionalBeforeRequired(RequestContent,int?,RequestContext)">
@@ -201,7 +201,7 @@ RequestContent content = RequestContent.Create(new
 {
     id = "<id>",
 });
-Response response = client.ConvenienceOptionalBeforeRequired(content, 1234);
+Response response = client.ConvenienceOptionalBeforeRequired(content, optional: 1234);
 
 Console.WriteLine(response.Status);
 ]]></code>
@@ -210,7 +210,7 @@ This sample shows how to call ConvenienceOptionalBeforeRequired with all paramet
 ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
 Model required = new Model("<id>");
-Response response = client.ConvenienceOptionalBeforeRequired(required, 1234);
+Response response = client.ConvenienceOptionalBeforeRequired(required, optional: 1234);
 ]]></code></example>
     </member>
     <member name="NoConvenienceAsync(RequestContext)">
@@ -733,7 +733,7 @@ This sample shows how to call ProtocolOptionalQueryValueAsync with all parameter
 <code><![CDATA[
 ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-Response<Model> response = await client.ProtocolOptionalQueryValueAsync(1234);
+Response<Model> response = await client.ProtocolOptionalQueryValueAsync(optional: 1234);
 ]]></code></example>
     </member>
     <member name="ProtocolOptionalQueryValue(int?,CancellationToken)">
@@ -748,7 +748,7 @@ This sample shows how to call ProtocolOptionalQueryValue with all parameters.
 <code><![CDATA[
 ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-Response<Model> response = client.ProtocolOptionalQueryValue(1234);
+Response<Model> response = client.ProtocolOptionalQueryValue(optional: 1234);
 ]]></code></example>
     </member>
     <member name="ProtocolOptionalQueryAsync(int?,RequestContext)">
@@ -772,7 +772,7 @@ This sample shows how to call ProtocolOptionalQueryAsync with all parameters and
 <code><![CDATA[
 ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-Response response = await client.ProtocolOptionalQueryAsync(1234);
+Response response = await client.ProtocolOptionalQueryAsync(optional: 1234);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
@@ -781,7 +781,7 @@ This sample shows how to call ProtocolOptionalQueryValueAsync with all parameter
 <code><![CDATA[
 ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-Response<Model> response = await client.ProtocolOptionalQueryValueAsync(1234);
+Response<Model> response = await client.ProtocolOptionalQueryValueAsync(optional: 1234);
 ]]></code></example>
     </member>
     <member name="ProtocolOptionalQuery(int?,RequestContext)">
@@ -805,7 +805,7 @@ This sample shows how to call ProtocolOptionalQuery with all parameters and pars
 <code><![CDATA[
 ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-Response response = client.ProtocolOptionalQuery(1234);
+Response response = client.ProtocolOptionalQuery(optional: 1234);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
@@ -814,7 +814,7 @@ This sample shows how to call ProtocolOptionalQueryValue with all parameters.
 <code><![CDATA[
 ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-Response<Model> response = client.ProtocolOptionalQueryValue(1234);
+Response<Model> response = client.ProtocolOptionalQueryValue(optional: 1234);
 ]]></code></example>
     </member>
     <member name="ProtocolRequiredQueryValueAsync(int,CancellationToken)">
@@ -925,7 +925,7 @@ This sample shows how to call ProtocolOptionalModelAsync with all parameters.
 <code><![CDATA[
 ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-Model optional = new Model("<id>");
+Model optional = optional: new Model("<id>");
 Response response = await client.ProtocolOptionalModelAsync(optional);
 ]]></code></example>
     </member>
@@ -941,7 +941,7 @@ This sample shows how to call ProtocolOptionalModel with all parameters.
 <code><![CDATA[
 ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-Model optional = new Model("<id>");
+Model optional = optional: new Model("<id>");
 Response response = client.ProtocolOptionalModel(optional);
 ]]></code></example>
     </member>
@@ -978,7 +978,7 @@ This sample shows how to call ProtocolOptionalModelAsync with all parameters.
 <code><![CDATA[
 ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-Model optional = new Model("<id>");
+Model optional = optional: new Model("<id>");
 Response response = await client.ProtocolOptionalModelAsync(optional);
 ]]></code></example>
     </member>
@@ -1015,7 +1015,7 @@ This sample shows how to call ProtocolOptionalModel with all parameters.
 <code><![CDATA[
 ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-Model optional = new Model("<id>");
+Model optional = optional: new Model("<id>");
 Response response = client.ProtocolOptionalModel(optional);
 ]]></code></example>
     </member>
@@ -1147,7 +1147,7 @@ This sample shows how to call ConvenienceOptionalQueryWithOptionalValueAsync wit
 <code><![CDATA[
 ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-Response<Model> response = await client.ConvenienceOptionalQueryWithOptionalValueAsync(1234);
+Response<Model> response = await client.ConvenienceOptionalQueryWithOptionalValueAsync(optional: 1234);
 ]]></code></example>
     </member>
     <member name="ConvenienceOptionalQueryWithOptionalValue(int?,CancellationToken)">
@@ -1162,7 +1162,7 @@ This sample shows how to call ConvenienceOptionalQueryWithOptionalValue with all
 <code><![CDATA[
 ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-Response<Model> response = client.ConvenienceOptionalQueryWithOptionalValue(1234);
+Response<Model> response = client.ConvenienceOptionalQueryWithOptionalValue(optional: 1234);
 ]]></code></example>
     </member>
     <member name="ConvenienceOptionalQueryWithOptionalAsync(int?,RequestContext)">
@@ -1186,7 +1186,7 @@ This sample shows how to call ConvenienceOptionalQueryWithOptionalAsync with all
 <code><![CDATA[
 ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-Response response = await client.ConvenienceOptionalQueryWithOptionalAsync(1234);
+Response response = await client.ConvenienceOptionalQueryWithOptionalAsync(optional: 1234);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
@@ -1195,7 +1195,7 @@ This sample shows how to call ConvenienceOptionalQueryWithOptionalValueAsync wit
 <code><![CDATA[
 ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-Response<Model> response = await client.ConvenienceOptionalQueryWithOptionalValueAsync(1234);
+Response<Model> response = await client.ConvenienceOptionalQueryWithOptionalValueAsync(optional: 1234);
 ]]></code></example>
     </member>
     <member name="ConvenienceOptionalQueryWithOptional(int?,RequestContext)">
@@ -1219,7 +1219,7 @@ This sample shows how to call ConvenienceOptionalQueryWithOptional with all para
 <code><![CDATA[
 ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-Response response = client.ConvenienceOptionalQueryWithOptional(1234);
+Response response = client.ConvenienceOptionalQueryWithOptional(optional: 1234);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
@@ -1228,7 +1228,7 @@ This sample shows how to call ConvenienceOptionalQueryWithOptionalValue with all
 <code><![CDATA[
 ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-Response<Model> response = client.ConvenienceOptionalQueryWithOptionalValue(1234);
+Response<Model> response = client.ConvenienceOptionalQueryWithOptionalValue(optional: 1234);
 ]]></code></example>
     </member>
     <member name="ConvenienceRequiredQueryWithOptionalValueAsync(int,CancellationToken)">
@@ -1339,7 +1339,7 @@ This sample shows how to call ConvenienceOptionalQueryWithRequiredAsync with all
 <code><![CDATA[
 ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-Response<Model> response = await client.ConvenienceOptionalQueryWithRequiredAsync(1234);
+Response<Model> response = await client.ConvenienceOptionalQueryWithRequiredAsync(optional: 1234);
 ]]></code></example>
     </member>
     <member name="ConvenienceOptionalQueryWithRequired(int?,CancellationToken)">
@@ -1354,7 +1354,7 @@ This sample shows how to call ConvenienceOptionalQueryWithRequired with all para
 <code><![CDATA[
 ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-Response<Model> response = client.ConvenienceOptionalQueryWithRequired(1234);
+Response<Model> response = client.ConvenienceOptionalQueryWithRequired(optional: 1234);
 ]]></code></example>
     </member>
     <member name="ConvenienceOptionalQueryWithRequiredAsync(int?,RequestContext)">
@@ -1387,7 +1387,7 @@ This sample shows how to call ConvenienceOptionalQueryWithRequiredAsync with all
 <code><![CDATA[
 ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-Response<Model> response = await client.ConvenienceOptionalQueryWithRequiredAsync(1234);
+Response<Model> response = await client.ConvenienceOptionalQueryWithRequiredAsync(optional: 1234);
 ]]></code></example>
     </member>
     <member name="ConvenienceOptionalQueryWithRequired(int?,RequestContext)">
@@ -1420,7 +1420,7 @@ This sample shows how to call ConvenienceOptionalQueryWithRequired with all para
 <code><![CDATA[
 ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-Response<Model> response = client.ConvenienceOptionalQueryWithRequired(1234);
+Response<Model> response = client.ConvenienceOptionalQueryWithRequired(optional: 1234);
 ]]></code></example>
     </member>
     <member name="ConvenienceRequiredQueryWithRequiredAsync(int,CancellationToken)">
@@ -1531,7 +1531,7 @@ This sample shows how to call ConvenienceOptionalModelWithOptionalAsync with all
 <code><![CDATA[
 ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-Model optional = new Model("<id>");
+Model optional = optional: new Model("<id>");
 Response response = await client.ConvenienceOptionalModelWithOptionalAsync(optional);
 ]]></code></example>
     </member>
@@ -1547,7 +1547,7 @@ This sample shows how to call ConvenienceOptionalModelWithOptional with all para
 <code><![CDATA[
 ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-Model optional = new Model("<id>");
+Model optional = optional: new Model("<id>");
 Response response = client.ConvenienceOptionalModelWithOptional(optional);
 ]]></code></example>
     </member>
@@ -1584,7 +1584,7 @@ This sample shows how to call ConvenienceOptionalModelWithOptionalAsync with all
 <code><![CDATA[
 ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-Model optional = new Model("<id>");
+Model optional = optional: new Model("<id>");
 Response response = await client.ConvenienceOptionalModelWithOptionalAsync(optional);
 ]]></code></example>
     </member>
@@ -1621,7 +1621,7 @@ This sample shows how to call ConvenienceOptionalModelWithOptional with all para
 <code><![CDATA[
 ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-Model optional = new Model("<id>");
+Model optional = optional: new Model("<id>");
 Response response = client.ConvenienceOptionalModelWithOptional(optional);
 ]]></code></example>
     </member>
@@ -1753,7 +1753,7 @@ This sample shows how to call ConvenienceOptionalModelWithRequiredAsync with all
 <code><![CDATA[
 ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-Model optional = new Model("<id>");
+Model optional = optional: new Model("<id>");
 Response response = await client.ConvenienceOptionalModelWithRequiredAsync(optional);
 ]]></code></example>
     </member>
@@ -1769,7 +1769,7 @@ This sample shows how to call ConvenienceOptionalModelWithRequired with all para
 <code><![CDATA[
 ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-Model optional = new Model("<id>");
+Model optional = optional: new Model("<id>");
 Response response = client.ConvenienceOptionalModelWithRequired(optional);
 ]]></code></example>
     </member>
@@ -1806,7 +1806,7 @@ This sample shows how to call ConvenienceOptionalModelWithRequiredAsync with all
 <code><![CDATA[
 ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-Model optional = new Model("<id>");
+Model optional = optional: new Model("<id>");
 Response response = await client.ConvenienceOptionalModelWithRequiredAsync(optional);
 ]]></code></example>
     </member>
@@ -1843,7 +1843,7 @@ This sample shows how to call ConvenienceOptionalModelWithRequired with all para
 <code><![CDATA[
 ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-Model optional = new Model("<id>");
+Model optional = optional: new Model("<id>");
 Response response = client.ConvenienceOptionalModelWithRequired(optional);
 ]]></code></example>
     </member>
@@ -1861,7 +1861,7 @@ This sample shows how to call ProtocolOptionalBeforeRequiredAsync with all param
 ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
 Model required = new Model("<id>");
-Response response = await client.ProtocolOptionalBeforeRequiredAsync(required, 1234);
+Response response = await client.ProtocolOptionalBeforeRequiredAsync(required, optional: 1234);
 ]]></code></example>
     </member>
     <member name="ProtocolOptionalBeforeRequired(Model,int?,CancellationToken)">
@@ -1878,7 +1878,7 @@ This sample shows how to call ProtocolOptionalBeforeRequired with all parameters
 ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
 Model required = new Model("<id>");
-Response response = client.ProtocolOptionalBeforeRequired(required, 1234);
+Response response = client.ProtocolOptionalBeforeRequired(required, optional: 1234);
 ]]></code></example>
     </member>
     <member name="ProtocolOptionalBeforeRequiredAsync(RequestContent,int?,RequestContext)">
@@ -1910,7 +1910,7 @@ RequestContent content = RequestContent.Create(new
 {
     id = "<id>",
 });
-Response response = await client.ProtocolOptionalBeforeRequiredAsync(content, 1234);
+Response response = await client.ProtocolOptionalBeforeRequiredAsync(content, optional: 1234);
 
 Console.WriteLine(response.Status);
 ]]></code>
@@ -1919,7 +1919,7 @@ This sample shows how to call ProtocolOptionalBeforeRequiredAsync with all param
 ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
 Model required = new Model("<id>");
-Response response = await client.ProtocolOptionalBeforeRequiredAsync(required, 1234);
+Response response = await client.ProtocolOptionalBeforeRequiredAsync(required, optional: 1234);
 ]]></code></example>
     </member>
     <member name="ProtocolOptionalBeforeRequired(RequestContent,int?,RequestContext)">
@@ -1951,7 +1951,7 @@ RequestContent content = RequestContent.Create(new
 {
     id = "<id>",
 });
-Response response = client.ProtocolOptionalBeforeRequired(content, 1234);
+Response response = client.ProtocolOptionalBeforeRequired(content, optional: 1234);
 
 Console.WriteLine(response.Status);
 ]]></code>
@@ -1960,7 +1960,7 @@ This sample shows how to call ProtocolOptionalBeforeRequired with all parameters
 ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
 Model required = new Model("<id>");
-Response response = client.ProtocolOptionalBeforeRequired(required, 1234);
+Response response = client.ProtocolOptionalBeforeRequired(required, optional: 1234);
 ]]></code></example>
     </member>
   </members>

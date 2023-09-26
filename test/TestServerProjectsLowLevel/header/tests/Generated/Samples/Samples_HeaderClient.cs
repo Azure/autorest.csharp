@@ -720,7 +720,7 @@ namespace header_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HeaderClient client = new HeaderClient(credential);
 
-            Response response = client.ParamString("<scenario>", "<value>");
+            Response response = client.ParamString("<scenario>", value: "<value>");
 
             Console.WriteLine(response.Status);
         }
@@ -732,7 +732,7 @@ namespace header_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HeaderClient client = new HeaderClient(credential);
 
-            Response response = await client.ParamStringAsync("<scenario>", "<value>");
+            Response response = await client.ParamStringAsync("<scenario>", value: "<value>");
 
             Console.WriteLine(response.Status);
         }
@@ -1008,7 +1008,7 @@ namespace header_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HeaderClient client = new HeaderClient(credential);
 
-            Response response = client.ParamDatetimeRfc1123("<scenario>", DateTimeOffset.Parse("Tue, 10 May 2022 18:57:31 GMT"));
+            Response response = client.ParamDatetimeRfc1123("<scenario>", value: DateTimeOffset.Parse("Tue, 10 May 2022 18:57:31 GMT"));
 
             Console.WriteLine(response.Status);
         }
@@ -1020,7 +1020,7 @@ namespace header_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HeaderClient client = new HeaderClient(credential);
 
-            Response response = await client.ParamDatetimeRfc1123Async("<scenario>", DateTimeOffset.Parse("Tue, 10 May 2022 18:57:31 GMT"));
+            Response response = await client.ParamDatetimeRfc1123Async("<scenario>", value: DateTimeOffset.Parse("Tue, 10 May 2022 18:57:31 GMT"));
 
             Console.WriteLine(response.Status);
         }
@@ -1296,7 +1296,7 @@ namespace header_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HeaderClient client = new HeaderClient(credential);
 
-            Response response = client.ParamEnum("<scenario>", "White");
+            Response response = client.ParamEnum("<scenario>", value: "White");
 
             Console.WriteLine(response.Status);
         }
@@ -1308,7 +1308,7 @@ namespace header_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HeaderClient client = new HeaderClient(credential);
 
-            Response response = await client.ParamEnumAsync("<scenario>", "White");
+            Response response = await client.ParamEnumAsync("<scenario>", value: "White");
 
             Console.WriteLine(response.Status);
         }

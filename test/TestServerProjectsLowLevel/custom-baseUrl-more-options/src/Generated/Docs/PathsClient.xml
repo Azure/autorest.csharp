@@ -17,7 +17,7 @@ This sample shows how to call GetEmptyAsync with all parameters.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PathsClient client = new PathsClient("host", "<SubscriptionId>", credential);
 
-Response response = await client.GetEmptyAsync("<vault>", "<secret>", "<keyName>", "<keyVersion>");
+Response response = await client.GetEmptyAsync("<vault>", "<secret>", "<keyName>", keyVersion: "<keyVersion>");
 
 Console.WriteLine(response.Status);
 ]]></code></example>
@@ -38,7 +38,7 @@ This sample shows how to call GetEmpty with all parameters.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PathsClient client = new PathsClient("host", "<SubscriptionId>", credential);
 
-Response response = client.GetEmpty("<vault>", "<secret>", "<keyName>", "<keyVersion>");
+Response response = client.GetEmpty("<vault>", "<secret>", "<keyName>", keyVersion: "<keyVersion>");
 
 Console.WriteLine(response.Status);
 ]]></code></example>

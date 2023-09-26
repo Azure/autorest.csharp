@@ -51,7 +51,7 @@ namespace CollapseRequestCondition_LowLevel.Samples
             NonCollapseClient client = new NonCollapseClient(credential);
 
             RequestContent content = RequestContent.Create("<body>");
-            Response response = client.IfMatchPut(content, new ETag("<ifMatch>"));
+            Response response = client.IfMatchPut(content, ifMatch: new ETag("<ifMatch>"));
 
             Console.WriteLine(response.Status);
         }
@@ -64,7 +64,7 @@ namespace CollapseRequestCondition_LowLevel.Samples
             NonCollapseClient client = new NonCollapseClient(credential);
 
             RequestContent content = RequestContent.Create("<body>");
-            Response response = await client.IfMatchPutAsync(content, new ETag("<ifMatch>"));
+            Response response = await client.IfMatchPutAsync(content, ifMatch: new ETag("<ifMatch>"));
 
             Console.WriteLine(response.Status);
         }
@@ -103,7 +103,7 @@ namespace CollapseRequestCondition_LowLevel.Samples
             NonCollapseClient client = new NonCollapseClient(credential);
 
             RequestContent content = RequestContent.Create("<body>");
-            Response response = client.IfNoneMatchPut(content, new ETag("<ifNoneMatch>"));
+            Response response = client.IfNoneMatchPut(content, ifNoneMatch: new ETag("<ifNoneMatch>"));
 
             Console.WriteLine(response.Status);
         }
@@ -116,7 +116,7 @@ namespace CollapseRequestCondition_LowLevel.Samples
             NonCollapseClient client = new NonCollapseClient(credential);
 
             RequestContent content = RequestContent.Create("<body>");
-            Response response = await client.IfNoneMatchPutAsync(content, new ETag("<ifNoneMatch>"));
+            Response response = await client.IfNoneMatchPutAsync(content, ifNoneMatch: new ETag("<ifNoneMatch>"));
 
             Console.WriteLine(response.Status);
         }

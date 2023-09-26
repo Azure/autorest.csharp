@@ -106,7 +106,7 @@ namespace BodyAndPath_LowLevel.Samples
             BodyAndPathClient client = new BodyAndPathClient(credential);
 
             RequestContent content = RequestContent.Create(File.OpenRead("<filePath>"));
-            Response response = client.CreateStream("<itemNameStream>", content, new ContentType("application/json"), new string[] { "<excluded>" });
+            Response response = client.CreateStream("<itemNameStream>", content, new ContentType("application/json"), excluded: new string[] { "<excluded>" });
 
             Console.WriteLine(response.Status);
         }
@@ -119,7 +119,7 @@ namespace BodyAndPath_LowLevel.Samples
             BodyAndPathClient client = new BodyAndPathClient(credential);
 
             RequestContent content = RequestContent.Create(File.OpenRead("<filePath>"));
-            Response response = await client.CreateStreamAsync("<itemNameStream>", content, new ContentType("application/json"), new string[] { "<excluded>" });
+            Response response = await client.CreateStreamAsync("<itemNameStream>", content, new ContentType("application/json"), excluded: new string[] { "<excluded>" });
 
             Console.WriteLine(response.Status);
         }
@@ -317,7 +317,7 @@ namespace BodyAndPath_LowLevel.Samples
             {
                 ["invalid-int-name"] = 1234
             });
-            Response response = client.Update("<item3>", "<item2>", "value", "<item4>", content, "<item5>");
+            Response response = client.Update("<item3>", "<item2>", "value", "<item4>", content, item5: "<item5>");
 
             Console.WriteLine(response.Status);
         }
@@ -333,7 +333,7 @@ namespace BodyAndPath_LowLevel.Samples
             {
                 ["invalid-int-name"] = 1234
             });
-            Response response = await client.UpdateAsync("<item3>", "<item2>", "value", "<item4>", content, "<item5>");
+            Response response = await client.UpdateAsync("<item3>", "<item2>", "value", "<item4>", content, item5: "<item5>");
 
             Console.WriteLine(response.Status);
         }

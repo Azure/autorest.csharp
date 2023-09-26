@@ -12,6 +12,7 @@ using AutoRest.CSharp.Common.Input.Examples;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models.Serialization;
+using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Output.Samples.Models;
 using AutoRest.CSharp.Utilities;
@@ -186,7 +187,7 @@ namespace AutoRest.CSharp.LowLevel.Extensions
             if (frameworkType == typeof(byte[]))
             {
                 if (exampleValue is InputExampleRawValue rawValue && rawValue.RawValue is not null)
-                    return new MemberExpression(new TypeReference(typeof(Encoding)), nameof(Encoding.UTF8)).Invoke(nameof(Encoding.GetBytes), new[] { Literal(rawValue.RawValue.ToString()) });
+                    return new TypeReference(typeof(Encoding)).Property(nameof(Encoding.UTF8)).Invoke(nameof(Encoding.GetBytes), Literal(rawValue.RawValue.ToString()));
 
                 return Null;
             }
@@ -194,12 +195,22 @@ namespace AutoRest.CSharp.LowLevel.Extensions
             return frameworkType.IsValueType ? Default : Null;
         }
 
+        public static ValueExpression GetExpression(Parameter parameter, InputExampleParameterValue exampleParameterValue)
+        {
+            var valueExpression = GetExpression(exampleParameterValue, parameter.SerializationFormat);
+            // for optional parameter, we write the parameter name here
+            if (parameter.DefaultValue != null)
+                return new PositionalParameterReference(parameter.Name, valueExpression);
+
+            return valueExpression;
+        }
+
         public static ValueExpression GetExpression(InputExampleParameterValue exampleParameterValue, SerializationFormat serializationFormat)
         {
             if (exampleParameterValue.Value != null)
                 return GetExpression(exampleParameterValue.Type, exampleParameterValue.Value, serializationFormat);
             else
-                return new FormattableStringToExpression(exampleParameterValue.Expression!);
+                return new FormattableStringToExpression(exampleParameterValue.Expression!);// TODO -- need to change the type of this expression to ValueExpression instead of plain FormattableString
         }
 
         private static ValueExpression GetExpressionForRequestContent(InputExampleValue value)
@@ -211,7 +222,7 @@ namespace AutoRest.CSharp.LowLevel.Extensions
             else
             {
                 var freeFormObjectExpression = GetExpressionForFreeFormObject(value, includeCollectionInitialization: true);
-                return new TypeReference(typeof(RequestContent)).Invoke(nameof(RequestContent.Create), freeFormObjectExpression);
+                return new TypeReference(typeof(RequestContent)).InvokeStatic(nameof(RequestContent.Create), freeFormObjectExpression);
             }
         }
 
@@ -263,7 +274,7 @@ namespace AutoRest.CSharp.LowLevel.Extensions
         {
             // determine which method on BinaryData we want to use to serialize this BinaryData
             string method = exampleValue is InputExampleRawValue exampleRawValue && exampleRawValue.RawValue is string ? nameof(BinaryData.FromString) : nameof(BinaryData.FromObjectAsJson);
-            return new TypeReference(typeof(BinaryData)).Invoke(method, GetExpressionForFreeFormObject(exampleValue, true));
+            return new TypeReference(typeof(BinaryData)).InvokeStatic(method, GetExpressionForFreeFormObject(exampleValue, true));
         }
 
         private static ValueExpression GetExpressionForFreeFormObject(InputExampleValue exampleValue, bool includeCollectionInitialization = true) => exampleValue switch
@@ -456,7 +467,7 @@ namespace AutoRest.CSharp.LowLevel.Extensions
             // Here we convert the values to string then compare, because the raw value has the "primitive types are deserialized into strings" issue
             var choice = enumType.Values.FirstOrDefault(c => StringComparer.Ordinal.Equals(value.ToString(), c.Value.Value?.ToString()));
             if (choice != null)
-                return new MemberExpression(new TypeReference(enumType.Type), choice.Declaration.Name);
+                return new TypeReference(enumType.Type).Property(choice.Declaration.Name);
             // if we did not find a match, check if this is a SealedChoice, if so, we throw exceptions
             if (!enumType.IsExtensible)
                 throw new InvalidOperationException($"Enum value `{value}` in example does not find in type {enumType.Type.Name}");

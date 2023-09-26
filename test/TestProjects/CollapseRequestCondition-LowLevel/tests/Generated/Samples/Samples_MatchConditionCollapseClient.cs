@@ -48,7 +48,7 @@ namespace CollapseRequestCondition_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             MatchConditionCollapseClient client = new MatchConditionCollapseClient(credential);
 
-            Response response = client.CollapseGetWithHead("<otherHeader>", null);
+            Response response = client.CollapseGetWithHead(otherHeader: "<otherHeader>", matchConditions: null);
 
             Console.WriteLine(response.Status);
         }
@@ -60,7 +60,7 @@ namespace CollapseRequestCondition_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             MatchConditionCollapseClient client = new MatchConditionCollapseClient(credential);
 
-            Response response = await client.CollapseGetWithHeadAsync("<otherHeader>", null);
+            Response response = await client.CollapseGetWithHeadAsync(otherHeader: "<otherHeader>", matchConditions: null);
 
             Console.WriteLine(response.Status);
         }
@@ -99,7 +99,7 @@ namespace CollapseRequestCondition_LowLevel.Samples
             MatchConditionCollapseClient client = new MatchConditionCollapseClient(credential);
 
             RequestContent content = RequestContent.Create("<body>");
-            Response response = client.CollapsePut(content, null);
+            Response response = client.CollapsePut(content, matchConditions: null);
 
             Console.WriteLine(response.Status);
         }
@@ -112,7 +112,7 @@ namespace CollapseRequestCondition_LowLevel.Samples
             MatchConditionCollapseClient client = new MatchConditionCollapseClient(credential);
 
             RequestContent content = RequestContent.Create("<body>");
-            Response response = await client.CollapsePutAsync(content, null);
+            Response response = await client.CollapsePutAsync(content, matchConditions: null);
 
             Console.WriteLine(response.Status);
         }
@@ -148,7 +148,7 @@ namespace CollapseRequestCondition_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             MatchConditionCollapseClient client = new MatchConditionCollapseClient(credential);
 
-            Response response = client.CollapseGet(null);
+            Response response = client.CollapseGet(matchConditions: null);
 
             Console.WriteLine(response.Status);
         }
@@ -160,7 +160,7 @@ namespace CollapseRequestCondition_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             MatchConditionCollapseClient client = new MatchConditionCollapseClient(credential);
 
-            Response response = await client.CollapseGetAsync(null);
+            Response response = await client.CollapseGetAsync(matchConditions: null);
 
             Console.WriteLine(response.Status);
         }

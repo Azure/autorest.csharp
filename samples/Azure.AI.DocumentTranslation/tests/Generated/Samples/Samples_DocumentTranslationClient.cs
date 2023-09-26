@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
@@ -554,16 +553,7 @@ namespace Azure.AI.DocumentTranslation.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", credential);
 
-            foreach (BinaryData item in client.GetTranslationsStatus(top: 1234, skip: 1234, maxpagesize: 1234, ids: new List<Guid>()
-{
-Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a")
-}, statuses: new List<string>()
-{
-"<statuses>"
-}, createdDateTimeUtcStart: DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"), createdDateTimeUtcEnd: DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"), orderBy: new List<string>()
-{
-"<orderBy>"
-}))
+            foreach (BinaryData item in client.GetTranslationsStatus(top: 1234, skip: 1234, maxpagesize: 1234, ids: new Guid[] { Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a") }, statuses: new string[] { "<statuses>" }, createdDateTimeUtcStart: DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"), createdDateTimeUtcEnd: DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"), orderBy: new string[] { "<orderBy>" }))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result[0].GetProperty("id").ToString());
@@ -593,16 +583,7 @@ Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a")
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", credential);
 
-            await foreach (BinaryData item in client.GetTranslationsStatusAsync(top: 1234, skip: 1234, maxpagesize: 1234, ids: new List<Guid>()
-{
-Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a")
-}, statuses: new List<string>()
-{
-"<statuses>"
-}, createdDateTimeUtcStart: DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"), createdDateTimeUtcEnd: DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"), orderBy: new List<string>()
-{
-"<orderBy>"
-}))
+            await foreach (BinaryData item in client.GetTranslationsStatusAsync(top: 1234, skip: 1234, maxpagesize: 1234, ids: new Guid[] { Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a") }, statuses: new string[] { "<statuses>" }, createdDateTimeUtcStart: DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"), createdDateTimeUtcEnd: DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"), orderBy: new string[] { "<orderBy>" }))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result[0].GetProperty("id").ToString());
@@ -672,16 +653,7 @@ Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a")
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", credential);
 
-            foreach (BinaryData item in client.GetDocumentsStatus(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), top: 1234, skip: 1234, maxpagesize: 1234, ids: new List<Guid>()
-{
-Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a")
-}, statuses: new List<string>()
-{
-"<statuses>"
-}, createdDateTimeUtcStart: DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"), createdDateTimeUtcEnd: DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"), orderBy: new List<string>()
-{
-"<orderBy>"
-}))
+            foreach (BinaryData item in client.GetDocumentsStatus(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), top: 1234, skip: 1234, maxpagesize: 1234, ids: new Guid[] { Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a") }, statuses: new string[] { "<statuses>" }, createdDateTimeUtcStart: DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"), createdDateTimeUtcEnd: DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"), orderBy: new string[] { "<orderBy>" }))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result[0].GetProperty("path").ToString());
@@ -709,16 +681,7 @@ Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a")
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", credential);
 
-            await foreach (BinaryData item in client.GetDocumentsStatusAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), top: 1234, skip: 1234, maxpagesize: 1234, ids: new List<Guid>()
-{
-Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a")
-}, statuses: new List<string>()
-{
-"<statuses>"
-}, createdDateTimeUtcStart: DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"), createdDateTimeUtcEnd: DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"), orderBy: new List<string>()
-{
-"<orderBy>"
-}))
+            await foreach (BinaryData item in client.GetDocumentsStatusAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), top: 1234, skip: 1234, maxpagesize: 1234, ids: new Guid[] { Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a") }, statuses: new string[] { "<statuses>" }, createdDateTimeUtcStart: DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"), createdDateTimeUtcEnd: DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"), orderBy: new string[] { "<orderBy>" }))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result[0].GetProperty("path").ToString());
@@ -748,15 +711,15 @@ Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a")
 
             RequestContent content = RequestContent.Create(new
             {
-                inputs = new List<object>()
-{
+                inputs = new object[]
+            {
 new
 {
 source = new
 {
 sourceUrl = "<sourceUrl>",
 },
-targets = new List<object>()
+targets = new object[]
 {
 new
 {
@@ -765,7 +728,7 @@ language = "<language>",
 }
 },
 }
-},
+            },
             });
             Operation operation = client.StartTranslation(WaitUntil.Completed, content, new ContentType("application/json"));
         }
@@ -779,15 +742,15 @@ language = "<language>",
 
             RequestContent content = RequestContent.Create(new
             {
-                inputs = new List<object>()
-{
+                inputs = new object[]
+            {
 new
 {
 source = new
 {
 sourceUrl = "<sourceUrl>",
 },
-targets = new List<object>()
+targets = new object[]
 {
 new
 {
@@ -796,7 +759,7 @@ language = "<language>",
 }
 },
 }
-},
+            },
             });
             Operation operation = await client.StartTranslationAsync(WaitUntil.Completed, content, new ContentType("application/json"));
         }
@@ -810,8 +773,8 @@ language = "<language>",
 
             RequestContent content = RequestContent.Create(new
             {
-                inputs = new List<object>()
-{
+                inputs = new object[]
+            {
 new
 {
 source = new
@@ -825,14 +788,14 @@ suffix = "<suffix>",
 language = "<language>",
 storageSource = "AzureBlob",
 },
-targets = new List<object>()
+targets = new object[]
 {
 new
 {
 targetUrl = "<targetUrl>",
 category = "<category>",
 language = "<language>",
-glossaries = new List<object>()
+glossaries = new object[]
 {
 new
 {
@@ -847,7 +810,7 @@ storageSource = "AzureBlob",
 },
 storageType = "Folder",
 }
-},
+            },
             });
             Operation operation = client.StartTranslation(WaitUntil.Completed, content, new ContentType("application/json"));
         }
@@ -861,8 +824,8 @@ storageType = "Folder",
 
             RequestContent content = RequestContent.Create(new
             {
-                inputs = new List<object>()
-{
+                inputs = new object[]
+            {
 new
 {
 source = new
@@ -876,14 +839,14 @@ suffix = "<suffix>",
 language = "<language>",
 storageSource = "AzureBlob",
 },
-targets = new List<object>()
+targets = new object[]
 {
 new
 {
 targetUrl = "<targetUrl>",
 category = "<category>",
 language = "<language>",
-glossaries = new List<object>()
+glossaries = new object[]
 {
 new
 {
@@ -898,7 +861,7 @@ storageSource = "AzureBlob",
 },
 storageType = "Folder",
 }
-},
+            },
             });
             Operation operation = await client.StartTranslationAsync(WaitUntil.Completed, content, new ContentType("application/json"));
         }
