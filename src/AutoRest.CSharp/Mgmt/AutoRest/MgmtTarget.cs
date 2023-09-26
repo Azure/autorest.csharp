@@ -126,7 +126,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             {
                 var writer = new OperationSourceWriter(operationSource);
                 writer.Write();
-                AddGeneratedFile(project, $"LongRunningOperation/{operationSource.TypeName}.cs", writer.ToString());
+                AddGeneratedFile(project, $"LongRunningOperation/{operationSource.Type.Name}.cs", writer.ToString());
             }
 
             foreach (var model in MgmtContext.Library.PropertyBagModels)

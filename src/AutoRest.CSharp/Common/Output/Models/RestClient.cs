@@ -24,7 +24,7 @@ namespace AutoRest.CSharp.Output.Models
         internal InputClient InputClient { get; }
         public IReadOnlyList<Parameter> Parameters { get; }
         public RestClientMethod[] Methods => _allMethods ??= BuildAllMethods().ToArray();
-        public ConstructorSignature Constructor => _constructor ??= new ConstructorSignature(Declaration.Name, $"Initializes a new instance of {Declaration.Name}", null, MethodSignatureModifiers.Public, Parameters.ToArray());
+        public ConstructorSignature Constructor => _constructor ??= new ConstructorSignature(Type, $"Initializes a new instance of {Declaration.Name}", null, MethodSignatureModifiers.Public, Parameters.ToArray());
 
         public string ClientPrefix { get; }
         protected override string DefaultName { get; }
