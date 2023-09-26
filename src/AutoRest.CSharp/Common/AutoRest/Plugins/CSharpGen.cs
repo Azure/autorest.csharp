@@ -45,13 +45,28 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                     if (Configuration.MgmtTestConfiguration is not null)
                         await MgmtTestTarget.ExecuteAsync(project, codeModel, sourceInputModel);
                 }
-                project.AddPlainFiles("transform-report.txt", TransformStore.Instance.ToReport());
+                GenerateTransformData(project);
             }
             else
             {
                 await LowLevelTarget.ExecuteAsync(project, new CodeModelConverter().CreateNamespace(codeModel, new SchemaUsageProvider(codeModel)), sourceInputModel, false);
             }
             return project;
+        }
+
+        private void GenerateTransformData(GeneratedCodeWorkspace project)
+        {
+            TransformStore.Instance.ForEachTransform((t, usages) =>
+            {
+                string[] ignoreNoUsage = new string[]
+                {
+                    MgmtConfiguration.ConfigName.AcronymMapping,
+                    MgmtConfiguration.ConfigName.FormatByNameRules
+                };
+                if (usages.Count == 0 && !ignoreNoUsage.Contains(t.TransformType))
+                    AutoRestLogger.Warning($"No usage transform detected: {t}").Wait();
+            });
+            project.AddPlainFiles("mgmt-codegen-report.log", TransformStore.Instance.ToReport());
         }
 
         public async Task<GeneratedCodeWorkspace> ExecuteAsync(InputNamespace rootNamespace)

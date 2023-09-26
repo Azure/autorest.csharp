@@ -1,7 +1,9 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 
@@ -65,6 +67,12 @@ namespace AutoRest.CSharp.Mgmt.Report
 
         private string CreateChangeMessage(string changeName, string? from, string? to) => $"{changeName} '{from ?? "<null>"}' --> '{to ?? "<null>"}'";
 
+        public void ForEachTransform(Action<TransformItem, ReadOnlyCollection<TransformLog>> action)
+        {
+            foreach (var (transform, logs) in this._transformItemDict)
+                action(transform, logs.AsReadOnly());
+        }
+
         public string ToReport()
         {
             StringBuilder sb = new StringBuilder();
@@ -90,36 +98,6 @@ namespace AutoRest.CSharp.Mgmt.Report
             }
             return sb.ToString();
         }
-
-
-        //public string LogsToCsv(bool includeHeader = true)
-        //{
-        //    StringBuilder sb = new StringBuilder();
-        //    if (includeHeader)
-        //        sb.AppendLine("index,transformType,transformKey,transformArguments, isFromConfig, transformTarget,transformLog");
-        //    int i = 0;
-        //    foreach (var item in TransformLogs)
-        //    {
-        //        sb.AppendLine($"{i},{item.Transformer.TransformType},{item.Transformer.Key},{item.Transformer.ArgumentsAsString},{item.Transformer.IsFromConfig},{item.TargetFullSerializedName},{item.LogMessage}");
-        //        i++;
-        //    }
-        //    return sb.ToString();
-        //}
-
-        //public string UsagesToCsv(bool includeHeader = true)
-        //{
-        //    StringBuilder sb = new StringBuilder();
-        //    if (includeHeader)
-        //        sb.AppendLine("index,transformType,transformKey,transformArguments, isFromConfig, usage");
-        //    int i = 0;
-        //    foreach (var (item, detail) in this._transformItems)
-        //    {
-        //        sb.AppendLine($"{i},{item.TransformType},{item.Key},{item.ArgumentsAsString},{item.IsFromConfig},{detail.Usage}");
-        //        i++;
-        //    }
-        //    return sb.ToString();
-        //}
-
     }
 
 }
