@@ -280,11 +280,12 @@ namespace AutoRest.CSharp.Generation.Writers
                 converter(_writer);
 
                 var responseVariable = new CodeWriterDeclaration(Configuration.ApiTypes.ResponseParameterName);
-                string rawResponseVariable = Configuration.ApiTypes.GetRawResponseString(responseVariable.RequestedName);
                 _writer
                     .Append($"{clientMethod.ProtocolMethodSignature.ReturnType} {responseVariable:D} = ")
                     .WriteMethodCall(clientMethod.ProtocolMethodSignature, parameterValues, async)
                     .LineRaw(";");
+
+                string rawResponseVariable = Configuration.ApiTypes.GetRawResponseString(responseVariable.ActualName);
 
                 var responseType = convenienceMethod.ResponseType;
                 if (responseType == null)

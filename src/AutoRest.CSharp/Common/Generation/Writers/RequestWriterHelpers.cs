@@ -66,7 +66,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 {
                     writer.Line($"{message}.BufferResponse = false;");
                 }
-                writer.Line(Configuration.ApiTypes.GetSetMethodString(request.RequestedName, method.Method));
+                writer.Line(Configuration.ApiTypes.GetSetMethodString(request.ActualName, method.Method));
 
                 writer.Line($"var {uri:D} = new {Configuration.ApiTypes.GetRequestUriBuiilderExpression().Type}();");
                 foreach (var segment in clientMethod.Request.PathSegments)
@@ -94,7 +94,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     WriteQueryParameter(writer, uri, queryParameter, fields, clientParameters);
                 }
 
-                writer.Line(Configuration.ApiTypes.GetSetUriString(request.RequestedName, uri.RequestedName));
+                writer.Line(Configuration.ApiTypes.GetSetUriString(request.ActualName, uri.ActualName));
 
                 WriteHeaders(writer, clientMethod, request, content: false, fields);
 
@@ -102,7 +102,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 {
                     case RequestContentRequestBody body:
                         WriteHeaders(writer, clientMethod, request, content: true, fields);
-                        writer.Line(Configuration.ApiTypes.GetSetContentString(request.RequestedName, body.Parameter.Name));
+                        writer.Line(Configuration.ApiTypes.GetSetContentString(request.ActualName, body.Parameter.Name));
                         break;
                     case SchemaRequestBody body:
                         using (WriteValueNullCheck(writer, body.Value))
