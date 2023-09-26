@@ -9,6 +9,7 @@ using System;
 using System.ServiceModel.Rest;
 using System.ServiceModel.Rest.Core;
 using System.ServiceModel.Rest.Experimental;
+using System.ServiceModel.Rest.Experimental.Core;
 using System.ServiceModel.Rest.Experimental.Core.Pipeline;
 using System.Threading;
 using System.Threading.Tasks;
@@ -1700,10 +1701,10 @@ namespace UnbrandedTypeSpec
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.PipelineRequest;
             request.SetMethod("GET");
-            var uri = new RawRequestUriBuilder();
+            var uri = new RequestUri();
             uri.Reset(_endpoint);
             uri.AppendPath("/top/", false);
-            uri.AppendPath(action, "O", true);
+            uri.AppendPath(action.ToString("O"), true);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.SetUri(uri);
             request.SetHeaderValue("Accept", "application/json");
@@ -1715,7 +1716,7 @@ namespace UnbrandedTypeSpec
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.PipelineRequest;
             request.SetMethod("GET");
-            var uri = new RawRequestUriBuilder();
+            var uri = new RequestUri();
             uri.Reset(_endpoint);
             uri.AppendPath("/top2", false);
             uri.AppendQuery("api-version", _apiVersion, true);
@@ -1729,7 +1730,7 @@ namespace UnbrandedTypeSpec
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.PipelineRequest;
             request.SetMethod("PATCH");
-            var uri = new RawRequestUriBuilder();
+            var uri = new RequestUri();
             uri.Reset(_endpoint);
             uri.AppendPath("/patch", false);
             uri.AppendQuery("api-version", _apiVersion, true);
@@ -1745,7 +1746,7 @@ namespace UnbrandedTypeSpec
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.PipelineRequest;
             request.SetMethod("POST");
-            var uri = new RawRequestUriBuilder();
+            var uri = new RequestUri();
             uri.Reset(_endpoint);
             uri.AppendPath("/anonymousBody", false);
             uri.AppendQuery("api-version", _apiVersion, true);
@@ -1761,7 +1762,7 @@ namespace UnbrandedTypeSpec
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.PipelineRequest;
             request.SetMethod("POST");
-            var uri = new RawRequestUriBuilder();
+            var uri = new RequestUri();
             uri.Reset(_endpoint);
             uri.AppendPath("/friendlyName", false);
             uri.AppendQuery("api-version", _apiVersion, true);
@@ -1777,7 +1778,7 @@ namespace UnbrandedTypeSpec
             var message = _pipeline.CreateMessage(context, ResponseClassifier204);
             var request = message.PipelineRequest;
             request.SetMethod("GET");
-            var uri = new RawRequestUriBuilder();
+            var uri = new RequestUri();
             uri.Reset(_endpoint);
             uri.AppendPath("/", false);
             uri.AppendQuery("api-version", _apiVersion, true);
@@ -1792,10 +1793,10 @@ namespace UnbrandedTypeSpec
             var message = _pipeline.CreateMessage(context, ResponseClassifier204);
             var request = message.PipelineRequest;
             request.SetMethod("POST");
-            var uri = new RawRequestUriBuilder();
+            var uri = new RequestUri();
             uri.Reset(_endpoint);
             uri.AppendPath("/stringFormat/", false);
-            uri.AppendPath(subscriptionId, true);
+            uri.AppendPath(subscriptionId.ToString(), true);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.SetUri(uri);
             request.SetHeaderValue("Accept", "application/json");
@@ -1809,7 +1810,7 @@ namespace UnbrandedTypeSpec
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.PipelineRequest;
             request.SetMethod("POST");
-            var uri = new RawRequestUriBuilder();
+            var uri = new RequestUri();
             uri.Reset(_endpoint);
             uri.AppendPath("/projectedName", false);
             uri.AppendQuery("api-version", _apiVersion, true);
@@ -1825,7 +1826,7 @@ namespace UnbrandedTypeSpec
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.PipelineRequest;
             request.SetMethod("POST");
-            var uri = new RawRequestUriBuilder();
+            var uri = new RequestUri();
             uri.Reset(_endpoint);
             uri.AppendPath("/returnsAnonymousModel", false);
             uri.AppendQuery("api-version", _apiVersion, true);
@@ -1839,7 +1840,7 @@ namespace UnbrandedTypeSpec
             var message = _pipeline.CreateMessage(context, ResponseClassifier200To300400To500);
             var request = message.PipelineRequest;
             request.SetMethod("HEAD");
-            var uri = new RawRequestUriBuilder();
+            var uri = new RequestUri();
             uri.Reset(_endpoint);
             uri.AppendPath("/headAsBoolean/", false);
             uri.AppendPath(id, true);
@@ -1854,7 +1855,7 @@ namespace UnbrandedTypeSpec
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.PipelineRequest;
             request.SetMethod("GET");
-            var uri = new RawRequestUriBuilder();
+            var uri = new RequestUri();
             uri.Reset(_endpoint);
             uri.AppendPath("/hello", false);
             uri.AppendQuery("queryParameter", queryParameter, true);
@@ -1874,7 +1875,7 @@ namespace UnbrandedTypeSpec
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.PipelineRequest;
             request.SetMethod("GET");
-            var uri = new RawRequestUriBuilder();
+            var uri = new RequestUri();
             uri.Reset(_endpoint);
             uri.AppendPath("/againHi/", false);
             uri.AppendPath(p2, true);
@@ -1892,7 +1893,7 @@ namespace UnbrandedTypeSpec
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.PipelineRequest;
             request.SetMethod("GET");
-            var uri = new RawRequestUriBuilder();
+            var uri = new RequestUri();
             uri.Reset(_endpoint);
             uri.AppendPath("/noContentType/", false);
             uri.AppendPath(p2, true);
@@ -1910,7 +1911,7 @@ namespace UnbrandedTypeSpec
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.PipelineRequest;
             request.SetMethod("GET");
-            var uri = new RawRequestUriBuilder();
+            var uri = new RequestUri();
             uri.Reset(_endpoint);
             uri.AppendPath("/demoHi", false);
             uri.AppendQuery("api-version", _apiVersion, true);
@@ -1924,7 +1925,7 @@ namespace UnbrandedTypeSpec
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.PipelineRequest;
             request.SetMethod("POST");
-            var uri = new RawRequestUriBuilder();
+            var uri = new RequestUri();
             uri.Reset(_endpoint);
             uri.AppendPath("/literal", false);
             uri.AppendQuery("api-version", _apiVersion, true);
@@ -1940,11 +1941,11 @@ namespace UnbrandedTypeSpec
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.PipelineRequest;
             request.SetMethod("GET");
-            var uri = new RawRequestUriBuilder();
+            var uri = new RequestUri();
             uri.Reset(_endpoint);
             uri.AppendPath("/helloLiteral/", false);
-            uri.AppendPath(123, true);
-            uri.AppendQuery("p3", true, true);
+            uri.AppendPath(123.ToString(), true);
+            uri.AppendQuery("p3", "true", true);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.SetUri(uri);
             request.SetHeaderValue("p1", "test");
@@ -1957,7 +1958,7 @@ namespace UnbrandedTypeSpec
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.PipelineRequest;
             request.SetMethod("GET");
-            var uri = new RawRequestUriBuilder();
+            var uri = new RequestUri();
             uri.Reset(_endpoint);
             uri.AppendPath("/unknown-value", false);
             uri.AppendQuery("api-version", _apiVersion, true);
@@ -1971,7 +1972,7 @@ namespace UnbrandedTypeSpec
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.PipelineRequest;
             request.SetMethod("POST");
-            var uri = new RawRequestUriBuilder();
+            var uri = new RequestUri();
             uri.Reset(_endpoint);
             uri.AppendPath("/internalProtocol", false);
             uri.AppendQuery("api-version", _apiVersion, true);
@@ -1987,7 +1988,7 @@ namespace UnbrandedTypeSpec
             var message = _pipeline.CreateMessage(context, ResponseClassifier204);
             var request = message.PipelineRequest;
             request.SetMethod("GET");
-            var uri = new RawRequestUriBuilder();
+            var uri = new RequestUri();
             uri.Reset(_endpoint);
             uri.AppendPath("/stillConvenient", false);
             uri.AppendQuery("api-version", _apiVersion, true);

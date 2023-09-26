@@ -71,7 +71,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 }
                 writer.Line(Configuration.ApiTypes.GetSetMethodString(request.RequestedName, method.Method));
 
-                writer.Line($"var {uri:D} = new RawRequestUriBuilder();");
+                writer.Line($"var {uri:D} = new {Configuration.ApiTypes.GetRequestUriBuiilderExpression().Type}();");
                 foreach (var segment in clientMethod.Request.PathSegments)
                 {
                     var value = GetFieldReference(fields, segment.Value);
@@ -342,7 +342,19 @@ namespace AutoRest.CSharp.Generation.Writers
             methodName ??= segment.IsRaw ? "AppendRaw" : "AppendPath";
             writer.Append($"{uri}.{methodName}(");
             WriteConstantOrParameter(writer, value, enumAsString: !segment.IsRaw || TypeFactory.IsExtendableEnum(value.Type));
-            WriteSerializationFormat(writer, segment.Format);
+            if (!Configuration.IsBranded)
+            {
+                if (value.Type.IsFrameworkType && value.Type.FrameworkType != typeof(string))
+                {
+                    writer.Append($".ToString(");
+                    WriteSerializationFormat(writer, segment.Format);
+                    writer.AppendRaw(")");
+                }
+            }
+            else
+            {
+                WriteSerializationFormat(writer, segment.Format);
+            }
             writer.Line($", {segment.Escape:L});");
         }
 
@@ -371,7 +383,7 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             if (constantOrReference.IsConstant)
             {
-                return constantOrReference.Constant.GetConstantFormattable();
+                return constantOrReference.Constant.GetConstantFormattable(!Configuration.IsBranded);
             }
 
             if (!ignoreNullability && constantOrReference.Type.IsNullable && constantOrReference.Type.IsValueType)
@@ -392,7 +404,14 @@ namespace AutoRest.CSharp.Generation.Writers
             var formatSpecifier = format.ToFormatSpecifier();
             if (formatSpecifier != null)
             {
-                writer.Append($", {formatSpecifier:L}");
+                if (Configuration.IsBranded)
+                {
+                    writer.Append($", {formatSpecifier:L}");
+                }
+                else
+                {
+                    writer.Append($"{formatSpecifier:L}");
+                }
             }
         }
 

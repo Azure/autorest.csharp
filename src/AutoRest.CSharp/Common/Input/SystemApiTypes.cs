@@ -5,11 +5,13 @@ using System;
 using System.ServiceModel.Rest;
 using System.ServiceModel.Rest.Core;
 using System.ServiceModel.Rest.Experimental;
+using System.ServiceModel.Rest.Experimental.Core;
 using System.ServiceModel.Rest.Experimental.Core.Pipeline;
 using System.ServiceModel.Rest.Experimental.Core.Serialization;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.Base;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.System;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
+using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
@@ -82,5 +84,8 @@ namespace AutoRest.CSharp.Common.Input
         public override Type RequestContentType => typeof(RequestBody);
         public override string ToRequestContentName => "ToRequestBody";
         public override string RequestContentCreateName => nameof(RequestBody.CreateFromStream);
+
+        public override BaseRawRequestUriBuilderExpression GetRequestUriBuiilderExpression(ValueExpression? valueExpression = null)
+            => new RequestUriExpression(valueExpression ?? Snippets.New.Instance(typeof(RequestUri)));
     }
 }

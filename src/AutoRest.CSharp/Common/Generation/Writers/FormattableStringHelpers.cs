@@ -140,7 +140,7 @@ namespace AutoRest.CSharp.Generation.Writers
         public static FormattableString GetReferenceOrConstantFormattable(this ReferenceOrConstant value)
             => value.IsConstant ? value.Constant.GetConstantFormattable() : value.Reference.GetReferenceFormattable();
 
-        public static FormattableString GetConstantFormattable(this Constant constant)
+        public static FormattableString GetConstantFormattable(this Constant constant, bool writeAsString = false)
         {
             if (constant.Value == null)
             {
@@ -190,6 +190,11 @@ namespace AutoRest.CSharp.Generation.Writers
             if (frameworkType == typeof(ResourceType))
             {
                 return $"{((ResourceType)constant.Value).ToString():L}";
+            }
+
+            if (frameworkType == typeof(bool) && writeAsString)
+            {
+                return $"\"{constant.Value!.ToString()!.ToLower()}\"";
             }
 
             return $"{constant.Value:L}";

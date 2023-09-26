@@ -5,6 +5,7 @@ using System;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.Azure;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.Base;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
+using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
@@ -79,5 +80,8 @@ namespace AutoRest.CSharp.Common.Input
         public override Type RequestContentType => typeof(RequestContent);
         public override string ToRequestContentName => "ToRequestContent";
         public override string RequestContentCreateName => nameof(RequestContent.Create);
+
+        public override BaseRawRequestUriBuilderExpression GetRequestUriBuiilderExpression(ValueExpression? valueExpression = null)
+            => new RawRequestUriBuilderExpression(valueExpression ?? Snippets.New.Instance(typeof(RawRequestUriBuilder)));
     }
 }

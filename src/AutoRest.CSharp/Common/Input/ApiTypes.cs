@@ -101,5 +101,7 @@ namespace AutoRest.CSharp.Common.Input
         public abstract Type RequestContentType { get; }
         public abstract string ToRequestContentName { get; }
         public abstract string RequestContentCreateName { get; }
+
+        public abstract BaseRawRequestUriBuilderExpression GetRequestUriBuiilderExpression(ValueExpression? valueExpression = null);
     }
 }

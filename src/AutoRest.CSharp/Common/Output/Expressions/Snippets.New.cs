@@ -42,7 +42,7 @@ namespace AutoRest.CSharp.Common.Output.Models
             public static FormUrlEncodedContentExpression FormUrlEncodedContent() => new(Instance(typeof(FormUrlEncodedContent)));
             public static MultipartFormDataContentExpression MultipartFormDataContent() => new(Instance(typeof(MultipartFormDataContent)));
 
-            public static RawRequestUriBuilderExpression RawRequestUriBuilder() => new(Instance(typeof(RawRequestUriBuilder)));
+            public static BaseRawRequestUriBuilderExpression RawRequestUriBuilder() => Configuration.ApiTypes.GetRequestUriBuiilderExpression();
 
             public static RequestContextExpression RequestContext(CancellationTokenExpression cancellationToken)
                 => new(Instance(Configuration.ApiTypes.RequestContextType, new Dictionary<string, ValueExpression>{ [Configuration.ApiTypes.CancellationTokenName] = cancellationToken }));
