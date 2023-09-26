@@ -5,7 +5,9 @@
 
 #nullable disable
 
+using System;
 using System.IO;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -26,6 +28,9 @@ namespace media_types_LowLevel.Samples
 
             RequestContent content = null;
             Response response = client.AnalyzeBody(content, new ContentType("application/pdf"));
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -37,6 +42,9 @@ namespace media_types_LowLevel.Samples
 
             RequestContent content = null;
             Response response = await client.AnalyzeBodyAsync(content, new ContentType("application/pdf"));
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -48,6 +56,9 @@ namespace media_types_LowLevel.Samples
 
             RequestContent content = RequestContent.Create(File.OpenRead("<filePath>"));
             Response response = client.AnalyzeBody(content, new ContentType("application/pdf"));
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -59,6 +70,9 @@ namespace media_types_LowLevel.Samples
 
             RequestContent content = RequestContent.Create(File.OpenRead("<filePath>"));
             Response response = await client.AnalyzeBodyAsync(content, new ContentType("application/pdf"));
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -70,6 +84,8 @@ namespace media_types_LowLevel.Samples
 
             RequestContent content = null;
             Response response = client.AnalyzeBodyNoAcceptHeader(content, new ContentType("application/pdf"));
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -81,6 +97,8 @@ namespace media_types_LowLevel.Samples
 
             RequestContent content = null;
             Response response = await client.AnalyzeBodyNoAcceptHeaderAsync(content, new ContentType("application/pdf"));
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -92,6 +110,8 @@ namespace media_types_LowLevel.Samples
 
             RequestContent content = RequestContent.Create(File.OpenRead("<filePath>"));
             Response response = client.AnalyzeBodyNoAcceptHeader(content, new ContentType("application/pdf"));
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -103,6 +123,8 @@ namespace media_types_LowLevel.Samples
 
             RequestContent content = RequestContent.Create(File.OpenRead("<filePath>"));
             Response response = await client.AnalyzeBodyNoAcceptHeaderAsync(content, new ContentType("application/pdf"));
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -114,6 +136,9 @@ namespace media_types_LowLevel.Samples
 
             RequestContent content = null;
             Response response = client.ContentTypeWithEncoding(content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -125,6 +150,9 @@ namespace media_types_LowLevel.Samples
 
             RequestContent content = null;
             Response response = await client.ContentTypeWithEncodingAsync(content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -136,6 +164,9 @@ namespace media_types_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("<input>");
             Response response = client.ContentTypeWithEncoding(content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -147,6 +178,9 @@ namespace media_types_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("<input>");
             Response response = await client.ContentTypeWithEncodingAsync(content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -158,6 +192,9 @@ namespace media_types_LowLevel.Samples
 
             RequestContent content = RequestContent.Create(File.OpenRead("<filePath>"));
             Response response = client.BinaryBodyWithTwoContentTypes(content, new ContentType("application/json"));
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -169,6 +206,9 @@ namespace media_types_LowLevel.Samples
 
             RequestContent content = RequestContent.Create(File.OpenRead("<filePath>"));
             Response response = await client.BinaryBodyWithTwoContentTypesAsync(content, new ContentType("application/json"));
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -180,6 +220,9 @@ namespace media_types_LowLevel.Samples
 
             RequestContent content = RequestContent.Create(File.OpenRead("<filePath>"));
             Response response = client.BinaryBodyWithTwoContentTypes(content, new ContentType("application/json"));
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -191,6 +234,9 @@ namespace media_types_LowLevel.Samples
 
             RequestContent content = RequestContent.Create(File.OpenRead("<filePath>"));
             Response response = await client.BinaryBodyWithTwoContentTypesAsync(content, new ContentType("application/json"));
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -202,6 +248,9 @@ namespace media_types_LowLevel.Samples
 
             RequestContent content = RequestContent.Create(File.OpenRead("<filePath>"));
             Response response = client.BinaryBodyWithThreeContentTypes(content, new ContentType("application/json"));
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -213,6 +262,9 @@ namespace media_types_LowLevel.Samples
 
             RequestContent content = RequestContent.Create(File.OpenRead("<filePath>"));
             Response response = await client.BinaryBodyWithThreeContentTypesAsync(content, new ContentType("application/json"));
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -224,6 +276,9 @@ namespace media_types_LowLevel.Samples
 
             RequestContent content = RequestContent.Create(File.OpenRead("<filePath>"));
             Response response = client.BinaryBodyWithThreeContentTypes(content, new ContentType("application/json"));
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -235,6 +290,9 @@ namespace media_types_LowLevel.Samples
 
             RequestContent content = RequestContent.Create(File.OpenRead("<filePath>"));
             Response response = await client.BinaryBodyWithThreeContentTypesAsync(content, new ContentType("application/json"));
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -246,6 +304,9 @@ namespace media_types_LowLevel.Samples
 
             RequestContent content = RequestContent.Create(File.OpenRead("<filePath>"));
             Response response = client.BodyThreeTypes(content, new ContentType("application/octet-stream"));
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -257,6 +318,9 @@ namespace media_types_LowLevel.Samples
 
             RequestContent content = RequestContent.Create(File.OpenRead("<filePath>"));
             Response response = await client.BodyThreeTypesAsync(content, new ContentType("application/octet-stream"));
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -268,6 +332,9 @@ namespace media_types_LowLevel.Samples
 
             RequestContent content = RequestContent.Create(File.OpenRead("<filePath>"));
             Response response = client.BodyThreeTypes(content, new ContentType("application/octet-stream"));
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -279,6 +346,9 @@ namespace media_types_LowLevel.Samples
 
             RequestContent content = RequestContent.Create(File.OpenRead("<filePath>"));
             Response response = await client.BodyThreeTypesAsync(content, new ContentType("application/octet-stream"));
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -290,6 +360,9 @@ namespace media_types_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("<message>");
             Response response = client.PutTextAndJsonBody(content, new ContentType("application/json"));
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -301,6 +374,9 @@ namespace media_types_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("<message>");
             Response response = await client.PutTextAndJsonBodyAsync(content, new ContentType("application/json"));
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -312,6 +388,9 @@ namespace media_types_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("<message>");
             Response response = client.PutTextAndJsonBody(content, new ContentType("application/json"));
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -323,6 +402,9 @@ namespace media_types_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("<message>");
             Response response = await client.PutTextAndJsonBodyAsync(content, new ContentType("application/json"));
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
     }
 }

@@ -9,6 +9,9 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 BasicClient client = new BasicClient(credential);
 
 Response response = await client.GetValidAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetValidAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -16,6 +19,11 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 BasicClient client = new BasicClient(credential);
 
 Response response = await client.GetValidAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("id").ToString());
+Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("color").ToString());
 ]]></code></example>
     </member>
     <member name="GetValid(RequestContext)">
@@ -26,6 +34,9 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 BasicClient client = new BasicClient(credential);
 
 Response response = client.GetValid(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetValid with all parameters and parse the result.
 <code><![CDATA[
@@ -33,6 +44,11 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 BasicClient client = new BasicClient(credential);
 
 Response response = client.GetValid(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("id").ToString());
+Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("color").ToString());
 ]]></code></example>
     </member>
     <member name="PutValidAsync(RequestContent,RequestContext)">
@@ -44,6 +60,8 @@ BasicClient client = new BasicClient(credential);
 
 RequestContent content = RequestContent.Create(new object());
 Response response = await client.PutValidAsync(content);
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutValidAsync with all request content.
 <code><![CDATA[
@@ -57,6 +75,8 @@ RequestContent content = RequestContent.Create(new
     color = "cyan",
 });
 Response response = await client.PutValidAsync(content);
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="PutValid(RequestContent,RequestContext)">
@@ -68,6 +88,8 @@ BasicClient client = new BasicClient(credential);
 
 RequestContent content = RequestContent.Create(new object());
 Response response = client.PutValid(content);
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutValid with all request content.
 <code><![CDATA[
@@ -81,6 +103,8 @@ RequestContent content = RequestContent.Create(new
     color = "cyan",
 });
 Response response = client.PutValid(content);
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="GetInvalidAsync(RequestContext)">
@@ -91,6 +115,9 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 BasicClient client = new BasicClient(credential);
 
 Response response = await client.GetInvalidAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetInvalidAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -98,6 +125,11 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 BasicClient client = new BasicClient(credential);
 
 Response response = await client.GetInvalidAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("id").ToString());
+Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("color").ToString());
 ]]></code></example>
     </member>
     <member name="GetInvalid(RequestContext)">
@@ -108,6 +140,9 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 BasicClient client = new BasicClient(credential);
 
 Response response = client.GetInvalid(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetInvalid with all parameters and parse the result.
 <code><![CDATA[
@@ -115,6 +150,11 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 BasicClient client = new BasicClient(credential);
 
 Response response = client.GetInvalid(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("id").ToString());
+Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("color").ToString());
 ]]></code></example>
     </member>
     <member name="GetEmptyAsync(RequestContext)">
@@ -125,6 +165,9 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 BasicClient client = new BasicClient(credential);
 
 Response response = await client.GetEmptyAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetEmptyAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -132,6 +175,11 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 BasicClient client = new BasicClient(credential);
 
 Response response = await client.GetEmptyAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("id").ToString());
+Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("color").ToString());
 ]]></code></example>
     </member>
     <member name="GetEmpty(RequestContext)">
@@ -142,6 +190,9 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 BasicClient client = new BasicClient(credential);
 
 Response response = client.GetEmpty(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetEmpty with all parameters and parse the result.
 <code><![CDATA[
@@ -149,6 +200,11 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 BasicClient client = new BasicClient(credential);
 
 Response response = client.GetEmpty(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("id").ToString());
+Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("color").ToString());
 ]]></code></example>
     </member>
     <member name="GetNullAsync(RequestContext)">
@@ -159,6 +215,9 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 BasicClient client = new BasicClient(credential);
 
 Response response = await client.GetNullAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetNullAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -166,6 +225,11 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 BasicClient client = new BasicClient(credential);
 
 Response response = await client.GetNullAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("id").ToString());
+Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("color").ToString());
 ]]></code></example>
     </member>
     <member name="GetNull(RequestContext)">
@@ -176,6 +240,9 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 BasicClient client = new BasicClient(credential);
 
 Response response = client.GetNull(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetNull with all parameters and parse the result.
 <code><![CDATA[
@@ -183,6 +250,11 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 BasicClient client = new BasicClient(credential);
 
 Response response = client.GetNull(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("id").ToString());
+Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("color").ToString());
 ]]></code></example>
     </member>
     <member name="GetNotProvidedAsync(RequestContext)">
@@ -193,6 +265,9 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 BasicClient client = new BasicClient(credential);
 
 Response response = await client.GetNotProvidedAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetNotProvidedAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -200,6 +275,11 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 BasicClient client = new BasicClient(credential);
 
 Response response = await client.GetNotProvidedAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("id").ToString());
+Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("color").ToString());
 ]]></code></example>
     </member>
     <member name="GetNotProvided(RequestContext)">
@@ -210,6 +290,9 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 BasicClient client = new BasicClient(credential);
 
 Response response = client.GetNotProvided(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetNotProvided with all parameters and parse the result.
 <code><![CDATA[
@@ -217,6 +300,11 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 BasicClient client = new BasicClient(credential);
 
 Response response = client.GetNotProvided(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("id").ToString());
+Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("color").ToString());
 ]]></code></example>
     </member>
   </members>

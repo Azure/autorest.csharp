@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Identity;
@@ -23,6 +25,9 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Samples
             SharedModelInOperation client = new AccessClient().GetSharedModelInOperationClient("1.0.0");
 
             Response response = client.Public("<name>", null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]
@@ -32,6 +37,9 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Samples
             SharedModelInOperation client = new AccessClient().GetSharedModelInOperationClient("1.0.0");
 
             Response response = await client.PublicAsync("<name>", null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]
@@ -59,6 +67,9 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Samples
             SharedModelInOperation client = new AccessClient().GetSharedModelInOperationClient("1.0.0");
 
             Response response = client.Public("<name>", null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]
@@ -68,6 +79,9 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Samples
             SharedModelInOperation client = new AccessClient().GetSharedModelInOperationClient("1.0.0");
 
             Response response = await client.PublicAsync("<name>", null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]

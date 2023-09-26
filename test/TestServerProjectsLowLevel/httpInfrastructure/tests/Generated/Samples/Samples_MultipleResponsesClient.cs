@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Identity;
@@ -23,6 +25,9 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = client.Get200Model204NoModelDefaultError200Valid(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -33,6 +38,9 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = await client.Get200Model204NoModelDefaultError200ValidAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -43,6 +51,9 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = client.Get200Model204NoModelDefaultError200Valid(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("statusCode").ToString());
         }
 
         [Test]
@@ -53,6 +64,9 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = await client.Get200Model204NoModelDefaultError200ValidAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("statusCode").ToString());
         }
 
         [Test]
@@ -63,6 +77,9 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = client.Get200Model204NoModelDefaultError204Valid(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -73,6 +90,9 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = await client.Get200Model204NoModelDefaultError204ValidAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -83,6 +103,9 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = client.Get200Model204NoModelDefaultError204Valid(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("statusCode").ToString());
         }
 
         [Test]
@@ -93,6 +116,9 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = await client.Get200Model204NoModelDefaultError204ValidAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("statusCode").ToString());
         }
 
         [Test]
@@ -103,6 +129,9 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = client.Get200Model204NoModelDefaultError201Invalid(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -113,6 +142,9 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = await client.Get200Model204NoModelDefaultError201InvalidAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -123,6 +155,9 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = client.Get200Model204NoModelDefaultError201Invalid(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("statusCode").ToString());
         }
 
         [Test]
@@ -133,6 +168,9 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = await client.Get200Model204NoModelDefaultError201InvalidAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("statusCode").ToString());
         }
 
         [Test]
@@ -143,6 +181,9 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = client.Get200Model204NoModelDefaultError202None(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -153,6 +194,9 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = await client.Get200Model204NoModelDefaultError202NoneAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -163,6 +207,9 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = client.Get200Model204NoModelDefaultError202None(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("statusCode").ToString());
         }
 
         [Test]
@@ -173,6 +220,9 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = await client.Get200Model204NoModelDefaultError202NoneAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("statusCode").ToString());
         }
 
         [Test]
@@ -183,6 +233,9 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = client.Get200Model204NoModelDefaultError400Valid(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -193,6 +246,9 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = await client.Get200Model204NoModelDefaultError400ValidAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -203,6 +259,9 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = client.Get200Model204NoModelDefaultError400Valid(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("statusCode").ToString());
         }
 
         [Test]
@@ -213,6 +272,9 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = await client.Get200Model204NoModelDefaultError400ValidAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("statusCode").ToString());
         }
 
         [Test]
@@ -223,6 +285,9 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = client.Get200Model201ModelDefaultError200Valid(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -233,6 +298,9 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = await client.Get200Model201ModelDefaultError200ValidAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -243,6 +311,9 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = client.Get200Model201ModelDefaultError200Valid(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("statusCode").ToString());
         }
 
         [Test]
@@ -253,6 +324,9 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = await client.Get200Model201ModelDefaultError200ValidAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("statusCode").ToString());
         }
 
         [Test]
@@ -263,6 +337,9 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = client.Get200Model201ModelDefaultError201Valid(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -273,6 +350,9 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = await client.Get200Model201ModelDefaultError201ValidAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -283,6 +363,9 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = client.Get200Model201ModelDefaultError201Valid(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("statusCode").ToString());
         }
 
         [Test]
@@ -293,6 +376,9 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = await client.Get200Model201ModelDefaultError201ValidAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("statusCode").ToString());
         }
 
         [Test]
@@ -303,6 +389,9 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = client.Get200Model201ModelDefaultError400Valid(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -313,6 +402,9 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = await client.Get200Model201ModelDefaultError400ValidAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -323,6 +415,9 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = client.Get200Model201ModelDefaultError400Valid(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("statusCode").ToString());
         }
 
         [Test]
@@ -333,6 +428,9 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = await client.Get200Model201ModelDefaultError400ValidAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("statusCode").ToString());
         }
 
         [Test]
@@ -343,6 +441,9 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = client.Get200ModelA201ModelC404ModelDDefaultError200Valid(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -353,6 +454,9 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = await client.Get200ModelA201ModelC404ModelDDefaultError200ValidAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -363,6 +467,9 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = client.Get200ModelA201ModelC404ModelDDefaultError200Valid(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("statusCode").ToString());
         }
 
         [Test]
@@ -373,6 +480,9 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = await client.Get200ModelA201ModelC404ModelDDefaultError200ValidAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("statusCode").ToString());
         }
 
         [Test]
@@ -383,6 +493,9 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = client.Get200ModelA201ModelC404ModelDDefaultError201Valid(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -393,6 +506,9 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = await client.Get200ModelA201ModelC404ModelDDefaultError201ValidAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -403,6 +519,9 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = client.Get200ModelA201ModelC404ModelDDefaultError201Valid(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("statusCode").ToString());
         }
 
         [Test]
@@ -413,6 +532,9 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = await client.Get200ModelA201ModelC404ModelDDefaultError201ValidAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("statusCode").ToString());
         }
 
         [Test]
@@ -423,6 +545,9 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = client.Get200ModelA201ModelC404ModelDDefaultError404Valid(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -433,6 +558,9 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = await client.Get200ModelA201ModelC404ModelDDefaultError404ValidAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -443,6 +571,9 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = client.Get200ModelA201ModelC404ModelDDefaultError404Valid(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("statusCode").ToString());
         }
 
         [Test]
@@ -453,6 +584,9 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = await client.Get200ModelA201ModelC404ModelDDefaultError404ValidAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("statusCode").ToString());
         }
 
         [Test]
@@ -463,6 +597,9 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = client.Get200ModelA201ModelC404ModelDDefaultError400Valid(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -473,6 +610,9 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = await client.Get200ModelA201ModelC404ModelDDefaultError400ValidAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -483,6 +623,9 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = client.Get200ModelA201ModelC404ModelDDefaultError400Valid(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("statusCode").ToString());
         }
 
         [Test]
@@ -493,6 +636,9 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = await client.Get200ModelA201ModelC404ModelDDefaultError400ValidAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("statusCode").ToString());
         }
 
         [Test]
@@ -503,6 +649,8 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = client.Get202None204NoneDefaultError202None();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -513,6 +661,8 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = await client.Get202None204NoneDefaultError202NoneAsync();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -523,6 +673,8 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = client.Get202None204NoneDefaultError202None();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -533,6 +685,8 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = await client.Get202None204NoneDefaultError202NoneAsync();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -543,6 +697,8 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = client.Get202None204NoneDefaultError204None();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -553,6 +709,8 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = await client.Get202None204NoneDefaultError204NoneAsync();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -563,6 +721,8 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = client.Get202None204NoneDefaultError204None();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -573,6 +733,8 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = await client.Get202None204NoneDefaultError204NoneAsync();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -583,6 +745,8 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = client.Get202None204NoneDefaultError400Valid();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -593,6 +757,8 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = await client.Get202None204NoneDefaultError400ValidAsync();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -603,6 +769,8 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = client.Get202None204NoneDefaultError400Valid();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -613,6 +781,8 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = await client.Get202None204NoneDefaultError400ValidAsync();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -623,6 +793,8 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = client.Get202None204NoneDefaultNone202Invalid();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -633,6 +805,8 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = await client.Get202None204NoneDefaultNone202InvalidAsync();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -643,6 +817,8 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = client.Get202None204NoneDefaultNone202Invalid();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -653,6 +829,8 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = await client.Get202None204NoneDefaultNone202InvalidAsync();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -663,6 +841,8 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = client.Get202None204NoneDefaultNone204None();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -673,6 +853,8 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = await client.Get202None204NoneDefaultNone204NoneAsync();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -683,6 +865,8 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = client.Get202None204NoneDefaultNone204None();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -693,6 +877,8 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = await client.Get202None204NoneDefaultNone204NoneAsync();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -703,6 +889,8 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = client.Get202None204NoneDefaultNone400None();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -713,6 +901,8 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = await client.Get202None204NoneDefaultNone400NoneAsync();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -723,6 +913,8 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = client.Get202None204NoneDefaultNone400None();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -733,6 +925,8 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = await client.Get202None204NoneDefaultNone400NoneAsync();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -743,6 +937,8 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = client.Get202None204NoneDefaultNone400Invalid();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -753,6 +949,8 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = await client.Get202None204NoneDefaultNone400InvalidAsync();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -763,6 +961,8 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = client.Get202None204NoneDefaultNone400Invalid();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -773,6 +973,8 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = await client.Get202None204NoneDefaultNone400InvalidAsync();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -783,6 +985,9 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = client.GetDefaultModelA200Valid(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -793,6 +998,9 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = await client.GetDefaultModelA200ValidAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -803,6 +1011,9 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = client.GetDefaultModelA200Valid(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("statusCode").ToString());
         }
 
         [Test]
@@ -813,6 +1024,9 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = await client.GetDefaultModelA200ValidAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("statusCode").ToString());
         }
 
         [Test]
@@ -823,6 +1037,9 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = client.GetDefaultModelA200None(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -833,6 +1050,9 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = await client.GetDefaultModelA200NoneAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -843,6 +1063,9 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = client.GetDefaultModelA200None(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("statusCode").ToString());
         }
 
         [Test]
@@ -853,6 +1076,9 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = await client.GetDefaultModelA200NoneAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("statusCode").ToString());
         }
 
         [Test]
@@ -863,6 +1089,8 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = client.GetDefaultModelA400Valid();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -873,6 +1101,8 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = await client.GetDefaultModelA400ValidAsync();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -883,6 +1113,8 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = client.GetDefaultModelA400Valid();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -893,6 +1125,8 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = await client.GetDefaultModelA400ValidAsync();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -903,6 +1137,8 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = client.GetDefaultModelA400None();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -913,6 +1149,8 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = await client.GetDefaultModelA400NoneAsync();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -923,6 +1161,8 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = client.GetDefaultModelA400None();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -933,6 +1173,8 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = await client.GetDefaultModelA400NoneAsync();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -943,6 +1185,8 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = client.GetDefaultNone200Invalid();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -953,6 +1197,8 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = await client.GetDefaultNone200InvalidAsync();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -963,6 +1209,8 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = client.GetDefaultNone200Invalid();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -973,6 +1221,8 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = await client.GetDefaultNone200InvalidAsync();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -983,6 +1233,8 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = client.GetDefaultNone200None();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -993,6 +1245,8 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = await client.GetDefaultNone200NoneAsync();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1003,6 +1257,8 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = client.GetDefaultNone200None();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1013,6 +1269,8 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = await client.GetDefaultNone200NoneAsync();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1023,6 +1281,8 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = client.GetDefaultNone400Invalid();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1033,6 +1293,8 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = await client.GetDefaultNone400InvalidAsync();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1043,6 +1305,8 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = client.GetDefaultNone400Invalid();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1053,6 +1317,8 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = await client.GetDefaultNone400InvalidAsync();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1063,6 +1329,8 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = client.GetDefaultNone400None();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1073,6 +1341,8 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = await client.GetDefaultNone400NoneAsync();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1083,6 +1353,8 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = client.GetDefaultNone400None();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1093,6 +1365,8 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = await client.GetDefaultNone400NoneAsync();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1103,6 +1377,9 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = client.Get200ModelA200None(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -1113,6 +1390,9 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = await client.Get200ModelA200NoneAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -1123,6 +1403,9 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = client.Get200ModelA200None(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("statusCode").ToString());
         }
 
         [Test]
@@ -1133,6 +1416,9 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = await client.Get200ModelA200NoneAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("statusCode").ToString());
         }
 
         [Test]
@@ -1143,6 +1429,9 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = client.Get200ModelA200Valid(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -1153,6 +1442,9 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = await client.Get200ModelA200ValidAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -1163,6 +1455,9 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = client.Get200ModelA200Valid(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("statusCode").ToString());
         }
 
         [Test]
@@ -1173,6 +1468,9 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = await client.Get200ModelA200ValidAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("statusCode").ToString());
         }
 
         [Test]
@@ -1183,6 +1481,9 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = client.Get200ModelA200Invalid(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -1193,6 +1494,9 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = await client.Get200ModelA200InvalidAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -1203,6 +1507,9 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = client.Get200ModelA200Invalid(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("statusCode").ToString());
         }
 
         [Test]
@@ -1213,6 +1520,9 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = await client.Get200ModelA200InvalidAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("statusCode").ToString());
         }
 
         [Test]
@@ -1223,6 +1533,9 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = client.Get200ModelA400None(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -1233,6 +1546,9 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = await client.Get200ModelA400NoneAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -1243,6 +1559,9 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = client.Get200ModelA400None(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("statusCode").ToString());
         }
 
         [Test]
@@ -1253,6 +1572,9 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = await client.Get200ModelA400NoneAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("statusCode").ToString());
         }
 
         [Test]
@@ -1263,6 +1585,9 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = client.Get200ModelA400Valid(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -1273,6 +1598,9 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = await client.Get200ModelA400ValidAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -1283,6 +1611,9 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = client.Get200ModelA400Valid(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("statusCode").ToString());
         }
 
         [Test]
@@ -1293,6 +1624,9 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = await client.Get200ModelA400ValidAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("statusCode").ToString());
         }
 
         [Test]
@@ -1303,6 +1637,9 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = client.Get200ModelA400Invalid(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -1313,6 +1650,9 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = await client.Get200ModelA400InvalidAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -1323,6 +1663,9 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = client.Get200ModelA400Invalid(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("statusCode").ToString());
         }
 
         [Test]
@@ -1333,6 +1676,9 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = await client.Get200ModelA400InvalidAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("statusCode").ToString());
         }
 
         [Test]
@@ -1343,6 +1689,9 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = client.Get200ModelA202Valid(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -1353,6 +1702,9 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = await client.Get200ModelA202ValidAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -1363,6 +1715,9 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = client.Get200ModelA202Valid(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("statusCode").ToString());
         }
 
         [Test]
@@ -1373,6 +1728,9 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = await client.Get200ModelA202ValidAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("statusCode").ToString());
         }
     }
 }

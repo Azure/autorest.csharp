@@ -46,6 +46,9 @@ RequestContent content = RequestContent.Create(new
     value = "PT1H23M45S",
 });
 Response response = await client.DefaultAsync(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code>
 This sample shows how to call DefaultAsync.
 <code><![CDATA[
@@ -63,6 +66,9 @@ RequestContent content = RequestContent.Create(new
     value = "PT1H23M45S",
 });
 Response response = await client.DefaultAsync(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code>
 This sample shows how to call DefaultAsync with all parameters.
 <code><![CDATA[
@@ -83,6 +89,9 @@ RequestContent content = RequestContent.Create(new
     value = "PT1H23M45S",
 });
 Response response = client.Default(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code>
 This sample shows how to call Default.
 <code><![CDATA[
@@ -100,6 +109,9 @@ RequestContent content = RequestContent.Create(new
     value = "PT1H23M45S",
 });
 Response response = client.Default(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code>
 This sample shows how to call Default with all parameters.
 <code><![CDATA[
@@ -154,6 +166,9 @@ RequestContent content = RequestContent.Create(new
     value = "PT1H23M45S",
 });
 Response response = await client.Iso8601Async(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code>
 This sample shows how to call Iso8601Async.
 <code><![CDATA[
@@ -171,6 +186,9 @@ RequestContent content = RequestContent.Create(new
     value = "PT1H23M45S",
 });
 Response response = await client.Iso8601Async(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code>
 This sample shows how to call Iso8601Async with all parameters.
 <code><![CDATA[
@@ -191,6 +209,9 @@ RequestContent content = RequestContent.Create(new
     value = "PT1H23M45S",
 });
 Response response = client.Iso8601(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code>
 This sample shows how to call Iso8601.
 <code><![CDATA[
@@ -208,6 +229,9 @@ RequestContent content = RequestContent.Create(new
     value = "PT1H23M45S",
 });
 Response response = client.Iso8601(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code>
 This sample shows how to call Iso8601 with all parameters.
 <code><![CDATA[
@@ -262,6 +286,9 @@ RequestContent content = RequestContent.Create(new
     value = 10,
 });
 Response response = await client.Int32SecondsAsync(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code>
 This sample shows how to call Int32SecondsAsync.
 <code><![CDATA[
@@ -279,6 +306,9 @@ RequestContent content = RequestContent.Create(new
     value = 10,
 });
 Response response = await client.Int32SecondsAsync(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code>
 This sample shows how to call Int32SecondsAsync with all parameters.
 <code><![CDATA[
@@ -299,6 +329,9 @@ RequestContent content = RequestContent.Create(new
     value = 10,
 });
 Response response = client.Int32Seconds(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code>
 This sample shows how to call Int32Seconds.
 <code><![CDATA[
@@ -316,6 +349,9 @@ RequestContent content = RequestContent.Create(new
     value = 10,
 });
 Response response = client.Int32Seconds(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code>
 This sample shows how to call Int32Seconds with all parameters.
 <code><![CDATA[
@@ -370,6 +406,9 @@ RequestContent content = RequestContent.Create(new
     value = 10F,
 });
 Response response = await client.FloatSecondsAsync(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code>
 This sample shows how to call FloatSecondsAsync.
 <code><![CDATA[
@@ -387,6 +426,9 @@ RequestContent content = RequestContent.Create(new
     value = 10F,
 });
 Response response = await client.FloatSecondsAsync(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code>
 This sample shows how to call FloatSecondsAsync with all parameters.
 <code><![CDATA[
@@ -407,6 +449,9 @@ RequestContent content = RequestContent.Create(new
     value = 10F,
 });
 Response response = client.FloatSeconds(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code>
 This sample shows how to call FloatSeconds.
 <code><![CDATA[
@@ -424,6 +469,9 @@ RequestContent content = RequestContent.Create(new
     value = 10F,
 });
 Response response = client.FloatSeconds(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code>
 This sample shows how to call FloatSeconds with all parameters.
 <code><![CDATA[
@@ -481,6 +529,9 @@ RequestContent content = RequestContent.Create(new
     },
 });
 Response response = await client.FloatSecondsArrayAsync(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value")[0].ToString());
 ]]></code>
 This sample shows how to call FloatSecondsArrayAsync.
 <code><![CDATA[
@@ -501,6 +552,9 @@ RequestContent content = RequestContent.Create(new
     },
 });
 Response response = await client.FloatSecondsArrayAsync(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value")[0].ToString());
 ]]></code>
 This sample shows how to call FloatSecondsArrayAsync with all parameters.
 <code><![CDATA[
@@ -524,6 +578,9 @@ RequestContent content = RequestContent.Create(new
     },
 });
 Response response = client.FloatSecondsArray(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value")[0].ToString());
 ]]></code>
 This sample shows how to call FloatSecondsArray.
 <code><![CDATA[
@@ -544,6 +601,9 @@ RequestContent content = RequestContent.Create(new
     },
 });
 Response response = client.FloatSecondsArray(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value")[0].ToString());
 ]]></code>
 This sample shows how to call FloatSecondsArray with all parameters.
 <code><![CDATA[

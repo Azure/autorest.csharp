@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -27,6 +28,8 @@ namespace Parameters.Spread.Samples
                 name = "<name>",
             });
             Response response = client.SpreadAsRequestBody(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -40,6 +43,8 @@ namespace Parameters.Spread.Samples
                 name = "<name>",
             });
             Response response = await client.SpreadAsRequestBodyAsync(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -71,6 +76,8 @@ namespace Parameters.Spread.Samples
                 name = "<name>",
             });
             Response response = client.SpreadAsRequestBody(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -84,6 +91,8 @@ namespace Parameters.Spread.Samples
                 name = "<name>",
             });
             Response response = await client.SpreadAsRequestBodyAsync(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -115,6 +124,8 @@ namespace Parameters.Spread.Samples
                 name = "<name>",
             });
             Response response = client.SpreadAsRequestParameter("<id>", "<x-ms-test-header>", content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -128,6 +139,8 @@ namespace Parameters.Spread.Samples
                 name = "<name>",
             });
             Response response = await client.SpreadAsRequestParameterAsync("<id>", "<x-ms-test-header>", content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -159,6 +172,8 @@ namespace Parameters.Spread.Samples
                 name = "<name>",
             });
             Response response = client.SpreadAsRequestParameter("<id>", "<x-ms-test-header>", content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -172,6 +187,8 @@ namespace Parameters.Spread.Samples
                 name = "<name>",
             });
             Response response = await client.SpreadAsRequestParameterAsync("<id>", "<x-ms-test-header>", content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -208,6 +225,8 @@ namespace Parameters.Spread.Samples
                 prop6 = "<prop6>",
             });
             Response response = client.SpreadWithMultipleParameters("<id>", "<x-ms-test-header>", content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -226,6 +245,8 @@ namespace Parameters.Spread.Samples
                 prop6 = "<prop6>",
             });
             Response response = await client.SpreadWithMultipleParametersAsync("<id>", "<x-ms-test-header>", content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -262,6 +283,8 @@ namespace Parameters.Spread.Samples
                 prop6 = "<prop6>",
             });
             Response response = client.SpreadWithMultipleParameters("<id>", "<x-ms-test-header>", content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -280,6 +303,8 @@ namespace Parameters.Spread.Samples
                 prop6 = "<prop6>",
             });
             Response response = await client.SpreadWithMultipleParametersAsync("<id>", "<x-ms-test-header>", content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]

@@ -38,6 +38,9 @@ This sample shows how to call SmokeTestAsync and parse the result.
 TraitsClient client = new TraitsClient();
 
 Response response = await client.SmokeTestAsync(1234, "<foo>", null, null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code>
 This sample shows how to call SmokeTestAsync.
 <code><![CDATA[
@@ -50,6 +53,10 @@ This sample shows how to call SmokeTestAsync with all parameters and parse the r
 TraitsClient client = new TraitsClient();
 
 Response response = await client.SmokeTestAsync(1234, "<foo>", null, null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("id").ToString());
+Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code>
 This sample shows how to call SmokeTestAsync with all parameters.
 <code><![CDATA[
@@ -65,6 +72,9 @@ This sample shows how to call SmokeTest and parse the result.
 TraitsClient client = new TraitsClient();
 
 Response response = client.SmokeTest(1234, "<foo>", null, null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code>
 This sample shows how to call SmokeTest.
 <code><![CDATA[
@@ -77,6 +87,10 @@ This sample shows how to call SmokeTest with all parameters and parse the result
 TraitsClient client = new TraitsClient();
 
 Response response = client.SmokeTest(1234, "<foo>", null, null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("id").ToString());
+Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code>
 This sample shows how to call SmokeTest with all parameters.
 <code><![CDATA[
@@ -130,6 +144,9 @@ RequestContent content = RequestContent.Create(new
     userActionValue = "<userActionValue>",
 });
 Response response = await client.RepeatableActionAsync(1234, content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("userActionResult").ToString());
 ]]></code>
 This sample shows how to call RepeatableActionAsync.
 <code><![CDATA[
@@ -147,6 +164,9 @@ RequestContent content = RequestContent.Create(new
     userActionValue = "<userActionValue>",
 });
 Response response = await client.RepeatableActionAsync(1234, content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("userActionResult").ToString());
 ]]></code>
 This sample shows how to call RepeatableActionAsync with all parameters.
 <code><![CDATA[
@@ -167,6 +187,9 @@ RequestContent content = RequestContent.Create(new
     userActionValue = "<userActionValue>",
 });
 Response response = client.RepeatableAction(1234, content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("userActionResult").ToString());
 ]]></code>
 This sample shows how to call RepeatableAction.
 <code><![CDATA[
@@ -184,6 +207,9 @@ RequestContent content = RequestContent.Create(new
     userActionValue = "<userActionValue>",
 });
 Response response = client.RepeatableAction(1234, content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("userActionResult").ToString());
 ]]></code>
 This sample shows how to call RepeatableAction with all parameters.
 <code><![CDATA[

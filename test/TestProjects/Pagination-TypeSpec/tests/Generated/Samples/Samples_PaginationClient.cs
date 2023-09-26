@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Azure.Core;
 using Azure.Identity;
@@ -32,6 +33,10 @@ namespace Pagination.Samples
             });
             foreach (BinaryData item in client.GetPaginationLedgerEntries(content))
             {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result[0].GetProperty("contents").ToString());
+                Console.WriteLine(result[0].GetProperty("collectionId").ToString());
+                Console.WriteLine(result[0].GetProperty("transactionId").ToString());
             }
         }
 
@@ -50,6 +55,10 @@ namespace Pagination.Samples
             });
             await foreach (BinaryData item in client.GetPaginationLedgerEntriesAsync(content))
             {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result[0].GetProperty("contents").ToString());
+                Console.WriteLine(result[0].GetProperty("collectionId").ToString());
+                Console.WriteLine(result[0].GetProperty("transactionId").ToString());
             }
         }
 
@@ -96,6 +105,10 @@ namespace Pagination.Samples
             });
             foreach (BinaryData item in client.GetPaginationLedgerEntries(content))
             {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result[0].GetProperty("contents").ToString());
+                Console.WriteLine(result[0].GetProperty("collectionId").ToString());
+                Console.WriteLine(result[0].GetProperty("transactionId").ToString());
             }
         }
 
@@ -114,6 +127,10 @@ namespace Pagination.Samples
             });
             await foreach (BinaryData item in client.GetPaginationLedgerEntriesAsync(content))
             {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result[0].GetProperty("contents").ToString());
+                Console.WriteLine(result[0].GetProperty("collectionId").ToString());
+                Console.WriteLine(result[0].GetProperty("transactionId").ToString());
             }
         }
 
@@ -155,6 +172,8 @@ namespace Pagination.Samples
 
             foreach (BinaryData item in client.GetMetricDimensionValues("<testRunId>", "<name>", "<metricNamespace>", null, null, null, null))
             {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result[0].GetProperty("value")[0].ToString());
             }
         }
 
@@ -168,6 +187,8 @@ namespace Pagination.Samples
 
             await foreach (BinaryData item in client.GetMetricDimensionValuesAsync("<testRunId>", "<name>", "<metricNamespace>", null, null, null, null))
             {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result[0].GetProperty("value")[0].ToString());
             }
         }
 
@@ -207,6 +228,8 @@ namespace Pagination.Samples
 
             foreach (BinaryData item in client.GetMetricDimensionValues("<testRunId>", "<name>", "<metricNamespace>", "PT5S", "<metricName>", "<timespan>", null))
             {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result[0].GetProperty("value")[0].ToString());
             }
         }
 
@@ -220,6 +243,8 @@ namespace Pagination.Samples
 
             await foreach (BinaryData item in client.GetMetricDimensionValuesAsync("<testRunId>", "<name>", "<metricNamespace>", "PT5S", "<metricName>", "<timespan>", null))
             {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result[0].GetProperty("value")[0].ToString());
             }
         }
 
@@ -259,6 +284,10 @@ namespace Pagination.Samples
 
             foreach (BinaryData item in client.GetLedgerEntries(null))
             {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result[0].GetProperty("contents").ToString());
+                Console.WriteLine(result[0].GetProperty("collectionId").ToString());
+                Console.WriteLine(result[0].GetProperty("transactionId").ToString());
             }
         }
 
@@ -272,6 +301,10 @@ namespace Pagination.Samples
 
             await foreach (BinaryData item in client.GetLedgerEntriesAsync(null))
             {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result[0].GetProperty("contents").ToString());
+                Console.WriteLine(result[0].GetProperty("collectionId").ToString());
+                Console.WriteLine(result[0].GetProperty("transactionId").ToString());
             }
         }
 
@@ -311,6 +344,10 @@ namespace Pagination.Samples
 
             foreach (BinaryData item in client.GetLedgerEntries(null))
             {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result[0].GetProperty("contents").ToString());
+                Console.WriteLine(result[0].GetProperty("collectionId").ToString());
+                Console.WriteLine(result[0].GetProperty("transactionId").ToString());
             }
         }
 
@@ -324,6 +361,10 @@ namespace Pagination.Samples
 
             await foreach (BinaryData item in client.GetLedgerEntriesAsync(null))
             {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result[0].GetProperty("contents").ToString());
+                Console.WriteLine(result[0].GetProperty("collectionId").ToString());
+                Console.WriteLine(result[0].GetProperty("transactionId").ToString());
             }
         }
 
@@ -363,6 +404,8 @@ namespace Pagination.Samples
 
             foreach (BinaryData item in client.GetTextBlocklists(null))
             {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result[0].GetProperty("blocklistName").ToString());
             }
         }
 
@@ -376,6 +419,8 @@ namespace Pagination.Samples
 
             await foreach (BinaryData item in client.GetTextBlocklistsAsync(null))
             {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result[0].GetProperty("blocklistName").ToString());
             }
         }
 
@@ -415,6 +460,9 @@ namespace Pagination.Samples
 
             foreach (BinaryData item in client.GetTextBlocklists(null))
             {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result[0].GetProperty("blocklistName").ToString());
+                Console.WriteLine(result[0].GetProperty("description").ToString());
             }
         }
 
@@ -428,6 +476,9 @@ namespace Pagination.Samples
 
             await foreach (BinaryData item in client.GetTextBlocklistsAsync(null))
             {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result[0].GetProperty("blocklistName").ToString());
+                Console.WriteLine(result[0].GetProperty("description").ToString());
             }
         }
 
@@ -467,6 +518,9 @@ namespace Pagination.Samples
 
             foreach (BinaryData item in client.GetTextBlocklistItems("<blocklistName>", null, null, null, null))
             {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result[0].GetProperty("blockItemId").ToString());
+                Console.WriteLine(result[0].GetProperty("text").ToString());
             }
         }
 
@@ -480,6 +534,9 @@ namespace Pagination.Samples
 
             await foreach (BinaryData item in client.GetTextBlocklistItemsAsync("<blocklistName>", null, null, null, null))
             {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result[0].GetProperty("blockItemId").ToString());
+                Console.WriteLine(result[0].GetProperty("text").ToString());
             }
         }
 
@@ -519,6 +576,10 @@ namespace Pagination.Samples
 
             foreach (BinaryData item in client.GetTextBlocklistItems("<blocklistName>", 1234, 1234, 1234, null))
             {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result[0].GetProperty("blockItemId").ToString());
+                Console.WriteLine(result[0].GetProperty("description").ToString());
+                Console.WriteLine(result[0].GetProperty("text").ToString());
             }
         }
 
@@ -532,6 +593,10 @@ namespace Pagination.Samples
 
             await foreach (BinaryData item in client.GetTextBlocklistItemsAsync("<blocklistName>", 1234, 1234, 1234, null))
             {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result[0].GetProperty("blockItemId").ToString());
+                Console.WriteLine(result[0].GetProperty("description").ToString());
+                Console.WriteLine(result[0].GetProperty("text").ToString());
             }
         }
 

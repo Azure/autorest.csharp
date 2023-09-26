@@ -38,6 +38,9 @@ This sample shows how to call GetDatetimeValueAsync and parse the result.
 DatetimeValue client = new DictionaryClient().GetDatetimeValueClient("1.0.0");
 
 Response response = await client.GetDatetimeValueAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("<key>").ToString());
 ]]></code>
 This sample shows how to call GetDatetimeValueAsync.
 <code><![CDATA[
@@ -50,6 +53,9 @@ This sample shows how to call GetDatetimeValueAsync with all parameters and pars
 DatetimeValue client = new DictionaryClient().GetDatetimeValueClient("1.0.0");
 
 Response response = await client.GetDatetimeValueAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("<key>").ToString());
 ]]></code>
 This sample shows how to call GetDatetimeValueAsync with all parameters.
 <code><![CDATA[
@@ -65,6 +71,9 @@ This sample shows how to call GetDatetimeValue and parse the result.
 DatetimeValue client = new DictionaryClient().GetDatetimeValueClient("1.0.0");
 
 Response response = client.GetDatetimeValue(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("<key>").ToString());
 ]]></code>
 This sample shows how to call GetDatetimeValue.
 <code><![CDATA[
@@ -77,6 +86,9 @@ This sample shows how to call GetDatetimeValue with all parameters and parse the
 DatetimeValue client = new DictionaryClient().GetDatetimeValueClient("1.0.0");
 
 Response response = client.GetDatetimeValue(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("<key>").ToString());
 ]]></code>
 This sample shows how to call GetDatetimeValue with all parameters.
 <code><![CDATA[
@@ -138,6 +150,8 @@ RequestContent content = RequestContent.Create(new
     key = "2022-05-10T14:57:31.2311892-04:00",
 });
 Response response = await client.PutAsync(content);
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutAsync.
 <code><![CDATA[
@@ -157,6 +171,8 @@ RequestContent content = RequestContent.Create(new
     key = "2022-05-10T14:57:31.2311892-04:00",
 });
 Response response = await client.PutAsync(content);
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutAsync with all parameters.
 <code><![CDATA[
@@ -179,6 +195,8 @@ RequestContent content = RequestContent.Create(new
     key = "2022-05-10T14:57:31.2311892-04:00",
 });
 Response response = client.Put(content);
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Put.
 <code><![CDATA[
@@ -198,6 +216,8 @@ RequestContent content = RequestContent.Create(new
     key = "2022-05-10T14:57:31.2311892-04:00",
 });
 Response response = client.Put(content);
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Put with all parameters.
 <code><![CDATA[

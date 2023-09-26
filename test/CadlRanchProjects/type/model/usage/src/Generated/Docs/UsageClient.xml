@@ -46,6 +46,8 @@ RequestContent content = RequestContent.Create(new
     requiredProp = "<requiredProp>",
 });
 Response response = await client.InputAsync(content);
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call InputAsync.
 <code><![CDATA[
@@ -63,6 +65,8 @@ RequestContent content = RequestContent.Create(new
     requiredProp = "<requiredProp>",
 });
 Response response = await client.InputAsync(content);
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call InputAsync with all parameters.
 <code><![CDATA[
@@ -83,6 +87,8 @@ RequestContent content = RequestContent.Create(new
     requiredProp = "<requiredProp>",
 });
 Response response = client.Input(content);
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Input.
 <code><![CDATA[
@@ -100,6 +106,8 @@ RequestContent content = RequestContent.Create(new
     requiredProp = "<requiredProp>",
 });
 Response response = client.Input(content);
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Input with all parameters.
 <code><![CDATA[
@@ -146,6 +154,9 @@ This sample shows how to call OutputAsync and parse the result.
 UsageClient client = new UsageClient();
 
 Response response = await client.OutputAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("requiredProp").ToString());
 ]]></code>
 This sample shows how to call OutputAsync.
 <code><![CDATA[
@@ -158,6 +169,9 @@ This sample shows how to call OutputAsync with all parameters and parse the resu
 UsageClient client = new UsageClient();
 
 Response response = await client.OutputAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("requiredProp").ToString());
 ]]></code>
 This sample shows how to call OutputAsync with all parameters.
 <code><![CDATA[
@@ -173,6 +187,9 @@ This sample shows how to call Output and parse the result.
 UsageClient client = new UsageClient();
 
 Response response = client.Output(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("requiredProp").ToString());
 ]]></code>
 This sample shows how to call Output.
 <code><![CDATA[
@@ -185,6 +202,9 @@ This sample shows how to call Output with all parameters and parse the result.
 UsageClient client = new UsageClient();
 
 Response response = client.Output(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("requiredProp").ToString());
 ]]></code>
 This sample shows how to call Output with all parameters.
 <code><![CDATA[
@@ -238,6 +258,9 @@ RequestContent content = RequestContent.Create(new
     requiredProp = "<requiredProp>",
 });
 Response response = await client.InputAndOutputAsync(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("requiredProp").ToString());
 ]]></code>
 This sample shows how to call InputAndOutputAsync.
 <code><![CDATA[
@@ -255,6 +278,9 @@ RequestContent content = RequestContent.Create(new
     requiredProp = "<requiredProp>",
 });
 Response response = await client.InputAndOutputAsync(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("requiredProp").ToString());
 ]]></code>
 This sample shows how to call InputAndOutputAsync with all parameters.
 <code><![CDATA[
@@ -275,6 +301,9 @@ RequestContent content = RequestContent.Create(new
     requiredProp = "<requiredProp>",
 });
 Response response = client.InputAndOutput(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("requiredProp").ToString());
 ]]></code>
 This sample shows how to call InputAndOutput.
 <code><![CDATA[
@@ -292,6 +321,9 @@ RequestContent content = RequestContent.Create(new
     requiredProp = "<requiredProp>",
 });
 Response response = client.InputAndOutput(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("requiredProp").ToString());
 ]]></code>
 This sample shows how to call InputAndOutput with all parameters.
 <code><![CDATA[

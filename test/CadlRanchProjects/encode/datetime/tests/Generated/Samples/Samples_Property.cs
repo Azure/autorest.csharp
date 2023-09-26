@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -29,6 +30,9 @@ namespace Encode.Datetime.Samples
                 value = "2022-05-10T14:57:31.2311892-04:00",
             });
             Response response = client.Default(content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("value").ToString());
         }
 
         [Test]
@@ -42,6 +46,9 @@ namespace Encode.Datetime.Samples
                 value = "2022-05-10T14:57:31.2311892-04:00",
             });
             Response response = await client.DefaultAsync(content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("value").ToString());
         }
 
         [Test]
@@ -75,6 +82,9 @@ namespace Encode.Datetime.Samples
                 value = "2022-05-10T14:57:31.2311892-04:00",
             });
             Response response = client.Default(content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("value").ToString());
         }
 
         [Test]
@@ -88,6 +98,9 @@ namespace Encode.Datetime.Samples
                 value = "2022-05-10T14:57:31.2311892-04:00",
             });
             Response response = await client.DefaultAsync(content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("value").ToString());
         }
 
         [Test]
@@ -121,6 +134,9 @@ namespace Encode.Datetime.Samples
                 value = "2022-05-10T18:57:31.2311892Z",
             });
             Response response = client.Rfc3339(content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("value").ToString());
         }
 
         [Test]
@@ -134,6 +150,9 @@ namespace Encode.Datetime.Samples
                 value = "2022-05-10T18:57:31.2311892Z",
             });
             Response response = await client.Rfc3339Async(content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("value").ToString());
         }
 
         [Test]
@@ -167,6 +186,9 @@ namespace Encode.Datetime.Samples
                 value = "2022-05-10T18:57:31.2311892Z",
             });
             Response response = client.Rfc3339(content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("value").ToString());
         }
 
         [Test]
@@ -180,6 +202,9 @@ namespace Encode.Datetime.Samples
                 value = "2022-05-10T18:57:31.2311892Z",
             });
             Response response = await client.Rfc3339Async(content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("value").ToString());
         }
 
         [Test]
@@ -213,6 +238,9 @@ namespace Encode.Datetime.Samples
                 value = "Tue, 10 May 2022 18:57:31 GMT",
             });
             Response response = client.Rfc7231(content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("value").ToString());
         }
 
         [Test]
@@ -226,6 +254,9 @@ namespace Encode.Datetime.Samples
                 value = "Tue, 10 May 2022 18:57:31 GMT",
             });
             Response response = await client.Rfc7231Async(content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("value").ToString());
         }
 
         [Test]
@@ -259,6 +290,9 @@ namespace Encode.Datetime.Samples
                 value = "Tue, 10 May 2022 18:57:31 GMT",
             });
             Response response = client.Rfc7231(content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("value").ToString());
         }
 
         [Test]
@@ -272,6 +306,9 @@ namespace Encode.Datetime.Samples
                 value = "Tue, 10 May 2022 18:57:31 GMT",
             });
             Response response = await client.Rfc7231Async(content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("value").ToString());
         }
 
         [Test]
@@ -305,6 +342,9 @@ namespace Encode.Datetime.Samples
                 value = 1652209051,
             });
             Response response = client.UnixTimestamp(content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("value").ToString());
         }
 
         [Test]
@@ -318,6 +358,9 @@ namespace Encode.Datetime.Samples
                 value = 1652209051,
             });
             Response response = await client.UnixTimestampAsync(content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("value").ToString());
         }
 
         [Test]
@@ -351,6 +394,9 @@ namespace Encode.Datetime.Samples
                 value = 1652209051,
             });
             Response response = client.UnixTimestamp(content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("value").ToString());
         }
 
         [Test]
@@ -364,6 +410,9 @@ namespace Encode.Datetime.Samples
                 value = 1652209051,
             });
             Response response = await client.UnixTimestampAsync(content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("value").ToString());
         }
 
         [Test]
@@ -400,6 +449,9 @@ namespace Encode.Datetime.Samples
             },
             });
             Response response = client.UnixTimestampArray(content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("value")[0].ToString());
         }
 
         [Test]
@@ -416,6 +468,9 @@ namespace Encode.Datetime.Samples
             },
             });
             Response response = await client.UnixTimestampArrayAsync(content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("value")[0].ToString());
         }
 
         [Test]
@@ -452,6 +507,9 @@ namespace Encode.Datetime.Samples
             },
             });
             Response response = client.UnixTimestampArray(content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("value")[0].ToString());
         }
 
         [Test]
@@ -468,6 +526,9 @@ namespace Encode.Datetime.Samples
             },
             });
             Response response = await client.UnixTimestampArrayAsync(content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("value")[0].ToString());
         }
 
         [Test]

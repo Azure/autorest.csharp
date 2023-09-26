@@ -41,6 +41,8 @@ OptionalExplicit client = new BodyOptionalityClient().GetOptionalExplicitClient(
 
 RequestContent content = null;
 Response response = await client.SetAsync(content);
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call SetAsync.
 <code><![CDATA[
@@ -57,6 +59,8 @@ RequestContent content = RequestContent.Create(new
     name = "<name>",
 });
 Response response = await client.SetAsync(content);
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call SetAsync with all parameters.
 <code><![CDATA[
@@ -74,6 +78,8 @@ OptionalExplicit client = new BodyOptionalityClient().GetOptionalExplicitClient(
 
 RequestContent content = null;
 Response response = client.Set(content);
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Set.
 <code><![CDATA[
@@ -90,6 +96,8 @@ RequestContent content = RequestContent.Create(new
     name = "<name>",
 });
 Response response = client.Set(content);
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Set with all parameters.
 <code><![CDATA[
@@ -139,6 +147,8 @@ OptionalExplicit client = new BodyOptionalityClient().GetOptionalExplicitClient(
 
 RequestContent content = null;
 Response response = await client.OmitAsync(content);
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call OmitAsync.
 <code><![CDATA[
@@ -155,6 +165,8 @@ RequestContent content = RequestContent.Create(new
     name = "<name>",
 });
 Response response = await client.OmitAsync(content);
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call OmitAsync with all parameters.
 <code><![CDATA[
@@ -172,6 +184,8 @@ OptionalExplicit client = new BodyOptionalityClient().GetOptionalExplicitClient(
 
 RequestContent content = null;
 Response response = client.Omit(content);
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Omit.
 <code><![CDATA[
@@ -188,6 +202,8 @@ RequestContent content = RequestContent.Create(new
     name = "<name>",
 });
 Response response = client.Omit(content);
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Omit with all parameters.
 <code><![CDATA[

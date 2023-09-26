@@ -24,6 +24,8 @@ namespace Encode.Duration.Samples
             Header client = new DurationClient().GetHeaderClient("1.0.0");
 
             Response response = client.Default(XmlConvert.ToTimeSpan("PT1H23M45S"));
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -33,6 +35,8 @@ namespace Encode.Duration.Samples
             Header client = new DurationClient().GetHeaderClient("1.0.0");
 
             Response response = await client.DefaultAsync(XmlConvert.ToTimeSpan("PT1H23M45S"));
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -42,6 +46,8 @@ namespace Encode.Duration.Samples
             Header client = new DurationClient().GetHeaderClient("1.0.0");
 
             Response response = client.Default(XmlConvert.ToTimeSpan("PT1H23M45S"));
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -51,6 +57,8 @@ namespace Encode.Duration.Samples
             Header client = new DurationClient().GetHeaderClient("1.0.0");
 
             Response response = await client.DefaultAsync(XmlConvert.ToTimeSpan("PT1H23M45S"));
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -60,6 +68,8 @@ namespace Encode.Duration.Samples
             Header client = new DurationClient().GetHeaderClient("1.0.0");
 
             Response response = client.Iso8601(XmlConvert.ToTimeSpan("PT1H23M45S"));
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -69,6 +79,8 @@ namespace Encode.Duration.Samples
             Header client = new DurationClient().GetHeaderClient("1.0.0");
 
             Response response = await client.Iso8601Async(XmlConvert.ToTimeSpan("PT1H23M45S"));
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -78,6 +90,8 @@ namespace Encode.Duration.Samples
             Header client = new DurationClient().GetHeaderClient("1.0.0");
 
             Response response = client.Iso8601(XmlConvert.ToTimeSpan("PT1H23M45S"));
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -87,6 +101,8 @@ namespace Encode.Duration.Samples
             Header client = new DurationClient().GetHeaderClient("1.0.0");
 
             Response response = await client.Iso8601Async(XmlConvert.ToTimeSpan("PT1H23M45S"));
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -96,6 +112,8 @@ namespace Encode.Duration.Samples
             Header client = new DurationClient().GetHeaderClient("1.0.0");
 
             Response response = client.Iso8601Array(new TimeSpan[] { XmlConvert.ToTimeSpan("PT1H23M45S") });
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -105,6 +123,8 @@ namespace Encode.Duration.Samples
             Header client = new DurationClient().GetHeaderClient("1.0.0");
 
             Response response = await client.Iso8601ArrayAsync(new TimeSpan[] { XmlConvert.ToTimeSpan("PT1H23M45S") });
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -114,6 +134,8 @@ namespace Encode.Duration.Samples
             Header client = new DurationClient().GetHeaderClient("1.0.0");
 
             Response response = client.Iso8601Array(new TimeSpan[] { XmlConvert.ToTimeSpan("PT1H23M45S") });
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -123,6 +145,8 @@ namespace Encode.Duration.Samples
             Header client = new DurationClient().GetHeaderClient("1.0.0");
 
             Response response = await client.Iso8601ArrayAsync(new TimeSpan[] { XmlConvert.ToTimeSpan("PT1H23M45S") });
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -132,6 +156,8 @@ namespace Encode.Duration.Samples
             Header client = new DurationClient().GetHeaderClient("1.0.0");
 
             Response response = client.Int32Seconds(TimeSpan.FromSeconds(10));
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -141,6 +167,8 @@ namespace Encode.Duration.Samples
             Header client = new DurationClient().GetHeaderClient("1.0.0");
 
             Response response = await client.Int32SecondsAsync(TimeSpan.FromSeconds(10));
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -150,6 +178,8 @@ namespace Encode.Duration.Samples
             Header client = new DurationClient().GetHeaderClient("1.0.0");
 
             Response response = client.Int32Seconds(TimeSpan.FromSeconds(10));
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -159,6 +189,8 @@ namespace Encode.Duration.Samples
             Header client = new DurationClient().GetHeaderClient("1.0.0");
 
             Response response = await client.Int32SecondsAsync(TimeSpan.FromSeconds(10));
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -168,6 +200,8 @@ namespace Encode.Duration.Samples
             Header client = new DurationClient().GetHeaderClient("1.0.0");
 
             Response response = client.FloatSeconds(TimeSpan.FromSeconds(10F));
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -177,6 +211,8 @@ namespace Encode.Duration.Samples
             Header client = new DurationClient().GetHeaderClient("1.0.0");
 
             Response response = await client.FloatSecondsAsync(TimeSpan.FromSeconds(10F));
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -186,6 +222,8 @@ namespace Encode.Duration.Samples
             Header client = new DurationClient().GetHeaderClient("1.0.0");
 
             Response response = client.FloatSeconds(TimeSpan.FromSeconds(10F));
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -195,6 +233,8 @@ namespace Encode.Duration.Samples
             Header client = new DurationClient().GetHeaderClient("1.0.0");
 
             Response response = await client.FloatSecondsAsync(TimeSpan.FromSeconds(10F));
+
+            Console.WriteLine(response.Status);
         }
     }
 }

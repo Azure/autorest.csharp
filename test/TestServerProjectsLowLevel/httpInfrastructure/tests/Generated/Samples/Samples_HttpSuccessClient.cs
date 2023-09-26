@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -24,6 +26,8 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpSuccessClient client = new HttpSuccessClient(credential);
 
             Response response = client.Head200();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -34,6 +38,8 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpSuccessClient client = new HttpSuccessClient(credential);
 
             Response response = await client.Head200Async();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -44,6 +50,8 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpSuccessClient client = new HttpSuccessClient(credential);
 
             Response response = client.Head200();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -54,6 +62,8 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpSuccessClient client = new HttpSuccessClient(credential);
 
             Response response = await client.Head200Async();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -64,6 +74,9 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpSuccessClient client = new HttpSuccessClient(credential);
 
             Response response = client.Get200(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -74,6 +87,9 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpSuccessClient client = new HttpSuccessClient(credential);
 
             Response response = await client.Get200Async(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -84,6 +100,9 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpSuccessClient client = new HttpSuccessClient(credential);
 
             Response response = client.Get200(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -94,6 +113,9 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpSuccessClient client = new HttpSuccessClient(credential);
 
             Response response = await client.Get200Async(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -104,6 +126,9 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpSuccessClient client = new HttpSuccessClient(credential);
 
             Response response = client.Options200(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -114,6 +139,9 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpSuccessClient client = new HttpSuccessClient(credential);
 
             Response response = await client.Options200Async(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -124,6 +152,9 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpSuccessClient client = new HttpSuccessClient(credential);
 
             Response response = client.Options200(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -134,6 +165,9 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpSuccessClient client = new HttpSuccessClient(credential);
 
             Response response = await client.Options200Async(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -145,6 +179,8 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = null;
             Response response = client.Put200(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -156,6 +192,8 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = null;
             Response response = await client.Put200Async(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -167,6 +205,8 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("true");
             Response response = client.Put200(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -178,6 +218,8 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("true");
             Response response = await client.Put200Async(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -189,6 +231,8 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = null;
             Response response = client.Patch200(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -200,6 +244,8 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = null;
             Response response = await client.Patch200Async(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -211,6 +257,8 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("true");
             Response response = client.Patch200(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -222,6 +270,8 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("true");
             Response response = await client.Patch200Async(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -233,6 +283,8 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = null;
             Response response = client.Post200(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -244,6 +296,8 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = null;
             Response response = await client.Post200Async(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -255,6 +309,8 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("true");
             Response response = client.Post200(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -266,6 +322,8 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("true");
             Response response = await client.Post200Async(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -277,6 +335,8 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = null;
             Response response = client.Delete200(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -288,6 +348,8 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = null;
             Response response = await client.Delete200Async(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -299,6 +361,8 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("true");
             Response response = client.Delete200(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -310,6 +374,8 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("true");
             Response response = await client.Delete200Async(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -321,6 +387,8 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = null;
             Response response = client.Put201(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -332,6 +400,8 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = null;
             Response response = await client.Put201Async(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -343,6 +413,8 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("true");
             Response response = client.Put201(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -354,6 +426,8 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("true");
             Response response = await client.Put201Async(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -365,6 +439,8 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = null;
             Response response = client.Post201(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -376,6 +452,8 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = null;
             Response response = await client.Post201Async(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -387,6 +465,8 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("true");
             Response response = client.Post201(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -398,6 +478,8 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("true");
             Response response = await client.Post201Async(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -409,6 +491,8 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = null;
             Response response = client.Put202(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -420,6 +504,8 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = null;
             Response response = await client.Put202Async(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -431,6 +517,8 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("true");
             Response response = client.Put202(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -442,6 +530,8 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("true");
             Response response = await client.Put202Async(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -453,6 +543,8 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = null;
             Response response = client.Patch202(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -464,6 +556,8 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = null;
             Response response = await client.Patch202Async(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -475,6 +569,8 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("true");
             Response response = client.Patch202(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -486,6 +582,8 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("true");
             Response response = await client.Patch202Async(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -497,6 +595,8 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = null;
             Response response = client.Post202(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -508,6 +608,8 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = null;
             Response response = await client.Post202Async(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -519,6 +621,8 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("true");
             Response response = client.Post202(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -530,6 +634,8 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("true");
             Response response = await client.Post202Async(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -541,6 +647,8 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = null;
             Response response = client.Delete202(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -552,6 +660,8 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = null;
             Response response = await client.Delete202Async(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -563,6 +673,8 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("true");
             Response response = client.Delete202(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -574,6 +686,8 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("true");
             Response response = await client.Delete202Async(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -584,6 +698,8 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpSuccessClient client = new HttpSuccessClient(credential);
 
             Response response = client.Head204();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -594,6 +710,8 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpSuccessClient client = new HttpSuccessClient(credential);
 
             Response response = await client.Head204Async();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -604,6 +722,8 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpSuccessClient client = new HttpSuccessClient(credential);
 
             Response response = client.Head204();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -614,6 +734,8 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpSuccessClient client = new HttpSuccessClient(credential);
 
             Response response = await client.Head204Async();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -625,6 +747,8 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = null;
             Response response = client.Put204(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -636,6 +760,8 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = null;
             Response response = await client.Put204Async(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -647,6 +773,8 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("true");
             Response response = client.Put204(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -658,6 +786,8 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("true");
             Response response = await client.Put204Async(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -669,6 +799,8 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = null;
             Response response = client.Patch204(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -680,6 +812,8 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = null;
             Response response = await client.Patch204Async(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -691,6 +825,8 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("true");
             Response response = client.Patch204(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -702,6 +838,8 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("true");
             Response response = await client.Patch204Async(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -713,6 +851,8 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = null;
             Response response = client.Post204(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -724,6 +864,8 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = null;
             Response response = await client.Post204Async(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -735,6 +877,8 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("true");
             Response response = client.Post204(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -746,6 +890,8 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("true");
             Response response = await client.Post204Async(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -757,6 +903,8 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = null;
             Response response = client.Delete204(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -768,6 +916,8 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = null;
             Response response = await client.Delete204Async(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -779,6 +929,8 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("true");
             Response response = client.Delete204(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -790,6 +942,8 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("true");
             Response response = await client.Delete204Async(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -800,6 +954,8 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpSuccessClient client = new HttpSuccessClient(credential);
 
             Response response = client.Head404();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -810,6 +966,8 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpSuccessClient client = new HttpSuccessClient(credential);
 
             Response response = await client.Head404Async();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -820,6 +978,8 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpSuccessClient client = new HttpSuccessClient(credential);
 
             Response response = client.Head404();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -830,6 +990,8 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpSuccessClient client = new HttpSuccessClient(credential);
 
             Response response = await client.Head404Async();
+
+            Console.WriteLine(response.Status);
         }
     }
 }

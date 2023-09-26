@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Identity;
@@ -22,6 +23,8 @@ namespace Encode.Datetime.Samples
             ResponseHeader client = new DatetimeClient().GetResponseHeaderClient("1.0.0");
 
             Response response = client.Default();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -31,6 +34,8 @@ namespace Encode.Datetime.Samples
             ResponseHeader client = new DatetimeClient().GetResponseHeaderClient("1.0.0");
 
             Response response = await client.DefaultAsync();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -40,6 +45,8 @@ namespace Encode.Datetime.Samples
             ResponseHeader client = new DatetimeClient().GetResponseHeaderClient("1.0.0");
 
             Response response = client.Default();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -49,6 +56,8 @@ namespace Encode.Datetime.Samples
             ResponseHeader client = new DatetimeClient().GetResponseHeaderClient("1.0.0");
 
             Response response = await client.DefaultAsync();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -58,6 +67,8 @@ namespace Encode.Datetime.Samples
             ResponseHeader client = new DatetimeClient().GetResponseHeaderClient("1.0.0");
 
             Response response = client.Rfc3339();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -67,6 +78,8 @@ namespace Encode.Datetime.Samples
             ResponseHeader client = new DatetimeClient().GetResponseHeaderClient("1.0.0");
 
             Response response = await client.Rfc3339Async();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -76,6 +89,8 @@ namespace Encode.Datetime.Samples
             ResponseHeader client = new DatetimeClient().GetResponseHeaderClient("1.0.0");
 
             Response response = client.Rfc3339();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -85,6 +100,8 @@ namespace Encode.Datetime.Samples
             ResponseHeader client = new DatetimeClient().GetResponseHeaderClient("1.0.0");
 
             Response response = await client.Rfc3339Async();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -94,6 +111,8 @@ namespace Encode.Datetime.Samples
             ResponseHeader client = new DatetimeClient().GetResponseHeaderClient("1.0.0");
 
             Response response = client.Rfc7231();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -103,6 +122,8 @@ namespace Encode.Datetime.Samples
             ResponseHeader client = new DatetimeClient().GetResponseHeaderClient("1.0.0");
 
             Response response = await client.Rfc7231Async();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -112,6 +133,8 @@ namespace Encode.Datetime.Samples
             ResponseHeader client = new DatetimeClient().GetResponseHeaderClient("1.0.0");
 
             Response response = client.Rfc7231();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -121,6 +144,8 @@ namespace Encode.Datetime.Samples
             ResponseHeader client = new DatetimeClient().GetResponseHeaderClient("1.0.0");
 
             Response response = await client.Rfc7231Async();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -130,6 +155,8 @@ namespace Encode.Datetime.Samples
             ResponseHeader client = new DatetimeClient().GetResponseHeaderClient("1.0.0");
 
             Response response = client.UnixTimestamp();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -139,6 +166,8 @@ namespace Encode.Datetime.Samples
             ResponseHeader client = new DatetimeClient().GetResponseHeaderClient("1.0.0");
 
             Response response = await client.UnixTimestampAsync();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -148,6 +177,8 @@ namespace Encode.Datetime.Samples
             ResponseHeader client = new DatetimeClient().GetResponseHeaderClient("1.0.0");
 
             Response response = client.UnixTimestamp();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -157,6 +188,8 @@ namespace Encode.Datetime.Samples
             ResponseHeader client = new DatetimeClient().GetResponseHeaderClient("1.0.0");
 
             Response response = await client.UnixTimestampAsync();
+
+            Console.WriteLine(response.Status);
         }
     }
 }

@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -25,6 +27,8 @@ namespace _Type.Model.Empty.Samples
 
             RequestContent content = RequestContent.Create(new object());
             Response response = client.PutEmpty(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -35,6 +39,8 @@ namespace _Type.Model.Empty.Samples
 
             RequestContent content = RequestContent.Create(new object());
             Response response = await client.PutEmptyAsync(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -65,6 +71,8 @@ namespace _Type.Model.Empty.Samples
 
             RequestContent content = RequestContent.Create(new object());
             Response response = client.PutEmpty(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -75,6 +83,8 @@ namespace _Type.Model.Empty.Samples
 
             RequestContent content = RequestContent.Create(new object());
             Response response = await client.PutEmptyAsync(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -104,6 +114,9 @@ namespace _Type.Model.Empty.Samples
             EmptyClient client = new EmptyClient();
 
             Response response = client.GetEmpty(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -113,6 +126,9 @@ namespace _Type.Model.Empty.Samples
             EmptyClient client = new EmptyClient();
 
             Response response = await client.GetEmptyAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -140,6 +156,9 @@ namespace _Type.Model.Empty.Samples
             EmptyClient client = new EmptyClient();
 
             Response response = client.GetEmpty(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -149,6 +168,9 @@ namespace _Type.Model.Empty.Samples
             EmptyClient client = new EmptyClient();
 
             Response response = await client.GetEmptyAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -177,6 +199,9 @@ namespace _Type.Model.Empty.Samples
 
             RequestContent content = RequestContent.Create(new object());
             Response response = client.PostRoundTripEmpty(content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -187,6 +212,9 @@ namespace _Type.Model.Empty.Samples
 
             RequestContent content = RequestContent.Create(new object());
             Response response = await client.PostRoundTripEmptyAsync(content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -217,6 +245,9 @@ namespace _Type.Model.Empty.Samples
 
             RequestContent content = RequestContent.Create(new object());
             Response response = client.PostRoundTripEmpty(content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -227,6 +258,9 @@ namespace _Type.Model.Empty.Samples
 
             RequestContent content = RequestContent.Create(new object());
             Response response = await client.PostRoundTripEmptyAsync(content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]

@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System;
+using System.Text.Json;
 using System.Threading.Tasks;
 using System.Xml;
 using Azure;
@@ -25,6 +27,9 @@ namespace _Type.Property.ValueTypes.Samples
             Duration client = new ValueTypesClient().GetDurationClient("1.0.0");
 
             Response response = client.GetDuration(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("property").ToString());
         }
 
         [Test]
@@ -34,6 +39,9 @@ namespace _Type.Property.ValueTypes.Samples
             Duration client = new ValueTypesClient().GetDurationClient("1.0.0");
 
             Response response = await client.GetDurationAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("property").ToString());
         }
 
         [Test]
@@ -61,6 +69,9 @@ namespace _Type.Property.ValueTypes.Samples
             Duration client = new ValueTypesClient().GetDurationClient("1.0.0");
 
             Response response = client.GetDuration(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("property").ToString());
         }
 
         [Test]
@@ -70,6 +81,9 @@ namespace _Type.Property.ValueTypes.Samples
             Duration client = new ValueTypesClient().GetDurationClient("1.0.0");
 
             Response response = await client.GetDurationAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("property").ToString());
         }
 
         [Test]
@@ -101,6 +115,8 @@ namespace _Type.Property.ValueTypes.Samples
                 property = "PT1H23M45S",
             });
             Response response = client.Put(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -114,6 +130,8 @@ namespace _Type.Property.ValueTypes.Samples
                 property = "PT1H23M45S",
             });
             Response response = await client.PutAsync(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -147,6 +165,8 @@ namespace _Type.Property.ValueTypes.Samples
                 property = "PT1H23M45S",
             });
             Response response = client.Put(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -160,6 +180,8 @@ namespace _Type.Property.ValueTypes.Samples
                 property = "PT1H23M45S",
             });
             Response response = await client.PutAsync(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]

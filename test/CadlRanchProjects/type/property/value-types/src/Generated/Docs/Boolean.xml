@@ -38,6 +38,9 @@ This sample shows how to call GetBooleanAsync and parse the result.
 Boolean client = new ValueTypesClient().GetBooleanClient("1.0.0");
 
 Response response = await client.GetBooleanAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("property").ToString());
 ]]></code>
 This sample shows how to call GetBooleanAsync.
 <code><![CDATA[
@@ -50,6 +53,9 @@ This sample shows how to call GetBooleanAsync with all parameters and parse the 
 Boolean client = new ValueTypesClient().GetBooleanClient("1.0.0");
 
 Response response = await client.GetBooleanAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("property").ToString());
 ]]></code>
 This sample shows how to call GetBooleanAsync with all parameters.
 <code><![CDATA[
@@ -65,6 +71,9 @@ This sample shows how to call GetBoolean and parse the result.
 Boolean client = new ValueTypesClient().GetBooleanClient("1.0.0");
 
 Response response = client.GetBoolean(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("property").ToString());
 ]]></code>
 This sample shows how to call GetBoolean.
 <code><![CDATA[
@@ -77,6 +86,9 @@ This sample shows how to call GetBoolean with all parameters and parse the resul
 Boolean client = new ValueTypesClient().GetBooleanClient("1.0.0");
 
 Response response = client.GetBoolean(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("property").ToString());
 ]]></code>
 This sample shows how to call GetBoolean with all parameters.
 <code><![CDATA[
@@ -130,6 +142,8 @@ RequestContent content = RequestContent.Create(new
     property = true,
 });
 Response response = await client.PutAsync(content);
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutAsync.
 <code><![CDATA[
@@ -147,6 +161,8 @@ RequestContent content = RequestContent.Create(new
     property = true,
 });
 Response response = await client.PutAsync(content);
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutAsync with all parameters.
 <code><![CDATA[
@@ -167,6 +183,8 @@ RequestContent content = RequestContent.Create(new
     property = true,
 });
 Response response = client.Put(content);
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Put.
 <code><![CDATA[
@@ -184,6 +202,8 @@ RequestContent content = RequestContent.Create(new
     property = true,
 });
 Response response = client.Put(content);
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Put with all parameters.
 <code><![CDATA[

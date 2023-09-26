@@ -46,6 +46,8 @@ RequestContent content = RequestContent.Create(new
     name = "<name>",
 });
 Response response = await client.RequiredExplicitAsync(content);
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call RequiredExplicitAsync.
 <code><![CDATA[
@@ -63,6 +65,8 @@ RequestContent content = RequestContent.Create(new
     name = "<name>",
 });
 Response response = await client.RequiredExplicitAsync(content);
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call RequiredExplicitAsync with all parameters.
 <code><![CDATA[
@@ -83,6 +87,8 @@ RequestContent content = RequestContent.Create(new
     name = "<name>",
 });
 Response response = client.RequiredExplicit(content);
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call RequiredExplicit.
 <code><![CDATA[
@@ -100,6 +106,8 @@ RequestContent content = RequestContent.Create(new
     name = "<name>",
 });
 Response response = client.RequiredExplicit(content);
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call RequiredExplicit with all parameters.
 <code><![CDATA[
@@ -154,6 +162,8 @@ RequestContent content = RequestContent.Create(new
     name = "<name>",
 });
 Response response = await client.RequiredImplicitAsync(content);
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call RequiredImplicitAsync.
 <code><![CDATA[
@@ -171,6 +181,8 @@ RequestContent content = RequestContent.Create(new
     name = "<name>",
 });
 Response response = await client.RequiredImplicitAsync(content);
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call RequiredImplicitAsync with all parameters.
 <code><![CDATA[
@@ -191,6 +203,8 @@ RequestContent content = RequestContent.Create(new
     name = "<name>",
 });
 Response response = client.RequiredImplicit(content);
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call RequiredImplicit.
 <code><![CDATA[
@@ -208,6 +222,8 @@ RequestContent content = RequestContent.Create(new
     name = "<name>",
 });
 Response response = client.RequiredImplicit(content);
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call RequiredImplicit with all parameters.
 <code><![CDATA[

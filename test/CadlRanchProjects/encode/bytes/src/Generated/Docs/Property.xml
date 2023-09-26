@@ -46,6 +46,9 @@ RequestContent content = RequestContent.Create(new
     value = new object(),
 });
 Response response = await client.DefaultAsync(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code>
 This sample shows how to call DefaultAsync.
 <code><![CDATA[
@@ -63,6 +66,9 @@ RequestContent content = RequestContent.Create(new
     value = new object(),
 });
 Response response = await client.DefaultAsync(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code>
 This sample shows how to call DefaultAsync with all parameters.
 <code><![CDATA[
@@ -83,6 +89,9 @@ RequestContent content = RequestContent.Create(new
     value = new object(),
 });
 Response response = client.Default(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code>
 This sample shows how to call Default.
 <code><![CDATA[
@@ -100,6 +109,9 @@ RequestContent content = RequestContent.Create(new
     value = new object(),
 });
 Response response = client.Default(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code>
 This sample shows how to call Default with all parameters.
 <code><![CDATA[
@@ -154,6 +166,9 @@ RequestContent content = RequestContent.Create(new
     value = new object(),
 });
 Response response = await client.Base64Async(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code>
 This sample shows how to call Base64Async.
 <code><![CDATA[
@@ -171,6 +186,9 @@ RequestContent content = RequestContent.Create(new
     value = new object(),
 });
 Response response = await client.Base64Async(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code>
 This sample shows how to call Base64Async with all parameters.
 <code><![CDATA[
@@ -191,6 +209,9 @@ RequestContent content = RequestContent.Create(new
     value = new object(),
 });
 Response response = client.Base64(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code>
 This sample shows how to call Base64.
 <code><![CDATA[
@@ -208,6 +229,9 @@ RequestContent content = RequestContent.Create(new
     value = new object(),
 });
 Response response = client.Base64(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code>
 This sample shows how to call Base64 with all parameters.
 <code><![CDATA[
@@ -262,6 +286,9 @@ RequestContent content = RequestContent.Create(new
     value = new object(),
 });
 Response response = await client.Base64urlAsync(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code>
 This sample shows how to call Base64urlAsync.
 <code><![CDATA[
@@ -279,6 +306,9 @@ RequestContent content = RequestContent.Create(new
     value = new object(),
 });
 Response response = await client.Base64urlAsync(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code>
 This sample shows how to call Base64urlAsync with all parameters.
 <code><![CDATA[
@@ -299,6 +329,9 @@ RequestContent content = RequestContent.Create(new
     value = new object(),
 });
 Response response = client.Base64url(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code>
 This sample shows how to call Base64url.
 <code><![CDATA[
@@ -316,6 +349,9 @@ RequestContent content = RequestContent.Create(new
     value = new object(),
 });
 Response response = client.Base64url(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code>
 This sample shows how to call Base64url with all parameters.
 <code><![CDATA[
@@ -385,6 +421,9 @@ RequestContent content = RequestContent.Create(new
     },
 });
 Response response = await client.Base64urlArrayAsync(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value")[0].ToString());
 ]]></code>
 This sample shows how to call Base64urlArrayAsync.
 <code><![CDATA[
@@ -408,6 +447,9 @@ RequestContent content = RequestContent.Create(new
     },
 });
 Response response = await client.Base64urlArrayAsync(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value")[0].ToString());
 ]]></code>
 This sample shows how to call Base64urlArrayAsync with all parameters.
 <code><![CDATA[
@@ -434,6 +476,9 @@ RequestContent content = RequestContent.Create(new
     },
 });
 Response response = client.Base64urlArray(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value")[0].ToString());
 ]]></code>
 This sample shows how to call Base64urlArray.
 <code><![CDATA[
@@ -457,6 +502,9 @@ RequestContent content = RequestContent.Create(new
     },
 });
 Response response = client.Base64urlArray(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value")[0].ToString());
 ]]></code>
 This sample shows how to call Base64urlArray with all parameters.
 <code><![CDATA[

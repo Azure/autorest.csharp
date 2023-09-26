@@ -27,6 +27,8 @@ namespace MultipleMediaTypes.Samples
 
             RequestContent content = RequestContent.Create(new object());
             Response response = client.OneBinaryBodyTwoContentTypes(content, new ContentType("application/json"));
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -38,6 +40,8 @@ namespace MultipleMediaTypes.Samples
 
             RequestContent content = RequestContent.Create(new object());
             Response response = await client.OneBinaryBodyTwoContentTypesAsync(content, new ContentType("application/json"));
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -69,6 +73,8 @@ namespace MultipleMediaTypes.Samples
 
             RequestContent content = RequestContent.Create(new object());
             Response response = client.OneBinaryBodyTwoContentTypes(content, new ContentType("application/json"));
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -80,6 +86,8 @@ namespace MultipleMediaTypes.Samples
 
             RequestContent content = RequestContent.Create(new object());
             Response response = await client.OneBinaryBodyTwoContentTypesAsync(content, new ContentType("application/json"));
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -111,6 +119,8 @@ namespace MultipleMediaTypes.Samples
 
             RequestContent content = RequestContent.Create("<body>");
             Response response = client.OneStringBodyThreeContentTypes(content, new ContentType("application/json"));
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -122,6 +132,8 @@ namespace MultipleMediaTypes.Samples
 
             RequestContent content = RequestContent.Create("<body>");
             Response response = await client.OneStringBodyThreeContentTypesAsync(content, new ContentType("application/json"));
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -153,6 +165,8 @@ namespace MultipleMediaTypes.Samples
 
             RequestContent content = RequestContent.Create("<body>");
             Response response = client.OneStringBodyThreeContentTypes(content, new ContentType("application/json"));
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -164,6 +178,8 @@ namespace MultipleMediaTypes.Samples
 
             RequestContent content = RequestContent.Create("<body>");
             Response response = await client.OneStringBodyThreeContentTypesAsync(content, new ContentType("application/json"));
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -198,6 +214,8 @@ namespace MultipleMediaTypes.Samples
                 id = "<id>",
             });
             Response response = client.OneModelBodyOneContentType(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -212,6 +230,8 @@ namespace MultipleMediaTypes.Samples
                 id = "<id>",
             });
             Response response = await client.OneModelBodyOneContentTypeAsync(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -248,6 +268,8 @@ namespace MultipleMediaTypes.Samples
                 id = "<id>",
             });
             Response response = client.OneModelBodyOneContentType(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -262,6 +284,8 @@ namespace MultipleMediaTypes.Samples
                 id = "<id>",
             });
             Response response = await client.OneModelBodyOneContentTypeAsync(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]

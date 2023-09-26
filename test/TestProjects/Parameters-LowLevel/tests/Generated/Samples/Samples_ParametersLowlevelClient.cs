@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -24,6 +26,9 @@ namespace Parameters_LowLevel.Samples
             ParametersLowlevelClient client = new ParametersLowlevelClient(credential);
 
             Response response = client.NoRequestBodyResponseBody(1234, default, null, null, null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -34,6 +39,9 @@ namespace Parameters_LowLevel.Samples
             ParametersLowlevelClient client = new ParametersLowlevelClient(credential);
 
             Response response = await client.NoRequestBodyResponseBodyAsync(1234, default, null, null, null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -44,6 +52,9 @@ namespace Parameters_LowLevel.Samples
             ParametersLowlevelClient client = new ParametersLowlevelClient(credential);
 
             Response response = client.NoRequestBodyResponseBody(1234, default, 1234, "start", null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -54,6 +65,9 @@ namespace Parameters_LowLevel.Samples
             ParametersLowlevelClient client = new ParametersLowlevelClient(credential);
 
             Response response = await client.NoRequestBodyResponseBodyAsync(1234, default, 1234, "start", null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -65,6 +79,9 @@ namespace Parameters_LowLevel.Samples
 
             RequestContent content = null;
             Response response = client.RequestBodyResponseBody(content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -76,6 +93,9 @@ namespace Parameters_LowLevel.Samples
 
             RequestContent content = null;
             Response response = await client.RequestBodyResponseBodyAsync(content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -91,6 +111,10 @@ namespace Parameters_LowLevel.Samples
                 Status = "<Status>",
             });
             Response response = client.RequestBodyResponseBody(content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("Code").ToString());
+            Console.WriteLine(result.GetProperty("Status").ToString());
         }
 
         [Test]
@@ -106,6 +130,10 @@ namespace Parameters_LowLevel.Samples
                 Status = "<Status>",
             });
             Response response = await client.RequestBodyResponseBodyAsync(content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("Code").ToString());
+            Console.WriteLine(result.GetProperty("Status").ToString());
         }
 
         [Test]
@@ -116,6 +144,9 @@ namespace Parameters_LowLevel.Samples
             ParametersLowlevelClient client = new ParametersLowlevelClient(credential);
 
             Response response = client.DeleteNoRequestBodyResponseBody("<resourceName>", null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -126,6 +157,9 @@ namespace Parameters_LowLevel.Samples
             ParametersLowlevelClient client = new ParametersLowlevelClient(credential);
 
             Response response = await client.DeleteNoRequestBodyResponseBodyAsync("<resourceName>", null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -136,6 +170,9 @@ namespace Parameters_LowLevel.Samples
             ParametersLowlevelClient client = new ParametersLowlevelClient(credential);
 
             Response response = client.DeleteNoRequestBodyResponseBody("<resourceName>", null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -146,6 +183,9 @@ namespace Parameters_LowLevel.Samples
             ParametersLowlevelClient client = new ParametersLowlevelClient(credential);
 
             Response response = await client.DeleteNoRequestBodyResponseBodyAsync("<resourceName>", null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -156,6 +196,8 @@ namespace Parameters_LowLevel.Samples
             ParametersLowlevelClient client = new ParametersLowlevelClient(credential);
 
             Response response = client.NoRequestBodyNoResponseBody();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -166,6 +208,8 @@ namespace Parameters_LowLevel.Samples
             ParametersLowlevelClient client = new ParametersLowlevelClient(credential);
 
             Response response = await client.NoRequestBodyNoResponseBodyAsync();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -176,6 +220,8 @@ namespace Parameters_LowLevel.Samples
             ParametersLowlevelClient client = new ParametersLowlevelClient(credential);
 
             Response response = client.NoRequestBodyNoResponseBody();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -186,6 +232,8 @@ namespace Parameters_LowLevel.Samples
             ParametersLowlevelClient client = new ParametersLowlevelClient(credential);
 
             Response response = await client.NoRequestBodyNoResponseBodyAsync();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -197,6 +245,8 @@ namespace Parameters_LowLevel.Samples
 
             RequestContent content = null;
             Response response = client.RequestBodyNoResponseBody(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -208,6 +258,8 @@ namespace Parameters_LowLevel.Samples
 
             RequestContent content = null;
             Response response = await client.RequestBodyNoResponseBodyAsync(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -219,6 +271,8 @@ namespace Parameters_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("<stringBody>");
             Response response = client.RequestBodyNoResponseBody(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -230,6 +284,8 @@ namespace Parameters_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("<stringBody>");
             Response response = await client.RequestBodyNoResponseBodyAsync(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -240,6 +296,8 @@ namespace Parameters_LowLevel.Samples
             ParametersLowlevelClient client = new ParametersLowlevelClient(credential);
 
             Response response = client.OptionalPathParameters(1234, "start", 1234);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -250,6 +308,8 @@ namespace Parameters_LowLevel.Samples
             ParametersLowlevelClient client = new ParametersLowlevelClient(credential);
 
             Response response = await client.OptionalPathParametersAsync(1234, "start", 1234);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -260,6 +320,8 @@ namespace Parameters_LowLevel.Samples
             ParametersLowlevelClient client = new ParametersLowlevelClient(credential);
 
             Response response = client.OptionalPathParameters(1234, "start", 1234);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -270,6 +332,8 @@ namespace Parameters_LowLevel.Samples
             ParametersLowlevelClient client = new ParametersLowlevelClient(credential);
 
             Response response = await client.OptionalPathParametersAsync(1234, "start", 1234);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -280,6 +344,8 @@ namespace Parameters_LowLevel.Samples
             ParametersLowlevelClient client = new ParametersLowlevelClient(credential);
 
             Response response = client.OptionalPathParametersWithMixedSequence(1234, "start", default);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -290,6 +356,8 @@ namespace Parameters_LowLevel.Samples
             ParametersLowlevelClient client = new ParametersLowlevelClient(credential);
 
             Response response = await client.OptionalPathParametersWithMixedSequenceAsync(1234, "start", default);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -300,6 +368,8 @@ namespace Parameters_LowLevel.Samples
             ParametersLowlevelClient client = new ParametersLowlevelClient(credential);
 
             Response response = client.OptionalPathParametersWithMixedSequence(1234, "start", default);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -310,6 +380,8 @@ namespace Parameters_LowLevel.Samples
             ParametersLowlevelClient client = new ParametersLowlevelClient(credential);
 
             Response response = await client.OptionalPathParametersWithMixedSequenceAsync(1234, "start", default);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -321,6 +393,8 @@ namespace Parameters_LowLevel.Samples
 
             RequestContent content = null;
             Response response = client.OptionalPathBodyParametersWithMixedSequence(default, "<name>", 1234, default, content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -332,6 +406,8 @@ namespace Parameters_LowLevel.Samples
 
             RequestContent content = null;
             Response response = await client.OptionalPathBodyParametersWithMixedSequenceAsync(default, "<name>", 1234, default, content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -347,6 +423,8 @@ namespace Parameters_LowLevel.Samples
                 Status = "<Status>",
             });
             Response response = client.OptionalPathBodyParametersWithMixedSequence(default, "<name>", 1234, default, content, 1234);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -362,6 +440,8 @@ namespace Parameters_LowLevel.Samples
                 Status = "<Status>",
             });
             Response response = await client.OptionalPathBodyParametersWithMixedSequenceAsync(default, "<name>", 1234, default, content, 1234);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -373,6 +453,8 @@ namespace Parameters_LowLevel.Samples
 
             RequestContent content = null;
             Response response = client.RepeatableAction(default, "<name>", content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -384,6 +466,8 @@ namespace Parameters_LowLevel.Samples
 
             RequestContent content = null;
             Response response = await client.RepeatableActionAsync(default, "<name>", content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -399,6 +483,8 @@ namespace Parameters_LowLevel.Samples
                 Status = "<Status>",
             });
             Response response = client.RepeatableAction(default, "<name>", content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -414,6 +500,8 @@ namespace Parameters_LowLevel.Samples
                 Status = "<Status>",
             });
             Response response = await client.RepeatableActionAsync(default, "<name>", content);
+
+            Console.WriteLine(response.Status);
         }
     }
 }

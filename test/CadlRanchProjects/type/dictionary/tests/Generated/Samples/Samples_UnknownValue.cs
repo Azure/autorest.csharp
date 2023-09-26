@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -25,6 +26,9 @@ namespace _Type._Dictionary.Samples
             UnknownValue client = new DictionaryClient().GetUnknownValueClient("1.0.0");
 
             Response response = client.GetUnknownValue(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("<key>").ToString());
         }
 
         [Test]
@@ -34,6 +38,9 @@ namespace _Type._Dictionary.Samples
             UnknownValue client = new DictionaryClient().GetUnknownValueClient("1.0.0");
 
             Response response = await client.GetUnknownValueAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("<key>").ToString());
         }
 
         [Test]
@@ -61,6 +68,9 @@ namespace _Type._Dictionary.Samples
             UnknownValue client = new DictionaryClient().GetUnknownValueClient("1.0.0");
 
             Response response = client.GetUnknownValue(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("<key>").ToString());
         }
 
         [Test]
@@ -70,6 +80,9 @@ namespace _Type._Dictionary.Samples
             UnknownValue client = new DictionaryClient().GetUnknownValueClient("1.0.0");
 
             Response response = await client.GetUnknownValueAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("<key>").ToString());
         }
 
         [Test]
@@ -101,6 +114,8 @@ namespace _Type._Dictionary.Samples
                 key = new object(),
             });
             Response response = client.Put(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -114,6 +129,8 @@ namespace _Type._Dictionary.Samples
                 key = new object(),
             });
             Response response = await client.PutAsync(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -151,6 +168,8 @@ namespace _Type._Dictionary.Samples
                 key = new object(),
             });
             Response response = client.Put(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -164,6 +183,8 @@ namespace _Type._Dictionary.Samples
                 key = new object(),
             });
             Response response = await client.PutAsync(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]

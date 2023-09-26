@@ -12,6 +12,8 @@ RequestContent content = RequestContent.Create(new
     simpleUnion = 1234,
 });
 Response response = await client.SendIntAsync(content);
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call SendIntAsync with all request content.
 <code><![CDATA[
@@ -22,6 +24,8 @@ RequestContent content = RequestContent.Create(new
     simpleUnion = 1234,
 });
 Response response = await client.SendIntAsync(content);
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="SendInt(RequestContent,RequestContext)">
@@ -35,6 +39,8 @@ RequestContent content = RequestContent.Create(new
     simpleUnion = 1234,
 });
 Response response = client.SendInt(content);
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call SendInt with all request content.
 <code><![CDATA[
@@ -45,6 +51,8 @@ RequestContent content = RequestContent.Create(new
     simpleUnion = 1234,
 });
 Response response = client.SendInt(content);
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="SendIntArrayAsync(RequestContent,RequestContext)">
@@ -58,6 +66,8 @@ RequestContent content = RequestContent.Create(new
     simpleUnion = 1234,
 });
 Response response = await client.SendIntArrayAsync(content);
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call SendIntArrayAsync with all request content.
 <code><![CDATA[
@@ -68,6 +78,8 @@ RequestContent content = RequestContent.Create(new
     simpleUnion = 1234,
 });
 Response response = await client.SendIntArrayAsync(content);
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="SendIntArray(RequestContent,RequestContext)">
@@ -81,6 +93,8 @@ RequestContent content = RequestContent.Create(new
     simpleUnion = 1234,
 });
 Response response = client.SendIntArray(content);
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call SendIntArray with all request content.
 <code><![CDATA[
@@ -91,6 +105,8 @@ RequestContent content = RequestContent.Create(new
     simpleUnion = 1234,
 });
 Response response = client.SendIntArray(content);
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="SendFirstNamedUnionValueAsync(RequestContent,RequestContext)">
@@ -108,6 +124,8 @@ RequestContent content = RequestContent.Create(new
     },
 });
 Response response = await client.SendFirstNamedUnionValueAsync(content);
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call SendFirstNamedUnionValueAsync with all request content.
 <code><![CDATA[
@@ -122,6 +140,8 @@ RequestContent content = RequestContent.Create(new
     },
 });
 Response response = await client.SendFirstNamedUnionValueAsync(content);
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="SendFirstNamedUnionValue(RequestContent,RequestContext)">
@@ -139,6 +159,8 @@ RequestContent content = RequestContent.Create(new
     },
 });
 Response response = client.SendFirstNamedUnionValue(content);
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call SendFirstNamedUnionValue with all request content.
 <code><![CDATA[
@@ -153,6 +175,8 @@ RequestContent content = RequestContent.Create(new
     },
 });
 Response response = client.SendFirstNamedUnionValue(content);
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="SendSecondNamedUnionValueAsync(RequestContent,RequestContext)">
@@ -170,6 +194,8 @@ RequestContent content = RequestContent.Create(new
     },
 });
 Response response = await client.SendSecondNamedUnionValueAsync(content);
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call SendSecondNamedUnionValueAsync with all request content.
 <code><![CDATA[
@@ -184,6 +210,8 @@ RequestContent content = RequestContent.Create(new
     },
 });
 Response response = await client.SendSecondNamedUnionValueAsync(content);
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="SendSecondNamedUnionValue(RequestContent,RequestContext)">
@@ -201,6 +229,8 @@ RequestContent content = RequestContent.Create(new
     },
 });
 Response response = client.SendSecondNamedUnionValue(content);
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call SendSecondNamedUnionValue with all request content.
 <code><![CDATA[
@@ -215,6 +245,8 @@ RequestContent content = RequestContent.Create(new
     },
 });
 Response response = client.SendSecondNamedUnionValue(content);
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="ReceiveStringAsync(RequestContext)">
@@ -224,12 +256,18 @@ This sample shows how to call ReceiveStringAsync and parse the result.
 UnionClient client = new UnionClient();
 
 Response response = await client.ReceiveStringAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("simpleUnion").ToString());
 ]]></code>
 This sample shows how to call ReceiveStringAsync with all parameters and parse the result.
 <code><![CDATA[
 UnionClient client = new UnionClient();
 
 Response response = await client.ReceiveStringAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("simpleUnion").ToString());
 ]]></code></example>
     </member>
     <member name="ReceiveString(RequestContext)">
@@ -239,12 +277,18 @@ This sample shows how to call ReceiveString and parse the result.
 UnionClient client = new UnionClient();
 
 Response response = client.ReceiveString(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("simpleUnion").ToString());
 ]]></code>
 This sample shows how to call ReceiveString with all parameters and parse the result.
 <code><![CDATA[
 UnionClient client = new UnionClient();
 
 Response response = client.ReceiveString(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("simpleUnion").ToString());
 ]]></code></example>
     </member>
     <member name="ReceiveIntArrayAsync(RequestContext)">
@@ -254,12 +298,18 @@ This sample shows how to call ReceiveIntArrayAsync and parse the result.
 UnionClient client = new UnionClient();
 
 Response response = await client.ReceiveIntArrayAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("simpleUnion").ToString());
 ]]></code>
 This sample shows how to call ReceiveIntArrayAsync with all parameters and parse the result.
 <code><![CDATA[
 UnionClient client = new UnionClient();
 
 Response response = await client.ReceiveIntArrayAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("simpleUnion").ToString());
 ]]></code></example>
     </member>
     <member name="ReceiveIntArray(RequestContext)">
@@ -269,12 +319,18 @@ This sample shows how to call ReceiveIntArray and parse the result.
 UnionClient client = new UnionClient();
 
 Response response = client.ReceiveIntArray(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("simpleUnion").ToString());
 ]]></code>
 This sample shows how to call ReceiveIntArray with all parameters and parse the result.
 <code><![CDATA[
 UnionClient client = new UnionClient();
 
 Response response = client.ReceiveIntArray(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("simpleUnion").ToString());
 ]]></code></example>
     </member>
     <member name="ReceiveFirstNamedUnionValueAsync(RequestContext)">
@@ -284,12 +340,18 @@ This sample shows how to call ReceiveFirstNamedUnionValueAsync and parse the res
 UnionClient client = new UnionClient();
 
 Response response = await client.ReceiveFirstNamedUnionValueAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("namedUnion").ToString());
 ]]></code>
 This sample shows how to call ReceiveFirstNamedUnionValueAsync with all parameters and parse the result.
 <code><![CDATA[
 UnionClient client = new UnionClient();
 
 Response response = await client.ReceiveFirstNamedUnionValueAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("namedUnion").ToString());
 ]]></code></example>
     </member>
     <member name="ReceiveFirstNamedUnionValue(RequestContext)">
@@ -299,12 +361,18 @@ This sample shows how to call ReceiveFirstNamedUnionValue and parse the result.
 UnionClient client = new UnionClient();
 
 Response response = client.ReceiveFirstNamedUnionValue(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("namedUnion").ToString());
 ]]></code>
 This sample shows how to call ReceiveFirstNamedUnionValue with all parameters and parse the result.
 <code><![CDATA[
 UnionClient client = new UnionClient();
 
 Response response = client.ReceiveFirstNamedUnionValue(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("namedUnion").ToString());
 ]]></code></example>
     </member>
     <member name="ReceiveSecondNamedUnionValueAsync(RequestContext)">
@@ -314,12 +382,18 @@ This sample shows how to call ReceiveSecondNamedUnionValueAsync and parse the re
 UnionClient client = new UnionClient();
 
 Response response = await client.ReceiveSecondNamedUnionValueAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("namedUnion").ToString());
 ]]></code>
 This sample shows how to call ReceiveSecondNamedUnionValueAsync with all parameters and parse the result.
 <code><![CDATA[
 UnionClient client = new UnionClient();
 
 Response response = await client.ReceiveSecondNamedUnionValueAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("namedUnion").ToString());
 ]]></code></example>
     </member>
     <member name="ReceiveSecondNamedUnionValue(RequestContext)">
@@ -329,12 +403,18 @@ This sample shows how to call ReceiveSecondNamedUnionValue and parse the result.
 UnionClient client = new UnionClient();
 
 Response response = client.ReceiveSecondNamedUnionValue(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("namedUnion").ToString());
 ]]></code>
 This sample shows how to call ReceiveSecondNamedUnionValue with all parameters and parse the result.
 <code><![CDATA[
 UnionClient client = new UnionClient();
 
 Response response = client.ReceiveSecondNamedUnionValue(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("namedUnion").ToString());
 ]]></code></example>
     </member>
   </members>

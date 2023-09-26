@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -29,6 +30,11 @@ namespace _Specs_.Azure.Core.Basic.Samples
                 name = "<name>",
             });
             Response response = client.CreateOrUpdate(1234, content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("name").ToString());
+            Console.WriteLine(result.GetProperty("etag").ToString());
         }
 
         [Test]
@@ -42,6 +48,11 @@ namespace _Specs_.Azure.Core.Basic.Samples
                 name = "<name>",
             });
             Response response = await client.CreateOrUpdateAsync(1234, content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("name").ToString());
+            Console.WriteLine(result.GetProperty("etag").ToString());
         }
 
         [Test]
@@ -63,6 +74,14 @@ detail = "<detail>",
             },
             });
             Response response = client.CreateOrUpdate(1234, content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("name").ToString());
+            Console.WriteLine(result.GetProperty("orders")[0].GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("orders")[0].GetProperty("userId").ToString());
+            Console.WriteLine(result.GetProperty("orders")[0].GetProperty("detail").ToString());
+            Console.WriteLine(result.GetProperty("etag").ToString());
         }
 
         [Test]
@@ -84,6 +103,14 @@ detail = "<detail>",
             },
             });
             Response response = await client.CreateOrUpdateAsync(1234, content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("name").ToString());
+            Console.WriteLine(result.GetProperty("orders")[0].GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("orders")[0].GetProperty("userId").ToString());
+            Console.WriteLine(result.GetProperty("orders")[0].GetProperty("detail").ToString());
+            Console.WriteLine(result.GetProperty("etag").ToString());
         }
 
         [Test]
@@ -97,6 +124,11 @@ detail = "<detail>",
                 name = "<name>",
             });
             Response response = client.CreateOrReplace(1234, content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("name").ToString());
+            Console.WriteLine(result.GetProperty("etag").ToString());
         }
 
         [Test]
@@ -110,6 +142,11 @@ detail = "<detail>",
                 name = "<name>",
             });
             Response response = await client.CreateOrReplaceAsync(1234, content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("name").ToString());
+            Console.WriteLine(result.GetProperty("etag").ToString());
         }
 
         [Test]
@@ -151,6 +188,14 @@ detail = "<detail>",
             },
             });
             Response response = client.CreateOrReplace(1234, content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("name").ToString());
+            Console.WriteLine(result.GetProperty("orders")[0].GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("orders")[0].GetProperty("userId").ToString());
+            Console.WriteLine(result.GetProperty("orders")[0].GetProperty("detail").ToString());
+            Console.WriteLine(result.GetProperty("etag").ToString());
         }
 
         [Test]
@@ -172,6 +217,14 @@ detail = "<detail>",
             },
             });
             Response response = await client.CreateOrReplaceAsync(1234, content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("name").ToString());
+            Console.WriteLine(result.GetProperty("orders")[0].GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("orders")[0].GetProperty("userId").ToString());
+            Console.WriteLine(result.GetProperty("orders")[0].GetProperty("detail").ToString());
+            Console.WriteLine(result.GetProperty("etag").ToString());
         }
 
         [Test]
@@ -207,6 +260,11 @@ detail = "<detail>",
             BasicClient client = new BasicClient();
 
             Response response = client.GetUser(1234, null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("name").ToString());
+            Console.WriteLine(result.GetProperty("etag").ToString());
         }
 
         [Test]
@@ -216,6 +274,11 @@ detail = "<detail>",
             BasicClient client = new BasicClient();
 
             Response response = await client.GetUserAsync(1234, null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("name").ToString());
+            Console.WriteLine(result.GetProperty("etag").ToString());
         }
 
         [Test]
@@ -243,6 +306,14 @@ detail = "<detail>",
             BasicClient client = new BasicClient();
 
             Response response = client.GetUser(1234, null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("name").ToString());
+            Console.WriteLine(result.GetProperty("orders")[0].GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("orders")[0].GetProperty("userId").ToString());
+            Console.WriteLine(result.GetProperty("orders")[0].GetProperty("detail").ToString());
+            Console.WriteLine(result.GetProperty("etag").ToString());
         }
 
         [Test]
@@ -252,6 +323,14 @@ detail = "<detail>",
             BasicClient client = new BasicClient();
 
             Response response = await client.GetUserAsync(1234, null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("name").ToString());
+            Console.WriteLine(result.GetProperty("orders")[0].GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("orders")[0].GetProperty("userId").ToString());
+            Console.WriteLine(result.GetProperty("orders")[0].GetProperty("detail").ToString());
+            Console.WriteLine(result.GetProperty("etag").ToString());
         }
 
         [Test]
@@ -279,6 +358,8 @@ detail = "<detail>",
             BasicClient client = new BasicClient();
 
             Response response = client.Delete(1234);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -288,6 +369,8 @@ detail = "<detail>",
             BasicClient client = new BasicClient();
 
             Response response = await client.DeleteAsync(1234);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -297,6 +380,8 @@ detail = "<detail>",
             BasicClient client = new BasicClient();
 
             Response response = client.Delete(1234);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -306,6 +391,8 @@ detail = "<detail>",
             BasicClient client = new BasicClient();
 
             Response response = await client.DeleteAsync(1234);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -315,6 +402,11 @@ detail = "<detail>",
             BasicClient client = new BasicClient();
 
             Response response = client.Export(1234, "<format>", null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("name").ToString());
+            Console.WriteLine(result.GetProperty("etag").ToString());
         }
 
         [Test]
@@ -324,6 +416,11 @@ detail = "<detail>",
             BasicClient client = new BasicClient();
 
             Response response = await client.ExportAsync(1234, "<format>", null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("name").ToString());
+            Console.WriteLine(result.GetProperty("etag").ToString());
         }
 
         [Test]
@@ -351,6 +448,14 @@ detail = "<detail>",
             BasicClient client = new BasicClient();
 
             Response response = client.Export(1234, "<format>", null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("name").ToString());
+            Console.WriteLine(result.GetProperty("orders")[0].GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("orders")[0].GetProperty("userId").ToString());
+            Console.WriteLine(result.GetProperty("orders")[0].GetProperty("detail").ToString());
+            Console.WriteLine(result.GetProperty("etag").ToString());
         }
 
         [Test]
@@ -360,6 +465,14 @@ detail = "<detail>",
             BasicClient client = new BasicClient();
 
             Response response = await client.ExportAsync(1234, "<format>", null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("name").ToString());
+            Console.WriteLine(result.GetProperty("orders")[0].GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("orders")[0].GetProperty("userId").ToString());
+            Console.WriteLine(result.GetProperty("orders")[0].GetProperty("detail").ToString());
+            Console.WriteLine(result.GetProperty("etag").ToString());
         }
 
         [Test]
@@ -388,6 +501,10 @@ detail = "<detail>",
 
             foreach (BinaryData item in client.GetUsers(null, null, null, null, null, null, null, null))
             {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result[0].GetProperty("id").ToString());
+                Console.WriteLine(result[0].GetProperty("name").ToString());
+                Console.WriteLine(result[0].GetProperty("etag").ToString());
             }
         }
 
@@ -399,6 +516,10 @@ detail = "<detail>",
 
             await foreach (BinaryData item in client.GetUsersAsync(null, null, null, null, null, null, null, null))
             {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result[0].GetProperty("id").ToString());
+                Console.WriteLine(result[0].GetProperty("name").ToString());
+                Console.WriteLine(result[0].GetProperty("etag").ToString());
             }
         }
 
@@ -432,6 +553,13 @@ detail = "<detail>",
 
             foreach (BinaryData item in client.GetUsers(1234, 1234, 1234, new string[] { "<orderby>" }, "<filter>", new string[] { "<select>" }, new string[] { "<expand>" }, null))
             {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result[0].GetProperty("id").ToString());
+                Console.WriteLine(result[0].GetProperty("name").ToString());
+                Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("id").ToString());
+                Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("userId").ToString());
+                Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("detail").ToString());
+                Console.WriteLine(result[0].GetProperty("etag").ToString());
             }
         }
 
@@ -443,6 +571,13 @@ detail = "<detail>",
 
             await foreach (BinaryData item in client.GetUsersAsync(1234, 1234, 1234, new string[] { "<orderby>" }, "<filter>", new string[] { "<select>" }, new string[] { "<expand>" }, null))
             {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result[0].GetProperty("id").ToString());
+                Console.WriteLine(result[0].GetProperty("name").ToString());
+                Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("id").ToString());
+                Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("userId").ToString());
+                Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("detail").ToString());
+                Console.WriteLine(result[0].GetProperty("etag").ToString());
             }
         }
 
@@ -476,6 +611,10 @@ detail = "<detail>",
 
             foreach (BinaryData item in client.GetWithPage(null))
             {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result[0].GetProperty("id").ToString());
+                Console.WriteLine(result[0].GetProperty("name").ToString());
+                Console.WriteLine(result[0].GetProperty("etag").ToString());
             }
         }
 
@@ -487,6 +626,10 @@ detail = "<detail>",
 
             await foreach (BinaryData item in client.GetWithPageAsync(null))
             {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result[0].GetProperty("id").ToString());
+                Console.WriteLine(result[0].GetProperty("name").ToString());
+                Console.WriteLine(result[0].GetProperty("etag").ToString());
             }
         }
 
@@ -520,6 +663,13 @@ detail = "<detail>",
 
             foreach (BinaryData item in client.GetWithPage(null))
             {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result[0].GetProperty("id").ToString());
+                Console.WriteLine(result[0].GetProperty("name").ToString());
+                Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("id").ToString());
+                Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("userId").ToString());
+                Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("detail").ToString());
+                Console.WriteLine(result[0].GetProperty("etag").ToString());
             }
         }
 
@@ -531,6 +681,13 @@ detail = "<detail>",
 
             await foreach (BinaryData item in client.GetWithPageAsync(null))
             {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result[0].GetProperty("id").ToString());
+                Console.WriteLine(result[0].GetProperty("name").ToString());
+                Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("id").ToString());
+                Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("userId").ToString());
+                Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("detail").ToString());
+                Console.WriteLine(result[0].GetProperty("etag").ToString());
             }
         }
 
@@ -564,6 +721,10 @@ detail = "<detail>",
 
             foreach (BinaryData item in client.GetWithCustomPageModel(null))
             {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result[0].GetProperty("id").ToString());
+                Console.WriteLine(result[0].GetProperty("name").ToString());
+                Console.WriteLine(result[0].GetProperty("etag").ToString());
             }
         }
 
@@ -575,6 +736,10 @@ detail = "<detail>",
 
             await foreach (BinaryData item in client.GetWithCustomPageModelAsync(null))
             {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result[0].GetProperty("id").ToString());
+                Console.WriteLine(result[0].GetProperty("name").ToString());
+                Console.WriteLine(result[0].GetProperty("etag").ToString());
             }
         }
 
@@ -608,6 +773,13 @@ detail = "<detail>",
 
             foreach (BinaryData item in client.GetWithCustomPageModel(null))
             {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result[0].GetProperty("id").ToString());
+                Console.WriteLine(result[0].GetProperty("name").ToString());
+                Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("id").ToString());
+                Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("userId").ToString());
+                Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("detail").ToString());
+                Console.WriteLine(result[0].GetProperty("etag").ToString());
             }
         }
 
@@ -619,6 +791,13 @@ detail = "<detail>",
 
             await foreach (BinaryData item in client.GetWithCustomPageModelAsync(null))
             {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result[0].GetProperty("id").ToString());
+                Console.WriteLine(result[0].GetProperty("name").ToString());
+                Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("id").ToString());
+                Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("userId").ToString());
+                Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("detail").ToString());
+                Console.WriteLine(result[0].GetProperty("etag").ToString());
             }
         }
 

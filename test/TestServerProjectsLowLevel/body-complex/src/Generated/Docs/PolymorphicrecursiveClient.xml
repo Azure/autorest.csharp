@@ -9,6 +9,10 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PolymorphicrecursiveClient client = new PolymorphicrecursiveClient(credential);
 
 Response response = await client.GetValidAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("fishtype").ToString());
+Console.WriteLine(result.GetProperty("length").ToString());
 ]]></code>
 This sample shows how to call GetValidAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -16,6 +20,14 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PolymorphicrecursiveClient client = new PolymorphicrecursiveClient(credential);
 
 Response response = await client.GetValidAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("fishtype").ToString());
+Console.WriteLine(result.GetProperty("species").ToString());
+Console.WriteLine(result.GetProperty("length").ToString());
+Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("fishtype").ToString());
+Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("species").ToString());
+Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("length").ToString());
 ]]></code></example>
     </member>
     <member name="GetValid(RequestContext)">
@@ -26,6 +38,10 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PolymorphicrecursiveClient client = new PolymorphicrecursiveClient(credential);
 
 Response response = client.GetValid(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("fishtype").ToString());
+Console.WriteLine(result.GetProperty("length").ToString());
 ]]></code>
 This sample shows how to call GetValid with all parameters and parse the result.
 <code><![CDATA[
@@ -33,6 +49,14 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PolymorphicrecursiveClient client = new PolymorphicrecursiveClient(credential);
 
 Response response = client.GetValid(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("fishtype").ToString());
+Console.WriteLine(result.GetProperty("species").ToString());
+Console.WriteLine(result.GetProperty("length").ToString());
+Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("fishtype").ToString());
+Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("species").ToString());
+Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("length").ToString());
 ]]></code></example>
     </member>
     <member name="PutValidAsync(RequestContent,RequestContext)">
@@ -48,6 +72,8 @@ RequestContent content = RequestContent.Create(new
     length = 123.45F,
 });
 Response response = await client.PutValidAsync(content);
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutValidAsync with all request content.
 <code><![CDATA[
@@ -67,6 +93,8 @@ RequestContent content = RequestContent.Create(new
     },
 });
 Response response = await client.PutValidAsync(content);
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="PutValid(RequestContent,RequestContext)">
@@ -82,6 +110,8 @@ RequestContent content = RequestContent.Create(new
     length = 123.45F,
 });
 Response response = client.PutValid(content);
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutValid with all request content.
 <code><![CDATA[
@@ -101,6 +131,8 @@ RequestContent content = RequestContent.Create(new
     },
 });
 Response response = client.PutValid(content);
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
   </members>

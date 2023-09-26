@@ -38,6 +38,9 @@ This sample shows how to call GetAllAsync and parse the result.
 String client = new OptionalClient().GetStringClient("1.0.0");
 
 Response response = await client.GetAllAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetAllAsync.
 <code><![CDATA[
@@ -50,6 +53,9 @@ This sample shows how to call GetAllAsync with all parameters and parse the resu
 String client = new OptionalClient().GetStringClient("1.0.0");
 
 Response response = await client.GetAllAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("property").ToString());
 ]]></code>
 This sample shows how to call GetAllAsync with all parameters.
 <code><![CDATA[
@@ -65,6 +71,9 @@ This sample shows how to call GetAll and parse the result.
 String client = new OptionalClient().GetStringClient("1.0.0");
 
 Response response = client.GetAll(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetAll.
 <code><![CDATA[
@@ -77,6 +86,9 @@ This sample shows how to call GetAll with all parameters and parse the result.
 String client = new OptionalClient().GetStringClient("1.0.0");
 
 Response response = client.GetAll(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("property").ToString());
 ]]></code>
 This sample shows how to call GetAll with all parameters.
 <code><![CDATA[
@@ -122,6 +134,9 @@ This sample shows how to call GetDefaultAsync and parse the result.
 String client = new OptionalClient().GetStringClient("1.0.0");
 
 Response response = await client.GetDefaultAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetDefaultAsync.
 <code><![CDATA[
@@ -134,6 +149,9 @@ This sample shows how to call GetDefaultAsync with all parameters and parse the 
 String client = new OptionalClient().GetStringClient("1.0.0");
 
 Response response = await client.GetDefaultAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("property").ToString());
 ]]></code>
 This sample shows how to call GetDefaultAsync with all parameters.
 <code><![CDATA[
@@ -149,6 +167,9 @@ This sample shows how to call GetDefault and parse the result.
 String client = new OptionalClient().GetStringClient("1.0.0");
 
 Response response = client.GetDefault(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetDefault.
 <code><![CDATA[
@@ -161,6 +182,9 @@ This sample shows how to call GetDefault with all parameters and parse the resul
 String client = new OptionalClient().GetStringClient("1.0.0");
 
 Response response = client.GetDefault(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("property").ToString());
 ]]></code>
 This sample shows how to call GetDefault with all parameters.
 <code><![CDATA[
@@ -217,6 +241,8 @@ String client = new OptionalClient().GetStringClient("1.0.0");
 
 RequestContent content = RequestContent.Create(new object());
 Response response = await client.PutAllAsync(content);
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutAllAsync.
 <code><![CDATA[
@@ -234,6 +260,8 @@ RequestContent content = RequestContent.Create(new
     property = "<property>",
 });
 Response response = await client.PutAllAsync(content);
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutAllAsync with all parameters.
 <code><![CDATA[
@@ -254,6 +282,8 @@ String client = new OptionalClient().GetStringClient("1.0.0");
 
 RequestContent content = RequestContent.Create(new object());
 Response response = client.PutAll(content);
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutAll.
 <code><![CDATA[
@@ -271,6 +301,8 @@ RequestContent content = RequestContent.Create(new
     property = "<property>",
 });
 Response response = client.PutAll(content);
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutAll with all parameters.
 <code><![CDATA[
@@ -331,6 +363,8 @@ String client = new OptionalClient().GetStringClient("1.0.0");
 
 RequestContent content = RequestContent.Create(new object());
 Response response = await client.PutDefaultAsync(content);
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutDefaultAsync.
 <code><![CDATA[
@@ -348,6 +382,8 @@ RequestContent content = RequestContent.Create(new
     property = "<property>",
 });
 Response response = await client.PutDefaultAsync(content);
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutDefaultAsync with all parameters.
 <code><![CDATA[
@@ -368,6 +404,8 @@ String client = new OptionalClient().GetStringClient("1.0.0");
 
 RequestContent content = RequestContent.Create(new object());
 Response response = client.PutDefault(content);
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutDefault.
 <code><![CDATA[
@@ -385,6 +423,8 @@ RequestContent content = RequestContent.Create(new
     property = "<property>",
 });
 Response response = client.PutDefault(content);
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutDefault with all parameters.
 <code><![CDATA[

@@ -46,6 +46,9 @@ RequestContent content = RequestContent.Create(new
     value = "2022-05-10T14:57:31.2311892-04:00",
 });
 Response response = await client.DefaultAsync(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code>
 This sample shows how to call DefaultAsync.
 <code><![CDATA[
@@ -63,6 +66,9 @@ RequestContent content = RequestContent.Create(new
     value = "2022-05-10T14:57:31.2311892-04:00",
 });
 Response response = await client.DefaultAsync(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code>
 This sample shows how to call DefaultAsync with all parameters.
 <code><![CDATA[
@@ -83,6 +89,9 @@ RequestContent content = RequestContent.Create(new
     value = "2022-05-10T14:57:31.2311892-04:00",
 });
 Response response = client.Default(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code>
 This sample shows how to call Default.
 <code><![CDATA[
@@ -100,6 +109,9 @@ RequestContent content = RequestContent.Create(new
     value = "2022-05-10T14:57:31.2311892-04:00",
 });
 Response response = client.Default(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code>
 This sample shows how to call Default with all parameters.
 <code><![CDATA[
@@ -154,6 +166,9 @@ RequestContent content = RequestContent.Create(new
     value = "2022-05-10T18:57:31.2311892Z",
 });
 Response response = await client.Rfc3339Async(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code>
 This sample shows how to call Rfc3339Async.
 <code><![CDATA[
@@ -171,6 +186,9 @@ RequestContent content = RequestContent.Create(new
     value = "2022-05-10T18:57:31.2311892Z",
 });
 Response response = await client.Rfc3339Async(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code>
 This sample shows how to call Rfc3339Async with all parameters.
 <code><![CDATA[
@@ -191,6 +209,9 @@ RequestContent content = RequestContent.Create(new
     value = "2022-05-10T18:57:31.2311892Z",
 });
 Response response = client.Rfc3339(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code>
 This sample shows how to call Rfc3339.
 <code><![CDATA[
@@ -208,6 +229,9 @@ RequestContent content = RequestContent.Create(new
     value = "2022-05-10T18:57:31.2311892Z",
 });
 Response response = client.Rfc3339(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code>
 This sample shows how to call Rfc3339 with all parameters.
 <code><![CDATA[
@@ -262,6 +286,9 @@ RequestContent content = RequestContent.Create(new
     value = "Tue, 10 May 2022 18:57:31 GMT",
 });
 Response response = await client.Rfc7231Async(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code>
 This sample shows how to call Rfc7231Async.
 <code><![CDATA[
@@ -279,6 +306,9 @@ RequestContent content = RequestContent.Create(new
     value = "Tue, 10 May 2022 18:57:31 GMT",
 });
 Response response = await client.Rfc7231Async(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code>
 This sample shows how to call Rfc7231Async with all parameters.
 <code><![CDATA[
@@ -299,6 +329,9 @@ RequestContent content = RequestContent.Create(new
     value = "Tue, 10 May 2022 18:57:31 GMT",
 });
 Response response = client.Rfc7231(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code>
 This sample shows how to call Rfc7231.
 <code><![CDATA[
@@ -316,6 +349,9 @@ RequestContent content = RequestContent.Create(new
     value = "Tue, 10 May 2022 18:57:31 GMT",
 });
 Response response = client.Rfc7231(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code>
 This sample shows how to call Rfc7231 with all parameters.
 <code><![CDATA[
@@ -370,6 +406,9 @@ RequestContent content = RequestContent.Create(new
     value = 1652209051,
 });
 Response response = await client.UnixTimestampAsync(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code>
 This sample shows how to call UnixTimestampAsync.
 <code><![CDATA[
@@ -387,6 +426,9 @@ RequestContent content = RequestContent.Create(new
     value = 1652209051,
 });
 Response response = await client.UnixTimestampAsync(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code>
 This sample shows how to call UnixTimestampAsync with all parameters.
 <code><![CDATA[
@@ -407,6 +449,9 @@ RequestContent content = RequestContent.Create(new
     value = 1652209051,
 });
 Response response = client.UnixTimestamp(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code>
 This sample shows how to call UnixTimestamp.
 <code><![CDATA[
@@ -424,6 +469,9 @@ RequestContent content = RequestContent.Create(new
     value = 1652209051,
 });
 Response response = client.UnixTimestamp(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code>
 This sample shows how to call UnixTimestamp with all parameters.
 <code><![CDATA[
@@ -481,6 +529,9 @@ RequestContent content = RequestContent.Create(new
     },
 });
 Response response = await client.UnixTimestampArrayAsync(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value")[0].ToString());
 ]]></code>
 This sample shows how to call UnixTimestampArrayAsync.
 <code><![CDATA[
@@ -501,6 +552,9 @@ RequestContent content = RequestContent.Create(new
     },
 });
 Response response = await client.UnixTimestampArrayAsync(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value")[0].ToString());
 ]]></code>
 This sample shows how to call UnixTimestampArrayAsync with all parameters.
 <code><![CDATA[
@@ -524,6 +578,9 @@ RequestContent content = RequestContent.Create(new
     },
 });
 Response response = client.UnixTimestampArray(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value")[0].ToString());
 ]]></code>
 This sample shows how to call UnixTimestampArray.
 <code><![CDATA[
@@ -544,6 +601,9 @@ RequestContent content = RequestContent.Create(new
     },
 });
 Response response = client.UnixTimestampArray(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value")[0].ToString());
 ]]></code>
 This sample shows how to call UnixTimestampArray with all parameters.
 <code><![CDATA[

@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -24,6 +26,10 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
             EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
             Response response = client.GetExtensibleModel(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("kind").ToString());
+            Console.WriteLine(result.GetProperty("weight").ToString());
         }
 
         [Test]
@@ -33,6 +39,10 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
             EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
             Response response = await client.GetExtensibleModelAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("kind").ToString());
+            Console.WriteLine(result.GetProperty("weight").ToString());
         }
 
         [Test]
@@ -60,6 +70,10 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
             EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
             Response response = client.GetExtensibleModel(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("kind").ToString());
+            Console.WriteLine(result.GetProperty("weight").ToString());
         }
 
         [Test]
@@ -69,6 +83,10 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
             EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
             Response response = await client.GetExtensibleModelAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("kind").ToString());
+            Console.WriteLine(result.GetProperty("weight").ToString());
         }
 
         [Test]
@@ -101,6 +119,8 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
                 weight = 1234,
             });
             Response response = client.PutExtensibleModel(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -115,6 +135,8 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
                 weight = 1234,
             });
             Response response = await client.PutExtensibleModelAsync(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -149,6 +171,8 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
                 weight = 1234,
             });
             Response response = client.PutExtensibleModel(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -163,6 +187,8 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
                 weight = 1234,
             });
             Response response = await client.PutExtensibleModelAsync(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -192,6 +218,10 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
             EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
             Response response = client.GetExtensibleModelMissingDiscriminator(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("kind").ToString());
+            Console.WriteLine(result.GetProperty("weight").ToString());
         }
 
         [Test]
@@ -201,6 +231,10 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
             EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
             Response response = await client.GetExtensibleModelMissingDiscriminatorAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("kind").ToString());
+            Console.WriteLine(result.GetProperty("weight").ToString());
         }
 
         [Test]
@@ -228,6 +262,10 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
             EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
             Response response = client.GetExtensibleModelMissingDiscriminator(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("kind").ToString());
+            Console.WriteLine(result.GetProperty("weight").ToString());
         }
 
         [Test]
@@ -237,6 +275,10 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
             EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
             Response response = await client.GetExtensibleModelMissingDiscriminatorAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("kind").ToString());
+            Console.WriteLine(result.GetProperty("weight").ToString());
         }
 
         [Test]
@@ -264,6 +306,10 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
             EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
             Response response = client.GetExtensibleModelWrongDiscriminator(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("kind").ToString());
+            Console.WriteLine(result.GetProperty("weight").ToString());
         }
 
         [Test]
@@ -273,6 +319,10 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
             EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
             Response response = await client.GetExtensibleModelWrongDiscriminatorAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("kind").ToString());
+            Console.WriteLine(result.GetProperty("weight").ToString());
         }
 
         [Test]
@@ -300,6 +350,10 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
             EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
             Response response = client.GetExtensibleModelWrongDiscriminator(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("kind").ToString());
+            Console.WriteLine(result.GetProperty("weight").ToString());
         }
 
         [Test]
@@ -309,6 +363,10 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
             EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
             Response response = await client.GetExtensibleModelWrongDiscriminatorAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("kind").ToString());
+            Console.WriteLine(result.GetProperty("weight").ToString());
         }
 
         [Test]
@@ -336,6 +394,10 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
             EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
             Response response = client.GetFixedModel(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("kind").ToString());
+            Console.WriteLine(result.GetProperty("length").ToString());
         }
 
         [Test]
@@ -345,6 +407,10 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
             EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
             Response response = await client.GetFixedModelAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("kind").ToString());
+            Console.WriteLine(result.GetProperty("length").ToString());
         }
 
         [Test]
@@ -372,6 +438,10 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
             EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
             Response response = client.GetFixedModel(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("kind").ToString());
+            Console.WriteLine(result.GetProperty("length").ToString());
         }
 
         [Test]
@@ -381,6 +451,10 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
             EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
             Response response = await client.GetFixedModelAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("kind").ToString());
+            Console.WriteLine(result.GetProperty("length").ToString());
         }
 
         [Test]
@@ -413,6 +487,8 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
                 length = 1234,
             });
             Response response = client.PutFixedModel(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -427,6 +503,8 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
                 length = 1234,
             });
             Response response = await client.PutFixedModelAsync(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -461,6 +539,8 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
                 length = 1234,
             });
             Response response = client.PutFixedModel(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -475,6 +555,8 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
                 length = 1234,
             });
             Response response = await client.PutFixedModelAsync(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -504,6 +586,10 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
             EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
             Response response = client.GetFixedModelMissingDiscriminator(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("kind").ToString());
+            Console.WriteLine(result.GetProperty("length").ToString());
         }
 
         [Test]
@@ -513,6 +599,10 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
             EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
             Response response = await client.GetFixedModelMissingDiscriminatorAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("kind").ToString());
+            Console.WriteLine(result.GetProperty("length").ToString());
         }
 
         [Test]
@@ -540,6 +630,10 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
             EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
             Response response = client.GetFixedModelMissingDiscriminator(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("kind").ToString());
+            Console.WriteLine(result.GetProperty("length").ToString());
         }
 
         [Test]
@@ -549,6 +643,10 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
             EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
             Response response = await client.GetFixedModelMissingDiscriminatorAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("kind").ToString());
+            Console.WriteLine(result.GetProperty("length").ToString());
         }
 
         [Test]
@@ -576,6 +674,10 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
             EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
             Response response = client.GetFixedModelWrongDiscriminator(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("kind").ToString());
+            Console.WriteLine(result.GetProperty("length").ToString());
         }
 
         [Test]
@@ -585,6 +687,10 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
             EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
             Response response = await client.GetFixedModelWrongDiscriminatorAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("kind").ToString());
+            Console.WriteLine(result.GetProperty("length").ToString());
         }
 
         [Test]
@@ -612,6 +718,10 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
             EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
             Response response = client.GetFixedModelWrongDiscriminator(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("kind").ToString());
+            Console.WriteLine(result.GetProperty("length").ToString());
         }
 
         [Test]
@@ -621,6 +731,10 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
             EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
             Response response = await client.GetFixedModelWrongDiscriminatorAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("kind").ToString());
+            Console.WriteLine(result.GetProperty("length").ToString());
         }
 
         [Test]

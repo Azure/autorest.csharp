@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Threading.Tasks;
 using Authentication.Http.Custom;
 using Azure;
@@ -23,6 +24,8 @@ namespace Authentication.Http.Custom.Samples
             CustomClient client = new CustomClient(credential);
 
             Response response = client.Valid();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -33,6 +36,8 @@ namespace Authentication.Http.Custom.Samples
             CustomClient client = new CustomClient(credential);
 
             Response response = await client.ValidAsync();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -43,6 +48,8 @@ namespace Authentication.Http.Custom.Samples
             CustomClient client = new CustomClient(credential);
 
             Response response = client.Valid();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -53,6 +60,8 @@ namespace Authentication.Http.Custom.Samples
             CustomClient client = new CustomClient(credential);
 
             Response response = await client.ValidAsync();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -63,6 +72,8 @@ namespace Authentication.Http.Custom.Samples
             CustomClient client = new CustomClient(credential);
 
             Response response = client.Invalid();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -73,6 +84,8 @@ namespace Authentication.Http.Custom.Samples
             CustomClient client = new CustomClient(credential);
 
             Response response = await client.InvalidAsync();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -83,6 +96,8 @@ namespace Authentication.Http.Custom.Samples
             CustomClient client = new CustomClient(credential);
 
             Response response = client.Invalid();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -93,6 +108,8 @@ namespace Authentication.Http.Custom.Samples
             CustomClient client = new CustomClient(credential);
 
             Response response = await client.InvalidAsync();
+
+            Console.WriteLine(response.Status);
         }
     }
 }

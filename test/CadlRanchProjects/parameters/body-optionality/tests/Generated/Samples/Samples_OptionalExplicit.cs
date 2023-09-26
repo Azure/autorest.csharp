@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -25,6 +26,8 @@ namespace Parameters.BodyOptionality.Samples
 
             RequestContent content = null;
             Response response = client.Set(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -35,6 +38,8 @@ namespace Parameters.BodyOptionality.Samples
 
             RequestContent content = null;
             Response response = await client.SetAsync(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -66,6 +71,8 @@ namespace Parameters.BodyOptionality.Samples
                 name = "<name>",
             });
             Response response = client.Set(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -79,6 +86,8 @@ namespace Parameters.BodyOptionality.Samples
                 name = "<name>",
             });
             Response response = await client.SetAsync(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -109,6 +118,8 @@ namespace Parameters.BodyOptionality.Samples
 
             RequestContent content = null;
             Response response = client.Omit(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -119,6 +130,8 @@ namespace Parameters.BodyOptionality.Samples
 
             RequestContent content = null;
             Response response = await client.OmitAsync(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -150,6 +163,8 @@ namespace Parameters.BodyOptionality.Samples
                 name = "<name>",
             });
             Response response = client.Omit(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -163,6 +178,8 @@ namespace Parameters.BodyOptionality.Samples
                 name = "<name>",
             });
             Response response = await client.OmitAsync(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]

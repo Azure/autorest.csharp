@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Identity;
@@ -23,6 +24,8 @@ namespace security_key_LowLevel.Samples
             AutorestSecurityKeyClient client = new AutorestSecurityKeyClient(credential);
 
             Response response = client.Head();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -33,6 +36,8 @@ namespace security_key_LowLevel.Samples
             AutorestSecurityKeyClient client = new AutorestSecurityKeyClient(credential);
 
             Response response = await client.HeadAsync();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -43,6 +48,8 @@ namespace security_key_LowLevel.Samples
             AutorestSecurityKeyClient client = new AutorestSecurityKeyClient(credential);
 
             Response response = client.Head();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -53,6 +60,8 @@ namespace security_key_LowLevel.Samples
             AutorestSecurityKeyClient client = new AutorestSecurityKeyClient(credential);
 
             Response response = await client.HeadAsync();
+
+            Console.WriteLine(response.Status);
         }
     }
 }

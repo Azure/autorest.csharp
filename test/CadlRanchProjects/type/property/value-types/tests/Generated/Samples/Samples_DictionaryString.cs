@@ -5,7 +5,9 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -25,6 +27,9 @@ namespace _Type.Property.ValueTypes.Samples
             DictionaryString client = new ValueTypesClient().GetDictionaryStringClient("1.0.0");
 
             Response response = client.GetDictionaryString(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("property").GetProperty("<key>").ToString());
         }
 
         [Test]
@@ -34,6 +39,9 @@ namespace _Type.Property.ValueTypes.Samples
             DictionaryString client = new ValueTypesClient().GetDictionaryStringClient("1.0.0");
 
             Response response = await client.GetDictionaryStringAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("property").GetProperty("<key>").ToString());
         }
 
         [Test]
@@ -61,6 +69,9 @@ namespace _Type.Property.ValueTypes.Samples
             DictionaryString client = new ValueTypesClient().GetDictionaryStringClient("1.0.0");
 
             Response response = client.GetDictionaryString(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("property").GetProperty("<key>").ToString());
         }
 
         [Test]
@@ -70,6 +81,9 @@ namespace _Type.Property.ValueTypes.Samples
             DictionaryString client = new ValueTypesClient().GetDictionaryStringClient("1.0.0");
 
             Response response = await client.GetDictionaryStringAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("property").GetProperty("<key>").ToString());
         }
 
         [Test]
@@ -104,6 +118,8 @@ namespace _Type.Property.ValueTypes.Samples
                 },
             });
             Response response = client.Put(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -120,6 +136,8 @@ namespace _Type.Property.ValueTypes.Samples
                 },
             });
             Response response = await client.PutAsync(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -162,6 +180,8 @@ namespace _Type.Property.ValueTypes.Samples
                 },
             });
             Response response = client.Put(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -178,6 +198,8 @@ namespace _Type.Property.ValueTypes.Samples
                 },
             });
             Response response = await client.PutAsync(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]

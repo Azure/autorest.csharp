@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -24,6 +26,9 @@ namespace _Type.Property.ValueTypes.Samples
             ExtensibleEnum client = new ValueTypesClient().GetExtensibleEnumClient("1.0.0");
 
             Response response = client.GetExtensibleEnum(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("property").ToString());
         }
 
         [Test]
@@ -33,6 +38,9 @@ namespace _Type.Property.ValueTypes.Samples
             ExtensibleEnum client = new ValueTypesClient().GetExtensibleEnumClient("1.0.0");
 
             Response response = await client.GetExtensibleEnumAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("property").ToString());
         }
 
         [Test]
@@ -60,6 +68,9 @@ namespace _Type.Property.ValueTypes.Samples
             ExtensibleEnum client = new ValueTypesClient().GetExtensibleEnumClient("1.0.0");
 
             Response response = client.GetExtensibleEnum(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("property").ToString());
         }
 
         [Test]
@@ -69,6 +80,9 @@ namespace _Type.Property.ValueTypes.Samples
             ExtensibleEnum client = new ValueTypesClient().GetExtensibleEnumClient("1.0.0");
 
             Response response = await client.GetExtensibleEnumAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("property").ToString());
         }
 
         [Test]
@@ -100,6 +114,8 @@ namespace _Type.Property.ValueTypes.Samples
                 property = "ValueOne",
             });
             Response response = client.Put(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -113,6 +129,8 @@ namespace _Type.Property.ValueTypes.Samples
                 property = "ValueOne",
             });
             Response response = await client.PutAsync(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -146,6 +164,8 @@ namespace _Type.Property.ValueTypes.Samples
                 property = "ValueOne",
             });
             Response response = client.Put(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -159,6 +179,8 @@ namespace _Type.Property.ValueTypes.Samples
                 property = "ValueOne",
             });
             Response response = await client.PutAsync(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]

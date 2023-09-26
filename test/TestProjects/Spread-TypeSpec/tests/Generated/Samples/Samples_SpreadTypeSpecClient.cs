@@ -31,6 +31,8 @@ namespace SpreadTypeSpec.Samples
                 age = 1234,
             });
             Response response = client.SpreadModel(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -46,6 +48,8 @@ namespace SpreadTypeSpec.Samples
                 age = 1234,
             });
             Response response = await client.SpreadModelAsync(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -83,6 +87,8 @@ namespace SpreadTypeSpec.Samples
                 age = 1234,
             });
             Response response = client.SpreadModel(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -98,6 +104,8 @@ namespace SpreadTypeSpec.Samples
                 age = 1234,
             });
             Response response = await client.SpreadModelAsync(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -135,6 +143,8 @@ namespace SpreadTypeSpec.Samples
                 age = 1234,
             });
             Response response = client.SpreadAlias(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -150,6 +160,8 @@ namespace SpreadTypeSpec.Samples
                 age = 1234,
             });
             Response response = await client.SpreadAliasAsync(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -185,6 +197,8 @@ namespace SpreadTypeSpec.Samples
                 age = 1234,
             });
             Response response = client.SpreadAlias(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -200,6 +214,8 @@ namespace SpreadTypeSpec.Samples
                 age = 1234,
             });
             Response response = await client.SpreadAliasAsync(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -235,6 +251,8 @@ namespace SpreadTypeSpec.Samples
                 age = 1234,
             });
             Response response = client.SpreadMultiTargetAlias("<id>", 1234, content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -250,6 +268,8 @@ namespace SpreadTypeSpec.Samples
                 age = 1234,
             });
             Response response = await client.SpreadMultiTargetAliasAsync("<id>", 1234, content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -285,6 +305,8 @@ namespace SpreadTypeSpec.Samples
                 age = 1234,
             });
             Response response = client.SpreadMultiTargetAlias("<id>", 1234, content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -300,6 +322,8 @@ namespace SpreadTypeSpec.Samples
                 age = 1234,
             });
             Response response = await client.SpreadMultiTargetAliasAsync("<id>", 1234, content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -335,6 +359,8 @@ namespace SpreadTypeSpec.Samples
                 age = 1234,
             });
             Response response = client.SpreadAliasWithModel("<id>", 1234, content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -350,6 +376,8 @@ namespace SpreadTypeSpec.Samples
                 age = 1234,
             });
             Response response = await client.SpreadAliasWithModelAsync("<id>", 1234, content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -387,6 +415,8 @@ namespace SpreadTypeSpec.Samples
                 age = 1234,
             });
             Response response = client.SpreadAliasWithModel("<id>", 1234, content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -402,6 +432,8 @@ namespace SpreadTypeSpec.Samples
                 age = 1234,
             });
             Response response = await client.SpreadAliasWithModelAsync("<id>", 1234, content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -439,6 +471,8 @@ namespace SpreadTypeSpec.Samples
                 age = 1234,
             });
             Response response = client.SpreadAliasWithSpreadAlias("<id>", 1234, content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -454,6 +488,8 @@ namespace SpreadTypeSpec.Samples
                 age = 1234,
             });
             Response response = await client.SpreadAliasWithSpreadAliasAsync("<id>", 1234, content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -489,6 +525,8 @@ namespace SpreadTypeSpec.Samples
                 age = 1234,
             });
             Response response = client.SpreadAliasWithSpreadAlias("<id>", 1234, content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -504,6 +542,8 @@ namespace SpreadTypeSpec.Samples
                 age = 1234,
             });
             Response response = await client.SpreadAliasWithSpreadAliasAsync("<id>", 1234, content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -542,6 +582,8 @@ namespace SpreadTypeSpec.Samples
             },
             });
             Response response = client.SpreadAliasWithOptionalProps("<id>", 1234, content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -560,6 +602,8 @@ namespace SpreadTypeSpec.Samples
             },
             });
             Response response = await client.SpreadAliasWithOptionalPropsAsync("<id>", 1234, content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -604,6 +648,8 @@ namespace SpreadTypeSpec.Samples
             },
             });
             Response response = client.SpreadAliasWithOptionalProps("<id>", 1234, content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -628,6 +674,8 @@ namespace SpreadTypeSpec.Samples
             },
             });
             Response response = await client.SpreadAliasWithOptionalPropsAsync("<id>", 1234, content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -665,6 +713,8 @@ namespace SpreadTypeSpec.Samples
             },
             });
             Response response = client.SpreadAliasWithCollections(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -682,6 +732,8 @@ namespace SpreadTypeSpec.Samples
             },
             });
             Response response = await client.SpreadAliasWithCollectionsAsync(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -723,6 +775,8 @@ namespace SpreadTypeSpec.Samples
             },
             });
             Response response = client.SpreadAliasWithCollections(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -744,6 +798,8 @@ namespace SpreadTypeSpec.Samples
             },
             });
             Response response = await client.SpreadAliasWithCollectionsAsync(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]

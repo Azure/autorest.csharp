@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Text.Json;
 using System.Threading.Tasks;
 using ApiVersionInTsp;
 using ApiVersionInTsp.Models;
@@ -26,6 +27,9 @@ namespace ApiVersionInTsp.Samples
             ApiVersionInTspClient client = new ApiVersionInTspClient(endpoint, credential);
 
             Response response = client.GetBatchDetectionResult(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("resultId").ToString());
         }
 
         [Test]
@@ -37,6 +41,9 @@ namespace ApiVersionInTsp.Samples
             ApiVersionInTspClient client = new ApiVersionInTspClient(endpoint, credential);
 
             Response response = await client.GetBatchDetectionResultAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("resultId").ToString());
         }
 
         [Test]
@@ -70,6 +77,9 @@ namespace ApiVersionInTsp.Samples
             ApiVersionInTspClient client = new ApiVersionInTspClient(endpoint, credential);
 
             Response response = client.GetBatchDetectionResult(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("resultId").ToString());
         }
 
         [Test]
@@ -81,6 +91,9 @@ namespace ApiVersionInTsp.Samples
             ApiVersionInTspClient client = new ApiVersionInTspClient(endpoint, credential);
 
             Response response = await client.GetBatchDetectionResultAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("resultId").ToString());
         }
 
         [Test]

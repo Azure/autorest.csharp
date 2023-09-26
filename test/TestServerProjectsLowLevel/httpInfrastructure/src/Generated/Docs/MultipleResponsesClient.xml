@@ -9,6 +9,9 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = await client.Get200Model204NoModelDefaultError200ValidAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call Get200Model204NoModelDefaultError200ValidAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -16,6 +19,9 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = await client.Get200Model204NoModelDefaultError200ValidAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("statusCode").ToString());
 ]]></code></example>
     </member>
     <member name="Get200Model204NoModelDefaultError200Valid(RequestContext)">
@@ -26,6 +32,9 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = client.Get200Model204NoModelDefaultError200Valid(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call Get200Model204NoModelDefaultError200Valid with all parameters and parse the result.
 <code><![CDATA[
@@ -33,6 +42,9 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = client.Get200Model204NoModelDefaultError200Valid(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("statusCode").ToString());
 ]]></code></example>
     </member>
     <member name="Get200Model204NoModelDefaultError204ValidAsync(RequestContext)">
@@ -43,6 +55,9 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = await client.Get200Model204NoModelDefaultError204ValidAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call Get200Model204NoModelDefaultError204ValidAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -50,6 +65,9 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = await client.Get200Model204NoModelDefaultError204ValidAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("statusCode").ToString());
 ]]></code></example>
     </member>
     <member name="Get200Model204NoModelDefaultError204Valid(RequestContext)">
@@ -60,6 +78,9 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = client.Get200Model204NoModelDefaultError204Valid(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call Get200Model204NoModelDefaultError204Valid with all parameters and parse the result.
 <code><![CDATA[
@@ -67,6 +88,9 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = client.Get200Model204NoModelDefaultError204Valid(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("statusCode").ToString());
 ]]></code></example>
     </member>
     <member name="Get200Model204NoModelDefaultError201InvalidAsync(RequestContext)">
@@ -77,6 +101,9 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = await client.Get200Model204NoModelDefaultError201InvalidAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call Get200Model204NoModelDefaultError201InvalidAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -84,6 +111,9 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = await client.Get200Model204NoModelDefaultError201InvalidAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("statusCode").ToString());
 ]]></code></example>
     </member>
     <member name="Get200Model204NoModelDefaultError201Invalid(RequestContext)">
@@ -94,6 +124,9 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = client.Get200Model204NoModelDefaultError201Invalid(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call Get200Model204NoModelDefaultError201Invalid with all parameters and parse the result.
 <code><![CDATA[
@@ -101,6 +134,9 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = client.Get200Model204NoModelDefaultError201Invalid(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("statusCode").ToString());
 ]]></code></example>
     </member>
     <member name="Get200Model204NoModelDefaultError202NoneAsync(RequestContext)">
@@ -111,6 +147,9 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = await client.Get200Model204NoModelDefaultError202NoneAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call Get200Model204NoModelDefaultError202NoneAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -118,6 +157,9 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = await client.Get200Model204NoModelDefaultError202NoneAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("statusCode").ToString());
 ]]></code></example>
     </member>
     <member name="Get200Model204NoModelDefaultError202None(RequestContext)">
@@ -128,6 +170,9 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = client.Get200Model204NoModelDefaultError202None(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call Get200Model204NoModelDefaultError202None with all parameters and parse the result.
 <code><![CDATA[
@@ -135,6 +180,9 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = client.Get200Model204NoModelDefaultError202None(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("statusCode").ToString());
 ]]></code></example>
     </member>
     <member name="Get200Model204NoModelDefaultError400ValidAsync(RequestContext)">
@@ -145,6 +193,9 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = await client.Get200Model204NoModelDefaultError400ValidAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call Get200Model204NoModelDefaultError400ValidAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -152,6 +203,9 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = await client.Get200Model204NoModelDefaultError400ValidAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("statusCode").ToString());
 ]]></code></example>
     </member>
     <member name="Get200Model204NoModelDefaultError400Valid(RequestContext)">
@@ -162,6 +216,9 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = client.Get200Model204NoModelDefaultError400Valid(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call Get200Model204NoModelDefaultError400Valid with all parameters and parse the result.
 <code><![CDATA[
@@ -169,6 +226,9 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = client.Get200Model204NoModelDefaultError400Valid(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("statusCode").ToString());
 ]]></code></example>
     </member>
     <member name="Get200Model201ModelDefaultError200ValidAsync(RequestContext)">
@@ -179,6 +239,9 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = await client.Get200Model201ModelDefaultError200ValidAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call Get200Model201ModelDefaultError200ValidAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -186,6 +249,9 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = await client.Get200Model201ModelDefaultError200ValidAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("statusCode").ToString());
 ]]></code></example>
     </member>
     <member name="Get200Model201ModelDefaultError200Valid(RequestContext)">
@@ -196,6 +262,9 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = client.Get200Model201ModelDefaultError200Valid(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call Get200Model201ModelDefaultError200Valid with all parameters and parse the result.
 <code><![CDATA[
@@ -203,6 +272,9 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = client.Get200Model201ModelDefaultError200Valid(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("statusCode").ToString());
 ]]></code></example>
     </member>
     <member name="Get200Model201ModelDefaultError201ValidAsync(RequestContext)">
@@ -213,6 +285,9 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = await client.Get200Model201ModelDefaultError201ValidAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call Get200Model201ModelDefaultError201ValidAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -220,6 +295,9 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = await client.Get200Model201ModelDefaultError201ValidAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("statusCode").ToString());
 ]]></code></example>
     </member>
     <member name="Get200Model201ModelDefaultError201Valid(RequestContext)">
@@ -230,6 +308,9 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = client.Get200Model201ModelDefaultError201Valid(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call Get200Model201ModelDefaultError201Valid with all parameters and parse the result.
 <code><![CDATA[
@@ -237,6 +318,9 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = client.Get200Model201ModelDefaultError201Valid(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("statusCode").ToString());
 ]]></code></example>
     </member>
     <member name="Get200Model201ModelDefaultError400ValidAsync(RequestContext)">
@@ -247,6 +331,9 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = await client.Get200Model201ModelDefaultError400ValidAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call Get200Model201ModelDefaultError400ValidAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -254,6 +341,9 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = await client.Get200Model201ModelDefaultError400ValidAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("statusCode").ToString());
 ]]></code></example>
     </member>
     <member name="Get200Model201ModelDefaultError400Valid(RequestContext)">
@@ -264,6 +354,9 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = client.Get200Model201ModelDefaultError400Valid(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call Get200Model201ModelDefaultError400Valid with all parameters and parse the result.
 <code><![CDATA[
@@ -271,6 +364,9 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = client.Get200Model201ModelDefaultError400Valid(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("statusCode").ToString());
 ]]></code></example>
     </member>
     <member name="Get200ModelA201ModelC404ModelDDefaultError200ValidAsync(RequestContext)">
@@ -281,6 +377,9 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = await client.Get200ModelA201ModelC404ModelDDefaultError200ValidAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call Get200ModelA201ModelC404ModelDDefaultError200ValidAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -288,6 +387,9 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = await client.Get200ModelA201ModelC404ModelDDefaultError200ValidAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("statusCode").ToString());
 ]]></code></example>
     </member>
     <member name="Get200ModelA201ModelC404ModelDDefaultError200Valid(RequestContext)">
@@ -298,6 +400,9 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = client.Get200ModelA201ModelC404ModelDDefaultError200Valid(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call Get200ModelA201ModelC404ModelDDefaultError200Valid with all parameters and parse the result.
 <code><![CDATA[
@@ -305,6 +410,9 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = client.Get200ModelA201ModelC404ModelDDefaultError200Valid(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("statusCode").ToString());
 ]]></code></example>
     </member>
     <member name="Get200ModelA201ModelC404ModelDDefaultError201ValidAsync(RequestContext)">
@@ -315,6 +423,9 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = await client.Get200ModelA201ModelC404ModelDDefaultError201ValidAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call Get200ModelA201ModelC404ModelDDefaultError201ValidAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -322,6 +433,9 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = await client.Get200ModelA201ModelC404ModelDDefaultError201ValidAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("statusCode").ToString());
 ]]></code></example>
     </member>
     <member name="Get200ModelA201ModelC404ModelDDefaultError201Valid(RequestContext)">
@@ -332,6 +446,9 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = client.Get200ModelA201ModelC404ModelDDefaultError201Valid(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call Get200ModelA201ModelC404ModelDDefaultError201Valid with all parameters and parse the result.
 <code><![CDATA[
@@ -339,6 +456,9 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = client.Get200ModelA201ModelC404ModelDDefaultError201Valid(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("statusCode").ToString());
 ]]></code></example>
     </member>
     <member name="Get200ModelA201ModelC404ModelDDefaultError404ValidAsync(RequestContext)">
@@ -349,6 +469,9 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = await client.Get200ModelA201ModelC404ModelDDefaultError404ValidAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call Get200ModelA201ModelC404ModelDDefaultError404ValidAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -356,6 +479,9 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = await client.Get200ModelA201ModelC404ModelDDefaultError404ValidAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("statusCode").ToString());
 ]]></code></example>
     </member>
     <member name="Get200ModelA201ModelC404ModelDDefaultError404Valid(RequestContext)">
@@ -366,6 +492,9 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = client.Get200ModelA201ModelC404ModelDDefaultError404Valid(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call Get200ModelA201ModelC404ModelDDefaultError404Valid with all parameters and parse the result.
 <code><![CDATA[
@@ -373,6 +502,9 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = client.Get200ModelA201ModelC404ModelDDefaultError404Valid(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("statusCode").ToString());
 ]]></code></example>
     </member>
     <member name="Get200ModelA201ModelC404ModelDDefaultError400ValidAsync(RequestContext)">
@@ -383,6 +515,9 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = await client.Get200ModelA201ModelC404ModelDDefaultError400ValidAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call Get200ModelA201ModelC404ModelDDefaultError400ValidAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -390,6 +525,9 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = await client.Get200ModelA201ModelC404ModelDDefaultError400ValidAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("statusCode").ToString());
 ]]></code></example>
     </member>
     <member name="Get200ModelA201ModelC404ModelDDefaultError400Valid(RequestContext)">
@@ -400,6 +538,9 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = client.Get200ModelA201ModelC404ModelDDefaultError400Valid(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call Get200ModelA201ModelC404ModelDDefaultError400Valid with all parameters and parse the result.
 <code><![CDATA[
@@ -407,6 +548,9 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = client.Get200ModelA201ModelC404ModelDDefaultError400Valid(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("statusCode").ToString());
 ]]></code></example>
     </member>
     <member name="Get202None204NoneDefaultError202NoneAsync(RequestContext)">
@@ -417,6 +561,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = await client.Get202None204NoneDefaultError202NoneAsync();
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Get202None204NoneDefaultError202NoneAsync with all request content.
 <code><![CDATA[
@@ -424,6 +570,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = await client.Get202None204NoneDefaultError202NoneAsync();
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="Get202None204NoneDefaultError202None(RequestContext)">
@@ -434,6 +582,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = client.Get202None204NoneDefaultError202None();
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Get202None204NoneDefaultError202None with all request content.
 <code><![CDATA[
@@ -441,6 +591,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = client.Get202None204NoneDefaultError202None();
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="Get202None204NoneDefaultError204NoneAsync(RequestContext)">
@@ -451,6 +603,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = await client.Get202None204NoneDefaultError204NoneAsync();
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Get202None204NoneDefaultError204NoneAsync with all request content.
 <code><![CDATA[
@@ -458,6 +612,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = await client.Get202None204NoneDefaultError204NoneAsync();
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="Get202None204NoneDefaultError204None(RequestContext)">
@@ -468,6 +624,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = client.Get202None204NoneDefaultError204None();
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Get202None204NoneDefaultError204None with all request content.
 <code><![CDATA[
@@ -475,6 +633,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = client.Get202None204NoneDefaultError204None();
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="Get202None204NoneDefaultError400ValidAsync(RequestContext)">
@@ -485,6 +645,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = await client.Get202None204NoneDefaultError400ValidAsync();
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Get202None204NoneDefaultError400ValidAsync with all request content.
 <code><![CDATA[
@@ -492,6 +654,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = await client.Get202None204NoneDefaultError400ValidAsync();
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="Get202None204NoneDefaultError400Valid(RequestContext)">
@@ -502,6 +666,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = client.Get202None204NoneDefaultError400Valid();
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Get202None204NoneDefaultError400Valid with all request content.
 <code><![CDATA[
@@ -509,6 +675,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = client.Get202None204NoneDefaultError400Valid();
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="Get202None204NoneDefaultNone202InvalidAsync(RequestContext)">
@@ -519,6 +687,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = await client.Get202None204NoneDefaultNone202InvalidAsync();
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Get202None204NoneDefaultNone202InvalidAsync with all request content.
 <code><![CDATA[
@@ -526,6 +696,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = await client.Get202None204NoneDefaultNone202InvalidAsync();
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="Get202None204NoneDefaultNone202Invalid(RequestContext)">
@@ -536,6 +708,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = client.Get202None204NoneDefaultNone202Invalid();
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Get202None204NoneDefaultNone202Invalid with all request content.
 <code><![CDATA[
@@ -543,6 +717,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = client.Get202None204NoneDefaultNone202Invalid();
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="Get202None204NoneDefaultNone204NoneAsync(RequestContext)">
@@ -553,6 +729,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = await client.Get202None204NoneDefaultNone204NoneAsync();
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Get202None204NoneDefaultNone204NoneAsync with all request content.
 <code><![CDATA[
@@ -560,6 +738,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = await client.Get202None204NoneDefaultNone204NoneAsync();
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="Get202None204NoneDefaultNone204None(RequestContext)">
@@ -570,6 +750,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = client.Get202None204NoneDefaultNone204None();
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Get202None204NoneDefaultNone204None with all request content.
 <code><![CDATA[
@@ -577,6 +759,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = client.Get202None204NoneDefaultNone204None();
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="Get202None204NoneDefaultNone400NoneAsync(RequestContext)">
@@ -587,6 +771,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = await client.Get202None204NoneDefaultNone400NoneAsync();
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Get202None204NoneDefaultNone400NoneAsync with all request content.
 <code><![CDATA[
@@ -594,6 +780,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = await client.Get202None204NoneDefaultNone400NoneAsync();
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="Get202None204NoneDefaultNone400None(RequestContext)">
@@ -604,6 +792,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = client.Get202None204NoneDefaultNone400None();
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Get202None204NoneDefaultNone400None with all request content.
 <code><![CDATA[
@@ -611,6 +801,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = client.Get202None204NoneDefaultNone400None();
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="Get202None204NoneDefaultNone400InvalidAsync(RequestContext)">
@@ -621,6 +813,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = await client.Get202None204NoneDefaultNone400InvalidAsync();
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Get202None204NoneDefaultNone400InvalidAsync with all request content.
 <code><![CDATA[
@@ -628,6 +822,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = await client.Get202None204NoneDefaultNone400InvalidAsync();
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="Get202None204NoneDefaultNone400Invalid(RequestContext)">
@@ -638,6 +834,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = client.Get202None204NoneDefaultNone400Invalid();
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Get202None204NoneDefaultNone400Invalid with all request content.
 <code><![CDATA[
@@ -645,6 +843,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = client.Get202None204NoneDefaultNone400Invalid();
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="GetDefaultModelA200ValidAsync(RequestContext)">
@@ -655,6 +855,9 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = await client.GetDefaultModelA200ValidAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetDefaultModelA200ValidAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -662,6 +865,9 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = await client.GetDefaultModelA200ValidAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("statusCode").ToString());
 ]]></code></example>
     </member>
     <member name="GetDefaultModelA200Valid(RequestContext)">
@@ -672,6 +878,9 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = client.GetDefaultModelA200Valid(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetDefaultModelA200Valid with all parameters and parse the result.
 <code><![CDATA[
@@ -679,6 +888,9 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = client.GetDefaultModelA200Valid(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("statusCode").ToString());
 ]]></code></example>
     </member>
     <member name="GetDefaultModelA200NoneAsync(RequestContext)">
@@ -689,6 +901,9 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = await client.GetDefaultModelA200NoneAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetDefaultModelA200NoneAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -696,6 +911,9 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = await client.GetDefaultModelA200NoneAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("statusCode").ToString());
 ]]></code></example>
     </member>
     <member name="GetDefaultModelA200None(RequestContext)">
@@ -706,6 +924,9 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = client.GetDefaultModelA200None(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetDefaultModelA200None with all parameters and parse the result.
 <code><![CDATA[
@@ -713,6 +934,9 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = client.GetDefaultModelA200None(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("statusCode").ToString());
 ]]></code></example>
     </member>
     <member name="GetDefaultModelA400ValidAsync(RequestContext)">
@@ -723,6 +947,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = await client.GetDefaultModelA400ValidAsync();
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call GetDefaultModelA400ValidAsync with all request content.
 <code><![CDATA[
@@ -730,6 +956,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = await client.GetDefaultModelA400ValidAsync();
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="GetDefaultModelA400Valid(RequestContext)">
@@ -740,6 +968,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = client.GetDefaultModelA400Valid();
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call GetDefaultModelA400Valid with all request content.
 <code><![CDATA[
@@ -747,6 +977,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = client.GetDefaultModelA400Valid();
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="GetDefaultModelA400NoneAsync(RequestContext)">
@@ -757,6 +989,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = await client.GetDefaultModelA400NoneAsync();
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call GetDefaultModelA400NoneAsync with all request content.
 <code><![CDATA[
@@ -764,6 +998,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = await client.GetDefaultModelA400NoneAsync();
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="GetDefaultModelA400None(RequestContext)">
@@ -774,6 +1010,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = client.GetDefaultModelA400None();
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call GetDefaultModelA400None with all request content.
 <code><![CDATA[
@@ -781,6 +1019,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = client.GetDefaultModelA400None();
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="GetDefaultNone200InvalidAsync(RequestContext)">
@@ -791,6 +1031,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = await client.GetDefaultNone200InvalidAsync();
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call GetDefaultNone200InvalidAsync with all request content.
 <code><![CDATA[
@@ -798,6 +1040,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = await client.GetDefaultNone200InvalidAsync();
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="GetDefaultNone200Invalid(RequestContext)">
@@ -808,6 +1052,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = client.GetDefaultNone200Invalid();
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call GetDefaultNone200Invalid with all request content.
 <code><![CDATA[
@@ -815,6 +1061,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = client.GetDefaultNone200Invalid();
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="GetDefaultNone200NoneAsync(RequestContext)">
@@ -825,6 +1073,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = await client.GetDefaultNone200NoneAsync();
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call GetDefaultNone200NoneAsync with all request content.
 <code><![CDATA[
@@ -832,6 +1082,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = await client.GetDefaultNone200NoneAsync();
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="GetDefaultNone200None(RequestContext)">
@@ -842,6 +1094,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = client.GetDefaultNone200None();
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call GetDefaultNone200None with all request content.
 <code><![CDATA[
@@ -849,6 +1103,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = client.GetDefaultNone200None();
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="GetDefaultNone400InvalidAsync(RequestContext)">
@@ -859,6 +1115,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = await client.GetDefaultNone400InvalidAsync();
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call GetDefaultNone400InvalidAsync with all request content.
 <code><![CDATA[
@@ -866,6 +1124,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = await client.GetDefaultNone400InvalidAsync();
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="GetDefaultNone400Invalid(RequestContext)">
@@ -876,6 +1136,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = client.GetDefaultNone400Invalid();
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call GetDefaultNone400Invalid with all request content.
 <code><![CDATA[
@@ -883,6 +1145,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = client.GetDefaultNone400Invalid();
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="GetDefaultNone400NoneAsync(RequestContext)">
@@ -893,6 +1157,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = await client.GetDefaultNone400NoneAsync();
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call GetDefaultNone400NoneAsync with all request content.
 <code><![CDATA[
@@ -900,6 +1166,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = await client.GetDefaultNone400NoneAsync();
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="GetDefaultNone400None(RequestContext)">
@@ -910,6 +1178,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = client.GetDefaultNone400None();
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call GetDefaultNone400None with all request content.
 <code><![CDATA[
@@ -917,6 +1187,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = client.GetDefaultNone400None();
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="Get200ModelA200NoneAsync(RequestContext)">
@@ -927,6 +1199,9 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = await client.Get200ModelA200NoneAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call Get200ModelA200NoneAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -934,6 +1209,9 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = await client.Get200ModelA200NoneAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("statusCode").ToString());
 ]]></code></example>
     </member>
     <member name="Get200ModelA200None(RequestContext)">
@@ -944,6 +1222,9 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = client.Get200ModelA200None(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call Get200ModelA200None with all parameters and parse the result.
 <code><![CDATA[
@@ -951,6 +1232,9 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = client.Get200ModelA200None(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("statusCode").ToString());
 ]]></code></example>
     </member>
     <member name="Get200ModelA200ValidAsync(RequestContext)">
@@ -961,6 +1245,9 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = await client.Get200ModelA200ValidAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call Get200ModelA200ValidAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -968,6 +1255,9 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = await client.Get200ModelA200ValidAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("statusCode").ToString());
 ]]></code></example>
     </member>
     <member name="Get200ModelA200Valid(RequestContext)">
@@ -978,6 +1268,9 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = client.Get200ModelA200Valid(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call Get200ModelA200Valid with all parameters and parse the result.
 <code><![CDATA[
@@ -985,6 +1278,9 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = client.Get200ModelA200Valid(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("statusCode").ToString());
 ]]></code></example>
     </member>
     <member name="Get200ModelA200InvalidAsync(RequestContext)">
@@ -995,6 +1291,9 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = await client.Get200ModelA200InvalidAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call Get200ModelA200InvalidAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -1002,6 +1301,9 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = await client.Get200ModelA200InvalidAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("statusCode").ToString());
 ]]></code></example>
     </member>
     <member name="Get200ModelA200Invalid(RequestContext)">
@@ -1012,6 +1314,9 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = client.Get200ModelA200Invalid(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call Get200ModelA200Invalid with all parameters and parse the result.
 <code><![CDATA[
@@ -1019,6 +1324,9 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = client.Get200ModelA200Invalid(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("statusCode").ToString());
 ]]></code></example>
     </member>
     <member name="Get200ModelA400NoneAsync(RequestContext)">
@@ -1029,6 +1337,9 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = await client.Get200ModelA400NoneAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call Get200ModelA400NoneAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -1036,6 +1347,9 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = await client.Get200ModelA400NoneAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("statusCode").ToString());
 ]]></code></example>
     </member>
     <member name="Get200ModelA400None(RequestContext)">
@@ -1046,6 +1360,9 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = client.Get200ModelA400None(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call Get200ModelA400None with all parameters and parse the result.
 <code><![CDATA[
@@ -1053,6 +1370,9 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = client.Get200ModelA400None(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("statusCode").ToString());
 ]]></code></example>
     </member>
     <member name="Get200ModelA400ValidAsync(RequestContext)">
@@ -1063,6 +1383,9 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = await client.Get200ModelA400ValidAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call Get200ModelA400ValidAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -1070,6 +1393,9 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = await client.Get200ModelA400ValidAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("statusCode").ToString());
 ]]></code></example>
     </member>
     <member name="Get200ModelA400Valid(RequestContext)">
@@ -1080,6 +1406,9 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = client.Get200ModelA400Valid(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call Get200ModelA400Valid with all parameters and parse the result.
 <code><![CDATA[
@@ -1087,6 +1416,9 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = client.Get200ModelA400Valid(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("statusCode").ToString());
 ]]></code></example>
     </member>
     <member name="Get200ModelA400InvalidAsync(RequestContext)">
@@ -1097,6 +1429,9 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = await client.Get200ModelA400InvalidAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call Get200ModelA400InvalidAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -1104,6 +1439,9 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = await client.Get200ModelA400InvalidAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("statusCode").ToString());
 ]]></code></example>
     </member>
     <member name="Get200ModelA400Invalid(RequestContext)">
@@ -1114,6 +1452,9 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = client.Get200ModelA400Invalid(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call Get200ModelA400Invalid with all parameters and parse the result.
 <code><![CDATA[
@@ -1121,6 +1462,9 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = client.Get200ModelA400Invalid(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("statusCode").ToString());
 ]]></code></example>
     </member>
     <member name="Get200ModelA202ValidAsync(RequestContext)">
@@ -1131,6 +1475,9 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = await client.Get200ModelA202ValidAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call Get200ModelA202ValidAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -1138,6 +1485,9 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = await client.Get200ModelA202ValidAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("statusCode").ToString());
 ]]></code></example>
     </member>
     <member name="Get200ModelA202Valid(RequestContext)">
@@ -1148,6 +1498,9 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = client.Get200ModelA202Valid(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call Get200ModelA202Valid with all parameters and parse the result.
 <code><![CDATA[
@@ -1155,6 +1508,9 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = client.Get200ModelA202Valid(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("statusCode").ToString());
 ]]></code></example>
     </member>
   </members>

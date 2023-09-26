@@ -38,6 +38,9 @@ This sample shows how to call GetNullableFloatValueAsync and parse the result.
 NullableFloatValue client = new DictionaryClient().GetNullableFloatValueClient("1.0.0");
 
 Response response = await client.GetNullableFloatValueAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("<key>").ToString());
 ]]></code>
 This sample shows how to call GetNullableFloatValueAsync.
 <code><![CDATA[
@@ -50,6 +53,9 @@ This sample shows how to call GetNullableFloatValueAsync with all parameters and
 NullableFloatValue client = new DictionaryClient().GetNullableFloatValueClient("1.0.0");
 
 Response response = await client.GetNullableFloatValueAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("<key>").ToString());
 ]]></code>
 This sample shows how to call GetNullableFloatValueAsync with all parameters.
 <code><![CDATA[
@@ -65,6 +71,9 @@ This sample shows how to call GetNullableFloatValue and parse the result.
 NullableFloatValue client = new DictionaryClient().GetNullableFloatValueClient("1.0.0");
 
 Response response = client.GetNullableFloatValue(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("<key>").ToString());
 ]]></code>
 This sample shows how to call GetNullableFloatValue.
 <code><![CDATA[
@@ -77,6 +86,9 @@ This sample shows how to call GetNullableFloatValue with all parameters and pars
 NullableFloatValue client = new DictionaryClient().GetNullableFloatValueClient("1.0.0");
 
 Response response = client.GetNullableFloatValue(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("<key>").ToString());
 ]]></code>
 This sample shows how to call GetNullableFloatValue with all parameters.
 <code><![CDATA[
@@ -138,6 +150,8 @@ RequestContent content = RequestContent.Create(new
     key = 123.45F,
 });
 Response response = await client.PutAsync(content);
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutAsync.
 <code><![CDATA[
@@ -157,6 +171,8 @@ RequestContent content = RequestContent.Create(new
     key = 123.45F,
 });
 Response response = await client.PutAsync(content);
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutAsync with all parameters.
 <code><![CDATA[
@@ -179,6 +195,8 @@ RequestContent content = RequestContent.Create(new
     key = 123.45F,
 });
 Response response = client.Put(content);
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Put.
 <code><![CDATA[
@@ -198,6 +216,8 @@ RequestContent content = RequestContent.Create(new
     key = 123.45F,
 });
 Response response = client.Put(content);
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Put with all parameters.
 <code><![CDATA[

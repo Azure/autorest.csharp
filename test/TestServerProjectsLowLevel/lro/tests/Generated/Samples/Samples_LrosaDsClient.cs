@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -26,6 +27,10 @@ namespace lro_LowLevel.Samples
 
             RequestContent content = null;
             Operation<BinaryData> operation = client.PutNonRetry400(WaitUntil.Completed, content);
+            BinaryData responseData = operation.Value;
+
+            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -37,6 +42,10 @@ namespace lro_LowLevel.Samples
 
             RequestContent content = null;
             Operation<BinaryData> operation = await client.PutNonRetry400Async(WaitUntil.Completed, content);
+            BinaryData responseData = operation.Value;
+
+            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -59,6 +68,16 @@ namespace lro_LowLevel.Samples
                 location = "<location>",
             });
             Operation<BinaryData> operation = client.PutNonRetry400(WaitUntil.Completed, content);
+            BinaryData responseData = operation.Value;
+
+            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+            Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
+            Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
+            Console.WriteLine(result.GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("type").ToString());
+            Console.WriteLine(result.GetProperty("tags").GetProperty("<key>").ToString());
+            Console.WriteLine(result.GetProperty("location").ToString());
+            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]
@@ -81,6 +100,16 @@ namespace lro_LowLevel.Samples
                 location = "<location>",
             });
             Operation<BinaryData> operation = await client.PutNonRetry400Async(WaitUntil.Completed, content);
+            BinaryData responseData = operation.Value;
+
+            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+            Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
+            Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
+            Console.WriteLine(result.GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("type").ToString());
+            Console.WriteLine(result.GetProperty("tags").GetProperty("<key>").ToString());
+            Console.WriteLine(result.GetProperty("location").ToString());
+            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]
@@ -92,6 +121,10 @@ namespace lro_LowLevel.Samples
 
             RequestContent content = null;
             Operation<BinaryData> operation = client.PutNonRetry201Creating400(WaitUntil.Completed, content);
+            BinaryData responseData = operation.Value;
+
+            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -103,6 +136,10 @@ namespace lro_LowLevel.Samples
 
             RequestContent content = null;
             Operation<BinaryData> operation = await client.PutNonRetry201Creating400Async(WaitUntil.Completed, content);
+            BinaryData responseData = operation.Value;
+
+            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -125,6 +162,16 @@ namespace lro_LowLevel.Samples
                 location = "<location>",
             });
             Operation<BinaryData> operation = client.PutNonRetry201Creating400(WaitUntil.Completed, content);
+            BinaryData responseData = operation.Value;
+
+            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+            Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
+            Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
+            Console.WriteLine(result.GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("type").ToString());
+            Console.WriteLine(result.GetProperty("tags").GetProperty("<key>").ToString());
+            Console.WriteLine(result.GetProperty("location").ToString());
+            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]
@@ -147,6 +194,16 @@ namespace lro_LowLevel.Samples
                 location = "<location>",
             });
             Operation<BinaryData> operation = await client.PutNonRetry201Creating400Async(WaitUntil.Completed, content);
+            BinaryData responseData = operation.Value;
+
+            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+            Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
+            Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
+            Console.WriteLine(result.GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("type").ToString());
+            Console.WriteLine(result.GetProperty("tags").GetProperty("<key>").ToString());
+            Console.WriteLine(result.GetProperty("location").ToString());
+            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]
@@ -158,6 +215,10 @@ namespace lro_LowLevel.Samples
 
             RequestContent content = null;
             Operation<BinaryData> operation = client.PutNonRetry201Creating400InvalidJson(WaitUntil.Completed, content);
+            BinaryData responseData = operation.Value;
+
+            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -169,6 +230,10 @@ namespace lro_LowLevel.Samples
 
             RequestContent content = null;
             Operation<BinaryData> operation = await client.PutNonRetry201Creating400InvalidJsonAsync(WaitUntil.Completed, content);
+            BinaryData responseData = operation.Value;
+
+            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -191,6 +256,16 @@ namespace lro_LowLevel.Samples
                 location = "<location>",
             });
             Operation<BinaryData> operation = client.PutNonRetry201Creating400InvalidJson(WaitUntil.Completed, content);
+            BinaryData responseData = operation.Value;
+
+            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+            Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
+            Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
+            Console.WriteLine(result.GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("type").ToString());
+            Console.WriteLine(result.GetProperty("tags").GetProperty("<key>").ToString());
+            Console.WriteLine(result.GetProperty("location").ToString());
+            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]
@@ -213,6 +288,16 @@ namespace lro_LowLevel.Samples
                 location = "<location>",
             });
             Operation<BinaryData> operation = await client.PutNonRetry201Creating400InvalidJsonAsync(WaitUntil.Completed, content);
+            BinaryData responseData = operation.Value;
+
+            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+            Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
+            Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
+            Console.WriteLine(result.GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("type").ToString());
+            Console.WriteLine(result.GetProperty("tags").GetProperty("<key>").ToString());
+            Console.WriteLine(result.GetProperty("location").ToString());
+            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]
@@ -224,6 +309,10 @@ namespace lro_LowLevel.Samples
 
             RequestContent content = null;
             Operation<BinaryData> operation = client.PutAsyncRelativeRetry400(WaitUntil.Completed, content);
+            BinaryData responseData = operation.Value;
+
+            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -235,6 +324,10 @@ namespace lro_LowLevel.Samples
 
             RequestContent content = null;
             Operation<BinaryData> operation = await client.PutAsyncRelativeRetry400Async(WaitUntil.Completed, content);
+            BinaryData responseData = operation.Value;
+
+            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -257,6 +350,16 @@ namespace lro_LowLevel.Samples
                 location = "<location>",
             });
             Operation<BinaryData> operation = client.PutAsyncRelativeRetry400(WaitUntil.Completed, content);
+            BinaryData responseData = operation.Value;
+
+            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+            Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
+            Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
+            Console.WriteLine(result.GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("type").ToString());
+            Console.WriteLine(result.GetProperty("tags").GetProperty("<key>").ToString());
+            Console.WriteLine(result.GetProperty("location").ToString());
+            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]
@@ -279,6 +382,16 @@ namespace lro_LowLevel.Samples
                 location = "<location>",
             });
             Operation<BinaryData> operation = await client.PutAsyncRelativeRetry400Async(WaitUntil.Completed, content);
+            BinaryData responseData = operation.Value;
+
+            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+            Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
+            Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
+            Console.WriteLine(result.GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("type").ToString());
+            Console.WriteLine(result.GetProperty("tags").GetProperty("<key>").ToString());
+            Console.WriteLine(result.GetProperty("location").ToString());
+            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]
@@ -608,6 +721,10 @@ namespace lro_LowLevel.Samples
 
             RequestContent content = null;
             Operation<BinaryData> operation = client.PutError201NoProvisioningStatePayload(WaitUntil.Completed, content);
+            BinaryData responseData = operation.Value;
+
+            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -619,6 +736,10 @@ namespace lro_LowLevel.Samples
 
             RequestContent content = null;
             Operation<BinaryData> operation = await client.PutError201NoProvisioningStatePayloadAsync(WaitUntil.Completed, content);
+            BinaryData responseData = operation.Value;
+
+            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -641,6 +762,16 @@ namespace lro_LowLevel.Samples
                 location = "<location>",
             });
             Operation<BinaryData> operation = client.PutError201NoProvisioningStatePayload(WaitUntil.Completed, content);
+            BinaryData responseData = operation.Value;
+
+            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+            Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
+            Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
+            Console.WriteLine(result.GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("type").ToString());
+            Console.WriteLine(result.GetProperty("tags").GetProperty("<key>").ToString());
+            Console.WriteLine(result.GetProperty("location").ToString());
+            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]
@@ -663,6 +794,16 @@ namespace lro_LowLevel.Samples
                 location = "<location>",
             });
             Operation<BinaryData> operation = await client.PutError201NoProvisioningStatePayloadAsync(WaitUntil.Completed, content);
+            BinaryData responseData = operation.Value;
+
+            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+            Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
+            Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
+            Console.WriteLine(result.GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("type").ToString());
+            Console.WriteLine(result.GetProperty("tags").GetProperty("<key>").ToString());
+            Console.WriteLine(result.GetProperty("location").ToString());
+            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]
@@ -674,6 +815,10 @@ namespace lro_LowLevel.Samples
 
             RequestContent content = null;
             Operation<BinaryData> operation = client.PutAsyncRelativeRetryNoStatus(WaitUntil.Completed, content);
+            BinaryData responseData = operation.Value;
+
+            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -685,6 +830,10 @@ namespace lro_LowLevel.Samples
 
             RequestContent content = null;
             Operation<BinaryData> operation = await client.PutAsyncRelativeRetryNoStatusAsync(WaitUntil.Completed, content);
+            BinaryData responseData = operation.Value;
+
+            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -707,6 +856,16 @@ namespace lro_LowLevel.Samples
                 location = "<location>",
             });
             Operation<BinaryData> operation = client.PutAsyncRelativeRetryNoStatus(WaitUntil.Completed, content);
+            BinaryData responseData = operation.Value;
+
+            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+            Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
+            Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
+            Console.WriteLine(result.GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("type").ToString());
+            Console.WriteLine(result.GetProperty("tags").GetProperty("<key>").ToString());
+            Console.WriteLine(result.GetProperty("location").ToString());
+            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]
@@ -729,6 +888,16 @@ namespace lro_LowLevel.Samples
                 location = "<location>",
             });
             Operation<BinaryData> operation = await client.PutAsyncRelativeRetryNoStatusAsync(WaitUntil.Completed, content);
+            BinaryData responseData = operation.Value;
+
+            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+            Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
+            Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
+            Console.WriteLine(result.GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("type").ToString());
+            Console.WriteLine(result.GetProperty("tags").GetProperty("<key>").ToString());
+            Console.WriteLine(result.GetProperty("location").ToString());
+            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]
@@ -740,6 +909,10 @@ namespace lro_LowLevel.Samples
 
             RequestContent content = null;
             Operation<BinaryData> operation = client.PutAsyncRelativeRetryNoStatusPayload(WaitUntil.Completed, content);
+            BinaryData responseData = operation.Value;
+
+            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -751,6 +924,10 @@ namespace lro_LowLevel.Samples
 
             RequestContent content = null;
             Operation<BinaryData> operation = await client.PutAsyncRelativeRetryNoStatusPayloadAsync(WaitUntil.Completed, content);
+            BinaryData responseData = operation.Value;
+
+            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -773,6 +950,16 @@ namespace lro_LowLevel.Samples
                 location = "<location>",
             });
             Operation<BinaryData> operation = client.PutAsyncRelativeRetryNoStatusPayload(WaitUntil.Completed, content);
+            BinaryData responseData = operation.Value;
+
+            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+            Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
+            Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
+            Console.WriteLine(result.GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("type").ToString());
+            Console.WriteLine(result.GetProperty("tags").GetProperty("<key>").ToString());
+            Console.WriteLine(result.GetProperty("location").ToString());
+            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]
@@ -795,6 +982,16 @@ namespace lro_LowLevel.Samples
                 location = "<location>",
             });
             Operation<BinaryData> operation = await client.PutAsyncRelativeRetryNoStatusPayloadAsync(WaitUntil.Completed, content);
+            BinaryData responseData = operation.Value;
+
+            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+            Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
+            Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
+            Console.WriteLine(result.GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("type").ToString());
+            Console.WriteLine(result.GetProperty("tags").GetProperty("<key>").ToString());
+            Console.WriteLine(result.GetProperty("location").ToString());
+            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]
@@ -1018,6 +1215,10 @@ namespace lro_LowLevel.Samples
 
             RequestContent content = null;
             Operation<BinaryData> operation = client.Put200InvalidJson(WaitUntil.Completed, content);
+            BinaryData responseData = operation.Value;
+
+            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -1029,6 +1230,10 @@ namespace lro_LowLevel.Samples
 
             RequestContent content = null;
             Operation<BinaryData> operation = await client.Put200InvalidJsonAsync(WaitUntil.Completed, content);
+            BinaryData responseData = operation.Value;
+
+            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -1051,6 +1256,16 @@ namespace lro_LowLevel.Samples
                 location = "<location>",
             });
             Operation<BinaryData> operation = client.Put200InvalidJson(WaitUntil.Completed, content);
+            BinaryData responseData = operation.Value;
+
+            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+            Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
+            Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
+            Console.WriteLine(result.GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("type").ToString());
+            Console.WriteLine(result.GetProperty("tags").GetProperty("<key>").ToString());
+            Console.WriteLine(result.GetProperty("location").ToString());
+            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]
@@ -1073,6 +1288,16 @@ namespace lro_LowLevel.Samples
                 location = "<location>",
             });
             Operation<BinaryData> operation = await client.Put200InvalidJsonAsync(WaitUntil.Completed, content);
+            BinaryData responseData = operation.Value;
+
+            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+            Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
+            Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
+            Console.WriteLine(result.GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("type").ToString());
+            Console.WriteLine(result.GetProperty("tags").GetProperty("<key>").ToString());
+            Console.WriteLine(result.GetProperty("location").ToString());
+            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]
@@ -1084,6 +1309,10 @@ namespace lro_LowLevel.Samples
 
             RequestContent content = null;
             Operation<BinaryData> operation = client.PutAsyncRelativeRetryInvalidHeader(WaitUntil.Completed, content);
+            BinaryData responseData = operation.Value;
+
+            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -1095,6 +1324,10 @@ namespace lro_LowLevel.Samples
 
             RequestContent content = null;
             Operation<BinaryData> operation = await client.PutAsyncRelativeRetryInvalidHeaderAsync(WaitUntil.Completed, content);
+            BinaryData responseData = operation.Value;
+
+            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -1117,6 +1350,16 @@ namespace lro_LowLevel.Samples
                 location = "<location>",
             });
             Operation<BinaryData> operation = client.PutAsyncRelativeRetryInvalidHeader(WaitUntil.Completed, content);
+            BinaryData responseData = operation.Value;
+
+            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+            Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
+            Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
+            Console.WriteLine(result.GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("type").ToString());
+            Console.WriteLine(result.GetProperty("tags").GetProperty("<key>").ToString());
+            Console.WriteLine(result.GetProperty("location").ToString());
+            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]
@@ -1139,6 +1382,16 @@ namespace lro_LowLevel.Samples
                 location = "<location>",
             });
             Operation<BinaryData> operation = await client.PutAsyncRelativeRetryInvalidHeaderAsync(WaitUntil.Completed, content);
+            BinaryData responseData = operation.Value;
+
+            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+            Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
+            Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
+            Console.WriteLine(result.GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("type").ToString());
+            Console.WriteLine(result.GetProperty("tags").GetProperty("<key>").ToString());
+            Console.WriteLine(result.GetProperty("location").ToString());
+            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]
@@ -1150,6 +1403,10 @@ namespace lro_LowLevel.Samples
 
             RequestContent content = null;
             Operation<BinaryData> operation = client.PutAsyncRelativeRetryInvalidJsonPolling(WaitUntil.Completed, content);
+            BinaryData responseData = operation.Value;
+
+            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -1161,6 +1418,10 @@ namespace lro_LowLevel.Samples
 
             RequestContent content = null;
             Operation<BinaryData> operation = await client.PutAsyncRelativeRetryInvalidJsonPollingAsync(WaitUntil.Completed, content);
+            BinaryData responseData = operation.Value;
+
+            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -1183,6 +1444,16 @@ namespace lro_LowLevel.Samples
                 location = "<location>",
             });
             Operation<BinaryData> operation = client.PutAsyncRelativeRetryInvalidJsonPolling(WaitUntil.Completed, content);
+            BinaryData responseData = operation.Value;
+
+            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+            Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
+            Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
+            Console.WriteLine(result.GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("type").ToString());
+            Console.WriteLine(result.GetProperty("tags").GetProperty("<key>").ToString());
+            Console.WriteLine(result.GetProperty("location").ToString());
+            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]
@@ -1205,6 +1476,16 @@ namespace lro_LowLevel.Samples
                 location = "<location>",
             });
             Operation<BinaryData> operation = await client.PutAsyncRelativeRetryInvalidJsonPollingAsync(WaitUntil.Completed, content);
+            BinaryData responseData = operation.Value;
+
+            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+            Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
+            Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
+            Console.WriteLine(result.GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("type").ToString());
+            Console.WriteLine(result.GetProperty("tags").GetProperty("<key>").ToString());
+            Console.WriteLine(result.GetProperty("location").ToString());
+            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]

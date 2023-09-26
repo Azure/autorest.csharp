@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -24,6 +26,10 @@ namespace _Type.Property.Nullable.Samples
             Datetime client = new NullableClient().GetDatetimeClient("1.0.0");
 
             Response response = client.GetNonNull(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("requiredProperty").ToString());
+            Console.WriteLine(result.GetProperty("nullableProperty").ToString());
         }
 
         [Test]
@@ -33,6 +39,10 @@ namespace _Type.Property.Nullable.Samples
             Datetime client = new NullableClient().GetDatetimeClient("1.0.0");
 
             Response response = await client.GetNonNullAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("requiredProperty").ToString());
+            Console.WriteLine(result.GetProperty("nullableProperty").ToString());
         }
 
         [Test]
@@ -60,6 +70,10 @@ namespace _Type.Property.Nullable.Samples
             Datetime client = new NullableClient().GetDatetimeClient("1.0.0");
 
             Response response = client.GetNonNull(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("requiredProperty").ToString());
+            Console.WriteLine(result.GetProperty("nullableProperty").ToString());
         }
 
         [Test]
@@ -69,6 +83,10 @@ namespace _Type.Property.Nullable.Samples
             Datetime client = new NullableClient().GetDatetimeClient("1.0.0");
 
             Response response = await client.GetNonNullAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("requiredProperty").ToString());
+            Console.WriteLine(result.GetProperty("nullableProperty").ToString());
         }
 
         [Test]
@@ -96,6 +114,10 @@ namespace _Type.Property.Nullable.Samples
             Datetime client = new NullableClient().GetDatetimeClient("1.0.0");
 
             Response response = client.GetNull(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("requiredProperty").ToString());
+            Console.WriteLine(result.GetProperty("nullableProperty").ToString());
         }
 
         [Test]
@@ -105,6 +127,10 @@ namespace _Type.Property.Nullable.Samples
             Datetime client = new NullableClient().GetDatetimeClient("1.0.0");
 
             Response response = await client.GetNullAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("requiredProperty").ToString());
+            Console.WriteLine(result.GetProperty("nullableProperty").ToString());
         }
 
         [Test]
@@ -132,6 +158,10 @@ namespace _Type.Property.Nullable.Samples
             Datetime client = new NullableClient().GetDatetimeClient("1.0.0");
 
             Response response = client.GetNull(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("requiredProperty").ToString());
+            Console.WriteLine(result.GetProperty("nullableProperty").ToString());
         }
 
         [Test]
@@ -141,6 +171,10 @@ namespace _Type.Property.Nullable.Samples
             Datetime client = new NullableClient().GetDatetimeClient("1.0.0");
 
             Response response = await client.GetNullAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("requiredProperty").ToString());
+            Console.WriteLine(result.GetProperty("nullableProperty").ToString());
         }
 
         [Test]
@@ -173,6 +207,8 @@ namespace _Type.Property.Nullable.Samples
                 nullableProperty = "2022-05-10T14:57:31.2311892-04:00",
             });
             Response response = client.PatchNonNull(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -187,6 +223,8 @@ namespace _Type.Property.Nullable.Samples
                 nullableProperty = "2022-05-10T14:57:31.2311892-04:00",
             });
             Response response = await client.PatchNonNullAsync(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -201,6 +239,8 @@ namespace _Type.Property.Nullable.Samples
                 nullableProperty = "2022-05-10T14:57:31.2311892-04:00",
             });
             Response response = client.PatchNonNull(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -215,6 +255,8 @@ namespace _Type.Property.Nullable.Samples
                 nullableProperty = "2022-05-10T14:57:31.2311892-04:00",
             });
             Response response = await client.PatchNonNullAsync(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -229,6 +271,8 @@ namespace _Type.Property.Nullable.Samples
                 nullableProperty = "2022-05-10T14:57:31.2311892-04:00",
             });
             Response response = client.PatchNull(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -243,6 +287,8 @@ namespace _Type.Property.Nullable.Samples
                 nullableProperty = "2022-05-10T14:57:31.2311892-04:00",
             });
             Response response = await client.PatchNullAsync(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -257,6 +303,8 @@ namespace _Type.Property.Nullable.Samples
                 nullableProperty = "2022-05-10T14:57:31.2311892-04:00",
             });
             Response response = client.PatchNull(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -271,6 +319,8 @@ namespace _Type.Property.Nullable.Samples
                 nullableProperty = "2022-05-10T14:57:31.2311892-04:00",
             });
             Response response = await client.PatchNullAsync(content);
+
+            Console.WriteLine(response.Status);
         }
     }
 }

@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -27,6 +29,8 @@ namespace _Type.Union.Samples
                 simpleUnion = 1234,
             });
             Response response = client.SendInt(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -40,6 +44,8 @@ namespace _Type.Union.Samples
                 simpleUnion = 1234,
             });
             Response response = await client.SendIntAsync(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -53,6 +59,8 @@ namespace _Type.Union.Samples
                 simpleUnion = 1234,
             });
             Response response = client.SendInt(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -66,6 +74,8 @@ namespace _Type.Union.Samples
                 simpleUnion = 1234,
             });
             Response response = await client.SendIntAsync(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -79,6 +89,8 @@ namespace _Type.Union.Samples
                 simpleUnion = 1234,
             });
             Response response = client.SendIntArray(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -92,6 +104,8 @@ namespace _Type.Union.Samples
                 simpleUnion = 1234,
             });
             Response response = await client.SendIntArrayAsync(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -105,6 +119,8 @@ namespace _Type.Union.Samples
                 simpleUnion = 1234,
             });
             Response response = client.SendIntArray(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -118,6 +134,8 @@ namespace _Type.Union.Samples
                 simpleUnion = 1234,
             });
             Response response = await client.SendIntArrayAsync(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -135,6 +153,8 @@ namespace _Type.Union.Samples
                 },
             });
             Response response = client.SendFirstNamedUnionValue(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -152,6 +172,8 @@ namespace _Type.Union.Samples
                 },
             });
             Response response = await client.SendFirstNamedUnionValueAsync(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -169,6 +191,8 @@ namespace _Type.Union.Samples
                 },
             });
             Response response = client.SendFirstNamedUnionValue(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -186,6 +210,8 @@ namespace _Type.Union.Samples
                 },
             });
             Response response = await client.SendFirstNamedUnionValueAsync(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -203,6 +229,8 @@ namespace _Type.Union.Samples
                 },
             });
             Response response = client.SendSecondNamedUnionValue(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -220,6 +248,8 @@ namespace _Type.Union.Samples
                 },
             });
             Response response = await client.SendSecondNamedUnionValueAsync(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -237,6 +267,8 @@ namespace _Type.Union.Samples
                 },
             });
             Response response = client.SendSecondNamedUnionValue(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -254,6 +286,8 @@ namespace _Type.Union.Samples
                 },
             });
             Response response = await client.SendSecondNamedUnionValueAsync(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -263,6 +297,9 @@ namespace _Type.Union.Samples
             UnionClient client = new UnionClient();
 
             Response response = client.ReceiveString(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("simpleUnion").ToString());
         }
 
         [Test]
@@ -272,6 +309,9 @@ namespace _Type.Union.Samples
             UnionClient client = new UnionClient();
 
             Response response = await client.ReceiveStringAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("simpleUnion").ToString());
         }
 
         [Test]
@@ -281,6 +321,9 @@ namespace _Type.Union.Samples
             UnionClient client = new UnionClient();
 
             Response response = client.ReceiveString(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("simpleUnion").ToString());
         }
 
         [Test]
@@ -290,6 +333,9 @@ namespace _Type.Union.Samples
             UnionClient client = new UnionClient();
 
             Response response = await client.ReceiveStringAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("simpleUnion").ToString());
         }
 
         [Test]
@@ -299,6 +345,9 @@ namespace _Type.Union.Samples
             UnionClient client = new UnionClient();
 
             Response response = client.ReceiveIntArray(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("simpleUnion").ToString());
         }
 
         [Test]
@@ -308,6 +357,9 @@ namespace _Type.Union.Samples
             UnionClient client = new UnionClient();
 
             Response response = await client.ReceiveIntArrayAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("simpleUnion").ToString());
         }
 
         [Test]
@@ -317,6 +369,9 @@ namespace _Type.Union.Samples
             UnionClient client = new UnionClient();
 
             Response response = client.ReceiveIntArray(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("simpleUnion").ToString());
         }
 
         [Test]
@@ -326,6 +381,9 @@ namespace _Type.Union.Samples
             UnionClient client = new UnionClient();
 
             Response response = await client.ReceiveIntArrayAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("simpleUnion").ToString());
         }
 
         [Test]
@@ -335,6 +393,9 @@ namespace _Type.Union.Samples
             UnionClient client = new UnionClient();
 
             Response response = client.ReceiveFirstNamedUnionValue(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("namedUnion").ToString());
         }
 
         [Test]
@@ -344,6 +405,9 @@ namespace _Type.Union.Samples
             UnionClient client = new UnionClient();
 
             Response response = await client.ReceiveFirstNamedUnionValueAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("namedUnion").ToString());
         }
 
         [Test]
@@ -353,6 +417,9 @@ namespace _Type.Union.Samples
             UnionClient client = new UnionClient();
 
             Response response = client.ReceiveFirstNamedUnionValue(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("namedUnion").ToString());
         }
 
         [Test]
@@ -362,6 +429,9 @@ namespace _Type.Union.Samples
             UnionClient client = new UnionClient();
 
             Response response = await client.ReceiveFirstNamedUnionValueAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("namedUnion").ToString());
         }
 
         [Test]
@@ -371,6 +441,9 @@ namespace _Type.Union.Samples
             UnionClient client = new UnionClient();
 
             Response response = client.ReceiveSecondNamedUnionValue(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("namedUnion").ToString());
         }
 
         [Test]
@@ -380,6 +453,9 @@ namespace _Type.Union.Samples
             UnionClient client = new UnionClient();
 
             Response response = await client.ReceiveSecondNamedUnionValueAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("namedUnion").ToString());
         }
 
         [Test]
@@ -389,6 +465,9 @@ namespace _Type.Union.Samples
             UnionClient client = new UnionClient();
 
             Response response = client.ReceiveSecondNamedUnionValue(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("namedUnion").ToString());
         }
 
         [Test]
@@ -398,6 +477,9 @@ namespace _Type.Union.Samples
             UnionClient client = new UnionClient();
 
             Response response = await client.ReceiveSecondNamedUnionValueAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("namedUnion").ToString());
         }
     }
 }

@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Identity;
@@ -23,6 +25,9 @@ namespace body_complex_LowLevel.Samples
             FlattencomplexClient client = new FlattencomplexClient(credential);
 
             Response response = client.GetValid(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("kind").ToString());
         }
 
         [Test]
@@ -33,6 +38,9 @@ namespace body_complex_LowLevel.Samples
             FlattencomplexClient client = new FlattencomplexClient(credential);
 
             Response response = await client.GetValidAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("kind").ToString());
         }
 
         [Test]
@@ -43,6 +51,11 @@ namespace body_complex_LowLevel.Samples
             FlattencomplexClient client = new FlattencomplexClient(credential);
 
             Response response = client.GetValid(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("kind").ToString());
+            Console.WriteLine(result.GetProperty("propB1").ToString());
+            Console.WriteLine(result.GetProperty("helper").GetProperty("propBH1").ToString());
         }
 
         [Test]
@@ -53,6 +66,11 @@ namespace body_complex_LowLevel.Samples
             FlattencomplexClient client = new FlattencomplexClient(credential);
 
             Response response = await client.GetValidAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("kind").ToString());
+            Console.WriteLine(result.GetProperty("propB1").ToString());
+            Console.WriteLine(result.GetProperty("helper").GetProperty("propBH1").ToString());
         }
     }
 }

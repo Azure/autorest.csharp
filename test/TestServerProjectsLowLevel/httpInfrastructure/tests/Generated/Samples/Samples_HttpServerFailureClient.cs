@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -24,6 +25,8 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpServerFailureClient client = new HttpServerFailureClient(credential);
 
             Response response = client.Head501();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -34,6 +37,8 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpServerFailureClient client = new HttpServerFailureClient(credential);
 
             Response response = await client.Head501Async();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -44,6 +49,8 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpServerFailureClient client = new HttpServerFailureClient(credential);
 
             Response response = client.Head501();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -54,6 +61,8 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpServerFailureClient client = new HttpServerFailureClient(credential);
 
             Response response = await client.Head501Async();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -64,6 +73,8 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpServerFailureClient client = new HttpServerFailureClient(credential);
 
             Response response = client.Get501();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -74,6 +85,8 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpServerFailureClient client = new HttpServerFailureClient(credential);
 
             Response response = await client.Get501Async();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -84,6 +97,8 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpServerFailureClient client = new HttpServerFailureClient(credential);
 
             Response response = client.Get501();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -94,6 +109,8 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpServerFailureClient client = new HttpServerFailureClient(credential);
 
             Response response = await client.Get501Async();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -105,6 +122,8 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = null;
             Response response = client.Post505(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -116,6 +135,8 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = null;
             Response response = await client.Post505Async(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -127,6 +148,8 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("true");
             Response response = client.Post505(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -138,6 +161,8 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("true");
             Response response = await client.Post505Async(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -149,6 +174,8 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = null;
             Response response = client.Delete505(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -160,6 +187,8 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = null;
             Response response = await client.Delete505Async(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -171,6 +200,8 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("true");
             Response response = client.Delete505(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -182,6 +213,8 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("true");
             Response response = await client.Delete505Async(content);
+
+            Console.WriteLine(response.Status);
         }
     }
 }

@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -24,6 +26,9 @@ namespace _Type.Property.ValueTypes.Samples
             Never client = new ValueTypesClient().GetNeverClient("1.0.0");
 
             Response response = client.GetNever(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -33,6 +38,9 @@ namespace _Type.Property.ValueTypes.Samples
             Never client = new ValueTypesClient().GetNeverClient("1.0.0");
 
             Response response = await client.GetNeverAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -60,6 +68,9 @@ namespace _Type.Property.ValueTypes.Samples
             Never client = new ValueTypesClient().GetNeverClient("1.0.0");
 
             Response response = client.GetNever(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -69,6 +80,9 @@ namespace _Type.Property.ValueTypes.Samples
             Never client = new ValueTypesClient().GetNeverClient("1.0.0");
 
             Response response = await client.GetNeverAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -97,6 +111,8 @@ namespace _Type.Property.ValueTypes.Samples
 
             RequestContent content = RequestContent.Create(new object());
             Response response = client.Put(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -107,6 +123,8 @@ namespace _Type.Property.ValueTypes.Samples
 
             RequestContent content = RequestContent.Create(new object());
             Response response = await client.PutAsync(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -137,6 +155,8 @@ namespace _Type.Property.ValueTypes.Samples
 
             RequestContent content = RequestContent.Create(new object());
             Response response = client.Put(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -147,6 +167,8 @@ namespace _Type.Property.ValueTypes.Samples
 
             RequestContent content = RequestContent.Create(new object());
             Response response = await client.PutAsync(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]

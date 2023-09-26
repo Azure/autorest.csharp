@@ -9,6 +9,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = await client.GetBooleanTrueAsync();
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call GetBooleanTrueAsync with all request content.
 <code><![CDATA[
@@ -16,6 +18,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = await client.GetBooleanTrueAsync();
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="GetBooleanTrue(RequestContext)">
@@ -26,6 +30,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = client.GetBooleanTrue();
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call GetBooleanTrue with all request content.
 <code><![CDATA[
@@ -33,6 +39,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = client.GetBooleanTrue();
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="GetBooleanFalseAsync(RequestContext)">
@@ -43,6 +51,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = await client.GetBooleanFalseAsync();
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call GetBooleanFalseAsync with all request content.
 <code><![CDATA[
@@ -50,6 +60,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = await client.GetBooleanFalseAsync();
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="GetBooleanFalse(RequestContext)">
@@ -60,6 +72,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = client.GetBooleanFalse();
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call GetBooleanFalse with all request content.
 <code><![CDATA[
@@ -67,6 +81,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = client.GetBooleanFalse();
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="GetBooleanNullAsync(bool?,RequestContext)">
@@ -77,6 +93,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = await client.GetBooleanNullAsync();
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call GetBooleanNullAsync with all parameters.
 <code><![CDATA[
@@ -84,6 +102,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = await client.GetBooleanNullAsync(true);
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="GetBooleanNull(bool?,RequestContext)">
@@ -94,6 +114,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = client.GetBooleanNull();
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call GetBooleanNull with all parameters.
 <code><![CDATA[
@@ -101,6 +123,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = client.GetBooleanNull(true);
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="GetIntOneMillionAsync(RequestContext)">
@@ -111,6 +135,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = await client.GetIntOneMillionAsync();
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call GetIntOneMillionAsync with all request content.
 <code><![CDATA[
@@ -118,6 +144,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = await client.GetIntOneMillionAsync();
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="GetIntOneMillion(RequestContext)">
@@ -128,6 +156,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = client.GetIntOneMillion();
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call GetIntOneMillion with all request content.
 <code><![CDATA[
@@ -135,6 +165,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = client.GetIntOneMillion();
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="GetIntNegativeOneMillionAsync(RequestContext)">
@@ -145,6 +177,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = await client.GetIntNegativeOneMillionAsync();
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call GetIntNegativeOneMillionAsync with all request content.
 <code><![CDATA[
@@ -152,6 +186,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = await client.GetIntNegativeOneMillionAsync();
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="GetIntNegativeOneMillion(RequestContext)">
@@ -162,6 +198,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = client.GetIntNegativeOneMillion();
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call GetIntNegativeOneMillion with all request content.
 <code><![CDATA[
@@ -169,6 +207,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = client.GetIntNegativeOneMillion();
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="GetIntNullAsync(int?,RequestContext)">
@@ -179,6 +219,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = await client.GetIntNullAsync();
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call GetIntNullAsync with all parameters.
 <code><![CDATA[
@@ -186,6 +228,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = await client.GetIntNullAsync(1234);
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="GetIntNull(int?,RequestContext)">
@@ -196,6 +240,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = client.GetIntNull();
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call GetIntNull with all parameters.
 <code><![CDATA[
@@ -203,6 +249,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = client.GetIntNull(1234);
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="GetTenBillionAsync(RequestContext)">
@@ -213,6 +261,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = await client.GetTenBillionAsync();
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call GetTenBillionAsync with all request content.
 <code><![CDATA[
@@ -220,6 +270,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = await client.GetTenBillionAsync();
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="GetTenBillion(RequestContext)">
@@ -230,6 +282,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = client.GetTenBillion();
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call GetTenBillion with all request content.
 <code><![CDATA[
@@ -237,6 +291,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = client.GetTenBillion();
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="GetNegativeTenBillionAsync(RequestContext)">
@@ -247,6 +303,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = await client.GetNegativeTenBillionAsync();
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call GetNegativeTenBillionAsync with all request content.
 <code><![CDATA[
@@ -254,6 +312,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = await client.GetNegativeTenBillionAsync();
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="GetNegativeTenBillion(RequestContext)">
@@ -264,6 +324,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = client.GetNegativeTenBillion();
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call GetNegativeTenBillion with all request content.
 <code><![CDATA[
@@ -271,6 +333,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = client.GetNegativeTenBillion();
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="GetLongNullAsync(long?,RequestContext)">
@@ -281,6 +345,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = await client.GetLongNullAsync();
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call GetLongNullAsync with all parameters.
 <code><![CDATA[
@@ -288,6 +354,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = await client.GetLongNullAsync(1234L);
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="GetLongNull(long?,RequestContext)">
@@ -298,6 +366,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = client.GetLongNull();
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call GetLongNull with all parameters.
 <code><![CDATA[
@@ -305,6 +375,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = client.GetLongNull(1234L);
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="FloatScientificPositiveAsync(RequestContext)">
@@ -315,6 +387,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = await client.FloatScientificPositiveAsync();
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call FloatScientificPositiveAsync with all request content.
 <code><![CDATA[
@@ -322,6 +396,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = await client.FloatScientificPositiveAsync();
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="FloatScientificPositive(RequestContext)">
@@ -332,6 +408,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = client.FloatScientificPositive();
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call FloatScientificPositive with all request content.
 <code><![CDATA[
@@ -339,6 +417,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = client.FloatScientificPositive();
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="FloatScientificNegativeAsync(RequestContext)">
@@ -349,6 +429,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = await client.FloatScientificNegativeAsync();
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call FloatScientificNegativeAsync with all request content.
 <code><![CDATA[
@@ -356,6 +438,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = await client.FloatScientificNegativeAsync();
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="FloatScientificNegative(RequestContext)">
@@ -366,6 +450,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = client.FloatScientificNegative();
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call FloatScientificNegative with all request content.
 <code><![CDATA[
@@ -373,6 +459,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = client.FloatScientificNegative();
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="FloatNullAsync(float?,RequestContext)">
@@ -383,6 +471,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = await client.FloatNullAsync();
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call FloatNullAsync with all parameters.
 <code><![CDATA[
@@ -390,6 +480,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = await client.FloatNullAsync(123.45F);
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="FloatNull(float?,RequestContext)">
@@ -400,6 +492,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = client.FloatNull();
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call FloatNull with all parameters.
 <code><![CDATA[
@@ -407,6 +501,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = client.FloatNull(123.45F);
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="DoubleDecimalPositiveAsync(RequestContext)">
@@ -417,6 +513,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = await client.DoubleDecimalPositiveAsync();
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call DoubleDecimalPositiveAsync with all request content.
 <code><![CDATA[
@@ -424,6 +522,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = await client.DoubleDecimalPositiveAsync();
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="DoubleDecimalPositive(RequestContext)">
@@ -434,6 +534,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = client.DoubleDecimalPositive();
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call DoubleDecimalPositive with all request content.
 <code><![CDATA[
@@ -441,6 +543,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = client.DoubleDecimalPositive();
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="DoubleDecimalNegativeAsync(RequestContext)">
@@ -451,6 +555,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = await client.DoubleDecimalNegativeAsync();
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call DoubleDecimalNegativeAsync with all request content.
 <code><![CDATA[
@@ -458,6 +564,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = await client.DoubleDecimalNegativeAsync();
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="DoubleDecimalNegative(RequestContext)">
@@ -468,6 +576,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = client.DoubleDecimalNegative();
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call DoubleDecimalNegative with all request content.
 <code><![CDATA[
@@ -475,6 +585,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = client.DoubleDecimalNegative();
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="DoubleNullAsync(double?,RequestContext)">
@@ -485,6 +597,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = await client.DoubleNullAsync();
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call DoubleNullAsync with all parameters.
 <code><![CDATA[
@@ -492,6 +606,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = await client.DoubleNullAsync(123.45);
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="DoubleNull(double?,RequestContext)">
@@ -502,6 +618,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = client.DoubleNull();
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call DoubleNull with all parameters.
 <code><![CDATA[
@@ -509,6 +627,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = client.DoubleNull(123.45);
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="StringUnicodeAsync(RequestContext)">
@@ -519,6 +639,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = await client.StringUnicodeAsync();
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call StringUnicodeAsync with all request content.
 <code><![CDATA[
@@ -526,6 +648,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = await client.StringUnicodeAsync();
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="StringUnicode(RequestContext)">
@@ -536,6 +660,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = client.StringUnicode();
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call StringUnicode with all request content.
 <code><![CDATA[
@@ -543,6 +669,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = client.StringUnicode();
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="StringUrlEncodedAsync(RequestContext)">
@@ -553,6 +681,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = await client.StringUrlEncodedAsync();
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call StringUrlEncodedAsync with all request content.
 <code><![CDATA[
@@ -560,6 +690,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = await client.StringUrlEncodedAsync();
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="StringUrlEncoded(RequestContext)">
@@ -570,6 +702,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = client.StringUrlEncoded();
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call StringUrlEncoded with all request content.
 <code><![CDATA[
@@ -577,6 +711,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = client.StringUrlEncoded();
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="StringEmptyAsync(RequestContext)">
@@ -587,6 +723,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = await client.StringEmptyAsync();
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call StringEmptyAsync with all request content.
 <code><![CDATA[
@@ -594,6 +732,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = await client.StringEmptyAsync();
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="StringEmpty(RequestContext)">
@@ -604,6 +744,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = client.StringEmpty();
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call StringEmpty with all request content.
 <code><![CDATA[
@@ -611,6 +753,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = client.StringEmpty();
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="StringNullAsync(string,RequestContext)">
@@ -621,6 +765,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = await client.StringNullAsync();
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call StringNullAsync with all parameters.
 <code><![CDATA[
@@ -628,6 +774,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = await client.StringNullAsync("<stringQuery>");
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="StringNull(string,RequestContext)">
@@ -638,6 +786,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = client.StringNull();
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call StringNull with all parameters.
 <code><![CDATA[
@@ -645,6 +795,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = client.StringNull("<stringQuery>");
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="EnumValidAsync(string,RequestContext)">
@@ -655,6 +807,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = await client.EnumValidAsync();
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call EnumValidAsync with all parameters.
 <code><![CDATA[
@@ -662,6 +816,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = await client.EnumValidAsync("red color");
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="EnumValid(string,RequestContext)">
@@ -672,6 +828,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = client.EnumValid();
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call EnumValid with all parameters.
 <code><![CDATA[
@@ -679,6 +837,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = client.EnumValid("red color");
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="EnumNullAsync(string,RequestContext)">
@@ -689,6 +849,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = await client.EnumNullAsync();
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call EnumNullAsync with all parameters.
 <code><![CDATA[
@@ -696,6 +858,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = await client.EnumNullAsync("red color");
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="EnumNull(string,RequestContext)">
@@ -706,6 +870,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = client.EnumNull();
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call EnumNull with all parameters.
 <code><![CDATA[
@@ -713,6 +879,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = client.EnumNull("red color");
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="ByteMultiByteAsync(BinaryData,RequestContext)">
@@ -723,6 +891,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = await client.ByteMultiByteAsync();
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call ByteMultiByteAsync with all parameters.
 <code><![CDATA[
@@ -730,6 +900,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = await client.ByteMultiByteAsync(BinaryData.FromObjectAsJson(new object()));
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="ByteMultiByte(BinaryData,RequestContext)">
@@ -740,6 +912,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = client.ByteMultiByte();
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call ByteMultiByte with all parameters.
 <code><![CDATA[
@@ -747,6 +921,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = client.ByteMultiByte(BinaryData.FromObjectAsJson(new object()));
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="ByteEmptyAsync(RequestContext)">
@@ -757,6 +933,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = await client.ByteEmptyAsync();
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call ByteEmptyAsync with all request content.
 <code><![CDATA[
@@ -764,6 +942,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = await client.ByteEmptyAsync();
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="ByteEmpty(RequestContext)">
@@ -774,6 +954,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = client.ByteEmpty();
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call ByteEmpty with all request content.
 <code><![CDATA[
@@ -781,6 +963,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = client.ByteEmpty();
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="ByteNullAsync(BinaryData,RequestContext)">
@@ -791,6 +975,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = await client.ByteNullAsync();
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call ByteNullAsync with all parameters.
 <code><![CDATA[
@@ -798,6 +984,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = await client.ByteNullAsync(BinaryData.FromObjectAsJson(new object()));
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="ByteNull(BinaryData,RequestContext)">
@@ -808,6 +996,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = client.ByteNull();
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call ByteNull with all parameters.
 <code><![CDATA[
@@ -815,6 +1005,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = client.ByteNull(BinaryData.FromObjectAsJson(new object()));
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="DateValidAsync(RequestContext)">
@@ -825,6 +1017,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = await client.DateValidAsync();
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call DateValidAsync with all request content.
 <code><![CDATA[
@@ -832,6 +1026,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = await client.DateValidAsync();
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="DateValid(RequestContext)">
@@ -842,6 +1038,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = client.DateValid();
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call DateValid with all request content.
 <code><![CDATA[
@@ -849,6 +1047,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = client.DateValid();
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="DateNullAsync(DateTimeOffset?,RequestContext)">
@@ -859,6 +1059,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = await client.DateNullAsync();
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call DateNullAsync with all parameters.
 <code><![CDATA[
@@ -866,6 +1068,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = await client.DateNullAsync(DateTimeOffset.Parse("2022-05-10"));
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="DateNull(DateTimeOffset?,RequestContext)">
@@ -876,6 +1080,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = client.DateNull();
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call DateNull with all parameters.
 <code><![CDATA[
@@ -883,6 +1089,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = client.DateNull(DateTimeOffset.Parse("2022-05-10"));
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="DateTimeValidAsync(RequestContext)">
@@ -893,6 +1101,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = await client.DateTimeValidAsync();
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call DateTimeValidAsync with all request content.
 <code><![CDATA[
@@ -900,6 +1110,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = await client.DateTimeValidAsync();
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="DateTimeValid(RequestContext)">
@@ -910,6 +1122,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = client.DateTimeValid();
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call DateTimeValid with all request content.
 <code><![CDATA[
@@ -917,6 +1131,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = client.DateTimeValid();
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="DateTimeNullAsync(DateTimeOffset?,RequestContext)">
@@ -927,6 +1143,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = await client.DateTimeNullAsync();
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call DateTimeNullAsync with all parameters.
 <code><![CDATA[
@@ -934,6 +1152,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = await client.DateTimeNullAsync(DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"));
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="DateTimeNull(DateTimeOffset?,RequestContext)">
@@ -944,6 +1164,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = client.DateTimeNull();
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call DateTimeNull with all parameters.
 <code><![CDATA[
@@ -951,6 +1173,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = client.DateTimeNull(DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"));
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="ArrayStringCsvValidAsync(IEnumerable{string},RequestContext)">
@@ -961,6 +1185,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = await client.ArrayStringCsvValidAsync();
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call ArrayStringCsvValidAsync with all parameters.
 <code><![CDATA[
@@ -968,6 +1194,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = await client.ArrayStringCsvValidAsync(new string[] { "<arrayQuery>" });
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="ArrayStringCsvValid(IEnumerable{string},RequestContext)">
@@ -978,6 +1206,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = client.ArrayStringCsvValid();
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call ArrayStringCsvValid with all parameters.
 <code><![CDATA[
@@ -985,6 +1215,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = client.ArrayStringCsvValid(new string[] { "<arrayQuery>" });
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="ArrayStringCsvNullAsync(IEnumerable{string},RequestContext)">
@@ -995,6 +1227,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = await client.ArrayStringCsvNullAsync();
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call ArrayStringCsvNullAsync with all parameters.
 <code><![CDATA[
@@ -1002,6 +1236,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = await client.ArrayStringCsvNullAsync(new string[] { "<arrayQuery>" });
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="ArrayStringCsvNull(IEnumerable{string},RequestContext)">
@@ -1012,6 +1248,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = client.ArrayStringCsvNull();
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call ArrayStringCsvNull with all parameters.
 <code><![CDATA[
@@ -1019,6 +1257,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = client.ArrayStringCsvNull(new string[] { "<arrayQuery>" });
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="ArrayStringCsvEmptyAsync(IEnumerable{string},RequestContext)">
@@ -1029,6 +1269,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = await client.ArrayStringCsvEmptyAsync();
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call ArrayStringCsvEmptyAsync with all parameters.
 <code><![CDATA[
@@ -1036,6 +1278,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = await client.ArrayStringCsvEmptyAsync(new string[] { "<arrayQuery>" });
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="ArrayStringCsvEmpty(IEnumerable{string},RequestContext)">
@@ -1046,6 +1290,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = client.ArrayStringCsvEmpty();
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call ArrayStringCsvEmpty with all parameters.
 <code><![CDATA[
@@ -1053,6 +1299,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = client.ArrayStringCsvEmpty(new string[] { "<arrayQuery>" });
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="ArrayStringNoCollectionFormatEmptyAsync(IEnumerable{string},RequestContext)">
@@ -1063,6 +1311,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = await client.ArrayStringNoCollectionFormatEmptyAsync();
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call ArrayStringNoCollectionFormatEmptyAsync with all parameters.
 <code><![CDATA[
@@ -1070,6 +1320,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = await client.ArrayStringNoCollectionFormatEmptyAsync(new string[] { "<arrayQuery>" });
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="ArrayStringNoCollectionFormatEmpty(IEnumerable{string},RequestContext)">
@@ -1080,6 +1332,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = client.ArrayStringNoCollectionFormatEmpty();
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call ArrayStringNoCollectionFormatEmpty with all parameters.
 <code><![CDATA[
@@ -1087,6 +1341,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = client.ArrayStringNoCollectionFormatEmpty(new string[] { "<arrayQuery>" });
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="ArrayStringSsvValidAsync(IEnumerable{string},RequestContext)">
@@ -1097,6 +1353,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = await client.ArrayStringSsvValidAsync();
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call ArrayStringSsvValidAsync with all parameters.
 <code><![CDATA[
@@ -1104,6 +1362,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = await client.ArrayStringSsvValidAsync(new string[] { "<arrayQuery>" });
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="ArrayStringSsvValid(IEnumerable{string},RequestContext)">
@@ -1114,6 +1374,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = client.ArrayStringSsvValid();
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call ArrayStringSsvValid with all parameters.
 <code><![CDATA[
@@ -1121,6 +1383,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = client.ArrayStringSsvValid(new string[] { "<arrayQuery>" });
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="ArrayStringTsvValidAsync(IEnumerable{string},RequestContext)">
@@ -1131,6 +1395,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = await client.ArrayStringTsvValidAsync();
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call ArrayStringTsvValidAsync with all parameters.
 <code><![CDATA[
@@ -1138,6 +1404,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = await client.ArrayStringTsvValidAsync(new string[] { "<arrayQuery>" });
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="ArrayStringTsvValid(IEnumerable{string},RequestContext)">
@@ -1148,6 +1416,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = client.ArrayStringTsvValid();
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call ArrayStringTsvValid with all parameters.
 <code><![CDATA[
@@ -1155,6 +1425,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = client.ArrayStringTsvValid(new string[] { "<arrayQuery>" });
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="ArrayStringPipesValidAsync(IEnumerable{string},RequestContext)">
@@ -1165,6 +1437,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = await client.ArrayStringPipesValidAsync();
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call ArrayStringPipesValidAsync with all parameters.
 <code><![CDATA[
@@ -1172,6 +1446,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = await client.ArrayStringPipesValidAsync(new string[] { "<arrayQuery>" });
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="ArrayStringPipesValid(IEnumerable{string},RequestContext)">
@@ -1182,6 +1458,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = client.ArrayStringPipesValid();
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call ArrayStringPipesValid with all parameters.
 <code><![CDATA[
@@ -1189,6 +1467,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = client.ArrayStringPipesValid(new string[] { "<arrayQuery>" });
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
   </members>

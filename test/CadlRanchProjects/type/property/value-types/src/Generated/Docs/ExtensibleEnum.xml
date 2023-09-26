@@ -38,6 +38,9 @@ This sample shows how to call GetExtensibleEnumAsync and parse the result.
 ExtensibleEnum client = new ValueTypesClient().GetExtensibleEnumClient("1.0.0");
 
 Response response = await client.GetExtensibleEnumAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("property").ToString());
 ]]></code>
 This sample shows how to call GetExtensibleEnumAsync.
 <code><![CDATA[
@@ -50,6 +53,9 @@ This sample shows how to call GetExtensibleEnumAsync with all parameters and par
 ExtensibleEnum client = new ValueTypesClient().GetExtensibleEnumClient("1.0.0");
 
 Response response = await client.GetExtensibleEnumAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("property").ToString());
 ]]></code>
 This sample shows how to call GetExtensibleEnumAsync with all parameters.
 <code><![CDATA[
@@ -65,6 +71,9 @@ This sample shows how to call GetExtensibleEnum and parse the result.
 ExtensibleEnum client = new ValueTypesClient().GetExtensibleEnumClient("1.0.0");
 
 Response response = client.GetExtensibleEnum(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("property").ToString());
 ]]></code>
 This sample shows how to call GetExtensibleEnum.
 <code><![CDATA[
@@ -77,6 +86,9 @@ This sample shows how to call GetExtensibleEnum with all parameters and parse th
 ExtensibleEnum client = new ValueTypesClient().GetExtensibleEnumClient("1.0.0");
 
 Response response = client.GetExtensibleEnum(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("property").ToString());
 ]]></code>
 This sample shows how to call GetExtensibleEnum with all parameters.
 <code><![CDATA[
@@ -130,6 +142,8 @@ RequestContent content = RequestContent.Create(new
     property = "ValueOne",
 });
 Response response = await client.PutAsync(content);
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutAsync.
 <code><![CDATA[
@@ -147,6 +161,8 @@ RequestContent content = RequestContent.Create(new
     property = "ValueOne",
 });
 Response response = await client.PutAsync(content);
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutAsync with all parameters.
 <code><![CDATA[
@@ -167,6 +183,8 @@ RequestContent content = RequestContent.Create(new
     property = "ValueOne",
 });
 Response response = client.Put(content);
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Put.
 <code><![CDATA[
@@ -184,6 +202,8 @@ RequestContent content = RequestContent.Create(new
     property = "ValueOne",
 });
 Response response = client.Put(content);
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Put with all parameters.
 <code><![CDATA[

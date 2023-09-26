@@ -5,7 +5,9 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -25,6 +27,9 @@ namespace SpecialWords.Samples
             Model client = new SpecialWordsClient().GetModelClient("1.0.0");
 
             Response response = client.GetModel();
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("model.kind").ToString());
         }
 
         [Test]
@@ -34,6 +39,9 @@ namespace SpecialWords.Samples
             Model client = new SpecialWordsClient().GetModelClient("1.0.0");
 
             Response response = await client.GetModelAsync();
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("model.kind").ToString());
         }
 
         [Test]
@@ -61,6 +69,9 @@ namespace SpecialWords.Samples
             Model client = new SpecialWordsClient().GetModelClient("1.0.0");
 
             Response response = client.GetModel();
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("model.kind").ToString());
         }
 
         [Test]
@@ -70,6 +81,9 @@ namespace SpecialWords.Samples
             Model client = new SpecialWordsClient().GetModelClient("1.0.0");
 
             Response response = await client.GetModelAsync();
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("model.kind").ToString());
         }
 
         [Test]
@@ -103,6 +117,8 @@ namespace SpecialWords.Samples
                 ["model.kind"] = "derived"
             });
             Response response = client.Put(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -118,6 +134,8 @@ namespace SpecialWords.Samples
                 ["model.kind"] = "derived"
             });
             Response response = await client.PutAsync(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -153,6 +171,8 @@ namespace SpecialWords.Samples
                 ["model.kind"] = "derived"
             });
             Response response = client.Put(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -168,6 +188,8 @@ namespace SpecialWords.Samples
                 ["model.kind"] = "derived"
             });
             Response response = await client.PutAsync(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]

@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Identity;
@@ -24,6 +25,9 @@ namespace ClientAndOperationGroup.Samples
             Gamma client = new ClientAndOperationGroupClient(endpoint).GetGammaClient();
 
             Response response = client.Four(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -34,6 +38,9 @@ namespace ClientAndOperationGroup.Samples
             Gamma client = new ClientAndOperationGroupClient(endpoint).GetGammaClient();
 
             Response response = await client.FourAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -44,6 +51,9 @@ namespace ClientAndOperationGroup.Samples
             Gamma client = new ClientAndOperationGroupClient(endpoint).GetGammaClient();
 
             Response response = client.Four(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -54,6 +64,9 @@ namespace ClientAndOperationGroup.Samples
             Gamma client = new ClientAndOperationGroupClient(endpoint).GetGammaClient();
 
             Response response = await client.FourAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -64,6 +77,9 @@ namespace ClientAndOperationGroup.Samples
             Gamma client = new ClientAndOperationGroupClient(endpoint).GetGammaClient();
 
             Response response = client.Five(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -74,6 +90,9 @@ namespace ClientAndOperationGroup.Samples
             Gamma client = new ClientAndOperationGroupClient(endpoint).GetGammaClient();
 
             Response response = await client.FiveAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -84,6 +103,9 @@ namespace ClientAndOperationGroup.Samples
             Gamma client = new ClientAndOperationGroupClient(endpoint).GetGammaClient();
 
             Response response = client.Five(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -94,6 +116,9 @@ namespace ClientAndOperationGroup.Samples
             Gamma client = new ClientAndOperationGroupClient(endpoint).GetGammaClient();
 
             Response response = await client.FiveAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
     }
 }

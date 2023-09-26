@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -24,6 +26,9 @@ namespace _Type.Property.Optionality.Samples
             CollectionsModel client = new OptionalClient().GetCollectionsModelClient("1.0.0");
 
             Response response = client.GetAll(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -33,6 +38,9 @@ namespace _Type.Property.Optionality.Samples
             CollectionsModel client = new OptionalClient().GetCollectionsModelClient("1.0.0");
 
             Response response = await client.GetAllAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -60,6 +68,9 @@ namespace _Type.Property.Optionality.Samples
             CollectionsModel client = new OptionalClient().GetCollectionsModelClient("1.0.0");
 
             Response response = client.GetAll(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("property")[0].GetProperty("property").ToString());
         }
 
         [Test]
@@ -69,6 +80,9 @@ namespace _Type.Property.Optionality.Samples
             CollectionsModel client = new OptionalClient().GetCollectionsModelClient("1.0.0");
 
             Response response = await client.GetAllAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("property")[0].GetProperty("property").ToString());
         }
 
         [Test]
@@ -96,6 +110,9 @@ namespace _Type.Property.Optionality.Samples
             CollectionsModel client = new OptionalClient().GetCollectionsModelClient("1.0.0");
 
             Response response = client.GetDefault(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -105,6 +122,9 @@ namespace _Type.Property.Optionality.Samples
             CollectionsModel client = new OptionalClient().GetCollectionsModelClient("1.0.0");
 
             Response response = await client.GetDefaultAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -132,6 +152,9 @@ namespace _Type.Property.Optionality.Samples
             CollectionsModel client = new OptionalClient().GetCollectionsModelClient("1.0.0");
 
             Response response = client.GetDefault(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("property")[0].GetProperty("property").ToString());
         }
 
         [Test]
@@ -141,6 +164,9 @@ namespace _Type.Property.Optionality.Samples
             CollectionsModel client = new OptionalClient().GetCollectionsModelClient("1.0.0");
 
             Response response = await client.GetDefaultAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("property")[0].GetProperty("property").ToString());
         }
 
         [Test]
@@ -169,6 +195,8 @@ namespace _Type.Property.Optionality.Samples
 
             RequestContent content = RequestContent.Create(new object());
             Response response = client.PutAll(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -179,6 +207,8 @@ namespace _Type.Property.Optionality.Samples
 
             RequestContent content = RequestContent.Create(new object());
             Response response = await client.PutAllAsync(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -218,6 +248,8 @@ property = "<property>",
             },
             });
             Response response = client.PutAll(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -237,6 +269,8 @@ property = "<property>",
             },
             });
             Response response = await client.PutAllAsync(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -279,6 +313,8 @@ Property = "<property>",
 
             RequestContent content = RequestContent.Create(new object());
             Response response = client.PutDefault(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -289,6 +325,8 @@ Property = "<property>",
 
             RequestContent content = RequestContent.Create(new object());
             Response response = await client.PutDefaultAsync(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -328,6 +366,8 @@ property = "<property>",
             },
             });
             Response response = client.PutDefault(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -347,6 +387,8 @@ property = "<property>",
             },
             });
             Response response = await client.PutDefaultAsync(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]

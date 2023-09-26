@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -24,6 +26,9 @@ namespace _Type._Enum.Fixed.Samples
             FixedClient client = new FixedClient();
 
             Response response = client.GetKnownValue(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -33,6 +38,9 @@ namespace _Type._Enum.Fixed.Samples
             FixedClient client = new FixedClient();
 
             Response response = await client.GetKnownValueAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -60,6 +68,9 @@ namespace _Type._Enum.Fixed.Samples
             FixedClient client = new FixedClient();
 
             Response response = client.GetKnownValue(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -69,6 +80,9 @@ namespace _Type._Enum.Fixed.Samples
             FixedClient client = new FixedClient();
 
             Response response = await client.GetKnownValueAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -97,6 +111,8 @@ namespace _Type._Enum.Fixed.Samples
 
             RequestContent content = RequestContent.Create("Monday");
             Response response = client.PutKnownValue(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -107,6 +123,8 @@ namespace _Type._Enum.Fixed.Samples
 
             RequestContent content = RequestContent.Create("Monday");
             Response response = await client.PutKnownValueAsync(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -135,6 +153,8 @@ namespace _Type._Enum.Fixed.Samples
 
             RequestContent content = RequestContent.Create("Monday");
             Response response = client.PutKnownValue(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -145,6 +165,8 @@ namespace _Type._Enum.Fixed.Samples
 
             RequestContent content = RequestContent.Create("Monday");
             Response response = await client.PutKnownValueAsync(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -173,6 +195,8 @@ namespace _Type._Enum.Fixed.Samples
 
             RequestContent content = RequestContent.Create("Monday");
             Response response = client.PutUnknownValue(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -183,6 +207,8 @@ namespace _Type._Enum.Fixed.Samples
 
             RequestContent content = RequestContent.Create("Monday");
             Response response = await client.PutUnknownValueAsync(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -211,6 +237,8 @@ namespace _Type._Enum.Fixed.Samples
 
             RequestContent content = RequestContent.Create("Monday");
             Response response = client.PutUnknownValue(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -221,6 +249,8 @@ namespace _Type._Enum.Fixed.Samples
 
             RequestContent content = RequestContent.Create("Monday");
             Response response = await client.PutUnknownValueAsync(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]

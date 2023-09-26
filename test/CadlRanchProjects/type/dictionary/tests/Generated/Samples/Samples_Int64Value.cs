@@ -5,7 +5,9 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -24,6 +26,9 @@ namespace _Type._Dictionary.Samples
             Int64Value client = new DictionaryClient().GetInt64ValueClient("1.0.0");
 
             Response response = client.GetInt64Value(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("<key>").ToString());
         }
 
         [Test]
@@ -33,6 +38,9 @@ namespace _Type._Dictionary.Samples
             Int64Value client = new DictionaryClient().GetInt64ValueClient("1.0.0");
 
             Response response = await client.GetInt64ValueAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("<key>").ToString());
         }
 
         [Test]
@@ -60,6 +68,9 @@ namespace _Type._Dictionary.Samples
             Int64Value client = new DictionaryClient().GetInt64ValueClient("1.0.0");
 
             Response response = client.GetInt64Value(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("<key>").ToString());
         }
 
         [Test]
@@ -69,6 +80,9 @@ namespace _Type._Dictionary.Samples
             Int64Value client = new DictionaryClient().GetInt64ValueClient("1.0.0");
 
             Response response = await client.GetInt64ValueAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("<key>").ToString());
         }
 
         [Test]
@@ -100,6 +114,8 @@ namespace _Type._Dictionary.Samples
                 key = 1234L,
             });
             Response response = client.Put(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -113,6 +129,8 @@ namespace _Type._Dictionary.Samples
                 key = 1234L,
             });
             Response response = await client.PutAsync(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -150,6 +168,8 @@ namespace _Type._Dictionary.Samples
                 key = 1234L,
             });
             Response response = client.Put(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -163,6 +183,8 @@ namespace _Type._Dictionary.Samples
                 key = 1234L,
             });
             Response response = await client.PutAsync(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]

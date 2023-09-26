@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Identity;
@@ -24,6 +25,9 @@ namespace ClientAndOperationGroup.Samples
             Beta client = new ClientAndOperationGroupClient(endpoint).GetBetaClient();
 
             Response response = client.Two(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -34,6 +38,9 @@ namespace ClientAndOperationGroup.Samples
             Beta client = new ClientAndOperationGroupClient(endpoint).GetBetaClient();
 
             Response response = await client.TwoAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -44,6 +51,9 @@ namespace ClientAndOperationGroup.Samples
             Beta client = new ClientAndOperationGroupClient(endpoint).GetBetaClient();
 
             Response response = client.Two(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -54,6 +64,9 @@ namespace ClientAndOperationGroup.Samples
             Beta client = new ClientAndOperationGroupClient(endpoint).GetBetaClient();
 
             Response response = await client.TwoAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -64,6 +77,9 @@ namespace ClientAndOperationGroup.Samples
             Beta client = new ClientAndOperationGroupClient(endpoint).GetBetaClient();
 
             Response response = client.Three(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -74,6 +90,9 @@ namespace ClientAndOperationGroup.Samples
             Beta client = new ClientAndOperationGroupClient(endpoint).GetBetaClient();
 
             Response response = await client.ThreeAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -84,6 +103,9 @@ namespace ClientAndOperationGroup.Samples
             Beta client = new ClientAndOperationGroupClient(endpoint).GetBetaClient();
 
             Response response = client.Three(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -94,6 +116,9 @@ namespace ClientAndOperationGroup.Samples
             Beta client = new ClientAndOperationGroupClient(endpoint).GetBetaClient();
 
             Response response = await client.ThreeAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
     }
 }

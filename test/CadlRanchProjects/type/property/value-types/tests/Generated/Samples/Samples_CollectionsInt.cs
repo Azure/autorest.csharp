@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -24,6 +26,9 @@ namespace _Type.Property.ValueTypes.Samples
             CollectionsInt client = new ValueTypesClient().GetCollectionsIntClient("1.0.0");
 
             Response response = client.GetCollectionsInt(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("property")[0].ToString());
         }
 
         [Test]
@@ -33,6 +38,9 @@ namespace _Type.Property.ValueTypes.Samples
             CollectionsInt client = new ValueTypesClient().GetCollectionsIntClient("1.0.0");
 
             Response response = await client.GetCollectionsIntAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("property")[0].ToString());
         }
 
         [Test]
@@ -60,6 +68,9 @@ namespace _Type.Property.ValueTypes.Samples
             CollectionsInt client = new ValueTypesClient().GetCollectionsIntClient("1.0.0");
 
             Response response = client.GetCollectionsInt(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("property")[0].ToString());
         }
 
         [Test]
@@ -69,6 +80,9 @@ namespace _Type.Property.ValueTypes.Samples
             CollectionsInt client = new ValueTypesClient().GetCollectionsIntClient("1.0.0");
 
             Response response = await client.GetCollectionsIntAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("property")[0].ToString());
         }
 
         [Test]
@@ -103,6 +117,8 @@ namespace _Type.Property.ValueTypes.Samples
             },
             });
             Response response = client.Put(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -119,6 +135,8 @@ namespace _Type.Property.ValueTypes.Samples
             },
             });
             Response response = await client.PutAsync(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -155,6 +173,8 @@ namespace _Type.Property.ValueTypes.Samples
             },
             });
             Response response = client.Put(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -171,6 +191,8 @@ namespace _Type.Property.ValueTypes.Samples
             },
             });
             Response response = await client.PutAsync(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]

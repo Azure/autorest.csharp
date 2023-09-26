@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -30,6 +32,8 @@ namespace _Type.Model.Inheritance.NotDiscriminated.Samples
                 name = "<name>",
             });
             Response response = client.PostValid(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -45,6 +49,8 @@ namespace _Type.Model.Inheritance.NotDiscriminated.Samples
                 name = "<name>",
             });
             Response response = await client.PostValidAsync(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -80,6 +86,8 @@ namespace _Type.Model.Inheritance.NotDiscriminated.Samples
                 name = "<name>",
             });
             Response response = client.PostValid(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -95,6 +103,8 @@ namespace _Type.Model.Inheritance.NotDiscriminated.Samples
                 name = "<name>",
             });
             Response response = await client.PostValidAsync(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -124,6 +134,11 @@ namespace _Type.Model.Inheritance.NotDiscriminated.Samples
             NotDiscriminatedClient client = new NotDiscriminatedClient();
 
             Response response = client.GetValid(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("smart").ToString());
+            Console.WriteLine(result.GetProperty("age").ToString());
+            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]
@@ -133,6 +148,11 @@ namespace _Type.Model.Inheritance.NotDiscriminated.Samples
             NotDiscriminatedClient client = new NotDiscriminatedClient();
 
             Response response = await client.GetValidAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("smart").ToString());
+            Console.WriteLine(result.GetProperty("age").ToString());
+            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]
@@ -160,6 +180,11 @@ namespace _Type.Model.Inheritance.NotDiscriminated.Samples
             NotDiscriminatedClient client = new NotDiscriminatedClient();
 
             Response response = client.GetValid(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("smart").ToString());
+            Console.WriteLine(result.GetProperty("age").ToString());
+            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]
@@ -169,6 +194,11 @@ namespace _Type.Model.Inheritance.NotDiscriminated.Samples
             NotDiscriminatedClient client = new NotDiscriminatedClient();
 
             Response response = await client.GetValidAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("smart").ToString());
+            Console.WriteLine(result.GetProperty("age").ToString());
+            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]
@@ -202,6 +232,11 @@ namespace _Type.Model.Inheritance.NotDiscriminated.Samples
                 name = "<name>",
             });
             Response response = client.PutValid(content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("smart").ToString());
+            Console.WriteLine(result.GetProperty("age").ToString());
+            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]
@@ -217,6 +252,11 @@ namespace _Type.Model.Inheritance.NotDiscriminated.Samples
                 name = "<name>",
             });
             Response response = await client.PutValidAsync(content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("smart").ToString());
+            Console.WriteLine(result.GetProperty("age").ToString());
+            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]
@@ -252,6 +292,11 @@ namespace _Type.Model.Inheritance.NotDiscriminated.Samples
                 name = "<name>",
             });
             Response response = client.PutValid(content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("smart").ToString());
+            Console.WriteLine(result.GetProperty("age").ToString());
+            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]
@@ -267,6 +312,11 @@ namespace _Type.Model.Inheritance.NotDiscriminated.Samples
                 name = "<name>",
             });
             Response response = await client.PutValidAsync(content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("smart").ToString());
+            Console.WriteLine(result.GetProperty("age").ToString());
+            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]

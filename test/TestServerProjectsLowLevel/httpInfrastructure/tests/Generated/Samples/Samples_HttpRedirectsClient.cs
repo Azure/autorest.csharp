@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -24,6 +25,8 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
             Response response = client.Head300();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -34,6 +37,8 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
             Response response = await client.Head300Async();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -44,6 +49,8 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
             Response response = client.Head300();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -54,6 +61,8 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
             Response response = await client.Head300Async();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -64,6 +73,8 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
             Response response = client.Get300();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -74,6 +85,8 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
             Response response = await client.Get300Async();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -84,6 +97,8 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
             Response response = client.Get300();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -94,6 +109,8 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
             Response response = await client.Get300Async();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -104,6 +121,8 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
             Response response = client.Head301();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -114,6 +133,8 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
             Response response = await client.Head301Async();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -124,6 +145,8 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
             Response response = client.Head301();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -134,6 +157,8 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
             Response response = await client.Head301Async();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -144,6 +169,8 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
             Response response = client.Get301();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -154,6 +181,8 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
             Response response = await client.Get301Async();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -164,6 +193,8 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
             Response response = client.Get301();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -174,6 +205,8 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
             Response response = await client.Get301Async();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -185,6 +218,8 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = null;
             Response response = client.Put301(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -196,6 +231,8 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = null;
             Response response = await client.Put301Async(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -207,6 +244,8 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("true");
             Response response = client.Put301(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -218,6 +257,8 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("true");
             Response response = await client.Put301Async(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -228,6 +269,8 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
             Response response = client.Head302();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -238,6 +281,8 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
             Response response = await client.Head302Async();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -248,6 +293,8 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
             Response response = client.Head302();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -258,6 +305,8 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
             Response response = await client.Head302Async();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -268,6 +317,8 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
             Response response = client.Get302();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -278,6 +329,8 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
             Response response = await client.Get302Async();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -288,6 +341,8 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
             Response response = client.Get302();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -298,6 +353,8 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
             Response response = await client.Get302Async();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -309,6 +366,8 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = null;
             Response response = client.Patch302(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -320,6 +379,8 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = null;
             Response response = await client.Patch302Async(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -331,6 +392,8 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("true");
             Response response = client.Patch302(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -342,6 +405,8 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("true");
             Response response = await client.Patch302Async(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -353,6 +418,8 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = null;
             Response response = client.Post303(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -364,6 +431,8 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = null;
             Response response = await client.Post303Async(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -375,6 +444,8 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("true");
             Response response = client.Post303(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -386,6 +457,8 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("true");
             Response response = await client.Post303Async(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -396,6 +469,8 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
             Response response = client.Head307();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -406,6 +481,8 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
             Response response = await client.Head307Async();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -416,6 +493,8 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
             Response response = client.Head307();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -426,6 +505,8 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
             Response response = await client.Head307Async();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -436,6 +517,8 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
             Response response = client.Get307();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -446,6 +529,8 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
             Response response = await client.Get307Async();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -456,6 +541,8 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
             Response response = client.Get307();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -466,6 +553,8 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
             Response response = await client.Get307Async();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -476,6 +565,8 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
             Response response = client.Options307();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -486,6 +577,8 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
             Response response = await client.Options307Async();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -496,6 +589,8 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
             Response response = client.Options307();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -506,6 +601,8 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
             Response response = await client.Options307Async();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -517,6 +614,8 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = null;
             Response response = client.Put307(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -528,6 +627,8 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = null;
             Response response = await client.Put307Async(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -539,6 +640,8 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("true");
             Response response = client.Put307(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -550,6 +653,8 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("true");
             Response response = await client.Put307Async(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -561,6 +666,8 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = null;
             Response response = client.Patch307(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -572,6 +679,8 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = null;
             Response response = await client.Patch307Async(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -583,6 +692,8 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("true");
             Response response = client.Patch307(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -594,6 +705,8 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("true");
             Response response = await client.Patch307Async(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -605,6 +718,8 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = null;
             Response response = client.Post307(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -616,6 +731,8 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = null;
             Response response = await client.Post307Async(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -627,6 +744,8 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("true");
             Response response = client.Post307(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -638,6 +757,8 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("true");
             Response response = await client.Post307Async(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -649,6 +770,8 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = null;
             Response response = client.Delete307(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -660,6 +783,8 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = null;
             Response response = await client.Delete307Async(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -671,6 +796,8 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("true");
             Response response = client.Delete307(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -682,6 +809,8 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("true");
             Response response = await client.Delete307Async(content);
+
+            Console.WriteLine(response.Status);
         }
     }
 }

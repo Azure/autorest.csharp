@@ -5,7 +5,9 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -25,6 +27,9 @@ namespace _Type._Dictionary.Samples
             RecursiveModelValue client = new DictionaryClient().GetRecursiveModelValueClient("1.0.0");
 
             Response response = client.GetRecursiveModelValue(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("<key>").GetProperty("property").ToString());
         }
 
         [Test]
@@ -34,6 +39,9 @@ namespace _Type._Dictionary.Samples
             RecursiveModelValue client = new DictionaryClient().GetRecursiveModelValueClient("1.0.0");
 
             Response response = await client.GetRecursiveModelValueAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("<key>").GetProperty("property").ToString());
         }
 
         [Test]
@@ -61,6 +69,10 @@ namespace _Type._Dictionary.Samples
             RecursiveModelValue client = new DictionaryClient().GetRecursiveModelValueClient("1.0.0");
 
             Response response = client.GetRecursiveModelValue(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("<key>").GetProperty("property").ToString());
+            Console.WriteLine(result.GetProperty("<key>").GetProperty("children").GetProperty("<key>").GetProperty("property").ToString());
         }
 
         [Test]
@@ -70,6 +82,10 @@ namespace _Type._Dictionary.Samples
             RecursiveModelValue client = new DictionaryClient().GetRecursiveModelValueClient("1.0.0");
 
             Response response = await client.GetRecursiveModelValueAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("<key>").GetProperty("property").ToString());
+            Console.WriteLine(result.GetProperty("<key>").GetProperty("children").GetProperty("<key>").GetProperty("property").ToString());
         }
 
         [Test]
@@ -104,6 +120,8 @@ namespace _Type._Dictionary.Samples
                 },
             });
             Response response = client.Put(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -120,6 +138,8 @@ namespace _Type._Dictionary.Samples
                 },
             });
             Response response = await client.PutAsync(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -161,6 +181,8 @@ namespace _Type._Dictionary.Samples
                 },
             });
             Response response = client.Put(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -178,6 +200,8 @@ namespace _Type._Dictionary.Samples
                 },
             });
             Response response = await client.PutAsync(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]

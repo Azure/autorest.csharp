@@ -38,6 +38,9 @@ This sample shows how to call GetKnownValueAsync and parse the result.
 ExtensibleClient client = new ExtensibleClient();
 
 Response response = await client.GetKnownValueAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetKnownValueAsync.
 <code><![CDATA[
@@ -50,6 +53,9 @@ This sample shows how to call GetKnownValueAsync with all parameters and parse t
 ExtensibleClient client = new ExtensibleClient();
 
 Response response = await client.GetKnownValueAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetKnownValueAsync with all parameters.
 <code><![CDATA[
@@ -65,6 +71,9 @@ This sample shows how to call GetKnownValue and parse the result.
 ExtensibleClient client = new ExtensibleClient();
 
 Response response = client.GetKnownValue(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetKnownValue.
 <code><![CDATA[
@@ -77,6 +86,9 @@ This sample shows how to call GetKnownValue with all parameters and parse the re
 ExtensibleClient client = new ExtensibleClient();
 
 Response response = client.GetKnownValue(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetKnownValue with all parameters.
 <code><![CDATA[
@@ -122,6 +134,9 @@ This sample shows how to call GetUnknownValueAsync and parse the result.
 ExtensibleClient client = new ExtensibleClient();
 
 Response response = await client.GetUnknownValueAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetUnknownValueAsync.
 <code><![CDATA[
@@ -134,6 +149,9 @@ This sample shows how to call GetUnknownValueAsync with all parameters and parse
 ExtensibleClient client = new ExtensibleClient();
 
 Response response = await client.GetUnknownValueAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetUnknownValueAsync with all parameters.
 <code><![CDATA[
@@ -149,6 +167,9 @@ This sample shows how to call GetUnknownValue and parse the result.
 ExtensibleClient client = new ExtensibleClient();
 
 Response response = client.GetUnknownValue(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetUnknownValue.
 <code><![CDATA[
@@ -161,6 +182,9 @@ This sample shows how to call GetUnknownValue with all parameters and parse the 
 ExtensibleClient client = new ExtensibleClient();
 
 Response response = client.GetUnknownValue(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetUnknownValue with all parameters.
 <code><![CDATA[
@@ -207,6 +231,8 @@ ExtensibleClient client = new ExtensibleClient();
 
 RequestContent content = RequestContent.Create("Monday");
 Response response = await client.PutKnownValueAsync(content);
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutKnownValueAsync.
 <code><![CDATA[
@@ -220,6 +246,8 @@ ExtensibleClient client = new ExtensibleClient();
 
 RequestContent content = RequestContent.Create("Monday");
 Response response = await client.PutKnownValueAsync(content);
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutKnownValueAsync with all parameters.
 <code><![CDATA[
@@ -236,6 +264,8 @@ ExtensibleClient client = new ExtensibleClient();
 
 RequestContent content = RequestContent.Create("Monday");
 Response response = client.PutKnownValue(content);
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutKnownValue.
 <code><![CDATA[
@@ -249,6 +279,8 @@ ExtensibleClient client = new ExtensibleClient();
 
 RequestContent content = RequestContent.Create("Monday");
 Response response = client.PutKnownValue(content);
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutKnownValue with all parameters.
 <code><![CDATA[
@@ -295,6 +327,8 @@ ExtensibleClient client = new ExtensibleClient();
 
 RequestContent content = RequestContent.Create("Monday");
 Response response = await client.PutUnknownValueAsync(content);
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutUnknownValueAsync.
 <code><![CDATA[
@@ -308,6 +342,8 @@ ExtensibleClient client = new ExtensibleClient();
 
 RequestContent content = RequestContent.Create("Monday");
 Response response = await client.PutUnknownValueAsync(content);
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutUnknownValueAsync with all parameters.
 <code><![CDATA[
@@ -324,6 +360,8 @@ ExtensibleClient client = new ExtensibleClient();
 
 RequestContent content = RequestContent.Create("Monday");
 Response response = client.PutUnknownValue(content);
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutUnknownValue.
 <code><![CDATA[
@@ -337,6 +375,8 @@ ExtensibleClient client = new ExtensibleClient();
 
 RequestContent content = RequestContent.Create("Monday");
 Response response = client.PutUnknownValue(content);
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutUnknownValue with all parameters.
 <code><![CDATA[

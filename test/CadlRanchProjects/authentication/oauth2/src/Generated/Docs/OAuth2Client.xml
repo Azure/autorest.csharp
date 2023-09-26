@@ -9,6 +9,8 @@ TokenCredential credential = new DefaultAzureCredential();
 OAuth2Client client = new OAuth2Client(credential);
 
 Response response = await client.ValidAsync();
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call ValidAsync with all request content.
 <code><![CDATA[
@@ -16,6 +18,8 @@ TokenCredential credential = new DefaultAzureCredential();
 OAuth2Client client = new OAuth2Client(credential);
 
 Response response = await client.ValidAsync();
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="Valid(RequestContext)">
@@ -26,6 +30,8 @@ TokenCredential credential = new DefaultAzureCredential();
 OAuth2Client client = new OAuth2Client(credential);
 
 Response response = client.Valid();
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Valid with all request content.
 <code><![CDATA[
@@ -33,6 +39,8 @@ TokenCredential credential = new DefaultAzureCredential();
 OAuth2Client client = new OAuth2Client(credential);
 
 Response response = client.Valid();
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="InvalidAsync(RequestContext)">
@@ -43,6 +51,8 @@ TokenCredential credential = new DefaultAzureCredential();
 OAuth2Client client = new OAuth2Client(credential);
 
 Response response = await client.InvalidAsync();
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call InvalidAsync with all request content.
 <code><![CDATA[
@@ -50,6 +60,8 @@ TokenCredential credential = new DefaultAzureCredential();
 OAuth2Client client = new OAuth2Client(credential);
 
 Response response = await client.InvalidAsync();
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="Invalid(RequestContext)">
@@ -60,6 +72,8 @@ TokenCredential credential = new DefaultAzureCredential();
 OAuth2Client client = new OAuth2Client(credential);
 
 Response response = client.Invalid();
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Invalid with all request content.
 <code><![CDATA[
@@ -67,6 +81,8 @@ TokenCredential credential = new DefaultAzureCredential();
 OAuth2Client client = new OAuth2Client(credential);
 
 Response response = client.Invalid();
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
   </members>

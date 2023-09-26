@@ -27,6 +27,8 @@ namespace SecurityDefinition_LowLevel.Samples
 
             RequestContent content = RequestContent.Create(new object());
             Response response = client.Operation(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -39,6 +41,8 @@ namespace SecurityDefinition_LowLevel.Samples
 
             RequestContent content = RequestContent.Create(new object());
             Response response = await client.OperationAsync(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -55,6 +59,8 @@ namespace SecurityDefinition_LowLevel.Samples
                 Status = "<Status>",
             });
             Response response = client.Operation(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -71,6 +77,8 @@ namespace SecurityDefinition_LowLevel.Samples
                 Status = "<Status>",
             });
             Response response = await client.OperationAsync(content);
+
+            Console.WriteLine(response.Status);
         }
     }
 }

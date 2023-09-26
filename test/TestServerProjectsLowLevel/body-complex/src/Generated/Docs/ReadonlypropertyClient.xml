@@ -9,6 +9,9 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ReadonlypropertyClient client = new ReadonlypropertyClient(credential);
 
 Response response = await client.GetValidAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetValidAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -16,6 +19,10 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ReadonlypropertyClient client = new ReadonlypropertyClient(credential);
 
 Response response = await client.GetValidAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("id").ToString());
+Console.WriteLine(result.GetProperty("size").ToString());
 ]]></code></example>
     </member>
     <member name="GetValid(RequestContext)">
@@ -26,6 +33,9 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ReadonlypropertyClient client = new ReadonlypropertyClient(credential);
 
 Response response = client.GetValid(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetValid with all parameters and parse the result.
 <code><![CDATA[
@@ -33,6 +43,10 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ReadonlypropertyClient client = new ReadonlypropertyClient(credential);
 
 Response response = client.GetValid(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("id").ToString());
+Console.WriteLine(result.GetProperty("size").ToString());
 ]]></code></example>
     </member>
     <member name="PutValidAsync(RequestContent,RequestContext)">
@@ -44,6 +58,8 @@ ReadonlypropertyClient client = new ReadonlypropertyClient(credential);
 
 RequestContent content = RequestContent.Create(new object());
 Response response = await client.PutValidAsync(content);
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutValidAsync with all request content.
 <code><![CDATA[
@@ -55,6 +71,8 @@ RequestContent content = RequestContent.Create(new
     size = 1234,
 });
 Response response = await client.PutValidAsync(content);
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="PutValid(RequestContent,RequestContext)">
@@ -66,6 +84,8 @@ ReadonlypropertyClient client = new ReadonlypropertyClient(credential);
 
 RequestContent content = RequestContent.Create(new object());
 Response response = client.PutValid(content);
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutValid with all request content.
 <code><![CDATA[
@@ -77,6 +97,8 @@ RequestContent content = RequestContent.Create(new
     size = 1234,
 });
 Response response = client.PutValid(content);
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
   </members>

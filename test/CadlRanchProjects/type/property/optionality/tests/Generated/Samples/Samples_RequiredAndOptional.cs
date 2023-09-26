@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -24,6 +26,9 @@ namespace _Type.Property.Optionality.Samples
             RequiredAndOptional client = new OptionalClient().GetRequiredAndOptionalClient("1.0.0");
 
             Response response = client.GetAll(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("requiredProperty").ToString());
         }
 
         [Test]
@@ -33,6 +38,9 @@ namespace _Type.Property.Optionality.Samples
             RequiredAndOptional client = new OptionalClient().GetRequiredAndOptionalClient("1.0.0");
 
             Response response = await client.GetAllAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("requiredProperty").ToString());
         }
 
         [Test]
@@ -60,6 +68,10 @@ namespace _Type.Property.Optionality.Samples
             RequiredAndOptional client = new OptionalClient().GetRequiredAndOptionalClient("1.0.0");
 
             Response response = client.GetAll(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("optionalProperty").ToString());
+            Console.WriteLine(result.GetProperty("requiredProperty").ToString());
         }
 
         [Test]
@@ -69,6 +81,10 @@ namespace _Type.Property.Optionality.Samples
             RequiredAndOptional client = new OptionalClient().GetRequiredAndOptionalClient("1.0.0");
 
             Response response = await client.GetAllAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("optionalProperty").ToString());
+            Console.WriteLine(result.GetProperty("requiredProperty").ToString());
         }
 
         [Test]
@@ -96,6 +112,9 @@ namespace _Type.Property.Optionality.Samples
             RequiredAndOptional client = new OptionalClient().GetRequiredAndOptionalClient("1.0.0");
 
             Response response = client.GetRequiredOnly(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("requiredProperty").ToString());
         }
 
         [Test]
@@ -105,6 +124,9 @@ namespace _Type.Property.Optionality.Samples
             RequiredAndOptional client = new OptionalClient().GetRequiredAndOptionalClient("1.0.0");
 
             Response response = await client.GetRequiredOnlyAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("requiredProperty").ToString());
         }
 
         [Test]
@@ -132,6 +154,10 @@ namespace _Type.Property.Optionality.Samples
             RequiredAndOptional client = new OptionalClient().GetRequiredAndOptionalClient("1.0.0");
 
             Response response = client.GetRequiredOnly(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("optionalProperty").ToString());
+            Console.WriteLine(result.GetProperty("requiredProperty").ToString());
         }
 
         [Test]
@@ -141,6 +167,10 @@ namespace _Type.Property.Optionality.Samples
             RequiredAndOptional client = new OptionalClient().GetRequiredAndOptionalClient("1.0.0");
 
             Response response = await client.GetRequiredOnlyAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("optionalProperty").ToString());
+            Console.WriteLine(result.GetProperty("requiredProperty").ToString());
         }
 
         [Test]
@@ -172,6 +202,8 @@ namespace _Type.Property.Optionality.Samples
                 requiredProperty = 1234,
             });
             Response response = client.PutAll(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -185,6 +217,8 @@ namespace _Type.Property.Optionality.Samples
                 requiredProperty = 1234,
             });
             Response response = await client.PutAllAsync(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -219,6 +253,8 @@ namespace _Type.Property.Optionality.Samples
                 requiredProperty = 1234,
             });
             Response response = client.PutAll(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -233,6 +269,8 @@ namespace _Type.Property.Optionality.Samples
                 requiredProperty = 1234,
             });
             Response response = await client.PutAllAsync(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -272,6 +310,8 @@ namespace _Type.Property.Optionality.Samples
                 requiredProperty = 1234,
             });
             Response response = client.PutRequiredOnly(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -285,6 +325,8 @@ namespace _Type.Property.Optionality.Samples
                 requiredProperty = 1234,
             });
             Response response = await client.PutRequiredOnlyAsync(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -319,6 +361,8 @@ namespace _Type.Property.Optionality.Samples
                 requiredProperty = 1234,
             });
             Response response = client.PutRequiredOnly(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -333,6 +377,8 @@ namespace _Type.Property.Optionality.Samples
                 requiredProperty = 1234,
             });
             Response response = await client.PutRequiredOnlyAsync(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]

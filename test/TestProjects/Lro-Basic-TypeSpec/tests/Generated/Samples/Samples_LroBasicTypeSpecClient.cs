@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -131,6 +132,10 @@ namespace LroBasicTypeSpec.Samples
 
             RequestContent content = RequestContent.Create(new object());
             Operation<BinaryData> operation = client.UpdateProject(WaitUntil.Completed, "<id>", content);
+            BinaryData responseData = operation.Value;
+
+            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+            Console.WriteLine(result.GetProperty("id").ToString());
         }
 
         [Test]
@@ -142,6 +147,10 @@ namespace LroBasicTypeSpec.Samples
 
             RequestContent content = RequestContent.Create(new object());
             Operation<BinaryData> operation = await client.UpdateProjectAsync(WaitUntil.Completed, "<id>", content);
+            BinaryData responseData = operation.Value;
+
+            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+            Console.WriteLine(result.GetProperty("id").ToString());
         }
 
         [Test]
@@ -153,6 +162,7 @@ namespace LroBasicTypeSpec.Samples
 
             Project resource = new Project();
             Operation<Project> operation = client.UpdateProject(WaitUntil.Completed, "<id>", resource);
+            Project responseData = operation.Value;
         }
 
         [Test]
@@ -164,6 +174,7 @@ namespace LroBasicTypeSpec.Samples
 
             Project resource = new Project();
             Operation<Project> operation = await client.UpdateProjectAsync(WaitUntil.Completed, "<id>", resource);
+            Project responseData = operation.Value;
         }
 
         [Test]
@@ -179,6 +190,12 @@ namespace LroBasicTypeSpec.Samples
                 name = "<name>",
             });
             Operation<BinaryData> operation = client.UpdateProject(WaitUntil.Completed, "<id>", content);
+            BinaryData responseData = operation.Value;
+
+            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+            Console.WriteLine(result.GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("description").ToString());
+            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]
@@ -194,6 +211,12 @@ namespace LroBasicTypeSpec.Samples
                 name = "<name>",
             });
             Operation<BinaryData> operation = await client.UpdateProjectAsync(WaitUntil.Completed, "<id>", content);
+            BinaryData responseData = operation.Value;
+
+            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+            Console.WriteLine(result.GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("description").ToString());
+            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]
@@ -209,6 +232,7 @@ namespace LroBasicTypeSpec.Samples
                 Name = "<name>",
             };
             Operation<Project> operation = client.UpdateProject(WaitUntil.Completed, "<id>", resource);
+            Project responseData = operation.Value;
         }
 
         [Test]
@@ -224,6 +248,7 @@ namespace LroBasicTypeSpec.Samples
                 Name = "<name>",
             };
             Operation<Project> operation = await client.UpdateProjectAsync(WaitUntil.Completed, "<id>", resource);
+            Project responseData = operation.Value;
         }
 
         [Test]
@@ -238,6 +263,10 @@ namespace LroBasicTypeSpec.Samples
                 name = "<name>",
             });
             Operation<BinaryData> operation = client.CreateThing(WaitUntil.Completed, content);
+            BinaryData responseData = operation.Value;
+
+            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]
@@ -252,6 +281,10 @@ namespace LroBasicTypeSpec.Samples
                 name = "<name>",
             });
             Operation<BinaryData> operation = await client.CreateThingAsync(WaitUntil.Completed, content);
+            BinaryData responseData = operation.Value;
+
+            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]
@@ -263,6 +296,7 @@ namespace LroBasicTypeSpec.Samples
 
             Thing thing = new Thing("<name>");
             Operation<Thing> operation = client.CreateThing(WaitUntil.Completed, thing);
+            Thing responseData = operation.Value;
         }
 
         [Test]
@@ -274,6 +308,7 @@ namespace LroBasicTypeSpec.Samples
 
             Thing thing = new Thing("<name>");
             Operation<Thing> operation = await client.CreateThingAsync(WaitUntil.Completed, thing);
+            Thing responseData = operation.Value;
         }
 
         [Test]
@@ -288,6 +323,10 @@ namespace LroBasicTypeSpec.Samples
                 name = "<name>",
             });
             Operation<BinaryData> operation = client.CreateThing(WaitUntil.Completed, content);
+            BinaryData responseData = operation.Value;
+
+            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]
@@ -302,6 +341,10 @@ namespace LroBasicTypeSpec.Samples
                 name = "<name>",
             });
             Operation<BinaryData> operation = await client.CreateThingAsync(WaitUntil.Completed, content);
+            BinaryData responseData = operation.Value;
+
+            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]
@@ -313,6 +356,7 @@ namespace LroBasicTypeSpec.Samples
 
             Thing thing = new Thing("<name>");
             Operation<Thing> operation = client.CreateThing(WaitUntil.Completed, thing);
+            Thing responseData = operation.Value;
         }
 
         [Test]
@@ -324,6 +368,7 @@ namespace LroBasicTypeSpec.Samples
 
             Thing thing = new Thing("<name>");
             Operation<Thing> operation = await client.CreateThingAsync(WaitUntil.Completed, thing);
+            Thing responseData = operation.Value;
         }
     }
 }

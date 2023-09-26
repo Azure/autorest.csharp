@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Identity;
@@ -22,6 +23,8 @@ namespace SpecialWords.Samples
             Parameter client = new SpecialWordsClient().GetParameterClient("1.0.0");
 
             Response response = client.GetWithIf("<if>");
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -31,6 +34,8 @@ namespace SpecialWords.Samples
             Parameter client = new SpecialWordsClient().GetParameterClient("1.0.0");
 
             Response response = await client.GetWithIfAsync("<if>");
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -40,6 +45,8 @@ namespace SpecialWords.Samples
             Parameter client = new SpecialWordsClient().GetParameterClient("1.0.0");
 
             Response response = client.GetWithIf("<if>");
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -49,6 +56,8 @@ namespace SpecialWords.Samples
             Parameter client = new SpecialWordsClient().GetParameterClient("1.0.0");
 
             Response response = await client.GetWithIfAsync("<if>");
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -58,6 +67,8 @@ namespace SpecialWords.Samples
             Parameter client = new SpecialWordsClient().GetParameterClient("1.0.0");
 
             Response response = client.GetWithFilter("<filter>");
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -67,6 +78,8 @@ namespace SpecialWords.Samples
             Parameter client = new SpecialWordsClient().GetParameterClient("1.0.0");
 
             Response response = await client.GetWithFilterAsync("<filter>");
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -76,6 +89,8 @@ namespace SpecialWords.Samples
             Parameter client = new SpecialWordsClient().GetParameterClient("1.0.0");
 
             Response response = client.GetWithFilter("<filter>");
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -85,6 +100,8 @@ namespace SpecialWords.Samples
             Parameter client = new SpecialWordsClient().GetParameterClient("1.0.0");
 
             Response response = await client.GetWithFilterAsync("<filter>");
+
+            Console.WriteLine(response.Status);
         }
     }
 }

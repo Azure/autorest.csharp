@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Text.Json;
 using System.Threading.Tasks;
 using System.Xml;
 using Azure;
@@ -30,6 +31,9 @@ namespace Encode.Duration.Samples
                 value = "PT1H23M45S",
             });
             Response response = client.Default(content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("value").ToString());
         }
 
         [Test]
@@ -43,6 +47,9 @@ namespace Encode.Duration.Samples
                 value = "PT1H23M45S",
             });
             Response response = await client.DefaultAsync(content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("value").ToString());
         }
 
         [Test]
@@ -76,6 +83,9 @@ namespace Encode.Duration.Samples
                 value = "PT1H23M45S",
             });
             Response response = client.Default(content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("value").ToString());
         }
 
         [Test]
@@ -89,6 +99,9 @@ namespace Encode.Duration.Samples
                 value = "PT1H23M45S",
             });
             Response response = await client.DefaultAsync(content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("value").ToString());
         }
 
         [Test]
@@ -122,6 +135,9 @@ namespace Encode.Duration.Samples
                 value = "PT1H23M45S",
             });
             Response response = client.Iso8601(content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("value").ToString());
         }
 
         [Test]
@@ -135,6 +151,9 @@ namespace Encode.Duration.Samples
                 value = "PT1H23M45S",
             });
             Response response = await client.Iso8601Async(content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("value").ToString());
         }
 
         [Test]
@@ -168,6 +187,9 @@ namespace Encode.Duration.Samples
                 value = "PT1H23M45S",
             });
             Response response = client.Iso8601(content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("value").ToString());
         }
 
         [Test]
@@ -181,6 +203,9 @@ namespace Encode.Duration.Samples
                 value = "PT1H23M45S",
             });
             Response response = await client.Iso8601Async(content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("value").ToString());
         }
 
         [Test]
@@ -214,6 +239,9 @@ namespace Encode.Duration.Samples
                 value = 10,
             });
             Response response = client.Int32Seconds(content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("value").ToString());
         }
 
         [Test]
@@ -227,6 +255,9 @@ namespace Encode.Duration.Samples
                 value = 10,
             });
             Response response = await client.Int32SecondsAsync(content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("value").ToString());
         }
 
         [Test]
@@ -260,6 +291,9 @@ namespace Encode.Duration.Samples
                 value = 10,
             });
             Response response = client.Int32Seconds(content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("value").ToString());
         }
 
         [Test]
@@ -273,6 +307,9 @@ namespace Encode.Duration.Samples
                 value = 10,
             });
             Response response = await client.Int32SecondsAsync(content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("value").ToString());
         }
 
         [Test]
@@ -306,6 +343,9 @@ namespace Encode.Duration.Samples
                 value = 10F,
             });
             Response response = client.FloatSeconds(content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("value").ToString());
         }
 
         [Test]
@@ -319,6 +359,9 @@ namespace Encode.Duration.Samples
                 value = 10F,
             });
             Response response = await client.FloatSecondsAsync(content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("value").ToString());
         }
 
         [Test]
@@ -352,6 +395,9 @@ namespace Encode.Duration.Samples
                 value = 10F,
             });
             Response response = client.FloatSeconds(content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("value").ToString());
         }
 
         [Test]
@@ -365,6 +411,9 @@ namespace Encode.Duration.Samples
                 value = 10F,
             });
             Response response = await client.FloatSecondsAsync(content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("value").ToString());
         }
 
         [Test]
@@ -401,6 +450,9 @@ namespace Encode.Duration.Samples
             },
             });
             Response response = client.FloatSecondsArray(content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("value")[0].ToString());
         }
 
         [Test]
@@ -417,6 +469,9 @@ namespace Encode.Duration.Samples
             },
             });
             Response response = await client.FloatSecondsArrayAsync(content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("value")[0].ToString());
         }
 
         [Test]
@@ -453,6 +508,9 @@ namespace Encode.Duration.Samples
             },
             });
             Response response = client.FloatSecondsArray(content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("value")[0].ToString());
         }
 
         [Test]
@@ -469,6 +527,9 @@ namespace Encode.Duration.Samples
             },
             });
             Response response = await client.FloatSecondsArrayAsync(content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("value")[0].ToString());
         }
 
         [Test]

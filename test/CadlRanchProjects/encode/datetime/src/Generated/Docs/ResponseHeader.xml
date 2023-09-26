@@ -8,12 +8,16 @@ This sample shows how to call DefaultAsync.
 ResponseHeader client = new DatetimeClient().GetResponseHeaderClient("1.0.0");
 
 Response response = await client.DefaultAsync();
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call DefaultAsync with all request content.
 <code><![CDATA[
 ResponseHeader client = new DatetimeClient().GetResponseHeaderClient("1.0.0");
 
 Response response = await client.DefaultAsync();
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="Default(RequestContext)">
@@ -23,12 +27,16 @@ This sample shows how to call Default.
 ResponseHeader client = new DatetimeClient().GetResponseHeaderClient("1.0.0");
 
 Response response = client.Default();
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Default with all request content.
 <code><![CDATA[
 ResponseHeader client = new DatetimeClient().GetResponseHeaderClient("1.0.0");
 
 Response response = client.Default();
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="Rfc3339Async(RequestContext)">
@@ -38,12 +46,16 @@ This sample shows how to call Rfc3339Async.
 ResponseHeader client = new DatetimeClient().GetResponseHeaderClient("1.0.0");
 
 Response response = await client.Rfc3339Async();
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Rfc3339Async with all request content.
 <code><![CDATA[
 ResponseHeader client = new DatetimeClient().GetResponseHeaderClient("1.0.0");
 
 Response response = await client.Rfc3339Async();
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="Rfc3339(RequestContext)">
@@ -53,12 +65,16 @@ This sample shows how to call Rfc3339.
 ResponseHeader client = new DatetimeClient().GetResponseHeaderClient("1.0.0");
 
 Response response = client.Rfc3339();
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Rfc3339 with all request content.
 <code><![CDATA[
 ResponseHeader client = new DatetimeClient().GetResponseHeaderClient("1.0.0");
 
 Response response = client.Rfc3339();
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="Rfc7231Async(RequestContext)">
@@ -68,12 +84,16 @@ This sample shows how to call Rfc7231Async.
 ResponseHeader client = new DatetimeClient().GetResponseHeaderClient("1.0.0");
 
 Response response = await client.Rfc7231Async();
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Rfc7231Async with all request content.
 <code><![CDATA[
 ResponseHeader client = new DatetimeClient().GetResponseHeaderClient("1.0.0");
 
 Response response = await client.Rfc7231Async();
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="Rfc7231(RequestContext)">
@@ -83,12 +103,16 @@ This sample shows how to call Rfc7231.
 ResponseHeader client = new DatetimeClient().GetResponseHeaderClient("1.0.0");
 
 Response response = client.Rfc7231();
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Rfc7231 with all request content.
 <code><![CDATA[
 ResponseHeader client = new DatetimeClient().GetResponseHeaderClient("1.0.0");
 
 Response response = client.Rfc7231();
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="UnixTimestampAsync(RequestContext)">
@@ -98,12 +122,16 @@ This sample shows how to call UnixTimestampAsync.
 ResponseHeader client = new DatetimeClient().GetResponseHeaderClient("1.0.0");
 
 Response response = await client.UnixTimestampAsync();
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call UnixTimestampAsync with all request content.
 <code><![CDATA[
 ResponseHeader client = new DatetimeClient().GetResponseHeaderClient("1.0.0");
 
 Response response = await client.UnixTimestampAsync();
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="UnixTimestamp(RequestContext)">
@@ -113,12 +141,16 @@ This sample shows how to call UnixTimestamp.
 ResponseHeader client = new DatetimeClient().GetResponseHeaderClient("1.0.0");
 
 Response response = client.UnixTimestamp();
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call UnixTimestamp with all request content.
 <code><![CDATA[
 ResponseHeader client = new DatetimeClient().GetResponseHeaderClient("1.0.0");
 
 Response response = client.UnixTimestamp();
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
   </members>

@@ -52,6 +52,8 @@ RequestContent content = RequestContent.Create(new
     age = 1234,
 });
 Response response = await client.SpreadModelAsync(content);
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call SpreadModelAsync.
 <code><![CDATA[
@@ -72,6 +74,8 @@ RequestContent content = RequestContent.Create(new
     age = 1234,
 });
 Response response = await client.SpreadModelAsync(content);
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call SpreadModelAsync with all parameters.
 <code><![CDATA[
@@ -95,6 +99,8 @@ RequestContent content = RequestContent.Create(new
     age = 1234,
 });
 Response response = client.SpreadModel(content);
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call SpreadModel.
 <code><![CDATA[
@@ -115,6 +121,8 @@ RequestContent content = RequestContent.Create(new
     age = 1234,
 });
 Response response = client.SpreadModel(content);
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call SpreadModel with all parameters.
 <code><![CDATA[
@@ -172,6 +180,8 @@ RequestContent content = RequestContent.Create(new
     age = 1234,
 });
 Response response = await client.SpreadAliasAsync(content);
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call SpreadAliasAsync.
 <code><![CDATA[
@@ -191,6 +201,8 @@ RequestContent content = RequestContent.Create(new
     age = 1234,
 });
 Response response = await client.SpreadAliasAsync(content);
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call SpreadAliasAsync with all parameters.
 <code><![CDATA[
@@ -213,6 +225,8 @@ RequestContent content = RequestContent.Create(new
     age = 1234,
 });
 Response response = client.SpreadAlias(content);
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call SpreadAlias.
 <code><![CDATA[
@@ -232,6 +246,8 @@ RequestContent content = RequestContent.Create(new
     age = 1234,
 });
 Response response = client.SpreadAlias(content);
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call SpreadAlias with all parameters.
 <code><![CDATA[
@@ -288,6 +304,8 @@ RequestContent content = RequestContent.Create(new
     age = 1234,
 });
 Response response = await client.SpreadMultiTargetAliasAsync("<id>", 1234, content);
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call SpreadMultiTargetAliasAsync.
 <code><![CDATA[
@@ -307,6 +325,8 @@ RequestContent content = RequestContent.Create(new
     age = 1234,
 });
 Response response = await client.SpreadMultiTargetAliasAsync("<id>", 1234, content);
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call SpreadMultiTargetAliasAsync with all parameters.
 <code><![CDATA[
@@ -329,6 +349,8 @@ RequestContent content = RequestContent.Create(new
     age = 1234,
 });
 Response response = client.SpreadMultiTargetAlias("<id>", 1234, content);
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call SpreadMultiTargetAlias.
 <code><![CDATA[
@@ -348,6 +370,8 @@ RequestContent content = RequestContent.Create(new
     age = 1234,
 });
 Response response = client.SpreadMultiTargetAlias("<id>", 1234, content);
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call SpreadMultiTargetAlias with all parameters.
 <code><![CDATA[
@@ -408,6 +432,8 @@ RequestContent content = RequestContent.Create(new
     age = 1234,
 });
 Response response = await client.SpreadAliasWithModelAsync("<id>", 1234, content);
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call SpreadAliasWithModelAsync.
 <code><![CDATA[
@@ -428,6 +454,8 @@ RequestContent content = RequestContent.Create(new
     age = 1234,
 });
 Response response = await client.SpreadAliasWithModelAsync("<id>", 1234, content);
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call SpreadAliasWithModelAsync with all parameters.
 <code><![CDATA[
@@ -451,6 +479,8 @@ RequestContent content = RequestContent.Create(new
     age = 1234,
 });
 Response response = client.SpreadAliasWithModel("<id>", 1234, content);
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call SpreadAliasWithModel.
 <code><![CDATA[
@@ -471,6 +501,8 @@ RequestContent content = RequestContent.Create(new
     age = 1234,
 });
 Response response = client.SpreadAliasWithModel("<id>", 1234, content);
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call SpreadAliasWithModel with all parameters.
 <code><![CDATA[
@@ -528,6 +560,8 @@ RequestContent content = RequestContent.Create(new
     age = 1234,
 });
 Response response = await client.SpreadAliasWithSpreadAliasAsync("<id>", 1234, content);
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call SpreadAliasWithSpreadAliasAsync.
 <code><![CDATA[
@@ -547,6 +581,8 @@ RequestContent content = RequestContent.Create(new
     age = 1234,
 });
 Response response = await client.SpreadAliasWithSpreadAliasAsync("<id>", 1234, content);
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call SpreadAliasWithSpreadAliasAsync with all parameters.
 <code><![CDATA[
@@ -569,6 +605,8 @@ RequestContent content = RequestContent.Create(new
     age = 1234,
 });
 Response response = client.SpreadAliasWithSpreadAlias("<id>", 1234, content);
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call SpreadAliasWithSpreadAlias.
 <code><![CDATA[
@@ -588,6 +626,8 @@ RequestContent content = RequestContent.Create(new
     age = 1234,
 });
 Response response = client.SpreadAliasWithSpreadAlias("<id>", 1234, content);
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call SpreadAliasWithSpreadAlias with all parameters.
 <code><![CDATA[
@@ -647,6 +687,8 @@ RequestContent content = RequestContent.Create(new
     },
 });
 Response response = await client.SpreadAliasWithOptionalPropsAsync("<id>", 1234, content);
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call SpreadAliasWithOptionalPropsAsync.
 <code><![CDATA[
@@ -675,6 +717,8 @@ RequestContent content = RequestContent.Create(new
     },
 });
 Response response = await client.SpreadAliasWithOptionalPropsAsync("<id>", 1234, content);
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call SpreadAliasWithOptionalPropsAsync with all parameters.
 <code><![CDATA[
@@ -700,6 +744,8 @@ RequestContent content = RequestContent.Create(new
     },
 });
 Response response = client.SpreadAliasWithOptionalProps("<id>", 1234, content);
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call SpreadAliasWithOptionalProps.
 <code><![CDATA[
@@ -728,6 +774,8 @@ RequestContent content = RequestContent.Create(new
     },
 });
 Response response = client.SpreadAliasWithOptionalProps("<id>", 1234, content);
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call SpreadAliasWithOptionalProps with all parameters.
 <code><![CDATA[
@@ -786,6 +834,8 @@ RequestContent content = RequestContent.Create(new
     },
 });
 Response response = await client.SpreadAliasWithCollectionsAsync(content);
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call SpreadAliasWithCollectionsAsync.
 <code><![CDATA[
@@ -811,6 +861,8 @@ RequestContent content = RequestContent.Create(new
     },
 });
 Response response = await client.SpreadAliasWithCollectionsAsync(content);
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call SpreadAliasWithCollectionsAsync with all parameters.
 <code><![CDATA[
@@ -835,6 +887,8 @@ RequestContent content = RequestContent.Create(new
     },
 });
 Response response = client.SpreadAliasWithCollections(content);
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call SpreadAliasWithCollections.
 <code><![CDATA[
@@ -860,6 +914,8 @@ RequestContent content = RequestContent.Create(new
     },
 });
 Response response = client.SpreadAliasWithCollections(content);
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call SpreadAliasWithCollections with all parameters.
 <code><![CDATA[

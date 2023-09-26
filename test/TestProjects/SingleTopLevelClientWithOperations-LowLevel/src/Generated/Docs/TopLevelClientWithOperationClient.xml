@@ -9,6 +9,9 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 TopLevelClientWithOperationClient client = new TopLevelClientWithOperationClient(credential);
 
 Response response = await client.OperationAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call OperationAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -16,6 +19,9 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 TopLevelClientWithOperationClient client = new TopLevelClientWithOperationClient(credential);
 
 Response response = await client.OperationAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
     <member name="Operation(RequestContext)">
@@ -26,6 +32,9 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 TopLevelClientWithOperationClient client = new TopLevelClientWithOperationClient(credential);
 
 Response response = client.Operation(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call Operation with all parameters and parse the result.
 <code><![CDATA[
@@ -33,6 +42,9 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 TopLevelClientWithOperationClient client = new TopLevelClientWithOperationClient(credential);
 
 Response response = client.Operation(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
     <member name="GetAllAsync(string,RequestContext)">
@@ -44,6 +56,8 @@ TopLevelClientWithOperationClient client = new TopLevelClientWithOperationClient
 
 await foreach (BinaryData item in client.GetAllAsync("<filter>", null))
 {
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result[0].ToString());
 }
 ]]></code>
 This sample shows how to call GetAllAsync with all parameters and parse the result.
@@ -53,6 +67,8 @@ TopLevelClientWithOperationClient client = new TopLevelClientWithOperationClient
 
 await foreach (BinaryData item in client.GetAllAsync("<filter>", null))
 {
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result[0].ToString());
 }
 ]]></code></example>
     </member>
@@ -65,6 +81,8 @@ TopLevelClientWithOperationClient client = new TopLevelClientWithOperationClient
 
 foreach (BinaryData item in client.GetAll("<filter>", null))
 {
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result[0].ToString());
 }
 ]]></code>
 This sample shows how to call GetAll with all parameters and parse the result.
@@ -74,6 +92,8 @@ TopLevelClientWithOperationClient client = new TopLevelClientWithOperationClient
 
 foreach (BinaryData item in client.GetAll("<filter>", null))
 {
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result[0].ToString());
 }
 ]]></code></example>
     </member>

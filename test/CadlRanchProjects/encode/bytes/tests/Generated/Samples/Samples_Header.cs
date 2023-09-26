@@ -23,6 +23,8 @@ namespace Encode.Bytes.Samples
             Header client = new BytesClient().GetHeaderClient("1.0.0");
 
             Response response = client.Default(BinaryData.FromObjectAsJson(new object()));
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -32,6 +34,8 @@ namespace Encode.Bytes.Samples
             Header client = new BytesClient().GetHeaderClient("1.0.0");
 
             Response response = await client.DefaultAsync(BinaryData.FromObjectAsJson(new object()));
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -41,6 +45,8 @@ namespace Encode.Bytes.Samples
             Header client = new BytesClient().GetHeaderClient("1.0.0");
 
             Response response = client.Default(BinaryData.FromObjectAsJson(new object()));
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -50,6 +56,8 @@ namespace Encode.Bytes.Samples
             Header client = new BytesClient().GetHeaderClient("1.0.0");
 
             Response response = await client.DefaultAsync(BinaryData.FromObjectAsJson(new object()));
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -59,6 +67,8 @@ namespace Encode.Bytes.Samples
             Header client = new BytesClient().GetHeaderClient("1.0.0");
 
             Response response = client.Base64(BinaryData.FromObjectAsJson(new object()));
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -68,6 +78,8 @@ namespace Encode.Bytes.Samples
             Header client = new BytesClient().GetHeaderClient("1.0.0");
 
             Response response = await client.Base64Async(BinaryData.FromObjectAsJson(new object()));
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -77,6 +89,8 @@ namespace Encode.Bytes.Samples
             Header client = new BytesClient().GetHeaderClient("1.0.0");
 
             Response response = client.Base64(BinaryData.FromObjectAsJson(new object()));
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -86,6 +100,8 @@ namespace Encode.Bytes.Samples
             Header client = new BytesClient().GetHeaderClient("1.0.0");
 
             Response response = await client.Base64Async(BinaryData.FromObjectAsJson(new object()));
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -95,6 +111,8 @@ namespace Encode.Bytes.Samples
             Header client = new BytesClient().GetHeaderClient("1.0.0");
 
             Response response = client.Base64url(BinaryData.FromObjectAsJson(new object()));
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -104,6 +122,8 @@ namespace Encode.Bytes.Samples
             Header client = new BytesClient().GetHeaderClient("1.0.0");
 
             Response response = await client.Base64urlAsync(BinaryData.FromObjectAsJson(new object()));
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -113,6 +133,8 @@ namespace Encode.Bytes.Samples
             Header client = new BytesClient().GetHeaderClient("1.0.0");
 
             Response response = client.Base64url(BinaryData.FromObjectAsJson(new object()));
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -122,6 +144,8 @@ namespace Encode.Bytes.Samples
             Header client = new BytesClient().GetHeaderClient("1.0.0");
 
             Response response = await client.Base64urlAsync(BinaryData.FromObjectAsJson(new object()));
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -134,6 +158,8 @@ namespace Encode.Bytes.Samples
             {
 BinaryData.FromObjectAsJson(new object())
             });
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -146,6 +172,8 @@ BinaryData.FromObjectAsJson(new object())
             {
 BinaryData.FromObjectAsJson(new object())
             });
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -158,6 +186,8 @@ BinaryData.FromObjectAsJson(new object())
             {
 BinaryData.FromObjectAsJson(new object())
             });
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -170,6 +200,8 @@ BinaryData.FromObjectAsJson(new object())
             {
 BinaryData.FromObjectAsJson(new object())
             });
+
+            Console.WriteLine(response.Status);
         }
     }
 }

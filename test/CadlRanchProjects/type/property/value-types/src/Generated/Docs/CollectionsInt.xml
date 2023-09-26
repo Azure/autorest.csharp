@@ -38,6 +38,9 @@ This sample shows how to call GetCollectionsIntAsync and parse the result.
 CollectionsInt client = new ValueTypesClient().GetCollectionsIntClient("1.0.0");
 
 Response response = await client.GetCollectionsIntAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("property")[0].ToString());
 ]]></code>
 This sample shows how to call GetCollectionsIntAsync.
 <code><![CDATA[
@@ -50,6 +53,9 @@ This sample shows how to call GetCollectionsIntAsync with all parameters and par
 CollectionsInt client = new ValueTypesClient().GetCollectionsIntClient("1.0.0");
 
 Response response = await client.GetCollectionsIntAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("property")[0].ToString());
 ]]></code>
 This sample shows how to call GetCollectionsIntAsync with all parameters.
 <code><![CDATA[
@@ -65,6 +71,9 @@ This sample shows how to call GetCollectionsInt and parse the result.
 CollectionsInt client = new ValueTypesClient().GetCollectionsIntClient("1.0.0");
 
 Response response = client.GetCollectionsInt(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("property")[0].ToString());
 ]]></code>
 This sample shows how to call GetCollectionsInt.
 <code><![CDATA[
@@ -77,6 +86,9 @@ This sample shows how to call GetCollectionsInt with all parameters and parse th
 CollectionsInt client = new ValueTypesClient().GetCollectionsIntClient("1.0.0");
 
 Response response = client.GetCollectionsInt(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("property")[0].ToString());
 ]]></code>
 This sample shows how to call GetCollectionsInt with all parameters.
 <code><![CDATA[
@@ -133,6 +145,8 @@ RequestContent content = RequestContent.Create(new
     },
 });
 Response response = await client.PutAsync(content);
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutAsync.
 <code><![CDATA[
@@ -153,6 +167,8 @@ RequestContent content = RequestContent.Create(new
     },
 });
 Response response = await client.PutAsync(content);
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutAsync with all parameters.
 <code><![CDATA[
@@ -176,6 +192,8 @@ RequestContent content = RequestContent.Create(new
     },
 });
 Response response = client.Put(content);
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Put.
 <code><![CDATA[
@@ -196,6 +214,8 @@ RequestContent content = RequestContent.Create(new
     },
 });
 Response response = client.Put(content);
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Put with all parameters.
 <code><![CDATA[

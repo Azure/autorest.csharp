@@ -38,6 +38,9 @@ This sample shows how to call GetInt64ValueAsync and parse the result.
 Int64Value client = new DictionaryClient().GetInt64ValueClient("1.0.0");
 
 Response response = await client.GetInt64ValueAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("<key>").ToString());
 ]]></code>
 This sample shows how to call GetInt64ValueAsync.
 <code><![CDATA[
@@ -50,6 +53,9 @@ This sample shows how to call GetInt64ValueAsync with all parameters and parse t
 Int64Value client = new DictionaryClient().GetInt64ValueClient("1.0.0");
 
 Response response = await client.GetInt64ValueAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("<key>").ToString());
 ]]></code>
 This sample shows how to call GetInt64ValueAsync with all parameters.
 <code><![CDATA[
@@ -65,6 +71,9 @@ This sample shows how to call GetInt64Value and parse the result.
 Int64Value client = new DictionaryClient().GetInt64ValueClient("1.0.0");
 
 Response response = client.GetInt64Value(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("<key>").ToString());
 ]]></code>
 This sample shows how to call GetInt64Value.
 <code><![CDATA[
@@ -77,6 +86,9 @@ This sample shows how to call GetInt64Value with all parameters and parse the re
 Int64Value client = new DictionaryClient().GetInt64ValueClient("1.0.0");
 
 Response response = client.GetInt64Value(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("<key>").ToString());
 ]]></code>
 This sample shows how to call GetInt64Value with all parameters.
 <code><![CDATA[
@@ -138,6 +150,8 @@ RequestContent content = RequestContent.Create(new
     key = 1234L,
 });
 Response response = await client.PutAsync(content);
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutAsync.
 <code><![CDATA[
@@ -157,6 +171,8 @@ RequestContent content = RequestContent.Create(new
     key = 1234L,
 });
 Response response = await client.PutAsync(content);
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutAsync with all parameters.
 <code><![CDATA[
@@ -179,6 +195,8 @@ RequestContent content = RequestContent.Create(new
     key = 1234L,
 });
 Response response = client.Put(content);
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Put.
 <code><![CDATA[
@@ -198,6 +216,8 @@ RequestContent content = RequestContent.Create(new
     key = 1234L,
 });
 Response response = client.Put(content);
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Put with all parameters.
 <code><![CDATA[

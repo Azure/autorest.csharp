@@ -8,12 +8,16 @@ This sample shows how to call CsvAsync.
 Header client = new CollectionFormatClient().GetHeaderClient("1.0.0");
 
 Response response = await client.CsvAsync(new string[] { "<colors>" });
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call CsvAsync with all parameters.
 <code><![CDATA[
 Header client = new CollectionFormatClient().GetHeaderClient("1.0.0");
 
 Response response = await client.CsvAsync(new string[] { "<colors>" });
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="Csv(IEnumerable{string},RequestContext)">
@@ -23,12 +27,16 @@ This sample shows how to call Csv.
 Header client = new CollectionFormatClient().GetHeaderClient("1.0.0");
 
 Response response = client.Csv(new string[] { "<colors>" });
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Csv with all parameters.
 <code><![CDATA[
 Header client = new CollectionFormatClient().GetHeaderClient("1.0.0");
 
 Response response = client.Csv(new string[] { "<colors>" });
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
   </members>

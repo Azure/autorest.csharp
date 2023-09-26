@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Threading.Tasks;
 using Authentication.OAuth2;
 using Azure;
@@ -24,6 +25,8 @@ namespace Authentication.OAuth2.Samples
             OAuth2Client client = new OAuth2Client(credential);
 
             Response response = client.Valid();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -34,6 +37,8 @@ namespace Authentication.OAuth2.Samples
             OAuth2Client client = new OAuth2Client(credential);
 
             Response response = await client.ValidAsync();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -44,6 +49,8 @@ namespace Authentication.OAuth2.Samples
             OAuth2Client client = new OAuth2Client(credential);
 
             Response response = client.Valid();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -54,6 +61,8 @@ namespace Authentication.OAuth2.Samples
             OAuth2Client client = new OAuth2Client(credential);
 
             Response response = await client.ValidAsync();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -64,6 +73,8 @@ namespace Authentication.OAuth2.Samples
             OAuth2Client client = new OAuth2Client(credential);
 
             Response response = client.Invalid();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -74,6 +85,8 @@ namespace Authentication.OAuth2.Samples
             OAuth2Client client = new OAuth2Client(credential);
 
             Response response = await client.InvalidAsync();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -84,6 +97,8 @@ namespace Authentication.OAuth2.Samples
             OAuth2Client client = new OAuth2Client(credential);
 
             Response response = client.Invalid();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -94,6 +109,8 @@ namespace Authentication.OAuth2.Samples
             OAuth2Client client = new OAuth2Client(credential);
 
             Response response = await client.InvalidAsync();
+
+            Console.WriteLine(response.Status);
         }
     }
 }

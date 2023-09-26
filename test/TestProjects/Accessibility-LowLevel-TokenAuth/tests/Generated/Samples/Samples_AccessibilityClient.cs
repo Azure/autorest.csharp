@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Threading.Tasks;
 using Accessibility_LowLevel_TokenAuth;
 using Azure;
@@ -25,6 +26,8 @@ namespace Accessibility_LowLevel_TokenAuth.Samples
 
             RequestContent content = null;
             Response response = client.Operation(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -36,6 +39,8 @@ namespace Accessibility_LowLevel_TokenAuth.Samples
 
             RequestContent content = null;
             Response response = await client.OperationAsync(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -47,6 +52,8 @@ namespace Accessibility_LowLevel_TokenAuth.Samples
 
             RequestContent content = RequestContent.Create("<body>");
             Response response = client.Operation(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -58,6 +65,8 @@ namespace Accessibility_LowLevel_TokenAuth.Samples
 
             RequestContent content = RequestContent.Create("<body>");
             Response response = await client.OperationAsync(content);
+
+            Console.WriteLine(response.Status);
         }
     }
 }

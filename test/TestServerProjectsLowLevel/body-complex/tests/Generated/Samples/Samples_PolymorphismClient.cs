@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -24,6 +26,10 @@ namespace body_complex_LowLevel.Samples
             PolymorphismClient client = new PolymorphismClient(credential);
 
             Response response = client.GetValid(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("fishtype").ToString());
+            Console.WriteLine(result.GetProperty("length").ToString());
         }
 
         [Test]
@@ -34,6 +40,10 @@ namespace body_complex_LowLevel.Samples
             PolymorphismClient client = new PolymorphismClient(credential);
 
             Response response = await client.GetValidAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("fishtype").ToString());
+            Console.WriteLine(result.GetProperty("length").ToString());
         }
 
         [Test]
@@ -44,6 +54,14 @@ namespace body_complex_LowLevel.Samples
             PolymorphismClient client = new PolymorphismClient(credential);
 
             Response response = client.GetValid(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("fishtype").ToString());
+            Console.WriteLine(result.GetProperty("species").ToString());
+            Console.WriteLine(result.GetProperty("length").ToString());
+            Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("fishtype").ToString());
+            Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("species").ToString());
+            Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("length").ToString());
         }
 
         [Test]
@@ -54,6 +72,14 @@ namespace body_complex_LowLevel.Samples
             PolymorphismClient client = new PolymorphismClient(credential);
 
             Response response = await client.GetValidAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("fishtype").ToString());
+            Console.WriteLine(result.GetProperty("species").ToString());
+            Console.WriteLine(result.GetProperty("length").ToString());
+            Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("fishtype").ToString());
+            Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("species").ToString());
+            Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("length").ToString());
         }
 
         [Test]
@@ -69,6 +95,8 @@ namespace body_complex_LowLevel.Samples
                 length = 123.45F,
             });
             Response response = client.PutValid(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -84,6 +112,8 @@ namespace body_complex_LowLevel.Samples
                 length = 123.45F,
             });
             Response response = await client.PutValidAsync(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -106,6 +136,8 @@ null
             },
             });
             Response response = client.PutValid(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -128,6 +160,8 @@ null
             },
             });
             Response response = await client.PutValidAsync(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -138,6 +172,9 @@ null
             PolymorphismClient client = new PolymorphismClient(credential);
 
             Response response = client.GetDotSyntax(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("fish.type").ToString());
         }
 
         [Test]
@@ -148,6 +185,9 @@ null
             PolymorphismClient client = new PolymorphismClient(credential);
 
             Response response = await client.GetDotSyntaxAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("fish.type").ToString());
         }
 
         [Test]
@@ -158,6 +198,10 @@ null
             PolymorphismClient client = new PolymorphismClient(credential);
 
             Response response = client.GetDotSyntax(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("fish.type").ToString());
+            Console.WriteLine(result.GetProperty("species").ToString());
         }
 
         [Test]
@@ -168,6 +212,10 @@ null
             PolymorphismClient client = new PolymorphismClient(credential);
 
             Response response = await client.GetDotSyntaxAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("fish.type").ToString());
+            Console.WriteLine(result.GetProperty("species").ToString());
         }
 
         [Test]
@@ -178,6 +226,9 @@ null
             PolymorphismClient client = new PolymorphismClient(credential);
 
             Response response = client.GetComposedWithDiscriminator(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -188,6 +239,9 @@ null
             PolymorphismClient client = new PolymorphismClient(credential);
 
             Response response = await client.GetComposedWithDiscriminatorAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -198,6 +252,20 @@ null
             PolymorphismClient client = new PolymorphismClient(credential);
 
             Response response = client.GetComposedWithDiscriminator(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("location").ToString());
+            Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("iswild").ToString());
+            Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("fish.type").ToString());
+            Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("species").ToString());
+            Console.WriteLine(result.GetProperty("salmons")[0].GetProperty("location").ToString());
+            Console.WriteLine(result.GetProperty("salmons")[0].GetProperty("iswild").ToString());
+            Console.WriteLine(result.GetProperty("salmons")[0].GetProperty("fish.type").ToString());
+            Console.WriteLine(result.GetProperty("salmons")[0].GetProperty("species").ToString());
+            Console.WriteLine(result.GetProperty("sampleFish").GetProperty("fish.type").ToString());
+            Console.WriteLine(result.GetProperty("sampleFish").GetProperty("species").ToString());
+            Console.WriteLine(result.GetProperty("fishes")[0].GetProperty("fish.type").ToString());
+            Console.WriteLine(result.GetProperty("fishes")[0].GetProperty("species").ToString());
         }
 
         [Test]
@@ -208,6 +276,20 @@ null
             PolymorphismClient client = new PolymorphismClient(credential);
 
             Response response = await client.GetComposedWithDiscriminatorAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("location").ToString());
+            Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("iswild").ToString());
+            Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("fish.type").ToString());
+            Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("species").ToString());
+            Console.WriteLine(result.GetProperty("salmons")[0].GetProperty("location").ToString());
+            Console.WriteLine(result.GetProperty("salmons")[0].GetProperty("iswild").ToString());
+            Console.WriteLine(result.GetProperty("salmons")[0].GetProperty("fish.type").ToString());
+            Console.WriteLine(result.GetProperty("salmons")[0].GetProperty("species").ToString());
+            Console.WriteLine(result.GetProperty("sampleFish").GetProperty("fish.type").ToString());
+            Console.WriteLine(result.GetProperty("sampleFish").GetProperty("species").ToString());
+            Console.WriteLine(result.GetProperty("fishes")[0].GetProperty("fish.type").ToString());
+            Console.WriteLine(result.GetProperty("fishes")[0].GetProperty("species").ToString());
         }
 
         [Test]
@@ -218,6 +300,9 @@ null
             PolymorphismClient client = new PolymorphismClient(credential);
 
             Response response = client.GetComposedWithoutDiscriminator(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -228,6 +313,9 @@ null
             PolymorphismClient client = new PolymorphismClient(credential);
 
             Response response = await client.GetComposedWithoutDiscriminatorAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -238,6 +326,20 @@ null
             PolymorphismClient client = new PolymorphismClient(credential);
 
             Response response = client.GetComposedWithoutDiscriminator(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("location").ToString());
+            Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("iswild").ToString());
+            Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("fish.type").ToString());
+            Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("species").ToString());
+            Console.WriteLine(result.GetProperty("salmons")[0].GetProperty("location").ToString());
+            Console.WriteLine(result.GetProperty("salmons")[0].GetProperty("iswild").ToString());
+            Console.WriteLine(result.GetProperty("salmons")[0].GetProperty("fish.type").ToString());
+            Console.WriteLine(result.GetProperty("salmons")[0].GetProperty("species").ToString());
+            Console.WriteLine(result.GetProperty("sampleFish").GetProperty("fish.type").ToString());
+            Console.WriteLine(result.GetProperty("sampleFish").GetProperty("species").ToString());
+            Console.WriteLine(result.GetProperty("fishes")[0].GetProperty("fish.type").ToString());
+            Console.WriteLine(result.GetProperty("fishes")[0].GetProperty("species").ToString());
         }
 
         [Test]
@@ -248,6 +350,20 @@ null
             PolymorphismClient client = new PolymorphismClient(credential);
 
             Response response = await client.GetComposedWithoutDiscriminatorAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("location").ToString());
+            Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("iswild").ToString());
+            Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("fish.type").ToString());
+            Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("species").ToString());
+            Console.WriteLine(result.GetProperty("salmons")[0].GetProperty("location").ToString());
+            Console.WriteLine(result.GetProperty("salmons")[0].GetProperty("iswild").ToString());
+            Console.WriteLine(result.GetProperty("salmons")[0].GetProperty("fish.type").ToString());
+            Console.WriteLine(result.GetProperty("salmons")[0].GetProperty("species").ToString());
+            Console.WriteLine(result.GetProperty("sampleFish").GetProperty("fish.type").ToString());
+            Console.WriteLine(result.GetProperty("sampleFish").GetProperty("species").ToString());
+            Console.WriteLine(result.GetProperty("fishes")[0].GetProperty("fish.type").ToString());
+            Console.WriteLine(result.GetProperty("fishes")[0].GetProperty("species").ToString());
         }
 
         [Test]
@@ -258,6 +374,10 @@ null
             PolymorphismClient client = new PolymorphismClient(credential);
 
             Response response = client.GetComplicated(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("fishtype").ToString());
+            Console.WriteLine(result.GetProperty("length").ToString());
         }
 
         [Test]
@@ -268,6 +388,10 @@ null
             PolymorphismClient client = new PolymorphismClient(credential);
 
             Response response = await client.GetComplicatedAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("fishtype").ToString());
+            Console.WriteLine(result.GetProperty("length").ToString());
         }
 
         [Test]
@@ -278,6 +402,16 @@ null
             PolymorphismClient client = new PolymorphismClient(credential);
 
             Response response = client.GetComplicated(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("location").ToString());
+            Console.WriteLine(result.GetProperty("iswild").ToString());
+            Console.WriteLine(result.GetProperty("fishtype").ToString());
+            Console.WriteLine(result.GetProperty("species").ToString());
+            Console.WriteLine(result.GetProperty("length").ToString());
+            Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("fishtype").ToString());
+            Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("species").ToString());
+            Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("length").ToString());
         }
 
         [Test]
@@ -288,6 +422,16 @@ null
             PolymorphismClient client = new PolymorphismClient(credential);
 
             Response response = await client.GetComplicatedAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("location").ToString());
+            Console.WriteLine(result.GetProperty("iswild").ToString());
+            Console.WriteLine(result.GetProperty("fishtype").ToString());
+            Console.WriteLine(result.GetProperty("species").ToString());
+            Console.WriteLine(result.GetProperty("length").ToString());
+            Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("fishtype").ToString());
+            Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("species").ToString());
+            Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("length").ToString());
         }
 
         [Test]
@@ -303,6 +447,8 @@ null
                 length = 123.45F,
             });
             Response response = client.PutComplicated(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -318,6 +464,8 @@ null
                 length = 123.45F,
             });
             Response response = await client.PutComplicatedAsync(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -352,6 +500,8 @@ null
             },
             });
             Response response = client.PutComplicated(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -386,6 +536,8 @@ null
             },
             });
             Response response = await client.PutComplicatedAsync(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -401,6 +553,10 @@ null
                 length = 123.45F,
             });
             Response response = client.PutMissingDiscriminator(content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("fishtype").ToString());
+            Console.WriteLine(result.GetProperty("length").ToString());
         }
 
         [Test]
@@ -416,6 +572,10 @@ null
                 length = 123.45F,
             });
             Response response = await client.PutMissingDiscriminatorAsync(content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("fishtype").ToString());
+            Console.WriteLine(result.GetProperty("length").ToString());
         }
 
         [Test]
@@ -450,6 +610,16 @@ null
             },
             });
             Response response = client.PutMissingDiscriminator(content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("location").ToString());
+            Console.WriteLine(result.GetProperty("iswild").ToString());
+            Console.WriteLine(result.GetProperty("fishtype").ToString());
+            Console.WriteLine(result.GetProperty("species").ToString());
+            Console.WriteLine(result.GetProperty("length").ToString());
+            Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("fishtype").ToString());
+            Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("species").ToString());
+            Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("length").ToString());
         }
 
         [Test]
@@ -484,6 +654,16 @@ null
             },
             });
             Response response = await client.PutMissingDiscriminatorAsync(content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("location").ToString());
+            Console.WriteLine(result.GetProperty("iswild").ToString());
+            Console.WriteLine(result.GetProperty("fishtype").ToString());
+            Console.WriteLine(result.GetProperty("species").ToString());
+            Console.WriteLine(result.GetProperty("length").ToString());
+            Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("fishtype").ToString());
+            Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("species").ToString());
+            Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("length").ToString());
         }
 
         [Test]
@@ -499,6 +679,8 @@ null
                 length = 123.45F,
             });
             Response response = client.PutValidMissingRequired(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -514,6 +696,8 @@ null
                 length = 123.45F,
             });
             Response response = await client.PutValidMissingRequiredAsync(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -536,6 +720,8 @@ null
             },
             });
             Response response = client.PutValidMissingRequired(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -558,6 +744,8 @@ null
             },
             });
             Response response = await client.PutValidMissingRequiredAsync(content);
+
+            Console.WriteLine(response.Status);
         }
     }
 }

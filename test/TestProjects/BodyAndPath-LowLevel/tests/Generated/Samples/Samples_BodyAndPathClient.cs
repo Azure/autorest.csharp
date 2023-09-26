@@ -5,8 +5,10 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -27,6 +29,8 @@ namespace BodyAndPath_LowLevel.Samples
 
             RequestContent content = RequestContent.Create(new object());
             Response response = client.Create("<itemName>", content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -38,6 +42,8 @@ namespace BodyAndPath_LowLevel.Samples
 
             RequestContent content = RequestContent.Create(new object());
             Response response = await client.CreateAsync("<itemName>", content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -49,6 +55,8 @@ namespace BodyAndPath_LowLevel.Samples
 
             RequestContent content = RequestContent.Create(new object());
             Response response = client.Create("<itemName>", content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -60,6 +68,8 @@ namespace BodyAndPath_LowLevel.Samples
 
             RequestContent content = RequestContent.Create(new object());
             Response response = await client.CreateAsync("<itemName>", content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -71,6 +81,8 @@ namespace BodyAndPath_LowLevel.Samples
 
             RequestContent content = RequestContent.Create(File.OpenRead("<filePath>"));
             Response response = client.CreateStream("<itemNameStream>", content, new ContentType("application/json"));
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -82,6 +94,8 @@ namespace BodyAndPath_LowLevel.Samples
 
             RequestContent content = RequestContent.Create(File.OpenRead("<filePath>"));
             Response response = await client.CreateStreamAsync("<itemNameStream>", content, new ContentType("application/json"));
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -93,6 +107,8 @@ namespace BodyAndPath_LowLevel.Samples
 
             RequestContent content = RequestContent.Create(File.OpenRead("<filePath>"));
             Response response = client.CreateStream("<itemNameStream>", content, new ContentType("application/json"), new string[] { "<excluded>" });
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -104,6 +120,8 @@ namespace BodyAndPath_LowLevel.Samples
 
             RequestContent content = RequestContent.Create(File.OpenRead("<filePath>"));
             Response response = await client.CreateStreamAsync("<itemNameStream>", content, new ContentType("application/json"), new string[] { "<excluded>" });
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -115,6 +133,8 @@ namespace BodyAndPath_LowLevel.Samples
 
             RequestContent content = RequestContent.Create(new object());
             Response response = client.CreateEnum("current", "latest", content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -126,6 +146,8 @@ namespace BodyAndPath_LowLevel.Samples
 
             RequestContent content = RequestContent.Create(new object());
             Response response = await client.CreateEnumAsync("current", "latest", content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -137,6 +159,8 @@ namespace BodyAndPath_LowLevel.Samples
 
             RequestContent content = RequestContent.Create(new object());
             Response response = client.CreateEnum("current", "latest", content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -148,6 +172,8 @@ namespace BodyAndPath_LowLevel.Samples
 
             RequestContent content = RequestContent.Create(new object());
             Response response = await client.CreateEnumAsync("current", "latest", content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -158,6 +184,9 @@ namespace BodyAndPath_LowLevel.Samples
             BodyAndPathClient client = new BodyAndPathClient(credential);
 
             Response response = client.GetBodyAndPaths(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -168,6 +197,9 @@ namespace BodyAndPath_LowLevel.Samples
             BodyAndPathClient client = new BodyAndPathClient(credential);
 
             Response response = await client.GetBodyAndPathsAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -178,6 +210,9 @@ namespace BodyAndPath_LowLevel.Samples
             BodyAndPathClient client = new BodyAndPathClient(credential);
 
             Response response = client.GetBodyAndPaths(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -188,6 +223,9 @@ namespace BodyAndPath_LowLevel.Samples
             BodyAndPathClient client = new BodyAndPathClient(credential);
 
             Response response = await client.GetBodyAndPathsAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -198,6 +236,9 @@ namespace BodyAndPath_LowLevel.Samples
             BodyAndPathClient client = new BodyAndPathClient(credential);
 
             Response response = client.GetItems(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -208,6 +249,9 @@ namespace BodyAndPath_LowLevel.Samples
             BodyAndPathClient client = new BodyAndPathClient(credential);
 
             Response response = await client.GetItemsAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -218,6 +262,9 @@ namespace BodyAndPath_LowLevel.Samples
             BodyAndPathClient client = new BodyAndPathClient(credential);
 
             Response response = client.GetItems(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -228,6 +275,9 @@ namespace BodyAndPath_LowLevel.Samples
             BodyAndPathClient client = new BodyAndPathClient(credential);
 
             Response response = await client.GetItemsAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -239,6 +289,8 @@ namespace BodyAndPath_LowLevel.Samples
 
             RequestContent content = RequestContent.Create(new object());
             Response response = client.Update("<item3>", "<item2>", "value", "<item4>", content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -250,6 +302,8 @@ namespace BodyAndPath_LowLevel.Samples
 
             RequestContent content = RequestContent.Create(new object());
             Response response = await client.UpdateAsync("<item3>", "<item2>", "value", "<item4>", content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -264,6 +318,8 @@ namespace BodyAndPath_LowLevel.Samples
                 ["invalid-int-name"] = 1234
             });
             Response response = client.Update("<item3>", "<item2>", "value", "<item4>", content, "<item5>");
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -278,6 +334,8 @@ namespace BodyAndPath_LowLevel.Samples
                 ["invalid-int-name"] = 1234
             });
             Response response = await client.UpdateAsync("<item3>", "<item2>", "value", "<item4>", content, "<item5>");
+
+            Console.WriteLine(response.Status);
         }
     }
 }

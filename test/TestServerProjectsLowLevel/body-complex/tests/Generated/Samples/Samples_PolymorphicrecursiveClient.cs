@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -24,6 +26,10 @@ namespace body_complex_LowLevel.Samples
             PolymorphicrecursiveClient client = new PolymorphicrecursiveClient(credential);
 
             Response response = client.GetValid(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("fishtype").ToString());
+            Console.WriteLine(result.GetProperty("length").ToString());
         }
 
         [Test]
@@ -34,6 +40,10 @@ namespace body_complex_LowLevel.Samples
             PolymorphicrecursiveClient client = new PolymorphicrecursiveClient(credential);
 
             Response response = await client.GetValidAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("fishtype").ToString());
+            Console.WriteLine(result.GetProperty("length").ToString());
         }
 
         [Test]
@@ -44,6 +54,14 @@ namespace body_complex_LowLevel.Samples
             PolymorphicrecursiveClient client = new PolymorphicrecursiveClient(credential);
 
             Response response = client.GetValid(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("fishtype").ToString());
+            Console.WriteLine(result.GetProperty("species").ToString());
+            Console.WriteLine(result.GetProperty("length").ToString());
+            Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("fishtype").ToString());
+            Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("species").ToString());
+            Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("length").ToString());
         }
 
         [Test]
@@ -54,6 +72,14 @@ namespace body_complex_LowLevel.Samples
             PolymorphicrecursiveClient client = new PolymorphicrecursiveClient(credential);
 
             Response response = await client.GetValidAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("fishtype").ToString());
+            Console.WriteLine(result.GetProperty("species").ToString());
+            Console.WriteLine(result.GetProperty("length").ToString());
+            Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("fishtype").ToString());
+            Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("species").ToString());
+            Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("length").ToString());
         }
 
         [Test]
@@ -69,6 +95,8 @@ namespace body_complex_LowLevel.Samples
                 length = 123.45F,
             });
             Response response = client.PutValid(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -84,6 +112,8 @@ namespace body_complex_LowLevel.Samples
                 length = 123.45F,
             });
             Response response = await client.PutValidAsync(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -106,6 +136,8 @@ null
             },
             });
             Response response = client.PutValid(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -128,6 +160,8 @@ null
             },
             });
             Response response = await client.PutValidAsync(content);
+
+            Console.WriteLine(response.Status);
         }
     }
 }

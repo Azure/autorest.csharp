@@ -46,6 +46,8 @@ RequestContent content = RequestContent.Create(new
     name = "<name>",
 });
 Response response = await client.SpreadAsRequestBodyAsync(content);
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call SpreadAsRequestBodyAsync.
 <code><![CDATA[
@@ -63,6 +65,8 @@ RequestContent content = RequestContent.Create(new
     name = "<name>",
 });
 Response response = await client.SpreadAsRequestBodyAsync(content);
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call SpreadAsRequestBodyAsync with all parameters.
 <code><![CDATA[
@@ -83,6 +87,8 @@ RequestContent content = RequestContent.Create(new
     name = "<name>",
 });
 Response response = client.SpreadAsRequestBody(content);
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call SpreadAsRequestBody.
 <code><![CDATA[
@@ -100,6 +106,8 @@ RequestContent content = RequestContent.Create(new
     name = "<name>",
 });
 Response response = client.SpreadAsRequestBody(content);
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call SpreadAsRequestBody with all parameters.
 <code><![CDATA[

@@ -8,12 +8,16 @@ This sample shows how to call GetWithIfAsync.
 Parameter client = new SpecialWordsClient().GetParameterClient("1.0.0");
 
 Response response = await client.GetWithIfAsync("<if>");
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call GetWithIfAsync with all parameters.
 <code><![CDATA[
 Parameter client = new SpecialWordsClient().GetParameterClient("1.0.0");
 
 Response response = await client.GetWithIfAsync("<if>");
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="GetWithIf(string,RequestContext)">
@@ -23,12 +27,16 @@ This sample shows how to call GetWithIf.
 Parameter client = new SpecialWordsClient().GetParameterClient("1.0.0");
 
 Response response = client.GetWithIf("<if>");
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call GetWithIf with all parameters.
 <code><![CDATA[
 Parameter client = new SpecialWordsClient().GetParameterClient("1.0.0");
 
 Response response = client.GetWithIf("<if>");
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="GetWithFilterAsync(string,RequestContext)">
@@ -38,12 +46,16 @@ This sample shows how to call GetWithFilterAsync.
 Parameter client = new SpecialWordsClient().GetParameterClient("1.0.0");
 
 Response response = await client.GetWithFilterAsync("<filter>");
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call GetWithFilterAsync with all parameters.
 <code><![CDATA[
 Parameter client = new SpecialWordsClient().GetParameterClient("1.0.0");
 
 Response response = await client.GetWithFilterAsync("<filter>");
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="GetWithFilter(string,RequestContext)">
@@ -53,12 +65,16 @@ This sample shows how to call GetWithFilter.
 Parameter client = new SpecialWordsClient().GetParameterClient("1.0.0");
 
 Response response = client.GetWithFilter("<filter>");
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call GetWithFilter with all parameters.
 <code><![CDATA[
 Parameter client = new SpecialWordsClient().GetParameterClient("1.0.0");
 
 Response response = client.GetWithFilter("<filter>");
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
   </members>

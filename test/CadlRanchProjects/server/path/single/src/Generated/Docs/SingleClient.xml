@@ -9,6 +9,8 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 SingleClient client = new SingleClient(endpoint);
 
 Response response = await client.MyOpAsync();
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call MyOpAsync with all request content.
 <code><![CDATA[
@@ -16,6 +18,8 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 SingleClient client = new SingleClient(endpoint);
 
 Response response = await client.MyOpAsync();
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="MyOp(RequestContext)">
@@ -26,6 +30,8 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 SingleClient client = new SingleClient(endpoint);
 
 Response response = client.MyOp();
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call MyOp with all request content.
 <code><![CDATA[
@@ -33,6 +39,8 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 SingleClient client = new SingleClient(endpoint);
 
 Response response = client.MyOp();
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
   </members>

@@ -9,6 +9,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = await client.ArrayStringMultiNullAsync();
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call ArrayStringMultiNullAsync with all parameters.
 <code><![CDATA[
@@ -16,6 +18,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = await client.ArrayStringMultiNullAsync(new string[] { "<arrayQuery>" });
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="ArrayStringMultiNull(IEnumerable{string},RequestContext)">
@@ -26,6 +30,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = client.ArrayStringMultiNull();
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call ArrayStringMultiNull with all parameters.
 <code><![CDATA[
@@ -33,6 +39,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = client.ArrayStringMultiNull(new string[] { "<arrayQuery>" });
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="ArrayStringMultiEmptyAsync(IEnumerable{string},RequestContext)">
@@ -43,6 +51,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = await client.ArrayStringMultiEmptyAsync();
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call ArrayStringMultiEmptyAsync with all parameters.
 <code><![CDATA[
@@ -50,6 +60,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = await client.ArrayStringMultiEmptyAsync(new string[] { "<arrayQuery>" });
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="ArrayStringMultiEmpty(IEnumerable{string},RequestContext)">
@@ -60,6 +72,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = client.ArrayStringMultiEmpty();
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call ArrayStringMultiEmpty with all parameters.
 <code><![CDATA[
@@ -67,6 +81,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = client.ArrayStringMultiEmpty(new string[] { "<arrayQuery>" });
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="ArrayStringMultiValidAsync(IEnumerable{string},RequestContext)">
@@ -77,6 +93,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = await client.ArrayStringMultiValidAsync();
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call ArrayStringMultiValidAsync with all parameters.
 <code><![CDATA[
@@ -84,6 +102,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = await client.ArrayStringMultiValidAsync(new string[] { "<arrayQuery>" });
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="ArrayStringMultiValid(IEnumerable{string},RequestContext)">
@@ -94,6 +114,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = client.ArrayStringMultiValid();
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call ArrayStringMultiValid with all parameters.
 <code><![CDATA[
@@ -101,6 +123,8 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
 Response response = client.ArrayStringMultiValid(new string[] { "<arrayQuery>" });
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
   </members>

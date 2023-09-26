@@ -24,6 +24,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = client.GetBooleanTrue();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -34,6 +36,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = await client.GetBooleanTrueAsync();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -44,6 +48,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = client.GetBooleanTrue();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -54,6 +60,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = await client.GetBooleanTrueAsync();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -64,6 +72,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = client.GetBooleanFalse();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -74,6 +84,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = await client.GetBooleanFalseAsync();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -84,6 +96,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = client.GetBooleanFalse();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -94,6 +108,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = await client.GetBooleanFalseAsync();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -104,6 +120,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = client.GetBooleanNull();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -114,6 +132,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = await client.GetBooleanNullAsync();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -124,6 +144,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = client.GetBooleanNull(true);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -134,6 +156,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = await client.GetBooleanNullAsync(true);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -144,6 +168,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = client.GetIntOneMillion();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -154,6 +180,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = await client.GetIntOneMillionAsync();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -164,6 +192,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = client.GetIntOneMillion();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -174,6 +204,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = await client.GetIntOneMillionAsync();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -184,6 +216,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = client.GetIntNegativeOneMillion();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -194,6 +228,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = await client.GetIntNegativeOneMillionAsync();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -204,6 +240,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = client.GetIntNegativeOneMillion();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -214,6 +252,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = await client.GetIntNegativeOneMillionAsync();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -224,6 +264,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = client.GetIntNull();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -234,6 +276,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = await client.GetIntNullAsync();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -244,6 +288,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = client.GetIntNull(1234);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -254,6 +300,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = await client.GetIntNullAsync(1234);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -264,6 +312,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = client.GetTenBillion();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -274,6 +324,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = await client.GetTenBillionAsync();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -284,6 +336,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = client.GetTenBillion();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -294,6 +348,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = await client.GetTenBillionAsync();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -304,6 +360,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = client.GetNegativeTenBillion();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -314,6 +372,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = await client.GetNegativeTenBillionAsync();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -324,6 +384,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = client.GetNegativeTenBillion();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -334,6 +396,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = await client.GetNegativeTenBillionAsync();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -344,6 +408,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = client.GetLongNull();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -354,6 +420,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = await client.GetLongNullAsync();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -364,6 +432,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = client.GetLongNull(1234L);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -374,6 +444,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = await client.GetLongNullAsync(1234L);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -384,6 +456,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = client.FloatScientificPositive();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -394,6 +468,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = await client.FloatScientificPositiveAsync();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -404,6 +480,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = client.FloatScientificPositive();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -414,6 +492,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = await client.FloatScientificPositiveAsync();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -424,6 +504,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = client.FloatScientificNegative();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -434,6 +516,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = await client.FloatScientificNegativeAsync();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -444,6 +528,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = client.FloatScientificNegative();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -454,6 +540,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = await client.FloatScientificNegativeAsync();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -464,6 +552,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = client.FloatNull();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -474,6 +564,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = await client.FloatNullAsync();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -484,6 +576,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = client.FloatNull(123.45F);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -494,6 +588,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = await client.FloatNullAsync(123.45F);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -504,6 +600,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = client.DoubleDecimalPositive();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -514,6 +612,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = await client.DoubleDecimalPositiveAsync();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -524,6 +624,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = client.DoubleDecimalPositive();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -534,6 +636,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = await client.DoubleDecimalPositiveAsync();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -544,6 +648,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = client.DoubleDecimalNegative();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -554,6 +660,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = await client.DoubleDecimalNegativeAsync();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -564,6 +672,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = client.DoubleDecimalNegative();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -574,6 +684,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = await client.DoubleDecimalNegativeAsync();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -584,6 +696,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = client.DoubleNull();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -594,6 +708,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = await client.DoubleNullAsync();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -604,6 +720,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = client.DoubleNull(123.45);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -614,6 +732,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = await client.DoubleNullAsync(123.45);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -624,6 +744,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = client.StringUnicode();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -634,6 +756,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = await client.StringUnicodeAsync();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -644,6 +768,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = client.StringUnicode();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -654,6 +780,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = await client.StringUnicodeAsync();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -664,6 +792,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = client.StringUrlEncoded();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -674,6 +804,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = await client.StringUrlEncodedAsync();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -684,6 +816,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = client.StringUrlEncoded();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -694,6 +828,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = await client.StringUrlEncodedAsync();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -704,6 +840,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = client.StringEmpty();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -714,6 +852,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = await client.StringEmptyAsync();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -724,6 +864,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = client.StringEmpty();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -734,6 +876,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = await client.StringEmptyAsync();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -744,6 +888,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = client.StringNull();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -754,6 +900,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = await client.StringNullAsync();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -764,6 +912,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = client.StringNull("<stringQuery>");
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -774,6 +924,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = await client.StringNullAsync("<stringQuery>");
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -784,6 +936,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = client.EnumValid();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -794,6 +948,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = await client.EnumValidAsync();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -804,6 +960,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = client.EnumValid("red color");
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -814,6 +972,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = await client.EnumValidAsync("red color");
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -824,6 +984,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = client.EnumNull();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -834,6 +996,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = await client.EnumNullAsync();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -844,6 +1008,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = client.EnumNull("red color");
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -854,6 +1020,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = await client.EnumNullAsync("red color");
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -864,6 +1032,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = client.ByteMultiByte();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -874,6 +1044,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = await client.ByteMultiByteAsync();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -884,6 +1056,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = client.ByteMultiByte(BinaryData.FromObjectAsJson(new object()));
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -894,6 +1068,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = await client.ByteMultiByteAsync(BinaryData.FromObjectAsJson(new object()));
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -904,6 +1080,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = client.ByteEmpty();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -914,6 +1092,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = await client.ByteEmptyAsync();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -924,6 +1104,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = client.ByteEmpty();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -934,6 +1116,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = await client.ByteEmptyAsync();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -944,6 +1128,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = client.ByteNull();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -954,6 +1140,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = await client.ByteNullAsync();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -964,6 +1152,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = client.ByteNull(BinaryData.FromObjectAsJson(new object()));
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -974,6 +1164,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = await client.ByteNullAsync(BinaryData.FromObjectAsJson(new object()));
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -984,6 +1176,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = client.DateValid();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -994,6 +1188,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = await client.DateValidAsync();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1004,6 +1200,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = client.DateValid();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1014,6 +1212,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = await client.DateValidAsync();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1024,6 +1224,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = client.DateNull();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1034,6 +1236,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = await client.DateNullAsync();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1044,6 +1248,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = client.DateNull(DateTimeOffset.Parse("2022-05-10"));
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1054,6 +1260,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = await client.DateNullAsync(DateTimeOffset.Parse("2022-05-10"));
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1064,6 +1272,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = client.DateTimeValid();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1074,6 +1284,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = await client.DateTimeValidAsync();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1084,6 +1296,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = client.DateTimeValid();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1094,6 +1308,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = await client.DateTimeValidAsync();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1104,6 +1320,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = client.DateTimeNull();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1114,6 +1332,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = await client.DateTimeNullAsync();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1124,6 +1344,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = client.DateTimeNull(DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"));
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1134,6 +1356,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = await client.DateTimeNullAsync(DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"));
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1144,6 +1368,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = client.ArrayStringCsvValid();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1154,6 +1380,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = await client.ArrayStringCsvValidAsync();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1164,6 +1392,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = client.ArrayStringCsvValid(new string[] { "<arrayQuery>" });
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1174,6 +1404,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = await client.ArrayStringCsvValidAsync(new string[] { "<arrayQuery>" });
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1184,6 +1416,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = client.ArrayStringCsvNull();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1194,6 +1428,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = await client.ArrayStringCsvNullAsync();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1204,6 +1440,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = client.ArrayStringCsvNull(new string[] { "<arrayQuery>" });
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1214,6 +1452,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = await client.ArrayStringCsvNullAsync(new string[] { "<arrayQuery>" });
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1224,6 +1464,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = client.ArrayStringCsvEmpty();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1234,6 +1476,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = await client.ArrayStringCsvEmptyAsync();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1244,6 +1488,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = client.ArrayStringCsvEmpty(new string[] { "<arrayQuery>" });
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1254,6 +1500,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = await client.ArrayStringCsvEmptyAsync(new string[] { "<arrayQuery>" });
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1264,6 +1512,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = client.ArrayStringNoCollectionFormatEmpty();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1274,6 +1524,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = await client.ArrayStringNoCollectionFormatEmptyAsync();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1284,6 +1536,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = client.ArrayStringNoCollectionFormatEmpty(new string[] { "<arrayQuery>" });
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1294,6 +1548,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = await client.ArrayStringNoCollectionFormatEmptyAsync(new string[] { "<arrayQuery>" });
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1304,6 +1560,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = client.ArrayStringSsvValid();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1314,6 +1572,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = await client.ArrayStringSsvValidAsync();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1324,6 +1584,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = client.ArrayStringSsvValid(new string[] { "<arrayQuery>" });
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1334,6 +1596,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = await client.ArrayStringSsvValidAsync(new string[] { "<arrayQuery>" });
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1344,6 +1608,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = client.ArrayStringTsvValid();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1354,6 +1620,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = await client.ArrayStringTsvValidAsync();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1364,6 +1632,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = client.ArrayStringTsvValid(new string[] { "<arrayQuery>" });
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1374,6 +1644,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = await client.ArrayStringTsvValidAsync(new string[] { "<arrayQuery>" });
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1384,6 +1656,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = client.ArrayStringPipesValid();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1394,6 +1668,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = await client.ArrayStringPipesValidAsync();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1404,6 +1680,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = client.ArrayStringPipesValid(new string[] { "<arrayQuery>" });
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1414,6 +1692,8 @@ namespace url_LowLevel.Samples
             QueriesClient client = new QueriesClient(credential);
 
             Response response = await client.ArrayStringPipesValidAsync(new string[] { "<arrayQuery>" });
+
+            Console.WriteLine(response.Status);
         }
     }
 }

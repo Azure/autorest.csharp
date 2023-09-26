@@ -48,6 +48,9 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ApiVersionInTspClient client = new ApiVersionInTspClient(endpoint, credential);
 
 Response response = await client.GetBatchDetectionResultAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("resultId").ToString());
 ]]></code>
 This sample shows how to call GetBatchDetectionResultAsync.
 <code><![CDATA[
@@ -64,6 +67,9 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ApiVersionInTspClient client = new ApiVersionInTspClient(endpoint, credential);
 
 Response response = await client.GetBatchDetectionResultAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("resultId").ToString());
 ]]></code>
 This sample shows how to call GetBatchDetectionResultAsync with all parameters.
 <code><![CDATA[
@@ -83,6 +89,9 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ApiVersionInTspClient client = new ApiVersionInTspClient(endpoint, credential);
 
 Response response = client.GetBatchDetectionResult(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("resultId").ToString());
 ]]></code>
 This sample shows how to call GetBatchDetectionResult.
 <code><![CDATA[
@@ -99,6 +108,9 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ApiVersionInTspClient client = new ApiVersionInTspClient(endpoint, credential);
 
 Response response = client.GetBatchDetectionResult(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("resultId").ToString());
 ]]></code>
 This sample shows how to call GetBatchDetectionResult with all parameters.
 <code><![CDATA[

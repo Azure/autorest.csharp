@@ -44,6 +44,8 @@ MultipleMediaTypesClient client = new MultipleMediaTypesClient(endpoint);
 
 RequestContent content = RequestContent.Create(new object());
 Response response = await client.OneBinaryBodyTwoContentTypesAsync(content, new ContentType("application/json"));
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call OneBinaryBodyTwoContentTypesAsync.
 <code><![CDATA[
@@ -59,6 +61,8 @@ MultipleMediaTypesClient client = new MultipleMediaTypesClient(endpoint);
 
 RequestContent content = RequestContent.Create(new object());
 Response response = await client.OneBinaryBodyTwoContentTypesAsync(content, new ContentType("application/json"));
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call OneBinaryBodyTwoContentTypesAsync with all parameters.
 <code><![CDATA[
@@ -77,6 +81,8 @@ MultipleMediaTypesClient client = new MultipleMediaTypesClient(endpoint);
 
 RequestContent content = RequestContent.Create(new object());
 Response response = client.OneBinaryBodyTwoContentTypes(content, new ContentType("application/json"));
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call OneBinaryBodyTwoContentTypes.
 <code><![CDATA[
@@ -92,6 +98,8 @@ MultipleMediaTypesClient client = new MultipleMediaTypesClient(endpoint);
 
 RequestContent content = RequestContent.Create(new object());
 Response response = client.OneBinaryBodyTwoContentTypes(content, new ContentType("application/json"));
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call OneBinaryBodyTwoContentTypes with all parameters.
 <code><![CDATA[
@@ -144,6 +152,8 @@ MultipleMediaTypesClient client = new MultipleMediaTypesClient(endpoint);
 
 RequestContent content = RequestContent.Create("<body>");
 Response response = await client.OneStringBodyThreeContentTypesAsync(content, new ContentType("application/json"));
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call OneStringBodyThreeContentTypesAsync.
 <code><![CDATA[
@@ -159,6 +169,8 @@ MultipleMediaTypesClient client = new MultipleMediaTypesClient(endpoint);
 
 RequestContent content = RequestContent.Create("<body>");
 Response response = await client.OneStringBodyThreeContentTypesAsync(content, new ContentType("application/json"));
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call OneStringBodyThreeContentTypesAsync with all parameters.
 <code><![CDATA[
@@ -177,6 +189,8 @@ MultipleMediaTypesClient client = new MultipleMediaTypesClient(endpoint);
 
 RequestContent content = RequestContent.Create("<body>");
 Response response = client.OneStringBodyThreeContentTypes(content, new ContentType("application/json"));
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call OneStringBodyThreeContentTypes.
 <code><![CDATA[
@@ -192,6 +206,8 @@ MultipleMediaTypesClient client = new MultipleMediaTypesClient(endpoint);
 
 RequestContent content = RequestContent.Create("<body>");
 Response response = client.OneStringBodyThreeContentTypes(content, new ContentType("application/json"));
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call OneStringBodyThreeContentTypes with all parameters.
 <code><![CDATA[
@@ -251,6 +267,8 @@ RequestContent content = RequestContent.Create(new
     id = "<id>",
 });
 Response response = await client.OneModelBodyOneContentTypeAsync(content);
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call OneModelBodyOneContentTypeAsync.
 <code><![CDATA[
@@ -270,6 +288,8 @@ RequestContent content = RequestContent.Create(new
     id = "<id>",
 });
 Response response = await client.OneModelBodyOneContentTypeAsync(content);
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call OneModelBodyOneContentTypeAsync with all parameters.
 <code><![CDATA[
@@ -292,6 +312,8 @@ RequestContent content = RequestContent.Create(new
     id = "<id>",
 });
 Response response = client.OneModelBodyOneContentType(content);
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call OneModelBodyOneContentType.
 <code><![CDATA[
@@ -311,6 +333,8 @@ RequestContent content = RequestContent.Create(new
     id = "<id>",
 });
 Response response = client.OneModelBodyOneContentType(content);
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call OneModelBodyOneContentType with all parameters.
 <code><![CDATA[

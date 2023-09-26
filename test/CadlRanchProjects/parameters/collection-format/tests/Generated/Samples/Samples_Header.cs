@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Identity;
@@ -22,6 +23,8 @@ namespace Parameters.CollectionFormat.Samples
             Header client = new CollectionFormatClient().GetHeaderClient("1.0.0");
 
             Response response = client.Csv(new string[] { "<colors>" });
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -31,6 +34,8 @@ namespace Parameters.CollectionFormat.Samples
             Header client = new CollectionFormatClient().GetHeaderClient("1.0.0");
 
             Response response = await client.CsvAsync(new string[] { "<colors>" });
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -40,6 +45,8 @@ namespace Parameters.CollectionFormat.Samples
             Header client = new CollectionFormatClient().GetHeaderClient("1.0.0");
 
             Response response = client.Csv(new string[] { "<colors>" });
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -49,6 +56,8 @@ namespace Parameters.CollectionFormat.Samples
             Header client = new CollectionFormatClient().GetHeaderClient("1.0.0");
 
             Response response = await client.CsvAsync(new string[] { "<colors>" });
+
+            Console.WriteLine(response.Status);
         }
     }
 }

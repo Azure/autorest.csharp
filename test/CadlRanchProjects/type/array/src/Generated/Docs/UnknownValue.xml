@@ -38,6 +38,9 @@ This sample shows how to call GetUnknownValueAsync and parse the result.
 UnknownValue client = new ArrayClient().GetUnknownValueClient("1.0.0");
 
 Response response = await client.GetUnknownValueAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result[0].ToString());
 ]]></code>
 This sample shows how to call GetUnknownValueAsync.
 <code><![CDATA[
@@ -50,6 +53,9 @@ This sample shows how to call GetUnknownValueAsync with all parameters and parse
 UnknownValue client = new ArrayClient().GetUnknownValueClient("1.0.0");
 
 Response response = await client.GetUnknownValueAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result[0].ToString());
 ]]></code>
 This sample shows how to call GetUnknownValueAsync with all parameters.
 <code><![CDATA[
@@ -65,6 +71,9 @@ This sample shows how to call GetUnknownValue and parse the result.
 UnknownValue client = new ArrayClient().GetUnknownValueClient("1.0.0");
 
 Response response = client.GetUnknownValue(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result[0].ToString());
 ]]></code>
 This sample shows how to call GetUnknownValue.
 <code><![CDATA[
@@ -77,6 +86,9 @@ This sample shows how to call GetUnknownValue with all parameters and parse the 
 UnknownValue client = new ArrayClient().GetUnknownValueClient("1.0.0");
 
 Response response = client.GetUnknownValue(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result[0].ToString());
 ]]></code>
 This sample shows how to call GetUnknownValue with all parameters.
 <code><![CDATA[
@@ -138,6 +150,8 @@ RequestContent content = RequestContent.Create(new object[]
     new object()
 });
 Response response = await client.PutAsync(content);
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutAsync.
 <code><![CDATA[
@@ -157,6 +171,8 @@ RequestContent content = RequestContent.Create(new object[]
     new object()
 });
 Response response = await client.PutAsync(content);
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutAsync with all parameters.
 <code><![CDATA[
@@ -179,6 +195,8 @@ RequestContent content = RequestContent.Create(new object[]
     new object()
 });
 Response response = client.Put(content);
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Put.
 <code><![CDATA[
@@ -198,6 +216,8 @@ RequestContent content = RequestContent.Create(new object[]
     new object()
 });
 Response response = client.Put(content);
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Put with all parameters.
 <code><![CDATA[

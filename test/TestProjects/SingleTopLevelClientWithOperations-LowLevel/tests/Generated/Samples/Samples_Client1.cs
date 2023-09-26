@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Identity;
@@ -23,6 +25,9 @@ namespace SingleTopLevelClientWithOperations_LowLevel.Samples
             Client1 client = new TopLevelClientWithOperationClient(credential).GetClient1Client();
 
             Response response = client.Operation(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -33,6 +38,9 @@ namespace SingleTopLevelClientWithOperations_LowLevel.Samples
             Client1 client = new TopLevelClientWithOperationClient(credential).GetClient1Client();
 
             Response response = await client.OperationAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -43,6 +51,9 @@ namespace SingleTopLevelClientWithOperations_LowLevel.Samples
             Client1 client = new TopLevelClientWithOperationClient(credential).GetClient1Client();
 
             Response response = client.Operation(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -53,6 +64,9 @@ namespace SingleTopLevelClientWithOperations_LowLevel.Samples
             Client1 client = new TopLevelClientWithOperationClient(credential).GetClient1Client();
 
             Response response = await client.OperationAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
     }
 }

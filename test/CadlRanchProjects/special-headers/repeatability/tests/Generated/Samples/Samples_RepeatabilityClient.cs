@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Identity;
@@ -22,6 +23,8 @@ namespace SpecialHeaders.Repeatability.Samples
             RepeatabilityClient client = new RepeatabilityClient();
 
             Response response = client.ImmediateSuccess();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -31,6 +34,8 @@ namespace SpecialHeaders.Repeatability.Samples
             RepeatabilityClient client = new RepeatabilityClient();
 
             Response response = await client.ImmediateSuccessAsync();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -40,6 +45,8 @@ namespace SpecialHeaders.Repeatability.Samples
             RepeatabilityClient client = new RepeatabilityClient();
 
             Response response = client.ImmediateSuccess();
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -49,6 +56,8 @@ namespace SpecialHeaders.Repeatability.Samples
             RepeatabilityClient client = new RepeatabilityClient();
 
             Response response = await client.ImmediateSuccessAsync();
+
+            Console.WriteLine(response.Status);
         }
     }
 }

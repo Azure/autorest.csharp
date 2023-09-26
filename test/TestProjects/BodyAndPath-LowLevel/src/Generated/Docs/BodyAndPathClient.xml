@@ -10,6 +10,8 @@ BodyAndPathClient client = new BodyAndPathClient(credential);
 
 RequestContent content = RequestContent.Create(new object());
 Response response = await client.CreateAsync("<itemName>", content);
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call CreateAsync with all parameters and request content.
 <code><![CDATA[
@@ -18,6 +20,8 @@ BodyAndPathClient client = new BodyAndPathClient(credential);
 
 RequestContent content = RequestContent.Create(new object());
 Response response = await client.CreateAsync("<itemName>", content);
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="Create(string,RequestContent,RequestContext)">
@@ -29,6 +33,8 @@ BodyAndPathClient client = new BodyAndPathClient(credential);
 
 RequestContent content = RequestContent.Create(new object());
 Response response = client.Create("<itemName>", content);
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Create with all parameters and request content.
 <code><![CDATA[
@@ -37,6 +43,8 @@ BodyAndPathClient client = new BodyAndPathClient(credential);
 
 RequestContent content = RequestContent.Create(new object());
 Response response = client.Create("<itemName>", content);
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="CreateStreamAsync(string,RequestContent,ContentType,IEnumerable{string},RequestContext)">
@@ -48,6 +56,8 @@ BodyAndPathClient client = new BodyAndPathClient(credential);
 
 RequestContent content = RequestContent.Create(File.OpenRead("<filePath>"));
 Response response = await client.CreateStreamAsync("<itemNameStream>", content, new ContentType("application/json"));
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call CreateStreamAsync with all parameters and request content.
 <code><![CDATA[
@@ -56,6 +66,8 @@ BodyAndPathClient client = new BodyAndPathClient(credential);
 
 RequestContent content = RequestContent.Create(File.OpenRead("<filePath>"));
 Response response = await client.CreateStreamAsync("<itemNameStream>", content, new ContentType("application/json"), new string[] { "<excluded>" });
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="CreateStream(string,RequestContent,ContentType,IEnumerable{string},RequestContext)">
@@ -67,6 +79,8 @@ BodyAndPathClient client = new BodyAndPathClient(credential);
 
 RequestContent content = RequestContent.Create(File.OpenRead("<filePath>"));
 Response response = client.CreateStream("<itemNameStream>", content, new ContentType("application/json"));
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call CreateStream with all parameters and request content.
 <code><![CDATA[
@@ -75,6 +89,8 @@ BodyAndPathClient client = new BodyAndPathClient(credential);
 
 RequestContent content = RequestContent.Create(File.OpenRead("<filePath>"));
 Response response = client.CreateStream("<itemNameStream>", content, new ContentType("application/json"), new string[] { "<excluded>" });
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="CreateEnumAsync(string,string,RequestContent,RequestContext)">
@@ -86,6 +102,8 @@ BodyAndPathClient client = new BodyAndPathClient(credential);
 
 RequestContent content = RequestContent.Create(new object());
 Response response = await client.CreateEnumAsync("current", "latest", content);
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call CreateEnumAsync with all parameters and request content.
 <code><![CDATA[
@@ -94,6 +112,8 @@ BodyAndPathClient client = new BodyAndPathClient(credential);
 
 RequestContent content = RequestContent.Create(new object());
 Response response = await client.CreateEnumAsync("current", "latest", content);
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="CreateEnum(string,string,RequestContent,RequestContext)">
@@ -105,6 +125,8 @@ BodyAndPathClient client = new BodyAndPathClient(credential);
 
 RequestContent content = RequestContent.Create(new object());
 Response response = client.CreateEnum("current", "latest", content);
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call CreateEnum with all parameters and request content.
 <code><![CDATA[
@@ -113,6 +135,8 @@ BodyAndPathClient client = new BodyAndPathClient(credential);
 
 RequestContent content = RequestContent.Create(new object());
 Response response = client.CreateEnum("current", "latest", content);
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="GetBodyAndPathsAsync(RequestContext)">
@@ -123,6 +147,9 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 BodyAndPathClient client = new BodyAndPathClient(credential);
 
 Response response = await client.GetBodyAndPathsAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result[0].ToString());
 ]]></code>
 This sample shows how to call GetBodyAndPathsAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -130,6 +157,9 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 BodyAndPathClient client = new BodyAndPathClient(credential);
 
 Response response = await client.GetBodyAndPathsAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result[0].ToString());
 ]]></code></example>
     </member>
     <member name="GetBodyAndPaths(RequestContext)">
@@ -140,6 +170,9 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 BodyAndPathClient client = new BodyAndPathClient(credential);
 
 Response response = client.GetBodyAndPaths(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result[0].ToString());
 ]]></code>
 This sample shows how to call GetBodyAndPaths with all parameters and parse the result.
 <code><![CDATA[
@@ -147,6 +180,9 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 BodyAndPathClient client = new BodyAndPathClient(credential);
 
 Response response = client.GetBodyAndPaths(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result[0].ToString());
 ]]></code></example>
     </member>
     <member name="GetItemsAsync(RequestContext)">
@@ -157,6 +193,9 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 BodyAndPathClient client = new BodyAndPathClient(credential);
 
 Response response = await client.GetItemsAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result[0].ToString());
 ]]></code>
 This sample shows how to call GetItemsAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -164,6 +203,9 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 BodyAndPathClient client = new BodyAndPathClient(credential);
 
 Response response = await client.GetItemsAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result[0].ToString());
 ]]></code></example>
     </member>
     <member name="GetItems(RequestContext)">
@@ -174,6 +216,9 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 BodyAndPathClient client = new BodyAndPathClient(credential);
 
 Response response = client.GetItems(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result[0].ToString());
 ]]></code>
 This sample shows how to call GetItems with all parameters and parse the result.
 <code><![CDATA[
@@ -181,6 +226,9 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 BodyAndPathClient client = new BodyAndPathClient(credential);
 
 Response response = client.GetItems(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result[0].ToString());
 ]]></code></example>
     </member>
     <member name="UpdateAsync(string,string,string,string,RequestContent,string,RequestContext)">
@@ -192,6 +240,8 @@ BodyAndPathClient client = new BodyAndPathClient(credential);
 
 RequestContent content = RequestContent.Create(new object());
 Response response = await client.UpdateAsync("<item3>", "<item2>", "value", "<item4>", content);
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call UpdateAsync with all parameters and request content.
 <code><![CDATA[
@@ -203,6 +253,8 @@ RequestContent content = RequestContent.Create(new Dictionary<string, object>
     ["invalid-int-name"] = 1234
 });
 Response response = await client.UpdateAsync("<item3>", "<item2>", "value", "<item4>", content, "<item5>");
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="Update(string,string,string,string,RequestContent,string,RequestContext)">
@@ -214,6 +266,8 @@ BodyAndPathClient client = new BodyAndPathClient(credential);
 
 RequestContent content = RequestContent.Create(new object());
 Response response = client.Update("<item3>", "<item2>", "value", "<item4>", content);
+
+Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Update with all parameters and request content.
 <code><![CDATA[
@@ -225,6 +279,8 @@ RequestContent content = RequestContent.Create(new Dictionary<string, object>
     ["invalid-int-name"] = 1234
 });
 Response response = client.Update("<item3>", "<item2>", "value", "<item4>", content, "<item5>");
+
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
   </members>

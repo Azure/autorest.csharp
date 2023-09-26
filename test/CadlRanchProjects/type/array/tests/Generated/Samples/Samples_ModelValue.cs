@@ -5,7 +5,9 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -25,6 +27,9 @@ namespace _Type._Array.Samples
             ModelValue client = new ArrayClient().GetModelValueClient("1.0.0");
 
             Response response = client.GetModelValue(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result[0].GetProperty("property").ToString());
         }
 
         [Test]
@@ -34,6 +39,9 @@ namespace _Type._Array.Samples
             ModelValue client = new ArrayClient().GetModelValueClient("1.0.0");
 
             Response response = await client.GetModelValueAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result[0].GetProperty("property").ToString());
         }
 
         [Test]
@@ -61,6 +69,10 @@ namespace _Type._Array.Samples
             ModelValue client = new ArrayClient().GetModelValueClient("1.0.0");
 
             Response response = client.GetModelValue(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result[0].GetProperty("property").ToString());
+            Console.WriteLine(result[0].GetProperty("children")[0].GetProperty("property").ToString());
         }
 
         [Test]
@@ -70,6 +82,10 @@ namespace _Type._Array.Samples
             ModelValue client = new ArrayClient().GetModelValueClient("1.0.0");
 
             Response response = await client.GetModelValueAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result[0].GetProperty("property").ToString());
+            Console.WriteLine(result[0].GetProperty("children")[0].GetProperty("property").ToString());
         }
 
         [Test]
@@ -104,6 +120,8 @@ property = "<property>",
 }
             });
             Response response = client.Put(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -120,6 +138,8 @@ property = "<property>",
 }
             });
             Response response = await client.PutAsync(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -164,6 +184,8 @@ null
 }
             });
             Response response = client.Put(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -184,6 +206,8 @@ null
 }
             });
             Response response = await client.PutAsync(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]

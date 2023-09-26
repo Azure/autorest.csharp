@@ -9,6 +9,9 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 ClientAndOperationGroupClient client = new ClientAndOperationGroupClient(endpoint);
 
 Response response = await client.ZeroAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call ZeroAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -16,6 +19,9 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 ClientAndOperationGroupClient client = new ClientAndOperationGroupClient(endpoint);
 
 Response response = await client.ZeroAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
     <member name="Zero(RequestContext)">
@@ -26,6 +32,9 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 ClientAndOperationGroupClient client = new ClientAndOperationGroupClient(endpoint);
 
 Response response = client.Zero(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call Zero with all parameters and parse the result.
 <code><![CDATA[
@@ -33,6 +42,9 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 ClientAndOperationGroupClient client = new ClientAndOperationGroupClient(endpoint);
 
 Response response = client.Zero(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
     <member name="OneAsync(RequestContext)">
@@ -43,6 +55,9 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 ClientAndOperationGroupClient client = new ClientAndOperationGroupClient(endpoint);
 
 Response response = await client.OneAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call OneAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -50,6 +65,9 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 ClientAndOperationGroupClient client = new ClientAndOperationGroupClient(endpoint);
 
 Response response = await client.OneAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
     <member name="One(RequestContext)">
@@ -60,6 +78,9 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 ClientAndOperationGroupClient client = new ClientAndOperationGroupClient(endpoint);
 
 Response response = client.One(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call One with all parameters and parse the result.
 <code><![CDATA[
@@ -67,6 +88,9 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 ClientAndOperationGroupClient client = new ClientAndOperationGroupClient(endpoint);
 
 Response response = client.One(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
   </members>

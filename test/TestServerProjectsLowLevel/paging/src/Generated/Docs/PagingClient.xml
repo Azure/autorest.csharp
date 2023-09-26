@@ -10,6 +10,8 @@ PagingClient client = new PagingClient(credential);
 
 await foreach (BinaryData item in client.GetNoItemNamePagesAsync(null))
 {
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result[0].ToString());
 }
 ]]></code>
 This sample shows how to call GetNoItemNamePagesAsync with all parameters and parse the result.
@@ -19,6 +21,9 @@ PagingClient client = new PagingClient(credential);
 
 await foreach (BinaryData item in client.GetNoItemNamePagesAsync(null))
 {
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result[0].GetProperty("properties").GetProperty("id").ToString());
+    Console.WriteLine(result[0].GetProperty("properties").GetProperty("name").ToString());
 }
 ]]></code></example>
     </member>
@@ -31,6 +36,8 @@ PagingClient client = new PagingClient(credential);
 
 foreach (BinaryData item in client.GetNoItemNamePages(null))
 {
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result[0].ToString());
 }
 ]]></code>
 This sample shows how to call GetNoItemNamePages with all parameters and parse the result.
@@ -40,6 +47,9 @@ PagingClient client = new PagingClient(credential);
 
 foreach (BinaryData item in client.GetNoItemNamePages(null))
 {
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result[0].GetProperty("properties").GetProperty("id").ToString());
+    Console.WriteLine(result[0].GetProperty("properties").GetProperty("name").ToString());
 }
 ]]></code></example>
     </member>
@@ -52,6 +62,8 @@ PagingClient client = new PagingClient(credential);
 
 await foreach (BinaryData item in client.GetEmptyNextLinkNamePagesAsync(null))
 {
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result[0].ToString());
 }
 ]]></code>
 This sample shows how to call GetEmptyNextLinkNamePagesAsync with all parameters and parse the result.
@@ -61,6 +73,9 @@ PagingClient client = new PagingClient(credential);
 
 await foreach (BinaryData item in client.GetEmptyNextLinkNamePagesAsync(null))
 {
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result[0].GetProperty("properties").GetProperty("id").ToString());
+    Console.WriteLine(result[0].GetProperty("properties").GetProperty("name").ToString());
 }
 ]]></code></example>
     </member>
@@ -73,6 +88,8 @@ PagingClient client = new PagingClient(credential);
 
 foreach (BinaryData item in client.GetEmptyNextLinkNamePages(null))
 {
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result[0].ToString());
 }
 ]]></code>
 This sample shows how to call GetEmptyNextLinkNamePages with all parameters and parse the result.
@@ -82,6 +99,9 @@ PagingClient client = new PagingClient(credential);
 
 foreach (BinaryData item in client.GetEmptyNextLinkNamePages(null))
 {
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result[0].GetProperty("properties").GetProperty("id").ToString());
+    Console.WriteLine(result[0].GetProperty("properties").GetProperty("name").ToString());
 }
 ]]></code></example>
     </member>
@@ -94,6 +114,8 @@ PagingClient client = new PagingClient(credential);
 
 await foreach (BinaryData item in client.GetNullNextLinkNamePagesAsync(null))
 {
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result[0].ToString());
 }
 ]]></code>
 This sample shows how to call GetNullNextLinkNamePagesAsync with all parameters and parse the result.
@@ -103,6 +125,9 @@ PagingClient client = new PagingClient(credential);
 
 await foreach (BinaryData item in client.GetNullNextLinkNamePagesAsync(null))
 {
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result[0].GetProperty("properties").GetProperty("id").ToString());
+    Console.WriteLine(result[0].GetProperty("properties").GetProperty("name").ToString());
 }
 ]]></code></example>
     </member>
@@ -115,6 +140,8 @@ PagingClient client = new PagingClient(credential);
 
 foreach (BinaryData item in client.GetNullNextLinkNamePages(null))
 {
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result[0].ToString());
 }
 ]]></code>
 This sample shows how to call GetNullNextLinkNamePages with all parameters and parse the result.
@@ -124,6 +151,9 @@ PagingClient client = new PagingClient(credential);
 
 foreach (BinaryData item in client.GetNullNextLinkNamePages(null))
 {
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result[0].GetProperty("properties").GetProperty("id").ToString());
+    Console.WriteLine(result[0].GetProperty("properties").GetProperty("name").ToString());
 }
 ]]></code></example>
     </member>
@@ -136,6 +166,8 @@ PagingClient client = new PagingClient(credential);
 
 await foreach (BinaryData item in client.GetSinglePagesAsync(null))
 {
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result[0].ToString());
 }
 ]]></code>
 This sample shows how to call GetSinglePagesAsync with all parameters and parse the result.
@@ -145,6 +177,9 @@ PagingClient client = new PagingClient(credential);
 
 await foreach (BinaryData item in client.GetSinglePagesAsync(null))
 {
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result[0].GetProperty("properties").GetProperty("id").ToString());
+    Console.WriteLine(result[0].GetProperty("properties").GetProperty("name").ToString());
 }
 ]]></code></example>
     </member>
@@ -157,6 +192,8 @@ PagingClient client = new PagingClient(credential);
 
 foreach (BinaryData item in client.GetSinglePages(null))
 {
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result[0].ToString());
 }
 ]]></code>
 This sample shows how to call GetSinglePages with all parameters and parse the result.
@@ -166,6 +203,9 @@ PagingClient client = new PagingClient(credential);
 
 foreach (BinaryData item in client.GetSinglePages(null))
 {
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result[0].GetProperty("properties").GetProperty("id").ToString());
+    Console.WriteLine(result[0].GetProperty("properties").GetProperty("name").ToString());
 }
 ]]></code></example>
     </member>
@@ -179,6 +219,8 @@ PagingClient client = new PagingClient(credential);
 RequestContent content = RequestContent.Create(new object());
 await foreach (BinaryData item in client.GetSinglePagesWithBodyParamsAsync(content))
 {
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result[0].ToString());
 }
 ]]></code>
 This sample shows how to call GetSinglePagesWithBodyParamsAsync with all request content and parse the result.
@@ -192,6 +234,9 @@ RequestContent content = RequestContent.Create(new
 });
 await foreach (BinaryData item in client.GetSinglePagesWithBodyParamsAsync(content))
 {
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result[0].GetProperty("properties").GetProperty("id").ToString());
+    Console.WriteLine(result[0].GetProperty("properties").GetProperty("name").ToString());
 }
 ]]></code></example>
     </member>
@@ -205,6 +250,8 @@ PagingClient client = new PagingClient(credential);
 RequestContent content = RequestContent.Create(new object());
 foreach (BinaryData item in client.GetSinglePagesWithBodyParams(content))
 {
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result[0].ToString());
 }
 ]]></code>
 This sample shows how to call GetSinglePagesWithBodyParams with all request content and parse the result.
@@ -218,6 +265,9 @@ RequestContent content = RequestContent.Create(new
 });
 foreach (BinaryData item in client.GetSinglePagesWithBodyParams(content))
 {
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result[0].GetProperty("properties").GetProperty("id").ToString());
+    Console.WriteLine(result[0].GetProperty("properties").GetProperty("name").ToString());
 }
 ]]></code></example>
     </member>
@@ -230,6 +280,8 @@ PagingClient client = new PagingClient(credential);
 
 await foreach (BinaryData item in client.FirstResponseEmptyAsync(null))
 {
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result[0].ToString());
 }
 ]]></code>
 This sample shows how to call FirstResponseEmptyAsync with all parameters and parse the result.
@@ -239,6 +291,9 @@ PagingClient client = new PagingClient(credential);
 
 await foreach (BinaryData item in client.FirstResponseEmptyAsync(null))
 {
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result[0].GetProperty("properties").GetProperty("id").ToString());
+    Console.WriteLine(result[0].GetProperty("properties").GetProperty("name").ToString());
 }
 ]]></code></example>
     </member>
@@ -251,6 +306,8 @@ PagingClient client = new PagingClient(credential);
 
 foreach (BinaryData item in client.FirstResponseEmpty(null))
 {
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result[0].ToString());
 }
 ]]></code>
 This sample shows how to call FirstResponseEmpty with all parameters and parse the result.
@@ -260,6 +317,9 @@ PagingClient client = new PagingClient(credential);
 
 foreach (BinaryData item in client.FirstResponseEmpty(null))
 {
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result[0].GetProperty("properties").GetProperty("id").ToString());
+    Console.WriteLine(result[0].GetProperty("properties").GetProperty("name").ToString());
 }
 ]]></code></example>
     </member>
@@ -272,6 +332,8 @@ PagingClient client = new PagingClient(credential);
 
 await foreach (BinaryData item in client.GetMultiplePagesAsync(null, null, null))
 {
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result[0].ToString());
 }
 ]]></code>
 This sample shows how to call GetMultiplePagesAsync with all parameters and parse the result.
@@ -281,6 +343,9 @@ PagingClient client = new PagingClient(credential);
 
 await foreach (BinaryData item in client.GetMultiplePagesAsync(1234, 1234, null))
 {
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result[0].GetProperty("properties").GetProperty("id").ToString());
+    Console.WriteLine(result[0].GetProperty("properties").GetProperty("name").ToString());
 }
 ]]></code></example>
     </member>
@@ -293,6 +358,8 @@ PagingClient client = new PagingClient(credential);
 
 foreach (BinaryData item in client.GetMultiplePages(null, null, null))
 {
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result[0].ToString());
 }
 ]]></code>
 This sample shows how to call GetMultiplePages with all parameters and parse the result.
@@ -302,6 +369,9 @@ PagingClient client = new PagingClient(credential);
 
 foreach (BinaryData item in client.GetMultiplePages(1234, 1234, null))
 {
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result[0].GetProperty("properties").GetProperty("id").ToString());
+    Console.WriteLine(result[0].GetProperty("properties").GetProperty("name").ToString());
 }
 ]]></code></example>
     </member>
@@ -314,6 +384,8 @@ PagingClient client = new PagingClient(credential);
 
 await foreach (BinaryData item in client.GetWithQueryParamsAsync(1234, null))
 {
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result[0].ToString());
 }
 ]]></code>
 This sample shows how to call GetWithQueryParamsAsync with all parameters and parse the result.
@@ -323,6 +395,9 @@ PagingClient client = new PagingClient(credential);
 
 await foreach (BinaryData item in client.GetWithQueryParamsAsync(1234, null))
 {
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result[0].GetProperty("properties").GetProperty("id").ToString());
+    Console.WriteLine(result[0].GetProperty("properties").GetProperty("name").ToString());
 }
 ]]></code></example>
     </member>
@@ -335,6 +410,8 @@ PagingClient client = new PagingClient(credential);
 
 foreach (BinaryData item in client.GetWithQueryParams(1234, null))
 {
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result[0].ToString());
 }
 ]]></code>
 This sample shows how to call GetWithQueryParams with all parameters and parse the result.
@@ -344,6 +421,9 @@ PagingClient client = new PagingClient(credential);
 
 foreach (BinaryData item in client.GetWithQueryParams(1234, null))
 {
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result[0].GetProperty("properties").GetProperty("id").ToString());
+    Console.WriteLine(result[0].GetProperty("properties").GetProperty("name").ToString());
 }
 ]]></code></example>
     </member>
@@ -356,6 +436,8 @@ PagingClient client = new PagingClient(credential);
 
 await foreach (BinaryData item in client.DuplicateParamsAsync(null, null))
 {
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result[0].ToString());
 }
 ]]></code>
 This sample shows how to call DuplicateParamsAsync with all parameters and parse the result.
@@ -365,6 +447,9 @@ PagingClient client = new PagingClient(credential);
 
 await foreach (BinaryData item in client.DuplicateParamsAsync("<filter>", null))
 {
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result[0].GetProperty("properties").GetProperty("id").ToString());
+    Console.WriteLine(result[0].GetProperty("properties").GetProperty("name").ToString());
 }
 ]]></code></example>
     </member>
@@ -377,6 +462,8 @@ PagingClient client = new PagingClient(credential);
 
 foreach (BinaryData item in client.DuplicateParams(null, null))
 {
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result[0].ToString());
 }
 ]]></code>
 This sample shows how to call DuplicateParams with all parameters and parse the result.
@@ -386,6 +473,9 @@ PagingClient client = new PagingClient(credential);
 
 foreach (BinaryData item in client.DuplicateParams("<filter>", null))
 {
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result[0].GetProperty("properties").GetProperty("id").ToString());
+    Console.WriteLine(result[0].GetProperty("properties").GetProperty("name").ToString());
 }
 ]]></code></example>
     </member>
@@ -398,6 +488,8 @@ PagingClient client = new PagingClient(credential);
 
 await foreach (BinaryData item in client.PageWithMaxPageSizeAsync(null, null))
 {
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result[0].ToString());
 }
 ]]></code>
 This sample shows how to call PageWithMaxPageSizeAsync with all parameters and parse the result.
@@ -407,6 +499,9 @@ PagingClient client = new PagingClient(credential);
 
 await foreach (BinaryData item in client.PageWithMaxPageSizeAsync("5", null))
 {
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result[0].GetProperty("properties").GetProperty("id").ToString());
+    Console.WriteLine(result[0].GetProperty("properties").GetProperty("name").ToString());
 }
 ]]></code></example>
     </member>
@@ -419,6 +514,8 @@ PagingClient client = new PagingClient(credential);
 
 foreach (BinaryData item in client.PageWithMaxPageSize(null, null))
 {
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result[0].ToString());
 }
 ]]></code>
 This sample shows how to call PageWithMaxPageSize with all parameters and parse the result.
@@ -428,6 +525,9 @@ PagingClient client = new PagingClient(credential);
 
 foreach (BinaryData item in client.PageWithMaxPageSize("5", null))
 {
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result[0].GetProperty("properties").GetProperty("id").ToString());
+    Console.WriteLine(result[0].GetProperty("properties").GetProperty("name").ToString());
 }
 ]]></code></example>
     </member>
@@ -440,6 +540,8 @@ PagingClient client = new PagingClient(credential);
 
 await foreach (BinaryData item in client.NextOperationWithQueryParamsAsync(null))
 {
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result[0].ToString());
 }
 ]]></code>
 This sample shows how to call NextOperationWithQueryParamsAsync with all parameters and parse the result.
@@ -449,6 +551,9 @@ PagingClient client = new PagingClient(credential);
 
 await foreach (BinaryData item in client.NextOperationWithQueryParamsAsync(null))
 {
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result[0].GetProperty("properties").GetProperty("id").ToString());
+    Console.WriteLine(result[0].GetProperty("properties").GetProperty("name").ToString());
 }
 ]]></code></example>
     </member>
@@ -461,6 +566,8 @@ PagingClient client = new PagingClient(credential);
 
 foreach (BinaryData item in client.NextOperationWithQueryParams(null))
 {
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result[0].ToString());
 }
 ]]></code>
 This sample shows how to call NextOperationWithQueryParams with all parameters and parse the result.
@@ -470,6 +577,9 @@ PagingClient client = new PagingClient(credential);
 
 foreach (BinaryData item in client.NextOperationWithQueryParams(null))
 {
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result[0].GetProperty("properties").GetProperty("id").ToString());
+    Console.WriteLine(result[0].GetProperty("properties").GetProperty("name").ToString());
 }
 ]]></code></example>
     </member>
@@ -482,6 +592,8 @@ PagingClient client = new PagingClient(credential);
 
 await foreach (BinaryData item in client.GetOdataMultiplePagesAsync(null, null, null))
 {
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result[0].ToString());
 }
 ]]></code>
 This sample shows how to call GetOdataMultiplePagesAsync with all parameters and parse the result.
@@ -491,6 +603,9 @@ PagingClient client = new PagingClient(credential);
 
 await foreach (BinaryData item in client.GetOdataMultiplePagesAsync(1234, 1234, null))
 {
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result[0].GetProperty("properties").GetProperty("id").ToString());
+    Console.WriteLine(result[0].GetProperty("properties").GetProperty("name").ToString());
 }
 ]]></code></example>
     </member>
@@ -503,6 +618,8 @@ PagingClient client = new PagingClient(credential);
 
 foreach (BinaryData item in client.GetOdataMultiplePages(null, null, null))
 {
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result[0].ToString());
 }
 ]]></code>
 This sample shows how to call GetOdataMultiplePages with all parameters and parse the result.
@@ -512,6 +629,9 @@ PagingClient client = new PagingClient(credential);
 
 foreach (BinaryData item in client.GetOdataMultiplePages(1234, 1234, null))
 {
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result[0].GetProperty("properties").GetProperty("id").ToString());
+    Console.WriteLine(result[0].GetProperty("properties").GetProperty("name").ToString());
 }
 ]]></code></example>
     </member>
@@ -524,6 +644,8 @@ PagingClient client = new PagingClient(credential);
 
 await foreach (BinaryData item in client.GetMultiplePagesWithOffsetAsync(1234, null, null, null))
 {
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result[0].ToString());
 }
 ]]></code>
 This sample shows how to call GetMultiplePagesWithOffsetAsync with all parameters and parse the result.
@@ -533,6 +655,9 @@ PagingClient client = new PagingClient(credential);
 
 await foreach (BinaryData item in client.GetMultiplePagesWithOffsetAsync(1234, 1234, 1234, null))
 {
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result[0].GetProperty("properties").GetProperty("id").ToString());
+    Console.WriteLine(result[0].GetProperty("properties").GetProperty("name").ToString());
 }
 ]]></code></example>
     </member>
@@ -545,6 +670,8 @@ PagingClient client = new PagingClient(credential);
 
 foreach (BinaryData item in client.GetMultiplePagesWithOffset(1234, null, null, null))
 {
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result[0].ToString());
 }
 ]]></code>
 This sample shows how to call GetMultiplePagesWithOffset with all parameters and parse the result.
@@ -554,6 +681,9 @@ PagingClient client = new PagingClient(credential);
 
 foreach (BinaryData item in client.GetMultiplePagesWithOffset(1234, 1234, 1234, null))
 {
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result[0].GetProperty("properties").GetProperty("id").ToString());
+    Console.WriteLine(result[0].GetProperty("properties").GetProperty("name").ToString());
 }
 ]]></code></example>
     </member>
@@ -566,6 +696,8 @@ PagingClient client = new PagingClient(credential);
 
 await foreach (BinaryData item in client.GetMultiplePagesRetryFirstAsync(null))
 {
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result[0].ToString());
 }
 ]]></code>
 This sample shows how to call GetMultiplePagesRetryFirstAsync with all parameters and parse the result.
@@ -575,6 +707,9 @@ PagingClient client = new PagingClient(credential);
 
 await foreach (BinaryData item in client.GetMultiplePagesRetryFirstAsync(null))
 {
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result[0].GetProperty("properties").GetProperty("id").ToString());
+    Console.WriteLine(result[0].GetProperty("properties").GetProperty("name").ToString());
 }
 ]]></code></example>
     </member>
@@ -587,6 +722,8 @@ PagingClient client = new PagingClient(credential);
 
 foreach (BinaryData item in client.GetMultiplePagesRetryFirst(null))
 {
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result[0].ToString());
 }
 ]]></code>
 This sample shows how to call GetMultiplePagesRetryFirst with all parameters and parse the result.
@@ -596,6 +733,9 @@ PagingClient client = new PagingClient(credential);
 
 foreach (BinaryData item in client.GetMultiplePagesRetryFirst(null))
 {
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result[0].GetProperty("properties").GetProperty("id").ToString());
+    Console.WriteLine(result[0].GetProperty("properties").GetProperty("name").ToString());
 }
 ]]></code></example>
     </member>
@@ -608,6 +748,8 @@ PagingClient client = new PagingClient(credential);
 
 await foreach (BinaryData item in client.GetMultiplePagesRetrySecondAsync(null))
 {
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result[0].ToString());
 }
 ]]></code>
 This sample shows how to call GetMultiplePagesRetrySecondAsync with all parameters and parse the result.
@@ -617,6 +759,9 @@ PagingClient client = new PagingClient(credential);
 
 await foreach (BinaryData item in client.GetMultiplePagesRetrySecondAsync(null))
 {
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result[0].GetProperty("properties").GetProperty("id").ToString());
+    Console.WriteLine(result[0].GetProperty("properties").GetProperty("name").ToString());
 }
 ]]></code></example>
     </member>
@@ -629,6 +774,8 @@ PagingClient client = new PagingClient(credential);
 
 foreach (BinaryData item in client.GetMultiplePagesRetrySecond(null))
 {
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result[0].ToString());
 }
 ]]></code>
 This sample shows how to call GetMultiplePagesRetrySecond with all parameters and parse the result.
@@ -638,6 +785,9 @@ PagingClient client = new PagingClient(credential);
 
 foreach (BinaryData item in client.GetMultiplePagesRetrySecond(null))
 {
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result[0].GetProperty("properties").GetProperty("id").ToString());
+    Console.WriteLine(result[0].GetProperty("properties").GetProperty("name").ToString());
 }
 ]]></code></example>
     </member>
@@ -650,6 +800,8 @@ PagingClient client = new PagingClient(credential);
 
 await foreach (BinaryData item in client.GetSinglePagesFailureAsync(null))
 {
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result[0].ToString());
 }
 ]]></code>
 This sample shows how to call GetSinglePagesFailureAsync with all parameters and parse the result.
@@ -659,6 +811,9 @@ PagingClient client = new PagingClient(credential);
 
 await foreach (BinaryData item in client.GetSinglePagesFailureAsync(null))
 {
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result[0].GetProperty("properties").GetProperty("id").ToString());
+    Console.WriteLine(result[0].GetProperty("properties").GetProperty("name").ToString());
 }
 ]]></code></example>
     </member>
@@ -671,6 +826,8 @@ PagingClient client = new PagingClient(credential);
 
 foreach (BinaryData item in client.GetSinglePagesFailure(null))
 {
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result[0].ToString());
 }
 ]]></code>
 This sample shows how to call GetSinglePagesFailure with all parameters and parse the result.
@@ -680,6 +837,9 @@ PagingClient client = new PagingClient(credential);
 
 foreach (BinaryData item in client.GetSinglePagesFailure(null))
 {
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result[0].GetProperty("properties").GetProperty("id").ToString());
+    Console.WriteLine(result[0].GetProperty("properties").GetProperty("name").ToString());
 }
 ]]></code></example>
     </member>
@@ -692,6 +852,8 @@ PagingClient client = new PagingClient(credential);
 
 await foreach (BinaryData item in client.GetMultiplePagesFailureAsync(null))
 {
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result[0].ToString());
 }
 ]]></code>
 This sample shows how to call GetMultiplePagesFailureAsync with all parameters and parse the result.
@@ -701,6 +863,9 @@ PagingClient client = new PagingClient(credential);
 
 await foreach (BinaryData item in client.GetMultiplePagesFailureAsync(null))
 {
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result[0].GetProperty("properties").GetProperty("id").ToString());
+    Console.WriteLine(result[0].GetProperty("properties").GetProperty("name").ToString());
 }
 ]]></code></example>
     </member>
@@ -713,6 +878,8 @@ PagingClient client = new PagingClient(credential);
 
 foreach (BinaryData item in client.GetMultiplePagesFailure(null))
 {
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result[0].ToString());
 }
 ]]></code>
 This sample shows how to call GetMultiplePagesFailure with all parameters and parse the result.
@@ -722,6 +889,9 @@ PagingClient client = new PagingClient(credential);
 
 foreach (BinaryData item in client.GetMultiplePagesFailure(null))
 {
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result[0].GetProperty("properties").GetProperty("id").ToString());
+    Console.WriteLine(result[0].GetProperty("properties").GetProperty("name").ToString());
 }
 ]]></code></example>
     </member>
@@ -734,6 +904,8 @@ PagingClient client = new PagingClient(credential);
 
 await foreach (BinaryData item in client.GetMultiplePagesFailureUriAsync(null))
 {
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result[0].ToString());
 }
 ]]></code>
 This sample shows how to call GetMultiplePagesFailureUriAsync with all parameters and parse the result.
@@ -743,6 +915,9 @@ PagingClient client = new PagingClient(credential);
 
 await foreach (BinaryData item in client.GetMultiplePagesFailureUriAsync(null))
 {
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result[0].GetProperty("properties").GetProperty("id").ToString());
+    Console.WriteLine(result[0].GetProperty("properties").GetProperty("name").ToString());
 }
 ]]></code></example>
     </member>
@@ -755,6 +930,8 @@ PagingClient client = new PagingClient(credential);
 
 foreach (BinaryData item in client.GetMultiplePagesFailureUri(null))
 {
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result[0].ToString());
 }
 ]]></code>
 This sample shows how to call GetMultiplePagesFailureUri with all parameters and parse the result.
@@ -764,6 +941,9 @@ PagingClient client = new PagingClient(credential);
 
 foreach (BinaryData item in client.GetMultiplePagesFailureUri(null))
 {
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result[0].GetProperty("properties").GetProperty("id").ToString());
+    Console.WriteLine(result[0].GetProperty("properties").GetProperty("name").ToString());
 }
 ]]></code></example>
     </member>
@@ -776,6 +956,8 @@ PagingClient client = new PagingClient(credential);
 
 await foreach (BinaryData item in client.GetMultiplePagesFragmentNextLinkAsync("<tenant>", "<apiVersion>", null))
 {
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result[0].ToString());
 }
 ]]></code>
 This sample shows how to call GetMultiplePagesFragmentNextLinkAsync with all parameters and parse the result.
@@ -785,6 +967,9 @@ PagingClient client = new PagingClient(credential);
 
 await foreach (BinaryData item in client.GetMultiplePagesFragmentNextLinkAsync("<tenant>", "<apiVersion>", null))
 {
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result[0].GetProperty("properties").GetProperty("id").ToString());
+    Console.WriteLine(result[0].GetProperty("properties").GetProperty("name").ToString());
 }
 ]]></code></example>
     </member>
@@ -797,6 +982,8 @@ PagingClient client = new PagingClient(credential);
 
 foreach (BinaryData item in client.GetMultiplePagesFragmentNextLink("<tenant>", "<apiVersion>", null))
 {
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result[0].ToString());
 }
 ]]></code>
 This sample shows how to call GetMultiplePagesFragmentNextLink with all parameters and parse the result.
@@ -806,6 +993,9 @@ PagingClient client = new PagingClient(credential);
 
 foreach (BinaryData item in client.GetMultiplePagesFragmentNextLink("<tenant>", "<apiVersion>", null))
 {
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result[0].GetProperty("properties").GetProperty("id").ToString());
+    Console.WriteLine(result[0].GetProperty("properties").GetProperty("name").ToString());
 }
 ]]></code></example>
     </member>
@@ -818,6 +1008,8 @@ PagingClient client = new PagingClient(credential);
 
 await foreach (BinaryData item in client.GetMultiplePagesFragmentWithGroupingNextLinkAsync("<tenant>", "<apiVersion>", null))
 {
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result[0].ToString());
 }
 ]]></code>
 This sample shows how to call GetMultiplePagesFragmentWithGroupingNextLinkAsync with all parameters and parse the result.
@@ -827,6 +1019,9 @@ PagingClient client = new PagingClient(credential);
 
 await foreach (BinaryData item in client.GetMultiplePagesFragmentWithGroupingNextLinkAsync("<tenant>", "<apiVersion>", null))
 {
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result[0].GetProperty("properties").GetProperty("id").ToString());
+    Console.WriteLine(result[0].GetProperty("properties").GetProperty("name").ToString());
 }
 ]]></code></example>
     </member>
@@ -839,6 +1034,8 @@ PagingClient client = new PagingClient(credential);
 
 foreach (BinaryData item in client.GetMultiplePagesFragmentWithGroupingNextLink("<tenant>", "<apiVersion>", null))
 {
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result[0].ToString());
 }
 ]]></code>
 This sample shows how to call GetMultiplePagesFragmentWithGroupingNextLink with all parameters and parse the result.
@@ -848,6 +1045,9 @@ PagingClient client = new PagingClient(credential);
 
 foreach (BinaryData item in client.GetMultiplePagesFragmentWithGroupingNextLink("<tenant>", "<apiVersion>", null))
 {
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result[0].GetProperty("properties").GetProperty("id").ToString());
+    Console.WriteLine(result[0].GetProperty("properties").GetProperty("name").ToString());
 }
 ]]></code></example>
     </member>
@@ -860,6 +1060,8 @@ PagingClient client = new PagingClient(credential);
 
 await foreach (BinaryData item in client.AppendApiVersionAsync(null))
 {
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result[0].ToString());
 }
 ]]></code>
 This sample shows how to call AppendApiVersionAsync with all parameters and parse the result.
@@ -869,6 +1071,9 @@ PagingClient client = new PagingClient(credential);
 
 await foreach (BinaryData item in client.AppendApiVersionAsync(null))
 {
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result[0].GetProperty("properties").GetProperty("id").ToString());
+    Console.WriteLine(result[0].GetProperty("properties").GetProperty("name").ToString());
 }
 ]]></code></example>
     </member>
@@ -881,6 +1086,8 @@ PagingClient client = new PagingClient(credential);
 
 foreach (BinaryData item in client.AppendApiVersion(null))
 {
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result[0].ToString());
 }
 ]]></code>
 This sample shows how to call AppendApiVersion with all parameters and parse the result.
@@ -890,6 +1097,9 @@ PagingClient client = new PagingClient(credential);
 
 foreach (BinaryData item in client.AppendApiVersion(null))
 {
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result[0].GetProperty("properties").GetProperty("id").ToString());
+    Console.WriteLine(result[0].GetProperty("properties").GetProperty("name").ToString());
 }
 ]]></code></example>
     </member>
@@ -902,6 +1112,8 @@ PagingClient client = new PagingClient(credential);
 
 await foreach (BinaryData item in client.ReplaceApiVersionAsync(null))
 {
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result[0].ToString());
 }
 ]]></code>
 This sample shows how to call ReplaceApiVersionAsync with all parameters and parse the result.
@@ -911,6 +1123,9 @@ PagingClient client = new PagingClient(credential);
 
 await foreach (BinaryData item in client.ReplaceApiVersionAsync(null))
 {
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result[0].GetProperty("properties").GetProperty("id").ToString());
+    Console.WriteLine(result[0].GetProperty("properties").GetProperty("name").ToString());
 }
 ]]></code></example>
     </member>
@@ -923,6 +1138,8 @@ PagingClient client = new PagingClient(credential);
 
 foreach (BinaryData item in client.ReplaceApiVersion(null))
 {
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result[0].ToString());
 }
 ]]></code>
 This sample shows how to call ReplaceApiVersion with all parameters and parse the result.
@@ -932,6 +1149,9 @@ PagingClient client = new PagingClient(credential);
 
 foreach (BinaryData item in client.ReplaceApiVersion(null))
 {
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result[0].GetProperty("properties").GetProperty("id").ToString());
+    Console.WriteLine(result[0].GetProperty("properties").GetProperty("name").ToString());
 }
 ]]></code></example>
     </member>
@@ -944,6 +1164,8 @@ PagingClient client = new PagingClient(credential);
 
 await foreach (BinaryData item in client.NextFragmentAsync("<tenant>", "<nextLink>", "<apiVersion>", null))
 {
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result[0].ToString());
 }
 ]]></code>
 This sample shows how to call NextFragmentAsync with all parameters and parse the result.
@@ -953,6 +1175,9 @@ PagingClient client = new PagingClient(credential);
 
 await foreach (BinaryData item in client.NextFragmentAsync("<tenant>", "<nextLink>", "<apiVersion>", null))
 {
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result[0].GetProperty("properties").GetProperty("id").ToString());
+    Console.WriteLine(result[0].GetProperty("properties").GetProperty("name").ToString());
 }
 ]]></code></example>
     </member>
@@ -965,6 +1190,8 @@ PagingClient client = new PagingClient(credential);
 
 foreach (BinaryData item in client.NextFragment("<tenant>", "<nextLink>", "<apiVersion>", null))
 {
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result[0].ToString());
 }
 ]]></code>
 This sample shows how to call NextFragment with all parameters and parse the result.
@@ -974,6 +1201,9 @@ PagingClient client = new PagingClient(credential);
 
 foreach (BinaryData item in client.NextFragment("<tenant>", "<nextLink>", "<apiVersion>", null))
 {
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result[0].GetProperty("properties").GetProperty("id").ToString());
+    Console.WriteLine(result[0].GetProperty("properties").GetProperty("name").ToString());
 }
 ]]></code></example>
     </member>
@@ -986,6 +1216,8 @@ PagingClient client = new PagingClient(credential);
 
 await foreach (BinaryData item in client.NextFragmentWithGroupingAsync("<tenant>", "<nextLink>", "<apiVersion>", null))
 {
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result[0].ToString());
 }
 ]]></code>
 This sample shows how to call NextFragmentWithGroupingAsync with all parameters and parse the result.
@@ -995,6 +1227,9 @@ PagingClient client = new PagingClient(credential);
 
 await foreach (BinaryData item in client.NextFragmentWithGroupingAsync("<tenant>", "<nextLink>", "<apiVersion>", null))
 {
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result[0].GetProperty("properties").GetProperty("id").ToString());
+    Console.WriteLine(result[0].GetProperty("properties").GetProperty("name").ToString());
 }
 ]]></code></example>
     </member>
@@ -1007,6 +1242,8 @@ PagingClient client = new PagingClient(credential);
 
 foreach (BinaryData item in client.NextFragmentWithGrouping("<tenant>", "<nextLink>", "<apiVersion>", null))
 {
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result[0].ToString());
 }
 ]]></code>
 This sample shows how to call NextFragmentWithGrouping with all parameters and parse the result.
@@ -1016,6 +1253,9 @@ PagingClient client = new PagingClient(credential);
 
 foreach (BinaryData item in client.NextFragmentWithGrouping("<tenant>", "<nextLink>", "<apiVersion>", null))
 {
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result[0].GetProperty("properties").GetProperty("id").ToString());
+    Console.WriteLine(result[0].GetProperty("properties").GetProperty("name").ToString());
 }
 ]]></code></example>
     </member>
@@ -1028,6 +1268,8 @@ PagingClient client = new PagingClient(credential);
 
 await foreach (BinaryData item in client.GetPagingModelWithItemNameWithXMSClientNameAsync(null))
 {
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result[0].ToString());
 }
 ]]></code>
 This sample shows how to call GetPagingModelWithItemNameWithXMSClientNameAsync with all parameters and parse the result.
@@ -1037,6 +1279,9 @@ PagingClient client = new PagingClient(credential);
 
 await foreach (BinaryData item in client.GetPagingModelWithItemNameWithXMSClientNameAsync(null))
 {
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result[0].GetProperty("properties").GetProperty("id").ToString());
+    Console.WriteLine(result[0].GetProperty("properties").GetProperty("name").ToString());
 }
 ]]></code></example>
     </member>
@@ -1049,6 +1294,8 @@ PagingClient client = new PagingClient(credential);
 
 foreach (BinaryData item in client.GetPagingModelWithItemNameWithXMSClientName(null))
 {
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result[0].ToString());
 }
 ]]></code>
 This sample shows how to call GetPagingModelWithItemNameWithXMSClientName with all parameters and parse the result.
@@ -1058,6 +1305,9 @@ PagingClient client = new PagingClient(credential);
 
 foreach (BinaryData item in client.GetPagingModelWithItemNameWithXMSClientName(null))
 {
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result[0].GetProperty("properties").GetProperty("id").ToString());
+    Console.WriteLine(result[0].GetProperty("properties").GetProperty("name").ToString());
 }
 ]]></code></example>
     </member>
@@ -1069,8 +1319,11 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PagingClient client = new PagingClient(credential);
 
 Operation<AsyncPageable<BinaryData>> operation = await client.GetMultiplePagesLROAsync(WaitUntil.Completed, null, null, null);
+AsyncPageable<BinaryData> responseData = operation.Value;
 await foreach (BinaryData item in operation.Value)
 {
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result[0].ToString());
 }
 ]]></code>
 This sample shows how to call GetMultiplePagesLROAsync with all parameters and parse the result.
@@ -1079,8 +1332,12 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PagingClient client = new PagingClient(credential);
 
 Operation<AsyncPageable<BinaryData>> operation = await client.GetMultiplePagesLROAsync(WaitUntil.Completed, 1234, 1234, null);
+AsyncPageable<BinaryData> responseData = operation.Value;
 await foreach (BinaryData item in operation.Value)
 {
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result[0].GetProperty("properties").GetProperty("id").ToString());
+    Console.WriteLine(result[0].GetProperty("properties").GetProperty("name").ToString());
 }
 ]]></code></example>
     </member>
@@ -1092,8 +1349,11 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PagingClient client = new PagingClient(credential);
 
 Operation<Pageable<BinaryData>> operation = client.GetMultiplePagesLRO(WaitUntil.Completed, null, null, null);
+Pageable<BinaryData> responseData = operation.Value;
 foreach (BinaryData item in operation.Value)
 {
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result[0].ToString());
 }
 ]]></code>
 This sample shows how to call GetMultiplePagesLRO with all parameters and parse the result.
@@ -1102,8 +1362,12 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PagingClient client = new PagingClient(credential);
 
 Operation<Pageable<BinaryData>> operation = client.GetMultiplePagesLRO(WaitUntil.Completed, 1234, 1234, null);
+Pageable<BinaryData> responseData = operation.Value;
 foreach (BinaryData item in operation.Value)
 {
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result[0].GetProperty("properties").GetProperty("id").ToString());
+    Console.WriteLine(result[0].GetProperty("properties").GetProperty("name").ToString());
 }
 ]]></code></example>
     </member>

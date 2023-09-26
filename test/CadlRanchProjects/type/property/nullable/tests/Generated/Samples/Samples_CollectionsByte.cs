@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -24,6 +26,10 @@ namespace _Type.Property.Nullable.Samples
             CollectionsByte client = new NullableClient().GetCollectionsByteClient("1.0.0");
 
             Response response = client.GetNonNull(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("requiredProperty").ToString());
+            Console.WriteLine(result.GetProperty("nullableProperty")[0].ToString());
         }
 
         [Test]
@@ -33,6 +39,10 @@ namespace _Type.Property.Nullable.Samples
             CollectionsByte client = new NullableClient().GetCollectionsByteClient("1.0.0");
 
             Response response = await client.GetNonNullAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("requiredProperty").ToString());
+            Console.WriteLine(result.GetProperty("nullableProperty")[0].ToString());
         }
 
         [Test]
@@ -60,6 +70,10 @@ namespace _Type.Property.Nullable.Samples
             CollectionsByte client = new NullableClient().GetCollectionsByteClient("1.0.0");
 
             Response response = client.GetNonNull(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("requiredProperty").ToString());
+            Console.WriteLine(result.GetProperty("nullableProperty")[0].ToString());
         }
 
         [Test]
@@ -69,6 +83,10 @@ namespace _Type.Property.Nullable.Samples
             CollectionsByte client = new NullableClient().GetCollectionsByteClient("1.0.0");
 
             Response response = await client.GetNonNullAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("requiredProperty").ToString());
+            Console.WriteLine(result.GetProperty("nullableProperty")[0].ToString());
         }
 
         [Test]
@@ -96,6 +114,10 @@ namespace _Type.Property.Nullable.Samples
             CollectionsByte client = new NullableClient().GetCollectionsByteClient("1.0.0");
 
             Response response = client.GetNull(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("requiredProperty").ToString());
+            Console.WriteLine(result.GetProperty("nullableProperty")[0].ToString());
         }
 
         [Test]
@@ -105,6 +127,10 @@ namespace _Type.Property.Nullable.Samples
             CollectionsByte client = new NullableClient().GetCollectionsByteClient("1.0.0");
 
             Response response = await client.GetNullAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("requiredProperty").ToString());
+            Console.WriteLine(result.GetProperty("nullableProperty")[0].ToString());
         }
 
         [Test]
@@ -132,6 +158,10 @@ namespace _Type.Property.Nullable.Samples
             CollectionsByte client = new NullableClient().GetCollectionsByteClient("1.0.0");
 
             Response response = client.GetNull(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("requiredProperty").ToString());
+            Console.WriteLine(result.GetProperty("nullableProperty")[0].ToString());
         }
 
         [Test]
@@ -141,6 +171,10 @@ namespace _Type.Property.Nullable.Samples
             CollectionsByte client = new NullableClient().GetCollectionsByteClient("1.0.0");
 
             Response response = await client.GetNullAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("requiredProperty").ToString());
+            Console.WriteLine(result.GetProperty("nullableProperty")[0].ToString());
         }
 
         [Test]
@@ -176,6 +210,8 @@ new object()
             },
             });
             Response response = client.PatchNonNull(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -193,6 +229,8 @@ new object()
             },
             });
             Response response = await client.PatchNonNullAsync(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -210,6 +248,8 @@ new object()
             },
             });
             Response response = client.PatchNonNull(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -227,6 +267,8 @@ new object()
             },
             });
             Response response = await client.PatchNonNullAsync(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -244,6 +286,8 @@ new object()
             },
             });
             Response response = client.PatchNull(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -261,6 +305,8 @@ new object()
             },
             });
             Response response = await client.PatchNullAsync(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -278,6 +324,8 @@ new object()
             },
             });
             Response response = client.PatchNull(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -295,6 +343,8 @@ new object()
             },
             });
             Response response = await client.PatchNullAsync(content);
+
+            Console.WriteLine(response.Status);
         }
     }
 }

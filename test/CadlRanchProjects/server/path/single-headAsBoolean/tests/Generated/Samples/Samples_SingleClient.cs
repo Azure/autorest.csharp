@@ -24,6 +24,8 @@ namespace Server.Path.SingleHeadAsBoolean.Samples
             SingleClient client = new SingleClient(endpoint);
 
             Response<bool> response = client.MyOp();
+
+            Console.WriteLine(response.GetRawResponse().Status);
         }
 
         [Test]
@@ -34,6 +36,8 @@ namespace Server.Path.SingleHeadAsBoolean.Samples
             SingleClient client = new SingleClient(endpoint);
 
             Response<bool> response = await client.MyOpAsync();
+
+            Console.WriteLine(response.GetRawResponse().Status);
         }
 
         [Test]
@@ -44,6 +48,8 @@ namespace Server.Path.SingleHeadAsBoolean.Samples
             SingleClient client = new SingleClient(endpoint);
 
             Response<bool> response = client.MyOp();
+
+            Console.WriteLine(response.GetRawResponse().Status);
         }
 
         [Test]
@@ -54,6 +60,8 @@ namespace Server.Path.SingleHeadAsBoolean.Samples
             SingleClient client = new SingleClient(endpoint);
 
             Response<bool> response = await client.MyOpAsync();
+
+            Console.WriteLine(response.GetRawResponse().Status);
         }
     }
 }

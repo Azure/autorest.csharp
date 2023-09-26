@@ -10,6 +10,10 @@ LROsCustomHeaderClient client = new LROsCustomHeaderClient(credential);
 
 RequestContent content = null;
 Operation<BinaryData> operation = await client.PutAsyncRetrySucceededAsync(WaitUntil.Completed, content);
+BinaryData responseData = operation.Value;
+
+JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call PutAsyncRetrySucceededAsync with all parameters and request content and parse the result.
 <code><![CDATA[
@@ -29,6 +33,16 @@ RequestContent content = RequestContent.Create(new
     location = "<location>",
 });
 Operation<BinaryData> operation = await client.PutAsyncRetrySucceededAsync(WaitUntil.Completed, content);
+BinaryData responseData = operation.Value;
+
+JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
+Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
+Console.WriteLine(result.GetProperty("id").ToString());
+Console.WriteLine(result.GetProperty("type").ToString());
+Console.WriteLine(result.GetProperty("tags").GetProperty("<key>").ToString());
+Console.WriteLine(result.GetProperty("location").ToString());
+Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code></example>
     </member>
     <member name="PutAsyncRetrySucceeded(WaitUntil,RequestContent,RequestContext)">
@@ -40,6 +54,10 @@ LROsCustomHeaderClient client = new LROsCustomHeaderClient(credential);
 
 RequestContent content = null;
 Operation<BinaryData> operation = client.PutAsyncRetrySucceeded(WaitUntil.Completed, content);
+BinaryData responseData = operation.Value;
+
+JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call PutAsyncRetrySucceeded with all parameters and request content and parse the result.
 <code><![CDATA[
@@ -59,6 +77,16 @@ RequestContent content = RequestContent.Create(new
     location = "<location>",
 });
 Operation<BinaryData> operation = client.PutAsyncRetrySucceeded(WaitUntil.Completed, content);
+BinaryData responseData = operation.Value;
+
+JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
+Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
+Console.WriteLine(result.GetProperty("id").ToString());
+Console.WriteLine(result.GetProperty("type").ToString());
+Console.WriteLine(result.GetProperty("tags").GetProperty("<key>").ToString());
+Console.WriteLine(result.GetProperty("location").ToString());
+Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code></example>
     </member>
     <member name="Put201CreatingSucceeded200Async(WaitUntil,RequestContent,RequestContext)">
@@ -70,6 +98,10 @@ LROsCustomHeaderClient client = new LROsCustomHeaderClient(credential);
 
 RequestContent content = null;
 Operation<BinaryData> operation = await client.Put201CreatingSucceeded200Async(WaitUntil.Completed, content);
+BinaryData responseData = operation.Value;
+
+JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call Put201CreatingSucceeded200Async with all parameters and request content and parse the result.
 <code><![CDATA[
@@ -89,6 +121,16 @@ RequestContent content = RequestContent.Create(new
     location = "<location>",
 });
 Operation<BinaryData> operation = await client.Put201CreatingSucceeded200Async(WaitUntil.Completed, content);
+BinaryData responseData = operation.Value;
+
+JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
+Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
+Console.WriteLine(result.GetProperty("id").ToString());
+Console.WriteLine(result.GetProperty("type").ToString());
+Console.WriteLine(result.GetProperty("tags").GetProperty("<key>").ToString());
+Console.WriteLine(result.GetProperty("location").ToString());
+Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code></example>
     </member>
     <member name="Put201CreatingSucceeded200(WaitUntil,RequestContent,RequestContext)">
@@ -100,6 +142,10 @@ LROsCustomHeaderClient client = new LROsCustomHeaderClient(credential);
 
 RequestContent content = null;
 Operation<BinaryData> operation = client.Put201CreatingSucceeded200(WaitUntil.Completed, content);
+BinaryData responseData = operation.Value;
+
+JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call Put201CreatingSucceeded200 with all parameters and request content and parse the result.
 <code><![CDATA[
@@ -119,6 +165,16 @@ RequestContent content = RequestContent.Create(new
     location = "<location>",
 });
 Operation<BinaryData> operation = client.Put201CreatingSucceeded200(WaitUntil.Completed, content);
+BinaryData responseData = operation.Value;
+
+JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
+Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
+Console.WriteLine(result.GetProperty("id").ToString());
+Console.WriteLine(result.GetProperty("type").ToString());
+Console.WriteLine(result.GetProperty("tags").GetProperty("<key>").ToString());
+Console.WriteLine(result.GetProperty("location").ToString());
+Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code></example>
     </member>
     <member name="Post202Retry200Async(WaitUntil,RequestContent,RequestContext)">

@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -25,6 +26,9 @@ namespace _Type.Property.ValueTypes.Samples
             Datetime client = new ValueTypesClient().GetDatetimeClient("1.0.0");
 
             Response response = client.GetDatetime(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("property").ToString());
         }
 
         [Test]
@@ -34,6 +38,9 @@ namespace _Type.Property.ValueTypes.Samples
             Datetime client = new ValueTypesClient().GetDatetimeClient("1.0.0");
 
             Response response = await client.GetDatetimeAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("property").ToString());
         }
 
         [Test]
@@ -61,6 +68,9 @@ namespace _Type.Property.ValueTypes.Samples
             Datetime client = new ValueTypesClient().GetDatetimeClient("1.0.0");
 
             Response response = client.GetDatetime(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("property").ToString());
         }
 
         [Test]
@@ -70,6 +80,9 @@ namespace _Type.Property.ValueTypes.Samples
             Datetime client = new ValueTypesClient().GetDatetimeClient("1.0.0");
 
             Response response = await client.GetDatetimeAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("property").ToString());
         }
 
         [Test]
@@ -101,6 +114,8 @@ namespace _Type.Property.ValueTypes.Samples
                 property = "2022-05-10T14:57:31.2311892-04:00",
             });
             Response response = client.Put(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -114,6 +129,8 @@ namespace _Type.Property.ValueTypes.Samples
                 property = "2022-05-10T14:57:31.2311892-04:00",
             });
             Response response = await client.PutAsync(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -147,6 +164,8 @@ namespace _Type.Property.ValueTypes.Samples
                 property = "2022-05-10T14:57:31.2311892-04:00",
             });
             Response response = client.Put(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -160,6 +179,8 @@ namespace _Type.Property.ValueTypes.Samples
                 property = "2022-05-10T14:57:31.2311892-04:00",
             });
             Response response = await client.PutAsync(content);
+
+            Console.WriteLine(response.Status);
         }
 
         [Test]
