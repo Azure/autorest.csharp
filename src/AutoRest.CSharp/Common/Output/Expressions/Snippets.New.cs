@@ -12,7 +12,6 @@ using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
-using Azure;
 using Azure.Core;
 
 namespace AutoRest.CSharp.Common.Output.Models
@@ -47,7 +46,7 @@ namespace AutoRest.CSharp.Common.Output.Models
             public static RequestContextExpression RequestContext(CancellationTokenExpression cancellationToken)
                 => new(Instance(Configuration.ApiTypes.RequestContextType, new Dictionary<string, ValueExpression>{ [Configuration.ApiTypes.CancellationTokenName] = cancellationToken }));
 
-            public static ValueExpression RequestFailedException(BaseResponseExpression response) => Instance(typeof(RequestFailedException), response);
+            public static ValueExpression RequestFailedException(BaseResponseExpression response) => Instance(Configuration.ApiTypes.RequestFailedExceptionType, response);
 
             public static ResourceIdentifierExpression ResourceIdentifier(ValueExpression resourceData) => new(Instance(typeof(ResourceIdentifier), new MemberExpression(resourceData, "Id")));
 

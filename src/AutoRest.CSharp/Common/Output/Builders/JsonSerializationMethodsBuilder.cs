@@ -599,7 +599,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                         {
                             type = new CSharpType(type.Arguments[0].FrameworkType);
                         }
-                        type = new CSharpType(typeof(Azure.Core.Optional<>), type);
+                        type = new CSharpType(Configuration.ApiTypes.OptionalPropertyType, type);
                     }
 
                     propertyVariables.Add(jsonProperty, new VariableReference(type, propertyDeclaration));
@@ -773,7 +773,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
         private static ValueExpression GetOptional(PropertySerialization jsonPropertySerialization, TypedValueExpression variable)
         {
             var sourceType = variable.Type;
-            if (!sourceType.IsFrameworkType || sourceType.FrameworkType != typeof(Azure.Core.Optional<>))
+            if (!sourceType.IsFrameworkType || sourceType.FrameworkType != Configuration.ApiTypes.OptionalPropertyType)
             {
                 return variable;
             }

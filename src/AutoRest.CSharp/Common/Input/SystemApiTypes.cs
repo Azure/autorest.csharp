@@ -97,5 +97,13 @@ namespace AutoRest.CSharp.Common.Input
             => new Utf8JsonRequestBodyExpression(untyped ?? Snippets.New.Instance(typeof(Utf8JsonRequestBody)));
 
         public override Type OptionalType => typeof(OptionalProperty);
+        public override Type OptionalPropertyType => typeof(OptionalProperty<>);
+
+        public override Type RequestFailedExceptionType => typeof(RequestErrorException);
+
+        public override Type ResponseClassifierType => typeof(ResponseErrorClassifier);
+        public override Type StatusCodeClassifierType => typeof(StatusResponseClassifier);
+
+        public override Type JsonElementExtensionsType => typeof(ModelSerializationExtensions);
     }
 }

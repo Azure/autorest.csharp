@@ -9,7 +9,6 @@ using System.Collections.Generic;
 using System.ServiceModel.Rest.Core;
 using System.ServiceModel.Rest.Experimental.Core.Serialization;
 using System.Text.Json;
-using Azure.Core;
 
 namespace UnbrandedTypeSpec.Models
 {
@@ -30,29 +29,29 @@ namespace UnbrandedTypeSpec.Models
             writer.WriteNumberValue(RequiredLiteralFloat.ToSerialSingle());
             writer.WritePropertyName("requiredLiteralBool"u8);
             writer.WriteBooleanValue(RequiredLiteralBool);
-            if (Optional.IsDefined(OptionalLiteralString))
+            if (OptionalProperty.IsDefined(OptionalLiteralString))
             {
                 writer.WritePropertyName("optionalLiteralString"u8);
                 writer.WriteStringValue(OptionalLiteralString.Value.ToString());
             }
-            if (Optional.IsDefined(OptionalLiteralInt))
+            if (OptionalProperty.IsDefined(OptionalLiteralInt))
             {
                 writer.WritePropertyName("optionalLiteralInt"u8);
                 writer.WriteNumberValue(OptionalLiteralInt.Value.ToSerialInt32());
             }
-            if (Optional.IsDefined(OptionalLiteralFloat))
+            if (OptionalProperty.IsDefined(OptionalLiteralFloat))
             {
                 writer.WritePropertyName("optionalLiteralFloat"u8);
                 writer.WriteNumberValue(OptionalLiteralFloat.Value.ToSerialSingle());
             }
-            if (Optional.IsDefined(OptionalLiteralBool))
+            if (OptionalProperty.IsDefined(OptionalLiteralBool))
             {
                 writer.WritePropertyName("optionalLiteralBool"u8);
                 writer.WriteBooleanValue(OptionalLiteralBool.Value);
             }
             writer.WritePropertyName("requiredBadDescription"u8);
             writer.WriteStringValue(RequiredBadDescription);
-            if (Optional.IsCollectionDefined(OptionalNullableList))
+            if (OptionalProperty.IsCollectionDefined(OptionalNullableList))
             {
                 if (OptionalNullableList != null)
                 {
@@ -69,7 +68,7 @@ namespace UnbrandedTypeSpec.Models
                     writer.WriteNull("optionalNullableList");
                 }
             }
-            if (RequiredNullableList != null && Optional.IsCollectionDefined(RequiredNullableList))
+            if (RequiredNullableList != null && OptionalProperty.IsCollectionDefined(RequiredNullableList))
             {
                 writer.WritePropertyName("requiredNullableList"u8);
                 writer.WriteStartArray();
@@ -98,12 +97,12 @@ namespace UnbrandedTypeSpec.Models
             ThingRequiredLiteralInt requiredLiteralInt = default;
             ThingRequiredLiteralFloat requiredLiteralFloat = default;
             bool requiredLiteralBool = default;
-            Optional<ThingOptionalLiteralString> optionalLiteralString = default;
-            Optional<ThingOptionalLiteralInt> optionalLiteralInt = default;
-            Optional<ThingOptionalLiteralFloat> optionalLiteralFloat = default;
-            Optional<bool> optionalLiteralBool = default;
+            OptionalProperty<ThingOptionalLiteralString> optionalLiteralString = default;
+            OptionalProperty<ThingOptionalLiteralInt> optionalLiteralInt = default;
+            OptionalProperty<ThingOptionalLiteralFloat> optionalLiteralFloat = default;
+            OptionalProperty<bool> optionalLiteralBool = default;
             string requiredBadDescription = default;
-            Optional<IList<int>> optionalNullableList = default;
+            OptionalProperty<IList<int>> optionalNullableList = default;
             IList<int> requiredNullableList = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -209,7 +208,7 @@ namespace UnbrandedTypeSpec.Models
                     continue;
                 }
             }
-            return new Thing(name, requiredUnion, requiredLiteralString, requiredLiteralInt, requiredLiteralFloat, requiredLiteralBool, Optional.ToNullable(optionalLiteralString), Optional.ToNullable(optionalLiteralInt), Optional.ToNullable(optionalLiteralFloat), Optional.ToNullable(optionalLiteralBool), requiredBadDescription, Optional.ToList(optionalNullableList), requiredNullableList);
+            return new Thing(name, requiredUnion, requiredLiteralString, requiredLiteralInt, requiredLiteralFloat, requiredLiteralBool, OptionalProperty.ToNullable(optionalLiteralString), OptionalProperty.ToNullable(optionalLiteralInt), OptionalProperty.ToNullable(optionalLiteralFloat), OptionalProperty.ToNullable(optionalLiteralBool), requiredBadDescription, OptionalProperty.ToList(optionalNullableList), requiredNullableList);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>

@@ -117,10 +117,19 @@ namespace AutoRest.CSharp.Common.Input
         public abstract BaseUtf8JsonRequestContentExpression GetUtf8JsonRequestContentExpression(ValueExpression? untyped = null);
 
         public abstract Type OptionalType { get; }
+        public abstract Type OptionalPropertyType { get; }
         public string OptionalIsCollectionDefinedName => nameof(OptionalProperty.IsCollectionDefined);
         public string OptionalIsDefinedName => nameof(OptionalProperty.IsDefined);
         public string OptionalToDictionaryName => nameof(OptionalProperty.ToDictionary);
         public string OptionalToListName => nameof(OptionalProperty.ToList);
         public string OptionalToNullableName => nameof(OptionalProperty.ToNullable);
+
+        public abstract Type RequestFailedExceptionType { get; }
+
+        public abstract Type ResponseClassifierType { get; }
+        public abstract Type StatusCodeClassifierType { get; }
+        public string ResponseClassifierIsErrorResponseName => nameof(ResponseErrorClassifier.IsErrorResponse);
+
+        public abstract Type JsonElementExtensionsType { get; }
     }
 }

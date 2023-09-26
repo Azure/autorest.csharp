@@ -32,7 +32,7 @@ namespace AutoRest.CSharp.LowLevel.Generation
         public void Write()
         {
             // since our generator source code does not have the Azure.Identity dependency, we have to add this dependency separately
-            if (Configuration.ApiTypes is AzureApiTypes)
+            if (Configuration.IsBranded)
                 _writer.UseNamespace("Azure.Identity");
 
             using (_writer.Namespace($"{_client.Declaration.Namespace}.Samples"))

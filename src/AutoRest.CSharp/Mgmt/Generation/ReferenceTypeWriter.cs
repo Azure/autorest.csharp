@@ -25,7 +25,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             var extensions = schema.ObjectSchema.Extensions;
             if (extensions != null)
             {
-                if (Configuration.ApiTypes is AzureApiTypes)
+                if (Configuration.IsBranded)
                     writer.UseNamespace("Azure.Core");
                 if (extensions.MgmtReferenceType)
                 {
