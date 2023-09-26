@@ -10,7 +10,6 @@ using System.Collections.Generic;
 using System.ServiceModel.Rest.Core;
 using System.ServiceModel.Rest.Experimental.Core.Serialization;
 using System.Text.Json;
-using Azure.Core;
 
 namespace UnbrandedTypeSpec.Models
 {
@@ -50,12 +49,12 @@ namespace UnbrandedTypeSpec.Models
             writer.WriteEndObject();
             writer.WritePropertyName("requiredModel"u8);
             writer.WriteObjectValue(RequiredModel);
-            if (Optional.IsDefined(IntExtensibleEnum))
+            if (OptionalProperty.IsDefined(IntExtensibleEnum))
             {
                 writer.WritePropertyName("intExtensibleEnum"u8);
                 writer.WriteNumberValue(IntExtensibleEnum.Value.ToSerialInt32());
             }
-            if (Optional.IsCollectionDefined(IntExtensibleEnumCollection))
+            if (OptionalProperty.IsCollectionDefined(IntExtensibleEnumCollection))
             {
                 writer.WritePropertyName("intExtensibleEnumCollection"u8);
                 writer.WriteStartArray();
@@ -65,12 +64,12 @@ namespace UnbrandedTypeSpec.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(FloatExtensibleEnum))
+            if (OptionalProperty.IsDefined(FloatExtensibleEnum))
             {
                 writer.WritePropertyName("floatExtensibleEnum"u8);
                 writer.WriteNumberValue(FloatExtensibleEnum.Value.ToSerialInt32());
             }
-            if (Optional.IsCollectionDefined(FloatExtensibleEnumCollection))
+            if (OptionalProperty.IsCollectionDefined(FloatExtensibleEnumCollection))
             {
                 writer.WritePropertyName("floatExtensibleEnumCollection"u8);
                 writer.WriteStartArray();
@@ -80,12 +79,12 @@ namespace UnbrandedTypeSpec.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(FloatFixedEnum))
+            if (OptionalProperty.IsDefined(FloatFixedEnum))
             {
                 writer.WritePropertyName("floatFixedEnum"u8);
                 writer.WriteNumberValue(FloatFixedEnum.Value.ToSerialSingle());
             }
-            if (Optional.IsCollectionDefined(FloatFixedEnumCollection))
+            if (OptionalProperty.IsCollectionDefined(FloatFixedEnumCollection))
             {
                 writer.WritePropertyName("floatFixedEnumCollection"u8);
                 writer.WriteStartArray();
@@ -95,12 +94,12 @@ namespace UnbrandedTypeSpec.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(IntFixedEnum))
+            if (OptionalProperty.IsDefined(IntFixedEnum))
             {
                 writer.WritePropertyName("intFixedEnum"u8);
                 writer.WriteNumberValue((int)IntFixedEnum.Value);
             }
-            if (Optional.IsCollectionDefined(IntFixedEnumCollection))
+            if (OptionalProperty.IsCollectionDefined(IntFixedEnumCollection))
             {
                 writer.WritePropertyName("intFixedEnumCollection"u8);
                 writer.WriteStartArray();
@@ -110,7 +109,7 @@ namespace UnbrandedTypeSpec.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(StringFixedEnum))
+            if (OptionalProperty.IsDefined(StringFixedEnum))
             {
                 if (StringFixedEnum != null)
                 {
@@ -128,7 +127,7 @@ namespace UnbrandedTypeSpec.Models
 #else
             JsonSerializer.Serialize(writer, JsonDocument.Parse(RequiredUnknown.ToString()).RootElement);
 #endif
-            if (Optional.IsDefined(OptionalUnknown))
+            if (OptionalProperty.IsDefined(OptionalUnknown))
             {
                 writer.WritePropertyName("optionalUnknown"u8);
 #if NET6_0_OR_GREATER
@@ -154,7 +153,7 @@ namespace UnbrandedTypeSpec.Models
 #endif
             }
             writer.WriteEndObject();
-            if (Optional.IsCollectionDefined(OptionalRecordUnknown))
+            if (OptionalProperty.IsCollectionDefined(OptionalRecordUnknown))
             {
                 writer.WritePropertyName("optionalRecordUnknown"u8);
                 writer.WriteStartObject();
@@ -190,21 +189,21 @@ namespace UnbrandedTypeSpec.Models
             IList<StringFixedEnum?> requiredCollection = default;
             IDictionary<string, StringExtensibleEnum?> requiredDictionary = default;
             Thing requiredModel = default;
-            Optional<IntExtensibleEnum> intExtensibleEnum = default;
-            Optional<IList<IntExtensibleEnum>> intExtensibleEnumCollection = default;
-            Optional<FloatExtensibleEnum> floatExtensibleEnum = default;
-            Optional<IList<FloatExtensibleEnum>> floatExtensibleEnumCollection = default;
-            Optional<FloatFixedEnum> floatFixedEnum = default;
-            Optional<IList<FloatFixedEnum>> floatFixedEnumCollection = default;
-            Optional<IntFixedEnum> intFixedEnum = default;
-            Optional<IList<IntFixedEnum>> intFixedEnumCollection = default;
-            Optional<StringFixedEnum?> stringFixedEnum = default;
+            OptionalProperty<IntExtensibleEnum> intExtensibleEnum = default;
+            OptionalProperty<IList<IntExtensibleEnum>> intExtensibleEnumCollection = default;
+            OptionalProperty<FloatExtensibleEnum> floatExtensibleEnum = default;
+            OptionalProperty<IList<FloatExtensibleEnum>> floatExtensibleEnumCollection = default;
+            OptionalProperty<FloatFixedEnum> floatFixedEnum = default;
+            OptionalProperty<IList<FloatFixedEnum>> floatFixedEnumCollection = default;
+            OptionalProperty<IntFixedEnum> intFixedEnum = default;
+            OptionalProperty<IList<IntFixedEnum>> intFixedEnumCollection = default;
+            OptionalProperty<StringFixedEnum?> stringFixedEnum = default;
             BinaryData requiredUnknown = default;
-            Optional<BinaryData> optionalUnknown = default;
+            OptionalProperty<BinaryData> optionalUnknown = default;
             IDictionary<string, BinaryData> requiredRecordUnknown = default;
-            Optional<IDictionary<string, BinaryData>> optionalRecordUnknown = default;
+            OptionalProperty<IDictionary<string, BinaryData>> optionalRecordUnknown = default;
             IReadOnlyDictionary<string, BinaryData> readOnlyRequiredRecordUnknown = default;
-            Optional<IReadOnlyDictionary<string, BinaryData>> readOnlyOptionalRecordUnknown = default;
+            OptionalProperty<IReadOnlyDictionary<string, BinaryData>> readOnlyOptionalRecordUnknown = default;
             ModelWithRequiredNullableProperties modelWithRequiredNullable = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -455,7 +454,7 @@ namespace UnbrandedTypeSpec.Models
                     continue;
                 }
             }
-            return new RoundTripModel(requiredString, requiredInt, requiredCollection, requiredDictionary, requiredModel, Optional.ToNullable(intExtensibleEnum), Optional.ToList(intExtensibleEnumCollection), Optional.ToNullable(floatExtensibleEnum), Optional.ToList(floatExtensibleEnumCollection), Optional.ToNullable(floatFixedEnum), Optional.ToList(floatFixedEnumCollection), Optional.ToNullable(intFixedEnum), Optional.ToList(intFixedEnumCollection), Optional.ToNullable(stringFixedEnum), requiredUnknown, optionalUnknown.Value, requiredRecordUnknown, Optional.ToDictionary(optionalRecordUnknown), readOnlyRequiredRecordUnknown, Optional.ToDictionary(readOnlyOptionalRecordUnknown), modelWithRequiredNullable);
+            return new RoundTripModel(requiredString, requiredInt, requiredCollection, requiredDictionary, requiredModel, OptionalProperty.ToNullable(intExtensibleEnum), OptionalProperty.ToList(intExtensibleEnumCollection), OptionalProperty.ToNullable(floatExtensibleEnum), OptionalProperty.ToList(floatExtensibleEnumCollection), OptionalProperty.ToNullable(floatFixedEnum), OptionalProperty.ToList(floatFixedEnumCollection), OptionalProperty.ToNullable(intFixedEnum), OptionalProperty.ToList(intFixedEnumCollection), OptionalProperty.ToNullable(stringFixedEnum), requiredUnknown, optionalUnknown.Value, requiredRecordUnknown, OptionalProperty.ToDictionary(optionalRecordUnknown), readOnlyRequiredRecordUnknown, OptionalProperty.ToDictionary(readOnlyOptionalRecordUnknown), modelWithRequiredNullable);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>

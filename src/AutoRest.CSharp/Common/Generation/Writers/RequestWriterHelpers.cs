@@ -45,9 +45,6 @@ namespace AutoRest.CSharp.Generation.Writers
                 var request = new CodeWriterDeclaration("request");
                 var uri = new CodeWriterDeclaration("uri");
 
-                //var extraCloseParen = Configuration.ApiTypes is AzureApiTypes ? string.Empty : ")";
-                var extraCloseParen = string.Empty;
-
                 if (clientMethod.Parameters.Contains(KnownParameters.RequestContext))
                 {
                     writer.Append($"var {message:D} = {Configuration.ApiTypes.GetHttpPipelineCreateMessageFormat(true)}");
@@ -55,11 +52,11 @@ namespace AutoRest.CSharp.Generation.Writers
                     {
                         writer.Append($", {responseClassifierType}");
                     }
-                    writer.Line($"){extraCloseParen};");
+                    writer.Line($");");
                 }
                 else
                 {
-                    writer.Line($"var {message:D} = {Configuration.ApiTypes.GetHttpPipelineCreateMessageFormat(false)}){extraCloseParen};");
+                    writer.Line($"var {message:D} = {Configuration.ApiTypes.GetHttpPipelineCreateMessageFormat(false)});");
                 }
 
                 writer.Line($"var {request:D} = {message}.{Configuration.ApiTypes.HttpMessageRequestName};");
@@ -467,7 +464,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
                 WriteValueExpression(writer, value);
 
-                writer.Append($" != null && {typeof(Optional)}.{nameof(Optional.IsCollectionDefined)}(");
+                writer.Append($" != null && {Configuration.ApiTypes.OptionalType}.{Configuration.ApiTypes.OptionalIsCollectionDefinedName}(");
 
                 WriteValueExpression(writer, value);
 

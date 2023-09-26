@@ -676,7 +676,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 {
                     _writer
                         .Line($"if ({response}.Value == null)")
-                        .Line($"throw new {typeof(RequestFailedException)}({response}.{Configuration.ApiTypes.GetRawResponseName}());");
+                        .Line($"throw new {Configuration.ApiTypes.RequestFailedExceptionType}({response}.{Configuration.ApiTypes.GetRawResponseName}());");
                 }
                 var realReturnType = operation.MgmtReturnType;
                 if (realReturnType != null && realReturnType.TryCastResource(out var resource) && resource.ResourceData.ShouldSetResourceIdentifier)

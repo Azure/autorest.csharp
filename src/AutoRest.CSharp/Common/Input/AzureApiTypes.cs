@@ -13,6 +13,7 @@ using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
+using JsonElementExtensions = Azure.Core.JsonElementExtensions;
 
 namespace AutoRest.CSharp.Common.Input
 {
@@ -58,7 +59,7 @@ namespace AutoRest.CSharp.Common.Input
         public override Type HttpPipelineBuilderType => typeof(HttpPipelineBuilder);
         public override Type KeyCredentialPolicyType => typeof(AzureKeyCredentialPolicy);
         public override FormattableString GetHttpPipelineClassifierString(string pipelineField, string optionsVariable, FormattableString perCallPolicies, FormattableString perRetryPolicies)
-            => $"{pipelineField:I} = {typeof(HttpPipelineBuilder)}.{nameof(HttpPipelineBuilder.Build)}({optionsVariable:I}, {perCallPolicies}, {perRetryPolicies}, new {typeof(ResponseClassifier)}());";
+            => $"{pipelineField:I} = {typeof(HttpPipelineBuilder)}.{nameof(HttpPipelineBuilder.Build)}({optionsVariable:I}, {perCallPolicies}, {perRetryPolicies}, new {Configuration.ApiTypes.ResponseClassifierType}());";
 
         public override Type HttpPipelinePolicyType => typeof(HttpPipelinePolicy);
 
@@ -90,5 +91,15 @@ namespace AutoRest.CSharp.Common.Input
 
         public override BaseUtf8JsonRequestContentExpression GetUtf8JsonRequestContentExpression(ValueExpression? untyped = null)
             => new Utf8JsonRequestContentExpression(untyped ?? Snippets.New.Instance(typeof(Utf8JsonRequestContent)));
+
+        public override Type OptionalType => typeof(Optional);
+        public override Type OptionalPropertyType => typeof(Optional<>);
+
+        public override Type RequestFailedExceptionType => typeof(RequestFailedException);
+
+        public override Type ResponseClassifierType => typeof(ResponseClassifier);
+        public override Type StatusCodeClassifierType => typeof(StatusCodeClassifier);
+
+        public override Type JsonElementExtensionsType => typeof(JsonElementExtensions);
     }
 }

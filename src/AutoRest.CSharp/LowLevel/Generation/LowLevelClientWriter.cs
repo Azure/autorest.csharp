@@ -494,9 +494,9 @@ namespace AutoRest.CSharp.Generation.Writers
             if (hasStatusCodeRanges)
             {
                 // After fixing https://github.com/Azure/autorest.csharp/issues/2018 issue remove "hasStatusCodeRanges" condition and this class
-                using (writer.Scope($"private sealed class {responseClassifierTypeName}Override : {typeof(ResponseClassifier)}"))
+                using (writer.Scope($"private sealed class {responseClassifierTypeName}Override : {Configuration.ApiTypes.ResponseClassifierType}"))
                 {
-                    using (writer.Scope($"public override bool {nameof(ResponseClassifier.IsErrorResponse)}({Configuration.ApiTypes.HttpMessageType} message)"))
+                    using (writer.Scope($"public override bool {Configuration.ApiTypes.ResponseClassifierIsErrorResponseName}({Configuration.ApiTypes.HttpMessageType} message)"))
                     {
                         using (writer.Scope($"return message.{Configuration.ApiTypes.HttpMessageResponseName}.{Configuration.ApiTypes.HttpMessageResponseStatusName} switch", end: "};"))
                         {
@@ -512,15 +512,15 @@ namespace AutoRest.CSharp.Generation.Writers
                 writer.Line();
             }
 
-            writer.Line($"private static {typeof(ResponseClassifier)} _{responseClassifierTypeName.FirstCharToLowerCase()};");
-            writer.Append($"private static {typeof(ResponseClassifier)} {responseClassifierTypeName} => _{responseClassifierTypeName.FirstCharToLowerCase()} ??= new ");
+            writer.Line($"private static {Configuration.ApiTypes.ResponseClassifierType} _{responseClassifierTypeName.FirstCharToLowerCase()};");
+            writer.Append($"private static {Configuration.ApiTypes.ResponseClassifierType} {responseClassifierTypeName} => _{responseClassifierTypeName.FirstCharToLowerCase()} ??= new ");
             if (hasStatusCodeRanges)
             {
                 writer.Line($"{responseClassifierTypeName}Override();");
             }
             else
             {
-                writer.Append($"{typeof(StatusCodeClassifier)}(stackalloc ushort[]{{");
+                writer.Append($"{Configuration.ApiTypes.StatusCodeClassifierType}(stackalloc ushort[]{{");
                 foreach (var statusCode in statusCodes)
                 {
                     if (statusCode.Code != null)
@@ -649,7 +649,7 @@ namespace AutoRest.CSharp.Generation.Writers
         private static void WriteMethodDocumentation(CodeWriter codeWriter, MethodSignature methodSignature, LowLevelClientMethod clientMethod, bool async)
         {
             codeWriter.WriteMethodDocumentation(methodSignature, BuildProtocolMethodSummary(methodSignature, clientMethod, async));
-            codeWriter.WriteXmlDocumentationException(typeof(RequestFailedException), $"Service returned a non-success status code.");
+            codeWriter.WriteXmlDocumentationException(Configuration.ApiTypes.RequestFailedExceptionType, $"Service returned a non-success status code.");
 
             if (methodSignature.ReturnType == null)
             {

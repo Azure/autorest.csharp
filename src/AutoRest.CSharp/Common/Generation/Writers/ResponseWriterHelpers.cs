@@ -9,7 +9,6 @@ using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Responses;
 using AutoRest.CSharp.Output.Models.Shared;
-using Azure;
 using Azure.Core;
 
 namespace AutoRest.CSharp.Generation.Writers
@@ -158,7 +157,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
                 writer
                     .Line($"default:")
-                    .Line($"throw new {typeof(RequestFailedException)}({responseVariable});");
+                    .Line($"throw new {Configuration.ApiTypes.RequestFailedExceptionType}({responseVariable});");
             }
         }
 
