@@ -35,7 +35,7 @@ namespace AutoRest.CSharp.MgmtTest.Output.Mock
         protected virtual ConstructorSignature? EnsureCtor()
         {
             return new ConstructorSignature(
-                Name: Type.Name,
+                Type,
                 null,
                 Description: $"Initializes a new instance of the <see cref=\"{Type.Name}\"/> class for mocking.",
                 Modifiers: MethodSignatureModifiers.Public,
