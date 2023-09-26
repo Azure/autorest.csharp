@@ -5,8 +5,6 @@
 
 #nullable disable
 
-using System;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -26,7 +24,6 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpRetryClient client = new HttpRetryClient(credential);
 
             Response response = client.Head408();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -37,7 +34,6 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpRetryClient client = new HttpRetryClient(credential);
 
             Response response = await client.Head408Async();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -48,7 +44,6 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpRetryClient client = new HttpRetryClient(credential);
 
             Response response = client.Head408();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -59,7 +54,6 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpRetryClient client = new HttpRetryClient(credential);
 
             Response response = await client.Head408Async();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -71,7 +65,6 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = null;
             Response response = client.Put500(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -83,7 +76,6 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = null;
             Response response = await client.Put500Async(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -95,7 +87,6 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("true");
             Response response = client.Put500(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -107,7 +98,6 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("true");
             Response response = await client.Put500Async(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -119,7 +109,6 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = null;
             Response response = client.Patch500(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -131,7 +120,6 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = null;
             Response response = await client.Patch500Async(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -143,7 +131,6 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("true");
             Response response = client.Patch500(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -155,7 +142,6 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("true");
             Response response = await client.Patch500Async(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -166,7 +152,6 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpRetryClient client = new HttpRetryClient(credential);
 
             Response response = client.Get502();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -177,7 +162,6 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpRetryClient client = new HttpRetryClient(credential);
 
             Response response = await client.Get502Async();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -188,7 +172,6 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpRetryClient client = new HttpRetryClient(credential);
 
             Response response = client.Get502();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -199,7 +182,6 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpRetryClient client = new HttpRetryClient(credential);
 
             Response response = await client.Get502Async();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -210,9 +192,6 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpRetryClient client = new HttpRetryClient(credential);
 
             Response response = client.Options502(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -223,9 +202,6 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpRetryClient client = new HttpRetryClient(credential);
 
             Response response = await client.Options502Async(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -236,9 +212,6 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpRetryClient client = new HttpRetryClient(credential);
 
             Response response = client.Options502(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -249,9 +222,6 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpRetryClient client = new HttpRetryClient(credential);
 
             Response response = await client.Options502Async(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -263,7 +233,6 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = null;
             Response response = client.Post503(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -275,7 +244,6 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = null;
             Response response = await client.Post503Async(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -287,7 +255,6 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("true");
             Response response = client.Post503(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -299,7 +266,6 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("true");
             Response response = await client.Post503Async(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -311,7 +277,6 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = null;
             Response response = client.Delete503(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -323,7 +288,6 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = null;
             Response response = await client.Delete503Async(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -335,7 +299,6 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("true");
             Response response = client.Delete503(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -347,7 +310,6 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("true");
             Response response = await client.Delete503Async(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -359,7 +321,6 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = null;
             Response response = client.Put504(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -371,7 +332,6 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = null;
             Response response = await client.Put504Async(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -383,7 +343,6 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("true");
             Response response = client.Put504(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -395,7 +354,6 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("true");
             Response response = await client.Put504Async(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -407,7 +365,6 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = null;
             Response response = client.Patch504(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -419,7 +376,6 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = null;
             Response response = await client.Patch504Async(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -431,7 +387,6 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("true");
             Response response = client.Patch504(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -443,7 +398,6 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("true");
             Response response = await client.Patch504Async(content);
-            Console.WriteLine(response.Status);
         }
     }
 }

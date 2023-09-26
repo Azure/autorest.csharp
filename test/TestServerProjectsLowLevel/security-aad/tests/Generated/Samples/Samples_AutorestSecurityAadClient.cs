@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -25,7 +24,6 @@ namespace security_aad_LowLevel.Samples
             AutorestSecurityAadClient client = new AutorestSecurityAadClient(credential);
 
             Response response = client.Head();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -36,7 +34,6 @@ namespace security_aad_LowLevel.Samples
             AutorestSecurityAadClient client = new AutorestSecurityAadClient(credential);
 
             Response response = await client.HeadAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -47,7 +44,6 @@ namespace security_aad_LowLevel.Samples
             AutorestSecurityAadClient client = new AutorestSecurityAadClient(credential);
 
             Response response = client.Head();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -58,7 +54,6 @@ namespace security_aad_LowLevel.Samples
             AutorestSecurityAadClient client = new AutorestSecurityAadClient(credential);
 
             Response response = await client.HeadAsync();
-            Console.WriteLine(response.Status);
         }
     }
 }

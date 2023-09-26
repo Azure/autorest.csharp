@@ -10,10 +10,6 @@ LrosaDsClient client = new LrosaDsClient(credential);
 
 RequestContent content = null;
 Operation<BinaryData> operation = await client.PutNonRetry400Async(WaitUntil.Completed, content);
-BinaryData responseData = operation.Value;
-
-JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
-Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call PutNonRetry400Async with all parameters and request content and parse the result.
 <code><![CDATA[
@@ -33,16 +29,6 @@ RequestContent content = RequestContent.Create(new
     location = "<location>",
 });
 Operation<BinaryData> operation = await client.PutNonRetry400Async(WaitUntil.Completed, content);
-BinaryData responseData = operation.Value;
-
-JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
-Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
-Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
-Console.WriteLine(result.GetProperty("id").ToString());
-Console.WriteLine(result.GetProperty("type").ToString());
-Console.WriteLine(result.GetProperty("tags").GetProperty("<key>").ToString());
-Console.WriteLine(result.GetProperty("location").ToString());
-Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code></example>
     </member>
     <member name="PutNonRetry400(WaitUntil,RequestContent,RequestContext)">
@@ -54,10 +40,6 @@ LrosaDsClient client = new LrosaDsClient(credential);
 
 RequestContent content = null;
 Operation<BinaryData> operation = client.PutNonRetry400(WaitUntil.Completed, content);
-BinaryData responseData = operation.Value;
-
-JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
-Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call PutNonRetry400 with all parameters and request content and parse the result.
 <code><![CDATA[
@@ -77,16 +59,6 @@ RequestContent content = RequestContent.Create(new
     location = "<location>",
 });
 Operation<BinaryData> operation = client.PutNonRetry400(WaitUntil.Completed, content);
-BinaryData responseData = operation.Value;
-
-JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
-Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
-Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
-Console.WriteLine(result.GetProperty("id").ToString());
-Console.WriteLine(result.GetProperty("type").ToString());
-Console.WriteLine(result.GetProperty("tags").GetProperty("<key>").ToString());
-Console.WriteLine(result.GetProperty("location").ToString());
-Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code></example>
     </member>
     <member name="PutNonRetry201Creating400Async(WaitUntil,RequestContent,RequestContext)">
@@ -98,10 +70,6 @@ LrosaDsClient client = new LrosaDsClient(credential);
 
 RequestContent content = null;
 Operation<BinaryData> operation = await client.PutNonRetry201Creating400Async(WaitUntil.Completed, content);
-BinaryData responseData = operation.Value;
-
-JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
-Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call PutNonRetry201Creating400Async with all parameters and request content and parse the result.
 <code><![CDATA[
@@ -121,16 +89,6 @@ RequestContent content = RequestContent.Create(new
     location = "<location>",
 });
 Operation<BinaryData> operation = await client.PutNonRetry201Creating400Async(WaitUntil.Completed, content);
-BinaryData responseData = operation.Value;
-
-JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
-Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
-Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
-Console.WriteLine(result.GetProperty("id").ToString());
-Console.WriteLine(result.GetProperty("type").ToString());
-Console.WriteLine(result.GetProperty("tags").GetProperty("<key>").ToString());
-Console.WriteLine(result.GetProperty("location").ToString());
-Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code></example>
     </member>
     <member name="PutNonRetry201Creating400(WaitUntil,RequestContent,RequestContext)">
@@ -142,10 +100,6 @@ LrosaDsClient client = new LrosaDsClient(credential);
 
 RequestContent content = null;
 Operation<BinaryData> operation = client.PutNonRetry201Creating400(WaitUntil.Completed, content);
-BinaryData responseData = operation.Value;
-
-JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
-Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call PutNonRetry201Creating400 with all parameters and request content and parse the result.
 <code><![CDATA[
@@ -165,16 +119,6 @@ RequestContent content = RequestContent.Create(new
     location = "<location>",
 });
 Operation<BinaryData> operation = client.PutNonRetry201Creating400(WaitUntil.Completed, content);
-BinaryData responseData = operation.Value;
-
-JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
-Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
-Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
-Console.WriteLine(result.GetProperty("id").ToString());
-Console.WriteLine(result.GetProperty("type").ToString());
-Console.WriteLine(result.GetProperty("tags").GetProperty("<key>").ToString());
-Console.WriteLine(result.GetProperty("location").ToString());
-Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code></example>
     </member>
     <member name="PutNonRetry201Creating400InvalidJsonAsync(WaitUntil,RequestContent,RequestContext)">
@@ -186,10 +130,6 @@ LrosaDsClient client = new LrosaDsClient(credential);
 
 RequestContent content = null;
 Operation<BinaryData> operation = await client.PutNonRetry201Creating400InvalidJsonAsync(WaitUntil.Completed, content);
-BinaryData responseData = operation.Value;
-
-JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
-Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call PutNonRetry201Creating400InvalidJsonAsync with all parameters and request content and parse the result.
 <code><![CDATA[
@@ -209,16 +149,6 @@ RequestContent content = RequestContent.Create(new
     location = "<location>",
 });
 Operation<BinaryData> operation = await client.PutNonRetry201Creating400InvalidJsonAsync(WaitUntil.Completed, content);
-BinaryData responseData = operation.Value;
-
-JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
-Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
-Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
-Console.WriteLine(result.GetProperty("id").ToString());
-Console.WriteLine(result.GetProperty("type").ToString());
-Console.WriteLine(result.GetProperty("tags").GetProperty("<key>").ToString());
-Console.WriteLine(result.GetProperty("location").ToString());
-Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code></example>
     </member>
     <member name="PutNonRetry201Creating400InvalidJson(WaitUntil,RequestContent,RequestContext)">
@@ -230,10 +160,6 @@ LrosaDsClient client = new LrosaDsClient(credential);
 
 RequestContent content = null;
 Operation<BinaryData> operation = client.PutNonRetry201Creating400InvalidJson(WaitUntil.Completed, content);
-BinaryData responseData = operation.Value;
-
-JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
-Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call PutNonRetry201Creating400InvalidJson with all parameters and request content and parse the result.
 <code><![CDATA[
@@ -253,16 +179,6 @@ RequestContent content = RequestContent.Create(new
     location = "<location>",
 });
 Operation<BinaryData> operation = client.PutNonRetry201Creating400InvalidJson(WaitUntil.Completed, content);
-BinaryData responseData = operation.Value;
-
-JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
-Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
-Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
-Console.WriteLine(result.GetProperty("id").ToString());
-Console.WriteLine(result.GetProperty("type").ToString());
-Console.WriteLine(result.GetProperty("tags").GetProperty("<key>").ToString());
-Console.WriteLine(result.GetProperty("location").ToString());
-Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code></example>
     </member>
     <member name="PutAsyncRelativeRetry400Async(WaitUntil,RequestContent,RequestContext)">
@@ -274,10 +190,6 @@ LrosaDsClient client = new LrosaDsClient(credential);
 
 RequestContent content = null;
 Operation<BinaryData> operation = await client.PutAsyncRelativeRetry400Async(WaitUntil.Completed, content);
-BinaryData responseData = operation.Value;
-
-JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
-Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call PutAsyncRelativeRetry400Async with all parameters and request content and parse the result.
 <code><![CDATA[
@@ -297,16 +209,6 @@ RequestContent content = RequestContent.Create(new
     location = "<location>",
 });
 Operation<BinaryData> operation = await client.PutAsyncRelativeRetry400Async(WaitUntil.Completed, content);
-BinaryData responseData = operation.Value;
-
-JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
-Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
-Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
-Console.WriteLine(result.GetProperty("id").ToString());
-Console.WriteLine(result.GetProperty("type").ToString());
-Console.WriteLine(result.GetProperty("tags").GetProperty("<key>").ToString());
-Console.WriteLine(result.GetProperty("location").ToString());
-Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code></example>
     </member>
     <member name="PutAsyncRelativeRetry400(WaitUntil,RequestContent,RequestContext)">
@@ -318,10 +220,6 @@ LrosaDsClient client = new LrosaDsClient(credential);
 
 RequestContent content = null;
 Operation<BinaryData> operation = client.PutAsyncRelativeRetry400(WaitUntil.Completed, content);
-BinaryData responseData = operation.Value;
-
-JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
-Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call PutAsyncRelativeRetry400 with all parameters and request content and parse the result.
 <code><![CDATA[
@@ -341,16 +239,6 @@ RequestContent content = RequestContent.Create(new
     location = "<location>",
 });
 Operation<BinaryData> operation = client.PutAsyncRelativeRetry400(WaitUntil.Completed, content);
-BinaryData responseData = operation.Value;
-
-JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
-Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
-Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
-Console.WriteLine(result.GetProperty("id").ToString());
-Console.WriteLine(result.GetProperty("type").ToString());
-Console.WriteLine(result.GetProperty("tags").GetProperty("<key>").ToString());
-Console.WriteLine(result.GetProperty("location").ToString());
-Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code></example>
     </member>
     <member name="DeleteNonRetry400Async(WaitUntil,RequestContext)">
@@ -644,10 +532,6 @@ LrosaDsClient client = new LrosaDsClient(credential);
 
 RequestContent content = null;
 Operation<BinaryData> operation = await client.PutError201NoProvisioningStatePayloadAsync(WaitUntil.Completed, content);
-BinaryData responseData = operation.Value;
-
-JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
-Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call PutError201NoProvisioningStatePayloadAsync with all parameters and request content and parse the result.
 <code><![CDATA[
@@ -667,16 +551,6 @@ RequestContent content = RequestContent.Create(new
     location = "<location>",
 });
 Operation<BinaryData> operation = await client.PutError201NoProvisioningStatePayloadAsync(WaitUntil.Completed, content);
-BinaryData responseData = operation.Value;
-
-JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
-Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
-Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
-Console.WriteLine(result.GetProperty("id").ToString());
-Console.WriteLine(result.GetProperty("type").ToString());
-Console.WriteLine(result.GetProperty("tags").GetProperty("<key>").ToString());
-Console.WriteLine(result.GetProperty("location").ToString());
-Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code></example>
     </member>
     <member name="PutError201NoProvisioningStatePayload(WaitUntil,RequestContent,RequestContext)">
@@ -688,10 +562,6 @@ LrosaDsClient client = new LrosaDsClient(credential);
 
 RequestContent content = null;
 Operation<BinaryData> operation = client.PutError201NoProvisioningStatePayload(WaitUntil.Completed, content);
-BinaryData responseData = operation.Value;
-
-JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
-Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call PutError201NoProvisioningStatePayload with all parameters and request content and parse the result.
 <code><![CDATA[
@@ -711,16 +581,6 @@ RequestContent content = RequestContent.Create(new
     location = "<location>",
 });
 Operation<BinaryData> operation = client.PutError201NoProvisioningStatePayload(WaitUntil.Completed, content);
-BinaryData responseData = operation.Value;
-
-JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
-Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
-Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
-Console.WriteLine(result.GetProperty("id").ToString());
-Console.WriteLine(result.GetProperty("type").ToString());
-Console.WriteLine(result.GetProperty("tags").GetProperty("<key>").ToString());
-Console.WriteLine(result.GetProperty("location").ToString());
-Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code></example>
     </member>
     <member name="PutAsyncRelativeRetryNoStatusAsync(WaitUntil,RequestContent,RequestContext)">
@@ -732,10 +592,6 @@ LrosaDsClient client = new LrosaDsClient(credential);
 
 RequestContent content = null;
 Operation<BinaryData> operation = await client.PutAsyncRelativeRetryNoStatusAsync(WaitUntil.Completed, content);
-BinaryData responseData = operation.Value;
-
-JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
-Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call PutAsyncRelativeRetryNoStatusAsync with all parameters and request content and parse the result.
 <code><![CDATA[
@@ -755,16 +611,6 @@ RequestContent content = RequestContent.Create(new
     location = "<location>",
 });
 Operation<BinaryData> operation = await client.PutAsyncRelativeRetryNoStatusAsync(WaitUntil.Completed, content);
-BinaryData responseData = operation.Value;
-
-JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
-Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
-Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
-Console.WriteLine(result.GetProperty("id").ToString());
-Console.WriteLine(result.GetProperty("type").ToString());
-Console.WriteLine(result.GetProperty("tags").GetProperty("<key>").ToString());
-Console.WriteLine(result.GetProperty("location").ToString());
-Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code></example>
     </member>
     <member name="PutAsyncRelativeRetryNoStatus(WaitUntil,RequestContent,RequestContext)">
@@ -776,10 +622,6 @@ LrosaDsClient client = new LrosaDsClient(credential);
 
 RequestContent content = null;
 Operation<BinaryData> operation = client.PutAsyncRelativeRetryNoStatus(WaitUntil.Completed, content);
-BinaryData responseData = operation.Value;
-
-JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
-Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call PutAsyncRelativeRetryNoStatus with all parameters and request content and parse the result.
 <code><![CDATA[
@@ -799,16 +641,6 @@ RequestContent content = RequestContent.Create(new
     location = "<location>",
 });
 Operation<BinaryData> operation = client.PutAsyncRelativeRetryNoStatus(WaitUntil.Completed, content);
-BinaryData responseData = operation.Value;
-
-JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
-Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
-Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
-Console.WriteLine(result.GetProperty("id").ToString());
-Console.WriteLine(result.GetProperty("type").ToString());
-Console.WriteLine(result.GetProperty("tags").GetProperty("<key>").ToString());
-Console.WriteLine(result.GetProperty("location").ToString());
-Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code></example>
     </member>
     <member name="PutAsyncRelativeRetryNoStatusPayloadAsync(WaitUntil,RequestContent,RequestContext)">
@@ -820,10 +652,6 @@ LrosaDsClient client = new LrosaDsClient(credential);
 
 RequestContent content = null;
 Operation<BinaryData> operation = await client.PutAsyncRelativeRetryNoStatusPayloadAsync(WaitUntil.Completed, content);
-BinaryData responseData = operation.Value;
-
-JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
-Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call PutAsyncRelativeRetryNoStatusPayloadAsync with all parameters and request content and parse the result.
 <code><![CDATA[
@@ -843,16 +671,6 @@ RequestContent content = RequestContent.Create(new
     location = "<location>",
 });
 Operation<BinaryData> operation = await client.PutAsyncRelativeRetryNoStatusPayloadAsync(WaitUntil.Completed, content);
-BinaryData responseData = operation.Value;
-
-JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
-Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
-Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
-Console.WriteLine(result.GetProperty("id").ToString());
-Console.WriteLine(result.GetProperty("type").ToString());
-Console.WriteLine(result.GetProperty("tags").GetProperty("<key>").ToString());
-Console.WriteLine(result.GetProperty("location").ToString());
-Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code></example>
     </member>
     <member name="PutAsyncRelativeRetryNoStatusPayload(WaitUntil,RequestContent,RequestContext)">
@@ -864,10 +682,6 @@ LrosaDsClient client = new LrosaDsClient(credential);
 
 RequestContent content = null;
 Operation<BinaryData> operation = client.PutAsyncRelativeRetryNoStatusPayload(WaitUntil.Completed, content);
-BinaryData responseData = operation.Value;
-
-JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
-Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call PutAsyncRelativeRetryNoStatusPayload with all parameters and request content and parse the result.
 <code><![CDATA[
@@ -887,16 +701,6 @@ RequestContent content = RequestContent.Create(new
     location = "<location>",
 });
 Operation<BinaryData> operation = client.PutAsyncRelativeRetryNoStatusPayload(WaitUntil.Completed, content);
-BinaryData responseData = operation.Value;
-
-JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
-Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
-Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
-Console.WriteLine(result.GetProperty("id").ToString());
-Console.WriteLine(result.GetProperty("type").ToString());
-Console.WriteLine(result.GetProperty("tags").GetProperty("<key>").ToString());
-Console.WriteLine(result.GetProperty("location").ToString());
-Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code></example>
     </member>
     <member name="Delete204SucceededAsync(WaitUntil,RequestContext)">
@@ -1096,10 +900,6 @@ LrosaDsClient client = new LrosaDsClient(credential);
 
 RequestContent content = null;
 Operation<BinaryData> operation = await client.Put200InvalidJsonAsync(WaitUntil.Completed, content);
-BinaryData responseData = operation.Value;
-
-JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
-Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call Put200InvalidJsonAsync with all parameters and request content and parse the result.
 <code><![CDATA[
@@ -1119,16 +919,6 @@ RequestContent content = RequestContent.Create(new
     location = "<location>",
 });
 Operation<BinaryData> operation = await client.Put200InvalidJsonAsync(WaitUntil.Completed, content);
-BinaryData responseData = operation.Value;
-
-JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
-Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
-Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
-Console.WriteLine(result.GetProperty("id").ToString());
-Console.WriteLine(result.GetProperty("type").ToString());
-Console.WriteLine(result.GetProperty("tags").GetProperty("<key>").ToString());
-Console.WriteLine(result.GetProperty("location").ToString());
-Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code></example>
     </member>
     <member name="Put200InvalidJson(WaitUntil,RequestContent,RequestContext)">
@@ -1140,10 +930,6 @@ LrosaDsClient client = new LrosaDsClient(credential);
 
 RequestContent content = null;
 Operation<BinaryData> operation = client.Put200InvalidJson(WaitUntil.Completed, content);
-BinaryData responseData = operation.Value;
-
-JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
-Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call Put200InvalidJson with all parameters and request content and parse the result.
 <code><![CDATA[
@@ -1163,16 +949,6 @@ RequestContent content = RequestContent.Create(new
     location = "<location>",
 });
 Operation<BinaryData> operation = client.Put200InvalidJson(WaitUntil.Completed, content);
-BinaryData responseData = operation.Value;
-
-JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
-Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
-Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
-Console.WriteLine(result.GetProperty("id").ToString());
-Console.WriteLine(result.GetProperty("type").ToString());
-Console.WriteLine(result.GetProperty("tags").GetProperty("<key>").ToString());
-Console.WriteLine(result.GetProperty("location").ToString());
-Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code></example>
     </member>
     <member name="PutAsyncRelativeRetryInvalidHeaderAsync(WaitUntil,RequestContent,RequestContext)">
@@ -1184,10 +960,6 @@ LrosaDsClient client = new LrosaDsClient(credential);
 
 RequestContent content = null;
 Operation<BinaryData> operation = await client.PutAsyncRelativeRetryInvalidHeaderAsync(WaitUntil.Completed, content);
-BinaryData responseData = operation.Value;
-
-JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
-Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call PutAsyncRelativeRetryInvalidHeaderAsync with all parameters and request content and parse the result.
 <code><![CDATA[
@@ -1207,16 +979,6 @@ RequestContent content = RequestContent.Create(new
     location = "<location>",
 });
 Operation<BinaryData> operation = await client.PutAsyncRelativeRetryInvalidHeaderAsync(WaitUntil.Completed, content);
-BinaryData responseData = operation.Value;
-
-JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
-Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
-Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
-Console.WriteLine(result.GetProperty("id").ToString());
-Console.WriteLine(result.GetProperty("type").ToString());
-Console.WriteLine(result.GetProperty("tags").GetProperty("<key>").ToString());
-Console.WriteLine(result.GetProperty("location").ToString());
-Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code></example>
     </member>
     <member name="PutAsyncRelativeRetryInvalidHeader(WaitUntil,RequestContent,RequestContext)">
@@ -1228,10 +990,6 @@ LrosaDsClient client = new LrosaDsClient(credential);
 
 RequestContent content = null;
 Operation<BinaryData> operation = client.PutAsyncRelativeRetryInvalidHeader(WaitUntil.Completed, content);
-BinaryData responseData = operation.Value;
-
-JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
-Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call PutAsyncRelativeRetryInvalidHeader with all parameters and request content and parse the result.
 <code><![CDATA[
@@ -1251,16 +1009,6 @@ RequestContent content = RequestContent.Create(new
     location = "<location>",
 });
 Operation<BinaryData> operation = client.PutAsyncRelativeRetryInvalidHeader(WaitUntil.Completed, content);
-BinaryData responseData = operation.Value;
-
-JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
-Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
-Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
-Console.WriteLine(result.GetProperty("id").ToString());
-Console.WriteLine(result.GetProperty("type").ToString());
-Console.WriteLine(result.GetProperty("tags").GetProperty("<key>").ToString());
-Console.WriteLine(result.GetProperty("location").ToString());
-Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code></example>
     </member>
     <member name="PutAsyncRelativeRetryInvalidJsonPollingAsync(WaitUntil,RequestContent,RequestContext)">
@@ -1272,10 +1020,6 @@ LrosaDsClient client = new LrosaDsClient(credential);
 
 RequestContent content = null;
 Operation<BinaryData> operation = await client.PutAsyncRelativeRetryInvalidJsonPollingAsync(WaitUntil.Completed, content);
-BinaryData responseData = operation.Value;
-
-JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
-Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call PutAsyncRelativeRetryInvalidJsonPollingAsync with all parameters and request content and parse the result.
 <code><![CDATA[
@@ -1295,16 +1039,6 @@ RequestContent content = RequestContent.Create(new
     location = "<location>",
 });
 Operation<BinaryData> operation = await client.PutAsyncRelativeRetryInvalidJsonPollingAsync(WaitUntil.Completed, content);
-BinaryData responseData = operation.Value;
-
-JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
-Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
-Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
-Console.WriteLine(result.GetProperty("id").ToString());
-Console.WriteLine(result.GetProperty("type").ToString());
-Console.WriteLine(result.GetProperty("tags").GetProperty("<key>").ToString());
-Console.WriteLine(result.GetProperty("location").ToString());
-Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code></example>
     </member>
     <member name="PutAsyncRelativeRetryInvalidJsonPolling(WaitUntil,RequestContent,RequestContext)">
@@ -1316,10 +1050,6 @@ LrosaDsClient client = new LrosaDsClient(credential);
 
 RequestContent content = null;
 Operation<BinaryData> operation = client.PutAsyncRelativeRetryInvalidJsonPolling(WaitUntil.Completed, content);
-BinaryData responseData = operation.Value;
-
-JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
-Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call PutAsyncRelativeRetryInvalidJsonPolling with all parameters and request content and parse the result.
 <code><![CDATA[
@@ -1339,16 +1069,6 @@ RequestContent content = RequestContent.Create(new
     location = "<location>",
 });
 Operation<BinaryData> operation = client.PutAsyncRelativeRetryInvalidJsonPolling(WaitUntil.Completed, content);
-BinaryData responseData = operation.Value;
-
-JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
-Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
-Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
-Console.WriteLine(result.GetProperty("id").ToString());
-Console.WriteLine(result.GetProperty("type").ToString());
-Console.WriteLine(result.GetProperty("tags").GetProperty("<key>").ToString());
-Console.WriteLine(result.GetProperty("location").ToString());
-Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code></example>
     </member>
     <member name="Delete202RetryInvalidHeaderAsync(WaitUntil,RequestContext)">

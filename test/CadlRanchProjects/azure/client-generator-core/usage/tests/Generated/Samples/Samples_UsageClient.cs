@@ -5,8 +5,6 @@
 
 #nullable disable
 
-using System;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -30,7 +28,6 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage.Samples
                 name = "<name>",
             });
             Response response = client.InputToInputOutput(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -44,7 +41,6 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage.Samples
                 name = "<name>",
             });
             Response response = await client.InputToInputOutputAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -55,7 +51,6 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage.Samples
 
             InputModel body = new InputModel("<name>");
             Response response = client.InputToInputOutput(body);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -66,7 +61,6 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage.Samples
 
             InputModel body = new InputModel("<name>");
             Response response = await client.InputToInputOutputAsync(body);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -80,7 +74,6 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage.Samples
                 name = "<name>",
             });
             Response response = client.InputToInputOutput(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -94,7 +87,6 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage.Samples
                 name = "<name>",
             });
             Response response = await client.InputToInputOutputAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -105,7 +97,6 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage.Samples
 
             InputModel body = new InputModel("<name>");
             Response response = client.InputToInputOutput(body);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -116,7 +107,6 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage.Samples
 
             InputModel body = new InputModel("<name>");
             Response response = await client.InputToInputOutputAsync(body);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -126,9 +116,6 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage.Samples
             UsageClient client = new UsageClient();
 
             Response response = client.OutputToInputOutput(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]
@@ -138,9 +125,6 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage.Samples
             UsageClient client = new UsageClient();
 
             Response response = await client.OutputToInputOutputAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]
@@ -168,9 +152,6 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage.Samples
             UsageClient client = new UsageClient();
 
             Response response = client.OutputToInputOutput(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]
@@ -180,9 +161,6 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage.Samples
             UsageClient client = new UsageClient();
 
             Response response = await client.OutputToInputOutputAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]

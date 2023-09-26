@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Identity;
@@ -24,7 +23,6 @@ namespace custom_baseUrl_more_options_LowLevel.Samples
             PathsClient client = new PathsClient("host", "<SubscriptionId>", credential);
 
             Response response = client.GetEmpty("<vault>", "<secret>", "<keyName>");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -35,7 +33,6 @@ namespace custom_baseUrl_more_options_LowLevel.Samples
             PathsClient client = new PathsClient("host", "<SubscriptionId>", credential);
 
             Response response = await client.GetEmptyAsync("<vault>", "<secret>", "<keyName>");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -45,8 +42,7 @@ namespace custom_baseUrl_more_options_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient("host", "<SubscriptionId>", credential);
 
-            Response response = client.GetEmpty("<vault>", "<secret>", "<keyName>", keyVersion: "<keyVersion>");
-            Console.WriteLine(response.Status);
+            Response response = client.GetEmpty("<vault>", "<secret>", "<keyName>", "<keyVersion>");
         }
 
         [Test]
@@ -56,8 +52,7 @@ namespace custom_baseUrl_more_options_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient("host", "<SubscriptionId>", credential);
 
-            Response response = await client.GetEmptyAsync("<vault>", "<secret>", "<keyName>", keyVersion: "<keyVersion>");
-            Console.WriteLine(response.Status);
+            Response response = await client.GetEmptyAsync("<vault>", "<secret>", "<keyName>", "<keyVersion>");
         }
     }
 }

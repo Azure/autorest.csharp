@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System;
 using System.Threading.Tasks;
 using Authentication.ApiKey;
 using Azure;
@@ -24,7 +23,6 @@ namespace Authentication.ApiKey.Samples
             ApiKeyClient client = new ApiKeyClient(credential);
 
             Response response = client.Valid();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -35,7 +33,6 @@ namespace Authentication.ApiKey.Samples
             ApiKeyClient client = new ApiKeyClient(credential);
 
             Response response = await client.ValidAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -46,7 +43,6 @@ namespace Authentication.ApiKey.Samples
             ApiKeyClient client = new ApiKeyClient(credential);
 
             Response response = client.Valid();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -57,7 +53,6 @@ namespace Authentication.ApiKey.Samples
             ApiKeyClient client = new ApiKeyClient(credential);
 
             Response response = await client.ValidAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -68,7 +63,6 @@ namespace Authentication.ApiKey.Samples
             ApiKeyClient client = new ApiKeyClient(credential);
 
             Response response = client.Invalid();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -79,7 +73,6 @@ namespace Authentication.ApiKey.Samples
             ApiKeyClient client = new ApiKeyClient(credential);
 
             Response response = await client.InvalidAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -90,7 +83,6 @@ namespace Authentication.ApiKey.Samples
             ApiKeyClient client = new ApiKeyClient(credential);
 
             Response response = client.Invalid();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -101,7 +93,6 @@ namespace Authentication.ApiKey.Samples
             ApiKeyClient client = new ApiKeyClient(credential);
 
             Response response = await client.InvalidAsync();
-            Console.WriteLine(response.Status);
         }
     }
 }

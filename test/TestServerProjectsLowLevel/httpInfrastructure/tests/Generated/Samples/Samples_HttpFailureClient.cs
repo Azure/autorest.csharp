@@ -5,8 +5,6 @@
 
 #nullable disable
 
-using System;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Identity;
@@ -25,9 +23,6 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpFailureClient client = new HttpFailureClient(credential);
 
             Response response = client.GetEmptyError(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -38,9 +33,6 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpFailureClient client = new HttpFailureClient(credential);
 
             Response response = await client.GetEmptyErrorAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -51,9 +43,6 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpFailureClient client = new HttpFailureClient(credential);
 
             Response response = client.GetEmptyError(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -64,9 +53,6 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpFailureClient client = new HttpFailureClient(credential);
 
             Response response = await client.GetEmptyErrorAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -77,9 +63,6 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpFailureClient client = new HttpFailureClient(credential);
 
             Response response = client.GetNoModelError(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -90,9 +73,6 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpFailureClient client = new HttpFailureClient(credential);
 
             Response response = await client.GetNoModelErrorAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -103,9 +83,6 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpFailureClient client = new HttpFailureClient(credential);
 
             Response response = client.GetNoModelError(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -116,9 +93,6 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpFailureClient client = new HttpFailureClient(credential);
 
             Response response = await client.GetNoModelErrorAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -129,9 +103,6 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpFailureClient client = new HttpFailureClient(credential);
 
             Response response = client.GetNoModelEmpty(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -142,9 +113,6 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpFailureClient client = new HttpFailureClient(credential);
 
             Response response = await client.GetNoModelEmptyAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -155,9 +123,6 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpFailureClient client = new HttpFailureClient(credential);
 
             Response response = client.GetNoModelEmpty(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -168,9 +133,6 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpFailureClient client = new HttpFailureClient(credential);
 
             Response response = await client.GetNoModelEmptyAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
     }
 }

@@ -9,9 +9,6 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ParametersLowlevelClient client = new ParametersLowlevelClient(credential);
 
 Response response = await client.NoRequestBodyResponseBodyAsync(1234, default, null, null, null);
-
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call NoRequestBodyResponseBodyAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -19,9 +16,6 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ParametersLowlevelClient client = new ParametersLowlevelClient(credential);
 
 Response response = await client.NoRequestBodyResponseBodyAsync(1234, default, 1234, "start", null);
-
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
     <member name="NoRequestBodyResponseBody(int,int,int?,string,RequestContext)">
@@ -32,9 +26,6 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ParametersLowlevelClient client = new ParametersLowlevelClient(credential);
 
 Response response = client.NoRequestBodyResponseBody(1234, default, null, null, null);
-
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call NoRequestBodyResponseBody with all parameters and parse the result.
 <code><![CDATA[
@@ -42,9 +33,6 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ParametersLowlevelClient client = new ParametersLowlevelClient(credential);
 
 Response response = client.NoRequestBodyResponseBody(1234, default, 1234, "start", null);
-
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
     <member name="RequestBodyResponseBodyAsync(RequestContent,RequestContext)">
@@ -56,9 +44,6 @@ ParametersLowlevelClient client = new ParametersLowlevelClient(credential);
 
 RequestContent content = null;
 Response response = await client.RequestBodyResponseBodyAsync(content);
-
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call RequestBodyResponseBodyAsync with all request content and parse the result.
 <code><![CDATA[
@@ -71,10 +56,6 @@ RequestContent content = RequestContent.Create(new
     Status = "<Status>",
 });
 Response response = await client.RequestBodyResponseBodyAsync(content);
-
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("Code").ToString());
-Console.WriteLine(result.GetProperty("Status").ToString());
 ]]></code></example>
     </member>
     <member name="RequestBodyResponseBody(RequestContent,RequestContext)">
@@ -86,9 +67,6 @@ ParametersLowlevelClient client = new ParametersLowlevelClient(credential);
 
 RequestContent content = null;
 Response response = client.RequestBodyResponseBody(content);
-
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call RequestBodyResponseBody with all request content and parse the result.
 <code><![CDATA[
@@ -101,10 +79,6 @@ RequestContent content = RequestContent.Create(new
     Status = "<Status>",
 });
 Response response = client.RequestBodyResponseBody(content);
-
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("Code").ToString());
-Console.WriteLine(result.GetProperty("Status").ToString());
 ]]></code></example>
     </member>
     <member name="DeleteNoRequestBodyResponseBodyAsync(string,RequestContext)">
@@ -115,9 +89,6 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ParametersLowlevelClient client = new ParametersLowlevelClient(credential);
 
 Response response = await client.DeleteNoRequestBodyResponseBodyAsync("<resourceName>", null);
-
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call DeleteNoRequestBodyResponseBodyAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -125,9 +96,6 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ParametersLowlevelClient client = new ParametersLowlevelClient(credential);
 
 Response response = await client.DeleteNoRequestBodyResponseBodyAsync("<resourceName>", null);
-
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
     <member name="DeleteNoRequestBodyResponseBody(string,RequestContext)">
@@ -138,9 +106,6 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ParametersLowlevelClient client = new ParametersLowlevelClient(credential);
 
 Response response = client.DeleteNoRequestBodyResponseBody("<resourceName>", null);
-
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call DeleteNoRequestBodyResponseBody with all parameters and parse the result.
 <code><![CDATA[
@@ -148,9 +113,6 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ParametersLowlevelClient client = new ParametersLowlevelClient(credential);
 
 Response response = client.DeleteNoRequestBodyResponseBody("<resourceName>", null);
-
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
     <member name="NoRequestBodyNoResponseBodyAsync(RequestContext)">
@@ -161,7 +123,6 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ParametersLowlevelClient client = new ParametersLowlevelClient(credential);
 
 Response response = await client.NoRequestBodyNoResponseBodyAsync();
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call NoRequestBodyNoResponseBodyAsync with all request content.
 <code><![CDATA[
@@ -169,7 +130,6 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ParametersLowlevelClient client = new ParametersLowlevelClient(credential);
 
 Response response = await client.NoRequestBodyNoResponseBodyAsync();
-Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="NoRequestBodyNoResponseBody(RequestContext)">
@@ -180,7 +140,6 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ParametersLowlevelClient client = new ParametersLowlevelClient(credential);
 
 Response response = client.NoRequestBodyNoResponseBody();
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call NoRequestBodyNoResponseBody with all request content.
 <code><![CDATA[
@@ -188,7 +147,6 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ParametersLowlevelClient client = new ParametersLowlevelClient(credential);
 
 Response response = client.NoRequestBodyNoResponseBody();
-Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="RequestBodyNoResponseBodyAsync(RequestContent,RequestContext)">
@@ -200,7 +158,6 @@ ParametersLowlevelClient client = new ParametersLowlevelClient(credential);
 
 RequestContent content = null;
 Response response = await client.RequestBodyNoResponseBodyAsync(content);
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call RequestBodyNoResponseBodyAsync with all request content.
 <code><![CDATA[
@@ -209,7 +166,6 @@ ParametersLowlevelClient client = new ParametersLowlevelClient(credential);
 
 RequestContent content = RequestContent.Create("<stringBody>");
 Response response = await client.RequestBodyNoResponseBodyAsync(content);
-Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="RequestBodyNoResponseBody(RequestContent,RequestContext)">
@@ -221,7 +177,6 @@ ParametersLowlevelClient client = new ParametersLowlevelClient(credential);
 
 RequestContent content = null;
 Response response = client.RequestBodyNoResponseBody(content);
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call RequestBodyNoResponseBody with all request content.
 <code><![CDATA[
@@ -230,7 +185,6 @@ ParametersLowlevelClient client = new ParametersLowlevelClient(credential);
 
 RequestContent content = RequestContent.Create("<stringBody>");
 Response response = client.RequestBodyNoResponseBody(content);
-Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="OptionalPathParametersAsync(int,string,int,RequestContext)">
@@ -241,7 +195,6 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ParametersLowlevelClient client = new ParametersLowlevelClient(credential);
 
 Response response = await client.OptionalPathParametersAsync(1234, "start", 1234);
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call OptionalPathParametersAsync with all parameters.
 <code><![CDATA[
@@ -249,7 +202,6 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ParametersLowlevelClient client = new ParametersLowlevelClient(credential);
 
 Response response = await client.OptionalPathParametersAsync(1234, "start", 1234);
-Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="OptionalPathParameters(int,string,int,RequestContext)">
@@ -260,7 +212,6 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ParametersLowlevelClient client = new ParametersLowlevelClient(credential);
 
 Response response = client.OptionalPathParameters(1234, "start", 1234);
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call OptionalPathParameters with all parameters.
 <code><![CDATA[
@@ -268,7 +219,6 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ParametersLowlevelClient client = new ParametersLowlevelClient(credential);
 
 Response response = client.OptionalPathParameters(1234, "start", 1234);
-Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="OptionalPathParametersWithMixedSequenceAsync(int,string,int,RequestContext)">
@@ -279,7 +229,6 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ParametersLowlevelClient client = new ParametersLowlevelClient(credential);
 
 Response response = await client.OptionalPathParametersWithMixedSequenceAsync(1234, "start", default);
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call OptionalPathParametersWithMixedSequenceAsync with all parameters.
 <code><![CDATA[
@@ -287,7 +236,6 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ParametersLowlevelClient client = new ParametersLowlevelClient(credential);
 
 Response response = await client.OptionalPathParametersWithMixedSequenceAsync(1234, "start", default);
-Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="OptionalPathParametersWithMixedSequence(int,string,int,RequestContext)">
@@ -298,7 +246,6 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ParametersLowlevelClient client = new ParametersLowlevelClient(credential);
 
 Response response = client.OptionalPathParametersWithMixedSequence(1234, "start", default);
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call OptionalPathParametersWithMixedSequence with all parameters.
 <code><![CDATA[
@@ -306,7 +253,6 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ParametersLowlevelClient client = new ParametersLowlevelClient(credential);
 
 Response response = client.OptionalPathParametersWithMixedSequence(1234, "start", default);
-Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="OptionalPathBodyParametersWithMixedSequenceAsync(int,string,int,int,RequestContent,int?,RequestContext)">
@@ -318,7 +264,6 @@ ParametersLowlevelClient client = new ParametersLowlevelClient(credential);
 
 RequestContent content = null;
 Response response = await client.OptionalPathBodyParametersWithMixedSequenceAsync(default, "<name>", 1234, default, content);
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call OptionalPathBodyParametersWithMixedSequenceAsync with all parameters and request content.
 <code><![CDATA[
@@ -330,8 +275,7 @@ RequestContent content = RequestContent.Create(new
     Code = "<Code>",
     Status = "<Status>",
 });
-Response response = await client.OptionalPathBodyParametersWithMixedSequenceAsync(default, "<name>", 1234, default, content, top: 1234);
-Console.WriteLine(response.Status);
+Response response = await client.OptionalPathBodyParametersWithMixedSequenceAsync(default, "<name>", 1234, default, content, 1234);
 ]]></code></example>
     </member>
     <member name="OptionalPathBodyParametersWithMixedSequence(int,string,int,int,RequestContent,int?,RequestContext)">
@@ -343,7 +287,6 @@ ParametersLowlevelClient client = new ParametersLowlevelClient(credential);
 
 RequestContent content = null;
 Response response = client.OptionalPathBodyParametersWithMixedSequence(default, "<name>", 1234, default, content);
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call OptionalPathBodyParametersWithMixedSequence with all parameters and request content.
 <code><![CDATA[
@@ -355,8 +298,7 @@ RequestContent content = RequestContent.Create(new
     Code = "<Code>",
     Status = "<Status>",
 });
-Response response = client.OptionalPathBodyParametersWithMixedSequence(default, "<name>", 1234, default, content, top: 1234);
-Console.WriteLine(response.Status);
+Response response = client.OptionalPathBodyParametersWithMixedSequence(default, "<name>", 1234, default, content, 1234);
 ]]></code></example>
     </member>
     <member name="RepeatableActionAsync(int,string,RequestContent,RequestContext)">
@@ -368,7 +310,6 @@ ParametersLowlevelClient client = new ParametersLowlevelClient(credential);
 
 RequestContent content = null;
 Response response = await client.RepeatableActionAsync(default, "<name>", content);
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call RepeatableActionAsync with all parameters and request content.
 <code><![CDATA[
@@ -381,7 +322,6 @@ RequestContent content = RequestContent.Create(new
     Status = "<Status>",
 });
 Response response = await client.RepeatableActionAsync(default, "<name>", content);
-Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="RepeatableAction(int,string,RequestContent,RequestContext)">
@@ -393,7 +333,6 @@ ParametersLowlevelClient client = new ParametersLowlevelClient(credential);
 
 RequestContent content = null;
 Response response = client.RepeatableAction(default, "<name>", content);
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call RepeatableAction with all parameters and request content.
 <code><![CDATA[
@@ -406,7 +345,6 @@ RequestContent content = RequestContent.Create(new
     Status = "<Status>",
 });
 Response response = client.RepeatableAction(default, "<name>", content);
-Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
   </members>

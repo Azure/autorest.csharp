@@ -9,13 +9,6 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 FilesClient client = new FilesClient(credential);
 
 Response response = await client.GetFileAsync(null);
-if (response.ContentStream != null)
-{
-    using (Stream outFileStream = File.OpenWrite("<filepath>"))
-    {
-        response.ContentStream.CopyTo(outFileStream);
-    }
-}
 ]]></code>
 This sample shows how to call GetFileAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -23,13 +16,6 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 FilesClient client = new FilesClient(credential);
 
 Response response = await client.GetFileAsync(null);
-if (response.ContentStream != null)
-{
-    using (Stream outFileStream = File.OpenWrite("<filepath>"))
-    {
-        response.ContentStream.CopyTo(outFileStream);
-    }
-}
 ]]></code></example>
     </member>
     <member name="GetFile(RequestContext)">
@@ -40,13 +26,6 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 FilesClient client = new FilesClient(credential);
 
 Response response = client.GetFile(null);
-if (response.ContentStream != null)
-{
-    using (Stream outFileStream = File.OpenWrite("<filepath>"))
-    {
-        response.ContentStream.CopyTo(outFileStream);
-    }
-}
 ]]></code>
 This sample shows how to call GetFile with all parameters and parse the result.
 <code><![CDATA[
@@ -54,13 +33,6 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 FilesClient client = new FilesClient(credential);
 
 Response response = client.GetFile(null);
-if (response.ContentStream != null)
-{
-    using (Stream outFileStream = File.OpenWrite("<filepath>"))
-    {
-        response.ContentStream.CopyTo(outFileStream);
-    }
-}
 ]]></code></example>
     </member>
     <member name="GetFileLargeAsync(RequestContext)">
@@ -71,13 +43,6 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 FilesClient client = new FilesClient(credential);
 
 Response response = await client.GetFileLargeAsync(null);
-if (response.ContentStream != null)
-{
-    using (Stream outFileStream = File.OpenWrite("<filepath>"))
-    {
-        response.ContentStream.CopyTo(outFileStream);
-    }
-}
 ]]></code>
 This sample shows how to call GetFileLargeAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -85,13 +50,6 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 FilesClient client = new FilesClient(credential);
 
 Response response = await client.GetFileLargeAsync(null);
-if (response.ContentStream != null)
-{
-    using (Stream outFileStream = File.OpenWrite("<filepath>"))
-    {
-        response.ContentStream.CopyTo(outFileStream);
-    }
-}
 ]]></code></example>
     </member>
     <member name="GetFileLarge(RequestContext)">
@@ -102,13 +60,6 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 FilesClient client = new FilesClient(credential);
 
 Response response = client.GetFileLarge(null);
-if (response.ContentStream != null)
-{
-    using (Stream outFileStream = File.OpenWrite("<filepath>"))
-    {
-        response.ContentStream.CopyTo(outFileStream);
-    }
-}
 ]]></code>
 This sample shows how to call GetFileLarge with all parameters and parse the result.
 <code><![CDATA[
@@ -116,13 +67,6 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 FilesClient client = new FilesClient(credential);
 
 Response response = client.GetFileLarge(null);
-if (response.ContentStream != null)
-{
-    using (Stream outFileStream = File.OpenWrite("<filepath>"))
-    {
-        response.ContentStream.CopyTo(outFileStream);
-    }
-}
 ]]></code></example>
     </member>
     <member name="GetEmptyFileAsync(RequestContext)">
@@ -133,13 +77,6 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 FilesClient client = new FilesClient(credential);
 
 Response response = await client.GetEmptyFileAsync(null);
-if (response.ContentStream != null)
-{
-    using (Stream outFileStream = File.OpenWrite("<filepath>"))
-    {
-        response.ContentStream.CopyTo(outFileStream);
-    }
-}
 ]]></code>
 This sample shows how to call GetEmptyFileAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -147,13 +84,6 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 FilesClient client = new FilesClient(credential);
 
 Response response = await client.GetEmptyFileAsync(null);
-if (response.ContentStream != null)
-{
-    using (Stream outFileStream = File.OpenWrite("<filepath>"))
-    {
-        response.ContentStream.CopyTo(outFileStream);
-    }
-}
 ]]></code></example>
     </member>
     <member name="GetEmptyFile(RequestContext)">
@@ -164,13 +94,6 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 FilesClient client = new FilesClient(credential);
 
 Response response = client.GetEmptyFile(null);
-if (response.ContentStream != null)
-{
-    using (Stream outFileStream = File.OpenWrite("<filepath>"))
-    {
-        response.ContentStream.CopyTo(outFileStream);
-    }
-}
 ]]></code>
 This sample shows how to call GetEmptyFile with all parameters and parse the result.
 <code><![CDATA[
@@ -178,13 +101,6 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 FilesClient client = new FilesClient(credential);
 
 Response response = client.GetEmptyFile(null);
-if (response.ContentStream != null)
-{
-    using (Stream outFileStream = File.OpenWrite("<filepath>"))
-    {
-        response.ContentStream.CopyTo(outFileStream);
-    }
-}
 ]]></code></example>
     </member>
   </members>

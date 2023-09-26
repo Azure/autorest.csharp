@@ -8,14 +8,12 @@ This sample shows how to call PostIfMatchAsync.
 ConditionalRequestClient client = new ConditionalRequestClient();
 
 Response response = await client.PostIfMatchAsync();
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PostIfMatchAsync with all parameters.
 <code><![CDATA[
 ConditionalRequestClient client = new ConditionalRequestClient();
 
-Response response = await client.PostIfMatchAsync(ifMatch: new ETag("<ifMatch>"));
-Console.WriteLine(response.Status);
+Response response = await client.PostIfMatchAsync(new ETag("<ifMatch>"));
 ]]></code></example>
     </member>
     <member name="PostIfMatch(ETag?,RequestContext)">
@@ -25,14 +23,12 @@ This sample shows how to call PostIfMatch.
 ConditionalRequestClient client = new ConditionalRequestClient();
 
 Response response = client.PostIfMatch();
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PostIfMatch with all parameters.
 <code><![CDATA[
 ConditionalRequestClient client = new ConditionalRequestClient();
 
-Response response = client.PostIfMatch(ifMatch: new ETag("<ifMatch>"));
-Console.WriteLine(response.Status);
+Response response = client.PostIfMatch(new ETag("<ifMatch>"));
 ]]></code></example>
     </member>
     <member name="PostIfNoneMatchAsync(ETag?,RequestContext)">
@@ -42,14 +38,12 @@ This sample shows how to call PostIfNoneMatchAsync.
 ConditionalRequestClient client = new ConditionalRequestClient();
 
 Response response = await client.PostIfNoneMatchAsync();
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PostIfNoneMatchAsync with all parameters.
 <code><![CDATA[
 ConditionalRequestClient client = new ConditionalRequestClient();
 
-Response response = await client.PostIfNoneMatchAsync(ifNoneMatch: new ETag("<ifNoneMatch>"));
-Console.WriteLine(response.Status);
+Response response = await client.PostIfNoneMatchAsync(new ETag("<ifNoneMatch>"));
 ]]></code></example>
     </member>
     <member name="PostIfNoneMatch(ETag?,RequestContext)">
@@ -59,14 +53,12 @@ This sample shows how to call PostIfNoneMatch.
 ConditionalRequestClient client = new ConditionalRequestClient();
 
 Response response = client.PostIfNoneMatch();
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PostIfNoneMatch with all parameters.
 <code><![CDATA[
 ConditionalRequestClient client = new ConditionalRequestClient();
 
-Response response = client.PostIfNoneMatch(ifNoneMatch: new ETag("<ifNoneMatch>"));
-Console.WriteLine(response.Status);
+Response response = client.PostIfNoneMatch(new ETag("<ifNoneMatch>"));
 ]]></code></example>
     </member>
   </members>

@@ -5,9 +5,7 @@
 
 #nullable disable
 
-using System;
 using System.Collections.Generic;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -27,9 +25,6 @@ namespace body_array_LowLevel.Samples
             ArrayClient client = new ArrayClient(credential);
 
             Response response = client.GetNull(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -40,9 +35,6 @@ namespace body_array_LowLevel.Samples
             ArrayClient client = new ArrayClient(credential);
 
             Response response = await client.GetNullAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -53,9 +45,6 @@ namespace body_array_LowLevel.Samples
             ArrayClient client = new ArrayClient(credential);
 
             Response response = client.GetNull(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -66,9 +55,6 @@ namespace body_array_LowLevel.Samples
             ArrayClient client = new ArrayClient(credential);
 
             Response response = await client.GetNullAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -79,9 +65,6 @@ namespace body_array_LowLevel.Samples
             ArrayClient client = new ArrayClient(credential);
 
             Response response = client.GetInvalid(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -92,9 +75,6 @@ namespace body_array_LowLevel.Samples
             ArrayClient client = new ArrayClient(credential);
 
             Response response = await client.GetInvalidAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -105,9 +85,6 @@ namespace body_array_LowLevel.Samples
             ArrayClient client = new ArrayClient(credential);
 
             Response response = client.GetInvalid(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -118,9 +95,6 @@ namespace body_array_LowLevel.Samples
             ArrayClient client = new ArrayClient(credential);
 
             Response response = await client.GetInvalidAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -131,9 +105,6 @@ namespace body_array_LowLevel.Samples
             ArrayClient client = new ArrayClient(credential);
 
             Response response = client.GetEmpty(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -144,9 +115,6 @@ namespace body_array_LowLevel.Samples
             ArrayClient client = new ArrayClient(credential);
 
             Response response = await client.GetEmptyAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -157,9 +125,6 @@ namespace body_array_LowLevel.Samples
             ArrayClient client = new ArrayClient(credential);
 
             Response response = client.GetEmpty(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -170,9 +135,6 @@ namespace body_array_LowLevel.Samples
             ArrayClient client = new ArrayClient(credential);
 
             Response response = await client.GetEmptyAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -182,12 +144,11 @@ namespace body_array_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new List<object>()
-{
+            RequestContent content = RequestContent.Create(new object[]
+            {
 "<arrayBody>"
-});
+            });
             Response response = client.PutEmpty(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -197,12 +158,11 @@ namespace body_array_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new List<object>()
-{
+            RequestContent content = RequestContent.Create(new object[]
+            {
 "<arrayBody>"
-});
+            });
             Response response = await client.PutEmptyAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -212,12 +172,11 @@ namespace body_array_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new List<object>()
-{
+            RequestContent content = RequestContent.Create(new object[]
+            {
 "<arrayBody>"
-});
+            });
             Response response = client.PutEmpty(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -227,12 +186,11 @@ namespace body_array_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new List<object>()
-{
+            RequestContent content = RequestContent.Create(new object[]
+            {
 "<arrayBody>"
-});
+            });
             Response response = await client.PutEmptyAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -243,9 +201,6 @@ namespace body_array_LowLevel.Samples
             ArrayClient client = new ArrayClient(credential);
 
             Response response = client.GetBooleanTfft(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -256,9 +211,6 @@ namespace body_array_LowLevel.Samples
             ArrayClient client = new ArrayClient(credential);
 
             Response response = await client.GetBooleanTfftAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -269,9 +221,6 @@ namespace body_array_LowLevel.Samples
             ArrayClient client = new ArrayClient(credential);
 
             Response response = client.GetBooleanTfft(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -282,9 +231,6 @@ namespace body_array_LowLevel.Samples
             ArrayClient client = new ArrayClient(credential);
 
             Response response = await client.GetBooleanTfftAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -294,12 +240,11 @@ namespace body_array_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new List<object>()
-{
+            RequestContent content = RequestContent.Create(new object[]
+            {
 true
-});
+            });
             Response response = client.PutBooleanTfft(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -309,12 +254,11 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new List<object>()
-{
+            RequestContent content = RequestContent.Create(new object[]
+            {
 true
-});
+            });
             Response response = await client.PutBooleanTfftAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -324,12 +268,11 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new List<object>()
-{
+            RequestContent content = RequestContent.Create(new object[]
+            {
 true
-});
+            });
             Response response = client.PutBooleanTfft(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -339,12 +282,11 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new List<object>()
-{
+            RequestContent content = RequestContent.Create(new object[]
+            {
 true
-});
+            });
             Response response = await client.PutBooleanTfftAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -355,9 +297,6 @@ true
             ArrayClient client = new ArrayClient(credential);
 
             Response response = client.GetBooleanInvalidNull(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -368,9 +307,6 @@ true
             ArrayClient client = new ArrayClient(credential);
 
             Response response = await client.GetBooleanInvalidNullAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -381,9 +317,6 @@ true
             ArrayClient client = new ArrayClient(credential);
 
             Response response = client.GetBooleanInvalidNull(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -394,9 +327,6 @@ true
             ArrayClient client = new ArrayClient(credential);
 
             Response response = await client.GetBooleanInvalidNullAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -407,9 +337,6 @@ true
             ArrayClient client = new ArrayClient(credential);
 
             Response response = client.GetBooleanInvalidString(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -420,9 +347,6 @@ true
             ArrayClient client = new ArrayClient(credential);
 
             Response response = await client.GetBooleanInvalidStringAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -433,9 +357,6 @@ true
             ArrayClient client = new ArrayClient(credential);
 
             Response response = client.GetBooleanInvalidString(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -446,9 +367,6 @@ true
             ArrayClient client = new ArrayClient(credential);
 
             Response response = await client.GetBooleanInvalidStringAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -459,9 +377,6 @@ true
             ArrayClient client = new ArrayClient(credential);
 
             Response response = client.GetIntegerValid(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -472,9 +387,6 @@ true
             ArrayClient client = new ArrayClient(credential);
 
             Response response = await client.GetIntegerValidAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -485,9 +397,6 @@ true
             ArrayClient client = new ArrayClient(credential);
 
             Response response = client.GetIntegerValid(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -498,9 +407,6 @@ true
             ArrayClient client = new ArrayClient(credential);
 
             Response response = await client.GetIntegerValidAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -510,12 +416,11 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new List<object>()
-{
+            RequestContent content = RequestContent.Create(new object[]
+            {
 1234
-});
+            });
             Response response = client.PutIntegerValid(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -525,12 +430,11 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new List<object>()
-{
+            RequestContent content = RequestContent.Create(new object[]
+            {
 1234
-});
+            });
             Response response = await client.PutIntegerValidAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -540,12 +444,11 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new List<object>()
-{
+            RequestContent content = RequestContent.Create(new object[]
+            {
 1234
-});
+            });
             Response response = client.PutIntegerValid(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -555,12 +458,11 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new List<object>()
-{
+            RequestContent content = RequestContent.Create(new object[]
+            {
 1234
-});
+            });
             Response response = await client.PutIntegerValidAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -571,9 +473,6 @@ true
             ArrayClient client = new ArrayClient(credential);
 
             Response response = client.GetIntInvalidNull(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -584,9 +483,6 @@ true
             ArrayClient client = new ArrayClient(credential);
 
             Response response = await client.GetIntInvalidNullAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -597,9 +493,6 @@ true
             ArrayClient client = new ArrayClient(credential);
 
             Response response = client.GetIntInvalidNull(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -610,9 +503,6 @@ true
             ArrayClient client = new ArrayClient(credential);
 
             Response response = await client.GetIntInvalidNullAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -623,9 +513,6 @@ true
             ArrayClient client = new ArrayClient(credential);
 
             Response response = client.GetIntInvalidString(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -636,9 +523,6 @@ true
             ArrayClient client = new ArrayClient(credential);
 
             Response response = await client.GetIntInvalidStringAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -649,9 +533,6 @@ true
             ArrayClient client = new ArrayClient(credential);
 
             Response response = client.GetIntInvalidString(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -662,9 +543,6 @@ true
             ArrayClient client = new ArrayClient(credential);
 
             Response response = await client.GetIntInvalidStringAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -675,9 +553,6 @@ true
             ArrayClient client = new ArrayClient(credential);
 
             Response response = client.GetLongValid(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -688,9 +563,6 @@ true
             ArrayClient client = new ArrayClient(credential);
 
             Response response = await client.GetLongValidAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -701,9 +573,6 @@ true
             ArrayClient client = new ArrayClient(credential);
 
             Response response = client.GetLongValid(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -714,9 +583,6 @@ true
             ArrayClient client = new ArrayClient(credential);
 
             Response response = await client.GetLongValidAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -726,12 +592,11 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new List<object>()
-{
+            RequestContent content = RequestContent.Create(new object[]
+            {
 1234L
-});
+            });
             Response response = client.PutLongValid(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -741,12 +606,11 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new List<object>()
-{
+            RequestContent content = RequestContent.Create(new object[]
+            {
 1234L
-});
+            });
             Response response = await client.PutLongValidAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -756,12 +620,11 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new List<object>()
-{
+            RequestContent content = RequestContent.Create(new object[]
+            {
 1234L
-});
+            });
             Response response = client.PutLongValid(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -771,12 +634,11 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new List<object>()
-{
+            RequestContent content = RequestContent.Create(new object[]
+            {
 1234L
-});
+            });
             Response response = await client.PutLongValidAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -787,9 +649,6 @@ true
             ArrayClient client = new ArrayClient(credential);
 
             Response response = client.GetLongInvalidNull(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -800,9 +659,6 @@ true
             ArrayClient client = new ArrayClient(credential);
 
             Response response = await client.GetLongInvalidNullAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -813,9 +669,6 @@ true
             ArrayClient client = new ArrayClient(credential);
 
             Response response = client.GetLongInvalidNull(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -826,9 +679,6 @@ true
             ArrayClient client = new ArrayClient(credential);
 
             Response response = await client.GetLongInvalidNullAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -839,9 +689,6 @@ true
             ArrayClient client = new ArrayClient(credential);
 
             Response response = client.GetLongInvalidString(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -852,9 +699,6 @@ true
             ArrayClient client = new ArrayClient(credential);
 
             Response response = await client.GetLongInvalidStringAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -865,9 +709,6 @@ true
             ArrayClient client = new ArrayClient(credential);
 
             Response response = client.GetLongInvalidString(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -878,9 +719,6 @@ true
             ArrayClient client = new ArrayClient(credential);
 
             Response response = await client.GetLongInvalidStringAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -891,9 +729,6 @@ true
             ArrayClient client = new ArrayClient(credential);
 
             Response response = client.GetFloatValid(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -904,9 +739,6 @@ true
             ArrayClient client = new ArrayClient(credential);
 
             Response response = await client.GetFloatValidAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -917,9 +749,6 @@ true
             ArrayClient client = new ArrayClient(credential);
 
             Response response = client.GetFloatValid(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -930,9 +759,6 @@ true
             ArrayClient client = new ArrayClient(credential);
 
             Response response = await client.GetFloatValidAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -942,12 +768,11 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new List<object>()
-{
+            RequestContent content = RequestContent.Create(new object[]
+            {
 123.45F
-});
+            });
             Response response = client.PutFloatValid(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -957,12 +782,11 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new List<object>()
-{
+            RequestContent content = RequestContent.Create(new object[]
+            {
 123.45F
-});
+            });
             Response response = await client.PutFloatValidAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -972,12 +796,11 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new List<object>()
-{
+            RequestContent content = RequestContent.Create(new object[]
+            {
 123.45F
-});
+            });
             Response response = client.PutFloatValid(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -987,12 +810,11 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new List<object>()
-{
+            RequestContent content = RequestContent.Create(new object[]
+            {
 123.45F
-});
+            });
             Response response = await client.PutFloatValidAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1003,9 +825,6 @@ true
             ArrayClient client = new ArrayClient(credential);
 
             Response response = client.GetFloatInvalidNull(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -1016,9 +835,6 @@ true
             ArrayClient client = new ArrayClient(credential);
 
             Response response = await client.GetFloatInvalidNullAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -1029,9 +845,6 @@ true
             ArrayClient client = new ArrayClient(credential);
 
             Response response = client.GetFloatInvalidNull(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -1042,9 +855,6 @@ true
             ArrayClient client = new ArrayClient(credential);
 
             Response response = await client.GetFloatInvalidNullAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -1055,9 +865,6 @@ true
             ArrayClient client = new ArrayClient(credential);
 
             Response response = client.GetFloatInvalidString(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -1068,9 +875,6 @@ true
             ArrayClient client = new ArrayClient(credential);
 
             Response response = await client.GetFloatInvalidStringAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -1081,9 +885,6 @@ true
             ArrayClient client = new ArrayClient(credential);
 
             Response response = client.GetFloatInvalidString(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -1094,9 +895,6 @@ true
             ArrayClient client = new ArrayClient(credential);
 
             Response response = await client.GetFloatInvalidStringAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -1107,9 +905,6 @@ true
             ArrayClient client = new ArrayClient(credential);
 
             Response response = client.GetDoubleValid(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -1120,9 +915,6 @@ true
             ArrayClient client = new ArrayClient(credential);
 
             Response response = await client.GetDoubleValidAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -1133,9 +925,6 @@ true
             ArrayClient client = new ArrayClient(credential);
 
             Response response = client.GetDoubleValid(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -1146,9 +935,6 @@ true
             ArrayClient client = new ArrayClient(credential);
 
             Response response = await client.GetDoubleValidAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -1158,12 +944,11 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new List<object>()
-{
+            RequestContent content = RequestContent.Create(new object[]
+            {
 123.45
-});
+            });
             Response response = client.PutDoubleValid(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1173,12 +958,11 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new List<object>()
-{
+            RequestContent content = RequestContent.Create(new object[]
+            {
 123.45
-});
+            });
             Response response = await client.PutDoubleValidAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1188,12 +972,11 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new List<object>()
-{
+            RequestContent content = RequestContent.Create(new object[]
+            {
 123.45
-});
+            });
             Response response = client.PutDoubleValid(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1203,12 +986,11 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new List<object>()
-{
+            RequestContent content = RequestContent.Create(new object[]
+            {
 123.45
-});
+            });
             Response response = await client.PutDoubleValidAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1219,9 +1001,6 @@ true
             ArrayClient client = new ArrayClient(credential);
 
             Response response = client.GetDoubleInvalidNull(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -1232,9 +1011,6 @@ true
             ArrayClient client = new ArrayClient(credential);
 
             Response response = await client.GetDoubleInvalidNullAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -1245,9 +1021,6 @@ true
             ArrayClient client = new ArrayClient(credential);
 
             Response response = client.GetDoubleInvalidNull(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -1258,9 +1031,6 @@ true
             ArrayClient client = new ArrayClient(credential);
 
             Response response = await client.GetDoubleInvalidNullAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -1271,9 +1041,6 @@ true
             ArrayClient client = new ArrayClient(credential);
 
             Response response = client.GetDoubleInvalidString(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -1284,9 +1051,6 @@ true
             ArrayClient client = new ArrayClient(credential);
 
             Response response = await client.GetDoubleInvalidStringAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -1297,9 +1061,6 @@ true
             ArrayClient client = new ArrayClient(credential);
 
             Response response = client.GetDoubleInvalidString(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -1310,9 +1071,6 @@ true
             ArrayClient client = new ArrayClient(credential);
 
             Response response = await client.GetDoubleInvalidStringAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -1323,9 +1081,6 @@ true
             ArrayClient client = new ArrayClient(credential);
 
             Response response = client.GetStringValid(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -1336,9 +1091,6 @@ true
             ArrayClient client = new ArrayClient(credential);
 
             Response response = await client.GetStringValidAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -1349,9 +1101,6 @@ true
             ArrayClient client = new ArrayClient(credential);
 
             Response response = client.GetStringValid(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -1362,9 +1111,6 @@ true
             ArrayClient client = new ArrayClient(credential);
 
             Response response = await client.GetStringValidAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -1374,12 +1120,11 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new List<object>()
-{
+            RequestContent content = RequestContent.Create(new object[]
+            {
 "<arrayBody>"
-});
+            });
             Response response = client.PutStringValid(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1389,12 +1134,11 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new List<object>()
-{
+            RequestContent content = RequestContent.Create(new object[]
+            {
 "<arrayBody>"
-});
+            });
             Response response = await client.PutStringValidAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1404,12 +1148,11 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new List<object>()
-{
+            RequestContent content = RequestContent.Create(new object[]
+            {
 "<arrayBody>"
-});
+            });
             Response response = client.PutStringValid(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1419,12 +1162,11 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new List<object>()
-{
+            RequestContent content = RequestContent.Create(new object[]
+            {
 "<arrayBody>"
-});
+            });
             Response response = await client.PutStringValidAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1435,9 +1177,6 @@ true
             ArrayClient client = new ArrayClient(credential);
 
             Response response = client.GetEnumValid(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -1448,9 +1187,6 @@ true
             ArrayClient client = new ArrayClient(credential);
 
             Response response = await client.GetEnumValidAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -1461,9 +1197,6 @@ true
             ArrayClient client = new ArrayClient(credential);
 
             Response response = client.GetEnumValid(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -1474,9 +1207,6 @@ true
             ArrayClient client = new ArrayClient(credential);
 
             Response response = await client.GetEnumValidAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -1486,12 +1216,11 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new List<object>()
-{
+            RequestContent content = RequestContent.Create(new object[]
+            {
 "foo1"
-});
+            });
             Response response = client.PutEnumValid(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1501,12 +1230,11 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new List<object>()
-{
+            RequestContent content = RequestContent.Create(new object[]
+            {
 "foo1"
-});
+            });
             Response response = await client.PutEnumValidAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1516,12 +1244,11 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new List<object>()
-{
+            RequestContent content = RequestContent.Create(new object[]
+            {
 "foo1"
-});
+            });
             Response response = client.PutEnumValid(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1531,12 +1258,11 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new List<object>()
-{
+            RequestContent content = RequestContent.Create(new object[]
+            {
 "foo1"
-});
+            });
             Response response = await client.PutEnumValidAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1547,9 +1273,6 @@ true
             ArrayClient client = new ArrayClient(credential);
 
             Response response = client.GetStringEnumValid(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -1560,9 +1283,6 @@ true
             ArrayClient client = new ArrayClient(credential);
 
             Response response = await client.GetStringEnumValidAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -1573,9 +1293,6 @@ true
             ArrayClient client = new ArrayClient(credential);
 
             Response response = client.GetStringEnumValid(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -1586,9 +1303,6 @@ true
             ArrayClient client = new ArrayClient(credential);
 
             Response response = await client.GetStringEnumValidAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -1598,12 +1312,11 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new List<object>()
-{
+            RequestContent content = RequestContent.Create(new object[]
+            {
 "foo1"
-});
+            });
             Response response = client.PutStringEnumValid(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1613,12 +1326,11 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new List<object>()
-{
+            RequestContent content = RequestContent.Create(new object[]
+            {
 "foo1"
-});
+            });
             Response response = await client.PutStringEnumValidAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1628,12 +1340,11 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new List<object>()
-{
+            RequestContent content = RequestContent.Create(new object[]
+            {
 "foo1"
-});
+            });
             Response response = client.PutStringEnumValid(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1643,12 +1354,11 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new List<object>()
-{
+            RequestContent content = RequestContent.Create(new object[]
+            {
 "foo1"
-});
+            });
             Response response = await client.PutStringEnumValidAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1659,9 +1369,6 @@ true
             ArrayClient client = new ArrayClient(credential);
 
             Response response = client.GetStringWithNull(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -1672,9 +1379,6 @@ true
             ArrayClient client = new ArrayClient(credential);
 
             Response response = await client.GetStringWithNullAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -1685,9 +1389,6 @@ true
             ArrayClient client = new ArrayClient(credential);
 
             Response response = client.GetStringWithNull(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -1698,9 +1399,6 @@ true
             ArrayClient client = new ArrayClient(credential);
 
             Response response = await client.GetStringWithNullAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -1711,9 +1409,6 @@ true
             ArrayClient client = new ArrayClient(credential);
 
             Response response = client.GetStringWithInvalid(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -1724,9 +1419,6 @@ true
             ArrayClient client = new ArrayClient(credential);
 
             Response response = await client.GetStringWithInvalidAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -1737,9 +1429,6 @@ true
             ArrayClient client = new ArrayClient(credential);
 
             Response response = client.GetStringWithInvalid(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -1750,9 +1439,6 @@ true
             ArrayClient client = new ArrayClient(credential);
 
             Response response = await client.GetStringWithInvalidAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -1763,9 +1449,6 @@ true
             ArrayClient client = new ArrayClient(credential);
 
             Response response = client.GetUuidValid(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -1776,9 +1459,6 @@ true
             ArrayClient client = new ArrayClient(credential);
 
             Response response = await client.GetUuidValidAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -1789,9 +1469,6 @@ true
             ArrayClient client = new ArrayClient(credential);
 
             Response response = client.GetUuidValid(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -1802,9 +1479,6 @@ true
             ArrayClient client = new ArrayClient(credential);
 
             Response response = await client.GetUuidValidAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -1814,12 +1488,11 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new List<object>()
-{
+            RequestContent content = RequestContent.Create(new object[]
+            {
 "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"
-});
+            });
             Response response = client.PutUuidValid(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1829,12 +1502,11 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new List<object>()
-{
+            RequestContent content = RequestContent.Create(new object[]
+            {
 "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"
-});
+            });
             Response response = await client.PutUuidValidAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1844,12 +1516,11 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new List<object>()
-{
+            RequestContent content = RequestContent.Create(new object[]
+            {
 "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"
-});
+            });
             Response response = client.PutUuidValid(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1859,12 +1530,11 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new List<object>()
-{
+            RequestContent content = RequestContent.Create(new object[]
+            {
 "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"
-});
+            });
             Response response = await client.PutUuidValidAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1875,9 +1545,6 @@ true
             ArrayClient client = new ArrayClient(credential);
 
             Response response = client.GetUuidInvalidChars(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -1888,9 +1555,6 @@ true
             ArrayClient client = new ArrayClient(credential);
 
             Response response = await client.GetUuidInvalidCharsAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -1901,9 +1565,6 @@ true
             ArrayClient client = new ArrayClient(credential);
 
             Response response = client.GetUuidInvalidChars(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -1914,9 +1575,6 @@ true
             ArrayClient client = new ArrayClient(credential);
 
             Response response = await client.GetUuidInvalidCharsAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -1927,9 +1585,6 @@ true
             ArrayClient client = new ArrayClient(credential);
 
             Response response = client.GetDateValid(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -1940,9 +1595,6 @@ true
             ArrayClient client = new ArrayClient(credential);
 
             Response response = await client.GetDateValidAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -1953,9 +1605,6 @@ true
             ArrayClient client = new ArrayClient(credential);
 
             Response response = client.GetDateValid(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -1966,9 +1615,6 @@ true
             ArrayClient client = new ArrayClient(credential);
 
             Response response = await client.GetDateValidAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -1978,12 +1624,11 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new List<object>()
-{
+            RequestContent content = RequestContent.Create(new object[]
+            {
 "2022-05-10"
-});
+            });
             Response response = client.PutDateValid(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1993,12 +1638,11 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new List<object>()
-{
+            RequestContent content = RequestContent.Create(new object[]
+            {
 "2022-05-10"
-});
+            });
             Response response = await client.PutDateValidAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -2008,12 +1652,11 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new List<object>()
-{
+            RequestContent content = RequestContent.Create(new object[]
+            {
 "2022-05-10"
-});
+            });
             Response response = client.PutDateValid(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -2023,12 +1666,11 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new List<object>()
-{
+            RequestContent content = RequestContent.Create(new object[]
+            {
 "2022-05-10"
-});
+            });
             Response response = await client.PutDateValidAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -2039,9 +1681,6 @@ true
             ArrayClient client = new ArrayClient(credential);
 
             Response response = client.GetDateInvalidNull(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -2052,9 +1691,6 @@ true
             ArrayClient client = new ArrayClient(credential);
 
             Response response = await client.GetDateInvalidNullAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -2065,9 +1701,6 @@ true
             ArrayClient client = new ArrayClient(credential);
 
             Response response = client.GetDateInvalidNull(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -2078,9 +1711,6 @@ true
             ArrayClient client = new ArrayClient(credential);
 
             Response response = await client.GetDateInvalidNullAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -2091,9 +1721,6 @@ true
             ArrayClient client = new ArrayClient(credential);
 
             Response response = client.GetDateInvalidChars(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -2104,9 +1731,6 @@ true
             ArrayClient client = new ArrayClient(credential);
 
             Response response = await client.GetDateInvalidCharsAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -2117,9 +1741,6 @@ true
             ArrayClient client = new ArrayClient(credential);
 
             Response response = client.GetDateInvalidChars(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -2130,9 +1751,6 @@ true
             ArrayClient client = new ArrayClient(credential);
 
             Response response = await client.GetDateInvalidCharsAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -2143,9 +1761,6 @@ true
             ArrayClient client = new ArrayClient(credential);
 
             Response response = client.GetDateTimeValid(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -2156,9 +1771,6 @@ true
             ArrayClient client = new ArrayClient(credential);
 
             Response response = await client.GetDateTimeValidAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -2169,9 +1781,6 @@ true
             ArrayClient client = new ArrayClient(credential);
 
             Response response = client.GetDateTimeValid(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -2182,9 +1791,6 @@ true
             ArrayClient client = new ArrayClient(credential);
 
             Response response = await client.GetDateTimeValidAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -2194,12 +1800,11 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new List<object>()
-{
+            RequestContent content = RequestContent.Create(new object[]
+            {
 "2022-05-10T18:57:31.2311892Z"
-});
+            });
             Response response = client.PutDateTimeValid(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -2209,12 +1814,11 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new List<object>()
-{
+            RequestContent content = RequestContent.Create(new object[]
+            {
 "2022-05-10T18:57:31.2311892Z"
-});
+            });
             Response response = await client.PutDateTimeValidAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -2224,12 +1828,11 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new List<object>()
-{
+            RequestContent content = RequestContent.Create(new object[]
+            {
 "2022-05-10T18:57:31.2311892Z"
-});
+            });
             Response response = client.PutDateTimeValid(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -2239,12 +1842,11 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new List<object>()
-{
+            RequestContent content = RequestContent.Create(new object[]
+            {
 "2022-05-10T18:57:31.2311892Z"
-});
+            });
             Response response = await client.PutDateTimeValidAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -2255,9 +1857,6 @@ true
             ArrayClient client = new ArrayClient(credential);
 
             Response response = client.GetDateTimeInvalidNull(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -2268,9 +1867,6 @@ true
             ArrayClient client = new ArrayClient(credential);
 
             Response response = await client.GetDateTimeInvalidNullAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -2281,9 +1877,6 @@ true
             ArrayClient client = new ArrayClient(credential);
 
             Response response = client.GetDateTimeInvalidNull(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -2294,9 +1887,6 @@ true
             ArrayClient client = new ArrayClient(credential);
 
             Response response = await client.GetDateTimeInvalidNullAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -2307,9 +1897,6 @@ true
             ArrayClient client = new ArrayClient(credential);
 
             Response response = client.GetDateTimeInvalidChars(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -2320,9 +1907,6 @@ true
             ArrayClient client = new ArrayClient(credential);
 
             Response response = await client.GetDateTimeInvalidCharsAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -2333,9 +1917,6 @@ true
             ArrayClient client = new ArrayClient(credential);
 
             Response response = client.GetDateTimeInvalidChars(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -2346,9 +1927,6 @@ true
             ArrayClient client = new ArrayClient(credential);
 
             Response response = await client.GetDateTimeInvalidCharsAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -2359,9 +1937,6 @@ true
             ArrayClient client = new ArrayClient(credential);
 
             Response response = client.GetDateTimeRfc1123Valid(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -2372,9 +1947,6 @@ true
             ArrayClient client = new ArrayClient(credential);
 
             Response response = await client.GetDateTimeRfc1123ValidAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -2385,9 +1957,6 @@ true
             ArrayClient client = new ArrayClient(credential);
 
             Response response = client.GetDateTimeRfc1123Valid(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -2398,9 +1967,6 @@ true
             ArrayClient client = new ArrayClient(credential);
 
             Response response = await client.GetDateTimeRfc1123ValidAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -2410,12 +1976,11 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new List<object>()
-{
+            RequestContent content = RequestContent.Create(new object[]
+            {
 "Tue, 10 May 2022 18:57:31 GMT"
-});
+            });
             Response response = client.PutDateTimeRfc1123Valid(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -2425,12 +1990,11 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new List<object>()
-{
+            RequestContent content = RequestContent.Create(new object[]
+            {
 "Tue, 10 May 2022 18:57:31 GMT"
-});
+            });
             Response response = await client.PutDateTimeRfc1123ValidAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -2440,12 +2004,11 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new List<object>()
-{
+            RequestContent content = RequestContent.Create(new object[]
+            {
 "Tue, 10 May 2022 18:57:31 GMT"
-});
+            });
             Response response = client.PutDateTimeRfc1123Valid(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -2455,12 +2018,11 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new List<object>()
-{
+            RequestContent content = RequestContent.Create(new object[]
+            {
 "Tue, 10 May 2022 18:57:31 GMT"
-});
+            });
             Response response = await client.PutDateTimeRfc1123ValidAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -2471,9 +2033,6 @@ true
             ArrayClient client = new ArrayClient(credential);
 
             Response response = client.GetDurationValid(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -2484,9 +2043,6 @@ true
             ArrayClient client = new ArrayClient(credential);
 
             Response response = await client.GetDurationValidAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -2497,9 +2053,6 @@ true
             ArrayClient client = new ArrayClient(credential);
 
             Response response = client.GetDurationValid(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -2510,9 +2063,6 @@ true
             ArrayClient client = new ArrayClient(credential);
 
             Response response = await client.GetDurationValidAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -2522,12 +2072,11 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new List<object>()
-{
+            RequestContent content = RequestContent.Create(new object[]
+            {
 "PT1H23M45S"
-});
+            });
             Response response = client.PutDurationValid(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -2537,12 +2086,11 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new List<object>()
-{
+            RequestContent content = RequestContent.Create(new object[]
+            {
 "PT1H23M45S"
-});
+            });
             Response response = await client.PutDurationValidAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -2552,12 +2100,11 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new List<object>()
-{
+            RequestContent content = RequestContent.Create(new object[]
+            {
 "PT1H23M45S"
-});
+            });
             Response response = client.PutDurationValid(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -2567,12 +2114,11 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new List<object>()
-{
+            RequestContent content = RequestContent.Create(new object[]
+            {
 "PT1H23M45S"
-});
+            });
             Response response = await client.PutDurationValidAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -2583,9 +2129,6 @@ true
             ArrayClient client = new ArrayClient(credential);
 
             Response response = client.GetByteValid(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -2596,9 +2139,6 @@ true
             ArrayClient client = new ArrayClient(credential);
 
             Response response = await client.GetByteValidAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -2609,9 +2149,6 @@ true
             ArrayClient client = new ArrayClient(credential);
 
             Response response = client.GetByteValid(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -2622,9 +2159,6 @@ true
             ArrayClient client = new ArrayClient(credential);
 
             Response response = await client.GetByteValidAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -2634,12 +2168,11 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new List<object>()
-{
+            RequestContent content = RequestContent.Create(new object[]
+            {
 new object()
-});
+            });
             Response response = client.PutByteValid(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -2649,12 +2182,11 @@ new object()
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new List<object>()
-{
+            RequestContent content = RequestContent.Create(new object[]
+            {
 new object()
-});
+            });
             Response response = await client.PutByteValidAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -2664,12 +2196,11 @@ new object()
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new List<object>()
-{
+            RequestContent content = RequestContent.Create(new object[]
+            {
 new object()
-});
+            });
             Response response = client.PutByteValid(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -2679,12 +2210,11 @@ new object()
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new List<object>()
-{
+            RequestContent content = RequestContent.Create(new object[]
+            {
 new object()
-});
+            });
             Response response = await client.PutByteValidAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -2695,9 +2225,6 @@ new object()
             ArrayClient client = new ArrayClient(credential);
 
             Response response = client.GetByteInvalidNull(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -2708,9 +2235,6 @@ new object()
             ArrayClient client = new ArrayClient(credential);
 
             Response response = await client.GetByteInvalidNullAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -2721,9 +2245,6 @@ new object()
             ArrayClient client = new ArrayClient(credential);
 
             Response response = client.GetByteInvalidNull(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -2734,9 +2255,6 @@ new object()
             ArrayClient client = new ArrayClient(credential);
 
             Response response = await client.GetByteInvalidNullAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -2747,9 +2265,6 @@ new object()
             ArrayClient client = new ArrayClient(credential);
 
             Response response = client.GetBase64Url(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -2760,9 +2275,6 @@ new object()
             ArrayClient client = new ArrayClient(credential);
 
             Response response = await client.GetBase64UrlAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -2773,9 +2285,6 @@ new object()
             ArrayClient client = new ArrayClient(credential);
 
             Response response = client.GetBase64Url(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -2786,9 +2295,6 @@ new object()
             ArrayClient client = new ArrayClient(credential);
 
             Response response = await client.GetBase64UrlAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -2799,9 +2305,6 @@ new object()
             ArrayClient client = new ArrayClient(credential);
 
             Response response = client.GetComplexNull(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -2812,9 +2315,6 @@ new object()
             ArrayClient client = new ArrayClient(credential);
 
             Response response = await client.GetComplexNullAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -2825,10 +2325,6 @@ new object()
             ArrayClient client = new ArrayClient(credential);
 
             Response response = client.GetComplexNull(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].GetProperty("integer").ToString());
-            Console.WriteLine(result[0].GetProperty("string").ToString());
         }
 
         [Test]
@@ -2839,10 +2335,6 @@ new object()
             ArrayClient client = new ArrayClient(credential);
 
             Response response = await client.GetComplexNullAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].GetProperty("integer").ToString());
-            Console.WriteLine(result[0].GetProperty("string").ToString());
         }
 
         [Test]
@@ -2853,9 +2345,6 @@ new object()
             ArrayClient client = new ArrayClient(credential);
 
             Response response = client.GetComplexEmpty(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -2866,9 +2355,6 @@ new object()
             ArrayClient client = new ArrayClient(credential);
 
             Response response = await client.GetComplexEmptyAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -2879,10 +2365,6 @@ new object()
             ArrayClient client = new ArrayClient(credential);
 
             Response response = client.GetComplexEmpty(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].GetProperty("integer").ToString());
-            Console.WriteLine(result[0].GetProperty("string").ToString());
         }
 
         [Test]
@@ -2893,10 +2375,6 @@ new object()
             ArrayClient client = new ArrayClient(credential);
 
             Response response = await client.GetComplexEmptyAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].GetProperty("integer").ToString());
-            Console.WriteLine(result[0].GetProperty("string").ToString());
         }
 
         [Test]
@@ -2907,9 +2385,6 @@ new object()
             ArrayClient client = new ArrayClient(credential);
 
             Response response = client.GetComplexItemNull(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -2920,9 +2395,6 @@ new object()
             ArrayClient client = new ArrayClient(credential);
 
             Response response = await client.GetComplexItemNullAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -2933,10 +2405,6 @@ new object()
             ArrayClient client = new ArrayClient(credential);
 
             Response response = client.GetComplexItemNull(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].GetProperty("integer").ToString());
-            Console.WriteLine(result[0].GetProperty("string").ToString());
         }
 
         [Test]
@@ -2947,10 +2415,6 @@ new object()
             ArrayClient client = new ArrayClient(credential);
 
             Response response = await client.GetComplexItemNullAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].GetProperty("integer").ToString());
-            Console.WriteLine(result[0].GetProperty("string").ToString());
         }
 
         [Test]
@@ -2961,9 +2425,6 @@ new object()
             ArrayClient client = new ArrayClient(credential);
 
             Response response = client.GetComplexItemEmpty(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -2974,9 +2435,6 @@ new object()
             ArrayClient client = new ArrayClient(credential);
 
             Response response = await client.GetComplexItemEmptyAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -2987,10 +2445,6 @@ new object()
             ArrayClient client = new ArrayClient(credential);
 
             Response response = client.GetComplexItemEmpty(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].GetProperty("integer").ToString());
-            Console.WriteLine(result[0].GetProperty("string").ToString());
         }
 
         [Test]
@@ -3001,10 +2455,6 @@ new object()
             ArrayClient client = new ArrayClient(credential);
 
             Response response = await client.GetComplexItemEmptyAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].GetProperty("integer").ToString());
-            Console.WriteLine(result[0].GetProperty("string").ToString());
         }
 
         [Test]
@@ -3015,9 +2465,6 @@ new object()
             ArrayClient client = new ArrayClient(credential);
 
             Response response = client.GetComplexValid(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -3028,9 +2475,6 @@ new object()
             ArrayClient client = new ArrayClient(credential);
 
             Response response = await client.GetComplexValidAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -3041,10 +2485,6 @@ new object()
             ArrayClient client = new ArrayClient(credential);
 
             Response response = client.GetComplexValid(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].GetProperty("integer").ToString());
-            Console.WriteLine(result[0].GetProperty("string").ToString());
         }
 
         [Test]
@@ -3055,10 +2495,6 @@ new object()
             ArrayClient client = new ArrayClient(credential);
 
             Response response = await client.GetComplexValidAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].GetProperty("integer").ToString());
-            Console.WriteLine(result[0].GetProperty("string").ToString());
         }
 
         [Test]
@@ -3068,12 +2504,11 @@ new object()
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new List<object>()
-{
+            RequestContent content = RequestContent.Create(new object[]
+            {
 new object()
-});
+            });
             Response response = client.PutComplexValid(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -3083,12 +2518,11 @@ new object()
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new List<object>()
-{
+            RequestContent content = RequestContent.Create(new object[]
+            {
 new object()
-});
+            });
             Response response = await client.PutComplexValidAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -3098,16 +2532,15 @@ new object()
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new List<object>()
-{
-new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new object[]
+            {
+new Dictionary<string, object>
 {
 ["integer"] = 1234,
-["string"] = "<string>",
+["string"] = "<string>"
 }
-});
+            });
             Response response = client.PutComplexValid(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -3117,16 +2550,15 @@ new Dictionary<string, object>()
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new List<object>()
-{
-new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new object[]
+            {
+new Dictionary<string, object>
 {
 ["integer"] = 1234,
-["string"] = "<string>",
+["string"] = "<string>"
 }
-});
+            });
             Response response = await client.PutComplexValidAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -3137,9 +2569,6 @@ new Dictionary<string, object>()
             ArrayClient client = new ArrayClient(credential);
 
             Response response = client.GetArrayNull(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0][0].ToString());
         }
 
         [Test]
@@ -3150,9 +2579,6 @@ new Dictionary<string, object>()
             ArrayClient client = new ArrayClient(credential);
 
             Response response = await client.GetArrayNullAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0][0].ToString());
         }
 
         [Test]
@@ -3163,9 +2589,6 @@ new Dictionary<string, object>()
             ArrayClient client = new ArrayClient(credential);
 
             Response response = client.GetArrayNull(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0][0].ToString());
         }
 
         [Test]
@@ -3176,9 +2599,6 @@ new Dictionary<string, object>()
             ArrayClient client = new ArrayClient(credential);
 
             Response response = await client.GetArrayNullAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0][0].ToString());
         }
 
         [Test]
@@ -3189,9 +2609,6 @@ new Dictionary<string, object>()
             ArrayClient client = new ArrayClient(credential);
 
             Response response = client.GetArrayEmpty(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0][0].ToString());
         }
 
         [Test]
@@ -3202,9 +2619,6 @@ new Dictionary<string, object>()
             ArrayClient client = new ArrayClient(credential);
 
             Response response = await client.GetArrayEmptyAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0][0].ToString());
         }
 
         [Test]
@@ -3215,9 +2629,6 @@ new Dictionary<string, object>()
             ArrayClient client = new ArrayClient(credential);
 
             Response response = client.GetArrayEmpty(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0][0].ToString());
         }
 
         [Test]
@@ -3228,9 +2639,6 @@ new Dictionary<string, object>()
             ArrayClient client = new ArrayClient(credential);
 
             Response response = await client.GetArrayEmptyAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0][0].ToString());
         }
 
         [Test]
@@ -3241,9 +2649,6 @@ new Dictionary<string, object>()
             ArrayClient client = new ArrayClient(credential);
 
             Response response = client.GetArrayItemNull(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0][0].ToString());
         }
 
         [Test]
@@ -3254,9 +2659,6 @@ new Dictionary<string, object>()
             ArrayClient client = new ArrayClient(credential);
 
             Response response = await client.GetArrayItemNullAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0][0].ToString());
         }
 
         [Test]
@@ -3267,9 +2669,6 @@ new Dictionary<string, object>()
             ArrayClient client = new ArrayClient(credential);
 
             Response response = client.GetArrayItemNull(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0][0].ToString());
         }
 
         [Test]
@@ -3280,9 +2679,6 @@ new Dictionary<string, object>()
             ArrayClient client = new ArrayClient(credential);
 
             Response response = await client.GetArrayItemNullAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0][0].ToString());
         }
 
         [Test]
@@ -3293,9 +2689,6 @@ new Dictionary<string, object>()
             ArrayClient client = new ArrayClient(credential);
 
             Response response = client.GetArrayItemEmpty(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0][0].ToString());
         }
 
         [Test]
@@ -3306,9 +2699,6 @@ new Dictionary<string, object>()
             ArrayClient client = new ArrayClient(credential);
 
             Response response = await client.GetArrayItemEmptyAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0][0].ToString());
         }
 
         [Test]
@@ -3319,9 +2709,6 @@ new Dictionary<string, object>()
             ArrayClient client = new ArrayClient(credential);
 
             Response response = client.GetArrayItemEmpty(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0][0].ToString());
         }
 
         [Test]
@@ -3332,9 +2719,6 @@ new Dictionary<string, object>()
             ArrayClient client = new ArrayClient(credential);
 
             Response response = await client.GetArrayItemEmptyAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0][0].ToString());
         }
 
         [Test]
@@ -3345,9 +2729,6 @@ new Dictionary<string, object>()
             ArrayClient client = new ArrayClient(credential);
 
             Response response = client.GetArrayValid(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0][0].ToString());
         }
 
         [Test]
@@ -3358,9 +2739,6 @@ new Dictionary<string, object>()
             ArrayClient client = new ArrayClient(credential);
 
             Response response = await client.GetArrayValidAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0][0].ToString());
         }
 
         [Test]
@@ -3371,9 +2749,6 @@ new Dictionary<string, object>()
             ArrayClient client = new ArrayClient(credential);
 
             Response response = client.GetArrayValid(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0][0].ToString());
         }
 
         [Test]
@@ -3384,9 +2759,6 @@ new Dictionary<string, object>()
             ArrayClient client = new ArrayClient(credential);
 
             Response response = await client.GetArrayValidAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0][0].ToString());
         }
 
         [Test]
@@ -3396,15 +2768,14 @@ new Dictionary<string, object>()
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new List<object>()
-{
-new List<object>()
+            RequestContent content = RequestContent.Create(new object[]
+            {
+new object[]
 {
 "<arrayBody>"
 }
-});
+            });
             Response response = client.PutArrayValid(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -3414,15 +2785,14 @@ new List<object>()
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new List<object>()
-{
-new List<object>()
+            RequestContent content = RequestContent.Create(new object[]
+            {
+new object[]
 {
 "<arrayBody>"
 }
-});
+            });
             Response response = await client.PutArrayValidAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -3432,15 +2802,14 @@ new List<object>()
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new List<object>()
-{
-new List<object>()
+            RequestContent content = RequestContent.Create(new object[]
+            {
+new object[]
 {
 "<arrayBody>"
 }
-});
+            });
             Response response = client.PutArrayValid(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -3450,15 +2819,14 @@ new List<object>()
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new List<object>()
-{
-new List<object>()
+            RequestContent content = RequestContent.Create(new object[]
+            {
+new object[]
 {
 "<arrayBody>"
 }
-});
+            });
             Response response = await client.PutArrayValidAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -3469,9 +2837,6 @@ new List<object>()
             ArrayClient client = new ArrayClient(credential);
 
             Response response = client.GetDictionaryNull(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].GetProperty("<key>").ToString());
         }
 
         [Test]
@@ -3482,9 +2847,6 @@ new List<object>()
             ArrayClient client = new ArrayClient(credential);
 
             Response response = await client.GetDictionaryNullAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].GetProperty("<key>").ToString());
         }
 
         [Test]
@@ -3495,9 +2857,6 @@ new List<object>()
             ArrayClient client = new ArrayClient(credential);
 
             Response response = client.GetDictionaryNull(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].GetProperty("<key>").ToString());
         }
 
         [Test]
@@ -3508,9 +2867,6 @@ new List<object>()
             ArrayClient client = new ArrayClient(credential);
 
             Response response = await client.GetDictionaryNullAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].GetProperty("<key>").ToString());
         }
 
         [Test]
@@ -3521,9 +2877,6 @@ new List<object>()
             ArrayClient client = new ArrayClient(credential);
 
             Response response = client.GetDictionaryEmpty(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].GetProperty("<key>").ToString());
         }
 
         [Test]
@@ -3534,9 +2887,6 @@ new List<object>()
             ArrayClient client = new ArrayClient(credential);
 
             Response response = await client.GetDictionaryEmptyAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].GetProperty("<key>").ToString());
         }
 
         [Test]
@@ -3547,9 +2897,6 @@ new List<object>()
             ArrayClient client = new ArrayClient(credential);
 
             Response response = client.GetDictionaryEmpty(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].GetProperty("<key>").ToString());
         }
 
         [Test]
@@ -3560,9 +2907,6 @@ new List<object>()
             ArrayClient client = new ArrayClient(credential);
 
             Response response = await client.GetDictionaryEmptyAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].GetProperty("<key>").ToString());
         }
 
         [Test]
@@ -3573,9 +2917,6 @@ new List<object>()
             ArrayClient client = new ArrayClient(credential);
 
             Response response = client.GetDictionaryItemNull(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].GetProperty("<key>").ToString());
         }
 
         [Test]
@@ -3586,9 +2927,6 @@ new List<object>()
             ArrayClient client = new ArrayClient(credential);
 
             Response response = await client.GetDictionaryItemNullAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].GetProperty("<key>").ToString());
         }
 
         [Test]
@@ -3599,9 +2937,6 @@ new List<object>()
             ArrayClient client = new ArrayClient(credential);
 
             Response response = client.GetDictionaryItemNull(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].GetProperty("<key>").ToString());
         }
 
         [Test]
@@ -3612,9 +2947,6 @@ new List<object>()
             ArrayClient client = new ArrayClient(credential);
 
             Response response = await client.GetDictionaryItemNullAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].GetProperty("<key>").ToString());
         }
 
         [Test]
@@ -3625,9 +2957,6 @@ new List<object>()
             ArrayClient client = new ArrayClient(credential);
 
             Response response = client.GetDictionaryItemEmpty(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].GetProperty("<key>").ToString());
         }
 
         [Test]
@@ -3638,9 +2967,6 @@ new List<object>()
             ArrayClient client = new ArrayClient(credential);
 
             Response response = await client.GetDictionaryItemEmptyAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].GetProperty("<key>").ToString());
         }
 
         [Test]
@@ -3651,9 +2977,6 @@ new List<object>()
             ArrayClient client = new ArrayClient(credential);
 
             Response response = client.GetDictionaryItemEmpty(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].GetProperty("<key>").ToString());
         }
 
         [Test]
@@ -3664,9 +2987,6 @@ new List<object>()
             ArrayClient client = new ArrayClient(credential);
 
             Response response = await client.GetDictionaryItemEmptyAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].GetProperty("<key>").ToString());
         }
 
         [Test]
@@ -3677,9 +2997,6 @@ new List<object>()
             ArrayClient client = new ArrayClient(credential);
 
             Response response = client.GetDictionaryValid(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].GetProperty("<key>").ToString());
         }
 
         [Test]
@@ -3690,9 +3007,6 @@ new List<object>()
             ArrayClient client = new ArrayClient(credential);
 
             Response response = await client.GetDictionaryValidAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].GetProperty("<key>").ToString());
         }
 
         [Test]
@@ -3703,9 +3017,6 @@ new List<object>()
             ArrayClient client = new ArrayClient(credential);
 
             Response response = client.GetDictionaryValid(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].GetProperty("<key>").ToString());
         }
 
         [Test]
@@ -3716,9 +3027,6 @@ new List<object>()
             ArrayClient client = new ArrayClient(credential);
 
             Response response = await client.GetDictionaryValidAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].GetProperty("<key>").ToString());
         }
 
         [Test]
@@ -3728,15 +3036,14 @@ new List<object>()
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new List<object>()
-{
+            RequestContent content = RequestContent.Create(new object[]
+            {
 new
 {
 key = "<arrayBody>",
 }
-});
+            });
             Response response = client.PutDictionaryValid(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -3746,15 +3053,14 @@ key = "<arrayBody>",
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new List<object>()
-{
+            RequestContent content = RequestContent.Create(new object[]
+            {
 new
 {
 key = "<arrayBody>",
 }
-});
+            });
             Response response = await client.PutDictionaryValidAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -3764,15 +3070,14 @@ key = "<arrayBody>",
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new List<object>()
-{
+            RequestContent content = RequestContent.Create(new object[]
+            {
 new
 {
 key = "<arrayBody>",
 }
-});
+            });
             Response response = client.PutDictionaryValid(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -3782,15 +3087,14 @@ key = "<arrayBody>",
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new List<object>()
-{
+            RequestContent content = RequestContent.Create(new object[]
+            {
 new
 {
 key = "<arrayBody>",
 }
-});
+            });
             Response response = await client.PutDictionaryValidAsync(content);
-            Console.WriteLine(response.Status);
         }
     }
 }

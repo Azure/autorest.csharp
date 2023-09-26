@@ -38,18 +38,24 @@ This sample shows how to call PublicAsync and parse the result.
 Shared client = new InternalClient().GetSharedClient();
 
 Response response = await client.PublicAsync("<name>", null);
+]]></code>
+This sample shows how to call PublicAsync.
+<code><![CDATA[
+Shared client = new InternalClient().GetSharedClient();
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("name").ToString());
+Response<SharedModel> response = await client.PublicAsync("<name>");
 ]]></code>
 This sample shows how to call PublicAsync with all parameters and parse the result.
 <code><![CDATA[
 Shared client = new InternalClient().GetSharedClient();
 
 Response response = await client.PublicAsync("<name>", null);
+]]></code>
+This sample shows how to call PublicAsync with all parameters.
+<code><![CDATA[
+Shared client = new InternalClient().GetSharedClient();
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("name").ToString());
+Response<SharedModel> response = await client.PublicAsync("<name>");
 ]]></code></example>
     </member>
     <member name="Public(string,RequestContext)">
@@ -59,23 +65,25 @@ This sample shows how to call Public and parse the result.
 Shared client = new InternalClient().GetSharedClient();
 
 Response response = client.Public("<name>", null);
+]]></code>
+This sample shows how to call Public.
+<code><![CDATA[
+Shared client = new InternalClient().GetSharedClient();
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("name").ToString());
+Response<SharedModel> response = client.Public("<name>");
 ]]></code>
 This sample shows how to call Public with all parameters and parse the result.
 <code><![CDATA[
 Shared client = new InternalClient().GetSharedClient();
 
 Response response = client.Public("<name>", null);
+]]></code>
+This sample shows how to call Public with all parameters.
+<code><![CDATA[
+Shared client = new InternalClient().GetSharedClient();
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("name").ToString());
+Response<SharedModel> response = client.Public("<name>");
 ]]></code></example>
     </member>
-    <member name="InternalAsync(string,CancellationToken)" />
-    <member name="Internal(string,CancellationToken)" />
-    <member name="InternalAsync(string,RequestContext)" />
-    <member name="Internal(string,RequestContext)" />
   </members>
 </doc>

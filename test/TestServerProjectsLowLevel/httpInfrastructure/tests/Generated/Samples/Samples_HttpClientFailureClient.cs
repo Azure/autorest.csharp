@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -25,7 +24,6 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
             Response response = client.Head400();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -36,7 +34,6 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
             Response response = await client.Head400Async();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -47,7 +44,6 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
             Response response = client.Head400();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -58,7 +54,6 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
             Response response = await client.Head400Async();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -69,7 +64,6 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
             Response response = client.Get400();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -80,7 +74,6 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
             Response response = await client.Get400Async();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -91,7 +84,6 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
             Response response = client.Get400();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -102,7 +94,6 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
             Response response = await client.Get400Async();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -113,7 +104,6 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
             Response response = client.Options400();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -124,7 +114,6 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
             Response response = await client.Options400Async();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -135,7 +124,6 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
             Response response = client.Options400();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -146,7 +134,6 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
             Response response = await client.Options400Async();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -158,7 +145,6 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = null;
             Response response = client.Put400(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -170,7 +156,6 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = null;
             Response response = await client.Put400Async(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -182,7 +167,6 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("true");
             Response response = client.Put400(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -194,7 +178,6 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("true");
             Response response = await client.Put400Async(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -206,7 +189,6 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = null;
             Response response = client.Patch400(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -218,7 +200,6 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = null;
             Response response = await client.Patch400Async(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -230,7 +211,6 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("true");
             Response response = client.Patch400(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -242,7 +222,6 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("true");
             Response response = await client.Patch400Async(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -254,7 +233,6 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = null;
             Response response = client.Post400(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -266,7 +244,6 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = null;
             Response response = await client.Post400Async(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -278,7 +255,6 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("true");
             Response response = client.Post400(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -290,7 +266,6 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("true");
             Response response = await client.Post400Async(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -302,7 +277,6 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = null;
             Response response = client.Delete400(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -314,7 +288,6 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = null;
             Response response = await client.Delete400Async(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -326,7 +299,6 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("true");
             Response response = client.Delete400(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -338,7 +310,6 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("true");
             Response response = await client.Delete400Async(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -349,7 +320,6 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
             Response response = client.Head401();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -360,7 +330,6 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
             Response response = await client.Head401Async();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -371,7 +340,6 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
             Response response = client.Head401();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -382,7 +350,6 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
             Response response = await client.Head401Async();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -393,7 +360,6 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
             Response response = client.Get402();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -404,7 +370,6 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
             Response response = await client.Get402Async();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -415,7 +380,6 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
             Response response = client.Get402();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -426,7 +390,6 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
             Response response = await client.Get402Async();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -437,7 +400,6 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
             Response response = client.Options403();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -448,7 +410,6 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
             Response response = await client.Options403Async();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -459,7 +420,6 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
             Response response = client.Options403();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -470,7 +430,6 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
             Response response = await client.Options403Async();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -481,7 +440,6 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
             Response response = client.Get403();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -492,7 +450,6 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
             Response response = await client.Get403Async();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -503,7 +460,6 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
             Response response = client.Get403();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -514,7 +470,6 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
             Response response = await client.Get403Async();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -526,7 +481,6 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = null;
             Response response = client.Put404(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -538,7 +492,6 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = null;
             Response response = await client.Put404Async(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -550,7 +503,6 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("true");
             Response response = client.Put404(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -562,7 +514,6 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("true");
             Response response = await client.Put404Async(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -574,7 +525,6 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = null;
             Response response = client.Patch405(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -586,7 +536,6 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = null;
             Response response = await client.Patch405Async(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -598,7 +547,6 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("true");
             Response response = client.Patch405(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -610,7 +558,6 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("true");
             Response response = await client.Patch405Async(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -622,7 +569,6 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = null;
             Response response = client.Post406(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -634,7 +580,6 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = null;
             Response response = await client.Post406Async(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -646,7 +591,6 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("true");
             Response response = client.Post406(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -658,7 +602,6 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("true");
             Response response = await client.Post406Async(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -670,7 +613,6 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = null;
             Response response = client.Delete407(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -682,7 +624,6 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = null;
             Response response = await client.Delete407Async(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -694,7 +635,6 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("true");
             Response response = client.Delete407(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -706,7 +646,6 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("true");
             Response response = await client.Delete407Async(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -718,7 +657,6 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = null;
             Response response = client.Put409(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -730,7 +668,6 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = null;
             Response response = await client.Put409Async(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -742,7 +679,6 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("true");
             Response response = client.Put409(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -754,7 +690,6 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("true");
             Response response = await client.Put409Async(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -765,7 +700,6 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
             Response response = client.Head410();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -776,7 +710,6 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
             Response response = await client.Head410Async();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -787,7 +720,6 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
             Response response = client.Head410();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -798,7 +730,6 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
             Response response = await client.Head410Async();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -809,7 +740,6 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
             Response response = client.Get411();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -820,7 +750,6 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
             Response response = await client.Get411Async();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -831,7 +760,6 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
             Response response = client.Get411();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -842,7 +770,6 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
             Response response = await client.Get411Async();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -853,7 +780,6 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
             Response response = client.Options412();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -864,7 +790,6 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
             Response response = await client.Options412Async();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -875,7 +800,6 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
             Response response = client.Options412();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -886,7 +810,6 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
             Response response = await client.Options412Async();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -897,7 +820,6 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
             Response response = client.Get412();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -908,7 +830,6 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
             Response response = await client.Get412Async();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -919,7 +840,6 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
             Response response = client.Get412();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -930,7 +850,6 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
             Response response = await client.Get412Async();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -942,7 +861,6 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = null;
             Response response = client.Put413(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -954,7 +872,6 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = null;
             Response response = await client.Put413Async(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -966,7 +883,6 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("true");
             Response response = client.Put413(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -978,7 +894,6 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("true");
             Response response = await client.Put413Async(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -990,7 +905,6 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = null;
             Response response = client.Patch414(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1002,7 +916,6 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = null;
             Response response = await client.Patch414Async(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1014,7 +927,6 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("true");
             Response response = client.Patch414(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1026,7 +938,6 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("true");
             Response response = await client.Patch414Async(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1038,7 +949,6 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = null;
             Response response = client.Post415(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1050,7 +960,6 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = null;
             Response response = await client.Post415Async(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1062,7 +971,6 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("true");
             Response response = client.Post415(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1074,7 +982,6 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("true");
             Response response = await client.Post415Async(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1085,7 +992,6 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
             Response response = client.Get416();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1096,7 +1002,6 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
             Response response = await client.Get416Async();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1107,7 +1012,6 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
             Response response = client.Get416();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1118,7 +1022,6 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
             Response response = await client.Get416Async();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1130,7 +1033,6 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = null;
             Response response = client.Delete417(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1142,7 +1044,6 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = null;
             Response response = await client.Delete417Async(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1154,7 +1055,6 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("true");
             Response response = client.Delete417(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1166,7 +1066,6 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("true");
             Response response = await client.Delete417Async(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1177,7 +1076,6 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
             Response response = client.Head429();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1188,7 +1086,6 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
             Response response = await client.Head429Async();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1199,7 +1096,6 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
             Response response = client.Head429();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1210,7 +1106,6 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
             Response response = await client.Head429Async();
-            Console.WriteLine(response.Status);
         }
     }
 }

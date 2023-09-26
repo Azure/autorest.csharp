@@ -5,8 +5,6 @@
 
 #nullable disable
 
-using System;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Identity;
@@ -15,7 +13,7 @@ using SubClients_LowLevel;
 
 namespace SubClients_LowLevel.Samples
 {
-    internal class Samples_Parameter
+    public class Samples_Parameter
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
@@ -25,9 +23,6 @@ namespace SubClients_LowLevel.Samples
             Parameter client = new RootClient(null, credential).GetParameterClient();
 
             Response response = client.GetSubParameter("<subParameter>", null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -38,9 +33,6 @@ namespace SubClients_LowLevel.Samples
             Parameter client = new RootClient(null, credential).GetParameterClient();
 
             Response response = await client.GetSubParameterAsync("<subParameter>", null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -51,9 +43,6 @@ namespace SubClients_LowLevel.Samples
             Parameter client = new RootClient(null, credential).GetParameterClient();
 
             Response response = client.GetSubParameter("<subParameter>", null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -64,9 +53,6 @@ namespace SubClients_LowLevel.Samples
             Parameter client = new RootClient(null, credential).GetParameterClient();
 
             Response response = await client.GetSubParameterAsync("<subParameter>", null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
     }
 }

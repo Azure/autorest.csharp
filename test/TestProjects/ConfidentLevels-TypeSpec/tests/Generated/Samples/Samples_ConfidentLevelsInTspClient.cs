@@ -6,8 +6,6 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -32,7 +30,6 @@ namespace ConfidentLevelsInTsp.Samples
                 unionProperty = "<unionProperty>",
             });
             Response response = client.UnionInRequestProperty(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -47,7 +44,6 @@ namespace ConfidentLevelsInTsp.Samples
                 unionProperty = "<unionProperty>",
             });
             Response response = await client.UnionInRequestPropertyAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -62,7 +58,6 @@ namespace ConfidentLevelsInTsp.Samples
                 unionProperty = "<unionProperty>",
             });
             Response response = client.UnionInRequestProperty(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -77,7 +72,6 @@ namespace ConfidentLevelsInTsp.Samples
                 unionProperty = "<unionProperty>",
             });
             Response response = await client.UnionInRequestPropertyAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -93,9 +87,6 @@ namespace ConfidentLevelsInTsp.Samples
                 age = 1234,
             });
             Response response = client.UnionInResponseProperty(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("unionProperty").ToString());
         }
 
         [Test]
@@ -111,9 +102,6 @@ namespace ConfidentLevelsInTsp.Samples
                 age = 1234,
             });
             Response response = await client.UnionInResponsePropertyAsync(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("unionProperty").ToString());
         }
 
         [Test]
@@ -130,9 +118,6 @@ namespace ConfidentLevelsInTsp.Samples
                 size = 123.45,
             });
             Response response = client.UnionInResponseProperty(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("unionProperty").ToString());
         }
 
         [Test]
@@ -149,9 +134,6 @@ namespace ConfidentLevelsInTsp.Samples
                 size = 123.45,
             });
             Response response = await client.UnionInResponsePropertyAsync(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("unionProperty").ToString());
         }
 
         [Test]
@@ -164,14 +146,13 @@ namespace ConfidentLevelsInTsp.Samples
             RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
-                selfReference = new List<object>()
-{
+                selfReference = new object[]
+            {
 null
-},
+            },
                 unionProperty = "<unionProperty>",
             });
             Response response = client.UnionWithSelfReference(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -184,14 +165,13 @@ null
             RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
-                selfReference = new List<object>()
-{
+                selfReference = new object[]
+            {
 null
-},
+            },
                 unionProperty = "<unionProperty>",
             });
             Response response = await client.UnionWithSelfReferenceAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -204,14 +184,13 @@ null
             RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
-                selfReference = new List<object>()
-{
+                selfReference = new object[]
+            {
 null
-},
+            },
                 unionProperty = "<unionProperty>",
             });
             Response response = client.UnionWithSelfReference(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -224,14 +203,13 @@ null
             RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
-                selfReference = new List<object>()
-{
+                selfReference = new object[]
+            {
 null
-},
+            },
                 unionProperty = "<unionProperty>",
             });
             Response response = await client.UnionWithSelfReferenceAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -246,7 +224,6 @@ null
                 name = "<name>",
             });
             Response response = client.UnionWithInderict(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -261,7 +238,6 @@ null
                 name = "<name>",
             });
             Response response = await client.UnionWithInderictAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -274,15 +250,15 @@ null
             RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
-                reference = new List<object>()
-{
+                reference = new object[]
+            {
 new
 {
 something = "<something>",
 reference = new
 {
 name = "<name>",
-selfReference = new List<object>()
+selfReference = new object[]
 {
 null
 },
@@ -290,10 +266,9 @@ unionProperty = "<unionProperty>",
 },
 unionProperty = "<unionProperty>",
 }
-},
+            },
             });
             Response response = client.UnionWithInderict(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -306,15 +281,15 @@ unionProperty = "<unionProperty>",
             RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
-                reference = new List<object>()
-{
+                reference = new object[]
+            {
 new
 {
 something = "<something>",
 reference = new
 {
 name = "<name>",
-selfReference = new List<object>()
+selfReference = new object[]
 {
 null
 },
@@ -322,10 +297,9 @@ unionProperty = "<unionProperty>",
 },
 unionProperty = "<unionProperty>",
 }
-},
+            },
             });
             Response response = await client.UnionWithInderictAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -341,7 +315,6 @@ unionProperty = "<unionProperty>",
                 id = 1,
             });
             Response response = client.LiteralOfInteger(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -357,7 +330,6 @@ unionProperty = "<unionProperty>",
                 id = 1,
             });
             Response response = await client.LiteralOfIntegerAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -373,7 +345,6 @@ unionProperty = "<unionProperty>",
                 id = 1,
             });
             Response response = client.LiteralOfInteger(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -389,7 +360,6 @@ unionProperty = "<unionProperty>",
                 id = 1,
             });
             Response response = await client.LiteralOfIntegerAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -405,7 +375,6 @@ unionProperty = "<unionProperty>",
                 id = 3.141592F,
             });
             Response response = client.LiteralOfFloat(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -421,7 +390,6 @@ unionProperty = "<unionProperty>",
                 id = 3.141592F,
             });
             Response response = await client.LiteralOfFloatAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -437,7 +405,6 @@ unionProperty = "<unionProperty>",
                 id = 3.141592F,
             });
             Response response = client.LiteralOfFloat(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -453,7 +420,6 @@ unionProperty = "<unionProperty>",
                 id = 3.141592F,
             });
             Response response = await client.LiteralOfFloatAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -470,10 +436,6 @@ unionProperty = "<unionProperty>",
                 name = "<name>",
             });
             Response response = client.ConfidentOperationWithDiscriminator(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("kind").ToString());
-            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]
@@ -490,10 +452,6 @@ unionProperty = "<unionProperty>",
                 name = "<name>",
             });
             Response response = await client.ConfidentOperationWithDiscriminatorAsync(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("kind").ToString());
-            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]
@@ -532,10 +490,6 @@ unionProperty = "<unionProperty>",
                 name = "<name>",
             });
             Response response = client.ConfidentOperationWithDiscriminator(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("kind").ToString());
-            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]
@@ -552,10 +506,6 @@ unionProperty = "<unionProperty>",
                 name = "<name>",
             });
             Response response = await client.ConfidentOperationWithDiscriminatorAsync(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("kind").ToString());
-            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]
@@ -595,10 +545,6 @@ unionProperty = "<unionProperty>",
                 name = "<name>",
             });
             Response response = client.PollutedBaseMethod(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("kind").ToString());
-            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]
@@ -616,10 +562,6 @@ unionProperty = "<unionProperty>",
                 name = "<name>",
             });
             Response response = await client.PollutedBaseMethodAsync(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("kind").ToString());
-            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]
@@ -637,10 +579,6 @@ unionProperty = "<unionProperty>",
                 name = "<name>",
             });
             Response response = client.PollutedBaseMethod(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("kind").ToString());
-            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]
@@ -658,10 +596,6 @@ unionProperty = "<unionProperty>",
                 name = "<name>",
             });
             Response response = await client.PollutedBaseMethodAsync(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("kind").ToString());
-            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]
@@ -679,12 +613,6 @@ unionProperty = "<unionProperty>",
                 name = "<name>",
             });
             Response response = client.PollutedDerivedMethod(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("woof").ToString());
-            Console.WriteLine(result.GetProperty("color").ToString());
-            Console.WriteLine(result.GetProperty("kind").ToString());
-            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]
@@ -702,12 +630,6 @@ unionProperty = "<unionProperty>",
                 name = "<name>",
             });
             Response response = await client.PollutedDerivedMethodAsync(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("woof").ToString());
-            Console.WriteLine(result.GetProperty("color").ToString());
-            Console.WriteLine(result.GetProperty("kind").ToString());
-            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]
@@ -725,12 +647,6 @@ unionProperty = "<unionProperty>",
                 name = "<name>",
             });
             Response response = client.PollutedDerivedMethod(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("woof").ToString());
-            Console.WriteLine(result.GetProperty("color").ToString());
-            Console.WriteLine(result.GetProperty("kind").ToString());
-            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]
@@ -748,12 +664,6 @@ unionProperty = "<unionProperty>",
                 name = "<name>",
             });
             Response response = await client.PollutedDerivedMethodAsync(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("woof").ToString());
-            Console.WriteLine(result.GetProperty("color").ToString());
-            Console.WriteLine(result.GetProperty("kind").ToString());
-            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]
@@ -770,11 +680,6 @@ unionProperty = "<unionProperty>",
                 name = "<name>",
             });
             Response response = client.UnpollutedDerivedMethod(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("meow").ToString());
-            Console.WriteLine(result.GetProperty("kind").ToString());
-            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]
@@ -791,11 +696,6 @@ unionProperty = "<unionProperty>",
                 name = "<name>",
             });
             Response response = await client.UnpollutedDerivedMethodAsync(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("meow").ToString());
-            Console.WriteLine(result.GetProperty("kind").ToString());
-            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]
@@ -812,11 +712,6 @@ unionProperty = "<unionProperty>",
                 name = "<name>",
             });
             Response response = client.UnpollutedDerivedMethod(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("meow").ToString());
-            Console.WriteLine(result.GetProperty("kind").ToString());
-            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]
@@ -833,11 +728,6 @@ unionProperty = "<unionProperty>",
                 name = "<name>",
             });
             Response response = await client.UnpollutedDerivedMethodAsync(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("meow").ToString());
-            Console.WriteLine(result.GetProperty("kind").ToString());
-            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]
@@ -852,7 +742,6 @@ unionProperty = "<unionProperty>",
                 name = "<name>",
             });
             Response response = client.UseDerivedModel(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -867,7 +756,6 @@ unionProperty = "<unionProperty>",
                 name = "<name>",
             });
             Response response = await client.UseDerivedModelAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -884,7 +772,6 @@ unionProperty = "<unionProperty>",
                 size = 123.45,
             });
             Response response = client.UseDerivedModel(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -901,7 +788,6 @@ unionProperty = "<unionProperty>",
                 size = 123.45,
             });
             Response response = await client.UseDerivedModelAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -917,7 +803,6 @@ unionProperty = "<unionProperty>",
                 name = "<name>",
             });
             Response response = client.UseDerivedModelWithUnion(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -933,7 +818,6 @@ unionProperty = "<unionProperty>",
                 name = "<name>",
             });
             Response response = await client.UseDerivedModelWithUnionAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -950,7 +834,6 @@ unionProperty = "<unionProperty>",
                 size = 123.45,
             });
             Response response = client.UseDerivedModelWithUnion(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -967,7 +850,6 @@ unionProperty = "<unionProperty>",
                 size = 123.45,
             });
             Response response = await client.UseDerivedModelWithUnionAsync(content);
-            Console.WriteLine(response.Status);
         }
     }
 }

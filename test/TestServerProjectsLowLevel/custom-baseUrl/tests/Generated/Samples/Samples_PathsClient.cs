@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Identity;
@@ -24,7 +23,6 @@ namespace custom_baseUrl_LowLevel.Samples
             PathsClient client = new PathsClient("host", credential);
 
             Response response = client.GetEmpty("<accountName>");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -35,7 +33,6 @@ namespace custom_baseUrl_LowLevel.Samples
             PathsClient client = new PathsClient("host", credential);
 
             Response response = await client.GetEmptyAsync("<accountName>");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -46,7 +43,6 @@ namespace custom_baseUrl_LowLevel.Samples
             PathsClient client = new PathsClient("host", credential);
 
             Response response = client.GetEmpty("<accountName>");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -57,7 +53,6 @@ namespace custom_baseUrl_LowLevel.Samples
             PathsClient client = new PathsClient("host", credential);
 
             Response response = await client.GetEmptyAsync("<accountName>");
-            Console.WriteLine(response.Status);
         }
     }
 }

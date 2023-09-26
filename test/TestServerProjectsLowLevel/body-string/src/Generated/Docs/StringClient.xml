@@ -9,9 +9,6 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 StringClient client = new StringClient(credential);
 
 Response response = await client.GetNullAsync(null);
-
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetNullAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -19,9 +16,6 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 StringClient client = new StringClient(credential);
 
 Response response = await client.GetNullAsync(null);
-
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
     <member name="GetNull(RequestContext)">
@@ -32,9 +26,6 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 StringClient client = new StringClient(credential);
 
 Response response = client.GetNull(null);
-
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetNull with all parameters and parse the result.
 <code><![CDATA[
@@ -42,9 +33,6 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 StringClient client = new StringClient(credential);
 
 Response response = client.GetNull(null);
-
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
     <member name="PutNullAsync(RequestContent,RequestContext)">
@@ -56,7 +44,6 @@ StringClient client = new StringClient(credential);
 
 RequestContent content = null;
 Response response = await client.PutNullAsync(content);
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutNullAsync with all request content.
 <code><![CDATA[
@@ -65,7 +52,6 @@ StringClient client = new StringClient(credential);
 
 RequestContent content = RequestContent.Create("<stringBody>");
 Response response = await client.PutNullAsync(content);
-Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="PutNull(RequestContent,RequestContext)">
@@ -77,7 +63,6 @@ StringClient client = new StringClient(credential);
 
 RequestContent content = null;
 Response response = client.PutNull(content);
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutNull with all request content.
 <code><![CDATA[
@@ -86,7 +71,6 @@ StringClient client = new StringClient(credential);
 
 RequestContent content = RequestContent.Create("<stringBody>");
 Response response = client.PutNull(content);
-Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="GetEmptyAsync(RequestContext)">
@@ -97,9 +81,6 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 StringClient client = new StringClient(credential);
 
 Response response = await client.GetEmptyAsync(null);
-
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetEmptyAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -107,9 +88,6 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 StringClient client = new StringClient(credential);
 
 Response response = await client.GetEmptyAsync(null);
-
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
     <member name="GetEmpty(RequestContext)">
@@ -120,9 +98,6 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 StringClient client = new StringClient(credential);
 
 Response response = client.GetEmpty(null);
-
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetEmpty with all parameters and parse the result.
 <code><![CDATA[
@@ -130,9 +105,6 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 StringClient client = new StringClient(credential);
 
 Response response = client.GetEmpty(null);
-
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
     <member name="PutEmptyAsync(RequestContent,RequestContext)">
@@ -144,7 +116,6 @@ StringClient client = new StringClient(credential);
 
 RequestContent content = RequestContent.Create("");
 Response response = await client.PutEmptyAsync(content);
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutEmptyAsync with all request content.
 <code><![CDATA[
@@ -153,7 +124,6 @@ StringClient client = new StringClient(credential);
 
 RequestContent content = RequestContent.Create("");
 Response response = await client.PutEmptyAsync(content);
-Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="PutEmpty(RequestContent,RequestContext)">
@@ -165,7 +135,6 @@ StringClient client = new StringClient(credential);
 
 RequestContent content = RequestContent.Create("");
 Response response = client.PutEmpty(content);
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutEmpty with all request content.
 <code><![CDATA[
@@ -174,7 +143,6 @@ StringClient client = new StringClient(credential);
 
 RequestContent content = RequestContent.Create("");
 Response response = client.PutEmpty(content);
-Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="GetMbcsAsync(RequestContext)">
@@ -185,9 +153,6 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 StringClient client = new StringClient(credential);
 
 Response response = await client.GetMbcsAsync(null);
-
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetMbcsAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -195,9 +160,6 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 StringClient client = new StringClient(credential);
 
 Response response = await client.GetMbcsAsync(null);
-
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
     <member name="GetMbcs(RequestContext)">
@@ -208,9 +170,6 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 StringClient client = new StringClient(credential);
 
 Response response = client.GetMbcs(null);
-
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetMbcs with all parameters and parse the result.
 <code><![CDATA[
@@ -218,9 +177,6 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 StringClient client = new StringClient(credential);
 
 Response response = client.GetMbcs(null);
-
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
     <member name="PutMbcsAsync(RequestContent,RequestContext)">
@@ -232,7 +188,6 @@ StringClient client = new StringClient(credential);
 
 RequestContent content = RequestContent.Create("啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€");
 Response response = await client.PutMbcsAsync(content);
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutMbcsAsync with all request content.
 <code><![CDATA[
@@ -241,7 +196,6 @@ StringClient client = new StringClient(credential);
 
 RequestContent content = RequestContent.Create("啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€");
 Response response = await client.PutMbcsAsync(content);
-Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="PutMbcs(RequestContent,RequestContext)">
@@ -253,7 +207,6 @@ StringClient client = new StringClient(credential);
 
 RequestContent content = RequestContent.Create("啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€");
 Response response = client.PutMbcs(content);
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutMbcs with all request content.
 <code><![CDATA[
@@ -262,7 +215,6 @@ StringClient client = new StringClient(credential);
 
 RequestContent content = RequestContent.Create("啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€");
 Response response = client.PutMbcs(content);
-Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="GetWhitespaceAsync(RequestContext)">
@@ -273,9 +225,6 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 StringClient client = new StringClient(credential);
 
 Response response = await client.GetWhitespaceAsync(null);
-
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetWhitespaceAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -283,9 +232,6 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 StringClient client = new StringClient(credential);
 
 Response response = await client.GetWhitespaceAsync(null);
-
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
     <member name="GetWhitespace(RequestContext)">
@@ -296,9 +242,6 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 StringClient client = new StringClient(credential);
 
 Response response = client.GetWhitespace(null);
-
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetWhitespace with all parameters and parse the result.
 <code><![CDATA[
@@ -306,9 +249,6 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 StringClient client = new StringClient(credential);
 
 Response response = client.GetWhitespace(null);
-
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
     <member name="PutWhitespaceAsync(RequestContent,RequestContext)">
@@ -320,7 +260,6 @@ StringClient client = new StringClient(credential);
 
 RequestContent content = RequestContent.Create("    Now is the time for all good men to come to the aid of their country    ");
 Response response = await client.PutWhitespaceAsync(content);
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutWhitespaceAsync with all request content.
 <code><![CDATA[
@@ -329,7 +268,6 @@ StringClient client = new StringClient(credential);
 
 RequestContent content = RequestContent.Create("    Now is the time for all good men to come to the aid of their country    ");
 Response response = await client.PutWhitespaceAsync(content);
-Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="PutWhitespace(RequestContent,RequestContext)">
@@ -341,7 +279,6 @@ StringClient client = new StringClient(credential);
 
 RequestContent content = RequestContent.Create("    Now is the time for all good men to come to the aid of their country    ");
 Response response = client.PutWhitespace(content);
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutWhitespace with all request content.
 <code><![CDATA[
@@ -350,7 +287,6 @@ StringClient client = new StringClient(credential);
 
 RequestContent content = RequestContent.Create("    Now is the time for all good men to come to the aid of their country    ");
 Response response = client.PutWhitespace(content);
-Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="GetNotProvidedAsync(RequestContext)">
@@ -361,9 +297,6 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 StringClient client = new StringClient(credential);
 
 Response response = await client.GetNotProvidedAsync(null);
-
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetNotProvidedAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -371,9 +304,6 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 StringClient client = new StringClient(credential);
 
 Response response = await client.GetNotProvidedAsync(null);
-
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
     <member name="GetNotProvided(RequestContext)">
@@ -384,9 +314,6 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 StringClient client = new StringClient(credential);
 
 Response response = client.GetNotProvided(null);
-
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetNotProvided with all parameters and parse the result.
 <code><![CDATA[
@@ -394,9 +321,6 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 StringClient client = new StringClient(credential);
 
 Response response = client.GetNotProvided(null);
-
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
     <member name="GetBase64EncodedAsync(RequestContext)">
@@ -407,9 +331,6 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 StringClient client = new StringClient(credential);
 
 Response response = await client.GetBase64EncodedAsync(null);
-
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetBase64EncodedAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -417,9 +338,6 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 StringClient client = new StringClient(credential);
 
 Response response = await client.GetBase64EncodedAsync(null);
-
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
     <member name="GetBase64Encoded(RequestContext)">
@@ -430,9 +348,6 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 StringClient client = new StringClient(credential);
 
 Response response = client.GetBase64Encoded(null);
-
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetBase64Encoded with all parameters and parse the result.
 <code><![CDATA[
@@ -440,9 +355,6 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 StringClient client = new StringClient(credential);
 
 Response response = client.GetBase64Encoded(null);
-
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
     <member name="GetBase64UrlEncodedAsync(RequestContext)">
@@ -453,9 +365,6 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 StringClient client = new StringClient(credential);
 
 Response response = await client.GetBase64UrlEncodedAsync(null);
-
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetBase64UrlEncodedAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -463,9 +372,6 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 StringClient client = new StringClient(credential);
 
 Response response = await client.GetBase64UrlEncodedAsync(null);
-
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
     <member name="GetBase64UrlEncoded(RequestContext)">
@@ -476,9 +382,6 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 StringClient client = new StringClient(credential);
 
 Response response = client.GetBase64UrlEncoded(null);
-
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetBase64UrlEncoded with all parameters and parse the result.
 <code><![CDATA[
@@ -486,9 +389,6 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 StringClient client = new StringClient(credential);
 
 Response response = client.GetBase64UrlEncoded(null);
-
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
     <member name="PutBase64UrlEncodedAsync(RequestContent,RequestContext)">
@@ -500,7 +400,6 @@ StringClient client = new StringClient(credential);
 
 RequestContent content = RequestContent.Create(new object());
 Response response = await client.PutBase64UrlEncodedAsync(content);
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutBase64UrlEncodedAsync with all request content.
 <code><![CDATA[
@@ -509,7 +408,6 @@ StringClient client = new StringClient(credential);
 
 RequestContent content = RequestContent.Create(new object());
 Response response = await client.PutBase64UrlEncodedAsync(content);
-Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="PutBase64UrlEncoded(RequestContent,RequestContext)">
@@ -521,7 +419,6 @@ StringClient client = new StringClient(credential);
 
 RequestContent content = RequestContent.Create(new object());
 Response response = client.PutBase64UrlEncoded(content);
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutBase64UrlEncoded with all request content.
 <code><![CDATA[
@@ -530,7 +427,6 @@ StringClient client = new StringClient(credential);
 
 RequestContent content = RequestContent.Create(new object());
 Response response = client.PutBase64UrlEncoded(content);
-Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="GetNullBase64UrlEncodedAsync(RequestContext)">
@@ -541,9 +437,6 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 StringClient client = new StringClient(credential);
 
 Response response = await client.GetNullBase64UrlEncodedAsync(null);
-
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetNullBase64UrlEncodedAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -551,9 +444,6 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 StringClient client = new StringClient(credential);
 
 Response response = await client.GetNullBase64UrlEncodedAsync(null);
-
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
     <member name="GetNullBase64UrlEncoded(RequestContext)">
@@ -564,9 +454,6 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 StringClient client = new StringClient(credential);
 
 Response response = client.GetNullBase64UrlEncoded(null);
-
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetNullBase64UrlEncoded with all parameters and parse the result.
 <code><![CDATA[
@@ -574,9 +461,6 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 StringClient client = new StringClient(credential);
 
 Response response = client.GetNullBase64UrlEncoded(null);
-
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
   </members>

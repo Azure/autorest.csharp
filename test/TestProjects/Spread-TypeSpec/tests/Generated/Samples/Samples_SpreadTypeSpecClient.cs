@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -32,7 +31,6 @@ namespace SpreadTypeSpec.Samples
                 age = 1234,
             });
             Response response = client.SpreadModel(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -48,7 +46,6 @@ namespace SpreadTypeSpec.Samples
                 age = 1234,
             });
             Response response = await client.SpreadModelAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -60,7 +57,6 @@ namespace SpreadTypeSpec.Samples
 
             Thing thing = new Thing("<name>", 1234);
             Response response = client.SpreadModel(thing);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -72,7 +68,6 @@ namespace SpreadTypeSpec.Samples
 
             Thing thing = new Thing("<name>", 1234);
             Response response = await client.SpreadModelAsync(thing);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -88,7 +83,6 @@ namespace SpreadTypeSpec.Samples
                 age = 1234,
             });
             Response response = client.SpreadModel(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -104,7 +98,6 @@ namespace SpreadTypeSpec.Samples
                 age = 1234,
             });
             Response response = await client.SpreadModelAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -116,7 +109,6 @@ namespace SpreadTypeSpec.Samples
 
             Thing thing = new Thing("<name>", 1234);
             Response response = client.SpreadModel(thing);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -128,7 +120,6 @@ namespace SpreadTypeSpec.Samples
 
             Thing thing = new Thing("<name>", 1234);
             Response response = await client.SpreadModelAsync(thing);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -144,7 +135,6 @@ namespace SpreadTypeSpec.Samples
                 age = 1234,
             });
             Response response = client.SpreadAlias(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -160,7 +150,6 @@ namespace SpreadTypeSpec.Samples
                 age = 1234,
             });
             Response response = await client.SpreadAliasAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -171,7 +160,6 @@ namespace SpreadTypeSpec.Samples
             SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
 
             Response response = client.SpreadAlias("<name>", 1234);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -182,7 +170,6 @@ namespace SpreadTypeSpec.Samples
             SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
 
             Response response = await client.SpreadAliasAsync("<name>", 1234);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -198,7 +185,6 @@ namespace SpreadTypeSpec.Samples
                 age = 1234,
             });
             Response response = client.SpreadAlias(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -214,7 +200,6 @@ namespace SpreadTypeSpec.Samples
                 age = 1234,
             });
             Response response = await client.SpreadAliasAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -225,7 +210,6 @@ namespace SpreadTypeSpec.Samples
             SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
 
             Response response = client.SpreadAlias("<name>", 1234);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -236,7 +220,6 @@ namespace SpreadTypeSpec.Samples
             SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
 
             Response response = await client.SpreadAliasAsync("<name>", 1234);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -252,7 +235,6 @@ namespace SpreadTypeSpec.Samples
                 age = 1234,
             });
             Response response = client.SpreadMultiTargetAlias("<id>", 1234, content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -268,7 +250,6 @@ namespace SpreadTypeSpec.Samples
                 age = 1234,
             });
             Response response = await client.SpreadMultiTargetAliasAsync("<id>", 1234, content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -279,7 +260,6 @@ namespace SpreadTypeSpec.Samples
             SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
 
             Response response = client.SpreadMultiTargetAlias("<id>", 1234, "<name>", 1234);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -290,7 +270,6 @@ namespace SpreadTypeSpec.Samples
             SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
 
             Response response = await client.SpreadMultiTargetAliasAsync("<id>", 1234, "<name>", 1234);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -306,7 +285,6 @@ namespace SpreadTypeSpec.Samples
                 age = 1234,
             });
             Response response = client.SpreadMultiTargetAlias("<id>", 1234, content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -322,7 +300,6 @@ namespace SpreadTypeSpec.Samples
                 age = 1234,
             });
             Response response = await client.SpreadMultiTargetAliasAsync("<id>", 1234, content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -333,7 +310,6 @@ namespace SpreadTypeSpec.Samples
             SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
 
             Response response = client.SpreadMultiTargetAlias("<id>", 1234, "<name>", 1234);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -344,7 +320,6 @@ namespace SpreadTypeSpec.Samples
             SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
 
             Response response = await client.SpreadMultiTargetAliasAsync("<id>", 1234, "<name>", 1234);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -360,7 +335,6 @@ namespace SpreadTypeSpec.Samples
                 age = 1234,
             });
             Response response = client.SpreadAliasWithModel("<id>", 1234, content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -376,7 +350,6 @@ namespace SpreadTypeSpec.Samples
                 age = 1234,
             });
             Response response = await client.SpreadAliasWithModelAsync("<id>", 1234, content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -388,7 +361,6 @@ namespace SpreadTypeSpec.Samples
 
             Thing thing = new Thing("<name>", 1234);
             Response response = client.SpreadAliasWithModel("<id>", 1234, thing);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -400,7 +372,6 @@ namespace SpreadTypeSpec.Samples
 
             Thing thing = new Thing("<name>", 1234);
             Response response = await client.SpreadAliasWithModelAsync("<id>", 1234, thing);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -416,7 +387,6 @@ namespace SpreadTypeSpec.Samples
                 age = 1234,
             });
             Response response = client.SpreadAliasWithModel("<id>", 1234, content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -432,7 +402,6 @@ namespace SpreadTypeSpec.Samples
                 age = 1234,
             });
             Response response = await client.SpreadAliasWithModelAsync("<id>", 1234, content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -444,7 +413,6 @@ namespace SpreadTypeSpec.Samples
 
             Thing thing = new Thing("<name>", 1234);
             Response response = client.SpreadAliasWithModel("<id>", 1234, thing);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -456,7 +424,6 @@ namespace SpreadTypeSpec.Samples
 
             Thing thing = new Thing("<name>", 1234);
             Response response = await client.SpreadAliasWithModelAsync("<id>", 1234, thing);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -472,7 +439,6 @@ namespace SpreadTypeSpec.Samples
                 age = 1234,
             });
             Response response = client.SpreadAliasWithSpreadAlias("<id>", 1234, content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -488,7 +454,6 @@ namespace SpreadTypeSpec.Samples
                 age = 1234,
             });
             Response response = await client.SpreadAliasWithSpreadAliasAsync("<id>", 1234, content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -499,7 +464,6 @@ namespace SpreadTypeSpec.Samples
             SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
 
             Response response = client.SpreadAliasWithSpreadAlias("<id>", 1234, "<name>", 1234);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -510,7 +474,6 @@ namespace SpreadTypeSpec.Samples
             SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
 
             Response response = await client.SpreadAliasWithSpreadAliasAsync("<id>", 1234, "<name>", 1234);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -526,7 +489,6 @@ namespace SpreadTypeSpec.Samples
                 age = 1234,
             });
             Response response = client.SpreadAliasWithSpreadAlias("<id>", 1234, content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -542,7 +504,6 @@ namespace SpreadTypeSpec.Samples
                 age = 1234,
             });
             Response response = await client.SpreadAliasWithSpreadAliasAsync("<id>", 1234, content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -553,7 +514,6 @@ namespace SpreadTypeSpec.Samples
             SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
 
             Response response = client.SpreadAliasWithSpreadAlias("<id>", 1234, "<name>", 1234);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -564,7 +524,6 @@ namespace SpreadTypeSpec.Samples
             SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
 
             Response response = await client.SpreadAliasWithSpreadAliasAsync("<id>", 1234, "<name>", 1234);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -577,13 +536,12 @@ namespace SpreadTypeSpec.Samples
             RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
-                items = new List<object>()
-{
+                items = new object[]
+            {
 1234
-},
+            },
             });
             Response response = client.SpreadAliasWithOptionalProps("<id>", 1234, content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -596,13 +554,12 @@ namespace SpreadTypeSpec.Samples
             RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
-                items = new List<object>()
-{
+                items = new object[]
+            {
 1234
-},
+            },
             });
             Response response = await client.SpreadAliasWithOptionalPropsAsync("<id>", 1234, content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -612,11 +569,7 @@ namespace SpreadTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
 
-            Response response = client.SpreadAliasWithOptionalProps("<id>", 1234, "<name>", new List<int>()
-{
-1234
-});
-            Console.WriteLine(response.Status);
+            Response response = client.SpreadAliasWithOptionalProps("<id>", 1234, "<name>", new int[] { 1234 });
         }
 
         [Test]
@@ -626,11 +579,7 @@ namespace SpreadTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
 
-            Response response = await client.SpreadAliasWithOptionalPropsAsync("<id>", 1234, "<name>", new List<int>()
-{
-1234
-});
-            Console.WriteLine(response.Status);
+            Response response = await client.SpreadAliasWithOptionalPropsAsync("<id>", 1234, "<name>", new int[] { 1234 });
         }
 
         [Test]
@@ -645,17 +594,16 @@ namespace SpreadTypeSpec.Samples
                 name = "<name>",
                 color = "<color>",
                 age = 1234,
-                items = new List<object>()
-{
+                items = new object[]
+            {
 1234
-},
-                elements = new List<object>()
-{
+            },
+                elements = new object[]
+            {
 "<elements>"
-},
+            },
             });
             Response response = client.SpreadAliasWithOptionalProps("<id>", 1234, content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -670,17 +618,16 @@ namespace SpreadTypeSpec.Samples
                 name = "<name>",
                 color = "<color>",
                 age = 1234,
-                items = new List<object>()
-{
+                items = new object[]
+            {
 1234
-},
-                elements = new List<object>()
-{
+            },
+                elements = new object[]
+            {
 "<elements>"
-},
+            },
             });
             Response response = await client.SpreadAliasWithOptionalPropsAsync("<id>", 1234, content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -690,14 +637,7 @@ namespace SpreadTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
 
-            Response response = client.SpreadAliasWithOptionalProps("<id>", 1234, "<name>", new List<int>()
-{
-1234
-}, color: "<color>", age: 1234, elements: new List<string>()
-{
-"<elements>"
-});
-            Console.WriteLine(response.Status);
+            Response response = client.SpreadAliasWithOptionalProps("<id>", 1234, "<name>", new int[] { 1234 }, "<color>", 1234, new string[] { "<elements>" });
         }
 
         [Test]
@@ -707,14 +647,7 @@ namespace SpreadTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
 
-            Response response = await client.SpreadAliasWithOptionalPropsAsync("<id>", 1234, "<name>", new List<int>()
-{
-1234
-}, color: "<color>", age: 1234, elements: new List<string>()
-{
-"<elements>"
-});
-            Console.WriteLine(response.Status);
+            Response response = await client.SpreadAliasWithOptionalPropsAsync("<id>", 1234, "<name>", new int[] { 1234 }, "<color>", 1234, new string[] { "<elements>" });
         }
 
         [Test]
@@ -726,13 +659,12 @@ namespace SpreadTypeSpec.Samples
 
             RequestContent content = RequestContent.Create(new
             {
-                requiredStringList = new List<object>()
-{
+                requiredStringList = new object[]
+            {
 "<requiredStringList>"
-},
+            },
             });
             Response response = client.SpreadAliasWithCollections(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -744,13 +676,12 @@ namespace SpreadTypeSpec.Samples
 
             RequestContent content = RequestContent.Create(new
             {
-                requiredStringList = new List<object>()
-{
+                requiredStringList = new object[]
+            {
 "<requiredStringList>"
-},
+            },
             });
             Response response = await client.SpreadAliasWithCollectionsAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -760,11 +691,7 @@ namespace SpreadTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
 
-            Response response = client.SpreadAliasWithCollections(new List<string>()
-{
-"<requiredStringList>"
-});
-            Console.WriteLine(response.Status);
+            Response response = client.SpreadAliasWithCollections(new string[] { "<requiredStringList>" });
         }
 
         [Test]
@@ -774,11 +701,7 @@ namespace SpreadTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
 
-            Response response = await client.SpreadAliasWithCollectionsAsync(new List<string>()
-{
-"<requiredStringList>"
-});
-            Console.WriteLine(response.Status);
+            Response response = await client.SpreadAliasWithCollectionsAsync(new string[] { "<requiredStringList>" });
         }
 
         [Test]
@@ -790,17 +713,16 @@ namespace SpreadTypeSpec.Samples
 
             RequestContent content = RequestContent.Create(new
             {
-                requiredStringList = new List<object>()
-{
+                requiredStringList = new object[]
+            {
 "<requiredStringList>"
-},
-                optionalStringList = new List<object>()
-{
+            },
+                optionalStringList = new object[]
+            {
 "<optionalStringList>"
-},
+            },
             });
             Response response = client.SpreadAliasWithCollections(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -812,17 +734,16 @@ namespace SpreadTypeSpec.Samples
 
             RequestContent content = RequestContent.Create(new
             {
-                requiredStringList = new List<object>()
-{
+                requiredStringList = new object[]
+            {
 "<requiredStringList>"
-},
-                optionalStringList = new List<object>()
-{
+            },
+                optionalStringList = new object[]
+            {
 "<optionalStringList>"
-},
+            },
             });
             Response response = await client.SpreadAliasWithCollectionsAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -832,14 +753,7 @@ namespace SpreadTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
 
-            Response response = client.SpreadAliasWithCollections(new List<string>()
-{
-"<requiredStringList>"
-}, optionalStringList: new List<string>()
-{
-"<optionalStringList>"
-});
-            Console.WriteLine(response.Status);
+            Response response = client.SpreadAliasWithCollections(new string[] { "<requiredStringList>" }, new string[] { "<optionalStringList>" });
         }
 
         [Test]
@@ -849,14 +763,7 @@ namespace SpreadTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
 
-            Response response = await client.SpreadAliasWithCollectionsAsync(new List<string>()
-{
-"<requiredStringList>"
-}, optionalStringList: new List<string>()
-{
-"<optionalStringList>"
-});
-            Console.WriteLine(response.Status);
+            Response response = await client.SpreadAliasWithCollectionsAsync(new string[] { "<requiredStringList>" }, new string[] { "<optionalStringList>" });
         }
     }
 }

@@ -5,8 +5,6 @@
 
 #nullable disable
 
-using System;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -26,9 +24,6 @@ namespace body_string_LowLevel.Samples
             EnumClient client = new EnumClient(credential);
 
             Response response = client.GetNotExpandable(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -39,9 +34,6 @@ namespace body_string_LowLevel.Samples
             EnumClient client = new EnumClient(credential);
 
             Response response = await client.GetNotExpandableAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -52,9 +44,6 @@ namespace body_string_LowLevel.Samples
             EnumClient client = new EnumClient(credential);
 
             Response response = client.GetNotExpandable(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -65,9 +54,6 @@ namespace body_string_LowLevel.Samples
             EnumClient client = new EnumClient(credential);
 
             Response response = await client.GetNotExpandableAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -79,7 +65,6 @@ namespace body_string_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("red color");
             Response response = client.PutNotExpandable(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -91,7 +76,6 @@ namespace body_string_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("red color");
             Response response = await client.PutNotExpandableAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -103,7 +87,6 @@ namespace body_string_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("red color");
             Response response = client.PutNotExpandable(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -115,7 +98,6 @@ namespace body_string_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("red color");
             Response response = await client.PutNotExpandableAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -126,9 +108,6 @@ namespace body_string_LowLevel.Samples
             EnumClient client = new EnumClient(credential);
 
             Response response = client.GetReferenced(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -139,9 +118,6 @@ namespace body_string_LowLevel.Samples
             EnumClient client = new EnumClient(credential);
 
             Response response = await client.GetReferencedAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -152,9 +128,6 @@ namespace body_string_LowLevel.Samples
             EnumClient client = new EnumClient(credential);
 
             Response response = client.GetReferenced(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -165,9 +138,6 @@ namespace body_string_LowLevel.Samples
             EnumClient client = new EnumClient(credential);
 
             Response response = await client.GetReferencedAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -179,7 +149,6 @@ namespace body_string_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("red color");
             Response response = client.PutReferenced(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -191,7 +160,6 @@ namespace body_string_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("red color");
             Response response = await client.PutReferencedAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -203,7 +171,6 @@ namespace body_string_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("red color");
             Response response = client.PutReferenced(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -215,7 +182,6 @@ namespace body_string_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("red color");
             Response response = await client.PutReferencedAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -226,9 +192,6 @@ namespace body_string_LowLevel.Samples
             EnumClient client = new EnumClient(credential);
 
             Response response = client.GetReferencedConstant(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("ColorConstant").ToString());
         }
 
         [Test]
@@ -239,9 +202,6 @@ namespace body_string_LowLevel.Samples
             EnumClient client = new EnumClient(credential);
 
             Response response = await client.GetReferencedConstantAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("ColorConstant").ToString());
         }
 
         [Test]
@@ -252,10 +212,6 @@ namespace body_string_LowLevel.Samples
             EnumClient client = new EnumClient(credential);
 
             Response response = client.GetReferencedConstant(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("ColorConstant").ToString());
-            Console.WriteLine(result.GetProperty("field1").ToString());
         }
 
         [Test]
@@ -266,10 +222,6 @@ namespace body_string_LowLevel.Samples
             EnumClient client = new EnumClient(credential);
 
             Response response = await client.GetReferencedConstantAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("ColorConstant").ToString());
-            Console.WriteLine(result.GetProperty("field1").ToString());
         }
 
         [Test]
@@ -284,7 +236,6 @@ namespace body_string_LowLevel.Samples
                 ColorConstant = "green-color",
             });
             Response response = client.PutReferencedConstant(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -299,7 +250,6 @@ namespace body_string_LowLevel.Samples
                 ColorConstant = "green-color",
             });
             Response response = await client.PutReferencedConstantAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -315,7 +265,6 @@ namespace body_string_LowLevel.Samples
                 field1 = "<field1>",
             });
             Response response = client.PutReferencedConstant(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -331,7 +280,6 @@ namespace body_string_LowLevel.Samples
                 field1 = "<field1>",
             });
             Response response = await client.PutReferencedConstantAsync(content);
-            Console.WriteLine(response.Status);
         }
     }
 }

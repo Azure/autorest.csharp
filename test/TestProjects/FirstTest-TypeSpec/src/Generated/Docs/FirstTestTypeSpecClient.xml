@@ -85,7 +85,10 @@ RequestContent content = RequestContent.Create(new
     requiredLiteralFloat = 1.23F,
     requiredLiteralBool = false,
     requiredBadDescription = "<requiredBadDescription>",
-    requiredNullableList = new object[] { 1234 },
+    requiredNullableList = new object[]
+    {
+        1234
+    },
 });
 Response response = await client.PatchActionAsync(content);
 ]]></code>
@@ -107,8 +110,14 @@ RequestContent content = RequestContent.Create(new
     optionalLiteralFloat = 4.56F,
     optionalLiteralBool = true,
     requiredBadDescription = "<requiredBadDescription>",
-    optionalNullableList = new object[] { 1234 },
-    requiredNullableList = new object[] { 1234 },
+    optionalNullableList = new object[]
+    {
+        1234
+    },
+    requiredNullableList = new object[]
+    {
+        1234
+    },
 });
 Response response = await client.PatchActionAsync(content);
 ]]></code></example>
@@ -129,7 +138,10 @@ RequestContent content = RequestContent.Create(new
     requiredLiteralFloat = 1.23F,
     requiredLiteralBool = false,
     requiredBadDescription = "<requiredBadDescription>",
-    requiredNullableList = new object[] { 1234 },
+    requiredNullableList = new object[]
+    {
+        1234
+    },
 });
 Response response = client.PatchAction(content);
 ]]></code>
@@ -151,8 +163,14 @@ RequestContent content = RequestContent.Create(new
     optionalLiteralFloat = 4.56F,
     optionalLiteralBool = true,
     requiredBadDescription = "<requiredBadDescription>",
-    optionalNullableList = new object[] { 1234 },
-    requiredNullableList = new object[] { 1234 },
+    optionalNullableList = new object[]
+    {
+        1234
+    },
+    requiredNullableList = new object[]
+    {
+        1234
+    },
 });
 Response response = client.PatchAction(content);
 ]]></code></example>
@@ -173,7 +191,10 @@ RequestContent content = RequestContent.Create(new
     requiredLiteralFloat = 1.23F,
     requiredLiteralBool = false,
     requiredBadDescription = "<requiredBadDescription>",
-    requiredNullableList = new object[] { 1234 },
+    requiredNullableList = new object[]
+    {
+        1234
+    },
 });
 Response response = await client.AnonymousBodyAsync(content);
 ]]></code>
@@ -195,8 +216,14 @@ RequestContent content = RequestContent.Create(new
     optionalLiteralFloat = 4.56F,
     optionalLiteralBool = true,
     requiredBadDescription = "<requiredBadDescription>",
-    optionalNullableList = new object[] { 1234 },
-    requiredNullableList = new object[] { 1234 },
+    optionalNullableList = new object[]
+    {
+        1234
+    },
+    requiredNullableList = new object[]
+    {
+        1234
+    },
 });
 Response response = await client.AnonymousBodyAsync(content);
 ]]></code></example>
@@ -217,7 +244,10 @@ RequestContent content = RequestContent.Create(new
     requiredLiteralFloat = 1.23F,
     requiredLiteralBool = false,
     requiredBadDescription = "<requiredBadDescription>",
-    requiredNullableList = new object[] { 1234 },
+    requiredNullableList = new object[]
+    {
+        1234
+    },
 });
 Response response = client.AnonymousBody(content);
 ]]></code>
@@ -239,8 +269,14 @@ RequestContent content = RequestContent.Create(new
     optionalLiteralFloat = 4.56F,
     optionalLiteralBool = true,
     requiredBadDescription = "<requiredBadDescription>",
-    optionalNullableList = new object[] { 1234 },
-    requiredNullableList = new object[] { 1234 },
+    optionalNullableList = new object[]
+    {
+        1234
+    },
+    requiredNullableList = new object[]
+    {
+        1234
+    },
 });
 Response response = client.AnonymousBody(content);
 ]]></code></example>
@@ -756,7 +792,10 @@ RequestContent content = RequestContent.Create(new
 {
     requiredString = "<requiredString>",
     requiredInt = 1234,
-    requiredCollection = new object[] { "1" },
+    requiredCollection = new object[]
+    {
+        "1"
+    },
     requiredDictionary = new
     {
         key = "1",
@@ -770,7 +809,10 @@ RequestContent content = RequestContent.Create(new
         requiredLiteralFloat = 1.23F,
         requiredLiteralBool = false,
         requiredBadDescription = "<requiredBadDescription>",
-        requiredNullableList = new object[] { 1234 },
+        requiredNullableList = new object[]
+        {
+            1234
+        },
     },
     requiredUnknown = new object(),
     requiredRecordUnknown = new
@@ -795,7 +837,10 @@ RequestContent content = RequestContent.Create(new
 {
     requiredString = "<requiredString>",
     requiredInt = 1234,
-    requiredCollection = new object[] { "1" },
+    requiredCollection = new object[]
+    {
+        "1"
+    },
     requiredDictionary = new
     {
         key = "1",
@@ -813,17 +858,35 @@ RequestContent content = RequestContent.Create(new
         optionalLiteralFloat = 4.56F,
         optionalLiteralBool = true,
         requiredBadDescription = "<requiredBadDescription>",
-        optionalNullableList = new object[] { 1234 },
-        requiredNullableList = new object[] { 1234 },
+        optionalNullableList = new object[]
+        {
+            1234
+        },
+        requiredNullableList = new object[]
+        {
+            1234
+        },
     },
     intExtensibleEnum = 1,
-    intExtensibleEnumCollection = new object[] { 1 },
+    intExtensibleEnumCollection = new object[]
+    {
+        1
+    },
     floatExtensibleEnum = 1,
-    floatExtensibleEnumCollection = new object[] { 1 },
+    floatExtensibleEnumCollection = new object[]
+    {
+        1
+    },
     floatFixedEnum = 1.1F,
-    floatFixedEnumCollection = new object[] { 1.1F },
+    floatFixedEnumCollection = new object[]
+    {
+        1.1F
+    },
     intFixedEnum = 1,
-    intFixedEnumCollection = new object[] { 1 },
+    intFixedEnumCollection = new object[]
+    {
+        1
+    },
     stringFixedEnum = "1",
     requiredUnknown = new object(),
     optionalUnknown = new object(),
@@ -856,7 +919,10 @@ RequestContent content = RequestContent.Create(new
 {
     requiredString = "<requiredString>",
     requiredInt = 1234,
-    requiredCollection = new object[] { "1" },
+    requiredCollection = new object[]
+    {
+        "1"
+    },
     requiredDictionary = new
     {
         key = "1",
@@ -870,7 +936,10 @@ RequestContent content = RequestContent.Create(new
         requiredLiteralFloat = 1.23F,
         requiredLiteralBool = false,
         requiredBadDescription = "<requiredBadDescription>",
-        requiredNullableList = new object[] { 1234 },
+        requiredNullableList = new object[]
+        {
+            1234
+        },
     },
     requiredUnknown = new object(),
     requiredRecordUnknown = new
@@ -895,7 +964,10 @@ RequestContent content = RequestContent.Create(new
 {
     requiredString = "<requiredString>",
     requiredInt = 1234,
-    requiredCollection = new object[] { "1" },
+    requiredCollection = new object[]
+    {
+        "1"
+    },
     requiredDictionary = new
     {
         key = "1",
@@ -913,17 +985,35 @@ RequestContent content = RequestContent.Create(new
         optionalLiteralFloat = 4.56F,
         optionalLiteralBool = true,
         requiredBadDescription = "<requiredBadDescription>",
-        optionalNullableList = new object[] { 1234 },
-        requiredNullableList = new object[] { 1234 },
+        optionalNullableList = new object[]
+        {
+            1234
+        },
+        requiredNullableList = new object[]
+        {
+            1234
+        },
     },
     intExtensibleEnum = 1,
-    intExtensibleEnumCollection = new object[] { 1 },
+    intExtensibleEnumCollection = new object[]
+    {
+        1
+    },
     floatExtensibleEnum = 1,
-    floatExtensibleEnumCollection = new object[] { 1 },
+    floatExtensibleEnumCollection = new object[]
+    {
+        1
+    },
     floatFixedEnum = 1.1F,
-    floatFixedEnumCollection = new object[] { 1.1F },
+    floatFixedEnumCollection = new object[]
+    {
+        1.1F
+    },
     intFixedEnum = 1,
-    intFixedEnumCollection = new object[] { 1 },
+    intFixedEnumCollection = new object[]
+    {
+        1
+    },
     stringFixedEnum = "1",
     requiredUnknown = new object(),
     optionalUnknown = new object(),
@@ -956,7 +1046,10 @@ RequestContent content = RequestContent.Create(new
 {
     requiredString = "<requiredString>",
     requiredInt = 1234,
-    requiredCollection = new object[] { "1" },
+    requiredCollection = new object[]
+    {
+        "1"
+    },
     requiredDictionary = new
     {
         key = "1",
@@ -970,7 +1063,10 @@ RequestContent content = RequestContent.Create(new
         requiredLiteralFloat = 1.23F,
         requiredLiteralBool = false,
         requiredBadDescription = "<requiredBadDescription>",
-        requiredNullableList = new object[] { 1234 },
+        requiredNullableList = new object[]
+        {
+            1234
+        },
     },
     requiredUnknown = new object(),
     requiredRecordUnknown = new
@@ -995,7 +1091,10 @@ RequestContent content = RequestContent.Create(new
 {
     requiredString = "<requiredString>",
     requiredInt = 1234,
-    requiredCollection = new object[] { "1" },
+    requiredCollection = new object[]
+    {
+        "1"
+    },
     requiredDictionary = new
     {
         key = "1",
@@ -1013,17 +1112,35 @@ RequestContent content = RequestContent.Create(new
         optionalLiteralFloat = 4.56F,
         optionalLiteralBool = true,
         requiredBadDescription = "<requiredBadDescription>",
-        optionalNullableList = new object[] { 1234 },
-        requiredNullableList = new object[] { 1234 },
+        optionalNullableList = new object[]
+        {
+            1234
+        },
+        requiredNullableList = new object[]
+        {
+            1234
+        },
     },
     intExtensibleEnum = 1,
-    intExtensibleEnumCollection = new object[] { 1 },
+    intExtensibleEnumCollection = new object[]
+    {
+        1
+    },
     floatExtensibleEnum = 1,
-    floatExtensibleEnumCollection = new object[] { 1 },
+    floatExtensibleEnumCollection = new object[]
+    {
+        1
+    },
     floatFixedEnum = 1.1F,
-    floatFixedEnumCollection = new object[] { 1.1F },
+    floatFixedEnumCollection = new object[]
+    {
+        1.1F
+    },
     intFixedEnum = 1,
-    intFixedEnumCollection = new object[] { 1 },
+    intFixedEnumCollection = new object[]
+    {
+        1
+    },
     stringFixedEnum = "1",
     requiredUnknown = new object(),
     optionalUnknown = new object(),
@@ -1056,7 +1173,10 @@ RequestContent content = RequestContent.Create(new
 {
     requiredString = "<requiredString>",
     requiredInt = 1234,
-    requiredCollection = new object[] { "1" },
+    requiredCollection = new object[]
+    {
+        "1"
+    },
     requiredDictionary = new
     {
         key = "1",
@@ -1070,7 +1190,10 @@ RequestContent content = RequestContent.Create(new
         requiredLiteralFloat = 1.23F,
         requiredLiteralBool = false,
         requiredBadDescription = "<requiredBadDescription>",
-        requiredNullableList = new object[] { 1234 },
+        requiredNullableList = new object[]
+        {
+            1234
+        },
     },
     requiredUnknown = new object(),
     requiredRecordUnknown = new
@@ -1095,7 +1218,10 @@ RequestContent content = RequestContent.Create(new
 {
     requiredString = "<requiredString>",
     requiredInt = 1234,
-    requiredCollection = new object[] { "1" },
+    requiredCollection = new object[]
+    {
+        "1"
+    },
     requiredDictionary = new
     {
         key = "1",
@@ -1113,17 +1239,35 @@ RequestContent content = RequestContent.Create(new
         optionalLiteralFloat = 4.56F,
         optionalLiteralBool = true,
         requiredBadDescription = "<requiredBadDescription>",
-        optionalNullableList = new object[] { 1234 },
-        requiredNullableList = new object[] { 1234 },
+        optionalNullableList = new object[]
+        {
+            1234
+        },
+        requiredNullableList = new object[]
+        {
+            1234
+        },
     },
     intExtensibleEnum = 1,
-    intExtensibleEnumCollection = new object[] { 1 },
+    intExtensibleEnumCollection = new object[]
+    {
+        1
+    },
     floatExtensibleEnum = 1,
-    floatExtensibleEnumCollection = new object[] { 1 },
+    floatExtensibleEnumCollection = new object[]
+    {
+        1
+    },
     floatFixedEnum = 1.1F,
-    floatFixedEnumCollection = new object[] { 1.1F },
+    floatFixedEnumCollection = new object[]
+    {
+        1.1F
+    },
     intFixedEnum = 1,
-    intFixedEnumCollection = new object[] { 1 },
+    intFixedEnumCollection = new object[]
+    {
+        1
+    },
     stringFixedEnum = "1",
     requiredUnknown = new object(),
     optionalUnknown = new object(),
@@ -1195,7 +1339,10 @@ RequestContent content = RequestContent.Create(new
     requiredLiteralFloat = 1.23F,
     requiredLiteralBool = false,
     requiredBadDescription = "<requiredBadDescription>",
-    requiredNullableList = new object[] { 1234 },
+    requiredNullableList = new object[]
+    {
+        1234
+    },
 });
 Response response = await client.CreateLiteralAsync(content);
 ]]></code>
@@ -1217,8 +1364,14 @@ RequestContent content = RequestContent.Create(new
     optionalLiteralFloat = 4.56F,
     optionalLiteralBool = true,
     requiredBadDescription = "<requiredBadDescription>",
-    optionalNullableList = new object[] { 1234 },
-    requiredNullableList = new object[] { 1234 },
+    optionalNullableList = new object[]
+    {
+        1234
+    },
+    requiredNullableList = new object[]
+    {
+        1234
+    },
 });
 Response response = await client.CreateLiteralAsync(content);
 ]]></code></example>
@@ -1239,7 +1392,10 @@ RequestContent content = RequestContent.Create(new
     requiredLiteralFloat = 1.23F,
     requiredLiteralBool = false,
     requiredBadDescription = "<requiredBadDescription>",
-    requiredNullableList = new object[] { 1234 },
+    requiredNullableList = new object[]
+    {
+        1234
+    },
 });
 Response response = client.CreateLiteral(content);
 ]]></code>
@@ -1261,8 +1417,14 @@ RequestContent content = RequestContent.Create(new
     optionalLiteralFloat = 4.56F,
     optionalLiteralBool = true,
     requiredBadDescription = "<requiredBadDescription>",
-    optionalNullableList = new object[] { 1234 },
-    requiredNullableList = new object[] { 1234 },
+    optionalNullableList = new object[]
+    {
+        1234
+    },
+    requiredNullableList = new object[]
+    {
+        1234
+    },
 });
 Response response = client.CreateLiteral(content);
 ]]></code></example>

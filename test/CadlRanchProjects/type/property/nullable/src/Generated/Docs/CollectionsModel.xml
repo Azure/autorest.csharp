@@ -5,13 +5,13 @@
       <example>
 This sample shows how to call GetNonNullAsync.
 <code><![CDATA[
-CollectionsModel client = new NullableClient().GetCollectionsModelClient(apiVersion: "1.0.0");
+CollectionsModel client = new NullableClient().GetCollectionsModelClient("1.0.0");
 
 Response<CollectionsModelProperty> response = await client.GetNonNullAsync();
 ]]></code>
 This sample shows how to call GetNonNullAsync with all parameters.
 <code><![CDATA[
-CollectionsModel client = new NullableClient().GetCollectionsModelClient(apiVersion: "1.0.0");
+CollectionsModel client = new NullableClient().GetCollectionsModelClient("1.0.0");
 
 Response<CollectionsModelProperty> response = await client.GetNonNullAsync();
 ]]></code></example>
@@ -20,13 +20,13 @@ Response<CollectionsModelProperty> response = await client.GetNonNullAsync();
       <example>
 This sample shows how to call GetNonNull.
 <code><![CDATA[
-CollectionsModel client = new NullableClient().GetCollectionsModelClient(apiVersion: "1.0.0");
+CollectionsModel client = new NullableClient().GetCollectionsModelClient("1.0.0");
 
 Response<CollectionsModelProperty> response = client.GetNonNull();
 ]]></code>
 This sample shows how to call GetNonNull with all parameters.
 <code><![CDATA[
-CollectionsModel client = new NullableClient().GetCollectionsModelClient(apiVersion: "1.0.0");
+CollectionsModel client = new NullableClient().GetCollectionsModelClient("1.0.0");
 
 Response<CollectionsModelProperty> response = client.GetNonNull();
 ]]></code></example>
@@ -35,59 +35,67 @@ Response<CollectionsModelProperty> response = client.GetNonNull();
       <example>
 This sample shows how to call GetNonNullAsync and parse the result.
 <code><![CDATA[
-CollectionsModel client = new NullableClient().GetCollectionsModelClient(apiVersion: "1.0.0");
+CollectionsModel client = new NullableClient().GetCollectionsModelClient("1.0.0");
 
 Response response = await client.GetNonNullAsync(null);
+]]></code>
+This sample shows how to call GetNonNullAsync.
+<code><![CDATA[
+CollectionsModel client = new NullableClient().GetCollectionsModelClient("1.0.0");
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("requiredProperty").ToString());
-Console.WriteLine(result.GetProperty("nullableProperty")[0].GetProperty("property").ToString());
+Response<CollectionsModelProperty> response = await client.GetNonNullAsync();
 ]]></code>
 This sample shows how to call GetNonNullAsync with all parameters and parse the result.
 <code><![CDATA[
-CollectionsModel client = new NullableClient().GetCollectionsModelClient(apiVersion: "1.0.0");
+CollectionsModel client = new NullableClient().GetCollectionsModelClient("1.0.0");
 
 Response response = await client.GetNonNullAsync(null);
+]]></code>
+This sample shows how to call GetNonNullAsync with all parameters.
+<code><![CDATA[
+CollectionsModel client = new NullableClient().GetCollectionsModelClient("1.0.0");
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("requiredProperty").ToString());
-Console.WriteLine(result.GetProperty("nullableProperty")[0].GetProperty("property").ToString());
+Response<CollectionsModelProperty> response = await client.GetNonNullAsync();
 ]]></code></example>
     </member>
     <member name="GetNonNull(RequestContext)">
       <example>
 This sample shows how to call GetNonNull and parse the result.
 <code><![CDATA[
-CollectionsModel client = new NullableClient().GetCollectionsModelClient(apiVersion: "1.0.0");
+CollectionsModel client = new NullableClient().GetCollectionsModelClient("1.0.0");
 
 Response response = client.GetNonNull(null);
+]]></code>
+This sample shows how to call GetNonNull.
+<code><![CDATA[
+CollectionsModel client = new NullableClient().GetCollectionsModelClient("1.0.0");
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("requiredProperty").ToString());
-Console.WriteLine(result.GetProperty("nullableProperty")[0].GetProperty("property").ToString());
+Response<CollectionsModelProperty> response = client.GetNonNull();
 ]]></code>
 This sample shows how to call GetNonNull with all parameters and parse the result.
 <code><![CDATA[
-CollectionsModel client = new NullableClient().GetCollectionsModelClient(apiVersion: "1.0.0");
+CollectionsModel client = new NullableClient().GetCollectionsModelClient("1.0.0");
 
 Response response = client.GetNonNull(null);
+]]></code>
+This sample shows how to call GetNonNull with all parameters.
+<code><![CDATA[
+CollectionsModel client = new NullableClient().GetCollectionsModelClient("1.0.0");
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("requiredProperty").ToString());
-Console.WriteLine(result.GetProperty("nullableProperty")[0].GetProperty("property").ToString());
+Response<CollectionsModelProperty> response = client.GetNonNull();
 ]]></code></example>
     </member>
     <member name="GetNullAsync(CancellationToken)">
       <example>
 This sample shows how to call GetNullAsync.
 <code><![CDATA[
-CollectionsModel client = new NullableClient().GetCollectionsModelClient(apiVersion: "1.0.0");
+CollectionsModel client = new NullableClient().GetCollectionsModelClient("1.0.0");
 
 Response<CollectionsModelProperty> response = await client.GetNullAsync();
 ]]></code>
 This sample shows how to call GetNullAsync with all parameters.
 <code><![CDATA[
-CollectionsModel client = new NullableClient().GetCollectionsModelClient(apiVersion: "1.0.0");
+CollectionsModel client = new NullableClient().GetCollectionsModelClient("1.0.0");
 
 Response<CollectionsModelProperty> response = await client.GetNullAsync();
 ]]></code></example>
@@ -96,13 +104,13 @@ Response<CollectionsModelProperty> response = await client.GetNullAsync();
       <example>
 This sample shows how to call GetNull.
 <code><![CDATA[
-CollectionsModel client = new NullableClient().GetCollectionsModelClient(apiVersion: "1.0.0");
+CollectionsModel client = new NullableClient().GetCollectionsModelClient("1.0.0");
 
 Response<CollectionsModelProperty> response = client.GetNull();
 ]]></code>
 This sample shows how to call GetNull with all parameters.
 <code><![CDATA[
-CollectionsModel client = new NullableClient().GetCollectionsModelClient(apiVersion: "1.0.0");
+CollectionsModel client = new NullableClient().GetCollectionsModelClient("1.0.0");
 
 Response<CollectionsModelProperty> response = client.GetNull();
 ]]></code></example>
@@ -111,58 +119,66 @@ Response<CollectionsModelProperty> response = client.GetNull();
       <example>
 This sample shows how to call GetNullAsync and parse the result.
 <code><![CDATA[
-CollectionsModel client = new NullableClient().GetCollectionsModelClient(apiVersion: "1.0.0");
+CollectionsModel client = new NullableClient().GetCollectionsModelClient("1.0.0");
 
 Response response = await client.GetNullAsync(null);
+]]></code>
+This sample shows how to call GetNullAsync.
+<code><![CDATA[
+CollectionsModel client = new NullableClient().GetCollectionsModelClient("1.0.0");
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("requiredProperty").ToString());
-Console.WriteLine(result.GetProperty("nullableProperty")[0].GetProperty("property").ToString());
+Response<CollectionsModelProperty> response = await client.GetNullAsync();
 ]]></code>
 This sample shows how to call GetNullAsync with all parameters and parse the result.
 <code><![CDATA[
-CollectionsModel client = new NullableClient().GetCollectionsModelClient(apiVersion: "1.0.0");
+CollectionsModel client = new NullableClient().GetCollectionsModelClient("1.0.0");
 
 Response response = await client.GetNullAsync(null);
+]]></code>
+This sample shows how to call GetNullAsync with all parameters.
+<code><![CDATA[
+CollectionsModel client = new NullableClient().GetCollectionsModelClient("1.0.0");
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("requiredProperty").ToString());
-Console.WriteLine(result.GetProperty("nullableProperty")[0].GetProperty("property").ToString());
+Response<CollectionsModelProperty> response = await client.GetNullAsync();
 ]]></code></example>
     </member>
     <member name="GetNull(RequestContext)">
       <example>
 This sample shows how to call GetNull and parse the result.
 <code><![CDATA[
-CollectionsModel client = new NullableClient().GetCollectionsModelClient(apiVersion: "1.0.0");
+CollectionsModel client = new NullableClient().GetCollectionsModelClient("1.0.0");
 
 Response response = client.GetNull(null);
+]]></code>
+This sample shows how to call GetNull.
+<code><![CDATA[
+CollectionsModel client = new NullableClient().GetCollectionsModelClient("1.0.0");
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("requiredProperty").ToString());
-Console.WriteLine(result.GetProperty("nullableProperty")[0].GetProperty("property").ToString());
+Response<CollectionsModelProperty> response = client.GetNull();
 ]]></code>
 This sample shows how to call GetNull with all parameters and parse the result.
 <code><![CDATA[
-CollectionsModel client = new NullableClient().GetCollectionsModelClient(apiVersion: "1.0.0");
+CollectionsModel client = new NullableClient().GetCollectionsModelClient("1.0.0");
 
 Response response = client.GetNull(null);
+]]></code>
+This sample shows how to call GetNull with all parameters.
+<code><![CDATA[
+CollectionsModel client = new NullableClient().GetCollectionsModelClient("1.0.0");
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("requiredProperty").ToString());
-Console.WriteLine(result.GetProperty("nullableProperty")[0].GetProperty("property").ToString());
+Response<CollectionsModelProperty> response = client.GetNull();
 ]]></code></example>
     </member>
     <member name="PatchNonNullAsync(RequestContent,RequestContext)">
       <example>
 This sample shows how to call PatchNonNullAsync.
 <code><![CDATA[
-CollectionsModel client = new NullableClient().GetCollectionsModelClient(apiVersion: "1.0.0");
+CollectionsModel client = new NullableClient().GetCollectionsModelClient("1.0.0");
 
 RequestContent content = RequestContent.Create(new
 {
     requiredProperty = "<requiredProperty>",
-    nullableProperty = new List<object>()
+    nullableProperty = new object[]
     {
         new
         {
@@ -171,16 +187,15 @@ RequestContent content = RequestContent.Create(new
     },
 });
 Response response = await client.PatchNonNullAsync(content);
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PatchNonNullAsync with all request content.
 <code><![CDATA[
-CollectionsModel client = new NullableClient().GetCollectionsModelClient(apiVersion: "1.0.0");
+CollectionsModel client = new NullableClient().GetCollectionsModelClient("1.0.0");
 
 RequestContent content = RequestContent.Create(new
 {
     requiredProperty = "<requiredProperty>",
-    nullableProperty = new List<object>()
+    nullableProperty = new object[]
     {
         new
         {
@@ -189,19 +204,18 @@ RequestContent content = RequestContent.Create(new
     },
 });
 Response response = await client.PatchNonNullAsync(content);
-Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="PatchNonNull(RequestContent,RequestContext)">
       <example>
 This sample shows how to call PatchNonNull.
 <code><![CDATA[
-CollectionsModel client = new NullableClient().GetCollectionsModelClient(apiVersion: "1.0.0");
+CollectionsModel client = new NullableClient().GetCollectionsModelClient("1.0.0");
 
 RequestContent content = RequestContent.Create(new
 {
     requiredProperty = "<requiredProperty>",
-    nullableProperty = new List<object>()
+    nullableProperty = new object[]
     {
         new
         {
@@ -210,16 +224,15 @@ RequestContent content = RequestContent.Create(new
     },
 });
 Response response = client.PatchNonNull(content);
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PatchNonNull with all request content.
 <code><![CDATA[
-CollectionsModel client = new NullableClient().GetCollectionsModelClient(apiVersion: "1.0.0");
+CollectionsModel client = new NullableClient().GetCollectionsModelClient("1.0.0");
 
 RequestContent content = RequestContent.Create(new
 {
     requiredProperty = "<requiredProperty>",
-    nullableProperty = new List<object>()
+    nullableProperty = new object[]
     {
         new
         {
@@ -228,19 +241,18 @@ RequestContent content = RequestContent.Create(new
     },
 });
 Response response = client.PatchNonNull(content);
-Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="PatchNullAsync(RequestContent,RequestContext)">
       <example>
 This sample shows how to call PatchNullAsync.
 <code><![CDATA[
-CollectionsModel client = new NullableClient().GetCollectionsModelClient(apiVersion: "1.0.0");
+CollectionsModel client = new NullableClient().GetCollectionsModelClient("1.0.0");
 
 RequestContent content = RequestContent.Create(new
 {
     requiredProperty = "<requiredProperty>",
-    nullableProperty = new List<object>()
+    nullableProperty = new object[]
     {
         new
         {
@@ -249,16 +261,15 @@ RequestContent content = RequestContent.Create(new
     },
 });
 Response response = await client.PatchNullAsync(content);
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PatchNullAsync with all request content.
 <code><![CDATA[
-CollectionsModel client = new NullableClient().GetCollectionsModelClient(apiVersion: "1.0.0");
+CollectionsModel client = new NullableClient().GetCollectionsModelClient("1.0.0");
 
 RequestContent content = RequestContent.Create(new
 {
     requiredProperty = "<requiredProperty>",
-    nullableProperty = new List<object>()
+    nullableProperty = new object[]
     {
         new
         {
@@ -267,19 +278,18 @@ RequestContent content = RequestContent.Create(new
     },
 });
 Response response = await client.PatchNullAsync(content);
-Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="PatchNull(RequestContent,RequestContext)">
       <example>
 This sample shows how to call PatchNull.
 <code><![CDATA[
-CollectionsModel client = new NullableClient().GetCollectionsModelClient(apiVersion: "1.0.0");
+CollectionsModel client = new NullableClient().GetCollectionsModelClient("1.0.0");
 
 RequestContent content = RequestContent.Create(new
 {
     requiredProperty = "<requiredProperty>",
-    nullableProperty = new List<object>()
+    nullableProperty = new object[]
     {
         new
         {
@@ -288,16 +298,15 @@ RequestContent content = RequestContent.Create(new
     },
 });
 Response response = client.PatchNull(content);
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PatchNull with all request content.
 <code><![CDATA[
-CollectionsModel client = new NullableClient().GetCollectionsModelClient(apiVersion: "1.0.0");
+CollectionsModel client = new NullableClient().GetCollectionsModelClient("1.0.0");
 
 RequestContent content = RequestContent.Create(new
 {
     requiredProperty = "<requiredProperty>",
-    nullableProperty = new List<object>()
+    nullableProperty = new object[]
     {
         new
         {
@@ -306,7 +315,6 @@ RequestContent content = RequestContent.Create(new
     },
 });
 Response response = client.PatchNull(content);
-Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
   </members>

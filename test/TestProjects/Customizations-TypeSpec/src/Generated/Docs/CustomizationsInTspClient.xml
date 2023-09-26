@@ -14,7 +14,7 @@ This sample shows how to call RoundTripAsync with all parameters.
 <code><![CDATA[
 CustomizationsInTspClient client = new CustomizationsInTspClient();
 
-RootModel input = new RootModel()
+RootModel input = new RootModel
 {
     PropertyExtensibleEnum = ExtensibleEnumWithOperator.Monday,
     PropertyModelToRename = new RenamedModel(1234)
@@ -22,23 +22,17 @@ RootModel input = new RootModel()
         OptionalInt = 1234,
     },
     PropertyModelToChangeNamespace = new ModelToChangeNamespace(1234),
-    PropertyModelWithCustomizedProperties = new ModelWithCustomizedProperties(1234, 1234, 1234, (int)123.45F, XmlConvert.ToTimeSpan("<propertyToMakeDuration>"), "PT1H23M45S", default, "<propertyToField>", new List<string>()
+    PropertyModelWithCustomizedProperties = new ModelWithCustomizedProperties(1234, 1234, 1234, (int)123.45F, XmlConvert.ToTimeSpan("<propertyToMakeDuration>"), "PT1H23M45S", default, "<propertyToField>", new string[] { "<badListName>" }, new Dictionary<string, string>
     {
-        "<badListName>"
-    }, new Dictionary<string, string>()
+        ["key"] = "<badDictionaryName>"
+    }, new IList<string>[]
     {
-        ["key"] = "<badDictionaryName>",
-    }, new List<IList<string>>()
+        new string[]{"<badListOfListName>"}
+    }, new IDictionary<string, string>[]
     {
-        new List<string>()
+        new Dictionary<string, string>
         {
-            "<badListOfListName>"
-        }
-    }, new List<IDictionary<string, string>>()
-    {
-        new Dictionary<string, string>()
-        {
-            ["key"] = "<badListOfDictionaryName>",
+            ["key"] = "<badListOfDictionaryName>"
         }
     }),
     PropertyEnumToRename = RenamedEnum.One,
@@ -63,7 +57,7 @@ This sample shows how to call RoundTrip with all parameters.
 <code><![CDATA[
 CustomizationsInTspClient client = new CustomizationsInTspClient();
 
-RootModel input = new RootModel()
+RootModel input = new RootModel
 {
     PropertyExtensibleEnum = ExtensibleEnumWithOperator.Monday,
     PropertyModelToRename = new RenamedModel(1234)
@@ -71,23 +65,17 @@ RootModel input = new RootModel()
         OptionalInt = 1234,
     },
     PropertyModelToChangeNamespace = new ModelToChangeNamespace(1234),
-    PropertyModelWithCustomizedProperties = new ModelWithCustomizedProperties(1234, 1234, 1234, (int)123.45F, XmlConvert.ToTimeSpan("<propertyToMakeDuration>"), "PT1H23M45S", default, "<propertyToField>", new List<string>()
+    PropertyModelWithCustomizedProperties = new ModelWithCustomizedProperties(1234, 1234, 1234, (int)123.45F, XmlConvert.ToTimeSpan("<propertyToMakeDuration>"), "PT1H23M45S", default, "<propertyToField>", new string[] { "<badListName>" }, new Dictionary<string, string>
     {
-        "<badListName>"
-    }, new Dictionary<string, string>()
+        ["key"] = "<badDictionaryName>"
+    }, new IList<string>[]
     {
-        ["key"] = "<badDictionaryName>",
-    }, new List<IList<string>>()
+        new string[]{"<badListOfListName>"}
+    }, new IDictionary<string, string>[]
     {
-        new List<string>()
+        new Dictionary<string, string>
         {
-            "<badListOfListName>"
-        }
-    }, new List<IDictionary<string, string>>()
-    {
-        new Dictionary<string, string>()
-        {
-            ["key"] = "<badListOfDictionaryName>",
+            ["key"] = "<badListOfDictionaryName>"
         }
     }),
     PropertyEnumToRename = RenamedEnum.One,
@@ -107,9 +95,13 @@ CustomizationsInTspClient client = new CustomizationsInTspClient();
 
 RequestContent content = RequestContent.Create(new object());
 Response response = await client.RoundTripAsync(content);
+]]></code>
+This sample shows how to call RoundTripAsync.
+<code><![CDATA[
+CustomizationsInTspClient client = new CustomizationsInTspClient();
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
+RootModel input = new RootModel();
+Response<RootModel> response = await client.RoundTripAsync(input);
 ]]></code>
 This sample shows how to call RoundTripAsync with all request content and parse the result.
 <code><![CDATA[
@@ -141,7 +133,7 @@ RequestContent content = RequestContent.Create(new
         propertyToMakeString = "PT1H23M45S",
         propertyToMakeJsonElement = "<propertyToMakeJsonElement>",
         propertyToField = "<propertyToField>",
-        badListName = new List<object>()
+        badListName = new object[]
         {
             "<badListName>"
         },
@@ -149,14 +141,14 @@ RequestContent content = RequestContent.Create(new
         {
             key = "<badDictionaryName>",
         },
-        badListOfListName = new List<object>()
+        badListOfListName = new object[]
         {
-            new List<object>()
+            new object[]
             {
                 "<badListOfListName>"
             }
         },
-        badListOfDictionaryName = new List<object>()
+        badListOfDictionaryName = new object[]
         {
             new
             {
@@ -174,30 +166,39 @@ RequestContent content = RequestContent.Create(new
     propertyToMoveToCustomization = "a",
 });
 Response response = await client.RoundTripAsync(content);
+]]></code>
+This sample shows how to call RoundTripAsync with all parameters.
+<code><![CDATA[
+CustomizationsInTspClient client = new CustomizationsInTspClient();
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("propertyExtensibleEnum").ToString());
-Console.WriteLine(result.GetProperty("propertyModelToMakeInternal").GetProperty("requiredInt").ToString());
-Console.WriteLine(result.GetProperty("propertyModelToRename").GetProperty("requiredInt").ToString());
-Console.WriteLine(result.GetProperty("propertyModelToRename").GetProperty("optionalInt").ToString());
-Console.WriteLine(result.GetProperty("propertyModelToChangeNamespace").GetProperty("requiredInt").ToString());
-Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("propertyToMakeInternal").ToString());
-Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("propertyToRename").ToString());
-Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("propertyToMakeFloat").ToString());
-Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("propertyToMakeInt").ToString());
-Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("propertyToMakeDuration").ToString());
-Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("propertyToMakeString").ToString());
-Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("propertyToMakeJsonElement").ToString());
-Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("propertyToField").ToString());
-Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("badListName")[0].ToString());
-Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("badDictionaryName").GetProperty("<key>").ToString());
-Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("badListOfListName")[0][0].ToString());
-Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("badListOfDictionaryName")[0].GetProperty("<key>").ToString());
-Console.WriteLine(result.GetProperty("propertyEnumToRename").ToString());
-Console.WriteLine(result.GetProperty("propertyEnumWithValueToRename").ToString());
-Console.WriteLine(result.GetProperty("propertyEnumToBeMadeExtensible").ToString());
-Console.WriteLine(result.GetProperty("propertyModelToAddAdditionalSerializableProperty").GetProperty("requiredInt").ToString());
-Console.WriteLine(result.GetProperty("propertyToMoveToCustomization").ToString());
+RootModel input = new RootModel
+{
+    PropertyExtensibleEnum = ExtensibleEnumWithOperator.Monday,
+    PropertyModelToRename = new RenamedModel(1234)
+    {
+        OptionalInt = 1234,
+    },
+    PropertyModelToChangeNamespace = new ModelToChangeNamespace(1234),
+    PropertyModelWithCustomizedProperties = new ModelWithCustomizedProperties(1234, 1234, 1234, (int)123.45F, XmlConvert.ToTimeSpan("<propertyToMakeDuration>"), "PT1H23M45S", default, "<propertyToField>", new string[] { "<badListName>" }, new Dictionary<string, string>
+    {
+        ["key"] = "<badDictionaryName>"
+    }, new IList<string>[]
+    {
+        new string[]{"<badListOfListName>"}
+    }, new IDictionary<string, string>[]
+    {
+        new Dictionary<string, string>
+        {
+            ["key"] = "<badListOfDictionaryName>"
+        }
+    }),
+    PropertyEnumToRename = RenamedEnum.One,
+    PropertyEnumWithValueToRename = EnumWithValueToRename.One,
+    PropertyEnumToBeMadeExtensible = EnumToBeMadeExtensible.ExOne,
+    PropertyModelToAddAdditionalSerializableProperty = new ModelToAddAdditionalSerializableProperty(1234),
+    PropertyToMoveToCustomization = NormalEnum.A,
+};
+Response<RootModel> response = await client.RoundTripAsync(input);
 ]]></code></example>
     </member>
     <member name="RoundTrip(RequestContent,RequestContext)">
@@ -208,9 +209,13 @@ CustomizationsInTspClient client = new CustomizationsInTspClient();
 
 RequestContent content = RequestContent.Create(new object());
 Response response = client.RoundTrip(content);
+]]></code>
+This sample shows how to call RoundTrip.
+<code><![CDATA[
+CustomizationsInTspClient client = new CustomizationsInTspClient();
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
+RootModel input = new RootModel();
+Response<RootModel> response = client.RoundTrip(input);
 ]]></code>
 This sample shows how to call RoundTrip with all request content and parse the result.
 <code><![CDATA[
@@ -242,7 +247,7 @@ RequestContent content = RequestContent.Create(new
         propertyToMakeString = "PT1H23M45S",
         propertyToMakeJsonElement = "<propertyToMakeJsonElement>",
         propertyToField = "<propertyToField>",
-        badListName = new List<object>()
+        badListName = new object[]
         {
             "<badListName>"
         },
@@ -250,14 +255,14 @@ RequestContent content = RequestContent.Create(new
         {
             key = "<badDictionaryName>",
         },
-        badListOfListName = new List<object>()
+        badListOfListName = new object[]
         {
-            new List<object>()
+            new object[]
             {
                 "<badListOfListName>"
             }
         },
-        badListOfDictionaryName = new List<object>()
+        badListOfDictionaryName = new object[]
         {
             new
             {
@@ -275,30 +280,39 @@ RequestContent content = RequestContent.Create(new
     propertyToMoveToCustomization = "a",
 });
 Response response = client.RoundTrip(content);
+]]></code>
+This sample shows how to call RoundTrip with all parameters.
+<code><![CDATA[
+CustomizationsInTspClient client = new CustomizationsInTspClient();
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("propertyExtensibleEnum").ToString());
-Console.WriteLine(result.GetProperty("propertyModelToMakeInternal").GetProperty("requiredInt").ToString());
-Console.WriteLine(result.GetProperty("propertyModelToRename").GetProperty("requiredInt").ToString());
-Console.WriteLine(result.GetProperty("propertyModelToRename").GetProperty("optionalInt").ToString());
-Console.WriteLine(result.GetProperty("propertyModelToChangeNamespace").GetProperty("requiredInt").ToString());
-Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("propertyToMakeInternal").ToString());
-Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("propertyToRename").ToString());
-Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("propertyToMakeFloat").ToString());
-Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("propertyToMakeInt").ToString());
-Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("propertyToMakeDuration").ToString());
-Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("propertyToMakeString").ToString());
-Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("propertyToMakeJsonElement").ToString());
-Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("propertyToField").ToString());
-Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("badListName")[0].ToString());
-Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("badDictionaryName").GetProperty("<key>").ToString());
-Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("badListOfListName")[0][0].ToString());
-Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("badListOfDictionaryName")[0].GetProperty("<key>").ToString());
-Console.WriteLine(result.GetProperty("propertyEnumToRename").ToString());
-Console.WriteLine(result.GetProperty("propertyEnumWithValueToRename").ToString());
-Console.WriteLine(result.GetProperty("propertyEnumToBeMadeExtensible").ToString());
-Console.WriteLine(result.GetProperty("propertyModelToAddAdditionalSerializableProperty").GetProperty("requiredInt").ToString());
-Console.WriteLine(result.GetProperty("propertyToMoveToCustomization").ToString());
+RootModel input = new RootModel
+{
+    PropertyExtensibleEnum = ExtensibleEnumWithOperator.Monday,
+    PropertyModelToRename = new RenamedModel(1234)
+    {
+        OptionalInt = 1234,
+    },
+    PropertyModelToChangeNamespace = new ModelToChangeNamespace(1234),
+    PropertyModelWithCustomizedProperties = new ModelWithCustomizedProperties(1234, 1234, 1234, (int)123.45F, XmlConvert.ToTimeSpan("<propertyToMakeDuration>"), "PT1H23M45S", default, "<propertyToField>", new string[] { "<badListName>" }, new Dictionary<string, string>
+    {
+        ["key"] = "<badDictionaryName>"
+    }, new IList<string>[]
+    {
+        new string[]{"<badListOfListName>"}
+    }, new IDictionary<string, string>[]
+    {
+        new Dictionary<string, string>
+        {
+            ["key"] = "<badListOfDictionaryName>"
+        }
+    }),
+    PropertyEnumToRename = RenamedEnum.One,
+    PropertyEnumWithValueToRename = EnumWithValueToRename.One,
+    PropertyEnumToBeMadeExtensible = EnumToBeMadeExtensible.ExOne,
+    PropertyModelToAddAdditionalSerializableProperty = new ModelToAddAdditionalSerializableProperty(1234),
+    PropertyToMoveToCustomization = NormalEnum.A,
+};
+Response<RootModel> response = client.RoundTrip(input);
 ]]></code></example>
     </member>
   </members>

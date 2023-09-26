@@ -5,8 +5,6 @@
 
 #nullable disable
 
-using System;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -26,9 +24,6 @@ namespace dpg_initial_LowLevel.Samples
             ParamsClient client = new ParamsClient(credential);
 
             Response response = client.HeadNoParams(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -39,9 +34,6 @@ namespace dpg_initial_LowLevel.Samples
             ParamsClient client = new ParamsClient(credential);
 
             Response response = await client.HeadNoParamsAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -52,9 +44,6 @@ namespace dpg_initial_LowLevel.Samples
             ParamsClient client = new ParamsClient(credential);
 
             Response response = client.HeadNoParams(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -65,9 +54,6 @@ namespace dpg_initial_LowLevel.Samples
             ParamsClient client = new ParamsClient(credential);
 
             Response response = await client.HeadNoParamsAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -78,9 +64,6 @@ namespace dpg_initial_LowLevel.Samples
             ParamsClient client = new ParamsClient(credential);
 
             Response response = client.GetRequired("<parameter>", null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -91,9 +74,6 @@ namespace dpg_initial_LowLevel.Samples
             ParamsClient client = new ParamsClient(credential);
 
             Response response = await client.GetRequiredAsync("<parameter>", null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -104,9 +84,6 @@ namespace dpg_initial_LowLevel.Samples
             ParamsClient client = new ParamsClient(credential);
 
             Response response = client.GetRequired("<parameter>", null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -117,9 +94,6 @@ namespace dpg_initial_LowLevel.Samples
             ParamsClient client = new ParamsClient(credential);
 
             Response response = await client.GetRequiredAsync("<parameter>", null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -130,9 +104,6 @@ namespace dpg_initial_LowLevel.Samples
             ParamsClient client = new ParamsClient(credential);
 
             Response response = client.PutRequiredOptional("<requiredParam>", null, null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -143,9 +114,6 @@ namespace dpg_initial_LowLevel.Samples
             ParamsClient client = new ParamsClient(credential);
 
             Response response = await client.PutRequiredOptionalAsync("<requiredParam>", null, null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -156,9 +124,6 @@ namespace dpg_initial_LowLevel.Samples
             ParamsClient client = new ParamsClient(credential);
 
             Response response = client.PutRequiredOptional("<requiredParam>", "<optionalParam>", null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -169,9 +134,6 @@ namespace dpg_initial_LowLevel.Samples
             ParamsClient client = new ParamsClient(credential);
 
             Response response = await client.PutRequiredOptionalAsync("<requiredParam>", "<optionalParam>", null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -186,9 +148,6 @@ namespace dpg_initial_LowLevel.Samples
                 url = "<url>",
             });
             Response response = client.PostParameters(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -203,9 +162,6 @@ namespace dpg_initial_LowLevel.Samples
                 url = "<url>",
             });
             Response response = await client.PostParametersAsync(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -220,9 +176,6 @@ namespace dpg_initial_LowLevel.Samples
                 url = "<url>",
             });
             Response response = client.PostParameters(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -237,9 +190,6 @@ namespace dpg_initial_LowLevel.Samples
                 url = "<url>",
             });
             Response response = await client.PostParametersAsync(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -250,9 +200,6 @@ namespace dpg_initial_LowLevel.Samples
             ParamsClient client = new ParamsClient(credential);
 
             Response response = client.GetOptional(null, null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -263,9 +210,6 @@ namespace dpg_initial_LowLevel.Samples
             ParamsClient client = new ParamsClient(credential);
 
             Response response = await client.GetOptionalAsync(null, null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -276,9 +220,6 @@ namespace dpg_initial_LowLevel.Samples
             ParamsClient client = new ParamsClient(credential);
 
             Response response = client.GetOptional("<optionalParam>", null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -289,9 +230,6 @@ namespace dpg_initial_LowLevel.Samples
             ParamsClient client = new ParamsClient(credential);
 
             Response response = await client.GetOptionalAsync("<optionalParam>", null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
     }
 }

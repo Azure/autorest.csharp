@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System;
 using System.Threading.Tasks;
 using Authentication.Union;
 using Azure;
@@ -24,7 +23,6 @@ namespace Authentication.Union.Samples
             UnionClient client = new UnionClient(credential);
 
             Response response = client.ValidKey();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -35,7 +33,6 @@ namespace Authentication.Union.Samples
             UnionClient client = new UnionClient(credential);
 
             Response response = await client.ValidKeyAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -46,7 +43,6 @@ namespace Authentication.Union.Samples
             UnionClient client = new UnionClient(credential);
 
             Response response = client.ValidKey();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -57,7 +53,6 @@ namespace Authentication.Union.Samples
             UnionClient client = new UnionClient(credential);
 
             Response response = await client.ValidKeyAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -68,7 +63,6 @@ namespace Authentication.Union.Samples
             UnionClient client = new UnionClient(credential);
 
             Response response = client.ValidToken();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -79,7 +73,6 @@ namespace Authentication.Union.Samples
             UnionClient client = new UnionClient(credential);
 
             Response response = await client.ValidTokenAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -90,7 +83,6 @@ namespace Authentication.Union.Samples
             UnionClient client = new UnionClient(credential);
 
             Response response = client.ValidToken();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -101,7 +93,6 @@ namespace Authentication.Union.Samples
             UnionClient client = new UnionClient(credential);
 
             Response response = await client.ValidTokenAsync();
-            Console.WriteLine(response.Status);
         }
     }
 }

@@ -6,8 +6,6 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using System.Text.Json;
 using System.Threading.Tasks;
 using System.Xml;
 using Azure;
@@ -19,45 +17,39 @@ using NUnit.Framework;
 
 namespace Encode.Duration.Samples
 {
-    internal class Samples_Property
+    public class Samples_Property
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_Default()
         {
-            Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
+            Property client = new DurationClient().GetPropertyClient("1.0.0");
 
             RequestContent content = RequestContent.Create(new
             {
                 value = "PT1H23M45S",
             });
             Response response = client.Default(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("value").ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Default_Async()
         {
-            Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
+            Property client = new DurationClient().GetPropertyClient("1.0.0");
 
             RequestContent content = RequestContent.Create(new
             {
                 value = "PT1H23M45S",
             });
             Response response = await client.DefaultAsync(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("value").ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_Default_Convenience()
         {
-            Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
+            Property client = new DurationClient().GetPropertyClient("1.0.0");
 
             DefaultDurationProperty body = new DefaultDurationProperty(XmlConvert.ToTimeSpan("PT1H23M45S"));
             Response<DefaultDurationProperty> response = client.Default(body);
@@ -67,7 +59,7 @@ namespace Encode.Duration.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Default_Convenience_Async()
         {
-            Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
+            Property client = new DurationClient().GetPropertyClient("1.0.0");
 
             DefaultDurationProperty body = new DefaultDurationProperty(XmlConvert.ToTimeSpan("PT1H23M45S"));
             Response<DefaultDurationProperty> response = await client.DefaultAsync(body);
@@ -77,39 +69,33 @@ namespace Encode.Duration.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Default_AllParameters()
         {
-            Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
+            Property client = new DurationClient().GetPropertyClient("1.0.0");
 
             RequestContent content = RequestContent.Create(new
             {
                 value = "PT1H23M45S",
             });
             Response response = client.Default(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("value").ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Default_AllParameters_Async()
         {
-            Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
+            Property client = new DurationClient().GetPropertyClient("1.0.0");
 
             RequestContent content = RequestContent.Create(new
             {
                 value = "PT1H23M45S",
             });
             Response response = await client.DefaultAsync(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("value").ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_Default_AllParameters_Convenience()
         {
-            Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
+            Property client = new DurationClient().GetPropertyClient("1.0.0");
 
             DefaultDurationProperty body = new DefaultDurationProperty(XmlConvert.ToTimeSpan("PT1H23M45S"));
             Response<DefaultDurationProperty> response = client.Default(body);
@@ -119,7 +105,7 @@ namespace Encode.Duration.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Default_AllParameters_Convenience_Async()
         {
-            Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
+            Property client = new DurationClient().GetPropertyClient("1.0.0");
 
             DefaultDurationProperty body = new DefaultDurationProperty(XmlConvert.ToTimeSpan("PT1H23M45S"));
             Response<DefaultDurationProperty> response = await client.DefaultAsync(body);
@@ -129,39 +115,33 @@ namespace Encode.Duration.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Iso8601()
         {
-            Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
+            Property client = new DurationClient().GetPropertyClient("1.0.0");
 
             RequestContent content = RequestContent.Create(new
             {
                 value = "PT1H23M45S",
             });
             Response response = client.Iso8601(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("value").ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Iso8601_Async()
         {
-            Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
+            Property client = new DurationClient().GetPropertyClient("1.0.0");
 
             RequestContent content = RequestContent.Create(new
             {
                 value = "PT1H23M45S",
             });
             Response response = await client.Iso8601Async(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("value").ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_Iso8601_Convenience()
         {
-            Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
+            Property client = new DurationClient().GetPropertyClient("1.0.0");
 
             ISO8601DurationProperty body = new ISO8601DurationProperty(XmlConvert.ToTimeSpan("PT1H23M45S"));
             Response<ISO8601DurationProperty> response = client.Iso8601(body);
@@ -171,7 +151,7 @@ namespace Encode.Duration.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Iso8601_Convenience_Async()
         {
-            Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
+            Property client = new DurationClient().GetPropertyClient("1.0.0");
 
             ISO8601DurationProperty body = new ISO8601DurationProperty(XmlConvert.ToTimeSpan("PT1H23M45S"));
             Response<ISO8601DurationProperty> response = await client.Iso8601Async(body);
@@ -181,39 +161,33 @@ namespace Encode.Duration.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Iso8601_AllParameters()
         {
-            Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
+            Property client = new DurationClient().GetPropertyClient("1.0.0");
 
             RequestContent content = RequestContent.Create(new
             {
                 value = "PT1H23M45S",
             });
             Response response = client.Iso8601(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("value").ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Iso8601_AllParameters_Async()
         {
-            Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
+            Property client = new DurationClient().GetPropertyClient("1.0.0");
 
             RequestContent content = RequestContent.Create(new
             {
                 value = "PT1H23M45S",
             });
             Response response = await client.Iso8601Async(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("value").ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_Iso8601_AllParameters_Convenience()
         {
-            Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
+            Property client = new DurationClient().GetPropertyClient("1.0.0");
 
             ISO8601DurationProperty body = new ISO8601DurationProperty(XmlConvert.ToTimeSpan("PT1H23M45S"));
             Response<ISO8601DurationProperty> response = client.Iso8601(body);
@@ -223,7 +197,7 @@ namespace Encode.Duration.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Iso8601_AllParameters_Convenience_Async()
         {
-            Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
+            Property client = new DurationClient().GetPropertyClient("1.0.0");
 
             ISO8601DurationProperty body = new ISO8601DurationProperty(XmlConvert.ToTimeSpan("PT1H23M45S"));
             Response<ISO8601DurationProperty> response = await client.Iso8601Async(body);
@@ -233,39 +207,33 @@ namespace Encode.Duration.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Int32Seconds()
         {
-            Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
+            Property client = new DurationClient().GetPropertyClient("1.0.0");
 
             RequestContent content = RequestContent.Create(new
             {
                 value = 10,
             });
             Response response = client.Int32Seconds(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("value").ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Int32Seconds_Async()
         {
-            Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
+            Property client = new DurationClient().GetPropertyClient("1.0.0");
 
             RequestContent content = RequestContent.Create(new
             {
                 value = 10,
             });
             Response response = await client.Int32SecondsAsync(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("value").ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_Int32Seconds_Convenience()
         {
-            Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
+            Property client = new DurationClient().GetPropertyClient("1.0.0");
 
             Int32SecondsDurationProperty body = new Int32SecondsDurationProperty(TimeSpan.FromSeconds(10));
             Response<Int32SecondsDurationProperty> response = client.Int32Seconds(body);
@@ -275,7 +243,7 @@ namespace Encode.Duration.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Int32Seconds_Convenience_Async()
         {
-            Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
+            Property client = new DurationClient().GetPropertyClient("1.0.0");
 
             Int32SecondsDurationProperty body = new Int32SecondsDurationProperty(TimeSpan.FromSeconds(10));
             Response<Int32SecondsDurationProperty> response = await client.Int32SecondsAsync(body);
@@ -285,39 +253,33 @@ namespace Encode.Duration.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Int32Seconds_AllParameters()
         {
-            Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
+            Property client = new DurationClient().GetPropertyClient("1.0.0");
 
             RequestContent content = RequestContent.Create(new
             {
                 value = 10,
             });
             Response response = client.Int32Seconds(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("value").ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Int32Seconds_AllParameters_Async()
         {
-            Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
+            Property client = new DurationClient().GetPropertyClient("1.0.0");
 
             RequestContent content = RequestContent.Create(new
             {
                 value = 10,
             });
             Response response = await client.Int32SecondsAsync(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("value").ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_Int32Seconds_AllParameters_Convenience()
         {
-            Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
+            Property client = new DurationClient().GetPropertyClient("1.0.0");
 
             Int32SecondsDurationProperty body = new Int32SecondsDurationProperty(TimeSpan.FromSeconds(10));
             Response<Int32SecondsDurationProperty> response = client.Int32Seconds(body);
@@ -327,7 +289,7 @@ namespace Encode.Duration.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Int32Seconds_AllParameters_Convenience_Async()
         {
-            Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
+            Property client = new DurationClient().GetPropertyClient("1.0.0");
 
             Int32SecondsDurationProperty body = new Int32SecondsDurationProperty(TimeSpan.FromSeconds(10));
             Response<Int32SecondsDurationProperty> response = await client.Int32SecondsAsync(body);
@@ -337,39 +299,33 @@ namespace Encode.Duration.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_FloatSeconds()
         {
-            Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
+            Property client = new DurationClient().GetPropertyClient("1.0.0");
 
             RequestContent content = RequestContent.Create(new
             {
                 value = 10F,
             });
             Response response = client.FloatSeconds(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("value").ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public async Task Example_FloatSeconds_Async()
         {
-            Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
+            Property client = new DurationClient().GetPropertyClient("1.0.0");
 
             RequestContent content = RequestContent.Create(new
             {
                 value = 10F,
             });
             Response response = await client.FloatSecondsAsync(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("value").ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_FloatSeconds_Convenience()
         {
-            Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
+            Property client = new DurationClient().GetPropertyClient("1.0.0");
 
             FloatSecondsDurationProperty body = new FloatSecondsDurationProperty(TimeSpan.FromSeconds(10F));
             Response<FloatSecondsDurationProperty> response = client.FloatSeconds(body);
@@ -379,7 +335,7 @@ namespace Encode.Duration.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_FloatSeconds_Convenience_Async()
         {
-            Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
+            Property client = new DurationClient().GetPropertyClient("1.0.0");
 
             FloatSecondsDurationProperty body = new FloatSecondsDurationProperty(TimeSpan.FromSeconds(10F));
             Response<FloatSecondsDurationProperty> response = await client.FloatSecondsAsync(body);
@@ -389,39 +345,33 @@ namespace Encode.Duration.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_FloatSeconds_AllParameters()
         {
-            Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
+            Property client = new DurationClient().GetPropertyClient("1.0.0");
 
             RequestContent content = RequestContent.Create(new
             {
                 value = 10F,
             });
             Response response = client.FloatSeconds(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("value").ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public async Task Example_FloatSeconds_AllParameters_Async()
         {
-            Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
+            Property client = new DurationClient().GetPropertyClient("1.0.0");
 
             RequestContent content = RequestContent.Create(new
             {
                 value = 10F,
             });
             Response response = await client.FloatSecondsAsync(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("value").ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_FloatSeconds_AllParameters_Convenience()
         {
-            Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
+            Property client = new DurationClient().GetPropertyClient("1.0.0");
 
             FloatSecondsDurationProperty body = new FloatSecondsDurationProperty(TimeSpan.FromSeconds(10F));
             Response<FloatSecondsDurationProperty> response = client.FloatSeconds(body);
@@ -431,7 +381,7 @@ namespace Encode.Duration.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_FloatSeconds_AllParameters_Convenience_Async()
         {
-            Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
+            Property client = new DurationClient().GetPropertyClient("1.0.0");
 
             FloatSecondsDurationProperty body = new FloatSecondsDurationProperty(TimeSpan.FromSeconds(10F));
             Response<FloatSecondsDurationProperty> response = await client.FloatSecondsAsync(body);
@@ -441,50 +391,41 @@ namespace Encode.Duration.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_FloatSecondsArray()
         {
-            Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
+            Property client = new DurationClient().GetPropertyClient("1.0.0");
 
             RequestContent content = RequestContent.Create(new
             {
-                value = new List<object>()
-{
+                value = new object[]
+            {
 10F
-},
+            },
             });
             Response response = client.FloatSecondsArray(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("value")[0].ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public async Task Example_FloatSecondsArray_Async()
         {
-            Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
+            Property client = new DurationClient().GetPropertyClient("1.0.0");
 
             RequestContent content = RequestContent.Create(new
             {
-                value = new List<object>()
-{
+                value = new object[]
+            {
 10F
-},
+            },
             });
             Response response = await client.FloatSecondsArrayAsync(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("value")[0].ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_FloatSecondsArray_Convenience()
         {
-            Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
+            Property client = new DurationClient().GetPropertyClient("1.0.0");
 
-            FloatSecondsDurationArrayProperty body = new FloatSecondsDurationArrayProperty(new List<TimeSpan>()
-{
-TimeSpan.FromSeconds(10F)
-});
+            FloatSecondsDurationArrayProperty body = new FloatSecondsDurationArrayProperty(new TimeSpan[] { TimeSpan.FromSeconds(10F) });
             Response<FloatSecondsDurationArrayProperty> response = client.FloatSecondsArray(body);
         }
 
@@ -492,12 +433,9 @@ TimeSpan.FromSeconds(10F)
         [Ignore("Only validating compilation of examples")]
         public async Task Example_FloatSecondsArray_Convenience_Async()
         {
-            Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
+            Property client = new DurationClient().GetPropertyClient("1.0.0");
 
-            FloatSecondsDurationArrayProperty body = new FloatSecondsDurationArrayProperty(new List<TimeSpan>()
-{
-TimeSpan.FromSeconds(10F)
-});
+            FloatSecondsDurationArrayProperty body = new FloatSecondsDurationArrayProperty(new TimeSpan[] { TimeSpan.FromSeconds(10F) });
             Response<FloatSecondsDurationArrayProperty> response = await client.FloatSecondsArrayAsync(body);
         }
 
@@ -505,50 +443,41 @@ TimeSpan.FromSeconds(10F)
         [Ignore("Only validating compilation of examples")]
         public void Example_FloatSecondsArray_AllParameters()
         {
-            Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
+            Property client = new DurationClient().GetPropertyClient("1.0.0");
 
             RequestContent content = RequestContent.Create(new
             {
-                value = new List<object>()
-{
+                value = new object[]
+            {
 10F
-},
+            },
             });
             Response response = client.FloatSecondsArray(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("value")[0].ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public async Task Example_FloatSecondsArray_AllParameters_Async()
         {
-            Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
+            Property client = new DurationClient().GetPropertyClient("1.0.0");
 
             RequestContent content = RequestContent.Create(new
             {
-                value = new List<object>()
-{
+                value = new object[]
+            {
 10F
-},
+            },
             });
             Response response = await client.FloatSecondsArrayAsync(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("value")[0].ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_FloatSecondsArray_AllParameters_Convenience()
         {
-            Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
+            Property client = new DurationClient().GetPropertyClient("1.0.0");
 
-            FloatSecondsDurationArrayProperty body = new FloatSecondsDurationArrayProperty(new List<TimeSpan>()
-{
-TimeSpan.FromSeconds(10F)
-});
+            FloatSecondsDurationArrayProperty body = new FloatSecondsDurationArrayProperty(new TimeSpan[] { TimeSpan.FromSeconds(10F) });
             Response<FloatSecondsDurationArrayProperty> response = client.FloatSecondsArray(body);
         }
 
@@ -556,12 +485,9 @@ TimeSpan.FromSeconds(10F)
         [Ignore("Only validating compilation of examples")]
         public async Task Example_FloatSecondsArray_AllParameters_Convenience_Async()
         {
-            Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
+            Property client = new DurationClient().GetPropertyClient("1.0.0");
 
-            FloatSecondsDurationArrayProperty body = new FloatSecondsDurationArrayProperty(new List<TimeSpan>()
-{
-TimeSpan.FromSeconds(10F)
-});
+            FloatSecondsDurationArrayProperty body = new FloatSecondsDurationArrayProperty(new TimeSpan[] { TimeSpan.FromSeconds(10F) });
             Response<FloatSecondsDurationArrayProperty> response = await client.FloatSecondsArrayAsync(body);
         }
     }

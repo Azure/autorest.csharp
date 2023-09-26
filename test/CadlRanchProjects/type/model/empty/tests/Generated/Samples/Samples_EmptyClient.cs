@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -26,7 +25,6 @@ namespace _Type.Model.Empty.Samples
 
             RequestContent content = RequestContent.Create(new object());
             Response response = client.PutEmpty(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -37,7 +35,6 @@ namespace _Type.Model.Empty.Samples
 
             RequestContent content = RequestContent.Create(new object());
             Response response = await client.PutEmptyAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -48,7 +45,6 @@ namespace _Type.Model.Empty.Samples
 
             EmptyInput input = new EmptyInput();
             Response response = client.PutEmpty(input);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -59,7 +55,6 @@ namespace _Type.Model.Empty.Samples
 
             EmptyInput input = new EmptyInput();
             Response response = await client.PutEmptyAsync(input);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -70,7 +65,6 @@ namespace _Type.Model.Empty.Samples
 
             RequestContent content = RequestContent.Create(new object());
             Response response = client.PutEmpty(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -81,7 +75,6 @@ namespace _Type.Model.Empty.Samples
 
             RequestContent content = RequestContent.Create(new object());
             Response response = await client.PutEmptyAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -92,7 +85,6 @@ namespace _Type.Model.Empty.Samples
 
             EmptyInput input = new EmptyInput();
             Response response = client.PutEmpty(input);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -103,7 +95,6 @@ namespace _Type.Model.Empty.Samples
 
             EmptyInput input = new EmptyInput();
             Response response = await client.PutEmptyAsync(input);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -113,8 +104,6 @@ namespace _Type.Model.Empty.Samples
             EmptyClient client = new EmptyClient();
 
             Response response = client.GetEmpty(null);
-
-            Console.WriteLine(response.ToString());
         }
 
         [Test]
@@ -124,8 +113,6 @@ namespace _Type.Model.Empty.Samples
             EmptyClient client = new EmptyClient();
 
             Response response = await client.GetEmptyAsync(null);
-
-            Console.WriteLine(response.ToString());
         }
 
         [Test]
@@ -153,8 +140,6 @@ namespace _Type.Model.Empty.Samples
             EmptyClient client = new EmptyClient();
 
             Response response = client.GetEmpty(null);
-
-            Console.WriteLine(response.ToString());
         }
 
         [Test]
@@ -164,8 +149,6 @@ namespace _Type.Model.Empty.Samples
             EmptyClient client = new EmptyClient();
 
             Response response = await client.GetEmptyAsync(null);
-
-            Console.WriteLine(response.ToString());
         }
 
         [Test]
@@ -194,8 +177,6 @@ namespace _Type.Model.Empty.Samples
 
             RequestContent content = RequestContent.Create(new object());
             Response response = client.PostRoundTripEmpty(content);
-
-            Console.WriteLine(response.ToString());
         }
 
         [Test]
@@ -206,8 +187,6 @@ namespace _Type.Model.Empty.Samples
 
             RequestContent content = RequestContent.Create(new object());
             Response response = await client.PostRoundTripEmptyAsync(content);
-
-            Console.WriteLine(response.ToString());
         }
 
         [Test]
@@ -238,8 +217,6 @@ namespace _Type.Model.Empty.Samples
 
             RequestContent content = RequestContent.Create(new object());
             Response response = client.PostRoundTripEmpty(content);
-
-            Console.WriteLine(response.ToString());
         }
 
         [Test]
@@ -250,8 +227,6 @@ namespace _Type.Model.Empty.Samples
 
             RequestContent content = RequestContent.Create(new object());
             Response response = await client.PostRoundTripEmptyAsync(content);
-
-            Console.WriteLine(response.ToString());
         }
 
         [Test]

@@ -5,9 +5,7 @@
 
 #nullable disable
 
-using System;
 using System.Collections.Generic;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -17,37 +15,31 @@ using _Type._Dictionary;
 
 namespace _Type._Dictionary.Samples
 {
-    internal class Samples_StringValue
+    public class Samples_StringValue
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_GetStringValue()
         {
-            StringValue client = new DictionaryClient().GetStringValueClient(apiVersion: "1.0.0");
+            StringValue client = new DictionaryClient().GetStringValueClient("1.0.0");
 
             Response response = client.GetStringValue(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("<key>").ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetStringValue_Async()
         {
-            StringValue client = new DictionaryClient().GetStringValueClient(apiVersion: "1.0.0");
+            StringValue client = new DictionaryClient().GetStringValueClient("1.0.0");
 
             Response response = await client.GetStringValueAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("<key>").ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_GetStringValue_Convenience()
         {
-            StringValue client = new DictionaryClient().GetStringValueClient(apiVersion: "1.0.0");
+            StringValue client = new DictionaryClient().GetStringValueClient("1.0.0");
 
             Response<IReadOnlyDictionary<string, string>> response = client.GetStringValue();
         }
@@ -56,7 +48,7 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetStringValue_Convenience_Async()
         {
-            StringValue client = new DictionaryClient().GetStringValueClient(apiVersion: "1.0.0");
+            StringValue client = new DictionaryClient().GetStringValueClient("1.0.0");
 
             Response<IReadOnlyDictionary<string, string>> response = await client.GetStringValueAsync();
         }
@@ -65,31 +57,25 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetStringValue_AllParameters()
         {
-            StringValue client = new DictionaryClient().GetStringValueClient(apiVersion: "1.0.0");
+            StringValue client = new DictionaryClient().GetStringValueClient("1.0.0");
 
             Response response = client.GetStringValue(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("<key>").ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetStringValue_AllParameters_Async()
         {
-            StringValue client = new DictionaryClient().GetStringValueClient(apiVersion: "1.0.0");
+            StringValue client = new DictionaryClient().GetStringValueClient("1.0.0");
 
             Response response = await client.GetStringValueAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("<key>").ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_GetStringValue_AllParameters_Convenience()
         {
-            StringValue client = new DictionaryClient().GetStringValueClient(apiVersion: "1.0.0");
+            StringValue client = new DictionaryClient().GetStringValueClient("1.0.0");
 
             Response<IReadOnlyDictionary<string, string>> response = client.GetStringValue();
         }
@@ -98,7 +84,7 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetStringValue_AllParameters_Convenience_Async()
         {
-            StringValue client = new DictionaryClient().GetStringValueClient(apiVersion: "1.0.0");
+            StringValue client = new DictionaryClient().GetStringValueClient("1.0.0");
 
             Response<IReadOnlyDictionary<string, string>> response = await client.GetStringValueAsync();
         }
@@ -107,108 +93,100 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Put()
         {
-            StringValue client = new DictionaryClient().GetStringValueClient(apiVersion: "1.0.0");
+            StringValue client = new DictionaryClient().GetStringValueClient("1.0.0");
 
             RequestContent content = RequestContent.Create(new
             {
                 key = "<body>",
             });
             Response response = client.Put(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Put_Async()
         {
-            StringValue client = new DictionaryClient().GetStringValueClient(apiVersion: "1.0.0");
+            StringValue client = new DictionaryClient().GetStringValueClient("1.0.0");
 
             RequestContent content = RequestContent.Create(new
             {
                 key = "<body>",
             });
             Response response = await client.PutAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_Put_Convenience()
         {
-            StringValue client = new DictionaryClient().GetStringValueClient(apiVersion: "1.0.0");
+            StringValue client = new DictionaryClient().GetStringValueClient("1.0.0");
 
-            Response response = client.Put(new Dictionary<string, string>()
+            Response response = client.Put(new Dictionary<string, string>
             {
-                ["key"] = "<body>",
+                ["key"] = "<body>"
             });
-            Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Put_Convenience_Async()
         {
-            StringValue client = new DictionaryClient().GetStringValueClient(apiVersion: "1.0.0");
+            StringValue client = new DictionaryClient().GetStringValueClient("1.0.0");
 
-            Response response = await client.PutAsync(new Dictionary<string, string>()
+            Response response = await client.PutAsync(new Dictionary<string, string>
             {
-                ["key"] = "<body>",
+                ["key"] = "<body>"
             });
-            Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_Put_AllParameters()
         {
-            StringValue client = new DictionaryClient().GetStringValueClient(apiVersion: "1.0.0");
+            StringValue client = new DictionaryClient().GetStringValueClient("1.0.0");
 
             RequestContent content = RequestContent.Create(new
             {
                 key = "<body>",
             });
             Response response = client.Put(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Put_AllParameters_Async()
         {
-            StringValue client = new DictionaryClient().GetStringValueClient(apiVersion: "1.0.0");
+            StringValue client = new DictionaryClient().GetStringValueClient("1.0.0");
 
             RequestContent content = RequestContent.Create(new
             {
                 key = "<body>",
             });
             Response response = await client.PutAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_Put_AllParameters_Convenience()
         {
-            StringValue client = new DictionaryClient().GetStringValueClient(apiVersion: "1.0.0");
+            StringValue client = new DictionaryClient().GetStringValueClient("1.0.0");
 
-            Response response = client.Put(new Dictionary<string, string>()
+            Response response = client.Put(new Dictionary<string, string>
             {
-                ["key"] = "<body>",
+                ["key"] = "<body>"
             });
-            Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Put_AllParameters_Convenience_Async()
         {
-            StringValue client = new DictionaryClient().GetStringValueClient(apiVersion: "1.0.0");
+            StringValue client = new DictionaryClient().GetStringValueClient("1.0.0");
 
-            Response response = await client.PutAsync(new Dictionary<string, string>()
+            Response response = await client.PutAsync(new Dictionary<string, string>
             {
-                ["key"] = "<body>",
+                ["key"] = "<body>"
             });
-            Console.WriteLine(response.Status);
         }
     }
 }

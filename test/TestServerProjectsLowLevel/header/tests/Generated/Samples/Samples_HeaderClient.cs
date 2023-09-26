@@ -25,7 +25,6 @@ namespace header_LowLevel.Samples
             HeaderClient client = new HeaderClient(credential);
 
             Response response = client.ParamExistingKey("<userAgent>");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -36,7 +35,6 @@ namespace header_LowLevel.Samples
             HeaderClient client = new HeaderClient(credential);
 
             Response response = await client.ParamExistingKeyAsync("<userAgent>");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -47,7 +45,6 @@ namespace header_LowLevel.Samples
             HeaderClient client = new HeaderClient(credential);
 
             Response response = client.ParamExistingKey("<userAgent>");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -58,7 +55,6 @@ namespace header_LowLevel.Samples
             HeaderClient client = new HeaderClient(credential);
 
             Response response = await client.ParamExistingKeyAsync("<userAgent>");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -69,7 +65,6 @@ namespace header_LowLevel.Samples
             HeaderClient client = new HeaderClient(credential);
 
             Response response = client.ResponseExistingKey();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -80,7 +75,6 @@ namespace header_LowLevel.Samples
             HeaderClient client = new HeaderClient(credential);
 
             Response response = await client.ResponseExistingKeyAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -91,7 +85,6 @@ namespace header_LowLevel.Samples
             HeaderClient client = new HeaderClient(credential);
 
             Response response = client.ResponseExistingKey();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -102,7 +95,6 @@ namespace header_LowLevel.Samples
             HeaderClient client = new HeaderClient(credential);
 
             Response response = await client.ResponseExistingKeyAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -113,7 +105,6 @@ namespace header_LowLevel.Samples
             HeaderClient client = new HeaderClient(credential);
 
             Response response = client.ParamProtectedKey("<contentType>");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -124,7 +115,6 @@ namespace header_LowLevel.Samples
             HeaderClient client = new HeaderClient(credential);
 
             Response response = await client.ParamProtectedKeyAsync("<contentType>");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -135,7 +125,6 @@ namespace header_LowLevel.Samples
             HeaderClient client = new HeaderClient(credential);
 
             Response response = client.ParamProtectedKey("<contentType>");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -146,7 +135,6 @@ namespace header_LowLevel.Samples
             HeaderClient client = new HeaderClient(credential);
 
             Response response = await client.ParamProtectedKeyAsync("<contentType>");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -157,7 +145,6 @@ namespace header_LowLevel.Samples
             HeaderClient client = new HeaderClient(credential);
 
             Response response = client.ResponseProtectedKey();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -168,7 +155,6 @@ namespace header_LowLevel.Samples
             HeaderClient client = new HeaderClient(credential);
 
             Response response = await client.ResponseProtectedKeyAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -179,7 +165,6 @@ namespace header_LowLevel.Samples
             HeaderClient client = new HeaderClient(credential);
 
             Response response = client.ResponseProtectedKey();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -190,7 +175,6 @@ namespace header_LowLevel.Samples
             HeaderClient client = new HeaderClient(credential);
 
             Response response = await client.ResponseProtectedKeyAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -201,7 +185,6 @@ namespace header_LowLevel.Samples
             HeaderClient client = new HeaderClient(credential);
 
             Response response = client.ParamInteger("<scenario>", 1234);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -212,7 +195,6 @@ namespace header_LowLevel.Samples
             HeaderClient client = new HeaderClient(credential);
 
             Response response = await client.ParamIntegerAsync("<scenario>", 1234);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -223,7 +205,6 @@ namespace header_LowLevel.Samples
             HeaderClient client = new HeaderClient(credential);
 
             Response response = client.ParamInteger("<scenario>", 1234);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -234,7 +215,6 @@ namespace header_LowLevel.Samples
             HeaderClient client = new HeaderClient(credential);
 
             Response response = await client.ParamIntegerAsync("<scenario>", 1234);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -245,7 +225,6 @@ namespace header_LowLevel.Samples
             HeaderClient client = new HeaderClient(credential);
 
             Response response = client.ResponseInteger("<scenario>");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -256,7 +235,6 @@ namespace header_LowLevel.Samples
             HeaderClient client = new HeaderClient(credential);
 
             Response response = await client.ResponseIntegerAsync("<scenario>");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -267,7 +245,6 @@ namespace header_LowLevel.Samples
             HeaderClient client = new HeaderClient(credential);
 
             Response response = client.ResponseInteger("<scenario>");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -278,7 +255,6 @@ namespace header_LowLevel.Samples
             HeaderClient client = new HeaderClient(credential);
 
             Response response = await client.ResponseIntegerAsync("<scenario>");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -289,7 +265,6 @@ namespace header_LowLevel.Samples
             HeaderClient client = new HeaderClient(credential);
 
             Response response = client.ParamLong("<scenario>", 1234L);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -300,7 +275,6 @@ namespace header_LowLevel.Samples
             HeaderClient client = new HeaderClient(credential);
 
             Response response = await client.ParamLongAsync("<scenario>", 1234L);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -311,7 +285,6 @@ namespace header_LowLevel.Samples
             HeaderClient client = new HeaderClient(credential);
 
             Response response = client.ParamLong("<scenario>", 1234L);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -322,7 +295,6 @@ namespace header_LowLevel.Samples
             HeaderClient client = new HeaderClient(credential);
 
             Response response = await client.ParamLongAsync("<scenario>", 1234L);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -333,7 +305,6 @@ namespace header_LowLevel.Samples
             HeaderClient client = new HeaderClient(credential);
 
             Response response = client.ResponseLong("<scenario>");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -344,7 +315,6 @@ namespace header_LowLevel.Samples
             HeaderClient client = new HeaderClient(credential);
 
             Response response = await client.ResponseLongAsync("<scenario>");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -355,7 +325,6 @@ namespace header_LowLevel.Samples
             HeaderClient client = new HeaderClient(credential);
 
             Response response = client.ResponseLong("<scenario>");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -366,7 +335,6 @@ namespace header_LowLevel.Samples
             HeaderClient client = new HeaderClient(credential);
 
             Response response = await client.ResponseLongAsync("<scenario>");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -377,7 +345,6 @@ namespace header_LowLevel.Samples
             HeaderClient client = new HeaderClient(credential);
 
             Response response = client.ParamFloat("<scenario>", 123.45F);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -388,7 +355,6 @@ namespace header_LowLevel.Samples
             HeaderClient client = new HeaderClient(credential);
 
             Response response = await client.ParamFloatAsync("<scenario>", 123.45F);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -399,7 +365,6 @@ namespace header_LowLevel.Samples
             HeaderClient client = new HeaderClient(credential);
 
             Response response = client.ParamFloat("<scenario>", 123.45F);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -410,7 +375,6 @@ namespace header_LowLevel.Samples
             HeaderClient client = new HeaderClient(credential);
 
             Response response = await client.ParamFloatAsync("<scenario>", 123.45F);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -421,7 +385,6 @@ namespace header_LowLevel.Samples
             HeaderClient client = new HeaderClient(credential);
 
             Response response = client.ResponseFloat("<scenario>");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -432,7 +395,6 @@ namespace header_LowLevel.Samples
             HeaderClient client = new HeaderClient(credential);
 
             Response response = await client.ResponseFloatAsync("<scenario>");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -443,7 +405,6 @@ namespace header_LowLevel.Samples
             HeaderClient client = new HeaderClient(credential);
 
             Response response = client.ResponseFloat("<scenario>");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -454,7 +415,6 @@ namespace header_LowLevel.Samples
             HeaderClient client = new HeaderClient(credential);
 
             Response response = await client.ResponseFloatAsync("<scenario>");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -465,7 +425,6 @@ namespace header_LowLevel.Samples
             HeaderClient client = new HeaderClient(credential);
 
             Response response = client.ParamDouble("<scenario>", 123.45);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -476,7 +435,6 @@ namespace header_LowLevel.Samples
             HeaderClient client = new HeaderClient(credential);
 
             Response response = await client.ParamDoubleAsync("<scenario>", 123.45);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -487,7 +445,6 @@ namespace header_LowLevel.Samples
             HeaderClient client = new HeaderClient(credential);
 
             Response response = client.ParamDouble("<scenario>", 123.45);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -498,7 +455,6 @@ namespace header_LowLevel.Samples
             HeaderClient client = new HeaderClient(credential);
 
             Response response = await client.ParamDoubleAsync("<scenario>", 123.45);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -509,7 +465,6 @@ namespace header_LowLevel.Samples
             HeaderClient client = new HeaderClient(credential);
 
             Response response = client.ResponseDouble("<scenario>");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -520,7 +475,6 @@ namespace header_LowLevel.Samples
             HeaderClient client = new HeaderClient(credential);
 
             Response response = await client.ResponseDoubleAsync("<scenario>");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -531,7 +485,6 @@ namespace header_LowLevel.Samples
             HeaderClient client = new HeaderClient(credential);
 
             Response response = client.ResponseDouble("<scenario>");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -542,7 +495,6 @@ namespace header_LowLevel.Samples
             HeaderClient client = new HeaderClient(credential);
 
             Response response = await client.ResponseDoubleAsync("<scenario>");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -553,7 +505,6 @@ namespace header_LowLevel.Samples
             HeaderClient client = new HeaderClient(credential);
 
             Response response = client.ParamBool("<scenario>", true);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -564,7 +515,6 @@ namespace header_LowLevel.Samples
             HeaderClient client = new HeaderClient(credential);
 
             Response response = await client.ParamBoolAsync("<scenario>", true);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -575,7 +525,6 @@ namespace header_LowLevel.Samples
             HeaderClient client = new HeaderClient(credential);
 
             Response response = client.ParamBool("<scenario>", true);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -586,7 +535,6 @@ namespace header_LowLevel.Samples
             HeaderClient client = new HeaderClient(credential);
 
             Response response = await client.ParamBoolAsync("<scenario>", true);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -597,7 +545,6 @@ namespace header_LowLevel.Samples
             HeaderClient client = new HeaderClient(credential);
 
             Response response = client.ResponseBool("<scenario>");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -608,7 +555,6 @@ namespace header_LowLevel.Samples
             HeaderClient client = new HeaderClient(credential);
 
             Response response = await client.ResponseBoolAsync("<scenario>");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -619,7 +565,6 @@ namespace header_LowLevel.Samples
             HeaderClient client = new HeaderClient(credential);
 
             Response response = client.ResponseBool("<scenario>");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -630,7 +575,6 @@ namespace header_LowLevel.Samples
             HeaderClient client = new HeaderClient(credential);
 
             Response response = await client.ResponseBoolAsync("<scenario>");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -641,7 +585,6 @@ namespace header_LowLevel.Samples
             HeaderClient client = new HeaderClient(credential);
 
             Response response = client.ParamString("<scenario>");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -652,7 +595,6 @@ namespace header_LowLevel.Samples
             HeaderClient client = new HeaderClient(credential);
 
             Response response = await client.ParamStringAsync("<scenario>");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -662,8 +604,7 @@ namespace header_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HeaderClient client = new HeaderClient(credential);
 
-            Response response = client.ParamString("<scenario>", value: "<value>");
-            Console.WriteLine(response.Status);
+            Response response = client.ParamString("<scenario>", "<value>");
         }
 
         [Test]
@@ -673,8 +614,7 @@ namespace header_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HeaderClient client = new HeaderClient(credential);
 
-            Response response = await client.ParamStringAsync("<scenario>", value: "<value>");
-            Console.WriteLine(response.Status);
+            Response response = await client.ParamStringAsync("<scenario>", "<value>");
         }
 
         [Test]
@@ -685,7 +625,6 @@ namespace header_LowLevel.Samples
             HeaderClient client = new HeaderClient(credential);
 
             Response response = client.ResponseString("<scenario>");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -696,7 +635,6 @@ namespace header_LowLevel.Samples
             HeaderClient client = new HeaderClient(credential);
 
             Response response = await client.ResponseStringAsync("<scenario>");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -707,7 +645,6 @@ namespace header_LowLevel.Samples
             HeaderClient client = new HeaderClient(credential);
 
             Response response = client.ResponseString("<scenario>");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -718,7 +655,6 @@ namespace header_LowLevel.Samples
             HeaderClient client = new HeaderClient(credential);
 
             Response response = await client.ResponseStringAsync("<scenario>");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -729,7 +665,6 @@ namespace header_LowLevel.Samples
             HeaderClient client = new HeaderClient(credential);
 
             Response response = client.ParamDate("<scenario>", DateTimeOffset.Parse("2022-05-10"));
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -740,7 +675,6 @@ namespace header_LowLevel.Samples
             HeaderClient client = new HeaderClient(credential);
 
             Response response = await client.ParamDateAsync("<scenario>", DateTimeOffset.Parse("2022-05-10"));
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -751,7 +685,6 @@ namespace header_LowLevel.Samples
             HeaderClient client = new HeaderClient(credential);
 
             Response response = client.ParamDate("<scenario>", DateTimeOffset.Parse("2022-05-10"));
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -762,7 +695,6 @@ namespace header_LowLevel.Samples
             HeaderClient client = new HeaderClient(credential);
 
             Response response = await client.ParamDateAsync("<scenario>", DateTimeOffset.Parse("2022-05-10"));
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -773,7 +705,6 @@ namespace header_LowLevel.Samples
             HeaderClient client = new HeaderClient(credential);
 
             Response response = client.ResponseDate("<scenario>");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -784,7 +715,6 @@ namespace header_LowLevel.Samples
             HeaderClient client = new HeaderClient(credential);
 
             Response response = await client.ResponseDateAsync("<scenario>");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -795,7 +725,6 @@ namespace header_LowLevel.Samples
             HeaderClient client = new HeaderClient(credential);
 
             Response response = client.ResponseDate("<scenario>");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -806,7 +735,6 @@ namespace header_LowLevel.Samples
             HeaderClient client = new HeaderClient(credential);
 
             Response response = await client.ResponseDateAsync("<scenario>");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -817,7 +745,6 @@ namespace header_LowLevel.Samples
             HeaderClient client = new HeaderClient(credential);
 
             Response response = client.ParamDatetime("<scenario>", DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"));
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -828,7 +755,6 @@ namespace header_LowLevel.Samples
             HeaderClient client = new HeaderClient(credential);
 
             Response response = await client.ParamDatetimeAsync("<scenario>", DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"));
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -839,7 +765,6 @@ namespace header_LowLevel.Samples
             HeaderClient client = new HeaderClient(credential);
 
             Response response = client.ParamDatetime("<scenario>", DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"));
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -850,7 +775,6 @@ namespace header_LowLevel.Samples
             HeaderClient client = new HeaderClient(credential);
 
             Response response = await client.ParamDatetimeAsync("<scenario>", DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"));
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -861,7 +785,6 @@ namespace header_LowLevel.Samples
             HeaderClient client = new HeaderClient(credential);
 
             Response response = client.ResponseDatetime("<scenario>");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -872,7 +795,6 @@ namespace header_LowLevel.Samples
             HeaderClient client = new HeaderClient(credential);
 
             Response response = await client.ResponseDatetimeAsync("<scenario>");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -883,7 +805,6 @@ namespace header_LowLevel.Samples
             HeaderClient client = new HeaderClient(credential);
 
             Response response = client.ResponseDatetime("<scenario>");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -894,7 +815,6 @@ namespace header_LowLevel.Samples
             HeaderClient client = new HeaderClient(credential);
 
             Response response = await client.ResponseDatetimeAsync("<scenario>");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -905,7 +825,6 @@ namespace header_LowLevel.Samples
             HeaderClient client = new HeaderClient(credential);
 
             Response response = client.ParamDatetimeRfc1123("<scenario>");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -916,7 +835,6 @@ namespace header_LowLevel.Samples
             HeaderClient client = new HeaderClient(credential);
 
             Response response = await client.ParamDatetimeRfc1123Async("<scenario>");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -926,8 +844,7 @@ namespace header_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HeaderClient client = new HeaderClient(credential);
 
-            Response response = client.ParamDatetimeRfc1123("<scenario>", value: DateTimeOffset.Parse("Tue, 10 May 2022 18:57:31 GMT"));
-            Console.WriteLine(response.Status);
+            Response response = client.ParamDatetimeRfc1123("<scenario>", DateTimeOffset.Parse("Tue, 10 May 2022 18:57:31 GMT"));
         }
 
         [Test]
@@ -937,8 +854,7 @@ namespace header_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HeaderClient client = new HeaderClient(credential);
 
-            Response response = await client.ParamDatetimeRfc1123Async("<scenario>", value: DateTimeOffset.Parse("Tue, 10 May 2022 18:57:31 GMT"));
-            Console.WriteLine(response.Status);
+            Response response = await client.ParamDatetimeRfc1123Async("<scenario>", DateTimeOffset.Parse("Tue, 10 May 2022 18:57:31 GMT"));
         }
 
         [Test]
@@ -949,7 +865,6 @@ namespace header_LowLevel.Samples
             HeaderClient client = new HeaderClient(credential);
 
             Response response = client.ResponseDatetimeRfc1123("<scenario>");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -960,7 +875,6 @@ namespace header_LowLevel.Samples
             HeaderClient client = new HeaderClient(credential);
 
             Response response = await client.ResponseDatetimeRfc1123Async("<scenario>");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -971,7 +885,6 @@ namespace header_LowLevel.Samples
             HeaderClient client = new HeaderClient(credential);
 
             Response response = client.ResponseDatetimeRfc1123("<scenario>");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -982,7 +895,6 @@ namespace header_LowLevel.Samples
             HeaderClient client = new HeaderClient(credential);
 
             Response response = await client.ResponseDatetimeRfc1123Async("<scenario>");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -993,7 +905,6 @@ namespace header_LowLevel.Samples
             HeaderClient client = new HeaderClient(credential);
 
             Response response = client.ParamDuration("<scenario>", XmlConvert.ToTimeSpan("PT1H23M45S"));
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1004,7 +915,6 @@ namespace header_LowLevel.Samples
             HeaderClient client = new HeaderClient(credential);
 
             Response response = await client.ParamDurationAsync("<scenario>", XmlConvert.ToTimeSpan("PT1H23M45S"));
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1015,7 +925,6 @@ namespace header_LowLevel.Samples
             HeaderClient client = new HeaderClient(credential);
 
             Response response = client.ParamDuration("<scenario>", XmlConvert.ToTimeSpan("PT1H23M45S"));
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1026,7 +935,6 @@ namespace header_LowLevel.Samples
             HeaderClient client = new HeaderClient(credential);
 
             Response response = await client.ParamDurationAsync("<scenario>", XmlConvert.ToTimeSpan("PT1H23M45S"));
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1037,7 +945,6 @@ namespace header_LowLevel.Samples
             HeaderClient client = new HeaderClient(credential);
 
             Response response = client.ResponseDuration("<scenario>");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1048,7 +955,6 @@ namespace header_LowLevel.Samples
             HeaderClient client = new HeaderClient(credential);
 
             Response response = await client.ResponseDurationAsync("<scenario>");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1059,7 +965,6 @@ namespace header_LowLevel.Samples
             HeaderClient client = new HeaderClient(credential);
 
             Response response = client.ResponseDuration("<scenario>");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1070,7 +975,6 @@ namespace header_LowLevel.Samples
             HeaderClient client = new HeaderClient(credential);
 
             Response response = await client.ResponseDurationAsync("<scenario>");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1081,7 +985,6 @@ namespace header_LowLevel.Samples
             HeaderClient client = new HeaderClient(credential);
 
             Response response = client.ParamByte("<scenario>", BinaryData.FromObjectAsJson(new object()));
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1092,7 +995,6 @@ namespace header_LowLevel.Samples
             HeaderClient client = new HeaderClient(credential);
 
             Response response = await client.ParamByteAsync("<scenario>", BinaryData.FromObjectAsJson(new object()));
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1103,7 +1005,6 @@ namespace header_LowLevel.Samples
             HeaderClient client = new HeaderClient(credential);
 
             Response response = client.ParamByte("<scenario>", BinaryData.FromObjectAsJson(new object()));
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1114,7 +1015,6 @@ namespace header_LowLevel.Samples
             HeaderClient client = new HeaderClient(credential);
 
             Response response = await client.ParamByteAsync("<scenario>", BinaryData.FromObjectAsJson(new object()));
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1125,7 +1025,6 @@ namespace header_LowLevel.Samples
             HeaderClient client = new HeaderClient(credential);
 
             Response response = client.ResponseByte("<scenario>");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1136,7 +1035,6 @@ namespace header_LowLevel.Samples
             HeaderClient client = new HeaderClient(credential);
 
             Response response = await client.ResponseByteAsync("<scenario>");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1147,7 +1045,6 @@ namespace header_LowLevel.Samples
             HeaderClient client = new HeaderClient(credential);
 
             Response response = client.ResponseByte("<scenario>");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1158,7 +1055,6 @@ namespace header_LowLevel.Samples
             HeaderClient client = new HeaderClient(credential);
 
             Response response = await client.ResponseByteAsync("<scenario>");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1169,7 +1065,6 @@ namespace header_LowLevel.Samples
             HeaderClient client = new HeaderClient(credential);
 
             Response response = client.ParamEnum("<scenario>");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1180,7 +1075,6 @@ namespace header_LowLevel.Samples
             HeaderClient client = new HeaderClient(credential);
 
             Response response = await client.ParamEnumAsync("<scenario>");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1190,8 +1084,7 @@ namespace header_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HeaderClient client = new HeaderClient(credential);
 
-            Response response = client.ParamEnum("<scenario>", value: "White");
-            Console.WriteLine(response.Status);
+            Response response = client.ParamEnum("<scenario>", "White");
         }
 
         [Test]
@@ -1201,8 +1094,7 @@ namespace header_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HeaderClient client = new HeaderClient(credential);
 
-            Response response = await client.ParamEnumAsync("<scenario>", value: "White");
-            Console.WriteLine(response.Status);
+            Response response = await client.ParamEnumAsync("<scenario>", "White");
         }
 
         [Test]
@@ -1213,7 +1105,6 @@ namespace header_LowLevel.Samples
             HeaderClient client = new HeaderClient(credential);
 
             Response response = client.ResponseEnum("<scenario>");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1224,7 +1115,6 @@ namespace header_LowLevel.Samples
             HeaderClient client = new HeaderClient(credential);
 
             Response response = await client.ResponseEnumAsync("<scenario>");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1235,7 +1125,6 @@ namespace header_LowLevel.Samples
             HeaderClient client = new HeaderClient(credential);
 
             Response response = client.ResponseEnum("<scenario>");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1246,7 +1135,6 @@ namespace header_LowLevel.Samples
             HeaderClient client = new HeaderClient(credential);
 
             Response response = await client.ResponseEnumAsync("<scenario>");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1257,7 +1145,6 @@ namespace header_LowLevel.Samples
             HeaderClient client = new HeaderClient(credential);
 
             Response response = client.CustomRequestId();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1268,7 +1155,6 @@ namespace header_LowLevel.Samples
             HeaderClient client = new HeaderClient(credential);
 
             Response response = await client.CustomRequestIdAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1279,7 +1165,6 @@ namespace header_LowLevel.Samples
             HeaderClient client = new HeaderClient(credential);
 
             Response response = client.CustomRequestId();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1290,7 +1175,6 @@ namespace header_LowLevel.Samples
             HeaderClient client = new HeaderClient(credential);
 
             Response response = await client.CustomRequestIdAsync();
-            Console.WriteLine(response.Status);
         }
     }
 }

@@ -7,7 +7,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -28,9 +27,6 @@ namespace ModelsTypeSpec.Samples
             ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
             Response response = client.GetOutputDiscriminatorModel(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("kind").ToString());
         }
 
         [Test]
@@ -41,9 +37,6 @@ namespace ModelsTypeSpec.Samples
             ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
             Response response = await client.GetOutputDiscriminatorModelAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("kind").ToString());
         }
 
         [Test]
@@ -74,9 +67,6 @@ namespace ModelsTypeSpec.Samples
             ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
             Response response = client.GetOutputDiscriminatorModel(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("kind").ToString());
         }
 
         [Test]
@@ -87,9 +77,6 @@ namespace ModelsTypeSpec.Samples
             ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
             Response response = await client.GetOutputDiscriminatorModelAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("kind").ToString());
         }
 
         [Test]
@@ -126,75 +113,53 @@ namespace ModelsTypeSpec.Samples
                 requiredNullableInt = 1234,
                 requiredNullableString = "<requiredNullableString>",
                 requiredModel = new object(),
-                requiredIntList = new List<object>()
-{
+                requiredIntList = new object[]
+            {
 1234
-},
-                requiredStringList = new List<object>()
-{
+            },
+                requiredStringList = new object[]
+            {
 "<requiredStringList>"
-},
-                requiredModelList = new List<object>()
-{
+            },
+                requiredModelList = new object[]
+            {
 new
 {
 requiredModelRecord = new
 {
 key = new
 {
-requiredList = new List<object>()
+requiredList = new object[]
 {
 null
 },
 },
 },
 }
-},
-                requiredModelRecord = new
-                {
-                },
-                requiredCollectionWithNullableFloatElement = new List<object>()
-{
+            },
+                requiredModelRecord = new { },
+                requiredCollectionWithNullableFloatElement = new object[]
+            {
 123.45F
-},
-                requiredCollectionWithNullableBooleanElement = new List<object>()
-{
+            },
+                requiredCollectionWithNullableBooleanElement = new object[]
+            {
 true
-},
-                requiredNullableModelList = new List<object>()
-{
+            },
+                requiredNullableModelList = new object[]
+            {
 null
-},
-                requiredNullableStringList = new List<object>()
-{
+            },
+                requiredNullableStringList = new object[]
+            {
 "<requiredNullableStringList>"
-},
-                requiredNullableIntList = new List<object>()
-{
+            },
+                requiredNullableIntList = new object[]
+            {
 1234
-},
+            },
             });
             Response response = client.InputToRoundTrip(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("requiredString").ToString());
-            Console.WriteLine(result.GetProperty("requiredInt").ToString());
-            Console.WriteLine(result.GetProperty("requiredNullableInt").ToString());
-            Console.WriteLine(result.GetProperty("requiredNullableString").ToString());
-            Console.WriteLine(result.GetProperty("requiredReadonlyInt").ToString());
-            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("discriminatorProperty").ToString());
-            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredPropertyOnBase").ToString());
-            Console.WriteLine(result.GetProperty("requiredFixedStringEnum").ToString());
-            Console.WriteLine(result.GetProperty("requiredFixedIntEnum").ToString());
-            Console.WriteLine(result.GetProperty("requiredExtensibleEnum").ToString());
-            Console.WriteLine(result.GetProperty("requiredIntRecord").GetProperty("<key>").ToString());
-            Console.WriteLine(result.GetProperty("requiredStringRecord").GetProperty("<key>").ToString());
-            Console.WriteLine(result.GetProperty("requiredBytes").ToString());
-            Console.WriteLine(result.GetProperty("requiredUint8Array")[0].ToString());
-            Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
-            Console.WriteLine(result.GetProperty("requiredInt8Array")[0].ToString());
-            Console.WriteLine(result.GetProperty("requiredNullableIntList")[0].ToString());
-            Console.WriteLine(result.GetProperty("requiredNullableStringList")[0].ToString());
         }
 
         [Test]
@@ -211,75 +176,53 @@ null
                 requiredNullableInt = 1234,
                 requiredNullableString = "<requiredNullableString>",
                 requiredModel = new object(),
-                requiredIntList = new List<object>()
-{
+                requiredIntList = new object[]
+            {
 1234
-},
-                requiredStringList = new List<object>()
-{
+            },
+                requiredStringList = new object[]
+            {
 "<requiredStringList>"
-},
-                requiredModelList = new List<object>()
-{
+            },
+                requiredModelList = new object[]
+            {
 new
 {
 requiredModelRecord = new
 {
 key = new
 {
-requiredList = new List<object>()
+requiredList = new object[]
 {
 null
 },
 },
 },
 }
-},
-                requiredModelRecord = new
-                {
-                },
-                requiredCollectionWithNullableFloatElement = new List<object>()
-{
+            },
+                requiredModelRecord = new { },
+                requiredCollectionWithNullableFloatElement = new object[]
+            {
 123.45F
-},
-                requiredCollectionWithNullableBooleanElement = new List<object>()
-{
+            },
+                requiredCollectionWithNullableBooleanElement = new object[]
+            {
 true
-},
-                requiredNullableModelList = new List<object>()
-{
+            },
+                requiredNullableModelList = new object[]
+            {
 null
-},
-                requiredNullableStringList = new List<object>()
-{
+            },
+                requiredNullableStringList = new object[]
+            {
 "<requiredNullableStringList>"
-},
-                requiredNullableIntList = new List<object>()
-{
+            },
+                requiredNullableIntList = new object[]
+            {
 1234
-},
+            },
             });
             Response response = await client.InputToRoundTripAsync(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("requiredString").ToString());
-            Console.WriteLine(result.GetProperty("requiredInt").ToString());
-            Console.WriteLine(result.GetProperty("requiredNullableInt").ToString());
-            Console.WriteLine(result.GetProperty("requiredNullableString").ToString());
-            Console.WriteLine(result.GetProperty("requiredReadonlyInt").ToString());
-            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("discriminatorProperty").ToString());
-            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredPropertyOnBase").ToString());
-            Console.WriteLine(result.GetProperty("requiredFixedStringEnum").ToString());
-            Console.WriteLine(result.GetProperty("requiredFixedIntEnum").ToString());
-            Console.WriteLine(result.GetProperty("requiredExtensibleEnum").ToString());
-            Console.WriteLine(result.GetProperty("requiredIntRecord").GetProperty("<key>").ToString());
-            Console.WriteLine(result.GetProperty("requiredStringRecord").GetProperty("<key>").ToString());
-            Console.WriteLine(result.GetProperty("requiredBytes").ToString());
-            Console.WriteLine(result.GetProperty("requiredUint8Array")[0].ToString());
-            Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
-            Console.WriteLine(result.GetProperty("requiredInt8Array")[0].ToString());
-            Console.WriteLine(result.GetProperty("requiredNullableIntList")[0].ToString());
-            Console.WriteLine(result.GetProperty("requiredNullableStringList")[0].ToString());
         }
 
         [Test]
@@ -289,40 +232,22 @@ null
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-            InputModel input = new InputModel("<requiredString>", 1234, 1234, "<requiredNullableString>", new BaseModel(), null, new List<int>()
+            InputModel input = new InputModel("<requiredString>", 1234, 1234, "<requiredNullableString>", new BaseModel(), default, new int[] { 1234 }, new string[] { "<requiredStringList>" }, new CollectionItem[]
+            {
+new CollectionItem(new Dictionary<string, RecordItem>
 {
-1234
-}, new List<string>()
+["key"] = new RecordItem(new CollectionItem[]
 {
-"<requiredStringList>"
-}, new List<CollectionItem>()
-{
-new CollectionItem(new Dictionary<string, RecordItem>()
-{
-["key"] = new RecordItem(new List<CollectionItem>()
-{
-null
-}),
+default
 })
-}, new Dictionary<string, RecordItem>()
-{
-    ["key"] = null,
-}, new List<float?>()
-{
-123.45F
-}, new List<bool?>()
-{
-true
-}, new List<CollectionItem>()
-{
-null
-}, new List<string>()
-{
-"<requiredNullableStringList>"
-}, new List<int>()
-{
-1234
-});
+})
+            }, new Dictionary<string, RecordItem>
+            {
+                ["key"] = default
+            }, new float?[] { 123.45F }, new bool?[] { true }, new CollectionItem[]
+            {
+default
+            }, new string[] { "<requiredNullableStringList>" }, new int[] { 1234 });
             Response<RoundTripModel> response = client.InputToRoundTrip(input);
         }
 
@@ -333,40 +258,22 @@ null
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-            InputModel input = new InputModel("<requiredString>", 1234, 1234, "<requiredNullableString>", new BaseModel(), null, new List<int>()
+            InputModel input = new InputModel("<requiredString>", 1234, 1234, "<requiredNullableString>", new BaseModel(), default, new int[] { 1234 }, new string[] { "<requiredStringList>" }, new CollectionItem[]
+            {
+new CollectionItem(new Dictionary<string, RecordItem>
 {
-1234
-}, new List<string>()
+["key"] = new RecordItem(new CollectionItem[]
 {
-"<requiredStringList>"
-}, new List<CollectionItem>()
-{
-new CollectionItem(new Dictionary<string, RecordItem>()
-{
-["key"] = new RecordItem(new List<CollectionItem>()
-{
-null
-}),
+default
 })
-}, new Dictionary<string, RecordItem>()
-{
-    ["key"] = null,
-}, new List<float?>()
-{
-123.45F
-}, new List<bool?>()
-{
-true
-}, new List<CollectionItem>()
-{
-null
-}, new List<string>()
-{
-"<requiredNullableStringList>"
-}, new List<int>()
-{
-1234
-});
+})
+            }, new Dictionary<string, RecordItem>
+            {
+                ["key"] = default
+            }, new float?[] { 123.45F }, new bool?[] { true }, new CollectionItem[]
+            {
+default
+            }, new string[] { "<requiredNullableStringList>" }, new int[] { 1234 });
             Response<RoundTripModel> response = await client.InputToRoundTripAsync(input);
         }
 
@@ -386,111 +293,77 @@ null
                 nonRequiredNullableInt = 1234,
                 nonRequiredNullableString = "<nonRequiredNullableString>",
                 requiredModel = new object(),
-                requiredIntList = new List<object>()
-{
+                requiredIntList = new object[]
+            {
 1234
-},
-                requiredStringList = new List<object>()
-{
+            },
+                requiredStringList = new object[]
+            {
 "<requiredStringList>"
-},
-                requiredModelList = new List<object>()
-{
+            },
+                requiredModelList = new object[]
+            {
 new
 {
 requiredModelRecord = new
 {
 key = new
 {
-requiredList = new List<object>()
+requiredList = new object[]
 {
 null
 },
 },
 },
 }
-},
-                requiredModelRecord = new
-                {
-                },
-                requiredCollectionWithNullableFloatElement = new List<object>()
-{
+            },
+                requiredModelRecord = new { },
+                requiredCollectionWithNullableFloatElement = new object[]
+            {
 123.45F
-},
-                requiredCollectionWithNullableBooleanElement = new List<object>()
-{
+            },
+                requiredCollectionWithNullableBooleanElement = new object[]
+            {
 true
-},
-                requiredNullableModelList = new List<object>()
-{
+            },
+                requiredNullableModelList = new object[]
+            {
 null
-},
-                requiredNullableStringList = new List<object>()
-{
+            },
+                requiredNullableStringList = new object[]
+            {
 "<requiredNullableStringList>"
-},
-                requiredNullableIntList = new List<object>()
-{
+            },
+                requiredNullableIntList = new object[]
+            {
 1234
-},
-                nonRequiredModelList = new List<object>()
-{
+            },
+                nonRequiredModelList = new object[]
+            {
 null
-},
-                nonRequiredStringList = new List<object>()
-{
+            },
+                nonRequiredStringList = new object[]
+            {
 "<nonRequiredStringList>"
-},
-                nonRequiredIntList = new List<object>()
-{
+            },
+                nonRequiredIntList = new object[]
+            {
 1234
-},
-                nonRequiredNullableModelList = new List<object>()
-{
+            },
+                nonRequiredNullableModelList = new object[]
+            {
 null
-},
-                nonRequiredNullableStringList = new List<object>()
-{
+            },
+                nonRequiredNullableStringList = new object[]
+            {
 "<nonRequiredNullableStringList>"
-},
-                nonRequiredNullableIntList = new List<object>()
-{
+            },
+                nonRequiredNullableIntList = new object[]
+            {
 1234
-},
+            },
             });
             Response response = client.InputToRoundTrip(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("requiredString").ToString());
-            Console.WriteLine(result.GetProperty("requiredInt").ToString());
-            Console.WriteLine(result.GetProperty("nonRequiredString").ToString());
-            Console.WriteLine(result.GetProperty("nonRequiredInt").ToString());
-            Console.WriteLine(result.GetProperty("requiredNullableInt").ToString());
-            Console.WriteLine(result.GetProperty("requiredNullableString").ToString());
-            Console.WriteLine(result.GetProperty("nonRequiredNullableInt").ToString());
-            Console.WriteLine(result.GetProperty("nonRequiredNullableString").ToString());
-            Console.WriteLine(result.GetProperty("requiredReadonlyInt").ToString());
-            Console.WriteLine(result.GetProperty("nonRequiredReadonlyInt").ToString());
-            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("discriminatorProperty").ToString());
-            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalPropertyOnBase").ToString());
-            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredPropertyOnBase").ToString());
-            Console.WriteLine(result.GetProperty("requiredFixedStringEnum").ToString());
-            Console.WriteLine(result.GetProperty("requiredFixedIntEnum").ToString());
-            Console.WriteLine(result.GetProperty("requiredExtensibleEnum").ToString());
-            Console.WriteLine(result.GetProperty("requiredIntRecord").GetProperty("<key>").ToString());
-            Console.WriteLine(result.GetProperty("requiredStringRecord").GetProperty("<key>").ToString());
-            Console.WriteLine(result.GetProperty("requiredBytes").ToString());
-            Console.WriteLine(result.GetProperty("optionalBytes").ToString());
-            Console.WriteLine(result.GetProperty("requiredUint8Array")[0].ToString());
-            Console.WriteLine(result.GetProperty("optionalUint8Array")[0].ToString());
-            Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
-            Console.WriteLine(result.GetProperty("optionalUnknown").ToString());
-            Console.WriteLine(result.GetProperty("requiredInt8Array")[0].ToString());
-            Console.WriteLine(result.GetProperty("optionalInt8Array")[0].ToString());
-            Console.WriteLine(result.GetProperty("requiredNullableIntList")[0].ToString());
-            Console.WriteLine(result.GetProperty("requiredNullableStringList")[0].ToString());
-            Console.WriteLine(result.GetProperty("nonRequiredNullableIntList")[0].ToString());
-            Console.WriteLine(result.GetProperty("nonRequiredNullableStringList")[0].ToString());
         }
 
         [Test]
@@ -509,111 +382,77 @@ null
                 nonRequiredNullableInt = 1234,
                 nonRequiredNullableString = "<nonRequiredNullableString>",
                 requiredModel = new object(),
-                requiredIntList = new List<object>()
-{
+                requiredIntList = new object[]
+            {
 1234
-},
-                requiredStringList = new List<object>()
-{
+            },
+                requiredStringList = new object[]
+            {
 "<requiredStringList>"
-},
-                requiredModelList = new List<object>()
-{
+            },
+                requiredModelList = new object[]
+            {
 new
 {
 requiredModelRecord = new
 {
 key = new
 {
-requiredList = new List<object>()
+requiredList = new object[]
 {
 null
 },
 },
 },
 }
-},
-                requiredModelRecord = new
-                {
-                },
-                requiredCollectionWithNullableFloatElement = new List<object>()
-{
+            },
+                requiredModelRecord = new { },
+                requiredCollectionWithNullableFloatElement = new object[]
+            {
 123.45F
-},
-                requiredCollectionWithNullableBooleanElement = new List<object>()
-{
+            },
+                requiredCollectionWithNullableBooleanElement = new object[]
+            {
 true
-},
-                requiredNullableModelList = new List<object>()
-{
+            },
+                requiredNullableModelList = new object[]
+            {
 null
-},
-                requiredNullableStringList = new List<object>()
-{
+            },
+                requiredNullableStringList = new object[]
+            {
 "<requiredNullableStringList>"
-},
-                requiredNullableIntList = new List<object>()
-{
+            },
+                requiredNullableIntList = new object[]
+            {
 1234
-},
-                nonRequiredModelList = new List<object>()
-{
+            },
+                nonRequiredModelList = new object[]
+            {
 null
-},
-                nonRequiredStringList = new List<object>()
-{
+            },
+                nonRequiredStringList = new object[]
+            {
 "<nonRequiredStringList>"
-},
-                nonRequiredIntList = new List<object>()
-{
+            },
+                nonRequiredIntList = new object[]
+            {
 1234
-},
-                nonRequiredNullableModelList = new List<object>()
-{
+            },
+                nonRequiredNullableModelList = new object[]
+            {
 null
-},
-                nonRequiredNullableStringList = new List<object>()
-{
+            },
+                nonRequiredNullableStringList = new object[]
+            {
 "<nonRequiredNullableStringList>"
-},
-                nonRequiredNullableIntList = new List<object>()
-{
+            },
+                nonRequiredNullableIntList = new object[]
+            {
 1234
-},
+            },
             });
             Response response = await client.InputToRoundTripAsync(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("requiredString").ToString());
-            Console.WriteLine(result.GetProperty("requiredInt").ToString());
-            Console.WriteLine(result.GetProperty("nonRequiredString").ToString());
-            Console.WriteLine(result.GetProperty("nonRequiredInt").ToString());
-            Console.WriteLine(result.GetProperty("requiredNullableInt").ToString());
-            Console.WriteLine(result.GetProperty("requiredNullableString").ToString());
-            Console.WriteLine(result.GetProperty("nonRequiredNullableInt").ToString());
-            Console.WriteLine(result.GetProperty("nonRequiredNullableString").ToString());
-            Console.WriteLine(result.GetProperty("requiredReadonlyInt").ToString());
-            Console.WriteLine(result.GetProperty("nonRequiredReadonlyInt").ToString());
-            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("discriminatorProperty").ToString());
-            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalPropertyOnBase").ToString());
-            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredPropertyOnBase").ToString());
-            Console.WriteLine(result.GetProperty("requiredFixedStringEnum").ToString());
-            Console.WriteLine(result.GetProperty("requiredFixedIntEnum").ToString());
-            Console.WriteLine(result.GetProperty("requiredExtensibleEnum").ToString());
-            Console.WriteLine(result.GetProperty("requiredIntRecord").GetProperty("<key>").ToString());
-            Console.WriteLine(result.GetProperty("requiredStringRecord").GetProperty("<key>").ToString());
-            Console.WriteLine(result.GetProperty("requiredBytes").ToString());
-            Console.WriteLine(result.GetProperty("optionalBytes").ToString());
-            Console.WriteLine(result.GetProperty("requiredUint8Array")[0].ToString());
-            Console.WriteLine(result.GetProperty("optionalUint8Array")[0].ToString());
-            Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
-            Console.WriteLine(result.GetProperty("optionalUnknown").ToString());
-            Console.WriteLine(result.GetProperty("requiredInt8Array")[0].ToString());
-            Console.WriteLine(result.GetProperty("optionalInt8Array")[0].ToString());
-            Console.WriteLine(result.GetProperty("requiredNullableIntList")[0].ToString());
-            Console.WriteLine(result.GetProperty("requiredNullableStringList")[0].ToString());
-            Console.WriteLine(result.GetProperty("nonRequiredNullableIntList")[0].ToString());
-            Console.WriteLine(result.GetProperty("nonRequiredNullableStringList")[0].ToString());
         }
 
         [Test]
@@ -623,67 +462,31 @@ null
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-            InputModel input = new InputModel("<requiredString>", 1234, 1234, "<requiredNullableString>", new BaseModel(), null, new List<int>()
+            InputModel input = new InputModel("<requiredString>", 1234, 1234, "<requiredNullableString>", new BaseModel(), default, new int[] { 1234 }, new string[] { "<requiredStringList>" }, new CollectionItem[]
+            {
+new CollectionItem(new Dictionary<string, RecordItem>
 {
-1234
-}, new List<string>()
+["key"] = new RecordItem(new CollectionItem[]
 {
-"<requiredStringList>"
-}, new List<CollectionItem>()
-{
-new CollectionItem(new Dictionary<string, RecordItem>()
-{
-["key"] = new RecordItem(new List<CollectionItem>()
-{
-null
-}),
+default
 })
-}, new Dictionary<string, RecordItem>()
-{
-    ["key"] = null,
-}, new List<float?>()
-{
-123.45F
-}, new List<bool?>()
-{
-true
-}, new List<CollectionItem>()
-{
-null
-}, new List<string>()
-{
-"<requiredNullableStringList>"
-}, new List<int>()
-{
-1234
 })
+            }, new Dictionary<string, RecordItem>
+            {
+                ["key"] = default
+            }, new float?[] { 123.45F }, new bool?[] { true }, new CollectionItem[]
+            {
+default
+            }, new string[] { "<requiredNullableStringList>" }, new int[] { 1234 })
             {
                 NonRequiredNullableInt = 1234,
                 NonRequiredNullableString = "<nonRequiredNullableString>",
-                NonRequiredModelList =
-{
-null
-},
-                NonRequiredStringList =
-{
-"<nonRequiredStringList>"
-},
-                NonRequiredIntList =
-{
-1234
-},
-                NonRequiredNullableModelList =
-{
-null
-},
-                NonRequiredNullableStringList =
-{
-"<nonRequiredNullableStringList>"
-},
-                NonRequiredNullableIntList =
-{
-1234
-},
+                NonRequiredModelList = { default },
+                NonRequiredStringList = { "<nonRequiredStringList>" },
+                NonRequiredIntList = { 1234 },
+                NonRequiredNullableModelList = { default },
+                NonRequiredNullableStringList = { "<nonRequiredNullableStringList>" },
+                NonRequiredNullableIntList = { 1234 },
             };
             Response<RoundTripModel> response = client.InputToRoundTrip(input);
         }
@@ -695,67 +498,31 @@ null
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-            InputModel input = new InputModel("<requiredString>", 1234, 1234, "<requiredNullableString>", new BaseModel(), null, new List<int>()
+            InputModel input = new InputModel("<requiredString>", 1234, 1234, "<requiredNullableString>", new BaseModel(), default, new int[] { 1234 }, new string[] { "<requiredStringList>" }, new CollectionItem[]
+            {
+new CollectionItem(new Dictionary<string, RecordItem>
 {
-1234
-}, new List<string>()
+["key"] = new RecordItem(new CollectionItem[]
 {
-"<requiredStringList>"
-}, new List<CollectionItem>()
-{
-new CollectionItem(new Dictionary<string, RecordItem>()
-{
-["key"] = new RecordItem(new List<CollectionItem>()
-{
-null
-}),
+default
 })
-}, new Dictionary<string, RecordItem>()
-{
-    ["key"] = null,
-}, new List<float?>()
-{
-123.45F
-}, new List<bool?>()
-{
-true
-}, new List<CollectionItem>()
-{
-null
-}, new List<string>()
-{
-"<requiredNullableStringList>"
-}, new List<int>()
-{
-1234
 })
+            }, new Dictionary<string, RecordItem>
+            {
+                ["key"] = default
+            }, new float?[] { 123.45F }, new bool?[] { true }, new CollectionItem[]
+            {
+default
+            }, new string[] { "<requiredNullableStringList>" }, new int[] { 1234 })
             {
                 NonRequiredNullableInt = 1234,
                 NonRequiredNullableString = "<nonRequiredNullableString>",
-                NonRequiredModelList =
-{
-null
-},
-                NonRequiredStringList =
-{
-"<nonRequiredStringList>"
-},
-                NonRequiredIntList =
-{
-1234
-},
-                NonRequiredNullableModelList =
-{
-null
-},
-                NonRequiredNullableStringList =
-{
-"<nonRequiredNullableStringList>"
-},
-                NonRequiredNullableIntList =
-{
-1234
-},
+                NonRequiredModelList = { default },
+                NonRequiredStringList = { "<nonRequiredStringList>" },
+                NonRequiredIntList = { 1234 },
+                NonRequiredNullableModelList = { default },
+                NonRequiredNullableStringList = { "<nonRequiredNullableStringList>" },
+                NonRequiredNullableIntList = { 1234 },
             };
             Response<RoundTripModel> response = await client.InputToRoundTripAsync(input);
         }
@@ -774,67 +541,53 @@ null
                 requiredNullableInt = 1234,
                 requiredNullableString = "<requiredNullableString>",
                 requiredModel = new object(),
-                requiredIntList = new List<object>()
-{
+                requiredIntList = new object[]
+            {
 1234
-},
-                requiredStringList = new List<object>()
-{
+            },
+                requiredStringList = new object[]
+            {
 "<requiredStringList>"
-},
-                requiredModelList = new List<object>()
-{
+            },
+                requiredModelList = new object[]
+            {
 new
 {
 requiredModelRecord = new
 {
 key = new
 {
-requiredList = new List<object>()
+requiredList = new object[]
 {
 null
 },
 },
 },
 }
-},
-                requiredModelRecord = new
-                {
-                },
-                requiredCollectionWithNullableFloatElement = new List<object>()
-{
+            },
+                requiredModelRecord = new { },
+                requiredCollectionWithNullableFloatElement = new object[]
+            {
 123.45F
-},
-                requiredCollectionWithNullableBooleanElement = new List<object>()
-{
+            },
+                requiredCollectionWithNullableBooleanElement = new object[]
+            {
 true
-},
-                requiredNullableModelList = new List<object>()
-{
+            },
+                requiredNullableModelList = new object[]
+            {
 null
-},
-                requiredNullableStringList = new List<object>()
-{
+            },
+                requiredNullableStringList = new object[]
+            {
 "<requiredNullableStringList>"
-},
-                requiredNullableIntList = new List<object>()
-{
+            },
+                requiredNullableIntList = new object[]
+            {
 1234
-},
+            },
             });
             Response response = client.InputToRoundTripPrimitive(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("requiredString").ToString());
-            Console.WriteLine(result.GetProperty("requiredInt").ToString());
-            Console.WriteLine(result.GetProperty("requiredInt64").ToString());
-            Console.WriteLine(result.GetProperty("requiredSafeInt").ToString());
-            Console.WriteLine(result.GetProperty("requiredFloat").ToString());
-            Console.WriteLine(result.GetProperty("required_Double").ToString());
-            Console.WriteLine(result.GetProperty("requiredBoolean").ToString());
-            Console.WriteLine(result.GetProperty("requiredDateTimeOffset").ToString());
-            Console.WriteLine(result.GetProperty("requiredTimeSpan").ToString());
-            Console.WriteLine(result.GetProperty("requiredCollectionWithNullableFloatElement")[0].ToString());
         }
 
         [Test]
@@ -851,67 +604,53 @@ null
                 requiredNullableInt = 1234,
                 requiredNullableString = "<requiredNullableString>",
                 requiredModel = new object(),
-                requiredIntList = new List<object>()
-{
+                requiredIntList = new object[]
+            {
 1234
-},
-                requiredStringList = new List<object>()
-{
+            },
+                requiredStringList = new object[]
+            {
 "<requiredStringList>"
-},
-                requiredModelList = new List<object>()
-{
+            },
+                requiredModelList = new object[]
+            {
 new
 {
 requiredModelRecord = new
 {
 key = new
 {
-requiredList = new List<object>()
+requiredList = new object[]
 {
 null
 },
 },
 },
 }
-},
-                requiredModelRecord = new
-                {
-                },
-                requiredCollectionWithNullableFloatElement = new List<object>()
-{
+            },
+                requiredModelRecord = new { },
+                requiredCollectionWithNullableFloatElement = new object[]
+            {
 123.45F
-},
-                requiredCollectionWithNullableBooleanElement = new List<object>()
-{
+            },
+                requiredCollectionWithNullableBooleanElement = new object[]
+            {
 true
-},
-                requiredNullableModelList = new List<object>()
-{
+            },
+                requiredNullableModelList = new object[]
+            {
 null
-},
-                requiredNullableStringList = new List<object>()
-{
+            },
+                requiredNullableStringList = new object[]
+            {
 "<requiredNullableStringList>"
-},
-                requiredNullableIntList = new List<object>()
-{
+            },
+                requiredNullableIntList = new object[]
+            {
 1234
-},
+            },
             });
             Response response = await client.InputToRoundTripPrimitiveAsync(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("requiredString").ToString());
-            Console.WriteLine(result.GetProperty("requiredInt").ToString());
-            Console.WriteLine(result.GetProperty("requiredInt64").ToString());
-            Console.WriteLine(result.GetProperty("requiredSafeInt").ToString());
-            Console.WriteLine(result.GetProperty("requiredFloat").ToString());
-            Console.WriteLine(result.GetProperty("required_Double").ToString());
-            Console.WriteLine(result.GetProperty("requiredBoolean").ToString());
-            Console.WriteLine(result.GetProperty("requiredDateTimeOffset").ToString());
-            Console.WriteLine(result.GetProperty("requiredTimeSpan").ToString());
-            Console.WriteLine(result.GetProperty("requiredCollectionWithNullableFloatElement")[0].ToString());
         }
 
         [Test]
@@ -921,40 +660,22 @@ null
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-            InputModel input = new InputModel("<requiredString>", 1234, 1234, "<requiredNullableString>", new BaseModel(), null, new List<int>()
+            InputModel input = new InputModel("<requiredString>", 1234, 1234, "<requiredNullableString>", new BaseModel(), default, new int[] { 1234 }, new string[] { "<requiredStringList>" }, new CollectionItem[]
+            {
+new CollectionItem(new Dictionary<string, RecordItem>
 {
-1234
-}, new List<string>()
+["key"] = new RecordItem(new CollectionItem[]
 {
-"<requiredStringList>"
-}, new List<CollectionItem>()
-{
-new CollectionItem(new Dictionary<string, RecordItem>()
-{
-["key"] = new RecordItem(new List<CollectionItem>()
-{
-null
-}),
+default
 })
-}, new Dictionary<string, RecordItem>()
-{
-    ["key"] = null,
-}, new List<float?>()
-{
-123.45F
-}, new List<bool?>()
-{
-true
-}, new List<CollectionItem>()
-{
-null
-}, new List<string>()
-{
-"<requiredNullableStringList>"
-}, new List<int>()
-{
-1234
-});
+})
+            }, new Dictionary<string, RecordItem>
+            {
+                ["key"] = default
+            }, new float?[] { 123.45F }, new bool?[] { true }, new CollectionItem[]
+            {
+default
+            }, new string[] { "<requiredNullableStringList>" }, new int[] { 1234 });
             Response<RoundTripPrimitiveModel> response = client.InputToRoundTripPrimitive(input);
         }
 
@@ -965,40 +686,22 @@ null
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-            InputModel input = new InputModel("<requiredString>", 1234, 1234, "<requiredNullableString>", new BaseModel(), null, new List<int>()
+            InputModel input = new InputModel("<requiredString>", 1234, 1234, "<requiredNullableString>", new BaseModel(), default, new int[] { 1234 }, new string[] { "<requiredStringList>" }, new CollectionItem[]
+            {
+new CollectionItem(new Dictionary<string, RecordItem>
 {
-1234
-}, new List<string>()
+["key"] = new RecordItem(new CollectionItem[]
 {
-"<requiredStringList>"
-}, new List<CollectionItem>()
-{
-new CollectionItem(new Dictionary<string, RecordItem>()
-{
-["key"] = new RecordItem(new List<CollectionItem>()
-{
-null
-}),
+default
 })
-}, new Dictionary<string, RecordItem>()
-{
-    ["key"] = null,
-}, new List<float?>()
-{
-123.45F
-}, new List<bool?>()
-{
-true
-}, new List<CollectionItem>()
-{
-null
-}, new List<string>()
-{
-"<requiredNullableStringList>"
-}, new List<int>()
-{
-1234
-});
+})
+            }, new Dictionary<string, RecordItem>
+            {
+                ["key"] = default
+            }, new float?[] { 123.45F }, new bool?[] { true }, new CollectionItem[]
+            {
+default
+            }, new string[] { "<requiredNullableStringList>" }, new int[] { 1234 });
             Response<RoundTripPrimitiveModel> response = await client.InputToRoundTripPrimitiveAsync(input);
         }
 
@@ -1018,91 +721,77 @@ null
                 nonRequiredNullableInt = 1234,
                 nonRequiredNullableString = "<nonRequiredNullableString>",
                 requiredModel = new object(),
-                requiredIntList = new List<object>()
-{
+                requiredIntList = new object[]
+            {
 1234
-},
-                requiredStringList = new List<object>()
-{
+            },
+                requiredStringList = new object[]
+            {
 "<requiredStringList>"
-},
-                requiredModelList = new List<object>()
-{
+            },
+                requiredModelList = new object[]
+            {
 new
 {
 requiredModelRecord = new
 {
 key = new
 {
-requiredList = new List<object>()
+requiredList = new object[]
 {
 null
 },
 },
 },
 }
-},
-                requiredModelRecord = new
-                {
-                },
-                requiredCollectionWithNullableFloatElement = new List<object>()
-{
+            },
+                requiredModelRecord = new { },
+                requiredCollectionWithNullableFloatElement = new object[]
+            {
 123.45F
-},
-                requiredCollectionWithNullableBooleanElement = new List<object>()
-{
+            },
+                requiredCollectionWithNullableBooleanElement = new object[]
+            {
 true
-},
-                requiredNullableModelList = new List<object>()
-{
+            },
+                requiredNullableModelList = new object[]
+            {
 null
-},
-                requiredNullableStringList = new List<object>()
-{
+            },
+                requiredNullableStringList = new object[]
+            {
 "<requiredNullableStringList>"
-},
-                requiredNullableIntList = new List<object>()
-{
+            },
+                requiredNullableIntList = new object[]
+            {
 1234
-},
-                nonRequiredModelList = new List<object>()
-{
+            },
+                nonRequiredModelList = new object[]
+            {
 null
-},
-                nonRequiredStringList = new List<object>()
-{
+            },
+                nonRequiredStringList = new object[]
+            {
 "<nonRequiredStringList>"
-},
-                nonRequiredIntList = new List<object>()
-{
+            },
+                nonRequiredIntList = new object[]
+            {
 1234
-},
-                nonRequiredNullableModelList = new List<object>()
-{
+            },
+                nonRequiredNullableModelList = new object[]
+            {
 null
-},
-                nonRequiredNullableStringList = new List<object>()
-{
+            },
+                nonRequiredNullableStringList = new object[]
+            {
 "<nonRequiredNullableStringList>"
-},
-                nonRequiredNullableIntList = new List<object>()
-{
+            },
+                nonRequiredNullableIntList = new object[]
+            {
 1234
-},
+            },
             });
             Response response = client.InputToRoundTripPrimitive(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("requiredString").ToString());
-            Console.WriteLine(result.GetProperty("requiredInt").ToString());
-            Console.WriteLine(result.GetProperty("requiredInt64").ToString());
-            Console.WriteLine(result.GetProperty("requiredSafeInt").ToString());
-            Console.WriteLine(result.GetProperty("requiredFloat").ToString());
-            Console.WriteLine(result.GetProperty("required_Double").ToString());
-            Console.WriteLine(result.GetProperty("requiredBoolean").ToString());
-            Console.WriteLine(result.GetProperty("requiredDateTimeOffset").ToString());
-            Console.WriteLine(result.GetProperty("requiredTimeSpan").ToString());
-            Console.WriteLine(result.GetProperty("requiredCollectionWithNullableFloatElement")[0].ToString());
         }
 
         [Test]
@@ -1121,91 +810,77 @@ null
                 nonRequiredNullableInt = 1234,
                 nonRequiredNullableString = "<nonRequiredNullableString>",
                 requiredModel = new object(),
-                requiredIntList = new List<object>()
-{
+                requiredIntList = new object[]
+            {
 1234
-},
-                requiredStringList = new List<object>()
-{
+            },
+                requiredStringList = new object[]
+            {
 "<requiredStringList>"
-},
-                requiredModelList = new List<object>()
-{
+            },
+                requiredModelList = new object[]
+            {
 new
 {
 requiredModelRecord = new
 {
 key = new
 {
-requiredList = new List<object>()
+requiredList = new object[]
 {
 null
 },
 },
 },
 }
-},
-                requiredModelRecord = new
-                {
-                },
-                requiredCollectionWithNullableFloatElement = new List<object>()
-{
+            },
+                requiredModelRecord = new { },
+                requiredCollectionWithNullableFloatElement = new object[]
+            {
 123.45F
-},
-                requiredCollectionWithNullableBooleanElement = new List<object>()
-{
+            },
+                requiredCollectionWithNullableBooleanElement = new object[]
+            {
 true
-},
-                requiredNullableModelList = new List<object>()
-{
+            },
+                requiredNullableModelList = new object[]
+            {
 null
-},
-                requiredNullableStringList = new List<object>()
-{
+            },
+                requiredNullableStringList = new object[]
+            {
 "<requiredNullableStringList>"
-},
-                requiredNullableIntList = new List<object>()
-{
+            },
+                requiredNullableIntList = new object[]
+            {
 1234
-},
-                nonRequiredModelList = new List<object>()
-{
+            },
+                nonRequiredModelList = new object[]
+            {
 null
-},
-                nonRequiredStringList = new List<object>()
-{
+            },
+                nonRequiredStringList = new object[]
+            {
 "<nonRequiredStringList>"
-},
-                nonRequiredIntList = new List<object>()
-{
+            },
+                nonRequiredIntList = new object[]
+            {
 1234
-},
-                nonRequiredNullableModelList = new List<object>()
-{
+            },
+                nonRequiredNullableModelList = new object[]
+            {
 null
-},
-                nonRequiredNullableStringList = new List<object>()
-{
+            },
+                nonRequiredNullableStringList = new object[]
+            {
 "<nonRequiredNullableStringList>"
-},
-                nonRequiredNullableIntList = new List<object>()
-{
+            },
+                nonRequiredNullableIntList = new object[]
+            {
 1234
-},
+            },
             });
             Response response = await client.InputToRoundTripPrimitiveAsync(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("requiredString").ToString());
-            Console.WriteLine(result.GetProperty("requiredInt").ToString());
-            Console.WriteLine(result.GetProperty("requiredInt64").ToString());
-            Console.WriteLine(result.GetProperty("requiredSafeInt").ToString());
-            Console.WriteLine(result.GetProperty("requiredFloat").ToString());
-            Console.WriteLine(result.GetProperty("required_Double").ToString());
-            Console.WriteLine(result.GetProperty("requiredBoolean").ToString());
-            Console.WriteLine(result.GetProperty("requiredDateTimeOffset").ToString());
-            Console.WriteLine(result.GetProperty("requiredTimeSpan").ToString());
-            Console.WriteLine(result.GetProperty("requiredCollectionWithNullableFloatElement")[0].ToString());
         }
 
         [Test]
@@ -1215,67 +890,31 @@ null
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-            InputModel input = new InputModel("<requiredString>", 1234, 1234, "<requiredNullableString>", new BaseModel(), null, new List<int>()
+            InputModel input = new InputModel("<requiredString>", 1234, 1234, "<requiredNullableString>", new BaseModel(), default, new int[] { 1234 }, new string[] { "<requiredStringList>" }, new CollectionItem[]
+            {
+new CollectionItem(new Dictionary<string, RecordItem>
 {
-1234
-}, new List<string>()
+["key"] = new RecordItem(new CollectionItem[]
 {
-"<requiredStringList>"
-}, new List<CollectionItem>()
-{
-new CollectionItem(new Dictionary<string, RecordItem>()
-{
-["key"] = new RecordItem(new List<CollectionItem>()
-{
-null
-}),
+default
 })
-}, new Dictionary<string, RecordItem>()
-{
-    ["key"] = null,
-}, new List<float?>()
-{
-123.45F
-}, new List<bool?>()
-{
-true
-}, new List<CollectionItem>()
-{
-null
-}, new List<string>()
-{
-"<requiredNullableStringList>"
-}, new List<int>()
-{
-1234
 })
+            }, new Dictionary<string, RecordItem>
+            {
+                ["key"] = default
+            }, new float?[] { 123.45F }, new bool?[] { true }, new CollectionItem[]
+            {
+default
+            }, new string[] { "<requiredNullableStringList>" }, new int[] { 1234 })
             {
                 NonRequiredNullableInt = 1234,
                 NonRequiredNullableString = "<nonRequiredNullableString>",
-                NonRequiredModelList =
-{
-null
-},
-                NonRequiredStringList =
-{
-"<nonRequiredStringList>"
-},
-                NonRequiredIntList =
-{
-1234
-},
-                NonRequiredNullableModelList =
-{
-null
-},
-                NonRequiredNullableStringList =
-{
-"<nonRequiredNullableStringList>"
-},
-                NonRequiredNullableIntList =
-{
-1234
-},
+                NonRequiredModelList = { default },
+                NonRequiredStringList = { "<nonRequiredStringList>" },
+                NonRequiredIntList = { 1234 },
+                NonRequiredNullableModelList = { default },
+                NonRequiredNullableStringList = { "<nonRequiredNullableStringList>" },
+                NonRequiredNullableIntList = { 1234 },
             };
             Response<RoundTripPrimitiveModel> response = client.InputToRoundTripPrimitive(input);
         }
@@ -1287,67 +926,31 @@ null
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-            InputModel input = new InputModel("<requiredString>", 1234, 1234, "<requiredNullableString>", new BaseModel(), null, new List<int>()
+            InputModel input = new InputModel("<requiredString>", 1234, 1234, "<requiredNullableString>", new BaseModel(), default, new int[] { 1234 }, new string[] { "<requiredStringList>" }, new CollectionItem[]
+            {
+new CollectionItem(new Dictionary<string, RecordItem>
 {
-1234
-}, new List<string>()
+["key"] = new RecordItem(new CollectionItem[]
 {
-"<requiredStringList>"
-}, new List<CollectionItem>()
-{
-new CollectionItem(new Dictionary<string, RecordItem>()
-{
-["key"] = new RecordItem(new List<CollectionItem>()
-{
-null
-}),
+default
 })
-}, new Dictionary<string, RecordItem>()
-{
-    ["key"] = null,
-}, new List<float?>()
-{
-123.45F
-}, new List<bool?>()
-{
-true
-}, new List<CollectionItem>()
-{
-null
-}, new List<string>()
-{
-"<requiredNullableStringList>"
-}, new List<int>()
-{
-1234
 })
+            }, new Dictionary<string, RecordItem>
+            {
+                ["key"] = default
+            }, new float?[] { 123.45F }, new bool?[] { true }, new CollectionItem[]
+            {
+default
+            }, new string[] { "<requiredNullableStringList>" }, new int[] { 1234 })
             {
                 NonRequiredNullableInt = 1234,
                 NonRequiredNullableString = "<nonRequiredNullableString>",
-                NonRequiredModelList =
-{
-null
-},
-                NonRequiredStringList =
-{
-"<nonRequiredStringList>"
-},
-                NonRequiredIntList =
-{
-1234
-},
-                NonRequiredNullableModelList =
-{
-null
-},
-                NonRequiredNullableStringList =
-{
-"<nonRequiredNullableStringList>"
-},
-                NonRequiredNullableIntList =
-{
-1234
-},
+                NonRequiredModelList = { default },
+                NonRequiredStringList = { "<nonRequiredStringList>" },
+                NonRequiredIntList = { 1234 },
+                NonRequiredNullableModelList = { default },
+                NonRequiredNullableStringList = { "<nonRequiredNullableStringList>" },
+                NonRequiredNullableIntList = { 1234 },
             };
             Response<RoundTripPrimitiveModel> response = await client.InputToRoundTripPrimitiveAsync(input);
         }
@@ -1361,9 +964,6 @@ null
 
             RequestContent content = RequestContent.Create(new object());
             Response response = client.InputToRoundTripOptional(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -1375,9 +975,6 @@ null
 
             RequestContent content = RequestContent.Create(new object());
             Response response = await client.InputToRoundTripOptionalAsync(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -1413,43 +1010,43 @@ null
             {
                 optionalString = "<optionalString>",
                 optionalInt = 1234,
-                optionalStringList = new List<object>()
-{
+                optionalStringList = new object[]
+            {
 "<optionalStringList>"
-},
-                optionalIntList = new List<object>()
-{
+            },
+                optionalIntList = new object[]
+            {
 1234
-},
-                optionalModelList = new List<object>()
-{
+            },
+                optionalModelList = new object[]
+            {
 new
 {
 requiredModelRecord = new
 {
 key = new
 {
-requiredList = new List<object>()
+requiredList = new object[]
 {
 null
 },
 },
 },
 }
-},
+            },
                 optionalModel = new
                 {
-                    requiredList = new List<object>()
-{
+                    requiredList = new object[]
+            {
 null
-},
+            },
                 },
                 optionalModelWithPropertiesOnBase = new
                 {
-                    requiredList = new List<object>()
-{
+                    requiredList = new object[]
+            {
 null
-},
+            },
                     optionalPropertyOnBase = "<optionalPropertyOnBase>",
                 },
                 optionalFixedStringEnum = "1",
@@ -1462,31 +1059,15 @@ null
                 {
                     key = "<optionalStringRecord>",
                 },
-                optionalModelRecord = new
-                {
-                },
+                optionalModelRecord = new { },
                 optionalPlainDate = "2022-05-10",
                 optionalPlainTime = "01:23:45",
-                optionalCollectionWithNullableIntElement = new List<object>()
-{
+                optionalCollectionWithNullableIntElement = new object[]
+            {
 1234
-},
+            },
             });
             Response response = client.InputToRoundTripOptional(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("optionalString").ToString());
-            Console.WriteLine(result.GetProperty("optionalInt").ToString());
-            Console.WriteLine(result.GetProperty("optionalStringList")[0].ToString());
-            Console.WriteLine(result.GetProperty("optionalIntList")[0].ToString());
-            Console.WriteLine(result.GetProperty("optionalModelWithPropertiesOnBase").GetProperty("optionalPropertyOnBase").ToString());
-            Console.WriteLine(result.GetProperty("optionalFixedStringEnum").ToString());
-            Console.WriteLine(result.GetProperty("optionalExtensibleEnum").ToString());
-            Console.WriteLine(result.GetProperty("optionalIntRecord").GetProperty("<key>").ToString());
-            Console.WriteLine(result.GetProperty("optionalStringRecord").GetProperty("<key>").ToString());
-            Console.WriteLine(result.GetProperty("optionalPlainDate").ToString());
-            Console.WriteLine(result.GetProperty("optionalPlainTime").ToString());
-            Console.WriteLine(result.GetProperty("optionalCollectionWithNullableIntElement")[0].ToString());
         }
 
         [Test]
@@ -1500,43 +1081,43 @@ null
             {
                 optionalString = "<optionalString>",
                 optionalInt = 1234,
-                optionalStringList = new List<object>()
-{
+                optionalStringList = new object[]
+            {
 "<optionalStringList>"
-},
-                optionalIntList = new List<object>()
-{
+            },
+                optionalIntList = new object[]
+            {
 1234
-},
-                optionalModelList = new List<object>()
-{
+            },
+                optionalModelList = new object[]
+            {
 new
 {
 requiredModelRecord = new
 {
 key = new
 {
-requiredList = new List<object>()
+requiredList = new object[]
 {
 null
 },
 },
 },
 }
-},
+            },
                 optionalModel = new
                 {
-                    requiredList = new List<object>()
-{
+                    requiredList = new object[]
+            {
 null
-},
+            },
                 },
                 optionalModelWithPropertiesOnBase = new
                 {
-                    requiredList = new List<object>()
-{
+                    requiredList = new object[]
+            {
 null
-},
+            },
                     optionalPropertyOnBase = "<optionalPropertyOnBase>",
                 },
                 optionalFixedStringEnum = "1",
@@ -1549,31 +1130,15 @@ null
                 {
                     key = "<optionalStringRecord>",
                 },
-                optionalModelRecord = new
-                {
-                },
+                optionalModelRecord = new { },
                 optionalPlainDate = "2022-05-10",
                 optionalPlainTime = "01:23:45",
-                optionalCollectionWithNullableIntElement = new List<object>()
-{
+                optionalCollectionWithNullableIntElement = new object[]
+            {
 1234
-},
+            },
             });
             Response response = await client.InputToRoundTripOptionalAsync(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("optionalString").ToString());
-            Console.WriteLine(result.GetProperty("optionalInt").ToString());
-            Console.WriteLine(result.GetProperty("optionalStringList")[0].ToString());
-            Console.WriteLine(result.GetProperty("optionalIntList")[0].ToString());
-            Console.WriteLine(result.GetProperty("optionalModelWithPropertiesOnBase").GetProperty("optionalPropertyOnBase").ToString());
-            Console.WriteLine(result.GetProperty("optionalFixedStringEnum").ToString());
-            Console.WriteLine(result.GetProperty("optionalExtensibleEnum").ToString());
-            Console.WriteLine(result.GetProperty("optionalIntRecord").GetProperty("<key>").ToString());
-            Console.WriteLine(result.GetProperty("optionalStringRecord").GetProperty("<key>").ToString());
-            Console.WriteLine(result.GetProperty("optionalPlainDate").ToString());
-            Console.WriteLine(result.GetProperty("optionalPlainTime").ToString());
-            Console.WriteLine(result.GetProperty("optionalCollectionWithNullableIntElement")[0].ToString());
         }
 
         [Test]
@@ -1583,56 +1148,44 @@ null
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-            RoundTripOptionalModel input = new RoundTripOptionalModel()
+            RoundTripOptionalModel input = new RoundTripOptionalModel
             {
                 OptionalString = "<optionalString>",
                 OptionalInt = 1234,
-                OptionalStringList =
+                OptionalStringList = { "<optionalStringList>" },
+                OptionalIntList = { 1234 },
+                OptionalModelList = {new CollectionItem(new Dictionary<string, RecordItem>
 {
-"<optionalStringList>"
-},
-                OptionalIntList =
+["key"] = new RecordItem(new CollectionItem[]
 {
-1234
-},
-                OptionalModelList =
-{
-new CollectionItem(new Dictionary<string, RecordItem>()
-{
-["key"] = new RecordItem(new List<CollectionItem>()
-{
-null
-}),
+default
 })
-},
-                OptionalModel = new DerivedModel(new List<CollectionItem>()
-{
-null
-}),
-                OptionalModelWithPropertiesOnBase = new DerivedModelWithProperties(new List<CollectionItem>()
-{
-null
-}),
+})},
+                OptionalModel = new DerivedModel(new CollectionItem[]
+            {
+default
+            }),
+                OptionalModelWithPropertiesOnBase = new DerivedModelWithProperties(new CollectionItem[]
+            {
+default
+            }),
                 OptionalFixedStringEnum = FixedStringEnum.One,
                 OptionalExtensibleEnum = ExtensibleEnum.One,
                 OptionalIntRecord =
 {
-["key"] = 1234,
+["key"] = 1234
 },
                 OptionalStringRecord =
 {
-["key"] = "<optionalStringRecord>",
+["key"] = "<optionalStringRecord>"
 },
                 OptionalModelRecord =
 {
-["key"] = null,
+["key"] = default
 },
                 OptionalPlainDate = DateTimeOffset.Parse("2022-05-10"),
                 OptionalPlainTime = TimeSpan.Parse("01:23:45"),
-                OptionalCollectionWithNullableIntElement =
-{
-1234
-},
+                OptionalCollectionWithNullableIntElement = { 1234 },
             };
             Response<RoundTripOptionalModel> response = client.InputToRoundTripOptional(input);
         }
@@ -1644,56 +1197,44 @@ null
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-            RoundTripOptionalModel input = new RoundTripOptionalModel()
+            RoundTripOptionalModel input = new RoundTripOptionalModel
             {
                 OptionalString = "<optionalString>",
                 OptionalInt = 1234,
-                OptionalStringList =
+                OptionalStringList = { "<optionalStringList>" },
+                OptionalIntList = { 1234 },
+                OptionalModelList = {new CollectionItem(new Dictionary<string, RecordItem>
 {
-"<optionalStringList>"
-},
-                OptionalIntList =
+["key"] = new RecordItem(new CollectionItem[]
 {
-1234
-},
-                OptionalModelList =
-{
-new CollectionItem(new Dictionary<string, RecordItem>()
-{
-["key"] = new RecordItem(new List<CollectionItem>()
-{
-null
-}),
+default
 })
-},
-                OptionalModel = new DerivedModel(new List<CollectionItem>()
-{
-null
-}),
-                OptionalModelWithPropertiesOnBase = new DerivedModelWithProperties(new List<CollectionItem>()
-{
-null
-}),
+})},
+                OptionalModel = new DerivedModel(new CollectionItem[]
+            {
+default
+            }),
+                OptionalModelWithPropertiesOnBase = new DerivedModelWithProperties(new CollectionItem[]
+            {
+default
+            }),
                 OptionalFixedStringEnum = FixedStringEnum.One,
                 OptionalExtensibleEnum = ExtensibleEnum.One,
                 OptionalIntRecord =
 {
-["key"] = 1234,
+["key"] = 1234
 },
                 OptionalStringRecord =
 {
-["key"] = "<optionalStringRecord>",
+["key"] = "<optionalStringRecord>"
 },
                 OptionalModelRecord =
 {
-["key"] = null,
+["key"] = default
 },
                 OptionalPlainDate = DateTimeOffset.Parse("2022-05-10"),
                 OptionalPlainTime = TimeSpan.Parse("01:23:45"),
-                OptionalCollectionWithNullableIntElement =
-{
-1234
-},
+                OptionalCollectionWithNullableIntElement = { 1234 },
             };
             Response<RoundTripOptionalModel> response = await client.InputToRoundTripOptionalAsync(input);
         }
@@ -1720,22 +1261,22 @@ null
                 requiredFixedStringEnum = "1",
                 requiredFixedIntEnum = 1,
                 requiredExtensibleEnum = "1",
-                requiredList = new List<object>()
-{
+                requiredList = new object[]
+            {
 new
 {
 requiredModelRecord = new
 {
 key = new
 {
-requiredList = new List<object>()
+requiredList = new object[]
 {
 null
 },
 },
 },
 }
-},
+            },
                 requiredIntRecord = new
                 {
                     key = 1234,
@@ -1744,33 +1285,27 @@ null
                 {
                     key = "<requiredStringRecord>",
                 },
-                requiredModelRecord = new
-                {
-                },
+                requiredModelRecord = new { },
                 requiredBytes = new object(),
-                requiredUint8Array = new List<object>()
-{
+                requiredUint8Array = new object[]
+            {
 1234
-},
+            },
                 requiredUnknown = new object(),
-                requiredInt8Array = new List<object>()
-{
+                requiredInt8Array = new object[]
+            {
 1234
-},
-                requiredNullableIntList = new List<object>()
-{
+            },
+                requiredNullableIntList = new object[]
+            {
 1234
-},
-                requiredNullableStringList = new List<object>()
-{
+            },
+                requiredNullableStringList = new object[]
+            {
 "<requiredNullableStringList>"
-},
+            },
             });
             Response response = client.RoundTripToOutput(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("requiredString").ToString());
-            Console.WriteLine(result.GetProperty("requiredInt").ToString());
         }
 
         [Test]
@@ -1795,22 +1330,22 @@ null
                 requiredFixedStringEnum = "1",
                 requiredFixedIntEnum = 1,
                 requiredExtensibleEnum = "1",
-                requiredList = new List<object>()
-{
+                requiredList = new object[]
+            {
 new
 {
 requiredModelRecord = new
 {
 key = new
 {
-requiredList = new List<object>()
+requiredList = new object[]
 {
 null
 },
 },
 },
 }
-},
+            },
                 requiredIntRecord = new
                 {
                     key = 1234,
@@ -1819,33 +1354,27 @@ null
                 {
                     key = "<requiredStringRecord>",
                 },
-                requiredModelRecord = new
-                {
-                },
+                requiredModelRecord = new { },
                 requiredBytes = new object(),
-                requiredUint8Array = new List<object>()
-{
+                requiredUint8Array = new object[]
+            {
 1234
-},
+            },
                 requiredUnknown = new object(),
-                requiredInt8Array = new List<object>()
-{
+                requiredInt8Array = new object[]
+            {
 1234
-},
-                requiredNullableIntList = new List<object>()
-{
+            },
+                requiredNullableIntList = new object[]
+            {
 1234
-},
-                requiredNullableStringList = new List<object>()
-{
+            },
+                requiredNullableStringList = new object[]
+            {
 "<requiredNullableStringList>"
-},
+            },
             });
             Response response = await client.RoundTripToOutputAsync(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("requiredString").ToString());
-            Console.WriteLine(result.GetProperty("requiredInt").ToString());
         }
 
         [Test]
@@ -1855,37 +1384,25 @@ null
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-            RoundTripModel input = new RoundTripModel("<requiredString>", 1234, 1234, "<requiredNullableString>", new DerivedModelWithDiscriminatorA(1234, "<requiredString>"), FixedStringEnum.One, FixedIntEnum.One, ExtensibleEnum.One, new List<CollectionItem>()
+            RoundTripModel input = new RoundTripModel("<requiredString>", 1234, 1234, "<requiredNullableString>", new DerivedModelWithDiscriminatorA(1234, "<requiredString>"), FixedStringEnum.One, FixedIntEnum.One, ExtensibleEnum.One, new CollectionItem[]
+            {
+new CollectionItem(new Dictionary<string, RecordItem>
 {
-new CollectionItem(new Dictionary<string, RecordItem>()
+["key"] = new RecordItem(new CollectionItem[]
 {
-["key"] = new RecordItem(new List<CollectionItem>()
-{
-null
-}),
+default
 })
-}, new Dictionary<string, int>()
-{
-    ["key"] = 1234,
-}, new Dictionary<string, string>()
-{
-    ["key"] = "<requiredStringRecord>",
-}, new Dictionary<string, RecordItem>()
-{
-    ["key"] = null,
-}, BinaryData.FromObjectAsJson(new object()), new List<int>()
-{
-1234
-}, BinaryData.FromObjectAsJson(new object()), new List<int>()
-{
-1234
-}, new List<int>()
-{
-1234
-}, new List<string>()
-{
-"<requiredNullableStringList>"
-});
+})
+            }, new Dictionary<string, int>
+            {
+                ["key"] = 1234
+            }, new Dictionary<string, string>
+            {
+                ["key"] = "<requiredStringRecord>"
+            }, new Dictionary<string, RecordItem>
+            {
+                ["key"] = default
+            }, BinaryData.FromObjectAsJson(new object()), new int[] { 1234 }, BinaryData.FromObjectAsJson(new object()), new int[] { 1234 }, new int[] { 1234 }, new string[] { "<requiredNullableStringList>" });
             Response<OutputModel> response = client.RoundTripToOutput(input);
         }
 
@@ -1896,37 +1413,25 @@ null
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-            RoundTripModel input = new RoundTripModel("<requiredString>", 1234, 1234, "<requiredNullableString>", new DerivedModelWithDiscriminatorA(1234, "<requiredString>"), FixedStringEnum.One, FixedIntEnum.One, ExtensibleEnum.One, new List<CollectionItem>()
+            RoundTripModel input = new RoundTripModel("<requiredString>", 1234, 1234, "<requiredNullableString>", new DerivedModelWithDiscriminatorA(1234, "<requiredString>"), FixedStringEnum.One, FixedIntEnum.One, ExtensibleEnum.One, new CollectionItem[]
+            {
+new CollectionItem(new Dictionary<string, RecordItem>
 {
-new CollectionItem(new Dictionary<string, RecordItem>()
+["key"] = new RecordItem(new CollectionItem[]
 {
-["key"] = new RecordItem(new List<CollectionItem>()
-{
-null
-}),
+default
 })
-}, new Dictionary<string, int>()
-{
-    ["key"] = 1234,
-}, new Dictionary<string, string>()
-{
-    ["key"] = "<requiredStringRecord>",
-}, new Dictionary<string, RecordItem>()
-{
-    ["key"] = null,
-}, BinaryData.FromObjectAsJson(new object()), new List<int>()
-{
-1234
-}, BinaryData.FromObjectAsJson(new object()), new List<int>()
-{
-1234
-}, new List<int>()
-{
-1234
-}, new List<string>()
-{
-"<requiredNullableStringList>"
-});
+})
+            }, new Dictionary<string, int>
+            {
+                ["key"] = 1234
+            }, new Dictionary<string, string>
+            {
+                ["key"] = "<requiredStringRecord>"
+            }, new Dictionary<string, RecordItem>
+            {
+                ["key"] = default
+            }, BinaryData.FromObjectAsJson(new object()), new int[] { 1234 }, BinaryData.FromObjectAsJson(new object()), new int[] { 1234 }, new int[] { 1234 }, new string[] { "<requiredNullableStringList>" });
             Response<OutputModel> response = await client.RoundTripToOutputAsync(input);
         }
 
@@ -1957,22 +1462,22 @@ null
                 requiredFixedStringEnum = "1",
                 requiredFixedIntEnum = 1,
                 requiredExtensibleEnum = "1",
-                requiredList = new List<object>()
-{
+                requiredList = new object[]
+            {
 new
 {
 requiredModelRecord = new
 {
 key = new
 {
-requiredList = new List<object>()
+requiredList = new object[]
 {
 null
 },
 },
 },
 }
-},
+            },
                 requiredIntRecord = new
                 {
                     key = 1234,
@@ -1981,51 +1486,45 @@ null
                 {
                     key = "<requiredStringRecord>",
                 },
-                requiredModelRecord = new
-                {
-                },
+                requiredModelRecord = new { },
                 requiredBytes = new object(),
                 optionalBytes = new object(),
-                requiredUint8Array = new List<object>()
-{
+                requiredUint8Array = new object[]
+            {
 1234
-},
-                optionalUint8Array = new List<object>()
-{
+            },
+                optionalUint8Array = new object[]
+            {
 1234
-},
+            },
                 requiredUnknown = new object(),
                 optionalUnknown = new object(),
-                requiredInt8Array = new List<object>()
-{
+                requiredInt8Array = new object[]
+            {
 1234
-},
-                optionalInt8Array = new List<object>()
-{
+            },
+                optionalInt8Array = new object[]
+            {
 1234
-},
-                requiredNullableIntList = new List<object>()
-{
+            },
+                requiredNullableIntList = new object[]
+            {
 1234
-},
-                requiredNullableStringList = new List<object>()
-{
+            },
+                requiredNullableStringList = new object[]
+            {
 "<requiredNullableStringList>"
-},
-                nonRequiredNullableIntList = new List<object>()
-{
+            },
+                nonRequiredNullableIntList = new object[]
+            {
 1234
-},
-                nonRequiredNullableStringList = new List<object>()
-{
+            },
+                nonRequiredNullableStringList = new object[]
+            {
 "<nonRequiredNullableStringList>"
-},
+            },
             });
             Response response = client.RoundTripToOutput(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("requiredString").ToString());
-            Console.WriteLine(result.GetProperty("requiredInt").ToString());
         }
 
         [Test]
@@ -2055,22 +1554,22 @@ null
                 requiredFixedStringEnum = "1",
                 requiredFixedIntEnum = 1,
                 requiredExtensibleEnum = "1",
-                requiredList = new List<object>()
-{
+                requiredList = new object[]
+            {
 new
 {
 requiredModelRecord = new
 {
 key = new
 {
-requiredList = new List<object>()
+requiredList = new object[]
 {
 null
 },
 },
 },
 }
-},
+            },
                 requiredIntRecord = new
                 {
                     key = 1234,
@@ -2079,51 +1578,45 @@ null
                 {
                     key = "<requiredStringRecord>",
                 },
-                requiredModelRecord = new
-                {
-                },
+                requiredModelRecord = new { },
                 requiredBytes = new object(),
                 optionalBytes = new object(),
-                requiredUint8Array = new List<object>()
-{
+                requiredUint8Array = new object[]
+            {
 1234
-},
-                optionalUint8Array = new List<object>()
-{
+            },
+                optionalUint8Array = new object[]
+            {
 1234
-},
+            },
                 requiredUnknown = new object(),
                 optionalUnknown = new object(),
-                requiredInt8Array = new List<object>()
-{
+                requiredInt8Array = new object[]
+            {
 1234
-},
-                optionalInt8Array = new List<object>()
-{
+            },
+                optionalInt8Array = new object[]
+            {
 1234
-},
-                requiredNullableIntList = new List<object>()
-{
+            },
+                requiredNullableIntList = new object[]
+            {
 1234
-},
-                requiredNullableStringList = new List<object>()
-{
+            },
+                requiredNullableStringList = new object[]
+            {
 "<requiredNullableStringList>"
-},
-                nonRequiredNullableIntList = new List<object>()
-{
+            },
+                nonRequiredNullableIntList = new object[]
+            {
 1234
-},
-                nonRequiredNullableStringList = new List<object>()
-{
+            },
+                nonRequiredNullableStringList = new object[]
+            {
 "<nonRequiredNullableStringList>"
-},
+            },
             });
             Response response = await client.RoundTripToOutputAsync(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("requiredString").ToString());
-            Console.WriteLine(result.GetProperty("requiredInt").ToString());
         }
 
         [Test]
@@ -2136,60 +1629,36 @@ null
             RoundTripModel input = new RoundTripModel("<requiredString>", 1234, 1234, "<requiredNullableString>", new DerivedModelWithDiscriminatorA(1234, "<requiredString>")
             {
                 OptionalPropertyOnBase = "<optionalPropertyOnBase>",
-            }, FixedStringEnum.One, FixedIntEnum.One, ExtensibleEnum.One, new List<CollectionItem>()
+            }, FixedStringEnum.One, FixedIntEnum.One, ExtensibleEnum.One, new CollectionItem[]
+            {
+new CollectionItem(new Dictionary<string, RecordItem>
 {
-new CollectionItem(new Dictionary<string, RecordItem>()
+["key"] = new RecordItem(new CollectionItem[]
 {
-["key"] = new RecordItem(new List<CollectionItem>()
-{
-null
-}),
+default
 })
-}, new Dictionary<string, int>()
-{
-    ["key"] = 1234,
-}, new Dictionary<string, string>()
-{
-    ["key"] = "<requiredStringRecord>",
-}, new Dictionary<string, RecordItem>()
-{
-    ["key"] = null,
-}, BinaryData.FromObjectAsJson(new object()), new List<int>()
-{
-1234
-}, BinaryData.FromObjectAsJson(new object()), new List<int>()
-{
-1234
-}, new List<int>()
-{
-1234
-}, new List<string>()
-{
-"<requiredNullableStringList>"
 })
+            }, new Dictionary<string, int>
+            {
+                ["key"] = 1234
+            }, new Dictionary<string, string>
+            {
+                ["key"] = "<requiredStringRecord>"
+            }, new Dictionary<string, RecordItem>
+            {
+                ["key"] = default
+            }, BinaryData.FromObjectAsJson(new object()), new int[] { 1234 }, BinaryData.FromObjectAsJson(new object()), new int[] { 1234 }, new int[] { 1234 }, new string[] { "<requiredNullableStringList>" })
             {
                 NonRequiredString = "<nonRequiredString>",
                 NonRequiredInt = 1234,
                 NonRequiredNullableInt = 1234,
                 NonRequiredNullableString = "<nonRequiredNullableString>",
                 OptionalBytes = BinaryData.FromObjectAsJson(new object()),
-                OptionalUint8Array =
-{
-1234
-},
+                OptionalUint8Array = { 1234 },
                 OptionalUnknown = BinaryData.FromObjectAsJson(new object()),
-                OptionalInt8Array =
-{
-1234
-},
-                NonRequiredNullableIntList =
-{
-1234
-},
-                NonRequiredNullableStringList =
-{
-"<nonRequiredNullableStringList>"
-},
+                OptionalInt8Array = { 1234 },
+                NonRequiredNullableIntList = { 1234 },
+                NonRequiredNullableStringList = { "<nonRequiredNullableStringList>" },
             };
             Response<OutputModel> response = client.RoundTripToOutput(input);
         }
@@ -2204,60 +1673,36 @@ null
             RoundTripModel input = new RoundTripModel("<requiredString>", 1234, 1234, "<requiredNullableString>", new DerivedModelWithDiscriminatorA(1234, "<requiredString>")
             {
                 OptionalPropertyOnBase = "<optionalPropertyOnBase>",
-            }, FixedStringEnum.One, FixedIntEnum.One, ExtensibleEnum.One, new List<CollectionItem>()
+            }, FixedStringEnum.One, FixedIntEnum.One, ExtensibleEnum.One, new CollectionItem[]
+            {
+new CollectionItem(new Dictionary<string, RecordItem>
 {
-new CollectionItem(new Dictionary<string, RecordItem>()
+["key"] = new RecordItem(new CollectionItem[]
 {
-["key"] = new RecordItem(new List<CollectionItem>()
-{
-null
-}),
+default
 })
-}, new Dictionary<string, int>()
-{
-    ["key"] = 1234,
-}, new Dictionary<string, string>()
-{
-    ["key"] = "<requiredStringRecord>",
-}, new Dictionary<string, RecordItem>()
-{
-    ["key"] = null,
-}, BinaryData.FromObjectAsJson(new object()), new List<int>()
-{
-1234
-}, BinaryData.FromObjectAsJson(new object()), new List<int>()
-{
-1234
-}, new List<int>()
-{
-1234
-}, new List<string>()
-{
-"<requiredNullableStringList>"
 })
+            }, new Dictionary<string, int>
+            {
+                ["key"] = 1234
+            }, new Dictionary<string, string>
+            {
+                ["key"] = "<requiredStringRecord>"
+            }, new Dictionary<string, RecordItem>
+            {
+                ["key"] = default
+            }, BinaryData.FromObjectAsJson(new object()), new int[] { 1234 }, BinaryData.FromObjectAsJson(new object()), new int[] { 1234 }, new int[] { 1234 }, new string[] { "<requiredNullableStringList>" })
             {
                 NonRequiredString = "<nonRequiredString>",
                 NonRequiredInt = 1234,
                 NonRequiredNullableInt = 1234,
                 NonRequiredNullableString = "<nonRequiredNullableString>",
                 OptionalBytes = BinaryData.FromObjectAsJson(new object()),
-                OptionalUint8Array =
-{
-1234
-},
+                OptionalUint8Array = { 1234 },
                 OptionalUnknown = BinaryData.FromObjectAsJson(new object()),
-                OptionalInt8Array =
-{
-1234
-},
-                NonRequiredNullableIntList =
-{
-1234
-},
-                NonRequiredNullableStringList =
-{
-"<nonRequiredNullableStringList>"
-},
+                OptionalInt8Array = { 1234 },
+                NonRequiredNullableIntList = { 1234 },
+                NonRequiredNullableStringList = { "<nonRequiredNullableStringList>" },
             };
             Response<OutputModel> response = await client.RoundTripToOutputAsync(input);
         }
@@ -2274,7 +1719,6 @@ null
                 message = "<message>",
             });
             Response response = client.InputRecursive(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -2289,7 +1733,6 @@ null
                 message = "<message>",
             });
             Response response = await client.InputRecursiveAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -2301,7 +1744,6 @@ null
 
             InputRecursiveModel input = new InputRecursiveModel("<message>");
             Response response = client.InputRecursive(input);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -2313,7 +1755,6 @@ null
 
             InputRecursiveModel input = new InputRecursiveModel("<message>");
             Response response = await client.InputRecursiveAsync(input);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -2328,7 +1769,6 @@ null
                 message = "<message>",
             });
             Response response = client.InputRecursive(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -2343,7 +1783,6 @@ null
                 message = "<message>",
             });
             Response response = await client.InputRecursiveAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -2355,10 +1794,9 @@ null
 
             InputRecursiveModel input = new InputRecursiveModel("<message>")
             {
-                Inner = null,
+                Inner = default,
             };
             Response response = client.InputRecursive(input);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -2370,10 +1808,9 @@ null
 
             InputRecursiveModel input = new InputRecursiveModel("<message>")
             {
-                Inner = null,
+                Inner = default,
             };
             Response response = await client.InputRecursiveAsync(input);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -2388,9 +1825,6 @@ null
                 message = "<message>",
             });
             Response response = client.RoundTripRecursive(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("message").ToString());
         }
 
         [Test]
@@ -2405,9 +1839,6 @@ null
                 message = "<message>",
             });
             Response response = await client.RoundTripRecursiveAsync(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("message").ToString());
         }
 
         [Test]
@@ -2444,10 +1875,6 @@ null
                 message = "<message>",
             });
             Response response = client.RoundTripRecursive(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("message").ToString());
-            Console.WriteLine(result.GetProperty("inner").GetProperty("message").ToString());
         }
 
         [Test]
@@ -2462,10 +1889,6 @@ null
                 message = "<message>",
             });
             Response response = await client.RoundTripRecursiveAsync(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("message").ToString());
-            Console.WriteLine(result.GetProperty("inner").GetProperty("message").ToString());
         }
 
         [Test]
@@ -2477,7 +1900,7 @@ null
 
             RoundTripRecursiveModel input = new RoundTripRecursiveModel("<message>")
             {
-                Inner = null,
+                Inner = default,
             };
             Response<RoundTripRecursiveModel> response = client.RoundTripRecursive(input);
         }
@@ -2491,7 +1914,7 @@ null
 
             RoundTripRecursiveModel input = new RoundTripRecursiveModel("<message>")
             {
-                Inner = null,
+                Inner = default,
             };
             Response<RoundTripRecursiveModel> response = await client.RoundTripRecursiveAsync(input);
         }
@@ -2504,9 +1927,6 @@ null
             ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
             Response response = client.SelfReference(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("message").ToString());
         }
 
         [Test]
@@ -2517,9 +1937,6 @@ null
             ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
             Response response = await client.SelfReferenceAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("message").ToString());
         }
 
         [Test]
@@ -2550,10 +1967,6 @@ null
             ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
             Response response = client.SelfReference(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("message").ToString());
-            Console.WriteLine(result.GetProperty("innerError").GetProperty("message").ToString());
         }
 
         [Test]
@@ -2564,10 +1977,6 @@ null
             ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
             Response response = await client.SelfReferenceAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("message").ToString());
-            Console.WriteLine(result.GetProperty("innerError").GetProperty("message").ToString());
         }
 
         [Test]
@@ -2599,28 +2008,25 @@ null
 
             RequestContent content = RequestContent.Create(new
             {
-                requiredList = new List<object>()
-{
+                requiredList = new object[]
+            {
 new
 {
 requiredModelRecord = new
 {
 key = new
 {
-requiredList = new List<object>()
+requiredList = new object[]
 {
 null
 },
 },
 },
 }
-},
+            },
                 baseModelProp = "<baseModelProp>",
             });
             Response response = client.RoundTripToOutputWithNoUseBase(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("baseModelProp").ToString());
         }
 
         [Test]
@@ -2632,28 +2038,25 @@ null
 
             RequestContent content = RequestContent.Create(new
             {
-                requiredList = new List<object>()
-{
+                requiredList = new object[]
+            {
 new
 {
 requiredModelRecord = new
 {
 key = new
 {
-requiredList = new List<object>()
+requiredList = new object[]
 {
 null
 },
 },
 },
 }
-},
+            },
                 baseModelProp = "<baseModelProp>",
             });
             Response response = await client.RoundTripToOutputWithNoUseBaseAsync(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("baseModelProp").ToString());
         }
 
         [Test]
@@ -2663,16 +2066,16 @@ null
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-            RoundTripOnNoUse input = new RoundTripOnNoUse("<baseModelProp>", new List<CollectionItem>()
+            RoundTripOnNoUse input = new RoundTripOnNoUse("<baseModelProp>", new CollectionItem[]
+            {
+new CollectionItem(new Dictionary<string, RecordItem>
 {
-new CollectionItem(new Dictionary<string, RecordItem>()
+["key"] = new RecordItem(new CollectionItem[]
 {
-["key"] = new RecordItem(new List<CollectionItem>()
-{
-null
-}),
+default
 })
-});
+})
+            });
             Response<RoundTripOnNoUse> response = client.RoundTripToOutputWithNoUseBase(input);
         }
 
@@ -2683,16 +2086,16 @@ null
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-            RoundTripOnNoUse input = new RoundTripOnNoUse("<baseModelProp>", new List<CollectionItem>()
+            RoundTripOnNoUse input = new RoundTripOnNoUse("<baseModelProp>", new CollectionItem[]
+            {
+new CollectionItem(new Dictionary<string, RecordItem>
 {
-new CollectionItem(new Dictionary<string, RecordItem>()
+["key"] = new RecordItem(new CollectionItem[]
 {
-["key"] = new RecordItem(new List<CollectionItem>()
-{
-null
-}),
+default
 })
-});
+})
+            });
             Response<RoundTripOnNoUse> response = await client.RoundTripToOutputWithNoUseBaseAsync(input);
         }
 
@@ -2705,28 +2108,25 @@ null
 
             RequestContent content = RequestContent.Create(new
             {
-                requiredList = new List<object>()
-{
+                requiredList = new object[]
+            {
 new
 {
 requiredModelRecord = new
 {
 key = new
 {
-requiredList = new List<object>()
+requiredList = new object[]
 {
 null
 },
 },
 },
 }
-},
+            },
                 baseModelProp = "<baseModelProp>",
             });
             Response response = client.RoundTripToOutputWithNoUseBase(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("baseModelProp").ToString());
         }
 
         [Test]
@@ -2738,28 +2138,25 @@ null
 
             RequestContent content = RequestContent.Create(new
             {
-                requiredList = new List<object>()
-{
+                requiredList = new object[]
+            {
 new
 {
 requiredModelRecord = new
 {
 key = new
 {
-requiredList = new List<object>()
+requiredList = new object[]
 {
 null
 },
 },
 },
 }
-},
+            },
                 baseModelProp = "<baseModelProp>",
             });
             Response response = await client.RoundTripToOutputWithNoUseBaseAsync(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("baseModelProp").ToString());
         }
 
         [Test]
@@ -2769,16 +2166,16 @@ null
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-            RoundTripOnNoUse input = new RoundTripOnNoUse("<baseModelProp>", new List<CollectionItem>()
+            RoundTripOnNoUse input = new RoundTripOnNoUse("<baseModelProp>", new CollectionItem[]
+            {
+new CollectionItem(new Dictionary<string, RecordItem>
 {
-new CollectionItem(new Dictionary<string, RecordItem>()
+["key"] = new RecordItem(new CollectionItem[]
 {
-["key"] = new RecordItem(new List<CollectionItem>()
-{
-null
-}),
+default
 })
-});
+})
+            });
             Response<RoundTripOnNoUse> response = client.RoundTripToOutputWithNoUseBase(input);
         }
 
@@ -2789,16 +2186,16 @@ null
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-            RoundTripOnNoUse input = new RoundTripOnNoUse("<baseModelProp>", new List<CollectionItem>()
+            RoundTripOnNoUse input = new RoundTripOnNoUse("<baseModelProp>", new CollectionItem[]
+            {
+new CollectionItem(new Dictionary<string, RecordItem>
 {
-new CollectionItem(new Dictionary<string, RecordItem>()
+["key"] = new RecordItem(new CollectionItem[]
 {
-["key"] = new RecordItem(new List<CollectionItem>()
-{
-null
-}),
+default
 })
-});
+})
+            });
             Response<RoundTripOnNoUse> response = await client.RoundTripToOutputWithNoUseBaseAsync(input);
         }
 
@@ -2810,10 +2207,6 @@ null
             ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
             Response response = client.AnalyzeConversation(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("discriminatorProperty").ToString());
-            Console.WriteLine(result.GetProperty("requiredPropertyOnBase").ToString());
         }
 
         [Test]
@@ -2824,10 +2217,6 @@ null
             ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
             Response response = await client.AnalyzeConversationAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("discriminatorProperty").ToString());
-            Console.WriteLine(result.GetProperty("requiredPropertyOnBase").ToString());
         }
 
         [Test]
@@ -2858,11 +2247,6 @@ null
             ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
             Response response = client.AnalyzeConversation(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("discriminatorProperty").ToString());
-            Console.WriteLine(result.GetProperty("optionalPropertyOnBase").ToString());
-            Console.WriteLine(result.GetProperty("requiredPropertyOnBase").ToString());
         }
 
         [Test]
@@ -2873,11 +2257,6 @@ null
             ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
             Response response = await client.AnalyzeConversationAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("discriminatorProperty").ToString());
-            Console.WriteLine(result.GetProperty("optionalPropertyOnBase").ToString());
-            Console.WriteLine(result.GetProperty("requiredPropertyOnBase").ToString());
         }
 
         [Test]
@@ -2908,10 +2287,6 @@ null
             ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
             Response response = client.GetSingleBase(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("kind").ToString());
-            Console.WriteLine(result.GetProperty("size").ToString());
         }
 
         [Test]
@@ -2922,10 +2297,6 @@ null
             ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
             Response response = await client.GetSingleBaseAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("kind").ToString());
-            Console.WriteLine(result.GetProperty("size").ToString());
         }
 
         [Test]
@@ -2956,10 +2327,6 @@ null
             ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
             Response response = client.GetSingleBase(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("kind").ToString());
-            Console.WriteLine(result.GetProperty("size").ToString());
         }
 
         [Test]
@@ -2970,10 +2337,6 @@ null
             ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
             Response response = await client.GetSingleBaseAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("kind").ToString());
-            Console.WriteLine(result.GetProperty("size").ToString());
         }
 
         [Test]
@@ -3006,15 +2369,14 @@ null
             RequestContent content = RequestContent.Create(new
             {
                 kind = "Int32Values",
-                values = new List<object>()
-{
+                values = new object[]
+            {
 1234
-},
+            },
                 value = 1234,
                 field = "<field>",
             });
             Response response = client.GenericType(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -3027,15 +2389,14 @@ null
             RequestContent content = RequestContent.Create(new
             {
                 kind = "Int32Values",
-                values = new List<object>()
-{
+                values = new object[]
+            {
 1234
-},
+            },
                 value = 1234,
                 field = "<field>",
             });
             Response response = await client.GenericTypeAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -3045,12 +2406,8 @@ null
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-            Int32ValuesFacet input = new Int32ValuesFacet("<field>", new List<int>()
-{
-1234
-}, 1234);
+            Int32ValuesFacet input = new Int32ValuesFacet("<field>", new int[] { 1234 }, 1234);
             Response response = client.GenericType(input);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -3060,12 +2417,8 @@ null
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-            Int32ValuesFacet input = new Int32ValuesFacet("<field>", new List<int>()
-{
-1234
-}, 1234);
+            Int32ValuesFacet input = new Int32ValuesFacet("<field>", new int[] { 1234 }, 1234);
             Response response = await client.GenericTypeAsync(input);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -3078,15 +2431,14 @@ null
             RequestContent content = RequestContent.Create(new
             {
                 kind = "Int32Values",
-                values = new List<object>()
-{
+                values = new object[]
+            {
 1234
-},
+            },
                 value = 1234,
                 field = "<field>",
             });
             Response response = client.GenericType(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -3099,15 +2451,14 @@ null
             RequestContent content = RequestContent.Create(new
             {
                 kind = "Int32Values",
-                values = new List<object>()
-{
+                values = new object[]
+            {
 1234
-},
+            },
                 value = 1234,
                 field = "<field>",
             });
             Response response = await client.GenericTypeAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -3117,12 +2468,8 @@ null
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-            Int32ValuesFacet input = new Int32ValuesFacet("<field>", new List<int>()
-{
-1234
-}, 1234);
+            Int32ValuesFacet input = new Int32ValuesFacet("<field>", new int[] { 1234 }, 1234);
             Response response = client.GenericType(input);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -3132,12 +2479,8 @@ null
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-            Int32ValuesFacet input = new Int32ValuesFacet("<field>", new List<int>()
-{
-1234
-}, 1234);
+            Int32ValuesFacet input = new Int32ValuesFacet("<field>", new int[] { 1234 }, 1234);
             Response response = await client.GenericTypeAsync(input);
-            Console.WriteLine(response.Status);
         }
     }
 }

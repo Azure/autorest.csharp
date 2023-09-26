@@ -38,18 +38,24 @@ This sample shows how to call GetKnownValueAsync and parse the result.
 FixedClient client = new FixedClient();
 
 Response response = await client.GetKnownValueAsync(null);
+]]></code>
+This sample shows how to call GetKnownValueAsync.
+<code><![CDATA[
+FixedClient client = new FixedClient();
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
+Response<DaysOfWeekEnum> response = await client.GetKnownValueAsync();
 ]]></code>
 This sample shows how to call GetKnownValueAsync with all parameters and parse the result.
 <code><![CDATA[
 FixedClient client = new FixedClient();
 
 Response response = await client.GetKnownValueAsync(null);
+]]></code>
+This sample shows how to call GetKnownValueAsync with all parameters.
+<code><![CDATA[
+FixedClient client = new FixedClient();
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
+Response<DaysOfWeekEnum> response = await client.GetKnownValueAsync();
 ]]></code></example>
     </member>
     <member name="GetKnownValue(RequestContext)">
@@ -59,18 +65,24 @@ This sample shows how to call GetKnownValue and parse the result.
 FixedClient client = new FixedClient();
 
 Response response = client.GetKnownValue(null);
+]]></code>
+This sample shows how to call GetKnownValue.
+<code><![CDATA[
+FixedClient client = new FixedClient();
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
+Response<DaysOfWeekEnum> response = client.GetKnownValue();
 ]]></code>
 This sample shows how to call GetKnownValue with all parameters and parse the result.
 <code><![CDATA[
 FixedClient client = new FixedClient();
 
 Response response = client.GetKnownValue(null);
+]]></code>
+This sample shows how to call GetKnownValue with all parameters.
+<code><![CDATA[
+FixedClient client = new FixedClient();
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
+Response<DaysOfWeekEnum> response = client.GetKnownValue();
 ]]></code></example>
     </member>
     <member name="PutKnownValueAsync(DaysOfWeekEnum,CancellationToken)">
@@ -80,14 +92,12 @@ This sample shows how to call PutKnownValueAsync.
 FixedClient client = new FixedClient();
 
 Response response = await client.PutKnownValueAsync(DaysOfWeekEnum.Monday);
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutKnownValueAsync with all parameters.
 <code><![CDATA[
 FixedClient client = new FixedClient();
 
 Response response = await client.PutKnownValueAsync(DaysOfWeekEnum.Monday);
-Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="PutKnownValue(DaysOfWeekEnum,CancellationToken)">
@@ -97,14 +107,12 @@ This sample shows how to call PutKnownValue.
 FixedClient client = new FixedClient();
 
 Response response = client.PutKnownValue(DaysOfWeekEnum.Monday);
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutKnownValue with all parameters.
 <code><![CDATA[
 FixedClient client = new FixedClient();
 
 Response response = client.PutKnownValue(DaysOfWeekEnum.Monday);
-Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="PutKnownValueAsync(RequestContent,RequestContext)">
@@ -115,7 +123,12 @@ FixedClient client = new FixedClient();
 
 RequestContent content = RequestContent.Create("Monday");
 Response response = await client.PutKnownValueAsync(content);
-Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call PutKnownValueAsync.
+<code><![CDATA[
+FixedClient client = new FixedClient();
+
+Response response = await client.PutKnownValueAsync(DaysOfWeekEnum.Monday);
 ]]></code>
 This sample shows how to call PutKnownValueAsync with all request content.
 <code><![CDATA[
@@ -123,7 +136,12 @@ FixedClient client = new FixedClient();
 
 RequestContent content = RequestContent.Create("Monday");
 Response response = await client.PutKnownValueAsync(content);
-Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call PutKnownValueAsync with all parameters.
+<code><![CDATA[
+FixedClient client = new FixedClient();
+
+Response response = await client.PutKnownValueAsync(DaysOfWeekEnum.Monday);
 ]]></code></example>
     </member>
     <member name="PutKnownValue(RequestContent,RequestContext)">
@@ -134,7 +152,12 @@ FixedClient client = new FixedClient();
 
 RequestContent content = RequestContent.Create("Monday");
 Response response = client.PutKnownValue(content);
-Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call PutKnownValue.
+<code><![CDATA[
+FixedClient client = new FixedClient();
+
+Response response = client.PutKnownValue(DaysOfWeekEnum.Monday);
 ]]></code>
 This sample shows how to call PutKnownValue with all request content.
 <code><![CDATA[
@@ -142,7 +165,12 @@ FixedClient client = new FixedClient();
 
 RequestContent content = RequestContent.Create("Monday");
 Response response = client.PutKnownValue(content);
-Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call PutKnownValue with all parameters.
+<code><![CDATA[
+FixedClient client = new FixedClient();
+
+Response response = client.PutKnownValue(DaysOfWeekEnum.Monday);
 ]]></code></example>
     </member>
     <member name="PutUnknownValueAsync(DaysOfWeekEnum,CancellationToken)">
@@ -152,14 +180,12 @@ This sample shows how to call PutUnknownValueAsync.
 FixedClient client = new FixedClient();
 
 Response response = await client.PutUnknownValueAsync(DaysOfWeekEnum.Monday);
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutUnknownValueAsync with all parameters.
 <code><![CDATA[
 FixedClient client = new FixedClient();
 
 Response response = await client.PutUnknownValueAsync(DaysOfWeekEnum.Monday);
-Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="PutUnknownValue(DaysOfWeekEnum,CancellationToken)">
@@ -169,14 +195,12 @@ This sample shows how to call PutUnknownValue.
 FixedClient client = new FixedClient();
 
 Response response = client.PutUnknownValue(DaysOfWeekEnum.Monday);
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutUnknownValue with all parameters.
 <code><![CDATA[
 FixedClient client = new FixedClient();
 
 Response response = client.PutUnknownValue(DaysOfWeekEnum.Monday);
-Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="PutUnknownValueAsync(RequestContent,RequestContext)">
@@ -187,7 +211,12 @@ FixedClient client = new FixedClient();
 
 RequestContent content = RequestContent.Create("Monday");
 Response response = await client.PutUnknownValueAsync(content);
-Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call PutUnknownValueAsync.
+<code><![CDATA[
+FixedClient client = new FixedClient();
+
+Response response = await client.PutUnknownValueAsync(DaysOfWeekEnum.Monday);
 ]]></code>
 This sample shows how to call PutUnknownValueAsync with all request content.
 <code><![CDATA[
@@ -195,7 +224,12 @@ FixedClient client = new FixedClient();
 
 RequestContent content = RequestContent.Create("Monday");
 Response response = await client.PutUnknownValueAsync(content);
-Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call PutUnknownValueAsync with all parameters.
+<code><![CDATA[
+FixedClient client = new FixedClient();
+
+Response response = await client.PutUnknownValueAsync(DaysOfWeekEnum.Monday);
 ]]></code></example>
     </member>
     <member name="PutUnknownValue(RequestContent,RequestContext)">
@@ -206,7 +240,12 @@ FixedClient client = new FixedClient();
 
 RequestContent content = RequestContent.Create("Monday");
 Response response = client.PutUnknownValue(content);
-Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call PutUnknownValue.
+<code><![CDATA[
+FixedClient client = new FixedClient();
+
+Response response = client.PutUnknownValue(DaysOfWeekEnum.Monday);
 ]]></code>
 This sample shows how to call PutUnknownValue with all request content.
 <code><![CDATA[
@@ -214,7 +253,12 @@ FixedClient client = new FixedClient();
 
 RequestContent content = RequestContent.Create("Monday");
 Response response = client.PutUnknownValue(content);
-Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call PutUnknownValue with all parameters.
+<code><![CDATA[
+FixedClient client = new FixedClient();
+
+Response response = client.PutUnknownValue(DaysOfWeekEnum.Monday);
 ]]></code></example>
     </member>
   </members>

@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Identity;
@@ -14,46 +13,42 @@ using SpecialWords;
 
 namespace SpecialWords.Samples
 {
-    internal class Samples_Operation
+    public class Samples_Operation
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_For()
         {
-            Operation client = new SpecialWordsClient().GetOperationClient(apiVersion: "1.0.0");
+            Operation client = new SpecialWordsClient().GetOperationClient("1.0.0");
 
             Response response = client.For();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public async Task Example_For_Async()
         {
-            Operation client = new SpecialWordsClient().GetOperationClient(apiVersion: "1.0.0");
+            Operation client = new SpecialWordsClient().GetOperationClient("1.0.0");
 
             Response response = await client.ForAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_For_AllParameters()
         {
-            Operation client = new SpecialWordsClient().GetOperationClient(apiVersion: "1.0.0");
+            Operation client = new SpecialWordsClient().GetOperationClient("1.0.0");
 
             Response response = client.For();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public async Task Example_For_AllParameters_Async()
         {
-            Operation client = new SpecialWordsClient().GetOperationClient(apiVersion: "1.0.0");
+            Operation client = new SpecialWordsClient().GetOperationClient("1.0.0");
 
             Response response = await client.ForAsync();
-            Console.WriteLine(response.Status);
         }
     }
 }

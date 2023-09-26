@@ -24,7 +24,6 @@ namespace Server.Path.Single.Samples
             SingleClient client = new SingleClient(endpoint);
 
             Response response = client.MyOp();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -35,7 +34,6 @@ namespace Server.Path.Single.Samples
             SingleClient client = new SingleClient(endpoint);
 
             Response response = await client.MyOpAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -46,7 +44,6 @@ namespace Server.Path.Single.Samples
             SingleClient client = new SingleClient(endpoint);
 
             Response response = client.MyOp();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -57,7 +54,6 @@ namespace Server.Path.Single.Samples
             SingleClient client = new SingleClient(endpoint);
 
             Response response = await client.MyOpAsync();
-            Console.WriteLine(response.Status);
         }
     }
 }

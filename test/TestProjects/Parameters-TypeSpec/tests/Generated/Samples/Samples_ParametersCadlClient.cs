@@ -5,8 +5,6 @@
 
 #nullable disable
 
-using System;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Identity;
@@ -25,9 +23,6 @@ namespace ParametersCadl.Samples
             ParametersCadlClient client = new ParametersCadlClient();
 
             Response response = client.Operation(1234, null, null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
         }
 
         [Test]
@@ -37,9 +32,6 @@ namespace ParametersCadl.Samples
             ParametersCadlClient client = new ParametersCadlClient();
 
             Response response = await client.OperationAsync(1234, null, null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
         }
 
         [Test]
@@ -67,9 +59,6 @@ namespace ParametersCadl.Samples
             ParametersCadlClient client = new ParametersCadlClient();
 
             Response response = client.Operation(1234, 1234, null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
         }
 
         [Test]
@@ -79,9 +68,6 @@ namespace ParametersCadl.Samples
             ParametersCadlClient client = new ParametersCadlClient();
 
             Response response = await client.OperationAsync(1234, 1234, null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
         }
 
         [Test]
@@ -90,7 +76,7 @@ namespace ParametersCadl.Samples
         {
             ParametersCadlClient client = new ParametersCadlClient();
 
-            Response<Result> response = client.Operation(1234, end: 1234);
+            Response<Result> response = client.Operation(1234, 1234);
         }
 
         [Test]
@@ -99,7 +85,7 @@ namespace ParametersCadl.Samples
         {
             ParametersCadlClient client = new ParametersCadlClient();
 
-            Response<Result> response = await client.OperationAsync(1234, end: 1234);
+            Response<Result> response = await client.OperationAsync(1234, 1234);
         }
 
         [Test]
@@ -109,9 +95,6 @@ namespace ParametersCadl.Samples
             ParametersCadlClient client = new ParametersCadlClient();
 
             Response response = client.Operation2(1234, null, null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
         }
 
         [Test]
@@ -121,9 +104,6 @@ namespace ParametersCadl.Samples
             ParametersCadlClient client = new ParametersCadlClient();
 
             Response response = await client.Operation2Async(1234, null, null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
         }
 
         [Test]
@@ -151,9 +131,6 @@ namespace ParametersCadl.Samples
             ParametersCadlClient client = new ParametersCadlClient();
 
             Response response = client.Operation2(1234, 1234, null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
         }
 
         [Test]
@@ -163,9 +140,6 @@ namespace ParametersCadl.Samples
             ParametersCadlClient client = new ParametersCadlClient();
 
             Response response = await client.Operation2Async(1234, 1234, null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
         }
 
         [Test]
@@ -174,7 +148,7 @@ namespace ParametersCadl.Samples
         {
             ParametersCadlClient client = new ParametersCadlClient();
 
-            Response<Result> response = client.Operation2(1234, start: 1234);
+            Response<Result> response = client.Operation2(1234, 1234);
         }
 
         [Test]
@@ -183,7 +157,7 @@ namespace ParametersCadl.Samples
         {
             ParametersCadlClient client = new ParametersCadlClient();
 
-            Response<Result> response = await client.Operation2Async(1234, start: 1234);
+            Response<Result> response = await client.Operation2Async(1234, 1234);
         }
     }
 }

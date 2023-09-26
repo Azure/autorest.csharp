@@ -382,6 +382,7 @@ namespace AutoRest.CSharp.Generation.Writers
                         break;
                     }
 
+                    writer.Line();
                     writer.LineRaw("{");
                     foreach (var (key, value) in values)
                     {

@@ -9,9 +9,6 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 Client5 client = new TopLevelClientWithoutOperationClient(credential).GetClient5Client();
 
 Response response = await client.OperationAsync(null);
-
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call OperationAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -19,9 +16,6 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 Client5 client = new TopLevelClientWithoutOperationClient(credential).GetClient5Client();
 
 Response response = await client.OperationAsync(null);
-
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
     <member name="Operation(RequestContext)">
@@ -32,9 +26,6 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 Client5 client = new TopLevelClientWithoutOperationClient(credential).GetClient5Client();
 
 Response response = client.Operation(null);
-
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call Operation with all parameters and parse the result.
 <code><![CDATA[
@@ -42,9 +33,6 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 Client5 client = new TopLevelClientWithoutOperationClient(credential).GetClient5Client();
 
 Response response = client.Operation(null);
-
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
   </members>

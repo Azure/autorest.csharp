@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Identity;
@@ -23,7 +22,6 @@ namespace Projection.ProjectedName.Samples
             ProjectedNameClient client = new ProjectedNameClient();
 
             Response response = client.Operation();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -33,7 +31,6 @@ namespace Projection.ProjectedName.Samples
             ProjectedNameClient client = new ProjectedNameClient();
 
             Response response = await client.OperationAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -43,7 +40,6 @@ namespace Projection.ProjectedName.Samples
             ProjectedNameClient client = new ProjectedNameClient();
 
             Response response = client.Operation();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -53,7 +49,6 @@ namespace Projection.ProjectedName.Samples
             ProjectedNameClient client = new ProjectedNameClient();
 
             Response response = await client.OperationAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -63,7 +58,6 @@ namespace Projection.ProjectedName.Samples
             ProjectedNameClient client = new ProjectedNameClient();
 
             Response response = client.Parameter("<default-name>");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -73,7 +67,6 @@ namespace Projection.ProjectedName.Samples
             ProjectedNameClient client = new ProjectedNameClient();
 
             Response response = await client.ParameterAsync("<default-name>");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -83,7 +76,6 @@ namespace Projection.ProjectedName.Samples
             ProjectedNameClient client = new ProjectedNameClient();
 
             Response response = client.Parameter("<default-name>");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -93,7 +85,6 @@ namespace Projection.ProjectedName.Samples
             ProjectedNameClient client = new ProjectedNameClient();
 
             Response response = await client.ParameterAsync("<default-name>");
-            Console.WriteLine(response.Status);
         }
     }
 }

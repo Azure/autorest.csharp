@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -29,7 +28,6 @@ namespace Parameters.BodyOptionality.Samples
                 name = "<name>",
             });
             Response response = client.RequiredExplicit(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -43,7 +41,6 @@ namespace Parameters.BodyOptionality.Samples
                 name = "<name>",
             });
             Response response = await client.RequiredExplicitAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -54,7 +51,6 @@ namespace Parameters.BodyOptionality.Samples
 
             BodyModel body = new BodyModel("<name>");
             Response response = client.RequiredExplicit(body);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -65,7 +61,6 @@ namespace Parameters.BodyOptionality.Samples
 
             BodyModel body = new BodyModel("<name>");
             Response response = await client.RequiredExplicitAsync(body);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -79,7 +74,6 @@ namespace Parameters.BodyOptionality.Samples
                 name = "<name>",
             });
             Response response = client.RequiredExplicit(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -93,7 +87,6 @@ namespace Parameters.BodyOptionality.Samples
                 name = "<name>",
             });
             Response response = await client.RequiredExplicitAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -104,7 +97,6 @@ namespace Parameters.BodyOptionality.Samples
 
             BodyModel body = new BodyModel("<name>");
             Response response = client.RequiredExplicit(body);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -115,7 +107,6 @@ namespace Parameters.BodyOptionality.Samples
 
             BodyModel body = new BodyModel("<name>");
             Response response = await client.RequiredExplicitAsync(body);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -129,7 +120,6 @@ namespace Parameters.BodyOptionality.Samples
                 name = "<name>",
             });
             Response response = client.RequiredImplicit(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -143,7 +133,6 @@ namespace Parameters.BodyOptionality.Samples
                 name = "<name>",
             });
             Response response = await client.RequiredImplicitAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -154,7 +143,6 @@ namespace Parameters.BodyOptionality.Samples
 
             BodyModel bodyModel = new BodyModel("<name>");
             Response response = client.RequiredImplicit(bodyModel);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -165,7 +153,6 @@ namespace Parameters.BodyOptionality.Samples
 
             BodyModel bodyModel = new BodyModel("<name>");
             Response response = await client.RequiredImplicitAsync(bodyModel);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -179,7 +166,6 @@ namespace Parameters.BodyOptionality.Samples
                 name = "<name>",
             });
             Response response = client.RequiredImplicit(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -193,7 +179,6 @@ namespace Parameters.BodyOptionality.Samples
                 name = "<name>",
             });
             Response response = await client.RequiredImplicitAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -204,7 +189,6 @@ namespace Parameters.BodyOptionality.Samples
 
             BodyModel bodyModel = new BodyModel("<name>");
             Response response = client.RequiredImplicit(bodyModel);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -215,7 +199,6 @@ namespace Parameters.BodyOptionality.Samples
 
             BodyModel bodyModel = new BodyModel("<name>");
             Response response = await client.RequiredImplicitAsync(bodyModel);
-            Console.WriteLine(response.Status);
         }
     }
 }

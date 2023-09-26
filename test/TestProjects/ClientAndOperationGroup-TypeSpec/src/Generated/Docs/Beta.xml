@@ -9,9 +9,6 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 Beta client = new ClientAndOperationGroupClient(endpoint).GetBetaClient();
 
 Response response = await client.TwoAsync(null);
-
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call TwoAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -19,9 +16,6 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 Beta client = new ClientAndOperationGroupClient(endpoint).GetBetaClient();
 
 Response response = await client.TwoAsync(null);
-
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
     <member name="Two(RequestContext)">
@@ -32,9 +26,6 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 Beta client = new ClientAndOperationGroupClient(endpoint).GetBetaClient();
 
 Response response = client.Two(null);
-
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call Two with all parameters and parse the result.
 <code><![CDATA[
@@ -42,9 +33,6 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 Beta client = new ClientAndOperationGroupClient(endpoint).GetBetaClient();
 
 Response response = client.Two(null);
-
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
     <member name="ThreeAsync(RequestContext)">
@@ -55,9 +43,6 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 Beta client = new ClientAndOperationGroupClient(endpoint).GetBetaClient();
 
 Response response = await client.ThreeAsync(null);
-
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call ThreeAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -65,9 +50,6 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 Beta client = new ClientAndOperationGroupClient(endpoint).GetBetaClient();
 
 Response response = await client.ThreeAsync(null);
-
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
     <member name="Three(RequestContext)">
@@ -78,9 +60,6 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 Beta client = new ClientAndOperationGroupClient(endpoint).GetBetaClient();
 
 Response response = client.Three(null);
-
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call Three with all parameters and parse the result.
 <code><![CDATA[
@@ -88,9 +67,6 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 Beta client = new ClientAndOperationGroupClient(endpoint).GetBetaClient();
 
 Response response = client.Three(null);
-
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
   </members>

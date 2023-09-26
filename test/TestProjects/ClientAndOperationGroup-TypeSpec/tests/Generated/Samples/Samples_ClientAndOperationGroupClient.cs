@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Identity;
@@ -25,9 +24,6 @@ namespace ClientAndOperationGroup.Samples
             ClientAndOperationGroupClient client = new ClientAndOperationGroupClient(endpoint);
 
             Response response = client.Zero(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -38,9 +34,6 @@ namespace ClientAndOperationGroup.Samples
             ClientAndOperationGroupClient client = new ClientAndOperationGroupClient(endpoint);
 
             Response response = await client.ZeroAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -51,9 +44,6 @@ namespace ClientAndOperationGroup.Samples
             ClientAndOperationGroupClient client = new ClientAndOperationGroupClient(endpoint);
 
             Response response = client.Zero(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -64,9 +54,6 @@ namespace ClientAndOperationGroup.Samples
             ClientAndOperationGroupClient client = new ClientAndOperationGroupClient(endpoint);
 
             Response response = await client.ZeroAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -77,9 +64,6 @@ namespace ClientAndOperationGroup.Samples
             ClientAndOperationGroupClient client = new ClientAndOperationGroupClient(endpoint);
 
             Response response = client.One(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -90,9 +74,6 @@ namespace ClientAndOperationGroup.Samples
             ClientAndOperationGroupClient client = new ClientAndOperationGroupClient(endpoint);
 
             Response response = await client.OneAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -103,9 +84,6 @@ namespace ClientAndOperationGroup.Samples
             ClientAndOperationGroupClient client = new ClientAndOperationGroupClient(endpoint);
 
             Response response = client.One(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -116,9 +94,6 @@ namespace ClientAndOperationGroup.Samples
             ClientAndOperationGroupClient client = new ClientAndOperationGroupClient(endpoint);
 
             Response response = await client.OneAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
     }
 }

@@ -5,8 +5,6 @@
 
 #nullable disable
 
-using System;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Identity;
@@ -16,7 +14,7 @@ using _Specs_.Azure.ClientGenerator.Core.Internal.Models;
 
 namespace _Specs_.Azure.ClientGenerator.Core.Internal.Samples
 {
-    internal class Samples_Shared
+    public class Samples_Shared
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
@@ -25,9 +23,6 @@ namespace _Specs_.Azure.ClientGenerator.Core.Internal.Samples
             Shared client = new InternalClient().GetSharedClient();
 
             Response response = client.Public("<name>", null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]
@@ -37,9 +32,6 @@ namespace _Specs_.Azure.ClientGenerator.Core.Internal.Samples
             Shared client = new InternalClient().GetSharedClient();
 
             Response response = await client.PublicAsync("<name>", null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]
@@ -67,9 +59,6 @@ namespace _Specs_.Azure.ClientGenerator.Core.Internal.Samples
             Shared client = new InternalClient().GetSharedClient();
 
             Response response = client.Public("<name>", null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]
@@ -79,9 +68,6 @@ namespace _Specs_.Azure.ClientGenerator.Core.Internal.Samples
             Shared client = new InternalClient().GetSharedClient();
 
             Response response = await client.PublicAsync("<name>", null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]

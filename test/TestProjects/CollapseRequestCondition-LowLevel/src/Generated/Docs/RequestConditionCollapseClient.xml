@@ -10,7 +10,6 @@ RequestConditionCollapseClient client = new RequestConditionCollapseClient(crede
 
 RequestContent content = null;
 Response response = await client.CollapsePutAsync(content);
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call CollapsePutAsync with all parameters and request content.
 <code><![CDATA[
@@ -18,8 +17,7 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 RequestConditionCollapseClient client = new RequestConditionCollapseClient(credential);
 
 RequestContent content = RequestContent.Create("<body>");
-Response response = await client.CollapsePutAsync(content, requestConditions: null);
-Console.WriteLine(response.Status);
+Response response = await client.CollapsePutAsync(content, null);
 ]]></code></example>
     </member>
     <member name="CollapsePut(RequestContent,RequestConditions,RequestContext)">
@@ -31,7 +29,6 @@ RequestConditionCollapseClient client = new RequestConditionCollapseClient(crede
 
 RequestContent content = null;
 Response response = client.CollapsePut(content);
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call CollapsePut with all parameters and request content.
 <code><![CDATA[
@@ -39,8 +36,7 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 RequestConditionCollapseClient client = new RequestConditionCollapseClient(credential);
 
 RequestContent content = RequestContent.Create("<body>");
-Response response = client.CollapsePut(content, requestConditions: null);
-Console.WriteLine(response.Status);
+Response response = client.CollapsePut(content, null);
 ]]></code></example>
     </member>
     <member name="CollapseGetAsync(RequestConditions,RequestContext)">
@@ -51,15 +47,13 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 RequestConditionCollapseClient client = new RequestConditionCollapseClient(credential);
 
 Response response = await client.CollapseGetAsync();
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call CollapseGetAsync with all parameters.
 <code><![CDATA[
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 RequestConditionCollapseClient client = new RequestConditionCollapseClient(credential);
 
-Response response = await client.CollapseGetAsync(requestConditions: null);
-Console.WriteLine(response.Status);
+Response response = await client.CollapseGetAsync(null);
 ]]></code></example>
     </member>
     <member name="CollapseGet(RequestConditions,RequestContext)">
@@ -70,15 +64,13 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 RequestConditionCollapseClient client = new RequestConditionCollapseClient(credential);
 
 Response response = client.CollapseGet();
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call CollapseGet with all parameters.
 <code><![CDATA[
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 RequestConditionCollapseClient client = new RequestConditionCollapseClient(credential);
 
-Response response = client.CollapseGet(requestConditions: null);
-Console.WriteLine(response.Status);
+Response response = client.CollapseGet(null);
 ]]></code></example>
     </member>
     <member name="MissIfNoneMatchGetAsync(RequestConditions,RequestContext)">
@@ -89,15 +81,13 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 RequestConditionCollapseClient client = new RequestConditionCollapseClient(credential);
 
 Response response = await client.MissIfNoneMatchGetAsync();
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call MissIfNoneMatchGetAsync with all parameters.
 <code><![CDATA[
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 RequestConditionCollapseClient client = new RequestConditionCollapseClient(credential);
 
-Response response = await client.MissIfNoneMatchGetAsync(requestConditions: null);
-Console.WriteLine(response.Status);
+Response response = await client.MissIfNoneMatchGetAsync(null);
 ]]></code></example>
     </member>
     <member name="MissIfNoneMatchGet(RequestConditions,RequestContext)">
@@ -108,15 +98,13 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 RequestConditionCollapseClient client = new RequestConditionCollapseClient(credential);
 
 Response response = client.MissIfNoneMatchGet();
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call MissIfNoneMatchGet with all parameters.
 <code><![CDATA[
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 RequestConditionCollapseClient client = new RequestConditionCollapseClient(credential);
 
-Response response = client.MissIfNoneMatchGet(requestConditions: null);
-Console.WriteLine(response.Status);
+Response response = client.MissIfNoneMatchGet(null);
 ]]></code></example>
     </member>
     <member name="MissIfMatchGetAsync(RequestConditions,RequestContext)">
@@ -127,15 +115,13 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 RequestConditionCollapseClient client = new RequestConditionCollapseClient(credential);
 
 Response response = await client.MissIfMatchGetAsync();
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call MissIfMatchGetAsync with all parameters.
 <code><![CDATA[
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 RequestConditionCollapseClient client = new RequestConditionCollapseClient(credential);
 
-Response response = await client.MissIfMatchGetAsync(requestConditions: null);
-Console.WriteLine(response.Status);
+Response response = await client.MissIfMatchGetAsync(null);
 ]]></code></example>
     </member>
     <member name="MissIfMatchGet(RequestConditions,RequestContext)">
@@ -146,15 +132,13 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 RequestConditionCollapseClient client = new RequestConditionCollapseClient(credential);
 
 Response response = client.MissIfMatchGet();
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call MissIfMatchGet with all parameters.
 <code><![CDATA[
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 RequestConditionCollapseClient client = new RequestConditionCollapseClient(credential);
 
-Response response = client.MissIfMatchGet(requestConditions: null);
-Console.WriteLine(response.Status);
+Response response = client.MissIfMatchGet(null);
 ]]></code></example>
     </member>
     <member name="MissIfModifiedSinceGetAsync(RequestConditions,RequestContext)">
@@ -165,15 +149,13 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 RequestConditionCollapseClient client = new RequestConditionCollapseClient(credential);
 
 Response response = await client.MissIfModifiedSinceGetAsync();
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call MissIfModifiedSinceGetAsync with all parameters.
 <code><![CDATA[
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 RequestConditionCollapseClient client = new RequestConditionCollapseClient(credential);
 
-Response response = await client.MissIfModifiedSinceGetAsync(requestConditions: null);
-Console.WriteLine(response.Status);
+Response response = await client.MissIfModifiedSinceGetAsync(null);
 ]]></code></example>
     </member>
     <member name="MissIfModifiedSinceGet(RequestConditions,RequestContext)">
@@ -184,15 +166,13 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 RequestConditionCollapseClient client = new RequestConditionCollapseClient(credential);
 
 Response response = client.MissIfModifiedSinceGet();
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call MissIfModifiedSinceGet with all parameters.
 <code><![CDATA[
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 RequestConditionCollapseClient client = new RequestConditionCollapseClient(credential);
 
-Response response = client.MissIfModifiedSinceGet(requestConditions: null);
-Console.WriteLine(response.Status);
+Response response = client.MissIfModifiedSinceGet(null);
 ]]></code></example>
     </member>
     <member name="MissIfUnmodifiedSinceGetAsync(RequestConditions,RequestContext)">
@@ -203,15 +183,13 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 RequestConditionCollapseClient client = new RequestConditionCollapseClient(credential);
 
 Response response = await client.MissIfUnmodifiedSinceGetAsync();
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call MissIfUnmodifiedSinceGetAsync with all parameters.
 <code><![CDATA[
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 RequestConditionCollapseClient client = new RequestConditionCollapseClient(credential);
 
-Response response = await client.MissIfUnmodifiedSinceGetAsync(requestConditions: null);
-Console.WriteLine(response.Status);
+Response response = await client.MissIfUnmodifiedSinceGetAsync(null);
 ]]></code></example>
     </member>
     <member name="MissIfUnmodifiedSinceGet(RequestConditions,RequestContext)">
@@ -222,15 +200,13 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 RequestConditionCollapseClient client = new RequestConditionCollapseClient(credential);
 
 Response response = client.MissIfUnmodifiedSinceGet();
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call MissIfUnmodifiedSinceGet with all parameters.
 <code><![CDATA[
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 RequestConditionCollapseClient client = new RequestConditionCollapseClient(credential);
 
-Response response = client.MissIfUnmodifiedSinceGet(requestConditions: null);
-Console.WriteLine(response.Status);
+Response response = client.MissIfUnmodifiedSinceGet(null);
 ]]></code></example>
     </member>
     <member name="MissIfMatchIfNoneMatchGetAsync(RequestConditions,RequestContext)">
@@ -241,15 +217,13 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 RequestConditionCollapseClient client = new RequestConditionCollapseClient(credential);
 
 Response response = await client.MissIfMatchIfNoneMatchGetAsync();
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call MissIfMatchIfNoneMatchGetAsync with all parameters.
 <code><![CDATA[
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 RequestConditionCollapseClient client = new RequestConditionCollapseClient(credential);
 
-Response response = await client.MissIfMatchIfNoneMatchGetAsync(requestConditions: null);
-Console.WriteLine(response.Status);
+Response response = await client.MissIfMatchIfNoneMatchGetAsync(null);
 ]]></code></example>
     </member>
     <member name="MissIfMatchIfNoneMatchGet(RequestConditions,RequestContext)">
@@ -260,15 +234,13 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 RequestConditionCollapseClient client = new RequestConditionCollapseClient(credential);
 
 Response response = client.MissIfMatchIfNoneMatchGet();
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call MissIfMatchIfNoneMatchGet with all parameters.
 <code><![CDATA[
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 RequestConditionCollapseClient client = new RequestConditionCollapseClient(credential);
 
-Response response = client.MissIfMatchIfNoneMatchGet(requestConditions: null);
-Console.WriteLine(response.Status);
+Response response = client.MissIfMatchIfNoneMatchGet(null);
 ]]></code></example>
     </member>
     <member name="IfModifiedSinceGetAsync(RequestConditions,RequestContext)">
@@ -279,15 +251,13 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 RequestConditionCollapseClient client = new RequestConditionCollapseClient(credential);
 
 Response response = await client.IfModifiedSinceGetAsync();
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call IfModifiedSinceGetAsync with all parameters.
 <code><![CDATA[
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 RequestConditionCollapseClient client = new RequestConditionCollapseClient(credential);
 
-Response response = await client.IfModifiedSinceGetAsync(requestConditions: null);
-Console.WriteLine(response.Status);
+Response response = await client.IfModifiedSinceGetAsync(null);
 ]]></code></example>
     </member>
     <member name="IfModifiedSinceGet(RequestConditions,RequestContext)">
@@ -298,15 +268,13 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 RequestConditionCollapseClient client = new RequestConditionCollapseClient(credential);
 
 Response response = client.IfModifiedSinceGet();
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call IfModifiedSinceGet with all parameters.
 <code><![CDATA[
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 RequestConditionCollapseClient client = new RequestConditionCollapseClient(credential);
 
-Response response = client.IfModifiedSinceGet(requestConditions: null);
-Console.WriteLine(response.Status);
+Response response = client.IfModifiedSinceGet(null);
 ]]></code></example>
     </member>
     <member name="IfUnmodifiedSinceGetAsync(RequestConditions,RequestContext)">
@@ -317,15 +285,13 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 RequestConditionCollapseClient client = new RequestConditionCollapseClient(credential);
 
 Response response = await client.IfUnmodifiedSinceGetAsync();
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call IfUnmodifiedSinceGetAsync with all parameters.
 <code><![CDATA[
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 RequestConditionCollapseClient client = new RequestConditionCollapseClient(credential);
 
-Response response = await client.IfUnmodifiedSinceGetAsync(requestConditions: null);
-Console.WriteLine(response.Status);
+Response response = await client.IfUnmodifiedSinceGetAsync(null);
 ]]></code></example>
     </member>
     <member name="IfUnmodifiedSinceGet(RequestConditions,RequestContext)">
@@ -336,15 +302,13 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 RequestConditionCollapseClient client = new RequestConditionCollapseClient(credential);
 
 Response response = client.IfUnmodifiedSinceGet();
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call IfUnmodifiedSinceGet with all parameters.
 <code><![CDATA[
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 RequestConditionCollapseClient client = new RequestConditionCollapseClient(credential);
 
-Response response = client.IfUnmodifiedSinceGet(requestConditions: null);
-Console.WriteLine(response.Status);
+Response response = client.IfUnmodifiedSinceGet(null);
 ]]></code></example>
     </member>
   </members>

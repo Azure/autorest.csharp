@@ -5,9 +5,7 @@
 
 #nullable disable
 
-using System;
 using System.Collections.Generic;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -17,37 +15,31 @@ using _Type._Array;
 
 namespace _Type._Array.Samples
 {
-    internal class Samples_BooleanValue
+    public class Samples_BooleanValue
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_GetBooleanValue()
         {
-            BooleanValue client = new ArrayClient().GetBooleanValueClient(apiVersion: "1.0.0");
+            BooleanValue client = new ArrayClient().GetBooleanValueClient("1.0.0");
 
             Response response = client.GetBooleanValue(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetBooleanValue_Async()
         {
-            BooleanValue client = new ArrayClient().GetBooleanValueClient(apiVersion: "1.0.0");
+            BooleanValue client = new ArrayClient().GetBooleanValueClient("1.0.0");
 
             Response response = await client.GetBooleanValueAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_GetBooleanValue_Convenience()
         {
-            BooleanValue client = new ArrayClient().GetBooleanValueClient(apiVersion: "1.0.0");
+            BooleanValue client = new ArrayClient().GetBooleanValueClient("1.0.0");
 
             Response<IReadOnlyList<bool>> response = client.GetBooleanValue();
         }
@@ -56,7 +48,7 @@ namespace _Type._Array.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetBooleanValue_Convenience_Async()
         {
-            BooleanValue client = new ArrayClient().GetBooleanValueClient(apiVersion: "1.0.0");
+            BooleanValue client = new ArrayClient().GetBooleanValueClient("1.0.0");
 
             Response<IReadOnlyList<bool>> response = await client.GetBooleanValueAsync();
         }
@@ -65,31 +57,25 @@ namespace _Type._Array.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetBooleanValue_AllParameters()
         {
-            BooleanValue client = new ArrayClient().GetBooleanValueClient(apiVersion: "1.0.0");
+            BooleanValue client = new ArrayClient().GetBooleanValueClient("1.0.0");
 
             Response response = client.GetBooleanValue(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetBooleanValue_AllParameters_Async()
         {
-            BooleanValue client = new ArrayClient().GetBooleanValueClient(apiVersion: "1.0.0");
+            BooleanValue client = new ArrayClient().GetBooleanValueClient("1.0.0");
 
             Response response = await client.GetBooleanValueAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_GetBooleanValue_AllParameters_Convenience()
         {
-            BooleanValue client = new ArrayClient().GetBooleanValueClient(apiVersion: "1.0.0");
+            BooleanValue client = new ArrayClient().GetBooleanValueClient("1.0.0");
 
             Response<IReadOnlyList<bool>> response = client.GetBooleanValue();
         }
@@ -98,7 +84,7 @@ namespace _Type._Array.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetBooleanValue_AllParameters_Convenience_Async()
         {
-            BooleanValue client = new ArrayClient().GetBooleanValueClient(apiVersion: "1.0.0");
+            BooleanValue client = new ArrayClient().GetBooleanValueClient("1.0.0");
 
             Response<IReadOnlyList<bool>> response = await client.GetBooleanValueAsync();
         }
@@ -107,108 +93,88 @@ namespace _Type._Array.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Put()
         {
-            BooleanValue client = new ArrayClient().GetBooleanValueClient(apiVersion: "1.0.0");
+            BooleanValue client = new ArrayClient().GetBooleanValueClient("1.0.0");
 
-            RequestContent content = RequestContent.Create(new List<object>()
-{
+            RequestContent content = RequestContent.Create(new object[]
+            {
 true
-});
+            });
             Response response = client.Put(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Put_Async()
         {
-            BooleanValue client = new ArrayClient().GetBooleanValueClient(apiVersion: "1.0.0");
+            BooleanValue client = new ArrayClient().GetBooleanValueClient("1.0.0");
 
-            RequestContent content = RequestContent.Create(new List<object>()
-{
+            RequestContent content = RequestContent.Create(new object[]
+            {
 true
-});
+            });
             Response response = await client.PutAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_Put_Convenience()
         {
-            BooleanValue client = new ArrayClient().GetBooleanValueClient(apiVersion: "1.0.0");
+            BooleanValue client = new ArrayClient().GetBooleanValueClient("1.0.0");
 
-            Response response = client.Put(new List<bool>()
-{
-true
-});
-            Console.WriteLine(response.Status);
+            Response response = client.Put(new bool[] { true });
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Put_Convenience_Async()
         {
-            BooleanValue client = new ArrayClient().GetBooleanValueClient(apiVersion: "1.0.0");
+            BooleanValue client = new ArrayClient().GetBooleanValueClient("1.0.0");
 
-            Response response = await client.PutAsync(new List<bool>()
-{
-true
-});
-            Console.WriteLine(response.Status);
+            Response response = await client.PutAsync(new bool[] { true });
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_Put_AllParameters()
         {
-            BooleanValue client = new ArrayClient().GetBooleanValueClient(apiVersion: "1.0.0");
+            BooleanValue client = new ArrayClient().GetBooleanValueClient("1.0.0");
 
-            RequestContent content = RequestContent.Create(new List<object>()
-{
+            RequestContent content = RequestContent.Create(new object[]
+            {
 true
-});
+            });
             Response response = client.Put(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Put_AllParameters_Async()
         {
-            BooleanValue client = new ArrayClient().GetBooleanValueClient(apiVersion: "1.0.0");
+            BooleanValue client = new ArrayClient().GetBooleanValueClient("1.0.0");
 
-            RequestContent content = RequestContent.Create(new List<object>()
-{
+            RequestContent content = RequestContent.Create(new object[]
+            {
 true
-});
+            });
             Response response = await client.PutAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_Put_AllParameters_Convenience()
         {
-            BooleanValue client = new ArrayClient().GetBooleanValueClient(apiVersion: "1.0.0");
+            BooleanValue client = new ArrayClient().GetBooleanValueClient("1.0.0");
 
-            Response response = client.Put(new List<bool>()
-{
-true
-});
-            Console.WriteLine(response.Status);
+            Response response = client.Put(new bool[] { true });
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Put_AllParameters_Convenience_Async()
         {
-            BooleanValue client = new ArrayClient().GetBooleanValueClient(apiVersion: "1.0.0");
+            BooleanValue client = new ArrayClient().GetBooleanValueClient("1.0.0");
 
-            Response response = await client.PutAsync(new List<bool>()
-{
-true
-});
-            Console.WriteLine(response.Status);
+            Response response = await client.PutAsync(new bool[] { true });
         }
     }
 }

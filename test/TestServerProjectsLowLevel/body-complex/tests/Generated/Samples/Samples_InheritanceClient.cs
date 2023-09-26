@@ -5,9 +5,6 @@
 
 #nullable disable
 
-using System;
-using System.Collections.Generic;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -27,9 +24,6 @@ namespace body_complex_LowLevel.Samples
             InheritanceClient client = new InheritanceClient(credential);
 
             Response response = client.GetValid(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -40,9 +34,6 @@ namespace body_complex_LowLevel.Samples
             InheritanceClient client = new InheritanceClient(credential);
 
             Response response = await client.GetValidAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -53,15 +44,6 @@ namespace body_complex_LowLevel.Samples
             InheritanceClient client = new InheritanceClient(credential);
 
             Response response = client.GetValid(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("breed").ToString());
-            Console.WriteLine(result.GetProperty("color").ToString());
-            Console.WriteLine(result.GetProperty("hates")[0].GetProperty("food").ToString());
-            Console.WriteLine(result.GetProperty("hates")[0].GetProperty("id").ToString());
-            Console.WriteLine(result.GetProperty("hates")[0].GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("id").ToString());
-            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]
@@ -72,15 +54,6 @@ namespace body_complex_LowLevel.Samples
             InheritanceClient client = new InheritanceClient(credential);
 
             Response response = await client.GetValidAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("breed").ToString());
-            Console.WriteLine(result.GetProperty("color").ToString());
-            Console.WriteLine(result.GetProperty("hates")[0].GetProperty("food").ToString());
-            Console.WriteLine(result.GetProperty("hates")[0].GetProperty("id").ToString());
-            Console.WriteLine(result.GetProperty("hates")[0].GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("id").ToString());
-            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]
@@ -92,7 +65,6 @@ namespace body_complex_LowLevel.Samples
 
             RequestContent content = RequestContent.Create(new object());
             Response response = client.PutValid(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -104,7 +76,6 @@ namespace body_complex_LowLevel.Samples
 
             RequestContent content = RequestContent.Create(new object());
             Response response = await client.PutValidAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -118,20 +89,19 @@ namespace body_complex_LowLevel.Samples
             {
                 breed = "<breed>",
                 color = "<color>",
-                hates = new List<object>()
-{
+                hates = new object[]
+            {
 new
 {
 food = "<food>",
 id = 1234,
 name = "<name>",
 }
-},
+            },
                 id = 1234,
                 name = "<name>",
             });
             Response response = client.PutValid(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -145,20 +115,19 @@ name = "<name>",
             {
                 breed = "<breed>",
                 color = "<color>",
-                hates = new List<object>()
-{
+                hates = new object[]
+            {
 new
 {
 food = "<food>",
 id = 1234,
 name = "<name>",
 }
-},
+            },
                 id = 1234,
                 name = "<name>",
             });
             Response response = await client.PutValidAsync(content);
-            Console.WriteLine(response.Status);
         }
     }
 }

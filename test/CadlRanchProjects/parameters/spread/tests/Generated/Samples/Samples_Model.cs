@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -16,106 +15,98 @@ using Parameters.Spread.Models;
 
 namespace Parameters.Spread.Samples
 {
-    internal class Samples_Model
+    public class Samples_Model
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_SpreadAsRequestBody()
         {
-            Model client = new SpreadClient().GetModelClient(apiVersion: "1.0.0");
+            Model client = new SpreadClient().GetModelClient("1.0.0");
 
             RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
             });
             Response response = client.SpreadAsRequestBody(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public async Task Example_SpreadAsRequestBody_Async()
         {
-            Model client = new SpreadClient().GetModelClient(apiVersion: "1.0.0");
+            Model client = new SpreadClient().GetModelClient("1.0.0");
 
             RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
             });
             Response response = await client.SpreadAsRequestBodyAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_SpreadAsRequestBody_Convenience()
         {
-            Model client = new SpreadClient().GetModelClient(apiVersion: "1.0.0");
+            Model client = new SpreadClient().GetModelClient("1.0.0");
 
             BodyParameter bodyParameter = new BodyParameter("<name>");
             Response response = client.SpreadAsRequestBody(bodyParameter);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public async Task Example_SpreadAsRequestBody_Convenience_Async()
         {
-            Model client = new SpreadClient().GetModelClient(apiVersion: "1.0.0");
+            Model client = new SpreadClient().GetModelClient("1.0.0");
 
             BodyParameter bodyParameter = new BodyParameter("<name>");
             Response response = await client.SpreadAsRequestBodyAsync(bodyParameter);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_SpreadAsRequestBody_AllParameters()
         {
-            Model client = new SpreadClient().GetModelClient(apiVersion: "1.0.0");
+            Model client = new SpreadClient().GetModelClient("1.0.0");
 
             RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
             });
             Response response = client.SpreadAsRequestBody(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public async Task Example_SpreadAsRequestBody_AllParameters_Async()
         {
-            Model client = new SpreadClient().GetModelClient(apiVersion: "1.0.0");
+            Model client = new SpreadClient().GetModelClient("1.0.0");
 
             RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
             });
             Response response = await client.SpreadAsRequestBodyAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_SpreadAsRequestBody_AllParameters_Convenience()
         {
-            Model client = new SpreadClient().GetModelClient(apiVersion: "1.0.0");
+            Model client = new SpreadClient().GetModelClient("1.0.0");
 
             BodyParameter bodyParameter = new BodyParameter("<name>");
             Response response = client.SpreadAsRequestBody(bodyParameter);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public async Task Example_SpreadAsRequestBody_AllParameters_Convenience_Async()
         {
-            Model client = new SpreadClient().GetModelClient(apiVersion: "1.0.0");
+            Model client = new SpreadClient().GetModelClient("1.0.0");
 
             BodyParameter bodyParameter = new BodyParameter("<name>");
             Response response = await client.SpreadAsRequestBodyAsync(bodyParameter);
-            Console.WriteLine(response.Status);
         }
     }
 }

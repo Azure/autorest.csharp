@@ -24,7 +24,6 @@ namespace Server.Path.Multiple.Samples
             MultipleClient client = new MultipleClient(endpoint);
 
             Response response = client.NoOperationParams();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -35,7 +34,6 @@ namespace Server.Path.Multiple.Samples
             MultipleClient client = new MultipleClient(endpoint);
 
             Response response = await client.NoOperationParamsAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -46,7 +44,6 @@ namespace Server.Path.Multiple.Samples
             MultipleClient client = new MultipleClient(endpoint);
 
             Response response = client.NoOperationParams();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -57,7 +54,6 @@ namespace Server.Path.Multiple.Samples
             MultipleClient client = new MultipleClient(endpoint);
 
             Response response = await client.NoOperationParamsAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -68,7 +64,6 @@ namespace Server.Path.Multiple.Samples
             MultipleClient client = new MultipleClient(endpoint);
 
             Response response = client.WithOperationPathParam("<keyword>");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -79,7 +74,6 @@ namespace Server.Path.Multiple.Samples
             MultipleClient client = new MultipleClient(endpoint);
 
             Response response = await client.WithOperationPathParamAsync("<keyword>");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -90,7 +84,6 @@ namespace Server.Path.Multiple.Samples
             MultipleClient client = new MultipleClient(endpoint);
 
             Response response = client.WithOperationPathParam("<keyword>");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -101,7 +94,6 @@ namespace Server.Path.Multiple.Samples
             MultipleClient client = new MultipleClient(endpoint);
 
             Response response = await client.WithOperationPathParamAsync("<keyword>");
-            Console.WriteLine(response.Status);
         }
     }
 }

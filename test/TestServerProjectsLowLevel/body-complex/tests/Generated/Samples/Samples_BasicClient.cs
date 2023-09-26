@@ -5,8 +5,6 @@
 
 #nullable disable
 
-using System;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -26,9 +24,6 @@ namespace body_complex_LowLevel.Samples
             BasicClient client = new BasicClient(credential);
 
             Response response = client.GetValid(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -39,9 +34,6 @@ namespace body_complex_LowLevel.Samples
             BasicClient client = new BasicClient(credential);
 
             Response response = await client.GetValidAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -52,11 +44,6 @@ namespace body_complex_LowLevel.Samples
             BasicClient client = new BasicClient(credential);
 
             Response response = client.GetValid(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
-            Console.WriteLine(result.GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("color").ToString());
         }
 
         [Test]
@@ -67,11 +54,6 @@ namespace body_complex_LowLevel.Samples
             BasicClient client = new BasicClient(credential);
 
             Response response = await client.GetValidAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
-            Console.WriteLine(result.GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("color").ToString());
         }
 
         [Test]
@@ -83,7 +65,6 @@ namespace body_complex_LowLevel.Samples
 
             RequestContent content = RequestContent.Create(new object());
             Response response = client.PutValid(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -95,7 +76,6 @@ namespace body_complex_LowLevel.Samples
 
             RequestContent content = RequestContent.Create(new object());
             Response response = await client.PutValidAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -112,7 +92,6 @@ namespace body_complex_LowLevel.Samples
                 color = "cyan",
             });
             Response response = client.PutValid(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -129,7 +108,6 @@ namespace body_complex_LowLevel.Samples
                 color = "cyan",
             });
             Response response = await client.PutValidAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -140,9 +118,6 @@ namespace body_complex_LowLevel.Samples
             BasicClient client = new BasicClient(credential);
 
             Response response = client.GetInvalid(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -153,9 +128,6 @@ namespace body_complex_LowLevel.Samples
             BasicClient client = new BasicClient(credential);
 
             Response response = await client.GetInvalidAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -166,11 +138,6 @@ namespace body_complex_LowLevel.Samples
             BasicClient client = new BasicClient(credential);
 
             Response response = client.GetInvalid(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
-            Console.WriteLine(result.GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("color").ToString());
         }
 
         [Test]
@@ -181,11 +148,6 @@ namespace body_complex_LowLevel.Samples
             BasicClient client = new BasicClient(credential);
 
             Response response = await client.GetInvalidAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
-            Console.WriteLine(result.GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("color").ToString());
         }
 
         [Test]
@@ -196,9 +158,6 @@ namespace body_complex_LowLevel.Samples
             BasicClient client = new BasicClient(credential);
 
             Response response = client.GetEmpty(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -209,9 +168,6 @@ namespace body_complex_LowLevel.Samples
             BasicClient client = new BasicClient(credential);
 
             Response response = await client.GetEmptyAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -222,11 +178,6 @@ namespace body_complex_LowLevel.Samples
             BasicClient client = new BasicClient(credential);
 
             Response response = client.GetEmpty(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
-            Console.WriteLine(result.GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("color").ToString());
         }
 
         [Test]
@@ -237,11 +188,6 @@ namespace body_complex_LowLevel.Samples
             BasicClient client = new BasicClient(credential);
 
             Response response = await client.GetEmptyAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
-            Console.WriteLine(result.GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("color").ToString());
         }
 
         [Test]
@@ -252,9 +198,6 @@ namespace body_complex_LowLevel.Samples
             BasicClient client = new BasicClient(credential);
 
             Response response = client.GetNull(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -265,9 +208,6 @@ namespace body_complex_LowLevel.Samples
             BasicClient client = new BasicClient(credential);
 
             Response response = await client.GetNullAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -278,11 +218,6 @@ namespace body_complex_LowLevel.Samples
             BasicClient client = new BasicClient(credential);
 
             Response response = client.GetNull(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
-            Console.WriteLine(result.GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("color").ToString());
         }
 
         [Test]
@@ -293,11 +228,6 @@ namespace body_complex_LowLevel.Samples
             BasicClient client = new BasicClient(credential);
 
             Response response = await client.GetNullAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
-            Console.WriteLine(result.GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("color").ToString());
         }
 
         [Test]
@@ -308,9 +238,6 @@ namespace body_complex_LowLevel.Samples
             BasicClient client = new BasicClient(credential);
 
             Response response = client.GetNotProvided(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -321,9 +248,6 @@ namespace body_complex_LowLevel.Samples
             BasicClient client = new BasicClient(credential);
 
             Response response = await client.GetNotProvidedAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -334,11 +258,6 @@ namespace body_complex_LowLevel.Samples
             BasicClient client = new BasicClient(credential);
 
             Response response = client.GetNotProvided(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
-            Console.WriteLine(result.GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("color").ToString());
         }
 
         [Test]
@@ -349,11 +268,6 @@ namespace body_complex_LowLevel.Samples
             BasicClient client = new BasicClient(credential);
 
             Response response = await client.GetNotProvidedAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
-            Console.WriteLine(result.GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("color").ToString());
         }
     }
 }

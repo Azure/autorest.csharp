@@ -52,7 +52,6 @@ namespace _Type.Union
         /// <param name="input"> The ModelWithSimpleUnionProperty to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        /// <include file="Docs/UnionClient.xml" path="doc/members/member[@name='SendIntAsync(ModelWithSimpleUnionProperty,CancellationToken)']/*" />
         internal virtual async Task<Response> SendIntAsync(ModelWithSimpleUnionProperty input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
@@ -65,7 +64,6 @@ namespace _Type.Union
         /// <param name="input"> The ModelWithSimpleUnionProperty to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        /// <include file="Docs/UnionClient.xml" path="doc/members/member[@name='SendInt(ModelWithSimpleUnionProperty,CancellationToken)']/*" />
         internal virtual Response SendInt(ModelWithSimpleUnionProperty input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
@@ -148,7 +146,6 @@ namespace _Type.Union
         /// <param name="input"> The ModelWithSimpleUnionProperty to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        /// <include file="Docs/UnionClient.xml" path="doc/members/member[@name='SendIntArrayAsync(ModelWithSimpleUnionProperty,CancellationToken)']/*" />
         internal virtual async Task<Response> SendIntArrayAsync(ModelWithSimpleUnionProperty input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
@@ -161,7 +158,6 @@ namespace _Type.Union
         /// <param name="input"> The ModelWithSimpleUnionProperty to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        /// <include file="Docs/UnionClient.xml" path="doc/members/member[@name='SendIntArray(ModelWithSimpleUnionProperty,CancellationToken)']/*" />
         internal virtual Response SendIntArray(ModelWithSimpleUnionProperty input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
@@ -244,7 +240,6 @@ namespace _Type.Union
         /// <param name="input"> The ModelWithNamedUnionProperty to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        /// <include file="Docs/UnionClient.xml" path="doc/members/member[@name='SendFirstNamedUnionValueAsync(ModelWithNamedUnionProperty,CancellationToken)']/*" />
         internal virtual async Task<Response> SendFirstNamedUnionValueAsync(ModelWithNamedUnionProperty input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
@@ -257,7 +252,6 @@ namespace _Type.Union
         /// <param name="input"> The ModelWithNamedUnionProperty to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        /// <include file="Docs/UnionClient.xml" path="doc/members/member[@name='SendFirstNamedUnionValue(ModelWithNamedUnionProperty,CancellationToken)']/*" />
         internal virtual Response SendFirstNamedUnionValue(ModelWithNamedUnionProperty input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
@@ -340,7 +334,6 @@ namespace _Type.Union
         /// <param name="input"> The ModelWithNamedUnionProperty to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        /// <include file="Docs/UnionClient.xml" path="doc/members/member[@name='SendSecondNamedUnionValueAsync(ModelWithNamedUnionProperty,CancellationToken)']/*" />
         internal virtual async Task<Response> SendSecondNamedUnionValueAsync(ModelWithNamedUnionProperty input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
@@ -353,7 +346,6 @@ namespace _Type.Union
         /// <param name="input"> The ModelWithNamedUnionProperty to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        /// <include file="Docs/UnionClient.xml" path="doc/members/member[@name='SendSecondNamedUnionValue(ModelWithNamedUnionProperty,CancellationToken)']/*" />
         internal virtual Response SendSecondNamedUnionValue(ModelWithNamedUnionProperty input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
@@ -434,7 +426,6 @@ namespace _Type.Union
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/UnionClient.xml" path="doc/members/member[@name='ReceiveStringAsync(CancellationToken)']/*" />
         internal virtual async Task<Response<ModelWithSimpleUnionPropertyInResponse>> ReceiveStringAsync(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -443,7 +434,6 @@ namespace _Type.Union
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/UnionClient.xml" path="doc/members/member[@name='ReceiveString(CancellationToken)']/*" />
         internal virtual Response<ModelWithSimpleUnionPropertyInResponse> ReceiveString(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -514,7 +504,6 @@ namespace _Type.Union
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/UnionClient.xml" path="doc/members/member[@name='ReceiveIntArrayAsync(CancellationToken)']/*" />
         internal virtual async Task<Response<ModelWithSimpleUnionPropertyInResponse>> ReceiveIntArrayAsync(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -523,7 +512,6 @@ namespace _Type.Union
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/UnionClient.xml" path="doc/members/member[@name='ReceiveIntArray(CancellationToken)']/*" />
         internal virtual Response<ModelWithSimpleUnionPropertyInResponse> ReceiveIntArray(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -594,7 +582,6 @@ namespace _Type.Union
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/UnionClient.xml" path="doc/members/member[@name='ReceiveFirstNamedUnionValueAsync(CancellationToken)']/*" />
         internal virtual async Task<Response<ModelWithNamedUnionPropertyInResponse>> ReceiveFirstNamedUnionValueAsync(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -603,7 +590,6 @@ namespace _Type.Union
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/UnionClient.xml" path="doc/members/member[@name='ReceiveFirstNamedUnionValue(CancellationToken)']/*" />
         internal virtual Response<ModelWithNamedUnionPropertyInResponse> ReceiveFirstNamedUnionValue(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -674,7 +660,6 @@ namespace _Type.Union
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/UnionClient.xml" path="doc/members/member[@name='ReceiveSecondNamedUnionValueAsync(CancellationToken)']/*" />
         internal virtual async Task<Response<ModelWithNamedUnionPropertyInResponse>> ReceiveSecondNamedUnionValueAsync(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -683,7 +668,6 @@ namespace _Type.Union
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/UnionClient.xml" path="doc/members/member[@name='ReceiveSecondNamedUnionValue(CancellationToken)']/*" />
         internal virtual Response<ModelWithNamedUnionPropertyInResponse> ReceiveSecondNamedUnionValue(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);

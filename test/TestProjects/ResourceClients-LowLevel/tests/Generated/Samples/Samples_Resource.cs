@@ -5,8 +5,6 @@
 
 #nullable disable
 
-using System;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Identity;
@@ -15,7 +13,7 @@ using ResourceClients_LowLevel;
 
 namespace ResourceClients_LowLevel.Samples
 {
-    internal class Samples_Resource
+    public class Samples_Resource
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
@@ -25,9 +23,6 @@ namespace ResourceClients_LowLevel.Samples
             Resource client = new ResourceServiceClient(credential).GetResourceGroup("<GroupId>").GetResource("<ItemId>");
 
             Response response = client.GetItem(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -38,9 +33,6 @@ namespace ResourceClients_LowLevel.Samples
             Resource client = new ResourceServiceClient(credential).GetResourceGroup("<GroupId>").GetResource("<ItemId>");
 
             Response response = await client.GetItemAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -51,9 +43,6 @@ namespace ResourceClients_LowLevel.Samples
             Resource client = new ResourceServiceClient(credential).GetResourceGroup("<GroupId>").GetResource("<ItemId>");
 
             Response response = client.GetItem(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -64,9 +53,6 @@ namespace ResourceClients_LowLevel.Samples
             Resource client = new ResourceServiceClient(credential).GetResourceGroup("<GroupId>").GetResource("<ItemId>");
 
             Response response = await client.GetItemAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
     }
 }

@@ -5,13 +5,13 @@
       <example>
 This sample shows how to call GetUnknownIntAsync.
 <code><![CDATA[
-UnknownInt client = new ValueTypesClient().GetUnknownIntClient(apiVersion: "1.0.0");
+UnknownInt client = new ValueTypesClient().GetUnknownIntClient("1.0.0");
 
 Response<UnknownIntProperty> response = await client.GetUnknownIntAsync();
 ]]></code>
 This sample shows how to call GetUnknownIntAsync with all parameters.
 <code><![CDATA[
-UnknownInt client = new ValueTypesClient().GetUnknownIntClient(apiVersion: "1.0.0");
+UnknownInt client = new ValueTypesClient().GetUnknownIntClient("1.0.0");
 
 Response<UnknownIntProperty> response = await client.GetUnknownIntAsync();
 ]]></code></example>
@@ -20,13 +20,13 @@ Response<UnknownIntProperty> response = await client.GetUnknownIntAsync();
       <example>
 This sample shows how to call GetUnknownInt.
 <code><![CDATA[
-UnknownInt client = new ValueTypesClient().GetUnknownIntClient(apiVersion: "1.0.0");
+UnknownInt client = new ValueTypesClient().GetUnknownIntClient("1.0.0");
 
 Response<UnknownIntProperty> response = client.GetUnknownInt();
 ]]></code>
 This sample shows how to call GetUnknownInt with all parameters.
 <code><![CDATA[
-UnknownInt client = new ValueTypesClient().GetUnknownIntClient(apiVersion: "1.0.0");
+UnknownInt client = new ValueTypesClient().GetUnknownIntClient("1.0.0");
 
 Response<UnknownIntProperty> response = client.GetUnknownInt();
 ]]></code></example>
@@ -35,130 +35,162 @@ Response<UnknownIntProperty> response = client.GetUnknownInt();
       <example>
 This sample shows how to call GetUnknownIntAsync and parse the result.
 <code><![CDATA[
-UnknownInt client = new ValueTypesClient().GetUnknownIntClient(apiVersion: "1.0.0");
+UnknownInt client = new ValueTypesClient().GetUnknownIntClient("1.0.0");
 
 Response response = await client.GetUnknownIntAsync(null);
+]]></code>
+This sample shows how to call GetUnknownIntAsync.
+<code><![CDATA[
+UnknownInt client = new ValueTypesClient().GetUnknownIntClient("1.0.0");
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("property").ToString());
+Response<UnknownIntProperty> response = await client.GetUnknownIntAsync();
 ]]></code>
 This sample shows how to call GetUnknownIntAsync with all parameters and parse the result.
 <code><![CDATA[
-UnknownInt client = new ValueTypesClient().GetUnknownIntClient(apiVersion: "1.0.0");
+UnknownInt client = new ValueTypesClient().GetUnknownIntClient("1.0.0");
 
 Response response = await client.GetUnknownIntAsync(null);
+]]></code>
+This sample shows how to call GetUnknownIntAsync with all parameters.
+<code><![CDATA[
+UnknownInt client = new ValueTypesClient().GetUnknownIntClient("1.0.0");
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("property").ToString());
+Response<UnknownIntProperty> response = await client.GetUnknownIntAsync();
 ]]></code></example>
     </member>
     <member name="GetUnknownInt(RequestContext)">
       <example>
 This sample shows how to call GetUnknownInt and parse the result.
 <code><![CDATA[
-UnknownInt client = new ValueTypesClient().GetUnknownIntClient(apiVersion: "1.0.0");
+UnknownInt client = new ValueTypesClient().GetUnknownIntClient("1.0.0");
 
 Response response = client.GetUnknownInt(null);
+]]></code>
+This sample shows how to call GetUnknownInt.
+<code><![CDATA[
+UnknownInt client = new ValueTypesClient().GetUnknownIntClient("1.0.0");
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("property").ToString());
+Response<UnknownIntProperty> response = client.GetUnknownInt();
 ]]></code>
 This sample shows how to call GetUnknownInt with all parameters and parse the result.
 <code><![CDATA[
-UnknownInt client = new ValueTypesClient().GetUnknownIntClient(apiVersion: "1.0.0");
+UnknownInt client = new ValueTypesClient().GetUnknownIntClient("1.0.0");
 
 Response response = client.GetUnknownInt(null);
+]]></code>
+This sample shows how to call GetUnknownInt with all parameters.
+<code><![CDATA[
+UnknownInt client = new ValueTypesClient().GetUnknownIntClient("1.0.0");
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("property").ToString());
+Response<UnknownIntProperty> response = client.GetUnknownInt();
 ]]></code></example>
     </member>
     <member name="PutAsync(UnknownIntProperty,CancellationToken)">
       <example>
 This sample shows how to call PutAsync.
 <code><![CDATA[
-UnknownInt client = new ValueTypesClient().GetUnknownIntClient(apiVersion: "1.0.0");
+UnknownInt client = new ValueTypesClient().GetUnknownIntClient("1.0.0");
 
 UnknownIntProperty body = new UnknownIntProperty(BinaryData.FromObjectAsJson(new object()));
 Response response = await client.PutAsync(body);
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutAsync with all parameters.
 <code><![CDATA[
-UnknownInt client = new ValueTypesClient().GetUnknownIntClient(apiVersion: "1.0.0");
+UnknownInt client = new ValueTypesClient().GetUnknownIntClient("1.0.0");
 
 UnknownIntProperty body = new UnknownIntProperty(BinaryData.FromObjectAsJson(new object()));
 Response response = await client.PutAsync(body);
-Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="Put(UnknownIntProperty,CancellationToken)">
       <example>
 This sample shows how to call Put.
 <code><![CDATA[
-UnknownInt client = new ValueTypesClient().GetUnknownIntClient(apiVersion: "1.0.0");
+UnknownInt client = new ValueTypesClient().GetUnknownIntClient("1.0.0");
 
 UnknownIntProperty body = new UnknownIntProperty(BinaryData.FromObjectAsJson(new object()));
 Response response = client.Put(body);
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Put with all parameters.
 <code><![CDATA[
-UnknownInt client = new ValueTypesClient().GetUnknownIntClient(apiVersion: "1.0.0");
+UnknownInt client = new ValueTypesClient().GetUnknownIntClient("1.0.0");
 
 UnknownIntProperty body = new UnknownIntProperty(BinaryData.FromObjectAsJson(new object()));
 Response response = client.Put(body);
-Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="PutAsync(RequestContent,RequestContext)">
       <example>
 This sample shows how to call PutAsync.
 <code><![CDATA[
-UnknownInt client = new ValueTypesClient().GetUnknownIntClient(apiVersion: "1.0.0");
+UnknownInt client = new ValueTypesClient().GetUnknownIntClient("1.0.0");
 
 RequestContent content = RequestContent.Create(new
 {
     property = new object(),
 });
 Response response = await client.PutAsync(content);
-Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call PutAsync.
+<code><![CDATA[
+UnknownInt client = new ValueTypesClient().GetUnknownIntClient("1.0.0");
+
+UnknownIntProperty body = new UnknownIntProperty(BinaryData.FromObjectAsJson(new object()));
+Response response = await client.PutAsync(body);
 ]]></code>
 This sample shows how to call PutAsync with all request content.
 <code><![CDATA[
-UnknownInt client = new ValueTypesClient().GetUnknownIntClient(apiVersion: "1.0.0");
+UnknownInt client = new ValueTypesClient().GetUnknownIntClient("1.0.0");
 
 RequestContent content = RequestContent.Create(new
 {
     property = new object(),
 });
 Response response = await client.PutAsync(content);
-Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call PutAsync with all parameters.
+<code><![CDATA[
+UnknownInt client = new ValueTypesClient().GetUnknownIntClient("1.0.0");
+
+UnknownIntProperty body = new UnknownIntProperty(BinaryData.FromObjectAsJson(new object()));
+Response response = await client.PutAsync(body);
 ]]></code></example>
     </member>
     <member name="Put(RequestContent,RequestContext)">
       <example>
 This sample shows how to call Put.
 <code><![CDATA[
-UnknownInt client = new ValueTypesClient().GetUnknownIntClient(apiVersion: "1.0.0");
+UnknownInt client = new ValueTypesClient().GetUnknownIntClient("1.0.0");
 
 RequestContent content = RequestContent.Create(new
 {
     property = new object(),
 });
 Response response = client.Put(content);
-Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call Put.
+<code><![CDATA[
+UnknownInt client = new ValueTypesClient().GetUnknownIntClient("1.0.0");
+
+UnknownIntProperty body = new UnknownIntProperty(BinaryData.FromObjectAsJson(new object()));
+Response response = client.Put(body);
 ]]></code>
 This sample shows how to call Put with all request content.
 <code><![CDATA[
-UnknownInt client = new ValueTypesClient().GetUnknownIntClient(apiVersion: "1.0.0");
+UnknownInt client = new ValueTypesClient().GetUnknownIntClient("1.0.0");
 
 RequestContent content = RequestContent.Create(new
 {
     property = new object(),
 });
 Response response = client.Put(content);
-Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call Put with all parameters.
+<code><![CDATA[
+UnknownInt client = new ValueTypesClient().GetUnknownIntClient("1.0.0");
+
+UnknownIntProperty body = new UnknownIntProperty(BinaryData.FromObjectAsJson(new object()));
+Response response = client.Put(body);
 ]]></code></example>
     </member>
   </members>

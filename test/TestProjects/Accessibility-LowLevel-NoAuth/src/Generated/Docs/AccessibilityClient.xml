@@ -9,7 +9,6 @@ AccessibilityClient client = new AccessibilityClient();
 
 RequestContent content = null;
 Response response = await client.OperationAsync(content);
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call OperationAsync with all request content.
 <code><![CDATA[
@@ -17,7 +16,6 @@ AccessibilityClient client = new AccessibilityClient();
 
 RequestContent content = RequestContent.Create("<body>");
 Response response = await client.OperationAsync(content);
-Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="Operation(RequestContent,RequestContext)">
@@ -28,7 +26,6 @@ AccessibilityClient client = new AccessibilityClient();
 
 RequestContent content = null;
 Response response = client.Operation(content);
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Operation with all request content.
 <code><![CDATA[
@@ -36,10 +33,7 @@ AccessibilityClient client = new AccessibilityClient();
 
 RequestContent content = RequestContent.Create("<body>");
 Response response = client.Operation(content);
-Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
-    <member name="OperationInternalAsync(RequestContent,RequestContext)" />
-    <member name="OperationInternal(RequestContent,RequestContext)" />
   </members>
 </doc>

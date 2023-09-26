@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Identity;
@@ -24,7 +23,6 @@ namespace head_LowLevel.Samples
             HttpSuccessClient client = new HttpSuccessClient(credential);
 
             Response response = client.Head200();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -35,7 +33,6 @@ namespace head_LowLevel.Samples
             HttpSuccessClient client = new HttpSuccessClient(credential);
 
             Response response = await client.Head200Async();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -46,7 +43,6 @@ namespace head_LowLevel.Samples
             HttpSuccessClient client = new HttpSuccessClient(credential);
 
             Response response = client.Head200();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -57,7 +53,6 @@ namespace head_LowLevel.Samples
             HttpSuccessClient client = new HttpSuccessClient(credential);
 
             Response response = await client.Head200Async();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -68,7 +63,6 @@ namespace head_LowLevel.Samples
             HttpSuccessClient client = new HttpSuccessClient(credential);
 
             Response response = client.Head204();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -79,7 +73,6 @@ namespace head_LowLevel.Samples
             HttpSuccessClient client = new HttpSuccessClient(credential);
 
             Response response = await client.Head204Async();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -90,7 +83,6 @@ namespace head_LowLevel.Samples
             HttpSuccessClient client = new HttpSuccessClient(credential);
 
             Response response = client.Head204();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -101,7 +93,6 @@ namespace head_LowLevel.Samples
             HttpSuccessClient client = new HttpSuccessClient(credential);
 
             Response response = await client.Head204Async();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -112,7 +103,6 @@ namespace head_LowLevel.Samples
             HttpSuccessClient client = new HttpSuccessClient(credential);
 
             Response response = client.Head404();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -123,7 +113,6 @@ namespace head_LowLevel.Samples
             HttpSuccessClient client = new HttpSuccessClient(credential);
 
             Response response = await client.Head404Async();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -134,7 +123,6 @@ namespace head_LowLevel.Samples
             HttpSuccessClient client = new HttpSuccessClient(credential);
 
             Response response = client.Head404();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -145,7 +133,6 @@ namespace head_LowLevel.Samples
             HttpSuccessClient client = new HttpSuccessClient(credential);
 
             Response response = await client.Head404Async();
-            Console.WriteLine(response.Status);
         }
     }
 }

@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Identity;
@@ -23,7 +22,6 @@ namespace ServiceVersionOverride_LowLevel.Samples
             ServiceVersionOverrideClient client = new ServiceVersionOverrideClient();
 
             Response response = client.Operation("2.0");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -33,7 +31,6 @@ namespace ServiceVersionOverride_LowLevel.Samples
             ServiceVersionOverrideClient client = new ServiceVersionOverrideClient();
 
             Response response = await client.OperationAsync("2.0");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -43,7 +40,6 @@ namespace ServiceVersionOverride_LowLevel.Samples
             ServiceVersionOverrideClient client = new ServiceVersionOverrideClient();
 
             Response response = client.Operation("2.0");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -53,7 +49,6 @@ namespace ServiceVersionOverride_LowLevel.Samples
             ServiceVersionOverrideClient client = new ServiceVersionOverrideClient();
 
             Response response = await client.OperationAsync("2.0");
-            Console.WriteLine(response.Status);
         }
     }
 }

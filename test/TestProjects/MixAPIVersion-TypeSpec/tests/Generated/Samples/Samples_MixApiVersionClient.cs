@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -26,7 +25,6 @@ namespace MixApiVersion.Samples
             MixApiVersionClient client = new MixApiVersionClient(endpoint);
 
             Response response = client.Delete("<name>");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -37,7 +35,6 @@ namespace MixApiVersion.Samples
             MixApiVersionClient client = new MixApiVersionClient(endpoint);
 
             Response response = await client.DeleteAsync("<name>");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -48,7 +45,6 @@ namespace MixApiVersion.Samples
             MixApiVersionClient client = new MixApiVersionClient(endpoint);
 
             Response response = client.Delete("<name>");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -59,7 +55,6 @@ namespace MixApiVersion.Samples
             MixApiVersionClient client = new MixApiVersionClient(endpoint);
 
             Response response = await client.DeleteAsync("<name>");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -70,10 +65,6 @@ namespace MixApiVersion.Samples
             MixApiVersionClient client = new MixApiVersionClient(endpoint);
 
             Response response = client.Read(1234, null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("age").ToString());
         }
 
         [Test]
@@ -84,10 +75,6 @@ namespace MixApiVersion.Samples
             MixApiVersionClient client = new MixApiVersionClient(endpoint);
 
             Response response = await client.ReadAsync(1234, null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("age").ToString());
         }
 
         [Test]
@@ -98,11 +85,6 @@ namespace MixApiVersion.Samples
             MixApiVersionClient client = new MixApiVersionClient(endpoint);
 
             Response response = client.Read(1234, null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("tag").ToString());
-            Console.WriteLine(result.GetProperty("age").ToString());
         }
 
         [Test]
@@ -113,11 +95,6 @@ namespace MixApiVersion.Samples
             MixApiVersionClient client = new MixApiVersionClient(endpoint);
 
             Response response = await client.ReadAsync(1234, null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("tag").ToString());
-            Console.WriteLine(result.GetProperty("age").ToString());
         }
 
         [Test]
@@ -132,10 +109,6 @@ namespace MixApiVersion.Samples
                 age = 1234,
             });
             Response response = client.Create(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("age").ToString());
         }
 
         [Test]
@@ -150,10 +123,6 @@ namespace MixApiVersion.Samples
                 age = 1234,
             });
             Response response = await client.CreateAsync(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("age").ToString());
         }
 
         [Test]
@@ -169,11 +138,6 @@ namespace MixApiVersion.Samples
                 age = 1234,
             });
             Response response = client.Create(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("tag").ToString());
-            Console.WriteLine(result.GetProperty("age").ToString());
         }
 
         [Test]
@@ -189,11 +153,6 @@ namespace MixApiVersion.Samples
                 age = 1234,
             });
             Response response = await client.CreateAsync(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("tag").ToString());
-            Console.WriteLine(result.GetProperty("age").ToString());
         }
 
         [Test]
@@ -205,10 +164,6 @@ namespace MixApiVersion.Samples
 
             foreach (BinaryData item in client.GetPets(null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("id").ToString());
-                Console.WriteLine(result[0].GetProperty("petId").ToString());
-                Console.WriteLine(result[0].GetProperty("name").ToString());
             }
         }
 
@@ -221,10 +176,6 @@ namespace MixApiVersion.Samples
 
             await foreach (BinaryData item in client.GetPetsAsync(null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("id").ToString());
-                Console.WriteLine(result[0].GetProperty("petId").ToString());
-                Console.WriteLine(result[0].GetProperty("name").ToString());
             }
         }
 
@@ -237,10 +188,6 @@ namespace MixApiVersion.Samples
 
             foreach (BinaryData item in client.GetPets(null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("id").ToString());
-                Console.WriteLine(result[0].GetProperty("petId").ToString());
-                Console.WriteLine(result[0].GetProperty("name").ToString());
             }
         }
 
@@ -253,10 +200,6 @@ namespace MixApiVersion.Samples
 
             await foreach (BinaryData item in client.GetPetsAsync(null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("id").ToString());
-                Console.WriteLine(result[0].GetProperty("petId").ToString());
-                Console.WriteLine(result[0].GetProperty("name").ToString());
             }
         }
     }

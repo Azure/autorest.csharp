@@ -9,7 +9,6 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
 Response response = await client.Head300Async();
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Head300Async with all request content.
 <code><![CDATA[
@@ -17,7 +16,6 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
 Response response = await client.Head300Async();
-Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="Head300(RequestContext)">
@@ -28,7 +26,6 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
 Response response = client.Head300();
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Head300 with all request content.
 <code><![CDATA[
@@ -36,7 +33,6 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
 Response response = client.Head300();
-Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="Get300Async(RequestContext)">
@@ -47,7 +43,6 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
 Response response = await client.Get300Async();
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Get300Async with all request content.
 <code><![CDATA[
@@ -55,7 +50,6 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
 Response response = await client.Get300Async();
-Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="Get300(RequestContext)">
@@ -66,7 +60,6 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
 Response response = client.Get300();
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Get300 with all request content.
 <code><![CDATA[
@@ -74,7 +67,6 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
 Response response = client.Get300();
-Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="Head301Async(RequestContext)">
@@ -85,7 +77,6 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
 Response response = await client.Head301Async();
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Head301Async with all request content.
 <code><![CDATA[
@@ -93,7 +84,6 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
 Response response = await client.Head301Async();
-Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="Head301(RequestContext)">
@@ -104,7 +94,6 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
 Response response = client.Head301();
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Head301 with all request content.
 <code><![CDATA[
@@ -112,7 +101,6 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
 Response response = client.Head301();
-Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="Get301Async(RequestContext)">
@@ -123,7 +111,6 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
 Response response = await client.Get301Async();
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Get301Async with all request content.
 <code><![CDATA[
@@ -131,7 +118,6 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
 Response response = await client.Get301Async();
-Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="Get301(RequestContext)">
@@ -142,7 +128,6 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
 Response response = client.Get301();
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Get301 with all request content.
 <code><![CDATA[
@@ -150,7 +135,6 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
 Response response = client.Get301();
-Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="Put301Async(RequestContent,RequestContext)">
@@ -162,7 +146,6 @@ HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
 RequestContent content = null;
 Response response = await client.Put301Async(content);
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Put301Async with all request content.
 <code><![CDATA[
@@ -171,7 +154,6 @@ HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
 RequestContent content = RequestContent.Create("true");
 Response response = await client.Put301Async(content);
-Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="Put301(RequestContent,RequestContext)">
@@ -183,7 +165,6 @@ HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
 RequestContent content = null;
 Response response = client.Put301(content);
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Put301 with all request content.
 <code><![CDATA[
@@ -192,7 +173,6 @@ HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
 RequestContent content = RequestContent.Create("true");
 Response response = client.Put301(content);
-Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="Head302Async(RequestContext)">
@@ -203,7 +183,6 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
 Response response = await client.Head302Async();
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Head302Async with all request content.
 <code><![CDATA[
@@ -211,7 +190,6 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
 Response response = await client.Head302Async();
-Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="Head302(RequestContext)">
@@ -222,7 +200,6 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
 Response response = client.Head302();
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Head302 with all request content.
 <code><![CDATA[
@@ -230,7 +207,6 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
 Response response = client.Head302();
-Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="Get302Async(RequestContext)">
@@ -241,7 +217,6 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
 Response response = await client.Get302Async();
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Get302Async with all request content.
 <code><![CDATA[
@@ -249,7 +224,6 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
 Response response = await client.Get302Async();
-Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="Get302(RequestContext)">
@@ -260,7 +234,6 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
 Response response = client.Get302();
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Get302 with all request content.
 <code><![CDATA[
@@ -268,7 +241,6 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
 Response response = client.Get302();
-Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="Patch302Async(RequestContent,RequestContext)">
@@ -280,7 +252,6 @@ HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
 RequestContent content = null;
 Response response = await client.Patch302Async(content);
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Patch302Async with all request content.
 <code><![CDATA[
@@ -289,7 +260,6 @@ HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
 RequestContent content = RequestContent.Create("true");
 Response response = await client.Patch302Async(content);
-Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="Patch302(RequestContent,RequestContext)">
@@ -301,7 +271,6 @@ HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
 RequestContent content = null;
 Response response = client.Patch302(content);
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Patch302 with all request content.
 <code><![CDATA[
@@ -310,7 +279,6 @@ HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
 RequestContent content = RequestContent.Create("true");
 Response response = client.Patch302(content);
-Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="Post303Async(RequestContent,RequestContext)">
@@ -322,7 +290,6 @@ HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
 RequestContent content = null;
 Response response = await client.Post303Async(content);
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Post303Async with all request content.
 <code><![CDATA[
@@ -331,7 +298,6 @@ HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
 RequestContent content = RequestContent.Create("true");
 Response response = await client.Post303Async(content);
-Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="Post303(RequestContent,RequestContext)">
@@ -343,7 +309,6 @@ HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
 RequestContent content = null;
 Response response = client.Post303(content);
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Post303 with all request content.
 <code><![CDATA[
@@ -352,7 +317,6 @@ HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
 RequestContent content = RequestContent.Create("true");
 Response response = client.Post303(content);
-Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="Head307Async(RequestContext)">
@@ -363,7 +327,6 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
 Response response = await client.Head307Async();
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Head307Async with all request content.
 <code><![CDATA[
@@ -371,7 +334,6 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
 Response response = await client.Head307Async();
-Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="Head307(RequestContext)">
@@ -382,7 +344,6 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
 Response response = client.Head307();
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Head307 with all request content.
 <code><![CDATA[
@@ -390,7 +351,6 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
 Response response = client.Head307();
-Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="Get307Async(RequestContext)">
@@ -401,7 +361,6 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
 Response response = await client.Get307Async();
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Get307Async with all request content.
 <code><![CDATA[
@@ -409,7 +368,6 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
 Response response = await client.Get307Async();
-Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="Get307(RequestContext)">
@@ -420,7 +378,6 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
 Response response = client.Get307();
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Get307 with all request content.
 <code><![CDATA[
@@ -428,7 +385,6 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
 Response response = client.Get307();
-Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="Options307Async(RequestContext)">
@@ -439,7 +395,6 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
 Response response = await client.Options307Async();
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Options307Async with all request content.
 <code><![CDATA[
@@ -447,7 +402,6 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
 Response response = await client.Options307Async();
-Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="Options307(RequestContext)">
@@ -458,7 +412,6 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
 Response response = client.Options307();
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Options307 with all request content.
 <code><![CDATA[
@@ -466,7 +419,6 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
 Response response = client.Options307();
-Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="Put307Async(RequestContent,RequestContext)">
@@ -478,7 +430,6 @@ HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
 RequestContent content = null;
 Response response = await client.Put307Async(content);
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Put307Async with all request content.
 <code><![CDATA[
@@ -487,7 +438,6 @@ HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
 RequestContent content = RequestContent.Create("true");
 Response response = await client.Put307Async(content);
-Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="Put307(RequestContent,RequestContext)">
@@ -499,7 +449,6 @@ HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
 RequestContent content = null;
 Response response = client.Put307(content);
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Put307 with all request content.
 <code><![CDATA[
@@ -508,7 +457,6 @@ HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
 RequestContent content = RequestContent.Create("true");
 Response response = client.Put307(content);
-Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="Patch307Async(RequestContent,RequestContext)">
@@ -520,7 +468,6 @@ HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
 RequestContent content = null;
 Response response = await client.Patch307Async(content);
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Patch307Async with all request content.
 <code><![CDATA[
@@ -529,7 +476,6 @@ HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
 RequestContent content = RequestContent.Create("true");
 Response response = await client.Patch307Async(content);
-Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="Patch307(RequestContent,RequestContext)">
@@ -541,7 +487,6 @@ HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
 RequestContent content = null;
 Response response = client.Patch307(content);
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Patch307 with all request content.
 <code><![CDATA[
@@ -550,7 +495,6 @@ HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
 RequestContent content = RequestContent.Create("true");
 Response response = client.Patch307(content);
-Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="Post307Async(RequestContent,RequestContext)">
@@ -562,7 +506,6 @@ HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
 RequestContent content = null;
 Response response = await client.Post307Async(content);
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Post307Async with all request content.
 <code><![CDATA[
@@ -571,7 +514,6 @@ HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
 RequestContent content = RequestContent.Create("true");
 Response response = await client.Post307Async(content);
-Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="Post307(RequestContent,RequestContext)">
@@ -583,7 +525,6 @@ HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
 RequestContent content = null;
 Response response = client.Post307(content);
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Post307 with all request content.
 <code><![CDATA[
@@ -592,7 +533,6 @@ HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
 RequestContent content = RequestContent.Create("true");
 Response response = client.Post307(content);
-Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="Delete307Async(RequestContent,RequestContext)">
@@ -604,7 +544,6 @@ HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
 RequestContent content = null;
 Response response = await client.Delete307Async(content);
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Delete307Async with all request content.
 <code><![CDATA[
@@ -613,7 +552,6 @@ HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
 RequestContent content = RequestContent.Create("true");
 Response response = await client.Delete307Async(content);
-Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="Delete307(RequestContent,RequestContext)">
@@ -625,7 +563,6 @@ HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
 RequestContent content = null;
 Response response = client.Delete307(content);
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Delete307 with all request content.
 <code><![CDATA[
@@ -634,7 +571,6 @@ HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
 RequestContent content = RequestContent.Create("true");
 Response response = client.Delete307(content);
-Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
   </members>

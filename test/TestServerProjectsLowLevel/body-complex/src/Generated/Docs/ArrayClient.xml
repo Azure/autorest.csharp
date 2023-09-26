@@ -9,9 +9,6 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ArrayClient client = new ArrayClient(credential);
 
 Response response = await client.GetValidAsync(null);
-
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetValidAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -19,9 +16,6 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ArrayClient client = new ArrayClient(credential);
 
 Response response = await client.GetValidAsync(null);
-
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("array")[0].ToString());
 ]]></code></example>
     </member>
     <member name="GetValid(RequestContext)">
@@ -32,9 +26,6 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ArrayClient client = new ArrayClient(credential);
 
 Response response = client.GetValid(null);
-
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetValid with all parameters and parse the result.
 <code><![CDATA[
@@ -42,9 +33,6 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ArrayClient client = new ArrayClient(credential);
 
 Response response = client.GetValid(null);
-
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("array")[0].ToString());
 ]]></code></example>
     </member>
     <member name="PutValidAsync(RequestContent,RequestContext)">
@@ -56,7 +44,6 @@ ArrayClient client = new ArrayClient(credential);
 
 RequestContent content = RequestContent.Create(new object());
 Response response = await client.PutValidAsync(content);
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutValidAsync with all request content.
 <code><![CDATA[
@@ -65,13 +52,12 @@ ArrayClient client = new ArrayClient(credential);
 
 RequestContent content = RequestContent.Create(new
 {
-    array = new List<object>()
+    array = new object[]
     {
         "<array>"
     },
 });
 Response response = await client.PutValidAsync(content);
-Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="PutValid(RequestContent,RequestContext)">
@@ -83,7 +69,6 @@ ArrayClient client = new ArrayClient(credential);
 
 RequestContent content = RequestContent.Create(new object());
 Response response = client.PutValid(content);
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutValid with all request content.
 <code><![CDATA[
@@ -92,13 +77,12 @@ ArrayClient client = new ArrayClient(credential);
 
 RequestContent content = RequestContent.Create(new
 {
-    array = new List<object>()
+    array = new object[]
     {
         "<array>"
     },
 });
 Response response = client.PutValid(content);
-Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="GetEmptyAsync(RequestContext)">
@@ -109,9 +93,6 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ArrayClient client = new ArrayClient(credential);
 
 Response response = await client.GetEmptyAsync(null);
-
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetEmptyAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -119,9 +100,6 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ArrayClient client = new ArrayClient(credential);
 
 Response response = await client.GetEmptyAsync(null);
-
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("array")[0].ToString());
 ]]></code></example>
     </member>
     <member name="GetEmpty(RequestContext)">
@@ -132,9 +110,6 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ArrayClient client = new ArrayClient(credential);
 
 Response response = client.GetEmpty(null);
-
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetEmpty with all parameters and parse the result.
 <code><![CDATA[
@@ -142,9 +117,6 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ArrayClient client = new ArrayClient(credential);
 
 Response response = client.GetEmpty(null);
-
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("array")[0].ToString());
 ]]></code></example>
     </member>
     <member name="PutEmptyAsync(RequestContent,RequestContext)">
@@ -156,7 +128,6 @@ ArrayClient client = new ArrayClient(credential);
 
 RequestContent content = RequestContent.Create(new object());
 Response response = await client.PutEmptyAsync(content);
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutEmptyAsync with all request content.
 <code><![CDATA[
@@ -165,13 +136,12 @@ ArrayClient client = new ArrayClient(credential);
 
 RequestContent content = RequestContent.Create(new
 {
-    array = new List<object>()
+    array = new object[]
     {
         "<array>"
     },
 });
 Response response = await client.PutEmptyAsync(content);
-Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="PutEmpty(RequestContent,RequestContext)">
@@ -183,7 +153,6 @@ ArrayClient client = new ArrayClient(credential);
 
 RequestContent content = RequestContent.Create(new object());
 Response response = client.PutEmpty(content);
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutEmpty with all request content.
 <code><![CDATA[
@@ -192,13 +161,12 @@ ArrayClient client = new ArrayClient(credential);
 
 RequestContent content = RequestContent.Create(new
 {
-    array = new List<object>()
+    array = new object[]
     {
         "<array>"
     },
 });
 Response response = client.PutEmpty(content);
-Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="GetNotProvidedAsync(RequestContext)">
@@ -209,9 +177,6 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ArrayClient client = new ArrayClient(credential);
 
 Response response = await client.GetNotProvidedAsync(null);
-
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetNotProvidedAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -219,9 +184,6 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ArrayClient client = new ArrayClient(credential);
 
 Response response = await client.GetNotProvidedAsync(null);
-
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("array")[0].ToString());
 ]]></code></example>
     </member>
     <member name="GetNotProvided(RequestContext)">
@@ -232,9 +194,6 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ArrayClient client = new ArrayClient(credential);
 
 Response response = client.GetNotProvided(null);
-
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetNotProvided with all parameters and parse the result.
 <code><![CDATA[
@@ -242,9 +201,6 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ArrayClient client = new ArrayClient(credential);
 
 Response response = client.GetNotProvided(null);
-
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("array")[0].ToString());
 ]]></code></example>
     </member>
   </members>

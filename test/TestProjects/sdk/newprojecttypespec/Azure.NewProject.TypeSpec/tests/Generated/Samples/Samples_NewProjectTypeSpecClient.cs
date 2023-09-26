@@ -6,8 +6,6 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -29,15 +27,6 @@ namespace Azure.NewProject.TypeSpec.Samples
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
             Response response = client.TopAction(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"), null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("requiredUnion").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
-            Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
         }
 
         [Test]
@@ -49,15 +38,6 @@ namespace Azure.NewProject.TypeSpec.Samples
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
             Response response = await client.TopActionAsync(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"), null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("requiredUnion").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
-            Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
         }
 
         [Test]
@@ -69,19 +49,6 @@ namespace Azure.NewProject.TypeSpec.Samples
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
             Response response = client.TopAction(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"), null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("requiredUnion").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
-            Console.WriteLine(result.GetProperty("optionalLiteralString").ToString());
-            Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
-            Console.WriteLine(result.GetProperty("optionalLiteralFloat").ToString());
-            Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
-            Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
         }
 
         [Test]
@@ -93,19 +60,6 @@ namespace Azure.NewProject.TypeSpec.Samples
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
             Response response = await client.TopActionAsync(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"), null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("requiredUnion").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
-            Console.WriteLine(result.GetProperty("optionalLiteralString").ToString());
-            Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
-            Console.WriteLine(result.GetProperty("optionalLiteralFloat").ToString());
-            Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
-            Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
         }
 
         [Test]
@@ -117,15 +71,6 @@ namespace Azure.NewProject.TypeSpec.Samples
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
             Response response = client.TopAction2(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("requiredUnion").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
-            Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
         }
 
         [Test]
@@ -137,15 +82,6 @@ namespace Azure.NewProject.TypeSpec.Samples
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
             Response response = await client.TopAction2Async(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("requiredUnion").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
-            Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
         }
 
         [Test]
@@ -157,19 +93,6 @@ namespace Azure.NewProject.TypeSpec.Samples
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
             Response response = client.TopAction2(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("requiredUnion").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
-            Console.WriteLine(result.GetProperty("optionalLiteralString").ToString());
-            Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
-            Console.WriteLine(result.GetProperty("optionalLiteralFloat").ToString());
-            Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
-            Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
         }
 
         [Test]
@@ -181,19 +104,6 @@ namespace Azure.NewProject.TypeSpec.Samples
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
             Response response = await client.TopAction2Async(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("requiredUnion").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
-            Console.WriteLine(result.GetProperty("optionalLiteralString").ToString());
-            Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
-            Console.WriteLine(result.GetProperty("optionalLiteralFloat").ToString());
-            Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
-            Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
         }
 
         [Test]
@@ -215,15 +125,6 @@ namespace Azure.NewProject.TypeSpec.Samples
                 requiredBadDescription = "<requiredBadDescription>",
             });
             Response response = client.PatchAction(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("requiredUnion").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
-            Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
         }
 
         [Test]
@@ -245,15 +146,6 @@ namespace Azure.NewProject.TypeSpec.Samples
                 requiredBadDescription = "<requiredBadDescription>",
             });
             Response response = await client.PatchActionAsync(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("requiredUnion").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
-            Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
         }
 
         [Test]
@@ -279,19 +171,6 @@ namespace Azure.NewProject.TypeSpec.Samples
                 requiredBadDescription = "<requiredBadDescription>",
             });
             Response response = client.PatchAction(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("requiredUnion").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
-            Console.WriteLine(result.GetProperty("optionalLiteralString").ToString());
-            Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
-            Console.WriteLine(result.GetProperty("optionalLiteralFloat").ToString());
-            Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
-            Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
         }
 
         [Test]
@@ -317,19 +196,6 @@ namespace Azure.NewProject.TypeSpec.Samples
                 requiredBadDescription = "<requiredBadDescription>",
             });
             Response response = await client.PatchActionAsync(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("requiredUnion").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
-            Console.WriteLine(result.GetProperty("optionalLiteralString").ToString());
-            Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
-            Console.WriteLine(result.GetProperty("optionalLiteralFloat").ToString());
-            Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
-            Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
         }
 
         [Test]
@@ -351,15 +217,6 @@ namespace Azure.NewProject.TypeSpec.Samples
                 requiredBadDescription = "<requiredBadDescription>",
             });
             Response response = client.AnonymousBody(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("requiredUnion").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
-            Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
         }
 
         [Test]
@@ -381,15 +238,6 @@ namespace Azure.NewProject.TypeSpec.Samples
                 requiredBadDescription = "<requiredBadDescription>",
             });
             Response response = await client.AnonymousBodyAsync(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("requiredUnion").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
-            Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
         }
 
         [Test]
@@ -415,19 +263,6 @@ namespace Azure.NewProject.TypeSpec.Samples
                 requiredBadDescription = "<requiredBadDescription>",
             });
             Response response = client.AnonymousBody(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("requiredUnion").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
-            Console.WriteLine(result.GetProperty("optionalLiteralString").ToString());
-            Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
-            Console.WriteLine(result.GetProperty("optionalLiteralFloat").ToString());
-            Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
-            Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
         }
 
         [Test]
@@ -453,19 +288,6 @@ namespace Azure.NewProject.TypeSpec.Samples
                 requiredBadDescription = "<requiredBadDescription>",
             });
             Response response = await client.AnonymousBodyAsync(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("requiredUnion").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
-            Console.WriteLine(result.GetProperty("optionalLiteralString").ToString());
-            Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
-            Console.WriteLine(result.GetProperty("optionalLiteralFloat").ToString());
-            Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
-            Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
         }
 
         [Test]
@@ -481,9 +303,6 @@ namespace Azure.NewProject.TypeSpec.Samples
                 name = "<name>",
             });
             Response response = client.FriendlyModel(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]
@@ -499,9 +318,6 @@ namespace Azure.NewProject.TypeSpec.Samples
                 name = "<name>",
             });
             Response response = await client.FriendlyModelAsync(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]
@@ -541,9 +357,6 @@ namespace Azure.NewProject.TypeSpec.Samples
                 name = "<name>",
             });
             Response response = client.FriendlyModel(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]
@@ -559,9 +372,6 @@ namespace Azure.NewProject.TypeSpec.Samples
                 name = "<name>",
             });
             Response response = await client.FriendlyModelAsync(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]
@@ -597,7 +407,6 @@ namespace Azure.NewProject.TypeSpec.Samples
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
             Response response = client.AddTimeHeader();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -609,7 +418,6 @@ namespace Azure.NewProject.TypeSpec.Samples
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
             Response response = await client.AddTimeHeaderAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -621,7 +429,6 @@ namespace Azure.NewProject.TypeSpec.Samples
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
             Response response = client.AddTimeHeader();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -633,7 +440,6 @@ namespace Azure.NewProject.TypeSpec.Samples
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
             Response response = await client.AddTimeHeaderAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -650,7 +456,6 @@ namespace Azure.NewProject.TypeSpec.Samples
                 guid = "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a",
             });
             Response response = client.StringFormat(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -667,7 +472,6 @@ namespace Azure.NewProject.TypeSpec.Samples
                 guid = "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a",
             });
             Response response = await client.StringFormatAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -680,7 +484,6 @@ namespace Azure.NewProject.TypeSpec.Samples
 
             ModelWithFormat body = new ModelWithFormat(new Uri("http://localhost:3000"), Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
             Response response = client.StringFormat(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), body);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -693,7 +496,6 @@ namespace Azure.NewProject.TypeSpec.Samples
 
             ModelWithFormat body = new ModelWithFormat(new Uri("http://localhost:3000"), Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
             Response response = await client.StringFormatAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), body);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -710,7 +512,6 @@ namespace Azure.NewProject.TypeSpec.Samples
                 guid = "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a",
             });
             Response response = client.StringFormat(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -727,7 +528,6 @@ namespace Azure.NewProject.TypeSpec.Samples
                 guid = "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a",
             });
             Response response = await client.StringFormatAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -740,7 +540,6 @@ namespace Azure.NewProject.TypeSpec.Samples
 
             ModelWithFormat body = new ModelWithFormat(new Uri("http://localhost:3000"), Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
             Response response = client.StringFormat(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), body);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -753,7 +552,6 @@ namespace Azure.NewProject.TypeSpec.Samples
 
             ModelWithFormat body = new ModelWithFormat(new Uri("http://localhost:3000"), Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
             Response response = await client.StringFormatAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), body);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -765,15 +563,6 @@ namespace Azure.NewProject.TypeSpec.Samples
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
             Response response = client.SayHi("<headParameter>", "<queryParameter>", null, null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("requiredUnion").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
-            Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
         }
 
         [Test]
@@ -785,15 +574,6 @@ namespace Azure.NewProject.TypeSpec.Samples
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
             Response response = await client.SayHiAsync("<headParameter>", "<queryParameter>", null, null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("requiredUnion").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
-            Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
         }
 
         [Test]
@@ -805,19 +585,6 @@ namespace Azure.NewProject.TypeSpec.Samples
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
             Response response = client.SayHi("<headParameter>", "<queryParameter>", "<optionalQuery>", null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("requiredUnion").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
-            Console.WriteLine(result.GetProperty("optionalLiteralString").ToString());
-            Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
-            Console.WriteLine(result.GetProperty("optionalLiteralFloat").ToString());
-            Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
-            Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
         }
 
         [Test]
@@ -829,19 +596,6 @@ namespace Azure.NewProject.TypeSpec.Samples
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
             Response response = await client.SayHiAsync("<headParameter>", "<queryParameter>", "<optionalQuery>", null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("requiredUnion").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
-            Console.WriteLine(result.GetProperty("optionalLiteralString").ToString());
-            Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
-            Console.WriteLine(result.GetProperty("optionalLiteralFloat").ToString());
-            Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
-            Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
         }
 
         [Test]
@@ -856,10 +610,10 @@ namespace Azure.NewProject.TypeSpec.Samples
             {
                 requiredString = "<requiredString>",
                 requiredInt = 1234,
-                requiredCollection = new List<object>()
-{
+                requiredCollection = new object[]
+            {
 "1"
-},
+            },
                 requiredDictionary = new
                 {
                     key = "1",
@@ -881,22 +635,6 @@ namespace Azure.NewProject.TypeSpec.Samples
                 },
             });
             Response response = client.HelloAgain("<p2>", "<p1>", content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("requiredString").ToString());
-            Console.WriteLine(result.GetProperty("requiredInt").ToString());
-            Console.WriteLine(result.GetProperty("requiredCollection")[0].ToString());
-            Console.WriteLine(result.GetProperty("requiredDictionary").GetProperty("<key>").ToString());
-            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnion").ToString());
-            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralString").ToString());
-            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralInt").ToString());
-            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralFloat").ToString());
-            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralBool").ToString());
-            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredBadDescription").ToString());
-            Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
-            Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("<key>").ToString());
-            Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<key>").ToString());
         }
 
         [Test]
@@ -911,10 +649,10 @@ namespace Azure.NewProject.TypeSpec.Samples
             {
                 requiredString = "<requiredString>",
                 requiredInt = 1234,
-                requiredCollection = new List<object>()
-{
+                requiredCollection = new object[]
+            {
 "1"
-},
+            },
                 requiredDictionary = new
                 {
                     key = "1",
@@ -936,22 +674,6 @@ namespace Azure.NewProject.TypeSpec.Samples
                 },
             });
             Response response = await client.HelloAgainAsync("<p2>", "<p1>", content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("requiredString").ToString());
-            Console.WriteLine(result.GetProperty("requiredInt").ToString());
-            Console.WriteLine(result.GetProperty("requiredCollection")[0].ToString());
-            Console.WriteLine(result.GetProperty("requiredDictionary").GetProperty("<key>").ToString());
-            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnion").ToString());
-            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralString").ToString());
-            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralInt").ToString());
-            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralFloat").ToString());
-            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralBool").ToString());
-            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredBadDescription").ToString());
-            Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
-            Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("<key>").ToString());
-            Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<key>").ToString());
         }
 
         [Test]
@@ -966,10 +688,10 @@ namespace Azure.NewProject.TypeSpec.Samples
             {
                 requiredString = "<requiredString>",
                 requiredInt = 1234,
-                requiredCollection = new List<object>()
-{
+                requiredCollection = new object[]
+            {
 "1"
-},
+            },
                 requiredDictionary = new
                 {
                     key = "1",
@@ -989,25 +711,25 @@ namespace Azure.NewProject.TypeSpec.Samples
                     requiredBadDescription = "<requiredBadDescription>",
                 },
                 intExtensibleEnum = 1,
-                intExtensibleEnumCollection = new List<object>()
-{
+                intExtensibleEnumCollection = new object[]
+            {
 1
-},
+            },
                 floatExtensibleEnum = 1,
-                floatExtensibleEnumCollection = new List<object>()
-{
+                floatExtensibleEnumCollection = new object[]
+            {
 1
-},
+            },
                 floatFixedEnum = 1.1F,
-                floatFixedEnumCollection = new List<object>()
-{
+                floatFixedEnumCollection = new object[]
+            {
 1.1F
-},
+            },
                 intFixedEnum = 1,
-                intFixedEnumCollection = new List<object>()
-{
+                intFixedEnumCollection = new object[]
+            {
 1
-},
+            },
                 stringFixedEnum = "1",
                 requiredUnknown = new object(),
                 optionalUnknown = new object(),
@@ -1021,38 +743,6 @@ namespace Azure.NewProject.TypeSpec.Samples
                 },
             });
             Response response = client.HelloAgain("<p2>", "<p1>", content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("requiredString").ToString());
-            Console.WriteLine(result.GetProperty("requiredInt").ToString());
-            Console.WriteLine(result.GetProperty("requiredCollection")[0].ToString());
-            Console.WriteLine(result.GetProperty("requiredDictionary").GetProperty("<key>").ToString());
-            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnion").ToString());
-            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralString").ToString());
-            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralInt").ToString());
-            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralFloat").ToString());
-            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralBool").ToString());
-            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalLiteralString").ToString());
-            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalLiteralInt").ToString());
-            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalLiteralFloat").ToString());
-            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalLiteralBool").ToString());
-            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredBadDescription").ToString());
-            Console.WriteLine(result.GetProperty("intExtensibleEnum").ToString());
-            Console.WriteLine(result.GetProperty("intExtensibleEnumCollection")[0].ToString());
-            Console.WriteLine(result.GetProperty("floatExtensibleEnum").ToString());
-            Console.WriteLine(result.GetProperty("floatExtensibleEnumCollection")[0].ToString());
-            Console.WriteLine(result.GetProperty("floatFixedEnum").ToString());
-            Console.WriteLine(result.GetProperty("floatFixedEnumCollection")[0].ToString());
-            Console.WriteLine(result.GetProperty("intFixedEnum").ToString());
-            Console.WriteLine(result.GetProperty("intFixedEnumCollection")[0].ToString());
-            Console.WriteLine(result.GetProperty("stringFixedEnum").ToString());
-            Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
-            Console.WriteLine(result.GetProperty("optionalUnknown").ToString());
-            Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("<key>").ToString());
-            Console.WriteLine(result.GetProperty("optionalRecordUnknown").GetProperty("<key>").ToString());
-            Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<key>").ToString());
-            Console.WriteLine(result.GetProperty("readOnlyOptionalRecordUnknown").GetProperty("<key>").ToString());
         }
 
         [Test]
@@ -1067,10 +757,10 @@ namespace Azure.NewProject.TypeSpec.Samples
             {
                 requiredString = "<requiredString>",
                 requiredInt = 1234,
-                requiredCollection = new List<object>()
-{
+                requiredCollection = new object[]
+            {
 "1"
-},
+            },
                 requiredDictionary = new
                 {
                     key = "1",
@@ -1090,25 +780,25 @@ namespace Azure.NewProject.TypeSpec.Samples
                     requiredBadDescription = "<requiredBadDescription>",
                 },
                 intExtensibleEnum = 1,
-                intExtensibleEnumCollection = new List<object>()
-{
+                intExtensibleEnumCollection = new object[]
+            {
 1
-},
+            },
                 floatExtensibleEnum = 1,
-                floatExtensibleEnumCollection = new List<object>()
-{
+                floatExtensibleEnumCollection = new object[]
+            {
 1
-},
+            },
                 floatFixedEnum = 1.1F,
-                floatFixedEnumCollection = new List<object>()
-{
+                floatFixedEnumCollection = new object[]
+            {
 1.1F
-},
+            },
                 intFixedEnum = 1,
-                intFixedEnumCollection = new List<object>()
-{
+                intFixedEnumCollection = new object[]
+            {
 1
-},
+            },
                 stringFixedEnum = "1",
                 requiredUnknown = new object(),
                 optionalUnknown = new object(),
@@ -1122,38 +812,6 @@ namespace Azure.NewProject.TypeSpec.Samples
                 },
             });
             Response response = await client.HelloAgainAsync("<p2>", "<p1>", content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("requiredString").ToString());
-            Console.WriteLine(result.GetProperty("requiredInt").ToString());
-            Console.WriteLine(result.GetProperty("requiredCollection")[0].ToString());
-            Console.WriteLine(result.GetProperty("requiredDictionary").GetProperty("<key>").ToString());
-            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnion").ToString());
-            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralString").ToString());
-            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralInt").ToString());
-            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralFloat").ToString());
-            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralBool").ToString());
-            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalLiteralString").ToString());
-            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalLiteralInt").ToString());
-            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalLiteralFloat").ToString());
-            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalLiteralBool").ToString());
-            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredBadDescription").ToString());
-            Console.WriteLine(result.GetProperty("intExtensibleEnum").ToString());
-            Console.WriteLine(result.GetProperty("intExtensibleEnumCollection")[0].ToString());
-            Console.WriteLine(result.GetProperty("floatExtensibleEnum").ToString());
-            Console.WriteLine(result.GetProperty("floatExtensibleEnumCollection")[0].ToString());
-            Console.WriteLine(result.GetProperty("floatFixedEnum").ToString());
-            Console.WriteLine(result.GetProperty("floatFixedEnumCollection")[0].ToString());
-            Console.WriteLine(result.GetProperty("intFixedEnum").ToString());
-            Console.WriteLine(result.GetProperty("intFixedEnumCollection")[0].ToString());
-            Console.WriteLine(result.GetProperty("stringFixedEnum").ToString());
-            Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
-            Console.WriteLine(result.GetProperty("optionalUnknown").ToString());
-            Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("<key>").ToString());
-            Console.WriteLine(result.GetProperty("optionalRecordUnknown").GetProperty("<key>").ToString());
-            Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<key>").ToString());
-            Console.WriteLine(result.GetProperty("readOnlyOptionalRecordUnknown").GetProperty("<key>").ToString());
         }
 
         [Test]
@@ -1168,10 +826,10 @@ namespace Azure.NewProject.TypeSpec.Samples
             {
                 requiredString = "<requiredString>",
                 requiredInt = 1234,
-                requiredCollection = new List<object>()
-{
+                requiredCollection = new object[]
+            {
 "1"
-},
+            },
                 requiredDictionary = new
                 {
                     key = "1",
@@ -1193,22 +851,6 @@ namespace Azure.NewProject.TypeSpec.Samples
                 },
             });
             Response response = client.NoContentType("<p2>", "<p1>", content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("requiredString").ToString());
-            Console.WriteLine(result.GetProperty("requiredInt").ToString());
-            Console.WriteLine(result.GetProperty("requiredCollection")[0].ToString());
-            Console.WriteLine(result.GetProperty("requiredDictionary").GetProperty("<key>").ToString());
-            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnion").ToString());
-            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralString").ToString());
-            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralInt").ToString());
-            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralFloat").ToString());
-            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralBool").ToString());
-            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredBadDescription").ToString());
-            Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
-            Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("<key>").ToString());
-            Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<key>").ToString());
         }
 
         [Test]
@@ -1223,10 +865,10 @@ namespace Azure.NewProject.TypeSpec.Samples
             {
                 requiredString = "<requiredString>",
                 requiredInt = 1234,
-                requiredCollection = new List<object>()
-{
+                requiredCollection = new object[]
+            {
 "1"
-},
+            },
                 requiredDictionary = new
                 {
                     key = "1",
@@ -1248,22 +890,6 @@ namespace Azure.NewProject.TypeSpec.Samples
                 },
             });
             Response response = await client.NoContentTypeAsync("<p2>", "<p1>", content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("requiredString").ToString());
-            Console.WriteLine(result.GetProperty("requiredInt").ToString());
-            Console.WriteLine(result.GetProperty("requiredCollection")[0].ToString());
-            Console.WriteLine(result.GetProperty("requiredDictionary").GetProperty("<key>").ToString());
-            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnion").ToString());
-            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralString").ToString());
-            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralInt").ToString());
-            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralFloat").ToString());
-            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralBool").ToString());
-            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredBadDescription").ToString());
-            Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
-            Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("<key>").ToString());
-            Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<key>").ToString());
         }
 
         [Test]
@@ -1278,10 +904,10 @@ namespace Azure.NewProject.TypeSpec.Samples
             {
                 requiredString = "<requiredString>",
                 requiredInt = 1234,
-                requiredCollection = new List<object>()
-{
+                requiredCollection = new object[]
+            {
 "1"
-},
+            },
                 requiredDictionary = new
                 {
                     key = "1",
@@ -1301,25 +927,25 @@ namespace Azure.NewProject.TypeSpec.Samples
                     requiredBadDescription = "<requiredBadDescription>",
                 },
                 intExtensibleEnum = 1,
-                intExtensibleEnumCollection = new List<object>()
-{
+                intExtensibleEnumCollection = new object[]
+            {
 1
-},
+            },
                 floatExtensibleEnum = 1,
-                floatExtensibleEnumCollection = new List<object>()
-{
+                floatExtensibleEnumCollection = new object[]
+            {
 1
-},
+            },
                 floatFixedEnum = 1.1F,
-                floatFixedEnumCollection = new List<object>()
-{
+                floatFixedEnumCollection = new object[]
+            {
 1.1F
-},
+            },
                 intFixedEnum = 1,
-                intFixedEnumCollection = new List<object>()
-{
+                intFixedEnumCollection = new object[]
+            {
 1
-},
+            },
                 stringFixedEnum = "1",
                 requiredUnknown = new object(),
                 optionalUnknown = new object(),
@@ -1333,38 +959,6 @@ namespace Azure.NewProject.TypeSpec.Samples
                 },
             });
             Response response = client.NoContentType("<p2>", "<p1>", content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("requiredString").ToString());
-            Console.WriteLine(result.GetProperty("requiredInt").ToString());
-            Console.WriteLine(result.GetProperty("requiredCollection")[0].ToString());
-            Console.WriteLine(result.GetProperty("requiredDictionary").GetProperty("<key>").ToString());
-            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnion").ToString());
-            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralString").ToString());
-            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralInt").ToString());
-            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralFloat").ToString());
-            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralBool").ToString());
-            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalLiteralString").ToString());
-            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalLiteralInt").ToString());
-            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalLiteralFloat").ToString());
-            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalLiteralBool").ToString());
-            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredBadDescription").ToString());
-            Console.WriteLine(result.GetProperty("intExtensibleEnum").ToString());
-            Console.WriteLine(result.GetProperty("intExtensibleEnumCollection")[0].ToString());
-            Console.WriteLine(result.GetProperty("floatExtensibleEnum").ToString());
-            Console.WriteLine(result.GetProperty("floatExtensibleEnumCollection")[0].ToString());
-            Console.WriteLine(result.GetProperty("floatFixedEnum").ToString());
-            Console.WriteLine(result.GetProperty("floatFixedEnumCollection")[0].ToString());
-            Console.WriteLine(result.GetProperty("intFixedEnum").ToString());
-            Console.WriteLine(result.GetProperty("intFixedEnumCollection")[0].ToString());
-            Console.WriteLine(result.GetProperty("stringFixedEnum").ToString());
-            Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
-            Console.WriteLine(result.GetProperty("optionalUnknown").ToString());
-            Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("<key>").ToString());
-            Console.WriteLine(result.GetProperty("optionalRecordUnknown").GetProperty("<key>").ToString());
-            Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<key>").ToString());
-            Console.WriteLine(result.GetProperty("readOnlyOptionalRecordUnknown").GetProperty("<key>").ToString());
         }
 
         [Test]
@@ -1379,10 +973,10 @@ namespace Azure.NewProject.TypeSpec.Samples
             {
                 requiredString = "<requiredString>",
                 requiredInt = 1234,
-                requiredCollection = new List<object>()
-{
+                requiredCollection = new object[]
+            {
 "1"
-},
+            },
                 requiredDictionary = new
                 {
                     key = "1",
@@ -1402,25 +996,25 @@ namespace Azure.NewProject.TypeSpec.Samples
                     requiredBadDescription = "<requiredBadDescription>",
                 },
                 intExtensibleEnum = 1,
-                intExtensibleEnumCollection = new List<object>()
-{
+                intExtensibleEnumCollection = new object[]
+            {
 1
-},
+            },
                 floatExtensibleEnum = 1,
-                floatExtensibleEnumCollection = new List<object>()
-{
+                floatExtensibleEnumCollection = new object[]
+            {
 1
-},
+            },
                 floatFixedEnum = 1.1F,
-                floatFixedEnumCollection = new List<object>()
-{
+                floatFixedEnumCollection = new object[]
+            {
 1.1F
-},
+            },
                 intFixedEnum = 1,
-                intFixedEnumCollection = new List<object>()
-{
+                intFixedEnumCollection = new object[]
+            {
 1
-},
+            },
                 stringFixedEnum = "1",
                 requiredUnknown = new object(),
                 optionalUnknown = new object(),
@@ -1434,38 +1028,6 @@ namespace Azure.NewProject.TypeSpec.Samples
                 },
             });
             Response response = await client.NoContentTypeAsync("<p2>", "<p1>", content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("requiredString").ToString());
-            Console.WriteLine(result.GetProperty("requiredInt").ToString());
-            Console.WriteLine(result.GetProperty("requiredCollection")[0].ToString());
-            Console.WriteLine(result.GetProperty("requiredDictionary").GetProperty("<key>").ToString());
-            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnion").ToString());
-            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralString").ToString());
-            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralInt").ToString());
-            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralFloat").ToString());
-            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralBool").ToString());
-            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalLiteralString").ToString());
-            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalLiteralInt").ToString());
-            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalLiteralFloat").ToString());
-            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalLiteralBool").ToString());
-            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredBadDescription").ToString());
-            Console.WriteLine(result.GetProperty("intExtensibleEnum").ToString());
-            Console.WriteLine(result.GetProperty("intExtensibleEnumCollection")[0].ToString());
-            Console.WriteLine(result.GetProperty("floatExtensibleEnum").ToString());
-            Console.WriteLine(result.GetProperty("floatExtensibleEnumCollection")[0].ToString());
-            Console.WriteLine(result.GetProperty("floatFixedEnum").ToString());
-            Console.WriteLine(result.GetProperty("floatFixedEnumCollection")[0].ToString());
-            Console.WriteLine(result.GetProperty("intFixedEnum").ToString());
-            Console.WriteLine(result.GetProperty("intFixedEnumCollection")[0].ToString());
-            Console.WriteLine(result.GetProperty("stringFixedEnum").ToString());
-            Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
-            Console.WriteLine(result.GetProperty("optionalUnknown").ToString());
-            Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("<key>").ToString());
-            Console.WriteLine(result.GetProperty("optionalRecordUnknown").GetProperty("<key>").ToString());
-            Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<key>").ToString());
-            Console.WriteLine(result.GetProperty("readOnlyOptionalRecordUnknown").GetProperty("<key>").ToString());
         }
 
         [Test]
@@ -1477,15 +1039,6 @@ namespace Azure.NewProject.TypeSpec.Samples
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
             Response response = client.HelloDemo2(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("requiredUnion").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
-            Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
         }
 
         [Test]
@@ -1497,15 +1050,6 @@ namespace Azure.NewProject.TypeSpec.Samples
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
             Response response = await client.HelloDemo2Async(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("requiredUnion").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
-            Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
         }
 
         [Test]
@@ -1517,19 +1061,6 @@ namespace Azure.NewProject.TypeSpec.Samples
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
             Response response = client.HelloDemo2(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("requiredUnion").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
-            Console.WriteLine(result.GetProperty("optionalLiteralString").ToString());
-            Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
-            Console.WriteLine(result.GetProperty("optionalLiteralFloat").ToString());
-            Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
-            Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
         }
 
         [Test]
@@ -1541,19 +1072,6 @@ namespace Azure.NewProject.TypeSpec.Samples
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
             Response response = await client.HelloDemo2Async(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("requiredUnion").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
-            Console.WriteLine(result.GetProperty("optionalLiteralString").ToString());
-            Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
-            Console.WriteLine(result.GetProperty("optionalLiteralFloat").ToString());
-            Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
-            Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
         }
 
         [Test]
@@ -1575,15 +1093,6 @@ namespace Azure.NewProject.TypeSpec.Samples
                 requiredBadDescription = "<requiredBadDescription>",
             });
             Response response = client.CreateLiteral(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("requiredUnion").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
-            Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
         }
 
         [Test]
@@ -1605,15 +1114,6 @@ namespace Azure.NewProject.TypeSpec.Samples
                 requiredBadDescription = "<requiredBadDescription>",
             });
             Response response = await client.CreateLiteralAsync(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("requiredUnion").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
-            Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
         }
 
         [Test]
@@ -1639,19 +1139,6 @@ namespace Azure.NewProject.TypeSpec.Samples
                 requiredBadDescription = "<requiredBadDescription>",
             });
             Response response = client.CreateLiteral(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("requiredUnion").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
-            Console.WriteLine(result.GetProperty("optionalLiteralString").ToString());
-            Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
-            Console.WriteLine(result.GetProperty("optionalLiteralFloat").ToString());
-            Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
-            Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
         }
 
         [Test]
@@ -1677,19 +1164,6 @@ namespace Azure.NewProject.TypeSpec.Samples
                 requiredBadDescription = "<requiredBadDescription>",
             });
             Response response = await client.CreateLiteralAsync(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("requiredUnion").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
-            Console.WriteLine(result.GetProperty("optionalLiteralString").ToString());
-            Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
-            Console.WriteLine(result.GetProperty("optionalLiteralFloat").ToString());
-            Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
-            Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
         }
 
         [Test]
@@ -1701,15 +1175,6 @@ namespace Azure.NewProject.TypeSpec.Samples
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
             Response response = client.HelloLiteral(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("requiredUnion").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
-            Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
         }
 
         [Test]
@@ -1721,15 +1186,6 @@ namespace Azure.NewProject.TypeSpec.Samples
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
             Response response = await client.HelloLiteralAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("requiredUnion").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
-            Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
         }
 
         [Test]
@@ -1741,19 +1197,6 @@ namespace Azure.NewProject.TypeSpec.Samples
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
             Response response = client.HelloLiteral(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("requiredUnion").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
-            Console.WriteLine(result.GetProperty("optionalLiteralString").ToString());
-            Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
-            Console.WriteLine(result.GetProperty("optionalLiteralFloat").ToString());
-            Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
-            Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
         }
 
         [Test]
@@ -1765,19 +1208,6 @@ namespace Azure.NewProject.TypeSpec.Samples
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
             Response response = await client.HelloLiteralAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("requiredUnion").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
-            Console.WriteLine(result.GetProperty("optionalLiteralString").ToString());
-            Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
-            Console.WriteLine(result.GetProperty("optionalLiteralFloat").ToString());
-            Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
-            Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
         }
 
         [Test]
@@ -1789,9 +1219,6 @@ namespace Azure.NewProject.TypeSpec.Samples
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
             Response response = client.GetUnknownValue(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -1803,9 +1230,6 @@ namespace Azure.NewProject.TypeSpec.Samples
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
             Response response = await client.GetUnknownValueAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -1817,9 +1241,6 @@ namespace Azure.NewProject.TypeSpec.Samples
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
             Response response = client.GetUnknownValue(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -1831,9 +1252,6 @@ namespace Azure.NewProject.TypeSpec.Samples
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
             Response response = await client.GetUnknownValueAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
     }
 }

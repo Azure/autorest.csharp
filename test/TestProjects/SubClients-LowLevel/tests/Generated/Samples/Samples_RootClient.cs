@@ -5,8 +5,6 @@
 
 #nullable disable
 
-using System;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Identity;
@@ -25,9 +23,6 @@ namespace SubClients_LowLevel.Samples
             RootClient client = new RootClient("<CachedParameter>", credential);
 
             Response response = client.GetCachedParameter(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -38,9 +33,6 @@ namespace SubClients_LowLevel.Samples
             RootClient client = new RootClient("<CachedParameter>", credential);
 
             Response response = await client.GetCachedParameterAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -51,9 +43,6 @@ namespace SubClients_LowLevel.Samples
             RootClient client = new RootClient("<CachedParameter>", credential);
 
             Response response = client.GetCachedParameter(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -64,9 +53,6 @@ namespace SubClients_LowLevel.Samples
             RootClient client = new RootClient("<CachedParameter>", credential);
 
             Response response = await client.GetCachedParameterAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
     }
 }

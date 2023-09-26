@@ -5,8 +5,6 @@
 
 #nullable disable
 
-using System;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -30,7 +28,6 @@ namespace _Type.Model.Usage.Samples
                 requiredProp = "<requiredProp>",
             });
             Response response = client.Input(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -44,7 +41,6 @@ namespace _Type.Model.Usage.Samples
                 requiredProp = "<requiredProp>",
             });
             Response response = await client.InputAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -55,7 +51,6 @@ namespace _Type.Model.Usage.Samples
 
             InputRecord input = new InputRecord("<requiredProp>");
             Response response = client.Input(input);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -66,7 +61,6 @@ namespace _Type.Model.Usage.Samples
 
             InputRecord input = new InputRecord("<requiredProp>");
             Response response = await client.InputAsync(input);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -80,7 +74,6 @@ namespace _Type.Model.Usage.Samples
                 requiredProp = "<requiredProp>",
             });
             Response response = client.Input(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -94,7 +87,6 @@ namespace _Type.Model.Usage.Samples
                 requiredProp = "<requiredProp>",
             });
             Response response = await client.InputAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -105,7 +97,6 @@ namespace _Type.Model.Usage.Samples
 
             InputRecord input = new InputRecord("<requiredProp>");
             Response response = client.Input(input);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -116,7 +107,6 @@ namespace _Type.Model.Usage.Samples
 
             InputRecord input = new InputRecord("<requiredProp>");
             Response response = await client.InputAsync(input);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -126,9 +116,6 @@ namespace _Type.Model.Usage.Samples
             UsageClient client = new UsageClient();
 
             Response response = client.Output(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("requiredProp").ToString());
         }
 
         [Test]
@@ -138,9 +125,6 @@ namespace _Type.Model.Usage.Samples
             UsageClient client = new UsageClient();
 
             Response response = await client.OutputAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("requiredProp").ToString());
         }
 
         [Test]
@@ -168,9 +152,6 @@ namespace _Type.Model.Usage.Samples
             UsageClient client = new UsageClient();
 
             Response response = client.Output(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("requiredProp").ToString());
         }
 
         [Test]
@@ -180,9 +161,6 @@ namespace _Type.Model.Usage.Samples
             UsageClient client = new UsageClient();
 
             Response response = await client.OutputAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("requiredProp").ToString());
         }
 
         [Test]
@@ -214,9 +192,6 @@ namespace _Type.Model.Usage.Samples
                 requiredProp = "<requiredProp>",
             });
             Response response = client.InputAndOutput(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("requiredProp").ToString());
         }
 
         [Test]
@@ -230,9 +205,6 @@ namespace _Type.Model.Usage.Samples
                 requiredProp = "<requiredProp>",
             });
             Response response = await client.InputAndOutputAsync(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("requiredProp").ToString());
         }
 
         [Test]
@@ -266,9 +238,6 @@ namespace _Type.Model.Usage.Samples
                 requiredProp = "<requiredProp>",
             });
             Response response = client.InputAndOutput(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("requiredProp").ToString());
         }
 
         [Test]
@@ -282,9 +251,6 @@ namespace _Type.Model.Usage.Samples
                 requiredProp = "<requiredProp>",
             });
             Response response = await client.InputAndOutputAsync(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("requiredProp").ToString());
         }
 
         [Test]

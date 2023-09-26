@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -16,7 +15,7 @@ using Projection.ProjectedName.Models;
 
 namespace Projection.ProjectedName.Samples
 {
-    internal class Samples_Property
+    public class Samples_Property
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
@@ -29,7 +28,6 @@ namespace Projection.ProjectedName.Samples
                 wireName = true,
             });
             Response response = client.Json(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -43,7 +41,6 @@ namespace Projection.ProjectedName.Samples
                 wireName = true,
             });
             Response response = await client.JsonAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -54,7 +51,6 @@ namespace Projection.ProjectedName.Samples
 
             JsonProjectedNameModel jsonProjectedNameModel = new JsonProjectedNameModel(true);
             Response response = client.Json(jsonProjectedNameModel);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -65,7 +61,6 @@ namespace Projection.ProjectedName.Samples
 
             JsonProjectedNameModel jsonProjectedNameModel = new JsonProjectedNameModel(true);
             Response response = await client.JsonAsync(jsonProjectedNameModel);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -79,7 +74,6 @@ namespace Projection.ProjectedName.Samples
                 wireName = true,
             });
             Response response = client.Json(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -93,7 +87,6 @@ namespace Projection.ProjectedName.Samples
                 wireName = true,
             });
             Response response = await client.JsonAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -104,7 +97,6 @@ namespace Projection.ProjectedName.Samples
 
             JsonProjectedNameModel jsonProjectedNameModel = new JsonProjectedNameModel(true);
             Response response = client.Json(jsonProjectedNameModel);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -115,7 +107,6 @@ namespace Projection.ProjectedName.Samples
 
             JsonProjectedNameModel jsonProjectedNameModel = new JsonProjectedNameModel(true);
             Response response = await client.JsonAsync(jsonProjectedNameModel);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -129,7 +120,6 @@ namespace Projection.ProjectedName.Samples
                 defaultName = true,
             });
             Response response = client.Client(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -143,7 +133,6 @@ namespace Projection.ProjectedName.Samples
                 defaultName = true,
             });
             Response response = await client.ClientAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -154,7 +143,6 @@ namespace Projection.ProjectedName.Samples
 
             ClientProjectedNameModel clientProjectedNameModel = new ClientProjectedNameModel(true);
             Response response = client.Client(clientProjectedNameModel);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -165,7 +153,6 @@ namespace Projection.ProjectedName.Samples
 
             ClientProjectedNameModel clientProjectedNameModel = new ClientProjectedNameModel(true);
             Response response = await client.ClientAsync(clientProjectedNameModel);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -179,7 +166,6 @@ namespace Projection.ProjectedName.Samples
                 defaultName = true,
             });
             Response response = client.Client(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -193,7 +179,6 @@ namespace Projection.ProjectedName.Samples
                 defaultName = true,
             });
             Response response = await client.ClientAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -204,7 +189,6 @@ namespace Projection.ProjectedName.Samples
 
             ClientProjectedNameModel clientProjectedNameModel = new ClientProjectedNameModel(true);
             Response response = client.Client(clientProjectedNameModel);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -215,7 +199,6 @@ namespace Projection.ProjectedName.Samples
 
             ClientProjectedNameModel clientProjectedNameModel = new ClientProjectedNameModel(true);
             Response response = await client.ClientAsync(clientProjectedNameModel);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -229,7 +212,6 @@ namespace Projection.ProjectedName.Samples
                 defaultName = true,
             });
             Response response = client.Language(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -243,7 +225,6 @@ namespace Projection.ProjectedName.Samples
                 defaultName = true,
             });
             Response response = await client.LanguageAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -254,7 +235,6 @@ namespace Projection.ProjectedName.Samples
 
             LanguageProjectedNameModel languageProjectedNameModel = new LanguageProjectedNameModel(true);
             Response response = client.Language(languageProjectedNameModel);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -265,7 +245,6 @@ namespace Projection.ProjectedName.Samples
 
             LanguageProjectedNameModel languageProjectedNameModel = new LanguageProjectedNameModel(true);
             Response response = await client.LanguageAsync(languageProjectedNameModel);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -279,7 +258,6 @@ namespace Projection.ProjectedName.Samples
                 defaultName = true,
             });
             Response response = client.Language(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -293,7 +271,6 @@ namespace Projection.ProjectedName.Samples
                 defaultName = true,
             });
             Response response = await client.LanguageAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -304,7 +281,6 @@ namespace Projection.ProjectedName.Samples
 
             LanguageProjectedNameModel languageProjectedNameModel = new LanguageProjectedNameModel(true);
             Response response = client.Language(languageProjectedNameModel);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -315,7 +291,6 @@ namespace Projection.ProjectedName.Samples
 
             LanguageProjectedNameModel languageProjectedNameModel = new LanguageProjectedNameModel(true);
             Response response = await client.LanguageAsync(languageProjectedNameModel);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -329,7 +304,6 @@ namespace Projection.ProjectedName.Samples
                 wireName = true,
             });
             Response response = client.JsonAndClient(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -343,7 +317,6 @@ namespace Projection.ProjectedName.Samples
                 wireName = true,
             });
             Response response = await client.JsonAndClientAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -354,7 +327,6 @@ namespace Projection.ProjectedName.Samples
 
             JsonAndClientProjectedNameModel jsonAndClientProjectedNameModel = new JsonAndClientProjectedNameModel(true);
             Response response = client.JsonAndClient(jsonAndClientProjectedNameModel);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -365,7 +337,6 @@ namespace Projection.ProjectedName.Samples
 
             JsonAndClientProjectedNameModel jsonAndClientProjectedNameModel = new JsonAndClientProjectedNameModel(true);
             Response response = await client.JsonAndClientAsync(jsonAndClientProjectedNameModel);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -379,7 +350,6 @@ namespace Projection.ProjectedName.Samples
                 wireName = true,
             });
             Response response = client.JsonAndClient(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -393,7 +363,6 @@ namespace Projection.ProjectedName.Samples
                 wireName = true,
             });
             Response response = await client.JsonAndClientAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -404,7 +373,6 @@ namespace Projection.ProjectedName.Samples
 
             JsonAndClientProjectedNameModel jsonAndClientProjectedNameModel = new JsonAndClientProjectedNameModel(true);
             Response response = client.JsonAndClient(jsonAndClientProjectedNameModel);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -415,7 +383,6 @@ namespace Projection.ProjectedName.Samples
 
             JsonAndClientProjectedNameModel jsonAndClientProjectedNameModel = new JsonAndClientProjectedNameModel(true);
             Response response = await client.JsonAndClientAsync(jsonAndClientProjectedNameModel);
-            Console.WriteLine(response.Status);
         }
     }
 }

@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Identity;
@@ -23,7 +22,6 @@ namespace SpecialHeaders.ConditionalRequest.Samples
             ConditionalRequestClient client = new ConditionalRequestClient();
 
             Response response = client.PostIfMatch();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -33,7 +31,6 @@ namespace SpecialHeaders.ConditionalRequest.Samples
             ConditionalRequestClient client = new ConditionalRequestClient();
 
             Response response = await client.PostIfMatchAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -42,8 +39,7 @@ namespace SpecialHeaders.ConditionalRequest.Samples
         {
             ConditionalRequestClient client = new ConditionalRequestClient();
 
-            Response response = client.PostIfMatch(ifMatch: new ETag("<ifMatch>"));
-            Console.WriteLine(response.Status);
+            Response response = client.PostIfMatch(new ETag("<ifMatch>"));
         }
 
         [Test]
@@ -52,8 +48,7 @@ namespace SpecialHeaders.ConditionalRequest.Samples
         {
             ConditionalRequestClient client = new ConditionalRequestClient();
 
-            Response response = await client.PostIfMatchAsync(ifMatch: new ETag("<ifMatch>"));
-            Console.WriteLine(response.Status);
+            Response response = await client.PostIfMatchAsync(new ETag("<ifMatch>"));
         }
 
         [Test]
@@ -63,7 +58,6 @@ namespace SpecialHeaders.ConditionalRequest.Samples
             ConditionalRequestClient client = new ConditionalRequestClient();
 
             Response response = client.PostIfNoneMatch();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -73,7 +67,6 @@ namespace SpecialHeaders.ConditionalRequest.Samples
             ConditionalRequestClient client = new ConditionalRequestClient();
 
             Response response = await client.PostIfNoneMatchAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -82,8 +75,7 @@ namespace SpecialHeaders.ConditionalRequest.Samples
         {
             ConditionalRequestClient client = new ConditionalRequestClient();
 
-            Response response = client.PostIfNoneMatch(ifNoneMatch: new ETag("<ifNoneMatch>"));
-            Console.WriteLine(response.Status);
+            Response response = client.PostIfNoneMatch(new ETag("<ifNoneMatch>"));
         }
 
         [Test]
@@ -92,8 +84,7 @@ namespace SpecialHeaders.ConditionalRequest.Samples
         {
             ConditionalRequestClient client = new ConditionalRequestClient();
 
-            Response response = await client.PostIfNoneMatchAsync(ifNoneMatch: new ETag("<ifNoneMatch>"));
-            Console.WriteLine(response.Status);
+            Response response = await client.PostIfNoneMatchAsync(new ETag("<ifNoneMatch>"));
         }
     }
 }

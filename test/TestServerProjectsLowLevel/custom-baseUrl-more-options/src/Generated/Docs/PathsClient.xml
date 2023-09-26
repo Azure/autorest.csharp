@@ -9,15 +9,13 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PathsClient client = new PathsClient("host", "<SubscriptionId>", credential);
 
 Response response = await client.GetEmptyAsync("<vault>", "<secret>", "<keyName>");
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call GetEmptyAsync with all parameters.
 <code><![CDATA[
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PathsClient client = new PathsClient("host", "<SubscriptionId>", credential);
 
-Response response = await client.GetEmptyAsync("<vault>", "<secret>", "<keyName>", keyVersion: "<keyVersion>");
-Console.WriteLine(response.Status);
+Response response = await client.GetEmptyAsync("<vault>", "<secret>", "<keyName>", "<keyVersion>");
 ]]></code></example>
     </member>
     <member name="GetEmpty(string,string,string,string,RequestContext)">
@@ -28,15 +26,13 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PathsClient client = new PathsClient("host", "<SubscriptionId>", credential);
 
 Response response = client.GetEmpty("<vault>", "<secret>", "<keyName>");
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call GetEmpty with all parameters.
 <code><![CDATA[
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PathsClient client = new PathsClient("host", "<SubscriptionId>", credential);
 
-Response response = client.GetEmpty("<vault>", "<secret>", "<keyName>", keyVersion: "<keyVersion>");
-Console.WriteLine(response.Status);
+Response response = client.GetEmpty("<vault>", "<secret>", "<keyName>", "<keyVersion>");
 ]]></code></example>
     </member>
   </members>

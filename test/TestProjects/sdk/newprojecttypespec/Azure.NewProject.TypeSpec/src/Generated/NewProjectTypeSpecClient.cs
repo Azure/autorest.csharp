@@ -93,7 +93,6 @@ namespace Azure.NewProject.TypeSpec
         /// <summary> top level method. </summary>
         /// <param name="action"> The DateTime to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/NewProjectTypeSpecClient.xml" path="doc/members/member[@name='TopActionAsync(DateTimeOffset,CancellationToken)']/*" />
         internal virtual async Task<Response<Thing>> TopActionAsync(DateTimeOffset action, CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -104,7 +103,6 @@ namespace Azure.NewProject.TypeSpec
         /// <summary> top level method. </summary>
         /// <param name="action"> The DateTime to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/NewProjectTypeSpecClient.xml" path="doc/members/member[@name='TopAction(DateTimeOffset,CancellationToken)']/*" />
         internal virtual Response<Thing> TopAction(DateTimeOffset action, CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -308,7 +306,6 @@ namespace Azure.NewProject.TypeSpec
         /// <param name="thing"> A model with a few properties of literal types. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="thing"/> is null. </exception>
-        /// <include file="Docs/NewProjectTypeSpecClient.xml" path="doc/members/member[@name='AnonymousBodyAsync(Thing,CancellationToken)']/*" />
         internal virtual async Task<Response<Thing>> AnonymousBodyAsync(Thing thing, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(thing, nameof(thing));
@@ -322,7 +319,6 @@ namespace Azure.NewProject.TypeSpec
         /// <param name="thing"> A model with a few properties of literal types. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="thing"/> is null. </exception>
-        /// <include file="Docs/NewProjectTypeSpecClient.xml" path="doc/members/member[@name='AnonymousBody(Thing,CancellationToken)']/*" />
         internal virtual Response<Thing> AnonymousBody(Thing thing, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(thing, nameof(thing));
@@ -759,7 +755,6 @@ namespace Azure.NewProject.TypeSpec
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="p2"/>, <paramref name="p1"/> or <paramref name="action"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="p2"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <include file="Docs/NewProjectTypeSpecClient.xml" path="doc/members/member[@name='HelloAgainAsync(string,string,RoundTripModel,CancellationToken)']/*" />
         internal virtual async Task<Response<RoundTripModel>> HelloAgainAsync(string p2, string p1, RoundTripModel action, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(p2, nameof(p2));
@@ -778,7 +773,6 @@ namespace Azure.NewProject.TypeSpec
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="p2"/>, <paramref name="p1"/> or <paramref name="action"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="p2"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <include file="Docs/NewProjectTypeSpecClient.xml" path="doc/members/member[@name='HelloAgain(string,string,RoundTripModel,CancellationToken)']/*" />
         internal virtual Response<RoundTripModel> HelloAgain(string p2, string p1, RoundTripModel action, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(p2, nameof(p2));
@@ -950,7 +944,6 @@ namespace Azure.NewProject.TypeSpec
 
         /// <summary> Return hi in demo2. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/NewProjectTypeSpecClient.xml" path="doc/members/member[@name='HelloDemo2Async(CancellationToken)']/*" />
         internal virtual async Task<Response<Thing>> HelloDemo2Async(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -960,7 +953,6 @@ namespace Azure.NewProject.TypeSpec
 
         /// <summary> Return hi in demo2. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/NewProjectTypeSpecClient.xml" path="doc/members/member[@name='HelloDemo2(CancellationToken)']/*" />
         internal virtual Response<Thing> HelloDemo2(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -1034,7 +1026,6 @@ namespace Azure.NewProject.TypeSpec
         /// <param name="body"> The Thing to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/NewProjectTypeSpecClient.xml" path="doc/members/member[@name='CreateLiteralAsync(Thing,CancellationToken)']/*" />
         internal virtual async Task<Response<Thing>> CreateLiteralAsync(Thing body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -1048,7 +1039,6 @@ namespace Azure.NewProject.TypeSpec
         /// <param name="body"> The Thing to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/NewProjectTypeSpecClient.xml" path="doc/members/member[@name='CreateLiteral(Thing,CancellationToken)']/*" />
         internal virtual Response<Thing> CreateLiteral(Thing body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -1130,7 +1120,6 @@ namespace Azure.NewProject.TypeSpec
 
         /// <summary> Send literal parameters. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/NewProjectTypeSpecClient.xml" path="doc/members/member[@name='HelloLiteralAsync(CancellationToken)']/*" />
         internal virtual async Task<Response<Thing>> HelloLiteralAsync(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -1140,7 +1129,6 @@ namespace Azure.NewProject.TypeSpec
 
         /// <summary> Send literal parameters. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/NewProjectTypeSpecClient.xml" path="doc/members/member[@name='HelloLiteral(CancellationToken)']/*" />
         internal virtual Response<Thing> HelloLiteral(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -1274,7 +1262,6 @@ namespace Azure.NewProject.TypeSpec
         /// <param name="body"> The Thing to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/NewProjectTypeSpecClient.xml" path="doc/members/member[@name='InternalProtocolAsync(Thing,CancellationToken)']/*" />
         internal virtual async Task<Response<Thing>> InternalProtocolAsync(Thing body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -1288,7 +1275,6 @@ namespace Azure.NewProject.TypeSpec
         /// <param name="body"> The Thing to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/NewProjectTypeSpecClient.xml" path="doc/members/member[@name='InternalProtocol(Thing,CancellationToken)']/*" />
         internal virtual Response<Thing> InternalProtocol(Thing body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -1319,7 +1305,6 @@ namespace Azure.NewProject.TypeSpec
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/NewProjectTypeSpecClient.xml" path="doc/members/member[@name='InternalProtocolAsync(RequestContent,RequestContext)']/*" />
         internal virtual async Task<Response> InternalProtocolAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -1359,7 +1344,6 @@ namespace Azure.NewProject.TypeSpec
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/NewProjectTypeSpecClient.xml" path="doc/members/member[@name='InternalProtocol(RequestContent,RequestContext)']/*" />
         internal virtual Response InternalProtocol(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -1380,7 +1364,6 @@ namespace Azure.NewProject.TypeSpec
 
         /// <summary> When set protocol false and convenient true, the convenient method should be generated even it has the same signature as protocol one. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/NewProjectTypeSpecClient.xml" path="doc/members/member[@name='StillConvenientValueAsync(CancellationToken)']/*" />
         public virtual async Task<Response> StillConvenientValueAsync(CancellationToken cancellationToken = default)
         {
             using var scope = ClientDiagnostics.CreateScope("NewProjectTypeSpecClient.StillConvenientValue");
@@ -1400,7 +1383,6 @@ namespace Azure.NewProject.TypeSpec
 
         /// <summary> When set protocol false and convenient true, the convenient method should be generated even it has the same signature as protocol one. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/NewProjectTypeSpecClient.xml" path="doc/members/member[@name='StillConvenientValue(CancellationToken)']/*" />
         public virtual Response StillConvenientValue(CancellationToken cancellationToken = default)
         {
             using var scope = ClientDiagnostics.CreateScope("NewProjectTypeSpecClient.StillConvenientValue");
@@ -1431,7 +1413,6 @@ namespace Azure.NewProject.TypeSpec
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/NewProjectTypeSpecClient.xml" path="doc/members/member[@name='StillConvenientAsync(RequestContext)']/*" />
         internal virtual async Task<Response> StillConvenientAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("NewProjectTypeSpecClient.StillConvenient");
@@ -1461,7 +1442,6 @@ namespace Azure.NewProject.TypeSpec
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/NewProjectTypeSpecClient.xml" path="doc/members/member[@name='StillConvenient(RequestContext)']/*" />
         internal virtual Response StillConvenient(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("NewProjectTypeSpecClient.StillConvenient");

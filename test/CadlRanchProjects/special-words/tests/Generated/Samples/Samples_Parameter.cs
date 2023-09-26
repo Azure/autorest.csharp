@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Identity;
@@ -14,86 +13,78 @@ using SpecialWords;
 
 namespace SpecialWords.Samples
 {
-    internal class Samples_Parameter
+    public class Samples_Parameter
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_GetWithIf()
         {
-            Parameter client = new SpecialWordsClient().GetParameterClient(apiVersion: "1.0.0");
+            Parameter client = new SpecialWordsClient().GetParameterClient("1.0.0");
 
             Response response = client.GetWithIf("<if>");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetWithIf_Async()
         {
-            Parameter client = new SpecialWordsClient().GetParameterClient(apiVersion: "1.0.0");
+            Parameter client = new SpecialWordsClient().GetParameterClient("1.0.0");
 
             Response response = await client.GetWithIfAsync("<if>");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_GetWithIf_AllParameters()
         {
-            Parameter client = new SpecialWordsClient().GetParameterClient(apiVersion: "1.0.0");
+            Parameter client = new SpecialWordsClient().GetParameterClient("1.0.0");
 
             Response response = client.GetWithIf("<if>");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetWithIf_AllParameters_Async()
         {
-            Parameter client = new SpecialWordsClient().GetParameterClient(apiVersion: "1.0.0");
+            Parameter client = new SpecialWordsClient().GetParameterClient("1.0.0");
 
             Response response = await client.GetWithIfAsync("<if>");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_GetWithFilter()
         {
-            Parameter client = new SpecialWordsClient().GetParameterClient(apiVersion: "1.0.0");
+            Parameter client = new SpecialWordsClient().GetParameterClient("1.0.0");
 
             Response response = client.GetWithFilter("<filter>");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetWithFilter_Async()
         {
-            Parameter client = new SpecialWordsClient().GetParameterClient(apiVersion: "1.0.0");
+            Parameter client = new SpecialWordsClient().GetParameterClient("1.0.0");
 
             Response response = await client.GetWithFilterAsync("<filter>");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_GetWithFilter_AllParameters()
         {
-            Parameter client = new SpecialWordsClient().GetParameterClient(apiVersion: "1.0.0");
+            Parameter client = new SpecialWordsClient().GetParameterClient("1.0.0");
 
             Response response = client.GetWithFilter("<filter>");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetWithFilter_AllParameters_Async()
         {
-            Parameter client = new SpecialWordsClient().GetParameterClient(apiVersion: "1.0.0");
+            Parameter client = new SpecialWordsClient().GetParameterClient("1.0.0");
 
             Response response = await client.GetWithFilterAsync("<filter>");
-            Console.WriteLine(response.Status);
         }
     }
 }

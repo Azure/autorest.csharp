@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System;
 using System.Threading.Tasks;
 using Accessibility_LowLevel_NoAuth;
 using Azure;
@@ -25,7 +24,6 @@ namespace Accessibility_LowLevel_NoAuth.Samples
 
             RequestContent content = null;
             Response response = client.Operation(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -36,7 +34,6 @@ namespace Accessibility_LowLevel_NoAuth.Samples
 
             RequestContent content = null;
             Response response = await client.OperationAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -47,7 +44,6 @@ namespace Accessibility_LowLevel_NoAuth.Samples
 
             RequestContent content = RequestContent.Create("<body>");
             Response response = client.Operation(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -58,7 +54,6 @@ namespace Accessibility_LowLevel_NoAuth.Samples
 
             RequestContent content = RequestContent.Create("<body>");
             Response response = await client.OperationAsync(content);
-            Console.WriteLine(response.Status);
         }
     }
 }

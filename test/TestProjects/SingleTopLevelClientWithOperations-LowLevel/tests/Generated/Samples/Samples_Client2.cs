@@ -5,8 +5,6 @@
 
 #nullable disable
 
-using System;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Identity;
@@ -15,7 +13,7 @@ using SingleTopLevelClientWithOperations_LowLevel;
 
 namespace SingleTopLevelClientWithOperations_LowLevel.Samples
 {
-    internal class Samples_Client2
+    public class Samples_Client2
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
@@ -25,9 +23,6 @@ namespace SingleTopLevelClientWithOperations_LowLevel.Samples
             Client2 client = new TopLevelClientWithOperationClient(credential).GetClient2Client();
 
             Response response = client.Operation(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -38,9 +33,6 @@ namespace SingleTopLevelClientWithOperations_LowLevel.Samples
             Client2 client = new TopLevelClientWithOperationClient(credential).GetClient2Client();
 
             Response response = await client.OperationAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -51,9 +43,6 @@ namespace SingleTopLevelClientWithOperations_LowLevel.Samples
             Client2 client = new TopLevelClientWithOperationClient(credential).GetClient2Client();
 
             Response response = client.Operation(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -64,9 +53,6 @@ namespace SingleTopLevelClientWithOperations_LowLevel.Samples
             Client2 client = new TopLevelClientWithOperationClient(credential).GetClient2Client();
 
             Response response = await client.OperationAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
     }
 }

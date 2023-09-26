@@ -26,11 +26,6 @@ namespace AutoRest.CSharp.LowLevel.Generation.SampleGeneration
             {
                 using (_writer.Scope($"public class {_sampleProvider.Type:D}"))
                 {
-                    //foreach (var sample in _sampleProvider.Samples)
-                    //{
-                    //    WriteTestMethod(sample, false);
-                    //    WriteTestMethod(sample, true);
-                    //}
                     foreach (var method in _sampleProvider.SampleMethods)
                     {
                         _writer.WriteMethod(method);
