@@ -18,10 +18,15 @@ namespace AutoRest.TestServer.Tests.Infrastructure
             return Path.Combine(nodeModules, "@azure-tools", "cadl-ranch");
         }
 
-        internal static string GetScenariosPath()
+        internal static string GetSpecDirectory()
         {
             var nodeModules = GetNodeModulesDirectory();
-            return Path.Combine(nodeModules, "@azure-tools", "cadl-ranch-specs", "http");
+            return Path.Combine(nodeModules, "@azure-tools", "cadl-ranch-specs");
+        }
+
+        internal static string GetScenariosPath()
+        {
+            return Path.Combine(GetSpecDirectory(), "http");
         }
         internal static string GetCoverageFilePath()
         {

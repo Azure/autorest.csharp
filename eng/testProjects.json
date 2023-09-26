@@ -26,6 +26,8 @@
         "encode/datetime",
         "encode/duration",
         "projection/projected-name",
+        "payload/content-negotiation",
+        "payload/pageable",
         "server/path/multiple",
         "server/path/single",
         "special-headers/client-request-id",
