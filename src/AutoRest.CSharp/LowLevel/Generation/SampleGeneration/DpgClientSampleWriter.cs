@@ -6,25 +6,25 @@ using AutoRest.CSharp.LowLevel.Output.Samples;
 
 namespace AutoRest.CSharp.LowLevel.Generation.SampleGeneration
 {
-    internal class DpgClientSampleWriter : DpgClientSampleBaseWriter
+    internal class DpgClientSampleWriter
     {
+        private readonly CodeWriter _writer;
         private readonly DpgClientSampleProvider _sampleProvider;
 
-        public DpgClientSampleWriter(DpgClientSampleProvider sampleProvider) : base()
+        public DpgClientSampleWriter(DpgClientSampleProvider sampleProvider)
         {
             _sampleProvider = sampleProvider;
+            _writer = new CodeWriter();
         }
 
-        protected override bool ShouldWriteResponse => true;
-
-        public override void Write()
+        public void Write()
         {
             // since our generator source code does not have the Azure.Identity dependency, we have to add this dependency separately
             _writer.UseNamespace("Azure.Identity");
 
             using (_writer.Namespace(_sampleProvider.Declaration.Namespace))
             {
-                using (_writer.Scope($"public class {_sampleProvider.Type:D}"))
+                using (_writer.Scope($"{_sampleProvider.Declaration.Accessibility} class {_sampleProvider.Type:D}"))
                 {
                     foreach (var method in _sampleProvider.SampleMethods)
                     {
@@ -32,6 +32,11 @@ namespace AutoRest.CSharp.LowLevel.Generation.SampleGeneration
                     }
                 }
             }
+        }
+
+        public override string ToString()
+        {
+            return _writer.ToString();
         }
     }
 }
