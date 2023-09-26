@@ -31,17 +31,14 @@ namespace AutoRest.CSharp.LowLevel.Output.Samples
         }
 
         private bool? _isEmpty;
-        public bool IsEmpty => _isEmpty ??= !Samples.Any();
-
-        private IEnumerable<DpgOperationSample>? _samples;
-        public IEnumerable<DpgOperationSample> Samples => _samples ??= Client.ClientMethods.SelectMany(m => m.Samples);
+        public bool IsEmpty => _isEmpty ??= !SampleMethods.Any();
 
         private IEnumerable<Method>? _sampleMethods;
         public IEnumerable<Method> SampleMethods => _sampleMethods ??= EnsureSampleMethods();
 
         private IEnumerable<Method> EnsureSampleMethods()
         {
-            foreach (var sample in Samples)
+            foreach (var sample in Client.ClientMethods.SelectMany(m => m.Samples))
             {
                 yield return ComposeSampleMethod(sample, false);
                 yield return ComposeSampleMethod(sample, true);
@@ -56,7 +53,7 @@ namespace AutoRest.CSharp.LowLevel.Output.Samples
 
             // the method invocation statements go here
             var operationVariableStatements = new List<MethodBodyStatement>();
-            var operationInvocationStatements = ComposeSampleOperationInvocation(sample, clientVar, operationVariableStatements, isAsync);
+            var operationInvocationStatements = ComposeSampleOperationInvocation(sample, clientVar, operationVariableStatements, isAsync).ToArray();
 
             return new Method(signature, new MethodBodyStatement[]
             {
@@ -88,50 +85,49 @@ namespace AutoRest.CSharp.LowLevel.Output.Samples
             return Declare(clientVar, valueExpression);
         }
 
-        private MethodBodyStatement ComposeSampleOperationInvocation(DpgOperationSample sample, ValueExpression clientVar, List<MethodBodyStatement> variableDeclarations, bool isAsync) => (sample.IsLongRunning, sample.IsPageable) switch
+        private IEnumerable<MethodBodyStatement> ComposeSampleOperationInvocation(DpgOperationSample sample, ValueExpression clientVar, List<MethodBodyStatement> variableDeclarations, bool isAsync)
         {
-            (true, true) => ComposeLongRunningPageableOperation(sample, sample.OperationMethodSignature.WithAsync(isAsync), clientVar, variableDeclarations, isAsync).ToArray(),
-            (true, false) => ComposeLongRunningOperation(sample, sample.OperationMethodSignature.WithAsync(isAsync), clientVar, variableDeclarations, isAsync).ToArray(),
-            (false, true) => ComposePageableOperation(sample, sample.OperationMethodSignature.WithAsync(isAsync), clientVar, variableDeclarations, isAsync).ToArray(),
-            (false, false) => ComposeNormalOperation(sample, sample.OperationMethodSignature.WithAsync(isAsync), clientVar, variableDeclarations, isAsync).ToArray()
-        };
+            var methodSignature = sample.OperationMethodSignature.WithAsync(isAsync);
+            var parameterExpressions = sample.GetValueExpressionsForParameters(methodSignature.Parameters, variableDeclarations);
+            var invocation = clientVar.Invoke(methodSignature, parameterExpressions.ToArray(), addConfigureAwaitFalse: false);
+            var returnType = GetReturnType(methodSignature.ReturnType);
+            VariableReference resultVar = sample.IsLongRunning
+                ? new VariableReference(returnType, "operation")
+                : new VariableReference(returnType, "response");
 
-        private IEnumerable<MethodBodyStatement> ComposeLongRunningPageableOperation(DpgOperationSample sample, MethodSignature methodSignature, ValueExpression clientVar, List<MethodBodyStatement> variableDeclarations, bool isAsync)
-        {
-            foreach (var statement in ComposeLongRunningOperation(sample, methodSignature, clientVar, variableDeclarations, isAsync))
+            if (sample.IsPageable)
             {
-                yield return statement;
+                // if it is pageable, we need to wrap the invocation inside a foreach statement
+                // but before the foreach, if this operation is long-running, we still need to call it, and pass the operation.Value into the foreach
+                if (sample.IsLongRunning)
+                {
+                    /*
+                     * This will generate code like:
+                     * Operation<T> operation = <invocation>;
+                     */
+                    yield return Declare(resultVar, invocation);
+                    invocation = resultVar.Property("Value");
+                    returnType = GetOperationValueType(returnType);
+                }
+                /*
+                 * This will generate code like:
+                 * await foreach (ItemType item in <invocation>)
+                 * {}
+                 */
+                var itemType = GetPageableItemType(returnType);
+                var foreachStatement = new ForeachStatement(itemType, new CodeWriterDeclaration("item"), invocation, isAsync);
+                yield return foreachStatement;
             }
-
-            // write a (await) foreach statement
-        }
-
-        private IEnumerable<MethodBodyStatement> ComposeLongRunningOperation(DpgOperationSample sample, MethodSignature methodSignature, ValueExpression clientVar, List<MethodBodyStatement> variableDeclarations, bool isAsync)
-        {
-            var parameterExpressions = sample.GetValueExpressionsForParameters(methodSignature.Parameters, variableDeclarations);
-            var invocation = clientVar.Invoke(methodSignature, parameterExpressions.ToArray(), addConfigureAwaitFalse: false);
-            var responseType = GetReturnType(methodSignature.ReturnType);
-            var resultVar = new VariableReference(responseType, "operation");
-            yield return Declare(resultVar, invocation);
-        }
-
-        private IEnumerable<MethodBodyStatement> ComposePageableOperation(DpgOperationSample sample, MethodSignature methodSignature, ValueExpression clientVar, List<MethodBodyStatement> variableDeclarations, bool isAsync)
-        {
-            var parameterExpressions = sample.GetValueExpressionsForParameters(methodSignature.Parameters, variableDeclarations);
-            var invocation = clientVar.Invoke(methodSignature, parameterExpressions.ToArray(), addConfigureAwaitFalse: false);
-
-            var itemType = GetPageableItemType(methodSignature.ReturnType);
-            var foreachStatement = new ForeachStatement(itemType, new CodeWriterDeclaration("item"), invocation, isAsync);
-            yield return foreachStatement;
-        }
-
-        private IEnumerable<MethodBodyStatement> ComposeNormalOperation(DpgOperationSample sample, MethodSignature methodSignature, ValueExpression clientVar, List<MethodBodyStatement> variableDeclarations, bool isAsync)
-        {
-            var parameterExpressions = sample.GetValueExpressionsForParameters(methodSignature.Parameters, variableDeclarations);
-            var invocation = clientVar.Invoke(methodSignature, parameterExpressions.ToArray(), addConfigureAwaitFalse: false);
-            var responseType = GetReturnType(methodSignature.ReturnType);
-            var resultVar = new VariableReference(responseType, "response");
-            yield return Declare(resultVar, invocation);
+            else
+            {
+                // if it is not pageable, we just call the operation, declare a local variable and assign the result to it
+                /*
+                 * This will generate code like:
+                 * Operation<T> operation = <invocation>; // when it is long-running
+                 * Response<T> response = <invocation>; // when it is not long-running
+                 */
+                yield return Declare(resultVar, invocation);
+            }
         }
 
         protected override string DefaultNamespace { get; }
@@ -139,6 +135,18 @@ namespace AutoRest.CSharp.LowLevel.Output.Samples
         protected override string DefaultName { get; }
 
         protected override string DefaultAccessibility => "public";
+
+        private static CSharpType GetOperationValueType(CSharpType? returnType)
+        {
+            if (returnType == null)
+                throw new InvalidOperationException("The return type of a client operation should never be null");
+
+            returnType = GetReturnType(returnType);
+
+            Debug.Assert(TypeFactory.IsOperationOfT(returnType));
+
+            return returnType.Arguments.Single();
+        }
 
         private static CSharpType GetReturnType(CSharpType? returnType)
         {

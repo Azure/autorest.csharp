@@ -22,7 +22,7 @@ using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
 namespace AutoRest.CSharp.LowLevel.Extensions
 {
-    internal partial class ExampleValueSnippets
+    internal static partial class ExampleValueSnippets
     {
         private static ValueExpression GetExpression(CSharpType type, InputExampleValue exampleValue, SerializationFormat serializationFormat, bool includeCollectionInitialization = true)
         {

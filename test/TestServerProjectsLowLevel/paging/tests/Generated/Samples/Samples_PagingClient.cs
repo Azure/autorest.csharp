@@ -1235,6 +1235,9 @@ namespace paging_LowLevel.Samples
             PagingClient client = new PagingClient(credential);
 
             Operation<Pageable<BinaryData>> operation = client.GetMultiplePagesLRO(WaitUntil.Completed, null, null, null);
+            foreach (BinaryData item in operation.Value)
+            {
+            }
         }
 
         [Test]
@@ -1245,6 +1248,9 @@ namespace paging_LowLevel.Samples
             PagingClient client = new PagingClient(credential);
 
             Operation<AsyncPageable<BinaryData>> operation = await client.GetMultiplePagesLROAsync(WaitUntil.Completed, null, null, null);
+            await foreach (BinaryData item in operation.Value)
+            {
+            }
         }
 
         [Test]
@@ -1255,6 +1261,9 @@ namespace paging_LowLevel.Samples
             PagingClient client = new PagingClient(credential);
 
             Operation<Pageable<BinaryData>> operation = client.GetMultiplePagesLRO(WaitUntil.Completed, 1234, 1234, null);
+            foreach (BinaryData item in operation.Value)
+            {
+            }
         }
 
         [Test]
@@ -1265,6 +1274,9 @@ namespace paging_LowLevel.Samples
             PagingClient client = new PagingClient(credential);
 
             Operation<AsyncPageable<BinaryData>> operation = await client.GetMultiplePagesLROAsync(WaitUntil.Completed, 1234, 1234, null);
+            await foreach (BinaryData item in operation.Value)
+            {
+            }
         }
     }
 }

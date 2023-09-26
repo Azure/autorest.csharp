@@ -21,8 +21,6 @@ namespace AutoRest.CSharp.Common.Output.Expressions.ValueExpressions
 
         public ValueExpression NullConditional(CSharpType type) => type.IsNullable ? new NullConditionalExpression(this) : this;
 
-        protected MemberExpression Property(string name) => new(this, name);
-
         protected static ValueExpression ValidateType(TypedValueExpression typed, CSharpType type)
         {
             if (type.EqualsIgnoreNullable(typed.Type))
