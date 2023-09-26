@@ -13,7 +13,7 @@ This sample shows how to call OperationAsync with all parameters.
 <code><![CDATA[
 ParametersCadlClient client = new ParametersCadlClient();
 
-Response<Result> response = await client.OperationAsync(1234, 1234);
+Response<Result> response = await client.OperationAsync(1234, end: 1234);
 ]]></code></example>
     </member>
     <member name="Operation(int,int?,CancellationToken)">
@@ -28,7 +28,7 @@ This sample shows how to call Operation with all parameters.
 <code><![CDATA[
 ParametersCadlClient client = new ParametersCadlClient();
 
-Response<Result> response = client.Operation(1234, 1234);
+Response<Result> response = client.Operation(1234, end: 1234);
 ]]></code></example>
     </member>
     <member name="OperationAsync(int,int?,RequestContext)">
@@ -61,7 +61,7 @@ This sample shows how to call OperationAsync with all parameters.
 <code><![CDATA[
 ParametersCadlClient client = new ParametersCadlClient();
 
-Response<Result> response = await client.OperationAsync(1234, 1234);
+Response<Result> response = await client.OperationAsync(1234, end: 1234);
 ]]></code></example>
     </member>
     <member name="Operation(int,int?,RequestContext)">
@@ -94,7 +94,7 @@ This sample shows how to call Operation with all parameters.
 <code><![CDATA[
 ParametersCadlClient client = new ParametersCadlClient();
 
-Response<Result> response = client.Operation(1234, 1234);
+Response<Result> response = client.Operation(1234, end: 1234);
 ]]></code></example>
     </member>
     <member name="Operation2Async(int,int?,CancellationToken)">
@@ -109,7 +109,7 @@ This sample shows how to call Operation2Async with all parameters.
 <code><![CDATA[
 ParametersCadlClient client = new ParametersCadlClient();
 
-Response<Result> response = await client.Operation2Async(1234, 1234);
+Response<Result> response = await client.Operation2Async(1234, start: 1234);
 ]]></code></example>
     </member>
     <member name="Operation2(int,int?,CancellationToken)">
@@ -124,7 +124,7 @@ This sample shows how to call Operation2 with all parameters.
 <code><![CDATA[
 ParametersCadlClient client = new ParametersCadlClient();
 
-Response<Result> response = client.Operation2(1234, 1234);
+Response<Result> response = client.Operation2(1234, start: 1234);
 ]]></code></example>
     </member>
     <member name="Operation2Async(int,int?,RequestContext)">
@@ -157,7 +157,7 @@ This sample shows how to call Operation2Async with all parameters.
 <code><![CDATA[
 ParametersCadlClient client = new ParametersCadlClient();
 
-Response<Result> response = await client.Operation2Async(1234, 1234);
+Response<Result> response = await client.Operation2Async(1234, start: 1234);
 ]]></code></example>
     </member>
     <member name="Operation2(int,int?,RequestContext)">
@@ -190,7 +190,7 @@ This sample shows how to call Operation2 with all parameters.
 <code><![CDATA[
 ParametersCadlClient client = new ParametersCadlClient();
 
-Response<Result> response = client.Operation2(1234, 1234);
+Response<Result> response = client.Operation2(1234, start: 1234);
 ]]></code></example>
     </member>
   </members>

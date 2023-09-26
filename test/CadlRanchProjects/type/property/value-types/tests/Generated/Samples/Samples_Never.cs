@@ -23,7 +23,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetNever()
         {
-            Never client = new ValueTypesClient().GetNeverClient("1.0.0");
+            Never client = new ValueTypesClient().GetNeverClient(apiVersion: "1.0.0");
 
             Response response = client.GetNever(null);
 
@@ -35,7 +35,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetNever_Async()
         {
-            Never client = new ValueTypesClient().GetNeverClient("1.0.0");
+            Never client = new ValueTypesClient().GetNeverClient(apiVersion: "1.0.0");
 
             Response response = await client.GetNeverAsync(null);
 
@@ -47,7 +47,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetNever_Convenience()
         {
-            Never client = new ValueTypesClient().GetNeverClient("1.0.0");
+            Never client = new ValueTypesClient().GetNeverClient(apiVersion: "1.0.0");
 
             Response<NeverProperty> response = client.GetNever();
         }
@@ -56,7 +56,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetNever_Convenience_Async()
         {
-            Never client = new ValueTypesClient().GetNeverClient("1.0.0");
+            Never client = new ValueTypesClient().GetNeverClient(apiVersion: "1.0.0");
 
             Response<NeverProperty> response = await client.GetNeverAsync();
         }
@@ -65,7 +65,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetNever_AllParameters()
         {
-            Never client = new ValueTypesClient().GetNeverClient("1.0.0");
+            Never client = new ValueTypesClient().GetNeverClient(apiVersion: "1.0.0");
 
             Response response = client.GetNever(null);
 
@@ -77,7 +77,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetNever_AllParameters_Async()
         {
-            Never client = new ValueTypesClient().GetNeverClient("1.0.0");
+            Never client = new ValueTypesClient().GetNeverClient(apiVersion: "1.0.0");
 
             Response response = await client.GetNeverAsync(null);
 
@@ -89,7 +89,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetNever_AllParameters_Convenience()
         {
-            Never client = new ValueTypesClient().GetNeverClient("1.0.0");
+            Never client = new ValueTypesClient().GetNeverClient(apiVersion: "1.0.0");
 
             Response<NeverProperty> response = client.GetNever();
         }
@@ -98,7 +98,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetNever_AllParameters_Convenience_Async()
         {
-            Never client = new ValueTypesClient().GetNeverClient("1.0.0");
+            Never client = new ValueTypesClient().GetNeverClient(apiVersion: "1.0.0");
 
             Response<NeverProperty> response = await client.GetNeverAsync();
         }
@@ -107,7 +107,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Put()
         {
-            Never client = new ValueTypesClient().GetNeverClient("1.0.0");
+            Never client = new ValueTypesClient().GetNeverClient(apiVersion: "1.0.0");
 
             RequestContent content = RequestContent.Create(new object());
             Response response = client.Put(content);
@@ -119,7 +119,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Put_Async()
         {
-            Never client = new ValueTypesClient().GetNeverClient("1.0.0");
+            Never client = new ValueTypesClient().GetNeverClient(apiVersion: "1.0.0");
 
             RequestContent content = RequestContent.Create(new object());
             Response response = await client.PutAsync(content);
@@ -131,7 +131,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Put_Convenience()
         {
-            Never client = new ValueTypesClient().GetNeverClient("1.0.0");
+            Never client = new ValueTypesClient().GetNeverClient(apiVersion: "1.0.0");
 
             NeverProperty body = new NeverProperty();
             Response response = client.Put(body);
@@ -141,7 +141,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Put_Convenience_Async()
         {
-            Never client = new ValueTypesClient().GetNeverClient("1.0.0");
+            Never client = new ValueTypesClient().GetNeverClient(apiVersion: "1.0.0");
 
             NeverProperty body = new NeverProperty();
             Response response = await client.PutAsync(body);
@@ -151,7 +151,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Put_AllParameters()
         {
-            Never client = new ValueTypesClient().GetNeverClient("1.0.0");
+            Never client = new ValueTypesClient().GetNeverClient(apiVersion: "1.0.0");
 
             RequestContent content = RequestContent.Create(new object());
             Response response = client.Put(content);
@@ -163,7 +163,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Put_AllParameters_Async()
         {
-            Never client = new ValueTypesClient().GetNeverClient("1.0.0");
+            Never client = new ValueTypesClient().GetNeverClient(apiVersion: "1.0.0");
 
             RequestContent content = RequestContent.Create(new object());
             Response response = await client.PutAsync(content);
@@ -175,7 +175,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Put_AllParameters_Convenience()
         {
-            Never client = new ValueTypesClient().GetNeverClient("1.0.0");
+            Never client = new ValueTypesClient().GetNeverClient(apiVersion: "1.0.0");
 
             NeverProperty body = new NeverProperty();
             Response response = client.Put(body);
@@ -185,7 +185,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Put_AllParameters_Convenience_Async()
         {
-            Never client = new ValueTypesClient().GetNeverClient("1.0.0");
+            Never client = new ValueTypesClient().GetNeverClient(apiVersion: "1.0.0");
 
             NeverProperty body = new NeverProperty();
             Response response = await client.PutAsync(body);

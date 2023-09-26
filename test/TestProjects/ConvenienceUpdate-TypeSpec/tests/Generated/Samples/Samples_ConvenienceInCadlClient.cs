@@ -951,8 +951,8 @@ namespace ConvenienceInCadl.Samples
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-            Model optional = optional: new Model("<id>");
-            Response response = client.ProtocolOptionalModel(optional);
+            Model optional = new Model("<id>");
+            Response response = client.ProtocolOptionalModel(optional: optional);
         }
 
         [Test]
@@ -961,8 +961,8 @@ namespace ConvenienceInCadl.Samples
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-            Model optional = optional: new Model("<id>");
-            Response response = await client.ProtocolOptionalModelAsync(optional);
+            Model optional = new Model("<id>");
+            Response response = await client.ProtocolOptionalModelAsync(optional: optional);
         }
 
         [Test]
@@ -1479,8 +1479,8 @@ namespace ConvenienceInCadl.Samples
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-            Model optional = optional: new Model("<id>");
-            Response response = client.ConvenienceOptionalModelWithOptional(optional);
+            Model optional = new Model("<id>");
+            Response response = client.ConvenienceOptionalModelWithOptional(optional: optional);
         }
 
         [Test]
@@ -1489,8 +1489,8 @@ namespace ConvenienceInCadl.Samples
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-            Model optional = optional: new Model("<id>");
-            Response response = await client.ConvenienceOptionalModelWithOptionalAsync(optional);
+            Model optional = new Model("<id>");
+            Response response = await client.ConvenienceOptionalModelWithOptionalAsync(optional: optional);
         }
 
         [Test]
@@ -1671,8 +1671,8 @@ namespace ConvenienceInCadl.Samples
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-            Model optional = optional: new Model("<id>");
-            Response response = client.ConvenienceOptionalModelWithRequired(optional);
+            Model optional = new Model("<id>");
+            Response response = client.ConvenienceOptionalModelWithRequired(optional: optional);
         }
 
         [Test]
@@ -1681,8 +1681,8 @@ namespace ConvenienceInCadl.Samples
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-            Model optional = optional: new Model("<id>");
-            Response response = await client.ConvenienceOptionalModelWithRequiredAsync(optional);
+            Model optional = new Model("<id>");
+            Response response = await client.ConvenienceOptionalModelWithRequiredAsync(optional: optional);
         }
 
         [Test]

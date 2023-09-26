@@ -90,7 +90,7 @@ namespace ParametersCadl.Samples
         {
             ParametersCadlClient client = new ParametersCadlClient();
 
-            Response<Result> response = client.Operation(1234, 1234);
+            Response<Result> response = client.Operation(1234, end: 1234);
         }
 
         [Test]
@@ -99,7 +99,7 @@ namespace ParametersCadl.Samples
         {
             ParametersCadlClient client = new ParametersCadlClient();
 
-            Response<Result> response = await client.OperationAsync(1234, 1234);
+            Response<Result> response = await client.OperationAsync(1234, end: 1234);
         }
 
         [Test]
@@ -174,7 +174,7 @@ namespace ParametersCadl.Samples
         {
             ParametersCadlClient client = new ParametersCadlClient();
 
-            Response<Result> response = client.Operation2(1234, 1234);
+            Response<Result> response = client.Operation2(1234, start: 1234);
         }
 
         [Test]
@@ -183,7 +183,7 @@ namespace ParametersCadl.Samples
         {
             ParametersCadlClient client = new ParametersCadlClient();
 
-            Response<Result> response = await client.Operation2Async(1234, 1234);
+            Response<Result> response = await client.Operation2Async(1234, start: 1234);
         }
     }
 }

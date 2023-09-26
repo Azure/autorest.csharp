@@ -93,7 +93,7 @@ namespace _Specs_.Azure.Core.Traits.Samples
         {
             TraitsClient client = new TraitsClient();
 
-            Response<User> response = client.SmokeTest(1234, "<foo>", null);
+            Response<User> response = client.SmokeTest(1234, "<foo>", requestConditions: null);
         }
 
         [Test]
@@ -102,7 +102,7 @@ namespace _Specs_.Azure.Core.Traits.Samples
         {
             TraitsClient client = new TraitsClient();
 
-            Response<User> response = await client.SmokeTestAsync(1234, "<foo>", null);
+            Response<User> response = await client.SmokeTestAsync(1234, "<foo>", requestConditions: null);
         }
 
         [Test]

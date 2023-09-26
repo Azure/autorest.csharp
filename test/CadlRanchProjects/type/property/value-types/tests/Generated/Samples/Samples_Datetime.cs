@@ -23,7 +23,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetDatetime()
         {
-            Datetime client = new ValueTypesClient().GetDatetimeClient("1.0.0");
+            Datetime client = new ValueTypesClient().GetDatetimeClient(apiVersion: "1.0.0");
 
             Response response = client.GetDatetime(null);
 
@@ -35,7 +35,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetDatetime_Async()
         {
-            Datetime client = new ValueTypesClient().GetDatetimeClient("1.0.0");
+            Datetime client = new ValueTypesClient().GetDatetimeClient(apiVersion: "1.0.0");
 
             Response response = await client.GetDatetimeAsync(null);
 
@@ -47,7 +47,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetDatetime_Convenience()
         {
-            Datetime client = new ValueTypesClient().GetDatetimeClient("1.0.0");
+            Datetime client = new ValueTypesClient().GetDatetimeClient(apiVersion: "1.0.0");
 
             Response<DatetimeProperty> response = client.GetDatetime();
         }
@@ -56,7 +56,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetDatetime_Convenience_Async()
         {
-            Datetime client = new ValueTypesClient().GetDatetimeClient("1.0.0");
+            Datetime client = new ValueTypesClient().GetDatetimeClient(apiVersion: "1.0.0");
 
             Response<DatetimeProperty> response = await client.GetDatetimeAsync();
         }
@@ -65,7 +65,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetDatetime_AllParameters()
         {
-            Datetime client = new ValueTypesClient().GetDatetimeClient("1.0.0");
+            Datetime client = new ValueTypesClient().GetDatetimeClient(apiVersion: "1.0.0");
 
             Response response = client.GetDatetime(null);
 
@@ -77,7 +77,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetDatetime_AllParameters_Async()
         {
-            Datetime client = new ValueTypesClient().GetDatetimeClient("1.0.0");
+            Datetime client = new ValueTypesClient().GetDatetimeClient(apiVersion: "1.0.0");
 
             Response response = await client.GetDatetimeAsync(null);
 
@@ -89,7 +89,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetDatetime_AllParameters_Convenience()
         {
-            Datetime client = new ValueTypesClient().GetDatetimeClient("1.0.0");
+            Datetime client = new ValueTypesClient().GetDatetimeClient(apiVersion: "1.0.0");
 
             Response<DatetimeProperty> response = client.GetDatetime();
         }
@@ -98,7 +98,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetDatetime_AllParameters_Convenience_Async()
         {
-            Datetime client = new ValueTypesClient().GetDatetimeClient("1.0.0");
+            Datetime client = new ValueTypesClient().GetDatetimeClient(apiVersion: "1.0.0");
 
             Response<DatetimeProperty> response = await client.GetDatetimeAsync();
         }
@@ -107,7 +107,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Put()
         {
-            Datetime client = new ValueTypesClient().GetDatetimeClient("1.0.0");
+            Datetime client = new ValueTypesClient().GetDatetimeClient(apiVersion: "1.0.0");
 
             RequestContent content = RequestContent.Create(new
             {
@@ -122,7 +122,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Put_Async()
         {
-            Datetime client = new ValueTypesClient().GetDatetimeClient("1.0.0");
+            Datetime client = new ValueTypesClient().GetDatetimeClient(apiVersion: "1.0.0");
 
             RequestContent content = RequestContent.Create(new
             {
@@ -137,7 +137,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Put_Convenience()
         {
-            Datetime client = new ValueTypesClient().GetDatetimeClient("1.0.0");
+            Datetime client = new ValueTypesClient().GetDatetimeClient(apiVersion: "1.0.0");
 
             DatetimeProperty body = new DatetimeProperty(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
             Response response = client.Put(body);
@@ -147,7 +147,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Put_Convenience_Async()
         {
-            Datetime client = new ValueTypesClient().GetDatetimeClient("1.0.0");
+            Datetime client = new ValueTypesClient().GetDatetimeClient(apiVersion: "1.0.0");
 
             DatetimeProperty body = new DatetimeProperty(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
             Response response = await client.PutAsync(body);
@@ -157,7 +157,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Put_AllParameters()
         {
-            Datetime client = new ValueTypesClient().GetDatetimeClient("1.0.0");
+            Datetime client = new ValueTypesClient().GetDatetimeClient(apiVersion: "1.0.0");
 
             RequestContent content = RequestContent.Create(new
             {
@@ -172,7 +172,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Put_AllParameters_Async()
         {
-            Datetime client = new ValueTypesClient().GetDatetimeClient("1.0.0");
+            Datetime client = new ValueTypesClient().GetDatetimeClient(apiVersion: "1.0.0");
 
             RequestContent content = RequestContent.Create(new
             {
@@ -187,7 +187,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Put_AllParameters_Convenience()
         {
-            Datetime client = new ValueTypesClient().GetDatetimeClient("1.0.0");
+            Datetime client = new ValueTypesClient().GetDatetimeClient(apiVersion: "1.0.0");
 
             DatetimeProperty body = new DatetimeProperty(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
             Response response = client.Put(body);
@@ -197,7 +197,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Put_AllParameters_Convenience_Async()
         {
-            Datetime client = new ValueTypesClient().GetDatetimeClient("1.0.0");
+            Datetime client = new ValueTypesClient().GetDatetimeClient(apiVersion: "1.0.0");
 
             DatetimeProperty body = new DatetimeProperty(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
             Response response = await client.PutAsync(body);

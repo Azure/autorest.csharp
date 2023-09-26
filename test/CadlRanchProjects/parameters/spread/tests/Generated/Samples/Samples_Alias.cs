@@ -21,7 +21,7 @@ namespace Parameters.Spread.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_SpreadAsRequestBody()
         {
-            Alias client = new SpreadClient().GetAliasClient("1.0.0");
+            Alias client = new SpreadClient().GetAliasClient(apiVersion: "1.0.0");
 
             RequestContent content = RequestContent.Create(new
             {
@@ -36,7 +36,7 @@ namespace Parameters.Spread.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_SpreadAsRequestBody_Async()
         {
-            Alias client = new SpreadClient().GetAliasClient("1.0.0");
+            Alias client = new SpreadClient().GetAliasClient(apiVersion: "1.0.0");
 
             RequestContent content = RequestContent.Create(new
             {
@@ -51,7 +51,7 @@ namespace Parameters.Spread.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_SpreadAsRequestBody_Convenience()
         {
-            Alias client = new SpreadClient().GetAliasClient("1.0.0");
+            Alias client = new SpreadClient().GetAliasClient(apiVersion: "1.0.0");
 
             Response response = client.SpreadAsRequestBody("<name>");
         }
@@ -60,7 +60,7 @@ namespace Parameters.Spread.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_SpreadAsRequestBody_Convenience_Async()
         {
-            Alias client = new SpreadClient().GetAliasClient("1.0.0");
+            Alias client = new SpreadClient().GetAliasClient(apiVersion: "1.0.0");
 
             Response response = await client.SpreadAsRequestBodyAsync("<name>");
         }
@@ -69,7 +69,7 @@ namespace Parameters.Spread.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_SpreadAsRequestBody_AllParameters()
         {
-            Alias client = new SpreadClient().GetAliasClient("1.0.0");
+            Alias client = new SpreadClient().GetAliasClient(apiVersion: "1.0.0");
 
             RequestContent content = RequestContent.Create(new
             {
@@ -84,7 +84,7 @@ namespace Parameters.Spread.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_SpreadAsRequestBody_AllParameters_Async()
         {
-            Alias client = new SpreadClient().GetAliasClient("1.0.0");
+            Alias client = new SpreadClient().GetAliasClient(apiVersion: "1.0.0");
 
             RequestContent content = RequestContent.Create(new
             {
@@ -99,7 +99,7 @@ namespace Parameters.Spread.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_SpreadAsRequestBody_AllParameters_Convenience()
         {
-            Alias client = new SpreadClient().GetAliasClient("1.0.0");
+            Alias client = new SpreadClient().GetAliasClient(apiVersion: "1.0.0");
 
             Response response = client.SpreadAsRequestBody("<name>");
         }
@@ -108,7 +108,7 @@ namespace Parameters.Spread.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_SpreadAsRequestBody_AllParameters_Convenience_Async()
         {
-            Alias client = new SpreadClient().GetAliasClient("1.0.0");
+            Alias client = new SpreadClient().GetAliasClient(apiVersion: "1.0.0");
 
             Response response = await client.SpreadAsRequestBodyAsync("<name>");
         }
@@ -117,7 +117,7 @@ namespace Parameters.Spread.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_SpreadAsRequestParameter()
         {
-            Alias client = new SpreadClient().GetAliasClient("1.0.0");
+            Alias client = new SpreadClient().GetAliasClient(apiVersion: "1.0.0");
 
             RequestContent content = RequestContent.Create(new
             {
@@ -132,7 +132,7 @@ namespace Parameters.Spread.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_SpreadAsRequestParameter_Async()
         {
-            Alias client = new SpreadClient().GetAliasClient("1.0.0");
+            Alias client = new SpreadClient().GetAliasClient(apiVersion: "1.0.0");
 
             RequestContent content = RequestContent.Create(new
             {
@@ -147,7 +147,7 @@ namespace Parameters.Spread.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_SpreadAsRequestParameter_Convenience()
         {
-            Alias client = new SpreadClient().GetAliasClient("1.0.0");
+            Alias client = new SpreadClient().GetAliasClient(apiVersion: "1.0.0");
 
             Response response = client.SpreadAsRequestParameter("<id>", "<x-ms-test-header>", "<name>");
         }
@@ -156,7 +156,7 @@ namespace Parameters.Spread.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_SpreadAsRequestParameter_Convenience_Async()
         {
-            Alias client = new SpreadClient().GetAliasClient("1.0.0");
+            Alias client = new SpreadClient().GetAliasClient(apiVersion: "1.0.0");
 
             Response response = await client.SpreadAsRequestParameterAsync("<id>", "<x-ms-test-header>", "<name>");
         }
@@ -165,7 +165,7 @@ namespace Parameters.Spread.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_SpreadAsRequestParameter_AllParameters()
         {
-            Alias client = new SpreadClient().GetAliasClient("1.0.0");
+            Alias client = new SpreadClient().GetAliasClient(apiVersion: "1.0.0");
 
             RequestContent content = RequestContent.Create(new
             {
@@ -180,7 +180,7 @@ namespace Parameters.Spread.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_SpreadAsRequestParameter_AllParameters_Async()
         {
-            Alias client = new SpreadClient().GetAliasClient("1.0.0");
+            Alias client = new SpreadClient().GetAliasClient(apiVersion: "1.0.0");
 
             RequestContent content = RequestContent.Create(new
             {
@@ -195,7 +195,7 @@ namespace Parameters.Spread.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_SpreadAsRequestParameter_AllParameters_Convenience()
         {
-            Alias client = new SpreadClient().GetAliasClient("1.0.0");
+            Alias client = new SpreadClient().GetAliasClient(apiVersion: "1.0.0");
 
             Response response = client.SpreadAsRequestParameter("<id>", "<x-ms-test-header>", "<name>");
         }
@@ -204,7 +204,7 @@ namespace Parameters.Spread.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_SpreadAsRequestParameter_AllParameters_Convenience_Async()
         {
-            Alias client = new SpreadClient().GetAliasClient("1.0.0");
+            Alias client = new SpreadClient().GetAliasClient(apiVersion: "1.0.0");
 
             Response response = await client.SpreadAsRequestParameterAsync("<id>", "<x-ms-test-header>", "<name>");
         }
@@ -213,7 +213,7 @@ namespace Parameters.Spread.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_SpreadWithMultipleParameters()
         {
-            Alias client = new SpreadClient().GetAliasClient("1.0.0");
+            Alias client = new SpreadClient().GetAliasClient(apiVersion: "1.0.0");
 
             RequestContent content = RequestContent.Create(new
             {
@@ -233,7 +233,7 @@ namespace Parameters.Spread.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_SpreadWithMultipleParameters_Async()
         {
-            Alias client = new SpreadClient().GetAliasClient("1.0.0");
+            Alias client = new SpreadClient().GetAliasClient(apiVersion: "1.0.0");
 
             RequestContent content = RequestContent.Create(new
             {
@@ -253,7 +253,7 @@ namespace Parameters.Spread.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_SpreadWithMultipleParameters_Convenience()
         {
-            Alias client = new SpreadClient().GetAliasClient("1.0.0");
+            Alias client = new SpreadClient().GetAliasClient(apiVersion: "1.0.0");
 
             Response response = client.SpreadWithMultipleParameters("<id>", "<x-ms-test-header>", "<prop1>", "<prop2>", "<prop3>", "<prop4>", "<prop5>", "<prop6>");
         }
@@ -262,7 +262,7 @@ namespace Parameters.Spread.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_SpreadWithMultipleParameters_Convenience_Async()
         {
-            Alias client = new SpreadClient().GetAliasClient("1.0.0");
+            Alias client = new SpreadClient().GetAliasClient(apiVersion: "1.0.0");
 
             Response response = await client.SpreadWithMultipleParametersAsync("<id>", "<x-ms-test-header>", "<prop1>", "<prop2>", "<prop3>", "<prop4>", "<prop5>", "<prop6>");
         }
@@ -271,7 +271,7 @@ namespace Parameters.Spread.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_SpreadWithMultipleParameters_AllParameters()
         {
-            Alias client = new SpreadClient().GetAliasClient("1.0.0");
+            Alias client = new SpreadClient().GetAliasClient(apiVersion: "1.0.0");
 
             RequestContent content = RequestContent.Create(new
             {
@@ -291,7 +291,7 @@ namespace Parameters.Spread.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_SpreadWithMultipleParameters_AllParameters_Async()
         {
-            Alias client = new SpreadClient().GetAliasClient("1.0.0");
+            Alias client = new SpreadClient().GetAliasClient(apiVersion: "1.0.0");
 
             RequestContent content = RequestContent.Create(new
             {
@@ -311,7 +311,7 @@ namespace Parameters.Spread.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_SpreadWithMultipleParameters_AllParameters_Convenience()
         {
-            Alias client = new SpreadClient().GetAliasClient("1.0.0");
+            Alias client = new SpreadClient().GetAliasClient(apiVersion: "1.0.0");
 
             Response response = client.SpreadWithMultipleParameters("<id>", "<x-ms-test-header>", "<prop1>", "<prop2>", "<prop3>", "<prop4>", "<prop5>", "<prop6>");
         }
@@ -320,7 +320,7 @@ namespace Parameters.Spread.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_SpreadWithMultipleParameters_AllParameters_Convenience_Async()
         {
-            Alias client = new SpreadClient().GetAliasClient("1.0.0");
+            Alias client = new SpreadClient().GetAliasClient(apiVersion: "1.0.0");
 
             Response response = await client.SpreadWithMultipleParametersAsync("<id>", "<x-ms-test-header>", "<prop1>", "<prop2>", "<prop3>", "<prop4>", "<prop5>", "<prop6>");
         }

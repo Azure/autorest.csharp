@@ -23,7 +23,7 @@ namespace _Type._Array.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetDatetimeValue()
         {
-            DatetimeValue client = new ArrayClient().GetDatetimeValueClient("1.0.0");
+            DatetimeValue client = new ArrayClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
             Response response = client.GetDatetimeValue(null);
 
@@ -35,7 +35,7 @@ namespace _Type._Array.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetDatetimeValue_Async()
         {
-            DatetimeValue client = new ArrayClient().GetDatetimeValueClient("1.0.0");
+            DatetimeValue client = new ArrayClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
             Response response = await client.GetDatetimeValueAsync(null);
 
@@ -47,7 +47,7 @@ namespace _Type._Array.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetDatetimeValue_Convenience()
         {
-            DatetimeValue client = new ArrayClient().GetDatetimeValueClient("1.0.0");
+            DatetimeValue client = new ArrayClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
             Response<IReadOnlyList<DateTimeOffset>> response = client.GetDatetimeValue();
         }
@@ -56,7 +56,7 @@ namespace _Type._Array.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetDatetimeValue_Convenience_Async()
         {
-            DatetimeValue client = new ArrayClient().GetDatetimeValueClient("1.0.0");
+            DatetimeValue client = new ArrayClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
             Response<IReadOnlyList<DateTimeOffset>> response = await client.GetDatetimeValueAsync();
         }
@@ -65,7 +65,7 @@ namespace _Type._Array.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetDatetimeValue_AllParameters()
         {
-            DatetimeValue client = new ArrayClient().GetDatetimeValueClient("1.0.0");
+            DatetimeValue client = new ArrayClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
             Response response = client.GetDatetimeValue(null);
 
@@ -77,7 +77,7 @@ namespace _Type._Array.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetDatetimeValue_AllParameters_Async()
         {
-            DatetimeValue client = new ArrayClient().GetDatetimeValueClient("1.0.0");
+            DatetimeValue client = new ArrayClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
             Response response = await client.GetDatetimeValueAsync(null);
 
@@ -89,7 +89,7 @@ namespace _Type._Array.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetDatetimeValue_AllParameters_Convenience()
         {
-            DatetimeValue client = new ArrayClient().GetDatetimeValueClient("1.0.0");
+            DatetimeValue client = new ArrayClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
             Response<IReadOnlyList<DateTimeOffset>> response = client.GetDatetimeValue();
         }
@@ -98,7 +98,7 @@ namespace _Type._Array.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetDatetimeValue_AllParameters_Convenience_Async()
         {
-            DatetimeValue client = new ArrayClient().GetDatetimeValueClient("1.0.0");
+            DatetimeValue client = new ArrayClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
             Response<IReadOnlyList<DateTimeOffset>> response = await client.GetDatetimeValueAsync();
         }
@@ -107,7 +107,7 @@ namespace _Type._Array.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Put()
         {
-            DatetimeValue client = new ArrayClient().GetDatetimeValueClient("1.0.0");
+            DatetimeValue client = new ArrayClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
             RequestContent content = RequestContent.Create(new object[]
             {
@@ -122,7 +122,7 @@ namespace _Type._Array.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Put_Async()
         {
-            DatetimeValue client = new ArrayClient().GetDatetimeValueClient("1.0.0");
+            DatetimeValue client = new ArrayClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
             RequestContent content = RequestContent.Create(new object[]
             {
@@ -137,7 +137,7 @@ namespace _Type._Array.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Put_Convenience()
         {
-            DatetimeValue client = new ArrayClient().GetDatetimeValueClient("1.0.0");
+            DatetimeValue client = new ArrayClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
             Response response = client.Put(new DateTimeOffset[] { DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00") });
         }
@@ -146,7 +146,7 @@ namespace _Type._Array.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Put_Convenience_Async()
         {
-            DatetimeValue client = new ArrayClient().GetDatetimeValueClient("1.0.0");
+            DatetimeValue client = new ArrayClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
             Response response = await client.PutAsync(new DateTimeOffset[] { DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00") });
         }
@@ -155,7 +155,7 @@ namespace _Type._Array.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Put_AllParameters()
         {
-            DatetimeValue client = new ArrayClient().GetDatetimeValueClient("1.0.0");
+            DatetimeValue client = new ArrayClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
             RequestContent content = RequestContent.Create(new object[]
             {
@@ -170,7 +170,7 @@ namespace _Type._Array.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Put_AllParameters_Async()
         {
-            DatetimeValue client = new ArrayClient().GetDatetimeValueClient("1.0.0");
+            DatetimeValue client = new ArrayClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
             RequestContent content = RequestContent.Create(new object[]
             {
@@ -185,7 +185,7 @@ namespace _Type._Array.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Put_AllParameters_Convenience()
         {
-            DatetimeValue client = new ArrayClient().GetDatetimeValueClient("1.0.0");
+            DatetimeValue client = new ArrayClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
             Response response = client.Put(new DateTimeOffset[] { DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00") });
         }
@@ -194,7 +194,7 @@ namespace _Type._Array.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Put_AllParameters_Convenience_Async()
         {
-            DatetimeValue client = new ArrayClient().GetDatetimeValueClient("1.0.0");
+            DatetimeValue client = new ArrayClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
             Response response = await client.PutAsync(new DateTimeOffset[] { DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00") });
         }

@@ -23,7 +23,7 @@ namespace Encode.Bytes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Default()
         {
-            Property client = new BytesClient().GetPropertyClient("1.0.0");
+            Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
             RequestContent content = RequestContent.Create(new
             {
@@ -39,7 +39,7 @@ namespace Encode.Bytes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Default_Async()
         {
-            Property client = new BytesClient().GetPropertyClient("1.0.0");
+            Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
             RequestContent content = RequestContent.Create(new
             {
@@ -55,7 +55,7 @@ namespace Encode.Bytes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Default_Convenience()
         {
-            Property client = new BytesClient().GetPropertyClient("1.0.0");
+            Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
             DefaultBytesProperty body = new DefaultBytesProperty(BinaryData.FromObjectAsJson(new object()));
             Response<DefaultBytesProperty> response = client.Default(body);
@@ -65,7 +65,7 @@ namespace Encode.Bytes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Default_Convenience_Async()
         {
-            Property client = new BytesClient().GetPropertyClient("1.0.0");
+            Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
             DefaultBytesProperty body = new DefaultBytesProperty(BinaryData.FromObjectAsJson(new object()));
             Response<DefaultBytesProperty> response = await client.DefaultAsync(body);
@@ -75,7 +75,7 @@ namespace Encode.Bytes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Default_AllParameters()
         {
-            Property client = new BytesClient().GetPropertyClient("1.0.0");
+            Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
             RequestContent content = RequestContent.Create(new
             {
@@ -91,7 +91,7 @@ namespace Encode.Bytes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Default_AllParameters_Async()
         {
-            Property client = new BytesClient().GetPropertyClient("1.0.0");
+            Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
             RequestContent content = RequestContent.Create(new
             {
@@ -107,7 +107,7 @@ namespace Encode.Bytes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Default_AllParameters_Convenience()
         {
-            Property client = new BytesClient().GetPropertyClient("1.0.0");
+            Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
             DefaultBytesProperty body = new DefaultBytesProperty(BinaryData.FromObjectAsJson(new object()));
             Response<DefaultBytesProperty> response = client.Default(body);
@@ -117,7 +117,7 @@ namespace Encode.Bytes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Default_AllParameters_Convenience_Async()
         {
-            Property client = new BytesClient().GetPropertyClient("1.0.0");
+            Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
             DefaultBytesProperty body = new DefaultBytesProperty(BinaryData.FromObjectAsJson(new object()));
             Response<DefaultBytesProperty> response = await client.DefaultAsync(body);
@@ -127,7 +127,7 @@ namespace Encode.Bytes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Base64()
         {
-            Property client = new BytesClient().GetPropertyClient("1.0.0");
+            Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
             RequestContent content = RequestContent.Create(new
             {
@@ -143,7 +143,7 @@ namespace Encode.Bytes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Base64_Async()
         {
-            Property client = new BytesClient().GetPropertyClient("1.0.0");
+            Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
             RequestContent content = RequestContent.Create(new
             {
@@ -159,7 +159,7 @@ namespace Encode.Bytes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Base64_Convenience()
         {
-            Property client = new BytesClient().GetPropertyClient("1.0.0");
+            Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
             Base64BytesProperty body = new Base64BytesProperty(BinaryData.FromObjectAsJson(new object()));
             Response<Base64BytesProperty> response = client.Base64(body);
@@ -169,7 +169,7 @@ namespace Encode.Bytes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Base64_Convenience_Async()
         {
-            Property client = new BytesClient().GetPropertyClient("1.0.0");
+            Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
             Base64BytesProperty body = new Base64BytesProperty(BinaryData.FromObjectAsJson(new object()));
             Response<Base64BytesProperty> response = await client.Base64Async(body);
@@ -179,7 +179,7 @@ namespace Encode.Bytes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Base64_AllParameters()
         {
-            Property client = new BytesClient().GetPropertyClient("1.0.0");
+            Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
             RequestContent content = RequestContent.Create(new
             {
@@ -195,7 +195,7 @@ namespace Encode.Bytes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Base64_AllParameters_Async()
         {
-            Property client = new BytesClient().GetPropertyClient("1.0.0");
+            Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
             RequestContent content = RequestContent.Create(new
             {
@@ -211,7 +211,7 @@ namespace Encode.Bytes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Base64_AllParameters_Convenience()
         {
-            Property client = new BytesClient().GetPropertyClient("1.0.0");
+            Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
             Base64BytesProperty body = new Base64BytesProperty(BinaryData.FromObjectAsJson(new object()));
             Response<Base64BytesProperty> response = client.Base64(body);
@@ -221,7 +221,7 @@ namespace Encode.Bytes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Base64_AllParameters_Convenience_Async()
         {
-            Property client = new BytesClient().GetPropertyClient("1.0.0");
+            Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
             Base64BytesProperty body = new Base64BytesProperty(BinaryData.FromObjectAsJson(new object()));
             Response<Base64BytesProperty> response = await client.Base64Async(body);
@@ -231,7 +231,7 @@ namespace Encode.Bytes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Base64url()
         {
-            Property client = new BytesClient().GetPropertyClient("1.0.0");
+            Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
             RequestContent content = RequestContent.Create(new
             {
@@ -247,7 +247,7 @@ namespace Encode.Bytes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Base64url_Async()
         {
-            Property client = new BytesClient().GetPropertyClient("1.0.0");
+            Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
             RequestContent content = RequestContent.Create(new
             {
@@ -263,7 +263,7 @@ namespace Encode.Bytes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Base64url_Convenience()
         {
-            Property client = new BytesClient().GetPropertyClient("1.0.0");
+            Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
             Base64urlBytesProperty body = new Base64urlBytesProperty(BinaryData.FromObjectAsJson(new object()));
             Response<Base64urlBytesProperty> response = client.Base64url(body);
@@ -273,7 +273,7 @@ namespace Encode.Bytes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Base64url_Convenience_Async()
         {
-            Property client = new BytesClient().GetPropertyClient("1.0.0");
+            Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
             Base64urlBytesProperty body = new Base64urlBytesProperty(BinaryData.FromObjectAsJson(new object()));
             Response<Base64urlBytesProperty> response = await client.Base64urlAsync(body);
@@ -283,7 +283,7 @@ namespace Encode.Bytes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Base64url_AllParameters()
         {
-            Property client = new BytesClient().GetPropertyClient("1.0.0");
+            Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
             RequestContent content = RequestContent.Create(new
             {
@@ -299,7 +299,7 @@ namespace Encode.Bytes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Base64url_AllParameters_Async()
         {
-            Property client = new BytesClient().GetPropertyClient("1.0.0");
+            Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
             RequestContent content = RequestContent.Create(new
             {
@@ -315,7 +315,7 @@ namespace Encode.Bytes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Base64url_AllParameters_Convenience()
         {
-            Property client = new BytesClient().GetPropertyClient("1.0.0");
+            Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
             Base64urlBytesProperty body = new Base64urlBytesProperty(BinaryData.FromObjectAsJson(new object()));
             Response<Base64urlBytesProperty> response = client.Base64url(body);
@@ -325,7 +325,7 @@ namespace Encode.Bytes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Base64url_AllParameters_Convenience_Async()
         {
-            Property client = new BytesClient().GetPropertyClient("1.0.0");
+            Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
             Base64urlBytesProperty body = new Base64urlBytesProperty(BinaryData.FromObjectAsJson(new object()));
             Response<Base64urlBytesProperty> response = await client.Base64urlAsync(body);
@@ -335,7 +335,7 @@ namespace Encode.Bytes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Base64urlArray()
         {
-            Property client = new BytesClient().GetPropertyClient("1.0.0");
+            Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
             RequestContent content = RequestContent.Create(new
             {
@@ -354,7 +354,7 @@ new object()
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Base64urlArray_Async()
         {
-            Property client = new BytesClient().GetPropertyClient("1.0.0");
+            Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
             RequestContent content = RequestContent.Create(new
             {
@@ -373,7 +373,7 @@ new object()
         [Ignore("Only validating compilation of examples")]
         public void Example_Base64urlArray_Convenience()
         {
-            Property client = new BytesClient().GetPropertyClient("1.0.0");
+            Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
             Base64urlArrayBytesProperty body = new Base64urlArrayBytesProperty(new BinaryData[]
             {
@@ -386,7 +386,7 @@ BinaryData.FromObjectAsJson(new object())
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Base64urlArray_Convenience_Async()
         {
-            Property client = new BytesClient().GetPropertyClient("1.0.0");
+            Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
             Base64urlArrayBytesProperty body = new Base64urlArrayBytesProperty(new BinaryData[]
             {
@@ -399,7 +399,7 @@ BinaryData.FromObjectAsJson(new object())
         [Ignore("Only validating compilation of examples")]
         public void Example_Base64urlArray_AllParameters()
         {
-            Property client = new BytesClient().GetPropertyClient("1.0.0");
+            Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
             RequestContent content = RequestContent.Create(new
             {
@@ -418,7 +418,7 @@ new object()
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Base64urlArray_AllParameters_Async()
         {
-            Property client = new BytesClient().GetPropertyClient("1.0.0");
+            Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
             RequestContent content = RequestContent.Create(new
             {
@@ -437,7 +437,7 @@ new object()
         [Ignore("Only validating compilation of examples")]
         public void Example_Base64urlArray_AllParameters_Convenience()
         {
-            Property client = new BytesClient().GetPropertyClient("1.0.0");
+            Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
             Base64urlArrayBytesProperty body = new Base64urlArrayBytesProperty(new BinaryData[]
             {
@@ -450,7 +450,7 @@ BinaryData.FromObjectAsJson(new object())
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Base64urlArray_AllParameters_Convenience_Async()
         {
-            Property client = new BytesClient().GetPropertyClient("1.0.0");
+            Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
             Base64urlArrayBytesProperty body = new Base64urlArrayBytesProperty(new BinaryData[]
             {

@@ -24,7 +24,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetModel()
         {
-            Model client = new SpecialWordsClient().GetModelClient("1.0.0");
+            Model client = new SpecialWordsClient().GetModelClient(apiVersion: "1.0.0");
 
             Response response = client.GetModel();
 
@@ -36,7 +36,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetModel_Async()
         {
-            Model client = new SpecialWordsClient().GetModelClient("1.0.0");
+            Model client = new SpecialWordsClient().GetModelClient(apiVersion: "1.0.0");
 
             Response response = await client.GetModelAsync();
 
@@ -48,7 +48,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetModelValue_Convenience()
         {
-            Model client = new SpecialWordsClient().GetModelClient("1.0.0");
+            Model client = new SpecialWordsClient().GetModelClient(apiVersion: "1.0.0");
 
             Response<BaseModel> response = client.GetModelValue();
         }
@@ -57,7 +57,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetModelValue_Convenience_Async()
         {
-            Model client = new SpecialWordsClient().GetModelClient("1.0.0");
+            Model client = new SpecialWordsClient().GetModelClient(apiVersion: "1.0.0");
 
             Response<BaseModel> response = await client.GetModelValueAsync();
         }
@@ -66,7 +66,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetModel_AllParameters()
         {
-            Model client = new SpecialWordsClient().GetModelClient("1.0.0");
+            Model client = new SpecialWordsClient().GetModelClient(apiVersion: "1.0.0");
 
             Response response = client.GetModel();
 
@@ -78,7 +78,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetModel_AllParameters_Async()
         {
-            Model client = new SpecialWordsClient().GetModelClient("1.0.0");
+            Model client = new SpecialWordsClient().GetModelClient(apiVersion: "1.0.0");
 
             Response response = await client.GetModelAsync();
 
@@ -90,7 +90,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetModelValue_AllParameters_Convenience()
         {
-            Model client = new SpecialWordsClient().GetModelClient("1.0.0");
+            Model client = new SpecialWordsClient().GetModelClient(apiVersion: "1.0.0");
 
             Response<BaseModel> response = client.GetModelValue();
         }
@@ -99,7 +99,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetModelValue_AllParameters_Convenience_Async()
         {
-            Model client = new SpecialWordsClient().GetModelClient("1.0.0");
+            Model client = new SpecialWordsClient().GetModelClient(apiVersion: "1.0.0");
 
             Response<BaseModel> response = await client.GetModelValueAsync();
         }
@@ -108,7 +108,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Put()
         {
-            Model client = new SpecialWordsClient().GetModelClient("1.0.0");
+            Model client = new SpecialWordsClient().GetModelClient(apiVersion: "1.0.0");
 
             RequestContent content = RequestContent.Create(new Dictionary<string, object>
             {
@@ -125,7 +125,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Put_Async()
         {
-            Model client = new SpecialWordsClient().GetModelClient("1.0.0");
+            Model client = new SpecialWordsClient().GetModelClient(apiVersion: "1.0.0");
 
             RequestContent content = RequestContent.Create(new Dictionary<string, object>
             {
@@ -142,7 +142,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Put_Convenience()
         {
-            Model client = new SpecialWordsClient().GetModelClient("1.0.0");
+            Model client = new SpecialWordsClient().GetModelClient(apiVersion: "1.0.0");
 
             BaseModel body = new DerivedModel("<derived.name>", "<for>");
             Response response = client.Put(body);
@@ -152,7 +152,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Put_Convenience_Async()
         {
-            Model client = new SpecialWordsClient().GetModelClient("1.0.0");
+            Model client = new SpecialWordsClient().GetModelClient(apiVersion: "1.0.0");
 
             BaseModel body = new DerivedModel("<derived.name>", "<for>");
             Response response = await client.PutAsync(body);
@@ -162,7 +162,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Put_AllParameters()
         {
-            Model client = new SpecialWordsClient().GetModelClient("1.0.0");
+            Model client = new SpecialWordsClient().GetModelClient(apiVersion: "1.0.0");
 
             RequestContent content = RequestContent.Create(new Dictionary<string, object>
             {
@@ -179,7 +179,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Put_AllParameters_Async()
         {
-            Model client = new SpecialWordsClient().GetModelClient("1.0.0");
+            Model client = new SpecialWordsClient().GetModelClient(apiVersion: "1.0.0");
 
             RequestContent content = RequestContent.Create(new Dictionary<string, object>
             {
@@ -196,7 +196,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Put_AllParameters_Convenience()
         {
-            Model client = new SpecialWordsClient().GetModelClient("1.0.0");
+            Model client = new SpecialWordsClient().GetModelClient(apiVersion: "1.0.0");
 
             BaseModel body = new DerivedModel("<derived.name>", "<for>");
             Response response = client.Put(body);
@@ -206,7 +206,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Put_AllParameters_Convenience_Async()
         {
-            Model client = new SpecialWordsClient().GetModelClient("1.0.0");
+            Model client = new SpecialWordsClient().GetModelClient(apiVersion: "1.0.0");
 
             BaseModel body = new DerivedModel("<derived.name>", "<for>");
             Response response = await client.PutAsync(body);

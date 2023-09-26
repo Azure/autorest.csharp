@@ -651,7 +651,7 @@ This sample shows how to call SpreadAliasWithOptionalPropsAsync with all paramet
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
 
-Response response = await client.SpreadAliasWithOptionalPropsAsync("<id>", 1234, "<name>", new int[] { 1234 }, "<color>", 1234, new string[] { "<elements>" });
+Response response = await client.SpreadAliasWithOptionalPropsAsync("<id>", 1234, "<name>", new int[] { 1234 }, color: "<color>", age: 1234, elements: new string[] { "<elements>" });
 ]]></code></example>
     </member>
     <member name="SpreadAliasWithOptionalProps(string,int,string,IEnumerable{int},string,int?,IEnumerable{string},CancellationToken)">
@@ -668,7 +668,7 @@ This sample shows how to call SpreadAliasWithOptionalProps with all parameters.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
 
-Response response = client.SpreadAliasWithOptionalProps("<id>", 1234, "<name>", new int[] { 1234 }, "<color>", 1234, new string[] { "<elements>" });
+Response response = client.SpreadAliasWithOptionalProps("<id>", 1234, "<name>", new int[] { 1234 }, color: "<color>", age: 1234, elements: new string[] { "<elements>" });
 ]]></code></example>
     </member>
     <member name="SpreadAliasWithOptionalPropsAsync(string,int,RequestContent,RequestContext)">
@@ -725,7 +725,7 @@ This sample shows how to call SpreadAliasWithOptionalPropsAsync with all paramet
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
 
-Response response = await client.SpreadAliasWithOptionalPropsAsync("<id>", 1234, "<name>", new int[] { 1234 }, "<color>", 1234, new string[] { "<elements>" });
+Response response = await client.SpreadAliasWithOptionalPropsAsync("<id>", 1234, "<name>", new int[] { 1234 }, color: "<color>", age: 1234, elements: new string[] { "<elements>" });
 ]]></code></example>
     </member>
     <member name="SpreadAliasWithOptionalProps(string,int,RequestContent,RequestContext)">
@@ -782,7 +782,7 @@ This sample shows how to call SpreadAliasWithOptionalProps with all parameters.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
 
-Response response = client.SpreadAliasWithOptionalProps("<id>", 1234, "<name>", new int[] { 1234 }, "<color>", 1234, new string[] { "<elements>" });
+Response response = client.SpreadAliasWithOptionalProps("<id>", 1234, "<name>", new int[] { 1234 }, color: "<color>", age: 1234, elements: new string[] { "<elements>" });
 ]]></code></example>
     </member>
     <member name="SpreadAliasWithCollectionsAsync(IEnumerable{string},IEnumerable{string},CancellationToken)">
@@ -799,7 +799,7 @@ This sample shows how to call SpreadAliasWithCollectionsAsync with all parameter
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
 
-Response response = await client.SpreadAliasWithCollectionsAsync(new string[] { "<requiredStringList>" }, new string[] { "<optionalStringList>" });
+Response response = await client.SpreadAliasWithCollectionsAsync(new string[] { "<requiredStringList>" }, optionalStringList: new string[] { "<optionalStringList>" });
 ]]></code></example>
     </member>
     <member name="SpreadAliasWithCollections(IEnumerable{string},IEnumerable{string},CancellationToken)">
@@ -816,7 +816,7 @@ This sample shows how to call SpreadAliasWithCollections with all parameters.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
 
-Response response = client.SpreadAliasWithCollections(new string[] { "<requiredStringList>" }, new string[] { "<optionalStringList>" });
+Response response = client.SpreadAliasWithCollections(new string[] { "<requiredStringList>" }, optionalStringList: new string[] { "<optionalStringList>" });
 ]]></code></example>
     </member>
     <member name="SpreadAliasWithCollectionsAsync(RequestContent,RequestContext)">
@@ -869,7 +869,7 @@ This sample shows how to call SpreadAliasWithCollectionsAsync with all parameter
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
 
-Response response = await client.SpreadAliasWithCollectionsAsync(new string[] { "<requiredStringList>" }, new string[] { "<optionalStringList>" });
+Response response = await client.SpreadAliasWithCollectionsAsync(new string[] { "<requiredStringList>" }, optionalStringList: new string[] { "<optionalStringList>" });
 ]]></code></example>
     </member>
     <member name="SpreadAliasWithCollections(RequestContent,RequestContext)">
@@ -922,7 +922,7 @@ This sample shows how to call SpreadAliasWithCollections with all parameters.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
 
-Response response = client.SpreadAliasWithCollections(new string[] { "<requiredStringList>" }, new string[] { "<optionalStringList>" });
+Response response = client.SpreadAliasWithCollections(new string[] { "<requiredStringList>" }, optionalStringList: new string[] { "<optionalStringList>" });
 ]]></code></example>
     </member>
   </members>

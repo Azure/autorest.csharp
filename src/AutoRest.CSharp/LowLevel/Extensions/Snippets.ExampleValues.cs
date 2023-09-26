@@ -195,16 +195,6 @@ namespace AutoRest.CSharp.LowLevel.Extensions
             return frameworkType.IsValueType ? Default : Null;
         }
 
-        public static ValueExpression GetExpression(Parameter parameter, InputExampleParameterValue exampleParameterValue)
-        {
-            var valueExpression = GetExpression(exampleParameterValue, parameter.SerializationFormat);
-            // for optional parameter, we write the parameter name here
-            if (parameter.DefaultValue != null)
-                return new PositionalParameterReference(parameter.Name, valueExpression);
-
-            return valueExpression;
-        }
-
         public static ValueExpression GetExpression(InputExampleParameterValue exampleParameterValue, SerializationFormat serializationFormat)
         {
             if (exampleParameterValue.Value != null)

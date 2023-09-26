@@ -23,7 +23,7 @@ namespace _Type.Property.Nullable.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetNonNull()
         {
-            String client = new NullableClient().GetStringClient("1.0.0");
+            String client = new NullableClient().GetStringClient(apiVersion: "1.0.0");
 
             Response response = client.GetNonNull(null);
 
@@ -36,7 +36,7 @@ namespace _Type.Property.Nullable.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetNonNull_Async()
         {
-            String client = new NullableClient().GetStringClient("1.0.0");
+            String client = new NullableClient().GetStringClient(apiVersion: "1.0.0");
 
             Response response = await client.GetNonNullAsync(null);
 
@@ -49,7 +49,7 @@ namespace _Type.Property.Nullable.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetNonNull_Convenience()
         {
-            String client = new NullableClient().GetStringClient("1.0.0");
+            String client = new NullableClient().GetStringClient(apiVersion: "1.0.0");
 
             Response<StringProperty> response = client.GetNonNull();
         }
@@ -58,7 +58,7 @@ namespace _Type.Property.Nullable.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetNonNull_Convenience_Async()
         {
-            String client = new NullableClient().GetStringClient("1.0.0");
+            String client = new NullableClient().GetStringClient(apiVersion: "1.0.0");
 
             Response<StringProperty> response = await client.GetNonNullAsync();
         }
@@ -67,7 +67,7 @@ namespace _Type.Property.Nullable.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetNonNull_AllParameters()
         {
-            String client = new NullableClient().GetStringClient("1.0.0");
+            String client = new NullableClient().GetStringClient(apiVersion: "1.0.0");
 
             Response response = client.GetNonNull(null);
 
@@ -80,7 +80,7 @@ namespace _Type.Property.Nullable.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetNonNull_AllParameters_Async()
         {
-            String client = new NullableClient().GetStringClient("1.0.0");
+            String client = new NullableClient().GetStringClient(apiVersion: "1.0.0");
 
             Response response = await client.GetNonNullAsync(null);
 
@@ -93,7 +93,7 @@ namespace _Type.Property.Nullable.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetNonNull_AllParameters_Convenience()
         {
-            String client = new NullableClient().GetStringClient("1.0.0");
+            String client = new NullableClient().GetStringClient(apiVersion: "1.0.0");
 
             Response<StringProperty> response = client.GetNonNull();
         }
@@ -102,7 +102,7 @@ namespace _Type.Property.Nullable.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetNonNull_AllParameters_Convenience_Async()
         {
-            String client = new NullableClient().GetStringClient("1.0.0");
+            String client = new NullableClient().GetStringClient(apiVersion: "1.0.0");
 
             Response<StringProperty> response = await client.GetNonNullAsync();
         }
@@ -111,7 +111,7 @@ namespace _Type.Property.Nullable.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetNull()
         {
-            String client = new NullableClient().GetStringClient("1.0.0");
+            String client = new NullableClient().GetStringClient(apiVersion: "1.0.0");
 
             Response response = client.GetNull(null);
 
@@ -124,7 +124,7 @@ namespace _Type.Property.Nullable.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetNull_Async()
         {
-            String client = new NullableClient().GetStringClient("1.0.0");
+            String client = new NullableClient().GetStringClient(apiVersion: "1.0.0");
 
             Response response = await client.GetNullAsync(null);
 
@@ -137,7 +137,7 @@ namespace _Type.Property.Nullable.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetNull_Convenience()
         {
-            String client = new NullableClient().GetStringClient("1.0.0");
+            String client = new NullableClient().GetStringClient(apiVersion: "1.0.0");
 
             Response<StringProperty> response = client.GetNull();
         }
@@ -146,7 +146,7 @@ namespace _Type.Property.Nullable.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetNull_Convenience_Async()
         {
-            String client = new NullableClient().GetStringClient("1.0.0");
+            String client = new NullableClient().GetStringClient(apiVersion: "1.0.0");
 
             Response<StringProperty> response = await client.GetNullAsync();
         }
@@ -155,7 +155,7 @@ namespace _Type.Property.Nullable.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetNull_AllParameters()
         {
-            String client = new NullableClient().GetStringClient("1.0.0");
+            String client = new NullableClient().GetStringClient(apiVersion: "1.0.0");
 
             Response response = client.GetNull(null);
 
@@ -168,7 +168,7 @@ namespace _Type.Property.Nullable.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetNull_AllParameters_Async()
         {
-            String client = new NullableClient().GetStringClient("1.0.0");
+            String client = new NullableClient().GetStringClient(apiVersion: "1.0.0");
 
             Response response = await client.GetNullAsync(null);
 
@@ -181,7 +181,7 @@ namespace _Type.Property.Nullable.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetNull_AllParameters_Convenience()
         {
-            String client = new NullableClient().GetStringClient("1.0.0");
+            String client = new NullableClient().GetStringClient(apiVersion: "1.0.0");
 
             Response<StringProperty> response = client.GetNull();
         }
@@ -190,7 +190,7 @@ namespace _Type.Property.Nullable.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetNull_AllParameters_Convenience_Async()
         {
-            String client = new NullableClient().GetStringClient("1.0.0");
+            String client = new NullableClient().GetStringClient(apiVersion: "1.0.0");
 
             Response<StringProperty> response = await client.GetNullAsync();
         }
@@ -199,7 +199,7 @@ namespace _Type.Property.Nullable.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_PatchNonNull()
         {
-            String client = new NullableClient().GetStringClient("1.0.0");
+            String client = new NullableClient().GetStringClient(apiVersion: "1.0.0");
 
             RequestContent content = RequestContent.Create(new
             {
@@ -215,7 +215,7 @@ namespace _Type.Property.Nullable.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_PatchNonNull_Async()
         {
-            String client = new NullableClient().GetStringClient("1.0.0");
+            String client = new NullableClient().GetStringClient(apiVersion: "1.0.0");
 
             RequestContent content = RequestContent.Create(new
             {
@@ -231,7 +231,7 @@ namespace _Type.Property.Nullable.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_PatchNonNull_AllParameters()
         {
-            String client = new NullableClient().GetStringClient("1.0.0");
+            String client = new NullableClient().GetStringClient(apiVersion: "1.0.0");
 
             RequestContent content = RequestContent.Create(new
             {
@@ -247,7 +247,7 @@ namespace _Type.Property.Nullable.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_PatchNonNull_AllParameters_Async()
         {
-            String client = new NullableClient().GetStringClient("1.0.0");
+            String client = new NullableClient().GetStringClient(apiVersion: "1.0.0");
 
             RequestContent content = RequestContent.Create(new
             {
@@ -263,7 +263,7 @@ namespace _Type.Property.Nullable.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_PatchNull()
         {
-            String client = new NullableClient().GetStringClient("1.0.0");
+            String client = new NullableClient().GetStringClient(apiVersion: "1.0.0");
 
             RequestContent content = RequestContent.Create(new
             {
@@ -279,7 +279,7 @@ namespace _Type.Property.Nullable.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_PatchNull_Async()
         {
-            String client = new NullableClient().GetStringClient("1.0.0");
+            String client = new NullableClient().GetStringClient(apiVersion: "1.0.0");
 
             RequestContent content = RequestContent.Create(new
             {
@@ -295,7 +295,7 @@ namespace _Type.Property.Nullable.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_PatchNull_AllParameters()
         {
-            String client = new NullableClient().GetStringClient("1.0.0");
+            String client = new NullableClient().GetStringClient(apiVersion: "1.0.0");
 
             RequestContent content = RequestContent.Create(new
             {
@@ -311,7 +311,7 @@ namespace _Type.Property.Nullable.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_PatchNull_AllParameters_Async()
         {
-            String client = new NullableClient().GetStringClient("1.0.0");
+            String client = new NullableClient().GetStringClient(apiVersion: "1.0.0");
 
             RequestContent content = RequestContent.Create(new
             {

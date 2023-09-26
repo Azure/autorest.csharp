@@ -5,13 +5,13 @@
       <example>
 This sample shows how to call GetUnknownArrayAsync.
 <code><![CDATA[
-UnknownArray client = new ValueTypesClient().GetUnknownArrayClient("1.0.0");
+UnknownArray client = new ValueTypesClient().GetUnknownArrayClient(apiVersion: "1.0.0");
 
 Response<UnknownArrayProperty> response = await client.GetUnknownArrayAsync();
 ]]></code>
 This sample shows how to call GetUnknownArrayAsync with all parameters.
 <code><![CDATA[
-UnknownArray client = new ValueTypesClient().GetUnknownArrayClient("1.0.0");
+UnknownArray client = new ValueTypesClient().GetUnknownArrayClient(apiVersion: "1.0.0");
 
 Response<UnknownArrayProperty> response = await client.GetUnknownArrayAsync();
 ]]></code></example>
@@ -20,13 +20,13 @@ Response<UnknownArrayProperty> response = await client.GetUnknownArrayAsync();
       <example>
 This sample shows how to call GetUnknownArray.
 <code><![CDATA[
-UnknownArray client = new ValueTypesClient().GetUnknownArrayClient("1.0.0");
+UnknownArray client = new ValueTypesClient().GetUnknownArrayClient(apiVersion: "1.0.0");
 
 Response<UnknownArrayProperty> response = client.GetUnknownArray();
 ]]></code>
 This sample shows how to call GetUnknownArray with all parameters.
 <code><![CDATA[
-UnknownArray client = new ValueTypesClient().GetUnknownArrayClient("1.0.0");
+UnknownArray client = new ValueTypesClient().GetUnknownArrayClient(apiVersion: "1.0.0");
 
 Response<UnknownArrayProperty> response = client.GetUnknownArray();
 ]]></code></example>
@@ -35,7 +35,7 @@ Response<UnknownArrayProperty> response = client.GetUnknownArray();
       <example>
 This sample shows how to call GetUnknownArrayAsync and parse the result.
 <code><![CDATA[
-UnknownArray client = new ValueTypesClient().GetUnknownArrayClient("1.0.0");
+UnknownArray client = new ValueTypesClient().GetUnknownArrayClient(apiVersion: "1.0.0");
 
 Response response = await client.GetUnknownArrayAsync(null);
 
@@ -44,13 +44,13 @@ Console.WriteLine(result.GetProperty("property").ToString());
 ]]></code>
 This sample shows how to call GetUnknownArrayAsync.
 <code><![CDATA[
-UnknownArray client = new ValueTypesClient().GetUnknownArrayClient("1.0.0");
+UnknownArray client = new ValueTypesClient().GetUnknownArrayClient(apiVersion: "1.0.0");
 
 Response<UnknownArrayProperty> response = await client.GetUnknownArrayAsync();
 ]]></code>
 This sample shows how to call GetUnknownArrayAsync with all parameters and parse the result.
 <code><![CDATA[
-UnknownArray client = new ValueTypesClient().GetUnknownArrayClient("1.0.0");
+UnknownArray client = new ValueTypesClient().GetUnknownArrayClient(apiVersion: "1.0.0");
 
 Response response = await client.GetUnknownArrayAsync(null);
 
@@ -59,7 +59,7 @@ Console.WriteLine(result.GetProperty("property").ToString());
 ]]></code>
 This sample shows how to call GetUnknownArrayAsync with all parameters.
 <code><![CDATA[
-UnknownArray client = new ValueTypesClient().GetUnknownArrayClient("1.0.0");
+UnknownArray client = new ValueTypesClient().GetUnknownArrayClient(apiVersion: "1.0.0");
 
 Response<UnknownArrayProperty> response = await client.GetUnknownArrayAsync();
 ]]></code></example>
@@ -68,7 +68,7 @@ Response<UnknownArrayProperty> response = await client.GetUnknownArrayAsync();
       <example>
 This sample shows how to call GetUnknownArray and parse the result.
 <code><![CDATA[
-UnknownArray client = new ValueTypesClient().GetUnknownArrayClient("1.0.0");
+UnknownArray client = new ValueTypesClient().GetUnknownArrayClient(apiVersion: "1.0.0");
 
 Response response = client.GetUnknownArray(null);
 
@@ -77,13 +77,13 @@ Console.WriteLine(result.GetProperty("property").ToString());
 ]]></code>
 This sample shows how to call GetUnknownArray.
 <code><![CDATA[
-UnknownArray client = new ValueTypesClient().GetUnknownArrayClient("1.0.0");
+UnknownArray client = new ValueTypesClient().GetUnknownArrayClient(apiVersion: "1.0.0");
 
 Response<UnknownArrayProperty> response = client.GetUnknownArray();
 ]]></code>
 This sample shows how to call GetUnknownArray with all parameters and parse the result.
 <code><![CDATA[
-UnknownArray client = new ValueTypesClient().GetUnknownArrayClient("1.0.0");
+UnknownArray client = new ValueTypesClient().GetUnknownArrayClient(apiVersion: "1.0.0");
 
 Response response = client.GetUnknownArray(null);
 
@@ -92,7 +92,7 @@ Console.WriteLine(result.GetProperty("property").ToString());
 ]]></code>
 This sample shows how to call GetUnknownArray with all parameters.
 <code><![CDATA[
-UnknownArray client = new ValueTypesClient().GetUnknownArrayClient("1.0.0");
+UnknownArray client = new ValueTypesClient().GetUnknownArrayClient(apiVersion: "1.0.0");
 
 Response<UnknownArrayProperty> response = client.GetUnknownArray();
 ]]></code></example>
@@ -101,14 +101,14 @@ Response<UnknownArrayProperty> response = client.GetUnknownArray();
       <example>
 This sample shows how to call PutAsync.
 <code><![CDATA[
-UnknownArray client = new ValueTypesClient().GetUnknownArrayClient("1.0.0");
+UnknownArray client = new ValueTypesClient().GetUnknownArrayClient(apiVersion: "1.0.0");
 
 UnknownArrayProperty body = new UnknownArrayProperty(BinaryData.FromObjectAsJson(new object()));
 Response response = await client.PutAsync(body);
 ]]></code>
 This sample shows how to call PutAsync with all parameters.
 <code><![CDATA[
-UnknownArray client = new ValueTypesClient().GetUnknownArrayClient("1.0.0");
+UnknownArray client = new ValueTypesClient().GetUnknownArrayClient(apiVersion: "1.0.0");
 
 UnknownArrayProperty body = new UnknownArrayProperty(BinaryData.FromObjectAsJson(new object()));
 Response response = await client.PutAsync(body);
@@ -118,14 +118,14 @@ Response response = await client.PutAsync(body);
       <example>
 This sample shows how to call Put.
 <code><![CDATA[
-UnknownArray client = new ValueTypesClient().GetUnknownArrayClient("1.0.0");
+UnknownArray client = new ValueTypesClient().GetUnknownArrayClient(apiVersion: "1.0.0");
 
 UnknownArrayProperty body = new UnknownArrayProperty(BinaryData.FromObjectAsJson(new object()));
 Response response = client.Put(body);
 ]]></code>
 This sample shows how to call Put with all parameters.
 <code><![CDATA[
-UnknownArray client = new ValueTypesClient().GetUnknownArrayClient("1.0.0");
+UnknownArray client = new ValueTypesClient().GetUnknownArrayClient(apiVersion: "1.0.0");
 
 UnknownArrayProperty body = new UnknownArrayProperty(BinaryData.FromObjectAsJson(new object()));
 Response response = client.Put(body);
@@ -135,7 +135,7 @@ Response response = client.Put(body);
       <example>
 This sample shows how to call PutAsync.
 <code><![CDATA[
-UnknownArray client = new ValueTypesClient().GetUnknownArrayClient("1.0.0");
+UnknownArray client = new ValueTypesClient().GetUnknownArrayClient(apiVersion: "1.0.0");
 
 RequestContent content = RequestContent.Create(new
 {
@@ -147,14 +147,14 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutAsync.
 <code><![CDATA[
-UnknownArray client = new ValueTypesClient().GetUnknownArrayClient("1.0.0");
+UnknownArray client = new ValueTypesClient().GetUnknownArrayClient(apiVersion: "1.0.0");
 
 UnknownArrayProperty body = new UnknownArrayProperty(BinaryData.FromObjectAsJson(new object()));
 Response response = await client.PutAsync(body);
 ]]></code>
 This sample shows how to call PutAsync with all request content.
 <code><![CDATA[
-UnknownArray client = new ValueTypesClient().GetUnknownArrayClient("1.0.0");
+UnknownArray client = new ValueTypesClient().GetUnknownArrayClient(apiVersion: "1.0.0");
 
 RequestContent content = RequestContent.Create(new
 {
@@ -166,7 +166,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutAsync with all parameters.
 <code><![CDATA[
-UnknownArray client = new ValueTypesClient().GetUnknownArrayClient("1.0.0");
+UnknownArray client = new ValueTypesClient().GetUnknownArrayClient(apiVersion: "1.0.0");
 
 UnknownArrayProperty body = new UnknownArrayProperty(BinaryData.FromObjectAsJson(new object()));
 Response response = await client.PutAsync(body);
@@ -176,7 +176,7 @@ Response response = await client.PutAsync(body);
       <example>
 This sample shows how to call Put.
 <code><![CDATA[
-UnknownArray client = new ValueTypesClient().GetUnknownArrayClient("1.0.0");
+UnknownArray client = new ValueTypesClient().GetUnknownArrayClient(apiVersion: "1.0.0");
 
 RequestContent content = RequestContent.Create(new
 {
@@ -188,14 +188,14 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Put.
 <code><![CDATA[
-UnknownArray client = new ValueTypesClient().GetUnknownArrayClient("1.0.0");
+UnknownArray client = new ValueTypesClient().GetUnknownArrayClient(apiVersion: "1.0.0");
 
 UnknownArrayProperty body = new UnknownArrayProperty(BinaryData.FromObjectAsJson(new object()));
 Response response = client.Put(body);
 ]]></code>
 This sample shows how to call Put with all request content.
 <code><![CDATA[
-UnknownArray client = new ValueTypesClient().GetUnknownArrayClient("1.0.0");
+UnknownArray client = new ValueTypesClient().GetUnknownArrayClient(apiVersion: "1.0.0");
 
 RequestContent content = RequestContent.Create(new
 {
@@ -207,7 +207,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Put with all parameters.
 <code><![CDATA[
-UnknownArray client = new ValueTypesClient().GetUnknownArrayClient("1.0.0");
+UnknownArray client = new ValueTypesClient().GetUnknownArrayClient(apiVersion: "1.0.0");
 
 UnknownArrayProperty body = new UnknownArrayProperty(BinaryData.FromObjectAsJson(new object()));
 Response response = client.Put(body);

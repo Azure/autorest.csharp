@@ -5,13 +5,13 @@
       <example>
 This sample shows how to call GetFloatAsync.
 <code><![CDATA[
-Float client = new ValueTypesClient().GetFloatClient("1.0.0");
+Float client = new ValueTypesClient().GetFloatClient(apiVersion: "1.0.0");
 
 Response<FloatProperty> response = await client.GetFloatAsync();
 ]]></code>
 This sample shows how to call GetFloatAsync with all parameters.
 <code><![CDATA[
-Float client = new ValueTypesClient().GetFloatClient("1.0.0");
+Float client = new ValueTypesClient().GetFloatClient(apiVersion: "1.0.0");
 
 Response<FloatProperty> response = await client.GetFloatAsync();
 ]]></code></example>
@@ -20,13 +20,13 @@ Response<FloatProperty> response = await client.GetFloatAsync();
       <example>
 This sample shows how to call GetFloat.
 <code><![CDATA[
-Float client = new ValueTypesClient().GetFloatClient("1.0.0");
+Float client = new ValueTypesClient().GetFloatClient(apiVersion: "1.0.0");
 
 Response<FloatProperty> response = client.GetFloat();
 ]]></code>
 This sample shows how to call GetFloat with all parameters.
 <code><![CDATA[
-Float client = new ValueTypesClient().GetFloatClient("1.0.0");
+Float client = new ValueTypesClient().GetFloatClient(apiVersion: "1.0.0");
 
 Response<FloatProperty> response = client.GetFloat();
 ]]></code></example>
@@ -35,7 +35,7 @@ Response<FloatProperty> response = client.GetFloat();
       <example>
 This sample shows how to call GetFloatAsync and parse the result.
 <code><![CDATA[
-Float client = new ValueTypesClient().GetFloatClient("1.0.0");
+Float client = new ValueTypesClient().GetFloatClient(apiVersion: "1.0.0");
 
 Response response = await client.GetFloatAsync(null);
 
@@ -44,13 +44,13 @@ Console.WriteLine(result.GetProperty("property").ToString());
 ]]></code>
 This sample shows how to call GetFloatAsync.
 <code><![CDATA[
-Float client = new ValueTypesClient().GetFloatClient("1.0.0");
+Float client = new ValueTypesClient().GetFloatClient(apiVersion: "1.0.0");
 
 Response<FloatProperty> response = await client.GetFloatAsync();
 ]]></code>
 This sample shows how to call GetFloatAsync with all parameters and parse the result.
 <code><![CDATA[
-Float client = new ValueTypesClient().GetFloatClient("1.0.0");
+Float client = new ValueTypesClient().GetFloatClient(apiVersion: "1.0.0");
 
 Response response = await client.GetFloatAsync(null);
 
@@ -59,7 +59,7 @@ Console.WriteLine(result.GetProperty("property").ToString());
 ]]></code>
 This sample shows how to call GetFloatAsync with all parameters.
 <code><![CDATA[
-Float client = new ValueTypesClient().GetFloatClient("1.0.0");
+Float client = new ValueTypesClient().GetFloatClient(apiVersion: "1.0.0");
 
 Response<FloatProperty> response = await client.GetFloatAsync();
 ]]></code></example>
@@ -68,7 +68,7 @@ Response<FloatProperty> response = await client.GetFloatAsync();
       <example>
 This sample shows how to call GetFloat and parse the result.
 <code><![CDATA[
-Float client = new ValueTypesClient().GetFloatClient("1.0.0");
+Float client = new ValueTypesClient().GetFloatClient(apiVersion: "1.0.0");
 
 Response response = client.GetFloat(null);
 
@@ -77,13 +77,13 @@ Console.WriteLine(result.GetProperty("property").ToString());
 ]]></code>
 This sample shows how to call GetFloat.
 <code><![CDATA[
-Float client = new ValueTypesClient().GetFloatClient("1.0.0");
+Float client = new ValueTypesClient().GetFloatClient(apiVersion: "1.0.0");
 
 Response<FloatProperty> response = client.GetFloat();
 ]]></code>
 This sample shows how to call GetFloat with all parameters and parse the result.
 <code><![CDATA[
-Float client = new ValueTypesClient().GetFloatClient("1.0.0");
+Float client = new ValueTypesClient().GetFloatClient(apiVersion: "1.0.0");
 
 Response response = client.GetFloat(null);
 
@@ -92,7 +92,7 @@ Console.WriteLine(result.GetProperty("property").ToString());
 ]]></code>
 This sample shows how to call GetFloat with all parameters.
 <code><![CDATA[
-Float client = new ValueTypesClient().GetFloatClient("1.0.0");
+Float client = new ValueTypesClient().GetFloatClient(apiVersion: "1.0.0");
 
 Response<FloatProperty> response = client.GetFloat();
 ]]></code></example>
@@ -101,14 +101,14 @@ Response<FloatProperty> response = client.GetFloat();
       <example>
 This sample shows how to call PutAsync.
 <code><![CDATA[
-Float client = new ValueTypesClient().GetFloatClient("1.0.0");
+Float client = new ValueTypesClient().GetFloatClient(apiVersion: "1.0.0");
 
 FloatProperty body = new FloatProperty(123.45F);
 Response response = await client.PutAsync(body);
 ]]></code>
 This sample shows how to call PutAsync with all parameters.
 <code><![CDATA[
-Float client = new ValueTypesClient().GetFloatClient("1.0.0");
+Float client = new ValueTypesClient().GetFloatClient(apiVersion: "1.0.0");
 
 FloatProperty body = new FloatProperty(123.45F);
 Response response = await client.PutAsync(body);
@@ -118,14 +118,14 @@ Response response = await client.PutAsync(body);
       <example>
 This sample shows how to call Put.
 <code><![CDATA[
-Float client = new ValueTypesClient().GetFloatClient("1.0.0");
+Float client = new ValueTypesClient().GetFloatClient(apiVersion: "1.0.0");
 
 FloatProperty body = new FloatProperty(123.45F);
 Response response = client.Put(body);
 ]]></code>
 This sample shows how to call Put with all parameters.
 <code><![CDATA[
-Float client = new ValueTypesClient().GetFloatClient("1.0.0");
+Float client = new ValueTypesClient().GetFloatClient(apiVersion: "1.0.0");
 
 FloatProperty body = new FloatProperty(123.45F);
 Response response = client.Put(body);
@@ -135,7 +135,7 @@ Response response = client.Put(body);
       <example>
 This sample shows how to call PutAsync.
 <code><![CDATA[
-Float client = new ValueTypesClient().GetFloatClient("1.0.0");
+Float client = new ValueTypesClient().GetFloatClient(apiVersion: "1.0.0");
 
 RequestContent content = RequestContent.Create(new
 {
@@ -147,14 +147,14 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutAsync.
 <code><![CDATA[
-Float client = new ValueTypesClient().GetFloatClient("1.0.0");
+Float client = new ValueTypesClient().GetFloatClient(apiVersion: "1.0.0");
 
 FloatProperty body = new FloatProperty(123.45F);
 Response response = await client.PutAsync(body);
 ]]></code>
 This sample shows how to call PutAsync with all request content.
 <code><![CDATA[
-Float client = new ValueTypesClient().GetFloatClient("1.0.0");
+Float client = new ValueTypesClient().GetFloatClient(apiVersion: "1.0.0");
 
 RequestContent content = RequestContent.Create(new
 {
@@ -166,7 +166,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutAsync with all parameters.
 <code><![CDATA[
-Float client = new ValueTypesClient().GetFloatClient("1.0.0");
+Float client = new ValueTypesClient().GetFloatClient(apiVersion: "1.0.0");
 
 FloatProperty body = new FloatProperty(123.45F);
 Response response = await client.PutAsync(body);
@@ -176,7 +176,7 @@ Response response = await client.PutAsync(body);
       <example>
 This sample shows how to call Put.
 <code><![CDATA[
-Float client = new ValueTypesClient().GetFloatClient("1.0.0");
+Float client = new ValueTypesClient().GetFloatClient(apiVersion: "1.0.0");
 
 RequestContent content = RequestContent.Create(new
 {
@@ -188,14 +188,14 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Put.
 <code><![CDATA[
-Float client = new ValueTypesClient().GetFloatClient("1.0.0");
+Float client = new ValueTypesClient().GetFloatClient(apiVersion: "1.0.0");
 
 FloatProperty body = new FloatProperty(123.45F);
 Response response = client.Put(body);
 ]]></code>
 This sample shows how to call Put with all request content.
 <code><![CDATA[
-Float client = new ValueTypesClient().GetFloatClient("1.0.0");
+Float client = new ValueTypesClient().GetFloatClient(apiVersion: "1.0.0");
 
 RequestContent content = RequestContent.Create(new
 {
@@ -207,7 +207,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Put with all parameters.
 <code><![CDATA[
-Float client = new ValueTypesClient().GetFloatClient("1.0.0");
+Float client = new ValueTypesClient().GetFloatClient(apiVersion: "1.0.0");
 
 FloatProperty body = new FloatProperty(123.45F);
 Response response = client.Put(body);

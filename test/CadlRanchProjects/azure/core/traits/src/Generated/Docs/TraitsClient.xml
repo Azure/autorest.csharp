@@ -13,7 +13,7 @@ This sample shows how to call SmokeTestAsync with all parameters.
 <code><![CDATA[
 TraitsClient client = new TraitsClient();
 
-Response<User> response = await client.SmokeTestAsync(1234, "<foo>", null);
+Response<User> response = await client.SmokeTestAsync(1234, "<foo>", requestConditions: null);
 ]]></code></example>
     </member>
     <member name="SmokeTest(int,string,RequestConditions,CancellationToken)">
@@ -28,7 +28,7 @@ This sample shows how to call SmokeTest with all parameters.
 <code><![CDATA[
 TraitsClient client = new TraitsClient();
 
-Response<User> response = client.SmokeTest(1234, "<foo>", null);
+Response<User> response = client.SmokeTest(1234, "<foo>", requestConditions: null);
 ]]></code></example>
     </member>
     <member name="SmokeTestAsync(int,string,RequestConditions,RequestContext)">
@@ -62,7 +62,7 @@ This sample shows how to call SmokeTestAsync with all parameters.
 <code><![CDATA[
 TraitsClient client = new TraitsClient();
 
-Response<User> response = await client.SmokeTestAsync(1234, "<foo>", null);
+Response<User> response = await client.SmokeTestAsync(1234, "<foo>", requestConditions: null);
 ]]></code></example>
     </member>
     <member name="SmokeTest(int,string,RequestConditions,RequestContext)">
@@ -96,7 +96,7 @@ This sample shows how to call SmokeTest with all parameters.
 <code><![CDATA[
 TraitsClient client = new TraitsClient();
 
-Response<User> response = client.SmokeTest(1234, "<foo>", null);
+Response<User> response = client.SmokeTest(1234, "<foo>", requestConditions: null);
 ]]></code></example>
     </member>
     <member name="RepeatableActionAsync(int,UserActionParam,CancellationToken)">

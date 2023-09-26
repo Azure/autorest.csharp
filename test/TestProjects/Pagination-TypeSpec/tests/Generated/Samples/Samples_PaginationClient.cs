@@ -256,7 +256,7 @@ namespace Pagination.Samples
             TokenCredential credential = new DefaultAzureCredential();
             PaginationClient client = new PaginationClient(endpoint, credential);
 
-            foreach (DimensionValueListItem item in client.GetMetricDimensionValues("<testRunId>", "<name>", "<metricNamespace>", Interval.PT5S, "<metricName>", "<timespan>"))
+            foreach (DimensionValueListItem item in client.GetMetricDimensionValues("<testRunId>", "<name>", "<metricNamespace>", interval: Interval.PT5S, metricName: "<metricName>", timespan: "<timespan>"))
             {
             }
         }
@@ -269,7 +269,7 @@ namespace Pagination.Samples
             TokenCredential credential = new DefaultAzureCredential();
             PaginationClient client = new PaginationClient(endpoint, credential);
 
-            await foreach (DimensionValueListItem item in client.GetMetricDimensionValuesAsync("<testRunId>", "<name>", "<metricNamespace>", Interval.PT5S, "<metricName>", "<timespan>"))
+            await foreach (DimensionValueListItem item in client.GetMetricDimensionValuesAsync("<testRunId>", "<name>", "<metricNamespace>", interval: Interval.PT5S, metricName: "<metricName>", timespan: "<timespan>"))
             {
             }
         }
@@ -608,7 +608,7 @@ namespace Pagination.Samples
             TokenCredential credential = new DefaultAzureCredential();
             PaginationClient client = new PaginationClient(endpoint, credential);
 
-            foreach (TextBlockItem item in client.GetTextBlocklistItems("<blocklistName>", 1234, 1234, 1234))
+            foreach (TextBlockItem item in client.GetTextBlocklistItems("<blocklistName>", maxCount: 1234, skip: 1234, maxpagesize: 1234))
             {
             }
         }
@@ -621,7 +621,7 @@ namespace Pagination.Samples
             TokenCredential credential = new DefaultAzureCredential();
             PaginationClient client = new PaginationClient(endpoint, credential);
 
-            await foreach (TextBlockItem item in client.GetTextBlocklistItemsAsync("<blocklistName>", 1234, 1234, 1234))
+            await foreach (TextBlockItem item in client.GetTextBlocklistItemsAsync("<blocklistName>", maxCount: 1234, skip: 1234, maxpagesize: 1234))
             {
             }
         }

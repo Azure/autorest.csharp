@@ -23,7 +23,7 @@ namespace _Type.Property.Optionality.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetAll()
         {
-            CollectionsModel client = new OptionalClient().GetCollectionsModelClient("1.0.0");
+            CollectionsModel client = new OptionalClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
             Response response = client.GetAll(null);
 
@@ -35,7 +35,7 @@ namespace _Type.Property.Optionality.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetAll_Async()
         {
-            CollectionsModel client = new OptionalClient().GetCollectionsModelClient("1.0.0");
+            CollectionsModel client = new OptionalClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
             Response response = await client.GetAllAsync(null);
 
@@ -47,7 +47,7 @@ namespace _Type.Property.Optionality.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetAll_Convenience()
         {
-            CollectionsModel client = new OptionalClient().GetCollectionsModelClient("1.0.0");
+            CollectionsModel client = new OptionalClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
             Response<CollectionsModelProperty> response = client.GetAll();
         }
@@ -56,7 +56,7 @@ namespace _Type.Property.Optionality.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetAll_Convenience_Async()
         {
-            CollectionsModel client = new OptionalClient().GetCollectionsModelClient("1.0.0");
+            CollectionsModel client = new OptionalClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
             Response<CollectionsModelProperty> response = await client.GetAllAsync();
         }
@@ -65,7 +65,7 @@ namespace _Type.Property.Optionality.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetAll_AllParameters()
         {
-            CollectionsModel client = new OptionalClient().GetCollectionsModelClient("1.0.0");
+            CollectionsModel client = new OptionalClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
             Response response = client.GetAll(null);
 
@@ -77,7 +77,7 @@ namespace _Type.Property.Optionality.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetAll_AllParameters_Async()
         {
-            CollectionsModel client = new OptionalClient().GetCollectionsModelClient("1.0.0");
+            CollectionsModel client = new OptionalClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
             Response response = await client.GetAllAsync(null);
 
@@ -89,7 +89,7 @@ namespace _Type.Property.Optionality.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetAll_AllParameters_Convenience()
         {
-            CollectionsModel client = new OptionalClient().GetCollectionsModelClient("1.0.0");
+            CollectionsModel client = new OptionalClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
             Response<CollectionsModelProperty> response = client.GetAll();
         }
@@ -98,7 +98,7 @@ namespace _Type.Property.Optionality.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetAll_AllParameters_Convenience_Async()
         {
-            CollectionsModel client = new OptionalClient().GetCollectionsModelClient("1.0.0");
+            CollectionsModel client = new OptionalClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
             Response<CollectionsModelProperty> response = await client.GetAllAsync();
         }
@@ -107,7 +107,7 @@ namespace _Type.Property.Optionality.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetDefault()
         {
-            CollectionsModel client = new OptionalClient().GetCollectionsModelClient("1.0.0");
+            CollectionsModel client = new OptionalClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
             Response response = client.GetDefault(null);
 
@@ -119,7 +119,7 @@ namespace _Type.Property.Optionality.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetDefault_Async()
         {
-            CollectionsModel client = new OptionalClient().GetCollectionsModelClient("1.0.0");
+            CollectionsModel client = new OptionalClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
             Response response = await client.GetDefaultAsync(null);
 
@@ -131,7 +131,7 @@ namespace _Type.Property.Optionality.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetDefault_Convenience()
         {
-            CollectionsModel client = new OptionalClient().GetCollectionsModelClient("1.0.0");
+            CollectionsModel client = new OptionalClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
             Response<CollectionsModelProperty> response = client.GetDefault();
         }
@@ -140,7 +140,7 @@ namespace _Type.Property.Optionality.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetDefault_Convenience_Async()
         {
-            CollectionsModel client = new OptionalClient().GetCollectionsModelClient("1.0.0");
+            CollectionsModel client = new OptionalClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
             Response<CollectionsModelProperty> response = await client.GetDefaultAsync();
         }
@@ -149,7 +149,7 @@ namespace _Type.Property.Optionality.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetDefault_AllParameters()
         {
-            CollectionsModel client = new OptionalClient().GetCollectionsModelClient("1.0.0");
+            CollectionsModel client = new OptionalClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
             Response response = client.GetDefault(null);
 
@@ -161,7 +161,7 @@ namespace _Type.Property.Optionality.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetDefault_AllParameters_Async()
         {
-            CollectionsModel client = new OptionalClient().GetCollectionsModelClient("1.0.0");
+            CollectionsModel client = new OptionalClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
             Response response = await client.GetDefaultAsync(null);
 
@@ -173,7 +173,7 @@ namespace _Type.Property.Optionality.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetDefault_AllParameters_Convenience()
         {
-            CollectionsModel client = new OptionalClient().GetCollectionsModelClient("1.0.0");
+            CollectionsModel client = new OptionalClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
             Response<CollectionsModelProperty> response = client.GetDefault();
         }
@@ -182,7 +182,7 @@ namespace _Type.Property.Optionality.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetDefault_AllParameters_Convenience_Async()
         {
-            CollectionsModel client = new OptionalClient().GetCollectionsModelClient("1.0.0");
+            CollectionsModel client = new OptionalClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
             Response<CollectionsModelProperty> response = await client.GetDefaultAsync();
         }
@@ -191,7 +191,7 @@ namespace _Type.Property.Optionality.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_PutAll()
         {
-            CollectionsModel client = new OptionalClient().GetCollectionsModelClient("1.0.0");
+            CollectionsModel client = new OptionalClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
             RequestContent content = RequestContent.Create(new object());
             Response response = client.PutAll(content);
@@ -203,7 +203,7 @@ namespace _Type.Property.Optionality.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_PutAll_Async()
         {
-            CollectionsModel client = new OptionalClient().GetCollectionsModelClient("1.0.0");
+            CollectionsModel client = new OptionalClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
             RequestContent content = RequestContent.Create(new object());
             Response response = await client.PutAllAsync(content);
@@ -215,7 +215,7 @@ namespace _Type.Property.Optionality.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_PutAll_Convenience()
         {
-            CollectionsModel client = new OptionalClient().GetCollectionsModelClient("1.0.0");
+            CollectionsModel client = new OptionalClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
             CollectionsModelProperty body = new CollectionsModelProperty();
             Response response = client.PutAll(body);
@@ -225,7 +225,7 @@ namespace _Type.Property.Optionality.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_PutAll_Convenience_Async()
         {
-            CollectionsModel client = new OptionalClient().GetCollectionsModelClient("1.0.0");
+            CollectionsModel client = new OptionalClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
             CollectionsModelProperty body = new CollectionsModelProperty();
             Response response = await client.PutAllAsync(body);
@@ -235,7 +235,7 @@ namespace _Type.Property.Optionality.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_PutAll_AllParameters()
         {
-            CollectionsModel client = new OptionalClient().GetCollectionsModelClient("1.0.0");
+            CollectionsModel client = new OptionalClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
             RequestContent content = RequestContent.Create(new
             {
@@ -256,7 +256,7 @@ property = "<property>",
         [Ignore("Only validating compilation of examples")]
         public async Task Example_PutAll_AllParameters_Async()
         {
-            CollectionsModel client = new OptionalClient().GetCollectionsModelClient("1.0.0");
+            CollectionsModel client = new OptionalClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
             RequestContent content = RequestContent.Create(new
             {
@@ -277,7 +277,7 @@ property = "<property>",
         [Ignore("Only validating compilation of examples")]
         public void Example_PutAll_AllParameters_Convenience()
         {
-            CollectionsModel client = new OptionalClient().GetCollectionsModelClient("1.0.0");
+            CollectionsModel client = new OptionalClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
             CollectionsModelProperty body = new CollectionsModelProperty
             {
@@ -293,7 +293,7 @@ Property = "<property>",
         [Ignore("Only validating compilation of examples")]
         public async Task Example_PutAll_AllParameters_Convenience_Async()
         {
-            CollectionsModel client = new OptionalClient().GetCollectionsModelClient("1.0.0");
+            CollectionsModel client = new OptionalClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
             CollectionsModelProperty body = new CollectionsModelProperty
             {
@@ -309,7 +309,7 @@ Property = "<property>",
         [Ignore("Only validating compilation of examples")]
         public void Example_PutDefault()
         {
-            CollectionsModel client = new OptionalClient().GetCollectionsModelClient("1.0.0");
+            CollectionsModel client = new OptionalClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
             RequestContent content = RequestContent.Create(new object());
             Response response = client.PutDefault(content);
@@ -321,7 +321,7 @@ Property = "<property>",
         [Ignore("Only validating compilation of examples")]
         public async Task Example_PutDefault_Async()
         {
-            CollectionsModel client = new OptionalClient().GetCollectionsModelClient("1.0.0");
+            CollectionsModel client = new OptionalClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
             RequestContent content = RequestContent.Create(new object());
             Response response = await client.PutDefaultAsync(content);
@@ -333,7 +333,7 @@ Property = "<property>",
         [Ignore("Only validating compilation of examples")]
         public void Example_PutDefault_Convenience()
         {
-            CollectionsModel client = new OptionalClient().GetCollectionsModelClient("1.0.0");
+            CollectionsModel client = new OptionalClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
             CollectionsModelProperty body = new CollectionsModelProperty();
             Response response = client.PutDefault(body);
@@ -343,7 +343,7 @@ Property = "<property>",
         [Ignore("Only validating compilation of examples")]
         public async Task Example_PutDefault_Convenience_Async()
         {
-            CollectionsModel client = new OptionalClient().GetCollectionsModelClient("1.0.0");
+            CollectionsModel client = new OptionalClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
             CollectionsModelProperty body = new CollectionsModelProperty();
             Response response = await client.PutDefaultAsync(body);
@@ -353,7 +353,7 @@ Property = "<property>",
         [Ignore("Only validating compilation of examples")]
         public void Example_PutDefault_AllParameters()
         {
-            CollectionsModel client = new OptionalClient().GetCollectionsModelClient("1.0.0");
+            CollectionsModel client = new OptionalClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
             RequestContent content = RequestContent.Create(new
             {
@@ -374,7 +374,7 @@ property = "<property>",
         [Ignore("Only validating compilation of examples")]
         public async Task Example_PutDefault_AllParameters_Async()
         {
-            CollectionsModel client = new OptionalClient().GetCollectionsModelClient("1.0.0");
+            CollectionsModel client = new OptionalClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
             RequestContent content = RequestContent.Create(new
             {
@@ -395,7 +395,7 @@ property = "<property>",
         [Ignore("Only validating compilation of examples")]
         public void Example_PutDefault_AllParameters_Convenience()
         {
-            CollectionsModel client = new OptionalClient().GetCollectionsModelClient("1.0.0");
+            CollectionsModel client = new OptionalClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
             CollectionsModelProperty body = new CollectionsModelProperty
             {
@@ -411,7 +411,7 @@ Property = "<property>",
         [Ignore("Only validating compilation of examples")]
         public async Task Example_PutDefault_AllParameters_Convenience_Async()
         {
-            CollectionsModel client = new OptionalClient().GetCollectionsModelClient("1.0.0");
+            CollectionsModel client = new OptionalClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
             CollectionsModelProperty body = new CollectionsModelProperty
             {

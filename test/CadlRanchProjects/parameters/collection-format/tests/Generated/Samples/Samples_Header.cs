@@ -20,7 +20,7 @@ namespace Parameters.CollectionFormat.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Csv()
         {
-            Header client = new CollectionFormatClient().GetHeaderClient("1.0.0");
+            Header client = new CollectionFormatClient().GetHeaderClient(apiVersion: "1.0.0");
 
             Response response = client.Csv(new string[] { "<colors>" });
 
@@ -31,7 +31,7 @@ namespace Parameters.CollectionFormat.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Csv_Async()
         {
-            Header client = new CollectionFormatClient().GetHeaderClient("1.0.0");
+            Header client = new CollectionFormatClient().GetHeaderClient(apiVersion: "1.0.0");
 
             Response response = await client.CsvAsync(new string[] { "<colors>" });
 
@@ -42,7 +42,7 @@ namespace Parameters.CollectionFormat.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Csv_AllParameters()
         {
-            Header client = new CollectionFormatClient().GetHeaderClient("1.0.0");
+            Header client = new CollectionFormatClient().GetHeaderClient(apiVersion: "1.0.0");
 
             Response response = client.Csv(new string[] { "<colors>" });
 
@@ -53,7 +53,7 @@ namespace Parameters.CollectionFormat.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Csv_AllParameters_Async()
         {
-            Header client = new CollectionFormatClient().GetHeaderClient("1.0.0");
+            Header client = new CollectionFormatClient().GetHeaderClient(apiVersion: "1.0.0");
 
             Response response = await client.CsvAsync(new string[] { "<colors>" });
 

@@ -925,8 +925,8 @@ This sample shows how to call ProtocolOptionalModelAsync with all parameters.
 <code><![CDATA[
 ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-Model optional = optional: new Model("<id>");
-Response response = await client.ProtocolOptionalModelAsync(optional);
+Model optional = new Model("<id>");
+Response response = await client.ProtocolOptionalModelAsync(optional: optional);
 ]]></code></example>
     </member>
     <member name="ProtocolOptionalModel(Model,CancellationToken)">
@@ -941,8 +941,8 @@ This sample shows how to call ProtocolOptionalModel with all parameters.
 <code><![CDATA[
 ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-Model optional = optional: new Model("<id>");
-Response response = client.ProtocolOptionalModel(optional);
+Model optional = new Model("<id>");
+Response response = client.ProtocolOptionalModel(optional: optional);
 ]]></code></example>
     </member>
     <member name="ProtocolOptionalModelAsync(RequestContent,RequestContext)">
@@ -978,8 +978,8 @@ This sample shows how to call ProtocolOptionalModelAsync with all parameters.
 <code><![CDATA[
 ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-Model optional = optional: new Model("<id>");
-Response response = await client.ProtocolOptionalModelAsync(optional);
+Model optional = new Model("<id>");
+Response response = await client.ProtocolOptionalModelAsync(optional: optional);
 ]]></code></example>
     </member>
     <member name="ProtocolOptionalModel(RequestContent,RequestContext)">
@@ -1015,8 +1015,8 @@ This sample shows how to call ProtocolOptionalModel with all parameters.
 <code><![CDATA[
 ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-Model optional = optional: new Model("<id>");
-Response response = client.ProtocolOptionalModel(optional);
+Model optional = new Model("<id>");
+Response response = client.ProtocolOptionalModel(optional: optional);
 ]]></code></example>
     </member>
     <member name="ProtocolRequiredModelAsync(Model,CancellationToken)">
@@ -1531,8 +1531,8 @@ This sample shows how to call ConvenienceOptionalModelWithOptionalAsync with all
 <code><![CDATA[
 ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-Model optional = optional: new Model("<id>");
-Response response = await client.ConvenienceOptionalModelWithOptionalAsync(optional);
+Model optional = new Model("<id>");
+Response response = await client.ConvenienceOptionalModelWithOptionalAsync(optional: optional);
 ]]></code></example>
     </member>
     <member name="ConvenienceOptionalModelWithOptional(Model,CancellationToken)">
@@ -1547,8 +1547,8 @@ This sample shows how to call ConvenienceOptionalModelWithOptional with all para
 <code><![CDATA[
 ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-Model optional = optional: new Model("<id>");
-Response response = client.ConvenienceOptionalModelWithOptional(optional);
+Model optional = new Model("<id>");
+Response response = client.ConvenienceOptionalModelWithOptional(optional: optional);
 ]]></code></example>
     </member>
     <member name="ConvenienceOptionalModelWithOptionalAsync(RequestContent,RequestContext)">
@@ -1584,8 +1584,8 @@ This sample shows how to call ConvenienceOptionalModelWithOptionalAsync with all
 <code><![CDATA[
 ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-Model optional = optional: new Model("<id>");
-Response response = await client.ConvenienceOptionalModelWithOptionalAsync(optional);
+Model optional = new Model("<id>");
+Response response = await client.ConvenienceOptionalModelWithOptionalAsync(optional: optional);
 ]]></code></example>
     </member>
     <member name="ConvenienceOptionalModelWithOptional(RequestContent,RequestContext)">
@@ -1621,8 +1621,8 @@ This sample shows how to call ConvenienceOptionalModelWithOptional with all para
 <code><![CDATA[
 ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-Model optional = optional: new Model("<id>");
-Response response = client.ConvenienceOptionalModelWithOptional(optional);
+Model optional = new Model("<id>");
+Response response = client.ConvenienceOptionalModelWithOptional(optional: optional);
 ]]></code></example>
     </member>
     <member name="ConvenienceRequiredModelWithOptionalAsync(Model,CancellationToken)">
@@ -1753,8 +1753,8 @@ This sample shows how to call ConvenienceOptionalModelWithRequiredAsync with all
 <code><![CDATA[
 ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-Model optional = optional: new Model("<id>");
-Response response = await client.ConvenienceOptionalModelWithRequiredAsync(optional);
+Model optional = new Model("<id>");
+Response response = await client.ConvenienceOptionalModelWithRequiredAsync(optional: optional);
 ]]></code></example>
     </member>
     <member name="ConvenienceOptionalModelWithRequired(Model,CancellationToken)">
@@ -1769,8 +1769,8 @@ This sample shows how to call ConvenienceOptionalModelWithRequired with all para
 <code><![CDATA[
 ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-Model optional = optional: new Model("<id>");
-Response response = client.ConvenienceOptionalModelWithRequired(optional);
+Model optional = new Model("<id>");
+Response response = client.ConvenienceOptionalModelWithRequired(optional: optional);
 ]]></code></example>
     </member>
     <member name="ConvenienceOptionalModelWithRequiredAsync(RequestContent,RequestContext)">
@@ -1806,8 +1806,8 @@ This sample shows how to call ConvenienceOptionalModelWithRequiredAsync with all
 <code><![CDATA[
 ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-Model optional = optional: new Model("<id>");
-Response response = await client.ConvenienceOptionalModelWithRequiredAsync(optional);
+Model optional = new Model("<id>");
+Response response = await client.ConvenienceOptionalModelWithRequiredAsync(optional: optional);
 ]]></code></example>
     </member>
     <member name="ConvenienceOptionalModelWithRequired(RequestContent,RequestContext)">
@@ -1843,8 +1843,8 @@ This sample shows how to call ConvenienceOptionalModelWithRequired with all para
 <code><![CDATA[
 ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-Model optional = optional: new Model("<id>");
-Response response = client.ConvenienceOptionalModelWithRequired(optional);
+Model optional = new Model("<id>");
+Response response = client.ConvenienceOptionalModelWithRequired(optional: optional);
 ]]></code></example>
     </member>
     <member name="ProtocolOptionalBeforeRequiredAsync(Model,int?,CancellationToken)">

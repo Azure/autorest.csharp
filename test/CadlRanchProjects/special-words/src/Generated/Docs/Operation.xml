@@ -5,7 +5,7 @@
       <example>
 This sample shows how to call ForAsync.
 <code><![CDATA[
-Operation client = new SpecialWordsClient().GetOperationClient("1.0.0");
+Operation client = new SpecialWordsClient().GetOperationClient(apiVersion: "1.0.0");
 
 Response response = await client.ForAsync();
 
@@ -13,7 +13,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call ForAsync with all request content.
 <code><![CDATA[
-Operation client = new SpecialWordsClient().GetOperationClient("1.0.0");
+Operation client = new SpecialWordsClient().GetOperationClient(apiVersion: "1.0.0");
 
 Response response = await client.ForAsync();
 
@@ -24,7 +24,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call For.
 <code><![CDATA[
-Operation client = new SpecialWordsClient().GetOperationClient("1.0.0");
+Operation client = new SpecialWordsClient().GetOperationClient(apiVersion: "1.0.0");
 
 Response response = client.For();
 
@@ -32,7 +32,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call For with all request content.
 <code><![CDATA[
-Operation client = new SpecialWordsClient().GetOperationClient("1.0.0");
+Operation client = new SpecialWordsClient().GetOperationClient(apiVersion: "1.0.0");
 
 Response response = client.For();
 

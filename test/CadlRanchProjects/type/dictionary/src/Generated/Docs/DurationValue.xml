@@ -5,13 +5,13 @@
       <example>
 This sample shows how to call GetDurationValueAsync.
 <code><![CDATA[
-DurationValue client = new DictionaryClient().GetDurationValueClient("1.0.0");
+DurationValue client = new DictionaryClient().GetDurationValueClient(apiVersion: "1.0.0");
 
 Response<IReadOnlyDictionary<string, TimeSpan>> response = await client.GetDurationValueAsync();
 ]]></code>
 This sample shows how to call GetDurationValueAsync with all parameters.
 <code><![CDATA[
-DurationValue client = new DictionaryClient().GetDurationValueClient("1.0.0");
+DurationValue client = new DictionaryClient().GetDurationValueClient(apiVersion: "1.0.0");
 
 Response<IReadOnlyDictionary<string, TimeSpan>> response = await client.GetDurationValueAsync();
 ]]></code></example>
@@ -20,13 +20,13 @@ Response<IReadOnlyDictionary<string, TimeSpan>> response = await client.GetDurat
       <example>
 This sample shows how to call GetDurationValue.
 <code><![CDATA[
-DurationValue client = new DictionaryClient().GetDurationValueClient("1.0.0");
+DurationValue client = new DictionaryClient().GetDurationValueClient(apiVersion: "1.0.0");
 
 Response<IReadOnlyDictionary<string, TimeSpan>> response = client.GetDurationValue();
 ]]></code>
 This sample shows how to call GetDurationValue with all parameters.
 <code><![CDATA[
-DurationValue client = new DictionaryClient().GetDurationValueClient("1.0.0");
+DurationValue client = new DictionaryClient().GetDurationValueClient(apiVersion: "1.0.0");
 
 Response<IReadOnlyDictionary<string, TimeSpan>> response = client.GetDurationValue();
 ]]></code></example>
@@ -35,7 +35,7 @@ Response<IReadOnlyDictionary<string, TimeSpan>> response = client.GetDurationVal
       <example>
 This sample shows how to call GetDurationValueAsync and parse the result.
 <code><![CDATA[
-DurationValue client = new DictionaryClient().GetDurationValueClient("1.0.0");
+DurationValue client = new DictionaryClient().GetDurationValueClient(apiVersion: "1.0.0");
 
 Response response = await client.GetDurationValueAsync(null);
 
@@ -44,13 +44,13 @@ Console.WriteLine(result.GetProperty("<key>").ToString());
 ]]></code>
 This sample shows how to call GetDurationValueAsync.
 <code><![CDATA[
-DurationValue client = new DictionaryClient().GetDurationValueClient("1.0.0");
+DurationValue client = new DictionaryClient().GetDurationValueClient(apiVersion: "1.0.0");
 
 Response<IReadOnlyDictionary<string, TimeSpan>> response = await client.GetDurationValueAsync();
 ]]></code>
 This sample shows how to call GetDurationValueAsync with all parameters and parse the result.
 <code><![CDATA[
-DurationValue client = new DictionaryClient().GetDurationValueClient("1.0.0");
+DurationValue client = new DictionaryClient().GetDurationValueClient(apiVersion: "1.0.0");
 
 Response response = await client.GetDurationValueAsync(null);
 
@@ -59,7 +59,7 @@ Console.WriteLine(result.GetProperty("<key>").ToString());
 ]]></code>
 This sample shows how to call GetDurationValueAsync with all parameters.
 <code><![CDATA[
-DurationValue client = new DictionaryClient().GetDurationValueClient("1.0.0");
+DurationValue client = new DictionaryClient().GetDurationValueClient(apiVersion: "1.0.0");
 
 Response<IReadOnlyDictionary<string, TimeSpan>> response = await client.GetDurationValueAsync();
 ]]></code></example>
@@ -68,7 +68,7 @@ Response<IReadOnlyDictionary<string, TimeSpan>> response = await client.GetDurat
       <example>
 This sample shows how to call GetDurationValue and parse the result.
 <code><![CDATA[
-DurationValue client = new DictionaryClient().GetDurationValueClient("1.0.0");
+DurationValue client = new DictionaryClient().GetDurationValueClient(apiVersion: "1.0.0");
 
 Response response = client.GetDurationValue(null);
 
@@ -77,13 +77,13 @@ Console.WriteLine(result.GetProperty("<key>").ToString());
 ]]></code>
 This sample shows how to call GetDurationValue.
 <code><![CDATA[
-DurationValue client = new DictionaryClient().GetDurationValueClient("1.0.0");
+DurationValue client = new DictionaryClient().GetDurationValueClient(apiVersion: "1.0.0");
 
 Response<IReadOnlyDictionary<string, TimeSpan>> response = client.GetDurationValue();
 ]]></code>
 This sample shows how to call GetDurationValue with all parameters and parse the result.
 <code><![CDATA[
-DurationValue client = new DictionaryClient().GetDurationValueClient("1.0.0");
+DurationValue client = new DictionaryClient().GetDurationValueClient(apiVersion: "1.0.0");
 
 Response response = client.GetDurationValue(null);
 
@@ -92,7 +92,7 @@ Console.WriteLine(result.GetProperty("<key>").ToString());
 ]]></code>
 This sample shows how to call GetDurationValue with all parameters.
 <code><![CDATA[
-DurationValue client = new DictionaryClient().GetDurationValueClient("1.0.0");
+DurationValue client = new DictionaryClient().GetDurationValueClient(apiVersion: "1.0.0");
 
 Response<IReadOnlyDictionary<string, TimeSpan>> response = client.GetDurationValue();
 ]]></code></example>
@@ -101,7 +101,7 @@ Response<IReadOnlyDictionary<string, TimeSpan>> response = client.GetDurationVal
       <example>
 This sample shows how to call PutAsync.
 <code><![CDATA[
-DurationValue client = new DictionaryClient().GetDurationValueClient("1.0.0");
+DurationValue client = new DictionaryClient().GetDurationValueClient(apiVersion: "1.0.0");
 
 Response response = await client.PutAsync(new Dictionary<string, TimeSpan>
 {
@@ -110,7 +110,7 @@ Response response = await client.PutAsync(new Dictionary<string, TimeSpan>
 ]]></code>
 This sample shows how to call PutAsync with all parameters.
 <code><![CDATA[
-DurationValue client = new DictionaryClient().GetDurationValueClient("1.0.0");
+DurationValue client = new DictionaryClient().GetDurationValueClient(apiVersion: "1.0.0");
 
 Response response = await client.PutAsync(new Dictionary<string, TimeSpan>
 {
@@ -122,7 +122,7 @@ Response response = await client.PutAsync(new Dictionary<string, TimeSpan>
       <example>
 This sample shows how to call Put.
 <code><![CDATA[
-DurationValue client = new DictionaryClient().GetDurationValueClient("1.0.0");
+DurationValue client = new DictionaryClient().GetDurationValueClient(apiVersion: "1.0.0");
 
 Response response = client.Put(new Dictionary<string, TimeSpan>
 {
@@ -131,7 +131,7 @@ Response response = client.Put(new Dictionary<string, TimeSpan>
 ]]></code>
 This sample shows how to call Put with all parameters.
 <code><![CDATA[
-DurationValue client = new DictionaryClient().GetDurationValueClient("1.0.0");
+DurationValue client = new DictionaryClient().GetDurationValueClient(apiVersion: "1.0.0");
 
 Response response = client.Put(new Dictionary<string, TimeSpan>
 {
@@ -143,7 +143,7 @@ Response response = client.Put(new Dictionary<string, TimeSpan>
       <example>
 This sample shows how to call PutAsync.
 <code><![CDATA[
-DurationValue client = new DictionaryClient().GetDurationValueClient("1.0.0");
+DurationValue client = new DictionaryClient().GetDurationValueClient(apiVersion: "1.0.0");
 
 RequestContent content = RequestContent.Create(new
 {
@@ -155,7 +155,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutAsync.
 <code><![CDATA[
-DurationValue client = new DictionaryClient().GetDurationValueClient("1.0.0");
+DurationValue client = new DictionaryClient().GetDurationValueClient(apiVersion: "1.0.0");
 
 Response response = await client.PutAsync(new Dictionary<string, TimeSpan>
 {
@@ -164,7 +164,7 @@ Response response = await client.PutAsync(new Dictionary<string, TimeSpan>
 ]]></code>
 This sample shows how to call PutAsync with all request content.
 <code><![CDATA[
-DurationValue client = new DictionaryClient().GetDurationValueClient("1.0.0");
+DurationValue client = new DictionaryClient().GetDurationValueClient(apiVersion: "1.0.0");
 
 RequestContent content = RequestContent.Create(new
 {
@@ -176,7 +176,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutAsync with all parameters.
 <code><![CDATA[
-DurationValue client = new DictionaryClient().GetDurationValueClient("1.0.0");
+DurationValue client = new DictionaryClient().GetDurationValueClient(apiVersion: "1.0.0");
 
 Response response = await client.PutAsync(new Dictionary<string, TimeSpan>
 {
@@ -188,7 +188,7 @@ Response response = await client.PutAsync(new Dictionary<string, TimeSpan>
       <example>
 This sample shows how to call Put.
 <code><![CDATA[
-DurationValue client = new DictionaryClient().GetDurationValueClient("1.0.0");
+DurationValue client = new DictionaryClient().GetDurationValueClient(apiVersion: "1.0.0");
 
 RequestContent content = RequestContent.Create(new
 {
@@ -200,7 +200,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Put.
 <code><![CDATA[
-DurationValue client = new DictionaryClient().GetDurationValueClient("1.0.0");
+DurationValue client = new DictionaryClient().GetDurationValueClient(apiVersion: "1.0.0");
 
 Response response = client.Put(new Dictionary<string, TimeSpan>
 {
@@ -209,7 +209,7 @@ Response response = client.Put(new Dictionary<string, TimeSpan>
 ]]></code>
 This sample shows how to call Put with all request content.
 <code><![CDATA[
-DurationValue client = new DictionaryClient().GetDurationValueClient("1.0.0");
+DurationValue client = new DictionaryClient().GetDurationValueClient(apiVersion: "1.0.0");
 
 RequestContent content = RequestContent.Create(new
 {
@@ -221,7 +221,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Put with all parameters.
 <code><![CDATA[
-DurationValue client = new DictionaryClient().GetDurationValueClient("1.0.0");
+DurationValue client = new DictionaryClient().GetDurationValueClient(apiVersion: "1.0.0");
 
 Response response = client.Put(new Dictionary<string, TimeSpan>
 {

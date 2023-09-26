@@ -23,7 +23,7 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetNullableFloatValue()
         {
-            NullableFloatValue client = new DictionaryClient().GetNullableFloatValueClient("1.0.0");
+            NullableFloatValue client = new DictionaryClient().GetNullableFloatValueClient(apiVersion: "1.0.0");
 
             Response response = client.GetNullableFloatValue(null);
 
@@ -35,7 +35,7 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetNullableFloatValue_Async()
         {
-            NullableFloatValue client = new DictionaryClient().GetNullableFloatValueClient("1.0.0");
+            NullableFloatValue client = new DictionaryClient().GetNullableFloatValueClient(apiVersion: "1.0.0");
 
             Response response = await client.GetNullableFloatValueAsync(null);
 
@@ -47,7 +47,7 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetNullableFloatValue_Convenience()
         {
-            NullableFloatValue client = new DictionaryClient().GetNullableFloatValueClient("1.0.0");
+            NullableFloatValue client = new DictionaryClient().GetNullableFloatValueClient(apiVersion: "1.0.0");
 
             Response<IReadOnlyDictionary<string, float?>> response = client.GetNullableFloatValue();
         }
@@ -56,7 +56,7 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetNullableFloatValue_Convenience_Async()
         {
-            NullableFloatValue client = new DictionaryClient().GetNullableFloatValueClient("1.0.0");
+            NullableFloatValue client = new DictionaryClient().GetNullableFloatValueClient(apiVersion: "1.0.0");
 
             Response<IReadOnlyDictionary<string, float?>> response = await client.GetNullableFloatValueAsync();
         }
@@ -65,7 +65,7 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetNullableFloatValue_AllParameters()
         {
-            NullableFloatValue client = new DictionaryClient().GetNullableFloatValueClient("1.0.0");
+            NullableFloatValue client = new DictionaryClient().GetNullableFloatValueClient(apiVersion: "1.0.0");
 
             Response response = client.GetNullableFloatValue(null);
 
@@ -77,7 +77,7 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetNullableFloatValue_AllParameters_Async()
         {
-            NullableFloatValue client = new DictionaryClient().GetNullableFloatValueClient("1.0.0");
+            NullableFloatValue client = new DictionaryClient().GetNullableFloatValueClient(apiVersion: "1.0.0");
 
             Response response = await client.GetNullableFloatValueAsync(null);
 
@@ -89,7 +89,7 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetNullableFloatValue_AllParameters_Convenience()
         {
-            NullableFloatValue client = new DictionaryClient().GetNullableFloatValueClient("1.0.0");
+            NullableFloatValue client = new DictionaryClient().GetNullableFloatValueClient(apiVersion: "1.0.0");
 
             Response<IReadOnlyDictionary<string, float?>> response = client.GetNullableFloatValue();
         }
@@ -98,7 +98,7 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetNullableFloatValue_AllParameters_Convenience_Async()
         {
-            NullableFloatValue client = new DictionaryClient().GetNullableFloatValueClient("1.0.0");
+            NullableFloatValue client = new DictionaryClient().GetNullableFloatValueClient(apiVersion: "1.0.0");
 
             Response<IReadOnlyDictionary<string, float?>> response = await client.GetNullableFloatValueAsync();
         }
@@ -107,7 +107,7 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Put()
         {
-            NullableFloatValue client = new DictionaryClient().GetNullableFloatValueClient("1.0.0");
+            NullableFloatValue client = new DictionaryClient().GetNullableFloatValueClient(apiVersion: "1.0.0");
 
             RequestContent content = RequestContent.Create(new
             {
@@ -122,7 +122,7 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Put_Async()
         {
-            NullableFloatValue client = new DictionaryClient().GetNullableFloatValueClient("1.0.0");
+            NullableFloatValue client = new DictionaryClient().GetNullableFloatValueClient(apiVersion: "1.0.0");
 
             RequestContent content = RequestContent.Create(new
             {
@@ -137,7 +137,7 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Put_Convenience()
         {
-            NullableFloatValue client = new DictionaryClient().GetNullableFloatValueClient("1.0.0");
+            NullableFloatValue client = new DictionaryClient().GetNullableFloatValueClient(apiVersion: "1.0.0");
 
             Response response = client.Put(new Dictionary<string, float?>
             {
@@ -149,7 +149,7 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Put_Convenience_Async()
         {
-            NullableFloatValue client = new DictionaryClient().GetNullableFloatValueClient("1.0.0");
+            NullableFloatValue client = new DictionaryClient().GetNullableFloatValueClient(apiVersion: "1.0.0");
 
             Response response = await client.PutAsync(new Dictionary<string, float?>
             {
@@ -161,7 +161,7 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Put_AllParameters()
         {
-            NullableFloatValue client = new DictionaryClient().GetNullableFloatValueClient("1.0.0");
+            NullableFloatValue client = new DictionaryClient().GetNullableFloatValueClient(apiVersion: "1.0.0");
 
             RequestContent content = RequestContent.Create(new
             {
@@ -176,7 +176,7 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Put_AllParameters_Async()
         {
-            NullableFloatValue client = new DictionaryClient().GetNullableFloatValueClient("1.0.0");
+            NullableFloatValue client = new DictionaryClient().GetNullableFloatValueClient(apiVersion: "1.0.0");
 
             RequestContent content = RequestContent.Create(new
             {
@@ -191,7 +191,7 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Put_AllParameters_Convenience()
         {
-            NullableFloatValue client = new DictionaryClient().GetNullableFloatValueClient("1.0.0");
+            NullableFloatValue client = new DictionaryClient().GetNullableFloatValueClient(apiVersion: "1.0.0");
 
             Response response = client.Put(new Dictionary<string, float?>
             {
@@ -203,7 +203,7 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Put_AllParameters_Convenience_Async()
         {
-            NullableFloatValue client = new DictionaryClient().GetNullableFloatValueClient("1.0.0");
+            NullableFloatValue client = new DictionaryClient().GetNullableFloatValueClient(apiVersion: "1.0.0");
 
             Response response = await client.PutAsync(new Dictionary<string, float?>
             {

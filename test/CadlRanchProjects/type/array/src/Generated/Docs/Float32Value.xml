@@ -5,13 +5,13 @@
       <example>
 This sample shows how to call GetFloat32ValueAsync.
 <code><![CDATA[
-Float32Value client = new ArrayClient().GetFloat32ValueClient("1.0.0");
+Float32Value client = new ArrayClient().GetFloat32ValueClient(apiVersion: "1.0.0");
 
 Response<IReadOnlyList<float>> response = await client.GetFloat32ValueAsync();
 ]]></code>
 This sample shows how to call GetFloat32ValueAsync with all parameters.
 <code><![CDATA[
-Float32Value client = new ArrayClient().GetFloat32ValueClient("1.0.0");
+Float32Value client = new ArrayClient().GetFloat32ValueClient(apiVersion: "1.0.0");
 
 Response<IReadOnlyList<float>> response = await client.GetFloat32ValueAsync();
 ]]></code></example>
@@ -20,13 +20,13 @@ Response<IReadOnlyList<float>> response = await client.GetFloat32ValueAsync();
       <example>
 This sample shows how to call GetFloat32Value.
 <code><![CDATA[
-Float32Value client = new ArrayClient().GetFloat32ValueClient("1.0.0");
+Float32Value client = new ArrayClient().GetFloat32ValueClient(apiVersion: "1.0.0");
 
 Response<IReadOnlyList<float>> response = client.GetFloat32Value();
 ]]></code>
 This sample shows how to call GetFloat32Value with all parameters.
 <code><![CDATA[
-Float32Value client = new ArrayClient().GetFloat32ValueClient("1.0.0");
+Float32Value client = new ArrayClient().GetFloat32ValueClient(apiVersion: "1.0.0");
 
 Response<IReadOnlyList<float>> response = client.GetFloat32Value();
 ]]></code></example>
@@ -35,7 +35,7 @@ Response<IReadOnlyList<float>> response = client.GetFloat32Value();
       <example>
 This sample shows how to call GetFloat32ValueAsync and parse the result.
 <code><![CDATA[
-Float32Value client = new ArrayClient().GetFloat32ValueClient("1.0.0");
+Float32Value client = new ArrayClient().GetFloat32ValueClient(apiVersion: "1.0.0");
 
 Response response = await client.GetFloat32ValueAsync(null);
 
@@ -44,13 +44,13 @@ Console.WriteLine(result[0].ToString());
 ]]></code>
 This sample shows how to call GetFloat32ValueAsync.
 <code><![CDATA[
-Float32Value client = new ArrayClient().GetFloat32ValueClient("1.0.0");
+Float32Value client = new ArrayClient().GetFloat32ValueClient(apiVersion: "1.0.0");
 
 Response<IReadOnlyList<float>> response = await client.GetFloat32ValueAsync();
 ]]></code>
 This sample shows how to call GetFloat32ValueAsync with all parameters and parse the result.
 <code><![CDATA[
-Float32Value client = new ArrayClient().GetFloat32ValueClient("1.0.0");
+Float32Value client = new ArrayClient().GetFloat32ValueClient(apiVersion: "1.0.0");
 
 Response response = await client.GetFloat32ValueAsync(null);
 
@@ -59,7 +59,7 @@ Console.WriteLine(result[0].ToString());
 ]]></code>
 This sample shows how to call GetFloat32ValueAsync with all parameters.
 <code><![CDATA[
-Float32Value client = new ArrayClient().GetFloat32ValueClient("1.0.0");
+Float32Value client = new ArrayClient().GetFloat32ValueClient(apiVersion: "1.0.0");
 
 Response<IReadOnlyList<float>> response = await client.GetFloat32ValueAsync();
 ]]></code></example>
@@ -68,7 +68,7 @@ Response<IReadOnlyList<float>> response = await client.GetFloat32ValueAsync();
       <example>
 This sample shows how to call GetFloat32Value and parse the result.
 <code><![CDATA[
-Float32Value client = new ArrayClient().GetFloat32ValueClient("1.0.0");
+Float32Value client = new ArrayClient().GetFloat32ValueClient(apiVersion: "1.0.0");
 
 Response response = client.GetFloat32Value(null);
 
@@ -77,13 +77,13 @@ Console.WriteLine(result[0].ToString());
 ]]></code>
 This sample shows how to call GetFloat32Value.
 <code><![CDATA[
-Float32Value client = new ArrayClient().GetFloat32ValueClient("1.0.0");
+Float32Value client = new ArrayClient().GetFloat32ValueClient(apiVersion: "1.0.0");
 
 Response<IReadOnlyList<float>> response = client.GetFloat32Value();
 ]]></code>
 This sample shows how to call GetFloat32Value with all parameters and parse the result.
 <code><![CDATA[
-Float32Value client = new ArrayClient().GetFloat32ValueClient("1.0.0");
+Float32Value client = new ArrayClient().GetFloat32ValueClient(apiVersion: "1.0.0");
 
 Response response = client.GetFloat32Value(null);
 
@@ -92,7 +92,7 @@ Console.WriteLine(result[0].ToString());
 ]]></code>
 This sample shows how to call GetFloat32Value with all parameters.
 <code><![CDATA[
-Float32Value client = new ArrayClient().GetFloat32ValueClient("1.0.0");
+Float32Value client = new ArrayClient().GetFloat32ValueClient(apiVersion: "1.0.0");
 
 Response<IReadOnlyList<float>> response = client.GetFloat32Value();
 ]]></code></example>
@@ -101,13 +101,13 @@ Response<IReadOnlyList<float>> response = client.GetFloat32Value();
       <example>
 This sample shows how to call PutAsync.
 <code><![CDATA[
-Float32Value client = new ArrayClient().GetFloat32ValueClient("1.0.0");
+Float32Value client = new ArrayClient().GetFloat32ValueClient(apiVersion: "1.0.0");
 
 Response response = await client.PutAsync(new float[] { 123.45F });
 ]]></code>
 This sample shows how to call PutAsync with all parameters.
 <code><![CDATA[
-Float32Value client = new ArrayClient().GetFloat32ValueClient("1.0.0");
+Float32Value client = new ArrayClient().GetFloat32ValueClient(apiVersion: "1.0.0");
 
 Response response = await client.PutAsync(new float[] { 123.45F });
 ]]></code></example>
@@ -116,13 +116,13 @@ Response response = await client.PutAsync(new float[] { 123.45F });
       <example>
 This sample shows how to call Put.
 <code><![CDATA[
-Float32Value client = new ArrayClient().GetFloat32ValueClient("1.0.0");
+Float32Value client = new ArrayClient().GetFloat32ValueClient(apiVersion: "1.0.0");
 
 Response response = client.Put(new float[] { 123.45F });
 ]]></code>
 This sample shows how to call Put with all parameters.
 <code><![CDATA[
-Float32Value client = new ArrayClient().GetFloat32ValueClient("1.0.0");
+Float32Value client = new ArrayClient().GetFloat32ValueClient(apiVersion: "1.0.0");
 
 Response response = client.Put(new float[] { 123.45F });
 ]]></code></example>
@@ -131,7 +131,7 @@ Response response = client.Put(new float[] { 123.45F });
       <example>
 This sample shows how to call PutAsync.
 <code><![CDATA[
-Float32Value client = new ArrayClient().GetFloat32ValueClient("1.0.0");
+Float32Value client = new ArrayClient().GetFloat32ValueClient(apiVersion: "1.0.0");
 
 RequestContent content = RequestContent.Create(new object[]
 {
@@ -143,13 +143,13 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutAsync.
 <code><![CDATA[
-Float32Value client = new ArrayClient().GetFloat32ValueClient("1.0.0");
+Float32Value client = new ArrayClient().GetFloat32ValueClient(apiVersion: "1.0.0");
 
 Response response = await client.PutAsync(new float[] { 123.45F });
 ]]></code>
 This sample shows how to call PutAsync with all request content.
 <code><![CDATA[
-Float32Value client = new ArrayClient().GetFloat32ValueClient("1.0.0");
+Float32Value client = new ArrayClient().GetFloat32ValueClient(apiVersion: "1.0.0");
 
 RequestContent content = RequestContent.Create(new object[]
 {
@@ -161,7 +161,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutAsync with all parameters.
 <code><![CDATA[
-Float32Value client = new ArrayClient().GetFloat32ValueClient("1.0.0");
+Float32Value client = new ArrayClient().GetFloat32ValueClient(apiVersion: "1.0.0");
 
 Response response = await client.PutAsync(new float[] { 123.45F });
 ]]></code></example>
@@ -170,7 +170,7 @@ Response response = await client.PutAsync(new float[] { 123.45F });
       <example>
 This sample shows how to call Put.
 <code><![CDATA[
-Float32Value client = new ArrayClient().GetFloat32ValueClient("1.0.0");
+Float32Value client = new ArrayClient().GetFloat32ValueClient(apiVersion: "1.0.0");
 
 RequestContent content = RequestContent.Create(new object[]
 {
@@ -182,13 +182,13 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Put.
 <code><![CDATA[
-Float32Value client = new ArrayClient().GetFloat32ValueClient("1.0.0");
+Float32Value client = new ArrayClient().GetFloat32ValueClient(apiVersion: "1.0.0");
 
 Response response = client.Put(new float[] { 123.45F });
 ]]></code>
 This sample shows how to call Put with all request content.
 <code><![CDATA[
-Float32Value client = new ArrayClient().GetFloat32ValueClient("1.0.0");
+Float32Value client = new ArrayClient().GetFloat32ValueClient(apiVersion: "1.0.0");
 
 RequestContent content = RequestContent.Create(new object[]
 {
@@ -200,7 +200,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Put with all parameters.
 <code><![CDATA[
-Float32Value client = new ArrayClient().GetFloat32ValueClient("1.0.0");
+Float32Value client = new ArrayClient().GetFloat32ValueClient(apiVersion: "1.0.0");
 
 Response response = client.Put(new float[] { 123.45F });
 ]]></code></example>

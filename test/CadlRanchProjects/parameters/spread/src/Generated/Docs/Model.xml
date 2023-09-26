@@ -5,14 +5,14 @@
       <example>
 This sample shows how to call SpreadAsRequestBodyAsync.
 <code><![CDATA[
-Model client = new SpreadClient().GetModelClient("1.0.0");
+Model client = new SpreadClient().GetModelClient(apiVersion: "1.0.0");
 
 BodyParameter bodyParameter = new BodyParameter("<name>");
 Response response = await client.SpreadAsRequestBodyAsync(bodyParameter);
 ]]></code>
 This sample shows how to call SpreadAsRequestBodyAsync with all parameters.
 <code><![CDATA[
-Model client = new SpreadClient().GetModelClient("1.0.0");
+Model client = new SpreadClient().GetModelClient(apiVersion: "1.0.0");
 
 BodyParameter bodyParameter = new BodyParameter("<name>");
 Response response = await client.SpreadAsRequestBodyAsync(bodyParameter);
@@ -22,14 +22,14 @@ Response response = await client.SpreadAsRequestBodyAsync(bodyParameter);
       <example>
 This sample shows how to call SpreadAsRequestBody.
 <code><![CDATA[
-Model client = new SpreadClient().GetModelClient("1.0.0");
+Model client = new SpreadClient().GetModelClient(apiVersion: "1.0.0");
 
 BodyParameter bodyParameter = new BodyParameter("<name>");
 Response response = client.SpreadAsRequestBody(bodyParameter);
 ]]></code>
 This sample shows how to call SpreadAsRequestBody with all parameters.
 <code><![CDATA[
-Model client = new SpreadClient().GetModelClient("1.0.0");
+Model client = new SpreadClient().GetModelClient(apiVersion: "1.0.0");
 
 BodyParameter bodyParameter = new BodyParameter("<name>");
 Response response = client.SpreadAsRequestBody(bodyParameter);
@@ -39,7 +39,7 @@ Response response = client.SpreadAsRequestBody(bodyParameter);
       <example>
 This sample shows how to call SpreadAsRequestBodyAsync.
 <code><![CDATA[
-Model client = new SpreadClient().GetModelClient("1.0.0");
+Model client = new SpreadClient().GetModelClient(apiVersion: "1.0.0");
 
 RequestContent content = RequestContent.Create(new
 {
@@ -51,14 +51,14 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call SpreadAsRequestBodyAsync.
 <code><![CDATA[
-Model client = new SpreadClient().GetModelClient("1.0.0");
+Model client = new SpreadClient().GetModelClient(apiVersion: "1.0.0");
 
 BodyParameter bodyParameter = new BodyParameter("<name>");
 Response response = await client.SpreadAsRequestBodyAsync(bodyParameter);
 ]]></code>
 This sample shows how to call SpreadAsRequestBodyAsync with all request content.
 <code><![CDATA[
-Model client = new SpreadClient().GetModelClient("1.0.0");
+Model client = new SpreadClient().GetModelClient(apiVersion: "1.0.0");
 
 RequestContent content = RequestContent.Create(new
 {
@@ -70,7 +70,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call SpreadAsRequestBodyAsync with all parameters.
 <code><![CDATA[
-Model client = new SpreadClient().GetModelClient("1.0.0");
+Model client = new SpreadClient().GetModelClient(apiVersion: "1.0.0");
 
 BodyParameter bodyParameter = new BodyParameter("<name>");
 Response response = await client.SpreadAsRequestBodyAsync(bodyParameter);
@@ -80,7 +80,7 @@ Response response = await client.SpreadAsRequestBodyAsync(bodyParameter);
       <example>
 This sample shows how to call SpreadAsRequestBody.
 <code><![CDATA[
-Model client = new SpreadClient().GetModelClient("1.0.0");
+Model client = new SpreadClient().GetModelClient(apiVersion: "1.0.0");
 
 RequestContent content = RequestContent.Create(new
 {
@@ -92,14 +92,14 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call SpreadAsRequestBody.
 <code><![CDATA[
-Model client = new SpreadClient().GetModelClient("1.0.0");
+Model client = new SpreadClient().GetModelClient(apiVersion: "1.0.0");
 
 BodyParameter bodyParameter = new BodyParameter("<name>");
 Response response = client.SpreadAsRequestBody(bodyParameter);
 ]]></code>
 This sample shows how to call SpreadAsRequestBody with all request content.
 <code><![CDATA[
-Model client = new SpreadClient().GetModelClient("1.0.0");
+Model client = new SpreadClient().GetModelClient(apiVersion: "1.0.0");
 
 RequestContent content = RequestContent.Create(new
 {
@@ -111,7 +111,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call SpreadAsRequestBody with all parameters.
 <code><![CDATA[
-Model client = new SpreadClient().GetModelClient("1.0.0");
+Model client = new SpreadClient().GetModelClient(apiVersion: "1.0.0");
 
 BodyParameter bodyParameter = new BodyParameter("<name>");
 Response response = client.SpreadAsRequestBody(bodyParameter);

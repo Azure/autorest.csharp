@@ -16,7 +16,7 @@ using Payload.ContentNegotiation.Models;
 
 namespace Payload.ContentNegotiation.Samples
 {
-    internal class Samples_DifferentBody
+    public class Samples_DifferentBody
     {
         [Test]
         [Ignore("Only validating compilation of examples")]

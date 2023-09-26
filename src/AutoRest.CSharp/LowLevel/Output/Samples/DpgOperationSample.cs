@@ -89,7 +89,7 @@ namespace AutoRest.CSharp.Output.Samples.Models
                 if (ParameterValueMapping.TryGetValue(parameter.Name, out var exampleValue))
                 {
                     // if we could get an example value out of the map, we just use it.
-                    parameterExpression = ExampleValueSnippets.GetExpression(parameter, exampleValue);
+                    parameterExpression = ExampleValueSnippets.GetExpression(exampleValue, parameter.SerializationFormat);
                 }
                 else
                 {
@@ -103,7 +103,7 @@ namespace AutoRest.CSharp.Output.Samples.Models
                 }
                 if (IsInlineParameter(parameter))
                 {
-                    yield return parameterExpression;
+                    yield return parameter.IsOptionalInSignature ? new PositionalParameterReference(parameter.Name, parameterExpression) : parameterExpression;
                 }
                 else
                 {
@@ -111,7 +111,7 @@ namespace AutoRest.CSharp.Output.Samples.Models
                     var parameterReference = new VariableReference(parameter.Type, parameter.Name);
                     var declaration = Snippets.Declare(parameterReference, parameterExpression);
                     variableDeclarationStatements.Add(declaration);
-                    yield return parameterReference; // returns the parameter name reference
+                    yield return parameter.IsOptionalInSignature ? new PositionalParameterReference(parameter.Name, parameterReference) : parameterReference; // returns the parameter name reference
                 }
             }
         }

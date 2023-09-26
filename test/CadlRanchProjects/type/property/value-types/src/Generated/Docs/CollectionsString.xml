@@ -5,13 +5,13 @@
       <example>
 This sample shows how to call GetCollectionsStringAsync.
 <code><![CDATA[
-CollectionsString client = new ValueTypesClient().GetCollectionsStringClient("1.0.0");
+CollectionsString client = new ValueTypesClient().GetCollectionsStringClient(apiVersion: "1.0.0");
 
 Response<CollectionsStringProperty> response = await client.GetCollectionsStringAsync();
 ]]></code>
 This sample shows how to call GetCollectionsStringAsync with all parameters.
 <code><![CDATA[
-CollectionsString client = new ValueTypesClient().GetCollectionsStringClient("1.0.0");
+CollectionsString client = new ValueTypesClient().GetCollectionsStringClient(apiVersion: "1.0.0");
 
 Response<CollectionsStringProperty> response = await client.GetCollectionsStringAsync();
 ]]></code></example>
@@ -20,13 +20,13 @@ Response<CollectionsStringProperty> response = await client.GetCollectionsString
       <example>
 This sample shows how to call GetCollectionsString.
 <code><![CDATA[
-CollectionsString client = new ValueTypesClient().GetCollectionsStringClient("1.0.0");
+CollectionsString client = new ValueTypesClient().GetCollectionsStringClient(apiVersion: "1.0.0");
 
 Response<CollectionsStringProperty> response = client.GetCollectionsString();
 ]]></code>
 This sample shows how to call GetCollectionsString with all parameters.
 <code><![CDATA[
-CollectionsString client = new ValueTypesClient().GetCollectionsStringClient("1.0.0");
+CollectionsString client = new ValueTypesClient().GetCollectionsStringClient(apiVersion: "1.0.0");
 
 Response<CollectionsStringProperty> response = client.GetCollectionsString();
 ]]></code></example>
@@ -35,7 +35,7 @@ Response<CollectionsStringProperty> response = client.GetCollectionsString();
       <example>
 This sample shows how to call GetCollectionsStringAsync and parse the result.
 <code><![CDATA[
-CollectionsString client = new ValueTypesClient().GetCollectionsStringClient("1.0.0");
+CollectionsString client = new ValueTypesClient().GetCollectionsStringClient(apiVersion: "1.0.0");
 
 Response response = await client.GetCollectionsStringAsync(null);
 
@@ -44,13 +44,13 @@ Console.WriteLine(result.GetProperty("property")[0].ToString());
 ]]></code>
 This sample shows how to call GetCollectionsStringAsync.
 <code><![CDATA[
-CollectionsString client = new ValueTypesClient().GetCollectionsStringClient("1.0.0");
+CollectionsString client = new ValueTypesClient().GetCollectionsStringClient(apiVersion: "1.0.0");
 
 Response<CollectionsStringProperty> response = await client.GetCollectionsStringAsync();
 ]]></code>
 This sample shows how to call GetCollectionsStringAsync with all parameters and parse the result.
 <code><![CDATA[
-CollectionsString client = new ValueTypesClient().GetCollectionsStringClient("1.0.0");
+CollectionsString client = new ValueTypesClient().GetCollectionsStringClient(apiVersion: "1.0.0");
 
 Response response = await client.GetCollectionsStringAsync(null);
 
@@ -59,7 +59,7 @@ Console.WriteLine(result.GetProperty("property")[0].ToString());
 ]]></code>
 This sample shows how to call GetCollectionsStringAsync with all parameters.
 <code><![CDATA[
-CollectionsString client = new ValueTypesClient().GetCollectionsStringClient("1.0.0");
+CollectionsString client = new ValueTypesClient().GetCollectionsStringClient(apiVersion: "1.0.0");
 
 Response<CollectionsStringProperty> response = await client.GetCollectionsStringAsync();
 ]]></code></example>
@@ -68,7 +68,7 @@ Response<CollectionsStringProperty> response = await client.GetCollectionsString
       <example>
 This sample shows how to call GetCollectionsString and parse the result.
 <code><![CDATA[
-CollectionsString client = new ValueTypesClient().GetCollectionsStringClient("1.0.0");
+CollectionsString client = new ValueTypesClient().GetCollectionsStringClient(apiVersion: "1.0.0");
 
 Response response = client.GetCollectionsString(null);
 
@@ -77,13 +77,13 @@ Console.WriteLine(result.GetProperty("property")[0].ToString());
 ]]></code>
 This sample shows how to call GetCollectionsString.
 <code><![CDATA[
-CollectionsString client = new ValueTypesClient().GetCollectionsStringClient("1.0.0");
+CollectionsString client = new ValueTypesClient().GetCollectionsStringClient(apiVersion: "1.0.0");
 
 Response<CollectionsStringProperty> response = client.GetCollectionsString();
 ]]></code>
 This sample shows how to call GetCollectionsString with all parameters and parse the result.
 <code><![CDATA[
-CollectionsString client = new ValueTypesClient().GetCollectionsStringClient("1.0.0");
+CollectionsString client = new ValueTypesClient().GetCollectionsStringClient(apiVersion: "1.0.0");
 
 Response response = client.GetCollectionsString(null);
 
@@ -92,7 +92,7 @@ Console.WriteLine(result.GetProperty("property")[0].ToString());
 ]]></code>
 This sample shows how to call GetCollectionsString with all parameters.
 <code><![CDATA[
-CollectionsString client = new ValueTypesClient().GetCollectionsStringClient("1.0.0");
+CollectionsString client = new ValueTypesClient().GetCollectionsStringClient(apiVersion: "1.0.0");
 
 Response<CollectionsStringProperty> response = client.GetCollectionsString();
 ]]></code></example>
@@ -101,14 +101,14 @@ Response<CollectionsStringProperty> response = client.GetCollectionsString();
       <example>
 This sample shows how to call PutAsync.
 <code><![CDATA[
-CollectionsString client = new ValueTypesClient().GetCollectionsStringClient("1.0.0");
+CollectionsString client = new ValueTypesClient().GetCollectionsStringClient(apiVersion: "1.0.0");
 
 CollectionsStringProperty body = new CollectionsStringProperty(new string[] { "<property>" });
 Response response = await client.PutAsync(body);
 ]]></code>
 This sample shows how to call PutAsync with all parameters.
 <code><![CDATA[
-CollectionsString client = new ValueTypesClient().GetCollectionsStringClient("1.0.0");
+CollectionsString client = new ValueTypesClient().GetCollectionsStringClient(apiVersion: "1.0.0");
 
 CollectionsStringProperty body = new CollectionsStringProperty(new string[] { "<property>" });
 Response response = await client.PutAsync(body);
@@ -118,14 +118,14 @@ Response response = await client.PutAsync(body);
       <example>
 This sample shows how to call Put.
 <code><![CDATA[
-CollectionsString client = new ValueTypesClient().GetCollectionsStringClient("1.0.0");
+CollectionsString client = new ValueTypesClient().GetCollectionsStringClient(apiVersion: "1.0.0");
 
 CollectionsStringProperty body = new CollectionsStringProperty(new string[] { "<property>" });
 Response response = client.Put(body);
 ]]></code>
 This sample shows how to call Put with all parameters.
 <code><![CDATA[
-CollectionsString client = new ValueTypesClient().GetCollectionsStringClient("1.0.0");
+CollectionsString client = new ValueTypesClient().GetCollectionsStringClient(apiVersion: "1.0.0");
 
 CollectionsStringProperty body = new CollectionsStringProperty(new string[] { "<property>" });
 Response response = client.Put(body);
@@ -135,7 +135,7 @@ Response response = client.Put(body);
       <example>
 This sample shows how to call PutAsync.
 <code><![CDATA[
-CollectionsString client = new ValueTypesClient().GetCollectionsStringClient("1.0.0");
+CollectionsString client = new ValueTypesClient().GetCollectionsStringClient(apiVersion: "1.0.0");
 
 RequestContent content = RequestContent.Create(new
 {
@@ -150,14 +150,14 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutAsync.
 <code><![CDATA[
-CollectionsString client = new ValueTypesClient().GetCollectionsStringClient("1.0.0");
+CollectionsString client = new ValueTypesClient().GetCollectionsStringClient(apiVersion: "1.0.0");
 
 CollectionsStringProperty body = new CollectionsStringProperty(new string[] { "<property>" });
 Response response = await client.PutAsync(body);
 ]]></code>
 This sample shows how to call PutAsync with all request content.
 <code><![CDATA[
-CollectionsString client = new ValueTypesClient().GetCollectionsStringClient("1.0.0");
+CollectionsString client = new ValueTypesClient().GetCollectionsStringClient(apiVersion: "1.0.0");
 
 RequestContent content = RequestContent.Create(new
 {
@@ -172,7 +172,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutAsync with all parameters.
 <code><![CDATA[
-CollectionsString client = new ValueTypesClient().GetCollectionsStringClient("1.0.0");
+CollectionsString client = new ValueTypesClient().GetCollectionsStringClient(apiVersion: "1.0.0");
 
 CollectionsStringProperty body = new CollectionsStringProperty(new string[] { "<property>" });
 Response response = await client.PutAsync(body);
@@ -182,7 +182,7 @@ Response response = await client.PutAsync(body);
       <example>
 This sample shows how to call Put.
 <code><![CDATA[
-CollectionsString client = new ValueTypesClient().GetCollectionsStringClient("1.0.0");
+CollectionsString client = new ValueTypesClient().GetCollectionsStringClient(apiVersion: "1.0.0");
 
 RequestContent content = RequestContent.Create(new
 {
@@ -197,14 +197,14 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Put.
 <code><![CDATA[
-CollectionsString client = new ValueTypesClient().GetCollectionsStringClient("1.0.0");
+CollectionsString client = new ValueTypesClient().GetCollectionsStringClient(apiVersion: "1.0.0");
 
 CollectionsStringProperty body = new CollectionsStringProperty(new string[] { "<property>" });
 Response response = client.Put(body);
 ]]></code>
 This sample shows how to call Put with all request content.
 <code><![CDATA[
-CollectionsString client = new ValueTypesClient().GetCollectionsStringClient("1.0.0");
+CollectionsString client = new ValueTypesClient().GetCollectionsStringClient(apiVersion: "1.0.0");
 
 RequestContent content = RequestContent.Create(new
 {
@@ -219,7 +219,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Put with all parameters.
 <code><![CDATA[
-CollectionsString client = new ValueTypesClient().GetCollectionsStringClient("1.0.0");
+CollectionsString client = new ValueTypesClient().GetCollectionsStringClient(apiVersion: "1.0.0");
 
 CollectionsStringProperty body = new CollectionsStringProperty(new string[] { "<property>" });
 Response response = client.Put(body);

@@ -5,13 +5,13 @@
       <example>
 This sample shows how to call GetDatetimeValueAsync.
 <code><![CDATA[
-DatetimeValue client = new ArrayClient().GetDatetimeValueClient("1.0.0");
+DatetimeValue client = new ArrayClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
 Response<IReadOnlyList<DateTimeOffset>> response = await client.GetDatetimeValueAsync();
 ]]></code>
 This sample shows how to call GetDatetimeValueAsync with all parameters.
 <code><![CDATA[
-DatetimeValue client = new ArrayClient().GetDatetimeValueClient("1.0.0");
+DatetimeValue client = new ArrayClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
 Response<IReadOnlyList<DateTimeOffset>> response = await client.GetDatetimeValueAsync();
 ]]></code></example>
@@ -20,13 +20,13 @@ Response<IReadOnlyList<DateTimeOffset>> response = await client.GetDatetimeValue
       <example>
 This sample shows how to call GetDatetimeValue.
 <code><![CDATA[
-DatetimeValue client = new ArrayClient().GetDatetimeValueClient("1.0.0");
+DatetimeValue client = new ArrayClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
 Response<IReadOnlyList<DateTimeOffset>> response = client.GetDatetimeValue();
 ]]></code>
 This sample shows how to call GetDatetimeValue with all parameters.
 <code><![CDATA[
-DatetimeValue client = new ArrayClient().GetDatetimeValueClient("1.0.0");
+DatetimeValue client = new ArrayClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
 Response<IReadOnlyList<DateTimeOffset>> response = client.GetDatetimeValue();
 ]]></code></example>
@@ -35,7 +35,7 @@ Response<IReadOnlyList<DateTimeOffset>> response = client.GetDatetimeValue();
       <example>
 This sample shows how to call GetDatetimeValueAsync and parse the result.
 <code><![CDATA[
-DatetimeValue client = new ArrayClient().GetDatetimeValueClient("1.0.0");
+DatetimeValue client = new ArrayClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
 Response response = await client.GetDatetimeValueAsync(null);
 
@@ -44,13 +44,13 @@ Console.WriteLine(result[0].ToString());
 ]]></code>
 This sample shows how to call GetDatetimeValueAsync.
 <code><![CDATA[
-DatetimeValue client = new ArrayClient().GetDatetimeValueClient("1.0.0");
+DatetimeValue client = new ArrayClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
 Response<IReadOnlyList<DateTimeOffset>> response = await client.GetDatetimeValueAsync();
 ]]></code>
 This sample shows how to call GetDatetimeValueAsync with all parameters and parse the result.
 <code><![CDATA[
-DatetimeValue client = new ArrayClient().GetDatetimeValueClient("1.0.0");
+DatetimeValue client = new ArrayClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
 Response response = await client.GetDatetimeValueAsync(null);
 
@@ -59,7 +59,7 @@ Console.WriteLine(result[0].ToString());
 ]]></code>
 This sample shows how to call GetDatetimeValueAsync with all parameters.
 <code><![CDATA[
-DatetimeValue client = new ArrayClient().GetDatetimeValueClient("1.0.0");
+DatetimeValue client = new ArrayClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
 Response<IReadOnlyList<DateTimeOffset>> response = await client.GetDatetimeValueAsync();
 ]]></code></example>
@@ -68,7 +68,7 @@ Response<IReadOnlyList<DateTimeOffset>> response = await client.GetDatetimeValue
       <example>
 This sample shows how to call GetDatetimeValue and parse the result.
 <code><![CDATA[
-DatetimeValue client = new ArrayClient().GetDatetimeValueClient("1.0.0");
+DatetimeValue client = new ArrayClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
 Response response = client.GetDatetimeValue(null);
 
@@ -77,13 +77,13 @@ Console.WriteLine(result[0].ToString());
 ]]></code>
 This sample shows how to call GetDatetimeValue.
 <code><![CDATA[
-DatetimeValue client = new ArrayClient().GetDatetimeValueClient("1.0.0");
+DatetimeValue client = new ArrayClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
 Response<IReadOnlyList<DateTimeOffset>> response = client.GetDatetimeValue();
 ]]></code>
 This sample shows how to call GetDatetimeValue with all parameters and parse the result.
 <code><![CDATA[
-DatetimeValue client = new ArrayClient().GetDatetimeValueClient("1.0.0");
+DatetimeValue client = new ArrayClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
 Response response = client.GetDatetimeValue(null);
 
@@ -92,7 +92,7 @@ Console.WriteLine(result[0].ToString());
 ]]></code>
 This sample shows how to call GetDatetimeValue with all parameters.
 <code><![CDATA[
-DatetimeValue client = new ArrayClient().GetDatetimeValueClient("1.0.0");
+DatetimeValue client = new ArrayClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
 Response<IReadOnlyList<DateTimeOffset>> response = client.GetDatetimeValue();
 ]]></code></example>
@@ -101,13 +101,13 @@ Response<IReadOnlyList<DateTimeOffset>> response = client.GetDatetimeValue();
       <example>
 This sample shows how to call PutAsync.
 <code><![CDATA[
-DatetimeValue client = new ArrayClient().GetDatetimeValueClient("1.0.0");
+DatetimeValue client = new ArrayClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
 Response response = await client.PutAsync(new DateTimeOffset[] { DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00") });
 ]]></code>
 This sample shows how to call PutAsync with all parameters.
 <code><![CDATA[
-DatetimeValue client = new ArrayClient().GetDatetimeValueClient("1.0.0");
+DatetimeValue client = new ArrayClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
 Response response = await client.PutAsync(new DateTimeOffset[] { DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00") });
 ]]></code></example>
@@ -116,13 +116,13 @@ Response response = await client.PutAsync(new DateTimeOffset[] { DateTimeOffset.
       <example>
 This sample shows how to call Put.
 <code><![CDATA[
-DatetimeValue client = new ArrayClient().GetDatetimeValueClient("1.0.0");
+DatetimeValue client = new ArrayClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
 Response response = client.Put(new DateTimeOffset[] { DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00") });
 ]]></code>
 This sample shows how to call Put with all parameters.
 <code><![CDATA[
-DatetimeValue client = new ArrayClient().GetDatetimeValueClient("1.0.0");
+DatetimeValue client = new ArrayClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
 Response response = client.Put(new DateTimeOffset[] { DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00") });
 ]]></code></example>
@@ -131,7 +131,7 @@ Response response = client.Put(new DateTimeOffset[] { DateTimeOffset.Parse("2022
       <example>
 This sample shows how to call PutAsync.
 <code><![CDATA[
-DatetimeValue client = new ArrayClient().GetDatetimeValueClient("1.0.0");
+DatetimeValue client = new ArrayClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
 RequestContent content = RequestContent.Create(new object[]
 {
@@ -143,13 +143,13 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutAsync.
 <code><![CDATA[
-DatetimeValue client = new ArrayClient().GetDatetimeValueClient("1.0.0");
+DatetimeValue client = new ArrayClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
 Response response = await client.PutAsync(new DateTimeOffset[] { DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00") });
 ]]></code>
 This sample shows how to call PutAsync with all request content.
 <code><![CDATA[
-DatetimeValue client = new ArrayClient().GetDatetimeValueClient("1.0.0");
+DatetimeValue client = new ArrayClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
 RequestContent content = RequestContent.Create(new object[]
 {
@@ -161,7 +161,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutAsync with all parameters.
 <code><![CDATA[
-DatetimeValue client = new ArrayClient().GetDatetimeValueClient("1.0.0");
+DatetimeValue client = new ArrayClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
 Response response = await client.PutAsync(new DateTimeOffset[] { DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00") });
 ]]></code></example>
@@ -170,7 +170,7 @@ Response response = await client.PutAsync(new DateTimeOffset[] { DateTimeOffset.
       <example>
 This sample shows how to call Put.
 <code><![CDATA[
-DatetimeValue client = new ArrayClient().GetDatetimeValueClient("1.0.0");
+DatetimeValue client = new ArrayClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
 RequestContent content = RequestContent.Create(new object[]
 {
@@ -182,13 +182,13 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Put.
 <code><![CDATA[
-DatetimeValue client = new ArrayClient().GetDatetimeValueClient("1.0.0");
+DatetimeValue client = new ArrayClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
 Response response = client.Put(new DateTimeOffset[] { DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00") });
 ]]></code>
 This sample shows how to call Put with all request content.
 <code><![CDATA[
-DatetimeValue client = new ArrayClient().GetDatetimeValueClient("1.0.0");
+DatetimeValue client = new ArrayClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
 RequestContent content = RequestContent.Create(new object[]
 {
@@ -200,7 +200,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Put with all parameters.
 <code><![CDATA[
-DatetimeValue client = new ArrayClient().GetDatetimeValueClient("1.0.0");
+DatetimeValue client = new ArrayClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
 Response response = client.Put(new DateTimeOffset[] { DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00") });
 ]]></code></example>

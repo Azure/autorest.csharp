@@ -5,13 +5,13 @@
       <example>
 This sample shows how to call GetDatetimeValueAsync.
 <code><![CDATA[
-DatetimeValue client = new DictionaryClient().GetDatetimeValueClient("1.0.0");
+DatetimeValue client = new DictionaryClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
 Response<IReadOnlyDictionary<string, DateTimeOffset>> response = await client.GetDatetimeValueAsync();
 ]]></code>
 This sample shows how to call GetDatetimeValueAsync with all parameters.
 <code><![CDATA[
-DatetimeValue client = new DictionaryClient().GetDatetimeValueClient("1.0.0");
+DatetimeValue client = new DictionaryClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
 Response<IReadOnlyDictionary<string, DateTimeOffset>> response = await client.GetDatetimeValueAsync();
 ]]></code></example>
@@ -20,13 +20,13 @@ Response<IReadOnlyDictionary<string, DateTimeOffset>> response = await client.Ge
       <example>
 This sample shows how to call GetDatetimeValue.
 <code><![CDATA[
-DatetimeValue client = new DictionaryClient().GetDatetimeValueClient("1.0.0");
+DatetimeValue client = new DictionaryClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
 Response<IReadOnlyDictionary<string, DateTimeOffset>> response = client.GetDatetimeValue();
 ]]></code>
 This sample shows how to call GetDatetimeValue with all parameters.
 <code><![CDATA[
-DatetimeValue client = new DictionaryClient().GetDatetimeValueClient("1.0.0");
+DatetimeValue client = new DictionaryClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
 Response<IReadOnlyDictionary<string, DateTimeOffset>> response = client.GetDatetimeValue();
 ]]></code></example>
@@ -35,7 +35,7 @@ Response<IReadOnlyDictionary<string, DateTimeOffset>> response = client.GetDatet
       <example>
 This sample shows how to call GetDatetimeValueAsync and parse the result.
 <code><![CDATA[
-DatetimeValue client = new DictionaryClient().GetDatetimeValueClient("1.0.0");
+DatetimeValue client = new DictionaryClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
 Response response = await client.GetDatetimeValueAsync(null);
 
@@ -44,13 +44,13 @@ Console.WriteLine(result.GetProperty("<key>").ToString());
 ]]></code>
 This sample shows how to call GetDatetimeValueAsync.
 <code><![CDATA[
-DatetimeValue client = new DictionaryClient().GetDatetimeValueClient("1.0.0");
+DatetimeValue client = new DictionaryClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
 Response<IReadOnlyDictionary<string, DateTimeOffset>> response = await client.GetDatetimeValueAsync();
 ]]></code>
 This sample shows how to call GetDatetimeValueAsync with all parameters and parse the result.
 <code><![CDATA[
-DatetimeValue client = new DictionaryClient().GetDatetimeValueClient("1.0.0");
+DatetimeValue client = new DictionaryClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
 Response response = await client.GetDatetimeValueAsync(null);
 
@@ -59,7 +59,7 @@ Console.WriteLine(result.GetProperty("<key>").ToString());
 ]]></code>
 This sample shows how to call GetDatetimeValueAsync with all parameters.
 <code><![CDATA[
-DatetimeValue client = new DictionaryClient().GetDatetimeValueClient("1.0.0");
+DatetimeValue client = new DictionaryClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
 Response<IReadOnlyDictionary<string, DateTimeOffset>> response = await client.GetDatetimeValueAsync();
 ]]></code></example>
@@ -68,7 +68,7 @@ Response<IReadOnlyDictionary<string, DateTimeOffset>> response = await client.Ge
       <example>
 This sample shows how to call GetDatetimeValue and parse the result.
 <code><![CDATA[
-DatetimeValue client = new DictionaryClient().GetDatetimeValueClient("1.0.0");
+DatetimeValue client = new DictionaryClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
 Response response = client.GetDatetimeValue(null);
 
@@ -77,13 +77,13 @@ Console.WriteLine(result.GetProperty("<key>").ToString());
 ]]></code>
 This sample shows how to call GetDatetimeValue.
 <code><![CDATA[
-DatetimeValue client = new DictionaryClient().GetDatetimeValueClient("1.0.0");
+DatetimeValue client = new DictionaryClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
 Response<IReadOnlyDictionary<string, DateTimeOffset>> response = client.GetDatetimeValue();
 ]]></code>
 This sample shows how to call GetDatetimeValue with all parameters and parse the result.
 <code><![CDATA[
-DatetimeValue client = new DictionaryClient().GetDatetimeValueClient("1.0.0");
+DatetimeValue client = new DictionaryClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
 Response response = client.GetDatetimeValue(null);
 
@@ -92,7 +92,7 @@ Console.WriteLine(result.GetProperty("<key>").ToString());
 ]]></code>
 This sample shows how to call GetDatetimeValue with all parameters.
 <code><![CDATA[
-DatetimeValue client = new DictionaryClient().GetDatetimeValueClient("1.0.0");
+DatetimeValue client = new DictionaryClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
 Response<IReadOnlyDictionary<string, DateTimeOffset>> response = client.GetDatetimeValue();
 ]]></code></example>
@@ -101,7 +101,7 @@ Response<IReadOnlyDictionary<string, DateTimeOffset>> response = client.GetDatet
       <example>
 This sample shows how to call PutAsync.
 <code><![CDATA[
-DatetimeValue client = new DictionaryClient().GetDatetimeValueClient("1.0.0");
+DatetimeValue client = new DictionaryClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
 Response response = await client.PutAsync(new Dictionary<string, DateTimeOffset>
 {
@@ -110,7 +110,7 @@ Response response = await client.PutAsync(new Dictionary<string, DateTimeOffset>
 ]]></code>
 This sample shows how to call PutAsync with all parameters.
 <code><![CDATA[
-DatetimeValue client = new DictionaryClient().GetDatetimeValueClient("1.0.0");
+DatetimeValue client = new DictionaryClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
 Response response = await client.PutAsync(new Dictionary<string, DateTimeOffset>
 {
@@ -122,7 +122,7 @@ Response response = await client.PutAsync(new Dictionary<string, DateTimeOffset>
       <example>
 This sample shows how to call Put.
 <code><![CDATA[
-DatetimeValue client = new DictionaryClient().GetDatetimeValueClient("1.0.0");
+DatetimeValue client = new DictionaryClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
 Response response = client.Put(new Dictionary<string, DateTimeOffset>
 {
@@ -131,7 +131,7 @@ Response response = client.Put(new Dictionary<string, DateTimeOffset>
 ]]></code>
 This sample shows how to call Put with all parameters.
 <code><![CDATA[
-DatetimeValue client = new DictionaryClient().GetDatetimeValueClient("1.0.0");
+DatetimeValue client = new DictionaryClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
 Response response = client.Put(new Dictionary<string, DateTimeOffset>
 {
@@ -143,7 +143,7 @@ Response response = client.Put(new Dictionary<string, DateTimeOffset>
       <example>
 This sample shows how to call PutAsync.
 <code><![CDATA[
-DatetimeValue client = new DictionaryClient().GetDatetimeValueClient("1.0.0");
+DatetimeValue client = new DictionaryClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
 RequestContent content = RequestContent.Create(new
 {
@@ -155,7 +155,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutAsync.
 <code><![CDATA[
-DatetimeValue client = new DictionaryClient().GetDatetimeValueClient("1.0.0");
+DatetimeValue client = new DictionaryClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
 Response response = await client.PutAsync(new Dictionary<string, DateTimeOffset>
 {
@@ -164,7 +164,7 @@ Response response = await client.PutAsync(new Dictionary<string, DateTimeOffset>
 ]]></code>
 This sample shows how to call PutAsync with all request content.
 <code><![CDATA[
-DatetimeValue client = new DictionaryClient().GetDatetimeValueClient("1.0.0");
+DatetimeValue client = new DictionaryClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
 RequestContent content = RequestContent.Create(new
 {
@@ -176,7 +176,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutAsync with all parameters.
 <code><![CDATA[
-DatetimeValue client = new DictionaryClient().GetDatetimeValueClient("1.0.0");
+DatetimeValue client = new DictionaryClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
 Response response = await client.PutAsync(new Dictionary<string, DateTimeOffset>
 {
@@ -188,7 +188,7 @@ Response response = await client.PutAsync(new Dictionary<string, DateTimeOffset>
       <example>
 This sample shows how to call Put.
 <code><![CDATA[
-DatetimeValue client = new DictionaryClient().GetDatetimeValueClient("1.0.0");
+DatetimeValue client = new DictionaryClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
 RequestContent content = RequestContent.Create(new
 {
@@ -200,7 +200,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Put.
 <code><![CDATA[
-DatetimeValue client = new DictionaryClient().GetDatetimeValueClient("1.0.0");
+DatetimeValue client = new DictionaryClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
 Response response = client.Put(new Dictionary<string, DateTimeOffset>
 {
@@ -209,7 +209,7 @@ Response response = client.Put(new Dictionary<string, DateTimeOffset>
 ]]></code>
 This sample shows how to call Put with all request content.
 <code><![CDATA[
-DatetimeValue client = new DictionaryClient().GetDatetimeValueClient("1.0.0");
+DatetimeValue client = new DictionaryClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
 RequestContent content = RequestContent.Create(new
 {
@@ -221,7 +221,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Put with all parameters.
 <code><![CDATA[
-DatetimeValue client = new DictionaryClient().GetDatetimeValueClient("1.0.0");
+DatetimeValue client = new DictionaryClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
 Response response = client.Put(new Dictionary<string, DateTimeOffset>
 {

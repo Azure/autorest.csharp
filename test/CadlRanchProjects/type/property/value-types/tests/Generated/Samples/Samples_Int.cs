@@ -23,7 +23,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetInt()
         {
-            Int client = new ValueTypesClient().GetIntClient("1.0.0");
+            Int client = new ValueTypesClient().GetIntClient(apiVersion: "1.0.0");
 
             Response response = client.GetInt(null);
 
@@ -35,7 +35,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetInt_Async()
         {
-            Int client = new ValueTypesClient().GetIntClient("1.0.0");
+            Int client = new ValueTypesClient().GetIntClient(apiVersion: "1.0.0");
 
             Response response = await client.GetIntAsync(null);
 
@@ -47,7 +47,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetInt_Convenience()
         {
-            Int client = new ValueTypesClient().GetIntClient("1.0.0");
+            Int client = new ValueTypesClient().GetIntClient(apiVersion: "1.0.0");
 
             Response<IntProperty> response = client.GetInt();
         }
@@ -56,7 +56,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetInt_Convenience_Async()
         {
-            Int client = new ValueTypesClient().GetIntClient("1.0.0");
+            Int client = new ValueTypesClient().GetIntClient(apiVersion: "1.0.0");
 
             Response<IntProperty> response = await client.GetIntAsync();
         }
@@ -65,7 +65,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetInt_AllParameters()
         {
-            Int client = new ValueTypesClient().GetIntClient("1.0.0");
+            Int client = new ValueTypesClient().GetIntClient(apiVersion: "1.0.0");
 
             Response response = client.GetInt(null);
 
@@ -77,7 +77,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetInt_AllParameters_Async()
         {
-            Int client = new ValueTypesClient().GetIntClient("1.0.0");
+            Int client = new ValueTypesClient().GetIntClient(apiVersion: "1.0.0");
 
             Response response = await client.GetIntAsync(null);
 
@@ -89,7 +89,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetInt_AllParameters_Convenience()
         {
-            Int client = new ValueTypesClient().GetIntClient("1.0.0");
+            Int client = new ValueTypesClient().GetIntClient(apiVersion: "1.0.0");
 
             Response<IntProperty> response = client.GetInt();
         }
@@ -98,7 +98,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetInt_AllParameters_Convenience_Async()
         {
-            Int client = new ValueTypesClient().GetIntClient("1.0.0");
+            Int client = new ValueTypesClient().GetIntClient(apiVersion: "1.0.0");
 
             Response<IntProperty> response = await client.GetIntAsync();
         }
@@ -107,7 +107,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Put()
         {
-            Int client = new ValueTypesClient().GetIntClient("1.0.0");
+            Int client = new ValueTypesClient().GetIntClient(apiVersion: "1.0.0");
 
             RequestContent content = RequestContent.Create(new
             {
@@ -122,7 +122,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Put_Async()
         {
-            Int client = new ValueTypesClient().GetIntClient("1.0.0");
+            Int client = new ValueTypesClient().GetIntClient(apiVersion: "1.0.0");
 
             RequestContent content = RequestContent.Create(new
             {
@@ -137,7 +137,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Put_Convenience()
         {
-            Int client = new ValueTypesClient().GetIntClient("1.0.0");
+            Int client = new ValueTypesClient().GetIntClient(apiVersion: "1.0.0");
 
             IntProperty body = new IntProperty(1234);
             Response response = client.Put(body);
@@ -147,7 +147,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Put_Convenience_Async()
         {
-            Int client = new ValueTypesClient().GetIntClient("1.0.0");
+            Int client = new ValueTypesClient().GetIntClient(apiVersion: "1.0.0");
 
             IntProperty body = new IntProperty(1234);
             Response response = await client.PutAsync(body);
@@ -157,7 +157,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Put_AllParameters()
         {
-            Int client = new ValueTypesClient().GetIntClient("1.0.0");
+            Int client = new ValueTypesClient().GetIntClient(apiVersion: "1.0.0");
 
             RequestContent content = RequestContent.Create(new
             {
@@ -172,7 +172,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Put_AllParameters_Async()
         {
-            Int client = new ValueTypesClient().GetIntClient("1.0.0");
+            Int client = new ValueTypesClient().GetIntClient(apiVersion: "1.0.0");
 
             RequestContent content = RequestContent.Create(new
             {
@@ -187,7 +187,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Put_AllParameters_Convenience()
         {
-            Int client = new ValueTypesClient().GetIntClient("1.0.0");
+            Int client = new ValueTypesClient().GetIntClient(apiVersion: "1.0.0");
 
             IntProperty body = new IntProperty(1234);
             Response response = client.Put(body);
@@ -197,7 +197,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Put_AllParameters_Convenience_Async()
         {
-            Int client = new ValueTypesClient().GetIntClient("1.0.0");
+            Int client = new ValueTypesClient().GetIntClient(apiVersion: "1.0.0");
 
             IntProperty body = new IntProperty(1234);
             Response response = await client.PutAsync(body);

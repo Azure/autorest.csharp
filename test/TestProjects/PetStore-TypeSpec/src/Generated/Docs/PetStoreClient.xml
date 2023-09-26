@@ -441,7 +441,7 @@ This sample shows how to call GetFirstPetAsync with all parameters.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 PetStoreClient client = new PetStoreClient(endpoint);
 
-Response<Pet> response = await client.GetFirstPetAsync(1234);
+Response<Pet> response = await client.GetFirstPetAsync(start: 1234);
 ]]></code></example>
     </member>
     <member name="GetFirstPet(int?,CancellationToken)">
@@ -458,7 +458,7 @@ This sample shows how to call GetFirstPet with all parameters.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 PetStoreClient client = new PetStoreClient(endpoint);
 
-Response<Pet> response = client.GetFirstPet(1234);
+Response<Pet> response = client.GetFirstPet(start: 1234);
 ]]></code></example>
     </member>
     <member name="GetFirstPetAsync(int?,RequestContext)">
@@ -498,7 +498,7 @@ This sample shows how to call GetFirstPetAsync with all parameters.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 PetStoreClient client = new PetStoreClient(endpoint);
 
-Response<Pet> response = await client.GetFirstPetAsync(1234);
+Response<Pet> response = await client.GetFirstPetAsync(start: 1234);
 ]]></code></example>
     </member>
     <member name="GetFirstPet(int?,RequestContext)">
@@ -538,7 +538,7 @@ This sample shows how to call GetFirstPet with all parameters.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 PetStoreClient client = new PetStoreClient(endpoint);
 
-Response<Pet> response = client.GetFirstPet(1234);
+Response<Pet> response = client.GetFirstPet(start: 1234);
 ]]></code></example>
     </member>
     <member name="GetFishAsync(string,CancellationToken)">
@@ -555,7 +555,7 @@ This sample shows how to call GetFishAsync with all parameters.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 PetStoreClient client = new PetStoreClient(endpoint);
 
-Response<Fish> response = await client.GetFishAsync("<kind>");
+Response<Fish> response = await client.GetFishAsync(kind: "<kind>");
 ]]></code></example>
     </member>
     <member name="GetFish(string,CancellationToken)">
@@ -572,7 +572,7 @@ This sample shows how to call GetFish with all parameters.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 PetStoreClient client = new PetStoreClient(endpoint);
 
-Response<Fish> response = client.GetFish("<kind>");
+Response<Fish> response = client.GetFish(kind: "<kind>");
 ]]></code></example>
     </member>
     <member name="GetFishAsync(string,RequestContext)">
@@ -611,7 +611,7 @@ This sample shows how to call GetFishAsync with all parameters.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 PetStoreClient client = new PetStoreClient(endpoint);
 
-Response<Fish> response = await client.GetFishAsync("<kind>");
+Response<Fish> response = await client.GetFishAsync(kind: "<kind>");
 ]]></code></example>
     </member>
     <member name="GetFish(string,RequestContext)">
@@ -650,7 +650,7 @@ This sample shows how to call GetFish with all parameters.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 PetStoreClient client = new PetStoreClient(endpoint);
 
-Response<Fish> response = client.GetFish("<kind>");
+Response<Fish> response = client.GetFish(kind: "<kind>");
 ]]></code></example>
     </member>
   </members>

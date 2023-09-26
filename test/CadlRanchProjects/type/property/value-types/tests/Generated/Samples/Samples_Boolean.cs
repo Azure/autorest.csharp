@@ -23,7 +23,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetBoolean()
         {
-            Boolean client = new ValueTypesClient().GetBooleanClient("1.0.0");
+            Boolean client = new ValueTypesClient().GetBooleanClient(apiVersion: "1.0.0");
 
             Response response = client.GetBoolean(null);
 
@@ -35,7 +35,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetBoolean_Async()
         {
-            Boolean client = new ValueTypesClient().GetBooleanClient("1.0.0");
+            Boolean client = new ValueTypesClient().GetBooleanClient(apiVersion: "1.0.0");
 
             Response response = await client.GetBooleanAsync(null);
 
@@ -47,7 +47,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetBoolean_Convenience()
         {
-            Boolean client = new ValueTypesClient().GetBooleanClient("1.0.0");
+            Boolean client = new ValueTypesClient().GetBooleanClient(apiVersion: "1.0.0");
 
             Response<BooleanProperty> response = client.GetBoolean();
         }
@@ -56,7 +56,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetBoolean_Convenience_Async()
         {
-            Boolean client = new ValueTypesClient().GetBooleanClient("1.0.0");
+            Boolean client = new ValueTypesClient().GetBooleanClient(apiVersion: "1.0.0");
 
             Response<BooleanProperty> response = await client.GetBooleanAsync();
         }
@@ -65,7 +65,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetBoolean_AllParameters()
         {
-            Boolean client = new ValueTypesClient().GetBooleanClient("1.0.0");
+            Boolean client = new ValueTypesClient().GetBooleanClient(apiVersion: "1.0.0");
 
             Response response = client.GetBoolean(null);
 
@@ -77,7 +77,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetBoolean_AllParameters_Async()
         {
-            Boolean client = new ValueTypesClient().GetBooleanClient("1.0.0");
+            Boolean client = new ValueTypesClient().GetBooleanClient(apiVersion: "1.0.0");
 
             Response response = await client.GetBooleanAsync(null);
 
@@ -89,7 +89,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetBoolean_AllParameters_Convenience()
         {
-            Boolean client = new ValueTypesClient().GetBooleanClient("1.0.0");
+            Boolean client = new ValueTypesClient().GetBooleanClient(apiVersion: "1.0.0");
 
             Response<BooleanProperty> response = client.GetBoolean();
         }
@@ -98,7 +98,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetBoolean_AllParameters_Convenience_Async()
         {
-            Boolean client = new ValueTypesClient().GetBooleanClient("1.0.0");
+            Boolean client = new ValueTypesClient().GetBooleanClient(apiVersion: "1.0.0");
 
             Response<BooleanProperty> response = await client.GetBooleanAsync();
         }
@@ -107,7 +107,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Put()
         {
-            Boolean client = new ValueTypesClient().GetBooleanClient("1.0.0");
+            Boolean client = new ValueTypesClient().GetBooleanClient(apiVersion: "1.0.0");
 
             RequestContent content = RequestContent.Create(new
             {
@@ -122,7 +122,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Put_Async()
         {
-            Boolean client = new ValueTypesClient().GetBooleanClient("1.0.0");
+            Boolean client = new ValueTypesClient().GetBooleanClient(apiVersion: "1.0.0");
 
             RequestContent content = RequestContent.Create(new
             {
@@ -137,7 +137,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Put_Convenience()
         {
-            Boolean client = new ValueTypesClient().GetBooleanClient("1.0.0");
+            Boolean client = new ValueTypesClient().GetBooleanClient(apiVersion: "1.0.0");
 
             BooleanProperty body = new BooleanProperty(true);
             Response response = client.Put(body);
@@ -147,7 +147,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Put_Convenience_Async()
         {
-            Boolean client = new ValueTypesClient().GetBooleanClient("1.0.0");
+            Boolean client = new ValueTypesClient().GetBooleanClient(apiVersion: "1.0.0");
 
             BooleanProperty body = new BooleanProperty(true);
             Response response = await client.PutAsync(body);
@@ -157,7 +157,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Put_AllParameters()
         {
-            Boolean client = new ValueTypesClient().GetBooleanClient("1.0.0");
+            Boolean client = new ValueTypesClient().GetBooleanClient(apiVersion: "1.0.0");
 
             RequestContent content = RequestContent.Create(new
             {
@@ -172,7 +172,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Put_AllParameters_Async()
         {
-            Boolean client = new ValueTypesClient().GetBooleanClient("1.0.0");
+            Boolean client = new ValueTypesClient().GetBooleanClient(apiVersion: "1.0.0");
 
             RequestContent content = RequestContent.Create(new
             {
@@ -187,7 +187,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Put_AllParameters_Convenience()
         {
-            Boolean client = new ValueTypesClient().GetBooleanClient("1.0.0");
+            Boolean client = new ValueTypesClient().GetBooleanClient(apiVersion: "1.0.0");
 
             BooleanProperty body = new BooleanProperty(true);
             Response response = client.Put(body);
@@ -197,7 +197,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Put_AllParameters_Convenience_Async()
         {
-            Boolean client = new ValueTypesClient().GetBooleanClient("1.0.0");
+            Boolean client = new ValueTypesClient().GetBooleanClient(apiVersion: "1.0.0");
 
             BooleanProperty body = new BooleanProperty(true);
             Response response = await client.PutAsync(body);

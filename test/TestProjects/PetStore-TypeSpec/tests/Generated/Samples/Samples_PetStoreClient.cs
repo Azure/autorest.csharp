@@ -478,7 +478,7 @@ namespace PetStore.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             PetStoreClient client = new PetStoreClient(endpoint);
 
-            Response<Pet> response = client.GetFirstPet(1234);
+            Response<Pet> response = client.GetFirstPet(start: 1234);
         }
 
         [Test]
@@ -488,7 +488,7 @@ namespace PetStore.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             PetStoreClient client = new PetStoreClient(endpoint);
 
-            Response<Pet> response = await client.GetFirstPetAsync(1234);
+            Response<Pet> response = await client.GetFirstPetAsync(start: 1234);
         }
 
         [Test]
@@ -574,7 +574,7 @@ namespace PetStore.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             PetStoreClient client = new PetStoreClient(endpoint);
 
-            Response<Fish> response = client.GetFish("<kind>");
+            Response<Fish> response = client.GetFish(kind: "<kind>");
         }
 
         [Test]
@@ -584,7 +584,7 @@ namespace PetStore.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             PetStoreClient client = new PetStoreClient(endpoint);
 
-            Response<Fish> response = await client.GetFishAsync("<kind>");
+            Response<Fish> response = await client.GetFishAsync(kind: "<kind>");
         }
     }
 }

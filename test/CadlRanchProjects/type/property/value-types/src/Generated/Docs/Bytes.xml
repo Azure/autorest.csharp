@@ -5,13 +5,13 @@
       <example>
 This sample shows how to call GetByteAsync.
 <code><![CDATA[
-Bytes client = new ValueTypesClient().GetBytesClient("1.0.0");
+Bytes client = new ValueTypesClient().GetBytesClient(apiVersion: "1.0.0");
 
 Response<BytesProperty> response = await client.GetByteAsync();
 ]]></code>
 This sample shows how to call GetByteAsync with all parameters.
 <code><![CDATA[
-Bytes client = new ValueTypesClient().GetBytesClient("1.0.0");
+Bytes client = new ValueTypesClient().GetBytesClient(apiVersion: "1.0.0");
 
 Response<BytesProperty> response = await client.GetByteAsync();
 ]]></code></example>
@@ -20,13 +20,13 @@ Response<BytesProperty> response = await client.GetByteAsync();
       <example>
 This sample shows how to call GetByte.
 <code><![CDATA[
-Bytes client = new ValueTypesClient().GetBytesClient("1.0.0");
+Bytes client = new ValueTypesClient().GetBytesClient(apiVersion: "1.0.0");
 
 Response<BytesProperty> response = client.GetByte();
 ]]></code>
 This sample shows how to call GetByte with all parameters.
 <code><![CDATA[
-Bytes client = new ValueTypesClient().GetBytesClient("1.0.0");
+Bytes client = new ValueTypesClient().GetBytesClient(apiVersion: "1.0.0");
 
 Response<BytesProperty> response = client.GetByte();
 ]]></code></example>
@@ -35,7 +35,7 @@ Response<BytesProperty> response = client.GetByte();
       <example>
 This sample shows how to call GetByteAsync and parse the result.
 <code><![CDATA[
-Bytes client = new ValueTypesClient().GetBytesClient("1.0.0");
+Bytes client = new ValueTypesClient().GetBytesClient(apiVersion: "1.0.0");
 
 Response response = await client.GetByteAsync(null);
 
@@ -44,13 +44,13 @@ Console.WriteLine(result.GetProperty("property").ToString());
 ]]></code>
 This sample shows how to call GetByteAsync.
 <code><![CDATA[
-Bytes client = new ValueTypesClient().GetBytesClient("1.0.0");
+Bytes client = new ValueTypesClient().GetBytesClient(apiVersion: "1.0.0");
 
 Response<BytesProperty> response = await client.GetByteAsync();
 ]]></code>
 This sample shows how to call GetByteAsync with all parameters and parse the result.
 <code><![CDATA[
-Bytes client = new ValueTypesClient().GetBytesClient("1.0.0");
+Bytes client = new ValueTypesClient().GetBytesClient(apiVersion: "1.0.0");
 
 Response response = await client.GetByteAsync(null);
 
@@ -59,7 +59,7 @@ Console.WriteLine(result.GetProperty("property").ToString());
 ]]></code>
 This sample shows how to call GetByteAsync with all parameters.
 <code><![CDATA[
-Bytes client = new ValueTypesClient().GetBytesClient("1.0.0");
+Bytes client = new ValueTypesClient().GetBytesClient(apiVersion: "1.0.0");
 
 Response<BytesProperty> response = await client.GetByteAsync();
 ]]></code></example>
@@ -68,7 +68,7 @@ Response<BytesProperty> response = await client.GetByteAsync();
       <example>
 This sample shows how to call GetByte and parse the result.
 <code><![CDATA[
-Bytes client = new ValueTypesClient().GetBytesClient("1.0.0");
+Bytes client = new ValueTypesClient().GetBytesClient(apiVersion: "1.0.0");
 
 Response response = client.GetByte(null);
 
@@ -77,13 +77,13 @@ Console.WriteLine(result.GetProperty("property").ToString());
 ]]></code>
 This sample shows how to call GetByte.
 <code><![CDATA[
-Bytes client = new ValueTypesClient().GetBytesClient("1.0.0");
+Bytes client = new ValueTypesClient().GetBytesClient(apiVersion: "1.0.0");
 
 Response<BytesProperty> response = client.GetByte();
 ]]></code>
 This sample shows how to call GetByte with all parameters and parse the result.
 <code><![CDATA[
-Bytes client = new ValueTypesClient().GetBytesClient("1.0.0");
+Bytes client = new ValueTypesClient().GetBytesClient(apiVersion: "1.0.0");
 
 Response response = client.GetByte(null);
 
@@ -92,7 +92,7 @@ Console.WriteLine(result.GetProperty("property").ToString());
 ]]></code>
 This sample shows how to call GetByte with all parameters.
 <code><![CDATA[
-Bytes client = new ValueTypesClient().GetBytesClient("1.0.0");
+Bytes client = new ValueTypesClient().GetBytesClient(apiVersion: "1.0.0");
 
 Response<BytesProperty> response = client.GetByte();
 ]]></code></example>
@@ -101,14 +101,14 @@ Response<BytesProperty> response = client.GetByte();
       <example>
 This sample shows how to call PutAsync.
 <code><![CDATA[
-Bytes client = new ValueTypesClient().GetBytesClient("1.0.0");
+Bytes client = new ValueTypesClient().GetBytesClient(apiVersion: "1.0.0");
 
 BytesProperty body = new BytesProperty(BinaryData.FromObjectAsJson(new object()));
 Response response = await client.PutAsync(body);
 ]]></code>
 This sample shows how to call PutAsync with all parameters.
 <code><![CDATA[
-Bytes client = new ValueTypesClient().GetBytesClient("1.0.0");
+Bytes client = new ValueTypesClient().GetBytesClient(apiVersion: "1.0.0");
 
 BytesProperty body = new BytesProperty(BinaryData.FromObjectAsJson(new object()));
 Response response = await client.PutAsync(body);
@@ -118,14 +118,14 @@ Response response = await client.PutAsync(body);
       <example>
 This sample shows how to call Put.
 <code><![CDATA[
-Bytes client = new ValueTypesClient().GetBytesClient("1.0.0");
+Bytes client = new ValueTypesClient().GetBytesClient(apiVersion: "1.0.0");
 
 BytesProperty body = new BytesProperty(BinaryData.FromObjectAsJson(new object()));
 Response response = client.Put(body);
 ]]></code>
 This sample shows how to call Put with all parameters.
 <code><![CDATA[
-Bytes client = new ValueTypesClient().GetBytesClient("1.0.0");
+Bytes client = new ValueTypesClient().GetBytesClient(apiVersion: "1.0.0");
 
 BytesProperty body = new BytesProperty(BinaryData.FromObjectAsJson(new object()));
 Response response = client.Put(body);
@@ -135,7 +135,7 @@ Response response = client.Put(body);
       <example>
 This sample shows how to call PutAsync.
 <code><![CDATA[
-Bytes client = new ValueTypesClient().GetBytesClient("1.0.0");
+Bytes client = new ValueTypesClient().GetBytesClient(apiVersion: "1.0.0");
 
 RequestContent content = RequestContent.Create(new
 {
@@ -147,14 +147,14 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutAsync.
 <code><![CDATA[
-Bytes client = new ValueTypesClient().GetBytesClient("1.0.0");
+Bytes client = new ValueTypesClient().GetBytesClient(apiVersion: "1.0.0");
 
 BytesProperty body = new BytesProperty(BinaryData.FromObjectAsJson(new object()));
 Response response = await client.PutAsync(body);
 ]]></code>
 This sample shows how to call PutAsync with all request content.
 <code><![CDATA[
-Bytes client = new ValueTypesClient().GetBytesClient("1.0.0");
+Bytes client = new ValueTypesClient().GetBytesClient(apiVersion: "1.0.0");
 
 RequestContent content = RequestContent.Create(new
 {
@@ -166,7 +166,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutAsync with all parameters.
 <code><![CDATA[
-Bytes client = new ValueTypesClient().GetBytesClient("1.0.0");
+Bytes client = new ValueTypesClient().GetBytesClient(apiVersion: "1.0.0");
 
 BytesProperty body = new BytesProperty(BinaryData.FromObjectAsJson(new object()));
 Response response = await client.PutAsync(body);
@@ -176,7 +176,7 @@ Response response = await client.PutAsync(body);
       <example>
 This sample shows how to call Put.
 <code><![CDATA[
-Bytes client = new ValueTypesClient().GetBytesClient("1.0.0");
+Bytes client = new ValueTypesClient().GetBytesClient(apiVersion: "1.0.0");
 
 RequestContent content = RequestContent.Create(new
 {
@@ -188,14 +188,14 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Put.
 <code><![CDATA[
-Bytes client = new ValueTypesClient().GetBytesClient("1.0.0");
+Bytes client = new ValueTypesClient().GetBytesClient(apiVersion: "1.0.0");
 
 BytesProperty body = new BytesProperty(BinaryData.FromObjectAsJson(new object()));
 Response response = client.Put(body);
 ]]></code>
 This sample shows how to call Put with all request content.
 <code><![CDATA[
-Bytes client = new ValueTypesClient().GetBytesClient("1.0.0");
+Bytes client = new ValueTypesClient().GetBytesClient(apiVersion: "1.0.0");
 
 RequestContent content = RequestContent.Create(new
 {
@@ -207,7 +207,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Put with all parameters.
 <code><![CDATA[
-Bytes client = new ValueTypesClient().GetBytesClient("1.0.0");
+Bytes client = new ValueTypesClient().GetBytesClient(apiVersion: "1.0.0");
 
 BytesProperty body = new BytesProperty(BinaryData.FromObjectAsJson(new object()));
 Response response = client.Put(body);

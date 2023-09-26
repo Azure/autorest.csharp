@@ -5,13 +5,13 @@
       <example>
 This sample shows how to call GetModelValueAsync.
 <code><![CDATA[
-Model client = new SpecialWordsClient().GetModelClient("1.0.0");
+Model client = new SpecialWordsClient().GetModelClient(apiVersion: "1.0.0");
 
 Response<BaseModel> response = await client.GetModelValueAsync();
 ]]></code>
 This sample shows how to call GetModelValueAsync with all parameters.
 <code><![CDATA[
-Model client = new SpecialWordsClient().GetModelClient("1.0.0");
+Model client = new SpecialWordsClient().GetModelClient(apiVersion: "1.0.0");
 
 Response<BaseModel> response = await client.GetModelValueAsync();
 ]]></code></example>
@@ -20,13 +20,13 @@ Response<BaseModel> response = await client.GetModelValueAsync();
       <example>
 This sample shows how to call GetModelValue.
 <code><![CDATA[
-Model client = new SpecialWordsClient().GetModelClient("1.0.0");
+Model client = new SpecialWordsClient().GetModelClient(apiVersion: "1.0.0");
 
 Response<BaseModel> response = client.GetModelValue();
 ]]></code>
 This sample shows how to call GetModelValue with all parameters.
 <code><![CDATA[
-Model client = new SpecialWordsClient().GetModelClient("1.0.0");
+Model client = new SpecialWordsClient().GetModelClient(apiVersion: "1.0.0");
 
 Response<BaseModel> response = client.GetModelValue();
 ]]></code></example>
@@ -35,7 +35,7 @@ Response<BaseModel> response = client.GetModelValue();
       <example>
 This sample shows how to call GetModelAsync and parse the result.
 <code><![CDATA[
-Model client = new SpecialWordsClient().GetModelClient("1.0.0");
+Model client = new SpecialWordsClient().GetModelClient(apiVersion: "1.0.0");
 
 Response response = await client.GetModelAsync();
 
@@ -44,13 +44,13 @@ Console.WriteLine(result.GetProperty("model.kind").ToString());
 ]]></code>
 This sample shows how to call GetModelValueAsync.
 <code><![CDATA[
-Model client = new SpecialWordsClient().GetModelClient("1.0.0");
+Model client = new SpecialWordsClient().GetModelClient(apiVersion: "1.0.0");
 
 Response<BaseModel> response = await client.GetModelValueAsync();
 ]]></code>
 This sample shows how to call GetModelAsync with all request content and parse the result.
 <code><![CDATA[
-Model client = new SpecialWordsClient().GetModelClient("1.0.0");
+Model client = new SpecialWordsClient().GetModelClient(apiVersion: "1.0.0");
 
 Response response = await client.GetModelAsync();
 
@@ -59,7 +59,7 @@ Console.WriteLine(result.GetProperty("model.kind").ToString());
 ]]></code>
 This sample shows how to call GetModelValueAsync with all parameters.
 <code><![CDATA[
-Model client = new SpecialWordsClient().GetModelClient("1.0.0");
+Model client = new SpecialWordsClient().GetModelClient(apiVersion: "1.0.0");
 
 Response<BaseModel> response = await client.GetModelValueAsync();
 ]]></code></example>
@@ -68,7 +68,7 @@ Response<BaseModel> response = await client.GetModelValueAsync();
       <example>
 This sample shows how to call GetModel and parse the result.
 <code><![CDATA[
-Model client = new SpecialWordsClient().GetModelClient("1.0.0");
+Model client = new SpecialWordsClient().GetModelClient(apiVersion: "1.0.0");
 
 Response response = client.GetModel();
 
@@ -77,13 +77,13 @@ Console.WriteLine(result.GetProperty("model.kind").ToString());
 ]]></code>
 This sample shows how to call GetModelValue.
 <code><![CDATA[
-Model client = new SpecialWordsClient().GetModelClient("1.0.0");
+Model client = new SpecialWordsClient().GetModelClient(apiVersion: "1.0.0");
 
 Response<BaseModel> response = client.GetModelValue();
 ]]></code>
 This sample shows how to call GetModel with all request content and parse the result.
 <code><![CDATA[
-Model client = new SpecialWordsClient().GetModelClient("1.0.0");
+Model client = new SpecialWordsClient().GetModelClient(apiVersion: "1.0.0");
 
 Response response = client.GetModel();
 
@@ -92,7 +92,7 @@ Console.WriteLine(result.GetProperty("model.kind").ToString());
 ]]></code>
 This sample shows how to call GetModelValue with all parameters.
 <code><![CDATA[
-Model client = new SpecialWordsClient().GetModelClient("1.0.0");
+Model client = new SpecialWordsClient().GetModelClient(apiVersion: "1.0.0");
 
 Response<BaseModel> response = client.GetModelValue();
 ]]></code></example>
@@ -101,14 +101,14 @@ Response<BaseModel> response = client.GetModelValue();
       <example>
 This sample shows how to call PutAsync.
 <code><![CDATA[
-Model client = new SpecialWordsClient().GetModelClient("1.0.0");
+Model client = new SpecialWordsClient().GetModelClient(apiVersion: "1.0.0");
 
 BaseModel body = new DerivedModel("<derived.name>", "<for>");
 Response response = await client.PutAsync(body);
 ]]></code>
 This sample shows how to call PutAsync with all parameters.
 <code><![CDATA[
-Model client = new SpecialWordsClient().GetModelClient("1.0.0");
+Model client = new SpecialWordsClient().GetModelClient(apiVersion: "1.0.0");
 
 BaseModel body = new DerivedModel("<derived.name>", "<for>");
 Response response = await client.PutAsync(body);
@@ -118,14 +118,14 @@ Response response = await client.PutAsync(body);
       <example>
 This sample shows how to call Put.
 <code><![CDATA[
-Model client = new SpecialWordsClient().GetModelClient("1.0.0");
+Model client = new SpecialWordsClient().GetModelClient(apiVersion: "1.0.0");
 
 BaseModel body = new DerivedModel("<derived.name>", "<for>");
 Response response = client.Put(body);
 ]]></code>
 This sample shows how to call Put with all parameters.
 <code><![CDATA[
-Model client = new SpecialWordsClient().GetModelClient("1.0.0");
+Model client = new SpecialWordsClient().GetModelClient(apiVersion: "1.0.0");
 
 BaseModel body = new DerivedModel("<derived.name>", "<for>");
 Response response = client.Put(body);
@@ -135,7 +135,7 @@ Response response = client.Put(body);
       <example>
 This sample shows how to call PutAsync.
 <code><![CDATA[
-Model client = new SpecialWordsClient().GetModelClient("1.0.0");
+Model client = new SpecialWordsClient().GetModelClient(apiVersion: "1.0.0");
 
 RequestContent content = RequestContent.Create(new Dictionary<string, object>
 {
@@ -149,14 +149,14 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutAsync.
 <code><![CDATA[
-Model client = new SpecialWordsClient().GetModelClient("1.0.0");
+Model client = new SpecialWordsClient().GetModelClient(apiVersion: "1.0.0");
 
 BaseModel body = new DerivedModel("<derived.name>", "<for>");
 Response response = await client.PutAsync(body);
 ]]></code>
 This sample shows how to call PutAsync with all request content.
 <code><![CDATA[
-Model client = new SpecialWordsClient().GetModelClient("1.0.0");
+Model client = new SpecialWordsClient().GetModelClient(apiVersion: "1.0.0");
 
 RequestContent content = RequestContent.Create(new Dictionary<string, object>
 {
@@ -170,7 +170,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutAsync with all parameters.
 <code><![CDATA[
-Model client = new SpecialWordsClient().GetModelClient("1.0.0");
+Model client = new SpecialWordsClient().GetModelClient(apiVersion: "1.0.0");
 
 BaseModel body = new DerivedModel("<derived.name>", "<for>");
 Response response = await client.PutAsync(body);
@@ -180,7 +180,7 @@ Response response = await client.PutAsync(body);
       <example>
 This sample shows how to call Put.
 <code><![CDATA[
-Model client = new SpecialWordsClient().GetModelClient("1.0.0");
+Model client = new SpecialWordsClient().GetModelClient(apiVersion: "1.0.0");
 
 RequestContent content = RequestContent.Create(new Dictionary<string, object>
 {
@@ -194,14 +194,14 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Put.
 <code><![CDATA[
-Model client = new SpecialWordsClient().GetModelClient("1.0.0");
+Model client = new SpecialWordsClient().GetModelClient(apiVersion: "1.0.0");
 
 BaseModel body = new DerivedModel("<derived.name>", "<for>");
 Response response = client.Put(body);
 ]]></code>
 This sample shows how to call Put with all request content.
 <code><![CDATA[
-Model client = new SpecialWordsClient().GetModelClient("1.0.0");
+Model client = new SpecialWordsClient().GetModelClient(apiVersion: "1.0.0");
 
 RequestContent content = RequestContent.Create(new Dictionary<string, object>
 {
@@ -215,7 +215,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Put with all parameters.
 <code><![CDATA[
-Model client = new SpecialWordsClient().GetModelClient("1.0.0");
+Model client = new SpecialWordsClient().GetModelClient(apiVersion: "1.0.0");
 
 BaseModel body = new DerivedModel("<derived.name>", "<for>");
 Response response = client.Put(body);

@@ -5,13 +5,13 @@
       <example>
 This sample shows how to call GetNonNullAsync.
 <code><![CDATA[
-Duration client = new NullableClient().GetDurationClient("1.0.0");
+Duration client = new NullableClient().GetDurationClient(apiVersion: "1.0.0");
 
 Response<DurationProperty> response = await client.GetNonNullAsync();
 ]]></code>
 This sample shows how to call GetNonNullAsync with all parameters.
 <code><![CDATA[
-Duration client = new NullableClient().GetDurationClient("1.0.0");
+Duration client = new NullableClient().GetDurationClient(apiVersion: "1.0.0");
 
 Response<DurationProperty> response = await client.GetNonNullAsync();
 ]]></code></example>
@@ -20,13 +20,13 @@ Response<DurationProperty> response = await client.GetNonNullAsync();
       <example>
 This sample shows how to call GetNonNull.
 <code><![CDATA[
-Duration client = new NullableClient().GetDurationClient("1.0.0");
+Duration client = new NullableClient().GetDurationClient(apiVersion: "1.0.0");
 
 Response<DurationProperty> response = client.GetNonNull();
 ]]></code>
 This sample shows how to call GetNonNull with all parameters.
 <code><![CDATA[
-Duration client = new NullableClient().GetDurationClient("1.0.0");
+Duration client = new NullableClient().GetDurationClient(apiVersion: "1.0.0");
 
 Response<DurationProperty> response = client.GetNonNull();
 ]]></code></example>
@@ -35,7 +35,7 @@ Response<DurationProperty> response = client.GetNonNull();
       <example>
 This sample shows how to call GetNonNullAsync and parse the result.
 <code><![CDATA[
-Duration client = new NullableClient().GetDurationClient("1.0.0");
+Duration client = new NullableClient().GetDurationClient(apiVersion: "1.0.0");
 
 Response response = await client.GetNonNullAsync(null);
 
@@ -45,13 +45,13 @@ Console.WriteLine(result.GetProperty("nullableProperty").ToString());
 ]]></code>
 This sample shows how to call GetNonNullAsync.
 <code><![CDATA[
-Duration client = new NullableClient().GetDurationClient("1.0.0");
+Duration client = new NullableClient().GetDurationClient(apiVersion: "1.0.0");
 
 Response<DurationProperty> response = await client.GetNonNullAsync();
 ]]></code>
 This sample shows how to call GetNonNullAsync with all parameters and parse the result.
 <code><![CDATA[
-Duration client = new NullableClient().GetDurationClient("1.0.0");
+Duration client = new NullableClient().GetDurationClient(apiVersion: "1.0.0");
 
 Response response = await client.GetNonNullAsync(null);
 
@@ -61,7 +61,7 @@ Console.WriteLine(result.GetProperty("nullableProperty").ToString());
 ]]></code>
 This sample shows how to call GetNonNullAsync with all parameters.
 <code><![CDATA[
-Duration client = new NullableClient().GetDurationClient("1.0.0");
+Duration client = new NullableClient().GetDurationClient(apiVersion: "1.0.0");
 
 Response<DurationProperty> response = await client.GetNonNullAsync();
 ]]></code></example>
@@ -70,7 +70,7 @@ Response<DurationProperty> response = await client.GetNonNullAsync();
       <example>
 This sample shows how to call GetNonNull and parse the result.
 <code><![CDATA[
-Duration client = new NullableClient().GetDurationClient("1.0.0");
+Duration client = new NullableClient().GetDurationClient(apiVersion: "1.0.0");
 
 Response response = client.GetNonNull(null);
 
@@ -80,13 +80,13 @@ Console.WriteLine(result.GetProperty("nullableProperty").ToString());
 ]]></code>
 This sample shows how to call GetNonNull.
 <code><![CDATA[
-Duration client = new NullableClient().GetDurationClient("1.0.0");
+Duration client = new NullableClient().GetDurationClient(apiVersion: "1.0.0");
 
 Response<DurationProperty> response = client.GetNonNull();
 ]]></code>
 This sample shows how to call GetNonNull with all parameters and parse the result.
 <code><![CDATA[
-Duration client = new NullableClient().GetDurationClient("1.0.0");
+Duration client = new NullableClient().GetDurationClient(apiVersion: "1.0.0");
 
 Response response = client.GetNonNull(null);
 
@@ -96,7 +96,7 @@ Console.WriteLine(result.GetProperty("nullableProperty").ToString());
 ]]></code>
 This sample shows how to call GetNonNull with all parameters.
 <code><![CDATA[
-Duration client = new NullableClient().GetDurationClient("1.0.0");
+Duration client = new NullableClient().GetDurationClient(apiVersion: "1.0.0");
 
 Response<DurationProperty> response = client.GetNonNull();
 ]]></code></example>
@@ -105,13 +105,13 @@ Response<DurationProperty> response = client.GetNonNull();
       <example>
 This sample shows how to call GetNullAsync.
 <code><![CDATA[
-Duration client = new NullableClient().GetDurationClient("1.0.0");
+Duration client = new NullableClient().GetDurationClient(apiVersion: "1.0.0");
 
 Response<DurationProperty> response = await client.GetNullAsync();
 ]]></code>
 This sample shows how to call GetNullAsync with all parameters.
 <code><![CDATA[
-Duration client = new NullableClient().GetDurationClient("1.0.0");
+Duration client = new NullableClient().GetDurationClient(apiVersion: "1.0.0");
 
 Response<DurationProperty> response = await client.GetNullAsync();
 ]]></code></example>
@@ -120,13 +120,13 @@ Response<DurationProperty> response = await client.GetNullAsync();
       <example>
 This sample shows how to call GetNull.
 <code><![CDATA[
-Duration client = new NullableClient().GetDurationClient("1.0.0");
+Duration client = new NullableClient().GetDurationClient(apiVersion: "1.0.0");
 
 Response<DurationProperty> response = client.GetNull();
 ]]></code>
 This sample shows how to call GetNull with all parameters.
 <code><![CDATA[
-Duration client = new NullableClient().GetDurationClient("1.0.0");
+Duration client = new NullableClient().GetDurationClient(apiVersion: "1.0.0");
 
 Response<DurationProperty> response = client.GetNull();
 ]]></code></example>
@@ -135,7 +135,7 @@ Response<DurationProperty> response = client.GetNull();
       <example>
 This sample shows how to call GetNullAsync and parse the result.
 <code><![CDATA[
-Duration client = new NullableClient().GetDurationClient("1.0.0");
+Duration client = new NullableClient().GetDurationClient(apiVersion: "1.0.0");
 
 Response response = await client.GetNullAsync(null);
 
@@ -145,13 +145,13 @@ Console.WriteLine(result.GetProperty("nullableProperty").ToString());
 ]]></code>
 This sample shows how to call GetNullAsync.
 <code><![CDATA[
-Duration client = new NullableClient().GetDurationClient("1.0.0");
+Duration client = new NullableClient().GetDurationClient(apiVersion: "1.0.0");
 
 Response<DurationProperty> response = await client.GetNullAsync();
 ]]></code>
 This sample shows how to call GetNullAsync with all parameters and parse the result.
 <code><![CDATA[
-Duration client = new NullableClient().GetDurationClient("1.0.0");
+Duration client = new NullableClient().GetDurationClient(apiVersion: "1.0.0");
 
 Response response = await client.GetNullAsync(null);
 
@@ -161,7 +161,7 @@ Console.WriteLine(result.GetProperty("nullableProperty").ToString());
 ]]></code>
 This sample shows how to call GetNullAsync with all parameters.
 <code><![CDATA[
-Duration client = new NullableClient().GetDurationClient("1.0.0");
+Duration client = new NullableClient().GetDurationClient(apiVersion: "1.0.0");
 
 Response<DurationProperty> response = await client.GetNullAsync();
 ]]></code></example>
@@ -170,7 +170,7 @@ Response<DurationProperty> response = await client.GetNullAsync();
       <example>
 This sample shows how to call GetNull and parse the result.
 <code><![CDATA[
-Duration client = new NullableClient().GetDurationClient("1.0.0");
+Duration client = new NullableClient().GetDurationClient(apiVersion: "1.0.0");
 
 Response response = client.GetNull(null);
 
@@ -180,13 +180,13 @@ Console.WriteLine(result.GetProperty("nullableProperty").ToString());
 ]]></code>
 This sample shows how to call GetNull.
 <code><![CDATA[
-Duration client = new NullableClient().GetDurationClient("1.0.0");
+Duration client = new NullableClient().GetDurationClient(apiVersion: "1.0.0");
 
 Response<DurationProperty> response = client.GetNull();
 ]]></code>
 This sample shows how to call GetNull with all parameters and parse the result.
 <code><![CDATA[
-Duration client = new NullableClient().GetDurationClient("1.0.0");
+Duration client = new NullableClient().GetDurationClient(apiVersion: "1.0.0");
 
 Response response = client.GetNull(null);
 
@@ -196,7 +196,7 @@ Console.WriteLine(result.GetProperty("nullableProperty").ToString());
 ]]></code>
 This sample shows how to call GetNull with all parameters.
 <code><![CDATA[
-Duration client = new NullableClient().GetDurationClient("1.0.0");
+Duration client = new NullableClient().GetDurationClient(apiVersion: "1.0.0");
 
 Response<DurationProperty> response = client.GetNull();
 ]]></code></example>
@@ -205,7 +205,7 @@ Response<DurationProperty> response = client.GetNull();
       <example>
 This sample shows how to call PatchNonNullAsync.
 <code><![CDATA[
-Duration client = new NullableClient().GetDurationClient("1.0.0");
+Duration client = new NullableClient().GetDurationClient(apiVersion: "1.0.0");
 
 RequestContent content = RequestContent.Create(new
 {
@@ -218,7 +218,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PatchNonNullAsync with all request content.
 <code><![CDATA[
-Duration client = new NullableClient().GetDurationClient("1.0.0");
+Duration client = new NullableClient().GetDurationClient(apiVersion: "1.0.0");
 
 RequestContent content = RequestContent.Create(new
 {
@@ -234,7 +234,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call PatchNonNull.
 <code><![CDATA[
-Duration client = new NullableClient().GetDurationClient("1.0.0");
+Duration client = new NullableClient().GetDurationClient(apiVersion: "1.0.0");
 
 RequestContent content = RequestContent.Create(new
 {
@@ -247,7 +247,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PatchNonNull with all request content.
 <code><![CDATA[
-Duration client = new NullableClient().GetDurationClient("1.0.0");
+Duration client = new NullableClient().GetDurationClient(apiVersion: "1.0.0");
 
 RequestContent content = RequestContent.Create(new
 {
@@ -263,7 +263,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call PatchNullAsync.
 <code><![CDATA[
-Duration client = new NullableClient().GetDurationClient("1.0.0");
+Duration client = new NullableClient().GetDurationClient(apiVersion: "1.0.0");
 
 RequestContent content = RequestContent.Create(new
 {
@@ -276,7 +276,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PatchNullAsync with all request content.
 <code><![CDATA[
-Duration client = new NullableClient().GetDurationClient("1.0.0");
+Duration client = new NullableClient().GetDurationClient(apiVersion: "1.0.0");
 
 RequestContent content = RequestContent.Create(new
 {
@@ -292,7 +292,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call PatchNull.
 <code><![CDATA[
-Duration client = new NullableClient().GetDurationClient("1.0.0");
+Duration client = new NullableClient().GetDurationClient(apiVersion: "1.0.0");
 
 RequestContent content = RequestContent.Create(new
 {
@@ -305,7 +305,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PatchNull with all request content.
 <code><![CDATA[
-Duration client = new NullableClient().GetDurationClient("1.0.0");
+Duration client = new NullableClient().GetDurationClient(apiVersion: "1.0.0");
 
 RequestContent content = RequestContent.Create(new
 {

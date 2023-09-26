@@ -587,7 +587,7 @@ detail = "<detail>",
         {
             BasicClient client = new BasicClient();
 
-            foreach (User item in client.GetUsers(1234, 1234, 1234, new string[] { "<orderby>" }, "<filter>", new string[] { "<select>" }, new string[] { "<expand>" }))
+            foreach (User item in client.GetUsers(maxCount: 1234, skip: 1234, maxpagesize: 1234, orderby: new string[] { "<orderby>" }, filter: "<filter>", select: new string[] { "<select>" }, expand: new string[] { "<expand>" }))
             {
             }
         }
@@ -598,7 +598,7 @@ detail = "<detail>",
         {
             BasicClient client = new BasicClient();
 
-            await foreach (User item in client.GetUsersAsync(1234, 1234, 1234, new string[] { "<orderby>" }, "<filter>", new string[] { "<select>" }, new string[] { "<expand>" }))
+            await foreach (User item in client.GetUsersAsync(maxCount: 1234, skip: 1234, maxpagesize: 1234, orderby: new string[] { "<orderby>" }, filter: "<filter>", select: new string[] { "<select>" }, expand: new string[] { "<expand>" }))
             {
             }
         }

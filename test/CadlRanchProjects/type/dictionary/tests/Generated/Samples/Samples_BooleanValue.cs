@@ -23,7 +23,7 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetBooleanValue()
         {
-            BooleanValue client = new DictionaryClient().GetBooleanValueClient("1.0.0");
+            BooleanValue client = new DictionaryClient().GetBooleanValueClient(apiVersion: "1.0.0");
 
             Response response = client.GetBooleanValue(null);
 
@@ -35,7 +35,7 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetBooleanValue_Async()
         {
-            BooleanValue client = new DictionaryClient().GetBooleanValueClient("1.0.0");
+            BooleanValue client = new DictionaryClient().GetBooleanValueClient(apiVersion: "1.0.0");
 
             Response response = await client.GetBooleanValueAsync(null);
 
@@ -47,7 +47,7 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetBooleanValue_Convenience()
         {
-            BooleanValue client = new DictionaryClient().GetBooleanValueClient("1.0.0");
+            BooleanValue client = new DictionaryClient().GetBooleanValueClient(apiVersion: "1.0.0");
 
             Response<IReadOnlyDictionary<string, bool>> response = client.GetBooleanValue();
         }
@@ -56,7 +56,7 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetBooleanValue_Convenience_Async()
         {
-            BooleanValue client = new DictionaryClient().GetBooleanValueClient("1.0.0");
+            BooleanValue client = new DictionaryClient().GetBooleanValueClient(apiVersion: "1.0.0");
 
             Response<IReadOnlyDictionary<string, bool>> response = await client.GetBooleanValueAsync();
         }
@@ -65,7 +65,7 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetBooleanValue_AllParameters()
         {
-            BooleanValue client = new DictionaryClient().GetBooleanValueClient("1.0.0");
+            BooleanValue client = new DictionaryClient().GetBooleanValueClient(apiVersion: "1.0.0");
 
             Response response = client.GetBooleanValue(null);
 
@@ -77,7 +77,7 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetBooleanValue_AllParameters_Async()
         {
-            BooleanValue client = new DictionaryClient().GetBooleanValueClient("1.0.0");
+            BooleanValue client = new DictionaryClient().GetBooleanValueClient(apiVersion: "1.0.0");
 
             Response response = await client.GetBooleanValueAsync(null);
 
@@ -89,7 +89,7 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetBooleanValue_AllParameters_Convenience()
         {
-            BooleanValue client = new DictionaryClient().GetBooleanValueClient("1.0.0");
+            BooleanValue client = new DictionaryClient().GetBooleanValueClient(apiVersion: "1.0.0");
 
             Response<IReadOnlyDictionary<string, bool>> response = client.GetBooleanValue();
         }
@@ -98,7 +98,7 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetBooleanValue_AllParameters_Convenience_Async()
         {
-            BooleanValue client = new DictionaryClient().GetBooleanValueClient("1.0.0");
+            BooleanValue client = new DictionaryClient().GetBooleanValueClient(apiVersion: "1.0.0");
 
             Response<IReadOnlyDictionary<string, bool>> response = await client.GetBooleanValueAsync();
         }
@@ -107,7 +107,7 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Put()
         {
-            BooleanValue client = new DictionaryClient().GetBooleanValueClient("1.0.0");
+            BooleanValue client = new DictionaryClient().GetBooleanValueClient(apiVersion: "1.0.0");
 
             RequestContent content = RequestContent.Create(new
             {
@@ -122,7 +122,7 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Put_Async()
         {
-            BooleanValue client = new DictionaryClient().GetBooleanValueClient("1.0.0");
+            BooleanValue client = new DictionaryClient().GetBooleanValueClient(apiVersion: "1.0.0");
 
             RequestContent content = RequestContent.Create(new
             {
@@ -137,7 +137,7 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Put_Convenience()
         {
-            BooleanValue client = new DictionaryClient().GetBooleanValueClient("1.0.0");
+            BooleanValue client = new DictionaryClient().GetBooleanValueClient(apiVersion: "1.0.0");
 
             Response response = client.Put(new Dictionary<string, bool>
             {
@@ -149,7 +149,7 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Put_Convenience_Async()
         {
-            BooleanValue client = new DictionaryClient().GetBooleanValueClient("1.0.0");
+            BooleanValue client = new DictionaryClient().GetBooleanValueClient(apiVersion: "1.0.0");
 
             Response response = await client.PutAsync(new Dictionary<string, bool>
             {
@@ -161,7 +161,7 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Put_AllParameters()
         {
-            BooleanValue client = new DictionaryClient().GetBooleanValueClient("1.0.0");
+            BooleanValue client = new DictionaryClient().GetBooleanValueClient(apiVersion: "1.0.0");
 
             RequestContent content = RequestContent.Create(new
             {
@@ -176,7 +176,7 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Put_AllParameters_Async()
         {
-            BooleanValue client = new DictionaryClient().GetBooleanValueClient("1.0.0");
+            BooleanValue client = new DictionaryClient().GetBooleanValueClient(apiVersion: "1.0.0");
 
             RequestContent content = RequestContent.Create(new
             {
@@ -191,7 +191,7 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Put_AllParameters_Convenience()
         {
-            BooleanValue client = new DictionaryClient().GetBooleanValueClient("1.0.0");
+            BooleanValue client = new DictionaryClient().GetBooleanValueClient(apiVersion: "1.0.0");
 
             Response response = client.Put(new Dictionary<string, bool>
             {
@@ -203,7 +203,7 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Put_AllParameters_Convenience_Async()
         {
-            BooleanValue client = new DictionaryClient().GetBooleanValueClient("1.0.0");
+            BooleanValue client = new DictionaryClient().GetBooleanValueClient(apiVersion: "1.0.0");
 
             Response response = await client.PutAsync(new Dictionary<string, bool>
             {

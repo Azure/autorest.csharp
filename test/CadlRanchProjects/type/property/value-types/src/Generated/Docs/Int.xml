@@ -5,13 +5,13 @@
       <example>
 This sample shows how to call GetIntAsync.
 <code><![CDATA[
-Int client = new ValueTypesClient().GetIntClient("1.0.0");
+Int client = new ValueTypesClient().GetIntClient(apiVersion: "1.0.0");
 
 Response<IntProperty> response = await client.GetIntAsync();
 ]]></code>
 This sample shows how to call GetIntAsync with all parameters.
 <code><![CDATA[
-Int client = new ValueTypesClient().GetIntClient("1.0.0");
+Int client = new ValueTypesClient().GetIntClient(apiVersion: "1.0.0");
 
 Response<IntProperty> response = await client.GetIntAsync();
 ]]></code></example>
@@ -20,13 +20,13 @@ Response<IntProperty> response = await client.GetIntAsync();
       <example>
 This sample shows how to call GetInt.
 <code><![CDATA[
-Int client = new ValueTypesClient().GetIntClient("1.0.0");
+Int client = new ValueTypesClient().GetIntClient(apiVersion: "1.0.0");
 
 Response<IntProperty> response = client.GetInt();
 ]]></code>
 This sample shows how to call GetInt with all parameters.
 <code><![CDATA[
-Int client = new ValueTypesClient().GetIntClient("1.0.0");
+Int client = new ValueTypesClient().GetIntClient(apiVersion: "1.0.0");
 
 Response<IntProperty> response = client.GetInt();
 ]]></code></example>
@@ -35,7 +35,7 @@ Response<IntProperty> response = client.GetInt();
       <example>
 This sample shows how to call GetIntAsync and parse the result.
 <code><![CDATA[
-Int client = new ValueTypesClient().GetIntClient("1.0.0");
+Int client = new ValueTypesClient().GetIntClient(apiVersion: "1.0.0");
 
 Response response = await client.GetIntAsync(null);
 
@@ -44,13 +44,13 @@ Console.WriteLine(result.GetProperty("property").ToString());
 ]]></code>
 This sample shows how to call GetIntAsync.
 <code><![CDATA[
-Int client = new ValueTypesClient().GetIntClient("1.0.0");
+Int client = new ValueTypesClient().GetIntClient(apiVersion: "1.0.0");
 
 Response<IntProperty> response = await client.GetIntAsync();
 ]]></code>
 This sample shows how to call GetIntAsync with all parameters and parse the result.
 <code><![CDATA[
-Int client = new ValueTypesClient().GetIntClient("1.0.0");
+Int client = new ValueTypesClient().GetIntClient(apiVersion: "1.0.0");
 
 Response response = await client.GetIntAsync(null);
 
@@ -59,7 +59,7 @@ Console.WriteLine(result.GetProperty("property").ToString());
 ]]></code>
 This sample shows how to call GetIntAsync with all parameters.
 <code><![CDATA[
-Int client = new ValueTypesClient().GetIntClient("1.0.0");
+Int client = new ValueTypesClient().GetIntClient(apiVersion: "1.0.0");
 
 Response<IntProperty> response = await client.GetIntAsync();
 ]]></code></example>
@@ -68,7 +68,7 @@ Response<IntProperty> response = await client.GetIntAsync();
       <example>
 This sample shows how to call GetInt and parse the result.
 <code><![CDATA[
-Int client = new ValueTypesClient().GetIntClient("1.0.0");
+Int client = new ValueTypesClient().GetIntClient(apiVersion: "1.0.0");
 
 Response response = client.GetInt(null);
 
@@ -77,13 +77,13 @@ Console.WriteLine(result.GetProperty("property").ToString());
 ]]></code>
 This sample shows how to call GetInt.
 <code><![CDATA[
-Int client = new ValueTypesClient().GetIntClient("1.0.0");
+Int client = new ValueTypesClient().GetIntClient(apiVersion: "1.0.0");
 
 Response<IntProperty> response = client.GetInt();
 ]]></code>
 This sample shows how to call GetInt with all parameters and parse the result.
 <code><![CDATA[
-Int client = new ValueTypesClient().GetIntClient("1.0.0");
+Int client = new ValueTypesClient().GetIntClient(apiVersion: "1.0.0");
 
 Response response = client.GetInt(null);
 
@@ -92,7 +92,7 @@ Console.WriteLine(result.GetProperty("property").ToString());
 ]]></code>
 This sample shows how to call GetInt with all parameters.
 <code><![CDATA[
-Int client = new ValueTypesClient().GetIntClient("1.0.0");
+Int client = new ValueTypesClient().GetIntClient(apiVersion: "1.0.0");
 
 Response<IntProperty> response = client.GetInt();
 ]]></code></example>
@@ -101,14 +101,14 @@ Response<IntProperty> response = client.GetInt();
       <example>
 This sample shows how to call PutAsync.
 <code><![CDATA[
-Int client = new ValueTypesClient().GetIntClient("1.0.0");
+Int client = new ValueTypesClient().GetIntClient(apiVersion: "1.0.0");
 
 IntProperty body = new IntProperty(1234);
 Response response = await client.PutAsync(body);
 ]]></code>
 This sample shows how to call PutAsync with all parameters.
 <code><![CDATA[
-Int client = new ValueTypesClient().GetIntClient("1.0.0");
+Int client = new ValueTypesClient().GetIntClient(apiVersion: "1.0.0");
 
 IntProperty body = new IntProperty(1234);
 Response response = await client.PutAsync(body);
@@ -118,14 +118,14 @@ Response response = await client.PutAsync(body);
       <example>
 This sample shows how to call Put.
 <code><![CDATA[
-Int client = new ValueTypesClient().GetIntClient("1.0.0");
+Int client = new ValueTypesClient().GetIntClient(apiVersion: "1.0.0");
 
 IntProperty body = new IntProperty(1234);
 Response response = client.Put(body);
 ]]></code>
 This sample shows how to call Put with all parameters.
 <code><![CDATA[
-Int client = new ValueTypesClient().GetIntClient("1.0.0");
+Int client = new ValueTypesClient().GetIntClient(apiVersion: "1.0.0");
 
 IntProperty body = new IntProperty(1234);
 Response response = client.Put(body);
@@ -135,7 +135,7 @@ Response response = client.Put(body);
       <example>
 This sample shows how to call PutAsync.
 <code><![CDATA[
-Int client = new ValueTypesClient().GetIntClient("1.0.0");
+Int client = new ValueTypesClient().GetIntClient(apiVersion: "1.0.0");
 
 RequestContent content = RequestContent.Create(new
 {
@@ -147,14 +147,14 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutAsync.
 <code><![CDATA[
-Int client = new ValueTypesClient().GetIntClient("1.0.0");
+Int client = new ValueTypesClient().GetIntClient(apiVersion: "1.0.0");
 
 IntProperty body = new IntProperty(1234);
 Response response = await client.PutAsync(body);
 ]]></code>
 This sample shows how to call PutAsync with all request content.
 <code><![CDATA[
-Int client = new ValueTypesClient().GetIntClient("1.0.0");
+Int client = new ValueTypesClient().GetIntClient(apiVersion: "1.0.0");
 
 RequestContent content = RequestContent.Create(new
 {
@@ -166,7 +166,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutAsync with all parameters.
 <code><![CDATA[
-Int client = new ValueTypesClient().GetIntClient("1.0.0");
+Int client = new ValueTypesClient().GetIntClient(apiVersion: "1.0.0");
 
 IntProperty body = new IntProperty(1234);
 Response response = await client.PutAsync(body);
@@ -176,7 +176,7 @@ Response response = await client.PutAsync(body);
       <example>
 This sample shows how to call Put.
 <code><![CDATA[
-Int client = new ValueTypesClient().GetIntClient("1.0.0");
+Int client = new ValueTypesClient().GetIntClient(apiVersion: "1.0.0");
 
 RequestContent content = RequestContent.Create(new
 {
@@ -188,14 +188,14 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Put.
 <code><![CDATA[
-Int client = new ValueTypesClient().GetIntClient("1.0.0");
+Int client = new ValueTypesClient().GetIntClient(apiVersion: "1.0.0");
 
 IntProperty body = new IntProperty(1234);
 Response response = client.Put(body);
 ]]></code>
 This sample shows how to call Put with all request content.
 <code><![CDATA[
-Int client = new ValueTypesClient().GetIntClient("1.0.0");
+Int client = new ValueTypesClient().GetIntClient(apiVersion: "1.0.0");
 
 RequestContent content = RequestContent.Create(new
 {
@@ -207,7 +207,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Put with all parameters.
 <code><![CDATA[
-Int client = new ValueTypesClient().GetIntClient("1.0.0");
+Int client = new ValueTypesClient().GetIntClient(apiVersion: "1.0.0");
 
 IntProperty body = new IntProperty(1234);
 Response response = client.Put(body);
