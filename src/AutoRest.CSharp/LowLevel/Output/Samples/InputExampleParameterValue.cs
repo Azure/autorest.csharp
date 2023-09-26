@@ -20,7 +20,7 @@ namespace AutoRest.CSharp.Output.Samples.Models
 
         public InputExampleValue? Value { get; }
 
-        public FormattableString? Expression { get; }
+        public FormattableString? Expression { get; } // TODO -- change this to a ValueExpression
 
         private InputExampleParameterValue(string name, CSharpType type)
         {

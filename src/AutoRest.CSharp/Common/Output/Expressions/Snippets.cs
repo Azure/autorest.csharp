@@ -48,8 +48,10 @@ namespace AutoRest.CSharp.Common.Output.Models
                 _ => expression
             };
 
-        public static StringExpression Literal(string? value) => new(value is null ? Null : new LiteralExpression(value, false));
-        public static StringExpression LiteralU8(string value) => new(new LiteralExpression(value, true));
+        public static ValueExpression Literal(object? value) => value is null ? Null : new LiteralExpression(value);
+
+        public static StringExpression Literal(string? value) => new(value is null ? Null : new StringLiteralExpression(value, false));
+        public static StringExpression LiteralU8(string value) => new(new StringLiteralExpression(value, true));
 
         public static BoolExpression Equal(ValueExpression left, ValueExpression right) => new(new BinaryOperatorExpression("==", left, right));
         public static BoolExpression NotEqual(ValueExpression left, ValueExpression right) => new(new BinaryOperatorExpression("!=", left, right));

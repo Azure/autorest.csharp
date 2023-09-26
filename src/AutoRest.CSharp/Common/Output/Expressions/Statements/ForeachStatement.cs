@@ -9,25 +9,25 @@ using AutoRest.CSharp.Generation.Writers;
 
 namespace AutoRest.CSharp.Common.Output.Expressions.Statements
 {
-    internal record ForeachStatement(CodeWriterDeclaration Item, ValueExpression Enumerable, bool IsAsync = false) : MethodBodyStatement, IEnumerable<MethodBodyStatement>
+    internal record ForeachStatement(CSharpType? ItemType, CodeWriterDeclaration Item, ValueExpression Enumerable, bool IsAsync = false, bool UseVarAsItemType = false) : MethodBodyStatement, IEnumerable<MethodBodyStatement>
     {
         private readonly List<MethodBodyStatement> _body = new();
         public IReadOnlyList<MethodBodyStatement> Body => _body;
 
-        public ForeachStatement(string itemName, EnumerableExpression enumerable, out ValueExpression item)
-            : this(new CodeWriterDeclaration(itemName), enumerable)
+        public ForeachStatement(string itemName, EnumerableExpression enumerable, out ValueExpression item, bool useVarAsItemType = false)
+            : this(enumerable.ItemType, new CodeWriterDeclaration(itemName), enumerable, UseVarAsItemType: useVarAsItemType)
         {
             item = new VariableReference(enumerable.ItemType, Item);
         }
 
         public ForeachStatement(string itemName, EnumerableExpression enumerable, bool isAsync, out ValueExpression item)
-            : this(new CodeWriterDeclaration(itemName), enumerable, isAsync)
+            : this(enumerable.ItemType, new CodeWriterDeclaration(itemName), enumerable, isAsync, true)
         {
             item = new VariableReference(enumerable.ItemType, Item);
         }
 
         public ForeachStatement(string itemName, DictionaryExpression dictionary, out KeyValuePairExpression item)
-            : this(new CodeWriterDeclaration(itemName), dictionary)
+            : this(null, new CodeWriterDeclaration(itemName), dictionary) // TODO -- figure out the type here
         {
             item = new KeyValuePairExpression(new VariableReference(dictionary.ValueType, Item));
         }

@@ -9,7 +9,6 @@ using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Output.Models.Shared;
 using Azure.ResourceManager.Models;
 using SwitchExpression = AutoRest.CSharp.Common.Output.Expressions.ValueExpressions.SwitchExpression;
 
@@ -105,7 +104,12 @@ namespace AutoRest.CSharp.Generation.Writers
                     using (writer.AmbientScope())
                     {
                         writer.AppendRawIf("await ", foreachStatement.IsAsync);
-                        writer.Append($"foreach (var {foreachStatement.Item:D} in ");
+                        writer.AppendRaw("foreach (");
+                        if (foreachStatement.ItemType == null || foreachStatement.UseVarAsItemType)
+                            writer.AppendRaw("var ");
+                        else
+                            writer.Append($"{foreachStatement.ItemType} ");
+                        writer.Append($"{foreachStatement.Item:D} in ");
                         writer.WriteValueExpression(foreachStatement.Enumerable);
                         //writer.AppendRawIf(".ConfigureAwait(false)", foreachStatement.IsAsync);
                         writer.LineRaw(")");
@@ -236,6 +240,9 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             switch (expression)
             {
+                case LiteralExpression literalExpression:
+                    writer.Literal(literalExpression.Value);
+                    break;
                 case CastExpression cast:
                     writer.Append($"({cast.Type})");
                     writer.WriteValueExpression(cast.Inner);
@@ -559,10 +566,10 @@ namespace AutoRest.CSharp.Generation.Writers
                         writer.AppendRaw(" ").WriteValueExpression(inner);
                     }
                     break;
-                case LiteralExpression(var literal, true):
+                case StringLiteralExpression(var literal, true):
                     writer.Literal(literal).AppendRaw("u8");
                     break;
-                case LiteralExpression(var literal, false):
+                case StringLiteralExpression(var literal, false):
                     writer.Literal(literal);
                     break;
             }

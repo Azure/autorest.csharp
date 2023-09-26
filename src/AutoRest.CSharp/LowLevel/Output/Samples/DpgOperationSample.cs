@@ -10,7 +10,11 @@ using System.Threading;
 using System.Threading.Tasks;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Input.Examples;
+using AutoRest.CSharp.Common.Output.Expressions.Statements;
+using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
+using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.LowLevel.Extensions;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
@@ -75,6 +79,39 @@ namespace AutoRest.CSharp.Output.Samples.Models
             callChain.Push(client.GetEffectiveCtor()!);
 
             return callChain.ToArray();
+        }
+
+        public IEnumerable<ValueExpression> GetValueExpressionsForParameters(IEnumerable<Parameter> parameters, List<MethodBodyStatement> variableDeclarationStatements)
+        {
+            foreach (var parameter in parameters)
+            {
+                // for some parameters, we will never write them, such as RequestContext/CancellationToken, unless they are required
+                if (IsHiddenParameter(parameter))
+                    continue;
+
+                ValueExpression parameterExpression;
+                if (ParameterValueMapping.TryGetValue(parameter.Name, out var exampleValue))
+                {
+                    parameterExpression = ExampleValueSnippets.GetExpression(exampleValue, parameter.SerializationFormat);
+                }
+                else
+                {
+                    // we should not abuse `default` because it might cause ambigious calls which leads to compilation errors
+                    parameterExpression = parameter.Type.IsValueType && !parameter.Type.IsNullable ? Snippets.Default : Snippets.Null;
+                }
+                if (IsInlineParameter(parameter))
+                {
+                    yield return parameterExpression;
+                }
+                else
+                {
+                    // when it is not inline parameter, we add the declaration of the parameter into the statements, and returns the parameter name reference
+                    var parameterReference = new VariableReference(parameter.Type, parameter.Name);
+                    var declaration = Snippets.Declare(parameterReference, parameterExpression);
+                    variableDeclarationStatements.Add(declaration);
+                    yield return parameterReference; // returns the parameter name reference
+                }
+            }
         }
 
         protected virtual string GetMethodName(bool isAsync)
@@ -286,6 +323,7 @@ namespace AutoRest.CSharp.Output.Samples.Models
             return InputExampleValue.Value(InputPrimitiveType.String, $"<{parameterName}>");
         }
 
+        // TODO -- make this private
         public bool IsInlineParameter(Parameter parameter)
         {
             if (IsSameParameter(parameter, KnownParameters.RequestContent) || IsSameParameter(parameter, KnownParameters.RequestContentNullable))
@@ -304,6 +342,16 @@ namespace AutoRest.CSharp.Output.Samples.Models
                 return false;
 
             return true;
+        }
+
+        private bool IsHiddenParameter(Parameter parameter)
+        {
+            // we could never hide a required parameter
+            if (!parameter.IsOptionalInSignature)
+                return false;
+
+            // we only hide a parameter when it is optional RequestContext or CancellationToken
+            return parameter == KnownParameters.RequestContext || parameter == KnownParameters.CancellationTokenParameter;
         }
 
         private InputExampleValue GetBodyParameterValue()
