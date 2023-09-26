@@ -8,9 +8,9 @@
 using System;
 using System.Collections.Generic;
 using System.ServiceModel.Rest;
+using System.ServiceModel.Rest.Core;
 using System.Text.Json;
 using System.Threading.Tasks;
-using Azure.Core;
 using NUnit.Framework;
 using UnbrandedTypeSpec;
 using UnbrandedTypeSpec.Models;
@@ -215,7 +215,7 @@ namespace UnbrandedTypeSpec.Samples
             KeyCredential credential = new KeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
             {
                 name = "<name>",
                 requiredUnion = "<requiredUnion>",
@@ -228,7 +228,7 @@ namespace UnbrandedTypeSpec.Samples
 {
 1234
 },
-            });
+            }).ToStream());
             Result result = client.PatchAction(content);
 
             JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
@@ -250,7 +250,7 @@ namespace UnbrandedTypeSpec.Samples
             KeyCredential credential = new KeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
             {
                 name = "<name>",
                 requiredUnion = "<requiredUnion>",
@@ -263,7 +263,7 @@ namespace UnbrandedTypeSpec.Samples
 {
 1234
 },
-            });
+            }).ToStream());
             Result result = await client.PatchActionAsync(content);
 
             JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
@@ -285,7 +285,7 @@ namespace UnbrandedTypeSpec.Samples
             KeyCredential credential = new KeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
             {
                 name = "<name>",
                 requiredUnion = "<requiredUnion>",
@@ -306,7 +306,7 @@ namespace UnbrandedTypeSpec.Samples
 {
 1234
 },
-            });
+            }).ToStream());
             Result result = client.PatchAction(content);
 
             JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
@@ -333,7 +333,7 @@ namespace UnbrandedTypeSpec.Samples
             KeyCredential credential = new KeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
             {
                 name = "<name>",
                 requiredUnion = "<requiredUnion>",
@@ -354,7 +354,7 @@ namespace UnbrandedTypeSpec.Samples
 {
 1234
 },
-            });
+            }).ToStream());
             Result result = await client.PatchActionAsync(content);
 
             JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
@@ -381,7 +381,7 @@ namespace UnbrandedTypeSpec.Samples
             KeyCredential credential = new KeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
             {
                 name = "<name>",
                 requiredUnion = "<requiredUnion>",
@@ -394,7 +394,7 @@ namespace UnbrandedTypeSpec.Samples
 {
 1234
 },
-            });
+            }).ToStream());
             Result result = client.AnonymousBody(content);
 
             JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
@@ -416,7 +416,7 @@ namespace UnbrandedTypeSpec.Samples
             KeyCredential credential = new KeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
             {
                 name = "<name>",
                 requiredUnion = "<requiredUnion>",
@@ -429,7 +429,7 @@ namespace UnbrandedTypeSpec.Samples
 {
 1234
 },
-            });
+            }).ToStream());
             Result result = await client.AnonymousBodyAsync(content);
 
             JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
@@ -451,7 +451,7 @@ namespace UnbrandedTypeSpec.Samples
             KeyCredential credential = new KeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
             {
                 name = "<name>",
                 requiredUnion = "<requiredUnion>",
@@ -472,7 +472,7 @@ namespace UnbrandedTypeSpec.Samples
 {
 1234
 },
-            });
+            }).ToStream());
             Result result = client.AnonymousBody(content);
 
             JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
@@ -499,7 +499,7 @@ namespace UnbrandedTypeSpec.Samples
             KeyCredential credential = new KeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
             {
                 name = "<name>",
                 requiredUnion = "<requiredUnion>",
@@ -520,7 +520,7 @@ namespace UnbrandedTypeSpec.Samples
 {
 1234
 },
-            });
+            }).ToStream());
             Result result = await client.AnonymousBodyAsync(content);
 
             JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
@@ -547,10 +547,10 @@ namespace UnbrandedTypeSpec.Samples
             KeyCredential credential = new KeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
             {
                 name = "<name>",
-            });
+            }).ToStream());
             Result result = client.FriendlyModel(content);
 
             JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
@@ -565,10 +565,10 @@ namespace UnbrandedTypeSpec.Samples
             KeyCredential credential = new KeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
             {
                 name = "<name>",
-            });
+            }).ToStream());
             Result result = await client.FriendlyModelAsync(content);
 
             JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
@@ -607,10 +607,10 @@ namespace UnbrandedTypeSpec.Samples
             KeyCredential credential = new KeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
             {
                 name = "<name>",
-            });
+            }).ToStream());
             Result result = client.FriendlyModel(content);
 
             JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
@@ -625,10 +625,10 @@ namespace UnbrandedTypeSpec.Samples
             KeyCredential credential = new KeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
             {
                 name = "<name>",
-            });
+            }).ToStream());
             Result result = await client.FriendlyModelAsync(content);
 
             JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
@@ -715,11 +715,11 @@ namespace UnbrandedTypeSpec.Samples
             KeyCredential credential = new KeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
             {
                 sourceUrl = "http://localhost:3000",
                 guid = "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a",
-            });
+            }).ToStream());
             Result result = client.StringFormat(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), content);
             Console.WriteLine(result.GetRawResponse().Status);
         }
@@ -732,11 +732,11 @@ namespace UnbrandedTypeSpec.Samples
             KeyCredential credential = new KeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
             {
                 sourceUrl = "http://localhost:3000",
                 guid = "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a",
-            });
+            }).ToStream());
             Result result = await client.StringFormatAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), content);
             Console.WriteLine(result.GetRawResponse().Status);
         }
@@ -775,11 +775,11 @@ namespace UnbrandedTypeSpec.Samples
             KeyCredential credential = new KeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
             {
                 sourceUrl = "http://localhost:3000",
                 guid = "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a",
-            });
+            }).ToStream());
             Result result = client.StringFormat(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), content);
             Console.WriteLine(result.GetRawResponse().Status);
         }
@@ -792,11 +792,11 @@ namespace UnbrandedTypeSpec.Samples
             KeyCredential credential = new KeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
             {
                 sourceUrl = "http://localhost:3000",
                 guid = "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a",
-            });
+            }).ToStream());
             Result result = await client.StringFormatAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), content);
             Console.WriteLine(result.GetRawResponse().Status);
         }
@@ -835,10 +835,10 @@ namespace UnbrandedTypeSpec.Samples
             KeyCredential credential = new KeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
             {
                 name = "<name>",
-            });
+            }).ToStream());
             Result result = client.ProjectedNameModel(content);
 
             JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
@@ -853,10 +853,10 @@ namespace UnbrandedTypeSpec.Samples
             KeyCredential credential = new KeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
             {
                 name = "<name>",
-            });
+            }).ToStream());
             Result result = await client.ProjectedNameModelAsync(content);
 
             JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
@@ -895,10 +895,10 @@ namespace UnbrandedTypeSpec.Samples
             KeyCredential credential = new KeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
             {
                 name = "<name>",
-            });
+            }).ToStream());
             Result result = client.ProjectedNameModel(content);
 
             JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
@@ -913,10 +913,10 @@ namespace UnbrandedTypeSpec.Samples
             KeyCredential credential = new KeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
             {
                 name = "<name>",
-            });
+            }).ToStream());
             Result result = await client.ProjectedNameModelAsync(content);
 
             JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
@@ -1149,7 +1149,7 @@ namespace UnbrandedTypeSpec.Samples
             KeyCredential credential = new KeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
             {
                 requiredString = "<requiredString>",
                 requiredInt = 1234,
@@ -1186,7 +1186,7 @@ namespace UnbrandedTypeSpec.Samples
                     requiredExtensibleEnum = "1",
                     requiredFixedEnum = "1",
                 },
-            });
+            }).ToStream());
             Result result = client.HelloAgain("<p2>", "<p1>", content);
 
             JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
@@ -1218,7 +1218,7 @@ namespace UnbrandedTypeSpec.Samples
             KeyCredential credential = new KeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
             {
                 requiredString = "<requiredString>",
                 requiredInt = 1234,
@@ -1255,7 +1255,7 @@ namespace UnbrandedTypeSpec.Samples
                     requiredExtensibleEnum = "1",
                     requiredFixedEnum = "1",
                 },
-            });
+            }).ToStream());
             Result result = await client.HelloAgainAsync("<p2>", "<p1>", content);
 
             JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
@@ -1287,7 +1287,7 @@ namespace UnbrandedTypeSpec.Samples
             KeyCredential credential = new KeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
             {
                 requiredString = "<requiredString>",
                 requiredInt = 1234,
@@ -1358,7 +1358,7 @@ namespace UnbrandedTypeSpec.Samples
                     requiredExtensibleEnum = "1",
                     requiredFixedEnum = "1",
                 },
-            });
+            }).ToStream());
             Result result = client.HelloAgain("<p2>", "<p1>", content);
 
             JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
@@ -1407,7 +1407,7 @@ namespace UnbrandedTypeSpec.Samples
             KeyCredential credential = new KeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
             {
                 requiredString = "<requiredString>",
                 requiredInt = 1234,
@@ -1478,7 +1478,7 @@ namespace UnbrandedTypeSpec.Samples
                     requiredExtensibleEnum = "1",
                     requiredFixedEnum = "1",
                 },
-            });
+            }).ToStream());
             Result result = await client.HelloAgainAsync("<p2>", "<p1>", content);
 
             JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
@@ -1527,7 +1527,7 @@ namespace UnbrandedTypeSpec.Samples
             KeyCredential credential = new KeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
             {
                 requiredString = "<requiredString>",
                 requiredInt = 1234,
@@ -1564,7 +1564,7 @@ namespace UnbrandedTypeSpec.Samples
                     requiredExtensibleEnum = "1",
                     requiredFixedEnum = "1",
                 },
-            });
+            }).ToStream());
             Result result = client.NoContentType("<p2>", "<p1>", content);
 
             JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
@@ -1596,7 +1596,7 @@ namespace UnbrandedTypeSpec.Samples
             KeyCredential credential = new KeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
             {
                 requiredString = "<requiredString>",
                 requiredInt = 1234,
@@ -1633,7 +1633,7 @@ namespace UnbrandedTypeSpec.Samples
                     requiredExtensibleEnum = "1",
                     requiredFixedEnum = "1",
                 },
-            });
+            }).ToStream());
             Result result = await client.NoContentTypeAsync("<p2>", "<p1>", content);
 
             JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
@@ -1665,7 +1665,7 @@ namespace UnbrandedTypeSpec.Samples
             KeyCredential credential = new KeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
             {
                 requiredString = "<requiredString>",
                 requiredInt = 1234,
@@ -1736,7 +1736,7 @@ namespace UnbrandedTypeSpec.Samples
                     requiredExtensibleEnum = "1",
                     requiredFixedEnum = "1",
                 },
-            });
+            }).ToStream());
             Result result = client.NoContentType("<p2>", "<p1>", content);
 
             JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
@@ -1785,7 +1785,7 @@ namespace UnbrandedTypeSpec.Samples
             KeyCredential credential = new KeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
             {
                 requiredString = "<requiredString>",
                 requiredInt = 1234,
@@ -1856,7 +1856,7 @@ namespace UnbrandedTypeSpec.Samples
                     requiredExtensibleEnum = "1",
                     requiredFixedEnum = "1",
                 },
-            });
+            }).ToStream());
             Result result = await client.NoContentTypeAsync("<p2>", "<p1>", content);
 
             JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
@@ -1999,7 +1999,7 @@ namespace UnbrandedTypeSpec.Samples
             KeyCredential credential = new KeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
             {
                 name = "<name>",
                 requiredUnion = "<requiredUnion>",
@@ -2012,7 +2012,7 @@ namespace UnbrandedTypeSpec.Samples
 {
 1234
 },
-            });
+            }).ToStream());
             Result result = client.CreateLiteral(content);
 
             JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
@@ -2034,7 +2034,7 @@ namespace UnbrandedTypeSpec.Samples
             KeyCredential credential = new KeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
             {
                 name = "<name>",
                 requiredUnion = "<requiredUnion>",
@@ -2047,7 +2047,7 @@ namespace UnbrandedTypeSpec.Samples
 {
 1234
 },
-            });
+            }).ToStream());
             Result result = await client.CreateLiteralAsync(content);
 
             JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
@@ -2069,7 +2069,7 @@ namespace UnbrandedTypeSpec.Samples
             KeyCredential credential = new KeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
             {
                 name = "<name>",
                 requiredUnion = "<requiredUnion>",
@@ -2090,7 +2090,7 @@ namespace UnbrandedTypeSpec.Samples
 {
 1234
 },
-            });
+            }).ToStream());
             Result result = client.CreateLiteral(content);
 
             JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
@@ -2117,7 +2117,7 @@ namespace UnbrandedTypeSpec.Samples
             KeyCredential credential = new KeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
             {
                 name = "<name>",
                 requiredUnion = "<requiredUnion>",
@@ -2138,7 +2138,7 @@ namespace UnbrandedTypeSpec.Samples
 {
 1234
 },
-            });
+            }).ToStream());
             Result result = await client.CreateLiteralAsync(content);
 
             JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;

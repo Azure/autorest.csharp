@@ -213,9 +213,9 @@ namespace AutoRest.CSharp.LowLevel.Generation.Extensions
             }
             else
             {
-                return writer.Append($"{Configuration.ApiTypes.RequestContentType}.{Configuration.ApiTypes.RequestContentCreateName}(")
+                return writer.Append($"{Configuration.ApiTypes.RequestContentType}.{Configuration.ApiTypes.RequestContentCreateName}(").AppendIf($"{typeof(BinaryData)}.{nameof(BinaryData.FromObjectAsJson)}(", !Configuration.IsBranded)
                     .AppendFreeFormObject(value, true)
-                    .AppendRaw(")");
+                    .AppendRaw(")").AppendRawIf(".ToStream())", !Configuration.IsBranded);
             }
         }
 

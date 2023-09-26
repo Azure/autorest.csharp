@@ -13,8 +13,8 @@ using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
-using Azure.Core;
-using Azure.Core.Pipeline;
+using Azure.Core.Pipeline; //needed because BearerTokenAuthenticationPolicy doesn't exist in System.ServiceModel.Rest yet
+using RequestBody = System.ServiceModel.Rest.Core.RequestBody;
 
 namespace AutoRest.CSharp.Common.Input
 {
@@ -78,7 +78,6 @@ namespace AutoRest.CSharp.Common.Input
 
         public override FormattableString GetSetContentString(string requestName, string contentName)
             => $"{requestName}.SetContent({contentName});";
-        public override Type RequestContextType => typeof(PipelineOptions);
 
         public override Type RequestContentType => typeof(RequestBody);
         public override string ToRequestContentName => "ToRequestBody";
