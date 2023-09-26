@@ -23,10 +23,15 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             ValidateConfiguration();
             Directory.CreateDirectory(Configuration.OutputFolder);
             var project = await GeneratedCodeWorkspace.Create(Configuration.AbsoluteProjectFolder, Configuration.OutputFolder, Configuration.SharedSourceFolders);
-            // TODO: get previous contract path from configuration
-            var previousContractPath = Path.GetFullPath(Path.Combine(Configuration.AbsoluteProjectFolder, "..", "..", "PreviousContract", Configuration.Namespace));
-            var sourceInputModel = Directory.Exists(previousContractPath)
-                ? new SourceInputModel(await project.GetCompilationAsync(), previousContract: await GeneratedCodeWorkspace.CreateExistingCodeProject(previousContractPath).GetCompilationAsync())
+            //// TODO: get previous contract path from configuration
+            //var previousContractPath = Path.GetFullPath(Path.Combine(Configuration.AbsoluteProjectFolder, "..", "..", "PreviousContract", Configuration.Namespace));
+            var previousContractDllPath = @"C:\netstandard2.0\MgmtCustomizations.dll";
+            var previousContract = await GeneratedCodeWorkspace.CreatePreviousContractFromDll(previousContractDllPath).GetCompilationAsync();
+            var alltypes = previousContract.GlobalNamespace.GetTypeMembers();
+            var custom = (await project.GetCompilationAsync()).Assembly.GlobalNamespace.GetTypeMembers();
+            //var previousContract = GeneratedCodeWorkspace.CreatePreviousContractFromDll(@"C:\netstandard2.0\MgmtCustomizations.dll");
+            var sourceInputModel = File.Exists(previousContractDllPath)
+                ? new SourceInputModel(await project.GetCompilationAsync(), previousContract: await GeneratedCodeWorkspace.CreatePreviousContractFromDll(previousContractDllPath).GetCompilationAsync())
                 : new SourceInputModel(await project.GetCompilationAsync());
 
             if (Configuration.Generation1ConvenienceClient)

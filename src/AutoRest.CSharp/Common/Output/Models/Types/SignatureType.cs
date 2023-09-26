@@ -161,7 +161,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             {
                 return new List<MethodSignature>();
             }
-            var type = compilation.Assembly.GetTypeByMetadataName($"{_defaultNamespace}.{_defaultName}");
+            var type = compilation.GetTypeByMetadataName($"{_defaultNamespace}.{_defaultName}");
             if (type is null)
             {
                 return new List<MethodSignature>();
