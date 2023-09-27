@@ -122,7 +122,7 @@ namespace AutoRest.CSharp.LowLevel.Output.Samples
                  * {}
                  */
                 var itemType = GetPageableItemType(returnType);
-                var foreachStatement = new ForeachStatement(itemType, "item", invocation, out var itemVar, isAsync)
+                var foreachStatement = new ForeachStatement(itemType, "item", invocation, isAsync, out var itemVar)
                 {
                     BuildResponseStatements(sample, itemVar).ToArray()
                 };

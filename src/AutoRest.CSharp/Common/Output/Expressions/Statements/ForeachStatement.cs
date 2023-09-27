@@ -14,7 +14,7 @@ namespace AutoRest.CSharp.Common.Output.Expressions.Statements
         private readonly List<MethodBodyStatement> _body = new();
         public IReadOnlyList<MethodBodyStatement> Body => _body;
 
-        public ForeachStatement(CSharpType itemType, string itemName, ValueExpression enumerable, out VariableReference item, bool isAsync = false, bool useVarAsItemType = false) : this(itemType, new CodeWriterDeclaration(itemName), enumerable, isAsync, useVarAsItemType)
+        public ForeachStatement(CSharpType itemType, string itemName, ValueExpression enumerable, bool isAsync, out VariableReference item, bool useVarAsItemType = false) : this(itemType, new CodeWriterDeclaration(itemName), enumerable, isAsync, useVarAsItemType)
         {
             item = new VariableReference(itemType, Item);
         }
