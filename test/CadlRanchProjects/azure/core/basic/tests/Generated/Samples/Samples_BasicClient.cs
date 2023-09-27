@@ -502,9 +502,9 @@ detail = "<detail>",
             foreach (BinaryData item in client.GetUsers(null, null, null, null, null, null, null, null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("id").ToString());
-                Console.WriteLine(result[0].GetProperty("name").ToString());
-                Console.WriteLine(result[0].GetProperty("etag").ToString());
+                Console.WriteLine(result.GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("name").ToString());
+                Console.WriteLine(result.GetProperty("etag").ToString());
             }
         }
 
@@ -517,9 +517,9 @@ detail = "<detail>",
             await foreach (BinaryData item in client.GetUsersAsync(null, null, null, null, null, null, null, null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("id").ToString());
-                Console.WriteLine(result[0].GetProperty("name").ToString());
-                Console.WriteLine(result[0].GetProperty("etag").ToString());
+                Console.WriteLine(result.GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("name").ToString());
+                Console.WriteLine(result.GetProperty("etag").ToString());
             }
         }
 
@@ -554,12 +554,12 @@ detail = "<detail>",
             foreach (BinaryData item in client.GetUsers(1234, 1234, 1234, new string[] { "<orderby>" }, "<filter>", new string[] { "<select>" }, new string[] { "<expand>" }, null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("id").ToString());
-                Console.WriteLine(result[0].GetProperty("name").ToString());
-                Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("id").ToString());
-                Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("userId").ToString());
-                Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("detail").ToString());
-                Console.WriteLine(result[0].GetProperty("etag").ToString());
+                Console.WriteLine(result.GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("name").ToString());
+                Console.WriteLine(result.GetProperty("orders")[0].GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("orders")[0].GetProperty("userId").ToString());
+                Console.WriteLine(result.GetProperty("orders")[0].GetProperty("detail").ToString());
+                Console.WriteLine(result.GetProperty("etag").ToString());
             }
         }
 
@@ -572,12 +572,12 @@ detail = "<detail>",
             await foreach (BinaryData item in client.GetUsersAsync(1234, 1234, 1234, new string[] { "<orderby>" }, "<filter>", new string[] { "<select>" }, new string[] { "<expand>" }, null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("id").ToString());
-                Console.WriteLine(result[0].GetProperty("name").ToString());
-                Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("id").ToString());
-                Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("userId").ToString());
-                Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("detail").ToString());
-                Console.WriteLine(result[0].GetProperty("etag").ToString());
+                Console.WriteLine(result.GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("name").ToString());
+                Console.WriteLine(result.GetProperty("orders")[0].GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("orders")[0].GetProperty("userId").ToString());
+                Console.WriteLine(result.GetProperty("orders")[0].GetProperty("detail").ToString());
+                Console.WriteLine(result.GetProperty("etag").ToString());
             }
         }
 
@@ -612,9 +612,9 @@ detail = "<detail>",
             foreach (BinaryData item in client.GetWithPage(null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("id").ToString());
-                Console.WriteLine(result[0].GetProperty("name").ToString());
-                Console.WriteLine(result[0].GetProperty("etag").ToString());
+                Console.WriteLine(result.GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("name").ToString());
+                Console.WriteLine(result.GetProperty("etag").ToString());
             }
         }
 
@@ -627,9 +627,9 @@ detail = "<detail>",
             await foreach (BinaryData item in client.GetWithPageAsync(null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("id").ToString());
-                Console.WriteLine(result[0].GetProperty("name").ToString());
-                Console.WriteLine(result[0].GetProperty("etag").ToString());
+                Console.WriteLine(result.GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("name").ToString());
+                Console.WriteLine(result.GetProperty("etag").ToString());
             }
         }
 
@@ -664,12 +664,12 @@ detail = "<detail>",
             foreach (BinaryData item in client.GetWithPage(null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("id").ToString());
-                Console.WriteLine(result[0].GetProperty("name").ToString());
-                Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("id").ToString());
-                Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("userId").ToString());
-                Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("detail").ToString());
-                Console.WriteLine(result[0].GetProperty("etag").ToString());
+                Console.WriteLine(result.GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("name").ToString());
+                Console.WriteLine(result.GetProperty("orders")[0].GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("orders")[0].GetProperty("userId").ToString());
+                Console.WriteLine(result.GetProperty("orders")[0].GetProperty("detail").ToString());
+                Console.WriteLine(result.GetProperty("etag").ToString());
             }
         }
 
@@ -682,12 +682,12 @@ detail = "<detail>",
             await foreach (BinaryData item in client.GetWithPageAsync(null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("id").ToString());
-                Console.WriteLine(result[0].GetProperty("name").ToString());
-                Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("id").ToString());
-                Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("userId").ToString());
-                Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("detail").ToString());
-                Console.WriteLine(result[0].GetProperty("etag").ToString());
+                Console.WriteLine(result.GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("name").ToString());
+                Console.WriteLine(result.GetProperty("orders")[0].GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("orders")[0].GetProperty("userId").ToString());
+                Console.WriteLine(result.GetProperty("orders")[0].GetProperty("detail").ToString());
+                Console.WriteLine(result.GetProperty("etag").ToString());
             }
         }
 
@@ -722,9 +722,9 @@ detail = "<detail>",
             foreach (BinaryData item in client.GetWithCustomPageModel(null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("id").ToString());
-                Console.WriteLine(result[0].GetProperty("name").ToString());
-                Console.WriteLine(result[0].GetProperty("etag").ToString());
+                Console.WriteLine(result.GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("name").ToString());
+                Console.WriteLine(result.GetProperty("etag").ToString());
             }
         }
 
@@ -737,9 +737,9 @@ detail = "<detail>",
             await foreach (BinaryData item in client.GetWithCustomPageModelAsync(null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("id").ToString());
-                Console.WriteLine(result[0].GetProperty("name").ToString());
-                Console.WriteLine(result[0].GetProperty("etag").ToString());
+                Console.WriteLine(result.GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("name").ToString());
+                Console.WriteLine(result.GetProperty("etag").ToString());
             }
         }
 
@@ -774,12 +774,12 @@ detail = "<detail>",
             foreach (BinaryData item in client.GetWithCustomPageModel(null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("id").ToString());
-                Console.WriteLine(result[0].GetProperty("name").ToString());
-                Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("id").ToString());
-                Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("userId").ToString());
-                Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("detail").ToString());
-                Console.WriteLine(result[0].GetProperty("etag").ToString());
+                Console.WriteLine(result.GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("name").ToString());
+                Console.WriteLine(result.GetProperty("orders")[0].GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("orders")[0].GetProperty("userId").ToString());
+                Console.WriteLine(result.GetProperty("orders")[0].GetProperty("detail").ToString());
+                Console.WriteLine(result.GetProperty("etag").ToString());
             }
         }
 
@@ -792,12 +792,12 @@ detail = "<detail>",
             await foreach (BinaryData item in client.GetWithCustomPageModelAsync(null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("id").ToString());
-                Console.WriteLine(result[0].GetProperty("name").ToString());
-                Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("id").ToString());
-                Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("userId").ToString());
-                Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("detail").ToString());
-                Console.WriteLine(result[0].GetProperty("etag").ToString());
+                Console.WriteLine(result.GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("name").ToString());
+                Console.WriteLine(result.GetProperty("orders")[0].GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("orders")[0].GetProperty("userId").ToString());
+                Console.WriteLine(result.GetProperty("orders")[0].GetProperty("detail").ToString());
+                Console.WriteLine(result.GetProperty("etag").ToString());
             }
         }
 

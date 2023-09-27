@@ -315,7 +315,7 @@ namespace Azure.Analytics.Purview.Account.Samples
             foreach (BinaryData item in client.GetCollections(null, null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].ToString());
+                Console.WriteLine(result.ToString());
             }
         }
 
@@ -330,7 +330,7 @@ namespace Azure.Analytics.Purview.Account.Samples
             await foreach (BinaryData item in client.GetCollectionsAsync(null, null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].ToString());
+                Console.WriteLine(result.ToString());
             }
         }
 
@@ -345,18 +345,18 @@ namespace Azure.Analytics.Purview.Account.Samples
             foreach (BinaryData item in client.GetCollections("<skipToken>", null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("collectionProvisioningState").ToString());
-                Console.WriteLine(result[0].GetProperty("description").ToString());
-                Console.WriteLine(result[0].GetProperty("friendlyName").ToString());
-                Console.WriteLine(result[0].GetProperty("name").ToString());
-                Console.WriteLine(result[0].GetProperty("parentCollection").GetProperty("referenceName").ToString());
-                Console.WriteLine(result[0].GetProperty("parentCollection").GetProperty("type").ToString());
-                Console.WriteLine(result[0].GetProperty("systemData").GetProperty("createdAt").ToString());
-                Console.WriteLine(result[0].GetProperty("systemData").GetProperty("createdBy").ToString());
-                Console.WriteLine(result[0].GetProperty("systemData").GetProperty("createdByType").ToString());
-                Console.WriteLine(result[0].GetProperty("systemData").GetProperty("lastModifiedAt").ToString());
-                Console.WriteLine(result[0].GetProperty("systemData").GetProperty("lastModifiedBy").ToString());
-                Console.WriteLine(result[0].GetProperty("systemData").GetProperty("lastModifiedByType").ToString());
+                Console.WriteLine(result.GetProperty("collectionProvisioningState").ToString());
+                Console.WriteLine(result.GetProperty("description").ToString());
+                Console.WriteLine(result.GetProperty("friendlyName").ToString());
+                Console.WriteLine(result.GetProperty("name").ToString());
+                Console.WriteLine(result.GetProperty("parentCollection").GetProperty("referenceName").ToString());
+                Console.WriteLine(result.GetProperty("parentCollection").GetProperty("type").ToString());
+                Console.WriteLine(result.GetProperty("systemData").GetProperty("createdAt").ToString());
+                Console.WriteLine(result.GetProperty("systemData").GetProperty("createdBy").ToString());
+                Console.WriteLine(result.GetProperty("systemData").GetProperty("createdByType").ToString());
+                Console.WriteLine(result.GetProperty("systemData").GetProperty("lastModifiedAt").ToString());
+                Console.WriteLine(result.GetProperty("systemData").GetProperty("lastModifiedBy").ToString());
+                Console.WriteLine(result.GetProperty("systemData").GetProperty("lastModifiedByType").ToString());
             }
         }
 
@@ -371,18 +371,18 @@ namespace Azure.Analytics.Purview.Account.Samples
             await foreach (BinaryData item in client.GetCollectionsAsync("<skipToken>", null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("collectionProvisioningState").ToString());
-                Console.WriteLine(result[0].GetProperty("description").ToString());
-                Console.WriteLine(result[0].GetProperty("friendlyName").ToString());
-                Console.WriteLine(result[0].GetProperty("name").ToString());
-                Console.WriteLine(result[0].GetProperty("parentCollection").GetProperty("referenceName").ToString());
-                Console.WriteLine(result[0].GetProperty("parentCollection").GetProperty("type").ToString());
-                Console.WriteLine(result[0].GetProperty("systemData").GetProperty("createdAt").ToString());
-                Console.WriteLine(result[0].GetProperty("systemData").GetProperty("createdBy").ToString());
-                Console.WriteLine(result[0].GetProperty("systemData").GetProperty("createdByType").ToString());
-                Console.WriteLine(result[0].GetProperty("systemData").GetProperty("lastModifiedAt").ToString());
-                Console.WriteLine(result[0].GetProperty("systemData").GetProperty("lastModifiedBy").ToString());
-                Console.WriteLine(result[0].GetProperty("systemData").GetProperty("lastModifiedByType").ToString());
+                Console.WriteLine(result.GetProperty("collectionProvisioningState").ToString());
+                Console.WriteLine(result.GetProperty("description").ToString());
+                Console.WriteLine(result.GetProperty("friendlyName").ToString());
+                Console.WriteLine(result.GetProperty("name").ToString());
+                Console.WriteLine(result.GetProperty("parentCollection").GetProperty("referenceName").ToString());
+                Console.WriteLine(result.GetProperty("parentCollection").GetProperty("type").ToString());
+                Console.WriteLine(result.GetProperty("systemData").GetProperty("createdAt").ToString());
+                Console.WriteLine(result.GetProperty("systemData").GetProperty("createdBy").ToString());
+                Console.WriteLine(result.GetProperty("systemData").GetProperty("createdByType").ToString());
+                Console.WriteLine(result.GetProperty("systemData").GetProperty("lastModifiedAt").ToString());
+                Console.WriteLine(result.GetProperty("systemData").GetProperty("lastModifiedBy").ToString());
+                Console.WriteLine(result.GetProperty("systemData").GetProperty("lastModifiedByType").ToString());
             }
         }
 
@@ -397,7 +397,7 @@ namespace Azure.Analytics.Purview.Account.Samples
             foreach (BinaryData item in client.GetChildCollectionNames(null, null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].ToString());
+                Console.WriteLine(result.ToString());
             }
         }
 
@@ -412,7 +412,7 @@ namespace Azure.Analytics.Purview.Account.Samples
             await foreach (BinaryData item in client.GetChildCollectionNamesAsync(null, null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].ToString());
+                Console.WriteLine(result.ToString());
             }
         }
 
@@ -427,8 +427,8 @@ namespace Azure.Analytics.Purview.Account.Samples
             foreach (BinaryData item in client.GetChildCollectionNames("<skipToken>", null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("friendlyName").ToString());
-                Console.WriteLine(result[0].GetProperty("name").ToString());
+                Console.WriteLine(result.GetProperty("friendlyName").ToString());
+                Console.WriteLine(result.GetProperty("name").ToString());
             }
         }
 
@@ -443,8 +443,8 @@ namespace Azure.Analytics.Purview.Account.Samples
             await foreach (BinaryData item in client.GetChildCollectionNamesAsync("<skipToken>", null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("friendlyName").ToString());
-                Console.WriteLine(result[0].GetProperty("name").ToString());
+                Console.WriteLine(result.GetProperty("friendlyName").ToString());
+                Console.WriteLine(result.GetProperty("name").ToString());
             }
         }
     }

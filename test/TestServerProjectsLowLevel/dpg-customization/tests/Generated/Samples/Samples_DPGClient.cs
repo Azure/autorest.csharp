@@ -148,7 +148,7 @@ namespace dpg_customization_LowLevel.Samples
             foreach (BinaryData item in client.GetPages("<mode>", null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("received").ToString());
+                Console.WriteLine(result.GetProperty("received").ToString());
             }
         }
 
@@ -162,7 +162,7 @@ namespace dpg_customization_LowLevel.Samples
             await foreach (BinaryData item in client.GetPagesAsync("<mode>", null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("received").ToString());
+                Console.WriteLine(result.GetProperty("received").ToString());
             }
         }
 
@@ -176,7 +176,7 @@ namespace dpg_customization_LowLevel.Samples
             foreach (BinaryData item in client.GetPages("<mode>", null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("received").ToString());
+                Console.WriteLine(result.GetProperty("received").ToString());
             }
         }
 
@@ -190,7 +190,7 @@ namespace dpg_customization_LowLevel.Samples
             await foreach (BinaryData item in client.GetPagesAsync("<mode>", null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("received").ToString());
+                Console.WriteLine(result.GetProperty("received").ToString());
             }
         }
 

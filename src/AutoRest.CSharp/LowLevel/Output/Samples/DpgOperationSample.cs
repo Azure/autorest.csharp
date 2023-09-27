@@ -396,7 +396,7 @@ namespace AutoRest.CSharp.Output.Samples.Models
             var pagingItemName = _method.PagingInfo.ItemName;
             var listResultType = responseType as InputModelType;
             var itemsArrayProperty = listResultType?.Properties.FirstOrDefault(p => p.SerializedName == pagingItemName && p.Type is InputListType);
-            return itemsArrayProperty?.Type as InputListType;
+            return (itemsArrayProperty?.Type as InputListType)?.ElementType;
         }
 
         // TODO -- this needs a refactor when we consolidate things around customization code https://github.com/Azure/autorest.csharp/issues/3370

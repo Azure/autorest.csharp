@@ -1754,9 +1754,9 @@ new VariableValues("<variable>", new string[]{"<timestamps>"}, new float[]{123.4
             foreach (BinaryData item in client.GetMultivariateModels(null, null, null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("modelId").ToString());
-                Console.WriteLine(result[0].GetProperty("createdTime").ToString());
-                Console.WriteLine(result[0].GetProperty("lastUpdatedTime").ToString());
+                Console.WriteLine(result.GetProperty("modelId").ToString());
+                Console.WriteLine(result.GetProperty("createdTime").ToString());
+                Console.WriteLine(result.GetProperty("lastUpdatedTime").ToString());
             }
         }
 
@@ -1771,9 +1771,9 @@ new VariableValues("<variable>", new string[]{"<timestamps>"}, new float[]{123.4
             await foreach (BinaryData item in client.GetMultivariateModelsAsync(null, null, null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("modelId").ToString());
-                Console.WriteLine(result[0].GetProperty("createdTime").ToString());
-                Console.WriteLine(result[0].GetProperty("lastUpdatedTime").ToString());
+                Console.WriteLine(result.GetProperty("modelId").ToString());
+                Console.WriteLine(result.GetProperty("createdTime").ToString());
+                Console.WriteLine(result.GetProperty("lastUpdatedTime").ToString());
             }
         }
 
@@ -1814,30 +1814,30 @@ new VariableValues("<variable>", new string[]{"<timestamps>"}, new float[]{123.4
             foreach (BinaryData item in client.GetMultivariateModels(1234, 1234, null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("modelId").ToString());
-                Console.WriteLine(result[0].GetProperty("createdTime").ToString());
-                Console.WriteLine(result[0].GetProperty("lastUpdatedTime").ToString());
-                Console.WriteLine(result[0].GetProperty("modelInfo").GetProperty("dataSource").ToString());
-                Console.WriteLine(result[0].GetProperty("modelInfo").GetProperty("dataSchema").ToString());
-                Console.WriteLine(result[0].GetProperty("modelInfo").GetProperty("startTime").ToString());
-                Console.WriteLine(result[0].GetProperty("modelInfo").GetProperty("endTime").ToString());
-                Console.WriteLine(result[0].GetProperty("modelInfo").GetProperty("displayName").ToString());
-                Console.WriteLine(result[0].GetProperty("modelInfo").GetProperty("slidingWindow").ToString());
-                Console.WriteLine(result[0].GetProperty("modelInfo").GetProperty("alignPolicy").GetProperty("alignMode").ToString());
-                Console.WriteLine(result[0].GetProperty("modelInfo").GetProperty("alignPolicy").GetProperty("fillNAMethod").ToString());
-                Console.WriteLine(result[0].GetProperty("modelInfo").GetProperty("alignPolicy").GetProperty("paddingValue").ToString());
-                Console.WriteLine(result[0].GetProperty("modelInfo").GetProperty("status").ToString());
-                Console.WriteLine(result[0].GetProperty("modelInfo").GetProperty("errors")[0].GetProperty("code").ToString());
-                Console.WriteLine(result[0].GetProperty("modelInfo").GetProperty("errors")[0].GetProperty("message").ToString());
-                Console.WriteLine(result[0].GetProperty("modelInfo").GetProperty("diagnosticsInfo").GetProperty("modelState").GetProperty("epochIds")[0].ToString());
-                Console.WriteLine(result[0].GetProperty("modelInfo").GetProperty("diagnosticsInfo").GetProperty("modelState").GetProperty("trainLosses")[0].ToString());
-                Console.WriteLine(result[0].GetProperty("modelInfo").GetProperty("diagnosticsInfo").GetProperty("modelState").GetProperty("validationLosses")[0].ToString());
-                Console.WriteLine(result[0].GetProperty("modelInfo").GetProperty("diagnosticsInfo").GetProperty("modelState").GetProperty("latenciesInSeconds")[0].ToString());
-                Console.WriteLine(result[0].GetProperty("modelInfo").GetProperty("diagnosticsInfo").GetProperty("variableStates")[0].GetProperty("variable").ToString());
-                Console.WriteLine(result[0].GetProperty("modelInfo").GetProperty("diagnosticsInfo").GetProperty("variableStates")[0].GetProperty("filledNARatio").ToString());
-                Console.WriteLine(result[0].GetProperty("modelInfo").GetProperty("diagnosticsInfo").GetProperty("variableStates")[0].GetProperty("effectiveCount").ToString());
-                Console.WriteLine(result[0].GetProperty("modelInfo").GetProperty("diagnosticsInfo").GetProperty("variableStates")[0].GetProperty("firstTimestamp").ToString());
-                Console.WriteLine(result[0].GetProperty("modelInfo").GetProperty("diagnosticsInfo").GetProperty("variableStates")[0].GetProperty("lastTimestamp").ToString());
+                Console.WriteLine(result.GetProperty("modelId").ToString());
+                Console.WriteLine(result.GetProperty("createdTime").ToString());
+                Console.WriteLine(result.GetProperty("lastUpdatedTime").ToString());
+                Console.WriteLine(result.GetProperty("modelInfo").GetProperty("dataSource").ToString());
+                Console.WriteLine(result.GetProperty("modelInfo").GetProperty("dataSchema").ToString());
+                Console.WriteLine(result.GetProperty("modelInfo").GetProperty("startTime").ToString());
+                Console.WriteLine(result.GetProperty("modelInfo").GetProperty("endTime").ToString());
+                Console.WriteLine(result.GetProperty("modelInfo").GetProperty("displayName").ToString());
+                Console.WriteLine(result.GetProperty("modelInfo").GetProperty("slidingWindow").ToString());
+                Console.WriteLine(result.GetProperty("modelInfo").GetProperty("alignPolicy").GetProperty("alignMode").ToString());
+                Console.WriteLine(result.GetProperty("modelInfo").GetProperty("alignPolicy").GetProperty("fillNAMethod").ToString());
+                Console.WriteLine(result.GetProperty("modelInfo").GetProperty("alignPolicy").GetProperty("paddingValue").ToString());
+                Console.WriteLine(result.GetProperty("modelInfo").GetProperty("status").ToString());
+                Console.WriteLine(result.GetProperty("modelInfo").GetProperty("errors")[0].GetProperty("code").ToString());
+                Console.WriteLine(result.GetProperty("modelInfo").GetProperty("errors")[0].GetProperty("message").ToString());
+                Console.WriteLine(result.GetProperty("modelInfo").GetProperty("diagnosticsInfo").GetProperty("modelState").GetProperty("epochIds")[0].ToString());
+                Console.WriteLine(result.GetProperty("modelInfo").GetProperty("diagnosticsInfo").GetProperty("modelState").GetProperty("trainLosses")[0].ToString());
+                Console.WriteLine(result.GetProperty("modelInfo").GetProperty("diagnosticsInfo").GetProperty("modelState").GetProperty("validationLosses")[0].ToString());
+                Console.WriteLine(result.GetProperty("modelInfo").GetProperty("diagnosticsInfo").GetProperty("modelState").GetProperty("latenciesInSeconds")[0].ToString());
+                Console.WriteLine(result.GetProperty("modelInfo").GetProperty("diagnosticsInfo").GetProperty("variableStates")[0].GetProperty("variable").ToString());
+                Console.WriteLine(result.GetProperty("modelInfo").GetProperty("diagnosticsInfo").GetProperty("variableStates")[0].GetProperty("filledNARatio").ToString());
+                Console.WriteLine(result.GetProperty("modelInfo").GetProperty("diagnosticsInfo").GetProperty("variableStates")[0].GetProperty("effectiveCount").ToString());
+                Console.WriteLine(result.GetProperty("modelInfo").GetProperty("diagnosticsInfo").GetProperty("variableStates")[0].GetProperty("firstTimestamp").ToString());
+                Console.WriteLine(result.GetProperty("modelInfo").GetProperty("diagnosticsInfo").GetProperty("variableStates")[0].GetProperty("lastTimestamp").ToString());
             }
         }
 
@@ -1852,30 +1852,30 @@ new VariableValues("<variable>", new string[]{"<timestamps>"}, new float[]{123.4
             await foreach (BinaryData item in client.GetMultivariateModelsAsync(1234, 1234, null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("modelId").ToString());
-                Console.WriteLine(result[0].GetProperty("createdTime").ToString());
-                Console.WriteLine(result[0].GetProperty("lastUpdatedTime").ToString());
-                Console.WriteLine(result[0].GetProperty("modelInfo").GetProperty("dataSource").ToString());
-                Console.WriteLine(result[0].GetProperty("modelInfo").GetProperty("dataSchema").ToString());
-                Console.WriteLine(result[0].GetProperty("modelInfo").GetProperty("startTime").ToString());
-                Console.WriteLine(result[0].GetProperty("modelInfo").GetProperty("endTime").ToString());
-                Console.WriteLine(result[0].GetProperty("modelInfo").GetProperty("displayName").ToString());
-                Console.WriteLine(result[0].GetProperty("modelInfo").GetProperty("slidingWindow").ToString());
-                Console.WriteLine(result[0].GetProperty("modelInfo").GetProperty("alignPolicy").GetProperty("alignMode").ToString());
-                Console.WriteLine(result[0].GetProperty("modelInfo").GetProperty("alignPolicy").GetProperty("fillNAMethod").ToString());
-                Console.WriteLine(result[0].GetProperty("modelInfo").GetProperty("alignPolicy").GetProperty("paddingValue").ToString());
-                Console.WriteLine(result[0].GetProperty("modelInfo").GetProperty("status").ToString());
-                Console.WriteLine(result[0].GetProperty("modelInfo").GetProperty("errors")[0].GetProperty("code").ToString());
-                Console.WriteLine(result[0].GetProperty("modelInfo").GetProperty("errors")[0].GetProperty("message").ToString());
-                Console.WriteLine(result[0].GetProperty("modelInfo").GetProperty("diagnosticsInfo").GetProperty("modelState").GetProperty("epochIds")[0].ToString());
-                Console.WriteLine(result[0].GetProperty("modelInfo").GetProperty("diagnosticsInfo").GetProperty("modelState").GetProperty("trainLosses")[0].ToString());
-                Console.WriteLine(result[0].GetProperty("modelInfo").GetProperty("diagnosticsInfo").GetProperty("modelState").GetProperty("validationLosses")[0].ToString());
-                Console.WriteLine(result[0].GetProperty("modelInfo").GetProperty("diagnosticsInfo").GetProperty("modelState").GetProperty("latenciesInSeconds")[0].ToString());
-                Console.WriteLine(result[0].GetProperty("modelInfo").GetProperty("diagnosticsInfo").GetProperty("variableStates")[0].GetProperty("variable").ToString());
-                Console.WriteLine(result[0].GetProperty("modelInfo").GetProperty("diagnosticsInfo").GetProperty("variableStates")[0].GetProperty("filledNARatio").ToString());
-                Console.WriteLine(result[0].GetProperty("modelInfo").GetProperty("diagnosticsInfo").GetProperty("variableStates")[0].GetProperty("effectiveCount").ToString());
-                Console.WriteLine(result[0].GetProperty("modelInfo").GetProperty("diagnosticsInfo").GetProperty("variableStates")[0].GetProperty("firstTimestamp").ToString());
-                Console.WriteLine(result[0].GetProperty("modelInfo").GetProperty("diagnosticsInfo").GetProperty("variableStates")[0].GetProperty("lastTimestamp").ToString());
+                Console.WriteLine(result.GetProperty("modelId").ToString());
+                Console.WriteLine(result.GetProperty("createdTime").ToString());
+                Console.WriteLine(result.GetProperty("lastUpdatedTime").ToString());
+                Console.WriteLine(result.GetProperty("modelInfo").GetProperty("dataSource").ToString());
+                Console.WriteLine(result.GetProperty("modelInfo").GetProperty("dataSchema").ToString());
+                Console.WriteLine(result.GetProperty("modelInfo").GetProperty("startTime").ToString());
+                Console.WriteLine(result.GetProperty("modelInfo").GetProperty("endTime").ToString());
+                Console.WriteLine(result.GetProperty("modelInfo").GetProperty("displayName").ToString());
+                Console.WriteLine(result.GetProperty("modelInfo").GetProperty("slidingWindow").ToString());
+                Console.WriteLine(result.GetProperty("modelInfo").GetProperty("alignPolicy").GetProperty("alignMode").ToString());
+                Console.WriteLine(result.GetProperty("modelInfo").GetProperty("alignPolicy").GetProperty("fillNAMethod").ToString());
+                Console.WriteLine(result.GetProperty("modelInfo").GetProperty("alignPolicy").GetProperty("paddingValue").ToString());
+                Console.WriteLine(result.GetProperty("modelInfo").GetProperty("status").ToString());
+                Console.WriteLine(result.GetProperty("modelInfo").GetProperty("errors")[0].GetProperty("code").ToString());
+                Console.WriteLine(result.GetProperty("modelInfo").GetProperty("errors")[0].GetProperty("message").ToString());
+                Console.WriteLine(result.GetProperty("modelInfo").GetProperty("diagnosticsInfo").GetProperty("modelState").GetProperty("epochIds")[0].ToString());
+                Console.WriteLine(result.GetProperty("modelInfo").GetProperty("diagnosticsInfo").GetProperty("modelState").GetProperty("trainLosses")[0].ToString());
+                Console.WriteLine(result.GetProperty("modelInfo").GetProperty("diagnosticsInfo").GetProperty("modelState").GetProperty("validationLosses")[0].ToString());
+                Console.WriteLine(result.GetProperty("modelInfo").GetProperty("diagnosticsInfo").GetProperty("modelState").GetProperty("latenciesInSeconds")[0].ToString());
+                Console.WriteLine(result.GetProperty("modelInfo").GetProperty("diagnosticsInfo").GetProperty("variableStates")[0].GetProperty("variable").ToString());
+                Console.WriteLine(result.GetProperty("modelInfo").GetProperty("diagnosticsInfo").GetProperty("variableStates")[0].GetProperty("filledNARatio").ToString());
+                Console.WriteLine(result.GetProperty("modelInfo").GetProperty("diagnosticsInfo").GetProperty("variableStates")[0].GetProperty("effectiveCount").ToString());
+                Console.WriteLine(result.GetProperty("modelInfo").GetProperty("diagnosticsInfo").GetProperty("variableStates")[0].GetProperty("firstTimestamp").ToString());
+                Console.WriteLine(result.GetProperty("modelInfo").GetProperty("diagnosticsInfo").GetProperty("variableStates")[0].GetProperty("lastTimestamp").ToString());
             }
         }
 

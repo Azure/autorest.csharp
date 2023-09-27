@@ -27,7 +27,7 @@ namespace custom_baseUrl_paging_LowLevel.Samples
             foreach (BinaryData item in client.GetPagesPartialUrl("<accountName>", null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].ToString());
+                Console.WriteLine(result.ToString());
             }
         }
 
@@ -41,7 +41,7 @@ namespace custom_baseUrl_paging_LowLevel.Samples
             await foreach (BinaryData item in client.GetPagesPartialUrlAsync("<accountName>", null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].ToString());
+                Console.WriteLine(result.ToString());
             }
         }
 
@@ -55,8 +55,8 @@ namespace custom_baseUrl_paging_LowLevel.Samples
             foreach (BinaryData item in client.GetPagesPartialUrl("<accountName>", null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("properties").GetProperty("id").ToString());
-                Console.WriteLine(result[0].GetProperty("properties").GetProperty("name").ToString());
+                Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
             }
         }
 
@@ -70,8 +70,8 @@ namespace custom_baseUrl_paging_LowLevel.Samples
             await foreach (BinaryData item in client.GetPagesPartialUrlAsync("<accountName>", null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("properties").GetProperty("id").ToString());
-                Console.WriteLine(result[0].GetProperty("properties").GetProperty("name").ToString());
+                Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
             }
         }
 
@@ -85,7 +85,7 @@ namespace custom_baseUrl_paging_LowLevel.Samples
             foreach (BinaryData item in client.GetPagesPartialUrlOperation("<accountName>", null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].ToString());
+                Console.WriteLine(result.ToString());
             }
         }
 
@@ -99,7 +99,7 @@ namespace custom_baseUrl_paging_LowLevel.Samples
             await foreach (BinaryData item in client.GetPagesPartialUrlOperationAsync("<accountName>", null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].ToString());
+                Console.WriteLine(result.ToString());
             }
         }
 
@@ -113,8 +113,8 @@ namespace custom_baseUrl_paging_LowLevel.Samples
             foreach (BinaryData item in client.GetPagesPartialUrlOperation("<accountName>", null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("properties").GetProperty("id").ToString());
-                Console.WriteLine(result[0].GetProperty("properties").GetProperty("name").ToString());
+                Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
             }
         }
 
@@ -128,8 +128,8 @@ namespace custom_baseUrl_paging_LowLevel.Samples
             await foreach (BinaryData item in client.GetPagesPartialUrlOperationAsync("<accountName>", null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("properties").GetProperty("id").ToString());
-                Console.WriteLine(result[0].GetProperty("properties").GetProperty("name").ToString());
+                Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
             }
         }
 
@@ -143,7 +143,7 @@ namespace custom_baseUrl_paging_LowLevel.Samples
             foreach (BinaryData item in client.GetPagesPartialUrlOperationNext("<accountName>", "<nextLink>", null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].ToString());
+                Console.WriteLine(result.ToString());
             }
         }
 
@@ -157,7 +157,7 @@ namespace custom_baseUrl_paging_LowLevel.Samples
             await foreach (BinaryData item in client.GetPagesPartialUrlOperationNextAsync("<accountName>", "<nextLink>", null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].ToString());
+                Console.WriteLine(result.ToString());
             }
         }
 
@@ -171,8 +171,8 @@ namespace custom_baseUrl_paging_LowLevel.Samples
             foreach (BinaryData item in client.GetPagesPartialUrlOperationNext("<accountName>", "<nextLink>", null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("properties").GetProperty("id").ToString());
-                Console.WriteLine(result[0].GetProperty("properties").GetProperty("name").ToString());
+                Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
             }
         }
 
@@ -186,8 +186,8 @@ namespace custom_baseUrl_paging_LowLevel.Samples
             await foreach (BinaryData item in client.GetPagesPartialUrlOperationNextAsync("<accountName>", "<nextLink>", null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("properties").GetProperty("id").ToString());
-                Console.WriteLine(result[0].GetProperty("properties").GetProperty("name").ToString());
+                Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
             }
         }
     }
