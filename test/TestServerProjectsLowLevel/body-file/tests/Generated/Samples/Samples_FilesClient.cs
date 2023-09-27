@@ -27,10 +27,8 @@ namespace body_file_LowLevel.Samples
 
             if (response.ContentStream != null)
             {
-                using (Stream outFileStream = File.OpenWrite("<filepath>"))
-                {
-                    response.ContentStream.CopyTo(outFileStream);
-                }
+                using Stream outFileStream = File.OpenWrite("<filepath>");
+                response.ContentStream.CopyTo(outFileStream);
             }
         }
 
@@ -45,10 +43,8 @@ namespace body_file_LowLevel.Samples
 
             if (response.ContentStream != null)
             {
-                using (Stream outFileStream = File.OpenWrite("<filepath>"))
-                {
-                    response.ContentStream.CopyTo(outFileStream);
-                }
+                using Stream outFileStream = File.OpenWrite("<filepath>");
+                response.ContentStream.CopyTo(outFileStream);
             }
         }
 
@@ -63,10 +59,8 @@ namespace body_file_LowLevel.Samples
 
             if (response.ContentStream != null)
             {
-                using (Stream outFileStream = File.OpenWrite("<filepath>"))
-                {
-                    response.ContentStream.CopyTo(outFileStream);
-                }
+                using Stream outFileStream = File.OpenWrite("<filepath>");
+                response.ContentStream.CopyTo(outFileStream);
             }
         }
 
@@ -81,10 +75,8 @@ namespace body_file_LowLevel.Samples
 
             if (response.ContentStream != null)
             {
-                using (Stream outFileStream = File.OpenWrite("<filepath>"))
-                {
-                    response.ContentStream.CopyTo(outFileStream);
-                }
+                using Stream outFileStream = File.OpenWrite("<filepath>");
+                response.ContentStream.CopyTo(outFileStream);
             }
         }
 
@@ -99,10 +91,8 @@ namespace body_file_LowLevel.Samples
 
             if (response.ContentStream != null)
             {
-                using (Stream outFileStream = File.OpenWrite("<filepath>"))
-                {
-                    response.ContentStream.CopyTo(outFileStream);
-                }
+                using Stream outFileStream = File.OpenWrite("<filepath>");
+                response.ContentStream.CopyTo(outFileStream);
             }
         }
 
@@ -117,10 +107,8 @@ namespace body_file_LowLevel.Samples
 
             if (response.ContentStream != null)
             {
-                using (Stream outFileStream = File.OpenWrite("<filepath>"))
-                {
-                    response.ContentStream.CopyTo(outFileStream);
-                }
+                using Stream outFileStream = File.OpenWrite("<filepath>");
+                response.ContentStream.CopyTo(outFileStream);
             }
         }
 
@@ -135,10 +123,8 @@ namespace body_file_LowLevel.Samples
 
             if (response.ContentStream != null)
             {
-                using (Stream outFileStream = File.OpenWrite("<filepath>"))
-                {
-                    response.ContentStream.CopyTo(outFileStream);
-                }
+                using Stream outFileStream = File.OpenWrite("<filepath>");
+                response.ContentStream.CopyTo(outFileStream);
             }
         }
 
@@ -153,10 +139,8 @@ namespace body_file_LowLevel.Samples
 
             if (response.ContentStream != null)
             {
-                using (Stream outFileStream = File.OpenWrite("<filepath>"))
-                {
-                    response.ContentStream.CopyTo(outFileStream);
-                }
+                using Stream outFileStream = File.OpenWrite("<filepath>");
+                response.ContentStream.CopyTo(outFileStream);
             }
         }
 
@@ -171,10 +155,8 @@ namespace body_file_LowLevel.Samples
 
             if (response.ContentStream != null)
             {
-                using (Stream outFileStream = File.OpenWrite("<filepath>"))
-                {
-                    response.ContentStream.CopyTo(outFileStream);
-                }
+                using Stream outFileStream = File.OpenWrite("<filepath>");
+                response.ContentStream.CopyTo(outFileStream);
             }
         }
 
@@ -189,10 +171,8 @@ namespace body_file_LowLevel.Samples
 
             if (response.ContentStream != null)
             {
-                using (Stream outFileStream = File.OpenWrite("<filepath>"))
-                {
-                    response.ContentStream.CopyTo(outFileStream);
-                }
+                using Stream outFileStream = File.OpenWrite("<filepath>");
+                response.ContentStream.CopyTo(outFileStream);
             }
         }
 
@@ -207,10 +187,8 @@ namespace body_file_LowLevel.Samples
 
             if (response.ContentStream != null)
             {
-                using (Stream outFileStream = File.OpenWrite("<filepath>"))
-                {
-                    response.ContentStream.CopyTo(outFileStream);
-                }
+                using Stream outFileStream = File.OpenWrite("<filepath>");
+                response.ContentStream.CopyTo(outFileStream);
             }
         }
 
@@ -225,10 +203,8 @@ namespace body_file_LowLevel.Samples
 
             if (response.ContentStream != null)
             {
-                using (Stream outFileStream = File.OpenWrite("<filepath>"))
-                {
-                    response.ContentStream.CopyTo(outFileStream);
-                }
+                using Stream outFileStream = File.OpenWrite("<filepath>");
+                response.ContentStream.CopyTo(outFileStream);
             }
         }
     }
