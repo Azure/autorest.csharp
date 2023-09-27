@@ -21,7 +21,7 @@ namespace _Type.Property.ValueTypes.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetUnknownString()
+        public void Example_GetUnknownString_ShortVersion()
         {
             UnknownString client = new ValueTypesClient().GetUnknownStringClient(apiVersion: "1.0.0");
 
@@ -33,7 +33,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetUnknownString_Async()
+        public async Task Example_GetUnknownString_ShortVersion_Async()
         {
             UnknownString client = new ValueTypesClient().GetUnknownStringClient(apiVersion: "1.0.0");
 
@@ -45,7 +45,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetUnknownString_Convenience()
+        public void Example_GetUnknownString_ShortVersion_Convenience()
         {
             UnknownString client = new ValueTypesClient().GetUnknownStringClient(apiVersion: "1.0.0");
 
@@ -54,7 +54,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetUnknownString_Convenience_Async()
+        public async Task Example_GetUnknownString_ShortVersion_Convenience_Async()
         {
             UnknownString client = new ValueTypesClient().GetUnknownStringClient(apiVersion: "1.0.0");
 
@@ -105,7 +105,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put()
+        public void Example_Put_ShortVersion()
         {
             UnknownString client = new ValueTypesClient().GetUnknownStringClient(apiVersion: "1.0.0");
 
@@ -119,7 +119,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_Async()
+        public async Task Example_Put_ShortVersion_Async()
         {
             UnknownString client = new ValueTypesClient().GetUnknownStringClient(apiVersion: "1.0.0");
 
@@ -133,7 +133,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put_Convenience()
+        public void Example_Put_ShortVersion_Convenience()
         {
             UnknownString client = new ValueTypesClient().GetUnknownStringClient(apiVersion: "1.0.0");
 
@@ -144,7 +144,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_Convenience_Async()
+        public async Task Example_Put_ShortVersion_Convenience_Async()
         {
             UnknownString client = new ValueTypesClient().GetUnknownStringClient(apiVersion: "1.0.0");
 

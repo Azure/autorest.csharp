@@ -19,7 +19,7 @@ namespace Accessibility_LowLevel_NoAuth.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Operation()
+        public void Example_Operation_ShortVersion()
         {
             AccessibilityClient client = new AccessibilityClient();
 
@@ -30,7 +30,7 @@ namespace Accessibility_LowLevel_NoAuth.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Operation_Async()
+        public async Task Example_Operation_ShortVersion_Async()
         {
             AccessibilityClient client = new AccessibilityClient();
 

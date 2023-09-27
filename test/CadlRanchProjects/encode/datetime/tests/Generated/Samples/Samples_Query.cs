@@ -19,7 +19,7 @@ namespace Encode.Datetime.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Default()
+        public void Example_Default_ShortVersion()
         {
             Query client = new DatetimeClient().GetQueryClient(apiVersion: "1.0.0");
 
@@ -29,7 +29,7 @@ namespace Encode.Datetime.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Default_Async()
+        public async Task Example_Default_ShortVersion_Async()
         {
             Query client = new DatetimeClient().GetQueryClient(apiVersion: "1.0.0");
 
@@ -59,7 +59,7 @@ namespace Encode.Datetime.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Rfc3339()
+        public void Example_Rfc3339_ShortVersion()
         {
             Query client = new DatetimeClient().GetQueryClient(apiVersion: "1.0.0");
 
@@ -69,7 +69,7 @@ namespace Encode.Datetime.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Rfc3339_Async()
+        public async Task Example_Rfc3339_ShortVersion_Async()
         {
             Query client = new DatetimeClient().GetQueryClient(apiVersion: "1.0.0");
 
@@ -99,7 +99,7 @@ namespace Encode.Datetime.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Rfc7231()
+        public void Example_Rfc7231_ShortVersion()
         {
             Query client = new DatetimeClient().GetQueryClient(apiVersion: "1.0.0");
 
@@ -109,7 +109,7 @@ namespace Encode.Datetime.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Rfc7231_Async()
+        public async Task Example_Rfc7231_ShortVersion_Async()
         {
             Query client = new DatetimeClient().GetQueryClient(apiVersion: "1.0.0");
 
@@ -139,7 +139,7 @@ namespace Encode.Datetime.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_UnixTimestamp()
+        public void Example_UnixTimestamp_ShortVersion()
         {
             Query client = new DatetimeClient().GetQueryClient(apiVersion: "1.0.0");
 
@@ -149,7 +149,7 @@ namespace Encode.Datetime.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_UnixTimestamp_Async()
+        public async Task Example_UnixTimestamp_ShortVersion_Async()
         {
             Query client = new DatetimeClient().GetQueryClient(apiVersion: "1.0.0");
 
@@ -179,7 +179,7 @@ namespace Encode.Datetime.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_UnixTimestampArray()
+        public void Example_UnixTimestampArray_ShortVersion()
         {
             Query client = new DatetimeClient().GetQueryClient(apiVersion: "1.0.0");
 
@@ -192,7 +192,7 @@ DateTimeOffset.FromUnixTimeSeconds(1652209051)
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_UnixTimestampArray_Async()
+        public async Task Example_UnixTimestampArray_ShortVersion_Async()
         {
             Query client = new DatetimeClient().GetQueryClient(apiVersion: "1.0.0");
 

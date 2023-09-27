@@ -20,7 +20,7 @@ namespace MixApiVersion.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Delete()
+        public void Example_Delete_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             MixApiVersionClient client = new MixApiVersionClient(endpoint);
@@ -31,7 +31,7 @@ namespace MixApiVersion.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Delete_Async()
+        public async Task Example_Delete_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             MixApiVersionClient client = new MixApiVersionClient(endpoint);
@@ -64,7 +64,7 @@ namespace MixApiVersion.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Read()
+        public void Example_Read_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             MixApiVersionClient client = new MixApiVersionClient(endpoint);
@@ -78,7 +78,7 @@ namespace MixApiVersion.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Read_Async()
+        public async Task Example_Read_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             MixApiVersionClient client = new MixApiVersionClient(endpoint);
@@ -122,7 +122,7 @@ namespace MixApiVersion.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Create()
+        public void Example_Create_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             MixApiVersionClient client = new MixApiVersionClient(endpoint);
@@ -140,7 +140,7 @@ namespace MixApiVersion.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Create_Async()
+        public async Task Example_Create_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             MixApiVersionClient client = new MixApiVersionClient(endpoint);
@@ -198,7 +198,7 @@ namespace MixApiVersion.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetPets()
+        public void Example_GetPets_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             MixApiVersionClient client = new MixApiVersionClient(endpoint);
@@ -214,7 +214,7 @@ namespace MixApiVersion.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetPets_Async()
+        public async Task Example_GetPets_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             MixApiVersionClient client = new MixApiVersionClient(endpoint);

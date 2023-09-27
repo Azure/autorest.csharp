@@ -20,7 +20,7 @@ namespace Projection.ProjectedName.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Json()
+        public void Example_Json_ShortVersion()
         {
             Property client = new ProjectedNameClient().GetPropertyClient();
 
@@ -34,7 +34,7 @@ namespace Projection.ProjectedName.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Json_Async()
+        public async Task Example_Json_ShortVersion_Async()
         {
             Property client = new ProjectedNameClient().GetPropertyClient();
 
@@ -48,7 +48,7 @@ namespace Projection.ProjectedName.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Json_Convenience()
+        public void Example_Json_ShortVersion_Convenience()
         {
             Property client = new ProjectedNameClient().GetPropertyClient();
 
@@ -59,7 +59,7 @@ namespace Projection.ProjectedName.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Json_Convenience_Async()
+        public async Task Example_Json_ShortVersion_Convenience_Async()
         {
             Property client = new ProjectedNameClient().GetPropertyClient();
 
@@ -120,7 +120,7 @@ namespace Projection.ProjectedName.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Client()
+        public void Example_Client_ShortVersion()
         {
             Property client = new ProjectedNameClient().GetPropertyClient();
 
@@ -134,7 +134,7 @@ namespace Projection.ProjectedName.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Client_Async()
+        public async Task Example_Client_ShortVersion_Async()
         {
             Property client = new ProjectedNameClient().GetPropertyClient();
 
@@ -148,7 +148,7 @@ namespace Projection.ProjectedName.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Client_Convenience()
+        public void Example_Client_ShortVersion_Convenience()
         {
             Property client = new ProjectedNameClient().GetPropertyClient();
 
@@ -159,7 +159,7 @@ namespace Projection.ProjectedName.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Client_Convenience_Async()
+        public async Task Example_Client_ShortVersion_Convenience_Async()
         {
             Property client = new ProjectedNameClient().GetPropertyClient();
 
@@ -220,7 +220,7 @@ namespace Projection.ProjectedName.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Language()
+        public void Example_Language_ShortVersion()
         {
             Property client = new ProjectedNameClient().GetPropertyClient();
 
@@ -234,7 +234,7 @@ namespace Projection.ProjectedName.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Language_Async()
+        public async Task Example_Language_ShortVersion_Async()
         {
             Property client = new ProjectedNameClient().GetPropertyClient();
 
@@ -248,7 +248,7 @@ namespace Projection.ProjectedName.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Language_Convenience()
+        public void Example_Language_ShortVersion_Convenience()
         {
             Property client = new ProjectedNameClient().GetPropertyClient();
 
@@ -259,7 +259,7 @@ namespace Projection.ProjectedName.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Language_Convenience_Async()
+        public async Task Example_Language_ShortVersion_Convenience_Async()
         {
             Property client = new ProjectedNameClient().GetPropertyClient();
 
@@ -320,7 +320,7 @@ namespace Projection.ProjectedName.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_JsonAndClient()
+        public void Example_JsonAndClient_ShortVersion()
         {
             Property client = new ProjectedNameClient().GetPropertyClient();
 
@@ -334,7 +334,7 @@ namespace Projection.ProjectedName.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_JsonAndClient_Async()
+        public async Task Example_JsonAndClient_ShortVersion_Async()
         {
             Property client = new ProjectedNameClient().GetPropertyClient();
 
@@ -348,7 +348,7 @@ namespace Projection.ProjectedName.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_JsonAndClient_Convenience()
+        public void Example_JsonAndClient_ShortVersion_Convenience()
         {
             Property client = new ProjectedNameClient().GetPropertyClient();
 
@@ -359,7 +359,7 @@ namespace Projection.ProjectedName.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_JsonAndClient_Convenience_Async()
+        public async Task Example_JsonAndClient_ShortVersion_Convenience_Async()
         {
             Property client = new ProjectedNameClient().GetPropertyClient();
 

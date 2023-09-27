@@ -22,7 +22,7 @@ namespace _Specs_.Azure.Core.Basic.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_CreateOrUpdate()
+        public void Example_CreateOrUpdate_ShortVersion()
         {
             BasicClient client = new BasicClient();
 
@@ -40,7 +40,7 @@ namespace _Specs_.Azure.Core.Basic.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_CreateOrUpdate_Async()
+        public async Task Example_CreateOrUpdate_ShortVersion_Async()
         {
             BasicClient client = new BasicClient();
 
@@ -116,7 +116,7 @@ detail = "<detail>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_CreateOrReplace()
+        public void Example_CreateOrReplace_ShortVersion()
         {
             BasicClient client = new BasicClient();
 
@@ -134,7 +134,7 @@ detail = "<detail>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_CreateOrReplace_Async()
+        public async Task Example_CreateOrReplace_ShortVersion_Async()
         {
             BasicClient client = new BasicClient();
 
@@ -152,7 +152,7 @@ detail = "<detail>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_CreateOrReplace_Convenience()
+        public void Example_CreateOrReplace_ShortVersion_Convenience()
         {
             BasicClient client = new BasicClient();
 
@@ -162,7 +162,7 @@ detail = "<detail>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_CreateOrReplace_Convenience_Async()
+        public async Task Example_CreateOrReplace_ShortVersion_Convenience_Async()
         {
             BasicClient client = new BasicClient();
 
@@ -262,7 +262,7 @@ new UserOrder(1234,"<detail>")
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetUser()
+        public void Example_GetUser_ShortVersion()
         {
             BasicClient client = new BasicClient();
 
@@ -276,7 +276,7 @@ new UserOrder(1234,"<detail>")
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetUser_Async()
+        public async Task Example_GetUser_ShortVersion_Async()
         {
             BasicClient client = new BasicClient();
 
@@ -290,7 +290,7 @@ new UserOrder(1234,"<detail>")
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetUser_Convenience()
+        public void Example_GetUser_ShortVersion_Convenience()
         {
             BasicClient client = new BasicClient();
 
@@ -299,7 +299,7 @@ new UserOrder(1234,"<detail>")
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetUser_Convenience_Async()
+        public async Task Example_GetUser_ShortVersion_Convenience_Async()
         {
             BasicClient client = new BasicClient();
 
@@ -360,7 +360,7 @@ new UserOrder(1234,"<detail>")
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Delete()
+        public void Example_Delete_ShortVersion()
         {
             BasicClient client = new BasicClient();
 
@@ -370,7 +370,7 @@ new UserOrder(1234,"<detail>")
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Delete_Async()
+        public async Task Example_Delete_ShortVersion_Async()
         {
             BasicClient client = new BasicClient();
 
@@ -400,7 +400,7 @@ new UserOrder(1234,"<detail>")
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Export()
+        public void Example_Export_ShortVersion()
         {
             BasicClient client = new BasicClient();
 
@@ -414,7 +414,7 @@ new UserOrder(1234,"<detail>")
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Export_Async()
+        public async Task Example_Export_ShortVersion_Async()
         {
             BasicClient client = new BasicClient();
 
@@ -428,7 +428,7 @@ new UserOrder(1234,"<detail>")
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Export_Convenience()
+        public void Example_Export_ShortVersion_Convenience()
         {
             BasicClient client = new BasicClient();
 
@@ -437,7 +437,7 @@ new UserOrder(1234,"<detail>")
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Export_Convenience_Async()
+        public async Task Example_Export_ShortVersion_Convenience_Async()
         {
             BasicClient client = new BasicClient();
 
@@ -498,7 +498,7 @@ new UserOrder(1234,"<detail>")
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetUsers()
+        public void Example_GetUsers_ShortVersion()
         {
             BasicClient client = new BasicClient();
 
@@ -513,7 +513,7 @@ new UserOrder(1234,"<detail>")
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetUsers_Async()
+        public async Task Example_GetUsers_ShortVersion_Async()
         {
             BasicClient client = new BasicClient();
 
@@ -528,7 +528,7 @@ new UserOrder(1234,"<detail>")
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetUsers_Convenience()
+        public void Example_GetUsers_ShortVersion_Convenience()
         {
             BasicClient client = new BasicClient();
 
@@ -539,7 +539,7 @@ new UserOrder(1234,"<detail>")
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetUsers_Convenience_Async()
+        public async Task Example_GetUsers_ShortVersion_Convenience_Async()
         {
             BasicClient client = new BasicClient();
 
@@ -644,7 +644,7 @@ new UserOrder(1234,"<detail>")
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetWithPage()
+        public void Example_GetWithPage_ShortVersion()
         {
             BasicClient client = new BasicClient();
 
@@ -659,7 +659,7 @@ new UserOrder(1234,"<detail>")
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetWithPage_Async()
+        public async Task Example_GetWithPage_ShortVersion_Async()
         {
             BasicClient client = new BasicClient();
 
@@ -674,7 +674,7 @@ new UserOrder(1234,"<detail>")
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetWithPage_Convenience()
+        public void Example_GetWithPage_ShortVersion_Convenience()
         {
             BasicClient client = new BasicClient();
 
@@ -685,7 +685,7 @@ new UserOrder(1234,"<detail>")
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetWithPage_Convenience_Async()
+        public async Task Example_GetWithPage_ShortVersion_Convenience_Async()
         {
             BasicClient client = new BasicClient();
 
@@ -754,7 +754,7 @@ new UserOrder(1234,"<detail>")
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetWithCustomPageModel()
+        public void Example_GetWithCustomPageModel_ShortVersion()
         {
             BasicClient client = new BasicClient();
 
@@ -769,7 +769,7 @@ new UserOrder(1234,"<detail>")
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetWithCustomPageModel_Async()
+        public async Task Example_GetWithCustomPageModel_ShortVersion_Async()
         {
             BasicClient client = new BasicClient();
 
@@ -784,7 +784,7 @@ new UserOrder(1234,"<detail>")
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetWithCustomPageModel_Convenience()
+        public void Example_GetWithCustomPageModel_ShortVersion_Convenience()
         {
             BasicClient client = new BasicClient();
 
@@ -795,7 +795,7 @@ new UserOrder(1234,"<detail>")
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetWithCustomPageModel_Convenience_Async()
+        public async Task Example_GetWithCustomPageModel_ShortVersion_Convenience_Async()
         {
             BasicClient client = new BasicClient();
 

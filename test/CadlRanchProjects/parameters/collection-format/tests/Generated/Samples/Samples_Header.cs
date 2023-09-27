@@ -19,7 +19,7 @@ namespace Parameters.CollectionFormat.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Csv()
+        public void Example_Csv_ShortVersion()
         {
             Header client = new CollectionFormatClient().GetHeaderClient(apiVersion: "1.0.0");
 
@@ -32,7 +32,7 @@ namespace Parameters.CollectionFormat.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Csv_Async()
+        public async Task Example_Csv_ShortVersion_Async()
         {
             Header client = new CollectionFormatClient().GetHeaderClient(apiVersion: "1.0.0");
 

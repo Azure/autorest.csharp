@@ -18,7 +18,7 @@ namespace ServiceVersionOverride_LowLevel.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Operation()
+        public void Example_Operation_ShortVersion()
         {
             ServiceVersionOverrideClient client = new ServiceVersionOverrideClient();
 
@@ -28,7 +28,7 @@ namespace ServiceVersionOverride_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Operation_Async()
+        public async Task Example_Operation_ShortVersion_Async()
         {
             ServiceVersionOverrideClient client = new ServiceVersionOverrideClient();
 

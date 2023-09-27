@@ -20,7 +20,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Public()
+        public void Example_Public_ShortVersion()
         {
             SharedModelInOperation client = new AccessClient().GetSharedModelInOperationClient(apiVersion: "1.0.0");
 
@@ -32,7 +32,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Public_Async()
+        public async Task Example_Public_ShortVersion_Async()
         {
             SharedModelInOperation client = new AccessClient().GetSharedModelInOperationClient(apiVersion: "1.0.0");
 
@@ -44,7 +44,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Public_Convenience()
+        public void Example_Public_ShortVersion_Convenience()
         {
             SharedModelInOperation client = new AccessClient().GetSharedModelInOperationClient(apiVersion: "1.0.0");
 
@@ -53,7 +53,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Public_Convenience_Async()
+        public async Task Example_Public_ShortVersion_Convenience_Async()
         {
             SharedModelInOperation client = new AccessClient().GetSharedModelInOperationClient(apiVersion: "1.0.0");
 

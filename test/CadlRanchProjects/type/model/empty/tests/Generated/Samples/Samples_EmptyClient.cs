@@ -20,7 +20,7 @@ namespace _Type.Model.Empty.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutEmpty()
+        public void Example_PutEmpty_ShortVersion()
         {
             EmptyClient client = new EmptyClient();
 
@@ -31,7 +31,7 @@ namespace _Type.Model.Empty.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutEmpty_Async()
+        public async Task Example_PutEmpty_ShortVersion_Async()
         {
             EmptyClient client = new EmptyClient();
 
@@ -42,7 +42,7 @@ namespace _Type.Model.Empty.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutEmpty_Convenience()
+        public void Example_PutEmpty_ShortVersion_Convenience()
         {
             EmptyClient client = new EmptyClient();
 
@@ -53,7 +53,7 @@ namespace _Type.Model.Empty.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutEmpty_Convenience_Async()
+        public async Task Example_PutEmpty_ShortVersion_Convenience_Async()
         {
             EmptyClient client = new EmptyClient();
 
@@ -108,7 +108,7 @@ namespace _Type.Model.Empty.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetEmpty()
+        public void Example_GetEmpty_ShortVersion()
         {
             EmptyClient client = new EmptyClient();
 
@@ -119,7 +119,7 @@ namespace _Type.Model.Empty.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetEmpty_Async()
+        public async Task Example_GetEmpty_ShortVersion_Async()
         {
             EmptyClient client = new EmptyClient();
 
@@ -130,7 +130,7 @@ namespace _Type.Model.Empty.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetEmpty_Convenience()
+        public void Example_GetEmpty_ShortVersion_Convenience()
         {
             EmptyClient client = new EmptyClient();
 
@@ -139,7 +139,7 @@ namespace _Type.Model.Empty.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetEmpty_Convenience_Async()
+        public async Task Example_GetEmpty_ShortVersion_Convenience_Async()
         {
             EmptyClient client = new EmptyClient();
 
@@ -188,7 +188,7 @@ namespace _Type.Model.Empty.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PostRoundTripEmpty()
+        public void Example_PostRoundTripEmpty_ShortVersion()
         {
             EmptyClient client = new EmptyClient();
 
@@ -200,7 +200,7 @@ namespace _Type.Model.Empty.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PostRoundTripEmpty_Async()
+        public async Task Example_PostRoundTripEmpty_ShortVersion_Async()
         {
             EmptyClient client = new EmptyClient();
 
@@ -212,7 +212,7 @@ namespace _Type.Model.Empty.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PostRoundTripEmpty_Convenience()
+        public void Example_PostRoundTripEmpty_ShortVersion_Convenience()
         {
             EmptyClient client = new EmptyClient();
 
@@ -222,7 +222,7 @@ namespace _Type.Model.Empty.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PostRoundTripEmpty_Convenience_Async()
+        public async Task Example_PostRoundTripEmpty_ShortVersion_Convenience_Async()
         {
             EmptyClient client = new EmptyClient();
 

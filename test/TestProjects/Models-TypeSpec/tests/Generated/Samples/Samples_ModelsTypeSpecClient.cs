@@ -22,7 +22,7 @@ namespace ModelsTypeSpec.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetOutputDiscriminatorModel()
+        public void Example_GetOutputDiscriminatorModel_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
@@ -35,7 +35,7 @@ namespace ModelsTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetOutputDiscriminatorModel_Async()
+        public async Task Example_GetOutputDiscriminatorModel_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
@@ -48,7 +48,7 @@ namespace ModelsTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetOutputDiscriminatorModel_Convenience()
+        public void Example_GetOutputDiscriminatorModel_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
@@ -58,7 +58,7 @@ namespace ModelsTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetOutputDiscriminatorModel_Convenience_Async()
+        public async Task Example_GetOutputDiscriminatorModel_ShortVersion_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
@@ -114,7 +114,7 @@ namespace ModelsTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_InputToRoundTrip()
+        public void Example_InputToRoundTrip_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
@@ -199,7 +199,7 @@ null
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_InputToRoundTrip_Async()
+        public async Task Example_InputToRoundTrip_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
@@ -284,7 +284,7 @@ null
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_InputToRoundTrip_Convenience()
+        public void Example_InputToRoundTrip_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
@@ -328,7 +328,7 @@ null
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_InputToRoundTrip_Convenience_Async()
+        public async Task Example_InputToRoundTrip_ShortVersion_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
@@ -762,7 +762,7 @@ null
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_InputToRoundTripPrimitive()
+        public void Example_InputToRoundTripPrimitive_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
@@ -839,7 +839,7 @@ null
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_InputToRoundTripPrimitive_Async()
+        public async Task Example_InputToRoundTripPrimitive_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
@@ -916,7 +916,7 @@ null
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_InputToRoundTripPrimitive_Convenience()
+        public void Example_InputToRoundTripPrimitive_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
@@ -960,7 +960,7 @@ null
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_InputToRoundTripPrimitive_Convenience_Async()
+        public async Task Example_InputToRoundTripPrimitive_ShortVersion_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
@@ -1354,7 +1354,7 @@ null
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_InputToRoundTripOptional()
+        public void Example_InputToRoundTripOptional_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
@@ -1368,7 +1368,7 @@ null
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_InputToRoundTripOptional_Async()
+        public async Task Example_InputToRoundTripOptional_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
@@ -1382,7 +1382,7 @@ null
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_InputToRoundTripOptional_Convenience()
+        public void Example_InputToRoundTripOptional_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
@@ -1393,7 +1393,7 @@ null
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_InputToRoundTripOptional_Convenience_Async()
+        public async Task Example_InputToRoundTripOptional_ShortVersion_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
@@ -1700,7 +1700,7 @@ null
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_RoundTripToOutput()
+        public void Example_RoundTripToOutput_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
@@ -1775,7 +1775,7 @@ null
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_RoundTripToOutput_Async()
+        public async Task Example_RoundTripToOutput_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
@@ -1850,7 +1850,7 @@ null
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_RoundTripToOutput_Convenience()
+        public void Example_RoundTripToOutput_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
@@ -1891,7 +1891,7 @@ null
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_RoundTripToOutput_Convenience_Async()
+        public async Task Example_RoundTripToOutput_ShortVersion_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
@@ -2264,7 +2264,7 @@ null
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_InputRecursive()
+        public void Example_InputRecursive_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
@@ -2279,7 +2279,7 @@ null
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_InputRecursive_Async()
+        public async Task Example_InputRecursive_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
@@ -2294,7 +2294,7 @@ null
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_InputRecursive_Convenience()
+        public void Example_InputRecursive_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
@@ -2306,7 +2306,7 @@ null
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_InputRecursive_Convenience_Async()
+        public async Task Example_InputRecursive_ShortVersion_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
@@ -2378,7 +2378,7 @@ null
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_RoundTripRecursive()
+        public void Example_RoundTripRecursive_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
@@ -2395,7 +2395,7 @@ null
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_RoundTripRecursive_Async()
+        public async Task Example_RoundTripRecursive_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
@@ -2412,7 +2412,7 @@ null
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_RoundTripRecursive_Convenience()
+        public void Example_RoundTripRecursive_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
@@ -2423,7 +2423,7 @@ null
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_RoundTripRecursive_Convenience_Async()
+        public async Task Example_RoundTripRecursive_ShortVersion_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
@@ -2498,7 +2498,7 @@ null
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_SelfReference()
+        public void Example_SelfReference_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
@@ -2511,7 +2511,7 @@ null
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_SelfReference_Async()
+        public async Task Example_SelfReference_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
@@ -2524,7 +2524,7 @@ null
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_SelfReference_Convenience()
+        public void Example_SelfReference_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
@@ -2534,7 +2534,7 @@ null
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_SelfReference_Convenience_Async()
+        public async Task Example_SelfReference_ShortVersion_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
@@ -2592,7 +2592,7 @@ null
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_RoundTripToOutputWithNoUseBase()
+        public void Example_RoundTripToOutputWithNoUseBase_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
@@ -2625,7 +2625,7 @@ null
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_RoundTripToOutputWithNoUseBase_Async()
+        public async Task Example_RoundTripToOutputWithNoUseBase_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
@@ -2658,7 +2658,7 @@ null
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_RoundTripToOutputWithNoUseBase_Convenience()
+        public void Example_RoundTripToOutputWithNoUseBase_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
@@ -2678,7 +2678,7 @@ null
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_RoundTripToOutputWithNoUseBase_Convenience_Async()
+        public async Task Example_RoundTripToOutputWithNoUseBase_ShortVersion_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
@@ -2804,7 +2804,7 @@ null
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_AnalyzeConversation()
+        public void Example_AnalyzeConversation_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
@@ -2818,7 +2818,7 @@ null
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_AnalyzeConversation_Async()
+        public async Task Example_AnalyzeConversation_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
@@ -2832,7 +2832,7 @@ null
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_AnalyzeConversation_Convenience()
+        public void Example_AnalyzeConversation_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
@@ -2842,7 +2842,7 @@ null
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_AnalyzeConversation_Convenience_Async()
+        public async Task Example_AnalyzeConversation_ShortVersion_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
@@ -2902,7 +2902,7 @@ null
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetSingleBase()
+        public void Example_GetSingleBase_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
@@ -2916,7 +2916,7 @@ null
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetSingleBase_Async()
+        public async Task Example_GetSingleBase_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
@@ -2930,7 +2930,7 @@ null
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetSingleBase_Convenience()
+        public void Example_GetSingleBase_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
@@ -2940,7 +2940,7 @@ null
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetSingleBase_Convenience_Async()
+        public async Task Example_GetSingleBase_ShortVersion_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
@@ -2998,7 +2998,7 @@ null
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GenericType()
+        public void Example_GenericType_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
@@ -3019,7 +3019,7 @@ null
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GenericType_Async()
+        public async Task Example_GenericType_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
@@ -3040,7 +3040,7 @@ null
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GenericType_Convenience()
+        public void Example_GenericType_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
@@ -3055,7 +3055,7 @@ null
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GenericType_Convenience_Async()
+        public async Task Example_GenericType_ShortVersion_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);

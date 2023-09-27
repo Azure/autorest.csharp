@@ -19,7 +19,7 @@ namespace Parameters.CollectionFormat.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Multi()
+        public void Example_Multi_ShortVersion()
         {
             Query client = new CollectionFormatClient().GetQueryClient(apiVersion: "1.0.0");
 
@@ -32,7 +32,7 @@ namespace Parameters.CollectionFormat.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Multi_Async()
+        public async Task Example_Multi_ShortVersion_Async()
         {
             Query client = new CollectionFormatClient().GetQueryClient(apiVersion: "1.0.0");
 
@@ -71,7 +71,7 @@ namespace Parameters.CollectionFormat.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Ssv()
+        public void Example_Ssv_ShortVersion()
         {
             Query client = new CollectionFormatClient().GetQueryClient(apiVersion: "1.0.0");
 
@@ -84,7 +84,7 @@ namespace Parameters.CollectionFormat.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Ssv_Async()
+        public async Task Example_Ssv_ShortVersion_Async()
         {
             Query client = new CollectionFormatClient().GetQueryClient(apiVersion: "1.0.0");
 
@@ -123,7 +123,7 @@ namespace Parameters.CollectionFormat.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Tsv()
+        public void Example_Tsv_ShortVersion()
         {
             Query client = new CollectionFormatClient().GetQueryClient(apiVersion: "1.0.0");
 
@@ -136,7 +136,7 @@ namespace Parameters.CollectionFormat.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Tsv_Async()
+        public async Task Example_Tsv_ShortVersion_Async()
         {
             Query client = new CollectionFormatClient().GetQueryClient(apiVersion: "1.0.0");
 
@@ -175,7 +175,7 @@ namespace Parameters.CollectionFormat.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Pipes()
+        public void Example_Pipes_ShortVersion()
         {
             Query client = new CollectionFormatClient().GetQueryClient(apiVersion: "1.0.0");
 
@@ -188,7 +188,7 @@ namespace Parameters.CollectionFormat.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Pipes_Async()
+        public async Task Example_Pipes_ShortVersion_Async()
         {
             Query client = new CollectionFormatClient().GetQueryClient(apiVersion: "1.0.0");
 
@@ -227,7 +227,7 @@ namespace Parameters.CollectionFormat.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Csv()
+        public void Example_Csv_ShortVersion()
         {
             Query client = new CollectionFormatClient().GetQueryClient(apiVersion: "1.0.0");
 
@@ -240,7 +240,7 @@ namespace Parameters.CollectionFormat.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Csv_Async()
+        public async Task Example_Csv_ShortVersion_Async()
         {
             Query client = new CollectionFormatClient().GetQueryClient(apiVersion: "1.0.0");
 

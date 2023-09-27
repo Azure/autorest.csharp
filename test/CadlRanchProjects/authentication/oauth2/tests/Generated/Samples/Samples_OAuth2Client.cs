@@ -19,7 +19,7 @@ namespace Authentication.OAuth2.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Valid()
+        public void Example_Valid_ShortVersion()
         {
             TokenCredential credential = new DefaultAzureCredential();
             OAuth2Client client = new OAuth2Client(credential);
@@ -30,7 +30,7 @@ namespace Authentication.OAuth2.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Valid_Async()
+        public async Task Example_Valid_ShortVersion_Async()
         {
             TokenCredential credential = new DefaultAzureCredential();
             OAuth2Client client = new OAuth2Client(credential);
@@ -63,7 +63,7 @@ namespace Authentication.OAuth2.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Invalid()
+        public void Example_Invalid_ShortVersion()
         {
             TokenCredential credential = new DefaultAzureCredential();
             OAuth2Client client = new OAuth2Client(credential);
@@ -74,7 +74,7 @@ namespace Authentication.OAuth2.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Invalid_Async()
+        public async Task Example_Invalid_ShortVersion_Async()
         {
             TokenCredential credential = new DefaultAzureCredential();
             OAuth2Client client = new OAuth2Client(credential);
