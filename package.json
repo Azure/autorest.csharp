@@ -6,7 +6,9 @@
     "@azure-tools/typespec-csharp": "file:src/TypeSpec.Extension/Emitter.Csharp",
     "@azure-tools/cadl-ranch-mockapis": "file:test/CadlRanchMockApis",
     "@microsoft.azure/autorest.testserver": "3.3.48",
-    "autorest": "3.6.3"
+    "autorest": "3.6.3",
+    "@typespec/openapi": "^0.49.0-dev.2",
+    "@typespec/openapi3": "^0.49.0-dev.5"
   },
   "overrides": {
     "@typespec/compiler": "0.49.0-dev.11",

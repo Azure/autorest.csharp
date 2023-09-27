@@ -548,6 +548,10 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\PetStore-TypeSpec\\src\\Generated -n"
     },
+    "Platform-OpenAI-TypeSpec": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\Platform-OpenAI-TypeSpec\\src\\Generated -n"
+    },
     "ProtocolMethodsInRestClient": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\ProtocolMethodsInRestClient\\Generated"
