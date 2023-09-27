@@ -17,7 +17,7 @@ using _Type.Property.ValueTypes.Models;
 
 namespace _Type.Property.ValueTypes.Samples
 {
-    public class Samples_Enum
+    public partial class Samples_Enum
     {
         [Test]
         [Ignore("Only validating compilation of examples")]

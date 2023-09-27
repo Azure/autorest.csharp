@@ -16,7 +16,7 @@ using dpg_customization_LowLevel;
 
 namespace dpg_customization_LowLevel.Samples
 {
-    public class Samples_DPGClient
+    public partial class Samples_DPGClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]

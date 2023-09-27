@@ -17,7 +17,7 @@ using NUnit.Framework;
 
 namespace AnomalyDetector.Samples
 {
-    public class Samples_AnomalyDetectorClient
+    public partial class Samples_AnomalyDetectorClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]

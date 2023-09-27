@@ -14,7 +14,7 @@ using SpecialHeaders.Repeatability;
 
 namespace SpecialHeaders.Repeatability.Samples
 {
-    public class Samples_RepeatabilityClient
+    public partial class Samples_RepeatabilityClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]

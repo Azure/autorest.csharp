@@ -14,7 +14,7 @@ using url_LowLevel;
 
 namespace url_LowLevel.Samples
 {
-    public class Samples_QueriesClient
+    public partial class Samples_QueriesClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]

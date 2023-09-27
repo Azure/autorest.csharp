@@ -17,7 +17,7 @@ using NUnit.Framework;
 
 namespace Encode.Bytes.Samples
 {
-    public class Samples_Property
+    public partial class Samples_Property
     {
         [Test]
         [Ignore("Only validating compilation of examples")]

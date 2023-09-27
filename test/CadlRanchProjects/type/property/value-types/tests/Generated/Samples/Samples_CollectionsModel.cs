@@ -17,7 +17,7 @@ using _Type.Property.ValueTypes.Models;
 
 namespace _Type.Property.ValueTypes.Samples
 {
-    public class Samples_CollectionsModel
+    public partial class Samples_CollectionsModel
     {
         [Test]
         [Ignore("Only validating compilation of examples")]

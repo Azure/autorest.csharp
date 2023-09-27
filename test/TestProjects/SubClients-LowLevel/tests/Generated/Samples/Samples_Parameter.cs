@@ -15,7 +15,7 @@ using SubClients_LowLevel;
 
 namespace SubClients_LowLevel.Samples
 {
-    public class Samples_Parameter
+    public partial class Samples_Parameter
     {
         [Test]
         [Ignore("Only validating compilation of examples")]

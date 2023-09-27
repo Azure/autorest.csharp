@@ -17,7 +17,7 @@ using _Type._Enum.Extensible.Models;
 
 namespace _Type._Enum.Extensible.Samples
 {
-    public class Samples_ExtensibleClient
+    public partial class Samples_ExtensibleClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]

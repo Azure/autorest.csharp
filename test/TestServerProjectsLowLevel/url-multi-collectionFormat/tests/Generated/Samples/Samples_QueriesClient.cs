@@ -14,7 +14,7 @@ using url_multi_collectionFormat_LowLevel;
 
 namespace url_multi_collectionFormat_LowLevel.Samples
 {
-    public class Samples_QueriesClient
+    public partial class Samples_QueriesClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]

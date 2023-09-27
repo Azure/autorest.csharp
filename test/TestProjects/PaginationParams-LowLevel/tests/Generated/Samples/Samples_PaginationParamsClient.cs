@@ -15,7 +15,7 @@ using PaginationParams_LowLevel;
 
 namespace PaginationParams_LowLevel.Samples
 {
-    public class Samples_PaginationParamsClient
+    public partial class Samples_PaginationParamsClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]

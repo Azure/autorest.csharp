@@ -16,7 +16,7 @@ using Pagination.Models;
 
 namespace Pagination.Samples
 {
-    public class Samples_PaginationClient
+    public partial class Samples_PaginationClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]

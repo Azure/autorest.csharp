@@ -16,7 +16,7 @@ using Parameters.BodyOptionality.Models;
 
 namespace Parameters.BodyOptionality.Samples
 {
-    public class Samples_OptionalExplicit
+    public partial class Samples_OptionalExplicit
     {
         [Test]
         [Ignore("Only validating compilation of examples")]

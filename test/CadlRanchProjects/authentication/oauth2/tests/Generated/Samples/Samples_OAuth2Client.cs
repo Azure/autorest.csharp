@@ -15,7 +15,7 @@ using NUnit.Framework;
 
 namespace Authentication.OAuth2.Samples
 {
-    public class Samples_OAuth2Client
+    public partial class Samples_OAuth2Client
     {
         [Test]
         [Ignore("Only validating compilation of examples")]

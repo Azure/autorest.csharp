@@ -16,7 +16,7 @@ using body_complex_LowLevel;
 
 namespace body_complex_LowLevel.Samples
 {
-    public class Samples_ReadonlypropertyClient
+    public partial class Samples_ReadonlypropertyClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]

@@ -16,7 +16,7 @@ using SpreadTypeSpec.Models;
 
 namespace SpreadTypeSpec.Samples
 {
-    public class Samples_SpreadTypeSpecClient
+    public partial class Samples_SpreadTypeSpecClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]

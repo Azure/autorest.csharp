@@ -15,7 +15,7 @@ using httpInfrastructure_LowLevel;
 
 namespace httpInfrastructure_LowLevel.Samples
 {
-    public class Samples_HttpRedirectsClient
+    public partial class Samples_HttpRedirectsClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]

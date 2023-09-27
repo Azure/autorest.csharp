@@ -14,7 +14,7 @@ using Projection.ProjectedName;
 
 namespace Projection.ProjectedName.Samples
 {
-    public class Samples_ProjectedNameClient
+    public partial class Samples_ProjectedNameClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]

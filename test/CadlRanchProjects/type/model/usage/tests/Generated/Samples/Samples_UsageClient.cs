@@ -17,7 +17,7 @@ using _Type.Model.Usage.Models;
 
 namespace _Type.Model.Usage.Samples
 {
-    public class Samples_UsageClient
+    public partial class Samples_UsageClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]

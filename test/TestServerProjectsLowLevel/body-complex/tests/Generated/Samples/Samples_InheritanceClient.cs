@@ -16,7 +16,7 @@ using body_complex_LowLevel;
 
 namespace body_complex_LowLevel.Samples
 {
-    public class Samples_InheritanceClient
+    public partial class Samples_InheritanceClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]

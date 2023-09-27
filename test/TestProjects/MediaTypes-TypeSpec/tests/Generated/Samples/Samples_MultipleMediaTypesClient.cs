@@ -16,7 +16,7 @@ using NUnit.Framework;
 
 namespace MultipleMediaTypes.Samples
 {
-    public class Samples_MultipleMediaTypesClient
+    public partial class Samples_MultipleMediaTypesClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]

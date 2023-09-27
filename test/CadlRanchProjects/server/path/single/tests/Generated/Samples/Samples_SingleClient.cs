@@ -14,7 +14,7 @@ using Server.Path.Single;
 
 namespace Server.Path.Single.Samples
 {
-    public class Samples_SingleClient
+    public partial class Samples_SingleClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]

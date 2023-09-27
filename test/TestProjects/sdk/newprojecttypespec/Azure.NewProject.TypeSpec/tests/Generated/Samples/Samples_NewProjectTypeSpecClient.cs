@@ -17,7 +17,7 @@ using NUnit.Framework;
 
 namespace Azure.NewProject.TypeSpec.Samples
 {
-    public class Samples_NewProjectTypeSpecClient
+    public partial class Samples_NewProjectTypeSpecClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]

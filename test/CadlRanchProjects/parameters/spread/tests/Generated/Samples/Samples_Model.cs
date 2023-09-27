@@ -16,7 +16,7 @@ using Parameters.Spread.Models;
 
 namespace Parameters.Spread.Samples
 {
-    public class Samples_Model
+    public partial class Samples_Model
     {
         [Test]
         [Ignore("Only validating compilation of examples")]

@@ -15,7 +15,7 @@ using NUnit.Framework;
 
 namespace CollapseRequestCondition_LowLevel.Samples
 {
-    public class Samples_MatchConditionCollapseClient
+    public partial class Samples_MatchConditionCollapseClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]

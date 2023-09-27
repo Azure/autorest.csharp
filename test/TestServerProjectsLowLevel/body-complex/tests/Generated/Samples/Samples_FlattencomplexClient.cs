@@ -15,7 +15,7 @@ using body_complex_LowLevel;
 
 namespace body_complex_LowLevel.Samples
 {
-    public class Samples_FlattencomplexClient
+    public partial class Samples_FlattencomplexClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]

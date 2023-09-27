@@ -15,7 +15,7 @@ using Payload.Pageable.Models;
 
 namespace Payload.Pageable.Samples
 {
-    public class Samples_PageableClient
+    public partial class Samples_PageableClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]

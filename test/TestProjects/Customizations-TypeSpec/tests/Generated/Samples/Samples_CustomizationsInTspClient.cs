@@ -19,7 +19,7 @@ using NUnit.Framework;
 
 namespace CustomizationsInTsp.Samples
 {
-    public class Samples_CustomizationsInTspClient
+    public partial class Samples_CustomizationsInTspClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]

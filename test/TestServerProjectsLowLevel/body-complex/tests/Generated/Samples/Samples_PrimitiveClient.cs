@@ -17,7 +17,7 @@ using body_complex_LowLevel;
 
 namespace body_complex_LowLevel.Samples
 {
-    public class Samples_PrimitiveClient
+    public partial class Samples_PrimitiveClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]

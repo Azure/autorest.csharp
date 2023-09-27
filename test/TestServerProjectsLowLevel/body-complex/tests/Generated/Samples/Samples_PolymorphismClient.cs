@@ -16,7 +16,7 @@ using body_complex_LowLevel;
 
 namespace body_complex_LowLevel.Samples
 {
-    public class Samples_PolymorphismClient
+    public partial class Samples_PolymorphismClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]

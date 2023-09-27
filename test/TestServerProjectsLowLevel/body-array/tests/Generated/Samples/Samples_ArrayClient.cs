@@ -17,7 +17,7 @@ using body_array_LowLevel;
 
 namespace body_array_LowLevel.Samples
 {
-    public class Samples_ArrayClient
+    public partial class Samples_ArrayClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]

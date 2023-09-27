@@ -16,7 +16,7 @@ using Projection.ProjectedName.Models;
 
 namespace Projection.ProjectedName.Samples
 {
-    public class Samples_Property
+    public partial class Samples_Property
     {
         [Test]
         [Ignore("Only validating compilation of examples")]

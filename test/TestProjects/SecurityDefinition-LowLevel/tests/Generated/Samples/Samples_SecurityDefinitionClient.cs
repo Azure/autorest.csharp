@@ -15,7 +15,7 @@ using SecurityDefinition_LowLevel;
 
 namespace SecurityDefinition_LowLevel.Samples
 {
-    public class Samples_SecurityDefinitionClient
+    public partial class Samples_SecurityDefinitionClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]

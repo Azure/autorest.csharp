@@ -16,7 +16,7 @@ using dpg_update1_LowLevel;
 
 namespace dpg_update1_LowLevel.Samples
 {
-    public class Samples_ParamsClient
+    public partial class Samples_ParamsClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]

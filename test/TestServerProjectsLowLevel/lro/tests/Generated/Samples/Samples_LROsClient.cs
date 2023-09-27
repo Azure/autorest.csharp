@@ -16,7 +16,7 @@ using lro_LowLevel;
 
 namespace lro_LowLevel.Samples
 {
-    public class Samples_LROsClient
+    public partial class Samples_LROsClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]

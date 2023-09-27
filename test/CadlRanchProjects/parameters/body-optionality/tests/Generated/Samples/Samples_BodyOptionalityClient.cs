@@ -16,7 +16,7 @@ using Parameters.BodyOptionality.Models;
 
 namespace Parameters.BodyOptionality.Samples
 {
-    public class Samples_BodyOptionalityClient
+    public partial class Samples_BodyOptionalityClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]

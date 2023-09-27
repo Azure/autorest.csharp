@@ -15,7 +15,7 @@ using security_aad_LowLevel;
 
 namespace security_aad_LowLevel.Samples
 {
-    public class Samples_AutorestSecurityAadClient
+    public partial class Samples_AutorestSecurityAadClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]

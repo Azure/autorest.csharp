@@ -18,7 +18,7 @@ using _Type._Dictionary;
 
 namespace _Type._Dictionary.Samples
 {
-    public class Samples_DurationValue
+    public partial class Samples_DurationValue
     {
         [Test]
         [Ignore("Only validating compilation of examples")]

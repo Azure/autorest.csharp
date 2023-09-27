@@ -14,7 +14,7 @@ using url_LowLevel;
 
 namespace url_LowLevel.Samples
 {
-    public class Samples_PathsClient
+    public partial class Samples_PathsClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]

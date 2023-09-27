@@ -17,7 +17,7 @@ using _Type.Property.Optionality.Models;
 
 namespace _Type.Property.Optionality.Samples
 {
-    public class Samples_String
+    public partial class Samples_String
     {
         [Test]
         [Ignore("Only validating compilation of examples")]

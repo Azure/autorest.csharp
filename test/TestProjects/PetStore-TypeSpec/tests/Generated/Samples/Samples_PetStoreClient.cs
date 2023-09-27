@@ -17,7 +17,7 @@ using PetStore.Models;
 
 namespace PetStore.Samples
 {
-    public class Samples_PetStoreClient
+    public partial class Samples_PetStoreClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]

@@ -14,7 +14,7 @@ using SpecialHeaders.ClientRequestId;
 
 namespace SpecialHeaders.ClientRequestId.Samples
 {
-    public class Samples_ClientRequestIdClient
+    public partial class Samples_ClientRequestIdClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]

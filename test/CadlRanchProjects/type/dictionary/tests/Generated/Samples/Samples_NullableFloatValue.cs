@@ -17,7 +17,7 @@ using _Type._Dictionary;
 
 namespace _Type._Dictionary.Samples
 {
-    public class Samples_NullableFloatValue
+    public partial class Samples_NullableFloatValue
     {
         [Test]
         [Ignore("Only validating compilation of examples")]

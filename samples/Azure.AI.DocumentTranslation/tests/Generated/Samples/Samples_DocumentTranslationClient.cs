@@ -16,7 +16,7 @@ using NUnit.Framework;
 
 namespace Azure.AI.DocumentTranslation.Samples
 {
-    public class Samples_DocumentTranslationClient
+    public partial class Samples_DocumentTranslationClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]

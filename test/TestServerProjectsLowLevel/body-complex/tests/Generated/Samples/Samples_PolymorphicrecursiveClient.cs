@@ -16,7 +16,7 @@ using body_complex_LowLevel;
 
 namespace body_complex_LowLevel.Samples
 {
-    public class Samples_PolymorphicrecursiveClient
+    public partial class Samples_PolymorphicrecursiveClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]

@@ -14,7 +14,7 @@ using NUnit.Framework;
 
 namespace Authentication.ApiKey.Samples
 {
-    public class Samples_ApiKeyClient
+    public partial class Samples_ApiKeyClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]

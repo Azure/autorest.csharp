@@ -16,7 +16,7 @@ using _Specs_.Azure.ClientGenerator.Core.Access.Models;
 
 namespace _Specs_.Azure.ClientGenerator.Core.Access.Samples
 {
-    public class Samples_SharedModelInOperation
+    public partial class Samples_SharedModelInOperation
     {
         [Test]
         [Ignore("Only validating compilation of examples")]

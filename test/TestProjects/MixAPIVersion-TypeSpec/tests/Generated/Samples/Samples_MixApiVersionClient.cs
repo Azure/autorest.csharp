@@ -16,7 +16,7 @@ using NUnit.Framework;
 
 namespace MixApiVersion.Samples
 {
-    public class Samples_MixApiVersionClient
+    public partial class Samples_MixApiVersionClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]

@@ -17,7 +17,7 @@ using _Type._Array;
 
 namespace _Type._Array.Samples
 {
-    public class Samples_Float32Value
+    public partial class Samples_Float32Value
     {
         [Test]
         [Ignore("Only validating compilation of examples")]

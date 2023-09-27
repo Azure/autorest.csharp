@@ -14,7 +14,7 @@ using security_key_LowLevel;
 
 namespace security_key_LowLevel.Samples
 {
-    public class Samples_AutorestSecurityKeyClient
+    public partial class Samples_AutorestSecurityKeyClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]

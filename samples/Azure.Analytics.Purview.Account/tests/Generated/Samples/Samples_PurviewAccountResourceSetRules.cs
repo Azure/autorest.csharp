@@ -16,7 +16,7 @@ using NUnit.Framework;
 
 namespace Azure.Analytics.Purview.Account.Samples
 {
-    public class Samples_PurviewAccountResourceSetRules
+    public partial class Samples_PurviewAccountResourceSetRules
     {
         [Test]
         [Ignore("Only validating compilation of examples")]

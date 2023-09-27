@@ -17,7 +17,7 @@ using _Type.Model.Inheritance.SingleDiscriminator.Models;
 
 namespace _Type.Model.Inheritance.SingleDiscriminator.Samples
 {
-    public class Samples_SingleDiscriminatorClient
+    public partial class Samples_SingleDiscriminatorClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]

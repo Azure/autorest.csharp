@@ -18,7 +18,7 @@ using NUnit.Framework;
 
 namespace ModelsTypeSpec.Samples
 {
-    public class Samples_ModelsTypeSpecClient
+    public partial class Samples_ModelsTypeSpecClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]

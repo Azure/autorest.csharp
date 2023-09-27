@@ -15,7 +15,7 @@ using RenameGetList;
 
 namespace RenameGetList.Samples
 {
-    public class Samples_RenameGetListClient
+    public partial class Samples_RenameGetListClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]

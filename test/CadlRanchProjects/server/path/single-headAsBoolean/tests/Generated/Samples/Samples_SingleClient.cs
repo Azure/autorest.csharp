@@ -14,7 +14,7 @@ using Server.Path.SingleHeadAsBoolean;
 
 namespace Server.Path.SingleHeadAsBoolean.Samples
 {
-    public class Samples_SingleClient
+    public partial class Samples_SingleClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]

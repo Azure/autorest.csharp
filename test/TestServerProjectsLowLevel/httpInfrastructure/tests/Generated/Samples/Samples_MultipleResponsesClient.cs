@@ -15,7 +15,7 @@ using httpInfrastructure_LowLevel;
 
 namespace httpInfrastructure_LowLevel.Samples
 {
-    public class Samples_MultipleResponsesClient
+    public partial class Samples_MultipleResponsesClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]

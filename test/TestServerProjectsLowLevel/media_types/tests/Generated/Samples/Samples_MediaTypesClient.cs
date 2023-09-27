@@ -17,7 +17,7 @@ using media_types_LowLevel;
 
 namespace media_types_LowLevel.Samples
 {
-    public class Samples_MediaTypesClient
+    public partial class Samples_MediaTypesClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]

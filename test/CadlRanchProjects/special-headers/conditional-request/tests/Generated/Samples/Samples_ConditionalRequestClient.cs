@@ -14,7 +14,7 @@ using SpecialHeaders.ConditionalRequest;
 
 namespace SpecialHeaders.ConditionalRequest.Samples
 {
-    public class Samples_ConditionalRequestClient
+    public partial class Samples_ConditionalRequestClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]

@@ -15,7 +15,7 @@ using httpInfrastructure_LowLevel;
 
 namespace httpInfrastructure_LowLevel.Samples
 {
-    public class Samples_HttpClientFailureClient
+    public partial class Samples_HttpClientFailureClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]

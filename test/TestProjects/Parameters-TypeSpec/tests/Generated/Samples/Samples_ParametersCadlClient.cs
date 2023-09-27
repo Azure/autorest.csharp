@@ -16,7 +16,7 @@ using ParametersCadl.Models;
 
 namespace ParametersCadl.Samples
 {
-    public class Samples_ParametersCadlClient
+    public partial class Samples_ParametersCadlClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]

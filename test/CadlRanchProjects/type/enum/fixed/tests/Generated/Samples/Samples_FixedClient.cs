@@ -17,7 +17,7 @@ using _Type._Enum.Fixed.Models;
 
 namespace _Type._Enum.Fixed.Samples
 {
-    public class Samples_FixedClient
+    public partial class Samples_FixedClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]

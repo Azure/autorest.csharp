@@ -14,7 +14,7 @@ using NUnit.Framework;
 
 namespace Authentication.Union.Samples
 {
-    public class Samples_UnionClient
+    public partial class Samples_UnionClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]

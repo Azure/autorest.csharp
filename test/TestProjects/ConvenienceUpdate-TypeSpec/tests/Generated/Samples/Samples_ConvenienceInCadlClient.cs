@@ -17,7 +17,7 @@ using NUnit.Framework;
 
 namespace ConvenienceInCadl.Samples
 {
-    public class Samples_ConvenienceInCadlClient
+    public partial class Samples_ConvenienceInCadlClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]

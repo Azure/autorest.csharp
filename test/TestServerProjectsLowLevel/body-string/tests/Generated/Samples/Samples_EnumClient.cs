@@ -16,7 +16,7 @@ using body_string_LowLevel;
 
 namespace body_string_LowLevel.Samples
 {
-    public class Samples_EnumClient
+    public partial class Samples_EnumClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]

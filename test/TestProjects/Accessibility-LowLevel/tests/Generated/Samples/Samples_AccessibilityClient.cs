@@ -15,7 +15,7 @@ using NUnit.Framework;
 
 namespace Accessibility_LowLevel.Samples
 {
-    public class Samples_AccessibilityClient
+    public partial class Samples_AccessibilityClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]

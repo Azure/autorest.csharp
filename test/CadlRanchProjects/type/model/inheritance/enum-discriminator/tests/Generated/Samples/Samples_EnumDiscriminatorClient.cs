@@ -17,7 +17,7 @@ using _Type.Model.Inheritance.EnumDiscriminator.Models;
 
 namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
 {
-    public class Samples_EnumDiscriminatorClient
+    public partial class Samples_EnumDiscriminatorClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]

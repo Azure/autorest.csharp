@@ -14,7 +14,7 @@ using NUnit.Framework;
 
 namespace Authentication.Http.Custom.Samples
 {
-    public class Samples_CustomClient
+    public partial class Samples_CustomClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]

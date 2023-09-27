@@ -18,7 +18,7 @@ using _Type._Array.Models;
 
 namespace _Type._Array.Samples
 {
-    public class Samples_ModelValue
+    public partial class Samples_ModelValue
     {
         [Test]
         [Ignore("Only validating compilation of examples")]

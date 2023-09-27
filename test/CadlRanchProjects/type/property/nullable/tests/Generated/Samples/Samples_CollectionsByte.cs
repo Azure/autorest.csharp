@@ -17,7 +17,7 @@ using _Type.Property.Nullable.Models;
 
 namespace _Type.Property.Nullable.Samples
 {
-    public class Samples_CollectionsByte
+    public partial class Samples_CollectionsByte
     {
         [Test]
         [Ignore("Only validating compilation of examples")]

@@ -16,7 +16,7 @@ using body_complex_LowLevel;
 
 namespace body_complex_LowLevel.Samples
 {
-    public class Samples_DictionaryClient
+    public partial class Samples_DictionaryClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]

@@ -17,7 +17,7 @@ using _Specs_.Azure.ClientGenerator.Core.Usage.Models;
 
 namespace _Specs_.Azure.ClientGenerator.Core.Usage.Samples
 {
-    public class Samples_UsageClient
+    public partial class Samples_UsageClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]

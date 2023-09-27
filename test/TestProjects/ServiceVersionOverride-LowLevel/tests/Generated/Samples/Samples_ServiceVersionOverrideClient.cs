@@ -14,7 +14,7 @@ using ServiceVersionOverride_LowLevel;
 
 namespace ServiceVersionOverride_LowLevel.Samples
 {
-    public class Samples_ServiceVersionOverrideClient
+    public partial class Samples_ServiceVersionOverrideClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]

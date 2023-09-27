@@ -16,7 +16,7 @@ using httpInfrastructure_LowLevel;
 
 namespace httpInfrastructure_LowLevel.Samples
 {
-    public class Samples_HttpRetryClient
+    public partial class Samples_HttpRetryClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]

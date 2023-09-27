@@ -14,7 +14,7 @@ using custom_baseUrl_more_options_LowLevel;
 
 namespace custom_baseUrl_more_options_LowLevel.Samples
 {
-    public class Samples_PathsClient
+    public partial class Samples_PathsClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]

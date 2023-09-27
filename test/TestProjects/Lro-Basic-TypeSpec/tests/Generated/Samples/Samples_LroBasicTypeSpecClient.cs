@@ -17,7 +17,7 @@ using NUnit.Framework;
 
 namespace LroBasicTypeSpec.Samples
 {
-    public class Samples_LroBasicTypeSpecClient
+    public partial class Samples_LroBasicTypeSpecClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]

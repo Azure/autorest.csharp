@@ -17,7 +17,7 @@ using _Type.Model.Empty.Models;
 
 namespace _Type.Model.Empty.Samples
 {
-    public class Samples_EmptyClient
+    public partial class Samples_EmptyClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]

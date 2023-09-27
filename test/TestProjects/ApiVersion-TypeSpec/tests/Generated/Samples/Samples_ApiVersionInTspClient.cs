@@ -16,7 +16,7 @@ using NUnit.Framework;
 
 namespace ApiVersionInTsp.Samples
 {
-    public class Samples_ApiVersionInTspClient
+    public partial class Samples_ApiVersionInTspClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]

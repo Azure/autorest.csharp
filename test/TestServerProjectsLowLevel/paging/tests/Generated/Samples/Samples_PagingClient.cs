@@ -16,7 +16,7 @@ using paging_LowLevel;
 
 namespace paging_LowLevel.Samples
 {
-    public class Samples_PagingClient
+    public partial class Samples_PagingClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]

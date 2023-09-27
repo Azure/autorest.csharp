@@ -15,7 +15,7 @@ using custom_baseUrl_paging_LowLevel;
 
 namespace custom_baseUrl_paging_LowLevel.Samples
 {
-    public class Samples_PagingClient
+    public partial class Samples_PagingClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]

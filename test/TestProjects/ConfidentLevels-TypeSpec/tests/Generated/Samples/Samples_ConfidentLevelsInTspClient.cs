@@ -17,7 +17,7 @@ using NUnit.Framework;
 
 namespace ConfidentLevelsInTsp.Samples
 {
-    public class Samples_ConfidentLevelsInTspClient
+    public partial class Samples_ConfidentLevelsInTspClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]

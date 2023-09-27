@@ -15,7 +15,7 @@ using NUnit.Framework;
 
 namespace Encode.Duration.Samples
 {
-    public class Samples_Query
+    public partial class Samples_Query
     {
         [Test]
         [Ignore("Only validating compilation of examples")]

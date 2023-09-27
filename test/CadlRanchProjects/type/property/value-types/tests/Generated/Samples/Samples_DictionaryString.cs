@@ -18,7 +18,7 @@ using _Type.Property.ValueTypes.Models;
 
 namespace _Type.Property.ValueTypes.Samples
 {
-    public class Samples_DictionaryString
+    public partial class Samples_DictionaryString
     {
         [Test]
         [Ignore("Only validating compilation of examples")]

@@ -17,7 +17,7 @@ using _Type.Model.Inheritance.NotDiscriminated.Models;
 
 namespace _Type.Model.Inheritance.NotDiscriminated.Samples
 {
-    public class Samples_NotDiscriminatedClient
+    public partial class Samples_NotDiscriminatedClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]

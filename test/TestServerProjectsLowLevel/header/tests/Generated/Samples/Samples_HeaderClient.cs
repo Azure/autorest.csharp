@@ -15,7 +15,7 @@ using header_LowLevel;
 
 namespace header_LowLevel.Samples
 {
-    public class Samples_HeaderClient
+    public partial class Samples_HeaderClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]

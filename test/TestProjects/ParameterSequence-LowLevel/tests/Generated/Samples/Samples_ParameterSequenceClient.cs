@@ -15,7 +15,7 @@ using ParameterSequence_LowLevel;
 
 namespace ParameterSequence_LowLevel.Samples
 {
-    public class Samples_ParameterSequenceClient
+    public partial class Samples_ParameterSequenceClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]

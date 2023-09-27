@@ -17,7 +17,7 @@ using _Specs_.Azure.Core.Basic.Models;
 
 namespace _Specs_.Azure.Core.Basic.Samples
 {
-    public class Samples_BasicClient
+    public partial class Samples_BasicClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]

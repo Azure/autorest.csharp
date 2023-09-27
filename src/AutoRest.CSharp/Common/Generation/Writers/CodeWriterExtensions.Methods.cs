@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
@@ -118,6 +119,18 @@ namespace AutoRest.CSharp.Generation.Writers
                         writer.LineRaw("}");
                     }
 
+                    break;
+                case UsingStatement usingStatement:
+                    using (writer.AmbientScope())
+                    {
+                        FormattableString type = usingStatement.Type == null ? (FormattableString)$"var" : $"{usingStatement.Type}";
+                        writer.Append($"using ({type} {usingStatement.Name:D} = ");
+                        writer.WriteValueExpression(usingStatement.Value);
+                        writer.AppendRaw(")");
+                        writer.LineRaw("{");
+                        writer.WriteMethodBodyStatement(usingStatement.Body.AsStatement());
+                        writer.LineRaw("}");
+                    }
                     break;
                 case DeclarationStatement line:
                     writer.WriteDeclaration(line);

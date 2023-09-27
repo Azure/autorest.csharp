@@ -15,7 +15,7 @@ using Parameters.Spread;
 
 namespace Parameters.Spread.Samples
 {
-    public class Samples_Alias
+    public partial class Samples_Alias
     {
         [Test]
         [Ignore("Only validating compilation of examples")]

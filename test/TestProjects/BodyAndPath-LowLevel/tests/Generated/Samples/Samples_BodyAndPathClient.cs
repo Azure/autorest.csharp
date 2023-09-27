@@ -18,7 +18,7 @@ using NUnit.Framework;
 
 namespace BodyAndPath_LowLevel.Samples
 {
-    public class Samples_BodyAndPathClient
+    public partial class Samples_BodyAndPathClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]

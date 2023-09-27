@@ -175,8 +175,10 @@ namespace AutoRest.CSharp.LowLevel.Output.Samples
             var contentStreamExpression = new StreamExpression(resultVar.Property("ContentStream"));
             yield return new IfStatement(NotEqual(contentStreamExpression, Null))
             {
-                UsingDeclare("outFileStream", new StreamExpression(new TypeReference(typeof(File)).InvokeStatic(nameof(File.OpenWrite), Literal("<filepath>"))), out var streamVariable),
-                contentStreamExpression.CopyTo(streamVariable)
+                new UsingStatement(typeof(Stream), "outFileStream", new TypeReference(typeof(File)).InvokeStatic(nameof(File.OpenWrite), Literal("<filepath>")), out var streamVariable)
+                {
+                    contentStreamExpression.CopyTo(new StreamExpression(streamVariable))
+                }
             };
         }
 
@@ -192,7 +194,7 @@ namespace AutoRest.CSharp.LowLevel.Output.Samples
                 streamVar = responseVar.Invoke(nameof(BinaryData.ToStream));
             else if (responseType.EqualsIgnoreNullable(typeof(Response)))
                 streamVar = responseVar.Property(nameof(Response.ContentStream));
-            else if (responseType.IsFrameworkType && responseType.FrameworkType == typeof(Response<>))
+            else if (TypeFactory.IsResponseOfT(responseType))
                 streamVar = responseVar.Invoke(nameof(Response<object>.GetRawResponse));
             else
                 yield break;
@@ -211,9 +213,10 @@ namespace AutoRest.CSharp.LowLevel.Output.Samples
             {
                 // if there is not a schema for us to show, just print status code
                 ValueExpression statusVar = responseVar;
-                if (responseType.IsFrameworkType && responseType.FrameworkType == typeof(Response<>))
+                if (TypeFactory.IsResponseOfT(responseType))
                     statusVar = responseVar.Invoke(nameof(Response<object>.GetRawResponse));
-                yield return InvokeConsoleWriteLine(statusVar.Property(nameof(Response.Status)));
+                if (TypeFactory.IsResponseOfT(responseType) || TypeFactory.IsResponse(responseType))
+                    yield return InvokeConsoleWriteLine(statusVar.Property(nameof(Response.Status)));
             }
         }
 

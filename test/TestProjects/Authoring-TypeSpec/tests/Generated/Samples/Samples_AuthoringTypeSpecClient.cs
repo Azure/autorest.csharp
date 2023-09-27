@@ -17,7 +17,7 @@ using NUnit.Framework;
 
 namespace AuthoringTypeSpec.Samples
 {
-    public class Samples_AuthoringTypeSpecClient
+    public partial class Samples_AuthoringTypeSpecClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]

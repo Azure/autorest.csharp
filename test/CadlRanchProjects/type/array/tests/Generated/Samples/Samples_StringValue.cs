@@ -17,7 +17,7 @@ using _Type._Array;
 
 namespace _Type._Array.Samples
 {
-    public class Samples_StringValue
+    public partial class Samples_StringValue
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
