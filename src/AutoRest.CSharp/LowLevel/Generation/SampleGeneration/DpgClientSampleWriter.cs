@@ -26,7 +26,7 @@ namespace AutoRest.CSharp.LowLevel.Generation.SampleGeneration
             {
                 using (_writer.Scope($"{_sampleProvider.Declaration.Accessibility} partial class {_sampleProvider.Type:D}"))
                 {
-                    foreach (var method in _sampleProvider.SampleMethods)
+                    foreach (var method in _sampleProvider.Methods)
                     {
                         _writer.WriteMethod(method);
                     }

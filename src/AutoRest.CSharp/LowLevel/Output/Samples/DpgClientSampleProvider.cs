@@ -35,12 +35,12 @@ namespace AutoRest.CSharp.LowLevel.Output.Samples
         }
 
         private bool? _isEmpty;
-        public bool IsEmpty => _isEmpty ??= !SampleMethods.Any();
+        public bool IsEmpty => _isEmpty ??= !Methods.Any();
 
-        private IEnumerable<Method>? _sampleMethods;
-        public IEnumerable<Method> SampleMethods => _sampleMethods ??= EnsureSampleMethods();
+        private IEnumerable<Method>? _methods;
+        public IEnumerable<Method> Methods => _methods ??= EnsureMethods();
 
-        private IEnumerable<Method> EnsureSampleMethods()
+        protected virtual IEnumerable<Method> EnsureMethods()
         {
             foreach (var sample in Client.ClientMethods.SelectMany(m => m.Samples))
             {
@@ -53,7 +53,7 @@ namespace AutoRest.CSharp.LowLevel.Output.Samples
         {
             var signature = sample.GetExampleMethodSignature(isAsync);
             var clientVariableStatements = new List<MethodBodyStatement>();
-            var newClientStatement = BuildGetClientStatement(sample, clientVariableStatements, out var clientVar);
+            var newClientStatement = BuildGetClientStatement(sample, sample.ClientInvocationChain, clientVariableStatements, out var clientVar);
 
             // the method invocation statements go here
             var operationVariableStatements = new List<MethodBodyStatement>();
@@ -69,10 +69,9 @@ namespace AutoRest.CSharp.LowLevel.Output.Samples
             });
         }
 
-        private MethodBodyStatement BuildGetClientStatement(DpgOperationSample sample, List<MethodBodyStatement> variableDeclarations, out VariableReference clientVar)
+        private MethodBodyStatement BuildGetClientStatement(DpgOperationSample sample, IReadOnlyList<MethodSignatureBase> methodsToCall, List<MethodBodyStatement> variableDeclarations, out VariableReference clientVar)
         {
-            var methodsToCall = sample.ClientInvocation;
-            var first = methodsToCall.First();
+            var first = methodsToCall[0];
             ValueExpression valueExpression = first switch
             {
                 ConstructorSignature ctor => New.Instance(ctor.Type, sample.GetValueExpressionsForParameters(ctor.Parameters, variableDeclarations).ToArray()),
@@ -84,7 +83,7 @@ namespace AutoRest.CSharp.LowLevel.Output.Samples
                 valueExpression = valueExpression.Invoke(method.Name, sample.GetValueExpressionsForParameters(method.Parameters, variableDeclarations).ToArray());
             }
 
-            clientVar = new VariableReference(sample.Client.Type, "client");
+            clientVar = new VariableReference(Client.Type, "client");
 
             return Declare(clientVar, valueExpression);
         }

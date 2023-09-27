@@ -28,7 +28,7 @@ namespace AutoRest.CSharp.Output.Samples.Models
     {
         public DpgOperationSample(LowLevelClient client, LowLevelClientMethod method, IEnumerable<InputParameterExample> inputClientParameterExamples, InputOperationExample inputOperationExample, bool isConvenienceSample, string exampleKey)
         {
-            Client = client;
+            _client = client;
             _method = method;
             _inputClientParameterExamples = inputClientParameterExamples;
             _inputOperationExample = inputOperationExample;
@@ -40,13 +40,12 @@ namespace AutoRest.CSharp.Output.Samples.Models
 
         protected internal readonly IEnumerable<InputParameterExample> _inputClientParameterExamples;
         protected internal readonly InputOperationExample _inputOperationExample;
-        protected readonly MethodSignature _operationMethodSignature;
-
-        private readonly LowLevelClientMethod _method;
+        private readonly LowLevelClient _client;
+        protected internal readonly LowLevelClientMethod _method;
+        private readonly MethodSignature _operationMethodSignature;
         public bool IsAllParametersUsed { get; }
         public string ExampleKey { get; }
         public bool IsConvenienceSample { get; }
-        public LowLevelClient Client { get; }
 
         public MethodSignature OperationMethodSignature => _operationMethodSignature;
 
@@ -54,17 +53,17 @@ namespace AutoRest.CSharp.Output.Samples.Models
 
         public bool IsPageable => IsConvenienceSample ? _method.ConvenienceMethod!.IsPageable : _method.PagingInfo != null;
 
-        private IReadOnlyList<MethodSignatureBase>? _clientInvocation;
-        public IReadOnlyList<MethodSignatureBase> ClientInvocation => _clientInvocation ??= GetClientInvocation();
+        private IReadOnlyList<MethodSignatureBase>? _clientInvocationChain;
+        public IReadOnlyList<MethodSignatureBase> ClientInvocationChain => _clientInvocationChain ??= GetClientInvocationChain();
 
         /// <summary>
         /// Get the methods to be called to get the client, it should be like `Client(...).GetXXClient(..).GetYYClient(..)`.
         /// It's composed of a constructor of non-subclient and a optional list of subclient factory methods.
         /// </summary>
         /// <returns></returns>
-        protected virtual IReadOnlyList<MethodSignatureBase> GetClientInvocation()
+        private IReadOnlyList<MethodSignatureBase> GetClientInvocationChain()
         {
-            var client = Client;
+            var client = _client;
             var callChain = new Stack<MethodSignatureBase>();
             while (client.FactoryMethod != null)
             {
@@ -191,7 +190,7 @@ namespace AutoRest.CSharp.Output.Samples.Models
         private IEnumerable<Parameter> GetAllParameters()
         {
             // here we should gather all the parameters from my client, and my parent client, and the parent client of my parent client, etc
-            foreach (var method in ClientInvocation)
+            foreach (var method in ClientInvocationChain)
             {
                 foreach (var parameter in method.Parameters)
                     yield return parameter;
