@@ -175,10 +175,8 @@ namespace AutoRest.CSharp.LowLevel.Output.Samples
             var contentStreamExpression = new StreamExpression(resultVar.Property("ContentStream"));
             yield return new IfStatement(NotEqual(contentStreamExpression, Null))
             {
-                new UsingStatement(typeof(Stream), "outFileStream", new TypeReference(typeof(File)).InvokeStatic(nameof(File.OpenWrite), Literal("<filepath>")), out var streamVariable)
-                {
-                    contentStreamExpression.CopyTo(new StreamExpression(streamVariable))
-                }
+                UsingDeclare("outFileStream", new StreamExpression(new TypeReference(typeof(File)).InvokeStatic(nameof(File.OpenWrite), Literal("<filepath>"))), out var streamVariable),
+                contentStreamExpression.CopyTo(streamVariable)
             };
         }
 
