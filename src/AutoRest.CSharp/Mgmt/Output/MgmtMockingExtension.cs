@@ -51,7 +51,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         protected override ConstructorSignature? EnsureArmClientCtor()
         {
             return new ConstructorSignature(
-                Name: Type.Name,
+                Type,
                 Summary: null,
                 Description: $"Initializes a new instance of the <see cref=\"{Type.Name}\"/> class.",
                 Modifiers: Internal,

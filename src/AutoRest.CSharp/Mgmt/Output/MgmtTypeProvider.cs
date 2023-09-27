@@ -136,7 +136,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         protected virtual ConstructorSignature? EnsureMockingCtor()
         {
             return new ConstructorSignature(
-                Name: Type.Name,
+                Type,
                 null,
                 Description: $"Initializes a new instance of the <see cref=\"{Type.Name}\"/> class for mocking.",
                 Modifiers: Protected,

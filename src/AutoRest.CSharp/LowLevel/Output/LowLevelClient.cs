@@ -213,11 +213,11 @@ namespace AutoRest.CSharp.Output.Models
         }
 
         private ConstructorSignature CreatePrimaryConstructor(IReadOnlyList<Parameter> parameters)
-            => new(Declaration.Name, $"Initializes a new instance of {Declaration.Name}", null, Public, parameters);
+            => new(Type, $"Initializes a new instance of {Declaration.Name}", null, Public, parameters);
 
         private ConstructorSignature CreateSecondaryConstructor(IReadOnlyList<Parameter> parameters, FormattableString[] arguments)
         {
-            return new(Declaration.Name, $"Initializes a new instance of {Declaration.Name}", null, Public, parameters, Initializer: new ConstructorInitializer(false, arguments));
+            return new(Type, $"Initializes a new instance of {Declaration.Name}", null, Public, parameters, Initializer: new ConstructorInitializer(false, arguments));
         }
 
         private Parameter CreateCredentialParameter(CSharpType type)
@@ -232,7 +232,7 @@ namespace AutoRest.CSharp.Output.Models
         }
 
         private ConstructorSignature CreateMockingConstructor()
-            => new(Declaration.Name, $"Initializes a new instance of {Declaration.Name} for mocking.", null, Protected, Array.Empty<Parameter>());
+            => new(Type, $"Initializes a new instance of {Declaration.Name} for mocking.", null, Protected, Array.Empty<Parameter>());
 
         private Parameter CreateOptionsParameter()
         {
@@ -246,7 +246,7 @@ namespace AutoRest.CSharp.Output.Models
                 .Select(p => p with { DefaultValue = null, Validation = ValidationType.None, Initializer = null })
                 .ToArray();
 
-            return new ConstructorSignature(Declaration.Name, $"Initializes a new instance of {Declaration.Name}", null, Internal, constructorParameters);
+            return new ConstructorSignature(Type, $"Initializes a new instance of {Declaration.Name}", null, Internal, constructorParameters);
         }
 
         public LowLevelSubClientFactoryMethod BuildFactoryMethod(ClientFields parentFields, string libraryName)
@@ -315,7 +315,7 @@ namespace AutoRest.CSharp.Output.Models
                         continue;
                     }
                     var ctor = new ConstructorSignature(
-                        DefaultName,
+                        Type,
                         GetSummaryPortion(existingCtor.GetDocumentationCommentXml()),
                         null,
                         modifiers,
