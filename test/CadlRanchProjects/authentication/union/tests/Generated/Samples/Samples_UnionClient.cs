@@ -18,7 +18,7 @@ namespace Authentication.Union.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ValidKey()
+        public void Example_ValidKey_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             UnionClient client = new UnionClient(credential);
@@ -29,7 +29,7 @@ namespace Authentication.Union.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_ValidKey_Async()
+        public async Task Example_ValidKey_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             UnionClient client = new UnionClient(credential);
@@ -62,7 +62,7 @@ namespace Authentication.Union.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ValidToken()
+        public void Example_ValidToken_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             UnionClient client = new UnionClient(credential);
@@ -73,7 +73,7 @@ namespace Authentication.Union.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_ValidToken_Async()
+        public async Task Example_ValidToken_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             UnionClient client = new UnionClient(credential);

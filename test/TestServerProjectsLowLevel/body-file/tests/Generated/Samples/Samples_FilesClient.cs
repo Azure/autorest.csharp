@@ -18,7 +18,7 @@ namespace body_file_LowLevel.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetFile()
+        public void Example_GetFile_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             FilesClient client = new FilesClient(credential);
@@ -35,7 +35,7 @@ namespace body_file_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetFile_Async()
+        public async Task Example_GetFile_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             FilesClient client = new FilesClient(credential);
@@ -86,7 +86,7 @@ namespace body_file_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetFileLarge()
+        public void Example_GetFileLarge_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             FilesClient client = new FilesClient(credential);
@@ -103,7 +103,7 @@ namespace body_file_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetFileLarge_Async()
+        public async Task Example_GetFileLarge_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             FilesClient client = new FilesClient(credential);
@@ -154,7 +154,7 @@ namespace body_file_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetEmptyFile()
+        public void Example_GetEmptyFile_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             FilesClient client = new FilesClient(credential);
@@ -171,7 +171,7 @@ namespace body_file_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetEmptyFile_Async()
+        public async Task Example_GetEmptyFile_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             FilesClient client = new FilesClient(credential);

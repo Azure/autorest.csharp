@@ -21,7 +21,7 @@ namespace media_types_LowLevel.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_AnalyzeBody()
+        public void Example_AnalyzeBody_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             MediaTypesClient client = new MediaTypesClient(credential);
@@ -35,7 +35,7 @@ namespace media_types_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_AnalyzeBody_Async()
+        public async Task Example_AnalyzeBody_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             MediaTypesClient client = new MediaTypesClient(credential);
@@ -77,7 +77,7 @@ namespace media_types_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_AnalyzeBodyNoAcceptHeader()
+        public void Example_AnalyzeBodyNoAcceptHeader_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             MediaTypesClient client = new MediaTypesClient(credential);
@@ -89,7 +89,7 @@ namespace media_types_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_AnalyzeBodyNoAcceptHeader_Async()
+        public async Task Example_AnalyzeBodyNoAcceptHeader_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             MediaTypesClient client = new MediaTypesClient(credential);
@@ -125,7 +125,7 @@ namespace media_types_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ContentTypeWithEncoding()
+        public void Example_ContentTypeWithEncoding_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             MediaTypesClient client = new MediaTypesClient(credential);
@@ -139,7 +139,7 @@ namespace media_types_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_ContentTypeWithEncoding_Async()
+        public async Task Example_ContentTypeWithEncoding_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             MediaTypesClient client = new MediaTypesClient(credential);
@@ -181,7 +181,7 @@ namespace media_types_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_BinaryBodyWithTwoContentTypes()
+        public void Example_BinaryBodyWithTwoContentTypes_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             MediaTypesClient client = new MediaTypesClient(credential);
@@ -195,7 +195,7 @@ namespace media_types_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_BinaryBodyWithTwoContentTypes_Async()
+        public async Task Example_BinaryBodyWithTwoContentTypes_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             MediaTypesClient client = new MediaTypesClient(credential);
@@ -237,7 +237,7 @@ namespace media_types_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_BinaryBodyWithThreeContentTypes()
+        public void Example_BinaryBodyWithThreeContentTypes_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             MediaTypesClient client = new MediaTypesClient(credential);
@@ -251,7 +251,7 @@ namespace media_types_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_BinaryBodyWithThreeContentTypes_Async()
+        public async Task Example_BinaryBodyWithThreeContentTypes_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             MediaTypesClient client = new MediaTypesClient(credential);
@@ -293,7 +293,7 @@ namespace media_types_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_BodyThreeTypes()
+        public void Example_BodyThreeTypes_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             MediaTypesClient client = new MediaTypesClient(credential);
@@ -307,7 +307,7 @@ namespace media_types_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_BodyThreeTypes_Async()
+        public async Task Example_BodyThreeTypes_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             MediaTypesClient client = new MediaTypesClient(credential);
@@ -349,7 +349,7 @@ namespace media_types_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutTextAndJsonBody()
+        public void Example_PutTextAndJsonBody_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             MediaTypesClient client = new MediaTypesClient(credential);
@@ -363,7 +363,7 @@ namespace media_types_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutTextAndJsonBody_Async()
+        public async Task Example_PutTextAndJsonBody_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             MediaTypesClient client = new MediaTypesClient(credential);

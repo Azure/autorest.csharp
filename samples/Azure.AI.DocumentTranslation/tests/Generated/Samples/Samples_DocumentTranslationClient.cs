@@ -21,7 +21,7 @@ namespace Azure.AI.DocumentTranslation.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetDocumentStatus()
+        public void Example_GetDocumentStatus_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", credential);
@@ -40,7 +40,7 @@ namespace Azure.AI.DocumentTranslation.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetDocumentStatus_Async()
+        public async Task Example_GetDocumentStatus_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", credential);
@@ -113,7 +113,7 @@ namespace Azure.AI.DocumentTranslation.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetTranslationStatus()
+        public void Example_GetTranslationStatus_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", credential);
@@ -136,7 +136,7 @@ namespace Azure.AI.DocumentTranslation.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetTranslationStatus_Async()
+        public async Task Example_GetTranslationStatus_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", credential);
@@ -217,7 +217,7 @@ namespace Azure.AI.DocumentTranslation.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_CancelTranslation()
+        public void Example_CancelTranslation_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", credential);
@@ -240,7 +240,7 @@ namespace Azure.AI.DocumentTranslation.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_CancelTranslation_Async()
+        public async Task Example_CancelTranslation_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", credential);
@@ -321,7 +321,7 @@ namespace Azure.AI.DocumentTranslation.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetSupportedDocumentFormats()
+        public void Example_GetSupportedDocumentFormats_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", credential);
@@ -336,7 +336,7 @@ namespace Azure.AI.DocumentTranslation.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetSupportedDocumentFormats_Async()
+        public async Task Example_GetSupportedDocumentFormats_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", credential);
@@ -385,7 +385,7 @@ namespace Azure.AI.DocumentTranslation.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetSupportedGlossaryFormats()
+        public void Example_GetSupportedGlossaryFormats_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", credential);
@@ -400,7 +400,7 @@ namespace Azure.AI.DocumentTranslation.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetSupportedGlossaryFormats_Async()
+        public async Task Example_GetSupportedGlossaryFormats_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", credential);
@@ -449,7 +449,7 @@ namespace Azure.AI.DocumentTranslation.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetSupportedStorageSources()
+        public void Example_GetSupportedStorageSources_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", credential);
@@ -462,7 +462,7 @@ namespace Azure.AI.DocumentTranslation.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetSupportedStorageSources_Async()
+        public async Task Example_GetSupportedStorageSources_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", credential);
@@ -501,7 +501,7 @@ namespace Azure.AI.DocumentTranslation.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetTranslationsStatus()
+        public void Example_GetTranslationsStatus_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", credential);
@@ -525,7 +525,7 @@ namespace Azure.AI.DocumentTranslation.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetTranslationsStatus_Async()
+        public async Task Example_GetTranslationsStatus_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", credential);
@@ -627,7 +627,7 @@ Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a")
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetDocumentsStatus()
+        public void Example_GetDocumentsStatus_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", credential);
@@ -647,7 +647,7 @@ Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a")
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetDocumentsStatus_Async()
+        public async Task Example_GetDocumentsStatus_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", credential);
@@ -741,7 +741,7 @@ Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a")
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_StartTranslation()
+        public void Example_StartTranslation_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", credential);
@@ -772,7 +772,7 @@ language = "<language>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_StartTranslation_Async()
+        public async Task Example_StartTranslation_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", credential);

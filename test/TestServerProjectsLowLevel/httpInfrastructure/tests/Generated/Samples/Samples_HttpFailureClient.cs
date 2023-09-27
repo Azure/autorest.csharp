@@ -19,7 +19,7 @@ namespace httpInfrastructure_LowLevel.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetEmptyError()
+        public void Example_GetEmptyError_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpFailureClient client = new HttpFailureClient(credential);
@@ -32,7 +32,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetEmptyError_Async()
+        public async Task Example_GetEmptyError_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpFailureClient client = new HttpFailureClient(credential);
@@ -71,7 +71,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetNoModelError()
+        public void Example_GetNoModelError_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpFailureClient client = new HttpFailureClient(credential);
@@ -84,7 +84,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetNoModelError_Async()
+        public async Task Example_GetNoModelError_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpFailureClient client = new HttpFailureClient(credential);
@@ -123,7 +123,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetNoModelEmpty()
+        public void Example_GetNoModelEmpty_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpFailureClient client = new HttpFailureClient(credential);
@@ -136,7 +136,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetNoModelEmpty_Async()
+        public async Task Example_GetNoModelEmpty_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpFailureClient client = new HttpFailureClient(credential);

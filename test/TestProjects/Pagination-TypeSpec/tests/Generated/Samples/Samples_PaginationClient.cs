@@ -20,7 +20,7 @@ namespace Pagination.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetPaginationLedgerEntries()
+        public void Example_GetPaginationLedgerEntries_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             TokenCredential credential = new DefaultAzureCredential();
@@ -42,7 +42,7 @@ namespace Pagination.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetPaginationLedgerEntries_Async()
+        public async Task Example_GetPaginationLedgerEntries_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             TokenCredential credential = new DefaultAzureCredential();
@@ -64,7 +64,7 @@ namespace Pagination.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetPaginationLedgerEntries_Convenience()
+        public void Example_GetPaginationLedgerEntries_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             TokenCredential credential = new DefaultAzureCredential();
@@ -78,7 +78,7 @@ namespace Pagination.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetPaginationLedgerEntries_Convenience_Async()
+        public async Task Example_GetPaginationLedgerEntries_ShortVersion_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             TokenCredential credential = new DefaultAzureCredential();
@@ -164,7 +164,7 @@ namespace Pagination.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetMetricDimensionValues()
+        public void Example_GetMetricDimensionValues_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             TokenCredential credential = new DefaultAzureCredential();
@@ -179,7 +179,7 @@ namespace Pagination.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetMetricDimensionValues_Async()
+        public async Task Example_GetMetricDimensionValues_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             TokenCredential credential = new DefaultAzureCredential();
@@ -194,7 +194,7 @@ namespace Pagination.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetMetricDimensionValues_Convenience()
+        public void Example_GetMetricDimensionValues_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             TokenCredential credential = new DefaultAzureCredential();
@@ -207,7 +207,7 @@ namespace Pagination.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetMetricDimensionValues_Convenience_Async()
+        public async Task Example_GetMetricDimensionValues_ShortVersion_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             TokenCredential credential = new DefaultAzureCredential();
@@ -276,7 +276,7 @@ namespace Pagination.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetLedgerEntries()
+        public void Example_GetLedgerEntries_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             TokenCredential credential = new DefaultAzureCredential();
@@ -293,7 +293,7 @@ namespace Pagination.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetLedgerEntries_Async()
+        public async Task Example_GetLedgerEntries_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             TokenCredential credential = new DefaultAzureCredential();
@@ -310,7 +310,7 @@ namespace Pagination.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetLedgerEntries_Convenience()
+        public void Example_GetLedgerEntries_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             TokenCredential credential = new DefaultAzureCredential();
@@ -323,7 +323,7 @@ namespace Pagination.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetLedgerEntries_Convenience_Async()
+        public async Task Example_GetLedgerEntries_ShortVersion_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             TokenCredential credential = new DefaultAzureCredential();
@@ -396,7 +396,7 @@ namespace Pagination.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetTextBlocklists()
+        public void Example_GetTextBlocklists_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             TokenCredential credential = new DefaultAzureCredential();
@@ -411,7 +411,7 @@ namespace Pagination.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetTextBlocklists_Async()
+        public async Task Example_GetTextBlocklists_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             TokenCredential credential = new DefaultAzureCredential();
@@ -426,7 +426,7 @@ namespace Pagination.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetTextBlocklists_Convenience()
+        public void Example_GetTextBlocklists_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             TokenCredential credential = new DefaultAzureCredential();
@@ -439,7 +439,7 @@ namespace Pagination.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetTextBlocklists_Convenience_Async()
+        public async Task Example_GetTextBlocklists_ShortVersion_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             TokenCredential credential = new DefaultAzureCredential();
@@ -510,7 +510,7 @@ namespace Pagination.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetTextBlocklistItems()
+        public void Example_GetTextBlocklistItems_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             TokenCredential credential = new DefaultAzureCredential();
@@ -526,7 +526,7 @@ namespace Pagination.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetTextBlocklistItems_Async()
+        public async Task Example_GetTextBlocklistItems_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             TokenCredential credential = new DefaultAzureCredential();
@@ -542,7 +542,7 @@ namespace Pagination.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetTextBlocklistItems_Convenience()
+        public void Example_GetTextBlocklistItems_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             TokenCredential credential = new DefaultAzureCredential();
@@ -555,7 +555,7 @@ namespace Pagination.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetTextBlocklistItems_Convenience_Async()
+        public async Task Example_GetTextBlocklistItems_ShortVersion_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             TokenCredential credential = new DefaultAzureCredential();

@@ -18,7 +18,7 @@ namespace SpecialWords.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetWithIf()
+        public void Example_GetWithIf_ShortVersion()
         {
             Parameter client = new SpecialWordsClient().GetParameterClient(apiVersion: "1.0.0");
 
@@ -28,7 +28,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetWithIf_Async()
+        public async Task Example_GetWithIf_ShortVersion_Async()
         {
             Parameter client = new SpecialWordsClient().GetParameterClient(apiVersion: "1.0.0");
 
@@ -58,7 +58,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetWithFilter()
+        public void Example_GetWithFilter_ShortVersion()
         {
             Parameter client = new SpecialWordsClient().GetParameterClient(apiVersion: "1.0.0");
 
@@ -68,7 +68,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetWithFilter_Async()
+        public async Task Example_GetWithFilter_ShortVersion_Async()
         {
             Parameter client = new SpecialWordsClient().GetParameterClient(apiVersion: "1.0.0");
 

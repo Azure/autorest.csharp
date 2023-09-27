@@ -79,10 +79,9 @@ namespace AutoRest.CSharp.Output.Samples.Models
         private string GetMethodName(bool isAsync)
         {
             var builder = new StringBuilder("Example_").Append(_operationMethodSignature.Name);
-            if (_useAllParameters)
-            {
-                builder.Append("_AllParameters");
-            }
+
+            builder.Append("_").Append(_exampleKey);
+
             if (IsConvenienceSample)
             {
                 builder.Append("_Convenience");

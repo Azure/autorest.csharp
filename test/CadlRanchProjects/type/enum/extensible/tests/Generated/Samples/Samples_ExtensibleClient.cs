@@ -21,7 +21,7 @@ namespace _Type._Enum.Extensible.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetKnownValue()
+        public void Example_GetKnownValue_ShortVersion()
         {
             ExtensibleClient client = new ExtensibleClient();
 
@@ -33,7 +33,7 @@ namespace _Type._Enum.Extensible.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetKnownValue_Async()
+        public async Task Example_GetKnownValue_ShortVersion_Async()
         {
             ExtensibleClient client = new ExtensibleClient();
 
@@ -45,7 +45,7 @@ namespace _Type._Enum.Extensible.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetKnownValue_Convenience()
+        public void Example_GetKnownValue_ShortVersion_Convenience()
         {
             ExtensibleClient client = new ExtensibleClient();
 
@@ -54,7 +54,7 @@ namespace _Type._Enum.Extensible.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetKnownValue_Convenience_Async()
+        public async Task Example_GetKnownValue_ShortVersion_Convenience_Async()
         {
             ExtensibleClient client = new ExtensibleClient();
 
@@ -105,7 +105,7 @@ namespace _Type._Enum.Extensible.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetUnknownValue()
+        public void Example_GetUnknownValue_ShortVersion()
         {
             ExtensibleClient client = new ExtensibleClient();
 
@@ -117,7 +117,7 @@ namespace _Type._Enum.Extensible.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetUnknownValue_Async()
+        public async Task Example_GetUnknownValue_ShortVersion_Async()
         {
             ExtensibleClient client = new ExtensibleClient();
 
@@ -129,7 +129,7 @@ namespace _Type._Enum.Extensible.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetUnknownValue_Convenience()
+        public void Example_GetUnknownValue_ShortVersion_Convenience()
         {
             ExtensibleClient client = new ExtensibleClient();
 
@@ -138,7 +138,7 @@ namespace _Type._Enum.Extensible.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetUnknownValue_Convenience_Async()
+        public async Task Example_GetUnknownValue_ShortVersion_Convenience_Async()
         {
             ExtensibleClient client = new ExtensibleClient();
 
@@ -189,7 +189,7 @@ namespace _Type._Enum.Extensible.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutKnownValue()
+        public void Example_PutKnownValue_ShortVersion()
         {
             ExtensibleClient client = new ExtensibleClient();
 
@@ -200,7 +200,7 @@ namespace _Type._Enum.Extensible.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutKnownValue_Async()
+        public async Task Example_PutKnownValue_ShortVersion_Async()
         {
             ExtensibleClient client = new ExtensibleClient();
 
@@ -211,7 +211,7 @@ namespace _Type._Enum.Extensible.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutKnownValue_Convenience()
+        public void Example_PutKnownValue_ShortVersion_Convenience()
         {
             ExtensibleClient client = new ExtensibleClient();
 
@@ -221,7 +221,7 @@ namespace _Type._Enum.Extensible.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutKnownValue_Convenience_Async()
+        public async Task Example_PutKnownValue_ShortVersion_Convenience_Async()
         {
             ExtensibleClient client = new ExtensibleClient();
 
@@ -273,7 +273,7 @@ namespace _Type._Enum.Extensible.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutUnknownValue()
+        public void Example_PutUnknownValue_ShortVersion()
         {
             ExtensibleClient client = new ExtensibleClient();
 
@@ -284,7 +284,7 @@ namespace _Type._Enum.Extensible.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutUnknownValue_Async()
+        public async Task Example_PutUnknownValue_ShortVersion_Async()
         {
             ExtensibleClient client = new ExtensibleClient();
 
@@ -295,7 +295,7 @@ namespace _Type._Enum.Extensible.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutUnknownValue_Convenience()
+        public void Example_PutUnknownValue_ShortVersion_Convenience()
         {
             ExtensibleClient client = new ExtensibleClient();
 
@@ -305,7 +305,7 @@ namespace _Type._Enum.Extensible.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutUnknownValue_Convenience_Async()
+        public async Task Example_PutUnknownValue_ShortVersion_Convenience_Async()
         {
             ExtensibleClient client = new ExtensibleClient();
 

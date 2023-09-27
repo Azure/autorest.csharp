@@ -23,7 +23,7 @@ namespace CustomizationsInTsp.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_RoundTrip()
+        public void Example_RoundTrip_ShortVersion()
         {
             CustomizationsInTspClient client = new CustomizationsInTspClient();
 
@@ -36,7 +36,7 @@ namespace CustomizationsInTsp.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_RoundTrip_Async()
+        public async Task Example_RoundTrip_ShortVersion_Async()
         {
             CustomizationsInTspClient client = new CustomizationsInTspClient();
 
@@ -49,7 +49,7 @@ namespace CustomizationsInTsp.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_RoundTrip_Convenience()
+        public void Example_RoundTrip_ShortVersion_Convenience()
         {
             CustomizationsInTspClient client = new CustomizationsInTspClient();
 
@@ -59,7 +59,7 @@ namespace CustomizationsInTsp.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_RoundTrip_Convenience_Async()
+        public async Task Example_RoundTrip_ShortVersion_Convenience_Async()
         {
             CustomizationsInTspClient client = new CustomizationsInTspClient();
 

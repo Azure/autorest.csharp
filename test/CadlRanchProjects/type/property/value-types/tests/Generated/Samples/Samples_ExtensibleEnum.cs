@@ -21,7 +21,7 @@ namespace _Type.Property.ValueTypes.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetExtensibleEnum()
+        public void Example_GetExtensibleEnum_ShortVersion()
         {
             ExtensibleEnum client = new ValueTypesClient().GetExtensibleEnumClient(apiVersion: "1.0.0");
 
@@ -33,7 +33,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetExtensibleEnum_Async()
+        public async Task Example_GetExtensibleEnum_ShortVersion_Async()
         {
             ExtensibleEnum client = new ValueTypesClient().GetExtensibleEnumClient(apiVersion: "1.0.0");
 
@@ -45,7 +45,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetExtensibleEnum_Convenience()
+        public void Example_GetExtensibleEnum_ShortVersion_Convenience()
         {
             ExtensibleEnum client = new ValueTypesClient().GetExtensibleEnumClient(apiVersion: "1.0.0");
 
@@ -54,7 +54,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetExtensibleEnum_Convenience_Async()
+        public async Task Example_GetExtensibleEnum_ShortVersion_Convenience_Async()
         {
             ExtensibleEnum client = new ValueTypesClient().GetExtensibleEnumClient(apiVersion: "1.0.0");
 
@@ -105,7 +105,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put()
+        public void Example_Put_ShortVersion()
         {
             ExtensibleEnum client = new ValueTypesClient().GetExtensibleEnumClient(apiVersion: "1.0.0");
 
@@ -119,7 +119,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_Async()
+        public async Task Example_Put_ShortVersion_Async()
         {
             ExtensibleEnum client = new ValueTypesClient().GetExtensibleEnumClient(apiVersion: "1.0.0");
 
@@ -133,7 +133,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put_Convenience()
+        public void Example_Put_ShortVersion_Convenience()
         {
             ExtensibleEnum client = new ValueTypesClient().GetExtensibleEnumClient(apiVersion: "1.0.0");
 
@@ -144,7 +144,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_Convenience_Async()
+        public async Task Example_Put_ShortVersion_Convenience_Async()
         {
             ExtensibleEnum client = new ValueTypesClient().GetExtensibleEnumClient(apiVersion: "1.0.0");
 

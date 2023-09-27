@@ -20,7 +20,7 @@ namespace Encode.Duration.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Default()
+        public void Example_Default_ShortVersion()
         {
             Query client = new DurationClient().GetQueryClient(apiVersion: "1.0.0");
 
@@ -30,7 +30,7 @@ namespace Encode.Duration.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Default_Async()
+        public async Task Example_Default_ShortVersion_Async()
         {
             Query client = new DurationClient().GetQueryClient(apiVersion: "1.0.0");
 
@@ -60,7 +60,7 @@ namespace Encode.Duration.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Iso8601()
+        public void Example_Iso8601_ShortVersion()
         {
             Query client = new DurationClient().GetQueryClient(apiVersion: "1.0.0");
 
@@ -70,7 +70,7 @@ namespace Encode.Duration.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Iso8601_Async()
+        public async Task Example_Iso8601_ShortVersion_Async()
         {
             Query client = new DurationClient().GetQueryClient(apiVersion: "1.0.0");
 
@@ -100,7 +100,7 @@ namespace Encode.Duration.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Int32Seconds()
+        public void Example_Int32Seconds_ShortVersion()
         {
             Query client = new DurationClient().GetQueryClient(apiVersion: "1.0.0");
 
@@ -110,7 +110,7 @@ namespace Encode.Duration.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Int32Seconds_Async()
+        public async Task Example_Int32Seconds_ShortVersion_Async()
         {
             Query client = new DurationClient().GetQueryClient(apiVersion: "1.0.0");
 
@@ -140,7 +140,7 @@ namespace Encode.Duration.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_FloatSeconds()
+        public void Example_FloatSeconds_ShortVersion()
         {
             Query client = new DurationClient().GetQueryClient(apiVersion: "1.0.0");
 
@@ -150,7 +150,7 @@ namespace Encode.Duration.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_FloatSeconds_Async()
+        public async Task Example_FloatSeconds_ShortVersion_Async()
         {
             Query client = new DurationClient().GetQueryClient(apiVersion: "1.0.0");
 
@@ -180,7 +180,7 @@ namespace Encode.Duration.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Int32SecondsArray()
+        public void Example_Int32SecondsArray_ShortVersion()
         {
             Query client = new DurationClient().GetQueryClient(apiVersion: "1.0.0");
 
@@ -193,7 +193,7 @@ TimeSpan.FromSeconds(10)
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Int32SecondsArray_Async()
+        public async Task Example_Int32SecondsArray_ShortVersion_Async()
         {
             Query client = new DurationClient().GetQueryClient(apiVersion: "1.0.0");
 

@@ -19,7 +19,7 @@ namespace PaginationParams_LowLevel.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetPaginationParams()
+        public void Example_GetPaginationParams_ShortVersion()
         {
             TokenCredential credential = new DefaultAzureCredential();
             PaginationParamsClient client = new PaginationParamsClient(credential);
@@ -33,7 +33,7 @@ namespace PaginationParams_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetPaginationParams_Async()
+        public async Task Example_GetPaginationParams_ShortVersion_Async()
         {
             TokenCredential credential = new DefaultAzureCredential();
             PaginationParamsClient client = new PaginationParamsClient(credential);
@@ -79,7 +79,7 @@ namespace PaginationParams_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Get2s()
+        public void Example_Get2s_ShortVersion()
         {
             TokenCredential credential = new DefaultAzureCredential();
             PaginationParamsClient client = new PaginationParamsClient(credential);
@@ -93,7 +93,7 @@ namespace PaginationParams_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Get2s_Async()
+        public async Task Example_Get2s_ShortVersion_Async()
         {
             TokenCredential credential = new DefaultAzureCredential();
             PaginationParamsClient client = new PaginationParamsClient(credential);
@@ -139,7 +139,7 @@ namespace PaginationParams_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Get3s()
+        public void Example_Get3s_ShortVersion()
         {
             TokenCredential credential = new DefaultAzureCredential();
             PaginationParamsClient client = new PaginationParamsClient(credential);
@@ -153,7 +153,7 @@ namespace PaginationParams_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Get3s_Async()
+        public async Task Example_Get3s_ShortVersion_Async()
         {
             TokenCredential credential = new DefaultAzureCredential();
             PaginationParamsClient client = new PaginationParamsClient(credential);
@@ -199,7 +199,7 @@ namespace PaginationParams_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Get4s()
+        public void Example_Get4s_ShortVersion()
         {
             TokenCredential credential = new DefaultAzureCredential();
             PaginationParamsClient client = new PaginationParamsClient(credential);
@@ -213,7 +213,7 @@ namespace PaginationParams_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Get4s_Async()
+        public async Task Example_Get4s_ShortVersion_Async()
         {
             TokenCredential credential = new DefaultAzureCredential();
             PaginationParamsClient client = new PaginationParamsClient(credential);

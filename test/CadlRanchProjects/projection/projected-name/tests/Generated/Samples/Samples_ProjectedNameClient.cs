@@ -18,7 +18,7 @@ namespace Projection.ProjectedName.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Operation()
+        public void Example_Operation_ShortVersion()
         {
             ProjectedNameClient client = new ProjectedNameClient();
 
@@ -28,7 +28,7 @@ namespace Projection.ProjectedName.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Operation_Async()
+        public async Task Example_Operation_ShortVersion_Async()
         {
             ProjectedNameClient client = new ProjectedNameClient();
 
@@ -58,7 +58,7 @@ namespace Projection.ProjectedName.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Parameter()
+        public void Example_Parameter_ShortVersion()
         {
             ProjectedNameClient client = new ProjectedNameClient();
 
@@ -68,7 +68,7 @@ namespace Projection.ProjectedName.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Parameter_Async()
+        public async Task Example_Parameter_ShortVersion_Async()
         {
             ProjectedNameClient client = new ProjectedNameClient();
 

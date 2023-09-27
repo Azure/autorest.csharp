@@ -21,7 +21,7 @@ namespace _Type.Property.Nullable.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetNonNull()
+        public void Example_GetNonNull_ShortVersion()
         {
             Datetime client = new NullableClient().GetDatetimeClient(apiVersion: "1.0.0");
 
@@ -34,7 +34,7 @@ namespace _Type.Property.Nullable.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetNonNull_Async()
+        public async Task Example_GetNonNull_ShortVersion_Async()
         {
             Datetime client = new NullableClient().GetDatetimeClient(apiVersion: "1.0.0");
 
@@ -47,7 +47,7 @@ namespace _Type.Property.Nullable.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetNonNull_Convenience()
+        public void Example_GetNonNull_ShortVersion_Convenience()
         {
             Datetime client = new NullableClient().GetDatetimeClient(apiVersion: "1.0.0");
 
@@ -56,7 +56,7 @@ namespace _Type.Property.Nullable.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetNonNull_Convenience_Async()
+        public async Task Example_GetNonNull_ShortVersion_Convenience_Async()
         {
             Datetime client = new NullableClient().GetDatetimeClient(apiVersion: "1.0.0");
 
@@ -109,7 +109,7 @@ namespace _Type.Property.Nullable.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetNull()
+        public void Example_GetNull_ShortVersion()
         {
             Datetime client = new NullableClient().GetDatetimeClient(apiVersion: "1.0.0");
 
@@ -122,7 +122,7 @@ namespace _Type.Property.Nullable.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetNull_Async()
+        public async Task Example_GetNull_ShortVersion_Async()
         {
             Datetime client = new NullableClient().GetDatetimeClient(apiVersion: "1.0.0");
 
@@ -135,7 +135,7 @@ namespace _Type.Property.Nullable.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetNull_Convenience()
+        public void Example_GetNull_ShortVersion_Convenience()
         {
             Datetime client = new NullableClient().GetDatetimeClient(apiVersion: "1.0.0");
 
@@ -144,7 +144,7 @@ namespace _Type.Property.Nullable.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetNull_Convenience_Async()
+        public async Task Example_GetNull_ShortVersion_Convenience_Async()
         {
             Datetime client = new NullableClient().GetDatetimeClient(apiVersion: "1.0.0");
 
@@ -197,7 +197,7 @@ namespace _Type.Property.Nullable.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PatchNonNull()
+        public void Example_PatchNonNull_ShortVersion()
         {
             Datetime client = new NullableClient().GetDatetimeClient(apiVersion: "1.0.0");
 
@@ -212,7 +212,7 @@ namespace _Type.Property.Nullable.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PatchNonNull_Async()
+        public async Task Example_PatchNonNull_ShortVersion_Async()
         {
             Datetime client = new NullableClient().GetDatetimeClient(apiVersion: "1.0.0");
 
@@ -257,7 +257,7 @@ namespace _Type.Property.Nullable.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PatchNull()
+        public void Example_PatchNull_ShortVersion()
         {
             Datetime client = new NullableClient().GetDatetimeClient(apiVersion: "1.0.0");
 
@@ -272,7 +272,7 @@ namespace _Type.Property.Nullable.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PatchNull_Async()
+        public async Task Example_PatchNull_ShortVersion_Async()
         {
             Datetime client = new NullableClient().GetDatetimeClient(apiVersion: "1.0.0");
 
