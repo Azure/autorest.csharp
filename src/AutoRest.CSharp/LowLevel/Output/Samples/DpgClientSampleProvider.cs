@@ -16,9 +16,11 @@ using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Models;
+using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Output.Samples.Models;
 using Azure;
+using NUnit.Framework;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
 namespace AutoRest.CSharp.LowLevel.Output.Samples
@@ -49,9 +51,25 @@ namespace AutoRest.CSharp.LowLevel.Output.Samples
             }
         }
 
+        protected virtual MethodSignature GetMethodSignature(DpgOperationSample sample, bool isAsync)
+        {
+            var methodName = sample.GetMethodName(isAsync);
+            return new MethodSignature(
+                methodName,
+                null,
+                null,
+                isAsync ? MethodSignatureModifiers.Public | MethodSignatureModifiers.Async : MethodSignatureModifiers.Public,
+                isAsync ? typeof(Task) : (CSharpType?)null,
+                null,
+                Array.Empty<Parameter>(),
+                Attributes: _attributes);
+        }
+
+        private readonly CSharpAttribute[] _attributes = new[] { new CSharpAttribute(typeof(TestAttribute)), new CSharpAttribute(typeof(IgnoreAttribute), "Only validating compilation of examples") };
+
         private Method BuildSampleMethod(DpgOperationSample sample, bool isAsync)
         {
-            var signature = sample.GetExampleMethodSignature(isAsync);
+            var signature = GetMethodSignature(sample, isAsync);
             var clientVariableStatements = new List<MethodBodyStatement>();
             var newClientStatement = BuildGetClientStatement(sample, sample.ClientInvocationChain, clientVariableStatements, out var clientVar);
 

@@ -115,7 +115,7 @@ namespace AutoRest.CSharp.Output.Samples.Models
             }
         }
 
-        protected virtual string GetMethodName(bool isAsync)
+        public string GetMethodName(bool isAsync)
         {
             var builder = new StringBuilder("Example_").Append(_operationMethodSignature.Name);
             if (IsAllParametersUsed)
@@ -132,18 +132,6 @@ namespace AutoRest.CSharp.Output.Samples.Models
             }
             return builder.ToString();
         }
-
-        protected virtual CSharpAttribute[] Attributes => new[] { new CSharpAttribute(typeof(TestAttribute)), new CSharpAttribute(typeof(IgnoreAttribute), "Only validating compilation of examples") };
-
-        public MethodSignature GetExampleMethodSignature(bool isAsync) => new MethodSignature(
-            GetMethodName(isAsync),
-            null,
-            null,
-            isAsync ? MethodSignatureModifiers.Public | MethodSignatureModifiers.Async : MethodSignatureModifiers.Public,
-            isAsync ? typeof(Task) : (CSharpType?)null,
-            null,
-            Array.Empty<Parameter>(),
-            Attributes: Attributes);
 
         private Dictionary<string, InputExampleParameterValue>? _parameterValueMapping;
         public Dictionary<string, InputExampleParameterValue> ParameterValueMapping => _parameterValueMapping ??= EnsureParameterValueMapping();

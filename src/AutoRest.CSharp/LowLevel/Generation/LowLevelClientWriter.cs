@@ -574,7 +574,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
             _xmlDocWriter.AddMember(docRef);
             _xmlDocWriter.AddExamples(
-                samples.Select(s => (s.GetSampleInformation(isAsync), s.GetExampleMethodSignature(isAsync).Name))
+                samples.Select(s => (s.GetSampleInformation(isAsync), s.GetMethodName(isAsync)))
                 );
         }
 
