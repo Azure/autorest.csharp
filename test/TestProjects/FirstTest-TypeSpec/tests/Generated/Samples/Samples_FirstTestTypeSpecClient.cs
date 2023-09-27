@@ -1016,6 +1016,7 @@ namespace FirstTestTypeSpec.Samples
 
             RequestContent content = RequestContent.Create("<body>");
             Response response = client.StringBody(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -1028,6 +1029,7 @@ namespace FirstTestTypeSpec.Samples
 
             RequestContent content = RequestContent.Create("<body>");
             Response response = await client.StringBodyAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -1039,7 +1041,6 @@ namespace FirstTestTypeSpec.Samples
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
             Response response = client.StringBody("<body>");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1050,7 +1051,6 @@ namespace FirstTestTypeSpec.Samples
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
             Response response = await client.StringBodyAsync("<body>");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1062,6 +1062,7 @@ namespace FirstTestTypeSpec.Samples
 
             RequestContent content = RequestContent.Create("<body>");
             Response response = client.StringBody(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -1074,6 +1075,7 @@ namespace FirstTestTypeSpec.Samples
 
             RequestContent content = RequestContent.Create("<body>");
             Response response = await client.StringBodyAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -1085,7 +1087,6 @@ namespace FirstTestTypeSpec.Samples
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
             Response response = client.StringBody("<body>");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1096,7 +1097,6 @@ namespace FirstTestTypeSpec.Samples
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
             Response response = await client.StringBodyAsync("<body>");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1108,6 +1108,7 @@ namespace FirstTestTypeSpec.Samples
 
             RequestContent content = RequestContent.Create(true);
             Response response = client.BoolBody(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -1120,6 +1121,7 @@ namespace FirstTestTypeSpec.Samples
 
             RequestContent content = RequestContent.Create(true);
             Response response = await client.BoolBodyAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -1131,7 +1133,6 @@ namespace FirstTestTypeSpec.Samples
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
             Response response = client.BoolBody(true);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1142,7 +1143,6 @@ namespace FirstTestTypeSpec.Samples
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
             Response response = await client.BoolBodyAsync(true);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1154,6 +1154,7 @@ namespace FirstTestTypeSpec.Samples
 
             RequestContent content = RequestContent.Create(true);
             Response response = client.BoolBody(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -1166,6 +1167,7 @@ namespace FirstTestTypeSpec.Samples
 
             RequestContent content = RequestContent.Create(true);
             Response response = await client.BoolBodyAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -1177,7 +1179,6 @@ namespace FirstTestTypeSpec.Samples
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
             Response response = client.BoolBody(true);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1188,7 +1189,6 @@ namespace FirstTestTypeSpec.Samples
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
             Response response = await client.BoolBodyAsync(true);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1200,6 +1200,7 @@ namespace FirstTestTypeSpec.Samples
 
             RequestContent content = RequestContent.Create("2022-05-10T14:57:31.2311892-04:00");
             Response response = client.DateTimeBody(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -1212,6 +1213,7 @@ namespace FirstTestTypeSpec.Samples
 
             RequestContent content = RequestContent.Create("2022-05-10T14:57:31.2311892-04:00");
             Response response = await client.DateTimeBodyAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -1223,7 +1225,6 @@ namespace FirstTestTypeSpec.Samples
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
             Response response = client.DateTimeBody(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1234,7 +1235,6 @@ namespace FirstTestTypeSpec.Samples
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
             Response response = await client.DateTimeBodyAsync(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1246,6 +1246,7 @@ namespace FirstTestTypeSpec.Samples
 
             RequestContent content = RequestContent.Create("2022-05-10T14:57:31.2311892-04:00");
             Response response = client.DateTimeBody(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -1258,6 +1259,7 @@ namespace FirstTestTypeSpec.Samples
 
             RequestContent content = RequestContent.Create("2022-05-10T14:57:31.2311892-04:00");
             Response response = await client.DateTimeBodyAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -1269,7 +1271,6 @@ namespace FirstTestTypeSpec.Samples
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
             Response response = client.DateTimeBody(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1280,7 +1281,6 @@ namespace FirstTestTypeSpec.Samples
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
             Response response = await client.DateTimeBodyAsync(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
-            Console.WriteLine(response.Status);
         }
 
         [Test]

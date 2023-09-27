@@ -1015,7 +1015,6 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
 Response response = await client.StringBodyAsync("<body>");
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call StringBodyAsync with all parameters.
 <code><![CDATA[
@@ -1023,7 +1022,6 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
 Response response = await client.StringBodyAsync("<body>");
-Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="StringBody(string,CancellationToken)">
@@ -1034,7 +1032,6 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
 Response response = client.StringBody("<body>");
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call StringBody with all parameters.
 <code><![CDATA[
@@ -1042,7 +1039,6 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
 Response response = client.StringBody("<body>");
-Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="StringBodyAsync(RequestContent,RequestContext)">
@@ -1054,7 +1050,15 @@ FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
 RequestContent content = RequestContent.Create("<body>");
 Response response = await client.StringBodyAsync(content);
+
 Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call StringBodyAsync.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+Response response = await client.StringBodyAsync("<body>");
 ]]></code>
 This sample shows how to call StringBodyAsync with all request content.
 <code><![CDATA[
@@ -1063,7 +1067,15 @@ FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
 RequestContent content = RequestContent.Create("<body>");
 Response response = await client.StringBodyAsync(content);
+
 Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call StringBodyAsync with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+Response response = await client.StringBodyAsync("<body>");
 ]]></code></example>
     </member>
     <member name="StringBody(RequestContent,RequestContext)">
@@ -1075,7 +1087,15 @@ FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
 RequestContent content = RequestContent.Create("<body>");
 Response response = client.StringBody(content);
+
 Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call StringBody.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+Response response = client.StringBody("<body>");
 ]]></code>
 This sample shows how to call StringBody with all request content.
 <code><![CDATA[
@@ -1084,7 +1104,15 @@ FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
 RequestContent content = RequestContent.Create("<body>");
 Response response = client.StringBody(content);
+
 Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call StringBody with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+Response response = client.StringBody("<body>");
 ]]></code></example>
     </member>
     <member name="BoolBodyAsync(bool,CancellationToken)">
@@ -1095,7 +1123,6 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
 Response response = await client.BoolBodyAsync(true);
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call BoolBodyAsync with all parameters.
 <code><![CDATA[
@@ -1103,7 +1130,6 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
 Response response = await client.BoolBodyAsync(true);
-Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="BoolBody(bool,CancellationToken)">
@@ -1114,7 +1140,6 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
 Response response = client.BoolBody(true);
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call BoolBody with all parameters.
 <code><![CDATA[
@@ -1122,7 +1147,6 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
 Response response = client.BoolBody(true);
-Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="BoolBodyAsync(RequestContent,RequestContext)">
@@ -1134,7 +1158,15 @@ FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
 RequestContent content = RequestContent.Create(true);
 Response response = await client.BoolBodyAsync(content);
+
 Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call BoolBodyAsync.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+Response response = await client.BoolBodyAsync(true);
 ]]></code>
 This sample shows how to call BoolBodyAsync with all request content.
 <code><![CDATA[
@@ -1143,7 +1175,15 @@ FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
 RequestContent content = RequestContent.Create(true);
 Response response = await client.BoolBodyAsync(content);
+
 Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call BoolBodyAsync with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+Response response = await client.BoolBodyAsync(true);
 ]]></code></example>
     </member>
     <member name="BoolBody(RequestContent,RequestContext)">
@@ -1155,7 +1195,15 @@ FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
 RequestContent content = RequestContent.Create(true);
 Response response = client.BoolBody(content);
+
 Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call BoolBody.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+Response response = client.BoolBody(true);
 ]]></code>
 This sample shows how to call BoolBody with all request content.
 <code><![CDATA[
@@ -1164,7 +1212,15 @@ FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
 RequestContent content = RequestContent.Create(true);
 Response response = client.BoolBody(content);
+
 Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call BoolBody with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+Response response = client.BoolBody(true);
 ]]></code></example>
     </member>
     <member name="DateTimeBodyAsync(DateTimeOffset,CancellationToken)">
@@ -1175,7 +1231,6 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
 Response response = await client.DateTimeBodyAsync(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call DateTimeBodyAsync with all parameters.
 <code><![CDATA[
@@ -1183,7 +1238,6 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
 Response response = await client.DateTimeBodyAsync(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
-Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="DateTimeBody(DateTimeOffset,CancellationToken)">
@@ -1194,7 +1248,6 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
 Response response = client.DateTimeBody(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call DateTimeBody with all parameters.
 <code><![CDATA[
@@ -1202,7 +1255,6 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
 Response response = client.DateTimeBody(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
-Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="DateTimeBodyAsync(RequestContent,RequestContext)">
@@ -1214,7 +1266,15 @@ FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
 RequestContent content = RequestContent.Create("2022-05-10T14:57:31.2311892-04:00");
 Response response = await client.DateTimeBodyAsync(content);
+
 Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call DateTimeBodyAsync.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+Response response = await client.DateTimeBodyAsync(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
 ]]></code>
 This sample shows how to call DateTimeBodyAsync with all request content.
 <code><![CDATA[
@@ -1223,7 +1283,15 @@ FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
 RequestContent content = RequestContent.Create("2022-05-10T14:57:31.2311892-04:00");
 Response response = await client.DateTimeBodyAsync(content);
+
 Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call DateTimeBodyAsync with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+Response response = await client.DateTimeBodyAsync(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
 ]]></code></example>
     </member>
     <member name="DateTimeBody(RequestContent,RequestContext)">
@@ -1235,7 +1303,15 @@ FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
 RequestContent content = RequestContent.Create("2022-05-10T14:57:31.2311892-04:00");
 Response response = client.DateTimeBody(content);
+
 Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call DateTimeBody.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+Response response = client.DateTimeBody(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
 ]]></code>
 This sample shows how to call DateTimeBody with all request content.
 <code><![CDATA[
@@ -1244,7 +1320,15 @@ FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
 RequestContent content = RequestContent.Create("2022-05-10T14:57:31.2311892-04:00");
 Response response = client.DateTimeBody(content);
+
 Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call DateTimeBody with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+Response response = client.DateTimeBody(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
 ]]></code></example>
     </member>
     <member name="ReturnStringAsync(CancellationToken)">
@@ -1293,6 +1377,13 @@ Response response = await client.ReturnStringAsync(null);
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
+This sample shows how to call ReturnStringAsync.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+Response<string> response = await client.ReturnStringAsync();
+]]></code>
 This sample shows how to call ReturnStringAsync with all parameters and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -1302,6 +1393,13 @@ Response response = await client.ReturnStringAsync(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
+]]></code>
+This sample shows how to call ReturnStringAsync with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+Response<string> response = await client.ReturnStringAsync();
 ]]></code></example>
     </member>
     <member name="ReturnString(RequestContext)">
@@ -1316,6 +1414,13 @@ Response response = client.ReturnString(null);
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
+This sample shows how to call ReturnString.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+Response<string> response = client.ReturnString();
+]]></code>
 This sample shows how to call ReturnString with all parameters and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -1325,6 +1430,13 @@ Response response = client.ReturnString(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
+]]></code>
+This sample shows how to call ReturnString with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+Response<string> response = client.ReturnString();
 ]]></code></example>
     </member>
     <member name="ReturnUnknownAsync(CancellationToken)">
@@ -1373,6 +1485,13 @@ Response response = await client.ReturnUnknownAsync(null);
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
+This sample shows how to call ReturnUnknownAsync.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+Response<BinaryData> response = await client.ReturnUnknownAsync();
+]]></code>
 This sample shows how to call ReturnUnknownAsync with all parameters and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -1382,6 +1501,13 @@ Response response = await client.ReturnUnknownAsync(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
+]]></code>
+This sample shows how to call ReturnUnknownAsync with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+Response<BinaryData> response = await client.ReturnUnknownAsync();
 ]]></code></example>
     </member>
     <member name="ReturnUnknown(RequestContext)">
@@ -1396,6 +1522,13 @@ Response response = client.ReturnUnknown(null);
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
+This sample shows how to call ReturnUnknown.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+Response<BinaryData> response = client.ReturnUnknown();
+]]></code>
 This sample shows how to call ReturnUnknown with all parameters and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -1405,6 +1538,13 @@ Response response = client.ReturnUnknown(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
+]]></code>
+This sample shows how to call ReturnUnknown with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+Response<BinaryData> response = client.ReturnUnknown();
 ]]></code></example>
     </member>
     <member name="SayHiAsync(string,string,string,RequestContext)">
