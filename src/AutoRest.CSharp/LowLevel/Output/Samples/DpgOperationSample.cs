@@ -120,7 +120,7 @@ namespace AutoRest.CSharp.Output.Samples.Models
         {
             var builder = new StringBuilder("Example_").Append(_operationMethodSignature.Name);
 
-            builder.Append("_").Append(_exampleKey);
+            builder.Append("_").Append(ExampleKey);
 
             if (IsConvenienceSample)
             {
