@@ -199,8 +199,10 @@ namespace AutoRest.CSharp.LowLevel.Extensions
         {
             if (exampleParameterValue.Value != null)
                 return GetExpression(exampleParameterValue.Type, exampleParameterValue.Value, serializationFormat);
+            else if (exampleParameterValue.Expression != null)
+                return exampleParameterValue.Expression;
             else
-                return new FormattableStringToExpression(exampleParameterValue.Expression!);// TODO -- need to change the type of this expression to ValueExpression instead of plain FormattableString
+                throw new InvalidOperationException("this should never happen");
         }
 
         private static ValueExpression GetExpressionForRequestContent(InputExampleValue value)

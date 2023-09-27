@@ -21,6 +21,7 @@ using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Azure;
 using NUnit.Framework;
+using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
 namespace AutoRest.CSharp.Output.Samples.Models
 {
@@ -155,7 +156,7 @@ namespace AutoRest.CSharp.Output.Samples.Models
                     // if this is a required parameter and we did not find the corresponding parameter in the examples, we put the null
                     if (parameter.DefaultValue == null)
                     {
-                        result.Add(parameter.Name, new InputExampleParameterValue(parameter, $"null"));
+                        result.Add(parameter.Name, new InputExampleParameterValue(parameter, Null));
                     }
                     // if it is optional, we just do not put it in the map indicates that in the invocation we could omit it
                 }
@@ -208,7 +209,7 @@ namespace AutoRest.CSharp.Output.Samples.Models
         {
             if (parameter == KnownParameters.WaitForCompletion)
             {
-                result.Add(parameter.Name, new InputExampleParameterValue(parameter, $"{typeof(WaitUntil)}.{nameof(WaitUntil.Completed)}"));
+                result.Add(parameter.Name, new InputExampleParameterValue(parameter, new TypeReference(typeof(WaitUntil)).Property(nameof(WaitUntil.Completed))));
                 return true;
             }
 
@@ -221,7 +222,7 @@ namespace AutoRest.CSharp.Output.Samples.Models
             if (parameter == KnownParameters.RequestContextRequired)
             {
                 // we need the RequestContext to disambiguiate from the convenience method - but passing in a null value is allowed.
-                result.Add(parameter.Name, new InputExampleParameterValue(parameter, $"null"));
+                result.Add(parameter.Name, new InputExampleParameterValue(parameter, Null));
                 return true;
             }
 
@@ -242,20 +243,20 @@ namespace AutoRest.CSharp.Output.Samples.Models
             if (IsSameParameter(parameter, KnownParameters.RequestConditionsParameter) || IsSameParameter(parameter, KnownParameters.MatchConditionsParameter))
             {
                 // temporarily just return null value
-                result.Add(parameter.Name, new InputExampleParameterValue(parameter, $"null"));
+                result.Add(parameter.Name, new InputExampleParameterValue(parameter, Null));
                 return true;
             }
 
             // handle credentials
             if (parameter.Type.EqualsIgnoreNullable(KnownParameters.KeyAuth.Type))
             {
-                result.Add(parameter.Name, new InputExampleParameterValue(parameter, $"new {typeof(AzureKeyCredential)}({"<key>":L})"));
+                result.Add(parameter.Name, new InputExampleParameterValue(parameter, New.Instance(typeof(AzureKeyCredential), Literal("<key>"))));
                 return true;
             }
 
             if (parameter.Type.EqualsIgnoreNullable(KnownParameters.TokenAuth.Type))
             {
-                result.Add(parameter.Name, new InputExampleParameterValue(parameter, $"new DefaultAzureCredential()"));
+                result.Add(parameter.Name, new InputExampleParameterValue(parameter, new FormattableStringToExpression($"new DefaultAzureCredential()"))); // TODO -- we have to workaround here because we do not have the Azure.Identity dependency here
                 return true;
             }
 
