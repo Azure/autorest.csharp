@@ -75,12 +75,36 @@ namespace MgmtCustomizations.Models
             return new Dog(PetKind.Dog, name, size, dateOfBirth, sleep, bark, jump);
         }
 
+        /// <summary>
+        ///             <summary> Initializes a new instance of Cat. </summary>
+        ///             <param name="name"> The name of the pet. </param>
+        ///             <param name="size">
+        ///             The size of the pet. This property here is mocking the following scenario:
+        ///             Despite in the swagger it has a type of string, in the real payload of this request, the service is actually sending using a number, therefore the type in this swagger here is wrong and we have to fix it using customization code.
+        ///             </param>
+        ///             <param name="dateOfBirth"> Pet date of birth. </param>
+        ///             <param name="meow"> A cat can meow. </param>
+        ///             <returns> A new <see cref="T:MgmtCustomizations.Models.Cat" /> instance for mocking. </returns>
+        ///
+        /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
         public static Cat Cat(string name, int size, DateTimeOffset? dateOfBirth, string meow)
         {
             return Cat(name, size, dateOfBirth, default, default, meow);
         }
 
+        /// <summary>
+        ///             <summary> Initializes a new instance of Dog. </summary>
+        ///             <param name="name"> The name of the pet. </param>
+        ///             <param name="size">
+        ///             The size of the pet. This property here is mocking the following scenario:
+        ///             Despite in the swagger it has a type of string, in the real payload of this request, the service is actually sending using a number, therefore the type in this swagger here is wrong and we have to fix it using customization code.
+        ///             </param>
+        ///             <param name="dateOfBirth"> Pet date of birth. </param>
+        ///             <param name="bark"> A dog can bark. </param>
+        ///             <returns> A new <see cref="T:MgmtCustomizations.Models.Dog" /> instance for mocking. </returns>
+        ///
+        /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
         public static Dog Dog(string name, int size, DateTimeOffset? dateOfBirth, string bark)
         {

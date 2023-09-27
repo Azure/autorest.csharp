@@ -239,8 +239,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 .AddMetadataReferences(AssemblyMetadataReferences)
                 .WithCompilationOptions(new CSharpCompilationOptions(
                     OutputKind.DynamicallyLinkedLibrary, nullableContextOptions: NullableContextOptions.Disable));
-            var metadatReference = MetadataReference.CreateFromFile(dllPath);
-            project = project.AddMetadataReference(MetadataReference.CreateFromFile(dllPath));
+            project = project.AddMetadataReference(MetadataReference.CreateFromFile(dllPath, documentation: XmlDocumentationProvider.CreateFromFile(@"C:\netstandard2.0\MgmtCustomizations.xml")));
             return new GeneratedCodeWorkspace(project);
         }
 
