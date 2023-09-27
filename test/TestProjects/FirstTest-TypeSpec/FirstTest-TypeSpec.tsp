@@ -367,3 +367,42 @@ namespace ProtocolAndConvenient {
 @head
 @convenientAPI(true)
 op headAsBoolean(@path id: string): void;
+
+
+@route("/stringBody")
+@doc("The body parameter type is string.")
+@put
+@convenientAPI(true)
+op stringBody(@body body: string): void;
+
+
+@route("/boolBody")
+@doc("The body parameter type is bool.")
+@put
+@convenientAPI(true)
+op boolBody(@body body: boolean): void;
+
+
+@route("/dateTimeBody")
+@doc("The body parameter type is datetime.")
+@put
+@convenientAPI(true)
+op dateTimeBody(@body body: utcDateTime): void;
+
+
+@route("/returnString")
+@doc("The return type is datetime.")
+@put
+@convenientAPI(true)
+op returnString(): string;
+
+@route("/returnUnknown")
+@put
+@convenientAPI(true)
+op returnUnknown(
+): {
+  @statusCode statusCode: 200;
+  @body
+  body: unknown;
+};
+
