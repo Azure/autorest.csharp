@@ -55,7 +55,7 @@ namespace Encode.Bytes
             Argument.AssertNotNull(value, nameof(value));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await DefaultAsync(value, context).ConfigureAwait(false);
+            Response response = await DefaultAsync(RequestContentHelper.FromObject(value), context).ConfigureAwait(false);
             return response;
         }
 
@@ -68,7 +68,7 @@ namespace Encode.Bytes
             Argument.AssertNotNull(value, nameof(value));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = Default(value, context);
+            Response response = Default(RequestContentHelper.FromObject(value), context);
             return response;
         }
 
@@ -159,7 +159,7 @@ namespace Encode.Bytes
             Argument.AssertNotNull(value, nameof(value));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await OctetStreamAsync(value, context).ConfigureAwait(false);
+            Response response = await OctetStreamAsync(RequestContentHelper.FromObject(value), context).ConfigureAwait(false);
             return response;
         }
 
@@ -172,7 +172,7 @@ namespace Encode.Bytes
             Argument.AssertNotNull(value, nameof(value));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = OctetStream(value, context);
+            Response response = OctetStream(RequestContentHelper.FromObject(value), context);
             return response;
         }
 
@@ -263,7 +263,7 @@ namespace Encode.Bytes
             Argument.AssertNotNull(value, nameof(value));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await CustomContentTypeAsync(value, context).ConfigureAwait(false);
+            Response response = await CustomContentTypeAsync(RequestContentHelper.FromObject(value), context).ConfigureAwait(false);
             return response;
         }
 
@@ -276,7 +276,7 @@ namespace Encode.Bytes
             Argument.AssertNotNull(value, nameof(value));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = CustomContentType(value, context);
+            Response response = CustomContentType(RequestContentHelper.FromObject(value), context);
             return response;
         }
 
@@ -367,7 +367,7 @@ namespace Encode.Bytes
             Argument.AssertNotNull(value, nameof(value));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await Base64Async(value, context).ConfigureAwait(false);
+            Response response = await Base64Async(RequestContentHelper.FromObject(value), context).ConfigureAwait(false);
             return response;
         }
 
@@ -380,7 +380,7 @@ namespace Encode.Bytes
             Argument.AssertNotNull(value, nameof(value));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = Base64(value, context);
+            Response response = Base64(RequestContentHelper.FromObject(value), context);
             return response;
         }
 
@@ -471,7 +471,7 @@ namespace Encode.Bytes
             Argument.AssertNotNull(value, nameof(value));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await Base64urlAsync(value, context).ConfigureAwait(false);
+            Response response = await Base64urlAsync(RequestContentHelper.FromObject(value), context).ConfigureAwait(false);
             return response;
         }
 
@@ -484,7 +484,7 @@ namespace Encode.Bytes
             Argument.AssertNotNull(value, nameof(value));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = Base64url(value, context);
+            Response response = Base64url(RequestContentHelper.FromObject(value), context);
             return response;
         }
 
