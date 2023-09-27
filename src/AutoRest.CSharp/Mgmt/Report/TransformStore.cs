@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using AutoRest.CSharp.Common.Utilities;
 
 namespace AutoRest.CSharp.Mgmt.Report
 {
@@ -28,6 +29,11 @@ namespace AutoRest.CSharp.Mgmt.Report
 
         public void AddTransformer(TransformItem item)
         {
+            if (this._transformItemDict.ContainsKey(item))
+            {
+                AutoRestLogger.Warning($"Duplicate transform detected: {item}").Wait();
+                return;
+            }
             this._transformItemDict.Add(item, new List<TransformLog>());
         }
 
