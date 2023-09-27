@@ -102,7 +102,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 yield return xmlWriter.WriteStartElement(arraySerialization.Name);
             }
 
-            yield return new ForeachStatement("item", array, out var item, useVarAsItemType: true)
+            yield return new ForeachStatement("item", array, out var item)
             {
                 SerializeExpression(xmlWriter, arraySerialization.ValueSerialization, item)
             };
@@ -277,7 +277,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             deserializationStatement = new MethodBodyStatement[]
             {
                 Var("array", New.List(arraySerialization.Type), out var array),
-                new ForeachStatement("e", container.Elements(arraySerialization.ValueSerialization.Name), out var child, useVarAsItemType: true)
+                new ForeachStatement("e", container.Elements(arraySerialization.ValueSerialization.Name), out var child)
                 {
                     BuildDeserializationForXContainer(arraySerialization.ValueSerialization, new XElementExpression(child), out var deserializedChild),
                     array.Add(deserializedChild)
@@ -291,7 +291,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             deserializationStatement = new MethodBodyStatement[]
             {
                 Var("dictionary", New.Dictionary(dictionarySerialization.Type), out var dictionary),
-                new ForeachStatement("e", container.Elements(), out var element, useVarAsItemType: true)
+                new ForeachStatement("e", container.Elements(), out var element)
                 {
                     BuildDeserializationForXContainer(dictionarySerialization.ValueSerialization, new XElementExpression(element), out var deserializedElement),
                     dictionary.Add(new XElementExpression(element).Name.LocalName, deserializedElement)

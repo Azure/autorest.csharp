@@ -9,30 +9,30 @@ using AutoRest.CSharp.Generation.Writers;
 
 namespace AutoRest.CSharp.Common.Output.Expressions.Statements
 {
-    internal record ForeachStatement(CSharpType? ItemType, CodeWriterDeclaration Item, ValueExpression Enumerable, bool IsAsync = false, bool UseVarAsItemType = false) : MethodBodyStatement, IEnumerable<MethodBodyStatement>
+    internal record ForeachStatement(CSharpType? ItemType, CodeWriterDeclaration Item, ValueExpression Enumerable, bool IsAsync) : MethodBodyStatement, IEnumerable<MethodBodyStatement>
     {
         private readonly List<MethodBodyStatement> _body = new();
         public IReadOnlyList<MethodBodyStatement> Body => _body;
 
-        public ForeachStatement(CSharpType itemType, string itemName, ValueExpression enumerable, bool isAsync, out VariableReference item, bool useVarAsItemType = false) : this(itemType, new CodeWriterDeclaration(itemName), enumerable, isAsync, useVarAsItemType)
+        public ForeachStatement(CSharpType itemType, string itemName, ValueExpression enumerable, bool isAsync, out VariableReference item) : this(itemType, new CodeWriterDeclaration(itemName), enumerable, isAsync)
         {
             item = new VariableReference(itemType, Item);
         }
 
-        public ForeachStatement(string itemName, EnumerableExpression enumerable, out ValueExpression item, bool useVarAsItemType = false)
-            : this(enumerable.ItemType, new CodeWriterDeclaration(itemName), enumerable, UseVarAsItemType: useVarAsItemType)
+        public ForeachStatement(string itemName, EnumerableExpression enumerable, out ValueExpression item)
+            : this(null, new CodeWriterDeclaration(itemName), enumerable, false)
         {
             item = new VariableReference(enumerable.ItemType, Item);
         }
 
         public ForeachStatement(string itemName, EnumerableExpression enumerable, bool isAsync, out ValueExpression item)
-            : this(enumerable.ItemType, new CodeWriterDeclaration(itemName), enumerable, isAsync, true)
+            : this(null, new CodeWriterDeclaration(itemName), enumerable, isAsync)
         {
             item = new VariableReference(enumerable.ItemType, Item);
         }
 
         public ForeachStatement(string itemName, DictionaryExpression dictionary, out KeyValuePairExpression item)
-            : this(null, new CodeWriterDeclaration(itemName), dictionary) // TODO -- figure out the type here
+            : this(null, new CodeWriterDeclaration(itemName), dictionary, false)
         {
             item = new KeyValuePairExpression(new VariableReference(dictionary.ValueType, Item));
         }

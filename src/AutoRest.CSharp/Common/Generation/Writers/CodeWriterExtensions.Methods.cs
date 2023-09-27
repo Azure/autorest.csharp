@@ -106,7 +106,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     {
                         writer.AppendRawIf("await ", foreachStatement.IsAsync);
                         writer.AppendRaw("foreach (");
-                        if (foreachStatement.ItemType == null || foreachStatement.UseVarAsItemType)
+                        if (foreachStatement.ItemType == null)
                             writer.AppendRaw("var ");
                         else
                             writer.Append($"{foreachStatement.ItemType} ");

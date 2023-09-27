@@ -145,7 +145,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             return new[]
             {
                 utf8JsonWriter.WriteStartArray(),
-                new ForeachStatement("item", array, out var item, useVarAsItemType: true)
+                new ForeachStatement("item", array, out var item)
                 {
                     CheckCollectionItemForNull(utf8JsonWriter, arraySerialization.ValueSerialization, item),
                     SerializeExpression(utf8JsonWriter, arraySerialization.ValueSerialization, item)
@@ -414,7 +414,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             {
                 var dictionary = new VariableReference(objAdditionalProperties.Type, "additionalPropertiesDictionary");
                 yield return Declare(dictionary, New.Instance(objAdditionalProperties.Type));
-                yield return new ForeachStatement("property", element.EnumerateObject(), out var property, useVarAsItemType: true)
+                yield return new ForeachStatement("property", element.EnumerateObject(), out var property)
                 {
                     DeserializeIntoObjectProperties(serialization.Properties, objAdditionalProperties.ValueSerialization, new JsonPropertyExpression(property), new DictionaryExpression(TypeFactory.GetElementType(objAdditionalProperties.Type), dictionary), propertyVariables, shouldTreatEmptyStringAsNull)
                 };
@@ -422,7 +422,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             }
             else
             {
-                yield return new ForeachStatement("property", element.EnumerateObject(), out var property, useVarAsItemType: true)
+                yield return new ForeachStatement("property", element.EnumerateObject(), out var property)
                 {
                     DeserializeIntoObjectProperties(serialization.Properties, new JsonPropertyExpression(property), propertyVariables, shouldTreatEmptyStringAsNull)
                 };
@@ -491,7 +491,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 return new[]
                 {
                     CreatePropertyNullCheckStatement(jsonPropertySerialization, jsonProperty, propertyVariables, shouldTreatEmptyStringAsNull),
-                    new ForeachStatement("property", jsonProperty.Value.EnumerateObject(), out var nestedItemVariable, useVarAsItemType: true)
+                    new ForeachStatement("property", jsonProperty.Value.EnumerateObject(), out var nestedItemVariable)
                     {
                         DeserializeIntoObjectProperties(jsonPropertySerialization.PropertySerializations, new JsonPropertyExpression(nestedItemVariable), propertyVariables, shouldTreatEmptyStringAsNull)
                     },
@@ -649,7 +649,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     return new MethodBodyStatement[]
                     {
                         Declare(array, New.Instance(jsonArray.ImplementationType)),
-                        new ForeachStatement("item", element.EnumerateArray(), out ValueExpression item, useVarAsItemType: true)
+                        new ForeachStatement("item", element.EnumerateArray(), out ValueExpression item)
                         {
                             DeserializeArrayItem(jsonArray.ValueSerialization, value, new JsonElementExpression(item))
                         }
@@ -661,7 +661,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     return new MethodBodyStatement[]
                     {
                         Declare(dictionary, New.Instance(jsonDictionary.Type)),
-                        new ForeachStatement("property", element.EnumerateObject(), out var property, useVarAsItemType: true)
+                        new ForeachStatement("property", element.EnumerateObject(), out var property)
                         {
                             DeserializeDictionaryValue(jsonDictionary.ValueSerialization, new DictionaryExpression(TypeFactory.GetElementType(jsonDictionary.Type), value), new JsonPropertyExpression(property))
                         }
