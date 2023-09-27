@@ -457,7 +457,7 @@ namespace AutoRest.CSharp.LowLevel.Extensions
             // Here we convert the values to string then compare, because the raw value has the "primitive types are deserialized into strings" issue
             var choice = enumType.Values.FirstOrDefault(c => StringComparer.Ordinal.Equals(value.ToString(), c.Value.Value?.ToString()));
             if (choice != null)
-                return new TypeReference(enumType.Type).Property(choice.Declaration.Name);
+                return EnumValue(enumType, choice);
             // if we did not find a match, check if this is a SealedChoice, if so, we throw exceptions
             if (!enumType.IsExtensible)
                 throw new InvalidOperationException($"Enum value `{value}` in example does not find in type {enumType.Type.Name}");

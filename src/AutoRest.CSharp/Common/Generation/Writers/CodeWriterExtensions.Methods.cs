@@ -575,9 +575,6 @@ namespace AutoRest.CSharp.Generation.Writers
                 case StringLiteralExpression(var literal, false):
                     writer.Literal(literal);
                     break;
-                case LiteralExpression literalExpression:
-                    writer.Literal(literalExpression.Value);
-                    break;
             }
 
             static void WriteArguments(CodeWriter writer, IEnumerable<ValueExpression> arguments)

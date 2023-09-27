@@ -48,7 +48,7 @@ namespace AutoRest.CSharp.Common.Output.Models
                 _ => expression
             };
 
-        public static ValueExpression Literal(object? value) => value is null ? Null : new LiteralExpression(value);
+        public static ValueExpression Literal(object? value) => new FormattableStringToExpression($"{value:L}");
 
         public static StringExpression Literal(string? value) => new(value is null ? Null : new StringLiteralExpression(value, false));
         public static StringExpression LiteralU8(string value) => new(new StringLiteralExpression(value, true));
