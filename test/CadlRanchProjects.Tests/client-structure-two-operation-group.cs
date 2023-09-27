@@ -3,7 +3,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoRest.TestServer.Tests.Infrastructure;
 using Azure;
-using Client.Structure.Service.rename.operation;
 using Client.Structure.Service.TwoOperationGroup;
 using NUnit.Framework;
 
