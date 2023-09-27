@@ -14,7 +14,7 @@ using NUnit.Framework;
 
 namespace Client.Structure.Service.Multiple.Client.Samples
 {
-    public class Samples_ClientAClient
+    public partial class Samples_ClientAClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
@@ -24,6 +24,7 @@ namespace Client.Structure.Service.Multiple.Client.Samples
             ClientAClient client = new ClientAClient(endpoint, "default");
 
             Response response = client.RenamedOne();
+
             Console.WriteLine(response.Status);
         }
 
@@ -35,6 +36,7 @@ namespace Client.Structure.Service.Multiple.Client.Samples
             ClientAClient client = new ClientAClient(endpoint, "default");
 
             Response response = await client.RenamedOneAsync();
+
             Console.WriteLine(response.Status);
         }
 
@@ -46,6 +48,7 @@ namespace Client.Structure.Service.Multiple.Client.Samples
             ClientAClient client = new ClientAClient(endpoint, "default");
 
             Response response = client.RenamedOne();
+
             Console.WriteLine(response.Status);
         }
 
@@ -57,6 +60,7 @@ namespace Client.Structure.Service.Multiple.Client.Samples
             ClientAClient client = new ClientAClient(endpoint, "default");
 
             Response response = await client.RenamedOneAsync();
+
             Console.WriteLine(response.Status);
         }
 
@@ -68,6 +72,7 @@ namespace Client.Structure.Service.Multiple.Client.Samples
             ClientAClient client = new ClientAClient(endpoint, "default");
 
             Response response = client.RenamedThree();
+
             Console.WriteLine(response.Status);
         }
 
@@ -79,6 +84,7 @@ namespace Client.Structure.Service.Multiple.Client.Samples
             ClientAClient client = new ClientAClient(endpoint, "default");
 
             Response response = await client.RenamedThreeAsync();
+
             Console.WriteLine(response.Status);
         }
 
@@ -90,6 +96,7 @@ namespace Client.Structure.Service.Multiple.Client.Samples
             ClientAClient client = new ClientAClient(endpoint, "default");
 
             Response response = client.RenamedThree();
+
             Console.WriteLine(response.Status);
         }
 
@@ -101,6 +108,7 @@ namespace Client.Structure.Service.Multiple.Client.Samples
             ClientAClient client = new ClientAClient(endpoint, "default");
 
             Response response = await client.RenamedThreeAsync();
+
             Console.WriteLine(response.Status);
         }
 
@@ -112,6 +120,7 @@ namespace Client.Structure.Service.Multiple.Client.Samples
             ClientAClient client = new ClientAClient(endpoint, "default");
 
             Response response = client.RenamedFive();
+
             Console.WriteLine(response.Status);
         }
 
@@ -123,6 +132,7 @@ namespace Client.Structure.Service.Multiple.Client.Samples
             ClientAClient client = new ClientAClient(endpoint, "default");
 
             Response response = await client.RenamedFiveAsync();
+
             Console.WriteLine(response.Status);
         }
 
@@ -134,6 +144,7 @@ namespace Client.Structure.Service.Multiple.Client.Samples
             ClientAClient client = new ClientAClient(endpoint, "default");
 
             Response response = client.RenamedFive();
+
             Console.WriteLine(response.Status);
         }
 
@@ -145,6 +156,7 @@ namespace Client.Structure.Service.Multiple.Client.Samples
             ClientAClient client = new ClientAClient(endpoint, "default");
 
             Response response = await client.RenamedFiveAsync();
+
             Console.WriteLine(response.Status);
         }
     }

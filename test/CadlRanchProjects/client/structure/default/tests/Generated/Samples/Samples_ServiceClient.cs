@@ -14,7 +14,7 @@ using NUnit.Framework;
 
 namespace Client.Structure.Service.Default.Samples
 {
-    public class Samples_ServiceClient
+    public partial class Samples_ServiceClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
@@ -24,6 +24,7 @@ namespace Client.Structure.Service.Default.Samples
             ServiceClient client = new ServiceClient(endpoint, "default");
 
             Response response = client.One();
+
             Console.WriteLine(response.Status);
         }
 
@@ -35,6 +36,7 @@ namespace Client.Structure.Service.Default.Samples
             ServiceClient client = new ServiceClient(endpoint, "default");
 
             Response response = await client.OneAsync();
+
             Console.WriteLine(response.Status);
         }
 
@@ -46,6 +48,7 @@ namespace Client.Structure.Service.Default.Samples
             ServiceClient client = new ServiceClient(endpoint, "default");
 
             Response response = client.One();
+
             Console.WriteLine(response.Status);
         }
 
@@ -57,6 +60,7 @@ namespace Client.Structure.Service.Default.Samples
             ServiceClient client = new ServiceClient(endpoint, "default");
 
             Response response = await client.OneAsync();
+
             Console.WriteLine(response.Status);
         }
 
@@ -68,6 +72,7 @@ namespace Client.Structure.Service.Default.Samples
             ServiceClient client = new ServiceClient(endpoint, "default");
 
             Response response = client.Two();
+
             Console.WriteLine(response.Status);
         }
 
@@ -79,6 +84,7 @@ namespace Client.Structure.Service.Default.Samples
             ServiceClient client = new ServiceClient(endpoint, "default");
 
             Response response = await client.TwoAsync();
+
             Console.WriteLine(response.Status);
         }
 
@@ -90,6 +96,7 @@ namespace Client.Structure.Service.Default.Samples
             ServiceClient client = new ServiceClient(endpoint, "default");
 
             Response response = client.Two();
+
             Console.WriteLine(response.Status);
         }
 
@@ -101,6 +108,7 @@ namespace Client.Structure.Service.Default.Samples
             ServiceClient client = new ServiceClient(endpoint, "default");
 
             Response response = await client.TwoAsync();
+
             Console.WriteLine(response.Status);
         }
 
@@ -112,6 +120,7 @@ namespace Client.Structure.Service.Default.Samples
             ServiceClient client = new ServiceClient(endpoint, "default");
 
             Response response = client.Three();
+
             Console.WriteLine(response.Status);
         }
 
@@ -123,6 +132,7 @@ namespace Client.Structure.Service.Default.Samples
             ServiceClient client = new ServiceClient(endpoint, "default");
 
             Response response = await client.ThreeAsync();
+
             Console.WriteLine(response.Status);
         }
 
@@ -134,6 +144,7 @@ namespace Client.Structure.Service.Default.Samples
             ServiceClient client = new ServiceClient(endpoint, "default");
 
             Response response = client.Three();
+
             Console.WriteLine(response.Status);
         }
 
@@ -145,6 +156,7 @@ namespace Client.Structure.Service.Default.Samples
             ServiceClient client = new ServiceClient(endpoint, "default");
 
             Response response = await client.ThreeAsync();
+
             Console.WriteLine(response.Status);
         }
 
@@ -156,6 +168,7 @@ namespace Client.Structure.Service.Default.Samples
             ServiceClient client = new ServiceClient(endpoint, "default");
 
             Response response = client.Four();
+
             Console.WriteLine(response.Status);
         }
 
@@ -167,6 +180,7 @@ namespace Client.Structure.Service.Default.Samples
             ServiceClient client = new ServiceClient(endpoint, "default");
 
             Response response = await client.FourAsync();
+
             Console.WriteLine(response.Status);
         }
 
@@ -178,6 +192,7 @@ namespace Client.Structure.Service.Default.Samples
             ServiceClient client = new ServiceClient(endpoint, "default");
 
             Response response = client.Four();
+
             Console.WriteLine(response.Status);
         }
 
@@ -189,6 +204,7 @@ namespace Client.Structure.Service.Default.Samples
             ServiceClient client = new ServiceClient(endpoint, "default");
 
             Response response = await client.FourAsync();
+
             Console.WriteLine(response.Status);
         }
 
@@ -200,6 +216,7 @@ namespace Client.Structure.Service.Default.Samples
             ServiceClient client = new ServiceClient(endpoint, "default");
 
             Response response = client.Five();
+
             Console.WriteLine(response.Status);
         }
 
@@ -211,6 +228,7 @@ namespace Client.Structure.Service.Default.Samples
             ServiceClient client = new ServiceClient(endpoint, "default");
 
             Response response = await client.FiveAsync();
+
             Console.WriteLine(response.Status);
         }
 
@@ -222,6 +240,7 @@ namespace Client.Structure.Service.Default.Samples
             ServiceClient client = new ServiceClient(endpoint, "default");
 
             Response response = client.Five();
+
             Console.WriteLine(response.Status);
         }
 
@@ -233,6 +252,7 @@ namespace Client.Structure.Service.Default.Samples
             ServiceClient client = new ServiceClient(endpoint, "default");
 
             Response response = await client.FiveAsync();
+
             Console.WriteLine(response.Status);
         }
 
@@ -244,6 +264,7 @@ namespace Client.Structure.Service.Default.Samples
             ServiceClient client = new ServiceClient(endpoint, "default");
 
             Response response = client.Six();
+
             Console.WriteLine(response.Status);
         }
 
@@ -255,6 +276,7 @@ namespace Client.Structure.Service.Default.Samples
             ServiceClient client = new ServiceClient(endpoint, "default");
 
             Response response = await client.SixAsync();
+
             Console.WriteLine(response.Status);
         }
 
@@ -266,6 +288,7 @@ namespace Client.Structure.Service.Default.Samples
             ServiceClient client = new ServiceClient(endpoint, "default");
 
             Response response = client.Six();
+
             Console.WriteLine(response.Status);
         }
 
@@ -277,6 +300,7 @@ namespace Client.Structure.Service.Default.Samples
             ServiceClient client = new ServiceClient(endpoint, "default");
 
             Response response = await client.SixAsync();
+
             Console.WriteLine(response.Status);
         }
     }
