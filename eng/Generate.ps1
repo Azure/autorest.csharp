@@ -76,7 +76,9 @@ function Add-CadlRanch-TypeSpec([string]$testName, [string]$projectPrefix, [stri
     }
     $projectDirectory = Join-Path $projectDirectory "src"
     $tspMain = Join-Path $cadlRanchFilePath $testName "main.tsp"
-    Add-TypeSpec "$projectPrefix$testName" $projectDirectory $tspMain "$configString--option @azure-tools/typespec-csharp.new-project=true" "-n"
+    $clientTsp = Join-Path $cadlRanchFilePath $testName "client.tsp"
+    $mainTypeSpecFile = If (Test-Path $clientTsp) { Resolve-Path $clientTsp } Else { Resolve-Path $tspMain}
+    Add-TypeSpec "$projectPrefix$testName" $projectDirectory $mainTypeSpecFile "$configString--option @azure-tools/typespec-csharp.new-project=true" "-n"
 }
 
 function Get-TypeSpec-Entry([System.IO.DirectoryInfo]$directory) {
