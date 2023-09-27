@@ -18,7 +18,7 @@ namespace Server.Path.Multiple.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_NoOperationParams()
+        public void Example_NoOperationParams_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             MultipleClient client = new MultipleClient(endpoint);
@@ -30,7 +30,7 @@ namespace Server.Path.Multiple.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_NoOperationParams_Async()
+        public async Task Example_NoOperationParams_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             MultipleClient client = new MultipleClient(endpoint);
@@ -66,7 +66,7 @@ namespace Server.Path.Multiple.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithOperationPathParam()
+        public void Example_WithOperationPathParam_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             MultipleClient client = new MultipleClient(endpoint);
@@ -78,7 +78,7 @@ namespace Server.Path.Multiple.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithOperationPathParam_Async()
+        public async Task Example_WithOperationPathParam_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             MultipleClient client = new MultipleClient(endpoint);

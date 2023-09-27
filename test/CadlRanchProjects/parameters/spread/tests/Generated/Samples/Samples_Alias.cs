@@ -19,7 +19,7 @@ namespace Parameters.Spread.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_SpreadAsRequestBody()
+        public void Example_SpreadAsRequestBody_ShortVersion()
         {
             Alias client = new SpreadClient().GetAliasClient(apiVersion: "1.0.0");
 
@@ -34,7 +34,7 @@ namespace Parameters.Spread.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_SpreadAsRequestBody_Async()
+        public async Task Example_SpreadAsRequestBody_ShortVersion_Async()
         {
             Alias client = new SpreadClient().GetAliasClient(apiVersion: "1.0.0");
 
@@ -49,7 +49,7 @@ namespace Parameters.Spread.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_SpreadAsRequestBody_Convenience()
+        public void Example_SpreadAsRequestBody_ShortVersion_Convenience()
         {
             Alias client = new SpreadClient().GetAliasClient(apiVersion: "1.0.0");
 
@@ -58,7 +58,7 @@ namespace Parameters.Spread.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_SpreadAsRequestBody_Convenience_Async()
+        public async Task Example_SpreadAsRequestBody_ShortVersion_Convenience_Async()
         {
             Alias client = new SpreadClient().GetAliasClient(apiVersion: "1.0.0");
 
@@ -115,7 +115,7 @@ namespace Parameters.Spread.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_SpreadAsRequestParameter()
+        public void Example_SpreadAsRequestParameter_ShortVersion()
         {
             Alias client = new SpreadClient().GetAliasClient(apiVersion: "1.0.0");
 
@@ -130,7 +130,7 @@ namespace Parameters.Spread.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_SpreadAsRequestParameter_Async()
+        public async Task Example_SpreadAsRequestParameter_ShortVersion_Async()
         {
             Alias client = new SpreadClient().GetAliasClient(apiVersion: "1.0.0");
 
@@ -145,7 +145,7 @@ namespace Parameters.Spread.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_SpreadAsRequestParameter_Convenience()
+        public void Example_SpreadAsRequestParameter_ShortVersion_Convenience()
         {
             Alias client = new SpreadClient().GetAliasClient(apiVersion: "1.0.0");
 
@@ -154,7 +154,7 @@ namespace Parameters.Spread.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_SpreadAsRequestParameter_Convenience_Async()
+        public async Task Example_SpreadAsRequestParameter_ShortVersion_Convenience_Async()
         {
             Alias client = new SpreadClient().GetAliasClient(apiVersion: "1.0.0");
 
@@ -211,7 +211,7 @@ namespace Parameters.Spread.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_SpreadWithMultipleParameters()
+        public void Example_SpreadWithMultipleParameters_ShortVersion()
         {
             Alias client = new SpreadClient().GetAliasClient(apiVersion: "1.0.0");
 
@@ -231,7 +231,7 @@ namespace Parameters.Spread.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_SpreadWithMultipleParameters_Async()
+        public async Task Example_SpreadWithMultipleParameters_ShortVersion_Async()
         {
             Alias client = new SpreadClient().GetAliasClient(apiVersion: "1.0.0");
 
@@ -251,7 +251,7 @@ namespace Parameters.Spread.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_SpreadWithMultipleParameters_Convenience()
+        public void Example_SpreadWithMultipleParameters_ShortVersion_Convenience()
         {
             Alias client = new SpreadClient().GetAliasClient(apiVersion: "1.0.0");
 
@@ -260,7 +260,7 @@ namespace Parameters.Spread.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_SpreadWithMultipleParameters_Convenience_Async()
+        public async Task Example_SpreadWithMultipleParameters_ShortVersion_Convenience_Async()
         {
             Alias client = new SpreadClient().GetAliasClient(apiVersion: "1.0.0");
 

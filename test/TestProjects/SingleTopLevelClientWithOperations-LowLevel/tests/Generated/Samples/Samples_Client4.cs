@@ -19,7 +19,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Patch()
+        public void Example_Patch_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Client4 client = new TopLevelClientWithOperationClient(credential).GetClient4("<ClientParameter>");
@@ -32,7 +32,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Patch_Async()
+        public async Task Example_Patch_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Client4 client = new TopLevelClientWithOperationClient(credential).GetClient4("<ClientParameter>");

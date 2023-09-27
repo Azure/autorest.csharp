@@ -21,7 +21,7 @@ namespace Encode.Bytes.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Default()
+        public void Example_Default_ShortVersion()
         {
             Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
@@ -37,7 +37,7 @@ namespace Encode.Bytes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Default_Async()
+        public async Task Example_Default_ShortVersion_Async()
         {
             Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
@@ -53,7 +53,7 @@ namespace Encode.Bytes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Default_Convenience()
+        public void Example_Default_ShortVersion_Convenience()
         {
             Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
@@ -63,7 +63,7 @@ namespace Encode.Bytes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Default_Convenience_Async()
+        public async Task Example_Default_ShortVersion_Convenience_Async()
         {
             Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
@@ -125,7 +125,7 @@ namespace Encode.Bytes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Base64()
+        public void Example_Base64_ShortVersion()
         {
             Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
@@ -141,7 +141,7 @@ namespace Encode.Bytes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Base64_Async()
+        public async Task Example_Base64_ShortVersion_Async()
         {
             Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
@@ -157,7 +157,7 @@ namespace Encode.Bytes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Base64_Convenience()
+        public void Example_Base64_ShortVersion_Convenience()
         {
             Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
@@ -167,7 +167,7 @@ namespace Encode.Bytes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Base64_Convenience_Async()
+        public async Task Example_Base64_ShortVersion_Convenience_Async()
         {
             Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
@@ -229,7 +229,7 @@ namespace Encode.Bytes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Base64url()
+        public void Example_Base64url_ShortVersion()
         {
             Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
@@ -245,7 +245,7 @@ namespace Encode.Bytes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Base64url_Async()
+        public async Task Example_Base64url_ShortVersion_Async()
         {
             Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
@@ -261,7 +261,7 @@ namespace Encode.Bytes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Base64url_Convenience()
+        public void Example_Base64url_ShortVersion_Convenience()
         {
             Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
@@ -271,7 +271,7 @@ namespace Encode.Bytes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Base64url_Convenience_Async()
+        public async Task Example_Base64url_ShortVersion_Convenience_Async()
         {
             Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
@@ -333,7 +333,7 @@ namespace Encode.Bytes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Base64urlArray()
+        public void Example_Base64urlArray_ShortVersion()
         {
             Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
@@ -352,7 +352,7 @@ new object()
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Base64urlArray_Async()
+        public async Task Example_Base64urlArray_ShortVersion_Async()
         {
             Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
@@ -371,7 +371,7 @@ new object()
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Base64urlArray_Convenience()
+        public void Example_Base64urlArray_ShortVersion_Convenience()
         {
             Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
@@ -384,7 +384,7 @@ BinaryData.FromObjectAsJson(new object())
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Base64urlArray_Convenience_Async()
+        public async Task Example_Base64urlArray_ShortVersion_Convenience_Async()
         {
             Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 

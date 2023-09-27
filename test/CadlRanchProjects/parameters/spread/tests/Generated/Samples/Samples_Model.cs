@@ -20,7 +20,7 @@ namespace Parameters.Spread.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_SpreadAsRequestBody()
+        public void Example_SpreadAsRequestBody_ShortVersion()
         {
             Model client = new SpreadClient().GetModelClient(apiVersion: "1.0.0");
 
@@ -35,7 +35,7 @@ namespace Parameters.Spread.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_SpreadAsRequestBody_Async()
+        public async Task Example_SpreadAsRequestBody_ShortVersion_Async()
         {
             Model client = new SpreadClient().GetModelClient(apiVersion: "1.0.0");
 
@@ -50,7 +50,7 @@ namespace Parameters.Spread.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_SpreadAsRequestBody_Convenience()
+        public void Example_SpreadAsRequestBody_ShortVersion_Convenience()
         {
             Model client = new SpreadClient().GetModelClient(apiVersion: "1.0.0");
 
@@ -60,7 +60,7 @@ namespace Parameters.Spread.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_SpreadAsRequestBody_Convenience_Async()
+        public async Task Example_SpreadAsRequestBody_ShortVersion_Convenience_Async()
         {
             Model client = new SpreadClient().GetModelClient(apiVersion: "1.0.0");
 

@@ -21,7 +21,7 @@ namespace _Type.Model.Usage.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Input()
+        public void Example_Input_ShortVersion()
         {
             UsageClient client = new UsageClient();
 
@@ -36,7 +36,7 @@ namespace _Type.Model.Usage.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Input_Async()
+        public async Task Example_Input_ShortVersion_Async()
         {
             UsageClient client = new UsageClient();
 
@@ -51,7 +51,7 @@ namespace _Type.Model.Usage.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Input_Convenience()
+        public void Example_Input_ShortVersion_Convenience()
         {
             UsageClient client = new UsageClient();
 
@@ -61,7 +61,7 @@ namespace _Type.Model.Usage.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Input_Convenience_Async()
+        public async Task Example_Input_ShortVersion_Convenience_Async()
         {
             UsageClient client = new UsageClient();
 
@@ -121,7 +121,7 @@ namespace _Type.Model.Usage.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Output()
+        public void Example_Output_ShortVersion()
         {
             UsageClient client = new UsageClient();
 
@@ -133,7 +133,7 @@ namespace _Type.Model.Usage.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Output_Async()
+        public async Task Example_Output_ShortVersion_Async()
         {
             UsageClient client = new UsageClient();
 
@@ -145,7 +145,7 @@ namespace _Type.Model.Usage.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Output_Convenience()
+        public void Example_Output_ShortVersion_Convenience()
         {
             UsageClient client = new UsageClient();
 
@@ -154,7 +154,7 @@ namespace _Type.Model.Usage.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Output_Convenience_Async()
+        public async Task Example_Output_ShortVersion_Convenience_Async()
         {
             UsageClient client = new UsageClient();
 
@@ -205,7 +205,7 @@ namespace _Type.Model.Usage.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_InputAndOutput()
+        public void Example_InputAndOutput_ShortVersion()
         {
             UsageClient client = new UsageClient();
 
@@ -221,7 +221,7 @@ namespace _Type.Model.Usage.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_InputAndOutput_Async()
+        public async Task Example_InputAndOutput_ShortVersion_Async()
         {
             UsageClient client = new UsageClient();
 
@@ -237,7 +237,7 @@ namespace _Type.Model.Usage.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_InputAndOutput_Convenience()
+        public void Example_InputAndOutput_ShortVersion_Convenience()
         {
             UsageClient client = new UsageClient();
 
@@ -247,7 +247,7 @@ namespace _Type.Model.Usage.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_InputAndOutput_Convenience_Async()
+        public async Task Example_InputAndOutput_ShortVersion_Convenience_Async()
         {
             UsageClient client = new UsageClient();
 

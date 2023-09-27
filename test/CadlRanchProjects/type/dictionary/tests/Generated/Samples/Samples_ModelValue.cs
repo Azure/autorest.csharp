@@ -22,7 +22,7 @@ namespace _Type._Dictionary.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetModelValue()
+        public void Example_GetModelValue_ShortVersion()
         {
             ModelValue client = new DictionaryClient().GetModelValueClient(apiVersion: "1.0.0");
 
@@ -34,7 +34,7 @@ namespace _Type._Dictionary.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetModelValue_Async()
+        public async Task Example_GetModelValue_ShortVersion_Async()
         {
             ModelValue client = new DictionaryClient().GetModelValueClient(apiVersion: "1.0.0");
 
@@ -46,7 +46,7 @@ namespace _Type._Dictionary.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetModelValue_Convenience()
+        public void Example_GetModelValue_ShortVersion_Convenience()
         {
             ModelValue client = new DictionaryClient().GetModelValueClient(apiVersion: "1.0.0");
 
@@ -55,7 +55,7 @@ namespace _Type._Dictionary.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetModelValue_Convenience_Async()
+        public async Task Example_GetModelValue_ShortVersion_Convenience_Async()
         {
             ModelValue client = new DictionaryClient().GetModelValueClient(apiVersion: "1.0.0");
 
@@ -108,7 +108,7 @@ namespace _Type._Dictionary.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put()
+        public void Example_Put_ShortVersion()
         {
             ModelValue client = new DictionaryClient().GetModelValueClient(apiVersion: "1.0.0");
 
@@ -126,7 +126,7 @@ namespace _Type._Dictionary.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_Async()
+        public async Task Example_Put_ShortVersion_Async()
         {
             ModelValue client = new DictionaryClient().GetModelValueClient(apiVersion: "1.0.0");
 
@@ -144,7 +144,7 @@ namespace _Type._Dictionary.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put_Convenience()
+        public void Example_Put_ShortVersion_Convenience()
         {
             ModelValue client = new DictionaryClient().GetModelValueClient(apiVersion: "1.0.0");
 
@@ -156,7 +156,7 @@ namespace _Type._Dictionary.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_Convenience_Async()
+        public async Task Example_Put_ShortVersion_Convenience_Async()
         {
             ModelValue client = new DictionaryClient().GetModelValueClient(apiVersion: "1.0.0");
 

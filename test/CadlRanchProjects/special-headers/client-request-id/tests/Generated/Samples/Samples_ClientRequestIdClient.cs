@@ -18,7 +18,7 @@ namespace SpecialHeaders.ClientRequestId.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetClientRequestId()
+        public void Example_GetClientRequestId_ShortVersion()
         {
             ClientRequestIdClient client = new ClientRequestIdClient();
 
@@ -29,7 +29,7 @@ namespace SpecialHeaders.ClientRequestId.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetClientRequestId_Async()
+        public async Task Example_GetClientRequestId_ShortVersion_Async()
         {
             ClientRequestIdClient client = new ClientRequestIdClient();
 

@@ -588,9 +588,6 @@ namespace AutoRest.CSharp.Generation.Writers
             return builder.ToString();
         }
 
-        private static string EscapeXmlCSharpType(CSharpType type)
-            => type.ToString().Trim().Replace('<', '{').Replace('>', '}');
-
         private static void WriteProtocolMethodDocumentation(CodeWriter writer, LowLevelClientMethod clientMethod, bool isAsync)
         {
             var methodSignature = clientMethod.ProtocolMethodSignature.WithAsync(isAsync);

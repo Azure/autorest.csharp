@@ -21,7 +21,7 @@ namespace _Type._Array.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetBooleanValue()
+        public void Example_GetBooleanValue_ShortVersion()
         {
             BooleanValue client = new ArrayClient().GetBooleanValueClient(apiVersion: "1.0.0");
 
@@ -33,7 +33,7 @@ namespace _Type._Array.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetBooleanValue_Async()
+        public async Task Example_GetBooleanValue_ShortVersion_Async()
         {
             BooleanValue client = new ArrayClient().GetBooleanValueClient(apiVersion: "1.0.0");
 
@@ -45,7 +45,7 @@ namespace _Type._Array.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetBooleanValue_Convenience()
+        public void Example_GetBooleanValue_ShortVersion_Convenience()
         {
             BooleanValue client = new ArrayClient().GetBooleanValueClient(apiVersion: "1.0.0");
 
@@ -54,7 +54,7 @@ namespace _Type._Array.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetBooleanValue_Convenience_Async()
+        public async Task Example_GetBooleanValue_ShortVersion_Convenience_Async()
         {
             BooleanValue client = new ArrayClient().GetBooleanValueClient(apiVersion: "1.0.0");
 
@@ -105,7 +105,7 @@ namespace _Type._Array.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put()
+        public void Example_Put_ShortVersion()
         {
             BooleanValue client = new ArrayClient().GetBooleanValueClient(apiVersion: "1.0.0");
 
@@ -120,7 +120,7 @@ true
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_Async()
+        public async Task Example_Put_ShortVersion_Async()
         {
             BooleanValue client = new ArrayClient().GetBooleanValueClient(apiVersion: "1.0.0");
 
@@ -135,7 +135,7 @@ true
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put_Convenience()
+        public void Example_Put_ShortVersion_Convenience()
         {
             BooleanValue client = new ArrayClient().GetBooleanValueClient(apiVersion: "1.0.0");
 
@@ -144,7 +144,7 @@ true
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_Convenience_Async()
+        public async Task Example_Put_ShortVersion_Convenience_Async()
         {
             BooleanValue client = new ArrayClient().GetBooleanValueClient(apiVersion: "1.0.0");
 

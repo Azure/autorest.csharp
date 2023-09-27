@@ -19,7 +19,7 @@ namespace header_LowLevel.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ParamExistingKey()
+        public void Example_ParamExistingKey_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HeaderClient client = new HeaderClient(credential);
@@ -31,7 +31,7 @@ namespace header_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_ParamExistingKey_Async()
+        public async Task Example_ParamExistingKey_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HeaderClient client = new HeaderClient(credential);
@@ -67,7 +67,7 @@ namespace header_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ResponseExistingKey()
+        public void Example_ResponseExistingKey_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HeaderClient client = new HeaderClient(credential);
@@ -79,7 +79,7 @@ namespace header_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_ResponseExistingKey_Async()
+        public async Task Example_ResponseExistingKey_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HeaderClient client = new HeaderClient(credential);
@@ -115,7 +115,7 @@ namespace header_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ParamProtectedKey()
+        public void Example_ParamProtectedKey_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HeaderClient client = new HeaderClient(credential);
@@ -127,7 +127,7 @@ namespace header_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_ParamProtectedKey_Async()
+        public async Task Example_ParamProtectedKey_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HeaderClient client = new HeaderClient(credential);
@@ -163,7 +163,7 @@ namespace header_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ResponseProtectedKey()
+        public void Example_ResponseProtectedKey_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HeaderClient client = new HeaderClient(credential);
@@ -175,7 +175,7 @@ namespace header_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_ResponseProtectedKey_Async()
+        public async Task Example_ResponseProtectedKey_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HeaderClient client = new HeaderClient(credential);
@@ -211,7 +211,7 @@ namespace header_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ParamInteger()
+        public void Example_ParamInteger_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HeaderClient client = new HeaderClient(credential);
@@ -223,7 +223,7 @@ namespace header_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_ParamInteger_Async()
+        public async Task Example_ParamInteger_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HeaderClient client = new HeaderClient(credential);
@@ -259,7 +259,7 @@ namespace header_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ResponseInteger()
+        public void Example_ResponseInteger_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HeaderClient client = new HeaderClient(credential);
@@ -271,7 +271,7 @@ namespace header_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_ResponseInteger_Async()
+        public async Task Example_ResponseInteger_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HeaderClient client = new HeaderClient(credential);
@@ -307,7 +307,7 @@ namespace header_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ParamLong()
+        public void Example_ParamLong_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HeaderClient client = new HeaderClient(credential);
@@ -319,7 +319,7 @@ namespace header_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_ParamLong_Async()
+        public async Task Example_ParamLong_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HeaderClient client = new HeaderClient(credential);
@@ -355,7 +355,7 @@ namespace header_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ResponseLong()
+        public void Example_ResponseLong_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HeaderClient client = new HeaderClient(credential);
@@ -367,7 +367,7 @@ namespace header_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_ResponseLong_Async()
+        public async Task Example_ResponseLong_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HeaderClient client = new HeaderClient(credential);
@@ -403,7 +403,7 @@ namespace header_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ParamFloat()
+        public void Example_ParamFloat_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HeaderClient client = new HeaderClient(credential);
@@ -415,7 +415,7 @@ namespace header_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_ParamFloat_Async()
+        public async Task Example_ParamFloat_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HeaderClient client = new HeaderClient(credential);
@@ -451,7 +451,7 @@ namespace header_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ResponseFloat()
+        public void Example_ResponseFloat_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HeaderClient client = new HeaderClient(credential);
@@ -463,7 +463,7 @@ namespace header_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_ResponseFloat_Async()
+        public async Task Example_ResponseFloat_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HeaderClient client = new HeaderClient(credential);
@@ -499,7 +499,7 @@ namespace header_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ParamDouble()
+        public void Example_ParamDouble_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HeaderClient client = new HeaderClient(credential);
@@ -511,7 +511,7 @@ namespace header_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_ParamDouble_Async()
+        public async Task Example_ParamDouble_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HeaderClient client = new HeaderClient(credential);
@@ -547,7 +547,7 @@ namespace header_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ResponseDouble()
+        public void Example_ResponseDouble_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HeaderClient client = new HeaderClient(credential);
@@ -559,7 +559,7 @@ namespace header_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_ResponseDouble_Async()
+        public async Task Example_ResponseDouble_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HeaderClient client = new HeaderClient(credential);
@@ -595,7 +595,7 @@ namespace header_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ParamBool()
+        public void Example_ParamBool_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HeaderClient client = new HeaderClient(credential);
@@ -607,7 +607,7 @@ namespace header_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_ParamBool_Async()
+        public async Task Example_ParamBool_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HeaderClient client = new HeaderClient(credential);
@@ -643,7 +643,7 @@ namespace header_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ResponseBool()
+        public void Example_ResponseBool_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HeaderClient client = new HeaderClient(credential);
@@ -655,7 +655,7 @@ namespace header_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_ResponseBool_Async()
+        public async Task Example_ResponseBool_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HeaderClient client = new HeaderClient(credential);
@@ -691,7 +691,7 @@ namespace header_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ParamString()
+        public void Example_ParamString_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HeaderClient client = new HeaderClient(credential);
@@ -703,7 +703,7 @@ namespace header_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_ParamString_Async()
+        public async Task Example_ParamString_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HeaderClient client = new HeaderClient(credential);
@@ -739,7 +739,7 @@ namespace header_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ResponseString()
+        public void Example_ResponseString_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HeaderClient client = new HeaderClient(credential);
@@ -751,7 +751,7 @@ namespace header_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_ResponseString_Async()
+        public async Task Example_ResponseString_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HeaderClient client = new HeaderClient(credential);
@@ -787,7 +787,7 @@ namespace header_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ParamDate()
+        public void Example_ParamDate_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HeaderClient client = new HeaderClient(credential);
@@ -799,7 +799,7 @@ namespace header_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_ParamDate_Async()
+        public async Task Example_ParamDate_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HeaderClient client = new HeaderClient(credential);
@@ -835,7 +835,7 @@ namespace header_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ResponseDate()
+        public void Example_ResponseDate_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HeaderClient client = new HeaderClient(credential);
@@ -847,7 +847,7 @@ namespace header_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_ResponseDate_Async()
+        public async Task Example_ResponseDate_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HeaderClient client = new HeaderClient(credential);
@@ -883,7 +883,7 @@ namespace header_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ParamDatetime()
+        public void Example_ParamDatetime_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HeaderClient client = new HeaderClient(credential);
@@ -895,7 +895,7 @@ namespace header_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_ParamDatetime_Async()
+        public async Task Example_ParamDatetime_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HeaderClient client = new HeaderClient(credential);
@@ -931,7 +931,7 @@ namespace header_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ResponseDatetime()
+        public void Example_ResponseDatetime_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HeaderClient client = new HeaderClient(credential);
@@ -943,7 +943,7 @@ namespace header_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_ResponseDatetime_Async()
+        public async Task Example_ResponseDatetime_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HeaderClient client = new HeaderClient(credential);
@@ -979,7 +979,7 @@ namespace header_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ParamDatetimeRfc1123()
+        public void Example_ParamDatetimeRfc1123_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HeaderClient client = new HeaderClient(credential);
@@ -991,7 +991,7 @@ namespace header_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_ParamDatetimeRfc1123_Async()
+        public async Task Example_ParamDatetimeRfc1123_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HeaderClient client = new HeaderClient(credential);
@@ -1027,7 +1027,7 @@ namespace header_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ResponseDatetimeRfc1123()
+        public void Example_ResponseDatetimeRfc1123_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HeaderClient client = new HeaderClient(credential);
@@ -1039,7 +1039,7 @@ namespace header_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_ResponseDatetimeRfc1123_Async()
+        public async Task Example_ResponseDatetimeRfc1123_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HeaderClient client = new HeaderClient(credential);
@@ -1075,7 +1075,7 @@ namespace header_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ParamDuration()
+        public void Example_ParamDuration_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HeaderClient client = new HeaderClient(credential);
@@ -1087,7 +1087,7 @@ namespace header_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_ParamDuration_Async()
+        public async Task Example_ParamDuration_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HeaderClient client = new HeaderClient(credential);
@@ -1123,7 +1123,7 @@ namespace header_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ResponseDuration()
+        public void Example_ResponseDuration_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HeaderClient client = new HeaderClient(credential);
@@ -1135,7 +1135,7 @@ namespace header_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_ResponseDuration_Async()
+        public async Task Example_ResponseDuration_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HeaderClient client = new HeaderClient(credential);
@@ -1171,7 +1171,7 @@ namespace header_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ParamByte()
+        public void Example_ParamByte_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HeaderClient client = new HeaderClient(credential);
@@ -1183,7 +1183,7 @@ namespace header_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_ParamByte_Async()
+        public async Task Example_ParamByte_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HeaderClient client = new HeaderClient(credential);
@@ -1219,7 +1219,7 @@ namespace header_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ResponseByte()
+        public void Example_ResponseByte_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HeaderClient client = new HeaderClient(credential);
@@ -1231,7 +1231,7 @@ namespace header_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_ResponseByte_Async()
+        public async Task Example_ResponseByte_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HeaderClient client = new HeaderClient(credential);
@@ -1267,7 +1267,7 @@ namespace header_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ParamEnum()
+        public void Example_ParamEnum_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HeaderClient client = new HeaderClient(credential);
@@ -1279,7 +1279,7 @@ namespace header_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_ParamEnum_Async()
+        public async Task Example_ParamEnum_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HeaderClient client = new HeaderClient(credential);
@@ -1315,7 +1315,7 @@ namespace header_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ResponseEnum()
+        public void Example_ResponseEnum_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HeaderClient client = new HeaderClient(credential);
@@ -1327,7 +1327,7 @@ namespace header_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_ResponseEnum_Async()
+        public async Task Example_ResponseEnum_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HeaderClient client = new HeaderClient(credential);
@@ -1363,7 +1363,7 @@ namespace header_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_CustomRequestId()
+        public void Example_CustomRequestId_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HeaderClient client = new HeaderClient(credential);
@@ -1375,7 +1375,7 @@ namespace header_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_CustomRequestId_Async()
+        public async Task Example_CustomRequestId_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HeaderClient client = new HeaderClient(credential);

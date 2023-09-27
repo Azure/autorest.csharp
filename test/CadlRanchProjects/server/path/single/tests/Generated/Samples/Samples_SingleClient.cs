@@ -18,7 +18,7 @@ namespace Server.Path.Single.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_MyOp()
+        public void Example_MyOp_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SingleClient client = new SingleClient(endpoint);
@@ -30,7 +30,7 @@ namespace Server.Path.Single.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_MyOp_Async()
+        public async Task Example_MyOp_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SingleClient client = new SingleClient(endpoint);

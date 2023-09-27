@@ -21,7 +21,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetModel()
+        public void Example_GetModel_ShortVersion()
         {
             SingleDiscriminatorClient client = new SingleDiscriminatorClient();
 
@@ -34,7 +34,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetModel_Async()
+        public async Task Example_GetModel_ShortVersion_Async()
         {
             SingleDiscriminatorClient client = new SingleDiscriminatorClient();
 
@@ -47,7 +47,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetModel_Convenience()
+        public void Example_GetModel_ShortVersion_Convenience()
         {
             SingleDiscriminatorClient client = new SingleDiscriminatorClient();
 
@@ -56,7 +56,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetModel_Convenience_Async()
+        public async Task Example_GetModel_ShortVersion_Convenience_Async()
         {
             SingleDiscriminatorClient client = new SingleDiscriminatorClient();
 
@@ -109,7 +109,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutModel()
+        public void Example_PutModel_ShortVersion()
         {
             SingleDiscriminatorClient client = new SingleDiscriminatorClient();
 
@@ -125,7 +125,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutModel_Async()
+        public async Task Example_PutModel_ShortVersion_Async()
         {
             SingleDiscriminatorClient client = new SingleDiscriminatorClient();
 
@@ -141,7 +141,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutModel_Convenience()
+        public void Example_PutModel_ShortVersion_Convenience()
         {
             SingleDiscriminatorClient client = new SingleDiscriminatorClient();
 
@@ -151,7 +151,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutModel_Convenience_Async()
+        public async Task Example_PutModel_ShortVersion_Convenience_Async()
         {
             SingleDiscriminatorClient client = new SingleDiscriminatorClient();
 
@@ -213,7 +213,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetRecursiveModel()
+        public void Example_GetRecursiveModel_ShortVersion()
         {
             SingleDiscriminatorClient client = new SingleDiscriminatorClient();
 
@@ -226,7 +226,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetRecursiveModel_Async()
+        public async Task Example_GetRecursiveModel_ShortVersion_Async()
         {
             SingleDiscriminatorClient client = new SingleDiscriminatorClient();
 
@@ -239,7 +239,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetRecursiveModel_Convenience()
+        public void Example_GetRecursiveModel_ShortVersion_Convenience()
         {
             SingleDiscriminatorClient client = new SingleDiscriminatorClient();
 
@@ -248,7 +248,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetRecursiveModel_Convenience_Async()
+        public async Task Example_GetRecursiveModel_ShortVersion_Convenience_Async()
         {
             SingleDiscriminatorClient client = new SingleDiscriminatorClient();
 
@@ -301,7 +301,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutRecursiveModel()
+        public void Example_PutRecursiveModel_ShortVersion()
         {
             SingleDiscriminatorClient client = new SingleDiscriminatorClient();
 
@@ -317,7 +317,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutRecursiveModel_Async()
+        public async Task Example_PutRecursiveModel_ShortVersion_Async()
         {
             SingleDiscriminatorClient client = new SingleDiscriminatorClient();
 
@@ -333,7 +333,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutRecursiveModel_Convenience()
+        public void Example_PutRecursiveModel_ShortVersion_Convenience()
         {
             SingleDiscriminatorClient client = new SingleDiscriminatorClient();
 
@@ -343,7 +343,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutRecursiveModel_Convenience_Async()
+        public async Task Example_PutRecursiveModel_ShortVersion_Convenience_Async()
         {
             SingleDiscriminatorClient client = new SingleDiscriminatorClient();
 
@@ -405,7 +405,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetMissingDiscriminator()
+        public void Example_GetMissingDiscriminator_ShortVersion()
         {
             SingleDiscriminatorClient client = new SingleDiscriminatorClient();
 
@@ -418,7 +418,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetMissingDiscriminator_Async()
+        public async Task Example_GetMissingDiscriminator_ShortVersion_Async()
         {
             SingleDiscriminatorClient client = new SingleDiscriminatorClient();
 
@@ -431,7 +431,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetMissingDiscriminator_Convenience()
+        public void Example_GetMissingDiscriminator_ShortVersion_Convenience()
         {
             SingleDiscriminatorClient client = new SingleDiscriminatorClient();
 
@@ -440,7 +440,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetMissingDiscriminator_Convenience_Async()
+        public async Task Example_GetMissingDiscriminator_ShortVersion_Convenience_Async()
         {
             SingleDiscriminatorClient client = new SingleDiscriminatorClient();
 
@@ -493,7 +493,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetWrongDiscriminator()
+        public void Example_GetWrongDiscriminator_ShortVersion()
         {
             SingleDiscriminatorClient client = new SingleDiscriminatorClient();
 
@@ -506,7 +506,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetWrongDiscriminator_Async()
+        public async Task Example_GetWrongDiscriminator_ShortVersion_Async()
         {
             SingleDiscriminatorClient client = new SingleDiscriminatorClient();
 
@@ -519,7 +519,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetWrongDiscriminator_Convenience()
+        public void Example_GetWrongDiscriminator_ShortVersion_Convenience()
         {
             SingleDiscriminatorClient client = new SingleDiscriminatorClient();
 
@@ -528,7 +528,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetWrongDiscriminator_Convenience_Async()
+        public async Task Example_GetWrongDiscriminator_ShortVersion_Convenience_Async()
         {
             SingleDiscriminatorClient client = new SingleDiscriminatorClient();
 
@@ -581,7 +581,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetLegacyModel()
+        public void Example_GetLegacyModel_ShortVersion()
         {
             SingleDiscriminatorClient client = new SingleDiscriminatorClient();
 
@@ -594,7 +594,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetLegacyModel_Async()
+        public async Task Example_GetLegacyModel_ShortVersion_Async()
         {
             SingleDiscriminatorClient client = new SingleDiscriminatorClient();
 
@@ -607,7 +607,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetLegacyModel_Convenience()
+        public void Example_GetLegacyModel_ShortVersion_Convenience()
         {
             SingleDiscriminatorClient client = new SingleDiscriminatorClient();
 
@@ -616,7 +616,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetLegacyModel_Convenience_Async()
+        public async Task Example_GetLegacyModel_ShortVersion_Convenience_Async()
         {
             SingleDiscriminatorClient client = new SingleDiscriminatorClient();
 

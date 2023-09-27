@@ -19,7 +19,7 @@ namespace Payload.Pageable.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetPageables()
+        public void Example_GetPageables_ShortVersion()
         {
             PageableClient client = new PageableClient();
 
@@ -32,7 +32,7 @@ namespace Payload.Pageable.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetPageables_Async()
+        public async Task Example_GetPageables_ShortVersion_Async()
         {
             PageableClient client = new PageableClient();
 
@@ -45,7 +45,7 @@ namespace Payload.Pageable.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetPageables_Convenience()
+        public void Example_GetPageables_ShortVersion_Convenience()
         {
             PageableClient client = new PageableClient();
 
@@ -56,7 +56,7 @@ namespace Payload.Pageable.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetPageables_Convenience_Async()
+        public async Task Example_GetPageables_ShortVersion_Convenience_Async()
         {
             PageableClient client = new PageableClient();
 

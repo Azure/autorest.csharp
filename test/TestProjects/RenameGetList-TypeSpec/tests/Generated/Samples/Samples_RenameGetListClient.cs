@@ -19,7 +19,7 @@ namespace RenameGetList.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetProject()
+        public void Example_GetProject_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             RenameGetListClient client = new RenameGetListClient(endpoint);
@@ -39,7 +39,7 @@ namespace RenameGetList.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetProject_Async()
+        public async Task Example_GetProject_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             RenameGetListClient client = new RenameGetListClient(endpoint);
@@ -105,7 +105,7 @@ namespace RenameGetList.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetDeployment()
+        public void Example_GetDeployment_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             RenameGetListClient client = new RenameGetListClient(endpoint);
@@ -118,7 +118,7 @@ namespace RenameGetList.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetDeployment_Async()
+        public async Task Example_GetDeployment_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             RenameGetListClient client = new RenameGetListClient(endpoint);
@@ -157,7 +157,7 @@ namespace RenameGetList.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetProjects()
+        public void Example_GetProjects_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             RenameGetListClient client = new RenameGetListClient(endpoint);
@@ -178,7 +178,7 @@ namespace RenameGetList.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetProjects_Async()
+        public async Task Example_GetProjects_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             RenameGetListClient client = new RenameGetListClient(endpoint);
@@ -247,7 +247,7 @@ namespace RenameGetList.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetDeployments()
+        public void Example_GetDeployments_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             RenameGetListClient client = new RenameGetListClient(endpoint);
@@ -261,7 +261,7 @@ namespace RenameGetList.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetDeployments_Async()
+        public async Task Example_GetDeployments_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             RenameGetListClient client = new RenameGetListClient(endpoint);

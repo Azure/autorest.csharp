@@ -20,7 +20,7 @@ namespace lro_LowLevel.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutAsyncRetrySucceeded()
+        public void Example_PutAsyncRetrySucceeded_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsCustomHeaderClient client = new LROsCustomHeaderClient(credential);
@@ -35,7 +35,7 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutAsyncRetrySucceeded_Async()
+        public async Task Example_PutAsyncRetrySucceeded_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsCustomHeaderClient client = new LROsCustomHeaderClient(credential);
@@ -114,7 +114,7 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put201CreatingSucceeded200()
+        public void Example_Put201CreatingSucceeded200_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsCustomHeaderClient client = new LROsCustomHeaderClient(credential);
@@ -129,7 +129,7 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put201CreatingSucceeded200_Async()
+        public async Task Example_Put201CreatingSucceeded200_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsCustomHeaderClient client = new LROsCustomHeaderClient(credential);
@@ -208,7 +208,7 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Post202Retry200()
+        public void Example_Post202Retry200_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsCustomHeaderClient client = new LROsCustomHeaderClient(credential);
@@ -219,7 +219,7 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Post202Retry200_Async()
+        public async Task Example_Post202Retry200_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsCustomHeaderClient client = new LROsCustomHeaderClient(credential);
@@ -274,7 +274,7 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PostAsyncRetrySucceeded()
+        public void Example_PostAsyncRetrySucceeded_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsCustomHeaderClient client = new LROsCustomHeaderClient(credential);
@@ -285,7 +285,7 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PostAsyncRetrySucceeded_Async()
+        public async Task Example_PostAsyncRetrySucceeded_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsCustomHeaderClient client = new LROsCustomHeaderClient(credential);

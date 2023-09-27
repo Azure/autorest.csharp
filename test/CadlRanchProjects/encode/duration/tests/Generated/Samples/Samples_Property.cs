@@ -22,7 +22,7 @@ namespace Encode.Duration.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Default()
+        public void Example_Default_ShortVersion()
         {
             Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
 
@@ -38,7 +38,7 @@ namespace Encode.Duration.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Default_Async()
+        public async Task Example_Default_ShortVersion_Async()
         {
             Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
 
@@ -54,7 +54,7 @@ namespace Encode.Duration.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Default_Convenience()
+        public void Example_Default_ShortVersion_Convenience()
         {
             Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
 
@@ -64,7 +64,7 @@ namespace Encode.Duration.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Default_Convenience_Async()
+        public async Task Example_Default_ShortVersion_Convenience_Async()
         {
             Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
 
@@ -126,7 +126,7 @@ namespace Encode.Duration.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Iso8601()
+        public void Example_Iso8601_ShortVersion()
         {
             Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
 
@@ -142,7 +142,7 @@ namespace Encode.Duration.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Iso8601_Async()
+        public async Task Example_Iso8601_ShortVersion_Async()
         {
             Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
 
@@ -158,7 +158,7 @@ namespace Encode.Duration.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Iso8601_Convenience()
+        public void Example_Iso8601_ShortVersion_Convenience()
         {
             Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
 
@@ -168,7 +168,7 @@ namespace Encode.Duration.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Iso8601_Convenience_Async()
+        public async Task Example_Iso8601_ShortVersion_Convenience_Async()
         {
             Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
 
@@ -230,7 +230,7 @@ namespace Encode.Duration.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Int32Seconds()
+        public void Example_Int32Seconds_ShortVersion()
         {
             Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
 
@@ -246,7 +246,7 @@ namespace Encode.Duration.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Int32Seconds_Async()
+        public async Task Example_Int32Seconds_ShortVersion_Async()
         {
             Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
 
@@ -262,7 +262,7 @@ namespace Encode.Duration.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Int32Seconds_Convenience()
+        public void Example_Int32Seconds_ShortVersion_Convenience()
         {
             Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
 
@@ -272,7 +272,7 @@ namespace Encode.Duration.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Int32Seconds_Convenience_Async()
+        public async Task Example_Int32Seconds_ShortVersion_Convenience_Async()
         {
             Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
 
@@ -334,7 +334,7 @@ namespace Encode.Duration.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_FloatSeconds()
+        public void Example_FloatSeconds_ShortVersion()
         {
             Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
 
@@ -350,7 +350,7 @@ namespace Encode.Duration.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_FloatSeconds_Async()
+        public async Task Example_FloatSeconds_ShortVersion_Async()
         {
             Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
 
@@ -366,7 +366,7 @@ namespace Encode.Duration.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_FloatSeconds_Convenience()
+        public void Example_FloatSeconds_ShortVersion_Convenience()
         {
             Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
 
@@ -376,7 +376,7 @@ namespace Encode.Duration.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_FloatSeconds_Convenience_Async()
+        public async Task Example_FloatSeconds_ShortVersion_Convenience_Async()
         {
             Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
 
@@ -438,7 +438,7 @@ namespace Encode.Duration.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_FloatSecondsArray()
+        public void Example_FloatSecondsArray_ShortVersion()
         {
             Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
 
@@ -457,7 +457,7 @@ namespace Encode.Duration.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_FloatSecondsArray_Async()
+        public async Task Example_FloatSecondsArray_ShortVersion_Async()
         {
             Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
 
@@ -476,7 +476,7 @@ namespace Encode.Duration.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_FloatSecondsArray_Convenience()
+        public void Example_FloatSecondsArray_ShortVersion_Convenience()
         {
             Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
 
@@ -486,7 +486,7 @@ namespace Encode.Duration.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_FloatSecondsArray_Convenience_Async()
+        public async Task Example_FloatSecondsArray_ShortVersion_Convenience_Async()
         {
             Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
 

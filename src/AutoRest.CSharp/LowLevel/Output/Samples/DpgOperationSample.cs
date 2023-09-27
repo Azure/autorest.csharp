@@ -95,7 +95,7 @@ namespace AutoRest.CSharp.Output.Samples.Models
                 {
                     // if we cannot get an example value out of the map, we should skip it, unless it is required
                     // in the required case, we should return the default value of the type.
-                    // but we should not abuse `default` because it might cause ambigious calls which leads to compilation errors
+                    // but we should not abuse `default` because it might cause ambiguous calls which leads to compilation errors
                     if (parameter.IsOptionalInSignature)
                         continue;
 
@@ -119,10 +119,9 @@ namespace AutoRest.CSharp.Output.Samples.Models
         public string GetMethodName(bool isAsync)
         {
             var builder = new StringBuilder("Example_").Append(_operationMethodSignature.Name);
-            if (IsAllParametersUsed)
-            {
-                builder.Append("_AllParameters");
-            }
+
+            builder.Append("_").Append(_exampleKey);
+
             if (IsConvenienceSample)
             {
                 builder.Append("_Convenience");

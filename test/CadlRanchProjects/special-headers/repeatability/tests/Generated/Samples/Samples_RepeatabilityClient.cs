@@ -18,7 +18,7 @@ namespace SpecialHeaders.Repeatability.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ImmediateSuccess()
+        public void Example_ImmediateSuccess_ShortVersion()
         {
             RepeatabilityClient client = new RepeatabilityClient();
 
@@ -29,7 +29,7 @@ namespace SpecialHeaders.Repeatability.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_ImmediateSuccess_Async()
+        public async Task Example_ImmediateSuccess_ShortVersion_Async()
         {
             RepeatabilityClient client = new RepeatabilityClient();
 

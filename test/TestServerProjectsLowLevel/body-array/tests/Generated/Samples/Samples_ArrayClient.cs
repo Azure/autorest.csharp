@@ -21,7 +21,7 @@ namespace body_array_LowLevel.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetNull()
+        public void Example_GetNull_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -34,7 +34,7 @@ namespace body_array_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetNull_Async()
+        public async Task Example_GetNull_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -73,7 +73,7 @@ namespace body_array_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetInvalid()
+        public void Example_GetInvalid_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -86,7 +86,7 @@ namespace body_array_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetInvalid_Async()
+        public async Task Example_GetInvalid_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -125,7 +125,7 @@ namespace body_array_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetEmpty()
+        public void Example_GetEmpty_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -138,7 +138,7 @@ namespace body_array_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetEmpty_Async()
+        public async Task Example_GetEmpty_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -177,7 +177,7 @@ namespace body_array_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutEmpty()
+        public void Example_PutEmpty_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -193,7 +193,7 @@ namespace body_array_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutEmpty_Async()
+        public async Task Example_PutEmpty_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -241,7 +241,7 @@ namespace body_array_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetBooleanTfft()
+        public void Example_GetBooleanTfft_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -254,7 +254,7 @@ namespace body_array_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetBooleanTfft_Async()
+        public async Task Example_GetBooleanTfft_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -293,7 +293,7 @@ namespace body_array_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutBooleanTfft()
+        public void Example_PutBooleanTfft_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -309,7 +309,7 @@ true
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutBooleanTfft_Async()
+        public async Task Example_PutBooleanTfft_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -357,7 +357,7 @@ true
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetBooleanInvalidNull()
+        public void Example_GetBooleanInvalidNull_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -370,7 +370,7 @@ true
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetBooleanInvalidNull_Async()
+        public async Task Example_GetBooleanInvalidNull_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -409,7 +409,7 @@ true
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetBooleanInvalidString()
+        public void Example_GetBooleanInvalidString_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -422,7 +422,7 @@ true
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetBooleanInvalidString_Async()
+        public async Task Example_GetBooleanInvalidString_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -461,7 +461,7 @@ true
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetIntegerValid()
+        public void Example_GetIntegerValid_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -474,7 +474,7 @@ true
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetIntegerValid_Async()
+        public async Task Example_GetIntegerValid_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -513,7 +513,7 @@ true
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutIntegerValid()
+        public void Example_PutIntegerValid_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -529,7 +529,7 @@ true
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutIntegerValid_Async()
+        public async Task Example_PutIntegerValid_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -577,7 +577,7 @@ true
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetIntInvalidNull()
+        public void Example_GetIntInvalidNull_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -590,7 +590,7 @@ true
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetIntInvalidNull_Async()
+        public async Task Example_GetIntInvalidNull_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -629,7 +629,7 @@ true
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetIntInvalidString()
+        public void Example_GetIntInvalidString_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -642,7 +642,7 @@ true
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetIntInvalidString_Async()
+        public async Task Example_GetIntInvalidString_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -681,7 +681,7 @@ true
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetLongValid()
+        public void Example_GetLongValid_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -694,7 +694,7 @@ true
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetLongValid_Async()
+        public async Task Example_GetLongValid_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -733,7 +733,7 @@ true
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutLongValid()
+        public void Example_PutLongValid_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -749,7 +749,7 @@ true
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutLongValid_Async()
+        public async Task Example_PutLongValid_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -797,7 +797,7 @@ true
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetLongInvalidNull()
+        public void Example_GetLongInvalidNull_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -810,7 +810,7 @@ true
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetLongInvalidNull_Async()
+        public async Task Example_GetLongInvalidNull_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -849,7 +849,7 @@ true
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetLongInvalidString()
+        public void Example_GetLongInvalidString_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -862,7 +862,7 @@ true
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetLongInvalidString_Async()
+        public async Task Example_GetLongInvalidString_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -901,7 +901,7 @@ true
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetFloatValid()
+        public void Example_GetFloatValid_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -914,7 +914,7 @@ true
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetFloatValid_Async()
+        public async Task Example_GetFloatValid_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -953,7 +953,7 @@ true
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutFloatValid()
+        public void Example_PutFloatValid_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -969,7 +969,7 @@ true
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutFloatValid_Async()
+        public async Task Example_PutFloatValid_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -1017,7 +1017,7 @@ true
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetFloatInvalidNull()
+        public void Example_GetFloatInvalidNull_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -1030,7 +1030,7 @@ true
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetFloatInvalidNull_Async()
+        public async Task Example_GetFloatInvalidNull_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -1069,7 +1069,7 @@ true
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetFloatInvalidString()
+        public void Example_GetFloatInvalidString_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -1082,7 +1082,7 @@ true
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetFloatInvalidString_Async()
+        public async Task Example_GetFloatInvalidString_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -1121,7 +1121,7 @@ true
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetDoubleValid()
+        public void Example_GetDoubleValid_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -1134,7 +1134,7 @@ true
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetDoubleValid_Async()
+        public async Task Example_GetDoubleValid_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -1173,7 +1173,7 @@ true
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutDoubleValid()
+        public void Example_PutDoubleValid_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -1189,7 +1189,7 @@ true
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutDoubleValid_Async()
+        public async Task Example_PutDoubleValid_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -1237,7 +1237,7 @@ true
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetDoubleInvalidNull()
+        public void Example_GetDoubleInvalidNull_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -1250,7 +1250,7 @@ true
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetDoubleInvalidNull_Async()
+        public async Task Example_GetDoubleInvalidNull_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -1289,7 +1289,7 @@ true
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetDoubleInvalidString()
+        public void Example_GetDoubleInvalidString_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -1302,7 +1302,7 @@ true
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetDoubleInvalidString_Async()
+        public async Task Example_GetDoubleInvalidString_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -1341,7 +1341,7 @@ true
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetStringValid()
+        public void Example_GetStringValid_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -1354,7 +1354,7 @@ true
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetStringValid_Async()
+        public async Task Example_GetStringValid_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -1393,7 +1393,7 @@ true
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutStringValid()
+        public void Example_PutStringValid_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -1409,7 +1409,7 @@ true
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutStringValid_Async()
+        public async Task Example_PutStringValid_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -1457,7 +1457,7 @@ true
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetEnumValid()
+        public void Example_GetEnumValid_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -1470,7 +1470,7 @@ true
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetEnumValid_Async()
+        public async Task Example_GetEnumValid_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -1509,7 +1509,7 @@ true
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutEnumValid()
+        public void Example_PutEnumValid_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -1525,7 +1525,7 @@ true
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutEnumValid_Async()
+        public async Task Example_PutEnumValid_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -1573,7 +1573,7 @@ true
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetStringEnumValid()
+        public void Example_GetStringEnumValid_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -1586,7 +1586,7 @@ true
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetStringEnumValid_Async()
+        public async Task Example_GetStringEnumValid_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -1625,7 +1625,7 @@ true
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutStringEnumValid()
+        public void Example_PutStringEnumValid_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -1641,7 +1641,7 @@ true
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutStringEnumValid_Async()
+        public async Task Example_PutStringEnumValid_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -1689,7 +1689,7 @@ true
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetStringWithNull()
+        public void Example_GetStringWithNull_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -1702,7 +1702,7 @@ true
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetStringWithNull_Async()
+        public async Task Example_GetStringWithNull_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -1741,7 +1741,7 @@ true
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetStringWithInvalid()
+        public void Example_GetStringWithInvalid_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -1754,7 +1754,7 @@ true
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetStringWithInvalid_Async()
+        public async Task Example_GetStringWithInvalid_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -1793,7 +1793,7 @@ true
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetUuidValid()
+        public void Example_GetUuidValid_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -1806,7 +1806,7 @@ true
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetUuidValid_Async()
+        public async Task Example_GetUuidValid_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -1845,7 +1845,7 @@ true
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutUuidValid()
+        public void Example_PutUuidValid_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -1861,7 +1861,7 @@ true
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutUuidValid_Async()
+        public async Task Example_PutUuidValid_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -1909,7 +1909,7 @@ true
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetUuidInvalidChars()
+        public void Example_GetUuidInvalidChars_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -1922,7 +1922,7 @@ true
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetUuidInvalidChars_Async()
+        public async Task Example_GetUuidInvalidChars_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -1961,7 +1961,7 @@ true
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetDateValid()
+        public void Example_GetDateValid_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -1974,7 +1974,7 @@ true
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetDateValid_Async()
+        public async Task Example_GetDateValid_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -2013,7 +2013,7 @@ true
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutDateValid()
+        public void Example_PutDateValid_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -2029,7 +2029,7 @@ true
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutDateValid_Async()
+        public async Task Example_PutDateValid_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -2077,7 +2077,7 @@ true
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetDateInvalidNull()
+        public void Example_GetDateInvalidNull_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -2090,7 +2090,7 @@ true
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetDateInvalidNull_Async()
+        public async Task Example_GetDateInvalidNull_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -2129,7 +2129,7 @@ true
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetDateInvalidChars()
+        public void Example_GetDateInvalidChars_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -2142,7 +2142,7 @@ true
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetDateInvalidChars_Async()
+        public async Task Example_GetDateInvalidChars_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -2181,7 +2181,7 @@ true
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetDateTimeValid()
+        public void Example_GetDateTimeValid_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -2194,7 +2194,7 @@ true
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetDateTimeValid_Async()
+        public async Task Example_GetDateTimeValid_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -2233,7 +2233,7 @@ true
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutDateTimeValid()
+        public void Example_PutDateTimeValid_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -2249,7 +2249,7 @@ true
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutDateTimeValid_Async()
+        public async Task Example_PutDateTimeValid_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -2297,7 +2297,7 @@ true
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetDateTimeInvalidNull()
+        public void Example_GetDateTimeInvalidNull_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -2310,7 +2310,7 @@ true
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetDateTimeInvalidNull_Async()
+        public async Task Example_GetDateTimeInvalidNull_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -2349,7 +2349,7 @@ true
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetDateTimeInvalidChars()
+        public void Example_GetDateTimeInvalidChars_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -2362,7 +2362,7 @@ true
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetDateTimeInvalidChars_Async()
+        public async Task Example_GetDateTimeInvalidChars_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -2401,7 +2401,7 @@ true
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetDateTimeRfc1123Valid()
+        public void Example_GetDateTimeRfc1123Valid_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -2414,7 +2414,7 @@ true
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetDateTimeRfc1123Valid_Async()
+        public async Task Example_GetDateTimeRfc1123Valid_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -2453,7 +2453,7 @@ true
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutDateTimeRfc1123Valid()
+        public void Example_PutDateTimeRfc1123Valid_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -2469,7 +2469,7 @@ true
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutDateTimeRfc1123Valid_Async()
+        public async Task Example_PutDateTimeRfc1123Valid_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -2517,7 +2517,7 @@ true
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetDurationValid()
+        public void Example_GetDurationValid_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -2530,7 +2530,7 @@ true
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetDurationValid_Async()
+        public async Task Example_GetDurationValid_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -2569,7 +2569,7 @@ true
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutDurationValid()
+        public void Example_PutDurationValid_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -2585,7 +2585,7 @@ true
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutDurationValid_Async()
+        public async Task Example_PutDurationValid_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -2633,7 +2633,7 @@ true
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetByteValid()
+        public void Example_GetByteValid_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -2646,7 +2646,7 @@ true
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetByteValid_Async()
+        public async Task Example_GetByteValid_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -2685,7 +2685,7 @@ true
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutByteValid()
+        public void Example_PutByteValid_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -2701,7 +2701,7 @@ new object()
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutByteValid_Async()
+        public async Task Example_PutByteValid_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -2749,7 +2749,7 @@ new object()
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetByteInvalidNull()
+        public void Example_GetByteInvalidNull_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -2762,7 +2762,7 @@ new object()
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetByteInvalidNull_Async()
+        public async Task Example_GetByteInvalidNull_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -2801,7 +2801,7 @@ new object()
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetBase64Url()
+        public void Example_GetBase64Url_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -2814,7 +2814,7 @@ new object()
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetBase64Url_Async()
+        public async Task Example_GetBase64Url_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -2853,7 +2853,7 @@ new object()
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetComplexNull()
+        public void Example_GetComplexNull_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -2866,7 +2866,7 @@ new object()
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetComplexNull_Async()
+        public async Task Example_GetComplexNull_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -2907,7 +2907,7 @@ new object()
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetComplexEmpty()
+        public void Example_GetComplexEmpty_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -2920,7 +2920,7 @@ new object()
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetComplexEmpty_Async()
+        public async Task Example_GetComplexEmpty_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -2961,7 +2961,7 @@ new object()
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetComplexItemNull()
+        public void Example_GetComplexItemNull_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -2974,7 +2974,7 @@ new object()
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetComplexItemNull_Async()
+        public async Task Example_GetComplexItemNull_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -3015,7 +3015,7 @@ new object()
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetComplexItemEmpty()
+        public void Example_GetComplexItemEmpty_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -3028,7 +3028,7 @@ new object()
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetComplexItemEmpty_Async()
+        public async Task Example_GetComplexItemEmpty_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -3069,7 +3069,7 @@ new object()
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetComplexValid()
+        public void Example_GetComplexValid_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -3082,7 +3082,7 @@ new object()
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetComplexValid_Async()
+        public async Task Example_GetComplexValid_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -3123,7 +3123,7 @@ new object()
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutComplexValid()
+        public void Example_PutComplexValid_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -3139,7 +3139,7 @@ new object()
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutComplexValid_Async()
+        public async Task Example_PutComplexValid_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -3195,7 +3195,7 @@ new Dictionary<string, object>
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetArrayNull()
+        public void Example_GetArrayNull_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -3208,7 +3208,7 @@ new Dictionary<string, object>
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetArrayNull_Async()
+        public async Task Example_GetArrayNull_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -3247,7 +3247,7 @@ new Dictionary<string, object>
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetArrayEmpty()
+        public void Example_GetArrayEmpty_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -3260,7 +3260,7 @@ new Dictionary<string, object>
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetArrayEmpty_Async()
+        public async Task Example_GetArrayEmpty_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -3299,7 +3299,7 @@ new Dictionary<string, object>
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetArrayItemNull()
+        public void Example_GetArrayItemNull_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -3312,7 +3312,7 @@ new Dictionary<string, object>
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetArrayItemNull_Async()
+        public async Task Example_GetArrayItemNull_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -3351,7 +3351,7 @@ new Dictionary<string, object>
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetArrayItemEmpty()
+        public void Example_GetArrayItemEmpty_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -3364,7 +3364,7 @@ new Dictionary<string, object>
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetArrayItemEmpty_Async()
+        public async Task Example_GetArrayItemEmpty_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -3403,7 +3403,7 @@ new Dictionary<string, object>
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetArrayValid()
+        public void Example_GetArrayValid_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -3416,7 +3416,7 @@ new Dictionary<string, object>
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetArrayValid_Async()
+        public async Task Example_GetArrayValid_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -3455,7 +3455,7 @@ new Dictionary<string, object>
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutArrayValid()
+        public void Example_PutArrayValid_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -3474,7 +3474,7 @@ new object[]
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutArrayValid_Async()
+        public async Task Example_PutArrayValid_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -3531,7 +3531,7 @@ new object[]
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetDictionaryNull()
+        public void Example_GetDictionaryNull_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -3544,7 +3544,7 @@ new object[]
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetDictionaryNull_Async()
+        public async Task Example_GetDictionaryNull_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -3583,7 +3583,7 @@ new object[]
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetDictionaryEmpty()
+        public void Example_GetDictionaryEmpty_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -3596,7 +3596,7 @@ new object[]
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetDictionaryEmpty_Async()
+        public async Task Example_GetDictionaryEmpty_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -3635,7 +3635,7 @@ new object[]
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetDictionaryItemNull()
+        public void Example_GetDictionaryItemNull_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -3648,7 +3648,7 @@ new object[]
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetDictionaryItemNull_Async()
+        public async Task Example_GetDictionaryItemNull_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -3687,7 +3687,7 @@ new object[]
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetDictionaryItemEmpty()
+        public void Example_GetDictionaryItemEmpty_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -3700,7 +3700,7 @@ new object[]
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetDictionaryItemEmpty_Async()
+        public async Task Example_GetDictionaryItemEmpty_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -3739,7 +3739,7 @@ new object[]
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetDictionaryValid()
+        public void Example_GetDictionaryValid_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -3752,7 +3752,7 @@ new object[]
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetDictionaryValid_Async()
+        public async Task Example_GetDictionaryValid_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -3791,7 +3791,7 @@ new object[]
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutDictionaryValid()
+        public void Example_PutDictionaryValid_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
@@ -3810,7 +3810,7 @@ key = "<arrayBody>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutDictionaryValid_Async()
+        public async Task Example_PutDictionaryValid_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
