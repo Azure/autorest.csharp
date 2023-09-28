@@ -61,6 +61,7 @@
     <Compile Include="$(AzureCoreSharedSources)XElementExtensions.cs" LinkBase="Shared/Core" />
     <Compile Include="$(AzureCoreSharedSources)XmlWriterContent.cs" LinkBase="Shared/Core" />
     <Compile Include="$(AzureCoreSharedSources)XmlWriterExtensions.cs" LinkBase="Shared/Core" />
+    <Compile Include="$(AzureCoreSharedSources)TrimmingAttribute.cs" LinkBase="Shared/Core" />
     <Compile Include="$(MSBuildThisFileDirectory)/src/assets/Generator.Shared/**/*.cs" Link="Shared/AutoRest/%(RecursiveDir)/%(Filename)%(Extension)" />
   </ItemGroup>
   <ItemGroup Condition="'$(IncludeManagementSharedCode)' == 'true'">
