@@ -69,6 +69,11 @@ namespace AutoRest.CSharp.Output.Models
             {
                 dictionary.Add(inputEnum, new EnumType(inputEnum, TypeProvider.GetDefaultModelNamespace(null, _defaultNamespace), "public", typeFactory, _sourceInputModel));
             }
+
+            Dictionary<InputType, EnumType> enumReplacements = new Dictionary<InputType, EnumType>();
+            foreach (var inputType in _rootNamespace.Models)
+            {
+            }
         }
 
         private void CreateModels(IDictionary<InputModelType, ModelTypeProvider> models, TypeFactory typeFactory)

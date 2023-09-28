@@ -192,7 +192,7 @@ namespace AutoRest.CSharp.Output.Models
         {
             // the union types are always not confident.
             // if any exceptions happen in the future, we could handle it here.
-            return ConvenienceMethodConfidenceLevel.Internal;
+            return unionType.UnionItemTypes.Any(t => t is not InputLiteralType) ? ConvenienceMethodConfidenceLevel.Internal : ConvenienceMethodConfidenceLevel.Confident;
         }
     }
 }
