@@ -535,14 +535,6 @@ Response response = await client.FriendlyModelAsync(content);
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code>
-This sample shows how to call FriendlyModelAsync.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
-
-Friend notFriend = new Friend("<name>");
-Response<Friend> response = await client.FriendlyModelAsync(notFriend);
-]]></code>
 This sample shows how to call FriendlyModelAsync with all request content and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -556,14 +548,6 @@ Response response = await client.FriendlyModelAsync(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
-]]></code>
-This sample shows how to call FriendlyModelAsync with all parameters.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
-
-Friend notFriend = new Friend("<name>");
-Response<Friend> response = await client.FriendlyModelAsync(notFriend);
 ]]></code></example>
     </member>
     <member name="FriendlyModel(RequestContent,RequestContext)">
@@ -582,14 +566,6 @@ Response response = client.FriendlyModel(content);
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code>
-This sample shows how to call FriendlyModel.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
-
-Friend notFriend = new Friend("<name>");
-Response<Friend> response = client.FriendlyModel(notFriend);
-]]></code>
 This sample shows how to call FriendlyModel with all request content and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -603,14 +579,6 @@ Response response = client.FriendlyModel(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
-]]></code>
-This sample shows how to call FriendlyModel with all parameters.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
-
-Friend notFriend = new Friend("<name>");
-Response<Friend> response = client.FriendlyModel(notFriend);
 ]]></code></example>
     </member>
     <member name="AddTimeHeaderAsync(RequestContext)">
@@ -709,14 +677,6 @@ Response response = await client.StringFormatAsync(Guid.Parse("73f411fe-4f43-4b4
 
 Console.WriteLine(response.Status);
 ]]></code>
-This sample shows how to call StringFormatAsync.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
-
-ModelWithFormat body = new ModelWithFormat(new Uri("http://localhost:3000"), Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
-Response response = await client.StringFormatAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), body);
-]]></code>
 This sample shows how to call StringFormatAsync with all parameters and request content.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -730,14 +690,6 @@ RequestContent content = RequestContent.Create(new
 Response response = await client.StringFormatAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), content);
 
 Console.WriteLine(response.Status);
-]]></code>
-This sample shows how to call StringFormatAsync with all parameters.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
-
-ModelWithFormat body = new ModelWithFormat(new Uri("http://localhost:3000"), Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
-Response response = await client.StringFormatAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), body);
 ]]></code></example>
     </member>
     <member name="StringFormat(Guid,RequestContent,RequestContext)">
@@ -756,14 +708,6 @@ Response response = client.StringFormat(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828
 
 Console.WriteLine(response.Status);
 ]]></code>
-This sample shows how to call StringFormat.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
-
-ModelWithFormat body = new ModelWithFormat(new Uri("http://localhost:3000"), Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
-Response response = client.StringFormat(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), body);
-]]></code>
 This sample shows how to call StringFormat with all parameters and request content.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -777,14 +721,6 @@ RequestContent content = RequestContent.Create(new
 Response response = client.StringFormat(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), content);
 
 Console.WriteLine(response.Status);
-]]></code>
-This sample shows how to call StringFormat with all parameters.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
-
-ModelWithFormat body = new ModelWithFormat(new Uri("http://localhost:3000"), Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
-Response response = client.StringFormat(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), body);
 ]]></code></example>
     </member>
     <member name="ProjectedNameModelAsync(ProjectedModel,CancellationToken)">
@@ -841,14 +777,6 @@ Response response = await client.ProjectedNameModelAsync(content);
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code>
-This sample shows how to call ProjectedNameModelAsync.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
-
-ProjectedModel modelWithProjectedName = new ProjectedModel("<name>");
-Response<ProjectedModel> response = await client.ProjectedNameModelAsync(modelWithProjectedName);
-]]></code>
 This sample shows how to call ProjectedNameModelAsync with all request content and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -862,14 +790,6 @@ Response response = await client.ProjectedNameModelAsync(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
-]]></code>
-This sample shows how to call ProjectedNameModelAsync with all parameters.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
-
-ProjectedModel modelWithProjectedName = new ProjectedModel("<name>");
-Response<ProjectedModel> response = await client.ProjectedNameModelAsync(modelWithProjectedName);
 ]]></code></example>
     </member>
     <member name="ProjectedNameModel(RequestContent,RequestContext)">
@@ -888,14 +808,6 @@ Response response = client.ProjectedNameModel(content);
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code>
-This sample shows how to call ProjectedNameModel.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
-
-ProjectedModel modelWithProjectedName = new ProjectedModel("<name>");
-Response<ProjectedModel> response = client.ProjectedNameModel(modelWithProjectedName);
-]]></code>
 This sample shows how to call ProjectedNameModel with all request content and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -909,14 +821,6 @@ Response response = client.ProjectedNameModel(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
-]]></code>
-This sample shows how to call ProjectedNameModel with all parameters.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
-
-ProjectedModel modelWithProjectedName = new ProjectedModel("<name>");
-Response<ProjectedModel> response = client.ProjectedNameModel(modelWithProjectedName);
 ]]></code></example>
     </member>
     <member name="ReturnsAnonymousModelAsync(RequestContext)">
@@ -1053,13 +957,6 @@ Response response = await client.StringBodyAsync(content);
 
 Console.WriteLine(response.Status);
 ]]></code>
-This sample shows how to call StringBodyAsync.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
-
-Response response = await client.StringBodyAsync("<body>");
-]]></code>
 This sample shows how to call StringBodyAsync with all request content.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -1069,13 +966,6 @@ RequestContent content = RequestContent.Create("<body>");
 Response response = await client.StringBodyAsync(content);
 
 Console.WriteLine(response.Status);
-]]></code>
-This sample shows how to call StringBodyAsync with all parameters.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
-
-Response response = await client.StringBodyAsync("<body>");
 ]]></code></example>
     </member>
     <member name="StringBody(RequestContent,RequestContext)">
@@ -1090,13 +980,6 @@ Response response = client.StringBody(content);
 
 Console.WriteLine(response.Status);
 ]]></code>
-This sample shows how to call StringBody.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
-
-Response response = client.StringBody("<body>");
-]]></code>
 This sample shows how to call StringBody with all request content.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -1106,13 +989,6 @@ RequestContent content = RequestContent.Create("<body>");
 Response response = client.StringBody(content);
 
 Console.WriteLine(response.Status);
-]]></code>
-This sample shows how to call StringBody with all parameters.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
-
-Response response = client.StringBody("<body>");
 ]]></code></example>
     </member>
     <member name="BoolBodyAsync(bool,CancellationToken)">
@@ -1161,13 +1037,6 @@ Response response = await client.BoolBodyAsync(content);
 
 Console.WriteLine(response.Status);
 ]]></code>
-This sample shows how to call BoolBodyAsync.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
-
-Response response = await client.BoolBodyAsync(true);
-]]></code>
 This sample shows how to call BoolBodyAsync with all request content.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -1177,13 +1046,6 @@ RequestContent content = RequestContent.Create(true);
 Response response = await client.BoolBodyAsync(content);
 
 Console.WriteLine(response.Status);
-]]></code>
-This sample shows how to call BoolBodyAsync with all parameters.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
-
-Response response = await client.BoolBodyAsync(true);
 ]]></code></example>
     </member>
     <member name="BoolBody(RequestContent,RequestContext)">
@@ -1198,13 +1060,6 @@ Response response = client.BoolBody(content);
 
 Console.WriteLine(response.Status);
 ]]></code>
-This sample shows how to call BoolBody.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
-
-Response response = client.BoolBody(true);
-]]></code>
 This sample shows how to call BoolBody with all request content.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -1214,13 +1069,6 @@ RequestContent content = RequestContent.Create(true);
 Response response = client.BoolBody(content);
 
 Console.WriteLine(response.Status);
-]]></code>
-This sample shows how to call BoolBody with all parameters.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
-
-Response response = client.BoolBody(true);
 ]]></code></example>
     </member>
     <member name="DateTimeBodyAsync(DateTimeOffset,CancellationToken)">
@@ -1269,13 +1117,6 @@ Response response = await client.DateTimeBodyAsync(content);
 
 Console.WriteLine(response.Status);
 ]]></code>
-This sample shows how to call DateTimeBodyAsync.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
-
-Response response = await client.DateTimeBodyAsync(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
-]]></code>
 This sample shows how to call DateTimeBodyAsync with all request content.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -1285,13 +1126,6 @@ RequestContent content = RequestContent.Create("2022-05-10T14:57:31.2311892-04:0
 Response response = await client.DateTimeBodyAsync(content);
 
 Console.WriteLine(response.Status);
-]]></code>
-This sample shows how to call DateTimeBodyAsync with all parameters.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
-
-Response response = await client.DateTimeBodyAsync(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
 ]]></code></example>
     </member>
     <member name="DateTimeBody(RequestContent,RequestContext)">
@@ -1306,13 +1140,6 @@ Response response = client.DateTimeBody(content);
 
 Console.WriteLine(response.Status);
 ]]></code>
-This sample shows how to call DateTimeBody.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
-
-Response response = client.DateTimeBody(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
-]]></code>
 This sample shows how to call DateTimeBody with all request content.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -1322,13 +1149,6 @@ RequestContent content = RequestContent.Create("2022-05-10T14:57:31.2311892-04:0
 Response response = client.DateTimeBody(content);
 
 Console.WriteLine(response.Status);
-]]></code>
-This sample shows how to call DateTimeBody with all parameters.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
-
-Response response = client.DateTimeBody(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
 ]]></code></example>
     </member>
     <member name="ReturnStringAsync(CancellationToken)">
@@ -1377,13 +1197,6 @@ Response response = await client.ReturnStringAsync(null);
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
-This sample shows how to call ReturnStringAsync.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
-
-Response<string> response = await client.ReturnStringAsync();
-]]></code>
 This sample shows how to call ReturnStringAsync with all parameters and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -1393,13 +1206,6 @@ Response response = await client.ReturnStringAsync(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
-]]></code>
-This sample shows how to call ReturnStringAsync with all parameters.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
-
-Response<string> response = await client.ReturnStringAsync();
 ]]></code></example>
     </member>
     <member name="ReturnString(RequestContext)">
@@ -1414,13 +1220,6 @@ Response response = client.ReturnString(null);
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
-This sample shows how to call ReturnString.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
-
-Response<string> response = client.ReturnString();
-]]></code>
 This sample shows how to call ReturnString with all parameters and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -1430,13 +1229,6 @@ Response response = client.ReturnString(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
-]]></code>
-This sample shows how to call ReturnString with all parameters.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
-
-Response<string> response = client.ReturnString();
 ]]></code></example>
     </member>
     <member name="ReturnUnknownAsync(CancellationToken)">
@@ -1485,13 +1277,6 @@ Response response = await client.ReturnUnknownAsync(null);
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
-This sample shows how to call ReturnUnknownAsync.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
-
-Response<BinaryData> response = await client.ReturnUnknownAsync();
-]]></code>
 This sample shows how to call ReturnUnknownAsync with all parameters and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -1501,13 +1286,6 @@ Response response = await client.ReturnUnknownAsync(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
-]]></code>
-This sample shows how to call ReturnUnknownAsync with all parameters.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
-
-Response<BinaryData> response = await client.ReturnUnknownAsync();
 ]]></code></example>
     </member>
     <member name="ReturnUnknown(RequestContext)">
@@ -1522,13 +1300,6 @@ Response response = client.ReturnUnknown(null);
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
-This sample shows how to call ReturnUnknown.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
-
-Response<BinaryData> response = client.ReturnUnknown();
-]]></code>
 This sample shows how to call ReturnUnknown with all parameters and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -1538,13 +1309,6 @@ Response response = client.ReturnUnknown(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
-]]></code>
-This sample shows how to call ReturnUnknown with all parameters.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
-
-Response<BinaryData> response = client.ReturnUnknown();
 ]]></code></example>
     </member>
     <member name="SayHiAsync(string,string,string,RequestContext)">

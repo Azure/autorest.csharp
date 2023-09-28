@@ -7,20 +7,17 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Input.Examples;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
-using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.LowLevel.Extensions;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Azure;
-using NUnit.Framework;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
 namespace AutoRest.CSharp.Output.Samples.Models
@@ -41,7 +38,7 @@ namespace AutoRest.CSharp.Output.Samples.Models
 
         protected internal readonly IEnumerable<InputParameterExample> _inputClientParameterExamples;
         protected internal readonly InputOperationExample _inputOperationExample;
-        private readonly LowLevelClient _client;
+        protected internal readonly LowLevelClient _client;
         protected internal readonly LowLevelClientMethod _method;
         private readonly MethodSignature _operationMethodSignature;
         public bool IsAllParametersUsed { get; }
@@ -114,23 +111,6 @@ namespace AutoRest.CSharp.Output.Samples.Models
                     yield return parameter.IsOptionalInSignature ? new PositionalParameterReference(parameter.Name, parameterReference) : parameterReference; // returns the parameter name reference
                 }
             }
-        }
-
-        public string GetMethodName(bool isAsync)
-        {
-            var builder = new StringBuilder("Example_").Append(_operationMethodSignature.Name);
-
-            builder.Append("_").Append(ExampleKey);
-
-            if (IsConvenienceSample)
-            {
-                builder.Append("_Convenience");
-            }
-            if (isAsync)
-            {
-                builder.Append("_Async");
-            }
-            return builder.ToString();
         }
 
         private Dictionary<string, InputExampleParameterValue>? _parameterValueMapping;
