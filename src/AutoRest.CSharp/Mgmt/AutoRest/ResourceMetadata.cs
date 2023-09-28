@@ -11,6 +11,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 {
     public class ResourceMetadata
     {
-        public IEnumerable<ResourceModel>? Resources { get; set; }
+        public IDictionary<string, ResourceModel>? Resources { get; set; }
     }
 }

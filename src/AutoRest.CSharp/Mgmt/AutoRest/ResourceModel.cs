@@ -13,11 +13,17 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
     public class ResourceModel
     {
         public string? Name { get; set; }
-        public IEnumerable<ResourceOperation>? Operations { get; set; }
-        public IEnumerable<string>? Parents { get; set; }
-        public string? ModelName {  get; set; }
+        public IList<ResourceOperation>? Operations { get; set; }
+        public IList<string>? Parents { get; set; }
+        public string? SwaggerModelName {  get; set; }
+        public string? ResourceType { get; set; }
+        public string? ResourceKey { get; set; }
+        public string? ResourceKeySegment { get; set; }
         public bool IsTrackedResource { get; set; }
-        public bool IsResource { get; set; }
-        public bool IsScopeResource { get; set; }
+        public bool IsTenantResource { get; set; }
+        public bool IsSubscriptionResource { get; set; }
+        public bool IsManagementGroupResource { get; set; }
+        public bool IsExtensionResource { get; set; }
+        public bool IsSingletonResource { get; set; }
     }
 }

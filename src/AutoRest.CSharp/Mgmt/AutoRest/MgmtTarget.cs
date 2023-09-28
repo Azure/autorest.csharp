@@ -19,7 +19,10 @@ using AutoRest.CSharp.Mgmt.Generation;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models.Types;
+using Azure.ResourceManager.ManagementGroups;
 using Azure.ResourceManager.Models;
+using Azure.ResourceManager.Resources;
+using Humanizer.Localisation;
 using Microsoft.CodeAnalysis;
 
 namespace AutoRest.CSharp.AutoRest.Plugins
@@ -109,35 +112,47 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 AddGeneratedFile(project, $"{resource.Type.Name}.cs", writer.ToString());
             }
 
+            // generate metadata for converter
             var metadata = new ResourceMetadata();
-            metadata.Resources = new List<ResourceModel>();
+            metadata.Resources = new Dictionary<string, ResourceModel>();
             foreach (var resource in MgmtContext.Library.ArmResources)
             {
                 var writer = ResourceWriter.GetWriter(resource);
                 writer.Write();
 
+                Console.WriteLine($"Dealing with resource {resource.Type.Name}");
+
                 var resourceModel = new ResourceModel();
                 resourceModel.Operations = new List<ResourceOperation>();
-                var operations = resource.AllOperations.Concat(resource.ResourceCollection?.AllOperations ?? Enumerable.Empty<MgmtClientOperation>()).SelectMany(o => o).Distinct().Select(r =>
+                resource.AllOperations.Concat(resource.ResourceCollection?.AllOperations ?? Enumerable.Empty<MgmtClientOperation>()).SelectMany(o => o).ToList().ForEach(r =>
                 {
-                    var resourceOperation = new ResourceOperation();
-                    resourceOperation.OperationID = r.OperationId;
-                    resourceOperation.Method = r.Method.Name;
-                    resourceOperation.Path = r.RequestPath;
-                    resourceModel.Operations.Append(resourceOperation);
+                    if (!resourceModel.Operations.Any(o => o.OperationID == r.OperationId))
+                    {
+                        var resourceOperation = new ResourceOperation();
+                        resourceOperation.OperationID = r.OperationId;
+                        resourceOperation.Method = r.Method.Request.HttpMethod.ToString();
+                        resourceOperation.Path = r.RequestPath;
+                        resourceModel.Operations.Add(resourceOperation);
+                    }
                 });
 
-                var data = resource.ResourceData.ObjectSchema;
-                resourceModel.ModelName = data.Language.Default.SerializedName ?? data.Language.Default.Name;
-                resourceModel.IsTrackedResource = resource.ResourceData.Inherits?.EqualsIgnoreNullable(typeof(TrackedResourceData)) ?? false;
-                resourceModel.IsResource = resource.ResourceData.Inherits?.EqualsIgnoreNullable(typeof(Azure.ResourceManager.Models.ResourceData)) ?? false;
-                resourceModel.Parents = resource.GetParents().Select(p => p.ResourceName);
-                resourceModel.IsScopeResource = resourceModel.Parents.Any(p => p.GetType() == typeof(ArmResourceExtension));
+                resourceModel.Name = resource.ResourceName;
+                resourceModel.SwaggerModelName = resource.ResourceData.ObjectSchema.Language.Default.SerializedName ?? resource.ResourceData.ObjectSchema.Language.Default.Name;
+                resourceModel.ResourceType = resource.ResourceType.ToString();
+                resourceModel.ResourceKeySegment = resource.ResourceType.Last().ConstantValue;
+                resourceModel.ResourceKey = resource.RequestPath.Last().IsReference? resource.RequestPath.Last().ReferenceName : resource.RequestPath.Last().ConstantValue;
+
+                resourceModel.Parents = resource.GetParents().Select(p => p.ResourceName).ToList();
+                resourceModel.IsTrackedResource = resource.ResourceData.Inherits?.EqualsByName(typeof(TrackedResourceData)) ?? false;
+                resourceModel.IsTenantResource = resource.GetParents().Any(p => p.ResourceName == "TenantResource");
+                resourceModel.IsSubscriptionResource = resource.GetParents().Any(p => p.ResourceName == "SubscriptionResource");
+                resourceModel.IsManagementGroupResource = resource.GetParents().Any(p => p.ResourceName == "ManagementGroupResource");
+                resourceModel.IsExtensionResource = resource.GetParents().Any(p => p.GetType() == typeof(ArmResourceExtension));
+                resourceModel.IsSingletonResource = resource.IsSingleton;
+
+                metadata.Resources.Add(resourceModel.SwaggerModelName, resourceModel);
             }
-            string fileName = "metadata.json";
-            using FileStream createStream = File.Create(fileName);
-            await JsonSerializer.SerializeAsync(createStream, metadata);
-            await createStream.DisposeAsync();
+            AddGeneratedFile(project, "metadata.json", JsonSerializer.Serialize(metadata));
 
             // write extension class
             WriteExtensions(project, isArmCore, MgmtContext.Library.ExtensionWrapper, MgmtContext.Library.Extensions, MgmtContext.Library.ExtensionClients);
