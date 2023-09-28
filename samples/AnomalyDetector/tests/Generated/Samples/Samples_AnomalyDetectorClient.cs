@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
 using System.Text.Json;
 using System.Threading.Tasks;
 using AnomalyDetector;
@@ -18,7 +17,7 @@ using NUnit.Framework;
 
 namespace AnomalyDetector.Samples
 {
-    public class Samples_AnomalyDetectorClient
+    public partial class Samples_AnomalyDetectorClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
@@ -30,13 +29,13 @@ namespace AnomalyDetector.Samples
 
             RequestContent content = RequestContent.Create(new
             {
-                series = new List<object>()
-{
+                series = new object[]
+            {
 new
 {
 value = 123.45F,
 }
-},
+            },
             });
             Response response = client.DetectUnivariateEntireSeries(content);
 
@@ -60,13 +59,13 @@ value = 123.45F,
 
             RequestContent content = RequestContent.Create(new
             {
-                series = new List<object>()
-{
+                series = new object[]
+            {
 new
 {
 value = 123.45F,
 }
-},
+            },
             });
             Response response = await client.DetectUnivariateEntireSeriesAsync(content);
 
@@ -88,10 +87,10 @@ value = 123.45F,
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
-            UnivariateDetectionOptions options = new UnivariateDetectionOptions(new List<TimeSeriesPoint>()
-{
+            UnivariateDetectionOptions options = new UnivariateDetectionOptions(new TimeSeriesPoint[]
+            {
 new TimeSeriesPoint(123.45F)
-});
+            });
             Response<UnivariateEntireDetectionResult> response = client.DetectUnivariateEntireSeries(options);
         }
 
@@ -103,10 +102,10 @@ new TimeSeriesPoint(123.45F)
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
-            UnivariateDetectionOptions options = new UnivariateDetectionOptions(new List<TimeSeriesPoint>()
-{
+            UnivariateDetectionOptions options = new UnivariateDetectionOptions(new TimeSeriesPoint[]
+            {
 new TimeSeriesPoint(123.45F)
-});
+            });
             Response<UnivariateEntireDetectionResult> response = await client.DetectUnivariateEntireSeriesAsync(options);
         }
 
@@ -120,14 +119,14 @@ new TimeSeriesPoint(123.45F)
 
             RequestContent content = RequestContent.Create(new
             {
-                series = new List<object>()
-{
+                series = new object[]
+            {
 new
 {
 timestamp = "2022-05-10T14:57:31.2311892-04:00",
 value = 123.45F,
 }
-},
+            },
                 granularity = "yearly",
                 customInterval = 1234,
                 period = 1234,
@@ -159,14 +158,14 @@ value = 123.45F,
 
             RequestContent content = RequestContent.Create(new
             {
-                series = new List<object>()
-{
+                series = new object[]
+            {
 new
 {
 timestamp = "2022-05-10T14:57:31.2311892-04:00",
 value = 123.45F,
 }
-},
+            },
                 granularity = "yearly",
                 customInterval = 1234,
                 period = 1234,
@@ -196,13 +195,13 @@ value = 123.45F,
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
-            UnivariateDetectionOptions options = new UnivariateDetectionOptions(new List<TimeSeriesPoint>()
-{
+            UnivariateDetectionOptions options = new UnivariateDetectionOptions(new TimeSeriesPoint[]
+            {
 new TimeSeriesPoint(123.45F)
 {
 Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
 }
-})
+            })
             {
                 Granularity = TimeGranularity.Yearly,
                 CustomInterval = 1234,
@@ -223,13 +222,13 @@ Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
-            UnivariateDetectionOptions options = new UnivariateDetectionOptions(new List<TimeSeriesPoint>()
-{
+            UnivariateDetectionOptions options = new UnivariateDetectionOptions(new TimeSeriesPoint[]
+            {
 new TimeSeriesPoint(123.45F)
 {
 Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
 }
-})
+            })
             {
                 Granularity = TimeGranularity.Yearly,
                 CustomInterval = 1234,
@@ -252,13 +251,13 @@ Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
 
             RequestContent content = RequestContent.Create(new
             {
-                series = new List<object>()
-{
+                series = new object[]
+            {
 new
 {
 value = 123.45F,
 }
-},
+            },
             });
             Response response = client.DetectUnivariateLastPoint(content);
 
@@ -283,13 +282,13 @@ value = 123.45F,
 
             RequestContent content = RequestContent.Create(new
             {
-                series = new List<object>()
-{
+                series = new object[]
+            {
 new
 {
 value = 123.45F,
 }
-},
+            },
             });
             Response response = await client.DetectUnivariateLastPointAsync(content);
 
@@ -312,10 +311,10 @@ value = 123.45F,
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
-            UnivariateDetectionOptions options = new UnivariateDetectionOptions(new List<TimeSeriesPoint>()
-{
+            UnivariateDetectionOptions options = new UnivariateDetectionOptions(new TimeSeriesPoint[]
+            {
 new TimeSeriesPoint(123.45F)
-});
+            });
             Response<UnivariateLastDetectionResult> response = client.DetectUnivariateLastPoint(options);
         }
 
@@ -327,10 +326,10 @@ new TimeSeriesPoint(123.45F)
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
-            UnivariateDetectionOptions options = new UnivariateDetectionOptions(new List<TimeSeriesPoint>()
-{
+            UnivariateDetectionOptions options = new UnivariateDetectionOptions(new TimeSeriesPoint[]
+            {
 new TimeSeriesPoint(123.45F)
-});
+            });
             Response<UnivariateLastDetectionResult> response = await client.DetectUnivariateLastPointAsync(options);
         }
 
@@ -344,14 +343,14 @@ new TimeSeriesPoint(123.45F)
 
             RequestContent content = RequestContent.Create(new
             {
-                series = new List<object>()
-{
+                series = new object[]
+            {
 new
 {
 timestamp = "2022-05-10T14:57:31.2311892-04:00",
 value = 123.45F,
 }
-},
+            },
                 granularity = "yearly",
                 customInterval = 1234,
                 period = 1234,
@@ -384,14 +383,14 @@ value = 123.45F,
 
             RequestContent content = RequestContent.Create(new
             {
-                series = new List<object>()
-{
+                series = new object[]
+            {
 new
 {
 timestamp = "2022-05-10T14:57:31.2311892-04:00",
 value = 123.45F,
 }
-},
+            },
                 granularity = "yearly",
                 customInterval = 1234,
                 period = 1234,
@@ -422,13 +421,13 @@ value = 123.45F,
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
-            UnivariateDetectionOptions options = new UnivariateDetectionOptions(new List<TimeSeriesPoint>()
-{
+            UnivariateDetectionOptions options = new UnivariateDetectionOptions(new TimeSeriesPoint[]
+            {
 new TimeSeriesPoint(123.45F)
 {
 Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
 }
-})
+            })
             {
                 Granularity = TimeGranularity.Yearly,
                 CustomInterval = 1234,
@@ -449,13 +448,13 @@ Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
-            UnivariateDetectionOptions options = new UnivariateDetectionOptions(new List<TimeSeriesPoint>()
-{
+            UnivariateDetectionOptions options = new UnivariateDetectionOptions(new TimeSeriesPoint[]
+            {
 new TimeSeriesPoint(123.45F)
 {
 Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
 }
-})
+            })
             {
                 Granularity = TimeGranularity.Yearly,
                 CustomInterval = 1234,
@@ -478,13 +477,13 @@ Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
 
             RequestContent content = RequestContent.Create(new
             {
-                series = new List<object>()
-{
+                series = new object[]
+            {
 new
 {
 value = 123.45F,
 }
-},
+            },
                 granularity = "yearly",
             });
             Response response = client.DetectUnivariateChangePoint(content);
@@ -503,13 +502,13 @@ value = 123.45F,
 
             RequestContent content = RequestContent.Create(new
             {
-                series = new List<object>()
-{
+                series = new object[]
+            {
 new
 {
 value = 123.45F,
 }
-},
+            },
                 granularity = "yearly",
             });
             Response response = await client.DetectUnivariateChangePointAsync(content);
@@ -526,10 +525,10 @@ value = 123.45F,
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
-            UnivariateChangePointDetectionOptions options = new UnivariateChangePointDetectionOptions(new List<TimeSeriesPoint>()
-{
+            UnivariateChangePointDetectionOptions options = new UnivariateChangePointDetectionOptions(new TimeSeriesPoint[]
+            {
 new TimeSeriesPoint(123.45F)
-}, TimeGranularity.Yearly);
+            }, TimeGranularity.Yearly);
             Response<UnivariateChangePointDetectionResult> response = client.DetectUnivariateChangePoint(options);
         }
 
@@ -541,10 +540,10 @@ new TimeSeriesPoint(123.45F)
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
-            UnivariateChangePointDetectionOptions options = new UnivariateChangePointDetectionOptions(new List<TimeSeriesPoint>()
-{
+            UnivariateChangePointDetectionOptions options = new UnivariateChangePointDetectionOptions(new TimeSeriesPoint[]
+            {
 new TimeSeriesPoint(123.45F)
-}, TimeGranularity.Yearly);
+            }, TimeGranularity.Yearly);
             Response<UnivariateChangePointDetectionResult> response = await client.DetectUnivariateChangePointAsync(options);
         }
 
@@ -558,14 +557,14 @@ new TimeSeriesPoint(123.45F)
 
             RequestContent content = RequestContent.Create(new
             {
-                series = new List<object>()
-{
+                series = new object[]
+            {
 new
 {
 timestamp = "2022-05-10T14:57:31.2311892-04:00",
 value = 123.45F,
 }
-},
+            },
                 granularity = "yearly",
                 customInterval = 1234,
                 period = 1234,
@@ -590,14 +589,14 @@ value = 123.45F,
 
             RequestContent content = RequestContent.Create(new
             {
-                series = new List<object>()
-{
+                series = new object[]
+            {
 new
 {
 timestamp = "2022-05-10T14:57:31.2311892-04:00",
 value = 123.45F,
 }
-},
+            },
                 granularity = "yearly",
                 customInterval = 1234,
                 period = 1234,
@@ -620,13 +619,13 @@ value = 123.45F,
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
-            UnivariateChangePointDetectionOptions options = new UnivariateChangePointDetectionOptions(new List<TimeSeriesPoint>()
-{
+            UnivariateChangePointDetectionOptions options = new UnivariateChangePointDetectionOptions(new TimeSeriesPoint[]
+            {
 new TimeSeriesPoint(123.45F)
 {
 Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
 }
-}, TimeGranularity.Yearly)
+            }, TimeGranularity.Yearly)
             {
                 CustomInterval = 1234,
                 Period = 1234,
@@ -644,13 +643,13 @@ Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
-            UnivariateChangePointDetectionOptions options = new UnivariateChangePointDetectionOptions(new List<TimeSeriesPoint>()
-{
+            UnivariateChangePointDetectionOptions options = new UnivariateChangePointDetectionOptions(new TimeSeriesPoint[]
+            {
 new TimeSeriesPoint(123.45F)
 {
 Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
 }
-}, TimeGranularity.Yearly)
+            }, TimeGranularity.Yearly)
             {
                 CustomInterval = 1234,
                 Period = 1234,
@@ -909,25 +908,25 @@ Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
                 {
                     modelState = new
                     {
-                        epochIds = new List<object>()
-{
+                        epochIds = new object[]
+            {
 1234
-},
-                        trainLosses = new List<object>()
-{
+            },
+                        trainLosses = new object[]
+            {
 123.45F
-},
-                        validationLosses = new List<object>()
-{
+            },
+                        validationLosses = new object[]
+            {
 123.45F
-},
-                        latenciesInSeconds = new List<object>()
-{
+            },
+                        latenciesInSeconds = new object[]
+            {
 123.45F
-},
+            },
                     },
-                    variableStates = new List<object>()
-{
+                    variableStates = new object[]
+            {
 new
 {
 variable = "<variable>",
@@ -936,7 +935,7 @@ effectiveCount = 1234,
 firstTimestamp = "2022-05-10T14:57:31.2311892-04:00",
 lastTimestamp = "2022-05-10T14:57:31.2311892-04:00",
 }
-},
+            },
                 },
             });
             Response response = client.TrainMultivariateModel(content);
@@ -995,25 +994,25 @@ lastTimestamp = "2022-05-10T14:57:31.2311892-04:00",
                 {
                     modelState = new
                     {
-                        epochIds = new List<object>()
-{
+                        epochIds = new object[]
+            {
 1234
-},
-                        trainLosses = new List<object>()
-{
+            },
+                        trainLosses = new object[]
+            {
 123.45F
-},
-                        validationLosses = new List<object>()
-{
+            },
+                        validationLosses = new object[]
+            {
 123.45F
-},
-                        latenciesInSeconds = new List<object>()
-{
+            },
+                        latenciesInSeconds = new object[]
+            {
 123.45F
-},
+            },
                     },
-                    variableStates = new List<object>()
-{
+                    variableStates = new object[]
+            {
 new
 {
 variable = "<variable>",
@@ -1022,7 +1021,7 @@ effectiveCount = 1234,
 firstTimestamp = "2022-05-10T14:57:31.2311892-04:00",
 lastTimestamp = "2022-05-10T14:57:31.2311892-04:00",
 }
-},
+            },
                 },
             });
             Response response = await client.TrainMultivariateModelAsync(content);
@@ -1067,45 +1066,30 @@ lastTimestamp = "2022-05-10T14:57:31.2311892-04:00",
                 DataSchema = DataSchema.OneTable,
                 DisplayName = "<displayName>",
                 SlidingWindow = 1234,
-                AlignPolicy = new AlignPolicy()
+                AlignPolicy = new AlignPolicy
                 {
                     AlignMode = AlignMode.Inner,
                     FillNAMethod = FillNAMethod.Previous,
                     PaddingValue = 123.45F,
                 },
                 Status = ModelStatus.Created,
-                DiagnosticsInfo = new DiagnosticsInfo()
+                DiagnosticsInfo = new DiagnosticsInfo
                 {
-                    ModelState = new ModelState()
+                    ModelState = new ModelState
                     {
-                        EpochIds =
-{
-1234
-},
-                        TrainLosses =
-{
-123.45F
-},
-                        ValidationLosses =
-{
-123.45F
-},
-                        LatenciesInSeconds =
-{
-123.45F
-},
+                        EpochIds = { 1234 },
+                        TrainLosses = { 123.45F },
+                        ValidationLosses = { 123.45F },
+                        LatenciesInSeconds = { 123.45F },
                     },
-                    VariableStates =
-{
-new VariableState()
+                    VariableStates = {new VariableState
 {
 Variable = "<variable>",
 FilledNARatio = 123.45F,
 EffectiveCount = 1234,
 FirstTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
 LastTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
-}
-},
+}},
                 },
             };
             Response<AnomalyDetectionModel> response = client.TrainMultivariateModel(modelInfo);
@@ -1124,45 +1108,30 @@ LastTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
                 DataSchema = DataSchema.OneTable,
                 DisplayName = "<displayName>",
                 SlidingWindow = 1234,
-                AlignPolicy = new AlignPolicy()
+                AlignPolicy = new AlignPolicy
                 {
                     AlignMode = AlignMode.Inner,
                     FillNAMethod = FillNAMethod.Previous,
                     PaddingValue = 123.45F,
                 },
                 Status = ModelStatus.Created,
-                DiagnosticsInfo = new DiagnosticsInfo()
+                DiagnosticsInfo = new DiagnosticsInfo
                 {
-                    ModelState = new ModelState()
+                    ModelState = new ModelState
                     {
-                        EpochIds =
-{
-1234
-},
-                        TrainLosses =
-{
-123.45F
-},
-                        ValidationLosses =
-{
-123.45F
-},
-                        LatenciesInSeconds =
-{
-123.45F
-},
+                        EpochIds = { 1234 },
+                        TrainLosses = { 123.45F },
+                        ValidationLosses = { 123.45F },
+                        LatenciesInSeconds = { 123.45F },
                     },
-                    VariableStates =
-{
-new VariableState()
+                    VariableStates = {new VariableState
 {
 Variable = "<variable>",
 FilledNARatio = 123.45F,
 EffectiveCount = 1234,
 FirstTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
 LastTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
-}
-},
+}},
                 },
             };
             Response<AnomalyDetectionModel> response = await client.TrainMultivariateModelAsync(modelInfo);
@@ -1177,6 +1146,7 @@ LastTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
             Response response = client.DeleteMultivariateModel("<modelId>");
+
             Console.WriteLine(response.Status);
         }
 
@@ -1189,6 +1159,7 @@ LastTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
             Response response = await client.DeleteMultivariateModelAsync("<modelId>");
+
             Console.WriteLine(response.Status);
         }
 
@@ -1201,6 +1172,7 @@ LastTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
             Response response = client.DeleteMultivariateModel("<modelId>");
+
             Console.WriteLine(response.Status);
         }
 
@@ -1213,6 +1185,7 @@ LastTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
             Response response = await client.DeleteMultivariateModelAsync("<modelId>");
+
             Console.WriteLine(response.Status);
         }
 
@@ -1562,21 +1535,21 @@ LastTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
 
             RequestContent content = RequestContent.Create(new
             {
-                variables = new List<object>()
-{
+                variables = new object[]
+            {
 new
 {
 variable = "<variable>",
-timestamps = new List<object>()
+timestamps = new object[]
 {
 "<timestamps>"
 },
-values = new List<object>()
+values = new object[]
 {
 123.45F
 },
 }
-},
+            },
                 topContributorCount = 1234,
             });
             Response response = client.DetectMultivariateLastAnomaly("<modelId>", content);
@@ -1595,21 +1568,21 @@ values = new List<object>()
 
             RequestContent content = RequestContent.Create(new
             {
-                variables = new List<object>()
-{
+                variables = new object[]
+            {
 new
 {
 variable = "<variable>",
-timestamps = new List<object>()
+timestamps = new object[]
 {
 "<timestamps>"
 },
-values = new List<object>()
+values = new object[]
 {
 123.45F
 },
 }
-},
+            },
                 topContributorCount = 1234,
             });
             Response response = await client.DetectMultivariateLastAnomalyAsync("<modelId>", content);
@@ -1626,16 +1599,10 @@ values = new List<object>()
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
-            MultivariateLastDetectionOptions options = new MultivariateLastDetectionOptions(new List<VariableValues>()
-{
-new VariableValues("<variable>",new List<string>()
-{
-"<timestamps>"
-},new List<float>()
-{
-123.45F
-})
-}, 1234);
+            MultivariateLastDetectionOptions options = new MultivariateLastDetectionOptions(new VariableValues[]
+            {
+new VariableValues("<variable>", new string[]{"<timestamps>"}, new float[]{123.45F})
+            }, 1234);
             Response<MultivariateLastDetectionResult> response = client.DetectMultivariateLastAnomaly("<modelId>", options);
         }
 
@@ -1647,16 +1614,10 @@ new VariableValues("<variable>",new List<string>()
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
-            MultivariateLastDetectionOptions options = new MultivariateLastDetectionOptions(new List<VariableValues>()
-{
-new VariableValues("<variable>",new List<string>()
-{
-"<timestamps>"
-},new List<float>()
-{
-123.45F
-})
-}, 1234);
+            MultivariateLastDetectionOptions options = new MultivariateLastDetectionOptions(new VariableValues[]
+            {
+new VariableValues("<variable>", new string[]{"<timestamps>"}, new float[]{123.45F})
+            }, 1234);
             Response<MultivariateLastDetectionResult> response = await client.DetectMultivariateLastAnomalyAsync("<modelId>", options);
         }
 
@@ -1670,21 +1631,21 @@ new VariableValues("<variable>",new List<string>()
 
             RequestContent content = RequestContent.Create(new
             {
-                variables = new List<object>()
-{
+                variables = new object[]
+            {
 new
 {
 variable = "<variable>",
-timestamps = new List<object>()
+timestamps = new object[]
 {
 "<timestamps>"
 },
-values = new List<object>()
+values = new object[]
 {
 123.45F
 },
 }
-},
+            },
                 topContributorCount = 1234,
             });
             Response response = client.DetectMultivariateLastAnomaly("<modelId>", content);
@@ -1716,21 +1677,21 @@ values = new List<object>()
 
             RequestContent content = RequestContent.Create(new
             {
-                variables = new List<object>()
-{
+                variables = new object[]
+            {
 new
 {
 variable = "<variable>",
-timestamps = new List<object>()
+timestamps = new object[]
 {
 "<timestamps>"
 },
-values = new List<object>()
+values = new object[]
 {
 123.45F
 },
 }
-},
+            },
                 topContributorCount = 1234,
             });
             Response response = await client.DetectMultivariateLastAnomalyAsync("<modelId>", content);
@@ -1760,16 +1721,10 @@ values = new List<object>()
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
-            MultivariateLastDetectionOptions options = new MultivariateLastDetectionOptions(new List<VariableValues>()
-{
-new VariableValues("<variable>",new List<string>()
-{
-"<timestamps>"
-},new List<float>()
-{
-123.45F
-})
-}, 1234);
+            MultivariateLastDetectionOptions options = new MultivariateLastDetectionOptions(new VariableValues[]
+            {
+new VariableValues("<variable>", new string[]{"<timestamps>"}, new float[]{123.45F})
+            }, 1234);
             Response<MultivariateLastDetectionResult> response = client.DetectMultivariateLastAnomaly("<modelId>", options);
         }
 
@@ -1781,16 +1736,10 @@ new VariableValues("<variable>",new List<string>()
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
-            MultivariateLastDetectionOptions options = new MultivariateLastDetectionOptions(new List<VariableValues>()
-{
-new VariableValues("<variable>",new List<string>()
-{
-"<timestamps>"
-},new List<float>()
-{
-123.45F
-})
-}, 1234);
+            MultivariateLastDetectionOptions options = new MultivariateLastDetectionOptions(new VariableValues[]
+            {
+new VariableValues("<variable>", new string[]{"<timestamps>"}, new float[]{123.45F})
+            }, 1234);
             Response<MultivariateLastDetectionResult> response = await client.DetectMultivariateLastAnomalyAsync("<modelId>", options);
         }
 
@@ -1805,9 +1754,9 @@ new VariableValues("<variable>",new List<string>()
             foreach (BinaryData item in client.GetMultivariateModels(null, null, null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("modelId").ToString());
-                Console.WriteLine(result[0].GetProperty("createdTime").ToString());
-                Console.WriteLine(result[0].GetProperty("lastUpdatedTime").ToString());
+                Console.WriteLine(result.GetProperty("modelId").ToString());
+                Console.WriteLine(result.GetProperty("createdTime").ToString());
+                Console.WriteLine(result.GetProperty("lastUpdatedTime").ToString());
             }
         }
 
@@ -1822,9 +1771,9 @@ new VariableValues("<variable>",new List<string>()
             await foreach (BinaryData item in client.GetMultivariateModelsAsync(null, null, null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("modelId").ToString());
-                Console.WriteLine(result[0].GetProperty("createdTime").ToString());
-                Console.WriteLine(result[0].GetProperty("lastUpdatedTime").ToString());
+                Console.WriteLine(result.GetProperty("modelId").ToString());
+                Console.WriteLine(result.GetProperty("createdTime").ToString());
+                Console.WriteLine(result.GetProperty("lastUpdatedTime").ToString());
             }
         }
 
@@ -1865,30 +1814,30 @@ new VariableValues("<variable>",new List<string>()
             foreach (BinaryData item in client.GetMultivariateModels(1234, 1234, null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("modelId").ToString());
-                Console.WriteLine(result[0].GetProperty("createdTime").ToString());
-                Console.WriteLine(result[0].GetProperty("lastUpdatedTime").ToString());
-                Console.WriteLine(result[0].GetProperty("modelInfo").GetProperty("dataSource").ToString());
-                Console.WriteLine(result[0].GetProperty("modelInfo").GetProperty("dataSchema").ToString());
-                Console.WriteLine(result[0].GetProperty("modelInfo").GetProperty("startTime").ToString());
-                Console.WriteLine(result[0].GetProperty("modelInfo").GetProperty("endTime").ToString());
-                Console.WriteLine(result[0].GetProperty("modelInfo").GetProperty("displayName").ToString());
-                Console.WriteLine(result[0].GetProperty("modelInfo").GetProperty("slidingWindow").ToString());
-                Console.WriteLine(result[0].GetProperty("modelInfo").GetProperty("alignPolicy").GetProperty("alignMode").ToString());
-                Console.WriteLine(result[0].GetProperty("modelInfo").GetProperty("alignPolicy").GetProperty("fillNAMethod").ToString());
-                Console.WriteLine(result[0].GetProperty("modelInfo").GetProperty("alignPolicy").GetProperty("paddingValue").ToString());
-                Console.WriteLine(result[0].GetProperty("modelInfo").GetProperty("status").ToString());
-                Console.WriteLine(result[0].GetProperty("modelInfo").GetProperty("errors")[0].GetProperty("code").ToString());
-                Console.WriteLine(result[0].GetProperty("modelInfo").GetProperty("errors")[0].GetProperty("message").ToString());
-                Console.WriteLine(result[0].GetProperty("modelInfo").GetProperty("diagnosticsInfo").GetProperty("modelState").GetProperty("epochIds")[0].ToString());
-                Console.WriteLine(result[0].GetProperty("modelInfo").GetProperty("diagnosticsInfo").GetProperty("modelState").GetProperty("trainLosses")[0].ToString());
-                Console.WriteLine(result[0].GetProperty("modelInfo").GetProperty("diagnosticsInfo").GetProperty("modelState").GetProperty("validationLosses")[0].ToString());
-                Console.WriteLine(result[0].GetProperty("modelInfo").GetProperty("diagnosticsInfo").GetProperty("modelState").GetProperty("latenciesInSeconds")[0].ToString());
-                Console.WriteLine(result[0].GetProperty("modelInfo").GetProperty("diagnosticsInfo").GetProperty("variableStates")[0].GetProperty("variable").ToString());
-                Console.WriteLine(result[0].GetProperty("modelInfo").GetProperty("diagnosticsInfo").GetProperty("variableStates")[0].GetProperty("filledNARatio").ToString());
-                Console.WriteLine(result[0].GetProperty("modelInfo").GetProperty("diagnosticsInfo").GetProperty("variableStates")[0].GetProperty("effectiveCount").ToString());
-                Console.WriteLine(result[0].GetProperty("modelInfo").GetProperty("diagnosticsInfo").GetProperty("variableStates")[0].GetProperty("firstTimestamp").ToString());
-                Console.WriteLine(result[0].GetProperty("modelInfo").GetProperty("diagnosticsInfo").GetProperty("variableStates")[0].GetProperty("lastTimestamp").ToString());
+                Console.WriteLine(result.GetProperty("modelId").ToString());
+                Console.WriteLine(result.GetProperty("createdTime").ToString());
+                Console.WriteLine(result.GetProperty("lastUpdatedTime").ToString());
+                Console.WriteLine(result.GetProperty("modelInfo").GetProperty("dataSource").ToString());
+                Console.WriteLine(result.GetProperty("modelInfo").GetProperty("dataSchema").ToString());
+                Console.WriteLine(result.GetProperty("modelInfo").GetProperty("startTime").ToString());
+                Console.WriteLine(result.GetProperty("modelInfo").GetProperty("endTime").ToString());
+                Console.WriteLine(result.GetProperty("modelInfo").GetProperty("displayName").ToString());
+                Console.WriteLine(result.GetProperty("modelInfo").GetProperty("slidingWindow").ToString());
+                Console.WriteLine(result.GetProperty("modelInfo").GetProperty("alignPolicy").GetProperty("alignMode").ToString());
+                Console.WriteLine(result.GetProperty("modelInfo").GetProperty("alignPolicy").GetProperty("fillNAMethod").ToString());
+                Console.WriteLine(result.GetProperty("modelInfo").GetProperty("alignPolicy").GetProperty("paddingValue").ToString());
+                Console.WriteLine(result.GetProperty("modelInfo").GetProperty("status").ToString());
+                Console.WriteLine(result.GetProperty("modelInfo").GetProperty("errors")[0].GetProperty("code").ToString());
+                Console.WriteLine(result.GetProperty("modelInfo").GetProperty("errors")[0].GetProperty("message").ToString());
+                Console.WriteLine(result.GetProperty("modelInfo").GetProperty("diagnosticsInfo").GetProperty("modelState").GetProperty("epochIds")[0].ToString());
+                Console.WriteLine(result.GetProperty("modelInfo").GetProperty("diagnosticsInfo").GetProperty("modelState").GetProperty("trainLosses")[0].ToString());
+                Console.WriteLine(result.GetProperty("modelInfo").GetProperty("diagnosticsInfo").GetProperty("modelState").GetProperty("validationLosses")[0].ToString());
+                Console.WriteLine(result.GetProperty("modelInfo").GetProperty("diagnosticsInfo").GetProperty("modelState").GetProperty("latenciesInSeconds")[0].ToString());
+                Console.WriteLine(result.GetProperty("modelInfo").GetProperty("diagnosticsInfo").GetProperty("variableStates")[0].GetProperty("variable").ToString());
+                Console.WriteLine(result.GetProperty("modelInfo").GetProperty("diagnosticsInfo").GetProperty("variableStates")[0].GetProperty("filledNARatio").ToString());
+                Console.WriteLine(result.GetProperty("modelInfo").GetProperty("diagnosticsInfo").GetProperty("variableStates")[0].GetProperty("effectiveCount").ToString());
+                Console.WriteLine(result.GetProperty("modelInfo").GetProperty("diagnosticsInfo").GetProperty("variableStates")[0].GetProperty("firstTimestamp").ToString());
+                Console.WriteLine(result.GetProperty("modelInfo").GetProperty("diagnosticsInfo").GetProperty("variableStates")[0].GetProperty("lastTimestamp").ToString());
             }
         }
 
@@ -1903,30 +1852,30 @@ new VariableValues("<variable>",new List<string>()
             await foreach (BinaryData item in client.GetMultivariateModelsAsync(1234, 1234, null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("modelId").ToString());
-                Console.WriteLine(result[0].GetProperty("createdTime").ToString());
-                Console.WriteLine(result[0].GetProperty("lastUpdatedTime").ToString());
-                Console.WriteLine(result[0].GetProperty("modelInfo").GetProperty("dataSource").ToString());
-                Console.WriteLine(result[0].GetProperty("modelInfo").GetProperty("dataSchema").ToString());
-                Console.WriteLine(result[0].GetProperty("modelInfo").GetProperty("startTime").ToString());
-                Console.WriteLine(result[0].GetProperty("modelInfo").GetProperty("endTime").ToString());
-                Console.WriteLine(result[0].GetProperty("modelInfo").GetProperty("displayName").ToString());
-                Console.WriteLine(result[0].GetProperty("modelInfo").GetProperty("slidingWindow").ToString());
-                Console.WriteLine(result[0].GetProperty("modelInfo").GetProperty("alignPolicy").GetProperty("alignMode").ToString());
-                Console.WriteLine(result[0].GetProperty("modelInfo").GetProperty("alignPolicy").GetProperty("fillNAMethod").ToString());
-                Console.WriteLine(result[0].GetProperty("modelInfo").GetProperty("alignPolicy").GetProperty("paddingValue").ToString());
-                Console.WriteLine(result[0].GetProperty("modelInfo").GetProperty("status").ToString());
-                Console.WriteLine(result[0].GetProperty("modelInfo").GetProperty("errors")[0].GetProperty("code").ToString());
-                Console.WriteLine(result[0].GetProperty("modelInfo").GetProperty("errors")[0].GetProperty("message").ToString());
-                Console.WriteLine(result[0].GetProperty("modelInfo").GetProperty("diagnosticsInfo").GetProperty("modelState").GetProperty("epochIds")[0].ToString());
-                Console.WriteLine(result[0].GetProperty("modelInfo").GetProperty("diagnosticsInfo").GetProperty("modelState").GetProperty("trainLosses")[0].ToString());
-                Console.WriteLine(result[0].GetProperty("modelInfo").GetProperty("diagnosticsInfo").GetProperty("modelState").GetProperty("validationLosses")[0].ToString());
-                Console.WriteLine(result[0].GetProperty("modelInfo").GetProperty("diagnosticsInfo").GetProperty("modelState").GetProperty("latenciesInSeconds")[0].ToString());
-                Console.WriteLine(result[0].GetProperty("modelInfo").GetProperty("diagnosticsInfo").GetProperty("variableStates")[0].GetProperty("variable").ToString());
-                Console.WriteLine(result[0].GetProperty("modelInfo").GetProperty("diagnosticsInfo").GetProperty("variableStates")[0].GetProperty("filledNARatio").ToString());
-                Console.WriteLine(result[0].GetProperty("modelInfo").GetProperty("diagnosticsInfo").GetProperty("variableStates")[0].GetProperty("effectiveCount").ToString());
-                Console.WriteLine(result[0].GetProperty("modelInfo").GetProperty("diagnosticsInfo").GetProperty("variableStates")[0].GetProperty("firstTimestamp").ToString());
-                Console.WriteLine(result[0].GetProperty("modelInfo").GetProperty("diagnosticsInfo").GetProperty("variableStates")[0].GetProperty("lastTimestamp").ToString());
+                Console.WriteLine(result.GetProperty("modelId").ToString());
+                Console.WriteLine(result.GetProperty("createdTime").ToString());
+                Console.WriteLine(result.GetProperty("lastUpdatedTime").ToString());
+                Console.WriteLine(result.GetProperty("modelInfo").GetProperty("dataSource").ToString());
+                Console.WriteLine(result.GetProperty("modelInfo").GetProperty("dataSchema").ToString());
+                Console.WriteLine(result.GetProperty("modelInfo").GetProperty("startTime").ToString());
+                Console.WriteLine(result.GetProperty("modelInfo").GetProperty("endTime").ToString());
+                Console.WriteLine(result.GetProperty("modelInfo").GetProperty("displayName").ToString());
+                Console.WriteLine(result.GetProperty("modelInfo").GetProperty("slidingWindow").ToString());
+                Console.WriteLine(result.GetProperty("modelInfo").GetProperty("alignPolicy").GetProperty("alignMode").ToString());
+                Console.WriteLine(result.GetProperty("modelInfo").GetProperty("alignPolicy").GetProperty("fillNAMethod").ToString());
+                Console.WriteLine(result.GetProperty("modelInfo").GetProperty("alignPolicy").GetProperty("paddingValue").ToString());
+                Console.WriteLine(result.GetProperty("modelInfo").GetProperty("status").ToString());
+                Console.WriteLine(result.GetProperty("modelInfo").GetProperty("errors")[0].GetProperty("code").ToString());
+                Console.WriteLine(result.GetProperty("modelInfo").GetProperty("errors")[0].GetProperty("message").ToString());
+                Console.WriteLine(result.GetProperty("modelInfo").GetProperty("diagnosticsInfo").GetProperty("modelState").GetProperty("epochIds")[0].ToString());
+                Console.WriteLine(result.GetProperty("modelInfo").GetProperty("diagnosticsInfo").GetProperty("modelState").GetProperty("trainLosses")[0].ToString());
+                Console.WriteLine(result.GetProperty("modelInfo").GetProperty("diagnosticsInfo").GetProperty("modelState").GetProperty("validationLosses")[0].ToString());
+                Console.WriteLine(result.GetProperty("modelInfo").GetProperty("diagnosticsInfo").GetProperty("modelState").GetProperty("latenciesInSeconds")[0].ToString());
+                Console.WriteLine(result.GetProperty("modelInfo").GetProperty("diagnosticsInfo").GetProperty("variableStates")[0].GetProperty("variable").ToString());
+                Console.WriteLine(result.GetProperty("modelInfo").GetProperty("diagnosticsInfo").GetProperty("variableStates")[0].GetProperty("filledNARatio").ToString());
+                Console.WriteLine(result.GetProperty("modelInfo").GetProperty("diagnosticsInfo").GetProperty("variableStates")[0].GetProperty("effectiveCount").ToString());
+                Console.WriteLine(result.GetProperty("modelInfo").GetProperty("diagnosticsInfo").GetProperty("variableStates")[0].GetProperty("firstTimestamp").ToString());
+                Console.WriteLine(result.GetProperty("modelInfo").GetProperty("diagnosticsInfo").GetProperty("variableStates")[0].GetProperty("lastTimestamp").ToString());
             }
         }
 

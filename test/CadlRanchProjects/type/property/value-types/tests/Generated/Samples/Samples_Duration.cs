@@ -18,7 +18,7 @@ using _Type.Property.ValueTypes.Models;
 
 namespace _Type.Property.ValueTypes.Samples
 {
-    internal class Samples_Duration
+    public partial class Samples_Duration
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
@@ -115,6 +115,7 @@ namespace _Type.Property.ValueTypes.Samples
                 property = "PT1H23M45S",
             });
             Response response = client.Put(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -129,6 +130,7 @@ namespace _Type.Property.ValueTypes.Samples
                 property = "PT1H23M45S",
             });
             Response response = await client.PutAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -140,7 +142,6 @@ namespace _Type.Property.ValueTypes.Samples
 
             DurationProperty body = new DurationProperty(XmlConvert.ToTimeSpan("PT1H23M45S"));
             Response response = client.Put(body);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -151,7 +152,6 @@ namespace _Type.Property.ValueTypes.Samples
 
             DurationProperty body = new DurationProperty(XmlConvert.ToTimeSpan("PT1H23M45S"));
             Response response = await client.PutAsync(body);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -165,6 +165,7 @@ namespace _Type.Property.ValueTypes.Samples
                 property = "PT1H23M45S",
             });
             Response response = client.Put(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -179,6 +180,7 @@ namespace _Type.Property.ValueTypes.Samples
                 property = "PT1H23M45S",
             });
             Response response = await client.PutAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -190,7 +192,6 @@ namespace _Type.Property.ValueTypes.Samples
 
             DurationProperty body = new DurationProperty(XmlConvert.ToTimeSpan("PT1H23M45S"));
             Response response = client.Put(body);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -201,7 +202,6 @@ namespace _Type.Property.ValueTypes.Samples
 
             DurationProperty body = new DurationProperty(XmlConvert.ToTimeSpan("PT1H23M45S"));
             Response response = await client.PutAsync(body);
-            Console.WriteLine(response.Status);
         }
     }
 }

@@ -17,7 +17,7 @@ using NUnit.Framework;
 
 namespace ConvenienceInCadl.Samples
 {
-    public class Samples_ConvenienceInCadlClient
+    public partial class Samples_ConvenienceInCadlClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
@@ -114,6 +114,7 @@ namespace ConvenienceInCadl.Samples
                 id = "<id>",
             });
             Response response = client.ConvenienceOptionalBeforeRequired(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -128,6 +129,7 @@ namespace ConvenienceInCadl.Samples
                 id = "<id>",
             });
             Response response = await client.ConvenienceOptionalBeforeRequiredAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -139,7 +141,6 @@ namespace ConvenienceInCadl.Samples
 
             Model required = new Model("<id>");
             Response response = client.ConvenienceOptionalBeforeRequired(required);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -150,7 +151,6 @@ namespace ConvenienceInCadl.Samples
 
             Model required = new Model("<id>");
             Response response = await client.ConvenienceOptionalBeforeRequiredAsync(required);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -164,6 +164,7 @@ namespace ConvenienceInCadl.Samples
                 id = "<id>",
             });
             Response response = client.ConvenienceOptionalBeforeRequired(content, optional: 1234);
+
             Console.WriteLine(response.Status);
         }
 
@@ -178,6 +179,7 @@ namespace ConvenienceInCadl.Samples
                 id = "<id>",
             });
             Response response = await client.ConvenienceOptionalBeforeRequiredAsync(content, optional: 1234);
+
             Console.WriteLine(response.Status);
         }
 
@@ -189,7 +191,6 @@ namespace ConvenienceInCadl.Samples
 
             Model required = new Model("<id>");
             Response response = client.ConvenienceOptionalBeforeRequired(required, optional: 1234);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -200,7 +201,6 @@ namespace ConvenienceInCadl.Samples
 
             Model required = new Model("<id>");
             Response response = await client.ConvenienceOptionalBeforeRequiredAsync(required, optional: 1234);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -262,6 +262,7 @@ namespace ConvenienceInCadl.Samples
                 id = "<id>",
             });
             Response response = client.NoConvenienceRequiredBody(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -276,6 +277,7 @@ namespace ConvenienceInCadl.Samples
                 id = "<id>",
             });
             Response response = await client.NoConvenienceRequiredBodyAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -290,6 +292,7 @@ namespace ConvenienceInCadl.Samples
                 id = "<id>",
             });
             Response response = client.NoConvenienceRequiredBody(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -304,6 +307,7 @@ namespace ConvenienceInCadl.Samples
                 id = "<id>",
             });
             Response response = await client.NoConvenienceRequiredBodyAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -315,6 +319,7 @@ namespace ConvenienceInCadl.Samples
 
             RequestContent content = null;
             Response response = client.NoConvenienceOptionalBody(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -326,6 +331,7 @@ namespace ConvenienceInCadl.Samples
 
             RequestContent content = null;
             Response response = await client.NoConvenienceOptionalBodyAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -340,6 +346,7 @@ namespace ConvenienceInCadl.Samples
                 id = "<id>",
             });
             Response response = client.NoConvenienceOptionalBody(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -354,6 +361,7 @@ namespace ConvenienceInCadl.Samples
                 id = "<id>",
             });
             Response response = await client.NoConvenienceOptionalBodyAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -616,6 +624,7 @@ namespace ConvenienceInCadl.Samples
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
             Response response = client.ConvenienceShouldNotGenerate();
+
             Console.WriteLine(response.Status);
         }
 
@@ -626,6 +635,7 @@ namespace ConvenienceInCadl.Samples
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
             Response response = await client.ConvenienceShouldNotGenerateAsync();
+
             Console.WriteLine(response.Status);
         }
 
@@ -636,6 +646,7 @@ namespace ConvenienceInCadl.Samples
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
             Response response = client.ConvenienceShouldNotGenerate();
+
             Console.WriteLine(response.Status);
         }
 
@@ -646,6 +657,7 @@ namespace ConvenienceInCadl.Samples
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
             Response response = await client.ConvenienceShouldNotGenerateAsync();
+
             Console.WriteLine(response.Status);
         }
 
@@ -656,6 +668,7 @@ namespace ConvenienceInCadl.Samples
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
             Response response = client.ProtocolShouldNotGenerateConvenience();
+
             Console.WriteLine(response.Status);
         }
 
@@ -666,6 +679,7 @@ namespace ConvenienceInCadl.Samples
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
             Response response = await client.ProtocolShouldNotGenerateConvenienceAsync();
+
             Console.WriteLine(response.Status);
         }
 
@@ -676,6 +690,7 @@ namespace ConvenienceInCadl.Samples
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
             Response response = client.ProtocolShouldNotGenerateConvenience();
+
             Console.WriteLine(response.Status);
         }
 
@@ -686,6 +701,7 @@ namespace ConvenienceInCadl.Samples
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
             Response response = await client.ProtocolShouldNotGenerateConvenienceAsync();
+
             Console.WriteLine(response.Status);
         }
 
@@ -865,6 +881,7 @@ namespace ConvenienceInCadl.Samples
 
             RequestContent content = null;
             Response response = client.ProtocolOptionalModel(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -876,6 +893,7 @@ namespace ConvenienceInCadl.Samples
 
             RequestContent content = null;
             Response response = await client.ProtocolOptionalModelAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -886,7 +904,6 @@ namespace ConvenienceInCadl.Samples
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
             Response response = client.ProtocolOptionalModel();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -896,7 +913,6 @@ namespace ConvenienceInCadl.Samples
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
             Response response = await client.ProtocolOptionalModelAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -910,6 +926,7 @@ namespace ConvenienceInCadl.Samples
                 id = "<id>",
             });
             Response response = client.ProtocolOptionalModel(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -924,6 +941,7 @@ namespace ConvenienceInCadl.Samples
                 id = "<id>",
             });
             Response response = await client.ProtocolOptionalModelAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -935,7 +953,6 @@ namespace ConvenienceInCadl.Samples
 
             Model optional = new Model("<id>");
             Response response = client.ProtocolOptionalModel(optional: optional);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -946,7 +963,6 @@ namespace ConvenienceInCadl.Samples
 
             Model optional = new Model("<id>");
             Response response = await client.ProtocolOptionalModelAsync(optional: optional);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -960,6 +976,7 @@ namespace ConvenienceInCadl.Samples
                 id = "<id>",
             });
             Response response = client.ProtocolRequiredModel(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -974,6 +991,7 @@ namespace ConvenienceInCadl.Samples
                 id = "<id>",
             });
             Response response = await client.ProtocolRequiredModelAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -985,7 +1003,6 @@ namespace ConvenienceInCadl.Samples
 
             Model required = new Model("<id>");
             Response response = client.ProtocolRequiredModel(required);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -996,7 +1013,6 @@ namespace ConvenienceInCadl.Samples
 
             Model required = new Model("<id>");
             Response response = await client.ProtocolRequiredModelAsync(required);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1010,6 +1026,7 @@ namespace ConvenienceInCadl.Samples
                 id = "<id>",
             });
             Response response = client.ProtocolRequiredModel(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -1024,6 +1041,7 @@ namespace ConvenienceInCadl.Samples
                 id = "<id>",
             });
             Response response = await client.ProtocolRequiredModelAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -1035,7 +1053,6 @@ namespace ConvenienceInCadl.Samples
 
             Model required = new Model("<id>");
             Response response = client.ProtocolRequiredModel(required);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1046,7 +1063,6 @@ namespace ConvenienceInCadl.Samples
 
             Model required = new Model("<id>");
             Response response = await client.ProtocolRequiredModelAsync(required);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1393,6 +1409,7 @@ namespace ConvenienceInCadl.Samples
 
             RequestContent content = null;
             Response response = client.ConvenienceOptionalModelWithOptional(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -1404,6 +1421,7 @@ namespace ConvenienceInCadl.Samples
 
             RequestContent content = null;
             Response response = await client.ConvenienceOptionalModelWithOptionalAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -1414,7 +1432,6 @@ namespace ConvenienceInCadl.Samples
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
             Response response = client.ConvenienceOptionalModelWithOptional();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1424,7 +1441,6 @@ namespace ConvenienceInCadl.Samples
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
             Response response = await client.ConvenienceOptionalModelWithOptionalAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1438,6 +1454,7 @@ namespace ConvenienceInCadl.Samples
                 id = "<id>",
             });
             Response response = client.ConvenienceOptionalModelWithOptional(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -1452,6 +1469,7 @@ namespace ConvenienceInCadl.Samples
                 id = "<id>",
             });
             Response response = await client.ConvenienceOptionalModelWithOptionalAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -1463,7 +1481,6 @@ namespace ConvenienceInCadl.Samples
 
             Model optional = new Model("<id>");
             Response response = client.ConvenienceOptionalModelWithOptional(optional: optional);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1474,7 +1491,6 @@ namespace ConvenienceInCadl.Samples
 
             Model optional = new Model("<id>");
             Response response = await client.ConvenienceOptionalModelWithOptionalAsync(optional: optional);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1488,6 +1504,7 @@ namespace ConvenienceInCadl.Samples
                 id = "<id>",
             });
             Response response = client.ConvenienceRequiredModelWithOptional(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -1502,6 +1519,7 @@ namespace ConvenienceInCadl.Samples
                 id = "<id>",
             });
             Response response = await client.ConvenienceRequiredModelWithOptionalAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -1513,7 +1531,6 @@ namespace ConvenienceInCadl.Samples
 
             Model required = new Model("<id>");
             Response response = client.ConvenienceRequiredModelWithOptional(required);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1524,7 +1541,6 @@ namespace ConvenienceInCadl.Samples
 
             Model required = new Model("<id>");
             Response response = await client.ConvenienceRequiredModelWithOptionalAsync(required);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1538,6 +1554,7 @@ namespace ConvenienceInCadl.Samples
                 id = "<id>",
             });
             Response response = client.ConvenienceRequiredModelWithOptional(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -1552,6 +1569,7 @@ namespace ConvenienceInCadl.Samples
                 id = "<id>",
             });
             Response response = await client.ConvenienceRequiredModelWithOptionalAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -1563,7 +1581,6 @@ namespace ConvenienceInCadl.Samples
 
             Model required = new Model("<id>");
             Response response = client.ConvenienceRequiredModelWithOptional(required);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1574,7 +1591,6 @@ namespace ConvenienceInCadl.Samples
 
             Model required = new Model("<id>");
             Response response = await client.ConvenienceRequiredModelWithOptionalAsync(required);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1585,6 +1601,7 @@ namespace ConvenienceInCadl.Samples
 
             RequestContent content = null;
             Response response = client.ConvenienceOptionalModelWithRequired(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -1596,6 +1613,7 @@ namespace ConvenienceInCadl.Samples
 
             RequestContent content = null;
             Response response = await client.ConvenienceOptionalModelWithRequiredAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -1606,7 +1624,6 @@ namespace ConvenienceInCadl.Samples
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
             Response response = client.ConvenienceOptionalModelWithRequired();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1616,7 +1633,6 @@ namespace ConvenienceInCadl.Samples
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
             Response response = await client.ConvenienceOptionalModelWithRequiredAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1630,6 +1646,7 @@ namespace ConvenienceInCadl.Samples
                 id = "<id>",
             });
             Response response = client.ConvenienceOptionalModelWithRequired(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -1644,6 +1661,7 @@ namespace ConvenienceInCadl.Samples
                 id = "<id>",
             });
             Response response = await client.ConvenienceOptionalModelWithRequiredAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -1655,7 +1673,6 @@ namespace ConvenienceInCadl.Samples
 
             Model optional = new Model("<id>");
             Response response = client.ConvenienceOptionalModelWithRequired(optional: optional);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1666,7 +1683,6 @@ namespace ConvenienceInCadl.Samples
 
             Model optional = new Model("<id>");
             Response response = await client.ConvenienceOptionalModelWithRequiredAsync(optional: optional);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1680,6 +1696,7 @@ namespace ConvenienceInCadl.Samples
                 id = "<id>",
             });
             Response response = client.ProtocolOptionalBeforeRequired(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -1694,6 +1711,7 @@ namespace ConvenienceInCadl.Samples
                 id = "<id>",
             });
             Response response = await client.ProtocolOptionalBeforeRequiredAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -1705,7 +1723,6 @@ namespace ConvenienceInCadl.Samples
 
             Model required = new Model("<id>");
             Response response = client.ProtocolOptionalBeforeRequired(required);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1716,7 +1733,6 @@ namespace ConvenienceInCadl.Samples
 
             Model required = new Model("<id>");
             Response response = await client.ProtocolOptionalBeforeRequiredAsync(required);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1730,6 +1746,7 @@ namespace ConvenienceInCadl.Samples
                 id = "<id>",
             });
             Response response = client.ProtocolOptionalBeforeRequired(content, optional: 1234);
+
             Console.WriteLine(response.Status);
         }
 
@@ -1744,6 +1761,7 @@ namespace ConvenienceInCadl.Samples
                 id = "<id>",
             });
             Response response = await client.ProtocolOptionalBeforeRequiredAsync(content, optional: 1234);
+
             Console.WriteLine(response.Status);
         }
 
@@ -1755,7 +1773,6 @@ namespace ConvenienceInCadl.Samples
 
             Model required = new Model("<id>");
             Response response = client.ProtocolOptionalBeforeRequired(required, optional: 1234);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1766,7 +1783,6 @@ namespace ConvenienceInCadl.Samples
 
             Model required = new Model("<id>");
             Response response = await client.ProtocolOptionalBeforeRequiredAsync(required, optional: 1234);
-            Console.WriteLine(response.Status);
         }
     }
 }

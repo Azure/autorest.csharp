@@ -9,7 +9,6 @@ UsageClient client = new UsageClient();
 
 InputRecord input = new InputRecord("<requiredProp>");
 Response response = await client.InputAsync(input);
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call InputAsync with all parameters.
 <code><![CDATA[
@@ -17,7 +16,6 @@ UsageClient client = new UsageClient();
 
 InputRecord input = new InputRecord("<requiredProp>");
 Response response = await client.InputAsync(input);
-Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="Input(InputRecord,CancellationToken)">
@@ -28,7 +26,6 @@ UsageClient client = new UsageClient();
 
 InputRecord input = new InputRecord("<requiredProp>");
 Response response = client.Input(input);
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Input with all parameters.
 <code><![CDATA[
@@ -36,7 +33,6 @@ UsageClient client = new UsageClient();
 
 InputRecord input = new InputRecord("<requiredProp>");
 Response response = client.Input(input);
-Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="InputAsync(RequestContent,RequestContext)">
@@ -50,7 +46,15 @@ RequestContent content = RequestContent.Create(new
     requiredProp = "<requiredProp>",
 });
 Response response = await client.InputAsync(content);
+
 Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call InputAsync.
+<code><![CDATA[
+UsageClient client = new UsageClient();
+
+InputRecord input = new InputRecord("<requiredProp>");
+Response response = await client.InputAsync(input);
 ]]></code>
 This sample shows how to call InputAsync with all request content.
 <code><![CDATA[
@@ -61,7 +65,15 @@ RequestContent content = RequestContent.Create(new
     requiredProp = "<requiredProp>",
 });
 Response response = await client.InputAsync(content);
+
 Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call InputAsync with all parameters.
+<code><![CDATA[
+UsageClient client = new UsageClient();
+
+InputRecord input = new InputRecord("<requiredProp>");
+Response response = await client.InputAsync(input);
 ]]></code></example>
     </member>
     <member name="Input(RequestContent,RequestContext)">
@@ -75,7 +87,15 @@ RequestContent content = RequestContent.Create(new
     requiredProp = "<requiredProp>",
 });
 Response response = client.Input(content);
+
 Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call Input.
+<code><![CDATA[
+UsageClient client = new UsageClient();
+
+InputRecord input = new InputRecord("<requiredProp>");
+Response response = client.Input(input);
 ]]></code>
 This sample shows how to call Input with all request content.
 <code><![CDATA[
@@ -86,7 +106,15 @@ RequestContent content = RequestContent.Create(new
     requiredProp = "<requiredProp>",
 });
 Response response = client.Input(content);
+
 Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call Input with all parameters.
+<code><![CDATA[
+UsageClient client = new UsageClient();
+
+InputRecord input = new InputRecord("<requiredProp>");
+Response response = client.Input(input);
 ]]></code></example>
     </member>
     <member name="OutputAsync(CancellationToken)">
@@ -130,6 +158,12 @@ Response response = await client.OutputAsync(null);
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("requiredProp").ToString());
 ]]></code>
+This sample shows how to call OutputAsync.
+<code><![CDATA[
+UsageClient client = new UsageClient();
+
+Response<OutputRecord> response = await client.OutputAsync();
+]]></code>
 This sample shows how to call OutputAsync with all parameters and parse the result.
 <code><![CDATA[
 UsageClient client = new UsageClient();
@@ -138,6 +172,12 @@ Response response = await client.OutputAsync(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("requiredProp").ToString());
+]]></code>
+This sample shows how to call OutputAsync with all parameters.
+<code><![CDATA[
+UsageClient client = new UsageClient();
+
+Response<OutputRecord> response = await client.OutputAsync();
 ]]></code></example>
     </member>
     <member name="Output(RequestContext)">
@@ -151,6 +191,12 @@ Response response = client.Output(null);
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("requiredProp").ToString());
 ]]></code>
+This sample shows how to call Output.
+<code><![CDATA[
+UsageClient client = new UsageClient();
+
+Response<OutputRecord> response = client.Output();
+]]></code>
 This sample shows how to call Output with all parameters and parse the result.
 <code><![CDATA[
 UsageClient client = new UsageClient();
@@ -159,6 +205,12 @@ Response response = client.Output(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("requiredProp").ToString());
+]]></code>
+This sample shows how to call Output with all parameters.
+<code><![CDATA[
+UsageClient client = new UsageClient();
+
+Response<OutputRecord> response = client.Output();
 ]]></code></example>
     </member>
     <member name="InputAndOutputAsync(InputOutputRecord,CancellationToken)">
@@ -210,6 +262,13 @@ Response response = await client.InputAndOutputAsync(content);
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("requiredProp").ToString());
 ]]></code>
+This sample shows how to call InputAndOutputAsync.
+<code><![CDATA[
+UsageClient client = new UsageClient();
+
+InputOutputRecord body = new InputOutputRecord("<requiredProp>");
+Response<InputOutputRecord> response = await client.InputAndOutputAsync(body);
+]]></code>
 This sample shows how to call InputAndOutputAsync with all request content and parse the result.
 <code><![CDATA[
 UsageClient client = new UsageClient();
@@ -222,6 +281,13 @@ Response response = await client.InputAndOutputAsync(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("requiredProp").ToString());
+]]></code>
+This sample shows how to call InputAndOutputAsync with all parameters.
+<code><![CDATA[
+UsageClient client = new UsageClient();
+
+InputOutputRecord body = new InputOutputRecord("<requiredProp>");
+Response<InputOutputRecord> response = await client.InputAndOutputAsync(body);
 ]]></code></example>
     </member>
     <member name="InputAndOutput(RequestContent,RequestContext)">
@@ -239,6 +305,13 @@ Response response = client.InputAndOutput(content);
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("requiredProp").ToString());
 ]]></code>
+This sample shows how to call InputAndOutput.
+<code><![CDATA[
+UsageClient client = new UsageClient();
+
+InputOutputRecord body = new InputOutputRecord("<requiredProp>");
+Response<InputOutputRecord> response = client.InputAndOutput(body);
+]]></code>
 This sample shows how to call InputAndOutput with all request content and parse the result.
 <code><![CDATA[
 UsageClient client = new UsageClient();
@@ -251,6 +324,13 @@ Response response = client.InputAndOutput(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("requiredProp").ToString());
+]]></code>
+This sample shows how to call InputAndOutput with all parameters.
+<code><![CDATA[
+UsageClient client = new UsageClient();
+
+InputOutputRecord body = new InputOutputRecord("<requiredProp>");
+Response<InputOutputRecord> response = client.InputAndOutput(body);
 ]]></code></example>
     </member>
   </members>

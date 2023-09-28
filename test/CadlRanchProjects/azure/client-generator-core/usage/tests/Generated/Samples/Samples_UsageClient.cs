@@ -17,7 +17,7 @@ using _Specs_.Azure.ClientGenerator.Core.Usage.Models;
 
 namespace _Specs_.Azure.ClientGenerator.Core.Usage.Samples
 {
-    public class Samples_UsageClient
+    public partial class Samples_UsageClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
@@ -30,6 +30,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage.Samples
                 name = "<name>",
             });
             Response response = client.InputToInputOutput(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -44,6 +45,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage.Samples
                 name = "<name>",
             });
             Response response = await client.InputToInputOutputAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -55,7 +57,6 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage.Samples
 
             InputModel body = new InputModel("<name>");
             Response response = client.InputToInputOutput(body);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -66,7 +67,6 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage.Samples
 
             InputModel body = new InputModel("<name>");
             Response response = await client.InputToInputOutputAsync(body);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -80,6 +80,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage.Samples
                 name = "<name>",
             });
             Response response = client.InputToInputOutput(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -94,6 +95,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage.Samples
                 name = "<name>",
             });
             Response response = await client.InputToInputOutputAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -105,7 +107,6 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage.Samples
 
             InputModel body = new InputModel("<name>");
             Response response = client.InputToInputOutput(body);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -116,7 +117,6 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage.Samples
 
             InputModel body = new InputModel("<name>");
             Response response = await client.InputToInputOutputAsync(body);
-            Console.WriteLine(response.Status);
         }
 
         [Test]

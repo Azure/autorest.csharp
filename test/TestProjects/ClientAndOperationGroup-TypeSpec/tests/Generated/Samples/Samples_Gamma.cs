@@ -15,7 +15,7 @@ using NUnit.Framework;
 
 namespace ClientAndOperationGroup.Samples
 {
-    internal class Samples_Gamma
+    public partial class Samples_Gamma
     {
         [Test]
         [Ignore("Only validating compilation of examples")]

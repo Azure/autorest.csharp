@@ -16,7 +16,7 @@ using body_complex_LowLevel;
 
 namespace body_complex_LowLevel.Samples
 {
-    public class Samples_ReadonlypropertyClient
+    public partial class Samples_ReadonlypropertyClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
@@ -81,6 +81,7 @@ namespace body_complex_LowLevel.Samples
 
             RequestContent content = RequestContent.Create(new object());
             Response response = client.PutValid(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -93,6 +94,7 @@ namespace body_complex_LowLevel.Samples
 
             RequestContent content = RequestContent.Create(new object());
             Response response = await client.PutValidAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -108,6 +110,7 @@ namespace body_complex_LowLevel.Samples
                 size = 1234,
             });
             Response response = client.PutValid(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -123,6 +126,7 @@ namespace body_complex_LowLevel.Samples
                 size = 1234,
             });
             Response response = await client.PutValidAsync(content);
+
             Console.WriteLine(response.Status);
         }
     }

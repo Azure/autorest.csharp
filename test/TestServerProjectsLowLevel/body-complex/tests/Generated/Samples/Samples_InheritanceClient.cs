@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
@@ -17,7 +16,7 @@ using body_complex_LowLevel;
 
 namespace body_complex_LowLevel.Samples
 {
-    public class Samples_InheritanceClient
+    public partial class Samples_InheritanceClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
@@ -92,6 +91,7 @@ namespace body_complex_LowLevel.Samples
 
             RequestContent content = RequestContent.Create(new object());
             Response response = client.PutValid(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -104,6 +104,7 @@ namespace body_complex_LowLevel.Samples
 
             RequestContent content = RequestContent.Create(new object());
             Response response = await client.PutValidAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -118,19 +119,20 @@ namespace body_complex_LowLevel.Samples
             {
                 breed = "<breed>",
                 color = "<color>",
-                hates = new List<object>()
-{
+                hates = new object[]
+            {
 new
 {
 food = "<food>",
 id = 1234,
 name = "<name>",
 }
-},
+            },
                 id = 1234,
                 name = "<name>",
             });
             Response response = client.PutValid(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -145,19 +147,20 @@ name = "<name>",
             {
                 breed = "<breed>",
                 color = "<color>",
-                hates = new List<object>()
-{
+                hates = new object[]
+            {
 new
 {
 food = "<food>",
 id = 1234,
 name = "<name>",
 }
-},
+            },
                 id = 1234,
                 name = "<name>",
             });
             Response response = await client.PutValidAsync(content);
+
             Console.WriteLine(response.Status);
         }
     }

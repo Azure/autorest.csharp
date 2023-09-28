@@ -146,11 +146,12 @@ This sample shows how to call PutEmptyAsync.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ArrayClient client = new ArrayClient(credential);
 
-RequestContent content = RequestContent.Create(new List<object>()
+RequestContent content = RequestContent.Create(new object[]
 {
     "<arrayBody>"
 });
 Response response = await client.PutEmptyAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutEmptyAsync with all request content.
@@ -158,11 +159,12 @@ This sample shows how to call PutEmptyAsync with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ArrayClient client = new ArrayClient(credential);
 
-RequestContent content = RequestContent.Create(new List<object>()
+RequestContent content = RequestContent.Create(new object[]
 {
     "<arrayBody>"
 });
 Response response = await client.PutEmptyAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -173,11 +175,12 @@ This sample shows how to call PutEmpty.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ArrayClient client = new ArrayClient(credential);
 
-RequestContent content = RequestContent.Create(new List<object>()
+RequestContent content = RequestContent.Create(new object[]
 {
     "<arrayBody>"
 });
 Response response = client.PutEmpty(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutEmpty with all request content.
@@ -185,11 +188,12 @@ This sample shows how to call PutEmpty with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ArrayClient client = new ArrayClient(credential);
 
-RequestContent content = RequestContent.Create(new List<object>()
+RequestContent content = RequestContent.Create(new object[]
 {
     "<arrayBody>"
 });
 Response response = client.PutEmpty(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -246,11 +250,12 @@ This sample shows how to call PutBooleanTfftAsync.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ArrayClient client = new ArrayClient(credential);
 
-RequestContent content = RequestContent.Create(new List<object>()
+RequestContent content = RequestContent.Create(new object[]
 {
     true
 });
 Response response = await client.PutBooleanTfftAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutBooleanTfftAsync with all request content.
@@ -258,11 +263,12 @@ This sample shows how to call PutBooleanTfftAsync with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ArrayClient client = new ArrayClient(credential);
 
-RequestContent content = RequestContent.Create(new List<object>()
+RequestContent content = RequestContent.Create(new object[]
 {
     true
 });
 Response response = await client.PutBooleanTfftAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -273,11 +279,12 @@ This sample shows how to call PutBooleanTfft.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ArrayClient client = new ArrayClient(credential);
 
-RequestContent content = RequestContent.Create(new List<object>()
+RequestContent content = RequestContent.Create(new object[]
 {
     true
 });
 Response response = client.PutBooleanTfft(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutBooleanTfft with all request content.
@@ -285,11 +292,12 @@ This sample shows how to call PutBooleanTfft with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ArrayClient client = new ArrayClient(credential);
 
-RequestContent content = RequestContent.Create(new List<object>()
+RequestContent content = RequestContent.Create(new object[]
 {
     true
 });
 Response response = client.PutBooleanTfft(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -438,11 +446,12 @@ This sample shows how to call PutIntegerValidAsync.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ArrayClient client = new ArrayClient(credential);
 
-RequestContent content = RequestContent.Create(new List<object>()
+RequestContent content = RequestContent.Create(new object[]
 {
     1234
 });
 Response response = await client.PutIntegerValidAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutIntegerValidAsync with all request content.
@@ -450,11 +459,12 @@ This sample shows how to call PutIntegerValidAsync with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ArrayClient client = new ArrayClient(credential);
 
-RequestContent content = RequestContent.Create(new List<object>()
+RequestContent content = RequestContent.Create(new object[]
 {
     1234
 });
 Response response = await client.PutIntegerValidAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -465,11 +475,12 @@ This sample shows how to call PutIntegerValid.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ArrayClient client = new ArrayClient(credential);
 
-RequestContent content = RequestContent.Create(new List<object>()
+RequestContent content = RequestContent.Create(new object[]
 {
     1234
 });
 Response response = client.PutIntegerValid(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutIntegerValid with all request content.
@@ -477,11 +488,12 @@ This sample shows how to call PutIntegerValid with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ArrayClient client = new ArrayClient(credential);
 
-RequestContent content = RequestContent.Create(new List<object>()
+RequestContent content = RequestContent.Create(new object[]
 {
     1234
 });
 Response response = client.PutIntegerValid(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -630,11 +642,12 @@ This sample shows how to call PutLongValidAsync.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ArrayClient client = new ArrayClient(credential);
 
-RequestContent content = RequestContent.Create(new List<object>()
+RequestContent content = RequestContent.Create(new object[]
 {
     1234L
 });
 Response response = await client.PutLongValidAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutLongValidAsync with all request content.
@@ -642,11 +655,12 @@ This sample shows how to call PutLongValidAsync with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ArrayClient client = new ArrayClient(credential);
 
-RequestContent content = RequestContent.Create(new List<object>()
+RequestContent content = RequestContent.Create(new object[]
 {
     1234L
 });
 Response response = await client.PutLongValidAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -657,11 +671,12 @@ This sample shows how to call PutLongValid.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ArrayClient client = new ArrayClient(credential);
 
-RequestContent content = RequestContent.Create(new List<object>()
+RequestContent content = RequestContent.Create(new object[]
 {
     1234L
 });
 Response response = client.PutLongValid(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutLongValid with all request content.
@@ -669,11 +684,12 @@ This sample shows how to call PutLongValid with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ArrayClient client = new ArrayClient(credential);
 
-RequestContent content = RequestContent.Create(new List<object>()
+RequestContent content = RequestContent.Create(new object[]
 {
     1234L
 });
 Response response = client.PutLongValid(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -822,11 +838,12 @@ This sample shows how to call PutFloatValidAsync.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ArrayClient client = new ArrayClient(credential);
 
-RequestContent content = RequestContent.Create(new List<object>()
+RequestContent content = RequestContent.Create(new object[]
 {
     123.45F
 });
 Response response = await client.PutFloatValidAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutFloatValidAsync with all request content.
@@ -834,11 +851,12 @@ This sample shows how to call PutFloatValidAsync with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ArrayClient client = new ArrayClient(credential);
 
-RequestContent content = RequestContent.Create(new List<object>()
+RequestContent content = RequestContent.Create(new object[]
 {
     123.45F
 });
 Response response = await client.PutFloatValidAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -849,11 +867,12 @@ This sample shows how to call PutFloatValid.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ArrayClient client = new ArrayClient(credential);
 
-RequestContent content = RequestContent.Create(new List<object>()
+RequestContent content = RequestContent.Create(new object[]
 {
     123.45F
 });
 Response response = client.PutFloatValid(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutFloatValid with all request content.
@@ -861,11 +880,12 @@ This sample shows how to call PutFloatValid with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ArrayClient client = new ArrayClient(credential);
 
-RequestContent content = RequestContent.Create(new List<object>()
+RequestContent content = RequestContent.Create(new object[]
 {
     123.45F
 });
 Response response = client.PutFloatValid(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -1014,11 +1034,12 @@ This sample shows how to call PutDoubleValidAsync.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ArrayClient client = new ArrayClient(credential);
 
-RequestContent content = RequestContent.Create(new List<object>()
+RequestContent content = RequestContent.Create(new object[]
 {
     123.45
 });
 Response response = await client.PutDoubleValidAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutDoubleValidAsync with all request content.
@@ -1026,11 +1047,12 @@ This sample shows how to call PutDoubleValidAsync with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ArrayClient client = new ArrayClient(credential);
 
-RequestContent content = RequestContent.Create(new List<object>()
+RequestContent content = RequestContent.Create(new object[]
 {
     123.45
 });
 Response response = await client.PutDoubleValidAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -1041,11 +1063,12 @@ This sample shows how to call PutDoubleValid.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ArrayClient client = new ArrayClient(credential);
 
-RequestContent content = RequestContent.Create(new List<object>()
+RequestContent content = RequestContent.Create(new object[]
 {
     123.45
 });
 Response response = client.PutDoubleValid(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutDoubleValid with all request content.
@@ -1053,11 +1076,12 @@ This sample shows how to call PutDoubleValid with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ArrayClient client = new ArrayClient(credential);
 
-RequestContent content = RequestContent.Create(new List<object>()
+RequestContent content = RequestContent.Create(new object[]
 {
     123.45
 });
 Response response = client.PutDoubleValid(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -1206,11 +1230,12 @@ This sample shows how to call PutStringValidAsync.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ArrayClient client = new ArrayClient(credential);
 
-RequestContent content = RequestContent.Create(new List<object>()
+RequestContent content = RequestContent.Create(new object[]
 {
     "<arrayBody>"
 });
 Response response = await client.PutStringValidAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutStringValidAsync with all request content.
@@ -1218,11 +1243,12 @@ This sample shows how to call PutStringValidAsync with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ArrayClient client = new ArrayClient(credential);
 
-RequestContent content = RequestContent.Create(new List<object>()
+RequestContent content = RequestContent.Create(new object[]
 {
     "<arrayBody>"
 });
 Response response = await client.PutStringValidAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -1233,11 +1259,12 @@ This sample shows how to call PutStringValid.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ArrayClient client = new ArrayClient(credential);
 
-RequestContent content = RequestContent.Create(new List<object>()
+RequestContent content = RequestContent.Create(new object[]
 {
     "<arrayBody>"
 });
 Response response = client.PutStringValid(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutStringValid with all request content.
@@ -1245,11 +1272,12 @@ This sample shows how to call PutStringValid with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ArrayClient client = new ArrayClient(credential);
 
-RequestContent content = RequestContent.Create(new List<object>()
+RequestContent content = RequestContent.Create(new object[]
 {
     "<arrayBody>"
 });
 Response response = client.PutStringValid(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -1306,11 +1334,12 @@ This sample shows how to call PutEnumValidAsync.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ArrayClient client = new ArrayClient(credential);
 
-RequestContent content = RequestContent.Create(new List<object>()
+RequestContent content = RequestContent.Create(new object[]
 {
     "foo1"
 });
 Response response = await client.PutEnumValidAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutEnumValidAsync with all request content.
@@ -1318,11 +1347,12 @@ This sample shows how to call PutEnumValidAsync with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ArrayClient client = new ArrayClient(credential);
 
-RequestContent content = RequestContent.Create(new List<object>()
+RequestContent content = RequestContent.Create(new object[]
 {
     "foo1"
 });
 Response response = await client.PutEnumValidAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -1333,11 +1363,12 @@ This sample shows how to call PutEnumValid.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ArrayClient client = new ArrayClient(credential);
 
-RequestContent content = RequestContent.Create(new List<object>()
+RequestContent content = RequestContent.Create(new object[]
 {
     "foo1"
 });
 Response response = client.PutEnumValid(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutEnumValid with all request content.
@@ -1345,11 +1376,12 @@ This sample shows how to call PutEnumValid with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ArrayClient client = new ArrayClient(credential);
 
-RequestContent content = RequestContent.Create(new List<object>()
+RequestContent content = RequestContent.Create(new object[]
 {
     "foo1"
 });
 Response response = client.PutEnumValid(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -1406,11 +1438,12 @@ This sample shows how to call PutStringEnumValidAsync.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ArrayClient client = new ArrayClient(credential);
 
-RequestContent content = RequestContent.Create(new List<object>()
+RequestContent content = RequestContent.Create(new object[]
 {
     "foo1"
 });
 Response response = await client.PutStringEnumValidAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutStringEnumValidAsync with all request content.
@@ -1418,11 +1451,12 @@ This sample shows how to call PutStringEnumValidAsync with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ArrayClient client = new ArrayClient(credential);
 
-RequestContent content = RequestContent.Create(new List<object>()
+RequestContent content = RequestContent.Create(new object[]
 {
     "foo1"
 });
 Response response = await client.PutStringEnumValidAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -1433,11 +1467,12 @@ This sample shows how to call PutStringEnumValid.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ArrayClient client = new ArrayClient(credential);
 
-RequestContent content = RequestContent.Create(new List<object>()
+RequestContent content = RequestContent.Create(new object[]
 {
     "foo1"
 });
 Response response = client.PutStringEnumValid(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutStringEnumValid with all request content.
@@ -1445,11 +1480,12 @@ This sample shows how to call PutStringEnumValid with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ArrayClient client = new ArrayClient(credential);
 
-RequestContent content = RequestContent.Create(new List<object>()
+RequestContent content = RequestContent.Create(new object[]
 {
     "foo1"
 });
 Response response = client.PutStringEnumValid(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -1598,11 +1634,12 @@ This sample shows how to call PutUuidValidAsync.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ArrayClient client = new ArrayClient(credential);
 
-RequestContent content = RequestContent.Create(new List<object>()
+RequestContent content = RequestContent.Create(new object[]
 {
     "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"
 });
 Response response = await client.PutUuidValidAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutUuidValidAsync with all request content.
@@ -1610,11 +1647,12 @@ This sample shows how to call PutUuidValidAsync with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ArrayClient client = new ArrayClient(credential);
 
-RequestContent content = RequestContent.Create(new List<object>()
+RequestContent content = RequestContent.Create(new object[]
 {
     "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"
 });
 Response response = await client.PutUuidValidAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -1625,11 +1663,12 @@ This sample shows how to call PutUuidValid.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ArrayClient client = new ArrayClient(credential);
 
-RequestContent content = RequestContent.Create(new List<object>()
+RequestContent content = RequestContent.Create(new object[]
 {
     "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"
 });
 Response response = client.PutUuidValid(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutUuidValid with all request content.
@@ -1637,11 +1676,12 @@ This sample shows how to call PutUuidValid with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ArrayClient client = new ArrayClient(credential);
 
-RequestContent content = RequestContent.Create(new List<object>()
+RequestContent content = RequestContent.Create(new object[]
 {
     "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"
 });
 Response response = client.PutUuidValid(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -1744,11 +1784,12 @@ This sample shows how to call PutDateValidAsync.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ArrayClient client = new ArrayClient(credential);
 
-RequestContent content = RequestContent.Create(new List<object>()
+RequestContent content = RequestContent.Create(new object[]
 {
     "2022-05-10"
 });
 Response response = await client.PutDateValidAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutDateValidAsync with all request content.
@@ -1756,11 +1797,12 @@ This sample shows how to call PutDateValidAsync with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ArrayClient client = new ArrayClient(credential);
 
-RequestContent content = RequestContent.Create(new List<object>()
+RequestContent content = RequestContent.Create(new object[]
 {
     "2022-05-10"
 });
 Response response = await client.PutDateValidAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -1771,11 +1813,12 @@ This sample shows how to call PutDateValid.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ArrayClient client = new ArrayClient(credential);
 
-RequestContent content = RequestContent.Create(new List<object>()
+RequestContent content = RequestContent.Create(new object[]
 {
     "2022-05-10"
 });
 Response response = client.PutDateValid(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutDateValid with all request content.
@@ -1783,11 +1826,12 @@ This sample shows how to call PutDateValid with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ArrayClient client = new ArrayClient(credential);
 
-RequestContent content = RequestContent.Create(new List<object>()
+RequestContent content = RequestContent.Create(new object[]
 {
     "2022-05-10"
 });
 Response response = client.PutDateValid(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -1936,11 +1980,12 @@ This sample shows how to call PutDateTimeValidAsync.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ArrayClient client = new ArrayClient(credential);
 
-RequestContent content = RequestContent.Create(new List<object>()
+RequestContent content = RequestContent.Create(new object[]
 {
     "2022-05-10T18:57:31.2311892Z"
 });
 Response response = await client.PutDateTimeValidAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutDateTimeValidAsync with all request content.
@@ -1948,11 +1993,12 @@ This sample shows how to call PutDateTimeValidAsync with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ArrayClient client = new ArrayClient(credential);
 
-RequestContent content = RequestContent.Create(new List<object>()
+RequestContent content = RequestContent.Create(new object[]
 {
     "2022-05-10T18:57:31.2311892Z"
 });
 Response response = await client.PutDateTimeValidAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -1963,11 +2009,12 @@ This sample shows how to call PutDateTimeValid.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ArrayClient client = new ArrayClient(credential);
 
-RequestContent content = RequestContent.Create(new List<object>()
+RequestContent content = RequestContent.Create(new object[]
 {
     "2022-05-10T18:57:31.2311892Z"
 });
 Response response = client.PutDateTimeValid(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutDateTimeValid with all request content.
@@ -1975,11 +2022,12 @@ This sample shows how to call PutDateTimeValid with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ArrayClient client = new ArrayClient(credential);
 
-RequestContent content = RequestContent.Create(new List<object>()
+RequestContent content = RequestContent.Create(new object[]
 {
     "2022-05-10T18:57:31.2311892Z"
 });
 Response response = client.PutDateTimeValid(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -2128,11 +2176,12 @@ This sample shows how to call PutDateTimeRfc1123ValidAsync.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ArrayClient client = new ArrayClient(credential);
 
-RequestContent content = RequestContent.Create(new List<object>()
+RequestContent content = RequestContent.Create(new object[]
 {
     "Tue, 10 May 2022 18:57:31 GMT"
 });
 Response response = await client.PutDateTimeRfc1123ValidAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutDateTimeRfc1123ValidAsync with all request content.
@@ -2140,11 +2189,12 @@ This sample shows how to call PutDateTimeRfc1123ValidAsync with all request cont
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ArrayClient client = new ArrayClient(credential);
 
-RequestContent content = RequestContent.Create(new List<object>()
+RequestContent content = RequestContent.Create(new object[]
 {
     "Tue, 10 May 2022 18:57:31 GMT"
 });
 Response response = await client.PutDateTimeRfc1123ValidAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -2155,11 +2205,12 @@ This sample shows how to call PutDateTimeRfc1123Valid.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ArrayClient client = new ArrayClient(credential);
 
-RequestContent content = RequestContent.Create(new List<object>()
+RequestContent content = RequestContent.Create(new object[]
 {
     "Tue, 10 May 2022 18:57:31 GMT"
 });
 Response response = client.PutDateTimeRfc1123Valid(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutDateTimeRfc1123Valid with all request content.
@@ -2167,11 +2218,12 @@ This sample shows how to call PutDateTimeRfc1123Valid with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ArrayClient client = new ArrayClient(credential);
 
-RequestContent content = RequestContent.Create(new List<object>()
+RequestContent content = RequestContent.Create(new object[]
 {
     "Tue, 10 May 2022 18:57:31 GMT"
 });
 Response response = client.PutDateTimeRfc1123Valid(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -2228,11 +2280,12 @@ This sample shows how to call PutDurationValidAsync.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ArrayClient client = new ArrayClient(credential);
 
-RequestContent content = RequestContent.Create(new List<object>()
+RequestContent content = RequestContent.Create(new object[]
 {
     "PT1H23M45S"
 });
 Response response = await client.PutDurationValidAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutDurationValidAsync with all request content.
@@ -2240,11 +2293,12 @@ This sample shows how to call PutDurationValidAsync with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ArrayClient client = new ArrayClient(credential);
 
-RequestContent content = RequestContent.Create(new List<object>()
+RequestContent content = RequestContent.Create(new object[]
 {
     "PT1H23M45S"
 });
 Response response = await client.PutDurationValidAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -2255,11 +2309,12 @@ This sample shows how to call PutDurationValid.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ArrayClient client = new ArrayClient(credential);
 
-RequestContent content = RequestContent.Create(new List<object>()
+RequestContent content = RequestContent.Create(new object[]
 {
     "PT1H23M45S"
 });
 Response response = client.PutDurationValid(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutDurationValid with all request content.
@@ -2267,11 +2322,12 @@ This sample shows how to call PutDurationValid with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ArrayClient client = new ArrayClient(credential);
 
-RequestContent content = RequestContent.Create(new List<object>()
+RequestContent content = RequestContent.Create(new object[]
 {
     "PT1H23M45S"
 });
 Response response = client.PutDurationValid(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -2328,11 +2384,12 @@ This sample shows how to call PutByteValidAsync.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ArrayClient client = new ArrayClient(credential);
 
-RequestContent content = RequestContent.Create(new List<object>()
+RequestContent content = RequestContent.Create(new object[]
 {
     new object()
 });
 Response response = await client.PutByteValidAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutByteValidAsync with all request content.
@@ -2340,11 +2397,12 @@ This sample shows how to call PutByteValidAsync with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ArrayClient client = new ArrayClient(credential);
 
-RequestContent content = RequestContent.Create(new List<object>()
+RequestContent content = RequestContent.Create(new object[]
 {
     new object()
 });
 Response response = await client.PutByteValidAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -2355,11 +2413,12 @@ This sample shows how to call PutByteValid.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ArrayClient client = new ArrayClient(credential);
 
-RequestContent content = RequestContent.Create(new List<object>()
+RequestContent content = RequestContent.Create(new object[]
 {
     new object()
 });
 Response response = client.PutByteValid(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutByteValid with all request content.
@@ -2367,11 +2426,12 @@ This sample shows how to call PutByteValid with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ArrayClient client = new ArrayClient(credential);
 
-RequestContent content = RequestContent.Create(new List<object>()
+RequestContent content = RequestContent.Create(new object[]
 {
     new object()
 });
 Response response = client.PutByteValid(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -2714,11 +2774,12 @@ This sample shows how to call PutComplexValidAsync.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ArrayClient client = new ArrayClient(credential);
 
-RequestContent content = RequestContent.Create(new List<object>()
+RequestContent content = RequestContent.Create(new object[]
 {
     new object()
 });
 Response response = await client.PutComplexValidAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutComplexValidAsync with all request content.
@@ -2726,15 +2787,16 @@ This sample shows how to call PutComplexValidAsync with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ArrayClient client = new ArrayClient(credential);
 
-RequestContent content = RequestContent.Create(new List<object>()
+RequestContent content = RequestContent.Create(new object[]
 {
-    new Dictionary<string, object>()
+    new Dictionary<string, object>
     {
         ["integer"] = 1234,
-        ["string"] = "<string>",
+        ["string"] = "<string>"
     }
 });
 Response response = await client.PutComplexValidAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -2745,11 +2807,12 @@ This sample shows how to call PutComplexValid.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ArrayClient client = new ArrayClient(credential);
 
-RequestContent content = RequestContent.Create(new List<object>()
+RequestContent content = RequestContent.Create(new object[]
 {
     new object()
 });
 Response response = client.PutComplexValid(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutComplexValid with all request content.
@@ -2757,15 +2820,16 @@ This sample shows how to call PutComplexValid with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ArrayClient client = new ArrayClient(credential);
 
-RequestContent content = RequestContent.Create(new List<object>()
+RequestContent content = RequestContent.Create(new object[]
 {
-    new Dictionary<string, object>()
+    new Dictionary<string, object>
     {
         ["integer"] = 1234,
-        ["string"] = "<string>",
+        ["string"] = "<string>"
     }
 });
 Response response = client.PutComplexValid(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -3006,14 +3070,15 @@ This sample shows how to call PutArrayValidAsync.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ArrayClient client = new ArrayClient(credential);
 
-RequestContent content = RequestContent.Create(new List<object>()
+RequestContent content = RequestContent.Create(new object[]
 {
-    new List<object>()
+    new object[]
     {
         "<arrayBody>"
     }
 });
 Response response = await client.PutArrayValidAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutArrayValidAsync with all request content.
@@ -3021,14 +3086,15 @@ This sample shows how to call PutArrayValidAsync with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ArrayClient client = new ArrayClient(credential);
 
-RequestContent content = RequestContent.Create(new List<object>()
+RequestContent content = RequestContent.Create(new object[]
 {
-    new List<object>()
+    new object[]
     {
         "<arrayBody>"
     }
 });
 Response response = await client.PutArrayValidAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -3039,14 +3105,15 @@ This sample shows how to call PutArrayValid.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ArrayClient client = new ArrayClient(credential);
 
-RequestContent content = RequestContent.Create(new List<object>()
+RequestContent content = RequestContent.Create(new object[]
 {
-    new List<object>()
+    new object[]
     {
         "<arrayBody>"
     }
 });
 Response response = client.PutArrayValid(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutArrayValid with all request content.
@@ -3054,14 +3121,15 @@ This sample shows how to call PutArrayValid with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ArrayClient client = new ArrayClient(credential);
 
-RequestContent content = RequestContent.Create(new List<object>()
+RequestContent content = RequestContent.Create(new object[]
 {
-    new List<object>()
+    new object[]
     {
         "<arrayBody>"
     }
 });
 Response response = client.PutArrayValid(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -3302,7 +3370,7 @@ This sample shows how to call PutDictionaryValidAsync.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ArrayClient client = new ArrayClient(credential);
 
-RequestContent content = RequestContent.Create(new List<object>()
+RequestContent content = RequestContent.Create(new object[]
 {
     new
     {
@@ -3310,6 +3378,7 @@ RequestContent content = RequestContent.Create(new List<object>()
     }
 });
 Response response = await client.PutDictionaryValidAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutDictionaryValidAsync with all request content.
@@ -3317,7 +3386,7 @@ This sample shows how to call PutDictionaryValidAsync with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ArrayClient client = new ArrayClient(credential);
 
-RequestContent content = RequestContent.Create(new List<object>()
+RequestContent content = RequestContent.Create(new object[]
 {
     new
     {
@@ -3325,6 +3394,7 @@ RequestContent content = RequestContent.Create(new List<object>()
     }
 });
 Response response = await client.PutDictionaryValidAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -3335,7 +3405,7 @@ This sample shows how to call PutDictionaryValid.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ArrayClient client = new ArrayClient(credential);
 
-RequestContent content = RequestContent.Create(new List<object>()
+RequestContent content = RequestContent.Create(new object[]
 {
     new
     {
@@ -3343,6 +3413,7 @@ RequestContent content = RequestContent.Create(new List<object>()
     }
 });
 Response response = client.PutDictionaryValid(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutDictionaryValid with all request content.
@@ -3350,7 +3421,7 @@ This sample shows how to call PutDictionaryValid with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ArrayClient client = new ArrayClient(credential);
 
-RequestContent content = RequestContent.Create(new List<object>()
+RequestContent content = RequestContent.Create(new object[]
 {
     new
     {
@@ -3358,6 +3429,7 @@ RequestContent content = RequestContent.Create(new List<object>()
     }
 });
 Response response = client.PutDictionaryValid(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>

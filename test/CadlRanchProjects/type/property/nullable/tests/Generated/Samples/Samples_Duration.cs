@@ -17,7 +17,7 @@ using _Type.Property.Nullable.Models;
 
 namespace _Type.Property.Nullable.Samples
 {
-    internal class Samples_Duration
+    public partial class Samples_Duration
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
@@ -207,6 +207,7 @@ namespace _Type.Property.Nullable.Samples
                 nullableProperty = "PT1H23M45S",
             });
             Response response = client.PatchNonNull(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -222,6 +223,7 @@ namespace _Type.Property.Nullable.Samples
                 nullableProperty = "PT1H23M45S",
             });
             Response response = await client.PatchNonNullAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -237,6 +239,7 @@ namespace _Type.Property.Nullable.Samples
                 nullableProperty = "PT1H23M45S",
             });
             Response response = client.PatchNonNull(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -252,6 +255,7 @@ namespace _Type.Property.Nullable.Samples
                 nullableProperty = "PT1H23M45S",
             });
             Response response = await client.PatchNonNullAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -267,6 +271,7 @@ namespace _Type.Property.Nullable.Samples
                 nullableProperty = "PT1H23M45S",
             });
             Response response = client.PatchNull(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -282,6 +287,7 @@ namespace _Type.Property.Nullable.Samples
                 nullableProperty = "PT1H23M45S",
             });
             Response response = await client.PatchNullAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -297,6 +303,7 @@ namespace _Type.Property.Nullable.Samples
                 nullableProperty = "PT1H23M45S",
             });
             Response response = client.PatchNull(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -312,6 +319,7 @@ namespace _Type.Property.Nullable.Samples
                 nullableProperty = "PT1H23M45S",
             });
             Response response = await client.PatchNullAsync(content);
+
             Console.WriteLine(response.Status);
         }
     }

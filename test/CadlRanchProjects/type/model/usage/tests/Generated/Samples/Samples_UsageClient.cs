@@ -17,7 +17,7 @@ using _Type.Model.Usage.Models;
 
 namespace _Type.Model.Usage.Samples
 {
-    public class Samples_UsageClient
+    public partial class Samples_UsageClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
@@ -30,6 +30,7 @@ namespace _Type.Model.Usage.Samples
                 requiredProp = "<requiredProp>",
             });
             Response response = client.Input(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -44,6 +45,7 @@ namespace _Type.Model.Usage.Samples
                 requiredProp = "<requiredProp>",
             });
             Response response = await client.InputAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -55,7 +57,6 @@ namespace _Type.Model.Usage.Samples
 
             InputRecord input = new InputRecord("<requiredProp>");
             Response response = client.Input(input);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -66,7 +67,6 @@ namespace _Type.Model.Usage.Samples
 
             InputRecord input = new InputRecord("<requiredProp>");
             Response response = await client.InputAsync(input);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -80,6 +80,7 @@ namespace _Type.Model.Usage.Samples
                 requiredProp = "<requiredProp>",
             });
             Response response = client.Input(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -94,6 +95,7 @@ namespace _Type.Model.Usage.Samples
                 requiredProp = "<requiredProp>",
             });
             Response response = await client.InputAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -105,7 +107,6 @@ namespace _Type.Model.Usage.Samples
 
             InputRecord input = new InputRecord("<requiredProp>");
             Response response = client.Input(input);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -116,7 +117,6 @@ namespace _Type.Model.Usage.Samples
 
             InputRecord input = new InputRecord("<requiredProp>");
             Response response = await client.InputAsync(input);
-            Console.WriteLine(response.Status);
         }
 
         [Test]

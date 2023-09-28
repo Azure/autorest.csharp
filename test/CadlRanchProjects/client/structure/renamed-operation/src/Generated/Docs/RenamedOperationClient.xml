@@ -9,6 +9,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 RenamedOperationClient client = new RenamedOperationClient(endpoint, "default");
 
 Response response = await client.RenamedOneAsync();
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call RenamedOneAsync with all request content.
@@ -17,6 +18,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 RenamedOperationClient client = new RenamedOperationClient(endpoint, "default");
 
 Response response = await client.RenamedOneAsync();
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -28,6 +30,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 RenamedOperationClient client = new RenamedOperationClient(endpoint, "default");
 
 Response response = client.RenamedOne();
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call RenamedOne with all request content.
@@ -36,6 +39,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 RenamedOperationClient client = new RenamedOperationClient(endpoint, "default");
 
 Response response = client.RenamedOne();
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -47,6 +51,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 RenamedOperationClient client = new RenamedOperationClient(endpoint, "default");
 
 Response response = await client.RenamedThreeAsync();
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call RenamedThreeAsync with all request content.
@@ -55,6 +60,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 RenamedOperationClient client = new RenamedOperationClient(endpoint, "default");
 
 Response response = await client.RenamedThreeAsync();
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -66,6 +72,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 RenamedOperationClient client = new RenamedOperationClient(endpoint, "default");
 
 Response response = client.RenamedThree();
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call RenamedThree with all request content.
@@ -74,6 +81,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 RenamedOperationClient client = new RenamedOperationClient(endpoint, "default");
 
 Response response = client.RenamedThree();
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -85,6 +93,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 RenamedOperationClient client = new RenamedOperationClient(endpoint, "default");
 
 Response response = await client.RenamedFiveAsync();
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call RenamedFiveAsync with all request content.
@@ -93,6 +102,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 RenamedOperationClient client = new RenamedOperationClient(endpoint, "default");
 
 Response response = await client.RenamedFiveAsync();
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -104,6 +114,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 RenamedOperationClient client = new RenamedOperationClient(endpoint, "default");
 
 Response response = client.RenamedFive();
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call RenamedFive with all request content.
@@ -112,6 +123,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 RenamedOperationClient client = new RenamedOperationClient(endpoint, "default");
 
 Response response = client.RenamedFive();
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>

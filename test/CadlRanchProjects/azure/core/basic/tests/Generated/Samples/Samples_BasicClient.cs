@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
@@ -18,7 +17,7 @@ using _Specs_.Azure.Core.Basic.Models;
 
 namespace _Specs_.Azure.Core.Basic.Samples
 {
-    public class Samples_BasicClient
+    public partial class Samples_BasicClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
@@ -65,14 +64,14 @@ namespace _Specs_.Azure.Core.Basic.Samples
             RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
-                orders = new List<object>()
-{
+                orders = new object[]
+            {
 new
 {
 userId = 1234,
 detail = "<detail>",
 }
-},
+            },
             });
             Response response = client.CreateOrUpdate(1234, content);
 
@@ -94,14 +93,14 @@ detail = "<detail>",
             RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
-                orders = new List<object>()
-{
+                orders = new object[]
+            {
 new
 {
 userId = 1234,
 detail = "<detail>",
 }
-},
+            },
             });
             Response response = await client.CreateOrUpdateAsync(1234, content);
 
@@ -179,14 +178,14 @@ detail = "<detail>",
             RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
-                orders = new List<object>()
-{
+                orders = new object[]
+            {
 new
 {
 userId = 1234,
 detail = "<detail>",
 }
-},
+            },
             });
             Response response = client.CreateOrReplace(1234, content);
 
@@ -208,14 +207,14 @@ detail = "<detail>",
             RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
-                orders = new List<object>()
-{
+                orders = new object[]
+            {
 new
 {
 userId = 1234,
 detail = "<detail>",
 }
-},
+            },
             });
             Response response = await client.CreateOrReplaceAsync(1234, content);
 
@@ -236,10 +235,7 @@ detail = "<detail>",
 
             User resource = new User("<name>")
             {
-                Orders =
-{
-new UserOrder(1234,"<detail>")
-},
+                Orders = { new UserOrder(1234, "<detail>") },
             };
             Response<User> response = client.CreateOrReplace(1234, resource);
         }
@@ -252,10 +248,7 @@ new UserOrder(1234,"<detail>")
 
             User resource = new User("<name>")
             {
-                Orders =
-{
-new UserOrder(1234,"<detail>")
-},
+                Orders = { new UserOrder(1234, "<detail>") },
             };
             Response<User> response = await client.CreateOrReplaceAsync(1234, resource);
         }
@@ -365,6 +358,7 @@ new UserOrder(1234,"<detail>")
             BasicClient client = new BasicClient();
 
             Response response = client.Delete(1234);
+
             Console.WriteLine(response.Status);
         }
 
@@ -375,6 +369,7 @@ new UserOrder(1234,"<detail>")
             BasicClient client = new BasicClient();
 
             Response response = await client.DeleteAsync(1234);
+
             Console.WriteLine(response.Status);
         }
 
@@ -385,6 +380,7 @@ new UserOrder(1234,"<detail>")
             BasicClient client = new BasicClient();
 
             Response response = client.Delete(1234);
+
             Console.WriteLine(response.Status);
         }
 
@@ -395,6 +391,7 @@ new UserOrder(1234,"<detail>")
             BasicClient client = new BasicClient();
 
             Response response = await client.DeleteAsync(1234);
+
             Console.WriteLine(response.Status);
         }
 
@@ -505,9 +502,9 @@ new UserOrder(1234,"<detail>")
             foreach (BinaryData item in client.GetUsers(null, null, null, null, null, null, null, null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("id").ToString());
-                Console.WriteLine(result[0].GetProperty("name").ToString());
-                Console.WriteLine(result[0].GetProperty("etag").ToString());
+                Console.WriteLine(result.GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("name").ToString());
+                Console.WriteLine(result.GetProperty("etag").ToString());
             }
         }
 
@@ -520,9 +517,9 @@ new UserOrder(1234,"<detail>")
             await foreach (BinaryData item in client.GetUsersAsync(null, null, null, null, null, null, null, null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("id").ToString());
-                Console.WriteLine(result[0].GetProperty("name").ToString());
-                Console.WriteLine(result[0].GetProperty("etag").ToString());
+                Console.WriteLine(result.GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("name").ToString());
+                Console.WriteLine(result.GetProperty("etag").ToString());
             }
         }
 
@@ -554,24 +551,15 @@ new UserOrder(1234,"<detail>")
         {
             BasicClient client = new BasicClient();
 
-            foreach (BinaryData item in client.GetUsers(1234, 1234, 1234, new List<string>()
-{
-"<orderby>"
-}, "<filter>", new List<string>()
-{
-"<select>"
-}, new List<string>()
-{
-"<expand>"
-}, null))
+            foreach (BinaryData item in client.GetUsers(1234, 1234, 1234, new string[] { "<orderby>" }, "<filter>", new string[] { "<select>" }, new string[] { "<expand>" }, null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("id").ToString());
-                Console.WriteLine(result[0].GetProperty("name").ToString());
-                Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("id").ToString());
-                Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("userId").ToString());
-                Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("detail").ToString());
-                Console.WriteLine(result[0].GetProperty("etag").ToString());
+                Console.WriteLine(result.GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("name").ToString());
+                Console.WriteLine(result.GetProperty("orders")[0].GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("orders")[0].GetProperty("userId").ToString());
+                Console.WriteLine(result.GetProperty("orders")[0].GetProperty("detail").ToString());
+                Console.WriteLine(result.GetProperty("etag").ToString());
             }
         }
 
@@ -581,24 +569,15 @@ new UserOrder(1234,"<detail>")
         {
             BasicClient client = new BasicClient();
 
-            await foreach (BinaryData item in client.GetUsersAsync(1234, 1234, 1234, new List<string>()
-{
-"<orderby>"
-}, "<filter>", new List<string>()
-{
-"<select>"
-}, new List<string>()
-{
-"<expand>"
-}, null))
+            await foreach (BinaryData item in client.GetUsersAsync(1234, 1234, 1234, new string[] { "<orderby>" }, "<filter>", new string[] { "<select>" }, new string[] { "<expand>" }, null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("id").ToString());
-                Console.WriteLine(result[0].GetProperty("name").ToString());
-                Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("id").ToString());
-                Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("userId").ToString());
-                Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("detail").ToString());
-                Console.WriteLine(result[0].GetProperty("etag").ToString());
+                Console.WriteLine(result.GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("name").ToString());
+                Console.WriteLine(result.GetProperty("orders")[0].GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("orders")[0].GetProperty("userId").ToString());
+                Console.WriteLine(result.GetProperty("orders")[0].GetProperty("detail").ToString());
+                Console.WriteLine(result.GetProperty("etag").ToString());
             }
         }
 
@@ -608,16 +587,7 @@ new UserOrder(1234,"<detail>")
         {
             BasicClient client = new BasicClient();
 
-            foreach (User item in client.GetUsers(maxCount: 1234, skip: 1234, maxpagesize: 1234, orderby: new List<string>()
-{
-"<orderby>"
-}, filter: "<filter>", select: new List<string>()
-{
-"<select>"
-}, expand: new List<string>()
-{
-"<expand>"
-}))
+            foreach (User item in client.GetUsers(maxCount: 1234, skip: 1234, maxpagesize: 1234, orderby: new string[] { "<orderby>" }, filter: "<filter>", select: new string[] { "<select>" }, expand: new string[] { "<expand>" }))
             {
             }
         }
@@ -628,16 +598,7 @@ new UserOrder(1234,"<detail>")
         {
             BasicClient client = new BasicClient();
 
-            await foreach (User item in client.GetUsersAsync(maxCount: 1234, skip: 1234, maxpagesize: 1234, orderby: new List<string>()
-{
-"<orderby>"
-}, filter: "<filter>", select: new List<string>()
-{
-"<select>"
-}, expand: new List<string>()
-{
-"<expand>"
-}))
+            await foreach (User item in client.GetUsersAsync(maxCount: 1234, skip: 1234, maxpagesize: 1234, orderby: new string[] { "<orderby>" }, filter: "<filter>", select: new string[] { "<select>" }, expand: new string[] { "<expand>" }))
             {
             }
         }
@@ -651,9 +612,9 @@ new UserOrder(1234,"<detail>")
             foreach (BinaryData item in client.GetWithPage(null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("id").ToString());
-                Console.WriteLine(result[0].GetProperty("name").ToString());
-                Console.WriteLine(result[0].GetProperty("etag").ToString());
+                Console.WriteLine(result.GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("name").ToString());
+                Console.WriteLine(result.GetProperty("etag").ToString());
             }
         }
 
@@ -666,9 +627,9 @@ new UserOrder(1234,"<detail>")
             await foreach (BinaryData item in client.GetWithPageAsync(null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("id").ToString());
-                Console.WriteLine(result[0].GetProperty("name").ToString());
-                Console.WriteLine(result[0].GetProperty("etag").ToString());
+                Console.WriteLine(result.GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("name").ToString());
+                Console.WriteLine(result.GetProperty("etag").ToString());
             }
         }
 
@@ -703,12 +664,12 @@ new UserOrder(1234,"<detail>")
             foreach (BinaryData item in client.GetWithPage(null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("id").ToString());
-                Console.WriteLine(result[0].GetProperty("name").ToString());
-                Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("id").ToString());
-                Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("userId").ToString());
-                Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("detail").ToString());
-                Console.WriteLine(result[0].GetProperty("etag").ToString());
+                Console.WriteLine(result.GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("name").ToString());
+                Console.WriteLine(result.GetProperty("orders")[0].GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("orders")[0].GetProperty("userId").ToString());
+                Console.WriteLine(result.GetProperty("orders")[0].GetProperty("detail").ToString());
+                Console.WriteLine(result.GetProperty("etag").ToString());
             }
         }
 
@@ -721,12 +682,12 @@ new UserOrder(1234,"<detail>")
             await foreach (BinaryData item in client.GetWithPageAsync(null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("id").ToString());
-                Console.WriteLine(result[0].GetProperty("name").ToString());
-                Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("id").ToString());
-                Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("userId").ToString());
-                Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("detail").ToString());
-                Console.WriteLine(result[0].GetProperty("etag").ToString());
+                Console.WriteLine(result.GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("name").ToString());
+                Console.WriteLine(result.GetProperty("orders")[0].GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("orders")[0].GetProperty("userId").ToString());
+                Console.WriteLine(result.GetProperty("orders")[0].GetProperty("detail").ToString());
+                Console.WriteLine(result.GetProperty("etag").ToString());
             }
         }
 
@@ -761,9 +722,9 @@ new UserOrder(1234,"<detail>")
             foreach (BinaryData item in client.GetWithCustomPageModel(null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("id").ToString());
-                Console.WriteLine(result[0].GetProperty("name").ToString());
-                Console.WriteLine(result[0].GetProperty("etag").ToString());
+                Console.WriteLine(result.GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("name").ToString());
+                Console.WriteLine(result.GetProperty("etag").ToString());
             }
         }
 
@@ -776,9 +737,9 @@ new UserOrder(1234,"<detail>")
             await foreach (BinaryData item in client.GetWithCustomPageModelAsync(null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("id").ToString());
-                Console.WriteLine(result[0].GetProperty("name").ToString());
-                Console.WriteLine(result[0].GetProperty("etag").ToString());
+                Console.WriteLine(result.GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("name").ToString());
+                Console.WriteLine(result.GetProperty("etag").ToString());
             }
         }
 
@@ -813,12 +774,12 @@ new UserOrder(1234,"<detail>")
             foreach (BinaryData item in client.GetWithCustomPageModel(null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("id").ToString());
-                Console.WriteLine(result[0].GetProperty("name").ToString());
-                Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("id").ToString());
-                Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("userId").ToString());
-                Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("detail").ToString());
-                Console.WriteLine(result[0].GetProperty("etag").ToString());
+                Console.WriteLine(result.GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("name").ToString());
+                Console.WriteLine(result.GetProperty("orders")[0].GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("orders")[0].GetProperty("userId").ToString());
+                Console.WriteLine(result.GetProperty("orders")[0].GetProperty("detail").ToString());
+                Console.WriteLine(result.GetProperty("etag").ToString());
             }
         }
 
@@ -831,12 +792,12 @@ new UserOrder(1234,"<detail>")
             await foreach (BinaryData item in client.GetWithCustomPageModelAsync(null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("id").ToString());
-                Console.WriteLine(result[0].GetProperty("name").ToString());
-                Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("id").ToString());
-                Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("userId").ToString());
-                Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("detail").ToString());
-                Console.WriteLine(result[0].GetProperty("etag").ToString());
+                Console.WriteLine(result.GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("name").ToString());
+                Console.WriteLine(result.GetProperty("orders")[0].GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("orders")[0].GetProperty("userId").ToString());
+                Console.WriteLine(result.GetProperty("orders")[0].GetProperty("detail").ToString());
+                Console.WriteLine(result.GetProperty("etag").ToString());
             }
         }
 

@@ -17,7 +17,7 @@ using _Type._Array;
 
 namespace _Type._Array.Samples
 {
-    internal class Samples_BooleanValue
+    public partial class Samples_BooleanValue
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
@@ -109,11 +109,12 @@ namespace _Type._Array.Samples
         {
             BooleanValue client = new ArrayClient().GetBooleanValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new List<object>()
-{
+            RequestContent content = RequestContent.Create(new object[]
+            {
 true
-});
+            });
             Response response = client.Put(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -123,11 +124,12 @@ true
         {
             BooleanValue client = new ArrayClient().GetBooleanValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new List<object>()
-{
+            RequestContent content = RequestContent.Create(new object[]
+            {
 true
-});
+            });
             Response response = await client.PutAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -137,11 +139,7 @@ true
         {
             BooleanValue client = new ArrayClient().GetBooleanValueClient(apiVersion: "1.0.0");
 
-            Response response = client.Put(new List<bool>()
-{
-true
-});
-            Console.WriteLine(response.Status);
+            Response response = client.Put(new bool[] { true });
         }
 
         [Test]
@@ -150,11 +148,7 @@ true
         {
             BooleanValue client = new ArrayClient().GetBooleanValueClient(apiVersion: "1.0.0");
 
-            Response response = await client.PutAsync(new List<bool>()
-{
-true
-});
-            Console.WriteLine(response.Status);
+            Response response = await client.PutAsync(new bool[] { true });
         }
 
         [Test]
@@ -163,11 +157,12 @@ true
         {
             BooleanValue client = new ArrayClient().GetBooleanValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new List<object>()
-{
+            RequestContent content = RequestContent.Create(new object[]
+            {
 true
-});
+            });
             Response response = client.Put(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -177,11 +172,12 @@ true
         {
             BooleanValue client = new ArrayClient().GetBooleanValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new List<object>()
-{
+            RequestContent content = RequestContent.Create(new object[]
+            {
 true
-});
+            });
             Response response = await client.PutAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -191,11 +187,7 @@ true
         {
             BooleanValue client = new ArrayClient().GetBooleanValueClient(apiVersion: "1.0.0");
 
-            Response response = client.Put(new List<bool>()
-{
-true
-});
-            Console.WriteLine(response.Status);
+            Response response = client.Put(new bool[] { true });
         }
 
         [Test]
@@ -204,11 +196,7 @@ true
         {
             BooleanValue client = new ArrayClient().GetBooleanValueClient(apiVersion: "1.0.0");
 
-            Response response = await client.PutAsync(new List<bool>()
-{
-true
-});
-            Console.WriteLine(response.Status);
+            Response response = await client.PutAsync(new bool[] { true });
         }
     }
 }

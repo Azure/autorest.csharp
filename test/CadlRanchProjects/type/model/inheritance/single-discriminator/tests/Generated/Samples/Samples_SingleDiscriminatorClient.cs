@@ -17,7 +17,7 @@ using _Type.Model.Inheritance.SingleDiscriminator.Models;
 
 namespace _Type.Model.Inheritance.SingleDiscriminator.Samples
 {
-    public class Samples_SingleDiscriminatorClient
+    public partial class Samples_SingleDiscriminatorClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
@@ -119,6 +119,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Samples
                 wingspan = 1234,
             });
             Response response = client.PutModel(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -134,6 +135,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Samples
                 wingspan = 1234,
             });
             Response response = await client.PutModelAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -145,7 +147,6 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Samples
 
             Bird input = new SeaGull(1234);
             Response response = client.PutModel(input);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -156,7 +157,6 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Samples
 
             Bird input = new SeaGull(1234);
             Response response = await client.PutModelAsync(input);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -171,6 +171,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Samples
                 wingspan = 1234,
             });
             Response response = client.PutModel(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -186,6 +187,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Samples
                 wingspan = 1234,
             });
             Response response = await client.PutModelAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -197,7 +199,6 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Samples
 
             Bird input = new SeaGull(1234);
             Response response = client.PutModel(input);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -208,7 +209,6 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Samples
 
             Bird input = new SeaGull(1234);
             Response response = await client.PutModelAsync(input);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -311,6 +311,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Samples
                 wingspan = 1234,
             });
             Response response = client.PutRecursiveModel(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -326,6 +327,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Samples
                 wingspan = 1234,
             });
             Response response = await client.PutRecursiveModelAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -337,7 +339,6 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Samples
 
             Bird input = new SeaGull(1234);
             Response response = client.PutRecursiveModel(input);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -348,7 +349,6 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Samples
 
             Bird input = new SeaGull(1234);
             Response response = await client.PutRecursiveModelAsync(input);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -363,6 +363,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Samples
                 wingspan = 1234,
             });
             Response response = client.PutRecursiveModel(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -378,6 +379,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Samples
                 wingspan = 1234,
             });
             Response response = await client.PutRecursiveModelAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -389,7 +391,6 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Samples
 
             Bird input = new SeaGull(1234);
             Response response = client.PutRecursiveModel(input);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -400,7 +401,6 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Samples
 
             Bird input = new SeaGull(1234);
             Response response = await client.PutRecursiveModelAsync(input);
-            Console.WriteLine(response.Status);
         }
 
         [Test]

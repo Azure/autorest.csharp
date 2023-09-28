@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Identity;
@@ -15,7 +14,7 @@ using NUnit.Framework;
 
 namespace Encode.Bytes.Samples
 {
-    internal class Samples_Header
+    public partial class Samples_Header
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
@@ -24,6 +23,7 @@ namespace Encode.Bytes.Samples
             Header client = new BytesClient().GetHeaderClient(apiVersion: "1.0.0");
 
             Response response = client.Default(BinaryData.FromObjectAsJson(new object()));
+
             Console.WriteLine(response.Status);
         }
 
@@ -34,6 +34,7 @@ namespace Encode.Bytes.Samples
             Header client = new BytesClient().GetHeaderClient(apiVersion: "1.0.0");
 
             Response response = await client.DefaultAsync(BinaryData.FromObjectAsJson(new object()));
+
             Console.WriteLine(response.Status);
         }
 
@@ -44,6 +45,7 @@ namespace Encode.Bytes.Samples
             Header client = new BytesClient().GetHeaderClient(apiVersion: "1.0.0");
 
             Response response = client.Default(BinaryData.FromObjectAsJson(new object()));
+
             Console.WriteLine(response.Status);
         }
 
@@ -54,6 +56,7 @@ namespace Encode.Bytes.Samples
             Header client = new BytesClient().GetHeaderClient(apiVersion: "1.0.0");
 
             Response response = await client.DefaultAsync(BinaryData.FromObjectAsJson(new object()));
+
             Console.WriteLine(response.Status);
         }
 
@@ -64,6 +67,7 @@ namespace Encode.Bytes.Samples
             Header client = new BytesClient().GetHeaderClient(apiVersion: "1.0.0");
 
             Response response = client.Base64(BinaryData.FromObjectAsJson(new object()));
+
             Console.WriteLine(response.Status);
         }
 
@@ -74,6 +78,7 @@ namespace Encode.Bytes.Samples
             Header client = new BytesClient().GetHeaderClient(apiVersion: "1.0.0");
 
             Response response = await client.Base64Async(BinaryData.FromObjectAsJson(new object()));
+
             Console.WriteLine(response.Status);
         }
 
@@ -84,6 +89,7 @@ namespace Encode.Bytes.Samples
             Header client = new BytesClient().GetHeaderClient(apiVersion: "1.0.0");
 
             Response response = client.Base64(BinaryData.FromObjectAsJson(new object()));
+
             Console.WriteLine(response.Status);
         }
 
@@ -94,6 +100,7 @@ namespace Encode.Bytes.Samples
             Header client = new BytesClient().GetHeaderClient(apiVersion: "1.0.0");
 
             Response response = await client.Base64Async(BinaryData.FromObjectAsJson(new object()));
+
             Console.WriteLine(response.Status);
         }
 
@@ -104,6 +111,7 @@ namespace Encode.Bytes.Samples
             Header client = new BytesClient().GetHeaderClient(apiVersion: "1.0.0");
 
             Response response = client.Base64url(BinaryData.FromObjectAsJson(new object()));
+
             Console.WriteLine(response.Status);
         }
 
@@ -114,6 +122,7 @@ namespace Encode.Bytes.Samples
             Header client = new BytesClient().GetHeaderClient(apiVersion: "1.0.0");
 
             Response response = await client.Base64urlAsync(BinaryData.FromObjectAsJson(new object()));
+
             Console.WriteLine(response.Status);
         }
 
@@ -124,6 +133,7 @@ namespace Encode.Bytes.Samples
             Header client = new BytesClient().GetHeaderClient(apiVersion: "1.0.0");
 
             Response response = client.Base64url(BinaryData.FromObjectAsJson(new object()));
+
             Console.WriteLine(response.Status);
         }
 
@@ -134,6 +144,7 @@ namespace Encode.Bytes.Samples
             Header client = new BytesClient().GetHeaderClient(apiVersion: "1.0.0");
 
             Response response = await client.Base64urlAsync(BinaryData.FromObjectAsJson(new object()));
+
             Console.WriteLine(response.Status);
         }
 
@@ -143,10 +154,11 @@ namespace Encode.Bytes.Samples
         {
             Header client = new BytesClient().GetHeaderClient(apiVersion: "1.0.0");
 
-            Response response = client.Base64urlArray(new List<BinaryData>()
-{
+            Response response = client.Base64urlArray(new BinaryData[]
+            {
 BinaryData.FromObjectAsJson(new object())
-});
+            });
+
             Console.WriteLine(response.Status);
         }
 
@@ -156,10 +168,11 @@ BinaryData.FromObjectAsJson(new object())
         {
             Header client = new BytesClient().GetHeaderClient(apiVersion: "1.0.0");
 
-            Response response = await client.Base64urlArrayAsync(new List<BinaryData>()
-{
+            Response response = await client.Base64urlArrayAsync(new BinaryData[]
+            {
 BinaryData.FromObjectAsJson(new object())
-});
+            });
+
             Console.WriteLine(response.Status);
         }
 
@@ -169,10 +182,11 @@ BinaryData.FromObjectAsJson(new object())
         {
             Header client = new BytesClient().GetHeaderClient(apiVersion: "1.0.0");
 
-            Response response = client.Base64urlArray(new List<BinaryData>()
-{
+            Response response = client.Base64urlArray(new BinaryData[]
+            {
 BinaryData.FromObjectAsJson(new object())
-});
+            });
+
             Console.WriteLine(response.Status);
         }
 
@@ -182,10 +196,11 @@ BinaryData.FromObjectAsJson(new object())
         {
             Header client = new BytesClient().GetHeaderClient(apiVersion: "1.0.0");
 
-            Response response = await client.Base64urlArrayAsync(new List<BinaryData>()
-{
+            Response response = await client.Base64urlArrayAsync(new BinaryData[]
+            {
 BinaryData.FromObjectAsJson(new object())
-});
+            });
+
             Console.WriteLine(response.Status);
         }
     }

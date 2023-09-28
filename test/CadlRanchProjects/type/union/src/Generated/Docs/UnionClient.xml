@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="SendIntAsync(ModelWithSimpleUnionProperty,CancellationToken)" />
-    <member name="SendInt(ModelWithSimpleUnionProperty,CancellationToken)" />
     <member name="SendIntAsync(RequestContent,RequestContext)">
       <example>
 This sample shows how to call SendIntAsync.
@@ -14,6 +12,7 @@ RequestContent content = RequestContent.Create(new
     simpleUnion = 1234,
 });
 Response response = await client.SendIntAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call SendIntAsync with all request content.
@@ -25,6 +24,7 @@ RequestContent content = RequestContent.Create(new
     simpleUnion = 1234,
 });
 Response response = await client.SendIntAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -39,6 +39,7 @@ RequestContent content = RequestContent.Create(new
     simpleUnion = 1234,
 });
 Response response = client.SendInt(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call SendInt with all request content.
@@ -50,11 +51,10 @@ RequestContent content = RequestContent.Create(new
     simpleUnion = 1234,
 });
 Response response = client.SendInt(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
-    <member name="SendIntArrayAsync(ModelWithSimpleUnionProperty,CancellationToken)" />
-    <member name="SendIntArray(ModelWithSimpleUnionProperty,CancellationToken)" />
     <member name="SendIntArrayAsync(RequestContent,RequestContext)">
       <example>
 This sample shows how to call SendIntArrayAsync.
@@ -66,6 +66,7 @@ RequestContent content = RequestContent.Create(new
     simpleUnion = 1234,
 });
 Response response = await client.SendIntArrayAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call SendIntArrayAsync with all request content.
@@ -77,6 +78,7 @@ RequestContent content = RequestContent.Create(new
     simpleUnion = 1234,
 });
 Response response = await client.SendIntArrayAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -91,6 +93,7 @@ RequestContent content = RequestContent.Create(new
     simpleUnion = 1234,
 });
 Response response = client.SendIntArray(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call SendIntArray with all request content.
@@ -102,11 +105,10 @@ RequestContent content = RequestContent.Create(new
     simpleUnion = 1234,
 });
 Response response = client.SendIntArray(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
-    <member name="SendFirstNamedUnionValueAsync(ModelWithNamedUnionProperty,CancellationToken)" />
-    <member name="SendFirstNamedUnionValue(ModelWithNamedUnionProperty,CancellationToken)" />
     <member name="SendFirstNamedUnionValueAsync(RequestContent,RequestContext)">
       <example>
 This sample shows how to call SendFirstNamedUnionValueAsync.
@@ -122,6 +124,7 @@ RequestContent content = RequestContent.Create(new
     },
 });
 Response response = await client.SendFirstNamedUnionValueAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call SendFirstNamedUnionValueAsync with all request content.
@@ -137,6 +140,7 @@ RequestContent content = RequestContent.Create(new
     },
 });
 Response response = await client.SendFirstNamedUnionValueAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -155,6 +159,7 @@ RequestContent content = RequestContent.Create(new
     },
 });
 Response response = client.SendFirstNamedUnionValue(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call SendFirstNamedUnionValue with all request content.
@@ -170,11 +175,10 @@ RequestContent content = RequestContent.Create(new
     },
 });
 Response response = client.SendFirstNamedUnionValue(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
-    <member name="SendSecondNamedUnionValueAsync(ModelWithNamedUnionProperty,CancellationToken)" />
-    <member name="SendSecondNamedUnionValue(ModelWithNamedUnionProperty,CancellationToken)" />
     <member name="SendSecondNamedUnionValueAsync(RequestContent,RequestContext)">
       <example>
 This sample shows how to call SendSecondNamedUnionValueAsync.
@@ -190,6 +194,7 @@ RequestContent content = RequestContent.Create(new
     },
 });
 Response response = await client.SendSecondNamedUnionValueAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call SendSecondNamedUnionValueAsync with all request content.
@@ -205,6 +210,7 @@ RequestContent content = RequestContent.Create(new
     },
 });
 Response response = await client.SendSecondNamedUnionValueAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -223,6 +229,7 @@ RequestContent content = RequestContent.Create(new
     },
 });
 Response response = client.SendSecondNamedUnionValue(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call SendSecondNamedUnionValue with all request content.
@@ -238,11 +245,10 @@ RequestContent content = RequestContent.Create(new
     },
 });
 Response response = client.SendSecondNamedUnionValue(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
-    <member name="ReceiveStringAsync(CancellationToken)" />
-    <member name="ReceiveString(CancellationToken)" />
     <member name="ReceiveStringAsync(RequestContext)">
       <example>
 This sample shows how to call ReceiveStringAsync and parse the result.
@@ -285,8 +291,6 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("simpleUnion").ToString());
 ]]></code></example>
     </member>
-    <member name="ReceiveIntArrayAsync(CancellationToken)" />
-    <member name="ReceiveIntArray(CancellationToken)" />
     <member name="ReceiveIntArrayAsync(RequestContext)">
       <example>
 This sample shows how to call ReceiveIntArrayAsync and parse the result.
@@ -329,8 +333,6 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("simpleUnion").ToString());
 ]]></code></example>
     </member>
-    <member name="ReceiveFirstNamedUnionValueAsync(CancellationToken)" />
-    <member name="ReceiveFirstNamedUnionValue(CancellationToken)" />
     <member name="ReceiveFirstNamedUnionValueAsync(RequestContext)">
       <example>
 This sample shows how to call ReceiveFirstNamedUnionValueAsync and parse the result.
@@ -373,8 +375,6 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("namedUnion").ToString());
 ]]></code></example>
     </member>
-    <member name="ReceiveSecondNamedUnionValueAsync(CancellationToken)" />
-    <member name="ReceiveSecondNamedUnionValue(CancellationToken)" />
     <member name="ReceiveSecondNamedUnionValueAsync(RequestContext)">
       <example>
 This sample shows how to call ReceiveSecondNamedUnionValueAsync and parse the result.

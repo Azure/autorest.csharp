@@ -15,7 +15,7 @@ using SecurityDefinition_LowLevel;
 
 namespace SecurityDefinition_LowLevel.Samples
 {
-    public class Samples_SecurityDefinitionClient
+    public partial class Samples_SecurityDefinitionClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
@@ -27,6 +27,7 @@ namespace SecurityDefinition_LowLevel.Samples
 
             RequestContent content = RequestContent.Create(new object());
             Response response = client.Operation(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -40,6 +41,7 @@ namespace SecurityDefinition_LowLevel.Samples
 
             RequestContent content = RequestContent.Create(new object());
             Response response = await client.OperationAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -57,6 +59,7 @@ namespace SecurityDefinition_LowLevel.Samples
                 Status = "<Status>",
             });
             Response response = client.Operation(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -74,6 +77,7 @@ namespace SecurityDefinition_LowLevel.Samples
                 Status = "<Status>",
             });
             Response response = await client.OperationAsync(content);
+
             Console.WriteLine(response.Status);
         }
     }

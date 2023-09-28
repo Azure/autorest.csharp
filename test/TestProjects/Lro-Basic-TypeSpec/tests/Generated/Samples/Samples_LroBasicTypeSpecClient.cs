@@ -17,7 +17,7 @@ using NUnit.Framework;
 
 namespace LroBasicTypeSpec.Samples
 {
-    public class Samples_LroBasicTypeSpecClient
+    public partial class Samples_LroBasicTypeSpecClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
@@ -100,7 +100,7 @@ namespace LroBasicTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             LroBasicTypeSpecClient client = new LroBasicTypeSpecClient(endpoint);
 
-            Project resource = new Project()
+            Project resource = new Project
             {
                 Description = "<description>",
                 Name = "<name>",
@@ -115,7 +115,7 @@ namespace LroBasicTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             LroBasicTypeSpecClient client = new LroBasicTypeSpecClient(endpoint);
 
-            Project resource = new Project()
+            Project resource = new Project
             {
                 Description = "<description>",
                 Name = "<name>",
@@ -226,7 +226,7 @@ namespace LroBasicTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             LroBasicTypeSpecClient client = new LroBasicTypeSpecClient(endpoint);
 
-            Project resource = new Project()
+            Project resource = new Project
             {
                 Description = "<description>",
                 Name = "<name>",
@@ -242,7 +242,7 @@ namespace LroBasicTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             LroBasicTypeSpecClient client = new LroBasicTypeSpecClient(endpoint);
 
-            Project resource = new Project()
+            Project resource = new Project
             {
                 Description = "<description>",
                 Name = "<name>",

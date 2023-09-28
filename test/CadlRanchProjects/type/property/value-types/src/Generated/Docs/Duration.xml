@@ -42,6 +42,12 @@ Response response = await client.GetDurationAsync(null);
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("property").ToString());
 ]]></code>
+This sample shows how to call GetDurationAsync.
+<code><![CDATA[
+Duration client = new ValueTypesClient().GetDurationClient(apiVersion: "1.0.0");
+
+Response<DurationProperty> response = await client.GetDurationAsync();
+]]></code>
 This sample shows how to call GetDurationAsync with all parameters and parse the result.
 <code><![CDATA[
 Duration client = new ValueTypesClient().GetDurationClient(apiVersion: "1.0.0");
@@ -50,6 +56,12 @@ Response response = await client.GetDurationAsync(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("property").ToString());
+]]></code>
+This sample shows how to call GetDurationAsync with all parameters.
+<code><![CDATA[
+Duration client = new ValueTypesClient().GetDurationClient(apiVersion: "1.0.0");
+
+Response<DurationProperty> response = await client.GetDurationAsync();
 ]]></code></example>
     </member>
     <member name="GetDuration(RequestContext)">
@@ -63,6 +75,12 @@ Response response = client.GetDuration(null);
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("property").ToString());
 ]]></code>
+This sample shows how to call GetDuration.
+<code><![CDATA[
+Duration client = new ValueTypesClient().GetDurationClient(apiVersion: "1.0.0");
+
+Response<DurationProperty> response = client.GetDuration();
+]]></code>
 This sample shows how to call GetDuration with all parameters and parse the result.
 <code><![CDATA[
 Duration client = new ValueTypesClient().GetDurationClient(apiVersion: "1.0.0");
@@ -71,6 +89,12 @@ Response response = client.GetDuration(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("property").ToString());
+]]></code>
+This sample shows how to call GetDuration with all parameters.
+<code><![CDATA[
+Duration client = new ValueTypesClient().GetDurationClient(apiVersion: "1.0.0");
+
+Response<DurationProperty> response = client.GetDuration();
 ]]></code></example>
     </member>
     <member name="PutAsync(DurationProperty,CancellationToken)">
@@ -81,7 +105,6 @@ Duration client = new ValueTypesClient().GetDurationClient(apiVersion: "1.0.0");
 
 DurationProperty body = new DurationProperty(XmlConvert.ToTimeSpan("PT1H23M45S"));
 Response response = await client.PutAsync(body);
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutAsync with all parameters.
 <code><![CDATA[
@@ -89,7 +112,6 @@ Duration client = new ValueTypesClient().GetDurationClient(apiVersion: "1.0.0");
 
 DurationProperty body = new DurationProperty(XmlConvert.ToTimeSpan("PT1H23M45S"));
 Response response = await client.PutAsync(body);
-Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="Put(DurationProperty,CancellationToken)">
@@ -100,7 +122,6 @@ Duration client = new ValueTypesClient().GetDurationClient(apiVersion: "1.0.0");
 
 DurationProperty body = new DurationProperty(XmlConvert.ToTimeSpan("PT1H23M45S"));
 Response response = client.Put(body);
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Put with all parameters.
 <code><![CDATA[
@@ -108,7 +129,6 @@ Duration client = new ValueTypesClient().GetDurationClient(apiVersion: "1.0.0");
 
 DurationProperty body = new DurationProperty(XmlConvert.ToTimeSpan("PT1H23M45S"));
 Response response = client.Put(body);
-Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="PutAsync(RequestContent,RequestContext)">
@@ -122,7 +142,15 @@ RequestContent content = RequestContent.Create(new
     property = "PT1H23M45S",
 });
 Response response = await client.PutAsync(content);
+
 Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call PutAsync.
+<code><![CDATA[
+Duration client = new ValueTypesClient().GetDurationClient(apiVersion: "1.0.0");
+
+DurationProperty body = new DurationProperty(XmlConvert.ToTimeSpan("PT1H23M45S"));
+Response response = await client.PutAsync(body);
 ]]></code>
 This sample shows how to call PutAsync with all request content.
 <code><![CDATA[
@@ -133,7 +161,15 @@ RequestContent content = RequestContent.Create(new
     property = "PT1H23M45S",
 });
 Response response = await client.PutAsync(content);
+
 Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call PutAsync with all parameters.
+<code><![CDATA[
+Duration client = new ValueTypesClient().GetDurationClient(apiVersion: "1.0.0");
+
+DurationProperty body = new DurationProperty(XmlConvert.ToTimeSpan("PT1H23M45S"));
+Response response = await client.PutAsync(body);
 ]]></code></example>
     </member>
     <member name="Put(RequestContent,RequestContext)">
@@ -147,7 +183,15 @@ RequestContent content = RequestContent.Create(new
     property = "PT1H23M45S",
 });
 Response response = client.Put(content);
+
 Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call Put.
+<code><![CDATA[
+Duration client = new ValueTypesClient().GetDurationClient(apiVersion: "1.0.0");
+
+DurationProperty body = new DurationProperty(XmlConvert.ToTimeSpan("PT1H23M45S"));
+Response response = client.Put(body);
 ]]></code>
 This sample shows how to call Put with all request content.
 <code><![CDATA[
@@ -158,7 +202,15 @@ RequestContent content = RequestContent.Create(new
     property = "PT1H23M45S",
 });
 Response response = client.Put(content);
+
 Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call Put with all parameters.
+<code><![CDATA[
+Duration client = new ValueTypesClient().GetDurationClient(apiVersion: "1.0.0");
+
+DurationProperty body = new DurationProperty(XmlConvert.ToTimeSpan("PT1H23M45S"));
+Response response = client.Put(body);
 ]]></code></example>
     </member>
   </members>

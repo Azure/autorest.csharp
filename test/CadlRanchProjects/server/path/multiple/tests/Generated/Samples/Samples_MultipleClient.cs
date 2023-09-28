@@ -14,7 +14,7 @@ using Server.Path.Multiple;
 
 namespace Server.Path.Multiple.Samples
 {
-    public class Samples_MultipleClient
+    public partial class Samples_MultipleClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
@@ -24,6 +24,7 @@ namespace Server.Path.Multiple.Samples
             MultipleClient client = new MultipleClient(endpoint);
 
             Response response = client.NoOperationParams();
+
             Console.WriteLine(response.Status);
         }
 
@@ -35,6 +36,7 @@ namespace Server.Path.Multiple.Samples
             MultipleClient client = new MultipleClient(endpoint);
 
             Response response = await client.NoOperationParamsAsync();
+
             Console.WriteLine(response.Status);
         }
 
@@ -46,6 +48,7 @@ namespace Server.Path.Multiple.Samples
             MultipleClient client = new MultipleClient(endpoint);
 
             Response response = client.NoOperationParams();
+
             Console.WriteLine(response.Status);
         }
 
@@ -57,6 +60,7 @@ namespace Server.Path.Multiple.Samples
             MultipleClient client = new MultipleClient(endpoint);
 
             Response response = await client.NoOperationParamsAsync();
+
             Console.WriteLine(response.Status);
         }
 
@@ -68,6 +72,7 @@ namespace Server.Path.Multiple.Samples
             MultipleClient client = new MultipleClient(endpoint);
 
             Response response = client.WithOperationPathParam("<keyword>");
+
             Console.WriteLine(response.Status);
         }
 
@@ -79,6 +84,7 @@ namespace Server.Path.Multiple.Samples
             MultipleClient client = new MultipleClient(endpoint);
 
             Response response = await client.WithOperationPathParamAsync("<keyword>");
+
             Console.WriteLine(response.Status);
         }
 
@@ -90,6 +96,7 @@ namespace Server.Path.Multiple.Samples
             MultipleClient client = new MultipleClient(endpoint);
 
             Response response = client.WithOperationPathParam("<keyword>");
+
             Console.WriteLine(response.Status);
         }
 
@@ -101,6 +108,7 @@ namespace Server.Path.Multiple.Samples
             MultipleClient client = new MultipleClient(endpoint);
 
             Response response = await client.WithOperationPathParamAsync("<keyword>");
+
             Console.WriteLine(response.Status);
         }
     }

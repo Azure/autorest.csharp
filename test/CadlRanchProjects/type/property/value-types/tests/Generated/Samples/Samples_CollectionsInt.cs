@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
@@ -18,7 +17,7 @@ using _Type.Property.ValueTypes.Models;
 
 namespace _Type.Property.ValueTypes.Samples
 {
-    internal class Samples_CollectionsInt
+    public partial class Samples_CollectionsInt
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
@@ -112,12 +111,13 @@ namespace _Type.Property.ValueTypes.Samples
 
             RequestContent content = RequestContent.Create(new
             {
-                property = new List<object>()
-{
+                property = new object[]
+            {
 1234
-},
+            },
             });
             Response response = client.Put(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -129,12 +129,13 @@ namespace _Type.Property.ValueTypes.Samples
 
             RequestContent content = RequestContent.Create(new
             {
-                property = new List<object>()
-{
+                property = new object[]
+            {
 1234
-},
+            },
             });
             Response response = await client.PutAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -144,12 +145,8 @@ namespace _Type.Property.ValueTypes.Samples
         {
             CollectionsInt client = new ValueTypesClient().GetCollectionsIntClient(apiVersion: "1.0.0");
 
-            CollectionsIntProperty body = new CollectionsIntProperty(new List<int>()
-{
-1234
-});
+            CollectionsIntProperty body = new CollectionsIntProperty(new int[] { 1234 });
             Response response = client.Put(body);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -158,12 +155,8 @@ namespace _Type.Property.ValueTypes.Samples
         {
             CollectionsInt client = new ValueTypesClient().GetCollectionsIntClient(apiVersion: "1.0.0");
 
-            CollectionsIntProperty body = new CollectionsIntProperty(new List<int>()
-{
-1234
-});
+            CollectionsIntProperty body = new CollectionsIntProperty(new int[] { 1234 });
             Response response = await client.PutAsync(body);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -174,12 +167,13 @@ namespace _Type.Property.ValueTypes.Samples
 
             RequestContent content = RequestContent.Create(new
             {
-                property = new List<object>()
-{
+                property = new object[]
+            {
 1234
-},
+            },
             });
             Response response = client.Put(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -191,12 +185,13 @@ namespace _Type.Property.ValueTypes.Samples
 
             RequestContent content = RequestContent.Create(new
             {
-                property = new List<object>()
-{
+                property = new object[]
+            {
 1234
-},
+            },
             });
             Response response = await client.PutAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -206,12 +201,8 @@ namespace _Type.Property.ValueTypes.Samples
         {
             CollectionsInt client = new ValueTypesClient().GetCollectionsIntClient(apiVersion: "1.0.0");
 
-            CollectionsIntProperty body = new CollectionsIntProperty(new List<int>()
-{
-1234
-});
+            CollectionsIntProperty body = new CollectionsIntProperty(new int[] { 1234 });
             Response response = client.Put(body);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -220,12 +211,8 @@ namespace _Type.Property.ValueTypes.Samples
         {
             CollectionsInt client = new ValueTypesClient().GetCollectionsIntClient(apiVersion: "1.0.0");
 
-            CollectionsIntProperty body = new CollectionsIntProperty(new List<int>()
-{
-1234
-});
+            CollectionsIntProperty body = new CollectionsIntProperty(new int[] { 1234 });
             Response response = await client.PutAsync(body);
-            Console.WriteLine(response.Status);
         }
     }
 }

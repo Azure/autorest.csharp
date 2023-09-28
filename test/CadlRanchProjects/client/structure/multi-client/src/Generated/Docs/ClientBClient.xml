@@ -9,6 +9,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 ClientBClient client = new ClientBClient(endpoint, "default");
 
 Response response = await client.RenamedTwoAsync();
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call RenamedTwoAsync with all request content.
@@ -17,6 +18,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 ClientBClient client = new ClientBClient(endpoint, "default");
 
 Response response = await client.RenamedTwoAsync();
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -28,6 +30,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 ClientBClient client = new ClientBClient(endpoint, "default");
 
 Response response = client.RenamedTwo();
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call RenamedTwo with all request content.
@@ -36,6 +39,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 ClientBClient client = new ClientBClient(endpoint, "default");
 
 Response response = client.RenamedTwo();
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -47,6 +51,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 ClientBClient client = new ClientBClient(endpoint, "default");
 
 Response response = await client.RenamedFourAsync();
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call RenamedFourAsync with all request content.
@@ -55,6 +60,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 ClientBClient client = new ClientBClient(endpoint, "default");
 
 Response response = await client.RenamedFourAsync();
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -66,6 +72,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 ClientBClient client = new ClientBClient(endpoint, "default");
 
 Response response = client.RenamedFour();
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call RenamedFour with all request content.
@@ -74,6 +81,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 ClientBClient client = new ClientBClient(endpoint, "default");
 
 Response response = client.RenamedFour();
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -85,6 +93,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 ClientBClient client = new ClientBClient(endpoint, "default");
 
 Response response = await client.RenamedSixAsync();
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call RenamedSixAsync with all request content.
@@ -93,6 +102,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 ClientBClient client = new ClientBClient(endpoint, "default");
 
 Response response = await client.RenamedSixAsync();
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -104,6 +114,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 ClientBClient client = new ClientBClient(endpoint, "default");
 
 Response response = client.RenamedSix();
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call RenamedSix with all request content.
@@ -112,6 +123,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 ClientBClient client = new ClientBClient(endpoint, "default");
 
 Response response = client.RenamedSix();
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>

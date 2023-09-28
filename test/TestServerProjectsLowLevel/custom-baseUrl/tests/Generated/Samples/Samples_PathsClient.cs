@@ -14,7 +14,7 @@ using custom_baseUrl_LowLevel;
 
 namespace custom_baseUrl_LowLevel.Samples
 {
-    public class Samples_PathsClient
+    public partial class Samples_PathsClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
@@ -24,6 +24,7 @@ namespace custom_baseUrl_LowLevel.Samples
             PathsClient client = new PathsClient("host", credential);
 
             Response response = client.GetEmpty("<accountName>");
+
             Console.WriteLine(response.Status);
         }
 
@@ -35,6 +36,7 @@ namespace custom_baseUrl_LowLevel.Samples
             PathsClient client = new PathsClient("host", credential);
 
             Response response = await client.GetEmptyAsync("<accountName>");
+
             Console.WriteLine(response.Status);
         }
 
@@ -46,6 +48,7 @@ namespace custom_baseUrl_LowLevel.Samples
             PathsClient client = new PathsClient("host", credential);
 
             Response response = client.GetEmpty("<accountName>");
+
             Console.WriteLine(response.Status);
         }
 
@@ -57,6 +60,7 @@ namespace custom_baseUrl_LowLevel.Samples
             PathsClient client = new PathsClient("host", credential);
 
             Response response = await client.GetEmptyAsync("<accountName>");
+
             Console.WriteLine(response.Status);
         }
     }

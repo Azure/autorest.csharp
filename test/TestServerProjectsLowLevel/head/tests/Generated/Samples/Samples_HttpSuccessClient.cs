@@ -14,7 +14,7 @@ using head_LowLevel;
 
 namespace head_LowLevel.Samples
 {
-    public class Samples_HttpSuccessClient
+    public partial class Samples_HttpSuccessClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
@@ -24,6 +24,7 @@ namespace head_LowLevel.Samples
             HttpSuccessClient client = new HttpSuccessClient(credential);
 
             Response response = client.Head200();
+
             Console.WriteLine(response.Status);
         }
 
@@ -35,6 +36,7 @@ namespace head_LowLevel.Samples
             HttpSuccessClient client = new HttpSuccessClient(credential);
 
             Response response = await client.Head200Async();
+
             Console.WriteLine(response.Status);
         }
 
@@ -46,6 +48,7 @@ namespace head_LowLevel.Samples
             HttpSuccessClient client = new HttpSuccessClient(credential);
 
             Response response = client.Head200();
+
             Console.WriteLine(response.Status);
         }
 
@@ -57,6 +60,7 @@ namespace head_LowLevel.Samples
             HttpSuccessClient client = new HttpSuccessClient(credential);
 
             Response response = await client.Head200Async();
+
             Console.WriteLine(response.Status);
         }
 
@@ -68,6 +72,7 @@ namespace head_LowLevel.Samples
             HttpSuccessClient client = new HttpSuccessClient(credential);
 
             Response response = client.Head204();
+
             Console.WriteLine(response.Status);
         }
 
@@ -79,6 +84,7 @@ namespace head_LowLevel.Samples
             HttpSuccessClient client = new HttpSuccessClient(credential);
 
             Response response = await client.Head204Async();
+
             Console.WriteLine(response.Status);
         }
 
@@ -90,6 +96,7 @@ namespace head_LowLevel.Samples
             HttpSuccessClient client = new HttpSuccessClient(credential);
 
             Response response = client.Head204();
+
             Console.WriteLine(response.Status);
         }
 
@@ -101,6 +108,7 @@ namespace head_LowLevel.Samples
             HttpSuccessClient client = new HttpSuccessClient(credential);
 
             Response response = await client.Head204Async();
+
             Console.WriteLine(response.Status);
         }
 
@@ -112,6 +120,7 @@ namespace head_LowLevel.Samples
             HttpSuccessClient client = new HttpSuccessClient(credential);
 
             Response response = client.Head404();
+
             Console.WriteLine(response.Status);
         }
 
@@ -123,6 +132,7 @@ namespace head_LowLevel.Samples
             HttpSuccessClient client = new HttpSuccessClient(credential);
 
             Response response = await client.Head404Async();
+
             Console.WriteLine(response.Status);
         }
 
@@ -134,6 +144,7 @@ namespace head_LowLevel.Samples
             HttpSuccessClient client = new HttpSuccessClient(credential);
 
             Response response = client.Head404();
+
             Console.WriteLine(response.Status);
         }
 
@@ -145,6 +156,7 @@ namespace head_LowLevel.Samples
             HttpSuccessClient client = new HttpSuccessClient(credential);
 
             Response response = await client.Head404Async();
+
             Console.WriteLine(response.Status);
         }
     }

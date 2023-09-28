@@ -3,5 +3,5 @@
 
 namespace AutoRest.CSharp.Common.Output.Expressions.ValueExpressions
 {
-    internal record LiteralExpression(string Literal, bool U8) : ValueExpression;
+    internal record StringLiteralExpression(string Literal, bool U8) : ValueExpression;
 }

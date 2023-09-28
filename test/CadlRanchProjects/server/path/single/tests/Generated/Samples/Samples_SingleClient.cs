@@ -14,7 +14,7 @@ using Server.Path.Single;
 
 namespace Server.Path.Single.Samples
 {
-    public class Samples_SingleClient
+    public partial class Samples_SingleClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
@@ -24,6 +24,7 @@ namespace Server.Path.Single.Samples
             SingleClient client = new SingleClient(endpoint);
 
             Response response = client.MyOp();
+
             Console.WriteLine(response.Status);
         }
 
@@ -35,6 +36,7 @@ namespace Server.Path.Single.Samples
             SingleClient client = new SingleClient(endpoint);
 
             Response response = await client.MyOpAsync();
+
             Console.WriteLine(response.Status);
         }
 
@@ -46,6 +48,7 @@ namespace Server.Path.Single.Samples
             SingleClient client = new SingleClient(endpoint);
 
             Response response = client.MyOp();
+
             Console.WriteLine(response.Status);
         }
 
@@ -57,6 +60,7 @@ namespace Server.Path.Single.Samples
             SingleClient client = new SingleClient(endpoint);
 
             Response response = await client.MyOpAsync();
+
             Console.WriteLine(response.Status);
         }
     }

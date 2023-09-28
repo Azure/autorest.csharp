@@ -14,7 +14,7 @@ using NUnit.Framework;
 
 namespace Authentication.Http.Custom.Samples
 {
-    public class Samples_CustomClient
+    public partial class Samples_CustomClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
@@ -24,6 +24,7 @@ namespace Authentication.Http.Custom.Samples
             CustomClient client = new CustomClient(credential);
 
             Response response = client.Valid();
+
             Console.WriteLine(response.Status);
         }
 
@@ -35,6 +36,7 @@ namespace Authentication.Http.Custom.Samples
             CustomClient client = new CustomClient(credential);
 
             Response response = await client.ValidAsync();
+
             Console.WriteLine(response.Status);
         }
 
@@ -46,6 +48,7 @@ namespace Authentication.Http.Custom.Samples
             CustomClient client = new CustomClient(credential);
 
             Response response = client.Valid();
+
             Console.WriteLine(response.Status);
         }
 
@@ -57,6 +60,7 @@ namespace Authentication.Http.Custom.Samples
             CustomClient client = new CustomClient(credential);
 
             Response response = await client.ValidAsync();
+
             Console.WriteLine(response.Status);
         }
 
@@ -68,6 +72,7 @@ namespace Authentication.Http.Custom.Samples
             CustomClient client = new CustomClient(credential);
 
             Response response = client.Invalid();
+
             Console.WriteLine(response.Status);
         }
 
@@ -79,6 +84,7 @@ namespace Authentication.Http.Custom.Samples
             CustomClient client = new CustomClient(credential);
 
             Response response = await client.InvalidAsync();
+
             Console.WriteLine(response.Status);
         }
 
@@ -90,6 +96,7 @@ namespace Authentication.Http.Custom.Samples
             CustomClient client = new CustomClient(credential);
 
             Response response = client.Invalid();
+
             Console.WriteLine(response.Status);
         }
 
@@ -101,6 +108,7 @@ namespace Authentication.Http.Custom.Samples
             CustomClient client = new CustomClient(credential);
 
             Response response = await client.InvalidAsync();
+
             Console.WriteLine(response.Status);
         }
     }

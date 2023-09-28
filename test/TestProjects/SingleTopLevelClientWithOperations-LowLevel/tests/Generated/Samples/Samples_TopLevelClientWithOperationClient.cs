@@ -15,7 +15,7 @@ using SingleTopLevelClientWithOperations_LowLevel;
 
 namespace SingleTopLevelClientWithOperations_LowLevel.Samples
 {
-    public class Samples_TopLevelClientWithOperationClient
+    public partial class Samples_TopLevelClientWithOperationClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
@@ -79,7 +79,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel.Samples
             foreach (BinaryData item in client.GetAll("<filter>", null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].ToString());
+                Console.WriteLine(result.ToString());
             }
         }
 
@@ -93,7 +93,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel.Samples
             await foreach (BinaryData item in client.GetAllAsync("<filter>", null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].ToString());
+                Console.WriteLine(result.ToString());
             }
         }
 
@@ -107,7 +107,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel.Samples
             foreach (BinaryData item in client.GetAll("<filter>", null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].ToString());
+                Console.WriteLine(result.ToString());
             }
         }
 
@@ -121,7 +121,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel.Samples
             await foreach (BinaryData item in client.GetAllAsync("<filter>", null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].ToString());
+                Console.WriteLine(result.ToString());
             }
         }
     }

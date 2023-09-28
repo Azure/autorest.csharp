@@ -15,7 +15,7 @@ using httpInfrastructure_LowLevel;
 
 namespace httpInfrastructure_LowLevel.Samples
 {
-    public class Samples_MultipleResponsesClient
+    public partial class Samples_MultipleResponsesClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
@@ -649,6 +649,7 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = client.Get202None204NoneDefaultError202None();
+
             Console.WriteLine(response.Status);
         }
 
@@ -660,6 +661,7 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = await client.Get202None204NoneDefaultError202NoneAsync();
+
             Console.WriteLine(response.Status);
         }
 
@@ -671,6 +673,7 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = client.Get202None204NoneDefaultError202None();
+
             Console.WriteLine(response.Status);
         }
 
@@ -682,6 +685,7 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = await client.Get202None204NoneDefaultError202NoneAsync();
+
             Console.WriteLine(response.Status);
         }
 
@@ -693,6 +697,7 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = client.Get202None204NoneDefaultError204None();
+
             Console.WriteLine(response.Status);
         }
 
@@ -704,6 +709,7 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = await client.Get202None204NoneDefaultError204NoneAsync();
+
             Console.WriteLine(response.Status);
         }
 
@@ -715,6 +721,7 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = client.Get202None204NoneDefaultError204None();
+
             Console.WriteLine(response.Status);
         }
 
@@ -726,6 +733,7 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = await client.Get202None204NoneDefaultError204NoneAsync();
+
             Console.WriteLine(response.Status);
         }
 
@@ -737,6 +745,7 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = client.Get202None204NoneDefaultError400Valid();
+
             Console.WriteLine(response.Status);
         }
 
@@ -748,6 +757,7 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = await client.Get202None204NoneDefaultError400ValidAsync();
+
             Console.WriteLine(response.Status);
         }
 
@@ -759,6 +769,7 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = client.Get202None204NoneDefaultError400Valid();
+
             Console.WriteLine(response.Status);
         }
 
@@ -770,6 +781,7 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = await client.Get202None204NoneDefaultError400ValidAsync();
+
             Console.WriteLine(response.Status);
         }
 
@@ -781,6 +793,7 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = client.Get202None204NoneDefaultNone202Invalid();
+
             Console.WriteLine(response.Status);
         }
 
@@ -792,6 +805,7 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = await client.Get202None204NoneDefaultNone202InvalidAsync();
+
             Console.WriteLine(response.Status);
         }
 
@@ -803,6 +817,7 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = client.Get202None204NoneDefaultNone202Invalid();
+
             Console.WriteLine(response.Status);
         }
 
@@ -814,6 +829,7 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = await client.Get202None204NoneDefaultNone202InvalidAsync();
+
             Console.WriteLine(response.Status);
         }
 
@@ -825,6 +841,7 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = client.Get202None204NoneDefaultNone204None();
+
             Console.WriteLine(response.Status);
         }
 
@@ -836,6 +853,7 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = await client.Get202None204NoneDefaultNone204NoneAsync();
+
             Console.WriteLine(response.Status);
         }
 
@@ -847,6 +865,7 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = client.Get202None204NoneDefaultNone204None();
+
             Console.WriteLine(response.Status);
         }
 
@@ -858,6 +877,7 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = await client.Get202None204NoneDefaultNone204NoneAsync();
+
             Console.WriteLine(response.Status);
         }
 
@@ -869,6 +889,7 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = client.Get202None204NoneDefaultNone400None();
+
             Console.WriteLine(response.Status);
         }
 
@@ -880,6 +901,7 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = await client.Get202None204NoneDefaultNone400NoneAsync();
+
             Console.WriteLine(response.Status);
         }
 
@@ -891,6 +913,7 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = client.Get202None204NoneDefaultNone400None();
+
             Console.WriteLine(response.Status);
         }
 
@@ -902,6 +925,7 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = await client.Get202None204NoneDefaultNone400NoneAsync();
+
             Console.WriteLine(response.Status);
         }
 
@@ -913,6 +937,7 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = client.Get202None204NoneDefaultNone400Invalid();
+
             Console.WriteLine(response.Status);
         }
 
@@ -924,6 +949,7 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = await client.Get202None204NoneDefaultNone400InvalidAsync();
+
             Console.WriteLine(response.Status);
         }
 
@@ -935,6 +961,7 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = client.Get202None204NoneDefaultNone400Invalid();
+
             Console.WriteLine(response.Status);
         }
 
@@ -946,6 +973,7 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = await client.Get202None204NoneDefaultNone400InvalidAsync();
+
             Console.WriteLine(response.Status);
         }
 
@@ -1061,6 +1089,7 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = client.GetDefaultModelA400Valid();
+
             Console.WriteLine(response.Status);
         }
 
@@ -1072,6 +1101,7 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = await client.GetDefaultModelA400ValidAsync();
+
             Console.WriteLine(response.Status);
         }
 
@@ -1083,6 +1113,7 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = client.GetDefaultModelA400Valid();
+
             Console.WriteLine(response.Status);
         }
 
@@ -1094,6 +1125,7 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = await client.GetDefaultModelA400ValidAsync();
+
             Console.WriteLine(response.Status);
         }
 
@@ -1105,6 +1137,7 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = client.GetDefaultModelA400None();
+
             Console.WriteLine(response.Status);
         }
 
@@ -1116,6 +1149,7 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = await client.GetDefaultModelA400NoneAsync();
+
             Console.WriteLine(response.Status);
         }
 
@@ -1127,6 +1161,7 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = client.GetDefaultModelA400None();
+
             Console.WriteLine(response.Status);
         }
 
@@ -1138,6 +1173,7 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = await client.GetDefaultModelA400NoneAsync();
+
             Console.WriteLine(response.Status);
         }
 
@@ -1149,6 +1185,7 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = client.GetDefaultNone200Invalid();
+
             Console.WriteLine(response.Status);
         }
 
@@ -1160,6 +1197,7 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = await client.GetDefaultNone200InvalidAsync();
+
             Console.WriteLine(response.Status);
         }
 
@@ -1171,6 +1209,7 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = client.GetDefaultNone200Invalid();
+
             Console.WriteLine(response.Status);
         }
 
@@ -1182,6 +1221,7 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = await client.GetDefaultNone200InvalidAsync();
+
             Console.WriteLine(response.Status);
         }
 
@@ -1193,6 +1233,7 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = client.GetDefaultNone200None();
+
             Console.WriteLine(response.Status);
         }
 
@@ -1204,6 +1245,7 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = await client.GetDefaultNone200NoneAsync();
+
             Console.WriteLine(response.Status);
         }
 
@@ -1215,6 +1257,7 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = client.GetDefaultNone200None();
+
             Console.WriteLine(response.Status);
         }
 
@@ -1226,6 +1269,7 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = await client.GetDefaultNone200NoneAsync();
+
             Console.WriteLine(response.Status);
         }
 
@@ -1237,6 +1281,7 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = client.GetDefaultNone400Invalid();
+
             Console.WriteLine(response.Status);
         }
 
@@ -1248,6 +1293,7 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = await client.GetDefaultNone400InvalidAsync();
+
             Console.WriteLine(response.Status);
         }
 
@@ -1259,6 +1305,7 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = client.GetDefaultNone400Invalid();
+
             Console.WriteLine(response.Status);
         }
 
@@ -1270,6 +1317,7 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = await client.GetDefaultNone400InvalidAsync();
+
             Console.WriteLine(response.Status);
         }
 
@@ -1281,6 +1329,7 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = client.GetDefaultNone400None();
+
             Console.WriteLine(response.Status);
         }
 
@@ -1292,6 +1341,7 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = await client.GetDefaultNone400NoneAsync();
+
             Console.WriteLine(response.Status);
         }
 
@@ -1303,6 +1353,7 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = client.GetDefaultNone400None();
+
             Console.WriteLine(response.Status);
         }
 
@@ -1314,6 +1365,7 @@ namespace httpInfrastructure_LowLevel.Samples
             MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
             Response response = await client.GetDefaultNone400NoneAsync();
+
             Console.WriteLine(response.Status);
         }
 

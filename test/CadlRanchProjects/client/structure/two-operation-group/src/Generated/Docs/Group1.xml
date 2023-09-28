@@ -9,6 +9,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 Group1 client = new TwoOperationGroupClient(endpoint).GetGroup1Client("default", apiVersion: "1.0.0");
 
 Response response = await client.OneAsync();
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call OneAsync with all request content.
@@ -17,6 +18,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 Group1 client = new TwoOperationGroupClient(endpoint).GetGroup1Client("default", apiVersion: "1.0.0");
 
 Response response = await client.OneAsync();
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -28,6 +30,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 Group1 client = new TwoOperationGroupClient(endpoint).GetGroup1Client("default", apiVersion: "1.0.0");
 
 Response response = client.One();
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call One with all request content.
@@ -36,6 +39,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 Group1 client = new TwoOperationGroupClient(endpoint).GetGroup1Client("default", apiVersion: "1.0.0");
 
 Response response = client.One();
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -47,6 +51,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 Group1 client = new TwoOperationGroupClient(endpoint).GetGroup1Client("default", apiVersion: "1.0.0");
 
 Response response = await client.ThreeAsync();
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call ThreeAsync with all request content.
@@ -55,6 +60,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 Group1 client = new TwoOperationGroupClient(endpoint).GetGroup1Client("default", apiVersion: "1.0.0");
 
 Response response = await client.ThreeAsync();
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -66,6 +72,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 Group1 client = new TwoOperationGroupClient(endpoint).GetGroup1Client("default", apiVersion: "1.0.0");
 
 Response response = client.Three();
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Three with all request content.
@@ -74,6 +81,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 Group1 client = new TwoOperationGroupClient(endpoint).GetGroup1Client("default", apiVersion: "1.0.0");
 
 Response response = client.Three();
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -85,6 +93,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 Group1 client = new TwoOperationGroupClient(endpoint).GetGroup1Client("default", apiVersion: "1.0.0");
 
 Response response = await client.FourAsync();
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call FourAsync with all request content.
@@ -93,6 +102,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 Group1 client = new TwoOperationGroupClient(endpoint).GetGroup1Client("default", apiVersion: "1.0.0");
 
 Response response = await client.FourAsync();
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -104,6 +114,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 Group1 client = new TwoOperationGroupClient(endpoint).GetGroup1Client("default", apiVersion: "1.0.0");
 
 Response response = client.Four();
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Four with all request content.
@@ -112,6 +123,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 Group1 client = new TwoOperationGroupClient(endpoint).GetGroup1Client("default", apiVersion: "1.0.0");
 
 Response response = client.Four();
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>

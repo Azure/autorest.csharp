@@ -16,7 +16,7 @@ using Parameters.Spread.Models;
 
 namespace Parameters.Spread.Samples
 {
-    internal class Samples_Model
+    public partial class Samples_Model
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
@@ -29,6 +29,7 @@ namespace Parameters.Spread.Samples
                 name = "<name>",
             });
             Response response = client.SpreadAsRequestBody(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -43,6 +44,7 @@ namespace Parameters.Spread.Samples
                 name = "<name>",
             });
             Response response = await client.SpreadAsRequestBodyAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -54,7 +56,6 @@ namespace Parameters.Spread.Samples
 
             BodyParameter bodyParameter = new BodyParameter("<name>");
             Response response = client.SpreadAsRequestBody(bodyParameter);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -65,7 +66,6 @@ namespace Parameters.Spread.Samples
 
             BodyParameter bodyParameter = new BodyParameter("<name>");
             Response response = await client.SpreadAsRequestBodyAsync(bodyParameter);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -79,6 +79,7 @@ namespace Parameters.Spread.Samples
                 name = "<name>",
             });
             Response response = client.SpreadAsRequestBody(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -93,6 +94,7 @@ namespace Parameters.Spread.Samples
                 name = "<name>",
             });
             Response response = await client.SpreadAsRequestBodyAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -104,7 +106,6 @@ namespace Parameters.Spread.Samples
 
             BodyParameter bodyParameter = new BodyParameter("<name>");
             Response response = client.SpreadAsRequestBody(bodyParameter);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -115,7 +116,6 @@ namespace Parameters.Spread.Samples
 
             BodyParameter bodyParameter = new BodyParameter("<name>");
             Response response = await client.SpreadAsRequestBodyAsync(bodyParameter);
-            Console.WriteLine(response.Status);
         }
     }
 }

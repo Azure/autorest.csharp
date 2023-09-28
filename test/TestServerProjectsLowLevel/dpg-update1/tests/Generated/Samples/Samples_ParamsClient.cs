@@ -16,7 +16,7 @@ using dpg_update1_LowLevel;
 
 namespace dpg_update1_LowLevel.Samples
 {
-    public class Samples_ParamsClient
+    public partial class Samples_ParamsClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
@@ -250,6 +250,7 @@ namespace dpg_update1_LowLevel.Samples
             ParamsClient client = new ParamsClient(credential);
 
             Response response = client.DeleteParameters();
+
             Console.WriteLine(response.Status);
         }
 
@@ -261,6 +262,7 @@ namespace dpg_update1_LowLevel.Samples
             ParamsClient client = new ParamsClient(credential);
 
             Response response = await client.DeleteParametersAsync();
+
             Console.WriteLine(response.Status);
         }
 
@@ -272,6 +274,7 @@ namespace dpg_update1_LowLevel.Samples
             ParamsClient client = new ParamsClient(credential);
 
             Response response = client.DeleteParameters();
+
             Console.WriteLine(response.Status);
         }
 
@@ -283,6 +286,7 @@ namespace dpg_update1_LowLevel.Samples
             ParamsClient client = new ParamsClient(credential);
 
             Response response = await client.DeleteParametersAsync();
+
             Console.WriteLine(response.Status);
         }
 

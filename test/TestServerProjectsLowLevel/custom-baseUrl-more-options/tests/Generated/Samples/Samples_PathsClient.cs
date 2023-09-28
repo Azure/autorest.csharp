@@ -14,7 +14,7 @@ using custom_baseUrl_more_options_LowLevel;
 
 namespace custom_baseUrl_more_options_LowLevel.Samples
 {
-    public class Samples_PathsClient
+    public partial class Samples_PathsClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
@@ -24,6 +24,7 @@ namespace custom_baseUrl_more_options_LowLevel.Samples
             PathsClient client = new PathsClient("host", "<SubscriptionId>", credential);
 
             Response response = client.GetEmpty("<vault>", "<secret>", "<keyName>");
+
             Console.WriteLine(response.Status);
         }
 
@@ -35,6 +36,7 @@ namespace custom_baseUrl_more_options_LowLevel.Samples
             PathsClient client = new PathsClient("host", "<SubscriptionId>", credential);
 
             Response response = await client.GetEmptyAsync("<vault>", "<secret>", "<keyName>");
+
             Console.WriteLine(response.Status);
         }
 
@@ -46,6 +48,7 @@ namespace custom_baseUrl_more_options_LowLevel.Samples
             PathsClient client = new PathsClient("host", "<SubscriptionId>", credential);
 
             Response response = client.GetEmpty("<vault>", "<secret>", "<keyName>", keyVersion: "<keyVersion>");
+
             Console.WriteLine(response.Status);
         }
 
@@ -57,6 +60,7 @@ namespace custom_baseUrl_more_options_LowLevel.Samples
             PathsClient client = new PathsClient("host", "<SubscriptionId>", credential);
 
             Response response = await client.GetEmptyAsync("<vault>", "<secret>", "<keyName>", keyVersion: "<keyVersion>");
+
             Console.WriteLine(response.Status);
         }
     }

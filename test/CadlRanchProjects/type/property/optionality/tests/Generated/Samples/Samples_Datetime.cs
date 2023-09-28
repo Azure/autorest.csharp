@@ -17,7 +17,7 @@ using _Type.Property.Optionality.Models;
 
 namespace _Type.Property.Optionality.Samples
 {
-    internal class Samples_Datetime
+    public partial class Samples_Datetime
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
@@ -195,6 +195,7 @@ namespace _Type.Property.Optionality.Samples
 
             RequestContent content = RequestContent.Create(new object());
             Response response = client.PutAll(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -206,6 +207,7 @@ namespace _Type.Property.Optionality.Samples
 
             RequestContent content = RequestContent.Create(new object());
             Response response = await client.PutAllAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -217,7 +219,6 @@ namespace _Type.Property.Optionality.Samples
 
             DatetimeProperty body = new DatetimeProperty();
             Response response = client.PutAll(body);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -228,7 +229,6 @@ namespace _Type.Property.Optionality.Samples
 
             DatetimeProperty body = new DatetimeProperty();
             Response response = await client.PutAllAsync(body);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -242,6 +242,7 @@ namespace _Type.Property.Optionality.Samples
                 property = "2022-05-10T14:57:31.2311892-04:00",
             });
             Response response = client.PutAll(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -256,6 +257,7 @@ namespace _Type.Property.Optionality.Samples
                 property = "2022-05-10T14:57:31.2311892-04:00",
             });
             Response response = await client.PutAllAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -265,12 +267,11 @@ namespace _Type.Property.Optionality.Samples
         {
             Datetime client = new OptionalClient().GetDatetimeClient(apiVersion: "1.0.0");
 
-            DatetimeProperty body = new DatetimeProperty()
+            DatetimeProperty body = new DatetimeProperty
             {
                 Property = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
             };
             Response response = client.PutAll(body);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -279,12 +280,11 @@ namespace _Type.Property.Optionality.Samples
         {
             Datetime client = new OptionalClient().GetDatetimeClient(apiVersion: "1.0.0");
 
-            DatetimeProperty body = new DatetimeProperty()
+            DatetimeProperty body = new DatetimeProperty
             {
                 Property = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
             };
             Response response = await client.PutAllAsync(body);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -295,6 +295,7 @@ namespace _Type.Property.Optionality.Samples
 
             RequestContent content = RequestContent.Create(new object());
             Response response = client.PutDefault(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -306,6 +307,7 @@ namespace _Type.Property.Optionality.Samples
 
             RequestContent content = RequestContent.Create(new object());
             Response response = await client.PutDefaultAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -317,7 +319,6 @@ namespace _Type.Property.Optionality.Samples
 
             DatetimeProperty body = new DatetimeProperty();
             Response response = client.PutDefault(body);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -328,7 +329,6 @@ namespace _Type.Property.Optionality.Samples
 
             DatetimeProperty body = new DatetimeProperty();
             Response response = await client.PutDefaultAsync(body);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -342,6 +342,7 @@ namespace _Type.Property.Optionality.Samples
                 property = "2022-05-10T14:57:31.2311892-04:00",
             });
             Response response = client.PutDefault(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -356,6 +357,7 @@ namespace _Type.Property.Optionality.Samples
                 property = "2022-05-10T14:57:31.2311892-04:00",
             });
             Response response = await client.PutDefaultAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -365,12 +367,11 @@ namespace _Type.Property.Optionality.Samples
         {
             Datetime client = new OptionalClient().GetDatetimeClient(apiVersion: "1.0.0");
 
-            DatetimeProperty body = new DatetimeProperty()
+            DatetimeProperty body = new DatetimeProperty
             {
                 Property = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
             };
             Response response = client.PutDefault(body);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -379,12 +380,11 @@ namespace _Type.Property.Optionality.Samples
         {
             Datetime client = new OptionalClient().GetDatetimeClient(apiVersion: "1.0.0");
 
-            DatetimeProperty body = new DatetimeProperty()
+            DatetimeProperty body = new DatetimeProperty
             {
                 Property = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
             };
             Response response = await client.PutDefaultAsync(body);
-            Console.WriteLine(response.Status);
         }
     }
 }

@@ -17,7 +17,7 @@ using _Type.Model.Inheritance.EnumDiscriminator.Models;
 
 namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
 {
-    public class Samples_EnumDiscriminatorClient
+    public partial class Samples_EnumDiscriminatorClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
@@ -119,6 +119,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
                 weight = 1234,
             });
             Response response = client.PutExtensibleModel(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -134,6 +135,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
                 weight = 1234,
             });
             Response response = await client.PutExtensibleModelAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -145,7 +147,6 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
 
             Dog input = new Golden(1234);
             Response response = client.PutExtensibleModel(input);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -156,7 +157,6 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
 
             Dog input = new Golden(1234);
             Response response = await client.PutExtensibleModelAsync(input);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -171,6 +171,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
                 weight = 1234,
             });
             Response response = client.PutExtensibleModel(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -186,6 +187,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
                 weight = 1234,
             });
             Response response = await client.PutExtensibleModelAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -197,7 +199,6 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
 
             Dog input = new Golden(1234);
             Response response = client.PutExtensibleModel(input);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -208,7 +209,6 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
 
             Dog input = new Golden(1234);
             Response response = await client.PutExtensibleModelAsync(input);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -487,6 +487,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
                 length = 1234,
             });
             Response response = client.PutFixedModel(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -502,6 +503,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
                 length = 1234,
             });
             Response response = await client.PutFixedModelAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -513,7 +515,6 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
 
             Snake input = new Cobra(1234);
             Response response = client.PutFixedModel(input);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -524,7 +525,6 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
 
             Snake input = new Cobra(1234);
             Response response = await client.PutFixedModelAsync(input);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -539,6 +539,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
                 length = 1234,
             });
             Response response = client.PutFixedModel(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -554,6 +555,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
                 length = 1234,
             });
             Response response = await client.PutFixedModelAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -565,7 +567,6 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
 
             Snake input = new Cobra(1234);
             Response response = client.PutFixedModel(input);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -576,7 +577,6 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
 
             Snake input = new Cobra(1234);
             Response response = await client.PutFixedModelAsync(input);
-            Console.WriteLine(response.Status);
         }
 
         [Test]

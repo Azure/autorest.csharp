@@ -17,7 +17,7 @@ using _Specs_.Azure.Core.Traits.Models;
 
 namespace _Specs_.Azure.Core.Traits.Samples
 {
-    public class Samples_TraitsClient
+    public partial class Samples_TraitsClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]

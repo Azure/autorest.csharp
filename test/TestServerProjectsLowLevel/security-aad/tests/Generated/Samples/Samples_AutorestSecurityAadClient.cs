@@ -15,7 +15,7 @@ using security_aad_LowLevel;
 
 namespace security_aad_LowLevel.Samples
 {
-    public class Samples_AutorestSecurityAadClient
+    public partial class Samples_AutorestSecurityAadClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
@@ -25,6 +25,7 @@ namespace security_aad_LowLevel.Samples
             AutorestSecurityAadClient client = new AutorestSecurityAadClient(credential);
 
             Response response = client.Head();
+
             Console.WriteLine(response.Status);
         }
 
@@ -36,6 +37,7 @@ namespace security_aad_LowLevel.Samples
             AutorestSecurityAadClient client = new AutorestSecurityAadClient(credential);
 
             Response response = await client.HeadAsync();
+
             Console.WriteLine(response.Status);
         }
 
@@ -47,6 +49,7 @@ namespace security_aad_LowLevel.Samples
             AutorestSecurityAadClient client = new AutorestSecurityAadClient(credential);
 
             Response response = client.Head();
+
             Console.WriteLine(response.Status);
         }
 
@@ -58,6 +61,7 @@ namespace security_aad_LowLevel.Samples
             AutorestSecurityAadClient client = new AutorestSecurityAadClient(credential);
 
             Response response = await client.HeadAsync();
+
             Console.WriteLine(response.Status);
         }
     }

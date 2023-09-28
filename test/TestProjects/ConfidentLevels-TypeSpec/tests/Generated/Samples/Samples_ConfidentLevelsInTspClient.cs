@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
@@ -18,7 +17,7 @@ using NUnit.Framework;
 
 namespace ConfidentLevelsInTsp.Samples
 {
-    public class Samples_ConfidentLevelsInTspClient
+    public partial class Samples_ConfidentLevelsInTspClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
@@ -32,6 +31,7 @@ namespace ConfidentLevelsInTsp.Samples
                 unionProperty = "<unionProperty>",
             });
             Response response = client.UnionInRequestProperty(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -47,6 +47,7 @@ namespace ConfidentLevelsInTsp.Samples
                 unionProperty = "<unionProperty>",
             });
             Response response = await client.UnionInRequestPropertyAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -62,6 +63,7 @@ namespace ConfidentLevelsInTsp.Samples
                 unionProperty = "<unionProperty>",
             });
             Response response = client.UnionInRequestProperty(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -77,6 +79,7 @@ namespace ConfidentLevelsInTsp.Samples
                 unionProperty = "<unionProperty>",
             });
             Response response = await client.UnionInRequestPropertyAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -164,13 +167,14 @@ namespace ConfidentLevelsInTsp.Samples
             RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
-                selfReference = new List<object>()
-{
+                selfReference = new object[]
+            {
 null
-},
+            },
                 unionProperty = "<unionProperty>",
             });
             Response response = client.UnionWithSelfReference(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -184,13 +188,14 @@ null
             RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
-                selfReference = new List<object>()
-{
+                selfReference = new object[]
+            {
 null
-},
+            },
                 unionProperty = "<unionProperty>",
             });
             Response response = await client.UnionWithSelfReferenceAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -204,13 +209,14 @@ null
             RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
-                selfReference = new List<object>()
-{
+                selfReference = new object[]
+            {
 null
-},
+            },
                 unionProperty = "<unionProperty>",
             });
             Response response = client.UnionWithSelfReference(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -224,13 +230,14 @@ null
             RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
-                selfReference = new List<object>()
-{
+                selfReference = new object[]
+            {
 null
-},
+            },
                 unionProperty = "<unionProperty>",
             });
             Response response = await client.UnionWithSelfReferenceAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -246,6 +253,7 @@ null
                 name = "<name>",
             });
             Response response = client.UnionWithInderict(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -261,6 +269,7 @@ null
                 name = "<name>",
             });
             Response response = await client.UnionWithInderictAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -274,15 +283,15 @@ null
             RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
-                reference = new List<object>()
-{
+                reference = new object[]
+            {
 new
 {
 something = "<something>",
 reference = new
 {
 name = "<name>",
-selfReference = new List<object>()
+selfReference = new object[]
 {
 null
 },
@@ -290,9 +299,10 @@ unionProperty = "<unionProperty>",
 },
 unionProperty = "<unionProperty>",
 }
-},
+            },
             });
             Response response = client.UnionWithInderict(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -306,15 +316,15 @@ unionProperty = "<unionProperty>",
             RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
-                reference = new List<object>()
-{
+                reference = new object[]
+            {
 new
 {
 something = "<something>",
 reference = new
 {
 name = "<name>",
-selfReference = new List<object>()
+selfReference = new object[]
 {
 null
 },
@@ -322,9 +332,10 @@ unionProperty = "<unionProperty>",
 },
 unionProperty = "<unionProperty>",
 }
-},
+            },
             });
             Response response = await client.UnionWithInderictAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -341,6 +352,7 @@ unionProperty = "<unionProperty>",
                 id = 1,
             });
             Response response = client.LiteralOfInteger(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -357,6 +369,7 @@ unionProperty = "<unionProperty>",
                 id = 1,
             });
             Response response = await client.LiteralOfIntegerAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -373,6 +386,7 @@ unionProperty = "<unionProperty>",
                 id = 1,
             });
             Response response = client.LiteralOfInteger(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -389,6 +403,7 @@ unionProperty = "<unionProperty>",
                 id = 1,
             });
             Response response = await client.LiteralOfIntegerAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -405,6 +420,7 @@ unionProperty = "<unionProperty>",
                 id = 3.141592F,
             });
             Response response = client.LiteralOfFloat(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -421,6 +437,7 @@ unionProperty = "<unionProperty>",
                 id = 3.141592F,
             });
             Response response = await client.LiteralOfFloatAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -437,6 +454,7 @@ unionProperty = "<unionProperty>",
                 id = 3.141592F,
             });
             Response response = client.LiteralOfFloat(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -453,6 +471,7 @@ unionProperty = "<unionProperty>",
                 id = 3.141592F,
             });
             Response response = await client.LiteralOfFloatAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -852,6 +871,7 @@ unionProperty = "<unionProperty>",
                 name = "<name>",
             });
             Response response = client.UseDerivedModel(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -867,6 +887,7 @@ unionProperty = "<unionProperty>",
                 name = "<name>",
             });
             Response response = await client.UseDerivedModelAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -884,6 +905,7 @@ unionProperty = "<unionProperty>",
                 size = 123.45,
             });
             Response response = client.UseDerivedModel(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -901,6 +923,7 @@ unionProperty = "<unionProperty>",
                 size = 123.45,
             });
             Response response = await client.UseDerivedModelAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -917,6 +940,7 @@ unionProperty = "<unionProperty>",
                 name = "<name>",
             });
             Response response = client.UseDerivedModelWithUnion(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -933,6 +957,7 @@ unionProperty = "<unionProperty>",
                 name = "<name>",
             });
             Response response = await client.UseDerivedModelWithUnionAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -950,6 +975,7 @@ unionProperty = "<unionProperty>",
                 size = 123.45,
             });
             Response response = client.UseDerivedModelWithUnion(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -967,6 +993,7 @@ unionProperty = "<unionProperty>",
                 size = 123.45,
             });
             Response response = await client.UseDerivedModelWithUnionAsync(content);
+
             Console.WriteLine(response.Status);
         }
     }

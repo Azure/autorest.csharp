@@ -17,7 +17,7 @@ using media_types_LowLevel;
 
 namespace media_types_LowLevel.Samples
 {
-    public class Samples_MediaTypesClient
+    public partial class Samples_MediaTypesClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
@@ -84,6 +84,7 @@ namespace media_types_LowLevel.Samples
 
             RequestContent content = null;
             Response response = client.AnalyzeBodyNoAcceptHeader(content, new ContentType("application/pdf"));
+
             Console.WriteLine(response.Status);
         }
 
@@ -96,6 +97,7 @@ namespace media_types_LowLevel.Samples
 
             RequestContent content = null;
             Response response = await client.AnalyzeBodyNoAcceptHeaderAsync(content, new ContentType("application/pdf"));
+
             Console.WriteLine(response.Status);
         }
 
@@ -108,6 +110,7 @@ namespace media_types_LowLevel.Samples
 
             RequestContent content = RequestContent.Create(File.OpenRead("<filePath>"));
             Response response = client.AnalyzeBodyNoAcceptHeader(content, new ContentType("application/pdf"));
+
             Console.WriteLine(response.Status);
         }
 
@@ -120,6 +123,7 @@ namespace media_types_LowLevel.Samples
 
             RequestContent content = RequestContent.Create(File.OpenRead("<filePath>"));
             Response response = await client.AnalyzeBodyNoAcceptHeaderAsync(content, new ContentType("application/pdf"));
+
             Console.WriteLine(response.Status);
         }
 

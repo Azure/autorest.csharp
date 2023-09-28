@@ -19,7 +19,7 @@ using NUnit.Framework;
 
 namespace CustomizationsInTsp.Samples
 {
-    public class Samples_CustomizationsInTspClient
+    public partial class Samples_CustomizationsInTspClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
@@ -99,28 +99,28 @@ namespace CustomizationsInTsp.Samples
                     propertyToMakeString = "PT1H23M45S",
                     propertyToMakeJsonElement = "<propertyToMakeJsonElement>",
                     propertyToField = "<propertyToField>",
-                    badListName = new List<object>()
-{
+                    badListName = new object[]
+            {
 "<badListName>"
-},
+            },
                     badDictionaryName = new
                     {
                         key = "<badDictionaryName>",
                     },
-                    badListOfListName = new List<object>()
-{
-new List<object>()
+                    badListOfListName = new object[]
+            {
+new object[]
 {
 "<badListOfListName>"
 }
-},
-                    badListOfDictionaryName = new List<object>()
-{
+            },
+                    badListOfDictionaryName = new object[]
+            {
 new
 {
 key = "<badListOfDictionaryName>",
 }
-},
+            },
                 },
                 propertyEnumToRename = "1",
                 propertyEnumWithValueToRename = "1",
@@ -190,28 +190,28 @@ key = "<badListOfDictionaryName>",
                     propertyToMakeString = "PT1H23M45S",
                     propertyToMakeJsonElement = "<propertyToMakeJsonElement>",
                     propertyToField = "<propertyToField>",
-                    badListName = new List<object>()
-{
+                    badListName = new object[]
+            {
 "<badListName>"
-},
+            },
                     badDictionaryName = new
                     {
                         key = "<badDictionaryName>",
                     },
-                    badListOfListName = new List<object>()
-{
-new List<object>()
+                    badListOfListName = new object[]
+            {
+new object[]
 {
 "<badListOfListName>"
 }
-},
-                    badListOfDictionaryName = new List<object>()
-{
+            },
+                    badListOfDictionaryName = new object[]
+            {
 new
 {
 key = "<badListOfDictionaryName>",
 }
-},
+            },
                 },
                 propertyEnumToRename = "1",
                 propertyEnumWithValueToRename = "1",
@@ -255,7 +255,7 @@ key = "<badListOfDictionaryName>",
         {
             CustomizationsInTspClient client = new CustomizationsInTspClient();
 
-            RootModel input = new RootModel()
+            RootModel input = new RootModel
             {
                 PropertyExtensibleEnum = ExtensibleEnumWithOperator.Monday,
                 PropertyModelToRename = new RenamedModel(1234)
@@ -263,25 +263,19 @@ key = "<badListOfDictionaryName>",
                     OptionalInt = 1234,
                 },
                 PropertyModelToChangeNamespace = new ModelToChangeNamespace(1234),
-                PropertyModelWithCustomizedProperties = new ModelWithCustomizedProperties(1234, 1234, 1234, (int)123.45F, XmlConvert.ToTimeSpan("<propertyToMakeDuration>"), "PT1H23M45S", default, "<propertyToField>", new List<string>()
+                PropertyModelWithCustomizedProperties = new ModelWithCustomizedProperties(1234, 1234, 1234, (int)123.45F, XmlConvert.ToTimeSpan("<propertyToMakeDuration>"), "PT1H23M45S", default, "<propertyToField>", new string[] { "<badListName>" }, new Dictionary<string, string>
+                {
+                    ["key"] = "<badDictionaryName>"
+                }, new IList<string>[]
+            {
+new string[]{"<badListOfListName>"}
+            }, new IDictionary<string, string>[]
+            {
+new Dictionary<string, string>
 {
-"<badListName>"
-}, new Dictionary<string, string>()
-{
-    ["key"] = "<badDictionaryName>",
-}, new List<IList<string>>()
-{
-new List<string>()
-{
-"<badListOfListName>"
+["key"] = "<badListOfDictionaryName>"
 }
-}, new List<IDictionary<string, string>>()
-{
-new Dictionary<string, string>()
-{
-["key"] = "<badListOfDictionaryName>",
-}
-}),
+            }),
                 PropertyEnumToRename = RenamedEnum.One,
                 PropertyEnumWithValueToRename = EnumWithValueToRename.One,
                 PropertyEnumToBeMadeExtensible = EnumToBeMadeExtensible.ExOne,
@@ -297,7 +291,7 @@ new Dictionary<string, string>()
         {
             CustomizationsInTspClient client = new CustomizationsInTspClient();
 
-            RootModel input = new RootModel()
+            RootModel input = new RootModel
             {
                 PropertyExtensibleEnum = ExtensibleEnumWithOperator.Monday,
                 PropertyModelToRename = new RenamedModel(1234)
@@ -305,25 +299,19 @@ new Dictionary<string, string>()
                     OptionalInt = 1234,
                 },
                 PropertyModelToChangeNamespace = new ModelToChangeNamespace(1234),
-                PropertyModelWithCustomizedProperties = new ModelWithCustomizedProperties(1234, 1234, 1234, (int)123.45F, XmlConvert.ToTimeSpan("<propertyToMakeDuration>"), "PT1H23M45S", default, "<propertyToField>", new List<string>()
+                PropertyModelWithCustomizedProperties = new ModelWithCustomizedProperties(1234, 1234, 1234, (int)123.45F, XmlConvert.ToTimeSpan("<propertyToMakeDuration>"), "PT1H23M45S", default, "<propertyToField>", new string[] { "<badListName>" }, new Dictionary<string, string>
+                {
+                    ["key"] = "<badDictionaryName>"
+                }, new IList<string>[]
+            {
+new string[]{"<badListOfListName>"}
+            }, new IDictionary<string, string>[]
+            {
+new Dictionary<string, string>
 {
-"<badListName>"
-}, new Dictionary<string, string>()
-{
-    ["key"] = "<badDictionaryName>",
-}, new List<IList<string>>()
-{
-new List<string>()
-{
-"<badListOfListName>"
+["key"] = "<badListOfDictionaryName>"
 }
-}, new List<IDictionary<string, string>>()
-{
-new Dictionary<string, string>()
-{
-["key"] = "<badListOfDictionaryName>",
-}
-}),
+            }),
                 PropertyEnumToRename = RenamedEnum.One,
                 PropertyEnumWithValueToRename = EnumWithValueToRename.One,
                 PropertyEnumToBeMadeExtensible = EnumToBeMadeExtensible.ExOne,

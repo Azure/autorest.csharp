@@ -16,7 +16,7 @@ using body_complex_LowLevel;
 
 namespace body_complex_LowLevel.Samples
 {
-    public class Samples_BasicClient
+    public partial class Samples_BasicClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
@@ -83,6 +83,7 @@ namespace body_complex_LowLevel.Samples
 
             RequestContent content = RequestContent.Create(new object());
             Response response = client.PutValid(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -95,6 +96,7 @@ namespace body_complex_LowLevel.Samples
 
             RequestContent content = RequestContent.Create(new object());
             Response response = await client.PutValidAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -112,6 +114,7 @@ namespace body_complex_LowLevel.Samples
                 color = "cyan",
             });
             Response response = client.PutValid(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -129,6 +132,7 @@ namespace body_complex_LowLevel.Samples
                 color = "cyan",
             });
             Response response = await client.PutValidAsync(content);
+
             Console.WriteLine(response.Status);
         }
 

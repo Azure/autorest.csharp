@@ -15,7 +15,7 @@ using NUnit.Framework;
 
 namespace Accessibility_LowLevel_NoAuth.Samples
 {
-    public class Samples_AccessibilityClient
+    public partial class Samples_AccessibilityClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
@@ -25,6 +25,7 @@ namespace Accessibility_LowLevel_NoAuth.Samples
 
             RequestContent content = null;
             Response response = client.Operation(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -36,6 +37,7 @@ namespace Accessibility_LowLevel_NoAuth.Samples
 
             RequestContent content = null;
             Response response = await client.OperationAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -47,6 +49,7 @@ namespace Accessibility_LowLevel_NoAuth.Samples
 
             RequestContent content = RequestContent.Create("<body>");
             Response response = client.Operation(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -58,6 +61,7 @@ namespace Accessibility_LowLevel_NoAuth.Samples
 
             RequestContent content = RequestContent.Create("<body>");
             Response response = await client.OperationAsync(content);
+
             Console.WriteLine(response.Status);
         }
     }

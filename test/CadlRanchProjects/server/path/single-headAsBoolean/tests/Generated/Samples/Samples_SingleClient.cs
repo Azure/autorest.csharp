@@ -14,7 +14,7 @@ using Server.Path.SingleHeadAsBoolean;
 
 namespace Server.Path.SingleHeadAsBoolean.Samples
 {
-    public class Samples_SingleClient
+    public partial class Samples_SingleClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
@@ -24,6 +24,7 @@ namespace Server.Path.SingleHeadAsBoolean.Samples
             SingleClient client = new SingleClient(endpoint);
 
             Response<bool> response = client.MyOp();
+
             Console.WriteLine(response.GetRawResponse().Status);
         }
 
@@ -35,6 +36,7 @@ namespace Server.Path.SingleHeadAsBoolean.Samples
             SingleClient client = new SingleClient(endpoint);
 
             Response<bool> response = await client.MyOpAsync();
+
             Console.WriteLine(response.GetRawResponse().Status);
         }
 
@@ -46,6 +48,7 @@ namespace Server.Path.SingleHeadAsBoolean.Samples
             SingleClient client = new SingleClient(endpoint);
 
             Response<bool> response = client.MyOp();
+
             Console.WriteLine(response.GetRawResponse().Status);
         }
 
@@ -57,6 +60,7 @@ namespace Server.Path.SingleHeadAsBoolean.Samples
             SingleClient client = new SingleClient(endpoint);
 
             Response<bool> response = await client.MyOpAsync();
+
             Console.WriteLine(response.GetRawResponse().Status);
         }
     }

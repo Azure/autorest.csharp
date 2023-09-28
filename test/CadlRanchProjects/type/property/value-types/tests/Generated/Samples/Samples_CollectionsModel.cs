@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
@@ -18,7 +17,7 @@ using _Type.Property.ValueTypes.Models;
 
 namespace _Type.Property.ValueTypes.Samples
 {
-    internal class Samples_CollectionsModel
+    public partial class Samples_CollectionsModel
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
@@ -112,15 +111,16 @@ namespace _Type.Property.ValueTypes.Samples
 
             RequestContent content = RequestContent.Create(new
             {
-                property = new List<object>()
-{
+                property = new object[]
+            {
 new
 {
 property = "<property>",
 }
-},
+            },
             });
             Response response = client.Put(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -132,15 +132,16 @@ property = "<property>",
 
             RequestContent content = RequestContent.Create(new
             {
-                property = new List<object>()
-{
+                property = new object[]
+            {
 new
 {
 property = "<property>",
 }
-},
+            },
             });
             Response response = await client.PutAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -150,12 +151,11 @@ property = "<property>",
         {
             CollectionsModel client = new ValueTypesClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
-            CollectionsModelProperty body = new CollectionsModelProperty(new List<InnerModel>()
-{
+            CollectionsModelProperty body = new CollectionsModelProperty(new InnerModel[]
+            {
 new InnerModel("<property>")
-});
+            });
             Response response = client.Put(body);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -164,12 +164,11 @@ new InnerModel("<property>")
         {
             CollectionsModel client = new ValueTypesClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
-            CollectionsModelProperty body = new CollectionsModelProperty(new List<InnerModel>()
-{
+            CollectionsModelProperty body = new CollectionsModelProperty(new InnerModel[]
+            {
 new InnerModel("<property>")
-});
+            });
             Response response = await client.PutAsync(body);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -180,15 +179,16 @@ new InnerModel("<property>")
 
             RequestContent content = RequestContent.Create(new
             {
-                property = new List<object>()
-{
+                property = new object[]
+            {
 new
 {
 property = "<property>",
 }
-},
+            },
             });
             Response response = client.Put(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -200,15 +200,16 @@ property = "<property>",
 
             RequestContent content = RequestContent.Create(new
             {
-                property = new List<object>()
-{
+                property = new object[]
+            {
 new
 {
 property = "<property>",
 }
-},
+            },
             });
             Response response = await client.PutAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -218,12 +219,11 @@ property = "<property>",
         {
             CollectionsModel client = new ValueTypesClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
-            CollectionsModelProperty body = new CollectionsModelProperty(new List<InnerModel>()
-{
+            CollectionsModelProperty body = new CollectionsModelProperty(new InnerModel[]
+            {
 new InnerModel("<property>")
-});
+            });
             Response response = client.Put(body);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -232,12 +232,11 @@ new InnerModel("<property>")
         {
             CollectionsModel client = new ValueTypesClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
-            CollectionsModelProperty body = new CollectionsModelProperty(new List<InnerModel>()
-{
+            CollectionsModelProperty body = new CollectionsModelProperty(new InnerModel[]
+            {
 new InnerModel("<property>")
-});
+            });
             Response response = await client.PutAsync(body);
-            Console.WriteLine(response.Status);
         }
     }
 }
