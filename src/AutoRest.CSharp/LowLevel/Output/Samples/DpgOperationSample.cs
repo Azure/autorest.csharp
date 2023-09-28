@@ -113,23 +113,6 @@ namespace AutoRest.CSharp.Output.Samples.Models
             }
         }
 
-        public string GetMethodName(bool isAsync)
-        {
-            var builder = new StringBuilder("Example_").Append(_operationMethodSignature.Name);
-
-            builder.Append("_").Append(ExampleKey);
-
-            if (IsConvenienceSample)
-            {
-                builder.Append("_Convenience");
-            }
-            if (isAsync)
-            {
-                builder.Append("_Async");
-            }
-            return builder.ToString();
-        }
-
         private Dictionary<string, InputExampleParameterValue>? _parameterValueMapping;
         public Dictionary<string, InputExampleParameterValue> ParameterValueMapping => _parameterValueMapping ??= EnsureParameterValueMapping();
 

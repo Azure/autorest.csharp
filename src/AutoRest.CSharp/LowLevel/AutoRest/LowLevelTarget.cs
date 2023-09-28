@@ -36,11 +36,9 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
             foreach (var client in library.RestClients)
             {
-                var codeWriter = new CodeWriter();
-                var xmlDocWriter = new XmlDocWriter();
-                var lowLevelClientWriter = new LowLevelClientWriter(codeWriter, xmlDocWriter, client);
-                lowLevelClientWriter.WriteClient();
-                project.AddGeneratedFile($"{client.Type.Name}.cs", codeWriter.ToString());
+                var dpgClientWriter = new DpgClientWriter(library, client);
+                dpgClientWriter.WriteClient();
+                project.AddGeneratedFile($"{client.Type.Name}.cs", dpgClientWriter.ToString());
 
                 // write samples
                 var sampleProvider = library.GetSampleForClient(client);
@@ -50,7 +48,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                     var clientSampleWriter = new ExpressionTypeProviderWriter(sampleProvider);
                     clientSampleWriter.Write();
                     project.AddGeneratedTestFile(clientExampleFilename, clientSampleWriter.ToString());
-                    project.AddGeneratedDocFile($"Docs/{client.Type.Name}.xml", new XmlDocumentFile(clientExampleFilename, xmlDocWriter));
+                    project.AddGeneratedDocFile($"Docs/{client.Type.Name}.xml", new XmlDocumentFile(clientExampleFilename, dpgClientWriter.XmlDocWriter));
                 }
             }
 
