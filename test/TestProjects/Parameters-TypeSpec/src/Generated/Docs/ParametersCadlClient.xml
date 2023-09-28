@@ -42,12 +42,6 @@ Response response = await client.OperationAsync(1234, null, null);
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code>
-This sample shows how to call OperationAsync.
-<code><![CDATA[
-ParametersCadlClient client = new ParametersCadlClient();
-
-Response<Result> response = await client.OperationAsync(1234);
-]]></code>
 This sample shows how to call OperationAsync with all parameters and parse the result.
 <code><![CDATA[
 ParametersCadlClient client = new ParametersCadlClient();
@@ -56,12 +50,6 @@ Response response = await client.OperationAsync(1234, 1234, null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
-]]></code>
-This sample shows how to call OperationAsync with all parameters.
-<code><![CDATA[
-ParametersCadlClient client = new ParametersCadlClient();
-
-Response<Result> response = await client.OperationAsync(1234, end: 1234);
 ]]></code></example>
     </member>
     <member name="Operation(int,int?,RequestContext)">
@@ -75,12 +63,6 @@ Response response = client.Operation(1234, null, null);
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code>
-This sample shows how to call Operation.
-<code><![CDATA[
-ParametersCadlClient client = new ParametersCadlClient();
-
-Response<Result> response = client.Operation(1234);
-]]></code>
 This sample shows how to call Operation with all parameters and parse the result.
 <code><![CDATA[
 ParametersCadlClient client = new ParametersCadlClient();
@@ -89,12 +71,6 @@ Response response = client.Operation(1234, 1234, null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
-]]></code>
-This sample shows how to call Operation with all parameters.
-<code><![CDATA[
-ParametersCadlClient client = new ParametersCadlClient();
-
-Response<Result> response = client.Operation(1234, end: 1234);
 ]]></code></example>
     </member>
     <member name="Operation2Async(int,int?,CancellationToken)">
@@ -138,12 +114,6 @@ Response response = await client.Operation2Async(1234, null, null);
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code>
-This sample shows how to call Operation2Async.
-<code><![CDATA[
-ParametersCadlClient client = new ParametersCadlClient();
-
-Response<Result> response = await client.Operation2Async(1234);
-]]></code>
 This sample shows how to call Operation2Async with all parameters and parse the result.
 <code><![CDATA[
 ParametersCadlClient client = new ParametersCadlClient();
@@ -152,12 +122,6 @@ Response response = await client.Operation2Async(1234, 1234, null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
-]]></code>
-This sample shows how to call Operation2Async with all parameters.
-<code><![CDATA[
-ParametersCadlClient client = new ParametersCadlClient();
-
-Response<Result> response = await client.Operation2Async(1234, start: 1234);
 ]]></code></example>
     </member>
     <member name="Operation2(int,int?,RequestContext)">
@@ -171,12 +135,6 @@ Response response = client.Operation2(1234, null, null);
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code>
-This sample shows how to call Operation2.
-<code><![CDATA[
-ParametersCadlClient client = new ParametersCadlClient();
-
-Response<Result> response = client.Operation2(1234);
-]]></code>
 This sample shows how to call Operation2 with all parameters and parse the result.
 <code><![CDATA[
 ParametersCadlClient client = new ParametersCadlClient();
@@ -185,12 +143,6 @@ Response response = client.Operation2(1234, 1234, null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
-]]></code>
-This sample shows how to call Operation2 with all parameters.
-<code><![CDATA[
-ParametersCadlClient client = new ParametersCadlClient();
-
-Response<Result> response = client.Operation2(1234, start: 1234);
 ]]></code></example>
     </member>
   </members>
