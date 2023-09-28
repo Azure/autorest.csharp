@@ -478,14 +478,6 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("kind").ToString());
 Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code>
-This sample shows how to call ConfidentOperationWithDiscriminatorAsync.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
-
-Pet input = new Cat("<name>", "<meow>");
-Response<Pet> response = await client.ConfidentOperationWithDiscriminatorAsync(input);
-]]></code>
 This sample shows how to call ConfidentOperationWithDiscriminatorAsync with all request content and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -502,14 +494,6 @@ Response response = await client.ConfidentOperationWithDiscriminatorAsync(conten
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("kind").ToString());
 Console.WriteLine(result.GetProperty("name").ToString());
-]]></code>
-This sample shows how to call ConfidentOperationWithDiscriminatorAsync with all parameters.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
-
-Pet input = new Cat("<name>", "<meow>");
-Response<Pet> response = await client.ConfidentOperationWithDiscriminatorAsync(input);
 ]]></code></example>
     </member>
     <member name="ConfidentOperationWithDiscriminator(RequestContent,RequestContext)">
@@ -531,14 +515,6 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("kind").ToString());
 Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code>
-This sample shows how to call ConfidentOperationWithDiscriminator.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
-
-Pet input = new Cat("<name>", "<meow>");
-Response<Pet> response = client.ConfidentOperationWithDiscriminator(input);
-]]></code>
 This sample shows how to call ConfidentOperationWithDiscriminator with all request content and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -555,14 +531,6 @@ Response response = client.ConfidentOperationWithDiscriminator(content);
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("kind").ToString());
 Console.WriteLine(result.GetProperty("name").ToString());
-]]></code>
-This sample shows how to call ConfidentOperationWithDiscriminator with all parameters.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
-
-Pet input = new Cat("<name>", "<meow>");
-Response<Pet> response = client.ConfidentOperationWithDiscriminator(input);
 ]]></code></example>
     </member>
     <member name="PollutedBaseMethodAsync(RequestContent,RequestContext)">
