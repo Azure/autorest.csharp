@@ -9,6 +9,7 @@ using System.Text;
 using System.Xml;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Input.Examples;
+using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models.Serialization;
@@ -125,11 +126,11 @@ namespace AutoRest.CSharp.LowLevel.Extensions
                                 _ => null
                             };
                             if (time != null)
-                                return new InvokeStaticMethodExpression(typeof(DateTimeOffset), nameof(DateTimeOffset.FromUnixTimeSeconds), new[] { Long(time.Value) });
+                                return DateTimeOffsetExpression.FromUnixTimeSeconds(Long(time.Value));
                             break;
                         case SerializationFormat.DateTime_RFC1123 or SerializationFormat.DateTime_RFC3339 or SerializationFormat.DateTime_RFC7231 or SerializationFormat.DateTime_ISO8601 or SerializationFormat.Date_ISO8601:
                             if (rawValue.RawValue is string s)
-                                return new InvokeStaticMethodExpression(typeof(DateTimeOffset), nameof(DateTimeOffset.Parse), new[] { Literal(s) });
+                                return DateTimeOffsetExpression.Parse(s);
                             break;
                     }
                 }
@@ -141,7 +142,7 @@ namespace AutoRest.CSharp.LowLevel.Extensions
             {
                 if (exampleValue is InputExampleRawValue rawValue && rawValue.RawValue is string s)
                 {
-                    return new InvokeStaticMethodExpression(typeof(Guid), nameof(Guid.Parse), new[] { Literal(s) });
+                    return GuidExpression.Parse(s);
                 }
 
                 return Default;
