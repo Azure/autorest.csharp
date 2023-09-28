@@ -6,8 +6,10 @@
 #nullable disable
 
 using System;
+using System.Net.Http;
 using System.ServiceModel.Rest;
 using System.ServiceModel.Rest.Core;
+using System.ServiceModel.Rest.Core.Pipeline;
 using System.ServiceModel.Rest.Experimental;
 using System.ServiceModel.Rest.Experimental.Core;
 using System.ServiceModel.Rest.Experimental.Core.Pipeline;
@@ -3145,68 +3147,68 @@ namespace OpenAI
         internal PipelineMessage CreateCreateChatCompletionRequest(RequestBody content, RequestOptions context)
         {
             var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
-            var request = message.PipelineRequest;
-            request.SetMethod("POST");
+            var request = message.Request;
+            request.Method = HttpMethod.Post;
             var uri = new RequestUri();
             uri.AppendPath("/chat/completions", false);
             uri.AppendQuery("api-version", _apiVersion, true);
-            request.SetUri(uri);
+            request.Uri = uri.ToUri();
             request.SetHeaderValue("Accept", "application/json");
             request.SetHeaderValue("Content-Type", "application/json");
-            request.SetContent(content);
+            request.Content = content;
             return message;
         }
 
         internal PipelineMessage CreateCreateTranscriptionRequest(RequestBody content, RequestOptions context)
         {
             var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
-            var request = message.PipelineRequest;
-            request.SetMethod("POST");
+            var request = message.Request;
+            request.Method = HttpMethod.Post;
             var uri = new RequestUri();
             uri.AppendPath("/audio/transcriptions", false);
             uri.AppendQuery("api-version", _apiVersion, true);
-            request.SetUri(uri);
+            request.Uri = uri.ToUri();
             request.SetHeaderValue("Accept", "application/json");
             request.SetHeaderValue("content-type", "multipart/form-data");
-            request.SetContent(content);
+            request.Content = content;
             return message;
         }
 
         internal PipelineMessage CreateCreateTranslationRequest(RequestBody content, RequestOptions context)
         {
             var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
-            var request = message.PipelineRequest;
-            request.SetMethod("POST");
+            var request = message.Request;
+            request.Method = HttpMethod.Post;
             var uri = new RequestUri();
             uri.AppendPath("/audio/translations", false);
             uri.AppendQuery("api-version", _apiVersion, true);
-            request.SetUri(uri);
+            request.Uri = uri.ToUri();
             request.SetHeaderValue("Accept", "application/json");
             request.SetHeaderValue("content-type", "multipart/form-data");
-            request.SetContent(content);
+            request.Content = content;
             return message;
         }
 
         internal PipelineMessage CreateCreateFineTuningJobRequest(RequestBody content, RequestOptions context)
         {
             var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
-            var request = message.PipelineRequest;
-            request.SetMethod("POST");
+            var request = message.Request;
+            request.Method = HttpMethod.Post;
             var uri = new RequestUri();
             uri.AppendPath("/fine_tuning/jobs", false);
             uri.AppendQuery("api-version", _apiVersion, true);
-            request.SetUri(uri);
+            request.Uri = uri.ToUri();
             request.SetHeaderValue("Accept", "application/json");
             request.SetHeaderValue("Content-Type", "application/json");
-            request.SetContent(content);
+            request.Content = content;
             return message;
         }
 
         internal PipelineMessage CreateGetPaginatedFineTuningJobsRequest(string after, long? limit, RequestOptions context)
         {
             var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
-            var request = message.PipelineRequest;
-            request.SetMethod("GET");
+            var request = message.Request;
+            request.Method = HttpMethod.Get;
             var uri = new RequestUri();
             uri.AppendPath("/fine_tuning/jobs", false);
             if (after != null)
@@ -3218,7 +3220,7 @@ namespace OpenAI
                 uri.AppendQuery("limit", limit.Value, true);
             }
             uri.AppendQuery("api-version", _apiVersion, true);
-            request.SetUri(uri);
+            request.Uri = uri.ToUri();
             request.SetHeaderValue("Accept", "application/json");
             return message;
         }
@@ -3226,13 +3228,13 @@ namespace OpenAI
         internal PipelineMessage CreateRetrieveFineTuningJobRequest(string fineTuningJobId, RequestOptions context)
         {
             var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
-            var request = message.PipelineRequest;
-            request.SetMethod("GET");
+            var request = message.Request;
+            request.Method = HttpMethod.Get;
             var uri = new RequestUri();
             uri.AppendPath("/fine_tuning/jobs/", false);
             uri.AppendPath(fineTuningJobId, true);
             uri.AppendQuery("api-version", _apiVersion, true);
-            request.SetUri(uri);
+            request.Uri = uri.ToUri();
             request.SetHeaderValue("Accept", "application/json");
             return message;
         }
@@ -3240,8 +3242,8 @@ namespace OpenAI
         internal PipelineMessage CreateGetFineTuningEventsRequest(string fineTuningJobId, string after, RequestOptions context)
         {
             var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
-            var request = message.PipelineRequest;
-            request.SetMethod("GET");
+            var request = message.Request;
+            request.Method = HttpMethod.Get;
             var uri = new RequestUri();
             uri.AppendPath("/fine_tuning/jobs/", false);
             uri.AppendPath(fineTuningJobId, true);
@@ -3251,7 +3253,7 @@ namespace OpenAI
                 uri.AppendQuery("after", after, true);
             }
             uri.AppendQuery("api-version", _apiVersion, true);
-            request.SetUri(uri);
+            request.Uri = uri.ToUri();
             request.SetHeaderValue("Accept", "application/json");
             return message;
         }
@@ -3259,14 +3261,14 @@ namespace OpenAI
         internal PipelineMessage CreateCancelFineTuningJobRequest(string fineTuningJobId, RequestOptions context)
         {
             var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
-            var request = message.PipelineRequest;
-            request.SetMethod("POST");
+            var request = message.Request;
+            request.Method = HttpMethod.Post;
             var uri = new RequestUri();
             uri.AppendPath("/fine_tuning/jobs/", false);
             uri.AppendPath(fineTuningJobId, true);
             uri.AppendPath("/cancel", false);
             uri.AppendQuery("api-version", _apiVersion, true);
-            request.SetUri(uri);
+            request.Uri = uri.ToUri();
             request.SetHeaderValue("Accept", "application/json");
             return message;
         }
@@ -3274,102 +3276,102 @@ namespace OpenAI
         internal PipelineMessage CreateCreateCompletionRequest(RequestBody content, RequestOptions context)
         {
             var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
-            var request = message.PipelineRequest;
-            request.SetMethod("POST");
+            var request = message.Request;
+            request.Method = HttpMethod.Post;
             var uri = new RequestUri();
             uri.AppendPath("/completions", false);
             uri.AppendQuery("api-version", _apiVersion, true);
-            request.SetUri(uri);
+            request.Uri = uri.ToUri();
             request.SetHeaderValue("Accept", "application/json");
             request.SetHeaderValue("Content-Type", "application/json");
-            request.SetContent(content);
+            request.Content = content;
             return message;
         }
 
         internal PipelineMessage CreateCreateEditRequest(RequestBody content, RequestOptions context)
         {
             var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
-            var request = message.PipelineRequest;
-            request.SetMethod("POST");
+            var request = message.Request;
+            request.Method = HttpMethod.Post;
             var uri = new RequestUri();
             uri.AppendPath("/edits", false);
             uri.AppendQuery("api-version", _apiVersion, true);
-            request.SetUri(uri);
+            request.Uri = uri.ToUri();
             request.SetHeaderValue("Accept", "application/json");
             request.SetHeaderValue("Content-Type", "application/json");
-            request.SetContent(content);
+            request.Content = content;
             return message;
         }
 
         internal PipelineMessage CreateCreateImageRequest(RequestBody content, RequestOptions context)
         {
             var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
-            var request = message.PipelineRequest;
-            request.SetMethod("POST");
+            var request = message.Request;
+            request.Method = HttpMethod.Post;
             var uri = new RequestUri();
             uri.AppendPath("/images/generations", false);
             uri.AppendQuery("api-version", _apiVersion, true);
-            request.SetUri(uri);
+            request.Uri = uri.ToUri();
             request.SetHeaderValue("Accept", "application/json");
             request.SetHeaderValue("Content-Type", "application/json");
-            request.SetContent(content);
+            request.Content = content;
             return message;
         }
 
         internal PipelineMessage CreateCreateImageEditRequest(RequestBody content, RequestOptions context)
         {
             var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
-            var request = message.PipelineRequest;
-            request.SetMethod("POST");
+            var request = message.Request;
+            request.Method = HttpMethod.Post;
             var uri = new RequestUri();
             uri.AppendPath("/images/edits", false);
             uri.AppendQuery("api-version", _apiVersion, true);
-            request.SetUri(uri);
+            request.Uri = uri.ToUri();
             request.SetHeaderValue("Accept", "application/json");
             request.SetHeaderValue("content-type", "multipart/form-data");
-            request.SetContent(content);
+            request.Content = content;
             return message;
         }
 
         internal PipelineMessage CreateCreateImageVariationRequest(RequestBody content, RequestOptions context)
         {
             var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
-            var request = message.PipelineRequest;
-            request.SetMethod("POST");
+            var request = message.Request;
+            request.Method = HttpMethod.Post;
             var uri = new RequestUri();
             uri.AppendPath("/images/variations", false);
             uri.AppendQuery("api-version", _apiVersion, true);
-            request.SetUri(uri);
+            request.Uri = uri.ToUri();
             request.SetHeaderValue("Accept", "application/json");
             request.SetHeaderValue("content-type", "multipart/form-data");
-            request.SetContent(content);
+            request.Content = content;
             return message;
         }
 
         internal PipelineMessage CreateCreateEmbeddingRequest(RequestBody content, RequestOptions context)
         {
             var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
-            var request = message.PipelineRequest;
-            request.SetMethod("POST");
+            var request = message.Request;
+            request.Method = HttpMethod.Post;
             var uri = new RequestUri();
             uri.AppendPath("/embeddings", false);
             uri.AppendQuery("api-version", _apiVersion, true);
-            request.SetUri(uri);
+            request.Uri = uri.ToUri();
             request.SetHeaderValue("Accept", "application/json");
             request.SetHeaderValue("Content-Type", "application/json");
-            request.SetContent(content);
+            request.Content = content;
             return message;
         }
 
         internal PipelineMessage CreateGetFilesRequest(RequestOptions context)
         {
             var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
-            var request = message.PipelineRequest;
-            request.SetMethod("GET");
+            var request = message.Request;
+            request.Method = HttpMethod.Get;
             var uri = new RequestUri();
             uri.AppendPath("/files", false);
             uri.AppendQuery("api-version", _apiVersion, true);
-            request.SetUri(uri);
+            request.Uri = uri.ToUri();
             request.SetHeaderValue("Accept", "application/json");
             return message;
         }
@@ -3377,28 +3379,28 @@ namespace OpenAI
         internal PipelineMessage CreateCreateFileRequest(RequestBody content, RequestOptions context)
         {
             var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
-            var request = message.PipelineRequest;
-            request.SetMethod("POST");
+            var request = message.Request;
+            request.Method = HttpMethod.Post;
             var uri = new RequestUri();
             uri.AppendPath("/files", false);
             uri.AppendQuery("api-version", _apiVersion, true);
-            request.SetUri(uri);
+            request.Uri = uri.ToUri();
             request.SetHeaderValue("Accept", "application/json");
             request.SetHeaderValue("content-type", "multipart/form-data");
-            request.SetContent(content);
+            request.Content = content;
             return message;
         }
 
         internal PipelineMessage CreateRetrieveFileRequest(string fileId, RequestOptions context)
         {
             var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
-            var request = message.PipelineRequest;
-            request.SetMethod("POST");
+            var request = message.Request;
+            request.Method = HttpMethod.Post;
             var uri = new RequestUri();
             uri.AppendPath("/files/files/", false);
             uri.AppendPath(fileId, true);
             uri.AppendQuery("api-version", _apiVersion, true);
-            request.SetUri(uri);
+            request.Uri = uri.ToUri();
             request.SetHeaderValue("Accept", "application/json");
             return message;
         }
@@ -3406,13 +3408,13 @@ namespace OpenAI
         internal PipelineMessage CreateDeleteFileRequest(string fileId, RequestOptions context)
         {
             var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
-            var request = message.PipelineRequest;
-            request.SetMethod("DELETE");
+            var request = message.Request;
+            request.Method = HttpMethod.Delete;
             var uri = new RequestUri();
             uri.AppendPath("/files/files/", false);
             uri.AppendPath(fileId, true);
             uri.AppendQuery("api-version", _apiVersion, true);
-            request.SetUri(uri);
+            request.Uri = uri.ToUri();
             request.SetHeaderValue("Accept", "application/json");
             return message;
         }
@@ -3420,14 +3422,14 @@ namespace OpenAI
         internal PipelineMessage CreateDownloadFileRequest(string fileId, RequestOptions context)
         {
             var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
-            var request = message.PipelineRequest;
-            request.SetMethod("GET");
+            var request = message.Request;
+            request.Method = HttpMethod.Get;
             var uri = new RequestUri();
             uri.AppendPath("/files/files/", false);
             uri.AppendPath(fileId, true);
             uri.AppendPath("/content", false);
             uri.AppendQuery("api-version", _apiVersion, true);
-            request.SetUri(uri);
+            request.Uri = uri.ToUri();
             request.SetHeaderValue("Accept", "application/json");
             return message;
         }
@@ -3435,27 +3437,27 @@ namespace OpenAI
         internal PipelineMessage CreateCreateFineTuneRequest(RequestBody content, RequestOptions context)
         {
             var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
-            var request = message.PipelineRequest;
-            request.SetMethod("POST");
+            var request = message.Request;
+            request.Method = HttpMethod.Post;
             var uri = new RequestUri();
             uri.AppendPath("/fine-tunes", false);
             uri.AppendQuery("api-version", _apiVersion, true);
-            request.SetUri(uri);
+            request.Uri = uri.ToUri();
             request.SetHeaderValue("Accept", "application/json");
             request.SetHeaderValue("Content-Type", "application/json");
-            request.SetContent(content);
+            request.Content = content;
             return message;
         }
 
         internal PipelineMessage CreateGetFineTunesRequest(RequestOptions context)
         {
             var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
-            var request = message.PipelineRequest;
-            request.SetMethod("GET");
+            var request = message.Request;
+            request.Method = HttpMethod.Get;
             var uri = new RequestUri();
             uri.AppendPath("/fine-tunes", false);
             uri.AppendQuery("api-version", _apiVersion, true);
-            request.SetUri(uri);
+            request.Uri = uri.ToUri();
             request.SetHeaderValue("Accept", "application/json");
             return message;
         }
@@ -3463,13 +3465,13 @@ namespace OpenAI
         internal PipelineMessage CreateRetrieveFineTuneRequest(string fineTuneId, RequestOptions context)
         {
             var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
-            var request = message.PipelineRequest;
-            request.SetMethod("GET");
+            var request = message.Request;
+            request.Method = HttpMethod.Get;
             var uri = new RequestUri();
             uri.AppendPath("/fine-tunes/", false);
             uri.AppendPath(fineTuneId, true);
             uri.AppendQuery("api-version", _apiVersion, true);
-            request.SetUri(uri);
+            request.Uri = uri.ToUri();
             request.SetHeaderValue("Accept", "application/json");
             return message;
         }
@@ -3477,8 +3479,8 @@ namespace OpenAI
         internal PipelineMessage CreateGetFineTuneEventsRequest(string fineTuneId, bool? stream, RequestOptions context)
         {
             var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
-            var request = message.PipelineRequest;
-            request.SetMethod("GET");
+            var request = message.Request;
+            request.Method = HttpMethod.Get;
             var uri = new RequestUri();
             uri.AppendPath("/fine-tunes/", false);
             uri.AppendPath(fineTuneId, true);
@@ -3488,7 +3490,7 @@ namespace OpenAI
                 uri.AppendQuery("stream", stream.Value, true);
             }
             uri.AppendQuery("api-version", _apiVersion, true);
-            request.SetUri(uri);
+            request.Uri = uri.ToUri();
             request.SetHeaderValue("Accept", "application/json");
             return message;
         }
@@ -3496,14 +3498,14 @@ namespace OpenAI
         internal PipelineMessage CreateCancelFineTuneRequest(string fineTuneId, RequestOptions context)
         {
             var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
-            var request = message.PipelineRequest;
-            request.SetMethod("POST");
+            var request = message.Request;
+            request.Method = HttpMethod.Post;
             var uri = new RequestUri();
             uri.AppendPath("/fine-tunes/", false);
             uri.AppendPath(fineTuneId, true);
             uri.AppendPath("/cancel", false);
             uri.AppendQuery("api-version", _apiVersion, true);
-            request.SetUri(uri);
+            request.Uri = uri.ToUri();
             request.SetHeaderValue("Accept", "application/json");
             return message;
         }
@@ -3511,12 +3513,12 @@ namespace OpenAI
         internal PipelineMessage CreateGetModelsRequest(RequestOptions context)
         {
             var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
-            var request = message.PipelineRequest;
-            request.SetMethod("GET");
+            var request = message.Request;
+            request.Method = HttpMethod.Get;
             var uri = new RequestUri();
             uri.AppendPath("/models", false);
             uri.AppendQuery("api-version", _apiVersion, true);
-            request.SetUri(uri);
+            request.Uri = uri.ToUri();
             request.SetHeaderValue("Accept", "application/json");
             return message;
         }
@@ -3524,13 +3526,13 @@ namespace OpenAI
         internal PipelineMessage CreateRetrieveModelRequest(string model, RequestOptions context)
         {
             var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
-            var request = message.PipelineRequest;
-            request.SetMethod("GET");
+            var request = message.Request;
+            request.Method = HttpMethod.Get;
             var uri = new RequestUri();
             uri.AppendPath("/models/", false);
             uri.AppendPath(model, true);
             uri.AppendQuery("api-version", _apiVersion, true);
-            request.SetUri(uri);
+            request.Uri = uri.ToUri();
             request.SetHeaderValue("Accept", "application/json");
             return message;
         }
@@ -3538,13 +3540,13 @@ namespace OpenAI
         internal PipelineMessage CreateDeleteModelRequest(string model, RequestOptions context)
         {
             var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
-            var request = message.PipelineRequest;
-            request.SetMethod("DELETE");
+            var request = message.Request;
+            request.Method = HttpMethod.Delete;
             var uri = new RequestUri();
             uri.AppendPath("/models/", false);
             uri.AppendPath(model, true);
             uri.AppendQuery("api-version", _apiVersion, true);
-            request.SetUri(uri);
+            request.Uri = uri.ToUri();
             request.SetHeaderValue("Accept", "application/json");
             return message;
         }
@@ -3552,15 +3554,15 @@ namespace OpenAI
         internal PipelineMessage CreateCreateModerationRequest(RequestBody content, RequestOptions context)
         {
             var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
-            var request = message.PipelineRequest;
-            request.SetMethod("POST");
+            var request = message.Request;
+            request.Method = HttpMethod.Post;
             var uri = new RequestUri();
             uri.AppendPath("/moderations", false);
             uri.AppendQuery("api-version", _apiVersion, true);
-            request.SetUri(uri);
+            request.Uri = uri.ToUri();
             request.SetHeaderValue("Accept", "application/json");
             request.SetHeaderValue("Content-Type", "application/json");
-            request.SetContent(content);
+            request.Content = content;
             return message;
         }
 

@@ -6,8 +6,10 @@
 #nullable disable
 
 using System;
+using System.Net.Http;
 using System.ServiceModel.Rest;
 using System.ServiceModel.Rest.Core;
+using System.ServiceModel.Rest.Core.Pipeline;
 using System.ServiceModel.Rest.Experimental;
 using System.ServiceModel.Rest.Experimental.Core;
 using System.ServiceModel.Rest.Experimental.Core.Pipeline;
@@ -1697,14 +1699,14 @@ namespace UnbrandedTypeSpec
         internal PipelineMessage CreateTopActionRequest(DateTimeOffset action, RequestOptions context)
         {
             var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
-            var request = message.PipelineRequest;
-            request.SetMethod("GET");
+            var request = message.Request;
+            request.Method = HttpMethod.Get;
             var uri = new RequestUri();
             uri.Reset(_endpoint);
             uri.AppendPath("/top/", false);
             uri.AppendPath(action.ToString("O"), true);
             uri.AppendQuery("api-version", _apiVersion, true);
-            request.SetUri(uri);
+            request.Uri = uri.ToUri();
             request.SetHeaderValue("Accept", "application/json");
             return message;
         }
@@ -1712,13 +1714,13 @@ namespace UnbrandedTypeSpec
         internal PipelineMessage CreateTopAction2Request(RequestOptions context)
         {
             var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
-            var request = message.PipelineRequest;
-            request.SetMethod("GET");
+            var request = message.Request;
+            request.Method = HttpMethod.Get;
             var uri = new RequestUri();
             uri.Reset(_endpoint);
             uri.AppendPath("/top2", false);
             uri.AppendQuery("api-version", _apiVersion, true);
-            request.SetUri(uri);
+            request.Uri = uri.ToUri();
             request.SetHeaderValue("Accept", "application/json");
             return message;
         }
@@ -1726,61 +1728,61 @@ namespace UnbrandedTypeSpec
         internal PipelineMessage CreatePatchActionRequest(RequestBody content, RequestOptions context)
         {
             var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
-            var request = message.PipelineRequest;
-            request.SetMethod("PATCH");
+            var request = message.Request;
+            request.Method = new HttpMethod("PATCH");
             var uri = new RequestUri();
             uri.Reset(_endpoint);
             uri.AppendPath("/patch", false);
             uri.AppendQuery("api-version", _apiVersion, true);
-            request.SetUri(uri);
+            request.Uri = uri.ToUri();
             request.SetHeaderValue("Accept", "application/json");
             request.SetHeaderValue("Content-Type", "application/json");
-            request.SetContent(content);
+            request.Content = content;
             return message;
         }
 
         internal PipelineMessage CreateAnonymousBodyRequest(RequestBody content, RequestOptions context)
         {
             var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
-            var request = message.PipelineRequest;
-            request.SetMethod("POST");
+            var request = message.Request;
+            request.Method = HttpMethod.Post;
             var uri = new RequestUri();
             uri.Reset(_endpoint);
             uri.AppendPath("/anonymousBody", false);
             uri.AppendQuery("api-version", _apiVersion, true);
-            request.SetUri(uri);
+            request.Uri = uri.ToUri();
             request.SetHeaderValue("Accept", "application/json");
             request.SetHeaderValue("Content-Type", "application/json");
-            request.SetContent(content);
+            request.Content = content;
             return message;
         }
 
         internal PipelineMessage CreateFriendlyModelRequest(RequestBody content, RequestOptions context)
         {
             var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
-            var request = message.PipelineRequest;
-            request.SetMethod("POST");
+            var request = message.Request;
+            request.Method = HttpMethod.Post;
             var uri = new RequestUri();
             uri.Reset(_endpoint);
             uri.AppendPath("/friendlyName", false);
             uri.AppendQuery("api-version", _apiVersion, true);
-            request.SetUri(uri);
+            request.Uri = uri.ToUri();
             request.SetHeaderValue("Accept", "application/json");
             request.SetHeaderValue("Content-Type", "application/json");
-            request.SetContent(content);
+            request.Content = content;
             return message;
         }
 
         internal PipelineMessage CreateAddTimeHeaderRequest(RequestOptions context)
         {
             var message = _pipeline.CreateMessage(context, ResponseErrorClassifier204);
-            var request = message.PipelineRequest;
-            request.SetMethod("GET");
+            var request = message.Request;
+            request.Method = HttpMethod.Get;
             var uri = new RequestUri();
             uri.Reset(_endpoint);
             uri.AppendPath("/", false);
             uri.AppendQuery("api-version", _apiVersion, true);
-            request.SetUri(uri);
+            request.Uri = uri.ToUri();
             request.SetHeaderValue("Accept", "application/json");
             request.SetHeaderValue("Repeatability-First-Sent", DateTimeOffset.Now.ToString("R"));
             return message;
@@ -1789,46 +1791,46 @@ namespace UnbrandedTypeSpec
         internal PipelineMessage CreateStringFormatRequest(Guid subscriptionId, RequestBody content, RequestOptions context)
         {
             var message = _pipeline.CreateMessage(context, ResponseErrorClassifier204);
-            var request = message.PipelineRequest;
-            request.SetMethod("POST");
+            var request = message.Request;
+            request.Method = HttpMethod.Post;
             var uri = new RequestUri();
             uri.Reset(_endpoint);
             uri.AppendPath("/stringFormat/", false);
             uri.AppendPath(subscriptionId.ToString(), true);
             uri.AppendQuery("api-version", _apiVersion, true);
-            request.SetUri(uri);
+            request.Uri = uri.ToUri();
             request.SetHeaderValue("Accept", "application/json");
             request.SetHeaderValue("Content-Type", "application/json");
-            request.SetContent(content);
+            request.Content = content;
             return message;
         }
 
         internal PipelineMessage CreateProjectedNameModelRequest(RequestBody content, RequestOptions context)
         {
             var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
-            var request = message.PipelineRequest;
-            request.SetMethod("POST");
+            var request = message.Request;
+            request.Method = HttpMethod.Post;
             var uri = new RequestUri();
             uri.Reset(_endpoint);
             uri.AppendPath("/projectedName", false);
             uri.AppendQuery("api-version", _apiVersion, true);
-            request.SetUri(uri);
+            request.Uri = uri.ToUri();
             request.SetHeaderValue("Accept", "application/json");
             request.SetHeaderValue("Content-Type", "application/json");
-            request.SetContent(content);
+            request.Content = content;
             return message;
         }
 
         internal PipelineMessage CreateReturnsAnonymousModelRequest(RequestOptions context)
         {
             var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
-            var request = message.PipelineRequest;
-            request.SetMethod("POST");
+            var request = message.Request;
+            request.Method = HttpMethod.Post;
             var uri = new RequestUri();
             uri.Reset(_endpoint);
             uri.AppendPath("/returnsAnonymousModel", false);
             uri.AppendQuery("api-version", _apiVersion, true);
-            request.SetUri(uri);
+            request.Uri = uri.ToUri();
             request.SetHeaderValue("Accept", "application/json");
             return message;
         }
@@ -1836,14 +1838,14 @@ namespace UnbrandedTypeSpec
         internal PipelineMessage CreateHeadAsBooleanRequest(string id, RequestOptions context)
         {
             var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200To300400To500);
-            var request = message.PipelineRequest;
-            request.SetMethod("HEAD");
+            var request = message.Request;
+            request.Method = HttpMethod.Head;
             var uri = new RequestUri();
             uri.Reset(_endpoint);
             uri.AppendPath("/headAsBoolean/", false);
             uri.AppendPath(id, true);
             uri.AppendQuery("api-version", _apiVersion, true);
-            request.SetUri(uri);
+            request.Uri = uri.ToUri();
             request.SetHeaderValue("Accept", "application/json");
             return message;
         }
@@ -1851,8 +1853,8 @@ namespace UnbrandedTypeSpec
         internal PipelineMessage CreateSayHiRequest(string headParameter, string queryParameter, string optionalQuery, RequestOptions context)
         {
             var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
-            var request = message.PipelineRequest;
-            request.SetMethod("GET");
+            var request = message.Request;
+            request.Method = HttpMethod.Get;
             var uri = new RequestUri();
             uri.Reset(_endpoint);
             uri.AppendPath("/hello", false);
@@ -1862,7 +1864,7 @@ namespace UnbrandedTypeSpec
                 uri.AppendQuery("optionalQuery", optionalQuery, true);
             }
             uri.AppendQuery("api-version", _apiVersion, true);
-            request.SetUri(uri);
+            request.Uri = uri.ToUri();
             request.SetHeaderValue("head-parameter", headParameter);
             request.SetHeaderValue("Accept", "application/json");
             return message;
@@ -1871,49 +1873,49 @@ namespace UnbrandedTypeSpec
         internal PipelineMessage CreateHelloAgainRequest(string p2, string p1, RequestBody content, RequestOptions context)
         {
             var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
-            var request = message.PipelineRequest;
-            request.SetMethod("GET");
+            var request = message.Request;
+            request.Method = HttpMethod.Get;
             var uri = new RequestUri();
             uri.Reset(_endpoint);
             uri.AppendPath("/againHi/", false);
             uri.AppendPath(p2, true);
             uri.AppendQuery("api-version", _apiVersion, true);
-            request.SetUri(uri);
+            request.Uri = uri.ToUri();
             request.SetHeaderValue("p1", p1);
             request.SetHeaderValue("Accept", "application/json");
             request.SetHeaderValue("content-type", "text/plain");
-            request.SetContent(content);
+            request.Content = content;
             return message;
         }
 
         internal PipelineMessage CreateNoContentTypeRequest(string p2, string p1, RequestBody content, RequestOptions context)
         {
             var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
-            var request = message.PipelineRequest;
-            request.SetMethod("GET");
+            var request = message.Request;
+            request.Method = HttpMethod.Get;
             var uri = new RequestUri();
             uri.Reset(_endpoint);
             uri.AppendPath("/noContentType/", false);
             uri.AppendPath(p2, true);
             uri.AppendQuery("api-version", _apiVersion, true);
-            request.SetUri(uri);
+            request.Uri = uri.ToUri();
             request.SetHeaderValue("p1", p1);
             request.SetHeaderValue("Accept", "application/json");
             request.SetHeaderValue("Content-Type", "application/json");
-            request.SetContent(content);
+            request.Content = content;
             return message;
         }
 
         internal PipelineMessage CreateHelloDemo2Request(RequestOptions context)
         {
             var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
-            var request = message.PipelineRequest;
-            request.SetMethod("GET");
+            var request = message.Request;
+            request.Method = HttpMethod.Get;
             var uri = new RequestUri();
             uri.Reset(_endpoint);
             uri.AppendPath("/demoHi", false);
             uri.AppendQuery("api-version", _apiVersion, true);
-            request.SetUri(uri);
+            request.Uri = uri.ToUri();
             request.SetHeaderValue("Accept", "application/json");
             return message;
         }
@@ -1921,31 +1923,31 @@ namespace UnbrandedTypeSpec
         internal PipelineMessage CreateCreateLiteralRequest(RequestBody content, RequestOptions context)
         {
             var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
-            var request = message.PipelineRequest;
-            request.SetMethod("POST");
+            var request = message.Request;
+            request.Method = HttpMethod.Post;
             var uri = new RequestUri();
             uri.Reset(_endpoint);
             uri.AppendPath("/literal", false);
             uri.AppendQuery("api-version", _apiVersion, true);
-            request.SetUri(uri);
+            request.Uri = uri.ToUri();
             request.SetHeaderValue("Accept", "application/json");
             request.SetHeaderValue("Content-Type", "application/json");
-            request.SetContent(content);
+            request.Content = content;
             return message;
         }
 
         internal PipelineMessage CreateHelloLiteralRequest(RequestOptions context)
         {
             var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
-            var request = message.PipelineRequest;
-            request.SetMethod("GET");
+            var request = message.Request;
+            request.Method = HttpMethod.Get;
             var uri = new RequestUri();
             uri.Reset(_endpoint);
             uri.AppendPath("/helloLiteral/", false);
             uri.AppendPath(123.ToString(), true);
             uri.AppendQuery("p3", "true", true);
             uri.AppendQuery("api-version", _apiVersion, true);
-            request.SetUri(uri);
+            request.Uri = uri.ToUri();
             request.SetHeaderValue("p1", "test");
             request.SetHeaderValue("Accept", "application/json");
             return message;
@@ -1954,13 +1956,13 @@ namespace UnbrandedTypeSpec
         internal PipelineMessage CreateGetUnknownValueRequest(RequestOptions context)
         {
             var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
-            var request = message.PipelineRequest;
-            request.SetMethod("GET");
+            var request = message.Request;
+            request.Method = HttpMethod.Get;
             var uri = new RequestUri();
             uri.Reset(_endpoint);
             uri.AppendPath("/unknown-value", false);
             uri.AppendQuery("api-version", _apiVersion, true);
-            request.SetUri(uri);
+            request.Uri = uri.ToUri();
             request.SetHeaderValue("Accept", "application/json");
             return message;
         }
@@ -1968,29 +1970,29 @@ namespace UnbrandedTypeSpec
         internal PipelineMessage CreateInternalProtocolRequest(RequestBody content, RequestOptions context)
         {
             var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
-            var request = message.PipelineRequest;
-            request.SetMethod("POST");
+            var request = message.Request;
+            request.Method = HttpMethod.Post;
             var uri = new RequestUri();
             uri.Reset(_endpoint);
             uri.AppendPath("/internalProtocol", false);
             uri.AppendQuery("api-version", _apiVersion, true);
-            request.SetUri(uri);
+            request.Uri = uri.ToUri();
             request.SetHeaderValue("Accept", "application/json");
             request.SetHeaderValue("Content-Type", "application/json");
-            request.SetContent(content);
+            request.Content = content;
             return message;
         }
 
         internal PipelineMessage CreateStillConvenientRequest(RequestOptions context)
         {
             var message = _pipeline.CreateMessage(context, ResponseErrorClassifier204);
-            var request = message.PipelineRequest;
-            request.SetMethod("GET");
+            var request = message.Request;
+            request.Method = HttpMethod.Get;
             var uri = new RequestUri();
             uri.Reset(_endpoint);
             uri.AppendPath("/stillConvenient", false);
             uri.AppendQuery("api-version", _apiVersion, true);
-            request.SetUri(uri);
+            request.Uri = uri.ToUri();
             request.SetHeaderValue("Accept", "application/json");
             return message;
         }
@@ -2014,7 +2016,7 @@ namespace UnbrandedTypeSpec
         {
             public override bool IsErrorResponse(PipelineMessage message)
             {
-                return message.PipelineResponse.Status switch
+                return message.Response.Status switch
                 {
                     >= 200 and < 300 => false,
                     >= 400 and < 500 => false,

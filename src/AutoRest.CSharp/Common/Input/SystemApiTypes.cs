@@ -2,8 +2,10 @@
 // Licensed under the MIT License.
 
 using System;
+using System.Net.Http;
 using System.ServiceModel.Rest;
 using System.ServiceModel.Rest.Core;
+using System.ServiceModel.Rest.Core.Pipeline;
 using System.ServiceModel.Rest.Experimental;
 using System.ServiceModel.Rest.Experimental.Core;
 using System.ServiceModel.Rest.Experimental.Core.Pipeline;
@@ -44,7 +46,7 @@ namespace AutoRest.CSharp.Common.Input
         public override string HttpPipelineCreateMessageName => nameof(MessagePipeline.CreateMessage);
 
         public override Type HttpMessageType => typeof(PipelineMessage);
-        public override string HttpMessageResponseName => nameof(PipelineMessage.PipelineResponse);
+        public override string HttpMessageResponseName => nameof(PipelineMessage.Response);
 
         public override Type ClientDiagnosticsType => typeof(TelemetrySource);
         public override string ClientDiagnosticsCreateScopeName => nameof(TelemetrySource.CreateSpan);
@@ -70,17 +72,27 @@ namespace AutoRest.CSharp.Common.Input
         public override FormattableString ProtocolReturnStartString => $"return {ResponseType}.{FromResponseName}(";
         public override FormattableString ProtocolReturnEndString => $");";
 
-        public override string HttpMessageRequestName => nameof(PipelineMessage.PipelineRequest);
+        public override string HttpMessageRequestName => nameof(PipelineMessage.Request);
 
         public override FormattableString GetSetMethodString(string requestName, string method)
-            => $"{requestName}.SetMethod(\"{method}\");";
+        {
+            return method == "PATCH"
+                ? (FormattableString)$"{requestName}.Method = new {typeof(HttpMethod)}(\"{method}\");"
+                : $"{requestName}.Method = {typeof(HttpMethod)}.{GetHttpMethodName(method)};";
+        }
+
+        private string GetHttpMethodName(string method)
+        {
+            return $"{method[0]}{method.Substring(1).ToLowerInvariant()}";
+        }
+
         public override FormattableString GetSetUriString(string requestName, string uriName)
-            => $"{requestName}.SetUri({uriName});";
+            => $"{requestName}.Uri = {uriName}.{nameof(RequestUri.ToUri)}();";
 
         public override Action<CodeWriter, CodeWriterDeclaration, RequestHeader, ClientFields?> WriteHeaderMethod => RequestWriterHelpers.WriteHeaderSystem;
 
         public override FormattableString GetSetContentString(string requestName, string contentName)
-            => $"{requestName}.SetContent({contentName});";
+            => $"{requestName}.Content = {contentName};";
 
         public override Type RequestContentType => typeof(RequestBody);
         public override string ToRequestContentName => "ToRequestBody";
