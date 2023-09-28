@@ -17,7 +17,6 @@ using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
-using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Output.Samples.Models;
 using Azure;
 using NUnit.Framework;
@@ -25,7 +24,7 @@ using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
 namespace AutoRest.CSharp.LowLevel.Output.Samples
 {
-    internal class DpgClientSampleProvider : TypeProvider
+    internal class DpgClientSampleProvider : ExpressionTypeProvider
     {
         public LowLevelClient Client { get; }
 
@@ -39,10 +38,7 @@ namespace AutoRest.CSharp.LowLevel.Output.Samples
         private bool? _isEmpty;
         public bool IsEmpty => _isEmpty ??= !Methods.Any();
 
-        private IEnumerable<Method>? _methods;
-        public IEnumerable<Method> Methods => _methods ??= EnsureMethods();
-
-        protected virtual IEnumerable<Method> EnsureMethods()
+        protected override IEnumerable<Method> EnsureMethods()
         {
             foreach (var sample in Client.ClientMethods.SelectMany(m => m.Samples))
             {

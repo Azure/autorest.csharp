@@ -14,10 +14,14 @@ using FirstTestTypeSpec;
 using FirstTestTypeSpec.Models;
 using NUnit.Framework;
 
-namespace FirstTestTypeSpec.Samples
+namespace FirstTestTypeSpec.Tests
 {
-    public partial class Samples_FirstTestTypeSpecClient
+    public partial class FirstTestTypeSpecClientTests : FirstTestTypeSpecTestBase
     {
+        public FirstTestTypeSpecClientTests(bool isAsync) : base(isAsync)
+        {
+        }
+
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_TopAction_ShortVersion()

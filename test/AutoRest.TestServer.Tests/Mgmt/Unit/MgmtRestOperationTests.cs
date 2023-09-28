@@ -73,6 +73,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.Unit
                 useOverloadsBetweenProtocolAndConvenience: true,
                 keepNonOverloadableProtocolSignature: false,
                 useCoreDataFactoryReplacements: true,
+                generateTestScaffolding: false,
                 projectFolder: "/..",
                 existingProjectFolder: null,
                 protocolMethodList: Array.Empty<string>(),
