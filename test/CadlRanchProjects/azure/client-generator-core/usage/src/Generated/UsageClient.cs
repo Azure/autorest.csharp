@@ -66,7 +66,8 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage
             Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await InputToInputOutputAsync(body.ToRequestContent(), context).ConfigureAwait(false);
+            using RequestContent content = body.ToRequestContent();
+            Response response = await InputToInputOutputAsync(content, context).ConfigureAwait(false);
             return response;
         }
 
@@ -87,7 +88,8 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage
             Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = InputToInputOutput(body.ToRequestContent(), context);
+            using RequestContent content = body.ToRequestContent();
+            Response response = InputToInputOutput(content, context);
             return response;
         }
 

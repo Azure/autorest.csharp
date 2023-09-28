@@ -55,7 +55,8 @@ namespace Encode.Bytes
             Argument.AssertNotNull(value, nameof(value));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await DefaultAsync(RequestContentHelper.FromObject(value), context).ConfigureAwait(false);
+            using RequestContent content = RequestContentHelper.FromObject(value);
+            Response response = await DefaultAsync(content, context).ConfigureAwait(false);
             return response;
         }
 
@@ -68,7 +69,8 @@ namespace Encode.Bytes
             Argument.AssertNotNull(value, nameof(value));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = Default(RequestContentHelper.FromObject(value), context);
+            using RequestContent content = RequestContentHelper.FromObject(value);
+            Response response = Default(content, context);
             return response;
         }
 
@@ -159,7 +161,8 @@ namespace Encode.Bytes
             Argument.AssertNotNull(value, nameof(value));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await OctetStreamAsync(RequestContentHelper.FromObject(value), context).ConfigureAwait(false);
+            using RequestContent content = RequestContentHelper.FromObject(value);
+            Response response = await OctetStreamAsync(content, context).ConfigureAwait(false);
             return response;
         }
 
@@ -172,7 +175,8 @@ namespace Encode.Bytes
             Argument.AssertNotNull(value, nameof(value));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = OctetStream(RequestContentHelper.FromObject(value), context);
+            using RequestContent content = RequestContentHelper.FromObject(value);
+            Response response = OctetStream(content, context);
             return response;
         }
 
@@ -263,7 +267,8 @@ namespace Encode.Bytes
             Argument.AssertNotNull(value, nameof(value));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await CustomContentTypeAsync(RequestContentHelper.FromObject(value), context).ConfigureAwait(false);
+            using RequestContent content = RequestContentHelper.FromObject(value);
+            Response response = await CustomContentTypeAsync(content, context).ConfigureAwait(false);
             return response;
         }
 
@@ -276,7 +281,8 @@ namespace Encode.Bytes
             Argument.AssertNotNull(value, nameof(value));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = CustomContentType(RequestContentHelper.FromObject(value), context);
+            using RequestContent content = RequestContentHelper.FromObject(value);
+            Response response = CustomContentType(content, context);
             return response;
         }
 
@@ -367,7 +373,8 @@ namespace Encode.Bytes
             Argument.AssertNotNull(value, nameof(value));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await Base64Async(RequestContentHelper.FromObject(value), context).ConfigureAwait(false);
+            using RequestContent content = RequestContentHelper.FromObject(value);
+            Response response = await Base64Async(content, context).ConfigureAwait(false);
             return response;
         }
 
@@ -380,7 +387,8 @@ namespace Encode.Bytes
             Argument.AssertNotNull(value, nameof(value));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = Base64(RequestContentHelper.FromObject(value), context);
+            using RequestContent content = RequestContentHelper.FromObject(value);
+            Response response = Base64(content, context);
             return response;
         }
 
@@ -471,7 +479,8 @@ namespace Encode.Bytes
             Argument.AssertNotNull(value, nameof(value));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await Base64urlAsync(RequestContentHelper.FromObject(value), context).ConfigureAwait(false);
+            using RequestContent content = RequestContentHelper.FromObject(value);
+            Response response = await Base64urlAsync(content, context).ConfigureAwait(false);
             return response;
         }
 
@@ -484,7 +493,8 @@ namespace Encode.Bytes
             Argument.AssertNotNull(value, nameof(value));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = Base64url(RequestContentHelper.FromObject(value), context);
+            using RequestContent content = RequestContentHelper.FromObject(value);
+            Response response = Base64url(content, context);
             return response;
         }
 

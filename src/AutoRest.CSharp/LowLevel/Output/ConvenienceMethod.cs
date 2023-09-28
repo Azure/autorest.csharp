@@ -21,17 +21,20 @@ namespace AutoRest.CSharp.Output.Models
     {
         public (IReadOnlyList<FormattableString> ParameterValues, Action<CodeWriter> Converter) GetParameterValues(CodeWriterDeclaration contextVariable)
         {
-            var (parameterValues, spreadVariable) = PrepareConvenienceMethodParameters(contextVariable);
+            var (parameterValues, contentInfo, spreadVariable) = PrepareConvenienceMethodParameters(contextVariable);
 
-            var converter = EnsureConvenienceBodyConverter(spreadVariable, contextVariable);
+            var converter = EnsureConvenienceBodyConverter(spreadVariable, contextVariable, contentInfo);
 
             return (parameterValues, converter);
         }
 
-        private (IReadOnlyList<FormattableString> ParameterValues, CodeWriterDeclaration? SpreadVariable) PrepareConvenienceMethodParameters(CodeWriterDeclaration contextVariable)
+        private record ContentInfo(CodeWriterDeclaration ContentVariable, FormattableString ContentValue);
+
+        private (IReadOnlyList<FormattableString> ParameterValues, ContentInfo? ContentInfo,  CodeWriterDeclaration? SpreadVariable) PrepareConvenienceMethodParameters(CodeWriterDeclaration contextVariable)
         {
             CodeWriterDeclaration? spreadVariable = null;
             var parameters = new List<FormattableString>();
+            ContentInfo? contentInfo = null;
             foreach (var converter in ProtocolToConvenienceParameterConverters)
             {
                 var protocolParameter = converter.Protocol;
@@ -43,7 +46,18 @@ namespace AutoRest.CSharp.Output.Models
                 else if (convenienceParameter != null)
                 {
                     if (converter.ConvenienceSpread == null)
-                        parameters.Add(convenienceParameter.GetConversionFormattable(protocolParameter.Type));
+                    {
+                        var parameter = convenienceParameter.GetConversionFormattable(protocolParameter.Type);
+                        if (protocolParameter.Type.EqualsIgnoreNullable(typeof(RequestContent)))
+                        {
+                            contentInfo = new ContentInfo(new CodeWriterDeclaration(KnownParameters.RequestContent.Name), $"{parameter:I}");
+                            parameters.Add($"{contentInfo.ContentVariable:I}");
+                        }
+                        else
+                        {
+                            parameters.Add(parameter);
+                        }
+                    }
                     else
                     {
                         // we put a declaration here to avoid possible local variable naming collisions
@@ -57,14 +71,21 @@ namespace AutoRest.CSharp.Output.Models
                 }
             }
 
-            return (parameters, spreadVariable);
+            return (parameters, contentInfo, spreadVariable);
         }
 
-        private Action<CodeWriter> EnsureConvenienceBodyConverter(CodeWriterDeclaration? spreadVariable, CodeWriterDeclaration contextVariable)
+        private Action<CodeWriter> EnsureConvenienceBodyConverter(CodeWriterDeclaration? spreadVariable, CodeWriterDeclaration contextVariable, ContentInfo? contentInfo)
         {
             var convenienceSpread = ProtocolToConvenienceParameterConverters.Select(c => c.ConvenienceSpread).WhereNotNull().SingleOrDefault();
             if (spreadVariable == null || convenienceSpread == null)
-                return writer => WriteCancellationTokenToRequestContext(writer, contextVariable);
+                return writer =>
+                {
+                    WriteCancellationTokenToRequestContext(writer, contextVariable);
+                    if (contentInfo != null)
+                    {
+                        WriteBodyToRequestContent(writer, contentInfo.ContentVariable, contentInfo.ContentValue);
+                    }
+                };
 
             // we need to get all the property initializers therefore here we use serialization constructor
             var serializationCtor = convenienceSpread.BackingModel.SerializationConstructor;
@@ -89,6 +110,11 @@ namespace AutoRest.CSharp.Output.Models
         private static void WriteCancellationTokenToRequestContext(CodeWriter writer, CodeWriterDeclaration contextVariable)
         {
             writer.Line($"{typeof(RequestContext)} {contextVariable:D} = FromCancellationToken({KnownParameters.CancellationTokenParameter.Name});");
+        }
+
+        private static void WriteBodyToRequestContent(CodeWriter writer, CodeWriterDeclaration contentVariable, FormattableString requestContentValue)
+        {
+            writer.Line($"using {typeof(RequestContent)} {contentVariable:D} = {requestContentValue};");
         }
 
         public bool IsDeprecatedForExamples()

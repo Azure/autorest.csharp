@@ -53,7 +53,8 @@ namespace Parameters.BodyOptionality
         public virtual async Task<Response> SetAsync(BodyModel body = null, CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await SetAsync(body?.ToRequestContent(), context).ConfigureAwait(false);
+            using RequestContent content = body?.ToRequestContent();
+            Response response = await SetAsync(content, context).ConfigureAwait(false);
             return response;
         }
 
@@ -63,7 +64,8 @@ namespace Parameters.BodyOptionality
         public virtual Response Set(BodyModel body = null, CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = Set(body?.ToRequestContent(), context);
+            using RequestContent content = body?.ToRequestContent();
+            Response response = Set(content, context);
             return response;
         }
 
@@ -145,7 +147,8 @@ namespace Parameters.BodyOptionality
         public virtual async Task<Response> OmitAsync(BodyModel body = null, CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await OmitAsync(body?.ToRequestContent(), context).ConfigureAwait(false);
+            using RequestContent content = body?.ToRequestContent();
+            Response response = await OmitAsync(content, context).ConfigureAwait(false);
             return response;
         }
 
@@ -155,7 +158,8 @@ namespace Parameters.BodyOptionality
         public virtual Response Omit(BodyModel body = null, CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = Omit(body?.ToRequestContent(), context);
+            using RequestContent content = body?.ToRequestContent();
+            Response response = Omit(content, context);
             return response;
         }
 
