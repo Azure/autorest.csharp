@@ -15,7 +15,6 @@ using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
-using AutoRest.CSharp.Output.Samples.Models;
 using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.Core;
@@ -314,7 +313,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 }
                 else if (responseType.IsFrameworkType && responseType.FrameworkType == typeof(BinaryData))
                 {
-                    _writer.Line($"return {typeof(Response)}.{nameof(Response.FromValue)}({responseVariable:I}.Content, {responseVariable:I});");
+                    _writer.Line($"return {Configuration.ApiTypes.ResponseType}.{Configuration.ApiTypes.FromValueName}({responseVariable:I}.Content, {responseVariable:I});");
                 }
                 else if (responseType.IsFrameworkType)
                 {

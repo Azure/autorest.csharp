@@ -117,5 +117,16 @@ namespace AutoRest.CSharp.Common.Input
         public override Type StatusCodeClassifierType => typeof(StatusResponseClassifier);
 
         public override Type JsonElementExtensionsType => typeof(ModelSerializationExtensions);
+
+        public override ValueExpression GetCreateFromStreamSampleExpression(ValueExpression freeFormObjectExpression)
+            => new TypeReference(Configuration.ApiTypes.RequestContentType)
+            .InvokeStatic(
+                Configuration.ApiTypes.RequestContentCreateName,
+                new InvokeInstanceMethodExpression(
+                    new TypeReference(typeof(BinaryData)).InvokeStatic(nameof(BinaryData.FromObjectAsJson), freeFormObjectExpression),
+                    nameof(BinaryData.ToStream),
+                    Array.Empty<ValueExpression>(),
+                    null,
+                    false));
     }
 }

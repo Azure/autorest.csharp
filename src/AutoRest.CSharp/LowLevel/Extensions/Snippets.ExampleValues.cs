@@ -13,7 +13,6 @@ using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models.Serialization;
-using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Output.Samples.Models;
 using AutoRest.CSharp.Utilities;
@@ -215,7 +214,7 @@ namespace AutoRest.CSharp.LowLevel.Extensions
             else
             {
                 var freeFormObjectExpression = GetExpressionForFreeFormObject(value, includeCollectionInitialization: true);
-                return new TypeReference(Configuration.ApiTypes.RequestContentType).InvokeStatic(Configuration.ApiTypes.RequestContentCreateName, freeFormObjectExpression);
+                return Configuration.ApiTypes.GetCreateFromStreamSampleExpression(freeFormObjectExpression);
             }
         }
 

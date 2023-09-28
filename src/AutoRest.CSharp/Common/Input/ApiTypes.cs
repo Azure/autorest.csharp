@@ -131,5 +131,7 @@ namespace AutoRest.CSharp.Common.Input
         public string ResponseClassifierIsErrorResponseName => nameof(ResponseErrorClassifier.IsErrorResponse);
 
         public abstract Type JsonElementExtensionsType { get; }
+
+        public abstract ValueExpression GetCreateFromStreamSampleExpression(ValueExpression freeFormObjectExpression);
     }
 }

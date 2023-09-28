@@ -17,93 +17,93 @@ using OpenAI.Models;
 
 namespace OpenAI.Samples
 {
-    public class Samples_OpenAIClient
+    public partial class Samples_OpenAIClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_CreateChatCompletion()
+        public void Example_CreateChatCompletion_ShortVersion()
         {
             OpenAIClient client = new OpenAIClient();
 
             RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
             {
                 model = "gpt4",
-                messages = new List<object>()
-{
+                messages = new object[]
+            {
 new
 {
 role = "system",
 content = "<content>",
 }
-},
+            },
             }).ToStream());
             Result result = client.CreateChatCompletion(content);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("id").ToString());
-            Console.WriteLine(result0.GetProperty("object").ToString());
-            Console.WriteLine(result0.GetProperty("created").ToString());
-            Console.WriteLine(result0.GetProperty("model").ToString());
-            Console.WriteLine(result0.GetProperty("choices")[0].GetProperty("index").ToString());
-            Console.WriteLine(result0.GetProperty("choices")[0].GetProperty("message").GetProperty("role").ToString());
-            Console.WriteLine(result0.GetProperty("choices")[0].GetProperty("message").GetProperty("content").ToString());
-            Console.WriteLine(result0.GetProperty("choices")[0].GetProperty("finish_reason").ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("id").ToString());
+            Console.WriteLine(element.GetProperty("object").ToString());
+            Console.WriteLine(element.GetProperty("created").ToString());
+            Console.WriteLine(element.GetProperty("model").ToString());
+            Console.WriteLine(element.GetProperty("choices")[0].GetProperty("index").ToString());
+            Console.WriteLine(element.GetProperty("choices")[0].GetProperty("message").GetProperty("role").ToString());
+            Console.WriteLine(element.GetProperty("choices")[0].GetProperty("message").GetProperty("content").ToString());
+            Console.WriteLine(element.GetProperty("choices")[0].GetProperty("finish_reason").ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_CreateChatCompletion_Async()
+        public async Task Example_CreateChatCompletion_ShortVersion_Async()
         {
             OpenAIClient client = new OpenAIClient();
 
             RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
             {
                 model = "gpt4",
-                messages = new List<object>()
-{
+                messages = new object[]
+            {
 new
 {
 role = "system",
 content = "<content>",
 }
-},
+            },
             }).ToStream());
             Result result = await client.CreateChatCompletionAsync(content);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("id").ToString());
-            Console.WriteLine(result0.GetProperty("object").ToString());
-            Console.WriteLine(result0.GetProperty("created").ToString());
-            Console.WriteLine(result0.GetProperty("model").ToString());
-            Console.WriteLine(result0.GetProperty("choices")[0].GetProperty("index").ToString());
-            Console.WriteLine(result0.GetProperty("choices")[0].GetProperty("message").GetProperty("role").ToString());
-            Console.WriteLine(result0.GetProperty("choices")[0].GetProperty("message").GetProperty("content").ToString());
-            Console.WriteLine(result0.GetProperty("choices")[0].GetProperty("finish_reason").ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("id").ToString());
+            Console.WriteLine(element.GetProperty("object").ToString());
+            Console.WriteLine(element.GetProperty("created").ToString());
+            Console.WriteLine(element.GetProperty("model").ToString());
+            Console.WriteLine(element.GetProperty("choices")[0].GetProperty("index").ToString());
+            Console.WriteLine(element.GetProperty("choices")[0].GetProperty("message").GetProperty("role").ToString());
+            Console.WriteLine(element.GetProperty("choices")[0].GetProperty("message").GetProperty("content").ToString());
+            Console.WriteLine(element.GetProperty("choices")[0].GetProperty("finish_reason").ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_CreateChatCompletion_Convenience()
+        public void Example_CreateChatCompletion_ShortVersion_Convenience()
         {
             OpenAIClient client = new OpenAIClient();
 
-            CreateChatCompletionRequest body = new CreateChatCompletionRequest(ChatCompletionModels.Gpt4, new List<ChatCompletionRequestMessage>()
-{
-new ChatCompletionRequestMessage(MessageRole.System,"<content>")
-});
+            CreateChatCompletionRequest body = new CreateChatCompletionRequest(ChatCompletionModels.Gpt4, new ChatCompletionRequestMessage[]
+            {
+new ChatCompletionRequestMessage(MessageRole.System, "<content>")
+            });
             Result<CreateChatCompletionResponse> result = client.CreateChatCompletion(body);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_CreateChatCompletion_Convenience_Async()
+        public async Task Example_CreateChatCompletion_ShortVersion_Convenience_Async()
         {
             OpenAIClient client = new OpenAIClient();
 
-            CreateChatCompletionRequest body = new CreateChatCompletionRequest(ChatCompletionModels.Gpt4, new List<ChatCompletionRequestMessage>()
-{
-new ChatCompletionRequestMessage(MessageRole.System,"<content>")
-});
+            CreateChatCompletionRequest body = new CreateChatCompletionRequest(ChatCompletionModels.Gpt4, new ChatCompletionRequestMessage[]
+            {
+new ChatCompletionRequestMessage(MessageRole.System, "<content>")
+            });
             Result<CreateChatCompletionResponse> result = await client.CreateChatCompletionAsync(body);
         }
 
@@ -116,8 +116,8 @@ new ChatCompletionRequestMessage(MessageRole.System,"<content>")
             RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
             {
                 model = "gpt4",
-                messages = new List<object>()
-{
+                messages = new object[]
+            {
 new
 {
 role = "system",
@@ -129,9 +129,9 @@ name = "<name>",
 arguments = "<arguments>",
 },
 }
-},
-                functions = new List<object>()
-{
+            },
+                functions = new object[]
+            {
 new
 {
 name = "<name>",
@@ -141,7 +141,7 @@ parameters = new
 key = new object(),
 },
 }
-},
+            },
                 function_call = new
                 {
                     name = "<name>",
@@ -150,10 +150,10 @@ key = new object(),
                 top_p = 123.45,
                 n = 1234L,
                 max_tokens = 1234L,
-                stop = new List<object>()
-{
+                stop = new object[]
+            {
 "<stop>"
-},
+            },
                 presence_penalty = 123.45,
                 frequency_penalty = 123.45,
                 logit_bias = new
@@ -165,20 +165,20 @@ key = new object(),
             }).ToStream());
             Result result = client.CreateChatCompletion(content);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("id").ToString());
-            Console.WriteLine(result0.GetProperty("object").ToString());
-            Console.WriteLine(result0.GetProperty("created").ToString());
-            Console.WriteLine(result0.GetProperty("model").ToString());
-            Console.WriteLine(result0.GetProperty("choices")[0].GetProperty("index").ToString());
-            Console.WriteLine(result0.GetProperty("choices")[0].GetProperty("message").GetProperty("role").ToString());
-            Console.WriteLine(result0.GetProperty("choices")[0].GetProperty("message").GetProperty("content").ToString());
-            Console.WriteLine(result0.GetProperty("choices")[0].GetProperty("message").GetProperty("function_call").GetProperty("name").ToString());
-            Console.WriteLine(result0.GetProperty("choices")[0].GetProperty("message").GetProperty("function_call").GetProperty("arguments").ToString());
-            Console.WriteLine(result0.GetProperty("choices")[0].GetProperty("finish_reason").ToString());
-            Console.WriteLine(result0.GetProperty("usage").GetProperty("prompt_tokens").ToString());
-            Console.WriteLine(result0.GetProperty("usage").GetProperty("completion_tokens").ToString());
-            Console.WriteLine(result0.GetProperty("usage").GetProperty("total_tokens").ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("id").ToString());
+            Console.WriteLine(element.GetProperty("object").ToString());
+            Console.WriteLine(element.GetProperty("created").ToString());
+            Console.WriteLine(element.GetProperty("model").ToString());
+            Console.WriteLine(element.GetProperty("choices")[0].GetProperty("index").ToString());
+            Console.WriteLine(element.GetProperty("choices")[0].GetProperty("message").GetProperty("role").ToString());
+            Console.WriteLine(element.GetProperty("choices")[0].GetProperty("message").GetProperty("content").ToString());
+            Console.WriteLine(element.GetProperty("choices")[0].GetProperty("message").GetProperty("function_call").GetProperty("name").ToString());
+            Console.WriteLine(element.GetProperty("choices")[0].GetProperty("message").GetProperty("function_call").GetProperty("arguments").ToString());
+            Console.WriteLine(element.GetProperty("choices")[0].GetProperty("finish_reason").ToString());
+            Console.WriteLine(element.GetProperty("usage").GetProperty("prompt_tokens").ToString());
+            Console.WriteLine(element.GetProperty("usage").GetProperty("completion_tokens").ToString());
+            Console.WriteLine(element.GetProperty("usage").GetProperty("total_tokens").ToString());
         }
 
         [Test]
@@ -190,8 +190,8 @@ key = new object(),
             RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
             {
                 model = "gpt4",
-                messages = new List<object>()
-{
+                messages = new object[]
+            {
 new
 {
 role = "system",
@@ -203,9 +203,9 @@ name = "<name>",
 arguments = "<arguments>",
 },
 }
-},
-                functions = new List<object>()
-{
+            },
+                functions = new object[]
+            {
 new
 {
 name = "<name>",
@@ -215,7 +215,7 @@ parameters = new
 key = new object(),
 },
 }
-},
+            },
                 function_call = new
                 {
                     name = "<name>",
@@ -224,10 +224,10 @@ key = new object(),
                 top_p = 123.45,
                 n = 1234L,
                 max_tokens = 1234L,
-                stop = new List<object>()
-{
+                stop = new object[]
+            {
 "<stop>"
-},
+            },
                 presence_penalty = 123.45,
                 frequency_penalty = 123.45,
                 logit_bias = new
@@ -239,20 +239,20 @@ key = new object(),
             }).ToStream());
             Result result = await client.CreateChatCompletionAsync(content);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("id").ToString());
-            Console.WriteLine(result0.GetProperty("object").ToString());
-            Console.WriteLine(result0.GetProperty("created").ToString());
-            Console.WriteLine(result0.GetProperty("model").ToString());
-            Console.WriteLine(result0.GetProperty("choices")[0].GetProperty("index").ToString());
-            Console.WriteLine(result0.GetProperty("choices")[0].GetProperty("message").GetProperty("role").ToString());
-            Console.WriteLine(result0.GetProperty("choices")[0].GetProperty("message").GetProperty("content").ToString());
-            Console.WriteLine(result0.GetProperty("choices")[0].GetProperty("message").GetProperty("function_call").GetProperty("name").ToString());
-            Console.WriteLine(result0.GetProperty("choices")[0].GetProperty("message").GetProperty("function_call").GetProperty("arguments").ToString());
-            Console.WriteLine(result0.GetProperty("choices")[0].GetProperty("finish_reason").ToString());
-            Console.WriteLine(result0.GetProperty("usage").GetProperty("prompt_tokens").ToString());
-            Console.WriteLine(result0.GetProperty("usage").GetProperty("completion_tokens").ToString());
-            Console.WriteLine(result0.GetProperty("usage").GetProperty("total_tokens").ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("id").ToString());
+            Console.WriteLine(element.GetProperty("object").ToString());
+            Console.WriteLine(element.GetProperty("created").ToString());
+            Console.WriteLine(element.GetProperty("model").ToString());
+            Console.WriteLine(element.GetProperty("choices")[0].GetProperty("index").ToString());
+            Console.WriteLine(element.GetProperty("choices")[0].GetProperty("message").GetProperty("role").ToString());
+            Console.WriteLine(element.GetProperty("choices")[0].GetProperty("message").GetProperty("content").ToString());
+            Console.WriteLine(element.GetProperty("choices")[0].GetProperty("message").GetProperty("function_call").GetProperty("name").ToString());
+            Console.WriteLine(element.GetProperty("choices")[0].GetProperty("message").GetProperty("function_call").GetProperty("arguments").ToString());
+            Console.WriteLine(element.GetProperty("choices")[0].GetProperty("finish_reason").ToString());
+            Console.WriteLine(element.GetProperty("usage").GetProperty("prompt_tokens").ToString());
+            Console.WriteLine(element.GetProperty("usage").GetProperty("completion_tokens").ToString());
+            Console.WriteLine(element.GetProperty("usage").GetProperty("total_tokens").ToString());
         }
 
         [Test]
@@ -261,39 +261,33 @@ key = new object(),
         {
             OpenAIClient client = new OpenAIClient();
 
-            CreateChatCompletionRequest body = new CreateChatCompletionRequest(ChatCompletionModels.Gpt4, new List<ChatCompletionRequestMessage>()
-{
-new ChatCompletionRequestMessage(MessageRole.System,"<content>")
+            CreateChatCompletionRequest body = new CreateChatCompletionRequest(ChatCompletionModels.Gpt4, new ChatCompletionRequestMessage[]
+            {
+new ChatCompletionRequestMessage(MessageRole.System, "<content>")
 {
 Name = "<name>",
-FunctionCall = new FunctionCall("<name>","<arguments>"),
+FunctionCall = new FunctionCall("<name>", "<arguments>"),
 }
-})
+            })
             {
-                Functions =
+                Functions = {new ChatCompletionFunctions("<name>", new Dictionary<string, BinaryData>
 {
-new ChatCompletionFunctions("<name>",new Dictionary<string, BinaryData>()
-{
-["key"] = BinaryData.FromObjectAsJson(new object()),
+["key"] = BinaryData.FromObjectAsJson(new object())
 })
 {
 Description = "<description>",
-}
-},
+}},
                 FunctionCall = new ChatCompletionFunctionCallOption("<name>"),
                 Temperature = 123.45,
                 TopP = 123.45,
                 N = 1234L,
                 MaxTokens = 1234L,
-                Stop =
-{
-"<stop>"
-},
+                Stop = { "<stop>" },
                 PresencePenalty = 123.45,
                 FrequencyPenalty = 123.45,
                 LogitBias =
 {
-["key"] = 1234L,
+["key"] = 1234L
 },
                 User = "<user>",
                 Stream = true,
@@ -307,39 +301,33 @@ Description = "<description>",
         {
             OpenAIClient client = new OpenAIClient();
 
-            CreateChatCompletionRequest body = new CreateChatCompletionRequest(ChatCompletionModels.Gpt4, new List<ChatCompletionRequestMessage>()
-{
-new ChatCompletionRequestMessage(MessageRole.System,"<content>")
+            CreateChatCompletionRequest body = new CreateChatCompletionRequest(ChatCompletionModels.Gpt4, new ChatCompletionRequestMessage[]
+            {
+new ChatCompletionRequestMessage(MessageRole.System, "<content>")
 {
 Name = "<name>",
-FunctionCall = new FunctionCall("<name>","<arguments>"),
+FunctionCall = new FunctionCall("<name>", "<arguments>"),
 }
-})
+            })
             {
-                Functions =
+                Functions = {new ChatCompletionFunctions("<name>", new Dictionary<string, BinaryData>
 {
-new ChatCompletionFunctions("<name>",new Dictionary<string, BinaryData>()
-{
-["key"] = BinaryData.FromObjectAsJson(new object()),
+["key"] = BinaryData.FromObjectAsJson(new object())
 })
 {
 Description = "<description>",
-}
-},
+}},
                 FunctionCall = new ChatCompletionFunctionCallOption("<name>"),
                 Temperature = 123.45,
                 TopP = 123.45,
                 N = 1234L,
                 MaxTokens = 1234L,
-                Stop =
-{
-"<stop>"
-},
+                Stop = { "<stop>" },
                 PresencePenalty = 123.45,
                 FrequencyPenalty = 123.45,
                 LogitBias =
 {
-["key"] = 1234L,
+["key"] = 1234L
 },
                 User = "<user>",
                 Stream = true,
@@ -349,7 +337,7 @@ Description = "<description>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_CreateTranscription()
+        public void Example_CreateTranscription_ShortVersion()
         {
             OpenAIClient client = new OpenAIClient();
 
@@ -360,13 +348,13 @@ Description = "<description>",
             }).ToStream());
             Result result = client.CreateTranscription(content);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("text").ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("text").ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_CreateTranscription_Async()
+        public async Task Example_CreateTranscription_ShortVersion_Async()
         {
             OpenAIClient client = new OpenAIClient();
 
@@ -377,13 +365,13 @@ Description = "<description>",
             }).ToStream());
             Result result = await client.CreateTranscriptionAsync(content);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("text").ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("text").ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_CreateTranscription_Convenience()
+        public void Example_CreateTranscription_ShortVersion_Convenience()
         {
             OpenAIClient client = new OpenAIClient();
 
@@ -393,7 +381,7 @@ Description = "<description>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_CreateTranscription_Convenience_Async()
+        public async Task Example_CreateTranscription_ShortVersion_Convenience_Async()
         {
             OpenAIClient client = new OpenAIClient();
 
@@ -418,8 +406,8 @@ Description = "<description>",
             }).ToStream());
             Result result = client.CreateTranscription(content);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("text").ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("text").ToString());
         }
 
         [Test]
@@ -439,8 +427,8 @@ Description = "<description>",
             }).ToStream());
             Result result = await client.CreateTranscriptionAsync(content);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("text").ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("text").ToString());
         }
 
         [Test]
@@ -477,7 +465,7 @@ Description = "<description>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_CreateTranslation()
+        public void Example_CreateTranslation_ShortVersion()
         {
             OpenAIClient client = new OpenAIClient();
 
@@ -488,13 +476,13 @@ Description = "<description>",
             }).ToStream());
             Result result = client.CreateTranslation(content);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("text").ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("text").ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_CreateTranslation_Async()
+        public async Task Example_CreateTranslation_ShortVersion_Async()
         {
             OpenAIClient client = new OpenAIClient();
 
@@ -505,13 +493,13 @@ Description = "<description>",
             }).ToStream());
             Result result = await client.CreateTranslationAsync(content);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("text").ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("text").ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_CreateTranslation_Convenience()
+        public void Example_CreateTranslation_ShortVersion_Convenience()
         {
             OpenAIClient client = new OpenAIClient();
 
@@ -521,7 +509,7 @@ Description = "<description>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_CreateTranslation_Convenience_Async()
+        public async Task Example_CreateTranslation_ShortVersion_Convenience_Async()
         {
             OpenAIClient client = new OpenAIClient();
 
@@ -545,8 +533,8 @@ Description = "<description>",
             }).ToStream());
             Result result = client.CreateTranslation(content);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("text").ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("text").ToString());
         }
 
         [Test]
@@ -565,8 +553,8 @@ Description = "<description>",
             }).ToStream());
             Result result = await client.CreateTranslationAsync(content);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("text").ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("text").ToString());
         }
 
         [Test]
@@ -601,7 +589,7 @@ Description = "<description>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_CreateFineTuningJob()
+        public void Example_CreateFineTuningJob_ShortVersion()
         {
             OpenAIClient client = new OpenAIClient();
 
@@ -612,26 +600,26 @@ Description = "<description>",
             }).ToStream());
             Result result = client.CreateFineTuningJob(content);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("id").ToString());
-            Console.WriteLine(result0.GetProperty("object").ToString());
-            Console.WriteLine(result0.GetProperty("created_at").ToString());
-            Console.WriteLine(result0.GetProperty("finished_at").ToString());
-            Console.WriteLine(result0.GetProperty("model").ToString());
-            Console.WriteLine(result0.GetProperty("fine_tuned_model").ToString());
-            Console.WriteLine(result0.GetProperty("organization_id").ToString());
-            Console.WriteLine(result0.GetProperty("status").ToString());
-            Console.WriteLine(result0.GetProperty("hyperparameters").ToString());
-            Console.WriteLine(result0.GetProperty("training_file").ToString());
-            Console.WriteLine(result0.GetProperty("validation_file").ToString());
-            Console.WriteLine(result0.GetProperty("result_files")[0].ToString());
-            Console.WriteLine(result0.GetProperty("trained_tokens").ToString());
-            Console.WriteLine(result0.GetProperty("error").ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("id").ToString());
+            Console.WriteLine(element.GetProperty("object").ToString());
+            Console.WriteLine(element.GetProperty("created_at").ToString());
+            Console.WriteLine(element.GetProperty("finished_at").ToString());
+            Console.WriteLine(element.GetProperty("model").ToString());
+            Console.WriteLine(element.GetProperty("fine_tuned_model").ToString());
+            Console.WriteLine(element.GetProperty("organization_id").ToString());
+            Console.WriteLine(element.GetProperty("status").ToString());
+            Console.WriteLine(element.GetProperty("hyperparameters").ToString());
+            Console.WriteLine(element.GetProperty("training_file").ToString());
+            Console.WriteLine(element.GetProperty("validation_file").ToString());
+            Console.WriteLine(element.GetProperty("result_files")[0].ToString());
+            Console.WriteLine(element.GetProperty("trained_tokens").ToString());
+            Console.WriteLine(element.GetProperty("error").ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_CreateFineTuningJob_Async()
+        public async Task Example_CreateFineTuningJob_ShortVersion_Async()
         {
             OpenAIClient client = new OpenAIClient();
 
@@ -642,26 +630,26 @@ Description = "<description>",
             }).ToStream());
             Result result = await client.CreateFineTuningJobAsync(content);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("id").ToString());
-            Console.WriteLine(result0.GetProperty("object").ToString());
-            Console.WriteLine(result0.GetProperty("created_at").ToString());
-            Console.WriteLine(result0.GetProperty("finished_at").ToString());
-            Console.WriteLine(result0.GetProperty("model").ToString());
-            Console.WriteLine(result0.GetProperty("fine_tuned_model").ToString());
-            Console.WriteLine(result0.GetProperty("organization_id").ToString());
-            Console.WriteLine(result0.GetProperty("status").ToString());
-            Console.WriteLine(result0.GetProperty("hyperparameters").ToString());
-            Console.WriteLine(result0.GetProperty("training_file").ToString());
-            Console.WriteLine(result0.GetProperty("validation_file").ToString());
-            Console.WriteLine(result0.GetProperty("result_files")[0].ToString());
-            Console.WriteLine(result0.GetProperty("trained_tokens").ToString());
-            Console.WriteLine(result0.GetProperty("error").ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("id").ToString());
+            Console.WriteLine(element.GetProperty("object").ToString());
+            Console.WriteLine(element.GetProperty("created_at").ToString());
+            Console.WriteLine(element.GetProperty("finished_at").ToString());
+            Console.WriteLine(element.GetProperty("model").ToString());
+            Console.WriteLine(element.GetProperty("fine_tuned_model").ToString());
+            Console.WriteLine(element.GetProperty("organization_id").ToString());
+            Console.WriteLine(element.GetProperty("status").ToString());
+            Console.WriteLine(element.GetProperty("hyperparameters").ToString());
+            Console.WriteLine(element.GetProperty("training_file").ToString());
+            Console.WriteLine(element.GetProperty("validation_file").ToString());
+            Console.WriteLine(element.GetProperty("result_files")[0].ToString());
+            Console.WriteLine(element.GetProperty("trained_tokens").ToString());
+            Console.WriteLine(element.GetProperty("error").ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_CreateFineTuningJob_Convenience()
+        public void Example_CreateFineTuningJob_ShortVersion_Convenience()
         {
             OpenAIClient client = new OpenAIClient();
 
@@ -671,7 +659,7 @@ Description = "<description>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_CreateFineTuningJob_Convenience_Async()
+        public async Task Example_CreateFineTuningJob_ShortVersion_Convenience_Async()
         {
             OpenAIClient client = new OpenAIClient();
 
@@ -698,23 +686,23 @@ Description = "<description>",
             }).ToStream());
             Result result = client.CreateFineTuningJob(content);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("id").ToString());
-            Console.WriteLine(result0.GetProperty("object").ToString());
-            Console.WriteLine(result0.GetProperty("created_at").ToString());
-            Console.WriteLine(result0.GetProperty("finished_at").ToString());
-            Console.WriteLine(result0.GetProperty("model").ToString());
-            Console.WriteLine(result0.GetProperty("fine_tuned_model").ToString());
-            Console.WriteLine(result0.GetProperty("organization_id").ToString());
-            Console.WriteLine(result0.GetProperty("status").ToString());
-            Console.WriteLine(result0.GetProperty("hyperparameters").GetProperty("n_epochs").ToString());
-            Console.WriteLine(result0.GetProperty("training_file").ToString());
-            Console.WriteLine(result0.GetProperty("validation_file").ToString());
-            Console.WriteLine(result0.GetProperty("result_files")[0].ToString());
-            Console.WriteLine(result0.GetProperty("trained_tokens").ToString());
-            Console.WriteLine(result0.GetProperty("error").GetProperty("message").ToString());
-            Console.WriteLine(result0.GetProperty("error").GetProperty("code").ToString());
-            Console.WriteLine(result0.GetProperty("error").GetProperty("param").ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("id").ToString());
+            Console.WriteLine(element.GetProperty("object").ToString());
+            Console.WriteLine(element.GetProperty("created_at").ToString());
+            Console.WriteLine(element.GetProperty("finished_at").ToString());
+            Console.WriteLine(element.GetProperty("model").ToString());
+            Console.WriteLine(element.GetProperty("fine_tuned_model").ToString());
+            Console.WriteLine(element.GetProperty("organization_id").ToString());
+            Console.WriteLine(element.GetProperty("status").ToString());
+            Console.WriteLine(element.GetProperty("hyperparameters").GetProperty("n_epochs").ToString());
+            Console.WriteLine(element.GetProperty("training_file").ToString());
+            Console.WriteLine(element.GetProperty("validation_file").ToString());
+            Console.WriteLine(element.GetProperty("result_files")[0].ToString());
+            Console.WriteLine(element.GetProperty("trained_tokens").ToString());
+            Console.WriteLine(element.GetProperty("error").GetProperty("message").ToString());
+            Console.WriteLine(element.GetProperty("error").GetProperty("code").ToString());
+            Console.WriteLine(element.GetProperty("error").GetProperty("param").ToString());
         }
 
         [Test]
@@ -736,23 +724,23 @@ Description = "<description>",
             }).ToStream());
             Result result = await client.CreateFineTuningJobAsync(content);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("id").ToString());
-            Console.WriteLine(result0.GetProperty("object").ToString());
-            Console.WriteLine(result0.GetProperty("created_at").ToString());
-            Console.WriteLine(result0.GetProperty("finished_at").ToString());
-            Console.WriteLine(result0.GetProperty("model").ToString());
-            Console.WriteLine(result0.GetProperty("fine_tuned_model").ToString());
-            Console.WriteLine(result0.GetProperty("organization_id").ToString());
-            Console.WriteLine(result0.GetProperty("status").ToString());
-            Console.WriteLine(result0.GetProperty("hyperparameters").GetProperty("n_epochs").ToString());
-            Console.WriteLine(result0.GetProperty("training_file").ToString());
-            Console.WriteLine(result0.GetProperty("validation_file").ToString());
-            Console.WriteLine(result0.GetProperty("result_files")[0].ToString());
-            Console.WriteLine(result0.GetProperty("trained_tokens").ToString());
-            Console.WriteLine(result0.GetProperty("error").GetProperty("message").ToString());
-            Console.WriteLine(result0.GetProperty("error").GetProperty("code").ToString());
-            Console.WriteLine(result0.GetProperty("error").GetProperty("param").ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("id").ToString());
+            Console.WriteLine(element.GetProperty("object").ToString());
+            Console.WriteLine(element.GetProperty("created_at").ToString());
+            Console.WriteLine(element.GetProperty("finished_at").ToString());
+            Console.WriteLine(element.GetProperty("model").ToString());
+            Console.WriteLine(element.GetProperty("fine_tuned_model").ToString());
+            Console.WriteLine(element.GetProperty("organization_id").ToString());
+            Console.WriteLine(element.GetProperty("status").ToString());
+            Console.WriteLine(element.GetProperty("hyperparameters").GetProperty("n_epochs").ToString());
+            Console.WriteLine(element.GetProperty("training_file").ToString());
+            Console.WriteLine(element.GetProperty("validation_file").ToString());
+            Console.WriteLine(element.GetProperty("result_files")[0].ToString());
+            Console.WriteLine(element.GetProperty("trained_tokens").ToString());
+            Console.WriteLine(element.GetProperty("error").GetProperty("message").ToString());
+            Console.WriteLine(element.GetProperty("error").GetProperty("code").ToString());
+            Console.WriteLine(element.GetProperty("error").GetProperty("param").ToString());
         }
 
         [Test]
@@ -764,7 +752,7 @@ Description = "<description>",
             CreateFineTuningJobRequest job = new CreateFineTuningJobRequest("<training_file>", FineTuningJobModels.Babbage002)
             {
                 ValidationFile = "<validation_file>",
-                Hyperparameters = new HyperParameters()
+                Hyperparameters = new HyperParameters
                 {
                     NEpochs = BinaryData.FromObjectAsJson(new object()),
                 },
@@ -782,7 +770,7 @@ Description = "<description>",
             CreateFineTuningJobRequest job = new CreateFineTuningJobRequest("<training_file>", FineTuningJobModels.Babbage002)
             {
                 ValidationFile = "<validation_file>",
-                Hyperparameters = new HyperParameters()
+                Hyperparameters = new HyperParameters
                 {
                     NEpochs = BinaryData.FromObjectAsJson(new object()),
                 },
@@ -793,61 +781,61 @@ Description = "<description>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetPaginatedFineTuningJobs()
+        public void Example_GetPaginatedFineTuningJobs_ShortVersion()
         {
             OpenAIClient client = new OpenAIClient();
 
             Result result = client.GetPaginatedFineTuningJobs(null, null, null);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("object").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("id").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("object").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("created_at").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("finished_at").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("model").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("fine_tuned_model").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("organization_id").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("status").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("hyperparameters").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("training_file").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("validation_file").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("result_files")[0].ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("trained_tokens").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("error").ToString());
-            Console.WriteLine(result0.GetProperty("has_more").ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("object").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("id").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("object").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("created_at").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("finished_at").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("model").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("fine_tuned_model").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("organization_id").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("status").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("hyperparameters").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("training_file").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("validation_file").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("result_files")[0].ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("trained_tokens").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("error").ToString());
+            Console.WriteLine(element.GetProperty("has_more").ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetPaginatedFineTuningJobs_Async()
+        public async Task Example_GetPaginatedFineTuningJobs_ShortVersion_Async()
         {
             OpenAIClient client = new OpenAIClient();
 
             Result result = await client.GetPaginatedFineTuningJobsAsync(null, null, null);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("object").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("id").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("object").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("created_at").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("finished_at").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("model").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("fine_tuned_model").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("organization_id").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("status").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("hyperparameters").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("training_file").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("validation_file").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("result_files")[0].ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("trained_tokens").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("error").ToString());
-            Console.WriteLine(result0.GetProperty("has_more").ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("object").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("id").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("object").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("created_at").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("finished_at").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("model").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("fine_tuned_model").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("organization_id").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("status").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("hyperparameters").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("training_file").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("validation_file").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("result_files")[0].ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("trained_tokens").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("error").ToString());
+            Console.WriteLine(element.GetProperty("has_more").ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetPaginatedFineTuningJobs_Convenience()
+        public void Example_GetPaginatedFineTuningJobs_ShortVersion_Convenience()
         {
             OpenAIClient client = new OpenAIClient();
 
@@ -856,7 +844,7 @@ Description = "<description>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetPaginatedFineTuningJobs_Convenience_Async()
+        public async Task Example_GetPaginatedFineTuningJobs_ShortVersion_Convenience_Async()
         {
             OpenAIClient client = new OpenAIClient();
 
@@ -871,25 +859,25 @@ Description = "<description>",
 
             Result result = client.GetPaginatedFineTuningJobs("<after>", 1234L, null);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("object").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("id").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("object").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("created_at").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("finished_at").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("model").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("fine_tuned_model").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("organization_id").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("status").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("hyperparameters").GetProperty("n_epochs").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("training_file").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("validation_file").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("result_files")[0].ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("trained_tokens").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("error").GetProperty("message").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("error").GetProperty("code").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("error").GetProperty("param").ToString());
-            Console.WriteLine(result0.GetProperty("has_more").ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("object").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("id").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("object").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("created_at").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("finished_at").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("model").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("fine_tuned_model").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("organization_id").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("status").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("hyperparameters").GetProperty("n_epochs").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("training_file").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("validation_file").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("result_files")[0].ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("trained_tokens").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("error").GetProperty("message").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("error").GetProperty("code").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("error").GetProperty("param").ToString());
+            Console.WriteLine(element.GetProperty("has_more").ToString());
         }
 
         [Test]
@@ -900,25 +888,25 @@ Description = "<description>",
 
             Result result = await client.GetPaginatedFineTuningJobsAsync("<after>", 1234L, null);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("object").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("id").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("object").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("created_at").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("finished_at").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("model").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("fine_tuned_model").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("organization_id").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("status").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("hyperparameters").GetProperty("n_epochs").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("training_file").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("validation_file").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("result_files")[0].ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("trained_tokens").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("error").GetProperty("message").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("error").GetProperty("code").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("error").GetProperty("param").ToString());
-            Console.WriteLine(result0.GetProperty("has_more").ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("object").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("id").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("object").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("created_at").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("finished_at").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("model").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("fine_tuned_model").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("organization_id").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("status").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("hyperparameters").GetProperty("n_epochs").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("training_file").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("validation_file").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("result_files")[0].ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("trained_tokens").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("error").GetProperty("message").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("error").GetProperty("code").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("error").GetProperty("param").ToString());
+            Console.WriteLine(element.GetProperty("has_more").ToString());
         }
 
         [Test]
@@ -941,57 +929,57 @@ Description = "<description>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_RetrieveFineTuningJob()
+        public void Example_RetrieveFineTuningJob_ShortVersion()
         {
             OpenAIClient client = new OpenAIClient();
 
             Result result = client.RetrieveFineTuningJob("<fine_tuning_job_id>", null);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("id").ToString());
-            Console.WriteLine(result0.GetProperty("object").ToString());
-            Console.WriteLine(result0.GetProperty("created_at").ToString());
-            Console.WriteLine(result0.GetProperty("finished_at").ToString());
-            Console.WriteLine(result0.GetProperty("model").ToString());
-            Console.WriteLine(result0.GetProperty("fine_tuned_model").ToString());
-            Console.WriteLine(result0.GetProperty("organization_id").ToString());
-            Console.WriteLine(result0.GetProperty("status").ToString());
-            Console.WriteLine(result0.GetProperty("hyperparameters").ToString());
-            Console.WriteLine(result0.GetProperty("training_file").ToString());
-            Console.WriteLine(result0.GetProperty("validation_file").ToString());
-            Console.WriteLine(result0.GetProperty("result_files")[0].ToString());
-            Console.WriteLine(result0.GetProperty("trained_tokens").ToString());
-            Console.WriteLine(result0.GetProperty("error").ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("id").ToString());
+            Console.WriteLine(element.GetProperty("object").ToString());
+            Console.WriteLine(element.GetProperty("created_at").ToString());
+            Console.WriteLine(element.GetProperty("finished_at").ToString());
+            Console.WriteLine(element.GetProperty("model").ToString());
+            Console.WriteLine(element.GetProperty("fine_tuned_model").ToString());
+            Console.WriteLine(element.GetProperty("organization_id").ToString());
+            Console.WriteLine(element.GetProperty("status").ToString());
+            Console.WriteLine(element.GetProperty("hyperparameters").ToString());
+            Console.WriteLine(element.GetProperty("training_file").ToString());
+            Console.WriteLine(element.GetProperty("validation_file").ToString());
+            Console.WriteLine(element.GetProperty("result_files")[0].ToString());
+            Console.WriteLine(element.GetProperty("trained_tokens").ToString());
+            Console.WriteLine(element.GetProperty("error").ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_RetrieveFineTuningJob_Async()
+        public async Task Example_RetrieveFineTuningJob_ShortVersion_Async()
         {
             OpenAIClient client = new OpenAIClient();
 
             Result result = await client.RetrieveFineTuningJobAsync("<fine_tuning_job_id>", null);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("id").ToString());
-            Console.WriteLine(result0.GetProperty("object").ToString());
-            Console.WriteLine(result0.GetProperty("created_at").ToString());
-            Console.WriteLine(result0.GetProperty("finished_at").ToString());
-            Console.WriteLine(result0.GetProperty("model").ToString());
-            Console.WriteLine(result0.GetProperty("fine_tuned_model").ToString());
-            Console.WriteLine(result0.GetProperty("organization_id").ToString());
-            Console.WriteLine(result0.GetProperty("status").ToString());
-            Console.WriteLine(result0.GetProperty("hyperparameters").ToString());
-            Console.WriteLine(result0.GetProperty("training_file").ToString());
-            Console.WriteLine(result0.GetProperty("validation_file").ToString());
-            Console.WriteLine(result0.GetProperty("result_files")[0].ToString());
-            Console.WriteLine(result0.GetProperty("trained_tokens").ToString());
-            Console.WriteLine(result0.GetProperty("error").ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("id").ToString());
+            Console.WriteLine(element.GetProperty("object").ToString());
+            Console.WriteLine(element.GetProperty("created_at").ToString());
+            Console.WriteLine(element.GetProperty("finished_at").ToString());
+            Console.WriteLine(element.GetProperty("model").ToString());
+            Console.WriteLine(element.GetProperty("fine_tuned_model").ToString());
+            Console.WriteLine(element.GetProperty("organization_id").ToString());
+            Console.WriteLine(element.GetProperty("status").ToString());
+            Console.WriteLine(element.GetProperty("hyperparameters").ToString());
+            Console.WriteLine(element.GetProperty("training_file").ToString());
+            Console.WriteLine(element.GetProperty("validation_file").ToString());
+            Console.WriteLine(element.GetProperty("result_files")[0].ToString());
+            Console.WriteLine(element.GetProperty("trained_tokens").ToString());
+            Console.WriteLine(element.GetProperty("error").ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_RetrieveFineTuningJob_Convenience()
+        public void Example_RetrieveFineTuningJob_ShortVersion_Convenience()
         {
             OpenAIClient client = new OpenAIClient();
 
@@ -1000,7 +988,7 @@ Description = "<description>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_RetrieveFineTuningJob_Convenience_Async()
+        public async Task Example_RetrieveFineTuningJob_ShortVersion_Convenience_Async()
         {
             OpenAIClient client = new OpenAIClient();
 
@@ -1015,23 +1003,23 @@ Description = "<description>",
 
             Result result = client.RetrieveFineTuningJob("<fine_tuning_job_id>", null);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("id").ToString());
-            Console.WriteLine(result0.GetProperty("object").ToString());
-            Console.WriteLine(result0.GetProperty("created_at").ToString());
-            Console.WriteLine(result0.GetProperty("finished_at").ToString());
-            Console.WriteLine(result0.GetProperty("model").ToString());
-            Console.WriteLine(result0.GetProperty("fine_tuned_model").ToString());
-            Console.WriteLine(result0.GetProperty("organization_id").ToString());
-            Console.WriteLine(result0.GetProperty("status").ToString());
-            Console.WriteLine(result0.GetProperty("hyperparameters").GetProperty("n_epochs").ToString());
-            Console.WriteLine(result0.GetProperty("training_file").ToString());
-            Console.WriteLine(result0.GetProperty("validation_file").ToString());
-            Console.WriteLine(result0.GetProperty("result_files")[0].ToString());
-            Console.WriteLine(result0.GetProperty("trained_tokens").ToString());
-            Console.WriteLine(result0.GetProperty("error").GetProperty("message").ToString());
-            Console.WriteLine(result0.GetProperty("error").GetProperty("code").ToString());
-            Console.WriteLine(result0.GetProperty("error").GetProperty("param").ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("id").ToString());
+            Console.WriteLine(element.GetProperty("object").ToString());
+            Console.WriteLine(element.GetProperty("created_at").ToString());
+            Console.WriteLine(element.GetProperty("finished_at").ToString());
+            Console.WriteLine(element.GetProperty("model").ToString());
+            Console.WriteLine(element.GetProperty("fine_tuned_model").ToString());
+            Console.WriteLine(element.GetProperty("organization_id").ToString());
+            Console.WriteLine(element.GetProperty("status").ToString());
+            Console.WriteLine(element.GetProperty("hyperparameters").GetProperty("n_epochs").ToString());
+            Console.WriteLine(element.GetProperty("training_file").ToString());
+            Console.WriteLine(element.GetProperty("validation_file").ToString());
+            Console.WriteLine(element.GetProperty("result_files")[0].ToString());
+            Console.WriteLine(element.GetProperty("trained_tokens").ToString());
+            Console.WriteLine(element.GetProperty("error").GetProperty("message").ToString());
+            Console.WriteLine(element.GetProperty("error").GetProperty("code").ToString());
+            Console.WriteLine(element.GetProperty("error").GetProperty("param").ToString());
         }
 
         [Test]
@@ -1042,23 +1030,23 @@ Description = "<description>",
 
             Result result = await client.RetrieveFineTuningJobAsync("<fine_tuning_job_id>", null);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("id").ToString());
-            Console.WriteLine(result0.GetProperty("object").ToString());
-            Console.WriteLine(result0.GetProperty("created_at").ToString());
-            Console.WriteLine(result0.GetProperty("finished_at").ToString());
-            Console.WriteLine(result0.GetProperty("model").ToString());
-            Console.WriteLine(result0.GetProperty("fine_tuned_model").ToString());
-            Console.WriteLine(result0.GetProperty("organization_id").ToString());
-            Console.WriteLine(result0.GetProperty("status").ToString());
-            Console.WriteLine(result0.GetProperty("hyperparameters").GetProperty("n_epochs").ToString());
-            Console.WriteLine(result0.GetProperty("training_file").ToString());
-            Console.WriteLine(result0.GetProperty("validation_file").ToString());
-            Console.WriteLine(result0.GetProperty("result_files")[0].ToString());
-            Console.WriteLine(result0.GetProperty("trained_tokens").ToString());
-            Console.WriteLine(result0.GetProperty("error").GetProperty("message").ToString());
-            Console.WriteLine(result0.GetProperty("error").GetProperty("code").ToString());
-            Console.WriteLine(result0.GetProperty("error").GetProperty("param").ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("id").ToString());
+            Console.WriteLine(element.GetProperty("object").ToString());
+            Console.WriteLine(element.GetProperty("created_at").ToString());
+            Console.WriteLine(element.GetProperty("finished_at").ToString());
+            Console.WriteLine(element.GetProperty("model").ToString());
+            Console.WriteLine(element.GetProperty("fine_tuned_model").ToString());
+            Console.WriteLine(element.GetProperty("organization_id").ToString());
+            Console.WriteLine(element.GetProperty("status").ToString());
+            Console.WriteLine(element.GetProperty("hyperparameters").GetProperty("n_epochs").ToString());
+            Console.WriteLine(element.GetProperty("training_file").ToString());
+            Console.WriteLine(element.GetProperty("validation_file").ToString());
+            Console.WriteLine(element.GetProperty("result_files")[0].ToString());
+            Console.WriteLine(element.GetProperty("trained_tokens").ToString());
+            Console.WriteLine(element.GetProperty("error").GetProperty("message").ToString());
+            Console.WriteLine(element.GetProperty("error").GetProperty("code").ToString());
+            Console.WriteLine(element.GetProperty("error").GetProperty("param").ToString());
         }
 
         [Test]
@@ -1081,41 +1069,41 @@ Description = "<description>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetFineTuningEvents()
+        public void Example_GetFineTuningEvents_ShortVersion()
         {
             OpenAIClient client = new OpenAIClient();
 
             Result result = client.GetFineTuningEvents("<fine_tuning_job_id>", null, null);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("object").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("id").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("object").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("created_at").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("level").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("message").ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("object").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("id").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("object").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("created_at").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("level").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("message").ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetFineTuningEvents_Async()
+        public async Task Example_GetFineTuningEvents_ShortVersion_Async()
         {
             OpenAIClient client = new OpenAIClient();
 
             Result result = await client.GetFineTuningEventsAsync("<fine_tuning_job_id>", null, null);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("object").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("id").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("object").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("created_at").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("level").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("message").ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("object").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("id").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("object").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("created_at").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("level").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("message").ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetFineTuningEvents_Convenience()
+        public void Example_GetFineTuningEvents_ShortVersion_Convenience()
         {
             OpenAIClient client = new OpenAIClient();
 
@@ -1124,7 +1112,7 @@ Description = "<description>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetFineTuningEvents_Convenience_Async()
+        public async Task Example_GetFineTuningEvents_ShortVersion_Convenience_Async()
         {
             OpenAIClient client = new OpenAIClient();
 
@@ -1139,13 +1127,13 @@ Description = "<description>",
 
             Result result = client.GetFineTuningEvents("<fine_tuning_job_id>", "<after>", null);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("object").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("id").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("object").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("created_at").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("level").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("message").ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("object").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("id").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("object").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("created_at").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("level").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("message").ToString());
         }
 
         [Test]
@@ -1156,13 +1144,13 @@ Description = "<description>",
 
             Result result = await client.GetFineTuningEventsAsync("<fine_tuning_job_id>", "<after>", null);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("object").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("id").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("object").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("created_at").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("level").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("message").ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("object").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("id").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("object").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("created_at").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("level").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("message").ToString());
         }
 
         [Test]
@@ -1185,57 +1173,57 @@ Description = "<description>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_CancelFineTuningJob()
+        public void Example_CancelFineTuningJob_ShortVersion()
         {
             OpenAIClient client = new OpenAIClient();
 
             Result result = client.CancelFineTuningJob("<fine_tuning_job_id>", null);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("id").ToString());
-            Console.WriteLine(result0.GetProperty("object").ToString());
-            Console.WriteLine(result0.GetProperty("created_at").ToString());
-            Console.WriteLine(result0.GetProperty("finished_at").ToString());
-            Console.WriteLine(result0.GetProperty("model").ToString());
-            Console.WriteLine(result0.GetProperty("fine_tuned_model").ToString());
-            Console.WriteLine(result0.GetProperty("organization_id").ToString());
-            Console.WriteLine(result0.GetProperty("status").ToString());
-            Console.WriteLine(result0.GetProperty("hyperparameters").ToString());
-            Console.WriteLine(result0.GetProperty("training_file").ToString());
-            Console.WriteLine(result0.GetProperty("validation_file").ToString());
-            Console.WriteLine(result0.GetProperty("result_files")[0].ToString());
-            Console.WriteLine(result0.GetProperty("trained_tokens").ToString());
-            Console.WriteLine(result0.GetProperty("error").ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("id").ToString());
+            Console.WriteLine(element.GetProperty("object").ToString());
+            Console.WriteLine(element.GetProperty("created_at").ToString());
+            Console.WriteLine(element.GetProperty("finished_at").ToString());
+            Console.WriteLine(element.GetProperty("model").ToString());
+            Console.WriteLine(element.GetProperty("fine_tuned_model").ToString());
+            Console.WriteLine(element.GetProperty("organization_id").ToString());
+            Console.WriteLine(element.GetProperty("status").ToString());
+            Console.WriteLine(element.GetProperty("hyperparameters").ToString());
+            Console.WriteLine(element.GetProperty("training_file").ToString());
+            Console.WriteLine(element.GetProperty("validation_file").ToString());
+            Console.WriteLine(element.GetProperty("result_files")[0].ToString());
+            Console.WriteLine(element.GetProperty("trained_tokens").ToString());
+            Console.WriteLine(element.GetProperty("error").ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_CancelFineTuningJob_Async()
+        public async Task Example_CancelFineTuningJob_ShortVersion_Async()
         {
             OpenAIClient client = new OpenAIClient();
 
             Result result = await client.CancelFineTuningJobAsync("<fine_tuning_job_id>", null);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("id").ToString());
-            Console.WriteLine(result0.GetProperty("object").ToString());
-            Console.WriteLine(result0.GetProperty("created_at").ToString());
-            Console.WriteLine(result0.GetProperty("finished_at").ToString());
-            Console.WriteLine(result0.GetProperty("model").ToString());
-            Console.WriteLine(result0.GetProperty("fine_tuned_model").ToString());
-            Console.WriteLine(result0.GetProperty("organization_id").ToString());
-            Console.WriteLine(result0.GetProperty("status").ToString());
-            Console.WriteLine(result0.GetProperty("hyperparameters").ToString());
-            Console.WriteLine(result0.GetProperty("training_file").ToString());
-            Console.WriteLine(result0.GetProperty("validation_file").ToString());
-            Console.WriteLine(result0.GetProperty("result_files")[0].ToString());
-            Console.WriteLine(result0.GetProperty("trained_tokens").ToString());
-            Console.WriteLine(result0.GetProperty("error").ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("id").ToString());
+            Console.WriteLine(element.GetProperty("object").ToString());
+            Console.WriteLine(element.GetProperty("created_at").ToString());
+            Console.WriteLine(element.GetProperty("finished_at").ToString());
+            Console.WriteLine(element.GetProperty("model").ToString());
+            Console.WriteLine(element.GetProperty("fine_tuned_model").ToString());
+            Console.WriteLine(element.GetProperty("organization_id").ToString());
+            Console.WriteLine(element.GetProperty("status").ToString());
+            Console.WriteLine(element.GetProperty("hyperparameters").ToString());
+            Console.WriteLine(element.GetProperty("training_file").ToString());
+            Console.WriteLine(element.GetProperty("validation_file").ToString());
+            Console.WriteLine(element.GetProperty("result_files")[0].ToString());
+            Console.WriteLine(element.GetProperty("trained_tokens").ToString());
+            Console.WriteLine(element.GetProperty("error").ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_CancelFineTuningJob_Convenience()
+        public void Example_CancelFineTuningJob_ShortVersion_Convenience()
         {
             OpenAIClient client = new OpenAIClient();
 
@@ -1244,7 +1232,7 @@ Description = "<description>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_CancelFineTuningJob_Convenience_Async()
+        public async Task Example_CancelFineTuningJob_ShortVersion_Convenience_Async()
         {
             OpenAIClient client = new OpenAIClient();
 
@@ -1259,23 +1247,23 @@ Description = "<description>",
 
             Result result = client.CancelFineTuningJob("<fine_tuning_job_id>", null);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("id").ToString());
-            Console.WriteLine(result0.GetProperty("object").ToString());
-            Console.WriteLine(result0.GetProperty("created_at").ToString());
-            Console.WriteLine(result0.GetProperty("finished_at").ToString());
-            Console.WriteLine(result0.GetProperty("model").ToString());
-            Console.WriteLine(result0.GetProperty("fine_tuned_model").ToString());
-            Console.WriteLine(result0.GetProperty("organization_id").ToString());
-            Console.WriteLine(result0.GetProperty("status").ToString());
-            Console.WriteLine(result0.GetProperty("hyperparameters").GetProperty("n_epochs").ToString());
-            Console.WriteLine(result0.GetProperty("training_file").ToString());
-            Console.WriteLine(result0.GetProperty("validation_file").ToString());
-            Console.WriteLine(result0.GetProperty("result_files")[0].ToString());
-            Console.WriteLine(result0.GetProperty("trained_tokens").ToString());
-            Console.WriteLine(result0.GetProperty("error").GetProperty("message").ToString());
-            Console.WriteLine(result0.GetProperty("error").GetProperty("code").ToString());
-            Console.WriteLine(result0.GetProperty("error").GetProperty("param").ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("id").ToString());
+            Console.WriteLine(element.GetProperty("object").ToString());
+            Console.WriteLine(element.GetProperty("created_at").ToString());
+            Console.WriteLine(element.GetProperty("finished_at").ToString());
+            Console.WriteLine(element.GetProperty("model").ToString());
+            Console.WriteLine(element.GetProperty("fine_tuned_model").ToString());
+            Console.WriteLine(element.GetProperty("organization_id").ToString());
+            Console.WriteLine(element.GetProperty("status").ToString());
+            Console.WriteLine(element.GetProperty("hyperparameters").GetProperty("n_epochs").ToString());
+            Console.WriteLine(element.GetProperty("training_file").ToString());
+            Console.WriteLine(element.GetProperty("validation_file").ToString());
+            Console.WriteLine(element.GetProperty("result_files")[0].ToString());
+            Console.WriteLine(element.GetProperty("trained_tokens").ToString());
+            Console.WriteLine(element.GetProperty("error").GetProperty("message").ToString());
+            Console.WriteLine(element.GetProperty("error").GetProperty("code").ToString());
+            Console.WriteLine(element.GetProperty("error").GetProperty("param").ToString());
         }
 
         [Test]
@@ -1286,23 +1274,23 @@ Description = "<description>",
 
             Result result = await client.CancelFineTuningJobAsync("<fine_tuning_job_id>", null);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("id").ToString());
-            Console.WriteLine(result0.GetProperty("object").ToString());
-            Console.WriteLine(result0.GetProperty("created_at").ToString());
-            Console.WriteLine(result0.GetProperty("finished_at").ToString());
-            Console.WriteLine(result0.GetProperty("model").ToString());
-            Console.WriteLine(result0.GetProperty("fine_tuned_model").ToString());
-            Console.WriteLine(result0.GetProperty("organization_id").ToString());
-            Console.WriteLine(result0.GetProperty("status").ToString());
-            Console.WriteLine(result0.GetProperty("hyperparameters").GetProperty("n_epochs").ToString());
-            Console.WriteLine(result0.GetProperty("training_file").ToString());
-            Console.WriteLine(result0.GetProperty("validation_file").ToString());
-            Console.WriteLine(result0.GetProperty("result_files")[0].ToString());
-            Console.WriteLine(result0.GetProperty("trained_tokens").ToString());
-            Console.WriteLine(result0.GetProperty("error").GetProperty("message").ToString());
-            Console.WriteLine(result0.GetProperty("error").GetProperty("code").ToString());
-            Console.WriteLine(result0.GetProperty("error").GetProperty("param").ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("id").ToString());
+            Console.WriteLine(element.GetProperty("object").ToString());
+            Console.WriteLine(element.GetProperty("created_at").ToString());
+            Console.WriteLine(element.GetProperty("finished_at").ToString());
+            Console.WriteLine(element.GetProperty("model").ToString());
+            Console.WriteLine(element.GetProperty("fine_tuned_model").ToString());
+            Console.WriteLine(element.GetProperty("organization_id").ToString());
+            Console.WriteLine(element.GetProperty("status").ToString());
+            Console.WriteLine(element.GetProperty("hyperparameters").GetProperty("n_epochs").ToString());
+            Console.WriteLine(element.GetProperty("training_file").ToString());
+            Console.WriteLine(element.GetProperty("validation_file").ToString());
+            Console.WriteLine(element.GetProperty("result_files")[0].ToString());
+            Console.WriteLine(element.GetProperty("trained_tokens").ToString());
+            Console.WriteLine(element.GetProperty("error").GetProperty("message").ToString());
+            Console.WriteLine(element.GetProperty("error").GetProperty("code").ToString());
+            Console.WriteLine(element.GetProperty("error").GetProperty("param").ToString());
         }
 
         [Test]
@@ -1325,7 +1313,7 @@ Description = "<description>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_CreateCompletion()
+        public void Example_CreateCompletion_ShortVersion()
         {
             OpenAIClient client = new OpenAIClient();
 
@@ -1337,23 +1325,23 @@ Description = "<description>",
             }).ToStream());
             Result result = client.CreateCompletion(content);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("id").ToString());
-            Console.WriteLine(result0.GetProperty("object").ToString());
-            Console.WriteLine(result0.GetProperty("created").ToString());
-            Console.WriteLine(result0.GetProperty("model").ToString());
-            Console.WriteLine(result0.GetProperty("choices")[0].GetProperty("index").ToString());
-            Console.WriteLine(result0.GetProperty("choices")[0].GetProperty("text").ToString());
-            Console.WriteLine(result0.GetProperty("choices")[0].GetProperty("logprobs").GetProperty("tokens")[0].ToString());
-            Console.WriteLine(result0.GetProperty("choices")[0].GetProperty("logprobs").GetProperty("token_logprobs")[0].ToString());
-            Console.WriteLine(result0.GetProperty("choices")[0].GetProperty("logprobs").GetProperty("top_logprobs")[0].GetProperty("<key>").ToString());
-            Console.WriteLine(result0.GetProperty("choices")[0].GetProperty("logprobs").GetProperty("text_offset")[0].ToString());
-            Console.WriteLine(result0.GetProperty("choices")[0].GetProperty("finish_reason").ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("id").ToString());
+            Console.WriteLine(element.GetProperty("object").ToString());
+            Console.WriteLine(element.GetProperty("created").ToString());
+            Console.WriteLine(element.GetProperty("model").ToString());
+            Console.WriteLine(element.GetProperty("choices")[0].GetProperty("index").ToString());
+            Console.WriteLine(element.GetProperty("choices")[0].GetProperty("text").ToString());
+            Console.WriteLine(element.GetProperty("choices")[0].GetProperty("logprobs").GetProperty("tokens")[0].ToString());
+            Console.WriteLine(element.GetProperty("choices")[0].GetProperty("logprobs").GetProperty("token_logprobs")[0].ToString());
+            Console.WriteLine(element.GetProperty("choices")[0].GetProperty("logprobs").GetProperty("top_logprobs")[0].GetProperty("<key>").ToString());
+            Console.WriteLine(element.GetProperty("choices")[0].GetProperty("logprobs").GetProperty("text_offset")[0].ToString());
+            Console.WriteLine(element.GetProperty("choices")[0].GetProperty("finish_reason").ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_CreateCompletion_Async()
+        public async Task Example_CreateCompletion_ShortVersion_Async()
         {
             OpenAIClient client = new OpenAIClient();
 
@@ -1365,23 +1353,23 @@ Description = "<description>",
             }).ToStream());
             Result result = await client.CreateCompletionAsync(content);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("id").ToString());
-            Console.WriteLine(result0.GetProperty("object").ToString());
-            Console.WriteLine(result0.GetProperty("created").ToString());
-            Console.WriteLine(result0.GetProperty("model").ToString());
-            Console.WriteLine(result0.GetProperty("choices")[0].GetProperty("index").ToString());
-            Console.WriteLine(result0.GetProperty("choices")[0].GetProperty("text").ToString());
-            Console.WriteLine(result0.GetProperty("choices")[0].GetProperty("logprobs").GetProperty("tokens")[0].ToString());
-            Console.WriteLine(result0.GetProperty("choices")[0].GetProperty("logprobs").GetProperty("token_logprobs")[0].ToString());
-            Console.WriteLine(result0.GetProperty("choices")[0].GetProperty("logprobs").GetProperty("top_logprobs")[0].GetProperty("<key>").ToString());
-            Console.WriteLine(result0.GetProperty("choices")[0].GetProperty("logprobs").GetProperty("text_offset")[0].ToString());
-            Console.WriteLine(result0.GetProperty("choices")[0].GetProperty("finish_reason").ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("id").ToString());
+            Console.WriteLine(element.GetProperty("object").ToString());
+            Console.WriteLine(element.GetProperty("created").ToString());
+            Console.WriteLine(element.GetProperty("model").ToString());
+            Console.WriteLine(element.GetProperty("choices")[0].GetProperty("index").ToString());
+            Console.WriteLine(element.GetProperty("choices")[0].GetProperty("text").ToString());
+            Console.WriteLine(element.GetProperty("choices")[0].GetProperty("logprobs").GetProperty("tokens")[0].ToString());
+            Console.WriteLine(element.GetProperty("choices")[0].GetProperty("logprobs").GetProperty("token_logprobs")[0].ToString());
+            Console.WriteLine(element.GetProperty("choices")[0].GetProperty("logprobs").GetProperty("top_logprobs")[0].GetProperty("<key>").ToString());
+            Console.WriteLine(element.GetProperty("choices")[0].GetProperty("logprobs").GetProperty("text_offset")[0].ToString());
+            Console.WriteLine(element.GetProperty("choices")[0].GetProperty("finish_reason").ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_CreateCompletion_Convenience()
+        public void Example_CreateCompletion_ShortVersion_Convenience()
         {
             OpenAIClient client = new OpenAIClient();
 
@@ -1391,7 +1379,7 @@ Description = "<description>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_CreateCompletion_Convenience_Async()
+        public async Task Example_CreateCompletion_ShortVersion_Convenience_Async()
         {
             OpenAIClient client = new OpenAIClient();
 
@@ -1414,10 +1402,10 @@ Description = "<description>",
                 top_p = 123.45,
                 n = 1234L,
                 max_tokens = 1234L,
-                stop = new List<object>()
-{
+                stop = new object[]
+            {
 "<stop>"
-},
+            },
                 presence_penalty = 123.45,
                 frequency_penalty = 123.45,
                 logit_bias = new
@@ -1432,21 +1420,21 @@ Description = "<description>",
             }).ToStream());
             Result result = client.CreateCompletion(content);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("id").ToString());
-            Console.WriteLine(result0.GetProperty("object").ToString());
-            Console.WriteLine(result0.GetProperty("created").ToString());
-            Console.WriteLine(result0.GetProperty("model").ToString());
-            Console.WriteLine(result0.GetProperty("choices")[0].GetProperty("index").ToString());
-            Console.WriteLine(result0.GetProperty("choices")[0].GetProperty("text").ToString());
-            Console.WriteLine(result0.GetProperty("choices")[0].GetProperty("logprobs").GetProperty("tokens")[0].ToString());
-            Console.WriteLine(result0.GetProperty("choices")[0].GetProperty("logprobs").GetProperty("token_logprobs")[0].ToString());
-            Console.WriteLine(result0.GetProperty("choices")[0].GetProperty("logprobs").GetProperty("top_logprobs")[0].GetProperty("<key>").ToString());
-            Console.WriteLine(result0.GetProperty("choices")[0].GetProperty("logprobs").GetProperty("text_offset")[0].ToString());
-            Console.WriteLine(result0.GetProperty("choices")[0].GetProperty("finish_reason").ToString());
-            Console.WriteLine(result0.GetProperty("usage").GetProperty("prompt_tokens").ToString());
-            Console.WriteLine(result0.GetProperty("usage").GetProperty("completion_tokens").ToString());
-            Console.WriteLine(result0.GetProperty("usage").GetProperty("total_tokens").ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("id").ToString());
+            Console.WriteLine(element.GetProperty("object").ToString());
+            Console.WriteLine(element.GetProperty("created").ToString());
+            Console.WriteLine(element.GetProperty("model").ToString());
+            Console.WriteLine(element.GetProperty("choices")[0].GetProperty("index").ToString());
+            Console.WriteLine(element.GetProperty("choices")[0].GetProperty("text").ToString());
+            Console.WriteLine(element.GetProperty("choices")[0].GetProperty("logprobs").GetProperty("tokens")[0].ToString());
+            Console.WriteLine(element.GetProperty("choices")[0].GetProperty("logprobs").GetProperty("token_logprobs")[0].ToString());
+            Console.WriteLine(element.GetProperty("choices")[0].GetProperty("logprobs").GetProperty("top_logprobs")[0].GetProperty("<key>").ToString());
+            Console.WriteLine(element.GetProperty("choices")[0].GetProperty("logprobs").GetProperty("text_offset")[0].ToString());
+            Console.WriteLine(element.GetProperty("choices")[0].GetProperty("finish_reason").ToString());
+            Console.WriteLine(element.GetProperty("usage").GetProperty("prompt_tokens").ToString());
+            Console.WriteLine(element.GetProperty("usage").GetProperty("completion_tokens").ToString());
+            Console.WriteLine(element.GetProperty("usage").GetProperty("total_tokens").ToString());
         }
 
         [Test]
@@ -1464,10 +1452,10 @@ Description = "<description>",
                 top_p = 123.45,
                 n = 1234L,
                 max_tokens = 1234L,
-                stop = new List<object>()
-{
+                stop = new object[]
+            {
 "<stop>"
-},
+            },
                 presence_penalty = 123.45,
                 frequency_penalty = 123.45,
                 logit_bias = new
@@ -1482,21 +1470,21 @@ Description = "<description>",
             }).ToStream());
             Result result = await client.CreateCompletionAsync(content);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("id").ToString());
-            Console.WriteLine(result0.GetProperty("object").ToString());
-            Console.WriteLine(result0.GetProperty("created").ToString());
-            Console.WriteLine(result0.GetProperty("model").ToString());
-            Console.WriteLine(result0.GetProperty("choices")[0].GetProperty("index").ToString());
-            Console.WriteLine(result0.GetProperty("choices")[0].GetProperty("text").ToString());
-            Console.WriteLine(result0.GetProperty("choices")[0].GetProperty("logprobs").GetProperty("tokens")[0].ToString());
-            Console.WriteLine(result0.GetProperty("choices")[0].GetProperty("logprobs").GetProperty("token_logprobs")[0].ToString());
-            Console.WriteLine(result0.GetProperty("choices")[0].GetProperty("logprobs").GetProperty("top_logprobs")[0].GetProperty("<key>").ToString());
-            Console.WriteLine(result0.GetProperty("choices")[0].GetProperty("logprobs").GetProperty("text_offset")[0].ToString());
-            Console.WriteLine(result0.GetProperty("choices")[0].GetProperty("finish_reason").ToString());
-            Console.WriteLine(result0.GetProperty("usage").GetProperty("prompt_tokens").ToString());
-            Console.WriteLine(result0.GetProperty("usage").GetProperty("completion_tokens").ToString());
-            Console.WriteLine(result0.GetProperty("usage").GetProperty("total_tokens").ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("id").ToString());
+            Console.WriteLine(element.GetProperty("object").ToString());
+            Console.WriteLine(element.GetProperty("created").ToString());
+            Console.WriteLine(element.GetProperty("model").ToString());
+            Console.WriteLine(element.GetProperty("choices")[0].GetProperty("index").ToString());
+            Console.WriteLine(element.GetProperty("choices")[0].GetProperty("text").ToString());
+            Console.WriteLine(element.GetProperty("choices")[0].GetProperty("logprobs").GetProperty("tokens")[0].ToString());
+            Console.WriteLine(element.GetProperty("choices")[0].GetProperty("logprobs").GetProperty("token_logprobs")[0].ToString());
+            Console.WriteLine(element.GetProperty("choices")[0].GetProperty("logprobs").GetProperty("top_logprobs")[0].GetProperty("<key>").ToString());
+            Console.WriteLine(element.GetProperty("choices")[0].GetProperty("logprobs").GetProperty("text_offset")[0].ToString());
+            Console.WriteLine(element.GetProperty("choices")[0].GetProperty("finish_reason").ToString());
+            Console.WriteLine(element.GetProperty("usage").GetProperty("prompt_tokens").ToString());
+            Console.WriteLine(element.GetProperty("usage").GetProperty("completion_tokens").ToString());
+            Console.WriteLine(element.GetProperty("usage").GetProperty("total_tokens").ToString());
         }
 
         [Test]
@@ -1512,15 +1500,12 @@ Description = "<description>",
                 TopP = 123.45,
                 N = 1234L,
                 MaxTokens = 1234L,
-                Stop =
-{
-"<stop>"
-},
+                Stop = { "<stop>" },
                 PresencePenalty = 123.45,
                 FrequencyPenalty = 123.45,
                 LogitBias =
 {
-["key"] = 1234L,
+["key"] = 1234L
 },
                 User = "<user>",
                 Stream = true,
@@ -1543,15 +1528,12 @@ Description = "<description>",
                 TopP = 123.45,
                 N = 1234L,
                 MaxTokens = 1234L,
-                Stop =
-{
-"<stop>"
-},
+                Stop = { "<stop>" },
                 PresencePenalty = 123.45,
                 FrequencyPenalty = 123.45,
                 LogitBias =
 {
-["key"] = 1234L,
+["key"] = 1234L
 },
                 User = "<user>",
                 Stream = true,
@@ -1563,7 +1545,7 @@ Description = "<description>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_CreateImage()
+        public void Example_CreateImage_ShortVersion()
         {
             OpenAIClient client = new OpenAIClient();
 
@@ -1573,14 +1555,14 @@ Description = "<description>",
             }).ToStream());
             Result result = client.CreateImage(content);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("created").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("created").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_CreateImage_Async()
+        public async Task Example_CreateImage_ShortVersion_Async()
         {
             OpenAIClient client = new OpenAIClient();
 
@@ -1590,14 +1572,14 @@ Description = "<description>",
             }).ToStream());
             Result result = await client.CreateImageAsync(content);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("created").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("created").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_CreateImage_Convenience()
+        public void Example_CreateImage_ShortVersion_Convenience()
         {
             OpenAIClient client = new OpenAIClient();
 
@@ -1607,7 +1589,7 @@ Description = "<description>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_CreateImage_Convenience_Async()
+        public async Task Example_CreateImage_ShortVersion_Convenience_Async()
         {
             OpenAIClient client = new OpenAIClient();
 
@@ -1631,10 +1613,10 @@ Description = "<description>",
             }).ToStream());
             Result result = client.CreateImage(content);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("created").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("url").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("b64_json").ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("created").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("url").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("b64_json").ToString());
         }
 
         [Test]
@@ -1653,10 +1635,10 @@ Description = "<description>",
             }).ToStream());
             Result result = await client.CreateImageAsync(content);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("created").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("url").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("b64_json").ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("created").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("url").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("b64_json").ToString());
         }
 
         [Test]
@@ -1693,7 +1675,7 @@ Description = "<description>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_CreateImageEdit()
+        public void Example_CreateImageEdit_ShortVersion()
         {
             OpenAIClient client = new OpenAIClient();
 
@@ -1704,14 +1686,14 @@ Description = "<description>",
             }).ToStream());
             Result result = client.CreateImageEdit(content);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("created").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("created").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_CreateImageEdit_Async()
+        public async Task Example_CreateImageEdit_ShortVersion_Async()
         {
             OpenAIClient client = new OpenAIClient();
 
@@ -1722,14 +1704,14 @@ Description = "<description>",
             }).ToStream());
             Result result = await client.CreateImageEditAsync(content);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("created").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("created").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_CreateImageEdit_Convenience()
+        public void Example_CreateImageEdit_ShortVersion_Convenience()
         {
             OpenAIClient client = new OpenAIClient();
 
@@ -1739,7 +1721,7 @@ Description = "<description>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_CreateImageEdit_Convenience_Async()
+        public async Task Example_CreateImageEdit_ShortVersion_Convenience_Async()
         {
             OpenAIClient client = new OpenAIClient();
 
@@ -1765,10 +1747,10 @@ Description = "<description>",
             }).ToStream());
             Result result = client.CreateImageEdit(content);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("created").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("url").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("b64_json").ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("created").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("url").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("b64_json").ToString());
         }
 
         [Test]
@@ -1789,10 +1771,10 @@ Description = "<description>",
             }).ToStream());
             Result result = await client.CreateImageEditAsync(content);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("created").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("url").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("b64_json").ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("created").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("url").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("b64_json").ToString());
         }
 
         [Test]
@@ -1831,7 +1813,7 @@ Description = "<description>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_CreateImageVariation()
+        public void Example_CreateImageVariation_ShortVersion()
         {
             OpenAIClient client = new OpenAIClient();
 
@@ -1841,14 +1823,14 @@ Description = "<description>",
             }).ToStream());
             Result result = client.CreateImageVariation(content);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("created").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("created").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_CreateImageVariation_Async()
+        public async Task Example_CreateImageVariation_ShortVersion_Async()
         {
             OpenAIClient client = new OpenAIClient();
 
@@ -1858,14 +1840,14 @@ Description = "<description>",
             }).ToStream());
             Result result = await client.CreateImageVariationAsync(content);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("created").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("created").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_CreateImageVariation_Convenience()
+        public void Example_CreateImageVariation_ShortVersion_Convenience()
         {
             OpenAIClient client = new OpenAIClient();
 
@@ -1875,7 +1857,7 @@ Description = "<description>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_CreateImageVariation_Convenience_Async()
+        public async Task Example_CreateImageVariation_ShortVersion_Convenience_Async()
         {
             OpenAIClient client = new OpenAIClient();
 
@@ -1899,10 +1881,10 @@ Description = "<description>",
             }).ToStream());
             Result result = client.CreateImageVariation(content);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("created").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("url").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("b64_json").ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("created").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("url").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("b64_json").ToString());
         }
 
         [Test]
@@ -1921,10 +1903,10 @@ Description = "<description>",
             }).ToStream());
             Result result = await client.CreateImageVariationAsync(content);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("created").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("url").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("b64_json").ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("created").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("url").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("b64_json").ToString());
         }
 
         [Test]
@@ -1961,7 +1943,7 @@ Description = "<description>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_CreateEmbedding()
+        public void Example_CreateEmbedding_ShortVersion()
         {
             OpenAIClient client = new OpenAIClient();
 
@@ -1972,19 +1954,19 @@ Description = "<description>",
             }).ToStream());
             Result result = client.CreateEmbedding(content);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("object").ToString());
-            Console.WriteLine(result0.GetProperty("model").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("index").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("object").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("embeddings")[0].ToString());
-            Console.WriteLine(result0.GetProperty("usage").GetProperty("prompt_tokens").ToString());
-            Console.WriteLine(result0.GetProperty("usage").GetProperty("total_tokens").ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("object").ToString());
+            Console.WriteLine(element.GetProperty("model").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("index").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("object").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("embeddings")[0].ToString());
+            Console.WriteLine(element.GetProperty("usage").GetProperty("prompt_tokens").ToString());
+            Console.WriteLine(element.GetProperty("usage").GetProperty("total_tokens").ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_CreateEmbedding_Async()
+        public async Task Example_CreateEmbedding_ShortVersion_Async()
         {
             OpenAIClient client = new OpenAIClient();
 
@@ -1995,19 +1977,19 @@ Description = "<description>",
             }).ToStream());
             Result result = await client.CreateEmbeddingAsync(content);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("object").ToString());
-            Console.WriteLine(result0.GetProperty("model").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("index").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("object").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("embeddings")[0].ToString());
-            Console.WriteLine(result0.GetProperty("usage").GetProperty("prompt_tokens").ToString());
-            Console.WriteLine(result0.GetProperty("usage").GetProperty("total_tokens").ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("object").ToString());
+            Console.WriteLine(element.GetProperty("model").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("index").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("object").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("embeddings")[0].ToString());
+            Console.WriteLine(element.GetProperty("usage").GetProperty("prompt_tokens").ToString());
+            Console.WriteLine(element.GetProperty("usage").GetProperty("total_tokens").ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_CreateEmbedding_Convenience()
+        public void Example_CreateEmbedding_ShortVersion_Convenience()
         {
             OpenAIClient client = new OpenAIClient();
 
@@ -2017,7 +1999,7 @@ Description = "<description>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_CreateEmbedding_Convenience_Async()
+        public async Task Example_CreateEmbedding_ShortVersion_Convenience_Async()
         {
             OpenAIClient client = new OpenAIClient();
 
@@ -2039,14 +2021,14 @@ Description = "<description>",
             }).ToStream());
             Result result = client.CreateEmbedding(content);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("object").ToString());
-            Console.WriteLine(result0.GetProperty("model").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("index").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("object").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("embeddings")[0].ToString());
-            Console.WriteLine(result0.GetProperty("usage").GetProperty("prompt_tokens").ToString());
-            Console.WriteLine(result0.GetProperty("usage").GetProperty("total_tokens").ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("object").ToString());
+            Console.WriteLine(element.GetProperty("model").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("index").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("object").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("embeddings")[0].ToString());
+            Console.WriteLine(element.GetProperty("usage").GetProperty("prompt_tokens").ToString());
+            Console.WriteLine(element.GetProperty("usage").GetProperty("total_tokens").ToString());
         }
 
         [Test]
@@ -2063,14 +2045,14 @@ Description = "<description>",
             }).ToStream());
             Result result = await client.CreateEmbeddingAsync(content);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("object").ToString());
-            Console.WriteLine(result0.GetProperty("model").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("index").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("object").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("embeddings")[0].ToString());
-            Console.WriteLine(result0.GetProperty("usage").GetProperty("prompt_tokens").ToString());
-            Console.WriteLine(result0.GetProperty("usage").GetProperty("total_tokens").ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("object").ToString());
+            Console.WriteLine(element.GetProperty("model").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("index").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("object").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("embeddings")[0].ToString());
+            Console.WriteLine(element.GetProperty("usage").GetProperty("prompt_tokens").ToString());
+            Console.WriteLine(element.GetProperty("usage").GetProperty("total_tokens").ToString());
         }
 
         [Test]
@@ -2101,45 +2083,45 @@ Description = "<description>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetFiles()
+        public void Example_GetFiles_ShortVersion()
         {
             OpenAIClient client = new OpenAIClient();
 
             Result result = client.GetFiles(null);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("object").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("id").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("object").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("bytes").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("createdAt").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("filename").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("purpose").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("status").ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("object").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("id").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("object").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("bytes").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("createdAt").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("filename").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("purpose").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("status").ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetFiles_Async()
+        public async Task Example_GetFiles_ShortVersion_Async()
         {
             OpenAIClient client = new OpenAIClient();
 
             Result result = await client.GetFilesAsync(null);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("object").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("id").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("object").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("bytes").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("createdAt").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("filename").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("purpose").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("status").ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("object").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("id").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("object").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("bytes").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("createdAt").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("filename").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("purpose").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("status").ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetFiles_Convenience()
+        public void Example_GetFiles_ShortVersion_Convenience()
         {
             OpenAIClient client = new OpenAIClient();
 
@@ -2148,7 +2130,7 @@ Description = "<description>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetFiles_Convenience_Async()
+        public async Task Example_GetFiles_ShortVersion_Convenience_Async()
         {
             OpenAIClient client = new OpenAIClient();
 
@@ -2163,16 +2145,16 @@ Description = "<description>",
 
             Result result = client.GetFiles(null);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("object").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("id").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("object").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("bytes").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("createdAt").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("filename").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("purpose").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("status").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("status_details").ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("object").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("id").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("object").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("bytes").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("createdAt").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("filename").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("purpose").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("status").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("status_details").ToString());
         }
 
         [Test]
@@ -2183,16 +2165,16 @@ Description = "<description>",
 
             Result result = await client.GetFilesAsync(null);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("object").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("id").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("object").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("bytes").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("createdAt").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("filename").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("purpose").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("status").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("status_details").ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("object").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("id").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("object").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("bytes").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("createdAt").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("filename").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("purpose").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("status").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("status_details").ToString());
         }
 
         [Test]
@@ -2215,7 +2197,7 @@ Description = "<description>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_CreateFile()
+        public void Example_CreateFile_ShortVersion()
         {
             OpenAIClient client = new OpenAIClient();
 
@@ -2226,19 +2208,19 @@ Description = "<description>",
             }).ToStream());
             Result result = client.CreateFile(content);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("id").ToString());
-            Console.WriteLine(result0.GetProperty("object").ToString());
-            Console.WriteLine(result0.GetProperty("bytes").ToString());
-            Console.WriteLine(result0.GetProperty("createdAt").ToString());
-            Console.WriteLine(result0.GetProperty("filename").ToString());
-            Console.WriteLine(result0.GetProperty("purpose").ToString());
-            Console.WriteLine(result0.GetProperty("status").ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("id").ToString());
+            Console.WriteLine(element.GetProperty("object").ToString());
+            Console.WriteLine(element.GetProperty("bytes").ToString());
+            Console.WriteLine(element.GetProperty("createdAt").ToString());
+            Console.WriteLine(element.GetProperty("filename").ToString());
+            Console.WriteLine(element.GetProperty("purpose").ToString());
+            Console.WriteLine(element.GetProperty("status").ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_CreateFile_Async()
+        public async Task Example_CreateFile_ShortVersion_Async()
         {
             OpenAIClient client = new OpenAIClient();
 
@@ -2249,19 +2231,19 @@ Description = "<description>",
             }).ToStream());
             Result result = await client.CreateFileAsync(content);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("id").ToString());
-            Console.WriteLine(result0.GetProperty("object").ToString());
-            Console.WriteLine(result0.GetProperty("bytes").ToString());
-            Console.WriteLine(result0.GetProperty("createdAt").ToString());
-            Console.WriteLine(result0.GetProperty("filename").ToString());
-            Console.WriteLine(result0.GetProperty("purpose").ToString());
-            Console.WriteLine(result0.GetProperty("status").ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("id").ToString());
+            Console.WriteLine(element.GetProperty("object").ToString());
+            Console.WriteLine(element.GetProperty("bytes").ToString());
+            Console.WriteLine(element.GetProperty("createdAt").ToString());
+            Console.WriteLine(element.GetProperty("filename").ToString());
+            Console.WriteLine(element.GetProperty("purpose").ToString());
+            Console.WriteLine(element.GetProperty("status").ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_CreateFile_Convenience()
+        public void Example_CreateFile_ShortVersion_Convenience()
         {
             OpenAIClient client = new OpenAIClient();
 
@@ -2271,7 +2253,7 @@ Description = "<description>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_CreateFile_Convenience_Async()
+        public async Task Example_CreateFile_ShortVersion_Convenience_Async()
         {
             OpenAIClient client = new OpenAIClient();
 
@@ -2292,15 +2274,15 @@ Description = "<description>",
             }).ToStream());
             Result result = client.CreateFile(content);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("id").ToString());
-            Console.WriteLine(result0.GetProperty("object").ToString());
-            Console.WriteLine(result0.GetProperty("bytes").ToString());
-            Console.WriteLine(result0.GetProperty("createdAt").ToString());
-            Console.WriteLine(result0.GetProperty("filename").ToString());
-            Console.WriteLine(result0.GetProperty("purpose").ToString());
-            Console.WriteLine(result0.GetProperty("status").ToString());
-            Console.WriteLine(result0.GetProperty("status_details").ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("id").ToString());
+            Console.WriteLine(element.GetProperty("object").ToString());
+            Console.WriteLine(element.GetProperty("bytes").ToString());
+            Console.WriteLine(element.GetProperty("createdAt").ToString());
+            Console.WriteLine(element.GetProperty("filename").ToString());
+            Console.WriteLine(element.GetProperty("purpose").ToString());
+            Console.WriteLine(element.GetProperty("status").ToString());
+            Console.WriteLine(element.GetProperty("status_details").ToString());
         }
 
         [Test]
@@ -2316,15 +2298,15 @@ Description = "<description>",
             }).ToStream());
             Result result = await client.CreateFileAsync(content);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("id").ToString());
-            Console.WriteLine(result0.GetProperty("object").ToString());
-            Console.WriteLine(result0.GetProperty("bytes").ToString());
-            Console.WriteLine(result0.GetProperty("createdAt").ToString());
-            Console.WriteLine(result0.GetProperty("filename").ToString());
-            Console.WriteLine(result0.GetProperty("purpose").ToString());
-            Console.WriteLine(result0.GetProperty("status").ToString());
-            Console.WriteLine(result0.GetProperty("status_details").ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("id").ToString());
+            Console.WriteLine(element.GetProperty("object").ToString());
+            Console.WriteLine(element.GetProperty("bytes").ToString());
+            Console.WriteLine(element.GetProperty("createdAt").ToString());
+            Console.WriteLine(element.GetProperty("filename").ToString());
+            Console.WriteLine(element.GetProperty("purpose").ToString());
+            Console.WriteLine(element.GetProperty("status").ToString());
+            Console.WriteLine(element.GetProperty("status_details").ToString());
         }
 
         [Test]
@@ -2349,43 +2331,43 @@ Description = "<description>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_RetrieveFile()
+        public void Example_RetrieveFile_ShortVersion()
         {
             OpenAIClient client = new OpenAIClient();
 
             Result result = client.RetrieveFile("<file_id>", null);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("id").ToString());
-            Console.WriteLine(result0.GetProperty("object").ToString());
-            Console.WriteLine(result0.GetProperty("bytes").ToString());
-            Console.WriteLine(result0.GetProperty("createdAt").ToString());
-            Console.WriteLine(result0.GetProperty("filename").ToString());
-            Console.WriteLine(result0.GetProperty("purpose").ToString());
-            Console.WriteLine(result0.GetProperty("status").ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("id").ToString());
+            Console.WriteLine(element.GetProperty("object").ToString());
+            Console.WriteLine(element.GetProperty("bytes").ToString());
+            Console.WriteLine(element.GetProperty("createdAt").ToString());
+            Console.WriteLine(element.GetProperty("filename").ToString());
+            Console.WriteLine(element.GetProperty("purpose").ToString());
+            Console.WriteLine(element.GetProperty("status").ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_RetrieveFile_Async()
+        public async Task Example_RetrieveFile_ShortVersion_Async()
         {
             OpenAIClient client = new OpenAIClient();
 
             Result result = await client.RetrieveFileAsync("<file_id>", null);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("id").ToString());
-            Console.WriteLine(result0.GetProperty("object").ToString());
-            Console.WriteLine(result0.GetProperty("bytes").ToString());
-            Console.WriteLine(result0.GetProperty("createdAt").ToString());
-            Console.WriteLine(result0.GetProperty("filename").ToString());
-            Console.WriteLine(result0.GetProperty("purpose").ToString());
-            Console.WriteLine(result0.GetProperty("status").ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("id").ToString());
+            Console.WriteLine(element.GetProperty("object").ToString());
+            Console.WriteLine(element.GetProperty("bytes").ToString());
+            Console.WriteLine(element.GetProperty("createdAt").ToString());
+            Console.WriteLine(element.GetProperty("filename").ToString());
+            Console.WriteLine(element.GetProperty("purpose").ToString());
+            Console.WriteLine(element.GetProperty("status").ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_RetrieveFile_Convenience()
+        public void Example_RetrieveFile_ShortVersion_Convenience()
         {
             OpenAIClient client = new OpenAIClient();
 
@@ -2394,7 +2376,7 @@ Description = "<description>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_RetrieveFile_Convenience_Async()
+        public async Task Example_RetrieveFile_ShortVersion_Convenience_Async()
         {
             OpenAIClient client = new OpenAIClient();
 
@@ -2409,15 +2391,15 @@ Description = "<description>",
 
             Result result = client.RetrieveFile("<file_id>", null);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("id").ToString());
-            Console.WriteLine(result0.GetProperty("object").ToString());
-            Console.WriteLine(result0.GetProperty("bytes").ToString());
-            Console.WriteLine(result0.GetProperty("createdAt").ToString());
-            Console.WriteLine(result0.GetProperty("filename").ToString());
-            Console.WriteLine(result0.GetProperty("purpose").ToString());
-            Console.WriteLine(result0.GetProperty("status").ToString());
-            Console.WriteLine(result0.GetProperty("status_details").ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("id").ToString());
+            Console.WriteLine(element.GetProperty("object").ToString());
+            Console.WriteLine(element.GetProperty("bytes").ToString());
+            Console.WriteLine(element.GetProperty("createdAt").ToString());
+            Console.WriteLine(element.GetProperty("filename").ToString());
+            Console.WriteLine(element.GetProperty("purpose").ToString());
+            Console.WriteLine(element.GetProperty("status").ToString());
+            Console.WriteLine(element.GetProperty("status_details").ToString());
         }
 
         [Test]
@@ -2428,15 +2410,15 @@ Description = "<description>",
 
             Result result = await client.RetrieveFileAsync("<file_id>", null);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("id").ToString());
-            Console.WriteLine(result0.GetProperty("object").ToString());
-            Console.WriteLine(result0.GetProperty("bytes").ToString());
-            Console.WriteLine(result0.GetProperty("createdAt").ToString());
-            Console.WriteLine(result0.GetProperty("filename").ToString());
-            Console.WriteLine(result0.GetProperty("purpose").ToString());
-            Console.WriteLine(result0.GetProperty("status").ToString());
-            Console.WriteLine(result0.GetProperty("status_details").ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("id").ToString());
+            Console.WriteLine(element.GetProperty("object").ToString());
+            Console.WriteLine(element.GetProperty("bytes").ToString());
+            Console.WriteLine(element.GetProperty("createdAt").ToString());
+            Console.WriteLine(element.GetProperty("filename").ToString());
+            Console.WriteLine(element.GetProperty("purpose").ToString());
+            Console.WriteLine(element.GetProperty("status").ToString());
+            Console.WriteLine(element.GetProperty("status_details").ToString());
         }
 
         [Test]
@@ -2459,35 +2441,35 @@ Description = "<description>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_DeleteFile()
+        public void Example_DeleteFile_ShortVersion()
         {
             OpenAIClient client = new OpenAIClient();
 
             Result result = client.DeleteFile("<file_id>", null);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("id").ToString());
-            Console.WriteLine(result0.GetProperty("object").ToString());
-            Console.WriteLine(result0.GetProperty("deleted").ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("id").ToString());
+            Console.WriteLine(element.GetProperty("object").ToString());
+            Console.WriteLine(element.GetProperty("deleted").ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_DeleteFile_Async()
+        public async Task Example_DeleteFile_ShortVersion_Async()
         {
             OpenAIClient client = new OpenAIClient();
 
             Result result = await client.DeleteFileAsync("<file_id>", null);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("id").ToString());
-            Console.WriteLine(result0.GetProperty("object").ToString());
-            Console.WriteLine(result0.GetProperty("deleted").ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("id").ToString());
+            Console.WriteLine(element.GetProperty("object").ToString());
+            Console.WriteLine(element.GetProperty("deleted").ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_DeleteFile_Convenience()
+        public void Example_DeleteFile_ShortVersion_Convenience()
         {
             OpenAIClient client = new OpenAIClient();
 
@@ -2496,7 +2478,7 @@ Description = "<description>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_DeleteFile_Convenience_Async()
+        public async Task Example_DeleteFile_ShortVersion_Convenience_Async()
         {
             OpenAIClient client = new OpenAIClient();
 
@@ -2511,10 +2493,10 @@ Description = "<description>",
 
             Result result = client.DeleteFile("<file_id>", null);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("id").ToString());
-            Console.WriteLine(result0.GetProperty("object").ToString());
-            Console.WriteLine(result0.GetProperty("deleted").ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("id").ToString());
+            Console.WriteLine(element.GetProperty("object").ToString());
+            Console.WriteLine(element.GetProperty("deleted").ToString());
         }
 
         [Test]
@@ -2525,10 +2507,10 @@ Description = "<description>",
 
             Result result = await client.DeleteFileAsync("<file_id>", null);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("id").ToString());
-            Console.WriteLine(result0.GetProperty("object").ToString());
-            Console.WriteLine(result0.GetProperty("deleted").ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("id").ToString());
+            Console.WriteLine(element.GetProperty("object").ToString());
+            Console.WriteLine(element.GetProperty("deleted").ToString());
         }
 
         [Test]
@@ -2551,31 +2533,31 @@ Description = "<description>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_DownloadFile()
+        public void Example_DownloadFile_ShortVersion()
         {
             OpenAIClient client = new OpenAIClient();
 
             Result result = client.DownloadFile("<file_id>", null);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_DownloadFile_Async()
+        public async Task Example_DownloadFile_ShortVersion_Async()
         {
             OpenAIClient client = new OpenAIClient();
 
             Result result = await client.DownloadFileAsync("<file_id>", null);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_DownloadFile_Convenience()
+        public void Example_DownloadFile_ShortVersion_Convenience()
         {
             OpenAIClient client = new OpenAIClient();
 
@@ -2584,7 +2566,7 @@ Description = "<description>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_DownloadFile_Convenience_Async()
+        public async Task Example_DownloadFile_ShortVersion_Convenience_Async()
         {
             OpenAIClient client = new OpenAIClient();
 
@@ -2599,8 +2581,8 @@ Description = "<description>",
 
             Result result = client.DownloadFile("<file_id>", null);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.ToString());
         }
 
         [Test]
@@ -2611,8 +2593,8 @@ Description = "<description>",
 
             Result result = await client.DownloadFileAsync("<file_id>", null);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.ToString());
         }
 
         [Test]
@@ -2635,39 +2617,39 @@ Description = "<description>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetModels()
+        public void Example_GetModels_ShortVersion()
         {
             OpenAIClient client = new OpenAIClient();
 
             Result result = client.GetModels(null);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("object").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("id").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("object").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("created").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("owned_by").ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("object").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("id").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("object").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("created").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("owned_by").ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetModels_Async()
+        public async Task Example_GetModels_ShortVersion_Async()
         {
             OpenAIClient client = new OpenAIClient();
 
             Result result = await client.GetModelsAsync(null);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("object").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("id").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("object").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("created").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("owned_by").ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("object").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("id").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("object").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("created").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("owned_by").ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetModels_Convenience()
+        public void Example_GetModels_ShortVersion_Convenience()
         {
             OpenAIClient client = new OpenAIClient();
 
@@ -2676,7 +2658,7 @@ Description = "<description>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetModels_Convenience_Async()
+        public async Task Example_GetModels_ShortVersion_Convenience_Async()
         {
             OpenAIClient client = new OpenAIClient();
 
@@ -2691,12 +2673,12 @@ Description = "<description>",
 
             Result result = client.GetModels(null);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("object").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("id").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("object").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("created").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("owned_by").ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("object").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("id").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("object").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("created").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("owned_by").ToString());
         }
 
         [Test]
@@ -2707,12 +2689,12 @@ Description = "<description>",
 
             Result result = await client.GetModelsAsync(null);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("object").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("id").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("object").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("created").ToString());
-            Console.WriteLine(result0.GetProperty("data")[0].GetProperty("owned_by").ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("object").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("id").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("object").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("created").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("owned_by").ToString());
         }
 
         [Test]
@@ -2735,37 +2717,37 @@ Description = "<description>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_RetrieveModel()
+        public void Example_RetrieveModel_ShortVersion()
         {
             OpenAIClient client = new OpenAIClient();
 
             Result result = client.RetrieveModel("<model>", null);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("id").ToString());
-            Console.WriteLine(result0.GetProperty("object").ToString());
-            Console.WriteLine(result0.GetProperty("created").ToString());
-            Console.WriteLine(result0.GetProperty("owned_by").ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("id").ToString());
+            Console.WriteLine(element.GetProperty("object").ToString());
+            Console.WriteLine(element.GetProperty("created").ToString());
+            Console.WriteLine(element.GetProperty("owned_by").ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_RetrieveModel_Async()
+        public async Task Example_RetrieveModel_ShortVersion_Async()
         {
             OpenAIClient client = new OpenAIClient();
 
             Result result = await client.RetrieveModelAsync("<model>", null);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("id").ToString());
-            Console.WriteLine(result0.GetProperty("object").ToString());
-            Console.WriteLine(result0.GetProperty("created").ToString());
-            Console.WriteLine(result0.GetProperty("owned_by").ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("id").ToString());
+            Console.WriteLine(element.GetProperty("object").ToString());
+            Console.WriteLine(element.GetProperty("created").ToString());
+            Console.WriteLine(element.GetProperty("owned_by").ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_RetrieveModel_Convenience()
+        public void Example_RetrieveModel_ShortVersion_Convenience()
         {
             OpenAIClient client = new OpenAIClient();
 
@@ -2774,7 +2756,7 @@ Description = "<description>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_RetrieveModel_Convenience_Async()
+        public async Task Example_RetrieveModel_ShortVersion_Convenience_Async()
         {
             OpenAIClient client = new OpenAIClient();
 
@@ -2789,11 +2771,11 @@ Description = "<description>",
 
             Result result = client.RetrieveModel("<model>", null);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("id").ToString());
-            Console.WriteLine(result0.GetProperty("object").ToString());
-            Console.WriteLine(result0.GetProperty("created").ToString());
-            Console.WriteLine(result0.GetProperty("owned_by").ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("id").ToString());
+            Console.WriteLine(element.GetProperty("object").ToString());
+            Console.WriteLine(element.GetProperty("created").ToString());
+            Console.WriteLine(element.GetProperty("owned_by").ToString());
         }
 
         [Test]
@@ -2804,11 +2786,11 @@ Description = "<description>",
 
             Result result = await client.RetrieveModelAsync("<model>", null);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("id").ToString());
-            Console.WriteLine(result0.GetProperty("object").ToString());
-            Console.WriteLine(result0.GetProperty("created").ToString());
-            Console.WriteLine(result0.GetProperty("owned_by").ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("id").ToString());
+            Console.WriteLine(element.GetProperty("object").ToString());
+            Console.WriteLine(element.GetProperty("created").ToString());
+            Console.WriteLine(element.GetProperty("owned_by").ToString());
         }
 
         [Test]
@@ -2831,35 +2813,35 @@ Description = "<description>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_DeleteModel()
+        public void Example_DeleteModel_ShortVersion()
         {
             OpenAIClient client = new OpenAIClient();
 
             Result result = client.DeleteModel("<model>", null);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("id").ToString());
-            Console.WriteLine(result0.GetProperty("object").ToString());
-            Console.WriteLine(result0.GetProperty("deleted").ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("id").ToString());
+            Console.WriteLine(element.GetProperty("object").ToString());
+            Console.WriteLine(element.GetProperty("deleted").ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_DeleteModel_Async()
+        public async Task Example_DeleteModel_ShortVersion_Async()
         {
             OpenAIClient client = new OpenAIClient();
 
             Result result = await client.DeleteModelAsync("<model>", null);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("id").ToString());
-            Console.WriteLine(result0.GetProperty("object").ToString());
-            Console.WriteLine(result0.GetProperty("deleted").ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("id").ToString());
+            Console.WriteLine(element.GetProperty("object").ToString());
+            Console.WriteLine(element.GetProperty("deleted").ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_DeleteModel_Convenience()
+        public void Example_DeleteModel_ShortVersion_Convenience()
         {
             OpenAIClient client = new OpenAIClient();
 
@@ -2868,7 +2850,7 @@ Description = "<description>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_DeleteModel_Convenience_Async()
+        public async Task Example_DeleteModel_ShortVersion_Convenience_Async()
         {
             OpenAIClient client = new OpenAIClient();
 
@@ -2883,10 +2865,10 @@ Description = "<description>",
 
             Result result = client.DeleteModel("<model>", null);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("id").ToString());
-            Console.WriteLine(result0.GetProperty("object").ToString());
-            Console.WriteLine(result0.GetProperty("deleted").ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("id").ToString());
+            Console.WriteLine(element.GetProperty("object").ToString());
+            Console.WriteLine(element.GetProperty("deleted").ToString());
         }
 
         [Test]
@@ -2897,10 +2879,10 @@ Description = "<description>",
 
             Result result = await client.DeleteModelAsync("<model>", null);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("id").ToString());
-            Console.WriteLine(result0.GetProperty("object").ToString());
-            Console.WriteLine(result0.GetProperty("deleted").ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("id").ToString());
+            Console.WriteLine(element.GetProperty("object").ToString());
+            Console.WriteLine(element.GetProperty("deleted").ToString());
         }
 
         [Test]
@@ -2923,113 +2905,107 @@ Description = "<description>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_CreateModeration()
+        public void Example_CreateModeration_ShortVersion()
         {
             OpenAIClient client = new OpenAIClient();
 
             RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
             {
-                input = new List<object>()
-{
+                input = new object[]
+            {
 "<input>"
-},
+            },
             }).ToStream());
             Result result = client.CreateModeration(content);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("id").ToString());
-            Console.WriteLine(result0.GetProperty("model").ToString());
-            Console.WriteLine(result0.GetProperty("results")[0].GetProperty("flagged").ToString());
-            Console.WriteLine(result0.GetProperty("results")[0].GetProperty("categories").GetProperty("hate").ToString());
-            Console.WriteLine(result0.GetProperty("results")[0].GetProperty("categories").GetProperty("hate/threatening").ToString());
-            Console.WriteLine(result0.GetProperty("results")[0].GetProperty("categories").GetProperty("harassment").ToString());
-            Console.WriteLine(result0.GetProperty("results")[0].GetProperty("categories").GetProperty("harassment/threatening").ToString());
-            Console.WriteLine(result0.GetProperty("results")[0].GetProperty("categories").GetProperty("self-harm").ToString());
-            Console.WriteLine(result0.GetProperty("results")[0].GetProperty("categories").GetProperty("self-harm/intent").ToString());
-            Console.WriteLine(result0.GetProperty("results")[0].GetProperty("categories").GetProperty("self-harm/instructive").ToString());
-            Console.WriteLine(result0.GetProperty("results")[0].GetProperty("categories").GetProperty("sexual").ToString());
-            Console.WriteLine(result0.GetProperty("results")[0].GetProperty("categories").GetProperty("sexual/minors").ToString());
-            Console.WriteLine(result0.GetProperty("results")[0].GetProperty("categories").GetProperty("violence").ToString());
-            Console.WriteLine(result0.GetProperty("results")[0].GetProperty("categories").GetProperty("violence/graphic").ToString());
-            Console.WriteLine(result0.GetProperty("results")[0].GetProperty("category_scores").GetProperty("hate").ToString());
-            Console.WriteLine(result0.GetProperty("results")[0].GetProperty("category_scores").GetProperty("hate/threatening").ToString());
-            Console.WriteLine(result0.GetProperty("results")[0].GetProperty("category_scores").GetProperty("harassment").ToString());
-            Console.WriteLine(result0.GetProperty("results")[0].GetProperty("category_scores").GetProperty("harassment/threatening").ToString());
-            Console.WriteLine(result0.GetProperty("results")[0].GetProperty("category_scores").GetProperty("self-harm").ToString());
-            Console.WriteLine(result0.GetProperty("results")[0].GetProperty("category_scores").GetProperty("self-harm/intent").ToString());
-            Console.WriteLine(result0.GetProperty("results")[0].GetProperty("category_scores").GetProperty("self-harm/instructive").ToString());
-            Console.WriteLine(result0.GetProperty("results")[0].GetProperty("category_scores").GetProperty("sexual").ToString());
-            Console.WriteLine(result0.GetProperty("results")[0].GetProperty("category_scores").GetProperty("sexual/minors").ToString());
-            Console.WriteLine(result0.GetProperty("results")[0].GetProperty("category_scores").GetProperty("violence").ToString());
-            Console.WriteLine(result0.GetProperty("results")[0].GetProperty("category_scores").GetProperty("violence/graphic").ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("id").ToString());
+            Console.WriteLine(element.GetProperty("model").ToString());
+            Console.WriteLine(element.GetProperty("results")[0].GetProperty("flagged").ToString());
+            Console.WriteLine(element.GetProperty("results")[0].GetProperty("categories").GetProperty("hate").ToString());
+            Console.WriteLine(element.GetProperty("results")[0].GetProperty("categories").GetProperty("hate/threatening").ToString());
+            Console.WriteLine(element.GetProperty("results")[0].GetProperty("categories").GetProperty("harassment").ToString());
+            Console.WriteLine(element.GetProperty("results")[0].GetProperty("categories").GetProperty("harassment/threatening").ToString());
+            Console.WriteLine(element.GetProperty("results")[0].GetProperty("categories").GetProperty("self-harm").ToString());
+            Console.WriteLine(element.GetProperty("results")[0].GetProperty("categories").GetProperty("self-harm/intent").ToString());
+            Console.WriteLine(element.GetProperty("results")[0].GetProperty("categories").GetProperty("self-harm/instructive").ToString());
+            Console.WriteLine(element.GetProperty("results")[0].GetProperty("categories").GetProperty("sexual").ToString());
+            Console.WriteLine(element.GetProperty("results")[0].GetProperty("categories").GetProperty("sexual/minors").ToString());
+            Console.WriteLine(element.GetProperty("results")[0].GetProperty("categories").GetProperty("violence").ToString());
+            Console.WriteLine(element.GetProperty("results")[0].GetProperty("categories").GetProperty("violence/graphic").ToString());
+            Console.WriteLine(element.GetProperty("results")[0].GetProperty("category_scores").GetProperty("hate").ToString());
+            Console.WriteLine(element.GetProperty("results")[0].GetProperty("category_scores").GetProperty("hate/threatening").ToString());
+            Console.WriteLine(element.GetProperty("results")[0].GetProperty("category_scores").GetProperty("harassment").ToString());
+            Console.WriteLine(element.GetProperty("results")[0].GetProperty("category_scores").GetProperty("harassment/threatening").ToString());
+            Console.WriteLine(element.GetProperty("results")[0].GetProperty("category_scores").GetProperty("self-harm").ToString());
+            Console.WriteLine(element.GetProperty("results")[0].GetProperty("category_scores").GetProperty("self-harm/intent").ToString());
+            Console.WriteLine(element.GetProperty("results")[0].GetProperty("category_scores").GetProperty("self-harm/instructive").ToString());
+            Console.WriteLine(element.GetProperty("results")[0].GetProperty("category_scores").GetProperty("sexual").ToString());
+            Console.WriteLine(element.GetProperty("results")[0].GetProperty("category_scores").GetProperty("sexual/minors").ToString());
+            Console.WriteLine(element.GetProperty("results")[0].GetProperty("category_scores").GetProperty("violence").ToString());
+            Console.WriteLine(element.GetProperty("results")[0].GetProperty("category_scores").GetProperty("violence/graphic").ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_CreateModeration_Async()
+        public async Task Example_CreateModeration_ShortVersion_Async()
         {
             OpenAIClient client = new OpenAIClient();
 
             RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
             {
-                input = new List<object>()
-{
+                input = new object[]
+            {
 "<input>"
-},
+            },
             }).ToStream());
             Result result = await client.CreateModerationAsync(content);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("id").ToString());
-            Console.WriteLine(result0.GetProperty("model").ToString());
-            Console.WriteLine(result0.GetProperty("results")[0].GetProperty("flagged").ToString());
-            Console.WriteLine(result0.GetProperty("results")[0].GetProperty("categories").GetProperty("hate").ToString());
-            Console.WriteLine(result0.GetProperty("results")[0].GetProperty("categories").GetProperty("hate/threatening").ToString());
-            Console.WriteLine(result0.GetProperty("results")[0].GetProperty("categories").GetProperty("harassment").ToString());
-            Console.WriteLine(result0.GetProperty("results")[0].GetProperty("categories").GetProperty("harassment/threatening").ToString());
-            Console.WriteLine(result0.GetProperty("results")[0].GetProperty("categories").GetProperty("self-harm").ToString());
-            Console.WriteLine(result0.GetProperty("results")[0].GetProperty("categories").GetProperty("self-harm/intent").ToString());
-            Console.WriteLine(result0.GetProperty("results")[0].GetProperty("categories").GetProperty("self-harm/instructive").ToString());
-            Console.WriteLine(result0.GetProperty("results")[0].GetProperty("categories").GetProperty("sexual").ToString());
-            Console.WriteLine(result0.GetProperty("results")[0].GetProperty("categories").GetProperty("sexual/minors").ToString());
-            Console.WriteLine(result0.GetProperty("results")[0].GetProperty("categories").GetProperty("violence").ToString());
-            Console.WriteLine(result0.GetProperty("results")[0].GetProperty("categories").GetProperty("violence/graphic").ToString());
-            Console.WriteLine(result0.GetProperty("results")[0].GetProperty("category_scores").GetProperty("hate").ToString());
-            Console.WriteLine(result0.GetProperty("results")[0].GetProperty("category_scores").GetProperty("hate/threatening").ToString());
-            Console.WriteLine(result0.GetProperty("results")[0].GetProperty("category_scores").GetProperty("harassment").ToString());
-            Console.WriteLine(result0.GetProperty("results")[0].GetProperty("category_scores").GetProperty("harassment/threatening").ToString());
-            Console.WriteLine(result0.GetProperty("results")[0].GetProperty("category_scores").GetProperty("self-harm").ToString());
-            Console.WriteLine(result0.GetProperty("results")[0].GetProperty("category_scores").GetProperty("self-harm/intent").ToString());
-            Console.WriteLine(result0.GetProperty("results")[0].GetProperty("category_scores").GetProperty("self-harm/instructive").ToString());
-            Console.WriteLine(result0.GetProperty("results")[0].GetProperty("category_scores").GetProperty("sexual").ToString());
-            Console.WriteLine(result0.GetProperty("results")[0].GetProperty("category_scores").GetProperty("sexual/minors").ToString());
-            Console.WriteLine(result0.GetProperty("results")[0].GetProperty("category_scores").GetProperty("violence").ToString());
-            Console.WriteLine(result0.GetProperty("results")[0].GetProperty("category_scores").GetProperty("violence/graphic").ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("id").ToString());
+            Console.WriteLine(element.GetProperty("model").ToString());
+            Console.WriteLine(element.GetProperty("results")[0].GetProperty("flagged").ToString());
+            Console.WriteLine(element.GetProperty("results")[0].GetProperty("categories").GetProperty("hate").ToString());
+            Console.WriteLine(element.GetProperty("results")[0].GetProperty("categories").GetProperty("hate/threatening").ToString());
+            Console.WriteLine(element.GetProperty("results")[0].GetProperty("categories").GetProperty("harassment").ToString());
+            Console.WriteLine(element.GetProperty("results")[0].GetProperty("categories").GetProperty("harassment/threatening").ToString());
+            Console.WriteLine(element.GetProperty("results")[0].GetProperty("categories").GetProperty("self-harm").ToString());
+            Console.WriteLine(element.GetProperty("results")[0].GetProperty("categories").GetProperty("self-harm/intent").ToString());
+            Console.WriteLine(element.GetProperty("results")[0].GetProperty("categories").GetProperty("self-harm/instructive").ToString());
+            Console.WriteLine(element.GetProperty("results")[0].GetProperty("categories").GetProperty("sexual").ToString());
+            Console.WriteLine(element.GetProperty("results")[0].GetProperty("categories").GetProperty("sexual/minors").ToString());
+            Console.WriteLine(element.GetProperty("results")[0].GetProperty("categories").GetProperty("violence").ToString());
+            Console.WriteLine(element.GetProperty("results")[0].GetProperty("categories").GetProperty("violence/graphic").ToString());
+            Console.WriteLine(element.GetProperty("results")[0].GetProperty("category_scores").GetProperty("hate").ToString());
+            Console.WriteLine(element.GetProperty("results")[0].GetProperty("category_scores").GetProperty("hate/threatening").ToString());
+            Console.WriteLine(element.GetProperty("results")[0].GetProperty("category_scores").GetProperty("harassment").ToString());
+            Console.WriteLine(element.GetProperty("results")[0].GetProperty("category_scores").GetProperty("harassment/threatening").ToString());
+            Console.WriteLine(element.GetProperty("results")[0].GetProperty("category_scores").GetProperty("self-harm").ToString());
+            Console.WriteLine(element.GetProperty("results")[0].GetProperty("category_scores").GetProperty("self-harm/intent").ToString());
+            Console.WriteLine(element.GetProperty("results")[0].GetProperty("category_scores").GetProperty("self-harm/instructive").ToString());
+            Console.WriteLine(element.GetProperty("results")[0].GetProperty("category_scores").GetProperty("sexual").ToString());
+            Console.WriteLine(element.GetProperty("results")[0].GetProperty("category_scores").GetProperty("sexual/minors").ToString());
+            Console.WriteLine(element.GetProperty("results")[0].GetProperty("category_scores").GetProperty("violence").ToString());
+            Console.WriteLine(element.GetProperty("results")[0].GetProperty("category_scores").GetProperty("violence/graphic").ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_CreateModeration_Convenience()
+        public void Example_CreateModeration_ShortVersion_Convenience()
         {
             OpenAIClient client = new OpenAIClient();
 
-            CreateModerationRequest content = new CreateModerationRequest(new List<string>()
-{
-"<input>"
-});
+            CreateModerationRequest content = new CreateModerationRequest(new string[] { "<input>" });
             Result<CreateModerationResponse> result = client.CreateModeration(content);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_CreateModeration_Convenience_Async()
+        public async Task Example_CreateModeration_ShortVersion_Convenience_Async()
         {
             OpenAIClient client = new OpenAIClient();
 
-            CreateModerationRequest content = new CreateModerationRequest(new List<string>()
-{
-"<input>"
-});
+            CreateModerationRequest content = new CreateModerationRequest(new string[] { "<input>" });
             Result<CreateModerationResponse> result = await client.CreateModerationAsync(content);
         }
 
@@ -3041,40 +3017,40 @@ Description = "<description>",
 
             RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
             {
-                input = new List<object>()
-{
+                input = new object[]
+            {
 "<input>"
-},
+            },
                 model = "text-moderation-latest",
             }).ToStream());
             Result result = client.CreateModeration(content);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("id").ToString());
-            Console.WriteLine(result0.GetProperty("model").ToString());
-            Console.WriteLine(result0.GetProperty("results")[0].GetProperty("flagged").ToString());
-            Console.WriteLine(result0.GetProperty("results")[0].GetProperty("categories").GetProperty("hate").ToString());
-            Console.WriteLine(result0.GetProperty("results")[0].GetProperty("categories").GetProperty("hate/threatening").ToString());
-            Console.WriteLine(result0.GetProperty("results")[0].GetProperty("categories").GetProperty("harassment").ToString());
-            Console.WriteLine(result0.GetProperty("results")[0].GetProperty("categories").GetProperty("harassment/threatening").ToString());
-            Console.WriteLine(result0.GetProperty("results")[0].GetProperty("categories").GetProperty("self-harm").ToString());
-            Console.WriteLine(result0.GetProperty("results")[0].GetProperty("categories").GetProperty("self-harm/intent").ToString());
-            Console.WriteLine(result0.GetProperty("results")[0].GetProperty("categories").GetProperty("self-harm/instructive").ToString());
-            Console.WriteLine(result0.GetProperty("results")[0].GetProperty("categories").GetProperty("sexual").ToString());
-            Console.WriteLine(result0.GetProperty("results")[0].GetProperty("categories").GetProperty("sexual/minors").ToString());
-            Console.WriteLine(result0.GetProperty("results")[0].GetProperty("categories").GetProperty("violence").ToString());
-            Console.WriteLine(result0.GetProperty("results")[0].GetProperty("categories").GetProperty("violence/graphic").ToString());
-            Console.WriteLine(result0.GetProperty("results")[0].GetProperty("category_scores").GetProperty("hate").ToString());
-            Console.WriteLine(result0.GetProperty("results")[0].GetProperty("category_scores").GetProperty("hate/threatening").ToString());
-            Console.WriteLine(result0.GetProperty("results")[0].GetProperty("category_scores").GetProperty("harassment").ToString());
-            Console.WriteLine(result0.GetProperty("results")[0].GetProperty("category_scores").GetProperty("harassment/threatening").ToString());
-            Console.WriteLine(result0.GetProperty("results")[0].GetProperty("category_scores").GetProperty("self-harm").ToString());
-            Console.WriteLine(result0.GetProperty("results")[0].GetProperty("category_scores").GetProperty("self-harm/intent").ToString());
-            Console.WriteLine(result0.GetProperty("results")[0].GetProperty("category_scores").GetProperty("self-harm/instructive").ToString());
-            Console.WriteLine(result0.GetProperty("results")[0].GetProperty("category_scores").GetProperty("sexual").ToString());
-            Console.WriteLine(result0.GetProperty("results")[0].GetProperty("category_scores").GetProperty("sexual/minors").ToString());
-            Console.WriteLine(result0.GetProperty("results")[0].GetProperty("category_scores").GetProperty("violence").ToString());
-            Console.WriteLine(result0.GetProperty("results")[0].GetProperty("category_scores").GetProperty("violence/graphic").ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("id").ToString());
+            Console.WriteLine(element.GetProperty("model").ToString());
+            Console.WriteLine(element.GetProperty("results")[0].GetProperty("flagged").ToString());
+            Console.WriteLine(element.GetProperty("results")[0].GetProperty("categories").GetProperty("hate").ToString());
+            Console.WriteLine(element.GetProperty("results")[0].GetProperty("categories").GetProperty("hate/threatening").ToString());
+            Console.WriteLine(element.GetProperty("results")[0].GetProperty("categories").GetProperty("harassment").ToString());
+            Console.WriteLine(element.GetProperty("results")[0].GetProperty("categories").GetProperty("harassment/threatening").ToString());
+            Console.WriteLine(element.GetProperty("results")[0].GetProperty("categories").GetProperty("self-harm").ToString());
+            Console.WriteLine(element.GetProperty("results")[0].GetProperty("categories").GetProperty("self-harm/intent").ToString());
+            Console.WriteLine(element.GetProperty("results")[0].GetProperty("categories").GetProperty("self-harm/instructive").ToString());
+            Console.WriteLine(element.GetProperty("results")[0].GetProperty("categories").GetProperty("sexual").ToString());
+            Console.WriteLine(element.GetProperty("results")[0].GetProperty("categories").GetProperty("sexual/minors").ToString());
+            Console.WriteLine(element.GetProperty("results")[0].GetProperty("categories").GetProperty("violence").ToString());
+            Console.WriteLine(element.GetProperty("results")[0].GetProperty("categories").GetProperty("violence/graphic").ToString());
+            Console.WriteLine(element.GetProperty("results")[0].GetProperty("category_scores").GetProperty("hate").ToString());
+            Console.WriteLine(element.GetProperty("results")[0].GetProperty("category_scores").GetProperty("hate/threatening").ToString());
+            Console.WriteLine(element.GetProperty("results")[0].GetProperty("category_scores").GetProperty("harassment").ToString());
+            Console.WriteLine(element.GetProperty("results")[0].GetProperty("category_scores").GetProperty("harassment/threatening").ToString());
+            Console.WriteLine(element.GetProperty("results")[0].GetProperty("category_scores").GetProperty("self-harm").ToString());
+            Console.WriteLine(element.GetProperty("results")[0].GetProperty("category_scores").GetProperty("self-harm/intent").ToString());
+            Console.WriteLine(element.GetProperty("results")[0].GetProperty("category_scores").GetProperty("self-harm/instructive").ToString());
+            Console.WriteLine(element.GetProperty("results")[0].GetProperty("category_scores").GetProperty("sexual").ToString());
+            Console.WriteLine(element.GetProperty("results")[0].GetProperty("category_scores").GetProperty("sexual/minors").ToString());
+            Console.WriteLine(element.GetProperty("results")[0].GetProperty("category_scores").GetProperty("violence").ToString());
+            Console.WriteLine(element.GetProperty("results")[0].GetProperty("category_scores").GetProperty("violence/graphic").ToString());
         }
 
         [Test]
@@ -3085,40 +3061,40 @@ Description = "<description>",
 
             RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
             {
-                input = new List<object>()
-{
+                input = new object[]
+            {
 "<input>"
-},
+            },
                 model = "text-moderation-latest",
             }).ToStream());
             Result result = await client.CreateModerationAsync(content);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("id").ToString());
-            Console.WriteLine(result0.GetProperty("model").ToString());
-            Console.WriteLine(result0.GetProperty("results")[0].GetProperty("flagged").ToString());
-            Console.WriteLine(result0.GetProperty("results")[0].GetProperty("categories").GetProperty("hate").ToString());
-            Console.WriteLine(result0.GetProperty("results")[0].GetProperty("categories").GetProperty("hate/threatening").ToString());
-            Console.WriteLine(result0.GetProperty("results")[0].GetProperty("categories").GetProperty("harassment").ToString());
-            Console.WriteLine(result0.GetProperty("results")[0].GetProperty("categories").GetProperty("harassment/threatening").ToString());
-            Console.WriteLine(result0.GetProperty("results")[0].GetProperty("categories").GetProperty("self-harm").ToString());
-            Console.WriteLine(result0.GetProperty("results")[0].GetProperty("categories").GetProperty("self-harm/intent").ToString());
-            Console.WriteLine(result0.GetProperty("results")[0].GetProperty("categories").GetProperty("self-harm/instructive").ToString());
-            Console.WriteLine(result0.GetProperty("results")[0].GetProperty("categories").GetProperty("sexual").ToString());
-            Console.WriteLine(result0.GetProperty("results")[0].GetProperty("categories").GetProperty("sexual/minors").ToString());
-            Console.WriteLine(result0.GetProperty("results")[0].GetProperty("categories").GetProperty("violence").ToString());
-            Console.WriteLine(result0.GetProperty("results")[0].GetProperty("categories").GetProperty("violence/graphic").ToString());
-            Console.WriteLine(result0.GetProperty("results")[0].GetProperty("category_scores").GetProperty("hate").ToString());
-            Console.WriteLine(result0.GetProperty("results")[0].GetProperty("category_scores").GetProperty("hate/threatening").ToString());
-            Console.WriteLine(result0.GetProperty("results")[0].GetProperty("category_scores").GetProperty("harassment").ToString());
-            Console.WriteLine(result0.GetProperty("results")[0].GetProperty("category_scores").GetProperty("harassment/threatening").ToString());
-            Console.WriteLine(result0.GetProperty("results")[0].GetProperty("category_scores").GetProperty("self-harm").ToString());
-            Console.WriteLine(result0.GetProperty("results")[0].GetProperty("category_scores").GetProperty("self-harm/intent").ToString());
-            Console.WriteLine(result0.GetProperty("results")[0].GetProperty("category_scores").GetProperty("self-harm/instructive").ToString());
-            Console.WriteLine(result0.GetProperty("results")[0].GetProperty("category_scores").GetProperty("sexual").ToString());
-            Console.WriteLine(result0.GetProperty("results")[0].GetProperty("category_scores").GetProperty("sexual/minors").ToString());
-            Console.WriteLine(result0.GetProperty("results")[0].GetProperty("category_scores").GetProperty("violence").ToString());
-            Console.WriteLine(result0.GetProperty("results")[0].GetProperty("category_scores").GetProperty("violence/graphic").ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("id").ToString());
+            Console.WriteLine(element.GetProperty("model").ToString());
+            Console.WriteLine(element.GetProperty("results")[0].GetProperty("flagged").ToString());
+            Console.WriteLine(element.GetProperty("results")[0].GetProperty("categories").GetProperty("hate").ToString());
+            Console.WriteLine(element.GetProperty("results")[0].GetProperty("categories").GetProperty("hate/threatening").ToString());
+            Console.WriteLine(element.GetProperty("results")[0].GetProperty("categories").GetProperty("harassment").ToString());
+            Console.WriteLine(element.GetProperty("results")[0].GetProperty("categories").GetProperty("harassment/threatening").ToString());
+            Console.WriteLine(element.GetProperty("results")[0].GetProperty("categories").GetProperty("self-harm").ToString());
+            Console.WriteLine(element.GetProperty("results")[0].GetProperty("categories").GetProperty("self-harm/intent").ToString());
+            Console.WriteLine(element.GetProperty("results")[0].GetProperty("categories").GetProperty("self-harm/instructive").ToString());
+            Console.WriteLine(element.GetProperty("results")[0].GetProperty("categories").GetProperty("sexual").ToString());
+            Console.WriteLine(element.GetProperty("results")[0].GetProperty("categories").GetProperty("sexual/minors").ToString());
+            Console.WriteLine(element.GetProperty("results")[0].GetProperty("categories").GetProperty("violence").ToString());
+            Console.WriteLine(element.GetProperty("results")[0].GetProperty("categories").GetProperty("violence/graphic").ToString());
+            Console.WriteLine(element.GetProperty("results")[0].GetProperty("category_scores").GetProperty("hate").ToString());
+            Console.WriteLine(element.GetProperty("results")[0].GetProperty("category_scores").GetProperty("hate/threatening").ToString());
+            Console.WriteLine(element.GetProperty("results")[0].GetProperty("category_scores").GetProperty("harassment").ToString());
+            Console.WriteLine(element.GetProperty("results")[0].GetProperty("category_scores").GetProperty("harassment/threatening").ToString());
+            Console.WriteLine(element.GetProperty("results")[0].GetProperty("category_scores").GetProperty("self-harm").ToString());
+            Console.WriteLine(element.GetProperty("results")[0].GetProperty("category_scores").GetProperty("self-harm/intent").ToString());
+            Console.WriteLine(element.GetProperty("results")[0].GetProperty("category_scores").GetProperty("self-harm/instructive").ToString());
+            Console.WriteLine(element.GetProperty("results")[0].GetProperty("category_scores").GetProperty("sexual").ToString());
+            Console.WriteLine(element.GetProperty("results")[0].GetProperty("category_scores").GetProperty("sexual/minors").ToString());
+            Console.WriteLine(element.GetProperty("results")[0].GetProperty("category_scores").GetProperty("violence").ToString());
+            Console.WriteLine(element.GetProperty("results")[0].GetProperty("category_scores").GetProperty("violence/graphic").ToString());
         }
 
         [Test]
@@ -3127,10 +3103,7 @@ Description = "<description>",
         {
             OpenAIClient client = new OpenAIClient();
 
-            CreateModerationRequest content = new CreateModerationRequest(new List<string>()
-{
-"<input>"
-})
+            CreateModerationRequest content = new CreateModerationRequest(new string[] { "<input>" })
             {
                 Model = ModerationModels.TextModerationLatest,
             };
@@ -3143,10 +3116,7 @@ Description = "<description>",
         {
             OpenAIClient client = new OpenAIClient();
 
-            CreateModerationRequest content = new CreateModerationRequest(new List<string>()
-{
-"<input>"
-})
+            CreateModerationRequest content = new CreateModerationRequest(new string[] { "<input>" })
             {
                 Model = ModerationModels.TextModerationLatest,
             };

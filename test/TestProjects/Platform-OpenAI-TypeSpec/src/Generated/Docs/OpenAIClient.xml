@@ -7,9 +7,9 @@ This sample shows how to call CreateChatCompletionAsync.
 <code><![CDATA[
 OpenAIClient client = new OpenAIClient();
 
-CreateChatCompletionRequest body = new CreateChatCompletionRequest(ChatCompletionModels.Gpt4, new List<ChatCompletionRequestMessage>()
+CreateChatCompletionRequest body = new CreateChatCompletionRequest(ChatCompletionModels.Gpt4, new ChatCompletionRequestMessage[]
 {
-    new ChatCompletionRequestMessage(MessageRole.System,"<content>")
+    new ChatCompletionRequestMessage(MessageRole.System, "<content>")
 });
 Result<CreateChatCompletionResponse> result = await client.CreateChatCompletionAsync(body);
 ]]></code>
@@ -17,39 +17,33 @@ This sample shows how to call CreateChatCompletionAsync with all parameters.
 <code><![CDATA[
 OpenAIClient client = new OpenAIClient();
 
-CreateChatCompletionRequest body = new CreateChatCompletionRequest(ChatCompletionModels.Gpt4, new List<ChatCompletionRequestMessage>()
+CreateChatCompletionRequest body = new CreateChatCompletionRequest(ChatCompletionModels.Gpt4, new ChatCompletionRequestMessage[]
 {
-    new ChatCompletionRequestMessage(MessageRole.System,"<content>")
+    new ChatCompletionRequestMessage(MessageRole.System, "<content>")
     {
         Name = "<name>",
-        FunctionCall = new FunctionCall("<name>","<arguments>"),
+        FunctionCall = new FunctionCall("<name>", "<arguments>"),
     }
 })
 {
-    Functions =
+    Functions = {new ChatCompletionFunctions("<name>", new Dictionary<string, BinaryData>
     {
-        new ChatCompletionFunctions("<name>",new Dictionary<string, BinaryData>()
-        {
-            ["key"] = BinaryData.FromObjectAsJson(new object()),
-        })
-        {
-            Description = "<description>",
-        }
-    },
+        ["key"] = BinaryData.FromObjectAsJson(new object())
+    })
+    {
+        Description = "<description>",
+    }},
     FunctionCall = new ChatCompletionFunctionCallOption("<name>"),
     Temperature = 123.45,
     TopP = 123.45,
     N = 1234L,
     MaxTokens = 1234L,
-    Stop =
-    {
-        "<stop>"
-    },
+    Stop = { "<stop>" },
     PresencePenalty = 123.45,
     FrequencyPenalty = 123.45,
     LogitBias =
     {
-        ["key"] = 1234L,
+        ["key"] = 1234L
     },
     User = "<user>",
     Stream = true,
@@ -63,9 +57,9 @@ This sample shows how to call CreateChatCompletion.
 <code><![CDATA[
 OpenAIClient client = new OpenAIClient();
 
-CreateChatCompletionRequest body = new CreateChatCompletionRequest(ChatCompletionModels.Gpt4, new List<ChatCompletionRequestMessage>()
+CreateChatCompletionRequest body = new CreateChatCompletionRequest(ChatCompletionModels.Gpt4, new ChatCompletionRequestMessage[]
 {
-    new ChatCompletionRequestMessage(MessageRole.System,"<content>")
+    new ChatCompletionRequestMessage(MessageRole.System, "<content>")
 });
 Result<CreateChatCompletionResponse> result = client.CreateChatCompletion(body);
 ]]></code>
@@ -73,39 +67,33 @@ This sample shows how to call CreateChatCompletion with all parameters.
 <code><![CDATA[
 OpenAIClient client = new OpenAIClient();
 
-CreateChatCompletionRequest body = new CreateChatCompletionRequest(ChatCompletionModels.Gpt4, new List<ChatCompletionRequestMessage>()
+CreateChatCompletionRequest body = new CreateChatCompletionRequest(ChatCompletionModels.Gpt4, new ChatCompletionRequestMessage[]
 {
-    new ChatCompletionRequestMessage(MessageRole.System,"<content>")
+    new ChatCompletionRequestMessage(MessageRole.System, "<content>")
     {
         Name = "<name>",
-        FunctionCall = new FunctionCall("<name>","<arguments>"),
+        FunctionCall = new FunctionCall("<name>", "<arguments>"),
     }
 })
 {
-    Functions =
+    Functions = {new ChatCompletionFunctions("<name>", new Dictionary<string, BinaryData>
     {
-        new ChatCompletionFunctions("<name>",new Dictionary<string, BinaryData>()
-        {
-            ["key"] = BinaryData.FromObjectAsJson(new object()),
-        })
-        {
-            Description = "<description>",
-        }
-    },
+        ["key"] = BinaryData.FromObjectAsJson(new object())
+    })
+    {
+        Description = "<description>",
+    }},
     FunctionCall = new ChatCompletionFunctionCallOption("<name>"),
     Temperature = 123.45,
     TopP = 123.45,
     N = 1234L,
     MaxTokens = 1234L,
-    Stop =
-    {
-        "<stop>"
-    },
+    Stop = { "<stop>" },
     PresencePenalty = 123.45,
     FrequencyPenalty = 123.45,
     LogitBias =
     {
-        ["key"] = 1234L,
+        ["key"] = 1234L
     },
     User = "<user>",
     Stream = true,
@@ -122,7 +110,7 @@ OpenAIClient client = new OpenAIClient();
 RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
 {
     model = "gpt4",
-    messages = new List<object>()
+    messages = new object[]
     {
         new
         {
@@ -133,15 +121,15 @@ RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(n
 }).ToStream());
 Result result = await client.CreateChatCompletionAsync(content);
 
-JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-Console.WriteLine(result0.GetProperty("id").ToString());
-Console.WriteLine(result0.GetProperty("object").ToString());
-Console.WriteLine(result0.GetProperty("created").ToString());
-Console.WriteLine(result0.GetProperty("model").ToString());
-Console.WriteLine(result0.GetProperty("choices")[0].GetProperty("index").ToString());
-Console.WriteLine(result0.GetProperty("choices")[0].GetProperty("message").GetProperty("role").ToString());
-Console.WriteLine(result0.GetProperty("choices")[0].GetProperty("message").GetProperty("content").ToString());
-Console.WriteLine(result0.GetProperty("choices")[0].GetProperty("finish_reason").ToString());
+JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("id").ToString());
+Console.WriteLine(element.GetProperty("object").ToString());
+Console.WriteLine(element.GetProperty("created").ToString());
+Console.WriteLine(element.GetProperty("model").ToString());
+Console.WriteLine(element.GetProperty("choices")[0].GetProperty("index").ToString());
+Console.WriteLine(element.GetProperty("choices")[0].GetProperty("message").GetProperty("role").ToString());
+Console.WriteLine(element.GetProperty("choices")[0].GetProperty("message").GetProperty("content").ToString());
+Console.WriteLine(element.GetProperty("choices")[0].GetProperty("finish_reason").ToString());
 ]]></code>
 This sample shows how to call CreateChatCompletionAsync with all request content and parse the result.
 <code><![CDATA[
@@ -150,7 +138,7 @@ OpenAIClient client = new OpenAIClient();
 RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
 {
     model = "gpt4",
-    messages = new List<object>()
+    messages = new object[]
     {
         new
         {
@@ -164,7 +152,7 @@ RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(n
             },
         }
     },
-    functions = new List<object>()
+    functions = new object[]
     {
         new
         {
@@ -184,7 +172,7 @@ RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(n
     top_p = 123.45,
     n = 1234L,
     max_tokens = 1234L,
-    stop = new List<object>()
+    stop = new object[]
     {
         "<stop>"
     },
@@ -199,20 +187,20 @@ RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(n
 }).ToStream());
 Result result = await client.CreateChatCompletionAsync(content);
 
-JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-Console.WriteLine(result0.GetProperty("id").ToString());
-Console.WriteLine(result0.GetProperty("object").ToString());
-Console.WriteLine(result0.GetProperty("created").ToString());
-Console.WriteLine(result0.GetProperty("model").ToString());
-Console.WriteLine(result0.GetProperty("choices")[0].GetProperty("index").ToString());
-Console.WriteLine(result0.GetProperty("choices")[0].GetProperty("message").GetProperty("role").ToString());
-Console.WriteLine(result0.GetProperty("choices")[0].GetProperty("message").GetProperty("content").ToString());
-Console.WriteLine(result0.GetProperty("choices")[0].GetProperty("message").GetProperty("function_call").GetProperty("name").ToString());
-Console.WriteLine(result0.GetProperty("choices")[0].GetProperty("message").GetProperty("function_call").GetProperty("arguments").ToString());
-Console.WriteLine(result0.GetProperty("choices")[0].GetProperty("finish_reason").ToString());
-Console.WriteLine(result0.GetProperty("usage").GetProperty("prompt_tokens").ToString());
-Console.WriteLine(result0.GetProperty("usage").GetProperty("completion_tokens").ToString());
-Console.WriteLine(result0.GetProperty("usage").GetProperty("total_tokens").ToString());
+JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("id").ToString());
+Console.WriteLine(element.GetProperty("object").ToString());
+Console.WriteLine(element.GetProperty("created").ToString());
+Console.WriteLine(element.GetProperty("model").ToString());
+Console.WriteLine(element.GetProperty("choices")[0].GetProperty("index").ToString());
+Console.WriteLine(element.GetProperty("choices")[0].GetProperty("message").GetProperty("role").ToString());
+Console.WriteLine(element.GetProperty("choices")[0].GetProperty("message").GetProperty("content").ToString());
+Console.WriteLine(element.GetProperty("choices")[0].GetProperty("message").GetProperty("function_call").GetProperty("name").ToString());
+Console.WriteLine(element.GetProperty("choices")[0].GetProperty("message").GetProperty("function_call").GetProperty("arguments").ToString());
+Console.WriteLine(element.GetProperty("choices")[0].GetProperty("finish_reason").ToString());
+Console.WriteLine(element.GetProperty("usage").GetProperty("prompt_tokens").ToString());
+Console.WriteLine(element.GetProperty("usage").GetProperty("completion_tokens").ToString());
+Console.WriteLine(element.GetProperty("usage").GetProperty("total_tokens").ToString());
 ]]></code></example>
     </member>
     <member name="CreateChatCompletion(RequestBody,RequestOptions)">
@@ -224,7 +212,7 @@ OpenAIClient client = new OpenAIClient();
 RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
 {
     model = "gpt4",
-    messages = new List<object>()
+    messages = new object[]
     {
         new
         {
@@ -235,15 +223,15 @@ RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(n
 }).ToStream());
 Result result = client.CreateChatCompletion(content);
 
-JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-Console.WriteLine(result0.GetProperty("id").ToString());
-Console.WriteLine(result0.GetProperty("object").ToString());
-Console.WriteLine(result0.GetProperty("created").ToString());
-Console.WriteLine(result0.GetProperty("model").ToString());
-Console.WriteLine(result0.GetProperty("choices")[0].GetProperty("index").ToString());
-Console.WriteLine(result0.GetProperty("choices")[0].GetProperty("message").GetProperty("role").ToString());
-Console.WriteLine(result0.GetProperty("choices")[0].GetProperty("message").GetProperty("content").ToString());
-Console.WriteLine(result0.GetProperty("choices")[0].GetProperty("finish_reason").ToString());
+JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("id").ToString());
+Console.WriteLine(element.GetProperty("object").ToString());
+Console.WriteLine(element.GetProperty("created").ToString());
+Console.WriteLine(element.GetProperty("model").ToString());
+Console.WriteLine(element.GetProperty("choices")[0].GetProperty("index").ToString());
+Console.WriteLine(element.GetProperty("choices")[0].GetProperty("message").GetProperty("role").ToString());
+Console.WriteLine(element.GetProperty("choices")[0].GetProperty("message").GetProperty("content").ToString());
+Console.WriteLine(element.GetProperty("choices")[0].GetProperty("finish_reason").ToString());
 ]]></code>
 This sample shows how to call CreateChatCompletion with all request content and parse the result.
 <code><![CDATA[
@@ -252,7 +240,7 @@ OpenAIClient client = new OpenAIClient();
 RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
 {
     model = "gpt4",
-    messages = new List<object>()
+    messages = new object[]
     {
         new
         {
@@ -266,7 +254,7 @@ RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(n
             },
         }
     },
-    functions = new List<object>()
+    functions = new object[]
     {
         new
         {
@@ -286,7 +274,7 @@ RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(n
     top_p = 123.45,
     n = 1234L,
     max_tokens = 1234L,
-    stop = new List<object>()
+    stop = new object[]
     {
         "<stop>"
     },
@@ -301,20 +289,20 @@ RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(n
 }).ToStream());
 Result result = client.CreateChatCompletion(content);
 
-JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-Console.WriteLine(result0.GetProperty("id").ToString());
-Console.WriteLine(result0.GetProperty("object").ToString());
-Console.WriteLine(result0.GetProperty("created").ToString());
-Console.WriteLine(result0.GetProperty("model").ToString());
-Console.WriteLine(result0.GetProperty("choices")[0].GetProperty("index").ToString());
-Console.WriteLine(result0.GetProperty("choices")[0].GetProperty("message").GetProperty("role").ToString());
-Console.WriteLine(result0.GetProperty("choices")[0].GetProperty("message").GetProperty("content").ToString());
-Console.WriteLine(result0.GetProperty("choices")[0].GetProperty("message").GetProperty("function_call").GetProperty("name").ToString());
-Console.WriteLine(result0.GetProperty("choices")[0].GetProperty("message").GetProperty("function_call").GetProperty("arguments").ToString());
-Console.WriteLine(result0.GetProperty("choices")[0].GetProperty("finish_reason").ToString());
-Console.WriteLine(result0.GetProperty("usage").GetProperty("prompt_tokens").ToString());
-Console.WriteLine(result0.GetProperty("usage").GetProperty("completion_tokens").ToString());
-Console.WriteLine(result0.GetProperty("usage").GetProperty("total_tokens").ToString());
+JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("id").ToString());
+Console.WriteLine(element.GetProperty("object").ToString());
+Console.WriteLine(element.GetProperty("created").ToString());
+Console.WriteLine(element.GetProperty("model").ToString());
+Console.WriteLine(element.GetProperty("choices")[0].GetProperty("index").ToString());
+Console.WriteLine(element.GetProperty("choices")[0].GetProperty("message").GetProperty("role").ToString());
+Console.WriteLine(element.GetProperty("choices")[0].GetProperty("message").GetProperty("content").ToString());
+Console.WriteLine(element.GetProperty("choices")[0].GetProperty("message").GetProperty("function_call").GetProperty("name").ToString());
+Console.WriteLine(element.GetProperty("choices")[0].GetProperty("message").GetProperty("function_call").GetProperty("arguments").ToString());
+Console.WriteLine(element.GetProperty("choices")[0].GetProperty("finish_reason").ToString());
+Console.WriteLine(element.GetProperty("usage").GetProperty("prompt_tokens").ToString());
+Console.WriteLine(element.GetProperty("usage").GetProperty("completion_tokens").ToString());
+Console.WriteLine(element.GetProperty("usage").GetProperty("total_tokens").ToString());
 ]]></code></example>
     </member>
     <member name="CreateTranscriptionAsync(CreateTranscriptionRequest,CancellationToken)">
@@ -376,8 +364,8 @@ RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(n
 }).ToStream());
 Result result = await client.CreateTranscriptionAsync(content);
 
-JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-Console.WriteLine(result0.GetProperty("text").ToString());
+JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("text").ToString());
 ]]></code>
 This sample shows how to call CreateTranscriptionAsync with all request content and parse the result.
 <code><![CDATA[
@@ -394,8 +382,8 @@ RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(n
 }).ToStream());
 Result result = await client.CreateTranscriptionAsync(content);
 
-JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-Console.WriteLine(result0.GetProperty("text").ToString());
+JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("text").ToString());
 ]]></code></example>
     </member>
     <member name="CreateTranscription(RequestBody,RequestOptions)">
@@ -411,8 +399,8 @@ RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(n
 }).ToStream());
 Result result = client.CreateTranscription(content);
 
-JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-Console.WriteLine(result0.GetProperty("text").ToString());
+JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("text").ToString());
 ]]></code>
 This sample shows how to call CreateTranscription with all request content and parse the result.
 <code><![CDATA[
@@ -429,8 +417,8 @@ RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(n
 }).ToStream());
 Result result = client.CreateTranscription(content);
 
-JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-Console.WriteLine(result0.GetProperty("text").ToString());
+JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("text").ToString());
 ]]></code></example>
     </member>
     <member name="CreateTranslationAsync(CreateTranslationRequest,CancellationToken)">
@@ -490,8 +478,8 @@ RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(n
 }).ToStream());
 Result result = await client.CreateTranslationAsync(content);
 
-JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-Console.WriteLine(result0.GetProperty("text").ToString());
+JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("text").ToString());
 ]]></code>
 This sample shows how to call CreateTranslationAsync with all request content and parse the result.
 <code><![CDATA[
@@ -507,8 +495,8 @@ RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(n
 }).ToStream());
 Result result = await client.CreateTranslationAsync(content);
 
-JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-Console.WriteLine(result0.GetProperty("text").ToString());
+JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("text").ToString());
 ]]></code></example>
     </member>
     <member name="CreateTranslation(RequestBody,RequestOptions)">
@@ -524,8 +512,8 @@ RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(n
 }).ToStream());
 Result result = client.CreateTranslation(content);
 
-JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-Console.WriteLine(result0.GetProperty("text").ToString());
+JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("text").ToString());
 ]]></code>
 This sample shows how to call CreateTranslation with all request content and parse the result.
 <code><![CDATA[
@@ -541,8 +529,8 @@ RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(n
 }).ToStream());
 Result result = client.CreateTranslation(content);
 
-JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-Console.WriteLine(result0.GetProperty("text").ToString());
+JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("text").ToString());
 ]]></code></example>
     </member>
     <member name="CreateFineTuningJobAsync(CreateFineTuningJobRequest,CancellationToken)">
@@ -561,7 +549,7 @@ OpenAIClient client = new OpenAIClient();
 CreateFineTuningJobRequest job = new CreateFineTuningJobRequest("<training_file>", FineTuningJobModels.Babbage002)
 {
     ValidationFile = "<validation_file>",
-    Hyperparameters = new HyperParameters()
+    Hyperparameters = new HyperParameters
     {
         NEpochs = BinaryData.FromObjectAsJson(new object()),
     },
@@ -586,7 +574,7 @@ OpenAIClient client = new OpenAIClient();
 CreateFineTuningJobRequest job = new CreateFineTuningJobRequest("<training_file>", FineTuningJobModels.Babbage002)
 {
     ValidationFile = "<validation_file>",
-    Hyperparameters = new HyperParameters()
+    Hyperparameters = new HyperParameters
     {
         NEpochs = BinaryData.FromObjectAsJson(new object()),
     },
@@ -608,21 +596,21 @@ RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(n
 }).ToStream());
 Result result = await client.CreateFineTuningJobAsync(content);
 
-JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-Console.WriteLine(result0.GetProperty("id").ToString());
-Console.WriteLine(result0.GetProperty("object").ToString());
-Console.WriteLine(result0.GetProperty("created_at").ToString());
-Console.WriteLine(result0.GetProperty("finished_at").ToString());
-Console.WriteLine(result0.GetProperty("model").ToString());
-Console.WriteLine(result0.GetProperty("fine_tuned_model").ToString());
-Console.WriteLine(result0.GetProperty("organization_id").ToString());
-Console.WriteLine(result0.GetProperty("status").ToString());
-Console.WriteLine(result0.GetProperty("hyperparameters").ToString());
-Console.WriteLine(result0.GetProperty("training_file").ToString());
-Console.WriteLine(result0.GetProperty("validation_file").ToString());
-Console.WriteLine(result0.GetProperty("result_files")[0].ToString());
-Console.WriteLine(result0.GetProperty("trained_tokens").ToString());
-Console.WriteLine(result0.GetProperty("error").ToString());
+JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("id").ToString());
+Console.WriteLine(element.GetProperty("object").ToString());
+Console.WriteLine(element.GetProperty("created_at").ToString());
+Console.WriteLine(element.GetProperty("finished_at").ToString());
+Console.WriteLine(element.GetProperty("model").ToString());
+Console.WriteLine(element.GetProperty("fine_tuned_model").ToString());
+Console.WriteLine(element.GetProperty("organization_id").ToString());
+Console.WriteLine(element.GetProperty("status").ToString());
+Console.WriteLine(element.GetProperty("hyperparameters").ToString());
+Console.WriteLine(element.GetProperty("training_file").ToString());
+Console.WriteLine(element.GetProperty("validation_file").ToString());
+Console.WriteLine(element.GetProperty("result_files")[0].ToString());
+Console.WriteLine(element.GetProperty("trained_tokens").ToString());
+Console.WriteLine(element.GetProperty("error").ToString());
 ]]></code>
 This sample shows how to call CreateFineTuningJobAsync with all request content and parse the result.
 <code><![CDATA[
@@ -641,23 +629,23 @@ RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(n
 }).ToStream());
 Result result = await client.CreateFineTuningJobAsync(content);
 
-JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-Console.WriteLine(result0.GetProperty("id").ToString());
-Console.WriteLine(result0.GetProperty("object").ToString());
-Console.WriteLine(result0.GetProperty("created_at").ToString());
-Console.WriteLine(result0.GetProperty("finished_at").ToString());
-Console.WriteLine(result0.GetProperty("model").ToString());
-Console.WriteLine(result0.GetProperty("fine_tuned_model").ToString());
-Console.WriteLine(result0.GetProperty("organization_id").ToString());
-Console.WriteLine(result0.GetProperty("status").ToString());
-Console.WriteLine(result0.GetProperty("hyperparameters").GetProperty("n_epochs").ToString());
-Console.WriteLine(result0.GetProperty("training_file").ToString());
-Console.WriteLine(result0.GetProperty("validation_file").ToString());
-Console.WriteLine(result0.GetProperty("result_files")[0].ToString());
-Console.WriteLine(result0.GetProperty("trained_tokens").ToString());
-Console.WriteLine(result0.GetProperty("error").GetProperty("message").ToString());
-Console.WriteLine(result0.GetProperty("error").GetProperty("code").ToString());
-Console.WriteLine(result0.GetProperty("error").GetProperty("param").ToString());
+JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("id").ToString());
+Console.WriteLine(element.GetProperty("object").ToString());
+Console.WriteLine(element.GetProperty("created_at").ToString());
+Console.WriteLine(element.GetProperty("finished_at").ToString());
+Console.WriteLine(element.GetProperty("model").ToString());
+Console.WriteLine(element.GetProperty("fine_tuned_model").ToString());
+Console.WriteLine(element.GetProperty("organization_id").ToString());
+Console.WriteLine(element.GetProperty("status").ToString());
+Console.WriteLine(element.GetProperty("hyperparameters").GetProperty("n_epochs").ToString());
+Console.WriteLine(element.GetProperty("training_file").ToString());
+Console.WriteLine(element.GetProperty("validation_file").ToString());
+Console.WriteLine(element.GetProperty("result_files")[0].ToString());
+Console.WriteLine(element.GetProperty("trained_tokens").ToString());
+Console.WriteLine(element.GetProperty("error").GetProperty("message").ToString());
+Console.WriteLine(element.GetProperty("error").GetProperty("code").ToString());
+Console.WriteLine(element.GetProperty("error").GetProperty("param").ToString());
 ]]></code></example>
     </member>
     <member name="CreateFineTuningJob(RequestBody,RequestOptions)">
@@ -673,21 +661,21 @@ RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(n
 }).ToStream());
 Result result = client.CreateFineTuningJob(content);
 
-JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-Console.WriteLine(result0.GetProperty("id").ToString());
-Console.WriteLine(result0.GetProperty("object").ToString());
-Console.WriteLine(result0.GetProperty("created_at").ToString());
-Console.WriteLine(result0.GetProperty("finished_at").ToString());
-Console.WriteLine(result0.GetProperty("model").ToString());
-Console.WriteLine(result0.GetProperty("fine_tuned_model").ToString());
-Console.WriteLine(result0.GetProperty("organization_id").ToString());
-Console.WriteLine(result0.GetProperty("status").ToString());
-Console.WriteLine(result0.GetProperty("hyperparameters").ToString());
-Console.WriteLine(result0.GetProperty("training_file").ToString());
-Console.WriteLine(result0.GetProperty("validation_file").ToString());
-Console.WriteLine(result0.GetProperty("result_files")[0].ToString());
-Console.WriteLine(result0.GetProperty("trained_tokens").ToString());
-Console.WriteLine(result0.GetProperty("error").ToString());
+JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("id").ToString());
+Console.WriteLine(element.GetProperty("object").ToString());
+Console.WriteLine(element.GetProperty("created_at").ToString());
+Console.WriteLine(element.GetProperty("finished_at").ToString());
+Console.WriteLine(element.GetProperty("model").ToString());
+Console.WriteLine(element.GetProperty("fine_tuned_model").ToString());
+Console.WriteLine(element.GetProperty("organization_id").ToString());
+Console.WriteLine(element.GetProperty("status").ToString());
+Console.WriteLine(element.GetProperty("hyperparameters").ToString());
+Console.WriteLine(element.GetProperty("training_file").ToString());
+Console.WriteLine(element.GetProperty("validation_file").ToString());
+Console.WriteLine(element.GetProperty("result_files")[0].ToString());
+Console.WriteLine(element.GetProperty("trained_tokens").ToString());
+Console.WriteLine(element.GetProperty("error").ToString());
 ]]></code>
 This sample shows how to call CreateFineTuningJob with all request content and parse the result.
 <code><![CDATA[
@@ -706,23 +694,23 @@ RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(n
 }).ToStream());
 Result result = client.CreateFineTuningJob(content);
 
-JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-Console.WriteLine(result0.GetProperty("id").ToString());
-Console.WriteLine(result0.GetProperty("object").ToString());
-Console.WriteLine(result0.GetProperty("created_at").ToString());
-Console.WriteLine(result0.GetProperty("finished_at").ToString());
-Console.WriteLine(result0.GetProperty("model").ToString());
-Console.WriteLine(result0.GetProperty("fine_tuned_model").ToString());
-Console.WriteLine(result0.GetProperty("organization_id").ToString());
-Console.WriteLine(result0.GetProperty("status").ToString());
-Console.WriteLine(result0.GetProperty("hyperparameters").GetProperty("n_epochs").ToString());
-Console.WriteLine(result0.GetProperty("training_file").ToString());
-Console.WriteLine(result0.GetProperty("validation_file").ToString());
-Console.WriteLine(result0.GetProperty("result_files")[0].ToString());
-Console.WriteLine(result0.GetProperty("trained_tokens").ToString());
-Console.WriteLine(result0.GetProperty("error").GetProperty("message").ToString());
-Console.WriteLine(result0.GetProperty("error").GetProperty("code").ToString());
-Console.WriteLine(result0.GetProperty("error").GetProperty("param").ToString());
+JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("id").ToString());
+Console.WriteLine(element.GetProperty("object").ToString());
+Console.WriteLine(element.GetProperty("created_at").ToString());
+Console.WriteLine(element.GetProperty("finished_at").ToString());
+Console.WriteLine(element.GetProperty("model").ToString());
+Console.WriteLine(element.GetProperty("fine_tuned_model").ToString());
+Console.WriteLine(element.GetProperty("organization_id").ToString());
+Console.WriteLine(element.GetProperty("status").ToString());
+Console.WriteLine(element.GetProperty("hyperparameters").GetProperty("n_epochs").ToString());
+Console.WriteLine(element.GetProperty("training_file").ToString());
+Console.WriteLine(element.GetProperty("validation_file").ToString());
+Console.WriteLine(element.GetProperty("result_files")[0].ToString());
+Console.WriteLine(element.GetProperty("trained_tokens").ToString());
+Console.WriteLine(element.GetProperty("error").GetProperty("message").ToString());
+Console.WriteLine(element.GetProperty("error").GetProperty("code").ToString());
+Console.WriteLine(element.GetProperty("error").GetProperty("param").ToString());
 ]]></code></example>
     </member>
     <member name="GetPaginatedFineTuningJobsAsync(string,long?,CancellationToken)">
@@ -763,23 +751,23 @@ OpenAIClient client = new OpenAIClient();
 
 Result result = await client.GetPaginatedFineTuningJobsAsync(null, null, null);
 
-JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-Console.WriteLine(result0.GetProperty("object").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("id").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("object").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("created_at").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("finished_at").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("model").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("fine_tuned_model").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("organization_id").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("status").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("hyperparameters").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("training_file").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("validation_file").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("result_files")[0].ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("trained_tokens").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("error").ToString());
-Console.WriteLine(result0.GetProperty("has_more").ToString());
+JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("object").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("id").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("object").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("created_at").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("finished_at").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("model").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("fine_tuned_model").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("organization_id").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("status").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("hyperparameters").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("training_file").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("validation_file").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("result_files")[0].ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("trained_tokens").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("error").ToString());
+Console.WriteLine(element.GetProperty("has_more").ToString());
 ]]></code>
 This sample shows how to call GetPaginatedFineTuningJobsAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -787,25 +775,25 @@ OpenAIClient client = new OpenAIClient();
 
 Result result = await client.GetPaginatedFineTuningJobsAsync("<after>", 1234L, null);
 
-JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-Console.WriteLine(result0.GetProperty("object").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("id").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("object").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("created_at").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("finished_at").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("model").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("fine_tuned_model").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("organization_id").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("status").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("hyperparameters").GetProperty("n_epochs").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("training_file").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("validation_file").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("result_files")[0].ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("trained_tokens").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("error").GetProperty("message").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("error").GetProperty("code").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("error").GetProperty("param").ToString());
-Console.WriteLine(result0.GetProperty("has_more").ToString());
+JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("object").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("id").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("object").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("created_at").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("finished_at").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("model").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("fine_tuned_model").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("organization_id").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("status").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("hyperparameters").GetProperty("n_epochs").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("training_file").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("validation_file").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("result_files")[0].ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("trained_tokens").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("error").GetProperty("message").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("error").GetProperty("code").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("error").GetProperty("param").ToString());
+Console.WriteLine(element.GetProperty("has_more").ToString());
 ]]></code></example>
     </member>
     <member name="GetPaginatedFineTuningJobs(string,long?,RequestOptions)">
@@ -816,23 +804,23 @@ OpenAIClient client = new OpenAIClient();
 
 Result result = client.GetPaginatedFineTuningJobs(null, null, null);
 
-JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-Console.WriteLine(result0.GetProperty("object").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("id").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("object").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("created_at").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("finished_at").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("model").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("fine_tuned_model").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("organization_id").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("status").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("hyperparameters").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("training_file").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("validation_file").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("result_files")[0].ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("trained_tokens").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("error").ToString());
-Console.WriteLine(result0.GetProperty("has_more").ToString());
+JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("object").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("id").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("object").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("created_at").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("finished_at").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("model").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("fine_tuned_model").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("organization_id").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("status").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("hyperparameters").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("training_file").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("validation_file").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("result_files")[0].ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("trained_tokens").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("error").ToString());
+Console.WriteLine(element.GetProperty("has_more").ToString());
 ]]></code>
 This sample shows how to call GetPaginatedFineTuningJobs with all parameters and parse the result.
 <code><![CDATA[
@@ -840,25 +828,25 @@ OpenAIClient client = new OpenAIClient();
 
 Result result = client.GetPaginatedFineTuningJobs("<after>", 1234L, null);
 
-JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-Console.WriteLine(result0.GetProperty("object").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("id").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("object").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("created_at").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("finished_at").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("model").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("fine_tuned_model").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("organization_id").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("status").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("hyperparameters").GetProperty("n_epochs").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("training_file").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("validation_file").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("result_files")[0].ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("trained_tokens").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("error").GetProperty("message").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("error").GetProperty("code").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("error").GetProperty("param").ToString());
-Console.WriteLine(result0.GetProperty("has_more").ToString());
+JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("object").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("id").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("object").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("created_at").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("finished_at").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("model").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("fine_tuned_model").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("organization_id").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("status").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("hyperparameters").GetProperty("n_epochs").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("training_file").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("validation_file").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("result_files")[0].ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("trained_tokens").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("error").GetProperty("message").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("error").GetProperty("code").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("error").GetProperty("param").ToString());
+Console.WriteLine(element.GetProperty("has_more").ToString());
 ]]></code></example>
     </member>
     <member name="RetrieveFineTuningJobAsync(string,CancellationToken)">
@@ -899,21 +887,21 @@ OpenAIClient client = new OpenAIClient();
 
 Result result = await client.RetrieveFineTuningJobAsync("<fine_tuning_job_id>", null);
 
-JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-Console.WriteLine(result0.GetProperty("id").ToString());
-Console.WriteLine(result0.GetProperty("object").ToString());
-Console.WriteLine(result0.GetProperty("created_at").ToString());
-Console.WriteLine(result0.GetProperty("finished_at").ToString());
-Console.WriteLine(result0.GetProperty("model").ToString());
-Console.WriteLine(result0.GetProperty("fine_tuned_model").ToString());
-Console.WriteLine(result0.GetProperty("organization_id").ToString());
-Console.WriteLine(result0.GetProperty("status").ToString());
-Console.WriteLine(result0.GetProperty("hyperparameters").ToString());
-Console.WriteLine(result0.GetProperty("training_file").ToString());
-Console.WriteLine(result0.GetProperty("validation_file").ToString());
-Console.WriteLine(result0.GetProperty("result_files")[0].ToString());
-Console.WriteLine(result0.GetProperty("trained_tokens").ToString());
-Console.WriteLine(result0.GetProperty("error").ToString());
+JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("id").ToString());
+Console.WriteLine(element.GetProperty("object").ToString());
+Console.WriteLine(element.GetProperty("created_at").ToString());
+Console.WriteLine(element.GetProperty("finished_at").ToString());
+Console.WriteLine(element.GetProperty("model").ToString());
+Console.WriteLine(element.GetProperty("fine_tuned_model").ToString());
+Console.WriteLine(element.GetProperty("organization_id").ToString());
+Console.WriteLine(element.GetProperty("status").ToString());
+Console.WriteLine(element.GetProperty("hyperparameters").ToString());
+Console.WriteLine(element.GetProperty("training_file").ToString());
+Console.WriteLine(element.GetProperty("validation_file").ToString());
+Console.WriteLine(element.GetProperty("result_files")[0].ToString());
+Console.WriteLine(element.GetProperty("trained_tokens").ToString());
+Console.WriteLine(element.GetProperty("error").ToString());
 ]]></code>
 This sample shows how to call RetrieveFineTuningJobAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -921,23 +909,23 @@ OpenAIClient client = new OpenAIClient();
 
 Result result = await client.RetrieveFineTuningJobAsync("<fine_tuning_job_id>", null);
 
-JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-Console.WriteLine(result0.GetProperty("id").ToString());
-Console.WriteLine(result0.GetProperty("object").ToString());
-Console.WriteLine(result0.GetProperty("created_at").ToString());
-Console.WriteLine(result0.GetProperty("finished_at").ToString());
-Console.WriteLine(result0.GetProperty("model").ToString());
-Console.WriteLine(result0.GetProperty("fine_tuned_model").ToString());
-Console.WriteLine(result0.GetProperty("organization_id").ToString());
-Console.WriteLine(result0.GetProperty("status").ToString());
-Console.WriteLine(result0.GetProperty("hyperparameters").GetProperty("n_epochs").ToString());
-Console.WriteLine(result0.GetProperty("training_file").ToString());
-Console.WriteLine(result0.GetProperty("validation_file").ToString());
-Console.WriteLine(result0.GetProperty("result_files")[0].ToString());
-Console.WriteLine(result0.GetProperty("trained_tokens").ToString());
-Console.WriteLine(result0.GetProperty("error").GetProperty("message").ToString());
-Console.WriteLine(result0.GetProperty("error").GetProperty("code").ToString());
-Console.WriteLine(result0.GetProperty("error").GetProperty("param").ToString());
+JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("id").ToString());
+Console.WriteLine(element.GetProperty("object").ToString());
+Console.WriteLine(element.GetProperty("created_at").ToString());
+Console.WriteLine(element.GetProperty("finished_at").ToString());
+Console.WriteLine(element.GetProperty("model").ToString());
+Console.WriteLine(element.GetProperty("fine_tuned_model").ToString());
+Console.WriteLine(element.GetProperty("organization_id").ToString());
+Console.WriteLine(element.GetProperty("status").ToString());
+Console.WriteLine(element.GetProperty("hyperparameters").GetProperty("n_epochs").ToString());
+Console.WriteLine(element.GetProperty("training_file").ToString());
+Console.WriteLine(element.GetProperty("validation_file").ToString());
+Console.WriteLine(element.GetProperty("result_files")[0].ToString());
+Console.WriteLine(element.GetProperty("trained_tokens").ToString());
+Console.WriteLine(element.GetProperty("error").GetProperty("message").ToString());
+Console.WriteLine(element.GetProperty("error").GetProperty("code").ToString());
+Console.WriteLine(element.GetProperty("error").GetProperty("param").ToString());
 ]]></code></example>
     </member>
     <member name="RetrieveFineTuningJob(string,RequestOptions)">
@@ -948,21 +936,21 @@ OpenAIClient client = new OpenAIClient();
 
 Result result = client.RetrieveFineTuningJob("<fine_tuning_job_id>", null);
 
-JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-Console.WriteLine(result0.GetProperty("id").ToString());
-Console.WriteLine(result0.GetProperty("object").ToString());
-Console.WriteLine(result0.GetProperty("created_at").ToString());
-Console.WriteLine(result0.GetProperty("finished_at").ToString());
-Console.WriteLine(result0.GetProperty("model").ToString());
-Console.WriteLine(result0.GetProperty("fine_tuned_model").ToString());
-Console.WriteLine(result0.GetProperty("organization_id").ToString());
-Console.WriteLine(result0.GetProperty("status").ToString());
-Console.WriteLine(result0.GetProperty("hyperparameters").ToString());
-Console.WriteLine(result0.GetProperty("training_file").ToString());
-Console.WriteLine(result0.GetProperty("validation_file").ToString());
-Console.WriteLine(result0.GetProperty("result_files")[0].ToString());
-Console.WriteLine(result0.GetProperty("trained_tokens").ToString());
-Console.WriteLine(result0.GetProperty("error").ToString());
+JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("id").ToString());
+Console.WriteLine(element.GetProperty("object").ToString());
+Console.WriteLine(element.GetProperty("created_at").ToString());
+Console.WriteLine(element.GetProperty("finished_at").ToString());
+Console.WriteLine(element.GetProperty("model").ToString());
+Console.WriteLine(element.GetProperty("fine_tuned_model").ToString());
+Console.WriteLine(element.GetProperty("organization_id").ToString());
+Console.WriteLine(element.GetProperty("status").ToString());
+Console.WriteLine(element.GetProperty("hyperparameters").ToString());
+Console.WriteLine(element.GetProperty("training_file").ToString());
+Console.WriteLine(element.GetProperty("validation_file").ToString());
+Console.WriteLine(element.GetProperty("result_files")[0].ToString());
+Console.WriteLine(element.GetProperty("trained_tokens").ToString());
+Console.WriteLine(element.GetProperty("error").ToString());
 ]]></code>
 This sample shows how to call RetrieveFineTuningJob with all parameters and parse the result.
 <code><![CDATA[
@@ -970,23 +958,23 @@ OpenAIClient client = new OpenAIClient();
 
 Result result = client.RetrieveFineTuningJob("<fine_tuning_job_id>", null);
 
-JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-Console.WriteLine(result0.GetProperty("id").ToString());
-Console.WriteLine(result0.GetProperty("object").ToString());
-Console.WriteLine(result0.GetProperty("created_at").ToString());
-Console.WriteLine(result0.GetProperty("finished_at").ToString());
-Console.WriteLine(result0.GetProperty("model").ToString());
-Console.WriteLine(result0.GetProperty("fine_tuned_model").ToString());
-Console.WriteLine(result0.GetProperty("organization_id").ToString());
-Console.WriteLine(result0.GetProperty("status").ToString());
-Console.WriteLine(result0.GetProperty("hyperparameters").GetProperty("n_epochs").ToString());
-Console.WriteLine(result0.GetProperty("training_file").ToString());
-Console.WriteLine(result0.GetProperty("validation_file").ToString());
-Console.WriteLine(result0.GetProperty("result_files")[0].ToString());
-Console.WriteLine(result0.GetProperty("trained_tokens").ToString());
-Console.WriteLine(result0.GetProperty("error").GetProperty("message").ToString());
-Console.WriteLine(result0.GetProperty("error").GetProperty("code").ToString());
-Console.WriteLine(result0.GetProperty("error").GetProperty("param").ToString());
+JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("id").ToString());
+Console.WriteLine(element.GetProperty("object").ToString());
+Console.WriteLine(element.GetProperty("created_at").ToString());
+Console.WriteLine(element.GetProperty("finished_at").ToString());
+Console.WriteLine(element.GetProperty("model").ToString());
+Console.WriteLine(element.GetProperty("fine_tuned_model").ToString());
+Console.WriteLine(element.GetProperty("organization_id").ToString());
+Console.WriteLine(element.GetProperty("status").ToString());
+Console.WriteLine(element.GetProperty("hyperparameters").GetProperty("n_epochs").ToString());
+Console.WriteLine(element.GetProperty("training_file").ToString());
+Console.WriteLine(element.GetProperty("validation_file").ToString());
+Console.WriteLine(element.GetProperty("result_files")[0].ToString());
+Console.WriteLine(element.GetProperty("trained_tokens").ToString());
+Console.WriteLine(element.GetProperty("error").GetProperty("message").ToString());
+Console.WriteLine(element.GetProperty("error").GetProperty("code").ToString());
+Console.WriteLine(element.GetProperty("error").GetProperty("param").ToString());
 ]]></code></example>
     </member>
     <member name="GetFineTuningEventsAsync(string,string,CancellationToken)">
@@ -1027,13 +1015,13 @@ OpenAIClient client = new OpenAIClient();
 
 Result result = await client.GetFineTuningEventsAsync("<fine_tuning_job_id>", null, null);
 
-JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-Console.WriteLine(result0.GetProperty("object").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("id").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("object").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("created_at").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("level").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("message").ToString());
+JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("object").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("id").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("object").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("created_at").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("level").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("message").ToString());
 ]]></code>
 This sample shows how to call GetFineTuningEventsAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -1041,13 +1029,13 @@ OpenAIClient client = new OpenAIClient();
 
 Result result = await client.GetFineTuningEventsAsync("<fine_tuning_job_id>", "<after>", null);
 
-JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-Console.WriteLine(result0.GetProperty("object").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("id").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("object").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("created_at").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("level").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("message").ToString());
+JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("object").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("id").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("object").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("created_at").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("level").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("message").ToString());
 ]]></code></example>
     </member>
     <member name="GetFineTuningEvents(string,string,RequestOptions)">
@@ -1058,13 +1046,13 @@ OpenAIClient client = new OpenAIClient();
 
 Result result = client.GetFineTuningEvents("<fine_tuning_job_id>", null, null);
 
-JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-Console.WriteLine(result0.GetProperty("object").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("id").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("object").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("created_at").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("level").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("message").ToString());
+JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("object").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("id").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("object").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("created_at").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("level").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("message").ToString());
 ]]></code>
 This sample shows how to call GetFineTuningEvents with all parameters and parse the result.
 <code><![CDATA[
@@ -1072,13 +1060,13 @@ OpenAIClient client = new OpenAIClient();
 
 Result result = client.GetFineTuningEvents("<fine_tuning_job_id>", "<after>", null);
 
-JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-Console.WriteLine(result0.GetProperty("object").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("id").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("object").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("created_at").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("level").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("message").ToString());
+JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("object").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("id").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("object").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("created_at").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("level").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("message").ToString());
 ]]></code></example>
     </member>
     <member name="CancelFineTuningJobAsync(string,CancellationToken)">
@@ -1119,21 +1107,21 @@ OpenAIClient client = new OpenAIClient();
 
 Result result = await client.CancelFineTuningJobAsync("<fine_tuning_job_id>", null);
 
-JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-Console.WriteLine(result0.GetProperty("id").ToString());
-Console.WriteLine(result0.GetProperty("object").ToString());
-Console.WriteLine(result0.GetProperty("created_at").ToString());
-Console.WriteLine(result0.GetProperty("finished_at").ToString());
-Console.WriteLine(result0.GetProperty("model").ToString());
-Console.WriteLine(result0.GetProperty("fine_tuned_model").ToString());
-Console.WriteLine(result0.GetProperty("organization_id").ToString());
-Console.WriteLine(result0.GetProperty("status").ToString());
-Console.WriteLine(result0.GetProperty("hyperparameters").ToString());
-Console.WriteLine(result0.GetProperty("training_file").ToString());
-Console.WriteLine(result0.GetProperty("validation_file").ToString());
-Console.WriteLine(result0.GetProperty("result_files")[0].ToString());
-Console.WriteLine(result0.GetProperty("trained_tokens").ToString());
-Console.WriteLine(result0.GetProperty("error").ToString());
+JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("id").ToString());
+Console.WriteLine(element.GetProperty("object").ToString());
+Console.WriteLine(element.GetProperty("created_at").ToString());
+Console.WriteLine(element.GetProperty("finished_at").ToString());
+Console.WriteLine(element.GetProperty("model").ToString());
+Console.WriteLine(element.GetProperty("fine_tuned_model").ToString());
+Console.WriteLine(element.GetProperty("organization_id").ToString());
+Console.WriteLine(element.GetProperty("status").ToString());
+Console.WriteLine(element.GetProperty("hyperparameters").ToString());
+Console.WriteLine(element.GetProperty("training_file").ToString());
+Console.WriteLine(element.GetProperty("validation_file").ToString());
+Console.WriteLine(element.GetProperty("result_files")[0].ToString());
+Console.WriteLine(element.GetProperty("trained_tokens").ToString());
+Console.WriteLine(element.GetProperty("error").ToString());
 ]]></code>
 This sample shows how to call CancelFineTuningJobAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -1141,23 +1129,23 @@ OpenAIClient client = new OpenAIClient();
 
 Result result = await client.CancelFineTuningJobAsync("<fine_tuning_job_id>", null);
 
-JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-Console.WriteLine(result0.GetProperty("id").ToString());
-Console.WriteLine(result0.GetProperty("object").ToString());
-Console.WriteLine(result0.GetProperty("created_at").ToString());
-Console.WriteLine(result0.GetProperty("finished_at").ToString());
-Console.WriteLine(result0.GetProperty("model").ToString());
-Console.WriteLine(result0.GetProperty("fine_tuned_model").ToString());
-Console.WriteLine(result0.GetProperty("organization_id").ToString());
-Console.WriteLine(result0.GetProperty("status").ToString());
-Console.WriteLine(result0.GetProperty("hyperparameters").GetProperty("n_epochs").ToString());
-Console.WriteLine(result0.GetProperty("training_file").ToString());
-Console.WriteLine(result0.GetProperty("validation_file").ToString());
-Console.WriteLine(result0.GetProperty("result_files")[0].ToString());
-Console.WriteLine(result0.GetProperty("trained_tokens").ToString());
-Console.WriteLine(result0.GetProperty("error").GetProperty("message").ToString());
-Console.WriteLine(result0.GetProperty("error").GetProperty("code").ToString());
-Console.WriteLine(result0.GetProperty("error").GetProperty("param").ToString());
+JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("id").ToString());
+Console.WriteLine(element.GetProperty("object").ToString());
+Console.WriteLine(element.GetProperty("created_at").ToString());
+Console.WriteLine(element.GetProperty("finished_at").ToString());
+Console.WriteLine(element.GetProperty("model").ToString());
+Console.WriteLine(element.GetProperty("fine_tuned_model").ToString());
+Console.WriteLine(element.GetProperty("organization_id").ToString());
+Console.WriteLine(element.GetProperty("status").ToString());
+Console.WriteLine(element.GetProperty("hyperparameters").GetProperty("n_epochs").ToString());
+Console.WriteLine(element.GetProperty("training_file").ToString());
+Console.WriteLine(element.GetProperty("validation_file").ToString());
+Console.WriteLine(element.GetProperty("result_files")[0].ToString());
+Console.WriteLine(element.GetProperty("trained_tokens").ToString());
+Console.WriteLine(element.GetProperty("error").GetProperty("message").ToString());
+Console.WriteLine(element.GetProperty("error").GetProperty("code").ToString());
+Console.WriteLine(element.GetProperty("error").GetProperty("param").ToString());
 ]]></code></example>
     </member>
     <member name="CancelFineTuningJob(string,RequestOptions)">
@@ -1168,21 +1156,21 @@ OpenAIClient client = new OpenAIClient();
 
 Result result = client.CancelFineTuningJob("<fine_tuning_job_id>", null);
 
-JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-Console.WriteLine(result0.GetProperty("id").ToString());
-Console.WriteLine(result0.GetProperty("object").ToString());
-Console.WriteLine(result0.GetProperty("created_at").ToString());
-Console.WriteLine(result0.GetProperty("finished_at").ToString());
-Console.WriteLine(result0.GetProperty("model").ToString());
-Console.WriteLine(result0.GetProperty("fine_tuned_model").ToString());
-Console.WriteLine(result0.GetProperty("organization_id").ToString());
-Console.WriteLine(result0.GetProperty("status").ToString());
-Console.WriteLine(result0.GetProperty("hyperparameters").ToString());
-Console.WriteLine(result0.GetProperty("training_file").ToString());
-Console.WriteLine(result0.GetProperty("validation_file").ToString());
-Console.WriteLine(result0.GetProperty("result_files")[0].ToString());
-Console.WriteLine(result0.GetProperty("trained_tokens").ToString());
-Console.WriteLine(result0.GetProperty("error").ToString());
+JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("id").ToString());
+Console.WriteLine(element.GetProperty("object").ToString());
+Console.WriteLine(element.GetProperty("created_at").ToString());
+Console.WriteLine(element.GetProperty("finished_at").ToString());
+Console.WriteLine(element.GetProperty("model").ToString());
+Console.WriteLine(element.GetProperty("fine_tuned_model").ToString());
+Console.WriteLine(element.GetProperty("organization_id").ToString());
+Console.WriteLine(element.GetProperty("status").ToString());
+Console.WriteLine(element.GetProperty("hyperparameters").ToString());
+Console.WriteLine(element.GetProperty("training_file").ToString());
+Console.WriteLine(element.GetProperty("validation_file").ToString());
+Console.WriteLine(element.GetProperty("result_files")[0].ToString());
+Console.WriteLine(element.GetProperty("trained_tokens").ToString());
+Console.WriteLine(element.GetProperty("error").ToString());
 ]]></code>
 This sample shows how to call CancelFineTuningJob with all parameters and parse the result.
 <code><![CDATA[
@@ -1190,23 +1178,23 @@ OpenAIClient client = new OpenAIClient();
 
 Result result = client.CancelFineTuningJob("<fine_tuning_job_id>", null);
 
-JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-Console.WriteLine(result0.GetProperty("id").ToString());
-Console.WriteLine(result0.GetProperty("object").ToString());
-Console.WriteLine(result0.GetProperty("created_at").ToString());
-Console.WriteLine(result0.GetProperty("finished_at").ToString());
-Console.WriteLine(result0.GetProperty("model").ToString());
-Console.WriteLine(result0.GetProperty("fine_tuned_model").ToString());
-Console.WriteLine(result0.GetProperty("organization_id").ToString());
-Console.WriteLine(result0.GetProperty("status").ToString());
-Console.WriteLine(result0.GetProperty("hyperparameters").GetProperty("n_epochs").ToString());
-Console.WriteLine(result0.GetProperty("training_file").ToString());
-Console.WriteLine(result0.GetProperty("validation_file").ToString());
-Console.WriteLine(result0.GetProperty("result_files")[0].ToString());
-Console.WriteLine(result0.GetProperty("trained_tokens").ToString());
-Console.WriteLine(result0.GetProperty("error").GetProperty("message").ToString());
-Console.WriteLine(result0.GetProperty("error").GetProperty("code").ToString());
-Console.WriteLine(result0.GetProperty("error").GetProperty("param").ToString());
+JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("id").ToString());
+Console.WriteLine(element.GetProperty("object").ToString());
+Console.WriteLine(element.GetProperty("created_at").ToString());
+Console.WriteLine(element.GetProperty("finished_at").ToString());
+Console.WriteLine(element.GetProperty("model").ToString());
+Console.WriteLine(element.GetProperty("fine_tuned_model").ToString());
+Console.WriteLine(element.GetProperty("organization_id").ToString());
+Console.WriteLine(element.GetProperty("status").ToString());
+Console.WriteLine(element.GetProperty("hyperparameters").GetProperty("n_epochs").ToString());
+Console.WriteLine(element.GetProperty("training_file").ToString());
+Console.WriteLine(element.GetProperty("validation_file").ToString());
+Console.WriteLine(element.GetProperty("result_files")[0].ToString());
+Console.WriteLine(element.GetProperty("trained_tokens").ToString());
+Console.WriteLine(element.GetProperty("error").GetProperty("message").ToString());
+Console.WriteLine(element.GetProperty("error").GetProperty("code").ToString());
+Console.WriteLine(element.GetProperty("error").GetProperty("param").ToString());
 ]]></code></example>
     </member>
     <member name="CreateCompletionAsync(CreateCompletionRequest,CancellationToken)">
@@ -1229,15 +1217,12 @@ CreateCompletionRequest body = new CreateCompletionRequest(CompletionModels.Babb
     TopP = 123.45,
     N = 1234L,
     MaxTokens = 1234L,
-    Stop =
-    {
-        "<stop>"
-    },
+    Stop = { "<stop>" },
     PresencePenalty = 123.45,
     FrequencyPenalty = 123.45,
     LogitBias =
     {
-        ["key"] = 1234L,
+        ["key"] = 1234L
     },
     User = "<user>",
     Stream = true,
@@ -1267,15 +1252,12 @@ CreateCompletionRequest body = new CreateCompletionRequest(CompletionModels.Babb
     TopP = 123.45,
     N = 1234L,
     MaxTokens = 1234L,
-    Stop =
-    {
-        "<stop>"
-    },
+    Stop = { "<stop>" },
     PresencePenalty = 123.45,
     FrequencyPenalty = 123.45,
     LogitBias =
     {
-        ["key"] = 1234L,
+        ["key"] = 1234L
     },
     User = "<user>",
     Stream = true,
@@ -1299,18 +1281,18 @@ RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(n
 }).ToStream());
 Result result = await client.CreateCompletionAsync(content);
 
-JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-Console.WriteLine(result0.GetProperty("id").ToString());
-Console.WriteLine(result0.GetProperty("object").ToString());
-Console.WriteLine(result0.GetProperty("created").ToString());
-Console.WriteLine(result0.GetProperty("model").ToString());
-Console.WriteLine(result0.GetProperty("choices")[0].GetProperty("index").ToString());
-Console.WriteLine(result0.GetProperty("choices")[0].GetProperty("text").ToString());
-Console.WriteLine(result0.GetProperty("choices")[0].GetProperty("logprobs").GetProperty("tokens")[0].ToString());
-Console.WriteLine(result0.GetProperty("choices")[0].GetProperty("logprobs").GetProperty("token_logprobs")[0].ToString());
-Console.WriteLine(result0.GetProperty("choices")[0].GetProperty("logprobs").GetProperty("top_logprobs")[0].GetProperty("<key>").ToString());
-Console.WriteLine(result0.GetProperty("choices")[0].GetProperty("logprobs").GetProperty("text_offset")[0].ToString());
-Console.WriteLine(result0.GetProperty("choices")[0].GetProperty("finish_reason").ToString());
+JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("id").ToString());
+Console.WriteLine(element.GetProperty("object").ToString());
+Console.WriteLine(element.GetProperty("created").ToString());
+Console.WriteLine(element.GetProperty("model").ToString());
+Console.WriteLine(element.GetProperty("choices")[0].GetProperty("index").ToString());
+Console.WriteLine(element.GetProperty("choices")[0].GetProperty("text").ToString());
+Console.WriteLine(element.GetProperty("choices")[0].GetProperty("logprobs").GetProperty("tokens")[0].ToString());
+Console.WriteLine(element.GetProperty("choices")[0].GetProperty("logprobs").GetProperty("token_logprobs")[0].ToString());
+Console.WriteLine(element.GetProperty("choices")[0].GetProperty("logprobs").GetProperty("top_logprobs")[0].GetProperty("<key>").ToString());
+Console.WriteLine(element.GetProperty("choices")[0].GetProperty("logprobs").GetProperty("text_offset")[0].ToString());
+Console.WriteLine(element.GetProperty("choices")[0].GetProperty("finish_reason").ToString());
 ]]></code>
 This sample shows how to call CreateCompletionAsync with all request content and parse the result.
 <code><![CDATA[
@@ -1325,7 +1307,7 @@ RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(n
     top_p = 123.45,
     n = 1234L,
     max_tokens = 1234L,
-    stop = new List<object>()
+    stop = new object[]
     {
         "<stop>"
     },
@@ -1343,21 +1325,21 @@ RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(n
 }).ToStream());
 Result result = await client.CreateCompletionAsync(content);
 
-JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-Console.WriteLine(result0.GetProperty("id").ToString());
-Console.WriteLine(result0.GetProperty("object").ToString());
-Console.WriteLine(result0.GetProperty("created").ToString());
-Console.WriteLine(result0.GetProperty("model").ToString());
-Console.WriteLine(result0.GetProperty("choices")[0].GetProperty("index").ToString());
-Console.WriteLine(result0.GetProperty("choices")[0].GetProperty("text").ToString());
-Console.WriteLine(result0.GetProperty("choices")[0].GetProperty("logprobs").GetProperty("tokens")[0].ToString());
-Console.WriteLine(result0.GetProperty("choices")[0].GetProperty("logprobs").GetProperty("token_logprobs")[0].ToString());
-Console.WriteLine(result0.GetProperty("choices")[0].GetProperty("logprobs").GetProperty("top_logprobs")[0].GetProperty("<key>").ToString());
-Console.WriteLine(result0.GetProperty("choices")[0].GetProperty("logprobs").GetProperty("text_offset")[0].ToString());
-Console.WriteLine(result0.GetProperty("choices")[0].GetProperty("finish_reason").ToString());
-Console.WriteLine(result0.GetProperty("usage").GetProperty("prompt_tokens").ToString());
-Console.WriteLine(result0.GetProperty("usage").GetProperty("completion_tokens").ToString());
-Console.WriteLine(result0.GetProperty("usage").GetProperty("total_tokens").ToString());
+JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("id").ToString());
+Console.WriteLine(element.GetProperty("object").ToString());
+Console.WriteLine(element.GetProperty("created").ToString());
+Console.WriteLine(element.GetProperty("model").ToString());
+Console.WriteLine(element.GetProperty("choices")[0].GetProperty("index").ToString());
+Console.WriteLine(element.GetProperty("choices")[0].GetProperty("text").ToString());
+Console.WriteLine(element.GetProperty("choices")[0].GetProperty("logprobs").GetProperty("tokens")[0].ToString());
+Console.WriteLine(element.GetProperty("choices")[0].GetProperty("logprobs").GetProperty("token_logprobs")[0].ToString());
+Console.WriteLine(element.GetProperty("choices")[0].GetProperty("logprobs").GetProperty("top_logprobs")[0].GetProperty("<key>").ToString());
+Console.WriteLine(element.GetProperty("choices")[0].GetProperty("logprobs").GetProperty("text_offset")[0].ToString());
+Console.WriteLine(element.GetProperty("choices")[0].GetProperty("finish_reason").ToString());
+Console.WriteLine(element.GetProperty("usage").GetProperty("prompt_tokens").ToString());
+Console.WriteLine(element.GetProperty("usage").GetProperty("completion_tokens").ToString());
+Console.WriteLine(element.GetProperty("usage").GetProperty("total_tokens").ToString());
 ]]></code></example>
     </member>
     <member name="CreateCompletion(RequestBody,RequestOptions)">
@@ -1374,18 +1356,18 @@ RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(n
 }).ToStream());
 Result result = client.CreateCompletion(content);
 
-JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-Console.WriteLine(result0.GetProperty("id").ToString());
-Console.WriteLine(result0.GetProperty("object").ToString());
-Console.WriteLine(result0.GetProperty("created").ToString());
-Console.WriteLine(result0.GetProperty("model").ToString());
-Console.WriteLine(result0.GetProperty("choices")[0].GetProperty("index").ToString());
-Console.WriteLine(result0.GetProperty("choices")[0].GetProperty("text").ToString());
-Console.WriteLine(result0.GetProperty("choices")[0].GetProperty("logprobs").GetProperty("tokens")[0].ToString());
-Console.WriteLine(result0.GetProperty("choices")[0].GetProperty("logprobs").GetProperty("token_logprobs")[0].ToString());
-Console.WriteLine(result0.GetProperty("choices")[0].GetProperty("logprobs").GetProperty("top_logprobs")[0].GetProperty("<key>").ToString());
-Console.WriteLine(result0.GetProperty("choices")[0].GetProperty("logprobs").GetProperty("text_offset")[0].ToString());
-Console.WriteLine(result0.GetProperty("choices")[0].GetProperty("finish_reason").ToString());
+JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("id").ToString());
+Console.WriteLine(element.GetProperty("object").ToString());
+Console.WriteLine(element.GetProperty("created").ToString());
+Console.WriteLine(element.GetProperty("model").ToString());
+Console.WriteLine(element.GetProperty("choices")[0].GetProperty("index").ToString());
+Console.WriteLine(element.GetProperty("choices")[0].GetProperty("text").ToString());
+Console.WriteLine(element.GetProperty("choices")[0].GetProperty("logprobs").GetProperty("tokens")[0].ToString());
+Console.WriteLine(element.GetProperty("choices")[0].GetProperty("logprobs").GetProperty("token_logprobs")[0].ToString());
+Console.WriteLine(element.GetProperty("choices")[0].GetProperty("logprobs").GetProperty("top_logprobs")[0].GetProperty("<key>").ToString());
+Console.WriteLine(element.GetProperty("choices")[0].GetProperty("logprobs").GetProperty("text_offset")[0].ToString());
+Console.WriteLine(element.GetProperty("choices")[0].GetProperty("finish_reason").ToString());
 ]]></code>
 This sample shows how to call CreateCompletion with all request content and parse the result.
 <code><![CDATA[
@@ -1400,7 +1382,7 @@ RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(n
     top_p = 123.45,
     n = 1234L,
     max_tokens = 1234L,
-    stop = new List<object>()
+    stop = new object[]
     {
         "<stop>"
     },
@@ -1418,27 +1400,23 @@ RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(n
 }).ToStream());
 Result result = client.CreateCompletion(content);
 
-JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-Console.WriteLine(result0.GetProperty("id").ToString());
-Console.WriteLine(result0.GetProperty("object").ToString());
-Console.WriteLine(result0.GetProperty("created").ToString());
-Console.WriteLine(result0.GetProperty("model").ToString());
-Console.WriteLine(result0.GetProperty("choices")[0].GetProperty("index").ToString());
-Console.WriteLine(result0.GetProperty("choices")[0].GetProperty("text").ToString());
-Console.WriteLine(result0.GetProperty("choices")[0].GetProperty("logprobs").GetProperty("tokens")[0].ToString());
-Console.WriteLine(result0.GetProperty("choices")[0].GetProperty("logprobs").GetProperty("token_logprobs")[0].ToString());
-Console.WriteLine(result0.GetProperty("choices")[0].GetProperty("logprobs").GetProperty("top_logprobs")[0].GetProperty("<key>").ToString());
-Console.WriteLine(result0.GetProperty("choices")[0].GetProperty("logprobs").GetProperty("text_offset")[0].ToString());
-Console.WriteLine(result0.GetProperty("choices")[0].GetProperty("finish_reason").ToString());
-Console.WriteLine(result0.GetProperty("usage").GetProperty("prompt_tokens").ToString());
-Console.WriteLine(result0.GetProperty("usage").GetProperty("completion_tokens").ToString());
-Console.WriteLine(result0.GetProperty("usage").GetProperty("total_tokens").ToString());
+JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("id").ToString());
+Console.WriteLine(element.GetProperty("object").ToString());
+Console.WriteLine(element.GetProperty("created").ToString());
+Console.WriteLine(element.GetProperty("model").ToString());
+Console.WriteLine(element.GetProperty("choices")[0].GetProperty("index").ToString());
+Console.WriteLine(element.GetProperty("choices")[0].GetProperty("text").ToString());
+Console.WriteLine(element.GetProperty("choices")[0].GetProperty("logprobs").GetProperty("tokens")[0].ToString());
+Console.WriteLine(element.GetProperty("choices")[0].GetProperty("logprobs").GetProperty("token_logprobs")[0].ToString());
+Console.WriteLine(element.GetProperty("choices")[0].GetProperty("logprobs").GetProperty("top_logprobs")[0].GetProperty("<key>").ToString());
+Console.WriteLine(element.GetProperty("choices")[0].GetProperty("logprobs").GetProperty("text_offset")[0].ToString());
+Console.WriteLine(element.GetProperty("choices")[0].GetProperty("finish_reason").ToString());
+Console.WriteLine(element.GetProperty("usage").GetProperty("prompt_tokens").ToString());
+Console.WriteLine(element.GetProperty("usage").GetProperty("completion_tokens").ToString());
+Console.WriteLine(element.GetProperty("usage").GetProperty("total_tokens").ToString());
 ]]></code></example>
     </member>
-    <member name="CreateEditAsync(CreateEditRequest,CancellationToken)" />
-    <member name="CreateEdit(CreateEditRequest,CancellationToken)" />
-    <member name="CreateEditAsync(RequestBody,RequestOptions)" />
-    <member name="CreateEdit(RequestBody,RequestOptions)" />
     <member name="CreateImageAsync(CreateImageRequest,CancellationToken)">
       <example>
 This sample shows how to call CreateImageAsync.
@@ -1497,9 +1475,9 @@ RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(n
 }).ToStream());
 Result result = await client.CreateImageAsync(content);
 
-JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-Console.WriteLine(result0.GetProperty("created").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].ToString());
+JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("created").ToString());
+Console.WriteLine(element.GetProperty("data")[0].ToString());
 ]]></code>
 This sample shows how to call CreateImageAsync with all request content and parse the result.
 <code><![CDATA[
@@ -1515,10 +1493,10 @@ RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(n
 }).ToStream());
 Result result = await client.CreateImageAsync(content);
 
-JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-Console.WriteLine(result0.GetProperty("created").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("url").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("b64_json").ToString());
+JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("created").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("url").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("b64_json").ToString());
 ]]></code></example>
     </member>
     <member name="CreateImage(RequestBody,RequestOptions)">
@@ -1533,9 +1511,9 @@ RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(n
 }).ToStream());
 Result result = client.CreateImage(content);
 
-JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-Console.WriteLine(result0.GetProperty("created").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].ToString());
+JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("created").ToString());
+Console.WriteLine(element.GetProperty("data")[0].ToString());
 ]]></code>
 This sample shows how to call CreateImage with all request content and parse the result.
 <code><![CDATA[
@@ -1551,10 +1529,10 @@ RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(n
 }).ToStream());
 Result result = client.CreateImage(content);
 
-JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-Console.WriteLine(result0.GetProperty("created").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("url").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("b64_json").ToString());
+JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("created").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("url").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("b64_json").ToString());
 ]]></code></example>
     </member>
     <member name="CreateImageEditAsync(CreateImageEditRequest,CancellationToken)">
@@ -1618,9 +1596,9 @@ RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(n
 }).ToStream());
 Result result = await client.CreateImageEditAsync(content);
 
-JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-Console.WriteLine(result0.GetProperty("created").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].ToString());
+JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("created").ToString());
+Console.WriteLine(element.GetProperty("data")[0].ToString());
 ]]></code>
 This sample shows how to call CreateImageEditAsync with all request content and parse the result.
 <code><![CDATA[
@@ -1638,10 +1616,10 @@ RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(n
 }).ToStream());
 Result result = await client.CreateImageEditAsync(content);
 
-JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-Console.WriteLine(result0.GetProperty("created").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("url").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("b64_json").ToString());
+JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("created").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("url").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("b64_json").ToString());
 ]]></code></example>
     </member>
     <member name="CreateImageEdit(RequestBody,RequestOptions)">
@@ -1657,9 +1635,9 @@ RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(n
 }).ToStream());
 Result result = client.CreateImageEdit(content);
 
-JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-Console.WriteLine(result0.GetProperty("created").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].ToString());
+JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("created").ToString());
+Console.WriteLine(element.GetProperty("data")[0].ToString());
 ]]></code>
 This sample shows how to call CreateImageEdit with all request content and parse the result.
 <code><![CDATA[
@@ -1677,10 +1655,10 @@ RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(n
 }).ToStream());
 Result result = client.CreateImageEdit(content);
 
-JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-Console.WriteLine(result0.GetProperty("created").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("url").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("b64_json").ToString());
+JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("created").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("url").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("b64_json").ToString());
 ]]></code></example>
     </member>
     <member name="CreateImageVariationAsync(CreateImageVariationRequest,CancellationToken)">
@@ -1741,9 +1719,9 @@ RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(n
 }).ToStream());
 Result result = await client.CreateImageVariationAsync(content);
 
-JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-Console.WriteLine(result0.GetProperty("created").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].ToString());
+JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("created").ToString());
+Console.WriteLine(element.GetProperty("data")[0].ToString());
 ]]></code>
 This sample shows how to call CreateImageVariationAsync with all request content and parse the result.
 <code><![CDATA[
@@ -1759,10 +1737,10 @@ RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(n
 }).ToStream());
 Result result = await client.CreateImageVariationAsync(content);
 
-JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-Console.WriteLine(result0.GetProperty("created").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("url").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("b64_json").ToString());
+JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("created").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("url").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("b64_json").ToString());
 ]]></code></example>
     </member>
     <member name="CreateImageVariation(RequestBody,RequestOptions)">
@@ -1777,9 +1755,9 @@ RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(n
 }).ToStream());
 Result result = client.CreateImageVariation(content);
 
-JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-Console.WriteLine(result0.GetProperty("created").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].ToString());
+JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("created").ToString());
+Console.WriteLine(element.GetProperty("data")[0].ToString());
 ]]></code>
 This sample shows how to call CreateImageVariation with all request content and parse the result.
 <code><![CDATA[
@@ -1795,10 +1773,10 @@ RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(n
 }).ToStream());
 Result result = client.CreateImageVariation(content);
 
-JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-Console.WriteLine(result0.GetProperty("created").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("url").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("b64_json").ToString());
+JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("created").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("url").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("b64_json").ToString());
 ]]></code></example>
     </member>
     <member name="CreateEmbeddingAsync(CreateEmbeddingRequest,CancellationToken)">
@@ -1854,14 +1832,14 @@ RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(n
 }).ToStream());
 Result result = await client.CreateEmbeddingAsync(content);
 
-JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-Console.WriteLine(result0.GetProperty("object").ToString());
-Console.WriteLine(result0.GetProperty("model").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("index").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("object").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("embeddings")[0].ToString());
-Console.WriteLine(result0.GetProperty("usage").GetProperty("prompt_tokens").ToString());
-Console.WriteLine(result0.GetProperty("usage").GetProperty("total_tokens").ToString());
+JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("object").ToString());
+Console.WriteLine(element.GetProperty("model").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("index").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("object").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("embeddings")[0].ToString());
+Console.WriteLine(element.GetProperty("usage").GetProperty("prompt_tokens").ToString());
+Console.WriteLine(element.GetProperty("usage").GetProperty("total_tokens").ToString());
 ]]></code>
 This sample shows how to call CreateEmbeddingAsync with all request content and parse the result.
 <code><![CDATA[
@@ -1875,14 +1853,14 @@ RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(n
 }).ToStream());
 Result result = await client.CreateEmbeddingAsync(content);
 
-JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-Console.WriteLine(result0.GetProperty("object").ToString());
-Console.WriteLine(result0.GetProperty("model").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("index").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("object").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("embeddings")[0].ToString());
-Console.WriteLine(result0.GetProperty("usage").GetProperty("prompt_tokens").ToString());
-Console.WriteLine(result0.GetProperty("usage").GetProperty("total_tokens").ToString());
+JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("object").ToString());
+Console.WriteLine(element.GetProperty("model").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("index").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("object").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("embeddings")[0].ToString());
+Console.WriteLine(element.GetProperty("usage").GetProperty("prompt_tokens").ToString());
+Console.WriteLine(element.GetProperty("usage").GetProperty("total_tokens").ToString());
 ]]></code></example>
     </member>
     <member name="CreateEmbedding(RequestBody,RequestOptions)">
@@ -1898,14 +1876,14 @@ RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(n
 }).ToStream());
 Result result = client.CreateEmbedding(content);
 
-JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-Console.WriteLine(result0.GetProperty("object").ToString());
-Console.WriteLine(result0.GetProperty("model").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("index").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("object").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("embeddings")[0].ToString());
-Console.WriteLine(result0.GetProperty("usage").GetProperty("prompt_tokens").ToString());
-Console.WriteLine(result0.GetProperty("usage").GetProperty("total_tokens").ToString());
+JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("object").ToString());
+Console.WriteLine(element.GetProperty("model").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("index").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("object").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("embeddings")[0].ToString());
+Console.WriteLine(element.GetProperty("usage").GetProperty("prompt_tokens").ToString());
+Console.WriteLine(element.GetProperty("usage").GetProperty("total_tokens").ToString());
 ]]></code>
 This sample shows how to call CreateEmbedding with all request content and parse the result.
 <code><![CDATA[
@@ -1919,14 +1897,14 @@ RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(n
 }).ToStream());
 Result result = client.CreateEmbedding(content);
 
-JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-Console.WriteLine(result0.GetProperty("object").ToString());
-Console.WriteLine(result0.GetProperty("model").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("index").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("object").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("embeddings")[0].ToString());
-Console.WriteLine(result0.GetProperty("usage").GetProperty("prompt_tokens").ToString());
-Console.WriteLine(result0.GetProperty("usage").GetProperty("total_tokens").ToString());
+JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("object").ToString());
+Console.WriteLine(element.GetProperty("model").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("index").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("object").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("embeddings")[0].ToString());
+Console.WriteLine(element.GetProperty("usage").GetProperty("prompt_tokens").ToString());
+Console.WriteLine(element.GetProperty("usage").GetProperty("total_tokens").ToString());
 ]]></code></example>
     </member>
     <member name="GetFilesAsync(CancellationToken)">
@@ -1967,15 +1945,15 @@ OpenAIClient client = new OpenAIClient();
 
 Result result = await client.GetFilesAsync(null);
 
-JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-Console.WriteLine(result0.GetProperty("object").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("id").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("object").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("bytes").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("createdAt").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("filename").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("purpose").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("status").ToString());
+JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("object").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("id").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("object").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("bytes").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("createdAt").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("filename").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("purpose").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("status").ToString());
 ]]></code>
 This sample shows how to call GetFilesAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -1983,16 +1961,16 @@ OpenAIClient client = new OpenAIClient();
 
 Result result = await client.GetFilesAsync(null);
 
-JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-Console.WriteLine(result0.GetProperty("object").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("id").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("object").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("bytes").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("createdAt").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("filename").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("purpose").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("status").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("status_details").ToString());
+JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("object").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("id").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("object").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("bytes").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("createdAt").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("filename").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("purpose").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("status").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("status_details").ToString());
 ]]></code></example>
     </member>
     <member name="GetFiles(RequestOptions)">
@@ -2003,15 +1981,15 @@ OpenAIClient client = new OpenAIClient();
 
 Result result = client.GetFiles(null);
 
-JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-Console.WriteLine(result0.GetProperty("object").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("id").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("object").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("bytes").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("createdAt").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("filename").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("purpose").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("status").ToString());
+JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("object").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("id").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("object").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("bytes").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("createdAt").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("filename").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("purpose").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("status").ToString());
 ]]></code>
 This sample shows how to call GetFiles with all parameters and parse the result.
 <code><![CDATA[
@@ -2019,16 +1997,16 @@ OpenAIClient client = new OpenAIClient();
 
 Result result = client.GetFiles(null);
 
-JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-Console.WriteLine(result0.GetProperty("object").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("id").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("object").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("bytes").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("createdAt").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("filename").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("purpose").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("status").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("status_details").ToString());
+JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("object").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("id").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("object").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("bytes").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("createdAt").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("filename").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("purpose").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("status").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("status_details").ToString());
 ]]></code></example>
     </member>
     <member name="CreateFileAsync(CreateFileRequest,CancellationToken)">
@@ -2078,14 +2056,14 @@ RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(n
 }).ToStream());
 Result result = await client.CreateFileAsync(content);
 
-JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-Console.WriteLine(result0.GetProperty("id").ToString());
-Console.WriteLine(result0.GetProperty("object").ToString());
-Console.WriteLine(result0.GetProperty("bytes").ToString());
-Console.WriteLine(result0.GetProperty("createdAt").ToString());
-Console.WriteLine(result0.GetProperty("filename").ToString());
-Console.WriteLine(result0.GetProperty("purpose").ToString());
-Console.WriteLine(result0.GetProperty("status").ToString());
+JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("id").ToString());
+Console.WriteLine(element.GetProperty("object").ToString());
+Console.WriteLine(element.GetProperty("bytes").ToString());
+Console.WriteLine(element.GetProperty("createdAt").ToString());
+Console.WriteLine(element.GetProperty("filename").ToString());
+Console.WriteLine(element.GetProperty("purpose").ToString());
+Console.WriteLine(element.GetProperty("status").ToString());
 ]]></code>
 This sample shows how to call CreateFileAsync with all request content and parse the result.
 <code><![CDATA[
@@ -2098,15 +2076,15 @@ RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(n
 }).ToStream());
 Result result = await client.CreateFileAsync(content);
 
-JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-Console.WriteLine(result0.GetProperty("id").ToString());
-Console.WriteLine(result0.GetProperty("object").ToString());
-Console.WriteLine(result0.GetProperty("bytes").ToString());
-Console.WriteLine(result0.GetProperty("createdAt").ToString());
-Console.WriteLine(result0.GetProperty("filename").ToString());
-Console.WriteLine(result0.GetProperty("purpose").ToString());
-Console.WriteLine(result0.GetProperty("status").ToString());
-Console.WriteLine(result0.GetProperty("status_details").ToString());
+JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("id").ToString());
+Console.WriteLine(element.GetProperty("object").ToString());
+Console.WriteLine(element.GetProperty("bytes").ToString());
+Console.WriteLine(element.GetProperty("createdAt").ToString());
+Console.WriteLine(element.GetProperty("filename").ToString());
+Console.WriteLine(element.GetProperty("purpose").ToString());
+Console.WriteLine(element.GetProperty("status").ToString());
+Console.WriteLine(element.GetProperty("status_details").ToString());
 ]]></code></example>
     </member>
     <member name="CreateFile(RequestBody,RequestOptions)">
@@ -2122,14 +2100,14 @@ RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(n
 }).ToStream());
 Result result = client.CreateFile(content);
 
-JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-Console.WriteLine(result0.GetProperty("id").ToString());
-Console.WriteLine(result0.GetProperty("object").ToString());
-Console.WriteLine(result0.GetProperty("bytes").ToString());
-Console.WriteLine(result0.GetProperty("createdAt").ToString());
-Console.WriteLine(result0.GetProperty("filename").ToString());
-Console.WriteLine(result0.GetProperty("purpose").ToString());
-Console.WriteLine(result0.GetProperty("status").ToString());
+JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("id").ToString());
+Console.WriteLine(element.GetProperty("object").ToString());
+Console.WriteLine(element.GetProperty("bytes").ToString());
+Console.WriteLine(element.GetProperty("createdAt").ToString());
+Console.WriteLine(element.GetProperty("filename").ToString());
+Console.WriteLine(element.GetProperty("purpose").ToString());
+Console.WriteLine(element.GetProperty("status").ToString());
 ]]></code>
 This sample shows how to call CreateFile with all request content and parse the result.
 <code><![CDATA[
@@ -2142,15 +2120,15 @@ RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(n
 }).ToStream());
 Result result = client.CreateFile(content);
 
-JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-Console.WriteLine(result0.GetProperty("id").ToString());
-Console.WriteLine(result0.GetProperty("object").ToString());
-Console.WriteLine(result0.GetProperty("bytes").ToString());
-Console.WriteLine(result0.GetProperty("createdAt").ToString());
-Console.WriteLine(result0.GetProperty("filename").ToString());
-Console.WriteLine(result0.GetProperty("purpose").ToString());
-Console.WriteLine(result0.GetProperty("status").ToString());
-Console.WriteLine(result0.GetProperty("status_details").ToString());
+JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("id").ToString());
+Console.WriteLine(element.GetProperty("object").ToString());
+Console.WriteLine(element.GetProperty("bytes").ToString());
+Console.WriteLine(element.GetProperty("createdAt").ToString());
+Console.WriteLine(element.GetProperty("filename").ToString());
+Console.WriteLine(element.GetProperty("purpose").ToString());
+Console.WriteLine(element.GetProperty("status").ToString());
+Console.WriteLine(element.GetProperty("status_details").ToString());
 ]]></code></example>
     </member>
     <member name="RetrieveFileAsync(string,CancellationToken)">
@@ -2191,14 +2169,14 @@ OpenAIClient client = new OpenAIClient();
 
 Result result = await client.RetrieveFileAsync("<file_id>", null);
 
-JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-Console.WriteLine(result0.GetProperty("id").ToString());
-Console.WriteLine(result0.GetProperty("object").ToString());
-Console.WriteLine(result0.GetProperty("bytes").ToString());
-Console.WriteLine(result0.GetProperty("createdAt").ToString());
-Console.WriteLine(result0.GetProperty("filename").ToString());
-Console.WriteLine(result0.GetProperty("purpose").ToString());
-Console.WriteLine(result0.GetProperty("status").ToString());
+JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("id").ToString());
+Console.WriteLine(element.GetProperty("object").ToString());
+Console.WriteLine(element.GetProperty("bytes").ToString());
+Console.WriteLine(element.GetProperty("createdAt").ToString());
+Console.WriteLine(element.GetProperty("filename").ToString());
+Console.WriteLine(element.GetProperty("purpose").ToString());
+Console.WriteLine(element.GetProperty("status").ToString());
 ]]></code>
 This sample shows how to call RetrieveFileAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -2206,15 +2184,15 @@ OpenAIClient client = new OpenAIClient();
 
 Result result = await client.RetrieveFileAsync("<file_id>", null);
 
-JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-Console.WriteLine(result0.GetProperty("id").ToString());
-Console.WriteLine(result0.GetProperty("object").ToString());
-Console.WriteLine(result0.GetProperty("bytes").ToString());
-Console.WriteLine(result0.GetProperty("createdAt").ToString());
-Console.WriteLine(result0.GetProperty("filename").ToString());
-Console.WriteLine(result0.GetProperty("purpose").ToString());
-Console.WriteLine(result0.GetProperty("status").ToString());
-Console.WriteLine(result0.GetProperty("status_details").ToString());
+JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("id").ToString());
+Console.WriteLine(element.GetProperty("object").ToString());
+Console.WriteLine(element.GetProperty("bytes").ToString());
+Console.WriteLine(element.GetProperty("createdAt").ToString());
+Console.WriteLine(element.GetProperty("filename").ToString());
+Console.WriteLine(element.GetProperty("purpose").ToString());
+Console.WriteLine(element.GetProperty("status").ToString());
+Console.WriteLine(element.GetProperty("status_details").ToString());
 ]]></code></example>
     </member>
     <member name="RetrieveFile(string,RequestOptions)">
@@ -2225,14 +2203,14 @@ OpenAIClient client = new OpenAIClient();
 
 Result result = client.RetrieveFile("<file_id>", null);
 
-JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-Console.WriteLine(result0.GetProperty("id").ToString());
-Console.WriteLine(result0.GetProperty("object").ToString());
-Console.WriteLine(result0.GetProperty("bytes").ToString());
-Console.WriteLine(result0.GetProperty("createdAt").ToString());
-Console.WriteLine(result0.GetProperty("filename").ToString());
-Console.WriteLine(result0.GetProperty("purpose").ToString());
-Console.WriteLine(result0.GetProperty("status").ToString());
+JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("id").ToString());
+Console.WriteLine(element.GetProperty("object").ToString());
+Console.WriteLine(element.GetProperty("bytes").ToString());
+Console.WriteLine(element.GetProperty("createdAt").ToString());
+Console.WriteLine(element.GetProperty("filename").ToString());
+Console.WriteLine(element.GetProperty("purpose").ToString());
+Console.WriteLine(element.GetProperty("status").ToString());
 ]]></code>
 This sample shows how to call RetrieveFile with all parameters and parse the result.
 <code><![CDATA[
@@ -2240,15 +2218,15 @@ OpenAIClient client = new OpenAIClient();
 
 Result result = client.RetrieveFile("<file_id>", null);
 
-JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-Console.WriteLine(result0.GetProperty("id").ToString());
-Console.WriteLine(result0.GetProperty("object").ToString());
-Console.WriteLine(result0.GetProperty("bytes").ToString());
-Console.WriteLine(result0.GetProperty("createdAt").ToString());
-Console.WriteLine(result0.GetProperty("filename").ToString());
-Console.WriteLine(result0.GetProperty("purpose").ToString());
-Console.WriteLine(result0.GetProperty("status").ToString());
-Console.WriteLine(result0.GetProperty("status_details").ToString());
+JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("id").ToString());
+Console.WriteLine(element.GetProperty("object").ToString());
+Console.WriteLine(element.GetProperty("bytes").ToString());
+Console.WriteLine(element.GetProperty("createdAt").ToString());
+Console.WriteLine(element.GetProperty("filename").ToString());
+Console.WriteLine(element.GetProperty("purpose").ToString());
+Console.WriteLine(element.GetProperty("status").ToString());
+Console.WriteLine(element.GetProperty("status_details").ToString());
 ]]></code></example>
     </member>
     <member name="DeleteFileAsync(string,CancellationToken)">
@@ -2289,10 +2267,10 @@ OpenAIClient client = new OpenAIClient();
 
 Result result = await client.DeleteFileAsync("<file_id>", null);
 
-JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-Console.WriteLine(result0.GetProperty("id").ToString());
-Console.WriteLine(result0.GetProperty("object").ToString());
-Console.WriteLine(result0.GetProperty("deleted").ToString());
+JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("id").ToString());
+Console.WriteLine(element.GetProperty("object").ToString());
+Console.WriteLine(element.GetProperty("deleted").ToString());
 ]]></code>
 This sample shows how to call DeleteFileAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -2300,10 +2278,10 @@ OpenAIClient client = new OpenAIClient();
 
 Result result = await client.DeleteFileAsync("<file_id>", null);
 
-JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-Console.WriteLine(result0.GetProperty("id").ToString());
-Console.WriteLine(result0.GetProperty("object").ToString());
-Console.WriteLine(result0.GetProperty("deleted").ToString());
+JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("id").ToString());
+Console.WriteLine(element.GetProperty("object").ToString());
+Console.WriteLine(element.GetProperty("deleted").ToString());
 ]]></code></example>
     </member>
     <member name="DeleteFile(string,RequestOptions)">
@@ -2314,10 +2292,10 @@ OpenAIClient client = new OpenAIClient();
 
 Result result = client.DeleteFile("<file_id>", null);
 
-JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-Console.WriteLine(result0.GetProperty("id").ToString());
-Console.WriteLine(result0.GetProperty("object").ToString());
-Console.WriteLine(result0.GetProperty("deleted").ToString());
+JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("id").ToString());
+Console.WriteLine(element.GetProperty("object").ToString());
+Console.WriteLine(element.GetProperty("deleted").ToString());
 ]]></code>
 This sample shows how to call DeleteFile with all parameters and parse the result.
 <code><![CDATA[
@@ -2325,10 +2303,10 @@ OpenAIClient client = new OpenAIClient();
 
 Result result = client.DeleteFile("<file_id>", null);
 
-JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-Console.WriteLine(result0.GetProperty("id").ToString());
-Console.WriteLine(result0.GetProperty("object").ToString());
-Console.WriteLine(result0.GetProperty("deleted").ToString());
+JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("id").ToString());
+Console.WriteLine(element.GetProperty("object").ToString());
+Console.WriteLine(element.GetProperty("deleted").ToString());
 ]]></code></example>
     </member>
     <member name="DownloadFileAsync(string,CancellationToken)">
@@ -2369,8 +2347,8 @@ OpenAIClient client = new OpenAIClient();
 
 Result result = await client.DownloadFileAsync("<file_id>", null);
 
-JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-Console.WriteLine(result0.ToString());
+JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call DownloadFileAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -2378,8 +2356,8 @@ OpenAIClient client = new OpenAIClient();
 
 Result result = await client.DownloadFileAsync("<file_id>", null);
 
-JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-Console.WriteLine(result0.ToString());
+JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+Console.WriteLine(element.ToString());
 ]]></code></example>
     </member>
     <member name="DownloadFile(string,RequestOptions)">
@@ -2390,8 +2368,8 @@ OpenAIClient client = new OpenAIClient();
 
 Result result = client.DownloadFile("<file_id>", null);
 
-JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-Console.WriteLine(result0.ToString());
+JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call DownloadFile with all parameters and parse the result.
 <code><![CDATA[
@@ -2399,30 +2377,10 @@ OpenAIClient client = new OpenAIClient();
 
 Result result = client.DownloadFile("<file_id>", null);
 
-JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-Console.WriteLine(result0.ToString());
+JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+Console.WriteLine(element.ToString());
 ]]></code></example>
     </member>
-    <member name="CreateFineTuneAsync(CreateFineTuneRequest,CancellationToken)" />
-    <member name="CreateFineTune(CreateFineTuneRequest,CancellationToken)" />
-    <member name="CreateFineTuneAsync(RequestBody,RequestOptions)" />
-    <member name="CreateFineTune(RequestBody,RequestOptions)" />
-    <member name="GetFineTunesAsync(CancellationToken)" />
-    <member name="GetFineTunes(CancellationToken)" />
-    <member name="GetFineTunesAsync(RequestOptions)" />
-    <member name="GetFineTunes(RequestOptions)" />
-    <member name="RetrieveFineTuneAsync(string,CancellationToken)" />
-    <member name="RetrieveFineTune(string,CancellationToken)" />
-    <member name="RetrieveFineTuneAsync(string,RequestOptions)" />
-    <member name="RetrieveFineTune(string,RequestOptions)" />
-    <member name="GetFineTuneEventsAsync(string,bool?,CancellationToken)" />
-    <member name="GetFineTuneEvents(string,bool?,CancellationToken)" />
-    <member name="GetFineTuneEventsAsync(string,bool?,RequestOptions)" />
-    <member name="GetFineTuneEvents(string,bool?,RequestOptions)" />
-    <member name="CancelFineTuneAsync(string,CancellationToken)" />
-    <member name="CancelFineTune(string,CancellationToken)" />
-    <member name="CancelFineTuneAsync(string,RequestOptions)" />
-    <member name="CancelFineTune(string,RequestOptions)" />
     <member name="GetModelsAsync(CancellationToken)">
       <example>
 This sample shows how to call GetModelsAsync.
@@ -2461,12 +2419,12 @@ OpenAIClient client = new OpenAIClient();
 
 Result result = await client.GetModelsAsync(null);
 
-JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-Console.WriteLine(result0.GetProperty("object").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("id").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("object").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("created").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("owned_by").ToString());
+JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("object").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("id").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("object").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("created").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("owned_by").ToString());
 ]]></code>
 This sample shows how to call GetModelsAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -2474,12 +2432,12 @@ OpenAIClient client = new OpenAIClient();
 
 Result result = await client.GetModelsAsync(null);
 
-JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-Console.WriteLine(result0.GetProperty("object").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("id").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("object").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("created").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("owned_by").ToString());
+JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("object").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("id").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("object").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("created").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("owned_by").ToString());
 ]]></code></example>
     </member>
     <member name="GetModels(RequestOptions)">
@@ -2490,12 +2448,12 @@ OpenAIClient client = new OpenAIClient();
 
 Result result = client.GetModels(null);
 
-JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-Console.WriteLine(result0.GetProperty("object").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("id").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("object").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("created").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("owned_by").ToString());
+JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("object").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("id").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("object").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("created").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("owned_by").ToString());
 ]]></code>
 This sample shows how to call GetModels with all parameters and parse the result.
 <code><![CDATA[
@@ -2503,12 +2461,12 @@ OpenAIClient client = new OpenAIClient();
 
 Result result = client.GetModels(null);
 
-JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-Console.WriteLine(result0.GetProperty("object").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("id").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("object").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("created").ToString());
-Console.WriteLine(result0.GetProperty("data")[0].GetProperty("owned_by").ToString());
+JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("object").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("id").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("object").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("created").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("owned_by").ToString());
 ]]></code></example>
     </member>
     <member name="RetrieveModelAsync(string,CancellationToken)">
@@ -2549,11 +2507,11 @@ OpenAIClient client = new OpenAIClient();
 
 Result result = await client.RetrieveModelAsync("<model>", null);
 
-JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-Console.WriteLine(result0.GetProperty("id").ToString());
-Console.WriteLine(result0.GetProperty("object").ToString());
-Console.WriteLine(result0.GetProperty("created").ToString());
-Console.WriteLine(result0.GetProperty("owned_by").ToString());
+JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("id").ToString());
+Console.WriteLine(element.GetProperty("object").ToString());
+Console.WriteLine(element.GetProperty("created").ToString());
+Console.WriteLine(element.GetProperty("owned_by").ToString());
 ]]></code>
 This sample shows how to call RetrieveModelAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -2561,11 +2519,11 @@ OpenAIClient client = new OpenAIClient();
 
 Result result = await client.RetrieveModelAsync("<model>", null);
 
-JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-Console.WriteLine(result0.GetProperty("id").ToString());
-Console.WriteLine(result0.GetProperty("object").ToString());
-Console.WriteLine(result0.GetProperty("created").ToString());
-Console.WriteLine(result0.GetProperty("owned_by").ToString());
+JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("id").ToString());
+Console.WriteLine(element.GetProperty("object").ToString());
+Console.WriteLine(element.GetProperty("created").ToString());
+Console.WriteLine(element.GetProperty("owned_by").ToString());
 ]]></code></example>
     </member>
     <member name="RetrieveModel(string,RequestOptions)">
@@ -2576,11 +2534,11 @@ OpenAIClient client = new OpenAIClient();
 
 Result result = client.RetrieveModel("<model>", null);
 
-JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-Console.WriteLine(result0.GetProperty("id").ToString());
-Console.WriteLine(result0.GetProperty("object").ToString());
-Console.WriteLine(result0.GetProperty("created").ToString());
-Console.WriteLine(result0.GetProperty("owned_by").ToString());
+JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("id").ToString());
+Console.WriteLine(element.GetProperty("object").ToString());
+Console.WriteLine(element.GetProperty("created").ToString());
+Console.WriteLine(element.GetProperty("owned_by").ToString());
 ]]></code>
 This sample shows how to call RetrieveModel with all parameters and parse the result.
 <code><![CDATA[
@@ -2588,11 +2546,11 @@ OpenAIClient client = new OpenAIClient();
 
 Result result = client.RetrieveModel("<model>", null);
 
-JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-Console.WriteLine(result0.GetProperty("id").ToString());
-Console.WriteLine(result0.GetProperty("object").ToString());
-Console.WriteLine(result0.GetProperty("created").ToString());
-Console.WriteLine(result0.GetProperty("owned_by").ToString());
+JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("id").ToString());
+Console.WriteLine(element.GetProperty("object").ToString());
+Console.WriteLine(element.GetProperty("created").ToString());
+Console.WriteLine(element.GetProperty("owned_by").ToString());
 ]]></code></example>
     </member>
     <member name="DeleteModelAsync(string,CancellationToken)">
@@ -2633,10 +2591,10 @@ OpenAIClient client = new OpenAIClient();
 
 Result result = await client.DeleteModelAsync("<model>", null);
 
-JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-Console.WriteLine(result0.GetProperty("id").ToString());
-Console.WriteLine(result0.GetProperty("object").ToString());
-Console.WriteLine(result0.GetProperty("deleted").ToString());
+JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("id").ToString());
+Console.WriteLine(element.GetProperty("object").ToString());
+Console.WriteLine(element.GetProperty("deleted").ToString());
 ]]></code>
 This sample shows how to call DeleteModelAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -2644,10 +2602,10 @@ OpenAIClient client = new OpenAIClient();
 
 Result result = await client.DeleteModelAsync("<model>", null);
 
-JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-Console.WriteLine(result0.GetProperty("id").ToString());
-Console.WriteLine(result0.GetProperty("object").ToString());
-Console.WriteLine(result0.GetProperty("deleted").ToString());
+JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("id").ToString());
+Console.WriteLine(element.GetProperty("object").ToString());
+Console.WriteLine(element.GetProperty("deleted").ToString());
 ]]></code></example>
     </member>
     <member name="DeleteModel(string,RequestOptions)">
@@ -2658,10 +2616,10 @@ OpenAIClient client = new OpenAIClient();
 
 Result result = client.DeleteModel("<model>", null);
 
-JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-Console.WriteLine(result0.GetProperty("id").ToString());
-Console.WriteLine(result0.GetProperty("object").ToString());
-Console.WriteLine(result0.GetProperty("deleted").ToString());
+JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("id").ToString());
+Console.WriteLine(element.GetProperty("object").ToString());
+Console.WriteLine(element.GetProperty("deleted").ToString());
 ]]></code>
 This sample shows how to call DeleteModel with all parameters and parse the result.
 <code><![CDATA[
@@ -2669,10 +2627,10 @@ OpenAIClient client = new OpenAIClient();
 
 Result result = client.DeleteModel("<model>", null);
 
-JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-Console.WriteLine(result0.GetProperty("id").ToString());
-Console.WriteLine(result0.GetProperty("object").ToString());
-Console.WriteLine(result0.GetProperty("deleted").ToString());
+JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("id").ToString());
+Console.WriteLine(element.GetProperty("object").ToString());
+Console.WriteLine(element.GetProperty("deleted").ToString());
 ]]></code></example>
     </member>
     <member name="CreateModerationAsync(CreateModerationRequest,CancellationToken)">
@@ -2681,20 +2639,14 @@ This sample shows how to call CreateModerationAsync.
 <code><![CDATA[
 OpenAIClient client = new OpenAIClient();
 
-CreateModerationRequest content = new CreateModerationRequest(new List<string>()
-{
-    "<input>"
-});
+CreateModerationRequest content = new CreateModerationRequest(new string[] { "<input>" });
 Result<CreateModerationResponse> result = await client.CreateModerationAsync(content);
 ]]></code>
 This sample shows how to call CreateModerationAsync with all parameters.
 <code><![CDATA[
 OpenAIClient client = new OpenAIClient();
 
-CreateModerationRequest content = new CreateModerationRequest(new List<string>()
-{
-    "<input>"
-})
+CreateModerationRequest content = new CreateModerationRequest(new string[] { "<input>" })
 {
     Model = ModerationModels.TextModerationLatest,
 };
@@ -2707,20 +2659,14 @@ This sample shows how to call CreateModeration.
 <code><![CDATA[
 OpenAIClient client = new OpenAIClient();
 
-CreateModerationRequest content = new CreateModerationRequest(new List<string>()
-{
-    "<input>"
-});
+CreateModerationRequest content = new CreateModerationRequest(new string[] { "<input>" });
 Result<CreateModerationResponse> result = client.CreateModeration(content);
 ]]></code>
 This sample shows how to call CreateModeration with all parameters.
 <code><![CDATA[
 OpenAIClient client = new OpenAIClient();
 
-CreateModerationRequest content = new CreateModerationRequest(new List<string>()
-{
-    "<input>"
-})
+CreateModerationRequest content = new CreateModerationRequest(new string[] { "<input>" })
 {
     Model = ModerationModels.TextModerationLatest,
 };
@@ -2735,39 +2681,39 @@ OpenAIClient client = new OpenAIClient();
 
 RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
 {
-    input = new List<object>()
+    input = new object[]
     {
         "<input>"
     },
 }).ToStream());
 Result result = await client.CreateModerationAsync(content);
 
-JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-Console.WriteLine(result0.GetProperty("id").ToString());
-Console.WriteLine(result0.GetProperty("model").ToString());
-Console.WriteLine(result0.GetProperty("results")[0].GetProperty("flagged").ToString());
-Console.WriteLine(result0.GetProperty("results")[0].GetProperty("categories").GetProperty("hate").ToString());
-Console.WriteLine(result0.GetProperty("results")[0].GetProperty("categories").GetProperty("hate/threatening").ToString());
-Console.WriteLine(result0.GetProperty("results")[0].GetProperty("categories").GetProperty("harassment").ToString());
-Console.WriteLine(result0.GetProperty("results")[0].GetProperty("categories").GetProperty("harassment/threatening").ToString());
-Console.WriteLine(result0.GetProperty("results")[0].GetProperty("categories").GetProperty("self-harm").ToString());
-Console.WriteLine(result0.GetProperty("results")[0].GetProperty("categories").GetProperty("self-harm/intent").ToString());
-Console.WriteLine(result0.GetProperty("results")[0].GetProperty("categories").GetProperty("self-harm/instructive").ToString());
-Console.WriteLine(result0.GetProperty("results")[0].GetProperty("categories").GetProperty("sexual").ToString());
-Console.WriteLine(result0.GetProperty("results")[0].GetProperty("categories").GetProperty("sexual/minors").ToString());
-Console.WriteLine(result0.GetProperty("results")[0].GetProperty("categories").GetProperty("violence").ToString());
-Console.WriteLine(result0.GetProperty("results")[0].GetProperty("categories").GetProperty("violence/graphic").ToString());
-Console.WriteLine(result0.GetProperty("results")[0].GetProperty("category_scores").GetProperty("hate").ToString());
-Console.WriteLine(result0.GetProperty("results")[0].GetProperty("category_scores").GetProperty("hate/threatening").ToString());
-Console.WriteLine(result0.GetProperty("results")[0].GetProperty("category_scores").GetProperty("harassment").ToString());
-Console.WriteLine(result0.GetProperty("results")[0].GetProperty("category_scores").GetProperty("harassment/threatening").ToString());
-Console.WriteLine(result0.GetProperty("results")[0].GetProperty("category_scores").GetProperty("self-harm").ToString());
-Console.WriteLine(result0.GetProperty("results")[0].GetProperty("category_scores").GetProperty("self-harm/intent").ToString());
-Console.WriteLine(result0.GetProperty("results")[0].GetProperty("category_scores").GetProperty("self-harm/instructive").ToString());
-Console.WriteLine(result0.GetProperty("results")[0].GetProperty("category_scores").GetProperty("sexual").ToString());
-Console.WriteLine(result0.GetProperty("results")[0].GetProperty("category_scores").GetProperty("sexual/minors").ToString());
-Console.WriteLine(result0.GetProperty("results")[0].GetProperty("category_scores").GetProperty("violence").ToString());
-Console.WriteLine(result0.GetProperty("results")[0].GetProperty("category_scores").GetProperty("violence/graphic").ToString());
+JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("id").ToString());
+Console.WriteLine(element.GetProperty("model").ToString());
+Console.WriteLine(element.GetProperty("results")[0].GetProperty("flagged").ToString());
+Console.WriteLine(element.GetProperty("results")[0].GetProperty("categories").GetProperty("hate").ToString());
+Console.WriteLine(element.GetProperty("results")[0].GetProperty("categories").GetProperty("hate/threatening").ToString());
+Console.WriteLine(element.GetProperty("results")[0].GetProperty("categories").GetProperty("harassment").ToString());
+Console.WriteLine(element.GetProperty("results")[0].GetProperty("categories").GetProperty("harassment/threatening").ToString());
+Console.WriteLine(element.GetProperty("results")[0].GetProperty("categories").GetProperty("self-harm").ToString());
+Console.WriteLine(element.GetProperty("results")[0].GetProperty("categories").GetProperty("self-harm/intent").ToString());
+Console.WriteLine(element.GetProperty("results")[0].GetProperty("categories").GetProperty("self-harm/instructive").ToString());
+Console.WriteLine(element.GetProperty("results")[0].GetProperty("categories").GetProperty("sexual").ToString());
+Console.WriteLine(element.GetProperty("results")[0].GetProperty("categories").GetProperty("sexual/minors").ToString());
+Console.WriteLine(element.GetProperty("results")[0].GetProperty("categories").GetProperty("violence").ToString());
+Console.WriteLine(element.GetProperty("results")[0].GetProperty("categories").GetProperty("violence/graphic").ToString());
+Console.WriteLine(element.GetProperty("results")[0].GetProperty("category_scores").GetProperty("hate").ToString());
+Console.WriteLine(element.GetProperty("results")[0].GetProperty("category_scores").GetProperty("hate/threatening").ToString());
+Console.WriteLine(element.GetProperty("results")[0].GetProperty("category_scores").GetProperty("harassment").ToString());
+Console.WriteLine(element.GetProperty("results")[0].GetProperty("category_scores").GetProperty("harassment/threatening").ToString());
+Console.WriteLine(element.GetProperty("results")[0].GetProperty("category_scores").GetProperty("self-harm").ToString());
+Console.WriteLine(element.GetProperty("results")[0].GetProperty("category_scores").GetProperty("self-harm/intent").ToString());
+Console.WriteLine(element.GetProperty("results")[0].GetProperty("category_scores").GetProperty("self-harm/instructive").ToString());
+Console.WriteLine(element.GetProperty("results")[0].GetProperty("category_scores").GetProperty("sexual").ToString());
+Console.WriteLine(element.GetProperty("results")[0].GetProperty("category_scores").GetProperty("sexual/minors").ToString());
+Console.WriteLine(element.GetProperty("results")[0].GetProperty("category_scores").GetProperty("violence").ToString());
+Console.WriteLine(element.GetProperty("results")[0].GetProperty("category_scores").GetProperty("violence/graphic").ToString());
 ]]></code>
 This sample shows how to call CreateModerationAsync with all request content and parse the result.
 <code><![CDATA[
@@ -2775,7 +2721,7 @@ OpenAIClient client = new OpenAIClient();
 
 RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
 {
-    input = new List<object>()
+    input = new object[]
     {
         "<input>"
     },
@@ -2783,32 +2729,32 @@ RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(n
 }).ToStream());
 Result result = await client.CreateModerationAsync(content);
 
-JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-Console.WriteLine(result0.GetProperty("id").ToString());
-Console.WriteLine(result0.GetProperty("model").ToString());
-Console.WriteLine(result0.GetProperty("results")[0].GetProperty("flagged").ToString());
-Console.WriteLine(result0.GetProperty("results")[0].GetProperty("categories").GetProperty("hate").ToString());
-Console.WriteLine(result0.GetProperty("results")[0].GetProperty("categories").GetProperty("hate/threatening").ToString());
-Console.WriteLine(result0.GetProperty("results")[0].GetProperty("categories").GetProperty("harassment").ToString());
-Console.WriteLine(result0.GetProperty("results")[0].GetProperty("categories").GetProperty("harassment/threatening").ToString());
-Console.WriteLine(result0.GetProperty("results")[0].GetProperty("categories").GetProperty("self-harm").ToString());
-Console.WriteLine(result0.GetProperty("results")[0].GetProperty("categories").GetProperty("self-harm/intent").ToString());
-Console.WriteLine(result0.GetProperty("results")[0].GetProperty("categories").GetProperty("self-harm/instructive").ToString());
-Console.WriteLine(result0.GetProperty("results")[0].GetProperty("categories").GetProperty("sexual").ToString());
-Console.WriteLine(result0.GetProperty("results")[0].GetProperty("categories").GetProperty("sexual/minors").ToString());
-Console.WriteLine(result0.GetProperty("results")[0].GetProperty("categories").GetProperty("violence").ToString());
-Console.WriteLine(result0.GetProperty("results")[0].GetProperty("categories").GetProperty("violence/graphic").ToString());
-Console.WriteLine(result0.GetProperty("results")[0].GetProperty("category_scores").GetProperty("hate").ToString());
-Console.WriteLine(result0.GetProperty("results")[0].GetProperty("category_scores").GetProperty("hate/threatening").ToString());
-Console.WriteLine(result0.GetProperty("results")[0].GetProperty("category_scores").GetProperty("harassment").ToString());
-Console.WriteLine(result0.GetProperty("results")[0].GetProperty("category_scores").GetProperty("harassment/threatening").ToString());
-Console.WriteLine(result0.GetProperty("results")[0].GetProperty("category_scores").GetProperty("self-harm").ToString());
-Console.WriteLine(result0.GetProperty("results")[0].GetProperty("category_scores").GetProperty("self-harm/intent").ToString());
-Console.WriteLine(result0.GetProperty("results")[0].GetProperty("category_scores").GetProperty("self-harm/instructive").ToString());
-Console.WriteLine(result0.GetProperty("results")[0].GetProperty("category_scores").GetProperty("sexual").ToString());
-Console.WriteLine(result0.GetProperty("results")[0].GetProperty("category_scores").GetProperty("sexual/minors").ToString());
-Console.WriteLine(result0.GetProperty("results")[0].GetProperty("category_scores").GetProperty("violence").ToString());
-Console.WriteLine(result0.GetProperty("results")[0].GetProperty("category_scores").GetProperty("violence/graphic").ToString());
+JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("id").ToString());
+Console.WriteLine(element.GetProperty("model").ToString());
+Console.WriteLine(element.GetProperty("results")[0].GetProperty("flagged").ToString());
+Console.WriteLine(element.GetProperty("results")[0].GetProperty("categories").GetProperty("hate").ToString());
+Console.WriteLine(element.GetProperty("results")[0].GetProperty("categories").GetProperty("hate/threatening").ToString());
+Console.WriteLine(element.GetProperty("results")[0].GetProperty("categories").GetProperty("harassment").ToString());
+Console.WriteLine(element.GetProperty("results")[0].GetProperty("categories").GetProperty("harassment/threatening").ToString());
+Console.WriteLine(element.GetProperty("results")[0].GetProperty("categories").GetProperty("self-harm").ToString());
+Console.WriteLine(element.GetProperty("results")[0].GetProperty("categories").GetProperty("self-harm/intent").ToString());
+Console.WriteLine(element.GetProperty("results")[0].GetProperty("categories").GetProperty("self-harm/instructive").ToString());
+Console.WriteLine(element.GetProperty("results")[0].GetProperty("categories").GetProperty("sexual").ToString());
+Console.WriteLine(element.GetProperty("results")[0].GetProperty("categories").GetProperty("sexual/minors").ToString());
+Console.WriteLine(element.GetProperty("results")[0].GetProperty("categories").GetProperty("violence").ToString());
+Console.WriteLine(element.GetProperty("results")[0].GetProperty("categories").GetProperty("violence/graphic").ToString());
+Console.WriteLine(element.GetProperty("results")[0].GetProperty("category_scores").GetProperty("hate").ToString());
+Console.WriteLine(element.GetProperty("results")[0].GetProperty("category_scores").GetProperty("hate/threatening").ToString());
+Console.WriteLine(element.GetProperty("results")[0].GetProperty("category_scores").GetProperty("harassment").ToString());
+Console.WriteLine(element.GetProperty("results")[0].GetProperty("category_scores").GetProperty("harassment/threatening").ToString());
+Console.WriteLine(element.GetProperty("results")[0].GetProperty("category_scores").GetProperty("self-harm").ToString());
+Console.WriteLine(element.GetProperty("results")[0].GetProperty("category_scores").GetProperty("self-harm/intent").ToString());
+Console.WriteLine(element.GetProperty("results")[0].GetProperty("category_scores").GetProperty("self-harm/instructive").ToString());
+Console.WriteLine(element.GetProperty("results")[0].GetProperty("category_scores").GetProperty("sexual").ToString());
+Console.WriteLine(element.GetProperty("results")[0].GetProperty("category_scores").GetProperty("sexual/minors").ToString());
+Console.WriteLine(element.GetProperty("results")[0].GetProperty("category_scores").GetProperty("violence").ToString());
+Console.WriteLine(element.GetProperty("results")[0].GetProperty("category_scores").GetProperty("violence/graphic").ToString());
 ]]></code></example>
     </member>
     <member name="CreateModeration(RequestBody,RequestOptions)">
@@ -2819,39 +2765,39 @@ OpenAIClient client = new OpenAIClient();
 
 RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
 {
-    input = new List<object>()
+    input = new object[]
     {
         "<input>"
     },
 }).ToStream());
 Result result = client.CreateModeration(content);
 
-JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-Console.WriteLine(result0.GetProperty("id").ToString());
-Console.WriteLine(result0.GetProperty("model").ToString());
-Console.WriteLine(result0.GetProperty("results")[0].GetProperty("flagged").ToString());
-Console.WriteLine(result0.GetProperty("results")[0].GetProperty("categories").GetProperty("hate").ToString());
-Console.WriteLine(result0.GetProperty("results")[0].GetProperty("categories").GetProperty("hate/threatening").ToString());
-Console.WriteLine(result0.GetProperty("results")[0].GetProperty("categories").GetProperty("harassment").ToString());
-Console.WriteLine(result0.GetProperty("results")[0].GetProperty("categories").GetProperty("harassment/threatening").ToString());
-Console.WriteLine(result0.GetProperty("results")[0].GetProperty("categories").GetProperty("self-harm").ToString());
-Console.WriteLine(result0.GetProperty("results")[0].GetProperty("categories").GetProperty("self-harm/intent").ToString());
-Console.WriteLine(result0.GetProperty("results")[0].GetProperty("categories").GetProperty("self-harm/instructive").ToString());
-Console.WriteLine(result0.GetProperty("results")[0].GetProperty("categories").GetProperty("sexual").ToString());
-Console.WriteLine(result0.GetProperty("results")[0].GetProperty("categories").GetProperty("sexual/minors").ToString());
-Console.WriteLine(result0.GetProperty("results")[0].GetProperty("categories").GetProperty("violence").ToString());
-Console.WriteLine(result0.GetProperty("results")[0].GetProperty("categories").GetProperty("violence/graphic").ToString());
-Console.WriteLine(result0.GetProperty("results")[0].GetProperty("category_scores").GetProperty("hate").ToString());
-Console.WriteLine(result0.GetProperty("results")[0].GetProperty("category_scores").GetProperty("hate/threatening").ToString());
-Console.WriteLine(result0.GetProperty("results")[0].GetProperty("category_scores").GetProperty("harassment").ToString());
-Console.WriteLine(result0.GetProperty("results")[0].GetProperty("category_scores").GetProperty("harassment/threatening").ToString());
-Console.WriteLine(result0.GetProperty("results")[0].GetProperty("category_scores").GetProperty("self-harm").ToString());
-Console.WriteLine(result0.GetProperty("results")[0].GetProperty("category_scores").GetProperty("self-harm/intent").ToString());
-Console.WriteLine(result0.GetProperty("results")[0].GetProperty("category_scores").GetProperty("self-harm/instructive").ToString());
-Console.WriteLine(result0.GetProperty("results")[0].GetProperty("category_scores").GetProperty("sexual").ToString());
-Console.WriteLine(result0.GetProperty("results")[0].GetProperty("category_scores").GetProperty("sexual/minors").ToString());
-Console.WriteLine(result0.GetProperty("results")[0].GetProperty("category_scores").GetProperty("violence").ToString());
-Console.WriteLine(result0.GetProperty("results")[0].GetProperty("category_scores").GetProperty("violence/graphic").ToString());
+JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("id").ToString());
+Console.WriteLine(element.GetProperty("model").ToString());
+Console.WriteLine(element.GetProperty("results")[0].GetProperty("flagged").ToString());
+Console.WriteLine(element.GetProperty("results")[0].GetProperty("categories").GetProperty("hate").ToString());
+Console.WriteLine(element.GetProperty("results")[0].GetProperty("categories").GetProperty("hate/threatening").ToString());
+Console.WriteLine(element.GetProperty("results")[0].GetProperty("categories").GetProperty("harassment").ToString());
+Console.WriteLine(element.GetProperty("results")[0].GetProperty("categories").GetProperty("harassment/threatening").ToString());
+Console.WriteLine(element.GetProperty("results")[0].GetProperty("categories").GetProperty("self-harm").ToString());
+Console.WriteLine(element.GetProperty("results")[0].GetProperty("categories").GetProperty("self-harm/intent").ToString());
+Console.WriteLine(element.GetProperty("results")[0].GetProperty("categories").GetProperty("self-harm/instructive").ToString());
+Console.WriteLine(element.GetProperty("results")[0].GetProperty("categories").GetProperty("sexual").ToString());
+Console.WriteLine(element.GetProperty("results")[0].GetProperty("categories").GetProperty("sexual/minors").ToString());
+Console.WriteLine(element.GetProperty("results")[0].GetProperty("categories").GetProperty("violence").ToString());
+Console.WriteLine(element.GetProperty("results")[0].GetProperty("categories").GetProperty("violence/graphic").ToString());
+Console.WriteLine(element.GetProperty("results")[0].GetProperty("category_scores").GetProperty("hate").ToString());
+Console.WriteLine(element.GetProperty("results")[0].GetProperty("category_scores").GetProperty("hate/threatening").ToString());
+Console.WriteLine(element.GetProperty("results")[0].GetProperty("category_scores").GetProperty("harassment").ToString());
+Console.WriteLine(element.GetProperty("results")[0].GetProperty("category_scores").GetProperty("harassment/threatening").ToString());
+Console.WriteLine(element.GetProperty("results")[0].GetProperty("category_scores").GetProperty("self-harm").ToString());
+Console.WriteLine(element.GetProperty("results")[0].GetProperty("category_scores").GetProperty("self-harm/intent").ToString());
+Console.WriteLine(element.GetProperty("results")[0].GetProperty("category_scores").GetProperty("self-harm/instructive").ToString());
+Console.WriteLine(element.GetProperty("results")[0].GetProperty("category_scores").GetProperty("sexual").ToString());
+Console.WriteLine(element.GetProperty("results")[0].GetProperty("category_scores").GetProperty("sexual/minors").ToString());
+Console.WriteLine(element.GetProperty("results")[0].GetProperty("category_scores").GetProperty("violence").ToString());
+Console.WriteLine(element.GetProperty("results")[0].GetProperty("category_scores").GetProperty("violence/graphic").ToString());
 ]]></code>
 This sample shows how to call CreateModeration with all request content and parse the result.
 <code><![CDATA[
@@ -2859,7 +2805,7 @@ OpenAIClient client = new OpenAIClient();
 
 RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
 {
-    input = new List<object>()
+    input = new object[]
     {
         "<input>"
     },
@@ -2867,32 +2813,32 @@ RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(n
 }).ToStream());
 Result result = client.CreateModeration(content);
 
-JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-Console.WriteLine(result0.GetProperty("id").ToString());
-Console.WriteLine(result0.GetProperty("model").ToString());
-Console.WriteLine(result0.GetProperty("results")[0].GetProperty("flagged").ToString());
-Console.WriteLine(result0.GetProperty("results")[0].GetProperty("categories").GetProperty("hate").ToString());
-Console.WriteLine(result0.GetProperty("results")[0].GetProperty("categories").GetProperty("hate/threatening").ToString());
-Console.WriteLine(result0.GetProperty("results")[0].GetProperty("categories").GetProperty("harassment").ToString());
-Console.WriteLine(result0.GetProperty("results")[0].GetProperty("categories").GetProperty("harassment/threatening").ToString());
-Console.WriteLine(result0.GetProperty("results")[0].GetProperty("categories").GetProperty("self-harm").ToString());
-Console.WriteLine(result0.GetProperty("results")[0].GetProperty("categories").GetProperty("self-harm/intent").ToString());
-Console.WriteLine(result0.GetProperty("results")[0].GetProperty("categories").GetProperty("self-harm/instructive").ToString());
-Console.WriteLine(result0.GetProperty("results")[0].GetProperty("categories").GetProperty("sexual").ToString());
-Console.WriteLine(result0.GetProperty("results")[0].GetProperty("categories").GetProperty("sexual/minors").ToString());
-Console.WriteLine(result0.GetProperty("results")[0].GetProperty("categories").GetProperty("violence").ToString());
-Console.WriteLine(result0.GetProperty("results")[0].GetProperty("categories").GetProperty("violence/graphic").ToString());
-Console.WriteLine(result0.GetProperty("results")[0].GetProperty("category_scores").GetProperty("hate").ToString());
-Console.WriteLine(result0.GetProperty("results")[0].GetProperty("category_scores").GetProperty("hate/threatening").ToString());
-Console.WriteLine(result0.GetProperty("results")[0].GetProperty("category_scores").GetProperty("harassment").ToString());
-Console.WriteLine(result0.GetProperty("results")[0].GetProperty("category_scores").GetProperty("harassment/threatening").ToString());
-Console.WriteLine(result0.GetProperty("results")[0].GetProperty("category_scores").GetProperty("self-harm").ToString());
-Console.WriteLine(result0.GetProperty("results")[0].GetProperty("category_scores").GetProperty("self-harm/intent").ToString());
-Console.WriteLine(result0.GetProperty("results")[0].GetProperty("category_scores").GetProperty("self-harm/instructive").ToString());
-Console.WriteLine(result0.GetProperty("results")[0].GetProperty("category_scores").GetProperty("sexual").ToString());
-Console.WriteLine(result0.GetProperty("results")[0].GetProperty("category_scores").GetProperty("sexual/minors").ToString());
-Console.WriteLine(result0.GetProperty("results")[0].GetProperty("category_scores").GetProperty("violence").ToString());
-Console.WriteLine(result0.GetProperty("results")[0].GetProperty("category_scores").GetProperty("violence/graphic").ToString());
+JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("id").ToString());
+Console.WriteLine(element.GetProperty("model").ToString());
+Console.WriteLine(element.GetProperty("results")[0].GetProperty("flagged").ToString());
+Console.WriteLine(element.GetProperty("results")[0].GetProperty("categories").GetProperty("hate").ToString());
+Console.WriteLine(element.GetProperty("results")[0].GetProperty("categories").GetProperty("hate/threatening").ToString());
+Console.WriteLine(element.GetProperty("results")[0].GetProperty("categories").GetProperty("harassment").ToString());
+Console.WriteLine(element.GetProperty("results")[0].GetProperty("categories").GetProperty("harassment/threatening").ToString());
+Console.WriteLine(element.GetProperty("results")[0].GetProperty("categories").GetProperty("self-harm").ToString());
+Console.WriteLine(element.GetProperty("results")[0].GetProperty("categories").GetProperty("self-harm/intent").ToString());
+Console.WriteLine(element.GetProperty("results")[0].GetProperty("categories").GetProperty("self-harm/instructive").ToString());
+Console.WriteLine(element.GetProperty("results")[0].GetProperty("categories").GetProperty("sexual").ToString());
+Console.WriteLine(element.GetProperty("results")[0].GetProperty("categories").GetProperty("sexual/minors").ToString());
+Console.WriteLine(element.GetProperty("results")[0].GetProperty("categories").GetProperty("violence").ToString());
+Console.WriteLine(element.GetProperty("results")[0].GetProperty("categories").GetProperty("violence/graphic").ToString());
+Console.WriteLine(element.GetProperty("results")[0].GetProperty("category_scores").GetProperty("hate").ToString());
+Console.WriteLine(element.GetProperty("results")[0].GetProperty("category_scores").GetProperty("hate/threatening").ToString());
+Console.WriteLine(element.GetProperty("results")[0].GetProperty("category_scores").GetProperty("harassment").ToString());
+Console.WriteLine(element.GetProperty("results")[0].GetProperty("category_scores").GetProperty("harassment/threatening").ToString());
+Console.WriteLine(element.GetProperty("results")[0].GetProperty("category_scores").GetProperty("self-harm").ToString());
+Console.WriteLine(element.GetProperty("results")[0].GetProperty("category_scores").GetProperty("self-harm/intent").ToString());
+Console.WriteLine(element.GetProperty("results")[0].GetProperty("category_scores").GetProperty("self-harm/instructive").ToString());
+Console.WriteLine(element.GetProperty("results")[0].GetProperty("category_scores").GetProperty("sexual").ToString());
+Console.WriteLine(element.GetProperty("results")[0].GetProperty("category_scores").GetProperty("sexual/minors").ToString());
+Console.WriteLine(element.GetProperty("results")[0].GetProperty("category_scores").GetProperty("violence").ToString());
+Console.WriteLine(element.GetProperty("results")[0].GetProperty("category_scores").GetProperty("violence/graphic").ToString());
 ]]></code></example>
     </member>
   </members>

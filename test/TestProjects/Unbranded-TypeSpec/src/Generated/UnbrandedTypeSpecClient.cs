@@ -69,7 +69,6 @@ namespace UnbrandedTypeSpec
         /// <summary> top level method. </summary>
         /// <param name="action"> The DateTime to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='TopActionAsync(DateTimeOffset,CancellationToken)']/*" />
         internal virtual async Task<Result<Thing>> TopActionAsync(DateTimeOffset action, CancellationToken cancellationToken = default)
         {
             RequestOptions context = FromCancellationToken(cancellationToken);
@@ -80,7 +79,6 @@ namespace UnbrandedTypeSpec
         /// <summary> top level method. </summary>
         /// <param name="action"> The DateTime to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='TopAction(DateTimeOffset,CancellationToken)']/*" />
         internal virtual Result<Thing> TopAction(DateTimeOffset action, CancellationToken cancellationToken = default)
         {
             RequestOptions context = FromCancellationToken(cancellationToken);
@@ -284,7 +282,6 @@ namespace UnbrandedTypeSpec
         /// <param name="thing"> A model with a few properties of literal types. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="thing"/> is null. </exception>
-        /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='AnonymousBodyAsync(Thing,CancellationToken)']/*" />
         internal virtual async Task<Result<Thing>> AnonymousBodyAsync(Thing thing, CancellationToken cancellationToken = default)
         {
             ClientUtilities.AssertNotNull(thing, nameof(thing));
@@ -298,7 +295,6 @@ namespace UnbrandedTypeSpec
         /// <param name="thing"> A model with a few properties of literal types. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="thing"/> is null. </exception>
-        /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='AnonymousBody(Thing,CancellationToken)']/*" />
         internal virtual Result<Thing> AnonymousBody(Thing thing, CancellationToken cancellationToken = default)
         {
             ClientUtilities.AssertNotNull(thing, nameof(thing));
@@ -977,7 +973,6 @@ namespace UnbrandedTypeSpec
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="p2"/>, <paramref name="p1"/> or <paramref name="action"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="p2"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='HelloAgainAsync(string,string,RoundTripModel,CancellationToken)']/*" />
         internal virtual async Task<Result<RoundTripModel>> HelloAgainAsync(string p2, string p1, RoundTripModel action, CancellationToken cancellationToken = default)
         {
             ClientUtilities.AssertNotNullOrEmpty(p2, nameof(p2));
@@ -996,7 +991,6 @@ namespace UnbrandedTypeSpec
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="p2"/>, <paramref name="p1"/> or <paramref name="action"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="p2"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='HelloAgain(string,string,RoundTripModel,CancellationToken)']/*" />
         internal virtual Result<RoundTripModel> HelloAgain(string p2, string p1, RoundTripModel action, CancellationToken cancellationToken = default)
         {
             ClientUtilities.AssertNotNullOrEmpty(p2, nameof(p2));
@@ -1168,7 +1162,6 @@ namespace UnbrandedTypeSpec
 
         /// <summary> Return hi in demo2. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='HelloDemo2Async(CancellationToken)']/*" />
         internal virtual async Task<Result<Thing>> HelloDemo2Async(CancellationToken cancellationToken = default)
         {
             RequestOptions context = FromCancellationToken(cancellationToken);
@@ -1178,7 +1171,6 @@ namespace UnbrandedTypeSpec
 
         /// <summary> Return hi in demo2. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='HelloDemo2(CancellationToken)']/*" />
         internal virtual Result<Thing> HelloDemo2(CancellationToken cancellationToken = default)
         {
             RequestOptions context = FromCancellationToken(cancellationToken);
@@ -1252,7 +1244,6 @@ namespace UnbrandedTypeSpec
         /// <param name="body"> The Thing to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='CreateLiteralAsync(Thing,CancellationToken)']/*" />
         internal virtual async Task<Result<Thing>> CreateLiteralAsync(Thing body, CancellationToken cancellationToken = default)
         {
             ClientUtilities.AssertNotNull(body, nameof(body));
@@ -1266,7 +1257,6 @@ namespace UnbrandedTypeSpec
         /// <param name="body"> The Thing to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='CreateLiteral(Thing,CancellationToken)']/*" />
         internal virtual Result<Thing> CreateLiteral(Thing body, CancellationToken cancellationToken = default)
         {
             ClientUtilities.AssertNotNull(body, nameof(body));
@@ -1348,7 +1338,6 @@ namespace UnbrandedTypeSpec
 
         /// <summary> Send literal parameters. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='HelloLiteralAsync(CancellationToken)']/*" />
         internal virtual async Task<Result<Thing>> HelloLiteralAsync(CancellationToken cancellationToken = default)
         {
             RequestOptions context = FromCancellationToken(cancellationToken);
@@ -1358,7 +1347,6 @@ namespace UnbrandedTypeSpec
 
         /// <summary> Send literal parameters. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='HelloLiteral(CancellationToken)']/*" />
         internal virtual Result<Thing> HelloLiteral(CancellationToken cancellationToken = default)
         {
             RequestOptions context = FromCancellationToken(cancellationToken);
@@ -1492,7 +1480,6 @@ namespace UnbrandedTypeSpec
         /// <param name="body"> The Thing to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='InternalProtocolAsync(Thing,CancellationToken)']/*" />
         internal virtual async Task<Result<Thing>> InternalProtocolAsync(Thing body, CancellationToken cancellationToken = default)
         {
             ClientUtilities.AssertNotNull(body, nameof(body));
@@ -1506,7 +1493,6 @@ namespace UnbrandedTypeSpec
         /// <param name="body"> The Thing to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='InternalProtocol(Thing,CancellationToken)']/*" />
         internal virtual Result<Thing> InternalProtocol(Thing body, CancellationToken cancellationToken = default)
         {
             ClientUtilities.AssertNotNull(body, nameof(body));
@@ -1537,7 +1523,6 @@ namespace UnbrandedTypeSpec
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='InternalProtocolAsync(RequestBody,RequestOptions)']/*" />
         internal virtual async Task<Result> InternalProtocolAsync(RequestBody content, RequestOptions context = null)
         {
             ClientUtilities.AssertNotNull(content, nameof(content));
@@ -1577,7 +1562,6 @@ namespace UnbrandedTypeSpec
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='InternalProtocol(RequestBody,RequestOptions)']/*" />
         internal virtual Result InternalProtocol(RequestBody content, RequestOptions context = null)
         {
             ClientUtilities.AssertNotNull(content, nameof(content));
@@ -1598,7 +1582,6 @@ namespace UnbrandedTypeSpec
 
         /// <summary> When set protocol false and convenient true, the convenient method should be generated even it has the same signature as protocol one. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='StillConvenientValueAsync(CancellationToken)']/*" />
         public virtual async Task<Result> StillConvenientValueAsync(CancellationToken cancellationToken = default)
         {
             using var scope = ClientDiagnostics.CreateSpan("UnbrandedTypeSpecClient.StillConvenientValue");
@@ -1618,7 +1601,6 @@ namespace UnbrandedTypeSpec
 
         /// <summary> When set protocol false and convenient true, the convenient method should be generated even it has the same signature as protocol one. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='StillConvenientValue(CancellationToken)']/*" />
         public virtual Result StillConvenientValue(CancellationToken cancellationToken = default)
         {
             using var scope = ClientDiagnostics.CreateSpan("UnbrandedTypeSpecClient.StillConvenientValue");
@@ -1649,7 +1631,6 @@ namespace UnbrandedTypeSpec
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='StillConvenientAsync(RequestOptions)']/*" />
         internal virtual async Task<Result> StillConvenientAsync(RequestOptions context = null)
         {
             using var scope = ClientDiagnostics.CreateSpan("UnbrandedTypeSpecClient.StillConvenient");
@@ -1679,7 +1660,6 @@ namespace UnbrandedTypeSpec
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/UnbrandedTypeSpecClient.xml" path="doc/members/member[@name='StillConvenient(RequestOptions)']/*" />
         internal virtual Result StillConvenient(RequestOptions context = null)
         {
             using var scope = ClientDiagnostics.CreateSpan("UnbrandedTypeSpecClient.StillConvenient");

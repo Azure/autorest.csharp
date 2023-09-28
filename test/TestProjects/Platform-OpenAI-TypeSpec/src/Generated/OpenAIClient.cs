@@ -1043,7 +1043,6 @@ namespace OpenAI
         /// <param name="edit"> The CreateEditRequest to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="edit"/> is null. </exception>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='CreateEditAsync(CreateEditRequest,CancellationToken)']/*" />
         [Obsolete("deprecated")]
         public virtual async Task<Result<CreateEditResponse>> CreateEditAsync(CreateEditRequest edit, CancellationToken cancellationToken = default)
         {
@@ -1057,7 +1056,6 @@ namespace OpenAI
         /// <param name="edit"> The CreateEditRequest to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="edit"/> is null. </exception>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='CreateEdit(CreateEditRequest,CancellationToken)']/*" />
         [Obsolete("deprecated")]
         public virtual Result<CreateEditResponse> CreateEdit(CreateEditRequest edit, CancellationToken cancellationToken = default)
         {
@@ -1088,7 +1086,6 @@ namespace OpenAI
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='CreateEditAsync(RequestBody,RequestOptions)']/*" />
         [Obsolete("deprecated")]
         public virtual async Task<Result> CreateEditAsync(RequestBody content, RequestOptions context = null)
         {
@@ -1128,7 +1125,6 @@ namespace OpenAI
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='CreateEdit(RequestBody,RequestOptions)']/*" />
         [Obsolete("deprecated")]
         public virtual Result CreateEdit(RequestBody content, RequestOptions context = null)
         {
@@ -2108,7 +2104,6 @@ namespace OpenAI
         /// <param name="fineTune"> The CreateFineTuneRequest to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fineTune"/> is null. </exception>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='CreateFineTuneAsync(CreateFineTuneRequest,CancellationToken)']/*" />
         [Obsolete("deprecated")]
         public virtual async Task<Result<FineTune>> CreateFineTuneAsync(CreateFineTuneRequest fineTune, CancellationToken cancellationToken = default)
         {
@@ -2129,7 +2124,6 @@ namespace OpenAI
         /// <param name="fineTune"> The CreateFineTuneRequest to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fineTune"/> is null. </exception>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='CreateFineTune(CreateFineTuneRequest,CancellationToken)']/*" />
         [Obsolete("deprecated")]
         public virtual Result<FineTune> CreateFineTune(CreateFineTuneRequest fineTune, CancellationToken cancellationToken = default)
         {
@@ -2164,7 +2158,6 @@ namespace OpenAI
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='CreateFineTuneAsync(RequestBody,RequestOptions)']/*" />
         [Obsolete("deprecated")]
         public virtual async Task<Result> CreateFineTuneAsync(RequestBody content, RequestOptions context = null)
         {
@@ -2208,7 +2201,6 @@ namespace OpenAI
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='CreateFineTune(RequestBody,RequestOptions)']/*" />
         [Obsolete("deprecated")]
         public virtual Result CreateFineTune(RequestBody content, RequestOptions context = null)
         {
@@ -2230,7 +2222,6 @@ namespace OpenAI
 
         /// <summary> List your organization's fine-tuning jobs. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='GetFineTunesAsync(CancellationToken)']/*" />
         [Obsolete("deprecated")]
         public virtual async Task<Result<ListFineTunesResponse>> GetFineTunesAsync(CancellationToken cancellationToken = default)
         {
@@ -2241,7 +2232,6 @@ namespace OpenAI
 
         /// <summary> List your organization's fine-tuning jobs. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='GetFineTunes(CancellationToken)']/*" />
         [Obsolete("deprecated")]
         public virtual Result<ListFineTunesResponse> GetFineTunes(CancellationToken cancellationToken = default)
         {
@@ -2268,7 +2258,6 @@ namespace OpenAI
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='GetFineTunesAsync(RequestOptions)']/*" />
         [Obsolete("deprecated")]
         public virtual async Task<Result> GetFineTunesAsync(RequestOptions context)
         {
@@ -2304,7 +2293,6 @@ namespace OpenAI
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='GetFineTunes(RequestOptions)']/*" />
         [Obsolete("deprecated")]
         public virtual Result GetFineTunes(RequestOptions context)
         {
@@ -2331,7 +2319,6 @@ namespace OpenAI
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fineTuneId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fineTuneId"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='RetrieveFineTuneAsync(string,CancellationToken)']/*" />
         [Obsolete("deprecated")]
         public virtual async Task<Result<FineTune>> RetrieveFineTuneAsync(string fineTuneId, CancellationToken cancellationToken = default)
         {
@@ -2351,7 +2338,6 @@ namespace OpenAI
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fineTuneId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fineTuneId"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='RetrieveFineTune(string,CancellationToken)']/*" />
         [Obsolete("deprecated")]
         public virtual Result<FineTune> RetrieveFineTune(string fineTuneId, CancellationToken cancellationToken = default)
         {
@@ -2385,7 +2371,6 @@ namespace OpenAI
         /// <exception cref="ArgumentException"> <paramref name="fineTuneId"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='RetrieveFineTuneAsync(string,RequestOptions)']/*" />
         [Obsolete("deprecated")]
         public virtual async Task<Result> RetrieveFineTuneAsync(string fineTuneId, RequestOptions context)
         {
@@ -2428,7 +2413,6 @@ namespace OpenAI
         /// <exception cref="ArgumentException"> <paramref name="fineTuneId"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='RetrieveFineTune(string,RequestOptions)']/*" />
         [Obsolete("deprecated")]
         public virtual Result RetrieveFineTune(string fineTuneId, RequestOptions context)
         {
@@ -2462,7 +2446,6 @@ namespace OpenAI
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fineTuneId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fineTuneId"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='GetFineTuneEventsAsync(string,bool?,CancellationToken)']/*" />
         [Obsolete("deprecated")]
         public virtual async Task<Result<ListFineTuneEventsResponse>> GetFineTuneEventsAsync(string fineTuneId, bool? stream = null, CancellationToken cancellationToken = default)
         {
@@ -2487,7 +2470,6 @@ namespace OpenAI
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fineTuneId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fineTuneId"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='GetFineTuneEvents(string,bool?,CancellationToken)']/*" />
         [Obsolete("deprecated")]
         public virtual Result<ListFineTuneEventsResponse> GetFineTuneEvents(string fineTuneId, bool? stream = null, CancellationToken cancellationToken = default)
         {
@@ -2528,7 +2510,6 @@ namespace OpenAI
         /// <exception cref="ArgumentException"> <paramref name="fineTuneId"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='GetFineTuneEventsAsync(string,bool?,RequestOptions)']/*" />
         [Obsolete("deprecated")]
         public virtual async Task<Result> GetFineTuneEventsAsync(string fineTuneId, bool? stream, RequestOptions context)
         {
@@ -2578,7 +2559,6 @@ namespace OpenAI
         /// <exception cref="ArgumentException"> <paramref name="fineTuneId"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='GetFineTuneEvents(string,bool?,RequestOptions)']/*" />
         [Obsolete("deprecated")]
         public virtual Result GetFineTuneEvents(string fineTuneId, bool? stream, RequestOptions context)
         {
@@ -2603,7 +2583,6 @@ namespace OpenAI
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fineTuneId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fineTuneId"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='CancelFineTuneAsync(string,CancellationToken)']/*" />
         [Obsolete("deprecated")]
         public virtual async Task<Result<FineTune>> CancelFineTuneAsync(string fineTuneId, CancellationToken cancellationToken = default)
         {
@@ -2619,7 +2598,6 @@ namespace OpenAI
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fineTuneId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fineTuneId"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='CancelFineTune(string,CancellationToken)']/*" />
         [Obsolete("deprecated")]
         public virtual Result<FineTune> CancelFineTune(string fineTuneId, CancellationToken cancellationToken = default)
         {
@@ -2651,7 +2629,6 @@ namespace OpenAI
         /// <exception cref="ArgumentException"> <paramref name="fineTuneId"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='CancelFineTuneAsync(string,RequestOptions)']/*" />
         [Obsolete("deprecated")]
         public virtual async Task<Result> CancelFineTuneAsync(string fineTuneId, RequestOptions context)
         {
@@ -2692,7 +2669,6 @@ namespace OpenAI
         /// <exception cref="ArgumentException"> <paramref name="fineTuneId"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='CancelFineTune(string,RequestOptions)']/*" />
         [Obsolete("deprecated")]
         public virtual Result CancelFineTune(string fineTuneId, RequestOptions context)
         {

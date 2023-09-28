@@ -101,5 +101,8 @@ namespace AutoRest.CSharp.Common.Input
         public override Type StatusCodeClassifierType => typeof(StatusCodeClassifier);
 
         public override Type JsonElementExtensionsType => typeof(JsonElementExtensions);
+
+        public override ValueExpression GetCreateFromStreamSampleExpression(ValueExpression freeFormObjectExpression)
+            => new TypeReference(Configuration.ApiTypes.RequestContentType).InvokeStatic(Configuration.ApiTypes.RequestContentCreateName, freeFormObjectExpression);
     }
 }

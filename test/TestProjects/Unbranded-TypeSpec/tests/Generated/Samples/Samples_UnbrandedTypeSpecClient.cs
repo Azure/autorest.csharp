@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
 using System.ServiceModel.Rest;
 using System.ServiceModel.Rest.Core;
 using System.Text.Json;
@@ -17,11 +16,11 @@ using UnbrandedTypeSpec.Models;
 
 namespace UnbrandedTypeSpec.Samples
 {
-    public class Samples_UnbrandedTypeSpecClient
+    public partial class Samples_UnbrandedTypeSpecClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_TopAction()
+        public void Example_TopAction_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             KeyCredential credential = new KeyCredential("<key>");
@@ -29,20 +28,20 @@ namespace UnbrandedTypeSpec.Samples
 
             Result result = client.TopAction(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"), null);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("name").ToString());
-            Console.WriteLine(result0.GetProperty("requiredUnion").ToString());
-            Console.WriteLine(result0.GetProperty("requiredLiteralString").ToString());
-            Console.WriteLine(result0.GetProperty("requiredLiteralInt").ToString());
-            Console.WriteLine(result0.GetProperty("requiredLiteralFloat").ToString());
-            Console.WriteLine(result0.GetProperty("requiredLiteralBool").ToString());
-            Console.WriteLine(result0.GetProperty("requiredBadDescription").ToString());
-            Console.WriteLine(result0.GetProperty("requiredNullableList")[0].ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("name").ToString());
+            Console.WriteLine(element.GetProperty("requiredUnion").ToString());
+            Console.WriteLine(element.GetProperty("requiredLiteralString").ToString());
+            Console.WriteLine(element.GetProperty("requiredLiteralInt").ToString());
+            Console.WriteLine(element.GetProperty("requiredLiteralFloat").ToString());
+            Console.WriteLine(element.GetProperty("requiredLiteralBool").ToString());
+            Console.WriteLine(element.GetProperty("requiredBadDescription").ToString());
+            Console.WriteLine(element.GetProperty("requiredNullableList")[0].ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_TopAction_Async()
+        public async Task Example_TopAction_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             KeyCredential credential = new KeyCredential("<key>");
@@ -50,15 +49,15 @@ namespace UnbrandedTypeSpec.Samples
 
             Result result = await client.TopActionAsync(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"), null);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("name").ToString());
-            Console.WriteLine(result0.GetProperty("requiredUnion").ToString());
-            Console.WriteLine(result0.GetProperty("requiredLiteralString").ToString());
-            Console.WriteLine(result0.GetProperty("requiredLiteralInt").ToString());
-            Console.WriteLine(result0.GetProperty("requiredLiteralFloat").ToString());
-            Console.WriteLine(result0.GetProperty("requiredLiteralBool").ToString());
-            Console.WriteLine(result0.GetProperty("requiredBadDescription").ToString());
-            Console.WriteLine(result0.GetProperty("requiredNullableList")[0].ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("name").ToString());
+            Console.WriteLine(element.GetProperty("requiredUnion").ToString());
+            Console.WriteLine(element.GetProperty("requiredLiteralString").ToString());
+            Console.WriteLine(element.GetProperty("requiredLiteralInt").ToString());
+            Console.WriteLine(element.GetProperty("requiredLiteralFloat").ToString());
+            Console.WriteLine(element.GetProperty("requiredLiteralBool").ToString());
+            Console.WriteLine(element.GetProperty("requiredBadDescription").ToString());
+            Console.WriteLine(element.GetProperty("requiredNullableList")[0].ToString());
         }
 
         [Test]
@@ -71,20 +70,20 @@ namespace UnbrandedTypeSpec.Samples
 
             Result result = client.TopAction(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"), null);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("name").ToString());
-            Console.WriteLine(result0.GetProperty("requiredUnion").ToString());
-            Console.WriteLine(result0.GetProperty("requiredLiteralString").ToString());
-            Console.WriteLine(result0.GetProperty("requiredLiteralInt").ToString());
-            Console.WriteLine(result0.GetProperty("requiredLiteralFloat").ToString());
-            Console.WriteLine(result0.GetProperty("requiredLiteralBool").ToString());
-            Console.WriteLine(result0.GetProperty("optionalLiteralString").ToString());
-            Console.WriteLine(result0.GetProperty("optionalLiteralInt").ToString());
-            Console.WriteLine(result0.GetProperty("optionalLiteralFloat").ToString());
-            Console.WriteLine(result0.GetProperty("optionalLiteralBool").ToString());
-            Console.WriteLine(result0.GetProperty("requiredBadDescription").ToString());
-            Console.WriteLine(result0.GetProperty("optionalNullableList")[0].ToString());
-            Console.WriteLine(result0.GetProperty("requiredNullableList")[0].ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("name").ToString());
+            Console.WriteLine(element.GetProperty("requiredUnion").ToString());
+            Console.WriteLine(element.GetProperty("requiredLiteralString").ToString());
+            Console.WriteLine(element.GetProperty("requiredLiteralInt").ToString());
+            Console.WriteLine(element.GetProperty("requiredLiteralFloat").ToString());
+            Console.WriteLine(element.GetProperty("requiredLiteralBool").ToString());
+            Console.WriteLine(element.GetProperty("optionalLiteralString").ToString());
+            Console.WriteLine(element.GetProperty("optionalLiteralInt").ToString());
+            Console.WriteLine(element.GetProperty("optionalLiteralFloat").ToString());
+            Console.WriteLine(element.GetProperty("optionalLiteralBool").ToString());
+            Console.WriteLine(element.GetProperty("requiredBadDescription").ToString());
+            Console.WriteLine(element.GetProperty("optionalNullableList")[0].ToString());
+            Console.WriteLine(element.GetProperty("requiredNullableList")[0].ToString());
         }
 
         [Test]
@@ -97,25 +96,25 @@ namespace UnbrandedTypeSpec.Samples
 
             Result result = await client.TopActionAsync(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"), null);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("name").ToString());
-            Console.WriteLine(result0.GetProperty("requiredUnion").ToString());
-            Console.WriteLine(result0.GetProperty("requiredLiteralString").ToString());
-            Console.WriteLine(result0.GetProperty("requiredLiteralInt").ToString());
-            Console.WriteLine(result0.GetProperty("requiredLiteralFloat").ToString());
-            Console.WriteLine(result0.GetProperty("requiredLiteralBool").ToString());
-            Console.WriteLine(result0.GetProperty("optionalLiteralString").ToString());
-            Console.WriteLine(result0.GetProperty("optionalLiteralInt").ToString());
-            Console.WriteLine(result0.GetProperty("optionalLiteralFloat").ToString());
-            Console.WriteLine(result0.GetProperty("optionalLiteralBool").ToString());
-            Console.WriteLine(result0.GetProperty("requiredBadDescription").ToString());
-            Console.WriteLine(result0.GetProperty("optionalNullableList")[0].ToString());
-            Console.WriteLine(result0.GetProperty("requiredNullableList")[0].ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("name").ToString());
+            Console.WriteLine(element.GetProperty("requiredUnion").ToString());
+            Console.WriteLine(element.GetProperty("requiredLiteralString").ToString());
+            Console.WriteLine(element.GetProperty("requiredLiteralInt").ToString());
+            Console.WriteLine(element.GetProperty("requiredLiteralFloat").ToString());
+            Console.WriteLine(element.GetProperty("requiredLiteralBool").ToString());
+            Console.WriteLine(element.GetProperty("optionalLiteralString").ToString());
+            Console.WriteLine(element.GetProperty("optionalLiteralInt").ToString());
+            Console.WriteLine(element.GetProperty("optionalLiteralFloat").ToString());
+            Console.WriteLine(element.GetProperty("optionalLiteralBool").ToString());
+            Console.WriteLine(element.GetProperty("requiredBadDescription").ToString());
+            Console.WriteLine(element.GetProperty("optionalNullableList")[0].ToString());
+            Console.WriteLine(element.GetProperty("requiredNullableList")[0].ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_TopAction2()
+        public void Example_TopAction2_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             KeyCredential credential = new KeyCredential("<key>");
@@ -123,20 +122,20 @@ namespace UnbrandedTypeSpec.Samples
 
             Result result = client.TopAction2(null);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("name").ToString());
-            Console.WriteLine(result0.GetProperty("requiredUnion").ToString());
-            Console.WriteLine(result0.GetProperty("requiredLiteralString").ToString());
-            Console.WriteLine(result0.GetProperty("requiredLiteralInt").ToString());
-            Console.WriteLine(result0.GetProperty("requiredLiteralFloat").ToString());
-            Console.WriteLine(result0.GetProperty("requiredLiteralBool").ToString());
-            Console.WriteLine(result0.GetProperty("requiredBadDescription").ToString());
-            Console.WriteLine(result0.GetProperty("requiredNullableList")[0].ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("name").ToString());
+            Console.WriteLine(element.GetProperty("requiredUnion").ToString());
+            Console.WriteLine(element.GetProperty("requiredLiteralString").ToString());
+            Console.WriteLine(element.GetProperty("requiredLiteralInt").ToString());
+            Console.WriteLine(element.GetProperty("requiredLiteralFloat").ToString());
+            Console.WriteLine(element.GetProperty("requiredLiteralBool").ToString());
+            Console.WriteLine(element.GetProperty("requiredBadDescription").ToString());
+            Console.WriteLine(element.GetProperty("requiredNullableList")[0].ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_TopAction2_Async()
+        public async Task Example_TopAction2_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             KeyCredential credential = new KeyCredential("<key>");
@@ -144,15 +143,15 @@ namespace UnbrandedTypeSpec.Samples
 
             Result result = await client.TopAction2Async(null);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("name").ToString());
-            Console.WriteLine(result0.GetProperty("requiredUnion").ToString());
-            Console.WriteLine(result0.GetProperty("requiredLiteralString").ToString());
-            Console.WriteLine(result0.GetProperty("requiredLiteralInt").ToString());
-            Console.WriteLine(result0.GetProperty("requiredLiteralFloat").ToString());
-            Console.WriteLine(result0.GetProperty("requiredLiteralBool").ToString());
-            Console.WriteLine(result0.GetProperty("requiredBadDescription").ToString());
-            Console.WriteLine(result0.GetProperty("requiredNullableList")[0].ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("name").ToString());
+            Console.WriteLine(element.GetProperty("requiredUnion").ToString());
+            Console.WriteLine(element.GetProperty("requiredLiteralString").ToString());
+            Console.WriteLine(element.GetProperty("requiredLiteralInt").ToString());
+            Console.WriteLine(element.GetProperty("requiredLiteralFloat").ToString());
+            Console.WriteLine(element.GetProperty("requiredLiteralBool").ToString());
+            Console.WriteLine(element.GetProperty("requiredBadDescription").ToString());
+            Console.WriteLine(element.GetProperty("requiredNullableList")[0].ToString());
         }
 
         [Test]
@@ -165,20 +164,20 @@ namespace UnbrandedTypeSpec.Samples
 
             Result result = client.TopAction2(null);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("name").ToString());
-            Console.WriteLine(result0.GetProperty("requiredUnion").ToString());
-            Console.WriteLine(result0.GetProperty("requiredLiteralString").ToString());
-            Console.WriteLine(result0.GetProperty("requiredLiteralInt").ToString());
-            Console.WriteLine(result0.GetProperty("requiredLiteralFloat").ToString());
-            Console.WriteLine(result0.GetProperty("requiredLiteralBool").ToString());
-            Console.WriteLine(result0.GetProperty("optionalLiteralString").ToString());
-            Console.WriteLine(result0.GetProperty("optionalLiteralInt").ToString());
-            Console.WriteLine(result0.GetProperty("optionalLiteralFloat").ToString());
-            Console.WriteLine(result0.GetProperty("optionalLiteralBool").ToString());
-            Console.WriteLine(result0.GetProperty("requiredBadDescription").ToString());
-            Console.WriteLine(result0.GetProperty("optionalNullableList")[0].ToString());
-            Console.WriteLine(result0.GetProperty("requiredNullableList")[0].ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("name").ToString());
+            Console.WriteLine(element.GetProperty("requiredUnion").ToString());
+            Console.WriteLine(element.GetProperty("requiredLiteralString").ToString());
+            Console.WriteLine(element.GetProperty("requiredLiteralInt").ToString());
+            Console.WriteLine(element.GetProperty("requiredLiteralFloat").ToString());
+            Console.WriteLine(element.GetProperty("requiredLiteralBool").ToString());
+            Console.WriteLine(element.GetProperty("optionalLiteralString").ToString());
+            Console.WriteLine(element.GetProperty("optionalLiteralInt").ToString());
+            Console.WriteLine(element.GetProperty("optionalLiteralFloat").ToString());
+            Console.WriteLine(element.GetProperty("optionalLiteralBool").ToString());
+            Console.WriteLine(element.GetProperty("requiredBadDescription").ToString());
+            Console.WriteLine(element.GetProperty("optionalNullableList")[0].ToString());
+            Console.WriteLine(element.GetProperty("requiredNullableList")[0].ToString());
         }
 
         [Test]
@@ -191,25 +190,25 @@ namespace UnbrandedTypeSpec.Samples
 
             Result result = await client.TopAction2Async(null);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("name").ToString());
-            Console.WriteLine(result0.GetProperty("requiredUnion").ToString());
-            Console.WriteLine(result0.GetProperty("requiredLiteralString").ToString());
-            Console.WriteLine(result0.GetProperty("requiredLiteralInt").ToString());
-            Console.WriteLine(result0.GetProperty("requiredLiteralFloat").ToString());
-            Console.WriteLine(result0.GetProperty("requiredLiteralBool").ToString());
-            Console.WriteLine(result0.GetProperty("optionalLiteralString").ToString());
-            Console.WriteLine(result0.GetProperty("optionalLiteralInt").ToString());
-            Console.WriteLine(result0.GetProperty("optionalLiteralFloat").ToString());
-            Console.WriteLine(result0.GetProperty("optionalLiteralBool").ToString());
-            Console.WriteLine(result0.GetProperty("requiredBadDescription").ToString());
-            Console.WriteLine(result0.GetProperty("optionalNullableList")[0].ToString());
-            Console.WriteLine(result0.GetProperty("requiredNullableList")[0].ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("name").ToString());
+            Console.WriteLine(element.GetProperty("requiredUnion").ToString());
+            Console.WriteLine(element.GetProperty("requiredLiteralString").ToString());
+            Console.WriteLine(element.GetProperty("requiredLiteralInt").ToString());
+            Console.WriteLine(element.GetProperty("requiredLiteralFloat").ToString());
+            Console.WriteLine(element.GetProperty("requiredLiteralBool").ToString());
+            Console.WriteLine(element.GetProperty("optionalLiteralString").ToString());
+            Console.WriteLine(element.GetProperty("optionalLiteralInt").ToString());
+            Console.WriteLine(element.GetProperty("optionalLiteralFloat").ToString());
+            Console.WriteLine(element.GetProperty("optionalLiteralBool").ToString());
+            Console.WriteLine(element.GetProperty("requiredBadDescription").ToString());
+            Console.WriteLine(element.GetProperty("optionalNullableList")[0].ToString());
+            Console.WriteLine(element.GetProperty("requiredNullableList")[0].ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PatchAction()
+        public void Example_PatchAction_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             KeyCredential credential = new KeyCredential("<key>");
@@ -224,27 +223,27 @@ namespace UnbrandedTypeSpec.Samples
                 requiredLiteralFloat = 1.23F,
                 requiredLiteralBool = false,
                 requiredBadDescription = "<requiredBadDescription>",
-                requiredNullableList = new List<object>()
-{
+                requiredNullableList = new object[]
+            {
 1234
-},
+            },
             }).ToStream());
             Result result = client.PatchAction(content);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("name").ToString());
-            Console.WriteLine(result0.GetProperty("requiredUnion").ToString());
-            Console.WriteLine(result0.GetProperty("requiredLiteralString").ToString());
-            Console.WriteLine(result0.GetProperty("requiredLiteralInt").ToString());
-            Console.WriteLine(result0.GetProperty("requiredLiteralFloat").ToString());
-            Console.WriteLine(result0.GetProperty("requiredLiteralBool").ToString());
-            Console.WriteLine(result0.GetProperty("requiredBadDescription").ToString());
-            Console.WriteLine(result0.GetProperty("requiredNullableList")[0].ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("name").ToString());
+            Console.WriteLine(element.GetProperty("requiredUnion").ToString());
+            Console.WriteLine(element.GetProperty("requiredLiteralString").ToString());
+            Console.WriteLine(element.GetProperty("requiredLiteralInt").ToString());
+            Console.WriteLine(element.GetProperty("requiredLiteralFloat").ToString());
+            Console.WriteLine(element.GetProperty("requiredLiteralBool").ToString());
+            Console.WriteLine(element.GetProperty("requiredBadDescription").ToString());
+            Console.WriteLine(element.GetProperty("requiredNullableList")[0].ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PatchAction_Async()
+        public async Task Example_PatchAction_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             KeyCredential credential = new KeyCredential("<key>");
@@ -259,22 +258,22 @@ namespace UnbrandedTypeSpec.Samples
                 requiredLiteralFloat = 1.23F,
                 requiredLiteralBool = false,
                 requiredBadDescription = "<requiredBadDescription>",
-                requiredNullableList = new List<object>()
-{
+                requiredNullableList = new object[]
+            {
 1234
-},
+            },
             }).ToStream());
             Result result = await client.PatchActionAsync(content);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("name").ToString());
-            Console.WriteLine(result0.GetProperty("requiredUnion").ToString());
-            Console.WriteLine(result0.GetProperty("requiredLiteralString").ToString());
-            Console.WriteLine(result0.GetProperty("requiredLiteralInt").ToString());
-            Console.WriteLine(result0.GetProperty("requiredLiteralFloat").ToString());
-            Console.WriteLine(result0.GetProperty("requiredLiteralBool").ToString());
-            Console.WriteLine(result0.GetProperty("requiredBadDescription").ToString());
-            Console.WriteLine(result0.GetProperty("requiredNullableList")[0].ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("name").ToString());
+            Console.WriteLine(element.GetProperty("requiredUnion").ToString());
+            Console.WriteLine(element.GetProperty("requiredLiteralString").ToString());
+            Console.WriteLine(element.GetProperty("requiredLiteralInt").ToString());
+            Console.WriteLine(element.GetProperty("requiredLiteralFloat").ToString());
+            Console.WriteLine(element.GetProperty("requiredLiteralBool").ToString());
+            Console.WriteLine(element.GetProperty("requiredBadDescription").ToString());
+            Console.WriteLine(element.GetProperty("requiredNullableList")[0].ToString());
         }
 
         [Test]
@@ -298,31 +297,31 @@ namespace UnbrandedTypeSpec.Samples
                 optionalLiteralFloat = 4.56F,
                 optionalLiteralBool = true,
                 requiredBadDescription = "<requiredBadDescription>",
-                optionalNullableList = new List<object>()
-{
+                optionalNullableList = new object[]
+            {
 1234
-},
-                requiredNullableList = new List<object>()
-{
+            },
+                requiredNullableList = new object[]
+            {
 1234
-},
+            },
             }).ToStream());
             Result result = client.PatchAction(content);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("name").ToString());
-            Console.WriteLine(result0.GetProperty("requiredUnion").ToString());
-            Console.WriteLine(result0.GetProperty("requiredLiteralString").ToString());
-            Console.WriteLine(result0.GetProperty("requiredLiteralInt").ToString());
-            Console.WriteLine(result0.GetProperty("requiredLiteralFloat").ToString());
-            Console.WriteLine(result0.GetProperty("requiredLiteralBool").ToString());
-            Console.WriteLine(result0.GetProperty("optionalLiteralString").ToString());
-            Console.WriteLine(result0.GetProperty("optionalLiteralInt").ToString());
-            Console.WriteLine(result0.GetProperty("optionalLiteralFloat").ToString());
-            Console.WriteLine(result0.GetProperty("optionalLiteralBool").ToString());
-            Console.WriteLine(result0.GetProperty("requiredBadDescription").ToString());
-            Console.WriteLine(result0.GetProperty("optionalNullableList")[0].ToString());
-            Console.WriteLine(result0.GetProperty("requiredNullableList")[0].ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("name").ToString());
+            Console.WriteLine(element.GetProperty("requiredUnion").ToString());
+            Console.WriteLine(element.GetProperty("requiredLiteralString").ToString());
+            Console.WriteLine(element.GetProperty("requiredLiteralInt").ToString());
+            Console.WriteLine(element.GetProperty("requiredLiteralFloat").ToString());
+            Console.WriteLine(element.GetProperty("requiredLiteralBool").ToString());
+            Console.WriteLine(element.GetProperty("optionalLiteralString").ToString());
+            Console.WriteLine(element.GetProperty("optionalLiteralInt").ToString());
+            Console.WriteLine(element.GetProperty("optionalLiteralFloat").ToString());
+            Console.WriteLine(element.GetProperty("optionalLiteralBool").ToString());
+            Console.WriteLine(element.GetProperty("requiredBadDescription").ToString());
+            Console.WriteLine(element.GetProperty("optionalNullableList")[0].ToString());
+            Console.WriteLine(element.GetProperty("requiredNullableList")[0].ToString());
         }
 
         [Test]
@@ -346,36 +345,36 @@ namespace UnbrandedTypeSpec.Samples
                 optionalLiteralFloat = 4.56F,
                 optionalLiteralBool = true,
                 requiredBadDescription = "<requiredBadDescription>",
-                optionalNullableList = new List<object>()
-{
+                optionalNullableList = new object[]
+            {
 1234
-},
-                requiredNullableList = new List<object>()
-{
+            },
+                requiredNullableList = new object[]
+            {
 1234
-},
+            },
             }).ToStream());
             Result result = await client.PatchActionAsync(content);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("name").ToString());
-            Console.WriteLine(result0.GetProperty("requiredUnion").ToString());
-            Console.WriteLine(result0.GetProperty("requiredLiteralString").ToString());
-            Console.WriteLine(result0.GetProperty("requiredLiteralInt").ToString());
-            Console.WriteLine(result0.GetProperty("requiredLiteralFloat").ToString());
-            Console.WriteLine(result0.GetProperty("requiredLiteralBool").ToString());
-            Console.WriteLine(result0.GetProperty("optionalLiteralString").ToString());
-            Console.WriteLine(result0.GetProperty("optionalLiteralInt").ToString());
-            Console.WriteLine(result0.GetProperty("optionalLiteralFloat").ToString());
-            Console.WriteLine(result0.GetProperty("optionalLiteralBool").ToString());
-            Console.WriteLine(result0.GetProperty("requiredBadDescription").ToString());
-            Console.WriteLine(result0.GetProperty("optionalNullableList")[0].ToString());
-            Console.WriteLine(result0.GetProperty("requiredNullableList")[0].ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("name").ToString());
+            Console.WriteLine(element.GetProperty("requiredUnion").ToString());
+            Console.WriteLine(element.GetProperty("requiredLiteralString").ToString());
+            Console.WriteLine(element.GetProperty("requiredLiteralInt").ToString());
+            Console.WriteLine(element.GetProperty("requiredLiteralFloat").ToString());
+            Console.WriteLine(element.GetProperty("requiredLiteralBool").ToString());
+            Console.WriteLine(element.GetProperty("optionalLiteralString").ToString());
+            Console.WriteLine(element.GetProperty("optionalLiteralInt").ToString());
+            Console.WriteLine(element.GetProperty("optionalLiteralFloat").ToString());
+            Console.WriteLine(element.GetProperty("optionalLiteralBool").ToString());
+            Console.WriteLine(element.GetProperty("requiredBadDescription").ToString());
+            Console.WriteLine(element.GetProperty("optionalNullableList")[0].ToString());
+            Console.WriteLine(element.GetProperty("requiredNullableList")[0].ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_AnonymousBody()
+        public void Example_AnonymousBody_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             KeyCredential credential = new KeyCredential("<key>");
@@ -390,27 +389,27 @@ namespace UnbrandedTypeSpec.Samples
                 requiredLiteralFloat = 1.23F,
                 requiredLiteralBool = false,
                 requiredBadDescription = "<requiredBadDescription>",
-                requiredNullableList = new List<object>()
-{
+                requiredNullableList = new object[]
+            {
 1234
-},
+            },
             }).ToStream());
             Result result = client.AnonymousBody(content);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("name").ToString());
-            Console.WriteLine(result0.GetProperty("requiredUnion").ToString());
-            Console.WriteLine(result0.GetProperty("requiredLiteralString").ToString());
-            Console.WriteLine(result0.GetProperty("requiredLiteralInt").ToString());
-            Console.WriteLine(result0.GetProperty("requiredLiteralFloat").ToString());
-            Console.WriteLine(result0.GetProperty("requiredLiteralBool").ToString());
-            Console.WriteLine(result0.GetProperty("requiredBadDescription").ToString());
-            Console.WriteLine(result0.GetProperty("requiredNullableList")[0].ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("name").ToString());
+            Console.WriteLine(element.GetProperty("requiredUnion").ToString());
+            Console.WriteLine(element.GetProperty("requiredLiteralString").ToString());
+            Console.WriteLine(element.GetProperty("requiredLiteralInt").ToString());
+            Console.WriteLine(element.GetProperty("requiredLiteralFloat").ToString());
+            Console.WriteLine(element.GetProperty("requiredLiteralBool").ToString());
+            Console.WriteLine(element.GetProperty("requiredBadDescription").ToString());
+            Console.WriteLine(element.GetProperty("requiredNullableList")[0].ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_AnonymousBody_Async()
+        public async Task Example_AnonymousBody_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             KeyCredential credential = new KeyCredential("<key>");
@@ -425,22 +424,22 @@ namespace UnbrandedTypeSpec.Samples
                 requiredLiteralFloat = 1.23F,
                 requiredLiteralBool = false,
                 requiredBadDescription = "<requiredBadDescription>",
-                requiredNullableList = new List<object>()
-{
+                requiredNullableList = new object[]
+            {
 1234
-},
+            },
             }).ToStream());
             Result result = await client.AnonymousBodyAsync(content);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("name").ToString());
-            Console.WriteLine(result0.GetProperty("requiredUnion").ToString());
-            Console.WriteLine(result0.GetProperty("requiredLiteralString").ToString());
-            Console.WriteLine(result0.GetProperty("requiredLiteralInt").ToString());
-            Console.WriteLine(result0.GetProperty("requiredLiteralFloat").ToString());
-            Console.WriteLine(result0.GetProperty("requiredLiteralBool").ToString());
-            Console.WriteLine(result0.GetProperty("requiredBadDescription").ToString());
-            Console.WriteLine(result0.GetProperty("requiredNullableList")[0].ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("name").ToString());
+            Console.WriteLine(element.GetProperty("requiredUnion").ToString());
+            Console.WriteLine(element.GetProperty("requiredLiteralString").ToString());
+            Console.WriteLine(element.GetProperty("requiredLiteralInt").ToString());
+            Console.WriteLine(element.GetProperty("requiredLiteralFloat").ToString());
+            Console.WriteLine(element.GetProperty("requiredLiteralBool").ToString());
+            Console.WriteLine(element.GetProperty("requiredBadDescription").ToString());
+            Console.WriteLine(element.GetProperty("requiredNullableList")[0].ToString());
         }
 
         [Test]
@@ -464,31 +463,31 @@ namespace UnbrandedTypeSpec.Samples
                 optionalLiteralFloat = 4.56F,
                 optionalLiteralBool = true,
                 requiredBadDescription = "<requiredBadDescription>",
-                optionalNullableList = new List<object>()
-{
+                optionalNullableList = new object[]
+            {
 1234
-},
-                requiredNullableList = new List<object>()
-{
+            },
+                requiredNullableList = new object[]
+            {
 1234
-},
+            },
             }).ToStream());
             Result result = client.AnonymousBody(content);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("name").ToString());
-            Console.WriteLine(result0.GetProperty("requiredUnion").ToString());
-            Console.WriteLine(result0.GetProperty("requiredLiteralString").ToString());
-            Console.WriteLine(result0.GetProperty("requiredLiteralInt").ToString());
-            Console.WriteLine(result0.GetProperty("requiredLiteralFloat").ToString());
-            Console.WriteLine(result0.GetProperty("requiredLiteralBool").ToString());
-            Console.WriteLine(result0.GetProperty("optionalLiteralString").ToString());
-            Console.WriteLine(result0.GetProperty("optionalLiteralInt").ToString());
-            Console.WriteLine(result0.GetProperty("optionalLiteralFloat").ToString());
-            Console.WriteLine(result0.GetProperty("optionalLiteralBool").ToString());
-            Console.WriteLine(result0.GetProperty("requiredBadDescription").ToString());
-            Console.WriteLine(result0.GetProperty("optionalNullableList")[0].ToString());
-            Console.WriteLine(result0.GetProperty("requiredNullableList")[0].ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("name").ToString());
+            Console.WriteLine(element.GetProperty("requiredUnion").ToString());
+            Console.WriteLine(element.GetProperty("requiredLiteralString").ToString());
+            Console.WriteLine(element.GetProperty("requiredLiteralInt").ToString());
+            Console.WriteLine(element.GetProperty("requiredLiteralFloat").ToString());
+            Console.WriteLine(element.GetProperty("requiredLiteralBool").ToString());
+            Console.WriteLine(element.GetProperty("optionalLiteralString").ToString());
+            Console.WriteLine(element.GetProperty("optionalLiteralInt").ToString());
+            Console.WriteLine(element.GetProperty("optionalLiteralFloat").ToString());
+            Console.WriteLine(element.GetProperty("optionalLiteralBool").ToString());
+            Console.WriteLine(element.GetProperty("requiredBadDescription").ToString());
+            Console.WriteLine(element.GetProperty("optionalNullableList")[0].ToString());
+            Console.WriteLine(element.GetProperty("requiredNullableList")[0].ToString());
         }
 
         [Test]
@@ -512,36 +511,36 @@ namespace UnbrandedTypeSpec.Samples
                 optionalLiteralFloat = 4.56F,
                 optionalLiteralBool = true,
                 requiredBadDescription = "<requiredBadDescription>",
-                optionalNullableList = new List<object>()
-{
+                optionalNullableList = new object[]
+            {
 1234
-},
-                requiredNullableList = new List<object>()
-{
+            },
+                requiredNullableList = new object[]
+            {
 1234
-},
+            },
             }).ToStream());
             Result result = await client.AnonymousBodyAsync(content);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("name").ToString());
-            Console.WriteLine(result0.GetProperty("requiredUnion").ToString());
-            Console.WriteLine(result0.GetProperty("requiredLiteralString").ToString());
-            Console.WriteLine(result0.GetProperty("requiredLiteralInt").ToString());
-            Console.WriteLine(result0.GetProperty("requiredLiteralFloat").ToString());
-            Console.WriteLine(result0.GetProperty("requiredLiteralBool").ToString());
-            Console.WriteLine(result0.GetProperty("optionalLiteralString").ToString());
-            Console.WriteLine(result0.GetProperty("optionalLiteralInt").ToString());
-            Console.WriteLine(result0.GetProperty("optionalLiteralFloat").ToString());
-            Console.WriteLine(result0.GetProperty("optionalLiteralBool").ToString());
-            Console.WriteLine(result0.GetProperty("requiredBadDescription").ToString());
-            Console.WriteLine(result0.GetProperty("optionalNullableList")[0].ToString());
-            Console.WriteLine(result0.GetProperty("requiredNullableList")[0].ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("name").ToString());
+            Console.WriteLine(element.GetProperty("requiredUnion").ToString());
+            Console.WriteLine(element.GetProperty("requiredLiteralString").ToString());
+            Console.WriteLine(element.GetProperty("requiredLiteralInt").ToString());
+            Console.WriteLine(element.GetProperty("requiredLiteralFloat").ToString());
+            Console.WriteLine(element.GetProperty("requiredLiteralBool").ToString());
+            Console.WriteLine(element.GetProperty("optionalLiteralString").ToString());
+            Console.WriteLine(element.GetProperty("optionalLiteralInt").ToString());
+            Console.WriteLine(element.GetProperty("optionalLiteralFloat").ToString());
+            Console.WriteLine(element.GetProperty("optionalLiteralBool").ToString());
+            Console.WriteLine(element.GetProperty("requiredBadDescription").ToString());
+            Console.WriteLine(element.GetProperty("optionalNullableList")[0].ToString());
+            Console.WriteLine(element.GetProperty("requiredNullableList")[0].ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_FriendlyModel()
+        public void Example_FriendlyModel_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             KeyCredential credential = new KeyCredential("<key>");
@@ -553,13 +552,13 @@ namespace UnbrandedTypeSpec.Samples
             }).ToStream());
             Result result = client.FriendlyModel(content);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("name").ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("name").ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_FriendlyModel_Async()
+        public async Task Example_FriendlyModel_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             KeyCredential credential = new KeyCredential("<key>");
@@ -571,13 +570,13 @@ namespace UnbrandedTypeSpec.Samples
             }).ToStream());
             Result result = await client.FriendlyModelAsync(content);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("name").ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("name").ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_FriendlyModel_Convenience()
+        public void Example_FriendlyModel_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             KeyCredential credential = new KeyCredential("<key>");
@@ -589,7 +588,7 @@ namespace UnbrandedTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_FriendlyModel_Convenience_Async()
+        public async Task Example_FriendlyModel_ShortVersion_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             KeyCredential credential = new KeyCredential("<key>");
@@ -613,8 +612,8 @@ namespace UnbrandedTypeSpec.Samples
             }).ToStream());
             Result result = client.FriendlyModel(content);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("name").ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("name").ToString());
         }
 
         [Test]
@@ -631,8 +630,8 @@ namespace UnbrandedTypeSpec.Samples
             }).ToStream());
             Result result = await client.FriendlyModelAsync(content);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("name").ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("name").ToString());
         }
 
         [Test]
@@ -661,26 +660,24 @@ namespace UnbrandedTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_AddTimeHeader()
+        public void Example_AddTimeHeader_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             KeyCredential credential = new KeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
             Result result = client.AddTimeHeader();
-            Console.WriteLine(result.GetRawResponse().Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_AddTimeHeader_Async()
+        public async Task Example_AddTimeHeader_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             KeyCredential credential = new KeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
             Result result = await client.AddTimeHeaderAsync();
-            Console.WriteLine(result.GetRawResponse().Status);
         }
 
         [Test]
@@ -692,7 +689,6 @@ namespace UnbrandedTypeSpec.Samples
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
             Result result = client.AddTimeHeader();
-            Console.WriteLine(result.GetRawResponse().Status);
         }
 
         [Test]
@@ -704,12 +700,11 @@ namespace UnbrandedTypeSpec.Samples
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
             Result result = await client.AddTimeHeaderAsync();
-            Console.WriteLine(result.GetRawResponse().Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_StringFormat()
+        public void Example_StringFormat_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             KeyCredential credential = new KeyCredential("<key>");
@@ -721,12 +716,11 @@ namespace UnbrandedTypeSpec.Samples
                 guid = "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a",
             }).ToStream());
             Result result = client.StringFormat(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), content);
-            Console.WriteLine(result.GetRawResponse().Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_StringFormat_Async()
+        public async Task Example_StringFormat_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             KeyCredential credential = new KeyCredential("<key>");
@@ -738,12 +732,11 @@ namespace UnbrandedTypeSpec.Samples
                 guid = "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a",
             }).ToStream());
             Result result = await client.StringFormatAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), content);
-            Console.WriteLine(result.GetRawResponse().Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_StringFormat_Convenience()
+        public void Example_StringFormat_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             KeyCredential credential = new KeyCredential("<key>");
@@ -751,12 +744,11 @@ namespace UnbrandedTypeSpec.Samples
 
             ModelWithFormat body = new ModelWithFormat(new Uri("http://localhost:3000"), Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
             Result result = client.StringFormat(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), body);
-            Console.WriteLine(result.GetRawResponse().Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_StringFormat_Convenience_Async()
+        public async Task Example_StringFormat_ShortVersion_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             KeyCredential credential = new KeyCredential("<key>");
@@ -764,7 +756,6 @@ namespace UnbrandedTypeSpec.Samples
 
             ModelWithFormat body = new ModelWithFormat(new Uri("http://localhost:3000"), Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
             Result result = await client.StringFormatAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), body);
-            Console.WriteLine(result.GetRawResponse().Status);
         }
 
         [Test]
@@ -781,7 +772,6 @@ namespace UnbrandedTypeSpec.Samples
                 guid = "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a",
             }).ToStream());
             Result result = client.StringFormat(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), content);
-            Console.WriteLine(result.GetRawResponse().Status);
         }
 
         [Test]
@@ -798,7 +788,6 @@ namespace UnbrandedTypeSpec.Samples
                 guid = "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a",
             }).ToStream());
             Result result = await client.StringFormatAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), content);
-            Console.WriteLine(result.GetRawResponse().Status);
         }
 
         [Test]
@@ -811,7 +800,6 @@ namespace UnbrandedTypeSpec.Samples
 
             ModelWithFormat body = new ModelWithFormat(new Uri("http://localhost:3000"), Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
             Result result = client.StringFormat(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), body);
-            Console.WriteLine(result.GetRawResponse().Status);
         }
 
         [Test]
@@ -824,12 +812,11 @@ namespace UnbrandedTypeSpec.Samples
 
             ModelWithFormat body = new ModelWithFormat(new Uri("http://localhost:3000"), Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
             Result result = await client.StringFormatAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), body);
-            Console.WriteLine(result.GetRawResponse().Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ProjectedNameModel()
+        public void Example_ProjectedNameModel_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             KeyCredential credential = new KeyCredential("<key>");
@@ -841,13 +828,13 @@ namespace UnbrandedTypeSpec.Samples
             }).ToStream());
             Result result = client.ProjectedNameModel(content);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("name").ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("name").ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_ProjectedNameModel_Async()
+        public async Task Example_ProjectedNameModel_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             KeyCredential credential = new KeyCredential("<key>");
@@ -859,13 +846,13 @@ namespace UnbrandedTypeSpec.Samples
             }).ToStream());
             Result result = await client.ProjectedNameModelAsync(content);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("name").ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("name").ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ProjectedNameModel_Convenience()
+        public void Example_ProjectedNameModel_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             KeyCredential credential = new KeyCredential("<key>");
@@ -877,7 +864,7 @@ namespace UnbrandedTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_ProjectedNameModel_Convenience_Async()
+        public async Task Example_ProjectedNameModel_ShortVersion_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             KeyCredential credential = new KeyCredential("<key>");
@@ -901,8 +888,8 @@ namespace UnbrandedTypeSpec.Samples
             }).ToStream());
             Result result = client.ProjectedNameModel(content);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("name").ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("name").ToString());
         }
 
         [Test]
@@ -919,8 +906,8 @@ namespace UnbrandedTypeSpec.Samples
             }).ToStream());
             Result result = await client.ProjectedNameModelAsync(content);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("name").ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("name").ToString());
         }
 
         [Test]
@@ -949,7 +936,7 @@ namespace UnbrandedTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ReturnsAnonymousModel()
+        public void Example_ReturnsAnonymousModel_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             KeyCredential credential = new KeyCredential("<key>");
@@ -957,12 +944,13 @@ namespace UnbrandedTypeSpec.Samples
 
             Result result = client.ReturnsAnonymousModel(null);
 
-            Console.WriteLine(result.ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_ReturnsAnonymousModel_Async()
+        public async Task Example_ReturnsAnonymousModel_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             KeyCredential credential = new KeyCredential("<key>");
@@ -970,7 +958,8 @@ namespace UnbrandedTypeSpec.Samples
 
             Result result = await client.ReturnsAnonymousModelAsync(null);
 
-            Console.WriteLine(result.ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.ToString());
         }
 
         [Test]
@@ -983,7 +972,8 @@ namespace UnbrandedTypeSpec.Samples
 
             Result result = client.ReturnsAnonymousModel(null);
 
-            Console.WriteLine(result.ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.ToString());
         }
 
         [Test]
@@ -996,31 +986,30 @@ namespace UnbrandedTypeSpec.Samples
 
             Result result = await client.ReturnsAnonymousModelAsync(null);
 
-            Console.WriteLine(result.ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_HeadAsBoolean()
+        public void Example_HeadAsBoolean_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             KeyCredential credential = new KeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
             Result<bool> result = client.HeadAsBoolean("<id>");
-            Console.WriteLine(result.GetRawResponse().Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_HeadAsBoolean_Async()
+        public async Task Example_HeadAsBoolean_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             KeyCredential credential = new KeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
             Result<bool> result = await client.HeadAsBooleanAsync("<id>");
-            Console.WriteLine(result.GetRawResponse().Status);
         }
 
         [Test]
@@ -1032,7 +1021,6 @@ namespace UnbrandedTypeSpec.Samples
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
             Result<bool> result = client.HeadAsBoolean("<id>");
-            Console.WriteLine(result.GetRawResponse().Status);
         }
 
         [Test]
@@ -1044,12 +1032,11 @@ namespace UnbrandedTypeSpec.Samples
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
             Result<bool> result = await client.HeadAsBooleanAsync("<id>");
-            Console.WriteLine(result.GetRawResponse().Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_SayHi()
+        public void Example_SayHi_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             KeyCredential credential = new KeyCredential("<key>");
@@ -1057,20 +1044,20 @@ namespace UnbrandedTypeSpec.Samples
 
             Result result = client.SayHi("<headParameter>", "<queryParameter>", null, null);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("name").ToString());
-            Console.WriteLine(result0.GetProperty("requiredUnion").ToString());
-            Console.WriteLine(result0.GetProperty("requiredLiteralString").ToString());
-            Console.WriteLine(result0.GetProperty("requiredLiteralInt").ToString());
-            Console.WriteLine(result0.GetProperty("requiredLiteralFloat").ToString());
-            Console.WriteLine(result0.GetProperty("requiredLiteralBool").ToString());
-            Console.WriteLine(result0.GetProperty("requiredBadDescription").ToString());
-            Console.WriteLine(result0.GetProperty("requiredNullableList")[0].ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("name").ToString());
+            Console.WriteLine(element.GetProperty("requiredUnion").ToString());
+            Console.WriteLine(element.GetProperty("requiredLiteralString").ToString());
+            Console.WriteLine(element.GetProperty("requiredLiteralInt").ToString());
+            Console.WriteLine(element.GetProperty("requiredLiteralFloat").ToString());
+            Console.WriteLine(element.GetProperty("requiredLiteralBool").ToString());
+            Console.WriteLine(element.GetProperty("requiredBadDescription").ToString());
+            Console.WriteLine(element.GetProperty("requiredNullableList")[0].ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_SayHi_Async()
+        public async Task Example_SayHi_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             KeyCredential credential = new KeyCredential("<key>");
@@ -1078,15 +1065,15 @@ namespace UnbrandedTypeSpec.Samples
 
             Result result = await client.SayHiAsync("<headParameter>", "<queryParameter>", null, null);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("name").ToString());
-            Console.WriteLine(result0.GetProperty("requiredUnion").ToString());
-            Console.WriteLine(result0.GetProperty("requiredLiteralString").ToString());
-            Console.WriteLine(result0.GetProperty("requiredLiteralInt").ToString());
-            Console.WriteLine(result0.GetProperty("requiredLiteralFloat").ToString());
-            Console.WriteLine(result0.GetProperty("requiredLiteralBool").ToString());
-            Console.WriteLine(result0.GetProperty("requiredBadDescription").ToString());
-            Console.WriteLine(result0.GetProperty("requiredNullableList")[0].ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("name").ToString());
+            Console.WriteLine(element.GetProperty("requiredUnion").ToString());
+            Console.WriteLine(element.GetProperty("requiredLiteralString").ToString());
+            Console.WriteLine(element.GetProperty("requiredLiteralInt").ToString());
+            Console.WriteLine(element.GetProperty("requiredLiteralFloat").ToString());
+            Console.WriteLine(element.GetProperty("requiredLiteralBool").ToString());
+            Console.WriteLine(element.GetProperty("requiredBadDescription").ToString());
+            Console.WriteLine(element.GetProperty("requiredNullableList")[0].ToString());
         }
 
         [Test]
@@ -1099,20 +1086,20 @@ namespace UnbrandedTypeSpec.Samples
 
             Result result = client.SayHi("<headParameter>", "<queryParameter>", "<optionalQuery>", null);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("name").ToString());
-            Console.WriteLine(result0.GetProperty("requiredUnion").ToString());
-            Console.WriteLine(result0.GetProperty("requiredLiteralString").ToString());
-            Console.WriteLine(result0.GetProperty("requiredLiteralInt").ToString());
-            Console.WriteLine(result0.GetProperty("requiredLiteralFloat").ToString());
-            Console.WriteLine(result0.GetProperty("requiredLiteralBool").ToString());
-            Console.WriteLine(result0.GetProperty("optionalLiteralString").ToString());
-            Console.WriteLine(result0.GetProperty("optionalLiteralInt").ToString());
-            Console.WriteLine(result0.GetProperty("optionalLiteralFloat").ToString());
-            Console.WriteLine(result0.GetProperty("optionalLiteralBool").ToString());
-            Console.WriteLine(result0.GetProperty("requiredBadDescription").ToString());
-            Console.WriteLine(result0.GetProperty("optionalNullableList")[0].ToString());
-            Console.WriteLine(result0.GetProperty("requiredNullableList")[0].ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("name").ToString());
+            Console.WriteLine(element.GetProperty("requiredUnion").ToString());
+            Console.WriteLine(element.GetProperty("requiredLiteralString").ToString());
+            Console.WriteLine(element.GetProperty("requiredLiteralInt").ToString());
+            Console.WriteLine(element.GetProperty("requiredLiteralFloat").ToString());
+            Console.WriteLine(element.GetProperty("requiredLiteralBool").ToString());
+            Console.WriteLine(element.GetProperty("optionalLiteralString").ToString());
+            Console.WriteLine(element.GetProperty("optionalLiteralInt").ToString());
+            Console.WriteLine(element.GetProperty("optionalLiteralFloat").ToString());
+            Console.WriteLine(element.GetProperty("optionalLiteralBool").ToString());
+            Console.WriteLine(element.GetProperty("requiredBadDescription").ToString());
+            Console.WriteLine(element.GetProperty("optionalNullableList")[0].ToString());
+            Console.WriteLine(element.GetProperty("requiredNullableList")[0].ToString());
         }
 
         [Test]
@@ -1125,25 +1112,25 @@ namespace UnbrandedTypeSpec.Samples
 
             Result result = await client.SayHiAsync("<headParameter>", "<queryParameter>", "<optionalQuery>", null);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("name").ToString());
-            Console.WriteLine(result0.GetProperty("requiredUnion").ToString());
-            Console.WriteLine(result0.GetProperty("requiredLiteralString").ToString());
-            Console.WriteLine(result0.GetProperty("requiredLiteralInt").ToString());
-            Console.WriteLine(result0.GetProperty("requiredLiteralFloat").ToString());
-            Console.WriteLine(result0.GetProperty("requiredLiteralBool").ToString());
-            Console.WriteLine(result0.GetProperty("optionalLiteralString").ToString());
-            Console.WriteLine(result0.GetProperty("optionalLiteralInt").ToString());
-            Console.WriteLine(result0.GetProperty("optionalLiteralFloat").ToString());
-            Console.WriteLine(result0.GetProperty("optionalLiteralBool").ToString());
-            Console.WriteLine(result0.GetProperty("requiredBadDescription").ToString());
-            Console.WriteLine(result0.GetProperty("optionalNullableList")[0].ToString());
-            Console.WriteLine(result0.GetProperty("requiredNullableList")[0].ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("name").ToString());
+            Console.WriteLine(element.GetProperty("requiredUnion").ToString());
+            Console.WriteLine(element.GetProperty("requiredLiteralString").ToString());
+            Console.WriteLine(element.GetProperty("requiredLiteralInt").ToString());
+            Console.WriteLine(element.GetProperty("requiredLiteralFloat").ToString());
+            Console.WriteLine(element.GetProperty("requiredLiteralBool").ToString());
+            Console.WriteLine(element.GetProperty("optionalLiteralString").ToString());
+            Console.WriteLine(element.GetProperty("optionalLiteralInt").ToString());
+            Console.WriteLine(element.GetProperty("optionalLiteralFloat").ToString());
+            Console.WriteLine(element.GetProperty("optionalLiteralBool").ToString());
+            Console.WriteLine(element.GetProperty("requiredBadDescription").ToString());
+            Console.WriteLine(element.GetProperty("optionalNullableList")[0].ToString());
+            Console.WriteLine(element.GetProperty("requiredNullableList")[0].ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_HelloAgain()
+        public void Example_HelloAgain_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             KeyCredential credential = new KeyCredential("<key>");
@@ -1153,10 +1140,10 @@ namespace UnbrandedTypeSpec.Samples
             {
                 requiredString = "<requiredString>",
                 requiredInt = 1234,
-                requiredCollection = new List<object>()
-{
+                requiredCollection = new object[]
+            {
 "1"
-},
+            },
                 requiredDictionary = new
                 {
                     key = "1",
@@ -1170,10 +1157,10 @@ namespace UnbrandedTypeSpec.Samples
                     requiredLiteralFloat = 1.23F,
                     requiredLiteralBool = false,
                     requiredBadDescription = "<requiredBadDescription>",
-                    requiredNullableList = new List<object>()
-{
+                    requiredNullableList = new object[]
+            {
 1234
-},
+            },
                 },
                 requiredUnknown = new object(),
                 requiredRecordUnknown = new
@@ -1189,30 +1176,30 @@ namespace UnbrandedTypeSpec.Samples
             }).ToStream());
             Result result = client.HelloAgain("<p2>", "<p1>", content);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("requiredString").ToString());
-            Console.WriteLine(result0.GetProperty("requiredInt").ToString());
-            Console.WriteLine(result0.GetProperty("requiredCollection")[0].ToString());
-            Console.WriteLine(result0.GetProperty("requiredDictionary").GetProperty("<key>").ToString());
-            Console.WriteLine(result0.GetProperty("requiredModel").GetProperty("name").ToString());
-            Console.WriteLine(result0.GetProperty("requiredModel").GetProperty("requiredUnion").ToString());
-            Console.WriteLine(result0.GetProperty("requiredModel").GetProperty("requiredLiteralString").ToString());
-            Console.WriteLine(result0.GetProperty("requiredModel").GetProperty("requiredLiteralInt").ToString());
-            Console.WriteLine(result0.GetProperty("requiredModel").GetProperty("requiredLiteralFloat").ToString());
-            Console.WriteLine(result0.GetProperty("requiredModel").GetProperty("requiredLiteralBool").ToString());
-            Console.WriteLine(result0.GetProperty("requiredModel").GetProperty("requiredBadDescription").ToString());
-            Console.WriteLine(result0.GetProperty("requiredModel").GetProperty("requiredNullableList")[0].ToString());
-            Console.WriteLine(result0.GetProperty("requiredUnknown").ToString());
-            Console.WriteLine(result0.GetProperty("requiredRecordUnknown").GetProperty("<key>").ToString());
-            Console.WriteLine(result0.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<key>").ToString());
-            Console.WriteLine(result0.GetProperty("modelWithRequiredNullable").GetProperty("requiredNullablePrimitive").ToString());
-            Console.WriteLine(result0.GetProperty("modelWithRequiredNullable").GetProperty("requiredExtensibleEnum").ToString());
-            Console.WriteLine(result0.GetProperty("modelWithRequiredNullable").GetProperty("requiredFixedEnum").ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("requiredString").ToString());
+            Console.WriteLine(element.GetProperty("requiredInt").ToString());
+            Console.WriteLine(element.GetProperty("requiredCollection")[0].ToString());
+            Console.WriteLine(element.GetProperty("requiredDictionary").GetProperty("<key>").ToString());
+            Console.WriteLine(element.GetProperty("requiredModel").GetProperty("name").ToString());
+            Console.WriteLine(element.GetProperty("requiredModel").GetProperty("requiredUnion").ToString());
+            Console.WriteLine(element.GetProperty("requiredModel").GetProperty("requiredLiteralString").ToString());
+            Console.WriteLine(element.GetProperty("requiredModel").GetProperty("requiredLiteralInt").ToString());
+            Console.WriteLine(element.GetProperty("requiredModel").GetProperty("requiredLiteralFloat").ToString());
+            Console.WriteLine(element.GetProperty("requiredModel").GetProperty("requiredLiteralBool").ToString());
+            Console.WriteLine(element.GetProperty("requiredModel").GetProperty("requiredBadDescription").ToString());
+            Console.WriteLine(element.GetProperty("requiredModel").GetProperty("requiredNullableList")[0].ToString());
+            Console.WriteLine(element.GetProperty("requiredUnknown").ToString());
+            Console.WriteLine(element.GetProperty("requiredRecordUnknown").GetProperty("<key>").ToString());
+            Console.WriteLine(element.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<key>").ToString());
+            Console.WriteLine(element.GetProperty("modelWithRequiredNullable").GetProperty("requiredNullablePrimitive").ToString());
+            Console.WriteLine(element.GetProperty("modelWithRequiredNullable").GetProperty("requiredExtensibleEnum").ToString());
+            Console.WriteLine(element.GetProperty("modelWithRequiredNullable").GetProperty("requiredFixedEnum").ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_HelloAgain_Async()
+        public async Task Example_HelloAgain_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             KeyCredential credential = new KeyCredential("<key>");
@@ -1222,10 +1209,10 @@ namespace UnbrandedTypeSpec.Samples
             {
                 requiredString = "<requiredString>",
                 requiredInt = 1234,
-                requiredCollection = new List<object>()
-{
+                requiredCollection = new object[]
+            {
 "1"
-},
+            },
                 requiredDictionary = new
                 {
                     key = "1",
@@ -1239,10 +1226,10 @@ namespace UnbrandedTypeSpec.Samples
                     requiredLiteralFloat = 1.23F,
                     requiredLiteralBool = false,
                     requiredBadDescription = "<requiredBadDescription>",
-                    requiredNullableList = new List<object>()
-{
+                    requiredNullableList = new object[]
+            {
 1234
-},
+            },
                 },
                 requiredUnknown = new object(),
                 requiredRecordUnknown = new
@@ -1258,25 +1245,25 @@ namespace UnbrandedTypeSpec.Samples
             }).ToStream());
             Result result = await client.HelloAgainAsync("<p2>", "<p1>", content);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("requiredString").ToString());
-            Console.WriteLine(result0.GetProperty("requiredInt").ToString());
-            Console.WriteLine(result0.GetProperty("requiredCollection")[0].ToString());
-            Console.WriteLine(result0.GetProperty("requiredDictionary").GetProperty("<key>").ToString());
-            Console.WriteLine(result0.GetProperty("requiredModel").GetProperty("name").ToString());
-            Console.WriteLine(result0.GetProperty("requiredModel").GetProperty("requiredUnion").ToString());
-            Console.WriteLine(result0.GetProperty("requiredModel").GetProperty("requiredLiteralString").ToString());
-            Console.WriteLine(result0.GetProperty("requiredModel").GetProperty("requiredLiteralInt").ToString());
-            Console.WriteLine(result0.GetProperty("requiredModel").GetProperty("requiredLiteralFloat").ToString());
-            Console.WriteLine(result0.GetProperty("requiredModel").GetProperty("requiredLiteralBool").ToString());
-            Console.WriteLine(result0.GetProperty("requiredModel").GetProperty("requiredBadDescription").ToString());
-            Console.WriteLine(result0.GetProperty("requiredModel").GetProperty("requiredNullableList")[0].ToString());
-            Console.WriteLine(result0.GetProperty("requiredUnknown").ToString());
-            Console.WriteLine(result0.GetProperty("requiredRecordUnknown").GetProperty("<key>").ToString());
-            Console.WriteLine(result0.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<key>").ToString());
-            Console.WriteLine(result0.GetProperty("modelWithRequiredNullable").GetProperty("requiredNullablePrimitive").ToString());
-            Console.WriteLine(result0.GetProperty("modelWithRequiredNullable").GetProperty("requiredExtensibleEnum").ToString());
-            Console.WriteLine(result0.GetProperty("modelWithRequiredNullable").GetProperty("requiredFixedEnum").ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("requiredString").ToString());
+            Console.WriteLine(element.GetProperty("requiredInt").ToString());
+            Console.WriteLine(element.GetProperty("requiredCollection")[0].ToString());
+            Console.WriteLine(element.GetProperty("requiredDictionary").GetProperty("<key>").ToString());
+            Console.WriteLine(element.GetProperty("requiredModel").GetProperty("name").ToString());
+            Console.WriteLine(element.GetProperty("requiredModel").GetProperty("requiredUnion").ToString());
+            Console.WriteLine(element.GetProperty("requiredModel").GetProperty("requiredLiteralString").ToString());
+            Console.WriteLine(element.GetProperty("requiredModel").GetProperty("requiredLiteralInt").ToString());
+            Console.WriteLine(element.GetProperty("requiredModel").GetProperty("requiredLiteralFloat").ToString());
+            Console.WriteLine(element.GetProperty("requiredModel").GetProperty("requiredLiteralBool").ToString());
+            Console.WriteLine(element.GetProperty("requiredModel").GetProperty("requiredBadDescription").ToString());
+            Console.WriteLine(element.GetProperty("requiredModel").GetProperty("requiredNullableList")[0].ToString());
+            Console.WriteLine(element.GetProperty("requiredUnknown").ToString());
+            Console.WriteLine(element.GetProperty("requiredRecordUnknown").GetProperty("<key>").ToString());
+            Console.WriteLine(element.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<key>").ToString());
+            Console.WriteLine(element.GetProperty("modelWithRequiredNullable").GetProperty("requiredNullablePrimitive").ToString());
+            Console.WriteLine(element.GetProperty("modelWithRequiredNullable").GetProperty("requiredExtensibleEnum").ToString());
+            Console.WriteLine(element.GetProperty("modelWithRequiredNullable").GetProperty("requiredFixedEnum").ToString());
         }
 
         [Test]
@@ -1291,10 +1278,10 @@ namespace UnbrandedTypeSpec.Samples
             {
                 requiredString = "<requiredString>",
                 requiredInt = 1234,
-                requiredCollection = new List<object>()
-{
+                requiredCollection = new object[]
+            {
 "1"
-},
+            },
                 requiredDictionary = new
                 {
                     key = "1",
@@ -1312,35 +1299,35 @@ namespace UnbrandedTypeSpec.Samples
                     optionalLiteralFloat = 4.56F,
                     optionalLiteralBool = true,
                     requiredBadDescription = "<requiredBadDescription>",
-                    optionalNullableList = new List<object>()
-{
+                    optionalNullableList = new object[]
+            {
 1234
-},
-                    requiredNullableList = new List<object>()
-{
+            },
+                    requiredNullableList = new object[]
+            {
 1234
-},
+            },
                 },
                 intExtensibleEnum = 1,
-                intExtensibleEnumCollection = new List<object>()
-{
+                intExtensibleEnumCollection = new object[]
+            {
 1
-},
+            },
                 floatExtensibleEnum = 1,
-                floatExtensibleEnumCollection = new List<object>()
-{
+                floatExtensibleEnumCollection = new object[]
+            {
 1
-},
+            },
                 floatFixedEnum = 1.1F,
-                floatFixedEnumCollection = new List<object>()
-{
+                floatFixedEnumCollection = new object[]
+            {
 1.1F
-},
+            },
                 intFixedEnum = 1,
-                intFixedEnumCollection = new List<object>()
-{
+                intFixedEnumCollection = new object[]
+            {
 1
-},
+            },
                 stringFixedEnum = "1",
                 requiredUnknown = new object(),
                 optionalUnknown = new object(),
@@ -1361,42 +1348,42 @@ namespace UnbrandedTypeSpec.Samples
             }).ToStream());
             Result result = client.HelloAgain("<p2>", "<p1>", content);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("requiredString").ToString());
-            Console.WriteLine(result0.GetProperty("requiredInt").ToString());
-            Console.WriteLine(result0.GetProperty("requiredCollection")[0].ToString());
-            Console.WriteLine(result0.GetProperty("requiredDictionary").GetProperty("<key>").ToString());
-            Console.WriteLine(result0.GetProperty("requiredModel").GetProperty("name").ToString());
-            Console.WriteLine(result0.GetProperty("requiredModel").GetProperty("requiredUnion").ToString());
-            Console.WriteLine(result0.GetProperty("requiredModel").GetProperty("requiredLiteralString").ToString());
-            Console.WriteLine(result0.GetProperty("requiredModel").GetProperty("requiredLiteralInt").ToString());
-            Console.WriteLine(result0.GetProperty("requiredModel").GetProperty("requiredLiteralFloat").ToString());
-            Console.WriteLine(result0.GetProperty("requiredModel").GetProperty("requiredLiteralBool").ToString());
-            Console.WriteLine(result0.GetProperty("requiredModel").GetProperty("optionalLiteralString").ToString());
-            Console.WriteLine(result0.GetProperty("requiredModel").GetProperty("optionalLiteralInt").ToString());
-            Console.WriteLine(result0.GetProperty("requiredModel").GetProperty("optionalLiteralFloat").ToString());
-            Console.WriteLine(result0.GetProperty("requiredModel").GetProperty("optionalLiteralBool").ToString());
-            Console.WriteLine(result0.GetProperty("requiredModel").GetProperty("requiredBadDescription").ToString());
-            Console.WriteLine(result0.GetProperty("requiredModel").GetProperty("optionalNullableList")[0].ToString());
-            Console.WriteLine(result0.GetProperty("requiredModel").GetProperty("requiredNullableList")[0].ToString());
-            Console.WriteLine(result0.GetProperty("intExtensibleEnum").ToString());
-            Console.WriteLine(result0.GetProperty("intExtensibleEnumCollection")[0].ToString());
-            Console.WriteLine(result0.GetProperty("floatExtensibleEnum").ToString());
-            Console.WriteLine(result0.GetProperty("floatExtensibleEnumCollection")[0].ToString());
-            Console.WriteLine(result0.GetProperty("floatFixedEnum").ToString());
-            Console.WriteLine(result0.GetProperty("floatFixedEnumCollection")[0].ToString());
-            Console.WriteLine(result0.GetProperty("intFixedEnum").ToString());
-            Console.WriteLine(result0.GetProperty("intFixedEnumCollection")[0].ToString());
-            Console.WriteLine(result0.GetProperty("stringFixedEnum").ToString());
-            Console.WriteLine(result0.GetProperty("requiredUnknown").ToString());
-            Console.WriteLine(result0.GetProperty("optionalUnknown").ToString());
-            Console.WriteLine(result0.GetProperty("requiredRecordUnknown").GetProperty("<key>").ToString());
-            Console.WriteLine(result0.GetProperty("optionalRecordUnknown").GetProperty("<key>").ToString());
-            Console.WriteLine(result0.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<key>").ToString());
-            Console.WriteLine(result0.GetProperty("readOnlyOptionalRecordUnknown").GetProperty("<key>").ToString());
-            Console.WriteLine(result0.GetProperty("modelWithRequiredNullable").GetProperty("requiredNullablePrimitive").ToString());
-            Console.WriteLine(result0.GetProperty("modelWithRequiredNullable").GetProperty("requiredExtensibleEnum").ToString());
-            Console.WriteLine(result0.GetProperty("modelWithRequiredNullable").GetProperty("requiredFixedEnum").ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("requiredString").ToString());
+            Console.WriteLine(element.GetProperty("requiredInt").ToString());
+            Console.WriteLine(element.GetProperty("requiredCollection")[0].ToString());
+            Console.WriteLine(element.GetProperty("requiredDictionary").GetProperty("<key>").ToString());
+            Console.WriteLine(element.GetProperty("requiredModel").GetProperty("name").ToString());
+            Console.WriteLine(element.GetProperty("requiredModel").GetProperty("requiredUnion").ToString());
+            Console.WriteLine(element.GetProperty("requiredModel").GetProperty("requiredLiteralString").ToString());
+            Console.WriteLine(element.GetProperty("requiredModel").GetProperty("requiredLiteralInt").ToString());
+            Console.WriteLine(element.GetProperty("requiredModel").GetProperty("requiredLiteralFloat").ToString());
+            Console.WriteLine(element.GetProperty("requiredModel").GetProperty("requiredLiteralBool").ToString());
+            Console.WriteLine(element.GetProperty("requiredModel").GetProperty("optionalLiteralString").ToString());
+            Console.WriteLine(element.GetProperty("requiredModel").GetProperty("optionalLiteralInt").ToString());
+            Console.WriteLine(element.GetProperty("requiredModel").GetProperty("optionalLiteralFloat").ToString());
+            Console.WriteLine(element.GetProperty("requiredModel").GetProperty("optionalLiteralBool").ToString());
+            Console.WriteLine(element.GetProperty("requiredModel").GetProperty("requiredBadDescription").ToString());
+            Console.WriteLine(element.GetProperty("requiredModel").GetProperty("optionalNullableList")[0].ToString());
+            Console.WriteLine(element.GetProperty("requiredModel").GetProperty("requiredNullableList")[0].ToString());
+            Console.WriteLine(element.GetProperty("intExtensibleEnum").ToString());
+            Console.WriteLine(element.GetProperty("intExtensibleEnumCollection")[0].ToString());
+            Console.WriteLine(element.GetProperty("floatExtensibleEnum").ToString());
+            Console.WriteLine(element.GetProperty("floatExtensibleEnumCollection")[0].ToString());
+            Console.WriteLine(element.GetProperty("floatFixedEnum").ToString());
+            Console.WriteLine(element.GetProperty("floatFixedEnumCollection")[0].ToString());
+            Console.WriteLine(element.GetProperty("intFixedEnum").ToString());
+            Console.WriteLine(element.GetProperty("intFixedEnumCollection")[0].ToString());
+            Console.WriteLine(element.GetProperty("stringFixedEnum").ToString());
+            Console.WriteLine(element.GetProperty("requiredUnknown").ToString());
+            Console.WriteLine(element.GetProperty("optionalUnknown").ToString());
+            Console.WriteLine(element.GetProperty("requiredRecordUnknown").GetProperty("<key>").ToString());
+            Console.WriteLine(element.GetProperty("optionalRecordUnknown").GetProperty("<key>").ToString());
+            Console.WriteLine(element.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<key>").ToString());
+            Console.WriteLine(element.GetProperty("readOnlyOptionalRecordUnknown").GetProperty("<key>").ToString());
+            Console.WriteLine(element.GetProperty("modelWithRequiredNullable").GetProperty("requiredNullablePrimitive").ToString());
+            Console.WriteLine(element.GetProperty("modelWithRequiredNullable").GetProperty("requiredExtensibleEnum").ToString());
+            Console.WriteLine(element.GetProperty("modelWithRequiredNullable").GetProperty("requiredFixedEnum").ToString());
         }
 
         [Test]
@@ -1411,10 +1398,10 @@ namespace UnbrandedTypeSpec.Samples
             {
                 requiredString = "<requiredString>",
                 requiredInt = 1234,
-                requiredCollection = new List<object>()
-{
+                requiredCollection = new object[]
+            {
 "1"
-},
+            },
                 requiredDictionary = new
                 {
                     key = "1",
@@ -1432,35 +1419,35 @@ namespace UnbrandedTypeSpec.Samples
                     optionalLiteralFloat = 4.56F,
                     optionalLiteralBool = true,
                     requiredBadDescription = "<requiredBadDescription>",
-                    optionalNullableList = new List<object>()
-{
+                    optionalNullableList = new object[]
+            {
 1234
-},
-                    requiredNullableList = new List<object>()
-{
+            },
+                    requiredNullableList = new object[]
+            {
 1234
-},
+            },
                 },
                 intExtensibleEnum = 1,
-                intExtensibleEnumCollection = new List<object>()
-{
+                intExtensibleEnumCollection = new object[]
+            {
 1
-},
+            },
                 floatExtensibleEnum = 1,
-                floatExtensibleEnumCollection = new List<object>()
-{
+                floatExtensibleEnumCollection = new object[]
+            {
 1
-},
+            },
                 floatFixedEnum = 1.1F,
-                floatFixedEnumCollection = new List<object>()
-{
+                floatFixedEnumCollection = new object[]
+            {
 1.1F
-},
+            },
                 intFixedEnum = 1,
-                intFixedEnumCollection = new List<object>()
-{
+                intFixedEnumCollection = new object[]
+            {
 1
-},
+            },
                 stringFixedEnum = "1",
                 requiredUnknown = new object(),
                 optionalUnknown = new object(),
@@ -1481,47 +1468,47 @@ namespace UnbrandedTypeSpec.Samples
             }).ToStream());
             Result result = await client.HelloAgainAsync("<p2>", "<p1>", content);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("requiredString").ToString());
-            Console.WriteLine(result0.GetProperty("requiredInt").ToString());
-            Console.WriteLine(result0.GetProperty("requiredCollection")[0].ToString());
-            Console.WriteLine(result0.GetProperty("requiredDictionary").GetProperty("<key>").ToString());
-            Console.WriteLine(result0.GetProperty("requiredModel").GetProperty("name").ToString());
-            Console.WriteLine(result0.GetProperty("requiredModel").GetProperty("requiredUnion").ToString());
-            Console.WriteLine(result0.GetProperty("requiredModel").GetProperty("requiredLiteralString").ToString());
-            Console.WriteLine(result0.GetProperty("requiredModel").GetProperty("requiredLiteralInt").ToString());
-            Console.WriteLine(result0.GetProperty("requiredModel").GetProperty("requiredLiteralFloat").ToString());
-            Console.WriteLine(result0.GetProperty("requiredModel").GetProperty("requiredLiteralBool").ToString());
-            Console.WriteLine(result0.GetProperty("requiredModel").GetProperty("optionalLiteralString").ToString());
-            Console.WriteLine(result0.GetProperty("requiredModel").GetProperty("optionalLiteralInt").ToString());
-            Console.WriteLine(result0.GetProperty("requiredModel").GetProperty("optionalLiteralFloat").ToString());
-            Console.WriteLine(result0.GetProperty("requiredModel").GetProperty("optionalLiteralBool").ToString());
-            Console.WriteLine(result0.GetProperty("requiredModel").GetProperty("requiredBadDescription").ToString());
-            Console.WriteLine(result0.GetProperty("requiredModel").GetProperty("optionalNullableList")[0].ToString());
-            Console.WriteLine(result0.GetProperty("requiredModel").GetProperty("requiredNullableList")[0].ToString());
-            Console.WriteLine(result0.GetProperty("intExtensibleEnum").ToString());
-            Console.WriteLine(result0.GetProperty("intExtensibleEnumCollection")[0].ToString());
-            Console.WriteLine(result0.GetProperty("floatExtensibleEnum").ToString());
-            Console.WriteLine(result0.GetProperty("floatExtensibleEnumCollection")[0].ToString());
-            Console.WriteLine(result0.GetProperty("floatFixedEnum").ToString());
-            Console.WriteLine(result0.GetProperty("floatFixedEnumCollection")[0].ToString());
-            Console.WriteLine(result0.GetProperty("intFixedEnum").ToString());
-            Console.WriteLine(result0.GetProperty("intFixedEnumCollection")[0].ToString());
-            Console.WriteLine(result0.GetProperty("stringFixedEnum").ToString());
-            Console.WriteLine(result0.GetProperty("requiredUnknown").ToString());
-            Console.WriteLine(result0.GetProperty("optionalUnknown").ToString());
-            Console.WriteLine(result0.GetProperty("requiredRecordUnknown").GetProperty("<key>").ToString());
-            Console.WriteLine(result0.GetProperty("optionalRecordUnknown").GetProperty("<key>").ToString());
-            Console.WriteLine(result0.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<key>").ToString());
-            Console.WriteLine(result0.GetProperty("readOnlyOptionalRecordUnknown").GetProperty("<key>").ToString());
-            Console.WriteLine(result0.GetProperty("modelWithRequiredNullable").GetProperty("requiredNullablePrimitive").ToString());
-            Console.WriteLine(result0.GetProperty("modelWithRequiredNullable").GetProperty("requiredExtensibleEnum").ToString());
-            Console.WriteLine(result0.GetProperty("modelWithRequiredNullable").GetProperty("requiredFixedEnum").ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("requiredString").ToString());
+            Console.WriteLine(element.GetProperty("requiredInt").ToString());
+            Console.WriteLine(element.GetProperty("requiredCollection")[0].ToString());
+            Console.WriteLine(element.GetProperty("requiredDictionary").GetProperty("<key>").ToString());
+            Console.WriteLine(element.GetProperty("requiredModel").GetProperty("name").ToString());
+            Console.WriteLine(element.GetProperty("requiredModel").GetProperty("requiredUnion").ToString());
+            Console.WriteLine(element.GetProperty("requiredModel").GetProperty("requiredLiteralString").ToString());
+            Console.WriteLine(element.GetProperty("requiredModel").GetProperty("requiredLiteralInt").ToString());
+            Console.WriteLine(element.GetProperty("requiredModel").GetProperty("requiredLiteralFloat").ToString());
+            Console.WriteLine(element.GetProperty("requiredModel").GetProperty("requiredLiteralBool").ToString());
+            Console.WriteLine(element.GetProperty("requiredModel").GetProperty("optionalLiteralString").ToString());
+            Console.WriteLine(element.GetProperty("requiredModel").GetProperty("optionalLiteralInt").ToString());
+            Console.WriteLine(element.GetProperty("requiredModel").GetProperty("optionalLiteralFloat").ToString());
+            Console.WriteLine(element.GetProperty("requiredModel").GetProperty("optionalLiteralBool").ToString());
+            Console.WriteLine(element.GetProperty("requiredModel").GetProperty("requiredBadDescription").ToString());
+            Console.WriteLine(element.GetProperty("requiredModel").GetProperty("optionalNullableList")[0].ToString());
+            Console.WriteLine(element.GetProperty("requiredModel").GetProperty("requiredNullableList")[0].ToString());
+            Console.WriteLine(element.GetProperty("intExtensibleEnum").ToString());
+            Console.WriteLine(element.GetProperty("intExtensibleEnumCollection")[0].ToString());
+            Console.WriteLine(element.GetProperty("floatExtensibleEnum").ToString());
+            Console.WriteLine(element.GetProperty("floatExtensibleEnumCollection")[0].ToString());
+            Console.WriteLine(element.GetProperty("floatFixedEnum").ToString());
+            Console.WriteLine(element.GetProperty("floatFixedEnumCollection")[0].ToString());
+            Console.WriteLine(element.GetProperty("intFixedEnum").ToString());
+            Console.WriteLine(element.GetProperty("intFixedEnumCollection")[0].ToString());
+            Console.WriteLine(element.GetProperty("stringFixedEnum").ToString());
+            Console.WriteLine(element.GetProperty("requiredUnknown").ToString());
+            Console.WriteLine(element.GetProperty("optionalUnknown").ToString());
+            Console.WriteLine(element.GetProperty("requiredRecordUnknown").GetProperty("<key>").ToString());
+            Console.WriteLine(element.GetProperty("optionalRecordUnknown").GetProperty("<key>").ToString());
+            Console.WriteLine(element.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<key>").ToString());
+            Console.WriteLine(element.GetProperty("readOnlyOptionalRecordUnknown").GetProperty("<key>").ToString());
+            Console.WriteLine(element.GetProperty("modelWithRequiredNullable").GetProperty("requiredNullablePrimitive").ToString());
+            Console.WriteLine(element.GetProperty("modelWithRequiredNullable").GetProperty("requiredExtensibleEnum").ToString());
+            Console.WriteLine(element.GetProperty("modelWithRequiredNullable").GetProperty("requiredFixedEnum").ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_NoContentType()
+        public void Example_NoContentType_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             KeyCredential credential = new KeyCredential("<key>");
@@ -1531,10 +1518,10 @@ namespace UnbrandedTypeSpec.Samples
             {
                 requiredString = "<requiredString>",
                 requiredInt = 1234,
-                requiredCollection = new List<object>()
-{
+                requiredCollection = new object[]
+            {
 "1"
-},
+            },
                 requiredDictionary = new
                 {
                     key = "1",
@@ -1548,10 +1535,10 @@ namespace UnbrandedTypeSpec.Samples
                     requiredLiteralFloat = 1.23F,
                     requiredLiteralBool = false,
                     requiredBadDescription = "<requiredBadDescription>",
-                    requiredNullableList = new List<object>()
-{
+                    requiredNullableList = new object[]
+            {
 1234
-},
+            },
                 },
                 requiredUnknown = new object(),
                 requiredRecordUnknown = new
@@ -1567,30 +1554,30 @@ namespace UnbrandedTypeSpec.Samples
             }).ToStream());
             Result result = client.NoContentType("<p2>", "<p1>", content);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("requiredString").ToString());
-            Console.WriteLine(result0.GetProperty("requiredInt").ToString());
-            Console.WriteLine(result0.GetProperty("requiredCollection")[0].ToString());
-            Console.WriteLine(result0.GetProperty("requiredDictionary").GetProperty("<key>").ToString());
-            Console.WriteLine(result0.GetProperty("requiredModel").GetProperty("name").ToString());
-            Console.WriteLine(result0.GetProperty("requiredModel").GetProperty("requiredUnion").ToString());
-            Console.WriteLine(result0.GetProperty("requiredModel").GetProperty("requiredLiteralString").ToString());
-            Console.WriteLine(result0.GetProperty("requiredModel").GetProperty("requiredLiteralInt").ToString());
-            Console.WriteLine(result0.GetProperty("requiredModel").GetProperty("requiredLiteralFloat").ToString());
-            Console.WriteLine(result0.GetProperty("requiredModel").GetProperty("requiredLiteralBool").ToString());
-            Console.WriteLine(result0.GetProperty("requiredModel").GetProperty("requiredBadDescription").ToString());
-            Console.WriteLine(result0.GetProperty("requiredModel").GetProperty("requiredNullableList")[0].ToString());
-            Console.WriteLine(result0.GetProperty("requiredUnknown").ToString());
-            Console.WriteLine(result0.GetProperty("requiredRecordUnknown").GetProperty("<key>").ToString());
-            Console.WriteLine(result0.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<key>").ToString());
-            Console.WriteLine(result0.GetProperty("modelWithRequiredNullable").GetProperty("requiredNullablePrimitive").ToString());
-            Console.WriteLine(result0.GetProperty("modelWithRequiredNullable").GetProperty("requiredExtensibleEnum").ToString());
-            Console.WriteLine(result0.GetProperty("modelWithRequiredNullable").GetProperty("requiredFixedEnum").ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("requiredString").ToString());
+            Console.WriteLine(element.GetProperty("requiredInt").ToString());
+            Console.WriteLine(element.GetProperty("requiredCollection")[0].ToString());
+            Console.WriteLine(element.GetProperty("requiredDictionary").GetProperty("<key>").ToString());
+            Console.WriteLine(element.GetProperty("requiredModel").GetProperty("name").ToString());
+            Console.WriteLine(element.GetProperty("requiredModel").GetProperty("requiredUnion").ToString());
+            Console.WriteLine(element.GetProperty("requiredModel").GetProperty("requiredLiteralString").ToString());
+            Console.WriteLine(element.GetProperty("requiredModel").GetProperty("requiredLiteralInt").ToString());
+            Console.WriteLine(element.GetProperty("requiredModel").GetProperty("requiredLiteralFloat").ToString());
+            Console.WriteLine(element.GetProperty("requiredModel").GetProperty("requiredLiteralBool").ToString());
+            Console.WriteLine(element.GetProperty("requiredModel").GetProperty("requiredBadDescription").ToString());
+            Console.WriteLine(element.GetProperty("requiredModel").GetProperty("requiredNullableList")[0].ToString());
+            Console.WriteLine(element.GetProperty("requiredUnknown").ToString());
+            Console.WriteLine(element.GetProperty("requiredRecordUnknown").GetProperty("<key>").ToString());
+            Console.WriteLine(element.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<key>").ToString());
+            Console.WriteLine(element.GetProperty("modelWithRequiredNullable").GetProperty("requiredNullablePrimitive").ToString());
+            Console.WriteLine(element.GetProperty("modelWithRequiredNullable").GetProperty("requiredExtensibleEnum").ToString());
+            Console.WriteLine(element.GetProperty("modelWithRequiredNullable").GetProperty("requiredFixedEnum").ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_NoContentType_Async()
+        public async Task Example_NoContentType_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             KeyCredential credential = new KeyCredential("<key>");
@@ -1600,10 +1587,10 @@ namespace UnbrandedTypeSpec.Samples
             {
                 requiredString = "<requiredString>",
                 requiredInt = 1234,
-                requiredCollection = new List<object>()
-{
+                requiredCollection = new object[]
+            {
 "1"
-},
+            },
                 requiredDictionary = new
                 {
                     key = "1",
@@ -1617,10 +1604,10 @@ namespace UnbrandedTypeSpec.Samples
                     requiredLiteralFloat = 1.23F,
                     requiredLiteralBool = false,
                     requiredBadDescription = "<requiredBadDescription>",
-                    requiredNullableList = new List<object>()
-{
+                    requiredNullableList = new object[]
+            {
 1234
-},
+            },
                 },
                 requiredUnknown = new object(),
                 requiredRecordUnknown = new
@@ -1636,25 +1623,25 @@ namespace UnbrandedTypeSpec.Samples
             }).ToStream());
             Result result = await client.NoContentTypeAsync("<p2>", "<p1>", content);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("requiredString").ToString());
-            Console.WriteLine(result0.GetProperty("requiredInt").ToString());
-            Console.WriteLine(result0.GetProperty("requiredCollection")[0].ToString());
-            Console.WriteLine(result0.GetProperty("requiredDictionary").GetProperty("<key>").ToString());
-            Console.WriteLine(result0.GetProperty("requiredModel").GetProperty("name").ToString());
-            Console.WriteLine(result0.GetProperty("requiredModel").GetProperty("requiredUnion").ToString());
-            Console.WriteLine(result0.GetProperty("requiredModel").GetProperty("requiredLiteralString").ToString());
-            Console.WriteLine(result0.GetProperty("requiredModel").GetProperty("requiredLiteralInt").ToString());
-            Console.WriteLine(result0.GetProperty("requiredModel").GetProperty("requiredLiteralFloat").ToString());
-            Console.WriteLine(result0.GetProperty("requiredModel").GetProperty("requiredLiteralBool").ToString());
-            Console.WriteLine(result0.GetProperty("requiredModel").GetProperty("requiredBadDescription").ToString());
-            Console.WriteLine(result0.GetProperty("requiredModel").GetProperty("requiredNullableList")[0].ToString());
-            Console.WriteLine(result0.GetProperty("requiredUnknown").ToString());
-            Console.WriteLine(result0.GetProperty("requiredRecordUnknown").GetProperty("<key>").ToString());
-            Console.WriteLine(result0.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<key>").ToString());
-            Console.WriteLine(result0.GetProperty("modelWithRequiredNullable").GetProperty("requiredNullablePrimitive").ToString());
-            Console.WriteLine(result0.GetProperty("modelWithRequiredNullable").GetProperty("requiredExtensibleEnum").ToString());
-            Console.WriteLine(result0.GetProperty("modelWithRequiredNullable").GetProperty("requiredFixedEnum").ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("requiredString").ToString());
+            Console.WriteLine(element.GetProperty("requiredInt").ToString());
+            Console.WriteLine(element.GetProperty("requiredCollection")[0].ToString());
+            Console.WriteLine(element.GetProperty("requiredDictionary").GetProperty("<key>").ToString());
+            Console.WriteLine(element.GetProperty("requiredModel").GetProperty("name").ToString());
+            Console.WriteLine(element.GetProperty("requiredModel").GetProperty("requiredUnion").ToString());
+            Console.WriteLine(element.GetProperty("requiredModel").GetProperty("requiredLiteralString").ToString());
+            Console.WriteLine(element.GetProperty("requiredModel").GetProperty("requiredLiteralInt").ToString());
+            Console.WriteLine(element.GetProperty("requiredModel").GetProperty("requiredLiteralFloat").ToString());
+            Console.WriteLine(element.GetProperty("requiredModel").GetProperty("requiredLiteralBool").ToString());
+            Console.WriteLine(element.GetProperty("requiredModel").GetProperty("requiredBadDescription").ToString());
+            Console.WriteLine(element.GetProperty("requiredModel").GetProperty("requiredNullableList")[0].ToString());
+            Console.WriteLine(element.GetProperty("requiredUnknown").ToString());
+            Console.WriteLine(element.GetProperty("requiredRecordUnknown").GetProperty("<key>").ToString());
+            Console.WriteLine(element.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<key>").ToString());
+            Console.WriteLine(element.GetProperty("modelWithRequiredNullable").GetProperty("requiredNullablePrimitive").ToString());
+            Console.WriteLine(element.GetProperty("modelWithRequiredNullable").GetProperty("requiredExtensibleEnum").ToString());
+            Console.WriteLine(element.GetProperty("modelWithRequiredNullable").GetProperty("requiredFixedEnum").ToString());
         }
 
         [Test]
@@ -1669,10 +1656,10 @@ namespace UnbrandedTypeSpec.Samples
             {
                 requiredString = "<requiredString>",
                 requiredInt = 1234,
-                requiredCollection = new List<object>()
-{
+                requiredCollection = new object[]
+            {
 "1"
-},
+            },
                 requiredDictionary = new
                 {
                     key = "1",
@@ -1690,35 +1677,35 @@ namespace UnbrandedTypeSpec.Samples
                     optionalLiteralFloat = 4.56F,
                     optionalLiteralBool = true,
                     requiredBadDescription = "<requiredBadDescription>",
-                    optionalNullableList = new List<object>()
-{
+                    optionalNullableList = new object[]
+            {
 1234
-},
-                    requiredNullableList = new List<object>()
-{
+            },
+                    requiredNullableList = new object[]
+            {
 1234
-},
+            },
                 },
                 intExtensibleEnum = 1,
-                intExtensibleEnumCollection = new List<object>()
-{
+                intExtensibleEnumCollection = new object[]
+            {
 1
-},
+            },
                 floatExtensibleEnum = 1,
-                floatExtensibleEnumCollection = new List<object>()
-{
+                floatExtensibleEnumCollection = new object[]
+            {
 1
-},
+            },
                 floatFixedEnum = 1.1F,
-                floatFixedEnumCollection = new List<object>()
-{
+                floatFixedEnumCollection = new object[]
+            {
 1.1F
-},
+            },
                 intFixedEnum = 1,
-                intFixedEnumCollection = new List<object>()
-{
+                intFixedEnumCollection = new object[]
+            {
 1
-},
+            },
                 stringFixedEnum = "1",
                 requiredUnknown = new object(),
                 optionalUnknown = new object(),
@@ -1739,42 +1726,42 @@ namespace UnbrandedTypeSpec.Samples
             }).ToStream());
             Result result = client.NoContentType("<p2>", "<p1>", content);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("requiredString").ToString());
-            Console.WriteLine(result0.GetProperty("requiredInt").ToString());
-            Console.WriteLine(result0.GetProperty("requiredCollection")[0].ToString());
-            Console.WriteLine(result0.GetProperty("requiredDictionary").GetProperty("<key>").ToString());
-            Console.WriteLine(result0.GetProperty("requiredModel").GetProperty("name").ToString());
-            Console.WriteLine(result0.GetProperty("requiredModel").GetProperty("requiredUnion").ToString());
-            Console.WriteLine(result0.GetProperty("requiredModel").GetProperty("requiredLiteralString").ToString());
-            Console.WriteLine(result0.GetProperty("requiredModel").GetProperty("requiredLiteralInt").ToString());
-            Console.WriteLine(result0.GetProperty("requiredModel").GetProperty("requiredLiteralFloat").ToString());
-            Console.WriteLine(result0.GetProperty("requiredModel").GetProperty("requiredLiteralBool").ToString());
-            Console.WriteLine(result0.GetProperty("requiredModel").GetProperty("optionalLiteralString").ToString());
-            Console.WriteLine(result0.GetProperty("requiredModel").GetProperty("optionalLiteralInt").ToString());
-            Console.WriteLine(result0.GetProperty("requiredModel").GetProperty("optionalLiteralFloat").ToString());
-            Console.WriteLine(result0.GetProperty("requiredModel").GetProperty("optionalLiteralBool").ToString());
-            Console.WriteLine(result0.GetProperty("requiredModel").GetProperty("requiredBadDescription").ToString());
-            Console.WriteLine(result0.GetProperty("requiredModel").GetProperty("optionalNullableList")[0].ToString());
-            Console.WriteLine(result0.GetProperty("requiredModel").GetProperty("requiredNullableList")[0].ToString());
-            Console.WriteLine(result0.GetProperty("intExtensibleEnum").ToString());
-            Console.WriteLine(result0.GetProperty("intExtensibleEnumCollection")[0].ToString());
-            Console.WriteLine(result0.GetProperty("floatExtensibleEnum").ToString());
-            Console.WriteLine(result0.GetProperty("floatExtensibleEnumCollection")[0].ToString());
-            Console.WriteLine(result0.GetProperty("floatFixedEnum").ToString());
-            Console.WriteLine(result0.GetProperty("floatFixedEnumCollection")[0].ToString());
-            Console.WriteLine(result0.GetProperty("intFixedEnum").ToString());
-            Console.WriteLine(result0.GetProperty("intFixedEnumCollection")[0].ToString());
-            Console.WriteLine(result0.GetProperty("stringFixedEnum").ToString());
-            Console.WriteLine(result0.GetProperty("requiredUnknown").ToString());
-            Console.WriteLine(result0.GetProperty("optionalUnknown").ToString());
-            Console.WriteLine(result0.GetProperty("requiredRecordUnknown").GetProperty("<key>").ToString());
-            Console.WriteLine(result0.GetProperty("optionalRecordUnknown").GetProperty("<key>").ToString());
-            Console.WriteLine(result0.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<key>").ToString());
-            Console.WriteLine(result0.GetProperty("readOnlyOptionalRecordUnknown").GetProperty("<key>").ToString());
-            Console.WriteLine(result0.GetProperty("modelWithRequiredNullable").GetProperty("requiredNullablePrimitive").ToString());
-            Console.WriteLine(result0.GetProperty("modelWithRequiredNullable").GetProperty("requiredExtensibleEnum").ToString());
-            Console.WriteLine(result0.GetProperty("modelWithRequiredNullable").GetProperty("requiredFixedEnum").ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("requiredString").ToString());
+            Console.WriteLine(element.GetProperty("requiredInt").ToString());
+            Console.WriteLine(element.GetProperty("requiredCollection")[0].ToString());
+            Console.WriteLine(element.GetProperty("requiredDictionary").GetProperty("<key>").ToString());
+            Console.WriteLine(element.GetProperty("requiredModel").GetProperty("name").ToString());
+            Console.WriteLine(element.GetProperty("requiredModel").GetProperty("requiredUnion").ToString());
+            Console.WriteLine(element.GetProperty("requiredModel").GetProperty("requiredLiteralString").ToString());
+            Console.WriteLine(element.GetProperty("requiredModel").GetProperty("requiredLiteralInt").ToString());
+            Console.WriteLine(element.GetProperty("requiredModel").GetProperty("requiredLiteralFloat").ToString());
+            Console.WriteLine(element.GetProperty("requiredModel").GetProperty("requiredLiteralBool").ToString());
+            Console.WriteLine(element.GetProperty("requiredModel").GetProperty("optionalLiteralString").ToString());
+            Console.WriteLine(element.GetProperty("requiredModel").GetProperty("optionalLiteralInt").ToString());
+            Console.WriteLine(element.GetProperty("requiredModel").GetProperty("optionalLiteralFloat").ToString());
+            Console.WriteLine(element.GetProperty("requiredModel").GetProperty("optionalLiteralBool").ToString());
+            Console.WriteLine(element.GetProperty("requiredModel").GetProperty("requiredBadDescription").ToString());
+            Console.WriteLine(element.GetProperty("requiredModel").GetProperty("optionalNullableList")[0].ToString());
+            Console.WriteLine(element.GetProperty("requiredModel").GetProperty("requiredNullableList")[0].ToString());
+            Console.WriteLine(element.GetProperty("intExtensibleEnum").ToString());
+            Console.WriteLine(element.GetProperty("intExtensibleEnumCollection")[0].ToString());
+            Console.WriteLine(element.GetProperty("floatExtensibleEnum").ToString());
+            Console.WriteLine(element.GetProperty("floatExtensibleEnumCollection")[0].ToString());
+            Console.WriteLine(element.GetProperty("floatFixedEnum").ToString());
+            Console.WriteLine(element.GetProperty("floatFixedEnumCollection")[0].ToString());
+            Console.WriteLine(element.GetProperty("intFixedEnum").ToString());
+            Console.WriteLine(element.GetProperty("intFixedEnumCollection")[0].ToString());
+            Console.WriteLine(element.GetProperty("stringFixedEnum").ToString());
+            Console.WriteLine(element.GetProperty("requiredUnknown").ToString());
+            Console.WriteLine(element.GetProperty("optionalUnknown").ToString());
+            Console.WriteLine(element.GetProperty("requiredRecordUnknown").GetProperty("<key>").ToString());
+            Console.WriteLine(element.GetProperty("optionalRecordUnknown").GetProperty("<key>").ToString());
+            Console.WriteLine(element.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<key>").ToString());
+            Console.WriteLine(element.GetProperty("readOnlyOptionalRecordUnknown").GetProperty("<key>").ToString());
+            Console.WriteLine(element.GetProperty("modelWithRequiredNullable").GetProperty("requiredNullablePrimitive").ToString());
+            Console.WriteLine(element.GetProperty("modelWithRequiredNullable").GetProperty("requiredExtensibleEnum").ToString());
+            Console.WriteLine(element.GetProperty("modelWithRequiredNullable").GetProperty("requiredFixedEnum").ToString());
         }
 
         [Test]
@@ -1789,10 +1776,10 @@ namespace UnbrandedTypeSpec.Samples
             {
                 requiredString = "<requiredString>",
                 requiredInt = 1234,
-                requiredCollection = new List<object>()
-{
+                requiredCollection = new object[]
+            {
 "1"
-},
+            },
                 requiredDictionary = new
                 {
                     key = "1",
@@ -1810,35 +1797,35 @@ namespace UnbrandedTypeSpec.Samples
                     optionalLiteralFloat = 4.56F,
                     optionalLiteralBool = true,
                     requiredBadDescription = "<requiredBadDescription>",
-                    optionalNullableList = new List<object>()
-{
+                    optionalNullableList = new object[]
+            {
 1234
-},
-                    requiredNullableList = new List<object>()
-{
+            },
+                    requiredNullableList = new object[]
+            {
 1234
-},
+            },
                 },
                 intExtensibleEnum = 1,
-                intExtensibleEnumCollection = new List<object>()
-{
+                intExtensibleEnumCollection = new object[]
+            {
 1
-},
+            },
                 floatExtensibleEnum = 1,
-                floatExtensibleEnumCollection = new List<object>()
-{
+                floatExtensibleEnumCollection = new object[]
+            {
 1
-},
+            },
                 floatFixedEnum = 1.1F,
-                floatFixedEnumCollection = new List<object>()
-{
+                floatFixedEnumCollection = new object[]
+            {
 1.1F
-},
+            },
                 intFixedEnum = 1,
-                intFixedEnumCollection = new List<object>()
-{
+                intFixedEnumCollection = new object[]
+            {
 1
-},
+            },
                 stringFixedEnum = "1",
                 requiredUnknown = new object(),
                 optionalUnknown = new object(),
@@ -1859,47 +1846,47 @@ namespace UnbrandedTypeSpec.Samples
             }).ToStream());
             Result result = await client.NoContentTypeAsync("<p2>", "<p1>", content);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("requiredString").ToString());
-            Console.WriteLine(result0.GetProperty("requiredInt").ToString());
-            Console.WriteLine(result0.GetProperty("requiredCollection")[0].ToString());
-            Console.WriteLine(result0.GetProperty("requiredDictionary").GetProperty("<key>").ToString());
-            Console.WriteLine(result0.GetProperty("requiredModel").GetProperty("name").ToString());
-            Console.WriteLine(result0.GetProperty("requiredModel").GetProperty("requiredUnion").ToString());
-            Console.WriteLine(result0.GetProperty("requiredModel").GetProperty("requiredLiteralString").ToString());
-            Console.WriteLine(result0.GetProperty("requiredModel").GetProperty("requiredLiteralInt").ToString());
-            Console.WriteLine(result0.GetProperty("requiredModel").GetProperty("requiredLiteralFloat").ToString());
-            Console.WriteLine(result0.GetProperty("requiredModel").GetProperty("requiredLiteralBool").ToString());
-            Console.WriteLine(result0.GetProperty("requiredModel").GetProperty("optionalLiteralString").ToString());
-            Console.WriteLine(result0.GetProperty("requiredModel").GetProperty("optionalLiteralInt").ToString());
-            Console.WriteLine(result0.GetProperty("requiredModel").GetProperty("optionalLiteralFloat").ToString());
-            Console.WriteLine(result0.GetProperty("requiredModel").GetProperty("optionalLiteralBool").ToString());
-            Console.WriteLine(result0.GetProperty("requiredModel").GetProperty("requiredBadDescription").ToString());
-            Console.WriteLine(result0.GetProperty("requiredModel").GetProperty("optionalNullableList")[0].ToString());
-            Console.WriteLine(result0.GetProperty("requiredModel").GetProperty("requiredNullableList")[0].ToString());
-            Console.WriteLine(result0.GetProperty("intExtensibleEnum").ToString());
-            Console.WriteLine(result0.GetProperty("intExtensibleEnumCollection")[0].ToString());
-            Console.WriteLine(result0.GetProperty("floatExtensibleEnum").ToString());
-            Console.WriteLine(result0.GetProperty("floatExtensibleEnumCollection")[0].ToString());
-            Console.WriteLine(result0.GetProperty("floatFixedEnum").ToString());
-            Console.WriteLine(result0.GetProperty("floatFixedEnumCollection")[0].ToString());
-            Console.WriteLine(result0.GetProperty("intFixedEnum").ToString());
-            Console.WriteLine(result0.GetProperty("intFixedEnumCollection")[0].ToString());
-            Console.WriteLine(result0.GetProperty("stringFixedEnum").ToString());
-            Console.WriteLine(result0.GetProperty("requiredUnknown").ToString());
-            Console.WriteLine(result0.GetProperty("optionalUnknown").ToString());
-            Console.WriteLine(result0.GetProperty("requiredRecordUnknown").GetProperty("<key>").ToString());
-            Console.WriteLine(result0.GetProperty("optionalRecordUnknown").GetProperty("<key>").ToString());
-            Console.WriteLine(result0.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<key>").ToString());
-            Console.WriteLine(result0.GetProperty("readOnlyOptionalRecordUnknown").GetProperty("<key>").ToString());
-            Console.WriteLine(result0.GetProperty("modelWithRequiredNullable").GetProperty("requiredNullablePrimitive").ToString());
-            Console.WriteLine(result0.GetProperty("modelWithRequiredNullable").GetProperty("requiredExtensibleEnum").ToString());
-            Console.WriteLine(result0.GetProperty("modelWithRequiredNullable").GetProperty("requiredFixedEnum").ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("requiredString").ToString());
+            Console.WriteLine(element.GetProperty("requiredInt").ToString());
+            Console.WriteLine(element.GetProperty("requiredCollection")[0].ToString());
+            Console.WriteLine(element.GetProperty("requiredDictionary").GetProperty("<key>").ToString());
+            Console.WriteLine(element.GetProperty("requiredModel").GetProperty("name").ToString());
+            Console.WriteLine(element.GetProperty("requiredModel").GetProperty("requiredUnion").ToString());
+            Console.WriteLine(element.GetProperty("requiredModel").GetProperty("requiredLiteralString").ToString());
+            Console.WriteLine(element.GetProperty("requiredModel").GetProperty("requiredLiteralInt").ToString());
+            Console.WriteLine(element.GetProperty("requiredModel").GetProperty("requiredLiteralFloat").ToString());
+            Console.WriteLine(element.GetProperty("requiredModel").GetProperty("requiredLiteralBool").ToString());
+            Console.WriteLine(element.GetProperty("requiredModel").GetProperty("optionalLiteralString").ToString());
+            Console.WriteLine(element.GetProperty("requiredModel").GetProperty("optionalLiteralInt").ToString());
+            Console.WriteLine(element.GetProperty("requiredModel").GetProperty("optionalLiteralFloat").ToString());
+            Console.WriteLine(element.GetProperty("requiredModel").GetProperty("optionalLiteralBool").ToString());
+            Console.WriteLine(element.GetProperty("requiredModel").GetProperty("requiredBadDescription").ToString());
+            Console.WriteLine(element.GetProperty("requiredModel").GetProperty("optionalNullableList")[0].ToString());
+            Console.WriteLine(element.GetProperty("requiredModel").GetProperty("requiredNullableList")[0].ToString());
+            Console.WriteLine(element.GetProperty("intExtensibleEnum").ToString());
+            Console.WriteLine(element.GetProperty("intExtensibleEnumCollection")[0].ToString());
+            Console.WriteLine(element.GetProperty("floatExtensibleEnum").ToString());
+            Console.WriteLine(element.GetProperty("floatExtensibleEnumCollection")[0].ToString());
+            Console.WriteLine(element.GetProperty("floatFixedEnum").ToString());
+            Console.WriteLine(element.GetProperty("floatFixedEnumCollection")[0].ToString());
+            Console.WriteLine(element.GetProperty("intFixedEnum").ToString());
+            Console.WriteLine(element.GetProperty("intFixedEnumCollection")[0].ToString());
+            Console.WriteLine(element.GetProperty("stringFixedEnum").ToString());
+            Console.WriteLine(element.GetProperty("requiredUnknown").ToString());
+            Console.WriteLine(element.GetProperty("optionalUnknown").ToString());
+            Console.WriteLine(element.GetProperty("requiredRecordUnknown").GetProperty("<key>").ToString());
+            Console.WriteLine(element.GetProperty("optionalRecordUnknown").GetProperty("<key>").ToString());
+            Console.WriteLine(element.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<key>").ToString());
+            Console.WriteLine(element.GetProperty("readOnlyOptionalRecordUnknown").GetProperty("<key>").ToString());
+            Console.WriteLine(element.GetProperty("modelWithRequiredNullable").GetProperty("requiredNullablePrimitive").ToString());
+            Console.WriteLine(element.GetProperty("modelWithRequiredNullable").GetProperty("requiredExtensibleEnum").ToString());
+            Console.WriteLine(element.GetProperty("modelWithRequiredNullable").GetProperty("requiredFixedEnum").ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_HelloDemo2()
+        public void Example_HelloDemo2_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             KeyCredential credential = new KeyCredential("<key>");
@@ -1907,20 +1894,20 @@ namespace UnbrandedTypeSpec.Samples
 
             Result result = client.HelloDemo2(null);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("name").ToString());
-            Console.WriteLine(result0.GetProperty("requiredUnion").ToString());
-            Console.WriteLine(result0.GetProperty("requiredLiteralString").ToString());
-            Console.WriteLine(result0.GetProperty("requiredLiteralInt").ToString());
-            Console.WriteLine(result0.GetProperty("requiredLiteralFloat").ToString());
-            Console.WriteLine(result0.GetProperty("requiredLiteralBool").ToString());
-            Console.WriteLine(result0.GetProperty("requiredBadDescription").ToString());
-            Console.WriteLine(result0.GetProperty("requiredNullableList")[0].ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("name").ToString());
+            Console.WriteLine(element.GetProperty("requiredUnion").ToString());
+            Console.WriteLine(element.GetProperty("requiredLiteralString").ToString());
+            Console.WriteLine(element.GetProperty("requiredLiteralInt").ToString());
+            Console.WriteLine(element.GetProperty("requiredLiteralFloat").ToString());
+            Console.WriteLine(element.GetProperty("requiredLiteralBool").ToString());
+            Console.WriteLine(element.GetProperty("requiredBadDescription").ToString());
+            Console.WriteLine(element.GetProperty("requiredNullableList")[0].ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_HelloDemo2_Async()
+        public async Task Example_HelloDemo2_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             KeyCredential credential = new KeyCredential("<key>");
@@ -1928,15 +1915,15 @@ namespace UnbrandedTypeSpec.Samples
 
             Result result = await client.HelloDemo2Async(null);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("name").ToString());
-            Console.WriteLine(result0.GetProperty("requiredUnion").ToString());
-            Console.WriteLine(result0.GetProperty("requiredLiteralString").ToString());
-            Console.WriteLine(result0.GetProperty("requiredLiteralInt").ToString());
-            Console.WriteLine(result0.GetProperty("requiredLiteralFloat").ToString());
-            Console.WriteLine(result0.GetProperty("requiredLiteralBool").ToString());
-            Console.WriteLine(result0.GetProperty("requiredBadDescription").ToString());
-            Console.WriteLine(result0.GetProperty("requiredNullableList")[0].ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("name").ToString());
+            Console.WriteLine(element.GetProperty("requiredUnion").ToString());
+            Console.WriteLine(element.GetProperty("requiredLiteralString").ToString());
+            Console.WriteLine(element.GetProperty("requiredLiteralInt").ToString());
+            Console.WriteLine(element.GetProperty("requiredLiteralFloat").ToString());
+            Console.WriteLine(element.GetProperty("requiredLiteralBool").ToString());
+            Console.WriteLine(element.GetProperty("requiredBadDescription").ToString());
+            Console.WriteLine(element.GetProperty("requiredNullableList")[0].ToString());
         }
 
         [Test]
@@ -1949,20 +1936,20 @@ namespace UnbrandedTypeSpec.Samples
 
             Result result = client.HelloDemo2(null);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("name").ToString());
-            Console.WriteLine(result0.GetProperty("requiredUnion").ToString());
-            Console.WriteLine(result0.GetProperty("requiredLiteralString").ToString());
-            Console.WriteLine(result0.GetProperty("requiredLiteralInt").ToString());
-            Console.WriteLine(result0.GetProperty("requiredLiteralFloat").ToString());
-            Console.WriteLine(result0.GetProperty("requiredLiteralBool").ToString());
-            Console.WriteLine(result0.GetProperty("optionalLiteralString").ToString());
-            Console.WriteLine(result0.GetProperty("optionalLiteralInt").ToString());
-            Console.WriteLine(result0.GetProperty("optionalLiteralFloat").ToString());
-            Console.WriteLine(result0.GetProperty("optionalLiteralBool").ToString());
-            Console.WriteLine(result0.GetProperty("requiredBadDescription").ToString());
-            Console.WriteLine(result0.GetProperty("optionalNullableList")[0].ToString());
-            Console.WriteLine(result0.GetProperty("requiredNullableList")[0].ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("name").ToString());
+            Console.WriteLine(element.GetProperty("requiredUnion").ToString());
+            Console.WriteLine(element.GetProperty("requiredLiteralString").ToString());
+            Console.WriteLine(element.GetProperty("requiredLiteralInt").ToString());
+            Console.WriteLine(element.GetProperty("requiredLiteralFloat").ToString());
+            Console.WriteLine(element.GetProperty("requiredLiteralBool").ToString());
+            Console.WriteLine(element.GetProperty("optionalLiteralString").ToString());
+            Console.WriteLine(element.GetProperty("optionalLiteralInt").ToString());
+            Console.WriteLine(element.GetProperty("optionalLiteralFloat").ToString());
+            Console.WriteLine(element.GetProperty("optionalLiteralBool").ToString());
+            Console.WriteLine(element.GetProperty("requiredBadDescription").ToString());
+            Console.WriteLine(element.GetProperty("optionalNullableList")[0].ToString());
+            Console.WriteLine(element.GetProperty("requiredNullableList")[0].ToString());
         }
 
         [Test]
@@ -1975,25 +1962,25 @@ namespace UnbrandedTypeSpec.Samples
 
             Result result = await client.HelloDemo2Async(null);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("name").ToString());
-            Console.WriteLine(result0.GetProperty("requiredUnion").ToString());
-            Console.WriteLine(result0.GetProperty("requiredLiteralString").ToString());
-            Console.WriteLine(result0.GetProperty("requiredLiteralInt").ToString());
-            Console.WriteLine(result0.GetProperty("requiredLiteralFloat").ToString());
-            Console.WriteLine(result0.GetProperty("requiredLiteralBool").ToString());
-            Console.WriteLine(result0.GetProperty("optionalLiteralString").ToString());
-            Console.WriteLine(result0.GetProperty("optionalLiteralInt").ToString());
-            Console.WriteLine(result0.GetProperty("optionalLiteralFloat").ToString());
-            Console.WriteLine(result0.GetProperty("optionalLiteralBool").ToString());
-            Console.WriteLine(result0.GetProperty("requiredBadDescription").ToString());
-            Console.WriteLine(result0.GetProperty("optionalNullableList")[0].ToString());
-            Console.WriteLine(result0.GetProperty("requiredNullableList")[0].ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("name").ToString());
+            Console.WriteLine(element.GetProperty("requiredUnion").ToString());
+            Console.WriteLine(element.GetProperty("requiredLiteralString").ToString());
+            Console.WriteLine(element.GetProperty("requiredLiteralInt").ToString());
+            Console.WriteLine(element.GetProperty("requiredLiteralFloat").ToString());
+            Console.WriteLine(element.GetProperty("requiredLiteralBool").ToString());
+            Console.WriteLine(element.GetProperty("optionalLiteralString").ToString());
+            Console.WriteLine(element.GetProperty("optionalLiteralInt").ToString());
+            Console.WriteLine(element.GetProperty("optionalLiteralFloat").ToString());
+            Console.WriteLine(element.GetProperty("optionalLiteralBool").ToString());
+            Console.WriteLine(element.GetProperty("requiredBadDescription").ToString());
+            Console.WriteLine(element.GetProperty("optionalNullableList")[0].ToString());
+            Console.WriteLine(element.GetProperty("requiredNullableList")[0].ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_CreateLiteral()
+        public void Example_CreateLiteral_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             KeyCredential credential = new KeyCredential("<key>");
@@ -2008,27 +1995,27 @@ namespace UnbrandedTypeSpec.Samples
                 requiredLiteralFloat = 1.23F,
                 requiredLiteralBool = false,
                 requiredBadDescription = "<requiredBadDescription>",
-                requiredNullableList = new List<object>()
-{
+                requiredNullableList = new object[]
+            {
 1234
-},
+            },
             }).ToStream());
             Result result = client.CreateLiteral(content);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("name").ToString());
-            Console.WriteLine(result0.GetProperty("requiredUnion").ToString());
-            Console.WriteLine(result0.GetProperty("requiredLiteralString").ToString());
-            Console.WriteLine(result0.GetProperty("requiredLiteralInt").ToString());
-            Console.WriteLine(result0.GetProperty("requiredLiteralFloat").ToString());
-            Console.WriteLine(result0.GetProperty("requiredLiteralBool").ToString());
-            Console.WriteLine(result0.GetProperty("requiredBadDescription").ToString());
-            Console.WriteLine(result0.GetProperty("requiredNullableList")[0].ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("name").ToString());
+            Console.WriteLine(element.GetProperty("requiredUnion").ToString());
+            Console.WriteLine(element.GetProperty("requiredLiteralString").ToString());
+            Console.WriteLine(element.GetProperty("requiredLiteralInt").ToString());
+            Console.WriteLine(element.GetProperty("requiredLiteralFloat").ToString());
+            Console.WriteLine(element.GetProperty("requiredLiteralBool").ToString());
+            Console.WriteLine(element.GetProperty("requiredBadDescription").ToString());
+            Console.WriteLine(element.GetProperty("requiredNullableList")[0].ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_CreateLiteral_Async()
+        public async Task Example_CreateLiteral_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             KeyCredential credential = new KeyCredential("<key>");
@@ -2043,22 +2030,22 @@ namespace UnbrandedTypeSpec.Samples
                 requiredLiteralFloat = 1.23F,
                 requiredLiteralBool = false,
                 requiredBadDescription = "<requiredBadDescription>",
-                requiredNullableList = new List<object>()
-{
+                requiredNullableList = new object[]
+            {
 1234
-},
+            },
             }).ToStream());
             Result result = await client.CreateLiteralAsync(content);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("name").ToString());
-            Console.WriteLine(result0.GetProperty("requiredUnion").ToString());
-            Console.WriteLine(result0.GetProperty("requiredLiteralString").ToString());
-            Console.WriteLine(result0.GetProperty("requiredLiteralInt").ToString());
-            Console.WriteLine(result0.GetProperty("requiredLiteralFloat").ToString());
-            Console.WriteLine(result0.GetProperty("requiredLiteralBool").ToString());
-            Console.WriteLine(result0.GetProperty("requiredBadDescription").ToString());
-            Console.WriteLine(result0.GetProperty("requiredNullableList")[0].ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("name").ToString());
+            Console.WriteLine(element.GetProperty("requiredUnion").ToString());
+            Console.WriteLine(element.GetProperty("requiredLiteralString").ToString());
+            Console.WriteLine(element.GetProperty("requiredLiteralInt").ToString());
+            Console.WriteLine(element.GetProperty("requiredLiteralFloat").ToString());
+            Console.WriteLine(element.GetProperty("requiredLiteralBool").ToString());
+            Console.WriteLine(element.GetProperty("requiredBadDescription").ToString());
+            Console.WriteLine(element.GetProperty("requiredNullableList")[0].ToString());
         }
 
         [Test]
@@ -2082,31 +2069,31 @@ namespace UnbrandedTypeSpec.Samples
                 optionalLiteralFloat = 4.56F,
                 optionalLiteralBool = true,
                 requiredBadDescription = "<requiredBadDescription>",
-                optionalNullableList = new List<object>()
-{
+                optionalNullableList = new object[]
+            {
 1234
-},
-                requiredNullableList = new List<object>()
-{
+            },
+                requiredNullableList = new object[]
+            {
 1234
-},
+            },
             }).ToStream());
             Result result = client.CreateLiteral(content);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("name").ToString());
-            Console.WriteLine(result0.GetProperty("requiredUnion").ToString());
-            Console.WriteLine(result0.GetProperty("requiredLiteralString").ToString());
-            Console.WriteLine(result0.GetProperty("requiredLiteralInt").ToString());
-            Console.WriteLine(result0.GetProperty("requiredLiteralFloat").ToString());
-            Console.WriteLine(result0.GetProperty("requiredLiteralBool").ToString());
-            Console.WriteLine(result0.GetProperty("optionalLiteralString").ToString());
-            Console.WriteLine(result0.GetProperty("optionalLiteralInt").ToString());
-            Console.WriteLine(result0.GetProperty("optionalLiteralFloat").ToString());
-            Console.WriteLine(result0.GetProperty("optionalLiteralBool").ToString());
-            Console.WriteLine(result0.GetProperty("requiredBadDescription").ToString());
-            Console.WriteLine(result0.GetProperty("optionalNullableList")[0].ToString());
-            Console.WriteLine(result0.GetProperty("requiredNullableList")[0].ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("name").ToString());
+            Console.WriteLine(element.GetProperty("requiredUnion").ToString());
+            Console.WriteLine(element.GetProperty("requiredLiteralString").ToString());
+            Console.WriteLine(element.GetProperty("requiredLiteralInt").ToString());
+            Console.WriteLine(element.GetProperty("requiredLiteralFloat").ToString());
+            Console.WriteLine(element.GetProperty("requiredLiteralBool").ToString());
+            Console.WriteLine(element.GetProperty("optionalLiteralString").ToString());
+            Console.WriteLine(element.GetProperty("optionalLiteralInt").ToString());
+            Console.WriteLine(element.GetProperty("optionalLiteralFloat").ToString());
+            Console.WriteLine(element.GetProperty("optionalLiteralBool").ToString());
+            Console.WriteLine(element.GetProperty("requiredBadDescription").ToString());
+            Console.WriteLine(element.GetProperty("optionalNullableList")[0].ToString());
+            Console.WriteLine(element.GetProperty("requiredNullableList")[0].ToString());
         }
 
         [Test]
@@ -2130,36 +2117,36 @@ namespace UnbrandedTypeSpec.Samples
                 optionalLiteralFloat = 4.56F,
                 optionalLiteralBool = true,
                 requiredBadDescription = "<requiredBadDescription>",
-                optionalNullableList = new List<object>()
-{
+                optionalNullableList = new object[]
+            {
 1234
-},
-                requiredNullableList = new List<object>()
-{
+            },
+                requiredNullableList = new object[]
+            {
 1234
-},
+            },
             }).ToStream());
             Result result = await client.CreateLiteralAsync(content);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("name").ToString());
-            Console.WriteLine(result0.GetProperty("requiredUnion").ToString());
-            Console.WriteLine(result0.GetProperty("requiredLiteralString").ToString());
-            Console.WriteLine(result0.GetProperty("requiredLiteralInt").ToString());
-            Console.WriteLine(result0.GetProperty("requiredLiteralFloat").ToString());
-            Console.WriteLine(result0.GetProperty("requiredLiteralBool").ToString());
-            Console.WriteLine(result0.GetProperty("optionalLiteralString").ToString());
-            Console.WriteLine(result0.GetProperty("optionalLiteralInt").ToString());
-            Console.WriteLine(result0.GetProperty("optionalLiteralFloat").ToString());
-            Console.WriteLine(result0.GetProperty("optionalLiteralBool").ToString());
-            Console.WriteLine(result0.GetProperty("requiredBadDescription").ToString());
-            Console.WriteLine(result0.GetProperty("optionalNullableList")[0].ToString());
-            Console.WriteLine(result0.GetProperty("requiredNullableList")[0].ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("name").ToString());
+            Console.WriteLine(element.GetProperty("requiredUnion").ToString());
+            Console.WriteLine(element.GetProperty("requiredLiteralString").ToString());
+            Console.WriteLine(element.GetProperty("requiredLiteralInt").ToString());
+            Console.WriteLine(element.GetProperty("requiredLiteralFloat").ToString());
+            Console.WriteLine(element.GetProperty("requiredLiteralBool").ToString());
+            Console.WriteLine(element.GetProperty("optionalLiteralString").ToString());
+            Console.WriteLine(element.GetProperty("optionalLiteralInt").ToString());
+            Console.WriteLine(element.GetProperty("optionalLiteralFloat").ToString());
+            Console.WriteLine(element.GetProperty("optionalLiteralBool").ToString());
+            Console.WriteLine(element.GetProperty("requiredBadDescription").ToString());
+            Console.WriteLine(element.GetProperty("optionalNullableList")[0].ToString());
+            Console.WriteLine(element.GetProperty("requiredNullableList")[0].ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_HelloLiteral()
+        public void Example_HelloLiteral_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             KeyCredential credential = new KeyCredential("<key>");
@@ -2167,20 +2154,20 @@ namespace UnbrandedTypeSpec.Samples
 
             Result result = client.HelloLiteral(null);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("name").ToString());
-            Console.WriteLine(result0.GetProperty("requiredUnion").ToString());
-            Console.WriteLine(result0.GetProperty("requiredLiteralString").ToString());
-            Console.WriteLine(result0.GetProperty("requiredLiteralInt").ToString());
-            Console.WriteLine(result0.GetProperty("requiredLiteralFloat").ToString());
-            Console.WriteLine(result0.GetProperty("requiredLiteralBool").ToString());
-            Console.WriteLine(result0.GetProperty("requiredBadDescription").ToString());
-            Console.WriteLine(result0.GetProperty("requiredNullableList")[0].ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("name").ToString());
+            Console.WriteLine(element.GetProperty("requiredUnion").ToString());
+            Console.WriteLine(element.GetProperty("requiredLiteralString").ToString());
+            Console.WriteLine(element.GetProperty("requiredLiteralInt").ToString());
+            Console.WriteLine(element.GetProperty("requiredLiteralFloat").ToString());
+            Console.WriteLine(element.GetProperty("requiredLiteralBool").ToString());
+            Console.WriteLine(element.GetProperty("requiredBadDescription").ToString());
+            Console.WriteLine(element.GetProperty("requiredNullableList")[0].ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_HelloLiteral_Async()
+        public async Task Example_HelloLiteral_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             KeyCredential credential = new KeyCredential("<key>");
@@ -2188,15 +2175,15 @@ namespace UnbrandedTypeSpec.Samples
 
             Result result = await client.HelloLiteralAsync(null);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("name").ToString());
-            Console.WriteLine(result0.GetProperty("requiredUnion").ToString());
-            Console.WriteLine(result0.GetProperty("requiredLiteralString").ToString());
-            Console.WriteLine(result0.GetProperty("requiredLiteralInt").ToString());
-            Console.WriteLine(result0.GetProperty("requiredLiteralFloat").ToString());
-            Console.WriteLine(result0.GetProperty("requiredLiteralBool").ToString());
-            Console.WriteLine(result0.GetProperty("requiredBadDescription").ToString());
-            Console.WriteLine(result0.GetProperty("requiredNullableList")[0].ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("name").ToString());
+            Console.WriteLine(element.GetProperty("requiredUnion").ToString());
+            Console.WriteLine(element.GetProperty("requiredLiteralString").ToString());
+            Console.WriteLine(element.GetProperty("requiredLiteralInt").ToString());
+            Console.WriteLine(element.GetProperty("requiredLiteralFloat").ToString());
+            Console.WriteLine(element.GetProperty("requiredLiteralBool").ToString());
+            Console.WriteLine(element.GetProperty("requiredBadDescription").ToString());
+            Console.WriteLine(element.GetProperty("requiredNullableList")[0].ToString());
         }
 
         [Test]
@@ -2209,20 +2196,20 @@ namespace UnbrandedTypeSpec.Samples
 
             Result result = client.HelloLiteral(null);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("name").ToString());
-            Console.WriteLine(result0.GetProperty("requiredUnion").ToString());
-            Console.WriteLine(result0.GetProperty("requiredLiteralString").ToString());
-            Console.WriteLine(result0.GetProperty("requiredLiteralInt").ToString());
-            Console.WriteLine(result0.GetProperty("requiredLiteralFloat").ToString());
-            Console.WriteLine(result0.GetProperty("requiredLiteralBool").ToString());
-            Console.WriteLine(result0.GetProperty("optionalLiteralString").ToString());
-            Console.WriteLine(result0.GetProperty("optionalLiteralInt").ToString());
-            Console.WriteLine(result0.GetProperty("optionalLiteralFloat").ToString());
-            Console.WriteLine(result0.GetProperty("optionalLiteralBool").ToString());
-            Console.WriteLine(result0.GetProperty("requiredBadDescription").ToString());
-            Console.WriteLine(result0.GetProperty("optionalNullableList")[0].ToString());
-            Console.WriteLine(result0.GetProperty("requiredNullableList")[0].ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("name").ToString());
+            Console.WriteLine(element.GetProperty("requiredUnion").ToString());
+            Console.WriteLine(element.GetProperty("requiredLiteralString").ToString());
+            Console.WriteLine(element.GetProperty("requiredLiteralInt").ToString());
+            Console.WriteLine(element.GetProperty("requiredLiteralFloat").ToString());
+            Console.WriteLine(element.GetProperty("requiredLiteralBool").ToString());
+            Console.WriteLine(element.GetProperty("optionalLiteralString").ToString());
+            Console.WriteLine(element.GetProperty("optionalLiteralInt").ToString());
+            Console.WriteLine(element.GetProperty("optionalLiteralFloat").ToString());
+            Console.WriteLine(element.GetProperty("optionalLiteralBool").ToString());
+            Console.WriteLine(element.GetProperty("requiredBadDescription").ToString());
+            Console.WriteLine(element.GetProperty("optionalNullableList")[0].ToString());
+            Console.WriteLine(element.GetProperty("requiredNullableList")[0].ToString());
         }
 
         [Test]
@@ -2235,25 +2222,25 @@ namespace UnbrandedTypeSpec.Samples
 
             Result result = await client.HelloLiteralAsync(null);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.GetProperty("name").ToString());
-            Console.WriteLine(result0.GetProperty("requiredUnion").ToString());
-            Console.WriteLine(result0.GetProperty("requiredLiteralString").ToString());
-            Console.WriteLine(result0.GetProperty("requiredLiteralInt").ToString());
-            Console.WriteLine(result0.GetProperty("requiredLiteralFloat").ToString());
-            Console.WriteLine(result0.GetProperty("requiredLiteralBool").ToString());
-            Console.WriteLine(result0.GetProperty("optionalLiteralString").ToString());
-            Console.WriteLine(result0.GetProperty("optionalLiteralInt").ToString());
-            Console.WriteLine(result0.GetProperty("optionalLiteralFloat").ToString());
-            Console.WriteLine(result0.GetProperty("optionalLiteralBool").ToString());
-            Console.WriteLine(result0.GetProperty("requiredBadDescription").ToString());
-            Console.WriteLine(result0.GetProperty("optionalNullableList")[0].ToString());
-            Console.WriteLine(result0.GetProperty("requiredNullableList")[0].ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("name").ToString());
+            Console.WriteLine(element.GetProperty("requiredUnion").ToString());
+            Console.WriteLine(element.GetProperty("requiredLiteralString").ToString());
+            Console.WriteLine(element.GetProperty("requiredLiteralInt").ToString());
+            Console.WriteLine(element.GetProperty("requiredLiteralFloat").ToString());
+            Console.WriteLine(element.GetProperty("requiredLiteralBool").ToString());
+            Console.WriteLine(element.GetProperty("optionalLiteralString").ToString());
+            Console.WriteLine(element.GetProperty("optionalLiteralInt").ToString());
+            Console.WriteLine(element.GetProperty("optionalLiteralFloat").ToString());
+            Console.WriteLine(element.GetProperty("optionalLiteralBool").ToString());
+            Console.WriteLine(element.GetProperty("requiredBadDescription").ToString());
+            Console.WriteLine(element.GetProperty("optionalNullableList")[0].ToString());
+            Console.WriteLine(element.GetProperty("requiredNullableList")[0].ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetUnknownValue()
+        public void Example_GetUnknownValue_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             KeyCredential credential = new KeyCredential("<key>");
@@ -2261,13 +2248,13 @@ namespace UnbrandedTypeSpec.Samples
 
             Result result = client.GetUnknownValue(null);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetUnknownValue_Async()
+        public async Task Example_GetUnknownValue_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             KeyCredential credential = new KeyCredential("<key>");
@@ -2275,8 +2262,8 @@ namespace UnbrandedTypeSpec.Samples
 
             Result result = await client.GetUnknownValueAsync(null);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.ToString());
         }
 
         [Test]
@@ -2289,8 +2276,8 @@ namespace UnbrandedTypeSpec.Samples
 
             Result result = client.GetUnknownValue(null);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.ToString());
         }
 
         [Test]
@@ -2303,8 +2290,8 @@ namespace UnbrandedTypeSpec.Samples
 
             Result result = await client.GetUnknownValueAsync(null);
 
-            JsonElement result0 = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(result0.ToString());
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.ToString());
         }
     }
 }
