@@ -150,7 +150,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 resourceModel.IsExtensionResource = resource.GetParents().Any(p => p.GetType() == typeof(ArmResourceExtension));
                 resourceModel.IsSingletonResource = resource.IsSingleton;
 
-                metadata.Resources.Add(resourceModel.SwaggerModelName, resourceModel);
+                metadata.Resources.Add(resourceModel.Name, resourceModel);
             }
             AddGeneratedFile(project, "metadata.json", JsonSerializer.Serialize(metadata));
 
