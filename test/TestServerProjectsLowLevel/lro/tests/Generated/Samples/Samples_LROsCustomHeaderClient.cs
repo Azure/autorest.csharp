@@ -16,7 +16,7 @@ using lro_LowLevel;
 
 namespace lro_LowLevel.Samples
 {
-    public class Samples_LROsCustomHeaderClient
+    public partial class Samples_LROsCustomHeaderClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]

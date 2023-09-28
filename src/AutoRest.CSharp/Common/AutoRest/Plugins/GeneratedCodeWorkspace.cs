@@ -26,6 +26,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
     {
         public static readonly string SharedFolder = "shared";
         public static readonly string GeneratedFolder = "Generated";
+        public static readonly string GeneratedTestFolder = "GeneratedTests";
 
         private static readonly IReadOnlyList<MetadataReference> AssemblyMetadataReferences;
 
@@ -51,6 +52,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
         private static readonly string[] SharedFolders = { SharedFolder };
         private static readonly string[] GeneratedFolders = { GeneratedFolder };
+        private static readonly string[] GeneratedTestFolders = { GeneratedFolder, GeneratedTestFolder };
         private static Task<Project>? _cachedProject;
 
         private Project _project;
@@ -71,9 +73,13 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             _cachedProject = Task.Run(CreateGeneratedCodeProject);
         }
 
-        public void AddGeneratedFile(string name, string text)
+        public void AddGeneratedFile(string name, string text) => AddGeneratedFile(name, text, GeneratedFolders);
+
+        public void AddGeneratedTestFile(string name, string text) => AddGeneratedFile(name, text, GeneratedTestFolders);
+
+        private void AddGeneratedFile(string name, string text, string[] folders)
         {
-            var document = _project.AddDocument(name, text, GeneratedFolders);
+            var document = _project.AddDocument(name, text, folders);
             var root = document.GetSyntaxRootAsync().GetAwaiter().GetResult();
             Debug.Assert(root != null);
 
@@ -128,9 +134,11 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             foreach (var (docName, doc) in _xmlDocFiles)
             {
                 var xmlWriter = doc.XmlDocWriter;
-                var testDocument = generatedDocs[doc.TestFileName];
-                var content = await XmlFormatter.FormatAsync(xmlWriter, testDocument);
-                yield return (docName, content);
+                if (generatedDocs.TryGetValue(doc.TestFileName, out var testDocument))
+                {
+                    var content = await XmlFormatter.FormatAsync(xmlWriter, testDocument);
+                    yield return (docName, content);
+                }
             }
         }
 
@@ -254,6 +262,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         public static bool IsCustomDocument(Document document) => !IsGeneratedDocument(document) && !IsSharedDocument(document);
         public static bool IsSharedDocument(Document document) => document.Folders.Contains(SharedFolder);
         public static bool IsGeneratedDocument(Document document) => document.Folders.Contains(GeneratedFolder);
+        public static bool IsGeneratedTestDocument(Document document) => document.Folders.Contains(GeneratedTestFolder);
 
         /// <summary>
         /// This method delegates the caller to do something on the generated code project

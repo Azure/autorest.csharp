@@ -472,7 +472,6 @@ namespace ModelsTypeSpec
         /// <param name="input"> The InputModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        /// <include file="Docs/ModelsTypeSpecClient.xml" path="doc/members/member[@name='InputToRoundTripReadOnlyAsync(InputModel,CancellationToken)']/*" />
         [Obsolete("deprecated for test")]
         public virtual async Task<Response<RoundTripReadOnlyModel>> InputToRoundTripReadOnlyAsync(InputModel input, CancellationToken cancellationToken = default)
         {
@@ -488,7 +487,6 @@ namespace ModelsTypeSpec
         /// <param name="input"> The InputModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        /// <include file="Docs/ModelsTypeSpecClient.xml" path="doc/members/member[@name='InputToRoundTripReadOnly(InputModel,CancellationToken)']/*" />
         [Obsolete("deprecated for test")]
         public virtual Response<RoundTripReadOnlyModel> InputToRoundTripReadOnly(InputModel input, CancellationToken cancellationToken = default)
         {
@@ -520,7 +518,6 @@ namespace ModelsTypeSpec
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ModelsTypeSpecClient.xml" path="doc/members/member[@name='InputToRoundTripReadOnlyAsync(RequestContent,RequestContext)']/*" />
         [Obsolete("deprecated for test")]
         public virtual async Task<Response> InputToRoundTripReadOnlyAsync(RequestContent content, RequestContext context = null)
         {
@@ -560,7 +557,6 @@ namespace ModelsTypeSpec
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ModelsTypeSpecClient.xml" path="doc/members/member[@name='InputToRoundTripReadOnly(RequestContent,RequestContext)']/*" />
         [Obsolete("deprecated for test")]
         public virtual Response InputToRoundTripReadOnly(RequestContent content, RequestContext context = null)
         {

@@ -15,7 +15,7 @@ using RenameGetList;
 
 namespace RenameGetList.Samples
 {
-    public class Samples_RenameGetListClient
+    public partial class Samples_RenameGetListClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
@@ -165,14 +165,14 @@ namespace RenameGetList.Samples
             foreach (BinaryData item in client.GetProjects(null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("projectName").ToString());
-                Console.WriteLine(result[0].GetProperty("projectKind").ToString());
-                Console.WriteLine(result[0].GetProperty("storageInputContainerName").ToString());
-                Console.WriteLine(result[0].GetProperty("language").ToString());
-                Console.WriteLine(result[0].GetProperty("createdDateTime").ToString());
-                Console.WriteLine(result[0].GetProperty("lastModifiedDateTime").ToString());
-                Console.WriteLine(result[0].GetProperty("lastTrainedDateTime").ToString());
-                Console.WriteLine(result[0].GetProperty("lastDeployedDateTime").ToString());
+                Console.WriteLine(result.GetProperty("projectName").ToString());
+                Console.WriteLine(result.GetProperty("projectKind").ToString());
+                Console.WriteLine(result.GetProperty("storageInputContainerName").ToString());
+                Console.WriteLine(result.GetProperty("language").ToString());
+                Console.WriteLine(result.GetProperty("createdDateTime").ToString());
+                Console.WriteLine(result.GetProperty("lastModifiedDateTime").ToString());
+                Console.WriteLine(result.GetProperty("lastTrainedDateTime").ToString());
+                Console.WriteLine(result.GetProperty("lastDeployedDateTime").ToString());
             }
         }
 
@@ -186,14 +186,14 @@ namespace RenameGetList.Samples
             await foreach (BinaryData item in client.GetProjectsAsync(null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("projectName").ToString());
-                Console.WriteLine(result[0].GetProperty("projectKind").ToString());
-                Console.WriteLine(result[0].GetProperty("storageInputContainerName").ToString());
-                Console.WriteLine(result[0].GetProperty("language").ToString());
-                Console.WriteLine(result[0].GetProperty("createdDateTime").ToString());
-                Console.WriteLine(result[0].GetProperty("lastModifiedDateTime").ToString());
-                Console.WriteLine(result[0].GetProperty("lastTrainedDateTime").ToString());
-                Console.WriteLine(result[0].GetProperty("lastDeployedDateTime").ToString());
+                Console.WriteLine(result.GetProperty("projectName").ToString());
+                Console.WriteLine(result.GetProperty("projectKind").ToString());
+                Console.WriteLine(result.GetProperty("storageInputContainerName").ToString());
+                Console.WriteLine(result.GetProperty("language").ToString());
+                Console.WriteLine(result.GetProperty("createdDateTime").ToString());
+                Console.WriteLine(result.GetProperty("lastModifiedDateTime").ToString());
+                Console.WriteLine(result.GetProperty("lastTrainedDateTime").ToString());
+                Console.WriteLine(result.GetProperty("lastDeployedDateTime").ToString());
             }
         }
 
@@ -207,17 +207,17 @@ namespace RenameGetList.Samples
             foreach (BinaryData item in client.GetProjects(null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("projectName").ToString());
-                Console.WriteLine(result[0].GetProperty("projectKind").ToString());
-                Console.WriteLine(result[0].GetProperty("storageInputContainerName").ToString());
-                Console.WriteLine(result[0].GetProperty("settings").GetProperty("<key>").ToString());
-                Console.WriteLine(result[0].GetProperty("multilingual").ToString());
-                Console.WriteLine(result[0].GetProperty("description").ToString());
-                Console.WriteLine(result[0].GetProperty("language").ToString());
-                Console.WriteLine(result[0].GetProperty("createdDateTime").ToString());
-                Console.WriteLine(result[0].GetProperty("lastModifiedDateTime").ToString());
-                Console.WriteLine(result[0].GetProperty("lastTrainedDateTime").ToString());
-                Console.WriteLine(result[0].GetProperty("lastDeployedDateTime").ToString());
+                Console.WriteLine(result.GetProperty("projectName").ToString());
+                Console.WriteLine(result.GetProperty("projectKind").ToString());
+                Console.WriteLine(result.GetProperty("storageInputContainerName").ToString());
+                Console.WriteLine(result.GetProperty("settings").GetProperty("<key>").ToString());
+                Console.WriteLine(result.GetProperty("multilingual").ToString());
+                Console.WriteLine(result.GetProperty("description").ToString());
+                Console.WriteLine(result.GetProperty("language").ToString());
+                Console.WriteLine(result.GetProperty("createdDateTime").ToString());
+                Console.WriteLine(result.GetProperty("lastModifiedDateTime").ToString());
+                Console.WriteLine(result.GetProperty("lastTrainedDateTime").ToString());
+                Console.WriteLine(result.GetProperty("lastDeployedDateTime").ToString());
             }
         }
 
@@ -231,17 +231,17 @@ namespace RenameGetList.Samples
             await foreach (BinaryData item in client.GetProjectsAsync(null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("projectName").ToString());
-                Console.WriteLine(result[0].GetProperty("projectKind").ToString());
-                Console.WriteLine(result[0].GetProperty("storageInputContainerName").ToString());
-                Console.WriteLine(result[0].GetProperty("settings").GetProperty("<key>").ToString());
-                Console.WriteLine(result[0].GetProperty("multilingual").ToString());
-                Console.WriteLine(result[0].GetProperty("description").ToString());
-                Console.WriteLine(result[0].GetProperty("language").ToString());
-                Console.WriteLine(result[0].GetProperty("createdDateTime").ToString());
-                Console.WriteLine(result[0].GetProperty("lastModifiedDateTime").ToString());
-                Console.WriteLine(result[0].GetProperty("lastTrainedDateTime").ToString());
-                Console.WriteLine(result[0].GetProperty("lastDeployedDateTime").ToString());
+                Console.WriteLine(result.GetProperty("projectName").ToString());
+                Console.WriteLine(result.GetProperty("projectKind").ToString());
+                Console.WriteLine(result.GetProperty("storageInputContainerName").ToString());
+                Console.WriteLine(result.GetProperty("settings").GetProperty("<key>").ToString());
+                Console.WriteLine(result.GetProperty("multilingual").ToString());
+                Console.WriteLine(result.GetProperty("description").ToString());
+                Console.WriteLine(result.GetProperty("language").ToString());
+                Console.WriteLine(result.GetProperty("createdDateTime").ToString());
+                Console.WriteLine(result.GetProperty("lastModifiedDateTime").ToString());
+                Console.WriteLine(result.GetProperty("lastTrainedDateTime").ToString());
+                Console.WriteLine(result.GetProperty("lastDeployedDateTime").ToString());
             }
         }
 
@@ -255,7 +255,7 @@ namespace RenameGetList.Samples
             foreach (BinaryData item in client.GetDeployments("<projectName>", null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("name").ToString());
+                Console.WriteLine(result.GetProperty("name").ToString());
             }
         }
 
@@ -269,7 +269,7 @@ namespace RenameGetList.Samples
             await foreach (BinaryData item in client.GetDeploymentsAsync("<projectName>", null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("name").ToString());
+                Console.WriteLine(result.GetProperty("name").ToString());
             }
         }
 
@@ -283,7 +283,7 @@ namespace RenameGetList.Samples
             foreach (BinaryData item in client.GetDeployments("<projectName>", null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("name").ToString());
+                Console.WriteLine(result.GetProperty("name").ToString());
             }
         }
 
@@ -297,7 +297,7 @@ namespace RenameGetList.Samples
             await foreach (BinaryData item in client.GetDeploymentsAsync("<projectName>", null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("name").ToString());
+                Console.WriteLine(result.GetProperty("name").ToString());
             }
         }
     }

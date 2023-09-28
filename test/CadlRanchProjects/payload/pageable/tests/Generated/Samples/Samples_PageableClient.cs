@@ -15,7 +15,7 @@ using Payload.Pageable.Models;
 
 namespace Payload.Pageable.Samples
 {
-    public class Samples_PageableClient
+    public partial class Samples_PageableClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
@@ -26,7 +26,7 @@ namespace Payload.Pageable.Samples
             foreach (BinaryData item in client.GetPageables(null, null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("name").ToString());
+                Console.WriteLine(result.GetProperty("name").ToString());
             }
         }
 
@@ -39,7 +39,7 @@ namespace Payload.Pageable.Samples
             await foreach (BinaryData item in client.GetPageablesAsync(null, null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("name").ToString());
+                Console.WriteLine(result.GetProperty("name").ToString());
             }
         }
 
@@ -74,7 +74,7 @@ namespace Payload.Pageable.Samples
             foreach (BinaryData item in client.GetPageables(1234, null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("name").ToString());
+                Console.WriteLine(result.GetProperty("name").ToString());
             }
         }
 
@@ -87,7 +87,7 @@ namespace Payload.Pageable.Samples
             await foreach (BinaryData item in client.GetPageablesAsync(1234, null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("name").ToString());
+                Console.WriteLine(result.GetProperty("name").ToString());
             }
         }
 

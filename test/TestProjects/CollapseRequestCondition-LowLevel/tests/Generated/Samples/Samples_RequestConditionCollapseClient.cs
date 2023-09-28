@@ -15,7 +15,7 @@ using NUnit.Framework;
 
 namespace CollapseRequestCondition_LowLevel.Samples
 {
-    public class Samples_RequestConditionCollapseClient
+    public partial class Samples_RequestConditionCollapseClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
@@ -26,6 +26,7 @@ namespace CollapseRequestCondition_LowLevel.Samples
 
             RequestContent content = null;
             Response response = client.CollapsePut(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -38,6 +39,7 @@ namespace CollapseRequestCondition_LowLevel.Samples
 
             RequestContent content = null;
             Response response = await client.CollapsePutAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -50,6 +52,7 @@ namespace CollapseRequestCondition_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("<body>");
             Response response = client.CollapsePut(content, requestConditions: null);
+
             Console.WriteLine(response.Status);
         }
 
@@ -62,6 +65,7 @@ namespace CollapseRequestCondition_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("<body>");
             Response response = await client.CollapsePutAsync(content, requestConditions: null);
+
             Console.WriteLine(response.Status);
         }
 
@@ -73,6 +77,7 @@ namespace CollapseRequestCondition_LowLevel.Samples
             RequestConditionCollapseClient client = new RequestConditionCollapseClient(credential);
 
             Response response = client.CollapseGet();
+
             Console.WriteLine(response.Status);
         }
 
@@ -84,6 +89,7 @@ namespace CollapseRequestCondition_LowLevel.Samples
             RequestConditionCollapseClient client = new RequestConditionCollapseClient(credential);
 
             Response response = await client.CollapseGetAsync();
+
             Console.WriteLine(response.Status);
         }
 
@@ -95,6 +101,7 @@ namespace CollapseRequestCondition_LowLevel.Samples
             RequestConditionCollapseClient client = new RequestConditionCollapseClient(credential);
 
             Response response = client.CollapseGet(requestConditions: null);
+
             Console.WriteLine(response.Status);
         }
 
@@ -106,6 +113,7 @@ namespace CollapseRequestCondition_LowLevel.Samples
             RequestConditionCollapseClient client = new RequestConditionCollapseClient(credential);
 
             Response response = await client.CollapseGetAsync(requestConditions: null);
+
             Console.WriteLine(response.Status);
         }
 
@@ -117,6 +125,7 @@ namespace CollapseRequestCondition_LowLevel.Samples
             RequestConditionCollapseClient client = new RequestConditionCollapseClient(credential);
 
             Response response = client.MissIfNoneMatchGet();
+
             Console.WriteLine(response.Status);
         }
 
@@ -128,6 +137,7 @@ namespace CollapseRequestCondition_LowLevel.Samples
             RequestConditionCollapseClient client = new RequestConditionCollapseClient(credential);
 
             Response response = await client.MissIfNoneMatchGetAsync();
+
             Console.WriteLine(response.Status);
         }
 
@@ -139,6 +149,7 @@ namespace CollapseRequestCondition_LowLevel.Samples
             RequestConditionCollapseClient client = new RequestConditionCollapseClient(credential);
 
             Response response = client.MissIfNoneMatchGet(requestConditions: null);
+
             Console.WriteLine(response.Status);
         }
 
@@ -150,6 +161,7 @@ namespace CollapseRequestCondition_LowLevel.Samples
             RequestConditionCollapseClient client = new RequestConditionCollapseClient(credential);
 
             Response response = await client.MissIfNoneMatchGetAsync(requestConditions: null);
+
             Console.WriteLine(response.Status);
         }
 
@@ -161,6 +173,7 @@ namespace CollapseRequestCondition_LowLevel.Samples
             RequestConditionCollapseClient client = new RequestConditionCollapseClient(credential);
 
             Response response = client.MissIfMatchGet();
+
             Console.WriteLine(response.Status);
         }
 
@@ -172,6 +185,7 @@ namespace CollapseRequestCondition_LowLevel.Samples
             RequestConditionCollapseClient client = new RequestConditionCollapseClient(credential);
 
             Response response = await client.MissIfMatchGetAsync();
+
             Console.WriteLine(response.Status);
         }
 
@@ -183,6 +197,7 @@ namespace CollapseRequestCondition_LowLevel.Samples
             RequestConditionCollapseClient client = new RequestConditionCollapseClient(credential);
 
             Response response = client.MissIfMatchGet(requestConditions: null);
+
             Console.WriteLine(response.Status);
         }
 
@@ -194,6 +209,7 @@ namespace CollapseRequestCondition_LowLevel.Samples
             RequestConditionCollapseClient client = new RequestConditionCollapseClient(credential);
 
             Response response = await client.MissIfMatchGetAsync(requestConditions: null);
+
             Console.WriteLine(response.Status);
         }
 
@@ -205,6 +221,7 @@ namespace CollapseRequestCondition_LowLevel.Samples
             RequestConditionCollapseClient client = new RequestConditionCollapseClient(credential);
 
             Response response = client.MissIfModifiedSinceGet();
+
             Console.WriteLine(response.Status);
         }
 
@@ -216,6 +233,7 @@ namespace CollapseRequestCondition_LowLevel.Samples
             RequestConditionCollapseClient client = new RequestConditionCollapseClient(credential);
 
             Response response = await client.MissIfModifiedSinceGetAsync();
+
             Console.WriteLine(response.Status);
         }
 
@@ -227,6 +245,7 @@ namespace CollapseRequestCondition_LowLevel.Samples
             RequestConditionCollapseClient client = new RequestConditionCollapseClient(credential);
 
             Response response = client.MissIfModifiedSinceGet(requestConditions: null);
+
             Console.WriteLine(response.Status);
         }
 
@@ -238,6 +257,7 @@ namespace CollapseRequestCondition_LowLevel.Samples
             RequestConditionCollapseClient client = new RequestConditionCollapseClient(credential);
 
             Response response = await client.MissIfModifiedSinceGetAsync(requestConditions: null);
+
             Console.WriteLine(response.Status);
         }
 
@@ -249,6 +269,7 @@ namespace CollapseRequestCondition_LowLevel.Samples
             RequestConditionCollapseClient client = new RequestConditionCollapseClient(credential);
 
             Response response = client.MissIfUnmodifiedSinceGet();
+
             Console.WriteLine(response.Status);
         }
 
@@ -260,6 +281,7 @@ namespace CollapseRequestCondition_LowLevel.Samples
             RequestConditionCollapseClient client = new RequestConditionCollapseClient(credential);
 
             Response response = await client.MissIfUnmodifiedSinceGetAsync();
+
             Console.WriteLine(response.Status);
         }
 
@@ -271,6 +293,7 @@ namespace CollapseRequestCondition_LowLevel.Samples
             RequestConditionCollapseClient client = new RequestConditionCollapseClient(credential);
 
             Response response = client.MissIfUnmodifiedSinceGet(requestConditions: null);
+
             Console.WriteLine(response.Status);
         }
 
@@ -282,6 +305,7 @@ namespace CollapseRequestCondition_LowLevel.Samples
             RequestConditionCollapseClient client = new RequestConditionCollapseClient(credential);
 
             Response response = await client.MissIfUnmodifiedSinceGetAsync(requestConditions: null);
+
             Console.WriteLine(response.Status);
         }
 
@@ -293,6 +317,7 @@ namespace CollapseRequestCondition_LowLevel.Samples
             RequestConditionCollapseClient client = new RequestConditionCollapseClient(credential);
 
             Response response = client.MissIfMatchIfNoneMatchGet();
+
             Console.WriteLine(response.Status);
         }
 
@@ -304,6 +329,7 @@ namespace CollapseRequestCondition_LowLevel.Samples
             RequestConditionCollapseClient client = new RequestConditionCollapseClient(credential);
 
             Response response = await client.MissIfMatchIfNoneMatchGetAsync();
+
             Console.WriteLine(response.Status);
         }
 
@@ -315,6 +341,7 @@ namespace CollapseRequestCondition_LowLevel.Samples
             RequestConditionCollapseClient client = new RequestConditionCollapseClient(credential);
 
             Response response = client.MissIfMatchIfNoneMatchGet(requestConditions: null);
+
             Console.WriteLine(response.Status);
         }
 
@@ -326,6 +353,7 @@ namespace CollapseRequestCondition_LowLevel.Samples
             RequestConditionCollapseClient client = new RequestConditionCollapseClient(credential);
 
             Response response = await client.MissIfMatchIfNoneMatchGetAsync(requestConditions: null);
+
             Console.WriteLine(response.Status);
         }
 
@@ -337,6 +365,7 @@ namespace CollapseRequestCondition_LowLevel.Samples
             RequestConditionCollapseClient client = new RequestConditionCollapseClient(credential);
 
             Response response = client.IfModifiedSinceGet();
+
             Console.WriteLine(response.Status);
         }
 
@@ -348,6 +377,7 @@ namespace CollapseRequestCondition_LowLevel.Samples
             RequestConditionCollapseClient client = new RequestConditionCollapseClient(credential);
 
             Response response = await client.IfModifiedSinceGetAsync();
+
             Console.WriteLine(response.Status);
         }
 
@@ -359,6 +389,7 @@ namespace CollapseRequestCondition_LowLevel.Samples
             RequestConditionCollapseClient client = new RequestConditionCollapseClient(credential);
 
             Response response = client.IfModifiedSinceGet(requestConditions: null);
+
             Console.WriteLine(response.Status);
         }
 
@@ -370,6 +401,7 @@ namespace CollapseRequestCondition_LowLevel.Samples
             RequestConditionCollapseClient client = new RequestConditionCollapseClient(credential);
 
             Response response = await client.IfModifiedSinceGetAsync(requestConditions: null);
+
             Console.WriteLine(response.Status);
         }
 
@@ -381,6 +413,7 @@ namespace CollapseRequestCondition_LowLevel.Samples
             RequestConditionCollapseClient client = new RequestConditionCollapseClient(credential);
 
             Response response = client.IfUnmodifiedSinceGet();
+
             Console.WriteLine(response.Status);
         }
 
@@ -392,6 +425,7 @@ namespace CollapseRequestCondition_LowLevel.Samples
             RequestConditionCollapseClient client = new RequestConditionCollapseClient(credential);
 
             Response response = await client.IfUnmodifiedSinceGetAsync();
+
             Console.WriteLine(response.Status);
         }
 
@@ -403,6 +437,7 @@ namespace CollapseRequestCondition_LowLevel.Samples
             RequestConditionCollapseClient client = new RequestConditionCollapseClient(credential);
 
             Response response = client.IfUnmodifiedSinceGet(requestConditions: null);
+
             Console.WriteLine(response.Status);
         }
 
@@ -414,6 +449,7 @@ namespace CollapseRequestCondition_LowLevel.Samples
             RequestConditionCollapseClient client = new RequestConditionCollapseClient(credential);
 
             Response response = await client.IfUnmodifiedSinceGetAsync(requestConditions: null);
+
             Console.WriteLine(response.Status);
         }
     }

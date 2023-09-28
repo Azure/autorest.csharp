@@ -17,7 +17,7 @@ using _Type.Model.Inheritance.NotDiscriminated.Models;
 
 namespace _Type.Model.Inheritance.NotDiscriminated.Samples
 {
-    public class Samples_NotDiscriminatedClient
+    public partial class Samples_NotDiscriminatedClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
@@ -32,6 +32,7 @@ namespace _Type.Model.Inheritance.NotDiscriminated.Samples
                 name = "<name>",
             });
             Response response = client.PostValid(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -48,6 +49,7 @@ namespace _Type.Model.Inheritance.NotDiscriminated.Samples
                 name = "<name>",
             });
             Response response = await client.PostValidAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -59,7 +61,6 @@ namespace _Type.Model.Inheritance.NotDiscriminated.Samples
 
             Siamese input = new Siamese("<name>", 1234, true);
             Response response = client.PostValid(input);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -70,7 +71,6 @@ namespace _Type.Model.Inheritance.NotDiscriminated.Samples
 
             Siamese input = new Siamese("<name>", 1234, true);
             Response response = await client.PostValidAsync(input);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -86,6 +86,7 @@ namespace _Type.Model.Inheritance.NotDiscriminated.Samples
                 name = "<name>",
             });
             Response response = client.PostValid(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -102,6 +103,7 @@ namespace _Type.Model.Inheritance.NotDiscriminated.Samples
                 name = "<name>",
             });
             Response response = await client.PostValidAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -113,7 +115,6 @@ namespace _Type.Model.Inheritance.NotDiscriminated.Samples
 
             Siamese input = new Siamese("<name>", 1234, true);
             Response response = client.PostValid(input);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -124,7 +125,6 @@ namespace _Type.Model.Inheritance.NotDiscriminated.Samples
 
             Siamese input = new Siamese("<name>", 1234, true);
             Response response = await client.PostValidAsync(input);
-            Console.WriteLine(response.Status);
         }
 
         [Test]

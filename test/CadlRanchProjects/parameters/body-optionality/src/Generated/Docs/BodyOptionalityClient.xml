@@ -9,7 +9,6 @@ BodyOptionalityClient client = new BodyOptionalityClient();
 
 BodyModel body = new BodyModel("<name>");
 Response response = await client.RequiredExplicitAsync(body);
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call RequiredExplicitAsync with all parameters.
 <code><![CDATA[
@@ -17,7 +16,6 @@ BodyOptionalityClient client = new BodyOptionalityClient();
 
 BodyModel body = new BodyModel("<name>");
 Response response = await client.RequiredExplicitAsync(body);
-Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="RequiredExplicit(BodyModel,CancellationToken)">
@@ -28,7 +26,6 @@ BodyOptionalityClient client = new BodyOptionalityClient();
 
 BodyModel body = new BodyModel("<name>");
 Response response = client.RequiredExplicit(body);
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call RequiredExplicit with all parameters.
 <code><![CDATA[
@@ -36,7 +33,6 @@ BodyOptionalityClient client = new BodyOptionalityClient();
 
 BodyModel body = new BodyModel("<name>");
 Response response = client.RequiredExplicit(body);
-Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="RequiredExplicitAsync(RequestContent,RequestContext)">
@@ -50,7 +46,15 @@ RequestContent content = RequestContent.Create(new
     name = "<name>",
 });
 Response response = await client.RequiredExplicitAsync(content);
+
 Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call RequiredExplicitAsync.
+<code><![CDATA[
+BodyOptionalityClient client = new BodyOptionalityClient();
+
+BodyModel body = new BodyModel("<name>");
+Response response = await client.RequiredExplicitAsync(body);
 ]]></code>
 This sample shows how to call RequiredExplicitAsync with all request content.
 <code><![CDATA[
@@ -61,7 +65,15 @@ RequestContent content = RequestContent.Create(new
     name = "<name>",
 });
 Response response = await client.RequiredExplicitAsync(content);
+
 Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call RequiredExplicitAsync with all parameters.
+<code><![CDATA[
+BodyOptionalityClient client = new BodyOptionalityClient();
+
+BodyModel body = new BodyModel("<name>");
+Response response = await client.RequiredExplicitAsync(body);
 ]]></code></example>
     </member>
     <member name="RequiredExplicit(RequestContent,RequestContext)">
@@ -75,7 +87,15 @@ RequestContent content = RequestContent.Create(new
     name = "<name>",
 });
 Response response = client.RequiredExplicit(content);
+
 Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call RequiredExplicit.
+<code><![CDATA[
+BodyOptionalityClient client = new BodyOptionalityClient();
+
+BodyModel body = new BodyModel("<name>");
+Response response = client.RequiredExplicit(body);
 ]]></code>
 This sample shows how to call RequiredExplicit with all request content.
 <code><![CDATA[
@@ -86,7 +106,15 @@ RequestContent content = RequestContent.Create(new
     name = "<name>",
 });
 Response response = client.RequiredExplicit(content);
+
 Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call RequiredExplicit with all parameters.
+<code><![CDATA[
+BodyOptionalityClient client = new BodyOptionalityClient();
+
+BodyModel body = new BodyModel("<name>");
+Response response = client.RequiredExplicit(body);
 ]]></code></example>
     </member>
     <member name="RequiredImplicitAsync(BodyModel,CancellationToken)">
@@ -97,7 +125,6 @@ BodyOptionalityClient client = new BodyOptionalityClient();
 
 BodyModel bodyModel = new BodyModel("<name>");
 Response response = await client.RequiredImplicitAsync(bodyModel);
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call RequiredImplicitAsync with all parameters.
 <code><![CDATA[
@@ -105,7 +132,6 @@ BodyOptionalityClient client = new BodyOptionalityClient();
 
 BodyModel bodyModel = new BodyModel("<name>");
 Response response = await client.RequiredImplicitAsync(bodyModel);
-Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="RequiredImplicit(BodyModel,CancellationToken)">
@@ -116,7 +142,6 @@ BodyOptionalityClient client = new BodyOptionalityClient();
 
 BodyModel bodyModel = new BodyModel("<name>");
 Response response = client.RequiredImplicit(bodyModel);
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call RequiredImplicit with all parameters.
 <code><![CDATA[
@@ -124,7 +149,6 @@ BodyOptionalityClient client = new BodyOptionalityClient();
 
 BodyModel bodyModel = new BodyModel("<name>");
 Response response = client.RequiredImplicit(bodyModel);
-Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="RequiredImplicitAsync(RequestContent,RequestContext)">
@@ -138,7 +162,15 @@ RequestContent content = RequestContent.Create(new
     name = "<name>",
 });
 Response response = await client.RequiredImplicitAsync(content);
+
 Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call RequiredImplicitAsync.
+<code><![CDATA[
+BodyOptionalityClient client = new BodyOptionalityClient();
+
+BodyModel bodyModel = new BodyModel("<name>");
+Response response = await client.RequiredImplicitAsync(bodyModel);
 ]]></code>
 This sample shows how to call RequiredImplicitAsync with all request content.
 <code><![CDATA[
@@ -149,7 +181,15 @@ RequestContent content = RequestContent.Create(new
     name = "<name>",
 });
 Response response = await client.RequiredImplicitAsync(content);
+
 Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call RequiredImplicitAsync with all parameters.
+<code><![CDATA[
+BodyOptionalityClient client = new BodyOptionalityClient();
+
+BodyModel bodyModel = new BodyModel("<name>");
+Response response = await client.RequiredImplicitAsync(bodyModel);
 ]]></code></example>
     </member>
     <member name="RequiredImplicit(RequestContent,RequestContext)">
@@ -163,7 +203,15 @@ RequestContent content = RequestContent.Create(new
     name = "<name>",
 });
 Response response = client.RequiredImplicit(content);
+
 Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call RequiredImplicit.
+<code><![CDATA[
+BodyOptionalityClient client = new BodyOptionalityClient();
+
+BodyModel bodyModel = new BodyModel("<name>");
+Response response = client.RequiredImplicit(bodyModel);
 ]]></code>
 This sample shows how to call RequiredImplicit with all request content.
 <code><![CDATA[
@@ -174,7 +222,15 @@ RequestContent content = RequestContent.Create(new
     name = "<name>",
 });
 Response response = client.RequiredImplicit(content);
+
 Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call RequiredImplicit with all parameters.
+<code><![CDATA[
+BodyOptionalityClient client = new BodyOptionalityClient();
+
+BodyModel bodyModel = new BodyModel("<name>");
+Response response = client.RequiredImplicit(bodyModel);
 ]]></code></example>
     </member>
   </members>

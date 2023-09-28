@@ -14,7 +14,7 @@ using NUnit.Framework;
 
 namespace Encode.Datetime.Samples
 {
-    internal class Samples_ResponseHeader
+    public partial class Samples_ResponseHeader
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
@@ -23,6 +23,7 @@ namespace Encode.Datetime.Samples
             ResponseHeader client = new DatetimeClient().GetResponseHeaderClient(apiVersion: "1.0.0");
 
             Response response = client.Default();
+
             Console.WriteLine(response.Status);
         }
 
@@ -33,6 +34,7 @@ namespace Encode.Datetime.Samples
             ResponseHeader client = new DatetimeClient().GetResponseHeaderClient(apiVersion: "1.0.0");
 
             Response response = await client.DefaultAsync();
+
             Console.WriteLine(response.Status);
         }
 
@@ -43,6 +45,7 @@ namespace Encode.Datetime.Samples
             ResponseHeader client = new DatetimeClient().GetResponseHeaderClient(apiVersion: "1.0.0");
 
             Response response = client.Default();
+
             Console.WriteLine(response.Status);
         }
 
@@ -53,6 +56,7 @@ namespace Encode.Datetime.Samples
             ResponseHeader client = new DatetimeClient().GetResponseHeaderClient(apiVersion: "1.0.0");
 
             Response response = await client.DefaultAsync();
+
             Console.WriteLine(response.Status);
         }
 
@@ -63,6 +67,7 @@ namespace Encode.Datetime.Samples
             ResponseHeader client = new DatetimeClient().GetResponseHeaderClient(apiVersion: "1.0.0");
 
             Response response = client.Rfc3339();
+
             Console.WriteLine(response.Status);
         }
 
@@ -73,6 +78,7 @@ namespace Encode.Datetime.Samples
             ResponseHeader client = new DatetimeClient().GetResponseHeaderClient(apiVersion: "1.0.0");
 
             Response response = await client.Rfc3339Async();
+
             Console.WriteLine(response.Status);
         }
 
@@ -83,6 +89,7 @@ namespace Encode.Datetime.Samples
             ResponseHeader client = new DatetimeClient().GetResponseHeaderClient(apiVersion: "1.0.0");
 
             Response response = client.Rfc3339();
+
             Console.WriteLine(response.Status);
         }
 
@@ -93,6 +100,7 @@ namespace Encode.Datetime.Samples
             ResponseHeader client = new DatetimeClient().GetResponseHeaderClient(apiVersion: "1.0.0");
 
             Response response = await client.Rfc3339Async();
+
             Console.WriteLine(response.Status);
         }
 
@@ -103,6 +111,7 @@ namespace Encode.Datetime.Samples
             ResponseHeader client = new DatetimeClient().GetResponseHeaderClient(apiVersion: "1.0.0");
 
             Response response = client.Rfc7231();
+
             Console.WriteLine(response.Status);
         }
 
@@ -113,6 +122,7 @@ namespace Encode.Datetime.Samples
             ResponseHeader client = new DatetimeClient().GetResponseHeaderClient(apiVersion: "1.0.0");
 
             Response response = await client.Rfc7231Async();
+
             Console.WriteLine(response.Status);
         }
 
@@ -123,6 +133,7 @@ namespace Encode.Datetime.Samples
             ResponseHeader client = new DatetimeClient().GetResponseHeaderClient(apiVersion: "1.0.0");
 
             Response response = client.Rfc7231();
+
             Console.WriteLine(response.Status);
         }
 
@@ -133,6 +144,7 @@ namespace Encode.Datetime.Samples
             ResponseHeader client = new DatetimeClient().GetResponseHeaderClient(apiVersion: "1.0.0");
 
             Response response = await client.Rfc7231Async();
+
             Console.WriteLine(response.Status);
         }
 
@@ -143,6 +155,7 @@ namespace Encode.Datetime.Samples
             ResponseHeader client = new DatetimeClient().GetResponseHeaderClient(apiVersion: "1.0.0");
 
             Response response = client.UnixTimestamp();
+
             Console.WriteLine(response.Status);
         }
 
@@ -153,6 +166,7 @@ namespace Encode.Datetime.Samples
             ResponseHeader client = new DatetimeClient().GetResponseHeaderClient(apiVersion: "1.0.0");
 
             Response response = await client.UnixTimestampAsync();
+
             Console.WriteLine(response.Status);
         }
 
@@ -163,6 +177,7 @@ namespace Encode.Datetime.Samples
             ResponseHeader client = new DatetimeClient().GetResponseHeaderClient(apiVersion: "1.0.0");
 
             Response response = client.UnixTimestamp();
+
             Console.WriteLine(response.Status);
         }
 
@@ -173,6 +188,7 @@ namespace Encode.Datetime.Samples
             ResponseHeader client = new DatetimeClient().GetResponseHeaderClient(apiVersion: "1.0.0");
 
             Response response = await client.UnixTimestampAsync();
+
             Console.WriteLine(response.Status);
         }
     }

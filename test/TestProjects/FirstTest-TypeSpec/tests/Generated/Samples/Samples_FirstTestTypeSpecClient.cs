@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
@@ -18,7 +17,7 @@ using NUnit.Framework;
 
 namespace FirstTestTypeSpec.Samples
 {
-    public class Samples_FirstTestTypeSpecClient
+    public partial class Samples_FirstTestTypeSpecClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
@@ -216,10 +215,10 @@ namespace FirstTestTypeSpec.Samples
                 requiredLiteralFloat = 1.23F,
                 requiredLiteralBool = false,
                 requiredBadDescription = "<requiredBadDescription>",
-                requiredNullableList = new List<object>()
-{
+                requiredNullableList = new object[]
+            {
 1234
-},
+            },
             });
             Response response = client.PatchAction(content);
 
@@ -250,10 +249,10 @@ namespace FirstTestTypeSpec.Samples
                 requiredLiteralFloat = 1.23F,
                 requiredLiteralBool = false,
                 requiredBadDescription = "<requiredBadDescription>",
-                requiredNullableList = new List<object>()
-{
+                requiredNullableList = new object[]
+            {
 1234
-},
+            },
             });
             Response response = await client.PatchActionAsync(content);
 
@@ -288,14 +287,14 @@ namespace FirstTestTypeSpec.Samples
                 optionalLiteralFloat = 4.56F,
                 optionalLiteralBool = true,
                 requiredBadDescription = "<requiredBadDescription>",
-                optionalNullableList = new List<object>()
-{
+                optionalNullableList = new object[]
+            {
 1234
-},
-                requiredNullableList = new List<object>()
-{
+            },
+                requiredNullableList = new object[]
+            {
 1234
-},
+            },
             });
             Response response = client.PatchAction(content);
 
@@ -335,14 +334,14 @@ namespace FirstTestTypeSpec.Samples
                 optionalLiteralFloat = 4.56F,
                 optionalLiteralBool = true,
                 requiredBadDescription = "<requiredBadDescription>",
-                optionalNullableList = new List<object>()
-{
+                optionalNullableList = new object[]
+            {
 1234
-},
-                requiredNullableList = new List<object>()
-{
+            },
+                requiredNullableList = new object[]
+            {
 1234
-},
+            },
             });
             Response response = await client.PatchActionAsync(content);
 
@@ -378,10 +377,10 @@ namespace FirstTestTypeSpec.Samples
                 requiredLiteralFloat = 1.23F,
                 requiredLiteralBool = false,
                 requiredBadDescription = "<requiredBadDescription>",
-                requiredNullableList = new List<object>()
-{
+                requiredNullableList = new object[]
+            {
 1234
-},
+            },
             });
             Response response = client.AnonymousBody(content);
 
@@ -412,10 +411,10 @@ namespace FirstTestTypeSpec.Samples
                 requiredLiteralFloat = 1.23F,
                 requiredLiteralBool = false,
                 requiredBadDescription = "<requiredBadDescription>",
-                requiredNullableList = new List<object>()
-{
+                requiredNullableList = new object[]
+            {
 1234
-},
+            },
             });
             Response response = await client.AnonymousBodyAsync(content);
 
@@ -450,14 +449,14 @@ namespace FirstTestTypeSpec.Samples
                 optionalLiteralFloat = 4.56F,
                 optionalLiteralBool = true,
                 requiredBadDescription = "<requiredBadDescription>",
-                optionalNullableList = new List<object>()
-{
+                optionalNullableList = new object[]
+            {
 1234
-},
-                requiredNullableList = new List<object>()
-{
+            },
+                requiredNullableList = new object[]
+            {
 1234
-},
+            },
             });
             Response response = client.AnonymousBody(content);
 
@@ -497,14 +496,14 @@ namespace FirstTestTypeSpec.Samples
                 optionalLiteralFloat = 4.56F,
                 optionalLiteralBool = true,
                 requiredBadDescription = "<requiredBadDescription>",
-                optionalNullableList = new List<object>()
-{
+                optionalNullableList = new object[]
+            {
 1234
-},
-                requiredNullableList = new List<object>()
-{
+            },
+                requiredNullableList = new object[]
+            {
 1234
-},
+            },
             });
             Response response = await client.AnonymousBodyAsync(content);
 
@@ -644,6 +643,7 @@ namespace FirstTestTypeSpec.Samples
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
             Response response = client.AddTimeHeader();
+
             Console.WriteLine(response.Status);
         }
 
@@ -655,6 +655,7 @@ namespace FirstTestTypeSpec.Samples
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
             Response response = await client.AddTimeHeaderAsync();
+
             Console.WriteLine(response.Status);
         }
 
@@ -666,6 +667,7 @@ namespace FirstTestTypeSpec.Samples
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
             Response response = client.AddTimeHeader();
+
             Console.WriteLine(response.Status);
         }
 
@@ -677,6 +679,7 @@ namespace FirstTestTypeSpec.Samples
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
             Response response = await client.AddTimeHeaderAsync();
+
             Console.WriteLine(response.Status);
         }
 
@@ -693,6 +696,7 @@ namespace FirstTestTypeSpec.Samples
                 guid = "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a",
             });
             Response response = client.StringFormat(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -709,6 +713,7 @@ namespace FirstTestTypeSpec.Samples
                 guid = "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a",
             });
             Response response = await client.StringFormatAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -721,7 +726,6 @@ namespace FirstTestTypeSpec.Samples
 
             ModelWithFormat body = new ModelWithFormat(new Uri("http://localhost:3000"), Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
             Response response = client.StringFormat(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), body);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -733,7 +737,6 @@ namespace FirstTestTypeSpec.Samples
 
             ModelWithFormat body = new ModelWithFormat(new Uri("http://localhost:3000"), Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
             Response response = await client.StringFormatAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), body);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -749,6 +752,7 @@ namespace FirstTestTypeSpec.Samples
                 guid = "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a",
             });
             Response response = client.StringFormat(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -765,6 +769,7 @@ namespace FirstTestTypeSpec.Samples
                 guid = "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a",
             });
             Response response = await client.StringFormatAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -777,7 +782,6 @@ namespace FirstTestTypeSpec.Samples
 
             ModelWithFormat body = new ModelWithFormat(new Uri("http://localhost:3000"), Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
             Response response = client.StringFormat(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), body);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -789,7 +793,6 @@ namespace FirstTestTypeSpec.Samples
 
             ModelWithFormat body = new ModelWithFormat(new Uri("http://localhost:3000"), Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
             Response response = await client.StringFormatAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), body);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -913,7 +916,8 @@ namespace FirstTestTypeSpec.Samples
 
             Response response = client.ReturnsAnonymousModel(null);
 
-            Console.WriteLine(response.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -925,7 +929,8 @@ namespace FirstTestTypeSpec.Samples
 
             Response response = await client.ReturnsAnonymousModelAsync(null);
 
-            Console.WriteLine(response.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -937,7 +942,8 @@ namespace FirstTestTypeSpec.Samples
 
             Response response = client.ReturnsAnonymousModel(null);
 
-            Console.WriteLine(response.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -949,7 +955,8 @@ namespace FirstTestTypeSpec.Samples
 
             Response response = await client.ReturnsAnonymousModelAsync(null);
 
-            Console.WriteLine(response.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -960,6 +967,7 @@ namespace FirstTestTypeSpec.Samples
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
             Response<bool> response = client.HeadAsBoolean("<id>");
+
             Console.WriteLine(response.GetRawResponse().Status);
         }
 
@@ -971,6 +979,7 @@ namespace FirstTestTypeSpec.Samples
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
             Response<bool> response = await client.HeadAsBooleanAsync("<id>");
+
             Console.WriteLine(response.GetRawResponse().Status);
         }
 
@@ -982,6 +991,7 @@ namespace FirstTestTypeSpec.Samples
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
             Response<bool> response = client.HeadAsBoolean("<id>");
+
             Console.WriteLine(response.GetRawResponse().Status);
         }
 
@@ -993,6 +1003,7 @@ namespace FirstTestTypeSpec.Samples
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
             Response<bool> response = await client.HeadAsBooleanAsync("<id>");
+
             Console.WriteLine(response.GetRawResponse().Status);
         }
 
@@ -1005,6 +1016,7 @@ namespace FirstTestTypeSpec.Samples
 
             RequestContent content = RequestContent.Create("<body>");
             Response response = client.StringBody(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -1017,6 +1029,7 @@ namespace FirstTestTypeSpec.Samples
 
             RequestContent content = RequestContent.Create("<body>");
             Response response = await client.StringBodyAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -1028,7 +1041,6 @@ namespace FirstTestTypeSpec.Samples
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
             Response response = client.StringBody("<body>");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1039,7 +1051,6 @@ namespace FirstTestTypeSpec.Samples
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
             Response response = await client.StringBodyAsync("<body>");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1051,6 +1062,7 @@ namespace FirstTestTypeSpec.Samples
 
             RequestContent content = RequestContent.Create("<body>");
             Response response = client.StringBody(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -1063,6 +1075,7 @@ namespace FirstTestTypeSpec.Samples
 
             RequestContent content = RequestContent.Create("<body>");
             Response response = await client.StringBodyAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -1074,7 +1087,6 @@ namespace FirstTestTypeSpec.Samples
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
             Response response = client.StringBody("<body>");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1085,7 +1097,6 @@ namespace FirstTestTypeSpec.Samples
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
             Response response = await client.StringBodyAsync("<body>");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1097,6 +1108,7 @@ namespace FirstTestTypeSpec.Samples
 
             RequestContent content = RequestContent.Create(true);
             Response response = client.BoolBody(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -1109,6 +1121,7 @@ namespace FirstTestTypeSpec.Samples
 
             RequestContent content = RequestContent.Create(true);
             Response response = await client.BoolBodyAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -1120,7 +1133,6 @@ namespace FirstTestTypeSpec.Samples
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
             Response response = client.BoolBody(true);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1131,7 +1143,6 @@ namespace FirstTestTypeSpec.Samples
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
             Response response = await client.BoolBodyAsync(true);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1143,6 +1154,7 @@ namespace FirstTestTypeSpec.Samples
 
             RequestContent content = RequestContent.Create(true);
             Response response = client.BoolBody(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -1155,6 +1167,7 @@ namespace FirstTestTypeSpec.Samples
 
             RequestContent content = RequestContent.Create(true);
             Response response = await client.BoolBodyAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -1166,7 +1179,6 @@ namespace FirstTestTypeSpec.Samples
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
             Response response = client.BoolBody(true);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1177,7 +1189,6 @@ namespace FirstTestTypeSpec.Samples
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
             Response response = await client.BoolBodyAsync(true);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1189,6 +1200,7 @@ namespace FirstTestTypeSpec.Samples
 
             RequestContent content = RequestContent.Create("2022-05-10T14:57:31.2311892-04:00");
             Response response = client.DateTimeBody(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -1201,6 +1213,7 @@ namespace FirstTestTypeSpec.Samples
 
             RequestContent content = RequestContent.Create("2022-05-10T14:57:31.2311892-04:00");
             Response response = await client.DateTimeBodyAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -1212,7 +1225,6 @@ namespace FirstTestTypeSpec.Samples
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
             Response response = client.DateTimeBody(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1223,7 +1235,6 @@ namespace FirstTestTypeSpec.Samples
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
             Response response = await client.DateTimeBodyAsync(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1235,6 +1246,7 @@ namespace FirstTestTypeSpec.Samples
 
             RequestContent content = RequestContent.Create("2022-05-10T14:57:31.2311892-04:00");
             Response response = client.DateTimeBody(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -1247,6 +1259,7 @@ namespace FirstTestTypeSpec.Samples
 
             RequestContent content = RequestContent.Create("2022-05-10T14:57:31.2311892-04:00");
             Response response = await client.DateTimeBodyAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -1258,7 +1271,6 @@ namespace FirstTestTypeSpec.Samples
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
             Response response = client.DateTimeBody(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1269,7 +1281,6 @@ namespace FirstTestTypeSpec.Samples
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
             Response response = await client.DateTimeBodyAsync(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -1557,10 +1568,10 @@ namespace FirstTestTypeSpec.Samples
             {
                 requiredString = "<requiredString>",
                 requiredInt = 1234,
-                requiredCollection = new List<object>()
-{
+                requiredCollection = new object[]
+            {
 "1"
-},
+            },
                 requiredDictionary = new
                 {
                     key = "1",
@@ -1574,10 +1585,10 @@ namespace FirstTestTypeSpec.Samples
                     requiredLiteralFloat = 1.23F,
                     requiredLiteralBool = false,
                     requiredBadDescription = "<requiredBadDescription>",
-                    requiredNullableList = new List<object>()
-{
+                    requiredNullableList = new object[]
+            {
 1234
-},
+            },
                 },
                 requiredUnknown = new object(),
                 requiredRecordUnknown = new
@@ -1625,10 +1636,10 @@ namespace FirstTestTypeSpec.Samples
             {
                 requiredString = "<requiredString>",
                 requiredInt = 1234,
-                requiredCollection = new List<object>()
-{
+                requiredCollection = new object[]
+            {
 "1"
-},
+            },
                 requiredDictionary = new
                 {
                     key = "1",
@@ -1642,10 +1653,10 @@ namespace FirstTestTypeSpec.Samples
                     requiredLiteralFloat = 1.23F,
                     requiredLiteralBool = false,
                     requiredBadDescription = "<requiredBadDescription>",
-                    requiredNullableList = new List<object>()
-{
+                    requiredNullableList = new object[]
+            {
 1234
-},
+            },
                 },
                 requiredUnknown = new object(),
                 requiredRecordUnknown = new
@@ -1693,10 +1704,10 @@ namespace FirstTestTypeSpec.Samples
             {
                 requiredString = "<requiredString>",
                 requiredInt = 1234,
-                requiredCollection = new List<object>()
-{
+                requiredCollection = new object[]
+            {
 "1"
-},
+            },
                 requiredDictionary = new
                 {
                     key = "1",
@@ -1714,35 +1725,35 @@ namespace FirstTestTypeSpec.Samples
                     optionalLiteralFloat = 4.56F,
                     optionalLiteralBool = true,
                     requiredBadDescription = "<requiredBadDescription>",
-                    optionalNullableList = new List<object>()
-{
+                    optionalNullableList = new object[]
+            {
 1234
-},
-                    requiredNullableList = new List<object>()
-{
+            },
+                    requiredNullableList = new object[]
+            {
 1234
-},
+            },
                 },
                 intExtensibleEnum = 1,
-                intExtensibleEnumCollection = new List<object>()
-{
+                intExtensibleEnumCollection = new object[]
+            {
 1
-},
+            },
                 floatExtensibleEnum = 1,
-                floatExtensibleEnumCollection = new List<object>()
-{
+                floatExtensibleEnumCollection = new object[]
+            {
 1
-},
+            },
                 floatFixedEnum = 1.1F,
-                floatFixedEnumCollection = new List<object>()
-{
+                floatFixedEnumCollection = new object[]
+            {
 1.1F
-},
+            },
                 intFixedEnum = 1,
-                intFixedEnumCollection = new List<object>()
-{
+                intFixedEnumCollection = new object[]
+            {
 1
-},
+            },
                 stringFixedEnum = "1",
                 requiredUnknown = new object(),
                 optionalUnknown = new object(),
@@ -1812,10 +1823,10 @@ namespace FirstTestTypeSpec.Samples
             {
                 requiredString = "<requiredString>",
                 requiredInt = 1234,
-                requiredCollection = new List<object>()
-{
+                requiredCollection = new object[]
+            {
 "1"
-},
+            },
                 requiredDictionary = new
                 {
                     key = "1",
@@ -1833,35 +1844,35 @@ namespace FirstTestTypeSpec.Samples
                     optionalLiteralFloat = 4.56F,
                     optionalLiteralBool = true,
                     requiredBadDescription = "<requiredBadDescription>",
-                    optionalNullableList = new List<object>()
-{
+                    optionalNullableList = new object[]
+            {
 1234
-},
-                    requiredNullableList = new List<object>()
-{
+            },
+                    requiredNullableList = new object[]
+            {
 1234
-},
+            },
                 },
                 intExtensibleEnum = 1,
-                intExtensibleEnumCollection = new List<object>()
-{
+                intExtensibleEnumCollection = new object[]
+            {
 1
-},
+            },
                 floatExtensibleEnum = 1,
-                floatExtensibleEnumCollection = new List<object>()
-{
+                floatExtensibleEnumCollection = new object[]
+            {
 1
-},
+            },
                 floatFixedEnum = 1.1F,
-                floatFixedEnumCollection = new List<object>()
-{
+                floatFixedEnumCollection = new object[]
+            {
 1.1F
-},
+            },
                 intFixedEnum = 1,
-                intFixedEnumCollection = new List<object>()
-{
+                intFixedEnumCollection = new object[]
+            {
 1
-},
+            },
                 stringFixedEnum = "1",
                 requiredUnknown = new object(),
                 optionalUnknown = new object(),
@@ -1931,10 +1942,10 @@ namespace FirstTestTypeSpec.Samples
             {
                 requiredString = "<requiredString>",
                 requiredInt = 1234,
-                requiredCollection = new List<object>()
-{
+                requiredCollection = new object[]
+            {
 "1"
-},
+            },
                 requiredDictionary = new
                 {
                     key = "1",
@@ -1948,10 +1959,10 @@ namespace FirstTestTypeSpec.Samples
                     requiredLiteralFloat = 1.23F,
                     requiredLiteralBool = false,
                     requiredBadDescription = "<requiredBadDescription>",
-                    requiredNullableList = new List<object>()
-{
+                    requiredNullableList = new object[]
+            {
 1234
-},
+            },
                 },
                 requiredUnknown = new object(),
                 requiredRecordUnknown = new
@@ -1999,10 +2010,10 @@ namespace FirstTestTypeSpec.Samples
             {
                 requiredString = "<requiredString>",
                 requiredInt = 1234,
-                requiredCollection = new List<object>()
-{
+                requiredCollection = new object[]
+            {
 "1"
-},
+            },
                 requiredDictionary = new
                 {
                     key = "1",
@@ -2016,10 +2027,10 @@ namespace FirstTestTypeSpec.Samples
                     requiredLiteralFloat = 1.23F,
                     requiredLiteralBool = false,
                     requiredBadDescription = "<requiredBadDescription>",
-                    requiredNullableList = new List<object>()
-{
+                    requiredNullableList = new object[]
+            {
 1234
-},
+            },
                 },
                 requiredUnknown = new object(),
                 requiredRecordUnknown = new
@@ -2067,10 +2078,10 @@ namespace FirstTestTypeSpec.Samples
             {
                 requiredString = "<requiredString>",
                 requiredInt = 1234,
-                requiredCollection = new List<object>()
-{
+                requiredCollection = new object[]
+            {
 "1"
-},
+            },
                 requiredDictionary = new
                 {
                     key = "1",
@@ -2088,35 +2099,35 @@ namespace FirstTestTypeSpec.Samples
                     optionalLiteralFloat = 4.56F,
                     optionalLiteralBool = true,
                     requiredBadDescription = "<requiredBadDescription>",
-                    optionalNullableList = new List<object>()
-{
+                    optionalNullableList = new object[]
+            {
 1234
-},
-                    requiredNullableList = new List<object>()
-{
+            },
+                    requiredNullableList = new object[]
+            {
 1234
-},
+            },
                 },
                 intExtensibleEnum = 1,
-                intExtensibleEnumCollection = new List<object>()
-{
+                intExtensibleEnumCollection = new object[]
+            {
 1
-},
+            },
                 floatExtensibleEnum = 1,
-                floatExtensibleEnumCollection = new List<object>()
-{
+                floatExtensibleEnumCollection = new object[]
+            {
 1
-},
+            },
                 floatFixedEnum = 1.1F,
-                floatFixedEnumCollection = new List<object>()
-{
+                floatFixedEnumCollection = new object[]
+            {
 1.1F
-},
+            },
                 intFixedEnum = 1,
-                intFixedEnumCollection = new List<object>()
-{
+                intFixedEnumCollection = new object[]
+            {
 1
-},
+            },
                 stringFixedEnum = "1",
                 requiredUnknown = new object(),
                 optionalUnknown = new object(),
@@ -2186,10 +2197,10 @@ namespace FirstTestTypeSpec.Samples
             {
                 requiredString = "<requiredString>",
                 requiredInt = 1234,
-                requiredCollection = new List<object>()
-{
+                requiredCollection = new object[]
+            {
 "1"
-},
+            },
                 requiredDictionary = new
                 {
                     key = "1",
@@ -2207,35 +2218,35 @@ namespace FirstTestTypeSpec.Samples
                     optionalLiteralFloat = 4.56F,
                     optionalLiteralBool = true,
                     requiredBadDescription = "<requiredBadDescription>",
-                    optionalNullableList = new List<object>()
-{
+                    optionalNullableList = new object[]
+            {
 1234
-},
-                    requiredNullableList = new List<object>()
-{
+            },
+                    requiredNullableList = new object[]
+            {
 1234
-},
+            },
                 },
                 intExtensibleEnum = 1,
-                intExtensibleEnumCollection = new List<object>()
-{
+                intExtensibleEnumCollection = new object[]
+            {
 1
-},
+            },
                 floatExtensibleEnum = 1,
-                floatExtensibleEnumCollection = new List<object>()
-{
+                floatExtensibleEnumCollection = new object[]
+            {
 1
-},
+            },
                 floatFixedEnum = 1.1F,
-                floatFixedEnumCollection = new List<object>()
-{
+                floatFixedEnumCollection = new object[]
+            {
 1.1F
-},
+            },
                 intFixedEnum = 1,
-                intFixedEnumCollection = new List<object>()
-{
+                intFixedEnumCollection = new object[]
+            {
 1
-},
+            },
                 stringFixedEnum = "1",
                 requiredUnknown = new object(),
                 optionalUnknown = new object(),
@@ -2400,10 +2411,10 @@ namespace FirstTestTypeSpec.Samples
                 requiredLiteralFloat = 1.23F,
                 requiredLiteralBool = false,
                 requiredBadDescription = "<requiredBadDescription>",
-                requiredNullableList = new List<object>()
-{
+                requiredNullableList = new object[]
+            {
 1234
-},
+            },
             });
             Response response = client.CreateLiteral(content);
 
@@ -2434,10 +2445,10 @@ namespace FirstTestTypeSpec.Samples
                 requiredLiteralFloat = 1.23F,
                 requiredLiteralBool = false,
                 requiredBadDescription = "<requiredBadDescription>",
-                requiredNullableList = new List<object>()
-{
+                requiredNullableList = new object[]
+            {
 1234
-},
+            },
             });
             Response response = await client.CreateLiteralAsync(content);
 
@@ -2472,14 +2483,14 @@ namespace FirstTestTypeSpec.Samples
                 optionalLiteralFloat = 4.56F,
                 optionalLiteralBool = true,
                 requiredBadDescription = "<requiredBadDescription>",
-                optionalNullableList = new List<object>()
-{
+                optionalNullableList = new object[]
+            {
 1234
-},
-                requiredNullableList = new List<object>()
-{
+            },
+                requiredNullableList = new object[]
+            {
 1234
-},
+            },
             });
             Response response = client.CreateLiteral(content);
 
@@ -2519,14 +2530,14 @@ namespace FirstTestTypeSpec.Samples
                 optionalLiteralFloat = 4.56F,
                 optionalLiteralBool = true,
                 requiredBadDescription = "<requiredBadDescription>",
-                optionalNullableList = new List<object>()
-{
+                optionalNullableList = new object[]
+            {
 1234
-},
-                requiredNullableList = new List<object>()
-{
+            },
+                requiredNullableList = new object[]
+            {
 1234
-},
+            },
             });
             Response response = await client.CreateLiteralAsync(content);
 

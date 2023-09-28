@@ -17,7 +17,7 @@ using body_complex_LowLevel;
 
 namespace body_complex_LowLevel.Samples
 {
-    public class Samples_PrimitiveClient
+    public partial class Samples_PrimitiveClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
@@ -82,6 +82,7 @@ namespace body_complex_LowLevel.Samples
 
             RequestContent content = RequestContent.Create(new object());
             Response response = client.PutInt(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -94,6 +95,7 @@ namespace body_complex_LowLevel.Samples
 
             RequestContent content = RequestContent.Create(new object());
             Response response = await client.PutIntAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -110,6 +112,7 @@ namespace body_complex_LowLevel.Samples
                 field2 = 1234,
             });
             Response response = client.PutInt(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -126,6 +129,7 @@ namespace body_complex_LowLevel.Samples
                 field2 = 1234,
             });
             Response response = await client.PutIntAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -192,6 +196,7 @@ namespace body_complex_LowLevel.Samples
 
             RequestContent content = RequestContent.Create(new object());
             Response response = client.PutLong(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -204,6 +209,7 @@ namespace body_complex_LowLevel.Samples
 
             RequestContent content = RequestContent.Create(new object());
             Response response = await client.PutLongAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -220,6 +226,7 @@ namespace body_complex_LowLevel.Samples
                 field2 = 1234L,
             });
             Response response = client.PutLong(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -236,6 +243,7 @@ namespace body_complex_LowLevel.Samples
                 field2 = 1234L,
             });
             Response response = await client.PutLongAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -302,6 +310,7 @@ namespace body_complex_LowLevel.Samples
 
             RequestContent content = RequestContent.Create(new object());
             Response response = client.PutFloat(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -314,6 +323,7 @@ namespace body_complex_LowLevel.Samples
 
             RequestContent content = RequestContent.Create(new object());
             Response response = await client.PutFloatAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -330,6 +340,7 @@ namespace body_complex_LowLevel.Samples
                 field2 = 123.45F,
             });
             Response response = client.PutFloat(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -346,6 +357,7 @@ namespace body_complex_LowLevel.Samples
                 field2 = 123.45F,
             });
             Response response = await client.PutFloatAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -412,6 +424,7 @@ namespace body_complex_LowLevel.Samples
 
             RequestContent content = RequestContent.Create(new object());
             Response response = client.PutDouble(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -424,6 +437,7 @@ namespace body_complex_LowLevel.Samples
 
             RequestContent content = RequestContent.Create(new object());
             Response response = await client.PutDoubleAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -440,6 +454,7 @@ namespace body_complex_LowLevel.Samples
                 field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose = 123.45,
             });
             Response response = client.PutDouble(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -456,6 +471,7 @@ namespace body_complex_LowLevel.Samples
                 field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose = 123.45,
             });
             Response response = await client.PutDoubleAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -522,6 +538,7 @@ namespace body_complex_LowLevel.Samples
 
             RequestContent content = RequestContent.Create(new object());
             Response response = client.PutBool(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -534,6 +551,7 @@ namespace body_complex_LowLevel.Samples
 
             RequestContent content = RequestContent.Create(new object());
             Response response = await client.PutBoolAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -550,6 +568,7 @@ namespace body_complex_LowLevel.Samples
                 field_false = true,
             });
             Response response = client.PutBool(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -566,6 +585,7 @@ namespace body_complex_LowLevel.Samples
                 field_false = true,
             });
             Response response = await client.PutBoolAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -634,6 +654,7 @@ namespace body_complex_LowLevel.Samples
 
             RequestContent content = RequestContent.Create(new object());
             Response response = client.PutString(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -646,6 +667,7 @@ namespace body_complex_LowLevel.Samples
 
             RequestContent content = RequestContent.Create(new object());
             Response response = await client.PutStringAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -656,13 +678,14 @@ namespace body_complex_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new Dictionary<string, object>
             {
                 ["field"] = "<field>",
                 ["empty"] = "<empty>",
-                ["null"] = "<null>",
+                ["null"] = "<null>"
             });
             Response response = client.PutString(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -673,13 +696,14 @@ namespace body_complex_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new Dictionary<string, object>
             {
                 ["field"] = "<field>",
                 ["empty"] = "<empty>",
-                ["null"] = "<null>",
+                ["null"] = "<null>"
             });
             Response response = await client.PutStringAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -746,6 +770,7 @@ namespace body_complex_LowLevel.Samples
 
             RequestContent content = RequestContent.Create(new object());
             Response response = client.PutDate(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -758,6 +783,7 @@ namespace body_complex_LowLevel.Samples
 
             RequestContent content = RequestContent.Create(new object());
             Response response = await client.PutDateAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -774,6 +800,7 @@ namespace body_complex_LowLevel.Samples
                 leap = "2022-05-10",
             });
             Response response = client.PutDate(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -790,6 +817,7 @@ namespace body_complex_LowLevel.Samples
                 leap = "2022-05-10",
             });
             Response response = await client.PutDateAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -856,6 +884,7 @@ namespace body_complex_LowLevel.Samples
 
             RequestContent content = RequestContent.Create(new object());
             Response response = client.PutDateTime(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -868,6 +897,7 @@ namespace body_complex_LowLevel.Samples
 
             RequestContent content = RequestContent.Create(new object());
             Response response = await client.PutDateTimeAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -884,6 +914,7 @@ namespace body_complex_LowLevel.Samples
                 now = "2022-05-10T18:57:31.2311892Z",
             });
             Response response = client.PutDateTime(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -900,6 +931,7 @@ namespace body_complex_LowLevel.Samples
                 now = "2022-05-10T18:57:31.2311892Z",
             });
             Response response = await client.PutDateTimeAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -966,6 +998,7 @@ namespace body_complex_LowLevel.Samples
 
             RequestContent content = RequestContent.Create(new object());
             Response response = client.PutDateTimeRfc1123(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -978,6 +1011,7 @@ namespace body_complex_LowLevel.Samples
 
             RequestContent content = RequestContent.Create(new object());
             Response response = await client.PutDateTimeRfc1123Async(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -994,6 +1028,7 @@ namespace body_complex_LowLevel.Samples
                 now = "Tue, 10 May 2022 18:57:31 GMT",
             });
             Response response = client.PutDateTimeRfc1123(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -1010,6 +1045,7 @@ namespace body_complex_LowLevel.Samples
                 now = "Tue, 10 May 2022 18:57:31 GMT",
             });
             Response response = await client.PutDateTimeRfc1123Async(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -1074,6 +1110,7 @@ namespace body_complex_LowLevel.Samples
 
             RequestContent content = RequestContent.Create(new object());
             Response response = client.PutDuration(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -1086,6 +1123,7 @@ namespace body_complex_LowLevel.Samples
 
             RequestContent content = RequestContent.Create(new object());
             Response response = await client.PutDurationAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -1101,6 +1139,7 @@ namespace body_complex_LowLevel.Samples
                 field = "PT1H23M45S",
             });
             Response response = client.PutDuration(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -1116,6 +1155,7 @@ namespace body_complex_LowLevel.Samples
                 field = "PT1H23M45S",
             });
             Response response = await client.PutDurationAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -1180,6 +1220,7 @@ namespace body_complex_LowLevel.Samples
 
             RequestContent content = RequestContent.Create(new object());
             Response response = client.PutByte(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -1192,6 +1233,7 @@ namespace body_complex_LowLevel.Samples
 
             RequestContent content = RequestContent.Create(new object());
             Response response = await client.PutByteAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -1207,6 +1249,7 @@ namespace body_complex_LowLevel.Samples
                 field = new object(),
             });
             Response response = client.PutByte(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -1222,6 +1265,7 @@ namespace body_complex_LowLevel.Samples
                 field = new object(),
             });
             Response response = await client.PutByteAsync(content);
+
             Console.WriteLine(response.Status);
         }
     }

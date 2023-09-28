@@ -15,7 +15,7 @@ using NUnit.Framework;
 
 namespace ClientAndOperationGroup.Samples
 {
-    internal class Samples_Beta
+    public partial class Samples_Beta
     {
         [Test]
         [Ignore("Only validating compilation of examples")]

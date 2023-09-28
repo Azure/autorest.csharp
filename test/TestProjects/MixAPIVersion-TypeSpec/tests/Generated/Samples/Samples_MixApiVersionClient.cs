@@ -16,7 +16,7 @@ using NUnit.Framework;
 
 namespace MixApiVersion.Samples
 {
-    public class Samples_MixApiVersionClient
+    public partial class Samples_MixApiVersionClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
@@ -26,6 +26,7 @@ namespace MixApiVersion.Samples
             MixApiVersionClient client = new MixApiVersionClient(endpoint);
 
             Response response = client.Delete("<name>");
+
             Console.WriteLine(response.Status);
         }
 
@@ -37,6 +38,7 @@ namespace MixApiVersion.Samples
             MixApiVersionClient client = new MixApiVersionClient(endpoint);
 
             Response response = await client.DeleteAsync("<name>");
+
             Console.WriteLine(response.Status);
         }
 
@@ -48,6 +50,7 @@ namespace MixApiVersion.Samples
             MixApiVersionClient client = new MixApiVersionClient(endpoint);
 
             Response response = client.Delete("<name>");
+
             Console.WriteLine(response.Status);
         }
 
@@ -59,6 +62,7 @@ namespace MixApiVersion.Samples
             MixApiVersionClient client = new MixApiVersionClient(endpoint);
 
             Response response = await client.DeleteAsync("<name>");
+
             Console.WriteLine(response.Status);
         }
 
@@ -206,9 +210,9 @@ namespace MixApiVersion.Samples
             foreach (BinaryData item in client.GetPets(null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("id").ToString());
-                Console.WriteLine(result[0].GetProperty("petId").ToString());
-                Console.WriteLine(result[0].GetProperty("name").ToString());
+                Console.WriteLine(result.GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("petId").ToString());
+                Console.WriteLine(result.GetProperty("name").ToString());
             }
         }
 
@@ -222,9 +226,9 @@ namespace MixApiVersion.Samples
             await foreach (BinaryData item in client.GetPetsAsync(null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("id").ToString());
-                Console.WriteLine(result[0].GetProperty("petId").ToString());
-                Console.WriteLine(result[0].GetProperty("name").ToString());
+                Console.WriteLine(result.GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("petId").ToString());
+                Console.WriteLine(result.GetProperty("name").ToString());
             }
         }
 
@@ -238,9 +242,9 @@ namespace MixApiVersion.Samples
             foreach (BinaryData item in client.GetPets(null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("id").ToString());
-                Console.WriteLine(result[0].GetProperty("petId").ToString());
-                Console.WriteLine(result[0].GetProperty("name").ToString());
+                Console.WriteLine(result.GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("petId").ToString());
+                Console.WriteLine(result.GetProperty("name").ToString());
             }
         }
 
@@ -254,9 +258,9 @@ namespace MixApiVersion.Samples
             await foreach (BinaryData item in client.GetPetsAsync(null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("id").ToString());
-                Console.WriteLine(result[0].GetProperty("petId").ToString());
-                Console.WriteLine(result[0].GetProperty("name").ToString());
+                Console.WriteLine(result.GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("petId").ToString());
+                Console.WriteLine(result.GetProperty("name").ToString());
             }
         }
     }

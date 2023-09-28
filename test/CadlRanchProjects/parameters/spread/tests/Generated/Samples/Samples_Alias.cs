@@ -15,7 +15,7 @@ using Parameters.Spread;
 
 namespace Parameters.Spread.Samples
 {
-    internal class Samples_Alias
+    public partial class Samples_Alias
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
@@ -28,6 +28,7 @@ namespace Parameters.Spread.Samples
                 name = "<name>",
             });
             Response response = client.SpreadAsRequestBody(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -42,6 +43,7 @@ namespace Parameters.Spread.Samples
                 name = "<name>",
             });
             Response response = await client.SpreadAsRequestBodyAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -52,7 +54,6 @@ namespace Parameters.Spread.Samples
             Alias client = new SpreadClient().GetAliasClient(apiVersion: "1.0.0");
 
             Response response = client.SpreadAsRequestBody("<name>");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -62,7 +63,6 @@ namespace Parameters.Spread.Samples
             Alias client = new SpreadClient().GetAliasClient(apiVersion: "1.0.0");
 
             Response response = await client.SpreadAsRequestBodyAsync("<name>");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -76,6 +76,7 @@ namespace Parameters.Spread.Samples
                 name = "<name>",
             });
             Response response = client.SpreadAsRequestBody(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -90,6 +91,7 @@ namespace Parameters.Spread.Samples
                 name = "<name>",
             });
             Response response = await client.SpreadAsRequestBodyAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -100,7 +102,6 @@ namespace Parameters.Spread.Samples
             Alias client = new SpreadClient().GetAliasClient(apiVersion: "1.0.0");
 
             Response response = client.SpreadAsRequestBody("<name>");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -110,7 +111,6 @@ namespace Parameters.Spread.Samples
             Alias client = new SpreadClient().GetAliasClient(apiVersion: "1.0.0");
 
             Response response = await client.SpreadAsRequestBodyAsync("<name>");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -124,6 +124,7 @@ namespace Parameters.Spread.Samples
                 name = "<name>",
             });
             Response response = client.SpreadAsRequestParameter("<id>", "<x-ms-test-header>", content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -138,6 +139,7 @@ namespace Parameters.Spread.Samples
                 name = "<name>",
             });
             Response response = await client.SpreadAsRequestParameterAsync("<id>", "<x-ms-test-header>", content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -148,7 +150,6 @@ namespace Parameters.Spread.Samples
             Alias client = new SpreadClient().GetAliasClient(apiVersion: "1.0.0");
 
             Response response = client.SpreadAsRequestParameter("<id>", "<x-ms-test-header>", "<name>");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -158,7 +159,6 @@ namespace Parameters.Spread.Samples
             Alias client = new SpreadClient().GetAliasClient(apiVersion: "1.0.0");
 
             Response response = await client.SpreadAsRequestParameterAsync("<id>", "<x-ms-test-header>", "<name>");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -172,6 +172,7 @@ namespace Parameters.Spread.Samples
                 name = "<name>",
             });
             Response response = client.SpreadAsRequestParameter("<id>", "<x-ms-test-header>", content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -186,6 +187,7 @@ namespace Parameters.Spread.Samples
                 name = "<name>",
             });
             Response response = await client.SpreadAsRequestParameterAsync("<id>", "<x-ms-test-header>", content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -196,7 +198,6 @@ namespace Parameters.Spread.Samples
             Alias client = new SpreadClient().GetAliasClient(apiVersion: "1.0.0");
 
             Response response = client.SpreadAsRequestParameter("<id>", "<x-ms-test-header>", "<name>");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -206,7 +207,6 @@ namespace Parameters.Spread.Samples
             Alias client = new SpreadClient().GetAliasClient(apiVersion: "1.0.0");
 
             Response response = await client.SpreadAsRequestParameterAsync("<id>", "<x-ms-test-header>", "<name>");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -225,6 +225,7 @@ namespace Parameters.Spread.Samples
                 prop6 = "<prop6>",
             });
             Response response = client.SpreadWithMultipleParameters("<id>", "<x-ms-test-header>", content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -244,6 +245,7 @@ namespace Parameters.Spread.Samples
                 prop6 = "<prop6>",
             });
             Response response = await client.SpreadWithMultipleParametersAsync("<id>", "<x-ms-test-header>", content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -254,7 +256,6 @@ namespace Parameters.Spread.Samples
             Alias client = new SpreadClient().GetAliasClient(apiVersion: "1.0.0");
 
             Response response = client.SpreadWithMultipleParameters("<id>", "<x-ms-test-header>", "<prop1>", "<prop2>", "<prop3>", "<prop4>", "<prop5>", "<prop6>");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -264,7 +265,6 @@ namespace Parameters.Spread.Samples
             Alias client = new SpreadClient().GetAliasClient(apiVersion: "1.0.0");
 
             Response response = await client.SpreadWithMultipleParametersAsync("<id>", "<x-ms-test-header>", "<prop1>", "<prop2>", "<prop3>", "<prop4>", "<prop5>", "<prop6>");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -283,6 +283,7 @@ namespace Parameters.Spread.Samples
                 prop6 = "<prop6>",
             });
             Response response = client.SpreadWithMultipleParameters("<id>", "<x-ms-test-header>", content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -302,6 +303,7 @@ namespace Parameters.Spread.Samples
                 prop6 = "<prop6>",
             });
             Response response = await client.SpreadWithMultipleParametersAsync("<id>", "<x-ms-test-header>", content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -312,7 +314,6 @@ namespace Parameters.Spread.Samples
             Alias client = new SpreadClient().GetAliasClient(apiVersion: "1.0.0");
 
             Response response = client.SpreadWithMultipleParameters("<id>", "<x-ms-test-header>", "<prop1>", "<prop2>", "<prop3>", "<prop4>", "<prop5>", "<prop6>");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -322,7 +323,6 @@ namespace Parameters.Spread.Samples
             Alias client = new SpreadClient().GetAliasClient(apiVersion: "1.0.0");
 
             Response response = await client.SpreadWithMultipleParametersAsync("<id>", "<x-ms-test-header>", "<prop1>", "<prop2>", "<prop3>", "<prop4>", "<prop5>", "<prop6>");
-            Console.WriteLine(response.Status);
         }
     }
 }

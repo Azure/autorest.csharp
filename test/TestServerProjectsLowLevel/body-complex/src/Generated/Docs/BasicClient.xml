@@ -60,6 +60,7 @@ BasicClient client = new BasicClient(credential);
 
 RequestContent content = RequestContent.Create(new object());
 Response response = await client.PutValidAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutValidAsync with all request content.
@@ -74,6 +75,7 @@ RequestContent content = RequestContent.Create(new
     color = "cyan",
 });
 Response response = await client.PutValidAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -86,6 +88,7 @@ BasicClient client = new BasicClient(credential);
 
 RequestContent content = RequestContent.Create(new object());
 Response response = client.PutValid(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutValid with all request content.
@@ -100,6 +103,7 @@ RequestContent content = RequestContent.Create(new
     color = "cyan",
 });
 Response response = client.PutValid(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>

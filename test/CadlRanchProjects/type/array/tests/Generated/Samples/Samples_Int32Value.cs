@@ -17,7 +17,7 @@ using _Type._Array;
 
 namespace _Type._Array.Samples
 {
-    internal class Samples_Int32Value
+    public partial class Samples_Int32Value
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
@@ -109,11 +109,12 @@ namespace _Type._Array.Samples
         {
             Int32Value client = new ArrayClient().GetInt32ValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new List<object>()
-{
+            RequestContent content = RequestContent.Create(new object[]
+            {
 1234
-});
+            });
             Response response = client.Put(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -123,11 +124,12 @@ namespace _Type._Array.Samples
         {
             Int32Value client = new ArrayClient().GetInt32ValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new List<object>()
-{
+            RequestContent content = RequestContent.Create(new object[]
+            {
 1234
-});
+            });
             Response response = await client.PutAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -137,11 +139,7 @@ namespace _Type._Array.Samples
         {
             Int32Value client = new ArrayClient().GetInt32ValueClient(apiVersion: "1.0.0");
 
-            Response response = client.Put(new List<int>()
-{
-1234
-});
-            Console.WriteLine(response.Status);
+            Response response = client.Put(new int[] { 1234 });
         }
 
         [Test]
@@ -150,11 +148,7 @@ namespace _Type._Array.Samples
         {
             Int32Value client = new ArrayClient().GetInt32ValueClient(apiVersion: "1.0.0");
 
-            Response response = await client.PutAsync(new List<int>()
-{
-1234
-});
-            Console.WriteLine(response.Status);
+            Response response = await client.PutAsync(new int[] { 1234 });
         }
 
         [Test]
@@ -163,11 +157,12 @@ namespace _Type._Array.Samples
         {
             Int32Value client = new ArrayClient().GetInt32ValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new List<object>()
-{
+            RequestContent content = RequestContent.Create(new object[]
+            {
 1234
-});
+            });
             Response response = client.Put(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -177,11 +172,12 @@ namespace _Type._Array.Samples
         {
             Int32Value client = new ArrayClient().GetInt32ValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new List<object>()
-{
+            RequestContent content = RequestContent.Create(new object[]
+            {
 1234
-});
+            });
             Response response = await client.PutAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -191,11 +187,7 @@ namespace _Type._Array.Samples
         {
             Int32Value client = new ArrayClient().GetInt32ValueClient(apiVersion: "1.0.0");
 
-            Response response = client.Put(new List<int>()
-{
-1234
-});
-            Console.WriteLine(response.Status);
+            Response response = client.Put(new int[] { 1234 });
         }
 
         [Test]
@@ -204,11 +196,7 @@ namespace _Type._Array.Samples
         {
             Int32Value client = new ArrayClient().GetInt32ValueClient(apiVersion: "1.0.0");
 
-            Response response = await client.PutAsync(new List<int>()
-{
-1234
-});
-            Console.WriteLine(response.Status);
+            Response response = await client.PutAsync(new int[] { 1234 });
         }
     }
 }

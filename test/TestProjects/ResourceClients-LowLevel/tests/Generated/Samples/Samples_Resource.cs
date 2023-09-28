@@ -15,7 +15,7 @@ using ResourceClients_LowLevel;
 
 namespace ResourceClients_LowLevel.Samples
 {
-    internal class Samples_Resource
+    public partial class Samples_Resource
     {
         [Test]
         [Ignore("Only validating compilation of examples")]

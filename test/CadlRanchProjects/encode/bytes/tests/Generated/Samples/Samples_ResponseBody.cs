@@ -15,7 +15,7 @@ using NUnit.Framework;
 
 namespace Encode.Bytes.Samples
 {
-    internal class Samples_ResponseBody
+    public partial class Samples_ResponseBody
     {
         [Test]
         [Ignore("Only validating compilation of examples")]

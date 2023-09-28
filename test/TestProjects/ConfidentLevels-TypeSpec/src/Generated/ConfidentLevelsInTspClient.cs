@@ -60,7 +60,6 @@ namespace ConfidentLevelsInTsp
         /// <param name="body"> The ModelWithUnionProperty to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/ConfidentLevelsInTspClient.xml" path="doc/members/member[@name='UnionInRequestPropertyAsync(ModelWithUnionProperty,CancellationToken)']/*" />
         internal virtual async Task<Response> UnionInRequestPropertyAsync(ModelWithUnionProperty body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -75,7 +74,6 @@ namespace ConfidentLevelsInTsp
         /// <param name="body"> The ModelWithUnionProperty to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/ConfidentLevelsInTspClient.xml" path="doc/members/member[@name='UnionInRequestProperty(ModelWithUnionProperty,CancellationToken)']/*" />
         internal virtual Response UnionInRequestProperty(ModelWithUnionProperty body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -160,7 +158,6 @@ namespace ConfidentLevelsInTsp
         /// <param name="body"> The UsualModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/ConfidentLevelsInTspClient.xml" path="doc/members/member[@name='UnionInResponsePropertyAsync(UsualModel,CancellationToken)']/*" />
         internal virtual async Task<Response<AnotherModelWithUnionProperty>> UnionInResponsePropertyAsync(UsualModel body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -175,7 +172,6 @@ namespace ConfidentLevelsInTsp
         /// <param name="body"> The UsualModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/ConfidentLevelsInTspClient.xml" path="doc/members/member[@name='UnionInResponseProperty(UsualModel,CancellationToken)']/*" />
         internal virtual Response<AnotherModelWithUnionProperty> UnionInResponseProperty(UsualModel body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -260,7 +256,6 @@ namespace ConfidentLevelsInTsp
         /// <param name="input"> The NonConfidentModelWithSelfReference to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        /// <include file="Docs/ConfidentLevelsInTspClient.xml" path="doc/members/member[@name='UnionWithSelfReferenceAsync(NonConfidentModelWithSelfReference,CancellationToken)']/*" />
         internal virtual async Task<Response> UnionWithSelfReferenceAsync(NonConfidentModelWithSelfReference input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
@@ -275,7 +270,6 @@ namespace ConfidentLevelsInTsp
         /// <param name="input"> The NonConfidentModelWithSelfReference to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        /// <include file="Docs/ConfidentLevelsInTspClient.xml" path="doc/members/member[@name='UnionWithSelfReference(NonConfidentModelWithSelfReference,CancellationToken)']/*" />
         internal virtual Response UnionWithSelfReference(NonConfidentModelWithSelfReference input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
@@ -360,7 +354,6 @@ namespace ConfidentLevelsInTsp
         /// <param name="input"> The NonConfidentModelWithIndirectSelfReference to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        /// <include file="Docs/ConfidentLevelsInTspClient.xml" path="doc/members/member[@name='UnionWithInderictAsync(NonConfidentModelWithIndirectSelfReference,CancellationToken)']/*" />
         internal virtual async Task<Response> UnionWithInderictAsync(NonConfidentModelWithIndirectSelfReference input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
@@ -375,7 +368,6 @@ namespace ConfidentLevelsInTsp
         /// <param name="input"> The NonConfidentModelWithIndirectSelfReference to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        /// <include file="Docs/ConfidentLevelsInTspClient.xml" path="doc/members/member[@name='UnionWithInderict(NonConfidentModelWithIndirectSelfReference,CancellationToken)']/*" />
         internal virtual Response UnionWithInderict(NonConfidentModelWithIndirectSelfReference input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
@@ -460,7 +452,6 @@ namespace ConfidentLevelsInTsp
         /// <param name="input"> The ModelWithIntegerLiteralTypeProperty to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        /// <include file="Docs/ConfidentLevelsInTspClient.xml" path="doc/members/member[@name='LiteralOfIntegerAsync(ModelWithIntegerLiteralTypeProperty,CancellationToken)']/*" />
         internal virtual async Task<Response> LiteralOfIntegerAsync(ModelWithIntegerLiteralTypeProperty input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
@@ -475,7 +466,6 @@ namespace ConfidentLevelsInTsp
         /// <param name="input"> The ModelWithIntegerLiteralTypeProperty to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        /// <include file="Docs/ConfidentLevelsInTspClient.xml" path="doc/members/member[@name='LiteralOfInteger(ModelWithIntegerLiteralTypeProperty,CancellationToken)']/*" />
         internal virtual Response LiteralOfInteger(ModelWithIntegerLiteralTypeProperty input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
@@ -560,7 +550,6 @@ namespace ConfidentLevelsInTsp
         /// <param name="input"> The ModelWithFloatLiteralTypeProperty to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        /// <include file="Docs/ConfidentLevelsInTspClient.xml" path="doc/members/member[@name='LiteralOfFloatAsync(ModelWithFloatLiteralTypeProperty,CancellationToken)']/*" />
         internal virtual async Task<Response> LiteralOfFloatAsync(ModelWithFloatLiteralTypeProperty input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
@@ -575,7 +564,6 @@ namespace ConfidentLevelsInTsp
         /// <param name="input"> The ModelWithFloatLiteralTypeProperty to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        /// <include file="Docs/ConfidentLevelsInTspClient.xml" path="doc/members/member[@name='LiteralOfFloat(ModelWithFloatLiteralTypeProperty,CancellationToken)']/*" />
         internal virtual Response LiteralOfFloat(ModelWithFloatLiteralTypeProperty input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
@@ -768,7 +756,6 @@ namespace ConfidentLevelsInTsp
         /// <param name="input"> The PollutedPet to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        /// <include file="Docs/ConfidentLevelsInTspClient.xml" path="doc/members/member[@name='PollutedBaseMethodAsync(PollutedPet,CancellationToken)']/*" />
         internal virtual async Task<Response<PollutedPet>> PollutedBaseMethodAsync(PollutedPet input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
@@ -783,7 +770,6 @@ namespace ConfidentLevelsInTsp
         /// <param name="input"> The PollutedPet to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        /// <include file="Docs/ConfidentLevelsInTspClient.xml" path="doc/members/member[@name='PollutedBaseMethod(PollutedPet,CancellationToken)']/*" />
         internal virtual Response<PollutedPet> PollutedBaseMethod(PollutedPet input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
@@ -868,7 +854,6 @@ namespace ConfidentLevelsInTsp
         /// <param name="input"> The PollutedDog to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        /// <include file="Docs/ConfidentLevelsInTspClient.xml" path="doc/members/member[@name='PollutedDerivedMethodAsync(PollutedDog,CancellationToken)']/*" />
         internal virtual async Task<Response<PollutedDog>> PollutedDerivedMethodAsync(PollutedDog input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
@@ -883,7 +868,6 @@ namespace ConfidentLevelsInTsp
         /// <param name="input"> The PollutedDog to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        /// <include file="Docs/ConfidentLevelsInTspClient.xml" path="doc/members/member[@name='PollutedDerivedMethod(PollutedDog,CancellationToken)']/*" />
         internal virtual Response<PollutedDog> PollutedDerivedMethod(PollutedDog input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
@@ -968,7 +952,6 @@ namespace ConfidentLevelsInTsp
         /// <param name="input"> The UnpollutedCat to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        /// <include file="Docs/ConfidentLevelsInTspClient.xml" path="doc/members/member[@name='UnpollutedDerivedMethodAsync(UnpollutedCat,CancellationToken)']/*" />
         internal virtual async Task<Response<UnpollutedCat>> UnpollutedDerivedMethodAsync(UnpollutedCat input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
@@ -983,7 +966,6 @@ namespace ConfidentLevelsInTsp
         /// <param name="input"> The UnpollutedCat to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        /// <include file="Docs/ConfidentLevelsInTspClient.xml" path="doc/members/member[@name='UnpollutedDerivedMethod(UnpollutedCat,CancellationToken)']/*" />
         internal virtual Response<UnpollutedCat> UnpollutedDerivedMethod(UnpollutedCat input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
@@ -1068,7 +1050,6 @@ namespace ConfidentLevelsInTsp
         /// <param name="input"> The DerivedModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        /// <include file="Docs/ConfidentLevelsInTspClient.xml" path="doc/members/member[@name='UseDerivedModelAsync(DerivedModel,CancellationToken)']/*" />
         internal virtual async Task<Response> UseDerivedModelAsync(DerivedModel input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
@@ -1083,7 +1064,6 @@ namespace ConfidentLevelsInTsp
         /// <param name="input"> The DerivedModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        /// <include file="Docs/ConfidentLevelsInTspClient.xml" path="doc/members/member[@name='UseDerivedModel(DerivedModel,CancellationToken)']/*" />
         internal virtual Response UseDerivedModel(DerivedModel input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
@@ -1168,7 +1148,6 @@ namespace ConfidentLevelsInTsp
         /// <param name="input"> The DerivedModelWithUnion to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        /// <include file="Docs/ConfidentLevelsInTspClient.xml" path="doc/members/member[@name='UseDerivedModelWithUnionAsync(DerivedModelWithUnion,CancellationToken)']/*" />
         internal virtual async Task<Response> UseDerivedModelWithUnionAsync(DerivedModelWithUnion input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
@@ -1183,7 +1162,6 @@ namespace ConfidentLevelsInTsp
         /// <param name="input"> The DerivedModelWithUnion to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        /// <include file="Docs/ConfidentLevelsInTspClient.xml" path="doc/members/member[@name='UseDerivedModelWithUnion(DerivedModelWithUnion,CancellationToken)']/*" />
         internal virtual Response UseDerivedModelWithUnion(DerivedModelWithUnion input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));

@@ -15,7 +15,7 @@ using SingleTopLevelClientWithoutOperations_LowLevel;
 
 namespace SingleTopLevelClientWithoutOperations_LowLevel.Samples
 {
-    internal class Samples_Client7
+    public partial class Samples_Client7
     {
         [Test]
         [Ignore("Only validating compilation of examples")]

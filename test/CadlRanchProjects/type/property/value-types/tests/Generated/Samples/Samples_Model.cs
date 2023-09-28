@@ -17,7 +17,7 @@ using _Type.Property.ValueTypes.Models;
 
 namespace _Type.Property.ValueTypes.Samples
 {
-    internal class Samples_Model
+    public partial class Samples_Model
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
@@ -117,6 +117,7 @@ namespace _Type.Property.ValueTypes.Samples
                 },
             });
             Response response = client.Put(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -134,6 +135,7 @@ namespace _Type.Property.ValueTypes.Samples
                 },
             });
             Response response = await client.PutAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -145,7 +147,6 @@ namespace _Type.Property.ValueTypes.Samples
 
             ModelProperty body = new ModelProperty(new InnerModel("<property>"));
             Response response = client.Put(body);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -156,7 +157,6 @@ namespace _Type.Property.ValueTypes.Samples
 
             ModelProperty body = new ModelProperty(new InnerModel("<property>"));
             Response response = await client.PutAsync(body);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -173,6 +173,7 @@ namespace _Type.Property.ValueTypes.Samples
                 },
             });
             Response response = client.Put(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -190,6 +191,7 @@ namespace _Type.Property.ValueTypes.Samples
                 },
             });
             Response response = await client.PutAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -201,7 +203,6 @@ namespace _Type.Property.ValueTypes.Samples
 
             ModelProperty body = new ModelProperty(new InnerModel("<property>"));
             Response response = client.Put(body);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -212,7 +213,6 @@ namespace _Type.Property.ValueTypes.Samples
 
             ModelProperty body = new ModelProperty(new InnerModel("<property>"));
             Response response = await client.PutAsync(body);
-            Console.WriteLine(response.Status);
         }
     }
 }

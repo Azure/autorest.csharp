@@ -18,7 +18,7 @@ using SpecialWords.Models;
 
 namespace SpecialWords.Samples
 {
-    internal class Samples_Model
+    public partial class Samples_Model
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
@@ -110,13 +110,14 @@ namespace SpecialWords.Samples
         {
             Model client = new SpecialWordsClient().GetModelClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new Dictionary<string, object>
             {
                 ["derived.name"] = "<derived.name>",
                 ["for"] = "<for>",
-                ["model.kind"] = "derived",
+                ["model.kind"] = "derived"
             });
             Response response = client.Put(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -126,13 +127,14 @@ namespace SpecialWords.Samples
         {
             Model client = new SpecialWordsClient().GetModelClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new Dictionary<string, object>
             {
                 ["derived.name"] = "<derived.name>",
                 ["for"] = "<for>",
-                ["model.kind"] = "derived",
+                ["model.kind"] = "derived"
             });
             Response response = await client.PutAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -144,7 +146,6 @@ namespace SpecialWords.Samples
 
             BaseModel body = new DerivedModel("<derived.name>", "<for>");
             Response response = client.Put(body);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -155,7 +156,6 @@ namespace SpecialWords.Samples
 
             BaseModel body = new DerivedModel("<derived.name>", "<for>");
             Response response = await client.PutAsync(body);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -164,13 +164,14 @@ namespace SpecialWords.Samples
         {
             Model client = new SpecialWordsClient().GetModelClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new Dictionary<string, object>
             {
                 ["derived.name"] = "<derived.name>",
                 ["for"] = "<for>",
-                ["model.kind"] = "derived",
+                ["model.kind"] = "derived"
             });
             Response response = client.Put(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -180,13 +181,14 @@ namespace SpecialWords.Samples
         {
             Model client = new SpecialWordsClient().GetModelClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new Dictionary<string, object>
             {
                 ["derived.name"] = "<derived.name>",
                 ["for"] = "<for>",
-                ["model.kind"] = "derived",
+                ["model.kind"] = "derived"
             });
             Response response = await client.PutAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -198,7 +200,6 @@ namespace SpecialWords.Samples
 
             BaseModel body = new DerivedModel("<derived.name>", "<for>");
             Response response = client.Put(body);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -209,7 +210,6 @@ namespace SpecialWords.Samples
 
             BaseModel body = new DerivedModel("<derived.name>", "<for>");
             Response response = await client.PutAsync(body);
-            Console.WriteLine(response.Status);
         }
     }
 }

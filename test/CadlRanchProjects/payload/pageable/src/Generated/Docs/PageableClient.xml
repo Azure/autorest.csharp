@@ -48,7 +48,15 @@ PageableClient client = new PageableClient();
 await foreach (BinaryData item in client.GetPageablesAsync(null, null))
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(result[0].GetProperty("name").ToString());
+    Console.WriteLine(result.GetProperty("name").ToString());
+}
+]]></code>
+This sample shows how to call GetPageablesAsync.
+<code><![CDATA[
+PageableClient client = new PageableClient();
+
+await foreach (User item in client.GetPageablesAsync())
+{
 }
 ]]></code>
 This sample shows how to call GetPageablesAsync with all parameters and parse the result.
@@ -58,7 +66,15 @@ PageableClient client = new PageableClient();
 await foreach (BinaryData item in client.GetPageablesAsync(1234, null))
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(result[0].GetProperty("name").ToString());
+    Console.WriteLine(result.GetProperty("name").ToString());
+}
+]]></code>
+This sample shows how to call GetPageablesAsync with all parameters.
+<code><![CDATA[
+PageableClient client = new PageableClient();
+
+await foreach (User item in client.GetPageablesAsync(maxpagesize: 1234))
+{
 }
 ]]></code></example>
     </member>
@@ -71,7 +87,15 @@ PageableClient client = new PageableClient();
 foreach (BinaryData item in client.GetPageables(null, null))
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(result[0].GetProperty("name").ToString());
+    Console.WriteLine(result.GetProperty("name").ToString());
+}
+]]></code>
+This sample shows how to call GetPageables.
+<code><![CDATA[
+PageableClient client = new PageableClient();
+
+foreach (User item in client.GetPageables())
+{
 }
 ]]></code>
 This sample shows how to call GetPageables with all parameters and parse the result.
@@ -81,7 +105,15 @@ PageableClient client = new PageableClient();
 foreach (BinaryData item in client.GetPageables(1234, null))
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(result[0].GetProperty("name").ToString());
+    Console.WriteLine(result.GetProperty("name").ToString());
+}
+]]></code>
+This sample shows how to call GetPageables with all parameters.
+<code><![CDATA[
+PageableClient client = new PageableClient();
+
+foreach (User item in client.GetPageables(maxpagesize: 1234))
+{
 }
 ]]></code></example>
     </member>

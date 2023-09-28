@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
@@ -18,7 +17,7 @@ using _Type.Property.Optionality.Models;
 
 namespace _Type.Property.Optionality.Samples
 {
-    internal class Samples_CollectionsByte
+    public partial class Samples_CollectionsByte
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
@@ -196,6 +195,7 @@ namespace _Type.Property.Optionality.Samples
 
             RequestContent content = RequestContent.Create(new object());
             Response response = client.PutAll(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -207,6 +207,7 @@ namespace _Type.Property.Optionality.Samples
 
             RequestContent content = RequestContent.Create(new object());
             Response response = await client.PutAllAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -218,7 +219,6 @@ namespace _Type.Property.Optionality.Samples
 
             CollectionsByteProperty body = new CollectionsByteProperty();
             Response response = client.PutAll(body);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -229,7 +229,6 @@ namespace _Type.Property.Optionality.Samples
 
             CollectionsByteProperty body = new CollectionsByteProperty();
             Response response = await client.PutAllAsync(body);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -240,12 +239,13 @@ namespace _Type.Property.Optionality.Samples
 
             RequestContent content = RequestContent.Create(new
             {
-                property = new List<object>()
-{
+                property = new object[]
+            {
 new object()
-},
+            },
             });
             Response response = client.PutAll(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -257,12 +257,13 @@ new object()
 
             RequestContent content = RequestContent.Create(new
             {
-                property = new List<object>()
-{
+                property = new object[]
+            {
 new object()
-},
+            },
             });
             Response response = await client.PutAllAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -272,15 +273,11 @@ new object()
         {
             CollectionsByte client = new OptionalClient().GetCollectionsByteClient(apiVersion: "1.0.0");
 
-            CollectionsByteProperty body = new CollectionsByteProperty()
+            CollectionsByteProperty body = new CollectionsByteProperty
             {
-                Property =
-{
-BinaryData.FromObjectAsJson(new object())
-},
+                Property = { BinaryData.FromObjectAsJson(new object()) },
             };
             Response response = client.PutAll(body);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -289,15 +286,11 @@ BinaryData.FromObjectAsJson(new object())
         {
             CollectionsByte client = new OptionalClient().GetCollectionsByteClient(apiVersion: "1.0.0");
 
-            CollectionsByteProperty body = new CollectionsByteProperty()
+            CollectionsByteProperty body = new CollectionsByteProperty
             {
-                Property =
-{
-BinaryData.FromObjectAsJson(new object())
-},
+                Property = { BinaryData.FromObjectAsJson(new object()) },
             };
             Response response = await client.PutAllAsync(body);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -308,6 +301,7 @@ BinaryData.FromObjectAsJson(new object())
 
             RequestContent content = RequestContent.Create(new object());
             Response response = client.PutDefault(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -319,6 +313,7 @@ BinaryData.FromObjectAsJson(new object())
 
             RequestContent content = RequestContent.Create(new object());
             Response response = await client.PutDefaultAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -330,7 +325,6 @@ BinaryData.FromObjectAsJson(new object())
 
             CollectionsByteProperty body = new CollectionsByteProperty();
             Response response = client.PutDefault(body);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -341,7 +335,6 @@ BinaryData.FromObjectAsJson(new object())
 
             CollectionsByteProperty body = new CollectionsByteProperty();
             Response response = await client.PutDefaultAsync(body);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -352,12 +345,13 @@ BinaryData.FromObjectAsJson(new object())
 
             RequestContent content = RequestContent.Create(new
             {
-                property = new List<object>()
-{
+                property = new object[]
+            {
 new object()
-},
+            },
             });
             Response response = client.PutDefault(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -369,12 +363,13 @@ new object()
 
             RequestContent content = RequestContent.Create(new
             {
-                property = new List<object>()
-{
+                property = new object[]
+            {
 new object()
-},
+            },
             });
             Response response = await client.PutDefaultAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -384,15 +379,11 @@ new object()
         {
             CollectionsByte client = new OptionalClient().GetCollectionsByteClient(apiVersion: "1.0.0");
 
-            CollectionsByteProperty body = new CollectionsByteProperty()
+            CollectionsByteProperty body = new CollectionsByteProperty
             {
-                Property =
-{
-BinaryData.FromObjectAsJson(new object())
-},
+                Property = { BinaryData.FromObjectAsJson(new object()) },
             };
             Response response = client.PutDefault(body);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -401,15 +392,11 @@ BinaryData.FromObjectAsJson(new object())
         {
             CollectionsByte client = new OptionalClient().GetCollectionsByteClient(apiVersion: "1.0.0");
 
-            CollectionsByteProperty body = new CollectionsByteProperty()
+            CollectionsByteProperty body = new CollectionsByteProperty
             {
-                Property =
-{
-BinaryData.FromObjectAsJson(new object())
-},
+                Property = { BinaryData.FromObjectAsJson(new object()) },
             };
             Response response = await client.PutDefaultAsync(body);
-            Console.WriteLine(response.Status);
         }
     }
 }

@@ -17,7 +17,7 @@ using PetStore.Models;
 
 namespace PetStore.Samples
 {
-    public class Samples_PetStoreClient
+    public partial class Samples_PetStoreClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
@@ -27,6 +27,7 @@ namespace PetStore.Samples
             PetStoreClient client = new PetStoreClient(endpoint);
 
             Response response = client.Delete(1234);
+
             Console.WriteLine(response.Status);
         }
 
@@ -38,6 +39,7 @@ namespace PetStore.Samples
             PetStoreClient client = new PetStoreClient(endpoint);
 
             Response response = await client.DeleteAsync(1234);
+
             Console.WriteLine(response.Status);
         }
 
@@ -49,6 +51,7 @@ namespace PetStore.Samples
             PetStoreClient client = new PetStoreClient(endpoint);
 
             Response response = client.Delete(1234);
+
             Console.WriteLine(response.Status);
         }
 
@@ -60,6 +63,7 @@ namespace PetStore.Samples
             PetStoreClient client = new PetStoreClient(endpoint);
 
             Response response = await client.DeleteAsync(1234);
+
             Console.WriteLine(response.Status);
         }
 

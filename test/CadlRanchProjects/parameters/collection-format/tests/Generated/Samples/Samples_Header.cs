@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Identity;
@@ -15,7 +14,7 @@ using Parameters.CollectionFormat;
 
 namespace Parameters.CollectionFormat.Samples
 {
-    internal class Samples_Header
+    public partial class Samples_Header
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
@@ -23,10 +22,8 @@ namespace Parameters.CollectionFormat.Samples
         {
             Header client = new CollectionFormatClient().GetHeaderClient(apiVersion: "1.0.0");
 
-            Response response = client.Csv(new List<string>()
-{
-"<colors>"
-});
+            Response response = client.Csv(new string[] { "<colors>" });
+
             Console.WriteLine(response.Status);
         }
 
@@ -36,10 +33,8 @@ namespace Parameters.CollectionFormat.Samples
         {
             Header client = new CollectionFormatClient().GetHeaderClient(apiVersion: "1.0.0");
 
-            Response response = await client.CsvAsync(new List<string>()
-{
-"<colors>"
-});
+            Response response = await client.CsvAsync(new string[] { "<colors>" });
+
             Console.WriteLine(response.Status);
         }
 
@@ -49,10 +44,8 @@ namespace Parameters.CollectionFormat.Samples
         {
             Header client = new CollectionFormatClient().GetHeaderClient(apiVersion: "1.0.0");
 
-            Response response = client.Csv(new List<string>()
-{
-"<colors>"
-});
+            Response response = client.Csv(new string[] { "<colors>" });
+
             Console.WriteLine(response.Status);
         }
 
@@ -62,10 +55,8 @@ namespace Parameters.CollectionFormat.Samples
         {
             Header client = new CollectionFormatClient().GetHeaderClient(apiVersion: "1.0.0");
 
-            Response response = await client.CsvAsync(new List<string>()
-{
-"<colors>"
-});
+            Response response = await client.CsvAsync(new string[] { "<colors>" });
+
             Console.WriteLine(response.Status);
         }
     }

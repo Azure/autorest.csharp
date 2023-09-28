@@ -17,7 +17,7 @@ using _Type._Array;
 
 namespace _Type._Array.Samples
 {
-    internal class Samples_Float32Value
+    public partial class Samples_Float32Value
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
@@ -109,11 +109,12 @@ namespace _Type._Array.Samples
         {
             Float32Value client = new ArrayClient().GetFloat32ValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new List<object>()
-{
+            RequestContent content = RequestContent.Create(new object[]
+            {
 123.45F
-});
+            });
             Response response = client.Put(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -123,11 +124,12 @@ namespace _Type._Array.Samples
         {
             Float32Value client = new ArrayClient().GetFloat32ValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new List<object>()
-{
+            RequestContent content = RequestContent.Create(new object[]
+            {
 123.45F
-});
+            });
             Response response = await client.PutAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -137,11 +139,7 @@ namespace _Type._Array.Samples
         {
             Float32Value client = new ArrayClient().GetFloat32ValueClient(apiVersion: "1.0.0");
 
-            Response response = client.Put(new List<float>()
-{
-123.45F
-});
-            Console.WriteLine(response.Status);
+            Response response = client.Put(new float[] { 123.45F });
         }
 
         [Test]
@@ -150,11 +148,7 @@ namespace _Type._Array.Samples
         {
             Float32Value client = new ArrayClient().GetFloat32ValueClient(apiVersion: "1.0.0");
 
-            Response response = await client.PutAsync(new List<float>()
-{
-123.45F
-});
-            Console.WriteLine(response.Status);
+            Response response = await client.PutAsync(new float[] { 123.45F });
         }
 
         [Test]
@@ -163,11 +157,12 @@ namespace _Type._Array.Samples
         {
             Float32Value client = new ArrayClient().GetFloat32ValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new List<object>()
-{
+            RequestContent content = RequestContent.Create(new object[]
+            {
 123.45F
-});
+            });
             Response response = client.Put(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -177,11 +172,12 @@ namespace _Type._Array.Samples
         {
             Float32Value client = new ArrayClient().GetFloat32ValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new List<object>()
-{
+            RequestContent content = RequestContent.Create(new object[]
+            {
 123.45F
-});
+            });
             Response response = await client.PutAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -191,11 +187,7 @@ namespace _Type._Array.Samples
         {
             Float32Value client = new ArrayClient().GetFloat32ValueClient(apiVersion: "1.0.0");
 
-            Response response = client.Put(new List<float>()
-{
-123.45F
-});
-            Console.WriteLine(response.Status);
+            Response response = client.Put(new float[] { 123.45F });
         }
 
         [Test]
@@ -204,11 +196,7 @@ namespace _Type._Array.Samples
         {
             Float32Value client = new ArrayClient().GetFloat32ValueClient(apiVersion: "1.0.0");
 
-            Response response = await client.PutAsync(new List<float>()
-{
-123.45F
-});
-            Console.WriteLine(response.Status);
+            Response response = await client.PutAsync(new float[] { 123.45F });
         }
     }
 }

@@ -17,7 +17,7 @@ using _Type.Property.ValueTypes.Models;
 
 namespace _Type.Property.ValueTypes.Samples
 {
-    internal class Samples_Datetime
+    public partial class Samples_Datetime
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
@@ -114,6 +114,7 @@ namespace _Type.Property.ValueTypes.Samples
                 property = "2022-05-10T14:57:31.2311892-04:00",
             });
             Response response = client.Put(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -128,6 +129,7 @@ namespace _Type.Property.ValueTypes.Samples
                 property = "2022-05-10T14:57:31.2311892-04:00",
             });
             Response response = await client.PutAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -139,7 +141,6 @@ namespace _Type.Property.ValueTypes.Samples
 
             DatetimeProperty body = new DatetimeProperty(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
             Response response = client.Put(body);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -150,7 +151,6 @@ namespace _Type.Property.ValueTypes.Samples
 
             DatetimeProperty body = new DatetimeProperty(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
             Response response = await client.PutAsync(body);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -164,6 +164,7 @@ namespace _Type.Property.ValueTypes.Samples
                 property = "2022-05-10T14:57:31.2311892-04:00",
             });
             Response response = client.Put(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -178,6 +179,7 @@ namespace _Type.Property.ValueTypes.Samples
                 property = "2022-05-10T14:57:31.2311892-04:00",
             });
             Response response = await client.PutAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -189,7 +191,6 @@ namespace _Type.Property.ValueTypes.Samples
 
             DatetimeProperty body = new DatetimeProperty(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
             Response response = client.Put(body);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -200,7 +201,6 @@ namespace _Type.Property.ValueTypes.Samples
 
             DatetimeProperty body = new DatetimeProperty(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
             Response response = await client.PutAsync(body);
-            Console.WriteLine(response.Status);
         }
     }
 }

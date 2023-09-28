@@ -17,7 +17,7 @@ using _Type._Enum.Extensible.Models;
 
 namespace _Type._Enum.Extensible.Samples
 {
-    public class Samples_ExtensibleClient
+    public partial class Samples_ExtensibleClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
@@ -195,6 +195,7 @@ namespace _Type._Enum.Extensible.Samples
 
             RequestContent content = RequestContent.Create("Monday");
             Response response = client.PutKnownValue(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -206,6 +207,7 @@ namespace _Type._Enum.Extensible.Samples
 
             RequestContent content = RequestContent.Create("Monday");
             Response response = await client.PutKnownValueAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -216,7 +218,6 @@ namespace _Type._Enum.Extensible.Samples
             ExtensibleClient client = new ExtensibleClient();
 
             Response response = client.PutKnownValue(DaysOfWeekExtensibleEnum.Monday);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -226,7 +227,6 @@ namespace _Type._Enum.Extensible.Samples
             ExtensibleClient client = new ExtensibleClient();
 
             Response response = await client.PutKnownValueAsync(DaysOfWeekExtensibleEnum.Monday);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -237,6 +237,7 @@ namespace _Type._Enum.Extensible.Samples
 
             RequestContent content = RequestContent.Create("Monday");
             Response response = client.PutKnownValue(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -248,6 +249,7 @@ namespace _Type._Enum.Extensible.Samples
 
             RequestContent content = RequestContent.Create("Monday");
             Response response = await client.PutKnownValueAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -258,7 +260,6 @@ namespace _Type._Enum.Extensible.Samples
             ExtensibleClient client = new ExtensibleClient();
 
             Response response = client.PutKnownValue(DaysOfWeekExtensibleEnum.Monday);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -268,7 +269,6 @@ namespace _Type._Enum.Extensible.Samples
             ExtensibleClient client = new ExtensibleClient();
 
             Response response = await client.PutKnownValueAsync(DaysOfWeekExtensibleEnum.Monday);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -279,6 +279,7 @@ namespace _Type._Enum.Extensible.Samples
 
             RequestContent content = RequestContent.Create("Monday");
             Response response = client.PutUnknownValue(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -290,6 +291,7 @@ namespace _Type._Enum.Extensible.Samples
 
             RequestContent content = RequestContent.Create("Monday");
             Response response = await client.PutUnknownValueAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -300,7 +302,6 @@ namespace _Type._Enum.Extensible.Samples
             ExtensibleClient client = new ExtensibleClient();
 
             Response response = client.PutUnknownValue(DaysOfWeekExtensibleEnum.Monday);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -310,7 +311,6 @@ namespace _Type._Enum.Extensible.Samples
             ExtensibleClient client = new ExtensibleClient();
 
             Response response = await client.PutUnknownValueAsync(DaysOfWeekExtensibleEnum.Monday);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -321,6 +321,7 @@ namespace _Type._Enum.Extensible.Samples
 
             RequestContent content = RequestContent.Create("Monday");
             Response response = client.PutUnknownValue(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -332,6 +333,7 @@ namespace _Type._Enum.Extensible.Samples
 
             RequestContent content = RequestContent.Create("Monday");
             Response response = await client.PutUnknownValueAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -342,7 +344,6 @@ namespace _Type._Enum.Extensible.Samples
             ExtensibleClient client = new ExtensibleClient();
 
             Response response = client.PutUnknownValue(DaysOfWeekExtensibleEnum.Monday);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -352,7 +353,6 @@ namespace _Type._Enum.Extensible.Samples
             ExtensibleClient client = new ExtensibleClient();
 
             Response response = await client.PutUnknownValueAsync(DaysOfWeekExtensibleEnum.Monday);
-            Console.WriteLine(response.Status);
         }
     }
 }

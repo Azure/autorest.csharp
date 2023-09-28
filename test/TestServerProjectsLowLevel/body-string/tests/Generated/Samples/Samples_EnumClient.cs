@@ -16,7 +16,7 @@ using body_string_LowLevel;
 
 namespace body_string_LowLevel.Samples
 {
-    public class Samples_EnumClient
+    public partial class Samples_EnumClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
@@ -79,6 +79,7 @@ namespace body_string_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("red color");
             Response response = client.PutNotExpandable(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -91,6 +92,7 @@ namespace body_string_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("red color");
             Response response = await client.PutNotExpandableAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -103,6 +105,7 @@ namespace body_string_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("red color");
             Response response = client.PutNotExpandable(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -115,6 +118,7 @@ namespace body_string_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("red color");
             Response response = await client.PutNotExpandableAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -179,6 +183,7 @@ namespace body_string_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("red color");
             Response response = client.PutReferenced(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -191,6 +196,7 @@ namespace body_string_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("red color");
             Response response = await client.PutReferencedAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -203,6 +209,7 @@ namespace body_string_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("red color");
             Response response = client.PutReferenced(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -215,6 +222,7 @@ namespace body_string_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("red color");
             Response response = await client.PutReferencedAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -284,6 +292,7 @@ namespace body_string_LowLevel.Samples
                 ColorConstant = "green-color",
             });
             Response response = client.PutReferencedConstant(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -299,6 +308,7 @@ namespace body_string_LowLevel.Samples
                 ColorConstant = "green-color",
             });
             Response response = await client.PutReferencedConstantAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -315,6 +325,7 @@ namespace body_string_LowLevel.Samples
                 field1 = "<field1>",
             });
             Response response = client.PutReferencedConstant(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -331,6 +342,7 @@ namespace body_string_LowLevel.Samples
                 field1 = "<field1>",
             });
             Response response = await client.PutReferencedConstantAsync(content);
+
             Console.WriteLine(response.Status);
         }
     }

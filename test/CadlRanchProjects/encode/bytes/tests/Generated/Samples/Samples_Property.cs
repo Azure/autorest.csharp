@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
@@ -18,7 +17,7 @@ using NUnit.Framework;
 
 namespace Encode.Bytes.Samples
 {
-    internal class Samples_Property
+    public partial class Samples_Property
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
@@ -340,10 +339,10 @@ namespace Encode.Bytes.Samples
 
             RequestContent content = RequestContent.Create(new
             {
-                value = new List<object>()
-{
+                value = new object[]
+            {
 new object()
-},
+            },
             });
             Response response = client.Base64urlArray(content);
 
@@ -359,10 +358,10 @@ new object()
 
             RequestContent content = RequestContent.Create(new
             {
-                value = new List<object>()
-{
+                value = new object[]
+            {
 new object()
-},
+            },
             });
             Response response = await client.Base64urlArrayAsync(content);
 
@@ -376,10 +375,10 @@ new object()
         {
             Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            Base64urlArrayBytesProperty body = new Base64urlArrayBytesProperty(new List<BinaryData>()
-{
+            Base64urlArrayBytesProperty body = new Base64urlArrayBytesProperty(new BinaryData[]
+            {
 BinaryData.FromObjectAsJson(new object())
-});
+            });
             Response<Base64urlArrayBytesProperty> response = client.Base64urlArray(body);
         }
 
@@ -389,10 +388,10 @@ BinaryData.FromObjectAsJson(new object())
         {
             Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            Base64urlArrayBytesProperty body = new Base64urlArrayBytesProperty(new List<BinaryData>()
-{
+            Base64urlArrayBytesProperty body = new Base64urlArrayBytesProperty(new BinaryData[]
+            {
 BinaryData.FromObjectAsJson(new object())
-});
+            });
             Response<Base64urlArrayBytesProperty> response = await client.Base64urlArrayAsync(body);
         }
 
@@ -404,10 +403,10 @@ BinaryData.FromObjectAsJson(new object())
 
             RequestContent content = RequestContent.Create(new
             {
-                value = new List<object>()
-{
+                value = new object[]
+            {
 new object()
-},
+            },
             });
             Response response = client.Base64urlArray(content);
 
@@ -423,10 +422,10 @@ new object()
 
             RequestContent content = RequestContent.Create(new
             {
-                value = new List<object>()
-{
+                value = new object[]
+            {
 new object()
-},
+            },
             });
             Response response = await client.Base64urlArrayAsync(content);
 
@@ -440,10 +439,10 @@ new object()
         {
             Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            Base64urlArrayBytesProperty body = new Base64urlArrayBytesProperty(new List<BinaryData>()
-{
+            Base64urlArrayBytesProperty body = new Base64urlArrayBytesProperty(new BinaryData[]
+            {
 BinaryData.FromObjectAsJson(new object())
-});
+            });
             Response<Base64urlArrayBytesProperty> response = client.Base64urlArray(body);
         }
 
@@ -453,10 +452,10 @@ BinaryData.FromObjectAsJson(new object())
         {
             Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            Base64urlArrayBytesProperty body = new Base64urlArrayBytesProperty(new List<BinaryData>()
-{
+            Base64urlArrayBytesProperty body = new Base64urlArrayBytesProperty(new BinaryData[]
+            {
 BinaryData.FromObjectAsJson(new object())
-});
+            });
             Response<Base64urlArrayBytesProperty> response = await client.Base64urlArrayAsync(body);
         }
     }

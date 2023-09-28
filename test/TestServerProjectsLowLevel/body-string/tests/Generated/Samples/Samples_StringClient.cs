@@ -16,7 +16,7 @@ using body_string_LowLevel;
 
 namespace body_string_LowLevel.Samples
 {
-    public class Samples_StringClient
+    public partial class Samples_StringClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
@@ -79,6 +79,7 @@ namespace body_string_LowLevel.Samples
 
             RequestContent content = null;
             Response response = client.PutNull(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -91,6 +92,7 @@ namespace body_string_LowLevel.Samples
 
             RequestContent content = null;
             Response response = await client.PutNullAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -103,6 +105,7 @@ namespace body_string_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("<stringBody>");
             Response response = client.PutNull(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -115,6 +118,7 @@ namespace body_string_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("<stringBody>");
             Response response = await client.PutNullAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -179,6 +183,7 @@ namespace body_string_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("");
             Response response = client.PutEmpty(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -191,6 +196,7 @@ namespace body_string_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("");
             Response response = await client.PutEmptyAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -203,6 +209,7 @@ namespace body_string_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("");
             Response response = client.PutEmpty(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -215,6 +222,7 @@ namespace body_string_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("");
             Response response = await client.PutEmptyAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -279,6 +287,7 @@ namespace body_string_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€");
             Response response = client.PutMbcs(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -291,6 +300,7 @@ namespace body_string_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€");
             Response response = await client.PutMbcsAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -303,6 +313,7 @@ namespace body_string_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€");
             Response response = client.PutMbcs(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -315,6 +326,7 @@ namespace body_string_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€");
             Response response = await client.PutMbcsAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -379,6 +391,7 @@ namespace body_string_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("    Now is the time for all good men to come to the aid of their country    ");
             Response response = client.PutWhitespace(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -391,6 +404,7 @@ namespace body_string_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("    Now is the time for all good men to come to the aid of their country    ");
             Response response = await client.PutWhitespaceAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -403,6 +417,7 @@ namespace body_string_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("    Now is the time for all good men to come to the aid of their country    ");
             Response response = client.PutWhitespace(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -415,6 +430,7 @@ namespace body_string_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("    Now is the time for all good men to come to the aid of their country    ");
             Response response = await client.PutWhitespaceAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -583,6 +599,7 @@ namespace body_string_LowLevel.Samples
 
             RequestContent content = RequestContent.Create(new object());
             Response response = client.PutBase64UrlEncoded(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -595,6 +612,7 @@ namespace body_string_LowLevel.Samples
 
             RequestContent content = RequestContent.Create(new object());
             Response response = await client.PutBase64UrlEncodedAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -607,6 +625,7 @@ namespace body_string_LowLevel.Samples
 
             RequestContent content = RequestContent.Create(new object());
             Response response = client.PutBase64UrlEncoded(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -619,6 +638,7 @@ namespace body_string_LowLevel.Samples
 
             RequestContent content = RequestContent.Create(new object());
             Response response = await client.PutBase64UrlEncodedAsync(content);
+
             Console.WriteLine(response.Status);
         }
 

@@ -16,7 +16,7 @@ using _Specs_.Azure.ClientGenerator.Core.Internal.Models;
 
 namespace _Specs_.Azure.ClientGenerator.Core.Internal.Samples
 {
-    internal class Samples_Shared
+    public partial class Samples_Shared
     {
         [Test]
         [Ignore("Only validating compilation of examples")]

@@ -14,7 +14,7 @@ using security_key_LowLevel;
 
 namespace security_key_LowLevel.Samples
 {
-    public class Samples_AutorestSecurityKeyClient
+    public partial class Samples_AutorestSecurityKeyClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
@@ -24,6 +24,7 @@ namespace security_key_LowLevel.Samples
             AutorestSecurityKeyClient client = new AutorestSecurityKeyClient(credential);
 
             Response response = client.Head();
+
             Console.WriteLine(response.Status);
         }
 
@@ -35,6 +36,7 @@ namespace security_key_LowLevel.Samples
             AutorestSecurityKeyClient client = new AutorestSecurityKeyClient(credential);
 
             Response response = await client.HeadAsync();
+
             Console.WriteLine(response.Status);
         }
 
@@ -46,6 +48,7 @@ namespace security_key_LowLevel.Samples
             AutorestSecurityKeyClient client = new AutorestSecurityKeyClient(credential);
 
             Response response = client.Head();
+
             Console.WriteLine(response.Status);
         }
 
@@ -57,6 +60,7 @@ namespace security_key_LowLevel.Samples
             AutorestSecurityKeyClient client = new AutorestSecurityKeyClient(credential);
 
             Response response = await client.HeadAsync();
+
             Console.WriteLine(response.Status);
         }
     }

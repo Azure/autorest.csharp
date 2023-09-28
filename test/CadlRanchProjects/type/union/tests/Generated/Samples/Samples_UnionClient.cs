@@ -16,7 +16,7 @@ using _Type.Union;
 
 namespace _Type.Union.Samples
 {
-    public class Samples_UnionClient
+    public partial class Samples_UnionClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
@@ -29,6 +29,7 @@ namespace _Type.Union.Samples
                 simpleUnion = 1234,
             });
             Response response = client.SendInt(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -43,6 +44,7 @@ namespace _Type.Union.Samples
                 simpleUnion = 1234,
             });
             Response response = await client.SendIntAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -57,6 +59,7 @@ namespace _Type.Union.Samples
                 simpleUnion = 1234,
             });
             Response response = client.SendInt(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -71,6 +74,7 @@ namespace _Type.Union.Samples
                 simpleUnion = 1234,
             });
             Response response = await client.SendIntAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -85,6 +89,7 @@ namespace _Type.Union.Samples
                 simpleUnion = 1234,
             });
             Response response = client.SendIntArray(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -99,6 +104,7 @@ namespace _Type.Union.Samples
                 simpleUnion = 1234,
             });
             Response response = await client.SendIntArrayAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -113,6 +119,7 @@ namespace _Type.Union.Samples
                 simpleUnion = 1234,
             });
             Response response = client.SendIntArray(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -127,6 +134,7 @@ namespace _Type.Union.Samples
                 simpleUnion = 1234,
             });
             Response response = await client.SendIntArrayAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -145,6 +153,7 @@ namespace _Type.Union.Samples
                 },
             });
             Response response = client.SendFirstNamedUnionValue(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -163,6 +172,7 @@ namespace _Type.Union.Samples
                 },
             });
             Response response = await client.SendFirstNamedUnionValueAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -181,6 +191,7 @@ namespace _Type.Union.Samples
                 },
             });
             Response response = client.SendFirstNamedUnionValue(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -199,6 +210,7 @@ namespace _Type.Union.Samples
                 },
             });
             Response response = await client.SendFirstNamedUnionValueAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -217,6 +229,7 @@ namespace _Type.Union.Samples
                 },
             });
             Response response = client.SendSecondNamedUnionValue(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -235,6 +248,7 @@ namespace _Type.Union.Samples
                 },
             });
             Response response = await client.SendSecondNamedUnionValueAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -253,6 +267,7 @@ namespace _Type.Union.Samples
                 },
             });
             Response response = client.SendSecondNamedUnionValue(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -271,6 +286,7 @@ namespace _Type.Union.Samples
                 },
             });
             Response response = await client.SendSecondNamedUnionValueAsync(content);
+
             Console.WriteLine(response.Status);
         }
 

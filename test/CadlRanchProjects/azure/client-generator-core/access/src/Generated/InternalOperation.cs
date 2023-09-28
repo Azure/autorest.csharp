@@ -50,7 +50,6 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        /// <include file="Docs/InternalOperation.xml" path="doc/members/member[@name='NoDecoratorInInternalAsync(string,CancellationToken)']/*" />
         internal virtual async Task<Response<NoDecoratorModelInInternal>> NoDecoratorInInternalAsync(string name, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(name, nameof(name));
@@ -63,7 +62,6 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        /// <include file="Docs/InternalOperation.xml" path="doc/members/member[@name='NoDecoratorInInternal(string,CancellationToken)']/*" />
         internal virtual Response<NoDecoratorModelInInternal> NoDecoratorInInternal(string name, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(name, nameof(name));
@@ -93,7 +91,6 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/InternalOperation.xml" path="doc/members/member[@name='NoDecoratorInInternalAsync(string,RequestContext)']/*" />
         internal virtual async Task<Response> NoDecoratorInInternalAsync(string name, RequestContext context)
         {
             Argument.AssertNotNull(name, nameof(name));
@@ -132,7 +129,6 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/InternalOperation.xml" path="doc/members/member[@name='NoDecoratorInInternal(string,RequestContext)']/*" />
         internal virtual Response NoDecoratorInInternal(string name, RequestContext context)
         {
             Argument.AssertNotNull(name, nameof(name));
@@ -154,7 +150,6 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        /// <include file="Docs/InternalOperation.xml" path="doc/members/member[@name='InternalDecoratorInInternalAsync(string,CancellationToken)']/*" />
         internal virtual async Task<Response<InternalDecoratorModelInInternal>> InternalDecoratorInInternalAsync(string name, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(name, nameof(name));
@@ -167,7 +162,6 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        /// <include file="Docs/InternalOperation.xml" path="doc/members/member[@name='InternalDecoratorInInternal(string,CancellationToken)']/*" />
         internal virtual Response<InternalDecoratorModelInInternal> InternalDecoratorInInternal(string name, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(name, nameof(name));
@@ -197,7 +191,6 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/InternalOperation.xml" path="doc/members/member[@name='InternalDecoratorInInternalAsync(string,RequestContext)']/*" />
         internal virtual async Task<Response> InternalDecoratorInInternalAsync(string name, RequestContext context)
         {
             Argument.AssertNotNull(name, nameof(name));
@@ -236,7 +229,6 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/InternalOperation.xml" path="doc/members/member[@name='InternalDecoratorInInternal(string,RequestContext)']/*" />
         internal virtual Response InternalDecoratorInInternal(string name, RequestContext context)
         {
             Argument.AssertNotNull(name, nameof(name));
@@ -258,7 +250,6 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        /// <include file="Docs/InternalOperation.xml" path="doc/members/member[@name='PublicDecoratorInInternalAsync(string,CancellationToken)']/*" />
         internal virtual async Task<Response<PublicDecoratorModelInInternal>> PublicDecoratorInInternalAsync(string name, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(name, nameof(name));
@@ -271,7 +262,6 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        /// <include file="Docs/InternalOperation.xml" path="doc/members/member[@name='PublicDecoratorInInternal(string,CancellationToken)']/*" />
         internal virtual Response<PublicDecoratorModelInInternal> PublicDecoratorInInternal(string name, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(name, nameof(name));
@@ -301,7 +291,6 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/InternalOperation.xml" path="doc/members/member[@name='PublicDecoratorInInternalAsync(string,RequestContext)']/*" />
         internal virtual async Task<Response> PublicDecoratorInInternalAsync(string name, RequestContext context)
         {
             Argument.AssertNotNull(name, nameof(name));
@@ -340,7 +329,6 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/InternalOperation.xml" path="doc/members/member[@name='PublicDecoratorInInternal(string,RequestContext)']/*" />
         internal virtual Response PublicDecoratorInInternal(string name, RequestContext context)
         {
             Argument.AssertNotNull(name, nameof(name));

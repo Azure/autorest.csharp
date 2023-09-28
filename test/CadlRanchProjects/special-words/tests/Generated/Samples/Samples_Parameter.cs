@@ -14,7 +14,7 @@ using SpecialWords;
 
 namespace SpecialWords.Samples
 {
-    internal class Samples_Parameter
+    public partial class Samples_Parameter
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
@@ -23,6 +23,7 @@ namespace SpecialWords.Samples
             Parameter client = new SpecialWordsClient().GetParameterClient(apiVersion: "1.0.0");
 
             Response response = client.GetWithIf("<if>");
+
             Console.WriteLine(response.Status);
         }
 
@@ -33,6 +34,7 @@ namespace SpecialWords.Samples
             Parameter client = new SpecialWordsClient().GetParameterClient(apiVersion: "1.0.0");
 
             Response response = await client.GetWithIfAsync("<if>");
+
             Console.WriteLine(response.Status);
         }
 
@@ -43,6 +45,7 @@ namespace SpecialWords.Samples
             Parameter client = new SpecialWordsClient().GetParameterClient(apiVersion: "1.0.0");
 
             Response response = client.GetWithIf("<if>");
+
             Console.WriteLine(response.Status);
         }
 
@@ -53,6 +56,7 @@ namespace SpecialWords.Samples
             Parameter client = new SpecialWordsClient().GetParameterClient(apiVersion: "1.0.0");
 
             Response response = await client.GetWithIfAsync("<if>");
+
             Console.WriteLine(response.Status);
         }
 
@@ -63,6 +67,7 @@ namespace SpecialWords.Samples
             Parameter client = new SpecialWordsClient().GetParameterClient(apiVersion: "1.0.0");
 
             Response response = client.GetWithFilter("<filter>");
+
             Console.WriteLine(response.Status);
         }
 
@@ -73,6 +78,7 @@ namespace SpecialWords.Samples
             Parameter client = new SpecialWordsClient().GetParameterClient(apiVersion: "1.0.0");
 
             Response response = await client.GetWithFilterAsync("<filter>");
+
             Console.WriteLine(response.Status);
         }
 
@@ -83,6 +89,7 @@ namespace SpecialWords.Samples
             Parameter client = new SpecialWordsClient().GetParameterClient(apiVersion: "1.0.0");
 
             Response response = client.GetWithFilter("<filter>");
+
             Console.WriteLine(response.Status);
         }
 
@@ -93,6 +100,7 @@ namespace SpecialWords.Samples
             Parameter client = new SpecialWordsClient().GetParameterClient(apiVersion: "1.0.0");
 
             Response response = await client.GetWithFilterAsync("<filter>");
+
             Console.WriteLine(response.Status);
         }
     }

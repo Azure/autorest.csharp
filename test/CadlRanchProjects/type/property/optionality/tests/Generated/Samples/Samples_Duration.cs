@@ -18,7 +18,7 @@ using _Type.Property.Optionality.Models;
 
 namespace _Type.Property.Optionality.Samples
 {
-    internal class Samples_Duration
+    public partial class Samples_Duration
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
@@ -196,6 +196,7 @@ namespace _Type.Property.Optionality.Samples
 
             RequestContent content = RequestContent.Create(new object());
             Response response = client.PutAll(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -207,6 +208,7 @@ namespace _Type.Property.Optionality.Samples
 
             RequestContent content = RequestContent.Create(new object());
             Response response = await client.PutAllAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -218,7 +220,6 @@ namespace _Type.Property.Optionality.Samples
 
             DurationProperty body = new DurationProperty();
             Response response = client.PutAll(body);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -229,7 +230,6 @@ namespace _Type.Property.Optionality.Samples
 
             DurationProperty body = new DurationProperty();
             Response response = await client.PutAllAsync(body);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -243,6 +243,7 @@ namespace _Type.Property.Optionality.Samples
                 property = "PT1H23M45S",
             });
             Response response = client.PutAll(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -257,6 +258,7 @@ namespace _Type.Property.Optionality.Samples
                 property = "PT1H23M45S",
             });
             Response response = await client.PutAllAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -266,12 +268,11 @@ namespace _Type.Property.Optionality.Samples
         {
             Duration client = new OptionalClient().GetDurationClient(apiVersion: "1.0.0");
 
-            DurationProperty body = new DurationProperty()
+            DurationProperty body = new DurationProperty
             {
                 Property = XmlConvert.ToTimeSpan("PT1H23M45S"),
             };
             Response response = client.PutAll(body);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -280,12 +281,11 @@ namespace _Type.Property.Optionality.Samples
         {
             Duration client = new OptionalClient().GetDurationClient(apiVersion: "1.0.0");
 
-            DurationProperty body = new DurationProperty()
+            DurationProperty body = new DurationProperty
             {
                 Property = XmlConvert.ToTimeSpan("PT1H23M45S"),
             };
             Response response = await client.PutAllAsync(body);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -296,6 +296,7 @@ namespace _Type.Property.Optionality.Samples
 
             RequestContent content = RequestContent.Create(new object());
             Response response = client.PutDefault(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -307,6 +308,7 @@ namespace _Type.Property.Optionality.Samples
 
             RequestContent content = RequestContent.Create(new object());
             Response response = await client.PutDefaultAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -318,7 +320,6 @@ namespace _Type.Property.Optionality.Samples
 
             DurationProperty body = new DurationProperty();
             Response response = client.PutDefault(body);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -329,7 +330,6 @@ namespace _Type.Property.Optionality.Samples
 
             DurationProperty body = new DurationProperty();
             Response response = await client.PutDefaultAsync(body);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -343,6 +343,7 @@ namespace _Type.Property.Optionality.Samples
                 property = "PT1H23M45S",
             });
             Response response = client.PutDefault(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -357,6 +358,7 @@ namespace _Type.Property.Optionality.Samples
                 property = "PT1H23M45S",
             });
             Response response = await client.PutDefaultAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -366,12 +368,11 @@ namespace _Type.Property.Optionality.Samples
         {
             Duration client = new OptionalClient().GetDurationClient(apiVersion: "1.0.0");
 
-            DurationProperty body = new DurationProperty()
+            DurationProperty body = new DurationProperty
             {
                 Property = XmlConvert.ToTimeSpan("PT1H23M45S"),
             };
             Response response = client.PutDefault(body);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -380,12 +381,11 @@ namespace _Type.Property.Optionality.Samples
         {
             Duration client = new OptionalClient().GetDurationClient(apiVersion: "1.0.0");
 
-            DurationProperty body = new DurationProperty()
+            DurationProperty body = new DurationProperty
             {
                 Property = XmlConvert.ToTimeSpan("PT1H23M45S"),
             };
             Response response = await client.PutDefaultAsync(body);
-            Console.WriteLine(response.Status);
         }
     }
 }

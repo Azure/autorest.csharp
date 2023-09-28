@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
@@ -17,7 +16,7 @@ using NUnit.Framework;
 
 namespace Azure.AI.DocumentTranslation.Samples
 {
-    public class Samples_DocumentTranslationClient
+    public partial class Samples_DocumentTranslationClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
@@ -509,17 +508,17 @@ namespace Azure.AI.DocumentTranslation.Samples
             foreach (BinaryData item in client.GetTranslationsStatus())
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("id").ToString());
-                Console.WriteLine(result[0].GetProperty("createdDateTimeUtc").ToString());
-                Console.WriteLine(result[0].GetProperty("lastActionDateTimeUtc").ToString());
-                Console.WriteLine(result[0].GetProperty("status").ToString());
-                Console.WriteLine(result[0].GetProperty("summary").GetProperty("total").ToString());
-                Console.WriteLine(result[0].GetProperty("summary").GetProperty("failed").ToString());
-                Console.WriteLine(result[0].GetProperty("summary").GetProperty("success").ToString());
-                Console.WriteLine(result[0].GetProperty("summary").GetProperty("inProgress").ToString());
-                Console.WriteLine(result[0].GetProperty("summary").GetProperty("notYetStarted").ToString());
-                Console.WriteLine(result[0].GetProperty("summary").GetProperty("cancelled").ToString());
-                Console.WriteLine(result[0].GetProperty("summary").GetProperty("totalCharacterCharged").ToString());
+                Console.WriteLine(result.GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("createdDateTimeUtc").ToString());
+                Console.WriteLine(result.GetProperty("lastActionDateTimeUtc").ToString());
+                Console.WriteLine(result.GetProperty("status").ToString());
+                Console.WriteLine(result.GetProperty("summary").GetProperty("total").ToString());
+                Console.WriteLine(result.GetProperty("summary").GetProperty("failed").ToString());
+                Console.WriteLine(result.GetProperty("summary").GetProperty("success").ToString());
+                Console.WriteLine(result.GetProperty("summary").GetProperty("inProgress").ToString());
+                Console.WriteLine(result.GetProperty("summary").GetProperty("notYetStarted").ToString());
+                Console.WriteLine(result.GetProperty("summary").GetProperty("cancelled").ToString());
+                Console.WriteLine(result.GetProperty("summary").GetProperty("totalCharacterCharged").ToString());
             }
         }
 
@@ -533,17 +532,17 @@ namespace Azure.AI.DocumentTranslation.Samples
             await foreach (BinaryData item in client.GetTranslationsStatusAsync())
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("id").ToString());
-                Console.WriteLine(result[0].GetProperty("createdDateTimeUtc").ToString());
-                Console.WriteLine(result[0].GetProperty("lastActionDateTimeUtc").ToString());
-                Console.WriteLine(result[0].GetProperty("status").ToString());
-                Console.WriteLine(result[0].GetProperty("summary").GetProperty("total").ToString());
-                Console.WriteLine(result[0].GetProperty("summary").GetProperty("failed").ToString());
-                Console.WriteLine(result[0].GetProperty("summary").GetProperty("success").ToString());
-                Console.WriteLine(result[0].GetProperty("summary").GetProperty("inProgress").ToString());
-                Console.WriteLine(result[0].GetProperty("summary").GetProperty("notYetStarted").ToString());
-                Console.WriteLine(result[0].GetProperty("summary").GetProperty("cancelled").ToString());
-                Console.WriteLine(result[0].GetProperty("summary").GetProperty("totalCharacterCharged").ToString());
+                Console.WriteLine(result.GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("createdDateTimeUtc").ToString());
+                Console.WriteLine(result.GetProperty("lastActionDateTimeUtc").ToString());
+                Console.WriteLine(result.GetProperty("status").ToString());
+                Console.WriteLine(result.GetProperty("summary").GetProperty("total").ToString());
+                Console.WriteLine(result.GetProperty("summary").GetProperty("failed").ToString());
+                Console.WriteLine(result.GetProperty("summary").GetProperty("success").ToString());
+                Console.WriteLine(result.GetProperty("summary").GetProperty("inProgress").ToString());
+                Console.WriteLine(result.GetProperty("summary").GetProperty("notYetStarted").ToString());
+                Console.WriteLine(result.GetProperty("summary").GetProperty("cancelled").ToString());
+                Console.WriteLine(result.GetProperty("summary").GetProperty("totalCharacterCharged").ToString());
             }
         }
 
@@ -554,35 +553,26 @@ namespace Azure.AI.DocumentTranslation.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", credential);
 
-            foreach (BinaryData item in client.GetTranslationsStatus(top: 1234, skip: 1234, maxpagesize: 1234, ids: new List<Guid>()
-{
-Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a")
-}, statuses: new List<string>()
-{
-"<statuses>"
-}, createdDateTimeUtcStart: DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"), createdDateTimeUtcEnd: DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"), orderBy: new List<string>()
-{
-"<orderBy>"
-}))
+            foreach (BinaryData item in client.GetTranslationsStatus(top: 1234, skip: 1234, maxpagesize: 1234, ids: new Guid[] { Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a") }, statuses: new string[] { "<statuses>" }, createdDateTimeUtcStart: DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"), createdDateTimeUtcEnd: DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"), orderBy: new string[] { "<orderBy>" }))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("id").ToString());
-                Console.WriteLine(result[0].GetProperty("createdDateTimeUtc").ToString());
-                Console.WriteLine(result[0].GetProperty("lastActionDateTimeUtc").ToString());
-                Console.WriteLine(result[0].GetProperty("status").ToString());
-                Console.WriteLine(result[0].GetProperty("error").GetProperty("code").ToString());
-                Console.WriteLine(result[0].GetProperty("error").GetProperty("message").ToString());
-                Console.WriteLine(result[0].GetProperty("error").GetProperty("target").ToString());
-                Console.WriteLine(result[0].GetProperty("error").GetProperty("innerError").GetProperty("code").ToString());
-                Console.WriteLine(result[0].GetProperty("error").GetProperty("innerError").GetProperty("message").ToString());
-                Console.WriteLine(result[0].GetProperty("error").GetProperty("innerError").GetProperty("target").ToString());
-                Console.WriteLine(result[0].GetProperty("summary").GetProperty("total").ToString());
-                Console.WriteLine(result[0].GetProperty("summary").GetProperty("failed").ToString());
-                Console.WriteLine(result[0].GetProperty("summary").GetProperty("success").ToString());
-                Console.WriteLine(result[0].GetProperty("summary").GetProperty("inProgress").ToString());
-                Console.WriteLine(result[0].GetProperty("summary").GetProperty("notYetStarted").ToString());
-                Console.WriteLine(result[0].GetProperty("summary").GetProperty("cancelled").ToString());
-                Console.WriteLine(result[0].GetProperty("summary").GetProperty("totalCharacterCharged").ToString());
+                Console.WriteLine(result.GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("createdDateTimeUtc").ToString());
+                Console.WriteLine(result.GetProperty("lastActionDateTimeUtc").ToString());
+                Console.WriteLine(result.GetProperty("status").ToString());
+                Console.WriteLine(result.GetProperty("error").GetProperty("code").ToString());
+                Console.WriteLine(result.GetProperty("error").GetProperty("message").ToString());
+                Console.WriteLine(result.GetProperty("error").GetProperty("target").ToString());
+                Console.WriteLine(result.GetProperty("error").GetProperty("innerError").GetProperty("code").ToString());
+                Console.WriteLine(result.GetProperty("error").GetProperty("innerError").GetProperty("message").ToString());
+                Console.WriteLine(result.GetProperty("error").GetProperty("innerError").GetProperty("target").ToString());
+                Console.WriteLine(result.GetProperty("summary").GetProperty("total").ToString());
+                Console.WriteLine(result.GetProperty("summary").GetProperty("failed").ToString());
+                Console.WriteLine(result.GetProperty("summary").GetProperty("success").ToString());
+                Console.WriteLine(result.GetProperty("summary").GetProperty("inProgress").ToString());
+                Console.WriteLine(result.GetProperty("summary").GetProperty("notYetStarted").ToString());
+                Console.WriteLine(result.GetProperty("summary").GetProperty("cancelled").ToString());
+                Console.WriteLine(result.GetProperty("summary").GetProperty("totalCharacterCharged").ToString());
             }
         }
 
@@ -593,35 +583,26 @@ Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a")
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", credential);
 
-            await foreach (BinaryData item in client.GetTranslationsStatusAsync(top: 1234, skip: 1234, maxpagesize: 1234, ids: new List<Guid>()
-{
-Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a")
-}, statuses: new List<string>()
-{
-"<statuses>"
-}, createdDateTimeUtcStart: DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"), createdDateTimeUtcEnd: DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"), orderBy: new List<string>()
-{
-"<orderBy>"
-}))
+            await foreach (BinaryData item in client.GetTranslationsStatusAsync(top: 1234, skip: 1234, maxpagesize: 1234, ids: new Guid[] { Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a") }, statuses: new string[] { "<statuses>" }, createdDateTimeUtcStart: DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"), createdDateTimeUtcEnd: DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"), orderBy: new string[] { "<orderBy>" }))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("id").ToString());
-                Console.WriteLine(result[0].GetProperty("createdDateTimeUtc").ToString());
-                Console.WriteLine(result[0].GetProperty("lastActionDateTimeUtc").ToString());
-                Console.WriteLine(result[0].GetProperty("status").ToString());
-                Console.WriteLine(result[0].GetProperty("error").GetProperty("code").ToString());
-                Console.WriteLine(result[0].GetProperty("error").GetProperty("message").ToString());
-                Console.WriteLine(result[0].GetProperty("error").GetProperty("target").ToString());
-                Console.WriteLine(result[0].GetProperty("error").GetProperty("innerError").GetProperty("code").ToString());
-                Console.WriteLine(result[0].GetProperty("error").GetProperty("innerError").GetProperty("message").ToString());
-                Console.WriteLine(result[0].GetProperty("error").GetProperty("innerError").GetProperty("target").ToString());
-                Console.WriteLine(result[0].GetProperty("summary").GetProperty("total").ToString());
-                Console.WriteLine(result[0].GetProperty("summary").GetProperty("failed").ToString());
-                Console.WriteLine(result[0].GetProperty("summary").GetProperty("success").ToString());
-                Console.WriteLine(result[0].GetProperty("summary").GetProperty("inProgress").ToString());
-                Console.WriteLine(result[0].GetProperty("summary").GetProperty("notYetStarted").ToString());
-                Console.WriteLine(result[0].GetProperty("summary").GetProperty("cancelled").ToString());
-                Console.WriteLine(result[0].GetProperty("summary").GetProperty("totalCharacterCharged").ToString());
+                Console.WriteLine(result.GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("createdDateTimeUtc").ToString());
+                Console.WriteLine(result.GetProperty("lastActionDateTimeUtc").ToString());
+                Console.WriteLine(result.GetProperty("status").ToString());
+                Console.WriteLine(result.GetProperty("error").GetProperty("code").ToString());
+                Console.WriteLine(result.GetProperty("error").GetProperty("message").ToString());
+                Console.WriteLine(result.GetProperty("error").GetProperty("target").ToString());
+                Console.WriteLine(result.GetProperty("error").GetProperty("innerError").GetProperty("code").ToString());
+                Console.WriteLine(result.GetProperty("error").GetProperty("innerError").GetProperty("message").ToString());
+                Console.WriteLine(result.GetProperty("error").GetProperty("innerError").GetProperty("target").ToString());
+                Console.WriteLine(result.GetProperty("summary").GetProperty("total").ToString());
+                Console.WriteLine(result.GetProperty("summary").GetProperty("failed").ToString());
+                Console.WriteLine(result.GetProperty("summary").GetProperty("success").ToString());
+                Console.WriteLine(result.GetProperty("summary").GetProperty("inProgress").ToString());
+                Console.WriteLine(result.GetProperty("summary").GetProperty("notYetStarted").ToString());
+                Console.WriteLine(result.GetProperty("summary").GetProperty("cancelled").ToString());
+                Console.WriteLine(result.GetProperty("summary").GetProperty("totalCharacterCharged").ToString());
             }
         }
 
@@ -635,13 +616,13 @@ Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a")
             foreach (BinaryData item in client.GetDocumentsStatus(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a")))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("sourcePath").ToString());
-                Console.WriteLine(result[0].GetProperty("createdDateTimeUtc").ToString());
-                Console.WriteLine(result[0].GetProperty("lastActionDateTimeUtc").ToString());
-                Console.WriteLine(result[0].GetProperty("status").ToString());
-                Console.WriteLine(result[0].GetProperty("to").ToString());
-                Console.WriteLine(result[0].GetProperty("progress").ToString());
-                Console.WriteLine(result[0].GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("sourcePath").ToString());
+                Console.WriteLine(result.GetProperty("createdDateTimeUtc").ToString());
+                Console.WriteLine(result.GetProperty("lastActionDateTimeUtc").ToString());
+                Console.WriteLine(result.GetProperty("status").ToString());
+                Console.WriteLine(result.GetProperty("to").ToString());
+                Console.WriteLine(result.GetProperty("progress").ToString());
+                Console.WriteLine(result.GetProperty("id").ToString());
             }
         }
 
@@ -655,13 +636,13 @@ Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a")
             await foreach (BinaryData item in client.GetDocumentsStatusAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a")))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("sourcePath").ToString());
-                Console.WriteLine(result[0].GetProperty("createdDateTimeUtc").ToString());
-                Console.WriteLine(result[0].GetProperty("lastActionDateTimeUtc").ToString());
-                Console.WriteLine(result[0].GetProperty("status").ToString());
-                Console.WriteLine(result[0].GetProperty("to").ToString());
-                Console.WriteLine(result[0].GetProperty("progress").ToString());
-                Console.WriteLine(result[0].GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("sourcePath").ToString());
+                Console.WriteLine(result.GetProperty("createdDateTimeUtc").ToString());
+                Console.WriteLine(result.GetProperty("lastActionDateTimeUtc").ToString());
+                Console.WriteLine(result.GetProperty("status").ToString());
+                Console.WriteLine(result.GetProperty("to").ToString());
+                Console.WriteLine(result.GetProperty("progress").ToString());
+                Console.WriteLine(result.GetProperty("id").ToString());
             }
         }
 
@@ -672,33 +653,24 @@ Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a")
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", credential);
 
-            foreach (BinaryData item in client.GetDocumentsStatus(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), top: 1234, skip: 1234, maxpagesize: 1234, ids: new List<Guid>()
-{
-Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a")
-}, statuses: new List<string>()
-{
-"<statuses>"
-}, createdDateTimeUtcStart: DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"), createdDateTimeUtcEnd: DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"), orderBy: new List<string>()
-{
-"<orderBy>"
-}))
+            foreach (BinaryData item in client.GetDocumentsStatus(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), top: 1234, skip: 1234, maxpagesize: 1234, ids: new Guid[] { Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a") }, statuses: new string[] { "<statuses>" }, createdDateTimeUtcStart: DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"), createdDateTimeUtcEnd: DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"), orderBy: new string[] { "<orderBy>" }))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("path").ToString());
-                Console.WriteLine(result[0].GetProperty("sourcePath").ToString());
-                Console.WriteLine(result[0].GetProperty("createdDateTimeUtc").ToString());
-                Console.WriteLine(result[0].GetProperty("lastActionDateTimeUtc").ToString());
-                Console.WriteLine(result[0].GetProperty("status").ToString());
-                Console.WriteLine(result[0].GetProperty("to").ToString());
-                Console.WriteLine(result[0].GetProperty("error").GetProperty("code").ToString());
-                Console.WriteLine(result[0].GetProperty("error").GetProperty("message").ToString());
-                Console.WriteLine(result[0].GetProperty("error").GetProperty("target").ToString());
-                Console.WriteLine(result[0].GetProperty("error").GetProperty("innerError").GetProperty("code").ToString());
-                Console.WriteLine(result[0].GetProperty("error").GetProperty("innerError").GetProperty("message").ToString());
-                Console.WriteLine(result[0].GetProperty("error").GetProperty("innerError").GetProperty("target").ToString());
-                Console.WriteLine(result[0].GetProperty("progress").ToString());
-                Console.WriteLine(result[0].GetProperty("id").ToString());
-                Console.WriteLine(result[0].GetProperty("characterCharged").ToString());
+                Console.WriteLine(result.GetProperty("path").ToString());
+                Console.WriteLine(result.GetProperty("sourcePath").ToString());
+                Console.WriteLine(result.GetProperty("createdDateTimeUtc").ToString());
+                Console.WriteLine(result.GetProperty("lastActionDateTimeUtc").ToString());
+                Console.WriteLine(result.GetProperty("status").ToString());
+                Console.WriteLine(result.GetProperty("to").ToString());
+                Console.WriteLine(result.GetProperty("error").GetProperty("code").ToString());
+                Console.WriteLine(result.GetProperty("error").GetProperty("message").ToString());
+                Console.WriteLine(result.GetProperty("error").GetProperty("target").ToString());
+                Console.WriteLine(result.GetProperty("error").GetProperty("innerError").GetProperty("code").ToString());
+                Console.WriteLine(result.GetProperty("error").GetProperty("innerError").GetProperty("message").ToString());
+                Console.WriteLine(result.GetProperty("error").GetProperty("innerError").GetProperty("target").ToString());
+                Console.WriteLine(result.GetProperty("progress").ToString());
+                Console.WriteLine(result.GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("characterCharged").ToString());
             }
         }
 
@@ -709,33 +681,24 @@ Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a")
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", credential);
 
-            await foreach (BinaryData item in client.GetDocumentsStatusAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), top: 1234, skip: 1234, maxpagesize: 1234, ids: new List<Guid>()
-{
-Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a")
-}, statuses: new List<string>()
-{
-"<statuses>"
-}, createdDateTimeUtcStart: DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"), createdDateTimeUtcEnd: DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"), orderBy: new List<string>()
-{
-"<orderBy>"
-}))
+            await foreach (BinaryData item in client.GetDocumentsStatusAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), top: 1234, skip: 1234, maxpagesize: 1234, ids: new Guid[] { Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a") }, statuses: new string[] { "<statuses>" }, createdDateTimeUtcStart: DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"), createdDateTimeUtcEnd: DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"), orderBy: new string[] { "<orderBy>" }))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("path").ToString());
-                Console.WriteLine(result[0].GetProperty("sourcePath").ToString());
-                Console.WriteLine(result[0].GetProperty("createdDateTimeUtc").ToString());
-                Console.WriteLine(result[0].GetProperty("lastActionDateTimeUtc").ToString());
-                Console.WriteLine(result[0].GetProperty("status").ToString());
-                Console.WriteLine(result[0].GetProperty("to").ToString());
-                Console.WriteLine(result[0].GetProperty("error").GetProperty("code").ToString());
-                Console.WriteLine(result[0].GetProperty("error").GetProperty("message").ToString());
-                Console.WriteLine(result[0].GetProperty("error").GetProperty("target").ToString());
-                Console.WriteLine(result[0].GetProperty("error").GetProperty("innerError").GetProperty("code").ToString());
-                Console.WriteLine(result[0].GetProperty("error").GetProperty("innerError").GetProperty("message").ToString());
-                Console.WriteLine(result[0].GetProperty("error").GetProperty("innerError").GetProperty("target").ToString());
-                Console.WriteLine(result[0].GetProperty("progress").ToString());
-                Console.WriteLine(result[0].GetProperty("id").ToString());
-                Console.WriteLine(result[0].GetProperty("characterCharged").ToString());
+                Console.WriteLine(result.GetProperty("path").ToString());
+                Console.WriteLine(result.GetProperty("sourcePath").ToString());
+                Console.WriteLine(result.GetProperty("createdDateTimeUtc").ToString());
+                Console.WriteLine(result.GetProperty("lastActionDateTimeUtc").ToString());
+                Console.WriteLine(result.GetProperty("status").ToString());
+                Console.WriteLine(result.GetProperty("to").ToString());
+                Console.WriteLine(result.GetProperty("error").GetProperty("code").ToString());
+                Console.WriteLine(result.GetProperty("error").GetProperty("message").ToString());
+                Console.WriteLine(result.GetProperty("error").GetProperty("target").ToString());
+                Console.WriteLine(result.GetProperty("error").GetProperty("innerError").GetProperty("code").ToString());
+                Console.WriteLine(result.GetProperty("error").GetProperty("innerError").GetProperty("message").ToString());
+                Console.WriteLine(result.GetProperty("error").GetProperty("innerError").GetProperty("target").ToString());
+                Console.WriteLine(result.GetProperty("progress").ToString());
+                Console.WriteLine(result.GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("characterCharged").ToString());
             }
         }
 
@@ -748,15 +711,15 @@ Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a")
 
             RequestContent content = RequestContent.Create(new
             {
-                inputs = new List<object>()
-{
+                inputs = new object[]
+            {
 new
 {
 source = new
 {
 sourceUrl = "<sourceUrl>",
 },
-targets = new List<object>()
+targets = new object[]
 {
 new
 {
@@ -765,7 +728,7 @@ language = "<language>",
 }
 },
 }
-},
+            },
             });
             Operation operation = client.StartTranslation(WaitUntil.Completed, content, new ContentType("application/json"));
         }
@@ -779,15 +742,15 @@ language = "<language>",
 
             RequestContent content = RequestContent.Create(new
             {
-                inputs = new List<object>()
-{
+                inputs = new object[]
+            {
 new
 {
 source = new
 {
 sourceUrl = "<sourceUrl>",
 },
-targets = new List<object>()
+targets = new object[]
 {
 new
 {
@@ -796,7 +759,7 @@ language = "<language>",
 }
 },
 }
-},
+            },
             });
             Operation operation = await client.StartTranslationAsync(WaitUntil.Completed, content, new ContentType("application/json"));
         }
@@ -810,8 +773,8 @@ language = "<language>",
 
             RequestContent content = RequestContent.Create(new
             {
-                inputs = new List<object>()
-{
+                inputs = new object[]
+            {
 new
 {
 source = new
@@ -825,14 +788,14 @@ suffix = "<suffix>",
 language = "<language>",
 storageSource = "AzureBlob",
 },
-targets = new List<object>()
+targets = new object[]
 {
 new
 {
 targetUrl = "<targetUrl>",
 category = "<category>",
 language = "<language>",
-glossaries = new List<object>()
+glossaries = new object[]
 {
 new
 {
@@ -847,7 +810,7 @@ storageSource = "AzureBlob",
 },
 storageType = "Folder",
 }
-},
+            },
             });
             Operation operation = client.StartTranslation(WaitUntil.Completed, content, new ContentType("application/json"));
         }
@@ -861,8 +824,8 @@ storageType = "Folder",
 
             RequestContent content = RequestContent.Create(new
             {
-                inputs = new List<object>()
-{
+                inputs = new object[]
+            {
 new
 {
 source = new
@@ -876,14 +839,14 @@ suffix = "<suffix>",
 language = "<language>",
 storageSource = "AzureBlob",
 },
-targets = new List<object>()
+targets = new object[]
 {
 new
 {
 targetUrl = "<targetUrl>",
 category = "<category>",
 language = "<language>",
-glossaries = new List<object>()
+glossaries = new object[]
 {
 new
 {
@@ -898,7 +861,7 @@ storageSource = "AzureBlob",
 },
 storageType = "Folder",
 }
-},
+            },
             });
             Operation operation = await client.StartTranslationAsync(WaitUntil.Completed, content, new ContentType("application/json"));
         }

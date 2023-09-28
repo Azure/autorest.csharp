@@ -43,6 +43,12 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("kind").ToString());
 Console.WriteLine(result.GetProperty("wingspan").ToString());
 ]]></code>
+This sample shows how to call GetModelAsync.
+<code><![CDATA[
+SingleDiscriminatorClient client = new SingleDiscriminatorClient();
+
+Response<Bird> response = await client.GetModelAsync();
+]]></code>
 This sample shows how to call GetModelAsync with all parameters and parse the result.
 <code><![CDATA[
 SingleDiscriminatorClient client = new SingleDiscriminatorClient();
@@ -52,6 +58,12 @@ Response response = await client.GetModelAsync(null);
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("kind").ToString());
 Console.WriteLine(result.GetProperty("wingspan").ToString());
+]]></code>
+This sample shows how to call GetModelAsync with all parameters.
+<code><![CDATA[
+SingleDiscriminatorClient client = new SingleDiscriminatorClient();
+
+Response<Bird> response = await client.GetModelAsync();
 ]]></code></example>
     </member>
     <member name="GetModel(RequestContext)">
@@ -66,6 +78,12 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("kind").ToString());
 Console.WriteLine(result.GetProperty("wingspan").ToString());
 ]]></code>
+This sample shows how to call GetModel.
+<code><![CDATA[
+SingleDiscriminatorClient client = new SingleDiscriminatorClient();
+
+Response<Bird> response = client.GetModel();
+]]></code>
 This sample shows how to call GetModel with all parameters and parse the result.
 <code><![CDATA[
 SingleDiscriminatorClient client = new SingleDiscriminatorClient();
@@ -75,6 +93,12 @@ Response response = client.GetModel(null);
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("kind").ToString());
 Console.WriteLine(result.GetProperty("wingspan").ToString());
+]]></code>
+This sample shows how to call GetModel with all parameters.
+<code><![CDATA[
+SingleDiscriminatorClient client = new SingleDiscriminatorClient();
+
+Response<Bird> response = client.GetModel();
 ]]></code></example>
     </member>
     <member name="PutModelAsync(Bird,CancellationToken)">
@@ -85,7 +109,6 @@ SingleDiscriminatorClient client = new SingleDiscriminatorClient();
 
 Bird input = new SeaGull(1234);
 Response response = await client.PutModelAsync(input);
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutModelAsync with all parameters.
 <code><![CDATA[
@@ -93,7 +116,6 @@ SingleDiscriminatorClient client = new SingleDiscriminatorClient();
 
 Bird input = new SeaGull(1234);
 Response response = await client.PutModelAsync(input);
-Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="PutModel(Bird,CancellationToken)">
@@ -104,7 +126,6 @@ SingleDiscriminatorClient client = new SingleDiscriminatorClient();
 
 Bird input = new SeaGull(1234);
 Response response = client.PutModel(input);
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutModel with all parameters.
 <code><![CDATA[
@@ -112,7 +133,6 @@ SingleDiscriminatorClient client = new SingleDiscriminatorClient();
 
 Bird input = new SeaGull(1234);
 Response response = client.PutModel(input);
-Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="PutModelAsync(RequestContent,RequestContext)">
@@ -127,7 +147,15 @@ RequestContent content = RequestContent.Create(new
     wingspan = 1234,
 });
 Response response = await client.PutModelAsync(content);
+
 Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call PutModelAsync.
+<code><![CDATA[
+SingleDiscriminatorClient client = new SingleDiscriminatorClient();
+
+Bird input = new SeaGull(1234);
+Response response = await client.PutModelAsync(input);
 ]]></code>
 This sample shows how to call PutModelAsync with all request content.
 <code><![CDATA[
@@ -139,7 +167,15 @@ RequestContent content = RequestContent.Create(new
     wingspan = 1234,
 });
 Response response = await client.PutModelAsync(content);
+
 Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call PutModelAsync with all parameters.
+<code><![CDATA[
+SingleDiscriminatorClient client = new SingleDiscriminatorClient();
+
+Bird input = new SeaGull(1234);
+Response response = await client.PutModelAsync(input);
 ]]></code></example>
     </member>
     <member name="PutModel(RequestContent,RequestContext)">
@@ -154,7 +190,15 @@ RequestContent content = RequestContent.Create(new
     wingspan = 1234,
 });
 Response response = client.PutModel(content);
+
 Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call PutModel.
+<code><![CDATA[
+SingleDiscriminatorClient client = new SingleDiscriminatorClient();
+
+Bird input = new SeaGull(1234);
+Response response = client.PutModel(input);
 ]]></code>
 This sample shows how to call PutModel with all request content.
 <code><![CDATA[
@@ -166,7 +210,15 @@ RequestContent content = RequestContent.Create(new
     wingspan = 1234,
 });
 Response response = client.PutModel(content);
+
 Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call PutModel with all parameters.
+<code><![CDATA[
+SingleDiscriminatorClient client = new SingleDiscriminatorClient();
+
+Bird input = new SeaGull(1234);
+Response response = client.PutModel(input);
 ]]></code></example>
     </member>
     <member name="GetRecursiveModelAsync(CancellationToken)">
@@ -211,6 +263,12 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("kind").ToString());
 Console.WriteLine(result.GetProperty("wingspan").ToString());
 ]]></code>
+This sample shows how to call GetRecursiveModelAsync.
+<code><![CDATA[
+SingleDiscriminatorClient client = new SingleDiscriminatorClient();
+
+Response<Bird> response = await client.GetRecursiveModelAsync();
+]]></code>
 This sample shows how to call GetRecursiveModelAsync with all parameters and parse the result.
 <code><![CDATA[
 SingleDiscriminatorClient client = new SingleDiscriminatorClient();
@@ -220,6 +278,12 @@ Response response = await client.GetRecursiveModelAsync(null);
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("kind").ToString());
 Console.WriteLine(result.GetProperty("wingspan").ToString());
+]]></code>
+This sample shows how to call GetRecursiveModelAsync with all parameters.
+<code><![CDATA[
+SingleDiscriminatorClient client = new SingleDiscriminatorClient();
+
+Response<Bird> response = await client.GetRecursiveModelAsync();
 ]]></code></example>
     </member>
     <member name="GetRecursiveModel(RequestContext)">
@@ -234,6 +298,12 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("kind").ToString());
 Console.WriteLine(result.GetProperty("wingspan").ToString());
 ]]></code>
+This sample shows how to call GetRecursiveModel.
+<code><![CDATA[
+SingleDiscriminatorClient client = new SingleDiscriminatorClient();
+
+Response<Bird> response = client.GetRecursiveModel();
+]]></code>
 This sample shows how to call GetRecursiveModel with all parameters and parse the result.
 <code><![CDATA[
 SingleDiscriminatorClient client = new SingleDiscriminatorClient();
@@ -243,6 +313,12 @@ Response response = client.GetRecursiveModel(null);
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("kind").ToString());
 Console.WriteLine(result.GetProperty("wingspan").ToString());
+]]></code>
+This sample shows how to call GetRecursiveModel with all parameters.
+<code><![CDATA[
+SingleDiscriminatorClient client = new SingleDiscriminatorClient();
+
+Response<Bird> response = client.GetRecursiveModel();
 ]]></code></example>
     </member>
     <member name="PutRecursiveModelAsync(Bird,CancellationToken)">
@@ -253,7 +329,6 @@ SingleDiscriminatorClient client = new SingleDiscriminatorClient();
 
 Bird input = new SeaGull(1234);
 Response response = await client.PutRecursiveModelAsync(input);
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutRecursiveModelAsync with all parameters.
 <code><![CDATA[
@@ -261,7 +336,6 @@ SingleDiscriminatorClient client = new SingleDiscriminatorClient();
 
 Bird input = new SeaGull(1234);
 Response response = await client.PutRecursiveModelAsync(input);
-Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="PutRecursiveModel(Bird,CancellationToken)">
@@ -272,7 +346,6 @@ SingleDiscriminatorClient client = new SingleDiscriminatorClient();
 
 Bird input = new SeaGull(1234);
 Response response = client.PutRecursiveModel(input);
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutRecursiveModel with all parameters.
 <code><![CDATA[
@@ -280,7 +353,6 @@ SingleDiscriminatorClient client = new SingleDiscriminatorClient();
 
 Bird input = new SeaGull(1234);
 Response response = client.PutRecursiveModel(input);
-Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="PutRecursiveModelAsync(RequestContent,RequestContext)">
@@ -295,7 +367,15 @@ RequestContent content = RequestContent.Create(new
     wingspan = 1234,
 });
 Response response = await client.PutRecursiveModelAsync(content);
+
 Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call PutRecursiveModelAsync.
+<code><![CDATA[
+SingleDiscriminatorClient client = new SingleDiscriminatorClient();
+
+Bird input = new SeaGull(1234);
+Response response = await client.PutRecursiveModelAsync(input);
 ]]></code>
 This sample shows how to call PutRecursiveModelAsync with all request content.
 <code><![CDATA[
@@ -307,7 +387,15 @@ RequestContent content = RequestContent.Create(new
     wingspan = 1234,
 });
 Response response = await client.PutRecursiveModelAsync(content);
+
 Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call PutRecursiveModelAsync with all parameters.
+<code><![CDATA[
+SingleDiscriminatorClient client = new SingleDiscriminatorClient();
+
+Bird input = new SeaGull(1234);
+Response response = await client.PutRecursiveModelAsync(input);
 ]]></code></example>
     </member>
     <member name="PutRecursiveModel(RequestContent,RequestContext)">
@@ -322,7 +410,15 @@ RequestContent content = RequestContent.Create(new
     wingspan = 1234,
 });
 Response response = client.PutRecursiveModel(content);
+
 Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call PutRecursiveModel.
+<code><![CDATA[
+SingleDiscriminatorClient client = new SingleDiscriminatorClient();
+
+Bird input = new SeaGull(1234);
+Response response = client.PutRecursiveModel(input);
 ]]></code>
 This sample shows how to call PutRecursiveModel with all request content.
 <code><![CDATA[
@@ -334,7 +430,15 @@ RequestContent content = RequestContent.Create(new
     wingspan = 1234,
 });
 Response response = client.PutRecursiveModel(content);
+
 Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call PutRecursiveModel with all parameters.
+<code><![CDATA[
+SingleDiscriminatorClient client = new SingleDiscriminatorClient();
+
+Bird input = new SeaGull(1234);
+Response response = client.PutRecursiveModel(input);
 ]]></code></example>
     </member>
     <member name="GetMissingDiscriminatorAsync(CancellationToken)">
@@ -379,6 +483,12 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("kind").ToString());
 Console.WriteLine(result.GetProperty("wingspan").ToString());
 ]]></code>
+This sample shows how to call GetMissingDiscriminatorAsync.
+<code><![CDATA[
+SingleDiscriminatorClient client = new SingleDiscriminatorClient();
+
+Response<Bird> response = await client.GetMissingDiscriminatorAsync();
+]]></code>
 This sample shows how to call GetMissingDiscriminatorAsync with all parameters and parse the result.
 <code><![CDATA[
 SingleDiscriminatorClient client = new SingleDiscriminatorClient();
@@ -388,6 +498,12 @@ Response response = await client.GetMissingDiscriminatorAsync(null);
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("kind").ToString());
 Console.WriteLine(result.GetProperty("wingspan").ToString());
+]]></code>
+This sample shows how to call GetMissingDiscriminatorAsync with all parameters.
+<code><![CDATA[
+SingleDiscriminatorClient client = new SingleDiscriminatorClient();
+
+Response<Bird> response = await client.GetMissingDiscriminatorAsync();
 ]]></code></example>
     </member>
     <member name="GetMissingDiscriminator(RequestContext)">
@@ -402,6 +518,12 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("kind").ToString());
 Console.WriteLine(result.GetProperty("wingspan").ToString());
 ]]></code>
+This sample shows how to call GetMissingDiscriminator.
+<code><![CDATA[
+SingleDiscriminatorClient client = new SingleDiscriminatorClient();
+
+Response<Bird> response = client.GetMissingDiscriminator();
+]]></code>
 This sample shows how to call GetMissingDiscriminator with all parameters and parse the result.
 <code><![CDATA[
 SingleDiscriminatorClient client = new SingleDiscriminatorClient();
@@ -411,6 +533,12 @@ Response response = client.GetMissingDiscriminator(null);
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("kind").ToString());
 Console.WriteLine(result.GetProperty("wingspan").ToString());
+]]></code>
+This sample shows how to call GetMissingDiscriminator with all parameters.
+<code><![CDATA[
+SingleDiscriminatorClient client = new SingleDiscriminatorClient();
+
+Response<Bird> response = client.GetMissingDiscriminator();
 ]]></code></example>
     </member>
     <member name="GetWrongDiscriminatorAsync(CancellationToken)">
@@ -455,6 +583,12 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("kind").ToString());
 Console.WriteLine(result.GetProperty("wingspan").ToString());
 ]]></code>
+This sample shows how to call GetWrongDiscriminatorAsync.
+<code><![CDATA[
+SingleDiscriminatorClient client = new SingleDiscriminatorClient();
+
+Response<Bird> response = await client.GetWrongDiscriminatorAsync();
+]]></code>
 This sample shows how to call GetWrongDiscriminatorAsync with all parameters and parse the result.
 <code><![CDATA[
 SingleDiscriminatorClient client = new SingleDiscriminatorClient();
@@ -464,6 +598,12 @@ Response response = await client.GetWrongDiscriminatorAsync(null);
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("kind").ToString());
 Console.WriteLine(result.GetProperty("wingspan").ToString());
+]]></code>
+This sample shows how to call GetWrongDiscriminatorAsync with all parameters.
+<code><![CDATA[
+SingleDiscriminatorClient client = new SingleDiscriminatorClient();
+
+Response<Bird> response = await client.GetWrongDiscriminatorAsync();
 ]]></code></example>
     </member>
     <member name="GetWrongDiscriminator(RequestContext)">
@@ -478,6 +618,12 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("kind").ToString());
 Console.WriteLine(result.GetProperty("wingspan").ToString());
 ]]></code>
+This sample shows how to call GetWrongDiscriminator.
+<code><![CDATA[
+SingleDiscriminatorClient client = new SingleDiscriminatorClient();
+
+Response<Bird> response = client.GetWrongDiscriminator();
+]]></code>
 This sample shows how to call GetWrongDiscriminator with all parameters and parse the result.
 <code><![CDATA[
 SingleDiscriminatorClient client = new SingleDiscriminatorClient();
@@ -487,6 +633,12 @@ Response response = client.GetWrongDiscriminator(null);
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("kind").ToString());
 Console.WriteLine(result.GetProperty("wingspan").ToString());
+]]></code>
+This sample shows how to call GetWrongDiscriminator with all parameters.
+<code><![CDATA[
+SingleDiscriminatorClient client = new SingleDiscriminatorClient();
+
+Response<Bird> response = client.GetWrongDiscriminator();
 ]]></code></example>
     </member>
     <member name="GetLegacyModelAsync(CancellationToken)">
@@ -531,6 +683,12 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("kind").ToString());
 Console.WriteLine(result.GetProperty("size").ToString());
 ]]></code>
+This sample shows how to call GetLegacyModelAsync.
+<code><![CDATA[
+SingleDiscriminatorClient client = new SingleDiscriminatorClient();
+
+Response<Dinosaur> response = await client.GetLegacyModelAsync();
+]]></code>
 This sample shows how to call GetLegacyModelAsync with all parameters and parse the result.
 <code><![CDATA[
 SingleDiscriminatorClient client = new SingleDiscriminatorClient();
@@ -540,6 +698,12 @@ Response response = await client.GetLegacyModelAsync(null);
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("kind").ToString());
 Console.WriteLine(result.GetProperty("size").ToString());
+]]></code>
+This sample shows how to call GetLegacyModelAsync with all parameters.
+<code><![CDATA[
+SingleDiscriminatorClient client = new SingleDiscriminatorClient();
+
+Response<Dinosaur> response = await client.GetLegacyModelAsync();
 ]]></code></example>
     </member>
     <member name="GetLegacyModel(RequestContext)">
@@ -554,6 +718,12 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("kind").ToString());
 Console.WriteLine(result.GetProperty("size").ToString());
 ]]></code>
+This sample shows how to call GetLegacyModel.
+<code><![CDATA[
+SingleDiscriminatorClient client = new SingleDiscriminatorClient();
+
+Response<Dinosaur> response = client.GetLegacyModel();
+]]></code>
 This sample shows how to call GetLegacyModel with all parameters and parse the result.
 <code><![CDATA[
 SingleDiscriminatorClient client = new SingleDiscriminatorClient();
@@ -563,6 +733,12 @@ Response response = client.GetLegacyModel(null);
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("kind").ToString());
 Console.WriteLine(result.GetProperty("size").ToString());
+]]></code>
+This sample shows how to call GetLegacyModel with all parameters.
+<code><![CDATA[
+SingleDiscriminatorClient client = new SingleDiscriminatorClient();
+
+Response<Dinosaur> response = client.GetLegacyModel();
 ]]></code></example>
     </member>
   </members>

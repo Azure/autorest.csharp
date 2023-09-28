@@ -3,15 +3,15 @@
 
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
 using System.Xml;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Input.Examples;
+using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
+using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Output.Models.Serialization;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
@@ -20,43 +20,45 @@ using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.Core;
 using Microsoft.CodeAnalysis.CSharp;
+using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
-namespace AutoRest.CSharp.LowLevel.Generation.Extensions
+namespace AutoRest.CSharp.LowLevel.Extensions
 {
-    internal static class CodeWriterExampleExtensions
+    internal static partial class ExampleValueSnippets
     {
-        public static CodeWriter AppendInputExampleValue(this CodeWriter writer, InputExampleValue exampleValue, CSharpType type, SerializationFormat serializationFormat, bool includeCollectionInitialization = true)
+        private static ValueExpression GetExpression(CSharpType type, InputExampleValue exampleValue, SerializationFormat serializationFormat, bool includeCollectionInitialization = true)
         {
             // handle list
             if (TypeFactory.IsList(type))
-                return writer.AppendListValue(type, exampleValue, serializationFormat, includeCollectionInitialization);
+                return GetExpressionForList(type, exampleValue, serializationFormat, includeCollectionInitialization);
             // handle dictionary
             if (TypeFactory.IsDictionary(type))
-                return writer.AppendDictionaryValue(type, exampleValue, serializationFormat, includeCollectionInitialization: includeCollectionInitialization);
+                return GetExpressionForDictionary(type, exampleValue, serializationFormat, includeCollectionInitialization);
 
             Type? frameworkType = type.SerializeAs != null ? type.SerializeAs : type.IsFrameworkType ? type.FrameworkType : null;
             if (frameworkType != null)
             {
                 // handle framework type
-                return writer.AppendFrameworkTypeValue(exampleValue, frameworkType, serializationFormat, includeCollectionInitialization);
+                return GetExpressionForFrameworkType(frameworkType, exampleValue, serializationFormat, includeCollectionInitialization);
             }
 
             // handle implementation
-            return writer.AppendTypeProviderValue(type, exampleValue);
+            return GetExpressionForTypeProvider(type, exampleValue);
         }
 
-        private static CodeWriter AppendFrameworkTypeValue(this CodeWriter writer, InputExampleValue exampleValue, Type frameworkType, SerializationFormat serializationFormat, bool includeCollectionInitialization = true)
+        private static ValueExpression GetExpressionForFrameworkType(Type frameworkType, InputExampleValue exampleValue, SerializationFormat serializationFormat, bool includeCollectionInitialization = true)
         {
             // handle objects - we usually do not generate object types, but for some rare cases (such as union type) we generate object
+            // and we get this case in the free form object initialization as well
             if (frameworkType == typeof(object))
             {
-                return writer.AppendFreeFormObject(exampleValue, includeCollectionInitialization);
+                return GetExpressionForFreeFormObject(exampleValue, includeCollectionInitialization);
             }
 
             // handle RequestContent
             if (frameworkType == typeof(RequestContent))
             {
-                return writer.AppendRequestContent(exampleValue);
+                return GetExpressionForRequestContent(exampleValue);
             }
 
             if (frameworkType == typeof(ETag) ||
@@ -68,22 +70,22 @@ namespace AutoRest.CSharp.LowLevel.Generation.Extensions
                 frameworkType == typeof(AzureLocation))
             {
                 if (exampleValue is InputExampleRawValue rawValue && rawValue.RawValue != null)
-                    return writer.Append($"new {frameworkType}({rawValue.RawValue.ToString():L})");
+                    return New.Instance(frameworkType, Literal(rawValue.RawValue.ToString()!));
                 else
-                    return writer.AppendRaw("default");
+                    return frameworkType.IsValueType ? Default : Null;
             }
 
             if (frameworkType == typeof(IPAddress))
             {
                 if (exampleValue is InputExampleRawValue rawValue && rawValue.RawValue != null)
-                    return writer.Append($"{frameworkType}.Parse({rawValue.RawValue.ToString():L})");
+                    return new InvokeStaticMethodExpression(typeof(IPAddress), nameof(IPAddress.Parse), new[] { Literal(rawValue.RawValue.ToString()!) });
                 else
-                    return writer.AppendRaw("default");
+                    return Null;
             }
 
             if (frameworkType == typeof(BinaryData))
             {
-                return writer.AppendBinaryData(exampleValue);
+                return GetExpressionForBinaryData(exampleValue);
             }
 
             if (frameworkType == typeof(TimeSpan))
@@ -94,20 +96,20 @@ namespace AutoRest.CSharp.LowLevel.Generation.Extensions
                     {
                         case SerializationFormat.Duration_Seconds or SerializationFormat.Duration_Seconds_Float:
                             if (rawValue.RawValue is int or float or double)
-                                return writer.Append($"{typeof(TimeSpan)}.FromSeconds({rawValue.RawValue:L})");
+                                return new InvokeStaticMethodExpression(typeof(TimeSpan), nameof(TimeSpan.FromSeconds), new[] { Literal(rawValue.RawValue) });
                             break;
                         case SerializationFormat.Duration_ISO8601:
                             if (rawValue.RawValue is string duration)
-                                return writer.Append($"{typeof(XmlConvert)}.ToTimeSpan({duration:L})");
+                                return new InvokeStaticMethodExpression(typeof(XmlConvert), nameof(XmlConvert.ToTimeSpan), new[] { Literal(duration) });
                             break;
                         case SerializationFormat.Time_ISO8601:
                             if (rawValue.RawValue is string time)
-                                return writer.Append($"{typeof(TimeSpan)}.Parse({time:L})");
+                                return new InvokeStaticMethodExpression(typeof(TimeSpan), nameof(TimeSpan.Parse), new[] { Literal(time) });
                             break;
                     };
                 }
 
-                return writer.AppendRaw("default");
+                return Default;
             }
 
             if (frameworkType == typeof(DateTimeOffset))
@@ -117,27 +119,33 @@ namespace AutoRest.CSharp.LowLevel.Generation.Extensions
                     switch (serializationFormat)
                     {
                         case SerializationFormat.DateTime_Unix:
-                            if (rawValue.RawValue is int or long)
-                                return writer.Append($"{typeof(DateTimeOffset)}.FromUnixTimeSeconds({rawValue.RawValue:L})");
+                            long? time = rawValue.RawValue switch
+                            {
+                                int i => i,
+                                long l => l,
+                                _ => null
+                            };
+                            if (time != null)
+                                return DateTimeOffsetExpression.FromUnixTimeSeconds(Long(time.Value));
                             break;
                         case SerializationFormat.DateTime_RFC1123 or SerializationFormat.DateTime_RFC3339 or SerializationFormat.DateTime_RFC7231 or SerializationFormat.DateTime_ISO8601 or SerializationFormat.Date_ISO8601:
                             if (rawValue.RawValue is string s)
-                                return writer.Append($"{typeof(DateTimeOffset)}.Parse({s:L})");
+                                return DateTimeOffsetExpression.Parse(s);
                             break;
                     }
                 }
 
-                return writer.AppendRaw("default");
+                return Default;
             }
 
             if (frameworkType == typeof(Guid))
             {
                 if (exampleValue is InputExampleRawValue rawValue && rawValue.RawValue is string s)
                 {
-                    return writer.Append($"{typeof(Guid)}.Parse({s:L})");
+                    return GuidExpression.Parse(s);
                 }
 
-                return writer.AppendRaw("default");
+                return Default;
             }
 
             if (frameworkType == typeof(char) ||
@@ -151,180 +159,153 @@ namespace AutoRest.CSharp.LowLevel.Generation.Extensions
                 if (exampleValue is InputExampleRawValue rawValue && rawValue.RawValue is char or short or int or long or float or double or decimal)
                 {
                     if (frameworkType == rawValue.RawValue.GetType())
-                        return writer.Append($"{rawValue.RawValue:L}");
+                        return Literal(rawValue.RawValue);
                     else
-                        return writer.Append($"({frameworkType}){rawValue.RawValue:L}");
+                        return new CastExpression(Literal(rawValue.RawValue), frameworkType);
                 }
 
-                return writer.AppendRaw("default");
+                return Default;
             }
 
             if (frameworkType == typeof(string))
             {
                 if (exampleValue is InputExampleRawValue rawValue && rawValue.RawValue is not null)
                 {
-                    return writer.Literal(rawValue.RawValue.ToString());
+                    return Literal(rawValue.RawValue.ToString());
                 }
 
-                return writer.AppendRaw("default");
+                return Null;
             }
 
             if (frameworkType == typeof(bool))
             {
                 if (exampleValue is InputExampleRawValue rawValue && rawValue.RawValue is bool b)
-                    return writer.Literal(b);
+                    return Literal(b);
 
-                return writer.AppendRaw("default");
+                return Default;
             }
 
             if (frameworkType == typeof(byte[]))
             {
                 if (exampleValue is InputExampleRawValue rawValue && rawValue.RawValue is not null)
-                    return writer.Append($"{typeof(Encoding)}.UTF8.GetBytes({rawValue.RawValue.ToString():L})");
+                    return new TypeReference(typeof(Encoding)).Property(nameof(Encoding.UTF8)).Invoke(nameof(Encoding.GetBytes), Literal(rawValue.RawValue.ToString()));
 
-                return writer.AppendRaw("default");
+                return Null;
             }
 
-            return writer.AppendRaw("default");
+            return frameworkType.IsValueType ? Default : Null;
         }
 
-        public static CodeWriter AppendInputExampleParameterValue(this CodeWriter writer, Parameter parameter, InputExampleParameterValue exampleParameterValue)
-        {
-            // for optional parameter, we write the parameter name here
-            if (parameter.DefaultValue != null)
-                writer.Append($"{parameter.Name}: ");
-
-            return writer.AppendInputExampleParameterValue(exampleParameterValue, parameter.SerializationFormat);
-        }
-
-        public static CodeWriter AppendInputExampleParameterValue(this CodeWriter writer, InputExampleParameterValue exampleParameterValue, SerializationFormat serializationFormat)
+        public static ValueExpression GetExpression(InputExampleParameterValue exampleParameterValue, SerializationFormat serializationFormat)
         {
             if (exampleParameterValue.Value != null)
-                return writer.AppendInputExampleValue(exampleParameterValue.Value, exampleParameterValue.Type, serializationFormat);
+                return GetExpression(exampleParameterValue.Type, exampleParameterValue.Value, serializationFormat);
+            else if (exampleParameterValue.Expression != null)
+                return exampleParameterValue.Expression;
             else
-                return writer.Append(exampleParameterValue.Expression!);
+                throw new InvalidOperationException("this should never happen");
         }
 
-        private static CodeWriter AppendRequestContent(this CodeWriter writer, InputExampleValue value)
+        private static ValueExpression GetExpressionForRequestContent(InputExampleValue value)
         {
             if (value is InputExampleRawValue rawValue && rawValue.RawValue == null)
             {
-                return writer.AppendRaw("null");
+                return Null;
             }
             else
             {
-                return writer.Append($"{typeof(RequestContent)}.Create(")
-                    .AppendFreeFormObject(value, true)
-                    .AppendRaw(")");
+                var freeFormObjectExpression = GetExpressionForFreeFormObject(value, includeCollectionInitialization: true);
+                return new TypeReference(typeof(RequestContent)).InvokeStatic(nameof(RequestContent.Create), freeFormObjectExpression);
             }
         }
 
-        private static CodeWriter AppendListValue(this CodeWriter writer, CSharpType listType, InputExampleValue exampleValue, SerializationFormat serializationFormat, bool includeCollectionInitialization = true)
+        private static ValueExpression GetExpressionForList(CSharpType listType, InputExampleValue exampleValue, SerializationFormat serializationFormat, bool includeCollectionInitialization = true)
         {
             var exampleListValue = exampleValue as InputExampleListValue;
-            // the collections in our generated SDK could never be assigned to, therefore if we have null value here, we can only assign an empty collection
-            var elements = exampleListValue?.Values ?? Enumerable.Empty<InputExampleValue>();
             var elementType = listType.Arguments.Single();
-            var initialization = includeCollectionInitialization ? (FormattableString)$"new {TypeFactory.GetImplementationType(listType)}()" : $"";
-            writer.Append(initialization);
-            if (elements.Any())
+            var elementExpressions = new List<ValueExpression>();
+            // the collections in our generated SDK could never be assigned to, therefore if we have null value here, we can only assign an empty collection
+            foreach (var itemValue in exampleListValue?.Values ?? Enumerable.Empty<InputExampleValue>())
             {
-                using (writer.Scope($"", newLine: false))
-                {
-                    foreach (var itemValue in elements)
-                    {
-                        writer.AppendInputExampleValue(itemValue, elementType, serializationFormat);
-                        if (elementType.IsFrameworkType)
-                            writer.AppendRaw(",");
-                        else
-                            writer.LineRaw(",");
-                    }
-                    writer.RemoveTrailingComma();
-                    writer.Line();
-                }
+                var elementExpression = GetExpression(elementType, itemValue, serializationFormat, includeCollectionInitialization);
+                elementExpressions.Add(elementExpression);
             }
-            return writer;
+
+            // we only put the array inline when the element is framework type or enum (which is basically framework type generated by us)
+            var isNotInline = elementType is { IsFrameworkType: false, Implementation: not EnumType } // when the element is a complex object type (not enum)
+                || TypeFactory.IsCollectionType(elementType) // when the element is a collection
+                || (elementType.IsFrameworkType && (elementType.FrameworkType == typeof(object) || (elementType.FrameworkType == typeof(BinaryData))));
+
+            return includeCollectionInitialization
+                ? New.Array(elementType, !isNotInline, elementExpressions.ToArray())
+                : new ArrayInitializerExpression(elementExpressions.ToArray());
         }
 
-        private static CodeWriter AppendDictionaryValue(this CodeWriter writer, CSharpType dictionaryType, InputExampleValue exampleValue, SerializationFormat serializationFormat, bool includeCollectionInitialization = true)
+        private static ValueExpression GetExpressionForDictionary(CSharpType dictionaryType, InputExampleValue exampleValue, SerializationFormat serializationFormat, bool includeCollectionInitialization = true)
         {
             var exampleObjectValue = exampleValue as InputExampleObjectValue;
-            // the collections in our generated SDK could never be assigned to, therefore if we have null value here, we can only assign an empty collection
-            var keyValues = exampleObjectValue?.Values ?? new Dictionary<string, InputExampleValue>();
             // since this is a dictionary, we take the first generic argument as the key type
             // this is important because in our SDK, the key of a dictionary is not always a string. It could be a string-like type, for instance, a ResourceIdentifier
             var keyType = dictionaryType.Arguments[0];
             // the second as the value type
             var valueType = dictionaryType.Arguments[1];
-            var initialization = includeCollectionInitialization ? (FormattableString)$"new {TypeFactory.GetImplementationType(dictionaryType)}()" : $"";
-            writer.Append(initialization);
-            if (keyValues.Any())
+            var elementExpressions = new List<(ValueExpression KeyExpression, ValueExpression ValueExpression)>();
+            // the collections in our generated SDK could never be assigned to, therefore if we have null value here, we can only assign an empty collection
+            foreach (var (key, value) in exampleObjectValue?.Values ?? new Dictionary<string, InputExampleValue>())
             {
-                using (writer.Scope($"", newLine: false))
-                {
-                    foreach (var (key, value) in keyValues)
-                    {
-                        // write key
-                        writer.AppendRaw("[");
-                        writer.AppendInputExampleValue(InputExampleValue.Value(InputPrimitiveType.String, key), keyType, SerializationFormat.Default);
-                        writer.AppendRaw("] = ");
-                        writer.AppendInputExampleValue(value, valueType, serializationFormat, includeCollectionInitialization);
-                        writer.LineRaw(", ");
-                    }
-                }
+                var keyExpression = GetExpression(keyType, InputExampleValue.Value(InputPrimitiveType.String, key), SerializationFormat.Default);
+                var valueExpression = GetExpression(valueType, value, serializationFormat, includeCollectionInitialization);
+                elementExpressions.Add((keyExpression, valueExpression));
             }
-            return writer;
+
+            return includeCollectionInitialization
+                ? New.Dictionary(keyType, valueType, elementExpressions.ToArray())
+                : new DictionaryInitializerExpression(elementExpressions.ToArray());
         }
 
-        private static CodeWriter AppendBinaryData(this CodeWriter writer, InputExampleValue exampleValue)
+        private static ValueExpression GetExpressionForBinaryData(InputExampleValue exampleValue)
         {
             // determine which method on BinaryData we want to use to serialize this BinaryData
-            string method = exampleValue is InputExampleRawValue exampleRawValue && exampleRawValue.RawValue is string ? "FromString" : "FromObjectAsJson";
-            return writer.Append($"{typeof(BinaryData)}.{method}(")
-                .AppendFreeFormObject(exampleValue, true)
-                .AppendRaw(")");
+            string method = exampleValue is InputExampleRawValue exampleRawValue && exampleRawValue.RawValue is string ? nameof(BinaryData.FromString) : nameof(BinaryData.FromObjectAsJson);
+            return new TypeReference(typeof(BinaryData)).InvokeStatic(method, GetExpressionForFreeFormObject(exampleValue, true));
         }
 
-        private static CodeWriter AppendFreeFormObject(this CodeWriter writer, InputExampleValue exampleValue, bool includeCollectionInitialization = true) => exampleValue switch
+        private static ValueExpression GetExpressionForFreeFormObject(InputExampleValue exampleValue, bool includeCollectionInitialization = true) => exampleValue switch
         {
             InputExampleRawValue rawValue => rawValue.RawValue == null ?
-                            writer.LineRaw("null") :
-                            writer.AppendFrameworkTypeValue(exampleValue, rawValue.RawValue.GetType(), SerializationFormat.Default, includeCollectionInitialization),
-            InputExampleListValue listValue => writer.AppendListValue(typeof(IList<object>), listValue, SerializationFormat.Default),
+                            Null :
+                            GetExpressionForFrameworkType(rawValue.RawValue.GetType(), exampleValue, SerializationFormat.Default, includeCollectionInitialization),
+            InputExampleListValue listValue => GetExpressionForList(typeof(IList<object>), listValue, SerializationFormat.Default),
             InputExampleObjectValue objectValue => CanBeInstantiatedByAnonymousObject(objectValue) ?
-                            writer.AppendAnonymousObject(objectValue, includeCollectionInitialization) :
-                            writer.AppendDictionaryValue(typeof(Dictionary<string, object>), objectValue, SerializationFormat.Default, includeCollectionInitialization),
-            InputExampleStreamValue streamValue => writer.Append($"{typeof(File)}.OpenRead({streamValue.Filename:L})"),
+                            GetExpressionForAnonymousObject(objectValue, includeCollectionInitialization) :
+                            GetExpressionForDictionary(typeof(Dictionary<string, object>), objectValue, SerializationFormat.Default, includeCollectionInitialization),
+            InputExampleStreamValue streamValue => InvokeFileOpenRead(streamValue.Filename),
             _ => throw new InvalidOperationException($"unhandled case {exampleValue}")
         };
 
-        private static CodeWriter AppendAnonymousObject(this CodeWriter writer, InputExampleObjectValue exampleObjectValue, bool includeCollectionInitialization = true)
+        private static ValueExpression GetExpressionForAnonymousObject(InputExampleObjectValue exampleObjectValue, bool includeCollectionInitialization = true)
         {
             // the collections in our generated SDK could never be assigned to, therefore if we have null value here, we can only assign an empty collection
             var keyValues = exampleObjectValue?.Values ?? new Dictionary<string, InputExampleValue>();
             if (keyValues.Any())
             {
-                using (writer.Scope($"new ", newLine: false))
+                var properties = new Dictionary<string, ValueExpression>();
+                foreach (var (key, value) in keyValues)
                 {
-                    foreach (var (key, value) in keyValues)
-                    {
-                        // we only write a property when it is not null because an anonymous object cannot have null assignments (causes compilation error)
-                        if (value is InputExampleRawValue rawValue && rawValue.RawValue == null)
-                            continue;
+                    // we only write a property when it is not null because an anonymous object cannot have null assignments (causes compilation error)
+                    if (value is InputExampleRawValue rawValue && rawValue.RawValue == null)
+                        continue;
 
-                        // write key
-                        writer.Append($"{key} = ");
-                        // write value
-                        writer.AppendInputExampleValue(value, typeof(object), SerializationFormat.Default, includeCollectionInitialization);
-                        writer.LineRaw(", ");
-                    }
+                    var valueExpression = GetExpression(typeof(object), value, SerializationFormat.Default, includeCollectionInitialization);
+                    properties.Add(key, valueExpression);
                 }
+
+                return New.Anonymous(properties);
             }
             else
             {
-                writer.Append($"new object()");
+                return New.Instance(typeof(object));
             }
-            return writer;
         }
 
         private static bool CanBeInstantiatedByAnonymousObject(InputExampleObjectValue objectValue)
@@ -340,37 +321,14 @@ namespace AutoRest.CSharp.LowLevel.Generation.Extensions
             return true;
         }
 
-        private static bool IsStringLikeType(CSharpType type) => type.IsFrameworkType && (_newInstanceInitializedTypes.Contains(type.FrameworkType) || _parsableInitializedTypes.Contains(type.FrameworkType));
-
-        private static readonly HashSet<Type> _newInstanceInitializedTypes = new()
+        private static ValueExpression GetExpressionForTypeProvider(CSharpType type, InputExampleValue exampleValue)
         {
-            typeof(ResourceIdentifier),
-            typeof(ResourceType),
-            typeof(Uri),
-            typeof(AzureLocation), typeof(AzureLocation?),
-            typeof(RequestMethod), typeof(RequestMethod?),
-            typeof(ContentType), typeof(ContentType?),
-            typeof(ETag), typeof(ETag?)
-        };
-
-        private static readonly HashSet<Type> _parsableInitializedTypes = new()
-        {
-            typeof(DateTimeOffset),
-            typeof(Guid), typeof(Guid?),
-            typeof(TimeSpan), typeof(TimeSpan?),
-            typeof(IPAddress)
-        };
-
-        private static CodeWriter AppendTypeProviderValue(this CodeWriter writer, CSharpType type, InputExampleValue exampleValue)
-        {
-            switch (type.Implementation)
+            return type.Implementation switch
             {
-                case ObjectType objectType:
-                    return writer.AppendObjectTypeValue(objectType, (exampleValue as InputExampleObjectValue)?.Values);
-                case EnumType enumType when exampleValue is InputExampleRawValue rawValue:
-                    return writer.AppendEnumTypeValue(enumType, rawValue.RawValue!);
-            }
-            return writer.AppendRaw("default");
+                ObjectType objectType => GetExpressionForObjectType(objectType, (exampleValue as InputExampleObjectValue)?.Values),
+                EnumType enumType when exampleValue is InputExampleRawValue rawValue => GetExpressionForEnumType(enumType, rawValue.RawValue!),
+                _ => type.IsValueType && !type.IsNullable ? Default : Null,
+            };
         }
 
         private static ObjectType GetActualImplementation(ObjectType objectType, IReadOnlyDictionary<string, InputExampleValue> valueDict)
@@ -394,61 +352,57 @@ namespace AutoRest.CSharp.LowLevel.Generation.Extensions
             return (ObjectType)implementation.Type.Implementation;
         }
 
-        private static CodeWriter AppendObjectTypeValue(this CodeWriter writer, ObjectType objectType, IReadOnlyDictionary<string, InputExampleValue>? valueDict)
+        private static ValueExpression GetExpressionForObjectType(ObjectType objectType, IReadOnlyDictionary<string, InputExampleValue>? valueDict)
         {
             if (valueDict == null)
-            {
-                return writer.AppendRaw("null");
-            }
+                return Default;
 
             // need to get the actual ObjectType if this type has a discrinimator
             objectType = GetActualImplementation(objectType, valueDict);
             // get all the properties on this type, including the properties from its base type
             var properties = new HashSet<ObjectTypeProperty>(objectType.EnumerateHierarchy().SelectMany(objectType => objectType.Properties));
             var constructor = objectType.InitializationConstructor;
-            writer.Append($"new {objectType.Type}(");
             // build a map from parameter name to property
             var propertyDict = properties.ToDictionary(
                 property => property.Declaration.Name.ToVariableName(), property => property);
             // find the corresponding properties in the parameters
+            var arguments = new List<ValueExpression>();
             foreach (var parameter in constructor.Signature.Parameters)
             {
                 // try every property, convert them to variable name and see if there are some of them matching
                 var property = propertyDict[parameter.Name];
+                var propertyType = property.Declaration.Type;
+                ValueExpression argument;
                 if (valueDict.TryGetValue(property.InputModelProperty!.SerializedName, out var exampleValue))
                 {
                     properties.Remove(property);
-                    writer.AppendInputExampleValue(exampleValue, property.Declaration.Type, property.SerializationFormat, includeCollectionInitialization: true).AppendRaw(",");
+                    argument = GetExpression(propertyType, exampleValue, property.SerializationFormat, includeCollectionInitialization: true);
                 }
                 else
                 {
                     // if no match, we put default here
-                    if (property.Declaration.Type.IsValueType && !property.Declaration.Type.IsNullable)
-                        writer.AppendRaw("default");
-                    else
-                        writer.AppendRaw("null");
+                    argument = propertyType.IsValueType && !propertyType.IsNullable ? Default : Null;
                 }
+                arguments.Add(argument);
             }
-            writer.RemoveTrailingComma();
-            writer.AppendRaw(")");
-            var propertiesToWrite = GetPropertiesToWrite(objectType, properties, valueDict);
+            var propertiesToWrite = GetPropertiesToWrite(properties, valueDict);
+            ObjectInitializerExpression? objectPropertyInitializer = null;
             if (propertiesToWrite.Count > 0) // only write the property initializers when there are properties to write
             {
-                using (writer.Scope($"", newLine: false))
+                var initializerDict = new Dictionary<string, ValueExpression>();
+                foreach (var (property, exampleValue) in propertiesToWrite)
                 {
-                    foreach (var (property, exampleValue) in propertiesToWrite)
-                    {
-                        writer.Append($"{property.Declaration.Name} = ");
-                        // we need to pass in the current type of this property to make sure its initialization is correct
-                        writer.AppendInputExampleValue(exampleValue, property.Declaration.Type, property.SerializationFormat, includeCollectionInitialization: false);
-                        writer.LineRaw(",");
-                    }
+                    // we need to pass in the current type of this property to make sure its initialization is correct
+                    var propertyExpression = GetExpression(property.Declaration.Type, exampleValue, property.SerializationFormat, includeCollectionInitialization: false);
+                    initializerDict.Add(property.Declaration.Name, propertyExpression);
                 }
+                objectPropertyInitializer = new(initializerDict, false);
             }
-            return writer;
+
+            return new NewInstanceExpression(objectType.Type, arguments, objectPropertyInitializer);
         }
 
-        private static Dictionary<ObjectTypeProperty, InputExampleValue> GetPropertiesToWrite(ObjectType objectType, IEnumerable<ObjectTypeProperty> properties, IReadOnlyDictionary<string, InputExampleValue> valueDict)
+        private static IReadOnlyDictionary<ObjectTypeProperty, InputExampleValue> GetPropertiesToWrite(IEnumerable<ObjectTypeProperty> properties, IReadOnlyDictionary<string, InputExampleValue> valueDict)
         {
             var propertiesToWrite = new Dictionary<ObjectTypeProperty, InputExampleValue>();
             foreach (var property in properties)
@@ -500,23 +454,17 @@ namespace AutoRest.CSharp.LowLevel.Generation.Extensions
         private static bool IsPropertyAssignable(ObjectTypeProperty property)
             => property.Declaration.Accessibility == "public" && (TypeFactory.IsReadWriteDictionary(property.Declaration.Type) || TypeFactory.IsReadWriteList(property.Declaration.Type) || !property.IsReadOnly);
 
-        private static CodeWriter AppendEnumTypeValue(this CodeWriter writer, EnumType enumType, object value)
+        private static ValueExpression GetExpressionForEnumType(EnumType enumType, object value)
         {
             // find value in one of the choices.
             // Here we convert the values to string then compare, because the raw value has the "primitive types are deserialized into strings" issue
             var choice = enumType.Values.FirstOrDefault(c => StringComparer.Ordinal.Equals(value.ToString(), c.Value.Value?.ToString()));
-            writer.UseNamespace(enumType.Type.Namespace);
             if (choice != null)
-                return writer.Append($"{enumType.Type.Name}.{choice.Declaration.Name}");
+                return EnumValue(enumType, choice);
             // if we did not find a match, check if this is a SealedChoice, if so, we throw exceptions
             if (!enumType.IsExtensible)
                 throw new InvalidOperationException($"Enum value `{value}` in example does not find in type {enumType.Type.Name}");
-            return writer.Append($"new {enumType.Type}({value:L})");
-        }
-
-        public static void ConsoleWriteLine(this CodeWriter writer, FormattableString content)
-        {
-            writer.Line($"{typeof(Console)}.{nameof(Console.WriteLine)}({content});");
+            return New.Instance(enumType.Type, Literal(value));
         }
     }
 }

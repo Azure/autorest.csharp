@@ -14,7 +14,7 @@ using url_LowLevel;
 
 namespace url_LowLevel.Samples
 {
-    public class Samples_PathItemsClient
+    public partial class Samples_PathItemsClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
@@ -24,6 +24,7 @@ namespace url_LowLevel.Samples
             PathItemsClient client = new PathItemsClient("<GlobalStringPath>", credential);
 
             Response response = client.GetAllWithValues("<pathItemStringPath>", "<localStringPath>");
+
             Console.WriteLine(response.Status);
         }
 
@@ -35,6 +36,7 @@ namespace url_LowLevel.Samples
             PathItemsClient client = new PathItemsClient("<GlobalStringPath>", credential);
 
             Response response = await client.GetAllWithValuesAsync("<pathItemStringPath>", "<localStringPath>");
+
             Console.WriteLine(response.Status);
         }
 
@@ -46,6 +48,7 @@ namespace url_LowLevel.Samples
             PathItemsClient client = new PathItemsClient("<GlobalStringPath>", credential);
 
             Response response = client.GetAllWithValues("<pathItemStringPath>", "<localStringPath>", pathItemStringQuery: "<pathItemStringQuery>", localStringQuery: "<localStringQuery>");
+
             Console.WriteLine(response.Status);
         }
 
@@ -57,6 +60,7 @@ namespace url_LowLevel.Samples
             PathItemsClient client = new PathItemsClient("<GlobalStringPath>", credential);
 
             Response response = await client.GetAllWithValuesAsync("<pathItemStringPath>", "<localStringPath>", pathItemStringQuery: "<pathItemStringQuery>", localStringQuery: "<localStringQuery>");
+
             Console.WriteLine(response.Status);
         }
 
@@ -68,6 +72,7 @@ namespace url_LowLevel.Samples
             PathItemsClient client = new PathItemsClient("<GlobalStringPath>", credential);
 
             Response response = client.GetGlobalQueryNull("<pathItemStringPath>", "<localStringPath>");
+
             Console.WriteLine(response.Status);
         }
 
@@ -79,6 +84,7 @@ namespace url_LowLevel.Samples
             PathItemsClient client = new PathItemsClient("<GlobalStringPath>", credential);
 
             Response response = await client.GetGlobalQueryNullAsync("<pathItemStringPath>", "<localStringPath>");
+
             Console.WriteLine(response.Status);
         }
 
@@ -90,6 +96,7 @@ namespace url_LowLevel.Samples
             PathItemsClient client = new PathItemsClient("<GlobalStringPath>", credential);
 
             Response response = client.GetGlobalQueryNull("<pathItemStringPath>", "<localStringPath>", pathItemStringQuery: "<pathItemStringQuery>", localStringQuery: "<localStringQuery>");
+
             Console.WriteLine(response.Status);
         }
 
@@ -101,6 +108,7 @@ namespace url_LowLevel.Samples
             PathItemsClient client = new PathItemsClient("<GlobalStringPath>", credential);
 
             Response response = await client.GetGlobalQueryNullAsync("<pathItemStringPath>", "<localStringPath>", pathItemStringQuery: "<pathItemStringQuery>", localStringQuery: "<localStringQuery>");
+
             Console.WriteLine(response.Status);
         }
 
@@ -112,6 +120,7 @@ namespace url_LowLevel.Samples
             PathItemsClient client = new PathItemsClient("<GlobalStringPath>", credential);
 
             Response response = client.GetGlobalAndLocalQueryNull("<pathItemStringPath>", "<localStringPath>");
+
             Console.WriteLine(response.Status);
         }
 
@@ -123,6 +132,7 @@ namespace url_LowLevel.Samples
             PathItemsClient client = new PathItemsClient("<GlobalStringPath>", credential);
 
             Response response = await client.GetGlobalAndLocalQueryNullAsync("<pathItemStringPath>", "<localStringPath>");
+
             Console.WriteLine(response.Status);
         }
 
@@ -134,6 +144,7 @@ namespace url_LowLevel.Samples
             PathItemsClient client = new PathItemsClient("<GlobalStringPath>", credential);
 
             Response response = client.GetGlobalAndLocalQueryNull("<pathItemStringPath>", "<localStringPath>", pathItemStringQuery: "<pathItemStringQuery>", localStringQuery: "<localStringQuery>");
+
             Console.WriteLine(response.Status);
         }
 
@@ -145,6 +156,7 @@ namespace url_LowLevel.Samples
             PathItemsClient client = new PathItemsClient("<GlobalStringPath>", credential);
 
             Response response = await client.GetGlobalAndLocalQueryNullAsync("<pathItemStringPath>", "<localStringPath>", pathItemStringQuery: "<pathItemStringQuery>", localStringQuery: "<localStringQuery>");
+
             Console.WriteLine(response.Status);
         }
 
@@ -156,6 +168,7 @@ namespace url_LowLevel.Samples
             PathItemsClient client = new PathItemsClient("<GlobalStringPath>", credential);
 
             Response response = client.GetLocalPathItemQueryNull("<pathItemStringPath>", "<localStringPath>");
+
             Console.WriteLine(response.Status);
         }
 
@@ -167,6 +180,7 @@ namespace url_LowLevel.Samples
             PathItemsClient client = new PathItemsClient("<GlobalStringPath>", credential);
 
             Response response = await client.GetLocalPathItemQueryNullAsync("<pathItemStringPath>", "<localStringPath>");
+
             Console.WriteLine(response.Status);
         }
 
@@ -178,6 +192,7 @@ namespace url_LowLevel.Samples
             PathItemsClient client = new PathItemsClient("<GlobalStringPath>", credential);
 
             Response response = client.GetLocalPathItemQueryNull("<pathItemStringPath>", "<localStringPath>", pathItemStringQuery: "<pathItemStringQuery>", localStringQuery: "<localStringQuery>");
+
             Console.WriteLine(response.Status);
         }
 
@@ -189,6 +204,7 @@ namespace url_LowLevel.Samples
             PathItemsClient client = new PathItemsClient("<GlobalStringPath>", credential);
 
             Response response = await client.GetLocalPathItemQueryNullAsync("<pathItemStringPath>", "<localStringPath>", pathItemStringQuery: "<pathItemStringQuery>", localStringQuery: "<localStringQuery>");
+
             Console.WriteLine(response.Status);
         }
     }

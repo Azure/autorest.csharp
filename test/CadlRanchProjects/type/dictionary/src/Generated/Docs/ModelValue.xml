@@ -42,6 +42,12 @@ Response response = await client.GetModelValueAsync(null);
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("<key>").GetProperty("property").ToString());
 ]]></code>
+This sample shows how to call GetModelValueAsync.
+<code><![CDATA[
+ModelValue client = new DictionaryClient().GetModelValueClient(apiVersion: "1.0.0");
+
+Response<IReadOnlyDictionary<string, InnerModel>> response = await client.GetModelValueAsync();
+]]></code>
 This sample shows how to call GetModelValueAsync with all parameters and parse the result.
 <code><![CDATA[
 ModelValue client = new DictionaryClient().GetModelValueClient(apiVersion: "1.0.0");
@@ -51,6 +57,12 @@ Response response = await client.GetModelValueAsync(null);
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("<key>").GetProperty("property").ToString());
 Console.WriteLine(result.GetProperty("<key>").GetProperty("children").GetProperty("<key>").GetProperty("property").ToString());
+]]></code>
+This sample shows how to call GetModelValueAsync with all parameters.
+<code><![CDATA[
+ModelValue client = new DictionaryClient().GetModelValueClient(apiVersion: "1.0.0");
+
+Response<IReadOnlyDictionary<string, InnerModel>> response = await client.GetModelValueAsync();
 ]]></code></example>
     </member>
     <member name="GetModelValue(RequestContext)">
@@ -64,6 +76,12 @@ Response response = client.GetModelValue(null);
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("<key>").GetProperty("property").ToString());
 ]]></code>
+This sample shows how to call GetModelValue.
+<code><![CDATA[
+ModelValue client = new DictionaryClient().GetModelValueClient(apiVersion: "1.0.0");
+
+Response<IReadOnlyDictionary<string, InnerModel>> response = client.GetModelValue();
+]]></code>
 This sample shows how to call GetModelValue with all parameters and parse the result.
 <code><![CDATA[
 ModelValue client = new DictionaryClient().GetModelValueClient(apiVersion: "1.0.0");
@@ -73,6 +91,12 @@ Response response = client.GetModelValue(null);
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("<key>").GetProperty("property").ToString());
 Console.WriteLine(result.GetProperty("<key>").GetProperty("children").GetProperty("<key>").GetProperty("property").ToString());
+]]></code>
+This sample shows how to call GetModelValue with all parameters.
+<code><![CDATA[
+ModelValue client = new DictionaryClient().GetModelValueClient(apiVersion: "1.0.0");
+
+Response<IReadOnlyDictionary<string, InnerModel>> response = client.GetModelValue();
 ]]></code></example>
     </member>
     <member name="PutAsync(IDictionary{string,InnerModel},CancellationToken)">
@@ -81,27 +105,25 @@ This sample shows how to call PutAsync.
 <code><![CDATA[
 ModelValue client = new DictionaryClient().GetModelValueClient(apiVersion: "1.0.0");
 
-Response response = await client.PutAsync(new Dictionary<string, InnerModel>()
+Response response = await client.PutAsync(new Dictionary<string, InnerModel>
 {
-    ["key"] = new InnerModel("<property>"),
+    ["key"] = new InnerModel("<property>")
 });
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutAsync with all parameters.
 <code><![CDATA[
 ModelValue client = new DictionaryClient().GetModelValueClient(apiVersion: "1.0.0");
 
-Response response = await client.PutAsync(new Dictionary<string, InnerModel>()
+Response response = await client.PutAsync(new Dictionary<string, InnerModel>
 {
     ["key"] = new InnerModel("<property>")
     {
         Children =
         {
-            ["key"] = null,
+            ["key"] = default
         },
-    },
+    }
 });
-Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="Put(IDictionary{string,InnerModel},CancellationToken)">
@@ -110,27 +132,25 @@ This sample shows how to call Put.
 <code><![CDATA[
 ModelValue client = new DictionaryClient().GetModelValueClient(apiVersion: "1.0.0");
 
-Response response = client.Put(new Dictionary<string, InnerModel>()
+Response response = client.Put(new Dictionary<string, InnerModel>
 {
-    ["key"] = new InnerModel("<property>"),
+    ["key"] = new InnerModel("<property>")
 });
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Put with all parameters.
 <code><![CDATA[
 ModelValue client = new DictionaryClient().GetModelValueClient(apiVersion: "1.0.0");
 
-Response response = client.Put(new Dictionary<string, InnerModel>()
+Response response = client.Put(new Dictionary<string, InnerModel>
 {
     ["key"] = new InnerModel("<property>")
     {
         Children =
         {
-            ["key"] = null,
+            ["key"] = default
         },
-    },
+    }
 });
-Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="PutAsync(RequestContent,RequestContext)">
@@ -147,7 +167,17 @@ RequestContent content = RequestContent.Create(new
     },
 });
 Response response = await client.PutAsync(content);
+
 Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call PutAsync.
+<code><![CDATA[
+ModelValue client = new DictionaryClient().GetModelValueClient(apiVersion: "1.0.0");
+
+Response response = await client.PutAsync(new Dictionary<string, InnerModel>
+{
+    ["key"] = new InnerModel("<property>")
+});
 ]]></code>
 This sample shows how to call PutAsync with all request content.
 <code><![CDATA[
@@ -158,13 +188,27 @@ RequestContent content = RequestContent.Create(new
     key = new
     {
         property = "<property>",
-        children = new
-        {
-        },
+        children = new { },
     },
 });
 Response response = await client.PutAsync(content);
+
 Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call PutAsync with all parameters.
+<code><![CDATA[
+ModelValue client = new DictionaryClient().GetModelValueClient(apiVersion: "1.0.0");
+
+Response response = await client.PutAsync(new Dictionary<string, InnerModel>
+{
+    ["key"] = new InnerModel("<property>")
+    {
+        Children =
+        {
+            ["key"] = default
+        },
+    }
+});
 ]]></code></example>
     </member>
     <member name="Put(RequestContent,RequestContext)">
@@ -181,7 +225,17 @@ RequestContent content = RequestContent.Create(new
     },
 });
 Response response = client.Put(content);
+
 Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call Put.
+<code><![CDATA[
+ModelValue client = new DictionaryClient().GetModelValueClient(apiVersion: "1.0.0");
+
+Response response = client.Put(new Dictionary<string, InnerModel>
+{
+    ["key"] = new InnerModel("<property>")
+});
 ]]></code>
 This sample shows how to call Put with all request content.
 <code><![CDATA[
@@ -192,13 +246,27 @@ RequestContent content = RequestContent.Create(new
     key = new
     {
         property = "<property>",
-        children = new
-        {
-        },
+        children = new { },
     },
 });
 Response response = client.Put(content);
+
 Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call Put with all parameters.
+<code><![CDATA[
+ModelValue client = new DictionaryClient().GetModelValueClient(apiVersion: "1.0.0");
+
+Response response = client.Put(new Dictionary<string, InnerModel>
+{
+    ["key"] = new InnerModel("<property>")
+    {
+        Children =
+        {
+            ["key"] = default
+        },
+    }
+});
 ]]></code></example>
     </member>
   </members>

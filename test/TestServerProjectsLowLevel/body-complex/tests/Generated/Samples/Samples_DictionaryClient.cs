@@ -16,7 +16,7 @@ using body_complex_LowLevel;
 
 namespace body_complex_LowLevel.Samples
 {
-    public class Samples_DictionaryClient
+    public partial class Samples_DictionaryClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
@@ -79,6 +79,7 @@ namespace body_complex_LowLevel.Samples
 
             RequestContent content = RequestContent.Create(new object());
             Response response = client.PutValid(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -91,6 +92,7 @@ namespace body_complex_LowLevel.Samples
 
             RequestContent content = RequestContent.Create(new object());
             Response response = await client.PutValidAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -109,6 +111,7 @@ namespace body_complex_LowLevel.Samples
                 },
             });
             Response response = client.PutValid(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -127,6 +130,7 @@ namespace body_complex_LowLevel.Samples
                 },
             });
             Response response = await client.PutValidAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -191,6 +195,7 @@ namespace body_complex_LowLevel.Samples
 
             RequestContent content = RequestContent.Create(new object());
             Response response = client.PutEmpty(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -203,6 +208,7 @@ namespace body_complex_LowLevel.Samples
 
             RequestContent content = RequestContent.Create(new object());
             Response response = await client.PutEmptyAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -221,6 +227,7 @@ namespace body_complex_LowLevel.Samples
                 },
             });
             Response response = client.PutEmpty(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -239,6 +246,7 @@ namespace body_complex_LowLevel.Samples
                 },
             });
             Response response = await client.PutEmptyAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
