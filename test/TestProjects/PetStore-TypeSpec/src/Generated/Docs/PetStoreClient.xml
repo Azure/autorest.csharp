@@ -9,6 +9,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 PetStoreClient client = new PetStoreClient(endpoint);
 
 Response response = await client.DeleteAsync(1234);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call DeleteAsync with all parameters.
@@ -17,6 +18,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 PetStoreClient client = new PetStoreClient(endpoint);
 
 Response response = await client.DeleteAsync(1234);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -28,6 +30,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 PetStoreClient client = new PetStoreClient(endpoint);
 
 Response response = client.Delete(1234);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Delete with all parameters.
@@ -36,6 +39,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 PetStoreClient client = new PetStoreClient(endpoint);
 
 Response response = client.Delete(1234);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>

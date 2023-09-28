@@ -81,7 +81,6 @@ Duration client = new ValueTypesClient().GetDurationClient(apiVersion: "1.0.0");
 
 DurationProperty body = new DurationProperty(XmlConvert.ToTimeSpan("PT1H23M45S"));
 Response response = await client.PutAsync(body);
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutAsync with all parameters.
 <code><![CDATA[
@@ -89,7 +88,6 @@ Duration client = new ValueTypesClient().GetDurationClient(apiVersion: "1.0.0");
 
 DurationProperty body = new DurationProperty(XmlConvert.ToTimeSpan("PT1H23M45S"));
 Response response = await client.PutAsync(body);
-Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="Put(DurationProperty,CancellationToken)">
@@ -100,7 +98,6 @@ Duration client = new ValueTypesClient().GetDurationClient(apiVersion: "1.0.0");
 
 DurationProperty body = new DurationProperty(XmlConvert.ToTimeSpan("PT1H23M45S"));
 Response response = client.Put(body);
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Put with all parameters.
 <code><![CDATA[
@@ -108,7 +105,6 @@ Duration client = new ValueTypesClient().GetDurationClient(apiVersion: "1.0.0");
 
 DurationProperty body = new DurationProperty(XmlConvert.ToTimeSpan("PT1H23M45S"));
 Response response = client.Put(body);
-Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="PutAsync(RequestContent,RequestContext)">
@@ -122,6 +118,7 @@ RequestContent content = RequestContent.Create(new
     property = "PT1H23M45S",
 });
 Response response = await client.PutAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutAsync with all request content.
@@ -133,6 +130,7 @@ RequestContent content = RequestContent.Create(new
     property = "PT1H23M45S",
 });
 Response response = await client.PutAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -147,6 +145,7 @@ RequestContent content = RequestContent.Create(new
     property = "PT1H23M45S",
 });
 Response response = client.Put(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Put with all request content.
@@ -158,6 +157,7 @@ RequestContent content = RequestContent.Create(new
     property = "PT1H23M45S",
 });
 Response response = client.Put(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>

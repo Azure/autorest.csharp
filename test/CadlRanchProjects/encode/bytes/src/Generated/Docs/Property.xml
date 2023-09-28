@@ -283,7 +283,7 @@ This sample shows how to call Base64urlArrayAsync.
 <code><![CDATA[
 Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
-Base64urlArrayBytesProperty body = new Base64urlArrayBytesProperty(new List<BinaryData>()
+Base64urlArrayBytesProperty body = new Base64urlArrayBytesProperty(new BinaryData[]
 {
     BinaryData.FromObjectAsJson(new object())
 });
@@ -293,7 +293,7 @@ This sample shows how to call Base64urlArrayAsync with all parameters.
 <code><![CDATA[
 Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
-Base64urlArrayBytesProperty body = new Base64urlArrayBytesProperty(new List<BinaryData>()
+Base64urlArrayBytesProperty body = new Base64urlArrayBytesProperty(new BinaryData[]
 {
     BinaryData.FromObjectAsJson(new object())
 });
@@ -306,7 +306,7 @@ This sample shows how to call Base64urlArray.
 <code><![CDATA[
 Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
-Base64urlArrayBytesProperty body = new Base64urlArrayBytesProperty(new List<BinaryData>()
+Base64urlArrayBytesProperty body = new Base64urlArrayBytesProperty(new BinaryData[]
 {
     BinaryData.FromObjectAsJson(new object())
 });
@@ -316,7 +316,7 @@ This sample shows how to call Base64urlArray with all parameters.
 <code><![CDATA[
 Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
-Base64urlArrayBytesProperty body = new Base64urlArrayBytesProperty(new List<BinaryData>()
+Base64urlArrayBytesProperty body = new Base64urlArrayBytesProperty(new BinaryData[]
 {
     BinaryData.FromObjectAsJson(new object())
 });
@@ -331,7 +331,7 @@ Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
 RequestContent content = RequestContent.Create(new
 {
-    value = new List<object>()
+    value = new object[]
     {
         new object()
     },
@@ -347,7 +347,7 @@ Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
 RequestContent content = RequestContent.Create(new
 {
-    value = new List<object>()
+    value = new object[]
     {
         new object()
     },
@@ -366,7 +366,7 @@ Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
 RequestContent content = RequestContent.Create(new
 {
-    value = new List<object>()
+    value = new object[]
     {
         new object()
     },
@@ -382,7 +382,7 @@ Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
 RequestContent content = RequestContent.Create(new
 {
-    value = new List<object>()
+    value = new object[]
     {
         new object()
     },

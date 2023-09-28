@@ -56,6 +56,7 @@ DictionaryClient client = new DictionaryClient(credential);
 
 RequestContent content = RequestContent.Create(new object());
 Response response = await client.PutValidAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutValidAsync with all request content.
@@ -71,6 +72,7 @@ RequestContent content = RequestContent.Create(new
     },
 });
 Response response = await client.PutValidAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -83,6 +85,7 @@ DictionaryClient client = new DictionaryClient(credential);
 
 RequestContent content = RequestContent.Create(new object());
 Response response = client.PutValid(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutValid with all request content.
@@ -98,6 +101,7 @@ RequestContent content = RequestContent.Create(new
     },
 });
 Response response = client.PutValid(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -156,6 +160,7 @@ DictionaryClient client = new DictionaryClient(credential);
 
 RequestContent content = RequestContent.Create(new object());
 Response response = await client.PutEmptyAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutEmptyAsync with all request content.
@@ -171,6 +176,7 @@ RequestContent content = RequestContent.Create(new
     },
 });
 Response response = await client.PutEmptyAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -183,6 +189,7 @@ DictionaryClient client = new DictionaryClient(credential);
 
 RequestContent content = RequestContent.Create(new object());
 Response response = client.PutEmpty(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutEmpty with all request content.
@@ -198,6 +205,7 @@ RequestContent content = RequestContent.Create(new
     },
 });
 Response response = client.PutEmpty(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>

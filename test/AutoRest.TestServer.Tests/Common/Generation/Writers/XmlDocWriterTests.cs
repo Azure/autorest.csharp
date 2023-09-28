@@ -12,7 +12,7 @@ namespace AutoRest.CSharp.Generation.Writers
         [SetUp]
         public void Setup()
         {
-            Writer = new XmlDocWriter();
+            Writer = new XmlDocWriter("test.xml");
         }
 
         [Test]

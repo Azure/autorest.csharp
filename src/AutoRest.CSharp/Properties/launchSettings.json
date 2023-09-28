@@ -648,6 +648,22 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\azure\\core\\traits\\src\\Generated -n"
     },
+    "typespec-client/structure/default": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\client\\structure\\default\\src\\Generated -n"
+    },
+    "typespec-client/structure/multi-client": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\client\\structure\\multi-client\\src\\Generated -n"
+    },
+    "typespec-client/structure/renamed-operation": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\client\\structure\\renamed-operation\\src\\Generated -n"
+    },
+    "typespec-client/structure/two-operation-group": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\client\\structure\\two-operation-group\\src\\Generated -n"
+    },
     "typespec-encode/bytes": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\encode\\bytes\\src\\Generated -n"

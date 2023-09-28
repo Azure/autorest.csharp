@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Xml;
 using Azure;
@@ -16,25 +15,27 @@ using NUnit.Framework;
 
 namespace Encode.Duration.Samples
 {
-    internal class Samples_Query
+    public partial class Samples_Query
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Default()
+        public void Example_Default_ShortVersion()
         {
             Query client = new DurationClient().GetQueryClient(apiVersion: "1.0.0");
 
             Response response = client.Default(XmlConvert.ToTimeSpan("PT1H23M45S"));
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Default_Async()
+        public async Task Example_Default_ShortVersion_Async()
         {
             Query client = new DurationClient().GetQueryClient(apiVersion: "1.0.0");
 
             Response response = await client.DefaultAsync(XmlConvert.ToTimeSpan("PT1H23M45S"));
+
             Console.WriteLine(response.Status);
         }
 
@@ -45,6 +46,7 @@ namespace Encode.Duration.Samples
             Query client = new DurationClient().GetQueryClient(apiVersion: "1.0.0");
 
             Response response = client.Default(XmlConvert.ToTimeSpan("PT1H23M45S"));
+
             Console.WriteLine(response.Status);
         }
 
@@ -55,26 +57,29 @@ namespace Encode.Duration.Samples
             Query client = new DurationClient().GetQueryClient(apiVersion: "1.0.0");
 
             Response response = await client.DefaultAsync(XmlConvert.ToTimeSpan("PT1H23M45S"));
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Iso8601()
+        public void Example_Iso8601_ShortVersion()
         {
             Query client = new DurationClient().GetQueryClient(apiVersion: "1.0.0");
 
             Response response = client.Iso8601(XmlConvert.ToTimeSpan("PT1H23M45S"));
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Iso8601_Async()
+        public async Task Example_Iso8601_ShortVersion_Async()
         {
             Query client = new DurationClient().GetQueryClient(apiVersion: "1.0.0");
 
             Response response = await client.Iso8601Async(XmlConvert.ToTimeSpan("PT1H23M45S"));
+
             Console.WriteLine(response.Status);
         }
 
@@ -85,6 +90,7 @@ namespace Encode.Duration.Samples
             Query client = new DurationClient().GetQueryClient(apiVersion: "1.0.0");
 
             Response response = client.Iso8601(XmlConvert.ToTimeSpan("PT1H23M45S"));
+
             Console.WriteLine(response.Status);
         }
 
@@ -95,26 +101,29 @@ namespace Encode.Duration.Samples
             Query client = new DurationClient().GetQueryClient(apiVersion: "1.0.0");
 
             Response response = await client.Iso8601Async(XmlConvert.ToTimeSpan("PT1H23M45S"));
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Int32Seconds()
+        public void Example_Int32Seconds_ShortVersion()
         {
             Query client = new DurationClient().GetQueryClient(apiVersion: "1.0.0");
 
             Response response = client.Int32Seconds(TimeSpan.FromSeconds(10));
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Int32Seconds_Async()
+        public async Task Example_Int32Seconds_ShortVersion_Async()
         {
             Query client = new DurationClient().GetQueryClient(apiVersion: "1.0.0");
 
             Response response = await client.Int32SecondsAsync(TimeSpan.FromSeconds(10));
+
             Console.WriteLine(response.Status);
         }
 
@@ -125,6 +134,7 @@ namespace Encode.Duration.Samples
             Query client = new DurationClient().GetQueryClient(apiVersion: "1.0.0");
 
             Response response = client.Int32Seconds(TimeSpan.FromSeconds(10));
+
             Console.WriteLine(response.Status);
         }
 
@@ -135,26 +145,29 @@ namespace Encode.Duration.Samples
             Query client = new DurationClient().GetQueryClient(apiVersion: "1.0.0");
 
             Response response = await client.Int32SecondsAsync(TimeSpan.FromSeconds(10));
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_FloatSeconds()
+        public void Example_FloatSeconds_ShortVersion()
         {
             Query client = new DurationClient().GetQueryClient(apiVersion: "1.0.0");
 
             Response response = client.FloatSeconds(TimeSpan.FromSeconds(10F));
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_FloatSeconds_Async()
+        public async Task Example_FloatSeconds_ShortVersion_Async()
         {
             Query client = new DurationClient().GetQueryClient(apiVersion: "1.0.0");
 
             Response response = await client.FloatSecondsAsync(TimeSpan.FromSeconds(10F));
+
             Console.WriteLine(response.Status);
         }
 
@@ -165,6 +178,7 @@ namespace Encode.Duration.Samples
             Query client = new DurationClient().GetQueryClient(apiVersion: "1.0.0");
 
             Response response = client.FloatSeconds(TimeSpan.FromSeconds(10F));
+
             Console.WriteLine(response.Status);
         }
 
@@ -175,32 +189,29 @@ namespace Encode.Duration.Samples
             Query client = new DurationClient().GetQueryClient(apiVersion: "1.0.0");
 
             Response response = await client.FloatSecondsAsync(TimeSpan.FromSeconds(10F));
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Int32SecondsArray()
+        public void Example_Int32SecondsArray_ShortVersion()
         {
             Query client = new DurationClient().GetQueryClient(apiVersion: "1.0.0");
 
-            Response response = client.Int32SecondsArray(new List<TimeSpan>()
-{
-TimeSpan.FromSeconds(10)
-});
+            Response response = client.Int32SecondsArray(new TimeSpan[] { TimeSpan.FromSeconds(10) });
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Int32SecondsArray_Async()
+        public async Task Example_Int32SecondsArray_ShortVersion_Async()
         {
             Query client = new DurationClient().GetQueryClient(apiVersion: "1.0.0");
 
-            Response response = await client.Int32SecondsArrayAsync(new List<TimeSpan>()
-{
-TimeSpan.FromSeconds(10)
-});
+            Response response = await client.Int32SecondsArrayAsync(new TimeSpan[] { TimeSpan.FromSeconds(10) });
+
             Console.WriteLine(response.Status);
         }
 
@@ -210,10 +221,8 @@ TimeSpan.FromSeconds(10)
         {
             Query client = new DurationClient().GetQueryClient(apiVersion: "1.0.0");
 
-            Response response = client.Int32SecondsArray(new List<TimeSpan>()
-{
-TimeSpan.FromSeconds(10)
-});
+            Response response = client.Int32SecondsArray(new TimeSpan[] { TimeSpan.FromSeconds(10) });
+
             Console.WriteLine(response.Status);
         }
 
@@ -223,10 +232,8 @@ TimeSpan.FromSeconds(10)
         {
             Query client = new DurationClient().GetQueryClient(apiVersion: "1.0.0");
 
-            Response response = await client.Int32SecondsArrayAsync(new List<TimeSpan>()
-{
-TimeSpan.FromSeconds(10)
-});
+            Response response = await client.Int32SecondsArrayAsync(new TimeSpan[] { TimeSpan.FromSeconds(10) });
+
             Console.WriteLine(response.Status);
         }
     }

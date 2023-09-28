@@ -17,11 +17,11 @@ using body_complex_LowLevel;
 
 namespace body_complex_LowLevel.Samples
 {
-    public class Samples_PrimitiveClient
+    public partial class Samples_PrimitiveClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetInt()
+        public void Example_GetInt_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
@@ -34,7 +34,7 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetInt_Async()
+        public async Task Example_GetInt_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
@@ -75,25 +75,27 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutInt()
+        public void Example_PutInt_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
 
             RequestContent content = RequestContent.Create(new object());
             Response response = client.PutInt(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutInt_Async()
+        public async Task Example_PutInt_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
 
             RequestContent content = RequestContent.Create(new object());
             Response response = await client.PutIntAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -110,6 +112,7 @@ namespace body_complex_LowLevel.Samples
                 field2 = 1234,
             });
             Response response = client.PutInt(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -126,12 +129,13 @@ namespace body_complex_LowLevel.Samples
                 field2 = 1234,
             });
             Response response = await client.PutIntAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetLong()
+        public void Example_GetLong_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
@@ -144,7 +148,7 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetLong_Async()
+        public async Task Example_GetLong_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
@@ -185,25 +189,27 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutLong()
+        public void Example_PutLong_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
 
             RequestContent content = RequestContent.Create(new object());
             Response response = client.PutLong(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutLong_Async()
+        public async Task Example_PutLong_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
 
             RequestContent content = RequestContent.Create(new object());
             Response response = await client.PutLongAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -220,6 +226,7 @@ namespace body_complex_LowLevel.Samples
                 field2 = 1234L,
             });
             Response response = client.PutLong(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -236,12 +243,13 @@ namespace body_complex_LowLevel.Samples
                 field2 = 1234L,
             });
             Response response = await client.PutLongAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetFloat()
+        public void Example_GetFloat_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
@@ -254,7 +262,7 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetFloat_Async()
+        public async Task Example_GetFloat_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
@@ -295,25 +303,27 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutFloat()
+        public void Example_PutFloat_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
 
             RequestContent content = RequestContent.Create(new object());
             Response response = client.PutFloat(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutFloat_Async()
+        public async Task Example_PutFloat_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
 
             RequestContent content = RequestContent.Create(new object());
             Response response = await client.PutFloatAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -330,6 +340,7 @@ namespace body_complex_LowLevel.Samples
                 field2 = 123.45F,
             });
             Response response = client.PutFloat(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -346,12 +357,13 @@ namespace body_complex_LowLevel.Samples
                 field2 = 123.45F,
             });
             Response response = await client.PutFloatAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetDouble()
+        public void Example_GetDouble_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
@@ -364,7 +376,7 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetDouble_Async()
+        public async Task Example_GetDouble_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
@@ -405,25 +417,27 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutDouble()
+        public void Example_PutDouble_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
 
             RequestContent content = RequestContent.Create(new object());
             Response response = client.PutDouble(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutDouble_Async()
+        public async Task Example_PutDouble_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
 
             RequestContent content = RequestContent.Create(new object());
             Response response = await client.PutDoubleAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -440,6 +454,7 @@ namespace body_complex_LowLevel.Samples
                 field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose = 123.45,
             });
             Response response = client.PutDouble(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -456,12 +471,13 @@ namespace body_complex_LowLevel.Samples
                 field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose = 123.45,
             });
             Response response = await client.PutDoubleAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetBool()
+        public void Example_GetBool_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
@@ -474,7 +490,7 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetBool_Async()
+        public async Task Example_GetBool_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
@@ -515,25 +531,27 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutBool()
+        public void Example_PutBool_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
 
             RequestContent content = RequestContent.Create(new object());
             Response response = client.PutBool(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutBool_Async()
+        public async Task Example_PutBool_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
 
             RequestContent content = RequestContent.Create(new object());
             Response response = await client.PutBoolAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -550,6 +568,7 @@ namespace body_complex_LowLevel.Samples
                 field_false = true,
             });
             Response response = client.PutBool(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -566,12 +585,13 @@ namespace body_complex_LowLevel.Samples
                 field_false = true,
             });
             Response response = await client.PutBoolAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetString()
+        public void Example_GetString_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
@@ -584,7 +604,7 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetString_Async()
+        public async Task Example_GetString_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
@@ -627,25 +647,27 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutString()
+        public void Example_PutString_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
 
             RequestContent content = RequestContent.Create(new object());
             Response response = client.PutString(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutString_Async()
+        public async Task Example_PutString_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
 
             RequestContent content = RequestContent.Create(new object());
             Response response = await client.PutStringAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -656,13 +678,14 @@ namespace body_complex_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new Dictionary<string, object>
             {
                 ["field"] = "<field>",
                 ["empty"] = "<empty>",
-                ["null"] = "<null>",
+                ["null"] = "<null>"
             });
             Response response = client.PutString(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -673,19 +696,20 @@ namespace body_complex_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new Dictionary<string, object>
             {
                 ["field"] = "<field>",
                 ["empty"] = "<empty>",
-                ["null"] = "<null>",
+                ["null"] = "<null>"
             });
             Response response = await client.PutStringAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetDate()
+        public void Example_GetDate_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
@@ -698,7 +722,7 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetDate_Async()
+        public async Task Example_GetDate_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
@@ -739,25 +763,27 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutDate()
+        public void Example_PutDate_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
 
             RequestContent content = RequestContent.Create(new object());
             Response response = client.PutDate(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutDate_Async()
+        public async Task Example_PutDate_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
 
             RequestContent content = RequestContent.Create(new object());
             Response response = await client.PutDateAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -774,6 +800,7 @@ namespace body_complex_LowLevel.Samples
                 leap = "2022-05-10",
             });
             Response response = client.PutDate(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -790,12 +817,13 @@ namespace body_complex_LowLevel.Samples
                 leap = "2022-05-10",
             });
             Response response = await client.PutDateAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetDateTime()
+        public void Example_GetDateTime_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
@@ -808,7 +836,7 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetDateTime_Async()
+        public async Task Example_GetDateTime_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
@@ -849,25 +877,27 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutDateTime()
+        public void Example_PutDateTime_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
 
             RequestContent content = RequestContent.Create(new object());
             Response response = client.PutDateTime(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutDateTime_Async()
+        public async Task Example_PutDateTime_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
 
             RequestContent content = RequestContent.Create(new object());
             Response response = await client.PutDateTimeAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -884,6 +914,7 @@ namespace body_complex_LowLevel.Samples
                 now = "2022-05-10T18:57:31.2311892Z",
             });
             Response response = client.PutDateTime(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -900,12 +931,13 @@ namespace body_complex_LowLevel.Samples
                 now = "2022-05-10T18:57:31.2311892Z",
             });
             Response response = await client.PutDateTimeAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetDateTimeRfc1123()
+        public void Example_GetDateTimeRfc1123_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
@@ -918,7 +950,7 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetDateTimeRfc1123_Async()
+        public async Task Example_GetDateTimeRfc1123_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
@@ -959,25 +991,27 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutDateTimeRfc1123()
+        public void Example_PutDateTimeRfc1123_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
 
             RequestContent content = RequestContent.Create(new object());
             Response response = client.PutDateTimeRfc1123(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutDateTimeRfc1123_Async()
+        public async Task Example_PutDateTimeRfc1123_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
 
             RequestContent content = RequestContent.Create(new object());
             Response response = await client.PutDateTimeRfc1123Async(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -994,6 +1028,7 @@ namespace body_complex_LowLevel.Samples
                 now = "Tue, 10 May 2022 18:57:31 GMT",
             });
             Response response = client.PutDateTimeRfc1123(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -1010,12 +1045,13 @@ namespace body_complex_LowLevel.Samples
                 now = "Tue, 10 May 2022 18:57:31 GMT",
             });
             Response response = await client.PutDateTimeRfc1123Async(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetDuration()
+        public void Example_GetDuration_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
@@ -1028,7 +1064,7 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetDuration_Async()
+        public async Task Example_GetDuration_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
@@ -1067,25 +1103,27 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutDuration()
+        public void Example_PutDuration_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
 
             RequestContent content = RequestContent.Create(new object());
             Response response = client.PutDuration(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutDuration_Async()
+        public async Task Example_PutDuration_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
 
             RequestContent content = RequestContent.Create(new object());
             Response response = await client.PutDurationAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -1101,6 +1139,7 @@ namespace body_complex_LowLevel.Samples
                 field = "PT1H23M45S",
             });
             Response response = client.PutDuration(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -1116,12 +1155,13 @@ namespace body_complex_LowLevel.Samples
                 field = "PT1H23M45S",
             });
             Response response = await client.PutDurationAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetByte()
+        public void Example_GetByte_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
@@ -1134,7 +1174,7 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetByte_Async()
+        public async Task Example_GetByte_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
@@ -1173,25 +1213,27 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutByte()
+        public void Example_PutByte_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
 
             RequestContent content = RequestContent.Create(new object());
             Response response = client.PutByte(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutByte_Async()
+        public async Task Example_PutByte_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PrimitiveClient client = new PrimitiveClient(credential);
 
             RequestContent content = RequestContent.Create(new object());
             Response response = await client.PutByteAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -1207,6 +1249,7 @@ namespace body_complex_LowLevel.Samples
                 field = new object(),
             });
             Response response = client.PutByte(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -1222,6 +1265,7 @@ namespace body_complex_LowLevel.Samples
                 field = new object(),
             });
             Response response = await client.PutByteAsync(content);
+
             Console.WriteLine(response.Status);
         }
     }

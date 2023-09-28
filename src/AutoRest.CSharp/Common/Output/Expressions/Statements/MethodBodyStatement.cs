@@ -10,6 +10,9 @@ namespace AutoRest.CSharp.Common.Output.Expressions.Statements
     [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
     internal record MethodBodyStatement
     {
+        private static readonly MethodBodyStatement _emptyStatement = new();
+        public static MethodBodyStatement Empty => _emptyStatement;
+
         public static implicit operator MethodBodyStatement(MethodBodyStatement[] statements) => new MethodBodyStatements(Statements: statements);
         public static implicit operator MethodBodyStatement(List<MethodBodyStatement> statements) => new MethodBodyStatements(Statements: statements);
 

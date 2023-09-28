@@ -165,6 +165,7 @@ RequestContent content = RequestContent.Create(new
     nullableProperty = "PT1H23M45S",
 });
 Response response = await client.PatchNonNullAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PatchNonNullAsync with all request content.
@@ -177,6 +178,7 @@ RequestContent content = RequestContent.Create(new
     nullableProperty = "PT1H23M45S",
 });
 Response response = await client.PatchNonNullAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -192,6 +194,7 @@ RequestContent content = RequestContent.Create(new
     nullableProperty = "PT1H23M45S",
 });
 Response response = client.PatchNonNull(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PatchNonNull with all request content.
@@ -204,6 +207,7 @@ RequestContent content = RequestContent.Create(new
     nullableProperty = "PT1H23M45S",
 });
 Response response = client.PatchNonNull(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -219,6 +223,7 @@ RequestContent content = RequestContent.Create(new
     nullableProperty = "PT1H23M45S",
 });
 Response response = await client.PatchNullAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PatchNullAsync with all request content.
@@ -231,6 +236,7 @@ RequestContent content = RequestContent.Create(new
     nullableProperty = "PT1H23M45S",
 });
 Response response = await client.PatchNullAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -246,6 +252,7 @@ RequestContent content = RequestContent.Create(new
     nullableProperty = "PT1H23M45S",
 });
 Response response = client.PatchNull(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PatchNull with all request content.
@@ -258,6 +265,7 @@ RequestContent content = RequestContent.Create(new
     nullableProperty = "PT1H23M45S",
 });
 Response response = client.PatchNull(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>

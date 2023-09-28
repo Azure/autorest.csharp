@@ -14,25 +14,27 @@ using SpecialHeaders.ConditionalRequest;
 
 namespace SpecialHeaders.ConditionalRequest.Samples
 {
-    public class Samples_ConditionalRequestClient
+    public partial class Samples_ConditionalRequestClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PostIfMatch()
+        public void Example_PostIfMatch_ShortVersion()
         {
             ConditionalRequestClient client = new ConditionalRequestClient();
 
             Response response = client.PostIfMatch();
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PostIfMatch_Async()
+        public async Task Example_PostIfMatch_ShortVersion_Async()
         {
             ConditionalRequestClient client = new ConditionalRequestClient();
 
             Response response = await client.PostIfMatchAsync();
+
             Console.WriteLine(response.Status);
         }
 
@@ -43,6 +45,7 @@ namespace SpecialHeaders.ConditionalRequest.Samples
             ConditionalRequestClient client = new ConditionalRequestClient();
 
             Response response = client.PostIfMatch(ifMatch: new ETag("<ifMatch>"));
+
             Console.WriteLine(response.Status);
         }
 
@@ -53,26 +56,29 @@ namespace SpecialHeaders.ConditionalRequest.Samples
             ConditionalRequestClient client = new ConditionalRequestClient();
 
             Response response = await client.PostIfMatchAsync(ifMatch: new ETag("<ifMatch>"));
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PostIfNoneMatch()
+        public void Example_PostIfNoneMatch_ShortVersion()
         {
             ConditionalRequestClient client = new ConditionalRequestClient();
 
             Response response = client.PostIfNoneMatch();
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PostIfNoneMatch_Async()
+        public async Task Example_PostIfNoneMatch_ShortVersion_Async()
         {
             ConditionalRequestClient client = new ConditionalRequestClient();
 
             Response response = await client.PostIfNoneMatchAsync();
+
             Console.WriteLine(response.Status);
         }
 
@@ -83,6 +89,7 @@ namespace SpecialHeaders.ConditionalRequest.Samples
             ConditionalRequestClient client = new ConditionalRequestClient();
 
             Response response = client.PostIfNoneMatch(ifNoneMatch: new ETag("<ifNoneMatch>"));
+
             Console.WriteLine(response.Status);
         }
 
@@ -93,6 +100,7 @@ namespace SpecialHeaders.ConditionalRequest.Samples
             ConditionalRequestClient client = new ConditionalRequestClient();
 
             Response response = await client.PostIfNoneMatchAsync(ifNoneMatch: new ETag("<ifNoneMatch>"));
+
             Console.WriteLine(response.Status);
         }
     }

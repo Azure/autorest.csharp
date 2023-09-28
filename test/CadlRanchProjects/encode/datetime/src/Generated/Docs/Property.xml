@@ -283,14 +283,14 @@ This sample shows how to call UnixTimestampAsync.
 <code><![CDATA[
 Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
 
-UnixTimestampDatetimeProperty body = new UnixTimestampDatetimeProperty(DateTimeOffset.FromUnixTimeSeconds(1652209051));
+UnixTimestampDatetimeProperty body = new UnixTimestampDatetimeProperty(DateTimeOffset.FromUnixTimeSeconds(1652209051L));
 Response<UnixTimestampDatetimeProperty> response = await client.UnixTimestampAsync(body);
 ]]></code>
 This sample shows how to call UnixTimestampAsync with all parameters.
 <code><![CDATA[
 Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
 
-UnixTimestampDatetimeProperty body = new UnixTimestampDatetimeProperty(DateTimeOffset.FromUnixTimeSeconds(1652209051));
+UnixTimestampDatetimeProperty body = new UnixTimestampDatetimeProperty(DateTimeOffset.FromUnixTimeSeconds(1652209051L));
 Response<UnixTimestampDatetimeProperty> response = await client.UnixTimestampAsync(body);
 ]]></code></example>
     </member>
@@ -300,14 +300,14 @@ This sample shows how to call UnixTimestamp.
 <code><![CDATA[
 Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
 
-UnixTimestampDatetimeProperty body = new UnixTimestampDatetimeProperty(DateTimeOffset.FromUnixTimeSeconds(1652209051));
+UnixTimestampDatetimeProperty body = new UnixTimestampDatetimeProperty(DateTimeOffset.FromUnixTimeSeconds(1652209051L));
 Response<UnixTimestampDatetimeProperty> response = client.UnixTimestamp(body);
 ]]></code>
 This sample shows how to call UnixTimestamp with all parameters.
 <code><![CDATA[
 Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
 
-UnixTimestampDatetimeProperty body = new UnixTimestampDatetimeProperty(DateTimeOffset.FromUnixTimeSeconds(1652209051));
+UnixTimestampDatetimeProperty body = new UnixTimestampDatetimeProperty(DateTimeOffset.FromUnixTimeSeconds(1652209051L));
 Response<UnixTimestampDatetimeProperty> response = client.UnixTimestamp(body);
 ]]></code></example>
     </member>
@@ -375,20 +375,14 @@ This sample shows how to call UnixTimestampArrayAsync.
 <code><![CDATA[
 Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
 
-UnixTimestampArrayDatetimeProperty body = new UnixTimestampArrayDatetimeProperty(new List<DateTimeOffset>()
-{
-    DateTimeOffset.FromUnixTimeSeconds(1652209051)
-});
+UnixTimestampArrayDatetimeProperty body = new UnixTimestampArrayDatetimeProperty(new DateTimeOffset[] { DateTimeOffset.FromUnixTimeSeconds(1652209051L) });
 Response<UnixTimestampArrayDatetimeProperty> response = await client.UnixTimestampArrayAsync(body);
 ]]></code>
 This sample shows how to call UnixTimestampArrayAsync with all parameters.
 <code><![CDATA[
 Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
 
-UnixTimestampArrayDatetimeProperty body = new UnixTimestampArrayDatetimeProperty(new List<DateTimeOffset>()
-{
-    DateTimeOffset.FromUnixTimeSeconds(1652209051)
-});
+UnixTimestampArrayDatetimeProperty body = new UnixTimestampArrayDatetimeProperty(new DateTimeOffset[] { DateTimeOffset.FromUnixTimeSeconds(1652209051L) });
 Response<UnixTimestampArrayDatetimeProperty> response = await client.UnixTimestampArrayAsync(body);
 ]]></code></example>
     </member>
@@ -398,20 +392,14 @@ This sample shows how to call UnixTimestampArray.
 <code><![CDATA[
 Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
 
-UnixTimestampArrayDatetimeProperty body = new UnixTimestampArrayDatetimeProperty(new List<DateTimeOffset>()
-{
-    DateTimeOffset.FromUnixTimeSeconds(1652209051)
-});
+UnixTimestampArrayDatetimeProperty body = new UnixTimestampArrayDatetimeProperty(new DateTimeOffset[] { DateTimeOffset.FromUnixTimeSeconds(1652209051L) });
 Response<UnixTimestampArrayDatetimeProperty> response = client.UnixTimestampArray(body);
 ]]></code>
 This sample shows how to call UnixTimestampArray with all parameters.
 <code><![CDATA[
 Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
 
-UnixTimestampArrayDatetimeProperty body = new UnixTimestampArrayDatetimeProperty(new List<DateTimeOffset>()
-{
-    DateTimeOffset.FromUnixTimeSeconds(1652209051)
-});
+UnixTimestampArrayDatetimeProperty body = new UnixTimestampArrayDatetimeProperty(new DateTimeOffset[] { DateTimeOffset.FromUnixTimeSeconds(1652209051L) });
 Response<UnixTimestampArrayDatetimeProperty> response = client.UnixTimestampArray(body);
 ]]></code></example>
     </member>
@@ -423,7 +411,7 @@ Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
 
 RequestContent content = RequestContent.Create(new
 {
-    value = new List<object>()
+    value = new object[]
     {
         1652209051
     },
@@ -439,7 +427,7 @@ Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
 
 RequestContent content = RequestContent.Create(new
 {
-    value = new List<object>()
+    value = new object[]
     {
         1652209051
     },
@@ -458,7 +446,7 @@ Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
 
 RequestContent content = RequestContent.Create(new
 {
-    value = new List<object>()
+    value = new object[]
     {
         1652209051
     },
@@ -474,7 +462,7 @@ Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
 
 RequestContent content = RequestContent.Create(new
 {
-    value = new List<object>()
+    value = new object[]
     {
         1652209051
     },

@@ -9,6 +9,7 @@ using AutoRest.CSharp.Common.Output.PostProcessing;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.LowLevel.Generation;
+using AutoRest.CSharp.LowLevel.Generation.SampleGeneration;
 using AutoRest.CSharp.Output.Models;
 
 namespace AutoRest.CSharp.AutoRest.Plugins
@@ -35,18 +36,20 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
             foreach (var client in library.RestClients)
             {
-                var codeWriter = new CodeWriter();
-                var xmlDocWriter = new XmlDocWriter();
-                var lowLevelClientWriter = new LowLevelClientWriter(codeWriter, xmlDocWriter, client);
-                lowLevelClientWriter.WriteClient();
-                project.AddGeneratedFile($"{client.Type.Name}.cs", codeWriter.ToString());
+                var dpgClientWriter = new DpgClientWriter(library, client);
+                dpgClientWriter.WriteClient();
+                project.AddGeneratedFile($"{client.Type.Name}.cs", dpgClientWriter.ToString());
 
-                var exampleCompileCheckWriter = new ExampleCompileCheckWriter(client);
-                exampleCompileCheckWriter.Write();
-                var exampleFileCheckFilename = $"../../tests/Generated/Samples/Samples_{client.Type.Name}.cs";
-                project.AddGeneratedFile(exampleFileCheckFilename, exampleCompileCheckWriter.ToString());
-
-                project.AddGeneratedDocFile($"Docs/{client.Type.Name}.xml", new XmlDocumentFile(exampleFileCheckFilename, xmlDocWriter));
+                // write samples
+                var sampleProvider = library.GetSampleForClient(client);
+                if (sampleProvider != null)
+                {
+                    var clientExampleFilename = $"../../tests/Generated/Samples/{sampleProvider.Type.Name}.cs";
+                    var clientSampleWriter = new DpgClientSampleWriter(sampleProvider);
+                    clientSampleWriter.Write();
+                    project.AddGeneratedTestFile(clientExampleFilename, clientSampleWriter.ToString());
+                    project.AddGeneratedDocFile(dpgClientWriter.XmlDocWriter.Filename, new XmlDocumentFile(clientExampleFilename, dpgClientWriter.XmlDocWriter));
+                }
             }
 
             var optionsWriter = new CodeWriter();

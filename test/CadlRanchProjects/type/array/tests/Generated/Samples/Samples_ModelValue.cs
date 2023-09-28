@@ -18,11 +18,11 @@ using _Type._Array.Models;
 
 namespace _Type._Array.Samples
 {
-    internal class Samples_ModelValue
+    public partial class Samples_ModelValue
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetModelValue()
+        public void Example_GetModelValue_ShortVersion()
         {
             ModelValue client = new ArrayClient().GetModelValueClient(apiVersion: "1.0.0");
 
@@ -34,7 +34,7 @@ namespace _Type._Array.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetModelValue_Async()
+        public async Task Example_GetModelValue_ShortVersion_Async()
         {
             ModelValue client = new ArrayClient().GetModelValueClient(apiVersion: "1.0.0");
 
@@ -46,7 +46,7 @@ namespace _Type._Array.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetModelValue_Convenience()
+        public void Example_GetModelValue_ShortVersion_Convenience()
         {
             ModelValue client = new ArrayClient().GetModelValueClient(apiVersion: "1.0.0");
 
@@ -55,7 +55,7 @@ namespace _Type._Array.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetModelValue_Convenience_Async()
+        public async Task Example_GetModelValue_ShortVersion_Convenience_Async()
         {
             ModelValue client = new ArrayClient().GetModelValueClient(apiVersion: "1.0.0");
 
@@ -108,62 +108,62 @@ namespace _Type._Array.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put()
+        public void Example_Put_ShortVersion()
         {
             ModelValue client = new ArrayClient().GetModelValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new List<object>()
-{
+            RequestContent content = RequestContent.Create(new object[]
+            {
 new
 {
 property = "<property>",
 }
-});
+            });
             Response response = client.Put(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_Async()
+        public async Task Example_Put_ShortVersion_Async()
         {
             ModelValue client = new ArrayClient().GetModelValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new List<object>()
-{
+            RequestContent content = RequestContent.Create(new object[]
+            {
 new
 {
 property = "<property>",
 }
-});
+            });
             Response response = await client.PutAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put_Convenience()
+        public void Example_Put_ShortVersion_Convenience()
         {
             ModelValue client = new ArrayClient().GetModelValueClient(apiVersion: "1.0.0");
 
-            Response response = client.Put(new List<InnerModel>()
-{
+            Response response = client.Put(new InnerModel[]
+            {
 new InnerModel("<property>")
-});
-            Console.WriteLine(response.Status);
+            });
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_Convenience_Async()
+        public async Task Example_Put_ShortVersion_Convenience_Async()
         {
             ModelValue client = new ArrayClient().GetModelValueClient(apiVersion: "1.0.0");
 
-            Response response = await client.PutAsync(new List<InnerModel>()
-{
+            Response response = await client.PutAsync(new InnerModel[]
+            {
 new InnerModel("<property>")
-});
-            Console.WriteLine(response.Status);
+            });
         }
 
         [Test]
@@ -172,18 +172,19 @@ new InnerModel("<property>")
         {
             ModelValue client = new ArrayClient().GetModelValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new List<object>()
-{
+            RequestContent content = RequestContent.Create(new object[]
+            {
 new
 {
 property = "<property>",
-children = new List<object>()
+children = new object[]
 {
 null
 },
 }
-});
+            });
             Response response = client.Put(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -193,18 +194,19 @@ null
         {
             ModelValue client = new ArrayClient().GetModelValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new List<object>()
-{
+            RequestContent content = RequestContent.Create(new object[]
+            {
 new
 {
 property = "<property>",
-children = new List<object>()
+children = new object[]
 {
 null
 },
 }
-});
+            });
             Response response = await client.PutAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -214,17 +216,13 @@ null
         {
             ModelValue client = new ArrayClient().GetModelValueClient(apiVersion: "1.0.0");
 
-            Response response = client.Put(new List<InnerModel>()
-{
+            Response response = client.Put(new InnerModel[]
+            {
 new InnerModel("<property>")
 {
-Children =
-{
-null
-},
+Children = {default},
 }
-});
-            Console.WriteLine(response.Status);
+            });
         }
 
         [Test]
@@ -233,17 +231,13 @@ null
         {
             ModelValue client = new ArrayClient().GetModelValueClient(apiVersion: "1.0.0");
 
-            Response response = await client.PutAsync(new List<InnerModel>()
-{
+            Response response = await client.PutAsync(new InnerModel[]
+            {
 new InnerModel("<property>")
 {
-Children =
-{
-null
-},
+Children = {default},
 }
-});
-            Console.WriteLine(response.Status);
+            });
         }
     }
 }

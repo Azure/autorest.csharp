@@ -18,11 +18,11 @@ using _Type._Dictionary;
 
 namespace _Type._Dictionary.Samples
 {
-    internal class Samples_DurationValue
+    public partial class Samples_DurationValue
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetDurationValue()
+        public void Example_GetDurationValue_ShortVersion()
         {
             DurationValue client = new DictionaryClient().GetDurationValueClient(apiVersion: "1.0.0");
 
@@ -34,7 +34,7 @@ namespace _Type._Dictionary.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetDurationValue_Async()
+        public async Task Example_GetDurationValue_ShortVersion_Async()
         {
             DurationValue client = new DictionaryClient().GetDurationValueClient(apiVersion: "1.0.0");
 
@@ -46,7 +46,7 @@ namespace _Type._Dictionary.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetDurationValue_Convenience()
+        public void Example_GetDurationValue_ShortVersion_Convenience()
         {
             DurationValue client = new DictionaryClient().GetDurationValueClient(apiVersion: "1.0.0");
 
@@ -55,7 +55,7 @@ namespace _Type._Dictionary.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetDurationValue_Convenience_Async()
+        public async Task Example_GetDurationValue_ShortVersion_Convenience_Async()
         {
             DurationValue client = new DictionaryClient().GetDurationValueClient(apiVersion: "1.0.0");
 
@@ -106,7 +106,7 @@ namespace _Type._Dictionary.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put()
+        public void Example_Put_ShortVersion()
         {
             DurationValue client = new DictionaryClient().GetDurationValueClient(apiVersion: "1.0.0");
 
@@ -115,12 +115,13 @@ namespace _Type._Dictionary.Samples
                 key = "PT1H23M45S",
             });
             Response response = client.Put(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_Async()
+        public async Task Example_Put_ShortVersion_Async()
         {
             DurationValue client = new DictionaryClient().GetDurationValueClient(apiVersion: "1.0.0");
 
@@ -129,33 +130,32 @@ namespace _Type._Dictionary.Samples
                 key = "PT1H23M45S",
             });
             Response response = await client.PutAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put_Convenience()
+        public void Example_Put_ShortVersion_Convenience()
         {
             DurationValue client = new DictionaryClient().GetDurationValueClient(apiVersion: "1.0.0");
 
-            Response response = client.Put(new Dictionary<string, TimeSpan>()
+            Response response = client.Put(new Dictionary<string, TimeSpan>
             {
-                ["key"] = XmlConvert.ToTimeSpan("PT1H23M45S"),
+                ["key"] = XmlConvert.ToTimeSpan("PT1H23M45S")
             });
-            Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_Convenience_Async()
+        public async Task Example_Put_ShortVersion_Convenience_Async()
         {
             DurationValue client = new DictionaryClient().GetDurationValueClient(apiVersion: "1.0.0");
 
-            Response response = await client.PutAsync(new Dictionary<string, TimeSpan>()
+            Response response = await client.PutAsync(new Dictionary<string, TimeSpan>
             {
-                ["key"] = XmlConvert.ToTimeSpan("PT1H23M45S"),
+                ["key"] = XmlConvert.ToTimeSpan("PT1H23M45S")
             });
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -169,6 +169,7 @@ namespace _Type._Dictionary.Samples
                 key = "PT1H23M45S",
             });
             Response response = client.Put(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -183,6 +184,7 @@ namespace _Type._Dictionary.Samples
                 key = "PT1H23M45S",
             });
             Response response = await client.PutAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -192,11 +194,10 @@ namespace _Type._Dictionary.Samples
         {
             DurationValue client = new DictionaryClient().GetDurationValueClient(apiVersion: "1.0.0");
 
-            Response response = client.Put(new Dictionary<string, TimeSpan>()
+            Response response = client.Put(new Dictionary<string, TimeSpan>
             {
-                ["key"] = XmlConvert.ToTimeSpan("PT1H23M45S"),
+                ["key"] = XmlConvert.ToTimeSpan("PT1H23M45S")
             });
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -205,11 +206,10 @@ namespace _Type._Dictionary.Samples
         {
             DurationValue client = new DictionaryClient().GetDurationValueClient(apiVersion: "1.0.0");
 
-            Response response = await client.PutAsync(new Dictionary<string, TimeSpan>()
+            Response response = await client.PutAsync(new Dictionary<string, TimeSpan>
             {
-                ["key"] = XmlConvert.ToTimeSpan("PT1H23M45S"),
+                ["key"] = XmlConvert.ToTimeSpan("PT1H23M45S")
             });
-            Console.WriteLine(response.Status);
         }
     }
 }

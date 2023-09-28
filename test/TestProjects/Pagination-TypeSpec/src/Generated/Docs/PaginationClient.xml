@@ -67,9 +67,9 @@ RequestContent content = RequestContent.Create(new
 await foreach (BinaryData item in client.GetPaginationLedgerEntriesAsync(content))
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(result[0].GetProperty("contents").ToString());
-    Console.WriteLine(result[0].GetProperty("collectionId").ToString());
-    Console.WriteLine(result[0].GetProperty("transactionId").ToString());
+    Console.WriteLine(result.GetProperty("contents").ToString());
+    Console.WriteLine(result.GetProperty("collectionId").ToString());
+    Console.WriteLine(result.GetProperty("transactionId").ToString());
 }
 ]]></code>
 This sample shows how to call GetPaginationLedgerEntriesAsync with all request content and parse the result.
@@ -86,9 +86,9 @@ RequestContent content = RequestContent.Create(new
 await foreach (BinaryData item in client.GetPaginationLedgerEntriesAsync(content))
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(result[0].GetProperty("contents").ToString());
-    Console.WriteLine(result[0].GetProperty("collectionId").ToString());
-    Console.WriteLine(result[0].GetProperty("transactionId").ToString());
+    Console.WriteLine(result.GetProperty("contents").ToString());
+    Console.WriteLine(result.GetProperty("collectionId").ToString());
+    Console.WriteLine(result.GetProperty("transactionId").ToString());
 }
 ]]></code></example>
     </member>
@@ -108,9 +108,9 @@ RequestContent content = RequestContent.Create(new
 foreach (BinaryData item in client.GetPaginationLedgerEntries(content))
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(result[0].GetProperty("contents").ToString());
-    Console.WriteLine(result[0].GetProperty("collectionId").ToString());
-    Console.WriteLine(result[0].GetProperty("transactionId").ToString());
+    Console.WriteLine(result.GetProperty("contents").ToString());
+    Console.WriteLine(result.GetProperty("collectionId").ToString());
+    Console.WriteLine(result.GetProperty("transactionId").ToString());
 }
 ]]></code>
 This sample shows how to call GetPaginationLedgerEntries with all request content and parse the result.
@@ -127,9 +127,9 @@ RequestContent content = RequestContent.Create(new
 foreach (BinaryData item in client.GetPaginationLedgerEntries(content))
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(result[0].GetProperty("contents").ToString());
-    Console.WriteLine(result[0].GetProperty("collectionId").ToString());
-    Console.WriteLine(result[0].GetProperty("transactionId").ToString());
+    Console.WriteLine(result.GetProperty("contents").ToString());
+    Console.WriteLine(result.GetProperty("collectionId").ToString());
+    Console.WriteLine(result.GetProperty("transactionId").ToString());
 }
 ]]></code></example>
     </member>
@@ -190,7 +190,7 @@ PaginationClient client = new PaginationClient(endpoint, credential);
 await foreach (BinaryData item in client.GetMetricDimensionValuesAsync("<testRunId>", "<name>", "<metricNamespace>", null, null, null, null))
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(result[0].GetProperty("value")[0].ToString());
+    Console.WriteLine(result.GetProperty("value")[0].ToString());
 }
 ]]></code>
 This sample shows how to call GetMetricDimensionValuesAsync with all parameters and parse the result.
@@ -202,7 +202,7 @@ PaginationClient client = new PaginationClient(endpoint, credential);
 await foreach (BinaryData item in client.GetMetricDimensionValuesAsync("<testRunId>", "<name>", "<metricNamespace>", "PT5S", "<metricName>", "<timespan>", null))
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(result[0].GetProperty("value")[0].ToString());
+    Console.WriteLine(result.GetProperty("value")[0].ToString());
 }
 ]]></code></example>
     </member>
@@ -217,7 +217,7 @@ PaginationClient client = new PaginationClient(endpoint, credential);
 foreach (BinaryData item in client.GetMetricDimensionValues("<testRunId>", "<name>", "<metricNamespace>", null, null, null, null))
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(result[0].GetProperty("value")[0].ToString());
+    Console.WriteLine(result.GetProperty("value")[0].ToString());
 }
 ]]></code>
 This sample shows how to call GetMetricDimensionValues with all parameters and parse the result.
@@ -229,7 +229,7 @@ PaginationClient client = new PaginationClient(endpoint, credential);
 foreach (BinaryData item in client.GetMetricDimensionValues("<testRunId>", "<name>", "<metricNamespace>", "PT5S", "<metricName>", "<timespan>", null))
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(result[0].GetProperty("value")[0].ToString());
+    Console.WriteLine(result.GetProperty("value")[0].ToString());
 }
 ]]></code></example>
     </member>
@@ -290,9 +290,9 @@ PaginationClient client = new PaginationClient(endpoint, credential);
 await foreach (BinaryData item in client.GetLedgerEntriesAsync(null))
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(result[0].GetProperty("contents").ToString());
-    Console.WriteLine(result[0].GetProperty("collectionId").ToString());
-    Console.WriteLine(result[0].GetProperty("transactionId").ToString());
+    Console.WriteLine(result.GetProperty("contents").ToString());
+    Console.WriteLine(result.GetProperty("collectionId").ToString());
+    Console.WriteLine(result.GetProperty("transactionId").ToString());
 }
 ]]></code>
 This sample shows how to call GetLedgerEntriesAsync with all parameters and parse the result.
@@ -304,9 +304,9 @@ PaginationClient client = new PaginationClient(endpoint, credential);
 await foreach (BinaryData item in client.GetLedgerEntriesAsync(null))
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(result[0].GetProperty("contents").ToString());
-    Console.WriteLine(result[0].GetProperty("collectionId").ToString());
-    Console.WriteLine(result[0].GetProperty("transactionId").ToString());
+    Console.WriteLine(result.GetProperty("contents").ToString());
+    Console.WriteLine(result.GetProperty("collectionId").ToString());
+    Console.WriteLine(result.GetProperty("transactionId").ToString());
 }
 ]]></code></example>
     </member>
@@ -321,9 +321,9 @@ PaginationClient client = new PaginationClient(endpoint, credential);
 foreach (BinaryData item in client.GetLedgerEntries(null))
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(result[0].GetProperty("contents").ToString());
-    Console.WriteLine(result[0].GetProperty("collectionId").ToString());
-    Console.WriteLine(result[0].GetProperty("transactionId").ToString());
+    Console.WriteLine(result.GetProperty("contents").ToString());
+    Console.WriteLine(result.GetProperty("collectionId").ToString());
+    Console.WriteLine(result.GetProperty("transactionId").ToString());
 }
 ]]></code>
 This sample shows how to call GetLedgerEntries with all parameters and parse the result.
@@ -335,9 +335,9 @@ PaginationClient client = new PaginationClient(endpoint, credential);
 foreach (BinaryData item in client.GetLedgerEntries(null))
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(result[0].GetProperty("contents").ToString());
-    Console.WriteLine(result[0].GetProperty("collectionId").ToString());
-    Console.WriteLine(result[0].GetProperty("transactionId").ToString());
+    Console.WriteLine(result.GetProperty("contents").ToString());
+    Console.WriteLine(result.GetProperty("collectionId").ToString());
+    Console.WriteLine(result.GetProperty("transactionId").ToString());
 }
 ]]></code></example>
     </member>
@@ -398,7 +398,7 @@ PaginationClient client = new PaginationClient(endpoint, credential);
 await foreach (BinaryData item in client.GetTextBlocklistsAsync(null))
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(result[0].GetProperty("blocklistName").ToString());
+    Console.WriteLine(result.GetProperty("blocklistName").ToString());
 }
 ]]></code>
 This sample shows how to call GetTextBlocklistsAsync with all parameters and parse the result.
@@ -410,8 +410,8 @@ PaginationClient client = new PaginationClient(endpoint, credential);
 await foreach (BinaryData item in client.GetTextBlocklistsAsync(null))
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(result[0].GetProperty("blocklistName").ToString());
-    Console.WriteLine(result[0].GetProperty("description").ToString());
+    Console.WriteLine(result.GetProperty("blocklistName").ToString());
+    Console.WriteLine(result.GetProperty("description").ToString());
 }
 ]]></code></example>
     </member>
@@ -426,7 +426,7 @@ PaginationClient client = new PaginationClient(endpoint, credential);
 foreach (BinaryData item in client.GetTextBlocklists(null))
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(result[0].GetProperty("blocklistName").ToString());
+    Console.WriteLine(result.GetProperty("blocklistName").ToString());
 }
 ]]></code>
 This sample shows how to call GetTextBlocklists with all parameters and parse the result.
@@ -438,8 +438,8 @@ PaginationClient client = new PaginationClient(endpoint, credential);
 foreach (BinaryData item in client.GetTextBlocklists(null))
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(result[0].GetProperty("blocklistName").ToString());
-    Console.WriteLine(result[0].GetProperty("description").ToString());
+    Console.WriteLine(result.GetProperty("blocklistName").ToString());
+    Console.WriteLine(result.GetProperty("description").ToString());
 }
 ]]></code></example>
     </member>
@@ -500,8 +500,8 @@ PaginationClient client = new PaginationClient(endpoint, credential);
 await foreach (BinaryData item in client.GetTextBlocklistItemsAsync("<blocklistName>", null, null, null, null))
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(result[0].GetProperty("blockItemId").ToString());
-    Console.WriteLine(result[0].GetProperty("text").ToString());
+    Console.WriteLine(result.GetProperty("blockItemId").ToString());
+    Console.WriteLine(result.GetProperty("text").ToString());
 }
 ]]></code>
 This sample shows how to call GetTextBlocklistItemsAsync with all parameters and parse the result.
@@ -513,9 +513,9 @@ PaginationClient client = new PaginationClient(endpoint, credential);
 await foreach (BinaryData item in client.GetTextBlocklistItemsAsync("<blocklistName>", 1234, 1234, 1234, null))
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(result[0].GetProperty("blockItemId").ToString());
-    Console.WriteLine(result[0].GetProperty("description").ToString());
-    Console.WriteLine(result[0].GetProperty("text").ToString());
+    Console.WriteLine(result.GetProperty("blockItemId").ToString());
+    Console.WriteLine(result.GetProperty("description").ToString());
+    Console.WriteLine(result.GetProperty("text").ToString());
 }
 ]]></code></example>
     </member>
@@ -530,8 +530,8 @@ PaginationClient client = new PaginationClient(endpoint, credential);
 foreach (BinaryData item in client.GetTextBlocklistItems("<blocklistName>", null, null, null, null))
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(result[0].GetProperty("blockItemId").ToString());
-    Console.WriteLine(result[0].GetProperty("text").ToString());
+    Console.WriteLine(result.GetProperty("blockItemId").ToString());
+    Console.WriteLine(result.GetProperty("text").ToString());
 }
 ]]></code>
 This sample shows how to call GetTextBlocklistItems with all parameters and parse the result.
@@ -543,9 +543,9 @@ PaginationClient client = new PaginationClient(endpoint, credential);
 foreach (BinaryData item in client.GetTextBlocklistItems("<blocklistName>", 1234, 1234, 1234, null))
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(result[0].GetProperty("blockItemId").ToString());
-    Console.WriteLine(result[0].GetProperty("description").ToString());
-    Console.WriteLine(result[0].GetProperty("text").ToString());
+    Console.WriteLine(result.GetProperty("blockItemId").ToString());
+    Console.WriteLine(result.GetProperty("description").ToString());
+    Console.WriteLine(result.GetProperty("text").ToString());
 }
 ]]></code></example>
     </member>

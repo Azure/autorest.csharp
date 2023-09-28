@@ -60,6 +60,7 @@ MediaTypesClient client = new MediaTypesClient(credential);
 
 RequestContent content = null;
 Response response = await client.AnalyzeBodyNoAcceptHeaderAsync(content, new ContentType("application/pdf"));
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call AnalyzeBodyNoAcceptHeaderAsync with all parameters and request content.
@@ -69,6 +70,7 @@ MediaTypesClient client = new MediaTypesClient(credential);
 
 RequestContent content = RequestContent.Create(File.OpenRead("<filePath>"));
 Response response = await client.AnalyzeBodyNoAcceptHeaderAsync(content, new ContentType("application/pdf"));
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -81,6 +83,7 @@ MediaTypesClient client = new MediaTypesClient(credential);
 
 RequestContent content = null;
 Response response = client.AnalyzeBodyNoAcceptHeader(content, new ContentType("application/pdf"));
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call AnalyzeBodyNoAcceptHeader with all parameters and request content.
@@ -90,6 +93,7 @@ MediaTypesClient client = new MediaTypesClient(credential);
 
 RequestContent content = RequestContent.Create(File.OpenRead("<filePath>"));
 Response response = client.AnalyzeBodyNoAcceptHeader(content, new ContentType("application/pdf"));
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>

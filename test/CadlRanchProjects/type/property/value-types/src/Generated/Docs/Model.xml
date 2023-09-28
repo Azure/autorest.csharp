@@ -81,7 +81,6 @@ Model client = new ValueTypesClient().GetModelClient(apiVersion: "1.0.0");
 
 ModelProperty body = new ModelProperty(new InnerModel("<property>"));
 Response response = await client.PutAsync(body);
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutAsync with all parameters.
 <code><![CDATA[
@@ -89,7 +88,6 @@ Model client = new ValueTypesClient().GetModelClient(apiVersion: "1.0.0");
 
 ModelProperty body = new ModelProperty(new InnerModel("<property>"));
 Response response = await client.PutAsync(body);
-Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="Put(ModelProperty,CancellationToken)">
@@ -100,7 +98,6 @@ Model client = new ValueTypesClient().GetModelClient(apiVersion: "1.0.0");
 
 ModelProperty body = new ModelProperty(new InnerModel("<property>"));
 Response response = client.Put(body);
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Put with all parameters.
 <code><![CDATA[
@@ -108,7 +105,6 @@ Model client = new ValueTypesClient().GetModelClient(apiVersion: "1.0.0");
 
 ModelProperty body = new ModelProperty(new InnerModel("<property>"));
 Response response = client.Put(body);
-Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="PutAsync(RequestContent,RequestContext)">
@@ -125,6 +121,7 @@ RequestContent content = RequestContent.Create(new
     },
 });
 Response response = await client.PutAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutAsync with all request content.
@@ -139,6 +136,7 @@ RequestContent content = RequestContent.Create(new
     },
 });
 Response response = await client.PutAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -156,6 +154,7 @@ RequestContent content = RequestContent.Create(new
     },
 });
 Response response = client.Put(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Put with all request content.
@@ -170,6 +169,7 @@ RequestContent content = RequestContent.Create(new
     },
 });
 Response response = client.Put(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>

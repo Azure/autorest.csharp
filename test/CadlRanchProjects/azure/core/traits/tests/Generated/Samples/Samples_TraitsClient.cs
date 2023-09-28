@@ -17,11 +17,11 @@ using _Specs_.Azure.Core.Traits.Models;
 
 namespace _Specs_.Azure.Core.Traits.Samples
 {
-    public class Samples_TraitsClient
+    public partial class Samples_TraitsClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_SmokeTest()
+        public void Example_SmokeTest_ShortVersion()
         {
             TraitsClient client = new TraitsClient();
 
@@ -33,7 +33,7 @@ namespace _Specs_.Azure.Core.Traits.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_SmokeTest_Async()
+        public async Task Example_SmokeTest_ShortVersion_Async()
         {
             TraitsClient client = new TraitsClient();
 
@@ -45,7 +45,7 @@ namespace _Specs_.Azure.Core.Traits.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_SmokeTest_Convenience()
+        public void Example_SmokeTest_ShortVersion_Convenience()
         {
             TraitsClient client = new TraitsClient();
 
@@ -54,7 +54,7 @@ namespace _Specs_.Azure.Core.Traits.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_SmokeTest_Convenience_Async()
+        public async Task Example_SmokeTest_ShortVersion_Convenience_Async()
         {
             TraitsClient client = new TraitsClient();
 
@@ -107,7 +107,7 @@ namespace _Specs_.Azure.Core.Traits.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_RepeatableAction()
+        public void Example_RepeatableAction_ShortVersion()
         {
             TraitsClient client = new TraitsClient();
 
@@ -123,7 +123,7 @@ namespace _Specs_.Azure.Core.Traits.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_RepeatableAction_Async()
+        public async Task Example_RepeatableAction_ShortVersion_Async()
         {
             TraitsClient client = new TraitsClient();
 
@@ -139,7 +139,7 @@ namespace _Specs_.Azure.Core.Traits.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_RepeatableAction_Convenience()
+        public void Example_RepeatableAction_ShortVersion_Convenience()
         {
             TraitsClient client = new TraitsClient();
 
@@ -149,7 +149,7 @@ namespace _Specs_.Azure.Core.Traits.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_RepeatableAction_Convenience_Async()
+        public async Task Example_RepeatableAction_ShortVersion_Convenience_Async()
         {
             TraitsClient client = new TraitsClient();
 

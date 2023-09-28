@@ -15,29 +15,31 @@ using NUnit.Framework;
 
 namespace CollapseRequestCondition_LowLevel.Samples
 {
-    public class Samples_NonCollapseClient
+    public partial class Samples_NonCollapseClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_IfMatchPut()
+        public void Example_IfMatchPut_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NonCollapseClient client = new NonCollapseClient(credential);
 
             RequestContent content = null;
             Response response = client.IfMatchPut(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_IfMatchPut_Async()
+        public async Task Example_IfMatchPut_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NonCollapseClient client = new NonCollapseClient(credential);
 
             RequestContent content = null;
             Response response = await client.IfMatchPutAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -50,6 +52,7 @@ namespace CollapseRequestCondition_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("<body>");
             Response response = client.IfMatchPut(content, ifMatch: new ETag("<ifMatch>"));
+
             Console.WriteLine(response.Status);
         }
 
@@ -62,30 +65,33 @@ namespace CollapseRequestCondition_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("<body>");
             Response response = await client.IfMatchPutAsync(content, ifMatch: new ETag("<ifMatch>"));
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_IfNoneMatchPut()
+        public void Example_IfNoneMatchPut_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NonCollapseClient client = new NonCollapseClient(credential);
 
             RequestContent content = null;
             Response response = client.IfNoneMatchPut(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_IfNoneMatchPut_Async()
+        public async Task Example_IfNoneMatchPut_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NonCollapseClient client = new NonCollapseClient(credential);
 
             RequestContent content = null;
             Response response = await client.IfNoneMatchPutAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -98,6 +104,7 @@ namespace CollapseRequestCondition_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("<body>");
             Response response = client.IfNoneMatchPut(content, ifNoneMatch: new ETag("<ifNoneMatch>"));
+
             Console.WriteLine(response.Status);
         }
 
@@ -110,6 +117,7 @@ namespace CollapseRequestCondition_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("<body>");
             Response response = await client.IfNoneMatchPutAsync(content, ifNoneMatch: new ETag("<ifNoneMatch>"));
+
             Console.WriteLine(response.Status);
         }
     }

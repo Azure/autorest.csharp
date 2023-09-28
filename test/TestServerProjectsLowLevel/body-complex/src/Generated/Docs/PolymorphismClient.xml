@@ -72,6 +72,7 @@ RequestContent content = RequestContent.Create(new
     length = 123.45F,
 });
 Response response = await client.PutValidAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutValidAsync with all request content.
@@ -86,12 +87,13 @@ RequestContent content = RequestContent.Create(new
     fishtype = "salmon",
     species = "<species>",
     length = 123.45F,
-    siblings = new List<object>()
+    siblings = new object[]
     {
         null
     },
 });
 Response response = await client.PutValidAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -108,6 +110,7 @@ RequestContent content = RequestContent.Create(new
     length = 123.45F,
 });
 Response response = client.PutValid(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutValid with all request content.
@@ -122,12 +125,13 @@ RequestContent content = RequestContent.Create(new
     fishtype = "salmon",
     species = "<species>",
     length = 123.45F,
-    siblings = new List<object>()
+    siblings = new object[]
     {
         null
     },
 });
 Response response = client.PutValid(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -325,7 +329,8 @@ PolymorphismClient client = new PolymorphismClient(credential);
 Response response = await client.GetComplicatedAsync(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
+Console.WriteLine(result.GetProperty("fishtype").ToString());
+Console.WriteLine(result.GetProperty("length").ToString());
 ]]></code>
 This sample shows how to call GetComplicatedAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -355,7 +360,8 @@ PolymorphismClient client = new PolymorphismClient(credential);
 Response response = client.GetComplicated(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
+Console.WriteLine(result.GetProperty("fishtype").ToString());
+Console.WriteLine(result.GetProperty("length").ToString());
 ]]></code>
 This sample shows how to call GetComplicated with all parameters and parse the result.
 <code><![CDATA[
@@ -388,6 +394,7 @@ RequestContent content = RequestContent.Create(new
     length = 123.45F,
 });
 Response response = await client.PutComplicatedAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutComplicatedAsync with all request content.
@@ -403,7 +410,7 @@ RequestContent content = RequestContent.Create(new
     fishtype = "smart_salmon",
     species = "<species>",
     length = 123.45F,
-    siblings = new List<object>()
+    siblings = new object[]
     {
         new
         {
@@ -412,7 +419,7 @@ RequestContent content = RequestContent.Create(new
             fishtype = "salmon",
             species = "<species>",
             length = 123.45F,
-            siblings = new List<object>()
+            siblings = new object[]
             {
                 null
             },
@@ -420,6 +427,7 @@ RequestContent content = RequestContent.Create(new
     },
 });
 Response response = await client.PutComplicatedAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -436,6 +444,7 @@ RequestContent content = RequestContent.Create(new
     length = 123.45F,
 });
 Response response = client.PutComplicated(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutComplicated with all request content.
@@ -451,7 +460,7 @@ RequestContent content = RequestContent.Create(new
     fishtype = "smart_salmon",
     species = "<species>",
     length = 123.45F,
-    siblings = new List<object>()
+    siblings = new object[]
     {
         new
         {
@@ -460,7 +469,7 @@ RequestContent content = RequestContent.Create(new
             fishtype = "salmon",
             species = "<species>",
             length = 123.45F,
-            siblings = new List<object>()
+            siblings = new object[]
             {
                 null
             },
@@ -468,6 +477,7 @@ RequestContent content = RequestContent.Create(new
     },
 });
 Response response = client.PutComplicated(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -486,7 +496,8 @@ RequestContent content = RequestContent.Create(new
 Response response = await client.PutMissingDiscriminatorAsync(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
+Console.WriteLine(result.GetProperty("fishtype").ToString());
+Console.WriteLine(result.GetProperty("length").ToString());
 ]]></code>
 This sample shows how to call PutMissingDiscriminatorAsync with all request content and parse the result.
 <code><![CDATA[
@@ -501,7 +512,7 @@ RequestContent content = RequestContent.Create(new
     fishtype = "smart_salmon",
     species = "<species>",
     length = 123.45F,
-    siblings = new List<object>()
+    siblings = new object[]
     {
         new
         {
@@ -510,7 +521,7 @@ RequestContent content = RequestContent.Create(new
             fishtype = "salmon",
             species = "<species>",
             length = 123.45F,
-            siblings = new List<object>()
+            siblings = new object[]
             {
                 null
             },
@@ -545,7 +556,8 @@ RequestContent content = RequestContent.Create(new
 Response response = client.PutMissingDiscriminator(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
+Console.WriteLine(result.GetProperty("fishtype").ToString());
+Console.WriteLine(result.GetProperty("length").ToString());
 ]]></code>
 This sample shows how to call PutMissingDiscriminator with all request content and parse the result.
 <code><![CDATA[
@@ -560,7 +572,7 @@ RequestContent content = RequestContent.Create(new
     fishtype = "smart_salmon",
     species = "<species>",
     length = 123.45F,
-    siblings = new List<object>()
+    siblings = new object[]
     {
         new
         {
@@ -569,7 +581,7 @@ RequestContent content = RequestContent.Create(new
             fishtype = "salmon",
             species = "<species>",
             length = 123.45F,
-            siblings = new List<object>()
+            siblings = new object[]
             {
                 null
             },
@@ -602,6 +614,7 @@ RequestContent content = RequestContent.Create(new
     length = 123.45F,
 });
 Response response = await client.PutValidMissingRequiredAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutValidMissingRequiredAsync with all request content.
@@ -616,12 +629,13 @@ RequestContent content = RequestContent.Create(new
     fishtype = "salmon",
     species = "<species>",
     length = 123.45F,
-    siblings = new List<object>()
+    siblings = new object[]
     {
         null
     },
 });
 Response response = await client.PutValidMissingRequiredAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -638,6 +652,7 @@ RequestContent content = RequestContent.Create(new
     length = 123.45F,
 });
 Response response = client.PutValidMissingRequired(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutValidMissingRequired with all request content.
@@ -652,12 +667,13 @@ RequestContent content = RequestContent.Create(new
     fishtype = "salmon",
     species = "<species>",
     length = 123.45F,
-    siblings = new List<object>()
+    siblings = new object[]
     {
         null
     },
 });
 Response response = client.PutValidMissingRequired(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>

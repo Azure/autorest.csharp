@@ -162,12 +162,13 @@ CollectionsByte client = new NullableClient().GetCollectionsByteClient(apiVersio
 RequestContent content = RequestContent.Create(new
 {
     requiredProperty = "<requiredProperty>",
-    nullableProperty = new List<object>()
+    nullableProperty = new object[]
     {
         new object()
     },
 });
 Response response = await client.PatchNonNullAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PatchNonNullAsync with all request content.
@@ -177,12 +178,13 @@ CollectionsByte client = new NullableClient().GetCollectionsByteClient(apiVersio
 RequestContent content = RequestContent.Create(new
 {
     requiredProperty = "<requiredProperty>",
-    nullableProperty = new List<object>()
+    nullableProperty = new object[]
     {
         new object()
     },
 });
 Response response = await client.PatchNonNullAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -195,12 +197,13 @@ CollectionsByte client = new NullableClient().GetCollectionsByteClient(apiVersio
 RequestContent content = RequestContent.Create(new
 {
     requiredProperty = "<requiredProperty>",
-    nullableProperty = new List<object>()
+    nullableProperty = new object[]
     {
         new object()
     },
 });
 Response response = client.PatchNonNull(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PatchNonNull with all request content.
@@ -210,12 +213,13 @@ CollectionsByte client = new NullableClient().GetCollectionsByteClient(apiVersio
 RequestContent content = RequestContent.Create(new
 {
     requiredProperty = "<requiredProperty>",
-    nullableProperty = new List<object>()
+    nullableProperty = new object[]
     {
         new object()
     },
 });
 Response response = client.PatchNonNull(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -228,12 +232,13 @@ CollectionsByte client = new NullableClient().GetCollectionsByteClient(apiVersio
 RequestContent content = RequestContent.Create(new
 {
     requiredProperty = "<requiredProperty>",
-    nullableProperty = new List<object>()
+    nullableProperty = new object[]
     {
         new object()
     },
 });
 Response response = await client.PatchNullAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PatchNullAsync with all request content.
@@ -243,12 +248,13 @@ CollectionsByte client = new NullableClient().GetCollectionsByteClient(apiVersio
 RequestContent content = RequestContent.Create(new
 {
     requiredProperty = "<requiredProperty>",
-    nullableProperty = new List<object>()
+    nullableProperty = new object[]
     {
         new object()
     },
 });
 Response response = await client.PatchNullAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -261,12 +267,13 @@ CollectionsByte client = new NullableClient().GetCollectionsByteClient(apiVersio
 RequestContent content = RequestContent.Create(new
 {
     requiredProperty = "<requiredProperty>",
-    nullableProperty = new List<object>()
+    nullableProperty = new object[]
     {
         new object()
     },
 });
 Response response = client.PatchNull(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PatchNull with all request content.
@@ -276,12 +283,13 @@ CollectionsByte client = new NullableClient().GetCollectionsByteClient(apiVersio
 RequestContent content = RequestContent.Create(new
 {
     requiredProperty = "<requiredProperty>",
-    nullableProperty = new List<object>()
+    nullableProperty = new object[]
     {
         new object()
     },
 });
 Response response = client.PatchNull(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>

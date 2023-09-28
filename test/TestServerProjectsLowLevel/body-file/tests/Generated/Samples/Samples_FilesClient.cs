@@ -14,39 +14,37 @@ using body_file_LowLevel;
 
 namespace body_file_LowLevel.Samples
 {
-    public class Samples_FilesClient
+    public partial class Samples_FilesClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetFile()
+        public void Example_GetFile_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             FilesClient client = new FilesClient(credential);
 
             Response response = client.GetFile(null);
+
             if (response.ContentStream != null)
             {
-                using (Stream outFileStream = File.OpenWrite("<filepath>"))
-                {
-                    response.ContentStream.CopyTo(outFileStream);
-                }
+                using Stream outFileStream = File.OpenWrite("<filepath>");
+                response.ContentStream.CopyTo(outFileStream);
             }
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetFile_Async()
+        public async Task Example_GetFile_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             FilesClient client = new FilesClient(credential);
 
             Response response = await client.GetFileAsync(null);
+
             if (response.ContentStream != null)
             {
-                using (Stream outFileStream = File.OpenWrite("<filepath>"))
-                {
-                    response.ContentStream.CopyTo(outFileStream);
-                }
+                using Stream outFileStream = File.OpenWrite("<filepath>");
+                response.ContentStream.CopyTo(outFileStream);
             }
         }
 
@@ -58,12 +56,11 @@ namespace body_file_LowLevel.Samples
             FilesClient client = new FilesClient(credential);
 
             Response response = client.GetFile(null);
+
             if (response.ContentStream != null)
             {
-                using (Stream outFileStream = File.OpenWrite("<filepath>"))
-                {
-                    response.ContentStream.CopyTo(outFileStream);
-                }
+                using Stream outFileStream = File.OpenWrite("<filepath>");
+                response.ContentStream.CopyTo(outFileStream);
             }
         }
 
@@ -75,46 +72,43 @@ namespace body_file_LowLevel.Samples
             FilesClient client = new FilesClient(credential);
 
             Response response = await client.GetFileAsync(null);
+
             if (response.ContentStream != null)
             {
-                using (Stream outFileStream = File.OpenWrite("<filepath>"))
-                {
-                    response.ContentStream.CopyTo(outFileStream);
-                }
+                using Stream outFileStream = File.OpenWrite("<filepath>");
+                response.ContentStream.CopyTo(outFileStream);
             }
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetFileLarge()
+        public void Example_GetFileLarge_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             FilesClient client = new FilesClient(credential);
 
             Response response = client.GetFileLarge(null);
+
             if (response.ContentStream != null)
             {
-                using (Stream outFileStream = File.OpenWrite("<filepath>"))
-                {
-                    response.ContentStream.CopyTo(outFileStream);
-                }
+                using Stream outFileStream = File.OpenWrite("<filepath>");
+                response.ContentStream.CopyTo(outFileStream);
             }
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetFileLarge_Async()
+        public async Task Example_GetFileLarge_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             FilesClient client = new FilesClient(credential);
 
             Response response = await client.GetFileLargeAsync(null);
+
             if (response.ContentStream != null)
             {
-                using (Stream outFileStream = File.OpenWrite("<filepath>"))
-                {
-                    response.ContentStream.CopyTo(outFileStream);
-                }
+                using Stream outFileStream = File.OpenWrite("<filepath>");
+                response.ContentStream.CopyTo(outFileStream);
             }
         }
 
@@ -126,12 +120,11 @@ namespace body_file_LowLevel.Samples
             FilesClient client = new FilesClient(credential);
 
             Response response = client.GetFileLarge(null);
+
             if (response.ContentStream != null)
             {
-                using (Stream outFileStream = File.OpenWrite("<filepath>"))
-                {
-                    response.ContentStream.CopyTo(outFileStream);
-                }
+                using Stream outFileStream = File.OpenWrite("<filepath>");
+                response.ContentStream.CopyTo(outFileStream);
             }
         }
 
@@ -143,46 +136,43 @@ namespace body_file_LowLevel.Samples
             FilesClient client = new FilesClient(credential);
 
             Response response = await client.GetFileLargeAsync(null);
+
             if (response.ContentStream != null)
             {
-                using (Stream outFileStream = File.OpenWrite("<filepath>"))
-                {
-                    response.ContentStream.CopyTo(outFileStream);
-                }
+                using Stream outFileStream = File.OpenWrite("<filepath>");
+                response.ContentStream.CopyTo(outFileStream);
             }
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetEmptyFile()
+        public void Example_GetEmptyFile_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             FilesClient client = new FilesClient(credential);
 
             Response response = client.GetEmptyFile(null);
+
             if (response.ContentStream != null)
             {
-                using (Stream outFileStream = File.OpenWrite("<filepath>"))
-                {
-                    response.ContentStream.CopyTo(outFileStream);
-                }
+                using Stream outFileStream = File.OpenWrite("<filepath>");
+                response.ContentStream.CopyTo(outFileStream);
             }
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetEmptyFile_Async()
+        public async Task Example_GetEmptyFile_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             FilesClient client = new FilesClient(credential);
 
             Response response = await client.GetEmptyFileAsync(null);
+
             if (response.ContentStream != null)
             {
-                using (Stream outFileStream = File.OpenWrite("<filepath>"))
-                {
-                    response.ContentStream.CopyTo(outFileStream);
-                }
+                using Stream outFileStream = File.OpenWrite("<filepath>");
+                response.ContentStream.CopyTo(outFileStream);
             }
         }
 
@@ -194,12 +184,11 @@ namespace body_file_LowLevel.Samples
             FilesClient client = new FilesClient(credential);
 
             Response response = client.GetEmptyFile(null);
+
             if (response.ContentStream != null)
             {
-                using (Stream outFileStream = File.OpenWrite("<filepath>"))
-                {
-                    response.ContentStream.CopyTo(outFileStream);
-                }
+                using Stream outFileStream = File.OpenWrite("<filepath>");
+                response.ContentStream.CopyTo(outFileStream);
             }
         }
 
@@ -211,12 +200,11 @@ namespace body_file_LowLevel.Samples
             FilesClient client = new FilesClient(credential);
 
             Response response = await client.GetEmptyFileAsync(null);
+
             if (response.ContentStream != null)
             {
-                using (Stream outFileStream = File.OpenWrite("<filepath>"))
-                {
-                    response.ContentStream.CopyTo(outFileStream);
-                }
+                using Stream outFileStream = File.OpenWrite("<filepath>");
+                response.ContentStream.CopyTo(outFileStream);
             }
         }
     }

@@ -375,20 +375,14 @@ This sample shows how to call FloatSecondsArrayAsync.
 <code><![CDATA[
 Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
 
-FloatSecondsDurationArrayProperty body = new FloatSecondsDurationArrayProperty(new List<TimeSpan>()
-{
-    TimeSpan.FromSeconds(10F)
-});
+FloatSecondsDurationArrayProperty body = new FloatSecondsDurationArrayProperty(new TimeSpan[] { TimeSpan.FromSeconds(10F) });
 Response<FloatSecondsDurationArrayProperty> response = await client.FloatSecondsArrayAsync(body);
 ]]></code>
 This sample shows how to call FloatSecondsArrayAsync with all parameters.
 <code><![CDATA[
 Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
 
-FloatSecondsDurationArrayProperty body = new FloatSecondsDurationArrayProperty(new List<TimeSpan>()
-{
-    TimeSpan.FromSeconds(10F)
-});
+FloatSecondsDurationArrayProperty body = new FloatSecondsDurationArrayProperty(new TimeSpan[] { TimeSpan.FromSeconds(10F) });
 Response<FloatSecondsDurationArrayProperty> response = await client.FloatSecondsArrayAsync(body);
 ]]></code></example>
     </member>
@@ -398,20 +392,14 @@ This sample shows how to call FloatSecondsArray.
 <code><![CDATA[
 Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
 
-FloatSecondsDurationArrayProperty body = new FloatSecondsDurationArrayProperty(new List<TimeSpan>()
-{
-    TimeSpan.FromSeconds(10F)
-});
+FloatSecondsDurationArrayProperty body = new FloatSecondsDurationArrayProperty(new TimeSpan[] { TimeSpan.FromSeconds(10F) });
 Response<FloatSecondsDurationArrayProperty> response = client.FloatSecondsArray(body);
 ]]></code>
 This sample shows how to call FloatSecondsArray with all parameters.
 <code><![CDATA[
 Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
 
-FloatSecondsDurationArrayProperty body = new FloatSecondsDurationArrayProperty(new List<TimeSpan>()
-{
-    TimeSpan.FromSeconds(10F)
-});
+FloatSecondsDurationArrayProperty body = new FloatSecondsDurationArrayProperty(new TimeSpan[] { TimeSpan.FromSeconds(10F) });
 Response<FloatSecondsDurationArrayProperty> response = client.FloatSecondsArray(body);
 ]]></code></example>
     </member>
@@ -423,7 +411,7 @@ Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
 
 RequestContent content = RequestContent.Create(new
 {
-    value = new List<object>()
+    value = new object[]
     {
         10F
     },
@@ -439,7 +427,7 @@ Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
 
 RequestContent content = RequestContent.Create(new
 {
-    value = new List<object>()
+    value = new object[]
     {
         10F
     },
@@ -458,7 +446,7 @@ Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
 
 RequestContent content = RequestContent.Create(new
 {
-    value = new List<object>()
+    value = new object[]
     {
         10F
     },
@@ -474,7 +462,7 @@ Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
 
 RequestContent content = RequestContent.Create(new
 {
-    value = new List<object>()
+    value = new object[]
     {
         10F
     },

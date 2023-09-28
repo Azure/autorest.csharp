@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
@@ -18,11 +17,11 @@ using NUnit.Framework;
 
 namespace FirstTestTypeSpec.Samples
 {
-    public class Samples_FirstTestTypeSpecClient
+    public partial class Samples_FirstTestTypeSpecClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_TopAction()
+        public void Example_TopAction_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
@@ -42,7 +41,7 @@ namespace FirstTestTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_TopAction_Async()
+        public async Task Example_TopAction_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
@@ -112,7 +111,7 @@ namespace FirstTestTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_TopAction2()
+        public void Example_TopAction2_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
@@ -132,7 +131,7 @@ namespace FirstTestTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_TopAction2_Async()
+        public async Task Example_TopAction2_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
@@ -202,7 +201,7 @@ namespace FirstTestTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PatchAction()
+        public void Example_PatchAction_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
@@ -216,10 +215,10 @@ namespace FirstTestTypeSpec.Samples
                 requiredLiteralFloat = 1.23F,
                 requiredLiteralBool = false,
                 requiredBadDescription = "<requiredBadDescription>",
-                requiredNullableList = new List<object>()
-{
+                requiredNullableList = new object[]
+            {
 1234
-},
+            },
             });
             Response response = client.PatchAction(content);
 
@@ -236,7 +235,7 @@ namespace FirstTestTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PatchAction_Async()
+        public async Task Example_PatchAction_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
@@ -250,10 +249,10 @@ namespace FirstTestTypeSpec.Samples
                 requiredLiteralFloat = 1.23F,
                 requiredLiteralBool = false,
                 requiredBadDescription = "<requiredBadDescription>",
-                requiredNullableList = new List<object>()
-{
+                requiredNullableList = new object[]
+            {
 1234
-},
+            },
             });
             Response response = await client.PatchActionAsync(content);
 
@@ -288,14 +287,14 @@ namespace FirstTestTypeSpec.Samples
                 optionalLiteralFloat = 4.56F,
                 optionalLiteralBool = true,
                 requiredBadDescription = "<requiredBadDescription>",
-                optionalNullableList = new List<object>()
-{
+                optionalNullableList = new object[]
+            {
 1234
-},
-                requiredNullableList = new List<object>()
-{
+            },
+                requiredNullableList = new object[]
+            {
 1234
-},
+            },
             });
             Response response = client.PatchAction(content);
 
@@ -335,14 +334,14 @@ namespace FirstTestTypeSpec.Samples
                 optionalLiteralFloat = 4.56F,
                 optionalLiteralBool = true,
                 requiredBadDescription = "<requiredBadDescription>",
-                optionalNullableList = new List<object>()
-{
+                optionalNullableList = new object[]
+            {
 1234
-},
-                requiredNullableList = new List<object>()
-{
+            },
+                requiredNullableList = new object[]
+            {
 1234
-},
+            },
             });
             Response response = await client.PatchActionAsync(content);
 
@@ -364,7 +363,7 @@ namespace FirstTestTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_AnonymousBody()
+        public void Example_AnonymousBody_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
@@ -378,10 +377,10 @@ namespace FirstTestTypeSpec.Samples
                 requiredLiteralFloat = 1.23F,
                 requiredLiteralBool = false,
                 requiredBadDescription = "<requiredBadDescription>",
-                requiredNullableList = new List<object>()
-{
+                requiredNullableList = new object[]
+            {
 1234
-},
+            },
             });
             Response response = client.AnonymousBody(content);
 
@@ -398,7 +397,7 @@ namespace FirstTestTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_AnonymousBody_Async()
+        public async Task Example_AnonymousBody_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
@@ -412,10 +411,10 @@ namespace FirstTestTypeSpec.Samples
                 requiredLiteralFloat = 1.23F,
                 requiredLiteralBool = false,
                 requiredBadDescription = "<requiredBadDescription>",
-                requiredNullableList = new List<object>()
-{
+                requiredNullableList = new object[]
+            {
 1234
-},
+            },
             });
             Response response = await client.AnonymousBodyAsync(content);
 
@@ -450,14 +449,14 @@ namespace FirstTestTypeSpec.Samples
                 optionalLiteralFloat = 4.56F,
                 optionalLiteralBool = true,
                 requiredBadDescription = "<requiredBadDescription>",
-                optionalNullableList = new List<object>()
-{
+                optionalNullableList = new object[]
+            {
 1234
-},
-                requiredNullableList = new List<object>()
-{
+            },
+                requiredNullableList = new object[]
+            {
 1234
-},
+            },
             });
             Response response = client.AnonymousBody(content);
 
@@ -497,14 +496,14 @@ namespace FirstTestTypeSpec.Samples
                 optionalLiteralFloat = 4.56F,
                 optionalLiteralBool = true,
                 requiredBadDescription = "<requiredBadDescription>",
-                optionalNullableList = new List<object>()
-{
+                optionalNullableList = new object[]
+            {
 1234
-},
-                requiredNullableList = new List<object>()
-{
+            },
+                requiredNullableList = new object[]
+            {
 1234
-},
+            },
             });
             Response response = await client.AnonymousBodyAsync(content);
 
@@ -526,7 +525,7 @@ namespace FirstTestTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_FriendlyModel()
+        public void Example_FriendlyModel_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
@@ -543,7 +542,7 @@ namespace FirstTestTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_FriendlyModel_Async()
+        public async Task Example_FriendlyModel_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
@@ -560,7 +559,7 @@ namespace FirstTestTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_FriendlyModel_Convenience()
+        public void Example_FriendlyModel_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
@@ -571,7 +570,7 @@ namespace FirstTestTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_FriendlyModel_Convenience_Async()
+        public async Task Example_FriendlyModel_ShortVersion_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
@@ -638,23 +637,25 @@ namespace FirstTestTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_AddTimeHeader()
+        public void Example_AddTimeHeader_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
             Response response = client.AddTimeHeader();
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_AddTimeHeader_Async()
+        public async Task Example_AddTimeHeader_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
             Response response = await client.AddTimeHeaderAsync();
+
             Console.WriteLine(response.Status);
         }
 
@@ -666,6 +667,7 @@ namespace FirstTestTypeSpec.Samples
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
             Response response = client.AddTimeHeader();
+
             Console.WriteLine(response.Status);
         }
 
@@ -677,12 +679,13 @@ namespace FirstTestTypeSpec.Samples
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
             Response response = await client.AddTimeHeaderAsync();
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_StringFormat()
+        public void Example_StringFormat_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
@@ -693,12 +696,13 @@ namespace FirstTestTypeSpec.Samples
                 guid = "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a",
             });
             Response response = client.StringFormat(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_StringFormat_Async()
+        public async Task Example_StringFormat_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
@@ -709,31 +713,30 @@ namespace FirstTestTypeSpec.Samples
                 guid = "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a",
             });
             Response response = await client.StringFormatAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_StringFormat_Convenience()
+        public void Example_StringFormat_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
             ModelWithFormat body = new ModelWithFormat(new Uri("http://localhost:3000"), Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
             Response response = client.StringFormat(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), body);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_StringFormat_Convenience_Async()
+        public async Task Example_StringFormat_ShortVersion_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
             ModelWithFormat body = new ModelWithFormat(new Uri("http://localhost:3000"), Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
             Response response = await client.StringFormatAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), body);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -749,6 +752,7 @@ namespace FirstTestTypeSpec.Samples
                 guid = "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a",
             });
             Response response = client.StringFormat(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -765,6 +769,7 @@ namespace FirstTestTypeSpec.Samples
                 guid = "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a",
             });
             Response response = await client.StringFormatAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -777,7 +782,6 @@ namespace FirstTestTypeSpec.Samples
 
             ModelWithFormat body = new ModelWithFormat(new Uri("http://localhost:3000"), Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
             Response response = client.StringFormat(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), body);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -789,12 +793,11 @@ namespace FirstTestTypeSpec.Samples
 
             ModelWithFormat body = new ModelWithFormat(new Uri("http://localhost:3000"), Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
             Response response = await client.StringFormatAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), body);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ProjectedNameModel()
+        public void Example_ProjectedNameModel_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
@@ -811,7 +814,7 @@ namespace FirstTestTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_ProjectedNameModel_Async()
+        public async Task Example_ProjectedNameModel_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
@@ -828,7 +831,7 @@ namespace FirstTestTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ProjectedNameModel_Convenience()
+        public void Example_ProjectedNameModel_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
@@ -839,7 +842,7 @@ namespace FirstTestTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_ProjectedNameModel_Convenience_Async()
+        public async Task Example_ProjectedNameModel_ShortVersion_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
@@ -906,26 +909,28 @@ namespace FirstTestTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ReturnsAnonymousModel()
+        public void Example_ReturnsAnonymousModel_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
             Response response = client.ReturnsAnonymousModel(null);
 
-            Console.WriteLine(response.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_ReturnsAnonymousModel_Async()
+        public async Task Example_ReturnsAnonymousModel_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
             Response response = await client.ReturnsAnonymousModelAsync(null);
 
-            Console.WriteLine(response.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -937,7 +942,8 @@ namespace FirstTestTypeSpec.Samples
 
             Response response = client.ReturnsAnonymousModel(null);
 
-            Console.WriteLine(response.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -949,28 +955,31 @@ namespace FirstTestTypeSpec.Samples
 
             Response response = await client.ReturnsAnonymousModelAsync(null);
 
-            Console.WriteLine(response.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_HeadAsBoolean()
+        public void Example_HeadAsBoolean_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
             Response<bool> response = client.HeadAsBoolean("<id>");
+
             Console.WriteLine(response.GetRawResponse().Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_HeadAsBoolean_Async()
+        public async Task Example_HeadAsBoolean_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
             Response<bool> response = await client.HeadAsBooleanAsync("<id>");
+
             Console.WriteLine(response.GetRawResponse().Status);
         }
 
@@ -982,6 +991,7 @@ namespace FirstTestTypeSpec.Samples
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
             Response<bool> response = client.HeadAsBoolean("<id>");
+
             Console.WriteLine(response.GetRawResponse().Status);
         }
 
@@ -993,12 +1003,473 @@ namespace FirstTestTypeSpec.Samples
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
             Response<bool> response = await client.HeadAsBooleanAsync("<id>");
+
             Console.WriteLine(response.GetRawResponse().Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_SayHi()
+        public void Example_StringBody_ShortVersion()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            RequestContent content = RequestContent.Create("<body>");
+            Response response = client.StringBody(content);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_StringBody_ShortVersion_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            RequestContent content = RequestContent.Create("<body>");
+            Response response = await client.StringBodyAsync(content);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_StringBody_ShortVersion_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            Response response = client.StringBody("<body>");
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_StringBody_ShortVersion_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            Response response = await client.StringBodyAsync("<body>");
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_StringBody_AllParameters()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            RequestContent content = RequestContent.Create("<body>");
+            Response response = client.StringBody(content);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_StringBody_AllParameters_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            RequestContent content = RequestContent.Create("<body>");
+            Response response = await client.StringBodyAsync(content);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_StringBody_AllParameters_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            Response response = client.StringBody("<body>");
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_StringBody_AllParameters_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            Response response = await client.StringBodyAsync("<body>");
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_BoolBody_ShortVersion()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            RequestContent content = RequestContent.Create(true);
+            Response response = client.BoolBody(content);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_BoolBody_ShortVersion_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            RequestContent content = RequestContent.Create(true);
+            Response response = await client.BoolBodyAsync(content);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_BoolBody_ShortVersion_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            Response response = client.BoolBody(true);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_BoolBody_ShortVersion_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            Response response = await client.BoolBodyAsync(true);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_BoolBody_AllParameters()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            RequestContent content = RequestContent.Create(true);
+            Response response = client.BoolBody(content);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_BoolBody_AllParameters_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            RequestContent content = RequestContent.Create(true);
+            Response response = await client.BoolBodyAsync(content);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_BoolBody_AllParameters_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            Response response = client.BoolBody(true);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_BoolBody_AllParameters_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            Response response = await client.BoolBodyAsync(true);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_DateTimeBody_ShortVersion()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            RequestContent content = RequestContent.Create("2022-05-10T14:57:31.2311892-04:00");
+            Response response = client.DateTimeBody(content);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_DateTimeBody_ShortVersion_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            RequestContent content = RequestContent.Create("2022-05-10T14:57:31.2311892-04:00");
+            Response response = await client.DateTimeBodyAsync(content);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_DateTimeBody_ShortVersion_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            Response response = client.DateTimeBody(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_DateTimeBody_ShortVersion_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            Response response = await client.DateTimeBodyAsync(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_DateTimeBody_AllParameters()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            RequestContent content = RequestContent.Create("2022-05-10T14:57:31.2311892-04:00");
+            Response response = client.DateTimeBody(content);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_DateTimeBody_AllParameters_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            RequestContent content = RequestContent.Create("2022-05-10T14:57:31.2311892-04:00");
+            Response response = await client.DateTimeBodyAsync(content);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_DateTimeBody_AllParameters_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            Response response = client.DateTimeBody(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_DateTimeBody_AllParameters_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            Response response = await client.DateTimeBodyAsync(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_ReturnString_ShortVersion()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            Response response = client.ReturnString(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_ReturnString_ShortVersion_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            Response response = await client.ReturnStringAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_ReturnString_ShortVersion_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            Response<string> response = client.ReturnString();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_ReturnString_ShortVersion_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            Response<string> response = await client.ReturnStringAsync();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_ReturnString_AllParameters()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            Response response = client.ReturnString(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_ReturnString_AllParameters_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            Response response = await client.ReturnStringAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_ReturnString_AllParameters_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            Response<string> response = client.ReturnString();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_ReturnString_AllParameters_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            Response<string> response = await client.ReturnStringAsync();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_ReturnUnknown_ShortVersion()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            Response response = client.ReturnUnknown(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_ReturnUnknown_ShortVersion_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            Response response = await client.ReturnUnknownAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_ReturnUnknown_ShortVersion_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            Response<BinaryData> response = client.ReturnUnknown();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_ReturnUnknown_ShortVersion_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            Response<BinaryData> response = await client.ReturnUnknownAsync();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_ReturnUnknown_AllParameters()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            Response response = client.ReturnUnknown(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_ReturnUnknown_AllParameters_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            Response response = await client.ReturnUnknownAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_ReturnUnknown_AllParameters_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            Response<BinaryData> response = client.ReturnUnknown();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_ReturnUnknown_AllParameters_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            Response<BinaryData> response = await client.ReturnUnknownAsync();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_SayHi_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
@@ -1018,7 +1489,7 @@ namespace FirstTestTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_SayHi_Async()
+        public async Task Example_SayHi_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
@@ -1088,7 +1559,7 @@ namespace FirstTestTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_HelloAgain()
+        public void Example_HelloAgain_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
@@ -1097,10 +1568,10 @@ namespace FirstTestTypeSpec.Samples
             {
                 requiredString = "<requiredString>",
                 requiredInt = 1234,
-                requiredCollection = new List<object>()
-{
+                requiredCollection = new object[]
+            {
 "1"
-},
+            },
                 requiredDictionary = new
                 {
                     key = "1",
@@ -1114,10 +1585,10 @@ namespace FirstTestTypeSpec.Samples
                     requiredLiteralFloat = 1.23F,
                     requiredLiteralBool = false,
                     requiredBadDescription = "<requiredBadDescription>",
-                    requiredNullableList = new List<object>()
-{
+                    requiredNullableList = new object[]
+            {
 1234
-},
+            },
                 },
                 requiredUnknown = new object(),
                 requiredRecordUnknown = new
@@ -1156,7 +1627,7 @@ namespace FirstTestTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_HelloAgain_Async()
+        public async Task Example_HelloAgain_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
@@ -1165,10 +1636,10 @@ namespace FirstTestTypeSpec.Samples
             {
                 requiredString = "<requiredString>",
                 requiredInt = 1234,
-                requiredCollection = new List<object>()
-{
+                requiredCollection = new object[]
+            {
 "1"
-},
+            },
                 requiredDictionary = new
                 {
                     key = "1",
@@ -1182,10 +1653,10 @@ namespace FirstTestTypeSpec.Samples
                     requiredLiteralFloat = 1.23F,
                     requiredLiteralBool = false,
                     requiredBadDescription = "<requiredBadDescription>",
-                    requiredNullableList = new List<object>()
-{
+                    requiredNullableList = new object[]
+            {
 1234
-},
+            },
                 },
                 requiredUnknown = new object(),
                 requiredRecordUnknown = new
@@ -1233,10 +1704,10 @@ namespace FirstTestTypeSpec.Samples
             {
                 requiredString = "<requiredString>",
                 requiredInt = 1234,
-                requiredCollection = new List<object>()
-{
+                requiredCollection = new object[]
+            {
 "1"
-},
+            },
                 requiredDictionary = new
                 {
                     key = "1",
@@ -1254,35 +1725,35 @@ namespace FirstTestTypeSpec.Samples
                     optionalLiteralFloat = 4.56F,
                     optionalLiteralBool = true,
                     requiredBadDescription = "<requiredBadDescription>",
-                    optionalNullableList = new List<object>()
-{
+                    optionalNullableList = new object[]
+            {
 1234
-},
-                    requiredNullableList = new List<object>()
-{
+            },
+                    requiredNullableList = new object[]
+            {
 1234
-},
+            },
                 },
                 intExtensibleEnum = 1,
-                intExtensibleEnumCollection = new List<object>()
-{
+                intExtensibleEnumCollection = new object[]
+            {
 1
-},
+            },
                 floatExtensibleEnum = 1,
-                floatExtensibleEnumCollection = new List<object>()
-{
+                floatExtensibleEnumCollection = new object[]
+            {
 1
-},
+            },
                 floatFixedEnum = 1.1F,
-                floatFixedEnumCollection = new List<object>()
-{
+                floatFixedEnumCollection = new object[]
+            {
 1.1F
-},
+            },
                 intFixedEnum = 1,
-                intFixedEnumCollection = new List<object>()
-{
+                intFixedEnumCollection = new object[]
+            {
 1
-},
+            },
                 stringFixedEnum = "1",
                 requiredUnknown = new object(),
                 optionalUnknown = new object(),
@@ -1352,10 +1823,10 @@ namespace FirstTestTypeSpec.Samples
             {
                 requiredString = "<requiredString>",
                 requiredInt = 1234,
-                requiredCollection = new List<object>()
-{
+                requiredCollection = new object[]
+            {
 "1"
-},
+            },
                 requiredDictionary = new
                 {
                     key = "1",
@@ -1373,35 +1844,35 @@ namespace FirstTestTypeSpec.Samples
                     optionalLiteralFloat = 4.56F,
                     optionalLiteralBool = true,
                     requiredBadDescription = "<requiredBadDescription>",
-                    optionalNullableList = new List<object>()
-{
+                    optionalNullableList = new object[]
+            {
 1234
-},
-                    requiredNullableList = new List<object>()
-{
+            },
+                    requiredNullableList = new object[]
+            {
 1234
-},
+            },
                 },
                 intExtensibleEnum = 1,
-                intExtensibleEnumCollection = new List<object>()
-{
+                intExtensibleEnumCollection = new object[]
+            {
 1
-},
+            },
                 floatExtensibleEnum = 1,
-                floatExtensibleEnumCollection = new List<object>()
-{
+                floatExtensibleEnumCollection = new object[]
+            {
 1
-},
+            },
                 floatFixedEnum = 1.1F,
-                floatFixedEnumCollection = new List<object>()
-{
+                floatFixedEnumCollection = new object[]
+            {
 1.1F
-},
+            },
                 intFixedEnum = 1,
-                intFixedEnumCollection = new List<object>()
-{
+                intFixedEnumCollection = new object[]
+            {
 1
-},
+            },
                 stringFixedEnum = "1",
                 requiredUnknown = new object(),
                 optionalUnknown = new object(),
@@ -1462,7 +1933,7 @@ namespace FirstTestTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_NoContentType()
+        public void Example_NoContentType_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
@@ -1471,10 +1942,10 @@ namespace FirstTestTypeSpec.Samples
             {
                 requiredString = "<requiredString>",
                 requiredInt = 1234,
-                requiredCollection = new List<object>()
-{
+                requiredCollection = new object[]
+            {
 "1"
-},
+            },
                 requiredDictionary = new
                 {
                     key = "1",
@@ -1488,10 +1959,10 @@ namespace FirstTestTypeSpec.Samples
                     requiredLiteralFloat = 1.23F,
                     requiredLiteralBool = false,
                     requiredBadDescription = "<requiredBadDescription>",
-                    requiredNullableList = new List<object>()
-{
+                    requiredNullableList = new object[]
+            {
 1234
-},
+            },
                 },
                 requiredUnknown = new object(),
                 requiredRecordUnknown = new
@@ -1530,7 +2001,7 @@ namespace FirstTestTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_NoContentType_Async()
+        public async Task Example_NoContentType_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
@@ -1539,10 +2010,10 @@ namespace FirstTestTypeSpec.Samples
             {
                 requiredString = "<requiredString>",
                 requiredInt = 1234,
-                requiredCollection = new List<object>()
-{
+                requiredCollection = new object[]
+            {
 "1"
-},
+            },
                 requiredDictionary = new
                 {
                     key = "1",
@@ -1556,10 +2027,10 @@ namespace FirstTestTypeSpec.Samples
                     requiredLiteralFloat = 1.23F,
                     requiredLiteralBool = false,
                     requiredBadDescription = "<requiredBadDescription>",
-                    requiredNullableList = new List<object>()
-{
+                    requiredNullableList = new object[]
+            {
 1234
-},
+            },
                 },
                 requiredUnknown = new object(),
                 requiredRecordUnknown = new
@@ -1607,10 +2078,10 @@ namespace FirstTestTypeSpec.Samples
             {
                 requiredString = "<requiredString>",
                 requiredInt = 1234,
-                requiredCollection = new List<object>()
-{
+                requiredCollection = new object[]
+            {
 "1"
-},
+            },
                 requiredDictionary = new
                 {
                     key = "1",
@@ -1628,35 +2099,35 @@ namespace FirstTestTypeSpec.Samples
                     optionalLiteralFloat = 4.56F,
                     optionalLiteralBool = true,
                     requiredBadDescription = "<requiredBadDescription>",
-                    optionalNullableList = new List<object>()
-{
+                    optionalNullableList = new object[]
+            {
 1234
-},
-                    requiredNullableList = new List<object>()
-{
+            },
+                    requiredNullableList = new object[]
+            {
 1234
-},
+            },
                 },
                 intExtensibleEnum = 1,
-                intExtensibleEnumCollection = new List<object>()
-{
+                intExtensibleEnumCollection = new object[]
+            {
 1
-},
+            },
                 floatExtensibleEnum = 1,
-                floatExtensibleEnumCollection = new List<object>()
-{
+                floatExtensibleEnumCollection = new object[]
+            {
 1
-},
+            },
                 floatFixedEnum = 1.1F,
-                floatFixedEnumCollection = new List<object>()
-{
+                floatFixedEnumCollection = new object[]
+            {
 1.1F
-},
+            },
                 intFixedEnum = 1,
-                intFixedEnumCollection = new List<object>()
-{
+                intFixedEnumCollection = new object[]
+            {
 1
-},
+            },
                 stringFixedEnum = "1",
                 requiredUnknown = new object(),
                 optionalUnknown = new object(),
@@ -1726,10 +2197,10 @@ namespace FirstTestTypeSpec.Samples
             {
                 requiredString = "<requiredString>",
                 requiredInt = 1234,
-                requiredCollection = new List<object>()
-{
+                requiredCollection = new object[]
+            {
 "1"
-},
+            },
                 requiredDictionary = new
                 {
                     key = "1",
@@ -1747,35 +2218,35 @@ namespace FirstTestTypeSpec.Samples
                     optionalLiteralFloat = 4.56F,
                     optionalLiteralBool = true,
                     requiredBadDescription = "<requiredBadDescription>",
-                    optionalNullableList = new List<object>()
-{
+                    optionalNullableList = new object[]
+            {
 1234
-},
-                    requiredNullableList = new List<object>()
-{
+            },
+                    requiredNullableList = new object[]
+            {
 1234
-},
+            },
                 },
                 intExtensibleEnum = 1,
-                intExtensibleEnumCollection = new List<object>()
-{
+                intExtensibleEnumCollection = new object[]
+            {
 1
-},
+            },
                 floatExtensibleEnum = 1,
-                floatExtensibleEnumCollection = new List<object>()
-{
+                floatExtensibleEnumCollection = new object[]
+            {
 1
-},
+            },
                 floatFixedEnum = 1.1F,
-                floatFixedEnumCollection = new List<object>()
-{
+                floatFixedEnumCollection = new object[]
+            {
 1.1F
-},
+            },
                 intFixedEnum = 1,
-                intFixedEnumCollection = new List<object>()
-{
+                intFixedEnumCollection = new object[]
+            {
 1
-},
+            },
                 stringFixedEnum = "1",
                 requiredUnknown = new object(),
                 optionalUnknown = new object(),
@@ -1836,7 +2307,7 @@ namespace FirstTestTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_HelloDemo2()
+        public void Example_HelloDemo2_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
@@ -1856,7 +2327,7 @@ namespace FirstTestTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_HelloDemo2_Async()
+        public async Task Example_HelloDemo2_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
@@ -1926,7 +2397,7 @@ namespace FirstTestTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_CreateLiteral()
+        public void Example_CreateLiteral_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
@@ -1940,10 +2411,10 @@ namespace FirstTestTypeSpec.Samples
                 requiredLiteralFloat = 1.23F,
                 requiredLiteralBool = false,
                 requiredBadDescription = "<requiredBadDescription>",
-                requiredNullableList = new List<object>()
-{
+                requiredNullableList = new object[]
+            {
 1234
-},
+            },
             });
             Response response = client.CreateLiteral(content);
 
@@ -1960,7 +2431,7 @@ namespace FirstTestTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_CreateLiteral_Async()
+        public async Task Example_CreateLiteral_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
@@ -1974,10 +2445,10 @@ namespace FirstTestTypeSpec.Samples
                 requiredLiteralFloat = 1.23F,
                 requiredLiteralBool = false,
                 requiredBadDescription = "<requiredBadDescription>",
-                requiredNullableList = new List<object>()
-{
+                requiredNullableList = new object[]
+            {
 1234
-},
+            },
             });
             Response response = await client.CreateLiteralAsync(content);
 
@@ -2012,14 +2483,14 @@ namespace FirstTestTypeSpec.Samples
                 optionalLiteralFloat = 4.56F,
                 optionalLiteralBool = true,
                 requiredBadDescription = "<requiredBadDescription>",
-                optionalNullableList = new List<object>()
-{
+                optionalNullableList = new object[]
+            {
 1234
-},
-                requiredNullableList = new List<object>()
-{
+            },
+                requiredNullableList = new object[]
+            {
 1234
-},
+            },
             });
             Response response = client.CreateLiteral(content);
 
@@ -2059,14 +2530,14 @@ namespace FirstTestTypeSpec.Samples
                 optionalLiteralFloat = 4.56F,
                 optionalLiteralBool = true,
                 requiredBadDescription = "<requiredBadDescription>",
-                optionalNullableList = new List<object>()
-{
+                optionalNullableList = new object[]
+            {
 1234
-},
-                requiredNullableList = new List<object>()
-{
+            },
+                requiredNullableList = new object[]
+            {
 1234
-},
+            },
             });
             Response response = await client.CreateLiteralAsync(content);
 
@@ -2088,7 +2559,7 @@ namespace FirstTestTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_HelloLiteral()
+        public void Example_HelloLiteral_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
@@ -2108,7 +2579,7 @@ namespace FirstTestTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_HelloLiteral_Async()
+        public async Task Example_HelloLiteral_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
@@ -2178,7 +2649,7 @@ namespace FirstTestTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetUnknownValue()
+        public void Example_GetUnknownValue_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
@@ -2191,7 +2662,7 @@ namespace FirstTestTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetUnknownValue_Async()
+        public async Task Example_GetUnknownValue_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);

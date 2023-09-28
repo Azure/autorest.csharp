@@ -154,7 +154,6 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        /// <include file="Docs/SharedModelInOperation.xml" path="doc/members/member[@name='InternalAsync(string,CancellationToken)']/*" />
         internal virtual async Task<Response<SharedModel>> InternalAsync(string name, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(name, nameof(name));
@@ -167,7 +166,6 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        /// <include file="Docs/SharedModelInOperation.xml" path="doc/members/member[@name='Internal(string,CancellationToken)']/*" />
         internal virtual Response<SharedModel> Internal(string name, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(name, nameof(name));
@@ -197,7 +195,6 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/SharedModelInOperation.xml" path="doc/members/member[@name='InternalAsync(string,RequestContext)']/*" />
         internal virtual async Task<Response> InternalAsync(string name, RequestContext context)
         {
             Argument.AssertNotNull(name, nameof(name));
@@ -236,7 +233,6 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/SharedModelInOperation.xml" path="doc/members/member[@name='Internal(string,RequestContext)']/*" />
         internal virtual Response Internal(string name, RequestContext context)
         {
             Argument.AssertNotNull(name, nameof(name));

@@ -79,21 +79,19 @@ This sample shows how to call PutAsync.
 <code><![CDATA[
 UnknownValue client = new ArrayClient().GetUnknownValueClient(apiVersion: "1.0.0");
 
-Response response = await client.PutAsync(new List<BinaryData>()
+Response response = await client.PutAsync(new BinaryData[]
 {
     BinaryData.FromObjectAsJson(new object())
 });
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutAsync with all parameters.
 <code><![CDATA[
 UnknownValue client = new ArrayClient().GetUnknownValueClient(apiVersion: "1.0.0");
 
-Response response = await client.PutAsync(new List<BinaryData>()
+Response response = await client.PutAsync(new BinaryData[]
 {
     BinaryData.FromObjectAsJson(new object())
 });
-Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="Put(IEnumerable{BinaryData},CancellationToken)">
@@ -102,21 +100,19 @@ This sample shows how to call Put.
 <code><![CDATA[
 UnknownValue client = new ArrayClient().GetUnknownValueClient(apiVersion: "1.0.0");
 
-Response response = client.Put(new List<BinaryData>()
+Response response = client.Put(new BinaryData[]
 {
     BinaryData.FromObjectAsJson(new object())
 });
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Put with all parameters.
 <code><![CDATA[
 UnknownValue client = new ArrayClient().GetUnknownValueClient(apiVersion: "1.0.0");
 
-Response response = client.Put(new List<BinaryData>()
+Response response = client.Put(new BinaryData[]
 {
     BinaryData.FromObjectAsJson(new object())
 });
-Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="PutAsync(RequestContent,RequestContext)">
@@ -125,22 +121,24 @@ This sample shows how to call PutAsync.
 <code><![CDATA[
 UnknownValue client = new ArrayClient().GetUnknownValueClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new List<object>()
+RequestContent content = RequestContent.Create(new object[]
 {
     new object()
 });
 Response response = await client.PutAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutAsync with all request content.
 <code><![CDATA[
 UnknownValue client = new ArrayClient().GetUnknownValueClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new List<object>()
+RequestContent content = RequestContent.Create(new object[]
 {
     new object()
 });
 Response response = await client.PutAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -150,22 +148,24 @@ This sample shows how to call Put.
 <code><![CDATA[
 UnknownValue client = new ArrayClient().GetUnknownValueClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new List<object>()
+RequestContent content = RequestContent.Create(new object[]
 {
     new object()
 });
 Response response = client.Put(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Put with all request content.
 <code><![CDATA[
 UnknownValue client = new ArrayClient().GetUnknownValueClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new List<object>()
+RequestContent content = RequestContent.Create(new object[]
 {
     new object()
 });
 Response response = client.Put(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
