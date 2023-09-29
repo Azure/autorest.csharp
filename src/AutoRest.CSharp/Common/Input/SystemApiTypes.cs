@@ -10,6 +10,7 @@ using System.ServiceModel.Rest.Experimental;
 using System.ServiceModel.Rest.Experimental.Core;
 using System.ServiceModel.Rest.Experimental.Core.Pipeline;
 using System.ServiceModel.Rest.Experimental.Core.Serialization;
+using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.Azure;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.Base;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.System;
@@ -122,11 +123,6 @@ namespace AutoRest.CSharp.Common.Input
             => new TypeReference(Configuration.ApiTypes.RequestContentType)
             .InvokeStatic(
                 Configuration.ApiTypes.RequestContentCreateName,
-                new InvokeInstanceMethodExpression(
-                    new TypeReference(typeof(BinaryData)).InvokeStatic(nameof(BinaryData.FromObjectAsJson), freeFormObjectExpression),
-                    nameof(BinaryData.ToStream),
-                    Array.Empty<ValueExpression>(),
-                    null,
-                    false));
+                BinaryDataExpression.FromObjectAsJson(freeFormObjectExpression).ToStream());
     }
 }

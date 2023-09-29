@@ -56,9 +56,12 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             ClientOptionsWriter.WriteClientOptions(optionsWriter, library.ClientOptions);
             project.AddGeneratedFile($"{library.ClientOptions.Type.Name}.cs", optionsWriter.ToString());
 
-            var extensionWriter = new AspDotNetExtensionWriter(library.AspDotNetExtension);
-            extensionWriter.Write();
-            project.AddGeneratedFile($"{library.AspDotNetExtension.Type.Name}.cs", extensionWriter.ToString());
+            if (Configuration.IsBranded)
+            {
+                var extensionWriter = new AspDotNetExtensionWriter(library.AspDotNetExtension);
+                extensionWriter.Write();
+                project.AddGeneratedFile($"{library.AspDotNetExtension.Type.Name}.cs", extensionWriter.ToString());
+            }
 
             var modelFactoryProvider = library.ModelFactory;
             if (modelFactoryProvider != null)

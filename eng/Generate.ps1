@@ -221,6 +221,14 @@ if (!($Exclude -contains "TestProjects")) {
     }
 }
 
+if (!($Exclude -contains "UnbrandedProjects")) {
+    # Local test projects
+    $testProjectRoot = Join-Path $repoRoot 'test' 'UnbrandedProjects'
+
+    foreach ($directory in Get-ChildItem $testProjectRoot -Directory) {
+        Add-TestProjects-Directory $directory
+    }
+}
 
 if (!($Exclude -contains "Samples")) {
     $sampleProjectsRoot = Join-Path $repoRoot 'samples'

@@ -278,7 +278,7 @@ extends:
 
         private string GetSrcCsproj()
         {
-            const string srcCsprojContent = @"<Project Sdk=""Microsoft.NET.Sdk"">
+            const string srcBrandedCsprojContent = @"<Project Sdk=""Microsoft.NET.Sdk"">
   <PropertyGroup>
     <Description>This is the {0} client library for developing .NET applications with rich experience.</Description>
     <AssemblyTitle>Azure SDK Code Generation {0} for Azure Data Plane</AssemblyTitle>
@@ -299,12 +299,32 @@ extends:
 
 </Project>
 ";
-            return String.Format(srcCsprojContent, Configuration.Namespace);
+            const string srcUnbrandedCsprojContent = @"<Project Sdk=""Microsoft.NET.Sdk"">
+  <PropertyGroup>
+    <Description>This is the {0} client library for developing .NET applications with rich experience.</Description>
+    <AssemblyTitle>SDK Code Generation {0}</AssemblyTitle>
+    <Version>1.0.0-beta.1</Version>
+    <PackageTags>{0}</PackageTags>
+    <TargetFramework>net6.0</TargetFramework>
+    <LangVersion>11.0</LangVersion>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include=""System.ServiceModel.Rest"" Version=""1.0.0-alpha.20230928.5"" />
+    <PackageReference Include=""System.Text.Json"" Version=""4.7.2"" />
+  </ItemGroup>
+
+</Project>
+";
+
+            var contentToUs = Configuration.IsBranded ? srcBrandedCsprojContent : srcUnbrandedCsprojContent;
+            return string.Format(contentToUs, Configuration.Namespace);
         }
 
         private string GetTestCsproj()
         {
-            string testCsprojContent = @"<Project Sdk=""Microsoft.NET.Sdk"">
+            string testBrandedCsprojContent = @"<Project Sdk=""Microsoft.NET.Sdk"">
   <PropertyGroup>
     <TargetFrameworks>$(RequiredTargetFrameworks)</TargetFrameworks>
 
@@ -317,10 +337,10 @@ extends:
 ";
             if (_isAzureSdk)
             {
-                testCsprojContent += @"    <ProjectReference Include=""$(AzureCoreTestFramework)"" />
+                testBrandedCsprojContent += @"    <ProjectReference Include=""$(AzureCoreTestFramework)"" />
 ";
             }
-            testCsprojContent += @"    <ProjectReference Include=""..\src\{0}.csproj"" />
+            testBrandedCsprojContent += @"    <ProjectReference Include=""..\src\{0}.csproj"" />
   </ItemGroup>
   
   <ItemGroup>
@@ -337,14 +357,36 @@ extends:
 ";
             if (_isAzureSdk)
             {
-                testCsprojContent += @"  <ItemGroup>
+                testBrandedCsprojContent += @"  <ItemGroup>
     <Folder Include=""SessionRecords\"" />
   </ItemGroup>
 ";
             }
-            testCsprojContent += @"</Project>
+            testBrandedCsprojContent += @"</Project>
 ";
-            return String.Format(testCsprojContent, Configuration.Namespace);
+            const string testUnbrandedCsprojContent = @"<Project Sdk=""Microsoft.NET.Sdk"">
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <!-- Ignore XML doc comments on test types and members -->
+    <NoWarn>$(NoWarn);CS1591</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include=""..\src\{0}.csproj"" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <PackageReference Include=""NUnit"" Version=""3.13.2"" />
+    <PackageReference Include=""NUnit3TestAdapter"" Version=""4.4.2"" />
+    <PackageReference Include=""Microsoft.NET.Test.Sdk"" Version=""17.0.0"" />
+    <PackageReference Include=""Moq"" Version=""[4.18.2]"" />
+  </ItemGroup>
+
+</Project>
+";
+
+            var contentToUse = Configuration.IsBranded ? testBrandedCsprojContent : testUnbrandedCsprojContent;
+            return string.Format(contentToUse, Configuration.Namespace);
 
         }
 
