@@ -16,11 +16,11 @@ using dpg_customization_LowLevel;
 
 namespace dpg_customization_LowLevel.Samples
 {
-    public class Samples_DPGClient
+    public partial class Samples_DPGClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetModel()
+        public void Example_GetModel_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             DPGClient client = new DPGClient(credential);
@@ -33,7 +33,7 @@ namespace dpg_customization_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetModel_Async()
+        public async Task Example_GetModel_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             DPGClient client = new DPGClient(credential);
@@ -72,7 +72,7 @@ namespace dpg_customization_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PostModel()
+        public void Example_PostModel_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             DPGClient client = new DPGClient(credential);
@@ -89,7 +89,7 @@ namespace dpg_customization_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PostModel_Async()
+        public async Task Example_PostModel_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             DPGClient client = new DPGClient(credential);
@@ -140,7 +140,7 @@ namespace dpg_customization_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetPages()
+        public void Example_GetPages_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             DPGClient client = new DPGClient(credential);
@@ -148,13 +148,13 @@ namespace dpg_customization_LowLevel.Samples
             foreach (BinaryData item in client.GetPages("<mode>", null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("received").ToString());
+                Console.WriteLine(result.GetProperty("received").ToString());
             }
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetPages_Async()
+        public async Task Example_GetPages_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             DPGClient client = new DPGClient(credential);
@@ -162,7 +162,7 @@ namespace dpg_customization_LowLevel.Samples
             await foreach (BinaryData item in client.GetPagesAsync("<mode>", null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("received").ToString());
+                Console.WriteLine(result.GetProperty("received").ToString());
             }
         }
 
@@ -176,7 +176,7 @@ namespace dpg_customization_LowLevel.Samples
             foreach (BinaryData item in client.GetPages("<mode>", null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("received").ToString());
+                Console.WriteLine(result.GetProperty("received").ToString());
             }
         }
 
@@ -190,13 +190,13 @@ namespace dpg_customization_LowLevel.Samples
             await foreach (BinaryData item in client.GetPagesAsync("<mode>", null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("received").ToString());
+                Console.WriteLine(result.GetProperty("received").ToString());
             }
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Lro()
+        public void Example_Lro_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             DPGClient client = new DPGClient(credential);
@@ -211,7 +211,7 @@ namespace dpg_customization_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Lro_Async()
+        public async Task Example_Lro_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             DPGClient client = new DPGClient(credential);

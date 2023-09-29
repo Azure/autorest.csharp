@@ -44,7 +44,7 @@ namespace HeaderCollectionPrefix
             uri.Reset(_endpoint);
             uri.AppendPath("/Operation/", false);
             request.Uri = uri;
-            if (metadata != null && Optional.IsCollectionDefined(metadata))
+            if (metadata != null)
             {
                 request.Headers.Add("x-ms-meta-", metadata);
             }

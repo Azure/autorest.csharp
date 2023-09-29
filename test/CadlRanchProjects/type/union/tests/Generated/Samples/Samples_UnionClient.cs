@@ -16,11 +16,11 @@ using _Type.Union;
 
 namespace _Type.Union.Samples
 {
-    public class Samples_UnionClient
+    public partial class Samples_UnionClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_SendInt()
+        public void Example_SendInt_ShortVersion()
         {
             UnionClient client = new UnionClient();
 
@@ -29,12 +29,13 @@ namespace _Type.Union.Samples
                 simpleUnion = 1234,
             });
             Response response = client.SendInt(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_SendInt_Async()
+        public async Task Example_SendInt_ShortVersion_Async()
         {
             UnionClient client = new UnionClient();
 
@@ -43,6 +44,7 @@ namespace _Type.Union.Samples
                 simpleUnion = 1234,
             });
             Response response = await client.SendIntAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -57,6 +59,7 @@ namespace _Type.Union.Samples
                 simpleUnion = 1234,
             });
             Response response = client.SendInt(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -71,12 +74,13 @@ namespace _Type.Union.Samples
                 simpleUnion = 1234,
             });
             Response response = await client.SendIntAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_SendIntArray()
+        public void Example_SendIntArray_ShortVersion()
         {
             UnionClient client = new UnionClient();
 
@@ -85,12 +89,13 @@ namespace _Type.Union.Samples
                 simpleUnion = 1234,
             });
             Response response = client.SendIntArray(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_SendIntArray_Async()
+        public async Task Example_SendIntArray_ShortVersion_Async()
         {
             UnionClient client = new UnionClient();
 
@@ -99,6 +104,7 @@ namespace _Type.Union.Samples
                 simpleUnion = 1234,
             });
             Response response = await client.SendIntArrayAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -113,6 +119,7 @@ namespace _Type.Union.Samples
                 simpleUnion = 1234,
             });
             Response response = client.SendIntArray(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -127,12 +134,13 @@ namespace _Type.Union.Samples
                 simpleUnion = 1234,
             });
             Response response = await client.SendIntArrayAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_SendFirstNamedUnionValue()
+        public void Example_SendFirstNamedUnionValue_ShortVersion()
         {
             UnionClient client = new UnionClient();
 
@@ -145,12 +153,13 @@ namespace _Type.Union.Samples
                 },
             });
             Response response = client.SendFirstNamedUnionValue(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_SendFirstNamedUnionValue_Async()
+        public async Task Example_SendFirstNamedUnionValue_ShortVersion_Async()
         {
             UnionClient client = new UnionClient();
 
@@ -163,6 +172,7 @@ namespace _Type.Union.Samples
                 },
             });
             Response response = await client.SendFirstNamedUnionValueAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -181,6 +191,7 @@ namespace _Type.Union.Samples
                 },
             });
             Response response = client.SendFirstNamedUnionValue(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -199,12 +210,13 @@ namespace _Type.Union.Samples
                 },
             });
             Response response = await client.SendFirstNamedUnionValueAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_SendSecondNamedUnionValue()
+        public void Example_SendSecondNamedUnionValue_ShortVersion()
         {
             UnionClient client = new UnionClient();
 
@@ -217,12 +229,13 @@ namespace _Type.Union.Samples
                 },
             });
             Response response = client.SendSecondNamedUnionValue(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_SendSecondNamedUnionValue_Async()
+        public async Task Example_SendSecondNamedUnionValue_ShortVersion_Async()
         {
             UnionClient client = new UnionClient();
 
@@ -235,6 +248,7 @@ namespace _Type.Union.Samples
                 },
             });
             Response response = await client.SendSecondNamedUnionValueAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -253,6 +267,7 @@ namespace _Type.Union.Samples
                 },
             });
             Response response = client.SendSecondNamedUnionValue(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -271,12 +286,13 @@ namespace _Type.Union.Samples
                 },
             });
             Response response = await client.SendSecondNamedUnionValueAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ReceiveString()
+        public void Example_ReceiveString_ShortVersion()
         {
             UnionClient client = new UnionClient();
 
@@ -288,7 +304,7 @@ namespace _Type.Union.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_ReceiveString_Async()
+        public async Task Example_ReceiveString_ShortVersion_Async()
         {
             UnionClient client = new UnionClient();
 
@@ -324,7 +340,7 @@ namespace _Type.Union.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ReceiveIntArray()
+        public void Example_ReceiveIntArray_ShortVersion()
         {
             UnionClient client = new UnionClient();
 
@@ -336,7 +352,7 @@ namespace _Type.Union.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_ReceiveIntArray_Async()
+        public async Task Example_ReceiveIntArray_ShortVersion_Async()
         {
             UnionClient client = new UnionClient();
 
@@ -372,7 +388,7 @@ namespace _Type.Union.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ReceiveFirstNamedUnionValue()
+        public void Example_ReceiveFirstNamedUnionValue_ShortVersion()
         {
             UnionClient client = new UnionClient();
 
@@ -384,7 +400,7 @@ namespace _Type.Union.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_ReceiveFirstNamedUnionValue_Async()
+        public async Task Example_ReceiveFirstNamedUnionValue_ShortVersion_Async()
         {
             UnionClient client = new UnionClient();
 
@@ -420,7 +436,7 @@ namespace _Type.Union.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ReceiveSecondNamedUnionValue()
+        public void Example_ReceiveSecondNamedUnionValue_ShortVersion()
         {
             UnionClient client = new UnionClient();
 
@@ -432,7 +448,7 @@ namespace _Type.Union.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_ReceiveSecondNamedUnionValue_Async()
+        public async Task Example_ReceiveSecondNamedUnionValue_ShortVersion_Async()
         {
             UnionClient client = new UnionClient();
 

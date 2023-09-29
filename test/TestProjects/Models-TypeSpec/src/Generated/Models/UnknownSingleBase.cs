@@ -11,6 +11,12 @@ namespace ModelsTypeSpec.Models
     internal partial class UnknownSingleBase : SingleBase
     {
         /// <summary> Initializes a new instance of UnknownSingleBase. </summary>
+        /// <param name="size"></param>
+        internal UnknownSingleBase(int size) : base(size)
+        {
+        }
+
+        /// <summary> Initializes a new instance of UnknownSingleBase. </summary>
         /// <param name="kind"> Discriminator. </param>
         /// <param name="size"></param>
         internal UnknownSingleBase(string kind, int size) : base(kind, size)

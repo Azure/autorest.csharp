@@ -26,7 +26,7 @@ namespace xms_error_responses.Models
                 }
             }
             Optional<string> reason = default;
-            string errorType = default;
+            string errorType = "PetSadError";
             Optional<string> errorMessage = default;
             Optional<string> actionResponse = default;
             foreach (var property in element.EnumerateObject())

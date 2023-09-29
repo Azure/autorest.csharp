@@ -16,7 +16,7 @@ This sample shows how to call CreateProjectAsync with all parameters.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 LroBasicTypeSpecClient client = new LroBasicTypeSpecClient(endpoint);
 
-Project resource = new Project()
+Project resource = new Project
 {
     Description = "<description>",
     Name = "<name>",
@@ -39,7 +39,7 @@ This sample shows how to call CreateProject with all parameters.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 LroBasicTypeSpecClient client = new LroBasicTypeSpecClient(endpoint);
 
-Project resource = new Project()
+Project resource = new Project
 {
     Description = "<description>",
     Name = "<name>",
@@ -109,7 +109,7 @@ This sample shows how to call UpdateProjectAsync with all parameters.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 LroBasicTypeSpecClient client = new LroBasicTypeSpecClient(endpoint);
 
-Project resource = new Project()
+Project resource = new Project
 {
     Description = "<description>",
     Name = "<name>",
@@ -134,7 +134,7 @@ This sample shows how to call UpdateProject with all parameters.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 LroBasicTypeSpecClient client = new LroBasicTypeSpecClient(endpoint);
 
-Project resource = new Project()
+Project resource = new Project
 {
     Description = "<description>",
     Name = "<name>",

@@ -81,27 +81,22 @@ This sample shows how to call PutAsync.
 <code><![CDATA[
 ModelValue client = new ArrayClient().GetModelValueClient(apiVersion: "1.0.0");
 
-Response response = await client.PutAsync(new List<InnerModel>()
+Response response = await client.PutAsync(new InnerModel[]
 {
     new InnerModel("<property>")
 });
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutAsync with all parameters.
 <code><![CDATA[
 ModelValue client = new ArrayClient().GetModelValueClient(apiVersion: "1.0.0");
 
-Response response = await client.PutAsync(new List<InnerModel>()
+Response response = await client.PutAsync(new InnerModel[]
 {
     new InnerModel("<property>")
     {
-        Children =
-        {
-            null
-        },
+        Children = {default},
     }
 });
-Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="Put(IEnumerable{InnerModel},CancellationToken)">
@@ -110,27 +105,22 @@ This sample shows how to call Put.
 <code><![CDATA[
 ModelValue client = new ArrayClient().GetModelValueClient(apiVersion: "1.0.0");
 
-Response response = client.Put(new List<InnerModel>()
+Response response = client.Put(new InnerModel[]
 {
     new InnerModel("<property>")
 });
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Put with all parameters.
 <code><![CDATA[
 ModelValue client = new ArrayClient().GetModelValueClient(apiVersion: "1.0.0");
 
-Response response = client.Put(new List<InnerModel>()
+Response response = client.Put(new InnerModel[]
 {
     new InnerModel("<property>")
     {
-        Children =
-        {
-            null
-        },
+        Children = {default},
     }
 });
-Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="PutAsync(RequestContent,RequestContext)">
@@ -139,7 +129,7 @@ This sample shows how to call PutAsync.
 <code><![CDATA[
 ModelValue client = new ArrayClient().GetModelValueClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new List<object>()
+RequestContent content = RequestContent.Create(new object[]
 {
     new
     {
@@ -147,24 +137,26 @@ RequestContent content = RequestContent.Create(new List<object>()
     }
 });
 Response response = await client.PutAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutAsync with all request content.
 <code><![CDATA[
 ModelValue client = new ArrayClient().GetModelValueClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new List<object>()
+RequestContent content = RequestContent.Create(new object[]
 {
     new
     {
         property = "<property>",
-        children = new List<object>()
+        children = new object[]
         {
             null
         },
     }
 });
 Response response = await client.PutAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -174,7 +166,7 @@ This sample shows how to call Put.
 <code><![CDATA[
 ModelValue client = new ArrayClient().GetModelValueClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new List<object>()
+RequestContent content = RequestContent.Create(new object[]
 {
     new
     {
@@ -182,24 +174,26 @@ RequestContent content = RequestContent.Create(new List<object>()
     }
 });
 Response response = client.Put(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Put with all request content.
 <code><![CDATA[
 ModelValue client = new ArrayClient().GetModelValueClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new List<object>()
+RequestContent content = RequestContent.Create(new object[]
 {
     new
     {
         property = "<property>",
-        children = new List<object>()
+        children = new object[]
         {
             null
         },
     }
 });
 Response response = client.Put(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>

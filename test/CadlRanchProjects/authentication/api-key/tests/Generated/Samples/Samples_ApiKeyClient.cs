@@ -9,31 +9,34 @@ using System;
 using System.Threading.Tasks;
 using Authentication.ApiKey;
 using Azure;
+using Azure.Identity;
 using NUnit.Framework;
 
 namespace Authentication.ApiKey.Samples
 {
-    public class Samples_ApiKeyClient
+    public partial class Samples_ApiKeyClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Valid()
+        public void Example_Valid_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ApiKeyClient client = new ApiKeyClient(credential);
 
             Response response = client.Valid();
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Valid_Async()
+        public async Task Example_Valid_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ApiKeyClient client = new ApiKeyClient(credential);
 
             Response response = await client.ValidAsync();
+
             Console.WriteLine(response.Status);
         }
 
@@ -45,6 +48,7 @@ namespace Authentication.ApiKey.Samples
             ApiKeyClient client = new ApiKeyClient(credential);
 
             Response response = client.Valid();
+
             Console.WriteLine(response.Status);
         }
 
@@ -56,28 +60,31 @@ namespace Authentication.ApiKey.Samples
             ApiKeyClient client = new ApiKeyClient(credential);
 
             Response response = await client.ValidAsync();
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Invalid()
+        public void Example_Invalid_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ApiKeyClient client = new ApiKeyClient(credential);
 
             Response response = client.Invalid();
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Invalid_Async()
+        public async Task Example_Invalid_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ApiKeyClient client = new ApiKeyClient(credential);
 
             Response response = await client.InvalidAsync();
+
             Console.WriteLine(response.Status);
         }
 
@@ -89,6 +96,7 @@ namespace Authentication.ApiKey.Samples
             ApiKeyClient client = new ApiKeyClient(credential);
 
             Response response = client.Invalid();
+
             Console.WriteLine(response.Status);
         }
 
@@ -100,6 +108,7 @@ namespace Authentication.ApiKey.Samples
             ApiKeyClient client = new ApiKeyClient(credential);
 
             Response response = await client.InvalidAsync();
+
             Console.WriteLine(response.Status);
         }
     }

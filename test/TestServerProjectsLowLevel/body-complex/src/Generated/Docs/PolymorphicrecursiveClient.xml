@@ -72,6 +72,7 @@ RequestContent content = RequestContent.Create(new
     length = 123.45F,
 });
 Response response = await client.PutValidAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutValidAsync with all request content.
@@ -86,12 +87,13 @@ RequestContent content = RequestContent.Create(new
     fishtype = "salmon",
     species = "<species>",
     length = 123.45F,
-    siblings = new List<object>()
+    siblings = new object[]
     {
         null
     },
 });
 Response response = await client.PutValidAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -108,6 +110,7 @@ RequestContent content = RequestContent.Create(new
     length = 123.45F,
 });
 Response response = client.PutValid(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutValid with all request content.
@@ -122,12 +125,13 @@ RequestContent content = RequestContent.Create(new
     fishtype = "salmon",
     species = "<species>",
     length = 123.45F,
-    siblings = new List<object>()
+    siblings = new object[]
     {
         null
     },
 });
 Response response = client.PutValid(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>

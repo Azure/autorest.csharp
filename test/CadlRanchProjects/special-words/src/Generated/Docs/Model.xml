@@ -81,7 +81,6 @@ Model client = new SpecialWordsClient().GetModelClient(apiVersion: "1.0.0");
 
 BaseModel body = new DerivedModel("<derived.name>", "<for>");
 Response response = await client.PutAsync(body);
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutAsync with all parameters.
 <code><![CDATA[
@@ -89,7 +88,6 @@ Model client = new SpecialWordsClient().GetModelClient(apiVersion: "1.0.0");
 
 BaseModel body = new DerivedModel("<derived.name>", "<for>");
 Response response = await client.PutAsync(body);
-Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="Put(BaseModel,CancellationToken)">
@@ -100,7 +98,6 @@ Model client = new SpecialWordsClient().GetModelClient(apiVersion: "1.0.0");
 
 BaseModel body = new DerivedModel("<derived.name>", "<for>");
 Response response = client.Put(body);
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Put with all parameters.
 <code><![CDATA[
@@ -108,7 +105,6 @@ Model client = new SpecialWordsClient().GetModelClient(apiVersion: "1.0.0");
 
 BaseModel body = new DerivedModel("<derived.name>", "<for>");
 Response response = client.Put(body);
-Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="PutAsync(RequestContent,RequestContext)">
@@ -117,26 +113,28 @@ This sample shows how to call PutAsync.
 <code><![CDATA[
 Model client = new SpecialWordsClient().GetModelClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new Dictionary<string, object>
 {
     ["derived.name"] = "<derived.name>",
     ["for"] = "<for>",
-    ["model.kind"] = "derived",
+    ["model.kind"] = "derived"
 });
 Response response = await client.PutAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutAsync with all request content.
 <code><![CDATA[
 Model client = new SpecialWordsClient().GetModelClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new Dictionary<string, object>
 {
     ["derived.name"] = "<derived.name>",
     ["for"] = "<for>",
-    ["model.kind"] = "derived",
+    ["model.kind"] = "derived"
 });
 Response response = await client.PutAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -146,26 +144,28 @@ This sample shows how to call Put.
 <code><![CDATA[
 Model client = new SpecialWordsClient().GetModelClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new Dictionary<string, object>
 {
     ["derived.name"] = "<derived.name>",
     ["for"] = "<for>",
-    ["model.kind"] = "derived",
+    ["model.kind"] = "derived"
 });
 Response response = client.Put(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Put with all request content.
 <code><![CDATA[
 Model client = new SpecialWordsClient().GetModelClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new Dictionary<string, object>
 {
     ["derived.name"] = "<derived.name>",
     ["for"] = "<for>",
-    ["model.kind"] = "derived",
+    ["model.kind"] = "derived"
 });
 Response response = client.Put(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>

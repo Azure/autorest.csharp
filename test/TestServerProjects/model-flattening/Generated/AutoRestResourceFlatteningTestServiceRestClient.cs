@@ -47,7 +47,7 @@ namespace model_flattening
             uri.AppendPath("/model-flatten/array", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            if (resourceArray != null && Optional.IsCollectionDefined(resourceArray))
+            if (resourceArray != null)
             {
                 request.Headers.Add("Content-Type", "application/json");
                 var content = new Utf8JsonRequestContent();
@@ -167,7 +167,7 @@ namespace model_flattening
             uri.AppendPath("/model-flatten/wrappedarray", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            if (resourceArray != null && Optional.IsCollectionDefined(resourceArray))
+            if (resourceArray != null)
             {
                 request.Headers.Add("Content-Type", "application/json");
                 var content = new Utf8JsonRequestContent();
@@ -287,7 +287,7 @@ namespace model_flattening
             uri.AppendPath("/model-flatten/dictionary", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            if (resourceDictionary != null && Optional.IsCollectionDefined(resourceDictionary))
+            if (resourceDictionary != null)
             {
                 request.Headers.Add("Content-Type", "application/json");
                 var content = new Utf8JsonRequestContent();

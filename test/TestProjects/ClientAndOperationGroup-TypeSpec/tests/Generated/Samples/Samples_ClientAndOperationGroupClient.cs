@@ -9,16 +9,17 @@ using System;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
+using Azure.Identity;
 using ClientAndOperationGroup;
 using NUnit.Framework;
 
 namespace ClientAndOperationGroup.Samples
 {
-    public class Samples_ClientAndOperationGroupClient
+    public partial class Samples_ClientAndOperationGroupClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Zero()
+        public void Example_Zero_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ClientAndOperationGroupClient client = new ClientAndOperationGroupClient(endpoint);
@@ -31,7 +32,7 @@ namespace ClientAndOperationGroup.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Zero_Async()
+        public async Task Example_Zero_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ClientAndOperationGroupClient client = new ClientAndOperationGroupClient(endpoint);
@@ -70,7 +71,7 @@ namespace ClientAndOperationGroup.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_One()
+        public void Example_One_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ClientAndOperationGroupClient client = new ClientAndOperationGroupClient(endpoint);
@@ -83,7 +84,7 @@ namespace ClientAndOperationGroup.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_One_Async()
+        public async Task Example_One_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ClientAndOperationGroupClient client = new ClientAndOperationGroupClient(endpoint);

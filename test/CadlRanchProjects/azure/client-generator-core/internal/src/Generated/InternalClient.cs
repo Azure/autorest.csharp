@@ -156,7 +156,6 @@ namespace _Specs_.Azure.ClientGenerator.Core.Internal
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        /// <include file="Docs/InternalClient.xml" path="doc/members/member[@name='InternalOnlyAsync(string,CancellationToken)']/*" />
         internal virtual async Task<Response<InternalModel>> InternalOnlyAsync(string name, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(name, nameof(name));
@@ -169,7 +168,6 @@ namespace _Specs_.Azure.ClientGenerator.Core.Internal
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        /// <include file="Docs/InternalClient.xml" path="doc/members/member[@name='InternalOnly(string,CancellationToken)']/*" />
         internal virtual Response<InternalModel> InternalOnly(string name, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(name, nameof(name));
@@ -187,6 +185,11 @@ namespace _Specs_.Azure.ClientGenerator.Core.Internal
         /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="InternalOnlyAsync(string,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="name"> The String to use. </param>
@@ -194,7 +197,6 @@ namespace _Specs_.Azure.ClientGenerator.Core.Internal
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/InternalClient.xml" path="doc/members/member[@name='InternalOnlyAsync(string,RequestContext)']/*" />
         internal virtual async Task<Response> InternalOnlyAsync(string name, RequestContext context)
         {
             Argument.AssertNotNull(name, nameof(name));
@@ -221,6 +223,11 @@ namespace _Specs_.Azure.ClientGenerator.Core.Internal
         /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="InternalOnly(string,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="name"> The String to use. </param>
@@ -228,7 +235,6 @@ namespace _Specs_.Azure.ClientGenerator.Core.Internal
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/InternalClient.xml" path="doc/members/member[@name='InternalOnly(string,RequestContext)']/*" />
         internal virtual Response InternalOnly(string name, RequestContext context)
         {
             Argument.AssertNotNull(name, nameof(name));

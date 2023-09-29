@@ -9,17 +9,18 @@ using System;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
+using Azure.Identity;
 using NUnit.Framework;
 using _Specs_.Azure.ClientGenerator.Core.Internal;
 using _Specs_.Azure.ClientGenerator.Core.Internal.Models;
 
 namespace _Specs_.Azure.ClientGenerator.Core.Internal.Samples
 {
-    internal class Samples_Shared
+    public partial class Samples_Shared
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Public()
+        public void Example_Public_ShortVersion()
         {
             Shared client = new InternalClient().GetSharedClient();
 
@@ -31,7 +32,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Internal.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Public_Async()
+        public async Task Example_Public_ShortVersion_Async()
         {
             Shared client = new InternalClient().GetSharedClient();
 
@@ -43,7 +44,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Internal.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Public_Convenience()
+        public void Example_Public_ShortVersion_Convenience()
         {
             Shared client = new InternalClient().GetSharedClient();
 
@@ -52,7 +53,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Internal.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Public_Convenience_Async()
+        public async Task Example_Public_ShortVersion_Convenience_Async()
         {
             Shared client = new InternalClient().GetSharedClient();
 

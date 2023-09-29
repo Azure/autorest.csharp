@@ -57,7 +57,7 @@ namespace Encode.Bytes
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="value"> The BinaryData to use. </param>
+        /// <param name="value"> The Bytes to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -92,7 +92,7 @@ namespace Encode.Bytes
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="value"> The BinaryData to use. </param>
+        /// <param name="value"> The Bytes to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -127,7 +127,7 @@ namespace Encode.Bytes
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="value"> The BinaryData to use. </param>
+        /// <param name="value"> The Bytes to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -162,7 +162,7 @@ namespace Encode.Bytes
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="value"> The BinaryData to use. </param>
+        /// <param name="value"> The Bytes to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -197,7 +197,7 @@ namespace Encode.Bytes
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="value"> The BinaryData to use. </param>
+        /// <param name="value"> The BytesBase64Url to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -232,7 +232,7 @@ namespace Encode.Bytes
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="value"> The BinaryData to use. </param>
+        /// <param name="value"> The BytesBase64Url to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -267,7 +267,7 @@ namespace Encode.Bytes
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="value"> The IList{BinaryData} to use. </param>
+        /// <param name="value"> The Array to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -302,7 +302,7 @@ namespace Encode.Bytes
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="value"> The IList{BinaryData} to use. </param>
+        /// <param name="value"> The Array to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -379,7 +379,10 @@ namespace Encode.Bytes
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/encode/bytes/query/base64url-array", false);
-            uri.AppendQueryDelimited("value", value, ",", "U", true);
+            if (value != null && Optional.IsCollectionDefined(value))
+            {
+                uri.AppendQueryDelimited("value", value, ",", "U", true);
+            }
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");

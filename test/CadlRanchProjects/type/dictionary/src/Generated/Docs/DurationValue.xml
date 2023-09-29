@@ -79,21 +79,19 @@ This sample shows how to call PutAsync.
 <code><![CDATA[
 DurationValue client = new DictionaryClient().GetDurationValueClient(apiVersion: "1.0.0");
 
-Response response = await client.PutAsync(new Dictionary<string, TimeSpan>()
+Response response = await client.PutAsync(new Dictionary<string, TimeSpan>
 {
-    ["key"] = XmlConvert.ToTimeSpan("PT1H23M45S"),
+    ["key"] = XmlConvert.ToTimeSpan("PT1H23M45S")
 });
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutAsync with all parameters.
 <code><![CDATA[
 DurationValue client = new DictionaryClient().GetDurationValueClient(apiVersion: "1.0.0");
 
-Response response = await client.PutAsync(new Dictionary<string, TimeSpan>()
+Response response = await client.PutAsync(new Dictionary<string, TimeSpan>
 {
-    ["key"] = XmlConvert.ToTimeSpan("PT1H23M45S"),
+    ["key"] = XmlConvert.ToTimeSpan("PT1H23M45S")
 });
-Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="Put(IDictionary{string,TimeSpan},CancellationToken)">
@@ -102,21 +100,19 @@ This sample shows how to call Put.
 <code><![CDATA[
 DurationValue client = new DictionaryClient().GetDurationValueClient(apiVersion: "1.0.0");
 
-Response response = client.Put(new Dictionary<string, TimeSpan>()
+Response response = client.Put(new Dictionary<string, TimeSpan>
 {
-    ["key"] = XmlConvert.ToTimeSpan("PT1H23M45S"),
+    ["key"] = XmlConvert.ToTimeSpan("PT1H23M45S")
 });
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Put with all parameters.
 <code><![CDATA[
 DurationValue client = new DictionaryClient().GetDurationValueClient(apiVersion: "1.0.0");
 
-Response response = client.Put(new Dictionary<string, TimeSpan>()
+Response response = client.Put(new Dictionary<string, TimeSpan>
 {
-    ["key"] = XmlConvert.ToTimeSpan("PT1H23M45S"),
+    ["key"] = XmlConvert.ToTimeSpan("PT1H23M45S")
 });
-Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="PutAsync(RequestContent,RequestContext)">
@@ -130,6 +126,7 @@ RequestContent content = RequestContent.Create(new
     key = "PT1H23M45S",
 });
 Response response = await client.PutAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutAsync with all request content.
@@ -141,6 +138,7 @@ RequestContent content = RequestContent.Create(new
     key = "PT1H23M45S",
 });
 Response response = await client.PutAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -155,6 +153,7 @@ RequestContent content = RequestContent.Create(new
     key = "PT1H23M45S",
 });
 Response response = client.Put(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Put with all request content.
@@ -166,6 +165,7 @@ RequestContent content = RequestContent.Create(new
     key = "PT1H23M45S",
 });
 Response response = client.Put(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>

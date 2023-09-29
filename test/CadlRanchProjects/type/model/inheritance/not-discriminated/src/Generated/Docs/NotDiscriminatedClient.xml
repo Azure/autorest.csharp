@@ -9,7 +9,6 @@ NotDiscriminatedClient client = new NotDiscriminatedClient();
 
 Siamese input = new Siamese("<name>", 1234, true);
 Response response = await client.PostValidAsync(input);
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PostValidAsync with all parameters.
 <code><![CDATA[
@@ -17,7 +16,6 @@ NotDiscriminatedClient client = new NotDiscriminatedClient();
 
 Siamese input = new Siamese("<name>", 1234, true);
 Response response = await client.PostValidAsync(input);
-Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="PostValid(Siamese,CancellationToken)">
@@ -28,7 +26,6 @@ NotDiscriminatedClient client = new NotDiscriminatedClient();
 
 Siamese input = new Siamese("<name>", 1234, true);
 Response response = client.PostValid(input);
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PostValid with all parameters.
 <code><![CDATA[
@@ -36,7 +33,6 @@ NotDiscriminatedClient client = new NotDiscriminatedClient();
 
 Siamese input = new Siamese("<name>", 1234, true);
 Response response = client.PostValid(input);
-Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="PostValidAsync(RequestContent,RequestContext)">
@@ -52,6 +48,7 @@ RequestContent content = RequestContent.Create(new
     name = "<name>",
 });
 Response response = await client.PostValidAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PostValidAsync with all request content.
@@ -65,6 +62,7 @@ RequestContent content = RequestContent.Create(new
     name = "<name>",
 });
 Response response = await client.PostValidAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -81,6 +79,7 @@ RequestContent content = RequestContent.Create(new
     name = "<name>",
 });
 Response response = client.PostValid(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PostValid with all request content.
@@ -94,6 +93,7 @@ RequestContent content = RequestContent.Create(new
     name = "<name>",
 });
 Response response = client.PostValid(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>

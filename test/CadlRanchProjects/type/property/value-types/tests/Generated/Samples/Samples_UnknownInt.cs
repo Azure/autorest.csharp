@@ -17,11 +17,11 @@ using _Type.Property.ValueTypes.Models;
 
 namespace _Type.Property.ValueTypes.Samples
 {
-    internal class Samples_UnknownInt
+    public partial class Samples_UnknownInt
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetUnknownInt()
+        public void Example_GetUnknownInt_ShortVersion()
         {
             UnknownInt client = new ValueTypesClient().GetUnknownIntClient(apiVersion: "1.0.0");
 
@@ -33,7 +33,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetUnknownInt_Async()
+        public async Task Example_GetUnknownInt_ShortVersion_Async()
         {
             UnknownInt client = new ValueTypesClient().GetUnknownIntClient(apiVersion: "1.0.0");
 
@@ -45,7 +45,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetUnknownInt_Convenience()
+        public void Example_GetUnknownInt_ShortVersion_Convenience()
         {
             UnknownInt client = new ValueTypesClient().GetUnknownIntClient(apiVersion: "1.0.0");
 
@@ -54,7 +54,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetUnknownInt_Convenience_Async()
+        public async Task Example_GetUnknownInt_ShortVersion_Convenience_Async()
         {
             UnknownInt client = new ValueTypesClient().GetUnknownIntClient(apiVersion: "1.0.0");
 
@@ -105,7 +105,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put()
+        public void Example_Put_ShortVersion()
         {
             UnknownInt client = new ValueTypesClient().GetUnknownIntClient(apiVersion: "1.0.0");
 
@@ -114,12 +114,13 @@ namespace _Type.Property.ValueTypes.Samples
                 property = new object(),
             });
             Response response = client.Put(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_Async()
+        public async Task Example_Put_ShortVersion_Async()
         {
             UnknownInt client = new ValueTypesClient().GetUnknownIntClient(apiVersion: "1.0.0");
 
@@ -128,29 +129,28 @@ namespace _Type.Property.ValueTypes.Samples
                 property = new object(),
             });
             Response response = await client.PutAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put_Convenience()
+        public void Example_Put_ShortVersion_Convenience()
         {
             UnknownInt client = new ValueTypesClient().GetUnknownIntClient(apiVersion: "1.0.0");
 
             UnknownIntProperty body = new UnknownIntProperty(BinaryData.FromObjectAsJson(new object()));
             Response response = client.Put(body);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_Convenience_Async()
+        public async Task Example_Put_ShortVersion_Convenience_Async()
         {
             UnknownInt client = new ValueTypesClient().GetUnknownIntClient(apiVersion: "1.0.0");
 
             UnknownIntProperty body = new UnknownIntProperty(BinaryData.FromObjectAsJson(new object()));
             Response response = await client.PutAsync(body);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -164,6 +164,7 @@ namespace _Type.Property.ValueTypes.Samples
                 property = new object(),
             });
             Response response = client.Put(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -178,6 +179,7 @@ namespace _Type.Property.ValueTypes.Samples
                 property = new object(),
             });
             Response response = await client.PutAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -189,7 +191,6 @@ namespace _Type.Property.ValueTypes.Samples
 
             UnknownIntProperty body = new UnknownIntProperty(BinaryData.FromObjectAsJson(new object()));
             Response response = client.Put(body);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -200,7 +201,6 @@ namespace _Type.Property.ValueTypes.Samples
 
             UnknownIntProperty body = new UnknownIntProperty(BinaryData.FromObjectAsJson(new object()));
             Response response = await client.PutAsync(body);
-            Console.WriteLine(response.Status);
         }
     }
 }
