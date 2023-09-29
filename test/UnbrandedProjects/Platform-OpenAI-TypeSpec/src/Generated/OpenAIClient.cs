@@ -24,6 +24,7 @@ namespace OpenAI
     public partial class OpenAIClient
     {
         private readonly MessagePipeline _pipeline;
+        private readonly Uri _endpoint;
         private readonly string _apiVersion;
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
@@ -32,19 +33,30 @@ namespace OpenAI
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual MessagePipeline Pipeline => _pipeline;
 
-        /// <summary> Initializes a new instance of OpenAIClient. </summary>
-        public OpenAIClient() : this(new OpenAIClientOptions())
+        /// <summary> Initializes a new instance of OpenAIClient for mocking. </summary>
+        protected OpenAIClient()
         {
         }
 
         /// <summary> Initializes a new instance of OpenAIClient. </summary>
-        /// <param name="options"> The options for configuring the client. </param>
-        public OpenAIClient(OpenAIClientOptions options)
+        /// <param name="endpoint"> The Uri to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
+        public OpenAIClient(Uri endpoint) : this(endpoint, new OpenAIClientOptions())
         {
+        }
+
+        /// <summary> Initializes a new instance of OpenAIClient. </summary>
+        /// <param name="endpoint"> The Uri to use. </param>
+        /// <param name="options"> The options for configuring the client. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
+        public OpenAIClient(Uri endpoint, OpenAIClientOptions options)
+        {
+            ClientUtilities.AssertNotNull(endpoint, nameof(endpoint));
             options ??= new OpenAIClientOptions();
 
             ClientDiagnostics = new TelemetrySource(options, true);
             _pipeline = MessagePipeline.Create(new MessagePipelineTransport(), options, Array.Empty<IPipelinePolicy<PipelineMessage>>(), Array.Empty<IPipelinePolicy<PipelineMessage>>());
+            _endpoint = endpoint;
             _apiVersion = options.Version;
         }
 
@@ -3126,6 +3138,7 @@ namespace OpenAI
             var request = message.Request;
             request.Method = HttpMethod.Post;
             var uri = new RequestUri();
+            uri.Reset(_endpoint);
             uri.AppendPath("/chat/completions", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri.ToUri();
@@ -3141,6 +3154,7 @@ namespace OpenAI
             var request = message.Request;
             request.Method = HttpMethod.Post;
             var uri = new RequestUri();
+            uri.Reset(_endpoint);
             uri.AppendPath("/audio/transcriptions", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri.ToUri();
@@ -3156,6 +3170,7 @@ namespace OpenAI
             var request = message.Request;
             request.Method = HttpMethod.Post;
             var uri = new RequestUri();
+            uri.Reset(_endpoint);
             uri.AppendPath("/audio/translations", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri.ToUri();
@@ -3171,6 +3186,7 @@ namespace OpenAI
             var request = message.Request;
             request.Method = HttpMethod.Post;
             var uri = new RequestUri();
+            uri.Reset(_endpoint);
             uri.AppendPath("/fine_tuning/jobs", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri.ToUri();
@@ -3186,6 +3202,7 @@ namespace OpenAI
             var request = message.Request;
             request.Method = HttpMethod.Get;
             var uri = new RequestUri();
+            uri.Reset(_endpoint);
             uri.AppendPath("/fine_tuning/jobs", false);
             if (after != null)
             {
@@ -3207,6 +3224,7 @@ namespace OpenAI
             var request = message.Request;
             request.Method = HttpMethod.Get;
             var uri = new RequestUri();
+            uri.Reset(_endpoint);
             uri.AppendPath("/fine_tuning/jobs/", false);
             uri.AppendPath(fineTuningJobId, true);
             uri.AppendQuery("api-version", _apiVersion, true);
@@ -3221,6 +3239,7 @@ namespace OpenAI
             var request = message.Request;
             request.Method = HttpMethod.Get;
             var uri = new RequestUri();
+            uri.Reset(_endpoint);
             uri.AppendPath("/fine_tuning/jobs/", false);
             uri.AppendPath(fineTuningJobId, true);
             uri.AppendPath("/events", false);
@@ -3240,6 +3259,7 @@ namespace OpenAI
             var request = message.Request;
             request.Method = HttpMethod.Post;
             var uri = new RequestUri();
+            uri.Reset(_endpoint);
             uri.AppendPath("/fine_tuning/jobs/", false);
             uri.AppendPath(fineTuningJobId, true);
             uri.AppendPath("/cancel", false);
@@ -3255,6 +3275,7 @@ namespace OpenAI
             var request = message.Request;
             request.Method = HttpMethod.Post;
             var uri = new RequestUri();
+            uri.Reset(_endpoint);
             uri.AppendPath("/completions", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri.ToUri();
@@ -3270,6 +3291,7 @@ namespace OpenAI
             var request = message.Request;
             request.Method = HttpMethod.Post;
             var uri = new RequestUri();
+            uri.Reset(_endpoint);
             uri.AppendPath("/edits", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri.ToUri();
@@ -3285,6 +3307,7 @@ namespace OpenAI
             var request = message.Request;
             request.Method = HttpMethod.Post;
             var uri = new RequestUri();
+            uri.Reset(_endpoint);
             uri.AppendPath("/images/generations", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri.ToUri();
@@ -3300,6 +3323,7 @@ namespace OpenAI
             var request = message.Request;
             request.Method = HttpMethod.Post;
             var uri = new RequestUri();
+            uri.Reset(_endpoint);
             uri.AppendPath("/images/edits", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri.ToUri();
@@ -3315,6 +3339,7 @@ namespace OpenAI
             var request = message.Request;
             request.Method = HttpMethod.Post;
             var uri = new RequestUri();
+            uri.Reset(_endpoint);
             uri.AppendPath("/images/variations", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri.ToUri();
@@ -3330,6 +3355,7 @@ namespace OpenAI
             var request = message.Request;
             request.Method = HttpMethod.Post;
             var uri = new RequestUri();
+            uri.Reset(_endpoint);
             uri.AppendPath("/embeddings", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri.ToUri();
@@ -3345,6 +3371,7 @@ namespace OpenAI
             var request = message.Request;
             request.Method = HttpMethod.Get;
             var uri = new RequestUri();
+            uri.Reset(_endpoint);
             uri.AppendPath("/files", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri.ToUri();
@@ -3358,6 +3385,7 @@ namespace OpenAI
             var request = message.Request;
             request.Method = HttpMethod.Post;
             var uri = new RequestUri();
+            uri.Reset(_endpoint);
             uri.AppendPath("/files", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri.ToUri();
@@ -3373,6 +3401,7 @@ namespace OpenAI
             var request = message.Request;
             request.Method = HttpMethod.Post;
             var uri = new RequestUri();
+            uri.Reset(_endpoint);
             uri.AppendPath("/files/files/", false);
             uri.AppendPath(fileId, true);
             uri.AppendQuery("api-version", _apiVersion, true);
@@ -3387,6 +3416,7 @@ namespace OpenAI
             var request = message.Request;
             request.Method = HttpMethod.Delete;
             var uri = new RequestUri();
+            uri.Reset(_endpoint);
             uri.AppendPath("/files/files/", false);
             uri.AppendPath(fileId, true);
             uri.AppendQuery("api-version", _apiVersion, true);
@@ -3401,6 +3431,7 @@ namespace OpenAI
             var request = message.Request;
             request.Method = HttpMethod.Get;
             var uri = new RequestUri();
+            uri.Reset(_endpoint);
             uri.AppendPath("/files/files/", false);
             uri.AppendPath(fileId, true);
             uri.AppendPath("/content", false);
@@ -3416,6 +3447,7 @@ namespace OpenAI
             var request = message.Request;
             request.Method = HttpMethod.Post;
             var uri = new RequestUri();
+            uri.Reset(_endpoint);
             uri.AppendPath("/fine-tunes", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri.ToUri();
@@ -3431,6 +3463,7 @@ namespace OpenAI
             var request = message.Request;
             request.Method = HttpMethod.Get;
             var uri = new RequestUri();
+            uri.Reset(_endpoint);
             uri.AppendPath("/fine-tunes", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri.ToUri();
@@ -3444,6 +3477,7 @@ namespace OpenAI
             var request = message.Request;
             request.Method = HttpMethod.Get;
             var uri = new RequestUri();
+            uri.Reset(_endpoint);
             uri.AppendPath("/fine-tunes/", false);
             uri.AppendPath(fineTuneId, true);
             uri.AppendQuery("api-version", _apiVersion, true);
@@ -3458,6 +3492,7 @@ namespace OpenAI
             var request = message.Request;
             request.Method = HttpMethod.Get;
             var uri = new RequestUri();
+            uri.Reset(_endpoint);
             uri.AppendPath("/fine-tunes/", false);
             uri.AppendPath(fineTuneId, true);
             uri.AppendPath("/events", false);
@@ -3477,6 +3512,7 @@ namespace OpenAI
             var request = message.Request;
             request.Method = HttpMethod.Post;
             var uri = new RequestUri();
+            uri.Reset(_endpoint);
             uri.AppendPath("/fine-tunes/", false);
             uri.AppendPath(fineTuneId, true);
             uri.AppendPath("/cancel", false);
@@ -3492,6 +3528,7 @@ namespace OpenAI
             var request = message.Request;
             request.Method = HttpMethod.Get;
             var uri = new RequestUri();
+            uri.Reset(_endpoint);
             uri.AppendPath("/models", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri.ToUri();
@@ -3505,6 +3542,7 @@ namespace OpenAI
             var request = message.Request;
             request.Method = HttpMethod.Get;
             var uri = new RequestUri();
+            uri.Reset(_endpoint);
             uri.AppendPath("/models/", false);
             uri.AppendPath(model, true);
             uri.AppendQuery("api-version", _apiVersion, true);
@@ -3519,6 +3557,7 @@ namespace OpenAI
             var request = message.Request;
             request.Method = HttpMethod.Delete;
             var uri = new RequestUri();
+            uri.Reset(_endpoint);
             uri.AppendPath("/models/", false);
             uri.AppendPath(model, true);
             uri.AppendQuery("api-version", _apiVersion, true);
@@ -3533,6 +3572,7 @@ namespace OpenAI
             var request = message.Request;
             request.Method = HttpMethod.Post;
             var uri = new RequestUri();
+            uri.Reset(_endpoint);
             uri.AppendPath("/moderations", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri.ToUri();
