@@ -148,8 +148,8 @@ BodyAndPathClient client = new BodyAndPathClient(credential);
 
 Response response = await client.GetBodyAndPathsAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result[0].ToString());
+JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(element[0].ToString());
 ]]></code>
 This sample shows how to call GetBodyAndPathsAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -158,8 +158,8 @@ BodyAndPathClient client = new BodyAndPathClient(credential);
 
 Response response = await client.GetBodyAndPathsAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result[0].ToString());
+JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(element[0].ToString());
 ]]></code></example>
     </member>
     <member name="GetBodyAndPaths(RequestContext)">
@@ -171,8 +171,8 @@ BodyAndPathClient client = new BodyAndPathClient(credential);
 
 Response response = client.GetBodyAndPaths(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result[0].ToString());
+JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(element[0].ToString());
 ]]></code>
 This sample shows how to call GetBodyAndPaths with all parameters and parse the result.
 <code><![CDATA[
@@ -181,8 +181,8 @@ BodyAndPathClient client = new BodyAndPathClient(credential);
 
 Response response = client.GetBodyAndPaths(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result[0].ToString());
+JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(element[0].ToString());
 ]]></code></example>
     </member>
     <member name="GetItemsAsync(RequestContext)">
@@ -194,8 +194,8 @@ BodyAndPathClient client = new BodyAndPathClient(credential);
 
 Response response = await client.GetItemsAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result[0].ToString());
+JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(element[0].ToString());
 ]]></code>
 This sample shows how to call GetItemsAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -204,8 +204,8 @@ BodyAndPathClient client = new BodyAndPathClient(credential);
 
 Response response = await client.GetItemsAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result[0].ToString());
+JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(element[0].ToString());
 ]]></code></example>
     </member>
     <member name="GetItems(RequestContext)">
@@ -217,8 +217,8 @@ BodyAndPathClient client = new BodyAndPathClient(credential);
 
 Response response = client.GetItems(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result[0].ToString());
+JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(element[0].ToString());
 ]]></code>
 This sample shows how to call GetItems with all parameters and parse the result.
 <code><![CDATA[
@@ -227,8 +227,8 @@ BodyAndPathClient client = new BodyAndPathClient(credential);
 
 Response response = client.GetItems(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result[0].ToString());
+JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(element[0].ToString());
 ]]></code></example>
     </member>
     <member name="UpdateAsync(string,string,string,string,RequestContent,string,RequestContext)">

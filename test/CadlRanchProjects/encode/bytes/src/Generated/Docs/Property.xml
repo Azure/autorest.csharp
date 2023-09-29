@@ -47,8 +47,8 @@ RequestContent content = RequestContent.Create(new
 });
 Response response = await client.DefaultAsync(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("value").ToString());
+JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("value").ToString());
 ]]></code>
 This sample shows how to call DefaultAsync with all request content and parse the result.
 <code><![CDATA[
@@ -60,8 +60,8 @@ RequestContent content = RequestContent.Create(new
 });
 Response response = await client.DefaultAsync(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("value").ToString());
+JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("value").ToString());
 ]]></code></example>
     </member>
     <member name="Default(RequestContent,RequestContext)">
@@ -76,8 +76,8 @@ RequestContent content = RequestContent.Create(new
 });
 Response response = client.Default(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("value").ToString());
+JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("value").ToString());
 ]]></code>
 This sample shows how to call Default with all request content and parse the result.
 <code><![CDATA[
@@ -89,8 +89,8 @@ RequestContent content = RequestContent.Create(new
 });
 Response response = client.Default(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("value").ToString());
+JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("value").ToString());
 ]]></code></example>
     </member>
     <member name="Base64Async(Base64BytesProperty,CancellationToken)">
@@ -139,8 +139,8 @@ RequestContent content = RequestContent.Create(new
 });
 Response response = await client.Base64Async(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("value").ToString());
+JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("value").ToString());
 ]]></code>
 This sample shows how to call Base64Async with all request content and parse the result.
 <code><![CDATA[
@@ -152,8 +152,8 @@ RequestContent content = RequestContent.Create(new
 });
 Response response = await client.Base64Async(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("value").ToString());
+JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("value").ToString());
 ]]></code></example>
     </member>
     <member name="Base64(RequestContent,RequestContext)">
@@ -168,8 +168,8 @@ RequestContent content = RequestContent.Create(new
 });
 Response response = client.Base64(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("value").ToString());
+JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("value").ToString());
 ]]></code>
 This sample shows how to call Base64 with all request content and parse the result.
 <code><![CDATA[
@@ -181,8 +181,8 @@ RequestContent content = RequestContent.Create(new
 });
 Response response = client.Base64(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("value").ToString());
+JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("value").ToString());
 ]]></code></example>
     </member>
     <member name="Base64urlAsync(Base64urlBytesProperty,CancellationToken)">
@@ -231,8 +231,8 @@ RequestContent content = RequestContent.Create(new
 });
 Response response = await client.Base64urlAsync(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("value").ToString());
+JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("value").ToString());
 ]]></code>
 This sample shows how to call Base64urlAsync with all request content and parse the result.
 <code><![CDATA[
@@ -244,8 +244,8 @@ RequestContent content = RequestContent.Create(new
 });
 Response response = await client.Base64urlAsync(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("value").ToString());
+JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("value").ToString());
 ]]></code></example>
     </member>
     <member name="Base64url(RequestContent,RequestContext)">
@@ -260,8 +260,8 @@ RequestContent content = RequestContent.Create(new
 });
 Response response = client.Base64url(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("value").ToString());
+JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("value").ToString());
 ]]></code>
 This sample shows how to call Base64url with all request content and parse the result.
 <code><![CDATA[
@@ -273,8 +273,8 @@ RequestContent content = RequestContent.Create(new
 });
 Response response = client.Base64url(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("value").ToString());
+JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("value").ToString());
 ]]></code></example>
     </member>
     <member name="Base64urlArrayAsync(Base64urlArrayBytesProperty,CancellationToken)">
@@ -338,8 +338,8 @@ RequestContent content = RequestContent.Create(new
 });
 Response response = await client.Base64urlArrayAsync(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("value")[0].ToString());
+JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("value")[0].ToString());
 ]]></code>
 This sample shows how to call Base64urlArrayAsync with all request content and parse the result.
 <code><![CDATA[
@@ -354,8 +354,8 @@ RequestContent content = RequestContent.Create(new
 });
 Response response = await client.Base64urlArrayAsync(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("value")[0].ToString());
+JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("value")[0].ToString());
 ]]></code></example>
     </member>
     <member name="Base64urlArray(RequestContent,RequestContext)">
@@ -373,8 +373,8 @@ RequestContent content = RequestContent.Create(new
 });
 Response response = client.Base64urlArray(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("value")[0].ToString());
+JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("value")[0].ToString());
 ]]></code>
 This sample shows how to call Base64urlArray with all request content and parse the result.
 <code><![CDATA[
@@ -389,8 +389,8 @@ RequestContent content = RequestContent.Create(new
 });
 Response response = client.Base64urlArray(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("value")[0].ToString());
+JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("value")[0].ToString());
 ]]></code></example>
     </member>
   </members>

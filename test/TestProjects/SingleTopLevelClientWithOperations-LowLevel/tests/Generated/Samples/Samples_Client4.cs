@@ -26,8 +26,8 @@ namespace SingleTopLevelClientWithOperations_LowLevel.Samples
 
             Response response = client.Patch("<filter>", null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.ToString());
         }
 
         [Test]
@@ -39,8 +39,8 @@ namespace SingleTopLevelClientWithOperations_LowLevel.Samples
 
             Response response = await client.PatchAsync("<filter>", null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.ToString());
         }
 
         [Test]
@@ -52,8 +52,8 @@ namespace SingleTopLevelClientWithOperations_LowLevel.Samples
 
             Response response = client.Patch("<filter>", null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.ToString());
         }
 
         [Test]
@@ -65,8 +65,8 @@ namespace SingleTopLevelClientWithOperations_LowLevel.Samples
 
             Response response = await client.PatchAsync("<filter>", null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.ToString());
         }
     }
 }

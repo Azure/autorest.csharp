@@ -19,7 +19,6 @@ namespace Client.Structure.Service.rename.operation
     public partial class RenamedOperationClient
     {
         private readonly HttpPipeline _pipeline;
-        private readonly Uri _endpoint;
         private readonly string _client;
         private readonly string _apiVersion;
 
@@ -35,29 +34,25 @@ namespace Client.Structure.Service.rename.operation
         }
 
         /// <summary> Initializes a new instance of RenamedOperationClient. </summary>
-        /// <param name="endpoint"> Need to be set as 'http://localhost:3000' in client. </param>
-        /// <param name="client"> Need to be set as 'default', 'multi-client', 'renamed-operation', 'two-operation-group' in client. Allowed values: "default" | "multi-client" | "renamed-operation" | "two-operation-group". </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="client"/> is null. </exception>
+        /// <param name="client"> The ClientType to use. Allowed values: "default" | "multi-client" | "renamed-operation" | "two-operation-group". </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="client"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="client"/> is an empty string, and was expected to be non-empty. </exception>
-        public RenamedOperationClient(Uri endpoint, string client) : this(endpoint, client, new RenamedOperationClientOptions())
+        public RenamedOperationClient(string client) : this(client, new RenamedOperationClientOptions())
         {
         }
 
         /// <summary> Initializes a new instance of RenamedOperationClient. </summary>
-        /// <param name="endpoint"> Need to be set as 'http://localhost:3000' in client. </param>
-        /// <param name="client"> Need to be set as 'default', 'multi-client', 'renamed-operation', 'two-operation-group' in client. Allowed values: "default" | "multi-client" | "renamed-operation" | "two-operation-group". </param>
+        /// <param name="client"> The ClientType to use. Allowed values: "default" | "multi-client" | "renamed-operation" | "two-operation-group". </param>
         /// <param name="options"> The options for configuring the client. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="client"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="client"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="client"/> is an empty string, and was expected to be non-empty. </exception>
-        public RenamedOperationClient(Uri endpoint, string client, RenamedOperationClientOptions options)
+        public RenamedOperationClient(string client, RenamedOperationClientOptions options)
         {
-            Argument.AssertNotNull(endpoint, nameof(endpoint));
             Argument.AssertNotNullOrEmpty(client, nameof(client));
             options ??= new RenamedOperationClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), Array.Empty<HttpPipelinePolicy>(), new ResponseClassifier());
-            _endpoint = endpoint;
             _client = client;
             _apiVersion = options.Version;
         }
@@ -253,7 +248,7 @@ namespace Client.Structure.Service.rename.operation
         /// <summary> Initializes a new instance of Group. </summary>
         public virtual Group GetGroupClient()
         {
-            return Volatile.Read(ref _cachedGroup) ?? Interlocked.CompareExchange(ref _cachedGroup, new Group(ClientDiagnostics, _pipeline, _endpoint, _client, _apiVersion), null) ?? _cachedGroup;
+            return Volatile.Read(ref _cachedGroup) ?? Interlocked.CompareExchange(ref _cachedGroup, new Group(ClientDiagnostics, _pipeline, _client, _apiVersion), null) ?? _cachedGroup;
         }
 
         internal HttpMessage CreateRenamedOneRequest(RequestContext context)
@@ -262,8 +257,7 @@ namespace Client.Structure.Service.rename.operation
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendRaw("/client/structure/", false);
+            uri.AppendRaw("http://localhost:3000/client/structure/", false);
             uri.AppendRaw(_client, true);
             uri.AppendPath("/one", false);
             uri.AppendQuery("api-version", _apiVersion, true);
@@ -278,8 +272,7 @@ namespace Client.Structure.Service.rename.operation
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendRaw("/client/structure/", false);
+            uri.AppendRaw("http://localhost:3000/client/structure/", false);
             uri.AppendRaw(_client, true);
             uri.AppendPath("/three", false);
             uri.AppendQuery("api-version", _apiVersion, true);
@@ -294,8 +287,7 @@ namespace Client.Structure.Service.rename.operation
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendRaw("/client/structure/", false);
+            uri.AppendRaw("http://localhost:3000/client/structure/", false);
             uri.AppendRaw(_client, true);
             uri.AppendPath("/five", false);
             uri.AppendQuery("api-version", _apiVersion, true);

@@ -27,9 +27,9 @@ namespace _Type.Property.Nullable.Samples
 
             Response response = client.GetNonNull(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("requiredProperty").ToString());
-            Console.WriteLine(result.GetProperty("nullableProperty")[0].ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("requiredProperty").ToString());
+            Console.WriteLine(element.GetProperty("nullableProperty")[0].ToString());
         }
 
         [Test]
@@ -40,9 +40,9 @@ namespace _Type.Property.Nullable.Samples
 
             Response response = await client.GetNonNullAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("requiredProperty").ToString());
-            Console.WriteLine(result.GetProperty("nullableProperty")[0].ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("requiredProperty").ToString());
+            Console.WriteLine(element.GetProperty("nullableProperty")[0].ToString());
         }
 
         [Test]
@@ -71,9 +71,9 @@ namespace _Type.Property.Nullable.Samples
 
             Response response = client.GetNonNull(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("requiredProperty").ToString());
-            Console.WriteLine(result.GetProperty("nullableProperty")[0].ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("requiredProperty").ToString());
+            Console.WriteLine(element.GetProperty("nullableProperty")[0].ToString());
         }
 
         [Test]
@@ -84,9 +84,9 @@ namespace _Type.Property.Nullable.Samples
 
             Response response = await client.GetNonNullAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("requiredProperty").ToString());
-            Console.WriteLine(result.GetProperty("nullableProperty")[0].ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("requiredProperty").ToString());
+            Console.WriteLine(element.GetProperty("nullableProperty")[0].ToString());
         }
 
         [Test]
@@ -115,9 +115,9 @@ namespace _Type.Property.Nullable.Samples
 
             Response response = client.GetNull(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("requiredProperty").ToString());
-            Console.WriteLine(result.GetProperty("nullableProperty")[0].ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("requiredProperty").ToString());
+            Console.WriteLine(element.GetProperty("nullableProperty")[0].ToString());
         }
 
         [Test]
@@ -128,9 +128,9 @@ namespace _Type.Property.Nullable.Samples
 
             Response response = await client.GetNullAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("requiredProperty").ToString());
-            Console.WriteLine(result.GetProperty("nullableProperty")[0].ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("requiredProperty").ToString());
+            Console.WriteLine(element.GetProperty("nullableProperty")[0].ToString());
         }
 
         [Test]
@@ -159,9 +159,9 @@ namespace _Type.Property.Nullable.Samples
 
             Response response = client.GetNull(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("requiredProperty").ToString());
-            Console.WriteLine(result.GetProperty("nullableProperty")[0].ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("requiredProperty").ToString());
+            Console.WriteLine(element.GetProperty("nullableProperty")[0].ToString());
         }
 
         [Test]
@@ -172,9 +172,9 @@ namespace _Type.Property.Nullable.Samples
 
             Response response = await client.GetNullAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("requiredProperty").ToString());
-            Console.WriteLine(result.GetProperty("nullableProperty")[0].ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("requiredProperty").ToString());
+            Console.WriteLine(element.GetProperty("nullableProperty")[0].ToString());
         }
 
         [Test]

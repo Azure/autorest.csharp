@@ -27,8 +27,8 @@ namespace ConvenienceInCadl.Samples
 
             Response response = client.UpdateConvenience(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("id").ToString());
         }
 
         [Test]
@@ -39,8 +39,8 @@ namespace ConvenienceInCadl.Samples
 
             Response response = await client.UpdateConvenienceAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("id").ToString());
         }
 
         [Test]
@@ -69,8 +69,8 @@ namespace ConvenienceInCadl.Samples
 
             Response response = client.UpdateConvenience(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("id").ToString());
         }
 
         [Test]
@@ -81,8 +81,8 @@ namespace ConvenienceInCadl.Samples
 
             Response response = await client.UpdateConvenienceAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("id").ToString());
         }
 
         [Test]
@@ -211,8 +211,8 @@ namespace ConvenienceInCadl.Samples
 
             Response response = client.NoConvenience(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("id").ToString());
         }
 
         [Test]
@@ -223,8 +223,8 @@ namespace ConvenienceInCadl.Samples
 
             Response response = await client.NoConvenienceAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("id").ToString());
         }
 
         [Test]
@@ -235,8 +235,8 @@ namespace ConvenienceInCadl.Samples
 
             Response response = client.NoConvenience(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("id").ToString());
         }
 
         [Test]
@@ -247,8 +247,8 @@ namespace ConvenienceInCadl.Samples
 
             Response response = await client.NoConvenienceAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("id").ToString());
         }
 
         [Test]
@@ -373,8 +373,8 @@ namespace ConvenienceInCadl.Samples
 
             Response response = client.Protocol();
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("id").ToString());
         }
 
         [Test]
@@ -385,8 +385,8 @@ namespace ConvenienceInCadl.Samples
 
             Response response = await client.ProtocolAsync();
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("id").ToString());
         }
 
         [Test]
@@ -415,8 +415,8 @@ namespace ConvenienceInCadl.Samples
 
             Response response = client.Protocol();
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("id").ToString());
         }
 
         [Test]
@@ -427,8 +427,8 @@ namespace ConvenienceInCadl.Samples
 
             Response response = await client.ProtocolAsync();
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("id").ToString());
         }
 
         [Test]
@@ -457,8 +457,8 @@ namespace ConvenienceInCadl.Samples
 
             Response response = client.ConvenienceWithOptional();
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("id").ToString());
         }
 
         [Test]
@@ -469,8 +469,8 @@ namespace ConvenienceInCadl.Samples
 
             Response response = await client.ConvenienceWithOptionalAsync();
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("id").ToString());
         }
 
         [Test]
@@ -499,8 +499,8 @@ namespace ConvenienceInCadl.Samples
 
             Response response = client.ConvenienceWithOptional();
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("id").ToString());
         }
 
         [Test]
@@ -511,8 +511,8 @@ namespace ConvenienceInCadl.Samples
 
             Response response = await client.ConvenienceWithOptionalAsync();
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("id").ToString());
         }
 
         [Test]
@@ -541,8 +541,8 @@ namespace ConvenienceInCadl.Samples
 
             Response response = client.ConvenienceWithRequired(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("id").ToString());
         }
 
         [Test]
@@ -553,8 +553,8 @@ namespace ConvenienceInCadl.Samples
 
             Response response = await client.ConvenienceWithRequiredAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("id").ToString());
         }
 
         [Test]
@@ -583,8 +583,8 @@ namespace ConvenienceInCadl.Samples
 
             Response response = client.ConvenienceWithRequired(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("id").ToString());
         }
 
         [Test]
@@ -595,8 +595,8 @@ namespace ConvenienceInCadl.Samples
 
             Response response = await client.ConvenienceWithRequiredAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("id").ToString());
         }
 
         [Test]
@@ -713,8 +713,8 @@ namespace ConvenienceInCadl.Samples
 
             Response response = client.ProtocolOptionalQuery();
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("id").ToString());
         }
 
         [Test]
@@ -725,8 +725,8 @@ namespace ConvenienceInCadl.Samples
 
             Response response = await client.ProtocolOptionalQueryAsync();
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("id").ToString());
         }
 
         [Test]
@@ -755,8 +755,8 @@ namespace ConvenienceInCadl.Samples
 
             Response response = client.ProtocolOptionalQuery(optional: 1234);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("id").ToString());
         }
 
         [Test]
@@ -767,8 +767,8 @@ namespace ConvenienceInCadl.Samples
 
             Response response = await client.ProtocolOptionalQueryAsync(optional: 1234);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("id").ToString());
         }
 
         [Test]
@@ -797,8 +797,8 @@ namespace ConvenienceInCadl.Samples
 
             Response response = client.ProtocolRequiredQuery(1234);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("id").ToString());
         }
 
         [Test]
@@ -809,8 +809,8 @@ namespace ConvenienceInCadl.Samples
 
             Response response = await client.ProtocolRequiredQueryAsync(1234);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("id").ToString());
         }
 
         [Test]
@@ -839,8 +839,8 @@ namespace ConvenienceInCadl.Samples
 
             Response response = client.ProtocolRequiredQuery(1234);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("id").ToString());
         }
 
         [Test]
@@ -851,8 +851,8 @@ namespace ConvenienceInCadl.Samples
 
             Response response = await client.ProtocolRequiredQueryAsync(1234);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("id").ToString());
         }
 
         [Test]
@@ -1073,8 +1073,8 @@ namespace ConvenienceInCadl.Samples
 
             Response response = client.ConvenienceOptionalQueryWithOptional();
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("id").ToString());
         }
 
         [Test]
@@ -1085,8 +1085,8 @@ namespace ConvenienceInCadl.Samples
 
             Response response = await client.ConvenienceOptionalQueryWithOptionalAsync();
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("id").ToString());
         }
 
         [Test]
@@ -1115,8 +1115,8 @@ namespace ConvenienceInCadl.Samples
 
             Response response = client.ConvenienceOptionalQueryWithOptional(optional: 1234);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("id").ToString());
         }
 
         [Test]
@@ -1127,8 +1127,8 @@ namespace ConvenienceInCadl.Samples
 
             Response response = await client.ConvenienceOptionalQueryWithOptionalAsync(optional: 1234);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("id").ToString());
         }
 
         [Test]
@@ -1157,8 +1157,8 @@ namespace ConvenienceInCadl.Samples
 
             Response response = client.ConvenienceRequiredQueryWithOptional(1234);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("id").ToString());
         }
 
         [Test]
@@ -1169,8 +1169,8 @@ namespace ConvenienceInCadl.Samples
 
             Response response = await client.ConvenienceRequiredQueryWithOptionalAsync(1234);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("id").ToString());
         }
 
         [Test]
@@ -1199,8 +1199,8 @@ namespace ConvenienceInCadl.Samples
 
             Response response = client.ConvenienceRequiredQueryWithOptional(1234);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("id").ToString());
         }
 
         [Test]
@@ -1211,8 +1211,8 @@ namespace ConvenienceInCadl.Samples
 
             Response response = await client.ConvenienceRequiredQueryWithOptionalAsync(1234);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("id").ToString());
         }
 
         [Test]
@@ -1241,8 +1241,8 @@ namespace ConvenienceInCadl.Samples
 
             Response response = client.ConvenienceOptionalQueryWithRequired(null, null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("id").ToString());
         }
 
         [Test]
@@ -1253,8 +1253,8 @@ namespace ConvenienceInCadl.Samples
 
             Response response = await client.ConvenienceOptionalQueryWithRequiredAsync(null, null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("id").ToString());
         }
 
         [Test]
@@ -1283,8 +1283,8 @@ namespace ConvenienceInCadl.Samples
 
             Response response = client.ConvenienceOptionalQueryWithRequired(1234, null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("id").ToString());
         }
 
         [Test]
@@ -1295,8 +1295,8 @@ namespace ConvenienceInCadl.Samples
 
             Response response = await client.ConvenienceOptionalQueryWithRequiredAsync(1234, null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("id").ToString());
         }
 
         [Test]
@@ -1325,8 +1325,8 @@ namespace ConvenienceInCadl.Samples
 
             Response response = client.ConvenienceRequiredQueryWithRequired(1234, null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("id").ToString());
         }
 
         [Test]
@@ -1337,8 +1337,8 @@ namespace ConvenienceInCadl.Samples
 
             Response response = await client.ConvenienceRequiredQueryWithRequiredAsync(1234, null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("id").ToString());
         }
 
         [Test]
@@ -1367,8 +1367,8 @@ namespace ConvenienceInCadl.Samples
 
             Response response = client.ConvenienceRequiredQueryWithRequired(1234, null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("id").ToString());
         }
 
         [Test]
@@ -1379,8 +1379,8 @@ namespace ConvenienceInCadl.Samples
 
             Response response = await client.ConvenienceRequiredQueryWithRequiredAsync(1234, null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("id").ToString());
         }
 
         [Test]

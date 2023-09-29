@@ -27,9 +27,9 @@ namespace body_complex_LowLevel.Samples
 
             Response response = client.GetValid(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("fishtype").ToString());
-            Console.WriteLine(result.GetProperty("length").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("fishtype").ToString());
+            Console.WriteLine(element.GetProperty("length").ToString());
         }
 
         [Test]
@@ -41,9 +41,9 @@ namespace body_complex_LowLevel.Samples
 
             Response response = await client.GetValidAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("fishtype").ToString());
-            Console.WriteLine(result.GetProperty("length").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("fishtype").ToString());
+            Console.WriteLine(element.GetProperty("length").ToString());
         }
 
         [Test]
@@ -55,13 +55,13 @@ namespace body_complex_LowLevel.Samples
 
             Response response = client.GetValid(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("fishtype").ToString());
-            Console.WriteLine(result.GetProperty("species").ToString());
-            Console.WriteLine(result.GetProperty("length").ToString());
-            Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("fishtype").ToString());
-            Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("species").ToString());
-            Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("length").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("fishtype").ToString());
+            Console.WriteLine(element.GetProperty("species").ToString());
+            Console.WriteLine(element.GetProperty("length").ToString());
+            Console.WriteLine(element.GetProperty("siblings")[0].GetProperty("fishtype").ToString());
+            Console.WriteLine(element.GetProperty("siblings")[0].GetProperty("species").ToString());
+            Console.WriteLine(element.GetProperty("siblings")[0].GetProperty("length").ToString());
         }
 
         [Test]
@@ -73,13 +73,13 @@ namespace body_complex_LowLevel.Samples
 
             Response response = await client.GetValidAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("fishtype").ToString());
-            Console.WriteLine(result.GetProperty("species").ToString());
-            Console.WriteLine(result.GetProperty("length").ToString());
-            Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("fishtype").ToString());
-            Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("species").ToString());
-            Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("length").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("fishtype").ToString());
+            Console.WriteLine(element.GetProperty("species").ToString());
+            Console.WriteLine(element.GetProperty("length").ToString());
+            Console.WriteLine(element.GetProperty("siblings")[0].GetProperty("fishtype").ToString());
+            Console.WriteLine(element.GetProperty("siblings")[0].GetProperty("species").ToString());
+            Console.WriteLine(element.GetProperty("siblings")[0].GetProperty("length").ToString());
         }
 
         [Test]
@@ -173,8 +173,8 @@ null
 
             Response response = client.GetDotSyntax(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("fish.type").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("fish.type").ToString());
         }
 
         [Test]
@@ -186,8 +186,8 @@ null
 
             Response response = await client.GetDotSyntaxAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("fish.type").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("fish.type").ToString());
         }
 
         [Test]
@@ -199,9 +199,9 @@ null
 
             Response response = client.GetDotSyntax(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("fish.type").ToString());
-            Console.WriteLine(result.GetProperty("species").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("fish.type").ToString());
+            Console.WriteLine(element.GetProperty("species").ToString());
         }
 
         [Test]
@@ -213,9 +213,9 @@ null
 
             Response response = await client.GetDotSyntaxAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("fish.type").ToString());
-            Console.WriteLine(result.GetProperty("species").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("fish.type").ToString());
+            Console.WriteLine(element.GetProperty("species").ToString());
         }
 
         [Test]
@@ -227,8 +227,8 @@ null
 
             Response response = client.GetComposedWithDiscriminator(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.ToString());
         }
 
         [Test]
@@ -240,8 +240,8 @@ null
 
             Response response = await client.GetComposedWithDiscriminatorAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.ToString());
         }
 
         [Test]
@@ -253,19 +253,19 @@ null
 
             Response response = client.GetComposedWithDiscriminator(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("location").ToString());
-            Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("iswild").ToString());
-            Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("fish.type").ToString());
-            Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("species").ToString());
-            Console.WriteLine(result.GetProperty("salmons")[0].GetProperty("location").ToString());
-            Console.WriteLine(result.GetProperty("salmons")[0].GetProperty("iswild").ToString());
-            Console.WriteLine(result.GetProperty("salmons")[0].GetProperty("fish.type").ToString());
-            Console.WriteLine(result.GetProperty("salmons")[0].GetProperty("species").ToString());
-            Console.WriteLine(result.GetProperty("sampleFish").GetProperty("fish.type").ToString());
-            Console.WriteLine(result.GetProperty("sampleFish").GetProperty("species").ToString());
-            Console.WriteLine(result.GetProperty("fishes")[0].GetProperty("fish.type").ToString());
-            Console.WriteLine(result.GetProperty("fishes")[0].GetProperty("species").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("sampleSalmon").GetProperty("location").ToString());
+            Console.WriteLine(element.GetProperty("sampleSalmon").GetProperty("iswild").ToString());
+            Console.WriteLine(element.GetProperty("sampleSalmon").GetProperty("fish.type").ToString());
+            Console.WriteLine(element.GetProperty("sampleSalmon").GetProperty("species").ToString());
+            Console.WriteLine(element.GetProperty("salmons")[0].GetProperty("location").ToString());
+            Console.WriteLine(element.GetProperty("salmons")[0].GetProperty("iswild").ToString());
+            Console.WriteLine(element.GetProperty("salmons")[0].GetProperty("fish.type").ToString());
+            Console.WriteLine(element.GetProperty("salmons")[0].GetProperty("species").ToString());
+            Console.WriteLine(element.GetProperty("sampleFish").GetProperty("fish.type").ToString());
+            Console.WriteLine(element.GetProperty("sampleFish").GetProperty("species").ToString());
+            Console.WriteLine(element.GetProperty("fishes")[0].GetProperty("fish.type").ToString());
+            Console.WriteLine(element.GetProperty("fishes")[0].GetProperty("species").ToString());
         }
 
         [Test]
@@ -277,19 +277,19 @@ null
 
             Response response = await client.GetComposedWithDiscriminatorAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("location").ToString());
-            Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("iswild").ToString());
-            Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("fish.type").ToString());
-            Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("species").ToString());
-            Console.WriteLine(result.GetProperty("salmons")[0].GetProperty("location").ToString());
-            Console.WriteLine(result.GetProperty("salmons")[0].GetProperty("iswild").ToString());
-            Console.WriteLine(result.GetProperty("salmons")[0].GetProperty("fish.type").ToString());
-            Console.WriteLine(result.GetProperty("salmons")[0].GetProperty("species").ToString());
-            Console.WriteLine(result.GetProperty("sampleFish").GetProperty("fish.type").ToString());
-            Console.WriteLine(result.GetProperty("sampleFish").GetProperty("species").ToString());
-            Console.WriteLine(result.GetProperty("fishes")[0].GetProperty("fish.type").ToString());
-            Console.WriteLine(result.GetProperty("fishes")[0].GetProperty("species").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("sampleSalmon").GetProperty("location").ToString());
+            Console.WriteLine(element.GetProperty("sampleSalmon").GetProperty("iswild").ToString());
+            Console.WriteLine(element.GetProperty("sampleSalmon").GetProperty("fish.type").ToString());
+            Console.WriteLine(element.GetProperty("sampleSalmon").GetProperty("species").ToString());
+            Console.WriteLine(element.GetProperty("salmons")[0].GetProperty("location").ToString());
+            Console.WriteLine(element.GetProperty("salmons")[0].GetProperty("iswild").ToString());
+            Console.WriteLine(element.GetProperty("salmons")[0].GetProperty("fish.type").ToString());
+            Console.WriteLine(element.GetProperty("salmons")[0].GetProperty("species").ToString());
+            Console.WriteLine(element.GetProperty("sampleFish").GetProperty("fish.type").ToString());
+            Console.WriteLine(element.GetProperty("sampleFish").GetProperty("species").ToString());
+            Console.WriteLine(element.GetProperty("fishes")[0].GetProperty("fish.type").ToString());
+            Console.WriteLine(element.GetProperty("fishes")[0].GetProperty("species").ToString());
         }
 
         [Test]
@@ -301,8 +301,8 @@ null
 
             Response response = client.GetComposedWithoutDiscriminator(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.ToString());
         }
 
         [Test]
@@ -314,8 +314,8 @@ null
 
             Response response = await client.GetComposedWithoutDiscriminatorAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.ToString());
         }
 
         [Test]
@@ -327,19 +327,19 @@ null
 
             Response response = client.GetComposedWithoutDiscriminator(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("location").ToString());
-            Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("iswild").ToString());
-            Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("fish.type").ToString());
-            Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("species").ToString());
-            Console.WriteLine(result.GetProperty("salmons")[0].GetProperty("location").ToString());
-            Console.WriteLine(result.GetProperty("salmons")[0].GetProperty("iswild").ToString());
-            Console.WriteLine(result.GetProperty("salmons")[0].GetProperty("fish.type").ToString());
-            Console.WriteLine(result.GetProperty("salmons")[0].GetProperty("species").ToString());
-            Console.WriteLine(result.GetProperty("sampleFish").GetProperty("fish.type").ToString());
-            Console.WriteLine(result.GetProperty("sampleFish").GetProperty("species").ToString());
-            Console.WriteLine(result.GetProperty("fishes")[0].GetProperty("fish.type").ToString());
-            Console.WriteLine(result.GetProperty("fishes")[0].GetProperty("species").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("sampleSalmon").GetProperty("location").ToString());
+            Console.WriteLine(element.GetProperty("sampleSalmon").GetProperty("iswild").ToString());
+            Console.WriteLine(element.GetProperty("sampleSalmon").GetProperty("fish.type").ToString());
+            Console.WriteLine(element.GetProperty("sampleSalmon").GetProperty("species").ToString());
+            Console.WriteLine(element.GetProperty("salmons")[0].GetProperty("location").ToString());
+            Console.WriteLine(element.GetProperty("salmons")[0].GetProperty("iswild").ToString());
+            Console.WriteLine(element.GetProperty("salmons")[0].GetProperty("fish.type").ToString());
+            Console.WriteLine(element.GetProperty("salmons")[0].GetProperty("species").ToString());
+            Console.WriteLine(element.GetProperty("sampleFish").GetProperty("fish.type").ToString());
+            Console.WriteLine(element.GetProperty("sampleFish").GetProperty("species").ToString());
+            Console.WriteLine(element.GetProperty("fishes")[0].GetProperty("fish.type").ToString());
+            Console.WriteLine(element.GetProperty("fishes")[0].GetProperty("species").ToString());
         }
 
         [Test]
@@ -351,19 +351,19 @@ null
 
             Response response = await client.GetComposedWithoutDiscriminatorAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("location").ToString());
-            Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("iswild").ToString());
-            Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("fish.type").ToString());
-            Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("species").ToString());
-            Console.WriteLine(result.GetProperty("salmons")[0].GetProperty("location").ToString());
-            Console.WriteLine(result.GetProperty("salmons")[0].GetProperty("iswild").ToString());
-            Console.WriteLine(result.GetProperty("salmons")[0].GetProperty("fish.type").ToString());
-            Console.WriteLine(result.GetProperty("salmons")[0].GetProperty("species").ToString());
-            Console.WriteLine(result.GetProperty("sampleFish").GetProperty("fish.type").ToString());
-            Console.WriteLine(result.GetProperty("sampleFish").GetProperty("species").ToString());
-            Console.WriteLine(result.GetProperty("fishes")[0].GetProperty("fish.type").ToString());
-            Console.WriteLine(result.GetProperty("fishes")[0].GetProperty("species").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("sampleSalmon").GetProperty("location").ToString());
+            Console.WriteLine(element.GetProperty("sampleSalmon").GetProperty("iswild").ToString());
+            Console.WriteLine(element.GetProperty("sampleSalmon").GetProperty("fish.type").ToString());
+            Console.WriteLine(element.GetProperty("sampleSalmon").GetProperty("species").ToString());
+            Console.WriteLine(element.GetProperty("salmons")[0].GetProperty("location").ToString());
+            Console.WriteLine(element.GetProperty("salmons")[0].GetProperty("iswild").ToString());
+            Console.WriteLine(element.GetProperty("salmons")[0].GetProperty("fish.type").ToString());
+            Console.WriteLine(element.GetProperty("salmons")[0].GetProperty("species").ToString());
+            Console.WriteLine(element.GetProperty("sampleFish").GetProperty("fish.type").ToString());
+            Console.WriteLine(element.GetProperty("sampleFish").GetProperty("species").ToString());
+            Console.WriteLine(element.GetProperty("fishes")[0].GetProperty("fish.type").ToString());
+            Console.WriteLine(element.GetProperty("fishes")[0].GetProperty("species").ToString());
         }
 
         [Test]
@@ -375,9 +375,9 @@ null
 
             Response response = client.GetComplicated(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("fishtype").ToString());
-            Console.WriteLine(result.GetProperty("length").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("fishtype").ToString());
+            Console.WriteLine(element.GetProperty("length").ToString());
         }
 
         [Test]
@@ -389,9 +389,9 @@ null
 
             Response response = await client.GetComplicatedAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("fishtype").ToString());
-            Console.WriteLine(result.GetProperty("length").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("fishtype").ToString());
+            Console.WriteLine(element.GetProperty("length").ToString());
         }
 
         [Test]
@@ -403,15 +403,15 @@ null
 
             Response response = client.GetComplicated(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("location").ToString());
-            Console.WriteLine(result.GetProperty("iswild").ToString());
-            Console.WriteLine(result.GetProperty("fishtype").ToString());
-            Console.WriteLine(result.GetProperty("species").ToString());
-            Console.WriteLine(result.GetProperty("length").ToString());
-            Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("fishtype").ToString());
-            Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("species").ToString());
-            Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("length").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("location").ToString());
+            Console.WriteLine(element.GetProperty("iswild").ToString());
+            Console.WriteLine(element.GetProperty("fishtype").ToString());
+            Console.WriteLine(element.GetProperty("species").ToString());
+            Console.WriteLine(element.GetProperty("length").ToString());
+            Console.WriteLine(element.GetProperty("siblings")[0].GetProperty("fishtype").ToString());
+            Console.WriteLine(element.GetProperty("siblings")[0].GetProperty("species").ToString());
+            Console.WriteLine(element.GetProperty("siblings")[0].GetProperty("length").ToString());
         }
 
         [Test]
@@ -423,15 +423,15 @@ null
 
             Response response = await client.GetComplicatedAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("location").ToString());
-            Console.WriteLine(result.GetProperty("iswild").ToString());
-            Console.WriteLine(result.GetProperty("fishtype").ToString());
-            Console.WriteLine(result.GetProperty("species").ToString());
-            Console.WriteLine(result.GetProperty("length").ToString());
-            Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("fishtype").ToString());
-            Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("species").ToString());
-            Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("length").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("location").ToString());
+            Console.WriteLine(element.GetProperty("iswild").ToString());
+            Console.WriteLine(element.GetProperty("fishtype").ToString());
+            Console.WriteLine(element.GetProperty("species").ToString());
+            Console.WriteLine(element.GetProperty("length").ToString());
+            Console.WriteLine(element.GetProperty("siblings")[0].GetProperty("fishtype").ToString());
+            Console.WriteLine(element.GetProperty("siblings")[0].GetProperty("species").ToString());
+            Console.WriteLine(element.GetProperty("siblings")[0].GetProperty("length").ToString());
         }
 
         [Test]
@@ -554,9 +554,9 @@ null
             });
             Response response = client.PutMissingDiscriminator(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("fishtype").ToString());
-            Console.WriteLine(result.GetProperty("length").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("fishtype").ToString());
+            Console.WriteLine(element.GetProperty("length").ToString());
         }
 
         [Test]
@@ -573,9 +573,9 @@ null
             });
             Response response = await client.PutMissingDiscriminatorAsync(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("fishtype").ToString());
-            Console.WriteLine(result.GetProperty("length").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("fishtype").ToString());
+            Console.WriteLine(element.GetProperty("length").ToString());
         }
 
         [Test]
@@ -611,15 +611,15 @@ null
             });
             Response response = client.PutMissingDiscriminator(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("location").ToString());
-            Console.WriteLine(result.GetProperty("iswild").ToString());
-            Console.WriteLine(result.GetProperty("fishtype").ToString());
-            Console.WriteLine(result.GetProperty("species").ToString());
-            Console.WriteLine(result.GetProperty("length").ToString());
-            Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("fishtype").ToString());
-            Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("species").ToString());
-            Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("length").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("location").ToString());
+            Console.WriteLine(element.GetProperty("iswild").ToString());
+            Console.WriteLine(element.GetProperty("fishtype").ToString());
+            Console.WriteLine(element.GetProperty("species").ToString());
+            Console.WriteLine(element.GetProperty("length").ToString());
+            Console.WriteLine(element.GetProperty("siblings")[0].GetProperty("fishtype").ToString());
+            Console.WriteLine(element.GetProperty("siblings")[0].GetProperty("species").ToString());
+            Console.WriteLine(element.GetProperty("siblings")[0].GetProperty("length").ToString());
         }
 
         [Test]
@@ -655,15 +655,15 @@ null
             });
             Response response = await client.PutMissingDiscriminatorAsync(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("location").ToString());
-            Console.WriteLine(result.GetProperty("iswild").ToString());
-            Console.WriteLine(result.GetProperty("fishtype").ToString());
-            Console.WriteLine(result.GetProperty("species").ToString());
-            Console.WriteLine(result.GetProperty("length").ToString());
-            Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("fishtype").ToString());
-            Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("species").ToString());
-            Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("length").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("location").ToString());
+            Console.WriteLine(element.GetProperty("iswild").ToString());
+            Console.WriteLine(element.GetProperty("fishtype").ToString());
+            Console.WriteLine(element.GetProperty("species").ToString());
+            Console.WriteLine(element.GetProperty("length").ToString());
+            Console.WriteLine(element.GetProperty("siblings")[0].GetProperty("fishtype").ToString());
+            Console.WriteLine(element.GetProperty("siblings")[0].GetProperty("species").ToString());
+            Console.WriteLine(element.GetProperty("siblings")[0].GetProperty("length").ToString());
         }
 
         [Test]

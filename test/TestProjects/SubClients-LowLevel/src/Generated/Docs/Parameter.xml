@@ -10,8 +10,8 @@ Parameter client = new RootClient(null, credential).GetParameterClient();
 
 Response response = await client.GetSubParameterAsync("<subParameter>", null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
+JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call GetSubParameterAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -20,8 +20,8 @@ Parameter client = new RootClient(null, credential).GetParameterClient();
 
 Response response = await client.GetSubParameterAsync("<subParameter>", null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
+JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(element.ToString());
 ]]></code></example>
     </member>
     <member name="GetSubParameter(string,RequestContext)">
@@ -33,8 +33,8 @@ Parameter client = new RootClient(null, credential).GetParameterClient();
 
 Response response = client.GetSubParameter("<subParameter>", null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
+JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call GetSubParameter with all parameters and parse the result.
 <code><![CDATA[
@@ -43,8 +43,8 @@ Parameter client = new RootClient(null, credential).GetParameterClient();
 
 Response response = client.GetSubParameter("<subParameter>", null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
+JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(element.ToString());
 ]]></code></example>
     </member>
   </members>

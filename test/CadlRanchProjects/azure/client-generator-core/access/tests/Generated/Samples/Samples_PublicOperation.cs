@@ -26,8 +26,8 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Samples
 
             Response response = client.NoDecoratorInPublic("<name>", null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("name").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("name").ToString());
         }
 
         [Test]
@@ -38,8 +38,8 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Samples
 
             Response response = await client.NoDecoratorInPublicAsync("<name>", null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("name").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("name").ToString());
         }
 
         [Test]
@@ -68,8 +68,8 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Samples
 
             Response response = client.NoDecoratorInPublic("<name>", null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("name").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("name").ToString());
         }
 
         [Test]
@@ -80,8 +80,8 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Samples
 
             Response response = await client.NoDecoratorInPublicAsync("<name>", null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("name").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("name").ToString());
         }
 
         [Test]
@@ -110,8 +110,8 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Samples
 
             Response response = client.PublicDecoratorInPublic("<name>", null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("name").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("name").ToString());
         }
 
         [Test]
@@ -122,8 +122,8 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Samples
 
             Response response = await client.PublicDecoratorInPublicAsync("<name>", null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("name").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("name").ToString());
         }
 
         [Test]
@@ -152,8 +152,8 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Samples
 
             Response response = client.PublicDecoratorInPublic("<name>", null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("name").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("name").ToString());
         }
 
         [Test]
@@ -164,8 +164,8 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Samples
 
             Response response = await client.PublicDecoratorInPublicAsync("<name>", null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("name").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("name").ToString());
         }
 
         [Test]

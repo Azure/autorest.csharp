@@ -27,8 +27,8 @@ namespace _Type._Array.Samples
 
             Response response = client.GetInt64Value(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element[0].ToString());
         }
 
         [Test]
@@ -39,8 +39,8 @@ namespace _Type._Array.Samples
 
             Response response = await client.GetInt64ValueAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element[0].ToString());
         }
 
         [Test]
@@ -69,8 +69,8 @@ namespace _Type._Array.Samples
 
             Response response = client.GetInt64Value(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element[0].ToString());
         }
 
         [Test]
@@ -81,8 +81,8 @@ namespace _Type._Array.Samples
 
             Response response = await client.GetInt64ValueAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element[0].ToString());
         }
 
         [Test]

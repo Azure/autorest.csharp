@@ -72,25 +72,5 @@ namespace Encode.Bytes
 
             return new Header(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
         }
-
-        /// <summary> Initializes a new instance of RequestBody. </summary>
-        /// <param name="apiVersion"> The String to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
-        public virtual RequestBody GetRequestBodyClient(string apiVersion = "1.0.0")
-        {
-            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
-
-            return new RequestBody(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
-        }
-
-        /// <summary> Initializes a new instance of ResponseBody. </summary>
-        /// <param name="apiVersion"> The String to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
-        public virtual ResponseBody GetResponseBodyClient(string apiVersion = "1.0.0")
-        {
-            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
-
-            return new ResponseBody(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
-        }
     }
 }

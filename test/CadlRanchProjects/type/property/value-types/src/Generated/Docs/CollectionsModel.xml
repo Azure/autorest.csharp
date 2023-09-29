@@ -39,8 +39,8 @@ CollectionsModel client = new ValueTypesClient().GetCollectionsModelClient(apiVe
 
 Response response = await client.GetCollectionsModelAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("property")[0].GetProperty("property").ToString());
+JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("property")[0].GetProperty("property").ToString());
 ]]></code>
 This sample shows how to call GetCollectionsModelAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -48,8 +48,8 @@ CollectionsModel client = new ValueTypesClient().GetCollectionsModelClient(apiVe
 
 Response response = await client.GetCollectionsModelAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("property")[0].GetProperty("property").ToString());
+JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("property")[0].GetProperty("property").ToString());
 ]]></code></example>
     </member>
     <member name="GetCollectionsModel(RequestContext)">
@@ -60,8 +60,8 @@ CollectionsModel client = new ValueTypesClient().GetCollectionsModelClient(apiVe
 
 Response response = client.GetCollectionsModel(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("property")[0].GetProperty("property").ToString());
+JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("property")[0].GetProperty("property").ToString());
 ]]></code>
 This sample shows how to call GetCollectionsModel with all parameters and parse the result.
 <code><![CDATA[
@@ -69,8 +69,8 @@ CollectionsModel client = new ValueTypesClient().GetCollectionsModelClient(apiVe
 
 Response response = client.GetCollectionsModel(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("property")[0].GetProperty("property").ToString());
+JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("property")[0].GetProperty("property").ToString());
 ]]></code></example>
     </member>
     <member name="PutAsync(CollectionsModelProperty,CancellationToken)">

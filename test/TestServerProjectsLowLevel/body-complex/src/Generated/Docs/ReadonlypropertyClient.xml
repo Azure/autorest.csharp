@@ -10,8 +10,8 @@ ReadonlypropertyClient client = new ReadonlypropertyClient(credential);
 
 Response response = await client.GetValidAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
+JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call GetValidAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -20,9 +20,9 @@ ReadonlypropertyClient client = new ReadonlypropertyClient(credential);
 
 Response response = await client.GetValidAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("id").ToString());
-Console.WriteLine(result.GetProperty("size").ToString());
+JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("id").ToString());
+Console.WriteLine(element.GetProperty("size").ToString());
 ]]></code></example>
     </member>
     <member name="GetValid(RequestContext)">
@@ -34,8 +34,8 @@ ReadonlypropertyClient client = new ReadonlypropertyClient(credential);
 
 Response response = client.GetValid(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
+JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call GetValid with all parameters and parse the result.
 <code><![CDATA[
@@ -44,9 +44,9 @@ ReadonlypropertyClient client = new ReadonlypropertyClient(credential);
 
 Response response = client.GetValid(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("id").ToString());
-Console.WriteLine(result.GetProperty("size").ToString());
+JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("id").ToString());
+Console.WriteLine(element.GetProperty("size").ToString());
 ]]></code></example>
     </member>
     <member name="PutValidAsync(RequestContent,RequestContext)">

@@ -26,8 +26,8 @@ namespace body_complex_LowLevel.Samples
 
             Response response = client.GetValid(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("kind").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("kind").ToString());
         }
 
         [Test]
@@ -39,8 +39,8 @@ namespace body_complex_LowLevel.Samples
 
             Response response = await client.GetValidAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("kind").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("kind").ToString());
         }
 
         [Test]
@@ -52,10 +52,10 @@ namespace body_complex_LowLevel.Samples
 
             Response response = client.GetValid(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("kind").ToString());
-            Console.WriteLine(result.GetProperty("propB1").ToString());
-            Console.WriteLine(result.GetProperty("helper").GetProperty("propBH1").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("kind").ToString());
+            Console.WriteLine(element.GetProperty("propB1").ToString());
+            Console.WriteLine(element.GetProperty("helper").GetProperty("propBH1").ToString());
         }
 
         [Test]
@@ -67,10 +67,10 @@ namespace body_complex_LowLevel.Samples
 
             Response response = await client.GetValidAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("kind").ToString());
-            Console.WriteLine(result.GetProperty("propB1").ToString());
-            Console.WriteLine(result.GetProperty("helper").GetProperty("propBH1").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("kind").ToString());
+            Console.WriteLine(element.GetProperty("propB1").ToString());
+            Console.WriteLine(element.GetProperty("helper").GetProperty("propBH1").ToString());
         }
     }
 }

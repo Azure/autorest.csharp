@@ -11,8 +11,8 @@ PurviewAccountCollections client = new PurviewAccountsClient(endpoint, credentia
 
 Response response = await client.GetCollectionAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
+JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call GetCollectionAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -22,19 +22,19 @@ PurviewAccountCollections client = new PurviewAccountsClient(endpoint, credentia
 
 Response response = await client.GetCollectionAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("collectionProvisioningState").ToString());
-Console.WriteLine(result.GetProperty("description").ToString());
-Console.WriteLine(result.GetProperty("friendlyName").ToString());
-Console.WriteLine(result.GetProperty("name").ToString());
-Console.WriteLine(result.GetProperty("parentCollection").GetProperty("referenceName").ToString());
-Console.WriteLine(result.GetProperty("parentCollection").GetProperty("type").ToString());
-Console.WriteLine(result.GetProperty("systemData").GetProperty("createdAt").ToString());
-Console.WriteLine(result.GetProperty("systemData").GetProperty("createdBy").ToString());
-Console.WriteLine(result.GetProperty("systemData").GetProperty("createdByType").ToString());
-Console.WriteLine(result.GetProperty("systemData").GetProperty("lastModifiedAt").ToString());
-Console.WriteLine(result.GetProperty("systemData").GetProperty("lastModifiedBy").ToString());
-Console.WriteLine(result.GetProperty("systemData").GetProperty("lastModifiedByType").ToString());
+JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("collectionProvisioningState").ToString());
+Console.WriteLine(element.GetProperty("description").ToString());
+Console.WriteLine(element.GetProperty("friendlyName").ToString());
+Console.WriteLine(element.GetProperty("name").ToString());
+Console.WriteLine(element.GetProperty("parentCollection").GetProperty("referenceName").ToString());
+Console.WriteLine(element.GetProperty("parentCollection").GetProperty("type").ToString());
+Console.WriteLine(element.GetProperty("systemData").GetProperty("createdAt").ToString());
+Console.WriteLine(element.GetProperty("systemData").GetProperty("createdBy").ToString());
+Console.WriteLine(element.GetProperty("systemData").GetProperty("createdByType").ToString());
+Console.WriteLine(element.GetProperty("systemData").GetProperty("lastModifiedAt").ToString());
+Console.WriteLine(element.GetProperty("systemData").GetProperty("lastModifiedBy").ToString());
+Console.WriteLine(element.GetProperty("systemData").GetProperty("lastModifiedByType").ToString());
 ]]></code></example>
     </member>
     <member name="GetCollection(RequestContext)">
@@ -47,8 +47,8 @@ PurviewAccountCollections client = new PurviewAccountsClient(endpoint, credentia
 
 Response response = client.GetCollection(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
+JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call GetCollection with all parameters and parse the result.
 <code><![CDATA[
@@ -58,19 +58,19 @@ PurviewAccountCollections client = new PurviewAccountsClient(endpoint, credentia
 
 Response response = client.GetCollection(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("collectionProvisioningState").ToString());
-Console.WriteLine(result.GetProperty("description").ToString());
-Console.WriteLine(result.GetProperty("friendlyName").ToString());
-Console.WriteLine(result.GetProperty("name").ToString());
-Console.WriteLine(result.GetProperty("parentCollection").GetProperty("referenceName").ToString());
-Console.WriteLine(result.GetProperty("parentCollection").GetProperty("type").ToString());
-Console.WriteLine(result.GetProperty("systemData").GetProperty("createdAt").ToString());
-Console.WriteLine(result.GetProperty("systemData").GetProperty("createdBy").ToString());
-Console.WriteLine(result.GetProperty("systemData").GetProperty("createdByType").ToString());
-Console.WriteLine(result.GetProperty("systemData").GetProperty("lastModifiedAt").ToString());
-Console.WriteLine(result.GetProperty("systemData").GetProperty("lastModifiedBy").ToString());
-Console.WriteLine(result.GetProperty("systemData").GetProperty("lastModifiedByType").ToString());
+JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("collectionProvisioningState").ToString());
+Console.WriteLine(element.GetProperty("description").ToString());
+Console.WriteLine(element.GetProperty("friendlyName").ToString());
+Console.WriteLine(element.GetProperty("name").ToString());
+Console.WriteLine(element.GetProperty("parentCollection").GetProperty("referenceName").ToString());
+Console.WriteLine(element.GetProperty("parentCollection").GetProperty("type").ToString());
+Console.WriteLine(element.GetProperty("systemData").GetProperty("createdAt").ToString());
+Console.WriteLine(element.GetProperty("systemData").GetProperty("createdBy").ToString());
+Console.WriteLine(element.GetProperty("systemData").GetProperty("createdByType").ToString());
+Console.WriteLine(element.GetProperty("systemData").GetProperty("lastModifiedAt").ToString());
+Console.WriteLine(element.GetProperty("systemData").GetProperty("lastModifiedBy").ToString());
+Console.WriteLine(element.GetProperty("systemData").GetProperty("lastModifiedByType").ToString());
 ]]></code></example>
     </member>
     <member name="CreateOrUpdateCollectionAsync(RequestContent,RequestContext)">
@@ -84,8 +84,8 @@ PurviewAccountCollections client = new PurviewAccountsClient(endpoint, credentia
 RequestContent content = RequestContent.Create(new object());
 Response response = await client.CreateOrUpdateCollectionAsync(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
+JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call CreateOrUpdateCollectionAsync with all request content and parse the result.
 <code><![CDATA[
@@ -104,19 +104,19 @@ RequestContent content = RequestContent.Create(new
 });
 Response response = await client.CreateOrUpdateCollectionAsync(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("collectionProvisioningState").ToString());
-Console.WriteLine(result.GetProperty("description").ToString());
-Console.WriteLine(result.GetProperty("friendlyName").ToString());
-Console.WriteLine(result.GetProperty("name").ToString());
-Console.WriteLine(result.GetProperty("parentCollection").GetProperty("referenceName").ToString());
-Console.WriteLine(result.GetProperty("parentCollection").GetProperty("type").ToString());
-Console.WriteLine(result.GetProperty("systemData").GetProperty("createdAt").ToString());
-Console.WriteLine(result.GetProperty("systemData").GetProperty("createdBy").ToString());
-Console.WriteLine(result.GetProperty("systemData").GetProperty("createdByType").ToString());
-Console.WriteLine(result.GetProperty("systemData").GetProperty("lastModifiedAt").ToString());
-Console.WriteLine(result.GetProperty("systemData").GetProperty("lastModifiedBy").ToString());
-Console.WriteLine(result.GetProperty("systemData").GetProperty("lastModifiedByType").ToString());
+JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("collectionProvisioningState").ToString());
+Console.WriteLine(element.GetProperty("description").ToString());
+Console.WriteLine(element.GetProperty("friendlyName").ToString());
+Console.WriteLine(element.GetProperty("name").ToString());
+Console.WriteLine(element.GetProperty("parentCollection").GetProperty("referenceName").ToString());
+Console.WriteLine(element.GetProperty("parentCollection").GetProperty("type").ToString());
+Console.WriteLine(element.GetProperty("systemData").GetProperty("createdAt").ToString());
+Console.WriteLine(element.GetProperty("systemData").GetProperty("createdBy").ToString());
+Console.WriteLine(element.GetProperty("systemData").GetProperty("createdByType").ToString());
+Console.WriteLine(element.GetProperty("systemData").GetProperty("lastModifiedAt").ToString());
+Console.WriteLine(element.GetProperty("systemData").GetProperty("lastModifiedBy").ToString());
+Console.WriteLine(element.GetProperty("systemData").GetProperty("lastModifiedByType").ToString());
 ]]></code></example>
     </member>
     <member name="CreateOrUpdateCollection(RequestContent,RequestContext)">
@@ -130,8 +130,8 @@ PurviewAccountCollections client = new PurviewAccountsClient(endpoint, credentia
 RequestContent content = RequestContent.Create(new object());
 Response response = client.CreateOrUpdateCollection(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
+JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call CreateOrUpdateCollection with all request content and parse the result.
 <code><![CDATA[
@@ -150,19 +150,19 @@ RequestContent content = RequestContent.Create(new
 });
 Response response = client.CreateOrUpdateCollection(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("collectionProvisioningState").ToString());
-Console.WriteLine(result.GetProperty("description").ToString());
-Console.WriteLine(result.GetProperty("friendlyName").ToString());
-Console.WriteLine(result.GetProperty("name").ToString());
-Console.WriteLine(result.GetProperty("parentCollection").GetProperty("referenceName").ToString());
-Console.WriteLine(result.GetProperty("parentCollection").GetProperty("type").ToString());
-Console.WriteLine(result.GetProperty("systemData").GetProperty("createdAt").ToString());
-Console.WriteLine(result.GetProperty("systemData").GetProperty("createdBy").ToString());
-Console.WriteLine(result.GetProperty("systemData").GetProperty("createdByType").ToString());
-Console.WriteLine(result.GetProperty("systemData").GetProperty("lastModifiedAt").ToString());
-Console.WriteLine(result.GetProperty("systemData").GetProperty("lastModifiedBy").ToString());
-Console.WriteLine(result.GetProperty("systemData").GetProperty("lastModifiedByType").ToString());
+JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("collectionProvisioningState").ToString());
+Console.WriteLine(element.GetProperty("description").ToString());
+Console.WriteLine(element.GetProperty("friendlyName").ToString());
+Console.WriteLine(element.GetProperty("name").ToString());
+Console.WriteLine(element.GetProperty("parentCollection").GetProperty("referenceName").ToString());
+Console.WriteLine(element.GetProperty("parentCollection").GetProperty("type").ToString());
+Console.WriteLine(element.GetProperty("systemData").GetProperty("createdAt").ToString());
+Console.WriteLine(element.GetProperty("systemData").GetProperty("createdBy").ToString());
+Console.WriteLine(element.GetProperty("systemData").GetProperty("createdByType").ToString());
+Console.WriteLine(element.GetProperty("systemData").GetProperty("lastModifiedAt").ToString());
+Console.WriteLine(element.GetProperty("systemData").GetProperty("lastModifiedBy").ToString());
+Console.WriteLine(element.GetProperty("systemData").GetProperty("lastModifiedByType").ToString());
 ]]></code></example>
     </member>
     <member name="DeleteCollectionAsync(RequestContext)">
@@ -221,8 +221,8 @@ PurviewAccountCollections client = new PurviewAccountsClient(endpoint, credentia
 
 Response response = await client.GetCollectionPathAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
+JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call GetCollectionPathAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -232,9 +232,9 @@ PurviewAccountCollections client = new PurviewAccountsClient(endpoint, credentia
 
 Response response = await client.GetCollectionPathAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("parentFriendlyNameChain")[0].ToString());
-Console.WriteLine(result.GetProperty("parentNameChain")[0].ToString());
+JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("parentFriendlyNameChain")[0].ToString());
+Console.WriteLine(element.GetProperty("parentNameChain")[0].ToString());
 ]]></code></example>
     </member>
     <member name="GetCollectionPath(RequestContext)">
@@ -247,8 +247,8 @@ PurviewAccountCollections client = new PurviewAccountsClient(endpoint, credentia
 
 Response response = client.GetCollectionPath(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
+JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call GetCollectionPath with all parameters and parse the result.
 <code><![CDATA[
@@ -258,9 +258,9 @@ PurviewAccountCollections client = new PurviewAccountsClient(endpoint, credentia
 
 Response response = client.GetCollectionPath(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("parentFriendlyNameChain")[0].ToString());
-Console.WriteLine(result.GetProperty("parentNameChain")[0].ToString());
+JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("parentFriendlyNameChain")[0].ToString());
+Console.WriteLine(element.GetProperty("parentNameChain")[0].ToString());
 ]]></code></example>
     </member>
     <member name="GetCollectionsAsync(string,RequestContext)">
@@ -273,8 +273,8 @@ PurviewAccountCollections client = new PurviewAccountsClient(endpoint, credentia
 
 await foreach (BinaryData item in client.GetCollectionsAsync(null, null))
 {
-    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(result.ToString());
+    JsonElement element = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(element.ToString());
 }
 ]]></code>
 This sample shows how to call GetCollectionsAsync with all parameters and parse the result.
@@ -285,19 +285,19 @@ PurviewAccountCollections client = new PurviewAccountsClient(endpoint, credentia
 
 await foreach (BinaryData item in client.GetCollectionsAsync("<skipToken>", null))
 {
-    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(result.GetProperty("collectionProvisioningState").ToString());
-    Console.WriteLine(result.GetProperty("description").ToString());
-    Console.WriteLine(result.GetProperty("friendlyName").ToString());
-    Console.WriteLine(result.GetProperty("name").ToString());
-    Console.WriteLine(result.GetProperty("parentCollection").GetProperty("referenceName").ToString());
-    Console.WriteLine(result.GetProperty("parentCollection").GetProperty("type").ToString());
-    Console.WriteLine(result.GetProperty("systemData").GetProperty("createdAt").ToString());
-    Console.WriteLine(result.GetProperty("systemData").GetProperty("createdBy").ToString());
-    Console.WriteLine(result.GetProperty("systemData").GetProperty("createdByType").ToString());
-    Console.WriteLine(result.GetProperty("systemData").GetProperty("lastModifiedAt").ToString());
-    Console.WriteLine(result.GetProperty("systemData").GetProperty("lastModifiedBy").ToString());
-    Console.WriteLine(result.GetProperty("systemData").GetProperty("lastModifiedByType").ToString());
+    JsonElement element = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(element.GetProperty("collectionProvisioningState").ToString());
+    Console.WriteLine(element.GetProperty("description").ToString());
+    Console.WriteLine(element.GetProperty("friendlyName").ToString());
+    Console.WriteLine(element.GetProperty("name").ToString());
+    Console.WriteLine(element.GetProperty("parentCollection").GetProperty("referenceName").ToString());
+    Console.WriteLine(element.GetProperty("parentCollection").GetProperty("type").ToString());
+    Console.WriteLine(element.GetProperty("systemData").GetProperty("createdAt").ToString());
+    Console.WriteLine(element.GetProperty("systemData").GetProperty("createdBy").ToString());
+    Console.WriteLine(element.GetProperty("systemData").GetProperty("createdByType").ToString());
+    Console.WriteLine(element.GetProperty("systemData").GetProperty("lastModifiedAt").ToString());
+    Console.WriteLine(element.GetProperty("systemData").GetProperty("lastModifiedBy").ToString());
+    Console.WriteLine(element.GetProperty("systemData").GetProperty("lastModifiedByType").ToString());
 }
 ]]></code></example>
     </member>
@@ -311,8 +311,8 @@ PurviewAccountCollections client = new PurviewAccountsClient(endpoint, credentia
 
 foreach (BinaryData item in client.GetCollections(null, null))
 {
-    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(result.ToString());
+    JsonElement element = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(element.ToString());
 }
 ]]></code>
 This sample shows how to call GetCollections with all parameters and parse the result.
@@ -323,19 +323,19 @@ PurviewAccountCollections client = new PurviewAccountsClient(endpoint, credentia
 
 foreach (BinaryData item in client.GetCollections("<skipToken>", null))
 {
-    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(result.GetProperty("collectionProvisioningState").ToString());
-    Console.WriteLine(result.GetProperty("description").ToString());
-    Console.WriteLine(result.GetProperty("friendlyName").ToString());
-    Console.WriteLine(result.GetProperty("name").ToString());
-    Console.WriteLine(result.GetProperty("parentCollection").GetProperty("referenceName").ToString());
-    Console.WriteLine(result.GetProperty("parentCollection").GetProperty("type").ToString());
-    Console.WriteLine(result.GetProperty("systemData").GetProperty("createdAt").ToString());
-    Console.WriteLine(result.GetProperty("systemData").GetProperty("createdBy").ToString());
-    Console.WriteLine(result.GetProperty("systemData").GetProperty("createdByType").ToString());
-    Console.WriteLine(result.GetProperty("systemData").GetProperty("lastModifiedAt").ToString());
-    Console.WriteLine(result.GetProperty("systemData").GetProperty("lastModifiedBy").ToString());
-    Console.WriteLine(result.GetProperty("systemData").GetProperty("lastModifiedByType").ToString());
+    JsonElement element = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(element.GetProperty("collectionProvisioningState").ToString());
+    Console.WriteLine(element.GetProperty("description").ToString());
+    Console.WriteLine(element.GetProperty("friendlyName").ToString());
+    Console.WriteLine(element.GetProperty("name").ToString());
+    Console.WriteLine(element.GetProperty("parentCollection").GetProperty("referenceName").ToString());
+    Console.WriteLine(element.GetProperty("parentCollection").GetProperty("type").ToString());
+    Console.WriteLine(element.GetProperty("systemData").GetProperty("createdAt").ToString());
+    Console.WriteLine(element.GetProperty("systemData").GetProperty("createdBy").ToString());
+    Console.WriteLine(element.GetProperty("systemData").GetProperty("createdByType").ToString());
+    Console.WriteLine(element.GetProperty("systemData").GetProperty("lastModifiedAt").ToString());
+    Console.WriteLine(element.GetProperty("systemData").GetProperty("lastModifiedBy").ToString());
+    Console.WriteLine(element.GetProperty("systemData").GetProperty("lastModifiedByType").ToString());
 }
 ]]></code></example>
     </member>
@@ -349,8 +349,8 @@ PurviewAccountCollections client = new PurviewAccountsClient(endpoint, credentia
 
 await foreach (BinaryData item in client.GetChildCollectionNamesAsync(null, null))
 {
-    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(result.ToString());
+    JsonElement element = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(element.ToString());
 }
 ]]></code>
 This sample shows how to call GetChildCollectionNamesAsync with all parameters and parse the result.
@@ -361,9 +361,9 @@ PurviewAccountCollections client = new PurviewAccountsClient(endpoint, credentia
 
 await foreach (BinaryData item in client.GetChildCollectionNamesAsync("<skipToken>", null))
 {
-    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(result.GetProperty("friendlyName").ToString());
-    Console.WriteLine(result.GetProperty("name").ToString());
+    JsonElement element = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(element.GetProperty("friendlyName").ToString());
+    Console.WriteLine(element.GetProperty("name").ToString());
 }
 ]]></code></example>
     </member>
@@ -377,8 +377,8 @@ PurviewAccountCollections client = new PurviewAccountsClient(endpoint, credentia
 
 foreach (BinaryData item in client.GetChildCollectionNames(null, null))
 {
-    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(result.ToString());
+    JsonElement element = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(element.ToString());
 }
 ]]></code>
 This sample shows how to call GetChildCollectionNames with all parameters and parse the result.
@@ -389,9 +389,9 @@ PurviewAccountCollections client = new PurviewAccountsClient(endpoint, credentia
 
 foreach (BinaryData item in client.GetChildCollectionNames("<skipToken>", null))
 {
-    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(result.GetProperty("friendlyName").ToString());
-    Console.WriteLine(result.GetProperty("name").ToString());
+    JsonElement element = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(element.GetProperty("friendlyName").ToString());
+    Console.WriteLine(element.GetProperty("name").ToString());
 }
 ]]></code></example>
     </member>

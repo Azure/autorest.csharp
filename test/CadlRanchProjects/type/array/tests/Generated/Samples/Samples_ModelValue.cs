@@ -28,8 +28,8 @@ namespace _Type._Array.Samples
 
             Response response = client.GetModelValue(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].GetProperty("property").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element[0].GetProperty("property").ToString());
         }
 
         [Test]
@@ -40,8 +40,8 @@ namespace _Type._Array.Samples
 
             Response response = await client.GetModelValueAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].GetProperty("property").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element[0].GetProperty("property").ToString());
         }
 
         [Test]
@@ -70,9 +70,9 @@ namespace _Type._Array.Samples
 
             Response response = client.GetModelValue(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].GetProperty("property").ToString());
-            Console.WriteLine(result[0].GetProperty("children")[0].GetProperty("property").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element[0].GetProperty("property").ToString());
+            Console.WriteLine(element[0].GetProperty("children")[0].GetProperty("property").ToString());
         }
 
         [Test]
@@ -83,9 +83,9 @@ namespace _Type._Array.Samples
 
             Response response = await client.GetModelValueAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].GetProperty("property").ToString());
-            Console.WriteLine(result[0].GetProperty("children")[0].GetProperty("property").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element[0].GetProperty("property").ToString());
+            Console.WriteLine(element[0].GetProperty("children")[0].GetProperty("property").ToString());
         }
 
         [Test]

@@ -186,8 +186,8 @@ HttpRetryClient client = new HttpRetryClient(credential);
 
 Response response = await client.Options502Async(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
+JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call Options502Async with all parameters and parse the result.
 <code><![CDATA[
@@ -196,8 +196,8 @@ HttpRetryClient client = new HttpRetryClient(credential);
 
 Response response = await client.Options502Async(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
+JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(element.ToString());
 ]]></code></example>
     </member>
     <member name="Options502(RequestContext)">
@@ -209,8 +209,8 @@ HttpRetryClient client = new HttpRetryClient(credential);
 
 Response response = client.Options502(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
+JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call Options502 with all parameters and parse the result.
 <code><![CDATA[
@@ -219,8 +219,8 @@ HttpRetryClient client = new HttpRetryClient(credential);
 
 Response response = client.Options502(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
+JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(element.ToString());
 ]]></code></example>
     </member>
     <member name="Post503Async(RequestContent,RequestContext)">

@@ -39,8 +39,8 @@ UnknownValue client = new DictionaryClient().GetUnknownValueClient(apiVersion: "
 
 Response response = await client.GetUnknownValueAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("<key>").ToString());
+JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("<key>").ToString());
 ]]></code>
 This sample shows how to call GetUnknownValueAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -48,8 +48,8 @@ UnknownValue client = new DictionaryClient().GetUnknownValueClient(apiVersion: "
 
 Response response = await client.GetUnknownValueAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("<key>").ToString());
+JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("<key>").ToString());
 ]]></code></example>
     </member>
     <member name="GetUnknownValue(RequestContext)">
@@ -60,8 +60,8 @@ UnknownValue client = new DictionaryClient().GetUnknownValueClient(apiVersion: "
 
 Response response = client.GetUnknownValue(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("<key>").ToString());
+JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("<key>").ToString());
 ]]></code>
 This sample shows how to call GetUnknownValue with all parameters and parse the result.
 <code><![CDATA[
@@ -69,8 +69,8 @@ UnknownValue client = new DictionaryClient().GetUnknownValueClient(apiVersion: "
 
 Response response = client.GetUnknownValue(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("<key>").ToString());
+JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("<key>").ToString());
 ]]></code></example>
     </member>
     <member name="PutAsync(IDictionary{string,BinaryData},CancellationToken)">

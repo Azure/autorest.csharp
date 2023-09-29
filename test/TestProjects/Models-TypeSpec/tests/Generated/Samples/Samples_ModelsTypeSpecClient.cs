@@ -29,8 +29,8 @@ namespace ModelsTypeSpec.Samples
 
             Response response = client.GetOutputDiscriminatorModel(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("kind").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("kind").ToString());
         }
 
         [Test]
@@ -42,8 +42,8 @@ namespace ModelsTypeSpec.Samples
 
             Response response = await client.GetOutputDiscriminatorModelAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("kind").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("kind").ToString());
         }
 
         [Test]
@@ -75,8 +75,8 @@ namespace ModelsTypeSpec.Samples
 
             Response response = client.GetOutputDiscriminatorModel(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("kind").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("kind").ToString());
         }
 
         [Test]
@@ -88,8 +88,8 @@ namespace ModelsTypeSpec.Samples
 
             Response response = await client.GetOutputDiscriminatorModelAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("kind").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("kind").ToString());
         }
 
         [Test]
@@ -174,25 +174,25 @@ null
             });
             Response response = client.InputToRoundTrip(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("requiredString").ToString());
-            Console.WriteLine(result.GetProperty("requiredInt").ToString());
-            Console.WriteLine(result.GetProperty("requiredNullableInt").ToString());
-            Console.WriteLine(result.GetProperty("requiredNullableString").ToString());
-            Console.WriteLine(result.GetProperty("requiredReadonlyInt").ToString());
-            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("discriminatorProperty").ToString());
-            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredPropertyOnBase").ToString());
-            Console.WriteLine(result.GetProperty("requiredFixedStringEnum").ToString());
-            Console.WriteLine(result.GetProperty("requiredFixedIntEnum").ToString());
-            Console.WriteLine(result.GetProperty("requiredExtensibleEnum").ToString());
-            Console.WriteLine(result.GetProperty("requiredIntRecord").GetProperty("<key>").ToString());
-            Console.WriteLine(result.GetProperty("requiredStringRecord").GetProperty("<key>").ToString());
-            Console.WriteLine(result.GetProperty("requiredBytes").ToString());
-            Console.WriteLine(result.GetProperty("requiredUint8Array")[0].ToString());
-            Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
-            Console.WriteLine(result.GetProperty("requiredInt8Array")[0].ToString());
-            Console.WriteLine(result.GetProperty("requiredNullableIntList")[0].ToString());
-            Console.WriteLine(result.GetProperty("requiredNullableStringList")[0].ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("requiredString").ToString());
+            Console.WriteLine(element.GetProperty("requiredInt").ToString());
+            Console.WriteLine(element.GetProperty("requiredNullableInt").ToString());
+            Console.WriteLine(element.GetProperty("requiredNullableString").ToString());
+            Console.WriteLine(element.GetProperty("requiredReadonlyInt").ToString());
+            Console.WriteLine(element.GetProperty("requiredModel").GetProperty("discriminatorProperty").ToString());
+            Console.WriteLine(element.GetProperty("requiredModel").GetProperty("requiredPropertyOnBase").ToString());
+            Console.WriteLine(element.GetProperty("requiredFixedStringEnum").ToString());
+            Console.WriteLine(element.GetProperty("requiredFixedIntEnum").ToString());
+            Console.WriteLine(element.GetProperty("requiredExtensibleEnum").ToString());
+            Console.WriteLine(element.GetProperty("requiredIntRecord").GetProperty("<key>").ToString());
+            Console.WriteLine(element.GetProperty("requiredStringRecord").GetProperty("<key>").ToString());
+            Console.WriteLine(element.GetProperty("requiredBytes").ToString());
+            Console.WriteLine(element.GetProperty("requiredUint8Array")[0].ToString());
+            Console.WriteLine(element.GetProperty("requiredUnknown").ToString());
+            Console.WriteLine(element.GetProperty("requiredInt8Array")[0].ToString());
+            Console.WriteLine(element.GetProperty("requiredNullableIntList")[0].ToString());
+            Console.WriteLine(element.GetProperty("requiredNullableStringList")[0].ToString());
         }
 
         [Test]
@@ -257,25 +257,25 @@ null
             });
             Response response = await client.InputToRoundTripAsync(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("requiredString").ToString());
-            Console.WriteLine(result.GetProperty("requiredInt").ToString());
-            Console.WriteLine(result.GetProperty("requiredNullableInt").ToString());
-            Console.WriteLine(result.GetProperty("requiredNullableString").ToString());
-            Console.WriteLine(result.GetProperty("requiredReadonlyInt").ToString());
-            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("discriminatorProperty").ToString());
-            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredPropertyOnBase").ToString());
-            Console.WriteLine(result.GetProperty("requiredFixedStringEnum").ToString());
-            Console.WriteLine(result.GetProperty("requiredFixedIntEnum").ToString());
-            Console.WriteLine(result.GetProperty("requiredExtensibleEnum").ToString());
-            Console.WriteLine(result.GetProperty("requiredIntRecord").GetProperty("<key>").ToString());
-            Console.WriteLine(result.GetProperty("requiredStringRecord").GetProperty("<key>").ToString());
-            Console.WriteLine(result.GetProperty("requiredBytes").ToString());
-            Console.WriteLine(result.GetProperty("requiredUint8Array")[0].ToString());
-            Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
-            Console.WriteLine(result.GetProperty("requiredInt8Array")[0].ToString());
-            Console.WriteLine(result.GetProperty("requiredNullableIntList")[0].ToString());
-            Console.WriteLine(result.GetProperty("requiredNullableStringList")[0].ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("requiredString").ToString());
+            Console.WriteLine(element.GetProperty("requiredInt").ToString());
+            Console.WriteLine(element.GetProperty("requiredNullableInt").ToString());
+            Console.WriteLine(element.GetProperty("requiredNullableString").ToString());
+            Console.WriteLine(element.GetProperty("requiredReadonlyInt").ToString());
+            Console.WriteLine(element.GetProperty("requiredModel").GetProperty("discriminatorProperty").ToString());
+            Console.WriteLine(element.GetProperty("requiredModel").GetProperty("requiredPropertyOnBase").ToString());
+            Console.WriteLine(element.GetProperty("requiredFixedStringEnum").ToString());
+            Console.WriteLine(element.GetProperty("requiredFixedIntEnum").ToString());
+            Console.WriteLine(element.GetProperty("requiredExtensibleEnum").ToString());
+            Console.WriteLine(element.GetProperty("requiredIntRecord").GetProperty("<key>").ToString());
+            Console.WriteLine(element.GetProperty("requiredStringRecord").GetProperty("<key>").ToString());
+            Console.WriteLine(element.GetProperty("requiredBytes").ToString());
+            Console.WriteLine(element.GetProperty("requiredUint8Array")[0].ToString());
+            Console.WriteLine(element.GetProperty("requiredUnknown").ToString());
+            Console.WriteLine(element.GetProperty("requiredInt8Array")[0].ToString());
+            Console.WriteLine(element.GetProperty("requiredNullableIntList")[0].ToString());
+            Console.WriteLine(element.GetProperty("requiredNullableStringList")[0].ToString());
         }
 
         [Test]
@@ -418,37 +418,37 @@ null
             });
             Response response = client.InputToRoundTrip(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("requiredString").ToString());
-            Console.WriteLine(result.GetProperty("requiredInt").ToString());
-            Console.WriteLine(result.GetProperty("nonRequiredString").ToString());
-            Console.WriteLine(result.GetProperty("nonRequiredInt").ToString());
-            Console.WriteLine(result.GetProperty("requiredNullableInt").ToString());
-            Console.WriteLine(result.GetProperty("requiredNullableString").ToString());
-            Console.WriteLine(result.GetProperty("nonRequiredNullableInt").ToString());
-            Console.WriteLine(result.GetProperty("nonRequiredNullableString").ToString());
-            Console.WriteLine(result.GetProperty("requiredReadonlyInt").ToString());
-            Console.WriteLine(result.GetProperty("nonRequiredReadonlyInt").ToString());
-            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("discriminatorProperty").ToString());
-            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalPropertyOnBase").ToString());
-            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredPropertyOnBase").ToString());
-            Console.WriteLine(result.GetProperty("requiredFixedStringEnum").ToString());
-            Console.WriteLine(result.GetProperty("requiredFixedIntEnum").ToString());
-            Console.WriteLine(result.GetProperty("requiredExtensibleEnum").ToString());
-            Console.WriteLine(result.GetProperty("requiredIntRecord").GetProperty("<key>").ToString());
-            Console.WriteLine(result.GetProperty("requiredStringRecord").GetProperty("<key>").ToString());
-            Console.WriteLine(result.GetProperty("requiredBytes").ToString());
-            Console.WriteLine(result.GetProperty("optionalBytes").ToString());
-            Console.WriteLine(result.GetProperty("requiredUint8Array")[0].ToString());
-            Console.WriteLine(result.GetProperty("optionalUint8Array")[0].ToString());
-            Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
-            Console.WriteLine(result.GetProperty("optionalUnknown").ToString());
-            Console.WriteLine(result.GetProperty("requiredInt8Array")[0].ToString());
-            Console.WriteLine(result.GetProperty("optionalInt8Array")[0].ToString());
-            Console.WriteLine(result.GetProperty("requiredNullableIntList")[0].ToString());
-            Console.WriteLine(result.GetProperty("requiredNullableStringList")[0].ToString());
-            Console.WriteLine(result.GetProperty("nonRequiredNullableIntList")[0].ToString());
-            Console.WriteLine(result.GetProperty("nonRequiredNullableStringList")[0].ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("requiredString").ToString());
+            Console.WriteLine(element.GetProperty("requiredInt").ToString());
+            Console.WriteLine(element.GetProperty("nonRequiredString").ToString());
+            Console.WriteLine(element.GetProperty("nonRequiredInt").ToString());
+            Console.WriteLine(element.GetProperty("requiredNullableInt").ToString());
+            Console.WriteLine(element.GetProperty("requiredNullableString").ToString());
+            Console.WriteLine(element.GetProperty("nonRequiredNullableInt").ToString());
+            Console.WriteLine(element.GetProperty("nonRequiredNullableString").ToString());
+            Console.WriteLine(element.GetProperty("requiredReadonlyInt").ToString());
+            Console.WriteLine(element.GetProperty("nonRequiredReadonlyInt").ToString());
+            Console.WriteLine(element.GetProperty("requiredModel").GetProperty("discriminatorProperty").ToString());
+            Console.WriteLine(element.GetProperty("requiredModel").GetProperty("optionalPropertyOnBase").ToString());
+            Console.WriteLine(element.GetProperty("requiredModel").GetProperty("requiredPropertyOnBase").ToString());
+            Console.WriteLine(element.GetProperty("requiredFixedStringEnum").ToString());
+            Console.WriteLine(element.GetProperty("requiredFixedIntEnum").ToString());
+            Console.WriteLine(element.GetProperty("requiredExtensibleEnum").ToString());
+            Console.WriteLine(element.GetProperty("requiredIntRecord").GetProperty("<key>").ToString());
+            Console.WriteLine(element.GetProperty("requiredStringRecord").GetProperty("<key>").ToString());
+            Console.WriteLine(element.GetProperty("requiredBytes").ToString());
+            Console.WriteLine(element.GetProperty("optionalBytes").ToString());
+            Console.WriteLine(element.GetProperty("requiredUint8Array")[0].ToString());
+            Console.WriteLine(element.GetProperty("optionalUint8Array")[0].ToString());
+            Console.WriteLine(element.GetProperty("requiredUnknown").ToString());
+            Console.WriteLine(element.GetProperty("optionalUnknown").ToString());
+            Console.WriteLine(element.GetProperty("requiredInt8Array")[0].ToString());
+            Console.WriteLine(element.GetProperty("optionalInt8Array")[0].ToString());
+            Console.WriteLine(element.GetProperty("requiredNullableIntList")[0].ToString());
+            Console.WriteLine(element.GetProperty("requiredNullableStringList")[0].ToString());
+            Console.WriteLine(element.GetProperty("nonRequiredNullableIntList")[0].ToString());
+            Console.WriteLine(element.GetProperty("nonRequiredNullableStringList")[0].ToString());
         }
 
         [Test]
@@ -539,37 +539,37 @@ null
             });
             Response response = await client.InputToRoundTripAsync(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("requiredString").ToString());
-            Console.WriteLine(result.GetProperty("requiredInt").ToString());
-            Console.WriteLine(result.GetProperty("nonRequiredString").ToString());
-            Console.WriteLine(result.GetProperty("nonRequiredInt").ToString());
-            Console.WriteLine(result.GetProperty("requiredNullableInt").ToString());
-            Console.WriteLine(result.GetProperty("requiredNullableString").ToString());
-            Console.WriteLine(result.GetProperty("nonRequiredNullableInt").ToString());
-            Console.WriteLine(result.GetProperty("nonRequiredNullableString").ToString());
-            Console.WriteLine(result.GetProperty("requiredReadonlyInt").ToString());
-            Console.WriteLine(result.GetProperty("nonRequiredReadonlyInt").ToString());
-            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("discriminatorProperty").ToString());
-            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalPropertyOnBase").ToString());
-            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredPropertyOnBase").ToString());
-            Console.WriteLine(result.GetProperty("requiredFixedStringEnum").ToString());
-            Console.WriteLine(result.GetProperty("requiredFixedIntEnum").ToString());
-            Console.WriteLine(result.GetProperty("requiredExtensibleEnum").ToString());
-            Console.WriteLine(result.GetProperty("requiredIntRecord").GetProperty("<key>").ToString());
-            Console.WriteLine(result.GetProperty("requiredStringRecord").GetProperty("<key>").ToString());
-            Console.WriteLine(result.GetProperty("requiredBytes").ToString());
-            Console.WriteLine(result.GetProperty("optionalBytes").ToString());
-            Console.WriteLine(result.GetProperty("requiredUint8Array")[0].ToString());
-            Console.WriteLine(result.GetProperty("optionalUint8Array")[0].ToString());
-            Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
-            Console.WriteLine(result.GetProperty("optionalUnknown").ToString());
-            Console.WriteLine(result.GetProperty("requiredInt8Array")[0].ToString());
-            Console.WriteLine(result.GetProperty("optionalInt8Array")[0].ToString());
-            Console.WriteLine(result.GetProperty("requiredNullableIntList")[0].ToString());
-            Console.WriteLine(result.GetProperty("requiredNullableStringList")[0].ToString());
-            Console.WriteLine(result.GetProperty("nonRequiredNullableIntList")[0].ToString());
-            Console.WriteLine(result.GetProperty("nonRequiredNullableStringList")[0].ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("requiredString").ToString());
+            Console.WriteLine(element.GetProperty("requiredInt").ToString());
+            Console.WriteLine(element.GetProperty("nonRequiredString").ToString());
+            Console.WriteLine(element.GetProperty("nonRequiredInt").ToString());
+            Console.WriteLine(element.GetProperty("requiredNullableInt").ToString());
+            Console.WriteLine(element.GetProperty("requiredNullableString").ToString());
+            Console.WriteLine(element.GetProperty("nonRequiredNullableInt").ToString());
+            Console.WriteLine(element.GetProperty("nonRequiredNullableString").ToString());
+            Console.WriteLine(element.GetProperty("requiredReadonlyInt").ToString());
+            Console.WriteLine(element.GetProperty("nonRequiredReadonlyInt").ToString());
+            Console.WriteLine(element.GetProperty("requiredModel").GetProperty("discriminatorProperty").ToString());
+            Console.WriteLine(element.GetProperty("requiredModel").GetProperty("optionalPropertyOnBase").ToString());
+            Console.WriteLine(element.GetProperty("requiredModel").GetProperty("requiredPropertyOnBase").ToString());
+            Console.WriteLine(element.GetProperty("requiredFixedStringEnum").ToString());
+            Console.WriteLine(element.GetProperty("requiredFixedIntEnum").ToString());
+            Console.WriteLine(element.GetProperty("requiredExtensibleEnum").ToString());
+            Console.WriteLine(element.GetProperty("requiredIntRecord").GetProperty("<key>").ToString());
+            Console.WriteLine(element.GetProperty("requiredStringRecord").GetProperty("<key>").ToString());
+            Console.WriteLine(element.GetProperty("requiredBytes").ToString());
+            Console.WriteLine(element.GetProperty("optionalBytes").ToString());
+            Console.WriteLine(element.GetProperty("requiredUint8Array")[0].ToString());
+            Console.WriteLine(element.GetProperty("optionalUint8Array")[0].ToString());
+            Console.WriteLine(element.GetProperty("requiredUnknown").ToString());
+            Console.WriteLine(element.GetProperty("optionalUnknown").ToString());
+            Console.WriteLine(element.GetProperty("requiredInt8Array")[0].ToString());
+            Console.WriteLine(element.GetProperty("optionalInt8Array")[0].ToString());
+            Console.WriteLine(element.GetProperty("requiredNullableIntList")[0].ToString());
+            Console.WriteLine(element.GetProperty("requiredNullableStringList")[0].ToString());
+            Console.WriteLine(element.GetProperty("nonRequiredNullableIntList")[0].ToString());
+            Console.WriteLine(element.GetProperty("nonRequiredNullableStringList")[0].ToString());
         }
 
         [Test]
@@ -706,17 +706,17 @@ null
             });
             Response response = client.InputToRoundTripPrimitive(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("requiredString").ToString());
-            Console.WriteLine(result.GetProperty("requiredInt").ToString());
-            Console.WriteLine(result.GetProperty("requiredInt64").ToString());
-            Console.WriteLine(result.GetProperty("requiredSafeInt").ToString());
-            Console.WriteLine(result.GetProperty("requiredFloat").ToString());
-            Console.WriteLine(result.GetProperty("required_Double").ToString());
-            Console.WriteLine(result.GetProperty("requiredBoolean").ToString());
-            Console.WriteLine(result.GetProperty("requiredDateTimeOffset").ToString());
-            Console.WriteLine(result.GetProperty("requiredTimeSpan").ToString());
-            Console.WriteLine(result.GetProperty("requiredCollectionWithNullableFloatElement")[0].ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("requiredString").ToString());
+            Console.WriteLine(element.GetProperty("requiredInt").ToString());
+            Console.WriteLine(element.GetProperty("requiredInt64").ToString());
+            Console.WriteLine(element.GetProperty("requiredSafeInt").ToString());
+            Console.WriteLine(element.GetProperty("requiredFloat").ToString());
+            Console.WriteLine(element.GetProperty("required_Double").ToString());
+            Console.WriteLine(element.GetProperty("requiredBoolean").ToString());
+            Console.WriteLine(element.GetProperty("requiredDateTimeOffset").ToString());
+            Console.WriteLine(element.GetProperty("requiredTimeSpan").ToString());
+            Console.WriteLine(element.GetProperty("requiredCollectionWithNullableFloatElement")[0].ToString());
         }
 
         [Test]
@@ -781,17 +781,17 @@ null
             });
             Response response = await client.InputToRoundTripPrimitiveAsync(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("requiredString").ToString());
-            Console.WriteLine(result.GetProperty("requiredInt").ToString());
-            Console.WriteLine(result.GetProperty("requiredInt64").ToString());
-            Console.WriteLine(result.GetProperty("requiredSafeInt").ToString());
-            Console.WriteLine(result.GetProperty("requiredFloat").ToString());
-            Console.WriteLine(result.GetProperty("required_Double").ToString());
-            Console.WriteLine(result.GetProperty("requiredBoolean").ToString());
-            Console.WriteLine(result.GetProperty("requiredDateTimeOffset").ToString());
-            Console.WriteLine(result.GetProperty("requiredTimeSpan").ToString());
-            Console.WriteLine(result.GetProperty("requiredCollectionWithNullableFloatElement")[0].ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("requiredString").ToString());
+            Console.WriteLine(element.GetProperty("requiredInt").ToString());
+            Console.WriteLine(element.GetProperty("requiredInt64").ToString());
+            Console.WriteLine(element.GetProperty("requiredSafeInt").ToString());
+            Console.WriteLine(element.GetProperty("requiredFloat").ToString());
+            Console.WriteLine(element.GetProperty("required_Double").ToString());
+            Console.WriteLine(element.GetProperty("requiredBoolean").ToString());
+            Console.WriteLine(element.GetProperty("requiredDateTimeOffset").ToString());
+            Console.WriteLine(element.GetProperty("requiredTimeSpan").ToString());
+            Console.WriteLine(element.GetProperty("requiredCollectionWithNullableFloatElement")[0].ToString());
         }
 
         [Test]
@@ -934,17 +934,17 @@ null
             });
             Response response = client.InputToRoundTripPrimitive(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("requiredString").ToString());
-            Console.WriteLine(result.GetProperty("requiredInt").ToString());
-            Console.WriteLine(result.GetProperty("requiredInt64").ToString());
-            Console.WriteLine(result.GetProperty("requiredSafeInt").ToString());
-            Console.WriteLine(result.GetProperty("requiredFloat").ToString());
-            Console.WriteLine(result.GetProperty("required_Double").ToString());
-            Console.WriteLine(result.GetProperty("requiredBoolean").ToString());
-            Console.WriteLine(result.GetProperty("requiredDateTimeOffset").ToString());
-            Console.WriteLine(result.GetProperty("requiredTimeSpan").ToString());
-            Console.WriteLine(result.GetProperty("requiredCollectionWithNullableFloatElement")[0].ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("requiredString").ToString());
+            Console.WriteLine(element.GetProperty("requiredInt").ToString());
+            Console.WriteLine(element.GetProperty("requiredInt64").ToString());
+            Console.WriteLine(element.GetProperty("requiredSafeInt").ToString());
+            Console.WriteLine(element.GetProperty("requiredFloat").ToString());
+            Console.WriteLine(element.GetProperty("required_Double").ToString());
+            Console.WriteLine(element.GetProperty("requiredBoolean").ToString());
+            Console.WriteLine(element.GetProperty("requiredDateTimeOffset").ToString());
+            Console.WriteLine(element.GetProperty("requiredTimeSpan").ToString());
+            Console.WriteLine(element.GetProperty("requiredCollectionWithNullableFloatElement")[0].ToString());
         }
 
         [Test]
@@ -1035,17 +1035,17 @@ null
             });
             Response response = await client.InputToRoundTripPrimitiveAsync(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("requiredString").ToString());
-            Console.WriteLine(result.GetProperty("requiredInt").ToString());
-            Console.WriteLine(result.GetProperty("requiredInt64").ToString());
-            Console.WriteLine(result.GetProperty("requiredSafeInt").ToString());
-            Console.WriteLine(result.GetProperty("requiredFloat").ToString());
-            Console.WriteLine(result.GetProperty("required_Double").ToString());
-            Console.WriteLine(result.GetProperty("requiredBoolean").ToString());
-            Console.WriteLine(result.GetProperty("requiredDateTimeOffset").ToString());
-            Console.WriteLine(result.GetProperty("requiredTimeSpan").ToString());
-            Console.WriteLine(result.GetProperty("requiredCollectionWithNullableFloatElement")[0].ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("requiredString").ToString());
+            Console.WriteLine(element.GetProperty("requiredInt").ToString());
+            Console.WriteLine(element.GetProperty("requiredInt64").ToString());
+            Console.WriteLine(element.GetProperty("requiredSafeInt").ToString());
+            Console.WriteLine(element.GetProperty("requiredFloat").ToString());
+            Console.WriteLine(element.GetProperty("required_Double").ToString());
+            Console.WriteLine(element.GetProperty("requiredBoolean").ToString());
+            Console.WriteLine(element.GetProperty("requiredDateTimeOffset").ToString());
+            Console.WriteLine(element.GetProperty("requiredTimeSpan").ToString());
+            Console.WriteLine(element.GetProperty("requiredCollectionWithNullableFloatElement")[0].ToString());
         }
 
         [Test]
@@ -1130,8 +1130,8 @@ default
             RequestContent content = RequestContent.Create(new object());
             Response response = client.InputToRoundTripOptional(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.ToString());
         }
 
         [Test]
@@ -1144,8 +1144,8 @@ default
             RequestContent content = RequestContent.Create(new object());
             Response response = await client.InputToRoundTripOptionalAsync(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.ToString());
         }
 
         [Test]
@@ -1240,19 +1240,19 @@ null
             });
             Response response = client.InputToRoundTripOptional(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("optionalString").ToString());
-            Console.WriteLine(result.GetProperty("optionalInt").ToString());
-            Console.WriteLine(result.GetProperty("optionalStringList")[0].ToString());
-            Console.WriteLine(result.GetProperty("optionalIntList")[0].ToString());
-            Console.WriteLine(result.GetProperty("optionalModelWithPropertiesOnBase").GetProperty("optionalPropertyOnBase").ToString());
-            Console.WriteLine(result.GetProperty("optionalFixedStringEnum").ToString());
-            Console.WriteLine(result.GetProperty("optionalExtensibleEnum").ToString());
-            Console.WriteLine(result.GetProperty("optionalIntRecord").GetProperty("<key>").ToString());
-            Console.WriteLine(result.GetProperty("optionalStringRecord").GetProperty("<key>").ToString());
-            Console.WriteLine(result.GetProperty("optionalPlainDate").ToString());
-            Console.WriteLine(result.GetProperty("optionalPlainTime").ToString());
-            Console.WriteLine(result.GetProperty("optionalCollectionWithNullableIntElement")[0].ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("optionalString").ToString());
+            Console.WriteLine(element.GetProperty("optionalInt").ToString());
+            Console.WriteLine(element.GetProperty("optionalStringList")[0].ToString());
+            Console.WriteLine(element.GetProperty("optionalIntList")[0].ToString());
+            Console.WriteLine(element.GetProperty("optionalModelWithPropertiesOnBase").GetProperty("optionalPropertyOnBase").ToString());
+            Console.WriteLine(element.GetProperty("optionalFixedStringEnum").ToString());
+            Console.WriteLine(element.GetProperty("optionalExtensibleEnum").ToString());
+            Console.WriteLine(element.GetProperty("optionalIntRecord").GetProperty("<key>").ToString());
+            Console.WriteLine(element.GetProperty("optionalStringRecord").GetProperty("<key>").ToString());
+            Console.WriteLine(element.GetProperty("optionalPlainDate").ToString());
+            Console.WriteLine(element.GetProperty("optionalPlainTime").ToString());
+            Console.WriteLine(element.GetProperty("optionalCollectionWithNullableIntElement")[0].ToString());
         }
 
         [Test]
@@ -1325,19 +1325,19 @@ null
             });
             Response response = await client.InputToRoundTripOptionalAsync(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("optionalString").ToString());
-            Console.WriteLine(result.GetProperty("optionalInt").ToString());
-            Console.WriteLine(result.GetProperty("optionalStringList")[0].ToString());
-            Console.WriteLine(result.GetProperty("optionalIntList")[0].ToString());
-            Console.WriteLine(result.GetProperty("optionalModelWithPropertiesOnBase").GetProperty("optionalPropertyOnBase").ToString());
-            Console.WriteLine(result.GetProperty("optionalFixedStringEnum").ToString());
-            Console.WriteLine(result.GetProperty("optionalExtensibleEnum").ToString());
-            Console.WriteLine(result.GetProperty("optionalIntRecord").GetProperty("<key>").ToString());
-            Console.WriteLine(result.GetProperty("optionalStringRecord").GetProperty("<key>").ToString());
-            Console.WriteLine(result.GetProperty("optionalPlainDate").ToString());
-            Console.WriteLine(result.GetProperty("optionalPlainTime").ToString());
-            Console.WriteLine(result.GetProperty("optionalCollectionWithNullableIntElement")[0].ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("optionalString").ToString());
+            Console.WriteLine(element.GetProperty("optionalInt").ToString());
+            Console.WriteLine(element.GetProperty("optionalStringList")[0].ToString());
+            Console.WriteLine(element.GetProperty("optionalIntList")[0].ToString());
+            Console.WriteLine(element.GetProperty("optionalModelWithPropertiesOnBase").GetProperty("optionalPropertyOnBase").ToString());
+            Console.WriteLine(element.GetProperty("optionalFixedStringEnum").ToString());
+            Console.WriteLine(element.GetProperty("optionalExtensibleEnum").ToString());
+            Console.WriteLine(element.GetProperty("optionalIntRecord").GetProperty("<key>").ToString());
+            Console.WriteLine(element.GetProperty("optionalStringRecord").GetProperty("<key>").ToString());
+            Console.WriteLine(element.GetProperty("optionalPlainDate").ToString());
+            Console.WriteLine(element.GetProperty("optionalPlainTime").ToString());
+            Console.WriteLine(element.GetProperty("optionalCollectionWithNullableIntElement")[0].ToString());
         }
 
         [Test]
@@ -1506,9 +1506,9 @@ null
             });
             Response response = client.RoundTripToOutput(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("requiredString").ToString());
-            Console.WriteLine(result.GetProperty("requiredInt").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("requiredString").ToString());
+            Console.WriteLine(element.GetProperty("requiredInt").ToString());
         }
 
         [Test]
@@ -1579,9 +1579,9 @@ null
             });
             Response response = await client.RoundTripToOutputAsync(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("requiredString").ToString());
-            Console.WriteLine(result.GetProperty("requiredInt").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("requiredString").ToString());
+            Console.WriteLine(element.GetProperty("requiredInt").ToString());
         }
 
         [Test]
@@ -1733,9 +1733,9 @@ null
             });
             Response response = client.RoundTripToOutput(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("requiredString").ToString());
-            Console.WriteLine(result.GetProperty("requiredInt").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("requiredString").ToString());
+            Console.WriteLine(element.GetProperty("requiredInt").ToString());
         }
 
         [Test]
@@ -1829,9 +1829,9 @@ null
             });
             Response response = await client.RoundTripToOutputAsync(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("requiredString").ToString());
-            Console.WriteLine(result.GetProperty("requiredInt").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("requiredString").ToString());
+            Console.WriteLine(element.GetProperty("requiredInt").ToString());
         }
 
         [Test]
@@ -2049,8 +2049,8 @@ default
             });
             Response response = client.RoundTripRecursive(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("message").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("message").ToString());
         }
 
         [Test]
@@ -2066,8 +2066,8 @@ default
             });
             Response response = await client.RoundTripRecursiveAsync(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("message").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("message").ToString());
         }
 
         [Test]
@@ -2105,9 +2105,9 @@ default
             });
             Response response = client.RoundTripRecursive(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("message").ToString());
-            Console.WriteLine(result.GetProperty("inner").GetProperty("message").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("message").ToString());
+            Console.WriteLine(element.GetProperty("inner").GetProperty("message").ToString());
         }
 
         [Test]
@@ -2123,9 +2123,9 @@ default
             });
             Response response = await client.RoundTripRecursiveAsync(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("message").ToString());
-            Console.WriteLine(result.GetProperty("inner").GetProperty("message").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("message").ToString());
+            Console.WriteLine(element.GetProperty("inner").GetProperty("message").ToString());
         }
 
         [Test]
@@ -2165,8 +2165,8 @@ default
 
             Response response = client.SelfReference(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("message").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("message").ToString());
         }
 
         [Test]
@@ -2178,8 +2178,8 @@ default
 
             Response response = await client.SelfReferenceAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("message").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("message").ToString());
         }
 
         [Test]
@@ -2211,9 +2211,9 @@ default
 
             Response response = client.SelfReference(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("message").ToString());
-            Console.WriteLine(result.GetProperty("innerError").GetProperty("message").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("message").ToString());
+            Console.WriteLine(element.GetProperty("innerError").GetProperty("message").ToString());
         }
 
         [Test]
@@ -2225,9 +2225,9 @@ default
 
             Response response = await client.SelfReferenceAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("message").ToString());
-            Console.WriteLine(result.GetProperty("innerError").GetProperty("message").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("message").ToString());
+            Console.WriteLine(element.GetProperty("innerError").GetProperty("message").ToString());
         }
 
         [Test]
@@ -2279,8 +2279,8 @@ null
             });
             Response response = client.RoundTripToOutputWithNoUseBase(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("baseModelProp").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("baseModelProp").ToString());
         }
 
         [Test]
@@ -2312,8 +2312,8 @@ null
             });
             Response response = await client.RoundTripToOutputWithNoUseBaseAsync(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("baseModelProp").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("baseModelProp").ToString());
         }
 
         [Test]
@@ -2385,8 +2385,8 @@ null
             });
             Response response = client.RoundTripToOutputWithNoUseBase(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("baseModelProp").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("baseModelProp").ToString());
         }
 
         [Test]
@@ -2418,8 +2418,8 @@ null
             });
             Response response = await client.RoundTripToOutputWithNoUseBaseAsync(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("baseModelProp").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("baseModelProp").ToString());
         }
 
         [Test]
@@ -2471,9 +2471,9 @@ default
 
             Response response = client.AnalyzeConversation(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("discriminatorProperty").ToString());
-            Console.WriteLine(result.GetProperty("requiredPropertyOnBase").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("discriminatorProperty").ToString());
+            Console.WriteLine(element.GetProperty("requiredPropertyOnBase").ToString());
         }
 
         [Test]
@@ -2485,9 +2485,9 @@ default
 
             Response response = await client.AnalyzeConversationAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("discriminatorProperty").ToString());
-            Console.WriteLine(result.GetProperty("requiredPropertyOnBase").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("discriminatorProperty").ToString());
+            Console.WriteLine(element.GetProperty("requiredPropertyOnBase").ToString());
         }
 
         [Test]
@@ -2519,10 +2519,10 @@ default
 
             Response response = client.AnalyzeConversation(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("discriminatorProperty").ToString());
-            Console.WriteLine(result.GetProperty("optionalPropertyOnBase").ToString());
-            Console.WriteLine(result.GetProperty("requiredPropertyOnBase").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("discriminatorProperty").ToString());
+            Console.WriteLine(element.GetProperty("optionalPropertyOnBase").ToString());
+            Console.WriteLine(element.GetProperty("requiredPropertyOnBase").ToString());
         }
 
         [Test]
@@ -2534,10 +2534,10 @@ default
 
             Response response = await client.AnalyzeConversationAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("discriminatorProperty").ToString());
-            Console.WriteLine(result.GetProperty("optionalPropertyOnBase").ToString());
-            Console.WriteLine(result.GetProperty("requiredPropertyOnBase").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("discriminatorProperty").ToString());
+            Console.WriteLine(element.GetProperty("optionalPropertyOnBase").ToString());
+            Console.WriteLine(element.GetProperty("requiredPropertyOnBase").ToString());
         }
 
         [Test]
@@ -2569,9 +2569,9 @@ default
 
             Response response = client.GetSingleBase(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("kind").ToString());
-            Console.WriteLine(result.GetProperty("size").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("kind").ToString());
+            Console.WriteLine(element.GetProperty("size").ToString());
         }
 
         [Test]
@@ -2583,9 +2583,9 @@ default
 
             Response response = await client.GetSingleBaseAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("kind").ToString());
-            Console.WriteLine(result.GetProperty("size").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("kind").ToString());
+            Console.WriteLine(element.GetProperty("size").ToString());
         }
 
         [Test]
@@ -2617,9 +2617,9 @@ default
 
             Response response = client.GetSingleBase(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("kind").ToString());
-            Console.WriteLine(result.GetProperty("size").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("kind").ToString());
+            Console.WriteLine(element.GetProperty("size").ToString());
         }
 
         [Test]
@@ -2631,9 +2631,9 @@ default
 
             Response response = await client.GetSingleBaseAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("kind").ToString());
-            Console.WriteLine(result.GetProperty("size").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("kind").ToString());
+            Console.WriteLine(element.GetProperty("size").ToString());
         }
 
         [Test]

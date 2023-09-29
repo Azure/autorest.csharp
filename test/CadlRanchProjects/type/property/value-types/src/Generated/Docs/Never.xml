@@ -39,8 +39,8 @@ Never client = new ValueTypesClient().GetNeverClient(apiVersion: "1.0.0");
 
 Response response = await client.GetNeverAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
+JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call GetNeverAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -48,8 +48,8 @@ Never client = new ValueTypesClient().GetNeverClient(apiVersion: "1.0.0");
 
 Response response = await client.GetNeverAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
+JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(element.ToString());
 ]]></code></example>
     </member>
     <member name="GetNever(RequestContext)">
@@ -60,8 +60,8 @@ Never client = new ValueTypesClient().GetNeverClient(apiVersion: "1.0.0");
 
 Response response = client.GetNever(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
+JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call GetNever with all parameters and parse the result.
 <code><![CDATA[
@@ -69,8 +69,8 @@ Never client = new ValueTypesClient().GetNeverClient(apiVersion: "1.0.0");
 
 Response response = client.GetNever(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
+JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(element.ToString());
 ]]></code></example>
     </member>
     <member name="PutAsync(NeverProperty,CancellationToken)">

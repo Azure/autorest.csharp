@@ -27,8 +27,8 @@ namespace _Type.Property.Optionality.Samples
 
             Response response = client.GetAll(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("requiredProperty").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("requiredProperty").ToString());
         }
 
         [Test]
@@ -39,8 +39,8 @@ namespace _Type.Property.Optionality.Samples
 
             Response response = await client.GetAllAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("requiredProperty").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("requiredProperty").ToString());
         }
 
         [Test]
@@ -69,9 +69,9 @@ namespace _Type.Property.Optionality.Samples
 
             Response response = client.GetAll(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("optionalProperty").ToString());
-            Console.WriteLine(result.GetProperty("requiredProperty").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("optionalProperty").ToString());
+            Console.WriteLine(element.GetProperty("requiredProperty").ToString());
         }
 
         [Test]
@@ -82,9 +82,9 @@ namespace _Type.Property.Optionality.Samples
 
             Response response = await client.GetAllAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("optionalProperty").ToString());
-            Console.WriteLine(result.GetProperty("requiredProperty").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("optionalProperty").ToString());
+            Console.WriteLine(element.GetProperty("requiredProperty").ToString());
         }
 
         [Test]
@@ -113,8 +113,8 @@ namespace _Type.Property.Optionality.Samples
 
             Response response = client.GetRequiredOnly(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("requiredProperty").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("requiredProperty").ToString());
         }
 
         [Test]
@@ -125,8 +125,8 @@ namespace _Type.Property.Optionality.Samples
 
             Response response = await client.GetRequiredOnlyAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("requiredProperty").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("requiredProperty").ToString());
         }
 
         [Test]
@@ -155,9 +155,9 @@ namespace _Type.Property.Optionality.Samples
 
             Response response = client.GetRequiredOnly(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("optionalProperty").ToString());
-            Console.WriteLine(result.GetProperty("requiredProperty").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("optionalProperty").ToString());
+            Console.WriteLine(element.GetProperty("requiredProperty").ToString());
         }
 
         [Test]
@@ -168,9 +168,9 @@ namespace _Type.Property.Optionality.Samples
 
             Response response = await client.GetRequiredOnlyAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("optionalProperty").ToString());
-            Console.WriteLine(result.GetProperty("requiredProperty").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("optionalProperty").ToString());
+            Console.WriteLine(element.GetProperty("requiredProperty").ToString());
         }
 
         [Test]

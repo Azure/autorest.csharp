@@ -10,8 +10,8 @@ Client4 client = new TopLevelClientWithOperationClient(credential).GetClient4("<
 
 Response response = await client.PatchAsync("<filter>", null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
+JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call PatchAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -20,8 +20,8 @@ Client4 client = new TopLevelClientWithOperationClient(credential).GetClient4("<
 
 Response response = await client.PatchAsync("<filter>", null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
+JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(element.ToString());
 ]]></code></example>
     </member>
     <member name="Patch(string,RequestContext)">
@@ -33,8 +33,8 @@ Client4 client = new TopLevelClientWithOperationClient(credential).GetClient4("<
 
 Response response = client.Patch("<filter>", null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
+JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call Patch with all parameters and parse the result.
 <code><![CDATA[
@@ -43,8 +43,8 @@ Client4 client = new TopLevelClientWithOperationClient(credential).GetClient4("<
 
 Response response = client.Patch("<filter>", null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
+JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(element.ToString());
 ]]></code></example>
     </member>
   </members>

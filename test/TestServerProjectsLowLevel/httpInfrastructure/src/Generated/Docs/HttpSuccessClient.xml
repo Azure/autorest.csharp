@@ -52,8 +52,8 @@ HttpSuccessClient client = new HttpSuccessClient(credential);
 
 Response response = await client.Get200Async(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
+JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call Get200Async with all parameters and parse the result.
 <code><![CDATA[
@@ -62,8 +62,8 @@ HttpSuccessClient client = new HttpSuccessClient(credential);
 
 Response response = await client.Get200Async(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
+JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(element.ToString());
 ]]></code></example>
     </member>
     <member name="Get200(RequestContext)">
@@ -75,8 +75,8 @@ HttpSuccessClient client = new HttpSuccessClient(credential);
 
 Response response = client.Get200(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
+JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call Get200 with all parameters and parse the result.
 <code><![CDATA[
@@ -85,8 +85,8 @@ HttpSuccessClient client = new HttpSuccessClient(credential);
 
 Response response = client.Get200(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
+JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(element.ToString());
 ]]></code></example>
     </member>
     <member name="Options200Async(RequestContext)">
@@ -98,8 +98,8 @@ HttpSuccessClient client = new HttpSuccessClient(credential);
 
 Response response = await client.Options200Async(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
+JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call Options200Async with all parameters and parse the result.
 <code><![CDATA[
@@ -108,8 +108,8 @@ HttpSuccessClient client = new HttpSuccessClient(credential);
 
 Response response = await client.Options200Async(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
+JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(element.ToString());
 ]]></code></example>
     </member>
     <member name="Options200(RequestContext)">
@@ -121,8 +121,8 @@ HttpSuccessClient client = new HttpSuccessClient(credential);
 
 Response response = client.Options200(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
+JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call Options200 with all parameters and parse the result.
 <code><![CDATA[
@@ -131,8 +131,8 @@ HttpSuccessClient client = new HttpSuccessClient(credential);
 
 Response response = client.Options200(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
+JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(element.ToString());
 ]]></code></example>
     </member>
     <member name="Put200Async(RequestContent,RequestContext)">

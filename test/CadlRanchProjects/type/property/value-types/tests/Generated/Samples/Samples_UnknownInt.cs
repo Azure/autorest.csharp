@@ -27,8 +27,8 @@ namespace _Type.Property.ValueTypes.Samples
 
             Response response = client.GetUnknownInt(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("property").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("property").ToString());
         }
 
         [Test]
@@ -39,8 +39,8 @@ namespace _Type.Property.ValueTypes.Samples
 
             Response response = await client.GetUnknownIntAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("property").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("property").ToString());
         }
 
         [Test]
@@ -69,8 +69,8 @@ namespace _Type.Property.ValueTypes.Samples
 
             Response response = client.GetUnknownInt(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("property").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("property").ToString());
         }
 
         [Test]
@@ -81,8 +81,8 @@ namespace _Type.Property.ValueTypes.Samples
 
             Response response = await client.GetUnknownIntAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("property").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("property").ToString());
         }
 
         [Test]

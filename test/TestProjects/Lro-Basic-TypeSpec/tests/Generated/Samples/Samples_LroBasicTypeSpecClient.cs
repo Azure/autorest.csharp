@@ -134,8 +134,8 @@ namespace LroBasicTypeSpec.Samples
             Operation<BinaryData> operation = client.UpdateProject(WaitUntil.Completed, "<id>", content);
             BinaryData responseData = operation.Value;
 
-            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
+            JsonElement element = JsonDocument.Parse(responseData.ToStream()).RootElement;
+            Console.WriteLine(element.GetProperty("id").ToString());
         }
 
         [Test]
@@ -149,8 +149,8 @@ namespace LroBasicTypeSpec.Samples
             Operation<BinaryData> operation = await client.UpdateProjectAsync(WaitUntil.Completed, "<id>", content);
             BinaryData responseData = operation.Value;
 
-            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
+            JsonElement element = JsonDocument.Parse(responseData.ToStream()).RootElement;
+            Console.WriteLine(element.GetProperty("id").ToString());
         }
 
         [Test]
@@ -192,10 +192,10 @@ namespace LroBasicTypeSpec.Samples
             Operation<BinaryData> operation = client.UpdateProject(WaitUntil.Completed, "<id>", content);
             BinaryData responseData = operation.Value;
 
-            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
-            Console.WriteLine(result.GetProperty("description").ToString());
-            Console.WriteLine(result.GetProperty("name").ToString());
+            JsonElement element = JsonDocument.Parse(responseData.ToStream()).RootElement;
+            Console.WriteLine(element.GetProperty("id").ToString());
+            Console.WriteLine(element.GetProperty("description").ToString());
+            Console.WriteLine(element.GetProperty("name").ToString());
         }
 
         [Test]
@@ -213,10 +213,10 @@ namespace LroBasicTypeSpec.Samples
             Operation<BinaryData> operation = await client.UpdateProjectAsync(WaitUntil.Completed, "<id>", content);
             BinaryData responseData = operation.Value;
 
-            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
-            Console.WriteLine(result.GetProperty("description").ToString());
-            Console.WriteLine(result.GetProperty("name").ToString());
+            JsonElement element = JsonDocument.Parse(responseData.ToStream()).RootElement;
+            Console.WriteLine(element.GetProperty("id").ToString());
+            Console.WriteLine(element.GetProperty("description").ToString());
+            Console.WriteLine(element.GetProperty("name").ToString());
         }
 
         [Test]
@@ -265,8 +265,8 @@ namespace LroBasicTypeSpec.Samples
             Operation<BinaryData> operation = client.CreateThing(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
 
-            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
-            Console.WriteLine(result.GetProperty("name").ToString());
+            JsonElement element = JsonDocument.Parse(responseData.ToStream()).RootElement;
+            Console.WriteLine(element.GetProperty("name").ToString());
         }
 
         [Test]
@@ -283,8 +283,8 @@ namespace LroBasicTypeSpec.Samples
             Operation<BinaryData> operation = await client.CreateThingAsync(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
 
-            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
-            Console.WriteLine(result.GetProperty("name").ToString());
+            JsonElement element = JsonDocument.Parse(responseData.ToStream()).RootElement;
+            Console.WriteLine(element.GetProperty("name").ToString());
         }
 
         [Test]
@@ -325,8 +325,8 @@ namespace LroBasicTypeSpec.Samples
             Operation<BinaryData> operation = client.CreateThing(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
 
-            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
-            Console.WriteLine(result.GetProperty("name").ToString());
+            JsonElement element = JsonDocument.Parse(responseData.ToStream()).RootElement;
+            Console.WriteLine(element.GetProperty("name").ToString());
         }
 
         [Test]
@@ -343,8 +343,8 @@ namespace LroBasicTypeSpec.Samples
             Operation<BinaryData> operation = await client.CreateThingAsync(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
 
-            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
-            Console.WriteLine(result.GetProperty("name").ToString());
+            JsonElement element = JsonDocument.Parse(responseData.ToStream()).RootElement;
+            Console.WriteLine(element.GetProperty("name").ToString());
         }
 
         [Test]

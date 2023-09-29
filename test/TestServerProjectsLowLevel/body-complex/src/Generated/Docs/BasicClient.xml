@@ -10,8 +10,8 @@ BasicClient client = new BasicClient(credential);
 
 Response response = await client.GetValidAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
+JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call GetValidAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -20,10 +20,10 @@ BasicClient client = new BasicClient(credential);
 
 Response response = await client.GetValidAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("id").ToString());
-Console.WriteLine(result.GetProperty("name").ToString());
-Console.WriteLine(result.GetProperty("color").ToString());
+JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("id").ToString());
+Console.WriteLine(element.GetProperty("name").ToString());
+Console.WriteLine(element.GetProperty("color").ToString());
 ]]></code></example>
     </member>
     <member name="GetValid(RequestContext)">
@@ -35,8 +35,8 @@ BasicClient client = new BasicClient(credential);
 
 Response response = client.GetValid(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
+JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call GetValid with all parameters and parse the result.
 <code><![CDATA[
@@ -45,10 +45,10 @@ BasicClient client = new BasicClient(credential);
 
 Response response = client.GetValid(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("id").ToString());
-Console.WriteLine(result.GetProperty("name").ToString());
-Console.WriteLine(result.GetProperty("color").ToString());
+JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("id").ToString());
+Console.WriteLine(element.GetProperty("name").ToString());
+Console.WriteLine(element.GetProperty("color").ToString());
 ]]></code></example>
     </member>
     <member name="PutValidAsync(RequestContent,RequestContext)">
@@ -116,8 +116,8 @@ BasicClient client = new BasicClient(credential);
 
 Response response = await client.GetInvalidAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
+JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call GetInvalidAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -126,10 +126,10 @@ BasicClient client = new BasicClient(credential);
 
 Response response = await client.GetInvalidAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("id").ToString());
-Console.WriteLine(result.GetProperty("name").ToString());
-Console.WriteLine(result.GetProperty("color").ToString());
+JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("id").ToString());
+Console.WriteLine(element.GetProperty("name").ToString());
+Console.WriteLine(element.GetProperty("color").ToString());
 ]]></code></example>
     </member>
     <member name="GetInvalid(RequestContext)">
@@ -141,8 +141,8 @@ BasicClient client = new BasicClient(credential);
 
 Response response = client.GetInvalid(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
+JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call GetInvalid with all parameters and parse the result.
 <code><![CDATA[
@@ -151,10 +151,10 @@ BasicClient client = new BasicClient(credential);
 
 Response response = client.GetInvalid(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("id").ToString());
-Console.WriteLine(result.GetProperty("name").ToString());
-Console.WriteLine(result.GetProperty("color").ToString());
+JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("id").ToString());
+Console.WriteLine(element.GetProperty("name").ToString());
+Console.WriteLine(element.GetProperty("color").ToString());
 ]]></code></example>
     </member>
     <member name="GetEmptyAsync(RequestContext)">
@@ -166,8 +166,8 @@ BasicClient client = new BasicClient(credential);
 
 Response response = await client.GetEmptyAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
+JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call GetEmptyAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -176,10 +176,10 @@ BasicClient client = new BasicClient(credential);
 
 Response response = await client.GetEmptyAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("id").ToString());
-Console.WriteLine(result.GetProperty("name").ToString());
-Console.WriteLine(result.GetProperty("color").ToString());
+JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("id").ToString());
+Console.WriteLine(element.GetProperty("name").ToString());
+Console.WriteLine(element.GetProperty("color").ToString());
 ]]></code></example>
     </member>
     <member name="GetEmpty(RequestContext)">
@@ -191,8 +191,8 @@ BasicClient client = new BasicClient(credential);
 
 Response response = client.GetEmpty(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
+JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call GetEmpty with all parameters and parse the result.
 <code><![CDATA[
@@ -201,10 +201,10 @@ BasicClient client = new BasicClient(credential);
 
 Response response = client.GetEmpty(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("id").ToString());
-Console.WriteLine(result.GetProperty("name").ToString());
-Console.WriteLine(result.GetProperty("color").ToString());
+JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("id").ToString());
+Console.WriteLine(element.GetProperty("name").ToString());
+Console.WriteLine(element.GetProperty("color").ToString());
 ]]></code></example>
     </member>
     <member name="GetNullAsync(RequestContext)">
@@ -216,8 +216,8 @@ BasicClient client = new BasicClient(credential);
 
 Response response = await client.GetNullAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
+JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call GetNullAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -226,10 +226,10 @@ BasicClient client = new BasicClient(credential);
 
 Response response = await client.GetNullAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("id").ToString());
-Console.WriteLine(result.GetProperty("name").ToString());
-Console.WriteLine(result.GetProperty("color").ToString());
+JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("id").ToString());
+Console.WriteLine(element.GetProperty("name").ToString());
+Console.WriteLine(element.GetProperty("color").ToString());
 ]]></code></example>
     </member>
     <member name="GetNull(RequestContext)">
@@ -241,8 +241,8 @@ BasicClient client = new BasicClient(credential);
 
 Response response = client.GetNull(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
+JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call GetNull with all parameters and parse the result.
 <code><![CDATA[
@@ -251,10 +251,10 @@ BasicClient client = new BasicClient(credential);
 
 Response response = client.GetNull(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("id").ToString());
-Console.WriteLine(result.GetProperty("name").ToString());
-Console.WriteLine(result.GetProperty("color").ToString());
+JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("id").ToString());
+Console.WriteLine(element.GetProperty("name").ToString());
+Console.WriteLine(element.GetProperty("color").ToString());
 ]]></code></example>
     </member>
     <member name="GetNotProvidedAsync(RequestContext)">
@@ -266,8 +266,8 @@ BasicClient client = new BasicClient(credential);
 
 Response response = await client.GetNotProvidedAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
+JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call GetNotProvidedAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -276,10 +276,10 @@ BasicClient client = new BasicClient(credential);
 
 Response response = await client.GetNotProvidedAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("id").ToString());
-Console.WriteLine(result.GetProperty("name").ToString());
-Console.WriteLine(result.GetProperty("color").ToString());
+JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("id").ToString());
+Console.WriteLine(element.GetProperty("name").ToString());
+Console.WriteLine(element.GetProperty("color").ToString());
 ]]></code></example>
     </member>
     <member name="GetNotProvided(RequestContext)">
@@ -291,8 +291,8 @@ BasicClient client = new BasicClient(credential);
 
 Response response = client.GetNotProvided(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
+JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call GetNotProvided with all parameters and parse the result.
 <code><![CDATA[
@@ -301,10 +301,10 @@ BasicClient client = new BasicClient(credential);
 
 Response response = client.GetNotProvided(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("id").ToString());
-Console.WriteLine(result.GetProperty("name").ToString());
-Console.WriteLine(result.GetProperty("color").ToString());
+JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("id").ToString());
+Console.WriteLine(element.GetProperty("name").ToString());
+Console.WriteLine(element.GetProperty("color").ToString());
 ]]></code></example>
     </member>
   </members>

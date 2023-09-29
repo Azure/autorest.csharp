@@ -39,8 +39,8 @@ Boolean client = new ValueTypesClient().GetBooleanClient(apiVersion: "1.0.0");
 
 Response response = await client.GetBooleanAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("property").ToString());
+JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("property").ToString());
 ]]></code>
 This sample shows how to call GetBooleanAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -48,8 +48,8 @@ Boolean client = new ValueTypesClient().GetBooleanClient(apiVersion: "1.0.0");
 
 Response response = await client.GetBooleanAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("property").ToString());
+JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("property").ToString());
 ]]></code></example>
     </member>
     <member name="GetBoolean(RequestContext)">
@@ -60,8 +60,8 @@ Boolean client = new ValueTypesClient().GetBooleanClient(apiVersion: "1.0.0");
 
 Response response = client.GetBoolean(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("property").ToString());
+JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("property").ToString());
 ]]></code>
 This sample shows how to call GetBoolean with all parameters and parse the result.
 <code><![CDATA[
@@ -69,8 +69,8 @@ Boolean client = new ValueTypesClient().GetBooleanClient(apiVersion: "1.0.0");
 
 Response response = client.GetBoolean(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("property").ToString());
+JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("property").ToString());
 ]]></code></example>
     </member>
     <member name="PutAsync(BooleanProperty,CancellationToken)">

@@ -26,8 +26,8 @@ namespace _Specs_.Azure.ClientGenerator.Core.Internal.Samples
 
             Response response = client.Public("<name>", null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("name").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("name").ToString());
         }
 
         [Test]
@@ -38,8 +38,8 @@ namespace _Specs_.Azure.ClientGenerator.Core.Internal.Samples
 
             Response response = await client.PublicAsync("<name>", null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("name").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("name").ToString());
         }
 
         [Test]
@@ -68,8 +68,8 @@ namespace _Specs_.Azure.ClientGenerator.Core.Internal.Samples
 
             Response response = client.Public("<name>", null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("name").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("name").ToString());
         }
 
         [Test]
@@ -80,8 +80,8 @@ namespace _Specs_.Azure.ClientGenerator.Core.Internal.Samples
 
             Response response = await client.PublicAsync("<name>", null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("name").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("name").ToString());
         }
 
         [Test]

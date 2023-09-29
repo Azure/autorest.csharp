@@ -39,8 +39,8 @@ NullableFloatValue client = new DictionaryClient().GetNullableFloatValueClient(a
 
 Response response = await client.GetNullableFloatValueAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("<key>").ToString());
+JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("<key>").ToString());
 ]]></code>
 This sample shows how to call GetNullableFloatValueAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -48,8 +48,8 @@ NullableFloatValue client = new DictionaryClient().GetNullableFloatValueClient(a
 
 Response response = await client.GetNullableFloatValueAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("<key>").ToString());
+JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("<key>").ToString());
 ]]></code></example>
     </member>
     <member name="GetNullableFloatValue(RequestContext)">
@@ -60,8 +60,8 @@ NullableFloatValue client = new DictionaryClient().GetNullableFloatValueClient(a
 
 Response response = client.GetNullableFloatValue(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("<key>").ToString());
+JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("<key>").ToString());
 ]]></code>
 This sample shows how to call GetNullableFloatValue with all parameters and parse the result.
 <code><![CDATA[
@@ -69,8 +69,8 @@ NullableFloatValue client = new DictionaryClient().GetNullableFloatValueClient(a
 
 Response response = client.GetNullableFloatValue(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("<key>").ToString());
+JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("<key>").ToString());
 ]]></code></example>
     </member>
     <member name="PutAsync(IDictionary{string,float?},CancellationToken)">

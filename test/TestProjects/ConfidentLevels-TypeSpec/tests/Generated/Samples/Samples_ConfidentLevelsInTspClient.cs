@@ -97,8 +97,8 @@ namespace ConfidentLevelsInTsp.Samples
             });
             Response response = client.UnionInResponseProperty(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("unionProperty").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("unionProperty").ToString());
         }
 
         [Test]
@@ -115,8 +115,8 @@ namespace ConfidentLevelsInTsp.Samples
             });
             Response response = await client.UnionInResponsePropertyAsync(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("unionProperty").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("unionProperty").ToString());
         }
 
         [Test]
@@ -134,8 +134,8 @@ namespace ConfidentLevelsInTsp.Samples
             });
             Response response = client.UnionInResponseProperty(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("unionProperty").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("unionProperty").ToString());
         }
 
         [Test]
@@ -153,8 +153,8 @@ namespace ConfidentLevelsInTsp.Samples
             });
             Response response = await client.UnionInResponsePropertyAsync(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("unionProperty").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("unionProperty").ToString());
         }
 
         [Test]
@@ -490,9 +490,9 @@ unionProperty = "<unionProperty>",
             });
             Response response = client.ConfidentOperationWithDiscriminator(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("kind").ToString());
-            Console.WriteLine(result.GetProperty("name").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("kind").ToString());
+            Console.WriteLine(element.GetProperty("name").ToString());
         }
 
         [Test]
@@ -510,9 +510,9 @@ unionProperty = "<unionProperty>",
             });
             Response response = await client.ConfidentOperationWithDiscriminatorAsync(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("kind").ToString());
-            Console.WriteLine(result.GetProperty("name").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("kind").ToString());
+            Console.WriteLine(element.GetProperty("name").ToString());
         }
 
         [Test]
@@ -552,9 +552,9 @@ unionProperty = "<unionProperty>",
             });
             Response response = client.ConfidentOperationWithDiscriminator(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("kind").ToString());
-            Console.WriteLine(result.GetProperty("name").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("kind").ToString());
+            Console.WriteLine(element.GetProperty("name").ToString());
         }
 
         [Test]
@@ -572,9 +572,9 @@ unionProperty = "<unionProperty>",
             });
             Response response = await client.ConfidentOperationWithDiscriminatorAsync(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("kind").ToString());
-            Console.WriteLine(result.GetProperty("name").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("kind").ToString());
+            Console.WriteLine(element.GetProperty("name").ToString());
         }
 
         [Test]
@@ -615,9 +615,9 @@ unionProperty = "<unionProperty>",
             });
             Response response = client.PollutedBaseMethod(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("kind").ToString());
-            Console.WriteLine(result.GetProperty("name").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("kind").ToString());
+            Console.WriteLine(element.GetProperty("name").ToString());
         }
 
         [Test]
@@ -636,9 +636,9 @@ unionProperty = "<unionProperty>",
             });
             Response response = await client.PollutedBaseMethodAsync(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("kind").ToString());
-            Console.WriteLine(result.GetProperty("name").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("kind").ToString());
+            Console.WriteLine(element.GetProperty("name").ToString());
         }
 
         [Test]
@@ -657,9 +657,9 @@ unionProperty = "<unionProperty>",
             });
             Response response = client.PollutedBaseMethod(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("kind").ToString());
-            Console.WriteLine(result.GetProperty("name").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("kind").ToString());
+            Console.WriteLine(element.GetProperty("name").ToString());
         }
 
         [Test]
@@ -678,9 +678,9 @@ unionProperty = "<unionProperty>",
             });
             Response response = await client.PollutedBaseMethodAsync(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("kind").ToString());
-            Console.WriteLine(result.GetProperty("name").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("kind").ToString());
+            Console.WriteLine(element.GetProperty("name").ToString());
         }
 
         [Test]
@@ -699,11 +699,11 @@ unionProperty = "<unionProperty>",
             });
             Response response = client.PollutedDerivedMethod(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("woof").ToString());
-            Console.WriteLine(result.GetProperty("color").ToString());
-            Console.WriteLine(result.GetProperty("kind").ToString());
-            Console.WriteLine(result.GetProperty("name").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("woof").ToString());
+            Console.WriteLine(element.GetProperty("color").ToString());
+            Console.WriteLine(element.GetProperty("kind").ToString());
+            Console.WriteLine(element.GetProperty("name").ToString());
         }
 
         [Test]
@@ -722,11 +722,11 @@ unionProperty = "<unionProperty>",
             });
             Response response = await client.PollutedDerivedMethodAsync(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("woof").ToString());
-            Console.WriteLine(result.GetProperty("color").ToString());
-            Console.WriteLine(result.GetProperty("kind").ToString());
-            Console.WriteLine(result.GetProperty("name").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("woof").ToString());
+            Console.WriteLine(element.GetProperty("color").ToString());
+            Console.WriteLine(element.GetProperty("kind").ToString());
+            Console.WriteLine(element.GetProperty("name").ToString());
         }
 
         [Test]
@@ -745,11 +745,11 @@ unionProperty = "<unionProperty>",
             });
             Response response = client.PollutedDerivedMethod(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("woof").ToString());
-            Console.WriteLine(result.GetProperty("color").ToString());
-            Console.WriteLine(result.GetProperty("kind").ToString());
-            Console.WriteLine(result.GetProperty("name").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("woof").ToString());
+            Console.WriteLine(element.GetProperty("color").ToString());
+            Console.WriteLine(element.GetProperty("kind").ToString());
+            Console.WriteLine(element.GetProperty("name").ToString());
         }
 
         [Test]
@@ -768,11 +768,11 @@ unionProperty = "<unionProperty>",
             });
             Response response = await client.PollutedDerivedMethodAsync(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("woof").ToString());
-            Console.WriteLine(result.GetProperty("color").ToString());
-            Console.WriteLine(result.GetProperty("kind").ToString());
-            Console.WriteLine(result.GetProperty("name").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("woof").ToString());
+            Console.WriteLine(element.GetProperty("color").ToString());
+            Console.WriteLine(element.GetProperty("kind").ToString());
+            Console.WriteLine(element.GetProperty("name").ToString());
         }
 
         [Test]
@@ -790,10 +790,10 @@ unionProperty = "<unionProperty>",
             });
             Response response = client.UnpollutedDerivedMethod(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("meow").ToString());
-            Console.WriteLine(result.GetProperty("kind").ToString());
-            Console.WriteLine(result.GetProperty("name").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("meow").ToString());
+            Console.WriteLine(element.GetProperty("kind").ToString());
+            Console.WriteLine(element.GetProperty("name").ToString());
         }
 
         [Test]
@@ -811,10 +811,10 @@ unionProperty = "<unionProperty>",
             });
             Response response = await client.UnpollutedDerivedMethodAsync(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("meow").ToString());
-            Console.WriteLine(result.GetProperty("kind").ToString());
-            Console.WriteLine(result.GetProperty("name").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("meow").ToString());
+            Console.WriteLine(element.GetProperty("kind").ToString());
+            Console.WriteLine(element.GetProperty("name").ToString());
         }
 
         [Test]
@@ -832,10 +832,10 @@ unionProperty = "<unionProperty>",
             });
             Response response = client.UnpollutedDerivedMethod(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("meow").ToString());
-            Console.WriteLine(result.GetProperty("kind").ToString());
-            Console.WriteLine(result.GetProperty("name").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("meow").ToString());
+            Console.WriteLine(element.GetProperty("kind").ToString());
+            Console.WriteLine(element.GetProperty("name").ToString());
         }
 
         [Test]
@@ -853,10 +853,10 @@ unionProperty = "<unionProperty>",
             });
             Response response = await client.UnpollutedDerivedMethodAsync(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("meow").ToString());
-            Console.WriteLine(result.GetProperty("kind").ToString());
-            Console.WriteLine(result.GetProperty("name").ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("meow").ToString());
+            Console.WriteLine(element.GetProperty("kind").ToString());
+            Console.WriteLine(element.GetProperty("name").ToString());
         }
 
         [Test]

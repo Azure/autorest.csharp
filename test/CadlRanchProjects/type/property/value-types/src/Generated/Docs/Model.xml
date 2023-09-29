@@ -39,8 +39,8 @@ Model client = new ValueTypesClient().GetModelClient(apiVersion: "1.0.0");
 
 Response response = await client.GetModelAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("property").GetProperty("property").ToString());
+JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("property").GetProperty("property").ToString());
 ]]></code>
 This sample shows how to call GetModelAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -48,8 +48,8 @@ Model client = new ValueTypesClient().GetModelClient(apiVersion: "1.0.0");
 
 Response response = await client.GetModelAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("property").GetProperty("property").ToString());
+JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("property").GetProperty("property").ToString());
 ]]></code></example>
     </member>
     <member name="GetModel(RequestContext)">
@@ -60,8 +60,8 @@ Model client = new ValueTypesClient().GetModelClient(apiVersion: "1.0.0");
 
 Response response = client.GetModel(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("property").GetProperty("property").ToString());
+JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("property").GetProperty("property").ToString());
 ]]></code>
 This sample shows how to call GetModel with all parameters and parse the result.
 <code><![CDATA[
@@ -69,8 +69,8 @@ Model client = new ValueTypesClient().GetModelClient(apiVersion: "1.0.0");
 
 Response response = client.GetModel(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("property").GetProperty("property").ToString());
+JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("property").GetProperty("property").ToString());
 ]]></code></example>
     </member>
     <member name="PutAsync(ModelProperty,CancellationToken)">

@@ -185,8 +185,8 @@ namespace BodyAndPath_LowLevel.Samples
 
             Response response = client.GetBodyAndPaths(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element[0].ToString());
         }
 
         [Test]
@@ -198,8 +198,8 @@ namespace BodyAndPath_LowLevel.Samples
 
             Response response = await client.GetBodyAndPathsAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element[0].ToString());
         }
 
         [Test]
@@ -211,8 +211,8 @@ namespace BodyAndPath_LowLevel.Samples
 
             Response response = client.GetBodyAndPaths(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element[0].ToString());
         }
 
         [Test]
@@ -224,8 +224,8 @@ namespace BodyAndPath_LowLevel.Samples
 
             Response response = await client.GetBodyAndPathsAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element[0].ToString());
         }
 
         [Test]
@@ -237,8 +237,8 @@ namespace BodyAndPath_LowLevel.Samples
 
             Response response = client.GetItems(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element[0].ToString());
         }
 
         [Test]
@@ -250,8 +250,8 @@ namespace BodyAndPath_LowLevel.Samples
 
             Response response = await client.GetItemsAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element[0].ToString());
         }
 
         [Test]
@@ -263,8 +263,8 @@ namespace BodyAndPath_LowLevel.Samples
 
             Response response = client.GetItems(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element[0].ToString());
         }
 
         [Test]
@@ -276,8 +276,8 @@ namespace BodyAndPath_LowLevel.Samples
 
             Response response = await client.GetItemsAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
+            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(element[0].ToString());
         }
 
         [Test]
