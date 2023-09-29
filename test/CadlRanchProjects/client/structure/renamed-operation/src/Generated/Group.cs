@@ -18,6 +18,7 @@ namespace Client.Structure.Service.rename.operation
     public partial class Group
     {
         private readonly HttpPipeline _pipeline;
+        private readonly Uri _endpoint;
         private readonly string _client;
         private readonly string _apiVersion;
 
@@ -35,12 +36,14 @@ namespace Client.Structure.Service.rename.operation
         /// <summary> Initializes a new instance of Group. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="client"> The ClientType to use. Allowed values: "default" | "multi-client" | "renamed-operation" | "two-operation-group". </param>
+        /// <param name="endpoint"> Need to be set as 'http://localhost:3000' in client. </param>
+        /// <param name="client"> Need to be set as 'default', 'multi-client', 'renamed-operation', 'two-operation-group' in client. Allowed values: "default" | "multi-client" | "renamed-operation" | "two-operation-group". </param>
         /// <param name="apiVersion"> The String to use. </param>
-        internal Group(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string client, string apiVersion)
+        internal Group(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint, string client, string apiVersion)
         {
             ClientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
+            _endpoint = endpoint;
             _client = client;
             _apiVersion = apiVersion;
         }
@@ -237,7 +240,8 @@ namespace Client.Structure.Service.rename.operation
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw("http://localhost:3000/client/structure/", false);
+            uri.Reset(_endpoint);
+            uri.AppendRaw("/client/structure/", false);
             uri.AppendRaw(_client, true);
             uri.AppendPath("/two", false);
             uri.AppendQuery("api-version", _apiVersion, true);
@@ -252,7 +256,8 @@ namespace Client.Structure.Service.rename.operation
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw("http://localhost:3000/client/structure/", false);
+            uri.Reset(_endpoint);
+            uri.AppendRaw("/client/structure/", false);
             uri.AppendRaw(_client, true);
             uri.AppendPath("/four", false);
             uri.AppendQuery("api-version", _apiVersion, true);
@@ -267,7 +272,8 @@ namespace Client.Structure.Service.rename.operation
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw("http://localhost:3000/client/structure/", false);
+            uri.Reset(_endpoint);
+            uri.AppendRaw("/client/structure/", false);
             uri.AppendRaw(_client, true);
             uri.AppendPath("/six", false);
             uri.AppendQuery("api-version", _apiVersion, true);

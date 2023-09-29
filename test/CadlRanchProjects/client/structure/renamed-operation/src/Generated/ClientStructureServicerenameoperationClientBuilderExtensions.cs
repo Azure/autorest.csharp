@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using Azure.Core.Extensions;
 using Client.Structure.Service.rename.operation;
 
@@ -15,11 +16,12 @@ namespace Microsoft.Extensions.Azure
     {
         /// <summary> Registers a <see cref="RenamedOperationClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>
-        /// <param name="client"> The ClientType to use. Allowed values: "default" | "multi-client" | "renamed-operation" | "two-operation-group". </param>
-        public static IAzureClientBuilder<RenamedOperationClient, RenamedOperationClientOptions> AddRenamedOperationClient<TBuilder>(this TBuilder builder, string client)
+        /// <param name="endpoint"> Need to be set as 'http://localhost:3000' in client. </param>
+        /// <param name="client"> Need to be set as 'default', 'multi-client', 'renamed-operation', 'two-operation-group' in client. Allowed values: "default" | "multi-client" | "renamed-operation" | "two-operation-group". </param>
+        public static IAzureClientBuilder<RenamedOperationClient, RenamedOperationClientOptions> AddRenamedOperationClient<TBuilder>(this TBuilder builder, Uri endpoint, string client)
         where TBuilder : IAzureClientFactoryBuilder
         {
-            return builder.RegisterClientFactory<RenamedOperationClient, RenamedOperationClientOptions>((options) => new RenamedOperationClient(client, options));
+            return builder.RegisterClientFactory<RenamedOperationClient, RenamedOperationClientOptions>((options) => new RenamedOperationClient(endpoint, client, options));
         }
 
         /// <summary> Registers a <see cref="RenamedOperationClient"/> instance. </summary>
