@@ -23,6 +23,9 @@ namespace OpenAI
     /// <summary> The OpenAI service client. </summary>
     public partial class OpenAIClient
     {
+        private const string AuthorizationHeader = "Authorization";
+        private readonly KeyCredential _keyCredential;
+        private const string AuthorizationApiKeyPrefix = "Bearer";
         private readonly MessagePipeline _pipeline;
         private readonly Uri _endpoint;
 
@@ -32,22 +35,32 @@ namespace OpenAI
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual MessagePipeline Pipeline => _pipeline;
 
+        /// <summary> Initializes a new instance of OpenAIClient for mocking. </summary>
+        protected OpenAIClient()
+        {
+        }
+
         /// <summary> Initializes a new instance of OpenAIClient. </summary>
-        public OpenAIClient() : this(new Uri("https://api.openai.com/v1"), new OpenAIClientOptions())
+        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
+        public OpenAIClient(KeyCredential credential) : this(new Uri("https://api.openai.com/v1"), credential, new OpenAIClientOptions())
         {
         }
 
         /// <summary> Initializes a new instance of OpenAIClient. </summary>
         /// <param name="endpoint"> OpenAI Endpoint. </param>
+        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="options"> The options for configuring the client. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
-        public OpenAIClient(Uri endpoint, OpenAIClientOptions options)
+        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
+        public OpenAIClient(Uri endpoint, KeyCredential credential, OpenAIClientOptions options)
         {
             ClientUtilities.AssertNotNull(endpoint, nameof(endpoint));
+            ClientUtilities.AssertNotNull(credential, nameof(credential));
             options ??= new OpenAIClientOptions();
 
             ClientDiagnostics = new TelemetrySource(options, true);
-            _pipeline = MessagePipeline.Create(new MessagePipelineTransport(), options, Array.Empty<IPipelinePolicy<PipelineMessage>>(), Array.Empty<IPipelinePolicy<PipelineMessage>>());
+            _keyCredential = credential;
+            _pipeline = MessagePipeline.Create(new MessagePipelineTransport(), options, new IPipelinePolicy<PipelineMessage>[] { new KeyCredentialPolicy(_keyCredential, AuthorizationHeader, AuthorizationApiKeyPrefix) }, Array.Empty<IPipelinePolicy<PipelineMessage>>());
             _endpoint = endpoint;
         }
 

@@ -5,7 +5,8 @@
       <example>
 This sample shows how to call CreateChatCompletionAsync.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 CreateChatCompletionRequest body = new CreateChatCompletionRequest(ChatCompletionModels.Gpt4, new ChatCompletionRequestMessage[]
 {
@@ -15,7 +16,8 @@ Result<CreateChatCompletionResponse> result = await client.CreateChatCompletionA
 ]]></code>
 This sample shows how to call CreateChatCompletionAsync with all parameters.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 CreateChatCompletionRequest body = new CreateChatCompletionRequest(ChatCompletionModels.Gpt4, new ChatCompletionRequestMessage[]
 {
@@ -55,7 +57,8 @@ Result<CreateChatCompletionResponse> result = await client.CreateChatCompletionA
       <example>
 This sample shows how to call CreateChatCompletion.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 CreateChatCompletionRequest body = new CreateChatCompletionRequest(ChatCompletionModels.Gpt4, new ChatCompletionRequestMessage[]
 {
@@ -65,7 +68,8 @@ Result<CreateChatCompletionResponse> result = client.CreateChatCompletion(body);
 ]]></code>
 This sample shows how to call CreateChatCompletion with all parameters.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 CreateChatCompletionRequest body = new CreateChatCompletionRequest(ChatCompletionModels.Gpt4, new ChatCompletionRequestMessage[]
 {
@@ -105,7 +109,8 @@ Result<CreateChatCompletionResponse> result = client.CreateChatCompletion(body);
       <example>
 This sample shows how to call CreateChatCompletionAsync and parse the result.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
 {
@@ -133,7 +138,8 @@ Console.WriteLine(element.GetProperty("choices")[0].GetProperty("finish_reason")
 ]]></code>
 This sample shows how to call CreateChatCompletionAsync with all request content and parse the result.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
 {
@@ -207,7 +213,8 @@ Console.WriteLine(element.GetProperty("usage").GetProperty("total_tokens").ToStr
       <example>
 This sample shows how to call CreateChatCompletion and parse the result.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
 {
@@ -235,7 +242,8 @@ Console.WriteLine(element.GetProperty("choices")[0].GetProperty("finish_reason")
 ]]></code>
 This sample shows how to call CreateChatCompletion with all request content and parse the result.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
 {
@@ -309,14 +317,16 @@ Console.WriteLine(element.GetProperty("usage").GetProperty("total_tokens").ToStr
       <example>
 This sample shows how to call CreateTranscriptionAsync.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 CreateTranscriptionRequest audio = new CreateTranscriptionRequest(BinaryData.FromObjectAsJson(new object()), AudioModels.Whisper1);
 Result<CreateTranscriptionResponse> result = await client.CreateTranscriptionAsync(audio);
 ]]></code>
 This sample shows how to call CreateTranscriptionAsync with all parameters.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 CreateTranscriptionRequest audio = new CreateTranscriptionRequest(BinaryData.FromObjectAsJson(new object()), AudioModels.Whisper1)
 {
@@ -332,14 +342,16 @@ Result<CreateTranscriptionResponse> result = await client.CreateTranscriptionAsy
       <example>
 This sample shows how to call CreateTranscription.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 CreateTranscriptionRequest audio = new CreateTranscriptionRequest(BinaryData.FromObjectAsJson(new object()), AudioModels.Whisper1);
 Result<CreateTranscriptionResponse> result = client.CreateTranscription(audio);
 ]]></code>
 This sample shows how to call CreateTranscription with all parameters.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 CreateTranscriptionRequest audio = new CreateTranscriptionRequest(BinaryData.FromObjectAsJson(new object()), AudioModels.Whisper1)
 {
@@ -355,7 +367,8 @@ Result<CreateTranscriptionResponse> result = client.CreateTranscription(audio);
       <example>
 This sample shows how to call CreateTranscriptionAsync and parse the result.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
 {
@@ -369,7 +382,8 @@ Console.WriteLine(element.GetProperty("text").ToString());
 ]]></code>
 This sample shows how to call CreateTranscriptionAsync with all request content and parse the result.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
 {
@@ -390,7 +404,8 @@ Console.WriteLine(element.GetProperty("text").ToString());
       <example>
 This sample shows how to call CreateTranscription and parse the result.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
 {
@@ -404,7 +419,8 @@ Console.WriteLine(element.GetProperty("text").ToString());
 ]]></code>
 This sample shows how to call CreateTranscription with all request content and parse the result.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
 {
@@ -425,14 +441,16 @@ Console.WriteLine(element.GetProperty("text").ToString());
       <example>
 This sample shows how to call CreateTranslationAsync.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 CreateTranslationRequest audio = new CreateTranslationRequest(BinaryData.FromObjectAsJson(new object()), AudioModels.Whisper1);
 Result<CreateTranslationResponse> result = await client.CreateTranslationAsync(audio);
 ]]></code>
 This sample shows how to call CreateTranslationAsync with all parameters.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 CreateTranslationRequest audio = new CreateTranslationRequest(BinaryData.FromObjectAsJson(new object()), AudioModels.Whisper1)
 {
@@ -447,14 +465,16 @@ Result<CreateTranslationResponse> result = await client.CreateTranslationAsync(a
       <example>
 This sample shows how to call CreateTranslation.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 CreateTranslationRequest audio = new CreateTranslationRequest(BinaryData.FromObjectAsJson(new object()), AudioModels.Whisper1);
 Result<CreateTranslationResponse> result = client.CreateTranslation(audio);
 ]]></code>
 This sample shows how to call CreateTranslation with all parameters.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 CreateTranslationRequest audio = new CreateTranslationRequest(BinaryData.FromObjectAsJson(new object()), AudioModels.Whisper1)
 {
@@ -469,7 +489,8 @@ Result<CreateTranslationResponse> result = client.CreateTranslation(audio);
       <example>
 This sample shows how to call CreateTranslationAsync and parse the result.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
 {
@@ -483,7 +504,8 @@ Console.WriteLine(element.GetProperty("text").ToString());
 ]]></code>
 This sample shows how to call CreateTranslationAsync with all request content and parse the result.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
 {
@@ -503,7 +525,8 @@ Console.WriteLine(element.GetProperty("text").ToString());
       <example>
 This sample shows how to call CreateTranslation and parse the result.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
 {
@@ -517,7 +540,8 @@ Console.WriteLine(element.GetProperty("text").ToString());
 ]]></code>
 This sample shows how to call CreateTranslation with all request content and parse the result.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
 {
@@ -537,14 +561,16 @@ Console.WriteLine(element.GetProperty("text").ToString());
       <example>
 This sample shows how to call CreateFineTuningJobAsync.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 CreateFineTuningJobRequest job = new CreateFineTuningJobRequest("<training_file>", FineTuningJobModels.Babbage002);
 Result<FineTuningJob> result = await client.CreateFineTuningJobAsync(job);
 ]]></code>
 This sample shows how to call CreateFineTuningJobAsync with all parameters.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 CreateFineTuningJobRequest job = new CreateFineTuningJobRequest("<training_file>", FineTuningJobModels.Babbage002)
 {
@@ -562,14 +588,16 @@ Result<FineTuningJob> result = await client.CreateFineTuningJobAsync(job);
       <example>
 This sample shows how to call CreateFineTuningJob.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 CreateFineTuningJobRequest job = new CreateFineTuningJobRequest("<training_file>", FineTuningJobModels.Babbage002);
 Result<FineTuningJob> result = client.CreateFineTuningJob(job);
 ]]></code>
 This sample shows how to call CreateFineTuningJob with all parameters.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 CreateFineTuningJobRequest job = new CreateFineTuningJobRequest("<training_file>", FineTuningJobModels.Babbage002)
 {
@@ -587,7 +615,8 @@ Result<FineTuningJob> result = client.CreateFineTuningJob(job);
       <example>
 This sample shows how to call CreateFineTuningJobAsync and parse the result.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
 {
@@ -614,7 +643,8 @@ Console.WriteLine(element.GetProperty("error").ToString());
 ]]></code>
 This sample shows how to call CreateFineTuningJobAsync with all request content and parse the result.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
 {
@@ -652,7 +682,8 @@ Console.WriteLine(element.GetProperty("error").GetProperty("param").ToString());
       <example>
 This sample shows how to call CreateFineTuningJob and parse the result.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
 {
@@ -679,7 +710,8 @@ Console.WriteLine(element.GetProperty("error").ToString());
 ]]></code>
 This sample shows how to call CreateFineTuningJob with all request content and parse the result.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
 {
@@ -717,13 +749,15 @@ Console.WriteLine(element.GetProperty("error").GetProperty("param").ToString());
       <example>
 This sample shows how to call GetPaginatedFineTuningJobsAsync.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 Result<ListPaginatedFineTuningJobsResponse> result = await client.GetPaginatedFineTuningJobsAsync();
 ]]></code>
 This sample shows how to call GetPaginatedFineTuningJobsAsync with all parameters.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 Result<ListPaginatedFineTuningJobsResponse> result = await client.GetPaginatedFineTuningJobsAsync(after: "<after>", limit: 1234L);
 ]]></code></example>
@@ -732,13 +766,15 @@ Result<ListPaginatedFineTuningJobsResponse> result = await client.GetPaginatedFi
       <example>
 This sample shows how to call GetPaginatedFineTuningJobs.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 Result<ListPaginatedFineTuningJobsResponse> result = client.GetPaginatedFineTuningJobs();
 ]]></code>
 This sample shows how to call GetPaginatedFineTuningJobs with all parameters.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 Result<ListPaginatedFineTuningJobsResponse> result = client.GetPaginatedFineTuningJobs(after: "<after>", limit: 1234L);
 ]]></code></example>
@@ -747,7 +783,8 @@ Result<ListPaginatedFineTuningJobsResponse> result = client.GetPaginatedFineTuni
       <example>
 This sample shows how to call GetPaginatedFineTuningJobsAsync and parse the result.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 Result result = await client.GetPaginatedFineTuningJobsAsync(null, null, null);
 
@@ -771,7 +808,8 @@ Console.WriteLine(element.GetProperty("has_more").ToString());
 ]]></code>
 This sample shows how to call GetPaginatedFineTuningJobsAsync with all parameters and parse the result.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 Result result = await client.GetPaginatedFineTuningJobsAsync("<after>", 1234L, null);
 
@@ -800,7 +838,8 @@ Console.WriteLine(element.GetProperty("has_more").ToString());
       <example>
 This sample shows how to call GetPaginatedFineTuningJobs and parse the result.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 Result result = client.GetPaginatedFineTuningJobs(null, null, null);
 
@@ -824,7 +863,8 @@ Console.WriteLine(element.GetProperty("has_more").ToString());
 ]]></code>
 This sample shows how to call GetPaginatedFineTuningJobs with all parameters and parse the result.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 Result result = client.GetPaginatedFineTuningJobs("<after>", 1234L, null);
 
@@ -853,13 +893,15 @@ Console.WriteLine(element.GetProperty("has_more").ToString());
       <example>
 This sample shows how to call RetrieveFineTuningJobAsync.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 Result<FineTuningJob> result = await client.RetrieveFineTuningJobAsync("<fine_tuning_job_id>");
 ]]></code>
 This sample shows how to call RetrieveFineTuningJobAsync with all parameters.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 Result<FineTuningJob> result = await client.RetrieveFineTuningJobAsync("<fine_tuning_job_id>");
 ]]></code></example>
@@ -868,13 +910,15 @@ Result<FineTuningJob> result = await client.RetrieveFineTuningJobAsync("<fine_tu
       <example>
 This sample shows how to call RetrieveFineTuningJob.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 Result<FineTuningJob> result = client.RetrieveFineTuningJob("<fine_tuning_job_id>");
 ]]></code>
 This sample shows how to call RetrieveFineTuningJob with all parameters.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 Result<FineTuningJob> result = client.RetrieveFineTuningJob("<fine_tuning_job_id>");
 ]]></code></example>
@@ -883,7 +927,8 @@ Result<FineTuningJob> result = client.RetrieveFineTuningJob("<fine_tuning_job_id
       <example>
 This sample shows how to call RetrieveFineTuningJobAsync and parse the result.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 Result result = await client.RetrieveFineTuningJobAsync("<fine_tuning_job_id>", null);
 
@@ -905,7 +950,8 @@ Console.WriteLine(element.GetProperty("error").ToString());
 ]]></code>
 This sample shows how to call RetrieveFineTuningJobAsync with all parameters and parse the result.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 Result result = await client.RetrieveFineTuningJobAsync("<fine_tuning_job_id>", null);
 
@@ -932,7 +978,8 @@ Console.WriteLine(element.GetProperty("error").GetProperty("param").ToString());
       <example>
 This sample shows how to call RetrieveFineTuningJob and parse the result.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 Result result = client.RetrieveFineTuningJob("<fine_tuning_job_id>", null);
 
@@ -954,7 +1001,8 @@ Console.WriteLine(element.GetProperty("error").ToString());
 ]]></code>
 This sample shows how to call RetrieveFineTuningJob with all parameters and parse the result.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 Result result = client.RetrieveFineTuningJob("<fine_tuning_job_id>", null);
 
@@ -981,13 +1029,15 @@ Console.WriteLine(element.GetProperty("error").GetProperty("param").ToString());
       <example>
 This sample shows how to call GetFineTuningEventsAsync.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 Result<ListFineTuningJobEventsResponse> result = await client.GetFineTuningEventsAsync("<fine_tuning_job_id>");
 ]]></code>
 This sample shows how to call GetFineTuningEventsAsync with all parameters.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 Result<ListFineTuningJobEventsResponse> result = await client.GetFineTuningEventsAsync("<fine_tuning_job_id>", after: "<after>");
 ]]></code></example>
@@ -996,13 +1046,15 @@ Result<ListFineTuningJobEventsResponse> result = await client.GetFineTuningEvent
       <example>
 This sample shows how to call GetFineTuningEvents.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 Result<ListFineTuningJobEventsResponse> result = client.GetFineTuningEvents("<fine_tuning_job_id>");
 ]]></code>
 This sample shows how to call GetFineTuningEvents with all parameters.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 Result<ListFineTuningJobEventsResponse> result = client.GetFineTuningEvents("<fine_tuning_job_id>", after: "<after>");
 ]]></code></example>
@@ -1011,7 +1063,8 @@ Result<ListFineTuningJobEventsResponse> result = client.GetFineTuningEvents("<fi
       <example>
 This sample shows how to call GetFineTuningEventsAsync and parse the result.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 Result result = await client.GetFineTuningEventsAsync("<fine_tuning_job_id>", null, null);
 
@@ -1025,7 +1078,8 @@ Console.WriteLine(element.GetProperty("data")[0].GetProperty("message").ToString
 ]]></code>
 This sample shows how to call GetFineTuningEventsAsync with all parameters and parse the result.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 Result result = await client.GetFineTuningEventsAsync("<fine_tuning_job_id>", "<after>", null);
 
@@ -1042,7 +1096,8 @@ Console.WriteLine(element.GetProperty("data")[0].GetProperty("message").ToString
       <example>
 This sample shows how to call GetFineTuningEvents and parse the result.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 Result result = client.GetFineTuningEvents("<fine_tuning_job_id>", null, null);
 
@@ -1056,7 +1111,8 @@ Console.WriteLine(element.GetProperty("data")[0].GetProperty("message").ToString
 ]]></code>
 This sample shows how to call GetFineTuningEvents with all parameters and parse the result.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 Result result = client.GetFineTuningEvents("<fine_tuning_job_id>", "<after>", null);
 
@@ -1073,13 +1129,15 @@ Console.WriteLine(element.GetProperty("data")[0].GetProperty("message").ToString
       <example>
 This sample shows how to call CancelFineTuningJobAsync.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 Result<FineTuningJob> result = await client.CancelFineTuningJobAsync("<fine_tuning_job_id>");
 ]]></code>
 This sample shows how to call CancelFineTuningJobAsync with all parameters.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 Result<FineTuningJob> result = await client.CancelFineTuningJobAsync("<fine_tuning_job_id>");
 ]]></code></example>
@@ -1088,13 +1146,15 @@ Result<FineTuningJob> result = await client.CancelFineTuningJobAsync("<fine_tuni
       <example>
 This sample shows how to call CancelFineTuningJob.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 Result<FineTuningJob> result = client.CancelFineTuningJob("<fine_tuning_job_id>");
 ]]></code>
 This sample shows how to call CancelFineTuningJob with all parameters.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 Result<FineTuningJob> result = client.CancelFineTuningJob("<fine_tuning_job_id>");
 ]]></code></example>
@@ -1103,7 +1163,8 @@ Result<FineTuningJob> result = client.CancelFineTuningJob("<fine_tuning_job_id>"
       <example>
 This sample shows how to call CancelFineTuningJobAsync and parse the result.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 Result result = await client.CancelFineTuningJobAsync("<fine_tuning_job_id>", null);
 
@@ -1125,7 +1186,8 @@ Console.WriteLine(element.GetProperty("error").ToString());
 ]]></code>
 This sample shows how to call CancelFineTuningJobAsync with all parameters and parse the result.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 Result result = await client.CancelFineTuningJobAsync("<fine_tuning_job_id>", null);
 
@@ -1152,7 +1214,8 @@ Console.WriteLine(element.GetProperty("error").GetProperty("param").ToString());
       <example>
 This sample shows how to call CancelFineTuningJob and parse the result.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 Result result = client.CancelFineTuningJob("<fine_tuning_job_id>", null);
 
@@ -1174,7 +1237,8 @@ Console.WriteLine(element.GetProperty("error").ToString());
 ]]></code>
 This sample shows how to call CancelFineTuningJob with all parameters and parse the result.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 Result result = client.CancelFineTuningJob("<fine_tuning_job_id>", null);
 
@@ -1201,14 +1265,16 @@ Console.WriteLine(element.GetProperty("error").GetProperty("param").ToString());
       <example>
 This sample shows how to call CreateCompletionAsync.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 CreateCompletionRequest body = new CreateCompletionRequest(CompletionModels.Babbage002, BinaryData.FromObjectAsJson(new object()), 1234L);
 Result<CreateCompletionResponse> result = await client.CreateCompletionAsync(body);
 ]]></code>
 This sample shows how to call CreateCompletionAsync with all parameters.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 CreateCompletionRequest body = new CreateCompletionRequest(CompletionModels.Babbage002, BinaryData.FromObjectAsJson(new object()), 1234L)
 {
@@ -1236,14 +1302,16 @@ Result<CreateCompletionResponse> result = await client.CreateCompletionAsync(bod
       <example>
 This sample shows how to call CreateCompletion.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 CreateCompletionRequest body = new CreateCompletionRequest(CompletionModels.Babbage002, BinaryData.FromObjectAsJson(new object()), 1234L);
 Result<CreateCompletionResponse> result = client.CreateCompletion(body);
 ]]></code>
 This sample shows how to call CreateCompletion with all parameters.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 CreateCompletionRequest body = new CreateCompletionRequest(CompletionModels.Babbage002, BinaryData.FromObjectAsJson(new object()), 1234L)
 {
@@ -1271,7 +1339,8 @@ Result<CreateCompletionResponse> result = client.CreateCompletion(body);
       <example>
 This sample shows how to call CreateCompletionAsync and parse the result.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
 {
@@ -1296,7 +1365,8 @@ Console.WriteLine(element.GetProperty("choices")[0].GetProperty("finish_reason")
 ]]></code>
 This sample shows how to call CreateCompletionAsync with all request content and parse the result.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
 {
@@ -1346,7 +1416,8 @@ Console.WriteLine(element.GetProperty("usage").GetProperty("total_tokens").ToStr
       <example>
 This sample shows how to call CreateCompletion and parse the result.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
 {
@@ -1371,7 +1442,8 @@ Console.WriteLine(element.GetProperty("choices")[0].GetProperty("finish_reason")
 ]]></code>
 This sample shows how to call CreateCompletion with all request content and parse the result.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
 {
@@ -1421,14 +1493,16 @@ Console.WriteLine(element.GetProperty("usage").GetProperty("total_tokens").ToStr
       <example>
 This sample shows how to call CreateImageAsync.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 CreateImageRequest image = new CreateImageRequest("<prompt>");
 Result<ImagesResponse> result = await client.CreateImageAsync(image);
 ]]></code>
 This sample shows how to call CreateImageAsync with all parameters.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 CreateImageRequest image = new CreateImageRequest("<prompt>")
 {
@@ -1444,14 +1518,16 @@ Result<ImagesResponse> result = await client.CreateImageAsync(image);
       <example>
 This sample shows how to call CreateImage.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 CreateImageRequest image = new CreateImageRequest("<prompt>");
 Result<ImagesResponse> result = client.CreateImage(image);
 ]]></code>
 This sample shows how to call CreateImage with all parameters.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 CreateImageRequest image = new CreateImageRequest("<prompt>")
 {
@@ -1467,7 +1543,8 @@ Result<ImagesResponse> result = client.CreateImage(image);
       <example>
 This sample shows how to call CreateImageAsync and parse the result.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
 {
@@ -1481,7 +1558,8 @@ Console.WriteLine(element.GetProperty("data")[0].ToString());
 ]]></code>
 This sample shows how to call CreateImageAsync with all request content and parse the result.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
 {
@@ -1503,7 +1581,8 @@ Console.WriteLine(element.GetProperty("data")[0].GetProperty("b64_json").ToStrin
       <example>
 This sample shows how to call CreateImage and parse the result.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
 {
@@ -1517,7 +1596,8 @@ Console.WriteLine(element.GetProperty("data")[0].ToString());
 ]]></code>
 This sample shows how to call CreateImage with all request content and parse the result.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
 {
@@ -1539,14 +1619,16 @@ Console.WriteLine(element.GetProperty("data")[0].GetProperty("b64_json").ToStrin
       <example>
 This sample shows how to call CreateImageEditAsync.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 CreateImageEditRequest image = new CreateImageEditRequest("<prompt>", BinaryData.FromObjectAsJson(new object()));
 Result<ImagesResponse> result = await client.CreateImageEditAsync(image);
 ]]></code>
 This sample shows how to call CreateImageEditAsync with all parameters.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 CreateImageEditRequest image = new CreateImageEditRequest("<prompt>", BinaryData.FromObjectAsJson(new object()))
 {
@@ -1563,14 +1645,16 @@ Result<ImagesResponse> result = await client.CreateImageEditAsync(image);
       <example>
 This sample shows how to call CreateImageEdit.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 CreateImageEditRequest image = new CreateImageEditRequest("<prompt>", BinaryData.FromObjectAsJson(new object()));
 Result<ImagesResponse> result = client.CreateImageEdit(image);
 ]]></code>
 This sample shows how to call CreateImageEdit with all parameters.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 CreateImageEditRequest image = new CreateImageEditRequest("<prompt>", BinaryData.FromObjectAsJson(new object()))
 {
@@ -1587,7 +1671,8 @@ Result<ImagesResponse> result = client.CreateImageEdit(image);
       <example>
 This sample shows how to call CreateImageEditAsync and parse the result.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
 {
@@ -1602,7 +1687,8 @@ Console.WriteLine(element.GetProperty("data")[0].ToString());
 ]]></code>
 This sample shows how to call CreateImageEditAsync with all request content and parse the result.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
 {
@@ -1626,7 +1712,8 @@ Console.WriteLine(element.GetProperty("data")[0].GetProperty("b64_json").ToStrin
       <example>
 This sample shows how to call CreateImageEdit and parse the result.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
 {
@@ -1641,7 +1728,8 @@ Console.WriteLine(element.GetProperty("data")[0].ToString());
 ]]></code>
 This sample shows how to call CreateImageEdit with all request content and parse the result.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
 {
@@ -1665,14 +1753,16 @@ Console.WriteLine(element.GetProperty("data")[0].GetProperty("b64_json").ToStrin
       <example>
 This sample shows how to call CreateImageVariationAsync.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 CreateImageVariationRequest image = new CreateImageVariationRequest(BinaryData.FromObjectAsJson(new object()));
 Result<ImagesResponse> result = await client.CreateImageVariationAsync(image);
 ]]></code>
 This sample shows how to call CreateImageVariationAsync with all parameters.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 CreateImageVariationRequest image = new CreateImageVariationRequest(BinaryData.FromObjectAsJson(new object()))
 {
@@ -1688,14 +1778,16 @@ Result<ImagesResponse> result = await client.CreateImageVariationAsync(image);
       <example>
 This sample shows how to call CreateImageVariation.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 CreateImageVariationRequest image = new CreateImageVariationRequest(BinaryData.FromObjectAsJson(new object()));
 Result<ImagesResponse> result = client.CreateImageVariation(image);
 ]]></code>
 This sample shows how to call CreateImageVariation with all parameters.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 CreateImageVariationRequest image = new CreateImageVariationRequest(BinaryData.FromObjectAsJson(new object()))
 {
@@ -1711,7 +1803,8 @@ Result<ImagesResponse> result = client.CreateImageVariation(image);
       <example>
 This sample shows how to call CreateImageVariationAsync and parse the result.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
 {
@@ -1725,7 +1818,8 @@ Console.WriteLine(element.GetProperty("data")[0].ToString());
 ]]></code>
 This sample shows how to call CreateImageVariationAsync with all request content and parse the result.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
 {
@@ -1747,7 +1841,8 @@ Console.WriteLine(element.GetProperty("data")[0].GetProperty("b64_json").ToStrin
       <example>
 This sample shows how to call CreateImageVariation and parse the result.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
 {
@@ -1761,7 +1856,8 @@ Console.WriteLine(element.GetProperty("data")[0].ToString());
 ]]></code>
 This sample shows how to call CreateImageVariation with all request content and parse the result.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
 {
@@ -1783,14 +1879,16 @@ Console.WriteLine(element.GetProperty("data")[0].GetProperty("b64_json").ToStrin
       <example>
 This sample shows how to call CreateEmbeddingAsync.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 CreateEmbeddingRequest embedding = new CreateEmbeddingRequest(EmbeddingsModels.TextEmbeddingAda002, BinaryData.FromObjectAsJson(new object()));
 Result<CreateEmbeddingResponse> result = await client.CreateEmbeddingAsync(embedding);
 ]]></code>
 This sample shows how to call CreateEmbeddingAsync with all parameters.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 CreateEmbeddingRequest embedding = new CreateEmbeddingRequest(EmbeddingsModels.TextEmbeddingAda002, BinaryData.FromObjectAsJson(new object()))
 {
@@ -1803,14 +1901,16 @@ Result<CreateEmbeddingResponse> result = await client.CreateEmbeddingAsync(embed
       <example>
 This sample shows how to call CreateEmbedding.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 CreateEmbeddingRequest embedding = new CreateEmbeddingRequest(EmbeddingsModels.TextEmbeddingAda002, BinaryData.FromObjectAsJson(new object()));
 Result<CreateEmbeddingResponse> result = client.CreateEmbedding(embedding);
 ]]></code>
 This sample shows how to call CreateEmbedding with all parameters.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 CreateEmbeddingRequest embedding = new CreateEmbeddingRequest(EmbeddingsModels.TextEmbeddingAda002, BinaryData.FromObjectAsJson(new object()))
 {
@@ -1823,7 +1923,8 @@ Result<CreateEmbeddingResponse> result = client.CreateEmbedding(embedding);
       <example>
 This sample shows how to call CreateEmbeddingAsync and parse the result.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
 {
@@ -1843,7 +1944,8 @@ Console.WriteLine(element.GetProperty("usage").GetProperty("total_tokens").ToStr
 ]]></code>
 This sample shows how to call CreateEmbeddingAsync with all request content and parse the result.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
 {
@@ -1867,7 +1969,8 @@ Console.WriteLine(element.GetProperty("usage").GetProperty("total_tokens").ToStr
       <example>
 This sample shows how to call CreateEmbedding and parse the result.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
 {
@@ -1887,7 +1990,8 @@ Console.WriteLine(element.GetProperty("usage").GetProperty("total_tokens").ToStr
 ]]></code>
 This sample shows how to call CreateEmbedding with all request content and parse the result.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
 {
@@ -1911,13 +2015,15 @@ Console.WriteLine(element.GetProperty("usage").GetProperty("total_tokens").ToStr
       <example>
 This sample shows how to call GetFilesAsync.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 Result<ListFilesResponse> result = await client.GetFilesAsync();
 ]]></code>
 This sample shows how to call GetFilesAsync with all parameters.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 Result<ListFilesResponse> result = await client.GetFilesAsync();
 ]]></code></example>
@@ -1926,13 +2032,15 @@ Result<ListFilesResponse> result = await client.GetFilesAsync();
       <example>
 This sample shows how to call GetFiles.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 Result<ListFilesResponse> result = client.GetFiles();
 ]]></code>
 This sample shows how to call GetFiles with all parameters.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 Result<ListFilesResponse> result = client.GetFiles();
 ]]></code></example>
@@ -1941,7 +2049,8 @@ Result<ListFilesResponse> result = client.GetFiles();
       <example>
 This sample shows how to call GetFilesAsync and parse the result.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 Result result = await client.GetFilesAsync(null);
 
@@ -1957,7 +2066,8 @@ Console.WriteLine(element.GetProperty("data")[0].GetProperty("status").ToString(
 ]]></code>
 This sample shows how to call GetFilesAsync with all parameters and parse the result.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 Result result = await client.GetFilesAsync(null);
 
@@ -1977,7 +2087,8 @@ Console.WriteLine(element.GetProperty("data")[0].GetProperty("status_details").T
       <example>
 This sample shows how to call GetFiles and parse the result.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 Result result = client.GetFiles(null);
 
@@ -1993,7 +2104,8 @@ Console.WriteLine(element.GetProperty("data")[0].GetProperty("status").ToString(
 ]]></code>
 This sample shows how to call GetFiles with all parameters and parse the result.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 Result result = client.GetFiles(null);
 
@@ -2013,14 +2125,16 @@ Console.WriteLine(element.GetProperty("data")[0].GetProperty("status_details").T
       <example>
 This sample shows how to call CreateFileAsync.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 CreateFileRequest file = new CreateFileRequest(BinaryData.FromObjectAsJson(new object()), "<purpose>");
 Result<OpenAIFile> result = await client.CreateFileAsync(file);
 ]]></code>
 This sample shows how to call CreateFileAsync with all parameters.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 CreateFileRequest file = new CreateFileRequest(BinaryData.FromObjectAsJson(new object()), "<purpose>");
 Result<OpenAIFile> result = await client.CreateFileAsync(file);
@@ -2030,14 +2144,16 @@ Result<OpenAIFile> result = await client.CreateFileAsync(file);
       <example>
 This sample shows how to call CreateFile.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 CreateFileRequest file = new CreateFileRequest(BinaryData.FromObjectAsJson(new object()), "<purpose>");
 Result<OpenAIFile> result = client.CreateFile(file);
 ]]></code>
 This sample shows how to call CreateFile with all parameters.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 CreateFileRequest file = new CreateFileRequest(BinaryData.FromObjectAsJson(new object()), "<purpose>");
 Result<OpenAIFile> result = client.CreateFile(file);
@@ -2047,7 +2163,8 @@ Result<OpenAIFile> result = client.CreateFile(file);
       <example>
 This sample shows how to call CreateFileAsync and parse the result.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
 {
@@ -2067,7 +2184,8 @@ Console.WriteLine(element.GetProperty("status").ToString());
 ]]></code>
 This sample shows how to call CreateFileAsync with all request content and parse the result.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
 {
@@ -2091,7 +2209,8 @@ Console.WriteLine(element.GetProperty("status_details").ToString());
       <example>
 This sample shows how to call CreateFile and parse the result.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
 {
@@ -2111,7 +2230,8 @@ Console.WriteLine(element.GetProperty("status").ToString());
 ]]></code>
 This sample shows how to call CreateFile with all request content and parse the result.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
 {
@@ -2135,13 +2255,15 @@ Console.WriteLine(element.GetProperty("status_details").ToString());
       <example>
 This sample shows how to call RetrieveFileAsync.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 Result<OpenAIFile> result = await client.RetrieveFileAsync("<file_id>");
 ]]></code>
 This sample shows how to call RetrieveFileAsync with all parameters.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 Result<OpenAIFile> result = await client.RetrieveFileAsync("<file_id>");
 ]]></code></example>
@@ -2150,13 +2272,15 @@ Result<OpenAIFile> result = await client.RetrieveFileAsync("<file_id>");
       <example>
 This sample shows how to call RetrieveFile.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 Result<OpenAIFile> result = client.RetrieveFile("<file_id>");
 ]]></code>
 This sample shows how to call RetrieveFile with all parameters.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 Result<OpenAIFile> result = client.RetrieveFile("<file_id>");
 ]]></code></example>
@@ -2165,7 +2289,8 @@ Result<OpenAIFile> result = client.RetrieveFile("<file_id>");
       <example>
 This sample shows how to call RetrieveFileAsync and parse the result.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 Result result = await client.RetrieveFileAsync("<file_id>", null);
 
@@ -2180,7 +2305,8 @@ Console.WriteLine(element.GetProperty("status").ToString());
 ]]></code>
 This sample shows how to call RetrieveFileAsync with all parameters and parse the result.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 Result result = await client.RetrieveFileAsync("<file_id>", null);
 
@@ -2199,7 +2325,8 @@ Console.WriteLine(element.GetProperty("status_details").ToString());
       <example>
 This sample shows how to call RetrieveFile and parse the result.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 Result result = client.RetrieveFile("<file_id>", null);
 
@@ -2214,7 +2341,8 @@ Console.WriteLine(element.GetProperty("status").ToString());
 ]]></code>
 This sample shows how to call RetrieveFile with all parameters and parse the result.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 Result result = client.RetrieveFile("<file_id>", null);
 
@@ -2233,13 +2361,15 @@ Console.WriteLine(element.GetProperty("status_details").ToString());
       <example>
 This sample shows how to call DeleteFileAsync.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 Result<DeleteFileResponse> result = await client.DeleteFileAsync("<file_id>");
 ]]></code>
 This sample shows how to call DeleteFileAsync with all parameters.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 Result<DeleteFileResponse> result = await client.DeleteFileAsync("<file_id>");
 ]]></code></example>
@@ -2248,13 +2378,15 @@ Result<DeleteFileResponse> result = await client.DeleteFileAsync("<file_id>");
       <example>
 This sample shows how to call DeleteFile.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 Result<DeleteFileResponse> result = client.DeleteFile("<file_id>");
 ]]></code>
 This sample shows how to call DeleteFile with all parameters.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 Result<DeleteFileResponse> result = client.DeleteFile("<file_id>");
 ]]></code></example>
@@ -2263,7 +2395,8 @@ Result<DeleteFileResponse> result = client.DeleteFile("<file_id>");
       <example>
 This sample shows how to call DeleteFileAsync and parse the result.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 Result result = await client.DeleteFileAsync("<file_id>", null);
 
@@ -2274,7 +2407,8 @@ Console.WriteLine(element.GetProperty("deleted").ToString());
 ]]></code>
 This sample shows how to call DeleteFileAsync with all parameters and parse the result.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 Result result = await client.DeleteFileAsync("<file_id>", null);
 
@@ -2288,7 +2422,8 @@ Console.WriteLine(element.GetProperty("deleted").ToString());
       <example>
 This sample shows how to call DeleteFile and parse the result.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 Result result = client.DeleteFile("<file_id>", null);
 
@@ -2299,7 +2434,8 @@ Console.WriteLine(element.GetProperty("deleted").ToString());
 ]]></code>
 This sample shows how to call DeleteFile with all parameters and parse the result.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 Result result = client.DeleteFile("<file_id>", null);
 
@@ -2313,13 +2449,15 @@ Console.WriteLine(element.GetProperty("deleted").ToString());
       <example>
 This sample shows how to call DownloadFileAsync.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 Result<string> result = await client.DownloadFileAsync("<file_id>");
 ]]></code>
 This sample shows how to call DownloadFileAsync with all parameters.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 Result<string> result = await client.DownloadFileAsync("<file_id>");
 ]]></code></example>
@@ -2328,13 +2466,15 @@ Result<string> result = await client.DownloadFileAsync("<file_id>");
       <example>
 This sample shows how to call DownloadFile.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 Result<string> result = client.DownloadFile("<file_id>");
 ]]></code>
 This sample shows how to call DownloadFile with all parameters.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 Result<string> result = client.DownloadFile("<file_id>");
 ]]></code></example>
@@ -2343,7 +2483,8 @@ Result<string> result = client.DownloadFile("<file_id>");
       <example>
 This sample shows how to call DownloadFileAsync and parse the result.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 Result result = await client.DownloadFileAsync("<file_id>", null);
 
@@ -2352,7 +2493,8 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call DownloadFileAsync with all parameters and parse the result.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 Result result = await client.DownloadFileAsync("<file_id>", null);
 
@@ -2364,7 +2506,8 @@ Console.WriteLine(element.ToString());
       <example>
 This sample shows how to call DownloadFile and parse the result.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 Result result = client.DownloadFile("<file_id>", null);
 
@@ -2373,7 +2516,8 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call DownloadFile with all parameters and parse the result.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 Result result = client.DownloadFile("<file_id>", null);
 
@@ -2385,13 +2529,15 @@ Console.WriteLine(element.ToString());
       <example>
 This sample shows how to call GetModelsAsync.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 Result<ListModelsResponse> result = await client.GetModelsAsync();
 ]]></code>
 This sample shows how to call GetModelsAsync with all parameters.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 Result<ListModelsResponse> result = await client.GetModelsAsync();
 ]]></code></example>
@@ -2400,13 +2546,15 @@ Result<ListModelsResponse> result = await client.GetModelsAsync();
       <example>
 This sample shows how to call GetModels.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 Result<ListModelsResponse> result = client.GetModels();
 ]]></code>
 This sample shows how to call GetModels with all parameters.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 Result<ListModelsResponse> result = client.GetModels();
 ]]></code></example>
@@ -2415,7 +2563,8 @@ Result<ListModelsResponse> result = client.GetModels();
       <example>
 This sample shows how to call GetModelsAsync and parse the result.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 Result result = await client.GetModelsAsync(null);
 
@@ -2428,7 +2577,8 @@ Console.WriteLine(element.GetProperty("data")[0].GetProperty("owned_by").ToStrin
 ]]></code>
 This sample shows how to call GetModelsAsync with all parameters and parse the result.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 Result result = await client.GetModelsAsync(null);
 
@@ -2444,7 +2594,8 @@ Console.WriteLine(element.GetProperty("data")[0].GetProperty("owned_by").ToStrin
       <example>
 This sample shows how to call GetModels and parse the result.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 Result result = client.GetModels(null);
 
@@ -2457,7 +2608,8 @@ Console.WriteLine(element.GetProperty("data")[0].GetProperty("owned_by").ToStrin
 ]]></code>
 This sample shows how to call GetModels with all parameters and parse the result.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 Result result = client.GetModels(null);
 
@@ -2473,13 +2625,15 @@ Console.WriteLine(element.GetProperty("data")[0].GetProperty("owned_by").ToStrin
       <example>
 This sample shows how to call RetrieveModelAsync.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 Result<Model> result = await client.RetrieveModelAsync("<model>");
 ]]></code>
 This sample shows how to call RetrieveModelAsync with all parameters.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 Result<Model> result = await client.RetrieveModelAsync("<model>");
 ]]></code></example>
@@ -2488,13 +2642,15 @@ Result<Model> result = await client.RetrieveModelAsync("<model>");
       <example>
 This sample shows how to call RetrieveModel.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 Result<Model> result = client.RetrieveModel("<model>");
 ]]></code>
 This sample shows how to call RetrieveModel with all parameters.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 Result<Model> result = client.RetrieveModel("<model>");
 ]]></code></example>
@@ -2503,7 +2659,8 @@ Result<Model> result = client.RetrieveModel("<model>");
       <example>
 This sample shows how to call RetrieveModelAsync and parse the result.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 Result result = await client.RetrieveModelAsync("<model>", null);
 
@@ -2515,7 +2672,8 @@ Console.WriteLine(element.GetProperty("owned_by").ToString());
 ]]></code>
 This sample shows how to call RetrieveModelAsync with all parameters and parse the result.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 Result result = await client.RetrieveModelAsync("<model>", null);
 
@@ -2530,7 +2688,8 @@ Console.WriteLine(element.GetProperty("owned_by").ToString());
       <example>
 This sample shows how to call RetrieveModel and parse the result.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 Result result = client.RetrieveModel("<model>", null);
 
@@ -2542,7 +2701,8 @@ Console.WriteLine(element.GetProperty("owned_by").ToString());
 ]]></code>
 This sample shows how to call RetrieveModel with all parameters and parse the result.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 Result result = client.RetrieveModel("<model>", null);
 
@@ -2557,13 +2717,15 @@ Console.WriteLine(element.GetProperty("owned_by").ToString());
       <example>
 This sample shows how to call DeleteModelAsync.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 Result<DeleteModelResponse> result = await client.DeleteModelAsync("<model>");
 ]]></code>
 This sample shows how to call DeleteModelAsync with all parameters.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 Result<DeleteModelResponse> result = await client.DeleteModelAsync("<model>");
 ]]></code></example>
@@ -2572,13 +2734,15 @@ Result<DeleteModelResponse> result = await client.DeleteModelAsync("<model>");
       <example>
 This sample shows how to call DeleteModel.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 Result<DeleteModelResponse> result = client.DeleteModel("<model>");
 ]]></code>
 This sample shows how to call DeleteModel with all parameters.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 Result<DeleteModelResponse> result = client.DeleteModel("<model>");
 ]]></code></example>
@@ -2587,7 +2751,8 @@ Result<DeleteModelResponse> result = client.DeleteModel("<model>");
       <example>
 This sample shows how to call DeleteModelAsync and parse the result.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 Result result = await client.DeleteModelAsync("<model>", null);
 
@@ -2598,7 +2763,8 @@ Console.WriteLine(element.GetProperty("deleted").ToString());
 ]]></code>
 This sample shows how to call DeleteModelAsync with all parameters and parse the result.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 Result result = await client.DeleteModelAsync("<model>", null);
 
@@ -2612,7 +2778,8 @@ Console.WriteLine(element.GetProperty("deleted").ToString());
       <example>
 This sample shows how to call DeleteModel and parse the result.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 Result result = client.DeleteModel("<model>", null);
 
@@ -2623,7 +2790,8 @@ Console.WriteLine(element.GetProperty("deleted").ToString());
 ]]></code>
 This sample shows how to call DeleteModel with all parameters and parse the result.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 Result result = client.DeleteModel("<model>", null);
 
@@ -2637,14 +2805,16 @@ Console.WriteLine(element.GetProperty("deleted").ToString());
       <example>
 This sample shows how to call CreateModerationAsync.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 CreateModerationRequest content = new CreateModerationRequest(new string[] { "<input>" });
 Result<CreateModerationResponse> result = await client.CreateModerationAsync(content);
 ]]></code>
 This sample shows how to call CreateModerationAsync with all parameters.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 CreateModerationRequest content = new CreateModerationRequest(new string[] { "<input>" })
 {
@@ -2657,14 +2827,16 @@ Result<CreateModerationResponse> result = await client.CreateModerationAsync(con
       <example>
 This sample shows how to call CreateModeration.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 CreateModerationRequest content = new CreateModerationRequest(new string[] { "<input>" });
 Result<CreateModerationResponse> result = client.CreateModeration(content);
 ]]></code>
 This sample shows how to call CreateModeration with all parameters.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 CreateModerationRequest content = new CreateModerationRequest(new string[] { "<input>" })
 {
@@ -2677,7 +2849,8 @@ Result<CreateModerationResponse> result = client.CreateModeration(content);
       <example>
 This sample shows how to call CreateModerationAsync and parse the result.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
 {
@@ -2717,7 +2890,8 @@ Console.WriteLine(element.GetProperty("results")[0].GetProperty("category_scores
 ]]></code>
 This sample shows how to call CreateModerationAsync with all request content and parse the result.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
 {
@@ -2761,7 +2935,8 @@ Console.WriteLine(element.GetProperty("results")[0].GetProperty("category_scores
       <example>
 This sample shows how to call CreateModeration and parse the result.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
 {
@@ -2801,7 +2976,8 @@ Console.WriteLine(element.GetProperty("results")[0].GetProperty("category_scores
 ]]></code>
 This sample shows how to call CreateModeration with all request content and parse the result.
 <code><![CDATA[
-OpenAIClient client = new OpenAIClient();
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
 
 RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
 {

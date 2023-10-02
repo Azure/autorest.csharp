@@ -7778,6 +7778,11 @@
   }
  ],
  "Auth": {
-  "$id": "912"
+  "$id": "912",
+  "ApiKey": {
+   "$id": "913",
+   "Name": "Authorization",
+   "Prefix": "Bearer"
+  }
  }
 }
