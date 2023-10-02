@@ -21,7 +21,7 @@ namespace ResourceClients_LowLevel.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of examples")]
+        [Ignore("Only validating compilation of test scaffoldings")]
         public async Task GetGroup_ShortVersion()
         {
             Uri endpoint = null;
@@ -32,7 +32,7 @@ namespace ResourceClients_LowLevel.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of examples")]
+        [Ignore("Only validating compilation of test scaffoldings")]
         public async Task GetGroup_AllParameters()
         {
             Uri endpoint = null;
@@ -43,7 +43,7 @@ namespace ResourceClients_LowLevel.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of examples")]
+        [Ignore("Only validating compilation of test scaffoldings")]
         public async Task GetItems_ShortVersion()
         {
             Uri endpoint = null;
@@ -56,7 +56,7 @@ namespace ResourceClients_LowLevel.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of examples")]
+        [Ignore("Only validating compilation of test scaffoldings")]
         public async Task GetItems_AllParameters()
         {
             Uri endpoint = null;

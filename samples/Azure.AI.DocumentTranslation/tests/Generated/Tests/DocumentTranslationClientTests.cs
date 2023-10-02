@@ -22,7 +22,7 @@ namespace Azure.AI.DocumentTranslation.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of examples")]
+        [Ignore("Only validating compilation of test scaffoldings")]
         public async Task GetDocumentStatus_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -32,7 +32,7 @@ namespace Azure.AI.DocumentTranslation.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of examples")]
+        [Ignore("Only validating compilation of test scaffoldings")]
         public async Task GetDocumentStatus_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -42,7 +42,7 @@ namespace Azure.AI.DocumentTranslation.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of examples")]
+        [Ignore("Only validating compilation of test scaffoldings")]
         public async Task GetTranslationStatus_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -52,7 +52,7 @@ namespace Azure.AI.DocumentTranslation.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of examples")]
+        [Ignore("Only validating compilation of test scaffoldings")]
         public async Task GetTranslationStatus_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -62,7 +62,7 @@ namespace Azure.AI.DocumentTranslation.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of examples")]
+        [Ignore("Only validating compilation of test scaffoldings")]
         public async Task CancelTranslation_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -72,7 +72,7 @@ namespace Azure.AI.DocumentTranslation.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of examples")]
+        [Ignore("Only validating compilation of test scaffoldings")]
         public async Task CancelTranslation_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -82,7 +82,7 @@ namespace Azure.AI.DocumentTranslation.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of examples")]
+        [Ignore("Only validating compilation of test scaffoldings")]
         public async Task GetSupportedDocumentFormats_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -92,7 +92,7 @@ namespace Azure.AI.DocumentTranslation.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of examples")]
+        [Ignore("Only validating compilation of test scaffoldings")]
         public async Task GetSupportedDocumentFormats_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -102,7 +102,7 @@ namespace Azure.AI.DocumentTranslation.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of examples")]
+        [Ignore("Only validating compilation of test scaffoldings")]
         public async Task GetSupportedGlossaryFormats_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -112,7 +112,7 @@ namespace Azure.AI.DocumentTranslation.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of examples")]
+        [Ignore("Only validating compilation of test scaffoldings")]
         public async Task GetSupportedGlossaryFormats_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -122,7 +122,7 @@ namespace Azure.AI.DocumentTranslation.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of examples")]
+        [Ignore("Only validating compilation of test scaffoldings")]
         public async Task GetSupportedStorageSources_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -132,7 +132,7 @@ namespace Azure.AI.DocumentTranslation.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of examples")]
+        [Ignore("Only validating compilation of test scaffoldings")]
         public async Task GetSupportedStorageSources_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -142,7 +142,7 @@ namespace Azure.AI.DocumentTranslation.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of examples")]
+        [Ignore("Only validating compilation of test scaffoldings")]
         public async Task GetTranslationsStatus_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -154,7 +154,7 @@ namespace Azure.AI.DocumentTranslation.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of examples")]
+        [Ignore("Only validating compilation of test scaffoldings")]
         public async Task GetTranslationsStatus_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -166,7 +166,7 @@ namespace Azure.AI.DocumentTranslation.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of examples")]
+        [Ignore("Only validating compilation of test scaffoldings")]
         public async Task GetDocumentsStatus_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -178,7 +178,7 @@ namespace Azure.AI.DocumentTranslation.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of examples")]
+        [Ignore("Only validating compilation of test scaffoldings")]
         public async Task GetDocumentsStatus_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -190,7 +190,7 @@ namespace Azure.AI.DocumentTranslation.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of examples")]
+        [Ignore("Only validating compilation of test scaffoldings")]
         public async Task StartTranslation_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -221,7 +221,7 @@ language = "<language>",
         }
 
         [Test]
-        [Ignore("Only validating compilation of examples")]
+        [Ignore("Only validating compilation of test scaffoldings")]
         public async Task StartTranslation_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
