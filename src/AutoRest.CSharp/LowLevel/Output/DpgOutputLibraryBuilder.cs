@@ -13,6 +13,7 @@ using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Configuration = AutoRest.CSharp.Common.Input.Configuration;
 
 namespace AutoRest.CSharp.Output.Models
@@ -103,7 +104,7 @@ namespace AutoRest.CSharp.Output.Models
                     foreach (var parameter in operation.Parameters)
                     {
                         if (IsSameType(parameter.Type, anonModel))
-                            return $"{operation.Name}{parameter.Name.FirstCharToUpperCase()}"; //TODO: Probably needs special casing for ipThing to become IPThing
+                            return $"{operation.Name}{GetNameWithCorrectPluralization(parameter.Type, parameter.Name)}";
                     }
                 }
             }
@@ -114,11 +115,27 @@ namespace AutoRest.CSharp.Output.Models
                 foreach (var property in model.Properties)
                 {
                     if (IsSameType(property.Type, anonModel))
-                        return $"{model.Name}{property.Name.FirstCharToUpperCase()}";
+                    {
+                        return $"{model.Name}{GetNameWithCorrectPluralization(property.Type, property.Name)}";
+                    }
                 }
             }
 
             return null;
+        }
+
+        private object GetNameWithCorrectPluralization(InputType type, string name)
+        {
+            //TODO: Probably needs special casing for ipThing to become IPThing
+            string result = name.FirstCharToUpperCase();
+            switch (type)
+            {
+                case InputListType:
+                case InputDictionaryType:
+                    return result.ToSingular();
+                default:
+                    return result;
+            }
         }
 
         private bool IsSameType(InputType type, InputModelType anonModel)
