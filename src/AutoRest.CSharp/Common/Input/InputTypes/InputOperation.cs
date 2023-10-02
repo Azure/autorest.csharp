@@ -53,6 +53,30 @@ internal record InputOperation(
         GenerateConvenienceMethod: false)
     { }
 
+    public static InputOperation RemoveApiVersionParam(InputOperation operation)
+    {
+        return new InputOperation(
+            operation.Name,
+            operation.ResourceName,
+            operation.Summary,
+            operation.Deprecated,
+            operation.Description,
+            operation.Accessibility,
+            operation.Parameters.Where(p => !p.IsApiVersion).ToList(),
+            operation.Responses,
+            operation.HttpMethod,
+            operation.RequestBodyMediaType,
+            operation.Uri,
+            operation.Path,
+            operation.ExternalDocsUrl,
+            operation.RequestMediaTypes,
+            operation.BufferResponse,
+            operation.LongRunning,
+            operation.Paging,
+            operation.GenerateProtocolMethod,
+            operation.GenerateConvenienceMethod);
+    }
+
     private string? _cleanName;
     public string CleanName
     {

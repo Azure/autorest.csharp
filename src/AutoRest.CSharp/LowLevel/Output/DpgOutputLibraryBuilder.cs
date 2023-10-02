@@ -198,7 +198,14 @@ namespace AutoRest.CSharp.Output.Models
                 ? (FormattableString)$"Client options for {clientName}."
                 : $"Client options for {_libraryName} library clients.";
 
-            return new ClientOptionsTypeProvider(_sourceInputModel?.GetServiceVersionOverrides() ?? _rootNamespace.ApiVersions, clientOptionsName, _defaultNamespace, description, _sourceInputModel);
+            IReadOnlyList<string>? apiVersions = _sourceInputModel?.GetServiceVersionOverrides() ?? _rootNamespace.ApiVersions;
+            if (!Configuration.IsBranded)
+            {
+                if (apiVersions.Count > 1)
+                    throw new InvalidOperationException("Multiple API versions are not supported in the unbranded path.");
+                apiVersions = null;
+            }
+            return new ClientOptionsTypeProvider(apiVersions, clientOptionsName, _defaultNamespace, description, _sourceInputModel);
         }
 
         private static ClientInfo CreateClientInfo(InputClient ns, SourceInputModel? sourceInputModel, string rootNamespaceName)
@@ -368,6 +375,14 @@ namespace AutoRest.CSharp.Output.Models
                     : BuilderHelpers.EscapeXmlDocDescription(clientInfo.Description);
 
                 var subClients = new List<LowLevelClient>();
+
+                if (!Configuration.IsBranded)
+                {
+                    for (int i = 0; i < clientInfo.Requests.Count; i++)
+                    {
+                        clientInfo.Requests[i] = InputOperation.RemoveApiVersionParam(clientInfo.Requests[i]);
+                    }
+                }
 
                 var client = new LowLevelClient(
                     clientInfo.Name,

@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System;
 using System.ServiceModel.Rest;
 
 namespace OpenAI
@@ -13,25 +12,5 @@ namespace OpenAI
     /// <summary> Client options for OpenAIClient. </summary>
     public partial class OpenAIClientOptions : RequestOptions
     {
-        private const ServiceVersion LatestVersion = ServiceVersion.V2_0_0;
-
-        /// <summary> The version of the service to use. </summary>
-        public enum ServiceVersion
-        {
-            /// <summary> Service version "2.0.0". </summary>
-            V2_0_0 = 1,
-        }
-
-        internal string Version { get; }
-
-        /// <summary> Initializes new instance of OpenAIClientOptions. </summary>
-        public OpenAIClientOptions(ServiceVersion version = LatestVersion)
-        {
-            Version = version switch
-            {
-                ServiceVersion.V2_0_0 => "2.0.0",
-                _ => throw new NotSupportedException()
-            };
-        }
     }
 }

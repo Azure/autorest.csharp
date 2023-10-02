@@ -25,7 +25,6 @@ namespace OpenAI
     {
         private readonly MessagePipeline _pipeline;
         private readonly Uri _endpoint;
-        private readonly string _apiVersion;
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal TelemetrySource ClientDiagnostics { get; }
@@ -50,7 +49,6 @@ namespace OpenAI
             ClientDiagnostics = new TelemetrySource(options, true);
             _pipeline = MessagePipeline.Create(new MessagePipelineTransport(), options, Array.Empty<IPipelinePolicy<PipelineMessage>>(), Array.Empty<IPipelinePolicy<PipelineMessage>>());
             _endpoint = endpoint;
-            _apiVersion = options.Version;
         }
 
         /// <param name="body"> The CreateChatCompletionRequest to use. </param>
@@ -3133,7 +3131,6 @@ namespace OpenAI
             var uri = new RequestUri();
             uri.Reset(_endpoint);
             uri.AppendPath("/chat/completions", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri.ToUri();
             request.SetHeaderValue("Accept", "application/json");
             request.SetHeaderValue("Content-Type", "application/json");
@@ -3149,7 +3146,6 @@ namespace OpenAI
             var uri = new RequestUri();
             uri.Reset(_endpoint);
             uri.AppendPath("/audio/transcriptions", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri.ToUri();
             request.SetHeaderValue("Accept", "application/json");
             request.SetHeaderValue("content-type", "multipart/form-data");
@@ -3165,7 +3161,6 @@ namespace OpenAI
             var uri = new RequestUri();
             uri.Reset(_endpoint);
             uri.AppendPath("/audio/translations", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri.ToUri();
             request.SetHeaderValue("Accept", "application/json");
             request.SetHeaderValue("content-type", "multipart/form-data");
@@ -3181,7 +3176,6 @@ namespace OpenAI
             var uri = new RequestUri();
             uri.Reset(_endpoint);
             uri.AppendPath("/fine_tuning/jobs", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri.ToUri();
             request.SetHeaderValue("Accept", "application/json");
             request.SetHeaderValue("Content-Type", "application/json");
@@ -3205,7 +3199,6 @@ namespace OpenAI
             {
                 uri.AppendQuery("limit", limit.Value, true);
             }
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri.ToUri();
             request.SetHeaderValue("Accept", "application/json");
             return message;
@@ -3220,7 +3213,6 @@ namespace OpenAI
             uri.Reset(_endpoint);
             uri.AppendPath("/fine_tuning/jobs/", false);
             uri.AppendPath(fineTuningJobId, true);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri.ToUri();
             request.SetHeaderValue("Accept", "application/json");
             return message;
@@ -3240,7 +3232,6 @@ namespace OpenAI
             {
                 uri.AppendQuery("after", after, true);
             }
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri.ToUri();
             request.SetHeaderValue("Accept", "application/json");
             return message;
@@ -3256,7 +3247,6 @@ namespace OpenAI
             uri.AppendPath("/fine_tuning/jobs/", false);
             uri.AppendPath(fineTuningJobId, true);
             uri.AppendPath("/cancel", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri.ToUri();
             request.SetHeaderValue("Accept", "application/json");
             return message;
@@ -3270,7 +3260,6 @@ namespace OpenAI
             var uri = new RequestUri();
             uri.Reset(_endpoint);
             uri.AppendPath("/completions", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri.ToUri();
             request.SetHeaderValue("Accept", "application/json");
             request.SetHeaderValue("Content-Type", "application/json");
@@ -3286,7 +3275,6 @@ namespace OpenAI
             var uri = new RequestUri();
             uri.Reset(_endpoint);
             uri.AppendPath("/edits", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri.ToUri();
             request.SetHeaderValue("Accept", "application/json");
             request.SetHeaderValue("Content-Type", "application/json");
@@ -3302,7 +3290,6 @@ namespace OpenAI
             var uri = new RequestUri();
             uri.Reset(_endpoint);
             uri.AppendPath("/images/generations", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri.ToUri();
             request.SetHeaderValue("Accept", "application/json");
             request.SetHeaderValue("Content-Type", "application/json");
@@ -3318,7 +3305,6 @@ namespace OpenAI
             var uri = new RequestUri();
             uri.Reset(_endpoint);
             uri.AppendPath("/images/edits", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri.ToUri();
             request.SetHeaderValue("Accept", "application/json");
             request.SetHeaderValue("content-type", "multipart/form-data");
@@ -3334,7 +3320,6 @@ namespace OpenAI
             var uri = new RequestUri();
             uri.Reset(_endpoint);
             uri.AppendPath("/images/variations", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri.ToUri();
             request.SetHeaderValue("Accept", "application/json");
             request.SetHeaderValue("content-type", "multipart/form-data");
@@ -3350,7 +3335,6 @@ namespace OpenAI
             var uri = new RequestUri();
             uri.Reset(_endpoint);
             uri.AppendPath("/embeddings", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri.ToUri();
             request.SetHeaderValue("Accept", "application/json");
             request.SetHeaderValue("Content-Type", "application/json");
@@ -3366,7 +3350,6 @@ namespace OpenAI
             var uri = new RequestUri();
             uri.Reset(_endpoint);
             uri.AppendPath("/files", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri.ToUri();
             request.SetHeaderValue("Accept", "application/json");
             return message;
@@ -3380,7 +3363,6 @@ namespace OpenAI
             var uri = new RequestUri();
             uri.Reset(_endpoint);
             uri.AppendPath("/files", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri.ToUri();
             request.SetHeaderValue("Accept", "application/json");
             request.SetHeaderValue("content-type", "multipart/form-data");
@@ -3397,7 +3379,6 @@ namespace OpenAI
             uri.Reset(_endpoint);
             uri.AppendPath("/files/files/", false);
             uri.AppendPath(fileId, true);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri.ToUri();
             request.SetHeaderValue("Accept", "application/json");
             return message;
@@ -3412,7 +3393,6 @@ namespace OpenAI
             uri.Reset(_endpoint);
             uri.AppendPath("/files/files/", false);
             uri.AppendPath(fileId, true);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri.ToUri();
             request.SetHeaderValue("Accept", "application/json");
             return message;
@@ -3428,7 +3408,6 @@ namespace OpenAI
             uri.AppendPath("/files/files/", false);
             uri.AppendPath(fileId, true);
             uri.AppendPath("/content", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri.ToUri();
             request.SetHeaderValue("Accept", "application/json");
             return message;
@@ -3442,7 +3421,6 @@ namespace OpenAI
             var uri = new RequestUri();
             uri.Reset(_endpoint);
             uri.AppendPath("/fine-tunes", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri.ToUri();
             request.SetHeaderValue("Accept", "application/json");
             request.SetHeaderValue("Content-Type", "application/json");
@@ -3458,7 +3436,6 @@ namespace OpenAI
             var uri = new RequestUri();
             uri.Reset(_endpoint);
             uri.AppendPath("/fine-tunes", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri.ToUri();
             request.SetHeaderValue("Accept", "application/json");
             return message;
@@ -3473,7 +3450,6 @@ namespace OpenAI
             uri.Reset(_endpoint);
             uri.AppendPath("/fine-tunes/", false);
             uri.AppendPath(fineTuneId, true);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri.ToUri();
             request.SetHeaderValue("Accept", "application/json");
             return message;
@@ -3493,7 +3469,6 @@ namespace OpenAI
             {
                 uri.AppendQuery("stream", stream.Value, true);
             }
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri.ToUri();
             request.SetHeaderValue("Accept", "application/json");
             return message;
@@ -3509,7 +3484,6 @@ namespace OpenAI
             uri.AppendPath("/fine-tunes/", false);
             uri.AppendPath(fineTuneId, true);
             uri.AppendPath("/cancel", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri.ToUri();
             request.SetHeaderValue("Accept", "application/json");
             return message;
@@ -3523,7 +3497,6 @@ namespace OpenAI
             var uri = new RequestUri();
             uri.Reset(_endpoint);
             uri.AppendPath("/models", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri.ToUri();
             request.SetHeaderValue("Accept", "application/json");
             return message;
@@ -3538,7 +3511,6 @@ namespace OpenAI
             uri.Reset(_endpoint);
             uri.AppendPath("/models/", false);
             uri.AppendPath(model, true);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri.ToUri();
             request.SetHeaderValue("Accept", "application/json");
             return message;
@@ -3553,7 +3525,6 @@ namespace OpenAI
             uri.Reset(_endpoint);
             uri.AppendPath("/models/", false);
             uri.AppendPath(model, true);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri.ToUri();
             request.SetHeaderValue("Accept", "application/json");
             return message;
@@ -3567,7 +3538,6 @@ namespace OpenAI
             var uri = new RequestUri();
             uri.Reset(_endpoint);
             uri.AppendPath("/moderations", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri.ToUri();
             request.SetHeaderValue("Accept", "application/json");
             request.SetHeaderValue("Content-Type", "application/json");
