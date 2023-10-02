@@ -27,7 +27,6 @@ namespace UnbrandedTypeSpec
         private readonly KeyCredential _keyCredential;
         private readonly MessagePipeline _pipeline;
         private readonly Uri _endpoint;
-        private readonly string _apiVersion;
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal TelemetrySource ClientDiagnostics { get; }
@@ -63,7 +62,6 @@ namespace UnbrandedTypeSpec
             _keyCredential = credential;
             _pipeline = MessagePipeline.Create(new MessagePipelineTransport(), options, new IPipelinePolicy<PipelineMessage>[] { new KeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, Array.Empty<IPipelinePolicy<PipelineMessage>>());
             _endpoint = endpoint;
-            _apiVersion = options.Version;
         }
 
         /// <summary> top level method. </summary>
@@ -1685,7 +1683,6 @@ namespace UnbrandedTypeSpec
             uri.Reset(_endpoint);
             uri.AppendPath("/top/", false);
             uri.AppendPath(action.ToString("O"), true);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri.ToUri();
             request.SetHeaderValue("Accept", "application/json");
             return message;
@@ -1699,7 +1696,6 @@ namespace UnbrandedTypeSpec
             var uri = new RequestUri();
             uri.Reset(_endpoint);
             uri.AppendPath("/top2", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri.ToUri();
             request.SetHeaderValue("Accept", "application/json");
             return message;
@@ -1713,7 +1709,6 @@ namespace UnbrandedTypeSpec
             var uri = new RequestUri();
             uri.Reset(_endpoint);
             uri.AppendPath("/patch", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri.ToUri();
             request.SetHeaderValue("Accept", "application/json");
             request.SetHeaderValue("Content-Type", "application/json");
@@ -1729,7 +1724,6 @@ namespace UnbrandedTypeSpec
             var uri = new RequestUri();
             uri.Reset(_endpoint);
             uri.AppendPath("/anonymousBody", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri.ToUri();
             request.SetHeaderValue("Accept", "application/json");
             request.SetHeaderValue("Content-Type", "application/json");
@@ -1745,7 +1739,6 @@ namespace UnbrandedTypeSpec
             var uri = new RequestUri();
             uri.Reset(_endpoint);
             uri.AppendPath("/friendlyName", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri.ToUri();
             request.SetHeaderValue("Accept", "application/json");
             request.SetHeaderValue("Content-Type", "application/json");
@@ -1761,7 +1754,6 @@ namespace UnbrandedTypeSpec
             var uri = new RequestUri();
             uri.Reset(_endpoint);
             uri.AppendPath("/", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri.ToUri();
             request.SetHeaderValue("Accept", "application/json");
             request.SetHeaderValue("Repeatability-First-Sent", DateTimeOffset.Now.ToString("R"));
@@ -1777,7 +1769,6 @@ namespace UnbrandedTypeSpec
             uri.Reset(_endpoint);
             uri.AppendPath("/stringFormat/", false);
             uri.AppendPath(subscriptionId.ToString(), true);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri.ToUri();
             request.SetHeaderValue("Accept", "application/json");
             request.SetHeaderValue("Content-Type", "application/json");
@@ -1793,7 +1784,6 @@ namespace UnbrandedTypeSpec
             var uri = new RequestUri();
             uri.Reset(_endpoint);
             uri.AppendPath("/projectedName", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri.ToUri();
             request.SetHeaderValue("Accept", "application/json");
             request.SetHeaderValue("Content-Type", "application/json");
@@ -1809,7 +1799,6 @@ namespace UnbrandedTypeSpec
             var uri = new RequestUri();
             uri.Reset(_endpoint);
             uri.AppendPath("/returnsAnonymousModel", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri.ToUri();
             request.SetHeaderValue("Accept", "application/json");
             return message;
@@ -1824,7 +1813,6 @@ namespace UnbrandedTypeSpec
             uri.Reset(_endpoint);
             uri.AppendPath("/headAsBoolean/", false);
             uri.AppendPath(id, true);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri.ToUri();
             request.SetHeaderValue("Accept", "application/json");
             return message;
@@ -1843,7 +1831,6 @@ namespace UnbrandedTypeSpec
             {
                 uri.AppendQuery("optionalQuery", optionalQuery, true);
             }
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri.ToUri();
             request.SetHeaderValue("head-parameter", headParameter);
             request.SetHeaderValue("Accept", "application/json");
@@ -1859,7 +1846,6 @@ namespace UnbrandedTypeSpec
             uri.Reset(_endpoint);
             uri.AppendPath("/againHi/", false);
             uri.AppendPath(p2, true);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri.ToUri();
             request.SetHeaderValue("p1", p1);
             request.SetHeaderValue("Accept", "application/json");
@@ -1877,7 +1863,6 @@ namespace UnbrandedTypeSpec
             uri.Reset(_endpoint);
             uri.AppendPath("/noContentType/", false);
             uri.AppendPath(p2, true);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri.ToUri();
             request.SetHeaderValue("p1", p1);
             request.SetHeaderValue("Accept", "application/json");
@@ -1894,7 +1879,6 @@ namespace UnbrandedTypeSpec
             var uri = new RequestUri();
             uri.Reset(_endpoint);
             uri.AppendPath("/demoHi", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri.ToUri();
             request.SetHeaderValue("Accept", "application/json");
             return message;
@@ -1908,7 +1892,6 @@ namespace UnbrandedTypeSpec
             var uri = new RequestUri();
             uri.Reset(_endpoint);
             uri.AppendPath("/literal", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri.ToUri();
             request.SetHeaderValue("Accept", "application/json");
             request.SetHeaderValue("Content-Type", "application/json");
@@ -1926,7 +1909,6 @@ namespace UnbrandedTypeSpec
             uri.AppendPath("/helloLiteral/", false);
             uri.AppendPath(123.ToString(), true);
             uri.AppendQuery("p3", "true", true);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri.ToUri();
             request.SetHeaderValue("p1", "test");
             request.SetHeaderValue("Accept", "application/json");
@@ -1941,7 +1923,6 @@ namespace UnbrandedTypeSpec
             var uri = new RequestUri();
             uri.Reset(_endpoint);
             uri.AppendPath("/unknown-value", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri.ToUri();
             request.SetHeaderValue("Accept", "application/json");
             return message;
@@ -1955,7 +1936,6 @@ namespace UnbrandedTypeSpec
             var uri = new RequestUri();
             uri.Reset(_endpoint);
             uri.AppendPath("/internalProtocol", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri.ToUri();
             request.SetHeaderValue("Accept", "application/json");
             request.SetHeaderValue("Content-Type", "application/json");
@@ -1971,7 +1951,6 @@ namespace UnbrandedTypeSpec
             var uri = new RequestUri();
             uri.Reset(_endpoint);
             uri.AppendPath("/stillConvenient", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri.ToUri();
             request.SetHeaderValue("Accept", "application/json");
             return message;
