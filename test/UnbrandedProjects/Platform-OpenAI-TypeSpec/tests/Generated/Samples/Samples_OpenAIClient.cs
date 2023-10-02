@@ -23,8 +23,7 @@ namespace OpenAI.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_CreateChatCompletion_ShortVersion()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
             {
@@ -55,8 +54,7 @@ content = "<content>",
         [Ignore("Only validating compilation of examples")]
         public async Task Example_CreateChatCompletion_ShortVersion_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
             {
@@ -87,8 +85,7 @@ content = "<content>",
         [Ignore("Only validating compilation of examples")]
         public void Example_CreateChatCompletion_ShortVersion_Convenience()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             CreateChatCompletionRequest body = new CreateChatCompletionRequest(ChatCompletionModels.Gpt4, new ChatCompletionRequestMessage[]
             {
@@ -101,8 +98,7 @@ new ChatCompletionRequestMessage(MessageRole.System, "<content>")
         [Ignore("Only validating compilation of examples")]
         public async Task Example_CreateChatCompletion_ShortVersion_Convenience_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             CreateChatCompletionRequest body = new CreateChatCompletionRequest(ChatCompletionModels.Gpt4, new ChatCompletionRequestMessage[]
             {
@@ -115,8 +111,7 @@ new ChatCompletionRequestMessage(MessageRole.System, "<content>")
         [Ignore("Only validating compilation of examples")]
         public void Example_CreateChatCompletion_AllParameters()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
             {
@@ -190,8 +185,7 @@ key = new object(),
         [Ignore("Only validating compilation of examples")]
         public async Task Example_CreateChatCompletion_AllParameters_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
             {
@@ -265,8 +259,7 @@ key = new object(),
         [Ignore("Only validating compilation of examples")]
         public void Example_CreateChatCompletion_AllParameters_Convenience()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             CreateChatCompletionRequest body = new CreateChatCompletionRequest(ChatCompletionModels.Gpt4, new ChatCompletionRequestMessage[]
             {
@@ -306,8 +299,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public async Task Example_CreateChatCompletion_AllParameters_Convenience_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             CreateChatCompletionRequest body = new CreateChatCompletionRequest(ChatCompletionModels.Gpt4, new ChatCompletionRequestMessage[]
             {
@@ -347,8 +339,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public void Example_CreateTranscription_ShortVersion()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
             {
@@ -365,8 +356,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public async Task Example_CreateTranscription_ShortVersion_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
             {
@@ -383,8 +373,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public void Example_CreateTranscription_ShortVersion_Convenience()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             CreateTranscriptionRequest audio = new CreateTranscriptionRequest(BinaryData.FromObjectAsJson(new object()), AudioModels.Whisper1);
             Result<CreateTranscriptionResponse> result = client.CreateTranscription(audio);
@@ -394,8 +383,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public async Task Example_CreateTranscription_ShortVersion_Convenience_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             CreateTranscriptionRequest audio = new CreateTranscriptionRequest(BinaryData.FromObjectAsJson(new object()), AudioModels.Whisper1);
             Result<CreateTranscriptionResponse> result = await client.CreateTranscriptionAsync(audio);
@@ -405,8 +393,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public void Example_CreateTranscription_AllParameters()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
             {
@@ -427,8 +414,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public async Task Example_CreateTranscription_AllParameters_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
             {
@@ -449,8 +435,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public void Example_CreateTranscription_AllParameters_Convenience()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             CreateTranscriptionRequest audio = new CreateTranscriptionRequest(BinaryData.FromObjectAsJson(new object()), AudioModels.Whisper1)
             {
@@ -466,8 +451,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public async Task Example_CreateTranscription_AllParameters_Convenience_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             CreateTranscriptionRequest audio = new CreateTranscriptionRequest(BinaryData.FromObjectAsJson(new object()), AudioModels.Whisper1)
             {
@@ -483,8 +467,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public void Example_CreateTranslation_ShortVersion()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
             {
@@ -501,8 +484,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public async Task Example_CreateTranslation_ShortVersion_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
             {
@@ -519,8 +501,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public void Example_CreateTranslation_ShortVersion_Convenience()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             CreateTranslationRequest audio = new CreateTranslationRequest(BinaryData.FromObjectAsJson(new object()), AudioModels.Whisper1);
             Result<CreateTranslationResponse> result = client.CreateTranslation(audio);
@@ -530,8 +511,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public async Task Example_CreateTranslation_ShortVersion_Convenience_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             CreateTranslationRequest audio = new CreateTranslationRequest(BinaryData.FromObjectAsJson(new object()), AudioModels.Whisper1);
             Result<CreateTranslationResponse> result = await client.CreateTranslationAsync(audio);
@@ -541,8 +521,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public void Example_CreateTranslation_AllParameters()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
             {
@@ -562,8 +541,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public async Task Example_CreateTranslation_AllParameters_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
             {
@@ -583,8 +561,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public void Example_CreateTranslation_AllParameters_Convenience()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             CreateTranslationRequest audio = new CreateTranslationRequest(BinaryData.FromObjectAsJson(new object()), AudioModels.Whisper1)
             {
@@ -599,8 +576,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public async Task Example_CreateTranslation_AllParameters_Convenience_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             CreateTranslationRequest audio = new CreateTranslationRequest(BinaryData.FromObjectAsJson(new object()), AudioModels.Whisper1)
             {
@@ -615,8 +591,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public void Example_CreateFineTuningJob_ShortVersion()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
             {
@@ -646,8 +621,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public async Task Example_CreateFineTuningJob_ShortVersion_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
             {
@@ -677,8 +651,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public void Example_CreateFineTuningJob_ShortVersion_Convenience()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             CreateFineTuningJobRequest job = new CreateFineTuningJobRequest("<training_file>", FineTuningJobModels.Babbage002);
             Result<FineTuningJob> result = client.CreateFineTuningJob(job);
@@ -688,8 +661,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public async Task Example_CreateFineTuningJob_ShortVersion_Convenience_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             CreateFineTuningJobRequest job = new CreateFineTuningJobRequest("<training_file>", FineTuningJobModels.Babbage002);
             Result<FineTuningJob> result = await client.CreateFineTuningJobAsync(job);
@@ -699,8 +671,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public void Example_CreateFineTuningJob_AllParameters()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
             {
@@ -738,8 +709,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public async Task Example_CreateFineTuningJob_AllParameters_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
             {
@@ -777,8 +747,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public void Example_CreateFineTuningJob_AllParameters_Convenience()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             CreateFineTuningJobRequest job = new CreateFineTuningJobRequest("<training_file>", FineTuningJobModels.Babbage002)
             {
@@ -796,8 +765,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public async Task Example_CreateFineTuningJob_AllParameters_Convenience_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             CreateFineTuningJobRequest job = new CreateFineTuningJobRequest("<training_file>", FineTuningJobModels.Babbage002)
             {
@@ -815,8 +783,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public void Example_GetPaginatedFineTuningJobs_ShortVersion()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             Result result = client.GetPaginatedFineTuningJobs(null, null, null);
 
@@ -843,8 +810,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetPaginatedFineTuningJobs_ShortVersion_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             Result result = await client.GetPaginatedFineTuningJobsAsync(null, null, null);
 
@@ -871,8 +837,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public void Example_GetPaginatedFineTuningJobs_ShortVersion_Convenience()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             Result<ListPaginatedFineTuningJobsResponse> result = client.GetPaginatedFineTuningJobs();
         }
@@ -881,8 +846,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetPaginatedFineTuningJobs_ShortVersion_Convenience_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             Result<ListPaginatedFineTuningJobsResponse> result = await client.GetPaginatedFineTuningJobsAsync();
         }
@@ -891,8 +855,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public void Example_GetPaginatedFineTuningJobs_AllParameters()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             Result result = client.GetPaginatedFineTuningJobs("<after>", 1234L, null);
 
@@ -921,8 +884,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetPaginatedFineTuningJobs_AllParameters_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             Result result = await client.GetPaginatedFineTuningJobsAsync("<after>", 1234L, null);
 
@@ -951,8 +913,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public void Example_GetPaginatedFineTuningJobs_AllParameters_Convenience()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             Result<ListPaginatedFineTuningJobsResponse> result = client.GetPaginatedFineTuningJobs(after: "<after>", limit: 1234L);
         }
@@ -961,8 +922,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetPaginatedFineTuningJobs_AllParameters_Convenience_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             Result<ListPaginatedFineTuningJobsResponse> result = await client.GetPaginatedFineTuningJobsAsync(after: "<after>", limit: 1234L);
         }
@@ -971,8 +931,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public void Example_RetrieveFineTuningJob_ShortVersion()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             Result result = client.RetrieveFineTuningJob("<fine_tuning_job_id>", null);
 
@@ -997,8 +956,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public async Task Example_RetrieveFineTuningJob_ShortVersion_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             Result result = await client.RetrieveFineTuningJobAsync("<fine_tuning_job_id>", null);
 
@@ -1023,8 +981,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public void Example_RetrieveFineTuningJob_ShortVersion_Convenience()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             Result<FineTuningJob> result = client.RetrieveFineTuningJob("<fine_tuning_job_id>");
         }
@@ -1033,8 +990,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public async Task Example_RetrieveFineTuningJob_ShortVersion_Convenience_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             Result<FineTuningJob> result = await client.RetrieveFineTuningJobAsync("<fine_tuning_job_id>");
         }
@@ -1043,8 +999,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public void Example_RetrieveFineTuningJob_AllParameters()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             Result result = client.RetrieveFineTuningJob("<fine_tuning_job_id>", null);
 
@@ -1071,8 +1026,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public async Task Example_RetrieveFineTuningJob_AllParameters_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             Result result = await client.RetrieveFineTuningJobAsync("<fine_tuning_job_id>", null);
 
@@ -1099,8 +1053,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public void Example_RetrieveFineTuningJob_AllParameters_Convenience()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             Result<FineTuningJob> result = client.RetrieveFineTuningJob("<fine_tuning_job_id>");
         }
@@ -1109,8 +1062,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public async Task Example_RetrieveFineTuningJob_AllParameters_Convenience_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             Result<FineTuningJob> result = await client.RetrieveFineTuningJobAsync("<fine_tuning_job_id>");
         }
@@ -1119,8 +1071,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public void Example_GetFineTuningEvents_ShortVersion()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             Result result = client.GetFineTuningEvents("<fine_tuning_job_id>", null, null);
 
@@ -1137,8 +1088,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetFineTuningEvents_ShortVersion_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             Result result = await client.GetFineTuningEventsAsync("<fine_tuning_job_id>", null, null);
 
@@ -1155,8 +1105,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public void Example_GetFineTuningEvents_ShortVersion_Convenience()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             Result<ListFineTuningJobEventsResponse> result = client.GetFineTuningEvents("<fine_tuning_job_id>");
         }
@@ -1165,8 +1114,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetFineTuningEvents_ShortVersion_Convenience_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             Result<ListFineTuningJobEventsResponse> result = await client.GetFineTuningEventsAsync("<fine_tuning_job_id>");
         }
@@ -1175,8 +1123,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public void Example_GetFineTuningEvents_AllParameters()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             Result result = client.GetFineTuningEvents("<fine_tuning_job_id>", "<after>", null);
 
@@ -1193,8 +1140,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetFineTuningEvents_AllParameters_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             Result result = await client.GetFineTuningEventsAsync("<fine_tuning_job_id>", "<after>", null);
 
@@ -1211,8 +1157,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public void Example_GetFineTuningEvents_AllParameters_Convenience()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             Result<ListFineTuningJobEventsResponse> result = client.GetFineTuningEvents("<fine_tuning_job_id>", after: "<after>");
         }
@@ -1221,8 +1166,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetFineTuningEvents_AllParameters_Convenience_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             Result<ListFineTuningJobEventsResponse> result = await client.GetFineTuningEventsAsync("<fine_tuning_job_id>", after: "<after>");
         }
@@ -1231,8 +1175,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public void Example_CancelFineTuningJob_ShortVersion()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             Result result = client.CancelFineTuningJob("<fine_tuning_job_id>", null);
 
@@ -1257,8 +1200,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public async Task Example_CancelFineTuningJob_ShortVersion_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             Result result = await client.CancelFineTuningJobAsync("<fine_tuning_job_id>", null);
 
@@ -1283,8 +1225,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public void Example_CancelFineTuningJob_ShortVersion_Convenience()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             Result<FineTuningJob> result = client.CancelFineTuningJob("<fine_tuning_job_id>");
         }
@@ -1293,8 +1234,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public async Task Example_CancelFineTuningJob_ShortVersion_Convenience_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             Result<FineTuningJob> result = await client.CancelFineTuningJobAsync("<fine_tuning_job_id>");
         }
@@ -1303,8 +1243,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public void Example_CancelFineTuningJob_AllParameters()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             Result result = client.CancelFineTuningJob("<fine_tuning_job_id>", null);
 
@@ -1331,8 +1270,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public async Task Example_CancelFineTuningJob_AllParameters_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             Result result = await client.CancelFineTuningJobAsync("<fine_tuning_job_id>", null);
 
@@ -1359,8 +1297,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public void Example_CancelFineTuningJob_AllParameters_Convenience()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             Result<FineTuningJob> result = client.CancelFineTuningJob("<fine_tuning_job_id>");
         }
@@ -1369,8 +1306,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public async Task Example_CancelFineTuningJob_AllParameters_Convenience_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             Result<FineTuningJob> result = await client.CancelFineTuningJobAsync("<fine_tuning_job_id>");
         }
@@ -1379,8 +1315,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public void Example_CreateCompletion_ShortVersion()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
             {
@@ -1408,8 +1343,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public async Task Example_CreateCompletion_ShortVersion_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
             {
@@ -1437,8 +1371,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public void Example_CreateCompletion_ShortVersion_Convenience()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             CreateCompletionRequest body = new CreateCompletionRequest(CompletionModels.Babbage002, BinaryData.FromObjectAsJson(new object()), 1234L);
             Result<CreateCompletionResponse> result = client.CreateCompletion(body);
@@ -1448,8 +1381,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public async Task Example_CreateCompletion_ShortVersion_Convenience_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             CreateCompletionRequest body = new CreateCompletionRequest(CompletionModels.Babbage002, BinaryData.FromObjectAsJson(new object()), 1234L);
             Result<CreateCompletionResponse> result = await client.CreateCompletionAsync(body);
@@ -1459,8 +1391,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public void Example_CreateCompletion_AllParameters()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
             {
@@ -1510,8 +1441,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public async Task Example_CreateCompletion_AllParameters_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
             {
@@ -1561,8 +1491,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public void Example_CreateCompletion_AllParameters_Convenience()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             CreateCompletionRequest body = new CreateCompletionRequest(CompletionModels.Babbage002, BinaryData.FromObjectAsJson(new object()), 1234L)
             {
@@ -1590,8 +1519,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public async Task Example_CreateCompletion_AllParameters_Convenience_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             CreateCompletionRequest body = new CreateCompletionRequest(CompletionModels.Babbage002, BinaryData.FromObjectAsJson(new object()), 1234L)
             {
@@ -1619,8 +1547,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public void Example_CreateImage_ShortVersion()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
             {
@@ -1637,8 +1564,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public async Task Example_CreateImage_ShortVersion_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
             {
@@ -1655,8 +1581,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public void Example_CreateImage_ShortVersion_Convenience()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             CreateImageRequest image = new CreateImageRequest("<prompt>");
             Result<ImagesResponse> result = client.CreateImage(image);
@@ -1666,8 +1591,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public async Task Example_CreateImage_ShortVersion_Convenience_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             CreateImageRequest image = new CreateImageRequest("<prompt>");
             Result<ImagesResponse> result = await client.CreateImageAsync(image);
@@ -1677,8 +1601,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public void Example_CreateImage_AllParameters()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
             {
@@ -1700,8 +1623,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public async Task Example_CreateImage_AllParameters_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
             {
@@ -1723,8 +1645,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public void Example_CreateImage_AllParameters_Convenience()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             CreateImageRequest image = new CreateImageRequest("<prompt>")
             {
@@ -1740,8 +1661,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public async Task Example_CreateImage_AllParameters_Convenience_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             CreateImageRequest image = new CreateImageRequest("<prompt>")
             {
@@ -1757,8 +1677,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public void Example_CreateImageEdit_ShortVersion()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
             {
@@ -1776,8 +1695,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public async Task Example_CreateImageEdit_ShortVersion_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
             {
@@ -1795,8 +1713,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public void Example_CreateImageEdit_ShortVersion_Convenience()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             CreateImageEditRequest image = new CreateImageEditRequest("<prompt>", BinaryData.FromObjectAsJson(new object()));
             Result<ImagesResponse> result = client.CreateImageEdit(image);
@@ -1806,8 +1723,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public async Task Example_CreateImageEdit_ShortVersion_Convenience_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             CreateImageEditRequest image = new CreateImageEditRequest("<prompt>", BinaryData.FromObjectAsJson(new object()));
             Result<ImagesResponse> result = await client.CreateImageEditAsync(image);
@@ -1817,8 +1733,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public void Example_CreateImageEdit_AllParameters()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
             {
@@ -1842,8 +1757,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public async Task Example_CreateImageEdit_AllParameters_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
             {
@@ -1867,8 +1781,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public void Example_CreateImageEdit_AllParameters_Convenience()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             CreateImageEditRequest image = new CreateImageEditRequest("<prompt>", BinaryData.FromObjectAsJson(new object()))
             {
@@ -1885,8 +1798,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public async Task Example_CreateImageEdit_AllParameters_Convenience_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             CreateImageEditRequest image = new CreateImageEditRequest("<prompt>", BinaryData.FromObjectAsJson(new object()))
             {
@@ -1903,8 +1815,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public void Example_CreateImageVariation_ShortVersion()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
             {
@@ -1921,8 +1832,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public async Task Example_CreateImageVariation_ShortVersion_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
             {
@@ -1939,8 +1849,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public void Example_CreateImageVariation_ShortVersion_Convenience()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             CreateImageVariationRequest image = new CreateImageVariationRequest(BinaryData.FromObjectAsJson(new object()));
             Result<ImagesResponse> result = client.CreateImageVariation(image);
@@ -1950,8 +1859,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public async Task Example_CreateImageVariation_ShortVersion_Convenience_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             CreateImageVariationRequest image = new CreateImageVariationRequest(BinaryData.FromObjectAsJson(new object()));
             Result<ImagesResponse> result = await client.CreateImageVariationAsync(image);
@@ -1961,8 +1869,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public void Example_CreateImageVariation_AllParameters()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
             {
@@ -1984,8 +1891,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public async Task Example_CreateImageVariation_AllParameters_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
             {
@@ -2007,8 +1913,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public void Example_CreateImageVariation_AllParameters_Convenience()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             CreateImageVariationRequest image = new CreateImageVariationRequest(BinaryData.FromObjectAsJson(new object()))
             {
@@ -2024,8 +1929,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public async Task Example_CreateImageVariation_AllParameters_Convenience_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             CreateImageVariationRequest image = new CreateImageVariationRequest(BinaryData.FromObjectAsJson(new object()))
             {
@@ -2041,8 +1945,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public void Example_CreateEmbedding_ShortVersion()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
             {
@@ -2065,8 +1968,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public async Task Example_CreateEmbedding_ShortVersion_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
             {
@@ -2089,8 +1991,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public void Example_CreateEmbedding_ShortVersion_Convenience()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             CreateEmbeddingRequest embedding = new CreateEmbeddingRequest(EmbeddingsModels.TextEmbeddingAda002, BinaryData.FromObjectAsJson(new object()));
             Result<CreateEmbeddingResponse> result = client.CreateEmbedding(embedding);
@@ -2100,8 +2001,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public async Task Example_CreateEmbedding_ShortVersion_Convenience_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             CreateEmbeddingRequest embedding = new CreateEmbeddingRequest(EmbeddingsModels.TextEmbeddingAda002, BinaryData.FromObjectAsJson(new object()));
             Result<CreateEmbeddingResponse> result = await client.CreateEmbeddingAsync(embedding);
@@ -2111,8 +2011,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public void Example_CreateEmbedding_AllParameters()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
             {
@@ -2136,8 +2035,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public async Task Example_CreateEmbedding_AllParameters_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
             {
@@ -2161,8 +2059,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public void Example_CreateEmbedding_AllParameters_Convenience()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             CreateEmbeddingRequest embedding = new CreateEmbeddingRequest(EmbeddingsModels.TextEmbeddingAda002, BinaryData.FromObjectAsJson(new object()))
             {
@@ -2175,8 +2072,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public async Task Example_CreateEmbedding_AllParameters_Convenience_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             CreateEmbeddingRequest embedding = new CreateEmbeddingRequest(EmbeddingsModels.TextEmbeddingAda002, BinaryData.FromObjectAsJson(new object()))
             {
@@ -2189,8 +2085,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public void Example_GetFiles_ShortVersion()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             Result result = client.GetFiles(null);
 
@@ -2209,8 +2104,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetFiles_ShortVersion_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             Result result = await client.GetFilesAsync(null);
 
@@ -2229,8 +2123,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public void Example_GetFiles_ShortVersion_Convenience()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             Result<ListFilesResponse> result = client.GetFiles();
         }
@@ -2239,8 +2132,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetFiles_ShortVersion_Convenience_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             Result<ListFilesResponse> result = await client.GetFilesAsync();
         }
@@ -2249,8 +2141,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public void Example_GetFiles_AllParameters()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             Result result = client.GetFiles(null);
 
@@ -2270,8 +2161,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetFiles_AllParameters_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             Result result = await client.GetFilesAsync(null);
 
@@ -2291,8 +2181,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public void Example_GetFiles_AllParameters_Convenience()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             Result<ListFilesResponse> result = client.GetFiles();
         }
@@ -2301,8 +2190,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetFiles_AllParameters_Convenience_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             Result<ListFilesResponse> result = await client.GetFilesAsync();
         }
@@ -2311,8 +2199,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public void Example_CreateFile_ShortVersion()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
             {
@@ -2335,8 +2222,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public async Task Example_CreateFile_ShortVersion_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
             {
@@ -2359,8 +2245,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public void Example_CreateFile_ShortVersion_Convenience()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             CreateFileRequest file = new CreateFileRequest(BinaryData.FromObjectAsJson(new object()), "<purpose>");
             Result<OpenAIFile> result = client.CreateFile(file);
@@ -2370,8 +2255,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public async Task Example_CreateFile_ShortVersion_Convenience_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             CreateFileRequest file = new CreateFileRequest(BinaryData.FromObjectAsJson(new object()), "<purpose>");
             Result<OpenAIFile> result = await client.CreateFileAsync(file);
@@ -2381,8 +2265,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public void Example_CreateFile_AllParameters()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
             {
@@ -2406,8 +2289,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public async Task Example_CreateFile_AllParameters_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
             {
@@ -2431,8 +2313,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public void Example_CreateFile_AllParameters_Convenience()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             CreateFileRequest file = new CreateFileRequest(BinaryData.FromObjectAsJson(new object()), "<purpose>");
             Result<OpenAIFile> result = client.CreateFile(file);
@@ -2442,8 +2323,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public async Task Example_CreateFile_AllParameters_Convenience_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             CreateFileRequest file = new CreateFileRequest(BinaryData.FromObjectAsJson(new object()), "<purpose>");
             Result<OpenAIFile> result = await client.CreateFileAsync(file);
@@ -2453,8 +2333,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public void Example_RetrieveFile_ShortVersion()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             Result result = client.RetrieveFile("<file_id>", null);
 
@@ -2472,8 +2351,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public async Task Example_RetrieveFile_ShortVersion_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             Result result = await client.RetrieveFileAsync("<file_id>", null);
 
@@ -2491,8 +2369,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public void Example_RetrieveFile_ShortVersion_Convenience()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             Result<OpenAIFile> result = client.RetrieveFile("<file_id>");
         }
@@ -2501,8 +2378,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public async Task Example_RetrieveFile_ShortVersion_Convenience_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             Result<OpenAIFile> result = await client.RetrieveFileAsync("<file_id>");
         }
@@ -2511,8 +2387,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public void Example_RetrieveFile_AllParameters()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             Result result = client.RetrieveFile("<file_id>", null);
 
@@ -2531,8 +2406,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public async Task Example_RetrieveFile_AllParameters_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             Result result = await client.RetrieveFileAsync("<file_id>", null);
 
@@ -2551,8 +2425,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public void Example_RetrieveFile_AllParameters_Convenience()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             Result<OpenAIFile> result = client.RetrieveFile("<file_id>");
         }
@@ -2561,8 +2434,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public async Task Example_RetrieveFile_AllParameters_Convenience_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             Result<OpenAIFile> result = await client.RetrieveFileAsync("<file_id>");
         }
@@ -2571,8 +2443,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public void Example_DeleteFile_ShortVersion()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             Result result = client.DeleteFile("<file_id>", null);
 
@@ -2586,8 +2457,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public async Task Example_DeleteFile_ShortVersion_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             Result result = await client.DeleteFileAsync("<file_id>", null);
 
@@ -2601,8 +2471,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public void Example_DeleteFile_ShortVersion_Convenience()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             Result<DeleteFileResponse> result = client.DeleteFile("<file_id>");
         }
@@ -2611,8 +2480,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public async Task Example_DeleteFile_ShortVersion_Convenience_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             Result<DeleteFileResponse> result = await client.DeleteFileAsync("<file_id>");
         }
@@ -2621,8 +2489,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public void Example_DeleteFile_AllParameters()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             Result result = client.DeleteFile("<file_id>", null);
 
@@ -2636,8 +2503,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public async Task Example_DeleteFile_AllParameters_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             Result result = await client.DeleteFileAsync("<file_id>", null);
 
@@ -2651,8 +2517,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public void Example_DeleteFile_AllParameters_Convenience()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             Result<DeleteFileResponse> result = client.DeleteFile("<file_id>");
         }
@@ -2661,8 +2526,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public async Task Example_DeleteFile_AllParameters_Convenience_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             Result<DeleteFileResponse> result = await client.DeleteFileAsync("<file_id>");
         }
@@ -2671,8 +2535,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public void Example_DownloadFile_ShortVersion()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             Result result = client.DownloadFile("<file_id>", null);
 
@@ -2684,8 +2547,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public async Task Example_DownloadFile_ShortVersion_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             Result result = await client.DownloadFileAsync("<file_id>", null);
 
@@ -2697,8 +2559,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public void Example_DownloadFile_ShortVersion_Convenience()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             Result<string> result = client.DownloadFile("<file_id>");
         }
@@ -2707,8 +2568,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public async Task Example_DownloadFile_ShortVersion_Convenience_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             Result<string> result = await client.DownloadFileAsync("<file_id>");
         }
@@ -2717,8 +2577,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public void Example_DownloadFile_AllParameters()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             Result result = client.DownloadFile("<file_id>", null);
 
@@ -2730,8 +2589,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public async Task Example_DownloadFile_AllParameters_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             Result result = await client.DownloadFileAsync("<file_id>", null);
 
@@ -2743,8 +2601,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public void Example_DownloadFile_AllParameters_Convenience()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             Result<string> result = client.DownloadFile("<file_id>");
         }
@@ -2753,8 +2610,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public async Task Example_DownloadFile_AllParameters_Convenience_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             Result<string> result = await client.DownloadFileAsync("<file_id>");
         }
@@ -2763,8 +2619,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public void Example_GetModels_ShortVersion()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             Result result = client.GetModels(null);
 
@@ -2780,8 +2635,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetModels_ShortVersion_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             Result result = await client.GetModelsAsync(null);
 
@@ -2797,8 +2651,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public void Example_GetModels_ShortVersion_Convenience()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             Result<ListModelsResponse> result = client.GetModels();
         }
@@ -2807,8 +2660,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetModels_ShortVersion_Convenience_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             Result<ListModelsResponse> result = await client.GetModelsAsync();
         }
@@ -2817,8 +2669,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public void Example_GetModels_AllParameters()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             Result result = client.GetModels(null);
 
@@ -2834,8 +2685,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetModels_AllParameters_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             Result result = await client.GetModelsAsync(null);
 
@@ -2851,8 +2701,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public void Example_GetModels_AllParameters_Convenience()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             Result<ListModelsResponse> result = client.GetModels();
         }
@@ -2861,8 +2710,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetModels_AllParameters_Convenience_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             Result<ListModelsResponse> result = await client.GetModelsAsync();
         }
@@ -2871,8 +2719,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public void Example_RetrieveModel_ShortVersion()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             Result result = client.RetrieveModel("<model>", null);
 
@@ -2887,8 +2734,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public async Task Example_RetrieveModel_ShortVersion_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             Result result = await client.RetrieveModelAsync("<model>", null);
 
@@ -2903,8 +2749,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public void Example_RetrieveModel_ShortVersion_Convenience()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             Result<Model> result = client.RetrieveModel("<model>");
         }
@@ -2913,8 +2758,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public async Task Example_RetrieveModel_ShortVersion_Convenience_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             Result<Model> result = await client.RetrieveModelAsync("<model>");
         }
@@ -2923,8 +2767,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public void Example_RetrieveModel_AllParameters()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             Result result = client.RetrieveModel("<model>", null);
 
@@ -2939,8 +2782,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public async Task Example_RetrieveModel_AllParameters_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             Result result = await client.RetrieveModelAsync("<model>", null);
 
@@ -2955,8 +2797,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public void Example_RetrieveModel_AllParameters_Convenience()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             Result<Model> result = client.RetrieveModel("<model>");
         }
@@ -2965,8 +2806,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public async Task Example_RetrieveModel_AllParameters_Convenience_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             Result<Model> result = await client.RetrieveModelAsync("<model>");
         }
@@ -2975,8 +2815,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public void Example_DeleteModel_ShortVersion()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             Result result = client.DeleteModel("<model>", null);
 
@@ -2990,8 +2829,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public async Task Example_DeleteModel_ShortVersion_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             Result result = await client.DeleteModelAsync("<model>", null);
 
@@ -3005,8 +2843,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public void Example_DeleteModel_ShortVersion_Convenience()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             Result<DeleteModelResponse> result = client.DeleteModel("<model>");
         }
@@ -3015,8 +2852,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public async Task Example_DeleteModel_ShortVersion_Convenience_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             Result<DeleteModelResponse> result = await client.DeleteModelAsync("<model>");
         }
@@ -3025,8 +2861,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public void Example_DeleteModel_AllParameters()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             Result result = client.DeleteModel("<model>", null);
 
@@ -3040,8 +2875,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public async Task Example_DeleteModel_AllParameters_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             Result result = await client.DeleteModelAsync("<model>", null);
 
@@ -3055,8 +2889,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public void Example_DeleteModel_AllParameters_Convenience()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             Result<DeleteModelResponse> result = client.DeleteModel("<model>");
         }
@@ -3065,8 +2898,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public async Task Example_DeleteModel_AllParameters_Convenience_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             Result<DeleteModelResponse> result = await client.DeleteModelAsync("<model>");
         }
@@ -3075,8 +2907,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public void Example_CreateModeration_ShortVersion()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
             {
@@ -3119,8 +2950,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public async Task Example_CreateModeration_ShortVersion_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
             {
@@ -3163,8 +2993,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public void Example_CreateModeration_ShortVersion_Convenience()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             CreateModerationRequest content = new CreateModerationRequest(new string[] { "<input>" });
             Result<CreateModerationResponse> result = client.CreateModeration(content);
@@ -3174,8 +3003,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public async Task Example_CreateModeration_ShortVersion_Convenience_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             CreateModerationRequest content = new CreateModerationRequest(new string[] { "<input>" });
             Result<CreateModerationResponse> result = await client.CreateModerationAsync(content);
@@ -3185,8 +3013,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public void Example_CreateModeration_AllParameters()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
             {
@@ -3230,8 +3057,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public async Task Example_CreateModeration_AllParameters_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
             {
@@ -3275,8 +3101,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public void Example_CreateModeration_AllParameters_Convenience()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             CreateModerationRequest content = new CreateModerationRequest(new string[] { "<input>" })
             {
@@ -3289,8 +3114,7 @@ Description = "<description>",
         [Ignore("Only validating compilation of examples")]
         public async Task Example_CreateModeration_AllParameters_Convenience_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            OpenAIClient client = new OpenAIClient(endpoint);
+            OpenAIClient client = new OpenAIClient();
 
             CreateModerationRequest content = new CreateModerationRequest(new string[] { "<input>" })
             {

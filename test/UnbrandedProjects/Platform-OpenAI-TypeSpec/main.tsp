@@ -32,11 +32,5 @@ using TypeSpec.Http;
   version: "2.0.0",
 })
 @useAuth(BearerAuth)
-@server(
-    "{openaiEndpoint}",
-    "OpenAI Service",
-    {
-        openaiEndpoint: string,
-    }
-)
+@server("https://api.openai.com/v1", "OpenAI Endpoint")
 namespace OpenAI;

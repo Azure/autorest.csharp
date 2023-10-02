@@ -33,20 +33,13 @@ namespace OpenAI
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual MessagePipeline Pipeline => _pipeline;
 
-        /// <summary> Initializes a new instance of OpenAIClient for mocking. </summary>
-        protected OpenAIClient()
+        /// <summary> Initializes a new instance of OpenAIClient. </summary>
+        public OpenAIClient() : this(new Uri("https://api.openai.com/v1"), new OpenAIClientOptions())
         {
         }
 
         /// <summary> Initializes a new instance of OpenAIClient. </summary>
-        /// <param name="endpoint"> The Uri to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
-        public OpenAIClient(Uri endpoint) : this(endpoint, new OpenAIClientOptions())
-        {
-        }
-
-        /// <summary> Initializes a new instance of OpenAIClient. </summary>
-        /// <param name="endpoint"> The Uri to use. </param>
+        /// <param name="endpoint"> OpenAI Endpoint. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public OpenAIClient(Uri endpoint, OpenAIClientOptions options)
