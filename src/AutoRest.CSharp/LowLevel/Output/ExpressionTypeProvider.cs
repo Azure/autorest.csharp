@@ -16,6 +16,14 @@ namespace AutoRest.CSharp.LowLevel.Output
         {
         }
 
+        private IEnumerable<string>? _usings;
+        public IEnumerable<string> Usings => _usings ??= EnsureUsings();
+
+        protected virtual IEnumerable<string> EnsureUsings()
+        {
+            yield break;
+        }
+
         public virtual CSharpType? Inherits => null;
 
         private IEnumerable<CSharpType>? _implements;

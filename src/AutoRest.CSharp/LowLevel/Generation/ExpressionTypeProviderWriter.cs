@@ -20,6 +20,11 @@ namespace AutoRest.CSharp.LowLevel.Generation
 
         public virtual void Write()
         {
+            foreach (var @using in _provider.Usings)
+            {
+                _writer.UseNamespace(@using);
+            }
+
             using (_writer.Namespace(_provider.Declaration.Namespace))
             {
                 _writer.Append($"{_provider.Declaration.Accessibility} partial class {_provider.Type:D}")

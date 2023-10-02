@@ -38,6 +38,11 @@ namespace AutoRest.CSharp.LowLevel.Output.Samples
             _samples = client.ClientMethods.SelectMany(m => m.Samples);
         }
 
+        protected override IEnumerable<string> EnsureUsings()
+        {
+            yield return "Azure.Identity"; // we need this using because we might need to call `new DefaultAzureCredential` from `Azure.Identity` package, but Azure.Identity package is not a dependency of the generator project.
+        }
+
         private readonly IEnumerable<DpgOperationSample> _samples;
         private Dictionary<MethodSignature, List<DpgOperationSample>>? methodToSampleDict;
         private Dictionary<MethodSignature, List<DpgOperationSample>> MethodToSampleDict => methodToSampleDict ??= BuildMethodToSampleCache();
@@ -106,7 +111,7 @@ namespace AutoRest.CSharp.LowLevel.Output.Samples
 
         private readonly CSharpAttribute[] _attributes = new[] { new CSharpAttribute(typeof(TestAttribute)), new CSharpAttribute(typeof(IgnoreAttribute), "Only validating compilation of examples") };
 
-        private Method BuildSampleMethod(DpgOperationSample sample, bool isAsync)
+        protected Method BuildSampleMethod(DpgOperationSample sample, bool isAsync)
         {
             var signature = GetMethodSignature(sample, isAsync);
             var clientVariableStatements = new List<MethodBodyStatement>();
@@ -126,7 +131,7 @@ namespace AutoRest.CSharp.LowLevel.Output.Samples
             });
         }
 
-        private MethodBodyStatement BuildGetClientStatement(DpgOperationSample sample, IReadOnlyList<MethodSignatureBase> methodsToCall, List<MethodBodyStatement> variableDeclarations, out VariableReference clientVar)
+        protected virtual MethodBodyStatement BuildGetClientStatement(DpgOperationSample sample, IReadOnlyList<MethodSignatureBase> methodsToCall, List<MethodBodyStatement> variableDeclarations, out VariableReference clientVar)
         {
             var first = methodsToCall[0];
             ValueExpression valueExpression = first switch
@@ -214,7 +219,7 @@ namespace AutoRest.CSharp.LowLevel.Output.Samples
             }
         }
 
-        private IEnumerable<MethodBodyStatement> BuildResponseStatements(DpgOperationSample sample, VariableReference resultVar)
+        protected virtual IEnumerable<MethodBodyStatement> BuildResponseStatements(DpgOperationSample sample, VariableReference resultVar)
         {
             if (sample.IsResponseStream)
             {
