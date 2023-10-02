@@ -42,12 +42,6 @@ Response response = await client.GetBooleanValueAsync(null);
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code>
-This sample shows how to call GetBooleanValueAsync.
-<code><![CDATA[
-BooleanValue client = new ArrayClient().GetBooleanValueClient(apiVersion: "1.0.0");
-
-Response<IReadOnlyList<bool>> response = await client.GetBooleanValueAsync();
-]]></code>
 This sample shows how to call GetBooleanValueAsync with all parameters and parse the result.
 <code><![CDATA[
 BooleanValue client = new ArrayClient().GetBooleanValueClient(apiVersion: "1.0.0");
@@ -56,12 +50,6 @@ Response response = await client.GetBooleanValueAsync(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0].ToString());
-]]></code>
-This sample shows how to call GetBooleanValueAsync with all parameters.
-<code><![CDATA[
-BooleanValue client = new ArrayClient().GetBooleanValueClient(apiVersion: "1.0.0");
-
-Response<IReadOnlyList<bool>> response = await client.GetBooleanValueAsync();
 ]]></code></example>
     </member>
     <member name="GetBooleanValue(RequestContext)">
@@ -75,12 +63,6 @@ Response response = client.GetBooleanValue(null);
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code>
-This sample shows how to call GetBooleanValue.
-<code><![CDATA[
-BooleanValue client = new ArrayClient().GetBooleanValueClient(apiVersion: "1.0.0");
-
-Response<IReadOnlyList<bool>> response = client.GetBooleanValue();
-]]></code>
 This sample shows how to call GetBooleanValue with all parameters and parse the result.
 <code><![CDATA[
 BooleanValue client = new ArrayClient().GetBooleanValueClient(apiVersion: "1.0.0");
@@ -89,12 +71,6 @@ Response response = client.GetBooleanValue(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0].ToString());
-]]></code>
-This sample shows how to call GetBooleanValue with all parameters.
-<code><![CDATA[
-BooleanValue client = new ArrayClient().GetBooleanValueClient(apiVersion: "1.0.0");
-
-Response<IReadOnlyList<bool>> response = client.GetBooleanValue();
 ]]></code></example>
     </member>
     <member name="PutAsync(IEnumerable{bool},CancellationToken)">
@@ -141,12 +117,6 @@ Response response = await client.PutAsync(content);
 
 Console.WriteLine(response.Status);
 ]]></code>
-This sample shows how to call PutAsync.
-<code><![CDATA[
-BooleanValue client = new ArrayClient().GetBooleanValueClient(apiVersion: "1.0.0");
-
-Response response = await client.PutAsync(new bool[] { true });
-]]></code>
 This sample shows how to call PutAsync with all request content.
 <code><![CDATA[
 BooleanValue client = new ArrayClient().GetBooleanValueClient(apiVersion: "1.0.0");
@@ -158,12 +128,6 @@ RequestContent content = RequestContent.Create(new object[]
 Response response = await client.PutAsync(content);
 
 Console.WriteLine(response.Status);
-]]></code>
-This sample shows how to call PutAsync with all parameters.
-<code><![CDATA[
-BooleanValue client = new ArrayClient().GetBooleanValueClient(apiVersion: "1.0.0");
-
-Response response = await client.PutAsync(new bool[] { true });
 ]]></code></example>
     </member>
     <member name="Put(RequestContent,RequestContext)">
@@ -180,12 +144,6 @@ Response response = client.Put(content);
 
 Console.WriteLine(response.Status);
 ]]></code>
-This sample shows how to call Put.
-<code><![CDATA[
-BooleanValue client = new ArrayClient().GetBooleanValueClient(apiVersion: "1.0.0");
-
-Response response = client.Put(new bool[] { true });
-]]></code>
 This sample shows how to call Put with all request content.
 <code><![CDATA[
 BooleanValue client = new ArrayClient().GetBooleanValueClient(apiVersion: "1.0.0");
@@ -197,12 +155,6 @@ RequestContent content = RequestContent.Create(new object[]
 Response response = client.Put(content);
 
 Console.WriteLine(response.Status);
-]]></code>
-This sample shows how to call Put with all parameters.
-<code><![CDATA[
-BooleanValue client = new ArrayClient().GetBooleanValueClient(apiVersion: "1.0.0");
-
-Response response = client.Put(new bool[] { true });
 ]]></code></example>
     </member>
   </members>

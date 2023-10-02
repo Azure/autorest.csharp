@@ -678,13 +678,6 @@ Console.WriteLine(result.GetProperty("errors").GetProperty("code").ToString());
 Console.WriteLine(result.GetProperty("errors").GetProperty("message").ToString());
 Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code>
-This sample shows how to call GetDeploymentStatusValueAsync.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-AuthoringTypeSpecClient client = new AuthoringTypeSpecClient(endpoint);
-
-Response<DeploymentJob> response = await client.GetDeploymentStatusValueAsync("<projectName>", "<deploymentName>", "<jobId>");
-]]></code>
 This sample shows how to call GetDeploymentStatusAsync with all parameters and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -705,13 +698,6 @@ Console.WriteLine(result.GetProperty("errors").GetProperty("message").ToString()
 Console.WriteLine(result.GetProperty("errors").GetProperty("target").ToString());
 Console.WriteLine(result.GetProperty("errors").GetProperty("innererror").GetProperty("code").ToString());
 Console.WriteLine(result.GetProperty("id").ToString());
-]]></code>
-This sample shows how to call GetDeploymentStatusValueAsync with all parameters.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-AuthoringTypeSpecClient client = new AuthoringTypeSpecClient(endpoint);
-
-Response<DeploymentJob> response = await client.GetDeploymentStatusValueAsync("<projectName>", "<deploymentName>", "<jobId>");
 ]]></code></example>
     </member>
     <member name="GetDeploymentStatus(string,string,string,RequestContext)">
@@ -735,13 +721,6 @@ Console.WriteLine(result.GetProperty("errors").GetProperty("code").ToString());
 Console.WriteLine(result.GetProperty("errors").GetProperty("message").ToString());
 Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code>
-This sample shows how to call GetDeploymentStatusValue.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-AuthoringTypeSpecClient client = new AuthoringTypeSpecClient(endpoint);
-
-Response<DeploymentJob> response = client.GetDeploymentStatusValue("<projectName>", "<deploymentName>", "<jobId>");
-]]></code>
 This sample shows how to call GetDeploymentStatus with all parameters and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -762,13 +741,6 @@ Console.WriteLine(result.GetProperty("errors").GetProperty("message").ToString()
 Console.WriteLine(result.GetProperty("errors").GetProperty("target").ToString());
 Console.WriteLine(result.GetProperty("errors").GetProperty("innererror").GetProperty("code").ToString());
 Console.WriteLine(result.GetProperty("id").ToString());
-]]></code>
-This sample shows how to call GetDeploymentStatusValue with all parameters.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-AuthoringTypeSpecClient client = new AuthoringTypeSpecClient(endpoint);
-
-Response<DeploymentJob> response = client.GetDeploymentStatusValue("<projectName>", "<deploymentName>", "<jobId>");
 ]]></code></example>
     </member>
     <member name="GetSwapDeploymentsStatusValueAsync(string,string,string,CancellationToken)">
@@ -826,13 +798,6 @@ Console.WriteLine(result.GetProperty("errors").GetProperty("code").ToString());
 Console.WriteLine(result.GetProperty("errors").GetProperty("message").ToString());
 Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code>
-This sample shows how to call GetSwapDeploymentsStatusValueAsync.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-AuthoringTypeSpecClient client = new AuthoringTypeSpecClient(endpoint);
-
-Response<SwapDeploymentsJob> response = await client.GetSwapDeploymentsStatusValueAsync("<projectName>", "<deploymentName>", "<jobId>");
-]]></code>
 This sample shows how to call GetSwapDeploymentsStatusAsync with all parameters and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -853,13 +818,6 @@ Console.WriteLine(result.GetProperty("errors").GetProperty("message").ToString()
 Console.WriteLine(result.GetProperty("errors").GetProperty("target").ToString());
 Console.WriteLine(result.GetProperty("errors").GetProperty("innererror").GetProperty("code").ToString());
 Console.WriteLine(result.GetProperty("id").ToString());
-]]></code>
-This sample shows how to call GetSwapDeploymentsStatusValueAsync with all parameters.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-AuthoringTypeSpecClient client = new AuthoringTypeSpecClient(endpoint);
-
-Response<SwapDeploymentsJob> response = await client.GetSwapDeploymentsStatusValueAsync("<projectName>", "<deploymentName>", "<jobId>");
 ]]></code></example>
     </member>
     <member name="GetSwapDeploymentsStatus(string,string,string,RequestContext)">
@@ -883,13 +841,6 @@ Console.WriteLine(result.GetProperty("errors").GetProperty("code").ToString());
 Console.WriteLine(result.GetProperty("errors").GetProperty("message").ToString());
 Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code>
-This sample shows how to call GetSwapDeploymentsStatusValue.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-AuthoringTypeSpecClient client = new AuthoringTypeSpecClient(endpoint);
-
-Response<SwapDeploymentsJob> response = client.GetSwapDeploymentsStatusValue("<projectName>", "<deploymentName>", "<jobId>");
-]]></code>
 This sample shows how to call GetSwapDeploymentsStatus with all parameters and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -910,13 +861,6 @@ Console.WriteLine(result.GetProperty("errors").GetProperty("message").ToString()
 Console.WriteLine(result.GetProperty("errors").GetProperty("target").ToString());
 Console.WriteLine(result.GetProperty("errors").GetProperty("innererror").GetProperty("code").ToString());
 Console.WriteLine(result.GetProperty("id").ToString());
-]]></code>
-This sample shows how to call GetSwapDeploymentsStatusValue with all parameters.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-AuthoringTypeSpecClient client = new AuthoringTypeSpecClient(endpoint);
-
-Response<SwapDeploymentsJob> response = client.GetSwapDeploymentsStatusValue("<projectName>", "<deploymentName>", "<jobId>");
 ]]></code></example>
     </member>
     <member name="GetProjectsAsync(RequestContext)">

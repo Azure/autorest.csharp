@@ -48,7 +48,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                     var clientSampleWriter = new ExpressionTypeProviderWriter(sampleProvider);
                     clientSampleWriter.Write();
                     project.AddGeneratedTestFile(clientExampleFilename, clientSampleWriter.ToString());
-                    project.AddGeneratedDocFile($"Docs/{client.Type.Name}.xml", new XmlDocumentFile(clientExampleFilename, dpgClientWriter.XmlDocWriter));
+                    project.AddGeneratedDocFile(dpgClientWriter.XmlDocWriter.Filename, new XmlDocumentFile(clientExampleFilename, dpgClientWriter.XmlDocWriter));
                 }
             }
 
