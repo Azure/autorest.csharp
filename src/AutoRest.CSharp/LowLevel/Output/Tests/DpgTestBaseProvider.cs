@@ -67,13 +67,13 @@ namespace AutoRest.CSharp.LowLevel.Output.Tests
             }
         }
 
-        private Dictionary<LowLevelClient, Method>? _createClientMethods;
+        private Dictionary<CSharpType, Method>? _createClientMethods;
 
-        public Dictionary<LowLevelClient, Method> CreateClientMethods => _createClientMethods ??= EnsureCreateClientMethods();
+        public Dictionary<CSharpType, Method> CreateClientMethods => _createClientMethods ??= EnsureCreateClientMethods();
 
-        private Dictionary<LowLevelClient, Method> EnsureCreateClientMethods()
+        private Dictionary<CSharpType, Method> EnsureCreateClientMethods()
         {
-            var result = new Dictionary<LowLevelClient, Method>();
+            var result = new Dictionary<CSharpType, Method>();
             foreach (var client in _clients)
             {
                 if (client.IsSubClient)
@@ -96,7 +96,7 @@ namespace AutoRest.CSharp.LowLevel.Output.Tests
 
                 var method = new Method(signature, BuildClientFactoryMethodBody(client, ctor).ToArray());
 
-                result.Add(client, method);
+                result.Add(client.Type, method);
             }
 
             return result;

@@ -99,7 +99,7 @@ namespace AutoRest.CSharp.LowLevel.Output.Samples
             return builder.ToString();
         }
 
-        protected virtual MethodSignature GetMethodSignature(DpgOperationSample sample, bool isAsync) => new(
+        private MethodSignature GetMethodSignature(DpgOperationSample sample, bool isAsync) => new(
                 Name: GetMethodName(sample, isAsync),
                 Summary: null,
                 Description: null,
@@ -107,7 +107,9 @@ namespace AutoRest.CSharp.LowLevel.Output.Samples
                 ReturnType: isAsync ? typeof(Task) : (CSharpType?)null,
                 ReturnDescription: null,
                 Parameters: Array.Empty<Parameter>(),
-                Attributes: _attributes);
+                Attributes: GetMethodAttributes());
+
+        protected virtual CSharpAttribute[] GetMethodAttributes() => _attributes;
 
         private readonly CSharpAttribute[] _attributes = new[] { new CSharpAttribute(typeof(TestAttribute)), new CSharpAttribute(typeof(IgnoreAttribute), "Only validating compilation of examples") };
 

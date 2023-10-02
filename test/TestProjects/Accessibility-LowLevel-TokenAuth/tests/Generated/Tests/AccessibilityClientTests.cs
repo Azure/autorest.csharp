@@ -22,7 +22,7 @@ namespace Accessibility_LowLevel_TokenAuth.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of examples")]
+        [Ignore("Only validating compilation of test scaffoldings")]
         public async Task Operation_ShortVersion()
         {
             Uri endpoint = null;
@@ -34,7 +34,7 @@ namespace Accessibility_LowLevel_TokenAuth.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of examples")]
+        [Ignore("Only validating compilation of test scaffoldings")]
         public async Task Operation_AllParameters()
         {
             Uri endpoint = null;

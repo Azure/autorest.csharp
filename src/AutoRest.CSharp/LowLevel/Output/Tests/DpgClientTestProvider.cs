@@ -14,6 +14,7 @@ using AutoRest.CSharp.LowLevel.Output.Samples;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Samples.Models;
+using NUnit.Framework;
 
 namespace AutoRest.CSharp.LowLevel.Output.Tests
 {
@@ -77,12 +78,20 @@ namespace AutoRest.CSharp.LowLevel.Output.Tests
             return builder.ToString();
         }
 
+        protected override CSharpAttribute[] GetMethodAttributes() => _attributes;
+
+        private static readonly CSharpAttribute[] _attributes = new[] { new CSharpAttribute(typeof(TestAttribute)), new CSharpAttribute(typeof(IgnoreAttribute), "Only validating compilation of test scaffoldings") };
+
         protected override MethodBodyStatement BuildGetClientStatement(DpgOperationSample sample, IReadOnlyList<MethodSignatureBase> methodsToCall, List<MethodBodyStatement> variableDeclarations, out VariableReference clientVar)
         {
-            // change the first method in methodToCall to the factory method of this client
-            var firstMethod = _testBaseProvider.CreateClientMethods[Client];
+            // change the first method in methodToCall to the factory method of that client
+            var firstMethod = methodsToCall[0];
+            if (firstMethod is ConstructorSignature ctor)
+            {
+                firstMethod = _testBaseProvider.CreateClientMethods[ctor.Type].Signature;
+            }
             var newMethodsToCall = methodsToCall.ToArray();
-            newMethodsToCall[0] = firstMethod.Signature;
+            newMethodsToCall[0] = firstMethod;
             return base.BuildGetClientStatement(sample, newMethodsToCall, variableDeclarations, out clientVar);
         }
 
