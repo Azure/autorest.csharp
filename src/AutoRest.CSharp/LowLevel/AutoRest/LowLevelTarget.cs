@@ -8,7 +8,6 @@ using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.PostProcessing;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input.Source;
-using AutoRest.CSharp.LowLevel.Generation;
 using AutoRest.CSharp.LowLevel.Generation.SampleGeneration;
 using AutoRest.CSharp.Output.Models;
 

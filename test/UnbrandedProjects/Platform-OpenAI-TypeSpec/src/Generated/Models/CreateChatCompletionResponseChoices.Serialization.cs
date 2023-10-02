@@ -10,9 +10,9 @@ using System.Text.Json;
 
 namespace OpenAI.Models
 {
-    public partial class ChatCompletionChoice
+    public partial class CreateChatCompletionResponseChoices
     {
-        internal static ChatCompletionChoice DeserializeChatCompletionChoice(JsonElement element)
+        internal static CreateChatCompletionResponseChoices DeserializeCreateChatCompletionResponseChoices(JsonElement element)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -39,15 +39,15 @@ namespace OpenAI.Models
                     continue;
                 }
             }
-            return new ChatCompletionChoice(index, message, finishReason);
+            return new CreateChatCompletionResponseChoices(index, message, finishReason);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="result"> The result to deserialize the model from. </param>
-        internal static ChatCompletionChoice FromResponse(PipelineResponse result)
+        internal static CreateChatCompletionResponseChoices FromResponse(PipelineResponse result)
         {
             using var document = JsonDocument.Parse(result.Content);
-            return DeserializeChatCompletionChoice(document.RootElement);
+            return DeserializeCreateChatCompletionResponseChoices(document.RootElement);
         }
     }
 }

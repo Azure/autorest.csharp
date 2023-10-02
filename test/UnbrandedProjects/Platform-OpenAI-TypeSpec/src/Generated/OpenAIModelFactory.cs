@@ -22,14 +22,14 @@ namespace OpenAI.Models
         /// <param name="choices"> A list of chat completion choices. Can be more than one if `n` is greater than 1. </param>
         /// <param name="usage"></param>
         /// <returns> A new <see cref="Models.CreateChatCompletionResponse"/> instance for mocking. </returns>
-        public static CreateChatCompletionResponse CreateChatCompletionResponse(string id = null, string @object = null, DateTimeOffset created = default, string model = null, IEnumerable<ChatCompletionChoice> choices = null, CompletionUsage usage = null)
+        public static CreateChatCompletionResponse CreateChatCompletionResponse(string id = null, string @object = null, DateTimeOffset created = default, string model = null, IEnumerable<CreateChatCompletionResponseChoices> choices = null, CompletionUsage usage = null)
         {
-            choices ??= new List<ChatCompletionChoice>();
+            choices ??= new List<CreateChatCompletionResponseChoices>();
 
             return new CreateChatCompletionResponse(id, @object, created, model, choices?.ToList(), usage);
         }
 
-        /// <summary> Initializes a new instance of ChatCompletionChoice. </summary>
+        /// <summary> Initializes a new instance of CreateChatCompletionResponseChoices. </summary>
         /// <param name="index"> The index of the choice in the list of choices. </param>
         /// <param name="message"></param>
         /// <param name="finishReason">
@@ -39,15 +39,15 @@ namespace OpenAI.Models
         /// a flag from our content filters, or `function_call` if the model called a function.
         /// </param>
         /// <exception cref="ArgumentNullException"> <paramref name="message"/> is null. </exception>
-        /// <returns> A new <see cref="Models.ChatCompletionChoice"/> instance for mocking. </returns>
-        public static ChatCompletionChoice ChatCompletionChoice(long index = default, ChatCompletionResponseMessage message = null, FinishReason finishReason = default)
+        /// <returns> A new <see cref="Models.CreateChatCompletionResponseChoices"/> instance for mocking. </returns>
+        public static CreateChatCompletionResponseChoices CreateChatCompletionResponseChoices(long index = default, ChatCompletionResponseMessage message = null, FinishReason finishReason = default)
         {
             if (message == null)
             {
                 throw new ArgumentNullException(nameof(message));
             }
 
-            return new ChatCompletionChoice(index, message, finishReason);
+            return new CreateChatCompletionResponseChoices(index, message, finishReason);
         }
 
         /// <summary> Initializes a new instance of ChatCompletionResponseMessage. </summary>

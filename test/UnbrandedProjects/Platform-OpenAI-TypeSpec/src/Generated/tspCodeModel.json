@@ -1210,9 +1210,8 @@
       "Name": "Array",
       "ElementType": {
        "$id": "175",
-       "Name": "ChatCompletionChoice",
+       "Name": "",
        "Namespace": "OpenAI",
-       "Description": "Chat completion choice",
        "IsNullable": false,
        "Usage": "Output",
        "Properties": [

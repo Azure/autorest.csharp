@@ -10,10 +10,10 @@ using System.ServiceModel.Rest.Experimental;
 
 namespace OpenAI.Models
 {
-    /// <summary> Chat completion choice. </summary>
-    public partial class ChatCompletionChoice
+    /// <summary> The CreateChatCompletionResponseChoices. </summary>
+    public partial class CreateChatCompletionResponseChoices
     {
-        /// <summary> Initializes a new instance of ChatCompletionChoice. </summary>
+        /// <summary> Initializes a new instance of CreateChatCompletionResponseChoices. </summary>
         /// <param name="index"> The index of the choice in the list of choices. </param>
         /// <param name="message"></param>
         /// <param name="finishReason">
@@ -23,7 +23,7 @@ namespace OpenAI.Models
         /// a flag from our content filters, or `function_call` if the model called a function.
         /// </param>
         /// <exception cref="ArgumentNullException"> <paramref name="message"/> is null. </exception>
-        internal ChatCompletionChoice(long index, ChatCompletionResponseMessage message, FinishReason finishReason)
+        internal CreateChatCompletionResponseChoices(long index, ChatCompletionResponseMessage message, FinishReason finishReason)
         {
             ClientUtilities.AssertNotNull(message, nameof(message));
 

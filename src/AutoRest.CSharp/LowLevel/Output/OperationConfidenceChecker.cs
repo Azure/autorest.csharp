@@ -103,7 +103,7 @@ namespace AutoRest.CSharp.Output.Models
             var confidenceLevel = ConvenienceMethodConfidenceLevel.Confident;
             if (type.IsAnonymousModel) // because the result of this is "Removal", we do not really need to consider customized code for it
             {
-                confidenceLevel = ConvenienceMethodConfidenceLevel.Removal;
+                confidenceLevel = ConvenienceMethodConfidenceLevel.Confident;
             }
 
             if (type.BaseModel != null)

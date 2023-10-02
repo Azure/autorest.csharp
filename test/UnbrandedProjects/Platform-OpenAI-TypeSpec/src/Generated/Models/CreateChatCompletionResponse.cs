@@ -22,7 +22,7 @@ namespace OpenAI.Models
         /// <param name="model"> The model used for the chat completion. </param>
         /// <param name="choices"> A list of chat completion choices. Can be more than one if `n` is greater than 1. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/>, <paramref name="object"/>, <paramref name="model"/> or <paramref name="choices"/> is null. </exception>
-        internal CreateChatCompletionResponse(string id, string @object, DateTimeOffset created, string model, IEnumerable<ChatCompletionChoice> choices)
+        internal CreateChatCompletionResponse(string id, string @object, DateTimeOffset created, string model, IEnumerable<CreateChatCompletionResponseChoices> choices)
         {
             ClientUtilities.AssertNotNull(id, nameof(id));
             ClientUtilities.AssertNotNull(@object, nameof(@object));
@@ -43,7 +43,7 @@ namespace OpenAI.Models
         /// <param name="model"> The model used for the chat completion. </param>
         /// <param name="choices"> A list of chat completion choices. Can be more than one if `n` is greater than 1. </param>
         /// <param name="usage"></param>
-        internal CreateChatCompletionResponse(string id, string @object, DateTimeOffset created, string model, IReadOnlyList<ChatCompletionChoice> choices, CompletionUsage usage)
+        internal CreateChatCompletionResponse(string id, string @object, DateTimeOffset created, string model, IReadOnlyList<CreateChatCompletionResponseChoices> choices, CompletionUsage usage)
         {
             Id = id;
             Object = @object;
@@ -62,7 +62,7 @@ namespace OpenAI.Models
         /// <summary> The model used for the chat completion. </summary>
         public string Model { get; }
         /// <summary> A list of chat completion choices. Can be more than one if `n` is greater than 1. </summary>
-        public IReadOnlyList<ChatCompletionChoice> Choices { get; }
+        public IReadOnlyList<CreateChatCompletionResponseChoices> Choices { get; }
         /// <summary> Gets the usage. </summary>
         public CompletionUsage Usage { get; }
     }

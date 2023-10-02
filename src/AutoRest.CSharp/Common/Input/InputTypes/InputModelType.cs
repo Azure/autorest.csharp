@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System;
 using System.Collections.Generic;
 
 namespace AutoRest.CSharp.Common.Input
@@ -41,6 +42,26 @@ namespace AutoRest.CSharp.Common.Input
                 yield return model;
                 model = model.BaseModel;
             }
+        }
+
+        internal static InputModelType GiveName(InputModelType model, string? newName)
+        {
+            if (newName is null)
+                return model;
+
+            return new InputModelType(
+                newName,
+                model.Namespace,
+                model.Accessibility,
+                model.Deprecated,
+                model.Description,
+                model.Usage,
+                model.Properties,
+                model.BaseModel,
+                model.DerivedModels,
+                model.DiscriminatorValue,
+                model.DiscriminatorPropertyName,
+                model.IsNullable);
         }
     }
 }

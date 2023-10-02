@@ -84,7 +84,53 @@ namespace AutoRest.CSharp.Output.Models
             {
                 InputModelType[] derivedTypesArray = model.DerivedModels.ToArray();
                 ModelTypeProvider? defaultDerivedType = GetDefaultDerivedType(models, typeFactory, model, derivedTypesArray, defaultDerivedTypes);
-                models.Add(model, new ModelTypeProvider(model, TypeProvider.GetDefaultModelNamespace(null, _defaultNamespace), _sourceInputModel, typeFactory, derivedTypesArray, defaultDerivedType));
+
+                InputModelType? replacement = null;
+                if (model.IsAnonymousModel)
+                    replacement = InputModelType.GiveName(model, GetAnonModelName(model));
+
+                models.Add(model, new ModelTypeProvider(replacement ?? model, TypeProvider.GetDefaultModelNamespace(null, _defaultNamespace), _sourceInputModel, typeFactory, derivedTypesArray, defaultDerivedType));
+            }
+        }
+
+        private string? GetAnonModelName(InputModelType anonModel)
+        {
+            //check operation parameters first
+            foreach (var client in _rootNamespace.Clients)
+            {
+                foreach (var operation in client.Operations)
+                {
+                    foreach (var parameter in operation.Parameters)
+                    {
+                        if (IsSameType(parameter.Type, anonModel))
+                            return $"{operation.Name}{parameter.Name.FirstCharToUpperCase()}"; //TODO: Probably needs special casing for ipThing to become IPThing
+                    }
+                }
+            }
+
+            //check other model properties
+            foreach (var model in _rootNamespace.Models)
+            {
+                foreach (var property in model.Properties)
+                {
+                    if (IsSameType(property.Type, anonModel))
+                        return $"{model.Name}{property.Name.FirstCharToUpperCase()}";
+                }
+            }
+
+            return null;
+        }
+
+        private bool IsSameType(InputType type, InputModelType anonModel)
+        {
+            switch (type)
+            {
+                case InputListType listType:
+                    return IsSameType(listType.ElementType, anonModel);
+                case InputDictionaryType dictionaryType:
+                    return IsSameType(dictionaryType.ValueType, anonModel);
+                default:
+                    return type.Equals(anonModel);
             }
         }
 
