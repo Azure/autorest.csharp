@@ -17,12 +17,11 @@ namespace OpenAI.Models
         {
             writer.WriteStartObject();
             writer.WritePropertyName("input"u8);
-            writer.WriteStartArray();
-            foreach (var item in Input)
-            {
-                writer.WriteStringValue(item);
-            }
-            writer.WriteEndArray();
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(Input);
+#else
+            JsonSerializer.Serialize(writer, JsonDocument.Parse(Input.ToString()).RootElement);
+#endif
             if (OptionalProperty.IsDefined(Model))
             {
                 writer.WritePropertyName("model"u8);

@@ -588,20 +588,20 @@ namespace OpenAI.Models
         /// <param name="model"> The model used to generate the moderation results. </param>
         /// <param name="results"> A list of moderation objects. </param>
         /// <returns> A new <see cref="Models.CreateModerationResponse"/> instance for mocking. </returns>
-        public static CreateModerationResponse CreateModerationResponse(string id = null, string model = null, IEnumerable<ModerationResult> results = null)
+        public static CreateModerationResponse CreateModerationResponse(string id = null, string model = null, IEnumerable<CreateModerationResult> results = null)
         {
-            results ??= new List<ModerationResult>();
+            results ??= new List<CreateModerationResult>();
 
             return new CreateModerationResponse(id, model, results?.ToList());
         }
 
-        /// <summary> Initializes a new instance of ModerationResult. </summary>
+        /// <summary> Initializes a new instance of CreateModerationResult. </summary>
         /// <param name="flagged"> Whether the content violates [OpenAI's usage policies](/policies/usage-policies). </param>
         /// <param name="categories"> A list of the categories, and whether they are flagged or not. </param>
         /// <param name="categoryScores"> A list of the categories along with their scores as predicted by model. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="categories"/> or <paramref name="categoryScores"/> is null. </exception>
-        /// <returns> A new <see cref="Models.ModerationResult"/> instance for mocking. </returns>
-        public static ModerationResult ModerationResult(bool flagged = default, ModerationCategories categories = null, ModerationCategoryScores categoryScores = null)
+        /// <returns> A new <see cref="Models.CreateModerationResult"/> instance for mocking. </returns>
+        public static CreateModerationResult CreateModerationResult(bool flagged = default, CreateModerationCategories categories = null, CreateModerationCategoryScores categoryScores = null)
         {
             if (categories == null)
             {
@@ -612,10 +612,10 @@ namespace OpenAI.Models
                 throw new ArgumentNullException(nameof(categoryScores));
             }
 
-            return new ModerationResult(flagged, categories, categoryScores);
+            return new CreateModerationResult(flagged, categories, categoryScores);
         }
 
-        /// <summary> Initializes a new instance of ModerationCategories. </summary>
+        /// <summary> Initializes a new instance of CreateModerationCategories. </summary>
         /// <param name="hate">
         /// Content that expresses, incites, or promotes hate based on race, gender, ethnicity,
         /// religion, nationality, sexual orientation, disability status, or caste. Hateful content
@@ -647,13 +647,13 @@ namespace OpenAI.Models
         /// <param name="sexualMinors"> Sexual content that includes an individual who is under 18 years old. </param>
         /// <param name="violence"> Content that depicts death, violence, or physical injury. </param>
         /// <param name="violenceGraphic"> Content that depicts death, violence, or physical injury in graphic detail. </param>
-        /// <returns> A new <see cref="Models.ModerationCategories"/> instance for mocking. </returns>
-        public static ModerationCategories ModerationCategories(bool hate = default, bool hateThreatening = default, bool harassment = default, bool harassmentThreatening = default, bool selfHarm = default, bool selfHarmIntent = default, bool selfHarmInstructive = default, bool sexual = default, bool sexualMinors = default, bool violence = default, bool violenceGraphic = default)
+        /// <returns> A new <see cref="Models.CreateModerationCategories"/> instance for mocking. </returns>
+        public static CreateModerationCategories CreateModerationCategories(bool hate = default, bool hateThreatening = default, bool harassment = default, bool harassmentThreatening = default, bool selfHarm = default, bool selfHarmIntent = default, bool selfHarmInstructive = default, bool sexual = default, bool sexualMinors = default, bool violence = default, bool violenceGraphic = default)
         {
-            return new ModerationCategories(hate, hateThreatening, harassment, harassmentThreatening, selfHarm, selfHarmIntent, selfHarmInstructive, sexual, sexualMinors, violence, violenceGraphic);
+            return new CreateModerationCategories(hate, hateThreatening, harassment, harassmentThreatening, selfHarm, selfHarmIntent, selfHarmInstructive, sexual, sexualMinors, violence, violenceGraphic);
         }
 
-        /// <summary> Initializes a new instance of ModerationCategoryScores. </summary>
+        /// <summary> Initializes a new instance of CreateModerationCategoryScores. </summary>
         /// <param name="hate"> The score for the category 'hate'. </param>
         /// <param name="hateThreatening"> The score for the category 'hate/threatening'. </param>
         /// <param name="harassment"> The score for the category 'harassment'. </param>
@@ -665,10 +665,10 @@ namespace OpenAI.Models
         /// <param name="sexualMinors"> The score for the category 'sexual/minors'. </param>
         /// <param name="violence"> The score for the category 'violence'. </param>
         /// <param name="violenceGraphic"> The score for the category 'violence/graphic'. </param>
-        /// <returns> A new <see cref="Models.ModerationCategoryScores"/> instance for mocking. </returns>
-        public static ModerationCategoryScores ModerationCategoryScores(double hate = default, double hateThreatening = default, double harassment = default, double harassmentThreatening = default, double selfHarm = default, double selfHarmIntent = default, double selfHarmInstructive = default, double sexual = default, double sexualMinors = default, double violence = default, double violenceGraphic = default)
+        /// <returns> A new <see cref="Models.CreateModerationCategoryScores"/> instance for mocking. </returns>
+        public static CreateModerationCategoryScores CreateModerationCategoryScores(double hate = default, double hateThreatening = default, double harassment = default, double harassmentThreatening = default, double selfHarm = default, double selfHarmIntent = default, double selfHarmInstructive = default, double sexual = default, double sexualMinors = default, double violence = default, double violenceGraphic = default)
         {
-            return new ModerationCategoryScores(hate, hateThreatening, harassment, harassmentThreatening, selfHarm, selfHarmIntent, selfHarmInstructive, sexual, sexualMinors, violence, violenceGraphic);
+            return new CreateModerationCategoryScores(hate, hateThreatening, harassment, harassmentThreatening, selfHarm, selfHarmIntent, selfHarmInstructive, sexual, sexualMinors, violence, violenceGraphic);
         }
     }
 }

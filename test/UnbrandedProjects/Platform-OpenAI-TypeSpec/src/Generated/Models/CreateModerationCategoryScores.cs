@@ -7,10 +7,10 @@
 
 namespace OpenAI.Models
 {
-    /// <summary> moderation category scores. </summary>
-    public partial class ModerationCategoryScores
+    /// <summary> The CreateModerationCategoryScores. </summary>
+    public partial class CreateModerationCategoryScores
     {
-        /// <summary> Initializes a new instance of ModerationCategoryScores. </summary>
+        /// <summary> Initializes a new instance of CreateModerationCategoryScores. </summary>
         /// <param name="hate"> The score for the category 'hate'. </param>
         /// <param name="hateThreatening"> The score for the category 'hate/threatening'. </param>
         /// <param name="harassment"> The score for the category 'harassment'. </param>
@@ -22,7 +22,7 @@ namespace OpenAI.Models
         /// <param name="sexualMinors"> The score for the category 'sexual/minors'. </param>
         /// <param name="violence"> The score for the category 'violence'. </param>
         /// <param name="violenceGraphic"> The score for the category 'violence/graphic'. </param>
-        internal ModerationCategoryScores(double hate, double hateThreatening, double harassment, double harassmentThreatening, double selfHarm, double selfHarmIntent, double selfHarmInstructive, double sexual, double sexualMinors, double violence, double violenceGraphic)
+        internal CreateModerationCategoryScores(double hate, double hateThreatening, double harassment, double harassmentThreatening, double selfHarm, double selfHarmIntent, double selfHarmInstructive, double sexual, double sexualMinors, double violence, double violenceGraphic)
         {
             Hate = hate;
             HateThreatening = hateThreatening;

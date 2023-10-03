@@ -10,92 +10,92 @@ using System.Text.Json;
 
 namespace OpenAI.Models
 {
-    public partial class ModerationCategories
+    public partial class CreateModerationCategoryScores
     {
-        internal static ModerationCategories DeserializeModerationCategories(JsonElement element)
+        internal static CreateModerationCategoryScores DeserializeCreateModerationCategoryScores(JsonElement element)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
             }
-            bool hate = default;
-            bool hateThreatening = default;
-            bool harassment = default;
-            bool harassmentThreatening = default;
-            bool selfHarm = default;
-            bool selfHarmIntent = default;
-            bool selfHarmInstructive = default;
-            bool sexual = default;
-            bool sexualMinors = default;
-            bool violence = default;
-            bool violenceGraphic = default;
+            double hate = default;
+            double hateThreatening = default;
+            double harassment = default;
+            double harassmentThreatening = default;
+            double selfHarm = default;
+            double selfHarmIntent = default;
+            double selfHarmInstructive = default;
+            double sexual = default;
+            double sexualMinors = default;
+            double violence = default;
+            double violenceGraphic = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("hate"u8))
                 {
-                    hate = property.Value.GetBoolean();
+                    hate = property.Value.GetDouble();
                     continue;
                 }
                 if (property.NameEquals("hate/threatening"u8))
                 {
-                    hateThreatening = property.Value.GetBoolean();
+                    hateThreatening = property.Value.GetDouble();
                     continue;
                 }
                 if (property.NameEquals("harassment"u8))
                 {
-                    harassment = property.Value.GetBoolean();
+                    harassment = property.Value.GetDouble();
                     continue;
                 }
                 if (property.NameEquals("harassment/threatening"u8))
                 {
-                    harassmentThreatening = property.Value.GetBoolean();
+                    harassmentThreatening = property.Value.GetDouble();
                     continue;
                 }
                 if (property.NameEquals("self-harm"u8))
                 {
-                    selfHarm = property.Value.GetBoolean();
+                    selfHarm = property.Value.GetDouble();
                     continue;
                 }
                 if (property.NameEquals("self-harm/intent"u8))
                 {
-                    selfHarmIntent = property.Value.GetBoolean();
+                    selfHarmIntent = property.Value.GetDouble();
                     continue;
                 }
                 if (property.NameEquals("self-harm/instructive"u8))
                 {
-                    selfHarmInstructive = property.Value.GetBoolean();
+                    selfHarmInstructive = property.Value.GetDouble();
                     continue;
                 }
                 if (property.NameEquals("sexual"u8))
                 {
-                    sexual = property.Value.GetBoolean();
+                    sexual = property.Value.GetDouble();
                     continue;
                 }
                 if (property.NameEquals("sexual/minors"u8))
                 {
-                    sexualMinors = property.Value.GetBoolean();
+                    sexualMinors = property.Value.GetDouble();
                     continue;
                 }
                 if (property.NameEquals("violence"u8))
                 {
-                    violence = property.Value.GetBoolean();
+                    violence = property.Value.GetDouble();
                     continue;
                 }
                 if (property.NameEquals("violence/graphic"u8))
                 {
-                    violenceGraphic = property.Value.GetBoolean();
+                    violenceGraphic = property.Value.GetDouble();
                     continue;
                 }
             }
-            return new ModerationCategories(hate, hateThreatening, harassment, harassmentThreatening, selfHarm, selfHarmIntent, selfHarmInstructive, sexual, sexualMinors, violence, violenceGraphic);
+            return new CreateModerationCategoryScores(hate, hateThreatening, harassment, harassmentThreatening, selfHarm, selfHarmIntent, selfHarmInstructive, sexual, sexualMinors, violence, violenceGraphic);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="result"> The result to deserialize the model from. </param>
-        internal static ModerationCategories FromResponse(PipelineResponse result)
+        internal static CreateModerationCategoryScores FromResponse(PipelineResponse result)
         {
             using var document = JsonDocument.Parse(result.Content);
-            return DeserializeModerationCategories(document.RootElement);
+            return DeserializeCreateModerationCategoryScores(document.RootElement);
         }
     }
 }

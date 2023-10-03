@@ -3062,10 +3062,7 @@ Description = "<description>",
 
             RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
             {
-                input = new object[]
-            {
-"<input>"
-            },
+                input = "<input>",
             }).ToStream());
             Result result = client.CreateModeration(content);
 
@@ -3106,10 +3103,7 @@ Description = "<description>",
 
             RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
             {
-                input = new object[]
-            {
-"<input>"
-            },
+                input = "<input>",
             }).ToStream());
             Result result = await client.CreateModerationAsync(content);
 
@@ -3148,7 +3142,7 @@ Description = "<description>",
             KeyCredential credential = new KeyCredential("<key>");
             OpenAIClient client = new OpenAIClient(credential);
 
-            CreateModerationRequest content = new CreateModerationRequest(new string[] { "<input>" });
+            CreateModerationRequest content = new CreateModerationRequest(BinaryData.FromObjectAsJson("<input>"));
             Result<CreateModerationResponse> result = client.CreateModeration(content);
         }
 
@@ -3159,7 +3153,7 @@ Description = "<description>",
             KeyCredential credential = new KeyCredential("<key>");
             OpenAIClient client = new OpenAIClient(credential);
 
-            CreateModerationRequest content = new CreateModerationRequest(new string[] { "<input>" });
+            CreateModerationRequest content = new CreateModerationRequest(BinaryData.FromObjectAsJson("<input>"));
             Result<CreateModerationResponse> result = await client.CreateModerationAsync(content);
         }
 
@@ -3172,11 +3166,8 @@ Description = "<description>",
 
             RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
             {
-                input = new object[]
-            {
-"<input>"
-            },
-                model = "text-moderation-latest",
+                input = "<input>",
+                model = "<model>",
             }).ToStream());
             Result result = client.CreateModeration(content);
 
@@ -3217,11 +3208,8 @@ Description = "<description>",
 
             RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
             {
-                input = new object[]
-            {
-"<input>"
-            },
-                model = "text-moderation-latest",
+                input = "<input>",
+                model = "<model>",
             }).ToStream());
             Result result = await client.CreateModerationAsync(content);
 
@@ -3260,9 +3248,9 @@ Description = "<description>",
             KeyCredential credential = new KeyCredential("<key>");
             OpenAIClient client = new OpenAIClient(credential);
 
-            CreateModerationRequest content = new CreateModerationRequest(new string[] { "<input>" })
+            CreateModerationRequest content = new CreateModerationRequest(BinaryData.FromObjectAsJson("<input>"))
             {
-                Model = ModerationModels.TextModerationLatest,
+                Model = new CreateModerationRequestModel("<model>"),
             };
             Result<CreateModerationResponse> result = client.CreateModeration(content);
         }
@@ -3274,9 +3262,9 @@ Description = "<description>",
             KeyCredential credential = new KeyCredential("<key>");
             OpenAIClient client = new OpenAIClient(credential);
 
-            CreateModerationRequest content = new CreateModerationRequest(new string[] { "<input>" })
+            CreateModerationRequest content = new CreateModerationRequest(BinaryData.FromObjectAsJson("<input>"))
             {
-                Model = ModerationModels.TextModerationLatest,
+                Model = new CreateModerationRequestModel("<model>"),
             };
             Result<CreateModerationResponse> result = await client.CreateModerationAsync(content);
         }

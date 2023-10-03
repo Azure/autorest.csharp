@@ -10,17 +10,17 @@ using System.Text.Json;
 
 namespace OpenAI.Models
 {
-    public partial class ModerationResult
+    public partial class CreateModerationResult
     {
-        internal static ModerationResult DeserializeModerationResult(JsonElement element)
+        internal static CreateModerationResult DeserializeCreateModerationResult(JsonElement element)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
             }
             bool flagged = default;
-            ModerationCategories categories = default;
-            ModerationCategoryScores categoryScores = default;
+            CreateModerationCategories categories = default;
+            CreateModerationCategoryScores categoryScores = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("flagged"u8))
@@ -30,24 +30,24 @@ namespace OpenAI.Models
                 }
                 if (property.NameEquals("categories"u8))
                 {
-                    categories = ModerationCategories.DeserializeModerationCategories(property.Value);
+                    categories = CreateModerationCategories.DeserializeCreateModerationCategories(property.Value);
                     continue;
                 }
                 if (property.NameEquals("category_scores"u8))
                 {
-                    categoryScores = ModerationCategoryScores.DeserializeModerationCategoryScores(property.Value);
+                    categoryScores = CreateModerationCategoryScores.DeserializeCreateModerationCategoryScores(property.Value);
                     continue;
                 }
             }
-            return new ModerationResult(flagged, categories, categoryScores);
+            return new CreateModerationResult(flagged, categories, categoryScores);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="result"> The result to deserialize the model from. </param>
-        internal static ModerationResult FromResponse(PipelineResponse result)
+        internal static CreateModerationResult FromResponse(PipelineResponse result)
         {
             using var document = JsonDocument.Parse(result.Content);
-            return DeserializeModerationResult(document.RootElement);
+            return DeserializeCreateModerationResult(document.RootElement);
         }
     }
 }

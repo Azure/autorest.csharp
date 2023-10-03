@@ -10,15 +10,15 @@ using System.ServiceModel.Rest.Experimental;
 
 namespace OpenAI.Models
 {
-    /// <summary> moderation result. </summary>
-    public partial class ModerationResult
+    /// <summary> The CreateModerationResult. </summary>
+    public partial class CreateModerationResult
     {
-        /// <summary> Initializes a new instance of ModerationResult. </summary>
+        /// <summary> Initializes a new instance of CreateModerationResult. </summary>
         /// <param name="flagged"> Whether the content violates [OpenAI's usage policies](/policies/usage-policies). </param>
         /// <param name="categories"> A list of the categories, and whether they are flagged or not. </param>
         /// <param name="categoryScores"> A list of the categories along with their scores as predicted by model. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="categories"/> or <paramref name="categoryScores"/> is null. </exception>
-        internal ModerationResult(bool flagged, ModerationCategories categories, ModerationCategoryScores categoryScores)
+        internal CreateModerationResult(bool flagged, CreateModerationCategories categories, CreateModerationCategoryScores categoryScores)
         {
             ClientUtilities.AssertNotNull(categories, nameof(categories));
             ClientUtilities.AssertNotNull(categoryScores, nameof(categoryScores));
@@ -31,8 +31,8 @@ namespace OpenAI.Models
         /// <summary> Whether the content violates [OpenAI's usage policies](/policies/usage-policies). </summary>
         public bool Flagged { get; }
         /// <summary> A list of the categories, and whether they are flagged or not. </summary>
-        public ModerationCategories Categories { get; }
+        public CreateModerationCategories Categories { get; }
         /// <summary> A list of the categories along with their scores as predicted by model. </summary>
-        public ModerationCategoryScores CategoryScores { get; }
+        public CreateModerationCategoryScores CategoryScores { get; }
     }
 }

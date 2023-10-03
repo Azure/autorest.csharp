@@ -7,10 +7,10 @@
 
 namespace OpenAI.Models
 {
-    /// <summary> moderation categories. </summary>
-    public partial class ModerationCategories
+    /// <summary> The CreateModerationCategories. </summary>
+    public partial class CreateModerationCategories
     {
-        /// <summary> Initializes a new instance of ModerationCategories. </summary>
+        /// <summary> Initializes a new instance of CreateModerationCategories. </summary>
         /// <param name="hate">
         /// Content that expresses, incites, or promotes hate based on race, gender, ethnicity,
         /// religion, nationality, sexual orientation, disability status, or caste. Hateful content
@@ -42,7 +42,7 @@ namespace OpenAI.Models
         /// <param name="sexualMinors"> Sexual content that includes an individual who is under 18 years old. </param>
         /// <param name="violence"> Content that depicts death, violence, or physical injury. </param>
         /// <param name="violenceGraphic"> Content that depicts death, violence, or physical injury in graphic detail. </param>
-        internal ModerationCategories(bool hate, bool hateThreatening, bool harassment, bool harassmentThreatening, bool selfHarm, bool selfHarmIntent, bool selfHarmInstructive, bool sexual, bool sexualMinors, bool violence, bool violenceGraphic)
+        internal CreateModerationCategories(bool hate, bool hateThreatening, bool harassment, bool harassmentThreatening, bool selfHarm, bool selfHarmIntent, bool selfHarmInstructive, bool sexual, bool sexualMinors, bool violence, bool violenceGraphic)
         {
             Hate = hate;
             HateThreatening = hateThreatening;

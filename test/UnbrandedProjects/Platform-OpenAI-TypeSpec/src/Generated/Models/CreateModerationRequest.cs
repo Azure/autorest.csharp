@@ -6,8 +6,6 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.ServiceModel.Rest.Experimental;
 
 namespace OpenAI.Models
@@ -18,11 +16,11 @@ namespace OpenAI.Models
         /// <summary> Initializes a new instance of CreateModerationRequest. </summary>
         /// <param name="input"> The input text to classify. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        public CreateModerationRequest(IEnumerable<string> input)
+        public CreateModerationRequest(BinaryData input)
         {
             ClientUtilities.AssertNotNull(input, nameof(input));
 
-            Input = input.ToList();
+            Input = input;
         }
 
         /// <summary> Initializes a new instance of CreateModerationRequest. </summary>
@@ -34,14 +32,43 @@ namespace OpenAI.Models
         /// `text-moderation-stable`, we will provide advanced notice before updating the model. Accuracy
         /// of `text-moderation-stable` may be slightly lower than for `text-moderation-latest`.
         /// </param>
-        internal CreateModerationRequest(IList<string> input, ModerationModels? model)
+        internal CreateModerationRequest(BinaryData input, CreateModerationRequestModel? model)
         {
             Input = input;
             Model = model;
         }
 
-        /// <summary> The input text to classify. </summary>
-        public IList<string> Input { get; }
+        /// <summary>
+        /// The input text to classify
+        /// <para>
+        /// To assign an object to this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
+        /// </para>
+        /// <para>
+        /// To assign an already formated json string to this property use <see cref="BinaryData.FromString(string)"/>.
+        /// </para>
+        /// <para>
+        /// Examples:
+        /// <list type="bullet">
+        /// <item>
+        /// <term>BinaryData.FromObjectAsJson("foo")</term>
+        /// <description>Creates a payload of "foo".</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromString("\"foo\"")</term>
+        /// <description>Creates a payload of "foo".</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromObjectAsJson(new { key = "value" })</term>
+        /// <description>Creates a payload of { "key": "value" }.</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromString("{\"key\": \"value\"}")</term>
+        /// <description>Creates a payload of { "key": "value" }.</description>
+        /// </item>
+        /// </list>
+        /// </para>
+        /// </summary>
+        public BinaryData Input { get; }
         /// <summary>
         /// Two content moderations models are available: `text-moderation-stable` and
         /// `text-moderation-latest`. The default is `text-moderation-latest` which will be automatically
@@ -49,6 +76,6 @@ namespace OpenAI.Models
         /// `text-moderation-stable`, we will provide advanced notice before updating the model. Accuracy
         /// of `text-moderation-stable` may be slightly lower than for `text-moderation-latest`.
         /// </summary>
-        public ModerationModels? Model { get; set; }
+        public CreateModerationRequestModel? Model { get; set; }
     }
 }
