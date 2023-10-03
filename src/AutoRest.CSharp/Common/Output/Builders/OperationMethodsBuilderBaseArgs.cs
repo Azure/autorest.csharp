@@ -15,6 +15,7 @@ namespace AutoRest.CSharp.Output.Models
         string ClientNamespace,
         string ClientName,
         StatusCodeSwitchBuilder StatusCodeSwitchBuilder,
+        DpgOperationSampleBuilder OperationSampleBuilder,
         TypeFactory TypeFactory,
         SourceInputModel? SourceInputModel
     );

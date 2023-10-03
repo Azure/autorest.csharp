@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
@@ -104,7 +105,12 @@ namespace AutoRest.CSharp.Generation.Writers
                     using (writer.AmbientScope())
                     {
                         writer.AppendRawIf("await ", foreachStatement.IsAsync);
-                        writer.Append($"foreach (var {foreachStatement.Item:D} in ");
+                        writer.AppendRaw("foreach (");
+                        if (foreachStatement.ItemType == null)
+                            writer.AppendRaw("var ");
+                        else
+                            writer.Append($"{foreachStatement.ItemType} ");
+                        writer.Append($"{foreachStatement.Item:D} in ");
                         writer.WriteValueExpression(foreachStatement.Enumerable);
                         //writer.AppendRawIf(".ConfigureAwait(false)", foreachStatement.IsAsync);
                         writer.LineRaw(")");
@@ -374,6 +380,7 @@ namespace AutoRest.CSharp.Generation.Writers
                         break;
                     }
 
+                    writer.Line();
                     writer.LineRaw("{");
                     foreach (var (key, value) in values)
                     {
@@ -536,6 +543,10 @@ namespace AutoRest.CSharp.Generation.Writers
                     writer.AppendRaw(" : ");
                     writer.WriteValueExpression(ternary.Alternative);
                     break;
+                case PositionalParameterReference(var parameterName, var value):
+                    writer.Append($"{parameterName}: ");
+                    writer.WriteValueExpression(value);
+                    break;
                 case ParameterReference parameterReference:
                     writer.Append($"{parameterReference.Parameter.Name:I}");
                     break;
@@ -558,10 +569,10 @@ namespace AutoRest.CSharp.Generation.Writers
                         writer.AppendRaw(" ").WriteValueExpression(inner);
                     }
                     break;
-                case LiteralExpression(var literal, true):
+                case StringLiteralExpression(var literal, true):
                     writer.Literal(literal).AppendRaw("u8");
                     break;
-                case LiteralExpression(var literal, false):
+                case StringLiteralExpression(var literal, false):
                     writer.Literal(literal);
                     break;
             }

@@ -37,7 +37,7 @@ namespace AutoRest.CSharp.Output.Models
                 ReturnType = returnType,
                 Modifiers = _method.Modifiers | MethodSignatureModifiers.Virtual
             };
-            var body = WrapInDiagnosticScopeLegacy(_method.Name, Return(_restClient.Invoke(_method.WithAsync(async), async)));
+            var body = WrapInDiagnosticScopeLegacy(_method.Name, Return(_restClient.Invoke(_method.WithAsync(async))));
             return new Method(signature.WithAsync(async), body);
         }
     }

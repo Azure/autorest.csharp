@@ -20,11 +20,14 @@ namespace AutoRest.CSharp.Generation.Writers
     {
         private readonly XElement _membersElement;
 
-        public XmlDocWriter()
+        public XmlDocWriter(string filename)
         {
             _membersElement = new XElement("members");
             Document = new XDocument(new XElement("doc", _membersElement));
+            Filename = filename;
         }
+
+        public string Filename { get; }
 
         public IEnumerable<XElement> Members => _membersElement.Elements("member");
 

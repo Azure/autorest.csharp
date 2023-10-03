@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using AutoRest.CSharp.Common.Input.Examples;
 using AutoRest.CSharp.Utilities;
 using Azure.Core;
 
@@ -17,6 +18,7 @@ internal record InputOperation(
     string? Accessibility,
     IReadOnlyList<InputParameter> Parameters,
     IReadOnlyList<OperationResponse> Responses,
+    IReadOnlyList<InputOperationExample> Examples,
     RequestMethod HttpMethod,
     BodyMediaType RequestBodyMediaType,
     string Uri,
@@ -38,6 +40,7 @@ internal record InputOperation(
         Accessibility: null,
         Parameters: Array.Empty<InputParameter>(),
         Responses: Array.Empty<OperationResponse>(),
+        Examples: Array.Empty<InputOperationExample>(),
         HttpMethod: RequestMethod.Get,
         RequestBodyMediaType: BodyMediaType.None,
         Uri: string.Empty,

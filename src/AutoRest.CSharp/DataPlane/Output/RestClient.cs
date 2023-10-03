@@ -36,9 +36,9 @@ namespace AutoRest.CSharp.Output.Models
             ClientParameters = clientParameters;
             Parameters = restClientParameters;
             Fields = ClientFields.CreateForRestClient(restClientParameters);
-            Constructor = new ConstructorSignature(Declaration.Name, $"Initializes a new instance of {Declaration.Name}", null, MethodSignatureModifiers.Public, Parameters.ToArray());
+            Constructor = new ConstructorSignature(Type, $"Initializes a new instance of {Declaration.Name}", null, MethodSignatureModifiers.Public, Parameters.ToArray());
 
-            Methods = clientMethodsBuilder.Build(Fields, clientPrefix + GetClientSuffix(), Declaration.Namespace, Key).ToList();
+            Methods = clientMethodsBuilder.Build(Fields, new DpgOperationSampleBuilder(), clientPrefix + GetClientSuffix(), Declaration.Namespace, Key).ToList();
 
             ProtocolMethods = null;
         }

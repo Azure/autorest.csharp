@@ -814,7 +814,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             {
                 if (operation.OperationSource is not null)
                 {
-                    _writer.Append($"new {operation.OperationSource.TypeName}(")
+                    _writer.Append($"new {operation.OperationSource.Type}(")
                         .AppendIf($"{ArmClientReference}", operation.MgmtReturnType!.TryCastResource(out _))
                         .Append($"), ");
                 }

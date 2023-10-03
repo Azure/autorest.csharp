@@ -214,11 +214,10 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private ConstructorSignature EnsurePublicConstructorSignature()
         {
-            var name = Declaration.Name;
             //get base public ctor params
             GetConstructorParameters(Fields.PublicConstructorParameters, out var fullParameterList, out var parametersToPassToBase, true);
 
-            FormattableString summary = $"Initializes a new instance of {name}";
+            FormattableString summary = $"Initializes a new instance of {_inputModel.Name}";
             var accessibility = IsAbstract
                 ? MethodSignatureModifiers.Protected
                 : _inputModelUsage.HasFlag(InputModelTypeUsage.Input)
@@ -226,7 +225,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                     : MethodSignatureModifiers.Internal;
 
             return new ConstructorSignature(
-                name,
+                Type,
                 summary,
                 null,
                 accessibility,
@@ -236,14 +235,12 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private ConstructorSignature EnsureSerializationConstructorSignature()
         {
-            var name = Declaration.Name;
-
             //get base public ctor params
             GetConstructorParameters(Fields.SerializationParameters, out var fullParameterList, out var parametersToPassToBase, false);
 
             return new ConstructorSignature(
-                name,
-                $"Initializes a new instance of {name}",
+                Type,
+                $"Initializes a new instance of {Declaration.Name}",
                 null,
                 MethodSignatureModifiers.Internal,
                 fullParameterList,

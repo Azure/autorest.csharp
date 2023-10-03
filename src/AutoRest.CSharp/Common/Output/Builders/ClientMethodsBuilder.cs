@@ -29,7 +29,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             _typeFactory = typeFactory;
         }
 
-        public IEnumerable<RestClientOperationMethods> Build(ClientFields fields, string clientName, string clientNamespace, string clientKey)
+        public IEnumerable<RestClientOperationMethods> Build(ClientFields fields, DpgOperationSampleBuilder sampleBuilder, string clientName, string clientNamespace, string clientKey)
         {
             var requireProtocolMethods = _library is DataPlaneOutputLibrary dpLibrary && dpLibrary.ProtocolMethodsDictionary.TryGetValue(clientKey, out var protocolMethodNames)
                 ? _operations.Where(o => protocolMethodNames.Any(m => m.Equals(o.Name, StringComparison.OrdinalIgnoreCase))).ToArray()
@@ -37,18 +37,18 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
             foreach (var operation in _operations)
             {
-                var builder = SelectBuilder(operation, fields, clientName, clientNamespace);
+                var builder = SelectBuilder(operation, fields, sampleBuilder, clientName, clientNamespace);
                 yield return Configuration.AzureArm || (Configuration.Generation1ConvenienceClient/* && !requireProtocolMethods.Contains(operation)*/) ? builder.BuildLegacy() : builder.Build();
             }
         }
 
-        private OperationMethodsBuilderBase SelectBuilder(InputOperation operation, ClientFields fields, string clientName, string clientNamespace)
+        private OperationMethodsBuilderBase SelectBuilder(InputOperation operation, ClientFields fields, DpgOperationSampleBuilder sampleBuilder, string clientName, string clientNamespace)
         {
             var statusCodeSwitchBuilder = operation.HttpMethod == RequestMethod.Head && Configuration.HeadAsBoolean
                 ? StatusCodeSwitchBuilder.CreateHeadAsBooleanOperationSwitch()
                 : StatusCodeSwitchBuilder.CreateSwitch(operation, _library, _typeFactory);
 
-            var args = new OperationMethodsBuilderBaseArgs(operation, fields, clientNamespace, clientName, statusCodeSwitchBuilder, _typeFactory, _sourceInputModel);
+            var args = new OperationMethodsBuilderBaseArgs(operation, fields, clientNamespace, clientName, statusCodeSwitchBuilder, sampleBuilder, _typeFactory, _sourceInputModel);
 
             return (operation.Paging, operation.LongRunning) switch
             {

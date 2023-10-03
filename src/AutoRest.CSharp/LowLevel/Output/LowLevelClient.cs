@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Input.Examples;
 using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models.Responses;
@@ -45,7 +46,7 @@ namespace AutoRest.CSharp.Output.Models
         public bool IsSubClient { get; }
         public bool IsResourceClient { get; }
 
-        public LowLevelClient(string name, string ns, string key, string description, string libraryName, LowLevelClient? parentClient, IEnumerable<InputOperation> operations, IReadOnlyList<Parameter> clientParameters, InputAuth authorization, SourceInputModel? sourceInputModel, ClientOptionsTypeProvider clientOptions, TypeFactory typeFactory)
+        public LowLevelClient(string name, string ns, string key, string description, string libraryName, LowLevelClient? parentClient, IEnumerable<InputOperation> operations, IReadOnlyList<Parameter> clientParameters, IReadOnlyList<InputClientExample> clientExamples, InputAuth authorization, SourceInputModel? sourceInputModel, ClientOptionsTypeProvider clientOptions, TypeFactory typeFactory)
             : base(ns, sourceInputModel)
         {
             DefaultName = name;
@@ -64,7 +65,7 @@ namespace AutoRest.CSharp.Output.Models
             (PrimaryConstructors, SecondaryConstructors) = BuildPublicConstructors(Parameters);
 
             OperationMethods = new ClientMethodsBuilder(operations, null, sourceInputModel, typeFactory)
-                .Build(Fields, Declaration.Name, Declaration.Namespace, key)
+                .Build(Fields, new DpgOperationSampleBuilder(this, clientExamples, ExistingType), Declaration.Name, Declaration.Namespace, key)
                 .ToList();
 
             ResponseClassifierTypes = OperationMethods.Select(rm => rm.ResponseClassifier).Distinct().ToArray();
@@ -161,11 +162,11 @@ namespace AutoRest.CSharp.Output.Models
         }
 
         private ConstructorSignature CreatePrimaryConstructor(IReadOnlyList<Parameter> parameters)
-            => new(Declaration.Name, $"Initializes a new instance of {Declaration.Name}", null, Public, parameters);
+            => new(Type, $"Initializes a new instance of {Declaration.Name}", null, Public, parameters);
 
         private ConstructorSignature CreateSecondaryConstructor(IReadOnlyList<Parameter> parameters, ValueExpression[] arguments)
         {
-            return new(Declaration.Name, $"Initializes a new instance of {Declaration.Name}", null, Public, parameters, Initializer: new ConstructorInitializer(false, arguments));
+            return new(Type, $"Initializes a new instance of {Declaration.Name}", null, Public, parameters, Initializer: new ConstructorInitializer(false, arguments));
         }
 
         private Parameter CreateCredentialParameter(CSharpType type)
@@ -180,7 +181,7 @@ namespace AutoRest.CSharp.Output.Models
         }
 
         private ConstructorSignature CreateMockingConstructor()
-            => new(Declaration.Name, $"Initializes a new instance of {Declaration.Name} for mocking.", null, Protected, Array.Empty<Parameter>());
+            => new(Type, $"Initializes a new instance of {Declaration.Name} for mocking.", null, Protected, Array.Empty<Parameter>());
 
         private Parameter CreateOptionsParameter()
         {
@@ -194,7 +195,7 @@ namespace AutoRest.CSharp.Output.Models
                 .Select(p => p with { DefaultValue = null, Validation = Validation.None, Initializer = null })
                 .ToArray();
 
-            return new ConstructorSignature(Declaration.Name, $"Initializes a new instance of {Declaration.Name}", null, Internal, constructorParameters);
+            return new ConstructorSignature(Type, $"Initializes a new instance of {Declaration.Name}", null, Internal, constructorParameters);
         }
 
         public LowLevelSubClientFactoryMethod BuildFactoryMethod(ClientFields parentFields, string libraryName)
@@ -266,7 +267,7 @@ namespace AutoRest.CSharp.Output.Models
                     continue;
                 }
                 var ctor = new ConstructorSignature(
-                    DefaultName,
+                    Type,
                     FormattableStringHelpers.FromString(GetSummaryPortion(existingCtor.GetDocumentationCommentXml())),
                     null,
                     modifiers,

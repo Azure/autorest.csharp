@@ -35,6 +35,9 @@ namespace AutoRest.CSharp.Common.Output.Models
         public static DeclarationStatement Declare(string name, JsonElementExpression value, out JsonElementExpression variable)
             => Declare(name, value, d => new JsonElementExpression(d), out variable);
 
+        public static DeclarationStatement Declare(string name, OperationExpression value, out OperationExpression variable)
+            => Declare(name, value, d => new OperationExpression(d), out variable);
+
         public static DeclarationStatement Declare(string name, ResponseExpression value, out ResponseExpression variable)
             => Declare(name, value, d => new ResponseExpression(d), out variable);
 

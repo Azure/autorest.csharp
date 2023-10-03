@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Input.Examples;
 using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
@@ -171,6 +172,8 @@ namespace AutoRest.CSharp.Output.Models.Types
                     .OrderBy(p => p.IsOptionalInSignature)
                     .ToList();
 
+                var clientExamples = Array.Empty<InputClientExample>();
+
                 var client = new LowLevelClient(
                     clientInfo.Name,
                     clientInfo.Namespace,
@@ -180,6 +183,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                     parentClient,
                     clientInfo.Requests,
                     clientParameters,
+                    clientExamples,
                     rootNamespace.Auth,
                     sourceInputModel,
                     clientOptions,

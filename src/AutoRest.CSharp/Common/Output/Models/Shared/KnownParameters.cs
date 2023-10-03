@@ -38,6 +38,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
         public static readonly Parameter RequestConditionsParameter = new("requestConditions", $"The content to send as the request conditions of the request.", RequestConditionsType, Constant.Default(RequestConditionsType), Validation.None, null, RequestLocation: RequestLocation.Header);
 
         public static readonly Parameter RequestContext = new("context", $"The request context, which can override default behaviors of the client pipeline on a per-call basis.", RequestContextNullableType, Constant.Default(RequestContextNullableType), Validation.None, null);
+        public static readonly Parameter RequestContextRequired = new("context", $"The request context, which can override default behaviors of the client pipeline on a per-call basis.", RequestContextType, null, Validation.None, null);
 
         public static readonly Parameter WaitForCompletion = new("waitUntil", $"<see cref=\"Azure.WaitUntil.Completed\"/> if the method should wait to return until the long-running operation has completed on the service; <see cref=\"Azure.WaitUntil.Started\"/> if it should return after starting the operation. For more information on long-running operations, please see <see href=\"https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md\"> Azure.Core Long-Running Operation samples</see>.", new CSharpType(typeof(WaitUntil)), null, Validation.None, null);
 

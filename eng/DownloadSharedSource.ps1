@@ -67,7 +67,8 @@ $files = @('AsyncLockWithValue.cs', 'ClientDiagnostics.cs', 'DiagnosticScope.cs'
     'Utf8JsonWriterExtensions.cs',
     'XElementExtensions.cs',
     'XmlWriterContent.cs',
-    'XmlWriterExtensions.cs')
+    'XmlWriterExtensions.cs',
+    'TrimmingAttribute.cs')
 $sourcePath = "$clonedPath/sdk/core/Azure.Core/src/Shared/"
 $destinationPath = "$repoRoot/src/assets/Azure.Core.Shared"
 

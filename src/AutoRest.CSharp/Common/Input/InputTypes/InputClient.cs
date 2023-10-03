@@ -3,10 +3,11 @@
 
 using System;
 using System.Collections.Generic;
+using AutoRest.CSharp.Common.Input.Examples;
 
 namespace AutoRest.CSharp.Common.Input;
 
-internal record InputClient(string Name, string Description, IReadOnlyList<InputOperation> Operations, bool Creatable, IReadOnlyList<InputParameter> Parameters, string? Parent)
+internal record InputClient(string Name, string Description, IReadOnlyList<InputOperation> Operations, IReadOnlyList<InputParameter> Parameters, IReadOnlyList<InputClientExample> Examples, string? Parent)
 {
     private readonly string? _key;
 
@@ -16,5 +17,5 @@ internal record InputClient(string Name, string Description, IReadOnlyList<Input
         init => _key = value;
     }
 
-    public InputClient() : this(string.Empty, string.Empty, Array.Empty<InputOperation>(), true, Array.Empty<InputParameter>(), null) { }
+    public InputClient() : this(string.Empty, string.Empty, Array.Empty<InputOperation>(), Array.Empty<InputParameter>(), Array.Empty<InputClientExample>(), null) { }
 }

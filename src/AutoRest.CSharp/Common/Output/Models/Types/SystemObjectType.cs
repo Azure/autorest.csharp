@@ -123,7 +123,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             var modifiers = ctor.IsFamily ? Protected : Public;
 
-            return new ObjectTypeConstructor(DefaultName, modifiers, parameters, initializers.ToArray(), baseConstructor);
+            return new ObjectTypeConstructor(Type, modifiers, parameters, initializers.ToArray(), baseConstructor);
         }
 
         protected override ObjectTypeConstructor BuildInitializationConstructor()

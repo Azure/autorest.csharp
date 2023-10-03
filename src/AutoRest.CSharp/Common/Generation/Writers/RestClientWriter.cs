@@ -32,7 +32,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
                         if (restClient.ProtocolMethods?.FirstOrDefault(m => m.Operation == methods.Operation) is {} protocolMethod)
                         {
-                            LowLevelClientWriter.WriteProtocolMethods(writer, restClient.Fields, protocolMethod);
+                            DpgClientWriter.WriteProtocolMethods(writer, restClient.Fields, protocolMethod);
                             responseClassifierTypes.Add(protocolMethod.ResponseClassifier);
                         }
                     }
@@ -48,7 +48,7 @@ namespace AutoRest.CSharp.Generation.Writers
                         WriteMethod(writer, methods.NextPageConvenience);
                     }
 
-                    LowLevelClientWriter.WriteResponseClassifierMethod(writer, responseClassifierTypes.Distinct());
+                    DpgClientWriter.WriteResponseClassifierMethod(writer, responseClassifierTypes.Distinct());
                 }
             }
         }

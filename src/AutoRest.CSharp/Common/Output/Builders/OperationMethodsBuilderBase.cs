@@ -20,6 +20,7 @@ using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
+using AutoRest.CSharp.Output.Samples.Models;
 using AutoRest.CSharp.Utilities;
 using Azure.Core;
 using Azure.Core.Pipeline;
@@ -44,6 +45,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
         private readonly MethodSignatureModifiers _protocolAccessibility;
         private readonly MethodParametersBuilder _parametersBuilder;
         private readonly StatusCodeSwitchBuilder _statusCodeSwitchBuilder;
+        private readonly DpgOperationSampleBuilder _operationSampleBuilder;
         private readonly TypeFactory _typeFactory;
         private readonly SourceInputModel? _sourceInputModel;
 
@@ -69,6 +71,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             _clientName = args.ClientName;
             _clientNamespace = args.ClientNamespace;
             _statusCodeSwitchBuilder = args.StatusCodeSwitchBuilder;
+            _operationSampleBuilder = args.OperationSampleBuilder;
             _parametersBuilder = new MethodParametersBuilder(args.Operation, args.TypeFactory);
             _typeFactory = args.TypeFactory;
             _sourceInputModel = args.SourceInputModel;
@@ -91,6 +94,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             _protocolAccessibility = Operation.GenerateProtocolMethod ? GetAccessibility(Operation.Accessibility) : MethodSignatureModifiers.Internal;
             ConvenienceModifiers = GetAccessibility(Operation.Accessibility);
         }
+
 
         public RestClientOperationMethods Build()
         {
@@ -119,6 +123,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             var createNextPageMessageMethod = BuildCreateNextPageMessageMethod(createNextPageMessageMethodSignature, parameters, requestContext);
 
             string? protocolMethodNonDocumentComment = null;
+            MethodSignature? convenienceMethodSignature = null;
             Method? convenience = null;
             Method? convenienceAsync = null;
 
@@ -141,8 +146,15 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
                     var methodNamingIsConfident = confidenceLevel == ConvenienceMethodConfidenceLevel.Confident;
                     protocolMethodNonDocumentComment = methodNamingIsConfident ? null : ConvenienceMethodNotConfident;
-                    convenience = BuildConvenienceMethod(convenienceMethodName, parameters, createNextPageMessageMethodSignature, methodNamingIsConfident, false);
-                    convenienceAsync = BuildConvenienceMethod(convenienceMethodName, parameters, createNextPageMessageMethodSignature, methodNamingIsConfident, true);
+                    var modifiers = ConvenienceModifiers | MethodSignatureModifiers.Virtual;
+                    if (!methodNamingIsConfident)
+                    {
+                        modifiers = modifiers & ~MethodSignatureModifiers.Public | MethodSignatureModifiers.Internal;
+                    }
+
+                    convenienceMethodSignature = CreateMethodSignature(convenienceMethodName, modifiers, parameters.Convenience, ConvenienceMethodReturnType, null);
+                    convenience = BuildConvenienceMethod(convenienceMethodSignature, parameters, createNextPageMessageMethodSignature, false);
+                    convenienceAsync = BuildConvenienceMethod(convenienceMethodSignature, parameters, createNextPageMessageMethodSignature, true);
                 }
                 else if (Operation.GenerateProtocolMethod)
                 {
@@ -150,15 +162,17 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 }
             }
 
+            var protocolMethodSignature = CreateMethodSignature(ProtocolMethodName, _protocolAccessibility | MethodSignatureModifiers.Virtual, parameters.Protocol, ProtocolMethodReturnType, protocolMethodNonDocumentComment);
             var order = Operation.LongRunning is not null ? 2 : Operation.Paging is not null ? 1 : 0;
             var requestBodyType = Operation.Parameters.FirstOrDefault(p => p.Location == RequestLocation.Body)?.Type;
+            var samples = _operationSampleBuilder.BuildSamples(Operation, protocolMethodSignature, convenienceMethodSignature, requestBodyType, ResponseType, _statusCodeSwitchBuilder.PageItemType);
 
             return new RestClientOperationMethods
             (
                 createMessageMethod,
                 createNextPageMessageMethod,
-                BuildProtocolMethod(parameters.Protocol, createMessageMethod.Signature, createNextPageMessageMethodSignature, protocolMethodNonDocumentComment, false),
-                BuildProtocolMethod(parameters.Protocol, createMessageMethod.Signature, createNextPageMessageMethodSignature, protocolMethodNonDocumentComment, true),
+                BuildProtocolMethod(protocolMethodSignature, createMessageMethod.Signature, createNextPageMessageMethodSignature, false),
+                BuildProtocolMethod(protocolMethodSignature, createMessageMethod.Signature, createNextPageMessageMethodSignature, true),
                 convenience,
                 convenienceAsync,
                 null,
@@ -170,6 +184,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 requestBodyType,
                 ResponseType,
                 _statusCodeSwitchBuilder.PageItemType,
+                samples,
                 createNextPageMessageMethodSignature
             );
         }
@@ -202,6 +217,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 null,
                 ResponseType,
                 _statusCodeSwitchBuilder.PageItemType,
+                Array.Empty<DpgOperationSample>(),
                 createNextPageMessageMethodSignature
             );
         }
@@ -254,9 +270,8 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
         protected string CreateScopeName(string methodName) => $"{_clientName}.{methodName}";
 
-        private Method BuildProtocolMethod(IReadOnlyList<Parameter> parameters, MethodSignatureBase createMessageSignature, MethodSignature? createNextPageMessageSignature, string? protocolMethodNonDocumentComment, bool async)
+        private Method BuildProtocolMethod(MethodSignature signature, MethodSignatureBase createMessageSignature, MethodSignature? createNextPageMessageSignature, bool async)
         {
-            var signature = CreateMethodSignature(ProtocolMethodName, _protocolAccessibility | MethodSignatureModifiers.Virtual, parameters, ProtocolMethodReturnType, protocolMethodNonDocumentComment);
             var body = new[]
             {
                 new ParameterValidationBlock(signature.Parameters),
@@ -266,19 +281,12 @@ namespace AutoRest.CSharp.Common.Output.Builders
             return new Method(signature.WithAsync(async), body);
         }
 
-        private Method BuildConvenienceMethod(string methodName, RestClientMethodParameters parameters, MethodSignature? createNextPageMessageSignature, bool methodIsConfident, bool async)
+        private Method BuildConvenienceMethod(MethodSignature signature, RestClientMethodParameters parameters, MethodSignature? createNextPageMessageSignature, bool async)
         {
-            var modifiers = ConvenienceModifiers | MethodSignatureModifiers.Virtual;
-            if (!methodIsConfident)
-            {
-                modifiers = modifiers & ~MethodSignatureModifiers.Public | MethodSignatureModifiers.Internal;
-            }
-
-            var signature = CreateMethodSignature(methodName, modifiers, parameters.Convenience, ConvenienceMethodReturnType, null);
             var body = new[]
             {
                 new ParameterValidationBlock(parameters.Convenience),
-                CreateConvenienceMethodBody(methodName, parameters, createNextPageMessageSignature, async)
+                CreateConvenienceMethodBody(signature.Name, parameters, createNextPageMessageSignature, async)
             };
             return new Method(signature.WithAsync(async), body);
         }

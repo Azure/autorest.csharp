@@ -1,10 +1,12 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using System.Collections.Generic;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Common.Output.Models.Responses;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Output.Samples.Models;
 
 namespace AutoRest.CSharp.Output.Models
 {
@@ -25,7 +27,8 @@ namespace AutoRest.CSharp.Output.Models
         InputType? RequestBodyType,
         CSharpType? ResponseType,
         CSharpType? PageItemType,
-        // May be not null when CreateNextPageMessage is null, referencing method created by for another operation
+        IReadOnlyList<DpgOperationSample> Samples,
+        // May be not null when CreateNextPageMessage is null, referencing method created by builder as `CreateRequest` for another operation
         MethodSignature? CreateNextPageMessageSignature
     );
 }

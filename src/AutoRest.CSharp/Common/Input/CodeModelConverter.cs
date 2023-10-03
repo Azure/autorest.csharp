@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using AutoRest.CSharp.Common.Input.Examples;
 using AutoRest.CSharp.Common.Utilities;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Builders;
@@ -57,13 +58,19 @@ namespace AutoRest.CSharp.Common.Input
             => operationGroups.Select(CreateClient).ToList();
 
         public InputClient CreateClient(OperationGroup operationGroup)
-            => new(
+        {
+            var parameters = Array.Empty<InputParameter>();
+            return new(
                 Name: operationGroup.Language.Default.Name,
                 Description: operationGroup.Language.Default.Description,
-                Operations: CreateOperations(operationGroup.Operations).Values.ToArray(), true, Array.Empty<InputParameter>(), null)
+                Operations: CreateOperations(operationGroup.Operations).Values.ToArray(),
+                Parameters: parameters,
+                ExampleMockValueBuilder.BuildClientExamples(parameters),
+                null)
             {
                 Key = operationGroup.Key,
             };
+        }
 
         public IReadOnlyDictionary<ServiceRequest, InputOperation> CreateOperations(IEnumerable<Operation> operations)
         {
@@ -92,6 +99,7 @@ namespace AutoRest.CSharp.Common.Input
 
         private InputOperation CreateOperation(ServiceRequest serviceRequest, Operation operation, HttpRequest httpRequest)
         {
+            var parameters = CreateOperationParameters(operation.Parameters.Concat(serviceRequest.Parameters).ToList());
             var inputOperation = new InputOperation(
                 Name: operation.Language.Default.Name,
                 ResourceName: null,
@@ -99,7 +107,7 @@ namespace AutoRest.CSharp.Common.Input
                 Deprecated: operation.Deprecated?.Reason,
                 Description: operation.Language.Default.Description,
                 Accessibility: operation.Accessibility,
-                Parameters: CreateOperationParameters(operation.Parameters.Concat(serviceRequest.Parameters).ToList()),
+                Parameters: parameters,
                 Responses: operation.Responses.Select(CreateOperationResponse).ToList(),
                 HttpMethod: httpRequest.Method.ToCoreRequestMethod(),
                 RequestBodyMediaType: GetBodyFormat((httpRequest as HttpWithBodyRequest)?.KnownMediaType),
@@ -111,7 +119,8 @@ namespace AutoRest.CSharp.Common.Input
                 LongRunning: CreateLongRunning(operation),
                 Paging: CreateOperationPaging(serviceRequest, operation),
                 GenerateProtocolMethod: true,
-                GenerateConvenienceMethod: false);
+                GenerateConvenienceMethod: false,
+                Examples: ExampleMockValueBuilder.BuildOperationExamples(parameters));
 
             _inputOperationToOperationMap[inputOperation] = operation;
             return inputOperation;

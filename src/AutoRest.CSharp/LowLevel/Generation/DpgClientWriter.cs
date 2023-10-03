@@ -12,6 +12,7 @@ using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Common.Output.Models.Responses;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.LowLevel.Output.Samples;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
@@ -26,19 +27,19 @@ using StatusCodes = AutoRest.CSharp.Output.Models.Responses.StatusCodes;
 
 namespace AutoRest.CSharp.Generation.Writers
 {
-    internal class LowLevelClientWriter : ClientWriter
+    internal class DpgClientWriter : ClientWriter
     {
         private readonly CodeWriter _writer;
         private readonly XmlDocWriter _xmlDocWriter;
         private readonly LowLevelClient _client;
-        private readonly ExampleComposer _exampleComposer;
+        private readonly DpgClientSampleProvider _sampleComposer;
 
-        public LowLevelClientWriter(CodeWriter writer, XmlDocWriter xmlDocWriter, LowLevelClient client, ExampleComposer exampleComposer)
+        public DpgClientWriter(LowLevelClient client, DpgClientSampleProvider sampleComposer, CodeWriter writer, XmlDocWriter xmlDocWriter)
         {
             _writer = writer;
             _xmlDocWriter = xmlDocWriter;
             _client = client;
-            _exampleComposer = exampleComposer;
+            _sampleComposer = sampleComposer;
         }
 
         public void WriteClient()
@@ -310,12 +311,12 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             if (async && operationMethods.ConvenienceAsync is {} convenienceAsync)
             {
-                WriteConvenienceMethodDocumentationWithExternalXmlDoc(operationMethods, convenienceAsync, true);
+                WriteConvenienceMethodDocumentationWithExternalXmlDoc(convenienceAsync);
                 _writer.WriteMethod(convenienceAsync);
             }
             else if (operationMethods.Convenience is {} convenience)
             {
-                WriteConvenienceMethodDocumentationWithExternalXmlDoc(operationMethods, convenience, false);
+                WriteConvenienceMethodDocumentationWithExternalXmlDoc(convenience);
                 _writer.WriteMethod(convenience);
             }
         }
@@ -324,35 +325,44 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             if (async && operationMethods.ProtocolAsync is {} protocolAsync)
             {
-                WriteProtocolMethodDocumentationWithExternalXmlDoc(operationMethods, protocolAsync, operationMethods.ConvenienceAsync?.Signature as MethodSignature, true);
+                WriteProtocolMethodDocumentationWithExternalXmlDoc(operationMethods, protocolAsync, operationMethods.ConvenienceAsync?.Signature as MethodSignature);
                 _writer.WriteMethod(protocolAsync);
             }
             else if (operationMethods.Protocol is {} protocol)
             {
-                WriteProtocolMethodDocumentationWithExternalXmlDoc(operationMethods, protocol, operationMethods.Convenience?.Signature as MethodSignature, false);
+                WriteProtocolMethodDocumentationWithExternalXmlDoc(operationMethods, protocol, operationMethods.Convenience?.Signature as MethodSignature);
                 _writer.WriteMethod(protocol);
             }
         }
 
-        private void WriteProtocolMethodDocumentationWithExternalXmlDoc(RestClientOperationMethods operationMethods, Method protocolMethod, MethodSignature? convenienceMethodSignature, bool async)
+        private void WriteProtocolMethodDocumentationWithExternalXmlDoc(RestClientOperationMethods operationMethods, Method protocolMethod, MethodSignature? convenienceMethodSignature)
         {
             var signature = (MethodSignature)protocolMethod.Signature;
             WriteMethodDocumentation(_writer, signature, convenienceMethodSignature, operationMethods);
-            var docRef = GetMethodSignatureString(signature);
-            _writer.WriteXmlDocumentationInclude(_client.Type, docRef);
-            _xmlDocWriter.AddMember(docRef);
-            _xmlDocWriter.AddExamples(_exampleComposer.ComposeProtocolSamples(operationMethods, signature, async).Select(s => (s.Key, GetSampleString(s.Value))));
+            WriteSampleRefsIfNecessary(signature);
         }
 
-        private void WriteConvenienceMethodDocumentationWithExternalXmlDoc(RestClientOperationMethods operationMethods, Method convenienceMethod, bool async)
+        private void WriteConvenienceMethodDocumentationWithExternalXmlDoc(Method convenienceMethod)
         {
             var signature = (MethodSignature)convenienceMethod.Signature;
             _writer.WriteMethodDocumentation(signature);
             _writer.WriteXmlDocumentation("remarks", $"{signature.DescriptionText}");
+            WriteSampleRefsIfNecessary(signature);
+        }
+
+        private void WriteSampleRefsIfNecessary(MethodSignatureBase signature)
+        {
+            var samples = _sampleComposer.GetSampleInformation(signature).ToList();
+            if (!samples.Any())
+            {
+                // do not write this part when there is no sample for this method
+                return;
+            }
+
             var docRef = GetMethodSignatureString(signature);
             _writer.WriteXmlDocumentationInclude(_client.Type, docRef);
             _xmlDocWriter.AddMember(docRef);
-            _xmlDocWriter.AddExamples(_exampleComposer.ComposeConvenienceSamples(operationMethods, signature, async).Select(s => (s.Key, GetSampleString(s.Value))));
+            _xmlDocWriter.AddExamples(samples.Select(s => (s.ExampleInformation, GetSampleString(s.TestMethodBody))));
         }
 
         private static string GetSampleString(MethodBodyStatement statement)

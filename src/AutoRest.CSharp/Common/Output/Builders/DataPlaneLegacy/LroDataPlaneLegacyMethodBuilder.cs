@@ -34,7 +34,7 @@ namespace AutoRest.CSharp.Output.Models
             {
                 new ParameterValidationBlock(signature.Parameters, true),
                 WrapInDiagnosticScopeLegacy(signature.Name,
-                    Var("originalResponse", new ResponseExpression(_restClient.Invoke(_convenienceMethod.WithAsync(async), async)), out var response),
+                    Var("originalResponse", new ResponseExpression(_restClient.Invoke(_convenienceMethod.WithAsync(async))), out var response),
                     Return(New.Instance(_lroType, new MemberExpression(null, $"_{KnownParameters.ClientDiagnostics.Name}"), PipelineField, new HttpMessageExpression(_restClient.Invoke(_createMessageMethod)).Request, response))
                 )
             };

@@ -15,11 +15,10 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
         protected SerializableObjectType(BuildContext context) : base(context)
         {
         }
+
         protected SerializableObjectType(string defaultNamespace, SourceInputModel? sourceInputModel) : base(defaultNamespace, sourceInputModel)
         {
         }
-
-        public INamedTypeSymbol? GetExistingType() => ExistingType;
 
         private bool? _includeSerializer;
         public bool IncludeSerializer => _includeSerializer ??= EnsureIncludeSerializer();
@@ -41,7 +40,6 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
 
         private bool? _hasXmlSerialization;
         private bool HasXmlSerialization => _hasXmlSerialization ??= EnsureHasXmlSerialization();
-
 
         public abstract ObjectTypeProperty GetPropertyBySerializedName(string serializedName, bool includeParents = false);
 
