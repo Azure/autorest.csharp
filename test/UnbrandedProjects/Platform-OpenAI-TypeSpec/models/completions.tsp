@@ -343,7 +343,7 @@ model CreateCompletionRequest {
    * **Note:** Because this parameter generates many completions, it can quickly consume your token
    * quota. Use carefully and ensure that you have reasonable settings for `max_tokens` and `stop`.
    */
-  best_of: safeint | null; // = 1;
+  best_of?: safeint | null; // = 1;
 }
 
 /**

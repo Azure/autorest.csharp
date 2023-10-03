@@ -1268,7 +1268,7 @@ This sample shows how to call CreateCompletionAsync.
 KeyCredential credential = new KeyCredential("<key>");
 OpenAIClient client = new OpenAIClient(credential);
 
-CreateCompletionRequest body = new CreateCompletionRequest(CompletionModels.Babbage002, BinaryData.FromObjectAsJson(new object()), 1234L);
+CreateCompletionRequest body = new CreateCompletionRequest(CompletionModels.Babbage002, BinaryData.FromObjectAsJson(new object()));
 Result<CreateCompletionResponse> result = await client.CreateCompletionAsync(body);
 ]]></code>
 This sample shows how to call CreateCompletionAsync with all parameters.
@@ -1276,7 +1276,7 @@ This sample shows how to call CreateCompletionAsync with all parameters.
 KeyCredential credential = new KeyCredential("<key>");
 OpenAIClient client = new OpenAIClient(credential);
 
-CreateCompletionRequest body = new CreateCompletionRequest(CompletionModels.Babbage002, BinaryData.FromObjectAsJson(new object()), 1234L)
+CreateCompletionRequest body = new CreateCompletionRequest(CompletionModels.Babbage002, BinaryData.FromObjectAsJson(new object()))
 {
     Suffix = "<suffix>",
     Temperature = 123.45,
@@ -1294,6 +1294,7 @@ CreateCompletionRequest body = new CreateCompletionRequest(CompletionModels.Babb
     Stream = true,
     Logprobs = 1234L,
     Echo = true,
+    BestOf = 1234L,
 };
 Result<CreateCompletionResponse> result = await client.CreateCompletionAsync(body);
 ]]></code></example>
@@ -1305,7 +1306,7 @@ This sample shows how to call CreateCompletion.
 KeyCredential credential = new KeyCredential("<key>");
 OpenAIClient client = new OpenAIClient(credential);
 
-CreateCompletionRequest body = new CreateCompletionRequest(CompletionModels.Babbage002, BinaryData.FromObjectAsJson(new object()), 1234L);
+CreateCompletionRequest body = new CreateCompletionRequest(CompletionModels.Babbage002, BinaryData.FromObjectAsJson(new object()));
 Result<CreateCompletionResponse> result = client.CreateCompletion(body);
 ]]></code>
 This sample shows how to call CreateCompletion with all parameters.
@@ -1313,7 +1314,7 @@ This sample shows how to call CreateCompletion with all parameters.
 KeyCredential credential = new KeyCredential("<key>");
 OpenAIClient client = new OpenAIClient(credential);
 
-CreateCompletionRequest body = new CreateCompletionRequest(CompletionModels.Babbage002, BinaryData.FromObjectAsJson(new object()), 1234L)
+CreateCompletionRequest body = new CreateCompletionRequest(CompletionModels.Babbage002, BinaryData.FromObjectAsJson(new object()))
 {
     Suffix = "<suffix>",
     Temperature = 123.45,
@@ -1331,6 +1332,7 @@ CreateCompletionRequest body = new CreateCompletionRequest(CompletionModels.Babb
     Stream = true,
     Logprobs = 1234L,
     Echo = true,
+    BestOf = 1234L,
 };
 Result<CreateCompletionResponse> result = client.CreateCompletion(body);
 ]]></code></example>
@@ -1346,7 +1348,6 @@ RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(n
 {
     model = "babbage-002",
     prompt = new object(),
-    best_of = 1234L,
 }).ToStream());
 Result result = await client.CreateCompletionAsync(content);
 
@@ -1423,7 +1424,6 @@ RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(n
 {
     model = "babbage-002",
     prompt = new object(),
-    best_of = 1234L,
 }).ToStream());
 Result result = client.CreateCompletion(content);
 

@@ -28,18 +28,8 @@ namespace OpenAI.Models
         /// Note that &lt;|endoftext|&gt; is the document separator that the model sees during training, so if a
         /// prompt is not specified the model will generate as if from the beginning of a new document.
         /// </param>
-        /// <param name="bestOf">
-        /// Generates `best_of` completions server-side and returns the "best" (the one with the highest
-        /// log probability per token). Results cannot be streamed.
-        ///
-        /// When used with `n`, `best_of` controls the number of candidate completions and `n` specifies
-        /// how many to return – `best_of` must be greater than `n`.
-        ///
-        /// **Note:** Because this parameter generates many completions, it can quickly consume your token
-        /// quota. Use carefully and ensure that you have reasonable settings for `max_tokens` and `stop`.
-        /// </param>
         /// <exception cref="ArgumentNullException"> <paramref name="prompt"/> is null. </exception>
-        public CreateCompletionRequest(CompletionModels model, BinaryData prompt, long? bestOf)
+        public CreateCompletionRequest(CompletionModels model, BinaryData prompt)
         {
             ClientUtilities.AssertNotNull(prompt, nameof(prompt));
 
@@ -47,7 +37,6 @@ namespace OpenAI.Models
             Prompt = prompt;
             Stop = new OptionalList<string>();
             LogitBias = new OptionalDictionary<string, long>();
-            BestOf = bestOf;
         }
 
         /// <summary> Initializes a new instance of CreateCompletionRequest. </summary>
@@ -291,6 +280,6 @@ namespace OpenAI.Models
         /// **Note:** Because this parameter generates many completions, it can quickly consume your token
         /// quota. Use carefully and ensure that you have reasonable settings for `max_tokens` and `stop`.
         /// </summary>
-        public long? BestOf { get; }
+        public long? BestOf { get; set; }
     }
 }

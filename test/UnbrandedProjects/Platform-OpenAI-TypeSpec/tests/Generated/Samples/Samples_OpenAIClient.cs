@@ -1386,7 +1386,6 @@ Description = "<description>",
             {
                 model = "babbage-002",
                 prompt = new object(),
-                best_of = 1234L,
             }).ToStream());
             Result result = client.CreateCompletion(content);
 
@@ -1415,7 +1414,6 @@ Description = "<description>",
             {
                 model = "babbage-002",
                 prompt = new object(),
-                best_of = 1234L,
             }).ToStream());
             Result result = await client.CreateCompletionAsync(content);
 
@@ -1440,7 +1438,7 @@ Description = "<description>",
             KeyCredential credential = new KeyCredential("<key>");
             OpenAIClient client = new OpenAIClient(credential);
 
-            CreateCompletionRequest body = new CreateCompletionRequest(CompletionModels.Babbage002, BinaryData.FromObjectAsJson(new object()), 1234L);
+            CreateCompletionRequest body = new CreateCompletionRequest(CompletionModels.Babbage002, BinaryData.FromObjectAsJson(new object()));
             Result<CreateCompletionResponse> result = client.CreateCompletion(body);
         }
 
@@ -1451,7 +1449,7 @@ Description = "<description>",
             KeyCredential credential = new KeyCredential("<key>");
             OpenAIClient client = new OpenAIClient(credential);
 
-            CreateCompletionRequest body = new CreateCompletionRequest(CompletionModels.Babbage002, BinaryData.FromObjectAsJson(new object()), 1234L);
+            CreateCompletionRequest body = new CreateCompletionRequest(CompletionModels.Babbage002, BinaryData.FromObjectAsJson(new object()));
             Result<CreateCompletionResponse> result = await client.CreateCompletionAsync(body);
         }
 
@@ -1564,7 +1562,7 @@ Description = "<description>",
             KeyCredential credential = new KeyCredential("<key>");
             OpenAIClient client = new OpenAIClient(credential);
 
-            CreateCompletionRequest body = new CreateCompletionRequest(CompletionModels.Babbage002, BinaryData.FromObjectAsJson(new object()), 1234L)
+            CreateCompletionRequest body = new CreateCompletionRequest(CompletionModels.Babbage002, BinaryData.FromObjectAsJson(new object()))
             {
                 Suffix = "<suffix>",
                 Temperature = 123.45,
@@ -1582,6 +1580,7 @@ Description = "<description>",
                 Stream = true,
                 Logprobs = 1234L,
                 Echo = true,
+                BestOf = 1234L,
             };
             Result<CreateCompletionResponse> result = client.CreateCompletion(body);
         }
@@ -1593,7 +1592,7 @@ Description = "<description>",
             KeyCredential credential = new KeyCredential("<key>");
             OpenAIClient client = new OpenAIClient(credential);
 
-            CreateCompletionRequest body = new CreateCompletionRequest(CompletionModels.Babbage002, BinaryData.FromObjectAsJson(new object()), 1234L)
+            CreateCompletionRequest body = new CreateCompletionRequest(CompletionModels.Babbage002, BinaryData.FromObjectAsJson(new object()))
             {
                 Suffix = "<suffix>",
                 Temperature = 123.45,
@@ -1611,6 +1610,7 @@ Description = "<description>",
                 Stream = true,
                 Logprobs = 1234L,
                 Echo = true,
+                BestOf = 1234L,
             };
             Result<CreateCompletionResponse> result = await client.CreateCompletionAsync(body);
         }

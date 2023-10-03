@@ -184,14 +184,17 @@ namespace OpenAI.Models
                     writer.WriteNull("echo");
                 }
             }
-            if (BestOf != null)
+            if (OptionalProperty.IsDefined(BestOf))
             {
-                writer.WritePropertyName("best_of"u8);
-                writer.WriteNumberValue(BestOf.Value);
-            }
-            else
-            {
-                writer.WriteNull("best_of");
+                if (BestOf != null)
+                {
+                    writer.WritePropertyName("best_of"u8);
+                    writer.WriteNumberValue(BestOf.Value);
+                }
+                else
+                {
+                    writer.WriteNull("best_of");
+                }
             }
             writer.WriteEndObject();
         }
