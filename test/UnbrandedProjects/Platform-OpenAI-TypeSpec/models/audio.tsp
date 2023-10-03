@@ -12,7 +12,7 @@ model CreateTranscriptionRequest {
 
   /** ID of the model to use. Only `whisper-1` is currently available. */
   @extension("x-oaiTypeLabel", "string")
-  `model`: AudioModels;
+  `model`: string | "whisper-1";
 
   /**
    * An optional text to guide the model's style or continue a previous audio segment. The
@@ -24,7 +24,7 @@ model CreateTranscriptionRequest {
    * The format of the transcript output, in one of these options: json, text, srt, verbose_json, or
    * vtt.
    */
-  response_format?: AudioResponseFormat = AudioResponseFormat.json;
+  response_format?: "json" | "text" | "srt" | "verbose_json" | "vtt" = "json";
 
   /**
    * The sampling temperature, between 0 and 1. Higher values like 0.8 will make the output more
@@ -44,20 +44,6 @@ model CreateTranscriptionRequest {
   language?: string;
 }
 
-@doc("audio models")
-enum AudioModels {
-    "whisper-1";
-}
-
-@doc("audio response formats")
-enum AudioResponseFormat {
-    "json";
-    "text";
-    "srt";
-    "verbose_json";
-    "vtt";
-}
-
 // Note: This does not currently support the non-default response format types.
 model CreateTranscriptionResponse {
   text: string;
@@ -74,7 +60,7 @@ model CreateTranslationRequest {
 
   /** ID of the model to use. Only `whisper-1` is currently available. */
   @extension("x-oaiTypeLabel", "string")
-  `model`: AudioModels;
+  `model`: string | "whisper-1";
 
   /**
    * An optional text to guide the model's style or continue a previous audio segment. The
@@ -87,7 +73,7 @@ model CreateTranslationRequest {
    * The format of the transcript output, in one of these options: json, text, srt, verbose_json, or
    * vtt.
    */
-  response_format?: AudioResponseFormat = AudioResponseFormat.json;
+  response_format?: "json" | "text" | "srt" | "verbose_json" | "vtt" = "json";
 
   /**
    * The sampling temperature, between 0 and 1. Higher values like 0.8 will make the output more

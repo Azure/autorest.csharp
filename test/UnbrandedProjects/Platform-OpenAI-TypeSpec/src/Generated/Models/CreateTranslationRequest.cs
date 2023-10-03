@@ -20,7 +20,7 @@ namespace OpenAI.Models
         /// </param>
         /// <param name="model"> ID of the model to use. Only `whisper-1` is currently available. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="file"/> is null. </exception>
-        public CreateTranslationRequest(BinaryData file, AudioModels model)
+        public CreateTranslationRequest(BinaryData file, CreateTranslationRequestModel model)
         {
             ClientUtilities.AssertNotNull(file, nameof(file));
 
@@ -48,7 +48,7 @@ namespace OpenAI.Models
         /// the model will use [log probability](https://en.wikipedia.org/wiki/Log_probability) to
         /// automatically increase the temperature until certain thresholds are hit.
         /// </param>
-        internal CreateTranslationRequest(BinaryData file, AudioModels model, string prompt, AudioResponseFormat? responseFormat, double? temperature)
+        internal CreateTranslationRequest(BinaryData file, CreateTranslationRequestModel model, string prompt, CreateTranslationRequestResponseFormat? responseFormat, double? temperature)
         {
             File = file;
             Model = model;
@@ -76,7 +76,7 @@ namespace OpenAI.Models
         /// </summary>
         public BinaryData File { get; }
         /// <summary> ID of the model to use. Only `whisper-1` is currently available. </summary>
-        public AudioModels Model { get; }
+        public CreateTranslationRequestModel Model { get; }
         /// <summary>
         /// An optional text to guide the model's style or continue a previous audio segment. The
         /// [prompt](/docs/guides/speech-to-text/prompting) should match the audio language.
@@ -86,7 +86,7 @@ namespace OpenAI.Models
         /// The format of the transcript output, in one of these options: json, text, srt, verbose_json, or
         /// vtt.
         /// </summary>
-        public AudioResponseFormat? ResponseFormat { get; set; }
+        public CreateTranslationRequestResponseFormat? ResponseFormat { get; set; }
         /// <summary>
         /// The sampling temperature, between 0 and 1. Higher values like 0.8 will make the output more
         /// random, while lower values like 0.2 will make it more focused and deterministic. If set to 0,

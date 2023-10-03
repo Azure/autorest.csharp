@@ -308,7 +308,7 @@ This sample shows how to call CreateTranscriptionAsync.
 KeyCredential credential = new KeyCredential("<key>");
 OpenAIClient client = new OpenAIClient(credential);
 
-CreateTranscriptionRequest audio = new CreateTranscriptionRequest(BinaryData.FromObjectAsJson(new object()), AudioModels.Whisper1);
+CreateTranscriptionRequest audio = new CreateTranscriptionRequest(BinaryData.FromObjectAsJson(new object()), new CreateTranscriptionRequestModel("<model>"));
 Result<CreateTranscriptionResponse> result = await client.CreateTranscriptionAsync(audio);
 ]]></code>
 This sample shows how to call CreateTranscriptionAsync with all parameters.
@@ -316,10 +316,10 @@ This sample shows how to call CreateTranscriptionAsync with all parameters.
 KeyCredential credential = new KeyCredential("<key>");
 OpenAIClient client = new OpenAIClient(credential);
 
-CreateTranscriptionRequest audio = new CreateTranscriptionRequest(BinaryData.FromObjectAsJson(new object()), AudioModels.Whisper1)
+CreateTranscriptionRequest audio = new CreateTranscriptionRequest(BinaryData.FromObjectAsJson(new object()), new CreateTranscriptionRequestModel("<model>"))
 {
     Prompt = "<prompt>",
-    ResponseFormat = AudioResponseFormat.Json,
+    ResponseFormat = CreateTranscriptionRequestResponseFormat.Json,
     Temperature = 123.45,
     Language = "<language>",
 };
@@ -333,7 +333,7 @@ This sample shows how to call CreateTranscription.
 KeyCredential credential = new KeyCredential("<key>");
 OpenAIClient client = new OpenAIClient(credential);
 
-CreateTranscriptionRequest audio = new CreateTranscriptionRequest(BinaryData.FromObjectAsJson(new object()), AudioModels.Whisper1);
+CreateTranscriptionRequest audio = new CreateTranscriptionRequest(BinaryData.FromObjectAsJson(new object()), new CreateTranscriptionRequestModel("<model>"));
 Result<CreateTranscriptionResponse> result = client.CreateTranscription(audio);
 ]]></code>
 This sample shows how to call CreateTranscription with all parameters.
@@ -341,10 +341,10 @@ This sample shows how to call CreateTranscription with all parameters.
 KeyCredential credential = new KeyCredential("<key>");
 OpenAIClient client = new OpenAIClient(credential);
 
-CreateTranscriptionRequest audio = new CreateTranscriptionRequest(BinaryData.FromObjectAsJson(new object()), AudioModels.Whisper1)
+CreateTranscriptionRequest audio = new CreateTranscriptionRequest(BinaryData.FromObjectAsJson(new object()), new CreateTranscriptionRequestModel("<model>"))
 {
     Prompt = "<prompt>",
-    ResponseFormat = AudioResponseFormat.Json,
+    ResponseFormat = CreateTranscriptionRequestResponseFormat.Json,
     Temperature = 123.45,
     Language = "<language>",
 };
@@ -361,7 +361,7 @@ OpenAIClient client = new OpenAIClient(credential);
 RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
 {
     file = new object(),
-    model = "whisper-1",
+    model = "<model>",
 }).ToStream());
 Result result = await client.CreateTranscriptionAsync(content);
 
@@ -376,7 +376,7 @@ OpenAIClient client = new OpenAIClient(credential);
 RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
 {
     file = new object(),
-    model = "whisper-1",
+    model = "<model>",
     prompt = "<prompt>",
     response_format = "json",
     temperature = 123.45,
@@ -398,7 +398,7 @@ OpenAIClient client = new OpenAIClient(credential);
 RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
 {
     file = new object(),
-    model = "whisper-1",
+    model = "<model>",
 }).ToStream());
 Result result = client.CreateTranscription(content);
 
@@ -413,7 +413,7 @@ OpenAIClient client = new OpenAIClient(credential);
 RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
 {
     file = new object(),
-    model = "whisper-1",
+    model = "<model>",
     prompt = "<prompt>",
     response_format = "json",
     temperature = 123.45,
@@ -432,7 +432,7 @@ This sample shows how to call CreateTranslationAsync.
 KeyCredential credential = new KeyCredential("<key>");
 OpenAIClient client = new OpenAIClient(credential);
 
-CreateTranslationRequest audio = new CreateTranslationRequest(BinaryData.FromObjectAsJson(new object()), AudioModels.Whisper1);
+CreateTranslationRequest audio = new CreateTranslationRequest(BinaryData.FromObjectAsJson(new object()), new CreateTranslationRequestModel("<model>"));
 Result<CreateTranslationResponse> result = await client.CreateTranslationAsync(audio);
 ]]></code>
 This sample shows how to call CreateTranslationAsync with all parameters.
@@ -440,10 +440,10 @@ This sample shows how to call CreateTranslationAsync with all parameters.
 KeyCredential credential = new KeyCredential("<key>");
 OpenAIClient client = new OpenAIClient(credential);
 
-CreateTranslationRequest audio = new CreateTranslationRequest(BinaryData.FromObjectAsJson(new object()), AudioModels.Whisper1)
+CreateTranslationRequest audio = new CreateTranslationRequest(BinaryData.FromObjectAsJson(new object()), new CreateTranslationRequestModel("<model>"))
 {
     Prompt = "<prompt>",
-    ResponseFormat = AudioResponseFormat.Json,
+    ResponseFormat = CreateTranslationRequestResponseFormat.Json,
     Temperature = 123.45,
 };
 Result<CreateTranslationResponse> result = await client.CreateTranslationAsync(audio);
@@ -456,7 +456,7 @@ This sample shows how to call CreateTranslation.
 KeyCredential credential = new KeyCredential("<key>");
 OpenAIClient client = new OpenAIClient(credential);
 
-CreateTranslationRequest audio = new CreateTranslationRequest(BinaryData.FromObjectAsJson(new object()), AudioModels.Whisper1);
+CreateTranslationRequest audio = new CreateTranslationRequest(BinaryData.FromObjectAsJson(new object()), new CreateTranslationRequestModel("<model>"));
 Result<CreateTranslationResponse> result = client.CreateTranslation(audio);
 ]]></code>
 This sample shows how to call CreateTranslation with all parameters.
@@ -464,10 +464,10 @@ This sample shows how to call CreateTranslation with all parameters.
 KeyCredential credential = new KeyCredential("<key>");
 OpenAIClient client = new OpenAIClient(credential);
 
-CreateTranslationRequest audio = new CreateTranslationRequest(BinaryData.FromObjectAsJson(new object()), AudioModels.Whisper1)
+CreateTranslationRequest audio = new CreateTranslationRequest(BinaryData.FromObjectAsJson(new object()), new CreateTranslationRequestModel("<model>"))
 {
     Prompt = "<prompt>",
-    ResponseFormat = AudioResponseFormat.Json,
+    ResponseFormat = CreateTranslationRequestResponseFormat.Json,
     Temperature = 123.45,
 };
 Result<CreateTranslationResponse> result = client.CreateTranslation(audio);
@@ -483,7 +483,7 @@ OpenAIClient client = new OpenAIClient(credential);
 RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
 {
     file = new object(),
-    model = "whisper-1",
+    model = "<model>",
 }).ToStream());
 Result result = await client.CreateTranslationAsync(content);
 
@@ -498,7 +498,7 @@ OpenAIClient client = new OpenAIClient(credential);
 RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
 {
     file = new object(),
-    model = "whisper-1",
+    model = "<model>",
     prompt = "<prompt>",
     response_format = "json",
     temperature = 123.45,
@@ -519,7 +519,7 @@ OpenAIClient client = new OpenAIClient(credential);
 RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
 {
     file = new object(),
-    model = "whisper-1",
+    model = "<model>",
 }).ToStream());
 Result result = client.CreateTranslation(content);
 
@@ -534,7 +534,7 @@ OpenAIClient client = new OpenAIClient(credential);
 RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
 {
     file = new object(),
-    model = "whisper-1",
+    model = "<model>",
     prompt = "<prompt>",
     response_format = "json",
     temperature = 123.45,
