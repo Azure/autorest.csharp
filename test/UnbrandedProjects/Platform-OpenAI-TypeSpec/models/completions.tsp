@@ -311,7 +311,12 @@ model CreateCompletionRequest {
    * prompt is not specified the model will generate as if from the beginning of a new document.
    */
   // TODO: needs oneOf.
-  prompt: unknown;
+  prompt:
+    | string
+    | string[]
+    | TokenArray
+    | TokenArrayArray
+    | null = "<|endoftext|>";
 
   // TODO: needs default of null
   /** The suffix that comes after a completion of inserted text. */

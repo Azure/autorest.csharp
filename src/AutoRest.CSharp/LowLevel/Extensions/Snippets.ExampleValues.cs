@@ -264,9 +264,8 @@ namespace AutoRest.CSharp.LowLevel.Extensions
 
         private static ValueExpression GetExpressionForBinaryData(InputExampleValue exampleValue)
         {
-            // determine which method on BinaryData we want to use to serialize this BinaryData
-            string method = exampleValue is InputExampleRawValue exampleRawValue && exampleRawValue.RawValue is string ? nameof(BinaryData.FromString) : nameof(BinaryData.FromObjectAsJson);
-            return new TypeReference(typeof(BinaryData)).InvokeStatic(method, GetExpressionForFreeFormObject(exampleValue, true));
+            //always use FromObjectAsJson for BinaryData so that the serialization works correctly.
+            return BinaryDataExpression.FromObjectAsJson(GetExpressionForFreeFormObject(exampleValue, true));
         }
 
         private static ValueExpression GetExpressionForFreeFormObject(InputExampleValue exampleValue, bool includeCollectionInitialization = true) => exampleValue switch

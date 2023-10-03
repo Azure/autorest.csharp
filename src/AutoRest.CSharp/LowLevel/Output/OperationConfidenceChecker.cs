@@ -190,9 +190,7 @@ namespace AutoRest.CSharp.Output.Models
 
         private static ConvenienceMethodConfidenceLevel WalkUnionType(InputUnionType unionType)
         {
-            // the union types are always not confident.
-            // if any exceptions happen in the future, we could handle it here.
-            return unionType.UnionItemTypes.Any(t => t is not InputLiteralType) ? ConvenienceMethodConfidenceLevel.Internal : ConvenienceMethodConfidenceLevel.Confident;
+            return ConvenienceMethodConfidenceLevel.Confident;
         }
     }
 }
