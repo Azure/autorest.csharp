@@ -16,7 +16,7 @@ model CreateEditRequest {
   instruction: string;
 
   /** How many edits to generate for the input and instruction. */
-  n?: EditN | null; // = 1;
+  n?: EditN | null = 1;
 
   /**
    * What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output
@@ -24,7 +24,7 @@ model CreateEditRequest {
    *
    * We generally recommend altering this or `top_p` but not both.
    */
-  temperature?: Temperature | null; // = 1;
+  temperature?: Temperature | null = 1;
 
   /**
    * An alternative to sampling with temperature, called nucleus sampling, where the model considers
@@ -33,7 +33,7 @@ model CreateEditRequest {
    *
    * We generally recommend altering this or `temperature` but not both.
    */
-  top_p?: TopP | null; // = 1;
+  top_p?: TopP | null = 1;
 }
 
 #deprecated "deprecated"

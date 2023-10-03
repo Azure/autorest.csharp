@@ -1,157 +1,13 @@
 import "@typespec/http";
+import "@typespec/openapi";
+
+import "../common/errors.tsp";
+import "./models.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace OpenAI;
-
-@route("/chat")
-namespace Chat {
-  @route("/completions")
-  interface Completions {
-    @tag("OpenAI")
-    @post
-    @operationId("createChatCompletion")
-    createChatCompletion(
-      @body body: CreateChatCompletionRequest,
-    ): CreateChatCompletionResponse | ErrorResponse;
-  }
-}
-
-@route("/completions")
-interface Completions {
-  @tag("OpenAI")
-  @post
-  @operationId("createCompletion")
-  createCompletion(
-    @body body: CreateCompletionRequest,
-  ): CreateCompletionResponse | ErrorResponse;
-}
-
-@route("/edits")
-interface Edits {
-  #deprecated "deprecated"
-  @post
-  @tag("OpenAI")
-  @operationId("createEdit")
-  createEdit(@body edit: CreateEditRequest): CreateEditResponse | ErrorResponse;
-}
-
-@route("/images")
-interface Images {
-  @route("generations")
-  @post
-  @operationId("createImage")
-  @tag("OpenAI")
-  @summary("Creates an image given a prompt")
-  createImage(@body image: CreateImageRequest): ImagesResponse | ErrorResponse;
-
-  @route("edits")
-  @post
-  @operationId("createImageEdit")
-  @tag("OpenAI")
-  @summary("Creates an edited or extended image given an original image and a prompt.")
-  createImageEdit(
-    @header contentType: "multipart/form-data",
-    @body image: CreateImageEditRequest,
-  ): ImagesResponse | ErrorResponse;
-
-  @route("variations")
-  @post
-  @operationId("createImageVariation")
-  @tag("OpenAI")
-  @summary("Creates an edited or extended image given an original image and a prompt.")
-  createImageVariation(
-    @header contentType: "multipart/form-data",
-    @body image: CreateImageVariationRequest,
-  ): ImagesResponse | ErrorResponse;
-}
-
-@route("/embeddings")
-interface Embeddings {
-  @tag("OpenAI")
-  @summary("Creates an embedding vector representing the input text.")
-  @post
-  @operationId("createEmbedding")
-  createEmbedding(
-    @body embedding: CreateEmbeddingRequest,
-  ): CreateEmbeddingResponse | ErrorResponse;
-}
-
-@route("/audio")
-namespace Audio {
-  @route("transcriptions")
-  interface Transcriptions {
-    @post
-    @operationId("createTranscription")
-    @tag("OpenAI")
-    @summary("Transcribes audio into the input language.")
-    createTranscription(
-      @header contentType: "multipart/form-data",
-      @body audio: CreateTranscriptionRequest,
-    ): CreateTranscriptionResponse | ErrorResponse;
-  }
-
-  @route("translations")
-  interface Translations {
-    @post
-    @operationId("createTranslation")
-    @tag("OpenAI")
-    @summary("Transcribes audio into the input language.")
-    createTranslation(
-      @header contentType: "multipart/form-data",
-      @body audio: CreateTranslationRequest,
-    ): CreateTranslationResponse | ErrorResponse;
-  }
-}
-
-@route("/files")
-interface Files {
-  @tag("OpenAI")
-  @get
-  @summary("Returns a list of files that belong to the user's organization.")
-  @operationId("listFiles")
-  listFiles(): ListFilesResponse | ErrorResponse;
-
-  @tag("OpenAI")
-  @post
-  @summary("Returns a list of files that belong to the user's organization.")
-  @operationId("createFile")
-  createFile(
-    @header contentType: "multipart/form-data",
-    @body file: CreateFileRequest,
-  ): OpenAIFile | ErrorResponse;
-
-  @tag("OpenAI")
-  @post
-  @summary("Returns information about a specific file.")
-  @operationId("retrieveFile")
-  @route("/files/{file_id}")
-  retrieveFile(
-    /** The ID of the file to use for this request. */
-    @path file_id: string,
-  ): OpenAIFile | ErrorResponse;
-
-  @tag("OpenAI")
-  @delete
-  @summary("Delete a file")
-  @operationId("deleteFile")
-  @route("/files/{file_id}")
-  deleteFile(
-    /** The ID of the file to use for this request. */
-    @path file_id: string,
-  ): DeleteFileResponse | ErrorResponse;
-
-  @route("/files/{file_id}/content")
-  @tag("OpenAI")
-  @get
-  @summary("Returns the contents of the specified file.")
-  @operationId("downloadFile")
-  downloadFile(
-    /** The ID of the file to use for this request. */
-    @path file_id: string,
-  ): string | ErrorResponse;
-}
 
 @route("/fine_tuning")
 namespace FineTuning {
@@ -192,7 +48,9 @@ namespace FineTuning {
     @tag("OpenAI")
     @get
     @operationId("retrieveFineTuningJob")
-    retrieveFineTuningJob(@path fine_tuning_job_id: string): FineTuningJob | ErrorResponse;
+    retrieveFineTuningJob(
+      @path fine_tuning_job_id: string,
+    ): FineTuningJob | ErrorResponse;
 
     @summary("Get status updates for a fine-tuning job.")
     @tag("OpenAI")
@@ -204,7 +62,10 @@ namespace FineTuning {
       @path fine_tuning_job_id: string,
 
       /** Identifier for the last event from the previous pagination request. */
-      @query after?: string
+      @query after?: string,
+
+      /** Number of events to retrieve. */
+      @query limit?: integer = 20,
     ): ListFineTuningJobEventsResponse | ErrorResponse;
 
     @summary("Immediately cancel a fine-tune job.")
@@ -232,7 +93,9 @@ interface FineTunes {
   [Learn more about fine-tuning](/docs/guides/legacy-fine-tuning)
   """)
   @operationId("createFineTune")
-  createFineTune(@body fine_tune: CreateFineTuneRequest): FineTune | ErrorResponse;
+  createFineTune(
+    @body fine_tune: CreateFineTuneRequest,
+  ): FineTune | ErrorResponse;
 
   #deprecated "deprecated"
   @get
@@ -309,7 +172,7 @@ interface Models {
   Retrieves a model instance, providing basic information about the model such as the owner and
   permissioning.
   """)
-  retrieveModel(
+  retrieve(
     /** The ID of the model to use for this request. */
     @path `model`: string,
   ): Model | ErrorResponse;
@@ -321,18 +184,8 @@ interface Models {
   @summary("""
   Delete a fine-tuned model. You must have the Owner role in your organization to delete a model.
   """)
-  deleteModel(
+  delete(
     /** The model to delete */
     @path `model`: string,
   ): DeleteModelResponse | ErrorResponse;
-}
-
-@route("/moderations")
-interface Moderations {
-  @operationId("createModeration")
-  @tag("OpenAI")
-  @summary("Classifies if text violates OpenAI's Content Policy")
-  createModeration(
-    @body content: CreateModerationRequest,
-  ): CreateModerationResponse | ErrorResponse;
 }

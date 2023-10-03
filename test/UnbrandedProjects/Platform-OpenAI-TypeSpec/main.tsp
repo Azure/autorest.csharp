@@ -2,18 +2,14 @@ import "@typespec/http";
 import "@typespec/openapi3";
 import "@typespec/openapi";
 
-import "./constants.tsp";
-import "./models/completions.tsp";
-import "./models/errors.tsp";
-import "./models/edits.tsp";
-import "./models/images.tsp";
-import "./models/embeddings.tsp";
-import "./models/audio.tsp";
-import "./models/files.tsp";
-import "./models/fine-tuning.tsp";
-import "./models/models.tsp";
-import "./models/moderation.tsp";
-import "./operations.tsp";
+import "./audio";
+import "./completions";
+import "./edits";
+import "./embeddings";
+import "./files";
+import "./fine-tuning";
+import "./images";
+import "./moderation";
 
 using TypeSpec.Http;
 
@@ -31,6 +27,6 @@ using TypeSpec.Http;
   },
   version: "2.0.0",
 })
-@useAuth(BearerAuth)
 @server("https://api.openai.com/v1", "OpenAI Endpoint")
+@useAuth(BearerAuth)
 namespace OpenAI;

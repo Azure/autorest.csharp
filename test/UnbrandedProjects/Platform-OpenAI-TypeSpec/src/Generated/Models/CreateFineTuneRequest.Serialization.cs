@@ -136,14 +136,17 @@ namespace OpenAI.Models
                     writer.WriteNull("classification_betas");
                 }
             }
-            if (Suffix != null)
+            if (OptionalProperty.IsDefined(Suffix))
             {
-                writer.WritePropertyName("suffix"u8);
-                writer.WriteStringValue(Suffix);
-            }
-            else
-            {
-                writer.WriteNull("suffix");
+                if (Suffix != null)
+                {
+                    writer.WritePropertyName("suffix"u8);
+                    writer.WriteStringValue(Suffix);
+                }
+                else
+                {
+                    writer.WriteNull("suffix");
+                }
             }
             writer.WriteEndObject();
         }

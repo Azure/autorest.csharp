@@ -1,306 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="CreateChatCompletionAsync(CreateChatCompletionRequest,CancellationToken)">
-      <example>
-This sample shows how to call CreateChatCompletionAsync.
-<code><![CDATA[
-KeyCredential credential = new KeyCredential("<key>");
-OpenAIClient client = new OpenAIClient(credential);
-
-CreateChatCompletionRequest body = new CreateChatCompletionRequest(new CreateChatCompletionRequestModel("<model>"), new ChatCompletionRequestMessage[]
-{
-    new ChatCompletionRequestMessage(ChatCompletionRequestMessageRole.System, "<content>")
-});
-Result<CreateChatCompletionResponse> result = await client.CreateChatCompletionAsync(body);
-]]></code>
-This sample shows how to call CreateChatCompletionAsync with all parameters.
-<code><![CDATA[
-KeyCredential credential = new KeyCredential("<key>");
-OpenAIClient client = new OpenAIClient(credential);
-
-CreateChatCompletionRequest body = new CreateChatCompletionRequest(new CreateChatCompletionRequestModel("<model>"), new ChatCompletionRequestMessage[]
-{
-    new ChatCompletionRequestMessage(ChatCompletionRequestMessageRole.System, "<content>")
-    {
-        Name = "<name>",
-        FunctionCall = new CreateChatCompletionFunctionCall("<name>", "<arguments>"),
-    }
-})
-{
-    Functions = {new ChatCompletionFunctions("<name>", new Dictionary<string, BinaryData>
-    {
-        ["key"] = BinaryData.FromObjectAsJson(new object())
-    })
-    {
-        Description = "<description>",
-    }},
-    FunctionCall = BinaryData.FromObjectAsJson("none"),
-    Temperature = 123.45,
-    TopP = 123.45,
-    N = 1234L,
-    MaxTokens = 1234L,
-    Stop = BinaryData.FromObjectAsJson("<stop>"),
-    PresencePenalty = 123.45,
-    FrequencyPenalty = 123.45,
-    LogitBias =
-    {
-        ["key"] = 1234L
-    },
-    User = "<user>",
-    Stream = true,
-};
-Result<CreateChatCompletionResponse> result = await client.CreateChatCompletionAsync(body);
-]]></code></example>
-    </member>
-    <member name="CreateChatCompletion(CreateChatCompletionRequest,CancellationToken)">
-      <example>
-This sample shows how to call CreateChatCompletion.
-<code><![CDATA[
-KeyCredential credential = new KeyCredential("<key>");
-OpenAIClient client = new OpenAIClient(credential);
-
-CreateChatCompletionRequest body = new CreateChatCompletionRequest(new CreateChatCompletionRequestModel("<model>"), new ChatCompletionRequestMessage[]
-{
-    new ChatCompletionRequestMessage(ChatCompletionRequestMessageRole.System, "<content>")
-});
-Result<CreateChatCompletionResponse> result = client.CreateChatCompletion(body);
-]]></code>
-This sample shows how to call CreateChatCompletion with all parameters.
-<code><![CDATA[
-KeyCredential credential = new KeyCredential("<key>");
-OpenAIClient client = new OpenAIClient(credential);
-
-CreateChatCompletionRequest body = new CreateChatCompletionRequest(new CreateChatCompletionRequestModel("<model>"), new ChatCompletionRequestMessage[]
-{
-    new ChatCompletionRequestMessage(ChatCompletionRequestMessageRole.System, "<content>")
-    {
-        Name = "<name>",
-        FunctionCall = new CreateChatCompletionFunctionCall("<name>", "<arguments>"),
-    }
-})
-{
-    Functions = {new ChatCompletionFunctions("<name>", new Dictionary<string, BinaryData>
-    {
-        ["key"] = BinaryData.FromObjectAsJson(new object())
-    })
-    {
-        Description = "<description>",
-    }},
-    FunctionCall = BinaryData.FromObjectAsJson("none"),
-    Temperature = 123.45,
-    TopP = 123.45,
-    N = 1234L,
-    MaxTokens = 1234L,
-    Stop = BinaryData.FromObjectAsJson("<stop>"),
-    PresencePenalty = 123.45,
-    FrequencyPenalty = 123.45,
-    LogitBias =
-    {
-        ["key"] = 1234L
-    },
-    User = "<user>",
-    Stream = true,
-};
-Result<CreateChatCompletionResponse> result = client.CreateChatCompletion(body);
-]]></code></example>
-    </member>
-    <member name="CreateChatCompletionAsync(RequestBody,RequestOptions)">
-      <example>
-This sample shows how to call CreateChatCompletionAsync and parse the result.
-<code><![CDATA[
-KeyCredential credential = new KeyCredential("<key>");
-OpenAIClient client = new OpenAIClient(credential);
-
-RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
-{
-    model = "<model>",
-    messages = new object[]
-    {
-        new
-        {
-            role = "system",
-            content = "<content>",
-        }
-    },
-}).ToStream());
-Result result = await client.CreateChatCompletionAsync(content);
-
-JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("id").ToString());
-Console.WriteLine(element.GetProperty("object").ToString());
-Console.WriteLine(element.GetProperty("created").ToString());
-Console.WriteLine(element.GetProperty("model").ToString());
-Console.WriteLine(element.GetProperty("choices")[0].GetProperty("index").ToString());
-Console.WriteLine(element.GetProperty("choices")[0].GetProperty("message").GetProperty("role").ToString());
-Console.WriteLine(element.GetProperty("choices")[0].GetProperty("message").GetProperty("content").ToString());
-Console.WriteLine(element.GetProperty("choices")[0].GetProperty("finish_reason").ToString());
-]]></code>
-This sample shows how to call CreateChatCompletionAsync with all request content and parse the result.
-<code><![CDATA[
-KeyCredential credential = new KeyCredential("<key>");
-OpenAIClient client = new OpenAIClient(credential);
-
-RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
-{
-    model = "<model>",
-    messages = new object[]
-    {
-        new
-        {
-            role = "system",
-            content = "<content>",
-            name = "<name>",
-            function_call = new
-            {
-                name = "<name>",
-                arguments = "<arguments>",
-            },
-        }
-    },
-    functions = new object[]
-    {
-        new
-        {
-            name = "<name>",
-            description = "<description>",
-            parameters = new
-            {
-                key = new object(),
-            },
-        }
-    },
-    function_call = "none",
-    temperature = 123.45,
-    top_p = 123.45,
-    n = 1234L,
-    max_tokens = 1234L,
-    stop = "<stop>",
-    presence_penalty = 123.45,
-    frequency_penalty = 123.45,
-    logit_bias = new
-    {
-        key = 1234L,
-    },
-    user = "<user>",
-    stream = true,
-}).ToStream());
-Result result = await client.CreateChatCompletionAsync(content);
-
-JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("id").ToString());
-Console.WriteLine(element.GetProperty("object").ToString());
-Console.WriteLine(element.GetProperty("created").ToString());
-Console.WriteLine(element.GetProperty("model").ToString());
-Console.WriteLine(element.GetProperty("choices")[0].GetProperty("index").ToString());
-Console.WriteLine(element.GetProperty("choices")[0].GetProperty("message").GetProperty("role").ToString());
-Console.WriteLine(element.GetProperty("choices")[0].GetProperty("message").GetProperty("content").ToString());
-Console.WriteLine(element.GetProperty("choices")[0].GetProperty("message").GetProperty("function_call").GetProperty("name").ToString());
-Console.WriteLine(element.GetProperty("choices")[0].GetProperty("message").GetProperty("function_call").GetProperty("arguments").ToString());
-Console.WriteLine(element.GetProperty("choices")[0].GetProperty("finish_reason").ToString());
-Console.WriteLine(element.GetProperty("usage").GetProperty("prompt_tokens").ToString());
-Console.WriteLine(element.GetProperty("usage").GetProperty("completion_tokens").ToString());
-Console.WriteLine(element.GetProperty("usage").GetProperty("total_tokens").ToString());
-]]></code></example>
-    </member>
-    <member name="CreateChatCompletion(RequestBody,RequestOptions)">
-      <example>
-This sample shows how to call CreateChatCompletion and parse the result.
-<code><![CDATA[
-KeyCredential credential = new KeyCredential("<key>");
-OpenAIClient client = new OpenAIClient(credential);
-
-RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
-{
-    model = "<model>",
-    messages = new object[]
-    {
-        new
-        {
-            role = "system",
-            content = "<content>",
-        }
-    },
-}).ToStream());
-Result result = client.CreateChatCompletion(content);
-
-JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("id").ToString());
-Console.WriteLine(element.GetProperty("object").ToString());
-Console.WriteLine(element.GetProperty("created").ToString());
-Console.WriteLine(element.GetProperty("model").ToString());
-Console.WriteLine(element.GetProperty("choices")[0].GetProperty("index").ToString());
-Console.WriteLine(element.GetProperty("choices")[0].GetProperty("message").GetProperty("role").ToString());
-Console.WriteLine(element.GetProperty("choices")[0].GetProperty("message").GetProperty("content").ToString());
-Console.WriteLine(element.GetProperty("choices")[0].GetProperty("finish_reason").ToString());
-]]></code>
-This sample shows how to call CreateChatCompletion with all request content and parse the result.
-<code><![CDATA[
-KeyCredential credential = new KeyCredential("<key>");
-OpenAIClient client = new OpenAIClient(credential);
-
-RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
-{
-    model = "<model>",
-    messages = new object[]
-    {
-        new
-        {
-            role = "system",
-            content = "<content>",
-            name = "<name>",
-            function_call = new
-            {
-                name = "<name>",
-                arguments = "<arguments>",
-            },
-        }
-    },
-    functions = new object[]
-    {
-        new
-        {
-            name = "<name>",
-            description = "<description>",
-            parameters = new
-            {
-                key = new object(),
-            },
-        }
-    },
-    function_call = "none",
-    temperature = 123.45,
-    top_p = 123.45,
-    n = 1234L,
-    max_tokens = 1234L,
-    stop = "<stop>",
-    presence_penalty = 123.45,
-    frequency_penalty = 123.45,
-    logit_bias = new
-    {
-        key = 1234L,
-    },
-    user = "<user>",
-    stream = true,
-}).ToStream());
-Result result = client.CreateChatCompletion(content);
-
-JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("id").ToString());
-Console.WriteLine(element.GetProperty("object").ToString());
-Console.WriteLine(element.GetProperty("created").ToString());
-Console.WriteLine(element.GetProperty("model").ToString());
-Console.WriteLine(element.GetProperty("choices")[0].GetProperty("index").ToString());
-Console.WriteLine(element.GetProperty("choices")[0].GetProperty("message").GetProperty("role").ToString());
-Console.WriteLine(element.GetProperty("choices")[0].GetProperty("message").GetProperty("content").ToString());
-Console.WriteLine(element.GetProperty("choices")[0].GetProperty("message").GetProperty("function_call").GetProperty("name").ToString());
-Console.WriteLine(element.GetProperty("choices")[0].GetProperty("message").GetProperty("function_call").GetProperty("arguments").ToString());
-Console.WriteLine(element.GetProperty("choices")[0].GetProperty("finish_reason").ToString());
-Console.WriteLine(element.GetProperty("usage").GetProperty("prompt_tokens").ToString());
-Console.WriteLine(element.GetProperty("usage").GetProperty("completion_tokens").ToString());
-Console.WriteLine(element.GetProperty("usage").GetProperty("total_tokens").ToString());
-]]></code></example>
-    </member>
     <member name="CreateTranscriptionAsync(CreateTranscriptionRequest,CancellationToken)">
       <example>
 This sample shows how to call CreateTranscriptionAsync.
@@ -543,6 +243,280 @@ Result result = client.CreateTranslation(content);
 
 JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
 Console.WriteLine(element.GetProperty("text").ToString());
+]]></code></example>
+    </member>
+    <member name="CreateChatCompletionAsync(CreateChatCompletionRequestModel,IEnumerable{ChatCompletionRequestMessage},IEnumerable{ChatCompletionFunctions},BinaryData,double?,double?,long?,long?,BinaryData,double?,double?,IDictionary{string,long},string,bool?,CancellationToken)">
+      <example>
+This sample shows how to call CreateChatCompletionAsync.
+<code><![CDATA[
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
+
+Result<CreateChatCompletionResponse> result = await client.CreateChatCompletionAsync(new CreateChatCompletionRequestModel("<model>"), new ChatCompletionRequestMessage[]
+{
+    new ChatCompletionRequestMessage(ChatCompletionRequestMessageRole.System, "<content>")
+});
+]]></code>
+This sample shows how to call CreateChatCompletionAsync with all parameters.
+<code><![CDATA[
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
+
+Result<CreateChatCompletionResponse> result = await client.CreateChatCompletionAsync(new CreateChatCompletionRequestModel("<model>"), new ChatCompletionRequestMessage[]
+{
+    new ChatCompletionRequestMessage(ChatCompletionRequestMessageRole.System, "<content>")
+    {
+        Name = "<name>",
+        FunctionCall = new CreateChatCompletionFunctionCall("<name>", "<arguments>"),
+    }
+}, functions: new ChatCompletionFunctions[]
+{
+    new ChatCompletionFunctions("<name>", new Dictionary<string, BinaryData>
+    {
+        ["key"] = BinaryData.FromObjectAsJson(new object())
+    })
+    {
+        Description = "<description>",
+    }
+}, functionCall: BinaryData.FromObjectAsJson("none"), temperature: 123.45, topP: 123.45, n: 1234L, maxTokens: 1234L, stop: BinaryData.FromObjectAsJson("<stop>"), presencePenalty: 123.45, frequencyPenalty: 123.45, logitBias: new Dictionary<string, long>
+{
+    ["key"] = 1234L
+}, user: "<user>", stream: true);
+]]></code></example>
+    </member>
+    <member name="CreateChatCompletion(CreateChatCompletionRequestModel,IEnumerable{ChatCompletionRequestMessage},IEnumerable{ChatCompletionFunctions},BinaryData,double?,double?,long?,long?,BinaryData,double?,double?,IDictionary{string,long},string,bool?,CancellationToken)">
+      <example>
+This sample shows how to call CreateChatCompletion.
+<code><![CDATA[
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
+
+Result<CreateChatCompletionResponse> result = client.CreateChatCompletion(new CreateChatCompletionRequestModel("<model>"), new ChatCompletionRequestMessage[]
+{
+    new ChatCompletionRequestMessage(ChatCompletionRequestMessageRole.System, "<content>")
+});
+]]></code>
+This sample shows how to call CreateChatCompletion with all parameters.
+<code><![CDATA[
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
+
+Result<CreateChatCompletionResponse> result = client.CreateChatCompletion(new CreateChatCompletionRequestModel("<model>"), new ChatCompletionRequestMessage[]
+{
+    new ChatCompletionRequestMessage(ChatCompletionRequestMessageRole.System, "<content>")
+    {
+        Name = "<name>",
+        FunctionCall = new CreateChatCompletionFunctionCall("<name>", "<arguments>"),
+    }
+}, functions: new ChatCompletionFunctions[]
+{
+    new ChatCompletionFunctions("<name>", new Dictionary<string, BinaryData>
+    {
+        ["key"] = BinaryData.FromObjectAsJson(new object())
+    })
+    {
+        Description = "<description>",
+    }
+}, functionCall: BinaryData.FromObjectAsJson("none"), temperature: 123.45, topP: 123.45, n: 1234L, maxTokens: 1234L, stop: BinaryData.FromObjectAsJson("<stop>"), presencePenalty: 123.45, frequencyPenalty: 123.45, logitBias: new Dictionary<string, long>
+{
+    ["key"] = 1234L
+}, user: "<user>", stream: true);
+]]></code></example>
+    </member>
+    <member name="CreateChatCompletionAsync(RequestBody,RequestOptions)">
+      <example>
+This sample shows how to call CreateChatCompletionAsync and parse the result.
+<code><![CDATA[
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
+
+RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
+{
+    model = "<model>",
+    messages = new object[]
+    {
+        new
+        {
+            role = "system",
+            content = "<content>",
+        }
+    },
+}).ToStream());
+Result result = await client.CreateChatCompletionAsync(content);
+
+JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("id").ToString());
+Console.WriteLine(element.GetProperty("object").ToString());
+Console.WriteLine(element.GetProperty("created").ToString());
+Console.WriteLine(element.GetProperty("model").ToString());
+Console.WriteLine(element.GetProperty("choices")[0].GetProperty("index").ToString());
+Console.WriteLine(element.GetProperty("choices")[0].GetProperty("message").GetProperty("role").ToString());
+Console.WriteLine(element.GetProperty("choices")[0].GetProperty("message").GetProperty("content").ToString());
+Console.WriteLine(element.GetProperty("choices")[0].GetProperty("finish_reason").ToString());
+]]></code>
+This sample shows how to call CreateChatCompletionAsync with all request content and parse the result.
+<code><![CDATA[
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
+
+RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
+{
+    model = "<model>",
+    messages = new object[]
+    {
+        new
+        {
+            role = "system",
+            content = "<content>",
+            name = "<name>",
+            function_call = new
+            {
+                name = "<name>",
+                arguments = "<arguments>",
+            },
+        }
+    },
+    functions = new object[]
+    {
+        new
+        {
+            name = "<name>",
+            description = "<description>",
+            parameters = new
+            {
+                key = new object(),
+            },
+        }
+    },
+    function_call = "none",
+    temperature = 123.45,
+    top_p = 123.45,
+    n = 1234L,
+    max_tokens = 1234L,
+    stop = "<stop>",
+    presence_penalty = 123.45,
+    frequency_penalty = 123.45,
+    logit_bias = new
+    {
+        key = 1234L,
+    },
+    user = "<user>",
+    stream = true,
+}).ToStream());
+Result result = await client.CreateChatCompletionAsync(content);
+
+JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("id").ToString());
+Console.WriteLine(element.GetProperty("object").ToString());
+Console.WriteLine(element.GetProperty("created").ToString());
+Console.WriteLine(element.GetProperty("model").ToString());
+Console.WriteLine(element.GetProperty("choices")[0].GetProperty("index").ToString());
+Console.WriteLine(element.GetProperty("choices")[0].GetProperty("message").GetProperty("role").ToString());
+Console.WriteLine(element.GetProperty("choices")[0].GetProperty("message").GetProperty("content").ToString());
+Console.WriteLine(element.GetProperty("choices")[0].GetProperty("message").GetProperty("function_call").GetProperty("name").ToString());
+Console.WriteLine(element.GetProperty("choices")[0].GetProperty("message").GetProperty("function_call").GetProperty("arguments").ToString());
+Console.WriteLine(element.GetProperty("choices")[0].GetProperty("finish_reason").ToString());
+Console.WriteLine(element.GetProperty("usage").GetProperty("prompt_tokens").ToString());
+Console.WriteLine(element.GetProperty("usage").GetProperty("completion_tokens").ToString());
+Console.WriteLine(element.GetProperty("usage").GetProperty("total_tokens").ToString());
+]]></code></example>
+    </member>
+    <member name="CreateChatCompletion(RequestBody,RequestOptions)">
+      <example>
+This sample shows how to call CreateChatCompletion and parse the result.
+<code><![CDATA[
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
+
+RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
+{
+    model = "<model>",
+    messages = new object[]
+    {
+        new
+        {
+            role = "system",
+            content = "<content>",
+        }
+    },
+}).ToStream());
+Result result = client.CreateChatCompletion(content);
+
+JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("id").ToString());
+Console.WriteLine(element.GetProperty("object").ToString());
+Console.WriteLine(element.GetProperty("created").ToString());
+Console.WriteLine(element.GetProperty("model").ToString());
+Console.WriteLine(element.GetProperty("choices")[0].GetProperty("index").ToString());
+Console.WriteLine(element.GetProperty("choices")[0].GetProperty("message").GetProperty("role").ToString());
+Console.WriteLine(element.GetProperty("choices")[0].GetProperty("message").GetProperty("content").ToString());
+Console.WriteLine(element.GetProperty("choices")[0].GetProperty("finish_reason").ToString());
+]]></code>
+This sample shows how to call CreateChatCompletion with all request content and parse the result.
+<code><![CDATA[
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
+
+RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
+{
+    model = "<model>",
+    messages = new object[]
+    {
+        new
+        {
+            role = "system",
+            content = "<content>",
+            name = "<name>",
+            function_call = new
+            {
+                name = "<name>",
+                arguments = "<arguments>",
+            },
+        }
+    },
+    functions = new object[]
+    {
+        new
+        {
+            name = "<name>",
+            description = "<description>",
+            parameters = new
+            {
+                key = new object(),
+            },
+        }
+    },
+    function_call = "none",
+    temperature = 123.45,
+    top_p = 123.45,
+    n = 1234L,
+    max_tokens = 1234L,
+    stop = "<stop>",
+    presence_penalty = 123.45,
+    frequency_penalty = 123.45,
+    logit_bias = new
+    {
+        key = 1234L,
+    },
+    user = "<user>",
+    stream = true,
+}).ToStream());
+Result result = client.CreateChatCompletion(content);
+
+JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("id").ToString());
+Console.WriteLine(element.GetProperty("object").ToString());
+Console.WriteLine(element.GetProperty("created").ToString());
+Console.WriteLine(element.GetProperty("model").ToString());
+Console.WriteLine(element.GetProperty("choices")[0].GetProperty("index").ToString());
+Console.WriteLine(element.GetProperty("choices")[0].GetProperty("message").GetProperty("role").ToString());
+Console.WriteLine(element.GetProperty("choices")[0].GetProperty("message").GetProperty("content").ToString());
+Console.WriteLine(element.GetProperty("choices")[0].GetProperty("message").GetProperty("function_call").GetProperty("name").ToString());
+Console.WriteLine(element.GetProperty("choices")[0].GetProperty("message").GetProperty("function_call").GetProperty("arguments").ToString());
+Console.WriteLine(element.GetProperty("choices")[0].GetProperty("finish_reason").ToString());
+Console.WriteLine(element.GetProperty("usage").GetProperty("prompt_tokens").ToString());
+Console.WriteLine(element.GetProperty("usage").GetProperty("completion_tokens").ToString());
+Console.WriteLine(element.GetProperty("usage").GetProperty("total_tokens").ToString());
 ]]></code></example>
     </member>
     <member name="CreateFineTuningJobAsync(CreateFineTuningJobRequest,CancellationToken)">
@@ -1013,7 +987,7 @@ Console.WriteLine(element.GetProperty("error").GetProperty("code").ToString());
 Console.WriteLine(element.GetProperty("error").GetProperty("param").ToString());
 ]]></code></example>
     </member>
-    <member name="GetFineTuningEventsAsync(string,string,CancellationToken)">
+    <member name="GetFineTuningEventsAsync(string,string,int?,CancellationToken)">
       <example>
 This sample shows how to call GetFineTuningEventsAsync.
 <code><![CDATA[
@@ -1027,10 +1001,10 @@ This sample shows how to call GetFineTuningEventsAsync with all parameters.
 KeyCredential credential = new KeyCredential("<key>");
 OpenAIClient client = new OpenAIClient(credential);
 
-Result<ListFineTuningJobEventsResponse> result = await client.GetFineTuningEventsAsync("<fine_tuning_job_id>", after: "<after>");
+Result<ListFineTuningJobEventsResponse> result = await client.GetFineTuningEventsAsync("<fine_tuning_job_id>", after: "<after>", limit: 1234);
 ]]></code></example>
     </member>
-    <member name="GetFineTuningEvents(string,string,CancellationToken)">
+    <member name="GetFineTuningEvents(string,string,int?,CancellationToken)">
       <example>
 This sample shows how to call GetFineTuningEvents.
 <code><![CDATA[
@@ -1044,17 +1018,17 @@ This sample shows how to call GetFineTuningEvents with all parameters.
 KeyCredential credential = new KeyCredential("<key>");
 OpenAIClient client = new OpenAIClient(credential);
 
-Result<ListFineTuningJobEventsResponse> result = client.GetFineTuningEvents("<fine_tuning_job_id>", after: "<after>");
+Result<ListFineTuningJobEventsResponse> result = client.GetFineTuningEvents("<fine_tuning_job_id>", after: "<after>", limit: 1234);
 ]]></code></example>
     </member>
-    <member name="GetFineTuningEventsAsync(string,string,RequestOptions)">
+    <member name="GetFineTuningEventsAsync(string,string,int?,RequestOptions)">
       <example>
 This sample shows how to call GetFineTuningEventsAsync and parse the result.
 <code><![CDATA[
 KeyCredential credential = new KeyCredential("<key>");
 OpenAIClient client = new OpenAIClient(credential);
 
-Result result = await client.GetFineTuningEventsAsync("<fine_tuning_job_id>", null, null);
+Result result = await client.GetFineTuningEventsAsync("<fine_tuning_job_id>", null, null, null);
 
 JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
 Console.WriteLine(element.GetProperty("object").ToString());
@@ -1069,7 +1043,7 @@ This sample shows how to call GetFineTuningEventsAsync with all parameters and p
 KeyCredential credential = new KeyCredential("<key>");
 OpenAIClient client = new OpenAIClient(credential);
 
-Result result = await client.GetFineTuningEventsAsync("<fine_tuning_job_id>", "<after>", null);
+Result result = await client.GetFineTuningEventsAsync("<fine_tuning_job_id>", "<after>", 1234, null);
 
 JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
 Console.WriteLine(element.GetProperty("object").ToString());
@@ -1080,14 +1054,14 @@ Console.WriteLine(element.GetProperty("data")[0].GetProperty("level").ToString()
 Console.WriteLine(element.GetProperty("data")[0].GetProperty("message").ToString());
 ]]></code></example>
     </member>
-    <member name="GetFineTuningEvents(string,string,RequestOptions)">
+    <member name="GetFineTuningEvents(string,string,int?,RequestOptions)">
       <example>
 This sample shows how to call GetFineTuningEvents and parse the result.
 <code><![CDATA[
 KeyCredential credential = new KeyCredential("<key>");
 OpenAIClient client = new OpenAIClient(credential);
 
-Result result = client.GetFineTuningEvents("<fine_tuning_job_id>", null, null);
+Result result = client.GetFineTuningEvents("<fine_tuning_job_id>", null, null, null);
 
 JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
 Console.WriteLine(element.GetProperty("object").ToString());
@@ -1102,7 +1076,7 @@ This sample shows how to call GetFineTuningEvents with all parameters and parse 
 KeyCredential credential = new KeyCredential("<key>");
 OpenAIClient client = new OpenAIClient(credential);
 
-Result result = client.GetFineTuningEvents("<fine_tuning_job_id>", "<after>", null);
+Result result = client.GetFineTuningEvents("<fine_tuning_job_id>", "<after>", 1234, null);
 
 JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
 Console.WriteLine(element.GetProperty("object").ToString());
@@ -1249,80 +1223,44 @@ Console.WriteLine(element.GetProperty("error").GetProperty("code").ToString());
 Console.WriteLine(element.GetProperty("error").GetProperty("param").ToString());
 ]]></code></example>
     </member>
-    <member name="CreateCompletionAsync(CreateCompletionRequest,CancellationToken)">
+    <member name="CreateCompletionAsync(CreateCompletionRequestModel,BinaryData,string,double?,double?,long?,long?,BinaryData,double?,double?,IDictionary{string,long},string,bool?,long?,bool?,long?,CancellationToken)">
       <example>
 This sample shows how to call CreateCompletionAsync.
 <code><![CDATA[
 KeyCredential credential = new KeyCredential("<key>");
 OpenAIClient client = new OpenAIClient(credential);
 
-CreateCompletionRequest body = new CreateCompletionRequest(new CreateCompletionRequestModel("<model>"), BinaryData.FromObjectAsJson("<prompt>"));
-Result<CreateCompletionResponse> result = await client.CreateCompletionAsync(body);
+Result<CreateCompletionResponse> result = await client.CreateCompletionAsync(new CreateCompletionRequestModel("<model>"), BinaryData.FromObjectAsJson("<prompt>"));
 ]]></code>
 This sample shows how to call CreateCompletionAsync with all parameters.
 <code><![CDATA[
 KeyCredential credential = new KeyCredential("<key>");
 OpenAIClient client = new OpenAIClient(credential);
 
-CreateCompletionRequest body = new CreateCompletionRequest(new CreateCompletionRequestModel("<model>"), BinaryData.FromObjectAsJson("<prompt>"))
+Result<CreateCompletionResponse> result = await client.CreateCompletionAsync(new CreateCompletionRequestModel("<model>"), BinaryData.FromObjectAsJson("<prompt>"), suffix: "<suffix>", temperature: 123.45, topP: 123.45, n: 1234L, maxTokens: 1234L, stop: BinaryData.FromObjectAsJson("<stop>"), presencePenalty: 123.45, frequencyPenalty: 123.45, logitBias: new Dictionary<string, long>
 {
-    Suffix = "<suffix>",
-    Temperature = 123.45,
-    TopP = 123.45,
-    N = 1234L,
-    MaxTokens = 1234L,
-    Stop = BinaryData.FromObjectAsJson("<stop>"),
-    PresencePenalty = 123.45,
-    FrequencyPenalty = 123.45,
-    LogitBias =
-    {
-        ["key"] = 1234L
-    },
-    User = "<user>",
-    Stream = true,
-    Logprobs = 1234L,
-    Echo = true,
-    BestOf = 1234L,
-};
-Result<CreateCompletionResponse> result = await client.CreateCompletionAsync(body);
+    ["key"] = 1234L
+}, user: "<user>", stream: true, logprobs: 1234L, echo: true, bestOf: 1234L);
 ]]></code></example>
     </member>
-    <member name="CreateCompletion(CreateCompletionRequest,CancellationToken)">
+    <member name="CreateCompletion(CreateCompletionRequestModel,BinaryData,string,double?,double?,long?,long?,BinaryData,double?,double?,IDictionary{string,long},string,bool?,long?,bool?,long?,CancellationToken)">
       <example>
 This sample shows how to call CreateCompletion.
 <code><![CDATA[
 KeyCredential credential = new KeyCredential("<key>");
 OpenAIClient client = new OpenAIClient(credential);
 
-CreateCompletionRequest body = new CreateCompletionRequest(new CreateCompletionRequestModel("<model>"), BinaryData.FromObjectAsJson("<prompt>"));
-Result<CreateCompletionResponse> result = client.CreateCompletion(body);
+Result<CreateCompletionResponse> result = client.CreateCompletion(new CreateCompletionRequestModel("<model>"), BinaryData.FromObjectAsJson("<prompt>"));
 ]]></code>
 This sample shows how to call CreateCompletion with all parameters.
 <code><![CDATA[
 KeyCredential credential = new KeyCredential("<key>");
 OpenAIClient client = new OpenAIClient(credential);
 
-CreateCompletionRequest body = new CreateCompletionRequest(new CreateCompletionRequestModel("<model>"), BinaryData.FromObjectAsJson("<prompt>"))
+Result<CreateCompletionResponse> result = client.CreateCompletion(new CreateCompletionRequestModel("<model>"), BinaryData.FromObjectAsJson("<prompt>"), suffix: "<suffix>", temperature: 123.45, topP: 123.45, n: 1234L, maxTokens: 1234L, stop: BinaryData.FromObjectAsJson("<stop>"), presencePenalty: 123.45, frequencyPenalty: 123.45, logitBias: new Dictionary<string, long>
 {
-    Suffix = "<suffix>",
-    Temperature = 123.45,
-    TopP = 123.45,
-    N = 1234L,
-    MaxTokens = 1234L,
-    Stop = BinaryData.FromObjectAsJson("<stop>"),
-    PresencePenalty = 123.45,
-    FrequencyPenalty = 123.45,
-    LogitBias =
-    {
-        ["key"] = 1234L
-    },
-    User = "<user>",
-    Stream = true,
-    Logprobs = 1234L,
-    Echo = true,
-    BestOf = 1234L,
-};
-Result<CreateCompletionResponse> result = client.CreateCompletion(body);
+    ["key"] = 1234L
+}, user: "<user>", stream: true, logprobs: 1234L, echo: true, bestOf: 1234L);
 ]]></code></example>
     </member>
     <member name="CreateCompletionAsync(RequestBody,RequestOptions)">
@@ -1469,392 +1407,6 @@ Console.WriteLine(element.GetProperty("choices")[0].GetProperty("finish_reason")
 Console.WriteLine(element.GetProperty("usage").GetProperty("prompt_tokens").ToString());
 Console.WriteLine(element.GetProperty("usage").GetProperty("completion_tokens").ToString());
 Console.WriteLine(element.GetProperty("usage").GetProperty("total_tokens").ToString());
-]]></code></example>
-    </member>
-    <member name="CreateImageAsync(CreateImageRequest,CancellationToken)">
-      <example>
-This sample shows how to call CreateImageAsync.
-<code><![CDATA[
-KeyCredential credential = new KeyCredential("<key>");
-OpenAIClient client = new OpenAIClient(credential);
-
-CreateImageRequest image = new CreateImageRequest("<prompt>");
-Result<ImagesResponse> result = await client.CreateImageAsync(image);
-]]></code>
-This sample shows how to call CreateImageAsync with all parameters.
-<code><![CDATA[
-KeyCredential credential = new KeyCredential("<key>");
-OpenAIClient client = new OpenAIClient(credential);
-
-CreateImageRequest image = new CreateImageRequest("<prompt>")
-{
-    N = 1234L,
-    Size = CreateImageRequestSize._256x256,
-    ResponseFormat = CreateImageRequestResponseFormat.Url,
-    User = "<user>",
-};
-Result<ImagesResponse> result = await client.CreateImageAsync(image);
-]]></code></example>
-    </member>
-    <member name="CreateImage(CreateImageRequest,CancellationToken)">
-      <example>
-This sample shows how to call CreateImage.
-<code><![CDATA[
-KeyCredential credential = new KeyCredential("<key>");
-OpenAIClient client = new OpenAIClient(credential);
-
-CreateImageRequest image = new CreateImageRequest("<prompt>");
-Result<ImagesResponse> result = client.CreateImage(image);
-]]></code>
-This sample shows how to call CreateImage with all parameters.
-<code><![CDATA[
-KeyCredential credential = new KeyCredential("<key>");
-OpenAIClient client = new OpenAIClient(credential);
-
-CreateImageRequest image = new CreateImageRequest("<prompt>")
-{
-    N = 1234L,
-    Size = CreateImageRequestSize._256x256,
-    ResponseFormat = CreateImageRequestResponseFormat.Url,
-    User = "<user>",
-};
-Result<ImagesResponse> result = client.CreateImage(image);
-]]></code></example>
-    </member>
-    <member name="CreateImageAsync(RequestBody,RequestOptions)">
-      <example>
-This sample shows how to call CreateImageAsync and parse the result.
-<code><![CDATA[
-KeyCredential credential = new KeyCredential("<key>");
-OpenAIClient client = new OpenAIClient(credential);
-
-RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
-{
-    prompt = "<prompt>",
-}).ToStream());
-Result result = await client.CreateImageAsync(content);
-
-JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("created").ToString());
-Console.WriteLine(element.GetProperty("data")[0].ToString());
-]]></code>
-This sample shows how to call CreateImageAsync with all request content and parse the result.
-<code><![CDATA[
-KeyCredential credential = new KeyCredential("<key>");
-OpenAIClient client = new OpenAIClient(credential);
-
-RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
-{
-    prompt = "<prompt>",
-    n = 1234L,
-    size = "256x256",
-    response_format = "url",
-    user = "<user>",
-}).ToStream());
-Result result = await client.CreateImageAsync(content);
-
-JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("created").ToString());
-Console.WriteLine(element.GetProperty("data")[0].GetProperty("url").ToString());
-Console.WriteLine(element.GetProperty("data")[0].GetProperty("b64_json").ToString());
-]]></code></example>
-    </member>
-    <member name="CreateImage(RequestBody,RequestOptions)">
-      <example>
-This sample shows how to call CreateImage and parse the result.
-<code><![CDATA[
-KeyCredential credential = new KeyCredential("<key>");
-OpenAIClient client = new OpenAIClient(credential);
-
-RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
-{
-    prompt = "<prompt>",
-}).ToStream());
-Result result = client.CreateImage(content);
-
-JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("created").ToString());
-Console.WriteLine(element.GetProperty("data")[0].ToString());
-]]></code>
-This sample shows how to call CreateImage with all request content and parse the result.
-<code><![CDATA[
-KeyCredential credential = new KeyCredential("<key>");
-OpenAIClient client = new OpenAIClient(credential);
-
-RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
-{
-    prompt = "<prompt>",
-    n = 1234L,
-    size = "256x256",
-    response_format = "url",
-    user = "<user>",
-}).ToStream());
-Result result = client.CreateImage(content);
-
-JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("created").ToString());
-Console.WriteLine(element.GetProperty("data")[0].GetProperty("url").ToString());
-Console.WriteLine(element.GetProperty("data")[0].GetProperty("b64_json").ToString());
-]]></code></example>
-    </member>
-    <member name="CreateImageEditAsync(CreateImageEditRequest,CancellationToken)">
-      <example>
-This sample shows how to call CreateImageEditAsync.
-<code><![CDATA[
-KeyCredential credential = new KeyCredential("<key>");
-OpenAIClient client = new OpenAIClient(credential);
-
-CreateImageEditRequest image = new CreateImageEditRequest("<prompt>", BinaryData.FromObjectAsJson(new object()));
-Result<ImagesResponse> result = await client.CreateImageEditAsync(image);
-]]></code>
-This sample shows how to call CreateImageEditAsync with all parameters.
-<code><![CDATA[
-KeyCredential credential = new KeyCredential("<key>");
-OpenAIClient client = new OpenAIClient(credential);
-
-CreateImageEditRequest image = new CreateImageEditRequest("<prompt>", BinaryData.FromObjectAsJson(new object()))
-{
-    Mask = BinaryData.FromObjectAsJson(new object()),
-    N = 1234L,
-    Size = CreateImageEditRequestSize._256x256,
-    ResponseFormat = CreateImageEditRequestResponseFormat.Url,
-    User = "<user>",
-};
-Result<ImagesResponse> result = await client.CreateImageEditAsync(image);
-]]></code></example>
-    </member>
-    <member name="CreateImageEdit(CreateImageEditRequest,CancellationToken)">
-      <example>
-This sample shows how to call CreateImageEdit.
-<code><![CDATA[
-KeyCredential credential = new KeyCredential("<key>");
-OpenAIClient client = new OpenAIClient(credential);
-
-CreateImageEditRequest image = new CreateImageEditRequest("<prompt>", BinaryData.FromObjectAsJson(new object()));
-Result<ImagesResponse> result = client.CreateImageEdit(image);
-]]></code>
-This sample shows how to call CreateImageEdit with all parameters.
-<code><![CDATA[
-KeyCredential credential = new KeyCredential("<key>");
-OpenAIClient client = new OpenAIClient(credential);
-
-CreateImageEditRequest image = new CreateImageEditRequest("<prompt>", BinaryData.FromObjectAsJson(new object()))
-{
-    Mask = BinaryData.FromObjectAsJson(new object()),
-    N = 1234L,
-    Size = CreateImageEditRequestSize._256x256,
-    ResponseFormat = CreateImageEditRequestResponseFormat.Url,
-    User = "<user>",
-};
-Result<ImagesResponse> result = client.CreateImageEdit(image);
-]]></code></example>
-    </member>
-    <member name="CreateImageEditAsync(RequestBody,RequestOptions)">
-      <example>
-This sample shows how to call CreateImageEditAsync and parse the result.
-<code><![CDATA[
-KeyCredential credential = new KeyCredential("<key>");
-OpenAIClient client = new OpenAIClient(credential);
-
-RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
-{
-    prompt = "<prompt>",
-    image = new object(),
-}).ToStream());
-Result result = await client.CreateImageEditAsync(content);
-
-JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("created").ToString());
-Console.WriteLine(element.GetProperty("data")[0].ToString());
-]]></code>
-This sample shows how to call CreateImageEditAsync with all request content and parse the result.
-<code><![CDATA[
-KeyCredential credential = new KeyCredential("<key>");
-OpenAIClient client = new OpenAIClient(credential);
-
-RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
-{
-    prompt = "<prompt>",
-    image = new object(),
-    mask = new object(),
-    n = 1234L,
-    size = "256x256",
-    response_format = "url",
-    user = "<user>",
-}).ToStream());
-Result result = await client.CreateImageEditAsync(content);
-
-JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("created").ToString());
-Console.WriteLine(element.GetProperty("data")[0].GetProperty("url").ToString());
-Console.WriteLine(element.GetProperty("data")[0].GetProperty("b64_json").ToString());
-]]></code></example>
-    </member>
-    <member name="CreateImageEdit(RequestBody,RequestOptions)">
-      <example>
-This sample shows how to call CreateImageEdit and parse the result.
-<code><![CDATA[
-KeyCredential credential = new KeyCredential("<key>");
-OpenAIClient client = new OpenAIClient(credential);
-
-RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
-{
-    prompt = "<prompt>",
-    image = new object(),
-}).ToStream());
-Result result = client.CreateImageEdit(content);
-
-JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("created").ToString());
-Console.WriteLine(element.GetProperty("data")[0].ToString());
-]]></code>
-This sample shows how to call CreateImageEdit with all request content and parse the result.
-<code><![CDATA[
-KeyCredential credential = new KeyCredential("<key>");
-OpenAIClient client = new OpenAIClient(credential);
-
-RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
-{
-    prompt = "<prompt>",
-    image = new object(),
-    mask = new object(),
-    n = 1234L,
-    size = "256x256",
-    response_format = "url",
-    user = "<user>",
-}).ToStream());
-Result result = client.CreateImageEdit(content);
-
-JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("created").ToString());
-Console.WriteLine(element.GetProperty("data")[0].GetProperty("url").ToString());
-Console.WriteLine(element.GetProperty("data")[0].GetProperty("b64_json").ToString());
-]]></code></example>
-    </member>
-    <member name="CreateImageVariationAsync(CreateImageVariationRequest,CancellationToken)">
-      <example>
-This sample shows how to call CreateImageVariationAsync.
-<code><![CDATA[
-KeyCredential credential = new KeyCredential("<key>");
-OpenAIClient client = new OpenAIClient(credential);
-
-CreateImageVariationRequest image = new CreateImageVariationRequest(BinaryData.FromObjectAsJson(new object()));
-Result<ImagesResponse> result = await client.CreateImageVariationAsync(image);
-]]></code>
-This sample shows how to call CreateImageVariationAsync with all parameters.
-<code><![CDATA[
-KeyCredential credential = new KeyCredential("<key>");
-OpenAIClient client = new OpenAIClient(credential);
-
-CreateImageVariationRequest image = new CreateImageVariationRequest(BinaryData.FromObjectAsJson(new object()))
-{
-    N = 1234L,
-    Size = CreateImageVariationRequestSize._256x256,
-    ResponseFormat = CreateImageVariationRequestResponseFormat.Url,
-    User = "<user>",
-};
-Result<ImagesResponse> result = await client.CreateImageVariationAsync(image);
-]]></code></example>
-    </member>
-    <member name="CreateImageVariation(CreateImageVariationRequest,CancellationToken)">
-      <example>
-This sample shows how to call CreateImageVariation.
-<code><![CDATA[
-KeyCredential credential = new KeyCredential("<key>");
-OpenAIClient client = new OpenAIClient(credential);
-
-CreateImageVariationRequest image = new CreateImageVariationRequest(BinaryData.FromObjectAsJson(new object()));
-Result<ImagesResponse> result = client.CreateImageVariation(image);
-]]></code>
-This sample shows how to call CreateImageVariation with all parameters.
-<code><![CDATA[
-KeyCredential credential = new KeyCredential("<key>");
-OpenAIClient client = new OpenAIClient(credential);
-
-CreateImageVariationRequest image = new CreateImageVariationRequest(BinaryData.FromObjectAsJson(new object()))
-{
-    N = 1234L,
-    Size = CreateImageVariationRequestSize._256x256,
-    ResponseFormat = CreateImageVariationRequestResponseFormat.Url,
-    User = "<user>",
-};
-Result<ImagesResponse> result = client.CreateImageVariation(image);
-]]></code></example>
-    </member>
-    <member name="CreateImageVariationAsync(RequestBody,RequestOptions)">
-      <example>
-This sample shows how to call CreateImageVariationAsync and parse the result.
-<code><![CDATA[
-KeyCredential credential = new KeyCredential("<key>");
-OpenAIClient client = new OpenAIClient(credential);
-
-RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
-{
-    image = new object(),
-}).ToStream());
-Result result = await client.CreateImageVariationAsync(content);
-
-JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("created").ToString());
-Console.WriteLine(element.GetProperty("data")[0].ToString());
-]]></code>
-This sample shows how to call CreateImageVariationAsync with all request content and parse the result.
-<code><![CDATA[
-KeyCredential credential = new KeyCredential("<key>");
-OpenAIClient client = new OpenAIClient(credential);
-
-RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
-{
-    image = new object(),
-    n = 1234L,
-    size = "256x256",
-    response_format = "url",
-    user = "<user>",
-}).ToStream());
-Result result = await client.CreateImageVariationAsync(content);
-
-JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("created").ToString());
-Console.WriteLine(element.GetProperty("data")[0].GetProperty("url").ToString());
-Console.WriteLine(element.GetProperty("data")[0].GetProperty("b64_json").ToString());
-]]></code></example>
-    </member>
-    <member name="CreateImageVariation(RequestBody,RequestOptions)">
-      <example>
-This sample shows how to call CreateImageVariation and parse the result.
-<code><![CDATA[
-KeyCredential credential = new KeyCredential("<key>");
-OpenAIClient client = new OpenAIClient(credential);
-
-RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
-{
-    image = new object(),
-}).ToStream());
-Result result = client.CreateImageVariation(content);
-
-JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("created").ToString());
-Console.WriteLine(element.GetProperty("data")[0].ToString());
-]]></code>
-This sample shows how to call CreateImageVariation with all request content and parse the result.
-<code><![CDATA[
-KeyCredential credential = new KeyCredential("<key>");
-OpenAIClient client = new OpenAIClient(credential);
-
-RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
-{
-    image = new object(),
-    n = 1234L,
-    size = "256x256",
-    response_format = "url",
-    user = "<user>",
-}).ToStream());
-Result result = client.CreateImageVariation(content);
-
-JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("created").ToString());
-Console.WriteLine(element.GetProperty("data")[0].GetProperty("url").ToString());
-Console.WriteLine(element.GetProperty("data")[0].GetProperty("b64_json").ToString());
 ]]></code></example>
     </member>
     <member name="CreateEmbeddingAsync(CreateEmbeddingRequest,CancellationToken)">
@@ -2603,48 +2155,48 @@ Console.WriteLine(element.GetProperty("data")[0].GetProperty("created").ToString
 Console.WriteLine(element.GetProperty("data")[0].GetProperty("owned_by").ToString());
 ]]></code></example>
     </member>
-    <member name="RetrieveModelAsync(string,CancellationToken)">
+    <member name="RetrieveAsync(string,CancellationToken)">
       <example>
-This sample shows how to call RetrieveModelAsync.
+This sample shows how to call RetrieveAsync.
 <code><![CDATA[
 KeyCredential credential = new KeyCredential("<key>");
 OpenAIClient client = new OpenAIClient(credential);
 
-Result<Model> result = await client.RetrieveModelAsync("<model>");
+Result<Model> result = await client.RetrieveAsync("<model>");
 ]]></code>
-This sample shows how to call RetrieveModelAsync with all parameters.
+This sample shows how to call RetrieveAsync with all parameters.
 <code><![CDATA[
 KeyCredential credential = new KeyCredential("<key>");
 OpenAIClient client = new OpenAIClient(credential);
 
-Result<Model> result = await client.RetrieveModelAsync("<model>");
+Result<Model> result = await client.RetrieveAsync("<model>");
 ]]></code></example>
     </member>
-    <member name="RetrieveModel(string,CancellationToken)">
+    <member name="Retrieve(string,CancellationToken)">
       <example>
-This sample shows how to call RetrieveModel.
+This sample shows how to call Retrieve.
 <code><![CDATA[
 KeyCredential credential = new KeyCredential("<key>");
 OpenAIClient client = new OpenAIClient(credential);
 
-Result<Model> result = client.RetrieveModel("<model>");
+Result<Model> result = client.Retrieve("<model>");
 ]]></code>
-This sample shows how to call RetrieveModel with all parameters.
+This sample shows how to call Retrieve with all parameters.
 <code><![CDATA[
 KeyCredential credential = new KeyCredential("<key>");
 OpenAIClient client = new OpenAIClient(credential);
 
-Result<Model> result = client.RetrieveModel("<model>");
+Result<Model> result = client.Retrieve("<model>");
 ]]></code></example>
     </member>
-    <member name="RetrieveModelAsync(string,RequestOptions)">
+    <member name="RetrieveAsync(string,RequestOptions)">
       <example>
-This sample shows how to call RetrieveModelAsync and parse the result.
+This sample shows how to call RetrieveAsync and parse the result.
 <code><![CDATA[
 KeyCredential credential = new KeyCredential("<key>");
 OpenAIClient client = new OpenAIClient(credential);
 
-Result result = await client.RetrieveModelAsync("<model>", null);
+Result result = await client.RetrieveAsync("<model>", null);
 
 JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
 Console.WriteLine(element.GetProperty("id").ToString());
@@ -2652,41 +2204,12 @@ Console.WriteLine(element.GetProperty("object").ToString());
 Console.WriteLine(element.GetProperty("created").ToString());
 Console.WriteLine(element.GetProperty("owned_by").ToString());
 ]]></code>
-This sample shows how to call RetrieveModelAsync with all parameters and parse the result.
+This sample shows how to call RetrieveAsync with all parameters and parse the result.
 <code><![CDATA[
 KeyCredential credential = new KeyCredential("<key>");
 OpenAIClient client = new OpenAIClient(credential);
 
-Result result = await client.RetrieveModelAsync("<model>", null);
-
-JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("id").ToString());
-Console.WriteLine(element.GetProperty("object").ToString());
-Console.WriteLine(element.GetProperty("created").ToString());
-Console.WriteLine(element.GetProperty("owned_by").ToString());
-]]></code></example>
-    </member>
-    <member name="RetrieveModel(string,RequestOptions)">
-      <example>
-This sample shows how to call RetrieveModel and parse the result.
-<code><![CDATA[
-KeyCredential credential = new KeyCredential("<key>");
-OpenAIClient client = new OpenAIClient(credential);
-
-Result result = client.RetrieveModel("<model>", null);
-
-JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("id").ToString());
-Console.WriteLine(element.GetProperty("object").ToString());
-Console.WriteLine(element.GetProperty("created").ToString());
-Console.WriteLine(element.GetProperty("owned_by").ToString());
-]]></code>
-This sample shows how to call RetrieveModel with all parameters and parse the result.
-<code><![CDATA[
-KeyCredential credential = new KeyCredential("<key>");
-OpenAIClient client = new OpenAIClient(credential);
-
-Result result = client.RetrieveModel("<model>", null);
+Result result = await client.RetrieveAsync("<model>", null);
 
 JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
 Console.WriteLine(element.GetProperty("id").ToString());
@@ -2695,60 +2218,89 @@ Console.WriteLine(element.GetProperty("created").ToString());
 Console.WriteLine(element.GetProperty("owned_by").ToString());
 ]]></code></example>
     </member>
-    <member name="DeleteModelAsync(string,CancellationToken)">
+    <member name="Retrieve(string,RequestOptions)">
       <example>
-This sample shows how to call DeleteModelAsync.
+This sample shows how to call Retrieve and parse the result.
 <code><![CDATA[
 KeyCredential credential = new KeyCredential("<key>");
 OpenAIClient client = new OpenAIClient(credential);
 
-Result<DeleteModelResponse> result = await client.DeleteModelAsync("<model>");
+Result result = client.Retrieve("<model>", null);
+
+JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("id").ToString());
+Console.WriteLine(element.GetProperty("object").ToString());
+Console.WriteLine(element.GetProperty("created").ToString());
+Console.WriteLine(element.GetProperty("owned_by").ToString());
 ]]></code>
-This sample shows how to call DeleteModelAsync with all parameters.
+This sample shows how to call Retrieve with all parameters and parse the result.
 <code><![CDATA[
 KeyCredential credential = new KeyCredential("<key>");
 OpenAIClient client = new OpenAIClient(credential);
 
-Result<DeleteModelResponse> result = await client.DeleteModelAsync("<model>");
+Result result = client.Retrieve("<model>", null);
+
+JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("id").ToString());
+Console.WriteLine(element.GetProperty("object").ToString());
+Console.WriteLine(element.GetProperty("created").ToString());
+Console.WriteLine(element.GetProperty("owned_by").ToString());
 ]]></code></example>
     </member>
-    <member name="DeleteModel(string,CancellationToken)">
+    <member name="DeleteAsync(string,CancellationToken)">
       <example>
-This sample shows how to call DeleteModel.
+This sample shows how to call DeleteAsync.
 <code><![CDATA[
 KeyCredential credential = new KeyCredential("<key>");
 OpenAIClient client = new OpenAIClient(credential);
 
-Result<DeleteModelResponse> result = client.DeleteModel("<model>");
+Result<DeleteModelResponse> result = await client.DeleteAsync("<model>");
 ]]></code>
-This sample shows how to call DeleteModel with all parameters.
+This sample shows how to call DeleteAsync with all parameters.
 <code><![CDATA[
 KeyCredential credential = new KeyCredential("<key>");
 OpenAIClient client = new OpenAIClient(credential);
 
-Result<DeleteModelResponse> result = client.DeleteModel("<model>");
+Result<DeleteModelResponse> result = await client.DeleteAsync("<model>");
 ]]></code></example>
     </member>
-    <member name="DeleteModelAsync(string,RequestOptions)">
+    <member name="Delete(string,CancellationToken)">
       <example>
-This sample shows how to call DeleteModelAsync and parse the result.
+This sample shows how to call Delete.
 <code><![CDATA[
 KeyCredential credential = new KeyCredential("<key>");
 OpenAIClient client = new OpenAIClient(credential);
 
-Result result = await client.DeleteModelAsync("<model>", null);
+Result<DeleteModelResponse> result = client.Delete("<model>");
+]]></code>
+This sample shows how to call Delete with all parameters.
+<code><![CDATA[
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
+
+Result<DeleteModelResponse> result = client.Delete("<model>");
+]]></code></example>
+    </member>
+    <member name="DeleteAsync(string,RequestOptions)">
+      <example>
+This sample shows how to call DeleteAsync and parse the result.
+<code><![CDATA[
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
+
+Result result = await client.DeleteAsync("<model>", null);
 
 JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
 Console.WriteLine(element.GetProperty("id").ToString());
 Console.WriteLine(element.GetProperty("object").ToString());
 Console.WriteLine(element.GetProperty("deleted").ToString());
 ]]></code>
-This sample shows how to call DeleteModelAsync with all parameters and parse the result.
+This sample shows how to call DeleteAsync with all parameters and parse the result.
 <code><![CDATA[
 KeyCredential credential = new KeyCredential("<key>");
 OpenAIClient client = new OpenAIClient(credential);
 
-Result result = await client.DeleteModelAsync("<model>", null);
+Result result = await client.DeleteAsync("<model>", null);
 
 JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
 Console.WriteLine(element.GetProperty("id").ToString());
@@ -2756,31 +2308,417 @@ Console.WriteLine(element.GetProperty("object").ToString());
 Console.WriteLine(element.GetProperty("deleted").ToString());
 ]]></code></example>
     </member>
-    <member name="DeleteModel(string,RequestOptions)">
+    <member name="Delete(string,RequestOptions)">
       <example>
-This sample shows how to call DeleteModel and parse the result.
+This sample shows how to call Delete and parse the result.
 <code><![CDATA[
 KeyCredential credential = new KeyCredential("<key>");
 OpenAIClient client = new OpenAIClient(credential);
 
-Result result = client.DeleteModel("<model>", null);
+Result result = client.Delete("<model>", null);
 
 JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
 Console.WriteLine(element.GetProperty("id").ToString());
 Console.WriteLine(element.GetProperty("object").ToString());
 Console.WriteLine(element.GetProperty("deleted").ToString());
 ]]></code>
-This sample shows how to call DeleteModel with all parameters and parse the result.
+This sample shows how to call Delete with all parameters and parse the result.
 <code><![CDATA[
 KeyCredential credential = new KeyCredential("<key>");
 OpenAIClient client = new OpenAIClient(credential);
 
-Result result = client.DeleteModel("<model>", null);
+Result result = client.Delete("<model>", null);
 
 JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
 Console.WriteLine(element.GetProperty("id").ToString());
 Console.WriteLine(element.GetProperty("object").ToString());
 Console.WriteLine(element.GetProperty("deleted").ToString());
+]]></code></example>
+    </member>
+    <member name="CreateImageAsync(CreateImageRequest,CancellationToken)">
+      <example>
+This sample shows how to call CreateImageAsync.
+<code><![CDATA[
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
+
+CreateImageRequest image = new CreateImageRequest("<prompt>");
+Result<ImagesResponse> result = await client.CreateImageAsync(image);
+]]></code>
+This sample shows how to call CreateImageAsync with all parameters.
+<code><![CDATA[
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
+
+CreateImageRequest image = new CreateImageRequest("<prompt>")
+{
+    N = 1234L,
+    Size = CreateImageRequestSize._256x256,
+    ResponseFormat = CreateImageRequestResponseFormat.Url,
+    User = "<user>",
+};
+Result<ImagesResponse> result = await client.CreateImageAsync(image);
+]]></code></example>
+    </member>
+    <member name="CreateImage(CreateImageRequest,CancellationToken)">
+      <example>
+This sample shows how to call CreateImage.
+<code><![CDATA[
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
+
+CreateImageRequest image = new CreateImageRequest("<prompt>");
+Result<ImagesResponse> result = client.CreateImage(image);
+]]></code>
+This sample shows how to call CreateImage with all parameters.
+<code><![CDATA[
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
+
+CreateImageRequest image = new CreateImageRequest("<prompt>")
+{
+    N = 1234L,
+    Size = CreateImageRequestSize._256x256,
+    ResponseFormat = CreateImageRequestResponseFormat.Url,
+    User = "<user>",
+};
+Result<ImagesResponse> result = client.CreateImage(image);
+]]></code></example>
+    </member>
+    <member name="CreateImageAsync(RequestBody,RequestOptions)">
+      <example>
+This sample shows how to call CreateImageAsync and parse the result.
+<code><![CDATA[
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
+
+RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
+{
+    prompt = "<prompt>",
+}).ToStream());
+Result result = await client.CreateImageAsync(content);
+
+JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("created").ToString());
+Console.WriteLine(element.GetProperty("data")[0].ToString());
+]]></code>
+This sample shows how to call CreateImageAsync with all request content and parse the result.
+<code><![CDATA[
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
+
+RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
+{
+    prompt = "<prompt>",
+    n = 1234L,
+    size = "256x256",
+    response_format = "url",
+    user = "<user>",
+}).ToStream());
+Result result = await client.CreateImageAsync(content);
+
+JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("created").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("url").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("b64_json").ToString());
+]]></code></example>
+    </member>
+    <member name="CreateImage(RequestBody,RequestOptions)">
+      <example>
+This sample shows how to call CreateImage and parse the result.
+<code><![CDATA[
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
+
+RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
+{
+    prompt = "<prompt>",
+}).ToStream());
+Result result = client.CreateImage(content);
+
+JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("created").ToString());
+Console.WriteLine(element.GetProperty("data")[0].ToString());
+]]></code>
+This sample shows how to call CreateImage with all request content and parse the result.
+<code><![CDATA[
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
+
+RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
+{
+    prompt = "<prompt>",
+    n = 1234L,
+    size = "256x256",
+    response_format = "url",
+    user = "<user>",
+}).ToStream());
+Result result = client.CreateImage(content);
+
+JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("created").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("url").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("b64_json").ToString());
+]]></code></example>
+    </member>
+    <member name="CreateImageEditAsync(CreateImageEditRequest,CancellationToken)">
+      <example>
+This sample shows how to call CreateImageEditAsync.
+<code><![CDATA[
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
+
+CreateImageEditRequest image = new CreateImageEditRequest("<prompt>", BinaryData.FromObjectAsJson(new object()));
+Result<ImagesResponse> result = await client.CreateImageEditAsync(image);
+]]></code>
+This sample shows how to call CreateImageEditAsync with all parameters.
+<code><![CDATA[
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
+
+CreateImageEditRequest image = new CreateImageEditRequest("<prompt>", BinaryData.FromObjectAsJson(new object()))
+{
+    Mask = BinaryData.FromObjectAsJson(new object()),
+    N = 1234L,
+    Size = CreateImageEditRequestSize._256x256,
+    ResponseFormat = CreateImageEditRequestResponseFormat.Url,
+    User = "<user>",
+};
+Result<ImagesResponse> result = await client.CreateImageEditAsync(image);
+]]></code></example>
+    </member>
+    <member name="CreateImageEdit(CreateImageEditRequest,CancellationToken)">
+      <example>
+This sample shows how to call CreateImageEdit.
+<code><![CDATA[
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
+
+CreateImageEditRequest image = new CreateImageEditRequest("<prompt>", BinaryData.FromObjectAsJson(new object()));
+Result<ImagesResponse> result = client.CreateImageEdit(image);
+]]></code>
+This sample shows how to call CreateImageEdit with all parameters.
+<code><![CDATA[
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
+
+CreateImageEditRequest image = new CreateImageEditRequest("<prompt>", BinaryData.FromObjectAsJson(new object()))
+{
+    Mask = BinaryData.FromObjectAsJson(new object()),
+    N = 1234L,
+    Size = CreateImageEditRequestSize._256x256,
+    ResponseFormat = CreateImageEditRequestResponseFormat.Url,
+    User = "<user>",
+};
+Result<ImagesResponse> result = client.CreateImageEdit(image);
+]]></code></example>
+    </member>
+    <member name="CreateImageEditAsync(RequestBody,RequestOptions)">
+      <example>
+This sample shows how to call CreateImageEditAsync and parse the result.
+<code><![CDATA[
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
+
+RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
+{
+    prompt = "<prompt>",
+    image = new object(),
+}).ToStream());
+Result result = await client.CreateImageEditAsync(content);
+
+JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("created").ToString());
+Console.WriteLine(element.GetProperty("data")[0].ToString());
+]]></code>
+This sample shows how to call CreateImageEditAsync with all request content and parse the result.
+<code><![CDATA[
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
+
+RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
+{
+    prompt = "<prompt>",
+    image = new object(),
+    mask = new object(),
+    n = 1234L,
+    size = "256x256",
+    response_format = "url",
+    user = "<user>",
+}).ToStream());
+Result result = await client.CreateImageEditAsync(content);
+
+JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("created").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("url").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("b64_json").ToString());
+]]></code></example>
+    </member>
+    <member name="CreateImageEdit(RequestBody,RequestOptions)">
+      <example>
+This sample shows how to call CreateImageEdit and parse the result.
+<code><![CDATA[
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
+
+RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
+{
+    prompt = "<prompt>",
+    image = new object(),
+}).ToStream());
+Result result = client.CreateImageEdit(content);
+
+JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("created").ToString());
+Console.WriteLine(element.GetProperty("data")[0].ToString());
+]]></code>
+This sample shows how to call CreateImageEdit with all request content and parse the result.
+<code><![CDATA[
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
+
+RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
+{
+    prompt = "<prompt>",
+    image = new object(),
+    mask = new object(),
+    n = 1234L,
+    size = "256x256",
+    response_format = "url",
+    user = "<user>",
+}).ToStream());
+Result result = client.CreateImageEdit(content);
+
+JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("created").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("url").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("b64_json").ToString());
+]]></code></example>
+    </member>
+    <member name="CreateImageVariationAsync(CreateImageVariationRequest,CancellationToken)">
+      <example>
+This sample shows how to call CreateImageVariationAsync.
+<code><![CDATA[
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
+
+CreateImageVariationRequest image = new CreateImageVariationRequest(BinaryData.FromObjectAsJson(new object()));
+Result<ImagesResponse> result = await client.CreateImageVariationAsync(image);
+]]></code>
+This sample shows how to call CreateImageVariationAsync with all parameters.
+<code><![CDATA[
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
+
+CreateImageVariationRequest image = new CreateImageVariationRequest(BinaryData.FromObjectAsJson(new object()))
+{
+    N = 1234L,
+    Size = CreateImageVariationRequestSize._256x256,
+    ResponseFormat = CreateImageVariationRequestResponseFormat.Url,
+    User = "<user>",
+};
+Result<ImagesResponse> result = await client.CreateImageVariationAsync(image);
+]]></code></example>
+    </member>
+    <member name="CreateImageVariation(CreateImageVariationRequest,CancellationToken)">
+      <example>
+This sample shows how to call CreateImageVariation.
+<code><![CDATA[
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
+
+CreateImageVariationRequest image = new CreateImageVariationRequest(BinaryData.FromObjectAsJson(new object()));
+Result<ImagesResponse> result = client.CreateImageVariation(image);
+]]></code>
+This sample shows how to call CreateImageVariation with all parameters.
+<code><![CDATA[
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
+
+CreateImageVariationRequest image = new CreateImageVariationRequest(BinaryData.FromObjectAsJson(new object()))
+{
+    N = 1234L,
+    Size = CreateImageVariationRequestSize._256x256,
+    ResponseFormat = CreateImageVariationRequestResponseFormat.Url,
+    User = "<user>",
+};
+Result<ImagesResponse> result = client.CreateImageVariation(image);
+]]></code></example>
+    </member>
+    <member name="CreateImageVariationAsync(RequestBody,RequestOptions)">
+      <example>
+This sample shows how to call CreateImageVariationAsync and parse the result.
+<code><![CDATA[
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
+
+RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
+{
+    image = new object(),
+}).ToStream());
+Result result = await client.CreateImageVariationAsync(content);
+
+JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("created").ToString());
+Console.WriteLine(element.GetProperty("data")[0].ToString());
+]]></code>
+This sample shows how to call CreateImageVariationAsync with all request content and parse the result.
+<code><![CDATA[
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
+
+RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
+{
+    image = new object(),
+    n = 1234L,
+    size = "256x256",
+    response_format = "url",
+    user = "<user>",
+}).ToStream());
+Result result = await client.CreateImageVariationAsync(content);
+
+JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("created").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("url").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("b64_json").ToString());
+]]></code></example>
+    </member>
+    <member name="CreateImageVariation(RequestBody,RequestOptions)">
+      <example>
+This sample shows how to call CreateImageVariation and parse the result.
+<code><![CDATA[
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
+
+RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
+{
+    image = new object(),
+}).ToStream());
+Result result = client.CreateImageVariation(content);
+
+JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("created").ToString());
+Console.WriteLine(element.GetProperty("data")[0].ToString());
+]]></code>
+This sample shows how to call CreateImageVariation with all request content and parse the result.
+<code><![CDATA[
+KeyCredential credential = new KeyCredential("<key>");
+OpenAIClient client = new OpenAIClient(credential);
+
+RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
+{
+    image = new object(),
+    n = 1234L,
+    size = "256x256",
+    response_format = "url",
+    user = "<user>",
+}).ToStream());
+Result result = client.CreateImageVariation(content);
+
+JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+Console.WriteLine(element.GetProperty("created").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("url").ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("b64_json").ToString());
 ]]></code></example>
     </member>
     <member name="CreateModerationAsync(CreateModerationRequest,CancellationToken)">

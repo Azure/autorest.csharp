@@ -261,7 +261,7 @@ model CreateFineTuningJobRequest {
    * For example, a `suffix` of "custom-model-name" would produce a model name like
    * `ft:gpt-3.5-turbo:openai:custom-model-name:7p4lURel`.
    */
-  suffix?: SuffixString | null; // = null;
+  suffix?: SuffixString | null = null;
 }
 
 @minValue(1)
@@ -317,7 +317,7 @@ model CreateFineTuneRequest {
    * The number of epochs to train the model for. An epoch refers to one full cycle through the
    * training dataset.
    */
-  n_epochs?: safeint | null; // = 4;
+  n_epochs?: safeint | null = 4;
 
   /**
    * The batch size to use for training. The batch size is the number of training examples used to
@@ -327,7 +327,7 @@ model CreateFineTuneRequest {
    * in the training set, capped at 256 - in general, we've found that larger batch sizes tend to
    * work better for larger datasets.
    */
-  batch_size?: safeint | null; // = null;
+  batch_size?: safeint | null = null;
 
   /**
    * The learning rate multiplier to use for training. The fine-tuning learning rate is the original
@@ -338,7 +338,7 @@ model CreateFineTuneRequest {
    * recommend experimenting with values in the range 0.02 to 0.2 to see what produces the best
    * results.
    */
-  learning_rate_multiplier?: float64 | null; // = null;
+  learning_rate_multiplier?: float64 | null = null;
 
   /**
    * The weight to use for loss on the prompt tokens. This controls how much the model tries to
@@ -348,7 +348,7 @@ model CreateFineTuneRequest {
    * If prompts are extremely long (relative to completions), it may make sense to reduce this
    * weight so as to avoid over-prioritizing learning the prompt.
    */
-  prompt_loss_rate?: float64 | null; // = 0.01;
+  prompt_loss_rate?: float64 | null = 0.01;
 
   /**
    * If set, we calculate classification-specific metrics such as accuracy and F-1 score using the
@@ -359,14 +359,14 @@ model CreateFineTuneRequest {
    * you must specify `classification_n_classes` for multiclass classification or
    * `classification_positive_class` for binary classification.
    */
-  compute_classification_metrics?: boolean | null; // = false;
+  compute_classification_metrics?: boolean | null = false;
 
   /**
    * The number of classes in a classification task.
    *
    * This parameter is required for multiclass classification.
    */
-  classification_n_classes?: safeint | null; // = null;
+  classification_n_classes?: safeint | null = null;
 
   /**
    * The positive class in binary classification.
@@ -374,7 +374,7 @@ model CreateFineTuneRequest {
    * This parameter is needed to generate precision, recall, and F1 metrics when doing binary
    * classification.
    */
-  classification_positive_class?: string | null; // = null
+  classification_positive_class?: string | null = null;
 
   /**
    * If this is provided, we calculate F-beta scores at the specified beta values. The F-beta score
@@ -384,7 +384,7 @@ model CreateFineTuneRequest {
    * beta score puts more weight on recall and less on precision. A smaller beta score puts more
    * weight on precision and less on recall.
    */
-  classification_betas?: float64[] | null; // = null;
+  classification_betas?: float64[] | null = null;
 
   /**
    * A string of up to 18 characters that will be added to your fine-tuned model name.
@@ -392,7 +392,7 @@ model CreateFineTuneRequest {
    * For example, a `suffix` of "custom-model-name" would produce a model name like
    * `ada:ft-your-org:custom-model-name-2022-02-15-04-21-04`.
    */
-  suffix: SuffixString | null; // = null;
+  suffix?: SuffixString | null = null;
 }
 
 @minLength(1)

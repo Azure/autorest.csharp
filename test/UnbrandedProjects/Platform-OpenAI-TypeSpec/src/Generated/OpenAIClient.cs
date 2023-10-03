@@ -6,6 +6,8 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.ServiceModel.Rest;
 using System.ServiceModel.Rest.Core;
@@ -62,110 +64,6 @@ namespace OpenAI
             _keyCredential = credential;
             _pipeline = MessagePipeline.Create(new MessagePipelineTransport(), options, new IPipelinePolicy<PipelineMessage>[] { new KeyCredentialPolicy(_keyCredential, AuthorizationHeader, AuthorizationApiKeyPrefix) }, Array.Empty<IPipelinePolicy<PipelineMessage>>());
             _endpoint = endpoint;
-        }
-
-        /// <param name="body"> The CreateChatCompletionRequest to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='CreateChatCompletionAsync(CreateChatCompletionRequest,CancellationToken)']/*" />
-        public virtual async Task<Result<CreateChatCompletionResponse>> CreateChatCompletionAsync(CreateChatCompletionRequest body, CancellationToken cancellationToken = default)
-        {
-            ClientUtilities.AssertNotNull(body, nameof(body));
-
-            RequestOptions context = FromCancellationToken(cancellationToken);
-            Result result = await CreateChatCompletionAsync(body.ToRequestBody(), context).ConfigureAwait(false);
-            return Result.FromValue(CreateChatCompletionResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
-        }
-
-        /// <param name="body"> The CreateChatCompletionRequest to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='CreateChatCompletion(CreateChatCompletionRequest,CancellationToken)']/*" />
-        public virtual Result<CreateChatCompletionResponse> CreateChatCompletion(CreateChatCompletionRequest body, CancellationToken cancellationToken = default)
-        {
-            ClientUtilities.AssertNotNull(body, nameof(body));
-
-            RequestOptions context = FromCancellationToken(cancellationToken);
-            Result result = CreateChatCompletion(body.ToRequestBody(), context);
-            return Result.FromValue(CreateChatCompletionResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
-        }
-
-        /// <summary>
-        /// [Protocol Method]
-        /// <list type="bullet">
-        /// <item>
-        /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
-        /// <item>
-        /// <description>
-        /// Please try the simpler <see cref="CreateChatCompletionAsync(CreateChatCompletionRequest,CancellationToken)"/> convenience overload with strongly typed models first.
-        /// </description>
-        /// </item>
-        /// </list>
-        /// </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='CreateChatCompletionAsync(RequestBody,RequestOptions)']/*" />
-        public virtual async Task<Result> CreateChatCompletionAsync(RequestBody content, RequestOptions context = null)
-        {
-            ClientUtilities.AssertNotNull(content, nameof(content));
-
-            using var scope = ClientDiagnostics.CreateSpan("OpenAIClient.CreateChatCompletion");
-            scope.Start();
-            try
-            {
-                using PipelineMessage message = CreateCreateChatCompletionRequest(content, context);
-                return Result.FromResponse(await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false));
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary>
-        /// [Protocol Method]
-        /// <list type="bullet">
-        /// <item>
-        /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
-        /// <item>
-        /// <description>
-        /// Please try the simpler <see cref="CreateChatCompletion(CreateChatCompletionRequest,CancellationToken)"/> convenience overload with strongly typed models first.
-        /// </description>
-        /// </item>
-        /// </list>
-        /// </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='CreateChatCompletion(RequestBody,RequestOptions)']/*" />
-        public virtual Result CreateChatCompletion(RequestBody content, RequestOptions context = null)
-        {
-            ClientUtilities.AssertNotNull(content, nameof(content));
-
-            using var scope = ClientDiagnostics.CreateSpan("OpenAIClient.CreateChatCompletion");
-            scope.Start();
-            try
-            {
-                using PipelineMessage message = CreateCreateChatCompletionRequest(content, context);
-                return Result.FromResponse(_pipeline.ProcessMessage(message, context));
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
         }
 
         /// <summary> Transcribes audio into the input language. </summary>
@@ -371,6 +269,298 @@ namespace OpenAI
             try
             {
                 using PipelineMessage message = CreateCreateTranslationRequest(content, context);
+                return Result.FromResponse(_pipeline.ProcessMessage(message, context));
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <param name="model">
+        /// ID of the model to use. See the [model endpoint compatibility](/docs/models/model-endpoint-compatibility)
+        /// table for details on which models work with the Chat API.
+        /// </param>
+        /// <param name="messages">
+        /// A list of messages comprising the conversation so far.
+        /// [Example Python code](https://github.com/openai/openai-cookbook/blob/main/examples/How_to_format_inputs_to_ChatGPT_models.ipynb).
+        /// </param>
+        /// <param name="functions"> A list of functions the model may generate JSON inputs for. </param>
+        /// <param name="functionCall">
+        /// Controls how the model responds to function calls. `none` means the model does not call a
+        /// function, and responds to the end-user. `auto` means the model can pick between an end-user or
+        /// calling a function.  Specifying a particular function via `{\"name":\ \"my_function\"}` forces the
+        /// model to call that function. `none` is the default when no functions are present. `auto` is the
+        /// default if functions are present.
+        /// </param>
+        /// <param name="temperature">
+        /// What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output
+        /// more random, while lower values like 0.2 will make it more focused and deterministic.
+        ///
+        /// We generally recommend altering this or `top_p` but not both.
+        /// </param>
+        /// <param name="topP">
+        /// An alternative to sampling with temperature, called nucleus sampling, where the model considers
+        /// the results of the tokens with top_p probability mass. So 0.1 means only the tokens comprising
+        /// the top 10% probability mass are considered.
+        ///
+        /// We generally recommend altering this or `temperature` but not both.
+        /// </param>
+        /// <param name="n">
+        /// How many completions to generate for each prompt.
+        /// **Note:** Because this parameter generates many completions, it can quickly consume your token
+        /// quota. Use carefully and ensure that you have reasonable settings for `max_tokens` and `stop`.
+        /// </param>
+        /// <param name="maxTokens">
+        /// The maximum number of [tokens](/tokenizer) to generate in the completion.
+        ///
+        /// The token count of your prompt plus `max_tokens` cannot exceed the model's context length.
+        /// [Example Python code](https://github.com/openai/openai-cookbook/blob/main/examples/How_to_count_tokens_with_tiktoken.ipynb)
+        /// for counting tokens.
+        /// </param>
+        /// <param name="stop"> Up to 4 sequences where the API will stop generating further tokens. </param>
+        /// <param name="presencePenalty">
+        /// Number between -2.0 and 2.0. Positive values penalize new tokens based on whether they appear
+        /// in the text so far, increasing the model's likelihood to talk about new topics.
+        ///
+        /// [See more information about frequency and presence penalties.](/docs/guides/gpt/parameter-details)
+        /// </param>
+        /// <param name="frequencyPenalty">
+        /// Number between -2.0 and 2.0. Positive values penalize new tokens based on their existing
+        /// frequency in the text so far, decreasing the model's likelihood to repeat the same line
+        /// verbatim.
+        ///
+        /// [See more information about frequency and presence penalties.](/docs/guides/gpt/parameter-details)
+        /// </param>
+        /// <param name="logitBias">
+        /// Modify the likelihood of specified tokens appearing in the completion.
+        /// Accepts a json object that maps tokens (specified by their token ID in the tokenizer) to an
+        /// associated bias value from -100 to 100. Mathematically, the bias is added to the logits
+        /// generated by the model prior to sampling. The exact effect will vary per model, but values
+        /// between -1 and 1 should decrease or increase likelihood of selection; values like -100 or 100
+        /// should result in a ban or exclusive selection of the relevant token.
+        /// </param>
+        /// <param name="user">
+        /// A unique identifier representing your end-user, which can help OpenAI to monitor and detect
+        /// abuse. [Learn more](/docs/guides/safety-best-practices/end-user-ids).
+        /// </param>
+        /// <param name="stream">
+        /// If set, partial message deltas will be sent, like in ChatGPT. Tokens will be sent as data-only
+        /// [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#Event_stream_format)
+        /// as they become available, with the stream terminated by a `data: [DONE]` message.
+        /// [Example Python code](https://github.com/openai/openai-cookbook/blob/main/examples/How_to_stream_completions.ipynb).
+        /// </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="messages"/> is null. </exception>
+        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='CreateChatCompletionAsync(CreateChatCompletionRequestModel,IEnumerable{ChatCompletionRequestMessage},IEnumerable{ChatCompletionFunctions},BinaryData,double?,double?,long?,long?,BinaryData,double?,double?,IDictionary{string,long},string,bool?,CancellationToken)']/*" />
+        public virtual async Task<Result<CreateChatCompletionResponse>> CreateChatCompletionAsync(CreateChatCompletionRequestModel model, IEnumerable<ChatCompletionRequestMessage> messages, IEnumerable<ChatCompletionFunctions> functions = null, BinaryData functionCall = null, double? temperature = null, double? topP = null, long? n = null, long? maxTokens = null, BinaryData stop = null, double? presencePenalty = null, double? frequencyPenalty = null, IDictionary<string, long> logitBias = null, string user = null, bool? stream = null, CancellationToken cancellationToken = default)
+        {
+            ClientUtilities.AssertNotNull(messages, nameof(messages));
+
+            RequestOptions context = FromCancellationToken(cancellationToken);
+            CreateChatCompletionRequest createChatCompletionRequest = new CreateChatCompletionRequest(model, messages.ToList())
+            {
+                FunctionCall = functionCall,
+                Temperature = temperature,
+                TopP = topP,
+                N = n,
+                MaxTokens = maxTokens,
+                Stop = stop,
+                PresencePenalty = presencePenalty,
+                FrequencyPenalty = frequencyPenalty,
+                LogitBias = logitBias,
+                User = user,
+                Stream = stream
+            };
+            if (functions != null)
+            {
+                foreach (var value in functions)
+                {
+                    createChatCompletionRequest.Functions.Add(value);
+                }
+            }
+            CreateChatCompletionRequest createChatCompletionRequest0 = createChatCompletionRequest;
+            Result result = await CreateChatCompletionAsync(createChatCompletionRequest0.ToRequestBody(), context).ConfigureAwait(false);
+            return Result.FromValue(CreateChatCompletionResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
+        }
+
+        /// <param name="model">
+        /// ID of the model to use. See the [model endpoint compatibility](/docs/models/model-endpoint-compatibility)
+        /// table for details on which models work with the Chat API.
+        /// </param>
+        /// <param name="messages">
+        /// A list of messages comprising the conversation so far.
+        /// [Example Python code](https://github.com/openai/openai-cookbook/blob/main/examples/How_to_format_inputs_to_ChatGPT_models.ipynb).
+        /// </param>
+        /// <param name="functions"> A list of functions the model may generate JSON inputs for. </param>
+        /// <param name="functionCall">
+        /// Controls how the model responds to function calls. `none` means the model does not call a
+        /// function, and responds to the end-user. `auto` means the model can pick between an end-user or
+        /// calling a function.  Specifying a particular function via `{\"name":\ \"my_function\"}` forces the
+        /// model to call that function. `none` is the default when no functions are present. `auto` is the
+        /// default if functions are present.
+        /// </param>
+        /// <param name="temperature">
+        /// What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output
+        /// more random, while lower values like 0.2 will make it more focused and deterministic.
+        ///
+        /// We generally recommend altering this or `top_p` but not both.
+        /// </param>
+        /// <param name="topP">
+        /// An alternative to sampling with temperature, called nucleus sampling, where the model considers
+        /// the results of the tokens with top_p probability mass. So 0.1 means only the tokens comprising
+        /// the top 10% probability mass are considered.
+        ///
+        /// We generally recommend altering this or `temperature` but not both.
+        /// </param>
+        /// <param name="n">
+        /// How many completions to generate for each prompt.
+        /// **Note:** Because this parameter generates many completions, it can quickly consume your token
+        /// quota. Use carefully and ensure that you have reasonable settings for `max_tokens` and `stop`.
+        /// </param>
+        /// <param name="maxTokens">
+        /// The maximum number of [tokens](/tokenizer) to generate in the completion.
+        ///
+        /// The token count of your prompt plus `max_tokens` cannot exceed the model's context length.
+        /// [Example Python code](https://github.com/openai/openai-cookbook/blob/main/examples/How_to_count_tokens_with_tiktoken.ipynb)
+        /// for counting tokens.
+        /// </param>
+        /// <param name="stop"> Up to 4 sequences where the API will stop generating further tokens. </param>
+        /// <param name="presencePenalty">
+        /// Number between -2.0 and 2.0. Positive values penalize new tokens based on whether they appear
+        /// in the text so far, increasing the model's likelihood to talk about new topics.
+        ///
+        /// [See more information about frequency and presence penalties.](/docs/guides/gpt/parameter-details)
+        /// </param>
+        /// <param name="frequencyPenalty">
+        /// Number between -2.0 and 2.0. Positive values penalize new tokens based on their existing
+        /// frequency in the text so far, decreasing the model's likelihood to repeat the same line
+        /// verbatim.
+        ///
+        /// [See more information about frequency and presence penalties.](/docs/guides/gpt/parameter-details)
+        /// </param>
+        /// <param name="logitBias">
+        /// Modify the likelihood of specified tokens appearing in the completion.
+        /// Accepts a json object that maps tokens (specified by their token ID in the tokenizer) to an
+        /// associated bias value from -100 to 100. Mathematically, the bias is added to the logits
+        /// generated by the model prior to sampling. The exact effect will vary per model, but values
+        /// between -1 and 1 should decrease or increase likelihood of selection; values like -100 or 100
+        /// should result in a ban or exclusive selection of the relevant token.
+        /// </param>
+        /// <param name="user">
+        /// A unique identifier representing your end-user, which can help OpenAI to monitor and detect
+        /// abuse. [Learn more](/docs/guides/safety-best-practices/end-user-ids).
+        /// </param>
+        /// <param name="stream">
+        /// If set, partial message deltas will be sent, like in ChatGPT. Tokens will be sent as data-only
+        /// [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#Event_stream_format)
+        /// as they become available, with the stream terminated by a `data: [DONE]` message.
+        /// [Example Python code](https://github.com/openai/openai-cookbook/blob/main/examples/How_to_stream_completions.ipynb).
+        /// </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="messages"/> is null. </exception>
+        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='CreateChatCompletion(CreateChatCompletionRequestModel,IEnumerable{ChatCompletionRequestMessage},IEnumerable{ChatCompletionFunctions},BinaryData,double?,double?,long?,long?,BinaryData,double?,double?,IDictionary{string,long},string,bool?,CancellationToken)']/*" />
+        public virtual Result<CreateChatCompletionResponse> CreateChatCompletion(CreateChatCompletionRequestModel model, IEnumerable<ChatCompletionRequestMessage> messages, IEnumerable<ChatCompletionFunctions> functions = null, BinaryData functionCall = null, double? temperature = null, double? topP = null, long? n = null, long? maxTokens = null, BinaryData stop = null, double? presencePenalty = null, double? frequencyPenalty = null, IDictionary<string, long> logitBias = null, string user = null, bool? stream = null, CancellationToken cancellationToken = default)
+        {
+            ClientUtilities.AssertNotNull(messages, nameof(messages));
+
+            RequestOptions context = FromCancellationToken(cancellationToken);
+            CreateChatCompletionRequest createChatCompletionRequest = new CreateChatCompletionRequest(model, messages.ToList())
+            {
+                FunctionCall = functionCall,
+                Temperature = temperature,
+                TopP = topP,
+                N = n,
+                MaxTokens = maxTokens,
+                Stop = stop,
+                PresencePenalty = presencePenalty,
+                FrequencyPenalty = frequencyPenalty,
+                LogitBias = logitBias,
+                User = user,
+                Stream = stream
+            };
+            if (functions != null)
+            {
+                foreach (var value in functions)
+                {
+                    createChatCompletionRequest.Functions.Add(value);
+                }
+            }
+            CreateChatCompletionRequest createChatCompletionRequest0 = createChatCompletionRequest;
+            Result result = CreateChatCompletion(createChatCompletionRequest0.ToRequestBody(), context);
+            return Result.FromValue(CreateChatCompletionResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
+        }
+
+        /// <summary>
+        /// [Protocol Method]
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="CreateChatCompletionAsync(CreateChatCompletionRequestModel,IEnumerable{ChatCompletionRequestMessage},IEnumerable{ChatCompletionFunctions},BinaryData,double?,double?,long?,long?,BinaryData,double?,double?,IDictionary{string,long},string,bool?,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='CreateChatCompletionAsync(RequestBody,RequestOptions)']/*" />
+        public virtual async Task<Result> CreateChatCompletionAsync(RequestBody content, RequestOptions context = null)
+        {
+            ClientUtilities.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateSpan("OpenAIClient.CreateChatCompletion");
+            scope.Start();
+            try
+            {
+                using PipelineMessage message = CreateCreateChatCompletionRequest(content, context);
+                return Result.FromResponse(await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false));
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// [Protocol Method]
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="CreateChatCompletion(CreateChatCompletionRequestModel,IEnumerable{ChatCompletionRequestMessage},IEnumerable{ChatCompletionFunctions},BinaryData,double?,double?,long?,long?,BinaryData,double?,double?,IDictionary{string,long},string,bool?,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='CreateChatCompletion(RequestBody,RequestOptions)']/*" />
+        public virtual Result CreateChatCompletion(RequestBody content, RequestOptions context = null)
+        {
+            ClientUtilities.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateSpan("OpenAIClient.CreateChatCompletion");
+            scope.Start();
+            try
+            {
+                using PipelineMessage message = CreateCreateChatCompletionRequest(content, context);
                 return Result.FromResponse(_pipeline.ProcessMessage(message, context));
             }
             catch (Exception e)
@@ -731,32 +921,34 @@ namespace OpenAI
         /// <summary> Get status updates for a fine-tuning job. </summary>
         /// <param name="fineTuningJobId"> The ID of the fine-tuning job to get events for. </param>
         /// <param name="after"> Identifier for the last event from the previous pagination request. </param>
+        /// <param name="limit"> Number of events to retrieve. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fineTuningJobId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fineTuningJobId"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='GetFineTuningEventsAsync(string,string,CancellationToken)']/*" />
-        public virtual async Task<Result<ListFineTuningJobEventsResponse>> GetFineTuningEventsAsync(string fineTuningJobId, string after = null, CancellationToken cancellationToken = default)
+        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='GetFineTuningEventsAsync(string,string,int?,CancellationToken)']/*" />
+        public virtual async Task<Result<ListFineTuningJobEventsResponse>> GetFineTuningEventsAsync(string fineTuningJobId, string after = null, int? limit = null, CancellationToken cancellationToken = default)
         {
             ClientUtilities.AssertNotNullOrEmpty(fineTuningJobId, nameof(fineTuningJobId));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
-            Result result = await GetFineTuningEventsAsync(fineTuningJobId, after, context).ConfigureAwait(false);
+            Result result = await GetFineTuningEventsAsync(fineTuningJobId, after, limit, context).ConfigureAwait(false);
             return Result.FromValue(ListFineTuningJobEventsResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
         /// <summary> Get status updates for a fine-tuning job. </summary>
         /// <param name="fineTuningJobId"> The ID of the fine-tuning job to get events for. </param>
         /// <param name="after"> Identifier for the last event from the previous pagination request. </param>
+        /// <param name="limit"> Number of events to retrieve. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fineTuningJobId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fineTuningJobId"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='GetFineTuningEvents(string,string,CancellationToken)']/*" />
-        public virtual Result<ListFineTuningJobEventsResponse> GetFineTuningEvents(string fineTuningJobId, string after = null, CancellationToken cancellationToken = default)
+        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='GetFineTuningEvents(string,string,int?,CancellationToken)']/*" />
+        public virtual Result<ListFineTuningJobEventsResponse> GetFineTuningEvents(string fineTuningJobId, string after = null, int? limit = null, CancellationToken cancellationToken = default)
         {
             ClientUtilities.AssertNotNullOrEmpty(fineTuningJobId, nameof(fineTuningJobId));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
-            Result result = GetFineTuningEvents(fineTuningJobId, after, context);
+            Result result = GetFineTuningEvents(fineTuningJobId, after, limit, context);
             return Result.FromValue(ListFineTuningJobEventsResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -770,20 +962,21 @@ namespace OpenAI
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="GetFineTuningEventsAsync(string,string,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="GetFineTuningEventsAsync(string,string,int?,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
         /// </summary>
         /// <param name="fineTuningJobId"> The ID of the fine-tuning job to get events for. </param>
         /// <param name="after"> Identifier for the last event from the previous pagination request. </param>
+        /// <param name="limit"> Number of events to retrieve. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fineTuningJobId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fineTuningJobId"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='GetFineTuningEventsAsync(string,string,RequestOptions)']/*" />
-        public virtual async Task<Result> GetFineTuningEventsAsync(string fineTuningJobId, string after, RequestOptions context)
+        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='GetFineTuningEventsAsync(string,string,int?,RequestOptions)']/*" />
+        public virtual async Task<Result> GetFineTuningEventsAsync(string fineTuningJobId, string after, int? limit, RequestOptions context)
         {
             ClientUtilities.AssertNotNullOrEmpty(fineTuningJobId, nameof(fineTuningJobId));
 
@@ -791,7 +984,7 @@ namespace OpenAI
             scope.Start();
             try
             {
-                using PipelineMessage message = CreateGetFineTuningEventsRequest(fineTuningJobId, after, context);
+                using PipelineMessage message = CreateGetFineTuningEventsRequest(fineTuningJobId, after, limit, context);
                 return Result.FromResponse(await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false));
             }
             catch (Exception e)
@@ -811,20 +1004,21 @@ namespace OpenAI
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="GetFineTuningEvents(string,string,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="GetFineTuningEvents(string,string,int?,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
         /// </summary>
         /// <param name="fineTuningJobId"> The ID of the fine-tuning job to get events for. </param>
         /// <param name="after"> Identifier for the last event from the previous pagination request. </param>
+        /// <param name="limit"> Number of events to retrieve. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fineTuningJobId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fineTuningJobId"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='GetFineTuningEvents(string,string,RequestOptions)']/*" />
-        public virtual Result GetFineTuningEvents(string fineTuningJobId, string after, RequestOptions context)
+        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='GetFineTuningEvents(string,string,int?,RequestOptions)']/*" />
+        public virtual Result GetFineTuningEvents(string fineTuningJobId, string after, int? limit, RequestOptions context)
         {
             ClientUtilities.AssertNotNullOrEmpty(fineTuningJobId, nameof(fineTuningJobId));
 
@@ -832,7 +1026,7 @@ namespace OpenAI
             scope.Start();
             try
             {
-                using PipelineMessage message = CreateGetFineTuningEventsRequest(fineTuningJobId, after, context);
+                using PipelineMessage message = CreateGetFineTuningEventsRequest(fineTuningJobId, after, limit, context);
                 return Result.FromResponse(_pipeline.ProcessMessage(message, context));
             }
             catch (Exception e)
@@ -952,29 +1146,239 @@ namespace OpenAI
             }
         }
 
-        /// <param name="body"> The CreateCompletionRequest to use. </param>
+        /// <param name="model">
+        /// ID of the model to use. You can use the [List models](/docs/api-reference/models/list) API to
+        /// see all of your available models, or see our [Model overview](/docs/models/overview) for
+        /// descriptions of them.
+        /// </param>
+        /// <param name="prompt">
+        /// The prompt(s) to generate completions for, encoded as a string, array of strings, array of
+        /// tokens, or array of token arrays.
+        ///
+        /// Note that &lt;|endoftext|&gt; is the document separator that the model sees during training, so if a
+        /// prompt is not specified the model will generate as if from the beginning of a new document.
+        /// </param>
+        /// <param name="suffix"> The suffix that comes after a completion of inserted text. </param>
+        /// <param name="temperature">
+        /// What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output
+        /// more random, while lower values like 0.2 will make it more focused and deterministic.
+        ///
+        /// We generally recommend altering this or `top_p` but not both.
+        /// </param>
+        /// <param name="topP">
+        /// An alternative to sampling with temperature, called nucleus sampling, where the model considers
+        /// the results of the tokens with top_p probability mass. So 0.1 means only the tokens comprising
+        /// the top 10% probability mass are considered.
+        ///
+        /// We generally recommend altering this or `temperature` but not both.
+        /// </param>
+        /// <param name="n">
+        /// How many completions to generate for each prompt.
+        /// **Note:** Because this parameter generates many completions, it can quickly consume your token
+        /// quota. Use carefully and ensure that you have reasonable settings for `max_tokens` and `stop`.
+        /// </param>
+        /// <param name="maxTokens">
+        /// The maximum number of [tokens](/tokenizer) to generate in the completion.
+        ///
+        /// The token count of your prompt plus `max_tokens` cannot exceed the model's context length.
+        /// [Example Python code](https://github.com/openai/openai-cookbook/blob/main/examples/How_to_count_tokens_with_tiktoken.ipynb)
+        /// for counting tokens.
+        /// </param>
+        /// <param name="stop"> Up to 4 sequences where the API will stop generating further tokens. </param>
+        /// <param name="presencePenalty">
+        /// Number between -2.0 and 2.0. Positive values penalize new tokens based on whether they appear
+        /// in the text so far, increasing the model's likelihood to talk about new topics.
+        ///
+        /// [See more information about frequency and presence penalties.](/docs/guides/gpt/parameter-details)
+        /// </param>
+        /// <param name="frequencyPenalty">
+        /// Number between -2.0 and 2.0. Positive values penalize new tokens based on their existing
+        /// frequency in the text so far, decreasing the model's likelihood to repeat the same line
+        /// verbatim.
+        ///
+        /// [See more information about frequency and presence penalties.](/docs/guides/gpt/parameter-details)
+        /// </param>
+        /// <param name="logitBias">
+        /// Modify the likelihood of specified tokens appearing in the completion.
+        /// Accepts a json object that maps tokens (specified by their token ID in the tokenizer) to an
+        /// associated bias value from -100 to 100. Mathematically, the bias is added to the logits
+        /// generated by the model prior to sampling. The exact effect will vary per model, but values
+        /// between -1 and 1 should decrease or increase likelihood of selection; values like -100 or 100
+        /// should result in a ban or exclusive selection of the relevant token.
+        /// </param>
+        /// <param name="user">
+        /// A unique identifier representing your end-user, which can help OpenAI to monitor and detect
+        /// abuse. [Learn more](/docs/guides/safety-best-practices/end-user-ids).
+        /// </param>
+        /// <param name="stream">
+        /// If set, partial message deltas will be sent, like in ChatGPT. Tokens will be sent as data-only
+        /// [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#Event_stream_format)
+        /// as they become available, with the stream terminated by a `data: [DONE]` message.
+        /// [Example Python code](https://github.com/openai/openai-cookbook/blob/main/examples/How_to_stream_completions.ipynb).
+        /// </param>
+        /// <param name="logprobs">
+        /// Include the log probabilities on the `logprobs` most likely tokens, as well the chosen tokens.
+        /// For example, if `logprobs` is 5, the API will return a list of the 5 most likely tokens. The
+        /// API will always return the `logprob` of the sampled token, so there may be up to `logprobs+1`
+        /// elements in the response.
+        ///
+        /// The maximum value for `logprobs` is 5.
+        /// </param>
+        /// <param name="echo"> Echo back the prompt in addition to the completion. </param>
+        /// <param name="bestOf">
+        /// Generates `best_of` completions server-side and returns the "best" (the one with the highest
+        /// log probability per token). Results cannot be streamed.
+        ///
+        /// When used with `n`, `best_of` controls the number of candidate completions and `n` specifies
+        /// how many to return – `best_of` must be greater than `n`.
+        ///
+        /// **Note:** Because this parameter generates many completions, it can quickly consume your token
+        /// quota. Use carefully and ensure that you have reasonable settings for `max_tokens` and `stop`.
+        /// </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='CreateCompletionAsync(CreateCompletionRequest,CancellationToken)']/*" />
-        public virtual async Task<Result<CreateCompletionResponse>> CreateCompletionAsync(CreateCompletionRequest body, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="prompt"/> is null. </exception>
+        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='CreateCompletionAsync(CreateCompletionRequestModel,BinaryData,string,double?,double?,long?,long?,BinaryData,double?,double?,IDictionary{string,long},string,bool?,long?,bool?,long?,CancellationToken)']/*" />
+        public virtual async Task<Result<CreateCompletionResponse>> CreateCompletionAsync(CreateCompletionRequestModel model, BinaryData prompt, string suffix = null, double? temperature = null, double? topP = null, long? n = null, long? maxTokens = null, BinaryData stop = null, double? presencePenalty = null, double? frequencyPenalty = null, IDictionary<string, long> logitBias = null, string user = null, bool? stream = null, long? logprobs = null, bool? echo = null, long? bestOf = null, CancellationToken cancellationToken = default)
         {
-            ClientUtilities.AssertNotNull(body, nameof(body));
+            ClientUtilities.AssertNotNull(prompt, nameof(prompt));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
-            Result result = await CreateCompletionAsync(body.ToRequestBody(), context).ConfigureAwait(false);
+            CreateCompletionRequest createCompletionRequest = new CreateCompletionRequest(model, prompt)
+            {
+                Suffix = suffix,
+                Temperature = temperature,
+                TopP = topP,
+                N = n,
+                MaxTokens = maxTokens,
+                Stop = stop,
+                PresencePenalty = presencePenalty,
+                FrequencyPenalty = frequencyPenalty,
+                LogitBias = logitBias,
+                User = user,
+                Stream = stream,
+                Logprobs = logprobs,
+                Echo = echo,
+                BestOf = bestOf
+            };
+            Result result = await CreateCompletionAsync(createCompletionRequest.ToRequestBody(), context).ConfigureAwait(false);
             return Result.FromValue(CreateCompletionResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
-        /// <param name="body"> The CreateCompletionRequest to use. </param>
+        /// <param name="model">
+        /// ID of the model to use. You can use the [List models](/docs/api-reference/models/list) API to
+        /// see all of your available models, or see our [Model overview](/docs/models/overview) for
+        /// descriptions of them.
+        /// </param>
+        /// <param name="prompt">
+        /// The prompt(s) to generate completions for, encoded as a string, array of strings, array of
+        /// tokens, or array of token arrays.
+        ///
+        /// Note that &lt;|endoftext|&gt; is the document separator that the model sees during training, so if a
+        /// prompt is not specified the model will generate as if from the beginning of a new document.
+        /// </param>
+        /// <param name="suffix"> The suffix that comes after a completion of inserted text. </param>
+        /// <param name="temperature">
+        /// What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output
+        /// more random, while lower values like 0.2 will make it more focused and deterministic.
+        ///
+        /// We generally recommend altering this or `top_p` but not both.
+        /// </param>
+        /// <param name="topP">
+        /// An alternative to sampling with temperature, called nucleus sampling, where the model considers
+        /// the results of the tokens with top_p probability mass. So 0.1 means only the tokens comprising
+        /// the top 10% probability mass are considered.
+        ///
+        /// We generally recommend altering this or `temperature` but not both.
+        /// </param>
+        /// <param name="n">
+        /// How many completions to generate for each prompt.
+        /// **Note:** Because this parameter generates many completions, it can quickly consume your token
+        /// quota. Use carefully and ensure that you have reasonable settings for `max_tokens` and `stop`.
+        /// </param>
+        /// <param name="maxTokens">
+        /// The maximum number of [tokens](/tokenizer) to generate in the completion.
+        ///
+        /// The token count of your prompt plus `max_tokens` cannot exceed the model's context length.
+        /// [Example Python code](https://github.com/openai/openai-cookbook/blob/main/examples/How_to_count_tokens_with_tiktoken.ipynb)
+        /// for counting tokens.
+        /// </param>
+        /// <param name="stop"> Up to 4 sequences where the API will stop generating further tokens. </param>
+        /// <param name="presencePenalty">
+        /// Number between -2.0 and 2.0. Positive values penalize new tokens based on whether they appear
+        /// in the text so far, increasing the model's likelihood to talk about new topics.
+        ///
+        /// [See more information about frequency and presence penalties.](/docs/guides/gpt/parameter-details)
+        /// </param>
+        /// <param name="frequencyPenalty">
+        /// Number between -2.0 and 2.0. Positive values penalize new tokens based on their existing
+        /// frequency in the text so far, decreasing the model's likelihood to repeat the same line
+        /// verbatim.
+        ///
+        /// [See more information about frequency and presence penalties.](/docs/guides/gpt/parameter-details)
+        /// </param>
+        /// <param name="logitBias">
+        /// Modify the likelihood of specified tokens appearing in the completion.
+        /// Accepts a json object that maps tokens (specified by their token ID in the tokenizer) to an
+        /// associated bias value from -100 to 100. Mathematically, the bias is added to the logits
+        /// generated by the model prior to sampling. The exact effect will vary per model, but values
+        /// between -1 and 1 should decrease or increase likelihood of selection; values like -100 or 100
+        /// should result in a ban or exclusive selection of the relevant token.
+        /// </param>
+        /// <param name="user">
+        /// A unique identifier representing your end-user, which can help OpenAI to monitor and detect
+        /// abuse. [Learn more](/docs/guides/safety-best-practices/end-user-ids).
+        /// </param>
+        /// <param name="stream">
+        /// If set, partial message deltas will be sent, like in ChatGPT. Tokens will be sent as data-only
+        /// [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#Event_stream_format)
+        /// as they become available, with the stream terminated by a `data: [DONE]` message.
+        /// [Example Python code](https://github.com/openai/openai-cookbook/blob/main/examples/How_to_stream_completions.ipynb).
+        /// </param>
+        /// <param name="logprobs">
+        /// Include the log probabilities on the `logprobs` most likely tokens, as well the chosen tokens.
+        /// For example, if `logprobs` is 5, the API will return a list of the 5 most likely tokens. The
+        /// API will always return the `logprob` of the sampled token, so there may be up to `logprobs+1`
+        /// elements in the response.
+        ///
+        /// The maximum value for `logprobs` is 5.
+        /// </param>
+        /// <param name="echo"> Echo back the prompt in addition to the completion. </param>
+        /// <param name="bestOf">
+        /// Generates `best_of` completions server-side and returns the "best" (the one with the highest
+        /// log probability per token). Results cannot be streamed.
+        ///
+        /// When used with `n`, `best_of` controls the number of candidate completions and `n` specifies
+        /// how many to return – `best_of` must be greater than `n`.
+        ///
+        /// **Note:** Because this parameter generates many completions, it can quickly consume your token
+        /// quota. Use carefully and ensure that you have reasonable settings for `max_tokens` and `stop`.
+        /// </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='CreateCompletion(CreateCompletionRequest,CancellationToken)']/*" />
-        public virtual Result<CreateCompletionResponse> CreateCompletion(CreateCompletionRequest body, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="prompt"/> is null. </exception>
+        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='CreateCompletion(CreateCompletionRequestModel,BinaryData,string,double?,double?,long?,long?,BinaryData,double?,double?,IDictionary{string,long},string,bool?,long?,bool?,long?,CancellationToken)']/*" />
+        public virtual Result<CreateCompletionResponse> CreateCompletion(CreateCompletionRequestModel model, BinaryData prompt, string suffix = null, double? temperature = null, double? topP = null, long? n = null, long? maxTokens = null, BinaryData stop = null, double? presencePenalty = null, double? frequencyPenalty = null, IDictionary<string, long> logitBias = null, string user = null, bool? stream = null, long? logprobs = null, bool? echo = null, long? bestOf = null, CancellationToken cancellationToken = default)
         {
-            ClientUtilities.AssertNotNull(body, nameof(body));
+            ClientUtilities.AssertNotNull(prompt, nameof(prompt));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
-            Result result = CreateCompletion(body.ToRequestBody(), context);
+            CreateCompletionRequest createCompletionRequest = new CreateCompletionRequest(model, prompt)
+            {
+                Suffix = suffix,
+                Temperature = temperature,
+                TopP = topP,
+                N = n,
+                MaxTokens = maxTokens,
+                Stop = stop,
+                PresencePenalty = presencePenalty,
+                FrequencyPenalty = frequencyPenalty,
+                LogitBias = logitBias,
+                User = user,
+                Stream = stream,
+                Logprobs = logprobs,
+                Echo = echo,
+                BestOf = bestOf
+            };
+            Result result = CreateCompletion(createCompletionRequest.ToRequestBody(), context);
             return Result.FromValue(CreateCompletionResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -988,7 +1392,7 @@ namespace OpenAI
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="CreateCompletionAsync(CreateCompletionRequest,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="CreateCompletionAsync(CreateCompletionRequestModel,BinaryData,string,double?,double?,long?,long?,BinaryData,double?,double?,IDictionary{string,long},string,bool?,long?,bool?,long?,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -1027,7 +1431,7 @@ namespace OpenAI
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="CreateCompletion(CreateCompletionRequest,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="CreateCompletion(CreateCompletionRequestModel,BinaryData,string,double?,double?,long?,long?,BinaryData,double?,double?,IDictionary{string,long},string,bool?,long?,bool?,long?,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -1151,324 +1555,6 @@ namespace OpenAI
             try
             {
                 using PipelineMessage message = CreateCreateEditRequest(content, context);
-                return Result.FromResponse(_pipeline.ProcessMessage(message, context));
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Creates an image given a prompt. </summary>
-        /// <param name="image"> The CreateImageRequest to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="image"/> is null. </exception>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='CreateImageAsync(CreateImageRequest,CancellationToken)']/*" />
-        public virtual async Task<Result<ImagesResponse>> CreateImageAsync(CreateImageRequest image, CancellationToken cancellationToken = default)
-        {
-            ClientUtilities.AssertNotNull(image, nameof(image));
-
-            RequestOptions context = FromCancellationToken(cancellationToken);
-            Result result = await CreateImageAsync(image.ToRequestBody(), context).ConfigureAwait(false);
-            return Result.FromValue(ImagesResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
-        }
-
-        /// <summary> Creates an image given a prompt. </summary>
-        /// <param name="image"> The CreateImageRequest to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="image"/> is null. </exception>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='CreateImage(CreateImageRequest,CancellationToken)']/*" />
-        public virtual Result<ImagesResponse> CreateImage(CreateImageRequest image, CancellationToken cancellationToken = default)
-        {
-            ClientUtilities.AssertNotNull(image, nameof(image));
-
-            RequestOptions context = FromCancellationToken(cancellationToken);
-            Result result = CreateImage(image.ToRequestBody(), context);
-            return Result.FromValue(ImagesResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
-        }
-
-        /// <summary>
-        /// [Protocol Method] Creates an image given a prompt
-        /// <list type="bullet">
-        /// <item>
-        /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
-        /// <item>
-        /// <description>
-        /// Please try the simpler <see cref="CreateImageAsync(CreateImageRequest,CancellationToken)"/> convenience overload with strongly typed models first.
-        /// </description>
-        /// </item>
-        /// </list>
-        /// </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='CreateImageAsync(RequestBody,RequestOptions)']/*" />
-        public virtual async Task<Result> CreateImageAsync(RequestBody content, RequestOptions context = null)
-        {
-            ClientUtilities.AssertNotNull(content, nameof(content));
-
-            using var scope = ClientDiagnostics.CreateSpan("OpenAIClient.CreateImage");
-            scope.Start();
-            try
-            {
-                using PipelineMessage message = CreateCreateImageRequest(content, context);
-                return Result.FromResponse(await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false));
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary>
-        /// [Protocol Method] Creates an image given a prompt
-        /// <list type="bullet">
-        /// <item>
-        /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
-        /// <item>
-        /// <description>
-        /// Please try the simpler <see cref="CreateImage(CreateImageRequest,CancellationToken)"/> convenience overload with strongly typed models first.
-        /// </description>
-        /// </item>
-        /// </list>
-        /// </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='CreateImage(RequestBody,RequestOptions)']/*" />
-        public virtual Result CreateImage(RequestBody content, RequestOptions context = null)
-        {
-            ClientUtilities.AssertNotNull(content, nameof(content));
-
-            using var scope = ClientDiagnostics.CreateSpan("OpenAIClient.CreateImage");
-            scope.Start();
-            try
-            {
-                using PipelineMessage message = CreateCreateImageRequest(content, context);
-                return Result.FromResponse(_pipeline.ProcessMessage(message, context));
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Creates an edited or extended image given an original image and a prompt. </summary>
-        /// <param name="image"> The CreateImageEditRequest to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="image"/> is null. </exception>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='CreateImageEditAsync(CreateImageEditRequest,CancellationToken)']/*" />
-        public virtual async Task<Result<ImagesResponse>> CreateImageEditAsync(CreateImageEditRequest image, CancellationToken cancellationToken = default)
-        {
-            ClientUtilities.AssertNotNull(image, nameof(image));
-
-            RequestOptions context = FromCancellationToken(cancellationToken);
-            Result result = await CreateImageEditAsync(image.ToRequestBody(), context).ConfigureAwait(false);
-            return Result.FromValue(ImagesResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
-        }
-
-        /// <summary> Creates an edited or extended image given an original image and a prompt. </summary>
-        /// <param name="image"> The CreateImageEditRequest to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="image"/> is null. </exception>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='CreateImageEdit(CreateImageEditRequest,CancellationToken)']/*" />
-        public virtual Result<ImagesResponse> CreateImageEdit(CreateImageEditRequest image, CancellationToken cancellationToken = default)
-        {
-            ClientUtilities.AssertNotNull(image, nameof(image));
-
-            RequestOptions context = FromCancellationToken(cancellationToken);
-            Result result = CreateImageEdit(image.ToRequestBody(), context);
-            return Result.FromValue(ImagesResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
-        }
-
-        /// <summary>
-        /// [Protocol Method] Creates an edited or extended image given an original image and a prompt.
-        /// <list type="bullet">
-        /// <item>
-        /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
-        /// <item>
-        /// <description>
-        /// Please try the simpler <see cref="CreateImageEditAsync(CreateImageEditRequest,CancellationToken)"/> convenience overload with strongly typed models first.
-        /// </description>
-        /// </item>
-        /// </list>
-        /// </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='CreateImageEditAsync(RequestBody,RequestOptions)']/*" />
-        public virtual async Task<Result> CreateImageEditAsync(RequestBody content, RequestOptions context = null)
-        {
-            ClientUtilities.AssertNotNull(content, nameof(content));
-
-            using var scope = ClientDiagnostics.CreateSpan("OpenAIClient.CreateImageEdit");
-            scope.Start();
-            try
-            {
-                using PipelineMessage message = CreateCreateImageEditRequest(content, context);
-                return Result.FromResponse(await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false));
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary>
-        /// [Protocol Method] Creates an edited or extended image given an original image and a prompt.
-        /// <list type="bullet">
-        /// <item>
-        /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
-        /// <item>
-        /// <description>
-        /// Please try the simpler <see cref="CreateImageEdit(CreateImageEditRequest,CancellationToken)"/> convenience overload with strongly typed models first.
-        /// </description>
-        /// </item>
-        /// </list>
-        /// </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='CreateImageEdit(RequestBody,RequestOptions)']/*" />
-        public virtual Result CreateImageEdit(RequestBody content, RequestOptions context = null)
-        {
-            ClientUtilities.AssertNotNull(content, nameof(content));
-
-            using var scope = ClientDiagnostics.CreateSpan("OpenAIClient.CreateImageEdit");
-            scope.Start();
-            try
-            {
-                using PipelineMessage message = CreateCreateImageEditRequest(content, context);
-                return Result.FromResponse(_pipeline.ProcessMessage(message, context));
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Creates an edited or extended image given an original image and a prompt. </summary>
-        /// <param name="image"> The CreateImageVariationRequest to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="image"/> is null. </exception>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='CreateImageVariationAsync(CreateImageVariationRequest,CancellationToken)']/*" />
-        public virtual async Task<Result<ImagesResponse>> CreateImageVariationAsync(CreateImageVariationRequest image, CancellationToken cancellationToken = default)
-        {
-            ClientUtilities.AssertNotNull(image, nameof(image));
-
-            RequestOptions context = FromCancellationToken(cancellationToken);
-            Result result = await CreateImageVariationAsync(image.ToRequestBody(), context).ConfigureAwait(false);
-            return Result.FromValue(ImagesResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
-        }
-
-        /// <summary> Creates an edited or extended image given an original image and a prompt. </summary>
-        /// <param name="image"> The CreateImageVariationRequest to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="image"/> is null. </exception>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='CreateImageVariation(CreateImageVariationRequest,CancellationToken)']/*" />
-        public virtual Result<ImagesResponse> CreateImageVariation(CreateImageVariationRequest image, CancellationToken cancellationToken = default)
-        {
-            ClientUtilities.AssertNotNull(image, nameof(image));
-
-            RequestOptions context = FromCancellationToken(cancellationToken);
-            Result result = CreateImageVariation(image.ToRequestBody(), context);
-            return Result.FromValue(ImagesResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
-        }
-
-        /// <summary>
-        /// [Protocol Method] Creates an edited or extended image given an original image and a prompt.
-        /// <list type="bullet">
-        /// <item>
-        /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
-        /// <item>
-        /// <description>
-        /// Please try the simpler <see cref="CreateImageVariationAsync(CreateImageVariationRequest,CancellationToken)"/> convenience overload with strongly typed models first.
-        /// </description>
-        /// </item>
-        /// </list>
-        /// </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='CreateImageVariationAsync(RequestBody,RequestOptions)']/*" />
-        public virtual async Task<Result> CreateImageVariationAsync(RequestBody content, RequestOptions context = null)
-        {
-            ClientUtilities.AssertNotNull(content, nameof(content));
-
-            using var scope = ClientDiagnostics.CreateSpan("OpenAIClient.CreateImageVariation");
-            scope.Start();
-            try
-            {
-                using PipelineMessage message = CreateCreateImageVariationRequest(content, context);
-                return Result.FromResponse(await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false));
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary>
-        /// [Protocol Method] Creates an edited or extended image given an original image and a prompt.
-        /// <list type="bullet">
-        /// <item>
-        /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
-        /// <item>
-        /// <description>
-        /// Please try the simpler <see cref="CreateImageVariation(CreateImageVariationRequest,CancellationToken)"/> convenience overload with strongly typed models first.
-        /// </description>
-        /// </item>
-        /// </list>
-        /// </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='CreateImageVariation(RequestBody,RequestOptions)']/*" />
-        public virtual Result CreateImageVariation(RequestBody content, RequestOptions context = null)
-        {
-            ClientUtilities.AssertNotNull(content, nameof(content));
-
-            using var scope = ClientDiagnostics.CreateSpan("OpenAIClient.CreateImageVariation");
-            scope.Start();
-            try
-            {
-                using PipelineMessage message = CreateCreateImageVariationRequest(content, context);
                 return Result.FromResponse(_pipeline.ProcessMessage(message, context));
             }
             catch (Exception e)
@@ -2810,13 +2896,13 @@ namespace OpenAI
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="model"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="model"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='RetrieveModelAsync(string,CancellationToken)']/*" />
-        public virtual async Task<Result<Model>> RetrieveModelAsync(string model, CancellationToken cancellationToken = default)
+        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='RetrieveAsync(string,CancellationToken)']/*" />
+        public virtual async Task<Result<Model>> RetrieveAsync(string model, CancellationToken cancellationToken = default)
         {
             ClientUtilities.AssertNotNullOrEmpty(model, nameof(model));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
-            Result result = await RetrieveModelAsync(model, context).ConfigureAwait(false);
+            Result result = await RetrieveAsync(model, context).ConfigureAwait(false);
             return Result.FromValue(Model.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -2828,13 +2914,13 @@ namespace OpenAI
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="model"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="model"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='RetrieveModel(string,CancellationToken)']/*" />
-        public virtual Result<Model> RetrieveModel(string model, CancellationToken cancellationToken = default)
+        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='Retrieve(string,CancellationToken)']/*" />
+        public virtual Result<Model> Retrieve(string model, CancellationToken cancellationToken = default)
         {
             ClientUtilities.AssertNotNullOrEmpty(model, nameof(model));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
-            Result result = RetrieveModel(model, context);
+            Result result = Retrieve(model, context);
             return Result.FromValue(Model.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -2849,7 +2935,7 @@ namespace OpenAI
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="RetrieveModelAsync(string,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="RetrieveAsync(string,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -2860,16 +2946,16 @@ namespace OpenAI
         /// <exception cref="ArgumentException"> <paramref name="model"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='RetrieveModelAsync(string,RequestOptions)']/*" />
-        public virtual async Task<Result> RetrieveModelAsync(string model, RequestOptions context)
+        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='RetrieveAsync(string,RequestOptions)']/*" />
+        public virtual async Task<Result> RetrieveAsync(string model, RequestOptions context)
         {
             ClientUtilities.AssertNotNullOrEmpty(model, nameof(model));
 
-            using var scope = ClientDiagnostics.CreateSpan("OpenAIClient.RetrieveModel");
+            using var scope = ClientDiagnostics.CreateSpan("OpenAIClient.Retrieve");
             scope.Start();
             try
             {
-                using PipelineMessage message = CreateRetrieveModelRequest(model, context);
+                using PipelineMessage message = CreateRetrieveRequest(model, context);
                 return Result.FromResponse(await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false));
             }
             catch (Exception e)
@@ -2890,7 +2976,7 @@ namespace OpenAI
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="RetrieveModel(string,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="Retrieve(string,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -2901,16 +2987,16 @@ namespace OpenAI
         /// <exception cref="ArgumentException"> <paramref name="model"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='RetrieveModel(string,RequestOptions)']/*" />
-        public virtual Result RetrieveModel(string model, RequestOptions context)
+        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='Retrieve(string,RequestOptions)']/*" />
+        public virtual Result Retrieve(string model, RequestOptions context)
         {
             ClientUtilities.AssertNotNullOrEmpty(model, nameof(model));
 
-            using var scope = ClientDiagnostics.CreateSpan("OpenAIClient.RetrieveModel");
+            using var scope = ClientDiagnostics.CreateSpan("OpenAIClient.Retrieve");
             scope.Start();
             try
             {
-                using PipelineMessage message = CreateRetrieveModelRequest(model, context);
+                using PipelineMessage message = CreateRetrieveRequest(model, context);
                 return Result.FromResponse(_pipeline.ProcessMessage(message, context));
             }
             catch (Exception e)
@@ -2925,13 +3011,13 @@ namespace OpenAI
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="model"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="model"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='DeleteModelAsync(string,CancellationToken)']/*" />
-        public virtual async Task<Result<DeleteModelResponse>> DeleteModelAsync(string model, CancellationToken cancellationToken = default)
+        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='DeleteAsync(string,CancellationToken)']/*" />
+        public virtual async Task<Result<DeleteModelResponse>> DeleteAsync(string model, CancellationToken cancellationToken = default)
         {
             ClientUtilities.AssertNotNullOrEmpty(model, nameof(model));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
-            Result result = await DeleteModelAsync(model, context).ConfigureAwait(false);
+            Result result = await DeleteAsync(model, context).ConfigureAwait(false);
             return Result.FromValue(DeleteModelResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -2940,13 +3026,13 @@ namespace OpenAI
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="model"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="model"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='DeleteModel(string,CancellationToken)']/*" />
-        public virtual Result<DeleteModelResponse> DeleteModel(string model, CancellationToken cancellationToken = default)
+        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='Delete(string,CancellationToken)']/*" />
+        public virtual Result<DeleteModelResponse> Delete(string model, CancellationToken cancellationToken = default)
         {
             ClientUtilities.AssertNotNullOrEmpty(model, nameof(model));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
-            Result result = DeleteModel(model, context);
+            Result result = Delete(model, context);
             return Result.FromValue(DeleteModelResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -2960,7 +3046,7 @@ namespace OpenAI
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="DeleteModelAsync(string,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="DeleteAsync(string,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -2971,16 +3057,16 @@ namespace OpenAI
         /// <exception cref="ArgumentException"> <paramref name="model"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='DeleteModelAsync(string,RequestOptions)']/*" />
-        public virtual async Task<Result> DeleteModelAsync(string model, RequestOptions context)
+        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='DeleteAsync(string,RequestOptions)']/*" />
+        public virtual async Task<Result> DeleteAsync(string model, RequestOptions context)
         {
             ClientUtilities.AssertNotNullOrEmpty(model, nameof(model));
 
-            using var scope = ClientDiagnostics.CreateSpan("OpenAIClient.DeleteModel");
+            using var scope = ClientDiagnostics.CreateSpan("OpenAIClient.Delete");
             scope.Start();
             try
             {
-                using PipelineMessage message = CreateDeleteModelRequest(model, context);
+                using PipelineMessage message = CreateDeleteRequest(model, context);
                 return Result.FromResponse(await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false));
             }
             catch (Exception e)
@@ -3000,7 +3086,7 @@ namespace OpenAI
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="DeleteModel(string,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="Delete(string,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -3011,16 +3097,334 @@ namespace OpenAI
         /// <exception cref="ArgumentException"> <paramref name="model"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='DeleteModel(string,RequestOptions)']/*" />
-        public virtual Result DeleteModel(string model, RequestOptions context)
+        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='Delete(string,RequestOptions)']/*" />
+        public virtual Result Delete(string model, RequestOptions context)
         {
             ClientUtilities.AssertNotNullOrEmpty(model, nameof(model));
 
-            using var scope = ClientDiagnostics.CreateSpan("OpenAIClient.DeleteModel");
+            using var scope = ClientDiagnostics.CreateSpan("OpenAIClient.Delete");
             scope.Start();
             try
             {
-                using PipelineMessage message = CreateDeleteModelRequest(model, context);
+                using PipelineMessage message = CreateDeleteRequest(model, context);
+                return Result.FromResponse(_pipeline.ProcessMessage(message, context));
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Creates an image given a prompt. </summary>
+        /// <param name="image"> The CreateImageRequest to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="image"/> is null. </exception>
+        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='CreateImageAsync(CreateImageRequest,CancellationToken)']/*" />
+        public virtual async Task<Result<ImagesResponse>> CreateImageAsync(CreateImageRequest image, CancellationToken cancellationToken = default)
+        {
+            ClientUtilities.AssertNotNull(image, nameof(image));
+
+            RequestOptions context = FromCancellationToken(cancellationToken);
+            Result result = await CreateImageAsync(image.ToRequestBody(), context).ConfigureAwait(false);
+            return Result.FromValue(ImagesResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
+        }
+
+        /// <summary> Creates an image given a prompt. </summary>
+        /// <param name="image"> The CreateImageRequest to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="image"/> is null. </exception>
+        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='CreateImage(CreateImageRequest,CancellationToken)']/*" />
+        public virtual Result<ImagesResponse> CreateImage(CreateImageRequest image, CancellationToken cancellationToken = default)
+        {
+            ClientUtilities.AssertNotNull(image, nameof(image));
+
+            RequestOptions context = FromCancellationToken(cancellationToken);
+            Result result = CreateImage(image.ToRequestBody(), context);
+            return Result.FromValue(ImagesResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
+        }
+
+        /// <summary>
+        /// [Protocol Method] Creates an image given a prompt
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="CreateImageAsync(CreateImageRequest,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='CreateImageAsync(RequestBody,RequestOptions)']/*" />
+        public virtual async Task<Result> CreateImageAsync(RequestBody content, RequestOptions context = null)
+        {
+            ClientUtilities.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateSpan("OpenAIClient.CreateImage");
+            scope.Start();
+            try
+            {
+                using PipelineMessage message = CreateCreateImageRequest(content, context);
+                return Result.FromResponse(await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false));
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// [Protocol Method] Creates an image given a prompt
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="CreateImage(CreateImageRequest,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='CreateImage(RequestBody,RequestOptions)']/*" />
+        public virtual Result CreateImage(RequestBody content, RequestOptions context = null)
+        {
+            ClientUtilities.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateSpan("OpenAIClient.CreateImage");
+            scope.Start();
+            try
+            {
+                using PipelineMessage message = CreateCreateImageRequest(content, context);
+                return Result.FromResponse(_pipeline.ProcessMessage(message, context));
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Creates an edited or extended image given an original image and a prompt. </summary>
+        /// <param name="image"> The CreateImageEditRequest to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="image"/> is null. </exception>
+        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='CreateImageEditAsync(CreateImageEditRequest,CancellationToken)']/*" />
+        public virtual async Task<Result<ImagesResponse>> CreateImageEditAsync(CreateImageEditRequest image, CancellationToken cancellationToken = default)
+        {
+            ClientUtilities.AssertNotNull(image, nameof(image));
+
+            RequestOptions context = FromCancellationToken(cancellationToken);
+            Result result = await CreateImageEditAsync(image.ToRequestBody(), context).ConfigureAwait(false);
+            return Result.FromValue(ImagesResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
+        }
+
+        /// <summary> Creates an edited or extended image given an original image and a prompt. </summary>
+        /// <param name="image"> The CreateImageEditRequest to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="image"/> is null. </exception>
+        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='CreateImageEdit(CreateImageEditRequest,CancellationToken)']/*" />
+        public virtual Result<ImagesResponse> CreateImageEdit(CreateImageEditRequest image, CancellationToken cancellationToken = default)
+        {
+            ClientUtilities.AssertNotNull(image, nameof(image));
+
+            RequestOptions context = FromCancellationToken(cancellationToken);
+            Result result = CreateImageEdit(image.ToRequestBody(), context);
+            return Result.FromValue(ImagesResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
+        }
+
+        /// <summary>
+        /// [Protocol Method] Creates an edited or extended image given an original image and a prompt.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="CreateImageEditAsync(CreateImageEditRequest,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='CreateImageEditAsync(RequestBody,RequestOptions)']/*" />
+        public virtual async Task<Result> CreateImageEditAsync(RequestBody content, RequestOptions context = null)
+        {
+            ClientUtilities.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateSpan("OpenAIClient.CreateImageEdit");
+            scope.Start();
+            try
+            {
+                using PipelineMessage message = CreateCreateImageEditRequest(content, context);
+                return Result.FromResponse(await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false));
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// [Protocol Method] Creates an edited or extended image given an original image and a prompt.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="CreateImageEdit(CreateImageEditRequest,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='CreateImageEdit(RequestBody,RequestOptions)']/*" />
+        public virtual Result CreateImageEdit(RequestBody content, RequestOptions context = null)
+        {
+            ClientUtilities.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateSpan("OpenAIClient.CreateImageEdit");
+            scope.Start();
+            try
+            {
+                using PipelineMessage message = CreateCreateImageEditRequest(content, context);
+                return Result.FromResponse(_pipeline.ProcessMessage(message, context));
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Creates an edited or extended image given an original image and a prompt. </summary>
+        /// <param name="image"> The CreateImageVariationRequest to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="image"/> is null. </exception>
+        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='CreateImageVariationAsync(CreateImageVariationRequest,CancellationToken)']/*" />
+        public virtual async Task<Result<ImagesResponse>> CreateImageVariationAsync(CreateImageVariationRequest image, CancellationToken cancellationToken = default)
+        {
+            ClientUtilities.AssertNotNull(image, nameof(image));
+
+            RequestOptions context = FromCancellationToken(cancellationToken);
+            Result result = await CreateImageVariationAsync(image.ToRequestBody(), context).ConfigureAwait(false);
+            return Result.FromValue(ImagesResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
+        }
+
+        /// <summary> Creates an edited or extended image given an original image and a prompt. </summary>
+        /// <param name="image"> The CreateImageVariationRequest to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="image"/> is null. </exception>
+        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='CreateImageVariation(CreateImageVariationRequest,CancellationToken)']/*" />
+        public virtual Result<ImagesResponse> CreateImageVariation(CreateImageVariationRequest image, CancellationToken cancellationToken = default)
+        {
+            ClientUtilities.AssertNotNull(image, nameof(image));
+
+            RequestOptions context = FromCancellationToken(cancellationToken);
+            Result result = CreateImageVariation(image.ToRequestBody(), context);
+            return Result.FromValue(ImagesResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
+        }
+
+        /// <summary>
+        /// [Protocol Method] Creates an edited or extended image given an original image and a prompt.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="CreateImageVariationAsync(CreateImageVariationRequest,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='CreateImageVariationAsync(RequestBody,RequestOptions)']/*" />
+        public virtual async Task<Result> CreateImageVariationAsync(RequestBody content, RequestOptions context = null)
+        {
+            ClientUtilities.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateSpan("OpenAIClient.CreateImageVariation");
+            scope.Start();
+            try
+            {
+                using PipelineMessage message = CreateCreateImageVariationRequest(content, context);
+                return Result.FromResponse(await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false));
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// [Protocol Method] Creates an edited or extended image given an original image and a prompt.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="CreateImageVariation(CreateImageVariationRequest,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='CreateImageVariation(RequestBody,RequestOptions)']/*" />
+        public virtual Result CreateImageVariation(RequestBody content, RequestOptions context = null)
+        {
+            ClientUtilities.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateSpan("OpenAIClient.CreateImageVariation");
+            scope.Start();
+            try
+            {
+                using PipelineMessage message = CreateCreateImageVariationRequest(content, context);
                 return Result.FromResponse(_pipeline.ProcessMessage(message, context));
             }
             catch (Exception e)
@@ -3136,21 +3540,6 @@ namespace OpenAI
             }
         }
 
-        internal PipelineMessage CreateCreateChatCompletionRequest(RequestBody content, RequestOptions context)
-        {
-            var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
-            var request = message.Request;
-            request.Method = HttpMethod.Post;
-            var uri = new RequestUri();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/chat/completions", false);
-            request.Uri = uri.ToUri();
-            request.SetHeaderValue("Accept", "application/json");
-            request.SetHeaderValue("Content-Type", "application/json");
-            request.Content = content;
-            return message;
-        }
-
         internal PipelineMessage CreateCreateTranscriptionRequest(RequestBody content, RequestOptions context)
         {
             var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
@@ -3177,6 +3566,21 @@ namespace OpenAI
             request.Uri = uri.ToUri();
             request.SetHeaderValue("Accept", "application/json");
             request.SetHeaderValue("content-type", "multipart/form-data");
+            request.Content = content;
+            return message;
+        }
+
+        internal PipelineMessage CreateCreateChatCompletionRequest(RequestBody content, RequestOptions context)
+        {
+            var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
+            var request = message.Request;
+            request.Method = HttpMethod.Post;
+            var uri = new RequestUri();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/chat/completions", false);
+            request.Uri = uri.ToUri();
+            request.SetHeaderValue("Accept", "application/json");
+            request.SetHeaderValue("Content-Type", "application/json");
             request.Content = content;
             return message;
         }
@@ -3231,7 +3635,7 @@ namespace OpenAI
             return message;
         }
 
-        internal PipelineMessage CreateGetFineTuningEventsRequest(string fineTuningJobId, string after, RequestOptions context)
+        internal PipelineMessage CreateGetFineTuningEventsRequest(string fineTuningJobId, string after, int? limit, RequestOptions context)
         {
             var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
             var request = message.Request;
@@ -3244,6 +3648,10 @@ namespace OpenAI
             if (after != null)
             {
                 uri.AppendQuery("after", after, true);
+            }
+            if (limit != null)
+            {
+                uri.AppendQuery("limit", limit.Value, true);
             }
             request.Uri = uri.ToUri();
             request.SetHeaderValue("Accept", "application/json");
@@ -3291,51 +3699,6 @@ namespace OpenAI
             request.Uri = uri.ToUri();
             request.SetHeaderValue("Accept", "application/json");
             request.SetHeaderValue("Content-Type", "application/json");
-            request.Content = content;
-            return message;
-        }
-
-        internal PipelineMessage CreateCreateImageRequest(RequestBody content, RequestOptions context)
-        {
-            var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
-            var request = message.Request;
-            request.Method = HttpMethod.Post;
-            var uri = new RequestUri();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/images/generations", false);
-            request.Uri = uri.ToUri();
-            request.SetHeaderValue("Accept", "application/json");
-            request.SetHeaderValue("Content-Type", "application/json");
-            request.Content = content;
-            return message;
-        }
-
-        internal PipelineMessage CreateCreateImageEditRequest(RequestBody content, RequestOptions context)
-        {
-            var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
-            var request = message.Request;
-            request.Method = HttpMethod.Post;
-            var uri = new RequestUri();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/images/edits", false);
-            request.Uri = uri.ToUri();
-            request.SetHeaderValue("Accept", "application/json");
-            request.SetHeaderValue("content-type", "multipart/form-data");
-            request.Content = content;
-            return message;
-        }
-
-        internal PipelineMessage CreateCreateImageVariationRequest(RequestBody content, RequestOptions context)
-        {
-            var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
-            var request = message.Request;
-            request.Method = HttpMethod.Post;
-            var uri = new RequestUri();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/images/variations", false);
-            request.Uri = uri.ToUri();
-            request.SetHeaderValue("Accept", "application/json");
-            request.SetHeaderValue("content-type", "multipart/form-data");
             request.Content = content;
             return message;
         }
@@ -3515,7 +3878,7 @@ namespace OpenAI
             return message;
         }
 
-        internal PipelineMessage CreateRetrieveModelRequest(string model, RequestOptions context)
+        internal PipelineMessage CreateRetrieveRequest(string model, RequestOptions context)
         {
             var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
             var request = message.Request;
@@ -3529,7 +3892,7 @@ namespace OpenAI
             return message;
         }
 
-        internal PipelineMessage CreateDeleteModelRequest(string model, RequestOptions context)
+        internal PipelineMessage CreateDeleteRequest(string model, RequestOptions context)
         {
             var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
             var request = message.Request;
@@ -3540,6 +3903,51 @@ namespace OpenAI
             uri.AppendPath(model, true);
             request.Uri = uri.ToUri();
             request.SetHeaderValue("Accept", "application/json");
+            return message;
+        }
+
+        internal PipelineMessage CreateCreateImageRequest(RequestBody content, RequestOptions context)
+        {
+            var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
+            var request = message.Request;
+            request.Method = HttpMethod.Post;
+            var uri = new RequestUri();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/images/generations", false);
+            request.Uri = uri.ToUri();
+            request.SetHeaderValue("Accept", "application/json");
+            request.SetHeaderValue("Content-Type", "application/json");
+            request.Content = content;
+            return message;
+        }
+
+        internal PipelineMessage CreateCreateImageEditRequest(RequestBody content, RequestOptions context)
+        {
+            var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
+            var request = message.Request;
+            request.Method = HttpMethod.Post;
+            var uri = new RequestUri();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/images/edits", false);
+            request.Uri = uri.ToUri();
+            request.SetHeaderValue("Accept", "application/json");
+            request.SetHeaderValue("content-type", "multipart/form-data");
+            request.Content = content;
+            return message;
+        }
+
+        internal PipelineMessage CreateCreateImageVariationRequest(RequestBody content, RequestOptions context)
+        {
+            var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
+            var request = message.Request;
+            request.Method = HttpMethod.Post;
+            var uri = new RequestUri();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/images/variations", false);
+            request.Uri = uri.ToUri();
+            request.SetHeaderValue("Accept", "application/json");
+            request.SetHeaderValue("content-type", "multipart/form-data");
+            request.Content = content;
             return message;
         }
 

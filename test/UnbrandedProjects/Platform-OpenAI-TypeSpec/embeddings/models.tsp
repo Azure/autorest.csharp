@@ -1,3 +1,5 @@
+import "../common/models.tsp";
+
 namespace OpenAI;
 using TypeSpec.OpenAPI;
 

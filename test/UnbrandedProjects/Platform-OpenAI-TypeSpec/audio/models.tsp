@@ -34,7 +34,7 @@ model CreateTranscriptionRequest {
    */
   @minValue(0)
   @maxValue(1)
-  temperature?: float64; // = 0;
+  temperature?: float64 = 0;
 
   /**
    * The language of the input audio. Supplying the input language in
@@ -83,7 +83,7 @@ model CreateTranslationRequest {
    */
   @minValue(0)
   @maxValue(1)
-  temperature?: float64; // = 0;
+  temperature?: float64 = 0;
 }
 
 // Note: This does not currently support the non-default response format types.

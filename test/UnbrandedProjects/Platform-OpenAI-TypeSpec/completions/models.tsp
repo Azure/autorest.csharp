@@ -1,6 +1,30 @@
 namespace OpenAI;
 using TypeSpec.OpenAPI;
 
+alias CHAT_COMPLETION_MODELS =
+  | "gpt4"
+  | "gpt-4-0314"
+  | "gpt-4-0613"
+  | "gpt-4-32k"
+  | "gpt-4-32k-0314"
+  | "gpt-4-32k-0613"
+  | "gpt-3.5-turbo"
+  | "gpt-3.5-turbo-16k"
+  | "gpt-3.5-turbo-0301"
+  | "gpt-3.5-turbo-0613"
+  | "gpt-3.5-turbo-16k-0613";
+
+alias COMPLETION_MODELS =
+  | "babbage-002"
+  | "davinci-002"
+  | "text-davinci-003"
+  | "text-davinci-002"
+  | "text-davinci-001"
+  | "code-davinci-002"
+  | "text-curie-001"
+  | "text-babbage-001"
+  | "text-ada-001";
+
 alias SharedCompletionProperties = {
   /**
    * What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output
@@ -35,11 +59,10 @@ alias SharedCompletionProperties = {
    */
   max_tokens?: MaxTokens | null = 16;
 
-  // todo: needs a null default
-  // todo: needs to be oneOf
+  // todo: consider inlining when https://github.com/microsoft/typespec/issues/2356 is resolved
   // https://github.com/microsoft/typespec/issues/2355
   /** Up to 4 sequences where the API will stop generating further tokens. */
-  stop?: string | StopSequences | null;
+  stop?: Stop = null;
 
   // needs default
   // https://github.com/microsoft/typespec/issues/1646
@@ -88,9 +111,12 @@ alias SharedCompletionProperties = {
   stream?: boolean | null = true;
 };
 
-// this is using yaml refs instead of a def in the openapi, not sure if that's required?
-
-scalar User extends string;
+@oneOf
+union Stop {
+  string,
+  StopSequences,
+  null,
+}
 
 @minValue(-2)
 @maxValue(2)
@@ -301,21 +327,14 @@ model CreateCompletionRequest {
    * Note that <|endoftext|> is the document separator that the model sees during training, so if a
    * prompt is not specified the model will generate as if from the beginning of a new document.
    */
-  // TODO: needs oneOf.
-  prompt:
-    | string
-    | string[]
-    | TokenArray
-    | TokenArrayArray
-    | null = "<|endoftext|>";
+  // TODO: consider inlining when https://github.com/microsoft/typespec/issues/2356 fixed
+  prompt: Prompt = "<|endoftext|>";
 
-  // TODO: needs default of null
   /** The suffix that comes after a completion of inserted text. */
-  suffix?: string | null;
+  suffix?: string | null = null;
 
   ...SharedCompletionProperties;
 
-  // TODO: needs default of null
   /**
    * Include the log probabilities on the `logprobs` most likely tokens, as well the chosen tokens.
    * For example, if `logprobs` is 5, the API will return a list of the 5 most likely tokens. The
@@ -324,7 +343,7 @@ model CreateCompletionRequest {
    *
    * The maximum value for `logprobs` is 5.
    */
-  logprobs?: safeint | null; // = null;
+  logprobs?: safeint | null = null;
 
   /** Echo back the prompt in addition to the completion */
   echo?: boolean | null = false;
@@ -339,9 +358,17 @@ model CreateCompletionRequest {
    * **Note:** Because this parameter generates many completions, it can quickly consume your token
    * quota. Use carefully and ensure that you have reasonable settings for `max_tokens` and `stop`.
    */
-  best_of?: safeint | null; // = 1;
+  best_of?: safeint | null = 1;
 }
 
+@oneOf
+union Prompt {
+  string,
+  string[],
+  TokenArray,
+  TokenArrayArray,
+  null,
+}
 /**
  * Represents a completion response from the API. Note: both the streamed and non-streamed response
  * objects share the same shape (unlike the chat endpoint).
@@ -391,13 +418,3 @@ model CreateCompletionResponse {
 
   usage?: CompletionUsage;
 }
-
-@minValue(0)
-@maxValue(5)
-scalar LogProbs extends safeint;
-
-@minItems(1)
-model TokenArray is safeint[];
-
-@minItems(1)
-model TokenArrayArray is TokenArray[];

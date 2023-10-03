@@ -14,6 +14,34 @@ namespace OpenAI.Models
     /// <summary> Model factory for models. </summary>
     public static partial class OpenAIModelFactory
     {
+        /// <summary> Initializes a new instance of CreateTranscriptionResponse. </summary>
+        /// <param name="text"></param>
+        /// <exception cref="ArgumentNullException"> <paramref name="text"/> is null. </exception>
+        /// <returns> A new <see cref="Models.CreateTranscriptionResponse"/> instance for mocking. </returns>
+        public static CreateTranscriptionResponse CreateTranscriptionResponse(string text = null)
+        {
+            if (text == null)
+            {
+                throw new ArgumentNullException(nameof(text));
+            }
+
+            return new CreateTranscriptionResponse(text);
+        }
+
+        /// <summary> Initializes a new instance of CreateTranslationResponse. </summary>
+        /// <param name="text"></param>
+        /// <exception cref="ArgumentNullException"> <paramref name="text"/> is null. </exception>
+        /// <returns> A new <see cref="Models.CreateTranslationResponse"/> instance for mocking. </returns>
+        public static CreateTranslationResponse CreateTranslationResponse(string text = null)
+        {
+            if (text == null)
+            {
+                throw new ArgumentNullException(nameof(text));
+            }
+
+            return new CreateTranslationResponse(text);
+        }
+
         /// <summary> Initializes a new instance of CreateChatCompletionResponse. </summary>
         /// <param name="id"> A unique identifier for the chat completion. </param>
         /// <param name="object"> The object type, which is always `chat.completion`. </param>
@@ -91,34 +119,6 @@ namespace OpenAI.Models
         public static CompletionUsage CompletionUsage(long promptTokens = default, long completionTokens = default, long totalTokens = default)
         {
             return new CompletionUsage(promptTokens, completionTokens, totalTokens);
-        }
-
-        /// <summary> Initializes a new instance of CreateTranscriptionResponse. </summary>
-        /// <param name="text"></param>
-        /// <exception cref="ArgumentNullException"> <paramref name="text"/> is null. </exception>
-        /// <returns> A new <see cref="Models.CreateTranscriptionResponse"/> instance for mocking. </returns>
-        public static CreateTranscriptionResponse CreateTranscriptionResponse(string text = null)
-        {
-            if (text == null)
-            {
-                throw new ArgumentNullException(nameof(text));
-            }
-
-            return new CreateTranscriptionResponse(text);
-        }
-
-        /// <summary> Initializes a new instance of CreateTranslationResponse. </summary>
-        /// <param name="text"></param>
-        /// <exception cref="ArgumentNullException"> <paramref name="text"/> is null. </exception>
-        /// <returns> A new <see cref="Models.CreateTranslationResponse"/> instance for mocking. </returns>
-        public static CreateTranslationResponse CreateTranslationResponse(string text = null)
-        {
-            if (text == null)
-            {
-                throw new ArgumentNullException(nameof(text));
-            }
-
-            return new CreateTranslationResponse(text);
         }
 
         /// <summary> Initializes a new instance of FineTuningJob. </summary>
@@ -332,26 +332,6 @@ namespace OpenAI.Models
             }
 
             return new CreateEditChoice(text, index, finishReason);
-        }
-
-        /// <summary> Initializes a new instance of ImagesResponse. </summary>
-        /// <param name="created"></param>
-        /// <param name="data"></param>
-        /// <returns> A new <see cref="Models.ImagesResponse"/> instance for mocking. </returns>
-        public static ImagesResponse ImagesResponse(DateTimeOffset created = default, IEnumerable<Image> data = null)
-        {
-            data ??= new List<Image>();
-
-            return new ImagesResponse(created, data?.ToList());
-        }
-
-        /// <summary> Initializes a new instance of Image. </summary>
-        /// <param name="url"> The URL of the generated image, if `response_format` is `url` (default). </param>
-        /// <param name="b64Json"> The base64-encoded JSON of the generated image, if `response_format` is `b64_json`. </param>
-        /// <returns> A new <see cref="Models.Image"/> instance for mocking. </returns>
-        public static Image Image(Uri url = null, BinaryData b64Json = null)
-        {
-            return new Image(url, b64Json);
         }
 
         /// <summary> Initializes a new instance of CreateEmbeddingResponse. </summary>
@@ -581,6 +561,26 @@ namespace OpenAI.Models
             }
 
             return new DeleteModelResponse(id, @object, deleted);
+        }
+
+        /// <summary> Initializes a new instance of ImagesResponse. </summary>
+        /// <param name="created"></param>
+        /// <param name="data"></param>
+        /// <returns> A new <see cref="Models.ImagesResponse"/> instance for mocking. </returns>
+        public static ImagesResponse ImagesResponse(DateTimeOffset created = default, IEnumerable<Image> data = null)
+        {
+            data ??= new List<Image>();
+
+            return new ImagesResponse(created, data?.ToList());
+        }
+
+        /// <summary> Initializes a new instance of Image. </summary>
+        /// <param name="url"> The URL of the generated image, if `response_format` is `url` (default). </param>
+        /// <param name="b64Json"> The base64-encoded JSON of the generated image, if `response_format` is `b64_json`. </param>
+        /// <returns> A new <see cref="Models.Image"/> instance for mocking. </returns>
+        public static Image Image(Uri url = null, BinaryData b64Json = null)
+        {
+            return new Image(url, b64Json);
         }
 
         /// <summary> Initializes a new instance of CreateModerationResponse. </summary>

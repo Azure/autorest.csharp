@@ -21,318 +21,6 @@ namespace OpenAI.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_CreateChatCompletion_ShortVersion()
-        {
-            KeyCredential credential = new KeyCredential("<key>");
-            OpenAIClient client = new OpenAIClient(credential);
-
-            RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
-            {
-                model = "<model>",
-                messages = new object[]
-            {
-new
-{
-role = "system",
-content = "<content>",
-}
-            },
-            }).ToStream());
-            Result result = client.CreateChatCompletion(content);
-
-            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(element.GetProperty("id").ToString());
-            Console.WriteLine(element.GetProperty("object").ToString());
-            Console.WriteLine(element.GetProperty("created").ToString());
-            Console.WriteLine(element.GetProperty("model").ToString());
-            Console.WriteLine(element.GetProperty("choices")[0].GetProperty("index").ToString());
-            Console.WriteLine(element.GetProperty("choices")[0].GetProperty("message").GetProperty("role").ToString());
-            Console.WriteLine(element.GetProperty("choices")[0].GetProperty("message").GetProperty("content").ToString());
-            Console.WriteLine(element.GetProperty("choices")[0].GetProperty("finish_reason").ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_CreateChatCompletion_ShortVersion_Async()
-        {
-            KeyCredential credential = new KeyCredential("<key>");
-            OpenAIClient client = new OpenAIClient(credential);
-
-            RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
-            {
-                model = "<model>",
-                messages = new object[]
-            {
-new
-{
-role = "system",
-content = "<content>",
-}
-            },
-            }).ToStream());
-            Result result = await client.CreateChatCompletionAsync(content);
-
-            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(element.GetProperty("id").ToString());
-            Console.WriteLine(element.GetProperty("object").ToString());
-            Console.WriteLine(element.GetProperty("created").ToString());
-            Console.WriteLine(element.GetProperty("model").ToString());
-            Console.WriteLine(element.GetProperty("choices")[0].GetProperty("index").ToString());
-            Console.WriteLine(element.GetProperty("choices")[0].GetProperty("message").GetProperty("role").ToString());
-            Console.WriteLine(element.GetProperty("choices")[0].GetProperty("message").GetProperty("content").ToString());
-            Console.WriteLine(element.GetProperty("choices")[0].GetProperty("finish_reason").ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_CreateChatCompletion_ShortVersion_Convenience()
-        {
-            KeyCredential credential = new KeyCredential("<key>");
-            OpenAIClient client = new OpenAIClient(credential);
-
-            CreateChatCompletionRequest body = new CreateChatCompletionRequest(new CreateChatCompletionRequestModel("<model>"), new ChatCompletionRequestMessage[]
-            {
-new ChatCompletionRequestMessage(ChatCompletionRequestMessageRole.System, "<content>")
-            });
-            Result<CreateChatCompletionResponse> result = client.CreateChatCompletion(body);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_CreateChatCompletion_ShortVersion_Convenience_Async()
-        {
-            KeyCredential credential = new KeyCredential("<key>");
-            OpenAIClient client = new OpenAIClient(credential);
-
-            CreateChatCompletionRequest body = new CreateChatCompletionRequest(new CreateChatCompletionRequestModel("<model>"), new ChatCompletionRequestMessage[]
-            {
-new ChatCompletionRequestMessage(ChatCompletionRequestMessageRole.System, "<content>")
-            });
-            Result<CreateChatCompletionResponse> result = await client.CreateChatCompletionAsync(body);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_CreateChatCompletion_AllParameters()
-        {
-            KeyCredential credential = new KeyCredential("<key>");
-            OpenAIClient client = new OpenAIClient(credential);
-
-            RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
-            {
-                model = "<model>",
-                messages = new object[]
-            {
-new
-{
-role = "system",
-content = "<content>",
-name = "<name>",
-function_call = new
-{
-name = "<name>",
-arguments = "<arguments>",
-},
-}
-            },
-                functions = new object[]
-            {
-new
-{
-name = "<name>",
-description = "<description>",
-parameters = new
-{
-key = new object(),
-},
-}
-            },
-                function_call = "none",
-                temperature = 123.45,
-                top_p = 123.45,
-                n = 1234L,
-                max_tokens = 1234L,
-                stop = "<stop>",
-                presence_penalty = 123.45,
-                frequency_penalty = 123.45,
-                logit_bias = new
-                {
-                    key = 1234L,
-                },
-                user = "<user>",
-                stream = true,
-            }).ToStream());
-            Result result = client.CreateChatCompletion(content);
-
-            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(element.GetProperty("id").ToString());
-            Console.WriteLine(element.GetProperty("object").ToString());
-            Console.WriteLine(element.GetProperty("created").ToString());
-            Console.WriteLine(element.GetProperty("model").ToString());
-            Console.WriteLine(element.GetProperty("choices")[0].GetProperty("index").ToString());
-            Console.WriteLine(element.GetProperty("choices")[0].GetProperty("message").GetProperty("role").ToString());
-            Console.WriteLine(element.GetProperty("choices")[0].GetProperty("message").GetProperty("content").ToString());
-            Console.WriteLine(element.GetProperty("choices")[0].GetProperty("message").GetProperty("function_call").GetProperty("name").ToString());
-            Console.WriteLine(element.GetProperty("choices")[0].GetProperty("message").GetProperty("function_call").GetProperty("arguments").ToString());
-            Console.WriteLine(element.GetProperty("choices")[0].GetProperty("finish_reason").ToString());
-            Console.WriteLine(element.GetProperty("usage").GetProperty("prompt_tokens").ToString());
-            Console.WriteLine(element.GetProperty("usage").GetProperty("completion_tokens").ToString());
-            Console.WriteLine(element.GetProperty("usage").GetProperty("total_tokens").ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_CreateChatCompletion_AllParameters_Async()
-        {
-            KeyCredential credential = new KeyCredential("<key>");
-            OpenAIClient client = new OpenAIClient(credential);
-
-            RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
-            {
-                model = "<model>",
-                messages = new object[]
-            {
-new
-{
-role = "system",
-content = "<content>",
-name = "<name>",
-function_call = new
-{
-name = "<name>",
-arguments = "<arguments>",
-},
-}
-            },
-                functions = new object[]
-            {
-new
-{
-name = "<name>",
-description = "<description>",
-parameters = new
-{
-key = new object(),
-},
-}
-            },
-                function_call = "none",
-                temperature = 123.45,
-                top_p = 123.45,
-                n = 1234L,
-                max_tokens = 1234L,
-                stop = "<stop>",
-                presence_penalty = 123.45,
-                frequency_penalty = 123.45,
-                logit_bias = new
-                {
-                    key = 1234L,
-                },
-                user = "<user>",
-                stream = true,
-            }).ToStream());
-            Result result = await client.CreateChatCompletionAsync(content);
-
-            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(element.GetProperty("id").ToString());
-            Console.WriteLine(element.GetProperty("object").ToString());
-            Console.WriteLine(element.GetProperty("created").ToString());
-            Console.WriteLine(element.GetProperty("model").ToString());
-            Console.WriteLine(element.GetProperty("choices")[0].GetProperty("index").ToString());
-            Console.WriteLine(element.GetProperty("choices")[0].GetProperty("message").GetProperty("role").ToString());
-            Console.WriteLine(element.GetProperty("choices")[0].GetProperty("message").GetProperty("content").ToString());
-            Console.WriteLine(element.GetProperty("choices")[0].GetProperty("message").GetProperty("function_call").GetProperty("name").ToString());
-            Console.WriteLine(element.GetProperty("choices")[0].GetProperty("message").GetProperty("function_call").GetProperty("arguments").ToString());
-            Console.WriteLine(element.GetProperty("choices")[0].GetProperty("finish_reason").ToString());
-            Console.WriteLine(element.GetProperty("usage").GetProperty("prompt_tokens").ToString());
-            Console.WriteLine(element.GetProperty("usage").GetProperty("completion_tokens").ToString());
-            Console.WriteLine(element.GetProperty("usage").GetProperty("total_tokens").ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_CreateChatCompletion_AllParameters_Convenience()
-        {
-            KeyCredential credential = new KeyCredential("<key>");
-            OpenAIClient client = new OpenAIClient(credential);
-
-            CreateChatCompletionRequest body = new CreateChatCompletionRequest(new CreateChatCompletionRequestModel("<model>"), new ChatCompletionRequestMessage[]
-            {
-new ChatCompletionRequestMessage(ChatCompletionRequestMessageRole.System, "<content>")
-{
-Name = "<name>",
-FunctionCall = new CreateChatCompletionFunctionCall("<name>", "<arguments>"),
-}
-            })
-            {
-                Functions = {new ChatCompletionFunctions("<name>", new Dictionary<string, BinaryData>
-{
-["key"] = BinaryData.FromObjectAsJson(new object())
-})
-{
-Description = "<description>",
-}},
-                FunctionCall = BinaryData.FromObjectAsJson("none"),
-                Temperature = 123.45,
-                TopP = 123.45,
-                N = 1234L,
-                MaxTokens = 1234L,
-                Stop = BinaryData.FromObjectAsJson("<stop>"),
-                PresencePenalty = 123.45,
-                FrequencyPenalty = 123.45,
-                LogitBias =
-{
-["key"] = 1234L
-},
-                User = "<user>",
-                Stream = true,
-            };
-            Result<CreateChatCompletionResponse> result = client.CreateChatCompletion(body);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_CreateChatCompletion_AllParameters_Convenience_Async()
-        {
-            KeyCredential credential = new KeyCredential("<key>");
-            OpenAIClient client = new OpenAIClient(credential);
-
-            CreateChatCompletionRequest body = new CreateChatCompletionRequest(new CreateChatCompletionRequestModel("<model>"), new ChatCompletionRequestMessage[]
-            {
-new ChatCompletionRequestMessage(ChatCompletionRequestMessageRole.System, "<content>")
-{
-Name = "<name>",
-FunctionCall = new CreateChatCompletionFunctionCall("<name>", "<arguments>"),
-}
-            })
-            {
-                Functions = {new ChatCompletionFunctions("<name>", new Dictionary<string, BinaryData>
-{
-["key"] = BinaryData.FromObjectAsJson(new object())
-})
-{
-Description = "<description>",
-}},
-                FunctionCall = BinaryData.FromObjectAsJson("none"),
-                Temperature = 123.45,
-                TopP = 123.45,
-                N = 1234L,
-                MaxTokens = 1234L,
-                Stop = BinaryData.FromObjectAsJson("<stop>"),
-                PresencePenalty = 123.45,
-                FrequencyPenalty = 123.45,
-                LogitBias =
-{
-["key"] = 1234L
-},
-                User = "<user>",
-                Stream = true,
-            };
-            Result<CreateChatCompletionResponse> result = await client.CreateChatCompletionAsync(body);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
         public void Example_CreateTranscription_ShortVersion()
         {
             KeyCredential credential = new KeyCredential("<key>");
@@ -597,6 +285,292 @@ Description = "<description>",
                 Temperature = 123.45,
             };
             Result<CreateTranslationResponse> result = await client.CreateTranslationAsync(audio);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_CreateChatCompletion_ShortVersion()
+        {
+            KeyCredential credential = new KeyCredential("<key>");
+            OpenAIClient client = new OpenAIClient(credential);
+
+            RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
+            {
+                model = "<model>",
+                messages = new object[]
+            {
+new
+{
+role = "system",
+content = "<content>",
+}
+            },
+            }).ToStream());
+            Result result = client.CreateChatCompletion(content);
+
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("id").ToString());
+            Console.WriteLine(element.GetProperty("object").ToString());
+            Console.WriteLine(element.GetProperty("created").ToString());
+            Console.WriteLine(element.GetProperty("model").ToString());
+            Console.WriteLine(element.GetProperty("choices")[0].GetProperty("index").ToString());
+            Console.WriteLine(element.GetProperty("choices")[0].GetProperty("message").GetProperty("role").ToString());
+            Console.WriteLine(element.GetProperty("choices")[0].GetProperty("message").GetProperty("content").ToString());
+            Console.WriteLine(element.GetProperty("choices")[0].GetProperty("finish_reason").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_CreateChatCompletion_ShortVersion_Async()
+        {
+            KeyCredential credential = new KeyCredential("<key>");
+            OpenAIClient client = new OpenAIClient(credential);
+
+            RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
+            {
+                model = "<model>",
+                messages = new object[]
+            {
+new
+{
+role = "system",
+content = "<content>",
+}
+            },
+            }).ToStream());
+            Result result = await client.CreateChatCompletionAsync(content);
+
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("id").ToString());
+            Console.WriteLine(element.GetProperty("object").ToString());
+            Console.WriteLine(element.GetProperty("created").ToString());
+            Console.WriteLine(element.GetProperty("model").ToString());
+            Console.WriteLine(element.GetProperty("choices")[0].GetProperty("index").ToString());
+            Console.WriteLine(element.GetProperty("choices")[0].GetProperty("message").GetProperty("role").ToString());
+            Console.WriteLine(element.GetProperty("choices")[0].GetProperty("message").GetProperty("content").ToString());
+            Console.WriteLine(element.GetProperty("choices")[0].GetProperty("finish_reason").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_CreateChatCompletion_ShortVersion_Convenience()
+        {
+            KeyCredential credential = new KeyCredential("<key>");
+            OpenAIClient client = new OpenAIClient(credential);
+
+            Result<CreateChatCompletionResponse> result = client.CreateChatCompletion(new CreateChatCompletionRequestModel("<model>"), new ChatCompletionRequestMessage[]
+            {
+new ChatCompletionRequestMessage(ChatCompletionRequestMessageRole.System, "<content>")
+            });
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_CreateChatCompletion_ShortVersion_Convenience_Async()
+        {
+            KeyCredential credential = new KeyCredential("<key>");
+            OpenAIClient client = new OpenAIClient(credential);
+
+            Result<CreateChatCompletionResponse> result = await client.CreateChatCompletionAsync(new CreateChatCompletionRequestModel("<model>"), new ChatCompletionRequestMessage[]
+            {
+new ChatCompletionRequestMessage(ChatCompletionRequestMessageRole.System, "<content>")
+            });
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_CreateChatCompletion_AllParameters()
+        {
+            KeyCredential credential = new KeyCredential("<key>");
+            OpenAIClient client = new OpenAIClient(credential);
+
+            RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
+            {
+                model = "<model>",
+                messages = new object[]
+            {
+new
+{
+role = "system",
+content = "<content>",
+name = "<name>",
+function_call = new
+{
+name = "<name>",
+arguments = "<arguments>",
+},
+}
+            },
+                functions = new object[]
+            {
+new
+{
+name = "<name>",
+description = "<description>",
+parameters = new
+{
+key = new object(),
+},
+}
+            },
+                function_call = "none",
+                temperature = 123.45,
+                top_p = 123.45,
+                n = 1234L,
+                max_tokens = 1234L,
+                stop = "<stop>",
+                presence_penalty = 123.45,
+                frequency_penalty = 123.45,
+                logit_bias = new
+                {
+                    key = 1234L,
+                },
+                user = "<user>",
+                stream = true,
+            }).ToStream());
+            Result result = client.CreateChatCompletion(content);
+
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("id").ToString());
+            Console.WriteLine(element.GetProperty("object").ToString());
+            Console.WriteLine(element.GetProperty("created").ToString());
+            Console.WriteLine(element.GetProperty("model").ToString());
+            Console.WriteLine(element.GetProperty("choices")[0].GetProperty("index").ToString());
+            Console.WriteLine(element.GetProperty("choices")[0].GetProperty("message").GetProperty("role").ToString());
+            Console.WriteLine(element.GetProperty("choices")[0].GetProperty("message").GetProperty("content").ToString());
+            Console.WriteLine(element.GetProperty("choices")[0].GetProperty("message").GetProperty("function_call").GetProperty("name").ToString());
+            Console.WriteLine(element.GetProperty("choices")[0].GetProperty("message").GetProperty("function_call").GetProperty("arguments").ToString());
+            Console.WriteLine(element.GetProperty("choices")[0].GetProperty("finish_reason").ToString());
+            Console.WriteLine(element.GetProperty("usage").GetProperty("prompt_tokens").ToString());
+            Console.WriteLine(element.GetProperty("usage").GetProperty("completion_tokens").ToString());
+            Console.WriteLine(element.GetProperty("usage").GetProperty("total_tokens").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_CreateChatCompletion_AllParameters_Async()
+        {
+            KeyCredential credential = new KeyCredential("<key>");
+            OpenAIClient client = new OpenAIClient(credential);
+
+            RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
+            {
+                model = "<model>",
+                messages = new object[]
+            {
+new
+{
+role = "system",
+content = "<content>",
+name = "<name>",
+function_call = new
+{
+name = "<name>",
+arguments = "<arguments>",
+},
+}
+            },
+                functions = new object[]
+            {
+new
+{
+name = "<name>",
+description = "<description>",
+parameters = new
+{
+key = new object(),
+},
+}
+            },
+                function_call = "none",
+                temperature = 123.45,
+                top_p = 123.45,
+                n = 1234L,
+                max_tokens = 1234L,
+                stop = "<stop>",
+                presence_penalty = 123.45,
+                frequency_penalty = 123.45,
+                logit_bias = new
+                {
+                    key = 1234L,
+                },
+                user = "<user>",
+                stream = true,
+            }).ToStream());
+            Result result = await client.CreateChatCompletionAsync(content);
+
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("id").ToString());
+            Console.WriteLine(element.GetProperty("object").ToString());
+            Console.WriteLine(element.GetProperty("created").ToString());
+            Console.WriteLine(element.GetProperty("model").ToString());
+            Console.WriteLine(element.GetProperty("choices")[0].GetProperty("index").ToString());
+            Console.WriteLine(element.GetProperty("choices")[0].GetProperty("message").GetProperty("role").ToString());
+            Console.WriteLine(element.GetProperty("choices")[0].GetProperty("message").GetProperty("content").ToString());
+            Console.WriteLine(element.GetProperty("choices")[0].GetProperty("message").GetProperty("function_call").GetProperty("name").ToString());
+            Console.WriteLine(element.GetProperty("choices")[0].GetProperty("message").GetProperty("function_call").GetProperty("arguments").ToString());
+            Console.WriteLine(element.GetProperty("choices")[0].GetProperty("finish_reason").ToString());
+            Console.WriteLine(element.GetProperty("usage").GetProperty("prompt_tokens").ToString());
+            Console.WriteLine(element.GetProperty("usage").GetProperty("completion_tokens").ToString());
+            Console.WriteLine(element.GetProperty("usage").GetProperty("total_tokens").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_CreateChatCompletion_AllParameters_Convenience()
+        {
+            KeyCredential credential = new KeyCredential("<key>");
+            OpenAIClient client = new OpenAIClient(credential);
+
+            Result<CreateChatCompletionResponse> result = client.CreateChatCompletion(new CreateChatCompletionRequestModel("<model>"), new ChatCompletionRequestMessage[]
+            {
+new ChatCompletionRequestMessage(ChatCompletionRequestMessageRole.System, "<content>")
+{
+Name = "<name>",
+FunctionCall = new CreateChatCompletionFunctionCall("<name>", "<arguments>"),
+}
+            }, functions: new ChatCompletionFunctions[]
+            {
+new ChatCompletionFunctions("<name>", new Dictionary<string, BinaryData>
+{
+["key"] = BinaryData.FromObjectAsJson(new object())
+})
+{
+Description = "<description>",
+}
+            }, functionCall: BinaryData.FromObjectAsJson("none"), temperature: 123.45, topP: 123.45, n: 1234L, maxTokens: 1234L, stop: BinaryData.FromObjectAsJson("<stop>"), presencePenalty: 123.45, frequencyPenalty: 123.45, logitBias: new Dictionary<string, long>
+            {
+                ["key"] = 1234L
+            }, user: "<user>", stream: true);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_CreateChatCompletion_AllParameters_Convenience_Async()
+        {
+            KeyCredential credential = new KeyCredential("<key>");
+            OpenAIClient client = new OpenAIClient(credential);
+
+            Result<CreateChatCompletionResponse> result = await client.CreateChatCompletionAsync(new CreateChatCompletionRequestModel("<model>"), new ChatCompletionRequestMessage[]
+            {
+new ChatCompletionRequestMessage(ChatCompletionRequestMessageRole.System, "<content>")
+{
+Name = "<name>",
+FunctionCall = new CreateChatCompletionFunctionCall("<name>", "<arguments>"),
+}
+            }, functions: new ChatCompletionFunctions[]
+            {
+new ChatCompletionFunctions("<name>", new Dictionary<string, BinaryData>
+{
+["key"] = BinaryData.FromObjectAsJson(new object())
+})
+{
+Description = "<description>",
+}
+            }, functionCall: BinaryData.FromObjectAsJson("none"), temperature: 123.45, topP: 123.45, n: 1234L, maxTokens: 1234L, stop: BinaryData.FromObjectAsJson("<stop>"), presencePenalty: 123.45, frequencyPenalty: 123.45, logitBias: new Dictionary<string, long>
+            {
+                ["key"] = 1234L
+            }, user: "<user>", stream: true);
         }
 
         [Test]
@@ -1110,7 +1084,7 @@ Description = "<description>",
             KeyCredential credential = new KeyCredential("<key>");
             OpenAIClient client = new OpenAIClient(credential);
 
-            Result result = client.GetFineTuningEvents("<fine_tuning_job_id>", null, null);
+            Result result = client.GetFineTuningEvents("<fine_tuning_job_id>", null, null, null);
 
             JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
             Console.WriteLine(element.GetProperty("object").ToString());
@@ -1128,7 +1102,7 @@ Description = "<description>",
             KeyCredential credential = new KeyCredential("<key>");
             OpenAIClient client = new OpenAIClient(credential);
 
-            Result result = await client.GetFineTuningEventsAsync("<fine_tuning_job_id>", null, null);
+            Result result = await client.GetFineTuningEventsAsync("<fine_tuning_job_id>", null, null, null);
 
             JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
             Console.WriteLine(element.GetProperty("object").ToString());
@@ -1166,7 +1140,7 @@ Description = "<description>",
             KeyCredential credential = new KeyCredential("<key>");
             OpenAIClient client = new OpenAIClient(credential);
 
-            Result result = client.GetFineTuningEvents("<fine_tuning_job_id>", "<after>", null);
+            Result result = client.GetFineTuningEvents("<fine_tuning_job_id>", "<after>", 1234, null);
 
             JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
             Console.WriteLine(element.GetProperty("object").ToString());
@@ -1184,7 +1158,7 @@ Description = "<description>",
             KeyCredential credential = new KeyCredential("<key>");
             OpenAIClient client = new OpenAIClient(credential);
 
-            Result result = await client.GetFineTuningEventsAsync("<fine_tuning_job_id>", "<after>", null);
+            Result result = await client.GetFineTuningEventsAsync("<fine_tuning_job_id>", "<after>", 1234, null);
 
             JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
             Console.WriteLine(element.GetProperty("object").ToString());
@@ -1202,7 +1176,7 @@ Description = "<description>",
             KeyCredential credential = new KeyCredential("<key>");
             OpenAIClient client = new OpenAIClient(credential);
 
-            Result<ListFineTuningJobEventsResponse> result = client.GetFineTuningEvents("<fine_tuning_job_id>", after: "<after>");
+            Result<ListFineTuningJobEventsResponse> result = client.GetFineTuningEvents("<fine_tuning_job_id>", after: "<after>", limit: 1234);
         }
 
         [Test]
@@ -1212,7 +1186,7 @@ Description = "<description>",
             KeyCredential credential = new KeyCredential("<key>");
             OpenAIClient client = new OpenAIClient(credential);
 
-            Result<ListFineTuningJobEventsResponse> result = await client.GetFineTuningEventsAsync("<fine_tuning_job_id>", after: "<after>");
+            Result<ListFineTuningJobEventsResponse> result = await client.GetFineTuningEventsAsync("<fine_tuning_job_id>", after: "<after>", limit: 1234);
         }
 
         [Test]
@@ -1426,8 +1400,7 @@ Description = "<description>",
             KeyCredential credential = new KeyCredential("<key>");
             OpenAIClient client = new OpenAIClient(credential);
 
-            CreateCompletionRequest body = new CreateCompletionRequest(new CreateCompletionRequestModel("<model>"), BinaryData.FromObjectAsJson("<prompt>"));
-            Result<CreateCompletionResponse> result = client.CreateCompletion(body);
+            Result<CreateCompletionResponse> result = client.CreateCompletion(new CreateCompletionRequestModel("<model>"), BinaryData.FromObjectAsJson("<prompt>"));
         }
 
         [Test]
@@ -1437,8 +1410,7 @@ Description = "<description>",
             KeyCredential credential = new KeyCredential("<key>");
             OpenAIClient client = new OpenAIClient(credential);
 
-            CreateCompletionRequest body = new CreateCompletionRequest(new CreateCompletionRequestModel("<model>"), BinaryData.FromObjectAsJson("<prompt>"));
-            Result<CreateCompletionResponse> result = await client.CreateCompletionAsync(body);
+            Result<CreateCompletionResponse> result = await client.CreateCompletionAsync(new CreateCompletionRequestModel("<model>"), BinaryData.FromObjectAsJson("<prompt>"));
         }
 
         [Test]
@@ -1544,27 +1516,10 @@ Description = "<description>",
             KeyCredential credential = new KeyCredential("<key>");
             OpenAIClient client = new OpenAIClient(credential);
 
-            CreateCompletionRequest body = new CreateCompletionRequest(new CreateCompletionRequestModel("<model>"), BinaryData.FromObjectAsJson("<prompt>"))
+            Result<CreateCompletionResponse> result = client.CreateCompletion(new CreateCompletionRequestModel("<model>"), BinaryData.FromObjectAsJson("<prompt>"), suffix: "<suffix>", temperature: 123.45, topP: 123.45, n: 1234L, maxTokens: 1234L, stop: BinaryData.FromObjectAsJson("<stop>"), presencePenalty: 123.45, frequencyPenalty: 123.45, logitBias: new Dictionary<string, long>
             {
-                Suffix = "<suffix>",
-                Temperature = 123.45,
-                TopP = 123.45,
-                N = 1234L,
-                MaxTokens = 1234L,
-                Stop = BinaryData.FromObjectAsJson("<stop>"),
-                PresencePenalty = 123.45,
-                FrequencyPenalty = 123.45,
-                LogitBias =
-{
-["key"] = 1234L
-},
-                User = "<user>",
-                Stream = true,
-                Logprobs = 1234L,
-                Echo = true,
-                BestOf = 1234L,
-            };
-            Result<CreateCompletionResponse> result = client.CreateCompletion(body);
+                ["key"] = 1234L
+            }, user: "<user>", stream: true, logprobs: 1234L, echo: true, bestOf: 1234L);
         }
 
         [Test]
@@ -1574,449 +1529,10 @@ Description = "<description>",
             KeyCredential credential = new KeyCredential("<key>");
             OpenAIClient client = new OpenAIClient(credential);
 
-            CreateCompletionRequest body = new CreateCompletionRequest(new CreateCompletionRequestModel("<model>"), BinaryData.FromObjectAsJson("<prompt>"))
+            Result<CreateCompletionResponse> result = await client.CreateCompletionAsync(new CreateCompletionRequestModel("<model>"), BinaryData.FromObjectAsJson("<prompt>"), suffix: "<suffix>", temperature: 123.45, topP: 123.45, n: 1234L, maxTokens: 1234L, stop: BinaryData.FromObjectAsJson("<stop>"), presencePenalty: 123.45, frequencyPenalty: 123.45, logitBias: new Dictionary<string, long>
             {
-                Suffix = "<suffix>",
-                Temperature = 123.45,
-                TopP = 123.45,
-                N = 1234L,
-                MaxTokens = 1234L,
-                Stop = BinaryData.FromObjectAsJson("<stop>"),
-                PresencePenalty = 123.45,
-                FrequencyPenalty = 123.45,
-                LogitBias =
-{
-["key"] = 1234L
-},
-                User = "<user>",
-                Stream = true,
-                Logprobs = 1234L,
-                Echo = true,
-                BestOf = 1234L,
-            };
-            Result<CreateCompletionResponse> result = await client.CreateCompletionAsync(body);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_CreateImage_ShortVersion()
-        {
-            KeyCredential credential = new KeyCredential("<key>");
-            OpenAIClient client = new OpenAIClient(credential);
-
-            RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
-            {
-                prompt = "<prompt>",
-            }).ToStream());
-            Result result = client.CreateImage(content);
-
-            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(element.GetProperty("created").ToString());
-            Console.WriteLine(element.GetProperty("data")[0].ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_CreateImage_ShortVersion_Async()
-        {
-            KeyCredential credential = new KeyCredential("<key>");
-            OpenAIClient client = new OpenAIClient(credential);
-
-            RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
-            {
-                prompt = "<prompt>",
-            }).ToStream());
-            Result result = await client.CreateImageAsync(content);
-
-            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(element.GetProperty("created").ToString());
-            Console.WriteLine(element.GetProperty("data")[0].ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_CreateImage_ShortVersion_Convenience()
-        {
-            KeyCredential credential = new KeyCredential("<key>");
-            OpenAIClient client = new OpenAIClient(credential);
-
-            CreateImageRequest image = new CreateImageRequest("<prompt>");
-            Result<ImagesResponse> result = client.CreateImage(image);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_CreateImage_ShortVersion_Convenience_Async()
-        {
-            KeyCredential credential = new KeyCredential("<key>");
-            OpenAIClient client = new OpenAIClient(credential);
-
-            CreateImageRequest image = new CreateImageRequest("<prompt>");
-            Result<ImagesResponse> result = await client.CreateImageAsync(image);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_CreateImage_AllParameters()
-        {
-            KeyCredential credential = new KeyCredential("<key>");
-            OpenAIClient client = new OpenAIClient(credential);
-
-            RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
-            {
-                prompt = "<prompt>",
-                n = 1234L,
-                size = "256x256",
-                response_format = "url",
-                user = "<user>",
-            }).ToStream());
-            Result result = client.CreateImage(content);
-
-            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(element.GetProperty("created").ToString());
-            Console.WriteLine(element.GetProperty("data")[0].GetProperty("url").ToString());
-            Console.WriteLine(element.GetProperty("data")[0].GetProperty("b64_json").ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_CreateImage_AllParameters_Async()
-        {
-            KeyCredential credential = new KeyCredential("<key>");
-            OpenAIClient client = new OpenAIClient(credential);
-
-            RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
-            {
-                prompt = "<prompt>",
-                n = 1234L,
-                size = "256x256",
-                response_format = "url",
-                user = "<user>",
-            }).ToStream());
-            Result result = await client.CreateImageAsync(content);
-
-            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(element.GetProperty("created").ToString());
-            Console.WriteLine(element.GetProperty("data")[0].GetProperty("url").ToString());
-            Console.WriteLine(element.GetProperty("data")[0].GetProperty("b64_json").ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_CreateImage_AllParameters_Convenience()
-        {
-            KeyCredential credential = new KeyCredential("<key>");
-            OpenAIClient client = new OpenAIClient(credential);
-
-            CreateImageRequest image = new CreateImageRequest("<prompt>")
-            {
-                N = 1234L,
-                Size = CreateImageRequestSize._256x256,
-                ResponseFormat = CreateImageRequestResponseFormat.Url,
-                User = "<user>",
-            };
-            Result<ImagesResponse> result = client.CreateImage(image);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_CreateImage_AllParameters_Convenience_Async()
-        {
-            KeyCredential credential = new KeyCredential("<key>");
-            OpenAIClient client = new OpenAIClient(credential);
-
-            CreateImageRequest image = new CreateImageRequest("<prompt>")
-            {
-                N = 1234L,
-                Size = CreateImageRequestSize._256x256,
-                ResponseFormat = CreateImageRequestResponseFormat.Url,
-                User = "<user>",
-            };
-            Result<ImagesResponse> result = await client.CreateImageAsync(image);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_CreateImageEdit_ShortVersion()
-        {
-            KeyCredential credential = new KeyCredential("<key>");
-            OpenAIClient client = new OpenAIClient(credential);
-
-            RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
-            {
-                prompt = "<prompt>",
-                image = new object(),
-            }).ToStream());
-            Result result = client.CreateImageEdit(content);
-
-            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(element.GetProperty("created").ToString());
-            Console.WriteLine(element.GetProperty("data")[0].ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_CreateImageEdit_ShortVersion_Async()
-        {
-            KeyCredential credential = new KeyCredential("<key>");
-            OpenAIClient client = new OpenAIClient(credential);
-
-            RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
-            {
-                prompt = "<prompt>",
-                image = new object(),
-            }).ToStream());
-            Result result = await client.CreateImageEditAsync(content);
-
-            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(element.GetProperty("created").ToString());
-            Console.WriteLine(element.GetProperty("data")[0].ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_CreateImageEdit_ShortVersion_Convenience()
-        {
-            KeyCredential credential = new KeyCredential("<key>");
-            OpenAIClient client = new OpenAIClient(credential);
-
-            CreateImageEditRequest image = new CreateImageEditRequest("<prompt>", BinaryData.FromObjectAsJson(new object()));
-            Result<ImagesResponse> result = client.CreateImageEdit(image);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_CreateImageEdit_ShortVersion_Convenience_Async()
-        {
-            KeyCredential credential = new KeyCredential("<key>");
-            OpenAIClient client = new OpenAIClient(credential);
-
-            CreateImageEditRequest image = new CreateImageEditRequest("<prompt>", BinaryData.FromObjectAsJson(new object()));
-            Result<ImagesResponse> result = await client.CreateImageEditAsync(image);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_CreateImageEdit_AllParameters()
-        {
-            KeyCredential credential = new KeyCredential("<key>");
-            OpenAIClient client = new OpenAIClient(credential);
-
-            RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
-            {
-                prompt = "<prompt>",
-                image = new object(),
-                mask = new object(),
-                n = 1234L,
-                size = "256x256",
-                response_format = "url",
-                user = "<user>",
-            }).ToStream());
-            Result result = client.CreateImageEdit(content);
-
-            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(element.GetProperty("created").ToString());
-            Console.WriteLine(element.GetProperty("data")[0].GetProperty("url").ToString());
-            Console.WriteLine(element.GetProperty("data")[0].GetProperty("b64_json").ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_CreateImageEdit_AllParameters_Async()
-        {
-            KeyCredential credential = new KeyCredential("<key>");
-            OpenAIClient client = new OpenAIClient(credential);
-
-            RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
-            {
-                prompt = "<prompt>",
-                image = new object(),
-                mask = new object(),
-                n = 1234L,
-                size = "256x256",
-                response_format = "url",
-                user = "<user>",
-            }).ToStream());
-            Result result = await client.CreateImageEditAsync(content);
-
-            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(element.GetProperty("created").ToString());
-            Console.WriteLine(element.GetProperty("data")[0].GetProperty("url").ToString());
-            Console.WriteLine(element.GetProperty("data")[0].GetProperty("b64_json").ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_CreateImageEdit_AllParameters_Convenience()
-        {
-            KeyCredential credential = new KeyCredential("<key>");
-            OpenAIClient client = new OpenAIClient(credential);
-
-            CreateImageEditRequest image = new CreateImageEditRequest("<prompt>", BinaryData.FromObjectAsJson(new object()))
-            {
-                Mask = BinaryData.FromObjectAsJson(new object()),
-                N = 1234L,
-                Size = CreateImageEditRequestSize._256x256,
-                ResponseFormat = CreateImageEditRequestResponseFormat.Url,
-                User = "<user>",
-            };
-            Result<ImagesResponse> result = client.CreateImageEdit(image);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_CreateImageEdit_AllParameters_Convenience_Async()
-        {
-            KeyCredential credential = new KeyCredential("<key>");
-            OpenAIClient client = new OpenAIClient(credential);
-
-            CreateImageEditRequest image = new CreateImageEditRequest("<prompt>", BinaryData.FromObjectAsJson(new object()))
-            {
-                Mask = BinaryData.FromObjectAsJson(new object()),
-                N = 1234L,
-                Size = CreateImageEditRequestSize._256x256,
-                ResponseFormat = CreateImageEditRequestResponseFormat.Url,
-                User = "<user>",
-            };
-            Result<ImagesResponse> result = await client.CreateImageEditAsync(image);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_CreateImageVariation_ShortVersion()
-        {
-            KeyCredential credential = new KeyCredential("<key>");
-            OpenAIClient client = new OpenAIClient(credential);
-
-            RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
-            {
-                image = new object(),
-            }).ToStream());
-            Result result = client.CreateImageVariation(content);
-
-            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(element.GetProperty("created").ToString());
-            Console.WriteLine(element.GetProperty("data")[0].ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_CreateImageVariation_ShortVersion_Async()
-        {
-            KeyCredential credential = new KeyCredential("<key>");
-            OpenAIClient client = new OpenAIClient(credential);
-
-            RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
-            {
-                image = new object(),
-            }).ToStream());
-            Result result = await client.CreateImageVariationAsync(content);
-
-            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(element.GetProperty("created").ToString());
-            Console.WriteLine(element.GetProperty("data")[0].ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_CreateImageVariation_ShortVersion_Convenience()
-        {
-            KeyCredential credential = new KeyCredential("<key>");
-            OpenAIClient client = new OpenAIClient(credential);
-
-            CreateImageVariationRequest image = new CreateImageVariationRequest(BinaryData.FromObjectAsJson(new object()));
-            Result<ImagesResponse> result = client.CreateImageVariation(image);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_CreateImageVariation_ShortVersion_Convenience_Async()
-        {
-            KeyCredential credential = new KeyCredential("<key>");
-            OpenAIClient client = new OpenAIClient(credential);
-
-            CreateImageVariationRequest image = new CreateImageVariationRequest(BinaryData.FromObjectAsJson(new object()));
-            Result<ImagesResponse> result = await client.CreateImageVariationAsync(image);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_CreateImageVariation_AllParameters()
-        {
-            KeyCredential credential = new KeyCredential("<key>");
-            OpenAIClient client = new OpenAIClient(credential);
-
-            RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
-            {
-                image = new object(),
-                n = 1234L,
-                size = "256x256",
-                response_format = "url",
-                user = "<user>",
-            }).ToStream());
-            Result result = client.CreateImageVariation(content);
-
-            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(element.GetProperty("created").ToString());
-            Console.WriteLine(element.GetProperty("data")[0].GetProperty("url").ToString());
-            Console.WriteLine(element.GetProperty("data")[0].GetProperty("b64_json").ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_CreateImageVariation_AllParameters_Async()
-        {
-            KeyCredential credential = new KeyCredential("<key>");
-            OpenAIClient client = new OpenAIClient(credential);
-
-            RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
-            {
-                image = new object(),
-                n = 1234L,
-                size = "256x256",
-                response_format = "url",
-                user = "<user>",
-            }).ToStream());
-            Result result = await client.CreateImageVariationAsync(content);
-
-            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
-            Console.WriteLine(element.GetProperty("created").ToString());
-            Console.WriteLine(element.GetProperty("data")[0].GetProperty("url").ToString());
-            Console.WriteLine(element.GetProperty("data")[0].GetProperty("b64_json").ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_CreateImageVariation_AllParameters_Convenience()
-        {
-            KeyCredential credential = new KeyCredential("<key>");
-            OpenAIClient client = new OpenAIClient(credential);
-
-            CreateImageVariationRequest image = new CreateImageVariationRequest(BinaryData.FromObjectAsJson(new object()))
-            {
-                N = 1234L,
-                Size = CreateImageVariationRequestSize._256x256,
-                ResponseFormat = CreateImageVariationRequestResponseFormat.Url,
-                User = "<user>",
-            };
-            Result<ImagesResponse> result = client.CreateImageVariation(image);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_CreateImageVariation_AllParameters_Convenience_Async()
-        {
-            KeyCredential credential = new KeyCredential("<key>");
-            OpenAIClient client = new OpenAIClient(credential);
-
-            CreateImageVariationRequest image = new CreateImageVariationRequest(BinaryData.FromObjectAsJson(new object()))
-            {
-                N = 1234L,
-                Size = CreateImageVariationRequestSize._256x256,
-                ResponseFormat = CreateImageVariationRequestResponseFormat.Url,
-                User = "<user>",
-            };
-            Result<ImagesResponse> result = await client.CreateImageVariationAsync(image);
+                ["key"] = 1234L
+            }, user: "<user>", stream: true, logprobs: 1234L, echo: true, bestOf: 1234L);
         }
 
         [Test]
@@ -2851,12 +2367,12 @@ Description = "<description>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_RetrieveModel_ShortVersion()
+        public void Example_Retrieve_ShortVersion()
         {
             KeyCredential credential = new KeyCredential("<key>");
             OpenAIClient client = new OpenAIClient(credential);
 
-            Result result = client.RetrieveModel("<model>", null);
+            Result result = client.Retrieve("<model>", null);
 
             JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
             Console.WriteLine(element.GetProperty("id").ToString());
@@ -2867,12 +2383,12 @@ Description = "<description>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_RetrieveModel_ShortVersion_Async()
+        public async Task Example_Retrieve_ShortVersion_Async()
         {
             KeyCredential credential = new KeyCredential("<key>");
             OpenAIClient client = new OpenAIClient(credential);
 
-            Result result = await client.RetrieveModelAsync("<model>", null);
+            Result result = await client.RetrieveAsync("<model>", null);
 
             JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
             Console.WriteLine(element.GetProperty("id").ToString());
@@ -2883,32 +2399,32 @@ Description = "<description>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_RetrieveModel_ShortVersion_Convenience()
+        public void Example_Retrieve_ShortVersion_Convenience()
         {
             KeyCredential credential = new KeyCredential("<key>");
             OpenAIClient client = new OpenAIClient(credential);
 
-            Result<Model> result = client.RetrieveModel("<model>");
+            Result<Model> result = client.Retrieve("<model>");
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_RetrieveModel_ShortVersion_Convenience_Async()
+        public async Task Example_Retrieve_ShortVersion_Convenience_Async()
         {
             KeyCredential credential = new KeyCredential("<key>");
             OpenAIClient client = new OpenAIClient(credential);
 
-            Result<Model> result = await client.RetrieveModelAsync("<model>");
+            Result<Model> result = await client.RetrieveAsync("<model>");
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_RetrieveModel_AllParameters()
+        public void Example_Retrieve_AllParameters()
         {
             KeyCredential credential = new KeyCredential("<key>");
             OpenAIClient client = new OpenAIClient(credential);
 
-            Result result = client.RetrieveModel("<model>", null);
+            Result result = client.Retrieve("<model>", null);
 
             JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
             Console.WriteLine(element.GetProperty("id").ToString());
@@ -2919,12 +2435,12 @@ Description = "<description>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_RetrieveModel_AllParameters_Async()
+        public async Task Example_Retrieve_AllParameters_Async()
         {
             KeyCredential credential = new KeyCredential("<key>");
             OpenAIClient client = new OpenAIClient(credential);
 
-            Result result = await client.RetrieveModelAsync("<model>", null);
+            Result result = await client.RetrieveAsync("<model>", null);
 
             JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
             Console.WriteLine(element.GetProperty("id").ToString());
@@ -2935,32 +2451,32 @@ Description = "<description>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_RetrieveModel_AllParameters_Convenience()
+        public void Example_Retrieve_AllParameters_Convenience()
         {
             KeyCredential credential = new KeyCredential("<key>");
             OpenAIClient client = new OpenAIClient(credential);
 
-            Result<Model> result = client.RetrieveModel("<model>");
+            Result<Model> result = client.Retrieve("<model>");
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_RetrieveModel_AllParameters_Convenience_Async()
+        public async Task Example_Retrieve_AllParameters_Convenience_Async()
         {
             KeyCredential credential = new KeyCredential("<key>");
             OpenAIClient client = new OpenAIClient(credential);
 
-            Result<Model> result = await client.RetrieveModelAsync("<model>");
+            Result<Model> result = await client.RetrieveAsync("<model>");
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_DeleteModel_ShortVersion()
+        public void Example_Delete_ShortVersion()
         {
             KeyCredential credential = new KeyCredential("<key>");
             OpenAIClient client = new OpenAIClient(credential);
 
-            Result result = client.DeleteModel("<model>", null);
+            Result result = client.Delete("<model>", null);
 
             JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
             Console.WriteLine(element.GetProperty("id").ToString());
@@ -2970,12 +2486,12 @@ Description = "<description>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_DeleteModel_ShortVersion_Async()
+        public async Task Example_Delete_ShortVersion_Async()
         {
             KeyCredential credential = new KeyCredential("<key>");
             OpenAIClient client = new OpenAIClient(credential);
 
-            Result result = await client.DeleteModelAsync("<model>", null);
+            Result result = await client.DeleteAsync("<model>", null);
 
             JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
             Console.WriteLine(element.GetProperty("id").ToString());
@@ -2985,32 +2501,32 @@ Description = "<description>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_DeleteModel_ShortVersion_Convenience()
+        public void Example_Delete_ShortVersion_Convenience()
         {
             KeyCredential credential = new KeyCredential("<key>");
             OpenAIClient client = new OpenAIClient(credential);
 
-            Result<DeleteModelResponse> result = client.DeleteModel("<model>");
+            Result<DeleteModelResponse> result = client.Delete("<model>");
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_DeleteModel_ShortVersion_Convenience_Async()
+        public async Task Example_Delete_ShortVersion_Convenience_Async()
         {
             KeyCredential credential = new KeyCredential("<key>");
             OpenAIClient client = new OpenAIClient(credential);
 
-            Result<DeleteModelResponse> result = await client.DeleteModelAsync("<model>");
+            Result<DeleteModelResponse> result = await client.DeleteAsync("<model>");
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_DeleteModel_AllParameters()
+        public void Example_Delete_AllParameters()
         {
             KeyCredential credential = new KeyCredential("<key>");
             OpenAIClient client = new OpenAIClient(credential);
 
-            Result result = client.DeleteModel("<model>", null);
+            Result result = client.Delete("<model>", null);
 
             JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
             Console.WriteLine(element.GetProperty("id").ToString());
@@ -3020,12 +2536,12 @@ Description = "<description>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_DeleteModel_AllParameters_Async()
+        public async Task Example_Delete_AllParameters_Async()
         {
             KeyCredential credential = new KeyCredential("<key>");
             OpenAIClient client = new OpenAIClient(credential);
 
-            Result result = await client.DeleteModelAsync("<model>", null);
+            Result result = await client.DeleteAsync("<model>", null);
 
             JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
             Console.WriteLine(element.GetProperty("id").ToString());
@@ -3035,22 +2551,444 @@ Description = "<description>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_DeleteModel_AllParameters_Convenience()
+        public void Example_Delete_AllParameters_Convenience()
         {
             KeyCredential credential = new KeyCredential("<key>");
             OpenAIClient client = new OpenAIClient(credential);
 
-            Result<DeleteModelResponse> result = client.DeleteModel("<model>");
+            Result<DeleteModelResponse> result = client.Delete("<model>");
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_DeleteModel_AllParameters_Convenience_Async()
+        public async Task Example_Delete_AllParameters_Convenience_Async()
         {
             KeyCredential credential = new KeyCredential("<key>");
             OpenAIClient client = new OpenAIClient(credential);
 
-            Result<DeleteModelResponse> result = await client.DeleteModelAsync("<model>");
+            Result<DeleteModelResponse> result = await client.DeleteAsync("<model>");
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_CreateImage_ShortVersion()
+        {
+            KeyCredential credential = new KeyCredential("<key>");
+            OpenAIClient client = new OpenAIClient(credential);
+
+            RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
+            {
+                prompt = "<prompt>",
+            }).ToStream());
+            Result result = client.CreateImage(content);
+
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("created").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_CreateImage_ShortVersion_Async()
+        {
+            KeyCredential credential = new KeyCredential("<key>");
+            OpenAIClient client = new OpenAIClient(credential);
+
+            RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
+            {
+                prompt = "<prompt>",
+            }).ToStream());
+            Result result = await client.CreateImageAsync(content);
+
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("created").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_CreateImage_ShortVersion_Convenience()
+        {
+            KeyCredential credential = new KeyCredential("<key>");
+            OpenAIClient client = new OpenAIClient(credential);
+
+            CreateImageRequest image = new CreateImageRequest("<prompt>");
+            Result<ImagesResponse> result = client.CreateImage(image);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_CreateImage_ShortVersion_Convenience_Async()
+        {
+            KeyCredential credential = new KeyCredential("<key>");
+            OpenAIClient client = new OpenAIClient(credential);
+
+            CreateImageRequest image = new CreateImageRequest("<prompt>");
+            Result<ImagesResponse> result = await client.CreateImageAsync(image);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_CreateImage_AllParameters()
+        {
+            KeyCredential credential = new KeyCredential("<key>");
+            OpenAIClient client = new OpenAIClient(credential);
+
+            RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
+            {
+                prompt = "<prompt>",
+                n = 1234L,
+                size = "256x256",
+                response_format = "url",
+                user = "<user>",
+            }).ToStream());
+            Result result = client.CreateImage(content);
+
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("created").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("url").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("b64_json").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_CreateImage_AllParameters_Async()
+        {
+            KeyCredential credential = new KeyCredential("<key>");
+            OpenAIClient client = new OpenAIClient(credential);
+
+            RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
+            {
+                prompt = "<prompt>",
+                n = 1234L,
+                size = "256x256",
+                response_format = "url",
+                user = "<user>",
+            }).ToStream());
+            Result result = await client.CreateImageAsync(content);
+
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("created").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("url").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("b64_json").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_CreateImage_AllParameters_Convenience()
+        {
+            KeyCredential credential = new KeyCredential("<key>");
+            OpenAIClient client = new OpenAIClient(credential);
+
+            CreateImageRequest image = new CreateImageRequest("<prompt>")
+            {
+                N = 1234L,
+                Size = CreateImageRequestSize._256x256,
+                ResponseFormat = CreateImageRequestResponseFormat.Url,
+                User = "<user>",
+            };
+            Result<ImagesResponse> result = client.CreateImage(image);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_CreateImage_AllParameters_Convenience_Async()
+        {
+            KeyCredential credential = new KeyCredential("<key>");
+            OpenAIClient client = new OpenAIClient(credential);
+
+            CreateImageRequest image = new CreateImageRequest("<prompt>")
+            {
+                N = 1234L,
+                Size = CreateImageRequestSize._256x256,
+                ResponseFormat = CreateImageRequestResponseFormat.Url,
+                User = "<user>",
+            };
+            Result<ImagesResponse> result = await client.CreateImageAsync(image);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_CreateImageEdit_ShortVersion()
+        {
+            KeyCredential credential = new KeyCredential("<key>");
+            OpenAIClient client = new OpenAIClient(credential);
+
+            RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
+            {
+                prompt = "<prompt>",
+                image = new object(),
+            }).ToStream());
+            Result result = client.CreateImageEdit(content);
+
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("created").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_CreateImageEdit_ShortVersion_Async()
+        {
+            KeyCredential credential = new KeyCredential("<key>");
+            OpenAIClient client = new OpenAIClient(credential);
+
+            RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
+            {
+                prompt = "<prompt>",
+                image = new object(),
+            }).ToStream());
+            Result result = await client.CreateImageEditAsync(content);
+
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("created").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_CreateImageEdit_ShortVersion_Convenience()
+        {
+            KeyCredential credential = new KeyCredential("<key>");
+            OpenAIClient client = new OpenAIClient(credential);
+
+            CreateImageEditRequest image = new CreateImageEditRequest("<prompt>", BinaryData.FromObjectAsJson(new object()));
+            Result<ImagesResponse> result = client.CreateImageEdit(image);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_CreateImageEdit_ShortVersion_Convenience_Async()
+        {
+            KeyCredential credential = new KeyCredential("<key>");
+            OpenAIClient client = new OpenAIClient(credential);
+
+            CreateImageEditRequest image = new CreateImageEditRequest("<prompt>", BinaryData.FromObjectAsJson(new object()));
+            Result<ImagesResponse> result = await client.CreateImageEditAsync(image);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_CreateImageEdit_AllParameters()
+        {
+            KeyCredential credential = new KeyCredential("<key>");
+            OpenAIClient client = new OpenAIClient(credential);
+
+            RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
+            {
+                prompt = "<prompt>",
+                image = new object(),
+                mask = new object(),
+                n = 1234L,
+                size = "256x256",
+                response_format = "url",
+                user = "<user>",
+            }).ToStream());
+            Result result = client.CreateImageEdit(content);
+
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("created").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("url").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("b64_json").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_CreateImageEdit_AllParameters_Async()
+        {
+            KeyCredential credential = new KeyCredential("<key>");
+            OpenAIClient client = new OpenAIClient(credential);
+
+            RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
+            {
+                prompt = "<prompt>",
+                image = new object(),
+                mask = new object(),
+                n = 1234L,
+                size = "256x256",
+                response_format = "url",
+                user = "<user>",
+            }).ToStream());
+            Result result = await client.CreateImageEditAsync(content);
+
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("created").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("url").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("b64_json").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_CreateImageEdit_AllParameters_Convenience()
+        {
+            KeyCredential credential = new KeyCredential("<key>");
+            OpenAIClient client = new OpenAIClient(credential);
+
+            CreateImageEditRequest image = new CreateImageEditRequest("<prompt>", BinaryData.FromObjectAsJson(new object()))
+            {
+                Mask = BinaryData.FromObjectAsJson(new object()),
+                N = 1234L,
+                Size = CreateImageEditRequestSize._256x256,
+                ResponseFormat = CreateImageEditRequestResponseFormat.Url,
+                User = "<user>",
+            };
+            Result<ImagesResponse> result = client.CreateImageEdit(image);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_CreateImageEdit_AllParameters_Convenience_Async()
+        {
+            KeyCredential credential = new KeyCredential("<key>");
+            OpenAIClient client = new OpenAIClient(credential);
+
+            CreateImageEditRequest image = new CreateImageEditRequest("<prompt>", BinaryData.FromObjectAsJson(new object()))
+            {
+                Mask = BinaryData.FromObjectAsJson(new object()),
+                N = 1234L,
+                Size = CreateImageEditRequestSize._256x256,
+                ResponseFormat = CreateImageEditRequestResponseFormat.Url,
+                User = "<user>",
+            };
+            Result<ImagesResponse> result = await client.CreateImageEditAsync(image);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_CreateImageVariation_ShortVersion()
+        {
+            KeyCredential credential = new KeyCredential("<key>");
+            OpenAIClient client = new OpenAIClient(credential);
+
+            RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
+            {
+                image = new object(),
+            }).ToStream());
+            Result result = client.CreateImageVariation(content);
+
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("created").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_CreateImageVariation_ShortVersion_Async()
+        {
+            KeyCredential credential = new KeyCredential("<key>");
+            OpenAIClient client = new OpenAIClient(credential);
+
+            RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
+            {
+                image = new object(),
+            }).ToStream());
+            Result result = await client.CreateImageVariationAsync(content);
+
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("created").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_CreateImageVariation_ShortVersion_Convenience()
+        {
+            KeyCredential credential = new KeyCredential("<key>");
+            OpenAIClient client = new OpenAIClient(credential);
+
+            CreateImageVariationRequest image = new CreateImageVariationRequest(BinaryData.FromObjectAsJson(new object()));
+            Result<ImagesResponse> result = client.CreateImageVariation(image);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_CreateImageVariation_ShortVersion_Convenience_Async()
+        {
+            KeyCredential credential = new KeyCredential("<key>");
+            OpenAIClient client = new OpenAIClient(credential);
+
+            CreateImageVariationRequest image = new CreateImageVariationRequest(BinaryData.FromObjectAsJson(new object()));
+            Result<ImagesResponse> result = await client.CreateImageVariationAsync(image);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_CreateImageVariation_AllParameters()
+        {
+            KeyCredential credential = new KeyCredential("<key>");
+            OpenAIClient client = new OpenAIClient(credential);
+
+            RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
+            {
+                image = new object(),
+                n = 1234L,
+                size = "256x256",
+                response_format = "url",
+                user = "<user>",
+            }).ToStream());
+            Result result = client.CreateImageVariation(content);
+
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("created").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("url").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("b64_json").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_CreateImageVariation_AllParameters_Async()
+        {
+            KeyCredential credential = new KeyCredential("<key>");
+            OpenAIClient client = new OpenAIClient(credential);
+
+            RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
+            {
+                image = new object(),
+                n = 1234L,
+                size = "256x256",
+                response_format = "url",
+                user = "<user>",
+            }).ToStream());
+            Result result = await client.CreateImageVariationAsync(content);
+
+            JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).RootElement;
+            Console.WriteLine(element.GetProperty("created").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("url").ToString());
+            Console.WriteLine(element.GetProperty("data")[0].GetProperty("b64_json").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_CreateImageVariation_AllParameters_Convenience()
+        {
+            KeyCredential credential = new KeyCredential("<key>");
+            OpenAIClient client = new OpenAIClient(credential);
+
+            CreateImageVariationRequest image = new CreateImageVariationRequest(BinaryData.FromObjectAsJson(new object()))
+            {
+                N = 1234L,
+                Size = CreateImageVariationRequestSize._256x256,
+                ResponseFormat = CreateImageVariationRequestResponseFormat.Url,
+                User = "<user>",
+            };
+            Result<ImagesResponse> result = client.CreateImageVariation(image);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_CreateImageVariation_AllParameters_Convenience_Async()
+        {
+            KeyCredential credential = new KeyCredential("<key>");
+            OpenAIClient client = new OpenAIClient(credential);
+
+            CreateImageVariationRequest image = new CreateImageVariationRequest(BinaryData.FromObjectAsJson(new object()))
+            {
+                N = 1234L,
+                Size = CreateImageVariationRequestSize._256x256,
+                ResponseFormat = CreateImageVariationRequestResponseFormat.Url,
+                User = "<user>",
+            };
+            Result<ImagesResponse> result = await client.CreateImageVariationAsync(image);
         }
 
         [Test]

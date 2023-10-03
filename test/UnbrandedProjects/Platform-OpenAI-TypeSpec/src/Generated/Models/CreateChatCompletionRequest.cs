@@ -14,7 +14,7 @@ using System.ServiceModel.Rest.Experimental.Core.Serialization;
 namespace OpenAI.Models
 {
     /// <summary> The CreateChatCompletionRequest. </summary>
-    public partial class CreateChatCompletionRequest
+    internal partial class CreateChatCompletionRequest
     {
         /// <summary> Initializes a new instance of CreateChatCompletionRequest. </summary>
         /// <param name="model">

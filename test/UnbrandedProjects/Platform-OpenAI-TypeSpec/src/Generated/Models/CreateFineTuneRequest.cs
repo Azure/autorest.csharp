@@ -28,20 +28,13 @@ namespace OpenAI.Models
         /// See the [fine-tuning guide](/docs/guides/legacy-fine-tuning/creating-training-data) for more
         /// details.
         /// </param>
-        /// <param name="suffix">
-        /// A string of up to 18 characters that will be added to your fine-tuned model name.
-        ///
-        /// For example, a `suffix` of "custom-model-name" would produce a model name like
-        /// `ada:ft-your-org:custom-model-name-2022-02-15-04-21-04`.
-        /// </param>
         /// <exception cref="ArgumentNullException"> <paramref name="trainingFile"/> is null. </exception>
-        public CreateFineTuneRequest(string trainingFile, string suffix)
+        public CreateFineTuneRequest(string trainingFile)
         {
             ClientUtilities.AssertNotNull(trainingFile, nameof(trainingFile));
 
             TrainingFile = trainingFile;
             ClassificationBetas = new OptionalList<double>();
-            Suffix = suffix;
         }
 
         /// <summary> Initializes a new instance of CreateFineTuneRequest. </summary>
@@ -262,6 +255,6 @@ namespace OpenAI.Models
         /// For example, a `suffix` of "custom-model-name" would produce a model name like
         /// `ada:ft-your-org:custom-model-name-2022-02-15-04-21-04`.
         /// </summary>
-        public string Suffix { get; }
+        public string Suffix { get; set; }
     }
 }

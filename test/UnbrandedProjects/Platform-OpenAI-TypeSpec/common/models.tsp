@@ -27,3 +27,13 @@ model DeleteModelResponse {
   object: string;
   deleted: boolean;
 }
+
+// this is using yaml refs instead of a def in the openapi, not sure if that's required?
+
+scalar User extends string;
+
+@minItems(1)
+model TokenArray is safeint[];
+
+@minItems(1)
+model TokenArrayArray is TokenArray[];

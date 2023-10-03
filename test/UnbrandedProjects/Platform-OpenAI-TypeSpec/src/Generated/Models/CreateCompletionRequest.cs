@@ -13,7 +13,7 @@ using System.ServiceModel.Rest.Experimental.Core.Serialization;
 namespace OpenAI.Models
 {
     /// <summary> The CreateCompletionRequest. </summary>
-    public partial class CreateCompletionRequest
+    internal partial class CreateCompletionRequest
     {
         /// <summary> Initializes a new instance of CreateCompletionRequest. </summary>
         /// <param name="model">
