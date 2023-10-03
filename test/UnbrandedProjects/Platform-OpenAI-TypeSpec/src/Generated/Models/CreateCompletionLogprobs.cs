@@ -12,16 +12,16 @@ using System.ServiceModel.Rest.Experimental;
 
 namespace OpenAI.Models
 {
-    /// <summary> log probs. </summary>
-    public partial class LogProbs
+    /// <summary> The CreateCompletionLogprobs. </summary>
+    public partial class CreateCompletionLogprobs
     {
-        /// <summary> Initializes a new instance of LogProbs. </summary>
+        /// <summary> Initializes a new instance of CreateCompletionLogprobs. </summary>
         /// <param name="tokens"></param>
         /// <param name="tokenLogprobs"></param>
         /// <param name="topLogprobs"></param>
         /// <param name="textOffset"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="tokens"/>, <paramref name="tokenLogprobs"/>, <paramref name="topLogprobs"/> or <paramref name="textOffset"/> is null. </exception>
-        internal LogProbs(IEnumerable<string> tokens, IEnumerable<double> tokenLogprobs, IEnumerable<IDictionary<string, long>> topLogprobs, IEnumerable<long> textOffset)
+        internal CreateCompletionLogprobs(IEnumerable<string> tokens, IEnumerable<double> tokenLogprobs, IEnumerable<IDictionary<string, long>> topLogprobs, IEnumerable<long> textOffset)
         {
             ClientUtilities.AssertNotNull(tokens, nameof(tokens));
             ClientUtilities.AssertNotNull(tokenLogprobs, nameof(tokenLogprobs));
@@ -34,12 +34,12 @@ namespace OpenAI.Models
             TextOffset = textOffset.ToList();
         }
 
-        /// <summary> Initializes a new instance of LogProbs. </summary>
+        /// <summary> Initializes a new instance of CreateCompletionLogprobs. </summary>
         /// <param name="tokens"></param>
         /// <param name="tokenLogprobs"></param>
         /// <param name="topLogprobs"></param>
         /// <param name="textOffset"></param>
-        internal LogProbs(IReadOnlyList<string> tokens, IReadOnlyList<double> tokenLogprobs, IReadOnlyList<IDictionary<string, long>> topLogprobs, IReadOnlyList<long> textOffset)
+        internal CreateCompletionLogprobs(IReadOnlyList<string> tokens, IReadOnlyList<double> tokenLogprobs, IReadOnlyList<IDictionary<string, long>> topLogprobs, IReadOnlyList<long> textOffset)
         {
             Tokens = tokens;
             TokenLogprobs = tokenLogprobs;

@@ -6,24 +6,13 @@
 #nullable disable
 
 using System.ServiceModel.Rest.Core;
-using System.ServiceModel.Rest.Experimental.Core.Serialization;
 using System.Text.Json;
 
 namespace OpenAI.Models
 {
-    public partial class FunctionCall : IUtf8JsonWriteable
+    public partial class CreateChatCompletionResponseFunctionCall
     {
-        void IUtf8JsonWriteable.Write(Utf8JsonWriter writer)
-        {
-            writer.WriteStartObject();
-            writer.WritePropertyName("name"u8);
-            writer.WriteStringValue(Name);
-            writer.WritePropertyName("arguments"u8);
-            writer.WriteStringValue(Arguments);
-            writer.WriteEndObject();
-        }
-
-        internal static FunctionCall DeserializeFunctionCall(JsonElement element)
+        internal static CreateChatCompletionResponseFunctionCall DeserializeCreateChatCompletionResponseFunctionCall(JsonElement element)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -44,23 +33,15 @@ namespace OpenAI.Models
                     continue;
                 }
             }
-            return new FunctionCall(name, arguments);
+            return new CreateChatCompletionResponseFunctionCall(name, arguments);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="result"> The result to deserialize the model from. </param>
-        internal static FunctionCall FromResponse(PipelineResponse result)
+        internal static CreateChatCompletionResponseFunctionCall FromResponse(PipelineResponse result)
         {
             using var document = JsonDocument.Parse(result.Content);
-            return DeserializeFunctionCall(document.RootElement);
-        }
-
-        /// <summary> Convert into a Utf8JsonRequestBody. </summary>
-        internal virtual RequestBody ToRequestBody()
-        {
-            var content = new Utf8JsonRequestBody();
-            content.JsonWriter.WriteObjectValue(this);
-            return content;
+            return DeserializeCreateChatCompletionResponseFunctionCall(document.RootElement);
         }
     }
 }

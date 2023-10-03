@@ -11,13 +11,15 @@ using System.Text.Json;
 
 namespace OpenAI.Models
 {
-    public partial class ChatCompletionFunctionCallOption : IUtf8JsonWriteable
+    public partial class CreateChatCompletionFunctionCall : IUtf8JsonWriteable
     {
         void IUtf8JsonWriteable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name);
+            writer.WritePropertyName("arguments"u8);
+            writer.WriteStringValue(Arguments);
             writer.WriteEndObject();
         }
 

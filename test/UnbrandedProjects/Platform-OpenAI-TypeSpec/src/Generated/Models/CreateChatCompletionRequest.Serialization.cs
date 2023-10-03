@@ -38,7 +38,11 @@ namespace OpenAI.Models
             if (OptionalProperty.IsDefined(FunctionCall))
             {
                 writer.WritePropertyName("function_call"u8);
-                writer.WriteObjectValue(FunctionCall);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(FunctionCall);
+#else
+                JsonSerializer.Serialize(writer, JsonDocument.Parse(FunctionCall.ToString()).RootElement);
+#endif
             }
             if (OptionalProperty.IsDefined(Temperature))
             {
@@ -88,22 +92,14 @@ namespace OpenAI.Models
                     writer.WriteNull("max_tokens");
                 }
             }
-            if (OptionalProperty.IsCollectionDefined(Stop))
+            if (OptionalProperty.IsDefined(Stop))
             {
-                if (Stop != null)
-                {
-                    writer.WritePropertyName("stop"u8);
-                    writer.WriteStartArray();
-                    foreach (var item in Stop)
-                    {
-                        writer.WriteStringValue(item);
-                    }
-                    writer.WriteEndArray();
-                }
-                else
-                {
-                    writer.WriteNull("stop");
-                }
+                writer.WritePropertyName("stop"u8);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(Stop);
+#else
+                JsonSerializer.Serialize(writer, JsonDocument.Parse(Stop.ToString()).RootElement);
+#endif
             }
             if (OptionalProperty.IsDefined(PresencePenalty))
             {

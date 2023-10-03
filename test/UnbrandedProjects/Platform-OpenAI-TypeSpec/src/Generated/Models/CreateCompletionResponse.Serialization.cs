@@ -25,7 +25,7 @@ namespace OpenAI.Models
             string @object = default;
             DateTimeOffset created = default;
             string model = default;
-            IReadOnlyList<CompletionChoice> choices = default;
+            IReadOnlyList<CreateCompletionChoice> choices = default;
             OptionalProperty<CompletionUsage> usage = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -51,10 +51,10 @@ namespace OpenAI.Models
                 }
                 if (property.NameEquals("choices"u8))
                 {
-                    List<CompletionChoice> array = new List<CompletionChoice>();
+                    List<CreateCompletionChoice> array = new List<CreateCompletionChoice>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(CompletionChoice.DeserializeCompletionChoice(item));
+                        array.Add(CreateCompletionChoice.DeserializeCreateCompletionChoice(item));
                     }
                     choices = array;
                     continue;

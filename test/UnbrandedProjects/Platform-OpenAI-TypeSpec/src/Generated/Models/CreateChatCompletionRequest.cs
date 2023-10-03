@@ -26,14 +26,13 @@ namespace OpenAI.Models
         /// [Example Python code](https://github.com/openai/openai-cookbook/blob/main/examples/How_to_format_inputs_to_ChatGPT_models.ipynb).
         /// </param>
         /// <exception cref="ArgumentNullException"> <paramref name="messages"/> is null. </exception>
-        public CreateChatCompletionRequest(ChatCompletionModels model, IEnumerable<ChatCompletionRequestMessage> messages)
+        public CreateChatCompletionRequest(CreateChatCompletionRequestModel model, IEnumerable<ChatCompletionRequestMessage> messages)
         {
             ClientUtilities.AssertNotNull(messages, nameof(messages));
 
             Model = model;
             Messages = messages.ToList();
             Functions = new OptionalList<ChatCompletionFunctions>();
-            Stop = new OptionalList<string>();
             LogitBias = new OptionalDictionary<string, long>();
         }
 
@@ -111,7 +110,7 @@ namespace OpenAI.Models
         /// as they become available, with the stream terminated by a `data: [DONE]` message.
         /// [Example Python code](https://github.com/openai/openai-cookbook/blob/main/examples/How_to_stream_completions.ipynb).
         /// </param>
-        internal CreateChatCompletionRequest(ChatCompletionModels model, IList<ChatCompletionRequestMessage> messages, IList<ChatCompletionFunctions> functions, ChatCompletionFunctionCallOption functionCall, double? temperature, double? topP, long? n, long? maxTokens, IList<string> stop, double? presencePenalty, double? frequencyPenalty, IDictionary<string, long> logitBias, string user, bool? stream)
+        internal CreateChatCompletionRequest(CreateChatCompletionRequestModel model, IList<ChatCompletionRequestMessage> messages, IList<ChatCompletionFunctions> functions, BinaryData functionCall, double? temperature, double? topP, long? n, long? maxTokens, BinaryData stop, double? presencePenalty, double? frequencyPenalty, IDictionary<string, long> logitBias, string user, bool? stream)
         {
             Model = model;
             Messages = messages;
@@ -133,7 +132,7 @@ namespace OpenAI.Models
         /// ID of the model to use. See the [model endpoint compatibility](/docs/models/model-endpoint-compatibility)
         /// table for details on which models work with the Chat API.
         /// </summary>
-        public ChatCompletionModels Model { get; }
+        public CreateChatCompletionRequestModel Model { get; }
         /// <summary>
         /// A list of messages comprising the conversation so far.
         /// [Example Python code](https://github.com/openai/openai-cookbook/blob/main/examples/How_to_format_inputs_to_ChatGPT_models.ipynb).
@@ -147,8 +146,35 @@ namespace OpenAI.Models
         /// calling a function.  Specifying a particular function via `{\"name":\ \"my_function\"}` forces the
         /// model to call that function. `none` is the default when no functions are present. `auto` is the
         /// default if functions are present.
+        /// <para>
+        /// To assign an object to this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
+        /// </para>
+        /// <para>
+        /// To assign an already formated json string to this property use <see cref="BinaryData.FromString(string)"/>.
+        /// </para>
+        /// <para>
+        /// Examples:
+        /// <list type="bullet">
+        /// <item>
+        /// <term>BinaryData.FromObjectAsJson("foo")</term>
+        /// <description>Creates a payload of "foo".</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromString("\"foo\"")</term>
+        /// <description>Creates a payload of "foo".</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromObjectAsJson(new { key = "value" })</term>
+        /// <description>Creates a payload of { "key": "value" }.</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromString("{\"key\": \"value\"}")</term>
+        /// <description>Creates a payload of { "key": "value" }.</description>
+        /// </item>
+        /// </list>
+        /// </para>
         /// </summary>
-        public ChatCompletionFunctionCallOption FunctionCall { get; set; }
+        public BinaryData FunctionCall { get; set; }
         /// <summary>
         /// What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output
         /// more random, while lower values like 0.2 will make it more focused and deterministic.
@@ -178,8 +204,37 @@ namespace OpenAI.Models
         /// for counting tokens.
         /// </summary>
         public long? MaxTokens { get; set; }
-        /// <summary> Up to 4 sequences where the API will stop generating further tokens. </summary>
-        public IList<string> Stop { get; set; }
+        /// <summary>
+        /// Up to 4 sequences where the API will stop generating further tokens.
+        /// <para>
+        /// To assign an object to this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
+        /// </para>
+        /// <para>
+        /// To assign an already formated json string to this property use <see cref="BinaryData.FromString(string)"/>.
+        /// </para>
+        /// <para>
+        /// Examples:
+        /// <list type="bullet">
+        /// <item>
+        /// <term>BinaryData.FromObjectAsJson("foo")</term>
+        /// <description>Creates a payload of "foo".</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromString("\"foo\"")</term>
+        /// <description>Creates a payload of "foo".</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromObjectAsJson(new { key = "value" })</term>
+        /// <description>Creates a payload of { "key": "value" }.</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromString("{\"key\": \"value\"}")</term>
+        /// <description>Creates a payload of { "key": "value" }.</description>
+        /// </item>
+        /// </list>
+        /// </para>
+        /// </summary>
+        public BinaryData Stop { get; set; }
         /// <summary>
         /// Number between -2.0 and 2.0. Positive values penalize new tokens based on whether they appear
         /// in the text so far, increasing the model's likelihood to talk about new topics.

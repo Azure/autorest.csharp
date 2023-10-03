@@ -29,13 +29,12 @@ namespace OpenAI.Models
         /// prompt is not specified the model will generate as if from the beginning of a new document.
         /// </param>
         /// <exception cref="ArgumentNullException"> <paramref name="prompt"/> is null. </exception>
-        public CreateCompletionRequest(CompletionModels model, BinaryData prompt)
+        public CreateCompletionRequest(CreateCompletionRequestModel model, BinaryData prompt)
         {
             ClientUtilities.AssertNotNull(prompt, nameof(prompt));
 
             Model = model;
             Prompt = prompt;
-            Stop = new OptionalList<string>();
             LogitBias = new OptionalDictionary<string, long>();
         }
 
@@ -129,7 +128,7 @@ namespace OpenAI.Models
         /// **Note:** Because this parameter generates many completions, it can quickly consume your token
         /// quota. Use carefully and ensure that you have reasonable settings for `max_tokens` and `stop`.
         /// </param>
-        internal CreateCompletionRequest(CompletionModels model, BinaryData prompt, string suffix, double? temperature, double? topP, long? n, long? maxTokens, IList<string> stop, double? presencePenalty, double? frequencyPenalty, IDictionary<string, long> logitBias, string user, bool? stream, long? logprobs, bool? echo, long? bestOf)
+        internal CreateCompletionRequest(CreateCompletionRequestModel model, BinaryData prompt, string suffix, double? temperature, double? topP, long? n, long? maxTokens, BinaryData stop, double? presencePenalty, double? frequencyPenalty, IDictionary<string, long> logitBias, string user, bool? stream, long? logprobs, bool? echo, long? bestOf)
         {
             Model = model;
             Prompt = prompt;
@@ -154,7 +153,7 @@ namespace OpenAI.Models
         /// see all of your available models, or see our [Model overview](/docs/models/overview) for
         /// descriptions of them.
         /// </summary>
-        public CompletionModels Model { get; }
+        public CreateCompletionRequestModel Model { get; }
         /// <summary>
         /// The prompt(s) to generate completions for, encoded as a string, array of strings, array of
         /// tokens, or array of token arrays.
@@ -221,8 +220,37 @@ namespace OpenAI.Models
         /// for counting tokens.
         /// </summary>
         public long? MaxTokens { get; set; }
-        /// <summary> Up to 4 sequences where the API will stop generating further tokens. </summary>
-        public IList<string> Stop { get; set; }
+        /// <summary>
+        /// Up to 4 sequences where the API will stop generating further tokens.
+        /// <para>
+        /// To assign an object to this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
+        /// </para>
+        /// <para>
+        /// To assign an already formated json string to this property use <see cref="BinaryData.FromString(string)"/>.
+        /// </para>
+        /// <para>
+        /// Examples:
+        /// <list type="bullet">
+        /// <item>
+        /// <term>BinaryData.FromObjectAsJson("foo")</term>
+        /// <description>Creates a payload of "foo".</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromString("\"foo\"")</term>
+        /// <description>Creates a payload of "foo".</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromObjectAsJson(new { key = "value" })</term>
+        /// <description>Creates a payload of { "key": "value" }.</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromString("{\"key\": \"value\"}")</term>
+        /// <description>Creates a payload of { "key": "value" }.</description>
+        /// </item>
+        /// </list>
+        /// </para>
+        /// </summary>
+        public BinaryData Stop { get; set; }
         /// <summary>
         /// Number between -2.0 and 2.0. Positive values penalize new tokens based on whether they appear
         /// in the text so far, increasing the model's likelihood to talk about new topics.

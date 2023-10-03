@@ -436,26 +436,21 @@ namespace AutoRest.CSharp.Output.Models.Types
             );
         }
 
-        internal ModelTypeProvider ReplaceInputModelType(InputModelType inputModelType)
+        internal ModelTypeProvider ReplaceProperty(InputModelProperty property, InputType inputType)
         {
-            return new ModelTypeProvider(
-                inputModelType,
+            var result = new ModelTypeProvider(
+                _inputModel.ReplaceProperty(property, inputType),
                 DefaultNamespace,
                 _sourceInputModel,
                 _typeFactory,
                 _derivedTypes,
                 _defaultDerivedType);
+            return result;
         }
 
-        internal ModelTypeProvider ReplaceInputModelType(InputModelProperty property, InputEnumType enumType)
+        internal InputModelProperty? GetProperty(InputModelType key)
         {
-            return new ModelTypeProvider(
-                _inputModel.ReplaceProperty(property, enumType),
-                DefaultNamespace,
-                _sourceInputModel,
-                _typeFactory,
-                _derivedTypes,
-                _defaultDerivedType);
+            return _inputModel.GetProperty(key);
         }
     }
 }

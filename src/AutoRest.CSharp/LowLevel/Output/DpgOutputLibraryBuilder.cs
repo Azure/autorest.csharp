@@ -100,7 +100,7 @@ namespace AutoRest.CSharp.Output.Models
 
             foreach (var pair in enumsToReplace)
             {
-                models[pair.Key] = models[pair.Key].ReplaceInputModelType(pair.Value.Item1, pair.Value.Item2);
+                models[pair.Key] = models[pair.Key].ReplaceProperty(pair.Value.Item1, pair.Value.Item2);
             }
         }
 
@@ -109,6 +109,7 @@ namespace AutoRest.CSharp.Output.Models
             Dictionary<string, ModelTypeProvider> defaultDerivedTypes = new Dictionary<string, ModelTypeProvider>();
 
             HashSet<string> createdNames = new HashSet<string>();
+            Dictionary<InputModelType, InputModelType> replacements = new Dictionary<InputModelType, InputModelType>();
             foreach (var model in _rootNamespace.Models)
             {
                 InputModelType[] derivedTypesArray = model.DerivedModels.ToArray();
@@ -117,15 +118,42 @@ namespace AutoRest.CSharp.Output.Models
                 InputModelType? replacement = null;
                 if (model.IsAnonymousModel)
                 {
-                    replacement = InputModelType.GiveName(model, GetAnonModelName(model, createdNames));
-                    if (model.Name != replacement.Name)
+                    var newName = GetAnonModelName(model, createdNames);
+                    if (newName is not null)
                     {
+                        var containingType = models.Keys.Where(m => m.GetProperty(model) is not null).First();
+                        replacement = model.Update(newName, containingType.Usage);
                         createdNames.Add(replacement.Name);
+                        replacements.Add(model, replacement);
                     }
                 }
 
-                models.Add(model, new ModelTypeProvider(replacement ?? model, TypeProvider.GetDefaultModelNamespace(null, _defaultNamespace), _sourceInputModel, typeFactory, derivedTypesArray, defaultDerivedType));
+                var typeProvider = new ModelTypeProvider(replacement ?? model, TypeProvider.GetDefaultModelNamespace(null, _defaultNamespace), _sourceInputModel, typeFactory, derivedTypesArray, defaultDerivedType);
+                models.Add(replacement ?? model, typeProvider);
             }
+
+            foreach (var pair in replacements)
+            {
+                var modelsNeedingReplacement = GetAllReferences(pair.Key, models);
+                foreach (var (modelContainingEnum, property) in modelsNeedingReplacement)
+                {
+                    models[modelContainingEnum] = models[modelContainingEnum].ReplaceProperty(property, pair.Value);
+                }
+            }
+        }
+
+        private Dictionary<InputModelType, InputModelProperty> GetAllReferences(InputModelType key, IDictionary<InputModelType, ModelTypeProvider> models)
+        {
+            var result = new Dictionary<InputModelType, InputModelProperty>();
+            foreach (var pair in models)
+            {
+                var property = pair.Value.GetProperty(key);
+                if (property is not null)
+                {
+                    result.Add(pair.Key, property);
+                }
+            }
+            return result;
         }
 
         private string? GetAnonModelName(InputModelType anonModel, HashSet<string> createdNames)
@@ -140,7 +168,7 @@ namespace AutoRest.CSharp.Output.Models
                     {
                         if (IsSameType(parameter.Type, anonModel))
                         {
-                            names.Add(new List<string> { operation.Name, GetNameWithCorrectPluralization(parameter.Type, parameter.Name) });
+                            names.Add(new List<string> { operation.Name.ToCleanName(), GetNameWithCorrectPluralization(parameter.Type, parameter.Name).ToCleanName() });
                         }
                         else
                         {
@@ -154,7 +182,7 @@ namespace AutoRest.CSharp.Output.Models
 
                         if (IsSameType(responseType, anonModel))
                         {
-                            names.Add(new List<string> { operation.Name, GetNameWithCorrectPluralization(responseType, responseType.Name) });
+                            names.Add(new List<string> { operation.Name.ToCleanName(), GetNameWithCorrectPluralization(responseType, responseType.Name).ToCleanName() });
                         }
                         else
                         {
@@ -165,14 +193,30 @@ namespace AutoRest.CSharp.Output.Models
             }
 
             if (names.Count == 1)
-                return $"{names[0][0]}{names[0][names[0].Count - 1]}";
+            {
+                var newName = $"{names[0][0]}{names[0][names[0].Count - 1].FirstCharToUpperCase()}";
+                if (createdNames.Contains(newName))
+                {
+                    if (names[0].Count >= 2)
+                    {
+                        newName = $"{names[0][1].FirstCharToUpperCase()}{names[0][names[0].Count - 1].FirstCharToUpperCase()}";
+                    }
+                    else
+                    {
+                        newName = $"{names[0][0].FirstCharToUpperCase()}{names[0][names[0].Count - 1].FirstCharToUpperCase()}";
+                    }
+                }
+                return newName;
+            }
 
             return null;
         }
 
         private void FindMatchesRecursively(InputType type, InputModelType anonModel, HashSet<string> createdNames, List<string> current, List<List<string>> names)
         {
-            if (type is not InputModelType model)
+            InputModelType? model = GetInputModelType(type);
+
+            if (model is null)
                 return;
 
             //check other model properties
@@ -180,7 +224,7 @@ namespace AutoRest.CSharp.Output.Models
             {
                 if (IsSameType(property.Type, anonModel))
                 {
-                    names.Add(new List<string>(current) { GetNameWithCorrectPluralization(property.Type, property.Name) });
+                    names.Add(new List<string>(current) { GetNameWithCorrectPluralization(property.Type, property.Name).ToCleanName() });
                 }
                 else
                 {
@@ -188,6 +232,14 @@ namespace AutoRest.CSharp.Output.Models
                 }
             }
         }
+
+        private InputModelType? GetInputModelType(InputType type) => type switch
+        {
+            InputModelType model => model,
+            InputListType listType => GetInputModelType(listType.ElementType),
+            InputDictionaryType dictionaryType => GetInputModelType(dictionaryType.ValueType),
+            _ => null
+        };
 
         private string GetNameWithCorrectPluralization(InputType type, string name)
         {

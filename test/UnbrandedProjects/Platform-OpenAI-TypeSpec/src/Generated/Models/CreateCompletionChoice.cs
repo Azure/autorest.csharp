@@ -10,10 +10,10 @@ using System.ServiceModel.Rest.Experimental;
 
 namespace OpenAI.Models
 {
-    /// <summary> Completion choice. </summary>
-    public partial class CompletionChoice
+    /// <summary> The CreateCompletionChoice. </summary>
+    public partial class CreateCompletionChoice
     {
-        /// <summary> Initializes a new instance of CompletionChoice. </summary>
+        /// <summary> Initializes a new instance of CreateCompletionChoice. </summary>
         /// <param name="index"></param>
         /// <param name="text"></param>
         /// <param name="logprobs"></param>
@@ -25,7 +25,7 @@ namespace OpenAI.Models
         /// content filters.
         /// </param>
         /// <exception cref="ArgumentNullException"> <paramref name="text"/> is null. </exception>
-        internal CompletionChoice(long index, string text, LogProbs logprobs, FinishReason finishReason)
+        internal CreateCompletionChoice(long index, string text, CreateCompletionLogprobs logprobs, CreateCompletionChoiceFinishReason finishReason)
         {
             ClientUtilities.AssertNotNull(text, nameof(text));
 
@@ -40,7 +40,7 @@ namespace OpenAI.Models
         /// <summary> Gets the text. </summary>
         public string Text { get; }
         /// <summary> Gets the logprobs. </summary>
-        public LogProbs Logprobs { get; }
+        public CreateCompletionLogprobs Logprobs { get; }
         /// <summary>
         /// The reason the model stopped generating tokens. This will be `stop` if the model hit a
         /// natural stop point or a provided stop sequence, or `content_filter` if content was omitted
@@ -48,6 +48,6 @@ namespace OpenAI.Models
         /// in the request was reached, or `content_filter` if content was omitted due to a flag from our
         /// content filters.
         /// </summary>
-        public FinishReason FinishReason { get; }
+        public CreateCompletionChoiceFinishReason FinishReason { get; }
     }
 }

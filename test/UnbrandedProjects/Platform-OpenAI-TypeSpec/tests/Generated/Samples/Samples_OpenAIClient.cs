@@ -28,7 +28,7 @@ namespace OpenAI.Samples
 
             RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
             {
-                model = "gpt4",
+                model = "<model>",
                 messages = new object[]
             {
 new
@@ -60,7 +60,7 @@ content = "<content>",
 
             RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
             {
-                model = "gpt4",
+                model = "<model>",
                 messages = new object[]
             {
 new
@@ -90,9 +90,9 @@ content = "<content>",
             KeyCredential credential = new KeyCredential("<key>");
             OpenAIClient client = new OpenAIClient(credential);
 
-            CreateChatCompletionRequest body = new CreateChatCompletionRequest(ChatCompletionModels.Gpt4, new ChatCompletionRequestMessage[]
+            CreateChatCompletionRequest body = new CreateChatCompletionRequest(new CreateChatCompletionRequestModel("<model>"), new ChatCompletionRequestMessage[]
             {
-new ChatCompletionRequestMessage(MessageRole.System, "<content>")
+new ChatCompletionRequestMessage(ChatCompletionRequestMessageRole.System, "<content>")
             });
             Result<CreateChatCompletionResponse> result = client.CreateChatCompletion(body);
         }
@@ -104,9 +104,9 @@ new ChatCompletionRequestMessage(MessageRole.System, "<content>")
             KeyCredential credential = new KeyCredential("<key>");
             OpenAIClient client = new OpenAIClient(credential);
 
-            CreateChatCompletionRequest body = new CreateChatCompletionRequest(ChatCompletionModels.Gpt4, new ChatCompletionRequestMessage[]
+            CreateChatCompletionRequest body = new CreateChatCompletionRequest(new CreateChatCompletionRequestModel("<model>"), new ChatCompletionRequestMessage[]
             {
-new ChatCompletionRequestMessage(MessageRole.System, "<content>")
+new ChatCompletionRequestMessage(ChatCompletionRequestMessageRole.System, "<content>")
             });
             Result<CreateChatCompletionResponse> result = await client.CreateChatCompletionAsync(body);
         }
@@ -120,7 +120,7 @@ new ChatCompletionRequestMessage(MessageRole.System, "<content>")
 
             RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
             {
-                model = "gpt4",
+                model = "<model>",
                 messages = new object[]
             {
 new
@@ -147,18 +147,12 @@ key = new object(),
 },
 }
             },
-                function_call = new
-                {
-                    name = "<name>",
-                },
+                function_call = "none",
                 temperature = 123.45,
                 top_p = 123.45,
                 n = 1234L,
                 max_tokens = 1234L,
-                stop = new object[]
-            {
-"<stop>"
-            },
+                stop = "<stop>",
                 presence_penalty = 123.45,
                 frequency_penalty = 123.45,
                 logit_bias = new
@@ -195,7 +189,7 @@ key = new object(),
 
             RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
             {
-                model = "gpt4",
+                model = "<model>",
                 messages = new object[]
             {
 new
@@ -222,18 +216,12 @@ key = new object(),
 },
 }
             },
-                function_call = new
-                {
-                    name = "<name>",
-                },
+                function_call = "none",
                 temperature = 123.45,
                 top_p = 123.45,
                 n = 1234L,
                 max_tokens = 1234L,
-                stop = new object[]
-            {
-"<stop>"
-            },
+                stop = "<stop>",
                 presence_penalty = 123.45,
                 frequency_penalty = 123.45,
                 logit_bias = new
@@ -268,12 +256,12 @@ key = new object(),
             KeyCredential credential = new KeyCredential("<key>");
             OpenAIClient client = new OpenAIClient(credential);
 
-            CreateChatCompletionRequest body = new CreateChatCompletionRequest(ChatCompletionModels.Gpt4, new ChatCompletionRequestMessage[]
+            CreateChatCompletionRequest body = new CreateChatCompletionRequest(new CreateChatCompletionRequestModel("<model>"), new ChatCompletionRequestMessage[]
             {
-new ChatCompletionRequestMessage(MessageRole.System, "<content>")
+new ChatCompletionRequestMessage(ChatCompletionRequestMessageRole.System, "<content>")
 {
 Name = "<name>",
-FunctionCall = new FunctionCall("<name>", "<arguments>"),
+FunctionCall = new CreateChatCompletionFunctionCall("<name>", "<arguments>"),
 }
             })
             {
@@ -284,12 +272,12 @@ FunctionCall = new FunctionCall("<name>", "<arguments>"),
 {
 Description = "<description>",
 }},
-                FunctionCall = new ChatCompletionFunctionCallOption("<name>"),
+                FunctionCall = BinaryData.FromObjectAsJson("none"),
                 Temperature = 123.45,
                 TopP = 123.45,
                 N = 1234L,
                 MaxTokens = 1234L,
-                Stop = { "<stop>" },
+                Stop = BinaryData.FromObjectAsJson("<stop>"),
                 PresencePenalty = 123.45,
                 FrequencyPenalty = 123.45,
                 LogitBias =
@@ -309,12 +297,12 @@ Description = "<description>",
             KeyCredential credential = new KeyCredential("<key>");
             OpenAIClient client = new OpenAIClient(credential);
 
-            CreateChatCompletionRequest body = new CreateChatCompletionRequest(ChatCompletionModels.Gpt4, new ChatCompletionRequestMessage[]
+            CreateChatCompletionRequest body = new CreateChatCompletionRequest(new CreateChatCompletionRequestModel("<model>"), new ChatCompletionRequestMessage[]
             {
-new ChatCompletionRequestMessage(MessageRole.System, "<content>")
+new ChatCompletionRequestMessage(ChatCompletionRequestMessageRole.System, "<content>")
 {
 Name = "<name>",
-FunctionCall = new FunctionCall("<name>", "<arguments>"),
+FunctionCall = new CreateChatCompletionFunctionCall("<name>", "<arguments>"),
 }
             })
             {
@@ -325,12 +313,12 @@ FunctionCall = new FunctionCall("<name>", "<arguments>"),
 {
 Description = "<description>",
 }},
-                FunctionCall = new ChatCompletionFunctionCallOption("<name>"),
+                FunctionCall = BinaryData.FromObjectAsJson("none"),
                 Temperature = 123.45,
                 TopP = 123.45,
                 N = 1234L,
                 MaxTokens = 1234L,
-                Stop = { "<stop>" },
+                Stop = BinaryData.FromObjectAsJson("<stop>"),
                 PresencePenalty = 123.45,
                 FrequencyPenalty = 123.45,
                 LogitBias =
@@ -1384,7 +1372,7 @@ Description = "<description>",
 
             RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
             {
-                model = "babbage-002",
+                model = "<model>",
                 prompt = "<prompt>",
             }).ToStream());
             Result result = client.CreateCompletion(content);
@@ -1412,7 +1400,7 @@ Description = "<description>",
 
             RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
             {
-                model = "babbage-002",
+                model = "<model>",
                 prompt = "<prompt>",
             }).ToStream());
             Result result = await client.CreateCompletionAsync(content);
@@ -1438,7 +1426,7 @@ Description = "<description>",
             KeyCredential credential = new KeyCredential("<key>");
             OpenAIClient client = new OpenAIClient(credential);
 
-            CreateCompletionRequest body = new CreateCompletionRequest(CompletionModels.Babbage002, BinaryData.FromObjectAsJson("<prompt>"));
+            CreateCompletionRequest body = new CreateCompletionRequest(new CreateCompletionRequestModel("<model>"), BinaryData.FromObjectAsJson("<prompt>"));
             Result<CreateCompletionResponse> result = client.CreateCompletion(body);
         }
 
@@ -1449,7 +1437,7 @@ Description = "<description>",
             KeyCredential credential = new KeyCredential("<key>");
             OpenAIClient client = new OpenAIClient(credential);
 
-            CreateCompletionRequest body = new CreateCompletionRequest(CompletionModels.Babbage002, BinaryData.FromObjectAsJson("<prompt>"));
+            CreateCompletionRequest body = new CreateCompletionRequest(new CreateCompletionRequestModel("<model>"), BinaryData.FromObjectAsJson("<prompt>"));
             Result<CreateCompletionResponse> result = await client.CreateCompletionAsync(body);
         }
 
@@ -1462,17 +1450,14 @@ Description = "<description>",
 
             RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
             {
-                model = "babbage-002",
+                model = "<model>",
                 prompt = "<prompt>",
                 suffix = "<suffix>",
                 temperature = 123.45,
                 top_p = 123.45,
                 n = 1234L,
                 max_tokens = 1234L,
-                stop = new object[]
-            {
-"<stop>"
-            },
+                stop = "<stop>",
                 presence_penalty = 123.45,
                 frequency_penalty = 123.45,
                 logit_bias = new
@@ -1513,17 +1498,14 @@ Description = "<description>",
 
             RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
             {
-                model = "babbage-002",
+                model = "<model>",
                 prompt = "<prompt>",
                 suffix = "<suffix>",
                 temperature = 123.45,
                 top_p = 123.45,
                 n = 1234L,
                 max_tokens = 1234L,
-                stop = new object[]
-            {
-"<stop>"
-            },
+                stop = "<stop>",
                 presence_penalty = 123.45,
                 frequency_penalty = 123.45,
                 logit_bias = new
@@ -1562,14 +1544,14 @@ Description = "<description>",
             KeyCredential credential = new KeyCredential("<key>");
             OpenAIClient client = new OpenAIClient(credential);
 
-            CreateCompletionRequest body = new CreateCompletionRequest(CompletionModels.Babbage002, BinaryData.FromObjectAsJson("<prompt>"))
+            CreateCompletionRequest body = new CreateCompletionRequest(new CreateCompletionRequestModel("<model>"), BinaryData.FromObjectAsJson("<prompt>"))
             {
                 Suffix = "<suffix>",
                 Temperature = 123.45,
                 TopP = 123.45,
                 N = 1234L,
                 MaxTokens = 1234L,
-                Stop = { "<stop>" },
+                Stop = BinaryData.FromObjectAsJson("<stop>"),
                 PresencePenalty = 123.45,
                 FrequencyPenalty = 123.45,
                 LogitBias =
@@ -1592,14 +1574,14 @@ Description = "<description>",
             KeyCredential credential = new KeyCredential("<key>");
             OpenAIClient client = new OpenAIClient(credential);
 
-            CreateCompletionRequest body = new CreateCompletionRequest(CompletionModels.Babbage002, BinaryData.FromObjectAsJson("<prompt>"))
+            CreateCompletionRequest body = new CreateCompletionRequest(new CreateCompletionRequestModel("<model>"), BinaryData.FromObjectAsJson("<prompt>"))
             {
                 Suffix = "<suffix>",
                 Temperature = 123.45,
                 TopP = 123.45,
                 N = 1234L,
                 MaxTokens = 1234L,
-                Stop = { "<stop>" },
+                Stop = BinaryData.FromObjectAsJson("<stop>"),
                 PresencePenalty = 123.45,
                 FrequencyPenalty = 123.45,
                 LogitBias =

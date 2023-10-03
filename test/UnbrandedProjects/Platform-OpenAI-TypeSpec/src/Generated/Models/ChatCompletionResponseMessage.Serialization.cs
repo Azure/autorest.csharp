@@ -19,14 +19,14 @@ namespace OpenAI.Models
             {
                 return null;
             }
-            MessageRole role = default;
+            ChatCompletionResponseMessageRole role = default;
             string content = default;
-            OptionalProperty<FunctionCall> functionCall = default;
+            OptionalProperty<CreateChatCompletionResponseFunctionCall> functionCall = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("role"u8))
                 {
-                    role = new MessageRole(property.Value.GetString());
+                    role = new ChatCompletionResponseMessageRole(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("content"u8))
@@ -45,7 +45,7 @@ namespace OpenAI.Models
                     {
                         continue;
                     }
-                    functionCall = FunctionCall.DeserializeFunctionCall(property.Value);
+                    functionCall = CreateChatCompletionResponseFunctionCall.DeserializeCreateChatCompletionResponseFunctionCall(property.Value);
                     continue;
                 }
             }

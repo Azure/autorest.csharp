@@ -11,9 +11,9 @@ using System.Text.Json;
 
 namespace OpenAI.Models
 {
-    public partial class LogProbs
+    public partial class CreateCompletionLogprobs
     {
-        internal static LogProbs DeserializeLogProbs(JsonElement element)
+        internal static CreateCompletionLogprobs DeserializeCreateCompletionLogprobs(JsonElement element)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -78,15 +78,15 @@ namespace OpenAI.Models
                     continue;
                 }
             }
-            return new LogProbs(tokens, tokenLogprobs, topLogprobs, textOffset);
+            return new CreateCompletionLogprobs(tokens, tokenLogprobs, topLogprobs, textOffset);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="result"> The result to deserialize the model from. </param>
-        internal static LogProbs FromResponse(PipelineResponse result)
+        internal static CreateCompletionLogprobs FromResponse(PipelineResponse result)
         {
             using var document = JsonDocument.Parse(result.Content);
-            return DeserializeLogProbs(document.RootElement);
+            return DeserializeCreateCompletionLogprobs(document.RootElement);
         }
     }
 }

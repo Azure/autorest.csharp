@@ -44,27 +44,24 @@ namespace AutoRest.CSharp.Common.Input
             }
         }
 
-        internal static InputModelType GiveName(InputModelType model, string? newName)
+        internal InputModelType Update(string newName, InputModelTypeUsage usage)
         {
-            if (newName is null)
-                return model;
-
             return new InputModelType(
                 newName,
-                model.Namespace,
-                model.Accessibility,
-                model.Deprecated,
-                model.Description,
-                model.Usage,
-                model.Properties,
-                model.BaseModel,
-                model.DerivedModels,
-                model.DiscriminatorValue,
-                model.DiscriminatorPropertyName,
-                model.IsNullable);
+                Namespace,
+                Accessibility,
+                Deprecated,
+                Description,
+                usage,
+                Properties,
+                BaseModel,
+                DerivedModels,
+                DiscriminatorValue,
+                DiscriminatorPropertyName,
+                IsNullable);
         }
 
-        internal InputModelType ReplaceProperty(InputModelProperty property, InputEnumType enumType)
+        internal InputModelType ReplaceProperty(InputModelProperty property, InputType inputType)
         {
             return new InputModelType(
                 Name,
@@ -73,7 +70,7 @@ namespace AutoRest.CSharp.Common.Input
                 Deprecated,
                 Description,
                 Usage,
-                GetNewProperties(property, enumType),
+                GetNewProperties(property, inputType),
                 BaseModel,
                 DerivedModels,
                 DiscriminatorValue,
@@ -81,7 +78,7 @@ namespace AutoRest.CSharp.Common.Input
                 IsNullable);
         }
 
-        private IReadOnlyList<InputModelProperty> GetNewProperties(InputModelProperty property, InputEnumType enumType)
+        private IReadOnlyList<InputModelProperty> GetNewProperties(InputModelProperty property, InputType inputType)
         {
             List<InputModelProperty> properties = new List<InputModelProperty>();
             foreach (var myProperty in Properties)
@@ -92,7 +89,7 @@ namespace AutoRest.CSharp.Common.Input
                         myProperty.Name,
                         myProperty.SerializedName,
                         myProperty.Description,
-                        enumType,
+                        myProperty.Type.GetCollectionEquivalent(inputType),
                         myProperty.IsRequired,
                         myProperty.IsReadOnly,
                         myProperty.IsDiscriminator));
@@ -103,6 +100,32 @@ namespace AutoRest.CSharp.Common.Input
                 }
             }
             return properties;
+        }
+
+        public bool Equals(InputType other, bool handleCollections)
+        {
+            if (!handleCollections)
+                return Equals(other);
+
+            switch (other)
+            {
+                case InputDictionaryType otherDictionary:
+                    return Equals(otherDictionary.ValueType);
+                case InputListType otherList:
+                    return Equals(otherList.ElementType);
+                default:
+                    return Equals(other);
+            }
+        }
+
+        internal InputModelProperty? GetProperty(InputModelType key)
+        {
+            foreach (var property in Properties)
+            {
+                if (key.Equals(property.Type, true))
+                    return property;
+            }
+            return null;
         }
     }
 }

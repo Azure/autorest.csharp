@@ -10,9 +10,9 @@ using System.Text.Json;
 
 namespace OpenAI.Models
 {
-    public partial class CompletionChoice
+    public partial class CreateCompletionChoice
     {
-        internal static CompletionChoice DeserializeCompletionChoice(JsonElement element)
+        internal static CreateCompletionChoice DeserializeCreateCompletionChoice(JsonElement element)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -20,8 +20,8 @@ namespace OpenAI.Models
             }
             long index = default;
             string text = default;
-            LogProbs logprobs = default;
-            FinishReason finishReason = default;
+            CreateCompletionLogprobs logprobs = default;
+            CreateCompletionChoiceFinishReason finishReason = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("index"u8))
@@ -41,24 +41,24 @@ namespace OpenAI.Models
                         logprobs = null;
                         continue;
                     }
-                    logprobs = LogProbs.DeserializeLogProbs(property.Value);
+                    logprobs = CreateCompletionLogprobs.DeserializeCreateCompletionLogprobs(property.Value);
                     continue;
                 }
                 if (property.NameEquals("finish_reason"u8))
                 {
-                    finishReason = new FinishReason(property.Value.GetString());
+                    finishReason = new CreateCompletionChoiceFinishReason(property.Value.GetString());
                     continue;
                 }
             }
-            return new CompletionChoice(index, text, logprobs, finishReason);
+            return new CreateCompletionChoice(index, text, logprobs, finishReason);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="result"> The result to deserialize the model from. </param>
-        internal static CompletionChoice FromResponse(PipelineResponse result)
+        internal static CreateCompletionChoice FromResponse(PipelineResponse result)
         {
             using var document = JsonDocument.Parse(result.Content);
-            return DeserializeCompletionChoice(document.RootElement);
+            return DeserializeCreateCompletionChoice(document.RootElement);
         }
     }
 }

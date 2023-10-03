@@ -16,9 +16,11 @@ internal record InputUnionType(string Name, IReadOnlyList<InputType> UnionItemTy
             throw new InvalidOperationException($"Cannot convert union '{Name}' to enum because its not all strings");
 
         var values = new List<InputEnumTypeValue>();
-        foreach (var item in UnionItemTypes.Cast<InputLiteralType>())
+        foreach (var item in UnionItemTypes)
         {
-            values.Add(new InputEnumTypeValue(item.Value.ToString()!.FirstCharToUpperCase(), item.Value, item.Value.ToString()));
+            if (item is not InputLiteralType literalType)
+                continue;
+            values.Add(new InputEnumTypeValue(literalType.Value.ToString()!.FirstCharToUpperCase(), literalType.Value, literalType.Value.ToString()));
         }
         return values;
     }
