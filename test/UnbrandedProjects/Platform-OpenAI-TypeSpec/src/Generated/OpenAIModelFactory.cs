@@ -293,9 +293,31 @@ namespace OpenAI.Models
         /// <param name="choices"> description: A list of edit choices. Can be more than one if `n` is greater than 1. </param>
         /// <param name="usage"></param>
         /// <returns> A new <see cref="Models.CreateEditResponse"/> instance for mocking. </returns>
-        public static CreateEditResponse CreateEditResponse(CreateEditResponseObject @object = default, DateTimeOffset created = default, BinaryData choices = null, CompletionUsage usage = null)
+        public static CreateEditResponse CreateEditResponse(CreateEditResponseObject @object = default, DateTimeOffset created = default, IEnumerable<CreateEditChoice> choices = null, CompletionUsage usage = null)
         {
-            return new CreateEditResponse(@object, created, choices, usage);
+            choices ??= new List<CreateEditChoice>();
+
+            return new CreateEditResponse(@object, created, choices?.ToList(), usage);
+        }
+
+        /// <summary> Initializes a new instance of CreateEditChoice. </summary>
+        /// <param name="text"> The edited result. </param>
+        /// <param name="index"> The index of the choice in the list of choices. </param>
+        /// <param name="finishReason">
+        /// The reason the model stopped generating tokens. This will be `stop` if the model hit a
+        /// natural stop point or a provided stop sequence, or `length` if the maximum number of tokens
+        /// specified in the request was reached.
+        /// </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="text"/> is null. </exception>
+        /// <returns> A new <see cref="Models.CreateEditChoice"/> instance for mocking. </returns>
+        public static CreateEditChoice CreateEditChoice(string text = null, long index = default, CreateEditChoiceFinishReason finishReason = default)
+        {
+            if (text == null)
+            {
+                throw new ArgumentNullException(nameof(text));
+            }
+
+            return new CreateEditChoice(text, index, finishReason);
         }
 
         /// <summary> Initializes a new instance of ImagesResponse. </summary>

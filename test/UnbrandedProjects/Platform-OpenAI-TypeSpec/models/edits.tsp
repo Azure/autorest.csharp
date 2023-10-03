@@ -7,7 +7,7 @@ model CreateEditRequest {
    * model with this endpoint.
    */
   @extension("x-oaiTypeLabel", "string")
-  `model`: EditModels;
+  `model`: string | "text-davinci-edit-001" | "code-davinci-edit-001";
 
   /** The input text to use as a starting point for the edit. */
   input?: string | null = "";
@@ -36,12 +36,6 @@ model CreateEditRequest {
   top_p?: TopP | null; // = 1;
 }
 
-@doc("Edit models")
-enum EditModels {
-    "text-davinci-edit-001";
-    "code-davinci-edit-001";
-}
-
 #deprecated "deprecated"
 model CreateEditResponse {
   /** The object type, which is always `edit`. */
@@ -52,29 +46,22 @@ model CreateEditResponse {
   created: utcDateTime;
 
   /** description: A list of edit choices. Can be more than one if `n` is greater than 1. */
-  choices: [];
+  choices: {
+    /** The edited result. */
+    text: string;
+
+    /** The index of the choice in the list of choices. */
+    index: safeint;
+
+    /**
+     * The reason the model stopped generating tokens. This will be `stop` if the model hit a
+     * natural stop point or a provided stop sequence, or `length` if the maximum number of tokens
+     * specified in the request was reached.
+     */
+    finish_reason: "stop" | "length";
+  }[];
 
   usage: CompletionUsage;
-}
-
-model EditChoice {
-  /** The edited result. */
-  text: string;
-
-  /** The index of the choice in the list of choices. */
-  index: safeint;
-
-  /**
-   * The reason the model stopped generating tokens. This will be `stop` if the model hit a
-   * natural stop point or a provided stop sequence, or `length` if the maximum number of tokens
-   * specified in the request was reached.
-   */
-  finish_reason: EditFinishReason;
-}
-
-enum EditFinishReason {
-    "stop";
-    "length";
 }
 
 @minValue(0)

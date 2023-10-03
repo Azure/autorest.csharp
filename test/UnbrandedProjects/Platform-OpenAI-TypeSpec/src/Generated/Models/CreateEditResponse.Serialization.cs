@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.ServiceModel.Rest.Core;
 using System.Text.Json;
 
@@ -21,7 +22,7 @@ namespace OpenAI.Models
             }
             CreateEditResponseObject @object = default;
             DateTimeOffset created = default;
-            BinaryData choices = default;
+            IReadOnlyList<CreateEditChoice> choices = default;
             CompletionUsage usage = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -37,7 +38,12 @@ namespace OpenAI.Models
                 }
                 if (property.NameEquals("choices"u8))
                 {
-                    choices = BinaryData.FromString(property.Value.GetRawText());
+                    List<CreateEditChoice> array = new List<CreateEditChoice>();
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        array.Add(CreateEditChoice.DeserializeCreateEditChoice(item));
+                    }
+                    choices = array;
                     continue;
                 }
                 if (property.NameEquals("usage"u8))

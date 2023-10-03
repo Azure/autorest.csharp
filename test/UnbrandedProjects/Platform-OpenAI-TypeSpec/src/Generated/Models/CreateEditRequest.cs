@@ -20,7 +20,7 @@ namespace OpenAI.Models
         /// </param>
         /// <param name="instruction"> The instruction that tells the model how to edit the prompt. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="instruction"/> is null. </exception>
-        public CreateEditRequest(EditModels model, string instruction)
+        public CreateEditRequest(CreateEditRequestModel model, string instruction)
         {
             ClientUtilities.AssertNotNull(instruction, nameof(instruction));
 
@@ -49,7 +49,7 @@ namespace OpenAI.Models
         ///
         /// We generally recommend altering this or `temperature` but not both.
         /// </param>
-        internal CreateEditRequest(EditModels model, string input, string instruction, long? n, double? temperature, double? topP)
+        internal CreateEditRequest(CreateEditRequestModel model, string input, string instruction, long? n, double? temperature, double? topP)
         {
             Model = model;
             Input = input;
@@ -63,7 +63,7 @@ namespace OpenAI.Models
         /// ID of the model to use. You can use the `text-davinci-edit-001` or `code-davinci-edit-001`
         /// model with this endpoint.
         /// </summary>
-        public EditModels Model { get; }
+        public CreateEditRequestModel Model { get; }
         /// <summary> The input text to use as a starting point for the edit. </summary>
         public string Input { get; set; }
         /// <summary> The instruction that tells the model how to edit the prompt. </summary>
