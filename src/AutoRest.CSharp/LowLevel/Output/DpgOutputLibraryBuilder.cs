@@ -70,7 +70,7 @@ namespace AutoRest.CSharp.Output.Models
                 dictionary.Add(inputEnum, new EnumType(inputEnum, TypeProvider.GetDefaultModelNamespace(null, _defaultNamespace), "public", typeFactory, _sourceInputModel));
             }
 
-            Dictionary<InputModelType, (InputModelProperty, InputEnumType)> enumsToReplace = new Dictionary<InputModelType, (InputModelProperty, InputEnumType)>();
+            List<(InputModelType, InputModelProperty, InputEnumType)> enumsToReplace = new List<(InputModelType, InputModelProperty, InputEnumType)>();
             foreach (var model in models.Keys)
             {
                 foreach (var property in model.Properties)
@@ -92,15 +92,15 @@ namespace AutoRest.CSharp.Output.Models
                             union.GetEnum(),
                             true,
                             union.IsNullable);
-                        enumsToReplace.Add(model, (property, inputEnum));
+                        enumsToReplace.Add((model, property, inputEnum));
                         dictionary.Add(inputEnum, new EnumType(inputEnum, TypeProvider.GetDefaultModelNamespace(null, _defaultNamespace), "public", typeFactory, _sourceInputModel));
                     }
                 }
             }
 
-            foreach (var pair in enumsToReplace)
+            foreach (var (containingModel, property, enumType) in enumsToReplace)
             {
-                models[pair.Key] = models[pair.Key].ReplaceProperty(pair.Value.Item1, pair.Value.Item2);
+                models[containingModel] = models[containingModel].ReplaceProperty(property, enumType);
             }
         }
 

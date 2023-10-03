@@ -29,7 +29,7 @@ namespace OpenAI.Models
         /// <param name="size"> The size of the generated images. Must be one of `256x256`, `512x512`, or `1024x1024`. </param>
         /// <param name="responseFormat"> The format in which the generated images are returned. Must be one of `url` or `b64_json`. </param>
         /// <param name="user"></param>
-        internal CreateImageRequest(string prompt, long? n, ImageSizes? size, ImageResponseFormat? responseFormat, string user)
+        internal CreateImageRequest(string prompt, long? n, CreateImageRequestSize? size, CreateImageRequestResponseFormat? responseFormat, string user)
         {
             Prompt = prompt;
             N = n;
@@ -43,9 +43,9 @@ namespace OpenAI.Models
         /// <summary> The number of images to generate. Must be between 1 and 10. </summary>
         public long? N { get; set; }
         /// <summary> The size of the generated images. Must be one of `256x256`, `512x512`, or `1024x1024`. </summary>
-        public ImageSizes? Size { get; set; }
+        public CreateImageRequestSize? Size { get; set; }
         /// <summary> The format in which the generated images are returned. Must be one of `url` or `b64_json`. </summary>
-        public ImageResponseFormat? ResponseFormat { get; set; }
+        public CreateImageRequestResponseFormat? ResponseFormat { get; set; }
         /// <summary> Gets or sets the user. </summary>
         public string User { get; set; }
     }

@@ -1,9 +1,4 @@
-@doc("image sizes")
-enum ImageSizes {
-    "256x256";
-    "512x512";
-    "1024x1024";
-}
+alias IMAGE_SIZES = "256x256" | "512x512" | "1024x1024";
 
 alias CHAT_COMPLETION_MODELS =
   | "gpt4"

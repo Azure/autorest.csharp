@@ -32,27 +32,13 @@ namespace OpenAI.Models
             }
             if (OptionalProperty.IsDefined(Size))
             {
-                if (Size != null)
-                {
-                    writer.WritePropertyName("size"u8);
-                    writer.WriteStringValue(Size.Value.ToString());
-                }
-                else
-                {
-                    writer.WriteNull("size");
-                }
+                writer.WritePropertyName("size"u8);
+                writer.WriteStringValue(Size.Value.ToString());
             }
             if (OptionalProperty.IsDefined(ResponseFormat))
             {
-                if (ResponseFormat != null)
-                {
-                    writer.WritePropertyName("response_format"u8);
-                    writer.WriteStringValue(ResponseFormat.Value.ToString());
-                }
-                else
-                {
-                    writer.WriteNull("response_format");
-                }
+                writer.WritePropertyName("response_format"u8);
+                writer.WriteStringValue(ResponseFormat.Value.ToString());
             }
             if (OptionalProperty.IsDefined(User))
             {

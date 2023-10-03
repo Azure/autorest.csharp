@@ -6,19 +6,13 @@ alias SharedImageProperties = {
   n?: ImagesN | null; // = 1;
 
   /** The size of the generated images. Must be one of `256x256`, `512x512`, or `1024x1024`. */
-  size?: ImageSizes | null; // = "1024x1024"
+  size?: IMAGE_SIZES | null; // = "1024x1024"
 
   /** The format in which the generated images are returned. Must be one of `url` or `b64_json`. */
-  response_format?: ImageResponseFormat | null = ImageResponseFormat.url;
+  response_format?: "url" | "b64_json" | null = "url";
 
   user?: User;
 };
-
-@doc("image response format")
-enum ImageResponseFormat {
-    "url";
-    "b64_json";
-}
 
 model CreateImageRequest {
   /** A text description of the desired image(s). The maximum length is 1000 characters. */
@@ -40,8 +34,8 @@ model Image {
   url?: url;
 
   /** The base64-encoded JSON of the generated image, if `response_format` is `b64_json`. */
-  //@encode("base64", string)
-  b64_json?: unknown;
+  @encode("base64", string)
+  b64_json?: bytes;
 }
 
 model CreateImageEditRequest {

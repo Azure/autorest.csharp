@@ -39,7 +39,7 @@ namespace OpenAI.Models
                     {
                         continue;
                     }
-                    b64Json = BinaryData.FromString(property.Value.GetRawText());
+                    b64Json = BinaryData.FromBytes(property.Value.GetBytesFromBase64("D"));
                     continue;
                 }
             }

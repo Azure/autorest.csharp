@@ -44,7 +44,7 @@ namespace OpenAI.Models
         /// <param name="size"> The size of the generated images. Must be one of `256x256`, `512x512`, or `1024x1024`. </param>
         /// <param name="responseFormat"> The format in which the generated images are returned. Must be one of `url` or `b64_json`. </param>
         /// <param name="user"></param>
-        internal CreateImageEditRequest(string prompt, BinaryData image, BinaryData mask, long? n, ImageSizes? size, ImageResponseFormat? responseFormat, string user)
+        internal CreateImageEditRequest(string prompt, BinaryData image, BinaryData mask, long? n, CreateImageEditRequestSize? size, CreateImageEditRequestResponseFormat? responseFormat, string user)
         {
             Prompt = prompt;
             Image = image;
@@ -97,9 +97,9 @@ namespace OpenAI.Models
         /// <summary> The number of images to generate. Must be between 1 and 10. </summary>
         public long? N { get; set; }
         /// <summary> The size of the generated images. Must be one of `256x256`, `512x512`, or `1024x1024`. </summary>
-        public ImageSizes? Size { get; set; }
+        public CreateImageEditRequestSize? Size { get; set; }
         /// <summary> The format in which the generated images are returned. Must be one of `url` or `b64_json`. </summary>
-        public ImageResponseFormat? ResponseFormat { get; set; }
+        public CreateImageEditRequestResponseFormat? ResponseFormat { get; set; }
         /// <summary> Gets or sets the user. </summary>
         public string User { get; set; }
     }

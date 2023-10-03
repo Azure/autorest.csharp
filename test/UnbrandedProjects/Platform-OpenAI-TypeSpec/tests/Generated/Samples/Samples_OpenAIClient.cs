@@ -1711,8 +1711,8 @@ Description = "<description>",
             CreateImageRequest image = new CreateImageRequest("<prompt>")
             {
                 N = 1234L,
-                Size = ImageSizes._256x256,
-                ResponseFormat = ImageResponseFormat.Url,
+                Size = CreateImageRequestSize._256x256,
+                ResponseFormat = CreateImageRequestResponseFormat.Url,
                 User = "<user>",
             };
             Result<ImagesResponse> result = client.CreateImage(image);
@@ -1728,8 +1728,8 @@ Description = "<description>",
             CreateImageRequest image = new CreateImageRequest("<prompt>")
             {
                 N = 1234L,
-                Size = ImageSizes._256x256,
-                ResponseFormat = ImageResponseFormat.Url,
+                Size = CreateImageRequestSize._256x256,
+                ResponseFormat = CreateImageRequestResponseFormat.Url,
                 User = "<user>",
             };
             Result<ImagesResponse> result = await client.CreateImageAsync(image);
@@ -1856,8 +1856,8 @@ Description = "<description>",
             {
                 Mask = BinaryData.FromObjectAsJson(new object()),
                 N = 1234L,
-                Size = ImageSizes._256x256,
-                ResponseFormat = ImageResponseFormat.Url,
+                Size = CreateImageEditRequestSize._256x256,
+                ResponseFormat = CreateImageEditRequestResponseFormat.Url,
                 User = "<user>",
             };
             Result<ImagesResponse> result = client.CreateImageEdit(image);
@@ -1874,8 +1874,8 @@ Description = "<description>",
             {
                 Mask = BinaryData.FromObjectAsJson(new object()),
                 N = 1234L,
-                Size = ImageSizes._256x256,
-                ResponseFormat = ImageResponseFormat.Url,
+                Size = CreateImageEditRequestSize._256x256,
+                ResponseFormat = CreateImageEditRequestResponseFormat.Url,
                 User = "<user>",
             };
             Result<ImagesResponse> result = await client.CreateImageEditAsync(image);
@@ -1995,8 +1995,8 @@ Description = "<description>",
             CreateImageVariationRequest image = new CreateImageVariationRequest(BinaryData.FromObjectAsJson(new object()))
             {
                 N = 1234L,
-                Size = ImageSizes._256x256,
-                ResponseFormat = ImageResponseFormat.Url,
+                Size = CreateImageVariationRequestSize._256x256,
+                ResponseFormat = CreateImageVariationRequestResponseFormat.Url,
                 User = "<user>",
             };
             Result<ImagesResponse> result = client.CreateImageVariation(image);
@@ -2012,8 +2012,8 @@ Description = "<description>",
             CreateImageVariationRequest image = new CreateImageVariationRequest(BinaryData.FromObjectAsJson(new object()))
             {
                 N = 1234L,
-                Size = ImageSizes._256x256,
-                ResponseFormat = ImageResponseFormat.Url,
+                Size = CreateImageVariationRequestSize._256x256,
+                ResponseFormat = CreateImageVariationRequestResponseFormat.Url,
                 User = "<user>",
             };
             Result<ImagesResponse> result = await client.CreateImageVariationAsync(image);
