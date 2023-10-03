@@ -40,7 +40,7 @@ namespace OpenAI.Models
         /// </param>
         /// <exception cref="ArgumentNullException"> <paramref name="message"/> is null. </exception>
         /// <returns> A new <see cref="Models.CreateChatCompletionChoice"/> instance for mocking. </returns>
-        public static CreateChatCompletionChoice CreateChatCompletionChoice(long index = default, ChatCompletionResponseMessage message = null, FinishReason finishReason = default)
+        public static CreateChatCompletionChoice CreateChatCompletionChoice(long index = default, ChatCompletionResponseMessage message = null, CreateChatCompletionChoiceFinishReason finishReason = default)
         {
             if (message == null)
             {

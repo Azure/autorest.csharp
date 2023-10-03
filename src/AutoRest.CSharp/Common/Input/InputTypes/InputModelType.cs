@@ -63,5 +63,46 @@ namespace AutoRest.CSharp.Common.Input
                 model.DiscriminatorPropertyName,
                 model.IsNullable);
         }
+
+        internal InputModelType ReplaceProperty(InputModelProperty property, InputEnumType enumType)
+        {
+            return new InputModelType(
+                Name,
+                Namespace,
+                Accessibility,
+                Deprecated,
+                Description,
+                Usage,
+                GetNewProperties(property, enumType),
+                BaseModel,
+                DerivedModels,
+                DiscriminatorValue,
+                DiscriminatorPropertyName,
+                IsNullable);
+        }
+
+        private IReadOnlyList<InputModelProperty> GetNewProperties(InputModelProperty property, InputEnumType enumType)
+        {
+            List<InputModelProperty> properties = new List<InputModelProperty>();
+            foreach (var myProperty in Properties)
+            {
+                if (myProperty.Equals(property))
+                {
+                    properties.Add(new InputModelProperty(
+                        myProperty.Name,
+                        myProperty.SerializedName,
+                        myProperty.Description,
+                        enumType,
+                        myProperty.IsRequired,
+                        myProperty.IsReadOnly,
+                        myProperty.IsDiscriminator));
+                }
+                else
+                {
+                    properties.Add(myProperty);
+                }
+            }
+            return properties;
+        }
     }
 }

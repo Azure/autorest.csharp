@@ -236,7 +236,7 @@ model CreateChatCompletionResponse {
      * specified in the request was reached, `content_filter` if the content was omitted due to
      * a flag from our content filters, or `function_call` if the model called a function.
      */
-    finish_reason: FinishReason;
+    finish_reason: "stop" | "length" | "function_call" | "content_filter";
   }[];
 
   usage?: CompletionUsage;

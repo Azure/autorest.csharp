@@ -23,7 +23,7 @@ namespace OpenAI.Models
         /// a flag from our content filters, or `function_call` if the model called a function.
         /// </param>
         /// <exception cref="ArgumentNullException"> <paramref name="message"/> is null. </exception>
-        internal CreateChatCompletionChoice(long index, ChatCompletionResponseMessage message, FinishReason finishReason)
+        internal CreateChatCompletionChoice(long index, ChatCompletionResponseMessage message, CreateChatCompletionChoiceFinishReason finishReason)
         {
             ClientUtilities.AssertNotNull(message, nameof(message));
 
@@ -42,6 +42,6 @@ namespace OpenAI.Models
         /// specified in the request was reached, `content_filter` if the content was omitted due to
         /// a flag from our content filters, or `function_call` if the model called a function.
         /// </summary>
-        public FinishReason FinishReason { get; }
+        public CreateChatCompletionChoiceFinishReason FinishReason { get; }
     }
 }

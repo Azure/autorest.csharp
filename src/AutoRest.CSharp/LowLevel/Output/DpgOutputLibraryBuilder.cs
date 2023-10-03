@@ -13,7 +13,6 @@ using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Configuration = AutoRest.CSharp.Common.Input.Configuration;
 
 namespace AutoRest.CSharp.Output.Models
@@ -56,24 +55,52 @@ namespace AutoRest.CSharp.Output.Models
 
             if (isTspInput)
             {
-                CreateEnums(enums, library.TypeFactory);
                 CreateModels(models, library.TypeFactory);
+                CreateEnums(enums, models, library.TypeFactory);
             }
             CreateClients(clients, topLevelClientInfos, library.TypeFactory, clientOptions);
 
             return library;
         }
 
-        private void CreateEnums(IDictionary<InputEnumType, EnumType> dictionary, TypeFactory typeFactory)
+        private void CreateEnums(IDictionary<InputEnumType, EnumType> dictionary, IDictionary<InputModelType, ModelTypeProvider> models, TypeFactory typeFactory)
         {
             foreach (var inputEnum in _rootNamespace.Enums)
             {
                 dictionary.Add(inputEnum, new EnumType(inputEnum, TypeProvider.GetDefaultModelNamespace(null, _defaultNamespace), "public", typeFactory, _sourceInputModel));
             }
 
-            Dictionary<InputType, EnumType> enumReplacements = new Dictionary<InputType, EnumType>();
-            foreach (var inputType in _rootNamespace.Models)
+            Dictionary<InputModelType, (InputModelProperty, InputEnumType)> enumsToReplace = new Dictionary<InputModelType, (InputModelProperty, InputEnumType)>();
+            foreach (var model in models.Keys)
             {
+                foreach (var property in model.Properties)
+                {
+                    if (property.Type is not InputUnionType union)
+                        continue;
+
+                    if (union.IsAllLiteralString() || union.IsAllLiteralStringPlusString())
+                    {
+                        string modelname = models[model].Type.Name;
+                        InputEnumType inputEnum = new InputEnumType(
+                            $"{modelname}{GetNameWithCorrectPluralization(union, property.Name)}",
+                            model.Namespace,
+                            model.Accessibility,
+                            null,
+                            $"Enum for {property.Name} in {modelname}",
+                            model.Usage,
+                            InputPrimitiveType.String,
+                            union.GetEnum(),
+                            true,
+                            union.IsNullable);
+                        enumsToReplace.Add(model, (property, inputEnum));
+                        dictionary.Add(inputEnum, new EnumType(inputEnum, TypeProvider.GetDefaultModelNamespace(null, _defaultNamespace), "public", typeFactory, _sourceInputModel));
+                    }
+                }
+            }
+
+            foreach (var pair in enumsToReplace)
+            {
+                models[pair.Key] = models[pair.Key].ReplaceInputModelType(pair.Value.Item1, pair.Value.Item2);
             }
         }
 

@@ -20,7 +20,7 @@ namespace OpenAI.Models
             }
             long index = default;
             ChatCompletionResponseMessage message = default;
-            FinishReason finishReason = default;
+            CreateChatCompletionChoiceFinishReason finishReason = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("index"u8))
@@ -35,7 +35,7 @@ namespace OpenAI.Models
                 }
                 if (property.NameEquals("finish_reason"u8))
                 {
-                    finishReason = new FinishReason(property.Value.GetString());
+                    finishReason = new CreateChatCompletionChoiceFinishReason(property.Value.GetString());
                     continue;
                 }
             }
