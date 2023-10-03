@@ -609,7 +609,7 @@ Description = "<description>",
             RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
             {
                 training_file = "<training_file>",
-                model = "babbage-002",
+                model = "<model>",
             }).ToStream());
             Result result = client.CreateFineTuningJob(content);
 
@@ -640,7 +640,7 @@ Description = "<description>",
             RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
             {
                 training_file = "<training_file>",
-                model = "babbage-002",
+                model = "<model>",
             }).ToStream());
             Result result = await client.CreateFineTuningJobAsync(content);
 
@@ -668,7 +668,7 @@ Description = "<description>",
             KeyCredential credential = new KeyCredential("<key>");
             OpenAIClient client = new OpenAIClient(credential);
 
-            CreateFineTuningJobRequest job = new CreateFineTuningJobRequest("<training_file>", FineTuningJobModels.Babbage002);
+            CreateFineTuningJobRequest job = new CreateFineTuningJobRequest("<training_file>", new CreateFineTuningJobRequestModel("<model>"));
             Result<FineTuningJob> result = client.CreateFineTuningJob(job);
         }
 
@@ -679,7 +679,7 @@ Description = "<description>",
             KeyCredential credential = new KeyCredential("<key>");
             OpenAIClient client = new OpenAIClient(credential);
 
-            CreateFineTuningJobRequest job = new CreateFineTuningJobRequest("<training_file>", FineTuningJobModels.Babbage002);
+            CreateFineTuningJobRequest job = new CreateFineTuningJobRequest("<training_file>", new CreateFineTuningJobRequestModel("<model>"));
             Result<FineTuningJob> result = await client.CreateFineTuningJobAsync(job);
         }
 
@@ -694,10 +694,10 @@ Description = "<description>",
             {
                 training_file = "<training_file>",
                 validation_file = "<validation_file>",
-                model = "babbage-002",
+                model = "<model>",
                 hyperparameters = new
                 {
-                    n_epochs = new object(),
+                    n_epochs = "auto",
                 },
                 suffix = "<suffix>",
             }).ToStream());
@@ -733,10 +733,10 @@ Description = "<description>",
             {
                 training_file = "<training_file>",
                 validation_file = "<validation_file>",
-                model = "babbage-002",
+                model = "<model>",
                 hyperparameters = new
                 {
-                    n_epochs = new object(),
+                    n_epochs = "auto",
                 },
                 suffix = "<suffix>",
             }).ToStream());
@@ -768,12 +768,12 @@ Description = "<description>",
             KeyCredential credential = new KeyCredential("<key>");
             OpenAIClient client = new OpenAIClient(credential);
 
-            CreateFineTuningJobRequest job = new CreateFineTuningJobRequest("<training_file>", FineTuningJobModels.Babbage002)
+            CreateFineTuningJobRequest job = new CreateFineTuningJobRequest("<training_file>", new CreateFineTuningJobRequestModel("<model>"))
             {
                 ValidationFile = "<validation_file>",
-                Hyperparameters = new HyperParameters
+                Hyperparameters = new CreateFineTuningJobHyperparameters
                 {
-                    NEpochs = BinaryData.FromObjectAsJson(new object()),
+                    NEpochs = BinaryData.FromObjectAsJson("auto"),
                 },
                 Suffix = "<suffix>",
             };
@@ -787,12 +787,12 @@ Description = "<description>",
             KeyCredential credential = new KeyCredential("<key>");
             OpenAIClient client = new OpenAIClient(credential);
 
-            CreateFineTuningJobRequest job = new CreateFineTuningJobRequest("<training_file>", FineTuningJobModels.Babbage002)
+            CreateFineTuningJobRequest job = new CreateFineTuningJobRequest("<training_file>", new CreateFineTuningJobRequestModel("<model>"))
             {
                 ValidationFile = "<validation_file>",
-                Hyperparameters = new HyperParameters
+                Hyperparameters = new CreateFineTuningJobHyperparameters
                 {
-                    NEpochs = BinaryData.FromObjectAsJson(new object()),
+                    NEpochs = BinaryData.FromObjectAsJson("auto"),
                 },
                 Suffix = "<suffix>",
             };

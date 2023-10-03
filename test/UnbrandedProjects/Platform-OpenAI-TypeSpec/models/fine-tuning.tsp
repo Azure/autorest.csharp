@@ -6,7 +6,7 @@ model FineTuningJob {
   id: string;
 
   /** The object type, which is always "fine_tuning.job". */
-  object: FineTuningJobObjectType.fineTuningJob;
+  object: "fine_tuning.job";
 
   /** The Unix timestamp (in seconds) for when the fine-tuning job was created. */
   @encode("unixTimestamp", int32)
@@ -35,13 +35,28 @@ model FineTuningJob {
    * The current status of the fine-tuning job, which can be either `created`, `pending`, `running`,
    * `succeeded`, `failed`, or `cancelled`.
    */
-  status: FineTuningStatus;
+  status:
+    | "created"
+    | "pending"
+    | "running"
+    | "succeeded"
+    | "failed"
+    | "cancelled";
 
   /**
    * The hyperparameters used for the fine-tuning job. See the
    * [fine-tuning guide](/docs/guides/fine-tuning) for more details.
    */
-  hyperparameters: HyperParameters;
+  hyperparameters: {
+    /**
+     * The number of epochs to train the model for. An epoch refers to one full cycle through the
+     * training dataset.
+     *
+     * "Auto" decides the optimal number of epochs based on the size of the dataset. If setting the
+     * number manually, we support any number between 1 and 50 epochs.
+     */
+    n_epochs?: "auto" | NEpochs = "auto";
+  };
 
   /**
    * The file ID used for training. You can retrieve the training data with the
@@ -71,49 +86,19 @@ model FineTuningJob {
    * For fine-tuning jobs that have `failed`, this will contain more information on the cause of the
    * failure.
    */
-  error: FineTuningJobError | null;
-}
+  error: {
+    /** A human-readable error message. */
+    message?: string; // likely should be required, but spec doesn't say so.
 
-@doc("fine tuning job object type")
-enum FineTuningJobObjectType {
-  fineTuningJob: "fine_tuning.job";
-}
+    /** A machine-readable error code. */
+    code?: string;
 
-@doc("fine tuning job error")
-model FineTuningJobError {
-  /** A human-readable error message. */
-  message?: string; // likely should be required, but spec doesn't say so.
-
-  /** A machine-readable error code. */
-  code?: string;
-
-  /**
-   * The parameter that was invalid, usually `training_file` or `validation_file`. This field
-   * will be null if the failure was not parameter-specific.
-   */
-  param?: string | null;
-}
-
-@doc("hyperparameters")
-model HyperParameters {
-  /**
-   * The number of epochs to train the model for. An epoch refers to one full cycle through the
-   * training dataset.
-   *
-   * "Auto" decides the optimal number of epochs based on the size of the dataset. If setting the
-   * number manually, we support any number between 1 and 50 epochs.
-   */
-  n_epochs?: unknown = "auto";
-}
-
-@doc("fine tuning status")
-enum FineTuningStatus {
-  "created";
-  "pending";
-  "running";
-  "succeeded";
-  "failed";
-  "cancelled";
+    /**
+     * The parameter that was invalid, usually `training_file` or `validation_file`. This field
+     * will be null if the failure was not parameter-specific.
+     */
+    param?: string | null;
+  } | null;
 }
 
 model FineTuningEvent {
@@ -124,14 +109,8 @@ model FineTuningEvent {
 
   level: string;
   message: string;
-  data?: Record<unknown>;
-  type?: FineTuningEventType; // "default is "none"?
-}
-
-@doc("fine tuning event type")
-enum FineTuningEventType {
-  "message";
-  "metrics";
+  data?: Record<unknown> | null;
+  type?: "message" | "metrics"; // "default is "none"?
 }
 
 /** The `FineTune` object represents a legacy fine-tune job that has been created through the API. */
@@ -141,7 +120,7 @@ model FineTune {
   id: string;
 
   /** The object type, which is always "fine-tune". */
-  object: FineTuneObjectType.fineTune;
+  object: "fine-tune";
 
   /** The Unix timestamp (in seconds) for when the fine-tuning job was created. */
   @encode("unixTimestamp", int32)
@@ -164,13 +143,40 @@ model FineTune {
    * The current status of the fine-tuning job, which can be either `created`, `running`,
    * `succeeded`, `failed`, or `cancelled`.
    */
-  status: FineTuneStatus;
+  status: "created" | "running" | "succeeded" | "failed" | "cancelled";
 
   /**
    * The hyperparameters used for the fine-tuning job. See the
    * [fine-tuning guide](/docs/guides/legacy-fine-tuning/hyperparameters) for more details.
    */
-  hyperparams: FineTuneHyperParameters;
+  hyperparams: {
+    /**
+     * The number of epochs to train the model for. An epoch refers to one full cycle through the
+     * training dataset.
+     */
+    n_epochs: safeint;
+
+    /**
+     * The batch size to use for training. The batch size is the number of training examples used to
+     * train a single forward and backward pass.
+     */
+    batch_size: safeint;
+
+    /** The weight to use for loss on the prompt tokens. */
+    prompt_loss_weight: float64;
+
+    /** The learning rate multiplier to use for training. */
+    learning_rate_multiplier: float64;
+
+    /** The classification metrics to compute using the validation dataset at the end of every epoch. */
+    compute_classification_metrics?: boolean;
+
+    /** The positive class to use for computing classification metrics. */
+    classification_positive_class?: string;
+
+    /** The number of classes to use for computing classification metrics. */
+    classification_n_classes?: safeint;
+  };
 
   /** The list of files used for training. */
   training_files: OpenAIFile[];
@@ -185,50 +191,6 @@ model FineTune {
   events?: FineTuneEvent[];
 }
 
-@doc("fine tune object type")
-enum FineTuneObjectType {
-  fineTune: "fine-tune"
-}
-
-@doc("fine tune status")
-enum FineTuneStatus {
-  "created";
-  "running";
-  "succeeded";
-  "failed";
-  "cancelled";
-}
-
-@doc("fine tune hyperparameters")
-model FineTuneHyperParameters {
-  /**
-   * The number of epochs to train the model for. An epoch refers to one full cycle through the
-   * training dataset.
-   */
-  n_epochs: safeint;
-
-  /**
-   * The batch size to use for training. The batch size is the number of training examples used to
-   * train a single forward and backward pass.
-   */
-  batch_size: safeint;
-
-  /** The weight to use for loss on the prompt tokens. */
-  prompt_loss_weight: float64;
-
-  /** The learning rate multiplier to use for training. */
-  learning_rate_multiplier: float64;
-
-  /** The classification metrics to compute using the validation dataset at the end of every epoch. */
-  compute_classification_metrics?: boolean;
-
-  /** The positive class to use for computing classification metrics. */
-  classification_positive_class?: string;
-
-  /** The number of classes to use for computing classification metrics. */
-  classification_n_classes?: safeint;
-}
-
 model FineTuningJobEvent {
   id: string;
   object: string;
@@ -236,15 +198,8 @@ model FineTuningJobEvent {
   @encode("unixTimestamp", int32)
   created_at: utcDateTime;
 
-  level: FineTuningJobEventLevel;
+  level: "info" | "warn" | "error";
   message: string;
-}
-
-@doc("fine tuning job event level")
-enum FineTuningJobEventLevel {
-  "info";
-  "warn";
-  "error";
 }
 
 model FineTuneEvent {
@@ -289,10 +244,16 @@ model CreateFineTuningJobRequest {
    * [supported models](/docs/guides/fine-tuning/what-models-can-be-fine-tuned).
    */
   @extension("x-oaiTypeLabel", "string")
-  `model`: FineTuningJobModels;
+  `model`: string | "babbage-002" | "davinci-002" | "gpt-3.5-turbo";
 
   /** The hyperparameters used for the fine-tuning job. */
-  hyperparameters?: HyperParameters;
+  hyperparameters?: {
+    /**
+     * The number of epochs to train the model for. An epoch refers to one full cycle through the
+     * training dataset.
+     */
+    n_epochs?: "auto" | NEpochs = "auto";
+  };
 
   /**
    * A string of up to 18 characters that will be added to your fine-tuned model name.
@@ -301,13 +262,6 @@ model CreateFineTuningJobRequest {
    * `ft:gpt-3.5-turbo:openai:custom-model-name:7p4lURel`.
    */
   suffix?: SuffixString | null; // = null;
-}
-
-@doc("fine tuning models")
-enum FineTuningJobModels {
-  "babbage-002";
-  "davinci-002";
-  "gpt-3.5-turbo";
 }
 
 @minValue(1)
@@ -357,7 +311,7 @@ model CreateFineTuneRequest {
    * about these models, see the [Models](/docs/models) documentation.
    */
   @extension("x-oaiTypeLabel", "string")
-  `model`?: FineTuningModels | null;
+  `model`?: string | "ada" | "babbage" | "curie" | "davinci" | null;
 
   /**
    * The number of epochs to train the model for. An epoch refers to one full cycle through the
@@ -439,14 +393,6 @@ model CreateFineTuneRequest {
    * `ada:ft-your-org:custom-model-name-2022-02-15-04-21-04`.
    */
   suffix: SuffixString | null; // = null;
-}
-
-@doc("fine tuning models")
-enum FineTuningModels {
-  "ada";
-  "babbage";
-  "curie";
-  "davinci";
 }
 
 @minLength(1)

@@ -11,9 +11,9 @@ using System.Text.Json;
 
 namespace OpenAI.Models
 {
-    public partial class FineTuneHyperParameters
+    public partial class FineTuneHyperparams
     {
-        internal static FineTuneHyperParameters DeserializeFineTuneHyperParameters(JsonElement element)
+        internal static FineTuneHyperparams DeserializeFineTuneHyperparams(JsonElement element)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -72,15 +72,15 @@ namespace OpenAI.Models
                     continue;
                 }
             }
-            return new FineTuneHyperParameters(nEpochs, batchSize, promptLossWeight, learningRateMultiplier, OptionalProperty.ToNullable(computeClassificationMetrics), classificationPositiveClass.Value, OptionalProperty.ToNullable(classificationNClasses));
+            return new FineTuneHyperparams(nEpochs, batchSize, promptLossWeight, learningRateMultiplier, OptionalProperty.ToNullable(computeClassificationMetrics), classificationPositiveClass.Value, OptionalProperty.ToNullable(classificationNClasses));
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="result"> The result to deserialize the model from. </param>
-        internal static FineTuneHyperParameters FromResponse(PipelineResponse result)
+        internal static FineTuneHyperparams FromResponse(PipelineResponse result)
         {
             using var document = JsonDocument.Parse(result.Content);
-            return DeserializeFineTuneHyperParameters(document.RootElement);
+            return DeserializeFineTuneHyperparams(document.RootElement);
         }
     }
 }

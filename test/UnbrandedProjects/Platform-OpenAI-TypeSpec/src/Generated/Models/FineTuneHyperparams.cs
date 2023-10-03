@@ -7,10 +7,10 @@
 
 namespace OpenAI.Models
 {
-    /// <summary> fine tune hyperparameters. </summary>
-    public partial class FineTuneHyperParameters
+    /// <summary> The FineTuneHyperparams. </summary>
+    public partial class FineTuneHyperparams
     {
-        /// <summary> Initializes a new instance of FineTuneHyperParameters. </summary>
+        /// <summary> Initializes a new instance of FineTuneHyperparams. </summary>
         /// <param name="nEpochs">
         /// The number of epochs to train the model for. An epoch refers to one full cycle through the
         /// training dataset.
@@ -21,7 +21,7 @@ namespace OpenAI.Models
         /// </param>
         /// <param name="promptLossWeight"> The weight to use for loss on the prompt tokens. </param>
         /// <param name="learningRateMultiplier"> The learning rate multiplier to use for training. </param>
-        internal FineTuneHyperParameters(long nEpochs, long batchSize, double promptLossWeight, double learningRateMultiplier)
+        internal FineTuneHyperparams(long nEpochs, long batchSize, double promptLossWeight, double learningRateMultiplier)
         {
             NEpochs = nEpochs;
             BatchSize = batchSize;
@@ -29,7 +29,7 @@ namespace OpenAI.Models
             LearningRateMultiplier = learningRateMultiplier;
         }
 
-        /// <summary> Initializes a new instance of FineTuneHyperParameters. </summary>
+        /// <summary> Initializes a new instance of FineTuneHyperparams. </summary>
         /// <param name="nEpochs">
         /// The number of epochs to train the model for. An epoch refers to one full cycle through the
         /// training dataset.
@@ -43,7 +43,7 @@ namespace OpenAI.Models
         /// <param name="computeClassificationMetrics"> The classification metrics to compute using the validation dataset at the end of every epoch. </param>
         /// <param name="classificationPositiveClass"> The positive class to use for computing classification metrics. </param>
         /// <param name="classificationNClasses"> The number of classes to use for computing classification metrics. </param>
-        internal FineTuneHyperParameters(long nEpochs, long batchSize, double promptLossWeight, double learningRateMultiplier, bool? computeClassificationMetrics, string classificationPositiveClass, long? classificationNClasses)
+        internal FineTuneHyperparams(long nEpochs, long batchSize, double promptLossWeight, double learningRateMultiplier, bool? computeClassificationMetrics, string classificationPositiveClass, long? classificationNClasses)
         {
             NEpochs = nEpochs;
             BatchSize = batchSize;

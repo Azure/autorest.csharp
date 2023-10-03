@@ -29,7 +29,7 @@ namespace OpenAI.Models
         /// [supported models](/docs/guides/fine-tuning/what-models-can-be-fine-tuned).
         /// </param>
         /// <exception cref="ArgumentNullException"> <paramref name="trainingFile"/> is null. </exception>
-        public CreateFineTuningJobRequest(string trainingFile, FineTuningJobModels model)
+        public CreateFineTuningJobRequest(string trainingFile, CreateFineTuningJobRequestModel model)
         {
             ClientUtilities.AssertNotNull(trainingFile, nameof(trainingFile));
 
@@ -71,7 +71,7 @@ namespace OpenAI.Models
         /// For example, a `suffix` of "custom-model-name" would produce a model name like
         /// `ft:gpt-3.5-turbo:openai:custom-model-name:7p4lURel`.
         /// </param>
-        internal CreateFineTuningJobRequest(string trainingFile, string validationFile, FineTuningJobModels model, HyperParameters hyperparameters, string suffix)
+        internal CreateFineTuningJobRequest(string trainingFile, string validationFile, CreateFineTuningJobRequestModel model, CreateFineTuningJobHyperparameters hyperparameters, string suffix)
         {
             TrainingFile = trainingFile;
             ValidationFile = validationFile;
@@ -108,9 +108,9 @@ namespace OpenAI.Models
         /// The name of the model to fine-tune. You can select one of the
         /// [supported models](/docs/guides/fine-tuning/what-models-can-be-fine-tuned).
         /// </summary>
-        public FineTuningJobModels Model { get; }
+        public CreateFineTuningJobRequestModel Model { get; }
         /// <summary> The hyperparameters used for the fine-tuning job. </summary>
-        public HyperParameters Hyperparameters { get; set; }
+        public CreateFineTuningJobHyperparameters Hyperparameters { get; set; }
         /// <summary>
         /// A string of up to 18 characters that will be added to your fine-tuned model name.
         ///

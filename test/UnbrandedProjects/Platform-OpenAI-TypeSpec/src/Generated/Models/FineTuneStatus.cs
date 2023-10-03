@@ -10,7 +10,7 @@ using System.ComponentModel;
 
 namespace OpenAI.Models
 {
-    /// <summary> fine tune status. </summary>
+    /// <summary> Enum for status in FineTune. </summary>
     public readonly partial struct FineTuneStatus : IEquatable<FineTuneStatus>
     {
         private readonly string _value;

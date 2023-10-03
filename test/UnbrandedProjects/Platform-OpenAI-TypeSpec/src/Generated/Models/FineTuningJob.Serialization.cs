@@ -22,14 +22,14 @@ namespace OpenAI.Models
                 return null;
             }
             string id = default;
-            string @object = default;
+            FineTuningJobObject @object = default;
             DateTimeOffset createdAt = default;
             DateTimeOffset? finishedAt = default;
             string model = default;
             string fineTunedModel = default;
             string organizationId = default;
-            FineTuningStatus status = default;
-            HyperParameters hyperparameters = default;
+            FineTuningJobStatus status = default;
+            FineTuningJobHyperparameters hyperparameters = default;
             string trainingFile = default;
             string validationFile = default;
             IReadOnlyList<string> resultFiles = default;
@@ -44,7 +44,7 @@ namespace OpenAI.Models
                 }
                 if (property.NameEquals("object"u8))
                 {
-                    @object = property.Value.GetString();
+                    @object = new FineTuningJobObject(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("created_at"u8))
@@ -84,12 +84,12 @@ namespace OpenAI.Models
                 }
                 if (property.NameEquals("status"u8))
                 {
-                    status = new FineTuningStatus(property.Value.GetString());
+                    status = new FineTuningJobStatus(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("hyperparameters"u8))
                 {
-                    hyperparameters = HyperParameters.DeserializeHyperParameters(property.Value);
+                    hyperparameters = FineTuningJobHyperparameters.DeserializeFineTuningJobHyperparameters(property.Value);
                     continue;
                 }
                 if (property.NameEquals("training_file"u8))

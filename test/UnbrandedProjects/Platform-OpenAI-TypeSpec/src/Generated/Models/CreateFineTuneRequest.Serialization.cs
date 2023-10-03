@@ -32,15 +32,8 @@ namespace OpenAI.Models
             }
             if (OptionalProperty.IsDefined(Model))
             {
-                if (Model != null)
-                {
-                    writer.WritePropertyName("model"u8);
-                    writer.WriteStringValue(Model.Value.ToString());
-                }
-                else
-                {
-                    writer.WriteNull("model");
-                }
+                writer.WritePropertyName("model"u8);
+                writer.WriteStringValue(Model.Value.ToString());
             }
             if (OptionalProperty.IsDefined(NEpochs))
             {

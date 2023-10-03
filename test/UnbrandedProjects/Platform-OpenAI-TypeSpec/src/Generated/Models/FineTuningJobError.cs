@@ -7,7 +7,7 @@
 
 namespace OpenAI.Models
 {
-    /// <summary> fine tuning job error. </summary>
+    /// <summary> The FineTuningJobError. </summary>
     public partial class FineTuningJobError
     {
         /// <summary> Initializes a new instance of FineTuningJobError. </summary>

@@ -12,24 +12,9 @@ using System.Text.Json;
 
 namespace OpenAI.Models
 {
-    public partial class HyperParameters : IUtf8JsonWriteable
+    public partial class FineTuningJobHyperparameters
     {
-        void IUtf8JsonWriteable.Write(Utf8JsonWriter writer)
-        {
-            writer.WriteStartObject();
-            if (OptionalProperty.IsDefined(NEpochs))
-            {
-                writer.WritePropertyName("n_epochs"u8);
-#if NET6_0_OR_GREATER
-				writer.WriteRawValue(NEpochs);
-#else
-                JsonSerializer.Serialize(writer, JsonDocument.Parse(NEpochs.ToString()).RootElement);
-#endif
-            }
-            writer.WriteEndObject();
-        }
-
-        internal static HyperParameters DeserializeHyperParameters(JsonElement element)
+        internal static FineTuningJobHyperparameters DeserializeFineTuningJobHyperparameters(JsonElement element)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -48,23 +33,15 @@ namespace OpenAI.Models
                     continue;
                 }
             }
-            return new HyperParameters(nEpochs.Value);
+            return new FineTuningJobHyperparameters(nEpochs.Value);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="result"> The result to deserialize the model from. </param>
-        internal static HyperParameters FromResponse(PipelineResponse result)
+        internal static FineTuningJobHyperparameters FromResponse(PipelineResponse result)
         {
             using var document = JsonDocument.Parse(result.Content);
-            return DeserializeHyperParameters(document.RootElement);
-        }
-
-        /// <summary> Convert into a Utf8JsonRequestBody. </summary>
-        internal virtual RequestBody ToRequestBody()
-        {
-            var content = new Utf8JsonRequestBody();
-            content.JsonWriter.WriteObjectValue(this);
-            return content;
+            return DeserializeFineTuningJobHyperparameters(document.RootElement);
         }
     }
 }

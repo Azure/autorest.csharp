@@ -164,11 +164,25 @@ namespace OpenAI.Models
         /// failure.
         /// </param>
         /// <returns> A new <see cref="Models.FineTuningJob"/> instance for mocking. </returns>
-        public static FineTuningJob FineTuningJob(string id = null, string @object = null, DateTimeOffset createdAt = default, DateTimeOffset? finishedAt = null, string model = null, string fineTunedModel = null, string organizationId = null, FineTuningStatus status = default, HyperParameters hyperparameters = null, string trainingFile = null, string validationFile = null, IEnumerable<string> resultFiles = null, long? trainedTokens = null, FineTuningJobError error = null)
+        public static FineTuningJob FineTuningJob(string id = null, FineTuningJobObject @object = default, DateTimeOffset createdAt = default, DateTimeOffset? finishedAt = null, string model = null, string fineTunedModel = null, string organizationId = null, FineTuningJobStatus status = default, FineTuningJobHyperparameters hyperparameters = null, string trainingFile = null, string validationFile = null, IEnumerable<string> resultFiles = null, long? trainedTokens = null, FineTuningJobError error = null)
         {
             resultFiles ??= new List<string>();
 
             return new FineTuningJob(id, @object, createdAt, finishedAt, model, fineTunedModel, organizationId, status, hyperparameters, trainingFile, validationFile, resultFiles?.ToList(), trainedTokens, error);
+        }
+
+        /// <summary> Initializes a new instance of FineTuningJobHyperparameters. </summary>
+        /// <param name="nEpochs">
+        /// The number of epochs to train the model for. An epoch refers to one full cycle through the
+        /// training dataset.
+        ///
+        /// "Auto" decides the optimal number of epochs based on the size of the dataset. If setting the
+        /// number manually, we support any number between 1 and 50 epochs.
+        /// </param>
+        /// <returns> A new <see cref="Models.FineTuningJobHyperparameters"/> instance for mocking. </returns>
+        public static FineTuningJobHyperparameters FineTuningJobHyperparameters(BinaryData nEpochs = null)
+        {
+            return new FineTuningJobHyperparameters(nEpochs);
         }
 
         /// <summary> Initializes a new instance of FineTuningJobError. </summary>
@@ -450,7 +464,7 @@ namespace OpenAI.Models
         /// <param name="resultFiles"> The compiled results files for the fine-tuning job. </param>
         /// <param name="events"> The list of events that have been observed in the lifecycle of the FineTune job. </param>
         /// <returns> A new <see cref="Models.FineTune"/> instance for mocking. </returns>
-        public static FineTune FineTune(string id = null, string @object = null, DateTimeOffset createdAt = default, DateTimeOffset updatedAt = default, string model = null, string fineTunedModel = null, string organizationId = null, FineTuneStatus status = default, FineTuneHyperParameters hyperparams = null, IEnumerable<OpenAIFile> trainingFiles = null, IEnumerable<OpenAIFile> validationFiles = null, IEnumerable<OpenAIFile> resultFiles = null, IEnumerable<FineTuneEvent> events = null)
+        public static FineTune FineTune(string id = null, FineTuneObject @object = default, DateTimeOffset createdAt = default, DateTimeOffset updatedAt = default, string model = null, string fineTunedModel = null, string organizationId = null, FineTuneStatus status = default, FineTuneHyperparams hyperparams = null, IEnumerable<OpenAIFile> trainingFiles = null, IEnumerable<OpenAIFile> validationFiles = null, IEnumerable<OpenAIFile> resultFiles = null, IEnumerable<FineTuneEvent> events = null)
         {
             trainingFiles ??= new List<OpenAIFile>();
             validationFiles ??= new List<OpenAIFile>();
@@ -460,7 +474,7 @@ namespace OpenAI.Models
             return new FineTune(id, @object, createdAt, updatedAt, model, fineTunedModel, organizationId, status, hyperparams, trainingFiles?.ToList(), validationFiles?.ToList(), resultFiles?.ToList(), events?.ToList());
         }
 
-        /// <summary> Initializes a new instance of FineTuneHyperParameters. </summary>
+        /// <summary> Initializes a new instance of FineTuneHyperparams. </summary>
         /// <param name="nEpochs">
         /// The number of epochs to train the model for. An epoch refers to one full cycle through the
         /// training dataset.
@@ -474,10 +488,10 @@ namespace OpenAI.Models
         /// <param name="computeClassificationMetrics"> The classification metrics to compute using the validation dataset at the end of every epoch. </param>
         /// <param name="classificationPositiveClass"> The positive class to use for computing classification metrics. </param>
         /// <param name="classificationNClasses"> The number of classes to use for computing classification metrics. </param>
-        /// <returns> A new <see cref="Models.FineTuneHyperParameters"/> instance for mocking. </returns>
-        public static FineTuneHyperParameters FineTuneHyperParameters(long nEpochs = default, long batchSize = default, double promptLossWeight = default, double learningRateMultiplier = default, bool? computeClassificationMetrics = null, string classificationPositiveClass = null, long? classificationNClasses = null)
+        /// <returns> A new <see cref="Models.FineTuneHyperparams"/> instance for mocking. </returns>
+        public static FineTuneHyperparams FineTuneHyperparams(long nEpochs = default, long batchSize = default, double promptLossWeight = default, double learningRateMultiplier = default, bool? computeClassificationMetrics = null, string classificationPositiveClass = null, long? classificationNClasses = null)
         {
-            return new FineTuneHyperParameters(nEpochs, batchSize, promptLossWeight, learningRateMultiplier, computeClassificationMetrics, classificationPositiveClass, classificationNClasses);
+            return new FineTuneHyperparams(nEpochs, batchSize, promptLossWeight, learningRateMultiplier, computeClassificationMetrics, classificationPositiveClass, classificationNClasses);
         }
 
         /// <summary> Initializes a new instance of FineTuneEvent. </summary>

@@ -140,7 +140,7 @@ namespace OpenAI.Models
         /// For example, a `suffix` of "custom-model-name" would produce a model name like
         /// `ada:ft-your-org:custom-model-name-2022-02-15-04-21-04`.
         /// </param>
-        internal CreateFineTuneRequest(string trainingFile, string validationFile, FineTuningModels? model, long? nEpochs, long? batchSize, double? learningRateMultiplier, double? promptLossRate, bool? computeClassificationMetrics, long? classificationNClasses, string classificationPositiveClass, IList<double> classificationBetas, string suffix)
+        internal CreateFineTuneRequest(string trainingFile, string validationFile, CreateFineTuneRequestModel? model, long? nEpochs, long? batchSize, double? learningRateMultiplier, double? promptLossRate, bool? computeClassificationMetrics, long? classificationNClasses, string classificationPositiveClass, IList<double> classificationBetas, string suffix)
         {
             TrainingFile = trainingFile;
             ValidationFile = validationFile;
@@ -190,7 +190,7 @@ namespace OpenAI.Models
         /// "davinci", or a fine-tuned model created after 2022-04-21 and before 2023-08-22. To learn more
         /// about these models, see the [Models](/docs/models) documentation.
         /// </summary>
-        public FineTuningModels? Model { get; set; }
+        public CreateFineTuneRequestModel? Model { get; set; }
         /// <summary>
         /// The number of epochs to train the model for. An epoch refers to one full cycle through the
         /// training dataset.

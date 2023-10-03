@@ -9,23 +9,20 @@ using System;
 
 namespace OpenAI.Models
 {
-    /// <summary> hyperparameters. </summary>
-    public partial class HyperParameters
+    /// <summary> The CreateFineTuningJobHyperparameters. </summary>
+    public partial class CreateFineTuningJobHyperparameters
     {
-        /// <summary> Initializes a new instance of HyperParameters. </summary>
-        public HyperParameters()
+        /// <summary> Initializes a new instance of CreateFineTuningJobHyperparameters. </summary>
+        public CreateFineTuningJobHyperparameters()
         {
         }
 
-        /// <summary> Initializes a new instance of HyperParameters. </summary>
+        /// <summary> Initializes a new instance of CreateFineTuningJobHyperparameters. </summary>
         /// <param name="nEpochs">
         /// The number of epochs to train the model for. An epoch refers to one full cycle through the
         /// training dataset.
-        ///
-        /// "Auto" decides the optimal number of epochs based on the size of the dataset. If setting the
-        /// number manually, we support any number between 1 and 50 epochs.
         /// </param>
-        internal HyperParameters(BinaryData nEpochs)
+        internal CreateFineTuningJobHyperparameters(BinaryData nEpochs)
         {
             NEpochs = nEpochs;
         }
@@ -33,9 +30,6 @@ namespace OpenAI.Models
         /// <summary>
         /// The number of epochs to train the model for. An epoch refers to one full cycle through the
         /// training dataset.
-        ///
-        /// "Auto" decides the optimal number of epochs based on the size of the dataset. If setting the
-        /// number manually, we support any number between 1 and 50 epochs.
         /// <para>
         /// To assign an object to this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
         /// </para>
