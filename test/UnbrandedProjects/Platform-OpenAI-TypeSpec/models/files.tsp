@@ -48,23 +48,19 @@ model OpenAIFile {
    * The current status of the file, which can be either `uploaded`, `processed`, `pending`,
    * `error`, `deleting` or `deleted`.
    */
-  status: FileStatus;
+  status:
+    | "uploaded"
+    | "processed"
+    | "pending"
+    | "error"
+    | "deleting"
+    | "deleted";
 
   /**
    * Additional details about the status of the file. If the file is in the `error` state, this will
    * include a message describing the error.
    */
   status_details?: string | null;
-}
-
-@doc("file status")
-enum FileStatus {
-  "uploaded";
-  "processed";
-  "pending";
-  "error";
-  "deleting";
-  "deleted";
 }
 
 model DeleteFileResponse {

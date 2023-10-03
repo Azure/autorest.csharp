@@ -26,7 +26,7 @@ namespace OpenAI.Models
             DateTimeOffset createdAt = default;
             string filename = default;
             string purpose = default;
-            FileStatus status = default;
+            OpenAIFileStatus status = default;
             OptionalProperty<string> statusDetails = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -62,7 +62,7 @@ namespace OpenAI.Models
                 }
                 if (property.NameEquals("status"u8))
                 {
-                    status = new FileStatus(property.Value.GetString());
+                    status = new OpenAIFileStatus(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("status_details"u8))

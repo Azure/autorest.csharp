@@ -404,7 +404,7 @@ namespace OpenAI.Models
         /// include a message describing the error.
         /// </param>
         /// <returns> A new <see cref="Models.OpenAIFile"/> instance for mocking. </returns>
-        public static OpenAIFile OpenAIFile(string id = null, OpenAIFileObject @object = default, long bytes = default, DateTimeOffset createdAt = default, string filename = null, string purpose = null, FileStatus status = default, string statusDetails = null)
+        public static OpenAIFile OpenAIFile(string id = null, OpenAIFileObject @object = default, long bytes = default, DateTimeOffset createdAt = default, string filename = null, string purpose = null, OpenAIFileStatus status = default, string statusDetails = null)
         {
             return new OpenAIFile(id, @object, bytes, createdAt, filename, purpose, status, statusDetails);
         }

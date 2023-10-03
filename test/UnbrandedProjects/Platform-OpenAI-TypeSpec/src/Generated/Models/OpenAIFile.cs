@@ -24,7 +24,7 @@ namespace OpenAI.Models
         /// `error`, `deleting` or `deleted`.
         /// </param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/>, <paramref name="filename"/> or <paramref name="purpose"/> is null. </exception>
-        internal OpenAIFile(string id, long bytes, DateTimeOffset createdAt, string filename, string purpose, FileStatus status)
+        internal OpenAIFile(string id, long bytes, DateTimeOffset createdAt, string filename, string purpose, OpenAIFileStatus status)
         {
             ClientUtilities.AssertNotNull(id, nameof(id));
             ClientUtilities.AssertNotNull(filename, nameof(filename));
@@ -53,7 +53,7 @@ namespace OpenAI.Models
         /// Additional details about the status of the file. If the file is in the `error` state, this will
         /// include a message describing the error.
         /// </param>
-        internal OpenAIFile(string id, OpenAIFileObject @object, long bytes, DateTimeOffset createdAt, string filename, string purpose, FileStatus status, string statusDetails)
+        internal OpenAIFile(string id, OpenAIFileObject @object, long bytes, DateTimeOffset createdAt, string filename, string purpose, OpenAIFileStatus status, string statusDetails)
         {
             Id = id;
             Object = @object;
@@ -82,7 +82,7 @@ namespace OpenAI.Models
         /// The current status of the file, which can be either `uploaded`, `processed`, `pending`,
         /// `error`, `deleting` or `deleted`.
         /// </summary>
-        public FileStatus Status { get; }
+        public OpenAIFileStatus Status { get; }
         /// <summary>
         /// Additional details about the status of the file. If the file is in the `error` state, this will
         /// include a message describing the error.
