@@ -1864,7 +1864,7 @@ This sample shows how to call CreateEmbeddingAsync.
 KeyCredential credential = new KeyCredential("<key>");
 OpenAIClient client = new OpenAIClient(credential);
 
-CreateEmbeddingRequest embedding = new CreateEmbeddingRequest(EmbeddingsModels.TextEmbeddingAda002, BinaryData.FromObjectAsJson(new object()));
+CreateEmbeddingRequest embedding = new CreateEmbeddingRequest(new CreateEmbeddingRequestModel("<model>"), BinaryData.FromObjectAsJson("<input>"));
 Result<CreateEmbeddingResponse> result = await client.CreateEmbeddingAsync(embedding);
 ]]></code>
 This sample shows how to call CreateEmbeddingAsync with all parameters.
@@ -1872,7 +1872,7 @@ This sample shows how to call CreateEmbeddingAsync with all parameters.
 KeyCredential credential = new KeyCredential("<key>");
 OpenAIClient client = new OpenAIClient(credential);
 
-CreateEmbeddingRequest embedding = new CreateEmbeddingRequest(EmbeddingsModels.TextEmbeddingAda002, BinaryData.FromObjectAsJson(new object()))
+CreateEmbeddingRequest embedding = new CreateEmbeddingRequest(new CreateEmbeddingRequestModel("<model>"), BinaryData.FromObjectAsJson("<input>"))
 {
     User = "<user>",
 };
@@ -1886,7 +1886,7 @@ This sample shows how to call CreateEmbedding.
 KeyCredential credential = new KeyCredential("<key>");
 OpenAIClient client = new OpenAIClient(credential);
 
-CreateEmbeddingRequest embedding = new CreateEmbeddingRequest(EmbeddingsModels.TextEmbeddingAda002, BinaryData.FromObjectAsJson(new object()));
+CreateEmbeddingRequest embedding = new CreateEmbeddingRequest(new CreateEmbeddingRequestModel("<model>"), BinaryData.FromObjectAsJson("<input>"));
 Result<CreateEmbeddingResponse> result = client.CreateEmbedding(embedding);
 ]]></code>
 This sample shows how to call CreateEmbedding with all parameters.
@@ -1894,7 +1894,7 @@ This sample shows how to call CreateEmbedding with all parameters.
 KeyCredential credential = new KeyCredential("<key>");
 OpenAIClient client = new OpenAIClient(credential);
 
-CreateEmbeddingRequest embedding = new CreateEmbeddingRequest(EmbeddingsModels.TextEmbeddingAda002, BinaryData.FromObjectAsJson(new object()))
+CreateEmbeddingRequest embedding = new CreateEmbeddingRequest(new CreateEmbeddingRequestModel("<model>"), BinaryData.FromObjectAsJson("<input>"))
 {
     User = "<user>",
 };
@@ -1910,8 +1910,8 @@ OpenAIClient client = new OpenAIClient(credential);
 
 RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
 {
-    model = "text-embedding-ada-002",
-    input = new object(),
+    model = "<model>",
+    input = "<input>",
 }).ToStream());
 Result result = await client.CreateEmbeddingAsync(content);
 
@@ -1920,7 +1920,7 @@ Console.WriteLine(element.GetProperty("object").ToString());
 Console.WriteLine(element.GetProperty("model").ToString());
 Console.WriteLine(element.GetProperty("data")[0].GetProperty("index").ToString());
 Console.WriteLine(element.GetProperty("data")[0].GetProperty("object").ToString());
-Console.WriteLine(element.GetProperty("data")[0].GetProperty("embeddings")[0].ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("embedding")[0].ToString());
 Console.WriteLine(element.GetProperty("usage").GetProperty("prompt_tokens").ToString());
 Console.WriteLine(element.GetProperty("usage").GetProperty("total_tokens").ToString());
 ]]></code>
@@ -1931,8 +1931,8 @@ OpenAIClient client = new OpenAIClient(credential);
 
 RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
 {
-    model = "text-embedding-ada-002",
-    input = new object(),
+    model = "<model>",
+    input = "<input>",
     user = "<user>",
 }).ToStream());
 Result result = await client.CreateEmbeddingAsync(content);
@@ -1942,7 +1942,7 @@ Console.WriteLine(element.GetProperty("object").ToString());
 Console.WriteLine(element.GetProperty("model").ToString());
 Console.WriteLine(element.GetProperty("data")[0].GetProperty("index").ToString());
 Console.WriteLine(element.GetProperty("data")[0].GetProperty("object").ToString());
-Console.WriteLine(element.GetProperty("data")[0].GetProperty("embeddings")[0].ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("embedding")[0].ToString());
 Console.WriteLine(element.GetProperty("usage").GetProperty("prompt_tokens").ToString());
 Console.WriteLine(element.GetProperty("usage").GetProperty("total_tokens").ToString());
 ]]></code></example>
@@ -1956,8 +1956,8 @@ OpenAIClient client = new OpenAIClient(credential);
 
 RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
 {
-    model = "text-embedding-ada-002",
-    input = new object(),
+    model = "<model>",
+    input = "<input>",
 }).ToStream());
 Result result = client.CreateEmbedding(content);
 
@@ -1966,7 +1966,7 @@ Console.WriteLine(element.GetProperty("object").ToString());
 Console.WriteLine(element.GetProperty("model").ToString());
 Console.WriteLine(element.GetProperty("data")[0].GetProperty("index").ToString());
 Console.WriteLine(element.GetProperty("data")[0].GetProperty("object").ToString());
-Console.WriteLine(element.GetProperty("data")[0].GetProperty("embeddings")[0].ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("embedding")[0].ToString());
 Console.WriteLine(element.GetProperty("usage").GetProperty("prompt_tokens").ToString());
 Console.WriteLine(element.GetProperty("usage").GetProperty("total_tokens").ToString());
 ]]></code>
@@ -1977,8 +1977,8 @@ OpenAIClient client = new OpenAIClient(credential);
 
 RequestBody content = RequestBody.CreateFromStream(BinaryData.FromObjectAsJson(new
 {
-    model = "text-embedding-ada-002",
-    input = new object(),
+    model = "<model>",
+    input = "<input>",
     user = "<user>",
 }).ToStream());
 Result result = client.CreateEmbedding(content);
@@ -1988,7 +1988,7 @@ Console.WriteLine(element.GetProperty("object").ToString());
 Console.WriteLine(element.GetProperty("model").ToString());
 Console.WriteLine(element.GetProperty("data")[0].GetProperty("index").ToString());
 Console.WriteLine(element.GetProperty("data")[0].GetProperty("object").ToString());
-Console.WriteLine(element.GetProperty("data")[0].GetProperty("embeddings")[0].ToString());
+Console.WriteLine(element.GetProperty("data")[0].GetProperty("embedding")[0].ToString());
 Console.WriteLine(element.GetProperty("usage").GetProperty("prompt_tokens").ToString());
 Console.WriteLine(element.GetProperty("usage").GetProperty("total_tokens").ToString());
 ]]></code></example>

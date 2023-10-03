@@ -23,7 +23,7 @@ namespace OpenAI.Models
         /// for counting tokens.
         /// </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        public CreateEmbeddingRequest(EmbeddingsModels model, BinaryData input)
+        public CreateEmbeddingRequest(CreateEmbeddingRequestModel model, BinaryData input)
         {
             ClientUtilities.AssertNotNull(input, nameof(input));
 
@@ -41,7 +41,7 @@ namespace OpenAI.Models
         /// for counting tokens.
         /// </param>
         /// <param name="user"></param>
-        internal CreateEmbeddingRequest(EmbeddingsModels model, BinaryData input, string user)
+        internal CreateEmbeddingRequest(CreateEmbeddingRequestModel model, BinaryData input, string user)
         {
             Model = model;
             Input = input;
@@ -49,7 +49,7 @@ namespace OpenAI.Models
         }
 
         /// <summary> ID of the model to use. You can use the [List models](/docs/api-reference/models/list) API to see all of your available models, or see our [Model overview](/docs/models/overview) for descriptions of them. </summary>
-        public EmbeddingsModels Model { get; }
+        public CreateEmbeddingRequestModel Model { get; }
         /// <summary>
         /// Input text to embed, encoded as a string or array of tokens. To embed multiple inputs in a
         /// single request, pass an array of strings or array of token arrays. Each input must not exceed

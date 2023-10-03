@@ -42,6 +42,10 @@ namespace AutoRest.CSharp.Output.Models.Types
             foreach (var inputModelProperty in inputModel.Properties)
             {
                 var originalFieldName = inputModelProperty.Name.ToCleanName();
+                if (originalFieldName == inputModel.Name)
+                {
+                    originalFieldName = $"{originalFieldName}Property";
+                }
                 var propertyType = GetPropertyDefaultType(inputModel.Usage, inputModelProperty, typeFactory);
 
                 // We represent property being optional by making it nullable (when it is a value type)

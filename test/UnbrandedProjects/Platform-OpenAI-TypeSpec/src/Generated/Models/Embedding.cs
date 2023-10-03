@@ -17,31 +17,31 @@ namespace OpenAI.Models
     {
         /// <summary> Initializes a new instance of Embedding. </summary>
         /// <param name="index"> The index of the embedding in the list of embeddings. </param>
-        /// <param name="embeddings">
+        /// <param name="embeddingProperty">
         /// The embedding vector, which is a list of floats. The length of vector depends on the model as\
         /// listed in the [embedding guide](/docs/guides/embeddings).
         /// </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="embeddings"/> is null. </exception>
-        internal Embedding(long index, IEnumerable<double> embeddings)
+        /// <exception cref="ArgumentNullException"> <paramref name="embeddingProperty"/> is null. </exception>
+        internal Embedding(long index, IEnumerable<double> embeddingProperty)
         {
-            ClientUtilities.AssertNotNull(embeddings, nameof(embeddings));
+            ClientUtilities.AssertNotNull(embeddingProperty, nameof(embeddingProperty));
 
             Index = index;
-            Embeddings = embeddings.ToList();
+            EmbeddingProperty = embeddingProperty.ToList();
         }
 
         /// <summary> Initializes a new instance of Embedding. </summary>
         /// <param name="index"> The index of the embedding in the list of embeddings. </param>
         /// <param name="object"> The object type, which is always "embedding". </param>
-        /// <param name="embeddings">
+        /// <param name="embeddingProperty">
         /// The embedding vector, which is a list of floats. The length of vector depends on the model as\
         /// listed in the [embedding guide](/docs/guides/embeddings).
         /// </param>
-        internal Embedding(long index, EmbeddingObject @object, IReadOnlyList<double> embeddings)
+        internal Embedding(long index, EmbeddingObject @object, IReadOnlyList<double> embeddingProperty)
         {
             Index = index;
             Object = @object;
-            Embeddings = embeddings;
+            EmbeddingProperty = embeddingProperty;
         }
 
         /// <summary> The index of the embedding in the list of embeddings. </summary>
@@ -53,6 +53,6 @@ namespace OpenAI.Models
         /// The embedding vector, which is a list of floats. The length of vector depends on the model as\
         /// listed in the [embedding guide](/docs/guides/embeddings).
         /// </summary>
-        public IReadOnlyList<double> Embeddings { get; }
+        public IReadOnlyList<double> EmbeddingProperty { get; }
     }
 }

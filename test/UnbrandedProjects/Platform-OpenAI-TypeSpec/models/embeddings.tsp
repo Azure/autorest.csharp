@@ -4,7 +4,7 @@ using TypeSpec.OpenAPI;
 model CreateEmbeddingRequest {
   /** ID of the model to use. You can use the [List models](/docs/api-reference/models/list) API to see all of your available models, or see our [Model overview](/docs/models/overview) for descriptions of them. */
   @extension("x-oaiTypeLabel", "string")
-  `model`: EmbeddingsModels;
+  `model`: string | "text-embedding-ada-002";
 
   /**
    * Input text to embed, encoded as a string or array of tokens. To embed multiple inputs in a
@@ -13,16 +13,10 @@ model CreateEmbeddingRequest {
    * [Example Python code](https://github.com/openai/openai-cookbook/blob/main/examples/How_to_count_tokens_with_tiktoken.ipynb)
    * for counting tokens.
    */
-  input: unknown;
+  input: string | string[] | TokenArray | TokenArrayArray;
 
   user?: User;
 }
-
-@doc("embeddings model")
-enum EmbeddingsModels {
-  "text-embedding-ada-002";
-}
-
 model CreateEmbeddingResponse {
   /** The object type, which is always "embedding". */
   object: "embedding";
@@ -34,15 +28,13 @@ model CreateEmbeddingResponse {
   data: Embedding[];
 
   /** The usage information for the request. */
-  usage: EmbeddingUsage;
-}
+  usage: {
+    /** The number of tokens used by the prompt. */
+    prompt_tokens: safeint;
 
-model EmbeddingUsage {
-  /** The number of tokens used by the prompt. */
-  prompt_tokens: safeint;
-
-  /** The total number of tokens used by the request. */
-  total_tokens: safeint;
+    /** The total number of tokens used by the request. */
+    total_tokens: safeint;
+  };
 }
 
 /** Represents an embedding vector returned by embedding endpoint. */
@@ -57,5 +49,5 @@ model Embedding {
    * The embedding vector, which is a list of floats. The length of vector depends on the model as\
    * listed in the [embedding guide](/docs/guides/embeddings).
    */
-  embeddings: float64[];
+  embedding: float64[];
 }

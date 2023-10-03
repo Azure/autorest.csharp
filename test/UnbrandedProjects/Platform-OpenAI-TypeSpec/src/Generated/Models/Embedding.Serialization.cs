@@ -21,7 +21,7 @@ namespace OpenAI.Models
             }
             long index = default;
             EmbeddingObject @object = default;
-            IReadOnlyList<double> embeddings = default;
+            IReadOnlyList<double> embedding = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("index"u8))
@@ -34,18 +34,18 @@ namespace OpenAI.Models
                     @object = new EmbeddingObject(property.Value.GetString());
                     continue;
                 }
-                if (property.NameEquals("embeddings"u8))
+                if (property.NameEquals("embedding"u8))
                 {
                     List<double> array = new List<double>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
                         array.Add(item.GetDouble());
                     }
-                    embeddings = array;
+                    embedding = array;
                     continue;
                 }
             }
-            return new Embedding(index, @object, embeddings);
+            return new Embedding(index, @object, embedding);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>

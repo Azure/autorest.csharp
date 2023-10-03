@@ -7,13 +7,13 @@
 
 namespace OpenAI.Models
 {
-    /// <summary> The EmbeddingUsage. </summary>
-    public partial class EmbeddingUsage
+    /// <summary> The CreateEmbeddingUsage. </summary>
+    public partial class CreateEmbeddingUsage
     {
-        /// <summary> Initializes a new instance of EmbeddingUsage. </summary>
+        /// <summary> Initializes a new instance of CreateEmbeddingUsage. </summary>
         /// <param name="promptTokens"> The number of tokens used by the prompt. </param>
         /// <param name="totalTokens"> The total number of tokens used by the request. </param>
-        internal EmbeddingUsage(long promptTokens, long totalTokens)
+        internal CreateEmbeddingUsage(long promptTokens, long totalTokens)
         {
             PromptTokens = promptTokens;
             TotalTokens = totalTokens;

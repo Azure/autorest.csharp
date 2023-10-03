@@ -10,9 +10,9 @@ using System.Text.Json;
 
 namespace OpenAI.Models
 {
-    public partial class EmbeddingUsage
+    public partial class CreateEmbeddingUsage
     {
-        internal static EmbeddingUsage DeserializeEmbeddingUsage(JsonElement element)
+        internal static CreateEmbeddingUsage DeserializeCreateEmbeddingUsage(JsonElement element)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -33,15 +33,15 @@ namespace OpenAI.Models
                     continue;
                 }
             }
-            return new EmbeddingUsage(promptTokens, totalTokens);
+            return new CreateEmbeddingUsage(promptTokens, totalTokens);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="result"> The result to deserialize the model from. </param>
-        internal static EmbeddingUsage FromResponse(PipelineResponse result)
+        internal static CreateEmbeddingUsage FromResponse(PipelineResponse result)
         {
             using var document = JsonDocument.Parse(result.Content);
-            return DeserializeEmbeddingUsage(document.RootElement);
+            return DeserializeCreateEmbeddingUsage(document.RootElement);
         }
     }
 }
