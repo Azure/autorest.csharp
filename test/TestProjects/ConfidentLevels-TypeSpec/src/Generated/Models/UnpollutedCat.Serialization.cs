@@ -11,7 +11,7 @@ using Azure.Core;
 
 namespace ConfidentLevelsInTsp.Models
 {
-    internal partial class UnpollutedCat : IUtf8JsonSerializable
+    public partial class UnpollutedCat : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {

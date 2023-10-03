@@ -305,8 +305,8 @@ extends:
     <AssemblyTitle>SDK Code Generation {0}</AssemblyTitle>
     <Version>1.0.0-beta.1</Version>
     <PackageTags>{0}</PackageTags>
-    <TargetFramework>net6.0</TargetFramework>
-    <LangVersion>11.0</LangVersion>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
 

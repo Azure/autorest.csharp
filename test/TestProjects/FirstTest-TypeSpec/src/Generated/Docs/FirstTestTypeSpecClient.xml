@@ -823,6 +823,40 @@ JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(element.GetProperty("name").ToString());
 ]]></code></example>
     </member>
+    <member name="ReturnsAnonymousModelAsync(CancellationToken)">
+      <example>
+This sample shows how to call ReturnsAnonymousModelAsync.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+Response<returnsAnonymousModel101> response = await client.ReturnsAnonymousModelAsync();
+]]></code>
+This sample shows how to call ReturnsAnonymousModelAsync with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+Response<returnsAnonymousModel101> response = await client.ReturnsAnonymousModelAsync();
+]]></code></example>
+    </member>
+    <member name="ReturnsAnonymousModel(CancellationToken)">
+      <example>
+This sample shows how to call ReturnsAnonymousModel.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+Response<returnsAnonymousModel101> response = client.ReturnsAnonymousModel();
+]]></code>
+This sample shows how to call ReturnsAnonymousModel with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+Response<returnsAnonymousModel101> response = client.ReturnsAnonymousModel();
+]]></code></example>
+    </member>
     <member name="ReturnsAnonymousModelAsync(RequestContext)">
       <example>
 This sample shows how to call ReturnsAnonymousModelAsync and parse the result.

@@ -780,13 +780,37 @@ namespace FirstTestTypeSpec
             }
         }
 
-        // The convenience method of this operation is omitted because it is using at least one anonymous model
+        /// <summary> return anonymous model. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='ReturnsAnonymousModelAsync(CancellationToken)']/*" />
+        public virtual async Task<Response<returnsAnonymousModel101>> ReturnsAnonymousModelAsync(CancellationToken cancellationToken = default)
+        {
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await ReturnsAnonymousModelAsync(context).ConfigureAwait(false);
+            return Response.FromValue(returnsAnonymousModel101.FromResponse(response), response);
+        }
+
+        /// <summary> return anonymous model. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='ReturnsAnonymousModel(CancellationToken)']/*" />
+        public virtual Response<returnsAnonymousModel101> ReturnsAnonymousModel(CancellationToken cancellationToken = default)
+        {
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = ReturnsAnonymousModel(context);
+            return Response.FromValue(returnsAnonymousModel101.FromResponse(response), response);
+        }
+
         /// <summary>
         /// [Protocol Method] return anonymous model
         /// <list type="bullet">
         /// <item>
         /// <description>
         /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="ReturnsAnonymousModelAsync(CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -811,13 +835,17 @@ namespace FirstTestTypeSpec
             }
         }
 
-        // The convenience method of this operation is omitted because it is using at least one anonymous model
         /// <summary>
         /// [Protocol Method] return anonymous model
         /// <list type="bullet">
         /// <item>
         /// <description>
         /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="ReturnsAnonymousModel(CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
