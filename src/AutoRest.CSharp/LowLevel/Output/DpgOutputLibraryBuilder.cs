@@ -81,6 +81,7 @@ namespace AutoRest.CSharp.Output.Models
         {
             Dictionary<string, ModelTypeProvider> defaultDerivedTypes = new Dictionary<string, ModelTypeProvider>();
 
+            HashSet<string> createdNames = new HashSet<string>();
             foreach (var model in _rootNamespace.Models)
             {
                 InputModelType[] derivedTypesArray = model.DerivedModels.ToArray();
@@ -88,14 +89,21 @@ namespace AutoRest.CSharp.Output.Models
 
                 InputModelType? replacement = null;
                 if (model.IsAnonymousModel)
-                    replacement = InputModelType.GiveName(model, GetAnonModelName(model));
+                {
+                    replacement = InputModelType.GiveName(model, GetAnonModelName(model, createdNames));
+                    if (model.Name != replacement.Name)
+                    {
+                        createdNames.Add(replacement.Name);
+                    }
+                }
 
                 models.Add(model, new ModelTypeProvider(replacement ?? model, TypeProvider.GetDefaultModelNamespace(null, _defaultNamespace), _sourceInputModel, typeFactory, derivedTypesArray, defaultDerivedType));
             }
         }
 
-        private string? GetAnonModelName(InputModelType anonModel)
+        private string? GetAnonModelName(InputModelType anonModel, HashSet<string> createdNames)
         {
+            List<List<string>> names = new List<List<string>>();
             //check operation parameters first
             foreach (var client in _rootNamespace.Clients)
             {
@@ -104,27 +112,57 @@ namespace AutoRest.CSharp.Output.Models
                     foreach (var parameter in operation.Parameters)
                     {
                         if (IsSameType(parameter.Type, anonModel))
-                            return $"{operation.Name}{GetNameWithCorrectPluralization(parameter.Type, parameter.Name)}";
+                        {
+                            names.Add(new List<string> { operation.Name, GetNameWithCorrectPluralization(parameter.Type, parameter.Name) });
+                        }
+                        else
+                        {
+                            FindMatchesRecursively(parameter.Type, anonModel, createdNames, new List<string>() { operation.Name.FirstCharToUpperCase(), parameter.Type.Name }, names);
+                        }
+                    }
+                    foreach (var response in operation.Responses)
+                    {
+                        if (response is null || response.BodyType is null || response.BodyType is not InputModelType responseType)
+                            continue;
+
+                        if (IsSameType(responseType, anonModel))
+                        {
+                            names.Add(new List<string> { operation.Name, GetNameWithCorrectPluralization(responseType, responseType.Name) });
+                        }
+                        else
+                        {
+                            FindMatchesRecursively(responseType, anonModel, createdNames, new List<string>() { operation.Name.FirstCharToUpperCase(), responseType.Name }, names);
+                        }
                     }
                 }
             }
 
-            //check other model properties
-            foreach (var model in _rootNamespace.Models)
-            {
-                foreach (var property in model.Properties)
-                {
-                    if (IsSameType(property.Type, anonModel))
-                    {
-                        return $"{model.Name}{GetNameWithCorrectPluralization(property.Type, property.Name)}";
-                    }
-                }
-            }
+            if (names.Count == 1)
+                return $"{names[0][0]}{names[0][names[0].Count - 1]}";
 
             return null;
         }
 
-        private object GetNameWithCorrectPluralization(InputType type, string name)
+        private void FindMatchesRecursively(InputType type, InputModelType anonModel, HashSet<string> createdNames, List<string> current, List<List<string>> names)
+        {
+            if (type is not InputModelType model)
+                return;
+
+            //check other model properties
+            foreach (var property in model.Properties)
+            {
+                if (IsSameType(property.Type, anonModel))
+                {
+                    names.Add(new List<string>(current) { GetNameWithCorrectPluralization(property.Type, property.Name) });
+                }
+                else
+                {
+                    FindMatchesRecursively(property.Type, anonModel, createdNames, new List<string>(current) { property.Name }, names);
+                }
+            }
+        }
+
+        private string GetNameWithCorrectPluralization(InputType type, string name)
         {
             //TODO: Probably needs special casing for ipThing to become IPThing
             string result = name.FirstCharToUpperCase();
