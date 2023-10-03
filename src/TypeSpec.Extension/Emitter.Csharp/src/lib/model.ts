@@ -220,7 +220,7 @@ function getCSharpInputTypeKindByIntrinsicModelName(
  * set of properties when non-schema properties are excluded.
  */
 export function getEffectiveSchemaType(context: SdkContext, type: Type): Type {
-   return type;
+    return type;
 }
 
 /**

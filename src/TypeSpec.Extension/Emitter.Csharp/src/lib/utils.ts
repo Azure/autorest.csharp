@@ -26,16 +26,16 @@ export function getNameForTemplate(model: Model): string {
 
 const anonCounter = (function () {
     let count = 0; // Private counter variable
-  
+
     return {
-      increment: function () {
-        return ++count;
-      },
-      getCount: function () {
-        return count;
-      },
+        increment: function () {
+            return ++count;
+        },
+        getCount: function () {
+            return count;
+        }
     };
-  })();
+})();
 
 export function getModelName(context: SdkContext, m: Model): string {
     const projectedNamesMap = getProjectedNames(context.program, m);
@@ -45,10 +45,10 @@ export function getModelName(context: SdkContext, m: Model): string {
         getFriendlyName(context.program, m) ??
         getNameForTemplate(m);
 
-    if(name === "") {
+    if (name === "") {
         anonCounter.increment();
-        return `Anon_${anonCounter.getCount()}`
+        return `Anon_${anonCounter.getCount()}`;
     }
-    
+
     return name;
 }
