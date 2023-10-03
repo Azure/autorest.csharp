@@ -8,6 +8,7 @@ using System.Linq;
 using System.Reflection;
 using System.Xml.Linq;
 using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Input.Examples;
 using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Common.Utilities;
@@ -127,25 +128,25 @@ namespace AutoRest.CSharp.Output.Models
             return new ClientOptionsTypeProvider(_sourceInputModel?.GetServiceVersionOverrides() ?? _rootNamespace.ApiVersions, clientOptionsName, _defaultNamespace, description, _sourceInputModel);
         }
 
-        private static ClientInfo CreateClientInfo(InputClient ns, SourceInputModel? sourceInputModel, string rootNamespaceName)
+        private static ClientInfo CreateClientInfo(InputClient inputClient, SourceInputModel? sourceInputModel, string rootNamespaceName)
         {
-            var clientNamePrefix = ClientBuilder.GetClientPrefix(ns.Name, rootNamespaceName);
+            var clientNamePrefix = ClientBuilder.GetClientPrefix(inputClient.Name, rootNamespaceName);
             var clientNamespace = Configuration.Namespace;
-            var clientDescription = ns.Description;
-            var operations = ns.Operations;
+            var clientDescription = inputClient.Description;
+            var operations = inputClient.Operations;
             var clientParameters = RestClientBuilder.GetParametersFromOperations(operations);
             var resourceParameters = clientParameters.Where(cp => cp.IsResourceParameter).ToHashSet();
-            var isSubClient = Configuration.SingleTopLevelClient && !string.IsNullOrEmpty(ns.Name) || resourceParameters.Any() || !string.IsNullOrEmpty(ns.Parent);
+            var isSubClient = Configuration.SingleTopLevelClient && !string.IsNullOrEmpty(inputClient.Name) || resourceParameters.Any() || !string.IsNullOrEmpty(inputClient.Parent);
             var clientName = isSubClient ? clientNamePrefix : clientNamePrefix + ClientBuilder.GetClientSuffix();
 
             if (sourceInputModel?.FindForType(clientNamespace, clientName) is not {} existingType)
             {
-                return new ClientInfo(ns.Key, clientName, clientNamespace, clientDescription, operations, clientParameters, resourceParameters);
+                return new ClientInfo(inputClient.Key, clientName, clientNamespace, clientDescription, operations, clientParameters, resourceParameters, inputClient.Examples);
             }
 
             clientName = existingType.Name;
             clientNamespace = existingType.ContainingNamespace.ToDisplayString();
-            return new ClientInfo(ns.Key, clientName, clientNamespace, clientDescription, existingType, operations, clientParameters, resourceParameters);
+            return new ClientInfo(inputClient.Key, clientName, clientNamespace, clientDescription, existingType, operations, clientParameters, resourceParameters, inputClient.Examples);
         }
 
         private IReadOnlyList<ClientInfo> SetHierarchy(IReadOnlyDictionary<string, ClientInfo> clientInfosByName)
@@ -169,10 +170,12 @@ namespace AutoRest.CSharp.Output.Models
             {
                 var clientName = ClientBuilder.GetClientPrefix(_libraryName, _rootNamespace.Name) + ClientBuilder.GetClientSuffix();
                 var clientNamespace = _defaultNamespace;
-                var endpointParameter = topLevelClients.SelectMany(c => c.ClientParameters).FirstOrDefault(p => p.IsEndpoint);
+                var infoForEndpoint = topLevelClients.FirstOrDefault(c => c.ClientParameters.Any(p => p.IsEndpoint));
+                var endpointParameter = infoForEndpoint?.ClientParameters.FirstOrDefault(p => p.IsEndpoint);
                 var clientParameters = endpointParameter != null ? new[] { endpointParameter } : Array.Empty<InputParameter>();
+                var clientExamples = infoForEndpoint?.Examples ?? Array.Empty<InputClientExample>();
 
-                topLevelClientInfo = new ClientInfo(clientName, clientNamespace, clientParameters);
+                topLevelClientInfo = new ClientInfo(clientName, clientNamespace, clientParameters, clientExamples);
             }
 
             foreach (var clientInfo in topLevelClients)
@@ -279,8 +282,33 @@ namespace AutoRest.CSharp.Output.Models
             public INamedTypeSymbol? ExistingType { get; }
             public IReadOnlyList<InputOperation> Operations { get; }
 
+            private readonly IReadOnlyList<InputClientExample> _initialExamples;
+            private IReadOnlyList<InputClientExample>? _examples;
+            public IReadOnlyList<InputClientExample> Examples => _examples ??= EnsureExamples();
+
+            private IReadOnlyList<InputClientExample> EnsureExamples()
+            {
+                // pick up all examples from child client infos here, since we might promote some parameters from child clients
+                var examples = new List<InputClientExample>();
+                foreach (var example in _initialExamples)
+                {
+                    var clientParameterExamples = new List<InputParameterExample>(example.ClientParameters);
+                    foreach (var child in Children)
+                    {
+                        if (child.Examples.FirstOrDefault(e => e.Key == example.Key) is {} childExamples)
+                        {
+                            clientParameterExamples.AddRange(childExamples.ClientParameters);
+                        }
+                    }
+
+                    examples.Add(example with {ClientParameters = clientParameterExamples});
+                }
+
+                return examples;
+            }
+
+            private readonly IReadOnlyList<InputParameter> _initClientParameters;
             private IReadOnlyList<InputParameter>? _clientParameters;
-            private IReadOnlyList<InputParameter> _initClientParameters;
             public IReadOnlyList<InputParameter> ClientParameters => _clientParameters ??= EnsureClientParameters();
 
             private IReadOnlyList<InputParameter> EnsureClientParameters()
@@ -298,12 +326,12 @@ namespace AutoRest.CSharp.Output.Models
             public IList<ClientInfo> Children { get; }
             public IList<InputOperation> Requests { get; }
 
-            public ClientInfo(string operationGroupKey, string clientName, string clientNamespace, string clientDescription, IReadOnlyList<InputOperation> operations, IReadOnlyList<InputParameter> clientParameters, ISet<InputParameter> resourceParameters)
-                : this(operationGroupKey, clientName, clientNamespace, clientDescription, null, operations, clientParameters, resourceParameters)
+            public ClientInfo(string operationGroupKey, string clientName, string clientNamespace, string clientDescription, IReadOnlyList<InputOperation> operations, IReadOnlyList<InputParameter> clientParameters, ISet<InputParameter> resourceParameters, IReadOnlyList<InputClientExample> examples)
+                : this(operationGroupKey, clientName, clientNamespace, clientDescription, null, operations, clientParameters, resourceParameters, examples)
             {
             }
 
-            public ClientInfo(string operationGroupKey, string clientName, string clientNamespace, string clientDescription, INamedTypeSymbol? existingType, IReadOnlyList<InputOperation> operations, IReadOnlyList<InputParameter> clientParameters, ISet<InputParameter> resourceParameters)
+            public ClientInfo(string operationGroupKey, string clientName, string clientNamespace, string clientDescription, INamedTypeSymbol? existingType, IReadOnlyList<InputOperation> operations, IReadOnlyList<InputParameter> clientParameters, ISet<InputParameter> resourceParameters, IReadOnlyList<InputClientExample> examples)
             {
                 OperationGroupKey = operationGroupKey;
                 Name = clientName;
@@ -315,9 +343,10 @@ namespace AutoRest.CSharp.Output.Models
                 ResourceParameters = resourceParameters;
                 Children = new List<ClientInfo>();
                 Requests = new List<InputOperation>();
+                _initialExamples = examples;
             }
 
-            public ClientInfo(string clientName, string clientNamespace, IReadOnlyList<InputParameter> clientParameters)
+            public ClientInfo(string clientName, string clientNamespace, IReadOnlyList<InputParameter> clientParameters, IReadOnlyList<InputClientExample> examples)
             {
                 OperationGroupKey = string.Empty;
                 Name = clientName;
@@ -329,6 +358,7 @@ namespace AutoRest.CSharp.Output.Models
                 ResourceParameters = new HashSet<InputParameter>();
                 Children = new List<ClientInfo>();
                 Requests = new List<InputOperation>();
+                _initialExamples = examples;
             }
         }
     }

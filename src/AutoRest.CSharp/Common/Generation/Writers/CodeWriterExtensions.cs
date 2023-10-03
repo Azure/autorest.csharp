@@ -416,12 +416,18 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 if (assignToSelf)
                 {
-                    writer.Line($"{variableName:I} ??= {parameter.Initializer};");
+                    writer
+                        .Append($"{variableName:I} ??= ")
+                        .WriteValueExpression(parameter.Initializer);
                 }
                 else
                 {
-                    writer.Line($"{variableName:I} = {parameter.Name:I} ?? {parameter.Initializer};");
+                    writer
+                        .Append($"{variableName:I} = {parameter.Name:I} ?? ")
+                        .WriteValueExpression(parameter.Initializer);
                 }
+
+                writer.AppendRaw(";");
             }
             else if (parameter.Validation != Validation.None)
             {

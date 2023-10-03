@@ -172,8 +172,6 @@ namespace AutoRest.CSharp.Output.Models.Types
                     .OrderBy(p => p.IsOptionalInSignature)
                     .ToList();
 
-                var clientExamples = Array.Empty<InputClientExample>();
-
                 var client = new LowLevelClient(
                     clientInfo.Name,
                     clientInfo.Namespace,
@@ -183,7 +181,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                     parentClient,
                     clientInfo.Requests,
                     clientParameters,
-                    clientExamples,
+                    clientInfo.Examples,
                     rootNamespace.Auth,
                     sourceInputModel,
                     clientOptions,
