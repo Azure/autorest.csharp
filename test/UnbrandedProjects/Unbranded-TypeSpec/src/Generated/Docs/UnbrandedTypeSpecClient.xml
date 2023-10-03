@@ -851,6 +851,44 @@ JsonElement element = JsonDocument.Parse(result.GetRawResponse().ContentStream).
 Console.WriteLine(element.GetProperty("name").ToString());
 ]]></code></example>
     </member>
+    <member name="ReturnsAnonymousModelAsync(CancellationToken)">
+      <example>
+This sample shows how to call ReturnsAnonymousModelAsync.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+KeyCredential credential = new KeyCredential("<key>");
+UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
+
+Result<returnsAnonymousModel92> result = await client.ReturnsAnonymousModelAsync();
+]]></code>
+This sample shows how to call ReturnsAnonymousModelAsync with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+KeyCredential credential = new KeyCredential("<key>");
+UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
+
+Result<returnsAnonymousModel92> result = await client.ReturnsAnonymousModelAsync();
+]]></code></example>
+    </member>
+    <member name="ReturnsAnonymousModel(CancellationToken)">
+      <example>
+This sample shows how to call ReturnsAnonymousModel.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+KeyCredential credential = new KeyCredential("<key>");
+UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
+
+Result<returnsAnonymousModel92> result = client.ReturnsAnonymousModel();
+]]></code>
+This sample shows how to call ReturnsAnonymousModel with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+KeyCredential credential = new KeyCredential("<key>");
+UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
+
+Result<returnsAnonymousModel92> result = client.ReturnsAnonymousModel();
+]]></code></example>
+    </member>
     <member name="ReturnsAnonymousModelAsync(RequestOptions)">
       <example>
 This sample shows how to call ReturnsAnonymousModelAsync and parse the result.

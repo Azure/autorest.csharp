@@ -60,7 +60,8 @@ namespace ConfidentLevelsInTsp
         /// <param name="body"> The ModelWithUnionProperty to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        internal virtual async Task<Response> UnionInRequestPropertyAsync(ModelWithUnionProperty body, CancellationToken cancellationToken = default)
+        /// <include file="Docs/ConfidentLevelsInTspClient.xml" path="doc/members/member[@name='UnionInRequestPropertyAsync(ModelWithUnionProperty,CancellationToken)']/*" />
+        public virtual async Task<Response> UnionInRequestPropertyAsync(ModelWithUnionProperty body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
 
@@ -73,7 +74,8 @@ namespace ConfidentLevelsInTsp
         /// <param name="body"> The ModelWithUnionProperty to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        internal virtual Response UnionInRequestProperty(ModelWithUnionProperty body, CancellationToken cancellationToken = default)
+        /// <include file="Docs/ConfidentLevelsInTspClient.xml" path="doc/members/member[@name='UnionInRequestProperty(ModelWithUnionProperty,CancellationToken)']/*" />
+        public virtual Response UnionInRequestProperty(ModelWithUnionProperty body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
 
@@ -82,13 +84,17 @@ namespace ConfidentLevelsInTsp
             return response;
         }
 
-        // The convenience method of this operation is made internal because this operation directly or indirectly uses a low confident type, for instance, unions, literal types with number values, etc.
         /// <summary>
         /// [Protocol Method] This is an operation that uses a model with union types in request body
         /// <list type="bullet">
         /// <item>
         /// <description>
         /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="UnionInRequestPropertyAsync(ModelWithUnionProperty,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -117,13 +123,17 @@ namespace ConfidentLevelsInTsp
             }
         }
 
-        // The convenience method of this operation is made internal because this operation directly or indirectly uses a low confident type, for instance, unions, literal types with number values, etc.
         /// <summary>
         /// [Protocol Method] This is an operation that uses a model with union types in request body
         /// <list type="bullet">
         /// <item>
         /// <description>
         /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="UnionInRequestProperty(ModelWithUnionProperty,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -156,7 +166,8 @@ namespace ConfidentLevelsInTsp
         /// <param name="body"> The UsualModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        internal virtual async Task<Response<AnotherModelWithUnionProperty>> UnionInResponsePropertyAsync(UsualModel body, CancellationToken cancellationToken = default)
+        /// <include file="Docs/ConfidentLevelsInTspClient.xml" path="doc/members/member[@name='UnionInResponsePropertyAsync(UsualModel,CancellationToken)']/*" />
+        public virtual async Task<Response<AnotherModelWithUnionProperty>> UnionInResponsePropertyAsync(UsualModel body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
 
@@ -169,7 +180,8 @@ namespace ConfidentLevelsInTsp
         /// <param name="body"> The UsualModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        internal virtual Response<AnotherModelWithUnionProperty> UnionInResponseProperty(UsualModel body, CancellationToken cancellationToken = default)
+        /// <include file="Docs/ConfidentLevelsInTspClient.xml" path="doc/members/member[@name='UnionInResponseProperty(UsualModel,CancellationToken)']/*" />
+        public virtual Response<AnotherModelWithUnionProperty> UnionInResponseProperty(UsualModel body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
 
@@ -178,13 +190,17 @@ namespace ConfidentLevelsInTsp
             return Response.FromValue(AnotherModelWithUnionProperty.FromResponse(response), response);
         }
 
-        // The convenience method of this operation is made internal because this operation directly or indirectly uses a low confident type, for instance, unions, literal types with number values, etc.
         /// <summary>
         /// [Protocol Method] This is an operation that uses a model with union types as response body
         /// <list type="bullet">
         /// <item>
         /// <description>
         /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="UnionInResponsePropertyAsync(UsualModel,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -213,13 +229,17 @@ namespace ConfidentLevelsInTsp
             }
         }
 
-        // The convenience method of this operation is made internal because this operation directly or indirectly uses a low confident type, for instance, unions, literal types with number values, etc.
         /// <summary>
         /// [Protocol Method] This is an operation that uses a model with union types as response body
         /// <list type="bullet">
         /// <item>
         /// <description>
         /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="UnionInResponseProperty(UsualModel,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -252,7 +272,8 @@ namespace ConfidentLevelsInTsp
         /// <param name="input"> The NonConfidentModelWithSelfReference to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        internal virtual async Task<Response> UnionWithSelfReferenceAsync(NonConfidentModelWithSelfReference input, CancellationToken cancellationToken = default)
+        /// <include file="Docs/ConfidentLevelsInTspClient.xml" path="doc/members/member[@name='UnionWithSelfReferenceAsync(NonConfidentModelWithSelfReference,CancellationToken)']/*" />
+        public virtual async Task<Response> UnionWithSelfReferenceAsync(NonConfidentModelWithSelfReference input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
 
@@ -265,7 +286,8 @@ namespace ConfidentLevelsInTsp
         /// <param name="input"> The NonConfidentModelWithSelfReference to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        internal virtual Response UnionWithSelfReference(NonConfidentModelWithSelfReference input, CancellationToken cancellationToken = default)
+        /// <include file="Docs/ConfidentLevelsInTspClient.xml" path="doc/members/member[@name='UnionWithSelfReference(NonConfidentModelWithSelfReference,CancellationToken)']/*" />
+        public virtual Response UnionWithSelfReference(NonConfidentModelWithSelfReference input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
 
@@ -274,13 +296,17 @@ namespace ConfidentLevelsInTsp
             return response;
         }
 
-        // The convenience method of this operation is made internal because this operation directly or indirectly uses a low confident type, for instance, unions, literal types with number values, etc.
         /// <summary>
         /// [Protocol Method] This is an operation that uses a model with union types and self reference in request body
         /// <list type="bullet">
         /// <item>
         /// <description>
         /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="UnionWithSelfReferenceAsync(NonConfidentModelWithSelfReference,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -309,13 +335,17 @@ namespace ConfidentLevelsInTsp
             }
         }
 
-        // The convenience method of this operation is made internal because this operation directly or indirectly uses a low confident type, for instance, unions, literal types with number values, etc.
         /// <summary>
         /// [Protocol Method] This is an operation that uses a model with union types and self reference in request body
         /// <list type="bullet">
         /// <item>
         /// <description>
         /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="UnionWithSelfReference(NonConfidentModelWithSelfReference,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -348,7 +378,8 @@ namespace ConfidentLevelsInTsp
         /// <param name="input"> The NonConfidentModelWithIndirectSelfReference to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        internal virtual async Task<Response> UnionWithInderictAsync(NonConfidentModelWithIndirectSelfReference input, CancellationToken cancellationToken = default)
+        /// <include file="Docs/ConfidentLevelsInTspClient.xml" path="doc/members/member[@name='UnionWithInderictAsync(NonConfidentModelWithIndirectSelfReference,CancellationToken)']/*" />
+        public virtual async Task<Response> UnionWithInderictAsync(NonConfidentModelWithIndirectSelfReference input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
 
@@ -361,7 +392,8 @@ namespace ConfidentLevelsInTsp
         /// <param name="input"> The NonConfidentModelWithIndirectSelfReference to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        internal virtual Response UnionWithInderict(NonConfidentModelWithIndirectSelfReference input, CancellationToken cancellationToken = default)
+        /// <include file="Docs/ConfidentLevelsInTspClient.xml" path="doc/members/member[@name='UnionWithInderict(NonConfidentModelWithIndirectSelfReference,CancellationToken)']/*" />
+        public virtual Response UnionWithInderict(NonConfidentModelWithIndirectSelfReference input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
 
@@ -370,13 +402,17 @@ namespace ConfidentLevelsInTsp
             return response;
         }
 
-        // The convenience method of this operation is made internal because this operation directly or indirectly uses a low confident type, for instance, unions, literal types with number values, etc.
         /// <summary>
         /// [Protocol Method] This is an operation that uses a model with union types and indirect self reference in request body
         /// <list type="bullet">
         /// <item>
         /// <description>
         /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="UnionWithInderictAsync(NonConfidentModelWithIndirectSelfReference,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -405,13 +441,17 @@ namespace ConfidentLevelsInTsp
             }
         }
 
-        // The convenience method of this operation is made internal because this operation directly or indirectly uses a low confident type, for instance, unions, literal types with number values, etc.
         /// <summary>
         /// [Protocol Method] This is an operation that uses a model with union types and indirect self reference in request body
         /// <list type="bullet">
         /// <item>
         /// <description>
         /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="UnionWithInderict(NonConfidentModelWithIndirectSelfReference,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -742,7 +782,8 @@ namespace ConfidentLevelsInTsp
         /// <param name="input"> The PollutedPet to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        internal virtual async Task<Response<PollutedPet>> PollutedBaseMethodAsync(PollutedPet input, CancellationToken cancellationToken = default)
+        /// <include file="Docs/ConfidentLevelsInTspClient.xml" path="doc/members/member[@name='PollutedBaseMethodAsync(PollutedPet,CancellationToken)']/*" />
+        public virtual async Task<Response<PollutedPet>> PollutedBaseMethodAsync(PollutedPet input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
 
@@ -755,7 +796,8 @@ namespace ConfidentLevelsInTsp
         /// <param name="input"> The PollutedPet to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        internal virtual Response<PollutedPet> PollutedBaseMethod(PollutedPet input, CancellationToken cancellationToken = default)
+        /// <include file="Docs/ConfidentLevelsInTspClient.xml" path="doc/members/member[@name='PollutedBaseMethod(PollutedPet,CancellationToken)']/*" />
+        public virtual Response<PollutedPet> PollutedBaseMethod(PollutedPet input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
 
@@ -764,13 +806,17 @@ namespace ConfidentLevelsInTsp
             return Response.FromValue(PollutedPet.FromResponse(response), response);
         }
 
-        // The convenience method of this operation is made internal because this operation directly or indirectly uses a low confident type, for instance, unions, literal types with number values, etc.
         /// <summary>
         /// [Protocol Method] This is an operation that uses the base type with a discriminator, but this operation is low confident because one of the derived type from the discriminated types has union types on it
         /// <list type="bullet">
         /// <item>
         /// <description>
         /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="PollutedBaseMethodAsync(PollutedPet,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -799,13 +845,17 @@ namespace ConfidentLevelsInTsp
             }
         }
 
-        // The convenience method of this operation is made internal because this operation directly or indirectly uses a low confident type, for instance, unions, literal types with number values, etc.
         /// <summary>
         /// [Protocol Method] This is an operation that uses the base type with a discriminator, but this operation is low confident because one of the derived type from the discriminated types has union types on it
         /// <list type="bullet">
         /// <item>
         /// <description>
         /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="PollutedBaseMethod(PollutedPet,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -838,7 +888,8 @@ namespace ConfidentLevelsInTsp
         /// <param name="input"> The PollutedDog to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        internal virtual async Task<Response<PollutedDog>> PollutedDerivedMethodAsync(PollutedDog input, CancellationToken cancellationToken = default)
+        /// <include file="Docs/ConfidentLevelsInTspClient.xml" path="doc/members/member[@name='PollutedDerivedMethodAsync(PollutedDog,CancellationToken)']/*" />
+        public virtual async Task<Response<PollutedDog>> PollutedDerivedMethodAsync(PollutedDog input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
 
@@ -851,7 +902,8 @@ namespace ConfidentLevelsInTsp
         /// <param name="input"> The PollutedDog to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        internal virtual Response<PollutedDog> PollutedDerivedMethod(PollutedDog input, CancellationToken cancellationToken = default)
+        /// <include file="Docs/ConfidentLevelsInTspClient.xml" path="doc/members/member[@name='PollutedDerivedMethod(PollutedDog,CancellationToken)']/*" />
+        public virtual Response<PollutedDog> PollutedDerivedMethod(PollutedDog input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
 
@@ -860,13 +912,17 @@ namespace ConfidentLevelsInTsp
             return Response.FromValue(PollutedDog.FromResponse(response), response);
         }
 
-        // The convenience method of this operation is made internal because this operation directly or indirectly uses a low confident type, for instance, unions, literal types with number values, etc.
         /// <summary>
         /// [Protocol Method] This is an operation that uses the model with a union type directly therefore this operation is not confident
         /// <list type="bullet">
         /// <item>
         /// <description>
         /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="PollutedDerivedMethodAsync(PollutedDog,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -895,13 +951,17 @@ namespace ConfidentLevelsInTsp
             }
         }
 
-        // The convenience method of this operation is made internal because this operation directly or indirectly uses a low confident type, for instance, unions, literal types with number values, etc.
         /// <summary>
         /// [Protocol Method] This is an operation that uses the model with a union type directly therefore this operation is not confident
         /// <list type="bullet">
         /// <item>
         /// <description>
         /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="PollutedDerivedMethod(PollutedDog,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -934,7 +994,8 @@ namespace ConfidentLevelsInTsp
         /// <param name="input"> The UnpollutedCat to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        internal virtual async Task<Response<UnpollutedCat>> UnpollutedDerivedMethodAsync(UnpollutedCat input, CancellationToken cancellationToken = default)
+        /// <include file="Docs/ConfidentLevelsInTspClient.xml" path="doc/members/member[@name='UnpollutedDerivedMethodAsync(UnpollutedCat,CancellationToken)']/*" />
+        public virtual async Task<Response<UnpollutedCat>> UnpollutedDerivedMethodAsync(UnpollutedCat input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
 
@@ -947,7 +1008,8 @@ namespace ConfidentLevelsInTsp
         /// <param name="input"> The UnpollutedCat to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        internal virtual Response<UnpollutedCat> UnpollutedDerivedMethod(UnpollutedCat input, CancellationToken cancellationToken = default)
+        /// <include file="Docs/ConfidentLevelsInTspClient.xml" path="doc/members/member[@name='UnpollutedDerivedMethod(UnpollutedCat,CancellationToken)']/*" />
+        public virtual Response<UnpollutedCat> UnpollutedDerivedMethod(UnpollutedCat input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
 
@@ -956,13 +1018,17 @@ namespace ConfidentLevelsInTsp
             return Response.FromValue(UnpollutedCat.FromResponse(response), response);
         }
 
-        // The convenience method of this operation is made internal because this operation directly or indirectly uses a low confident type, for instance, unions, literal types with number values, etc.
         /// <summary>
         /// [Protocol Method] This is an operation that is not using the model with a union type directly but since the base type is not confident and we would like it to be low confident, therefore this must be made internal as well
         /// <list type="bullet">
         /// <item>
         /// <description>
         /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="UnpollutedDerivedMethodAsync(UnpollutedCat,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -991,13 +1057,17 @@ namespace ConfidentLevelsInTsp
             }
         }
 
-        // The convenience method of this operation is made internal because this operation directly or indirectly uses a low confident type, for instance, unions, literal types with number values, etc.
         /// <summary>
         /// [Protocol Method] This is an operation that is not using the model with a union type directly but since the base type is not confident and we would like it to be low confident, therefore this must be made internal as well
         /// <list type="bullet">
         /// <item>
         /// <description>
         /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="UnpollutedDerivedMethod(UnpollutedCat,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -1030,7 +1100,8 @@ namespace ConfidentLevelsInTsp
         /// <param name="input"> The DerivedModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        internal virtual async Task<Response> UseDerivedModelAsync(DerivedModel input, CancellationToken cancellationToken = default)
+        /// <include file="Docs/ConfidentLevelsInTspClient.xml" path="doc/members/member[@name='UseDerivedModelAsync(DerivedModel,CancellationToken)']/*" />
+        public virtual async Task<Response> UseDerivedModelAsync(DerivedModel input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
 
@@ -1043,7 +1114,8 @@ namespace ConfidentLevelsInTsp
         /// <param name="input"> The DerivedModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        internal virtual Response UseDerivedModel(DerivedModel input, CancellationToken cancellationToken = default)
+        /// <include file="Docs/ConfidentLevelsInTspClient.xml" path="doc/members/member[@name='UseDerivedModel(DerivedModel,CancellationToken)']/*" />
+        public virtual Response UseDerivedModel(DerivedModel input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
 
@@ -1052,13 +1124,17 @@ namespace ConfidentLevelsInTsp
             return response;
         }
 
-        // The convenience method of this operation is made internal because this operation directly or indirectly uses a low confident type, for instance, unions, literal types with number values, etc.
         /// <summary>
         /// [Protocol Method] This is an operation with nothing special
         /// <list type="bullet">
         /// <item>
         /// <description>
         /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="UseDerivedModelAsync(DerivedModel,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -1087,13 +1163,17 @@ namespace ConfidentLevelsInTsp
             }
         }
 
-        // The convenience method of this operation is made internal because this operation directly or indirectly uses a low confident type, for instance, unions, literal types with number values, etc.
         /// <summary>
         /// [Protocol Method] This is an operation with nothing special
         /// <list type="bullet">
         /// <item>
         /// <description>
         /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="UseDerivedModel(DerivedModel,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -1126,7 +1206,8 @@ namespace ConfidentLevelsInTsp
         /// <param name="input"> The DerivedModelWithUnion to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        internal virtual async Task<Response> UseDerivedModelWithUnionAsync(DerivedModelWithUnion input, CancellationToken cancellationToken = default)
+        /// <include file="Docs/ConfidentLevelsInTspClient.xml" path="doc/members/member[@name='UseDerivedModelWithUnionAsync(DerivedModelWithUnion,CancellationToken)']/*" />
+        public virtual async Task<Response> UseDerivedModelWithUnionAsync(DerivedModelWithUnion input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
 
@@ -1139,7 +1220,8 @@ namespace ConfidentLevelsInTsp
         /// <param name="input"> The DerivedModelWithUnion to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        internal virtual Response UseDerivedModelWithUnion(DerivedModelWithUnion input, CancellationToken cancellationToken = default)
+        /// <include file="Docs/ConfidentLevelsInTspClient.xml" path="doc/members/member[@name='UseDerivedModelWithUnion(DerivedModelWithUnion,CancellationToken)']/*" />
+        public virtual Response UseDerivedModelWithUnion(DerivedModelWithUnion input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
 
@@ -1148,13 +1230,17 @@ namespace ConfidentLevelsInTsp
             return response;
         }
 
-        // The convenience method of this operation is made internal because this operation directly or indirectly uses a low confident type, for instance, unions, literal types with number values, etc.
         /// <summary>
         /// [Protocol Method] This is an operation that uses a derived model with unions
         /// <list type="bullet">
         /// <item>
         /// <description>
         /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="UseDerivedModelWithUnionAsync(DerivedModelWithUnion,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -1183,13 +1269,17 @@ namespace ConfidentLevelsInTsp
             }
         }
 
-        // The convenience method of this operation is made internal because this operation directly or indirectly uses a low confident type, for instance, unions, literal types with number values, etc.
         /// <summary>
         /// [Protocol Method] This is an operation that uses a derived model with unions
         /// <list type="bullet">
         /// <item>
         /// <description>
         /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="UseDerivedModelWithUnion(DerivedModelWithUnion,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>

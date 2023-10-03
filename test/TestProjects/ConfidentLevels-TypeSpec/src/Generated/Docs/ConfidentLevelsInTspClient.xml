@@ -1,6 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
+    <member name="UnionInRequestPropertyAsync(ModelWithUnionProperty,CancellationToken)">
+      <example>
+This sample shows how to call UnionInRequestPropertyAsync.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
+
+ModelWithUnionProperty body = new ModelWithUnionProperty(BinaryData.FromObjectAsJson("<unionProperty>"));
+Response response = await client.UnionInRequestPropertyAsync(body);
+]]></code>
+This sample shows how to call UnionInRequestPropertyAsync with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
+
+ModelWithUnionProperty body = new ModelWithUnionProperty(BinaryData.FromObjectAsJson("<unionProperty>"));
+Response response = await client.UnionInRequestPropertyAsync(body);
+]]></code></example>
+    </member>
+    <member name="UnionInRequestProperty(ModelWithUnionProperty,CancellationToken)">
+      <example>
+This sample shows how to call UnionInRequestProperty.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
+
+ModelWithUnionProperty body = new ModelWithUnionProperty(BinaryData.FromObjectAsJson("<unionProperty>"));
+Response response = client.UnionInRequestProperty(body);
+]]></code>
+This sample shows how to call UnionInRequestProperty with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
+
+ModelWithUnionProperty body = new ModelWithUnionProperty(BinaryData.FromObjectAsJson("<unionProperty>"));
+Response response = client.UnionInRequestProperty(body);
+]]></code></example>
+    </member>
     <member name="UnionInRequestPropertyAsync(RequestContent,RequestContext)">
       <example>
 This sample shows how to call UnionInRequestPropertyAsync.
@@ -57,6 +95,50 @@ RequestContent content = RequestContent.Create(new
 Response response = client.UnionInRequestProperty(content);
 
 Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+    <member name="UnionInResponsePropertyAsync(UsualModel,CancellationToken)">
+      <example>
+This sample shows how to call UnionInResponsePropertyAsync.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
+
+UsualModel body = new UsualModel("<name>", 1234);
+Response<AnotherModelWithUnionProperty> response = await client.UnionInResponsePropertyAsync(body);
+]]></code>
+This sample shows how to call UnionInResponsePropertyAsync with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
+
+UsualModel body = new UsualModel("<name>", 1234)
+{
+    Size = 123.45,
+};
+Response<AnotherModelWithUnionProperty> response = await client.UnionInResponsePropertyAsync(body);
+]]></code></example>
+    </member>
+    <member name="UnionInResponseProperty(UsualModel,CancellationToken)">
+      <example>
+This sample shows how to call UnionInResponseProperty.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
+
+UsualModel body = new UsualModel("<name>", 1234);
+Response<AnotherModelWithUnionProperty> response = client.UnionInResponseProperty(body);
+]]></code>
+This sample shows how to call UnionInResponseProperty with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
+
+UsualModel body = new UsualModel("<name>", 1234)
+{
+    Size = 123.45,
+};
+Response<AnotherModelWithUnionProperty> response = client.UnionInResponseProperty(body);
 ]]></code></example>
     </member>
     <member name="UnionInResponsePropertyAsync(RequestContent,RequestContext)">
@@ -125,6 +207,56 @@ Response response = client.UnionInResponseProperty(content);
 
 JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(element.GetProperty("unionProperty").ToString());
+]]></code></example>
+    </member>
+    <member name="UnionWithSelfReferenceAsync(NonConfidentModelWithSelfReference,CancellationToken)">
+      <example>
+This sample shows how to call UnionWithSelfReferenceAsync.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
+
+NonConfidentModelWithSelfReference input = new NonConfidentModelWithSelfReference("<name>", new NonConfidentModelWithSelfReference[]
+{
+    default
+}, BinaryData.FromObjectAsJson("<unionProperty>"));
+Response response = await client.UnionWithSelfReferenceAsync(input);
+]]></code>
+This sample shows how to call UnionWithSelfReferenceAsync with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
+
+NonConfidentModelWithSelfReference input = new NonConfidentModelWithSelfReference("<name>", new NonConfidentModelWithSelfReference[]
+{
+    default
+}, BinaryData.FromObjectAsJson("<unionProperty>"));
+Response response = await client.UnionWithSelfReferenceAsync(input);
+]]></code></example>
+    </member>
+    <member name="UnionWithSelfReference(NonConfidentModelWithSelfReference,CancellationToken)">
+      <example>
+This sample shows how to call UnionWithSelfReference.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
+
+NonConfidentModelWithSelfReference input = new NonConfidentModelWithSelfReference("<name>", new NonConfidentModelWithSelfReference[]
+{
+    default
+}, BinaryData.FromObjectAsJson("<unionProperty>"));
+Response response = client.UnionWithSelfReference(input);
+]]></code>
+This sample shows how to call UnionWithSelfReference with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
+
+NonConfidentModelWithSelfReference input = new NonConfidentModelWithSelfReference("<name>", new NonConfidentModelWithSelfReference[]
+{
+    default
+}, BinaryData.FromObjectAsJson("<unionProperty>"));
+Response response = client.UnionWithSelfReference(input);
 ]]></code></example>
     </member>
     <member name="UnionWithSelfReferenceAsync(RequestContent,RequestContext)">
@@ -203,6 +335,62 @@ RequestContent content = RequestContent.Create(new
 Response response = client.UnionWithSelfReference(content);
 
 Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+    <member name="UnionWithInderictAsync(NonConfidentModelWithIndirectSelfReference,CancellationToken)">
+      <example>
+This sample shows how to call UnionWithInderictAsync.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
+
+NonConfidentModelWithIndirectSelfReference input = new NonConfidentModelWithIndirectSelfReference("<name>");
+Response response = await client.UnionWithInderictAsync(input);
+]]></code>
+This sample shows how to call UnionWithInderictAsync with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
+
+NonConfidentModelWithIndirectSelfReference input = new NonConfidentModelWithIndirectSelfReference("<name>")
+{
+    Reference = {new IndirectSelfReferenceModel("<something>", BinaryData.FromObjectAsJson("<unionProperty>"))
+    {
+        Reference = new NonConfidentModelWithSelfReference("<name>", new NonConfidentModelWithSelfReference[]
+        {
+            default
+        }, BinaryData.FromObjectAsJson("<unionProperty>")),
+    }},
+};
+Response response = await client.UnionWithInderictAsync(input);
+]]></code></example>
+    </member>
+    <member name="UnionWithInderict(NonConfidentModelWithIndirectSelfReference,CancellationToken)">
+      <example>
+This sample shows how to call UnionWithInderict.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
+
+NonConfidentModelWithIndirectSelfReference input = new NonConfidentModelWithIndirectSelfReference("<name>");
+Response response = client.UnionWithInderict(input);
+]]></code>
+This sample shows how to call UnionWithInderict with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
+
+NonConfidentModelWithIndirectSelfReference input = new NonConfidentModelWithIndirectSelfReference("<name>")
+{
+    Reference = {new IndirectSelfReferenceModel("<something>", BinaryData.FromObjectAsJson("<unionProperty>"))
+    {
+        Reference = new NonConfidentModelWithSelfReference("<name>", new NonConfidentModelWithSelfReference[]
+        {
+            default
+        }, BinaryData.FromObjectAsJson("<unionProperty>")),
+    }},
+};
+Response response = client.UnionWithInderict(input);
 ]]></code></example>
     </member>
     <member name="UnionWithInderictAsync(RequestContent,RequestContext)">
@@ -533,6 +721,44 @@ Console.WriteLine(element.GetProperty("kind").ToString());
 Console.WriteLine(element.GetProperty("name").ToString());
 ]]></code></example>
     </member>
+    <member name="PollutedBaseMethodAsync(PollutedPet,CancellationToken)">
+      <example>
+This sample shows how to call PollutedBaseMethodAsync.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
+
+PollutedPet input = new PollutedDog("<name>", "<woof>", BinaryData.FromObjectAsJson("<color>"));
+Response<PollutedPet> response = await client.PollutedBaseMethodAsync(input);
+]]></code>
+This sample shows how to call PollutedBaseMethodAsync with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
+
+PollutedPet input = new PollutedDog("<name>", "<woof>", BinaryData.FromObjectAsJson("<color>"));
+Response<PollutedPet> response = await client.PollutedBaseMethodAsync(input);
+]]></code></example>
+    </member>
+    <member name="PollutedBaseMethod(PollutedPet,CancellationToken)">
+      <example>
+This sample shows how to call PollutedBaseMethod.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
+
+PollutedPet input = new PollutedDog("<name>", "<woof>", BinaryData.FromObjectAsJson("<color>"));
+Response<PollutedPet> response = client.PollutedBaseMethod(input);
+]]></code>
+This sample shows how to call PollutedBaseMethod with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
+
+PollutedPet input = new PollutedDog("<name>", "<woof>", BinaryData.FromObjectAsJson("<color>"));
+Response<PollutedPet> response = client.PollutedBaseMethod(input);
+]]></code></example>
+    </member>
     <member name="PollutedBaseMethodAsync(RequestContent,RequestContext)">
       <example>
 This sample shows how to call PollutedBaseMethodAsync and parse the result.
@@ -609,6 +835,44 @@ Response response = client.PollutedBaseMethod(content);
 JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(element.GetProperty("kind").ToString());
 Console.WriteLine(element.GetProperty("name").ToString());
+]]></code></example>
+    </member>
+    <member name="PollutedDerivedMethodAsync(PollutedDog,CancellationToken)">
+      <example>
+This sample shows how to call PollutedDerivedMethodAsync.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
+
+PollutedDog input = new PollutedDog("<name>", "<woof>", BinaryData.FromObjectAsJson("<color>"));
+Response<PollutedDog> response = await client.PollutedDerivedMethodAsync(input);
+]]></code>
+This sample shows how to call PollutedDerivedMethodAsync with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
+
+PollutedDog input = new PollutedDog("<name>", "<woof>", BinaryData.FromObjectAsJson("<color>"));
+Response<PollutedDog> response = await client.PollutedDerivedMethodAsync(input);
+]]></code></example>
+    </member>
+    <member name="PollutedDerivedMethod(PollutedDog,CancellationToken)">
+      <example>
+This sample shows how to call PollutedDerivedMethod.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
+
+PollutedDog input = new PollutedDog("<name>", "<woof>", BinaryData.FromObjectAsJson("<color>"));
+Response<PollutedDog> response = client.PollutedDerivedMethod(input);
+]]></code>
+This sample shows how to call PollutedDerivedMethod with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
+
+PollutedDog input = new PollutedDog("<name>", "<woof>", BinaryData.FromObjectAsJson("<color>"));
+Response<PollutedDog> response = client.PollutedDerivedMethod(input);
 ]]></code></example>
     </member>
     <member name="PollutedDerivedMethodAsync(RequestContent,RequestContext)">
@@ -697,6 +961,44 @@ Console.WriteLine(element.GetProperty("kind").ToString());
 Console.WriteLine(element.GetProperty("name").ToString());
 ]]></code></example>
     </member>
+    <member name="UnpollutedDerivedMethodAsync(UnpollutedCat,CancellationToken)">
+      <example>
+This sample shows how to call UnpollutedDerivedMethodAsync.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
+
+UnpollutedCat input = new UnpollutedCat("<name>", "<meow>");
+Response<UnpollutedCat> response = await client.UnpollutedDerivedMethodAsync(input);
+]]></code>
+This sample shows how to call UnpollutedDerivedMethodAsync with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
+
+UnpollutedCat input = new UnpollutedCat("<name>", "<meow>");
+Response<UnpollutedCat> response = await client.UnpollutedDerivedMethodAsync(input);
+]]></code></example>
+    </member>
+    <member name="UnpollutedDerivedMethod(UnpollutedCat,CancellationToken)">
+      <example>
+This sample shows how to call UnpollutedDerivedMethod.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
+
+UnpollutedCat input = new UnpollutedCat("<name>", "<meow>");
+Response<UnpollutedCat> response = client.UnpollutedDerivedMethod(input);
+]]></code>
+This sample shows how to call UnpollutedDerivedMethod with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
+
+UnpollutedCat input = new UnpollutedCat("<name>", "<meow>");
+Response<UnpollutedCat> response = client.UnpollutedDerivedMethod(input);
+]]></code></example>
+    </member>
     <member name="UnpollutedDerivedMethodAsync(RequestContent,RequestContext)">
       <example>
 This sample shows how to call UnpollutedDerivedMethodAsync and parse the result.
@@ -775,6 +1077,50 @@ Console.WriteLine(element.GetProperty("kind").ToString());
 Console.WriteLine(element.GetProperty("name").ToString());
 ]]></code></example>
     </member>
+    <member name="UseDerivedModelAsync(DerivedModel,CancellationToken)">
+      <example>
+This sample shows how to call UseDerivedModelAsync.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
+
+DerivedModel input = new DerivedModel("<name>");
+Response response = await client.UseDerivedModelAsync(input);
+]]></code>
+This sample shows how to call UseDerivedModelAsync with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
+
+DerivedModel input = new DerivedModel("<name>")
+{
+    Age = 1234,
+};
+Response response = await client.UseDerivedModelAsync(input);
+]]></code></example>
+    </member>
+    <member name="UseDerivedModel(DerivedModel,CancellationToken)">
+      <example>
+This sample shows how to call UseDerivedModel.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
+
+DerivedModel input = new DerivedModel("<name>");
+Response response = client.UseDerivedModel(input);
+]]></code>
+This sample shows how to call UseDerivedModel with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
+
+DerivedModel input = new DerivedModel("<name>")
+{
+    Age = 1234,
+};
+Response response = client.UseDerivedModel(input);
+]]></code></example>
+    </member>
     <member name="UseDerivedModelAsync(RequestContent,RequestContext)">
       <example>
 This sample shows how to call UseDerivedModelAsync.
@@ -835,6 +1181,44 @@ RequestContent content = RequestContent.Create(new
 Response response = client.UseDerivedModel(content);
 
 Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+    <member name="UseDerivedModelWithUnionAsync(DerivedModelWithUnion,CancellationToken)">
+      <example>
+This sample shows how to call UseDerivedModelWithUnionAsync.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
+
+DerivedModelWithUnion input = new DerivedModelWithUnion("<name>", BinaryData.FromObjectAsJson("<unionProperty>"));
+Response response = await client.UseDerivedModelWithUnionAsync(input);
+]]></code>
+This sample shows how to call UseDerivedModelWithUnionAsync with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
+
+DerivedModelWithUnion input = new DerivedModelWithUnion("<name>", BinaryData.FromObjectAsJson("<unionProperty>"));
+Response response = await client.UseDerivedModelWithUnionAsync(input);
+]]></code></example>
+    </member>
+    <member name="UseDerivedModelWithUnion(DerivedModelWithUnion,CancellationToken)">
+      <example>
+This sample shows how to call UseDerivedModelWithUnion.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
+
+DerivedModelWithUnion input = new DerivedModelWithUnion("<name>", BinaryData.FromObjectAsJson("<unionProperty>"));
+Response response = client.UseDerivedModelWithUnion(input);
+]]></code>
+This sample shows how to call UseDerivedModelWithUnion with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
+
+DerivedModelWithUnion input = new DerivedModelWithUnion("<name>", BinaryData.FromObjectAsJson("<unionProperty>"));
+Response response = client.UseDerivedModelWithUnion(input);
 ]]></code></example>
     </member>
     <member name="UseDerivedModelWithUnionAsync(RequestContent,RequestContext)">
