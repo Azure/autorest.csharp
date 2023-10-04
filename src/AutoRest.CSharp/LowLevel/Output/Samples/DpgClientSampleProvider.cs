@@ -69,7 +69,7 @@ namespace AutoRest.CSharp.LowLevel.Output.Samples
         {
             methods = new List<Method>();
             restClientMethodsToTestMethods = new Dictionary<MethodSignatureBase, IReadOnlyList<(string, Method)>>();
-            foreach (var operationMethods in client.OperationMethods)
+            foreach (var operationMethods in client.OperationMethods.OrderBy(m => m.Order))
             {
                 var samples = operationMethods.Samples;
 
@@ -207,6 +207,8 @@ namespace AutoRest.CSharp.LowLevel.Output.Samples
 
             if (sample.PageItemType is {} pageItemType)
             {
+                var foreachItemType = sample.IsConvenienceSample ? pageItemType : typeof(BinaryData);
+
                 // if it is pageable, we need to wrap the invocation inside a foreach statement
                 // but before the foreach, if this operation is long-running, we still need to call it, and pass the operation.Value into the foreach
                 if (sample.IsLongRunning)
@@ -220,9 +222,9 @@ namespace AutoRest.CSharp.LowLevel.Output.Samples
                     return new MethodBodyStatement[]
                     {
                         Declare("operation", new OperationExpression(invocation), out var operation),
-                        new ForeachStatement(pageItemType, "item", operation.Value, isAsync, out var itemVar)
+                        new ForeachStatement(foreachItemType, "item", operation.Value, isAsync, out var itemVar)
                         {
-                            BuildResponseStatements(sample, itemVar)
+                            ParseResponse(pageItemType, sample, new BinaryDataExpression(itemVar).ToStream())
                         }
                     };
                 }
@@ -233,49 +235,60 @@ namespace AutoRest.CSharp.LowLevel.Output.Samples
                      * await foreach (ItemType item in <invocation>)
                      * {}
                      */
-                    return new ForeachStatement(pageItemType, "item", invocation, isAsync, out var itemVar)
+                    return new ForeachStatement(foreachItemType, "item", invocation, isAsync, out var itemVar)
                     {
-                        BuildResponseStatements(sample, itemVar)
+                        ParseResponse(pageItemType, sample, new BinaryDataExpression(itemVar).ToStream())
                     };
                 }
             }
 
             // if it is not pageable, we just call the operation, declare a local variable and assign the result to it
-            if (sample is {IsLongRunning: true, ResponseType: not null})
+            if (sample is {ResponseType: {} responseType})
             {
+                if (sample.IsLongRunning)
+                {
+                    /*
+                    * This will generate code like:
+                    * Operation<T> operation = <invocation>;
+                    * BinaryData responseData = operation.Value;
+                    */
+                    return new[]
+                    {
+                        Declare("operation", new OperationExpression(invocation), out var operation),
+                        Declare("responseData", new BinaryDataExpression(operation.Value), out var responseData),
+                        EmptyLine,
+                        ParseResponse(responseType, sample, responseData.ToStream())
+                    };
+                }
+
                 /*
                  * This will generate code like:
-                 * Operation<T> operation = <invocation>;
-                 * BinaryData responseData = operation.Value;
+                 * Response<T> operation = <invocation>; // when response has payload
+                 * Response response = <invocation>; // when response has no payload
                  */
                 return new[]
                 {
-                    Declare("operation", new OperationExpression(invocation), out var operation),
-                    Declare("responseData", new BinaryDataExpression(operation.Value), out var responseData),
+                    Declare("response", new ResponseExpression(invocation), out var responseOfT),
                     EmptyLine,
-                    BuildResponseStatements(sample, responseData)
+                    ParseResponse(responseType, sample, responseOfT.ContentStream)
                 };
-            }
-
-            if (sample.IsLongRunning)
-            {
-                /*
-                 * This will generate code like:
-                 * Operation operation = <invocation>;
-                 */
-                return Declare("operation", new OperationExpression(invocation), out _);
             }
 
             /*
              * This will generate code like:
-             * Response<T> operation = <invocation>; // when response has payload
-             * Response response = <invocation>; // when response has no payload
+             * Operation operation = <invocation>; // when it is long-running
+             * Response response = <invocation>; // when it is not long-running
              */
+            if (sample.IsLongRunning)
+            {
+                return Declare("operation", new ResponseExpression(invocation), out _);
+            }
+
             return new[]
             {
-                Declare(sample.IsLongRunning ? "operation" : "response", new ResponseExpression(invocation), out var response),
+                Declare("response", new ResponseExpression(invocation), out var response),
                 EmptyLine,
-                BuildResponseStatements(sample, response)
+                InvokeConsoleWriteLine(response.Status)
             };
         }
 
@@ -302,12 +315,12 @@ namespace AutoRest.CSharp.LowLevel.Output.Samples
 
             if (resultVar.Type.EqualsIgnoreNullable(typeof(BinaryData)))
             {
-                return ParseResponse(sample.ResponseType, sample.IsAllParametersUsed, new BinaryDataExpression(resultVar).ToStream());
+                return ParseResponse(sample.ResponseType, sample, new BinaryDataExpression(resultVar).ToStream());
             }
 
             if (resultVar.Type.EqualsIgnoreNullable(typeof(Response)))
             {
-                return ParseResponse(sample.ResponseType, sample.IsAllParametersUsed, new ResponseExpression(resultVar).ContentStream);
+                return ParseResponse(sample.ResponseType, sample, new ResponseExpression(resultVar).ContentStream);
             }
 
             return new MethodBodyStatement();
@@ -322,13 +335,18 @@ namespace AutoRest.CSharp.LowLevel.Output.Samples
             };
         }
 
-        private static MethodBodyStatement ParseResponse(CSharpType responseType, bool isAllParametersUsed, TypedValueExpression responseDataVar)
+        private static MethodBodyStatement ParseResponse(CSharpType responseType, DpgOperationSample sample, TypedValueExpression responseDataVar)
         {
+            if (sample.IsConvenienceSample)
+            {
+                return new MethodBodyStatement();
+            }
+
             var responseParsingStatements = new List<MethodBodyStatement>
             {
                 Declare("result", JsonDocumentExpression.Parse(responseDataVar).RootElement, out var resultVar)
             };
-            BuildResponseParseStatements(isAllParametersUsed, responseType, resultVar, responseParsingStatements, new HashSet<CSharpType>());
+            BuildResponseParseStatements(sample.IsAllParametersUsed, responseType, resultVar, responseParsingStatements, new HashSet<CSharpType>());
             return responseParsingStatements;
         }
 
@@ -350,7 +368,7 @@ namespace AutoRest.CSharp.LowLevel.Output.Samples
                     BuildResponseParseStatements(useAllProperties, valueType, jsonElement.GetProperty("<key>"), statements, visitedTypes);
                 }
             }
-            else if (jsonElementType is { IsFrameworkType: false, Implementation: {} implementation })
+            else if (jsonElementType is { IsFrameworkType: false, Implementation: ObjectType implementation })
             {
                 switch (implementation)
                 {

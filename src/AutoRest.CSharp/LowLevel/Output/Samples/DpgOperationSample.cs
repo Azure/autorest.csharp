@@ -50,7 +50,7 @@ namespace AutoRest.CSharp.Output.Samples.Models
             OperationMethodSignature = signature;
             ResponseType = responseType;
             IsLongRunning = signature.ReturnType is {} && (TypeFactory.IsOperation(signature.ReturnType) || TypeFactory.IsTaskOfOperation(signature.ReturnType));
-            PageItemType = IsConvenienceSample ? pageItemType : pageItemType is {} ? new CSharpType(typeof(BinaryData)) : null;
+            PageItemType = pageItemType;
         }
 
         public IEnumerable<ValueExpression> GetValueExpressionsForParameters(IEnumerable<Parameter> parameters, List<MethodBodyStatement> variableDeclarationStatements)

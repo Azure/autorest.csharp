@@ -205,7 +205,7 @@ namespace AutoRest.CSharp.Generation.Types
 
         internal static bool IsDictionary(CSharpType type, [MaybeNullWhen(false)] out CSharpType keyType, [MaybeNullWhen(false)] out CSharpType valueType)
         {
-            if (IsReadOnlyList(type) || IsReadWriteList(type))
+            if (IsReadOnlyDictionary(type) || IsReadWriteDictionary(type))
             {
                 keyType = type.Arguments[0];
                 valueType = type.Arguments[0];
