@@ -66,7 +66,7 @@
    "Name": "Thing",
    "Namespace": "Demo.HelloWorld",
    "IsNullable": false,
-   "Usage": "RoundTrip",
+   "Usage": "Output",
    "Properties": [
     {
      "$id": "11",
@@ -86,16 +86,16 @@
   },
   {
    "$id": "13",
-   "Name": "RoundTripModel",
+   "Name": "AnonymousBodyRequest",
    "Namespace": "Demo.HelloWorld",
    "IsNullable": false,
    "Usage": "Input",
    "Properties": [
     {
      "$id": "14",
-     "Name": "requiredString",
-     "SerializedName": "requiredString",
-     "Description": "Required string, illustrating a reference type property.",
+     "Name": "name",
+     "SerializedName": "name",
+     "Description": "name of the Thing",
      "Type": {
       "$id": "15",
       "Name": "string",
@@ -104,14 +104,37 @@
      },
      "IsRequired": true,
      "IsReadOnly": false
+    }
+   ]
+  },
+  {
+   "$id": "16",
+   "Name": "RoundTripModel",
+   "Namespace": "Demo.HelloWorld",
+   "IsNullable": false,
+   "Usage": "Input",
+   "Properties": [
+    {
+     "$id": "17",
+     "Name": "requiredString",
+     "SerializedName": "requiredString",
+     "Description": "Required string, illustrating a reference type property.",
+     "Type": {
+      "$id": "18",
+      "Name": "string",
+      "Kind": "String",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
     },
     {
-     "$id": "16",
+     "$id": "19",
      "Name": "requiredInt",
      "SerializedName": "requiredInt",
      "Description": "Required int, illustrating a value type property.",
      "Type": {
-      "$id": "17",
+      "$id": "20",
       "Name": "int32",
       "Kind": "Int32",
       "IsNullable": false
@@ -120,12 +143,12 @@
      "IsReadOnly": false
     },
     {
-     "$id": "18",
+     "$id": "21",
      "Name": "requiredCollection",
      "SerializedName": "requiredCollection",
      "Description": "Required collection of enums",
      "Type": {
-      "$id": "19",
+      "$id": "22",
       "Name": "Array",
       "ElementType": {
        "$ref": "2"
@@ -136,15 +159,15 @@
      "IsReadOnly": false
     },
     {
-     "$id": "20",
+     "$id": "23",
      "Name": "requiredDictionary",
      "SerializedName": "requiredDictionary",
      "Description": "Required dictionary of enums",
      "Type": {
-      "$id": "21",
+      "$id": "24",
       "Name": "Dictionary",
       "KeyType": {
-       "$id": "22",
+       "$id": "25",
        "Name": "string",
        "Kind": "String",
        "IsNullable": false
@@ -162,22 +185,22 @@
  ],
  "Clients": [
   {
-   "$id": "23",
+   "$id": "26",
    "Name": "HelloWorldClient",
    "Description": "",
    "Operations": [
     {
-     "$id": "24",
+     "$id": "27",
      "Name": "topAction",
      "ResourceName": "HelloWorld",
      "Description": "top level method",
      "Parameters": [
       {
-       "$id": "25",
+       "$id": "28",
        "Name": "action",
        "NameInRequest": "action",
        "Type": {
-        "$id": "26",
+        "$id": "29",
         "Name": "string",
         "Kind": "DateTime",
         "IsNullable": false
@@ -193,11 +216,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "27",
+       "$id": "30",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "28",
+        "$id": "31",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -212,20 +235,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "29",
+        "$id": "32",
         "Type": {
-         "$ref": "28"
+         "$ref": "31"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "30",
+       "$id": "33",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Description": "",
        "Type": {
-        "$id": "31",
+        "$id": "34",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -240,9 +263,9 @@
        "Explode": false,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "32",
+        "$id": "35",
         "Type": {
-         "$id": "33",
+         "$id": "36",
          "Name": "String",
          "Kind": "String",
          "IsNullable": false
@@ -253,7 +276,7 @@
      ],
      "Responses": [
       {
-       "$id": "34",
+       "$id": "37",
        "StatusCodes": [
         200
        ],
@@ -274,17 +297,17 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "35",
+     "$id": "38",
      "Name": "topAction2",
      "ResourceName": "HelloWorld",
      "Description": "top level method2",
      "Parameters": [
       {
-       "$id": "36",
+       "$id": "39",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "37",
+        "$id": "40",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -299,20 +322,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "38",
+        "$id": "41",
         "Type": {
-         "$ref": "37"
+         "$ref": "40"
         },
         "Value": "application/json"
        }
       },
       {
-       "$ref": "30"
+       "$ref": "33"
       }
      ],
      "Responses": [
       {
-       "$id": "39",
+       "$id": "42",
        "StatusCodes": [
         200
        ],
@@ -333,17 +356,17 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "40",
+     "$id": "43",
      "Name": "anonymousBody",
      "ResourceName": "HelloWorld",
      "Description": "body parameter without body decorator",
      "Parameters": [
       {
-       "$id": "41",
-       "Name": "Thing",
-       "NameInRequest": "Thing",
+       "$id": "44",
+       "Name": "AnonymousBodyRequest",
+       "NameInRequest": "AnonymousBodyRequest",
        "Type": {
-        "$ref": "10"
+        "$ref": "13"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -353,14 +376,14 @@
        "IsEndpoint": false,
        "SkipUrlEncoding": false,
        "Explode": false,
-       "Kind": "Method"
+       "Kind": "Spread"
       },
       {
-       "$id": "42",
+       "$id": "45",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "43",
+        "$id": "46",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -375,19 +398,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "44",
+        "$id": "47",
         "Type": {
-         "$ref": "43"
+         "$ref": "46"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "45",
+       "$id": "48",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "46",
+        "$id": "49",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -402,20 +425,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "47",
+        "$id": "50",
         "Type": {
-         "$ref": "46"
+         "$ref": "49"
         },
         "Value": "application/json"
        }
       },
       {
-       "$ref": "30"
+       "$ref": "33"
       }
      ],
      "Responses": [
       {
-       "$id": "48",
+       "$id": "51",
        "StatusCodes": [
         200
        ],
@@ -439,17 +462,17 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "49",
+     "$id": "52",
      "Name": "sayHi",
      "ResourceName": "Demo",
      "Description": "Return hi",
      "Parameters": [
       {
-       "$id": "50",
+       "$id": "53",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "51",
+        "$id": "54",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -464,20 +487,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "52",
+        "$id": "55",
         "Type": {
-         "$ref": "51"
+         "$ref": "54"
         },
         "Value": "application/json"
        }
       },
       {
-       "$ref": "30"
+       "$ref": "33"
       }
      ],
      "Responses": [
       {
-       "$id": "53",
+       "$id": "56",
        "StatusCodes": [
         200
        ],
@@ -498,17 +521,17 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "54",
+     "$id": "57",
      "Name": "helloAgain",
      "ResourceName": "Demo2",
      "Description": "Return hi again",
      "Parameters": [
       {
-       "$id": "55",
+       "$id": "58",
        "Name": "action",
        "NameInRequest": "action",
        "Type": {
-        "$ref": "13"
+        "$ref": "16"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -521,11 +544,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "56",
+       "$id": "59",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "57",
+        "$id": "60",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -540,19 +563,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "58",
+        "$id": "61",
         "Type": {
-         "$ref": "57"
+         "$ref": "60"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "59",
+       "$id": "62",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "60",
+        "$id": "63",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -567,20 +590,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "61",
+        "$id": "64",
         "Type": {
-         "$ref": "60"
+         "$ref": "63"
         },
         "Value": "application/json"
        }
       },
       {
-       "$ref": "30"
+       "$ref": "33"
       }
      ],
      "Responses": [
       {
-       "$id": "62",
+       "$id": "65",
        "StatusCodes": [
         200
        ],
@@ -604,17 +627,17 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "63",
+     "$id": "66",
      "Name": "helloDemo2",
      "ResourceName": "Demo2",
      "Description": "Return hi in demo2",
      "Parameters": [
       {
-       "$id": "64",
+       "$id": "67",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "65",
+        "$id": "68",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -629,20 +652,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "66",
+        "$id": "69",
         "Type": {
-         "$ref": "65"
+         "$ref": "68"
         },
         "Value": "application/json"
        }
       },
       {
-       "$ref": "30"
+       "$ref": "33"
       }
      ],
      "Responses": [
       {
-       "$id": "67",
+       "$id": "70",
        "StatusCodes": [
         200
        ],
@@ -664,7 +687,7 @@
     }
    ],
    "Protocol": {
-    "$id": "68"
+    "$id": "71"
    },
    "Creatable": true
   }
