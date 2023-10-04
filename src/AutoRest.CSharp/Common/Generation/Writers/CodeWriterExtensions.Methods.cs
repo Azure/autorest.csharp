@@ -46,9 +46,9 @@ namespace AutoRest.CSharp.Generation.Writers
                     }
                     break;
                 case IfStatement ifStatement:
-                    writer.WriteMethodBodyStatement(new IfElseStatement(ifStatement.Condition, ifStatement.Body, null));
+                    writer.WriteMethodBodyStatement(new IfElseStatement(ifStatement.Condition, ifStatement.Body, null, ifStatement.Inline, ifStatement.AddBraces));
                     break;
-                case IfElseStatement(var condition, var ifBlock, var elseBlock, var inline):
+                case IfElseStatement(var condition, var ifBlock, var elseBlock, var inline, var addBraces):
                     writer.AppendRaw("if (");
                     writer.WriteValueExpression(condition);
 
@@ -63,7 +63,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     else
                     {
                         writer.LineRaw(")");
-                        using (writer.Scope())
+                        using (addBraces ? writer.Scope() : writer.AmbientScope())
                         {
                             WriteMethodBodyStatement(writer, ifBlock);
                         }
@@ -71,11 +71,15 @@ namespace AutoRest.CSharp.Generation.Writers
 
                     if (elseBlock is not null)
                     {
-                        if (inline)
+                        if (inline || !addBraces)
                         {
                             using (writer.AmbientScope())
                             {
                                 writer.AppendRaw("else ");
+                                if (!inline)
+                                {
+                                    writer.Line();
+                                }
                                 WriteMethodBodyStatement(writer, elseBlock);
                             }
                         }

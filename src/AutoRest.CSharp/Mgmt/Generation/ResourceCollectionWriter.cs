@@ -12,6 +12,7 @@ using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models.Requests;
+using AutoRest.CSharp.Output.Models.Shared;
 using Azure;
 using static AutoRest.CSharp.Mgmt.Decorator.ParameterMappingBuilder;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
@@ -92,11 +93,13 @@ namespace AutoRest.CSharp.Mgmt.Generation
         {
             var returnType = operation.MgmtReturnType!;
             var restClient = new MemberExpression(null, GetRestClientName(operation));
+            var arguments = GetArguments(writer, parameterMappings.SkipLast(1));
+            arguments.Add(new PositionalParameterReference(KnownParameters.CancellationTokenParameter.Name, KnownParameters.CancellationTokenParameter));
 
             writer.WriteMethodBodyStatement(new[]
             {
-                Var("response", new(restClient.Invoke(CreateMethodName(operation.MethodName, async), GetArguments(writer, parameterMappings.SkipLast(1)), async)), out ResponseExpression response),
-                new IfStatement(Equal(response.Value, Null))
+                Var("response", new(restClient.Invoke(CreateMethodName(operation.MethodName, async), arguments, async)), out ResponseExpression response),
+                new IfStatement(Equal(response.Value, Null), AddBraces: false)
                 {
                     Return(New.Instance(new CSharpType(typeof(NoValueResponse<>), returnType), response.GetRawResponse()))
                 },

@@ -139,8 +139,10 @@ namespace AutoRest.CSharp.Output.Models.Shared
         public static FormattableString CreateDescription(InputParameter operationParameter, CSharpType type, IEnumerable<string>? values, Constant? defaultValue = null)
         {
             FormattableString description = string.IsNullOrWhiteSpace(operationParameter.Description)
-                ? (FormattableString)$"The {operationParameter.Type.Name} to use."
+                // [TODO] "The String to use." is special cased to reduce amount of changes. Remove during cleanup
+                ? type.Equals(typeof(string)) ? $"The String to use." : (FormattableString)$"The {type.ToStringForDocs()} to use."
                 : $"{BuilderHelpers.EscapeXmlDocDescription(operationParameter.Description)}";
+
             if (defaultValue != null)
             {
                 var defaultValueString = defaultValue?.Value is string s ? $"\"{s}\"" : $"{defaultValue?.Value}";
