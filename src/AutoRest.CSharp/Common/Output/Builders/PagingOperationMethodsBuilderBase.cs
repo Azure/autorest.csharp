@@ -20,7 +20,7 @@ namespace AutoRest.CSharp.Output.Models
 {
     internal abstract class PagingOperationMethodsBuilderBase : OperationMethodsBuilderBase
     {
-        private static readonly Parameter NextPageUrlParameter = new("nextLink", $"The URL to the next page of results.", typeof(string), DefaultValue: null, Validation.AssertNotNull, null);
+        private static readonly Parameter NextPageUrlParameter = new("nextLink", "The URL to the next page of results.", typeof(string), DefaultValue: null, Validation.AssertNotNull, null);
         private readonly StatusCodeSwitchBuilder _nextPageStatusCodeSwitchBuilder;
         private readonly string _clientName;
         private readonly string _clientNamespace;

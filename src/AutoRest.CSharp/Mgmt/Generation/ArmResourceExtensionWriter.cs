@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.Decorator;
@@ -45,12 +46,12 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _armClientParameter = This.ExtensionParameter with
             {
                 Name = "client",
-                Description = $"The <see cref=\"{typeof(ArmClient)}\" /> instance the method will execute against.",
+                Description = $"The <see cref=\"{new CSharpType(typeof(ArmClient)).ToStringForDocs()}\" /> instance the method will execute against.",
                 Type = typeof(ArmClient),
             };
             _scopeParameter = new Parameter(
                 Name: "scope",
-                Description: $"The scope that the resource will apply against.",
+                Description: "The scope that the resource will apply against.",
                 Type: typeof(ResourceIdentifier),
                 DefaultValue: null,
                 Validation: Validation.None,

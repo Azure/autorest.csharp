@@ -9,4 +9,5 @@ require: $(this-folder)/../../../../readme.md
 input-file: $(this-folder)\CollapseRequestCondition-LowLevel.json
 security: AzureKey
 security-header-name: Fake-Subscription-Key
+keep-non-overloadable-protocol-signature: true
 ```

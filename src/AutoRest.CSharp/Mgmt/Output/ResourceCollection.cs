@@ -309,9 +309,9 @@ namespace AutoRest.CSharp.Mgmt.Output
         public Parameter ParentParameter => ResourceParameter with
         {
             Name = "parent",
-            Description = $"The resource representing the parent resource."
+            Description = "The resource representing the parent resource."
         };
 
-        protected override FormattableString IdParamDescription => $"The identifier of the parent resource that is the target of operations.";
+        protected override string IdParamDescription => "The identifier of the parent resource that is the target of operations.";
     }
 }

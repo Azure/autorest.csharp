@@ -55,7 +55,7 @@ namespace AutoRest.CSharp.Output.Models
             {
                 var credentialParam = new Parameter(
                     "credential",
-                    $"A credential used to authenticate to an Azure Service.",
+                    "A credential used to authenticate to an Azure Service.",
                     credentialType,
                     null,
                     Validation.AssertNotNull,

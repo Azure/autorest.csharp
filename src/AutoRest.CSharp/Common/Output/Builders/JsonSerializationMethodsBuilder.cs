@@ -326,7 +326,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
         public static Method BuildFromResponse(SerializableObjectType type, MethodSignatureModifiers modifiers)
         {
-            var fromResponse = new Parameter("response", $"The response to deserialize the model from.", new CSharpType(typeof(Response)), null, Validation.None, null);
+            var fromResponse = new Parameter("response", "The response to deserialize the model from.", new CSharpType(typeof(Response)), null, Validation.None, null);
             return new Method
             (
                 new MethodSignature("FromResponse", null, $"Deserializes the model from a raw response.", modifiers, type.Type, null, new[]{fromResponse}),

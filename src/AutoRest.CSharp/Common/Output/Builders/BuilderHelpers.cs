@@ -265,7 +265,7 @@ namespace AutoRest.CSharp.Output.Builders
             return newType.WithNullable(defaultType.IsNullable);
         }
 
-        public static FormattableString CreateDerivedTypesDescription(CSharpType type)
+        public static string CreateDerivedTypesDescription(CSharpType type)
         {
             if (TypeFactory.IsCollectionType(type))
             {
@@ -277,7 +277,7 @@ namespace AutoRest.CSharp.Output.Builders
                 return objectType.CreateExtraDescriptionWithDiscriminator();
             }
 
-            return $"";
+            return string.Empty;
         }
 
         public static string CreateDescription(this Schema schema)

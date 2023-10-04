@@ -263,8 +263,7 @@ namespace AutoRest.CSharp.LowLevel.Output.Samples
 
                 /*
                  * This will generate code like:
-                 * Response<T> operation = <invocation>; // when response has payload
-                 * Response response = <invocation>; // when response has no payload
+                 * Response<T> operation = <invocation>;
                  */
                 return new[]
                 {
@@ -292,51 +291,17 @@ namespace AutoRest.CSharp.LowLevel.Output.Samples
             };
         }
 
-        private static MethodBodyStatement BuildResponseStatements(DpgOperationSample sample, TypedValueExpression resultVar)
+        private static MethodBodyStatement ParseResponse(CSharpType responseType, DpgOperationSample sample, StreamExpression streamVar)
         {
-            if (sample.ResponseType is {} responseType && responseType.Equals(typeof(Stream)) && resultVar is ResponseExpression response)
+            if (responseType.Equals(typeof(Stream)))
             {
-                return BuildResponseForStream(response);
+                return new IfStatement(NotEqual(streamVar, Null))
+                {
+                    UsingDeclare("outFileStream", new StreamExpression(InvokeFileOpenWrite("<filepath>")), out var streamVariable),
+                    streamVar.CopyTo(streamVariable)
+                };
             }
 
-            if (sample.IsConvenienceSample)
-            {
-                return new MethodBodyStatement();
-            }
-
-            if (sample.ResponseType is null)
-            {
-                var status = resultVar.Type.EqualsIgnoreNullable(typeof(Response<>))
-                    ? new ResponseExpression(resultVar).GetRawResponse().Status
-                    : new ResponseExpression(resultVar).Status;
-
-                return InvokeConsoleWriteLine(status);
-            }
-
-            if (resultVar.Type.EqualsIgnoreNullable(typeof(BinaryData)))
-            {
-                return ParseResponse(sample.ResponseType, sample, new BinaryDataExpression(resultVar).ToStream());
-            }
-
-            if (resultVar.Type.EqualsIgnoreNullable(typeof(Response)))
-            {
-                return ParseResponse(sample.ResponseType, sample, new ResponseExpression(resultVar).ContentStream);
-            }
-
-            return new MethodBodyStatement();
-        }
-
-        private static MethodBodyStatement BuildResponseForStream(ResponseExpression response)
-        {
-            return new IfStatement(NotEqual(response.ContentStream, Null))
-            {
-                UsingDeclare("outFileStream", new StreamExpression(InvokeFileOpenWrite("<filepath>")), out var streamVariable),
-                response.ContentStream.CopyTo(streamVariable)
-            };
-        }
-
-        private static MethodBodyStatement ParseResponse(CSharpType responseType, DpgOperationSample sample, TypedValueExpression responseDataVar)
-        {
             if (sample.IsConvenienceSample)
             {
                 return new MethodBodyStatement();
@@ -344,7 +309,7 @@ namespace AutoRest.CSharp.LowLevel.Output.Samples
 
             var responseParsingStatements = new List<MethodBodyStatement>
             {
-                Declare("result", JsonDocumentExpression.Parse(responseDataVar).RootElement, out var resultVar)
+                Declare("result", JsonDocumentExpression.Parse(streamVar).RootElement, out var resultVar)
             };
             BuildResponseParseStatements(sample.IsAllParametersUsed, responseType, resultVar, responseParsingStatements, new HashSet<CSharpType>());
             return responseParsingStatements;

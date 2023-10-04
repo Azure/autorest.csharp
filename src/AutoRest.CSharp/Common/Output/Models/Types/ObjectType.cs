@@ -7,6 +7,7 @@ using System.Linq;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input.Source;
+using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Output.Models.Types
 {
@@ -40,7 +41,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public ObjectTypeConstructor InitializationConstructor => _initializationConstructor ??= BuildInitializationConstructor();
 
-        public FormattableString? Description => _description ??= $"{CreateDescription()}{CreateExtraDescriptionWithDiscriminator()}";
+        public FormattableString Description => _description ??= $"{CreateDescription()}{CreateExtraDescriptionWithDiscriminator()}";
         public abstract ObjectTypeProperty? AdditionalPropertiesProperty { get; }
         protected abstract ObjectTypeConstructor BuildInitializationConstructor();
         protected abstract ObjectTypeConstructor BuildSerializationConstructor();
@@ -73,19 +74,15 @@ namespace AutoRest.CSharp.Output.Models.Types
             " is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.",
             "The available derived classes include " };
 
-        public FormattableString CreateExtraDescriptionWithDiscriminator()
+        public string CreateExtraDescriptionWithDiscriminator()
         {
-            if (Discriminator?.HasDescendants == true)
+            if (Discriminator?.HasDescendants != true)
             {
-                List<FormattableString> childrenList = new List<FormattableString>();
-                foreach (var implementation in Discriminator.Implementations)
-                {
-                    childrenList.Add($"<see cref=\"{implementation.Type.Implementation.Type.Name}\"/>");
-                }
-
-                return $"{System.Environment.NewLine}{DiscriminatorDescFixedPart[0]}<see cref=\"{Type.Name}\"/>{DiscriminatorDescFixedPart[1]}{System.Environment.NewLine}{DiscriminatorDescFixedPart[2]}{FormattableStringHelpers.Join(childrenList, ", ", " and ")}.";
+                return string.Empty;
             }
-            return $"";
+
+            var childrenList = string.Join(", ", Discriminator.Implementations.Select(implementation => $"<see cref=\"{implementation.Type.Implementation.Type.Name}\"/>")).ReplaceLast(", ", " and ");
+            return $"{System.Environment.NewLine}{DiscriminatorDescFixedPart[0]}<see cref=\"{Type.Name}\"/>{DiscriminatorDescFixedPart[1]}{System.Environment.NewLine}{DiscriminatorDescFixedPart[2]}{childrenList}.";
         }
     }
 }

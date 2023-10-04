@@ -9,7 +9,6 @@ using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
@@ -17,7 +16,7 @@ using Azure.Core;
 
 namespace AutoRest.CSharp.Output.Models.Shared
 {
-    internal record Parameter(string Name, FormattableString? Description, CSharpType Type, Constant? DefaultValue, Validation Validation, ValueExpression? Initializer, bool IsApiVersionParameter = false, bool IsResourceIdentifier = false, bool SkipUrlEncoding = false, bool IsEndpoint = false, RequestLocation RequestLocation = RequestLocation.None, bool IsPropertyBag = false)
+    internal record Parameter(string Name, string? Description, CSharpType Type, Constant? DefaultValue, Validation Validation, ValueExpression? Initializer, bool IsApiVersionParameter = false, bool IsResourceIdentifier = false, bool SkipUrlEncoding = false, bool IsEndpoint = false, RequestLocation RequestLocation = RequestLocation.None, bool IsPropertyBag = false)
     {
         public CSharpAttribute[] Attributes { get; init; } = Array.Empty<CSharpAttribute>();
         public bool IsOptionalInSignature => DefaultValue != null;
@@ -104,7 +103,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
         {
             if (toType.EqualsIgnoreNullable(typeof(RequestContent)))
             {
-                if (fromFrameworkType == typeof(BinaryData) || fromFrameworkType == typeof(string))
+                if (fromFrameworkType == typeof(BinaryData))
                 {
                     return fromExpression;
                 }
@@ -119,7 +118,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
                     return RequestContentExpression.FromDictionary(fromExpression);
                 }
 
-                return RequestContentExpression.Create(fromExpression);
+                return RequestContentExpression.FromObject(fromExpression);
             }
 
             return fromExpression;
@@ -136,17 +135,17 @@ namespace AutoRest.CSharp.Output.Models.Shared
             };
         }
 
-        public static FormattableString CreateDescription(InputParameter operationParameter, CSharpType type, IEnumerable<string>? values, Constant? defaultValue = null)
+        public static string CreateDescription(InputParameter operationParameter, CSharpType type, IEnumerable<string>? values, Constant? defaultValue = null)
         {
-            FormattableString description = string.IsNullOrWhiteSpace(operationParameter.Description)
+            var description = string.IsNullOrWhiteSpace(operationParameter.Description)
                 // [TODO] "The String to use." is special cased to reduce amount of changes. Remove during cleanup
-                ? type.Equals(typeof(string)) ? $"The String to use." : (FormattableString)$"The {type.ToStringForDocs()} to use."
-                : $"{BuilderHelpers.EscapeXmlDocDescription(operationParameter.Description)}";
+                ? type.Equals(typeof(string)) ? $"The String to use." : $"The {type.ToStringForDocs()} to use."
+                : BuilderHelpers.EscapeXmlDocDescription(operationParameter.Description);
 
             if (defaultValue != null)
             {
-                var defaultValueString = defaultValue?.Value is string s ? $"\"{s}\"" : $"{defaultValue?.Value}";
-                description = $"{description}{(description.ToString().EndsWith(".") ? "" : ".")} The default value is {defaultValueString}";
+                var defaultValueString = defaultValue.Value.Value is string s ? $"\"{s}\"" : $"{defaultValue.Value}";
+                description = $"{description}{(description.EndsWith(".") ? "" : ".")} The default value is {defaultValueString}";
             }
 
             if (!type.IsFrameworkType || values == null)
@@ -155,7 +154,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
             }
 
             var allowedValues = string.Join(" | ", values.Select(v => $"\"{v}\""));
-            return $"{description}{(description.ToString().EndsWith(".") ? "" : ".")} Allowed values: {BuilderHelpers.EscapeXmlDocDescription(allowedValues)}";
+            return $"{description}{(description.EndsWith(".") ? "" : ".")} Allowed values: {BuilderHelpers.EscapeXmlDocDescription(allowedValues)}";
         }
 
         public static Validation GetValidation(CSharpType type, RequestLocation requestLocation, bool skipUrlEncoding)

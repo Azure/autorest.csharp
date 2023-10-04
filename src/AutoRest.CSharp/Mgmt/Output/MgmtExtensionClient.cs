@@ -96,7 +96,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         private Parameter _generalExtensionParameter = new Parameter(
             "resource",
-            $"The resource parameters to use in these operations.",
+            "The resource parameters to use in these operations.",
             typeof(ArmResource),
             null,
             Validation.None,
@@ -104,7 +104,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         private Parameter _scopeParameter = new Parameter(
             "scope",
-            $"The scope to use in these operations",
+            "The scope to use in these operations",
             typeof(ResourceIdentifier),
             null,
             Validation.None,

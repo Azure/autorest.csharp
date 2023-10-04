@@ -48,7 +48,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         {
             return new Parameter(
                 VariableName,
-                $"The <see cref=\"{ArmCoreType}\" /> instance the method will execute against.",
+                $"The <see cref=\"{new CSharpType(ArmCoreType).ToStringForDocs()}\" /> instance the method will execute against.",
                 ArmCoreType,
                 null,
                 Validation.None,

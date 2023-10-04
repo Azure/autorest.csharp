@@ -338,7 +338,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 _protocolParameters.Add(protocolMethodParameter);
                 _convenienceParameters.Add(convenienceMethodParameter);
 
-                if (protocolMethodParameter == convenienceMethodParameter)
+                if (protocolMethodParameter.Equals(convenienceMethodParameter))
                 {
                     _arguments[protocolMethodParameter] = convenienceMethodParameter;
                 }
@@ -415,7 +415,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 ? Parameter.GetValidation(parameterType, inputParameter.Location, false)
                 : Validation.None;
 
-            return new Parameter(property.Name, $"{property.Description}", parameterType, defaultValue, validation, initializer);
+            return new Parameter(property.Name, property.Description, parameterType, defaultValue, validation, initializer);
         }
 
         private void AddCreateMessageParameter(Parameter parameter) => _createMessageParameters.Add(parameter with {DefaultValue = null});
