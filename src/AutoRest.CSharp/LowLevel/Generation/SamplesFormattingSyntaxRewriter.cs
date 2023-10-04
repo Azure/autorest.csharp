@@ -95,7 +95,8 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             if (IsSingleLine(node))
             {
-                return node;
+                node = node.WithOpenBraceToken(node.OpenBraceToken.WithLeadingTrivia(SyntaxFactory.Space).WithTrailingTrivia(SyntaxFactory.Space));
+                return node.WithCloseBraceToken(node.CloseBraceToken.WithLeadingTrivia(SyntaxFactory.Space));
             }
 
             var parentLeadingTrivia = GetPreviousLevelTrivia(node);

@@ -281,7 +281,7 @@ namespace AutoRest.CSharp.LowLevel.Output.Samples
              */
             if (sample.IsLongRunning)
             {
-                return Declare("operation", new ResponseExpression(invocation), out _);
+                return Declare("operation", new OperationExpression(invocation), out _);
             }
 
             return new[]

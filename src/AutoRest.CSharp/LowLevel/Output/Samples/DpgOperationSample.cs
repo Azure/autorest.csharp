@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Input.Examples;
+using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
@@ -99,8 +100,7 @@ namespace AutoRest.CSharp.Output.Samples.Models
 
             foreach (var parameter in parameters)
             {
-                var serializationFormat = parameter.SerializationFormat;
-                if (ProcessKnownParameters(result, parameter, serializationFormat))
+                if (ProcessKnownParameters(result, parameter))
                 {
                     continue;
                 }
@@ -120,6 +120,7 @@ namespace AutoRest.CSharp.Output.Samples.Models
                 else
                 {
                     // add it into the mapping
+                    var serializationFormat = SerializationBuilder.GetSerializationFormat(exampleValue.Type);
                     result.Add(parameter.Name, new InputExampleParameterValue(parameter, ExampleValueSnippets.GetExpression(parameter.Type, exampleValue, serializationFormat)));
                 }
             }
@@ -168,7 +169,7 @@ namespace AutoRest.CSharp.Output.Samples.Models
                 yield return parameter;
         }
 
-        private bool ProcessKnownParameters(Dictionary<string, InputExampleParameterValue> result, Parameter parameter, SerializationFormat serializationFormat)
+        private bool ProcessKnownParameters(Dictionary<string, InputExampleParameterValue> result, Parameter parameter)
         {
             if (parameter == KnownParameters.WaitForCompletion)
             {
@@ -182,7 +183,7 @@ namespace AutoRest.CSharp.Output.Samples.Models
                 return true;
             }
 
-            if (parameter == KnownParameters.RequestContextRequired)
+            if (IsSameParameter(parameter, KnownParameters.RequestContext) && !parameter.IsOptionalInSignature)
             {
                 // we need the RequestContext to disambiguiate from the convenience method - but passing in a null value is allowed.
                 result.Add(parameter.Name, new InputExampleParameterValue(parameter, Null));
@@ -192,14 +193,14 @@ namespace AutoRest.CSharp.Output.Samples.Models
             // endpoint we kind of will change its description therefore here we only find it for name and type
             if (IsSameParameter(parameter, KnownParameters.Endpoint))
             {
-                result.Add(parameter.Name, new InputExampleParameterValue(parameter, ExampleValueSnippets.GetExpression(parameter.Type, GetEndpointValue(parameter.Name), serializationFormat)));
+                result.Add(parameter.Name, new InputExampleParameterValue(parameter, ExampleValueSnippets.GetExpression(parameter.Type, GetEndpointValue(parameter.Name), SerializationFormat.Default)));
                 return true;
             }
 
             // request content is also special
             if (IsSameParameter(parameter, KnownParameters.RequestContent) || IsSameParameter(parameter, KnownParameters.RequestContentNullable))
             {
-                result.Add(parameter.Name, new InputExampleParameterValue(parameter, ExampleValueSnippets.GetExpression(parameter.Type,  GetBodyParameterValue(), serializationFormat)));
+                result.Add(parameter.Name, new InputExampleParameterValue(parameter, ExampleValueSnippets.GetExpression(parameter.Type,  GetBodyParameterValue(), SerializationFormat.Default)));
                 return true;
             }
 
