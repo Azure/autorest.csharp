@@ -245,6 +245,8 @@ namespace AutoRest.CSharp.LowLevel.Output.Samples
             // if it is not pageable, we just call the operation, declare a local variable and assign the result to it
             if (sample is {ResponseType: {} responseType})
             {
+                var returnType = sample.OperationMethodSignature.ReturnType!;
+
                 if (sample.IsLongRunning)
                 {
                     /*
@@ -254,7 +256,7 @@ namespace AutoRest.CSharp.LowLevel.Output.Samples
                     */
                     return new[]
                     {
-                        Declare(new CSharpType(typeof(Operation<>), responseType), "operation", new OperationExpression(invocation), out var operation),
+                        Declare(returnType, "operation", new OperationExpression(invocation), out var operation),
                         Declare("responseData", new BinaryDataExpression(operation.Value), out var responseData),
                         EmptyLine,
                         ParseResponse(responseType, sample, responseData.ToStream())
@@ -267,7 +269,7 @@ namespace AutoRest.CSharp.LowLevel.Output.Samples
                  */
                 return new[]
                 {
-                    Declare(new CSharpType(typeof(Response<>), responseType), "response", new ResponseExpression(invocation), out var responseOfT),
+                    Declare(returnType, "response", new ResponseExpression(invocation), out var responseOfT),
                     EmptyLine,
                     ParseResponse(responseType, sample, responseOfT.ContentStream)
                 };

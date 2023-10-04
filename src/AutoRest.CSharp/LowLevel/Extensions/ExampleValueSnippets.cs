@@ -9,6 +9,7 @@ using System.Text;
 using System.Xml;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Input.Examples;
+using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
@@ -379,7 +380,7 @@ namespace AutoRest.CSharp.LowLevel.Extensions
                 if (valueDict.TryGetValue(property.InputModelProperty!.SerializedName, out var exampleValue))
                 {
                     properties.Remove(property);
-                    argument = GetExpression(propertyType, exampleValue, SerializationFormat.Default, includeCollectionInitialization: true);
+                    argument = GetExpression(propertyType, exampleValue, SerializationBuilder.GetSerializationFormat(exampleValue.Type), includeCollectionInitialization: true);
                 }
                 else
                 {
@@ -396,7 +397,7 @@ namespace AutoRest.CSharp.LowLevel.Extensions
                 foreach (var (property, exampleValue) in propertiesToWrite)
                 {
                     // we need to pass in the current type of this property to make sure its initialization is correct
-                    var propertyExpression = GetExpression(property.Declaration.Type, exampleValue, SerializationFormat.Default, includeCollectionInitialization: false);
+                    var propertyExpression = GetExpression(property.Declaration.Type, exampleValue, SerializationBuilder.GetSerializationFormat(exampleValue.Type), includeCollectionInitialization: false);
                     initializerDict.Add(property.Declaration.Name, propertyExpression);
                 }
                 objectPropertyInitializer = new(initializerDict, false);
