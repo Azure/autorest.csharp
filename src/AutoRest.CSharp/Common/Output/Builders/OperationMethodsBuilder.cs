@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
@@ -67,7 +68,14 @@ namespace AutoRest.CSharp.Common.Output.Builders
             }
             else if (ResponseType is { IsFrameworkType: true })
             {
-                yield return Return(ResponseExpression.FromValue(response.Content.ToObjectFromJson(ResponseType.FrameworkType), response));
+                if (ResponseType.EqualsIgnoreNullable(typeof(BinaryData)))
+                {
+                    yield return Return(ResponseExpression.FromValue(response.Content, response));
+                }
+                else
+                {
+                    yield return Return(ResponseExpression.FromValue(response.Content.ToObjectFromJson(ResponseType.FrameworkType), response));
+                }
             }
         }
     }

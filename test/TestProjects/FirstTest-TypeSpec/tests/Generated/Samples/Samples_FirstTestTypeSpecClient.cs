@@ -213,7 +213,7 @@ namespace FirstTestTypeSpec.Samples
                 requiredLiteralString = "accept",
                 requiredLiteralInt = 123,
                 requiredLiteralFloat = 1.23F,
-                requiredLiteralBool = false,
+                requiredLiteralBool = true,
                 requiredBadDescription = "<requiredBadDescription>",
                 requiredNullableList = new object[]
             {
@@ -247,7 +247,7 @@ namespace FirstTestTypeSpec.Samples
                 requiredLiteralString = "accept",
                 requiredLiteralInt = 123,
                 requiredLiteralFloat = 1.23F,
-                requiredLiteralBool = false,
+                requiredLiteralBool = true,
                 requiredBadDescription = "<requiredBadDescription>",
                 requiredNullableList = new object[]
             {
@@ -281,7 +281,7 @@ namespace FirstTestTypeSpec.Samples
                 requiredLiteralString = "accept",
                 requiredLiteralInt = 123,
                 requiredLiteralFloat = 1.23F,
-                requiredLiteralBool = false,
+                requiredLiteralBool = true,
                 optionalLiteralString = "reject",
                 optionalLiteralInt = 456,
                 optionalLiteralFloat = 4.56F,
@@ -328,7 +328,7 @@ namespace FirstTestTypeSpec.Samples
                 requiredLiteralString = "accept",
                 requiredLiteralInt = 123,
                 requiredLiteralFloat = 1.23F,
-                requiredLiteralBool = false,
+                requiredLiteralBool = true,
                 optionalLiteralString = "reject",
                 optionalLiteralInt = 456,
                 optionalLiteralFloat = 4.56F,
@@ -375,7 +375,7 @@ namespace FirstTestTypeSpec.Samples
                 requiredLiteralString = "accept",
                 requiredLiteralInt = 123,
                 requiredLiteralFloat = 1.23F,
-                requiredLiteralBool = false,
+                requiredLiteralBool = true,
                 requiredBadDescription = "<requiredBadDescription>",
                 requiredNullableList = new object[]
             {
@@ -409,7 +409,7 @@ namespace FirstTestTypeSpec.Samples
                 requiredLiteralString = "accept",
                 requiredLiteralInt = 123,
                 requiredLiteralFloat = 1.23F,
-                requiredLiteralBool = false,
+                requiredLiteralBool = true,
                 requiredBadDescription = "<requiredBadDescription>",
                 requiredNullableList = new object[]
             {
@@ -443,7 +443,7 @@ namespace FirstTestTypeSpec.Samples
                 requiredLiteralString = "accept",
                 requiredLiteralInt = 123,
                 requiredLiteralFloat = 1.23F,
-                requiredLiteralBool = false,
+                requiredLiteralBool = true,
                 optionalLiteralString = "reject",
                 optionalLiteralInt = 456,
                 optionalLiteralFloat = 4.56F,
@@ -490,7 +490,7 @@ namespace FirstTestTypeSpec.Samples
                 requiredLiteralString = "accept",
                 requiredLiteralInt = 123,
                 requiredLiteralFloat = 1.23F,
-                requiredLiteralBool = false,
+                requiredLiteralBool = true,
                 optionalLiteralString = "reject",
                 optionalLiteralInt = 456,
                 optionalLiteralFloat = 4.56F,
