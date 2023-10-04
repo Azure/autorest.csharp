@@ -20,12 +20,14 @@ namespace AutoRest.CSharp.Common.Output.Builders
         private readonly LowLevelClient? _client;
         private readonly IReadOnlyList<InputClientExample>? _clientExamples;
         private readonly INamedTypeSymbol? _existingType;
+        private readonly IReadOnlyList<MethodSignatureBase> _clientInvocationChain;
 
         public DpgOperationSampleBuilder()
         {
             _client = null;
             _clientExamples = null;
             _existingType = null;
+            _clientInvocationChain = Array.Empty<MethodSignatureBase>();
         }
 
         public DpgOperationSampleBuilder(LowLevelClient client, IReadOnlyList<InputClientExample>? clientExamples, INamedTypeSymbol? existingType)
@@ -33,6 +35,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             _client = client;
             _clientExamples = clientExamples;
             _existingType = existingType;
+            _clientInvocationChain = GetClientInvocationChain(_client);
         }
 
         public IReadOnlyList<DpgOperationSample> BuildSamples(InputOperation operation, MethodSignature protocolMethodSignature, MethodSignature? convenienceMethodSignature, InputType? requestBodyType, CSharpType? responseType, CSharpType? pageItemType)
@@ -52,7 +55,6 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
             // short version samples
             var shouldGenerateShortVersion = ShouldGenerateShortVersion(protocolMethodSignature, convenienceMethodSignature);
-            var clientInvocationChain = GetClientInvocationChain(_client);
             var samples = new List<DpgOperationSample>();
             foreach (var (exampleKey, clientParameters) in _clientExamples)
             {
@@ -64,12 +66,12 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 if (operation.Examples.FirstOrDefault(e => e.Key == exampleKey) is {} operationExample)
                 {
                     // add protocol method sample
-                    samples.Add(new(clientInvocationChain, protocolMethodSignature, requestBodyType, responseType, pageItemType, clientParameters, operationExample, false, exampleKey));
+                    samples.Add(new(_clientInvocationChain, protocolMethodSignature, requestBodyType, responseType, pageItemType, clientParameters, operationExample, false, exampleKey));
 
                     // add convenience method sample
                     if (convenienceMethodSignature != null && convenienceMethodSignature.Modifiers.HasFlag(MethodSignatureModifiers.Public))
                     {
-                        samples.Add(new(clientInvocationChain, convenienceMethodSignature, requestBodyType, responseType, pageItemType, clientParameters, operationExample, true, exampleKey));
+                        samples.Add(new(_clientInvocationChain, convenienceMethodSignature, requestBodyType, responseType, pageItemType, clientParameters, operationExample, true, exampleKey));
                     }
                 }
             }

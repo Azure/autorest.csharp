@@ -427,7 +427,7 @@ namespace AutoRest.CSharp.Generation.Writers
                         .WriteValueExpression(parameter.Initializer);
                 }
 
-                writer.AppendRaw(";");
+                writer.LineRaw(";");
             }
             else if (parameter.Validation != Validation.None)
             {

@@ -61,6 +61,7 @@ namespace AutoRest.CSharp.Output.Models
             Parameters = clientParameters;
             IsResourceClient = Parameters.Any(p => p.IsResourceIdentifier);
             Fields = ClientFields.CreateForClient(Parameters, authorization);
+            FactoryMethod = parentClient != null ? BuildFactoryMethod(parentClient.Fields, libraryName) : null;
 
             (PrimaryConstructors, SecondaryConstructors) = BuildPublicConstructors(Parameters);
 
@@ -69,8 +70,6 @@ namespace AutoRest.CSharp.Output.Models
                 .ToList();
 
             ResponseClassifierTypes = OperationMethods.Select(rm => rm.ResponseClassifier).Distinct().ToArray();
-
-            FactoryMethod = parentClient != null ? BuildFactoryMethod(parentClient.Fields, libraryName) : null;
 
             SubClients = Array.Empty<LowLevelClient>();
         }
@@ -198,7 +197,7 @@ namespace AutoRest.CSharp.Output.Models
             return new ConstructorSignature(Type, $"Initializes a new instance of {Declaration.Name}", null, Internal, constructorParameters);
         }
 
-        public LowLevelSubClientFactoryMethod BuildFactoryMethod(ClientFields parentFields, string libraryName)
+        private LowLevelSubClientFactoryMethod BuildFactoryMethod(ClientFields parentFields, string libraryName)
         {
             var constructorCallParameters = GetSubClientFactoryMethodParameters().ToArray();
             var methodParameters = constructorCallParameters.Where(p => parentFields.GetFieldByParameter(p) == null).ToArray();
