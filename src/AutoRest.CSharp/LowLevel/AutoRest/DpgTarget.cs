@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System.Collections.Immutable;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoRest.CSharp.Common.Generation.Writers;
 using AutoRest.CSharp.Common.Input;
@@ -45,12 +46,15 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 var dpgClientWriter = new DpgClientWriter(client, sampleProvider, codeWriter, xmlDocWriter);
                 dpgClientWriter.WriteClient();
                 project.AddGeneratedFile($"{client.Type.Name}.cs", codeWriter.ToString());
-                project.AddGeneratedDocFile(xmlDocWriter.Filename, xmlDocWriter.ToString());
 
-                var clientExampleFilename = $"../../tests/Generated/Samples/{sampleProvider.Type.Name}.cs";
-                var clientSampleWriter = new DpgClientSampleWriter(sampleProvider);
-                clientSampleWriter.Write();
-                project.AddGeneratedTestFile(clientExampleFilename, clientSampleWriter.ToString());
+                if (sampleProvider.Methods.Any())
+                {
+                    var clientExampleFilename = $"../../tests/Generated/Samples/{sampleProvider.Type.Name}.cs";
+                    var clientSampleWriter = new DpgClientSampleWriter(sampleProvider);
+                    clientSampleWriter.Write();
+                    project.AddGeneratedTestFile(clientExampleFilename, clientSampleWriter.ToString());
+                    project.AddGeneratedDocFile(xmlDocWriter.Filename, xmlDocWriter.ToString());
+                }
             }
 
             var optionsWriter = new CodeWriter();

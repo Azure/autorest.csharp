@@ -269,13 +269,7 @@ namespace AutoRest.CSharp.Common.Input
                 Accessibility: schema.Extensions?.Accessibility ?? (usage.HasFlag(SchemaTypeUsage.Model) ? "public" : "internal"),
                 Deprecated: schema.Deprecated?.Reason,
                 Description: schema.CreateDescription(),
-                Usage: (usage & (SchemaTypeUsage.Input | SchemaTypeUsage.Output)) switch
-                {
-                    SchemaTypeUsage.Input => InputModelTypeUsage.Input,
-                    SchemaTypeUsage.Output => InputModelTypeUsage.Output,
-                    SchemaTypeUsage.RoundTrip => InputModelTypeUsage.RoundTrip,
-                    _ => InputModelTypeUsage.None
-                },
+                Usage: GetUsage(usage),
                 Properties: properties,
                 BaseModel: baseModelSchema is not null ? GetOrCreateModel(baseModelSchema) : null,
                 DerivedModels: derived,
@@ -294,6 +288,15 @@ namespace AutoRest.CSharp.Common.Input
 
             return model;
         }
+
+        private static InputModelTypeUsage GetUsage(SchemaTypeUsage usage)
+            => (usage & (SchemaTypeUsage.Input | SchemaTypeUsage.Output)) switch
+            {
+                SchemaTypeUsage.Input => InputModelTypeUsage.Input,
+                SchemaTypeUsage.Output => InputModelTypeUsage.Output,
+                SchemaTypeUsage.RoundTrip => InputModelTypeUsage.RoundTrip,
+                _ => InputModelTypeUsage.None
+            };
 
         private static ObjectSchema? GetBaseModelSchema(ObjectSchema schema)
             => schema.Parents?.Immediate is {} parents
@@ -540,6 +543,7 @@ namespace AutoRest.CSharp.Common.Input
                 Accessibility: schema.Extensions?.Accessibility ?? (usage.HasFlag(SchemaTypeUsage.Model) ? "public" : "internal"),
                 Deprecated: schema.Deprecated?.Reason,
                 Description: schema.CreateDescription(),
+                Usage: GetUsage(usage),
                 EnumValueType: (InputPrimitiveType)CreateType(choiceType, schema.Extensions?.Format, null),
                 AllowedValues: choices.Select(CreateEnumValue).ToList(),
                 IsExtensible: isExtensible,

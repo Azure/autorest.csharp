@@ -60,6 +60,11 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public override CSharpType ResolveEnum(InputEnumType enumType)
         {
+            if (enumType.Usage == InputModelTypeUsage.None)
+            {
+                return TypeFactory.CreateType(enumType.EnumValueType);
+            }
+
             if (_enums.TryGetValue(enumType with {IsNullable = false}, out var typeProvider))
             {
                 return typeProvider.Type.WithNullable(enumType.IsNullable);
