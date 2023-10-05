@@ -10,7 +10,6 @@ using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Output.Builders;
-using AutoRest.CSharp.Output.Models.Serialization;
 using Azure.ResourceManager.Models;
 
 namespace AutoRest.CSharp.Output.Models.Types
@@ -23,7 +22,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                   isReadOnly: field.Modifiers.HasFlag(FieldModifiers.ReadOnly),
                   schemaProperty: null,
                   isRequired: field.IsRequired,
-                  valueType: null,
+                  valueType: inputModelProperty is null ? null : field.Type.WithNullable(inputModelProperty.Type.IsNullable),
                   inputModelProperty: inputModelProperty,
                   optionalViaNullability: field.OptionalViaNullability,
                   getterModifiers: field.GetterModifiers,

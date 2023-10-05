@@ -342,7 +342,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
             var declaredName = property.Declaration.Name;
             var serializedName = inputModelProperty.SerializedName;
-            var valueSerialization = BuildJsonSerialization(inputModelProperty.Type, property.ValueType, false);
+            var valueSerialization = BuildJsonSerialization(inputModelProperty.Type, property.Declaration.Type, false);
 
             return new JsonPropertySerialization(
                 declaredName.ToVariableName(),

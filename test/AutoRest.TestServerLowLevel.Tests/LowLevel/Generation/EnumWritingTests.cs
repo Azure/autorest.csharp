@@ -100,7 +100,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
             internal EnumWrapper(EnumType enumType) => this.EnumType = enumType;
         }
 
-        private static readonly InputEnumType ExtensibleEnumType = new InputEnumType("TranslationLanguageValues", "Cadl.TestServer.EnumPropertiesBasic", "public", null, "The supported languages to translate input text into.", InputPrimitiveType.String,
+        private static readonly InputEnumType ExtensibleEnumType = new("TranslationLanguageValues", "Cadl.TestServer.EnumPropertiesBasic", "public", null, "The supported languages to translate input text into.", InputModelTypeUsage.RoundTrip, InputPrimitiveType.String,
                     new List<InputEnumTypeValue>() {
                         new("English", "English", "Translate to English"),
                         new("Spanish", "Spanish", "Translate to Spanish"),
@@ -108,7 +108,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
                         new("Undocumented", "Undocumented", null)
                     }, true, false);
 
-        private static readonly InputEnumType FixedEnumType = new InputEnumType("DayOfTheWeek", "Cadl.TestServer.EnumPropertiesBasic", "public", null, "Represents the days of the week using a standard, non-string enum.", InputPrimitiveType.String,
+        private static readonly InputEnumType FixedEnumType = new("DayOfTheWeek", "Cadl.TestServer.EnumPropertiesBasic", "public", null, "Represents the days of the week using a standard, non-string enum.", InputModelTypeUsage.RoundTrip, InputPrimitiveType.String,
                     new List<InputEnumTypeValue>() {
                         new("Monday", "Monday", null),
                         new("Tuesday", "Tuesday", null),
