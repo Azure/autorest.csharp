@@ -54,7 +54,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             }
 
             // short version samples
-            var hasResponseBody = operation.Responses.Any(r => r is { IsErrorResponse: false, BodyType: not null and not InputPrimitiveType });
+            var hasResponseBody = operation.Responses.Any(r => r is { IsErrorResponse: false, BodyType: {} });
             var shouldGenerateShortVersion = ShouldGenerateShortVersion(protocolMethodSignature, convenienceMethodSignature);
             var samples = new List<DpgOperationSample>();
             foreach (var (exampleKey, clientParameters) in _clientExamples)
