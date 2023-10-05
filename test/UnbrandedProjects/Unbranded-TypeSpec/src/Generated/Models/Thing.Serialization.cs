@@ -13,7 +13,7 @@ using System.Text.Json;
 
 namespace UnbrandedTypeSpec.Models
 {
-    internal partial class Thing : IUtf8JsonWriteable
+    public partial class Thing : IUtf8JsonWriteable
     {
         void IUtf8JsonWriteable.Write(Utf8JsonWriter writer)
         {

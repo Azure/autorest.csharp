@@ -8,7 +8,7 @@
 namespace UnbrandedTypeSpec.Models
 {
     /// <summary> float fixed enum. </summary>
-    internal enum FloatFixedEnum
+    public enum FloatFixedEnum
     {
         /// <summary> 1.1. </summary>
         One,

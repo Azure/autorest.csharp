@@ -587,6 +587,28 @@ default
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public void Example_LiteralOfInteger_ShortVersion_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
+
+            ModelWithIntegerLiteralTypeProperty input = new ModelWithIntegerLiteralTypeProperty("<name>");
+            Response response = client.LiteralOfInteger(input);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_LiteralOfInteger_ShortVersion_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
+
+            ModelWithIntegerLiteralTypeProperty input = new ModelWithIntegerLiteralTypeProperty("<name>");
+            Response response = await client.LiteralOfIntegerAsync(input);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_LiteralOfInteger_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -617,6 +639,28 @@ default
             Response response = await client.LiteralOfIntegerAsync(content);
 
             Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_LiteralOfInteger_AllParameters_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
+
+            ModelWithIntegerLiteralTypeProperty input = new ModelWithIntegerLiteralTypeProperty("<name>");
+            Response response = client.LiteralOfInteger(input);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_LiteralOfInteger_AllParameters_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
+
+            ModelWithIntegerLiteralTypeProperty input = new ModelWithIntegerLiteralTypeProperty("<name>");
+            Response response = await client.LiteralOfIntegerAsync(input);
         }
 
         [Test]
@@ -655,6 +699,28 @@ default
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public void Example_LiteralOfFloat_ShortVersion_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
+
+            ModelWithFloatLiteralTypeProperty input = new ModelWithFloatLiteralTypeProperty("<name>");
+            Response response = client.LiteralOfFloat(input);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_LiteralOfFloat_ShortVersion_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
+
+            ModelWithFloatLiteralTypeProperty input = new ModelWithFloatLiteralTypeProperty("<name>");
+            Response response = await client.LiteralOfFloatAsync(input);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_LiteralOfFloat_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -685,6 +751,28 @@ default
             Response response = await client.LiteralOfFloatAsync(content);
 
             Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_LiteralOfFloat_AllParameters_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
+
+            ModelWithFloatLiteralTypeProperty input = new ModelWithFloatLiteralTypeProperty("<name>");
+            Response response = client.LiteralOfFloat(input);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_LiteralOfFloat_AllParameters_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
+
+            ModelWithFloatLiteralTypeProperty input = new ModelWithFloatLiteralTypeProperty("<name>");
+            Response response = await client.LiteralOfFloatAsync(input);
         }
 
         [Test]

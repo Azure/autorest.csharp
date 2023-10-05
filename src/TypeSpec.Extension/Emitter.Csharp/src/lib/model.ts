@@ -220,7 +220,23 @@ function getCSharpInputTypeKindByIntrinsicModelName(
  * set of properties when non-schema properties are excluded.
  */
 export function getEffectiveSchemaType(context: SdkContext, type: Type): Type {
-    return type;
+    let target = type;
+    if (type.kind === "Model" && !type.name) {
+        const effective = getEffectiveModelType(
+            context.program,
+            type,
+            isSchemaPropertyInternal
+        );
+        if (effective.name) {
+            target = effective;
+        }
+    }
+
+    return target;
+
+    function isSchemaPropertyInternal(property: ModelProperty) {
+        return isSchemaProperty(context, property);
+    }
 }
 
 /**

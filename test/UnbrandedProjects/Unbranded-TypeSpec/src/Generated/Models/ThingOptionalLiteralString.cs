@@ -11,7 +11,7 @@ using System.ComponentModel;
 namespace UnbrandedTypeSpec.Models
 {
     /// <summary> The Thing_optionalLiteralString. </summary>
-    internal readonly partial struct ThingOptionalLiteralString : IEquatable<ThingOptionalLiteralString>
+    public readonly partial struct ThingOptionalLiteralString : IEquatable<ThingOptionalLiteralString>
     {
         private readonly string _value;
 

@@ -515,7 +515,7 @@
   {
    "$id": "72",
    "Name": "CreateChatCompletionRequest",
-   "Namespace": "OpenAI.Chat",
+   "Namespace": "OpenAI",
    "IsNullable": false,
    "Usage": "Input",
    "Properties": [
@@ -6326,7 +6326,7 @@
        "IsEndpoint": false,
        "SkipUrlEncoding": false,
        "Explode": false,
-       "Kind": "Spread"
+       "Kind": "Method"
       },
       {
        "$id": "886",
@@ -6936,7 +6936,7 @@
        "IsEndpoint": false,
        "SkipUrlEncoding": false,
        "Explode": false,
-       "Kind": "Spread"
+       "Kind": "Method"
       },
       {
        "$id": "938",

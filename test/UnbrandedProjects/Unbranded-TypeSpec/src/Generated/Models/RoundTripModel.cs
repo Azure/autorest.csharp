@@ -14,7 +14,7 @@ using System.ServiceModel.Rest.Experimental.Core.Serialization;
 namespace UnbrandedTypeSpec.Models
 {
     /// <summary> this is a roundtrip model. </summary>
-    internal partial class RoundTripModel
+    public partial class RoundTripModel
     {
         /// <summary> Initializes a new instance of RoundTripModel. </summary>
         /// <param name="requiredString"> Required string, illustrating a reference type property. </param>

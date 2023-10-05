@@ -11,7 +11,7 @@ using System.Text.Json;
 
 namespace OpenAI.Models
 {
-    internal partial class CreateCompletionRequest : IUtf8JsonWriteable
+    public partial class CreateCompletionRequest : IUtf8JsonWriteable
     {
         void IUtf8JsonWriteable.Write(Utf8JsonWriter writer)
         {

@@ -12,7 +12,7 @@ using System.Globalization;
 namespace UnbrandedTypeSpec.Models
 {
     /// <summary> Int based extensible enum. </summary>
-    internal readonly partial struct IntExtensibleEnum : IEquatable<IntExtensibleEnum>
+    public readonly partial struct IntExtensibleEnum : IEquatable<IntExtensibleEnum>
     {
         private readonly int _value;
 

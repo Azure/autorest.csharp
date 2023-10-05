@@ -485,6 +485,44 @@ Response response = client.UnionWithInderict(content);
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
+    <member name="LiteralOfIntegerAsync(ModelWithIntegerLiteralTypeProperty,CancellationToken)">
+      <example>
+This sample shows how to call LiteralOfIntegerAsync.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
+
+ModelWithIntegerLiteralTypeProperty input = new ModelWithIntegerLiteralTypeProperty("<name>");
+Response response = await client.LiteralOfIntegerAsync(input);
+]]></code>
+This sample shows how to call LiteralOfIntegerAsync with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
+
+ModelWithIntegerLiteralTypeProperty input = new ModelWithIntegerLiteralTypeProperty("<name>");
+Response response = await client.LiteralOfIntegerAsync(input);
+]]></code></example>
+    </member>
+    <member name="LiteralOfInteger(ModelWithIntegerLiteralTypeProperty,CancellationToken)">
+      <example>
+This sample shows how to call LiteralOfInteger.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
+
+ModelWithIntegerLiteralTypeProperty input = new ModelWithIntegerLiteralTypeProperty("<name>");
+Response response = client.LiteralOfInteger(input);
+]]></code>
+This sample shows how to call LiteralOfInteger with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
+
+ModelWithIntegerLiteralTypeProperty input = new ModelWithIntegerLiteralTypeProperty("<name>");
+Response response = client.LiteralOfInteger(input);
+]]></code></example>
+    </member>
     <member name="LiteralOfIntegerAsync(RequestContent,RequestContext)">
       <example>
 This sample shows how to call LiteralOfIntegerAsync.
@@ -545,6 +583,44 @@ RequestContent content = RequestContent.Create(new
 Response response = client.LiteralOfInteger(content);
 
 Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+    <member name="LiteralOfFloatAsync(ModelWithFloatLiteralTypeProperty,CancellationToken)">
+      <example>
+This sample shows how to call LiteralOfFloatAsync.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
+
+ModelWithFloatLiteralTypeProperty input = new ModelWithFloatLiteralTypeProperty("<name>");
+Response response = await client.LiteralOfFloatAsync(input);
+]]></code>
+This sample shows how to call LiteralOfFloatAsync with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
+
+ModelWithFloatLiteralTypeProperty input = new ModelWithFloatLiteralTypeProperty("<name>");
+Response response = await client.LiteralOfFloatAsync(input);
+]]></code></example>
+    </member>
+    <member name="LiteralOfFloat(ModelWithFloatLiteralTypeProperty,CancellationToken)">
+      <example>
+This sample shows how to call LiteralOfFloat.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
+
+ModelWithFloatLiteralTypeProperty input = new ModelWithFloatLiteralTypeProperty("<name>");
+Response response = client.LiteralOfFloat(input);
+]]></code>
+This sample shows how to call LiteralOfFloat with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
+
+ModelWithFloatLiteralTypeProperty input = new ModelWithFloatLiteralTypeProperty("<name>");
+Response response = client.LiteralOfFloat(input);
 ]]></code></example>
     </member>
     <member name="LiteralOfFloatAsync(RequestContent,RequestContext)">

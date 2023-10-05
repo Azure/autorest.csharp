@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.ServiceModel.Rest;
 using System.ServiceModel.Rest.Core;
 using System.Text.Json;
@@ -62,6 +63,28 @@ namespace UnbrandedTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public void Example_TopAction_ShortVersion_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            KeyCredential credential = new KeyCredential("<key>");
+            UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
+
+            Result<Thing> result = client.TopAction(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_TopAction_ShortVersion_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            KeyCredential credential = new KeyCredential("<key>");
+            UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
+
+            Result<Thing> result = await client.TopActionAsync(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_TopAction_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -110,6 +133,28 @@ namespace UnbrandedTypeSpec.Samples
             Console.WriteLine(element.GetProperty("requiredBadDescription").ToString());
             Console.WriteLine(element.GetProperty("optionalNullableList")[0].ToString());
             Console.WriteLine(element.GetProperty("requiredNullableList")[0].ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_TopAction_AllParameters_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            KeyCredential credential = new KeyCredential("<key>");
+            UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
+
+            Result<Thing> result = client.TopAction(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_TopAction_AllParameters_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            KeyCredential credential = new KeyCredential("<key>");
+            UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
+
+            Result<Thing> result = await client.TopActionAsync(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
         }
 
         [Test]
@@ -444,6 +489,30 @@ namespace UnbrandedTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public void Example_AnonymousBody_ShortVersion_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            KeyCredential credential = new KeyCredential("<key>");
+            UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
+
+            Thing thing = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 });
+            Result<Thing> result = client.AnonymousBody(thing);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_AnonymousBody_ShortVersion_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            KeyCredential credential = new KeyCredential("<key>");
+            UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
+
+            Thing thing = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 });
+            Result<Thing> result = await client.AnonymousBodyAsync(thing);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_AnonymousBody_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -536,6 +605,44 @@ namespace UnbrandedTypeSpec.Samples
             Console.WriteLine(element.GetProperty("requiredBadDescription").ToString());
             Console.WriteLine(element.GetProperty("optionalNullableList")[0].ToString());
             Console.WriteLine(element.GetProperty("requiredNullableList")[0].ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_AnonymousBody_AllParameters_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            KeyCredential credential = new KeyCredential("<key>");
+            UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
+
+            Thing thing = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 })
+            {
+                OptionalLiteralString = ThingOptionalLiteralString.Reject,
+                OptionalLiteralInt = ThingOptionalLiteralInt._456,
+                OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
+                OptionalLiteralBool = true,
+                OptionalNullableList = { 1234 },
+            };
+            Result<Thing> result = client.AnonymousBody(thing);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_AnonymousBody_AllParameters_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            KeyCredential credential = new KeyCredential("<key>");
+            UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
+
+            Thing thing = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 })
+            {
+                OptionalLiteralString = ThingOptionalLiteralString.Reject,
+                OptionalLiteralInt = ThingOptionalLiteralInt._456,
+                OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
+                OptionalLiteralBool = true,
+                OptionalNullableList = { 1234 },
+            };
+            Result<Thing> result = await client.AnonymousBodyAsync(thing);
         }
 
         [Test]
@@ -970,7 +1077,7 @@ namespace UnbrandedTypeSpec.Samples
             KeyCredential credential = new KeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-            Result<returnsAnonymousModel92> result = client.ReturnsAnonymousModel();
+            Result<object> result = client.ReturnsAnonymousModel();
         }
 
         [Test]
@@ -981,7 +1088,7 @@ namespace UnbrandedTypeSpec.Samples
             KeyCredential credential = new KeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-            Result<returnsAnonymousModel92> result = await client.ReturnsAnonymousModelAsync();
+            Result<object> result = await client.ReturnsAnonymousModelAsync();
         }
 
         [Test]
@@ -1020,7 +1127,7 @@ namespace UnbrandedTypeSpec.Samples
             KeyCredential credential = new KeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-            Result<returnsAnonymousModel92> result = client.ReturnsAnonymousModel();
+            Result<object> result = client.ReturnsAnonymousModel();
         }
 
         [Test]
@@ -1031,7 +1138,7 @@ namespace UnbrandedTypeSpec.Samples
             KeyCredential credential = new KeyCredential("<key>");
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
 
-            Result<returnsAnonymousModel92> result = await client.ReturnsAnonymousModelAsync();
+            Result<object> result = await client.ReturnsAnonymousModelAsync();
         }
 
         [Test]
@@ -1312,6 +1419,42 @@ namespace UnbrandedTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public void Example_HelloAgain_ShortVersion_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            KeyCredential credential = new KeyCredential("<key>");
+            UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
+
+            RoundTripModel action = new RoundTripModel("<requiredString>", 1234, new StringFixedEnum?[] { StringFixedEnum.One }, new Dictionary<string, StringExtensibleEnum?>
+            {
+                ["key"] = StringExtensibleEnum.One
+            }, new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 }), BinaryData.FromObjectAsJson(new object()), new Dictionary<string, BinaryData>
+            {
+                ["key"] = BinaryData.FromObjectAsJson(new object())
+            }, new ModelWithRequiredNullableProperties(1234, StringExtensibleEnum.One, StringFixedEnum.One));
+            Result<RoundTripModel> result = client.HelloAgain("<p2>", "<p1>", action);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_HelloAgain_ShortVersion_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            KeyCredential credential = new KeyCredential("<key>");
+            UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
+
+            RoundTripModel action = new RoundTripModel("<requiredString>", 1234, new StringFixedEnum?[] { StringFixedEnum.One }, new Dictionary<string, StringExtensibleEnum?>
+            {
+                ["key"] = StringExtensibleEnum.One
+            }, new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 }), BinaryData.FromObjectAsJson(new object()), new Dictionary<string, BinaryData>
+            {
+                ["key"] = BinaryData.FromObjectAsJson(new object())
+            }, new ModelWithRequiredNullableProperties(1234, StringExtensibleEnum.One, StringFixedEnum.One));
+            Result<RoundTripModel> result = await client.HelloAgainAsync("<p2>", "<p1>", action);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_HelloAgain_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -1548,6 +1691,88 @@ namespace UnbrandedTypeSpec.Samples
             Console.WriteLine(element.GetProperty("modelWithRequiredNullable").GetProperty("requiredNullablePrimitive").ToString());
             Console.WriteLine(element.GetProperty("modelWithRequiredNullable").GetProperty("requiredExtensibleEnum").ToString());
             Console.WriteLine(element.GetProperty("modelWithRequiredNullable").GetProperty("requiredFixedEnum").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_HelloAgain_AllParameters_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            KeyCredential credential = new KeyCredential("<key>");
+            UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
+
+            RoundTripModel action = new RoundTripModel("<requiredString>", 1234, new StringFixedEnum?[] { StringFixedEnum.One }, new Dictionary<string, StringExtensibleEnum?>
+            {
+                ["key"] = StringExtensibleEnum.One
+            }, new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 })
+            {
+                OptionalLiteralString = ThingOptionalLiteralString.Reject,
+                OptionalLiteralInt = ThingOptionalLiteralInt._456,
+                OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
+                OptionalLiteralBool = true,
+                OptionalNullableList = { 1234 },
+            }, BinaryData.FromObjectAsJson(new object()), new Dictionary<string, BinaryData>
+            {
+                ["key"] = BinaryData.FromObjectAsJson(new object())
+            }, new ModelWithRequiredNullableProperties(1234, StringExtensibleEnum.One, StringFixedEnum.One))
+            {
+                IntExtensibleEnum = IntExtensibleEnum.One,
+                IntExtensibleEnumCollection = { IntExtensibleEnum.One },
+                FloatExtensibleEnum = FloatExtensibleEnum.One,
+                FloatExtensibleEnumCollection = { FloatExtensibleEnum.One },
+                FloatFixedEnum = FloatFixedEnum.One,
+                FloatFixedEnumCollection = { FloatFixedEnum.One },
+                IntFixedEnum = IntFixedEnum.One,
+                IntFixedEnumCollection = { IntFixedEnum.One },
+                StringFixedEnum = StringFixedEnum.One,
+                OptionalUnknown = BinaryData.FromObjectAsJson(new object()),
+                OptionalRecordUnknown =
+{
+["key"] = BinaryData.FromObjectAsJson(new object())
+},
+            };
+            Result<RoundTripModel> result = client.HelloAgain("<p2>", "<p1>", action);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_HelloAgain_AllParameters_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            KeyCredential credential = new KeyCredential("<key>");
+            UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
+
+            RoundTripModel action = new RoundTripModel("<requiredString>", 1234, new StringFixedEnum?[] { StringFixedEnum.One }, new Dictionary<string, StringExtensibleEnum?>
+            {
+                ["key"] = StringExtensibleEnum.One
+            }, new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 })
+            {
+                OptionalLiteralString = ThingOptionalLiteralString.Reject,
+                OptionalLiteralInt = ThingOptionalLiteralInt._456,
+                OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
+                OptionalLiteralBool = true,
+                OptionalNullableList = { 1234 },
+            }, BinaryData.FromObjectAsJson(new object()), new Dictionary<string, BinaryData>
+            {
+                ["key"] = BinaryData.FromObjectAsJson(new object())
+            }, new ModelWithRequiredNullableProperties(1234, StringExtensibleEnum.One, StringFixedEnum.One))
+            {
+                IntExtensibleEnum = IntExtensibleEnum.One,
+                IntExtensibleEnumCollection = { IntExtensibleEnum.One },
+                FloatExtensibleEnum = FloatExtensibleEnum.One,
+                FloatExtensibleEnumCollection = { FloatExtensibleEnum.One },
+                FloatFixedEnum = FloatFixedEnum.One,
+                FloatFixedEnumCollection = { FloatFixedEnum.One },
+                IntFixedEnum = IntFixedEnum.One,
+                IntFixedEnumCollection = { IntFixedEnum.One },
+                StringFixedEnum = StringFixedEnum.One,
+                OptionalUnknown = BinaryData.FromObjectAsJson(new object()),
+                OptionalRecordUnknown =
+{
+["key"] = BinaryData.FromObjectAsJson(new object())
+},
+            };
+            Result<RoundTripModel> result = await client.HelloAgainAsync("<p2>", "<p1>", action);
         }
 
         [Test]
@@ -1972,6 +2197,28 @@ namespace UnbrandedTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public void Example_HelloDemo2_ShortVersion_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            KeyCredential credential = new KeyCredential("<key>");
+            UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
+
+            Result<Thing> result = client.HelloDemo2();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_HelloDemo2_ShortVersion_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            KeyCredential credential = new KeyCredential("<key>");
+            UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
+
+            Result<Thing> result = await client.HelloDemo2Async();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_HelloDemo2_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -2020,6 +2267,28 @@ namespace UnbrandedTypeSpec.Samples
             Console.WriteLine(element.GetProperty("requiredBadDescription").ToString());
             Console.WriteLine(element.GetProperty("optionalNullableList")[0].ToString());
             Console.WriteLine(element.GetProperty("requiredNullableList")[0].ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_HelloDemo2_AllParameters_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            KeyCredential credential = new KeyCredential("<key>");
+            UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
+
+            Result<Thing> result = client.HelloDemo2();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_HelloDemo2_AllParameters_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            KeyCredential credential = new KeyCredential("<key>");
+            UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
+
+            Result<Thing> result = await client.HelloDemo2Async();
         }
 
         [Test]
@@ -2090,6 +2359,30 @@ namespace UnbrandedTypeSpec.Samples
             Console.WriteLine(element.GetProperty("requiredLiteralBool").ToString());
             Console.WriteLine(element.GetProperty("requiredBadDescription").ToString());
             Console.WriteLine(element.GetProperty("requiredNullableList")[0].ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_CreateLiteral_ShortVersion_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            KeyCredential credential = new KeyCredential("<key>");
+            UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
+
+            Thing body = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 });
+            Result<Thing> result = client.CreateLiteral(body);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_CreateLiteral_ShortVersion_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            KeyCredential credential = new KeyCredential("<key>");
+            UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
+
+            Thing body = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 });
+            Result<Thing> result = await client.CreateLiteralAsync(body);
         }
 
         [Test]
@@ -2190,6 +2483,44 @@ namespace UnbrandedTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public void Example_CreateLiteral_AllParameters_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            KeyCredential credential = new KeyCredential("<key>");
+            UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
+
+            Thing body = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 })
+            {
+                OptionalLiteralString = ThingOptionalLiteralString.Reject,
+                OptionalLiteralInt = ThingOptionalLiteralInt._456,
+                OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
+                OptionalLiteralBool = true,
+                OptionalNullableList = { 1234 },
+            };
+            Result<Thing> result = client.CreateLiteral(body);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_CreateLiteral_AllParameters_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            KeyCredential credential = new KeyCredential("<key>");
+            UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
+
+            Thing body = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 })
+            {
+                OptionalLiteralString = ThingOptionalLiteralString.Reject,
+                OptionalLiteralInt = ThingOptionalLiteralInt._456,
+                OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
+                OptionalLiteralBool = true,
+                OptionalNullableList = { 1234 },
+            };
+            Result<Thing> result = await client.CreateLiteralAsync(body);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_HelloLiteral_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -2228,6 +2559,28 @@ namespace UnbrandedTypeSpec.Samples
             Console.WriteLine(element.GetProperty("requiredLiteralBool").ToString());
             Console.WriteLine(element.GetProperty("requiredBadDescription").ToString());
             Console.WriteLine(element.GetProperty("requiredNullableList")[0].ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_HelloLiteral_ShortVersion_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            KeyCredential credential = new KeyCredential("<key>");
+            UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
+
+            Result<Thing> result = client.HelloLiteral();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_HelloLiteral_ShortVersion_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            KeyCredential credential = new KeyCredential("<key>");
+            UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
+
+            Result<Thing> result = await client.HelloLiteralAsync();
         }
 
         [Test]
@@ -2280,6 +2633,28 @@ namespace UnbrandedTypeSpec.Samples
             Console.WriteLine(element.GetProperty("requiredBadDescription").ToString());
             Console.WriteLine(element.GetProperty("optionalNullableList")[0].ToString());
             Console.WriteLine(element.GetProperty("requiredNullableList")[0].ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_HelloLiteral_AllParameters_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            KeyCredential credential = new KeyCredential("<key>");
+            UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
+
+            Result<Thing> result = client.HelloLiteral();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_HelloLiteral_AllParameters_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            KeyCredential credential = new KeyCredential("<key>");
+            UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
+
+            Result<Thing> result = await client.HelloLiteralAsync();
         }
 
         [Test]

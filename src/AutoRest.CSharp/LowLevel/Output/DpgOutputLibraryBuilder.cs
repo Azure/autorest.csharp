@@ -122,8 +122,7 @@ namespace AutoRest.CSharp.Output.Models
                     var newName = GetAnonModelName(model, createdNames);
                     if (newName is not null)
                     {
-                        var containingType = models.Keys.Where(m => m.GetProperty(model) is not null).First();
-                        replacement = model.Update(newName, containingType.Usage);
+                        replacement = model.Update(newName, GetNewUsage(model));
                         createdNames.Add(replacement.Name);
                         replacements.Add(model, replacement);
                     }
@@ -141,6 +140,47 @@ namespace AutoRest.CSharp.Output.Models
                     models[modelContainingEnum] = models[modelContainingEnum].ReplaceProperty(property, pair.Value);
                 }
             }
+        }
+
+        private InputModelTypeUsage GetNewUsage(InputModelType anonModel)
+        {
+            var containingType = GetFirstNonAnonContainingType(anonModel);
+            if (containingType is not null)
+                return containingType.Usage;
+
+            InputModelTypeUsage usage = InputModelTypeUsage.None;
+            foreach (var client in _rootNamespace.Clients)
+            {
+                foreach (var operation in client.Operations)
+                {
+                    foreach (var parameter in operation.Parameters)
+                    {
+                        if (IsSameType(parameter.Type, anonModel))
+                        {
+                            usage |= InputModelTypeUsage.Input;
+                            break;
+                        }
+                    }
+                    foreach (var response in operation.Responses)
+                    {
+                        if (response is null || response.BodyType is null || response.BodyType is not InputModelType responseType)
+                            continue;
+
+                        if (IsSameType(responseType, anonModel))
+                        {
+                            usage |= InputModelTypeUsage.Output;
+                        }
+                    }
+
+                }
+            }
+            return usage;
+        }
+
+        private InputModelType? GetFirstNonAnonContainingType(InputModelType anonModel)
+        {
+            var containingType = _rootNamespace.Models.Where(m => m.GetProperty(anonModel) is not null).FirstOrDefault();
+            return containingType is not null && containingType.IsAnonymousModel ? GetFirstNonAnonContainingType(containingType) : containingType;
         }
 
         private Dictionary<InputModelType, InputModelProperty> GetAllReferences(InputModelType key, IDictionary<InputModelType, ModelTypeProvider> models)
@@ -193,6 +233,18 @@ namespace AutoRest.CSharp.Output.Models
                 }
             }
 
+            if (names.Count == 0)
+            {
+                foreach (var model in _rootNamespace.Models)
+                {
+                    foreach (var property in model.Properties)
+                    {
+                        if (IsSameType(property.Type, anonModel))
+                            return $"{model.Name.FirstCharToUpperCase()}{property.Name.FirstCharToUpperCase()}";
+                    }
+                }
+                return $"{_rootNamespace.Name}Model{anonModel.Name}";
+            }
             if (names.Count == 1)
             {
                 var newName = $"{names[0][0]}{names[0][names[0].Count - 1].FirstCharToUpperCase()}";

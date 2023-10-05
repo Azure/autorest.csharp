@@ -14,7 +14,7 @@ using System.ServiceModel.Rest.Experimental.Core.Serialization;
 namespace UnbrandedTypeSpec.Models
 {
     /// <summary> A model with a few properties of literal types. </summary>
-    internal partial class Thing
+    public partial class Thing
     {
         /// <summary> Initializes a new instance of Thing. </summary>
         /// <param name="name"> name of the Thing. </param>

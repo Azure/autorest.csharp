@@ -484,7 +484,8 @@ namespace ConfidentLevelsInTsp
         /// <param name="input"> The ModelWithIntegerLiteralTypeProperty to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        internal virtual async Task<Response> LiteralOfIntegerAsync(ModelWithIntegerLiteralTypeProperty input, CancellationToken cancellationToken = default)
+        /// <include file="Docs/ConfidentLevelsInTspClient.xml" path="doc/members/member[@name='LiteralOfIntegerAsync(ModelWithIntegerLiteralTypeProperty,CancellationToken)']/*" />
+        public virtual async Task<Response> LiteralOfIntegerAsync(ModelWithIntegerLiteralTypeProperty input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
 
@@ -497,7 +498,8 @@ namespace ConfidentLevelsInTsp
         /// <param name="input"> The ModelWithIntegerLiteralTypeProperty to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        internal virtual Response LiteralOfInteger(ModelWithIntegerLiteralTypeProperty input, CancellationToken cancellationToken = default)
+        /// <include file="Docs/ConfidentLevelsInTspClient.xml" path="doc/members/member[@name='LiteralOfInteger(ModelWithIntegerLiteralTypeProperty,CancellationToken)']/*" />
+        public virtual Response LiteralOfInteger(ModelWithIntegerLiteralTypeProperty input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
 
@@ -506,13 +508,17 @@ namespace ConfidentLevelsInTsp
             return response;
         }
 
-        // The convenience method of this operation is made internal because this operation directly or indirectly uses a low confident type, for instance, unions, literal types with number values, etc.
         /// <summary>
         /// [Protocol Method] This is an operation that uses a model with a property of literal type of numbers in request body
         /// <list type="bullet">
         /// <item>
         /// <description>
         /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="LiteralOfIntegerAsync(ModelWithIntegerLiteralTypeProperty,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -541,13 +547,17 @@ namespace ConfidentLevelsInTsp
             }
         }
 
-        // The convenience method of this operation is made internal because this operation directly or indirectly uses a low confident type, for instance, unions, literal types with number values, etc.
         /// <summary>
         /// [Protocol Method] This is an operation that uses a model with a property of literal type of numbers in request body
         /// <list type="bullet">
         /// <item>
         /// <description>
         /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="LiteralOfInteger(ModelWithIntegerLiteralTypeProperty,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -580,7 +590,8 @@ namespace ConfidentLevelsInTsp
         /// <param name="input"> The ModelWithFloatLiteralTypeProperty to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        internal virtual async Task<Response> LiteralOfFloatAsync(ModelWithFloatLiteralTypeProperty input, CancellationToken cancellationToken = default)
+        /// <include file="Docs/ConfidentLevelsInTspClient.xml" path="doc/members/member[@name='LiteralOfFloatAsync(ModelWithFloatLiteralTypeProperty,CancellationToken)']/*" />
+        public virtual async Task<Response> LiteralOfFloatAsync(ModelWithFloatLiteralTypeProperty input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
 
@@ -593,7 +604,8 @@ namespace ConfidentLevelsInTsp
         /// <param name="input"> The ModelWithFloatLiteralTypeProperty to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        internal virtual Response LiteralOfFloat(ModelWithFloatLiteralTypeProperty input, CancellationToken cancellationToken = default)
+        /// <include file="Docs/ConfidentLevelsInTspClient.xml" path="doc/members/member[@name='LiteralOfFloat(ModelWithFloatLiteralTypeProperty,CancellationToken)']/*" />
+        public virtual Response LiteralOfFloat(ModelWithFloatLiteralTypeProperty input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
 
@@ -602,13 +614,17 @@ namespace ConfidentLevelsInTsp
             return response;
         }
 
-        // The convenience method of this operation is made internal because this operation directly or indirectly uses a low confident type, for instance, unions, literal types with number values, etc.
         /// <summary>
         /// [Protocol Method] This is an operation that uses a model with a property of literal type of numbers in request body
         /// <list type="bullet">
         /// <item>
         /// <description>
         /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="LiteralOfFloatAsync(ModelWithFloatLiteralTypeProperty,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -637,13 +653,17 @@ namespace ConfidentLevelsInTsp
             }
         }
 
-        // The convenience method of this operation is made internal because this operation directly or indirectly uses a low confident type, for instance, unions, literal types with number values, etc.
         /// <summary>
         /// [Protocol Method] This is an operation that uses a model with a property of literal type of numbers in request body
         /// <list type="bullet">
         /// <item>
         /// <description>
         /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="LiteralOfFloat(ModelWithFloatLiteralTypeProperty,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>

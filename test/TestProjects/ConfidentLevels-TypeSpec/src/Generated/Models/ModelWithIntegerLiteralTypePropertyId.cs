@@ -12,7 +12,7 @@ using System.Globalization;
 namespace ConfidentLevelsInTsp.Models
 {
     /// <summary> The ModelWithIntegerLiteralTypeProperty_id. </summary>
-    internal readonly partial struct ModelWithIntegerLiteralTypePropertyId : IEquatable<ModelWithIntegerLiteralTypePropertyId>
+    public readonly partial struct ModelWithIntegerLiteralTypePropertyId : IEquatable<ModelWithIntegerLiteralTypePropertyId>
     {
         private readonly int _value;
 

@@ -358,10 +358,11 @@ content = "<content>",
             KeyCredential credential = new KeyCredential("<key>");
             OpenAIClient client = new OpenAIClient(credential);
 
-            Result<CreateChatCompletionResponse> result = client.CreateChatCompletion(new CreateChatCompletionRequestModel("<model>"), new ChatCompletionRequestMessage[]
+            CreateChatCompletionRequest createChatCompletionRequest = new CreateChatCompletionRequest(new CreateChatCompletionRequestModel("<model>"), new ChatCompletionRequestMessage[]
             {
 new ChatCompletionRequestMessage(ChatCompletionRequestMessageRole.System, "<content>")
             });
+            Result<CreateChatCompletionResponse> result = client.CreateChatCompletion(createChatCompletionRequest);
         }
 
         [Test]
@@ -371,10 +372,11 @@ new ChatCompletionRequestMessage(ChatCompletionRequestMessageRole.System, "<cont
             KeyCredential credential = new KeyCredential("<key>");
             OpenAIClient client = new OpenAIClient(credential);
 
-            Result<CreateChatCompletionResponse> result = await client.CreateChatCompletionAsync(new CreateChatCompletionRequestModel("<model>"), new ChatCompletionRequestMessage[]
+            CreateChatCompletionRequest createChatCompletionRequest = new CreateChatCompletionRequest(new CreateChatCompletionRequestModel("<model>"), new ChatCompletionRequestMessage[]
             {
 new ChatCompletionRequestMessage(ChatCompletionRequestMessageRole.System, "<content>")
             });
+            Result<CreateChatCompletionResponse> result = await client.CreateChatCompletionAsync(createChatCompletionRequest);
         }
 
         [Test]
@@ -522,26 +524,38 @@ key = new object(),
             KeyCredential credential = new KeyCredential("<key>");
             OpenAIClient client = new OpenAIClient(credential);
 
-            Result<CreateChatCompletionResponse> result = client.CreateChatCompletion(new CreateChatCompletionRequestModel("<model>"), new ChatCompletionRequestMessage[]
+            CreateChatCompletionRequest createChatCompletionRequest = new CreateChatCompletionRequest(new CreateChatCompletionRequestModel("<model>"), new ChatCompletionRequestMessage[]
             {
 new ChatCompletionRequestMessage(ChatCompletionRequestMessageRole.System, "<content>")
 {
 Name = "<name>",
 FunctionCall = new CreateChatCompletionFunctionCall("<name>", "<arguments>"),
 }
-            }, functions: new ChatCompletionFunctions[]
+            })
             {
-new ChatCompletionFunctions("<name>", new Dictionary<string, BinaryData>
+                Functions = {new ChatCompletionFunctions("<name>", new Dictionary<string, BinaryData>
 {
 ["key"] = BinaryData.FromObjectAsJson(new object())
 })
 {
 Description = "<description>",
-}
-            }, functionCall: BinaryData.FromObjectAsJson("none"), temperature: 123.45, topP: 123.45, n: 1234L, maxTokens: 1234L, stop: BinaryData.FromObjectAsJson("<stop>"), presencePenalty: 123.45, frequencyPenalty: 123.45, logitBias: new Dictionary<string, long>
-            {
-                ["key"] = 1234L
-            }, user: "<user>", stream: true);
+}},
+                FunctionCall = BinaryData.FromObjectAsJson("none"),
+                Temperature = 123.45,
+                TopP = 123.45,
+                N = 1234L,
+                MaxTokens = 1234L,
+                Stop = BinaryData.FromObjectAsJson("<stop>"),
+                PresencePenalty = 123.45,
+                FrequencyPenalty = 123.45,
+                LogitBias =
+{
+["key"] = 1234L
+},
+                User = "<user>",
+                Stream = true,
+            };
+            Result<CreateChatCompletionResponse> result = client.CreateChatCompletion(createChatCompletionRequest);
         }
 
         [Test]
@@ -551,26 +565,38 @@ Description = "<description>",
             KeyCredential credential = new KeyCredential("<key>");
             OpenAIClient client = new OpenAIClient(credential);
 
-            Result<CreateChatCompletionResponse> result = await client.CreateChatCompletionAsync(new CreateChatCompletionRequestModel("<model>"), new ChatCompletionRequestMessage[]
+            CreateChatCompletionRequest createChatCompletionRequest = new CreateChatCompletionRequest(new CreateChatCompletionRequestModel("<model>"), new ChatCompletionRequestMessage[]
             {
 new ChatCompletionRequestMessage(ChatCompletionRequestMessageRole.System, "<content>")
 {
 Name = "<name>",
 FunctionCall = new CreateChatCompletionFunctionCall("<name>", "<arguments>"),
 }
-            }, functions: new ChatCompletionFunctions[]
+            })
             {
-new ChatCompletionFunctions("<name>", new Dictionary<string, BinaryData>
+                Functions = {new ChatCompletionFunctions("<name>", new Dictionary<string, BinaryData>
 {
 ["key"] = BinaryData.FromObjectAsJson(new object())
 })
 {
 Description = "<description>",
-}
-            }, functionCall: BinaryData.FromObjectAsJson("none"), temperature: 123.45, topP: 123.45, n: 1234L, maxTokens: 1234L, stop: BinaryData.FromObjectAsJson("<stop>"), presencePenalty: 123.45, frequencyPenalty: 123.45, logitBias: new Dictionary<string, long>
-            {
-                ["key"] = 1234L
-            }, user: "<user>", stream: true);
+}},
+                FunctionCall = BinaryData.FromObjectAsJson("none"),
+                Temperature = 123.45,
+                TopP = 123.45,
+                N = 1234L,
+                MaxTokens = 1234L,
+                Stop = BinaryData.FromObjectAsJson("<stop>"),
+                PresencePenalty = 123.45,
+                FrequencyPenalty = 123.45,
+                LogitBias =
+{
+["key"] = 1234L
+},
+                User = "<user>",
+                Stream = true,
+            };
+            Result<CreateChatCompletionResponse> result = await client.CreateChatCompletionAsync(createChatCompletionRequest);
         }
 
         [Test]
@@ -1400,7 +1426,8 @@ Description = "<description>",
             KeyCredential credential = new KeyCredential("<key>");
             OpenAIClient client = new OpenAIClient(credential);
 
-            Result<CreateCompletionResponse> result = client.CreateCompletion(new CreateCompletionRequestModel("<model>"), BinaryData.FromObjectAsJson("<prompt>"));
+            CreateCompletionRequest createCompletionRequest = new CreateCompletionRequest(new CreateCompletionRequestModel("<model>"), BinaryData.FromObjectAsJson("<prompt>"));
+            Result<CreateCompletionResponse> result = client.CreateCompletion(createCompletionRequest);
         }
 
         [Test]
@@ -1410,7 +1437,8 @@ Description = "<description>",
             KeyCredential credential = new KeyCredential("<key>");
             OpenAIClient client = new OpenAIClient(credential);
 
-            Result<CreateCompletionResponse> result = await client.CreateCompletionAsync(new CreateCompletionRequestModel("<model>"), BinaryData.FromObjectAsJson("<prompt>"));
+            CreateCompletionRequest createCompletionRequest = new CreateCompletionRequest(new CreateCompletionRequestModel("<model>"), BinaryData.FromObjectAsJson("<prompt>"));
+            Result<CreateCompletionResponse> result = await client.CreateCompletionAsync(createCompletionRequest);
         }
 
         [Test]
@@ -1516,10 +1544,27 @@ Description = "<description>",
             KeyCredential credential = new KeyCredential("<key>");
             OpenAIClient client = new OpenAIClient(credential);
 
-            Result<CreateCompletionResponse> result = client.CreateCompletion(new CreateCompletionRequestModel("<model>"), BinaryData.FromObjectAsJson("<prompt>"), suffix: "<suffix>", temperature: 123.45, topP: 123.45, n: 1234L, maxTokens: 1234L, stop: BinaryData.FromObjectAsJson("<stop>"), presencePenalty: 123.45, frequencyPenalty: 123.45, logitBias: new Dictionary<string, long>
+            CreateCompletionRequest createCompletionRequest = new CreateCompletionRequest(new CreateCompletionRequestModel("<model>"), BinaryData.FromObjectAsJson("<prompt>"))
             {
-                ["key"] = 1234L
-            }, user: "<user>", stream: true, logprobs: 1234L, echo: true, bestOf: 1234L);
+                Suffix = "<suffix>",
+                Temperature = 123.45,
+                TopP = 123.45,
+                N = 1234L,
+                MaxTokens = 1234L,
+                Stop = BinaryData.FromObjectAsJson("<stop>"),
+                PresencePenalty = 123.45,
+                FrequencyPenalty = 123.45,
+                LogitBias =
+{
+["key"] = 1234L
+},
+                User = "<user>",
+                Stream = true,
+                Logprobs = 1234L,
+                Echo = true,
+                BestOf = 1234L,
+            };
+            Result<CreateCompletionResponse> result = client.CreateCompletion(createCompletionRequest);
         }
 
         [Test]
@@ -1529,10 +1574,27 @@ Description = "<description>",
             KeyCredential credential = new KeyCredential("<key>");
             OpenAIClient client = new OpenAIClient(credential);
 
-            Result<CreateCompletionResponse> result = await client.CreateCompletionAsync(new CreateCompletionRequestModel("<model>"), BinaryData.FromObjectAsJson("<prompt>"), suffix: "<suffix>", temperature: 123.45, topP: 123.45, n: 1234L, maxTokens: 1234L, stop: BinaryData.FromObjectAsJson("<stop>"), presencePenalty: 123.45, frequencyPenalty: 123.45, logitBias: new Dictionary<string, long>
+            CreateCompletionRequest createCompletionRequest = new CreateCompletionRequest(new CreateCompletionRequestModel("<model>"), BinaryData.FromObjectAsJson("<prompt>"))
             {
-                ["key"] = 1234L
-            }, user: "<user>", stream: true, logprobs: 1234L, echo: true, bestOf: 1234L);
+                Suffix = "<suffix>",
+                Temperature = 123.45,
+                TopP = 123.45,
+                N = 1234L,
+                MaxTokens = 1234L,
+                Stop = BinaryData.FromObjectAsJson("<stop>"),
+                PresencePenalty = 123.45,
+                FrequencyPenalty = 123.45,
+                LogitBias =
+{
+["key"] = 1234L
+},
+                User = "<user>",
+                Stream = true,
+                Logprobs = 1234L,
+                Echo = true,
+                BestOf = 1234L,
+            };
+            Result<CreateCompletionResponse> result = await client.CreateCompletionAsync(createCompletionRequest);
         }
 
         [Test]

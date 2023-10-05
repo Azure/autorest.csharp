@@ -1,6 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
+    <member name="TopActionAsync(DateTimeOffset,CancellationToken)">
+      <example>
+This sample shows how to call TopActionAsync.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
+
+Response<Thing> response = await client.TopActionAsync(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
+]]></code>
+This sample shows how to call TopActionAsync with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
+
+Response<Thing> response = await client.TopActionAsync(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
+]]></code></example>
+    </member>
+    <member name="TopAction(DateTimeOffset,CancellationToken)">
+      <example>
+This sample shows how to call TopAction.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
+
+Response<Thing> response = client.TopAction(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
+]]></code>
+This sample shows how to call TopAction with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
+
+Response<Thing> response = client.TopAction(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
+]]></code></example>
+    </member>
     <member name="TopActionAsync(DateTimeOffset,RequestContext)">
       <example>
 This sample shows how to call TopActionAsync and parse the result.
@@ -293,6 +331,60 @@ Console.WriteLine(element.GetProperty("optionalLiteralInt").ToString());
 Console.WriteLine(element.GetProperty("optionalLiteralFloat").ToString());
 Console.WriteLine(element.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(element.GetProperty("requiredBadDescription").ToString());
+]]></code></example>
+    </member>
+    <member name="AnonymousBodyAsync(Thing,CancellationToken)">
+      <example>
+This sample shows how to call AnonymousBodyAsync.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
+
+Thing thing = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>");
+Response<Thing> response = await client.AnonymousBodyAsync(thing);
+]]></code>
+This sample shows how to call AnonymousBodyAsync with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
+
+Thing thing = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>")
+{
+    OptionalLiteralString = ThingOptionalLiteralString.Reject,
+    OptionalLiteralInt = ThingOptionalLiteralInt._456,
+    OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
+    OptionalLiteralBool = true,
+};
+Response<Thing> response = await client.AnonymousBodyAsync(thing);
+]]></code></example>
+    </member>
+    <member name="AnonymousBody(Thing,CancellationToken)">
+      <example>
+This sample shows how to call AnonymousBody.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
+
+Thing thing = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>");
+Response<Thing> response = client.AnonymousBody(thing);
+]]></code>
+This sample shows how to call AnonymousBody with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
+
+Thing thing = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>")
+{
+    OptionalLiteralString = ThingOptionalLiteralString.Reject,
+    OptionalLiteralInt = ThingOptionalLiteralInt._456,
+    OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
+    OptionalLiteralBool = true,
+};
+Response<Thing> response = client.AnonymousBody(thing);
 ]]></code></example>
     </member>
     <member name="AnonymousBodyAsync(RequestContent,RequestContext)">
@@ -767,6 +859,116 @@ Console.WriteLine(element.GetProperty("optionalLiteralInt").ToString());
 Console.WriteLine(element.GetProperty("optionalLiteralFloat").ToString());
 Console.WriteLine(element.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(element.GetProperty("requiredBadDescription").ToString());
+]]></code></example>
+    </member>
+    <member name="HelloAgainAsync(string,string,RoundTripModel,CancellationToken)">
+      <example>
+This sample shows how to call HelloAgainAsync.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
+
+RoundTripModel action = new RoundTripModel("<requiredString>", 1234, new StringFixedEnum[] { StringFixedEnum.One }, new Dictionary<string, StringExtensibleEnum>
+{
+    ["key"] = StringExtensibleEnum.One
+}, new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>"), BinaryData.FromObjectAsJson(new object()), new Dictionary<string, BinaryData>
+{
+    ["key"] = BinaryData.FromObjectAsJson(new object())
+});
+Response<RoundTripModel> response = await client.HelloAgainAsync("<p2>", "<p1>", action);
+]]></code>
+This sample shows how to call HelloAgainAsync with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
+
+RoundTripModel action = new RoundTripModel("<requiredString>", 1234, new StringFixedEnum[] { StringFixedEnum.One }, new Dictionary<string, StringExtensibleEnum>
+{
+    ["key"] = StringExtensibleEnum.One
+}, new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>")
+{
+    OptionalLiteralString = ThingOptionalLiteralString.Reject,
+    OptionalLiteralInt = ThingOptionalLiteralInt._456,
+    OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
+    OptionalLiteralBool = true,
+}, BinaryData.FromObjectAsJson(new object()), new Dictionary<string, BinaryData>
+{
+    ["key"] = BinaryData.FromObjectAsJson(new object())
+})
+{
+    IntExtensibleEnum = IntExtensibleEnum.One,
+    IntExtensibleEnumCollection = { IntExtensibleEnum.One },
+    FloatExtensibleEnum = FloatExtensibleEnum.One,
+    FloatExtensibleEnumCollection = { FloatExtensibleEnum.One },
+    FloatFixedEnum = FloatFixedEnum.One,
+    FloatFixedEnumCollection = { FloatFixedEnum.One },
+    IntFixedEnum = IntFixedEnum.One,
+    IntFixedEnumCollection = { IntFixedEnum.One },
+    StringFixedEnum = StringFixedEnum.One,
+    OptionalUnknown = BinaryData.FromObjectAsJson(new object()),
+    OptionalRecordUnknown =
+    {
+        ["key"] = BinaryData.FromObjectAsJson(new object())
+    },
+};
+Response<RoundTripModel> response = await client.HelloAgainAsync("<p2>", "<p1>", action);
+]]></code></example>
+    </member>
+    <member name="HelloAgain(string,string,RoundTripModel,CancellationToken)">
+      <example>
+This sample shows how to call HelloAgain.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
+
+RoundTripModel action = new RoundTripModel("<requiredString>", 1234, new StringFixedEnum[] { StringFixedEnum.One }, new Dictionary<string, StringExtensibleEnum>
+{
+    ["key"] = StringExtensibleEnum.One
+}, new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>"), BinaryData.FromObjectAsJson(new object()), new Dictionary<string, BinaryData>
+{
+    ["key"] = BinaryData.FromObjectAsJson(new object())
+});
+Response<RoundTripModel> response = client.HelloAgain("<p2>", "<p1>", action);
+]]></code>
+This sample shows how to call HelloAgain with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
+
+RoundTripModel action = new RoundTripModel("<requiredString>", 1234, new StringFixedEnum[] { StringFixedEnum.One }, new Dictionary<string, StringExtensibleEnum>
+{
+    ["key"] = StringExtensibleEnum.One
+}, new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>")
+{
+    OptionalLiteralString = ThingOptionalLiteralString.Reject,
+    OptionalLiteralInt = ThingOptionalLiteralInt._456,
+    OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
+    OptionalLiteralBool = true,
+}, BinaryData.FromObjectAsJson(new object()), new Dictionary<string, BinaryData>
+{
+    ["key"] = BinaryData.FromObjectAsJson(new object())
+})
+{
+    IntExtensibleEnum = IntExtensibleEnum.One,
+    IntExtensibleEnumCollection = { IntExtensibleEnum.One },
+    FloatExtensibleEnum = FloatExtensibleEnum.One,
+    FloatExtensibleEnumCollection = { FloatExtensibleEnum.One },
+    FloatFixedEnum = FloatFixedEnum.One,
+    FloatFixedEnumCollection = { FloatFixedEnum.One },
+    IntFixedEnum = IntFixedEnum.One,
+    IntFixedEnumCollection = { IntFixedEnum.One },
+    StringFixedEnum = StringFixedEnum.One,
+    OptionalUnknown = BinaryData.FromObjectAsJson(new object()),
+    OptionalRecordUnknown =
+    {
+        ["key"] = BinaryData.FromObjectAsJson(new object())
+    },
+};
+Response<RoundTripModel> response = client.HelloAgain("<p2>", "<p1>", action);
 ]]></code></example>
     </member>
     <member name="HelloAgainAsync(string,string,RequestContent,RequestContext)">
@@ -1381,6 +1583,44 @@ Console.WriteLine(element.GetProperty("readOnlyRequiredRecordUnknown").GetProper
 Console.WriteLine(element.GetProperty("readOnlyOptionalRecordUnknown").GetProperty("<key>").ToString());
 ]]></code></example>
     </member>
+    <member name="HelloDemo2Async(CancellationToken)">
+      <example>
+This sample shows how to call HelloDemo2Async.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
+
+Response<Thing> response = await client.HelloDemo2Async();
+]]></code>
+This sample shows how to call HelloDemo2Async with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
+
+Response<Thing> response = await client.HelloDemo2Async();
+]]></code></example>
+    </member>
+    <member name="HelloDemo2(CancellationToken)">
+      <example>
+This sample shows how to call HelloDemo2.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
+
+Response<Thing> response = client.HelloDemo2();
+]]></code>
+This sample shows how to call HelloDemo2 with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
+
+Response<Thing> response = client.HelloDemo2();
+]]></code></example>
+    </member>
     <member name="HelloDemo2Async(RequestContext)">
       <example>
 This sample shows how to call HelloDemo2Async and parse the result.
@@ -1461,6 +1701,60 @@ Console.WriteLine(element.GetProperty("optionalLiteralInt").ToString());
 Console.WriteLine(element.GetProperty("optionalLiteralFloat").ToString());
 Console.WriteLine(element.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(element.GetProperty("requiredBadDescription").ToString());
+]]></code></example>
+    </member>
+    <member name="CreateLiteralAsync(Thing,CancellationToken)">
+      <example>
+This sample shows how to call CreateLiteralAsync.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
+
+Thing body = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>");
+Response<Thing> response = await client.CreateLiteralAsync(body);
+]]></code>
+This sample shows how to call CreateLiteralAsync with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
+
+Thing body = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>")
+{
+    OptionalLiteralString = ThingOptionalLiteralString.Reject,
+    OptionalLiteralInt = ThingOptionalLiteralInt._456,
+    OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
+    OptionalLiteralBool = true,
+};
+Response<Thing> response = await client.CreateLiteralAsync(body);
+]]></code></example>
+    </member>
+    <member name="CreateLiteral(Thing,CancellationToken)">
+      <example>
+This sample shows how to call CreateLiteral.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
+
+Thing body = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>");
+Response<Thing> response = client.CreateLiteral(body);
+]]></code>
+This sample shows how to call CreateLiteral with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
+
+Thing body = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>")
+{
+    OptionalLiteralString = ThingOptionalLiteralString.Reject,
+    OptionalLiteralInt = ThingOptionalLiteralInt._456,
+    OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
+    OptionalLiteralBool = true,
+};
+Response<Thing> response = client.CreateLiteral(body);
 ]]></code></example>
     </member>
     <member name="CreateLiteralAsync(RequestContent,RequestContext)">
@@ -1591,6 +1885,44 @@ Console.WriteLine(element.GetProperty("optionalLiteralInt").ToString());
 Console.WriteLine(element.GetProperty("optionalLiteralFloat").ToString());
 Console.WriteLine(element.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(element.GetProperty("requiredBadDescription").ToString());
+]]></code></example>
+    </member>
+    <member name="HelloLiteralAsync(CancellationToken)">
+      <example>
+This sample shows how to call HelloLiteralAsync.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
+
+Response<Thing> response = await client.HelloLiteralAsync();
+]]></code>
+This sample shows how to call HelloLiteralAsync with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
+
+Response<Thing> response = await client.HelloLiteralAsync();
+]]></code></example>
+    </member>
+    <member name="HelloLiteral(CancellationToken)">
+      <example>
+This sample shows how to call HelloLiteral.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
+
+Response<Thing> response = client.HelloLiteral();
+]]></code>
+This sample shows how to call HelloLiteral with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
+
+Response<Thing> response = client.HelloLiteral();
 ]]></code></example>
     </member>
     <member name="HelloLiteralAsync(RequestContext)">

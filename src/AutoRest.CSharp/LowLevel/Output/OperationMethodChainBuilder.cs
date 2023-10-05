@@ -385,6 +385,8 @@ namespace AutoRest.CSharp.Output.Models
             {
                 var field = fields.GetFieldByParameter(parameter);
                 var inputProperty = fields.GetInputByField(field);
+                if (inputProperty.IsRequired && inputProperty.Type is InputLiteralType)
+                    continue;
                 var inputType = TypeFactory.GetInputType(parameter.Type).WithNullable(!inputProperty.IsRequired);
                 Constant? defaultValue = null;
                 if (!inputProperty.IsRequired)
