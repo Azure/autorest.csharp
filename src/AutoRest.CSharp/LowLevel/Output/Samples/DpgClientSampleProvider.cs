@@ -298,6 +298,11 @@ namespace AutoRest.CSharp.LowLevel.Output.Samples
                 return Declare("operation", new OperationExpression(invocation), out _);
             }
 
+            if (sample.IsConvenienceSample)
+            {
+                return Declare("response", new ResponseExpression(invocation), out _);
+            }
+
             return new[]
             {
                 Declare("response", new ResponseExpression(invocation), out var response),
