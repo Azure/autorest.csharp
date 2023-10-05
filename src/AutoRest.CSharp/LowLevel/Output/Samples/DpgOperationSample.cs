@@ -30,6 +30,7 @@ namespace AutoRest.CSharp.Output.Samples.Models
         public bool IsLongRunning { get; }
         public bool IsAllParametersUsed { get; }
         public bool IsConvenienceSample { get; }
+        public bool HasResponseBody { get; }
         public string ExampleKey { get; }
         public CSharpType? ResponseType { get; }
         public CSharpType? PageItemType { get; }
@@ -38,12 +39,13 @@ namespace AutoRest.CSharp.Output.Samples.Models
         private readonly IEnumerable<InputParameterExample> _inputClientParameterExamples;
         private readonly InputOperationExample _inputOperationExample;
 
-        public DpgOperationSample(IReadOnlyList<MethodSignatureBase> clientInvocationChain, MethodSignature signature, InputType? requestBodyType, CSharpType? responseType, CSharpType? pageItemType, IEnumerable<InputParameterExample> inputClientParameterExamples, InputOperationExample inputOperationExample, bool isConvenienceSample, string exampleKey)
+        public DpgOperationSample(IReadOnlyList<MethodSignatureBase> clientInvocationChain, MethodSignature signature, InputType? requestBodyType, CSharpType? responseType, CSharpType? pageItemType, IEnumerable<InputParameterExample> inputClientParameterExamples, InputOperationExample inputOperationExample, bool isConvenienceSample, bool hasResponseBody, string exampleKey)
         {
             _requestBodyType = requestBodyType;
             _inputClientParameterExamples = inputClientParameterExamples;
             _inputOperationExample = inputOperationExample;
             IsConvenienceSample = isConvenienceSample;
+            HasResponseBody = hasResponseBody;
             ExampleKey = exampleKey;
             IsAllParametersUsed = exampleKey == ExampleMockValueBuilder.MockExampleAllParameterKey; // TODO -- only work around for the response usage building.
 
@@ -328,8 +330,6 @@ namespace AutoRest.CSharp.Output.Samples.Models
 
         private static bool IsSameParameter(Parameter parameter, Parameter knownParameter)
             => parameter.Name == knownParameter.Name && parameter.Type.EqualsIgnoreNullable(knownParameter.Type);
-
-        public bool HasResponseBody => ResponseType is not null;
 
         public string GetSampleInformation(MethodSignatureBase signature) => IsConvenienceSample
                 ? GetSampleInformationForConvenience(signature)

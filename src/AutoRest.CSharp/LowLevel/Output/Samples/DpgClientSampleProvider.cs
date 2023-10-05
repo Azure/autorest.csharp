@@ -271,7 +271,7 @@ namespace AutoRest.CSharp.LowLevel.Output.Samples
                 {
                     Declare(returnType, "response", new ResponseExpression(invocation), out var responseOfT),
                     EmptyLine,
-                    ParseResponse(responseType, sample, responseOfT.ContentStream)
+                    ParseResponseOfT(responseType, sample, responseOfT)
                 };
             }
 
@@ -291,6 +291,13 @@ namespace AutoRest.CSharp.LowLevel.Output.Samples
                 EmptyLine,
                 InvokeConsoleWriteLine(response.Status)
             };
+        }
+
+        private static MethodBodyStatement ParseResponseOfT(CSharpType responseType, DpgOperationSample sample, ResponseExpression responseVar)
+        {
+            return sample.HasResponseBody
+                ? ParseResponse(responseType, sample, responseVar.ContentStream)
+                : InvokeConsoleWriteLine(responseVar.GetRawResponse().Status);
         }
 
         private static MethodBodyStatement ParseResponse(CSharpType responseType, DpgOperationSample sample, StreamExpression streamVar)

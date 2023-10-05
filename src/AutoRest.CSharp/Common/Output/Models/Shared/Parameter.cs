@@ -144,7 +144,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
 
             if (defaultValue != null)
             {
-                var defaultValueString = defaultValue.Value.Value is string s ? $"\"{s}\"" : $"{defaultValue.Value}";
+                var defaultValueString = defaultValue.Value.Value is string s ? $"\"{s}\"" : $"{defaultValue.Value.Value}";
                 description = $"{description}{(description.EndsWith(".") ? "" : ".")} The default value is {defaultValueString}";
             }
 
