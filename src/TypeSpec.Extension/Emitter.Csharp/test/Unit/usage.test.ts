@@ -303,7 +303,7 @@ describe("Test getUsages", () => {
         const sdkContext = createSdkContext(context);
         const [services] = getAllHttpServices(program);
         const usages = getUsages(sdkContext, services[0].operations);
-        assert(usages.inputs.includes("BaseModelWithDiscriminator"));
+        assert(usages.roundTrips.includes("BaseModelWithDiscriminator"));
         assert(usages.inputs.includes("DerivedModelWithDiscriminatorA"));
     });
 
