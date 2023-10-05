@@ -19,10 +19,10 @@ namespace AutoRest.CSharp.Common.Output.Models
         public static DeclarationStatement UsingDeclare(string name, HttpMessageExpression value, out HttpMessageExpression variable)
             => UsingDeclare(name, value, d => new HttpMessageExpression(d), out variable);
 
-        public static DeclarationStatement Declare(CSharpType operationType, string name, OperationExpression value, out OperationExpression response)
+        public static DeclarationStatement Declare(CSharpType operationType, string name, OperationExpression value, out OperationExpression operation)
         {
             var variable = new VariableReference(operationType, name);
-            response = new OperationExpression(variable);
+            operation = new OperationExpression(variable);
             return Declare(variable, value);
         }
 
@@ -31,6 +31,13 @@ namespace AutoRest.CSharp.Common.Output.Models
             var variable = new VariableReference(responseType, name);
             response = new ResponseExpression(variable);
             return Declare(variable, value);
+        }
+
+        public static DeclarationStatement Declare(CSharpType variableType, string name, ValueExpression value, out TypedValueExpression variable)
+        {
+            var variableRef = new VariableReference(variableType, name);
+            variable = variableRef;
+            return Declare(variableRef, value);
         }
 
         public static DeclarationStatement Declare(RequestContextExpression value, out RequestContextExpression variable)
@@ -51,7 +58,7 @@ namespace AutoRest.CSharp.Common.Output.Models
         public static DeclarationStatement Declare(string name, StreamReaderExpression value, out StreamReaderExpression variable)
             => Declare(name, value, d => new StreamReaderExpression(d), out variable);
 
-        public static DeclarationStatement Declare(string name, TypedValueExpression value, out ValueExpression variable)
+        public static DeclarationStatement Declare(string name, TypedValueExpression value, out TypedValueExpression variable)
         {
             var declaration = new VariableReference(value.Type, name);
             variable = declaration;
@@ -106,7 +113,7 @@ namespace AutoRest.CSharp.Common.Output.Models
         public static DeclarationStatement Var(string name, XmlWriterContentExpression value, out XmlWriterContentExpression variable)
             => Var(name, value, d => new XmlWriterContentExpression(d), out variable);
 
-        public static DeclarationStatement Var(string name, TypedValueExpression value, out ValueExpression variable)
+        public static DeclarationStatement Var(string name, TypedValueExpression value, out TypedValueExpression variable)
         {
             var reference = new VariableReference(value.Type, name);
             variable = reference;

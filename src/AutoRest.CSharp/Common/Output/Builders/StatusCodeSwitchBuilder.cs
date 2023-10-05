@@ -308,7 +308,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     : Return(httpMessage.Response);
             }
 
-            var valueStatement = BuildStatusCodeSwitchCaseValueStatement(type, serialization, httpMessage, async, out ValueExpression value);
+            var valueStatement = BuildStatusCodeSwitchCaseValueStatement(type, serialization, httpMessage, async, out TypedValueExpression value);
 
             var returnStatement = ResponseType is not null && !ResponseType.EqualsIgnoreNullable(type)
                 ? Return(ResponseExpression.FromValue(ResponseType, value, httpMessage.Response))
@@ -326,7 +326,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     : Return(ResponseWithHeadersExpression.FromValue(headers, httpMessage.Response));
             }
 
-            var valueStatement = BuildStatusCodeSwitchCaseValueStatement(type, serialization, httpMessage, async, out ValueExpression value);
+            var valueStatement = BuildStatusCodeSwitchCaseValueStatement(type, serialization, httpMessage, async, out TypedValueExpression value);
 
             var returnStatement = ResponseType is not null && !ResponseType.EqualsIgnoreNullable(type)
                     ? Return(ResponseWithHeadersExpression.FromValue(ResponseType, value, headers, httpMessage.Response))
@@ -335,13 +335,13 @@ namespace AutoRest.CSharp.Common.Output.Builders
             return new[] { valueStatement, returnStatement };
         }
 
-        private static MethodBodyStatement BuildStatusCodeSwitchCaseValueStatement(CSharpType type, ObjectSerialization? serialization, HttpMessageExpression httpMessage, bool async, out ValueExpression value)
+        private static MethodBodyStatement BuildStatusCodeSwitchCaseValueStatement(CSharpType type, ObjectSerialization? serialization, HttpMessageExpression httpMessage, bool async, out TypedValueExpression value)
         {
             if (serialization is not null)
             {
                 return new[]
                 {
-                    new DeclareVariableStatement(type, "value", Snippets.Default, out value),
+                    Declare(type, "value", Snippets.Default, out value),
                     serialization switch
                     {
                         JsonSerialization jsonSerialization => JsonSerializationMethodsBuilder.BuildDeserializationForMethods(jsonSerialization, async, value, httpMessage.Response, type.Equals(typeof(BinaryData))),

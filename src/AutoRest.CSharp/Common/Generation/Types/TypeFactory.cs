@@ -256,6 +256,9 @@ namespace AutoRest.CSharp.Generation.Types
         internal static bool IsOperation(CSharpType type)
             => type.IsFrameworkType && (type.FrameworkType == typeof(Operation) || type.FrameworkType == typeof(Operation<>));
 
+        internal static bool IsTaskOfT(CSharpType type)
+            => type.IsFrameworkType && type.FrameworkType == typeof(Task<>);
+
         internal static bool IsTaskOfOperation(CSharpType type)
             => type.IsFrameworkType && type.FrameworkType == typeof(Task<>) && IsOperation(type.Arguments[0]);
 

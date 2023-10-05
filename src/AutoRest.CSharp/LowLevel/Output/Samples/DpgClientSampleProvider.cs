@@ -202,6 +202,12 @@ namespace AutoRest.CSharp.LowLevel.Output.Samples
         private static MethodBodyStatement BuildSampleOperationInvocation(DpgOperationSample sample, ValueExpression clientVar, List<MethodBodyStatement> variableDeclarations, bool isAsync)
         {
             var methodSignature = sample.OperationMethodSignature.WithAsync(isAsync);
+            var returnType = methodSignature.ReturnType ?? throw new InvalidOperationException($"Operation method {methodSignature.Name} signature has no return type");
+            if (methodSignature.Modifiers.HasFlag(MethodSignatureModifiers.Async) && TypeFactory.IsTaskOfT(returnType))
+            {
+                returnType = returnType.Arguments[0];
+            }
+
             var parameterExpressions = sample.GetValueExpressionsForParameters(methodSignature.Parameters, variableDeclarations);
             var invocation = clientVar.Invoke(methodSignature, parameterExpressions.ToArray(), addConfigureAwaitFalse: false);
 
@@ -221,7 +227,7 @@ namespace AutoRest.CSharp.LowLevel.Output.Samples
                      */
                     return new MethodBodyStatement[]
                     {
-                        Declare("operation", new OperationExpression(invocation), out var operation),
+                        Declare(returnType, "operation", new OperationExpression(invocation), out var operation),
                         new ForeachStatement(foreachItemType, "item", operation.Value, isAsync, out var itemVar)
                         {
                             ParseResponse(pageItemType, sample, new BinaryDataExpression(itemVar).ToStream())
@@ -245,15 +251,22 @@ namespace AutoRest.CSharp.LowLevel.Output.Samples
             // if it is not pageable, we just call the operation, declare a local variable and assign the result to it
             if (sample is {ResponseType: {} responseType})
             {
-                var returnType = sample.OperationMethodSignature.ReturnType!;
-
                 if (sample.IsLongRunning)
                 {
                     /*
                     * This will generate code like:
                     * Operation<T> operation = <invocation>;
-                    * BinaryData responseData = operation.Value;
+                    * T responseData = operation.Value;
                     */
+                    if (sample.IsConvenienceSample)
+                    {
+                        return new[]
+                        {
+                            Declare(returnType, "operation", new OperationExpression(invocation), out var operationOfT),
+                            Declare(responseType, "responseData", operationOfT.Value, out _)
+                        };
+                    }
+
                     return new[]
                     {
                         Declare(returnType, "operation", new OperationExpression(invocation), out var operation),
@@ -271,7 +284,7 @@ namespace AutoRest.CSharp.LowLevel.Output.Samples
                 {
                     Declare(returnType, "response", new ResponseExpression(invocation), out var responseOfT),
                     EmptyLine,
-                    ParseResponseOfT(responseType, sample, responseOfT)
+                    sample.HasResponseBody ? ParseResponse(responseType, sample, responseOfT.ContentStream) : InvokeConsoleWriteLine(responseOfT.GetRawResponse().Status)
                 };
             }
 
@@ -291,13 +304,6 @@ namespace AutoRest.CSharp.LowLevel.Output.Samples
                 EmptyLine,
                 InvokeConsoleWriteLine(response.Status)
             };
-        }
-
-        private static MethodBodyStatement ParseResponseOfT(CSharpType responseType, DpgOperationSample sample, ResponseExpression responseVar)
-        {
-            return sample.HasResponseBody
-                ? ParseResponse(responseType, sample, responseVar.ContentStream)
-                : InvokeConsoleWriteLine(responseVar.GetRawResponse().Status);
         }
 
         private static MethodBodyStatement ParseResponse(CSharpType responseType, DpgOperationSample sample, StreamExpression streamVar)

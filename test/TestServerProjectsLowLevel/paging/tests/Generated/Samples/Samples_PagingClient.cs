@@ -1486,7 +1486,6 @@ namespace paging_LowLevel.Samples
             PagingClient client = new PagingClient(credential);
 
             Operation<Pageable<BinaryData>> operation = client.GetMultiplePagesLRO(WaitUntil.Completed, null, null, null);
-            Pageable<BinaryData> responseData = operation.Value;
             foreach (BinaryData item in operation.Value)
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
@@ -1502,7 +1501,6 @@ namespace paging_LowLevel.Samples
             PagingClient client = new PagingClient(credential);
 
             Operation<AsyncPageable<BinaryData>> operation = await client.GetMultiplePagesLROAsync(WaitUntil.Completed, null, null, null);
-            AsyncPageable<BinaryData> responseData = operation.Value;
             await foreach (BinaryData item in operation.Value)
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
@@ -1518,7 +1516,6 @@ namespace paging_LowLevel.Samples
             PagingClient client = new PagingClient(credential);
 
             Operation<Pageable<BinaryData>> operation = client.GetMultiplePagesLRO(WaitUntil.Completed, 1234, 1234, null);
-            Pageable<BinaryData> responseData = operation.Value;
             foreach (BinaryData item in operation.Value)
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
@@ -1535,7 +1532,6 @@ namespace paging_LowLevel.Samples
             PagingClient client = new PagingClient(credential);
 
             Operation<AsyncPageable<BinaryData>> operation = await client.GetMultiplePagesLROAsync(WaitUntil.Completed, 1234, 1234, null);
-            AsyncPageable<BinaryData> responseData = operation.Value;
             await foreach (BinaryData item in operation.Value)
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
