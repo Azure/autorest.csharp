@@ -28,14 +28,14 @@ namespace AutoRest.CSharp.Common.Output.Models
             public static EnumerableExpression Array(CSharpType? elementType, params ValueExpression[] items) => new(elementType ?? typeof(object), new NewArrayExpression(elementType, new ArrayInitializerExpression(items)));
             public static EnumerableExpression Array(CSharpType? elementType, bool isInline, params ValueExpression[] items) => new(elementType ?? typeof(object), new NewArrayExpression(elementType, new ArrayInitializerExpression(items, isInline)));
 
-            public static DictionaryExpression Dictionary(CSharpType dictionaryType) => new(TypeFactory.GetElementType(dictionaryType), new NewDictionaryExpression(dictionaryType));
+            public static DictionaryExpression Dictionary(CSharpType dictionaryType) => new(dictionaryType.Arguments[0], dictionaryType.Arguments[1], new NewDictionaryExpression(dictionaryType));
             public static DictionaryExpression Dictionary(CSharpType keyType, CSharpType valueType) => Dictionary(new CSharpType(typeof(Dictionary<,>), keyType, valueType));
             public static DictionaryExpression Dictionary(CSharpType keyType, CSharpType valueType, params (ValueExpression Key, ValueExpression Value)[] values)
-                => new(valueType, new NewDictionaryExpression(new CSharpType(typeof(Dictionary<,>), keyType, valueType), new DictionaryInitializerExpression(values)));
+                => new(keyType, valueType, new NewDictionaryExpression(new CSharpType(typeof(Dictionary<,>), keyType, valueType), new DictionaryInitializerExpression(values)));
 
             public static TypedValueExpression JsonSerializerOptions() => new FrameworkTypeExpression(typeof(JsonSerializerOptions), new NewJsonSerializerOptionsExpression());
 
-            public static ListExpression List(CSharpType listType) => new(Instance(listType));
+            public static ListExpression List(CSharpType listType) => new(listType.Arguments[0], Instance(listType));
 
             public static FormUrlEncodedContentExpression FormUrlEncodedContent() => new(Instance(typeof(FormUrlEncodedContent)));
             public static MultipartFormDataContentExpression MultipartFormDataContent() => new(Instance(typeof(MultipartFormDataContent)));

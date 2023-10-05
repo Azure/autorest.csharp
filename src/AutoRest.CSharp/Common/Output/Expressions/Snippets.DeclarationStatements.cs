@@ -46,8 +46,14 @@ namespace AutoRest.CSharp.Common.Output.Models
         public static DeclarationStatement Declare(string name, BinaryDataExpression value, out BinaryDataExpression variable)
             => Declare(name, value, d => new BinaryDataExpression(d), out variable);
 
+        public static DeclarationStatement Declare(string name, DictionaryExpression value, out DictionaryExpression variable)
+            => Declare(name, value, d => new DictionaryExpression(value.KeyType, value.ValueType, d), out variable);
+
         public static DeclarationStatement Declare(string name, JsonElementExpression value, out JsonElementExpression variable)
             => Declare(name, value, d => new JsonElementExpression(d), out variable);
+
+        public static DeclarationStatement Declare(string name, ListExpression value, out ListExpression variable)
+            => Declare(name, value, d => new ListExpression(value.ItemType, d), out variable);
 
         public static DeclarationStatement Declare(string name, OperationExpression value, out OperationExpression variable)
             => Declare(name, value, d => new OperationExpression(d), out variable);
@@ -75,7 +81,7 @@ namespace AutoRest.CSharp.Common.Output.Models
             => UsingVar(name, value, d => new JsonDocumentExpression(d), out variable);
 
         public static DeclarationStatement Var(string name, DictionaryExpression value, out DictionaryExpression variable)
-            => Var(name, value, d => new DictionaryExpression(value.ValueType, d), out variable);
+            => Var(name, value, d => new DictionaryExpression(value.KeyType, value.ValueType, d), out variable);
 
         public static DeclarationStatement Var(string name, FormUrlEncodedContentExpression value, out FormUrlEncodedContentExpression variable)
             => Var(name, value, d => new FormUrlEncodedContentExpression(d), out variable);
@@ -84,7 +90,7 @@ namespace AutoRest.CSharp.Common.Output.Models
             => Var(name, value, d => new HttpMessageExpression(d), out variable);
 
         public static DeclarationStatement Var(string name, ListExpression value, out ListExpression variable)
-            => Var(name, value, d => new ListExpression(d), out variable);
+            => Var(name, value, d => new ListExpression(value.ItemType, d), out variable);
 
         public static DeclarationStatement Var(string name, MultipartFormDataContentExpression value, out MultipartFormDataContentExpression variable)
             => Var(name, value, d => new MultipartFormDataContentExpression(d), out variable);

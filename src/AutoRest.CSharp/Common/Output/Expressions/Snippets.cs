@@ -44,9 +44,12 @@ namespace AutoRest.CSharp.Common.Output.Models
             {
                 NullConditionalExpression nullConditional => nullConditional.Inner,
                 MemberExpression { Inner: {} inner } member => member with {Inner = RemoveAllNullConditional(inner)},
-                TypedValueExpression typed => typed with {Untyped = RemoveAllNullConditional(typed.Untyped)},
+                TypedValueExpression typed => RemoveAllNullConditional(typed),
                 _ => expression
             };
+
+        public static TypedValueExpression RemoveAllNullConditional(TypedValueExpression expression)
+            => expression with {Untyped = RemoveAllNullConditional(expression.Untyped)};
 
         public static ValueExpression Literal(object? value) => new FormattableStringToExpression($"{value:L}");
 

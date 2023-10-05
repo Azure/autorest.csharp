@@ -84,11 +84,11 @@ namespace AutoRest.CSharp.Common.Output.Builders
             return statement;
         }
 
-        public static MethodBodyStatement SerializeExpression(XmlWriterExpression xmlWriter, XmlElementSerialization serialization, ValueExpression expression)
+        public static MethodBodyStatement SerializeExpression(XmlWriterExpression xmlWriter, XmlElementSerialization serialization, TypedValueExpression expression)
             => serialization switch
             {
                 XmlArraySerialization array => SerializeArray(xmlWriter, array, new EnumerableExpression(TypeFactory.GetElementType(array.Type), expression)).AsStatement(),
-                XmlDictionarySerialization dictionary => SerializeDictionary(xmlWriter, dictionary, new DictionaryExpression(TypeFactory.GetElementType(dictionary.Type), expression)),
+                XmlDictionarySerialization dictionary => SerializeDictionary(xmlWriter, dictionary, new DictionaryExpression(dictionary.Type.Arguments[0], dictionary.Type.Arguments[1], expression)),
                 XmlElementValueSerialization value => SerializeElement(xmlWriter, value, expression),
                 _ => throw new NotSupportedException()
             };

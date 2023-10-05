@@ -500,7 +500,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             return new BodyRequestPart(value, content, conversions, SkipNullCheck: true);
         }
 
-        private static RequestContentExpression GetRequestContentForSerialization(ObjectSerialization serialization, ValueExpression expression, out MethodBodyStatement conversion)
+        private static RequestContentExpression GetRequestContentForSerialization(ObjectSerialization serialization, TypedValueExpression expression, out MethodBodyStatement conversion)
         {
             switch (serialization)
             {

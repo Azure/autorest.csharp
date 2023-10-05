@@ -433,7 +433,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
         {
             var valueSerialization = SerializationBuilder.BuildJsonSerialization(property.Type, parameter.Type, false);
 
-            var propertyName = property.SerializedName ?? property.Name;
+            var propertyName = property.SerializedName;
             var writePropertyStatement = new[]
             {
                 jsonWriter.WritePropertyName(propertyName),
