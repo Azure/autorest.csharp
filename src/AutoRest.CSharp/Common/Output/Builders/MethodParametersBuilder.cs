@@ -189,26 +189,35 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 return;
             }
 
+            Parameter parameter;
+            string nameInRequest;
             switch (conditionHeaderFlag)
             {
                 case RequestConditionHeaders.IfMatch | RequestConditionHeaders.IfNoneMatch:
-                    AddCreateMessageParameter(KnownParameters.MatchConditionsParameter);
-                    _protocolParameters.Add(KnownParameters.MatchConditionsParameter);
-                    _convenienceParameters.Add(KnownParameters.MatchConditionsParameter);
-                    AddReference(KnownParameters.MatchConditionsParameter.Name, null, KnownParameters.MatchConditionsParameter, serializationFormat);
+                    requestConditionRequestParameter = null;
+                    parameter = KnownParameters.MatchConditionsParameter;
+                    nameInRequest = parameter.Name;
                     break;
+
                 case RequestConditionHeaders.IfMatch:
                 case RequestConditionHeaders.IfNoneMatch:
-                    AddReferenceAndParameter(requestConditionRequestParameter, typeof(ETag));
+                    var type = new CSharpType(typeof(ETag), requestConditionRequestParameter.Type.IsNullable);
+                    parameter = Parameter.FromInputParameter(requestConditionRequestParameter, type, _keepClientDefaultValue, _typeFactory);
+                    serializationFormat = SerializationBuilder.GetSerializationFormat(requestConditionRequestParameter.Type);
+                    nameInRequest = requestConditionRequestParameter.NameInRequest;
                     break;
+
                 default:
-                    var parameter = KnownParameters.RequestConditionsParameter with { Validation = new Validation(ValidationType.AssertNull, conditionHeaderFlag) };
-                    AddCreateMessageParameter(parameter);
-                    _protocolParameters.Add(parameter);
-                    _convenienceParameters.Add(parameter);
-                    AddReference(parameter.Name, null, parameter, serializationFormat);
+                    parameter = KnownParameters.RequestConditionsParameter with { Validation = new Validation(ValidationType.AssertNull, conditionHeaderFlag) };
+                    requestConditionRequestParameter = null;
+                    nameInRequest = parameter.Name;
                     break;
             }
+
+            AddCreateMessageParameter(parameter);
+            _protocolParameters.Add(parameter);
+            _convenienceParameters.Add(parameter);
+            AddReference(nameInRequest, requestConditionRequestParameter, parameter, serializationFormat);
         }
 
         private void AddRequestContext()
