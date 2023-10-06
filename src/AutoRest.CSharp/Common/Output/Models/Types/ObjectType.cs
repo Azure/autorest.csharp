@@ -81,8 +81,8 @@ namespace AutoRest.CSharp.Output.Models.Types
                 return string.Empty;
             }
 
-            var childrenList = string.Join(", ", Discriminator.Implementations.Select(implementation => $"<see cref=\"{implementation.Type.Implementation.Type.Name}\"/>")).ReplaceLast(", ", " and ");
-            return $"{System.Environment.NewLine}{DiscriminatorDescFixedPart[0]}<see cref=\"{Type.Name}\"/>{DiscriminatorDescFixedPart[1]}{System.Environment.NewLine}{DiscriminatorDescFixedPart[2]}{childrenList}.";
+            var childrenList = string.Join(", ", Discriminator.Implementations.Select(implementation => $"<see cref=\"global::{implementation.Type.Namespace}.{implementation.Type.ToStringForDocs()}\"/>")).ReplaceLast(", ", " and ");
+            return $"{System.Environment.NewLine}{DiscriminatorDescFixedPart[0]}<see cref=\"global::{Type.Namespace}.{Type.ToStringForDocs()}\"/>{DiscriminatorDescFixedPart[1]}{System.Environment.NewLine}{DiscriminatorDescFixedPart[2]}{childrenList}.";
         }
     }
 }
