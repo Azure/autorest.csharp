@@ -5,7 +5,7 @@
       <example>
 This sample shows how to call HeadNoParamsAsync and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("ParamsClient_KEY"));
 ParamsClient client = new ParamsClient(credential);
 
 Response response = await client.HeadNoParamsAsync(null, null);
@@ -15,7 +15,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call HeadNoParamsAsync with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("ParamsClient_KEY"));
 ParamsClient client = new ParamsClient(credential);
 
 Response response = await client.HeadNoParamsAsync("<newParameter>", null);
@@ -28,7 +28,7 @@ Console.WriteLine(element.ToString());
       <example>
 This sample shows how to call HeadNoParams and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("ParamsClient_KEY"));
 ParamsClient client = new ParamsClient(credential);
 
 Response response = client.HeadNoParams(null, null);
@@ -38,7 +38,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call HeadNoParams with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("ParamsClient_KEY"));
 ParamsClient client = new ParamsClient(credential);
 
 Response response = client.HeadNoParams("<newParameter>", null);
@@ -51,7 +51,7 @@ Console.WriteLine(element.ToString());
       <example>
 This sample shows how to call GetRequiredAsync and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("ParamsClient_KEY"));
 ParamsClient client = new ParamsClient(credential);
 
 Response response = await client.GetRequiredAsync("<parameter>", null, null);
@@ -61,7 +61,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call GetRequiredAsync with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("ParamsClient_KEY"));
 ParamsClient client = new ParamsClient(credential);
 
 Response response = await client.GetRequiredAsync("<parameter>", "<newParameter>", null);
@@ -74,7 +74,7 @@ Console.WriteLine(element.ToString());
       <example>
 This sample shows how to call GetRequired and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("ParamsClient_KEY"));
 ParamsClient client = new ParamsClient(credential);
 
 Response response = client.GetRequired("<parameter>", null, null);
@@ -84,7 +84,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call GetRequired with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("ParamsClient_KEY"));
 ParamsClient client = new ParamsClient(credential);
 
 Response response = client.GetRequired("<parameter>", "<newParameter>", null);
@@ -97,7 +97,7 @@ Console.WriteLine(element.ToString());
       <example>
 This sample shows how to call PutRequiredOptionalAsync and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("ParamsClient_KEY"));
 ParamsClient client = new ParamsClient(credential);
 
 Response response = await client.PutRequiredOptionalAsync("<requiredParam>", null, null, null);
@@ -107,7 +107,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call PutRequiredOptionalAsync with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("ParamsClient_KEY"));
 ParamsClient client = new ParamsClient(credential);
 
 Response response = await client.PutRequiredOptionalAsync("<requiredParam>", "<optionalParam>", "<newParameter>", null);
@@ -120,7 +120,7 @@ Console.WriteLine(element.ToString());
       <example>
 This sample shows how to call PutRequiredOptional and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("ParamsClient_KEY"));
 ParamsClient client = new ParamsClient(credential);
 
 Response response = client.PutRequiredOptional("<requiredParam>", null, null, null);
@@ -130,7 +130,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call PutRequiredOptional with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("ParamsClient_KEY"));
 ParamsClient client = new ParamsClient(credential);
 
 Response response = client.PutRequiredOptional("<requiredParam>", "<optionalParam>", "<newParameter>", null);
@@ -143,7 +143,7 @@ Console.WriteLine(element.ToString());
       <example>
 This sample shows how to call PostParametersAsync and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("ParamsClient_KEY"));
 ParamsClient client = new ParamsClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -157,7 +157,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call PostParametersAsync with all parameters and request content and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("ParamsClient_KEY"));
 ParamsClient client = new ParamsClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -174,7 +174,7 @@ Console.WriteLine(element.ToString());
       <example>
 This sample shows how to call PostParameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("ParamsClient_KEY"));
 ParamsClient client = new ParamsClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -188,7 +188,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call PostParameters with all parameters and request content and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("ParamsClient_KEY"));
 ParamsClient client = new ParamsClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -205,7 +205,7 @@ Console.WriteLine(element.ToString());
       <example>
 This sample shows how to call DeleteParametersAsync.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("ParamsClient_KEY"));
 ParamsClient client = new ParamsClient(credential);
 
 Response response = await client.DeleteParametersAsync();
@@ -214,7 +214,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call DeleteParametersAsync with all request content.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("ParamsClient_KEY"));
 ParamsClient client = new ParamsClient(credential);
 
 Response response = await client.DeleteParametersAsync();
@@ -226,7 +226,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call DeleteParameters.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("ParamsClient_KEY"));
 ParamsClient client = new ParamsClient(credential);
 
 Response response = client.DeleteParameters();
@@ -235,7 +235,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call DeleteParameters with all request content.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("ParamsClient_KEY"));
 ParamsClient client = new ParamsClient(credential);
 
 Response response = client.DeleteParameters();
@@ -247,7 +247,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call GetOptionalAsync and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("ParamsClient_KEY"));
 ParamsClient client = new ParamsClient(credential);
 
 Response response = await client.GetOptionalAsync(null, null, null);
@@ -257,7 +257,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call GetOptionalAsync with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("ParamsClient_KEY"));
 ParamsClient client = new ParamsClient(credential);
 
 Response response = await client.GetOptionalAsync("<optionalParam>", "<newParameter>", null);
@@ -270,7 +270,7 @@ Console.WriteLine(element.ToString());
       <example>
 This sample shows how to call GetOptional and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("ParamsClient_KEY"));
 ParamsClient client = new ParamsClient(credential);
 
 Response response = client.GetOptional(null, null, null);
@@ -280,7 +280,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call GetOptional with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("ParamsClient_KEY"));
 ParamsClient client = new ParamsClient(credential);
 
 Response response = client.GetOptional("<optionalParam>", "<newParameter>", null);
@@ -293,7 +293,7 @@ Console.WriteLine(element.ToString());
       <example>
 This sample shows how to call GetNewOperationAsync and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("ParamsClient_KEY"));
 ParamsClient client = new ParamsClient(credential);
 
 Response response = await client.GetNewOperationAsync(null);
@@ -303,7 +303,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call GetNewOperationAsync with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("ParamsClient_KEY"));
 ParamsClient client = new ParamsClient(credential);
 
 Response response = await client.GetNewOperationAsync(null);
@@ -316,7 +316,7 @@ Console.WriteLine(element.ToString());
       <example>
 This sample shows how to call GetNewOperation and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("ParamsClient_KEY"));
 ParamsClient client = new ParamsClient(credential);
 
 Response response = client.GetNewOperation(null);
@@ -326,7 +326,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call GetNewOperation with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("ParamsClient_KEY"));
 ParamsClient client = new ParamsClient(credential);
 
 Response response = client.GetNewOperation(null);

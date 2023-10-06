@@ -5,7 +5,7 @@
       <example>
 This sample shows how to call GetBooleanTrueAsync.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
 PathsClient client = new PathsClient(credential);
 
 Response response = await client.GetBooleanTrueAsync();
@@ -14,7 +14,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call GetBooleanTrueAsync with all request content.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
 PathsClient client = new PathsClient(credential);
 
 Response response = await client.GetBooleanTrueAsync();
@@ -26,7 +26,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call GetBooleanTrue.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
 PathsClient client = new PathsClient(credential);
 
 Response response = client.GetBooleanTrue();
@@ -35,7 +35,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call GetBooleanTrue with all request content.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
 PathsClient client = new PathsClient(credential);
 
 Response response = client.GetBooleanTrue();
@@ -47,7 +47,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call GetBooleanFalseAsync.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
 PathsClient client = new PathsClient(credential);
 
 Response response = await client.GetBooleanFalseAsync();
@@ -56,7 +56,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call GetBooleanFalseAsync with all request content.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
 PathsClient client = new PathsClient(credential);
 
 Response response = await client.GetBooleanFalseAsync();
@@ -68,7 +68,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call GetBooleanFalse.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
 PathsClient client = new PathsClient(credential);
 
 Response response = client.GetBooleanFalse();
@@ -77,7 +77,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call GetBooleanFalse with all request content.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
 PathsClient client = new PathsClient(credential);
 
 Response response = client.GetBooleanFalse();
@@ -89,7 +89,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call GetIntOneMillionAsync.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
 PathsClient client = new PathsClient(credential);
 
 Response response = await client.GetIntOneMillionAsync();
@@ -98,7 +98,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call GetIntOneMillionAsync with all request content.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
 PathsClient client = new PathsClient(credential);
 
 Response response = await client.GetIntOneMillionAsync();
@@ -110,7 +110,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call GetIntOneMillion.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
 PathsClient client = new PathsClient(credential);
 
 Response response = client.GetIntOneMillion();
@@ -119,7 +119,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call GetIntOneMillion with all request content.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
 PathsClient client = new PathsClient(credential);
 
 Response response = client.GetIntOneMillion();
@@ -131,7 +131,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call GetIntNegativeOneMillionAsync.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
 PathsClient client = new PathsClient(credential);
 
 Response response = await client.GetIntNegativeOneMillionAsync();
@@ -140,7 +140,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call GetIntNegativeOneMillionAsync with all request content.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
 PathsClient client = new PathsClient(credential);
 
 Response response = await client.GetIntNegativeOneMillionAsync();
@@ -152,7 +152,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call GetIntNegativeOneMillion.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
 PathsClient client = new PathsClient(credential);
 
 Response response = client.GetIntNegativeOneMillion();
@@ -161,7 +161,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call GetIntNegativeOneMillion with all request content.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
 PathsClient client = new PathsClient(credential);
 
 Response response = client.GetIntNegativeOneMillion();
@@ -173,7 +173,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call GetTenBillionAsync.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
 PathsClient client = new PathsClient(credential);
 
 Response response = await client.GetTenBillionAsync();
@@ -182,7 +182,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call GetTenBillionAsync with all request content.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
 PathsClient client = new PathsClient(credential);
 
 Response response = await client.GetTenBillionAsync();
@@ -194,7 +194,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call GetTenBillion.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
 PathsClient client = new PathsClient(credential);
 
 Response response = client.GetTenBillion();
@@ -203,7 +203,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call GetTenBillion with all request content.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
 PathsClient client = new PathsClient(credential);
 
 Response response = client.GetTenBillion();
@@ -215,7 +215,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call GetNegativeTenBillionAsync.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
 PathsClient client = new PathsClient(credential);
 
 Response response = await client.GetNegativeTenBillionAsync();
@@ -224,7 +224,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call GetNegativeTenBillionAsync with all request content.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
 PathsClient client = new PathsClient(credential);
 
 Response response = await client.GetNegativeTenBillionAsync();
@@ -236,7 +236,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call GetNegativeTenBillion.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
 PathsClient client = new PathsClient(credential);
 
 Response response = client.GetNegativeTenBillion();
@@ -245,7 +245,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call GetNegativeTenBillion with all request content.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
 PathsClient client = new PathsClient(credential);
 
 Response response = client.GetNegativeTenBillion();
@@ -257,7 +257,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call FloatScientificPositiveAsync.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
 PathsClient client = new PathsClient(credential);
 
 Response response = await client.FloatScientificPositiveAsync();
@@ -266,7 +266,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call FloatScientificPositiveAsync with all request content.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
 PathsClient client = new PathsClient(credential);
 
 Response response = await client.FloatScientificPositiveAsync();
@@ -278,7 +278,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call FloatScientificPositive.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
 PathsClient client = new PathsClient(credential);
 
 Response response = client.FloatScientificPositive();
@@ -287,7 +287,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call FloatScientificPositive with all request content.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
 PathsClient client = new PathsClient(credential);
 
 Response response = client.FloatScientificPositive();
@@ -299,7 +299,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call FloatScientificNegativeAsync.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
 PathsClient client = new PathsClient(credential);
 
 Response response = await client.FloatScientificNegativeAsync();
@@ -308,7 +308,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call FloatScientificNegativeAsync with all request content.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
 PathsClient client = new PathsClient(credential);
 
 Response response = await client.FloatScientificNegativeAsync();
@@ -320,7 +320,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call FloatScientificNegative.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
 PathsClient client = new PathsClient(credential);
 
 Response response = client.FloatScientificNegative();
@@ -329,7 +329,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call FloatScientificNegative with all request content.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
 PathsClient client = new PathsClient(credential);
 
 Response response = client.FloatScientificNegative();
@@ -341,7 +341,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call DoubleDecimalPositiveAsync.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
 PathsClient client = new PathsClient(credential);
 
 Response response = await client.DoubleDecimalPositiveAsync();
@@ -350,7 +350,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call DoubleDecimalPositiveAsync with all request content.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
 PathsClient client = new PathsClient(credential);
 
 Response response = await client.DoubleDecimalPositiveAsync();
@@ -362,7 +362,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call DoubleDecimalPositive.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
 PathsClient client = new PathsClient(credential);
 
 Response response = client.DoubleDecimalPositive();
@@ -371,7 +371,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call DoubleDecimalPositive with all request content.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
 PathsClient client = new PathsClient(credential);
 
 Response response = client.DoubleDecimalPositive();
@@ -383,7 +383,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call DoubleDecimalNegativeAsync.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
 PathsClient client = new PathsClient(credential);
 
 Response response = await client.DoubleDecimalNegativeAsync();
@@ -392,7 +392,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call DoubleDecimalNegativeAsync with all request content.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
 PathsClient client = new PathsClient(credential);
 
 Response response = await client.DoubleDecimalNegativeAsync();
@@ -404,7 +404,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call DoubleDecimalNegative.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
 PathsClient client = new PathsClient(credential);
 
 Response response = client.DoubleDecimalNegative();
@@ -413,7 +413,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call DoubleDecimalNegative with all request content.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
 PathsClient client = new PathsClient(credential);
 
 Response response = client.DoubleDecimalNegative();
@@ -425,7 +425,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call StringUnicodeAsync.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
 PathsClient client = new PathsClient(credential);
 
 Response response = await client.StringUnicodeAsync();
@@ -434,7 +434,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call StringUnicodeAsync with all request content.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
 PathsClient client = new PathsClient(credential);
 
 Response response = await client.StringUnicodeAsync();
@@ -446,7 +446,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call StringUnicode.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
 PathsClient client = new PathsClient(credential);
 
 Response response = client.StringUnicode();
@@ -455,7 +455,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call StringUnicode with all request content.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
 PathsClient client = new PathsClient(credential);
 
 Response response = client.StringUnicode();
@@ -467,7 +467,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call StringUrlEncodedAsync.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
 PathsClient client = new PathsClient(credential);
 
 Response response = await client.StringUrlEncodedAsync();
@@ -476,7 +476,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call StringUrlEncodedAsync with all request content.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
 PathsClient client = new PathsClient(credential);
 
 Response response = await client.StringUrlEncodedAsync();
@@ -488,7 +488,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call StringUrlEncoded.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
 PathsClient client = new PathsClient(credential);
 
 Response response = client.StringUrlEncoded();
@@ -497,7 +497,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call StringUrlEncoded with all request content.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
 PathsClient client = new PathsClient(credential);
 
 Response response = client.StringUrlEncoded();
@@ -509,7 +509,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call StringUrlNonEncodedAsync.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
 PathsClient client = new PathsClient(credential);
 
 Response response = await client.StringUrlNonEncodedAsync();
@@ -518,7 +518,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call StringUrlNonEncodedAsync with all request content.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
 PathsClient client = new PathsClient(credential);
 
 Response response = await client.StringUrlNonEncodedAsync();
@@ -530,7 +530,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call StringUrlNonEncoded.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
 PathsClient client = new PathsClient(credential);
 
 Response response = client.StringUrlNonEncoded();
@@ -539,7 +539,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call StringUrlNonEncoded with all request content.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
 PathsClient client = new PathsClient(credential);
 
 Response response = client.StringUrlNonEncoded();
@@ -551,7 +551,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call StringEmptyAsync.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
 PathsClient client = new PathsClient(credential);
 
 Response response = await client.StringEmptyAsync();
@@ -560,7 +560,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call StringEmptyAsync with all request content.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
 PathsClient client = new PathsClient(credential);
 
 Response response = await client.StringEmptyAsync();
@@ -572,7 +572,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call StringEmpty.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
 PathsClient client = new PathsClient(credential);
 
 Response response = client.StringEmpty();
@@ -581,7 +581,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call StringEmpty with all request content.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
 PathsClient client = new PathsClient(credential);
 
 Response response = client.StringEmpty();
@@ -593,7 +593,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call StringNullAsync.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
 PathsClient client = new PathsClient(credential);
 
 Response response = await client.StringNullAsync("<stringPath>");
@@ -602,7 +602,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call StringNullAsync with all parameters.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
 PathsClient client = new PathsClient(credential);
 
 Response response = await client.StringNullAsync("<stringPath>");
@@ -614,7 +614,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call StringNull.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
 PathsClient client = new PathsClient(credential);
 
 Response response = client.StringNull("<stringPath>");
@@ -623,7 +623,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call StringNull with all parameters.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
 PathsClient client = new PathsClient(credential);
 
 Response response = client.StringNull("<stringPath>");
@@ -635,7 +635,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call EnumValidAsync.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
 PathsClient client = new PathsClient(credential);
 
 Response response = await client.EnumValidAsync("red color");
@@ -644,7 +644,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call EnumValidAsync with all parameters.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
 PathsClient client = new PathsClient(credential);
 
 Response response = await client.EnumValidAsync("red color");
@@ -656,7 +656,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call EnumValid.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
 PathsClient client = new PathsClient(credential);
 
 Response response = client.EnumValid("red color");
@@ -665,7 +665,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call EnumValid with all parameters.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
 PathsClient client = new PathsClient(credential);
 
 Response response = client.EnumValid("red color");
@@ -677,7 +677,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call EnumNullAsync.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
 PathsClient client = new PathsClient(credential);
 
 Response response = await client.EnumNullAsync("red color");
@@ -686,7 +686,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call EnumNullAsync with all parameters.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
 PathsClient client = new PathsClient(credential);
 
 Response response = await client.EnumNullAsync("red color");
@@ -698,7 +698,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call EnumNull.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
 PathsClient client = new PathsClient(credential);
 
 Response response = client.EnumNull("red color");
@@ -707,7 +707,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call EnumNull with all parameters.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
 PathsClient client = new PathsClient(credential);
 
 Response response = client.EnumNull("red color");
@@ -719,7 +719,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call ByteMultiByteAsync.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
 PathsClient client = new PathsClient(credential);
 
 Response response = await client.ByteMultiByteAsync(BinaryData.FromObjectAsJson(new object()));
@@ -728,7 +728,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call ByteMultiByteAsync with all parameters.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
 PathsClient client = new PathsClient(credential);
 
 Response response = await client.ByteMultiByteAsync(BinaryData.FromObjectAsJson(new object()));
@@ -740,7 +740,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call ByteMultiByte.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
 PathsClient client = new PathsClient(credential);
 
 Response response = client.ByteMultiByte(BinaryData.FromObjectAsJson(new object()));
@@ -749,7 +749,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call ByteMultiByte with all parameters.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
 PathsClient client = new PathsClient(credential);
 
 Response response = client.ByteMultiByte(BinaryData.FromObjectAsJson(new object()));
@@ -761,7 +761,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call ByteEmptyAsync.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
 PathsClient client = new PathsClient(credential);
 
 Response response = await client.ByteEmptyAsync();
@@ -770,7 +770,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call ByteEmptyAsync with all request content.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
 PathsClient client = new PathsClient(credential);
 
 Response response = await client.ByteEmptyAsync();
@@ -782,7 +782,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call ByteEmpty.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
 PathsClient client = new PathsClient(credential);
 
 Response response = client.ByteEmpty();
@@ -791,7 +791,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call ByteEmpty with all request content.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
 PathsClient client = new PathsClient(credential);
 
 Response response = client.ByteEmpty();
@@ -803,7 +803,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call ByteNullAsync.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
 PathsClient client = new PathsClient(credential);
 
 Response response = await client.ByteNullAsync(BinaryData.FromObjectAsJson(new object()));
@@ -812,7 +812,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call ByteNullAsync with all parameters.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
 PathsClient client = new PathsClient(credential);
 
 Response response = await client.ByteNullAsync(BinaryData.FromObjectAsJson(new object()));
@@ -824,7 +824,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call ByteNull.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
 PathsClient client = new PathsClient(credential);
 
 Response response = client.ByteNull(BinaryData.FromObjectAsJson(new object()));
@@ -833,7 +833,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call ByteNull with all parameters.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
 PathsClient client = new PathsClient(credential);
 
 Response response = client.ByteNull(BinaryData.FromObjectAsJson(new object()));
@@ -845,7 +845,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call DateValidAsync.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
 PathsClient client = new PathsClient(credential);
 
 Response response = await client.DateValidAsync();
@@ -854,7 +854,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call DateValidAsync with all request content.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
 PathsClient client = new PathsClient(credential);
 
 Response response = await client.DateValidAsync();
@@ -866,7 +866,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call DateValid.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
 PathsClient client = new PathsClient(credential);
 
 Response response = client.DateValid();
@@ -875,7 +875,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call DateValid with all request content.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
 PathsClient client = new PathsClient(credential);
 
 Response response = client.DateValid();
@@ -887,7 +887,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call DateNullAsync.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
 PathsClient client = new PathsClient(credential);
 
 Response response = await client.DateNullAsync(DateTimeOffset.Parse("2022-05-10"));
@@ -896,7 +896,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call DateNullAsync with all parameters.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
 PathsClient client = new PathsClient(credential);
 
 Response response = await client.DateNullAsync(DateTimeOffset.Parse("2022-05-10"));
@@ -908,7 +908,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call DateNull.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
 PathsClient client = new PathsClient(credential);
 
 Response response = client.DateNull(DateTimeOffset.Parse("2022-05-10"));
@@ -917,7 +917,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call DateNull with all parameters.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
 PathsClient client = new PathsClient(credential);
 
 Response response = client.DateNull(DateTimeOffset.Parse("2022-05-10"));
@@ -929,7 +929,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call DateTimeValidAsync.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
 PathsClient client = new PathsClient(credential);
 
 Response response = await client.DateTimeValidAsync();
@@ -938,7 +938,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call DateTimeValidAsync with all request content.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
 PathsClient client = new PathsClient(credential);
 
 Response response = await client.DateTimeValidAsync();
@@ -950,7 +950,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call DateTimeValid.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
 PathsClient client = new PathsClient(credential);
 
 Response response = client.DateTimeValid();
@@ -959,7 +959,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call DateTimeValid with all request content.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
 PathsClient client = new PathsClient(credential);
 
 Response response = client.DateTimeValid();
@@ -971,7 +971,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call DateTimeNullAsync.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
 PathsClient client = new PathsClient(credential);
 
 Response response = await client.DateTimeNullAsync(DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"));
@@ -980,7 +980,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call DateTimeNullAsync with all parameters.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
 PathsClient client = new PathsClient(credential);
 
 Response response = await client.DateTimeNullAsync(DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"));
@@ -992,7 +992,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call DateTimeNull.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
 PathsClient client = new PathsClient(credential);
 
 Response response = client.DateTimeNull(DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"));
@@ -1001,7 +1001,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call DateTimeNull with all parameters.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
 PathsClient client = new PathsClient(credential);
 
 Response response = client.DateTimeNull(DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"));
@@ -1013,7 +1013,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call Base64UrlAsync.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
 PathsClient client = new PathsClient(credential);
 
 Response response = await client.Base64UrlAsync(BinaryData.FromObjectAsJson(new object()));
@@ -1022,7 +1022,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Base64UrlAsync with all parameters.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
 PathsClient client = new PathsClient(credential);
 
 Response response = await client.Base64UrlAsync(BinaryData.FromObjectAsJson(new object()));
@@ -1034,7 +1034,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call Base64Url.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
 PathsClient client = new PathsClient(credential);
 
 Response response = client.Base64Url(BinaryData.FromObjectAsJson(new object()));
@@ -1043,7 +1043,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Base64Url with all parameters.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
 PathsClient client = new PathsClient(credential);
 
 Response response = client.Base64Url(BinaryData.FromObjectAsJson(new object()));
@@ -1055,7 +1055,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call ArrayCsvInPathAsync.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
 PathsClient client = new PathsClient(credential);
 
 Response response = await client.ArrayCsvInPathAsync(new string[] { "<arrayPath>" });
@@ -1064,7 +1064,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call ArrayCsvInPathAsync with all parameters.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
 PathsClient client = new PathsClient(credential);
 
 Response response = await client.ArrayCsvInPathAsync(new string[] { "<arrayPath>" });
@@ -1076,7 +1076,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call ArrayCsvInPath.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
 PathsClient client = new PathsClient(credential);
 
 Response response = client.ArrayCsvInPath(new string[] { "<arrayPath>" });
@@ -1085,7 +1085,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call ArrayCsvInPath with all parameters.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
 PathsClient client = new PathsClient(credential);
 
 Response response = client.ArrayCsvInPath(new string[] { "<arrayPath>" });
@@ -1097,7 +1097,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call UnixTimeUrlAsync.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
 PathsClient client = new PathsClient(credential);
 
 Response response = await client.UnixTimeUrlAsync(DateTimeOffset.FromUnixTimeSeconds(1652209051L));
@@ -1106,7 +1106,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call UnixTimeUrlAsync with all parameters.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
 PathsClient client = new PathsClient(credential);
 
 Response response = await client.UnixTimeUrlAsync(DateTimeOffset.FromUnixTimeSeconds(1652209051L));
@@ -1118,7 +1118,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call UnixTimeUrl.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
 PathsClient client = new PathsClient(credential);
 
 Response response = client.UnixTimeUrl(DateTimeOffset.FromUnixTimeSeconds(1652209051L));
@@ -1127,7 +1127,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call UnixTimeUrl with all parameters.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
 PathsClient client = new PathsClient(credential);
 
 Response response = client.UnixTimeUrl(DateTimeOffset.FromUnixTimeSeconds(1652209051L));

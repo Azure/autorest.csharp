@@ -25,7 +25,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         public void Example_TopAction_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("NewProjectTypeSpecClient_KEY"));
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
             Response response = client.TopAction(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"), null);
@@ -45,7 +45,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         public async Task Example_TopAction_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("NewProjectTypeSpecClient_KEY"));
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
             Response response = await client.TopActionAsync(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"), null);
@@ -65,7 +65,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         public void Example_TopAction_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("NewProjectTypeSpecClient_KEY"));
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
             Response<Thing> response = client.TopAction(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
@@ -76,7 +76,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         public async Task Example_TopAction_ShortVersion_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("NewProjectTypeSpecClient_KEY"));
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
             Response<Thing> response = await client.TopActionAsync(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
@@ -87,7 +87,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         public void Example_TopAction_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("NewProjectTypeSpecClient_KEY"));
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
             Response response = client.TopAction(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"), null);
@@ -111,7 +111,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         public async Task Example_TopAction_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("NewProjectTypeSpecClient_KEY"));
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
             Response response = await client.TopActionAsync(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"), null);
@@ -135,7 +135,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         public void Example_TopAction_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("NewProjectTypeSpecClient_KEY"));
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
             Response<Thing> response = client.TopAction(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
@@ -146,7 +146,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         public async Task Example_TopAction_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("NewProjectTypeSpecClient_KEY"));
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
             Response<Thing> response = await client.TopActionAsync(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
@@ -157,7 +157,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         public void Example_TopAction2_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("NewProjectTypeSpecClient_KEY"));
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
             Response response = client.TopAction2(null);
@@ -177,7 +177,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         public async Task Example_TopAction2_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("NewProjectTypeSpecClient_KEY"));
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
             Response response = await client.TopAction2Async(null);
@@ -197,7 +197,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         public void Example_TopAction2_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("NewProjectTypeSpecClient_KEY"));
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
             Response response = client.TopAction2(null);
@@ -221,7 +221,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         public async Task Example_TopAction2_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("NewProjectTypeSpecClient_KEY"));
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
             Response response = await client.TopAction2Async(null);
@@ -245,7 +245,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         public void Example_PatchAction_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("NewProjectTypeSpecClient_KEY"));
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
             RequestContent content = RequestContent.Create(new
@@ -275,7 +275,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         public async Task Example_PatchAction_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("NewProjectTypeSpecClient_KEY"));
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
             RequestContent content = RequestContent.Create(new
@@ -305,7 +305,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         public void Example_PatchAction_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("NewProjectTypeSpecClient_KEY"));
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
             RequestContent content = RequestContent.Create(new
@@ -343,7 +343,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         public async Task Example_PatchAction_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("NewProjectTypeSpecClient_KEY"));
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
             RequestContent content = RequestContent.Create(new
@@ -381,7 +381,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         public void Example_AnonymousBody_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("NewProjectTypeSpecClient_KEY"));
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
             RequestContent content = RequestContent.Create(new
@@ -411,7 +411,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         public async Task Example_AnonymousBody_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("NewProjectTypeSpecClient_KEY"));
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
             RequestContent content = RequestContent.Create(new
@@ -441,7 +441,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         public void Example_AnonymousBody_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("NewProjectTypeSpecClient_KEY"));
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
             Thing thing = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>");
@@ -453,7 +453,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         public async Task Example_AnonymousBody_ShortVersion_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("NewProjectTypeSpecClient_KEY"));
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
             Thing thing = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>");
@@ -465,7 +465,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         public void Example_AnonymousBody_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("NewProjectTypeSpecClient_KEY"));
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
             RequestContent content = RequestContent.Create(new
@@ -503,7 +503,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         public async Task Example_AnonymousBody_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("NewProjectTypeSpecClient_KEY"));
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
             RequestContent content = RequestContent.Create(new
@@ -541,7 +541,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         public void Example_AnonymousBody_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("NewProjectTypeSpecClient_KEY"));
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
             Thing thing = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>")
@@ -559,7 +559,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         public async Task Example_AnonymousBody_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("NewProjectTypeSpecClient_KEY"));
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
             Thing thing = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>")
@@ -577,7 +577,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         public void Example_FriendlyModel_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("NewProjectTypeSpecClient_KEY"));
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
             RequestContent content = RequestContent.Create(new
@@ -595,7 +595,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         public async Task Example_FriendlyModel_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("NewProjectTypeSpecClient_KEY"));
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
             RequestContent content = RequestContent.Create(new
@@ -613,7 +613,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         public void Example_FriendlyModel_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("NewProjectTypeSpecClient_KEY"));
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
             Friend notFriend = new Friend("<name>");
@@ -625,7 +625,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         public async Task Example_FriendlyModel_ShortVersion_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("NewProjectTypeSpecClient_KEY"));
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
             Friend notFriend = new Friend("<name>");
@@ -637,7 +637,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         public void Example_FriendlyModel_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("NewProjectTypeSpecClient_KEY"));
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
             RequestContent content = RequestContent.Create(new
@@ -655,7 +655,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         public async Task Example_FriendlyModel_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("NewProjectTypeSpecClient_KEY"));
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
             RequestContent content = RequestContent.Create(new
@@ -673,7 +673,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         public void Example_FriendlyModel_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("NewProjectTypeSpecClient_KEY"));
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
             Friend notFriend = new Friend("<name>");
@@ -685,7 +685,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         public async Task Example_FriendlyModel_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("NewProjectTypeSpecClient_KEY"));
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
             Friend notFriend = new Friend("<name>");
@@ -697,7 +697,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         public void Example_AddTimeHeader_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("NewProjectTypeSpecClient_KEY"));
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
             Response response = client.AddTimeHeader();
@@ -710,7 +710,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         public async Task Example_AddTimeHeader_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("NewProjectTypeSpecClient_KEY"));
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
             Response response = await client.AddTimeHeaderAsync();
@@ -723,7 +723,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         public void Example_AddTimeHeader_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("NewProjectTypeSpecClient_KEY"));
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
             Response response = client.AddTimeHeader();
@@ -736,7 +736,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         public async Task Example_AddTimeHeader_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("NewProjectTypeSpecClient_KEY"));
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
             Response response = await client.AddTimeHeaderAsync();
@@ -749,7 +749,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         public void Example_StringFormat_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("NewProjectTypeSpecClient_KEY"));
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
             RequestContent content = RequestContent.Create(new
@@ -767,7 +767,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         public async Task Example_StringFormat_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("NewProjectTypeSpecClient_KEY"));
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
             RequestContent content = RequestContent.Create(new
@@ -785,7 +785,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         public void Example_StringFormat_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("NewProjectTypeSpecClient_KEY"));
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
             ModelWithFormat body = new ModelWithFormat(new Uri("http://localhost:3000"), Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
@@ -797,7 +797,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         public async Task Example_StringFormat_ShortVersion_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("NewProjectTypeSpecClient_KEY"));
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
             ModelWithFormat body = new ModelWithFormat(new Uri("http://localhost:3000"), Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
@@ -809,7 +809,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         public void Example_StringFormat_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("NewProjectTypeSpecClient_KEY"));
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
             RequestContent content = RequestContent.Create(new
@@ -827,7 +827,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         public async Task Example_StringFormat_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("NewProjectTypeSpecClient_KEY"));
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
             RequestContent content = RequestContent.Create(new
@@ -845,7 +845,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         public void Example_StringFormat_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("NewProjectTypeSpecClient_KEY"));
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
             ModelWithFormat body = new ModelWithFormat(new Uri("http://localhost:3000"), Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
@@ -857,7 +857,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         public async Task Example_StringFormat_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("NewProjectTypeSpecClient_KEY"));
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
             ModelWithFormat body = new ModelWithFormat(new Uri("http://localhost:3000"), Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
@@ -869,7 +869,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         public void Example_SayHi_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("NewProjectTypeSpecClient_KEY"));
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
             Response response = client.SayHi("<headParameter>", "<queryParameter>", null, null);
@@ -889,7 +889,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         public async Task Example_SayHi_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("NewProjectTypeSpecClient_KEY"));
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
             Response response = await client.SayHiAsync("<headParameter>", "<queryParameter>", null, null);
@@ -909,7 +909,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         public void Example_SayHi_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("NewProjectTypeSpecClient_KEY"));
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
             Response response = client.SayHi("<headParameter>", "<queryParameter>", "<optionalQuery>", null);
@@ -933,7 +933,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         public async Task Example_SayHi_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("NewProjectTypeSpecClient_KEY"));
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
             Response response = await client.SayHiAsync("<headParameter>", "<queryParameter>", "<optionalQuery>", null);
@@ -957,7 +957,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         public void Example_HelloAgain_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("NewProjectTypeSpecClient_KEY"));
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
             RequestContent content = RequestContent.Create(new
@@ -1012,7 +1012,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         public async Task Example_HelloAgain_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("NewProjectTypeSpecClient_KEY"));
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
             RequestContent content = RequestContent.Create(new
@@ -1067,7 +1067,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         public void Example_HelloAgain_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("NewProjectTypeSpecClient_KEY"));
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
             RoundTripModel action = new RoundTripModel("<requiredString>", 1234, new StringFixedEnum[] { StringFixedEnum.One }, new Dictionary<string, StringExtensibleEnum>
@@ -1085,7 +1085,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         public async Task Example_HelloAgain_ShortVersion_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("NewProjectTypeSpecClient_KEY"));
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
             RoundTripModel action = new RoundTripModel("<requiredString>", 1234, new StringFixedEnum[] { StringFixedEnum.One }, new Dictionary<string, StringExtensibleEnum>
@@ -1103,7 +1103,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         public void Example_HelloAgain_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("NewProjectTypeSpecClient_KEY"));
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
             RequestContent content = RequestContent.Create(new
@@ -1204,7 +1204,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         public async Task Example_HelloAgain_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("NewProjectTypeSpecClient_KEY"));
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
             RequestContent content = RequestContent.Create(new
@@ -1305,7 +1305,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         public void Example_HelloAgain_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("NewProjectTypeSpecClient_KEY"));
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
             RoundTripModel action = new RoundTripModel("<requiredString>", 1234, new StringFixedEnum[] { StringFixedEnum.One }, new Dictionary<string, StringExtensibleEnum>
@@ -1345,7 +1345,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         public async Task Example_HelloAgain_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("NewProjectTypeSpecClient_KEY"));
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
             RoundTripModel action = new RoundTripModel("<requiredString>", 1234, new StringFixedEnum[] { StringFixedEnum.One }, new Dictionary<string, StringExtensibleEnum>
@@ -1385,7 +1385,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         public void Example_NoContentType_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("NewProjectTypeSpecClient_KEY"));
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
             RequestContent content = RequestContent.Create(new
@@ -1440,7 +1440,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         public async Task Example_NoContentType_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("NewProjectTypeSpecClient_KEY"));
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
             RequestContent content = RequestContent.Create(new
@@ -1495,7 +1495,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         public void Example_NoContentType_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("NewProjectTypeSpecClient_KEY"));
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
             RequestContent content = RequestContent.Create(new
@@ -1596,7 +1596,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         public async Task Example_NoContentType_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("NewProjectTypeSpecClient_KEY"));
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
             RequestContent content = RequestContent.Create(new
@@ -1697,7 +1697,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         public void Example_HelloDemo2_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("NewProjectTypeSpecClient_KEY"));
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
             Response response = client.HelloDemo2(null);
@@ -1717,7 +1717,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         public async Task Example_HelloDemo2_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("NewProjectTypeSpecClient_KEY"));
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
             Response response = await client.HelloDemo2Async(null);
@@ -1737,7 +1737,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         public void Example_HelloDemo2_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("NewProjectTypeSpecClient_KEY"));
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
             Response<Thing> response = client.HelloDemo2();
@@ -1748,7 +1748,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         public async Task Example_HelloDemo2_ShortVersion_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("NewProjectTypeSpecClient_KEY"));
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
             Response<Thing> response = await client.HelloDemo2Async();
@@ -1759,7 +1759,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         public void Example_HelloDemo2_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("NewProjectTypeSpecClient_KEY"));
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
             Response response = client.HelloDemo2(null);
@@ -1783,7 +1783,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         public async Task Example_HelloDemo2_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("NewProjectTypeSpecClient_KEY"));
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
             Response response = await client.HelloDemo2Async(null);
@@ -1807,7 +1807,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         public void Example_HelloDemo2_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("NewProjectTypeSpecClient_KEY"));
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
             Response<Thing> response = client.HelloDemo2();
@@ -1818,7 +1818,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         public async Task Example_HelloDemo2_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("NewProjectTypeSpecClient_KEY"));
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
             Response<Thing> response = await client.HelloDemo2Async();
@@ -1829,7 +1829,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         public void Example_CreateLiteral_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("NewProjectTypeSpecClient_KEY"));
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
             RequestContent content = RequestContent.Create(new
@@ -1859,7 +1859,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         public async Task Example_CreateLiteral_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("NewProjectTypeSpecClient_KEY"));
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
             RequestContent content = RequestContent.Create(new
@@ -1889,7 +1889,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         public void Example_CreateLiteral_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("NewProjectTypeSpecClient_KEY"));
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
             Thing body = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>");
@@ -1901,7 +1901,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         public async Task Example_CreateLiteral_ShortVersion_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("NewProjectTypeSpecClient_KEY"));
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
             Thing body = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>");
@@ -1913,7 +1913,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         public void Example_CreateLiteral_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("NewProjectTypeSpecClient_KEY"));
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
             RequestContent content = RequestContent.Create(new
@@ -1951,7 +1951,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         public async Task Example_CreateLiteral_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("NewProjectTypeSpecClient_KEY"));
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
             RequestContent content = RequestContent.Create(new
@@ -1989,7 +1989,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         public void Example_CreateLiteral_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("NewProjectTypeSpecClient_KEY"));
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
             Thing body = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>")
@@ -2007,7 +2007,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         public async Task Example_CreateLiteral_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("NewProjectTypeSpecClient_KEY"));
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
             Thing body = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>")
@@ -2025,7 +2025,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         public void Example_HelloLiteral_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("NewProjectTypeSpecClient_KEY"));
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
             Response response = client.HelloLiteral(null);
@@ -2045,7 +2045,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         public async Task Example_HelloLiteral_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("NewProjectTypeSpecClient_KEY"));
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
             Response response = await client.HelloLiteralAsync(null);
@@ -2065,7 +2065,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         public void Example_HelloLiteral_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("NewProjectTypeSpecClient_KEY"));
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
             Response<Thing> response = client.HelloLiteral();
@@ -2076,7 +2076,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         public async Task Example_HelloLiteral_ShortVersion_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("NewProjectTypeSpecClient_KEY"));
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
             Response<Thing> response = await client.HelloLiteralAsync();
@@ -2087,7 +2087,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         public void Example_HelloLiteral_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("NewProjectTypeSpecClient_KEY"));
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
             Response response = client.HelloLiteral(null);
@@ -2111,7 +2111,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         public async Task Example_HelloLiteral_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("NewProjectTypeSpecClient_KEY"));
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
             Response response = await client.HelloLiteralAsync(null);
@@ -2135,7 +2135,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         public void Example_HelloLiteral_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("NewProjectTypeSpecClient_KEY"));
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
             Response<Thing> response = client.HelloLiteral();
@@ -2146,7 +2146,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         public async Task Example_HelloLiteral_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("NewProjectTypeSpecClient_KEY"));
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
             Response<Thing> response = await client.HelloLiteralAsync();
@@ -2157,7 +2157,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         public void Example_GetUnknownValue_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("NewProjectTypeSpecClient_KEY"));
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
             Response response = client.GetUnknownValue(null);
@@ -2171,7 +2171,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         public async Task Example_GetUnknownValue_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("NewProjectTypeSpecClient_KEY"));
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
             Response response = await client.GetUnknownValueAsync(null);
@@ -2185,7 +2185,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         public void Example_GetUnknownValue_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("NewProjectTypeSpecClient_KEY"));
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
             Response response = client.GetUnknownValue(null);
@@ -2199,7 +2199,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         public async Task Example_GetUnknownValue_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("NewProjectTypeSpecClient_KEY"));
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
             Response response = await client.GetUnknownValueAsync(null);

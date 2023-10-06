@@ -5,7 +5,7 @@
       <example>
 This sample shows how to call GetValidAsync and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("ArrayClient_KEY"));
 ArrayClient client = new ArrayClient(credential);
 
 Response response = await client.GetValidAsync(null);
@@ -15,7 +15,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call GetValidAsync with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("ArrayClient_KEY"));
 ArrayClient client = new ArrayClient(credential);
 
 Response response = await client.GetValidAsync(null);
@@ -28,7 +28,7 @@ Console.WriteLine(element.GetProperty("array")[0].ToString());
       <example>
 This sample shows how to call GetValid and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("ArrayClient_KEY"));
 ArrayClient client = new ArrayClient(credential);
 
 Response response = client.GetValid(null);
@@ -38,7 +38,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call GetValid with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("ArrayClient_KEY"));
 ArrayClient client = new ArrayClient(credential);
 
 Response response = client.GetValid(null);
@@ -51,7 +51,7 @@ Console.WriteLine(element.GetProperty("array")[0].ToString());
       <example>
 This sample shows how to call PutValidAsync.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("ArrayClient_KEY"));
 ArrayClient client = new ArrayClient(credential);
 
 RequestContent content = RequestContent.Create(new object());
@@ -61,7 +61,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutValidAsync with all request content.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("ArrayClient_KEY"));
 ArrayClient client = new ArrayClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -80,7 +80,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call PutValid.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("ArrayClient_KEY"));
 ArrayClient client = new ArrayClient(credential);
 
 RequestContent content = RequestContent.Create(new object());
@@ -90,7 +90,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutValid with all request content.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("ArrayClient_KEY"));
 ArrayClient client = new ArrayClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -109,7 +109,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call GetEmptyAsync and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("ArrayClient_KEY"));
 ArrayClient client = new ArrayClient(credential);
 
 Response response = await client.GetEmptyAsync(null);
@@ -119,7 +119,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call GetEmptyAsync with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("ArrayClient_KEY"));
 ArrayClient client = new ArrayClient(credential);
 
 Response response = await client.GetEmptyAsync(null);
@@ -132,7 +132,7 @@ Console.WriteLine(element.GetProperty("array")[0].ToString());
       <example>
 This sample shows how to call GetEmpty and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("ArrayClient_KEY"));
 ArrayClient client = new ArrayClient(credential);
 
 Response response = client.GetEmpty(null);
@@ -142,7 +142,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call GetEmpty with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("ArrayClient_KEY"));
 ArrayClient client = new ArrayClient(credential);
 
 Response response = client.GetEmpty(null);
@@ -155,7 +155,7 @@ Console.WriteLine(element.GetProperty("array")[0].ToString());
       <example>
 This sample shows how to call PutEmptyAsync.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("ArrayClient_KEY"));
 ArrayClient client = new ArrayClient(credential);
 
 RequestContent content = RequestContent.Create(new object());
@@ -165,7 +165,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutEmptyAsync with all request content.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("ArrayClient_KEY"));
 ArrayClient client = new ArrayClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -184,7 +184,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call PutEmpty.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("ArrayClient_KEY"));
 ArrayClient client = new ArrayClient(credential);
 
 RequestContent content = RequestContent.Create(new object());
@@ -194,7 +194,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutEmpty with all request content.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("ArrayClient_KEY"));
 ArrayClient client = new ArrayClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -213,7 +213,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call GetNotProvidedAsync and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("ArrayClient_KEY"));
 ArrayClient client = new ArrayClient(credential);
 
 Response response = await client.GetNotProvidedAsync(null);
@@ -223,7 +223,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call GetNotProvidedAsync with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("ArrayClient_KEY"));
 ArrayClient client = new ArrayClient(credential);
 
 Response response = await client.GetNotProvidedAsync(null);
@@ -236,7 +236,7 @@ Console.WriteLine(element.GetProperty("array")[0].ToString());
       <example>
 This sample shows how to call GetNotProvided and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("ArrayClient_KEY"));
 ArrayClient client = new ArrayClient(credential);
 
 Response response = client.GetNotProvided(null);
@@ -246,7 +246,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call GetNotProvided with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("ArrayClient_KEY"));
 ArrayClient client = new ArrayClient(credential);
 
 Response response = client.GetNotProvided(null);

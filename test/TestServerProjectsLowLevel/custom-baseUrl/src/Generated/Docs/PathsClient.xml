@@ -5,7 +5,7 @@
       <example>
 This sample shows how to call GetEmptyAsync.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
 PathsClient client = new PathsClient("host", credential);
 
 Response response = await client.GetEmptyAsync("<accountName>");
@@ -14,7 +14,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call GetEmptyAsync with all parameters.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
 PathsClient client = new PathsClient("host", credential);
 
 Response response = await client.GetEmptyAsync("<accountName>");
@@ -26,7 +26,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call GetEmpty.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
 PathsClient client = new PathsClient("host", credential);
 
 Response response = client.GetEmpty("<accountName>");
@@ -35,7 +35,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call GetEmpty with all parameters.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
 PathsClient client = new PathsClient("host", credential);
 
 Response response = client.GetEmpty("<accountName>");

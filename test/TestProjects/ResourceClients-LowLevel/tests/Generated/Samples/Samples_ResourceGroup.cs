@@ -21,7 +21,7 @@ namespace ResourceClients_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetGroup_ShortVersion()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("ResourceGroup_KEY"));
             ResourceGroup client = new ResourceServiceClient(credential).GetResourceGroup("<GroupId>");
 
             Response response = client.GetGroup(null);
@@ -34,7 +34,7 @@ namespace ResourceClients_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetGroup_ShortVersion_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("ResourceGroup_KEY"));
             ResourceGroup client = new ResourceServiceClient(credential).GetResourceGroup("<GroupId>");
 
             Response response = await client.GetGroupAsync(null);
@@ -47,7 +47,7 @@ namespace ResourceClients_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetGroup_AllParameters()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("ResourceGroup_KEY"));
             ResourceGroup client = new ResourceServiceClient(credential).GetResourceGroup("<GroupId>");
 
             Response response = client.GetGroup(null);
@@ -60,7 +60,7 @@ namespace ResourceClients_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetGroup_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("ResourceGroup_KEY"));
             ResourceGroup client = new ResourceServiceClient(credential).GetResourceGroup("<GroupId>");
 
             Response response = await client.GetGroupAsync(null);
@@ -73,7 +73,7 @@ namespace ResourceClients_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetItems_ShortVersion()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("ResourceGroup_KEY"));
             ResourceGroup client = new ResourceServiceClient(credential).GetResourceGroup("<GroupId>");
 
             foreach (BinaryData item in client.GetItems(null))
@@ -87,7 +87,7 @@ namespace ResourceClients_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetItems_ShortVersion_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("ResourceGroup_KEY"));
             ResourceGroup client = new ResourceServiceClient(credential).GetResourceGroup("<GroupId>");
 
             await foreach (BinaryData item in client.GetItemsAsync(null))
@@ -101,7 +101,7 @@ namespace ResourceClients_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetItems_AllParameters()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("ResourceGroup_KEY"));
             ResourceGroup client = new ResourceServiceClient(credential).GetResourceGroup("<GroupId>");
 
             foreach (BinaryData item in client.GetItems(null))
@@ -115,7 +115,7 @@ namespace ResourceClients_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetItems_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("ResourceGroup_KEY"));
             ResourceGroup client = new ResourceServiceClient(credential).GetResourceGroup("<GroupId>");
 
             await foreach (BinaryData item in client.GetItemsAsync(null))

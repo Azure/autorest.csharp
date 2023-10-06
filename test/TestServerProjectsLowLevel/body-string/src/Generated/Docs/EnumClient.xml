@@ -5,7 +5,7 @@
       <example>
 This sample shows how to call GetNotExpandableAsync and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("EnumClient_KEY"));
 EnumClient client = new EnumClient(credential);
 
 Response response = await client.GetNotExpandableAsync(null);
@@ -15,7 +15,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call GetNotExpandableAsync with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("EnumClient_KEY"));
 EnumClient client = new EnumClient(credential);
 
 Response response = await client.GetNotExpandableAsync(null);
@@ -28,7 +28,7 @@ Console.WriteLine(element.ToString());
       <example>
 This sample shows how to call GetNotExpandable and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("EnumClient_KEY"));
 EnumClient client = new EnumClient(credential);
 
 Response response = client.GetNotExpandable(null);
@@ -38,7 +38,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call GetNotExpandable with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("EnumClient_KEY"));
 EnumClient client = new EnumClient(credential);
 
 Response response = client.GetNotExpandable(null);
@@ -51,7 +51,7 @@ Console.WriteLine(element.ToString());
       <example>
 This sample shows how to call PutNotExpandableAsync.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("EnumClient_KEY"));
 EnumClient client = new EnumClient(credential);
 
 RequestContent content = RequestContent.Create("red color");
@@ -61,7 +61,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutNotExpandableAsync with all request content.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("EnumClient_KEY"));
 EnumClient client = new EnumClient(credential);
 
 RequestContent content = RequestContent.Create("red color");
@@ -74,7 +74,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call PutNotExpandable.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("EnumClient_KEY"));
 EnumClient client = new EnumClient(credential);
 
 RequestContent content = RequestContent.Create("red color");
@@ -84,7 +84,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutNotExpandable with all request content.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("EnumClient_KEY"));
 EnumClient client = new EnumClient(credential);
 
 RequestContent content = RequestContent.Create("red color");
@@ -97,7 +97,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call GetReferencedAsync and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("EnumClient_KEY"));
 EnumClient client = new EnumClient(credential);
 
 Response response = await client.GetReferencedAsync(null);
@@ -107,7 +107,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call GetReferencedAsync with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("EnumClient_KEY"));
 EnumClient client = new EnumClient(credential);
 
 Response response = await client.GetReferencedAsync(null);
@@ -120,7 +120,7 @@ Console.WriteLine(element.ToString());
       <example>
 This sample shows how to call GetReferenced and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("EnumClient_KEY"));
 EnumClient client = new EnumClient(credential);
 
 Response response = client.GetReferenced(null);
@@ -130,7 +130,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call GetReferenced with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("EnumClient_KEY"));
 EnumClient client = new EnumClient(credential);
 
 Response response = client.GetReferenced(null);
@@ -143,7 +143,7 @@ Console.WriteLine(element.ToString());
       <example>
 This sample shows how to call PutReferencedAsync.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("EnumClient_KEY"));
 EnumClient client = new EnumClient(credential);
 
 RequestContent content = RequestContent.Create("red color");
@@ -153,7 +153,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutReferencedAsync with all request content.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("EnumClient_KEY"));
 EnumClient client = new EnumClient(credential);
 
 RequestContent content = RequestContent.Create("red color");
@@ -166,7 +166,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call PutReferenced.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("EnumClient_KEY"));
 EnumClient client = new EnumClient(credential);
 
 RequestContent content = RequestContent.Create("red color");
@@ -176,7 +176,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutReferenced with all request content.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("EnumClient_KEY"));
 EnumClient client = new EnumClient(credential);
 
 RequestContent content = RequestContent.Create("red color");
@@ -189,7 +189,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call GetReferencedConstantAsync and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("EnumClient_KEY"));
 EnumClient client = new EnumClient(credential);
 
 Response response = await client.GetReferencedConstantAsync(null);
@@ -199,7 +199,7 @@ Console.WriteLine(element.GetProperty("ColorConstant").ToString());
 ]]></code>
 This sample shows how to call GetReferencedConstantAsync with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("EnumClient_KEY"));
 EnumClient client = new EnumClient(credential);
 
 Response response = await client.GetReferencedConstantAsync(null);
@@ -213,7 +213,7 @@ Console.WriteLine(element.GetProperty("field1").ToString());
       <example>
 This sample shows how to call GetReferencedConstant and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("EnumClient_KEY"));
 EnumClient client = new EnumClient(credential);
 
 Response response = client.GetReferencedConstant(null);
@@ -223,7 +223,7 @@ Console.WriteLine(element.GetProperty("ColorConstant").ToString());
 ]]></code>
 This sample shows how to call GetReferencedConstant with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("EnumClient_KEY"));
 EnumClient client = new EnumClient(credential);
 
 Response response = client.GetReferencedConstant(null);
@@ -237,7 +237,7 @@ Console.WriteLine(element.GetProperty("field1").ToString());
       <example>
 This sample shows how to call PutReferencedConstantAsync.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("EnumClient_KEY"));
 EnumClient client = new EnumClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -250,7 +250,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutReferencedConstantAsync with all request content.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("EnumClient_KEY"));
 EnumClient client = new EnumClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -267,7 +267,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call PutReferencedConstant.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("EnumClient_KEY"));
 EnumClient client = new EnumClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -280,7 +280,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutReferencedConstant with all request content.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("EnumClient_KEY"));
 EnumClient client = new EnumClient(credential);
 
 RequestContent content = RequestContent.Create(new

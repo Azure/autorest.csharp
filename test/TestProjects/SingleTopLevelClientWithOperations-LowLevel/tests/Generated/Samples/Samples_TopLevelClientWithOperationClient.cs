@@ -21,7 +21,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Operation_ShortVersion()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("TopLevelClientWithOperationClient_KEY"));
             TopLevelClientWithOperationClient client = new TopLevelClientWithOperationClient(credential);
 
             Response response = client.Operation(null);
@@ -34,7 +34,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Operation_ShortVersion_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("TopLevelClientWithOperationClient_KEY"));
             TopLevelClientWithOperationClient client = new TopLevelClientWithOperationClient(credential);
 
             Response response = await client.OperationAsync(null);
@@ -47,7 +47,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Operation_AllParameters()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("TopLevelClientWithOperationClient_KEY"));
             TopLevelClientWithOperationClient client = new TopLevelClientWithOperationClient(credential);
 
             Response response = client.Operation(null);
@@ -60,7 +60,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Operation_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("TopLevelClientWithOperationClient_KEY"));
             TopLevelClientWithOperationClient client = new TopLevelClientWithOperationClient(credential);
 
             Response response = await client.OperationAsync(null);
@@ -73,7 +73,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetAll_ShortVersion()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("TopLevelClientWithOperationClient_KEY"));
             TopLevelClientWithOperationClient client = new TopLevelClientWithOperationClient(credential);
 
             foreach (BinaryData item in client.GetAll("<filter>", null))
@@ -87,7 +87,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetAll_ShortVersion_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("TopLevelClientWithOperationClient_KEY"));
             TopLevelClientWithOperationClient client = new TopLevelClientWithOperationClient(credential);
 
             await foreach (BinaryData item in client.GetAllAsync("<filter>", null))
@@ -101,7 +101,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetAll_AllParameters()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("TopLevelClientWithOperationClient_KEY"));
             TopLevelClientWithOperationClient client = new TopLevelClientWithOperationClient(credential);
 
             foreach (BinaryData item in client.GetAll("<filter>", null))
@@ -115,7 +115,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetAll_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("TopLevelClientWithOperationClient_KEY"));
             TopLevelClientWithOperationClient client = new TopLevelClientWithOperationClient(credential);
 
             await foreach (BinaryData item in client.GetAllAsync("<filter>", null))

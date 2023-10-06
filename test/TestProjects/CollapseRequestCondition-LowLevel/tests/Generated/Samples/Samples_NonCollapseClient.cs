@@ -21,7 +21,7 @@ namespace CollapseRequestCondition_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_IfMatchPut_ShortVersion()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("NonCollapseClient_KEY"));
             NonCollapseClient client = new NonCollapseClient(credential);
 
             RequestContent content = null;
@@ -34,7 +34,7 @@ namespace CollapseRequestCondition_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_IfMatchPut_ShortVersion_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("NonCollapseClient_KEY"));
             NonCollapseClient client = new NonCollapseClient(credential);
 
             RequestContent content = null;
@@ -47,7 +47,7 @@ namespace CollapseRequestCondition_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_IfMatchPut_AllParameters()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("NonCollapseClient_KEY"));
             NonCollapseClient client = new NonCollapseClient(credential);
 
             RequestContent content = RequestContent.Create("<body>");
@@ -60,7 +60,7 @@ namespace CollapseRequestCondition_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_IfMatchPut_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("NonCollapseClient_KEY"));
             NonCollapseClient client = new NonCollapseClient(credential);
 
             RequestContent content = RequestContent.Create("<body>");
@@ -73,7 +73,7 @@ namespace CollapseRequestCondition_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_IfNoneMatchPut_ShortVersion()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("NonCollapseClient_KEY"));
             NonCollapseClient client = new NonCollapseClient(credential);
 
             RequestContent content = null;
@@ -86,7 +86,7 @@ namespace CollapseRequestCondition_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_IfNoneMatchPut_ShortVersion_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("NonCollapseClient_KEY"));
             NonCollapseClient client = new NonCollapseClient(credential);
 
             RequestContent content = null;
@@ -99,7 +99,7 @@ namespace CollapseRequestCondition_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_IfNoneMatchPut_AllParameters()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("NonCollapseClient_KEY"));
             NonCollapseClient client = new NonCollapseClient(credential);
 
             RequestContent content = RequestContent.Create("<body>");
@@ -112,7 +112,7 @@ namespace CollapseRequestCondition_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_IfNoneMatchPut_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("NonCollapseClient_KEY"));
             NonCollapseClient client = new NonCollapseClient(credential);
 
             RequestContent content = RequestContent.Create("<body>");

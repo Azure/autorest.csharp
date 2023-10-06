@@ -21,7 +21,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Patch_ShortVersion()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("Client4_KEY"));
             Client4 client = new TopLevelClientWithOperationClient(credential).GetClient4("<ClientParameter>");
 
             Response response = client.Patch("<filter>", null);
@@ -34,7 +34,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Patch_ShortVersion_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("Client4_KEY"));
             Client4 client = new TopLevelClientWithOperationClient(credential).GetClient4("<ClientParameter>");
 
             Response response = await client.PatchAsync("<filter>", null);
@@ -47,7 +47,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Patch_AllParameters()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("Client4_KEY"));
             Client4 client = new TopLevelClientWithOperationClient(credential).GetClient4("<ClientParameter>");
 
             Response response = client.Patch("<filter>", null);
@@ -60,7 +60,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Patch_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("Client4_KEY"));
             Client4 client = new TopLevelClientWithOperationClient(credential).GetClient4("<ClientParameter>");
 
             Response response = await client.PatchAsync("<filter>", null);

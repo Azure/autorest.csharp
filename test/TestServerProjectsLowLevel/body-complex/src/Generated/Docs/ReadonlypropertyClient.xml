@@ -5,7 +5,7 @@
       <example>
 This sample shows how to call GetValidAsync and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("ReadonlypropertyClient_KEY"));
 ReadonlypropertyClient client = new ReadonlypropertyClient(credential);
 
 Response response = await client.GetValidAsync(null);
@@ -15,7 +15,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call GetValidAsync with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("ReadonlypropertyClient_KEY"));
 ReadonlypropertyClient client = new ReadonlypropertyClient(credential);
 
 Response response = await client.GetValidAsync(null);
@@ -29,7 +29,7 @@ Console.WriteLine(element.GetProperty("size").ToString());
       <example>
 This sample shows how to call GetValid and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("ReadonlypropertyClient_KEY"));
 ReadonlypropertyClient client = new ReadonlypropertyClient(credential);
 
 Response response = client.GetValid(null);
@@ -39,7 +39,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call GetValid with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("ReadonlypropertyClient_KEY"));
 ReadonlypropertyClient client = new ReadonlypropertyClient(credential);
 
 Response response = client.GetValid(null);
@@ -53,7 +53,7 @@ Console.WriteLine(element.GetProperty("size").ToString());
       <example>
 This sample shows how to call PutValidAsync.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("ReadonlypropertyClient_KEY"));
 ReadonlypropertyClient client = new ReadonlypropertyClient(credential);
 
 RequestContent content = RequestContent.Create(new object());
@@ -63,7 +63,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutValidAsync with all request content.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("ReadonlypropertyClient_KEY"));
 ReadonlypropertyClient client = new ReadonlypropertyClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -79,7 +79,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call PutValid.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("ReadonlypropertyClient_KEY"));
 ReadonlypropertyClient client = new ReadonlypropertyClient(credential);
 
 RequestContent content = RequestContent.Create(new object());
@@ -89,7 +89,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutValid with all request content.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("ReadonlypropertyClient_KEY"));
 ReadonlypropertyClient client = new ReadonlypropertyClient(credential);
 
 RequestContent content = RequestContent.Create(new

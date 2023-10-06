@@ -6,7 +6,7 @@
 This sample shows how to call GetBatchDetectionResultAsync.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("ApiVersionInTspClient_KEY"));
 ApiVersionInTspClient client = new ApiVersionInTspClient(endpoint, credential);
 
 Response<DetectionResult> response = await client.GetBatchDetectionResultAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
@@ -14,7 +14,7 @@ Response<DetectionResult> response = await client.GetBatchDetectionResultAsync(G
 This sample shows how to call GetBatchDetectionResultAsync with all parameters.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("ApiVersionInTspClient_KEY"));
 ApiVersionInTspClient client = new ApiVersionInTspClient(endpoint, credential);
 
 Response<DetectionResult> response = await client.GetBatchDetectionResultAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
@@ -25,7 +25,7 @@ Response<DetectionResult> response = await client.GetBatchDetectionResultAsync(G
 This sample shows how to call GetBatchDetectionResult.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("ApiVersionInTspClient_KEY"));
 ApiVersionInTspClient client = new ApiVersionInTspClient(endpoint, credential);
 
 Response<DetectionResult> response = client.GetBatchDetectionResult(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
@@ -33,7 +33,7 @@ Response<DetectionResult> response = client.GetBatchDetectionResult(Guid.Parse("
 This sample shows how to call GetBatchDetectionResult with all parameters.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("ApiVersionInTspClient_KEY"));
 ApiVersionInTspClient client = new ApiVersionInTspClient(endpoint, credential);
 
 Response<DetectionResult> response = client.GetBatchDetectionResult(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
@@ -44,7 +44,7 @@ Response<DetectionResult> response = client.GetBatchDetectionResult(Guid.Parse("
 This sample shows how to call GetBatchDetectionResultAsync and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("ApiVersionInTspClient_KEY"));
 ApiVersionInTspClient client = new ApiVersionInTspClient(endpoint, credential);
 
 Response response = await client.GetBatchDetectionResultAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), null);
@@ -55,7 +55,7 @@ Console.WriteLine(element.GetProperty("resultId").ToString());
 This sample shows how to call GetBatchDetectionResultAsync with all parameters and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("ApiVersionInTspClient_KEY"));
 ApiVersionInTspClient client = new ApiVersionInTspClient(endpoint, credential);
 
 Response response = await client.GetBatchDetectionResultAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), null);
@@ -69,7 +69,7 @@ Console.WriteLine(element.GetProperty("resultId").ToString());
 This sample shows how to call GetBatchDetectionResult and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("ApiVersionInTspClient_KEY"));
 ApiVersionInTspClient client = new ApiVersionInTspClient(endpoint, credential);
 
 Response response = client.GetBatchDetectionResult(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), null);
@@ -80,7 +80,7 @@ Console.WriteLine(element.GetProperty("resultId").ToString());
 This sample shows how to call GetBatchDetectionResult with all parameters and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("ApiVersionInTspClient_KEY"));
 ApiVersionInTspClient client = new ApiVersionInTspClient(endpoint, credential);
 
 Response response = client.GetBatchDetectionResult(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), null);

@@ -22,7 +22,7 @@ namespace body_complex_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetValid_ShortVersion()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PolymorphismClient_KEY"));
             PolymorphismClient client = new PolymorphismClient(credential);
 
             Response response = client.GetValid(null);
@@ -36,7 +36,7 @@ namespace body_complex_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetValid_ShortVersion_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PolymorphismClient_KEY"));
             PolymorphismClient client = new PolymorphismClient(credential);
 
             Response response = await client.GetValidAsync(null);
@@ -50,7 +50,7 @@ namespace body_complex_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetValid_AllParameters()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PolymorphismClient_KEY"));
             PolymorphismClient client = new PolymorphismClient(credential);
 
             Response response = client.GetValid(null);
@@ -68,7 +68,7 @@ namespace body_complex_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetValid_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PolymorphismClient_KEY"));
             PolymorphismClient client = new PolymorphismClient(credential);
 
             Response response = await client.GetValidAsync(null);
@@ -86,7 +86,7 @@ namespace body_complex_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_PutValid_ShortVersion()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PolymorphismClient_KEY"));
             PolymorphismClient client = new PolymorphismClient(credential);
 
             RequestContent content = RequestContent.Create(new
@@ -103,7 +103,7 @@ namespace body_complex_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_PutValid_ShortVersion_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PolymorphismClient_KEY"));
             PolymorphismClient client = new PolymorphismClient(credential);
 
             RequestContent content = RequestContent.Create(new
@@ -120,7 +120,7 @@ namespace body_complex_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_PutValid_AllParameters()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PolymorphismClient_KEY"));
             PolymorphismClient client = new PolymorphismClient(credential);
 
             RequestContent content = RequestContent.Create(new
@@ -144,7 +144,7 @@ null
         [Ignore("Only validating compilation of examples")]
         public async Task Example_PutValid_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PolymorphismClient_KEY"));
             PolymorphismClient client = new PolymorphismClient(credential);
 
             RequestContent content = RequestContent.Create(new
@@ -168,7 +168,7 @@ null
         [Ignore("Only validating compilation of examples")]
         public void Example_GetDotSyntax_ShortVersion()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PolymorphismClient_KEY"));
             PolymorphismClient client = new PolymorphismClient(credential);
 
             Response response = client.GetDotSyntax(null);
@@ -181,7 +181,7 @@ null
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetDotSyntax_ShortVersion_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PolymorphismClient_KEY"));
             PolymorphismClient client = new PolymorphismClient(credential);
 
             Response response = await client.GetDotSyntaxAsync(null);
@@ -194,7 +194,7 @@ null
         [Ignore("Only validating compilation of examples")]
         public void Example_GetDotSyntax_AllParameters()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PolymorphismClient_KEY"));
             PolymorphismClient client = new PolymorphismClient(credential);
 
             Response response = client.GetDotSyntax(null);
@@ -208,7 +208,7 @@ null
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetDotSyntax_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PolymorphismClient_KEY"));
             PolymorphismClient client = new PolymorphismClient(credential);
 
             Response response = await client.GetDotSyntaxAsync(null);
@@ -222,7 +222,7 @@ null
         [Ignore("Only validating compilation of examples")]
         public void Example_GetComposedWithDiscriminator_ShortVersion()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PolymorphismClient_KEY"));
             PolymorphismClient client = new PolymorphismClient(credential);
 
             Response response = client.GetComposedWithDiscriminator(null);
@@ -235,7 +235,7 @@ null
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetComposedWithDiscriminator_ShortVersion_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PolymorphismClient_KEY"));
             PolymorphismClient client = new PolymorphismClient(credential);
 
             Response response = await client.GetComposedWithDiscriminatorAsync(null);
@@ -248,7 +248,7 @@ null
         [Ignore("Only validating compilation of examples")]
         public void Example_GetComposedWithDiscriminator_AllParameters()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PolymorphismClient_KEY"));
             PolymorphismClient client = new PolymorphismClient(credential);
 
             Response response = client.GetComposedWithDiscriminator(null);
@@ -272,7 +272,7 @@ null
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetComposedWithDiscriminator_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PolymorphismClient_KEY"));
             PolymorphismClient client = new PolymorphismClient(credential);
 
             Response response = await client.GetComposedWithDiscriminatorAsync(null);
@@ -296,7 +296,7 @@ null
         [Ignore("Only validating compilation of examples")]
         public void Example_GetComposedWithoutDiscriminator_ShortVersion()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PolymorphismClient_KEY"));
             PolymorphismClient client = new PolymorphismClient(credential);
 
             Response response = client.GetComposedWithoutDiscriminator(null);
@@ -309,7 +309,7 @@ null
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetComposedWithoutDiscriminator_ShortVersion_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PolymorphismClient_KEY"));
             PolymorphismClient client = new PolymorphismClient(credential);
 
             Response response = await client.GetComposedWithoutDiscriminatorAsync(null);
@@ -322,7 +322,7 @@ null
         [Ignore("Only validating compilation of examples")]
         public void Example_GetComposedWithoutDiscriminator_AllParameters()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PolymorphismClient_KEY"));
             PolymorphismClient client = new PolymorphismClient(credential);
 
             Response response = client.GetComposedWithoutDiscriminator(null);
@@ -346,7 +346,7 @@ null
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetComposedWithoutDiscriminator_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PolymorphismClient_KEY"));
             PolymorphismClient client = new PolymorphismClient(credential);
 
             Response response = await client.GetComposedWithoutDiscriminatorAsync(null);
@@ -370,7 +370,7 @@ null
         [Ignore("Only validating compilation of examples")]
         public void Example_GetComplicated_ShortVersion()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PolymorphismClient_KEY"));
             PolymorphismClient client = new PolymorphismClient(credential);
 
             Response response = client.GetComplicated(null);
@@ -384,7 +384,7 @@ null
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetComplicated_ShortVersion_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PolymorphismClient_KEY"));
             PolymorphismClient client = new PolymorphismClient(credential);
 
             Response response = await client.GetComplicatedAsync(null);
@@ -398,7 +398,7 @@ null
         [Ignore("Only validating compilation of examples")]
         public void Example_GetComplicated_AllParameters()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PolymorphismClient_KEY"));
             PolymorphismClient client = new PolymorphismClient(credential);
 
             Response response = client.GetComplicated(null);
@@ -418,7 +418,7 @@ null
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetComplicated_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PolymorphismClient_KEY"));
             PolymorphismClient client = new PolymorphismClient(credential);
 
             Response response = await client.GetComplicatedAsync(null);
@@ -438,7 +438,7 @@ null
         [Ignore("Only validating compilation of examples")]
         public void Example_PutComplicated_ShortVersion()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PolymorphismClient_KEY"));
             PolymorphismClient client = new PolymorphismClient(credential);
 
             RequestContent content = RequestContent.Create(new
@@ -455,7 +455,7 @@ null
         [Ignore("Only validating compilation of examples")]
         public async Task Example_PutComplicated_ShortVersion_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PolymorphismClient_KEY"));
             PolymorphismClient client = new PolymorphismClient(credential);
 
             RequestContent content = RequestContent.Create(new
@@ -472,7 +472,7 @@ null
         [Ignore("Only validating compilation of examples")]
         public void Example_PutComplicated_AllParameters()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PolymorphismClient_KEY"));
             PolymorphismClient client = new PolymorphismClient(credential);
 
             RequestContent content = RequestContent.Create(new
@@ -508,7 +508,7 @@ null
         [Ignore("Only validating compilation of examples")]
         public async Task Example_PutComplicated_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PolymorphismClient_KEY"));
             PolymorphismClient client = new PolymorphismClient(credential);
 
             RequestContent content = RequestContent.Create(new
@@ -544,7 +544,7 @@ null
         [Ignore("Only validating compilation of examples")]
         public void Example_PutMissingDiscriminator_ShortVersion()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PolymorphismClient_KEY"));
             PolymorphismClient client = new PolymorphismClient(credential);
 
             RequestContent content = RequestContent.Create(new
@@ -563,7 +563,7 @@ null
         [Ignore("Only validating compilation of examples")]
         public async Task Example_PutMissingDiscriminator_ShortVersion_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PolymorphismClient_KEY"));
             PolymorphismClient client = new PolymorphismClient(credential);
 
             RequestContent content = RequestContent.Create(new
@@ -582,7 +582,7 @@ null
         [Ignore("Only validating compilation of examples")]
         public void Example_PutMissingDiscriminator_AllParameters()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PolymorphismClient_KEY"));
             PolymorphismClient client = new PolymorphismClient(credential);
 
             RequestContent content = RequestContent.Create(new
@@ -626,7 +626,7 @@ null
         [Ignore("Only validating compilation of examples")]
         public async Task Example_PutMissingDiscriminator_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PolymorphismClient_KEY"));
             PolymorphismClient client = new PolymorphismClient(credential);
 
             RequestContent content = RequestContent.Create(new
@@ -670,7 +670,7 @@ null
         [Ignore("Only validating compilation of examples")]
         public void Example_PutValidMissingRequired_ShortVersion()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PolymorphismClient_KEY"));
             PolymorphismClient client = new PolymorphismClient(credential);
 
             RequestContent content = RequestContent.Create(new
@@ -687,7 +687,7 @@ null
         [Ignore("Only validating compilation of examples")]
         public async Task Example_PutValidMissingRequired_ShortVersion_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PolymorphismClient_KEY"));
             PolymorphismClient client = new PolymorphismClient(credential);
 
             RequestContent content = RequestContent.Create(new
@@ -704,7 +704,7 @@ null
         [Ignore("Only validating compilation of examples")]
         public void Example_PutValidMissingRequired_AllParameters()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PolymorphismClient_KEY"));
             PolymorphismClient client = new PolymorphismClient(credential);
 
             RequestContent content = RequestContent.Create(new
@@ -728,7 +728,7 @@ null
         [Ignore("Only validating compilation of examples")]
         public async Task Example_PutValidMissingRequired_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PolymorphismClient_KEY"));
             PolymorphismClient client = new PolymorphismClient(credential);
 
             RequestContent content = RequestContent.Create(new

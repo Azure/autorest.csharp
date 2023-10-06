@@ -5,7 +5,7 @@
       <example>
 This sample shows how to call GetSubParameterAsync and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("Parameter_KEY"));
 Parameter client = new RootClient(null, credential).GetParameterClient();
 
 Response response = await client.GetSubParameterAsync("<subParameter>", null);
@@ -15,7 +15,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call GetSubParameterAsync with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("Parameter_KEY"));
 Parameter client = new RootClient(null, credential).GetParameterClient();
 
 Response response = await client.GetSubParameterAsync("<subParameter>", null);
@@ -28,7 +28,7 @@ Console.WriteLine(element.ToString());
       <example>
 This sample shows how to call GetSubParameter and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("Parameter_KEY"));
 Parameter client = new RootClient(null, credential).GetParameterClient();
 
 Response response = client.GetSubParameter("<subParameter>", null);
@@ -38,7 +38,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call GetSubParameter with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("Parameter_KEY"));
 Parameter client = new RootClient(null, credential).GetParameterClient();
 
 Response response = client.GetSubParameter("<subParameter>", null);

@@ -5,7 +5,7 @@
       <example>
 This sample shows how to call OperationAsync.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("AccessibilityClient_KEY"));
 AccessibilityClient client = new AccessibilityClient(credential);
 
 RequestContent content = null;
@@ -15,7 +15,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call OperationAsync with all request content.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("AccessibilityClient_KEY"));
 AccessibilityClient client = new AccessibilityClient(credential);
 
 RequestContent content = RequestContent.Create("<body>");
@@ -28,7 +28,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call Operation.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("AccessibilityClient_KEY"));
 AccessibilityClient client = new AccessibilityClient(credential);
 
 RequestContent content = null;
@@ -38,7 +38,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Operation with all request content.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("AccessibilityClient_KEY"));
 AccessibilityClient client = new AccessibilityClient(credential);
 
 RequestContent content = RequestContent.Create("<body>");

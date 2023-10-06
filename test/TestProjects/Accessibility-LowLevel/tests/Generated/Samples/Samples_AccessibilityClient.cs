@@ -21,7 +21,7 @@ namespace Accessibility_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Operation_ShortVersion()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("AccessibilityClient_KEY"));
             AccessibilityClient client = new AccessibilityClient(credential);
 
             RequestContent content = null;
@@ -34,7 +34,7 @@ namespace Accessibility_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Operation_ShortVersion_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("AccessibilityClient_KEY"));
             AccessibilityClient client = new AccessibilityClient(credential);
 
             RequestContent content = null;
@@ -47,7 +47,7 @@ namespace Accessibility_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Operation_AllParameters()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("AccessibilityClient_KEY"));
             AccessibilityClient client = new AccessibilityClient(credential);
 
             RequestContent content = RequestContent.Create("<body>");
@@ -60,7 +60,7 @@ namespace Accessibility_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Operation_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("AccessibilityClient_KEY"));
             AccessibilityClient client = new AccessibilityClient(credential);
 
             RequestContent content = RequestContent.Create("<body>");

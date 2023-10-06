@@ -5,7 +5,7 @@
       <example>
 This sample shows how to call GetFileAsync and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("FilesClient_KEY"));
 FilesClient client = new FilesClient(credential);
 
 Response response = await client.GetFileAsync(null);
@@ -18,7 +18,7 @@ if (response.ContentStream != null)
 ]]></code>
 This sample shows how to call GetFileAsync with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("FilesClient_KEY"));
 FilesClient client = new FilesClient(credential);
 
 Response response = await client.GetFileAsync(null);
@@ -34,7 +34,7 @@ if (response.ContentStream != null)
       <example>
 This sample shows how to call GetFile and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("FilesClient_KEY"));
 FilesClient client = new FilesClient(credential);
 
 Response response = client.GetFile(null);
@@ -47,7 +47,7 @@ if (response.ContentStream != null)
 ]]></code>
 This sample shows how to call GetFile with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("FilesClient_KEY"));
 FilesClient client = new FilesClient(credential);
 
 Response response = client.GetFile(null);
@@ -63,7 +63,7 @@ if (response.ContentStream != null)
       <example>
 This sample shows how to call GetFileLargeAsync and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("FilesClient_KEY"));
 FilesClient client = new FilesClient(credential);
 
 Response response = await client.GetFileLargeAsync(null);
@@ -76,7 +76,7 @@ if (response.ContentStream != null)
 ]]></code>
 This sample shows how to call GetFileLargeAsync with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("FilesClient_KEY"));
 FilesClient client = new FilesClient(credential);
 
 Response response = await client.GetFileLargeAsync(null);
@@ -92,7 +92,7 @@ if (response.ContentStream != null)
       <example>
 This sample shows how to call GetFileLarge and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("FilesClient_KEY"));
 FilesClient client = new FilesClient(credential);
 
 Response response = client.GetFileLarge(null);
@@ -105,7 +105,7 @@ if (response.ContentStream != null)
 ]]></code>
 This sample shows how to call GetFileLarge with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("FilesClient_KEY"));
 FilesClient client = new FilesClient(credential);
 
 Response response = client.GetFileLarge(null);
@@ -121,7 +121,7 @@ if (response.ContentStream != null)
       <example>
 This sample shows how to call GetEmptyFileAsync and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("FilesClient_KEY"));
 FilesClient client = new FilesClient(credential);
 
 Response response = await client.GetEmptyFileAsync(null);
@@ -134,7 +134,7 @@ if (response.ContentStream != null)
 ]]></code>
 This sample shows how to call GetEmptyFileAsync with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("FilesClient_KEY"));
 FilesClient client = new FilesClient(credential);
 
 Response response = await client.GetEmptyFileAsync(null);
@@ -150,7 +150,7 @@ if (response.ContentStream != null)
       <example>
 This sample shows how to call GetEmptyFile and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("FilesClient_KEY"));
 FilesClient client = new FilesClient(credential);
 
 Response response = client.GetEmptyFile(null);
@@ -163,7 +163,7 @@ if (response.ContentStream != null)
 ]]></code>
 This sample shows how to call GetEmptyFile with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("FilesClient_KEY"));
 FilesClient client = new FilesClient(credential);
 
 Response response = client.GetEmptyFile(null);

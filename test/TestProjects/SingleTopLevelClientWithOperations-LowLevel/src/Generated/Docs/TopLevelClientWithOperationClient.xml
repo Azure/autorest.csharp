@@ -5,7 +5,7 @@
       <example>
 This sample shows how to call OperationAsync and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("TopLevelClientWithOperationClient_KEY"));
 TopLevelClientWithOperationClient client = new TopLevelClientWithOperationClient(credential);
 
 Response response = await client.OperationAsync(null);
@@ -15,7 +15,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call OperationAsync with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("TopLevelClientWithOperationClient_KEY"));
 TopLevelClientWithOperationClient client = new TopLevelClientWithOperationClient(credential);
 
 Response response = await client.OperationAsync(null);
@@ -28,7 +28,7 @@ Console.WriteLine(element.ToString());
       <example>
 This sample shows how to call Operation and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("TopLevelClientWithOperationClient_KEY"));
 TopLevelClientWithOperationClient client = new TopLevelClientWithOperationClient(credential);
 
 Response response = client.Operation(null);
@@ -38,7 +38,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call Operation with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("TopLevelClientWithOperationClient_KEY"));
 TopLevelClientWithOperationClient client = new TopLevelClientWithOperationClient(credential);
 
 Response response = client.Operation(null);
@@ -51,7 +51,7 @@ Console.WriteLine(element.ToString());
       <example>
 This sample shows how to call GetAllAsync and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("TopLevelClientWithOperationClient_KEY"));
 TopLevelClientWithOperationClient client = new TopLevelClientWithOperationClient(credential);
 
 await foreach (BinaryData item in client.GetAllAsync("<filter>", null))
@@ -62,7 +62,7 @@ await foreach (BinaryData item in client.GetAllAsync("<filter>", null))
 ]]></code>
 This sample shows how to call GetAllAsync with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("TopLevelClientWithOperationClient_KEY"));
 TopLevelClientWithOperationClient client = new TopLevelClientWithOperationClient(credential);
 
 await foreach (BinaryData item in client.GetAllAsync("<filter>", null))
@@ -76,7 +76,7 @@ await foreach (BinaryData item in client.GetAllAsync("<filter>", null))
       <example>
 This sample shows how to call GetAll and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("TopLevelClientWithOperationClient_KEY"));
 TopLevelClientWithOperationClient client = new TopLevelClientWithOperationClient(credential);
 
 foreach (BinaryData item in client.GetAll("<filter>", null))
@@ -87,7 +87,7 @@ foreach (BinaryData item in client.GetAll("<filter>", null))
 ]]></code>
 This sample shows how to call GetAll with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("TopLevelClientWithOperationClient_KEY"));
 TopLevelClientWithOperationClient client = new TopLevelClientWithOperationClient(credential);
 
 foreach (BinaryData item in client.GetAll("<filter>", null))

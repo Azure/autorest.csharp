@@ -21,7 +21,7 @@ namespace header_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ParamExistingKey_ShortVersion()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HeaderClient_KEY"));
             HeaderClient client = new HeaderClient(credential);
 
             Response response = client.ParamExistingKey("<userAgent>");
@@ -33,7 +33,7 @@ namespace header_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ParamExistingKey_ShortVersion_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HeaderClient_KEY"));
             HeaderClient client = new HeaderClient(credential);
 
             Response response = await client.ParamExistingKeyAsync("<userAgent>");
@@ -45,7 +45,7 @@ namespace header_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ParamExistingKey_AllParameters()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HeaderClient_KEY"));
             HeaderClient client = new HeaderClient(credential);
 
             Response response = client.ParamExistingKey("<userAgent>");
@@ -57,7 +57,7 @@ namespace header_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ParamExistingKey_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HeaderClient_KEY"));
             HeaderClient client = new HeaderClient(credential);
 
             Response response = await client.ParamExistingKeyAsync("<userAgent>");
@@ -69,7 +69,7 @@ namespace header_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ResponseExistingKey_ShortVersion()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HeaderClient_KEY"));
             HeaderClient client = new HeaderClient(credential);
 
             Response response = client.ResponseExistingKey();
@@ -81,7 +81,7 @@ namespace header_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ResponseExistingKey_ShortVersion_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HeaderClient_KEY"));
             HeaderClient client = new HeaderClient(credential);
 
             Response response = await client.ResponseExistingKeyAsync();
@@ -93,7 +93,7 @@ namespace header_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ResponseExistingKey_AllParameters()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HeaderClient_KEY"));
             HeaderClient client = new HeaderClient(credential);
 
             Response response = client.ResponseExistingKey();
@@ -105,7 +105,7 @@ namespace header_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ResponseExistingKey_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HeaderClient_KEY"));
             HeaderClient client = new HeaderClient(credential);
 
             Response response = await client.ResponseExistingKeyAsync();
@@ -117,7 +117,7 @@ namespace header_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ParamProtectedKey_ShortVersion()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HeaderClient_KEY"));
             HeaderClient client = new HeaderClient(credential);
 
             Response response = client.ParamProtectedKey("<contentType>");
@@ -129,7 +129,7 @@ namespace header_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ParamProtectedKey_ShortVersion_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HeaderClient_KEY"));
             HeaderClient client = new HeaderClient(credential);
 
             Response response = await client.ParamProtectedKeyAsync("<contentType>");
@@ -141,7 +141,7 @@ namespace header_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ParamProtectedKey_AllParameters()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HeaderClient_KEY"));
             HeaderClient client = new HeaderClient(credential);
 
             Response response = client.ParamProtectedKey("<contentType>");
@@ -153,7 +153,7 @@ namespace header_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ParamProtectedKey_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HeaderClient_KEY"));
             HeaderClient client = new HeaderClient(credential);
 
             Response response = await client.ParamProtectedKeyAsync("<contentType>");
@@ -165,7 +165,7 @@ namespace header_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ResponseProtectedKey_ShortVersion()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HeaderClient_KEY"));
             HeaderClient client = new HeaderClient(credential);
 
             Response response = client.ResponseProtectedKey();
@@ -177,7 +177,7 @@ namespace header_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ResponseProtectedKey_ShortVersion_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HeaderClient_KEY"));
             HeaderClient client = new HeaderClient(credential);
 
             Response response = await client.ResponseProtectedKeyAsync();
@@ -189,7 +189,7 @@ namespace header_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ResponseProtectedKey_AllParameters()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HeaderClient_KEY"));
             HeaderClient client = new HeaderClient(credential);
 
             Response response = client.ResponseProtectedKey();
@@ -201,7 +201,7 @@ namespace header_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ResponseProtectedKey_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HeaderClient_KEY"));
             HeaderClient client = new HeaderClient(credential);
 
             Response response = await client.ResponseProtectedKeyAsync();
@@ -213,7 +213,7 @@ namespace header_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ParamInteger_ShortVersion()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HeaderClient_KEY"));
             HeaderClient client = new HeaderClient(credential);
 
             Response response = client.ParamInteger("<scenario>", 1234);
@@ -225,7 +225,7 @@ namespace header_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ParamInteger_ShortVersion_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HeaderClient_KEY"));
             HeaderClient client = new HeaderClient(credential);
 
             Response response = await client.ParamIntegerAsync("<scenario>", 1234);
@@ -237,7 +237,7 @@ namespace header_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ParamInteger_AllParameters()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HeaderClient_KEY"));
             HeaderClient client = new HeaderClient(credential);
 
             Response response = client.ParamInteger("<scenario>", 1234);
@@ -249,7 +249,7 @@ namespace header_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ParamInteger_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HeaderClient_KEY"));
             HeaderClient client = new HeaderClient(credential);
 
             Response response = await client.ParamIntegerAsync("<scenario>", 1234);
@@ -261,7 +261,7 @@ namespace header_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ResponseInteger_ShortVersion()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HeaderClient_KEY"));
             HeaderClient client = new HeaderClient(credential);
 
             Response response = client.ResponseInteger("<scenario>");
@@ -273,7 +273,7 @@ namespace header_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ResponseInteger_ShortVersion_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HeaderClient_KEY"));
             HeaderClient client = new HeaderClient(credential);
 
             Response response = await client.ResponseIntegerAsync("<scenario>");
@@ -285,7 +285,7 @@ namespace header_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ResponseInteger_AllParameters()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HeaderClient_KEY"));
             HeaderClient client = new HeaderClient(credential);
 
             Response response = client.ResponseInteger("<scenario>");
@@ -297,7 +297,7 @@ namespace header_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ResponseInteger_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HeaderClient_KEY"));
             HeaderClient client = new HeaderClient(credential);
 
             Response response = await client.ResponseIntegerAsync("<scenario>");
@@ -309,7 +309,7 @@ namespace header_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ParamLong_ShortVersion()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HeaderClient_KEY"));
             HeaderClient client = new HeaderClient(credential);
 
             Response response = client.ParamLong("<scenario>", 1234L);
@@ -321,7 +321,7 @@ namespace header_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ParamLong_ShortVersion_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HeaderClient_KEY"));
             HeaderClient client = new HeaderClient(credential);
 
             Response response = await client.ParamLongAsync("<scenario>", 1234L);
@@ -333,7 +333,7 @@ namespace header_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ParamLong_AllParameters()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HeaderClient_KEY"));
             HeaderClient client = new HeaderClient(credential);
 
             Response response = client.ParamLong("<scenario>", 1234L);
@@ -345,7 +345,7 @@ namespace header_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ParamLong_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HeaderClient_KEY"));
             HeaderClient client = new HeaderClient(credential);
 
             Response response = await client.ParamLongAsync("<scenario>", 1234L);
@@ -357,7 +357,7 @@ namespace header_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ResponseLong_ShortVersion()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HeaderClient_KEY"));
             HeaderClient client = new HeaderClient(credential);
 
             Response response = client.ResponseLong("<scenario>");
@@ -369,7 +369,7 @@ namespace header_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ResponseLong_ShortVersion_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HeaderClient_KEY"));
             HeaderClient client = new HeaderClient(credential);
 
             Response response = await client.ResponseLongAsync("<scenario>");
@@ -381,7 +381,7 @@ namespace header_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ResponseLong_AllParameters()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HeaderClient_KEY"));
             HeaderClient client = new HeaderClient(credential);
 
             Response response = client.ResponseLong("<scenario>");
@@ -393,7 +393,7 @@ namespace header_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ResponseLong_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HeaderClient_KEY"));
             HeaderClient client = new HeaderClient(credential);
 
             Response response = await client.ResponseLongAsync("<scenario>");
@@ -405,7 +405,7 @@ namespace header_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ParamFloat_ShortVersion()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HeaderClient_KEY"));
             HeaderClient client = new HeaderClient(credential);
 
             Response response = client.ParamFloat("<scenario>", 123.45F);
@@ -417,7 +417,7 @@ namespace header_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ParamFloat_ShortVersion_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HeaderClient_KEY"));
             HeaderClient client = new HeaderClient(credential);
 
             Response response = await client.ParamFloatAsync("<scenario>", 123.45F);
@@ -429,7 +429,7 @@ namespace header_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ParamFloat_AllParameters()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HeaderClient_KEY"));
             HeaderClient client = new HeaderClient(credential);
 
             Response response = client.ParamFloat("<scenario>", 123.45F);
@@ -441,7 +441,7 @@ namespace header_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ParamFloat_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HeaderClient_KEY"));
             HeaderClient client = new HeaderClient(credential);
 
             Response response = await client.ParamFloatAsync("<scenario>", 123.45F);
@@ -453,7 +453,7 @@ namespace header_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ResponseFloat_ShortVersion()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HeaderClient_KEY"));
             HeaderClient client = new HeaderClient(credential);
 
             Response response = client.ResponseFloat("<scenario>");
@@ -465,7 +465,7 @@ namespace header_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ResponseFloat_ShortVersion_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HeaderClient_KEY"));
             HeaderClient client = new HeaderClient(credential);
 
             Response response = await client.ResponseFloatAsync("<scenario>");
@@ -477,7 +477,7 @@ namespace header_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ResponseFloat_AllParameters()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HeaderClient_KEY"));
             HeaderClient client = new HeaderClient(credential);
 
             Response response = client.ResponseFloat("<scenario>");
@@ -489,7 +489,7 @@ namespace header_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ResponseFloat_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HeaderClient_KEY"));
             HeaderClient client = new HeaderClient(credential);
 
             Response response = await client.ResponseFloatAsync("<scenario>");
@@ -501,7 +501,7 @@ namespace header_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ParamDouble_ShortVersion()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HeaderClient_KEY"));
             HeaderClient client = new HeaderClient(credential);
 
             Response response = client.ParamDouble("<scenario>", 123.45);
@@ -513,7 +513,7 @@ namespace header_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ParamDouble_ShortVersion_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HeaderClient_KEY"));
             HeaderClient client = new HeaderClient(credential);
 
             Response response = await client.ParamDoubleAsync("<scenario>", 123.45);
@@ -525,7 +525,7 @@ namespace header_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ParamDouble_AllParameters()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HeaderClient_KEY"));
             HeaderClient client = new HeaderClient(credential);
 
             Response response = client.ParamDouble("<scenario>", 123.45);
@@ -537,7 +537,7 @@ namespace header_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ParamDouble_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HeaderClient_KEY"));
             HeaderClient client = new HeaderClient(credential);
 
             Response response = await client.ParamDoubleAsync("<scenario>", 123.45);
@@ -549,7 +549,7 @@ namespace header_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ResponseDouble_ShortVersion()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HeaderClient_KEY"));
             HeaderClient client = new HeaderClient(credential);
 
             Response response = client.ResponseDouble("<scenario>");
@@ -561,7 +561,7 @@ namespace header_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ResponseDouble_ShortVersion_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HeaderClient_KEY"));
             HeaderClient client = new HeaderClient(credential);
 
             Response response = await client.ResponseDoubleAsync("<scenario>");
@@ -573,7 +573,7 @@ namespace header_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ResponseDouble_AllParameters()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HeaderClient_KEY"));
             HeaderClient client = new HeaderClient(credential);
 
             Response response = client.ResponseDouble("<scenario>");
@@ -585,7 +585,7 @@ namespace header_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ResponseDouble_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HeaderClient_KEY"));
             HeaderClient client = new HeaderClient(credential);
 
             Response response = await client.ResponseDoubleAsync("<scenario>");
@@ -597,7 +597,7 @@ namespace header_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ParamBool_ShortVersion()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HeaderClient_KEY"));
             HeaderClient client = new HeaderClient(credential);
 
             Response response = client.ParamBool("<scenario>", true);
@@ -609,7 +609,7 @@ namespace header_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ParamBool_ShortVersion_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HeaderClient_KEY"));
             HeaderClient client = new HeaderClient(credential);
 
             Response response = await client.ParamBoolAsync("<scenario>", true);
@@ -621,7 +621,7 @@ namespace header_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ParamBool_AllParameters()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HeaderClient_KEY"));
             HeaderClient client = new HeaderClient(credential);
 
             Response response = client.ParamBool("<scenario>", true);
@@ -633,7 +633,7 @@ namespace header_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ParamBool_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HeaderClient_KEY"));
             HeaderClient client = new HeaderClient(credential);
 
             Response response = await client.ParamBoolAsync("<scenario>", true);
@@ -645,7 +645,7 @@ namespace header_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ResponseBool_ShortVersion()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HeaderClient_KEY"));
             HeaderClient client = new HeaderClient(credential);
 
             Response response = client.ResponseBool("<scenario>");
@@ -657,7 +657,7 @@ namespace header_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ResponseBool_ShortVersion_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HeaderClient_KEY"));
             HeaderClient client = new HeaderClient(credential);
 
             Response response = await client.ResponseBoolAsync("<scenario>");
@@ -669,7 +669,7 @@ namespace header_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ResponseBool_AllParameters()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HeaderClient_KEY"));
             HeaderClient client = new HeaderClient(credential);
 
             Response response = client.ResponseBool("<scenario>");
@@ -681,7 +681,7 @@ namespace header_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ResponseBool_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HeaderClient_KEY"));
             HeaderClient client = new HeaderClient(credential);
 
             Response response = await client.ResponseBoolAsync("<scenario>");
@@ -693,7 +693,7 @@ namespace header_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ParamString_ShortVersion()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HeaderClient_KEY"));
             HeaderClient client = new HeaderClient(credential);
 
             Response response = client.ParamString("<scenario>");
@@ -705,7 +705,7 @@ namespace header_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ParamString_ShortVersion_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HeaderClient_KEY"));
             HeaderClient client = new HeaderClient(credential);
 
             Response response = await client.ParamStringAsync("<scenario>");
@@ -717,7 +717,7 @@ namespace header_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ParamString_AllParameters()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HeaderClient_KEY"));
             HeaderClient client = new HeaderClient(credential);
 
             Response response = client.ParamString("<scenario>", value: "<value>");
@@ -729,7 +729,7 @@ namespace header_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ParamString_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HeaderClient_KEY"));
             HeaderClient client = new HeaderClient(credential);
 
             Response response = await client.ParamStringAsync("<scenario>", value: "<value>");
@@ -741,7 +741,7 @@ namespace header_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ResponseString_ShortVersion()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HeaderClient_KEY"));
             HeaderClient client = new HeaderClient(credential);
 
             Response response = client.ResponseString("<scenario>");
@@ -753,7 +753,7 @@ namespace header_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ResponseString_ShortVersion_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HeaderClient_KEY"));
             HeaderClient client = new HeaderClient(credential);
 
             Response response = await client.ResponseStringAsync("<scenario>");
@@ -765,7 +765,7 @@ namespace header_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ResponseString_AllParameters()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HeaderClient_KEY"));
             HeaderClient client = new HeaderClient(credential);
 
             Response response = client.ResponseString("<scenario>");
@@ -777,7 +777,7 @@ namespace header_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ResponseString_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HeaderClient_KEY"));
             HeaderClient client = new HeaderClient(credential);
 
             Response response = await client.ResponseStringAsync("<scenario>");
@@ -789,7 +789,7 @@ namespace header_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ParamDate_ShortVersion()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HeaderClient_KEY"));
             HeaderClient client = new HeaderClient(credential);
 
             Response response = client.ParamDate("<scenario>", DateTimeOffset.Parse("2022-05-10"));
@@ -801,7 +801,7 @@ namespace header_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ParamDate_ShortVersion_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HeaderClient_KEY"));
             HeaderClient client = new HeaderClient(credential);
 
             Response response = await client.ParamDateAsync("<scenario>", DateTimeOffset.Parse("2022-05-10"));
@@ -813,7 +813,7 @@ namespace header_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ParamDate_AllParameters()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HeaderClient_KEY"));
             HeaderClient client = new HeaderClient(credential);
 
             Response response = client.ParamDate("<scenario>", DateTimeOffset.Parse("2022-05-10"));
@@ -825,7 +825,7 @@ namespace header_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ParamDate_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HeaderClient_KEY"));
             HeaderClient client = new HeaderClient(credential);
 
             Response response = await client.ParamDateAsync("<scenario>", DateTimeOffset.Parse("2022-05-10"));
@@ -837,7 +837,7 @@ namespace header_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ResponseDate_ShortVersion()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HeaderClient_KEY"));
             HeaderClient client = new HeaderClient(credential);
 
             Response response = client.ResponseDate("<scenario>");
@@ -849,7 +849,7 @@ namespace header_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ResponseDate_ShortVersion_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HeaderClient_KEY"));
             HeaderClient client = new HeaderClient(credential);
 
             Response response = await client.ResponseDateAsync("<scenario>");
@@ -861,7 +861,7 @@ namespace header_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ResponseDate_AllParameters()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HeaderClient_KEY"));
             HeaderClient client = new HeaderClient(credential);
 
             Response response = client.ResponseDate("<scenario>");
@@ -873,7 +873,7 @@ namespace header_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ResponseDate_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HeaderClient_KEY"));
             HeaderClient client = new HeaderClient(credential);
 
             Response response = await client.ResponseDateAsync("<scenario>");
@@ -885,7 +885,7 @@ namespace header_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ParamDatetime_ShortVersion()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HeaderClient_KEY"));
             HeaderClient client = new HeaderClient(credential);
 
             Response response = client.ParamDatetime("<scenario>", DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"));
@@ -897,7 +897,7 @@ namespace header_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ParamDatetime_ShortVersion_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HeaderClient_KEY"));
             HeaderClient client = new HeaderClient(credential);
 
             Response response = await client.ParamDatetimeAsync("<scenario>", DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"));
@@ -909,7 +909,7 @@ namespace header_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ParamDatetime_AllParameters()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HeaderClient_KEY"));
             HeaderClient client = new HeaderClient(credential);
 
             Response response = client.ParamDatetime("<scenario>", DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"));
@@ -921,7 +921,7 @@ namespace header_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ParamDatetime_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HeaderClient_KEY"));
             HeaderClient client = new HeaderClient(credential);
 
             Response response = await client.ParamDatetimeAsync("<scenario>", DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"));
@@ -933,7 +933,7 @@ namespace header_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ResponseDatetime_ShortVersion()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HeaderClient_KEY"));
             HeaderClient client = new HeaderClient(credential);
 
             Response response = client.ResponseDatetime("<scenario>");
@@ -945,7 +945,7 @@ namespace header_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ResponseDatetime_ShortVersion_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HeaderClient_KEY"));
             HeaderClient client = new HeaderClient(credential);
 
             Response response = await client.ResponseDatetimeAsync("<scenario>");
@@ -957,7 +957,7 @@ namespace header_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ResponseDatetime_AllParameters()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HeaderClient_KEY"));
             HeaderClient client = new HeaderClient(credential);
 
             Response response = client.ResponseDatetime("<scenario>");
@@ -969,7 +969,7 @@ namespace header_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ResponseDatetime_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HeaderClient_KEY"));
             HeaderClient client = new HeaderClient(credential);
 
             Response response = await client.ResponseDatetimeAsync("<scenario>");
@@ -981,7 +981,7 @@ namespace header_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ParamDatetimeRfc1123_ShortVersion()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HeaderClient_KEY"));
             HeaderClient client = new HeaderClient(credential);
 
             Response response = client.ParamDatetimeRfc1123("<scenario>");
@@ -993,7 +993,7 @@ namespace header_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ParamDatetimeRfc1123_ShortVersion_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HeaderClient_KEY"));
             HeaderClient client = new HeaderClient(credential);
 
             Response response = await client.ParamDatetimeRfc1123Async("<scenario>");
@@ -1005,7 +1005,7 @@ namespace header_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ParamDatetimeRfc1123_AllParameters()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HeaderClient_KEY"));
             HeaderClient client = new HeaderClient(credential);
 
             Response response = client.ParamDatetimeRfc1123("<scenario>", value: DateTimeOffset.Parse("Tue, 10 May 2022 18:57:31 GMT"));
@@ -1017,7 +1017,7 @@ namespace header_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ParamDatetimeRfc1123_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HeaderClient_KEY"));
             HeaderClient client = new HeaderClient(credential);
 
             Response response = await client.ParamDatetimeRfc1123Async("<scenario>", value: DateTimeOffset.Parse("Tue, 10 May 2022 18:57:31 GMT"));
@@ -1029,7 +1029,7 @@ namespace header_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ResponseDatetimeRfc1123_ShortVersion()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HeaderClient_KEY"));
             HeaderClient client = new HeaderClient(credential);
 
             Response response = client.ResponseDatetimeRfc1123("<scenario>");
@@ -1041,7 +1041,7 @@ namespace header_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ResponseDatetimeRfc1123_ShortVersion_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HeaderClient_KEY"));
             HeaderClient client = new HeaderClient(credential);
 
             Response response = await client.ResponseDatetimeRfc1123Async("<scenario>");
@@ -1053,7 +1053,7 @@ namespace header_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ResponseDatetimeRfc1123_AllParameters()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HeaderClient_KEY"));
             HeaderClient client = new HeaderClient(credential);
 
             Response response = client.ResponseDatetimeRfc1123("<scenario>");
@@ -1065,7 +1065,7 @@ namespace header_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ResponseDatetimeRfc1123_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HeaderClient_KEY"));
             HeaderClient client = new HeaderClient(credential);
 
             Response response = await client.ResponseDatetimeRfc1123Async("<scenario>");
@@ -1077,7 +1077,7 @@ namespace header_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ParamDuration_ShortVersion()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HeaderClient_KEY"));
             HeaderClient client = new HeaderClient(credential);
 
             Response response = client.ParamDuration("<scenario>", XmlConvert.ToTimeSpan("PT1H23M45S"));
@@ -1089,7 +1089,7 @@ namespace header_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ParamDuration_ShortVersion_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HeaderClient_KEY"));
             HeaderClient client = new HeaderClient(credential);
 
             Response response = await client.ParamDurationAsync("<scenario>", XmlConvert.ToTimeSpan("PT1H23M45S"));
@@ -1101,7 +1101,7 @@ namespace header_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ParamDuration_AllParameters()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HeaderClient_KEY"));
             HeaderClient client = new HeaderClient(credential);
 
             Response response = client.ParamDuration("<scenario>", XmlConvert.ToTimeSpan("PT1H23M45S"));
@@ -1113,7 +1113,7 @@ namespace header_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ParamDuration_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HeaderClient_KEY"));
             HeaderClient client = new HeaderClient(credential);
 
             Response response = await client.ParamDurationAsync("<scenario>", XmlConvert.ToTimeSpan("PT1H23M45S"));
@@ -1125,7 +1125,7 @@ namespace header_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ResponseDuration_ShortVersion()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HeaderClient_KEY"));
             HeaderClient client = new HeaderClient(credential);
 
             Response response = client.ResponseDuration("<scenario>");
@@ -1137,7 +1137,7 @@ namespace header_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ResponseDuration_ShortVersion_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HeaderClient_KEY"));
             HeaderClient client = new HeaderClient(credential);
 
             Response response = await client.ResponseDurationAsync("<scenario>");
@@ -1149,7 +1149,7 @@ namespace header_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ResponseDuration_AllParameters()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HeaderClient_KEY"));
             HeaderClient client = new HeaderClient(credential);
 
             Response response = client.ResponseDuration("<scenario>");
@@ -1161,7 +1161,7 @@ namespace header_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ResponseDuration_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HeaderClient_KEY"));
             HeaderClient client = new HeaderClient(credential);
 
             Response response = await client.ResponseDurationAsync("<scenario>");
@@ -1173,7 +1173,7 @@ namespace header_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ParamByte_ShortVersion()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HeaderClient_KEY"));
             HeaderClient client = new HeaderClient(credential);
 
             Response response = client.ParamByte("<scenario>", BinaryData.FromObjectAsJson(new object()));
@@ -1185,7 +1185,7 @@ namespace header_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ParamByte_ShortVersion_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HeaderClient_KEY"));
             HeaderClient client = new HeaderClient(credential);
 
             Response response = await client.ParamByteAsync("<scenario>", BinaryData.FromObjectAsJson(new object()));
@@ -1197,7 +1197,7 @@ namespace header_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ParamByte_AllParameters()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HeaderClient_KEY"));
             HeaderClient client = new HeaderClient(credential);
 
             Response response = client.ParamByte("<scenario>", BinaryData.FromObjectAsJson(new object()));
@@ -1209,7 +1209,7 @@ namespace header_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ParamByte_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HeaderClient_KEY"));
             HeaderClient client = new HeaderClient(credential);
 
             Response response = await client.ParamByteAsync("<scenario>", BinaryData.FromObjectAsJson(new object()));
@@ -1221,7 +1221,7 @@ namespace header_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ResponseByte_ShortVersion()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HeaderClient_KEY"));
             HeaderClient client = new HeaderClient(credential);
 
             Response response = client.ResponseByte("<scenario>");
@@ -1233,7 +1233,7 @@ namespace header_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ResponseByte_ShortVersion_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HeaderClient_KEY"));
             HeaderClient client = new HeaderClient(credential);
 
             Response response = await client.ResponseByteAsync("<scenario>");
@@ -1245,7 +1245,7 @@ namespace header_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ResponseByte_AllParameters()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HeaderClient_KEY"));
             HeaderClient client = new HeaderClient(credential);
 
             Response response = client.ResponseByte("<scenario>");
@@ -1257,7 +1257,7 @@ namespace header_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ResponseByte_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HeaderClient_KEY"));
             HeaderClient client = new HeaderClient(credential);
 
             Response response = await client.ResponseByteAsync("<scenario>");
@@ -1269,7 +1269,7 @@ namespace header_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ParamEnum_ShortVersion()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HeaderClient_KEY"));
             HeaderClient client = new HeaderClient(credential);
 
             Response response = client.ParamEnum("<scenario>");
@@ -1281,7 +1281,7 @@ namespace header_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ParamEnum_ShortVersion_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HeaderClient_KEY"));
             HeaderClient client = new HeaderClient(credential);
 
             Response response = await client.ParamEnumAsync("<scenario>");
@@ -1293,7 +1293,7 @@ namespace header_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ParamEnum_AllParameters()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HeaderClient_KEY"));
             HeaderClient client = new HeaderClient(credential);
 
             Response response = client.ParamEnum("<scenario>", value: "White");
@@ -1305,7 +1305,7 @@ namespace header_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ParamEnum_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HeaderClient_KEY"));
             HeaderClient client = new HeaderClient(credential);
 
             Response response = await client.ParamEnumAsync("<scenario>", value: "White");
@@ -1317,7 +1317,7 @@ namespace header_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ResponseEnum_ShortVersion()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HeaderClient_KEY"));
             HeaderClient client = new HeaderClient(credential);
 
             Response response = client.ResponseEnum("<scenario>");
@@ -1329,7 +1329,7 @@ namespace header_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ResponseEnum_ShortVersion_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HeaderClient_KEY"));
             HeaderClient client = new HeaderClient(credential);
 
             Response response = await client.ResponseEnumAsync("<scenario>");
@@ -1341,7 +1341,7 @@ namespace header_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ResponseEnum_AllParameters()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HeaderClient_KEY"));
             HeaderClient client = new HeaderClient(credential);
 
             Response response = client.ResponseEnum("<scenario>");
@@ -1353,7 +1353,7 @@ namespace header_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ResponseEnum_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HeaderClient_KEY"));
             HeaderClient client = new HeaderClient(credential);
 
             Response response = await client.ResponseEnumAsync("<scenario>");
@@ -1365,7 +1365,7 @@ namespace header_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_CustomRequestId_ShortVersion()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HeaderClient_KEY"));
             HeaderClient client = new HeaderClient(credential);
 
             Response response = client.CustomRequestId();
@@ -1377,7 +1377,7 @@ namespace header_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_CustomRequestId_ShortVersion_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HeaderClient_KEY"));
             HeaderClient client = new HeaderClient(credential);
 
             Response response = await client.CustomRequestIdAsync();
@@ -1389,7 +1389,7 @@ namespace header_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_CustomRequestId_AllParameters()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HeaderClient_KEY"));
             HeaderClient client = new HeaderClient(credential);
 
             Response response = client.CustomRequestId();
@@ -1401,7 +1401,7 @@ namespace header_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_CustomRequestId_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HeaderClient_KEY"));
             HeaderClient client = new HeaderClient(credential);
 
             Response response = await client.CustomRequestIdAsync();

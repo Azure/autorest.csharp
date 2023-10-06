@@ -5,7 +5,7 @@
       <example>
 This sample shows how to call Head408Async.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HttpRetryClient_KEY"));
 HttpRetryClient client = new HttpRetryClient(credential);
 
 Response response = await client.Head408Async();
@@ -14,7 +14,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Head408Async with all request content.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HttpRetryClient_KEY"));
 HttpRetryClient client = new HttpRetryClient(credential);
 
 Response response = await client.Head408Async();
@@ -26,7 +26,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call Head408.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HttpRetryClient_KEY"));
 HttpRetryClient client = new HttpRetryClient(credential);
 
 Response response = client.Head408();
@@ -35,7 +35,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Head408 with all request content.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HttpRetryClient_KEY"));
 HttpRetryClient client = new HttpRetryClient(credential);
 
 Response response = client.Head408();
@@ -47,7 +47,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call Put500Async.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HttpRetryClient_KEY"));
 HttpRetryClient client = new HttpRetryClient(credential);
 
 RequestContent content = null;
@@ -57,7 +57,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Put500Async with all request content.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HttpRetryClient_KEY"));
 HttpRetryClient client = new HttpRetryClient(credential);
 
 RequestContent content = RequestContent.Create("true");
@@ -70,7 +70,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call Put500.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HttpRetryClient_KEY"));
 HttpRetryClient client = new HttpRetryClient(credential);
 
 RequestContent content = null;
@@ -80,7 +80,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Put500 with all request content.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HttpRetryClient_KEY"));
 HttpRetryClient client = new HttpRetryClient(credential);
 
 RequestContent content = RequestContent.Create("true");
@@ -93,7 +93,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call Patch500Async.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HttpRetryClient_KEY"));
 HttpRetryClient client = new HttpRetryClient(credential);
 
 RequestContent content = null;
@@ -103,7 +103,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Patch500Async with all request content.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HttpRetryClient_KEY"));
 HttpRetryClient client = new HttpRetryClient(credential);
 
 RequestContent content = RequestContent.Create("true");
@@ -116,7 +116,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call Patch500.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HttpRetryClient_KEY"));
 HttpRetryClient client = new HttpRetryClient(credential);
 
 RequestContent content = null;
@@ -126,7 +126,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Patch500 with all request content.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HttpRetryClient_KEY"));
 HttpRetryClient client = new HttpRetryClient(credential);
 
 RequestContent content = RequestContent.Create("true");
@@ -139,7 +139,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call Get502Async.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HttpRetryClient_KEY"));
 HttpRetryClient client = new HttpRetryClient(credential);
 
 Response response = await client.Get502Async();
@@ -148,7 +148,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Get502Async with all request content.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HttpRetryClient_KEY"));
 HttpRetryClient client = new HttpRetryClient(credential);
 
 Response response = await client.Get502Async();
@@ -160,7 +160,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call Get502.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HttpRetryClient_KEY"));
 HttpRetryClient client = new HttpRetryClient(credential);
 
 Response response = client.Get502();
@@ -169,7 +169,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Get502 with all request content.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HttpRetryClient_KEY"));
 HttpRetryClient client = new HttpRetryClient(credential);
 
 Response response = client.Get502();
@@ -181,7 +181,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call Options502Async and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HttpRetryClient_KEY"));
 HttpRetryClient client = new HttpRetryClient(credential);
 
 Response response = await client.Options502Async(null);
@@ -191,7 +191,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call Options502Async with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HttpRetryClient_KEY"));
 HttpRetryClient client = new HttpRetryClient(credential);
 
 Response response = await client.Options502Async(null);
@@ -204,7 +204,7 @@ Console.WriteLine(element.ToString());
       <example>
 This sample shows how to call Options502 and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HttpRetryClient_KEY"));
 HttpRetryClient client = new HttpRetryClient(credential);
 
 Response response = client.Options502(null);
@@ -214,7 +214,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call Options502 with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HttpRetryClient_KEY"));
 HttpRetryClient client = new HttpRetryClient(credential);
 
 Response response = client.Options502(null);
@@ -227,7 +227,7 @@ Console.WriteLine(element.ToString());
       <example>
 This sample shows how to call Post503Async.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HttpRetryClient_KEY"));
 HttpRetryClient client = new HttpRetryClient(credential);
 
 RequestContent content = null;
@@ -237,7 +237,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Post503Async with all request content.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HttpRetryClient_KEY"));
 HttpRetryClient client = new HttpRetryClient(credential);
 
 RequestContent content = RequestContent.Create("true");
@@ -250,7 +250,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call Post503.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HttpRetryClient_KEY"));
 HttpRetryClient client = new HttpRetryClient(credential);
 
 RequestContent content = null;
@@ -260,7 +260,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Post503 with all request content.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HttpRetryClient_KEY"));
 HttpRetryClient client = new HttpRetryClient(credential);
 
 RequestContent content = RequestContent.Create("true");
@@ -273,7 +273,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call Delete503Async.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HttpRetryClient_KEY"));
 HttpRetryClient client = new HttpRetryClient(credential);
 
 RequestContent content = null;
@@ -283,7 +283,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Delete503Async with all request content.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HttpRetryClient_KEY"));
 HttpRetryClient client = new HttpRetryClient(credential);
 
 RequestContent content = RequestContent.Create("true");
@@ -296,7 +296,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call Delete503.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HttpRetryClient_KEY"));
 HttpRetryClient client = new HttpRetryClient(credential);
 
 RequestContent content = null;
@@ -306,7 +306,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Delete503 with all request content.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HttpRetryClient_KEY"));
 HttpRetryClient client = new HttpRetryClient(credential);
 
 RequestContent content = RequestContent.Create("true");
@@ -319,7 +319,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call Put504Async.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HttpRetryClient_KEY"));
 HttpRetryClient client = new HttpRetryClient(credential);
 
 RequestContent content = null;
@@ -329,7 +329,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Put504Async with all request content.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HttpRetryClient_KEY"));
 HttpRetryClient client = new HttpRetryClient(credential);
 
 RequestContent content = RequestContent.Create("true");
@@ -342,7 +342,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call Put504.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HttpRetryClient_KEY"));
 HttpRetryClient client = new HttpRetryClient(credential);
 
 RequestContent content = null;
@@ -352,7 +352,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Put504 with all request content.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HttpRetryClient_KEY"));
 HttpRetryClient client = new HttpRetryClient(credential);
 
 RequestContent content = RequestContent.Create("true");
@@ -365,7 +365,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call Patch504Async.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HttpRetryClient_KEY"));
 HttpRetryClient client = new HttpRetryClient(credential);
 
 RequestContent content = null;
@@ -375,7 +375,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Patch504Async with all request content.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HttpRetryClient_KEY"));
 HttpRetryClient client = new HttpRetryClient(credential);
 
 RequestContent content = RequestContent.Create("true");
@@ -388,7 +388,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call Patch504.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HttpRetryClient_KEY"));
 HttpRetryClient client = new HttpRetryClient(credential);
 
 RequestContent content = null;
@@ -398,7 +398,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Patch504 with all request content.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HttpRetryClient_KEY"));
 HttpRetryClient client = new HttpRetryClient(credential);
 
 RequestContent content = RequestContent.Create("true");

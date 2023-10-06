@@ -5,7 +5,7 @@
       <example>
 This sample shows how to call GetItemAsync and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("ParameterSequenceClient_KEY"));
 ParameterSequenceClient client = new ParameterSequenceClient(credential);
 
 Response response = await client.GetItemAsync("<itemName>", "<origin>", null, null);
@@ -15,7 +15,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call GetItemAsync with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("ParameterSequenceClient_KEY"));
 ParameterSequenceClient client = new ParameterSequenceClient(credential);
 
 Response response = await client.GetItemAsync("<itemName>", "<origin>", "<version>", null);
@@ -28,7 +28,7 @@ Console.WriteLine(element.ToString());
       <example>
 This sample shows how to call GetItem and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("ParameterSequenceClient_KEY"));
 ParameterSequenceClient client = new ParameterSequenceClient(credential);
 
 Response response = client.GetItem("<itemName>", "<origin>", null, null);
@@ -38,7 +38,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call GetItem with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("ParameterSequenceClient_KEY"));
 ParameterSequenceClient client = new ParameterSequenceClient(credential);
 
 Response response = client.GetItem("<itemName>", "<origin>", "<version>", null);
@@ -51,7 +51,7 @@ Console.WriteLine(element.ToString());
       <example>
 This sample shows how to call SelectItemAsync and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("ParameterSequenceClient_KEY"));
 ParameterSequenceClient client = new ParameterSequenceClient(credential);
 
 Response response = await client.SelectItemAsync("<itemName>", "<origin>", null, null);
@@ -61,7 +61,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call SelectItemAsync with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("ParameterSequenceClient_KEY"));
 ParameterSequenceClient client = new ParameterSequenceClient(credential);
 
 Response response = await client.SelectItemAsync("<itemName>", "<origin>", "<version>", null);
@@ -74,7 +74,7 @@ Console.WriteLine(element.ToString());
       <example>
 This sample shows how to call SelectItem and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("ParameterSequenceClient_KEY"));
 ParameterSequenceClient client = new ParameterSequenceClient(credential);
 
 Response response = client.SelectItem("<itemName>", "<origin>", null, null);
@@ -84,7 +84,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call SelectItem with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("ParameterSequenceClient_KEY"));
 ParameterSequenceClient client = new ParameterSequenceClient(credential);
 
 Response response = client.SelectItem("<itemName>", "<origin>", "<version>", null);

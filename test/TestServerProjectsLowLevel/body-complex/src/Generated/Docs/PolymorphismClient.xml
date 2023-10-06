@@ -5,7 +5,7 @@
       <example>
 This sample shows how to call GetValidAsync and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PolymorphismClient_KEY"));
 PolymorphismClient client = new PolymorphismClient(credential);
 
 Response response = await client.GetValidAsync(null);
@@ -16,7 +16,7 @@ Console.WriteLine(element.GetProperty("length").ToString());
 ]]></code>
 This sample shows how to call GetValidAsync with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PolymorphismClient_KEY"));
 PolymorphismClient client = new PolymorphismClient(credential);
 
 Response response = await client.GetValidAsync(null);
@@ -34,7 +34,7 @@ Console.WriteLine(element.GetProperty("siblings")[0].GetProperty("length").ToStr
       <example>
 This sample shows how to call GetValid and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PolymorphismClient_KEY"));
 PolymorphismClient client = new PolymorphismClient(credential);
 
 Response response = client.GetValid(null);
@@ -45,7 +45,7 @@ Console.WriteLine(element.GetProperty("length").ToString());
 ]]></code>
 This sample shows how to call GetValid with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PolymorphismClient_KEY"));
 PolymorphismClient client = new PolymorphismClient(credential);
 
 Response response = client.GetValid(null);
@@ -63,7 +63,7 @@ Console.WriteLine(element.GetProperty("siblings")[0].GetProperty("length").ToStr
       <example>
 This sample shows how to call PutValidAsync.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PolymorphismClient_KEY"));
 PolymorphismClient client = new PolymorphismClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -77,7 +77,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutValidAsync with all request content.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PolymorphismClient_KEY"));
 PolymorphismClient client = new PolymorphismClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -101,7 +101,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call PutValid.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PolymorphismClient_KEY"));
 PolymorphismClient client = new PolymorphismClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -115,7 +115,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutValid with all request content.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PolymorphismClient_KEY"));
 PolymorphismClient client = new PolymorphismClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -139,7 +139,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call GetDotSyntaxAsync and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PolymorphismClient_KEY"));
 PolymorphismClient client = new PolymorphismClient(credential);
 
 Response response = await client.GetDotSyntaxAsync(null);
@@ -149,7 +149,7 @@ Console.WriteLine(element.GetProperty("fish.type").ToString());
 ]]></code>
 This sample shows how to call GetDotSyntaxAsync with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PolymorphismClient_KEY"));
 PolymorphismClient client = new PolymorphismClient(credential);
 
 Response response = await client.GetDotSyntaxAsync(null);
@@ -163,7 +163,7 @@ Console.WriteLine(element.GetProperty("species").ToString());
       <example>
 This sample shows how to call GetDotSyntax and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PolymorphismClient_KEY"));
 PolymorphismClient client = new PolymorphismClient(credential);
 
 Response response = client.GetDotSyntax(null);
@@ -173,7 +173,7 @@ Console.WriteLine(element.GetProperty("fish.type").ToString());
 ]]></code>
 This sample shows how to call GetDotSyntax with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PolymorphismClient_KEY"));
 PolymorphismClient client = new PolymorphismClient(credential);
 
 Response response = client.GetDotSyntax(null);
@@ -187,7 +187,7 @@ Console.WriteLine(element.GetProperty("species").ToString());
       <example>
 This sample shows how to call GetComposedWithDiscriminatorAsync and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PolymorphismClient_KEY"));
 PolymorphismClient client = new PolymorphismClient(credential);
 
 Response response = await client.GetComposedWithDiscriminatorAsync(null);
@@ -197,7 +197,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call GetComposedWithDiscriminatorAsync with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PolymorphismClient_KEY"));
 PolymorphismClient client = new PolymorphismClient(credential);
 
 Response response = await client.GetComposedWithDiscriminatorAsync(null);
@@ -221,7 +221,7 @@ Console.WriteLine(element.GetProperty("fishes")[0].GetProperty("species").ToStri
       <example>
 This sample shows how to call GetComposedWithDiscriminator and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PolymorphismClient_KEY"));
 PolymorphismClient client = new PolymorphismClient(credential);
 
 Response response = client.GetComposedWithDiscriminator(null);
@@ -231,7 +231,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call GetComposedWithDiscriminator with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PolymorphismClient_KEY"));
 PolymorphismClient client = new PolymorphismClient(credential);
 
 Response response = client.GetComposedWithDiscriminator(null);
@@ -255,7 +255,7 @@ Console.WriteLine(element.GetProperty("fishes")[0].GetProperty("species").ToStri
       <example>
 This sample shows how to call GetComposedWithoutDiscriminatorAsync and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PolymorphismClient_KEY"));
 PolymorphismClient client = new PolymorphismClient(credential);
 
 Response response = await client.GetComposedWithoutDiscriminatorAsync(null);
@@ -265,7 +265,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call GetComposedWithoutDiscriminatorAsync with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PolymorphismClient_KEY"));
 PolymorphismClient client = new PolymorphismClient(credential);
 
 Response response = await client.GetComposedWithoutDiscriminatorAsync(null);
@@ -289,7 +289,7 @@ Console.WriteLine(element.GetProperty("fishes")[0].GetProperty("species").ToStri
       <example>
 This sample shows how to call GetComposedWithoutDiscriminator and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PolymorphismClient_KEY"));
 PolymorphismClient client = new PolymorphismClient(credential);
 
 Response response = client.GetComposedWithoutDiscriminator(null);
@@ -299,7 +299,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call GetComposedWithoutDiscriminator with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PolymorphismClient_KEY"));
 PolymorphismClient client = new PolymorphismClient(credential);
 
 Response response = client.GetComposedWithoutDiscriminator(null);
@@ -323,7 +323,7 @@ Console.WriteLine(element.GetProperty("fishes")[0].GetProperty("species").ToStri
       <example>
 This sample shows how to call GetComplicatedAsync and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PolymorphismClient_KEY"));
 PolymorphismClient client = new PolymorphismClient(credential);
 
 Response response = await client.GetComplicatedAsync(null);
@@ -334,7 +334,7 @@ Console.WriteLine(element.GetProperty("length").ToString());
 ]]></code>
 This sample shows how to call GetComplicatedAsync with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PolymorphismClient_KEY"));
 PolymorphismClient client = new PolymorphismClient(credential);
 
 Response response = await client.GetComplicatedAsync(null);
@@ -354,7 +354,7 @@ Console.WriteLine(element.GetProperty("siblings")[0].GetProperty("length").ToStr
       <example>
 This sample shows how to call GetComplicated and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PolymorphismClient_KEY"));
 PolymorphismClient client = new PolymorphismClient(credential);
 
 Response response = client.GetComplicated(null);
@@ -365,7 +365,7 @@ Console.WriteLine(element.GetProperty("length").ToString());
 ]]></code>
 This sample shows how to call GetComplicated with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PolymorphismClient_KEY"));
 PolymorphismClient client = new PolymorphismClient(credential);
 
 Response response = client.GetComplicated(null);
@@ -385,7 +385,7 @@ Console.WriteLine(element.GetProperty("siblings")[0].GetProperty("length").ToStr
       <example>
 This sample shows how to call PutComplicatedAsync.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PolymorphismClient_KEY"));
 PolymorphismClient client = new PolymorphismClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -399,7 +399,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutComplicatedAsync with all request content.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PolymorphismClient_KEY"));
 PolymorphismClient client = new PolymorphismClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -435,7 +435,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call PutComplicated.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PolymorphismClient_KEY"));
 PolymorphismClient client = new PolymorphismClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -449,7 +449,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutComplicated with all request content.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PolymorphismClient_KEY"));
 PolymorphismClient client = new PolymorphismClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -485,7 +485,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call PutMissingDiscriminatorAsync and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PolymorphismClient_KEY"));
 PolymorphismClient client = new PolymorphismClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -501,7 +501,7 @@ Console.WriteLine(element.GetProperty("length").ToString());
 ]]></code>
 This sample shows how to call PutMissingDiscriminatorAsync with all request content and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PolymorphismClient_KEY"));
 PolymorphismClient client = new PolymorphismClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -545,7 +545,7 @@ Console.WriteLine(element.GetProperty("siblings")[0].GetProperty("length").ToStr
       <example>
 This sample shows how to call PutMissingDiscriminator and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PolymorphismClient_KEY"));
 PolymorphismClient client = new PolymorphismClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -561,7 +561,7 @@ Console.WriteLine(element.GetProperty("length").ToString());
 ]]></code>
 This sample shows how to call PutMissingDiscriminator with all request content and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PolymorphismClient_KEY"));
 PolymorphismClient client = new PolymorphismClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -605,7 +605,7 @@ Console.WriteLine(element.GetProperty("siblings")[0].GetProperty("length").ToStr
       <example>
 This sample shows how to call PutValidMissingRequiredAsync.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PolymorphismClient_KEY"));
 PolymorphismClient client = new PolymorphismClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -619,7 +619,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutValidMissingRequiredAsync with all request content.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PolymorphismClient_KEY"));
 PolymorphismClient client = new PolymorphismClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -643,7 +643,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call PutValidMissingRequired.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PolymorphismClient_KEY"));
 PolymorphismClient client = new PolymorphismClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -657,7 +657,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutValidMissingRequired with all request content.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PolymorphismClient_KEY"));
 PolymorphismClient client = new PolymorphismClient(credential);
 
 RequestContent content = RequestContent.Create(new

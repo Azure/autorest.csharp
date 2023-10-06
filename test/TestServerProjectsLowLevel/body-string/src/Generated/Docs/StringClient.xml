@@ -5,7 +5,7 @@
       <example>
 This sample shows how to call GetNullAsync and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("StringClient_KEY"));
 StringClient client = new StringClient(credential);
 
 Response response = await client.GetNullAsync(null);
@@ -15,7 +15,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call GetNullAsync with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("StringClient_KEY"));
 StringClient client = new StringClient(credential);
 
 Response response = await client.GetNullAsync(null);
@@ -28,7 +28,7 @@ Console.WriteLine(element.ToString());
       <example>
 This sample shows how to call GetNull and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("StringClient_KEY"));
 StringClient client = new StringClient(credential);
 
 Response response = client.GetNull(null);
@@ -38,7 +38,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call GetNull with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("StringClient_KEY"));
 StringClient client = new StringClient(credential);
 
 Response response = client.GetNull(null);
@@ -51,7 +51,7 @@ Console.WriteLine(element.ToString());
       <example>
 This sample shows how to call PutNullAsync.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("StringClient_KEY"));
 StringClient client = new StringClient(credential);
 
 RequestContent content = null;
@@ -61,7 +61,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutNullAsync with all request content.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("StringClient_KEY"));
 StringClient client = new StringClient(credential);
 
 RequestContent content = RequestContent.Create("<stringBody>");
@@ -74,7 +74,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call PutNull.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("StringClient_KEY"));
 StringClient client = new StringClient(credential);
 
 RequestContent content = null;
@@ -84,7 +84,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutNull with all request content.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("StringClient_KEY"));
 StringClient client = new StringClient(credential);
 
 RequestContent content = RequestContent.Create("<stringBody>");
@@ -97,7 +97,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call GetEmptyAsync and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("StringClient_KEY"));
 StringClient client = new StringClient(credential);
 
 Response response = await client.GetEmptyAsync(null);
@@ -107,7 +107,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call GetEmptyAsync with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("StringClient_KEY"));
 StringClient client = new StringClient(credential);
 
 Response response = await client.GetEmptyAsync(null);
@@ -120,7 +120,7 @@ Console.WriteLine(element.ToString());
       <example>
 This sample shows how to call GetEmpty and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("StringClient_KEY"));
 StringClient client = new StringClient(credential);
 
 Response response = client.GetEmpty(null);
@@ -130,7 +130,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call GetEmpty with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("StringClient_KEY"));
 StringClient client = new StringClient(credential);
 
 Response response = client.GetEmpty(null);
@@ -143,7 +143,7 @@ Console.WriteLine(element.ToString());
       <example>
 This sample shows how to call PutEmptyAsync.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("StringClient_KEY"));
 StringClient client = new StringClient(credential);
 
 RequestContent content = RequestContent.Create("");
@@ -153,7 +153,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutEmptyAsync with all request content.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("StringClient_KEY"));
 StringClient client = new StringClient(credential);
 
 RequestContent content = RequestContent.Create("");
@@ -166,7 +166,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call PutEmpty.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("StringClient_KEY"));
 StringClient client = new StringClient(credential);
 
 RequestContent content = RequestContent.Create("");
@@ -176,7 +176,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutEmpty with all request content.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("StringClient_KEY"));
 StringClient client = new StringClient(credential);
 
 RequestContent content = RequestContent.Create("");
@@ -189,7 +189,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call GetMbcsAsync and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("StringClient_KEY"));
 StringClient client = new StringClient(credential);
 
 Response response = await client.GetMbcsAsync(null);
@@ -199,7 +199,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call GetMbcsAsync with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("StringClient_KEY"));
 StringClient client = new StringClient(credential);
 
 Response response = await client.GetMbcsAsync(null);
@@ -212,7 +212,7 @@ Console.WriteLine(element.ToString());
       <example>
 This sample shows how to call GetMbcs and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("StringClient_KEY"));
 StringClient client = new StringClient(credential);
 
 Response response = client.GetMbcs(null);
@@ -222,7 +222,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call GetMbcs with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("StringClient_KEY"));
 StringClient client = new StringClient(credential);
 
 Response response = client.GetMbcs(null);
@@ -235,7 +235,7 @@ Console.WriteLine(element.ToString());
       <example>
 This sample shows how to call PutMbcsAsync.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("StringClient_KEY"));
 StringClient client = new StringClient(credential);
 
 RequestContent content = RequestContent.Create("啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€");
@@ -245,7 +245,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutMbcsAsync with all request content.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("StringClient_KEY"));
 StringClient client = new StringClient(credential);
 
 RequestContent content = RequestContent.Create("啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€");
@@ -258,7 +258,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call PutMbcs.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("StringClient_KEY"));
 StringClient client = new StringClient(credential);
 
 RequestContent content = RequestContent.Create("啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€");
@@ -268,7 +268,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutMbcs with all request content.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("StringClient_KEY"));
 StringClient client = new StringClient(credential);
 
 RequestContent content = RequestContent.Create("啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€");
@@ -281,7 +281,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call GetWhitespaceAsync and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("StringClient_KEY"));
 StringClient client = new StringClient(credential);
 
 Response response = await client.GetWhitespaceAsync(null);
@@ -291,7 +291,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call GetWhitespaceAsync with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("StringClient_KEY"));
 StringClient client = new StringClient(credential);
 
 Response response = await client.GetWhitespaceAsync(null);
@@ -304,7 +304,7 @@ Console.WriteLine(element.ToString());
       <example>
 This sample shows how to call GetWhitespace and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("StringClient_KEY"));
 StringClient client = new StringClient(credential);
 
 Response response = client.GetWhitespace(null);
@@ -314,7 +314,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call GetWhitespace with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("StringClient_KEY"));
 StringClient client = new StringClient(credential);
 
 Response response = client.GetWhitespace(null);
@@ -327,7 +327,7 @@ Console.WriteLine(element.ToString());
       <example>
 This sample shows how to call PutWhitespaceAsync.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("StringClient_KEY"));
 StringClient client = new StringClient(credential);
 
 RequestContent content = RequestContent.Create("    Now is the time for all good men to come to the aid of their country    ");
@@ -337,7 +337,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutWhitespaceAsync with all request content.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("StringClient_KEY"));
 StringClient client = new StringClient(credential);
 
 RequestContent content = RequestContent.Create("    Now is the time for all good men to come to the aid of their country    ");
@@ -350,7 +350,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call PutWhitespace.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("StringClient_KEY"));
 StringClient client = new StringClient(credential);
 
 RequestContent content = RequestContent.Create("    Now is the time for all good men to come to the aid of their country    ");
@@ -360,7 +360,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutWhitespace with all request content.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("StringClient_KEY"));
 StringClient client = new StringClient(credential);
 
 RequestContent content = RequestContent.Create("    Now is the time for all good men to come to the aid of their country    ");
@@ -373,7 +373,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call GetNotProvidedAsync and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("StringClient_KEY"));
 StringClient client = new StringClient(credential);
 
 Response response = await client.GetNotProvidedAsync(null);
@@ -383,7 +383,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call GetNotProvidedAsync with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("StringClient_KEY"));
 StringClient client = new StringClient(credential);
 
 Response response = await client.GetNotProvidedAsync(null);
@@ -396,7 +396,7 @@ Console.WriteLine(element.ToString());
       <example>
 This sample shows how to call GetNotProvided and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("StringClient_KEY"));
 StringClient client = new StringClient(credential);
 
 Response response = client.GetNotProvided(null);
@@ -406,7 +406,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call GetNotProvided with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("StringClient_KEY"));
 StringClient client = new StringClient(credential);
 
 Response response = client.GetNotProvided(null);
@@ -419,7 +419,7 @@ Console.WriteLine(element.ToString());
       <example>
 This sample shows how to call GetBase64EncodedAsync and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("StringClient_KEY"));
 StringClient client = new StringClient(credential);
 
 Response response = await client.GetBase64EncodedAsync(null);
@@ -429,7 +429,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call GetBase64EncodedAsync with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("StringClient_KEY"));
 StringClient client = new StringClient(credential);
 
 Response response = await client.GetBase64EncodedAsync(null);
@@ -442,7 +442,7 @@ Console.WriteLine(element.ToString());
       <example>
 This sample shows how to call GetBase64Encoded and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("StringClient_KEY"));
 StringClient client = new StringClient(credential);
 
 Response response = client.GetBase64Encoded(null);
@@ -452,7 +452,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call GetBase64Encoded with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("StringClient_KEY"));
 StringClient client = new StringClient(credential);
 
 Response response = client.GetBase64Encoded(null);
@@ -465,7 +465,7 @@ Console.WriteLine(element.ToString());
       <example>
 This sample shows how to call GetBase64UrlEncodedAsync and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("StringClient_KEY"));
 StringClient client = new StringClient(credential);
 
 Response response = await client.GetBase64UrlEncodedAsync(null);
@@ -475,7 +475,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call GetBase64UrlEncodedAsync with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("StringClient_KEY"));
 StringClient client = new StringClient(credential);
 
 Response response = await client.GetBase64UrlEncodedAsync(null);
@@ -488,7 +488,7 @@ Console.WriteLine(element.ToString());
       <example>
 This sample shows how to call GetBase64UrlEncoded and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("StringClient_KEY"));
 StringClient client = new StringClient(credential);
 
 Response response = client.GetBase64UrlEncoded(null);
@@ -498,7 +498,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call GetBase64UrlEncoded with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("StringClient_KEY"));
 StringClient client = new StringClient(credential);
 
 Response response = client.GetBase64UrlEncoded(null);
@@ -511,7 +511,7 @@ Console.WriteLine(element.ToString());
       <example>
 This sample shows how to call PutBase64UrlEncodedAsync.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("StringClient_KEY"));
 StringClient client = new StringClient(credential);
 
 RequestContent content = RequestContent.Create(new object());
@@ -521,7 +521,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutBase64UrlEncodedAsync with all request content.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("StringClient_KEY"));
 StringClient client = new StringClient(credential);
 
 RequestContent content = RequestContent.Create(new object());
@@ -534,7 +534,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call PutBase64UrlEncoded.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("StringClient_KEY"));
 StringClient client = new StringClient(credential);
 
 RequestContent content = RequestContent.Create(new object());
@@ -544,7 +544,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutBase64UrlEncoded with all request content.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("StringClient_KEY"));
 StringClient client = new StringClient(credential);
 
 RequestContent content = RequestContent.Create(new object());
@@ -557,7 +557,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call GetNullBase64UrlEncodedAsync and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("StringClient_KEY"));
 StringClient client = new StringClient(credential);
 
 Response response = await client.GetNullBase64UrlEncodedAsync(null);
@@ -567,7 +567,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call GetNullBase64UrlEncodedAsync with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("StringClient_KEY"));
 StringClient client = new StringClient(credential);
 
 Response response = await client.GetNullBase64UrlEncodedAsync(null);
@@ -580,7 +580,7 @@ Console.WriteLine(element.ToString());
       <example>
 This sample shows how to call GetNullBase64UrlEncoded and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("StringClient_KEY"));
 StringClient client = new StringClient(credential);
 
 Response response = client.GetNullBase64UrlEncoded(null);
@@ -590,7 +590,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call GetNullBase64UrlEncoded with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("StringClient_KEY"));
 StringClient client = new StringClient(credential);
 
 Response response = client.GetNullBase64UrlEncoded(null);

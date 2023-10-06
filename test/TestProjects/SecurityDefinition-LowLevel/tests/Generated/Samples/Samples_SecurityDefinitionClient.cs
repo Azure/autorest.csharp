@@ -22,7 +22,7 @@ namespace SecurityDefinition_LowLevel.Samples
         public void Example_Operation_ShortVersion()
         {
             Uri endpoint = new Uri("<endpoint>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("SecurityDefinitionClient_KEY"));
             SecurityDefinitionClient client = new SecurityDefinitionClient(endpoint, credential);
 
             RequestContent content = RequestContent.Create(new object());
@@ -36,7 +36,7 @@ namespace SecurityDefinition_LowLevel.Samples
         public async Task Example_Operation_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<endpoint>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("SecurityDefinitionClient_KEY"));
             SecurityDefinitionClient client = new SecurityDefinitionClient(endpoint, credential);
 
             RequestContent content = RequestContent.Create(new object());
@@ -50,7 +50,7 @@ namespace SecurityDefinition_LowLevel.Samples
         public void Example_Operation_AllParameters()
         {
             Uri endpoint = new Uri("<endpoint>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("SecurityDefinitionClient_KEY"));
             SecurityDefinitionClient client = new SecurityDefinitionClient(endpoint, credential);
 
             RequestContent content = RequestContent.Create(new
@@ -68,7 +68,7 @@ namespace SecurityDefinition_LowLevel.Samples
         public async Task Example_Operation_AllParameters_Async()
         {
             Uri endpoint = new Uri("<endpoint>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("SecurityDefinitionClient_KEY"));
             SecurityDefinitionClient client = new SecurityDefinitionClient(endpoint, credential);
 
             RequestContent content = RequestContent.Create(new

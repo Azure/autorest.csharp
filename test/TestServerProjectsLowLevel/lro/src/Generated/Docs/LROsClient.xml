@@ -5,7 +5,7 @@
       <example>
 This sample shows how to call Put200SucceededAsync and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 RequestContent content = null;
@@ -17,7 +17,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call Put200SucceededAsync with all parameters and request content and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -49,7 +49,7 @@ Console.WriteLine(element.GetProperty("name").ToString());
       <example>
 This sample shows how to call Put200Succeeded and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 RequestContent content = null;
@@ -61,7 +61,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call Put200Succeeded with all parameters and request content and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -93,7 +93,7 @@ Console.WriteLine(element.GetProperty("name").ToString());
       <example>
 This sample shows how to call Patch200SucceededIgnoreHeadersAsync and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 RequestContent content = null;
@@ -105,7 +105,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call Patch200SucceededIgnoreHeadersAsync with all parameters and request content and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -137,7 +137,7 @@ Console.WriteLine(element.GetProperty("name").ToString());
       <example>
 This sample shows how to call Patch200SucceededIgnoreHeaders and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 RequestContent content = null;
@@ -149,7 +149,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call Patch200SucceededIgnoreHeaders with all parameters and request content and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -181,7 +181,7 @@ Console.WriteLine(element.GetProperty("name").ToString());
       <example>
 This sample shows how to call Patch201RetryWithAsyncHeaderAsync and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 RequestContent content = null;
@@ -193,7 +193,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call Patch201RetryWithAsyncHeaderAsync with all parameters and request content and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -225,7 +225,7 @@ Console.WriteLine(element.GetProperty("name").ToString());
       <example>
 This sample shows how to call Patch201RetryWithAsyncHeader and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 RequestContent content = null;
@@ -237,7 +237,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call Patch201RetryWithAsyncHeader with all parameters and request content and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -269,7 +269,7 @@ Console.WriteLine(element.GetProperty("name").ToString());
       <example>
 This sample shows how to call Patch202RetryWithAsyncAndLocationHeaderAsync and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 RequestContent content = null;
@@ -281,7 +281,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call Patch202RetryWithAsyncAndLocationHeaderAsync with all parameters and request content and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -313,7 +313,7 @@ Console.WriteLine(element.GetProperty("name").ToString());
       <example>
 This sample shows how to call Patch202RetryWithAsyncAndLocationHeader and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 RequestContent content = null;
@@ -325,7 +325,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call Patch202RetryWithAsyncAndLocationHeader with all parameters and request content and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -357,7 +357,7 @@ Console.WriteLine(element.GetProperty("name").ToString());
       <example>
 This sample shows how to call Put201SucceededAsync and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 RequestContent content = null;
@@ -369,7 +369,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call Put201SucceededAsync with all parameters and request content and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -401,7 +401,7 @@ Console.WriteLine(element.GetProperty("name").ToString());
       <example>
 This sample shows how to call Put201Succeeded and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 RequestContent content = null;
@@ -413,7 +413,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call Put201Succeeded with all parameters and request content and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -445,7 +445,7 @@ Console.WriteLine(element.GetProperty("name").ToString());
       <example>
 This sample shows how to call Post202ListAsync and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 Operation<BinaryData> operation = await client.Post202ListAsync(WaitUntil.Completed, null);
@@ -456,7 +456,7 @@ Console.WriteLine(element[0].ToString());
 ]]></code>
 This sample shows how to call Post202ListAsync with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 Operation<BinaryData> operation = await client.Post202ListAsync(WaitUntil.Completed, null);
@@ -476,7 +476,7 @@ Console.WriteLine(element[0].GetProperty("name").ToString());
       <example>
 This sample shows how to call Post202List and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 Operation<BinaryData> operation = client.Post202List(WaitUntil.Completed, null);
@@ -487,7 +487,7 @@ Console.WriteLine(element[0].ToString());
 ]]></code>
 This sample shows how to call Post202List with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 Operation<BinaryData> operation = client.Post202List(WaitUntil.Completed, null);
@@ -507,7 +507,7 @@ Console.WriteLine(element[0].GetProperty("name").ToString());
       <example>
 This sample shows how to call Put200SucceededNoStateAsync and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 RequestContent content = null;
@@ -519,7 +519,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call Put200SucceededNoStateAsync with all parameters and request content and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -551,7 +551,7 @@ Console.WriteLine(element.GetProperty("name").ToString());
       <example>
 This sample shows how to call Put200SucceededNoState and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 RequestContent content = null;
@@ -563,7 +563,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call Put200SucceededNoState with all parameters and request content and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -595,7 +595,7 @@ Console.WriteLine(element.GetProperty("name").ToString());
       <example>
 This sample shows how to call Put202Retry200Async and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 RequestContent content = null;
@@ -607,7 +607,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call Put202Retry200Async with all parameters and request content and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -639,7 +639,7 @@ Console.WriteLine(element.GetProperty("name").ToString());
       <example>
 This sample shows how to call Put202Retry200 and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 RequestContent content = null;
@@ -651,7 +651,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call Put202Retry200 with all parameters and request content and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -683,7 +683,7 @@ Console.WriteLine(element.GetProperty("name").ToString());
       <example>
 This sample shows how to call Put201CreatingSucceeded200Async and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 RequestContent content = null;
@@ -695,7 +695,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call Put201CreatingSucceeded200Async with all parameters and request content and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -727,7 +727,7 @@ Console.WriteLine(element.GetProperty("name").ToString());
       <example>
 This sample shows how to call Put201CreatingSucceeded200 and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 RequestContent content = null;
@@ -739,7 +739,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call Put201CreatingSucceeded200 with all parameters and request content and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -771,7 +771,7 @@ Console.WriteLine(element.GetProperty("name").ToString());
       <example>
 This sample shows how to call Put200UpdatingSucceeded204Async and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 RequestContent content = null;
@@ -783,7 +783,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call Put200UpdatingSucceeded204Async with all parameters and request content and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -815,7 +815,7 @@ Console.WriteLine(element.GetProperty("name").ToString());
       <example>
 This sample shows how to call Put200UpdatingSucceeded204 and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 RequestContent content = null;
@@ -827,7 +827,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call Put200UpdatingSucceeded204 with all parameters and request content and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -859,7 +859,7 @@ Console.WriteLine(element.GetProperty("name").ToString());
       <example>
 This sample shows how to call Put201CreatingFailed200Async and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 RequestContent content = null;
@@ -871,7 +871,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call Put201CreatingFailed200Async with all parameters and request content and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -903,7 +903,7 @@ Console.WriteLine(element.GetProperty("name").ToString());
       <example>
 This sample shows how to call Put201CreatingFailed200 and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 RequestContent content = null;
@@ -915,7 +915,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call Put201CreatingFailed200 with all parameters and request content and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -947,7 +947,7 @@ Console.WriteLine(element.GetProperty("name").ToString());
       <example>
 This sample shows how to call Put200Acceptedcanceled200Async and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 RequestContent content = null;
@@ -959,7 +959,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call Put200Acceptedcanceled200Async with all parameters and request content and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -991,7 +991,7 @@ Console.WriteLine(element.GetProperty("name").ToString());
       <example>
 This sample shows how to call Put200Acceptedcanceled200 and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 RequestContent content = null;
@@ -1003,7 +1003,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call Put200Acceptedcanceled200 with all parameters and request content and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -1035,7 +1035,7 @@ Console.WriteLine(element.GetProperty("name").ToString());
       <example>
 This sample shows how to call PutNoHeaderInRetryAsync and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 RequestContent content = null;
@@ -1047,7 +1047,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call PutNoHeaderInRetryAsync with all parameters and request content and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -1079,7 +1079,7 @@ Console.WriteLine(element.GetProperty("name").ToString());
       <example>
 This sample shows how to call PutNoHeaderInRetry and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 RequestContent content = null;
@@ -1091,7 +1091,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call PutNoHeaderInRetry with all parameters and request content and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -1123,7 +1123,7 @@ Console.WriteLine(element.GetProperty("name").ToString());
       <example>
 This sample shows how to call PutAsyncRetrySucceededAsync and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 RequestContent content = null;
@@ -1135,7 +1135,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call PutAsyncRetrySucceededAsync with all parameters and request content and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -1167,7 +1167,7 @@ Console.WriteLine(element.GetProperty("name").ToString());
       <example>
 This sample shows how to call PutAsyncRetrySucceeded and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 RequestContent content = null;
@@ -1179,7 +1179,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call PutAsyncRetrySucceeded with all parameters and request content and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -1211,7 +1211,7 @@ Console.WriteLine(element.GetProperty("name").ToString());
       <example>
 This sample shows how to call PutAsyncNoRetrySucceededAsync and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 RequestContent content = null;
@@ -1223,7 +1223,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call PutAsyncNoRetrySucceededAsync with all parameters and request content and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -1255,7 +1255,7 @@ Console.WriteLine(element.GetProperty("name").ToString());
       <example>
 This sample shows how to call PutAsyncNoRetrySucceeded and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 RequestContent content = null;
@@ -1267,7 +1267,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call PutAsyncNoRetrySucceeded with all parameters and request content and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -1299,7 +1299,7 @@ Console.WriteLine(element.GetProperty("name").ToString());
       <example>
 This sample shows how to call PutAsyncRetryFailedAsync and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 RequestContent content = null;
@@ -1311,7 +1311,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call PutAsyncRetryFailedAsync with all parameters and request content and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -1343,7 +1343,7 @@ Console.WriteLine(element.GetProperty("name").ToString());
       <example>
 This sample shows how to call PutAsyncRetryFailed and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 RequestContent content = null;
@@ -1355,7 +1355,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call PutAsyncRetryFailed with all parameters and request content and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -1387,7 +1387,7 @@ Console.WriteLine(element.GetProperty("name").ToString());
       <example>
 This sample shows how to call PutAsyncNoRetrycanceledAsync and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 RequestContent content = null;
@@ -1399,7 +1399,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call PutAsyncNoRetrycanceledAsync with all parameters and request content and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -1431,7 +1431,7 @@ Console.WriteLine(element.GetProperty("name").ToString());
       <example>
 This sample shows how to call PutAsyncNoRetrycanceled and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 RequestContent content = null;
@@ -1443,7 +1443,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call PutAsyncNoRetrycanceled with all parameters and request content and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -1475,7 +1475,7 @@ Console.WriteLine(element.GetProperty("name").ToString());
       <example>
 This sample shows how to call PutAsyncNoHeaderInRetryAsync and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 RequestContent content = null;
@@ -1487,7 +1487,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call PutAsyncNoHeaderInRetryAsync with all parameters and request content and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -1519,7 +1519,7 @@ Console.WriteLine(element.GetProperty("name").ToString());
       <example>
 This sample shows how to call PutAsyncNoHeaderInRetry and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 RequestContent content = null;
@@ -1531,7 +1531,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call PutAsyncNoHeaderInRetry with all parameters and request content and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -1563,7 +1563,7 @@ Console.WriteLine(element.GetProperty("name").ToString());
       <example>
 This sample shows how to call PutNonResourceAsync and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 RequestContent content = null;
@@ -1575,7 +1575,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call PutNonResourceAsync with all parameters and request content and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -1595,7 +1595,7 @@ Console.WriteLine(element.GetProperty("id").ToString());
       <example>
 This sample shows how to call PutNonResource and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 RequestContent content = null;
@@ -1607,7 +1607,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call PutNonResource with all parameters and request content and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -1627,7 +1627,7 @@ Console.WriteLine(element.GetProperty("id").ToString());
       <example>
 This sample shows how to call PutAsyncNonResourceAsync and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 RequestContent content = null;
@@ -1639,7 +1639,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call PutAsyncNonResourceAsync with all parameters and request content and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -1659,7 +1659,7 @@ Console.WriteLine(element.GetProperty("id").ToString());
       <example>
 This sample shows how to call PutAsyncNonResource and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 RequestContent content = null;
@@ -1671,7 +1671,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call PutAsyncNonResource with all parameters and request content and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -1691,7 +1691,7 @@ Console.WriteLine(element.GetProperty("id").ToString());
       <example>
 This sample shows how to call PutSubResourceAsync and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 RequestContent content = null;
@@ -1703,7 +1703,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call PutSubResourceAsync with all parameters and request content and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -1726,7 +1726,7 @@ Console.WriteLine(element.GetProperty("id").ToString());
       <example>
 This sample shows how to call PutSubResource and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 RequestContent content = null;
@@ -1738,7 +1738,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call PutSubResource with all parameters and request content and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -1761,7 +1761,7 @@ Console.WriteLine(element.GetProperty("id").ToString());
       <example>
 This sample shows how to call PutAsyncSubResourceAsync and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 RequestContent content = null;
@@ -1773,7 +1773,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call PutAsyncSubResourceAsync with all parameters and request content and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -1796,7 +1796,7 @@ Console.WriteLine(element.GetProperty("id").ToString());
       <example>
 This sample shows how to call PutAsyncSubResource and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 RequestContent content = null;
@@ -1808,7 +1808,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call PutAsyncSubResource with all parameters and request content and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -1831,7 +1831,7 @@ Console.WriteLine(element.GetProperty("id").ToString());
       <example>
 This sample shows how to call DeleteProvisioning202Accepted200SucceededAsync and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 Operation<BinaryData> operation = await client.DeleteProvisioning202Accepted200SucceededAsync(WaitUntil.Completed, null);
@@ -1842,7 +1842,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call DeleteProvisioning202Accepted200SucceededAsync with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 Operation<BinaryData> operation = await client.DeleteProvisioning202Accepted200SucceededAsync(WaitUntil.Completed, null);
@@ -1862,7 +1862,7 @@ Console.WriteLine(element.GetProperty("name").ToString());
       <example>
 This sample shows how to call DeleteProvisioning202Accepted200Succeeded and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 Operation<BinaryData> operation = client.DeleteProvisioning202Accepted200Succeeded(WaitUntil.Completed, null);
@@ -1873,7 +1873,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call DeleteProvisioning202Accepted200Succeeded with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 Operation<BinaryData> operation = client.DeleteProvisioning202Accepted200Succeeded(WaitUntil.Completed, null);
@@ -1893,7 +1893,7 @@ Console.WriteLine(element.GetProperty("name").ToString());
       <example>
 This sample shows how to call DeleteProvisioning202DeletingFailed200Async and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 Operation<BinaryData> operation = await client.DeleteProvisioning202DeletingFailed200Async(WaitUntil.Completed, null);
@@ -1904,7 +1904,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call DeleteProvisioning202DeletingFailed200Async with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 Operation<BinaryData> operation = await client.DeleteProvisioning202DeletingFailed200Async(WaitUntil.Completed, null);
@@ -1924,7 +1924,7 @@ Console.WriteLine(element.GetProperty("name").ToString());
       <example>
 This sample shows how to call DeleteProvisioning202DeletingFailed200 and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 Operation<BinaryData> operation = client.DeleteProvisioning202DeletingFailed200(WaitUntil.Completed, null);
@@ -1935,7 +1935,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call DeleteProvisioning202DeletingFailed200 with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 Operation<BinaryData> operation = client.DeleteProvisioning202DeletingFailed200(WaitUntil.Completed, null);
@@ -1955,7 +1955,7 @@ Console.WriteLine(element.GetProperty("name").ToString());
       <example>
 This sample shows how to call DeleteProvisioning202Deletingcanceled200Async and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 Operation<BinaryData> operation = await client.DeleteProvisioning202Deletingcanceled200Async(WaitUntil.Completed, null);
@@ -1966,7 +1966,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call DeleteProvisioning202Deletingcanceled200Async with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 Operation<BinaryData> operation = await client.DeleteProvisioning202Deletingcanceled200Async(WaitUntil.Completed, null);
@@ -1986,7 +1986,7 @@ Console.WriteLine(element.GetProperty("name").ToString());
       <example>
 This sample shows how to call DeleteProvisioning202Deletingcanceled200 and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 Operation<BinaryData> operation = client.DeleteProvisioning202Deletingcanceled200(WaitUntil.Completed, null);
@@ -1997,7 +1997,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call DeleteProvisioning202Deletingcanceled200 with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 Operation<BinaryData> operation = client.DeleteProvisioning202Deletingcanceled200(WaitUntil.Completed, null);
@@ -2017,14 +2017,14 @@ Console.WriteLine(element.GetProperty("name").ToString());
       <example>
 This sample shows how to call Delete204SucceededAsync.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 Operation operation = await client.Delete204SucceededAsync(WaitUntil.Completed);
 ]]></code>
 This sample shows how to call Delete204SucceededAsync with all parameters.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 Operation operation = await client.Delete204SucceededAsync(WaitUntil.Completed);
@@ -2034,14 +2034,14 @@ Operation operation = await client.Delete204SucceededAsync(WaitUntil.Completed);
       <example>
 This sample shows how to call Delete204Succeeded.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 Operation operation = client.Delete204Succeeded(WaitUntil.Completed);
 ]]></code>
 This sample shows how to call Delete204Succeeded with all parameters.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 Operation operation = client.Delete204Succeeded(WaitUntil.Completed);
@@ -2051,7 +2051,7 @@ Operation operation = client.Delete204Succeeded(WaitUntil.Completed);
       <example>
 This sample shows how to call Delete202Retry200Async and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 Operation<BinaryData> operation = await client.Delete202Retry200Async(WaitUntil.Completed, null);
@@ -2062,7 +2062,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call Delete202Retry200Async with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 Operation<BinaryData> operation = await client.Delete202Retry200Async(WaitUntil.Completed, null);
@@ -2082,7 +2082,7 @@ Console.WriteLine(element.GetProperty("name").ToString());
       <example>
 This sample shows how to call Delete202Retry200 and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 Operation<BinaryData> operation = client.Delete202Retry200(WaitUntil.Completed, null);
@@ -2093,7 +2093,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call Delete202Retry200 with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 Operation<BinaryData> operation = client.Delete202Retry200(WaitUntil.Completed, null);
@@ -2113,7 +2113,7 @@ Console.WriteLine(element.GetProperty("name").ToString());
       <example>
 This sample shows how to call Delete202NoRetry204Async and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 Operation<BinaryData> operation = await client.Delete202NoRetry204Async(WaitUntil.Completed, null);
@@ -2124,7 +2124,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call Delete202NoRetry204Async with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 Operation<BinaryData> operation = await client.Delete202NoRetry204Async(WaitUntil.Completed, null);
@@ -2144,7 +2144,7 @@ Console.WriteLine(element.GetProperty("name").ToString());
       <example>
 This sample shows how to call Delete202NoRetry204 and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 Operation<BinaryData> operation = client.Delete202NoRetry204(WaitUntil.Completed, null);
@@ -2155,7 +2155,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call Delete202NoRetry204 with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 Operation<BinaryData> operation = client.Delete202NoRetry204(WaitUntil.Completed, null);
@@ -2175,14 +2175,14 @@ Console.WriteLine(element.GetProperty("name").ToString());
       <example>
 This sample shows how to call DeleteNoHeaderInRetryAsync.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 Operation operation = await client.DeleteNoHeaderInRetryAsync(WaitUntil.Completed);
 ]]></code>
 This sample shows how to call DeleteNoHeaderInRetryAsync with all parameters.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 Operation operation = await client.DeleteNoHeaderInRetryAsync(WaitUntil.Completed);
@@ -2192,14 +2192,14 @@ Operation operation = await client.DeleteNoHeaderInRetryAsync(WaitUntil.Complete
       <example>
 This sample shows how to call DeleteNoHeaderInRetry.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 Operation operation = client.DeleteNoHeaderInRetry(WaitUntil.Completed);
 ]]></code>
 This sample shows how to call DeleteNoHeaderInRetry with all parameters.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 Operation operation = client.DeleteNoHeaderInRetry(WaitUntil.Completed);
@@ -2209,14 +2209,14 @@ Operation operation = client.DeleteNoHeaderInRetry(WaitUntil.Completed);
       <example>
 This sample shows how to call DeleteAsyncNoHeaderInRetryAsync.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 Operation operation = await client.DeleteAsyncNoHeaderInRetryAsync(WaitUntil.Completed);
 ]]></code>
 This sample shows how to call DeleteAsyncNoHeaderInRetryAsync with all parameters.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 Operation operation = await client.DeleteAsyncNoHeaderInRetryAsync(WaitUntil.Completed);
@@ -2226,14 +2226,14 @@ Operation operation = await client.DeleteAsyncNoHeaderInRetryAsync(WaitUntil.Com
       <example>
 This sample shows how to call DeleteAsyncNoHeaderInRetry.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 Operation operation = client.DeleteAsyncNoHeaderInRetry(WaitUntil.Completed);
 ]]></code>
 This sample shows how to call DeleteAsyncNoHeaderInRetry with all parameters.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 Operation operation = client.DeleteAsyncNoHeaderInRetry(WaitUntil.Completed);
@@ -2243,14 +2243,14 @@ Operation operation = client.DeleteAsyncNoHeaderInRetry(WaitUntil.Completed);
       <example>
 This sample shows how to call DeleteAsyncRetrySucceededAsync.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 Operation operation = await client.DeleteAsyncRetrySucceededAsync(WaitUntil.Completed);
 ]]></code>
 This sample shows how to call DeleteAsyncRetrySucceededAsync with all parameters.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 Operation operation = await client.DeleteAsyncRetrySucceededAsync(WaitUntil.Completed);
@@ -2260,14 +2260,14 @@ Operation operation = await client.DeleteAsyncRetrySucceededAsync(WaitUntil.Comp
       <example>
 This sample shows how to call DeleteAsyncRetrySucceeded.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 Operation operation = client.DeleteAsyncRetrySucceeded(WaitUntil.Completed);
 ]]></code>
 This sample shows how to call DeleteAsyncRetrySucceeded with all parameters.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 Operation operation = client.DeleteAsyncRetrySucceeded(WaitUntil.Completed);
@@ -2277,14 +2277,14 @@ Operation operation = client.DeleteAsyncRetrySucceeded(WaitUntil.Completed);
       <example>
 This sample shows how to call DeleteAsyncNoRetrySucceededAsync.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 Operation operation = await client.DeleteAsyncNoRetrySucceededAsync(WaitUntil.Completed);
 ]]></code>
 This sample shows how to call DeleteAsyncNoRetrySucceededAsync with all parameters.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 Operation operation = await client.DeleteAsyncNoRetrySucceededAsync(WaitUntil.Completed);
@@ -2294,14 +2294,14 @@ Operation operation = await client.DeleteAsyncNoRetrySucceededAsync(WaitUntil.Co
       <example>
 This sample shows how to call DeleteAsyncNoRetrySucceeded.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 Operation operation = client.DeleteAsyncNoRetrySucceeded(WaitUntil.Completed);
 ]]></code>
 This sample shows how to call DeleteAsyncNoRetrySucceeded with all parameters.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 Operation operation = client.DeleteAsyncNoRetrySucceeded(WaitUntil.Completed);
@@ -2311,14 +2311,14 @@ Operation operation = client.DeleteAsyncNoRetrySucceeded(WaitUntil.Completed);
       <example>
 This sample shows how to call DeleteAsyncRetryFailedAsync.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 Operation operation = await client.DeleteAsyncRetryFailedAsync(WaitUntil.Completed);
 ]]></code>
 This sample shows how to call DeleteAsyncRetryFailedAsync with all parameters.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 Operation operation = await client.DeleteAsyncRetryFailedAsync(WaitUntil.Completed);
@@ -2328,14 +2328,14 @@ Operation operation = await client.DeleteAsyncRetryFailedAsync(WaitUntil.Complet
       <example>
 This sample shows how to call DeleteAsyncRetryFailed.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 Operation operation = client.DeleteAsyncRetryFailed(WaitUntil.Completed);
 ]]></code>
 This sample shows how to call DeleteAsyncRetryFailed with all parameters.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 Operation operation = client.DeleteAsyncRetryFailed(WaitUntil.Completed);
@@ -2345,14 +2345,14 @@ Operation operation = client.DeleteAsyncRetryFailed(WaitUntil.Completed);
       <example>
 This sample shows how to call DeleteAsyncRetrycanceledAsync.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 Operation operation = await client.DeleteAsyncRetrycanceledAsync(WaitUntil.Completed);
 ]]></code>
 This sample shows how to call DeleteAsyncRetrycanceledAsync with all parameters.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 Operation operation = await client.DeleteAsyncRetrycanceledAsync(WaitUntil.Completed);
@@ -2362,14 +2362,14 @@ Operation operation = await client.DeleteAsyncRetrycanceledAsync(WaitUntil.Compl
       <example>
 This sample shows how to call DeleteAsyncRetrycanceled.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 Operation operation = client.DeleteAsyncRetrycanceled(WaitUntil.Completed);
 ]]></code>
 This sample shows how to call DeleteAsyncRetrycanceled with all parameters.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 Operation operation = client.DeleteAsyncRetrycanceled(WaitUntil.Completed);
@@ -2379,7 +2379,7 @@ Operation operation = client.DeleteAsyncRetrycanceled(WaitUntil.Completed);
       <example>
 This sample shows how to call Post200WithPayloadAsync and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 Operation<BinaryData> operation = await client.Post200WithPayloadAsync(WaitUntil.Completed, null);
@@ -2390,7 +2390,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call Post200WithPayloadAsync with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 Operation<BinaryData> operation = await client.Post200WithPayloadAsync(WaitUntil.Completed, null);
@@ -2405,7 +2405,7 @@ Console.WriteLine(element.GetProperty("id").ToString());
       <example>
 This sample shows how to call Post200WithPayload and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 Operation<BinaryData> operation = client.Post200WithPayload(WaitUntil.Completed, null);
@@ -2416,7 +2416,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call Post200WithPayload with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 Operation<BinaryData> operation = client.Post200WithPayload(WaitUntil.Completed, null);
@@ -2431,7 +2431,7 @@ Console.WriteLine(element.GetProperty("id").ToString());
       <example>
 This sample shows how to call Post202Retry200Async.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 RequestContent content = null;
@@ -2439,7 +2439,7 @@ Operation operation = await client.Post202Retry200Async(WaitUntil.Completed, con
 ]]></code>
 This sample shows how to call Post202Retry200Async with all parameters and request content.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -2461,7 +2461,7 @@ Operation operation = await client.Post202Retry200Async(WaitUntil.Completed, con
       <example>
 This sample shows how to call Post202Retry200.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 RequestContent content = null;
@@ -2469,7 +2469,7 @@ Operation operation = client.Post202Retry200(WaitUntil.Completed, content);
 ]]></code>
 This sample shows how to call Post202Retry200 with all parameters and request content.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -2491,7 +2491,7 @@ Operation operation = client.Post202Retry200(WaitUntil.Completed, content);
       <example>
 This sample shows how to call Post202NoRetry204Async and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 RequestContent content = null;
@@ -2503,7 +2503,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call Post202NoRetry204Async with all parameters and request content and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -2535,7 +2535,7 @@ Console.WriteLine(element.GetProperty("name").ToString());
       <example>
 This sample shows how to call Post202NoRetry204 and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 RequestContent content = null;
@@ -2547,7 +2547,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call Post202NoRetry204 with all parameters and request content and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -2579,7 +2579,7 @@ Console.WriteLine(element.GetProperty("name").ToString());
       <example>
 This sample shows how to call PostDoubleHeadersFinalLocationGetAsync and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 Operation<BinaryData> operation = await client.PostDoubleHeadersFinalLocationGetAsync(WaitUntil.Completed, null);
@@ -2590,7 +2590,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call PostDoubleHeadersFinalLocationGetAsync with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 Operation<BinaryData> operation = await client.PostDoubleHeadersFinalLocationGetAsync(WaitUntil.Completed, null);
@@ -2610,7 +2610,7 @@ Console.WriteLine(element.GetProperty("name").ToString());
       <example>
 This sample shows how to call PostDoubleHeadersFinalLocationGet and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 Operation<BinaryData> operation = client.PostDoubleHeadersFinalLocationGet(WaitUntil.Completed, null);
@@ -2621,7 +2621,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call PostDoubleHeadersFinalLocationGet with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 Operation<BinaryData> operation = client.PostDoubleHeadersFinalLocationGet(WaitUntil.Completed, null);
@@ -2641,7 +2641,7 @@ Console.WriteLine(element.GetProperty("name").ToString());
       <example>
 This sample shows how to call PostDoubleHeadersFinalAzureHeaderGetAsync and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 Operation<BinaryData> operation = await client.PostDoubleHeadersFinalAzureHeaderGetAsync(WaitUntil.Completed, null);
@@ -2652,7 +2652,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call PostDoubleHeadersFinalAzureHeaderGetAsync with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 Operation<BinaryData> operation = await client.PostDoubleHeadersFinalAzureHeaderGetAsync(WaitUntil.Completed, null);
@@ -2672,7 +2672,7 @@ Console.WriteLine(element.GetProperty("name").ToString());
       <example>
 This sample shows how to call PostDoubleHeadersFinalAzureHeaderGet and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 Operation<BinaryData> operation = client.PostDoubleHeadersFinalAzureHeaderGet(WaitUntil.Completed, null);
@@ -2683,7 +2683,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call PostDoubleHeadersFinalAzureHeaderGet with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 Operation<BinaryData> operation = client.PostDoubleHeadersFinalAzureHeaderGet(WaitUntil.Completed, null);
@@ -2703,7 +2703,7 @@ Console.WriteLine(element.GetProperty("name").ToString());
       <example>
 This sample shows how to call PostDoubleHeadersFinalAzureHeaderGetDefaultAsync and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 Operation<BinaryData> operation = await client.PostDoubleHeadersFinalAzureHeaderGetDefaultAsync(WaitUntil.Completed, null);
@@ -2714,7 +2714,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call PostDoubleHeadersFinalAzureHeaderGetDefaultAsync with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 Operation<BinaryData> operation = await client.PostDoubleHeadersFinalAzureHeaderGetDefaultAsync(WaitUntil.Completed, null);
@@ -2734,7 +2734,7 @@ Console.WriteLine(element.GetProperty("name").ToString());
       <example>
 This sample shows how to call PostDoubleHeadersFinalAzureHeaderGetDefault and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 Operation<BinaryData> operation = client.PostDoubleHeadersFinalAzureHeaderGetDefault(WaitUntil.Completed, null);
@@ -2745,7 +2745,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call PostDoubleHeadersFinalAzureHeaderGetDefault with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 Operation<BinaryData> operation = client.PostDoubleHeadersFinalAzureHeaderGetDefault(WaitUntil.Completed, null);
@@ -2765,7 +2765,7 @@ Console.WriteLine(element.GetProperty("name").ToString());
       <example>
 This sample shows how to call PostAsyncRetrySucceededAsync and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 RequestContent content = null;
@@ -2777,7 +2777,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call PostAsyncRetrySucceededAsync with all parameters and request content and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -2809,7 +2809,7 @@ Console.WriteLine(element.GetProperty("name").ToString());
       <example>
 This sample shows how to call PostAsyncRetrySucceeded and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 RequestContent content = null;
@@ -2821,7 +2821,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call PostAsyncRetrySucceeded with all parameters and request content and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -2853,7 +2853,7 @@ Console.WriteLine(element.GetProperty("name").ToString());
       <example>
 This sample shows how to call PostAsyncNoRetrySucceededAsync and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 RequestContent content = null;
@@ -2865,7 +2865,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call PostAsyncNoRetrySucceededAsync with all parameters and request content and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -2897,7 +2897,7 @@ Console.WriteLine(element.GetProperty("name").ToString());
       <example>
 This sample shows how to call PostAsyncNoRetrySucceeded and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 RequestContent content = null;
@@ -2909,7 +2909,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call PostAsyncNoRetrySucceeded with all parameters and request content and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -2941,7 +2941,7 @@ Console.WriteLine(element.GetProperty("name").ToString());
       <example>
 This sample shows how to call PostAsyncRetryFailedAsync.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 RequestContent content = null;
@@ -2949,7 +2949,7 @@ Operation operation = await client.PostAsyncRetryFailedAsync(WaitUntil.Completed
 ]]></code>
 This sample shows how to call PostAsyncRetryFailedAsync with all parameters and request content.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -2971,7 +2971,7 @@ Operation operation = await client.PostAsyncRetryFailedAsync(WaitUntil.Completed
       <example>
 This sample shows how to call PostAsyncRetryFailed.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 RequestContent content = null;
@@ -2979,7 +2979,7 @@ Operation operation = client.PostAsyncRetryFailed(WaitUntil.Completed, content);
 ]]></code>
 This sample shows how to call PostAsyncRetryFailed with all parameters and request content.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -3001,7 +3001,7 @@ Operation operation = client.PostAsyncRetryFailed(WaitUntil.Completed, content);
       <example>
 This sample shows how to call PostAsyncRetrycanceledAsync.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 RequestContent content = null;
@@ -3009,7 +3009,7 @@ Operation operation = await client.PostAsyncRetrycanceledAsync(WaitUntil.Complet
 ]]></code>
 This sample shows how to call PostAsyncRetrycanceledAsync with all parameters and request content.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -3031,7 +3031,7 @@ Operation operation = await client.PostAsyncRetrycanceledAsync(WaitUntil.Complet
       <example>
 This sample shows how to call PostAsyncRetrycanceled.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 RequestContent content = null;
@@ -3039,7 +3039,7 @@ Operation operation = client.PostAsyncRetrycanceled(WaitUntil.Completed, content
 ]]></code>
 This sample shows how to call PostAsyncRetrycanceled with all parameters and request content.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LROsClient_KEY"));
 LROsClient client = new LROsClient(credential);
 
 RequestContent content = RequestContent.Create(new

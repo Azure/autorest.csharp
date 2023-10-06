@@ -6,7 +6,7 @@
 This sample shows how to call OperationAsync.
 <code><![CDATA[
 Uri endpoint = new Uri("<endpoint>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("SecurityDefinitionClient_KEY"));
 SecurityDefinitionClient client = new SecurityDefinitionClient(endpoint, credential);
 
 RequestContent content = RequestContent.Create(new object());
@@ -17,7 +17,7 @@ Console.WriteLine(response.Status);
 This sample shows how to call OperationAsync with all request content.
 <code><![CDATA[
 Uri endpoint = new Uri("<endpoint>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("SecurityDefinitionClient_KEY"));
 SecurityDefinitionClient client = new SecurityDefinitionClient(endpoint, credential);
 
 RequestContent content = RequestContent.Create(new
@@ -35,7 +35,7 @@ Console.WriteLine(response.Status);
 This sample shows how to call Operation.
 <code><![CDATA[
 Uri endpoint = new Uri("<endpoint>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("SecurityDefinitionClient_KEY"));
 SecurityDefinitionClient client = new SecurityDefinitionClient(endpoint, credential);
 
 RequestContent content = RequestContent.Create(new object());
@@ -46,7 +46,7 @@ Console.WriteLine(response.Status);
 This sample shows how to call Operation with all request content.
 <code><![CDATA[
 Uri endpoint = new Uri("<endpoint>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("SecurityDefinitionClient_KEY"));
 SecurityDefinitionClient client = new SecurityDefinitionClient(endpoint, credential);
 
 RequestContent content = RequestContent.Create(new

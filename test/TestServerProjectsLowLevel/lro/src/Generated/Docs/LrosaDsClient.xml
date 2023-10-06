@@ -5,7 +5,7 @@
       <example>
 This sample shows how to call PutNonRetry400Async and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LrosaDsClient_KEY"));
 LrosaDsClient client = new LrosaDsClient(credential);
 
 RequestContent content = null;
@@ -17,7 +17,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call PutNonRetry400Async with all parameters and request content and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LrosaDsClient_KEY"));
 LrosaDsClient client = new LrosaDsClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -49,7 +49,7 @@ Console.WriteLine(element.GetProperty("name").ToString());
       <example>
 This sample shows how to call PutNonRetry400 and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LrosaDsClient_KEY"));
 LrosaDsClient client = new LrosaDsClient(credential);
 
 RequestContent content = null;
@@ -61,7 +61,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call PutNonRetry400 with all parameters and request content and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LrosaDsClient_KEY"));
 LrosaDsClient client = new LrosaDsClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -93,7 +93,7 @@ Console.WriteLine(element.GetProperty("name").ToString());
       <example>
 This sample shows how to call PutNonRetry201Creating400Async and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LrosaDsClient_KEY"));
 LrosaDsClient client = new LrosaDsClient(credential);
 
 RequestContent content = null;
@@ -105,7 +105,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call PutNonRetry201Creating400Async with all parameters and request content and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LrosaDsClient_KEY"));
 LrosaDsClient client = new LrosaDsClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -137,7 +137,7 @@ Console.WriteLine(element.GetProperty("name").ToString());
       <example>
 This sample shows how to call PutNonRetry201Creating400 and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LrosaDsClient_KEY"));
 LrosaDsClient client = new LrosaDsClient(credential);
 
 RequestContent content = null;
@@ -149,7 +149,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call PutNonRetry201Creating400 with all parameters and request content and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LrosaDsClient_KEY"));
 LrosaDsClient client = new LrosaDsClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -181,7 +181,7 @@ Console.WriteLine(element.GetProperty("name").ToString());
       <example>
 This sample shows how to call PutNonRetry201Creating400InvalidJsonAsync and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LrosaDsClient_KEY"));
 LrosaDsClient client = new LrosaDsClient(credential);
 
 RequestContent content = null;
@@ -193,7 +193,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call PutNonRetry201Creating400InvalidJsonAsync with all parameters and request content and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LrosaDsClient_KEY"));
 LrosaDsClient client = new LrosaDsClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -225,7 +225,7 @@ Console.WriteLine(element.GetProperty("name").ToString());
       <example>
 This sample shows how to call PutNonRetry201Creating400InvalidJson and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LrosaDsClient_KEY"));
 LrosaDsClient client = new LrosaDsClient(credential);
 
 RequestContent content = null;
@@ -237,7 +237,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call PutNonRetry201Creating400InvalidJson with all parameters and request content and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LrosaDsClient_KEY"));
 LrosaDsClient client = new LrosaDsClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -269,7 +269,7 @@ Console.WriteLine(element.GetProperty("name").ToString());
       <example>
 This sample shows how to call PutAsyncRelativeRetry400Async and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LrosaDsClient_KEY"));
 LrosaDsClient client = new LrosaDsClient(credential);
 
 RequestContent content = null;
@@ -281,7 +281,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call PutAsyncRelativeRetry400Async with all parameters and request content and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LrosaDsClient_KEY"));
 LrosaDsClient client = new LrosaDsClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -313,7 +313,7 @@ Console.WriteLine(element.GetProperty("name").ToString());
       <example>
 This sample shows how to call PutAsyncRelativeRetry400 and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LrosaDsClient_KEY"));
 LrosaDsClient client = new LrosaDsClient(credential);
 
 RequestContent content = null;
@@ -325,7 +325,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call PutAsyncRelativeRetry400 with all parameters and request content and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LrosaDsClient_KEY"));
 LrosaDsClient client = new LrosaDsClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -357,14 +357,14 @@ Console.WriteLine(element.GetProperty("name").ToString());
       <example>
 This sample shows how to call DeleteNonRetry400Async.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LrosaDsClient_KEY"));
 LrosaDsClient client = new LrosaDsClient(credential);
 
 Operation operation = await client.DeleteNonRetry400Async(WaitUntil.Completed);
 ]]></code>
 This sample shows how to call DeleteNonRetry400Async with all parameters.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LrosaDsClient_KEY"));
 LrosaDsClient client = new LrosaDsClient(credential);
 
 Operation operation = await client.DeleteNonRetry400Async(WaitUntil.Completed);
@@ -374,14 +374,14 @@ Operation operation = await client.DeleteNonRetry400Async(WaitUntil.Completed);
       <example>
 This sample shows how to call DeleteNonRetry400.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LrosaDsClient_KEY"));
 LrosaDsClient client = new LrosaDsClient(credential);
 
 Operation operation = client.DeleteNonRetry400(WaitUntil.Completed);
 ]]></code>
 This sample shows how to call DeleteNonRetry400 with all parameters.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LrosaDsClient_KEY"));
 LrosaDsClient client = new LrosaDsClient(credential);
 
 Operation operation = client.DeleteNonRetry400(WaitUntil.Completed);
@@ -391,14 +391,14 @@ Operation operation = client.DeleteNonRetry400(WaitUntil.Completed);
       <example>
 This sample shows how to call Delete202NonRetry400Async.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LrosaDsClient_KEY"));
 LrosaDsClient client = new LrosaDsClient(credential);
 
 Operation operation = await client.Delete202NonRetry400Async(WaitUntil.Completed);
 ]]></code>
 This sample shows how to call Delete202NonRetry400Async with all parameters.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LrosaDsClient_KEY"));
 LrosaDsClient client = new LrosaDsClient(credential);
 
 Operation operation = await client.Delete202NonRetry400Async(WaitUntil.Completed);
@@ -408,14 +408,14 @@ Operation operation = await client.Delete202NonRetry400Async(WaitUntil.Completed
       <example>
 This sample shows how to call Delete202NonRetry400.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LrosaDsClient_KEY"));
 LrosaDsClient client = new LrosaDsClient(credential);
 
 Operation operation = client.Delete202NonRetry400(WaitUntil.Completed);
 ]]></code>
 This sample shows how to call Delete202NonRetry400 with all parameters.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LrosaDsClient_KEY"));
 LrosaDsClient client = new LrosaDsClient(credential);
 
 Operation operation = client.Delete202NonRetry400(WaitUntil.Completed);
@@ -425,14 +425,14 @@ Operation operation = client.Delete202NonRetry400(WaitUntil.Completed);
       <example>
 This sample shows how to call DeleteAsyncRelativeRetry400Async.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LrosaDsClient_KEY"));
 LrosaDsClient client = new LrosaDsClient(credential);
 
 Operation operation = await client.DeleteAsyncRelativeRetry400Async(WaitUntil.Completed);
 ]]></code>
 This sample shows how to call DeleteAsyncRelativeRetry400Async with all parameters.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LrosaDsClient_KEY"));
 LrosaDsClient client = new LrosaDsClient(credential);
 
 Operation operation = await client.DeleteAsyncRelativeRetry400Async(WaitUntil.Completed);
@@ -442,14 +442,14 @@ Operation operation = await client.DeleteAsyncRelativeRetry400Async(WaitUntil.Co
       <example>
 This sample shows how to call DeleteAsyncRelativeRetry400.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LrosaDsClient_KEY"));
 LrosaDsClient client = new LrosaDsClient(credential);
 
 Operation operation = client.DeleteAsyncRelativeRetry400(WaitUntil.Completed);
 ]]></code>
 This sample shows how to call DeleteAsyncRelativeRetry400 with all parameters.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LrosaDsClient_KEY"));
 LrosaDsClient client = new LrosaDsClient(credential);
 
 Operation operation = client.DeleteAsyncRelativeRetry400(WaitUntil.Completed);
@@ -459,7 +459,7 @@ Operation operation = client.DeleteAsyncRelativeRetry400(WaitUntil.Completed);
       <example>
 This sample shows how to call PostNonRetry400Async.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LrosaDsClient_KEY"));
 LrosaDsClient client = new LrosaDsClient(credential);
 
 RequestContent content = null;
@@ -467,7 +467,7 @@ Operation operation = await client.PostNonRetry400Async(WaitUntil.Completed, con
 ]]></code>
 This sample shows how to call PostNonRetry400Async with all parameters and request content.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LrosaDsClient_KEY"));
 LrosaDsClient client = new LrosaDsClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -489,7 +489,7 @@ Operation operation = await client.PostNonRetry400Async(WaitUntil.Completed, con
       <example>
 This sample shows how to call PostNonRetry400.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LrosaDsClient_KEY"));
 LrosaDsClient client = new LrosaDsClient(credential);
 
 RequestContent content = null;
@@ -497,7 +497,7 @@ Operation operation = client.PostNonRetry400(WaitUntil.Completed, content);
 ]]></code>
 This sample shows how to call PostNonRetry400 with all parameters and request content.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LrosaDsClient_KEY"));
 LrosaDsClient client = new LrosaDsClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -519,7 +519,7 @@ Operation operation = client.PostNonRetry400(WaitUntil.Completed, content);
       <example>
 This sample shows how to call Post202NonRetry400Async.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LrosaDsClient_KEY"));
 LrosaDsClient client = new LrosaDsClient(credential);
 
 RequestContent content = null;
@@ -527,7 +527,7 @@ Operation operation = await client.Post202NonRetry400Async(WaitUntil.Completed, 
 ]]></code>
 This sample shows how to call Post202NonRetry400Async with all parameters and request content.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LrosaDsClient_KEY"));
 LrosaDsClient client = new LrosaDsClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -549,7 +549,7 @@ Operation operation = await client.Post202NonRetry400Async(WaitUntil.Completed, 
       <example>
 This sample shows how to call Post202NonRetry400.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LrosaDsClient_KEY"));
 LrosaDsClient client = new LrosaDsClient(credential);
 
 RequestContent content = null;
@@ -557,7 +557,7 @@ Operation operation = client.Post202NonRetry400(WaitUntil.Completed, content);
 ]]></code>
 This sample shows how to call Post202NonRetry400 with all parameters and request content.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LrosaDsClient_KEY"));
 LrosaDsClient client = new LrosaDsClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -579,7 +579,7 @@ Operation operation = client.Post202NonRetry400(WaitUntil.Completed, content);
       <example>
 This sample shows how to call PostAsyncRelativeRetry400Async.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LrosaDsClient_KEY"));
 LrosaDsClient client = new LrosaDsClient(credential);
 
 RequestContent content = null;
@@ -587,7 +587,7 @@ Operation operation = await client.PostAsyncRelativeRetry400Async(WaitUntil.Comp
 ]]></code>
 This sample shows how to call PostAsyncRelativeRetry400Async with all parameters and request content.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LrosaDsClient_KEY"));
 LrosaDsClient client = new LrosaDsClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -609,7 +609,7 @@ Operation operation = await client.PostAsyncRelativeRetry400Async(WaitUntil.Comp
       <example>
 This sample shows how to call PostAsyncRelativeRetry400.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LrosaDsClient_KEY"));
 LrosaDsClient client = new LrosaDsClient(credential);
 
 RequestContent content = null;
@@ -617,7 +617,7 @@ Operation operation = client.PostAsyncRelativeRetry400(WaitUntil.Completed, cont
 ]]></code>
 This sample shows how to call PostAsyncRelativeRetry400 with all parameters and request content.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LrosaDsClient_KEY"));
 LrosaDsClient client = new LrosaDsClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -639,7 +639,7 @@ Operation operation = client.PostAsyncRelativeRetry400(WaitUntil.Completed, cont
       <example>
 This sample shows how to call PutError201NoProvisioningStatePayloadAsync and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LrosaDsClient_KEY"));
 LrosaDsClient client = new LrosaDsClient(credential);
 
 RequestContent content = null;
@@ -651,7 +651,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call PutError201NoProvisioningStatePayloadAsync with all parameters and request content and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LrosaDsClient_KEY"));
 LrosaDsClient client = new LrosaDsClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -683,7 +683,7 @@ Console.WriteLine(element.GetProperty("name").ToString());
       <example>
 This sample shows how to call PutError201NoProvisioningStatePayload and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LrosaDsClient_KEY"));
 LrosaDsClient client = new LrosaDsClient(credential);
 
 RequestContent content = null;
@@ -695,7 +695,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call PutError201NoProvisioningStatePayload with all parameters and request content and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LrosaDsClient_KEY"));
 LrosaDsClient client = new LrosaDsClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -727,7 +727,7 @@ Console.WriteLine(element.GetProperty("name").ToString());
       <example>
 This sample shows how to call PutAsyncRelativeRetryNoStatusAsync and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LrosaDsClient_KEY"));
 LrosaDsClient client = new LrosaDsClient(credential);
 
 RequestContent content = null;
@@ -739,7 +739,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call PutAsyncRelativeRetryNoStatusAsync with all parameters and request content and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LrosaDsClient_KEY"));
 LrosaDsClient client = new LrosaDsClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -771,7 +771,7 @@ Console.WriteLine(element.GetProperty("name").ToString());
       <example>
 This sample shows how to call PutAsyncRelativeRetryNoStatus and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LrosaDsClient_KEY"));
 LrosaDsClient client = new LrosaDsClient(credential);
 
 RequestContent content = null;
@@ -783,7 +783,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call PutAsyncRelativeRetryNoStatus with all parameters and request content and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LrosaDsClient_KEY"));
 LrosaDsClient client = new LrosaDsClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -815,7 +815,7 @@ Console.WriteLine(element.GetProperty("name").ToString());
       <example>
 This sample shows how to call PutAsyncRelativeRetryNoStatusPayloadAsync and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LrosaDsClient_KEY"));
 LrosaDsClient client = new LrosaDsClient(credential);
 
 RequestContent content = null;
@@ -827,7 +827,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call PutAsyncRelativeRetryNoStatusPayloadAsync with all parameters and request content and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LrosaDsClient_KEY"));
 LrosaDsClient client = new LrosaDsClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -859,7 +859,7 @@ Console.WriteLine(element.GetProperty("name").ToString());
       <example>
 This sample shows how to call PutAsyncRelativeRetryNoStatusPayload and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LrosaDsClient_KEY"));
 LrosaDsClient client = new LrosaDsClient(credential);
 
 RequestContent content = null;
@@ -871,7 +871,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call PutAsyncRelativeRetryNoStatusPayload with all parameters and request content and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LrosaDsClient_KEY"));
 LrosaDsClient client = new LrosaDsClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -903,14 +903,14 @@ Console.WriteLine(element.GetProperty("name").ToString());
       <example>
 This sample shows how to call Delete204SucceededAsync.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LrosaDsClient_KEY"));
 LrosaDsClient client = new LrosaDsClient(credential);
 
 Operation operation = await client.Delete204SucceededAsync(WaitUntil.Completed);
 ]]></code>
 This sample shows how to call Delete204SucceededAsync with all parameters.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LrosaDsClient_KEY"));
 LrosaDsClient client = new LrosaDsClient(credential);
 
 Operation operation = await client.Delete204SucceededAsync(WaitUntil.Completed);
@@ -920,14 +920,14 @@ Operation operation = await client.Delete204SucceededAsync(WaitUntil.Completed);
       <example>
 This sample shows how to call Delete204Succeeded.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LrosaDsClient_KEY"));
 LrosaDsClient client = new LrosaDsClient(credential);
 
 Operation operation = client.Delete204Succeeded(WaitUntil.Completed);
 ]]></code>
 This sample shows how to call Delete204Succeeded with all parameters.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LrosaDsClient_KEY"));
 LrosaDsClient client = new LrosaDsClient(credential);
 
 Operation operation = client.Delete204Succeeded(WaitUntil.Completed);
@@ -937,14 +937,14 @@ Operation operation = client.Delete204Succeeded(WaitUntil.Completed);
       <example>
 This sample shows how to call DeleteAsyncRelativeRetryNoStatusAsync.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LrosaDsClient_KEY"));
 LrosaDsClient client = new LrosaDsClient(credential);
 
 Operation operation = await client.DeleteAsyncRelativeRetryNoStatusAsync(WaitUntil.Completed);
 ]]></code>
 This sample shows how to call DeleteAsyncRelativeRetryNoStatusAsync with all parameters.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LrosaDsClient_KEY"));
 LrosaDsClient client = new LrosaDsClient(credential);
 
 Operation operation = await client.DeleteAsyncRelativeRetryNoStatusAsync(WaitUntil.Completed);
@@ -954,14 +954,14 @@ Operation operation = await client.DeleteAsyncRelativeRetryNoStatusAsync(WaitUnt
       <example>
 This sample shows how to call DeleteAsyncRelativeRetryNoStatus.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LrosaDsClient_KEY"));
 LrosaDsClient client = new LrosaDsClient(credential);
 
 Operation operation = client.DeleteAsyncRelativeRetryNoStatus(WaitUntil.Completed);
 ]]></code>
 This sample shows how to call DeleteAsyncRelativeRetryNoStatus with all parameters.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LrosaDsClient_KEY"));
 LrosaDsClient client = new LrosaDsClient(credential);
 
 Operation operation = client.DeleteAsyncRelativeRetryNoStatus(WaitUntil.Completed);
@@ -971,7 +971,7 @@ Operation operation = client.DeleteAsyncRelativeRetryNoStatus(WaitUntil.Complete
       <example>
 This sample shows how to call Post202NoLocationAsync.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LrosaDsClient_KEY"));
 LrosaDsClient client = new LrosaDsClient(credential);
 
 RequestContent content = null;
@@ -979,7 +979,7 @@ Operation operation = await client.Post202NoLocationAsync(WaitUntil.Completed, c
 ]]></code>
 This sample shows how to call Post202NoLocationAsync with all parameters and request content.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LrosaDsClient_KEY"));
 LrosaDsClient client = new LrosaDsClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -1001,7 +1001,7 @@ Operation operation = await client.Post202NoLocationAsync(WaitUntil.Completed, c
       <example>
 This sample shows how to call Post202NoLocation.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LrosaDsClient_KEY"));
 LrosaDsClient client = new LrosaDsClient(credential);
 
 RequestContent content = null;
@@ -1009,7 +1009,7 @@ Operation operation = client.Post202NoLocation(WaitUntil.Completed, content);
 ]]></code>
 This sample shows how to call Post202NoLocation with all parameters and request content.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LrosaDsClient_KEY"));
 LrosaDsClient client = new LrosaDsClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -1031,7 +1031,7 @@ Operation operation = client.Post202NoLocation(WaitUntil.Completed, content);
       <example>
 This sample shows how to call PostAsyncRelativeRetryNoPayloadAsync.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LrosaDsClient_KEY"));
 LrosaDsClient client = new LrosaDsClient(credential);
 
 RequestContent content = null;
@@ -1039,7 +1039,7 @@ Operation operation = await client.PostAsyncRelativeRetryNoPayloadAsync(WaitUnti
 ]]></code>
 This sample shows how to call PostAsyncRelativeRetryNoPayloadAsync with all parameters and request content.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LrosaDsClient_KEY"));
 LrosaDsClient client = new LrosaDsClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -1061,7 +1061,7 @@ Operation operation = await client.PostAsyncRelativeRetryNoPayloadAsync(WaitUnti
       <example>
 This sample shows how to call PostAsyncRelativeRetryNoPayload.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LrosaDsClient_KEY"));
 LrosaDsClient client = new LrosaDsClient(credential);
 
 RequestContent content = null;
@@ -1069,7 +1069,7 @@ Operation operation = client.PostAsyncRelativeRetryNoPayload(WaitUntil.Completed
 ]]></code>
 This sample shows how to call PostAsyncRelativeRetryNoPayload with all parameters and request content.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LrosaDsClient_KEY"));
 LrosaDsClient client = new LrosaDsClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -1091,7 +1091,7 @@ Operation operation = client.PostAsyncRelativeRetryNoPayload(WaitUntil.Completed
       <example>
 This sample shows how to call Put200InvalidJsonAsync and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LrosaDsClient_KEY"));
 LrosaDsClient client = new LrosaDsClient(credential);
 
 RequestContent content = null;
@@ -1103,7 +1103,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call Put200InvalidJsonAsync with all parameters and request content and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LrosaDsClient_KEY"));
 LrosaDsClient client = new LrosaDsClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -1135,7 +1135,7 @@ Console.WriteLine(element.GetProperty("name").ToString());
       <example>
 This sample shows how to call Put200InvalidJson and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LrosaDsClient_KEY"));
 LrosaDsClient client = new LrosaDsClient(credential);
 
 RequestContent content = null;
@@ -1147,7 +1147,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call Put200InvalidJson with all parameters and request content and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LrosaDsClient_KEY"));
 LrosaDsClient client = new LrosaDsClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -1179,7 +1179,7 @@ Console.WriteLine(element.GetProperty("name").ToString());
       <example>
 This sample shows how to call PutAsyncRelativeRetryInvalidHeaderAsync and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LrosaDsClient_KEY"));
 LrosaDsClient client = new LrosaDsClient(credential);
 
 RequestContent content = null;
@@ -1191,7 +1191,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call PutAsyncRelativeRetryInvalidHeaderAsync with all parameters and request content and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LrosaDsClient_KEY"));
 LrosaDsClient client = new LrosaDsClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -1223,7 +1223,7 @@ Console.WriteLine(element.GetProperty("name").ToString());
       <example>
 This sample shows how to call PutAsyncRelativeRetryInvalidHeader and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LrosaDsClient_KEY"));
 LrosaDsClient client = new LrosaDsClient(credential);
 
 RequestContent content = null;
@@ -1235,7 +1235,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call PutAsyncRelativeRetryInvalidHeader with all parameters and request content and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LrosaDsClient_KEY"));
 LrosaDsClient client = new LrosaDsClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -1267,7 +1267,7 @@ Console.WriteLine(element.GetProperty("name").ToString());
       <example>
 This sample shows how to call PutAsyncRelativeRetryInvalidJsonPollingAsync and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LrosaDsClient_KEY"));
 LrosaDsClient client = new LrosaDsClient(credential);
 
 RequestContent content = null;
@@ -1279,7 +1279,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call PutAsyncRelativeRetryInvalidJsonPollingAsync with all parameters and request content and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LrosaDsClient_KEY"));
 LrosaDsClient client = new LrosaDsClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -1311,7 +1311,7 @@ Console.WriteLine(element.GetProperty("name").ToString());
       <example>
 This sample shows how to call PutAsyncRelativeRetryInvalidJsonPolling and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LrosaDsClient_KEY"));
 LrosaDsClient client = new LrosaDsClient(credential);
 
 RequestContent content = null;
@@ -1323,7 +1323,7 @@ Console.WriteLine(element.ToString());
 ]]></code>
 This sample shows how to call PutAsyncRelativeRetryInvalidJsonPolling with all parameters and request content and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LrosaDsClient_KEY"));
 LrosaDsClient client = new LrosaDsClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -1355,14 +1355,14 @@ Console.WriteLine(element.GetProperty("name").ToString());
       <example>
 This sample shows how to call Delete202RetryInvalidHeaderAsync.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LrosaDsClient_KEY"));
 LrosaDsClient client = new LrosaDsClient(credential);
 
 Operation operation = await client.Delete202RetryInvalidHeaderAsync(WaitUntil.Completed);
 ]]></code>
 This sample shows how to call Delete202RetryInvalidHeaderAsync with all parameters.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LrosaDsClient_KEY"));
 LrosaDsClient client = new LrosaDsClient(credential);
 
 Operation operation = await client.Delete202RetryInvalidHeaderAsync(WaitUntil.Completed);
@@ -1372,14 +1372,14 @@ Operation operation = await client.Delete202RetryInvalidHeaderAsync(WaitUntil.Co
       <example>
 This sample shows how to call Delete202RetryInvalidHeader.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LrosaDsClient_KEY"));
 LrosaDsClient client = new LrosaDsClient(credential);
 
 Operation operation = client.Delete202RetryInvalidHeader(WaitUntil.Completed);
 ]]></code>
 This sample shows how to call Delete202RetryInvalidHeader with all parameters.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LrosaDsClient_KEY"));
 LrosaDsClient client = new LrosaDsClient(credential);
 
 Operation operation = client.Delete202RetryInvalidHeader(WaitUntil.Completed);
@@ -1389,14 +1389,14 @@ Operation operation = client.Delete202RetryInvalidHeader(WaitUntil.Completed);
       <example>
 This sample shows how to call DeleteAsyncRelativeRetryInvalidHeaderAsync.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LrosaDsClient_KEY"));
 LrosaDsClient client = new LrosaDsClient(credential);
 
 Operation operation = await client.DeleteAsyncRelativeRetryInvalidHeaderAsync(WaitUntil.Completed);
 ]]></code>
 This sample shows how to call DeleteAsyncRelativeRetryInvalidHeaderAsync with all parameters.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LrosaDsClient_KEY"));
 LrosaDsClient client = new LrosaDsClient(credential);
 
 Operation operation = await client.DeleteAsyncRelativeRetryInvalidHeaderAsync(WaitUntil.Completed);
@@ -1406,14 +1406,14 @@ Operation operation = await client.DeleteAsyncRelativeRetryInvalidHeaderAsync(Wa
       <example>
 This sample shows how to call DeleteAsyncRelativeRetryInvalidHeader.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LrosaDsClient_KEY"));
 LrosaDsClient client = new LrosaDsClient(credential);
 
 Operation operation = client.DeleteAsyncRelativeRetryInvalidHeader(WaitUntil.Completed);
 ]]></code>
 This sample shows how to call DeleteAsyncRelativeRetryInvalidHeader with all parameters.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LrosaDsClient_KEY"));
 LrosaDsClient client = new LrosaDsClient(credential);
 
 Operation operation = client.DeleteAsyncRelativeRetryInvalidHeader(WaitUntil.Completed);
@@ -1423,14 +1423,14 @@ Operation operation = client.DeleteAsyncRelativeRetryInvalidHeader(WaitUntil.Com
       <example>
 This sample shows how to call DeleteAsyncRelativeRetryInvalidJsonPollingAsync.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LrosaDsClient_KEY"));
 LrosaDsClient client = new LrosaDsClient(credential);
 
 Operation operation = await client.DeleteAsyncRelativeRetryInvalidJsonPollingAsync(WaitUntil.Completed);
 ]]></code>
 This sample shows how to call DeleteAsyncRelativeRetryInvalidJsonPollingAsync with all parameters.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LrosaDsClient_KEY"));
 LrosaDsClient client = new LrosaDsClient(credential);
 
 Operation operation = await client.DeleteAsyncRelativeRetryInvalidJsonPollingAsync(WaitUntil.Completed);
@@ -1440,14 +1440,14 @@ Operation operation = await client.DeleteAsyncRelativeRetryInvalidJsonPollingAsy
       <example>
 This sample shows how to call DeleteAsyncRelativeRetryInvalidJsonPolling.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LrosaDsClient_KEY"));
 LrosaDsClient client = new LrosaDsClient(credential);
 
 Operation operation = client.DeleteAsyncRelativeRetryInvalidJsonPolling(WaitUntil.Completed);
 ]]></code>
 This sample shows how to call DeleteAsyncRelativeRetryInvalidJsonPolling with all parameters.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LrosaDsClient_KEY"));
 LrosaDsClient client = new LrosaDsClient(credential);
 
 Operation operation = client.DeleteAsyncRelativeRetryInvalidJsonPolling(WaitUntil.Completed);
@@ -1457,7 +1457,7 @@ Operation operation = client.DeleteAsyncRelativeRetryInvalidJsonPolling(WaitUnti
       <example>
 This sample shows how to call Post202RetryInvalidHeaderAsync.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LrosaDsClient_KEY"));
 LrosaDsClient client = new LrosaDsClient(credential);
 
 RequestContent content = null;
@@ -1465,7 +1465,7 @@ Operation operation = await client.Post202RetryInvalidHeaderAsync(WaitUntil.Comp
 ]]></code>
 This sample shows how to call Post202RetryInvalidHeaderAsync with all parameters and request content.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LrosaDsClient_KEY"));
 LrosaDsClient client = new LrosaDsClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -1487,7 +1487,7 @@ Operation operation = await client.Post202RetryInvalidHeaderAsync(WaitUntil.Comp
       <example>
 This sample shows how to call Post202RetryInvalidHeader.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LrosaDsClient_KEY"));
 LrosaDsClient client = new LrosaDsClient(credential);
 
 RequestContent content = null;
@@ -1495,7 +1495,7 @@ Operation operation = client.Post202RetryInvalidHeader(WaitUntil.Completed, cont
 ]]></code>
 This sample shows how to call Post202RetryInvalidHeader with all parameters and request content.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LrosaDsClient_KEY"));
 LrosaDsClient client = new LrosaDsClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -1517,7 +1517,7 @@ Operation operation = client.Post202RetryInvalidHeader(WaitUntil.Completed, cont
       <example>
 This sample shows how to call PostAsyncRelativeRetryInvalidHeaderAsync.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LrosaDsClient_KEY"));
 LrosaDsClient client = new LrosaDsClient(credential);
 
 RequestContent content = null;
@@ -1525,7 +1525,7 @@ Operation operation = await client.PostAsyncRelativeRetryInvalidHeaderAsync(Wait
 ]]></code>
 This sample shows how to call PostAsyncRelativeRetryInvalidHeaderAsync with all parameters and request content.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LrosaDsClient_KEY"));
 LrosaDsClient client = new LrosaDsClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -1547,7 +1547,7 @@ Operation operation = await client.PostAsyncRelativeRetryInvalidHeaderAsync(Wait
       <example>
 This sample shows how to call PostAsyncRelativeRetryInvalidHeader.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LrosaDsClient_KEY"));
 LrosaDsClient client = new LrosaDsClient(credential);
 
 RequestContent content = null;
@@ -1555,7 +1555,7 @@ Operation operation = client.PostAsyncRelativeRetryInvalidHeader(WaitUntil.Compl
 ]]></code>
 This sample shows how to call PostAsyncRelativeRetryInvalidHeader with all parameters and request content.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LrosaDsClient_KEY"));
 LrosaDsClient client = new LrosaDsClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -1577,7 +1577,7 @@ Operation operation = client.PostAsyncRelativeRetryInvalidHeader(WaitUntil.Compl
       <example>
 This sample shows how to call PostAsyncRelativeRetryInvalidJsonPollingAsync.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LrosaDsClient_KEY"));
 LrosaDsClient client = new LrosaDsClient(credential);
 
 RequestContent content = null;
@@ -1585,7 +1585,7 @@ Operation operation = await client.PostAsyncRelativeRetryInvalidJsonPollingAsync
 ]]></code>
 This sample shows how to call PostAsyncRelativeRetryInvalidJsonPollingAsync with all parameters and request content.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LrosaDsClient_KEY"));
 LrosaDsClient client = new LrosaDsClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -1607,7 +1607,7 @@ Operation operation = await client.PostAsyncRelativeRetryInvalidJsonPollingAsync
       <example>
 This sample shows how to call PostAsyncRelativeRetryInvalidJsonPolling.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LrosaDsClient_KEY"));
 LrosaDsClient client = new LrosaDsClient(credential);
 
 RequestContent content = null;
@@ -1615,7 +1615,7 @@ Operation operation = client.PostAsyncRelativeRetryInvalidJsonPolling(WaitUntil.
 ]]></code>
 This sample shows how to call PostAsyncRelativeRetryInvalidJsonPolling with all parameters and request content.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
+AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("LrosaDsClient_KEY"));
 LrosaDsClient client = new LrosaDsClient(credential);
 
 RequestContent content = RequestContent.Create(new

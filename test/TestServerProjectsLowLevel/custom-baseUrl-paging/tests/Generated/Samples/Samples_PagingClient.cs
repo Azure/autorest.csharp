@@ -21,7 +21,7 @@ namespace custom_baseUrl_paging_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetPagesPartialUrl_ShortVersion()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PagingClient_KEY"));
             PagingClient client = new PagingClient("host", credential);
 
             foreach (BinaryData item in client.GetPagesPartialUrl("<accountName>", null))
@@ -35,7 +35,7 @@ namespace custom_baseUrl_paging_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetPagesPartialUrl_ShortVersion_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PagingClient_KEY"));
             PagingClient client = new PagingClient("host", credential);
 
             await foreach (BinaryData item in client.GetPagesPartialUrlAsync("<accountName>", null))
@@ -49,7 +49,7 @@ namespace custom_baseUrl_paging_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetPagesPartialUrl_AllParameters()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PagingClient_KEY"));
             PagingClient client = new PagingClient("host", credential);
 
             foreach (BinaryData item in client.GetPagesPartialUrl("<accountName>", null))
@@ -64,7 +64,7 @@ namespace custom_baseUrl_paging_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetPagesPartialUrl_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PagingClient_KEY"));
             PagingClient client = new PagingClient("host", credential);
 
             await foreach (BinaryData item in client.GetPagesPartialUrlAsync("<accountName>", null))
@@ -79,7 +79,7 @@ namespace custom_baseUrl_paging_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetPagesPartialUrlOperation_ShortVersion()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PagingClient_KEY"));
             PagingClient client = new PagingClient("host", credential);
 
             foreach (BinaryData item in client.GetPagesPartialUrlOperation("<accountName>", null))
@@ -93,7 +93,7 @@ namespace custom_baseUrl_paging_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetPagesPartialUrlOperation_ShortVersion_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PagingClient_KEY"));
             PagingClient client = new PagingClient("host", credential);
 
             await foreach (BinaryData item in client.GetPagesPartialUrlOperationAsync("<accountName>", null))
@@ -107,7 +107,7 @@ namespace custom_baseUrl_paging_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetPagesPartialUrlOperation_AllParameters()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PagingClient_KEY"));
             PagingClient client = new PagingClient("host", credential);
 
             foreach (BinaryData item in client.GetPagesPartialUrlOperation("<accountName>", null))
@@ -122,7 +122,7 @@ namespace custom_baseUrl_paging_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetPagesPartialUrlOperation_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PagingClient_KEY"));
             PagingClient client = new PagingClient("host", credential);
 
             await foreach (BinaryData item in client.GetPagesPartialUrlOperationAsync("<accountName>", null))
@@ -137,7 +137,7 @@ namespace custom_baseUrl_paging_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetPagesPartialUrlOperationNext_ShortVersion()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PagingClient_KEY"));
             PagingClient client = new PagingClient("host", credential);
 
             foreach (BinaryData item in client.GetPagesPartialUrlOperationNext("<accountName>", "<nextLink>", null))
@@ -151,7 +151,7 @@ namespace custom_baseUrl_paging_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetPagesPartialUrlOperationNext_ShortVersion_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PagingClient_KEY"));
             PagingClient client = new PagingClient("host", credential);
 
             await foreach (BinaryData item in client.GetPagesPartialUrlOperationNextAsync("<accountName>", "<nextLink>", null))
@@ -165,7 +165,7 @@ namespace custom_baseUrl_paging_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetPagesPartialUrlOperationNext_AllParameters()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PagingClient_KEY"));
             PagingClient client = new PagingClient("host", credential);
 
             foreach (BinaryData item in client.GetPagesPartialUrlOperationNext("<accountName>", "<nextLink>", null))
@@ -180,7 +180,7 @@ namespace custom_baseUrl_paging_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetPagesPartialUrlOperationNext_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PagingClient_KEY"));
             PagingClient client = new PagingClient("host", credential);
 
             await foreach (BinaryData item in client.GetPagesPartialUrlOperationNextAsync("<accountName>", "<nextLink>", null))

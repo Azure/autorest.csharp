@@ -22,7 +22,7 @@ namespace body_complex_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetValid_ShortVersion()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("ReadonlypropertyClient_KEY"));
             ReadonlypropertyClient client = new ReadonlypropertyClient(credential);
 
             Response response = client.GetValid(null);
@@ -35,7 +35,7 @@ namespace body_complex_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetValid_ShortVersion_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("ReadonlypropertyClient_KEY"));
             ReadonlypropertyClient client = new ReadonlypropertyClient(credential);
 
             Response response = await client.GetValidAsync(null);
@@ -48,7 +48,7 @@ namespace body_complex_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetValid_AllParameters()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("ReadonlypropertyClient_KEY"));
             ReadonlypropertyClient client = new ReadonlypropertyClient(credential);
 
             Response response = client.GetValid(null);
@@ -62,7 +62,7 @@ namespace body_complex_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetValid_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("ReadonlypropertyClient_KEY"));
             ReadonlypropertyClient client = new ReadonlypropertyClient(credential);
 
             Response response = await client.GetValidAsync(null);
@@ -76,7 +76,7 @@ namespace body_complex_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_PutValid_ShortVersion()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("ReadonlypropertyClient_KEY"));
             ReadonlypropertyClient client = new ReadonlypropertyClient(credential);
 
             RequestContent content = RequestContent.Create(new object());
@@ -89,7 +89,7 @@ namespace body_complex_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_PutValid_ShortVersion_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("ReadonlypropertyClient_KEY"));
             ReadonlypropertyClient client = new ReadonlypropertyClient(credential);
 
             RequestContent content = RequestContent.Create(new object());
@@ -102,7 +102,7 @@ namespace body_complex_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_PutValid_AllParameters()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("ReadonlypropertyClient_KEY"));
             ReadonlypropertyClient client = new ReadonlypropertyClient(credential);
 
             RequestContent content = RequestContent.Create(new
@@ -118,7 +118,7 @@ namespace body_complex_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_PutValid_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("ReadonlypropertyClient_KEY"));
             ReadonlypropertyClient client = new ReadonlypropertyClient(credential);
 
             RequestContent content = RequestContent.Create(new
