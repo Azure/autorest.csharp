@@ -12,7 +12,7 @@ namespace AutoRest.CSharp.Common.Input.Examples
         public const string ShortVersionMockExampleKey = "ShortVersion";
         public const string MockExampleAllParameterKey = "AllParameters";
 
-        private const string EndpointMockValue = "<https://my-service.azure.com>";
+        private const string EndpointMockValue = "https://my-service.com";
 
         private readonly static ConcurrentDictionary<InputType, InputExampleValue> _cache = new();
 
