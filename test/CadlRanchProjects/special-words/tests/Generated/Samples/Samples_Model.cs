@@ -28,8 +28,8 @@ namespace SpecialWords.Samples
 
             Response response = client.GetModel();
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.GetProperty("model.kind").ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("model.kind").ToString());
         }
 
         [Test]
@@ -40,8 +40,8 @@ namespace SpecialWords.Samples
 
             Response response = await client.GetModelAsync();
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.GetProperty("model.kind").ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("model.kind").ToString());
         }
 
         [Test]
@@ -70,8 +70,8 @@ namespace SpecialWords.Samples
 
             Response response = client.GetModel();
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.GetProperty("model.kind").ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("model.kind").ToString());
         }
 
         [Test]
@@ -82,8 +82,8 @@ namespace SpecialWords.Samples
 
             Response response = await client.GetModelAsync();
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.GetProperty("model.kind").ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("model.kind").ToString());
         }
 
         [Test]

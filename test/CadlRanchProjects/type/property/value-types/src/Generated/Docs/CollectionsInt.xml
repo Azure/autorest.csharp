@@ -39,8 +39,8 @@ CollectionsInt client = new ValueTypesClient().GetCollectionsIntClient(apiVersio
 
 Response response = await client.GetCollectionsIntAsync(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("property")[0].ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("property")[0].ToString());
 ]]></code>
 This sample shows how to call GetCollectionsIntAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -48,8 +48,8 @@ CollectionsInt client = new ValueTypesClient().GetCollectionsIntClient(apiVersio
 
 Response response = await client.GetCollectionsIntAsync(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("property")[0].ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("property")[0].ToString());
 ]]></code></example>
     </member>
     <member name="GetCollectionsInt(RequestContext)">
@@ -60,8 +60,8 @@ CollectionsInt client = new ValueTypesClient().GetCollectionsIntClient(apiVersio
 
 Response response = client.GetCollectionsInt(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("property")[0].ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("property")[0].ToString());
 ]]></code>
 This sample shows how to call GetCollectionsInt with all parameters and parse the result.
 <code><![CDATA[
@@ -69,8 +69,8 @@ CollectionsInt client = new ValueTypesClient().GetCollectionsIntClient(apiVersio
 
 Response response = client.GetCollectionsInt(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("property")[0].ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("property")[0].ToString());
 ]]></code></example>
     </member>
     <member name="PutAsync(CollectionsIntProperty,CancellationToken)">

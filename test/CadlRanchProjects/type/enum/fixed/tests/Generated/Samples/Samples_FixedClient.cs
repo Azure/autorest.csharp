@@ -27,8 +27,8 @@ namespace _Type._Enum.Fixed.Samples
 
             Response response = client.GetKnownValue(null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -39,8 +39,8 @@ namespace _Type._Enum.Fixed.Samples
 
             Response response = await client.GetKnownValueAsync(null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -69,8 +69,8 @@ namespace _Type._Enum.Fixed.Samples
 
             Response response = client.GetKnownValue(null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -81,8 +81,8 @@ namespace _Type._Enum.Fixed.Samples
 
             Response response = await client.GetKnownValueAsync(null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]

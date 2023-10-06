@@ -47,8 +47,8 @@ PageableClient client = new PageableClient();
 
 await foreach (BinaryData item in client.GetPageablesAsync(null, null))
 {
-    JsonElement element = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(element.GetProperty("name").ToString());
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result.GetProperty("name").ToString());
 }
 ]]></code>
 This sample shows how to call GetPageablesAsync with all parameters and parse the result.
@@ -57,8 +57,8 @@ PageableClient client = new PageableClient();
 
 await foreach (BinaryData item in client.GetPageablesAsync(1234, null))
 {
-    JsonElement element = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(element.GetProperty("name").ToString());
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result.GetProperty("name").ToString());
 }
 ]]></code></example>
     </member>
@@ -70,8 +70,8 @@ PageableClient client = new PageableClient();
 
 foreach (BinaryData item in client.GetPageables(null, null))
 {
-    JsonElement element = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(element.GetProperty("name").ToString());
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result.GetProperty("name").ToString());
 }
 ]]></code>
 This sample shows how to call GetPageables with all parameters and parse the result.
@@ -80,8 +80,8 @@ PageableClient client = new PageableClient();
 
 foreach (BinaryData item in client.GetPageables(1234, null))
 {
-    JsonElement element = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(element.GetProperty("name").ToString());
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result.GetProperty("name").ToString());
 }
 ]]></code></example>
     </member>

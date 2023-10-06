@@ -52,9 +52,9 @@ MixApiVersionClient client = new MixApiVersionClient(endpoint);
 
 Response response = await client.ReadAsync(1234, null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("name").ToString());
-Console.WriteLine(element.GetProperty("age").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("age").ToString());
 ]]></code>
 This sample shows how to call ReadAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -63,10 +63,10 @@ MixApiVersionClient client = new MixApiVersionClient(endpoint);
 
 Response response = await client.ReadAsync(1234, null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("name").ToString());
-Console.WriteLine(element.GetProperty("tag").ToString());
-Console.WriteLine(element.GetProperty("age").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("tag").ToString());
+Console.WriteLine(result.GetProperty("age").ToString());
 ]]></code></example>
     </member>
     <member name="Read(int,RequestContext)">
@@ -78,9 +78,9 @@ MixApiVersionClient client = new MixApiVersionClient(endpoint);
 
 Response response = client.Read(1234, null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("name").ToString());
-Console.WriteLine(element.GetProperty("age").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("age").ToString());
 ]]></code>
 This sample shows how to call Read with all parameters and parse the result.
 <code><![CDATA[
@@ -89,10 +89,10 @@ MixApiVersionClient client = new MixApiVersionClient(endpoint);
 
 Response response = client.Read(1234, null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("name").ToString());
-Console.WriteLine(element.GetProperty("tag").ToString());
-Console.WriteLine(element.GetProperty("age").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("tag").ToString());
+Console.WriteLine(result.GetProperty("age").ToString());
 ]]></code></example>
     </member>
     <member name="CreateAsync(RequestContent,RequestContext)">
@@ -108,9 +108,9 @@ RequestContent content = RequestContent.Create(new
 });
 Response response = await client.CreateAsync(content);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("name").ToString());
-Console.WriteLine(element.GetProperty("age").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("age").ToString());
 ]]></code>
 This sample shows how to call CreateAsync with all request content and parse the result.
 <code><![CDATA[
@@ -124,10 +124,10 @@ RequestContent content = RequestContent.Create(new
 });
 Response response = await client.CreateAsync(content);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("name").ToString());
-Console.WriteLine(element.GetProperty("tag").ToString());
-Console.WriteLine(element.GetProperty("age").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("tag").ToString());
+Console.WriteLine(result.GetProperty("age").ToString());
 ]]></code></example>
     </member>
     <member name="Create(RequestContent,RequestContext)">
@@ -143,9 +143,9 @@ RequestContent content = RequestContent.Create(new
 });
 Response response = client.Create(content);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("name").ToString());
-Console.WriteLine(element.GetProperty("age").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("age").ToString());
 ]]></code>
 This sample shows how to call Create with all request content and parse the result.
 <code><![CDATA[
@@ -159,10 +159,10 @@ RequestContent content = RequestContent.Create(new
 });
 Response response = client.Create(content);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("name").ToString());
-Console.WriteLine(element.GetProperty("tag").ToString());
-Console.WriteLine(element.GetProperty("age").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("tag").ToString());
+Console.WriteLine(result.GetProperty("age").ToString());
 ]]></code></example>
     </member>
     <member name="GetPetsAsync(RequestContext)">
@@ -174,10 +174,10 @@ MixApiVersionClient client = new MixApiVersionClient(endpoint);
 
 await foreach (BinaryData item in client.GetPetsAsync(null))
 {
-    JsonElement element = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(element.GetProperty("id").ToString());
-    Console.WriteLine(element.GetProperty("petId").ToString());
-    Console.WriteLine(element.GetProperty("name").ToString());
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result.GetProperty("id").ToString());
+    Console.WriteLine(result.GetProperty("petId").ToString());
+    Console.WriteLine(result.GetProperty("name").ToString());
 }
 ]]></code>
 This sample shows how to call GetPetsAsync with all parameters and parse the result.
@@ -187,10 +187,10 @@ MixApiVersionClient client = new MixApiVersionClient(endpoint);
 
 await foreach (BinaryData item in client.GetPetsAsync(null))
 {
-    JsonElement element = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(element.GetProperty("id").ToString());
-    Console.WriteLine(element.GetProperty("petId").ToString());
-    Console.WriteLine(element.GetProperty("name").ToString());
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result.GetProperty("id").ToString());
+    Console.WriteLine(result.GetProperty("petId").ToString());
+    Console.WriteLine(result.GetProperty("name").ToString());
 }
 ]]></code></example>
     </member>
@@ -203,10 +203,10 @@ MixApiVersionClient client = new MixApiVersionClient(endpoint);
 
 foreach (BinaryData item in client.GetPets(null))
 {
-    JsonElement element = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(element.GetProperty("id").ToString());
-    Console.WriteLine(element.GetProperty("petId").ToString());
-    Console.WriteLine(element.GetProperty("name").ToString());
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result.GetProperty("id").ToString());
+    Console.WriteLine(result.GetProperty("petId").ToString());
+    Console.WriteLine(result.GetProperty("name").ToString());
 }
 ]]></code>
 This sample shows how to call GetPets with all parameters and parse the result.
@@ -216,10 +216,10 @@ MixApiVersionClient client = new MixApiVersionClient(endpoint);
 
 foreach (BinaryData item in client.GetPets(null))
 {
-    JsonElement element = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(element.GetProperty("id").ToString());
-    Console.WriteLine(element.GetProperty("petId").ToString());
-    Console.WriteLine(element.GetProperty("name").ToString());
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result.GetProperty("id").ToString());
+    Console.WriteLine(result.GetProperty("petId").ToString());
+    Console.WriteLine(result.GetProperty("name").ToString());
 }
 ]]></code></example>
     </member>

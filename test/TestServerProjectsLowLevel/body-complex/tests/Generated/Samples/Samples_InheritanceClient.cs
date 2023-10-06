@@ -27,8 +27,8 @@ namespace body_complex_LowLevel.Samples
 
             Response response = client.GetValid(null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -40,8 +40,8 @@ namespace body_complex_LowLevel.Samples
 
             Response response = await client.GetValidAsync(null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -53,14 +53,14 @@ namespace body_complex_LowLevel.Samples
 
             Response response = client.GetValid(null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.GetProperty("breed").ToString());
-            Console.WriteLine(element.GetProperty("color").ToString());
-            Console.WriteLine(element.GetProperty("hates")[0].GetProperty("food").ToString());
-            Console.WriteLine(element.GetProperty("hates")[0].GetProperty("id").ToString());
-            Console.WriteLine(element.GetProperty("hates")[0].GetProperty("name").ToString());
-            Console.WriteLine(element.GetProperty("id").ToString());
-            Console.WriteLine(element.GetProperty("name").ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("breed").ToString());
+            Console.WriteLine(result.GetProperty("color").ToString());
+            Console.WriteLine(result.GetProperty("hates")[0].GetProperty("food").ToString());
+            Console.WriteLine(result.GetProperty("hates")[0].GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("hates")[0].GetProperty("name").ToString());
+            Console.WriteLine(result.GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]
@@ -72,14 +72,14 @@ namespace body_complex_LowLevel.Samples
 
             Response response = await client.GetValidAsync(null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.GetProperty("breed").ToString());
-            Console.WriteLine(element.GetProperty("color").ToString());
-            Console.WriteLine(element.GetProperty("hates")[0].GetProperty("food").ToString());
-            Console.WriteLine(element.GetProperty("hates")[0].GetProperty("id").ToString());
-            Console.WriteLine(element.GetProperty("hates")[0].GetProperty("name").ToString());
-            Console.WriteLine(element.GetProperty("id").ToString());
-            Console.WriteLine(element.GetProperty("name").ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("breed").ToString());
+            Console.WriteLine(result.GetProperty("color").ToString());
+            Console.WriteLine(result.GetProperty("hates")[0].GetProperty("food").ToString());
+            Console.WriteLine(result.GetProperty("hates")[0].GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("hates")[0].GetProperty("name").ToString());
+            Console.WriteLine(result.GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]

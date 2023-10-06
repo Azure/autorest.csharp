@@ -115,8 +115,8 @@ namespace _Type.Model.Empty.Samples
 
             Response response = client.GetEmpty(null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -127,8 +127,8 @@ namespace _Type.Model.Empty.Samples
 
             Response response = await client.GetEmptyAsync(null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -157,8 +157,8 @@ namespace _Type.Model.Empty.Samples
 
             Response response = client.GetEmpty(null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -169,8 +169,8 @@ namespace _Type.Model.Empty.Samples
 
             Response response = await client.GetEmptyAsync(null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -200,8 +200,8 @@ namespace _Type.Model.Empty.Samples
             RequestContent content = RequestContent.Create(new object());
             Response response = client.PostRoundTripEmpty(content);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -213,8 +213,8 @@ namespace _Type.Model.Empty.Samples
             RequestContent content = RequestContent.Create(new object());
             Response response = await client.PostRoundTripEmptyAsync(content);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -246,8 +246,8 @@ namespace _Type.Model.Empty.Samples
             RequestContent content = RequestContent.Create(new object());
             Response response = client.PostRoundTripEmpty(content);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -259,8 +259,8 @@ namespace _Type.Model.Empty.Samples
             RequestContent content = RequestContent.Create(new object());
             Response response = await client.PostRoundTripEmptyAsync(content);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]

@@ -32,8 +32,8 @@ namespace Encode.Duration.Samples
             });
             Response response = client.Default(content);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.GetProperty("value").ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("value").ToString());
         }
 
         [Test]
@@ -48,8 +48,8 @@ namespace Encode.Duration.Samples
             });
             Response response = await client.DefaultAsync(content);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.GetProperty("value").ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("value").ToString());
         }
 
         [Test]
@@ -84,8 +84,8 @@ namespace Encode.Duration.Samples
             });
             Response response = client.Default(content);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.GetProperty("value").ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("value").ToString());
         }
 
         [Test]
@@ -100,8 +100,8 @@ namespace Encode.Duration.Samples
             });
             Response response = await client.DefaultAsync(content);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.GetProperty("value").ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("value").ToString());
         }
 
         [Test]
@@ -136,8 +136,8 @@ namespace Encode.Duration.Samples
             });
             Response response = client.Iso8601(content);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.GetProperty("value").ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("value").ToString());
         }
 
         [Test]
@@ -152,8 +152,8 @@ namespace Encode.Duration.Samples
             });
             Response response = await client.Iso8601Async(content);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.GetProperty("value").ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("value").ToString());
         }
 
         [Test]
@@ -188,8 +188,8 @@ namespace Encode.Duration.Samples
             });
             Response response = client.Iso8601(content);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.GetProperty("value").ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("value").ToString());
         }
 
         [Test]
@@ -204,8 +204,8 @@ namespace Encode.Duration.Samples
             });
             Response response = await client.Iso8601Async(content);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.GetProperty("value").ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("value").ToString());
         }
 
         [Test]
@@ -240,8 +240,8 @@ namespace Encode.Duration.Samples
             });
             Response response = client.Int32Seconds(content);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.GetProperty("value").ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("value").ToString());
         }
 
         [Test]
@@ -256,8 +256,8 @@ namespace Encode.Duration.Samples
             });
             Response response = await client.Int32SecondsAsync(content);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.GetProperty("value").ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("value").ToString());
         }
 
         [Test]
@@ -292,8 +292,8 @@ namespace Encode.Duration.Samples
             });
             Response response = client.Int32Seconds(content);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.GetProperty("value").ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("value").ToString());
         }
 
         [Test]
@@ -308,8 +308,8 @@ namespace Encode.Duration.Samples
             });
             Response response = await client.Int32SecondsAsync(content);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.GetProperty("value").ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("value").ToString());
         }
 
         [Test]
@@ -344,8 +344,8 @@ namespace Encode.Duration.Samples
             });
             Response response = client.FloatSeconds(content);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.GetProperty("value").ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("value").ToString());
         }
 
         [Test]
@@ -360,8 +360,8 @@ namespace Encode.Duration.Samples
             });
             Response response = await client.FloatSecondsAsync(content);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.GetProperty("value").ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("value").ToString());
         }
 
         [Test]
@@ -396,8 +396,8 @@ namespace Encode.Duration.Samples
             });
             Response response = client.FloatSeconds(content);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.GetProperty("value").ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("value").ToString());
         }
 
         [Test]
@@ -412,8 +412,8 @@ namespace Encode.Duration.Samples
             });
             Response response = await client.FloatSecondsAsync(content);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.GetProperty("value").ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("value").ToString());
         }
 
         [Test]
@@ -451,8 +451,8 @@ namespace Encode.Duration.Samples
             });
             Response response = client.FloatSecondsArray(content);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.GetProperty("value")[0].ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("value")[0].ToString());
         }
 
         [Test]
@@ -470,8 +470,8 @@ namespace Encode.Duration.Samples
             });
             Response response = await client.FloatSecondsArrayAsync(content);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.GetProperty("value")[0].ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("value")[0].ToString());
         }
 
         [Test]
@@ -509,8 +509,8 @@ namespace Encode.Duration.Samples
             });
             Response response = client.FloatSecondsArray(content);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.GetProperty("value")[0].ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("value")[0].ToString());
         }
 
         [Test]
@@ -528,8 +528,8 @@ namespace Encode.Duration.Samples
             });
             Response response = await client.FloatSecondsArrayAsync(content);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.GetProperty("value")[0].ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("value")[0].ToString());
         }
 
         [Test]

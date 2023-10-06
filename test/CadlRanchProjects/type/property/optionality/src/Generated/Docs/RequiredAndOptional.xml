@@ -39,8 +39,8 @@ RequiredAndOptional client = new OptionalClient().GetRequiredAndOptionalClient(a
 
 Response response = await client.GetAllAsync(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("requiredProperty").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("requiredProperty").ToString());
 ]]></code>
 This sample shows how to call GetAllAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -48,9 +48,9 @@ RequiredAndOptional client = new OptionalClient().GetRequiredAndOptionalClient(a
 
 Response response = await client.GetAllAsync(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("optionalProperty").ToString());
-Console.WriteLine(element.GetProperty("requiredProperty").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("optionalProperty").ToString());
+Console.WriteLine(result.GetProperty("requiredProperty").ToString());
 ]]></code></example>
     </member>
     <member name="GetAll(RequestContext)">
@@ -61,8 +61,8 @@ RequiredAndOptional client = new OptionalClient().GetRequiredAndOptionalClient(a
 
 Response response = client.GetAll(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("requiredProperty").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("requiredProperty").ToString());
 ]]></code>
 This sample shows how to call GetAll with all parameters and parse the result.
 <code><![CDATA[
@@ -70,9 +70,9 @@ RequiredAndOptional client = new OptionalClient().GetRequiredAndOptionalClient(a
 
 Response response = client.GetAll(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("optionalProperty").ToString());
-Console.WriteLine(element.GetProperty("requiredProperty").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("optionalProperty").ToString());
+Console.WriteLine(result.GetProperty("requiredProperty").ToString());
 ]]></code></example>
     </member>
     <member name="GetRequiredOnlyAsync(CancellationToken)">
@@ -113,8 +113,8 @@ RequiredAndOptional client = new OptionalClient().GetRequiredAndOptionalClient(a
 
 Response response = await client.GetRequiredOnlyAsync(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("requiredProperty").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("requiredProperty").ToString());
 ]]></code>
 This sample shows how to call GetRequiredOnlyAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -122,9 +122,9 @@ RequiredAndOptional client = new OptionalClient().GetRequiredAndOptionalClient(a
 
 Response response = await client.GetRequiredOnlyAsync(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("optionalProperty").ToString());
-Console.WriteLine(element.GetProperty("requiredProperty").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("optionalProperty").ToString());
+Console.WriteLine(result.GetProperty("requiredProperty").ToString());
 ]]></code></example>
     </member>
     <member name="GetRequiredOnly(RequestContext)">
@@ -135,8 +135,8 @@ RequiredAndOptional client = new OptionalClient().GetRequiredAndOptionalClient(a
 
 Response response = client.GetRequiredOnly(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("requiredProperty").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("requiredProperty").ToString());
 ]]></code>
 This sample shows how to call GetRequiredOnly with all parameters and parse the result.
 <code><![CDATA[
@@ -144,9 +144,9 @@ RequiredAndOptional client = new OptionalClient().GetRequiredAndOptionalClient(a
 
 Response response = client.GetRequiredOnly(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("optionalProperty").ToString());
-Console.WriteLine(element.GetProperty("requiredProperty").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("optionalProperty").ToString());
+Console.WriteLine(result.GetProperty("requiredProperty").ToString());
 ]]></code></example>
     </member>
     <member name="PutAllAsync(RequiredAndOptionalProperty,CancellationToken)">

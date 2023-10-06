@@ -39,8 +39,8 @@ Int client = new ValueTypesClient().GetIntClient(apiVersion: "1.0.0");
 
 Response response = await client.GetIntAsync(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("property").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("property").ToString());
 ]]></code>
 This sample shows how to call GetIntAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -48,8 +48,8 @@ Int client = new ValueTypesClient().GetIntClient(apiVersion: "1.0.0");
 
 Response response = await client.GetIntAsync(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("property").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("property").ToString());
 ]]></code></example>
     </member>
     <member name="GetInt(RequestContext)">
@@ -60,8 +60,8 @@ Int client = new ValueTypesClient().GetIntClient(apiVersion: "1.0.0");
 
 Response response = client.GetInt(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("property").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("property").ToString());
 ]]></code>
 This sample shows how to call GetInt with all parameters and parse the result.
 <code><![CDATA[
@@ -69,8 +69,8 @@ Int client = new ValueTypesClient().GetIntClient(apiVersion: "1.0.0");
 
 Response response = client.GetInt(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("property").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("property").ToString());
 ]]></code></example>
     </member>
     <member name="PutAsync(IntProperty,CancellationToken)">

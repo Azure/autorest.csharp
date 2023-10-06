@@ -10,8 +10,8 @@ StringClient client = new StringClient(credential);
 
 Response response = await client.GetNullAsync(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetNullAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -20,8 +20,8 @@ StringClient client = new StringClient(credential);
 
 Response response = await client.GetNullAsync(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
     <member name="GetNull(RequestContext)">
@@ -33,8 +33,8 @@ StringClient client = new StringClient(credential);
 
 Response response = client.GetNull(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetNull with all parameters and parse the result.
 <code><![CDATA[
@@ -43,8 +43,8 @@ StringClient client = new StringClient(credential);
 
 Response response = client.GetNull(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
     <member name="PutNullAsync(RequestContent,RequestContext)">
@@ -102,8 +102,8 @@ StringClient client = new StringClient(credential);
 
 Response response = await client.GetEmptyAsync(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetEmptyAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -112,8 +112,8 @@ StringClient client = new StringClient(credential);
 
 Response response = await client.GetEmptyAsync(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
     <member name="GetEmpty(RequestContext)">
@@ -125,8 +125,8 @@ StringClient client = new StringClient(credential);
 
 Response response = client.GetEmpty(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetEmpty with all parameters and parse the result.
 <code><![CDATA[
@@ -135,8 +135,8 @@ StringClient client = new StringClient(credential);
 
 Response response = client.GetEmpty(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
     <member name="PutEmptyAsync(RequestContent,RequestContext)">
@@ -194,8 +194,8 @@ StringClient client = new StringClient(credential);
 
 Response response = await client.GetMbcsAsync(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetMbcsAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -204,8 +204,8 @@ StringClient client = new StringClient(credential);
 
 Response response = await client.GetMbcsAsync(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
     <member name="GetMbcs(RequestContext)">
@@ -217,8 +217,8 @@ StringClient client = new StringClient(credential);
 
 Response response = client.GetMbcs(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetMbcs with all parameters and parse the result.
 <code><![CDATA[
@@ -227,8 +227,8 @@ StringClient client = new StringClient(credential);
 
 Response response = client.GetMbcs(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
     <member name="PutMbcsAsync(RequestContent,RequestContext)">
@@ -286,8 +286,8 @@ StringClient client = new StringClient(credential);
 
 Response response = await client.GetWhitespaceAsync(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetWhitespaceAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -296,8 +296,8 @@ StringClient client = new StringClient(credential);
 
 Response response = await client.GetWhitespaceAsync(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
     <member name="GetWhitespace(RequestContext)">
@@ -309,8 +309,8 @@ StringClient client = new StringClient(credential);
 
 Response response = client.GetWhitespace(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetWhitespace with all parameters and parse the result.
 <code><![CDATA[
@@ -319,8 +319,8 @@ StringClient client = new StringClient(credential);
 
 Response response = client.GetWhitespace(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
     <member name="PutWhitespaceAsync(RequestContent,RequestContext)">
@@ -378,8 +378,8 @@ StringClient client = new StringClient(credential);
 
 Response response = await client.GetNotProvidedAsync(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetNotProvidedAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -388,8 +388,8 @@ StringClient client = new StringClient(credential);
 
 Response response = await client.GetNotProvidedAsync(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
     <member name="GetNotProvided(RequestContext)">
@@ -401,8 +401,8 @@ StringClient client = new StringClient(credential);
 
 Response response = client.GetNotProvided(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetNotProvided with all parameters and parse the result.
 <code><![CDATA[
@@ -411,8 +411,8 @@ StringClient client = new StringClient(credential);
 
 Response response = client.GetNotProvided(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
     <member name="GetBase64EncodedAsync(RequestContext)">
@@ -424,8 +424,8 @@ StringClient client = new StringClient(credential);
 
 Response response = await client.GetBase64EncodedAsync(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetBase64EncodedAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -434,8 +434,8 @@ StringClient client = new StringClient(credential);
 
 Response response = await client.GetBase64EncodedAsync(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
     <member name="GetBase64Encoded(RequestContext)">
@@ -447,8 +447,8 @@ StringClient client = new StringClient(credential);
 
 Response response = client.GetBase64Encoded(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetBase64Encoded with all parameters and parse the result.
 <code><![CDATA[
@@ -457,8 +457,8 @@ StringClient client = new StringClient(credential);
 
 Response response = client.GetBase64Encoded(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
     <member name="GetBase64UrlEncodedAsync(RequestContext)">
@@ -470,8 +470,8 @@ StringClient client = new StringClient(credential);
 
 Response response = await client.GetBase64UrlEncodedAsync(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetBase64UrlEncodedAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -480,8 +480,8 @@ StringClient client = new StringClient(credential);
 
 Response response = await client.GetBase64UrlEncodedAsync(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
     <member name="GetBase64UrlEncoded(RequestContext)">
@@ -493,8 +493,8 @@ StringClient client = new StringClient(credential);
 
 Response response = client.GetBase64UrlEncoded(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetBase64UrlEncoded with all parameters and parse the result.
 <code><![CDATA[
@@ -503,8 +503,8 @@ StringClient client = new StringClient(credential);
 
 Response response = client.GetBase64UrlEncoded(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
     <member name="PutBase64UrlEncodedAsync(RequestContent,RequestContext)">
@@ -562,8 +562,8 @@ StringClient client = new StringClient(credential);
 
 Response response = await client.GetNullBase64UrlEncodedAsync(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetNullBase64UrlEncodedAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -572,8 +572,8 @@ StringClient client = new StringClient(credential);
 
 Response response = await client.GetNullBase64UrlEncodedAsync(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
     <member name="GetNullBase64UrlEncoded(RequestContext)">
@@ -585,8 +585,8 @@ StringClient client = new StringClient(credential);
 
 Response response = client.GetNullBase64UrlEncoded(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetNullBase64UrlEncoded with all parameters and parse the result.
 <code><![CDATA[
@@ -595,8 +595,8 @@ StringClient client = new StringClient(credential);
 
 Response response = client.GetNullBase64UrlEncoded(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
   </members>

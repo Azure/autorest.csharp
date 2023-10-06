@@ -39,8 +39,8 @@ BooleanValue client = new ArrayClient().GetBooleanValueClient(apiVersion: "1.0.0
 
 Response response = await client.GetBooleanValueAsync(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element[0].ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result[0].ToString());
 ]]></code>
 This sample shows how to call GetBooleanValueAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -48,8 +48,8 @@ BooleanValue client = new ArrayClient().GetBooleanValueClient(apiVersion: "1.0.0
 
 Response response = await client.GetBooleanValueAsync(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element[0].ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result[0].ToString());
 ]]></code></example>
     </member>
     <member name="GetBooleanValue(RequestContext)">
@@ -60,8 +60,8 @@ BooleanValue client = new ArrayClient().GetBooleanValueClient(apiVersion: "1.0.0
 
 Response response = client.GetBooleanValue(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element[0].ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result[0].ToString());
 ]]></code>
 This sample shows how to call GetBooleanValue with all parameters and parse the result.
 <code><![CDATA[
@@ -69,8 +69,8 @@ BooleanValue client = new ArrayClient().GetBooleanValueClient(apiVersion: "1.0.0
 
 Response response = client.GetBooleanValue(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element[0].ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result[0].ToString());
 ]]></code></example>
     </member>
     <member name="PutAsync(IEnumerable{bool},CancellationToken)">

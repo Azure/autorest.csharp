@@ -10,8 +10,8 @@ PaginationParamsClient client = new PaginationParamsClient(credential);
 
 await foreach (BinaryData item in client.GetPaginationParamsAsync(null, null, null, null))
 {
-    JsonElement element = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(element.ToString());
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result.ToString());
 }
 ]]></code>
 This sample shows how to call GetPaginationParamsAsync with all parameters and parse the result.
@@ -21,10 +21,10 @@ PaginationParamsClient client = new PaginationParamsClient(credential);
 
 await foreach (BinaryData item in client.GetPaginationParamsAsync(1234, 1234, 1234, null))
 {
-    JsonElement element = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(element.GetProperty("id").ToString());
-    Console.WriteLine(element.GetProperty("name").ToString());
-    Console.WriteLine(element.GetProperty("type").ToString());
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result.GetProperty("id").ToString());
+    Console.WriteLine(result.GetProperty("name").ToString());
+    Console.WriteLine(result.GetProperty("type").ToString());
 }
 ]]></code></example>
     </member>
@@ -37,8 +37,8 @@ PaginationParamsClient client = new PaginationParamsClient(credential);
 
 foreach (BinaryData item in client.GetPaginationParams(null, null, null, null))
 {
-    JsonElement element = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(element.ToString());
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result.ToString());
 }
 ]]></code>
 This sample shows how to call GetPaginationParams with all parameters and parse the result.
@@ -48,10 +48,10 @@ PaginationParamsClient client = new PaginationParamsClient(credential);
 
 foreach (BinaryData item in client.GetPaginationParams(1234, 1234, 1234, null))
 {
-    JsonElement element = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(element.GetProperty("id").ToString());
-    Console.WriteLine(element.GetProperty("name").ToString());
-    Console.WriteLine(element.GetProperty("type").ToString());
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result.GetProperty("id").ToString());
+    Console.WriteLine(result.GetProperty("name").ToString());
+    Console.WriteLine(result.GetProperty("type").ToString());
 }
 ]]></code></example>
     </member>
@@ -64,8 +64,8 @@ PaginationParamsClient client = new PaginationParamsClient(credential);
 
 await foreach (BinaryData item in client.Get2sAsync(null, null, null, null))
 {
-    JsonElement element = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(element.ToString());
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result.ToString());
 }
 ]]></code>
 This sample shows how to call Get2sAsync with all parameters and parse the result.
@@ -75,10 +75,10 @@ PaginationParamsClient client = new PaginationParamsClient(credential);
 
 await foreach (BinaryData item in client.Get2sAsync(1234, 1234, 1234L, null))
 {
-    JsonElement element = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(element.GetProperty("id").ToString());
-    Console.WriteLine(element.GetProperty("name").ToString());
-    Console.WriteLine(element.GetProperty("type").ToString());
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result.GetProperty("id").ToString());
+    Console.WriteLine(result.GetProperty("name").ToString());
+    Console.WriteLine(result.GetProperty("type").ToString());
 }
 ]]></code></example>
     </member>
@@ -91,8 +91,8 @@ PaginationParamsClient client = new PaginationParamsClient(credential);
 
 foreach (BinaryData item in client.Get2s(null, null, null, null))
 {
-    JsonElement element = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(element.ToString());
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result.ToString());
 }
 ]]></code>
 This sample shows how to call Get2s with all parameters and parse the result.
@@ -102,10 +102,10 @@ PaginationParamsClient client = new PaginationParamsClient(credential);
 
 foreach (BinaryData item in client.Get2s(1234, 1234, 1234L, null))
 {
-    JsonElement element = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(element.GetProperty("id").ToString());
-    Console.WriteLine(element.GetProperty("name").ToString());
-    Console.WriteLine(element.GetProperty("type").ToString());
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result.GetProperty("id").ToString());
+    Console.WriteLine(result.GetProperty("name").ToString());
+    Console.WriteLine(result.GetProperty("type").ToString());
 }
 ]]></code></example>
     </member>
@@ -118,8 +118,8 @@ PaginationParamsClient client = new PaginationParamsClient(credential);
 
 await foreach (BinaryData item in client.Get3sAsync(null, null, null, null))
 {
-    JsonElement element = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(element.ToString());
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result.ToString());
 }
 ]]></code>
 This sample shows how to call Get3sAsync with all parameters and parse the result.
@@ -129,10 +129,10 @@ PaginationParamsClient client = new PaginationParamsClient(credential);
 
 await foreach (BinaryData item in client.Get3sAsync(1234, 1234, 1234, null))
 {
-    JsonElement element = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(element.GetProperty("id").ToString());
-    Console.WriteLine(element.GetProperty("name").ToString());
-    Console.WriteLine(element.GetProperty("type").ToString());
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result.GetProperty("id").ToString());
+    Console.WriteLine(result.GetProperty("name").ToString());
+    Console.WriteLine(result.GetProperty("type").ToString());
 }
 ]]></code></example>
     </member>
@@ -145,8 +145,8 @@ PaginationParamsClient client = new PaginationParamsClient(credential);
 
 foreach (BinaryData item in client.Get3s(null, null, null, null))
 {
-    JsonElement element = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(element.ToString());
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result.ToString());
 }
 ]]></code>
 This sample shows how to call Get3s with all parameters and parse the result.
@@ -156,10 +156,10 @@ PaginationParamsClient client = new PaginationParamsClient(credential);
 
 foreach (BinaryData item in client.Get3s(1234, 1234, 1234, null))
 {
-    JsonElement element = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(element.GetProperty("id").ToString());
-    Console.WriteLine(element.GetProperty("name").ToString());
-    Console.WriteLine(element.GetProperty("type").ToString());
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result.GetProperty("id").ToString());
+    Console.WriteLine(result.GetProperty("name").ToString());
+    Console.WriteLine(result.GetProperty("type").ToString());
 }
 ]]></code></example>
     </member>
@@ -172,8 +172,8 @@ PaginationParamsClient client = new PaginationParamsClient(credential);
 
 await foreach (BinaryData item in client.Get4sAsync(null, null, null, null))
 {
-    JsonElement element = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(element.ToString());
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result.ToString());
 }
 ]]></code>
 This sample shows how to call Get4sAsync with all parameters and parse the result.
@@ -183,10 +183,10 @@ PaginationParamsClient client = new PaginationParamsClient(credential);
 
 await foreach (BinaryData item in client.Get4sAsync(1234, 1234, 123.45F, null))
 {
-    JsonElement element = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(element.GetProperty("id").ToString());
-    Console.WriteLine(element.GetProperty("name").ToString());
-    Console.WriteLine(element.GetProperty("type").ToString());
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result.GetProperty("id").ToString());
+    Console.WriteLine(result.GetProperty("name").ToString());
+    Console.WriteLine(result.GetProperty("type").ToString());
 }
 ]]></code></example>
     </member>
@@ -199,8 +199,8 @@ PaginationParamsClient client = new PaginationParamsClient(credential);
 
 foreach (BinaryData item in client.Get4s(null, null, null, null))
 {
-    JsonElement element = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(element.ToString());
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result.ToString());
 }
 ]]></code>
 This sample shows how to call Get4s with all parameters and parse the result.
@@ -210,10 +210,10 @@ PaginationParamsClient client = new PaginationParamsClient(credential);
 
 foreach (BinaryData item in client.Get4s(1234, 1234, 123.45F, null))
 {
-    JsonElement element = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(element.GetProperty("id").ToString());
-    Console.WriteLine(element.GetProperty("name").ToString());
-    Console.WriteLine(element.GetProperty("type").ToString());
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result.GetProperty("id").ToString());
+    Console.WriteLine(result.GetProperty("name").ToString());
+    Console.WriteLine(result.GetProperty("type").ToString());
 }
 ]]></code></example>
     </member>

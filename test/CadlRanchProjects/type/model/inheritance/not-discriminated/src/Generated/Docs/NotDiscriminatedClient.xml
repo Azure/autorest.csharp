@@ -135,10 +135,10 @@ NotDiscriminatedClient client = new NotDiscriminatedClient();
 
 Response response = await client.GetValidAsync(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("smart").ToString());
-Console.WriteLine(element.GetProperty("age").ToString());
-Console.WriteLine(element.GetProperty("name").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("smart").ToString());
+Console.WriteLine(result.GetProperty("age").ToString());
+Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code>
 This sample shows how to call GetValidAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -146,10 +146,10 @@ NotDiscriminatedClient client = new NotDiscriminatedClient();
 
 Response response = await client.GetValidAsync(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("smart").ToString());
-Console.WriteLine(element.GetProperty("age").ToString());
-Console.WriteLine(element.GetProperty("name").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("smart").ToString());
+Console.WriteLine(result.GetProperty("age").ToString());
+Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code></example>
     </member>
     <member name="GetValid(RequestContext)">
@@ -160,10 +160,10 @@ NotDiscriminatedClient client = new NotDiscriminatedClient();
 
 Response response = client.GetValid(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("smart").ToString());
-Console.WriteLine(element.GetProperty("age").ToString());
-Console.WriteLine(element.GetProperty("name").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("smart").ToString());
+Console.WriteLine(result.GetProperty("age").ToString());
+Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code>
 This sample shows how to call GetValid with all parameters and parse the result.
 <code><![CDATA[
@@ -171,10 +171,10 @@ NotDiscriminatedClient client = new NotDiscriminatedClient();
 
 Response response = client.GetValid(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("smart").ToString());
-Console.WriteLine(element.GetProperty("age").ToString());
-Console.WriteLine(element.GetProperty("name").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("smart").ToString());
+Console.WriteLine(result.GetProperty("age").ToString());
+Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code></example>
     </member>
     <member name="PutValidAsync(Siamese,CancellationToken)">
@@ -225,10 +225,10 @@ RequestContent content = RequestContent.Create(new
 });
 Response response = await client.PutValidAsync(content);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("smart").ToString());
-Console.WriteLine(element.GetProperty("age").ToString());
-Console.WriteLine(element.GetProperty("name").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("smart").ToString());
+Console.WriteLine(result.GetProperty("age").ToString());
+Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code>
 This sample shows how to call PutValidAsync with all request content and parse the result.
 <code><![CDATA[
@@ -242,10 +242,10 @@ RequestContent content = RequestContent.Create(new
 });
 Response response = await client.PutValidAsync(content);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("smart").ToString());
-Console.WriteLine(element.GetProperty("age").ToString());
-Console.WriteLine(element.GetProperty("name").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("smart").ToString());
+Console.WriteLine(result.GetProperty("age").ToString());
+Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code></example>
     </member>
     <member name="PutValid(RequestContent,RequestContext)">
@@ -262,10 +262,10 @@ RequestContent content = RequestContent.Create(new
 });
 Response response = client.PutValid(content);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("smart").ToString());
-Console.WriteLine(element.GetProperty("age").ToString());
-Console.WriteLine(element.GetProperty("name").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("smart").ToString());
+Console.WriteLine(result.GetProperty("age").ToString());
+Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code>
 This sample shows how to call PutValid with all request content and parse the result.
 <code><![CDATA[
@@ -279,10 +279,10 @@ RequestContent content = RequestContent.Create(new
 });
 Response response = client.PutValid(content);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("smart").ToString());
-Console.WriteLine(element.GetProperty("age").ToString());
-Console.WriteLine(element.GetProperty("name").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("smart").ToString());
+Console.WriteLine(result.GetProperty("age").ToString());
+Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code></example>
     </member>
   </members>

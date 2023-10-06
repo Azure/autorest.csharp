@@ -28,8 +28,8 @@ namespace Azure.Analytics.Purview.Account.Samples
 
             Response response = client.GetCollection(null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -42,8 +42,8 @@ namespace Azure.Analytics.Purview.Account.Samples
 
             Response response = await client.GetCollectionAsync(null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -56,19 +56,19 @@ namespace Azure.Analytics.Purview.Account.Samples
 
             Response response = client.GetCollection(null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.GetProperty("collectionProvisioningState").ToString());
-            Console.WriteLine(element.GetProperty("description").ToString());
-            Console.WriteLine(element.GetProperty("friendlyName").ToString());
-            Console.WriteLine(element.GetProperty("name").ToString());
-            Console.WriteLine(element.GetProperty("parentCollection").GetProperty("referenceName").ToString());
-            Console.WriteLine(element.GetProperty("parentCollection").GetProperty("type").ToString());
-            Console.WriteLine(element.GetProperty("systemData").GetProperty("createdAt").ToString());
-            Console.WriteLine(element.GetProperty("systemData").GetProperty("createdBy").ToString());
-            Console.WriteLine(element.GetProperty("systemData").GetProperty("createdByType").ToString());
-            Console.WriteLine(element.GetProperty("systemData").GetProperty("lastModifiedAt").ToString());
-            Console.WriteLine(element.GetProperty("systemData").GetProperty("lastModifiedBy").ToString());
-            Console.WriteLine(element.GetProperty("systemData").GetProperty("lastModifiedByType").ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("collectionProvisioningState").ToString());
+            Console.WriteLine(result.GetProperty("description").ToString());
+            Console.WriteLine(result.GetProperty("friendlyName").ToString());
+            Console.WriteLine(result.GetProperty("name").ToString());
+            Console.WriteLine(result.GetProperty("parentCollection").GetProperty("referenceName").ToString());
+            Console.WriteLine(result.GetProperty("parentCollection").GetProperty("type").ToString());
+            Console.WriteLine(result.GetProperty("systemData").GetProperty("createdAt").ToString());
+            Console.WriteLine(result.GetProperty("systemData").GetProperty("createdBy").ToString());
+            Console.WriteLine(result.GetProperty("systemData").GetProperty("createdByType").ToString());
+            Console.WriteLine(result.GetProperty("systemData").GetProperty("lastModifiedAt").ToString());
+            Console.WriteLine(result.GetProperty("systemData").GetProperty("lastModifiedBy").ToString());
+            Console.WriteLine(result.GetProperty("systemData").GetProperty("lastModifiedByType").ToString());
         }
 
         [Test]
@@ -81,19 +81,19 @@ namespace Azure.Analytics.Purview.Account.Samples
 
             Response response = await client.GetCollectionAsync(null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.GetProperty("collectionProvisioningState").ToString());
-            Console.WriteLine(element.GetProperty("description").ToString());
-            Console.WriteLine(element.GetProperty("friendlyName").ToString());
-            Console.WriteLine(element.GetProperty("name").ToString());
-            Console.WriteLine(element.GetProperty("parentCollection").GetProperty("referenceName").ToString());
-            Console.WriteLine(element.GetProperty("parentCollection").GetProperty("type").ToString());
-            Console.WriteLine(element.GetProperty("systemData").GetProperty("createdAt").ToString());
-            Console.WriteLine(element.GetProperty("systemData").GetProperty("createdBy").ToString());
-            Console.WriteLine(element.GetProperty("systemData").GetProperty("createdByType").ToString());
-            Console.WriteLine(element.GetProperty("systemData").GetProperty("lastModifiedAt").ToString());
-            Console.WriteLine(element.GetProperty("systemData").GetProperty("lastModifiedBy").ToString());
-            Console.WriteLine(element.GetProperty("systemData").GetProperty("lastModifiedByType").ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("collectionProvisioningState").ToString());
+            Console.WriteLine(result.GetProperty("description").ToString());
+            Console.WriteLine(result.GetProperty("friendlyName").ToString());
+            Console.WriteLine(result.GetProperty("name").ToString());
+            Console.WriteLine(result.GetProperty("parentCollection").GetProperty("referenceName").ToString());
+            Console.WriteLine(result.GetProperty("parentCollection").GetProperty("type").ToString());
+            Console.WriteLine(result.GetProperty("systemData").GetProperty("createdAt").ToString());
+            Console.WriteLine(result.GetProperty("systemData").GetProperty("createdBy").ToString());
+            Console.WriteLine(result.GetProperty("systemData").GetProperty("createdByType").ToString());
+            Console.WriteLine(result.GetProperty("systemData").GetProperty("lastModifiedAt").ToString());
+            Console.WriteLine(result.GetProperty("systemData").GetProperty("lastModifiedBy").ToString());
+            Console.WriteLine(result.GetProperty("systemData").GetProperty("lastModifiedByType").ToString());
         }
 
         [Test]
@@ -107,8 +107,8 @@ namespace Azure.Analytics.Purview.Account.Samples
             RequestContent content = RequestContent.Create(new object());
             Response response = client.CreateOrUpdateCollection(content);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -122,8 +122,8 @@ namespace Azure.Analytics.Purview.Account.Samples
             RequestContent content = RequestContent.Create(new object());
             Response response = await client.CreateOrUpdateCollectionAsync(content);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -145,19 +145,19 @@ namespace Azure.Analytics.Purview.Account.Samples
             });
             Response response = client.CreateOrUpdateCollection(content);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.GetProperty("collectionProvisioningState").ToString());
-            Console.WriteLine(element.GetProperty("description").ToString());
-            Console.WriteLine(element.GetProperty("friendlyName").ToString());
-            Console.WriteLine(element.GetProperty("name").ToString());
-            Console.WriteLine(element.GetProperty("parentCollection").GetProperty("referenceName").ToString());
-            Console.WriteLine(element.GetProperty("parentCollection").GetProperty("type").ToString());
-            Console.WriteLine(element.GetProperty("systemData").GetProperty("createdAt").ToString());
-            Console.WriteLine(element.GetProperty("systemData").GetProperty("createdBy").ToString());
-            Console.WriteLine(element.GetProperty("systemData").GetProperty("createdByType").ToString());
-            Console.WriteLine(element.GetProperty("systemData").GetProperty("lastModifiedAt").ToString());
-            Console.WriteLine(element.GetProperty("systemData").GetProperty("lastModifiedBy").ToString());
-            Console.WriteLine(element.GetProperty("systemData").GetProperty("lastModifiedByType").ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("collectionProvisioningState").ToString());
+            Console.WriteLine(result.GetProperty("description").ToString());
+            Console.WriteLine(result.GetProperty("friendlyName").ToString());
+            Console.WriteLine(result.GetProperty("name").ToString());
+            Console.WriteLine(result.GetProperty("parentCollection").GetProperty("referenceName").ToString());
+            Console.WriteLine(result.GetProperty("parentCollection").GetProperty("type").ToString());
+            Console.WriteLine(result.GetProperty("systemData").GetProperty("createdAt").ToString());
+            Console.WriteLine(result.GetProperty("systemData").GetProperty("createdBy").ToString());
+            Console.WriteLine(result.GetProperty("systemData").GetProperty("createdByType").ToString());
+            Console.WriteLine(result.GetProperty("systemData").GetProperty("lastModifiedAt").ToString());
+            Console.WriteLine(result.GetProperty("systemData").GetProperty("lastModifiedBy").ToString());
+            Console.WriteLine(result.GetProperty("systemData").GetProperty("lastModifiedByType").ToString());
         }
 
         [Test]
@@ -179,19 +179,19 @@ namespace Azure.Analytics.Purview.Account.Samples
             });
             Response response = await client.CreateOrUpdateCollectionAsync(content);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.GetProperty("collectionProvisioningState").ToString());
-            Console.WriteLine(element.GetProperty("description").ToString());
-            Console.WriteLine(element.GetProperty("friendlyName").ToString());
-            Console.WriteLine(element.GetProperty("name").ToString());
-            Console.WriteLine(element.GetProperty("parentCollection").GetProperty("referenceName").ToString());
-            Console.WriteLine(element.GetProperty("parentCollection").GetProperty("type").ToString());
-            Console.WriteLine(element.GetProperty("systemData").GetProperty("createdAt").ToString());
-            Console.WriteLine(element.GetProperty("systemData").GetProperty("createdBy").ToString());
-            Console.WriteLine(element.GetProperty("systemData").GetProperty("createdByType").ToString());
-            Console.WriteLine(element.GetProperty("systemData").GetProperty("lastModifiedAt").ToString());
-            Console.WriteLine(element.GetProperty("systemData").GetProperty("lastModifiedBy").ToString());
-            Console.WriteLine(element.GetProperty("systemData").GetProperty("lastModifiedByType").ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("collectionProvisioningState").ToString());
+            Console.WriteLine(result.GetProperty("description").ToString());
+            Console.WriteLine(result.GetProperty("friendlyName").ToString());
+            Console.WriteLine(result.GetProperty("name").ToString());
+            Console.WriteLine(result.GetProperty("parentCollection").GetProperty("referenceName").ToString());
+            Console.WriteLine(result.GetProperty("parentCollection").GetProperty("type").ToString());
+            Console.WriteLine(result.GetProperty("systemData").GetProperty("createdAt").ToString());
+            Console.WriteLine(result.GetProperty("systemData").GetProperty("createdBy").ToString());
+            Console.WriteLine(result.GetProperty("systemData").GetProperty("createdByType").ToString());
+            Console.WriteLine(result.GetProperty("systemData").GetProperty("lastModifiedAt").ToString());
+            Console.WriteLine(result.GetProperty("systemData").GetProperty("lastModifiedBy").ToString());
+            Console.WriteLine(result.GetProperty("systemData").GetProperty("lastModifiedByType").ToString());
         }
 
         [Test]
@@ -256,8 +256,8 @@ namespace Azure.Analytics.Purview.Account.Samples
 
             Response response = client.GetCollectionPath(null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -270,8 +270,8 @@ namespace Azure.Analytics.Purview.Account.Samples
 
             Response response = await client.GetCollectionPathAsync(null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -284,9 +284,9 @@ namespace Azure.Analytics.Purview.Account.Samples
 
             Response response = client.GetCollectionPath(null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.GetProperty("parentFriendlyNameChain")[0].ToString());
-            Console.WriteLine(element.GetProperty("parentNameChain")[0].ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("parentFriendlyNameChain")[0].ToString());
+            Console.WriteLine(result.GetProperty("parentNameChain")[0].ToString());
         }
 
         [Test]
@@ -299,9 +299,9 @@ namespace Azure.Analytics.Purview.Account.Samples
 
             Response response = await client.GetCollectionPathAsync(null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.GetProperty("parentFriendlyNameChain")[0].ToString());
-            Console.WriteLine(element.GetProperty("parentNameChain")[0].ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("parentFriendlyNameChain")[0].ToString());
+            Console.WriteLine(result.GetProperty("parentNameChain")[0].ToString());
         }
 
         [Test]
@@ -314,8 +314,8 @@ namespace Azure.Analytics.Purview.Account.Samples
 
             foreach (BinaryData item in client.GetCollections(null, null))
             {
-                JsonElement element = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(element.ToString());
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result.ToString());
             }
         }
 
@@ -329,8 +329,8 @@ namespace Azure.Analytics.Purview.Account.Samples
 
             await foreach (BinaryData item in client.GetCollectionsAsync(null, null))
             {
-                JsonElement element = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(element.ToString());
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result.ToString());
             }
         }
 
@@ -344,19 +344,19 @@ namespace Azure.Analytics.Purview.Account.Samples
 
             foreach (BinaryData item in client.GetCollections("<skipToken>", null))
             {
-                JsonElement element = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(element.GetProperty("collectionProvisioningState").ToString());
-                Console.WriteLine(element.GetProperty("description").ToString());
-                Console.WriteLine(element.GetProperty("friendlyName").ToString());
-                Console.WriteLine(element.GetProperty("name").ToString());
-                Console.WriteLine(element.GetProperty("parentCollection").GetProperty("referenceName").ToString());
-                Console.WriteLine(element.GetProperty("parentCollection").GetProperty("type").ToString());
-                Console.WriteLine(element.GetProperty("systemData").GetProperty("createdAt").ToString());
-                Console.WriteLine(element.GetProperty("systemData").GetProperty("createdBy").ToString());
-                Console.WriteLine(element.GetProperty("systemData").GetProperty("createdByType").ToString());
-                Console.WriteLine(element.GetProperty("systemData").GetProperty("lastModifiedAt").ToString());
-                Console.WriteLine(element.GetProperty("systemData").GetProperty("lastModifiedBy").ToString());
-                Console.WriteLine(element.GetProperty("systemData").GetProperty("lastModifiedByType").ToString());
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result.GetProperty("collectionProvisioningState").ToString());
+                Console.WriteLine(result.GetProperty("description").ToString());
+                Console.WriteLine(result.GetProperty("friendlyName").ToString());
+                Console.WriteLine(result.GetProperty("name").ToString());
+                Console.WriteLine(result.GetProperty("parentCollection").GetProperty("referenceName").ToString());
+                Console.WriteLine(result.GetProperty("parentCollection").GetProperty("type").ToString());
+                Console.WriteLine(result.GetProperty("systemData").GetProperty("createdAt").ToString());
+                Console.WriteLine(result.GetProperty("systemData").GetProperty("createdBy").ToString());
+                Console.WriteLine(result.GetProperty("systemData").GetProperty("createdByType").ToString());
+                Console.WriteLine(result.GetProperty("systemData").GetProperty("lastModifiedAt").ToString());
+                Console.WriteLine(result.GetProperty("systemData").GetProperty("lastModifiedBy").ToString());
+                Console.WriteLine(result.GetProperty("systemData").GetProperty("lastModifiedByType").ToString());
             }
         }
 
@@ -370,19 +370,19 @@ namespace Azure.Analytics.Purview.Account.Samples
 
             await foreach (BinaryData item in client.GetCollectionsAsync("<skipToken>", null))
             {
-                JsonElement element = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(element.GetProperty("collectionProvisioningState").ToString());
-                Console.WriteLine(element.GetProperty("description").ToString());
-                Console.WriteLine(element.GetProperty("friendlyName").ToString());
-                Console.WriteLine(element.GetProperty("name").ToString());
-                Console.WriteLine(element.GetProperty("parentCollection").GetProperty("referenceName").ToString());
-                Console.WriteLine(element.GetProperty("parentCollection").GetProperty("type").ToString());
-                Console.WriteLine(element.GetProperty("systemData").GetProperty("createdAt").ToString());
-                Console.WriteLine(element.GetProperty("systemData").GetProperty("createdBy").ToString());
-                Console.WriteLine(element.GetProperty("systemData").GetProperty("createdByType").ToString());
-                Console.WriteLine(element.GetProperty("systemData").GetProperty("lastModifiedAt").ToString());
-                Console.WriteLine(element.GetProperty("systemData").GetProperty("lastModifiedBy").ToString());
-                Console.WriteLine(element.GetProperty("systemData").GetProperty("lastModifiedByType").ToString());
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result.GetProperty("collectionProvisioningState").ToString());
+                Console.WriteLine(result.GetProperty("description").ToString());
+                Console.WriteLine(result.GetProperty("friendlyName").ToString());
+                Console.WriteLine(result.GetProperty("name").ToString());
+                Console.WriteLine(result.GetProperty("parentCollection").GetProperty("referenceName").ToString());
+                Console.WriteLine(result.GetProperty("parentCollection").GetProperty("type").ToString());
+                Console.WriteLine(result.GetProperty("systemData").GetProperty("createdAt").ToString());
+                Console.WriteLine(result.GetProperty("systemData").GetProperty("createdBy").ToString());
+                Console.WriteLine(result.GetProperty("systemData").GetProperty("createdByType").ToString());
+                Console.WriteLine(result.GetProperty("systemData").GetProperty("lastModifiedAt").ToString());
+                Console.WriteLine(result.GetProperty("systemData").GetProperty("lastModifiedBy").ToString());
+                Console.WriteLine(result.GetProperty("systemData").GetProperty("lastModifiedByType").ToString());
             }
         }
 
@@ -396,8 +396,8 @@ namespace Azure.Analytics.Purview.Account.Samples
 
             foreach (BinaryData item in client.GetChildCollectionNames(null, null))
             {
-                JsonElement element = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(element.ToString());
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result.ToString());
             }
         }
 
@@ -411,8 +411,8 @@ namespace Azure.Analytics.Purview.Account.Samples
 
             await foreach (BinaryData item in client.GetChildCollectionNamesAsync(null, null))
             {
-                JsonElement element = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(element.ToString());
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result.ToString());
             }
         }
 
@@ -426,9 +426,9 @@ namespace Azure.Analytics.Purview.Account.Samples
 
             foreach (BinaryData item in client.GetChildCollectionNames("<skipToken>", null))
             {
-                JsonElement element = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(element.GetProperty("friendlyName").ToString());
-                Console.WriteLine(element.GetProperty("name").ToString());
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result.GetProperty("friendlyName").ToString());
+                Console.WriteLine(result.GetProperty("name").ToString());
             }
         }
 
@@ -442,9 +442,9 @@ namespace Azure.Analytics.Purview.Account.Samples
 
             await foreach (BinaryData item in client.GetChildCollectionNamesAsync("<skipToken>", null))
             {
-                JsonElement element = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(element.GetProperty("friendlyName").ToString());
-                Console.WriteLine(element.GetProperty("name").ToString());
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result.GetProperty("friendlyName").ToString());
+                Console.WriteLine(result.GetProperty("name").ToString());
             }
         }
     }

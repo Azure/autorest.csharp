@@ -10,8 +10,8 @@ ClientAndOperationGroupClient client = new ClientAndOperationGroupClient(endpoin
 
 Response response = await client.ZeroAsync(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call ZeroAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -20,8 +20,8 @@ ClientAndOperationGroupClient client = new ClientAndOperationGroupClient(endpoin
 
 Response response = await client.ZeroAsync(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
     <member name="Zero(RequestContext)">
@@ -33,8 +33,8 @@ ClientAndOperationGroupClient client = new ClientAndOperationGroupClient(endpoin
 
 Response response = client.Zero(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call Zero with all parameters and parse the result.
 <code><![CDATA[
@@ -43,8 +43,8 @@ ClientAndOperationGroupClient client = new ClientAndOperationGroupClient(endpoin
 
 Response response = client.Zero(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
     <member name="OneAsync(RequestContext)">
@@ -56,8 +56,8 @@ ClientAndOperationGroupClient client = new ClientAndOperationGroupClient(endpoin
 
 Response response = await client.OneAsync(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call OneAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -66,8 +66,8 @@ ClientAndOperationGroupClient client = new ClientAndOperationGroupClient(endpoin
 
 Response response = await client.OneAsync(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
     <member name="One(RequestContext)">
@@ -79,8 +79,8 @@ ClientAndOperationGroupClient client = new ClientAndOperationGroupClient(endpoin
 
 Response response = client.One(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call One with all parameters and parse the result.
 <code><![CDATA[
@@ -89,8 +89,8 @@ ClientAndOperationGroupClient client = new ClientAndOperationGroupClient(endpoin
 
 Response response = client.One(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
   </members>

@@ -118,5 +118,9 @@ namespace AutoRest.CSharp.Common.Input
             .InvokeStatic(
                 Configuration.ApiTypes.RequestContentCreateName,
                 BinaryDataExpression.FromObjectAsJson(freeFormObjectExpression).ToStream());
+
+        public override string EndPointSampleValue => "https://my-service.com";
+
+        public override string JsonElementVariableName => "element";
     }
 }

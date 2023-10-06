@@ -39,8 +39,8 @@ Bytes client = new ValueTypesClient().GetBytesClient(apiVersion: "1.0.0");
 
 Response response = await client.GetByteAsync(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("property").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("property").ToString());
 ]]></code>
 This sample shows how to call GetByteAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -48,8 +48,8 @@ Bytes client = new ValueTypesClient().GetBytesClient(apiVersion: "1.0.0");
 
 Response response = await client.GetByteAsync(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("property").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("property").ToString());
 ]]></code></example>
     </member>
     <member name="GetByte(RequestContext)">
@@ -60,8 +60,8 @@ Bytes client = new ValueTypesClient().GetBytesClient(apiVersion: "1.0.0");
 
 Response response = client.GetByte(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("property").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("property").ToString());
 ]]></code>
 This sample shows how to call GetByte with all parameters and parse the result.
 <code><![CDATA[
@@ -69,8 +69,8 @@ Bytes client = new ValueTypesClient().GetBytesClient(apiVersion: "1.0.0");
 
 Response response = client.GetByte(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("property").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("property").ToString());
 ]]></code></example>
     </member>
     <member name="PutAsync(BytesProperty,CancellationToken)">

@@ -26,8 +26,8 @@ namespace ParameterSequence_LowLevel.Samples
 
             Response response = client.GetItem("<itemName>", "<origin>", null, null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -39,8 +39,8 @@ namespace ParameterSequence_LowLevel.Samples
 
             Response response = await client.GetItemAsync("<itemName>", "<origin>", null, null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -52,8 +52,8 @@ namespace ParameterSequence_LowLevel.Samples
 
             Response response = client.GetItem("<itemName>", "<origin>", "<version>", null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -65,8 +65,8 @@ namespace ParameterSequence_LowLevel.Samples
 
             Response response = await client.GetItemAsync("<itemName>", "<origin>", "<version>", null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -78,8 +78,8 @@ namespace ParameterSequence_LowLevel.Samples
 
             Response response = client.SelectItem("<itemName>", "<origin>", null, null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -91,8 +91,8 @@ namespace ParameterSequence_LowLevel.Samples
 
             Response response = await client.SelectItemAsync("<itemName>", "<origin>", null, null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -104,8 +104,8 @@ namespace ParameterSequence_LowLevel.Samples
 
             Response response = client.SelectItem("<itemName>", "<origin>", "<version>", null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -117,8 +117,8 @@ namespace ParameterSequence_LowLevel.Samples
 
             Response response = await client.SelectItemAsync("<itemName>", "<origin>", "<version>", null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
     }
 }

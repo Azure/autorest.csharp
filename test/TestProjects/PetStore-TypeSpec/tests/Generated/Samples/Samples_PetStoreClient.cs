@@ -76,9 +76,9 @@ namespace PetStore.Samples
 
             Response response = client.Read(1234, null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.GetProperty("name").ToString());
-            Console.WriteLine(element.GetProperty("age").ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("name").ToString());
+            Console.WriteLine(result.GetProperty("age").ToString());
         }
 
         [Test]
@@ -90,9 +90,9 @@ namespace PetStore.Samples
 
             Response response = await client.ReadAsync(1234, null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.GetProperty("name").ToString());
-            Console.WriteLine(element.GetProperty("age").ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("name").ToString());
+            Console.WriteLine(result.GetProperty("age").ToString());
         }
 
         [Test]
@@ -124,10 +124,10 @@ namespace PetStore.Samples
 
             Response response = client.Read(1234, null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.GetProperty("name").ToString());
-            Console.WriteLine(element.GetProperty("tag").ToString());
-            Console.WriteLine(element.GetProperty("age").ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("name").ToString());
+            Console.WriteLine(result.GetProperty("tag").ToString());
+            Console.WriteLine(result.GetProperty("age").ToString());
         }
 
         [Test]
@@ -139,10 +139,10 @@ namespace PetStore.Samples
 
             Response response = await client.ReadAsync(1234, null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.GetProperty("name").ToString());
-            Console.WriteLine(element.GetProperty("tag").ToString());
-            Console.WriteLine(element.GetProperty("age").ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("name").ToString());
+            Console.WriteLine(result.GetProperty("tag").ToString());
+            Console.WriteLine(result.GetProperty("age").ToString());
         }
 
         [Test]
@@ -179,9 +179,9 @@ namespace PetStore.Samples
             });
             Response response = client.Create(content);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.GetProperty("name").ToString());
-            Console.WriteLine(element.GetProperty("age").ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("name").ToString());
+            Console.WriteLine(result.GetProperty("age").ToString());
         }
 
         [Test]
@@ -198,9 +198,9 @@ namespace PetStore.Samples
             });
             Response response = await client.CreateAsync(content);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.GetProperty("name").ToString());
-            Console.WriteLine(element.GetProperty("age").ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("name").ToString());
+            Console.WriteLine(result.GetProperty("age").ToString());
         }
 
         [Test]
@@ -240,10 +240,10 @@ namespace PetStore.Samples
             });
             Response response = client.Create(content);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.GetProperty("name").ToString());
-            Console.WriteLine(element.GetProperty("tag").ToString());
-            Console.WriteLine(element.GetProperty("age").ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("name").ToString());
+            Console.WriteLine(result.GetProperty("tag").ToString());
+            Console.WriteLine(result.GetProperty("age").ToString());
         }
 
         [Test]
@@ -261,10 +261,10 @@ namespace PetStore.Samples
             });
             Response response = await client.CreateAsync(content);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.GetProperty("name").ToString());
-            Console.WriteLine(element.GetProperty("tag").ToString());
-            Console.WriteLine(element.GetProperty("age").ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("name").ToString());
+            Console.WriteLine(result.GetProperty("tag").ToString());
+            Console.WriteLine(result.GetProperty("age").ToString());
         }
 
         [Test]
@@ -304,9 +304,9 @@ namespace PetStore.Samples
 
             Response response = client.GetPetByKind("dog");
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.GetProperty("name").ToString());
-            Console.WriteLine(element.GetProperty("age").ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("name").ToString());
+            Console.WriteLine(result.GetProperty("age").ToString());
         }
 
         [Test]
@@ -318,9 +318,9 @@ namespace PetStore.Samples
 
             Response response = await client.GetPetByKindAsync("dog");
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.GetProperty("name").ToString());
-            Console.WriteLine(element.GetProperty("age").ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("name").ToString());
+            Console.WriteLine(result.GetProperty("age").ToString());
         }
 
         [Test]
@@ -352,10 +352,10 @@ namespace PetStore.Samples
 
             Response response = client.GetPetByKind("dog");
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.GetProperty("name").ToString());
-            Console.WriteLine(element.GetProperty("tag").ToString());
-            Console.WriteLine(element.GetProperty("age").ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("name").ToString());
+            Console.WriteLine(result.GetProperty("tag").ToString());
+            Console.WriteLine(result.GetProperty("age").ToString());
         }
 
         [Test]
@@ -367,10 +367,10 @@ namespace PetStore.Samples
 
             Response response = await client.GetPetByKindAsync("dog");
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.GetProperty("name").ToString());
-            Console.WriteLine(element.GetProperty("tag").ToString());
-            Console.WriteLine(element.GetProperty("age").ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("name").ToString());
+            Console.WriteLine(result.GetProperty("tag").ToString());
+            Console.WriteLine(result.GetProperty("age").ToString());
         }
 
         [Test]
@@ -402,9 +402,9 @@ namespace PetStore.Samples
 
             Response response = client.GetFirstPet(null, null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.GetProperty("name").ToString());
-            Console.WriteLine(element.GetProperty("age").ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("name").ToString());
+            Console.WriteLine(result.GetProperty("age").ToString());
         }
 
         [Test]
@@ -416,9 +416,9 @@ namespace PetStore.Samples
 
             Response response = await client.GetFirstPetAsync(null, null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.GetProperty("name").ToString());
-            Console.WriteLine(element.GetProperty("age").ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("name").ToString());
+            Console.WriteLine(result.GetProperty("age").ToString());
         }
 
         [Test]
@@ -450,10 +450,10 @@ namespace PetStore.Samples
 
             Response response = client.GetFirstPet(1234, null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.GetProperty("name").ToString());
-            Console.WriteLine(element.GetProperty("tag").ToString());
-            Console.WriteLine(element.GetProperty("age").ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("name").ToString());
+            Console.WriteLine(result.GetProperty("tag").ToString());
+            Console.WriteLine(result.GetProperty("age").ToString());
         }
 
         [Test]
@@ -465,10 +465,10 @@ namespace PetStore.Samples
 
             Response response = await client.GetFirstPetAsync(1234, null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.GetProperty("name").ToString());
-            Console.WriteLine(element.GetProperty("tag").ToString());
-            Console.WriteLine(element.GetProperty("age").ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("name").ToString());
+            Console.WriteLine(result.GetProperty("tag").ToString());
+            Console.WriteLine(result.GetProperty("age").ToString());
         }
 
         [Test]
@@ -500,9 +500,9 @@ namespace PetStore.Samples
 
             Response response = client.GetFish(null, null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.GetProperty("kind").ToString());
-            Console.WriteLine(element.GetProperty("size").ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("kind").ToString());
+            Console.WriteLine(result.GetProperty("size").ToString());
         }
 
         [Test]
@@ -514,9 +514,9 @@ namespace PetStore.Samples
 
             Response response = await client.GetFishAsync(null, null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.GetProperty("kind").ToString());
-            Console.WriteLine(element.GetProperty("size").ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("kind").ToString());
+            Console.WriteLine(result.GetProperty("size").ToString());
         }
 
         [Test]
@@ -548,9 +548,9 @@ namespace PetStore.Samples
 
             Response response = client.GetFish("<kind>", null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.GetProperty("kind").ToString());
-            Console.WriteLine(element.GetProperty("size").ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("kind").ToString());
+            Console.WriteLine(result.GetProperty("size").ToString());
         }
 
         [Test]
@@ -562,9 +562,9 @@ namespace PetStore.Samples
 
             Response response = await client.GetFishAsync("<kind>", null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.GetProperty("kind").ToString());
-            Console.WriteLine(element.GetProperty("size").ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("kind").ToString());
+            Console.WriteLine(result.GetProperty("size").ToString());
         }
 
         [Test]

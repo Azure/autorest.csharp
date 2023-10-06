@@ -39,9 +39,9 @@ Datetime client = new NullableClient().GetDatetimeClient(apiVersion: "1.0.0");
 
 Response response = await client.GetNonNullAsync(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("requiredProperty").ToString());
-Console.WriteLine(element.GetProperty("nullableProperty").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("requiredProperty").ToString());
+Console.WriteLine(result.GetProperty("nullableProperty").ToString());
 ]]></code>
 This sample shows how to call GetNonNullAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -49,9 +49,9 @@ Datetime client = new NullableClient().GetDatetimeClient(apiVersion: "1.0.0");
 
 Response response = await client.GetNonNullAsync(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("requiredProperty").ToString());
-Console.WriteLine(element.GetProperty("nullableProperty").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("requiredProperty").ToString());
+Console.WriteLine(result.GetProperty("nullableProperty").ToString());
 ]]></code></example>
     </member>
     <member name="GetNonNull(RequestContext)">
@@ -62,9 +62,9 @@ Datetime client = new NullableClient().GetDatetimeClient(apiVersion: "1.0.0");
 
 Response response = client.GetNonNull(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("requiredProperty").ToString());
-Console.WriteLine(element.GetProperty("nullableProperty").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("requiredProperty").ToString());
+Console.WriteLine(result.GetProperty("nullableProperty").ToString());
 ]]></code>
 This sample shows how to call GetNonNull with all parameters and parse the result.
 <code><![CDATA[
@@ -72,9 +72,9 @@ Datetime client = new NullableClient().GetDatetimeClient(apiVersion: "1.0.0");
 
 Response response = client.GetNonNull(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("requiredProperty").ToString());
-Console.WriteLine(element.GetProperty("nullableProperty").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("requiredProperty").ToString());
+Console.WriteLine(result.GetProperty("nullableProperty").ToString());
 ]]></code></example>
     </member>
     <member name="GetNullAsync(CancellationToken)">
@@ -115,9 +115,9 @@ Datetime client = new NullableClient().GetDatetimeClient(apiVersion: "1.0.0");
 
 Response response = await client.GetNullAsync(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("requiredProperty").ToString());
-Console.WriteLine(element.GetProperty("nullableProperty").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("requiredProperty").ToString());
+Console.WriteLine(result.GetProperty("nullableProperty").ToString());
 ]]></code>
 This sample shows how to call GetNullAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -125,9 +125,9 @@ Datetime client = new NullableClient().GetDatetimeClient(apiVersion: "1.0.0");
 
 Response response = await client.GetNullAsync(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("requiredProperty").ToString());
-Console.WriteLine(element.GetProperty("nullableProperty").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("requiredProperty").ToString());
+Console.WriteLine(result.GetProperty("nullableProperty").ToString());
 ]]></code></example>
     </member>
     <member name="GetNull(RequestContext)">
@@ -138,9 +138,9 @@ Datetime client = new NullableClient().GetDatetimeClient(apiVersion: "1.0.0");
 
 Response response = client.GetNull(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("requiredProperty").ToString());
-Console.WriteLine(element.GetProperty("nullableProperty").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("requiredProperty").ToString());
+Console.WriteLine(result.GetProperty("nullableProperty").ToString());
 ]]></code>
 This sample shows how to call GetNull with all parameters and parse the result.
 <code><![CDATA[
@@ -148,9 +148,9 @@ Datetime client = new NullableClient().GetDatetimeClient(apiVersion: "1.0.0");
 
 Response response = client.GetNull(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("requiredProperty").ToString());
-Console.WriteLine(element.GetProperty("nullableProperty").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("requiredProperty").ToString());
+Console.WriteLine(result.GetProperty("nullableProperty").ToString());
 ]]></code></example>
     </member>
     <member name="PatchNonNullAsync(RequestContent,RequestContext)">

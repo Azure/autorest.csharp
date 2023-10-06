@@ -10,8 +10,8 @@ DictionaryClient client = new DictionaryClient(credential);
 
 Response response = await client.GetValidAsync(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetValidAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -20,8 +20,8 @@ DictionaryClient client = new DictionaryClient(credential);
 
 Response response = await client.GetValidAsync(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("defaultProgram").GetProperty("<key>").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("defaultProgram").GetProperty("<key>").ToString());
 ]]></code></example>
     </member>
     <member name="GetValid(RequestContext)">
@@ -33,8 +33,8 @@ DictionaryClient client = new DictionaryClient(credential);
 
 Response response = client.GetValid(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetValid with all parameters and parse the result.
 <code><![CDATA[
@@ -43,8 +43,8 @@ DictionaryClient client = new DictionaryClient(credential);
 
 Response response = client.GetValid(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("defaultProgram").GetProperty("<key>").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("defaultProgram").GetProperty("<key>").ToString());
 ]]></code></example>
     </member>
     <member name="PutValidAsync(RequestContent,RequestContext)">
@@ -114,8 +114,8 @@ DictionaryClient client = new DictionaryClient(credential);
 
 Response response = await client.GetEmptyAsync(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetEmptyAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -124,8 +124,8 @@ DictionaryClient client = new DictionaryClient(credential);
 
 Response response = await client.GetEmptyAsync(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("defaultProgram").GetProperty("<key>").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("defaultProgram").GetProperty("<key>").ToString());
 ]]></code></example>
     </member>
     <member name="GetEmpty(RequestContext)">
@@ -137,8 +137,8 @@ DictionaryClient client = new DictionaryClient(credential);
 
 Response response = client.GetEmpty(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetEmpty with all parameters and parse the result.
 <code><![CDATA[
@@ -147,8 +147,8 @@ DictionaryClient client = new DictionaryClient(credential);
 
 Response response = client.GetEmpty(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("defaultProgram").GetProperty("<key>").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("defaultProgram").GetProperty("<key>").ToString());
 ]]></code></example>
     </member>
     <member name="PutEmptyAsync(RequestContent,RequestContext)">
@@ -218,8 +218,8 @@ DictionaryClient client = new DictionaryClient(credential);
 
 Response response = await client.GetNullAsync(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetNullAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -228,8 +228,8 @@ DictionaryClient client = new DictionaryClient(credential);
 
 Response response = await client.GetNullAsync(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("defaultProgram").GetProperty("<key>").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("defaultProgram").GetProperty("<key>").ToString());
 ]]></code></example>
     </member>
     <member name="GetNull(RequestContext)">
@@ -241,8 +241,8 @@ DictionaryClient client = new DictionaryClient(credential);
 
 Response response = client.GetNull(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetNull with all parameters and parse the result.
 <code><![CDATA[
@@ -251,8 +251,8 @@ DictionaryClient client = new DictionaryClient(credential);
 
 Response response = client.GetNull(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("defaultProgram").GetProperty("<key>").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("defaultProgram").GetProperty("<key>").ToString());
 ]]></code></example>
     </member>
     <member name="GetNotProvidedAsync(RequestContext)">
@@ -264,8 +264,8 @@ DictionaryClient client = new DictionaryClient(credential);
 
 Response response = await client.GetNotProvidedAsync(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetNotProvidedAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -274,8 +274,8 @@ DictionaryClient client = new DictionaryClient(credential);
 
 Response response = await client.GetNotProvidedAsync(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("defaultProgram").GetProperty("<key>").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("defaultProgram").GetProperty("<key>").ToString());
 ]]></code></example>
     </member>
     <member name="GetNotProvided(RequestContext)">
@@ -287,8 +287,8 @@ DictionaryClient client = new DictionaryClient(credential);
 
 Response response = client.GetNotProvided(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetNotProvided with all parameters and parse the result.
 <code><![CDATA[
@@ -297,8 +297,8 @@ DictionaryClient client = new DictionaryClient(credential);
 
 Response response = client.GetNotProvided(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("defaultProgram").GetProperty("<key>").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("defaultProgram").GetProperty("<key>").ToString());
 ]]></code></example>
     </member>
   </members>

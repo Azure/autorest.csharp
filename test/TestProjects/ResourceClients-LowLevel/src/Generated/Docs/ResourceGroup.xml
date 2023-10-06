@@ -10,8 +10,8 @@ ResourceGroup client = new ResourceServiceClient(credential).GetResourceGroup("<
 
 Response response = await client.GetGroupAsync(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetGroupAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -20,8 +20,8 @@ ResourceGroup client = new ResourceServiceClient(credential).GetResourceGroup("<
 
 Response response = await client.GetGroupAsync(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
     <member name="GetGroup(RequestContext)">
@@ -33,8 +33,8 @@ ResourceGroup client = new ResourceServiceClient(credential).GetResourceGroup("<
 
 Response response = client.GetGroup(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetGroup with all parameters and parse the result.
 <code><![CDATA[
@@ -43,8 +43,8 @@ ResourceGroup client = new ResourceServiceClient(credential).GetResourceGroup("<
 
 Response response = client.GetGroup(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
     <member name="GetItemsAsync(RequestContext)">
@@ -56,8 +56,8 @@ ResourceGroup client = new ResourceServiceClient(credential).GetResourceGroup("<
 
 await foreach (BinaryData item in client.GetItemsAsync(null))
 {
-    JsonElement element = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(element.ToString());
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result.ToString());
 }
 ]]></code>
 This sample shows how to call GetItemsAsync with all parameters and parse the result.
@@ -67,8 +67,8 @@ ResourceGroup client = new ResourceServiceClient(credential).GetResourceGroup("<
 
 await foreach (BinaryData item in client.GetItemsAsync(null))
 {
-    JsonElement element = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(element.ToString());
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result.ToString());
 }
 ]]></code></example>
     </member>
@@ -81,8 +81,8 @@ ResourceGroup client = new ResourceServiceClient(credential).GetResourceGroup("<
 
 foreach (BinaryData item in client.GetItems(null))
 {
-    JsonElement element = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(element.ToString());
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result.ToString());
 }
 ]]></code>
 This sample shows how to call GetItems with all parameters and parse the result.
@@ -92,8 +92,8 @@ ResourceGroup client = new ResourceServiceClient(credential).GetResourceGroup("<
 
 foreach (BinaryData item in client.GetItems(null))
 {
-    JsonElement element = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(element.ToString());
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result.ToString());
 }
 ]]></code></example>
     </member>

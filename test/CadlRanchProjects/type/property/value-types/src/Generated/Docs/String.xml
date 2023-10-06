@@ -39,8 +39,8 @@ String client = new ValueTypesClient().GetStringClient(apiVersion: "1.0.0");
 
 Response response = await client.GetStringAsync(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("property").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("property").ToString());
 ]]></code>
 This sample shows how to call GetStringAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -48,8 +48,8 @@ String client = new ValueTypesClient().GetStringClient(apiVersion: "1.0.0");
 
 Response response = await client.GetStringAsync(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("property").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("property").ToString());
 ]]></code></example>
     </member>
     <member name="GetString(RequestContext)">
@@ -60,8 +60,8 @@ String client = new ValueTypesClient().GetStringClient(apiVersion: "1.0.0");
 
 Response response = client.GetString(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("property").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("property").ToString());
 ]]></code>
 This sample shows how to call GetString with all parameters and parse the result.
 <code><![CDATA[
@@ -69,8 +69,8 @@ String client = new ValueTypesClient().GetStringClient(apiVersion: "1.0.0");
 
 Response response = client.GetString(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("property").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("property").ToString());
 ]]></code></example>
     </member>
     <member name="PutAsync(StringProperty,CancellationToken)">

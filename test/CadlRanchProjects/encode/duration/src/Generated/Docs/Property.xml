@@ -47,8 +47,8 @@ RequestContent content = RequestContent.Create(new
 });
 Response response = await client.DefaultAsync(content);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("value").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code>
 This sample shows how to call DefaultAsync with all request content and parse the result.
 <code><![CDATA[
@@ -60,8 +60,8 @@ RequestContent content = RequestContent.Create(new
 });
 Response response = await client.DefaultAsync(content);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("value").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code></example>
     </member>
     <member name="Default(RequestContent,RequestContext)">
@@ -76,8 +76,8 @@ RequestContent content = RequestContent.Create(new
 });
 Response response = client.Default(content);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("value").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code>
 This sample shows how to call Default with all request content and parse the result.
 <code><![CDATA[
@@ -89,8 +89,8 @@ RequestContent content = RequestContent.Create(new
 });
 Response response = client.Default(content);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("value").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code></example>
     </member>
     <member name="Iso8601Async(ISO8601DurationProperty,CancellationToken)">
@@ -139,8 +139,8 @@ RequestContent content = RequestContent.Create(new
 });
 Response response = await client.Iso8601Async(content);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("value").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code>
 This sample shows how to call Iso8601Async with all request content and parse the result.
 <code><![CDATA[
@@ -152,8 +152,8 @@ RequestContent content = RequestContent.Create(new
 });
 Response response = await client.Iso8601Async(content);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("value").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code></example>
     </member>
     <member name="Iso8601(RequestContent,RequestContext)">
@@ -168,8 +168,8 @@ RequestContent content = RequestContent.Create(new
 });
 Response response = client.Iso8601(content);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("value").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code>
 This sample shows how to call Iso8601 with all request content and parse the result.
 <code><![CDATA[
@@ -181,8 +181,8 @@ RequestContent content = RequestContent.Create(new
 });
 Response response = client.Iso8601(content);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("value").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code></example>
     </member>
     <member name="Int32SecondsAsync(Int32SecondsDurationProperty,CancellationToken)">
@@ -231,8 +231,8 @@ RequestContent content = RequestContent.Create(new
 });
 Response response = await client.Int32SecondsAsync(content);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("value").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code>
 This sample shows how to call Int32SecondsAsync with all request content and parse the result.
 <code><![CDATA[
@@ -244,8 +244,8 @@ RequestContent content = RequestContent.Create(new
 });
 Response response = await client.Int32SecondsAsync(content);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("value").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code></example>
     </member>
     <member name="Int32Seconds(RequestContent,RequestContext)">
@@ -260,8 +260,8 @@ RequestContent content = RequestContent.Create(new
 });
 Response response = client.Int32Seconds(content);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("value").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code>
 This sample shows how to call Int32Seconds with all request content and parse the result.
 <code><![CDATA[
@@ -273,8 +273,8 @@ RequestContent content = RequestContent.Create(new
 });
 Response response = client.Int32Seconds(content);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("value").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code></example>
     </member>
     <member name="FloatSecondsAsync(FloatSecondsDurationProperty,CancellationToken)">
@@ -323,8 +323,8 @@ RequestContent content = RequestContent.Create(new
 });
 Response response = await client.FloatSecondsAsync(content);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("value").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code>
 This sample shows how to call FloatSecondsAsync with all request content and parse the result.
 <code><![CDATA[
@@ -336,8 +336,8 @@ RequestContent content = RequestContent.Create(new
 });
 Response response = await client.FloatSecondsAsync(content);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("value").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code></example>
     </member>
     <member name="FloatSeconds(RequestContent,RequestContext)">
@@ -352,8 +352,8 @@ RequestContent content = RequestContent.Create(new
 });
 Response response = client.FloatSeconds(content);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("value").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code>
 This sample shows how to call FloatSeconds with all request content and parse the result.
 <code><![CDATA[
@@ -365,8 +365,8 @@ RequestContent content = RequestContent.Create(new
 });
 Response response = client.FloatSeconds(content);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("value").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code></example>
     </member>
     <member name="FloatSecondsArrayAsync(FloatSecondsDurationArrayProperty,CancellationToken)">
@@ -418,8 +418,8 @@ RequestContent content = RequestContent.Create(new
 });
 Response response = await client.FloatSecondsArrayAsync(content);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("value")[0].ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value")[0].ToString());
 ]]></code>
 This sample shows how to call FloatSecondsArrayAsync with all request content and parse the result.
 <code><![CDATA[
@@ -434,8 +434,8 @@ RequestContent content = RequestContent.Create(new
 });
 Response response = await client.FloatSecondsArrayAsync(content);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("value")[0].ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value")[0].ToString());
 ]]></code></example>
     </member>
     <member name="FloatSecondsArray(RequestContent,RequestContext)">
@@ -453,8 +453,8 @@ RequestContent content = RequestContent.Create(new
 });
 Response response = client.FloatSecondsArray(content);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("value")[0].ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value")[0].ToString());
 ]]></code>
 This sample shows how to call FloatSecondsArray with all request content and parse the result.
 <code><![CDATA[
@@ -469,8 +469,8 @@ RequestContent content = RequestContent.Create(new
 });
 Response response = client.FloatSecondsArray(content);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("value")[0].ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value")[0].ToString());
 ]]></code></example>
     </member>
   </members>

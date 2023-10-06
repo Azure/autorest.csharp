@@ -39,8 +39,8 @@ ExtensibleEnum client = new ValueTypesClient().GetExtensibleEnumClient(apiVersio
 
 Response response = await client.GetExtensibleEnumAsync(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("property").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("property").ToString());
 ]]></code>
 This sample shows how to call GetExtensibleEnumAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -48,8 +48,8 @@ ExtensibleEnum client = new ValueTypesClient().GetExtensibleEnumClient(apiVersio
 
 Response response = await client.GetExtensibleEnumAsync(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("property").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("property").ToString());
 ]]></code></example>
     </member>
     <member name="GetExtensibleEnum(RequestContext)">
@@ -60,8 +60,8 @@ ExtensibleEnum client = new ValueTypesClient().GetExtensibleEnumClient(apiVersio
 
 Response response = client.GetExtensibleEnum(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("property").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("property").ToString());
 ]]></code>
 This sample shows how to call GetExtensibleEnum with all parameters and parse the result.
 <code><![CDATA[
@@ -69,8 +69,8 @@ ExtensibleEnum client = new ValueTypesClient().GetExtensibleEnumClient(apiVersio
 
 Response response = client.GetExtensibleEnum(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("property").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("property").ToString());
 ]]></code></example>
     </member>
     <member name="PutAsync(ExtensibleEnumProperty,CancellationToken)">

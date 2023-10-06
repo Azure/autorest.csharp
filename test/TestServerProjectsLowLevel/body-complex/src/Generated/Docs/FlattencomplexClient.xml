@@ -10,8 +10,8 @@ FlattencomplexClient client = new FlattencomplexClient(credential);
 
 Response response = await client.GetValidAsync(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("kind").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("kind").ToString());
 ]]></code>
 This sample shows how to call GetValidAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -20,10 +20,10 @@ FlattencomplexClient client = new FlattencomplexClient(credential);
 
 Response response = await client.GetValidAsync(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("kind").ToString());
-Console.WriteLine(element.GetProperty("propB1").ToString());
-Console.WriteLine(element.GetProperty("helper").GetProperty("propBH1").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("kind").ToString());
+Console.WriteLine(result.GetProperty("propB1").ToString());
+Console.WriteLine(result.GetProperty("helper").GetProperty("propBH1").ToString());
 ]]></code></example>
     </member>
     <member name="GetValid(RequestContext)">
@@ -35,8 +35,8 @@ FlattencomplexClient client = new FlattencomplexClient(credential);
 
 Response response = client.GetValid(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("kind").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("kind").ToString());
 ]]></code>
 This sample shows how to call GetValid with all parameters and parse the result.
 <code><![CDATA[
@@ -45,10 +45,10 @@ FlattencomplexClient client = new FlattencomplexClient(credential);
 
 Response response = client.GetValid(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("kind").ToString());
-Console.WriteLine(element.GetProperty("propB1").ToString());
-Console.WriteLine(element.GetProperty("helper").GetProperty("propBH1").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("kind").ToString());
+Console.WriteLine(result.GetProperty("propB1").ToString());
+Console.WriteLine(result.GetProperty("helper").GetProperty("propBH1").ToString());
 ]]></code></example>
     </member>
   </members>

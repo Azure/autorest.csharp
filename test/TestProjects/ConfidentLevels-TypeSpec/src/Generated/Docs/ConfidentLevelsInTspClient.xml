@@ -155,8 +155,8 @@ RequestContent content = RequestContent.Create(new
 });
 Response response = await client.UnionInResponsePropertyAsync(content);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("unionProperty").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("unionProperty").ToString());
 ]]></code>
 This sample shows how to call UnionInResponsePropertyAsync with all request content and parse the result.
 <code><![CDATA[
@@ -171,8 +171,8 @@ RequestContent content = RequestContent.Create(new
 });
 Response response = await client.UnionInResponsePropertyAsync(content);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("unionProperty").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("unionProperty").ToString());
 ]]></code></example>
     </member>
     <member name="UnionInResponseProperty(RequestContent,RequestContext)">
@@ -189,8 +189,8 @@ RequestContent content = RequestContent.Create(new
 });
 Response response = client.UnionInResponseProperty(content);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("unionProperty").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("unionProperty").ToString());
 ]]></code>
 This sample shows how to call UnionInResponseProperty with all request content and parse the result.
 <code><![CDATA[
@@ -205,8 +205,8 @@ RequestContent content = RequestContent.Create(new
 });
 Response response = client.UnionInResponseProperty(content);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("unionProperty").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("unionProperty").ToString());
 ]]></code></example>
     </member>
     <member name="UnionWithSelfReferenceAsync(NonConfidentModelWithSelfReference,CancellationToken)">
@@ -738,9 +738,9 @@ RequestContent content = RequestContent.Create(new
 });
 Response response = await client.ConfidentOperationWithDiscriminatorAsync(content);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("kind").ToString());
-Console.WriteLine(element.GetProperty("name").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("kind").ToString());
+Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code>
 This sample shows how to call ConfidentOperationWithDiscriminatorAsync with all request content and parse the result.
 <code><![CDATA[
@@ -755,9 +755,9 @@ RequestContent content = RequestContent.Create(new
 });
 Response response = await client.ConfidentOperationWithDiscriminatorAsync(content);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("kind").ToString());
-Console.WriteLine(element.GetProperty("name").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("kind").ToString());
+Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code></example>
     </member>
     <member name="ConfidentOperationWithDiscriminator(RequestContent,RequestContext)">
@@ -775,9 +775,9 @@ RequestContent content = RequestContent.Create(new
 });
 Response response = client.ConfidentOperationWithDiscriminator(content);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("kind").ToString());
-Console.WriteLine(element.GetProperty("name").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("kind").ToString());
+Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code>
 This sample shows how to call ConfidentOperationWithDiscriminator with all request content and parse the result.
 <code><![CDATA[
@@ -792,9 +792,9 @@ RequestContent content = RequestContent.Create(new
 });
 Response response = client.ConfidentOperationWithDiscriminator(content);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("kind").ToString());
-Console.WriteLine(element.GetProperty("name").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("kind").ToString());
+Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code></example>
     </member>
     <member name="PollutedBaseMethodAsync(PollutedPet,CancellationToken)">
@@ -851,9 +851,9 @@ RequestContent content = RequestContent.Create(new
 });
 Response response = await client.PollutedBaseMethodAsync(content);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("kind").ToString());
-Console.WriteLine(element.GetProperty("name").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("kind").ToString());
+Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code>
 This sample shows how to call PollutedBaseMethodAsync with all request content and parse the result.
 <code><![CDATA[
@@ -869,9 +869,9 @@ RequestContent content = RequestContent.Create(new
 });
 Response response = await client.PollutedBaseMethodAsync(content);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("kind").ToString());
-Console.WriteLine(element.GetProperty("name").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("kind").ToString());
+Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code></example>
     </member>
     <member name="PollutedBaseMethod(RequestContent,RequestContext)">
@@ -890,9 +890,9 @@ RequestContent content = RequestContent.Create(new
 });
 Response response = client.PollutedBaseMethod(content);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("kind").ToString());
-Console.WriteLine(element.GetProperty("name").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("kind").ToString());
+Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code>
 This sample shows how to call PollutedBaseMethod with all request content and parse the result.
 <code><![CDATA[
@@ -908,9 +908,9 @@ RequestContent content = RequestContent.Create(new
 });
 Response response = client.PollutedBaseMethod(content);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("kind").ToString());
-Console.WriteLine(element.GetProperty("name").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("kind").ToString());
+Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code></example>
     </member>
     <member name="PollutedDerivedMethodAsync(PollutedDog,CancellationToken)">
@@ -967,11 +967,11 @@ RequestContent content = RequestContent.Create(new
 });
 Response response = await client.PollutedDerivedMethodAsync(content);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("woof").ToString());
-Console.WriteLine(element.GetProperty("color").ToString());
-Console.WriteLine(element.GetProperty("kind").ToString());
-Console.WriteLine(element.GetProperty("name").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("woof").ToString());
+Console.WriteLine(result.GetProperty("color").ToString());
+Console.WriteLine(result.GetProperty("kind").ToString());
+Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code>
 This sample shows how to call PollutedDerivedMethodAsync with all request content and parse the result.
 <code><![CDATA[
@@ -987,11 +987,11 @@ RequestContent content = RequestContent.Create(new
 });
 Response response = await client.PollutedDerivedMethodAsync(content);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("woof").ToString());
-Console.WriteLine(element.GetProperty("color").ToString());
-Console.WriteLine(element.GetProperty("kind").ToString());
-Console.WriteLine(element.GetProperty("name").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("woof").ToString());
+Console.WriteLine(result.GetProperty("color").ToString());
+Console.WriteLine(result.GetProperty("kind").ToString());
+Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code></example>
     </member>
     <member name="PollutedDerivedMethod(RequestContent,RequestContext)">
@@ -1010,11 +1010,11 @@ RequestContent content = RequestContent.Create(new
 });
 Response response = client.PollutedDerivedMethod(content);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("woof").ToString());
-Console.WriteLine(element.GetProperty("color").ToString());
-Console.WriteLine(element.GetProperty("kind").ToString());
-Console.WriteLine(element.GetProperty("name").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("woof").ToString());
+Console.WriteLine(result.GetProperty("color").ToString());
+Console.WriteLine(result.GetProperty("kind").ToString());
+Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code>
 This sample shows how to call PollutedDerivedMethod with all request content and parse the result.
 <code><![CDATA[
@@ -1030,11 +1030,11 @@ RequestContent content = RequestContent.Create(new
 });
 Response response = client.PollutedDerivedMethod(content);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("woof").ToString());
-Console.WriteLine(element.GetProperty("color").ToString());
-Console.WriteLine(element.GetProperty("kind").ToString());
-Console.WriteLine(element.GetProperty("name").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("woof").ToString());
+Console.WriteLine(result.GetProperty("color").ToString());
+Console.WriteLine(result.GetProperty("kind").ToString());
+Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code></example>
     </member>
     <member name="UnpollutedDerivedMethodAsync(UnpollutedCat,CancellationToken)">
@@ -1090,10 +1090,10 @@ RequestContent content = RequestContent.Create(new
 });
 Response response = await client.UnpollutedDerivedMethodAsync(content);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("meow").ToString());
-Console.WriteLine(element.GetProperty("kind").ToString());
-Console.WriteLine(element.GetProperty("name").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("meow").ToString());
+Console.WriteLine(result.GetProperty("kind").ToString());
+Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code>
 This sample shows how to call UnpollutedDerivedMethodAsync with all request content and parse the result.
 <code><![CDATA[
@@ -1108,10 +1108,10 @@ RequestContent content = RequestContent.Create(new
 });
 Response response = await client.UnpollutedDerivedMethodAsync(content);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("meow").ToString());
-Console.WriteLine(element.GetProperty("kind").ToString());
-Console.WriteLine(element.GetProperty("name").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("meow").ToString());
+Console.WriteLine(result.GetProperty("kind").ToString());
+Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code></example>
     </member>
     <member name="UnpollutedDerivedMethod(RequestContent,RequestContext)">
@@ -1129,10 +1129,10 @@ RequestContent content = RequestContent.Create(new
 });
 Response response = client.UnpollutedDerivedMethod(content);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("meow").ToString());
-Console.WriteLine(element.GetProperty("kind").ToString());
-Console.WriteLine(element.GetProperty("name").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("meow").ToString());
+Console.WriteLine(result.GetProperty("kind").ToString());
+Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code>
 This sample shows how to call UnpollutedDerivedMethod with all request content and parse the result.
 <code><![CDATA[
@@ -1147,10 +1147,10 @@ RequestContent content = RequestContent.Create(new
 });
 Response response = client.UnpollutedDerivedMethod(content);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("meow").ToString());
-Console.WriteLine(element.GetProperty("kind").ToString());
-Console.WriteLine(element.GetProperty("name").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("meow").ToString());
+Console.WriteLine(result.GetProperty("kind").ToString());
+Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code></example>
     </member>
     <member name="UseDerivedModelAsync(DerivedModel,CancellationToken)">

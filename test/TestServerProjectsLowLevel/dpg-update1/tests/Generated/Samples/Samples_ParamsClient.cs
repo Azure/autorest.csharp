@@ -27,8 +27,8 @@ namespace dpg_update1_LowLevel.Samples
 
             Response response = client.HeadNoParams(null, null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -40,8 +40,8 @@ namespace dpg_update1_LowLevel.Samples
 
             Response response = await client.HeadNoParamsAsync(null, null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -53,8 +53,8 @@ namespace dpg_update1_LowLevel.Samples
 
             Response response = client.HeadNoParams("<newParameter>", null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -66,8 +66,8 @@ namespace dpg_update1_LowLevel.Samples
 
             Response response = await client.HeadNoParamsAsync("<newParameter>", null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -79,8 +79,8 @@ namespace dpg_update1_LowLevel.Samples
 
             Response response = client.GetRequired("<parameter>", null, null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -92,8 +92,8 @@ namespace dpg_update1_LowLevel.Samples
 
             Response response = await client.GetRequiredAsync("<parameter>", null, null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -105,8 +105,8 @@ namespace dpg_update1_LowLevel.Samples
 
             Response response = client.GetRequired("<parameter>", "<newParameter>", null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -118,8 +118,8 @@ namespace dpg_update1_LowLevel.Samples
 
             Response response = await client.GetRequiredAsync("<parameter>", "<newParameter>", null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -131,8 +131,8 @@ namespace dpg_update1_LowLevel.Samples
 
             Response response = client.PutRequiredOptional("<requiredParam>", null, null, null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -144,8 +144,8 @@ namespace dpg_update1_LowLevel.Samples
 
             Response response = await client.PutRequiredOptionalAsync("<requiredParam>", null, null, null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -157,8 +157,8 @@ namespace dpg_update1_LowLevel.Samples
 
             Response response = client.PutRequiredOptional("<requiredParam>", "<optionalParam>", "<newParameter>", null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -170,8 +170,8 @@ namespace dpg_update1_LowLevel.Samples
 
             Response response = await client.PutRequiredOptionalAsync("<requiredParam>", "<optionalParam>", "<newParameter>", null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -187,8 +187,8 @@ namespace dpg_update1_LowLevel.Samples
             });
             Response response = client.PostParameters(content, new ContentType("application/json"));
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -204,8 +204,8 @@ namespace dpg_update1_LowLevel.Samples
             });
             Response response = await client.PostParametersAsync(content, new ContentType("application/json"));
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -221,8 +221,8 @@ namespace dpg_update1_LowLevel.Samples
             });
             Response response = client.PostParameters(content, new ContentType("application/json"));
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -238,8 +238,8 @@ namespace dpg_update1_LowLevel.Samples
             });
             Response response = await client.PostParametersAsync(content, new ContentType("application/json"));
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -299,8 +299,8 @@ namespace dpg_update1_LowLevel.Samples
 
             Response response = client.GetOptional(null, null, null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -312,8 +312,8 @@ namespace dpg_update1_LowLevel.Samples
 
             Response response = await client.GetOptionalAsync(null, null, null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -325,8 +325,8 @@ namespace dpg_update1_LowLevel.Samples
 
             Response response = client.GetOptional("<optionalParam>", "<newParameter>", null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -338,8 +338,8 @@ namespace dpg_update1_LowLevel.Samples
 
             Response response = await client.GetOptionalAsync("<optionalParam>", "<newParameter>", null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -351,8 +351,8 @@ namespace dpg_update1_LowLevel.Samples
 
             Response response = client.GetNewOperation(null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -364,8 +364,8 @@ namespace dpg_update1_LowLevel.Samples
 
             Response response = await client.GetNewOperationAsync(null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -377,8 +377,8 @@ namespace dpg_update1_LowLevel.Samples
 
             Response response = client.GetNewOperation(null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -390,8 +390,8 @@ namespace dpg_update1_LowLevel.Samples
 
             Response response = await client.GetNewOperationAsync(null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
     }
 }

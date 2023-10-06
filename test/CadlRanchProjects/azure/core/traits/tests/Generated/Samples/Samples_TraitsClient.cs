@@ -27,8 +27,8 @@ namespace _Specs_.Azure.Core.Traits.Samples
 
             Response response = client.SmokeTest(1234, "<foo>", null, null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.GetProperty("id").ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("id").ToString());
         }
 
         [Test]
@@ -39,8 +39,8 @@ namespace _Specs_.Azure.Core.Traits.Samples
 
             Response response = await client.SmokeTestAsync(1234, "<foo>", null, null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.GetProperty("id").ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("id").ToString());
         }
 
         [Test]
@@ -69,9 +69,9 @@ namespace _Specs_.Azure.Core.Traits.Samples
 
             Response response = client.SmokeTest(1234, "<foo>", null, null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.GetProperty("id").ToString());
-            Console.WriteLine(element.GetProperty("name").ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]
@@ -82,9 +82,9 @@ namespace _Specs_.Azure.Core.Traits.Samples
 
             Response response = await client.SmokeTestAsync(1234, "<foo>", null, null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.GetProperty("id").ToString());
-            Console.WriteLine(element.GetProperty("name").ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]
@@ -117,8 +117,8 @@ namespace _Specs_.Azure.Core.Traits.Samples
             });
             Response response = client.RepeatableAction(1234, content);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.GetProperty("userActionResult").ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("userActionResult").ToString());
         }
 
         [Test]
@@ -133,8 +133,8 @@ namespace _Specs_.Azure.Core.Traits.Samples
             });
             Response response = await client.RepeatableActionAsync(1234, content);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.GetProperty("userActionResult").ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("userActionResult").ToString());
         }
 
         [Test]
@@ -169,8 +169,8 @@ namespace _Specs_.Azure.Core.Traits.Samples
             });
             Response response = client.RepeatableAction(1234, content);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.GetProperty("userActionResult").ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("userActionResult").ToString());
         }
 
         [Test]
@@ -185,8 +185,8 @@ namespace _Specs_.Azure.Core.Traits.Samples
             });
             Response response = await client.RepeatableActionAsync(1234, content);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.GetProperty("userActionResult").ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("userActionResult").ToString());
         }
 
         [Test]

@@ -39,8 +39,8 @@ FixedClient client = new FixedClient();
 
 Response response = await client.GetKnownValueAsync(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetKnownValueAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -48,8 +48,8 @@ FixedClient client = new FixedClient();
 
 Response response = await client.GetKnownValueAsync(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
     <member name="GetKnownValue(RequestContext)">
@@ -60,8 +60,8 @@ FixedClient client = new FixedClient();
 
 Response response = client.GetKnownValue(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetKnownValue with all parameters and parse the result.
 <code><![CDATA[
@@ -69,8 +69,8 @@ FixedClient client = new FixedClient();
 
 Response response = client.GetKnownValue(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
     <member name="PutKnownValueAsync(DaysOfWeekEnum,CancellationToken)">

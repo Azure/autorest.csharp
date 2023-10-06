@@ -10,9 +10,9 @@ PolymorphicrecursiveClient client = new PolymorphicrecursiveClient(credential);
 
 Response response = await client.GetValidAsync(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("fishtype").ToString());
-Console.WriteLine(element.GetProperty("length").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("fishtype").ToString());
+Console.WriteLine(result.GetProperty("length").ToString());
 ]]></code>
 This sample shows how to call GetValidAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -21,13 +21,13 @@ PolymorphicrecursiveClient client = new PolymorphicrecursiveClient(credential);
 
 Response response = await client.GetValidAsync(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("fishtype").ToString());
-Console.WriteLine(element.GetProperty("species").ToString());
-Console.WriteLine(element.GetProperty("length").ToString());
-Console.WriteLine(element.GetProperty("siblings")[0].GetProperty("fishtype").ToString());
-Console.WriteLine(element.GetProperty("siblings")[0].GetProperty("species").ToString());
-Console.WriteLine(element.GetProperty("siblings")[0].GetProperty("length").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("fishtype").ToString());
+Console.WriteLine(result.GetProperty("species").ToString());
+Console.WriteLine(result.GetProperty("length").ToString());
+Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("fishtype").ToString());
+Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("species").ToString());
+Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("length").ToString());
 ]]></code></example>
     </member>
     <member name="GetValid(RequestContext)">
@@ -39,9 +39,9 @@ PolymorphicrecursiveClient client = new PolymorphicrecursiveClient(credential);
 
 Response response = client.GetValid(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("fishtype").ToString());
-Console.WriteLine(element.GetProperty("length").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("fishtype").ToString());
+Console.WriteLine(result.GetProperty("length").ToString());
 ]]></code>
 This sample shows how to call GetValid with all parameters and parse the result.
 <code><![CDATA[
@@ -50,13 +50,13 @@ PolymorphicrecursiveClient client = new PolymorphicrecursiveClient(credential);
 
 Response response = client.GetValid(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("fishtype").ToString());
-Console.WriteLine(element.GetProperty("species").ToString());
-Console.WriteLine(element.GetProperty("length").ToString());
-Console.WriteLine(element.GetProperty("siblings")[0].GetProperty("fishtype").ToString());
-Console.WriteLine(element.GetProperty("siblings")[0].GetProperty("species").ToString());
-Console.WriteLine(element.GetProperty("siblings")[0].GetProperty("length").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("fishtype").ToString());
+Console.WriteLine(result.GetProperty("species").ToString());
+Console.WriteLine(result.GetProperty("length").ToString());
+Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("fishtype").ToString());
+Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("species").ToString());
+Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("length").ToString());
 ]]></code></example>
     </member>
     <member name="PutValidAsync(RequestContent,RequestContext)">

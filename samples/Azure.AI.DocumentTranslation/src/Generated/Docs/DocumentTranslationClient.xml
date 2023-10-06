@@ -10,14 +10,14 @@ DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", c
 
 Response response = await client.GetDocumentStatusAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("sourcePath").ToString());
-Console.WriteLine(element.GetProperty("createdDateTimeUtc").ToString());
-Console.WriteLine(element.GetProperty("lastActionDateTimeUtc").ToString());
-Console.WriteLine(element.GetProperty("status").ToString());
-Console.WriteLine(element.GetProperty("to").ToString());
-Console.WriteLine(element.GetProperty("progress").ToString());
-Console.WriteLine(element.GetProperty("id").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("sourcePath").ToString());
+Console.WriteLine(result.GetProperty("createdDateTimeUtc").ToString());
+Console.WriteLine(result.GetProperty("lastActionDateTimeUtc").ToString());
+Console.WriteLine(result.GetProperty("status").ToString());
+Console.WriteLine(result.GetProperty("to").ToString());
+Console.WriteLine(result.GetProperty("progress").ToString());
+Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code>
 This sample shows how to call GetDocumentStatusAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -26,22 +26,22 @@ DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", c
 
 Response response = await client.GetDocumentStatusAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("path").ToString());
-Console.WriteLine(element.GetProperty("sourcePath").ToString());
-Console.WriteLine(element.GetProperty("createdDateTimeUtc").ToString());
-Console.WriteLine(element.GetProperty("lastActionDateTimeUtc").ToString());
-Console.WriteLine(element.GetProperty("status").ToString());
-Console.WriteLine(element.GetProperty("to").ToString());
-Console.WriteLine(element.GetProperty("error").GetProperty("code").ToString());
-Console.WriteLine(element.GetProperty("error").GetProperty("message").ToString());
-Console.WriteLine(element.GetProperty("error").GetProperty("target").ToString());
-Console.WriteLine(element.GetProperty("error").GetProperty("innerError").GetProperty("code").ToString());
-Console.WriteLine(element.GetProperty("error").GetProperty("innerError").GetProperty("message").ToString());
-Console.WriteLine(element.GetProperty("error").GetProperty("innerError").GetProperty("target").ToString());
-Console.WriteLine(element.GetProperty("progress").ToString());
-Console.WriteLine(element.GetProperty("id").ToString());
-Console.WriteLine(element.GetProperty("characterCharged").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("path").ToString());
+Console.WriteLine(result.GetProperty("sourcePath").ToString());
+Console.WriteLine(result.GetProperty("createdDateTimeUtc").ToString());
+Console.WriteLine(result.GetProperty("lastActionDateTimeUtc").ToString());
+Console.WriteLine(result.GetProperty("status").ToString());
+Console.WriteLine(result.GetProperty("to").ToString());
+Console.WriteLine(result.GetProperty("error").GetProperty("code").ToString());
+Console.WriteLine(result.GetProperty("error").GetProperty("message").ToString());
+Console.WriteLine(result.GetProperty("error").GetProperty("target").ToString());
+Console.WriteLine(result.GetProperty("error").GetProperty("innerError").GetProperty("code").ToString());
+Console.WriteLine(result.GetProperty("error").GetProperty("innerError").GetProperty("message").ToString());
+Console.WriteLine(result.GetProperty("error").GetProperty("innerError").GetProperty("target").ToString());
+Console.WriteLine(result.GetProperty("progress").ToString());
+Console.WriteLine(result.GetProperty("id").ToString());
+Console.WriteLine(result.GetProperty("characterCharged").ToString());
 ]]></code></example>
     </member>
     <member name="GetDocumentStatus(Guid,Guid,RequestContext)">
@@ -53,14 +53,14 @@ DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", c
 
 Response response = client.GetDocumentStatus(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("sourcePath").ToString());
-Console.WriteLine(element.GetProperty("createdDateTimeUtc").ToString());
-Console.WriteLine(element.GetProperty("lastActionDateTimeUtc").ToString());
-Console.WriteLine(element.GetProperty("status").ToString());
-Console.WriteLine(element.GetProperty("to").ToString());
-Console.WriteLine(element.GetProperty("progress").ToString());
-Console.WriteLine(element.GetProperty("id").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("sourcePath").ToString());
+Console.WriteLine(result.GetProperty("createdDateTimeUtc").ToString());
+Console.WriteLine(result.GetProperty("lastActionDateTimeUtc").ToString());
+Console.WriteLine(result.GetProperty("status").ToString());
+Console.WriteLine(result.GetProperty("to").ToString());
+Console.WriteLine(result.GetProperty("progress").ToString());
+Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code>
 This sample shows how to call GetDocumentStatus with all parameters and parse the result.
 <code><![CDATA[
@@ -69,22 +69,22 @@ DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", c
 
 Response response = client.GetDocumentStatus(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("path").ToString());
-Console.WriteLine(element.GetProperty("sourcePath").ToString());
-Console.WriteLine(element.GetProperty("createdDateTimeUtc").ToString());
-Console.WriteLine(element.GetProperty("lastActionDateTimeUtc").ToString());
-Console.WriteLine(element.GetProperty("status").ToString());
-Console.WriteLine(element.GetProperty("to").ToString());
-Console.WriteLine(element.GetProperty("error").GetProperty("code").ToString());
-Console.WriteLine(element.GetProperty("error").GetProperty("message").ToString());
-Console.WriteLine(element.GetProperty("error").GetProperty("target").ToString());
-Console.WriteLine(element.GetProperty("error").GetProperty("innerError").GetProperty("code").ToString());
-Console.WriteLine(element.GetProperty("error").GetProperty("innerError").GetProperty("message").ToString());
-Console.WriteLine(element.GetProperty("error").GetProperty("innerError").GetProperty("target").ToString());
-Console.WriteLine(element.GetProperty("progress").ToString());
-Console.WriteLine(element.GetProperty("id").ToString());
-Console.WriteLine(element.GetProperty("characterCharged").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("path").ToString());
+Console.WriteLine(result.GetProperty("sourcePath").ToString());
+Console.WriteLine(result.GetProperty("createdDateTimeUtc").ToString());
+Console.WriteLine(result.GetProperty("lastActionDateTimeUtc").ToString());
+Console.WriteLine(result.GetProperty("status").ToString());
+Console.WriteLine(result.GetProperty("to").ToString());
+Console.WriteLine(result.GetProperty("error").GetProperty("code").ToString());
+Console.WriteLine(result.GetProperty("error").GetProperty("message").ToString());
+Console.WriteLine(result.GetProperty("error").GetProperty("target").ToString());
+Console.WriteLine(result.GetProperty("error").GetProperty("innerError").GetProperty("code").ToString());
+Console.WriteLine(result.GetProperty("error").GetProperty("innerError").GetProperty("message").ToString());
+Console.WriteLine(result.GetProperty("error").GetProperty("innerError").GetProperty("target").ToString());
+Console.WriteLine(result.GetProperty("progress").ToString());
+Console.WriteLine(result.GetProperty("id").ToString());
+Console.WriteLine(result.GetProperty("characterCharged").ToString());
 ]]></code></example>
     </member>
     <member name="GetTranslationStatusAsync(Guid,RequestContext)">
@@ -96,18 +96,18 @@ DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", c
 
 Response response = await client.GetTranslationStatusAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("id").ToString());
-Console.WriteLine(element.GetProperty("createdDateTimeUtc").ToString());
-Console.WriteLine(element.GetProperty("lastActionDateTimeUtc").ToString());
-Console.WriteLine(element.GetProperty("status").ToString());
-Console.WriteLine(element.GetProperty("summary").GetProperty("total").ToString());
-Console.WriteLine(element.GetProperty("summary").GetProperty("failed").ToString());
-Console.WriteLine(element.GetProperty("summary").GetProperty("success").ToString());
-Console.WriteLine(element.GetProperty("summary").GetProperty("inProgress").ToString());
-Console.WriteLine(element.GetProperty("summary").GetProperty("notYetStarted").ToString());
-Console.WriteLine(element.GetProperty("summary").GetProperty("cancelled").ToString());
-Console.WriteLine(element.GetProperty("summary").GetProperty("totalCharacterCharged").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("id").ToString());
+Console.WriteLine(result.GetProperty("createdDateTimeUtc").ToString());
+Console.WriteLine(result.GetProperty("lastActionDateTimeUtc").ToString());
+Console.WriteLine(result.GetProperty("status").ToString());
+Console.WriteLine(result.GetProperty("summary").GetProperty("total").ToString());
+Console.WriteLine(result.GetProperty("summary").GetProperty("failed").ToString());
+Console.WriteLine(result.GetProperty("summary").GetProperty("success").ToString());
+Console.WriteLine(result.GetProperty("summary").GetProperty("inProgress").ToString());
+Console.WriteLine(result.GetProperty("summary").GetProperty("notYetStarted").ToString());
+Console.WriteLine(result.GetProperty("summary").GetProperty("cancelled").ToString());
+Console.WriteLine(result.GetProperty("summary").GetProperty("totalCharacterCharged").ToString());
 ]]></code>
 This sample shows how to call GetTranslationStatusAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -116,24 +116,24 @@ DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", c
 
 Response response = await client.GetTranslationStatusAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("id").ToString());
-Console.WriteLine(element.GetProperty("createdDateTimeUtc").ToString());
-Console.WriteLine(element.GetProperty("lastActionDateTimeUtc").ToString());
-Console.WriteLine(element.GetProperty("status").ToString());
-Console.WriteLine(element.GetProperty("error").GetProperty("code").ToString());
-Console.WriteLine(element.GetProperty("error").GetProperty("message").ToString());
-Console.WriteLine(element.GetProperty("error").GetProperty("target").ToString());
-Console.WriteLine(element.GetProperty("error").GetProperty("innerError").GetProperty("code").ToString());
-Console.WriteLine(element.GetProperty("error").GetProperty("innerError").GetProperty("message").ToString());
-Console.WriteLine(element.GetProperty("error").GetProperty("innerError").GetProperty("target").ToString());
-Console.WriteLine(element.GetProperty("summary").GetProperty("total").ToString());
-Console.WriteLine(element.GetProperty("summary").GetProperty("failed").ToString());
-Console.WriteLine(element.GetProperty("summary").GetProperty("success").ToString());
-Console.WriteLine(element.GetProperty("summary").GetProperty("inProgress").ToString());
-Console.WriteLine(element.GetProperty("summary").GetProperty("notYetStarted").ToString());
-Console.WriteLine(element.GetProperty("summary").GetProperty("cancelled").ToString());
-Console.WriteLine(element.GetProperty("summary").GetProperty("totalCharacterCharged").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("id").ToString());
+Console.WriteLine(result.GetProperty("createdDateTimeUtc").ToString());
+Console.WriteLine(result.GetProperty("lastActionDateTimeUtc").ToString());
+Console.WriteLine(result.GetProperty("status").ToString());
+Console.WriteLine(result.GetProperty("error").GetProperty("code").ToString());
+Console.WriteLine(result.GetProperty("error").GetProperty("message").ToString());
+Console.WriteLine(result.GetProperty("error").GetProperty("target").ToString());
+Console.WriteLine(result.GetProperty("error").GetProperty("innerError").GetProperty("code").ToString());
+Console.WriteLine(result.GetProperty("error").GetProperty("innerError").GetProperty("message").ToString());
+Console.WriteLine(result.GetProperty("error").GetProperty("innerError").GetProperty("target").ToString());
+Console.WriteLine(result.GetProperty("summary").GetProperty("total").ToString());
+Console.WriteLine(result.GetProperty("summary").GetProperty("failed").ToString());
+Console.WriteLine(result.GetProperty("summary").GetProperty("success").ToString());
+Console.WriteLine(result.GetProperty("summary").GetProperty("inProgress").ToString());
+Console.WriteLine(result.GetProperty("summary").GetProperty("notYetStarted").ToString());
+Console.WriteLine(result.GetProperty("summary").GetProperty("cancelled").ToString());
+Console.WriteLine(result.GetProperty("summary").GetProperty("totalCharacterCharged").ToString());
 ]]></code></example>
     </member>
     <member name="GetTranslationStatus(Guid,RequestContext)">
@@ -145,18 +145,18 @@ DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", c
 
 Response response = client.GetTranslationStatus(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("id").ToString());
-Console.WriteLine(element.GetProperty("createdDateTimeUtc").ToString());
-Console.WriteLine(element.GetProperty("lastActionDateTimeUtc").ToString());
-Console.WriteLine(element.GetProperty("status").ToString());
-Console.WriteLine(element.GetProperty("summary").GetProperty("total").ToString());
-Console.WriteLine(element.GetProperty("summary").GetProperty("failed").ToString());
-Console.WriteLine(element.GetProperty("summary").GetProperty("success").ToString());
-Console.WriteLine(element.GetProperty("summary").GetProperty("inProgress").ToString());
-Console.WriteLine(element.GetProperty("summary").GetProperty("notYetStarted").ToString());
-Console.WriteLine(element.GetProperty("summary").GetProperty("cancelled").ToString());
-Console.WriteLine(element.GetProperty("summary").GetProperty("totalCharacterCharged").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("id").ToString());
+Console.WriteLine(result.GetProperty("createdDateTimeUtc").ToString());
+Console.WriteLine(result.GetProperty("lastActionDateTimeUtc").ToString());
+Console.WriteLine(result.GetProperty("status").ToString());
+Console.WriteLine(result.GetProperty("summary").GetProperty("total").ToString());
+Console.WriteLine(result.GetProperty("summary").GetProperty("failed").ToString());
+Console.WriteLine(result.GetProperty("summary").GetProperty("success").ToString());
+Console.WriteLine(result.GetProperty("summary").GetProperty("inProgress").ToString());
+Console.WriteLine(result.GetProperty("summary").GetProperty("notYetStarted").ToString());
+Console.WriteLine(result.GetProperty("summary").GetProperty("cancelled").ToString());
+Console.WriteLine(result.GetProperty("summary").GetProperty("totalCharacterCharged").ToString());
 ]]></code>
 This sample shows how to call GetTranslationStatus with all parameters and parse the result.
 <code><![CDATA[
@@ -165,24 +165,24 @@ DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", c
 
 Response response = client.GetTranslationStatus(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("id").ToString());
-Console.WriteLine(element.GetProperty("createdDateTimeUtc").ToString());
-Console.WriteLine(element.GetProperty("lastActionDateTimeUtc").ToString());
-Console.WriteLine(element.GetProperty("status").ToString());
-Console.WriteLine(element.GetProperty("error").GetProperty("code").ToString());
-Console.WriteLine(element.GetProperty("error").GetProperty("message").ToString());
-Console.WriteLine(element.GetProperty("error").GetProperty("target").ToString());
-Console.WriteLine(element.GetProperty("error").GetProperty("innerError").GetProperty("code").ToString());
-Console.WriteLine(element.GetProperty("error").GetProperty("innerError").GetProperty("message").ToString());
-Console.WriteLine(element.GetProperty("error").GetProperty("innerError").GetProperty("target").ToString());
-Console.WriteLine(element.GetProperty("summary").GetProperty("total").ToString());
-Console.WriteLine(element.GetProperty("summary").GetProperty("failed").ToString());
-Console.WriteLine(element.GetProperty("summary").GetProperty("success").ToString());
-Console.WriteLine(element.GetProperty("summary").GetProperty("inProgress").ToString());
-Console.WriteLine(element.GetProperty("summary").GetProperty("notYetStarted").ToString());
-Console.WriteLine(element.GetProperty("summary").GetProperty("cancelled").ToString());
-Console.WriteLine(element.GetProperty("summary").GetProperty("totalCharacterCharged").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("id").ToString());
+Console.WriteLine(result.GetProperty("createdDateTimeUtc").ToString());
+Console.WriteLine(result.GetProperty("lastActionDateTimeUtc").ToString());
+Console.WriteLine(result.GetProperty("status").ToString());
+Console.WriteLine(result.GetProperty("error").GetProperty("code").ToString());
+Console.WriteLine(result.GetProperty("error").GetProperty("message").ToString());
+Console.WriteLine(result.GetProperty("error").GetProperty("target").ToString());
+Console.WriteLine(result.GetProperty("error").GetProperty("innerError").GetProperty("code").ToString());
+Console.WriteLine(result.GetProperty("error").GetProperty("innerError").GetProperty("message").ToString());
+Console.WriteLine(result.GetProperty("error").GetProperty("innerError").GetProperty("target").ToString());
+Console.WriteLine(result.GetProperty("summary").GetProperty("total").ToString());
+Console.WriteLine(result.GetProperty("summary").GetProperty("failed").ToString());
+Console.WriteLine(result.GetProperty("summary").GetProperty("success").ToString());
+Console.WriteLine(result.GetProperty("summary").GetProperty("inProgress").ToString());
+Console.WriteLine(result.GetProperty("summary").GetProperty("notYetStarted").ToString());
+Console.WriteLine(result.GetProperty("summary").GetProperty("cancelled").ToString());
+Console.WriteLine(result.GetProperty("summary").GetProperty("totalCharacterCharged").ToString());
 ]]></code></example>
     </member>
     <member name="CancelTranslationAsync(Guid,RequestContext)">
@@ -194,18 +194,18 @@ DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", c
 
 Response response = await client.CancelTranslationAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("id").ToString());
-Console.WriteLine(element.GetProperty("createdDateTimeUtc").ToString());
-Console.WriteLine(element.GetProperty("lastActionDateTimeUtc").ToString());
-Console.WriteLine(element.GetProperty("status").ToString());
-Console.WriteLine(element.GetProperty("summary").GetProperty("total").ToString());
-Console.WriteLine(element.GetProperty("summary").GetProperty("failed").ToString());
-Console.WriteLine(element.GetProperty("summary").GetProperty("success").ToString());
-Console.WriteLine(element.GetProperty("summary").GetProperty("inProgress").ToString());
-Console.WriteLine(element.GetProperty("summary").GetProperty("notYetStarted").ToString());
-Console.WriteLine(element.GetProperty("summary").GetProperty("cancelled").ToString());
-Console.WriteLine(element.GetProperty("summary").GetProperty("totalCharacterCharged").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("id").ToString());
+Console.WriteLine(result.GetProperty("createdDateTimeUtc").ToString());
+Console.WriteLine(result.GetProperty("lastActionDateTimeUtc").ToString());
+Console.WriteLine(result.GetProperty("status").ToString());
+Console.WriteLine(result.GetProperty("summary").GetProperty("total").ToString());
+Console.WriteLine(result.GetProperty("summary").GetProperty("failed").ToString());
+Console.WriteLine(result.GetProperty("summary").GetProperty("success").ToString());
+Console.WriteLine(result.GetProperty("summary").GetProperty("inProgress").ToString());
+Console.WriteLine(result.GetProperty("summary").GetProperty("notYetStarted").ToString());
+Console.WriteLine(result.GetProperty("summary").GetProperty("cancelled").ToString());
+Console.WriteLine(result.GetProperty("summary").GetProperty("totalCharacterCharged").ToString());
 ]]></code>
 This sample shows how to call CancelTranslationAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -214,24 +214,24 @@ DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", c
 
 Response response = await client.CancelTranslationAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("id").ToString());
-Console.WriteLine(element.GetProperty("createdDateTimeUtc").ToString());
-Console.WriteLine(element.GetProperty("lastActionDateTimeUtc").ToString());
-Console.WriteLine(element.GetProperty("status").ToString());
-Console.WriteLine(element.GetProperty("error").GetProperty("code").ToString());
-Console.WriteLine(element.GetProperty("error").GetProperty("message").ToString());
-Console.WriteLine(element.GetProperty("error").GetProperty("target").ToString());
-Console.WriteLine(element.GetProperty("error").GetProperty("innerError").GetProperty("code").ToString());
-Console.WriteLine(element.GetProperty("error").GetProperty("innerError").GetProperty("message").ToString());
-Console.WriteLine(element.GetProperty("error").GetProperty("innerError").GetProperty("target").ToString());
-Console.WriteLine(element.GetProperty("summary").GetProperty("total").ToString());
-Console.WriteLine(element.GetProperty("summary").GetProperty("failed").ToString());
-Console.WriteLine(element.GetProperty("summary").GetProperty("success").ToString());
-Console.WriteLine(element.GetProperty("summary").GetProperty("inProgress").ToString());
-Console.WriteLine(element.GetProperty("summary").GetProperty("notYetStarted").ToString());
-Console.WriteLine(element.GetProperty("summary").GetProperty("cancelled").ToString());
-Console.WriteLine(element.GetProperty("summary").GetProperty("totalCharacterCharged").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("id").ToString());
+Console.WriteLine(result.GetProperty("createdDateTimeUtc").ToString());
+Console.WriteLine(result.GetProperty("lastActionDateTimeUtc").ToString());
+Console.WriteLine(result.GetProperty("status").ToString());
+Console.WriteLine(result.GetProperty("error").GetProperty("code").ToString());
+Console.WriteLine(result.GetProperty("error").GetProperty("message").ToString());
+Console.WriteLine(result.GetProperty("error").GetProperty("target").ToString());
+Console.WriteLine(result.GetProperty("error").GetProperty("innerError").GetProperty("code").ToString());
+Console.WriteLine(result.GetProperty("error").GetProperty("innerError").GetProperty("message").ToString());
+Console.WriteLine(result.GetProperty("error").GetProperty("innerError").GetProperty("target").ToString());
+Console.WriteLine(result.GetProperty("summary").GetProperty("total").ToString());
+Console.WriteLine(result.GetProperty("summary").GetProperty("failed").ToString());
+Console.WriteLine(result.GetProperty("summary").GetProperty("success").ToString());
+Console.WriteLine(result.GetProperty("summary").GetProperty("inProgress").ToString());
+Console.WriteLine(result.GetProperty("summary").GetProperty("notYetStarted").ToString());
+Console.WriteLine(result.GetProperty("summary").GetProperty("cancelled").ToString());
+Console.WriteLine(result.GetProperty("summary").GetProperty("totalCharacterCharged").ToString());
 ]]></code></example>
     </member>
     <member name="CancelTranslation(Guid,RequestContext)">
@@ -243,18 +243,18 @@ DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", c
 
 Response response = client.CancelTranslation(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("id").ToString());
-Console.WriteLine(element.GetProperty("createdDateTimeUtc").ToString());
-Console.WriteLine(element.GetProperty("lastActionDateTimeUtc").ToString());
-Console.WriteLine(element.GetProperty("status").ToString());
-Console.WriteLine(element.GetProperty("summary").GetProperty("total").ToString());
-Console.WriteLine(element.GetProperty("summary").GetProperty("failed").ToString());
-Console.WriteLine(element.GetProperty("summary").GetProperty("success").ToString());
-Console.WriteLine(element.GetProperty("summary").GetProperty("inProgress").ToString());
-Console.WriteLine(element.GetProperty("summary").GetProperty("notYetStarted").ToString());
-Console.WriteLine(element.GetProperty("summary").GetProperty("cancelled").ToString());
-Console.WriteLine(element.GetProperty("summary").GetProperty("totalCharacterCharged").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("id").ToString());
+Console.WriteLine(result.GetProperty("createdDateTimeUtc").ToString());
+Console.WriteLine(result.GetProperty("lastActionDateTimeUtc").ToString());
+Console.WriteLine(result.GetProperty("status").ToString());
+Console.WriteLine(result.GetProperty("summary").GetProperty("total").ToString());
+Console.WriteLine(result.GetProperty("summary").GetProperty("failed").ToString());
+Console.WriteLine(result.GetProperty("summary").GetProperty("success").ToString());
+Console.WriteLine(result.GetProperty("summary").GetProperty("inProgress").ToString());
+Console.WriteLine(result.GetProperty("summary").GetProperty("notYetStarted").ToString());
+Console.WriteLine(result.GetProperty("summary").GetProperty("cancelled").ToString());
+Console.WriteLine(result.GetProperty("summary").GetProperty("totalCharacterCharged").ToString());
 ]]></code>
 This sample shows how to call CancelTranslation with all parameters and parse the result.
 <code><![CDATA[
@@ -263,24 +263,24 @@ DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", c
 
 Response response = client.CancelTranslation(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("id").ToString());
-Console.WriteLine(element.GetProperty("createdDateTimeUtc").ToString());
-Console.WriteLine(element.GetProperty("lastActionDateTimeUtc").ToString());
-Console.WriteLine(element.GetProperty("status").ToString());
-Console.WriteLine(element.GetProperty("error").GetProperty("code").ToString());
-Console.WriteLine(element.GetProperty("error").GetProperty("message").ToString());
-Console.WriteLine(element.GetProperty("error").GetProperty("target").ToString());
-Console.WriteLine(element.GetProperty("error").GetProperty("innerError").GetProperty("code").ToString());
-Console.WriteLine(element.GetProperty("error").GetProperty("innerError").GetProperty("message").ToString());
-Console.WriteLine(element.GetProperty("error").GetProperty("innerError").GetProperty("target").ToString());
-Console.WriteLine(element.GetProperty("summary").GetProperty("total").ToString());
-Console.WriteLine(element.GetProperty("summary").GetProperty("failed").ToString());
-Console.WriteLine(element.GetProperty("summary").GetProperty("success").ToString());
-Console.WriteLine(element.GetProperty("summary").GetProperty("inProgress").ToString());
-Console.WriteLine(element.GetProperty("summary").GetProperty("notYetStarted").ToString());
-Console.WriteLine(element.GetProperty("summary").GetProperty("cancelled").ToString());
-Console.WriteLine(element.GetProperty("summary").GetProperty("totalCharacterCharged").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("id").ToString());
+Console.WriteLine(result.GetProperty("createdDateTimeUtc").ToString());
+Console.WriteLine(result.GetProperty("lastActionDateTimeUtc").ToString());
+Console.WriteLine(result.GetProperty("status").ToString());
+Console.WriteLine(result.GetProperty("error").GetProperty("code").ToString());
+Console.WriteLine(result.GetProperty("error").GetProperty("message").ToString());
+Console.WriteLine(result.GetProperty("error").GetProperty("target").ToString());
+Console.WriteLine(result.GetProperty("error").GetProperty("innerError").GetProperty("code").ToString());
+Console.WriteLine(result.GetProperty("error").GetProperty("innerError").GetProperty("message").ToString());
+Console.WriteLine(result.GetProperty("error").GetProperty("innerError").GetProperty("target").ToString());
+Console.WriteLine(result.GetProperty("summary").GetProperty("total").ToString());
+Console.WriteLine(result.GetProperty("summary").GetProperty("failed").ToString());
+Console.WriteLine(result.GetProperty("summary").GetProperty("success").ToString());
+Console.WriteLine(result.GetProperty("summary").GetProperty("inProgress").ToString());
+Console.WriteLine(result.GetProperty("summary").GetProperty("notYetStarted").ToString());
+Console.WriteLine(result.GetProperty("summary").GetProperty("cancelled").ToString());
+Console.WriteLine(result.GetProperty("summary").GetProperty("totalCharacterCharged").ToString());
 ]]></code></example>
     </member>
     <member name="GetSupportedDocumentFormatsAsync(RequestContext)">
@@ -292,10 +292,10 @@ DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", c
 
 Response response = await client.GetSupportedDocumentFormatsAsync();
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("value")[0].GetProperty("format").ToString());
-Console.WriteLine(element.GetProperty("value")[0].GetProperty("fileExtensions")[0].ToString());
-Console.WriteLine(element.GetProperty("value")[0].GetProperty("contentTypes")[0].ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value")[0].GetProperty("format").ToString());
+Console.WriteLine(result.GetProperty("value")[0].GetProperty("fileExtensions")[0].ToString());
+Console.WriteLine(result.GetProperty("value")[0].GetProperty("contentTypes")[0].ToString());
 ]]></code>
 This sample shows how to call GetSupportedDocumentFormatsAsync with all request content and parse the result.
 <code><![CDATA[
@@ -304,12 +304,12 @@ DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", c
 
 Response response = await client.GetSupportedDocumentFormatsAsync();
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("value")[0].GetProperty("format").ToString());
-Console.WriteLine(element.GetProperty("value")[0].GetProperty("fileExtensions")[0].ToString());
-Console.WriteLine(element.GetProperty("value")[0].GetProperty("contentTypes")[0].ToString());
-Console.WriteLine(element.GetProperty("value")[0].GetProperty("defaultVersion").ToString());
-Console.WriteLine(element.GetProperty("value")[0].GetProperty("versions")[0].ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value")[0].GetProperty("format").ToString());
+Console.WriteLine(result.GetProperty("value")[0].GetProperty("fileExtensions")[0].ToString());
+Console.WriteLine(result.GetProperty("value")[0].GetProperty("contentTypes")[0].ToString());
+Console.WriteLine(result.GetProperty("value")[0].GetProperty("defaultVersion").ToString());
+Console.WriteLine(result.GetProperty("value")[0].GetProperty("versions")[0].ToString());
 ]]></code></example>
     </member>
     <member name="GetSupportedDocumentFormats(RequestContext)">
@@ -321,10 +321,10 @@ DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", c
 
 Response response = client.GetSupportedDocumentFormats();
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("value")[0].GetProperty("format").ToString());
-Console.WriteLine(element.GetProperty("value")[0].GetProperty("fileExtensions")[0].ToString());
-Console.WriteLine(element.GetProperty("value")[0].GetProperty("contentTypes")[0].ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value")[0].GetProperty("format").ToString());
+Console.WriteLine(result.GetProperty("value")[0].GetProperty("fileExtensions")[0].ToString());
+Console.WriteLine(result.GetProperty("value")[0].GetProperty("contentTypes")[0].ToString());
 ]]></code>
 This sample shows how to call GetSupportedDocumentFormats with all request content and parse the result.
 <code><![CDATA[
@@ -333,12 +333,12 @@ DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", c
 
 Response response = client.GetSupportedDocumentFormats();
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("value")[0].GetProperty("format").ToString());
-Console.WriteLine(element.GetProperty("value")[0].GetProperty("fileExtensions")[0].ToString());
-Console.WriteLine(element.GetProperty("value")[0].GetProperty("contentTypes")[0].ToString());
-Console.WriteLine(element.GetProperty("value")[0].GetProperty("defaultVersion").ToString());
-Console.WriteLine(element.GetProperty("value")[0].GetProperty("versions")[0].ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value")[0].GetProperty("format").ToString());
+Console.WriteLine(result.GetProperty("value")[0].GetProperty("fileExtensions")[0].ToString());
+Console.WriteLine(result.GetProperty("value")[0].GetProperty("contentTypes")[0].ToString());
+Console.WriteLine(result.GetProperty("value")[0].GetProperty("defaultVersion").ToString());
+Console.WriteLine(result.GetProperty("value")[0].GetProperty("versions")[0].ToString());
 ]]></code></example>
     </member>
     <member name="GetSupportedGlossaryFormatsAsync(RequestContext)">
@@ -350,10 +350,10 @@ DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", c
 
 Response response = await client.GetSupportedGlossaryFormatsAsync();
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("value")[0].GetProperty("format").ToString());
-Console.WriteLine(element.GetProperty("value")[0].GetProperty("fileExtensions")[0].ToString());
-Console.WriteLine(element.GetProperty("value")[0].GetProperty("contentTypes")[0].ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value")[0].GetProperty("format").ToString());
+Console.WriteLine(result.GetProperty("value")[0].GetProperty("fileExtensions")[0].ToString());
+Console.WriteLine(result.GetProperty("value")[0].GetProperty("contentTypes")[0].ToString());
 ]]></code>
 This sample shows how to call GetSupportedGlossaryFormatsAsync with all request content and parse the result.
 <code><![CDATA[
@@ -362,12 +362,12 @@ DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", c
 
 Response response = await client.GetSupportedGlossaryFormatsAsync();
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("value")[0].GetProperty("format").ToString());
-Console.WriteLine(element.GetProperty("value")[0].GetProperty("fileExtensions")[0].ToString());
-Console.WriteLine(element.GetProperty("value")[0].GetProperty("contentTypes")[0].ToString());
-Console.WriteLine(element.GetProperty("value")[0].GetProperty("defaultVersion").ToString());
-Console.WriteLine(element.GetProperty("value")[0].GetProperty("versions")[0].ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value")[0].GetProperty("format").ToString());
+Console.WriteLine(result.GetProperty("value")[0].GetProperty("fileExtensions")[0].ToString());
+Console.WriteLine(result.GetProperty("value")[0].GetProperty("contentTypes")[0].ToString());
+Console.WriteLine(result.GetProperty("value")[0].GetProperty("defaultVersion").ToString());
+Console.WriteLine(result.GetProperty("value")[0].GetProperty("versions")[0].ToString());
 ]]></code></example>
     </member>
     <member name="GetSupportedGlossaryFormats(RequestContext)">
@@ -379,10 +379,10 @@ DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", c
 
 Response response = client.GetSupportedGlossaryFormats();
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("value")[0].GetProperty("format").ToString());
-Console.WriteLine(element.GetProperty("value")[0].GetProperty("fileExtensions")[0].ToString());
-Console.WriteLine(element.GetProperty("value")[0].GetProperty("contentTypes")[0].ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value")[0].GetProperty("format").ToString());
+Console.WriteLine(result.GetProperty("value")[0].GetProperty("fileExtensions")[0].ToString());
+Console.WriteLine(result.GetProperty("value")[0].GetProperty("contentTypes")[0].ToString());
 ]]></code>
 This sample shows how to call GetSupportedGlossaryFormats with all request content and parse the result.
 <code><![CDATA[
@@ -391,12 +391,12 @@ DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", c
 
 Response response = client.GetSupportedGlossaryFormats();
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("value")[0].GetProperty("format").ToString());
-Console.WriteLine(element.GetProperty("value")[0].GetProperty("fileExtensions")[0].ToString());
-Console.WriteLine(element.GetProperty("value")[0].GetProperty("contentTypes")[0].ToString());
-Console.WriteLine(element.GetProperty("value")[0].GetProperty("defaultVersion").ToString());
-Console.WriteLine(element.GetProperty("value")[0].GetProperty("versions")[0].ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value")[0].GetProperty("format").ToString());
+Console.WriteLine(result.GetProperty("value")[0].GetProperty("fileExtensions")[0].ToString());
+Console.WriteLine(result.GetProperty("value")[0].GetProperty("contentTypes")[0].ToString());
+Console.WriteLine(result.GetProperty("value")[0].GetProperty("defaultVersion").ToString());
+Console.WriteLine(result.GetProperty("value")[0].GetProperty("versions")[0].ToString());
 ]]></code></example>
     </member>
     <member name="GetSupportedStorageSourcesAsync(RequestContext)">
@@ -408,8 +408,8 @@ DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", c
 
 Response response = await client.GetSupportedStorageSourcesAsync();
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("value")[0].ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value")[0].ToString());
 ]]></code>
 This sample shows how to call GetSupportedStorageSourcesAsync with all request content and parse the result.
 <code><![CDATA[
@@ -418,8 +418,8 @@ DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", c
 
 Response response = await client.GetSupportedStorageSourcesAsync();
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("value")[0].ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value")[0].ToString());
 ]]></code></example>
     </member>
     <member name="GetSupportedStorageSources(RequestContext)">
@@ -431,8 +431,8 @@ DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", c
 
 Response response = client.GetSupportedStorageSources();
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("value")[0].ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value")[0].ToString());
 ]]></code>
 This sample shows how to call GetSupportedStorageSources with all request content and parse the result.
 <code><![CDATA[
@@ -441,8 +441,8 @@ DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", c
 
 Response response = client.GetSupportedStorageSources();
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("value")[0].ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value")[0].ToString());
 ]]></code></example>
     </member>
     <member name="GetTranslationsStatusAsync(int?,int?,int?,IEnumerable{Guid},IEnumerable{string},DateTimeOffset?,DateTimeOffset?,IEnumerable{string},RequestContext)">
@@ -454,18 +454,18 @@ DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", c
 
 await foreach (BinaryData item in client.GetTranslationsStatusAsync())
 {
-    JsonElement element = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(element.GetProperty("id").ToString());
-    Console.WriteLine(element.GetProperty("createdDateTimeUtc").ToString());
-    Console.WriteLine(element.GetProperty("lastActionDateTimeUtc").ToString());
-    Console.WriteLine(element.GetProperty("status").ToString());
-    Console.WriteLine(element.GetProperty("summary").GetProperty("total").ToString());
-    Console.WriteLine(element.GetProperty("summary").GetProperty("failed").ToString());
-    Console.WriteLine(element.GetProperty("summary").GetProperty("success").ToString());
-    Console.WriteLine(element.GetProperty("summary").GetProperty("inProgress").ToString());
-    Console.WriteLine(element.GetProperty("summary").GetProperty("notYetStarted").ToString());
-    Console.WriteLine(element.GetProperty("summary").GetProperty("cancelled").ToString());
-    Console.WriteLine(element.GetProperty("summary").GetProperty("totalCharacterCharged").ToString());
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result.GetProperty("id").ToString());
+    Console.WriteLine(result.GetProperty("createdDateTimeUtc").ToString());
+    Console.WriteLine(result.GetProperty("lastActionDateTimeUtc").ToString());
+    Console.WriteLine(result.GetProperty("status").ToString());
+    Console.WriteLine(result.GetProperty("summary").GetProperty("total").ToString());
+    Console.WriteLine(result.GetProperty("summary").GetProperty("failed").ToString());
+    Console.WriteLine(result.GetProperty("summary").GetProperty("success").ToString());
+    Console.WriteLine(result.GetProperty("summary").GetProperty("inProgress").ToString());
+    Console.WriteLine(result.GetProperty("summary").GetProperty("notYetStarted").ToString());
+    Console.WriteLine(result.GetProperty("summary").GetProperty("cancelled").ToString());
+    Console.WriteLine(result.GetProperty("summary").GetProperty("totalCharacterCharged").ToString());
 }
 ]]></code>
 This sample shows how to call GetTranslationsStatusAsync with all parameters and parse the result.
@@ -475,24 +475,24 @@ DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", c
 
 await foreach (BinaryData item in client.GetTranslationsStatusAsync(top: 1234, skip: 1234, maxpagesize: 1234, ids: new Guid[] { Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a") }, statuses: new string[] { "<statuses>" }, createdDateTimeUtcStart: DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"), createdDateTimeUtcEnd: DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"), orderBy: new string[] { "<orderBy>" }))
 {
-    JsonElement element = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(element.GetProperty("id").ToString());
-    Console.WriteLine(element.GetProperty("createdDateTimeUtc").ToString());
-    Console.WriteLine(element.GetProperty("lastActionDateTimeUtc").ToString());
-    Console.WriteLine(element.GetProperty("status").ToString());
-    Console.WriteLine(element.GetProperty("error").GetProperty("code").ToString());
-    Console.WriteLine(element.GetProperty("error").GetProperty("message").ToString());
-    Console.WriteLine(element.GetProperty("error").GetProperty("target").ToString());
-    Console.WriteLine(element.GetProperty("error").GetProperty("innerError").GetProperty("code").ToString());
-    Console.WriteLine(element.GetProperty("error").GetProperty("innerError").GetProperty("message").ToString());
-    Console.WriteLine(element.GetProperty("error").GetProperty("innerError").GetProperty("target").ToString());
-    Console.WriteLine(element.GetProperty("summary").GetProperty("total").ToString());
-    Console.WriteLine(element.GetProperty("summary").GetProperty("failed").ToString());
-    Console.WriteLine(element.GetProperty("summary").GetProperty("success").ToString());
-    Console.WriteLine(element.GetProperty("summary").GetProperty("inProgress").ToString());
-    Console.WriteLine(element.GetProperty("summary").GetProperty("notYetStarted").ToString());
-    Console.WriteLine(element.GetProperty("summary").GetProperty("cancelled").ToString());
-    Console.WriteLine(element.GetProperty("summary").GetProperty("totalCharacterCharged").ToString());
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result.GetProperty("id").ToString());
+    Console.WriteLine(result.GetProperty("createdDateTimeUtc").ToString());
+    Console.WriteLine(result.GetProperty("lastActionDateTimeUtc").ToString());
+    Console.WriteLine(result.GetProperty("status").ToString());
+    Console.WriteLine(result.GetProperty("error").GetProperty("code").ToString());
+    Console.WriteLine(result.GetProperty("error").GetProperty("message").ToString());
+    Console.WriteLine(result.GetProperty("error").GetProperty("target").ToString());
+    Console.WriteLine(result.GetProperty("error").GetProperty("innerError").GetProperty("code").ToString());
+    Console.WriteLine(result.GetProperty("error").GetProperty("innerError").GetProperty("message").ToString());
+    Console.WriteLine(result.GetProperty("error").GetProperty("innerError").GetProperty("target").ToString());
+    Console.WriteLine(result.GetProperty("summary").GetProperty("total").ToString());
+    Console.WriteLine(result.GetProperty("summary").GetProperty("failed").ToString());
+    Console.WriteLine(result.GetProperty("summary").GetProperty("success").ToString());
+    Console.WriteLine(result.GetProperty("summary").GetProperty("inProgress").ToString());
+    Console.WriteLine(result.GetProperty("summary").GetProperty("notYetStarted").ToString());
+    Console.WriteLine(result.GetProperty("summary").GetProperty("cancelled").ToString());
+    Console.WriteLine(result.GetProperty("summary").GetProperty("totalCharacterCharged").ToString());
 }
 ]]></code></example>
     </member>
@@ -505,18 +505,18 @@ DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", c
 
 foreach (BinaryData item in client.GetTranslationsStatus())
 {
-    JsonElement element = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(element.GetProperty("id").ToString());
-    Console.WriteLine(element.GetProperty("createdDateTimeUtc").ToString());
-    Console.WriteLine(element.GetProperty("lastActionDateTimeUtc").ToString());
-    Console.WriteLine(element.GetProperty("status").ToString());
-    Console.WriteLine(element.GetProperty("summary").GetProperty("total").ToString());
-    Console.WriteLine(element.GetProperty("summary").GetProperty("failed").ToString());
-    Console.WriteLine(element.GetProperty("summary").GetProperty("success").ToString());
-    Console.WriteLine(element.GetProperty("summary").GetProperty("inProgress").ToString());
-    Console.WriteLine(element.GetProperty("summary").GetProperty("notYetStarted").ToString());
-    Console.WriteLine(element.GetProperty("summary").GetProperty("cancelled").ToString());
-    Console.WriteLine(element.GetProperty("summary").GetProperty("totalCharacterCharged").ToString());
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result.GetProperty("id").ToString());
+    Console.WriteLine(result.GetProperty("createdDateTimeUtc").ToString());
+    Console.WriteLine(result.GetProperty("lastActionDateTimeUtc").ToString());
+    Console.WriteLine(result.GetProperty("status").ToString());
+    Console.WriteLine(result.GetProperty("summary").GetProperty("total").ToString());
+    Console.WriteLine(result.GetProperty("summary").GetProperty("failed").ToString());
+    Console.WriteLine(result.GetProperty("summary").GetProperty("success").ToString());
+    Console.WriteLine(result.GetProperty("summary").GetProperty("inProgress").ToString());
+    Console.WriteLine(result.GetProperty("summary").GetProperty("notYetStarted").ToString());
+    Console.WriteLine(result.GetProperty("summary").GetProperty("cancelled").ToString());
+    Console.WriteLine(result.GetProperty("summary").GetProperty("totalCharacterCharged").ToString());
 }
 ]]></code>
 This sample shows how to call GetTranslationsStatus with all parameters and parse the result.
@@ -526,24 +526,24 @@ DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", c
 
 foreach (BinaryData item in client.GetTranslationsStatus(top: 1234, skip: 1234, maxpagesize: 1234, ids: new Guid[] { Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a") }, statuses: new string[] { "<statuses>" }, createdDateTimeUtcStart: DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"), createdDateTimeUtcEnd: DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"), orderBy: new string[] { "<orderBy>" }))
 {
-    JsonElement element = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(element.GetProperty("id").ToString());
-    Console.WriteLine(element.GetProperty("createdDateTimeUtc").ToString());
-    Console.WriteLine(element.GetProperty("lastActionDateTimeUtc").ToString());
-    Console.WriteLine(element.GetProperty("status").ToString());
-    Console.WriteLine(element.GetProperty("error").GetProperty("code").ToString());
-    Console.WriteLine(element.GetProperty("error").GetProperty("message").ToString());
-    Console.WriteLine(element.GetProperty("error").GetProperty("target").ToString());
-    Console.WriteLine(element.GetProperty("error").GetProperty("innerError").GetProperty("code").ToString());
-    Console.WriteLine(element.GetProperty("error").GetProperty("innerError").GetProperty("message").ToString());
-    Console.WriteLine(element.GetProperty("error").GetProperty("innerError").GetProperty("target").ToString());
-    Console.WriteLine(element.GetProperty("summary").GetProperty("total").ToString());
-    Console.WriteLine(element.GetProperty("summary").GetProperty("failed").ToString());
-    Console.WriteLine(element.GetProperty("summary").GetProperty("success").ToString());
-    Console.WriteLine(element.GetProperty("summary").GetProperty("inProgress").ToString());
-    Console.WriteLine(element.GetProperty("summary").GetProperty("notYetStarted").ToString());
-    Console.WriteLine(element.GetProperty("summary").GetProperty("cancelled").ToString());
-    Console.WriteLine(element.GetProperty("summary").GetProperty("totalCharacterCharged").ToString());
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result.GetProperty("id").ToString());
+    Console.WriteLine(result.GetProperty("createdDateTimeUtc").ToString());
+    Console.WriteLine(result.GetProperty("lastActionDateTimeUtc").ToString());
+    Console.WriteLine(result.GetProperty("status").ToString());
+    Console.WriteLine(result.GetProperty("error").GetProperty("code").ToString());
+    Console.WriteLine(result.GetProperty("error").GetProperty("message").ToString());
+    Console.WriteLine(result.GetProperty("error").GetProperty("target").ToString());
+    Console.WriteLine(result.GetProperty("error").GetProperty("innerError").GetProperty("code").ToString());
+    Console.WriteLine(result.GetProperty("error").GetProperty("innerError").GetProperty("message").ToString());
+    Console.WriteLine(result.GetProperty("error").GetProperty("innerError").GetProperty("target").ToString());
+    Console.WriteLine(result.GetProperty("summary").GetProperty("total").ToString());
+    Console.WriteLine(result.GetProperty("summary").GetProperty("failed").ToString());
+    Console.WriteLine(result.GetProperty("summary").GetProperty("success").ToString());
+    Console.WriteLine(result.GetProperty("summary").GetProperty("inProgress").ToString());
+    Console.WriteLine(result.GetProperty("summary").GetProperty("notYetStarted").ToString());
+    Console.WriteLine(result.GetProperty("summary").GetProperty("cancelled").ToString());
+    Console.WriteLine(result.GetProperty("summary").GetProperty("totalCharacterCharged").ToString());
 }
 ]]></code></example>
     </member>
@@ -556,14 +556,14 @@ DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", c
 
 await foreach (BinaryData item in client.GetDocumentsStatusAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a")))
 {
-    JsonElement element = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(element.GetProperty("sourcePath").ToString());
-    Console.WriteLine(element.GetProperty("createdDateTimeUtc").ToString());
-    Console.WriteLine(element.GetProperty("lastActionDateTimeUtc").ToString());
-    Console.WriteLine(element.GetProperty("status").ToString());
-    Console.WriteLine(element.GetProperty("to").ToString());
-    Console.WriteLine(element.GetProperty("progress").ToString());
-    Console.WriteLine(element.GetProperty("id").ToString());
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result.GetProperty("sourcePath").ToString());
+    Console.WriteLine(result.GetProperty("createdDateTimeUtc").ToString());
+    Console.WriteLine(result.GetProperty("lastActionDateTimeUtc").ToString());
+    Console.WriteLine(result.GetProperty("status").ToString());
+    Console.WriteLine(result.GetProperty("to").ToString());
+    Console.WriteLine(result.GetProperty("progress").ToString());
+    Console.WriteLine(result.GetProperty("id").ToString());
 }
 ]]></code>
 This sample shows how to call GetDocumentsStatusAsync with all parameters and parse the result.
@@ -573,22 +573,22 @@ DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", c
 
 await foreach (BinaryData item in client.GetDocumentsStatusAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), top: 1234, skip: 1234, maxpagesize: 1234, ids: new Guid[] { Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a") }, statuses: new string[] { "<statuses>" }, createdDateTimeUtcStart: DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"), createdDateTimeUtcEnd: DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"), orderBy: new string[] { "<orderBy>" }))
 {
-    JsonElement element = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(element.GetProperty("path").ToString());
-    Console.WriteLine(element.GetProperty("sourcePath").ToString());
-    Console.WriteLine(element.GetProperty("createdDateTimeUtc").ToString());
-    Console.WriteLine(element.GetProperty("lastActionDateTimeUtc").ToString());
-    Console.WriteLine(element.GetProperty("status").ToString());
-    Console.WriteLine(element.GetProperty("to").ToString());
-    Console.WriteLine(element.GetProperty("error").GetProperty("code").ToString());
-    Console.WriteLine(element.GetProperty("error").GetProperty("message").ToString());
-    Console.WriteLine(element.GetProperty("error").GetProperty("target").ToString());
-    Console.WriteLine(element.GetProperty("error").GetProperty("innerError").GetProperty("code").ToString());
-    Console.WriteLine(element.GetProperty("error").GetProperty("innerError").GetProperty("message").ToString());
-    Console.WriteLine(element.GetProperty("error").GetProperty("innerError").GetProperty("target").ToString());
-    Console.WriteLine(element.GetProperty("progress").ToString());
-    Console.WriteLine(element.GetProperty("id").ToString());
-    Console.WriteLine(element.GetProperty("characterCharged").ToString());
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result.GetProperty("path").ToString());
+    Console.WriteLine(result.GetProperty("sourcePath").ToString());
+    Console.WriteLine(result.GetProperty("createdDateTimeUtc").ToString());
+    Console.WriteLine(result.GetProperty("lastActionDateTimeUtc").ToString());
+    Console.WriteLine(result.GetProperty("status").ToString());
+    Console.WriteLine(result.GetProperty("to").ToString());
+    Console.WriteLine(result.GetProperty("error").GetProperty("code").ToString());
+    Console.WriteLine(result.GetProperty("error").GetProperty("message").ToString());
+    Console.WriteLine(result.GetProperty("error").GetProperty("target").ToString());
+    Console.WriteLine(result.GetProperty("error").GetProperty("innerError").GetProperty("code").ToString());
+    Console.WriteLine(result.GetProperty("error").GetProperty("innerError").GetProperty("message").ToString());
+    Console.WriteLine(result.GetProperty("error").GetProperty("innerError").GetProperty("target").ToString());
+    Console.WriteLine(result.GetProperty("progress").ToString());
+    Console.WriteLine(result.GetProperty("id").ToString());
+    Console.WriteLine(result.GetProperty("characterCharged").ToString());
 }
 ]]></code></example>
     </member>
@@ -601,14 +601,14 @@ DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", c
 
 foreach (BinaryData item in client.GetDocumentsStatus(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a")))
 {
-    JsonElement element = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(element.GetProperty("sourcePath").ToString());
-    Console.WriteLine(element.GetProperty("createdDateTimeUtc").ToString());
-    Console.WriteLine(element.GetProperty("lastActionDateTimeUtc").ToString());
-    Console.WriteLine(element.GetProperty("status").ToString());
-    Console.WriteLine(element.GetProperty("to").ToString());
-    Console.WriteLine(element.GetProperty("progress").ToString());
-    Console.WriteLine(element.GetProperty("id").ToString());
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result.GetProperty("sourcePath").ToString());
+    Console.WriteLine(result.GetProperty("createdDateTimeUtc").ToString());
+    Console.WriteLine(result.GetProperty("lastActionDateTimeUtc").ToString());
+    Console.WriteLine(result.GetProperty("status").ToString());
+    Console.WriteLine(result.GetProperty("to").ToString());
+    Console.WriteLine(result.GetProperty("progress").ToString());
+    Console.WriteLine(result.GetProperty("id").ToString());
 }
 ]]></code>
 This sample shows how to call GetDocumentsStatus with all parameters and parse the result.
@@ -618,22 +618,22 @@ DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", c
 
 foreach (BinaryData item in client.GetDocumentsStatus(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), top: 1234, skip: 1234, maxpagesize: 1234, ids: new Guid[] { Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a") }, statuses: new string[] { "<statuses>" }, createdDateTimeUtcStart: DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"), createdDateTimeUtcEnd: DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"), orderBy: new string[] { "<orderBy>" }))
 {
-    JsonElement element = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(element.GetProperty("path").ToString());
-    Console.WriteLine(element.GetProperty("sourcePath").ToString());
-    Console.WriteLine(element.GetProperty("createdDateTimeUtc").ToString());
-    Console.WriteLine(element.GetProperty("lastActionDateTimeUtc").ToString());
-    Console.WriteLine(element.GetProperty("status").ToString());
-    Console.WriteLine(element.GetProperty("to").ToString());
-    Console.WriteLine(element.GetProperty("error").GetProperty("code").ToString());
-    Console.WriteLine(element.GetProperty("error").GetProperty("message").ToString());
-    Console.WriteLine(element.GetProperty("error").GetProperty("target").ToString());
-    Console.WriteLine(element.GetProperty("error").GetProperty("innerError").GetProperty("code").ToString());
-    Console.WriteLine(element.GetProperty("error").GetProperty("innerError").GetProperty("message").ToString());
-    Console.WriteLine(element.GetProperty("error").GetProperty("innerError").GetProperty("target").ToString());
-    Console.WriteLine(element.GetProperty("progress").ToString());
-    Console.WriteLine(element.GetProperty("id").ToString());
-    Console.WriteLine(element.GetProperty("characterCharged").ToString());
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result.GetProperty("path").ToString());
+    Console.WriteLine(result.GetProperty("sourcePath").ToString());
+    Console.WriteLine(result.GetProperty("createdDateTimeUtc").ToString());
+    Console.WriteLine(result.GetProperty("lastActionDateTimeUtc").ToString());
+    Console.WriteLine(result.GetProperty("status").ToString());
+    Console.WriteLine(result.GetProperty("to").ToString());
+    Console.WriteLine(result.GetProperty("error").GetProperty("code").ToString());
+    Console.WriteLine(result.GetProperty("error").GetProperty("message").ToString());
+    Console.WriteLine(result.GetProperty("error").GetProperty("target").ToString());
+    Console.WriteLine(result.GetProperty("error").GetProperty("innerError").GetProperty("code").ToString());
+    Console.WriteLine(result.GetProperty("error").GetProperty("innerError").GetProperty("message").ToString());
+    Console.WriteLine(result.GetProperty("error").GetProperty("innerError").GetProperty("target").ToString());
+    Console.WriteLine(result.GetProperty("progress").ToString());
+    Console.WriteLine(result.GetProperty("id").ToString());
+    Console.WriteLine(result.GetProperty("characterCharged").ToString());
 }
 ]]></code></example>
     </member>

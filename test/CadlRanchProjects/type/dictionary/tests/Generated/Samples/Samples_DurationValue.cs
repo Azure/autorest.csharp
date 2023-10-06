@@ -28,8 +28,8 @@ namespace _Type._Dictionary.Samples
 
             Response response = client.GetDurationValue(null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.GetProperty("<key>").ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("<key>").ToString());
         }
 
         [Test]
@@ -40,8 +40,8 @@ namespace _Type._Dictionary.Samples
 
             Response response = await client.GetDurationValueAsync(null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.GetProperty("<key>").ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("<key>").ToString());
         }
 
         [Test]
@@ -70,8 +70,8 @@ namespace _Type._Dictionary.Samples
 
             Response response = client.GetDurationValue(null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.GetProperty("<key>").ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("<key>").ToString());
         }
 
         [Test]
@@ -82,8 +82,8 @@ namespace _Type._Dictionary.Samples
 
             Response response = await client.GetDurationValueAsync(null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.GetProperty("<key>").ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("<key>").ToString());
         }
 
         [Test]

@@ -455,8 +455,8 @@ UnionClient client = new UnionClient();
 
 Response response = await client.ReceiveStringAsync(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("simpleUnion").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("simpleUnion").ToString());
 ]]></code>
 This sample shows how to call ReceiveStringAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -464,8 +464,8 @@ UnionClient client = new UnionClient();
 
 Response response = await client.ReceiveStringAsync(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("simpleUnion").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("simpleUnion").ToString());
 ]]></code></example>
     </member>
     <member name="ReceiveString(RequestContext)">
@@ -476,8 +476,8 @@ UnionClient client = new UnionClient();
 
 Response response = client.ReceiveString(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("simpleUnion").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("simpleUnion").ToString());
 ]]></code>
 This sample shows how to call ReceiveString with all parameters and parse the result.
 <code><![CDATA[
@@ -485,8 +485,8 @@ UnionClient client = new UnionClient();
 
 Response response = client.ReceiveString(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("simpleUnion").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("simpleUnion").ToString());
 ]]></code></example>
     </member>
     <member name="ReceiveIntArrayAsync(CancellationToken)">
@@ -527,8 +527,8 @@ UnionClient client = new UnionClient();
 
 Response response = await client.ReceiveIntArrayAsync(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("simpleUnion").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("simpleUnion").ToString());
 ]]></code>
 This sample shows how to call ReceiveIntArrayAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -536,8 +536,8 @@ UnionClient client = new UnionClient();
 
 Response response = await client.ReceiveIntArrayAsync(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("simpleUnion").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("simpleUnion").ToString());
 ]]></code></example>
     </member>
     <member name="ReceiveIntArray(RequestContext)">
@@ -548,8 +548,8 @@ UnionClient client = new UnionClient();
 
 Response response = client.ReceiveIntArray(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("simpleUnion").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("simpleUnion").ToString());
 ]]></code>
 This sample shows how to call ReceiveIntArray with all parameters and parse the result.
 <code><![CDATA[
@@ -557,8 +557,8 @@ UnionClient client = new UnionClient();
 
 Response response = client.ReceiveIntArray(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("simpleUnion").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("simpleUnion").ToString());
 ]]></code></example>
     </member>
     <member name="ReceiveFirstNamedUnionValueAsync(CancellationToken)">
@@ -599,8 +599,8 @@ UnionClient client = new UnionClient();
 
 Response response = await client.ReceiveFirstNamedUnionValueAsync(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("namedUnion").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("namedUnion").ToString());
 ]]></code>
 This sample shows how to call ReceiveFirstNamedUnionValueAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -608,8 +608,8 @@ UnionClient client = new UnionClient();
 
 Response response = await client.ReceiveFirstNamedUnionValueAsync(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("namedUnion").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("namedUnion").ToString());
 ]]></code></example>
     </member>
     <member name="ReceiveFirstNamedUnionValue(RequestContext)">
@@ -620,8 +620,8 @@ UnionClient client = new UnionClient();
 
 Response response = client.ReceiveFirstNamedUnionValue(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("namedUnion").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("namedUnion").ToString());
 ]]></code>
 This sample shows how to call ReceiveFirstNamedUnionValue with all parameters and parse the result.
 <code><![CDATA[
@@ -629,8 +629,8 @@ UnionClient client = new UnionClient();
 
 Response response = client.ReceiveFirstNamedUnionValue(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("namedUnion").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("namedUnion").ToString());
 ]]></code></example>
     </member>
     <member name="ReceiveSecondNamedUnionValueAsync(CancellationToken)">
@@ -671,8 +671,8 @@ UnionClient client = new UnionClient();
 
 Response response = await client.ReceiveSecondNamedUnionValueAsync(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("namedUnion").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("namedUnion").ToString());
 ]]></code>
 This sample shows how to call ReceiveSecondNamedUnionValueAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -680,8 +680,8 @@ UnionClient client = new UnionClient();
 
 Response response = await client.ReceiveSecondNamedUnionValueAsync(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("namedUnion").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("namedUnion").ToString());
 ]]></code></example>
     </member>
     <member name="ReceiveSecondNamedUnionValue(RequestContext)">
@@ -692,8 +692,8 @@ UnionClient client = new UnionClient();
 
 Response response = client.ReceiveSecondNamedUnionValue(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("namedUnion").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("namedUnion").ToString());
 ]]></code>
 This sample shows how to call ReceiveSecondNamedUnionValue with all parameters and parse the result.
 <code><![CDATA[
@@ -701,8 +701,8 @@ UnionClient client = new UnionClient();
 
 Response response = client.ReceiveSecondNamedUnionValue(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("namedUnion").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("namedUnion").ToString());
 ]]></code></example>
     </member>
   </members>

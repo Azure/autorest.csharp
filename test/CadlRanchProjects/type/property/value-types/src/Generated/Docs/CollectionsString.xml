@@ -39,8 +39,8 @@ CollectionsString client = new ValueTypesClient().GetCollectionsStringClient(api
 
 Response response = await client.GetCollectionsStringAsync(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("property")[0].ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("property")[0].ToString());
 ]]></code>
 This sample shows how to call GetCollectionsStringAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -48,8 +48,8 @@ CollectionsString client = new ValueTypesClient().GetCollectionsStringClient(api
 
 Response response = await client.GetCollectionsStringAsync(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("property")[0].ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("property")[0].ToString());
 ]]></code></example>
     </member>
     <member name="GetCollectionsString(RequestContext)">
@@ -60,8 +60,8 @@ CollectionsString client = new ValueTypesClient().GetCollectionsStringClient(api
 
 Response response = client.GetCollectionsString(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("property")[0].ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("property")[0].ToString());
 ]]></code>
 This sample shows how to call GetCollectionsString with all parameters and parse the result.
 <code><![CDATA[
@@ -69,8 +69,8 @@ CollectionsString client = new ValueTypesClient().GetCollectionsStringClient(api
 
 Response response = client.GetCollectionsString(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("property")[0].ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("property")[0].ToString());
 ]]></code></example>
     </member>
     <member name="PutAsync(CollectionsStringProperty,CancellationToken)">

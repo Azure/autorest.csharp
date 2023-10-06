@@ -26,8 +26,8 @@ namespace Payload.ContentNegotiation.Samples
 
             Response response = client.GetAvatarAsPng(null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -38,8 +38,8 @@ namespace Payload.ContentNegotiation.Samples
 
             Response response = await client.GetAvatarAsPngAsync(null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -68,8 +68,8 @@ namespace Payload.ContentNegotiation.Samples
 
             Response response = client.GetAvatarAsPng(null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -80,8 +80,8 @@ namespace Payload.ContentNegotiation.Samples
 
             Response response = await client.GetAvatarAsPngAsync(null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -110,8 +110,8 @@ namespace Payload.ContentNegotiation.Samples
 
             Response response = client.GetAvatarAsJson(null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.GetProperty("content").ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("content").ToString());
         }
 
         [Test]
@@ -122,8 +122,8 @@ namespace Payload.ContentNegotiation.Samples
 
             Response response = await client.GetAvatarAsJsonAsync(null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.GetProperty("content").ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("content").ToString());
         }
 
         [Test]
@@ -152,8 +152,8 @@ namespace Payload.ContentNegotiation.Samples
 
             Response response = client.GetAvatarAsJson(null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.GetProperty("content").ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("content").ToString());
         }
 
         [Test]
@@ -164,8 +164,8 @@ namespace Payload.ContentNegotiation.Samples
 
             Response response = await client.GetAvatarAsJsonAsync(null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.GetProperty("content").ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("content").ToString());
         }
 
         [Test]

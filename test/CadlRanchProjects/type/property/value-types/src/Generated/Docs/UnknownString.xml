@@ -39,8 +39,8 @@ UnknownString client = new ValueTypesClient().GetUnknownStringClient(apiVersion:
 
 Response response = await client.GetUnknownStringAsync(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("property").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("property").ToString());
 ]]></code>
 This sample shows how to call GetUnknownStringAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -48,8 +48,8 @@ UnknownString client = new ValueTypesClient().GetUnknownStringClient(apiVersion:
 
 Response response = await client.GetUnknownStringAsync(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("property").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("property").ToString());
 ]]></code></example>
     </member>
     <member name="GetUnknownString(RequestContext)">
@@ -60,8 +60,8 @@ UnknownString client = new ValueTypesClient().GetUnknownStringClient(apiVersion:
 
 Response response = client.GetUnknownString(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("property").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("property").ToString());
 ]]></code>
 This sample shows how to call GetUnknownString with all parameters and parse the result.
 <code><![CDATA[
@@ -69,8 +69,8 @@ UnknownString client = new ValueTypesClient().GetUnknownStringClient(apiVersion:
 
 Response response = client.GetUnknownString(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("property").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("property").ToString());
 ]]></code></example>
     </member>
     <member name="PutAsync(UnknownStringProperty,CancellationToken)">

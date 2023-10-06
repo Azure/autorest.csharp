@@ -135,10 +135,10 @@ namespace _Type.Model.Inheritance.NotDiscriminated.Samples
 
             Response response = client.GetValid(null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.GetProperty("smart").ToString());
-            Console.WriteLine(element.GetProperty("age").ToString());
-            Console.WriteLine(element.GetProperty("name").ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("smart").ToString());
+            Console.WriteLine(result.GetProperty("age").ToString());
+            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]
@@ -149,10 +149,10 @@ namespace _Type.Model.Inheritance.NotDiscriminated.Samples
 
             Response response = await client.GetValidAsync(null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.GetProperty("smart").ToString());
-            Console.WriteLine(element.GetProperty("age").ToString());
-            Console.WriteLine(element.GetProperty("name").ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("smart").ToString());
+            Console.WriteLine(result.GetProperty("age").ToString());
+            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]
@@ -181,10 +181,10 @@ namespace _Type.Model.Inheritance.NotDiscriminated.Samples
 
             Response response = client.GetValid(null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.GetProperty("smart").ToString());
-            Console.WriteLine(element.GetProperty("age").ToString());
-            Console.WriteLine(element.GetProperty("name").ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("smart").ToString());
+            Console.WriteLine(result.GetProperty("age").ToString());
+            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]
@@ -195,10 +195,10 @@ namespace _Type.Model.Inheritance.NotDiscriminated.Samples
 
             Response response = await client.GetValidAsync(null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.GetProperty("smart").ToString());
-            Console.WriteLine(element.GetProperty("age").ToString());
-            Console.WriteLine(element.GetProperty("name").ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("smart").ToString());
+            Console.WriteLine(result.GetProperty("age").ToString());
+            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]
@@ -233,10 +233,10 @@ namespace _Type.Model.Inheritance.NotDiscriminated.Samples
             });
             Response response = client.PutValid(content);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.GetProperty("smart").ToString());
-            Console.WriteLine(element.GetProperty("age").ToString());
-            Console.WriteLine(element.GetProperty("name").ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("smart").ToString());
+            Console.WriteLine(result.GetProperty("age").ToString());
+            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]
@@ -253,10 +253,10 @@ namespace _Type.Model.Inheritance.NotDiscriminated.Samples
             });
             Response response = await client.PutValidAsync(content);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.GetProperty("smart").ToString());
-            Console.WriteLine(element.GetProperty("age").ToString());
-            Console.WriteLine(element.GetProperty("name").ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("smart").ToString());
+            Console.WriteLine(result.GetProperty("age").ToString());
+            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]
@@ -293,10 +293,10 @@ namespace _Type.Model.Inheritance.NotDiscriminated.Samples
             });
             Response response = client.PutValid(content);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.GetProperty("smart").ToString());
-            Console.WriteLine(element.GetProperty("age").ToString());
-            Console.WriteLine(element.GetProperty("name").ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("smart").ToString());
+            Console.WriteLine(result.GetProperty("age").ToString());
+            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]
@@ -313,10 +313,10 @@ namespace _Type.Model.Inheritance.NotDiscriminated.Samples
             });
             Response response = await client.PutValidAsync(content);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.GetProperty("smart").ToString());
-            Console.WriteLine(element.GetProperty("age").ToString());
-            Console.WriteLine(element.GetProperty("name").ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("smart").ToString());
+            Console.WriteLine(result.GetProperty("age").ToString());
+            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]

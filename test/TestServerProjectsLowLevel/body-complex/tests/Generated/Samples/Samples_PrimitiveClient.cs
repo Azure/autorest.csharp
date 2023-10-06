@@ -28,8 +28,8 @@ namespace body_complex_LowLevel.Samples
 
             Response response = client.GetInt(null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -41,8 +41,8 @@ namespace body_complex_LowLevel.Samples
 
             Response response = await client.GetIntAsync(null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -54,9 +54,9 @@ namespace body_complex_LowLevel.Samples
 
             Response response = client.GetInt(null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.GetProperty("field1").ToString());
-            Console.WriteLine(element.GetProperty("field2").ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("field1").ToString());
+            Console.WriteLine(result.GetProperty("field2").ToString());
         }
 
         [Test]
@@ -68,9 +68,9 @@ namespace body_complex_LowLevel.Samples
 
             Response response = await client.GetIntAsync(null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.GetProperty("field1").ToString());
-            Console.WriteLine(element.GetProperty("field2").ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("field1").ToString());
+            Console.WriteLine(result.GetProperty("field2").ToString());
         }
 
         [Test]
@@ -142,8 +142,8 @@ namespace body_complex_LowLevel.Samples
 
             Response response = client.GetLong(null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -155,8 +155,8 @@ namespace body_complex_LowLevel.Samples
 
             Response response = await client.GetLongAsync(null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -168,9 +168,9 @@ namespace body_complex_LowLevel.Samples
 
             Response response = client.GetLong(null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.GetProperty("field1").ToString());
-            Console.WriteLine(element.GetProperty("field2").ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("field1").ToString());
+            Console.WriteLine(result.GetProperty("field2").ToString());
         }
 
         [Test]
@@ -182,9 +182,9 @@ namespace body_complex_LowLevel.Samples
 
             Response response = await client.GetLongAsync(null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.GetProperty("field1").ToString());
-            Console.WriteLine(element.GetProperty("field2").ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("field1").ToString());
+            Console.WriteLine(result.GetProperty("field2").ToString());
         }
 
         [Test]
@@ -256,8 +256,8 @@ namespace body_complex_LowLevel.Samples
 
             Response response = client.GetFloat(null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -269,8 +269,8 @@ namespace body_complex_LowLevel.Samples
 
             Response response = await client.GetFloatAsync(null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -282,9 +282,9 @@ namespace body_complex_LowLevel.Samples
 
             Response response = client.GetFloat(null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.GetProperty("field1").ToString());
-            Console.WriteLine(element.GetProperty("field2").ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("field1").ToString());
+            Console.WriteLine(result.GetProperty("field2").ToString());
         }
 
         [Test]
@@ -296,9 +296,9 @@ namespace body_complex_LowLevel.Samples
 
             Response response = await client.GetFloatAsync(null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.GetProperty("field1").ToString());
-            Console.WriteLine(element.GetProperty("field2").ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("field1").ToString());
+            Console.WriteLine(result.GetProperty("field2").ToString());
         }
 
         [Test]
@@ -370,8 +370,8 @@ namespace body_complex_LowLevel.Samples
 
             Response response = client.GetDouble(null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -383,8 +383,8 @@ namespace body_complex_LowLevel.Samples
 
             Response response = await client.GetDoubleAsync(null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -396,9 +396,9 @@ namespace body_complex_LowLevel.Samples
 
             Response response = client.GetDouble(null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.GetProperty("field1").ToString());
-            Console.WriteLine(element.GetProperty("field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose").ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("field1").ToString());
+            Console.WriteLine(result.GetProperty("field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose").ToString());
         }
 
         [Test]
@@ -410,9 +410,9 @@ namespace body_complex_LowLevel.Samples
 
             Response response = await client.GetDoubleAsync(null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.GetProperty("field1").ToString());
-            Console.WriteLine(element.GetProperty("field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose").ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("field1").ToString());
+            Console.WriteLine(result.GetProperty("field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose").ToString());
         }
 
         [Test]
@@ -484,8 +484,8 @@ namespace body_complex_LowLevel.Samples
 
             Response response = client.GetBool(null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -497,8 +497,8 @@ namespace body_complex_LowLevel.Samples
 
             Response response = await client.GetBoolAsync(null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -510,9 +510,9 @@ namespace body_complex_LowLevel.Samples
 
             Response response = client.GetBool(null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.GetProperty("field_true").ToString());
-            Console.WriteLine(element.GetProperty("field_false").ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("field_true").ToString());
+            Console.WriteLine(result.GetProperty("field_false").ToString());
         }
 
         [Test]
@@ -524,9 +524,9 @@ namespace body_complex_LowLevel.Samples
 
             Response response = await client.GetBoolAsync(null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.GetProperty("field_true").ToString());
-            Console.WriteLine(element.GetProperty("field_false").ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("field_true").ToString());
+            Console.WriteLine(result.GetProperty("field_false").ToString());
         }
 
         [Test]
@@ -598,8 +598,8 @@ namespace body_complex_LowLevel.Samples
 
             Response response = client.GetString(null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -611,8 +611,8 @@ namespace body_complex_LowLevel.Samples
 
             Response response = await client.GetStringAsync(null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -624,10 +624,10 @@ namespace body_complex_LowLevel.Samples
 
             Response response = client.GetString(null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.GetProperty("field").ToString());
-            Console.WriteLine(element.GetProperty("empty").ToString());
-            Console.WriteLine(element.GetProperty("null").ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("field").ToString());
+            Console.WriteLine(result.GetProperty("empty").ToString());
+            Console.WriteLine(result.GetProperty("null").ToString());
         }
 
         [Test]
@@ -639,10 +639,10 @@ namespace body_complex_LowLevel.Samples
 
             Response response = await client.GetStringAsync(null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.GetProperty("field").ToString());
-            Console.WriteLine(element.GetProperty("empty").ToString());
-            Console.WriteLine(element.GetProperty("null").ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("field").ToString());
+            Console.WriteLine(result.GetProperty("empty").ToString());
+            Console.WriteLine(result.GetProperty("null").ToString());
         }
 
         [Test]
@@ -716,8 +716,8 @@ namespace body_complex_LowLevel.Samples
 
             Response response = client.GetDate(null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -729,8 +729,8 @@ namespace body_complex_LowLevel.Samples
 
             Response response = await client.GetDateAsync(null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -742,9 +742,9 @@ namespace body_complex_LowLevel.Samples
 
             Response response = client.GetDate(null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.GetProperty("field").ToString());
-            Console.WriteLine(element.GetProperty("leap").ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("field").ToString());
+            Console.WriteLine(result.GetProperty("leap").ToString());
         }
 
         [Test]
@@ -756,9 +756,9 @@ namespace body_complex_LowLevel.Samples
 
             Response response = await client.GetDateAsync(null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.GetProperty("field").ToString());
-            Console.WriteLine(element.GetProperty("leap").ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("field").ToString());
+            Console.WriteLine(result.GetProperty("leap").ToString());
         }
 
         [Test]
@@ -830,8 +830,8 @@ namespace body_complex_LowLevel.Samples
 
             Response response = client.GetDateTime(null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -843,8 +843,8 @@ namespace body_complex_LowLevel.Samples
 
             Response response = await client.GetDateTimeAsync(null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -856,9 +856,9 @@ namespace body_complex_LowLevel.Samples
 
             Response response = client.GetDateTime(null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.GetProperty("field").ToString());
-            Console.WriteLine(element.GetProperty("now").ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("field").ToString());
+            Console.WriteLine(result.GetProperty("now").ToString());
         }
 
         [Test]
@@ -870,9 +870,9 @@ namespace body_complex_LowLevel.Samples
 
             Response response = await client.GetDateTimeAsync(null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.GetProperty("field").ToString());
-            Console.WriteLine(element.GetProperty("now").ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("field").ToString());
+            Console.WriteLine(result.GetProperty("now").ToString());
         }
 
         [Test]
@@ -944,8 +944,8 @@ namespace body_complex_LowLevel.Samples
 
             Response response = client.GetDateTimeRfc1123(null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -957,8 +957,8 @@ namespace body_complex_LowLevel.Samples
 
             Response response = await client.GetDateTimeRfc1123Async(null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -970,9 +970,9 @@ namespace body_complex_LowLevel.Samples
 
             Response response = client.GetDateTimeRfc1123(null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.GetProperty("field").ToString());
-            Console.WriteLine(element.GetProperty("now").ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("field").ToString());
+            Console.WriteLine(result.GetProperty("now").ToString());
         }
 
         [Test]
@@ -984,9 +984,9 @@ namespace body_complex_LowLevel.Samples
 
             Response response = await client.GetDateTimeRfc1123Async(null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.GetProperty("field").ToString());
-            Console.WriteLine(element.GetProperty("now").ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("field").ToString());
+            Console.WriteLine(result.GetProperty("now").ToString());
         }
 
         [Test]
@@ -1058,8 +1058,8 @@ namespace body_complex_LowLevel.Samples
 
             Response response = client.GetDuration(null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -1071,8 +1071,8 @@ namespace body_complex_LowLevel.Samples
 
             Response response = await client.GetDurationAsync(null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -1084,8 +1084,8 @@ namespace body_complex_LowLevel.Samples
 
             Response response = client.GetDuration(null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.GetProperty("field").ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("field").ToString());
         }
 
         [Test]
@@ -1097,8 +1097,8 @@ namespace body_complex_LowLevel.Samples
 
             Response response = await client.GetDurationAsync(null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.GetProperty("field").ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("field").ToString());
         }
 
         [Test]
@@ -1168,8 +1168,8 @@ namespace body_complex_LowLevel.Samples
 
             Response response = client.GetByte(null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -1181,8 +1181,8 @@ namespace body_complex_LowLevel.Samples
 
             Response response = await client.GetByteAsync(null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -1194,8 +1194,8 @@ namespace body_complex_LowLevel.Samples
 
             Response response = client.GetByte(null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.GetProperty("field").ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("field").ToString());
         }
 
         [Test]
@@ -1207,8 +1207,8 @@ namespace body_complex_LowLevel.Samples
 
             Response response = await client.GetByteAsync(null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.GetProperty("field").ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("field").ToString());
         }
 
         [Test]

@@ -27,8 +27,8 @@ namespace Parameters_LowLevel.Samples
 
             Response response = client.NoRequestBodyResponseBody(1234, default, null, null, null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -40,8 +40,8 @@ namespace Parameters_LowLevel.Samples
 
             Response response = await client.NoRequestBodyResponseBodyAsync(1234, default, null, null, null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -53,8 +53,8 @@ namespace Parameters_LowLevel.Samples
 
             Response response = client.NoRequestBodyResponseBody(1234, default, 1234, "start", null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -66,8 +66,8 @@ namespace Parameters_LowLevel.Samples
 
             Response response = await client.NoRequestBodyResponseBodyAsync(1234, default, 1234, "start", null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -80,8 +80,8 @@ namespace Parameters_LowLevel.Samples
             RequestContent content = null;
             Response response = client.RequestBodyResponseBody(content);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -94,8 +94,8 @@ namespace Parameters_LowLevel.Samples
             RequestContent content = null;
             Response response = await client.RequestBodyResponseBodyAsync(content);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -112,9 +112,9 @@ namespace Parameters_LowLevel.Samples
             });
             Response response = client.RequestBodyResponseBody(content);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.GetProperty("Code").ToString());
-            Console.WriteLine(element.GetProperty("Status").ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("Code").ToString());
+            Console.WriteLine(result.GetProperty("Status").ToString());
         }
 
         [Test]
@@ -131,9 +131,9 @@ namespace Parameters_LowLevel.Samples
             });
             Response response = await client.RequestBodyResponseBodyAsync(content);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.GetProperty("Code").ToString());
-            Console.WriteLine(element.GetProperty("Status").ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("Code").ToString());
+            Console.WriteLine(result.GetProperty("Status").ToString());
         }
 
         [Test]
@@ -145,8 +145,8 @@ namespace Parameters_LowLevel.Samples
 
             Response response = client.DeleteNoRequestBodyResponseBody("<resourceName>", null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -158,8 +158,8 @@ namespace Parameters_LowLevel.Samples
 
             Response response = await client.DeleteNoRequestBodyResponseBodyAsync("<resourceName>", null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -171,8 +171,8 @@ namespace Parameters_LowLevel.Samples
 
             Response response = client.DeleteNoRequestBodyResponseBody("<resourceName>", null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -184,8 +184,8 @@ namespace Parameters_LowLevel.Samples
 
             Response response = await client.DeleteNoRequestBodyResponseBodyAsync("<resourceName>", null);
 
-            JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(element.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]

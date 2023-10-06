@@ -258,7 +258,7 @@ namespace AutoRest.CSharp.LowLevel.Output.Samples
 
             if (sample.ResultType != null)
             {
-                var resultVar = new VariableReference(typeof(JsonElement), "element");
+                var resultVar = new VariableReference(typeof(JsonElement), Configuration.ApiTypes.JsonElementVariableName);
                 yield return Declare(resultVar, new TypeReference(typeof(JsonDocument)).InvokeStatic(nameof(JsonDocument.Parse), streamVar).Property(nameof(JsonDocument.RootElement)));
 
                 var responseParsingStatements = new List<MethodBodyStatement>();

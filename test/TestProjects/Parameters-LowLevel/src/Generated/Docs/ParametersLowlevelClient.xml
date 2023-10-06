@@ -10,8 +10,8 @@ ParametersLowlevelClient client = new ParametersLowlevelClient(credential);
 
 Response response = await client.NoRequestBodyResponseBodyAsync(1234, default, null, null, null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call NoRequestBodyResponseBodyAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -20,8 +20,8 @@ ParametersLowlevelClient client = new ParametersLowlevelClient(credential);
 
 Response response = await client.NoRequestBodyResponseBodyAsync(1234, default, 1234, "start", null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
     <member name="NoRequestBodyResponseBody(int,int,int?,string,RequestContext)">
@@ -33,8 +33,8 @@ ParametersLowlevelClient client = new ParametersLowlevelClient(credential);
 
 Response response = client.NoRequestBodyResponseBody(1234, default, null, null, null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call NoRequestBodyResponseBody with all parameters and parse the result.
 <code><![CDATA[
@@ -43,8 +43,8 @@ ParametersLowlevelClient client = new ParametersLowlevelClient(credential);
 
 Response response = client.NoRequestBodyResponseBody(1234, default, 1234, "start", null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
     <member name="RequestBodyResponseBodyAsync(RequestContent,RequestContext)">
@@ -57,8 +57,8 @@ ParametersLowlevelClient client = new ParametersLowlevelClient(credential);
 RequestContent content = null;
 Response response = await client.RequestBodyResponseBodyAsync(content);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call RequestBodyResponseBodyAsync with all request content and parse the result.
 <code><![CDATA[
@@ -72,9 +72,9 @@ RequestContent content = RequestContent.Create(new
 });
 Response response = await client.RequestBodyResponseBodyAsync(content);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("Code").ToString());
-Console.WriteLine(element.GetProperty("Status").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("Code").ToString());
+Console.WriteLine(result.GetProperty("Status").ToString());
 ]]></code></example>
     </member>
     <member name="RequestBodyResponseBody(RequestContent,RequestContext)">
@@ -87,8 +87,8 @@ ParametersLowlevelClient client = new ParametersLowlevelClient(credential);
 RequestContent content = null;
 Response response = client.RequestBodyResponseBody(content);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call RequestBodyResponseBody with all request content and parse the result.
 <code><![CDATA[
@@ -102,9 +102,9 @@ RequestContent content = RequestContent.Create(new
 });
 Response response = client.RequestBodyResponseBody(content);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("Code").ToString());
-Console.WriteLine(element.GetProperty("Status").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("Code").ToString());
+Console.WriteLine(result.GetProperty("Status").ToString());
 ]]></code></example>
     </member>
     <member name="DeleteNoRequestBodyResponseBodyAsync(string,RequestContext)">
@@ -116,8 +116,8 @@ ParametersLowlevelClient client = new ParametersLowlevelClient(credential);
 
 Response response = await client.DeleteNoRequestBodyResponseBodyAsync("<resourceName>", null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call DeleteNoRequestBodyResponseBodyAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -126,8 +126,8 @@ ParametersLowlevelClient client = new ParametersLowlevelClient(credential);
 
 Response response = await client.DeleteNoRequestBodyResponseBodyAsync("<resourceName>", null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
     <member name="DeleteNoRequestBodyResponseBody(string,RequestContext)">
@@ -139,8 +139,8 @@ ParametersLowlevelClient client = new ParametersLowlevelClient(credential);
 
 Response response = client.DeleteNoRequestBodyResponseBody("<resourceName>", null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call DeleteNoRequestBodyResponseBody with all parameters and parse the result.
 <code><![CDATA[
@@ -149,8 +149,8 @@ ParametersLowlevelClient client = new ParametersLowlevelClient(credential);
 
 Response response = client.DeleteNoRequestBodyResponseBody("<resourceName>", null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
     <member name="NoRequestBodyNoResponseBodyAsync(RequestContext)">

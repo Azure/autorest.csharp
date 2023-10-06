@@ -39,8 +39,8 @@ String client = new OptionalClient().GetStringClient(apiVersion: "1.0.0");
 
 Response response = await client.GetAllAsync(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetAllAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -48,8 +48,8 @@ String client = new OptionalClient().GetStringClient(apiVersion: "1.0.0");
 
 Response response = await client.GetAllAsync(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("property").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("property").ToString());
 ]]></code></example>
     </member>
     <member name="GetAll(RequestContext)">
@@ -60,8 +60,8 @@ String client = new OptionalClient().GetStringClient(apiVersion: "1.0.0");
 
 Response response = client.GetAll(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetAll with all parameters and parse the result.
 <code><![CDATA[
@@ -69,8 +69,8 @@ String client = new OptionalClient().GetStringClient(apiVersion: "1.0.0");
 
 Response response = client.GetAll(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("property").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("property").ToString());
 ]]></code></example>
     </member>
     <member name="GetDefaultAsync(CancellationToken)">
@@ -111,8 +111,8 @@ String client = new OptionalClient().GetStringClient(apiVersion: "1.0.0");
 
 Response response = await client.GetDefaultAsync(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetDefaultAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -120,8 +120,8 @@ String client = new OptionalClient().GetStringClient(apiVersion: "1.0.0");
 
 Response response = await client.GetDefaultAsync(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("property").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("property").ToString());
 ]]></code></example>
     </member>
     <member name="GetDefault(RequestContext)">
@@ -132,8 +132,8 @@ String client = new OptionalClient().GetStringClient(apiVersion: "1.0.0");
 
 Response response = client.GetDefault(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetDefault with all parameters and parse the result.
 <code><![CDATA[
@@ -141,8 +141,8 @@ String client = new OptionalClient().GetStringClient(apiVersion: "1.0.0");
 
 Response response = client.GetDefault(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("property").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("property").ToString());
 ]]></code></example>
     </member>
     <member name="PutAllAsync(StringProperty,CancellationToken)">

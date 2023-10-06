@@ -39,9 +39,9 @@ EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
 Response response = await client.GetExtensibleModelAsync(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("kind").ToString());
-Console.WriteLine(element.GetProperty("weight").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("kind").ToString());
+Console.WriteLine(result.GetProperty("weight").ToString());
 ]]></code>
 This sample shows how to call GetExtensibleModelAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -49,9 +49,9 @@ EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
 Response response = await client.GetExtensibleModelAsync(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("kind").ToString());
-Console.WriteLine(element.GetProperty("weight").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("kind").ToString());
+Console.WriteLine(result.GetProperty("weight").ToString());
 ]]></code></example>
     </member>
     <member name="GetExtensibleModel(RequestContext)">
@@ -62,9 +62,9 @@ EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
 Response response = client.GetExtensibleModel(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("kind").ToString());
-Console.WriteLine(element.GetProperty("weight").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("kind").ToString());
+Console.WriteLine(result.GetProperty("weight").ToString());
 ]]></code>
 This sample shows how to call GetExtensibleModel with all parameters and parse the result.
 <code><![CDATA[
@@ -72,9 +72,9 @@ EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
 Response response = client.GetExtensibleModel(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("kind").ToString());
-Console.WriteLine(element.GetProperty("weight").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("kind").ToString());
+Console.WriteLine(result.GetProperty("weight").ToString());
 ]]></code></example>
     </member>
     <member name="PutExtensibleModelAsync(Dog,CancellationToken)">
@@ -207,9 +207,9 @@ EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
 Response response = await client.GetExtensibleModelMissingDiscriminatorAsync(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("kind").ToString());
-Console.WriteLine(element.GetProperty("weight").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("kind").ToString());
+Console.WriteLine(result.GetProperty("weight").ToString());
 ]]></code>
 This sample shows how to call GetExtensibleModelMissingDiscriminatorAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -217,9 +217,9 @@ EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
 Response response = await client.GetExtensibleModelMissingDiscriminatorAsync(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("kind").ToString());
-Console.WriteLine(element.GetProperty("weight").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("kind").ToString());
+Console.WriteLine(result.GetProperty("weight").ToString());
 ]]></code></example>
     </member>
     <member name="GetExtensibleModelMissingDiscriminator(RequestContext)">
@@ -230,9 +230,9 @@ EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
 Response response = client.GetExtensibleModelMissingDiscriminator(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("kind").ToString());
-Console.WriteLine(element.GetProperty("weight").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("kind").ToString());
+Console.WriteLine(result.GetProperty("weight").ToString());
 ]]></code>
 This sample shows how to call GetExtensibleModelMissingDiscriminator with all parameters and parse the result.
 <code><![CDATA[
@@ -240,9 +240,9 @@ EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
 Response response = client.GetExtensibleModelMissingDiscriminator(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("kind").ToString());
-Console.WriteLine(element.GetProperty("weight").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("kind").ToString());
+Console.WriteLine(result.GetProperty("weight").ToString());
 ]]></code></example>
     </member>
     <member name="GetExtensibleModelWrongDiscriminatorAsync(CancellationToken)">
@@ -283,9 +283,9 @@ EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
 Response response = await client.GetExtensibleModelWrongDiscriminatorAsync(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("kind").ToString());
-Console.WriteLine(element.GetProperty("weight").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("kind").ToString());
+Console.WriteLine(result.GetProperty("weight").ToString());
 ]]></code>
 This sample shows how to call GetExtensibleModelWrongDiscriminatorAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -293,9 +293,9 @@ EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
 Response response = await client.GetExtensibleModelWrongDiscriminatorAsync(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("kind").ToString());
-Console.WriteLine(element.GetProperty("weight").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("kind").ToString());
+Console.WriteLine(result.GetProperty("weight").ToString());
 ]]></code></example>
     </member>
     <member name="GetExtensibleModelWrongDiscriminator(RequestContext)">
@@ -306,9 +306,9 @@ EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
 Response response = client.GetExtensibleModelWrongDiscriminator(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("kind").ToString());
-Console.WriteLine(element.GetProperty("weight").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("kind").ToString());
+Console.WriteLine(result.GetProperty("weight").ToString());
 ]]></code>
 This sample shows how to call GetExtensibleModelWrongDiscriminator with all parameters and parse the result.
 <code><![CDATA[
@@ -316,9 +316,9 @@ EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
 Response response = client.GetExtensibleModelWrongDiscriminator(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("kind").ToString());
-Console.WriteLine(element.GetProperty("weight").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("kind").ToString());
+Console.WriteLine(result.GetProperty("weight").ToString());
 ]]></code></example>
     </member>
     <member name="GetFixedModelAsync(CancellationToken)">
@@ -359,9 +359,9 @@ EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
 Response response = await client.GetFixedModelAsync(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("kind").ToString());
-Console.WriteLine(element.GetProperty("length").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("kind").ToString());
+Console.WriteLine(result.GetProperty("length").ToString());
 ]]></code>
 This sample shows how to call GetFixedModelAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -369,9 +369,9 @@ EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
 Response response = await client.GetFixedModelAsync(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("kind").ToString());
-Console.WriteLine(element.GetProperty("length").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("kind").ToString());
+Console.WriteLine(result.GetProperty("length").ToString());
 ]]></code></example>
     </member>
     <member name="GetFixedModel(RequestContext)">
@@ -382,9 +382,9 @@ EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
 Response response = client.GetFixedModel(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("kind").ToString());
-Console.WriteLine(element.GetProperty("length").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("kind").ToString());
+Console.WriteLine(result.GetProperty("length").ToString());
 ]]></code>
 This sample shows how to call GetFixedModel with all parameters and parse the result.
 <code><![CDATA[
@@ -392,9 +392,9 @@ EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
 Response response = client.GetFixedModel(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("kind").ToString());
-Console.WriteLine(element.GetProperty("length").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("kind").ToString());
+Console.WriteLine(result.GetProperty("length").ToString());
 ]]></code></example>
     </member>
     <member name="PutFixedModelAsync(Snake,CancellationToken)">
@@ -527,9 +527,9 @@ EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
 Response response = await client.GetFixedModelMissingDiscriminatorAsync(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("kind").ToString());
-Console.WriteLine(element.GetProperty("length").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("kind").ToString());
+Console.WriteLine(result.GetProperty("length").ToString());
 ]]></code>
 This sample shows how to call GetFixedModelMissingDiscriminatorAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -537,9 +537,9 @@ EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
 Response response = await client.GetFixedModelMissingDiscriminatorAsync(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("kind").ToString());
-Console.WriteLine(element.GetProperty("length").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("kind").ToString());
+Console.WriteLine(result.GetProperty("length").ToString());
 ]]></code></example>
     </member>
     <member name="GetFixedModelMissingDiscriminator(RequestContext)">
@@ -550,9 +550,9 @@ EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
 Response response = client.GetFixedModelMissingDiscriminator(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("kind").ToString());
-Console.WriteLine(element.GetProperty("length").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("kind").ToString());
+Console.WriteLine(result.GetProperty("length").ToString());
 ]]></code>
 This sample shows how to call GetFixedModelMissingDiscriminator with all parameters and parse the result.
 <code><![CDATA[
@@ -560,9 +560,9 @@ EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
 Response response = client.GetFixedModelMissingDiscriminator(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("kind").ToString());
-Console.WriteLine(element.GetProperty("length").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("kind").ToString());
+Console.WriteLine(result.GetProperty("length").ToString());
 ]]></code></example>
     </member>
     <member name="GetFixedModelWrongDiscriminatorAsync(CancellationToken)">
@@ -603,9 +603,9 @@ EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
 Response response = await client.GetFixedModelWrongDiscriminatorAsync(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("kind").ToString());
-Console.WriteLine(element.GetProperty("length").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("kind").ToString());
+Console.WriteLine(result.GetProperty("length").ToString());
 ]]></code>
 This sample shows how to call GetFixedModelWrongDiscriminatorAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -613,9 +613,9 @@ EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
 Response response = await client.GetFixedModelWrongDiscriminatorAsync(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("kind").ToString());
-Console.WriteLine(element.GetProperty("length").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("kind").ToString());
+Console.WriteLine(result.GetProperty("length").ToString());
 ]]></code></example>
     </member>
     <member name="GetFixedModelWrongDiscriminator(RequestContext)">
@@ -626,9 +626,9 @@ EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
 Response response = client.GetFixedModelWrongDiscriminator(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("kind").ToString());
-Console.WriteLine(element.GetProperty("length").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("kind").ToString());
+Console.WriteLine(result.GetProperty("length").ToString());
 ]]></code>
 This sample shows how to call GetFixedModelWrongDiscriminator with all parameters and parse the result.
 <code><![CDATA[
@@ -636,9 +636,9 @@ EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
 Response response = client.GetFixedModelWrongDiscriminator(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("kind").ToString());
-Console.WriteLine(element.GetProperty("length").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("kind").ToString());
+Console.WriteLine(result.GetProperty("length").ToString());
 ]]></code></example>
     </member>
   </members>

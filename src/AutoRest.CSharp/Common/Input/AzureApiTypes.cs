@@ -104,5 +104,9 @@ namespace AutoRest.CSharp.Common.Input
 
         public override ValueExpression GetCreateFromStreamSampleExpression(ValueExpression freeFormObjectExpression)
             => new TypeReference(Configuration.ApiTypes.RequestContentType).InvokeStatic(Configuration.ApiTypes.RequestContentCreateName, freeFormObjectExpression);
+
+        public override string EndPointSampleValue => "<https://my-service.azure.com>";
+
+        public override string JsonElementVariableName => "result";
     }
 }

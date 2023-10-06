@@ -11,8 +11,8 @@ MediaTypesClient client = new MediaTypesClient(credential);
 RequestContent content = null;
 Response response = await client.AnalyzeBodyAsync(content, new ContentType("application/pdf"));
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call AnalyzeBodyAsync with all parameters and request content and parse the result.
 <code><![CDATA[
@@ -22,8 +22,8 @@ MediaTypesClient client = new MediaTypesClient(credential);
 RequestContent content = RequestContent.Create(File.OpenRead("<filePath>"));
 Response response = await client.AnalyzeBodyAsync(content, new ContentType("application/pdf"));
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
     <member name="AnalyzeBody(RequestContent,ContentType,RequestContext)">
@@ -36,8 +36,8 @@ MediaTypesClient client = new MediaTypesClient(credential);
 RequestContent content = null;
 Response response = client.AnalyzeBody(content, new ContentType("application/pdf"));
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call AnalyzeBody with all parameters and request content and parse the result.
 <code><![CDATA[
@@ -47,8 +47,8 @@ MediaTypesClient client = new MediaTypesClient(credential);
 RequestContent content = RequestContent.Create(File.OpenRead("<filePath>"));
 Response response = client.AnalyzeBody(content, new ContentType("application/pdf"));
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
     <member name="AnalyzeBodyNoAcceptHeaderAsync(RequestContent,ContentType,RequestContext)">
@@ -107,8 +107,8 @@ MediaTypesClient client = new MediaTypesClient(credential);
 RequestContent content = null;
 Response response = await client.ContentTypeWithEncodingAsync(content);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call ContentTypeWithEncodingAsync with all request content and parse the result.
 <code><![CDATA[
@@ -118,8 +118,8 @@ MediaTypesClient client = new MediaTypesClient(credential);
 RequestContent content = RequestContent.Create("<input>");
 Response response = await client.ContentTypeWithEncodingAsync(content);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
     <member name="ContentTypeWithEncoding(RequestContent,RequestContext)">
@@ -132,8 +132,8 @@ MediaTypesClient client = new MediaTypesClient(credential);
 RequestContent content = null;
 Response response = client.ContentTypeWithEncoding(content);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call ContentTypeWithEncoding with all request content and parse the result.
 <code><![CDATA[
@@ -143,8 +143,8 @@ MediaTypesClient client = new MediaTypesClient(credential);
 RequestContent content = RequestContent.Create("<input>");
 Response response = client.ContentTypeWithEncoding(content);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
     <member name="BinaryBodyWithTwoContentTypesAsync(RequestContent,ContentType,RequestContext)">
@@ -157,8 +157,8 @@ MediaTypesClient client = new MediaTypesClient(credential);
 RequestContent content = RequestContent.Create(File.OpenRead("<filePath>"));
 Response response = await client.BinaryBodyWithTwoContentTypesAsync(content, new ContentType("application/json"));
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call BinaryBodyWithTwoContentTypesAsync with all parameters and request content and parse the result.
 <code><![CDATA[
@@ -168,8 +168,8 @@ MediaTypesClient client = new MediaTypesClient(credential);
 RequestContent content = RequestContent.Create(File.OpenRead("<filePath>"));
 Response response = await client.BinaryBodyWithTwoContentTypesAsync(content, new ContentType("application/json"));
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
     <member name="BinaryBodyWithTwoContentTypes(RequestContent,ContentType,RequestContext)">
@@ -182,8 +182,8 @@ MediaTypesClient client = new MediaTypesClient(credential);
 RequestContent content = RequestContent.Create(File.OpenRead("<filePath>"));
 Response response = client.BinaryBodyWithTwoContentTypes(content, new ContentType("application/json"));
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call BinaryBodyWithTwoContentTypes with all parameters and request content and parse the result.
 <code><![CDATA[
@@ -193,8 +193,8 @@ MediaTypesClient client = new MediaTypesClient(credential);
 RequestContent content = RequestContent.Create(File.OpenRead("<filePath>"));
 Response response = client.BinaryBodyWithTwoContentTypes(content, new ContentType("application/json"));
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
     <member name="BinaryBodyWithThreeContentTypesAsync(RequestContent,ContentType,RequestContext)">
@@ -207,8 +207,8 @@ MediaTypesClient client = new MediaTypesClient(credential);
 RequestContent content = RequestContent.Create(File.OpenRead("<filePath>"));
 Response response = await client.BinaryBodyWithThreeContentTypesAsync(content, new ContentType("application/json"));
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call BinaryBodyWithThreeContentTypesAsync with all parameters and request content and parse the result.
 <code><![CDATA[
@@ -218,8 +218,8 @@ MediaTypesClient client = new MediaTypesClient(credential);
 RequestContent content = RequestContent.Create(File.OpenRead("<filePath>"));
 Response response = await client.BinaryBodyWithThreeContentTypesAsync(content, new ContentType("application/json"));
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
     <member name="BinaryBodyWithThreeContentTypes(RequestContent,ContentType,RequestContext)">
@@ -232,8 +232,8 @@ MediaTypesClient client = new MediaTypesClient(credential);
 RequestContent content = RequestContent.Create(File.OpenRead("<filePath>"));
 Response response = client.BinaryBodyWithThreeContentTypes(content, new ContentType("application/json"));
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call BinaryBodyWithThreeContentTypes with all parameters and request content and parse the result.
 <code><![CDATA[
@@ -243,8 +243,8 @@ MediaTypesClient client = new MediaTypesClient(credential);
 RequestContent content = RequestContent.Create(File.OpenRead("<filePath>"));
 Response response = client.BinaryBodyWithThreeContentTypes(content, new ContentType("application/json"));
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
     <member name="BodyThreeTypesAsync(RequestContent,ContentType,RequestContext)">
@@ -257,8 +257,8 @@ MediaTypesClient client = new MediaTypesClient(credential);
 RequestContent content = RequestContent.Create(File.OpenRead("<filePath>"));
 Response response = await client.BodyThreeTypesAsync(content, new ContentType("application/octet-stream"));
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call BodyThreeTypesAsync with all parameters and request content and parse the result.
 <code><![CDATA[
@@ -268,8 +268,8 @@ MediaTypesClient client = new MediaTypesClient(credential);
 RequestContent content = RequestContent.Create(File.OpenRead("<filePath>"));
 Response response = await client.BodyThreeTypesAsync(content, new ContentType("application/octet-stream"));
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
     <member name="BodyThreeTypes(RequestContent,ContentType,RequestContext)">
@@ -282,8 +282,8 @@ MediaTypesClient client = new MediaTypesClient(credential);
 RequestContent content = RequestContent.Create(File.OpenRead("<filePath>"));
 Response response = client.BodyThreeTypes(content, new ContentType("application/octet-stream"));
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call BodyThreeTypes with all parameters and request content and parse the result.
 <code><![CDATA[
@@ -293,8 +293,8 @@ MediaTypesClient client = new MediaTypesClient(credential);
 RequestContent content = RequestContent.Create(File.OpenRead("<filePath>"));
 Response response = client.BodyThreeTypes(content, new ContentType("application/octet-stream"));
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
     <member name="PutTextAndJsonBodyAsync(RequestContent,ContentType,RequestContext)">
@@ -307,8 +307,8 @@ MediaTypesClient client = new MediaTypesClient(credential);
 RequestContent content = RequestContent.Create("<message>");
 Response response = await client.PutTextAndJsonBodyAsync(content, new ContentType("application/json"));
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call PutTextAndJsonBodyAsync with all parameters and request content and parse the result.
 <code><![CDATA[
@@ -318,8 +318,8 @@ MediaTypesClient client = new MediaTypesClient(credential);
 RequestContent content = RequestContent.Create("<message>");
 Response response = await client.PutTextAndJsonBodyAsync(content, new ContentType("application/json"));
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
     <member name="PutTextAndJsonBody(RequestContent,ContentType,RequestContext)">
@@ -332,8 +332,8 @@ MediaTypesClient client = new MediaTypesClient(credential);
 RequestContent content = RequestContent.Create("<message>");
 Response response = client.PutTextAndJsonBody(content, new ContentType("application/json"));
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call PutTextAndJsonBody with all parameters and request content and parse the result.
 <code><![CDATA[
@@ -343,8 +343,8 @@ MediaTypesClient client = new MediaTypesClient(credential);
 RequestContent content = RequestContent.Create("<message>");
 Response response = client.PutTextAndJsonBody(content, new ContentType("application/json"));
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
   </members>

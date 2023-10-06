@@ -132,5 +132,9 @@ namespace AutoRest.CSharp.Common.Input
         public abstract Type JsonElementExtensionsType { get; }
 
         public abstract ValueExpression GetCreateFromStreamSampleExpression(ValueExpression freeFormObjectExpression);
+
+        public abstract string EndPointSampleValue { get; }
+
+        public abstract string JsonElementVariableName { get; }
     }
 }

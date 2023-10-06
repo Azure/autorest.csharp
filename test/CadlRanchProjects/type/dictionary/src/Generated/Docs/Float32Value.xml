@@ -39,8 +39,8 @@ Float32Value client = new DictionaryClient().GetFloat32ValueClient(apiVersion: "
 
 Response response = await client.GetFloat32ValueAsync(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("<key>").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("<key>").ToString());
 ]]></code>
 This sample shows how to call GetFloat32ValueAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -48,8 +48,8 @@ Float32Value client = new DictionaryClient().GetFloat32ValueClient(apiVersion: "
 
 Response response = await client.GetFloat32ValueAsync(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("<key>").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("<key>").ToString());
 ]]></code></example>
     </member>
     <member name="GetFloat32Value(RequestContext)">
@@ -60,8 +60,8 @@ Float32Value client = new DictionaryClient().GetFloat32ValueClient(apiVersion: "
 
 Response response = client.GetFloat32Value(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("<key>").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("<key>").ToString());
 ]]></code>
 This sample shows how to call GetFloat32Value with all parameters and parse the result.
 <code><![CDATA[
@@ -69,8 +69,8 @@ Float32Value client = new DictionaryClient().GetFloat32ValueClient(apiVersion: "
 
 Response response = client.GetFloat32Value(null);
 
-JsonElement element = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(element.GetProperty("<key>").ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("<key>").ToString());
 ]]></code></example>
     </member>
     <member name="PutAsync(IDictionary{string,float},CancellationToken)">
