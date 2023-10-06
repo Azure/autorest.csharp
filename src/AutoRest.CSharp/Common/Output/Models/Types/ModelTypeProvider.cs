@@ -217,7 +217,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             //get base public ctor params
             GetConstructorParameters(Fields.PublicConstructorParameters, out var fullParameterList, out var parametersToPassToBase, true);
 
-            FormattableString summary = $"Initializes a new instance of {_inputModel.Name}";
+            FormattableString summary = $"Initializes a new instance of {Declaration.Name}";
             var accessibility = IsAbstract
                 ? MethodSignatureModifiers.Protected
                 : _inputModelUsage.HasFlag(InputModelTypeUsage.Input)
@@ -402,7 +402,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             // Serialization uses field and property names that first need to verified for uniqueness
             // For that, FieldDeclaration instances must be written in the main partial class before JsonObjectSerialization is created for the serialization partial class
-            var properties = SerializationBuilder.GetPropertySerializations(this);
+            var properties = SerializationBuilder.GetPropertySerializations(this, _typeFactory);
             var additionalProperties = CreateAdditionalPropertySerialization();
             return new(Type, SerializationConstructor.Signature.Parameters, properties, additionalProperties, Discriminator, IncludeConverter);
         }
@@ -428,7 +428,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         protected override XmlObjectSerialization? EnsureXmlSerialization()
         {
-            return SerializationBuilder.BuildXmlObjectSerialization(_inputModelSerialization.Xml?.Name ?? _inputModel.Name, this);
+            return SerializationBuilder.BuildXmlObjectSerialization(_inputModelSerialization.Xml?.Name ?? _inputModel.Name, this, _typeFactory);
         }
 
         protected override IEnumerable<Method> BuildSerializationMethods()

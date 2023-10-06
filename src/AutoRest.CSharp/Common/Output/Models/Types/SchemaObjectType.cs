@@ -682,7 +682,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         protected override XmlObjectSerialization EnsureXmlSerialization()
         {
             var serializationName = ObjectSchema.Serialization?.Xml?.Name ?? ObjectSchema.Language.Default.Name;
-            return SerializationBuilder.BuildXmlObjectSerialization(serializationName, this);
+            return SerializationBuilder.BuildXmlObjectSerialization(serializationName, this, _typeFactory);
         }
 
         private ObjectType? BuildDefaultDerivedType()

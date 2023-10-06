@@ -22,7 +22,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                   isReadOnly: field.Modifiers.HasFlag(FieldModifiers.ReadOnly),
                   schemaProperty: null,
                   isRequired: field.IsRequired,
-                  valueType: inputModelProperty is null ? null : field.Type.WithNullable(inputModelProperty.Type.IsNullable),
+                  valueType: null,
                   inputModelProperty: inputModelProperty,
                   optionalViaNullability: field.OptionalViaNullability,
                   getterModifiers: field.GetterModifiers,
