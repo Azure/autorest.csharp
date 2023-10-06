@@ -109,9 +109,7 @@ namespace Azure.ResourceManager.Storage
             {
                 var response = await _immutabilityPolicyBlobContainersRestClient.GetImmutabilityPolicyAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Parent.Parent.Name, Id.Parent.Name, ifMatch, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                {
                     throw new RequestFailedException(response.GetRawResponse());
-                }
                 return Response.FromValue(new ImmutabilityPolicyResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -144,9 +142,7 @@ namespace Azure.ResourceManager.Storage
             {
                 var response = _immutabilityPolicyBlobContainersRestClient.GetImmutabilityPolicy(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Parent.Parent.Name, Id.Parent.Name, ifMatch, cancellationToken);
                 if (response.Value == null)
-                {
                     throw new RequestFailedException(response.GetRawResponse());
-                }
                 return Response.FromValue(new ImmutabilityPolicyResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)

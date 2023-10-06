@@ -161,9 +161,7 @@ namespace Azure.ResourceManager.Storage
             {
                 var response = await _blobServiceRestClient.GetServicePropertiesAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                {
                     throw new RequestFailedException(response.GetRawResponse());
-                }
                 return Response.FromValue(new BlobServiceResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -195,9 +193,7 @@ namespace Azure.ResourceManager.Storage
             {
                 var response = _blobServiceRestClient.GetServiceProperties(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, cancellationToken);
                 if (response.Value == null)
-                {
                     throw new RequestFailedException(response.GetRawResponse());
-                }
                 return Response.FromValue(new BlobServiceResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
