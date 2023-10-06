@@ -45,44 +45,48 @@ Console.WriteLine(response.Status);
     </member>
     <member name="Get300Async(RequestContext)">
       <example>
-This sample shows how to call Get300Async.
+This sample shows how to call Get300Async and parse the result.
 <code><![CDATA[
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
-Response response = await client.Get300Async();
+Response response = await client.Get300Async(null);
 
-Console.WriteLine(response.Status);
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result[0].ToString());
 ]]></code>
-This sample shows how to call Get300Async with all request content.
+This sample shows how to call Get300Async with all parameters and parse the result.
 <code><![CDATA[
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
-Response response = await client.Get300Async();
+Response response = await client.Get300Async(null);
 
-Console.WriteLine(response.Status);
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result[0].ToString());
 ]]></code></example>
     </member>
     <member name="Get300(RequestContext)">
       <example>
-This sample shows how to call Get300.
+This sample shows how to call Get300 and parse the result.
 <code><![CDATA[
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
-Response response = client.Get300();
+Response response = client.Get300(null);
 
-Console.WriteLine(response.Status);
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result[0].ToString());
 ]]></code>
-This sample shows how to call Get300 with all request content.
+This sample shows how to call Get300 with all parameters and parse the result.
 <code><![CDATA[
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
-Response response = client.Get300();
+Response response = client.Get300(null);
 
-Console.WriteLine(response.Status);
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result[0].ToString());
 ]]></code></example>
     </member>
     <member name="Head301Async(RequestContext)">
