@@ -95,7 +95,6 @@ namespace AutoRest.CSharp.Common.Output.Builders
             ConvenienceModifiers = GetAccessibility(Operation.Accessibility);
         }
 
-
         public RestClientOperationMethods Build()
         {
             var parameters = _parametersBuilder.BuildParameters();

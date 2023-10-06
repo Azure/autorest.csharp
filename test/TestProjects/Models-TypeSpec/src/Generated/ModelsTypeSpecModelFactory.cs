@@ -41,7 +41,11 @@ namespace ModelsTypeSpec.Models
         /// <param name="nonRequiredNullableString"> Optional nullable string. </param>
         /// <param name="requiredReadonlyInt"> Required readonly int. </param>
         /// <param name="nonRequiredReadonlyInt"> Optional readonly int. </param>
-        /// <param name="requiredModel"> Required model with discriminator. </param>
+        /// <param name="requiredModel">
+        /// Required model with discriminator
+        /// Please note <see cref="BaseModelWithDiscriminator"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
+        /// The available derived classes include <see cref="DerivedModelWithDiscriminatorA"/> and <see cref="DerivedModelWithDiscriminatorB"/>.
+        /// </param>
         /// <param name="requiredFixedStringEnum"> Required fixed string enum. </param>
         /// <param name="requiredFixedIntEnum"> Required fixed int enum. </param>
         /// <param name="requiredExtensibleEnum"> Required extensible enum. </param>

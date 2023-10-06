@@ -78,7 +78,8 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 .Select(p => new RequestPart(p.NameInRequest, GetValueForRequestPart(p.InputParameter!, p.OutputParameter!), null, p.SerializationFormat, p.InputParameter!.ArraySerializationDelimiter,
                     Explode: p.InputParameter.Explode,
                     Escape: !p.InputParameter.SkipUrlEncoding,
-                    SkipNullCheck: p.OutputParameter is {IsApiVersionParameter: true, IsOptionalInSignature: true, Initializer: not null}
+                    SkipNullCheck: p.OutputParameter is {IsApiVersionParameter: true, IsOptionalInSignature: true, Initializer: not null},
+                    CheckUndefinedCollection: true
                 ))
                 .ToList();
 
@@ -544,14 +545,23 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
             var value = requestPart.Value;
             var type = requestPart.Value.Type;
-            if (value is ConstantExpression || !type.IsNullable)
+            if (value is ConstantExpression)
             {
                 return addRequestPartStatement;
             }
 
-            return TypeFactory.IsCollectionType(type)
-                ? new IfElseStatement(And(NotEqual(value, Null), InvokeOptional.IsCollectionDefined(value)), addRequestPartStatement, null)
-                : new IfElseStatement(NotEqual(value, Null), addRequestPartStatement, null);
+            if (requestPart.CheckUndefinedCollection && TypeFactory.IsCollectionType(type))
+            {
+                return new IfElseStatement(And(NotEqual(value, Null), InvokeOptional.IsCollectionDefined(value)), addRequestPartStatement, null);
+            }
+
+            if (type.IsNullable)
+            {
+                return new IfElseStatement(NotEqual(value, Null), addRequestPartStatement, null);
+            }
+
+            return addRequestPartStatement;
+
         }
 
         private static ValueExpression ConvertToRequestPartType(ValueExpression value, CSharpType fromType, SerializationFormat format = SerializationFormat.Default, bool convertOnlyExtendableEnumToString = false)

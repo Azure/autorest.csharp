@@ -11,7 +11,6 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using Parameters.Spread.Models;
 
 namespace Parameters.Spread
 {
@@ -50,28 +49,40 @@ namespace Parameters.Spread
         /// <param name="name"></param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <include file="Docs/Alias.xml" path="doc/members/member[@name='SpreadAsRequestBodyAsync(string,CancellationToken)']/*" />
         public virtual async Task<Response> SpreadAsRequestBodyAsync(string name, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(name, nameof(name));
+            Argument.AssertNotNullOrEmpty(name, nameof(name));
 
+            var content = new Utf8JsonRequestContent();
+            var writer = content.JsonWriter;
+            writer.WriteStartObject();
+            writer.WritePropertyName("name"u8);
+            writer.WriteStringValue(name);
+            writer.WriteEndObject();
             RequestContext context = FromCancellationToken(cancellationToken);
-            SpreadAsRequestBodyRequest spreadAsRequestBodyRequest = new SpreadAsRequestBodyRequest(name);
-            Response response = await SpreadAsRequestBodyAsync(spreadAsRequestBodyRequest.ToRequestContent(), context).ConfigureAwait(false);
+            Response response = await SpreadAsRequestBodyAsync(content, context).ConfigureAwait(false);
             return response;
         }
 
         /// <param name="name"></param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <include file="Docs/Alias.xml" path="doc/members/member[@name='SpreadAsRequestBody(string,CancellationToken)']/*" />
         public virtual Response SpreadAsRequestBody(string name, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(name, nameof(name));
+            Argument.AssertNotNullOrEmpty(name, nameof(name));
 
+            var content = new Utf8JsonRequestContent();
+            var writer = content.JsonWriter;
+            writer.WriteStartObject();
+            writer.WritePropertyName("name"u8);
+            writer.WriteStringValue(name);
+            writer.WriteEndObject();
             RequestContext context = FromCancellationToken(cancellationToken);
-            SpreadAsRequestBodyRequest spreadAsRequestBodyRequest = new SpreadAsRequestBodyRequest(name);
-            Response response = SpreadAsRequestBody(spreadAsRequestBodyRequest.ToRequestContent(), context);
+            Response response = SpreadAsRequestBody(content, context);
             return response;
         }
 
@@ -158,17 +169,22 @@ namespace Parameters.Spread
         /// <param name="name"></param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/>, <paramref name="xMsTestHeader"/> or <paramref name="name"/> is null. </exception>
-        /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="id"/> or <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <include file="Docs/Alias.xml" path="doc/members/member[@name='SpreadAsRequestParameterAsync(string,string,string,CancellationToken)']/*" />
         public virtual async Task<Response> SpreadAsRequestParameterAsync(string id, string xMsTestHeader, string name, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(id, nameof(id));
             Argument.AssertNotNull(xMsTestHeader, nameof(xMsTestHeader));
-            Argument.AssertNotNull(name, nameof(name));
+            Argument.AssertNotNullOrEmpty(name, nameof(name));
 
+            var content = new Utf8JsonRequestContent();
+            var writer = content.JsonWriter;
+            writer.WriteStartObject();
+            writer.WritePropertyName("name"u8);
+            writer.WriteStringValue(name);
+            writer.WriteEndObject();
             RequestContext context = FromCancellationToken(cancellationToken);
-            SpreadAsRequestParameterRequest spreadAsRequestParameterRequest = new SpreadAsRequestParameterRequest(name);
-            Response response = await SpreadAsRequestParameterAsync(id, xMsTestHeader, spreadAsRequestParameterRequest.ToRequestContent(), context).ConfigureAwait(false);
+            Response response = await SpreadAsRequestParameterAsync(id, xMsTestHeader, content, context).ConfigureAwait(false);
             return response;
         }
 
@@ -177,17 +193,22 @@ namespace Parameters.Spread
         /// <param name="name"></param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/>, <paramref name="xMsTestHeader"/> or <paramref name="name"/> is null. </exception>
-        /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="id"/> or <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <include file="Docs/Alias.xml" path="doc/members/member[@name='SpreadAsRequestParameter(string,string,string,CancellationToken)']/*" />
         public virtual Response SpreadAsRequestParameter(string id, string xMsTestHeader, string name, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(id, nameof(id));
             Argument.AssertNotNull(xMsTestHeader, nameof(xMsTestHeader));
-            Argument.AssertNotNull(name, nameof(name));
+            Argument.AssertNotNullOrEmpty(name, nameof(name));
 
+            var content = new Utf8JsonRequestContent();
+            var writer = content.JsonWriter;
+            writer.WriteStartObject();
+            writer.WritePropertyName("name"u8);
+            writer.WriteStringValue(name);
+            writer.WriteEndObject();
             RequestContext context = FromCancellationToken(cancellationToken);
-            SpreadAsRequestParameterRequest spreadAsRequestParameterRequest = new SpreadAsRequestParameterRequest(name);
-            Response response = SpreadAsRequestParameter(id, xMsTestHeader, spreadAsRequestParameterRequest.ToRequestContent(), context);
+            Response response = SpreadAsRequestParameter(id, xMsTestHeader, content, context);
             return response;
         }
 
@@ -289,22 +310,37 @@ namespace Parameters.Spread
         /// <param name="prop6"></param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/>, <paramref name="xMsTestHeader"/>, <paramref name="prop1"/>, <paramref name="prop2"/>, <paramref name="prop3"/>, <paramref name="prop4"/>, <paramref name="prop5"/> or <paramref name="prop6"/> is null. </exception>
-        /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="id"/>, <paramref name="prop1"/>, <paramref name="prop2"/>, <paramref name="prop3"/>, <paramref name="prop4"/>, <paramref name="prop5"/> or <paramref name="prop6"/> is an empty string, and was expected to be non-empty. </exception>
         /// <include file="Docs/Alias.xml" path="doc/members/member[@name='SpreadWithMultipleParametersAsync(string,string,string,string,string,string,string,string,CancellationToken)']/*" />
         public virtual async Task<Response> SpreadWithMultipleParametersAsync(string id, string xMsTestHeader, string prop1, string prop2, string prop3, string prop4, string prop5, string prop6, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(id, nameof(id));
             Argument.AssertNotNull(xMsTestHeader, nameof(xMsTestHeader));
-            Argument.AssertNotNull(prop1, nameof(prop1));
-            Argument.AssertNotNull(prop2, nameof(prop2));
-            Argument.AssertNotNull(prop3, nameof(prop3));
-            Argument.AssertNotNull(prop4, nameof(prop4));
-            Argument.AssertNotNull(prop5, nameof(prop5));
-            Argument.AssertNotNull(prop6, nameof(prop6));
+            Argument.AssertNotNullOrEmpty(prop1, nameof(prop1));
+            Argument.AssertNotNullOrEmpty(prop2, nameof(prop2));
+            Argument.AssertNotNullOrEmpty(prop3, nameof(prop3));
+            Argument.AssertNotNullOrEmpty(prop4, nameof(prop4));
+            Argument.AssertNotNullOrEmpty(prop5, nameof(prop5));
+            Argument.AssertNotNullOrEmpty(prop6, nameof(prop6));
 
+            var content = new Utf8JsonRequestContent();
+            var writer = content.JsonWriter;
+            writer.WriteStartObject();
+            writer.WritePropertyName("prop1"u8);
+            writer.WriteStringValue(prop1);
+            writer.WritePropertyName("prop2"u8);
+            writer.WriteStringValue(prop2);
+            writer.WritePropertyName("prop3"u8);
+            writer.WriteStringValue(prop3);
+            writer.WritePropertyName("prop4"u8);
+            writer.WriteStringValue(prop4);
+            writer.WritePropertyName("prop5"u8);
+            writer.WriteStringValue(prop5);
+            writer.WritePropertyName("prop6"u8);
+            writer.WriteStringValue(prop6);
+            writer.WriteEndObject();
             RequestContext context = FromCancellationToken(cancellationToken);
-            SpreadWithMultipleParametersRequest spreadWithMultipleParametersRequest = new SpreadWithMultipleParametersRequest(prop1, prop2, prop3, prop4, prop5, prop6);
-            Response response = await SpreadWithMultipleParametersAsync(id, xMsTestHeader, spreadWithMultipleParametersRequest.ToRequestContent(), context).ConfigureAwait(false);
+            Response response = await SpreadWithMultipleParametersAsync(id, xMsTestHeader, content, context).ConfigureAwait(false);
             return response;
         }
 
@@ -318,22 +354,37 @@ namespace Parameters.Spread
         /// <param name="prop6"></param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/>, <paramref name="xMsTestHeader"/>, <paramref name="prop1"/>, <paramref name="prop2"/>, <paramref name="prop3"/>, <paramref name="prop4"/>, <paramref name="prop5"/> or <paramref name="prop6"/> is null. </exception>
-        /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="id"/>, <paramref name="prop1"/>, <paramref name="prop2"/>, <paramref name="prop3"/>, <paramref name="prop4"/>, <paramref name="prop5"/> or <paramref name="prop6"/> is an empty string, and was expected to be non-empty. </exception>
         /// <include file="Docs/Alias.xml" path="doc/members/member[@name='SpreadWithMultipleParameters(string,string,string,string,string,string,string,string,CancellationToken)']/*" />
         public virtual Response SpreadWithMultipleParameters(string id, string xMsTestHeader, string prop1, string prop2, string prop3, string prop4, string prop5, string prop6, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(id, nameof(id));
             Argument.AssertNotNull(xMsTestHeader, nameof(xMsTestHeader));
-            Argument.AssertNotNull(prop1, nameof(prop1));
-            Argument.AssertNotNull(prop2, nameof(prop2));
-            Argument.AssertNotNull(prop3, nameof(prop3));
-            Argument.AssertNotNull(prop4, nameof(prop4));
-            Argument.AssertNotNull(prop5, nameof(prop5));
-            Argument.AssertNotNull(prop6, nameof(prop6));
+            Argument.AssertNotNullOrEmpty(prop1, nameof(prop1));
+            Argument.AssertNotNullOrEmpty(prop2, nameof(prop2));
+            Argument.AssertNotNullOrEmpty(prop3, nameof(prop3));
+            Argument.AssertNotNullOrEmpty(prop4, nameof(prop4));
+            Argument.AssertNotNullOrEmpty(prop5, nameof(prop5));
+            Argument.AssertNotNullOrEmpty(prop6, nameof(prop6));
 
+            var content = new Utf8JsonRequestContent();
+            var writer = content.JsonWriter;
+            writer.WriteStartObject();
+            writer.WritePropertyName("prop1"u8);
+            writer.WriteStringValue(prop1);
+            writer.WritePropertyName("prop2"u8);
+            writer.WriteStringValue(prop2);
+            writer.WritePropertyName("prop3"u8);
+            writer.WriteStringValue(prop3);
+            writer.WritePropertyName("prop4"u8);
+            writer.WriteStringValue(prop4);
+            writer.WritePropertyName("prop5"u8);
+            writer.WriteStringValue(prop5);
+            writer.WritePropertyName("prop6"u8);
+            writer.WriteStringValue(prop6);
+            writer.WriteEndObject();
             RequestContext context = FromCancellationToken(cancellationToken);
-            SpreadWithMultipleParametersRequest spreadWithMultipleParametersRequest = new SpreadWithMultipleParametersRequest(prop1, prop2, prop3, prop4, prop5, prop6);
-            Response response = SpreadWithMultipleParameters(id, xMsTestHeader, spreadWithMultipleParametersRequest.ToRequestContent(), context);
+            Response response = SpreadWithMultipleParameters(id, xMsTestHeader, content, context);
             return response;
         }
 
