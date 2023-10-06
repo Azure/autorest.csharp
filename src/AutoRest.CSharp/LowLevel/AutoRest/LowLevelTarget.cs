@@ -39,15 +39,27 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 dpgClientWriter.WriteClient();
                 project.AddGeneratedFile($"{client.Type.Name}.cs", dpgClientWriter.ToString());
 
-                // write samples
                 var sampleProvider = library.GetSampleForClient(client);
-                if (sampleProvider != null)
+                if (Configuration.IsBranded)
                 {
-                    var clientExampleFilename = $"../../tests/Generated/Samples/{sampleProvider.Type.Name}.cs";
-                    var clientSampleWriter = new DpgClientSampleWriter(sampleProvider);
-                    clientSampleWriter.Write();
-                    project.AddGeneratedTestFile(clientExampleFilename, clientSampleWriter.ToString());
-                    project.AddGeneratedDocFile(dpgClientWriter.XmlDocWriter.Filename, new XmlDocumentFile(clientExampleFilename, dpgClientWriter.XmlDocWriter));
+                    // write samples
+                    if (sampleProvider != null)
+                    {
+                        var clientExampleFilename = $"../../tests/Generated/Samples/{sampleProvider.Type.Name}.cs";
+                        var clientSampleWriter = new DpgClientSampleWriter(sampleProvider);
+                        clientSampleWriter.Write();
+                        project.AddGeneratedTestFile(clientExampleFilename, clientSampleWriter.ToString());
+                        project.AddGeneratedDocFile(dpgClientWriter.XmlDocWriter.Filename, new XmlDocumentFile(clientExampleFilename, dpgClientWriter.XmlDocWriter));
+                    }
+                }
+                else
+                {
+                    if (sampleProvider is not null)
+                    {
+                        var smokeTestWriter = new SmokeTestWriter(client, sampleProvider);
+                        smokeTestWriter.Write();
+                        project.AddGeneratedTestFile($"../../tests/Generated/{client.Type.Name}Tests.cs", smokeTestWriter.ToString());
+                    }
                 }
             }
 

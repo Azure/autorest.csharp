@@ -573,6 +573,9 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private void WriteSampleRefsIfNecessary(MethodSignature methodSignature, bool isAsync)
         {
+            if (!Configuration.IsBranded)
+                return;
+
             var sampleProvider = _library.GetSampleForClient(_client);
             // do not write this part when there is no sample provider
             if (sampleProvider == null)

@@ -129,7 +129,7 @@ namespace AutoRest.CSharp.LowLevel.Output.Samples
             });
         }
 
-        private MethodBodyStatement BuildGetClientStatement(DpgOperationSample sample, IReadOnlyList<MethodSignatureBase> methodsToCall, List<MethodBodyStatement> variableDeclarations, out VariableReference clientVar)
+        internal MethodBodyStatement BuildGetClientStatement(DpgOperationSample sample, IReadOnlyList<MethodSignatureBase> methodsToCall, List<MethodBodyStatement> variableDeclarations, out VariableReference clientVar)
         {
             var first = methodsToCall[0];
             ValueExpression valueExpression = first switch

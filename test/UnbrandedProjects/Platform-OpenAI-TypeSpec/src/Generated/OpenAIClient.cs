@@ -65,7 +65,6 @@ namespace OpenAI
         /// <param name="audio"> The CreateTranscriptionRequest to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="audio"/> is null. </exception>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='CreateTranscriptionAsync(CreateTranscriptionRequest,CancellationToken)']/*" />
         public virtual async Task<Result<CreateTranscriptionResponse>> CreateTranscriptionAsync(CreateTranscriptionRequest audio, CancellationToken cancellationToken = default)
         {
             ClientUtilities.AssertNotNull(audio, nameof(audio));
@@ -79,7 +78,6 @@ namespace OpenAI
         /// <param name="audio"> The CreateTranscriptionRequest to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="audio"/> is null. </exception>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='CreateTranscription(CreateTranscriptionRequest,CancellationToken)']/*" />
         public virtual Result<CreateTranscriptionResponse> CreateTranscription(CreateTranscriptionRequest audio, CancellationToken cancellationToken = default)
         {
             ClientUtilities.AssertNotNull(audio, nameof(audio));
@@ -109,7 +107,6 @@ namespace OpenAI
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='CreateTranscriptionAsync(RequestBody,RequestOptions)']/*" />
         public virtual async Task<Result> CreateTranscriptionAsync(RequestBody content, RequestOptions context = null)
         {
             ClientUtilities.AssertNotNull(content, nameof(content));
@@ -148,7 +145,6 @@ namespace OpenAI
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='CreateTranscription(RequestBody,RequestOptions)']/*" />
         public virtual Result CreateTranscription(RequestBody content, RequestOptions context = null)
         {
             ClientUtilities.AssertNotNull(content, nameof(content));
@@ -171,7 +167,6 @@ namespace OpenAI
         /// <param name="audio"> The CreateTranslationRequest to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="audio"/> is null. </exception>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='CreateTranslationAsync(CreateTranslationRequest,CancellationToken)']/*" />
         public virtual async Task<Result<CreateTranslationResponse>> CreateTranslationAsync(CreateTranslationRequest audio, CancellationToken cancellationToken = default)
         {
             ClientUtilities.AssertNotNull(audio, nameof(audio));
@@ -185,7 +180,6 @@ namespace OpenAI
         /// <param name="audio"> The CreateTranslationRequest to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="audio"/> is null. </exception>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='CreateTranslation(CreateTranslationRequest,CancellationToken)']/*" />
         public virtual Result<CreateTranslationResponse> CreateTranslation(CreateTranslationRequest audio, CancellationToken cancellationToken = default)
         {
             ClientUtilities.AssertNotNull(audio, nameof(audio));
@@ -215,7 +209,6 @@ namespace OpenAI
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='CreateTranslationAsync(RequestBody,RequestOptions)']/*" />
         public virtual async Task<Result> CreateTranslationAsync(RequestBody content, RequestOptions context = null)
         {
             ClientUtilities.AssertNotNull(content, nameof(content));
@@ -254,7 +247,6 @@ namespace OpenAI
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='CreateTranslation(RequestBody,RequestOptions)']/*" />
         public virtual Result CreateTranslation(RequestBody content, RequestOptions context = null)
         {
             ClientUtilities.AssertNotNull(content, nameof(content));
@@ -276,7 +268,6 @@ namespace OpenAI
         /// <param name="createChatCompletionRequest"> The CreateChatCompletionRequest to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="createChatCompletionRequest"/> is null. </exception>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='CreateChatCompletionAsync(CreateChatCompletionRequest,CancellationToken)']/*" />
         public virtual async Task<Result<CreateChatCompletionResponse>> CreateChatCompletionAsync(CreateChatCompletionRequest createChatCompletionRequest, CancellationToken cancellationToken = default)
         {
             ClientUtilities.AssertNotNull(createChatCompletionRequest, nameof(createChatCompletionRequest));
@@ -289,7 +280,6 @@ namespace OpenAI
         /// <param name="createChatCompletionRequest"> The CreateChatCompletionRequest to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="createChatCompletionRequest"/> is null. </exception>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='CreateChatCompletion(CreateChatCompletionRequest,CancellationToken)']/*" />
         public virtual Result<CreateChatCompletionResponse> CreateChatCompletion(CreateChatCompletionRequest createChatCompletionRequest, CancellationToken cancellationToken = default)
         {
             ClientUtilities.AssertNotNull(createChatCompletionRequest, nameof(createChatCompletionRequest));
@@ -319,7 +309,6 @@ namespace OpenAI
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='CreateChatCompletionAsync(RequestBody,RequestOptions)']/*" />
         public virtual async Task<Result> CreateChatCompletionAsync(RequestBody content, RequestOptions context = null)
         {
             ClientUtilities.AssertNotNull(content, nameof(content));
@@ -358,7 +347,6 @@ namespace OpenAI
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='CreateChatCompletion(RequestBody,RequestOptions)']/*" />
         public virtual Result CreateChatCompletion(RequestBody content, RequestOptions context = null)
         {
             ClientUtilities.AssertNotNull(content, nameof(content));
@@ -388,7 +376,6 @@ namespace OpenAI
         /// <param name="job"> The CreateFineTuningJobRequest to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="job"/> is null. </exception>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='CreateFineTuningJobAsync(CreateFineTuningJobRequest,CancellationToken)']/*" />
         public virtual async Task<Result<FineTuningJob>> CreateFineTuningJobAsync(CreateFineTuningJobRequest job, CancellationToken cancellationToken = default)
         {
             ClientUtilities.AssertNotNull(job, nameof(job));
@@ -409,7 +396,6 @@ namespace OpenAI
         /// <param name="job"> The CreateFineTuningJobRequest to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="job"/> is null. </exception>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='CreateFineTuningJob(CreateFineTuningJobRequest,CancellationToken)']/*" />
         public virtual Result<FineTuningJob> CreateFineTuningJob(CreateFineTuningJobRequest job, CancellationToken cancellationToken = default)
         {
             ClientUtilities.AssertNotNull(job, nameof(job));
@@ -444,7 +430,6 @@ namespace OpenAI
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='CreateFineTuningJobAsync(RequestBody,RequestOptions)']/*" />
         public virtual async Task<Result> CreateFineTuningJobAsync(RequestBody content, RequestOptions context = null)
         {
             ClientUtilities.AssertNotNull(content, nameof(content));
@@ -488,7 +473,6 @@ namespace OpenAI
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='CreateFineTuningJob(RequestBody,RequestOptions)']/*" />
         public virtual Result CreateFineTuningJob(RequestBody content, RequestOptions context = null)
         {
             ClientUtilities.AssertNotNull(content, nameof(content));
@@ -510,7 +494,6 @@ namespace OpenAI
         /// <param name="after"> Identifier for the last job from the previous pagination request. </param>
         /// <param name="limit"> Number of fine-tuning jobs to retrieve. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='GetPaginatedFineTuningJobsAsync(string,long?,CancellationToken)']/*" />
         public virtual async Task<Result<ListPaginatedFineTuningJobsResponse>> GetPaginatedFineTuningJobsAsync(string after = null, long? limit = null, CancellationToken cancellationToken = default)
         {
             RequestOptions context = FromCancellationToken(cancellationToken);
@@ -521,7 +504,6 @@ namespace OpenAI
         /// <param name="after"> Identifier for the last job from the previous pagination request. </param>
         /// <param name="limit"> Number of fine-tuning jobs to retrieve. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='GetPaginatedFineTuningJobs(string,long?,CancellationToken)']/*" />
         public virtual Result<ListPaginatedFineTuningJobsResponse> GetPaginatedFineTuningJobs(string after = null, long? limit = null, CancellationToken cancellationToken = default)
         {
             RequestOptions context = FromCancellationToken(cancellationToken);
@@ -549,7 +531,6 @@ namespace OpenAI
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='GetPaginatedFineTuningJobsAsync(string,long?,RequestOptions)']/*" />
         public virtual async Task<Result> GetPaginatedFineTuningJobsAsync(string after, long? limit, RequestOptions context)
         {
             using var scope = ClientDiagnostics.CreateSpan("OpenAIClient.GetPaginatedFineTuningJobs");
@@ -586,7 +567,6 @@ namespace OpenAI
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='GetPaginatedFineTuningJobs(string,long?,RequestOptions)']/*" />
         public virtual Result GetPaginatedFineTuningJobs(string after, long? limit, RequestOptions context)
         {
             using var scope = ClientDiagnostics.CreateSpan("OpenAIClient.GetPaginatedFineTuningJobs");
@@ -612,7 +592,6 @@ namespace OpenAI
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fineTuningJobId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fineTuningJobId"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='RetrieveFineTuningJobAsync(string,CancellationToken)']/*" />
         public virtual async Task<Result<FineTuningJob>> RetrieveFineTuningJobAsync(string fineTuningJobId, CancellationToken cancellationToken = default)
         {
             ClientUtilities.AssertNotNullOrEmpty(fineTuningJobId, nameof(fineTuningJobId));
@@ -631,7 +610,6 @@ namespace OpenAI
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fineTuningJobId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fineTuningJobId"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='RetrieveFineTuningJob(string,CancellationToken)']/*" />
         public virtual Result<FineTuningJob> RetrieveFineTuningJob(string fineTuningJobId, CancellationToken cancellationToken = default)
         {
             ClientUtilities.AssertNotNullOrEmpty(fineTuningJobId, nameof(fineTuningJobId));
@@ -664,7 +642,6 @@ namespace OpenAI
         /// <exception cref="ArgumentException"> <paramref name="fineTuningJobId"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='RetrieveFineTuningJobAsync(string,RequestOptions)']/*" />
         public virtual async Task<Result> RetrieveFineTuningJobAsync(string fineTuningJobId, RequestOptions context)
         {
             ClientUtilities.AssertNotNullOrEmpty(fineTuningJobId, nameof(fineTuningJobId));
@@ -706,7 +683,6 @@ namespace OpenAI
         /// <exception cref="ArgumentException"> <paramref name="fineTuningJobId"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='RetrieveFineTuningJob(string,RequestOptions)']/*" />
         public virtual Result RetrieveFineTuningJob(string fineTuningJobId, RequestOptions context)
         {
             ClientUtilities.AssertNotNullOrEmpty(fineTuningJobId, nameof(fineTuningJobId));
@@ -732,7 +708,6 @@ namespace OpenAI
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fineTuningJobId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fineTuningJobId"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='GetFineTuningEventsAsync(string,string,int?,CancellationToken)']/*" />
         public virtual async Task<Result<ListFineTuningJobEventsResponse>> GetFineTuningEventsAsync(string fineTuningJobId, string after = null, int? limit = null, CancellationToken cancellationToken = default)
         {
             ClientUtilities.AssertNotNullOrEmpty(fineTuningJobId, nameof(fineTuningJobId));
@@ -749,7 +724,6 @@ namespace OpenAI
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fineTuningJobId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fineTuningJobId"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='GetFineTuningEvents(string,string,int?,CancellationToken)']/*" />
         public virtual Result<ListFineTuningJobEventsResponse> GetFineTuningEvents(string fineTuningJobId, string after = null, int? limit = null, CancellationToken cancellationToken = default)
         {
             ClientUtilities.AssertNotNullOrEmpty(fineTuningJobId, nameof(fineTuningJobId));
@@ -782,7 +756,6 @@ namespace OpenAI
         /// <exception cref="ArgumentException"> <paramref name="fineTuningJobId"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='GetFineTuningEventsAsync(string,string,int?,RequestOptions)']/*" />
         public virtual async Task<Result> GetFineTuningEventsAsync(string fineTuningJobId, string after, int? limit, RequestOptions context)
         {
             ClientUtilities.AssertNotNullOrEmpty(fineTuningJobId, nameof(fineTuningJobId));
@@ -824,7 +797,6 @@ namespace OpenAI
         /// <exception cref="ArgumentException"> <paramref name="fineTuningJobId"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='GetFineTuningEvents(string,string,int?,RequestOptions)']/*" />
         public virtual Result GetFineTuningEvents(string fineTuningJobId, string after, int? limit, RequestOptions context)
         {
             ClientUtilities.AssertNotNullOrEmpty(fineTuningJobId, nameof(fineTuningJobId));
@@ -848,7 +820,6 @@ namespace OpenAI
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fineTuningJobId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fineTuningJobId"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='CancelFineTuningJobAsync(string,CancellationToken)']/*" />
         public virtual async Task<Result<FineTuningJob>> CancelFineTuningJobAsync(string fineTuningJobId, CancellationToken cancellationToken = default)
         {
             ClientUtilities.AssertNotNullOrEmpty(fineTuningJobId, nameof(fineTuningJobId));
@@ -863,7 +834,6 @@ namespace OpenAI
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fineTuningJobId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fineTuningJobId"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='CancelFineTuningJob(string,CancellationToken)']/*" />
         public virtual Result<FineTuningJob> CancelFineTuningJob(string fineTuningJobId, CancellationToken cancellationToken = default)
         {
             ClientUtilities.AssertNotNullOrEmpty(fineTuningJobId, nameof(fineTuningJobId));
@@ -894,7 +864,6 @@ namespace OpenAI
         /// <exception cref="ArgumentException"> <paramref name="fineTuningJobId"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='CancelFineTuningJobAsync(string,RequestOptions)']/*" />
         public virtual async Task<Result> CancelFineTuningJobAsync(string fineTuningJobId, RequestOptions context)
         {
             ClientUtilities.AssertNotNullOrEmpty(fineTuningJobId, nameof(fineTuningJobId));
@@ -934,7 +903,6 @@ namespace OpenAI
         /// <exception cref="ArgumentException"> <paramref name="fineTuningJobId"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='CancelFineTuningJob(string,RequestOptions)']/*" />
         public virtual Result CancelFineTuningJob(string fineTuningJobId, RequestOptions context)
         {
             ClientUtilities.AssertNotNullOrEmpty(fineTuningJobId, nameof(fineTuningJobId));
@@ -956,7 +924,6 @@ namespace OpenAI
         /// <param name="createCompletionRequest"> The CreateCompletionRequest to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="createCompletionRequest"/> is null. </exception>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='CreateCompletionAsync(CreateCompletionRequest,CancellationToken)']/*" />
         public virtual async Task<Result<CreateCompletionResponse>> CreateCompletionAsync(CreateCompletionRequest createCompletionRequest, CancellationToken cancellationToken = default)
         {
             ClientUtilities.AssertNotNull(createCompletionRequest, nameof(createCompletionRequest));
@@ -969,7 +936,6 @@ namespace OpenAI
         /// <param name="createCompletionRequest"> The CreateCompletionRequest to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="createCompletionRequest"/> is null. </exception>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='CreateCompletion(CreateCompletionRequest,CancellationToken)']/*" />
         public virtual Result<CreateCompletionResponse> CreateCompletion(CreateCompletionRequest createCompletionRequest, CancellationToken cancellationToken = default)
         {
             ClientUtilities.AssertNotNull(createCompletionRequest, nameof(createCompletionRequest));
@@ -999,7 +965,6 @@ namespace OpenAI
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='CreateCompletionAsync(RequestBody,RequestOptions)']/*" />
         public virtual async Task<Result> CreateCompletionAsync(RequestBody content, RequestOptions context = null)
         {
             ClientUtilities.AssertNotNull(content, nameof(content));
@@ -1038,7 +1003,6 @@ namespace OpenAI
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='CreateCompletion(RequestBody,RequestOptions)']/*" />
         public virtual Result CreateCompletion(RequestBody content, RequestOptions context = null)
         {
             ClientUtilities.AssertNotNull(content, nameof(content));
@@ -1165,7 +1129,6 @@ namespace OpenAI
         /// <param name="embedding"> The CreateEmbeddingRequest to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="embedding"/> is null. </exception>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='CreateEmbeddingAsync(CreateEmbeddingRequest,CancellationToken)']/*" />
         public virtual async Task<Result<CreateEmbeddingResponse>> CreateEmbeddingAsync(CreateEmbeddingRequest embedding, CancellationToken cancellationToken = default)
         {
             ClientUtilities.AssertNotNull(embedding, nameof(embedding));
@@ -1179,7 +1142,6 @@ namespace OpenAI
         /// <param name="embedding"> The CreateEmbeddingRequest to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="embedding"/> is null. </exception>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='CreateEmbedding(CreateEmbeddingRequest,CancellationToken)']/*" />
         public virtual Result<CreateEmbeddingResponse> CreateEmbedding(CreateEmbeddingRequest embedding, CancellationToken cancellationToken = default)
         {
             ClientUtilities.AssertNotNull(embedding, nameof(embedding));
@@ -1209,7 +1171,6 @@ namespace OpenAI
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='CreateEmbeddingAsync(RequestBody,RequestOptions)']/*" />
         public virtual async Task<Result> CreateEmbeddingAsync(RequestBody content, RequestOptions context = null)
         {
             ClientUtilities.AssertNotNull(content, nameof(content));
@@ -1248,7 +1209,6 @@ namespace OpenAI
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='CreateEmbedding(RequestBody,RequestOptions)']/*" />
         public virtual Result CreateEmbedding(RequestBody content, RequestOptions context = null)
         {
             ClientUtilities.AssertNotNull(content, nameof(content));
@@ -1269,7 +1229,6 @@ namespace OpenAI
 
         /// <summary> Returns a list of files that belong to the user's organization. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='GetFilesAsync(CancellationToken)']/*" />
         public virtual async Task<Result<ListFilesResponse>> GetFilesAsync(CancellationToken cancellationToken = default)
         {
             RequestOptions context = FromCancellationToken(cancellationToken);
@@ -1279,7 +1238,6 @@ namespace OpenAI
 
         /// <summary> Returns a list of files that belong to the user's organization. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='GetFiles(CancellationToken)']/*" />
         public virtual Result<ListFilesResponse> GetFiles(CancellationToken cancellationToken = default)
         {
             RequestOptions context = FromCancellationToken(cancellationToken);
@@ -1305,7 +1263,6 @@ namespace OpenAI
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='GetFilesAsync(RequestOptions)']/*" />
         public virtual async Task<Result> GetFilesAsync(RequestOptions context)
         {
             using var scope = ClientDiagnostics.CreateSpan("OpenAIClient.GetFiles");
@@ -1340,7 +1297,6 @@ namespace OpenAI
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='GetFiles(RequestOptions)']/*" />
         public virtual Result GetFiles(RequestOptions context)
         {
             using var scope = ClientDiagnostics.CreateSpan("OpenAIClient.GetFiles");
@@ -1361,7 +1317,6 @@ namespace OpenAI
         /// <param name="file"> The CreateFileRequest to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="file"/> is null. </exception>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='CreateFileAsync(CreateFileRequest,CancellationToken)']/*" />
         public virtual async Task<Result<OpenAIFile>> CreateFileAsync(CreateFileRequest file, CancellationToken cancellationToken = default)
         {
             ClientUtilities.AssertNotNull(file, nameof(file));
@@ -1375,7 +1330,6 @@ namespace OpenAI
         /// <param name="file"> The CreateFileRequest to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="file"/> is null. </exception>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='CreateFile(CreateFileRequest,CancellationToken)']/*" />
         public virtual Result<OpenAIFile> CreateFile(CreateFileRequest file, CancellationToken cancellationToken = default)
         {
             ClientUtilities.AssertNotNull(file, nameof(file));
@@ -1405,7 +1359,6 @@ namespace OpenAI
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='CreateFileAsync(RequestBody,RequestOptions)']/*" />
         public virtual async Task<Result> CreateFileAsync(RequestBody content, RequestOptions context = null)
         {
             ClientUtilities.AssertNotNull(content, nameof(content));
@@ -1444,7 +1397,6 @@ namespace OpenAI
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='CreateFile(RequestBody,RequestOptions)']/*" />
         public virtual Result CreateFile(RequestBody content, RequestOptions context = null)
         {
             ClientUtilities.AssertNotNull(content, nameof(content));
@@ -1468,7 +1420,6 @@ namespace OpenAI
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fileId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fileId"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='RetrieveFileAsync(string,CancellationToken)']/*" />
         public virtual async Task<Result<OpenAIFile>> RetrieveFileAsync(string fileId, CancellationToken cancellationToken = default)
         {
             ClientUtilities.AssertNotNullOrEmpty(fileId, nameof(fileId));
@@ -1483,7 +1434,6 @@ namespace OpenAI
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fileId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fileId"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='RetrieveFile(string,CancellationToken)']/*" />
         public virtual Result<OpenAIFile> RetrieveFile(string fileId, CancellationToken cancellationToken = default)
         {
             ClientUtilities.AssertNotNullOrEmpty(fileId, nameof(fileId));
@@ -1514,7 +1464,6 @@ namespace OpenAI
         /// <exception cref="ArgumentException"> <paramref name="fileId"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='RetrieveFileAsync(string,RequestOptions)']/*" />
         public virtual async Task<Result> RetrieveFileAsync(string fileId, RequestOptions context)
         {
             ClientUtilities.AssertNotNullOrEmpty(fileId, nameof(fileId));
@@ -1554,7 +1503,6 @@ namespace OpenAI
         /// <exception cref="ArgumentException"> <paramref name="fileId"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='RetrieveFile(string,RequestOptions)']/*" />
         public virtual Result RetrieveFile(string fileId, RequestOptions context)
         {
             ClientUtilities.AssertNotNullOrEmpty(fileId, nameof(fileId));
@@ -1578,7 +1526,6 @@ namespace OpenAI
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fileId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fileId"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='DeleteFileAsync(string,CancellationToken)']/*" />
         public virtual async Task<Result<DeleteFileResponse>> DeleteFileAsync(string fileId, CancellationToken cancellationToken = default)
         {
             ClientUtilities.AssertNotNullOrEmpty(fileId, nameof(fileId));
@@ -1593,7 +1540,6 @@ namespace OpenAI
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fileId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fileId"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='DeleteFile(string,CancellationToken)']/*" />
         public virtual Result<DeleteFileResponse> DeleteFile(string fileId, CancellationToken cancellationToken = default)
         {
             ClientUtilities.AssertNotNullOrEmpty(fileId, nameof(fileId));
@@ -1624,7 +1570,6 @@ namespace OpenAI
         /// <exception cref="ArgumentException"> <paramref name="fileId"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='DeleteFileAsync(string,RequestOptions)']/*" />
         public virtual async Task<Result> DeleteFileAsync(string fileId, RequestOptions context)
         {
             ClientUtilities.AssertNotNullOrEmpty(fileId, nameof(fileId));
@@ -1664,7 +1609,6 @@ namespace OpenAI
         /// <exception cref="ArgumentException"> <paramref name="fileId"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='DeleteFile(string,RequestOptions)']/*" />
         public virtual Result DeleteFile(string fileId, RequestOptions context)
         {
             ClientUtilities.AssertNotNullOrEmpty(fileId, nameof(fileId));
@@ -1688,7 +1632,6 @@ namespace OpenAI
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fileId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fileId"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='DownloadFileAsync(string,CancellationToken)']/*" />
         public virtual async Task<Result<string>> DownloadFileAsync(string fileId, CancellationToken cancellationToken = default)
         {
             ClientUtilities.AssertNotNullOrEmpty(fileId, nameof(fileId));
@@ -1703,7 +1646,6 @@ namespace OpenAI
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fileId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fileId"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='DownloadFile(string,CancellationToken)']/*" />
         public virtual Result<string> DownloadFile(string fileId, CancellationToken cancellationToken = default)
         {
             ClientUtilities.AssertNotNullOrEmpty(fileId, nameof(fileId));
@@ -1734,7 +1676,6 @@ namespace OpenAI
         /// <exception cref="ArgumentException"> <paramref name="fileId"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='DownloadFileAsync(string,RequestOptions)']/*" />
         public virtual async Task<Result> DownloadFileAsync(string fileId, RequestOptions context)
         {
             ClientUtilities.AssertNotNullOrEmpty(fileId, nameof(fileId));
@@ -1774,7 +1715,6 @@ namespace OpenAI
         /// <exception cref="ArgumentException"> <paramref name="fileId"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='DownloadFile(string,RequestOptions)']/*" />
         public virtual Result DownloadFile(string fileId, RequestOptions context)
         {
             ClientUtilities.AssertNotNullOrEmpty(fileId, nameof(fileId));
@@ -2392,7 +2332,6 @@ namespace OpenAI
         /// owner and availability.
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='GetModelsAsync(CancellationToken)']/*" />
         public virtual async Task<Result<ListModelsResponse>> GetModelsAsync(CancellationToken cancellationToken = default)
         {
             RequestOptions context = FromCancellationToken(cancellationToken);
@@ -2405,7 +2344,6 @@ namespace OpenAI
         /// owner and availability.
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='GetModels(CancellationToken)']/*" />
         public virtual Result<ListModelsResponse> GetModels(CancellationToken cancellationToken = default)
         {
             RequestOptions context = FromCancellationToken(cancellationToken);
@@ -2432,7 +2370,6 @@ namespace OpenAI
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='GetModelsAsync(RequestOptions)']/*" />
         public virtual async Task<Result> GetModelsAsync(RequestOptions context)
         {
             using var scope = ClientDiagnostics.CreateSpan("OpenAIClient.GetModels");
@@ -2468,7 +2405,6 @@ namespace OpenAI
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='GetModels(RequestOptions)']/*" />
         public virtual Result GetModels(RequestOptions context)
         {
             using var scope = ClientDiagnostics.CreateSpan("OpenAIClient.GetModels");
@@ -2493,7 +2429,6 @@ namespace OpenAI
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="model"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="model"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='RetrieveAsync(string,CancellationToken)']/*" />
         public virtual async Task<Result<Model>> RetrieveAsync(string model, CancellationToken cancellationToken = default)
         {
             ClientUtilities.AssertNotNullOrEmpty(model, nameof(model));
@@ -2511,7 +2446,6 @@ namespace OpenAI
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="model"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="model"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='Retrieve(string,CancellationToken)']/*" />
         public virtual Result<Model> Retrieve(string model, CancellationToken cancellationToken = default)
         {
             ClientUtilities.AssertNotNullOrEmpty(model, nameof(model));
@@ -2543,7 +2477,6 @@ namespace OpenAI
         /// <exception cref="ArgumentException"> <paramref name="model"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='RetrieveAsync(string,RequestOptions)']/*" />
         public virtual async Task<Result> RetrieveAsync(string model, RequestOptions context)
         {
             ClientUtilities.AssertNotNullOrEmpty(model, nameof(model));
@@ -2584,7 +2517,6 @@ namespace OpenAI
         /// <exception cref="ArgumentException"> <paramref name="model"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='Retrieve(string,RequestOptions)']/*" />
         public virtual Result Retrieve(string model, RequestOptions context)
         {
             ClientUtilities.AssertNotNullOrEmpty(model, nameof(model));
@@ -2608,7 +2540,6 @@ namespace OpenAI
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="model"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="model"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='DeleteAsync(string,CancellationToken)']/*" />
         public virtual async Task<Result<DeleteModelResponse>> DeleteAsync(string model, CancellationToken cancellationToken = default)
         {
             ClientUtilities.AssertNotNullOrEmpty(model, nameof(model));
@@ -2623,7 +2554,6 @@ namespace OpenAI
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="model"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="model"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='Delete(string,CancellationToken)']/*" />
         public virtual Result<DeleteModelResponse> Delete(string model, CancellationToken cancellationToken = default)
         {
             ClientUtilities.AssertNotNullOrEmpty(model, nameof(model));
@@ -2654,7 +2584,6 @@ namespace OpenAI
         /// <exception cref="ArgumentException"> <paramref name="model"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='DeleteAsync(string,RequestOptions)']/*" />
         public virtual async Task<Result> DeleteAsync(string model, RequestOptions context)
         {
             ClientUtilities.AssertNotNullOrEmpty(model, nameof(model));
@@ -2694,7 +2623,6 @@ namespace OpenAI
         /// <exception cref="ArgumentException"> <paramref name="model"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='Delete(string,RequestOptions)']/*" />
         public virtual Result Delete(string model, RequestOptions context)
         {
             ClientUtilities.AssertNotNullOrEmpty(model, nameof(model));
@@ -2717,7 +2645,6 @@ namespace OpenAI
         /// <param name="image"> The CreateImageRequest to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="image"/> is null. </exception>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='CreateImageAsync(CreateImageRequest,CancellationToken)']/*" />
         public virtual async Task<Result<ImagesResponse>> CreateImageAsync(CreateImageRequest image, CancellationToken cancellationToken = default)
         {
             ClientUtilities.AssertNotNull(image, nameof(image));
@@ -2731,7 +2658,6 @@ namespace OpenAI
         /// <param name="image"> The CreateImageRequest to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="image"/> is null. </exception>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='CreateImage(CreateImageRequest,CancellationToken)']/*" />
         public virtual Result<ImagesResponse> CreateImage(CreateImageRequest image, CancellationToken cancellationToken = default)
         {
             ClientUtilities.AssertNotNull(image, nameof(image));
@@ -2761,7 +2687,6 @@ namespace OpenAI
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='CreateImageAsync(RequestBody,RequestOptions)']/*" />
         public virtual async Task<Result> CreateImageAsync(RequestBody content, RequestOptions context = null)
         {
             ClientUtilities.AssertNotNull(content, nameof(content));
@@ -2800,7 +2725,6 @@ namespace OpenAI
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='CreateImage(RequestBody,RequestOptions)']/*" />
         public virtual Result CreateImage(RequestBody content, RequestOptions context = null)
         {
             ClientUtilities.AssertNotNull(content, nameof(content));
@@ -2823,7 +2747,6 @@ namespace OpenAI
         /// <param name="image"> The CreateImageEditRequest to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="image"/> is null. </exception>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='CreateImageEditAsync(CreateImageEditRequest,CancellationToken)']/*" />
         public virtual async Task<Result<ImagesResponse>> CreateImageEditAsync(CreateImageEditRequest image, CancellationToken cancellationToken = default)
         {
             ClientUtilities.AssertNotNull(image, nameof(image));
@@ -2837,7 +2760,6 @@ namespace OpenAI
         /// <param name="image"> The CreateImageEditRequest to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="image"/> is null. </exception>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='CreateImageEdit(CreateImageEditRequest,CancellationToken)']/*" />
         public virtual Result<ImagesResponse> CreateImageEdit(CreateImageEditRequest image, CancellationToken cancellationToken = default)
         {
             ClientUtilities.AssertNotNull(image, nameof(image));
@@ -2867,7 +2789,6 @@ namespace OpenAI
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='CreateImageEditAsync(RequestBody,RequestOptions)']/*" />
         public virtual async Task<Result> CreateImageEditAsync(RequestBody content, RequestOptions context = null)
         {
             ClientUtilities.AssertNotNull(content, nameof(content));
@@ -2906,7 +2827,6 @@ namespace OpenAI
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='CreateImageEdit(RequestBody,RequestOptions)']/*" />
         public virtual Result CreateImageEdit(RequestBody content, RequestOptions context = null)
         {
             ClientUtilities.AssertNotNull(content, nameof(content));
@@ -2929,7 +2849,6 @@ namespace OpenAI
         /// <param name="image"> The CreateImageVariationRequest to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="image"/> is null. </exception>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='CreateImageVariationAsync(CreateImageVariationRequest,CancellationToken)']/*" />
         public virtual async Task<Result<ImagesResponse>> CreateImageVariationAsync(CreateImageVariationRequest image, CancellationToken cancellationToken = default)
         {
             ClientUtilities.AssertNotNull(image, nameof(image));
@@ -2943,7 +2862,6 @@ namespace OpenAI
         /// <param name="image"> The CreateImageVariationRequest to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="image"/> is null. </exception>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='CreateImageVariation(CreateImageVariationRequest,CancellationToken)']/*" />
         public virtual Result<ImagesResponse> CreateImageVariation(CreateImageVariationRequest image, CancellationToken cancellationToken = default)
         {
             ClientUtilities.AssertNotNull(image, nameof(image));
@@ -2973,7 +2891,6 @@ namespace OpenAI
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='CreateImageVariationAsync(RequestBody,RequestOptions)']/*" />
         public virtual async Task<Result> CreateImageVariationAsync(RequestBody content, RequestOptions context = null)
         {
             ClientUtilities.AssertNotNull(content, nameof(content));
@@ -3012,7 +2929,6 @@ namespace OpenAI
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='CreateImageVariation(RequestBody,RequestOptions)']/*" />
         public virtual Result CreateImageVariation(RequestBody content, RequestOptions context = null)
         {
             ClientUtilities.AssertNotNull(content, nameof(content));
@@ -3035,7 +2951,6 @@ namespace OpenAI
         /// <param name="content"> The CreateModerationRequest to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='CreateModerationAsync(CreateModerationRequest,CancellationToken)']/*" />
         public virtual async Task<Result<CreateModerationResponse>> CreateModerationAsync(CreateModerationRequest content, CancellationToken cancellationToken = default)
         {
             ClientUtilities.AssertNotNull(content, nameof(content));
@@ -3049,7 +2964,6 @@ namespace OpenAI
         /// <param name="content"> The CreateModerationRequest to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='CreateModeration(CreateModerationRequest,CancellationToken)']/*" />
         public virtual Result<CreateModerationResponse> CreateModeration(CreateModerationRequest content, CancellationToken cancellationToken = default)
         {
             ClientUtilities.AssertNotNull(content, nameof(content));
@@ -3079,7 +2993,6 @@ namespace OpenAI
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='CreateModerationAsync(RequestBody,RequestOptions)']/*" />
         public virtual async Task<Result> CreateModerationAsync(RequestBody content, RequestOptions context = null)
         {
             ClientUtilities.AssertNotNull(content, nameof(content));
@@ -3118,7 +3031,6 @@ namespace OpenAI
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestErrorException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/OpenAIClient.xml" path="doc/members/member[@name='CreateModeration(RequestBody,RequestOptions)']/*" />
         public virtual Result CreateModeration(RequestBody content, RequestOptions context = null)
         {
             ClientUtilities.AssertNotNull(content, nameof(content));
