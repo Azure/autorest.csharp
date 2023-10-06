@@ -4,8 +4,7 @@
 using System;
 using System.ServiceModel.Rest;
 using System.ServiceModel.Rest.Core;
-using System.ServiceModel.Rest.Experimental;
-using System.ServiceModel.Rest.Experimental.Core.Serialization;
+using System.ServiceModel.Rest.Internal;
 using System.Threading.Tasks;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.Base;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;

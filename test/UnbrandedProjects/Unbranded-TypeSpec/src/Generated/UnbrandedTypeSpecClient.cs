@@ -6,13 +6,10 @@
 #nullable disable
 
 using System;
-using System.Net.Http;
 using System.ServiceModel.Rest;
 using System.ServiceModel.Rest.Core;
 using System.ServiceModel.Rest.Core.Pipeline;
-using System.ServiceModel.Rest.Experimental;
-using System.ServiceModel.Rest.Experimental.Core;
-using System.ServiceModel.Rest.Experimental.Core.Pipeline;
+using System.ServiceModel.Rest.Internal;
 using System.Threading;
 using System.Threading.Tasks;
 using UnbrandedTypeSpec.Models;
@@ -60,7 +57,7 @@ namespace UnbrandedTypeSpec
 
             ClientDiagnostics = new TelemetrySource(options, true);
             _keyCredential = credential;
-            _pipeline = MessagePipeline.Create(new MessagePipelineTransport(), options, new IPipelinePolicy<PipelineMessage>[] { new KeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, Array.Empty<IPipelinePolicy<PipelineMessage>>());
+            _pipeline = MessagePipeline.Create(options, new IPipelinePolicy<PipelineMessage>[] { new KeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, Array.Empty<IPipelinePolicy<PipelineMessage>>());
             _endpoint = endpoint;
         }
 
@@ -1754,7 +1751,7 @@ namespace UnbrandedTypeSpec
         {
             var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
             var request = message.Request;
-            request.Method = HttpMethod.Get;
+            request.SetMethod("GET");
             var uri = new RequestUri();
             uri.Reset(_endpoint);
             uri.AppendPath("/top/", false);
@@ -1768,7 +1765,7 @@ namespace UnbrandedTypeSpec
         {
             var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
             var request = message.Request;
-            request.Method = HttpMethod.Get;
+            request.SetMethod("GET");
             var uri = new RequestUri();
             uri.Reset(_endpoint);
             uri.AppendPath("/top2", false);
@@ -1781,7 +1778,7 @@ namespace UnbrandedTypeSpec
         {
             var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
             var request = message.Request;
-            request.Method = new HttpMethod("PATCH");
+            request.SetMethod("PATCH");
             var uri = new RequestUri();
             uri.Reset(_endpoint);
             uri.AppendPath("/patch", false);
@@ -1796,7 +1793,7 @@ namespace UnbrandedTypeSpec
         {
             var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
             var request = message.Request;
-            request.Method = HttpMethod.Post;
+            request.SetMethod("POST");
             var uri = new RequestUri();
             uri.Reset(_endpoint);
             uri.AppendPath("/anonymousBody", false);
@@ -1811,7 +1808,7 @@ namespace UnbrandedTypeSpec
         {
             var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
             var request = message.Request;
-            request.Method = HttpMethod.Post;
+            request.SetMethod("POST");
             var uri = new RequestUri();
             uri.Reset(_endpoint);
             uri.AppendPath("/friendlyName", false);
@@ -1826,7 +1823,7 @@ namespace UnbrandedTypeSpec
         {
             var message = _pipeline.CreateMessage(context, ResponseErrorClassifier204);
             var request = message.Request;
-            request.Method = HttpMethod.Get;
+            request.SetMethod("GET");
             var uri = new RequestUri();
             uri.Reset(_endpoint);
             uri.AppendPath("/", false);
@@ -1840,7 +1837,7 @@ namespace UnbrandedTypeSpec
         {
             var message = _pipeline.CreateMessage(context, ResponseErrorClassifier204);
             var request = message.Request;
-            request.Method = HttpMethod.Post;
+            request.SetMethod("POST");
             var uri = new RequestUri();
             uri.Reset(_endpoint);
             uri.AppendPath("/stringFormat/", false);
@@ -1856,7 +1853,7 @@ namespace UnbrandedTypeSpec
         {
             var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
             var request = message.Request;
-            request.Method = HttpMethod.Post;
+            request.SetMethod("POST");
             var uri = new RequestUri();
             uri.Reset(_endpoint);
             uri.AppendPath("/projectedName", false);
@@ -1871,7 +1868,7 @@ namespace UnbrandedTypeSpec
         {
             var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
             var request = message.Request;
-            request.Method = HttpMethod.Post;
+            request.SetMethod("POST");
             var uri = new RequestUri();
             uri.Reset(_endpoint);
             uri.AppendPath("/returnsAnonymousModel", false);
@@ -1884,7 +1881,7 @@ namespace UnbrandedTypeSpec
         {
             var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200To300400To500);
             var request = message.Request;
-            request.Method = HttpMethod.Head;
+            request.SetMethod("HEAD");
             var uri = new RequestUri();
             uri.Reset(_endpoint);
             uri.AppendPath("/headAsBoolean/", false);
@@ -1898,7 +1895,7 @@ namespace UnbrandedTypeSpec
         {
             var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
             var request = message.Request;
-            request.Method = HttpMethod.Get;
+            request.SetMethod("GET");
             var uri = new RequestUri();
             uri.Reset(_endpoint);
             uri.AppendPath("/hello", false);
@@ -1917,7 +1914,7 @@ namespace UnbrandedTypeSpec
         {
             var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
             var request = message.Request;
-            request.Method = HttpMethod.Get;
+            request.SetMethod("GET");
             var uri = new RequestUri();
             uri.Reset(_endpoint);
             uri.AppendPath("/againHi/", false);
@@ -1934,7 +1931,7 @@ namespace UnbrandedTypeSpec
         {
             var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
             var request = message.Request;
-            request.Method = HttpMethod.Get;
+            request.SetMethod("GET");
             var uri = new RequestUri();
             uri.Reset(_endpoint);
             uri.AppendPath("/noContentType/", false);
@@ -1951,7 +1948,7 @@ namespace UnbrandedTypeSpec
         {
             var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
             var request = message.Request;
-            request.Method = HttpMethod.Get;
+            request.SetMethod("GET");
             var uri = new RequestUri();
             uri.Reset(_endpoint);
             uri.AppendPath("/demoHi", false);
@@ -1964,7 +1961,7 @@ namespace UnbrandedTypeSpec
         {
             var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
             var request = message.Request;
-            request.Method = HttpMethod.Post;
+            request.SetMethod("POST");
             var uri = new RequestUri();
             uri.Reset(_endpoint);
             uri.AppendPath("/literal", false);
@@ -1979,7 +1976,7 @@ namespace UnbrandedTypeSpec
         {
             var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
             var request = message.Request;
-            request.Method = HttpMethod.Get;
+            request.SetMethod("GET");
             var uri = new RequestUri();
             uri.Reset(_endpoint);
             uri.AppendPath("/helloLiteral/", false);
@@ -1995,7 +1992,7 @@ namespace UnbrandedTypeSpec
         {
             var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
             var request = message.Request;
-            request.Method = HttpMethod.Get;
+            request.SetMethod("GET");
             var uri = new RequestUri();
             uri.Reset(_endpoint);
             uri.AppendPath("/unknown-value", false);
@@ -2008,7 +2005,7 @@ namespace UnbrandedTypeSpec
         {
             var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
             var request = message.Request;
-            request.Method = HttpMethod.Post;
+            request.SetMethod("POST");
             var uri = new RequestUri();
             uri.Reset(_endpoint);
             uri.AppendPath("/internalProtocol", false);
@@ -2023,7 +2020,7 @@ namespace UnbrandedTypeSpec
         {
             var message = _pipeline.CreateMessage(context, ResponseErrorClassifier204);
             var request = message.Request;
-            request.Method = HttpMethod.Get;
+            request.SetMethod("GET");
             var uri = new RequestUri();
             uri.Reset(_endpoint);
             uri.AppendPath("/stillConvenient", false);

@@ -6,7 +6,7 @@
 #nullable disable
 
 using System;
-using System.ServiceModel.Rest.Experimental;
+using System.ServiceModel.Rest.Internal;
 
 namespace OpenAI.Models
 {

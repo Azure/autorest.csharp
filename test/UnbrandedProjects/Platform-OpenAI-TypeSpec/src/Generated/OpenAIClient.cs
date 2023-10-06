@@ -6,13 +6,10 @@
 #nullable disable
 
 using System;
-using System.Net.Http;
 using System.ServiceModel.Rest;
 using System.ServiceModel.Rest.Core;
 using System.ServiceModel.Rest.Core.Pipeline;
-using System.ServiceModel.Rest.Experimental;
-using System.ServiceModel.Rest.Experimental.Core;
-using System.ServiceModel.Rest.Experimental.Core.Pipeline;
+using System.ServiceModel.Rest.Internal;
 using System.Threading;
 using System.Threading.Tasks;
 using OpenAI.Models;
@@ -60,7 +57,7 @@ namespace OpenAI
 
             ClientDiagnostics = new TelemetrySource(options, true);
             _keyCredential = credential;
-            _pipeline = MessagePipeline.Create(new MessagePipelineTransport(), options, new IPipelinePolicy<PipelineMessage>[] { new KeyCredentialPolicy(_keyCredential, AuthorizationHeader, AuthorizationApiKeyPrefix) }, Array.Empty<IPipelinePolicy<PipelineMessage>>());
+            _pipeline = MessagePipeline.Create(options, new IPipelinePolicy<PipelineMessage>[] { new KeyCredentialPolicy(_keyCredential, AuthorizationHeader, AuthorizationApiKeyPrefix) }, Array.Empty<IPipelinePolicy<PipelineMessage>>());
             _endpoint = endpoint;
         }
 
@@ -3144,7 +3141,7 @@ namespace OpenAI
         {
             var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
             var request = message.Request;
-            request.Method = HttpMethod.Post;
+            request.SetMethod("POST");
             var uri = new RequestUri();
             uri.Reset(_endpoint);
             uri.AppendPath("/audio/transcriptions", false);
@@ -3159,7 +3156,7 @@ namespace OpenAI
         {
             var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
             var request = message.Request;
-            request.Method = HttpMethod.Post;
+            request.SetMethod("POST");
             var uri = new RequestUri();
             uri.Reset(_endpoint);
             uri.AppendPath("/audio/translations", false);
@@ -3174,7 +3171,7 @@ namespace OpenAI
         {
             var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
             var request = message.Request;
-            request.Method = HttpMethod.Post;
+            request.SetMethod("POST");
             var uri = new RequestUri();
             uri.Reset(_endpoint);
             uri.AppendPath("/chat/completions", false);
@@ -3189,7 +3186,7 @@ namespace OpenAI
         {
             var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
             var request = message.Request;
-            request.Method = HttpMethod.Post;
+            request.SetMethod("POST");
             var uri = new RequestUri();
             uri.Reset(_endpoint);
             uri.AppendPath("/fine_tuning/jobs", false);
@@ -3204,7 +3201,7 @@ namespace OpenAI
         {
             var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
             var request = message.Request;
-            request.Method = HttpMethod.Get;
+            request.SetMethod("GET");
             var uri = new RequestUri();
             uri.Reset(_endpoint);
             uri.AppendPath("/fine_tuning/jobs", false);
@@ -3225,7 +3222,7 @@ namespace OpenAI
         {
             var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
             var request = message.Request;
-            request.Method = HttpMethod.Get;
+            request.SetMethod("GET");
             var uri = new RequestUri();
             uri.Reset(_endpoint);
             uri.AppendPath("/fine_tuning/jobs/", false);
@@ -3239,7 +3236,7 @@ namespace OpenAI
         {
             var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
             var request = message.Request;
-            request.Method = HttpMethod.Get;
+            request.SetMethod("GET");
             var uri = new RequestUri();
             uri.Reset(_endpoint);
             uri.AppendPath("/fine_tuning/jobs/", false);
@@ -3262,7 +3259,7 @@ namespace OpenAI
         {
             var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
             var request = message.Request;
-            request.Method = HttpMethod.Post;
+            request.SetMethod("POST");
             var uri = new RequestUri();
             uri.Reset(_endpoint);
             uri.AppendPath("/fine_tuning/jobs/", false);
@@ -3277,7 +3274,7 @@ namespace OpenAI
         {
             var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
             var request = message.Request;
-            request.Method = HttpMethod.Post;
+            request.SetMethod("POST");
             var uri = new RequestUri();
             uri.Reset(_endpoint);
             uri.AppendPath("/completions", false);
@@ -3292,7 +3289,7 @@ namespace OpenAI
         {
             var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
             var request = message.Request;
-            request.Method = HttpMethod.Post;
+            request.SetMethod("POST");
             var uri = new RequestUri();
             uri.Reset(_endpoint);
             uri.AppendPath("/edits", false);
@@ -3307,7 +3304,7 @@ namespace OpenAI
         {
             var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
             var request = message.Request;
-            request.Method = HttpMethod.Post;
+            request.SetMethod("POST");
             var uri = new RequestUri();
             uri.Reset(_endpoint);
             uri.AppendPath("/embeddings", false);
@@ -3322,7 +3319,7 @@ namespace OpenAI
         {
             var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
             var request = message.Request;
-            request.Method = HttpMethod.Get;
+            request.SetMethod("GET");
             var uri = new RequestUri();
             uri.Reset(_endpoint);
             uri.AppendPath("/files", false);
@@ -3335,7 +3332,7 @@ namespace OpenAI
         {
             var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
             var request = message.Request;
-            request.Method = HttpMethod.Post;
+            request.SetMethod("POST");
             var uri = new RequestUri();
             uri.Reset(_endpoint);
             uri.AppendPath("/files", false);
@@ -3350,7 +3347,7 @@ namespace OpenAI
         {
             var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
             var request = message.Request;
-            request.Method = HttpMethod.Post;
+            request.SetMethod("POST");
             var uri = new RequestUri();
             uri.Reset(_endpoint);
             uri.AppendPath("/files/files/", false);
@@ -3364,7 +3361,7 @@ namespace OpenAI
         {
             var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
             var request = message.Request;
-            request.Method = HttpMethod.Delete;
+            request.SetMethod("DELETE");
             var uri = new RequestUri();
             uri.Reset(_endpoint);
             uri.AppendPath("/files/files/", false);
@@ -3378,7 +3375,7 @@ namespace OpenAI
         {
             var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
             var request = message.Request;
-            request.Method = HttpMethod.Get;
+            request.SetMethod("GET");
             var uri = new RequestUri();
             uri.Reset(_endpoint);
             uri.AppendPath("/files/files/", false);
@@ -3393,7 +3390,7 @@ namespace OpenAI
         {
             var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
             var request = message.Request;
-            request.Method = HttpMethod.Post;
+            request.SetMethod("POST");
             var uri = new RequestUri();
             uri.Reset(_endpoint);
             uri.AppendPath("/fine-tunes", false);
@@ -3408,7 +3405,7 @@ namespace OpenAI
         {
             var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
             var request = message.Request;
-            request.Method = HttpMethod.Get;
+            request.SetMethod("GET");
             var uri = new RequestUri();
             uri.Reset(_endpoint);
             uri.AppendPath("/fine-tunes", false);
@@ -3421,7 +3418,7 @@ namespace OpenAI
         {
             var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
             var request = message.Request;
-            request.Method = HttpMethod.Get;
+            request.SetMethod("GET");
             var uri = new RequestUri();
             uri.Reset(_endpoint);
             uri.AppendPath("/fine-tunes/", false);
@@ -3435,7 +3432,7 @@ namespace OpenAI
         {
             var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
             var request = message.Request;
-            request.Method = HttpMethod.Get;
+            request.SetMethod("GET");
             var uri = new RequestUri();
             uri.Reset(_endpoint);
             uri.AppendPath("/fine-tunes/", false);
@@ -3454,7 +3451,7 @@ namespace OpenAI
         {
             var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
             var request = message.Request;
-            request.Method = HttpMethod.Post;
+            request.SetMethod("POST");
             var uri = new RequestUri();
             uri.Reset(_endpoint);
             uri.AppendPath("/fine-tunes/", false);
@@ -3469,7 +3466,7 @@ namespace OpenAI
         {
             var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
             var request = message.Request;
-            request.Method = HttpMethod.Get;
+            request.SetMethod("GET");
             var uri = new RequestUri();
             uri.Reset(_endpoint);
             uri.AppendPath("/models", false);
@@ -3482,7 +3479,7 @@ namespace OpenAI
         {
             var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
             var request = message.Request;
-            request.Method = HttpMethod.Get;
+            request.SetMethod("GET");
             var uri = new RequestUri();
             uri.Reset(_endpoint);
             uri.AppendPath("/models/", false);
@@ -3496,7 +3493,7 @@ namespace OpenAI
         {
             var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
             var request = message.Request;
-            request.Method = HttpMethod.Delete;
+            request.SetMethod("DELETE");
             var uri = new RequestUri();
             uri.Reset(_endpoint);
             uri.AppendPath("/models/", false);
@@ -3510,7 +3507,7 @@ namespace OpenAI
         {
             var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
             var request = message.Request;
-            request.Method = HttpMethod.Post;
+            request.SetMethod("POST");
             var uri = new RequestUri();
             uri.Reset(_endpoint);
             uri.AppendPath("/images/generations", false);
@@ -3525,7 +3522,7 @@ namespace OpenAI
         {
             var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
             var request = message.Request;
-            request.Method = HttpMethod.Post;
+            request.SetMethod("POST");
             var uri = new RequestUri();
             uri.Reset(_endpoint);
             uri.AppendPath("/images/edits", false);
@@ -3540,7 +3537,7 @@ namespace OpenAI
         {
             var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
             var request = message.Request;
-            request.Method = HttpMethod.Post;
+            request.SetMethod("POST");
             var uri = new RequestUri();
             uri.Reset(_endpoint);
             uri.AppendPath("/images/variations", false);
@@ -3555,7 +3552,7 @@ namespace OpenAI
         {
             var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
             var request = message.Request;
-            request.Method = HttpMethod.Post;
+            request.SetMethod("POST");
             var uri = new RequestUri();
             uri.Reset(_endpoint);
             uri.AppendPath("/moderations", false);

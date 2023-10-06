@@ -2,14 +2,10 @@
 // Licensed under the MIT License.
 
 using System;
-using System.Net.Http;
 using System.ServiceModel.Rest;
 using System.ServiceModel.Rest.Core;
 using System.ServiceModel.Rest.Core.Pipeline;
-using System.ServiceModel.Rest.Experimental;
-using System.ServiceModel.Rest.Experimental.Core;
-using System.ServiceModel.Rest.Experimental.Core.Pipeline;
-using System.ServiceModel.Rest.Experimental.Core.Serialization;
+using System.ServiceModel.Rest.Internal;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.Azure;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.Base;
@@ -66,7 +62,7 @@ namespace AutoRest.CSharp.Common.Input
         public override Type HttpPipelineBuilderType => typeof(MessagePipeline);
         public override Type KeyCredentialPolicyType => typeof(KeyCredentialPolicy);
         public override FormattableString GetHttpPipelineClassifierString(string pipelineField, string optionsVariable, FormattableString perCallPolicies, FormattableString perRetryPolicies)
-            => $"{pipelineField:I} = {typeof(MessagePipeline)}.{nameof(MessagePipeline.Create)}(new {typeof(MessagePipelineTransport)}(), {optionsVariable:I}, {perRetryPolicies}, {perCallPolicies});";
+            => $"{pipelineField:I} = {typeof(MessagePipeline)}.{nameof(MessagePipeline.Create)}({optionsVariable:I}, {perRetryPolicies}, {perCallPolicies});";
 
         public override Type HttpPipelinePolicyType => typeof(IPipelinePolicy<PipelineMessage>);
 
@@ -77,9 +73,7 @@ namespace AutoRest.CSharp.Common.Input
 
         public override FormattableString GetSetMethodString(string requestName, string method)
         {
-            return method == "PATCH"
-                ? (FormattableString)$"{requestName}.Method = new {typeof(HttpMethod)}(\"{method}\");"
-                : $"{requestName}.Method = {typeof(HttpMethod)}.{GetHttpMethodName(method)};";
+            return $"{requestName}.{nameof(PipelineRequest.SetMethod)}(\"{method}\");";
         }
 
         private string GetHttpMethodName(string method)

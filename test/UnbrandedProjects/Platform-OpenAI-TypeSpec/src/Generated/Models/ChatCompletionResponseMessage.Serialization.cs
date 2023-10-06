@@ -6,7 +6,7 @@
 #nullable disable
 
 using System.ServiceModel.Rest.Core;
-using System.ServiceModel.Rest.Experimental.Core.Serialization;
+using System.ServiceModel.Rest.Internal;
 using System.Text.Json;
 
 namespace OpenAI.Models

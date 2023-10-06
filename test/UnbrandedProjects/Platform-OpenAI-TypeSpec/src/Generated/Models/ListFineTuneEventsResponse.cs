@@ -8,7 +8,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.ServiceModel.Rest.Experimental;
+using System.ServiceModel.Rest.Internal;
 
 namespace OpenAI.Models
 {

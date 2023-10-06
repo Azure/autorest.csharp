@@ -311,7 +311,7 @@ extends:
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include=""System.ServiceModel.Rest"" Version=""1.0.0-alpha.20230928.5"" />
+    <PackageReference Include=""System.ServiceModel.Rest"" Version=""1.0.0-alpha.20231005.2"" />
     <PackageReference Include=""System.Text.Json"" Version=""4.7.2"" />
   </ItemGroup>
 
