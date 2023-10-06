@@ -163,9 +163,7 @@ namespace MgmtExtensionCommonRestOperation
             {
                 var response = await _typeOneCommonRestClient.GetTypeOneAsync(Id.SubscriptionId, Id.ResourceGroupName, typeOneName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                {
                     throw new RequestFailedException(response.GetRawResponse());
-                }
                 return Response.FromValue(new TypeOneResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -202,9 +200,7 @@ namespace MgmtExtensionCommonRestOperation
             {
                 var response = _typeOneCommonRestClient.GetTypeOne(Id.SubscriptionId, Id.ResourceGroupName, typeOneName, cancellationToken);
                 if (response.Value == null)
-                {
                     throw new RequestFailedException(response.GetRawResponse());
-                }
                 return Response.FromValue(new TypeOneResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)

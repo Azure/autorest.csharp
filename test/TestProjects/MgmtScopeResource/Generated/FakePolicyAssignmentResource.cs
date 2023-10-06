@@ -108,9 +108,7 @@ namespace MgmtScopeResource
             {
                 var response = await _fakePolicyAssignmentRestClient.GetAsync(Id.Parent, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                {
                     throw new RequestFailedException(response.GetRawResponse());
-                }
                 return Response.FromValue(new FakePolicyAssignmentResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -142,9 +140,7 @@ namespace MgmtScopeResource
             {
                 var response = _fakePolicyAssignmentRestClient.Get(Id.Parent, Id.Name, cancellationToken);
                 if (response.Value == null)
-                {
                     throw new RequestFailedException(response.GetRawResponse());
-                }
                 return Response.FromValue(new FakePolicyAssignmentResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)

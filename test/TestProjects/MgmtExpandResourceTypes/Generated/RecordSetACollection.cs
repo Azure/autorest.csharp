@@ -164,9 +164,7 @@ namespace MgmtExpandResourceTypes
             {
                 var response = await _recordSetARecordSetsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "A".ToRecordType(), relativeRecordSetName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                {
                     throw new RequestFailedException(response.GetRawResponse());
-                }
                 return Response.FromValue(new RecordSetAResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -202,9 +200,7 @@ namespace MgmtExpandResourceTypes
             {
                 var response = _recordSetARecordSetsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "A".ToRecordType(), relativeRecordSetName, cancellationToken);
                 if (response.Value == null)
-                {
                     throw new RequestFailedException(response.GetRawResponse());
-                }
                 return Response.FromValue(new RecordSetAResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)

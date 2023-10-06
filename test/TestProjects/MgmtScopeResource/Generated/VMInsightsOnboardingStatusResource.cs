@@ -108,9 +108,7 @@ namespace MgmtScopeResource
             {
                 var response = await _vmInsightsOnboardingStatusVMInsightsRestClient.GetOnboardingStatusAsync(Id.Parent, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                {
                     throw new RequestFailedException(response.GetRawResponse());
-                }
                 return Response.FromValue(new VMInsightsOnboardingStatusResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -142,9 +140,7 @@ namespace MgmtScopeResource
             {
                 var response = _vmInsightsOnboardingStatusVMInsightsRestClient.GetOnboardingStatus(Id.Parent, cancellationToken);
                 if (response.Value == null)
-                {
                     throw new RequestFailedException(response.GetRawResponse());
-                }
                 return Response.FromValue(new VMInsightsOnboardingStatusResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)

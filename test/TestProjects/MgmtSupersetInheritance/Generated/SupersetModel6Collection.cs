@@ -160,9 +160,7 @@ namespace MgmtSupersetInheritance
             {
                 var response = await _supersetModel6RestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, supersetModel6SName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                {
                     throw new RequestFailedException(response.GetRawResponse());
-                }
                 return Response.FromValue(new SupersetModel6Resource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -198,9 +196,7 @@ namespace MgmtSupersetInheritance
             {
                 var response = _supersetModel6RestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, supersetModel6SName, cancellationToken);
                 if (response.Value == null)
-                {
                     throw new RequestFailedException(response.GetRawResponse());
-                }
                 return Response.FromValue(new SupersetModel6Resource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)

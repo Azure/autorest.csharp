@@ -108,9 +108,7 @@ namespace MgmtSingletonResource
             {
                 var response = await _brakeRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                {
                     throw new RequestFailedException(response.GetRawResponse());
-                }
                 return Response.FromValue(new BrakeResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -141,9 +139,7 @@ namespace MgmtSingletonResource
             {
                 var response = _brakeRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
                 if (response.Value == null)
-                {
                     throw new RequestFailedException(response.GetRawResponse());
-                }
                 return Response.FromValue(new BrakeResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)

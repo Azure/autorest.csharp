@@ -692,7 +692,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
                 if (operation.ThrowIfNull)
                 {
-                    _writer.WriteMethodBodyStatement(new IfStatement(Equal(response.Value, Null))
+                    _writer.WriteMethodBodyStatement(new IfStatement(Equal(response.Value, Null), AddBraces: false)
                     {
                         Throw(Snippets.New.RequestFailedException(response.GetRawResponse()))
                     });

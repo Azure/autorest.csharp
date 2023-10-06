@@ -113,9 +113,7 @@ namespace MgmtOmitOperationGroups
             {
                 var response = await _model2RestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                {
                     throw new RequestFailedException(response.GetRawResponse());
-                }
                 return Response.FromValue(new Model2Resource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -146,9 +144,7 @@ namespace MgmtOmitOperationGroups
             {
                 var response = _model2RestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 if (response.Value == null)
-                {
                     throw new RequestFailedException(response.GetRawResponse());
-                }
                 return Response.FromValue(new Model2Resource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)

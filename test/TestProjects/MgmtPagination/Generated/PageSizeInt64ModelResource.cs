@@ -108,9 +108,7 @@ namespace MgmtPagination
             {
                 var response = await _pageSizeInt64ModelRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                {
                     throw new RequestFailedException(response.GetRawResponse());
-                }
                 return Response.FromValue(new PageSizeInt64ModelResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -141,9 +139,7 @@ namespace MgmtPagination
             {
                 var response = _pageSizeInt64ModelRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 if (response.Value == null)
-                {
                     throw new RequestFailedException(response.GetRawResponse());
-                }
                 return Response.FromValue(new PageSizeInt64ModelResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)

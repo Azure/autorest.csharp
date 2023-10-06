@@ -164,9 +164,7 @@ namespace MgmtAcronymMapping
             {
                 var response = await _imageRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, imageName, expand, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                {
                     throw new RequestFailedException(response.GetRawResponse());
-                }
                 return Response.FromValue(new ImageResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -204,9 +202,7 @@ namespace MgmtAcronymMapping
             {
                 var response = _imageRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, imageName, expand, cancellationToken);
                 if (response.Value == null)
-                {
                     throw new RequestFailedException(response.GetRawResponse());
-                }
                 return Response.FromValue(new ImageResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)

@@ -155,9 +155,7 @@ namespace MgmtScopeResource
             {
                 var response = await _deploymentExtendedDeploymentsRestClient.GetAtScopeAsync(Id, deploymentName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                {
                     throw new RequestFailedException(response.GetRawResponse());
-                }
                 return Response.FromValue(new DeploymentExtendedResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -194,9 +192,7 @@ namespace MgmtScopeResource
             {
                 var response = _deploymentExtendedDeploymentsRestClient.GetAtScope(Id, deploymentName, cancellationToken);
                 if (response.Value == null)
-                {
                     throw new RequestFailedException(response.GetRawResponse());
-                }
                 return Response.FromValue(new DeploymentExtendedResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)

@@ -110,9 +110,7 @@ namespace MgmtListMethods
             {
                 var response = await _mgmtGrpParentWithLocRestClient.GetAsync(Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                {
                     throw new RequestFailedException(response.GetRawResponse());
-                }
                 return Response.FromValue(new MgmtGrpParentWithLocResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -144,9 +142,7 @@ namespace MgmtListMethods
             {
                 var response = _mgmtGrpParentWithLocRestClient.Get(Id.Parent.Name, Id.Name, cancellationToken);
                 if (response.Value == null)
-                {
                     throw new RequestFailedException(response.GetRawResponse());
-                }
                 return Response.FromValue(new MgmtGrpParentWithLocResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
