@@ -82,7 +82,8 @@ namespace AutoRest.CSharp.Output.Models
             var updatedOperation = operation with
             {
                 Name = UpdateOperationName(operation, operation.ResourceName ?? clientName),
-                Parameters = UpdateOperationParameters(operation.Parameters),
+                Parameters = UpdateOperationParameters(operation.Parameters, out var parameterMap),
+                Examples = UpdateOperationExamples(operation, parameterMap)
             };
 
             if (nextLinkOperation is null)
@@ -96,22 +97,34 @@ namespace AutoRest.CSharp.Output.Models
         private static string UpdateOperationName(InputOperation operation, string clientName)
             => operation.CleanName.RenameGetMethod(clientName).RenameListToGet(clientName);
 
-        private static IReadOnlyList<InputParameter> UpdateOperationParameters(IReadOnlyList<InputParameter> operationParameters)
+        private static IReadOnlyList<InputParameter> UpdateOperationParameters(IReadOnlyList<InputParameter> operationParameters, out IDictionary<string, InputParameter> parameterMap)
         {
+            parameterMap = new Dictionary<string, InputParameter>();
             var parameters = new List<InputParameter>(operationParameters.Count);
             foreach (var parameter in operationParameters)
             {
-                if (parameter.Name.Equals("top", StringComparison.OrdinalIgnoreCase))
-                {
-                    parameters.Add(parameter with { Name = MaxCountParameterName });
-                }
-                else
-                {
-                    parameters.Add(parameter);
-                }
+                var updatedParameter = parameter.Name.Equals("top", StringComparison.OrdinalIgnoreCase)
+                    ? parameter with { Name = MaxCountParameterName }
+                    : parameter;
+
+                parameters.Add(updatedParameter);
+                parameterMap[parameter.Name] = updatedParameter;
             }
 
             return parameters;
+        }
+
+        private static IReadOnlyList<InputOperationExample> UpdateOperationExamples(InputOperation operation, IDictionary<string, InputParameter> parameterMap)
+        {
+            var operationExamples = new List<InputOperationExample>(operation.Examples.Count);
+            foreach (var operationExample in operation.Examples)
+            {
+                var parameterExamples = operationExample.Parameters
+                    .Select(pe => pe with { Parameter = parameterMap[pe.Parameter.Name] })
+                    .ToList();
+                operationExamples.Add(operationExample with {Parameters = parameterExamples});
+            }
+            return operationExamples;
         }
 
         private ClientOptionsTypeProvider CreateClientOptions(IReadOnlyList<ClientInfo> topLevelClientInfos)
