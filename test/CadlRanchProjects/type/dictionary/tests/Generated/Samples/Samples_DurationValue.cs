@@ -110,7 +110,7 @@ namespace _Type._Dictionary.Samples
         {
             DurationValue client = new DictionaryClient().GetDurationValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 key = "PT1H23M45S",
             });
@@ -125,7 +125,7 @@ namespace _Type._Dictionary.Samples
         {
             DurationValue client = new DictionaryClient().GetDurationValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 key = "PT1H23M45S",
             });
@@ -164,7 +164,7 @@ namespace _Type._Dictionary.Samples
         {
             DurationValue client = new DictionaryClient().GetDurationValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 key = "PT1H23M45S",
             });
@@ -179,7 +179,7 @@ namespace _Type._Dictionary.Samples
         {
             DurationValue client = new DictionaryClient().GetDurationValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 key = "PT1H23M45S",
             });

@@ -129,7 +129,7 @@ This sample shows how to call PutAsync.
 <code><![CDATA[
 ModelValue client = new ArrayClient().GetModelValueClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new object[]
+using RequestContent content = RequestContent.Create(new object[]
 {
     new
     {
@@ -144,7 +144,7 @@ This sample shows how to call PutAsync with all request content.
 <code><![CDATA[
 ModelValue client = new ArrayClient().GetModelValueClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new object[]
+using RequestContent content = RequestContent.Create(new object[]
 {
     new
     {
@@ -166,7 +166,7 @@ This sample shows how to call Put.
 <code><![CDATA[
 ModelValue client = new ArrayClient().GetModelValueClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new object[]
+using RequestContent content = RequestContent.Create(new object[]
 {
     new
     {
@@ -181,7 +181,7 @@ This sample shows how to call Put with all request content.
 <code><![CDATA[
 ModelValue client = new ArrayClient().GetModelValueClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new object[]
+using RequestContent content = RequestContent.Create(new object[]
 {
     new
     {

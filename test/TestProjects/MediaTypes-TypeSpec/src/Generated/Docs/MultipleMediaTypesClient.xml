@@ -42,7 +42,7 @@ This sample shows how to call OneBinaryBodyTwoContentTypesAsync.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 MultipleMediaTypesClient client = new MultipleMediaTypesClient(endpoint);
 
-RequestContent content = RequestContent.Create(new object());
+using RequestContent content = RequestContent.Create(new object());
 Response response = await client.OneBinaryBodyTwoContentTypesAsync(content, new ContentType("application/json"));
 
 Console.WriteLine(response.Status);
@@ -52,7 +52,7 @@ This sample shows how to call OneBinaryBodyTwoContentTypesAsync with all paramet
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 MultipleMediaTypesClient client = new MultipleMediaTypesClient(endpoint);
 
-RequestContent content = RequestContent.Create(new object());
+using RequestContent content = RequestContent.Create(new object());
 Response response = await client.OneBinaryBodyTwoContentTypesAsync(content, new ContentType("application/json"));
 
 Console.WriteLine(response.Status);
@@ -65,7 +65,7 @@ This sample shows how to call OneBinaryBodyTwoContentTypes.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 MultipleMediaTypesClient client = new MultipleMediaTypesClient(endpoint);
 
-RequestContent content = RequestContent.Create(new object());
+using RequestContent content = RequestContent.Create(new object());
 Response response = client.OneBinaryBodyTwoContentTypes(content, new ContentType("application/json"));
 
 Console.WriteLine(response.Status);
@@ -75,7 +75,7 @@ This sample shows how to call OneBinaryBodyTwoContentTypes with all parameters a
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 MultipleMediaTypesClient client = new MultipleMediaTypesClient(endpoint);
 
-RequestContent content = RequestContent.Create(new object());
+using RequestContent content = RequestContent.Create(new object());
 Response response = client.OneBinaryBodyTwoContentTypes(content, new ContentType("application/json"));
 
 Console.WriteLine(response.Status);
@@ -122,7 +122,7 @@ This sample shows how to call OneStringBodyThreeContentTypesAsync.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 MultipleMediaTypesClient client = new MultipleMediaTypesClient(endpoint);
 
-RequestContent content = RequestContent.Create("<body>");
+using RequestContent content = RequestContent.Create("<body>");
 Response response = await client.OneStringBodyThreeContentTypesAsync(content, new ContentType("application/json"));
 
 Console.WriteLine(response.Status);
@@ -132,7 +132,7 @@ This sample shows how to call OneStringBodyThreeContentTypesAsync with all param
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 MultipleMediaTypesClient client = new MultipleMediaTypesClient(endpoint);
 
-RequestContent content = RequestContent.Create("<body>");
+using RequestContent content = RequestContent.Create("<body>");
 Response response = await client.OneStringBodyThreeContentTypesAsync(content, new ContentType("application/json"));
 
 Console.WriteLine(response.Status);
@@ -145,7 +145,7 @@ This sample shows how to call OneStringBodyThreeContentTypes.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 MultipleMediaTypesClient client = new MultipleMediaTypesClient(endpoint);
 
-RequestContent content = RequestContent.Create("<body>");
+using RequestContent content = RequestContent.Create("<body>");
 Response response = client.OneStringBodyThreeContentTypes(content, new ContentType("application/json"));
 
 Console.WriteLine(response.Status);
@@ -155,7 +155,7 @@ This sample shows how to call OneStringBodyThreeContentTypes with all parameters
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 MultipleMediaTypesClient client = new MultipleMediaTypesClient(endpoint);
 
-RequestContent content = RequestContent.Create("<body>");
+using RequestContent content = RequestContent.Create("<body>");
 Response response = client.OneStringBodyThreeContentTypes(content, new ContentType("application/json"));
 
 Console.WriteLine(response.Status);
@@ -206,7 +206,7 @@ This sample shows how to call OneModelBodyOneContentTypeAsync.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 MultipleMediaTypesClient client = new MultipleMediaTypesClient(endpoint);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     id = "<id>",
 });
@@ -219,7 +219,7 @@ This sample shows how to call OneModelBodyOneContentTypeAsync with all request c
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 MultipleMediaTypesClient client = new MultipleMediaTypesClient(endpoint);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     id = "<id>",
 });
@@ -235,7 +235,7 @@ This sample shows how to call OneModelBodyOneContentType.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 MultipleMediaTypesClient client = new MultipleMediaTypesClient(endpoint);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     id = "<id>",
 });
@@ -248,7 +248,7 @@ This sample shows how to call OneModelBodyOneContentType with all request conten
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 MultipleMediaTypesClient client = new MultipleMediaTypesClient(endpoint);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     id = "<id>",
 });

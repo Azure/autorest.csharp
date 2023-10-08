@@ -117,7 +117,7 @@ This sample shows how to call PutModelAsync.
 <code><![CDATA[
 SingleDiscriminatorClient client = new SingleDiscriminatorClient();
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     kind = "seagull",
     wingspan = 1234,
@@ -130,7 +130,7 @@ This sample shows how to call PutModelAsync with all request content.
 <code><![CDATA[
 SingleDiscriminatorClient client = new SingleDiscriminatorClient();
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     kind = "seagull",
     wingspan = 1234,
@@ -146,7 +146,7 @@ This sample shows how to call PutModel.
 <code><![CDATA[
 SingleDiscriminatorClient client = new SingleDiscriminatorClient();
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     kind = "seagull",
     wingspan = 1234,
@@ -159,7 +159,7 @@ This sample shows how to call PutModel with all request content.
 <code><![CDATA[
 SingleDiscriminatorClient client = new SingleDiscriminatorClient();
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     kind = "seagull",
     wingspan = 1234,
@@ -285,7 +285,7 @@ This sample shows how to call PutRecursiveModelAsync.
 <code><![CDATA[
 SingleDiscriminatorClient client = new SingleDiscriminatorClient();
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     kind = "seagull",
     wingspan = 1234,
@@ -298,7 +298,7 @@ This sample shows how to call PutRecursiveModelAsync with all request content.
 <code><![CDATA[
 SingleDiscriminatorClient client = new SingleDiscriminatorClient();
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     kind = "seagull",
     wingspan = 1234,
@@ -314,7 +314,7 @@ This sample shows how to call PutRecursiveModel.
 <code><![CDATA[
 SingleDiscriminatorClient client = new SingleDiscriminatorClient();
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     kind = "seagull",
     wingspan = 1234,
@@ -327,7 +327,7 @@ This sample shows how to call PutRecursiveModel with all request content.
 <code><![CDATA[
 SingleDiscriminatorClient client = new SingleDiscriminatorClient();
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     kind = "seagull",
     wingspan = 1234,

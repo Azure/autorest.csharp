@@ -115,7 +115,7 @@ This sample shows how to call RepeatableActionAsync and parse the result.
 <code><![CDATA[
 TraitsClient client = new TraitsClient();
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     userActionValue = "<userActionValue>",
 });
@@ -128,7 +128,7 @@ This sample shows how to call RepeatableActionAsync with all parameters and requ
 <code><![CDATA[
 TraitsClient client = new TraitsClient();
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     userActionValue = "<userActionValue>",
 });
@@ -144,7 +144,7 @@ This sample shows how to call RepeatableAction and parse the result.
 <code><![CDATA[
 TraitsClient client = new TraitsClient();
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     userActionValue = "<userActionValue>",
 });
@@ -157,7 +157,7 @@ This sample shows how to call RepeatableAction with all parameters and request c
 <code><![CDATA[
 TraitsClient client = new TraitsClient();
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     userActionValue = "<userActionValue>",
 });

@@ -195,7 +195,7 @@ This sample shows how to call PutAllAsync.
 <code><![CDATA[
 RequiredAndOptional client = new OptionalClient().GetRequiredAndOptionalClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     requiredProperty = 1234,
 });
@@ -207,7 +207,7 @@ This sample shows how to call PutAllAsync with all request content.
 <code><![CDATA[
 RequiredAndOptional client = new OptionalClient().GetRequiredAndOptionalClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     optionalProperty = "<optionalProperty>",
     requiredProperty = 1234,
@@ -223,7 +223,7 @@ This sample shows how to call PutAll.
 <code><![CDATA[
 RequiredAndOptional client = new OptionalClient().GetRequiredAndOptionalClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     requiredProperty = 1234,
 });
@@ -235,7 +235,7 @@ This sample shows how to call PutAll with all request content.
 <code><![CDATA[
 RequiredAndOptional client = new OptionalClient().GetRequiredAndOptionalClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     optionalProperty = "<optionalProperty>",
     requiredProperty = 1234,
@@ -291,7 +291,7 @@ This sample shows how to call PutRequiredOnlyAsync.
 <code><![CDATA[
 RequiredAndOptional client = new OptionalClient().GetRequiredAndOptionalClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     requiredProperty = 1234,
 });
@@ -303,7 +303,7 @@ This sample shows how to call PutRequiredOnlyAsync with all request content.
 <code><![CDATA[
 RequiredAndOptional client = new OptionalClient().GetRequiredAndOptionalClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     optionalProperty = "<optionalProperty>",
     requiredProperty = 1234,
@@ -319,7 +319,7 @@ This sample shows how to call PutRequiredOnly.
 <code><![CDATA[
 RequiredAndOptional client = new OptionalClient().GetRequiredAndOptionalClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     requiredProperty = 1234,
 });
@@ -331,7 +331,7 @@ This sample shows how to call PutRequiredOnly with all request content.
 <code><![CDATA[
 RequiredAndOptional client = new OptionalClient().GetRequiredAndOptionalClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     optionalProperty = "<optionalProperty>",
     requiredProperty = 1234,

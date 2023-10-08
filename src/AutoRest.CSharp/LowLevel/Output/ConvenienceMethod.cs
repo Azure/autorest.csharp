@@ -28,13 +28,13 @@ namespace AutoRest.CSharp.Output.Models
             return (parameterValues, converter);
         }
 
-        private record ContentInfo(CodeWriterDeclaration ContentVariable, FormattableString ContentValue);
+        private record RequestContentParameterInfo(CodeWriterDeclaration ContentVariable, FormattableString ContentValue);
 
-        private (IReadOnlyList<FormattableString> ParameterValues, ContentInfo? ContentInfo,  CodeWriterDeclaration? SpreadVariable) PrepareConvenienceMethodParameters(CodeWriterDeclaration contextVariable)
+        private (IReadOnlyList<FormattableString> ParameterValues, RequestContentParameterInfo? ContentInfo,  CodeWriterDeclaration? SpreadVariable) PrepareConvenienceMethodParameters(CodeWriterDeclaration contextVariable)
         {
             CodeWriterDeclaration? spreadVariable = null;
             var parameters = new List<FormattableString>();
-            ContentInfo? contentInfo = null;
+            RequestContentParameterInfo? contentInfo = null;
             foreach (var converter in ProtocolToConvenienceParameterConverters)
             {
                 var protocolParameter = converter.Protocol;
@@ -50,7 +50,7 @@ namespace AutoRest.CSharp.Output.Models
                         var parameter = convenienceParameter.GetConversionFormattable(protocolParameter.Type);
                         if (protocolParameter.Type.EqualsIgnoreNullable(typeof(RequestContent)))
                         {
-                            contentInfo = new ContentInfo(new CodeWriterDeclaration(KnownParameters.RequestContent.Name), $"{parameter:I}");
+                            contentInfo = new RequestContentParameterInfo(new CodeWriterDeclaration(KnownParameters.RequestContent.Name), $"{parameter:I}");
                             parameters.Add($"{contentInfo.ContentVariable:I}");
                         }
                         else
@@ -74,7 +74,7 @@ namespace AutoRest.CSharp.Output.Models
             return (parameters, contentInfo, spreadVariable);
         }
 
-        private Action<CodeWriter> EnsureConvenienceBodyConverter(CodeWriterDeclaration? spreadVariable, CodeWriterDeclaration contextVariable, ContentInfo? contentInfo)
+        private Action<CodeWriter> EnsureConvenienceBodyConverter(CodeWriterDeclaration? spreadVariable, CodeWriterDeclaration contextVariable, RequestContentParameterInfo? contentInfo)
         {
             var convenienceSpread = ProtocolToConvenienceParameterConverters.Select(c => c.ConvenienceSpread).WhereNotNull().SingleOrDefault();
             if (spreadVariable == null || convenienceSpread == null)

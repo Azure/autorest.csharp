@@ -23,7 +23,7 @@ namespace Encode.Bytes.Samples
         {
             RequestBody client = new BytesClient().GetRequestBodyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new object());
+            using RequestContent content = RequestContent.Create(new object());
             Response response = client.Default(content);
 
             Console.WriteLine(response.Status);
@@ -35,7 +35,7 @@ namespace Encode.Bytes.Samples
         {
             RequestBody client = new BytesClient().GetRequestBodyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new object());
+            using RequestContent content = RequestContent.Create(new object());
             Response response = await client.DefaultAsync(content);
 
             Console.WriteLine(response.Status);
@@ -65,7 +65,7 @@ namespace Encode.Bytes.Samples
         {
             RequestBody client = new BytesClient().GetRequestBodyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new object());
+            using RequestContent content = RequestContent.Create(new object());
             Response response = client.Default(content);
 
             Console.WriteLine(response.Status);
@@ -77,7 +77,7 @@ namespace Encode.Bytes.Samples
         {
             RequestBody client = new BytesClient().GetRequestBodyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new object());
+            using RequestContent content = RequestContent.Create(new object());
             Response response = await client.DefaultAsync(content);
 
             Console.WriteLine(response.Status);
@@ -107,7 +107,7 @@ namespace Encode.Bytes.Samples
         {
             RequestBody client = new BytesClient().GetRequestBodyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new object());
+            using RequestContent content = RequestContent.Create(new object());
             Response response = client.OctetStream(content);
 
             Console.WriteLine(response.Status);
@@ -119,7 +119,7 @@ namespace Encode.Bytes.Samples
         {
             RequestBody client = new BytesClient().GetRequestBodyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new object());
+            using RequestContent content = RequestContent.Create(new object());
             Response response = await client.OctetStreamAsync(content);
 
             Console.WriteLine(response.Status);
@@ -149,7 +149,7 @@ namespace Encode.Bytes.Samples
         {
             RequestBody client = new BytesClient().GetRequestBodyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new object());
+            using RequestContent content = RequestContent.Create(new object());
             Response response = client.OctetStream(content);
 
             Console.WriteLine(response.Status);
@@ -161,7 +161,7 @@ namespace Encode.Bytes.Samples
         {
             RequestBody client = new BytesClient().GetRequestBodyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new object());
+            using RequestContent content = RequestContent.Create(new object());
             Response response = await client.OctetStreamAsync(content);
 
             Console.WriteLine(response.Status);
@@ -191,7 +191,7 @@ namespace Encode.Bytes.Samples
         {
             RequestBody client = new BytesClient().GetRequestBodyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new object());
+            using RequestContent content = RequestContent.Create(new object());
             Response response = client.CustomContentType(content);
 
             Console.WriteLine(response.Status);
@@ -203,7 +203,7 @@ namespace Encode.Bytes.Samples
         {
             RequestBody client = new BytesClient().GetRequestBodyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new object());
+            using RequestContent content = RequestContent.Create(new object());
             Response response = await client.CustomContentTypeAsync(content);
 
             Console.WriteLine(response.Status);
@@ -233,7 +233,7 @@ namespace Encode.Bytes.Samples
         {
             RequestBody client = new BytesClient().GetRequestBodyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new object());
+            using RequestContent content = RequestContent.Create(new object());
             Response response = client.CustomContentType(content);
 
             Console.WriteLine(response.Status);
@@ -245,7 +245,7 @@ namespace Encode.Bytes.Samples
         {
             RequestBody client = new BytesClient().GetRequestBodyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new object());
+            using RequestContent content = RequestContent.Create(new object());
             Response response = await client.CustomContentTypeAsync(content);
 
             Console.WriteLine(response.Status);
@@ -275,7 +275,7 @@ namespace Encode.Bytes.Samples
         {
             RequestBody client = new BytesClient().GetRequestBodyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new object());
+            using RequestContent content = RequestContent.Create(new object());
             Response response = client.Base64(content);
 
             Console.WriteLine(response.Status);
@@ -287,7 +287,7 @@ namespace Encode.Bytes.Samples
         {
             RequestBody client = new BytesClient().GetRequestBodyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new object());
+            using RequestContent content = RequestContent.Create(new object());
             Response response = await client.Base64Async(content);
 
             Console.WriteLine(response.Status);
@@ -317,7 +317,7 @@ namespace Encode.Bytes.Samples
         {
             RequestBody client = new BytesClient().GetRequestBodyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new object());
+            using RequestContent content = RequestContent.Create(new object());
             Response response = client.Base64(content);
 
             Console.WriteLine(response.Status);
@@ -329,7 +329,7 @@ namespace Encode.Bytes.Samples
         {
             RequestBody client = new BytesClient().GetRequestBodyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new object());
+            using RequestContent content = RequestContent.Create(new object());
             Response response = await client.Base64Async(content);
 
             Console.WriteLine(response.Status);
@@ -359,7 +359,7 @@ namespace Encode.Bytes.Samples
         {
             RequestBody client = new BytesClient().GetRequestBodyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new object());
+            using RequestContent content = RequestContent.Create(new object());
             Response response = client.Base64url(content);
 
             Console.WriteLine(response.Status);
@@ -371,7 +371,7 @@ namespace Encode.Bytes.Samples
         {
             RequestBody client = new BytesClient().GetRequestBodyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new object());
+            using RequestContent content = RequestContent.Create(new object());
             Response response = await client.Base64urlAsync(content);
 
             Console.WriteLine(response.Status);
@@ -401,7 +401,7 @@ namespace Encode.Bytes.Samples
         {
             RequestBody client = new BytesClient().GetRequestBodyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new object());
+            using RequestContent content = RequestContent.Create(new object());
             Response response = client.Base64url(content);
 
             Console.WriteLine(response.Status);
@@ -413,7 +413,7 @@ namespace Encode.Bytes.Samples
         {
             RequestBody client = new BytesClient().GetRequestBodyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new object());
+            using RequestContent content = RequestContent.Create(new object());
             Response response = await client.Base64urlAsync(content);
 
             Console.WriteLine(response.Status);

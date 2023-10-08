@@ -26,7 +26,7 @@ namespace AuthoringTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AuthoringTypeSpecClient client = new AuthoringTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 projectKind = "CustomSingleLabelClassification",
                 storageInputContainerName = "<storageInputContainerName>",
@@ -52,7 +52,7 @@ namespace AuthoringTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AuthoringTypeSpecClient client = new AuthoringTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 projectKind = "CustomSingleLabelClassification",
                 storageInputContainerName = "<storageInputContainerName>",
@@ -78,7 +78,7 @@ namespace AuthoringTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AuthoringTypeSpecClient client = new AuthoringTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 projectKind = "CustomSingleLabelClassification",
                 storageInputContainerName = "<storageInputContainerName>",
@@ -113,7 +113,7 @@ namespace AuthoringTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AuthoringTypeSpecClient client = new AuthoringTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 projectKind = "CustomSingleLabelClassification",
                 storageInputContainerName = "<storageInputContainerName>",
@@ -416,7 +416,7 @@ namespace AuthoringTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AuthoringTypeSpecClient client = new AuthoringTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 modelLabel = "<modelLabel>",
             });
@@ -432,7 +432,7 @@ namespace AuthoringTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AuthoringTypeSpecClient client = new AuthoringTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 modelLabel = "<modelLabel>",
             });
@@ -448,7 +448,7 @@ namespace AuthoringTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AuthoringTypeSpecClient client = new AuthoringTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 modelLabel = "<modelLabel>",
             });
@@ -464,7 +464,7 @@ namespace AuthoringTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AuthoringTypeSpecClient client = new AuthoringTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 modelLabel = "<modelLabel>",
             });
@@ -532,7 +532,7 @@ namespace AuthoringTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AuthoringTypeSpecClient client = new AuthoringTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new object());
+            using RequestContent content = RequestContent.Create(new object());
             Response response = client.DeployProject("<projectName>", "<deploymentName>", content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
@@ -546,7 +546,7 @@ namespace AuthoringTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AuthoringTypeSpecClient client = new AuthoringTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new object());
+            using RequestContent content = RequestContent.Create(new object());
             Response response = await client.DeployProjectAsync("<projectName>", "<deploymentName>", content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
@@ -560,7 +560,7 @@ namespace AuthoringTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AuthoringTypeSpecClient client = new AuthoringTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new object());
+            using RequestContent content = RequestContent.Create(new object());
             Response response = client.DeployProject("<projectName>", "<deploymentName>", content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
@@ -574,7 +574,7 @@ namespace AuthoringTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AuthoringTypeSpecClient client = new AuthoringTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new object());
+            using RequestContent content = RequestContent.Create(new object());
             Response response = await client.DeployProjectAsync("<projectName>", "<deploymentName>", content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
@@ -640,7 +640,7 @@ namespace AuthoringTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AuthoringTypeSpecClient client = new AuthoringTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 firstDeploymentName = "<firstDeploymentName>",
                 secondDeploymentName = "<secondDeploymentName>",
@@ -657,7 +657,7 @@ namespace AuthoringTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AuthoringTypeSpecClient client = new AuthoringTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 firstDeploymentName = "<firstDeploymentName>",
                 secondDeploymentName = "<secondDeploymentName>",
@@ -674,7 +674,7 @@ namespace AuthoringTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AuthoringTypeSpecClient client = new AuthoringTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 firstDeploymentName = "<firstDeploymentName>",
                 secondDeploymentName = "<secondDeploymentName>",
@@ -691,7 +691,7 @@ namespace AuthoringTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AuthoringTypeSpecClient client = new AuthoringTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 firstDeploymentName = "<firstDeploymentName>",
                 secondDeploymentName = "<secondDeploymentName>",

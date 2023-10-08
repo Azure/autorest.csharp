@@ -109,7 +109,7 @@ namespace _Type.Property.ValueTypes.Samples
         {
             CollectionsModel client = new ValueTypesClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 property = new object[]
             {
@@ -130,7 +130,7 @@ property = "<property>",
         {
             CollectionsModel client = new ValueTypesClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 property = new object[]
             {
@@ -177,7 +177,7 @@ new InnerModel("<property>")
         {
             CollectionsModel client = new ValueTypesClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 property = new object[]
             {
@@ -198,7 +198,7 @@ property = "<property>",
         {
             CollectionsModel client = new ValueTypesClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 property = new object[]
             {

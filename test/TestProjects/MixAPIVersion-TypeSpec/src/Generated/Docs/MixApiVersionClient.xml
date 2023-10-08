@@ -102,7 +102,7 @@ This sample shows how to call CreateAsync and parse the result.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 MixApiVersionClient client = new MixApiVersionClient(endpoint);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     age = 1234,
 });
@@ -117,7 +117,7 @@ This sample shows how to call CreateAsync with all request content and parse the
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 MixApiVersionClient client = new MixApiVersionClient(endpoint);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     tag = "<tag>",
     age = 1234,
@@ -137,7 +137,7 @@ This sample shows how to call Create and parse the result.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 MixApiVersionClient client = new MixApiVersionClient(endpoint);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     age = 1234,
 });
@@ -152,7 +152,7 @@ This sample shows how to call Create with all request content and parse the resu
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 MixApiVersionClient client = new MixApiVersionClient(endpoint);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     tag = "<tag>",
     age = 1234,

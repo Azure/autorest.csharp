@@ -8,7 +8,7 @@ This sample shows how to call OperationAsync.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 AccessibilityClient client = new AccessibilityClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Response response = await client.OperationAsync(content);
 
 Console.WriteLine(response.Status);
@@ -18,7 +18,7 @@ This sample shows how to call OperationAsync with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 AccessibilityClient client = new AccessibilityClient(credential);
 
-RequestContent content = RequestContent.Create("<body>");
+using RequestContent content = RequestContent.Create("<body>");
 Response response = await client.OperationAsync(content);
 
 Console.WriteLine(response.Status);
@@ -31,7 +31,7 @@ This sample shows how to call Operation.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 AccessibilityClient client = new AccessibilityClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Response response = client.Operation(content);
 
 Console.WriteLine(response.Status);
@@ -41,7 +41,7 @@ This sample shows how to call Operation with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 AccessibilityClient client = new AccessibilityClient(credential);
 
-RequestContent content = RequestContent.Create("<body>");
+using RequestContent content = RequestContent.Create("<body>");
 Response response = client.Operation(content);
 
 Console.WriteLine(response.Status);

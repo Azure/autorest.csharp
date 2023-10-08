@@ -142,7 +142,7 @@ This sample shows how to call Put200Async.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpSuccessClient client = new HttpSuccessClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Response response = await client.Put200Async(content);
 
 Console.WriteLine(response.Status);
@@ -152,7 +152,7 @@ This sample shows how to call Put200Async with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpSuccessClient client = new HttpSuccessClient(credential);
 
-RequestContent content = RequestContent.Create("true");
+using RequestContent content = RequestContent.Create("true");
 Response response = await client.Put200Async(content);
 
 Console.WriteLine(response.Status);
@@ -165,7 +165,7 @@ This sample shows how to call Put200.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpSuccessClient client = new HttpSuccessClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Response response = client.Put200(content);
 
 Console.WriteLine(response.Status);
@@ -175,7 +175,7 @@ This sample shows how to call Put200 with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpSuccessClient client = new HttpSuccessClient(credential);
 
-RequestContent content = RequestContent.Create("true");
+using RequestContent content = RequestContent.Create("true");
 Response response = client.Put200(content);
 
 Console.WriteLine(response.Status);
@@ -188,7 +188,7 @@ This sample shows how to call Patch200Async.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpSuccessClient client = new HttpSuccessClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Response response = await client.Patch200Async(content);
 
 Console.WriteLine(response.Status);
@@ -198,7 +198,7 @@ This sample shows how to call Patch200Async with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpSuccessClient client = new HttpSuccessClient(credential);
 
-RequestContent content = RequestContent.Create("true");
+using RequestContent content = RequestContent.Create("true");
 Response response = await client.Patch200Async(content);
 
 Console.WriteLine(response.Status);
@@ -211,7 +211,7 @@ This sample shows how to call Patch200.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpSuccessClient client = new HttpSuccessClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Response response = client.Patch200(content);
 
 Console.WriteLine(response.Status);
@@ -221,7 +221,7 @@ This sample shows how to call Patch200 with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpSuccessClient client = new HttpSuccessClient(credential);
 
-RequestContent content = RequestContent.Create("true");
+using RequestContent content = RequestContent.Create("true");
 Response response = client.Patch200(content);
 
 Console.WriteLine(response.Status);
@@ -234,7 +234,7 @@ This sample shows how to call Post200Async.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpSuccessClient client = new HttpSuccessClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Response response = await client.Post200Async(content);
 
 Console.WriteLine(response.Status);
@@ -244,7 +244,7 @@ This sample shows how to call Post200Async with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpSuccessClient client = new HttpSuccessClient(credential);
 
-RequestContent content = RequestContent.Create("true");
+using RequestContent content = RequestContent.Create("true");
 Response response = await client.Post200Async(content);
 
 Console.WriteLine(response.Status);
@@ -257,7 +257,7 @@ This sample shows how to call Post200.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpSuccessClient client = new HttpSuccessClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Response response = client.Post200(content);
 
 Console.WriteLine(response.Status);
@@ -267,7 +267,7 @@ This sample shows how to call Post200 with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpSuccessClient client = new HttpSuccessClient(credential);
 
-RequestContent content = RequestContent.Create("true");
+using RequestContent content = RequestContent.Create("true");
 Response response = client.Post200(content);
 
 Console.WriteLine(response.Status);
@@ -280,7 +280,7 @@ This sample shows how to call Delete200Async.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpSuccessClient client = new HttpSuccessClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Response response = await client.Delete200Async(content);
 
 Console.WriteLine(response.Status);
@@ -290,7 +290,7 @@ This sample shows how to call Delete200Async with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpSuccessClient client = new HttpSuccessClient(credential);
 
-RequestContent content = RequestContent.Create("true");
+using RequestContent content = RequestContent.Create("true");
 Response response = await client.Delete200Async(content);
 
 Console.WriteLine(response.Status);
@@ -303,7 +303,7 @@ This sample shows how to call Delete200.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpSuccessClient client = new HttpSuccessClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Response response = client.Delete200(content);
 
 Console.WriteLine(response.Status);
@@ -313,7 +313,7 @@ This sample shows how to call Delete200 with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpSuccessClient client = new HttpSuccessClient(credential);
 
-RequestContent content = RequestContent.Create("true");
+using RequestContent content = RequestContent.Create("true");
 Response response = client.Delete200(content);
 
 Console.WriteLine(response.Status);
@@ -326,7 +326,7 @@ This sample shows how to call Put201Async.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpSuccessClient client = new HttpSuccessClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Response response = await client.Put201Async(content);
 
 Console.WriteLine(response.Status);
@@ -336,7 +336,7 @@ This sample shows how to call Put201Async with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpSuccessClient client = new HttpSuccessClient(credential);
 
-RequestContent content = RequestContent.Create("true");
+using RequestContent content = RequestContent.Create("true");
 Response response = await client.Put201Async(content);
 
 Console.WriteLine(response.Status);
@@ -349,7 +349,7 @@ This sample shows how to call Put201.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpSuccessClient client = new HttpSuccessClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Response response = client.Put201(content);
 
 Console.WriteLine(response.Status);
@@ -359,7 +359,7 @@ This sample shows how to call Put201 with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpSuccessClient client = new HttpSuccessClient(credential);
 
-RequestContent content = RequestContent.Create("true");
+using RequestContent content = RequestContent.Create("true");
 Response response = client.Put201(content);
 
 Console.WriteLine(response.Status);
@@ -372,7 +372,7 @@ This sample shows how to call Post201Async.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpSuccessClient client = new HttpSuccessClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Response response = await client.Post201Async(content);
 
 Console.WriteLine(response.Status);
@@ -382,7 +382,7 @@ This sample shows how to call Post201Async with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpSuccessClient client = new HttpSuccessClient(credential);
 
-RequestContent content = RequestContent.Create("true");
+using RequestContent content = RequestContent.Create("true");
 Response response = await client.Post201Async(content);
 
 Console.WriteLine(response.Status);
@@ -395,7 +395,7 @@ This sample shows how to call Post201.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpSuccessClient client = new HttpSuccessClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Response response = client.Post201(content);
 
 Console.WriteLine(response.Status);
@@ -405,7 +405,7 @@ This sample shows how to call Post201 with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpSuccessClient client = new HttpSuccessClient(credential);
 
-RequestContent content = RequestContent.Create("true");
+using RequestContent content = RequestContent.Create("true");
 Response response = client.Post201(content);
 
 Console.WriteLine(response.Status);
@@ -418,7 +418,7 @@ This sample shows how to call Put202Async.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpSuccessClient client = new HttpSuccessClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Response response = await client.Put202Async(content);
 
 Console.WriteLine(response.Status);
@@ -428,7 +428,7 @@ This sample shows how to call Put202Async with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpSuccessClient client = new HttpSuccessClient(credential);
 
-RequestContent content = RequestContent.Create("true");
+using RequestContent content = RequestContent.Create("true");
 Response response = await client.Put202Async(content);
 
 Console.WriteLine(response.Status);
@@ -441,7 +441,7 @@ This sample shows how to call Put202.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpSuccessClient client = new HttpSuccessClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Response response = client.Put202(content);
 
 Console.WriteLine(response.Status);
@@ -451,7 +451,7 @@ This sample shows how to call Put202 with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpSuccessClient client = new HttpSuccessClient(credential);
 
-RequestContent content = RequestContent.Create("true");
+using RequestContent content = RequestContent.Create("true");
 Response response = client.Put202(content);
 
 Console.WriteLine(response.Status);
@@ -464,7 +464,7 @@ This sample shows how to call Patch202Async.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpSuccessClient client = new HttpSuccessClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Response response = await client.Patch202Async(content);
 
 Console.WriteLine(response.Status);
@@ -474,7 +474,7 @@ This sample shows how to call Patch202Async with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpSuccessClient client = new HttpSuccessClient(credential);
 
-RequestContent content = RequestContent.Create("true");
+using RequestContent content = RequestContent.Create("true");
 Response response = await client.Patch202Async(content);
 
 Console.WriteLine(response.Status);
@@ -487,7 +487,7 @@ This sample shows how to call Patch202.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpSuccessClient client = new HttpSuccessClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Response response = client.Patch202(content);
 
 Console.WriteLine(response.Status);
@@ -497,7 +497,7 @@ This sample shows how to call Patch202 with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpSuccessClient client = new HttpSuccessClient(credential);
 
-RequestContent content = RequestContent.Create("true");
+using RequestContent content = RequestContent.Create("true");
 Response response = client.Patch202(content);
 
 Console.WriteLine(response.Status);
@@ -510,7 +510,7 @@ This sample shows how to call Post202Async.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpSuccessClient client = new HttpSuccessClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Response response = await client.Post202Async(content);
 
 Console.WriteLine(response.Status);
@@ -520,7 +520,7 @@ This sample shows how to call Post202Async with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpSuccessClient client = new HttpSuccessClient(credential);
 
-RequestContent content = RequestContent.Create("true");
+using RequestContent content = RequestContent.Create("true");
 Response response = await client.Post202Async(content);
 
 Console.WriteLine(response.Status);
@@ -533,7 +533,7 @@ This sample shows how to call Post202.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpSuccessClient client = new HttpSuccessClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Response response = client.Post202(content);
 
 Console.WriteLine(response.Status);
@@ -543,7 +543,7 @@ This sample shows how to call Post202 with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpSuccessClient client = new HttpSuccessClient(credential);
 
-RequestContent content = RequestContent.Create("true");
+using RequestContent content = RequestContent.Create("true");
 Response response = client.Post202(content);
 
 Console.WriteLine(response.Status);
@@ -556,7 +556,7 @@ This sample shows how to call Delete202Async.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpSuccessClient client = new HttpSuccessClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Response response = await client.Delete202Async(content);
 
 Console.WriteLine(response.Status);
@@ -566,7 +566,7 @@ This sample shows how to call Delete202Async with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpSuccessClient client = new HttpSuccessClient(credential);
 
-RequestContent content = RequestContent.Create("true");
+using RequestContent content = RequestContent.Create("true");
 Response response = await client.Delete202Async(content);
 
 Console.WriteLine(response.Status);
@@ -579,7 +579,7 @@ This sample shows how to call Delete202.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpSuccessClient client = new HttpSuccessClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Response response = client.Delete202(content);
 
 Console.WriteLine(response.Status);
@@ -589,7 +589,7 @@ This sample shows how to call Delete202 with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpSuccessClient client = new HttpSuccessClient(credential);
 
-RequestContent content = RequestContent.Create("true");
+using RequestContent content = RequestContent.Create("true");
 Response response = client.Delete202(content);
 
 Console.WriteLine(response.Status);
@@ -644,7 +644,7 @@ This sample shows how to call Put204Async.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpSuccessClient client = new HttpSuccessClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Response response = await client.Put204Async(content);
 
 Console.WriteLine(response.Status);
@@ -654,7 +654,7 @@ This sample shows how to call Put204Async with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpSuccessClient client = new HttpSuccessClient(credential);
 
-RequestContent content = RequestContent.Create("true");
+using RequestContent content = RequestContent.Create("true");
 Response response = await client.Put204Async(content);
 
 Console.WriteLine(response.Status);
@@ -667,7 +667,7 @@ This sample shows how to call Put204.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpSuccessClient client = new HttpSuccessClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Response response = client.Put204(content);
 
 Console.WriteLine(response.Status);
@@ -677,7 +677,7 @@ This sample shows how to call Put204 with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpSuccessClient client = new HttpSuccessClient(credential);
 
-RequestContent content = RequestContent.Create("true");
+using RequestContent content = RequestContent.Create("true");
 Response response = client.Put204(content);
 
 Console.WriteLine(response.Status);
@@ -690,7 +690,7 @@ This sample shows how to call Patch204Async.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpSuccessClient client = new HttpSuccessClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Response response = await client.Patch204Async(content);
 
 Console.WriteLine(response.Status);
@@ -700,7 +700,7 @@ This sample shows how to call Patch204Async with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpSuccessClient client = new HttpSuccessClient(credential);
 
-RequestContent content = RequestContent.Create("true");
+using RequestContent content = RequestContent.Create("true");
 Response response = await client.Patch204Async(content);
 
 Console.WriteLine(response.Status);
@@ -713,7 +713,7 @@ This sample shows how to call Patch204.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpSuccessClient client = new HttpSuccessClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Response response = client.Patch204(content);
 
 Console.WriteLine(response.Status);
@@ -723,7 +723,7 @@ This sample shows how to call Patch204 with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpSuccessClient client = new HttpSuccessClient(credential);
 
-RequestContent content = RequestContent.Create("true");
+using RequestContent content = RequestContent.Create("true");
 Response response = client.Patch204(content);
 
 Console.WriteLine(response.Status);
@@ -736,7 +736,7 @@ This sample shows how to call Post204Async.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpSuccessClient client = new HttpSuccessClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Response response = await client.Post204Async(content);
 
 Console.WriteLine(response.Status);
@@ -746,7 +746,7 @@ This sample shows how to call Post204Async with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpSuccessClient client = new HttpSuccessClient(credential);
 
-RequestContent content = RequestContent.Create("true");
+using RequestContent content = RequestContent.Create("true");
 Response response = await client.Post204Async(content);
 
 Console.WriteLine(response.Status);
@@ -759,7 +759,7 @@ This sample shows how to call Post204.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpSuccessClient client = new HttpSuccessClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Response response = client.Post204(content);
 
 Console.WriteLine(response.Status);
@@ -769,7 +769,7 @@ This sample shows how to call Post204 with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpSuccessClient client = new HttpSuccessClient(credential);
 
-RequestContent content = RequestContent.Create("true");
+using RequestContent content = RequestContent.Create("true");
 Response response = client.Post204(content);
 
 Console.WriteLine(response.Status);
@@ -782,7 +782,7 @@ This sample shows how to call Delete204Async.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpSuccessClient client = new HttpSuccessClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Response response = await client.Delete204Async(content);
 
 Console.WriteLine(response.Status);
@@ -792,7 +792,7 @@ This sample shows how to call Delete204Async with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpSuccessClient client = new HttpSuccessClient(credential);
 
-RequestContent content = RequestContent.Create("true");
+using RequestContent content = RequestContent.Create("true");
 Response response = await client.Delete204Async(content);
 
 Console.WriteLine(response.Status);
@@ -805,7 +805,7 @@ This sample shows how to call Delete204.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpSuccessClient client = new HttpSuccessClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Response response = client.Delete204(content);
 
 Console.WriteLine(response.Status);
@@ -815,7 +815,7 @@ This sample shows how to call Delete204 with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpSuccessClient client = new HttpSuccessClient(credential);
 
-RequestContent content = RequestContent.Create("true");
+using RequestContent content = RequestContent.Create("true");
 Response response = client.Delete204(content);
 
 Console.WriteLine(response.Status);

@@ -644,7 +644,7 @@ This sample shows how to call StartTranslationAsync.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     inputs = new object[]
     {
@@ -672,7 +672,7 @@ This sample shows how to call StartTranslationAsync with all parameters and requ
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     inputs = new object[]
     {
@@ -723,7 +723,7 @@ This sample shows how to call StartTranslation.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     inputs = new object[]
     {
@@ -751,7 +751,7 @@ This sample shows how to call StartTranslation with all parameters and request c
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     inputs = new object[]
     {

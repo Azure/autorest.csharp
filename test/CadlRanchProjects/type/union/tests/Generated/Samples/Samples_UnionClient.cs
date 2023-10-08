@@ -24,7 +24,7 @@ namespace _Type.Union.Samples
         {
             UnionClient client = new UnionClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 simpleUnion = 1234,
             });
@@ -39,7 +39,7 @@ namespace _Type.Union.Samples
         {
             UnionClient client = new UnionClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 simpleUnion = 1234,
             });
@@ -54,7 +54,7 @@ namespace _Type.Union.Samples
         {
             UnionClient client = new UnionClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 simpleUnion = 1234,
             });
@@ -69,7 +69,7 @@ namespace _Type.Union.Samples
         {
             UnionClient client = new UnionClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 simpleUnion = 1234,
             });
@@ -84,7 +84,7 @@ namespace _Type.Union.Samples
         {
             UnionClient client = new UnionClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 simpleUnion = 1234,
             });
@@ -99,7 +99,7 @@ namespace _Type.Union.Samples
         {
             UnionClient client = new UnionClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 simpleUnion = 1234,
             });
@@ -114,7 +114,7 @@ namespace _Type.Union.Samples
         {
             UnionClient client = new UnionClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 simpleUnion = 1234,
             });
@@ -129,7 +129,7 @@ namespace _Type.Union.Samples
         {
             UnionClient client = new UnionClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 simpleUnion = 1234,
             });
@@ -144,7 +144,7 @@ namespace _Type.Union.Samples
         {
             UnionClient client = new UnionClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 namedUnion = new
                 {
@@ -163,7 +163,7 @@ namespace _Type.Union.Samples
         {
             UnionClient client = new UnionClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 namedUnion = new
                 {
@@ -182,7 +182,7 @@ namespace _Type.Union.Samples
         {
             UnionClient client = new UnionClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 namedUnion = new
                 {
@@ -201,7 +201,7 @@ namespace _Type.Union.Samples
         {
             UnionClient client = new UnionClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 namedUnion = new
                 {
@@ -220,7 +220,7 @@ namespace _Type.Union.Samples
         {
             UnionClient client = new UnionClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 namedUnion = new
                 {
@@ -239,7 +239,7 @@ namespace _Type.Union.Samples
         {
             UnionClient client = new UnionClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 namedUnion = new
                 {
@@ -258,7 +258,7 @@ namespace _Type.Union.Samples
         {
             UnionClient client = new UnionClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 namedUnion = new
                 {
@@ -277,7 +277,7 @@ namespace _Type.Union.Samples
         {
             UnionClient client = new UnionClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 namedUnion = new
                 {
