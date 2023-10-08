@@ -38,7 +38,7 @@ namespace AutoRest.CSharp.LowLevel.Output.Samples
             _samples = client.ClientMethods.SelectMany(m => m.Samples);
         }
 
-        protected override IEnumerable<string> EnsureUsings()
+        protected override IEnumerable<string> BuildUsings()
         {
             yield return "Azure.Identity"; // we need this using because we might need to call `new DefaultAzureCredential` from `Azure.Identity` package, but Azure.Identity package is not a dependency of the generator project.
         }
@@ -73,7 +73,7 @@ namespace AutoRest.CSharp.LowLevel.Output.Samples
         private bool? _isEmpty;
         public bool IsEmpty => _isEmpty ??= !Methods.Any();
 
-        protected override IEnumerable<Method> EnsureMethods()
+        protected override IEnumerable<Method> BuildMethods()
         {
             foreach (var sample in Client.ClientMethods.SelectMany(m => m.Samples))
             {

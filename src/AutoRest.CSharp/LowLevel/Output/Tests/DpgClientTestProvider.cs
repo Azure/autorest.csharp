@@ -39,7 +39,7 @@ namespace AutoRest.CSharp.LowLevel.Output.Tests
 
         protected override string DefaultAccessibility => "public";
 
-        protected override IEnumerable<Method> EnsureConstructors()
+        protected override IEnumerable<Method> BuildConstructors()
         {
             yield return new(new ConstructorSignature(
                 Type,
@@ -54,7 +54,7 @@ namespace AutoRest.CSharp.LowLevel.Output.Tests
                 MethodBodyStatement.Empty);
         }
 
-        protected override IEnumerable<Method> EnsureMethods()
+        protected override IEnumerable<Method> BuildMethods()
         {
             foreach (var sample in Client.ClientMethods.SelectMany(m => m.Samples))
             {

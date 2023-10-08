@@ -44,7 +44,7 @@ namespace AutoRest.CSharp.LowLevel.Output.Tests
 
         public override CSharpType? Inherits => new CSharpType(typeof(RecordedTestBase<>), TestEnvironment.Type);
 
-        protected override IEnumerable<Method> EnsureConstructors()
+        protected override IEnumerable<Method> BuildConstructors()
         {
             yield return new(new ConstructorSignature(
                     Type: Type,
@@ -59,7 +59,7 @@ namespace AutoRest.CSharp.LowLevel.Output.Tests
                     MethodBodyStatement.Empty);
         }
 
-        protected override IEnumerable<Method> EnsureMethods()
+        protected override IEnumerable<Method> BuildMethods()
         {
             foreach (var method in CreateClientMethods.Values)
             {

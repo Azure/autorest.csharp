@@ -17,9 +17,9 @@ namespace AutoRest.CSharp.LowLevel.Output
         }
 
         private IEnumerable<string>? _usings;
-        public IEnumerable<string> Usings => _usings ??= EnsureUsings();
+        public IEnumerable<string> Usings => _usings ??= BuildUsings();
 
-        protected virtual IEnumerable<string> EnsureUsings()
+        protected virtual IEnumerable<string> BuildUsings()
         {
             yield break;
         }
@@ -27,25 +27,25 @@ namespace AutoRest.CSharp.LowLevel.Output
         public virtual CSharpType? Inherits => null;
 
         private IEnumerable<CSharpType>? _implements;
-        public virtual IEnumerable<CSharpType> Implements => _implements ??= EnsureImplements();
+        public virtual IEnumerable<CSharpType> Implements => _implements ??= BuildImplements();
 
         private IEnumerable<Method>? _methods;
-        public IEnumerable<Method> Methods => _methods ??= EnsureMethods();
+        public IEnumerable<Method> Methods => _methods ??= BuildMethods();
 
         private IEnumerable<Method>? _constructors;
-        public IEnumerable<Method> Constructors => _constructors ??= EnsureConstructors();
+        public IEnumerable<Method> Constructors => _constructors ??= BuildConstructors();
 
-        protected virtual IEnumerable<CSharpType> EnsureImplements()
+        protected virtual IEnumerable<CSharpType> BuildImplements()
         {
             yield break;
         }
 
-        protected virtual IEnumerable<Method> EnsureMethods()
+        protected virtual IEnumerable<Method> BuildMethods()
         {
             yield break;
         }
 
-        protected virtual IEnumerable<Method> EnsureConstructors()
+        protected virtual IEnumerable<Method> BuildConstructors()
         {
             yield break;
         }
