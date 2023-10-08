@@ -20,7 +20,8 @@ namespace Client.Structure.Service.rename.operation.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_RenamedTwo_ShortVersion()
         {
-            Group client = new RenamedOperationClient("default").GetGroupClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Group client = new RenamedOperationClient(endpoint, "default").GetGroupClient();
 
             Response response = client.RenamedTwo();
 
@@ -31,7 +32,8 @@ namespace Client.Structure.Service.rename.operation.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_RenamedTwo_ShortVersion_Async()
         {
-            Group client = new RenamedOperationClient("default").GetGroupClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Group client = new RenamedOperationClient(endpoint, "default").GetGroupClient();
 
             Response response = await client.RenamedTwoAsync();
 
@@ -42,7 +44,8 @@ namespace Client.Structure.Service.rename.operation.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_RenamedTwo_AllParameters()
         {
-            Group client = new RenamedOperationClient("default").GetGroupClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Group client = new RenamedOperationClient(endpoint, "default").GetGroupClient();
 
             Response response = client.RenamedTwo();
 
@@ -53,7 +56,8 @@ namespace Client.Structure.Service.rename.operation.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_RenamedTwo_AllParameters_Async()
         {
-            Group client = new RenamedOperationClient("default").GetGroupClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Group client = new RenamedOperationClient(endpoint, "default").GetGroupClient();
 
             Response response = await client.RenamedTwoAsync();
 
@@ -64,7 +68,8 @@ namespace Client.Structure.Service.rename.operation.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_RenamedFour_ShortVersion()
         {
-            Group client = new RenamedOperationClient("default").GetGroupClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Group client = new RenamedOperationClient(endpoint, "default").GetGroupClient();
 
             Response response = client.RenamedFour();
 
@@ -75,7 +80,8 @@ namespace Client.Structure.Service.rename.operation.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_RenamedFour_ShortVersion_Async()
         {
-            Group client = new RenamedOperationClient("default").GetGroupClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Group client = new RenamedOperationClient(endpoint, "default").GetGroupClient();
 
             Response response = await client.RenamedFourAsync();
 
@@ -86,7 +92,8 @@ namespace Client.Structure.Service.rename.operation.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_RenamedFour_AllParameters()
         {
-            Group client = new RenamedOperationClient("default").GetGroupClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Group client = new RenamedOperationClient(endpoint, "default").GetGroupClient();
 
             Response response = client.RenamedFour();
 
@@ -97,7 +104,8 @@ namespace Client.Structure.Service.rename.operation.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_RenamedFour_AllParameters_Async()
         {
-            Group client = new RenamedOperationClient("default").GetGroupClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Group client = new RenamedOperationClient(endpoint, "default").GetGroupClient();
 
             Response response = await client.RenamedFourAsync();
 
@@ -108,7 +116,8 @@ namespace Client.Structure.Service.rename.operation.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_RenamedSix_ShortVersion()
         {
-            Group client = new RenamedOperationClient("default").GetGroupClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Group client = new RenamedOperationClient(endpoint, "default").GetGroupClient();
 
             Response response = client.RenamedSix();
 
@@ -119,7 +128,8 @@ namespace Client.Structure.Service.rename.operation.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_RenamedSix_ShortVersion_Async()
         {
-            Group client = new RenamedOperationClient("default").GetGroupClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Group client = new RenamedOperationClient(endpoint, "default").GetGroupClient();
 
             Response response = await client.RenamedSixAsync();
 
@@ -130,7 +140,8 @@ namespace Client.Structure.Service.rename.operation.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_RenamedSix_AllParameters()
         {
-            Group client = new RenamedOperationClient("default").GetGroupClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Group client = new RenamedOperationClient(endpoint, "default").GetGroupClient();
 
             Response response = client.RenamedSix();
 
@@ -141,7 +152,8 @@ namespace Client.Structure.Service.rename.operation.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_RenamedSix_AllParameters_Async()
         {
-            Group client = new RenamedOperationClient("default").GetGroupClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Group client = new RenamedOperationClient(endpoint, "default").GetGroupClient();
 
             Response response = await client.RenamedSixAsync();
 

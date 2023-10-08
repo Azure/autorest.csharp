@@ -20,7 +20,8 @@ namespace Client.Structure.Service.TwoOperationGroup.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_One_ShortVersion()
         {
-            Group1 client = new TwoOperationGroupClient().GetGroup1Client("default", apiVersion: "1.0.0");
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Group1 client = new TwoOperationGroupClient(endpoint).GetGroup1Client("default", apiVersion: "1.0.0");
 
             Response response = client.One();
 
@@ -31,7 +32,8 @@ namespace Client.Structure.Service.TwoOperationGroup.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_One_ShortVersion_Async()
         {
-            Group1 client = new TwoOperationGroupClient().GetGroup1Client("default", apiVersion: "1.0.0");
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Group1 client = new TwoOperationGroupClient(endpoint).GetGroup1Client("default", apiVersion: "1.0.0");
 
             Response response = await client.OneAsync();
 
@@ -42,7 +44,8 @@ namespace Client.Structure.Service.TwoOperationGroup.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_One_AllParameters()
         {
-            Group1 client = new TwoOperationGroupClient().GetGroup1Client("default", apiVersion: "1.0.0");
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Group1 client = new TwoOperationGroupClient(endpoint).GetGroup1Client("default", apiVersion: "1.0.0");
 
             Response response = client.One();
 
@@ -53,7 +56,8 @@ namespace Client.Structure.Service.TwoOperationGroup.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_One_AllParameters_Async()
         {
-            Group1 client = new TwoOperationGroupClient().GetGroup1Client("default", apiVersion: "1.0.0");
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Group1 client = new TwoOperationGroupClient(endpoint).GetGroup1Client("default", apiVersion: "1.0.0");
 
             Response response = await client.OneAsync();
 
@@ -64,7 +68,8 @@ namespace Client.Structure.Service.TwoOperationGroup.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Three_ShortVersion()
         {
-            Group1 client = new TwoOperationGroupClient().GetGroup1Client("default", apiVersion: "1.0.0");
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Group1 client = new TwoOperationGroupClient(endpoint).GetGroup1Client("default", apiVersion: "1.0.0");
 
             Response response = client.Three();
 
@@ -75,7 +80,8 @@ namespace Client.Structure.Service.TwoOperationGroup.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Three_ShortVersion_Async()
         {
-            Group1 client = new TwoOperationGroupClient().GetGroup1Client("default", apiVersion: "1.0.0");
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Group1 client = new TwoOperationGroupClient(endpoint).GetGroup1Client("default", apiVersion: "1.0.0");
 
             Response response = await client.ThreeAsync();
 
@@ -86,7 +92,8 @@ namespace Client.Structure.Service.TwoOperationGroup.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Three_AllParameters()
         {
-            Group1 client = new TwoOperationGroupClient().GetGroup1Client("default", apiVersion: "1.0.0");
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Group1 client = new TwoOperationGroupClient(endpoint).GetGroup1Client("default", apiVersion: "1.0.0");
 
             Response response = client.Three();
 
@@ -97,7 +104,8 @@ namespace Client.Structure.Service.TwoOperationGroup.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Three_AllParameters_Async()
         {
-            Group1 client = new TwoOperationGroupClient().GetGroup1Client("default", apiVersion: "1.0.0");
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Group1 client = new TwoOperationGroupClient(endpoint).GetGroup1Client("default", apiVersion: "1.0.0");
 
             Response response = await client.ThreeAsync();
 
@@ -108,7 +116,8 @@ namespace Client.Structure.Service.TwoOperationGroup.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Four_ShortVersion()
         {
-            Group1 client = new TwoOperationGroupClient().GetGroup1Client("default", apiVersion: "1.0.0");
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Group1 client = new TwoOperationGroupClient(endpoint).GetGroup1Client("default", apiVersion: "1.0.0");
 
             Response response = client.Four();
 
@@ -119,7 +128,8 @@ namespace Client.Structure.Service.TwoOperationGroup.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Four_ShortVersion_Async()
         {
-            Group1 client = new TwoOperationGroupClient().GetGroup1Client("default", apiVersion: "1.0.0");
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Group1 client = new TwoOperationGroupClient(endpoint).GetGroup1Client("default", apiVersion: "1.0.0");
 
             Response response = await client.FourAsync();
 
@@ -130,7 +140,8 @@ namespace Client.Structure.Service.TwoOperationGroup.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Four_AllParameters()
         {
-            Group1 client = new TwoOperationGroupClient().GetGroup1Client("default", apiVersion: "1.0.0");
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Group1 client = new TwoOperationGroupClient(endpoint).GetGroup1Client("default", apiVersion: "1.0.0");
 
             Response response = client.Four();
 
@@ -141,7 +152,8 @@ namespace Client.Structure.Service.TwoOperationGroup.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Four_AllParameters_Async()
         {
-            Group1 client = new TwoOperationGroupClient().GetGroup1Client("default", apiVersion: "1.0.0");
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Group1 client = new TwoOperationGroupClient(endpoint).GetGroup1Client("default", apiVersion: "1.0.0");
 
             Response response = await client.FourAsync();
 

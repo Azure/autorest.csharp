@@ -1,4 +1,3 @@
-using System;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoRest.TestServer.Tests.Infrastructure;
@@ -13,7 +12,7 @@ namespace CadlRanchProjects.Tests
         [Test]
         public void Client_Structure_Renamed_Operation_methods()
         {
-            /*cheeck methods in service client. */
+            /*check methods in service client. */
             var methodsOfServiceClient = typeof(RenamedOperationClient).GetMethods();
             Assert.IsNotNull(methodsOfServiceClient);
             Assert.AreEqual(3, methodsOfServiceClient.Where(method => method.Name.EndsWith("Async")).ToArray().Length);
@@ -23,7 +22,7 @@ namespace CadlRanchProjects.Tests
             //check existance of method to get the operation group client
             Assert.AreNotEqual(null, typeof(RenamedOperationClient).GetMethod("GetGroupClient"));
 
-            /*cheeck methods in operation client. */
+            /*check methods in operation client. */
             var methodsOfOperationGroup = typeof(Group).GetMethods();
             Assert.IsNotNull(methodsOfOperationGroup);
             Assert.AreEqual(3, methodsOfOperationGroup.Where(method => method.Name.EndsWith("Async")).ToArray().Length);

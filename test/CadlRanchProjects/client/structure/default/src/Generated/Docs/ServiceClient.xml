@@ -5,7 +5,8 @@
       <example>
 This sample shows how to call OneAsync.
 <code><![CDATA[
-ServiceClient client = new ServiceClient("default");
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ServiceClient client = new ServiceClient(endpoint, "default");
 
 Response response = await client.OneAsync();
 
@@ -13,7 +14,8 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call OneAsync with all request content.
 <code><![CDATA[
-ServiceClient client = new ServiceClient("default");
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ServiceClient client = new ServiceClient(endpoint, "default");
 
 Response response = await client.OneAsync();
 
@@ -24,7 +26,8 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call One.
 <code><![CDATA[
-ServiceClient client = new ServiceClient("default");
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ServiceClient client = new ServiceClient(endpoint, "default");
 
 Response response = client.One();
 
@@ -32,7 +35,8 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call One with all request content.
 <code><![CDATA[
-ServiceClient client = new ServiceClient("default");
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ServiceClient client = new ServiceClient(endpoint, "default");
 
 Response response = client.One();
 
@@ -43,7 +47,8 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call TwoAsync.
 <code><![CDATA[
-ServiceClient client = new ServiceClient("default");
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ServiceClient client = new ServiceClient(endpoint, "default");
 
 Response response = await client.TwoAsync();
 
@@ -51,7 +56,8 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call TwoAsync with all request content.
 <code><![CDATA[
-ServiceClient client = new ServiceClient("default");
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ServiceClient client = new ServiceClient(endpoint, "default");
 
 Response response = await client.TwoAsync();
 
@@ -62,7 +68,8 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call Two.
 <code><![CDATA[
-ServiceClient client = new ServiceClient("default");
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ServiceClient client = new ServiceClient(endpoint, "default");
 
 Response response = client.Two();
 
@@ -70,7 +77,8 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Two with all request content.
 <code><![CDATA[
-ServiceClient client = new ServiceClient("default");
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ServiceClient client = new ServiceClient(endpoint, "default");
 
 Response response = client.Two();
 
@@ -81,7 +89,8 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call ThreeAsync.
 <code><![CDATA[
-ServiceClient client = new ServiceClient("default");
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ServiceClient client = new ServiceClient(endpoint, "default");
 
 Response response = await client.ThreeAsync();
 
@@ -89,7 +98,8 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call ThreeAsync with all request content.
 <code><![CDATA[
-ServiceClient client = new ServiceClient("default");
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ServiceClient client = new ServiceClient(endpoint, "default");
 
 Response response = await client.ThreeAsync();
 
@@ -100,7 +110,8 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call Three.
 <code><![CDATA[
-ServiceClient client = new ServiceClient("default");
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ServiceClient client = new ServiceClient(endpoint, "default");
 
 Response response = client.Three();
 
@@ -108,7 +119,8 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Three with all request content.
 <code><![CDATA[
-ServiceClient client = new ServiceClient("default");
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ServiceClient client = new ServiceClient(endpoint, "default");
 
 Response response = client.Three();
 
@@ -119,7 +131,8 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call FourAsync.
 <code><![CDATA[
-ServiceClient client = new ServiceClient("default");
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ServiceClient client = new ServiceClient(endpoint, "default");
 
 Response response = await client.FourAsync();
 
@@ -127,7 +140,8 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call FourAsync with all request content.
 <code><![CDATA[
-ServiceClient client = new ServiceClient("default");
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ServiceClient client = new ServiceClient(endpoint, "default");
 
 Response response = await client.FourAsync();
 
@@ -138,7 +152,8 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call Four.
 <code><![CDATA[
-ServiceClient client = new ServiceClient("default");
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ServiceClient client = new ServiceClient(endpoint, "default");
 
 Response response = client.Four();
 
@@ -146,7 +161,8 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Four with all request content.
 <code><![CDATA[
-ServiceClient client = new ServiceClient("default");
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ServiceClient client = new ServiceClient(endpoint, "default");
 
 Response response = client.Four();
 
@@ -157,7 +173,8 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call FiveAsync.
 <code><![CDATA[
-ServiceClient client = new ServiceClient("default");
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ServiceClient client = new ServiceClient(endpoint, "default");
 
 Response response = await client.FiveAsync();
 
@@ -165,7 +182,8 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call FiveAsync with all request content.
 <code><![CDATA[
-ServiceClient client = new ServiceClient("default");
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ServiceClient client = new ServiceClient(endpoint, "default");
 
 Response response = await client.FiveAsync();
 
@@ -176,7 +194,8 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call Five.
 <code><![CDATA[
-ServiceClient client = new ServiceClient("default");
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ServiceClient client = new ServiceClient(endpoint, "default");
 
 Response response = client.Five();
 
@@ -184,7 +203,8 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Five with all request content.
 <code><![CDATA[
-ServiceClient client = new ServiceClient("default");
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ServiceClient client = new ServiceClient(endpoint, "default");
 
 Response response = client.Five();
 
@@ -195,7 +215,8 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call SixAsync.
 <code><![CDATA[
-ServiceClient client = new ServiceClient("default");
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ServiceClient client = new ServiceClient(endpoint, "default");
 
 Response response = await client.SixAsync();
 
@@ -203,7 +224,8 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call SixAsync with all request content.
 <code><![CDATA[
-ServiceClient client = new ServiceClient("default");
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ServiceClient client = new ServiceClient(endpoint, "default");
 
 Response response = await client.SixAsync();
 
@@ -214,7 +236,8 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call Six.
 <code><![CDATA[
-ServiceClient client = new ServiceClient("default");
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ServiceClient client = new ServiceClient(endpoint, "default");
 
 Response response = client.Six();
 
@@ -222,7 +245,8 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Six with all request content.
 <code><![CDATA[
-ServiceClient client = new ServiceClient("default");
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ServiceClient client = new ServiceClient(endpoint, "default");
 
 Response response = client.Six();
 
