@@ -6,15 +6,16 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoRest.CSharp.Common.Utilities;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.AutoRest.PostProcess;
 using AutoRest.CSharp.Mgmt.Decorator;
-using AutoRest.CSharp.Mgmt.Decorator.Transformer;
 using AutoRest.CSharp.Mgmt.Generation;
 using AutoRest.CSharp.Mgmt.Output;
+using AutoRest.CSharp.Mgmt.Report;
 using AutoRest.CSharp.Output.Models.Types;
 using Microsoft.CodeAnalysis;
 
@@ -69,6 +70,42 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                     continue;
 
                 var name = model.Type.Name;
+
+                if (model is MgmtObjectType mot)
+                {
+                    ObjectModelItem mi = new ObjectModelItem(mot.Declaration.Namespace, mot.Declaration.Name, mot.ObjectSchema.GetFullSerializedName());
+                    mi.Properties = mot.Properties.ToDictionary(p => p.Declaration.Name, p => mot.ObjectSchema.GetFullSerializedName(p.SchemaProperty!));
+                    MgmtReport.Instance.ObjectModelSection.Add(mi.FullName, mi);
+                }
+                else if (model is EnumType et)
+                {
+                    var schema = MgmtContext.Library.SchemaMap.First(map => map.Value == model).Key;
+                    var choices = schema switch
+                    {
+                        ChoiceSchema sc => sc.Choices,
+                        SealedChoiceSchema scs => scs.Choices,
+                        _ => throw new InvalidOperationException("Unexpected Schema type for EnumType: " + schema.GetType())
+                    };
+
+                    EnumModelItem mi = new EnumModelItem(et.Declaration.Namespace, et.Declaration.Name, schema.GetFullSerializedName());
+                    mi.Values = et.Values.ToDictionary(v => v.Declaration.Name, v =>
+                    {
+                        var found = choices.FirstOrDefault(c => c.Value == v.Value.Value?.ToString());
+                        if (found == null)
+                        {
+                            var allValues = string.Join(",", choices.Select(c => c.Value ?? "<null>"));
+                            AutoRestLogger.Warning($"Can't find matching enumvalue '{v.Value}' in '{allValues}'").Wait();
+                            return "<no matching enum value found>";
+                        }
+                        return schema.GetFullSerializedName(found);
+                    });
+                    MgmtReport.Instance.EnumModelSection.Add(mi.FullName, mi);
+                }
+                else
+                {
+                    AutoRestLogger.Warning("Model found which is not MgmtObjectType: " + name).Wait();
+                }
+
                 WriteArmModel(project, model, serializeWriter, $"Models/{name}.cs", $"Models/{name}.Serialization.cs");
             }
 
@@ -94,6 +131,11 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                     continue;
 
                 var name = model.Type.Name;
+
+                ObjectModelItem mi = new ObjectModelItem(model.Declaration.Namespace, model.Declaration.Name, model.ObjectSchema.GetFullSerializedName());
+                mi.Properties = model.Properties.ToDictionary(p => p.Declaration.Name, p => model.ObjectSchema.GetFullSerializedName(p.SchemaProperty!));
+                MgmtReport.Instance.ObjectModelSection.Add(mi.FullName, mi);
+
                 WriteArmModel(project, model, serializeWriter, $"{name}.cs", $"Models/{name}.Serialization.cs");
             }
 
@@ -101,6 +143,15 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             {
                 var writer = ResourceWriter.GetWriter(resource);
                 writer.Write();
+
+                var ri = new ResourceItem(resource.ResourceName);
+                ri.ContextPaths =
+                    resource.GetOperation.Select(rop => rop.ContextualPath.ToString()).ToList() ??
+                    resource.ResourceCollection?.GetOperation.Select(rop => rop.ContextualPath.ToString()).ToList() ??
+                    new List<string>();
+                ri.IsNonResource = !resource.OperationSet.IsResource();
+                ri.Operations = resource.AllOperations.ToDictionary(op => op.MethodSignature.Name, op => op.Select(mrop => mrop.OperationId).ToList());
+                MgmtReport.Instance.ResourceSection.Add(ri.Name, ri);
 
                 AddGeneratedFile(project, $"{resource.Type.Name}.cs", writer.ToString());
             }

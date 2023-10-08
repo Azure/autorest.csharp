@@ -89,7 +89,7 @@ internal static class SchemaNameAndFormatUpdater
             string oriName = parameter.Language.Default.Name;
             parameter.Language.Default.SerializedName ??= parameter.Language.Default.Name;
             parameter.Language.Default.Name = target.NewName;
-            TransformStore.Instance.AddTransformLogForApplyChange(
+            MgmtReport.Instance.TransformSection.AddTransformLogForApplyChange(
                 new TransformItem(target.Source, target.Key, operation.OperationId!, target.Value),
                 operation.GetFullSerializedName(parameter),
                 "ApplyRenameParameter", oriName, parameter.Language.Default.Name);
@@ -228,7 +228,7 @@ internal static class SchemaNameAndFormatUpdater
         string oriName = language.Default.Name;
         language.Default.SerializedName ??= language.Default.Name;
         language.Default.Name = value;
-        TransformStore.Instance.AddTransformLogForApplyChange(rrt.Source, rrt.Key, rrt.Value, targetFullSerializedName,
+        MgmtReport.Instance.TransformSection.AddTransformLogForApplyChange(rrt.Source, rrt.Key, rrt.Value, targetFullSerializedName,
             "ApplyNewName", oriName, value);
     }
 
@@ -241,7 +241,7 @@ internal static class SchemaNameAndFormatUpdater
         {
             AllSchemaTypes oriType = schema.Type;
             schema.Type = formatPattern.PrimitiveType!.Value;
-            TransformStore.Instance.AddTransformLogForApplyChange(rrt.Source, rrt.Key, rrt.Value, targetFullSerializedName,
+            MgmtReport.Instance.TransformSection.AddTransformLogForApplyChange(rrt.Source, rrt.Key, rrt.Value, targetFullSerializedName,
                 "ApplyNewType", oriType.ToString(), schema.Type.ToString());
         }
         else
@@ -250,7 +250,7 @@ internal static class SchemaNameAndFormatUpdater
                 schema.Extensions = new RecordOfStringAndAny();
             string? oriFormat = schema.Extensions.Format;
             schema.Extensions.Format = formatPattern.ExtensionType!;
-            TransformStore.Instance.AddTransformLogForApplyChange(rrt.Source, rrt.Key, rrt.Value, targetFullSerializedName,
+            MgmtReport.Instance.TransformSection.AddTransformLogForApplyChange(rrt.Source, rrt.Key, rrt.Value, targetFullSerializedName,
                 "ApplyNewFormat", oriFormat, schema.Extensions.Format);
         }
     }
@@ -395,7 +395,7 @@ internal static class SchemaNameAndFormatUpdater
         var tempName = originalName;
         var result = NameTransformer.Instance.EnsureNameCase(originalName, (applyStep) =>
         {
-            TransformStore.Instance.AddTransformLogForApplyChange(MgmtConfiguration.ConfigName.AcronymMapping, applyStep.MappingKey, applyStep.MappingValue.RawValue, targetFullSerializedName,
+            MgmtReport.Instance.TransformSection.AddTransformLogForApplyChange(MgmtConfiguration.ConfigName.AcronymMapping, applyStep.MappingKey, applyStep.MappingValue.RawValue, targetFullSerializedName,
                 "ApplyAcronymMapping", tempName, applyStep.NewName.Name);
             tempName = applyStep.NewName.Name;
         });

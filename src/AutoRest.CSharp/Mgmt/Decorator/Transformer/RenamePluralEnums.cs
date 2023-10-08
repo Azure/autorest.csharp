@@ -27,7 +27,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
                 string schemaName = schema.Language.Default.Name;
                 if (enumsToKeepPlural.Contains(schemaName))
                 {
-                    TransformStore.Instance.AddTransformLog(
+                    MgmtReport.Instance.TransformSection.AddTransformLog(
                         new TransformItem(MgmtConfiguration.ConfigName.KeepPluralEnums, schemaName),
                         schema.GetOriginalName(), $"Keep Enum {schemaName} Plural");
                     continue;

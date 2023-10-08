@@ -11,7 +11,7 @@ namespace AutoRest.CSharp.Mgmt.Report
         public static T AddToTransformerStore<T>(this T items, string transformerType, bool fromConfig) where T : IEnumerable<string>
         {
             foreach (var item in items)
-                TransformStore.Instance.AddTransformer(transformerType, item, fromConfig);
+                MgmtReport.Instance.TransformSection.AddTransformer(transformerType, item, fromConfig);
             return items;
         }
 
@@ -25,7 +25,7 @@ namespace AutoRest.CSharp.Mgmt.Report
             foreach (var kv in dict)
             {
                 var items = toTransformerArguments((transformerType, kv.Key, kv.Value));
-                TransformStore.Instance.AddTransformers(items);
+                MgmtReport.Instance.TransformSection.AddTransformers(items);
             }
             return dict;
         }

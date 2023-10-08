@@ -868,7 +868,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                     }
                     else
                     {
-                        TransformStore.Instance.AddTransformLog(
+                        MgmtReport.Instance.TransformSection.AddTransformLog(
                             new TransformItem(MgmtConfiguration.ConfigName.KeepPluralResourceData, schemaName),
                             resourceDataSchema.GetFullSerializedName(), $"Keep ObjectName as Plural: {schemaName}");
                     }

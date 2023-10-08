@@ -23,7 +23,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
                 var omittedOGs = MgmtContext.CodeModel.OperationGroups.Where(og => omitSet.Contains(og.Key)).ToList();
                 var nonOmittedOGs = MgmtContext.CodeModel.OperationGroups.Where(og => !omitSet.Contains(og.Key)).ToList();
 
-                omittedOGs.ForEach(og => TransformStore.Instance.AddTransformLog(
+                omittedOGs.ForEach(og => MgmtReport.Instance.TransformSection.AddTransformLog(
                     new TransformItem(MgmtConfiguration.ConfigName.OperationGroupsToOmit, og.Key),
                     og.GetFullSerializedName(), $"Omit OperationGroup: '{og.GetFullSerializedName()}'"));
 
@@ -54,7 +54,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
                 {
                     MgmtContext.CodeModel.Schemas.Objects.Remove(objSchema);
                     foreach (var og in schemasToOmit[schema])
-                        TransformStore.Instance.AddTransformLog(
+                        MgmtReport.Instance.TransformSection.AddTransformLog(
                             new TransformItem(MgmtConfiguration.ConfigName.OperationGroupsToOmit, og.Key),
                             schema.GetFullSerializedName(), $"Omit Object '{schema.GetFullSerializedName()}' under OperationGroup '{og.GetFullSerializedName()}'");
                     RemoveRelations(objSchema, schemasToOmit[objSchema]);
@@ -63,7 +63,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
                 {
                     MgmtContext.CodeModel.Schemas.Choices.Remove(choiceSchema);
                     foreach (var og in schemasToOmit[schema])
-                        TransformStore.Instance.AddTransformLog(
+                        MgmtReport.Instance.TransformSection.AddTransformLog(
                             new TransformItem(MgmtConfiguration.ConfigName.OperationGroupsToOmit, og.Key),
                             schema.GetFullSerializedName(), $"Omit Choice '{schema.GetFullSerializedName()}' under OperationGroup '{og.GetFullSerializedName()}'");
                 }
@@ -71,7 +71,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
                 {
                     MgmtContext.CodeModel.Schemas.SealedChoices.Remove(sealChoiceSchema);
                     foreach (var og in schemasToOmit[schema])
-                        TransformStore.Instance.AddTransformLog(
+                        MgmtReport.Instance.TransformSection.AddTransformLog(
                             new TransformItem(MgmtConfiguration.ConfigName.OperationGroupsToOmit, og.Key),
                             schema.GetFullSerializedName(), $"Omit SealedChoice '{schema.GetFullSerializedName()}' under OperationGroup '{og.GetFullSerializedName()}'");
                 }
@@ -88,7 +88,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
                     {
                         parent.Children.Immediate.Remove(schema);
                         foreach (var og in groups)
-                            TransformStore.Instance.AddTransformLog(
+                            MgmtReport.Instance.TransformSection.AddTransformLog(
                                 new TransformItem(MgmtConfiguration.ConfigName.OperationGroupsToOmit, og.Key),
                                 schema.GetFullSerializedName(), $"Omit related Object '{schema.GetFullSerializedName()}' from related Object '{parent.GetFullSerializedName()}' under OperationGroup '{og.GetFullSerializedName}'");
                     }

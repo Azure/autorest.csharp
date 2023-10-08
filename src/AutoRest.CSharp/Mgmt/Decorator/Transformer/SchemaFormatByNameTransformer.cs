@@ -133,7 +133,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
                             parameter.Extensions = new RecordOfStringAndAny();
                         var oriFormat = parameter.Extensions.Format;
                         parameter.Extensions.Format = formatPattern.ExtensionType;
-                        TransformStore.Instance.AddTransformLogForApplyChange(
+                        MgmtReport.Instance.TransformSection.AddTransformLogForApplyChange(
                             MgmtConfiguration.ConfigName.FormatByNameRules, curRule.NamePattern.RawValue, curRule.FormatPattern.RawValue,
                             operation.GetFullSerializedName(parameter),
                             "ApplyNewExFormat", oriFormat, parameter.Extensions.Format);
@@ -173,7 +173,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
                 {
                     var oriType = schema.Type;
                     schema.Type = formatPattern.PrimitiveType!.Value;
-                    TransformStore.Instance.AddTransformLogForApplyChange(MgmtConfiguration.ConfigName.FormatByNameRules, curRule.NamePattern.RawValue, curRule.FormatPattern.RawValue,
+                    MgmtReport.Instance.TransformSection.AddTransformLogForApplyChange(MgmtConfiguration.ConfigName.FormatByNameRules, curRule.NamePattern.RawValue, curRule.FormatPattern.RawValue,
                         schema.GetFullSerializedName(),
                         "ApplyNewType", oriType.ToString(), schema.Type.ToString());
                 }
@@ -183,7 +183,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
                         schema.Extensions = new RecordOfStringAndAny();
                     string? oriExFormat = schema.Extensions.Format;
                     schema.Extensions.Format = formatPattern.ExtensionType!;
-                    TransformStore.Instance.AddTransformLogForApplyChange(MgmtConfiguration.ConfigName.FormatByNameRules, curRule.NamePattern.RawValue, curRule.FormatPattern.RawValue,
+                    MgmtReport.Instance.TransformSection.AddTransformLogForApplyChange(MgmtConfiguration.ConfigName.FormatByNameRules, curRule.NamePattern.RawValue, curRule.FormatPattern.RawValue,
                         schema.GetFullSerializedName(),
                         "ApplyNewExFormat", oriExFormat, schema.Extensions.Format);
                 }

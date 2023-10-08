@@ -55,7 +55,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
                     string suffix = serializedName.Equals("Resource") ? "Data" : string.Empty;
                     schema.Language.Default.SerializedName ??= schema.Language.Default.Name;
                     schema.Language.Default.Name = prefix + serializedName + suffix;
-                    TransformStore.Instance.AddTransformLogForApplyChange(
+                    MgmtReport.Instance.TransformSection.AddTransformLogForApplyChange(
                         new TransformItem(MgmtConfiguration.ConfigName.PrependRpPrefix, serializedName), schema.GetFullSerializedName(), "ApplyPrependRpPrefix", oriName, schema.Language.Default.Name);
                 }
             }

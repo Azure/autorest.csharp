@@ -56,7 +56,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         {
             if (Configuration.MgmtConfiguration.OverrideOperationName.TryGetValue(operation.OperationId!, out name))
             {
-                TransformStore.Instance.AddTransformLog(
+                MgmtReport.Instance.TransformSection.AddTransformLog(
                     new TransformItem(MgmtConfiguration.ConfigName.OverrideOperationName, operation.OperationId!, name),
                     operation.GetFullSerializedName(),
                     $"OverrideOperationName to '{name}' for '{operation.OperationId}'");

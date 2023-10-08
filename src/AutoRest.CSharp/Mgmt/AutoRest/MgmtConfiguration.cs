@@ -134,7 +134,7 @@ namespace AutoRest.CSharp.Input
             JsonElement? partialResources = default,
             JsonElement? operationsToLroApiVersionOverride = default)
         {
-            TransformStore.Instance.Reset();
+            MgmtReport.Instance.Reset();
             RequestPathToParent = DeserializeDictionary<string, string>(requestPathToParent);
             RequestPathToResourceName = DeserializeDictionary<string, string>(requestPathToResourceName);
             RequestPathToResourceData = DeserializeDictionary<string, string>(requestPathToResourceData);

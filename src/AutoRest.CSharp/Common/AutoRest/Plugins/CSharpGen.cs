@@ -56,7 +56,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
         private void GenerateTransformData(GeneratedCodeWorkspace project)
         {
-            TransformStore.Instance.ForEachTransform((t, usages) =>
+            MgmtReport.Instance.TransformSection.ForEachTransform((t, usages) =>
             {
                 string[] ignoreNoUsage = new string[]
                 {
@@ -66,7 +66,8 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 if (usages.Count == 0 && !ignoreNoUsage.Contains(t.TransformType))
                     AutoRestLogger.Warning($"No usage transform detected: {t}").Wait();
             });
-            project.AddPlainFiles("mgmt-codegen-report.log", TransformStore.Instance.ToReport());
+            string report = MgmtReport.Instance.GenerateReport();
+            project.AddPlainFiles("mgmt-codegen-report.log", report);
         }
 
         public async Task<GeneratedCodeWorkspace> ExecuteAsync(InputNamespace rootNamespace)

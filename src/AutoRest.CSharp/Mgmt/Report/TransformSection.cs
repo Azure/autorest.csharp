@@ -10,18 +10,37 @@ using AutoRest.CSharp.Common.Utilities;
 
 namespace AutoRest.CSharp.Mgmt.Report
 {
-    internal class TransformStore
+    internal class TransformSection : ReportSection
     {
-        public static TransformStore Instance { get; set; } = new TransformStore();
-
         private Dictionary<TransformItem, List<TransformLog>> _transformItemDict = new Dictionary<TransformItem, List<TransformLog>>();
         private int _logIndex = 0;
-
-        public TransformStore()
+        public TransformSection(string name)
+            : base(name)
         {
         }
 
-        public void Reset()
+        public override Dictionary<string, object?> GenerateSection()
+        {
+            Dictionary<string, object?> r = new Dictionary<string, object?>();
+            foreach (var group in _transformItemDict.GroupBy(item => item.Key.TransformType).OrderBy(g => g.Key))
+            {
+                var key = group.Key;
+                Dictionary<string, List<string>> value = new Dictionary<string, List<string>>();
+                foreach (var (item, logs) in group.OrderBy(kv => kv.Value.Count == 0 ? 0 : 1).ThenBy(kv => kv.Key.Key))
+                {
+                    List<string> logList = logs.Select(log => $"[{log.Index}][{(item.Key == log.TargetFullSerializedName ? "=" : log.TargetFullSerializedName)}]: {log.LogMessage}").ToList();
+                    if (logList.Count == 0)
+                        logList.Add("<NoUsgae>");
+                    value.Add(
+                        $"{item.Key}{(string.IsNullOrEmpty(item.ArgumentsAsString) ? "" : ":" + item.ArgumentsAsString)}{(item.IsFromConfig ? "" : "!")}",
+                        logList);
+                }
+                r.Add(key, value);
+            }
+            return r;
+        }
+
+        public override void Reset()
         {
             this._transformItemDict = new Dictionary<TransformItem, List<TransformLog>>();
             this._logIndex = 0;
@@ -77,32 +96,6 @@ namespace AutoRest.CSharp.Mgmt.Report
         {
             foreach (var (transform, logs) in this._transformItemDict)
                 action(transform, logs.AsReadOnly());
-        }
-
-        public string ToReport()
-        {
-            StringBuilder sb = new StringBuilder();
-
-            if (this._transformItemDict.Count > 0)
-            {
-                foreach (var group in _transformItemDict.GroupBy(item => item.Key.TransformType).OrderBy(g => g.Key))
-                {
-                    sb.AppendLine(group.Key);
-                    foreach (var (item, logs) in group.OrderBy(kv => kv.Value.Count == 0 ? 0 : 1).ThenBy(kv => kv.Key.Key))
-                    {
-                        sb.AppendLine($"  - {item.Key}{(string.IsNullOrEmpty(item.ArgumentsAsString) ? "" : ": " + item.ArgumentsAsString)}{(item.IsFromConfig ? "" : "!")}{(logs.Count == 0 ? " ## <NoUsage>" : "")}");
-                        foreach (var log in logs)
-                        {
-                            sb.AppendLine($"    - [{log.Index}][{(item.Key == log.TargetFullSerializedName ? "=" : log.TargetFullSerializedName)}]: {log.LogMessage}");
-                        }
-                    }
-                }
-            }
-            else
-            {
-                sb.AppendLine("No Transform detedted");
-            }
-            return sb.ToString();
         }
     }
 
