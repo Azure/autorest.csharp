@@ -21,11 +21,11 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         private readonly IEnumerable<Operation> _allRawOperations;
 
-        public MgmtExtension(IEnumerable<Operation> allRawOperations, IEnumerable<MgmtMockingExtension> extensionClients, Type armCoreType, RequestPath? contextualPath = null)
+        public MgmtExtension(IEnumerable<Operation> allRawOperations, IEnumerable<MgmtMockingExtension> mockingExtensions, Type armCoreType, RequestPath? contextualPath = null)
             : base(armCoreType.Name)
         {
             _allRawOperations = allRawOperations;
-            _extensionClients = extensionClients; // this property is populated later
+            _mockingExtensions = mockingExtensions; // this property is populated later
             ArmCoreType = armCoreType;
             DefaultName = Configuration.MgmtConfiguration.IsArmCore ? ResourceName : $"{ResourceName}Extensions";
             DefaultNamespace = Configuration.MgmtConfiguration.IsArmCore ? ArmCoreType.Namespace! : base.DefaultNamespace;
@@ -159,12 +159,12 @@ namespace AutoRest.CSharp.Mgmt.Output
             return null;
         }
 
-        public MgmtMockingExtension ExtensionClient => Cache[ArmCoreType];
+        public MgmtMockingExtension MockingExtension => Cache[ArmCoreType];
 
-        private readonly IEnumerable<MgmtMockingExtension> _extensionClients;
+        private readonly IEnumerable<MgmtMockingExtension> _mockingExtensions;
 
         private Dictionary<CSharpType, MgmtMockingExtension>? _cache;
-        private Dictionary<CSharpType, MgmtMockingExtension> Cache => _cache ??= _extensionClients.ToDictionary(
+        private Dictionary<CSharpType, MgmtMockingExtension> Cache => _cache ??= _mockingExtensions.ToDictionary(
             extensionClient => extensionClient.ExtendedResourceType,
             extensionClient => extensionClient);
     }

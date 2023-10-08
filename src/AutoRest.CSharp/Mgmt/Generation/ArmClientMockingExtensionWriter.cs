@@ -11,18 +11,16 @@ using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
-using AutoRest.CSharp.Utilities;
 using Azure.Core;
-using Humanizer.Localisation;
 
 namespace AutoRest.CSharp.Mgmt.Generation
 {
-    internal sealed class ArmClientExtensionClientWriter : MgmtExtensionClientWriter
+    internal sealed class ArmClientMockingExtensionWriter : MgmtExtensionClientWriter
     {
         private readonly Parameter _scopeParameter;
         private MgmtMockingExtension This { get; }
 
-        public ArmClientExtensionClientWriter(MgmtMockingExtension extensionClient) : base(extensionClient)
+        public ArmClientMockingExtensionWriter(MgmtMockingExtension extensionClient) : base(extensionClient)
         {
             This = extensionClient;
             _scopeParameter = new Parameter(

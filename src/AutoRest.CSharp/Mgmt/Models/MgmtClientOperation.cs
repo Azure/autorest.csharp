@@ -5,8 +5,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
+using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models;
@@ -106,10 +108,38 @@ namespace AutoRest.CSharp.Mgmt.Models
             pathInformation = $@"<list type=""bullet"">
 {pathInformation}
 </list>";
+            FormattableString? mockingInformation;
+            if (_extensionParameter == null)
+            {
+                mockingInformation = null;
+            }
+            else
+            {
+                // find the corresponding extension of this method
+                var extendType = _extensionParameter.Type;
+                var mockingExtensionTypeName = MgmtMockingExtension.GetMockingExtensionDefaultName(extendType.Name);
+                // construct the cref name
+                var builder = new StringBuilder(Name);
+                builder.Append("(");
+                var paramList = MethodParameters.Skip(1).Select(p => p.Type.ToStringForDocs());
+                builder.Append(string.Join(",", paramList));
+                builder.Append(")");
+                var methodRef = builder.ToString();
+
+                mockingInformation = $@"<item>
+<term>Mocking</term>
+<description>To mock this method, please mock <see cref=""{mockingExtensionTypeName}.{methodRef}""/> instead.</description>
+</item>";
+            }
+
+            // TODO -- temp
+            mockingInformation = null;
+
+            FormattableString extraInformation = mockingInformation != null ? $"{pathInformation}{Environment.NewLine}{mockingInformation}" : pathInformation;
             var descriptionOfOperation = _operations.First().Description;
             if (descriptionOfOperation != null)
-                return $"{descriptionOfOperation}\n{pathInformation}";
-            return pathInformation;
+                return $"{descriptionOfOperation}{Environment.NewLine}{extraInformation}";
+            return extraInformation;
         }
 
         // TODO -- we need a better way to get this

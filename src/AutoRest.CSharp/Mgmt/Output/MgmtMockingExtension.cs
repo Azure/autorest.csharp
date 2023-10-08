@@ -13,7 +13,6 @@ using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Utilities;
-using Azure.Core;
 using Azure.ResourceManager;
 using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 
@@ -34,7 +33,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             DefaultName = GetMockingExtensionDefaultName(resourceType.Name);
         }
 
-        private static string GetMockingExtensionDefaultName(string resourceName)
+        internal static string GetMockingExtensionDefaultName(string resourceName)
         {
             const string resourceSuffix = "Resource";
             // trim the Resource suffix if it has one. Actually it should always have one, eg, SubscriptionResource, ResourceGroupResource, etc.

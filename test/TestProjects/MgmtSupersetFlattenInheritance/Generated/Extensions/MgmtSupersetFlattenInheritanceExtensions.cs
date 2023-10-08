@@ -179,6 +179,10 @@ namespace MgmtSupersetFlattenInheritance
         /// <description>CustomModel1s_List</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtSupersetFlattenInheritanceResourceGroupMockingExtension.GetCustomModel1s(CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -199,6 +203,10 @@ namespace MgmtSupersetFlattenInheritance
         /// <description>CustomModel1s_List</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtSupersetFlattenInheritanceResourceGroupMockingExtension.GetCustomModel1s(CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -219,6 +227,10 @@ namespace MgmtSupersetFlattenInheritance
         /// <description>CustomModel1s_Put</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtSupersetFlattenInheritanceResourceGroupMockingExtension.PutCustomModel1(string,CustomModel1,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="customModel1SName"> The String to use. </param>
@@ -242,6 +254,10 @@ namespace MgmtSupersetFlattenInheritance
         /// <description>CustomModel1s_Put</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtSupersetFlattenInheritanceResourceGroupMockingExtension.PutCustomModel1(string,CustomModel1,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="customModel1SName"> The String to use. </param>
@@ -265,6 +281,10 @@ namespace MgmtSupersetFlattenInheritance
         /// <description>CustomModel1s_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtSupersetFlattenInheritanceResourceGroupMockingExtension.GetCustomModel1(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="customModel1SName"> The String to use. </param>
@@ -287,6 +307,10 @@ namespace MgmtSupersetFlattenInheritance
         /// <description>CustomModel1s_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtSupersetFlattenInheritanceResourceGroupMockingExtension.GetCustomModel1(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="customModel1SName"> The String to use. </param>
@@ -309,6 +333,10 @@ namespace MgmtSupersetFlattenInheritance
         /// <description>CustomModel2s_List</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtSupersetFlattenInheritanceResourceGroupMockingExtension.GetCustomModel2s(CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -329,6 +357,10 @@ namespace MgmtSupersetFlattenInheritance
         /// <description>CustomModel2s_List</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtSupersetFlattenInheritanceResourceGroupMockingExtension.GetCustomModel2s(CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -349,6 +381,10 @@ namespace MgmtSupersetFlattenInheritance
         /// <description>CustomModel2s_Put</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtSupersetFlattenInheritanceResourceGroupMockingExtension.PutCustomModel2(string,CustomModel2,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="customModel2SName"> The String to use. </param>
@@ -372,6 +408,10 @@ namespace MgmtSupersetFlattenInheritance
         /// <description>CustomModel2s_Put</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtSupersetFlattenInheritanceResourceGroupMockingExtension.PutCustomModel2(string,CustomModel2,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="customModel2SName"> The String to use. </param>
@@ -395,6 +435,10 @@ namespace MgmtSupersetFlattenInheritance
         /// <description>CustomModel2s_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtSupersetFlattenInheritanceResourceGroupMockingExtension.GetCustomModel2(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="customModel2SName"> The String to use. </param>
@@ -417,6 +461,10 @@ namespace MgmtSupersetFlattenInheritance
         /// <description>CustomModel2s_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtSupersetFlattenInheritanceResourceGroupMockingExtension.GetCustomModel2(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="customModel2SName"> The String to use. </param>
@@ -439,6 +487,10 @@ namespace MgmtSupersetFlattenInheritance
         /// <description>SubResourceModel1s_List</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtSupersetFlattenInheritanceResourceGroupMockingExtension.GetSubResourceModel1s(CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -459,6 +511,10 @@ namespace MgmtSupersetFlattenInheritance
         /// <description>SubResourceModel1s_List</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtSupersetFlattenInheritanceResourceGroupMockingExtension.GetSubResourceModel1s(CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -479,6 +535,10 @@ namespace MgmtSupersetFlattenInheritance
         /// <description>SubResourceModel1s_Put</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtSupersetFlattenInheritanceResourceGroupMockingExtension.PutSubResourceModel1(string,SubResourceModel1,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="subResourceModel1SName"> The String to use. </param>
@@ -502,6 +562,10 @@ namespace MgmtSupersetFlattenInheritance
         /// <description>SubResourceModel1s_Put</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtSupersetFlattenInheritanceResourceGroupMockingExtension.PutSubResourceModel1(string,SubResourceModel1,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="subResourceModel1SName"> The String to use. </param>
@@ -525,6 +589,10 @@ namespace MgmtSupersetFlattenInheritance
         /// <description>SubResourceModel1s_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtSupersetFlattenInheritanceResourceGroupMockingExtension.GetSubResourceModel1(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="subResourceModel1SName"> The String to use. </param>
@@ -547,6 +615,10 @@ namespace MgmtSupersetFlattenInheritance
         /// <description>SubResourceModel1s_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtSupersetFlattenInheritanceResourceGroupMockingExtension.GetSubResourceModel1(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="subResourceModel1SName"> The String to use. </param>
@@ -569,6 +641,10 @@ namespace MgmtSupersetFlattenInheritance
         /// <description>SubResourceModel2s_List</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtSupersetFlattenInheritanceResourceGroupMockingExtension.GetSubResourceModel2s(CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -589,6 +665,10 @@ namespace MgmtSupersetFlattenInheritance
         /// <description>SubResourceModel2s_List</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtSupersetFlattenInheritanceResourceGroupMockingExtension.GetSubResourceModel2s(CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -609,6 +689,10 @@ namespace MgmtSupersetFlattenInheritance
         /// <description>SubResourceModel2s_Put</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtSupersetFlattenInheritanceResourceGroupMockingExtension.PutSubResourceModel2(string,SubResourceModel2,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="subResourceModel2SName"> The String to use. </param>
@@ -632,6 +716,10 @@ namespace MgmtSupersetFlattenInheritance
         /// <description>SubResourceModel2s_Put</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtSupersetFlattenInheritanceResourceGroupMockingExtension.PutSubResourceModel2(string,SubResourceModel2,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="subResourceModel2SName"> The String to use. </param>
@@ -655,6 +743,10 @@ namespace MgmtSupersetFlattenInheritance
         /// <description>SubResourceModel2s_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtSupersetFlattenInheritanceResourceGroupMockingExtension.GetSubResourceModel2(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="subResourceModel2SName"> The String to use. </param>
@@ -677,6 +769,10 @@ namespace MgmtSupersetFlattenInheritance
         /// <description>SubResourceModel2s_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtSupersetFlattenInheritanceResourceGroupMockingExtension.GetSubResourceModel2(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="subResourceModel2SName"> The String to use. </param>
@@ -699,6 +795,10 @@ namespace MgmtSupersetFlattenInheritance
         /// <description>WritableSubResourceModel1s_List</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtSupersetFlattenInheritanceResourceGroupMockingExtension.GetWritableSubResourceModel1s(CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -719,6 +819,10 @@ namespace MgmtSupersetFlattenInheritance
         /// <description>WritableSubResourceModel1s_List</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtSupersetFlattenInheritanceResourceGroupMockingExtension.GetWritableSubResourceModel1s(CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -739,6 +843,10 @@ namespace MgmtSupersetFlattenInheritance
         /// <description>WritableSubResourceModel1s_Put</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtSupersetFlattenInheritanceResourceGroupMockingExtension.PutWritableSubResourceModel1(string,WritableSubResourceModel1,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="writableSubResourceModel1SName"> The String to use. </param>
@@ -762,6 +870,10 @@ namespace MgmtSupersetFlattenInheritance
         /// <description>WritableSubResourceModel1s_Put</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtSupersetFlattenInheritanceResourceGroupMockingExtension.PutWritableSubResourceModel1(string,WritableSubResourceModel1,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="writableSubResourceModel1SName"> The String to use. </param>
@@ -785,6 +897,10 @@ namespace MgmtSupersetFlattenInheritance
         /// <description>WritableSubResourceModel1s_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtSupersetFlattenInheritanceResourceGroupMockingExtension.GetWritableSubResourceModel1(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="writableSubResourceModel1SName"> The String to use. </param>
@@ -807,6 +923,10 @@ namespace MgmtSupersetFlattenInheritance
         /// <description>WritableSubResourceModel1s_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtSupersetFlattenInheritanceResourceGroupMockingExtension.GetWritableSubResourceModel1(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="writableSubResourceModel1SName"> The String to use. </param>
@@ -829,6 +949,10 @@ namespace MgmtSupersetFlattenInheritance
         /// <description>WritableSubResourceModel2s_List</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtSupersetFlattenInheritanceResourceGroupMockingExtension.GetWritableSubResourceModel2s(CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -849,6 +973,10 @@ namespace MgmtSupersetFlattenInheritance
         /// <description>WritableSubResourceModel2s_List</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtSupersetFlattenInheritanceResourceGroupMockingExtension.GetWritableSubResourceModel2s(CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -869,6 +997,10 @@ namespace MgmtSupersetFlattenInheritance
         /// <description>WritableSubResourceModel2s_Put</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtSupersetFlattenInheritanceResourceGroupMockingExtension.PutWritableSubResourceModel2(string,WritableSubResourceModel2,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="writableSubResourceModel2SName"> The String to use. </param>
@@ -892,6 +1024,10 @@ namespace MgmtSupersetFlattenInheritance
         /// <description>WritableSubResourceModel2s_Put</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtSupersetFlattenInheritanceResourceGroupMockingExtension.PutWritableSubResourceModel2(string,WritableSubResourceModel2,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="writableSubResourceModel2SName"> The String to use. </param>
@@ -915,6 +1051,10 @@ namespace MgmtSupersetFlattenInheritance
         /// <description>WritableSubResourceModel2s_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtSupersetFlattenInheritanceResourceGroupMockingExtension.GetWritableSubResourceModel2(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="writableSubResourceModel2SName"> The String to use. </param>
@@ -937,6 +1077,10 @@ namespace MgmtSupersetFlattenInheritance
         /// <description>WritableSubResourceModel2s_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtSupersetFlattenInheritanceResourceGroupMockingExtension.GetWritableSubResourceModel2(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="writableSubResourceModel2SName"> The String to use. </param>
@@ -959,6 +1103,10 @@ namespace MgmtSupersetFlattenInheritance
         /// <description>ResourceModel2s_List</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtSupersetFlattenInheritanceResourceGroupMockingExtension.GetResourceModel2s(CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -979,6 +1127,10 @@ namespace MgmtSupersetFlattenInheritance
         /// <description>ResourceModel2s_List</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtSupersetFlattenInheritanceResourceGroupMockingExtension.GetResourceModel2s(CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -999,6 +1151,10 @@ namespace MgmtSupersetFlattenInheritance
         /// <description>ResourceModel2s_Put</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtSupersetFlattenInheritanceResourceGroupMockingExtension.PutResourceModel2(string,ResourceModel2,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="resourceModel2SName"> The String to use. </param>
@@ -1022,6 +1178,10 @@ namespace MgmtSupersetFlattenInheritance
         /// <description>ResourceModel2s_Put</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtSupersetFlattenInheritanceResourceGroupMockingExtension.PutResourceModel2(string,ResourceModel2,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="resourceModel2SName"> The String to use. </param>
@@ -1045,6 +1205,10 @@ namespace MgmtSupersetFlattenInheritance
         /// <description>ResourceModel2s_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtSupersetFlattenInheritanceResourceGroupMockingExtension.GetResourceModel2(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="resourceModel2SName"> The String to use. </param>
@@ -1067,6 +1231,10 @@ namespace MgmtSupersetFlattenInheritance
         /// <description>ResourceModel2s_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtSupersetFlattenInheritanceResourceGroupMockingExtension.GetResourceModel2(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="resourceModel2SName"> The String to use. </param>
@@ -1089,6 +1257,10 @@ namespace MgmtSupersetFlattenInheritance
         /// <description>TrackedResourceModel2s_List</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtSupersetFlattenInheritanceResourceGroupMockingExtension.GetTrackedResourceModel2s(CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -1109,6 +1281,10 @@ namespace MgmtSupersetFlattenInheritance
         /// <description>TrackedResourceModel2s_List</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtSupersetFlattenInheritanceResourceGroupMockingExtension.GetTrackedResourceModel2s(CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -1129,6 +1305,10 @@ namespace MgmtSupersetFlattenInheritance
         /// <description>TrackedResourceModel2s_Put</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtSupersetFlattenInheritanceResourceGroupMockingExtension.PutTrackedResourceModel2(string,TrackedResourceModel2,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="trackedResourceModel2SName"> The String to use. </param>
@@ -1152,6 +1332,10 @@ namespace MgmtSupersetFlattenInheritance
         /// <description>TrackedResourceModel2s_Put</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtSupersetFlattenInheritanceResourceGroupMockingExtension.PutTrackedResourceModel2(string,TrackedResourceModel2,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="trackedResourceModel2SName"> The String to use. </param>
@@ -1175,6 +1359,10 @@ namespace MgmtSupersetFlattenInheritance
         /// <description>TrackedResourceModel2s_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtSupersetFlattenInheritanceResourceGroupMockingExtension.GetTrackedResourceModel2(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="trackedResourceModel2SName"> The String to use. </param>
@@ -1197,6 +1385,10 @@ namespace MgmtSupersetFlattenInheritance
         /// <description>TrackedResourceModel2s_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtSupersetFlattenInheritanceResourceGroupMockingExtension.GetTrackedResourceModel2(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="trackedResourceModel2SName"> The String to use. </param>
@@ -1219,6 +1411,10 @@ namespace MgmtSupersetFlattenInheritance
         /// <description>NonResourceModel1s_Put</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtSupersetFlattenInheritanceResourceGroupMockingExtension.PutNonResourceModel1(string,NonResourceModel1,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="nonResourceModel1SName"> The String to use. </param>
@@ -1242,6 +1438,10 @@ namespace MgmtSupersetFlattenInheritance
         /// <description>NonResourceModel1s_Put</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtSupersetFlattenInheritanceResourceGroupMockingExtension.PutNonResourceModel1(string,NonResourceModel1,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="nonResourceModel1SName"> The String to use. </param>
@@ -1265,6 +1465,10 @@ namespace MgmtSupersetFlattenInheritance
         /// <description>NonResourceModel1s_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtSupersetFlattenInheritanceResourceGroupMockingExtension.GetNonResourceModel1(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="nonResourceModel1SName"> The String to use. </param>
@@ -1287,6 +1491,10 @@ namespace MgmtSupersetFlattenInheritance
         /// <description>NonResourceModel1s_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtSupersetFlattenInheritanceResourceGroupMockingExtension.GetNonResourceModel1(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="nonResourceModel1SName"> The String to use. </param>

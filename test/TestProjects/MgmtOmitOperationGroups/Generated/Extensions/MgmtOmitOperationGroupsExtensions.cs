@@ -113,6 +113,10 @@ namespace MgmtOmitOperationGroups
         /// <description>Model5s_List</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtOmitOperationGroupsResourceGroupMockingExtension.GetModel5s(CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -133,6 +137,10 @@ namespace MgmtOmitOperationGroups
         /// <description>Model5s_List</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtOmitOperationGroupsResourceGroupMockingExtension.GetModel5s(CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -153,6 +161,10 @@ namespace MgmtOmitOperationGroups
         /// <description>Model5s_CreateOrUpdate</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtOmitOperationGroupsResourceGroupMockingExtension.CreateOrUpdateModel5(string,Model5,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="model5SName"> The String to use. </param>
@@ -176,6 +188,10 @@ namespace MgmtOmitOperationGroups
         /// <description>Model5s_CreateOrUpdate</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtOmitOperationGroupsResourceGroupMockingExtension.CreateOrUpdateModel5(string,Model5,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="model5SName"> The String to use. </param>
@@ -199,6 +215,10 @@ namespace MgmtOmitOperationGroups
         /// <description>Model5s_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtOmitOperationGroupsResourceGroupMockingExtension.GetModel5(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="model5SName"> The String to use. </param>
@@ -221,6 +241,10 @@ namespace MgmtOmitOperationGroups
         /// <description>Model5s_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtOmitOperationGroupsResourceGroupMockingExtension.GetModel5(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="model5SName"> The String to use. </param>

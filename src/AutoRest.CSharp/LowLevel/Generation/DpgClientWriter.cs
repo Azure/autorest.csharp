@@ -579,21 +579,11 @@ namespace AutoRest.CSharp.Generation.Writers
             if (!samples.Any())
                 return;
 
-            var docRef = GetMethodSignatureString(methodSignature);
+            var docRef = methodSignature.ToStringForDocs();
             _writer.Line($"/// <include file=\"{XmlDocWriter.Filename}\" path=\"doc/members/member[@name='{docRef}']/*\" />");
 
             _xmlDocWriter.AddMember(docRef);
             _xmlDocWriter.AddExamples(samples);
-        }
-
-        private static string GetMethodSignatureString(MethodSignature signature)
-        {
-            var builder = new StringBuilder(signature.Name);
-            builder.Append("(");
-            var paramList = signature.Parameters.Select(p => p.Type.ToStringForDocs());
-            builder.Append(string.Join(",", paramList));
-            builder.Append(")");
-            return builder.ToString();
         }
 
         private static void WriteProtocolMethodDocumentation(CodeWriter writer, LowLevelClientMethod clientMethod, bool isAsync)
@@ -649,7 +639,7 @@ namespace AutoRest.CSharp.Generation.Writers
             // we only append the relative convenience method information when the convenience method is public
             if (clientMethod.ShouldGenerateConvenienceMethodRef())
             {
-                var convenienceDocRef = GetMethodSignatureString(clientMethod.ConvenienceMethod!.Signature.WithAsync(async));
+                var convenienceDocRef = clientMethod.ConvenienceMethod!.Signature.WithAsync(async).ToStringForDocs();
                 builder.AppendLine($"<item>{Environment.NewLine}<description>{Environment.NewLine}Please try the simpler <see cref=\"{convenienceDocRef}\"/> convenience overload with strongly typed models first.{Environment.NewLine}</description>{Environment.NewLine}</item>");
             }
             builder.AppendLine($"</list>");

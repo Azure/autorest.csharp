@@ -233,6 +233,10 @@ namespace MgmtExtensionResource
         /// <description>CheckDnsNameAvailability</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtExtensionResourceSubscriptionMockingExtension.CheckDnsNameAvailability(string,string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="location"> The location of the domain name. </param>
@@ -257,6 +261,10 @@ namespace MgmtExtensionResource
         /// <description>CheckDnsNameAvailability</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtExtensionResourceSubscriptionMockingExtension.CheckDnsNameAvailability(string,string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="location"> The location of the domain name. </param>
@@ -281,6 +289,10 @@ namespace MgmtExtensionResource
         /// <description>OrphanedPost_ValidateSomething</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtExtensionResourceSubscriptionMockingExtension.ValidateSomethingOrphanedPost(ValidateSomethingContent,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="content"> Information to validate. </param>
@@ -303,6 +315,10 @@ namespace MgmtExtensionResource
         /// <description>OrphanedPost_ValidateSomething</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtExtensionResourceSubscriptionMockingExtension.ValidateSomethingOrphanedPost(ValidateSomethingContent,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="content"> Information to validate. </param>

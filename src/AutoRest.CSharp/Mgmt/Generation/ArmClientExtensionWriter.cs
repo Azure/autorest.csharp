@@ -205,7 +205,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 if (!IsArmCore)
                 {
                     _writer.AppendRaw("return ")
-                        .Append($"{This.ExtensionClient.FactoryMethodName}({This.ExtensionParameter.Name}).Get{resource.Type.Name}(id);");
+                        .Append($"{This.MockingExtension.FactoryMethodName}({This.ExtensionParameter.Name}).Get{resource.Type.Name}(id);");
                 }
                 else
                 {
