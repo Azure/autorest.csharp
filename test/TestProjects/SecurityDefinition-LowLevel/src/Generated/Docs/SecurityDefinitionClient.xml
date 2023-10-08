@@ -11,6 +11,7 @@ SecurityDefinitionClient client = new SecurityDefinitionClient(endpoint, credent
 
 RequestContent content = RequestContent.Create(new object());
 Response response = await client.OperationAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call OperationAsync with all request content.
@@ -25,6 +26,7 @@ RequestContent content = RequestContent.Create(new
     Status = "<Status>",
 });
 Response response = await client.OperationAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -38,6 +40,7 @@ SecurityDefinitionClient client = new SecurityDefinitionClient(endpoint, credent
 
 RequestContent content = RequestContent.Create(new object());
 Response response = client.Operation(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Operation with all request content.
@@ -52,6 +55,7 @@ RequestContent content = RequestContent.Create(new
     Status = "<Status>",
 });
 Response response = client.Operation(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>

@@ -15,11 +15,11 @@ using SecurityDefinition_LowLevel;
 
 namespace SecurityDefinition_LowLevel.Samples
 {
-    public class Samples_SecurityDefinitionClient
+    public partial class Samples_SecurityDefinitionClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Operation()
+        public void Example_Operation_ShortVersion()
         {
             Uri endpoint = new Uri("<endpoint>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -27,12 +27,13 @@ namespace SecurityDefinition_LowLevel.Samples
 
             RequestContent content = RequestContent.Create(new object());
             Response response = client.Operation(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Operation_Async()
+        public async Task Example_Operation_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<endpoint>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -40,6 +41,7 @@ namespace SecurityDefinition_LowLevel.Samples
 
             RequestContent content = RequestContent.Create(new object());
             Response response = await client.OperationAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -57,6 +59,7 @@ namespace SecurityDefinition_LowLevel.Samples
                 Status = "<Status>",
             });
             Response response = client.Operation(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -74,6 +77,7 @@ namespace SecurityDefinition_LowLevel.Samples
                 Status = "<Status>",
             });
             Response response = await client.OperationAsync(content);
+
             Console.WriteLine(response.Status);
         }
     }

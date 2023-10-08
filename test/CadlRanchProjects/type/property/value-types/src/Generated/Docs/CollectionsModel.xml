@@ -79,23 +79,21 @@ This sample shows how to call PutAsync.
 <code><![CDATA[
 CollectionsModel client = new ValueTypesClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
-CollectionsModelProperty body = new CollectionsModelProperty(new List<InnerModel>()
+CollectionsModelProperty body = new CollectionsModelProperty(new InnerModel[]
 {
     new InnerModel("<property>")
 });
 Response response = await client.PutAsync(body);
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutAsync with all parameters.
 <code><![CDATA[
 CollectionsModel client = new ValueTypesClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
-CollectionsModelProperty body = new CollectionsModelProperty(new List<InnerModel>()
+CollectionsModelProperty body = new CollectionsModelProperty(new InnerModel[]
 {
     new InnerModel("<property>")
 });
 Response response = await client.PutAsync(body);
-Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="Put(CollectionsModelProperty,CancellationToken)">
@@ -104,23 +102,21 @@ This sample shows how to call Put.
 <code><![CDATA[
 CollectionsModel client = new ValueTypesClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
-CollectionsModelProperty body = new CollectionsModelProperty(new List<InnerModel>()
+CollectionsModelProperty body = new CollectionsModelProperty(new InnerModel[]
 {
     new InnerModel("<property>")
 });
 Response response = client.Put(body);
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Put with all parameters.
 <code><![CDATA[
 CollectionsModel client = new ValueTypesClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
-CollectionsModelProperty body = new CollectionsModelProperty(new List<InnerModel>()
+CollectionsModelProperty body = new CollectionsModelProperty(new InnerModel[]
 {
     new InnerModel("<property>")
 });
 Response response = client.Put(body);
-Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="PutAsync(RequestContent,RequestContext)">
@@ -131,7 +127,7 @@ CollectionsModel client = new ValueTypesClient().GetCollectionsModelClient(apiVe
 
 RequestContent content = RequestContent.Create(new
 {
-    property = new List<object>()
+    property = new object[]
     {
         new
         {
@@ -140,6 +136,7 @@ RequestContent content = RequestContent.Create(new
     },
 });
 Response response = await client.PutAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutAsync with all request content.
@@ -148,7 +145,7 @@ CollectionsModel client = new ValueTypesClient().GetCollectionsModelClient(apiVe
 
 RequestContent content = RequestContent.Create(new
 {
-    property = new List<object>()
+    property = new object[]
     {
         new
         {
@@ -157,6 +154,7 @@ RequestContent content = RequestContent.Create(new
     },
 });
 Response response = await client.PutAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -168,7 +166,7 @@ CollectionsModel client = new ValueTypesClient().GetCollectionsModelClient(apiVe
 
 RequestContent content = RequestContent.Create(new
 {
-    property = new List<object>()
+    property = new object[]
     {
         new
         {
@@ -177,6 +175,7 @@ RequestContent content = RequestContent.Create(new
     },
 });
 Response response = client.Put(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Put with all request content.
@@ -185,7 +184,7 @@ CollectionsModel client = new ValueTypesClient().GetCollectionsModelClient(apiVe
 
 RequestContent content = RequestContent.Create(new
 {
-    property = new List<object>()
+    property = new object[]
     {
         new
         {
@@ -194,6 +193,7 @@ RequestContent content = RequestContent.Create(new
     },
 });
 Response response = client.Put(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>

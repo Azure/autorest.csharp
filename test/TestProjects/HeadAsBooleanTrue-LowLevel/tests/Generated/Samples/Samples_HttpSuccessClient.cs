@@ -14,27 +14,29 @@ using NUnit.Framework;
 
 namespace HeadAsBooleanTrue_LowLevel.Samples
 {
-    public class Samples_HttpSuccessClient
+    public partial class Samples_HttpSuccessClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Head200()
+        public void Example_Head200_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
 
             Response<bool> response = client.Head200();
+
             Console.WriteLine(response.GetRawResponse().Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Head200_Async()
+        public async Task Example_Head200_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
 
             Response<bool> response = await client.Head200Async();
+
             Console.WriteLine(response.GetRawResponse().Status);
         }
 
@@ -46,6 +48,7 @@ namespace HeadAsBooleanTrue_LowLevel.Samples
             HttpSuccessClient client = new HttpSuccessClient(credential);
 
             Response<bool> response = client.Head200();
+
             Console.WriteLine(response.GetRawResponse().Status);
         }
 
@@ -57,28 +60,31 @@ namespace HeadAsBooleanTrue_LowLevel.Samples
             HttpSuccessClient client = new HttpSuccessClient(credential);
 
             Response<bool> response = await client.Head200Async();
+
             Console.WriteLine(response.GetRawResponse().Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Head204()
+        public void Example_Head204_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
 
             Response<bool> response = client.Head204();
+
             Console.WriteLine(response.GetRawResponse().Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Head204_Async()
+        public async Task Example_Head204_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
 
             Response<bool> response = await client.Head204Async();
+
             Console.WriteLine(response.GetRawResponse().Status);
         }
 
@@ -90,6 +96,7 @@ namespace HeadAsBooleanTrue_LowLevel.Samples
             HttpSuccessClient client = new HttpSuccessClient(credential);
 
             Response<bool> response = client.Head204();
+
             Console.WriteLine(response.GetRawResponse().Status);
         }
 
@@ -101,28 +108,31 @@ namespace HeadAsBooleanTrue_LowLevel.Samples
             HttpSuccessClient client = new HttpSuccessClient(credential);
 
             Response<bool> response = await client.Head204Async();
+
             Console.WriteLine(response.GetRawResponse().Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Head404()
+        public void Example_Head404_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
 
             Response<bool> response = client.Head404();
+
             Console.WriteLine(response.GetRawResponse().Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Head404_Async()
+        public async Task Example_Head404_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
 
             Response<bool> response = await client.Head404Async();
+
             Console.WriteLine(response.GetRawResponse().Status);
         }
 
@@ -134,6 +144,7 @@ namespace HeadAsBooleanTrue_LowLevel.Samples
             HttpSuccessClient client = new HttpSuccessClient(credential);
 
             Response<bool> response = client.Head404();
+
             Console.WriteLine(response.GetRawResponse().Status);
         }
 
@@ -145,6 +156,7 @@ namespace HeadAsBooleanTrue_LowLevel.Samples
             HttpSuccessClient client = new HttpSuccessClient(credential);
 
             Response<bool> response = await client.Head404Async();
+
             Console.WriteLine(response.GetRawResponse().Status);
         }
     }

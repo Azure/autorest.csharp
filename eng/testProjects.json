@@ -36,7 +36,11 @@
         "special-words",
         "parameters/collection-format",
         "parameters/spread",
-        "parameters/body-optionality"
+        "parameters/body-optionality",
+        "client/structure/default",
+        "client/structure/multi-client",
+        "client/structure/renamed-operation",
+        "client/structure/two-operation-group"
     ],
     "TestServerProjects": [
         "additionalProperties",

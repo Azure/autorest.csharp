@@ -16,27 +16,29 @@ using httpInfrastructure_LowLevel;
 
 namespace httpInfrastructure_LowLevel.Samples
 {
-    public class Samples_HttpSuccessClient
+    public partial class Samples_HttpSuccessClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Head200()
+        public void Example_Head200_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
 
             Response response = client.Head200();
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Head200_Async()
+        public async Task Example_Head200_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
 
             Response response = await client.Head200Async();
+
             Console.WriteLine(response.Status);
         }
 
@@ -48,6 +50,7 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpSuccessClient client = new HttpSuccessClient(credential);
 
             Response response = client.Head200();
+
             Console.WriteLine(response.Status);
         }
 
@@ -59,12 +62,13 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpSuccessClient client = new HttpSuccessClient(credential);
 
             Response response = await client.Head200Async();
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Get200()
+        public void Example_Get200_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
@@ -77,7 +81,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Get200_Async()
+        public async Task Example_Get200_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
@@ -116,7 +120,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Options200()
+        public void Example_Options200_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
@@ -129,7 +133,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Options200_Async()
+        public async Task Example_Options200_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
@@ -168,25 +172,27 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put200()
+        public void Example_Put200_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
 
             RequestContent content = null;
             Response response = client.Put200(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put200_Async()
+        public async Task Example_Put200_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
 
             RequestContent content = null;
             Response response = await client.Put200Async(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -199,6 +205,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("true");
             Response response = client.Put200(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -211,30 +218,33 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("true");
             Response response = await client.Put200Async(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Patch200()
+        public void Example_Patch200_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
 
             RequestContent content = null;
             Response response = client.Patch200(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Patch200_Async()
+        public async Task Example_Patch200_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
 
             RequestContent content = null;
             Response response = await client.Patch200Async(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -247,6 +257,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("true");
             Response response = client.Patch200(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -259,30 +270,33 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("true");
             Response response = await client.Patch200Async(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Post200()
+        public void Example_Post200_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
 
             RequestContent content = null;
             Response response = client.Post200(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Post200_Async()
+        public async Task Example_Post200_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
 
             RequestContent content = null;
             Response response = await client.Post200Async(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -295,6 +309,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("true");
             Response response = client.Post200(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -307,30 +322,33 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("true");
             Response response = await client.Post200Async(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Delete200()
+        public void Example_Delete200_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
 
             RequestContent content = null;
             Response response = client.Delete200(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Delete200_Async()
+        public async Task Example_Delete200_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
 
             RequestContent content = null;
             Response response = await client.Delete200Async(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -343,6 +361,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("true");
             Response response = client.Delete200(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -355,30 +374,33 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("true");
             Response response = await client.Delete200Async(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put201()
+        public void Example_Put201_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
 
             RequestContent content = null;
             Response response = client.Put201(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put201_Async()
+        public async Task Example_Put201_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
 
             RequestContent content = null;
             Response response = await client.Put201Async(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -391,6 +413,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("true");
             Response response = client.Put201(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -403,30 +426,33 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("true");
             Response response = await client.Put201Async(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Post201()
+        public void Example_Post201_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
 
             RequestContent content = null;
             Response response = client.Post201(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Post201_Async()
+        public async Task Example_Post201_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
 
             RequestContent content = null;
             Response response = await client.Post201Async(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -439,6 +465,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("true");
             Response response = client.Post201(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -451,30 +478,33 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("true");
             Response response = await client.Post201Async(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put202()
+        public void Example_Put202_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
 
             RequestContent content = null;
             Response response = client.Put202(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put202_Async()
+        public async Task Example_Put202_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
 
             RequestContent content = null;
             Response response = await client.Put202Async(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -487,6 +517,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("true");
             Response response = client.Put202(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -499,30 +530,33 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("true");
             Response response = await client.Put202Async(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Patch202()
+        public void Example_Patch202_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
 
             RequestContent content = null;
             Response response = client.Patch202(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Patch202_Async()
+        public async Task Example_Patch202_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
 
             RequestContent content = null;
             Response response = await client.Patch202Async(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -535,6 +569,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("true");
             Response response = client.Patch202(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -547,30 +582,33 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("true");
             Response response = await client.Patch202Async(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Post202()
+        public void Example_Post202_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
 
             RequestContent content = null;
             Response response = client.Post202(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Post202_Async()
+        public async Task Example_Post202_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
 
             RequestContent content = null;
             Response response = await client.Post202Async(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -583,6 +621,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("true");
             Response response = client.Post202(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -595,30 +634,33 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("true");
             Response response = await client.Post202Async(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Delete202()
+        public void Example_Delete202_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
 
             RequestContent content = null;
             Response response = client.Delete202(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Delete202_Async()
+        public async Task Example_Delete202_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
 
             RequestContent content = null;
             Response response = await client.Delete202Async(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -631,6 +673,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("true");
             Response response = client.Delete202(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -643,28 +686,31 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("true");
             Response response = await client.Delete202Async(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Head204()
+        public void Example_Head204_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
 
             Response response = client.Head204();
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Head204_Async()
+        public async Task Example_Head204_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
 
             Response response = await client.Head204Async();
+
             Console.WriteLine(response.Status);
         }
 
@@ -676,6 +722,7 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpSuccessClient client = new HttpSuccessClient(credential);
 
             Response response = client.Head204();
+
             Console.WriteLine(response.Status);
         }
 
@@ -687,30 +734,33 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpSuccessClient client = new HttpSuccessClient(credential);
 
             Response response = await client.Head204Async();
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put204()
+        public void Example_Put204_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
 
             RequestContent content = null;
             Response response = client.Put204(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put204_Async()
+        public async Task Example_Put204_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
 
             RequestContent content = null;
             Response response = await client.Put204Async(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -723,6 +773,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("true");
             Response response = client.Put204(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -735,30 +786,33 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("true");
             Response response = await client.Put204Async(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Patch204()
+        public void Example_Patch204_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
 
             RequestContent content = null;
             Response response = client.Patch204(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Patch204_Async()
+        public async Task Example_Patch204_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
 
             RequestContent content = null;
             Response response = await client.Patch204Async(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -771,6 +825,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("true");
             Response response = client.Patch204(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -783,30 +838,33 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("true");
             Response response = await client.Patch204Async(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Post204()
+        public void Example_Post204_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
 
             RequestContent content = null;
             Response response = client.Post204(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Post204_Async()
+        public async Task Example_Post204_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
 
             RequestContent content = null;
             Response response = await client.Post204Async(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -819,6 +877,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("true");
             Response response = client.Post204(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -831,30 +890,33 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("true");
             Response response = await client.Post204Async(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Delete204()
+        public void Example_Delete204_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
 
             RequestContent content = null;
             Response response = client.Delete204(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Delete204_Async()
+        public async Task Example_Delete204_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
 
             RequestContent content = null;
             Response response = await client.Delete204Async(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -867,6 +929,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("true");
             Response response = client.Delete204(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -879,28 +942,31 @@ namespace httpInfrastructure_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("true");
             Response response = await client.Delete204Async(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Head404()
+        public void Example_Head404_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
 
             Response response = client.Head404();
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Head404_Async()
+        public async Task Example_Head404_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
 
             Response response = await client.Head404Async();
+
             Console.WriteLine(response.Status);
         }
 
@@ -912,6 +978,7 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpSuccessClient client = new HttpSuccessClient(credential);
 
             Response response = client.Head404();
+
             Console.WriteLine(response.Status);
         }
 
@@ -923,6 +990,7 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpSuccessClient client = new HttpSuccessClient(credential);
 
             Response response = await client.Head404Async();
+
             Console.WriteLine(response.Status);
         }
     }

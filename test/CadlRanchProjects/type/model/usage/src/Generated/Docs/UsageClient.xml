@@ -9,7 +9,6 @@ UsageClient client = new UsageClient();
 
 InputRecord input = new InputRecord("<requiredProp>");
 Response response = await client.InputAsync(input);
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call InputAsync with all parameters.
 <code><![CDATA[
@@ -17,7 +16,6 @@ UsageClient client = new UsageClient();
 
 InputRecord input = new InputRecord("<requiredProp>");
 Response response = await client.InputAsync(input);
-Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="Input(InputRecord,CancellationToken)">
@@ -28,7 +26,6 @@ UsageClient client = new UsageClient();
 
 InputRecord input = new InputRecord("<requiredProp>");
 Response response = client.Input(input);
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Input with all parameters.
 <code><![CDATA[
@@ -36,7 +33,6 @@ UsageClient client = new UsageClient();
 
 InputRecord input = new InputRecord("<requiredProp>");
 Response response = client.Input(input);
-Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="InputAsync(RequestContent,RequestContext)">
@@ -50,6 +46,7 @@ RequestContent content = RequestContent.Create(new
     requiredProp = "<requiredProp>",
 });
 Response response = await client.InputAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call InputAsync with all request content.
@@ -61,6 +58,7 @@ RequestContent content = RequestContent.Create(new
     requiredProp = "<requiredProp>",
 });
 Response response = await client.InputAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -75,6 +73,7 @@ RequestContent content = RequestContent.Create(new
     requiredProp = "<requiredProp>",
 });
 Response response = client.Input(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Input with all request content.
@@ -86,6 +85,7 @@ RequestContent content = RequestContent.Create(new
     requiredProp = "<requiredProp>",
 });
 Response response = client.Input(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>

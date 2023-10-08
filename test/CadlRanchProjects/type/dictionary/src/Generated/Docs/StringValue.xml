@@ -79,21 +79,19 @@ This sample shows how to call PutAsync.
 <code><![CDATA[
 StringValue client = new DictionaryClient().GetStringValueClient(apiVersion: "1.0.0");
 
-Response response = await client.PutAsync(new Dictionary<string, string>()
+Response response = await client.PutAsync(new Dictionary<string, string>
 {
-    ["key"] = "<body>",
+    ["key"] = "<body>"
 });
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutAsync with all parameters.
 <code><![CDATA[
 StringValue client = new DictionaryClient().GetStringValueClient(apiVersion: "1.0.0");
 
-Response response = await client.PutAsync(new Dictionary<string, string>()
+Response response = await client.PutAsync(new Dictionary<string, string>
 {
-    ["key"] = "<body>",
+    ["key"] = "<body>"
 });
-Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="Put(IDictionary{string,string},CancellationToken)">
@@ -102,21 +100,19 @@ This sample shows how to call Put.
 <code><![CDATA[
 StringValue client = new DictionaryClient().GetStringValueClient(apiVersion: "1.0.0");
 
-Response response = client.Put(new Dictionary<string, string>()
+Response response = client.Put(new Dictionary<string, string>
 {
-    ["key"] = "<body>",
+    ["key"] = "<body>"
 });
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Put with all parameters.
 <code><![CDATA[
 StringValue client = new DictionaryClient().GetStringValueClient(apiVersion: "1.0.0");
 
-Response response = client.Put(new Dictionary<string, string>()
+Response response = client.Put(new Dictionary<string, string>
 {
-    ["key"] = "<body>",
+    ["key"] = "<body>"
 });
-Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="PutAsync(RequestContent,RequestContext)">
@@ -130,6 +126,7 @@ RequestContent content = RequestContent.Create(new
     key = "<body>",
 });
 Response response = await client.PutAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutAsync with all request content.
@@ -141,6 +138,7 @@ RequestContent content = RequestContent.Create(new
     key = "<body>",
 });
 Response response = await client.PutAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -155,6 +153,7 @@ RequestContent content = RequestContent.Create(new
     key = "<body>",
 });
 Response response = client.Put(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Put with all request content.
@@ -166,6 +165,7 @@ RequestContent content = RequestContent.Create(new
     key = "<body>",
 });
 Response response = client.Put(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>

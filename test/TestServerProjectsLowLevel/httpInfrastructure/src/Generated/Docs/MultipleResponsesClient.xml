@@ -561,6 +561,7 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = await client.Get202None204NoneDefaultError202NoneAsync();
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Get202None204NoneDefaultError202NoneAsync with all request content.
@@ -569,6 +570,7 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = await client.Get202None204NoneDefaultError202NoneAsync();
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -580,6 +582,7 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = client.Get202None204NoneDefaultError202None();
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Get202None204NoneDefaultError202None with all request content.
@@ -588,6 +591,7 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = client.Get202None204NoneDefaultError202None();
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -599,6 +603,7 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = await client.Get202None204NoneDefaultError204NoneAsync();
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Get202None204NoneDefaultError204NoneAsync with all request content.
@@ -607,6 +612,7 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = await client.Get202None204NoneDefaultError204NoneAsync();
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -618,6 +624,7 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = client.Get202None204NoneDefaultError204None();
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Get202None204NoneDefaultError204None with all request content.
@@ -626,6 +633,7 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = client.Get202None204NoneDefaultError204None();
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -637,6 +645,7 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = await client.Get202None204NoneDefaultError400ValidAsync();
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Get202None204NoneDefaultError400ValidAsync with all request content.
@@ -645,6 +654,7 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = await client.Get202None204NoneDefaultError400ValidAsync();
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -656,6 +666,7 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = client.Get202None204NoneDefaultError400Valid();
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Get202None204NoneDefaultError400Valid with all request content.
@@ -664,6 +675,7 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = client.Get202None204NoneDefaultError400Valid();
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -675,6 +687,7 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = await client.Get202None204NoneDefaultNone202InvalidAsync();
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Get202None204NoneDefaultNone202InvalidAsync with all request content.
@@ -683,6 +696,7 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = await client.Get202None204NoneDefaultNone202InvalidAsync();
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -694,6 +708,7 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = client.Get202None204NoneDefaultNone202Invalid();
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Get202None204NoneDefaultNone202Invalid with all request content.
@@ -702,6 +717,7 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = client.Get202None204NoneDefaultNone202Invalid();
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -713,6 +729,7 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = await client.Get202None204NoneDefaultNone204NoneAsync();
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Get202None204NoneDefaultNone204NoneAsync with all request content.
@@ -721,6 +738,7 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = await client.Get202None204NoneDefaultNone204NoneAsync();
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -732,6 +750,7 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = client.Get202None204NoneDefaultNone204None();
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Get202None204NoneDefaultNone204None with all request content.
@@ -740,6 +759,7 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = client.Get202None204NoneDefaultNone204None();
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -751,6 +771,7 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = await client.Get202None204NoneDefaultNone400NoneAsync();
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Get202None204NoneDefaultNone400NoneAsync with all request content.
@@ -759,6 +780,7 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = await client.Get202None204NoneDefaultNone400NoneAsync();
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -770,6 +792,7 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = client.Get202None204NoneDefaultNone400None();
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Get202None204NoneDefaultNone400None with all request content.
@@ -778,6 +801,7 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = client.Get202None204NoneDefaultNone400None();
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -789,6 +813,7 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = await client.Get202None204NoneDefaultNone400InvalidAsync();
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Get202None204NoneDefaultNone400InvalidAsync with all request content.
@@ -797,6 +822,7 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = await client.Get202None204NoneDefaultNone400InvalidAsync();
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -808,6 +834,7 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = client.Get202None204NoneDefaultNone400Invalid();
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Get202None204NoneDefaultNone400Invalid with all request content.
@@ -816,6 +843,7 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = client.Get202None204NoneDefaultNone400Invalid();
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -919,6 +947,7 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = await client.GetDefaultModelA400ValidAsync();
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call GetDefaultModelA400ValidAsync with all request content.
@@ -927,6 +956,7 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = await client.GetDefaultModelA400ValidAsync();
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -938,6 +968,7 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = client.GetDefaultModelA400Valid();
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call GetDefaultModelA400Valid with all request content.
@@ -946,6 +977,7 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = client.GetDefaultModelA400Valid();
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -957,6 +989,7 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = await client.GetDefaultModelA400NoneAsync();
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call GetDefaultModelA400NoneAsync with all request content.
@@ -965,6 +998,7 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = await client.GetDefaultModelA400NoneAsync();
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -976,6 +1010,7 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = client.GetDefaultModelA400None();
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call GetDefaultModelA400None with all request content.
@@ -984,6 +1019,7 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = client.GetDefaultModelA400None();
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -995,6 +1031,7 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = await client.GetDefaultNone200InvalidAsync();
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call GetDefaultNone200InvalidAsync with all request content.
@@ -1003,6 +1040,7 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = await client.GetDefaultNone200InvalidAsync();
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -1014,6 +1052,7 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = client.GetDefaultNone200Invalid();
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call GetDefaultNone200Invalid with all request content.
@@ -1022,6 +1061,7 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = client.GetDefaultNone200Invalid();
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -1033,6 +1073,7 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = await client.GetDefaultNone200NoneAsync();
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call GetDefaultNone200NoneAsync with all request content.
@@ -1041,6 +1082,7 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = await client.GetDefaultNone200NoneAsync();
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -1052,6 +1094,7 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = client.GetDefaultNone200None();
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call GetDefaultNone200None with all request content.
@@ -1060,6 +1103,7 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = client.GetDefaultNone200None();
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -1071,6 +1115,7 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = await client.GetDefaultNone400InvalidAsync();
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call GetDefaultNone400InvalidAsync with all request content.
@@ -1079,6 +1124,7 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = await client.GetDefaultNone400InvalidAsync();
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -1090,6 +1136,7 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = client.GetDefaultNone400Invalid();
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call GetDefaultNone400Invalid with all request content.
@@ -1098,6 +1145,7 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = client.GetDefaultNone400Invalid();
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -1109,6 +1157,7 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = await client.GetDefaultNone400NoneAsync();
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call GetDefaultNone400NoneAsync with all request content.
@@ -1117,6 +1166,7 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = await client.GetDefaultNone400NoneAsync();
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -1128,6 +1178,7 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = client.GetDefaultNone400None();
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call GetDefaultNone400None with all request content.
@@ -1136,6 +1187,7 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MultipleResponsesClient client = new MultipleResponsesClient(credential);
 
 Response response = client.GetDefaultNone400None();
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>

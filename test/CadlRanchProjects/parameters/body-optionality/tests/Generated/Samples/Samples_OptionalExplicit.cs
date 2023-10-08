@@ -16,48 +16,48 @@ using Parameters.BodyOptionality.Models;
 
 namespace Parameters.BodyOptionality.Samples
 {
-    internal class Samples_OptionalExplicit
+    public partial class Samples_OptionalExplicit
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Set()
+        public void Example_Set_ShortVersion()
         {
             OptionalExplicit client = new BodyOptionalityClient().GetOptionalExplicitClient();
 
             RequestContent content = null;
             Response response = client.Set(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Set_Async()
+        public async Task Example_Set_ShortVersion_Async()
         {
             OptionalExplicit client = new BodyOptionalityClient().GetOptionalExplicitClient();
 
             RequestContent content = null;
             Response response = await client.SetAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Set_Convenience()
+        public void Example_Set_ShortVersion_Convenience()
         {
             OptionalExplicit client = new BodyOptionalityClient().GetOptionalExplicitClient();
 
             Response response = client.Set();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Set_Convenience_Async()
+        public async Task Example_Set_ShortVersion_Convenience_Async()
         {
             OptionalExplicit client = new BodyOptionalityClient().GetOptionalExplicitClient();
 
             Response response = await client.SetAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -71,6 +71,7 @@ namespace Parameters.BodyOptionality.Samples
                 name = "<name>",
             });
             Response response = client.Set(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -85,6 +86,7 @@ namespace Parameters.BodyOptionality.Samples
                 name = "<name>",
             });
             Response response = await client.SetAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -96,7 +98,6 @@ namespace Parameters.BodyOptionality.Samples
 
             BodyModel body = new BodyModel("<name>");
             Response response = client.Set(body: body);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -107,49 +108,48 @@ namespace Parameters.BodyOptionality.Samples
 
             BodyModel body = new BodyModel("<name>");
             Response response = await client.SetAsync(body: body);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Omit()
+        public void Example_Omit_ShortVersion()
         {
             OptionalExplicit client = new BodyOptionalityClient().GetOptionalExplicitClient();
 
             RequestContent content = null;
             Response response = client.Omit(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Omit_Async()
+        public async Task Example_Omit_ShortVersion_Async()
         {
             OptionalExplicit client = new BodyOptionalityClient().GetOptionalExplicitClient();
 
             RequestContent content = null;
             Response response = await client.OmitAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Omit_Convenience()
+        public void Example_Omit_ShortVersion_Convenience()
         {
             OptionalExplicit client = new BodyOptionalityClient().GetOptionalExplicitClient();
 
             Response response = client.Omit();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Omit_Convenience_Async()
+        public async Task Example_Omit_ShortVersion_Convenience_Async()
         {
             OptionalExplicit client = new BodyOptionalityClient().GetOptionalExplicitClient();
 
             Response response = await client.OmitAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -163,6 +163,7 @@ namespace Parameters.BodyOptionality.Samples
                 name = "<name>",
             });
             Response response = client.Omit(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -177,6 +178,7 @@ namespace Parameters.BodyOptionality.Samples
                 name = "<name>",
             });
             Response response = await client.OmitAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -188,7 +190,6 @@ namespace Parameters.BodyOptionality.Samples
 
             BodyModel body = new BodyModel("<name>");
             Response response = client.Omit(body: body);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -199,7 +200,6 @@ namespace Parameters.BodyOptionality.Samples
 
             BodyModel body = new BodyModel("<name>");
             Response response = await client.OmitAsync(body: body);
-            Console.WriteLine(response.Status);
         }
     }
 }

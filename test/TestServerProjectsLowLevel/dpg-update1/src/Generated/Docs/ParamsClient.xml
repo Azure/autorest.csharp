@@ -209,6 +209,7 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ParamsClient client = new ParamsClient(credential);
 
 Response response = await client.DeleteParametersAsync();
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call DeleteParametersAsync with all request content.
@@ -217,6 +218,7 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ParamsClient client = new ParamsClient(credential);
 
 Response response = await client.DeleteParametersAsync();
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -228,6 +230,7 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ParamsClient client = new ParamsClient(credential);
 
 Response response = client.DeleteParameters();
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call DeleteParameters with all request content.
@@ -236,6 +239,7 @@ AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ParamsClient client = new ParamsClient(credential);
 
 Response response = client.DeleteParameters();
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>

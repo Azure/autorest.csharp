@@ -17,11 +17,11 @@ using _Type.Property.Optionality.Models;
 
 namespace _Type.Property.Optionality.Samples
 {
-    internal class Samples_RequiredAndOptional
+    public partial class Samples_RequiredAndOptional
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetAll()
+        public void Example_GetAll_ShortVersion()
         {
             RequiredAndOptional client = new OptionalClient().GetRequiredAndOptionalClient(apiVersion: "1.0.0");
 
@@ -33,7 +33,7 @@ namespace _Type.Property.Optionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetAll_Async()
+        public async Task Example_GetAll_ShortVersion_Async()
         {
             RequiredAndOptional client = new OptionalClient().GetRequiredAndOptionalClient(apiVersion: "1.0.0");
 
@@ -45,7 +45,7 @@ namespace _Type.Property.Optionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetAll_Convenience()
+        public void Example_GetAll_ShortVersion_Convenience()
         {
             RequiredAndOptional client = new OptionalClient().GetRequiredAndOptionalClient(apiVersion: "1.0.0");
 
@@ -54,7 +54,7 @@ namespace _Type.Property.Optionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetAll_Convenience_Async()
+        public async Task Example_GetAll_ShortVersion_Convenience_Async()
         {
             RequiredAndOptional client = new OptionalClient().GetRequiredAndOptionalClient(apiVersion: "1.0.0");
 
@@ -107,7 +107,7 @@ namespace _Type.Property.Optionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetRequiredOnly()
+        public void Example_GetRequiredOnly_ShortVersion()
         {
             RequiredAndOptional client = new OptionalClient().GetRequiredAndOptionalClient(apiVersion: "1.0.0");
 
@@ -119,7 +119,7 @@ namespace _Type.Property.Optionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetRequiredOnly_Async()
+        public async Task Example_GetRequiredOnly_ShortVersion_Async()
         {
             RequiredAndOptional client = new OptionalClient().GetRequiredAndOptionalClient(apiVersion: "1.0.0");
 
@@ -131,7 +131,7 @@ namespace _Type.Property.Optionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetRequiredOnly_Convenience()
+        public void Example_GetRequiredOnly_ShortVersion_Convenience()
         {
             RequiredAndOptional client = new OptionalClient().GetRequiredAndOptionalClient(apiVersion: "1.0.0");
 
@@ -140,7 +140,7 @@ namespace _Type.Property.Optionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetRequiredOnly_Convenience_Async()
+        public async Task Example_GetRequiredOnly_ShortVersion_Convenience_Async()
         {
             RequiredAndOptional client = new OptionalClient().GetRequiredAndOptionalClient(apiVersion: "1.0.0");
 
@@ -193,7 +193,7 @@ namespace _Type.Property.Optionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutAll()
+        public void Example_PutAll_ShortVersion()
         {
             RequiredAndOptional client = new OptionalClient().GetRequiredAndOptionalClient(apiVersion: "1.0.0");
 
@@ -202,12 +202,13 @@ namespace _Type.Property.Optionality.Samples
                 requiredProperty = 1234,
             });
             Response response = client.PutAll(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutAll_Async()
+        public async Task Example_PutAll_ShortVersion_Async()
         {
             RequiredAndOptional client = new OptionalClient().GetRequiredAndOptionalClient(apiVersion: "1.0.0");
 
@@ -216,29 +217,28 @@ namespace _Type.Property.Optionality.Samples
                 requiredProperty = 1234,
             });
             Response response = await client.PutAllAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutAll_Convenience()
+        public void Example_PutAll_ShortVersion_Convenience()
         {
             RequiredAndOptional client = new OptionalClient().GetRequiredAndOptionalClient(apiVersion: "1.0.0");
 
             RequiredAndOptionalProperty body = new RequiredAndOptionalProperty(1234);
             Response response = client.PutAll(body);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutAll_Convenience_Async()
+        public async Task Example_PutAll_ShortVersion_Convenience_Async()
         {
             RequiredAndOptional client = new OptionalClient().GetRequiredAndOptionalClient(apiVersion: "1.0.0");
 
             RequiredAndOptionalProperty body = new RequiredAndOptionalProperty(1234);
             Response response = await client.PutAllAsync(body);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -253,6 +253,7 @@ namespace _Type.Property.Optionality.Samples
                 requiredProperty = 1234,
             });
             Response response = client.PutAll(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -268,6 +269,7 @@ namespace _Type.Property.Optionality.Samples
                 requiredProperty = 1234,
             });
             Response response = await client.PutAllAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -282,7 +284,6 @@ namespace _Type.Property.Optionality.Samples
                 OptionalProperty = "<optionalProperty>",
             };
             Response response = client.PutAll(body);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -296,12 +297,11 @@ namespace _Type.Property.Optionality.Samples
                 OptionalProperty = "<optionalProperty>",
             };
             Response response = await client.PutAllAsync(body);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutRequiredOnly()
+        public void Example_PutRequiredOnly_ShortVersion()
         {
             RequiredAndOptional client = new OptionalClient().GetRequiredAndOptionalClient(apiVersion: "1.0.0");
 
@@ -310,12 +310,13 @@ namespace _Type.Property.Optionality.Samples
                 requiredProperty = 1234,
             });
             Response response = client.PutRequiredOnly(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutRequiredOnly_Async()
+        public async Task Example_PutRequiredOnly_ShortVersion_Async()
         {
             RequiredAndOptional client = new OptionalClient().GetRequiredAndOptionalClient(apiVersion: "1.0.0");
 
@@ -324,29 +325,28 @@ namespace _Type.Property.Optionality.Samples
                 requiredProperty = 1234,
             });
             Response response = await client.PutRequiredOnlyAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutRequiredOnly_Convenience()
+        public void Example_PutRequiredOnly_ShortVersion_Convenience()
         {
             RequiredAndOptional client = new OptionalClient().GetRequiredAndOptionalClient(apiVersion: "1.0.0");
 
             RequiredAndOptionalProperty body = new RequiredAndOptionalProperty(1234);
             Response response = client.PutRequiredOnly(body);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutRequiredOnly_Convenience_Async()
+        public async Task Example_PutRequiredOnly_ShortVersion_Convenience_Async()
         {
             RequiredAndOptional client = new OptionalClient().GetRequiredAndOptionalClient(apiVersion: "1.0.0");
 
             RequiredAndOptionalProperty body = new RequiredAndOptionalProperty(1234);
             Response response = await client.PutRequiredOnlyAsync(body);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -361,6 +361,7 @@ namespace _Type.Property.Optionality.Samples
                 requiredProperty = 1234,
             });
             Response response = client.PutRequiredOnly(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -376,6 +377,7 @@ namespace _Type.Property.Optionality.Samples
                 requiredProperty = 1234,
             });
             Response response = await client.PutRequiredOnlyAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -390,7 +392,6 @@ namespace _Type.Property.Optionality.Samples
                 OptionalProperty = "<optionalProperty>",
             };
             Response response = client.PutRequiredOnly(body);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -404,7 +405,6 @@ namespace _Type.Property.Optionality.Samples
                 OptionalProperty = "<optionalProperty>",
             };
             Response response = await client.PutRequiredOnlyAsync(body);
-            Console.WriteLine(response.Status);
         }
     }
 }

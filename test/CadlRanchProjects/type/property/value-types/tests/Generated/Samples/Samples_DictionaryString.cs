@@ -18,11 +18,11 @@ using _Type.Property.ValueTypes.Models;
 
 namespace _Type.Property.ValueTypes.Samples
 {
-    internal class Samples_DictionaryString
+    public partial class Samples_DictionaryString
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetDictionaryString()
+        public void Example_GetDictionaryString_ShortVersion()
         {
             DictionaryString client = new ValueTypesClient().GetDictionaryStringClient(apiVersion: "1.0.0");
 
@@ -34,7 +34,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetDictionaryString_Async()
+        public async Task Example_GetDictionaryString_ShortVersion_Async()
         {
             DictionaryString client = new ValueTypesClient().GetDictionaryStringClient(apiVersion: "1.0.0");
 
@@ -46,7 +46,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetDictionaryString_Convenience()
+        public void Example_GetDictionaryString_ShortVersion_Convenience()
         {
             DictionaryString client = new ValueTypesClient().GetDictionaryStringClient(apiVersion: "1.0.0");
 
@@ -55,7 +55,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetDictionaryString_Convenience_Async()
+        public async Task Example_GetDictionaryString_ShortVersion_Convenience_Async()
         {
             DictionaryString client = new ValueTypesClient().GetDictionaryStringClient(apiVersion: "1.0.0");
 
@@ -106,7 +106,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put()
+        public void Example_Put_ShortVersion()
         {
             DictionaryString client = new ValueTypesClient().GetDictionaryStringClient(apiVersion: "1.0.0");
 
@@ -118,12 +118,13 @@ namespace _Type.Property.ValueTypes.Samples
                 },
             });
             Response response = client.Put(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_Async()
+        public async Task Example_Put_ShortVersion_Async()
         {
             DictionaryString client = new ValueTypesClient().GetDictionaryStringClient(apiVersion: "1.0.0");
 
@@ -135,35 +136,34 @@ namespace _Type.Property.ValueTypes.Samples
                 },
             });
             Response response = await client.PutAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put_Convenience()
+        public void Example_Put_ShortVersion_Convenience()
         {
             DictionaryString client = new ValueTypesClient().GetDictionaryStringClient(apiVersion: "1.0.0");
 
-            DictionaryStringProperty body = new DictionaryStringProperty(new Dictionary<string, string>()
+            DictionaryStringProperty body = new DictionaryStringProperty(new Dictionary<string, string>
             {
-                ["key"] = "<property>",
+                ["key"] = "<property>"
             });
             Response response = client.Put(body);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_Convenience_Async()
+        public async Task Example_Put_ShortVersion_Convenience_Async()
         {
             DictionaryString client = new ValueTypesClient().GetDictionaryStringClient(apiVersion: "1.0.0");
 
-            DictionaryStringProperty body = new DictionaryStringProperty(new Dictionary<string, string>()
+            DictionaryStringProperty body = new DictionaryStringProperty(new Dictionary<string, string>
             {
-                ["key"] = "<property>",
+                ["key"] = "<property>"
             });
             Response response = await client.PutAsync(body);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -180,6 +180,7 @@ namespace _Type.Property.ValueTypes.Samples
                 },
             });
             Response response = client.Put(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -197,6 +198,7 @@ namespace _Type.Property.ValueTypes.Samples
                 },
             });
             Response response = await client.PutAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -206,12 +208,11 @@ namespace _Type.Property.ValueTypes.Samples
         {
             DictionaryString client = new ValueTypesClient().GetDictionaryStringClient(apiVersion: "1.0.0");
 
-            DictionaryStringProperty body = new DictionaryStringProperty(new Dictionary<string, string>()
+            DictionaryStringProperty body = new DictionaryStringProperty(new Dictionary<string, string>
             {
-                ["key"] = "<property>",
+                ["key"] = "<property>"
             });
             Response response = client.Put(body);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -220,12 +221,11 @@ namespace _Type.Property.ValueTypes.Samples
         {
             DictionaryString client = new ValueTypesClient().GetDictionaryStringClient(apiVersion: "1.0.0");
 
-            DictionaryStringProperty body = new DictionaryStringProperty(new Dictionary<string, string>()
+            DictionaryStringProperty body = new DictionaryStringProperty(new Dictionary<string, string>
             {
-                ["key"] = "<property>",
+                ["key"] = "<property>"
             });
             Response response = await client.PutAsync(body);
-            Console.WriteLine(response.Status);
         }
     }
 }
