@@ -134,7 +134,7 @@ This sample shows how to call Put400Async.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Response response = await client.Put400Async(content);
 
 Console.WriteLine(response.Status);
@@ -144,7 +144,7 @@ This sample shows how to call Put400Async with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
-RequestContent content = RequestContent.Create("true");
+using RequestContent content = RequestContent.Create("true");
 Response response = await client.Put400Async(content);
 
 Console.WriteLine(response.Status);
@@ -157,7 +157,7 @@ This sample shows how to call Put400.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Response response = client.Put400(content);
 
 Console.WriteLine(response.Status);
@@ -167,7 +167,7 @@ This sample shows how to call Put400 with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
-RequestContent content = RequestContent.Create("true");
+using RequestContent content = RequestContent.Create("true");
 Response response = client.Put400(content);
 
 Console.WriteLine(response.Status);
@@ -180,7 +180,7 @@ This sample shows how to call Patch400Async.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Response response = await client.Patch400Async(content);
 
 Console.WriteLine(response.Status);
@@ -190,7 +190,7 @@ This sample shows how to call Patch400Async with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
-RequestContent content = RequestContent.Create("true");
+using RequestContent content = RequestContent.Create("true");
 Response response = await client.Patch400Async(content);
 
 Console.WriteLine(response.Status);
@@ -203,7 +203,7 @@ This sample shows how to call Patch400.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Response response = client.Patch400(content);
 
 Console.WriteLine(response.Status);
@@ -213,7 +213,7 @@ This sample shows how to call Patch400 with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
-RequestContent content = RequestContent.Create("true");
+using RequestContent content = RequestContent.Create("true");
 Response response = client.Patch400(content);
 
 Console.WriteLine(response.Status);
@@ -226,7 +226,7 @@ This sample shows how to call Post400Async.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Response response = await client.Post400Async(content);
 
 Console.WriteLine(response.Status);
@@ -236,7 +236,7 @@ This sample shows how to call Post400Async with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
-RequestContent content = RequestContent.Create("true");
+using RequestContent content = RequestContent.Create("true");
 Response response = await client.Post400Async(content);
 
 Console.WriteLine(response.Status);
@@ -249,7 +249,7 @@ This sample shows how to call Post400.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Response response = client.Post400(content);
 
 Console.WriteLine(response.Status);
@@ -259,7 +259,7 @@ This sample shows how to call Post400 with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
-RequestContent content = RequestContent.Create("true");
+using RequestContent content = RequestContent.Create("true");
 Response response = client.Post400(content);
 
 Console.WriteLine(response.Status);
@@ -272,7 +272,7 @@ This sample shows how to call Delete400Async.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Response response = await client.Delete400Async(content);
 
 Console.WriteLine(response.Status);
@@ -282,7 +282,7 @@ This sample shows how to call Delete400Async with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
-RequestContent content = RequestContent.Create("true");
+using RequestContent content = RequestContent.Create("true");
 Response response = await client.Delete400Async(content);
 
 Console.WriteLine(response.Status);
@@ -295,7 +295,7 @@ This sample shows how to call Delete400.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Response response = client.Delete400(content);
 
 Console.WriteLine(response.Status);
@@ -305,7 +305,7 @@ This sample shows how to call Delete400 with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
-RequestContent content = RequestContent.Create("true");
+using RequestContent content = RequestContent.Create("true");
 Response response = client.Delete400(content);
 
 Console.WriteLine(response.Status);
@@ -486,7 +486,7 @@ This sample shows how to call Put404Async.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Response response = await client.Put404Async(content);
 
 Console.WriteLine(response.Status);
@@ -496,7 +496,7 @@ This sample shows how to call Put404Async with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
-RequestContent content = RequestContent.Create("true");
+using RequestContent content = RequestContent.Create("true");
 Response response = await client.Put404Async(content);
 
 Console.WriteLine(response.Status);
@@ -509,7 +509,7 @@ This sample shows how to call Put404.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Response response = client.Put404(content);
 
 Console.WriteLine(response.Status);
@@ -519,7 +519,7 @@ This sample shows how to call Put404 with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
-RequestContent content = RequestContent.Create("true");
+using RequestContent content = RequestContent.Create("true");
 Response response = client.Put404(content);
 
 Console.WriteLine(response.Status);
@@ -532,7 +532,7 @@ This sample shows how to call Patch405Async.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Response response = await client.Patch405Async(content);
 
 Console.WriteLine(response.Status);
@@ -542,7 +542,7 @@ This sample shows how to call Patch405Async with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
-RequestContent content = RequestContent.Create("true");
+using RequestContent content = RequestContent.Create("true");
 Response response = await client.Patch405Async(content);
 
 Console.WriteLine(response.Status);
@@ -555,7 +555,7 @@ This sample shows how to call Patch405.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Response response = client.Patch405(content);
 
 Console.WriteLine(response.Status);
@@ -565,7 +565,7 @@ This sample shows how to call Patch405 with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
-RequestContent content = RequestContent.Create("true");
+using RequestContent content = RequestContent.Create("true");
 Response response = client.Patch405(content);
 
 Console.WriteLine(response.Status);
@@ -578,7 +578,7 @@ This sample shows how to call Post406Async.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Response response = await client.Post406Async(content);
 
 Console.WriteLine(response.Status);
@@ -588,7 +588,7 @@ This sample shows how to call Post406Async with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
-RequestContent content = RequestContent.Create("true");
+using RequestContent content = RequestContent.Create("true");
 Response response = await client.Post406Async(content);
 
 Console.WriteLine(response.Status);
@@ -601,7 +601,7 @@ This sample shows how to call Post406.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Response response = client.Post406(content);
 
 Console.WriteLine(response.Status);
@@ -611,7 +611,7 @@ This sample shows how to call Post406 with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
-RequestContent content = RequestContent.Create("true");
+using RequestContent content = RequestContent.Create("true");
 Response response = client.Post406(content);
 
 Console.WriteLine(response.Status);
@@ -624,7 +624,7 @@ This sample shows how to call Delete407Async.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Response response = await client.Delete407Async(content);
 
 Console.WriteLine(response.Status);
@@ -634,7 +634,7 @@ This sample shows how to call Delete407Async with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
-RequestContent content = RequestContent.Create("true");
+using RequestContent content = RequestContent.Create("true");
 Response response = await client.Delete407Async(content);
 
 Console.WriteLine(response.Status);
@@ -647,7 +647,7 @@ This sample shows how to call Delete407.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Response response = client.Delete407(content);
 
 Console.WriteLine(response.Status);
@@ -657,7 +657,7 @@ This sample shows how to call Delete407 with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
-RequestContent content = RequestContent.Create("true");
+using RequestContent content = RequestContent.Create("true");
 Response response = client.Delete407(content);
 
 Console.WriteLine(response.Status);
@@ -670,7 +670,7 @@ This sample shows how to call Put409Async.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Response response = await client.Put409Async(content);
 
 Console.WriteLine(response.Status);
@@ -680,7 +680,7 @@ This sample shows how to call Put409Async with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
-RequestContent content = RequestContent.Create("true");
+using RequestContent content = RequestContent.Create("true");
 Response response = await client.Put409Async(content);
 
 Console.WriteLine(response.Status);
@@ -693,7 +693,7 @@ This sample shows how to call Put409.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Response response = client.Put409(content);
 
 Console.WriteLine(response.Status);
@@ -703,7 +703,7 @@ This sample shows how to call Put409 with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
-RequestContent content = RequestContent.Create("true");
+using RequestContent content = RequestContent.Create("true");
 Response response = client.Put409(content);
 
 Console.WriteLine(response.Status);
@@ -884,7 +884,7 @@ This sample shows how to call Put413Async.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Response response = await client.Put413Async(content);
 
 Console.WriteLine(response.Status);
@@ -894,7 +894,7 @@ This sample shows how to call Put413Async with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
-RequestContent content = RequestContent.Create("true");
+using RequestContent content = RequestContent.Create("true");
 Response response = await client.Put413Async(content);
 
 Console.WriteLine(response.Status);
@@ -907,7 +907,7 @@ This sample shows how to call Put413.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Response response = client.Put413(content);
 
 Console.WriteLine(response.Status);
@@ -917,7 +917,7 @@ This sample shows how to call Put413 with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
-RequestContent content = RequestContent.Create("true");
+using RequestContent content = RequestContent.Create("true");
 Response response = client.Put413(content);
 
 Console.WriteLine(response.Status);
@@ -930,7 +930,7 @@ This sample shows how to call Patch414Async.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Response response = await client.Patch414Async(content);
 
 Console.WriteLine(response.Status);
@@ -940,7 +940,7 @@ This sample shows how to call Patch414Async with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
-RequestContent content = RequestContent.Create("true");
+using RequestContent content = RequestContent.Create("true");
 Response response = await client.Patch414Async(content);
 
 Console.WriteLine(response.Status);
@@ -953,7 +953,7 @@ This sample shows how to call Patch414.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Response response = client.Patch414(content);
 
 Console.WriteLine(response.Status);
@@ -963,7 +963,7 @@ This sample shows how to call Patch414 with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
-RequestContent content = RequestContent.Create("true");
+using RequestContent content = RequestContent.Create("true");
 Response response = client.Patch414(content);
 
 Console.WriteLine(response.Status);
@@ -976,7 +976,7 @@ This sample shows how to call Post415Async.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Response response = await client.Post415Async(content);
 
 Console.WriteLine(response.Status);
@@ -986,7 +986,7 @@ This sample shows how to call Post415Async with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
-RequestContent content = RequestContent.Create("true");
+using RequestContent content = RequestContent.Create("true");
 Response response = await client.Post415Async(content);
 
 Console.WriteLine(response.Status);
@@ -999,7 +999,7 @@ This sample shows how to call Post415.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Response response = client.Post415(content);
 
 Console.WriteLine(response.Status);
@@ -1009,7 +1009,7 @@ This sample shows how to call Post415 with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
-RequestContent content = RequestContent.Create("true");
+using RequestContent content = RequestContent.Create("true");
 Response response = client.Post415(content);
 
 Console.WriteLine(response.Status);
@@ -1064,7 +1064,7 @@ This sample shows how to call Delete417Async.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Response response = await client.Delete417Async(content);
 
 Console.WriteLine(response.Status);
@@ -1074,7 +1074,7 @@ This sample shows how to call Delete417Async with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
-RequestContent content = RequestContent.Create("true");
+using RequestContent content = RequestContent.Create("true");
 Response response = await client.Delete417Async(content);
 
 Console.WriteLine(response.Status);
@@ -1087,7 +1087,7 @@ This sample shows how to call Delete417.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Response response = client.Delete417(content);
 
 Console.WriteLine(response.Status);
@@ -1097,7 +1097,7 @@ This sample shows how to call Delete417 with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
-RequestContent content = RequestContent.Create("true");
+using RequestContent content = RequestContent.Create("true");
 Response response = client.Delete417(content);
 
 Console.WriteLine(response.Status);

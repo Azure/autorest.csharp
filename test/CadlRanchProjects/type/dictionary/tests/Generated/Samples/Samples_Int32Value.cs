@@ -109,7 +109,7 @@ namespace _Type._Dictionary.Samples
         {
             Int32Value client = new DictionaryClient().GetInt32ValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 key = 1234,
             });
@@ -124,7 +124,7 @@ namespace _Type._Dictionary.Samples
         {
             Int32Value client = new DictionaryClient().GetInt32ValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 key = 1234,
             });
@@ -163,7 +163,7 @@ namespace _Type._Dictionary.Samples
         {
             Int32Value client = new DictionaryClient().GetInt32ValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 key = 1234,
             });
@@ -178,7 +178,7 @@ namespace _Type._Dictionary.Samples
         {
             Int32Value client = new DictionaryClient().GetInt32ValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 key = 1234,
             });

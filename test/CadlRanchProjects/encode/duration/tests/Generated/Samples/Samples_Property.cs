@@ -26,7 +26,7 @@ namespace Encode.Duration.Samples
         {
             Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 value = "PT1H23M45S",
             });
@@ -42,7 +42,7 @@ namespace Encode.Duration.Samples
         {
             Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 value = "PT1H23M45S",
             });
@@ -78,7 +78,7 @@ namespace Encode.Duration.Samples
         {
             Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 value = "PT1H23M45S",
             });
@@ -94,7 +94,7 @@ namespace Encode.Duration.Samples
         {
             Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 value = "PT1H23M45S",
             });
@@ -130,7 +130,7 @@ namespace Encode.Duration.Samples
         {
             Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 value = "PT1H23M45S",
             });
@@ -146,7 +146,7 @@ namespace Encode.Duration.Samples
         {
             Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 value = "PT1H23M45S",
             });
@@ -182,7 +182,7 @@ namespace Encode.Duration.Samples
         {
             Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 value = "PT1H23M45S",
             });
@@ -198,7 +198,7 @@ namespace Encode.Duration.Samples
         {
             Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 value = "PT1H23M45S",
             });
@@ -234,7 +234,7 @@ namespace Encode.Duration.Samples
         {
             Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 value = 10,
             });
@@ -250,7 +250,7 @@ namespace Encode.Duration.Samples
         {
             Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 value = 10,
             });
@@ -286,7 +286,7 @@ namespace Encode.Duration.Samples
         {
             Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 value = 10,
             });
@@ -302,7 +302,7 @@ namespace Encode.Duration.Samples
         {
             Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 value = 10,
             });
@@ -338,7 +338,7 @@ namespace Encode.Duration.Samples
         {
             Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 value = 10F,
             });
@@ -354,7 +354,7 @@ namespace Encode.Duration.Samples
         {
             Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 value = 10F,
             });
@@ -390,7 +390,7 @@ namespace Encode.Duration.Samples
         {
             Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 value = 10F,
             });
@@ -406,7 +406,7 @@ namespace Encode.Duration.Samples
         {
             Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 value = 10F,
             });
@@ -442,7 +442,7 @@ namespace Encode.Duration.Samples
         {
             Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 value = new object[]
             {
@@ -461,7 +461,7 @@ namespace Encode.Duration.Samples
         {
             Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 value = new object[]
             {
@@ -500,7 +500,7 @@ namespace Encode.Duration.Samples
         {
             Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 value = new object[]
             {
@@ -519,7 +519,7 @@ namespace Encode.Duration.Samples
         {
             Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 value = new object[]
             {

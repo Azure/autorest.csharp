@@ -109,7 +109,7 @@ This sample shows how to call PutAsync.
 <code><![CDATA[
 NullableFloatValue client = new ArrayClient().GetNullableFloatValueClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new object[]
+using RequestContent content = RequestContent.Create(new object[]
 {
     123.45F
 });
@@ -121,7 +121,7 @@ This sample shows how to call PutAsync with all request content.
 <code><![CDATA[
 NullableFloatValue client = new ArrayClient().GetNullableFloatValueClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new object[]
+using RequestContent content = RequestContent.Create(new object[]
 {
     123.45F
 });
@@ -136,7 +136,7 @@ This sample shows how to call Put.
 <code><![CDATA[
 NullableFloatValue client = new ArrayClient().GetNullableFloatValueClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new object[]
+using RequestContent content = RequestContent.Create(new object[]
 {
     123.45F
 });
@@ -148,7 +148,7 @@ This sample shows how to call Put with all request content.
 <code><![CDATA[
 NullableFloatValue client = new ArrayClient().GetNullableFloatValueClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new object[]
+using RequestContent content = RequestContent.Create(new object[]
 {
     123.45F
 });

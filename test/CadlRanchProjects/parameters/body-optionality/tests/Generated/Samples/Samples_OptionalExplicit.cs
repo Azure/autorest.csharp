@@ -24,7 +24,7 @@ namespace Parameters.BodyOptionality.Samples
         {
             OptionalExplicit client = new BodyOptionalityClient().GetOptionalExplicitClient();
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Response response = client.Set(content);
 
             Console.WriteLine(response.Status);
@@ -36,7 +36,7 @@ namespace Parameters.BodyOptionality.Samples
         {
             OptionalExplicit client = new BodyOptionalityClient().GetOptionalExplicitClient();
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Response response = await client.SetAsync(content);
 
             Console.WriteLine(response.Status);
@@ -66,7 +66,7 @@ namespace Parameters.BodyOptionality.Samples
         {
             OptionalExplicit client = new BodyOptionalityClient().GetOptionalExplicitClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
             });
@@ -81,7 +81,7 @@ namespace Parameters.BodyOptionality.Samples
         {
             OptionalExplicit client = new BodyOptionalityClient().GetOptionalExplicitClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
             });
@@ -116,7 +116,7 @@ namespace Parameters.BodyOptionality.Samples
         {
             OptionalExplicit client = new BodyOptionalityClient().GetOptionalExplicitClient();
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Response response = client.Omit(content);
 
             Console.WriteLine(response.Status);
@@ -128,7 +128,7 @@ namespace Parameters.BodyOptionality.Samples
         {
             OptionalExplicit client = new BodyOptionalityClient().GetOptionalExplicitClient();
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Response response = await client.OmitAsync(content);
 
             Console.WriteLine(response.Status);
@@ -158,7 +158,7 @@ namespace Parameters.BodyOptionality.Samples
         {
             OptionalExplicit client = new BodyOptionalityClient().GetOptionalExplicitClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
             });
@@ -173,7 +173,7 @@ namespace Parameters.BodyOptionality.Samples
         {
             OptionalExplicit client = new BodyOptionalityClient().GetOptionalExplicitClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
             });

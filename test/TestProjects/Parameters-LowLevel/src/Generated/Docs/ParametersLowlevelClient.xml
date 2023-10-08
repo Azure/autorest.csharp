@@ -54,7 +54,7 @@ This sample shows how to call RequestBodyResponseBodyAsync and parse the result.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ParametersLowlevelClient client = new ParametersLowlevelClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Response response = await client.RequestBodyResponseBodyAsync(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
@@ -65,7 +65,7 @@ This sample shows how to call RequestBodyResponseBodyAsync with all request cont
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ParametersLowlevelClient client = new ParametersLowlevelClient(credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     Code = "<Code>",
     Status = "<Status>",
@@ -84,7 +84,7 @@ This sample shows how to call RequestBodyResponseBody and parse the result.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ParametersLowlevelClient client = new ParametersLowlevelClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Response response = client.RequestBodyResponseBody(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
@@ -95,7 +95,7 @@ This sample shows how to call RequestBodyResponseBody with all request content a
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ParametersLowlevelClient client = new ParametersLowlevelClient(credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     Code = "<Code>",
     Status = "<Status>",
@@ -202,7 +202,7 @@ This sample shows how to call RequestBodyNoResponseBodyAsync.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ParametersLowlevelClient client = new ParametersLowlevelClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Response response = await client.RequestBodyNoResponseBodyAsync(content);
 
 Console.WriteLine(response.Status);
@@ -212,7 +212,7 @@ This sample shows how to call RequestBodyNoResponseBodyAsync with all request co
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ParametersLowlevelClient client = new ParametersLowlevelClient(credential);
 
-RequestContent content = RequestContent.Create("<stringBody>");
+using RequestContent content = RequestContent.Create("<stringBody>");
 Response response = await client.RequestBodyNoResponseBodyAsync(content);
 
 Console.WriteLine(response.Status);
@@ -225,7 +225,7 @@ This sample shows how to call RequestBodyNoResponseBody.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ParametersLowlevelClient client = new ParametersLowlevelClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Response response = client.RequestBodyNoResponseBody(content);
 
 Console.WriteLine(response.Status);
@@ -235,7 +235,7 @@ This sample shows how to call RequestBodyNoResponseBody with all request content
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ParametersLowlevelClient client = new ParametersLowlevelClient(credential);
 
-RequestContent content = RequestContent.Create("<stringBody>");
+using RequestContent content = RequestContent.Create("<stringBody>");
 Response response = client.RequestBodyNoResponseBody(content);
 
 Console.WriteLine(response.Status);
@@ -332,7 +332,7 @@ This sample shows how to call OptionalPathBodyParametersWithMixedSequenceAsync.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ParametersLowlevelClient client = new ParametersLowlevelClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Response response = await client.OptionalPathBodyParametersWithMixedSequenceAsync(default, "<name>", 1234, default, content);
 
 Console.WriteLine(response.Status);
@@ -342,7 +342,7 @@ This sample shows how to call OptionalPathBodyParametersWithMixedSequenceAsync w
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ParametersLowlevelClient client = new ParametersLowlevelClient(credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     Code = "<Code>",
     Status = "<Status>",
@@ -359,7 +359,7 @@ This sample shows how to call OptionalPathBodyParametersWithMixedSequence.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ParametersLowlevelClient client = new ParametersLowlevelClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Response response = client.OptionalPathBodyParametersWithMixedSequence(default, "<name>", 1234, default, content);
 
 Console.WriteLine(response.Status);
@@ -369,7 +369,7 @@ This sample shows how to call OptionalPathBodyParametersWithMixedSequence with a
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ParametersLowlevelClient client = new ParametersLowlevelClient(credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     Code = "<Code>",
     Status = "<Status>",
@@ -386,7 +386,7 @@ This sample shows how to call RepeatableActionAsync.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ParametersLowlevelClient client = new ParametersLowlevelClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Response response = await client.RepeatableActionAsync(default, "<name>", content);
 
 Console.WriteLine(response.Status);
@@ -396,7 +396,7 @@ This sample shows how to call RepeatableActionAsync with all parameters and requ
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ParametersLowlevelClient client = new ParametersLowlevelClient(credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     Code = "<Code>",
     Status = "<Status>",
@@ -413,7 +413,7 @@ This sample shows how to call RepeatableAction.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ParametersLowlevelClient client = new ParametersLowlevelClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Response response = client.RepeatableAction(default, "<name>", content);
 
 Console.WriteLine(response.Status);
@@ -423,7 +423,7 @@ This sample shows how to call RepeatableAction with all parameters and request c
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ParametersLowlevelClient client = new ParametersLowlevelClient(credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     Code = "<Code>",
     Status = "<Status>",

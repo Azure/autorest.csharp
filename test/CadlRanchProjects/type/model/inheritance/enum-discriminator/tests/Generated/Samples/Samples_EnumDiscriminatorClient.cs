@@ -113,7 +113,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
         {
             EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 kind = "golden",
                 weight = 1234,
@@ -129,7 +129,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
         {
             EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 kind = "golden",
                 weight = 1234,
@@ -165,7 +165,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
         {
             EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 kind = "golden",
                 weight = 1234,
@@ -181,7 +181,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
         {
             EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 kind = "golden",
                 weight = 1234,
@@ -481,7 +481,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
         {
             EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 kind = "cobra",
                 length = 1234,
@@ -497,7 +497,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
         {
             EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 kind = "cobra",
                 length = 1234,
@@ -533,7 +533,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
         {
             EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 kind = "cobra",
                 length = 1234,
@@ -549,7 +549,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
         {
             EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 kind = "cobra",
                 length = 1234,

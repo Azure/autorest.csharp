@@ -7,7 +7,7 @@ This sample shows how to call OperationAsync.
 <code><![CDATA[
 AccessibilityClient client = new AccessibilityClient();
 
-RequestContent content = null;
+using RequestContent content = null;
 Response response = await client.OperationAsync(content);
 
 Console.WriteLine(response.Status);
@@ -16,7 +16,7 @@ This sample shows how to call OperationAsync with all request content.
 <code><![CDATA[
 AccessibilityClient client = new AccessibilityClient();
 
-RequestContent content = RequestContent.Create("<body>");
+using RequestContent content = RequestContent.Create("<body>");
 Response response = await client.OperationAsync(content);
 
 Console.WriteLine(response.Status);
@@ -28,7 +28,7 @@ This sample shows how to call Operation.
 <code><![CDATA[
 AccessibilityClient client = new AccessibilityClient();
 
-RequestContent content = null;
+using RequestContent content = null;
 Response response = client.Operation(content);
 
 Console.WriteLine(response.Status);
@@ -37,7 +37,7 @@ This sample shows how to call Operation with all request content.
 <code><![CDATA[
 AccessibilityClient client = new AccessibilityClient();
 
-RequestContent content = RequestContent.Create("<body>");
+using RequestContent content = RequestContent.Create("<body>");
 Response response = client.Operation(content);
 
 Console.WriteLine(response.Status);

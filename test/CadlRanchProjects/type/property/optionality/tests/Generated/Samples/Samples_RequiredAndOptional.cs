@@ -197,7 +197,7 @@ namespace _Type.Property.Optionality.Samples
         {
             RequiredAndOptional client = new OptionalClient().GetRequiredAndOptionalClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 requiredProperty = 1234,
             });
@@ -212,7 +212,7 @@ namespace _Type.Property.Optionality.Samples
         {
             RequiredAndOptional client = new OptionalClient().GetRequiredAndOptionalClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 requiredProperty = 1234,
             });
@@ -247,7 +247,7 @@ namespace _Type.Property.Optionality.Samples
         {
             RequiredAndOptional client = new OptionalClient().GetRequiredAndOptionalClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 optionalProperty = "<optionalProperty>",
                 requiredProperty = 1234,
@@ -263,7 +263,7 @@ namespace _Type.Property.Optionality.Samples
         {
             RequiredAndOptional client = new OptionalClient().GetRequiredAndOptionalClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 optionalProperty = "<optionalProperty>",
                 requiredProperty = 1234,
@@ -305,7 +305,7 @@ namespace _Type.Property.Optionality.Samples
         {
             RequiredAndOptional client = new OptionalClient().GetRequiredAndOptionalClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 requiredProperty = 1234,
             });
@@ -320,7 +320,7 @@ namespace _Type.Property.Optionality.Samples
         {
             RequiredAndOptional client = new OptionalClient().GetRequiredAndOptionalClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 requiredProperty = 1234,
             });
@@ -355,7 +355,7 @@ namespace _Type.Property.Optionality.Samples
         {
             RequiredAndOptional client = new OptionalClient().GetRequiredAndOptionalClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 optionalProperty = "<optionalProperty>",
                 requiredProperty = 1234,
@@ -371,7 +371,7 @@ namespace _Type.Property.Optionality.Samples
         {
             RequiredAndOptional client = new OptionalClient().GetRequiredAndOptionalClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 optionalProperty = "<optionalProperty>",
                 requiredProperty = 1234,

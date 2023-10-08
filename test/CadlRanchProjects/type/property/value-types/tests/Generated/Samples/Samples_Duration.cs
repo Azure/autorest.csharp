@@ -110,7 +110,7 @@ namespace _Type.Property.ValueTypes.Samples
         {
             Duration client = new ValueTypesClient().GetDurationClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 property = "PT1H23M45S",
             });
@@ -125,7 +125,7 @@ namespace _Type.Property.ValueTypes.Samples
         {
             Duration client = new ValueTypesClient().GetDurationClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 property = "PT1H23M45S",
             });
@@ -160,7 +160,7 @@ namespace _Type.Property.ValueTypes.Samples
         {
             Duration client = new ValueTypesClient().GetDurationClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 property = "PT1H23M45S",
             });
@@ -175,7 +175,7 @@ namespace _Type.Property.ValueTypes.Samples
         {
             Duration client = new ValueTypesClient().GetDurationClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 property = "PT1H23M45S",
             });

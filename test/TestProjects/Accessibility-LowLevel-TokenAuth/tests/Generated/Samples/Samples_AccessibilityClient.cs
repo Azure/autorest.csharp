@@ -24,7 +24,7 @@ namespace Accessibility_LowLevel_TokenAuth.Samples
             TokenCredential credential = new DefaultAzureCredential();
             AccessibilityClient client = new AccessibilityClient(credential);
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Response response = client.Operation(content);
 
             Console.WriteLine(response.Status);
@@ -37,7 +37,7 @@ namespace Accessibility_LowLevel_TokenAuth.Samples
             TokenCredential credential = new DefaultAzureCredential();
             AccessibilityClient client = new AccessibilityClient(credential);
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Response response = await client.OperationAsync(content);
 
             Console.WriteLine(response.Status);
@@ -50,7 +50,7 @@ namespace Accessibility_LowLevel_TokenAuth.Samples
             TokenCredential credential = new DefaultAzureCredential();
             AccessibilityClient client = new AccessibilityClient(credential);
 
-            RequestContent content = RequestContent.Create("<body>");
+            using RequestContent content = RequestContent.Create("<body>");
             Response response = client.Operation(content);
 
             Console.WriteLine(response.Status);
@@ -63,7 +63,7 @@ namespace Accessibility_LowLevel_TokenAuth.Samples
             TokenCredential credential = new DefaultAzureCredential();
             AccessibilityClient client = new AccessibilityClient(credential);
 
-            RequestContent content = RequestContent.Create("<body>");
+            using RequestContent content = RequestContent.Create("<body>");
             Response response = await client.OperationAsync(content);
 
             Console.WriteLine(response.Status);

@@ -112,7 +112,7 @@ namespace _Type._Array.Samples
         {
             ModelValue client = new ArrayClient().GetModelValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new object[]
+            using RequestContent content = RequestContent.Create(new object[]
             {
 new
 {
@@ -130,7 +130,7 @@ property = "<property>",
         {
             ModelValue client = new ArrayClient().GetModelValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new object[]
+            using RequestContent content = RequestContent.Create(new object[]
             {
 new
 {
@@ -172,7 +172,7 @@ new InnerModel("<property>")
         {
             ModelValue client = new ArrayClient().GetModelValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new object[]
+            using RequestContent content = RequestContent.Create(new object[]
             {
 new
 {
@@ -194,7 +194,7 @@ null
         {
             ModelValue client = new ArrayClient().GetModelValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new object[]
+            using RequestContent content = RequestContent.Create(new object[]
             {
 new
 {

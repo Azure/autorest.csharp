@@ -182,7 +182,7 @@ namespace body_array_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
+            using RequestContent content = RequestContent.Create(new object[]
             {
 "<arrayBody>"
             });
@@ -198,7 +198,7 @@ namespace body_array_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
+            using RequestContent content = RequestContent.Create(new object[]
             {
 "<arrayBody>"
             });
@@ -214,7 +214,7 @@ namespace body_array_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
+            using RequestContent content = RequestContent.Create(new object[]
             {
 "<arrayBody>"
             });
@@ -230,7 +230,7 @@ namespace body_array_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
+            using RequestContent content = RequestContent.Create(new object[]
             {
 "<arrayBody>"
             });
@@ -298,7 +298,7 @@ namespace body_array_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
+            using RequestContent content = RequestContent.Create(new object[]
             {
 true
             });
@@ -314,7 +314,7 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
+            using RequestContent content = RequestContent.Create(new object[]
             {
 true
             });
@@ -330,7 +330,7 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
+            using RequestContent content = RequestContent.Create(new object[]
             {
 true
             });
@@ -346,7 +346,7 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
+            using RequestContent content = RequestContent.Create(new object[]
             {
 true
             });
@@ -518,7 +518,7 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
+            using RequestContent content = RequestContent.Create(new object[]
             {
 1234
             });
@@ -534,7 +534,7 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
+            using RequestContent content = RequestContent.Create(new object[]
             {
 1234
             });
@@ -550,7 +550,7 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
+            using RequestContent content = RequestContent.Create(new object[]
             {
 1234
             });
@@ -566,7 +566,7 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
+            using RequestContent content = RequestContent.Create(new object[]
             {
 1234
             });
@@ -738,7 +738,7 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
+            using RequestContent content = RequestContent.Create(new object[]
             {
 1234L
             });
@@ -754,7 +754,7 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
+            using RequestContent content = RequestContent.Create(new object[]
             {
 1234L
             });
@@ -770,7 +770,7 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
+            using RequestContent content = RequestContent.Create(new object[]
             {
 1234L
             });
@@ -786,7 +786,7 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
+            using RequestContent content = RequestContent.Create(new object[]
             {
 1234L
             });
@@ -958,7 +958,7 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
+            using RequestContent content = RequestContent.Create(new object[]
             {
 123.45F
             });
@@ -974,7 +974,7 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
+            using RequestContent content = RequestContent.Create(new object[]
             {
 123.45F
             });
@@ -990,7 +990,7 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
+            using RequestContent content = RequestContent.Create(new object[]
             {
 123.45F
             });
@@ -1006,7 +1006,7 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
+            using RequestContent content = RequestContent.Create(new object[]
             {
 123.45F
             });
@@ -1178,7 +1178,7 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
+            using RequestContent content = RequestContent.Create(new object[]
             {
 123.45
             });
@@ -1194,7 +1194,7 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
+            using RequestContent content = RequestContent.Create(new object[]
             {
 123.45
             });
@@ -1210,7 +1210,7 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
+            using RequestContent content = RequestContent.Create(new object[]
             {
 123.45
             });
@@ -1226,7 +1226,7 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
+            using RequestContent content = RequestContent.Create(new object[]
             {
 123.45
             });
@@ -1398,7 +1398,7 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
+            using RequestContent content = RequestContent.Create(new object[]
             {
 "<arrayBody>"
             });
@@ -1414,7 +1414,7 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
+            using RequestContent content = RequestContent.Create(new object[]
             {
 "<arrayBody>"
             });
@@ -1430,7 +1430,7 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
+            using RequestContent content = RequestContent.Create(new object[]
             {
 "<arrayBody>"
             });
@@ -1446,7 +1446,7 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
+            using RequestContent content = RequestContent.Create(new object[]
             {
 "<arrayBody>"
             });
@@ -1514,7 +1514,7 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
+            using RequestContent content = RequestContent.Create(new object[]
             {
 "foo1"
             });
@@ -1530,7 +1530,7 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
+            using RequestContent content = RequestContent.Create(new object[]
             {
 "foo1"
             });
@@ -1546,7 +1546,7 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
+            using RequestContent content = RequestContent.Create(new object[]
             {
 "foo1"
             });
@@ -1562,7 +1562,7 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
+            using RequestContent content = RequestContent.Create(new object[]
             {
 "foo1"
             });
@@ -1630,7 +1630,7 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
+            using RequestContent content = RequestContent.Create(new object[]
             {
 "foo1"
             });
@@ -1646,7 +1646,7 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
+            using RequestContent content = RequestContent.Create(new object[]
             {
 "foo1"
             });
@@ -1662,7 +1662,7 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
+            using RequestContent content = RequestContent.Create(new object[]
             {
 "foo1"
             });
@@ -1678,7 +1678,7 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
+            using RequestContent content = RequestContent.Create(new object[]
             {
 "foo1"
             });
@@ -1850,7 +1850,7 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
+            using RequestContent content = RequestContent.Create(new object[]
             {
 "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"
             });
@@ -1866,7 +1866,7 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
+            using RequestContent content = RequestContent.Create(new object[]
             {
 "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"
             });
@@ -1882,7 +1882,7 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
+            using RequestContent content = RequestContent.Create(new object[]
             {
 "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"
             });
@@ -1898,7 +1898,7 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
+            using RequestContent content = RequestContent.Create(new object[]
             {
 "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"
             });
@@ -2018,7 +2018,7 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
+            using RequestContent content = RequestContent.Create(new object[]
             {
 "2022-05-10"
             });
@@ -2034,7 +2034,7 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
+            using RequestContent content = RequestContent.Create(new object[]
             {
 "2022-05-10"
             });
@@ -2050,7 +2050,7 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
+            using RequestContent content = RequestContent.Create(new object[]
             {
 "2022-05-10"
             });
@@ -2066,7 +2066,7 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
+            using RequestContent content = RequestContent.Create(new object[]
             {
 "2022-05-10"
             });
@@ -2238,7 +2238,7 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
+            using RequestContent content = RequestContent.Create(new object[]
             {
 "2022-05-10T18:57:31.2311892Z"
             });
@@ -2254,7 +2254,7 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
+            using RequestContent content = RequestContent.Create(new object[]
             {
 "2022-05-10T18:57:31.2311892Z"
             });
@@ -2270,7 +2270,7 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
+            using RequestContent content = RequestContent.Create(new object[]
             {
 "2022-05-10T18:57:31.2311892Z"
             });
@@ -2286,7 +2286,7 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
+            using RequestContent content = RequestContent.Create(new object[]
             {
 "2022-05-10T18:57:31.2311892Z"
             });
@@ -2458,7 +2458,7 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
+            using RequestContent content = RequestContent.Create(new object[]
             {
 "Tue, 10 May 2022 18:57:31 GMT"
             });
@@ -2474,7 +2474,7 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
+            using RequestContent content = RequestContent.Create(new object[]
             {
 "Tue, 10 May 2022 18:57:31 GMT"
             });
@@ -2490,7 +2490,7 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
+            using RequestContent content = RequestContent.Create(new object[]
             {
 "Tue, 10 May 2022 18:57:31 GMT"
             });
@@ -2506,7 +2506,7 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
+            using RequestContent content = RequestContent.Create(new object[]
             {
 "Tue, 10 May 2022 18:57:31 GMT"
             });
@@ -2574,7 +2574,7 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
+            using RequestContent content = RequestContent.Create(new object[]
             {
 "PT1H23M45S"
             });
@@ -2590,7 +2590,7 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
+            using RequestContent content = RequestContent.Create(new object[]
             {
 "PT1H23M45S"
             });
@@ -2606,7 +2606,7 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
+            using RequestContent content = RequestContent.Create(new object[]
             {
 "PT1H23M45S"
             });
@@ -2622,7 +2622,7 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
+            using RequestContent content = RequestContent.Create(new object[]
             {
 "PT1H23M45S"
             });
@@ -2690,7 +2690,7 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
+            using RequestContent content = RequestContent.Create(new object[]
             {
 new object()
             });
@@ -2706,7 +2706,7 @@ new object()
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
+            using RequestContent content = RequestContent.Create(new object[]
             {
 new object()
             });
@@ -2722,7 +2722,7 @@ new object()
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
+            using RequestContent content = RequestContent.Create(new object[]
             {
 new object()
             });
@@ -2738,7 +2738,7 @@ new object()
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
+            using RequestContent content = RequestContent.Create(new object[]
             {
 new object()
             });
@@ -3128,7 +3128,7 @@ new object()
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
+            using RequestContent content = RequestContent.Create(new object[]
             {
 new object()
             });
@@ -3144,7 +3144,7 @@ new object()
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
+            using RequestContent content = RequestContent.Create(new object[]
             {
 new object()
             });
@@ -3160,7 +3160,7 @@ new object()
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
+            using RequestContent content = RequestContent.Create(new object[]
             {
 new Dictionary<string, object>
 {
@@ -3180,7 +3180,7 @@ new Dictionary<string, object>
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
+            using RequestContent content = RequestContent.Create(new object[]
             {
 new Dictionary<string, object>
 {
@@ -3460,7 +3460,7 @@ new Dictionary<string, object>
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
+            using RequestContent content = RequestContent.Create(new object[]
             {
 new object[]
 {
@@ -3479,7 +3479,7 @@ new object[]
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
+            using RequestContent content = RequestContent.Create(new object[]
             {
 new object[]
 {
@@ -3498,7 +3498,7 @@ new object[]
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
+            using RequestContent content = RequestContent.Create(new object[]
             {
 new object[]
 {
@@ -3517,7 +3517,7 @@ new object[]
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
+            using RequestContent content = RequestContent.Create(new object[]
             {
 new object[]
 {
@@ -3796,7 +3796,7 @@ new object[]
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
+            using RequestContent content = RequestContent.Create(new object[]
             {
 new
 {
@@ -3815,7 +3815,7 @@ key = "<arrayBody>",
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
+            using RequestContent content = RequestContent.Create(new object[]
             {
 new
 {
@@ -3834,7 +3834,7 @@ key = "<arrayBody>",
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
+            using RequestContent content = RequestContent.Create(new object[]
             {
 new
 {
@@ -3853,7 +3853,7 @@ key = "<arrayBody>",
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
+            using RequestContent content = RequestContent.Create(new object[]
             {
 new
 {
