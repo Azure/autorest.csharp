@@ -108,18 +108,6 @@ Console.WriteLine(result.GetProperty("isAnomaly")[0].ToString());
 Console.WriteLine(result.GetProperty("isNegativeAnomaly")[0].ToString());
 Console.WriteLine(result.GetProperty("isPositiveAnomaly")[0].ToString());
 ]]></code>
-This sample shows how to call DetectUnivariateEntireSeriesAsync.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
-AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
-
-UnivariateDetectionOptions options = new UnivariateDetectionOptions(new TimeSeriesPoint[]
-{
-    new TimeSeriesPoint(123.45F)
-});
-Response<UnivariateEntireDetectionResult> response = await client.DetectUnivariateEntireSeriesAsync(options);
-]]></code>
 This sample shows how to call DetectUnivariateEntireSeriesAsync with all request content and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -155,30 +143,6 @@ Console.WriteLine(result.GetProperty("isAnomaly")[0].ToString());
 Console.WriteLine(result.GetProperty("isNegativeAnomaly")[0].ToString());
 Console.WriteLine(result.GetProperty("isPositiveAnomaly")[0].ToString());
 Console.WriteLine(result.GetProperty("severity")[0].ToString());
-]]></code>
-This sample shows how to call DetectUnivariateEntireSeriesAsync with all parameters.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
-AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
-
-UnivariateDetectionOptions options = new UnivariateDetectionOptions(new TimeSeriesPoint[]
-{
-    new TimeSeriesPoint(123.45F)
-    {
-        Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
-    }
-})
-{
-    Granularity = TimeGranularity.Yearly,
-    CustomInterval = 1234,
-    Period = 1234,
-    MaxAnomalyRatio = 123.45F,
-    Sensitivity = 1234,
-    ImputeMode = ImputeMode.Auto,
-    ImputeFixedValue = 123.45F,
-};
-Response<UnivariateEntireDetectionResult> response = await client.DetectUnivariateEntireSeriesAsync(options);
 ]]></code></example>
     </member>
     <member name="DetectUnivariateEntireSeries(RequestContent,RequestContext)">
@@ -209,18 +173,6 @@ Console.WriteLine(result.GetProperty("lowerMargins")[0].ToString());
 Console.WriteLine(result.GetProperty("isAnomaly")[0].ToString());
 Console.WriteLine(result.GetProperty("isNegativeAnomaly")[0].ToString());
 Console.WriteLine(result.GetProperty("isPositiveAnomaly")[0].ToString());
-]]></code>
-This sample shows how to call DetectUnivariateEntireSeries.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
-AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
-
-UnivariateDetectionOptions options = new UnivariateDetectionOptions(new TimeSeriesPoint[]
-{
-    new TimeSeriesPoint(123.45F)
-});
-Response<UnivariateEntireDetectionResult> response = client.DetectUnivariateEntireSeries(options);
 ]]></code>
 This sample shows how to call DetectUnivariateEntireSeries with all request content and parse the result.
 <code><![CDATA[
@@ -257,30 +209,6 @@ Console.WriteLine(result.GetProperty("isAnomaly")[0].ToString());
 Console.WriteLine(result.GetProperty("isNegativeAnomaly")[0].ToString());
 Console.WriteLine(result.GetProperty("isPositiveAnomaly")[0].ToString());
 Console.WriteLine(result.GetProperty("severity")[0].ToString());
-]]></code>
-This sample shows how to call DetectUnivariateEntireSeries with all parameters.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
-AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
-
-UnivariateDetectionOptions options = new UnivariateDetectionOptions(new TimeSeriesPoint[]
-{
-    new TimeSeriesPoint(123.45F)
-    {
-        Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
-    }
-})
-{
-    Granularity = TimeGranularity.Yearly,
-    CustomInterval = 1234,
-    Period = 1234,
-    MaxAnomalyRatio = 123.45F,
-    Sensitivity = 1234,
-    ImputeMode = ImputeMode.Auto,
-    ImputeFixedValue = 123.45F,
-};
-Response<UnivariateEntireDetectionResult> response = client.DetectUnivariateEntireSeries(options);
 ]]></code></example>
     </member>
     <member name="DetectUnivariateLastPointAsync(UnivariateDetectionOptions,CancellationToken)">
@@ -391,18 +319,6 @@ Console.WriteLine(result.GetProperty("isAnomaly").ToString());
 Console.WriteLine(result.GetProperty("isNegativeAnomaly").ToString());
 Console.WriteLine(result.GetProperty("isPositiveAnomaly").ToString());
 ]]></code>
-This sample shows how to call DetectUnivariateLastPointAsync.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
-AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
-
-UnivariateDetectionOptions options = new UnivariateDetectionOptions(new TimeSeriesPoint[]
-{
-    new TimeSeriesPoint(123.45F)
-});
-Response<UnivariateLastDetectionResult> response = await client.DetectUnivariateLastPointAsync(options);
-]]></code>
 This sample shows how to call DetectUnivariateLastPointAsync with all request content and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -439,30 +355,6 @@ Console.WriteLine(result.GetProperty("isAnomaly").ToString());
 Console.WriteLine(result.GetProperty("isNegativeAnomaly").ToString());
 Console.WriteLine(result.GetProperty("isPositiveAnomaly").ToString());
 Console.WriteLine(result.GetProperty("severity").ToString());
-]]></code>
-This sample shows how to call DetectUnivariateLastPointAsync with all parameters.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
-AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
-
-UnivariateDetectionOptions options = new UnivariateDetectionOptions(new TimeSeriesPoint[]
-{
-    new TimeSeriesPoint(123.45F)
-    {
-        Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
-    }
-})
-{
-    Granularity = TimeGranularity.Yearly,
-    CustomInterval = 1234,
-    Period = 1234,
-    MaxAnomalyRatio = 123.45F,
-    Sensitivity = 1234,
-    ImputeMode = ImputeMode.Auto,
-    ImputeFixedValue = 123.45F,
-};
-Response<UnivariateLastDetectionResult> response = await client.DetectUnivariateLastPointAsync(options);
 ]]></code></example>
     </member>
     <member name="DetectUnivariateLastPoint(RequestContent,RequestContext)">
@@ -494,18 +386,6 @@ Console.WriteLine(result.GetProperty("lowerMargin").ToString());
 Console.WriteLine(result.GetProperty("isAnomaly").ToString());
 Console.WriteLine(result.GetProperty("isNegativeAnomaly").ToString());
 Console.WriteLine(result.GetProperty("isPositiveAnomaly").ToString());
-]]></code>
-This sample shows how to call DetectUnivariateLastPoint.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
-AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
-
-UnivariateDetectionOptions options = new UnivariateDetectionOptions(new TimeSeriesPoint[]
-{
-    new TimeSeriesPoint(123.45F)
-});
-Response<UnivariateLastDetectionResult> response = client.DetectUnivariateLastPoint(options);
 ]]></code>
 This sample shows how to call DetectUnivariateLastPoint with all request content and parse the result.
 <code><![CDATA[
@@ -543,30 +423,6 @@ Console.WriteLine(result.GetProperty("isAnomaly").ToString());
 Console.WriteLine(result.GetProperty("isNegativeAnomaly").ToString());
 Console.WriteLine(result.GetProperty("isPositiveAnomaly").ToString());
 Console.WriteLine(result.GetProperty("severity").ToString());
-]]></code>
-This sample shows how to call DetectUnivariateLastPoint with all parameters.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
-AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
-
-UnivariateDetectionOptions options = new UnivariateDetectionOptions(new TimeSeriesPoint[]
-{
-    new TimeSeriesPoint(123.45F)
-    {
-        Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
-    }
-})
-{
-    Granularity = TimeGranularity.Yearly,
-    CustomInterval = 1234,
-    Period = 1234,
-    MaxAnomalyRatio = 123.45F,
-    Sensitivity = 1234,
-    ImputeMode = ImputeMode.Auto,
-    ImputeFixedValue = 123.45F,
-};
-Response<UnivariateLastDetectionResult> response = client.DetectUnivariateLastPoint(options);
 ]]></code></example>
     </member>
     <member name="DetectUnivariateChangePointAsync(UnivariateChangePointDetectionOptions,CancellationToken)">
@@ -665,18 +521,6 @@ Response response = await client.DetectUnivariateChangePointAsync(content);
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
-This sample shows how to call DetectUnivariateChangePointAsync.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
-AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
-
-UnivariateChangePointDetectionOptions options = new UnivariateChangePointDetectionOptions(new TimeSeriesPoint[]
-{
-    new TimeSeriesPoint(123.45F)
-}, TimeGranularity.Yearly);
-Response<UnivariateChangePointDetectionResult> response = await client.DetectUnivariateChangePointAsync(options);
-]]></code>
 This sample shows how to call DetectUnivariateChangePointAsync with all request content and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -705,27 +549,6 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("period").ToString());
 Console.WriteLine(result.GetProperty("isChangePoint")[0].ToString());
 Console.WriteLine(result.GetProperty("confidenceScores")[0].ToString());
-]]></code>
-This sample shows how to call DetectUnivariateChangePointAsync with all parameters.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
-AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
-
-UnivariateChangePointDetectionOptions options = new UnivariateChangePointDetectionOptions(new TimeSeriesPoint[]
-{
-    new TimeSeriesPoint(123.45F)
-    {
-        Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
-    }
-}, TimeGranularity.Yearly)
-{
-    CustomInterval = 1234,
-    Period = 1234,
-    StableTrendWindow = 1234,
-    Threshold = 123.45F,
-};
-Response<UnivariateChangePointDetectionResult> response = await client.DetectUnivariateChangePointAsync(options);
 ]]></code></example>
     </member>
     <member name="DetectUnivariateChangePoint(RequestContent,RequestContext)">
@@ -751,18 +574,6 @@ Response response = client.DetectUnivariateChangePoint(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
-]]></code>
-This sample shows how to call DetectUnivariateChangePoint.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
-AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
-
-UnivariateChangePointDetectionOptions options = new UnivariateChangePointDetectionOptions(new TimeSeriesPoint[]
-{
-    new TimeSeriesPoint(123.45F)
-}, TimeGranularity.Yearly);
-Response<UnivariateChangePointDetectionResult> response = client.DetectUnivariateChangePoint(options);
 ]]></code>
 This sample shows how to call DetectUnivariateChangePoint with all request content and parse the result.
 <code><![CDATA[
@@ -792,27 +603,6 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("period").ToString());
 Console.WriteLine(result.GetProperty("isChangePoint")[0].ToString());
 Console.WriteLine(result.GetProperty("confidenceScores")[0].ToString());
-]]></code>
-This sample shows how to call DetectUnivariateChangePoint with all parameters.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
-AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
-
-UnivariateChangePointDetectionOptions options = new UnivariateChangePointDetectionOptions(new TimeSeriesPoint[]
-{
-    new TimeSeriesPoint(123.45F)
-    {
-        Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
-    }
-}, TimeGranularity.Yearly)
-{
-    CustomInterval = 1234,
-    Period = 1234,
-    StableTrendWindow = 1234,
-    Threshold = 123.45F,
-};
-Response<UnivariateChangePointDetectionResult> response = client.DetectUnivariateChangePoint(options);
 ]]></code></example>
     </member>
     <member name="GetMultivariateBatchDetectionResultAsync(Guid,CancellationToken)">
@@ -872,14 +662,6 @@ Console.WriteLine(result.GetProperty("summary").GetProperty("setupInfo").GetProp
 Console.WriteLine(result.GetProperty("summary").GetProperty("setupInfo").GetProperty("endTime").ToString());
 Console.WriteLine(result.GetProperty("results")[0].GetProperty("timestamp").ToString());
 ]]></code>
-This sample shows how to call GetMultivariateBatchDetectionResultAsync.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
-AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
-
-Response<MultivariateDetectionResult> response = await client.GetMultivariateBatchDetectionResultAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
-]]></code>
 This sample shows how to call GetMultivariateBatchDetectionResultAsync with all parameters and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -911,14 +693,6 @@ Console.WriteLine(result.GetProperty("results")[0].GetProperty("value").GetPrope
 Console.WriteLine(result.GetProperty("results")[0].GetProperty("value").GetProperty("interpretation")[0].GetProperty("correlationChanges").GetProperty("changedVariables")[0].ToString());
 Console.WriteLine(result.GetProperty("results")[0].GetProperty("errors")[0].GetProperty("code").ToString());
 Console.WriteLine(result.GetProperty("results")[0].GetProperty("errors")[0].GetProperty("message").ToString());
-]]></code>
-This sample shows how to call GetMultivariateBatchDetectionResultAsync with all parameters.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
-AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
-
-Response<MultivariateDetectionResult> response = await client.GetMultivariateBatchDetectionResultAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
 ]]></code></example>
     </member>
     <member name="GetMultivariateBatchDetectionResult(Guid,RequestContext)">
@@ -939,14 +713,6 @@ Console.WriteLine(result.GetProperty("summary").GetProperty("setupInfo").GetProp
 Console.WriteLine(result.GetProperty("summary").GetProperty("setupInfo").GetProperty("startTime").ToString());
 Console.WriteLine(result.GetProperty("summary").GetProperty("setupInfo").GetProperty("endTime").ToString());
 Console.WriteLine(result.GetProperty("results")[0].GetProperty("timestamp").ToString());
-]]></code>
-This sample shows how to call GetMultivariateBatchDetectionResult.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
-AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
-
-Response<MultivariateDetectionResult> response = client.GetMultivariateBatchDetectionResult(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
 ]]></code>
 This sample shows how to call GetMultivariateBatchDetectionResult with all parameters and parse the result.
 <code><![CDATA[
@@ -979,14 +745,6 @@ Console.WriteLine(result.GetProperty("results")[0].GetProperty("value").GetPrope
 Console.WriteLine(result.GetProperty("results")[0].GetProperty("value").GetProperty("interpretation")[0].GetProperty("correlationChanges").GetProperty("changedVariables")[0].ToString());
 Console.WriteLine(result.GetProperty("results")[0].GetProperty("errors")[0].GetProperty("code").ToString());
 Console.WriteLine(result.GetProperty("results")[0].GetProperty("errors")[0].GetProperty("message").ToString());
-]]></code>
-This sample shows how to call GetMultivariateBatchDetectionResult with all parameters.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
-AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
-
-Response<MultivariateDetectionResult> response = client.GetMultivariateBatchDetectionResult(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
 ]]></code></example>
     </member>
     <member name="TrainMultivariateModelAsync(ModelInfo,CancellationToken)">
@@ -1112,15 +870,6 @@ Console.WriteLine(result.GetProperty("modelId").ToString());
 Console.WriteLine(result.GetProperty("createdTime").ToString());
 Console.WriteLine(result.GetProperty("lastUpdatedTime").ToString());
 ]]></code>
-This sample shows how to call TrainMultivariateModelAsync.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
-AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
-
-ModelInfo modelInfo = new ModelInfo("<dataSource>", DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"), DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
-Response<AnomalyDetectionModel> response = await client.TrainMultivariateModelAsync(modelInfo);
-]]></code>
 This sample shows how to call TrainMultivariateModelAsync with all request content and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -1203,45 +952,6 @@ Console.WriteLine(result.GetProperty("modelInfo").GetProperty("diagnosticsInfo")
 Console.WriteLine(result.GetProperty("modelInfo").GetProperty("diagnosticsInfo").GetProperty("variableStates")[0].GetProperty("effectiveCount").ToString());
 Console.WriteLine(result.GetProperty("modelInfo").GetProperty("diagnosticsInfo").GetProperty("variableStates")[0].GetProperty("firstTimestamp").ToString());
 Console.WriteLine(result.GetProperty("modelInfo").GetProperty("diagnosticsInfo").GetProperty("variableStates")[0].GetProperty("lastTimestamp").ToString());
-]]></code>
-This sample shows how to call TrainMultivariateModelAsync with all parameters.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
-AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
-
-ModelInfo modelInfo = new ModelInfo("<dataSource>", DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"), DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"))
-{
-    DataSchema = DataSchema.OneTable,
-    DisplayName = "<displayName>",
-    SlidingWindow = 1234,
-    AlignPolicy = new AlignPolicy
-    {
-        AlignMode = AlignMode.Inner,
-        FillNAMethod = FillNAMethod.Previous,
-        PaddingValue = 123.45F,
-    },
-    Status = ModelStatus.Created,
-    DiagnosticsInfo = new DiagnosticsInfo
-    {
-        ModelState = new ModelState
-        {
-            EpochIds = { 1234 },
-            TrainLosses = { 123.45F },
-            ValidationLosses = { 123.45F },
-            LatenciesInSeconds = { 123.45F },
-        },
-        VariableStates = {new VariableState
-        {
-            Variable = "<variable>",
-            FilledNARatio = 123.45F,
-            EffectiveCount = 1234,
-            FirstTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
-            LastTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
-        }},
-    },
-};
-Response<AnomalyDetectionModel> response = await client.TrainMultivariateModelAsync(modelInfo);
 ]]></code></example>
     </member>
     <member name="TrainMultivariateModel(RequestContent,RequestContext)">
@@ -1264,15 +974,6 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("modelId").ToString());
 Console.WriteLine(result.GetProperty("createdTime").ToString());
 Console.WriteLine(result.GetProperty("lastUpdatedTime").ToString());
-]]></code>
-This sample shows how to call TrainMultivariateModel.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
-AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
-
-ModelInfo modelInfo = new ModelInfo("<dataSource>", DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"), DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
-Response<AnomalyDetectionModel> response = client.TrainMultivariateModel(modelInfo);
 ]]></code>
 This sample shows how to call TrainMultivariateModel with all request content and parse the result.
 <code><![CDATA[
@@ -1356,45 +1057,6 @@ Console.WriteLine(result.GetProperty("modelInfo").GetProperty("diagnosticsInfo")
 Console.WriteLine(result.GetProperty("modelInfo").GetProperty("diagnosticsInfo").GetProperty("variableStates")[0].GetProperty("effectiveCount").ToString());
 Console.WriteLine(result.GetProperty("modelInfo").GetProperty("diagnosticsInfo").GetProperty("variableStates")[0].GetProperty("firstTimestamp").ToString());
 Console.WriteLine(result.GetProperty("modelInfo").GetProperty("diagnosticsInfo").GetProperty("variableStates")[0].GetProperty("lastTimestamp").ToString());
-]]></code>
-This sample shows how to call TrainMultivariateModel with all parameters.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
-AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
-
-ModelInfo modelInfo = new ModelInfo("<dataSource>", DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"), DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"))
-{
-    DataSchema = DataSchema.OneTable,
-    DisplayName = "<displayName>",
-    SlidingWindow = 1234,
-    AlignPolicy = new AlignPolicy
-    {
-        AlignMode = AlignMode.Inner,
-        FillNAMethod = FillNAMethod.Previous,
-        PaddingValue = 123.45F,
-    },
-    Status = ModelStatus.Created,
-    DiagnosticsInfo = new DiagnosticsInfo
-    {
-        ModelState = new ModelState
-        {
-            EpochIds = { 1234 },
-            TrainLosses = { 123.45F },
-            ValidationLosses = { 123.45F },
-            LatenciesInSeconds = { 123.45F },
-        },
-        VariableStates = {new VariableState
-        {
-            Variable = "<variable>",
-            FilledNARatio = 123.45F,
-            EffectiveCount = 1234,
-            FirstTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
-            LastTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
-        }},
-    },
-};
-Response<AnomalyDetectionModel> response = client.TrainMultivariateModel(modelInfo);
 ]]></code></example>
     </member>
     <member name="DeleteMultivariateModelAsync(string,RequestContext)">
@@ -1496,14 +1158,6 @@ Console.WriteLine(result.GetProperty("modelId").ToString());
 Console.WriteLine(result.GetProperty("createdTime").ToString());
 Console.WriteLine(result.GetProperty("lastUpdatedTime").ToString());
 ]]></code>
-This sample shows how to call GetMultivariateModelAsync.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
-AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
-
-Response<AnomalyDetectionModel> response = await client.GetMultivariateModelAsync("<modelId>");
-]]></code>
 This sample shows how to call GetMultivariateModelAsync with all parameters and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -1537,14 +1191,6 @@ Console.WriteLine(result.GetProperty("modelInfo").GetProperty("diagnosticsInfo")
 Console.WriteLine(result.GetProperty("modelInfo").GetProperty("diagnosticsInfo").GetProperty("variableStates")[0].GetProperty("effectiveCount").ToString());
 Console.WriteLine(result.GetProperty("modelInfo").GetProperty("diagnosticsInfo").GetProperty("variableStates")[0].GetProperty("firstTimestamp").ToString());
 Console.WriteLine(result.GetProperty("modelInfo").GetProperty("diagnosticsInfo").GetProperty("variableStates")[0].GetProperty("lastTimestamp").ToString());
-]]></code>
-This sample shows how to call GetMultivariateModelAsync with all parameters.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
-AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
-
-Response<AnomalyDetectionModel> response = await client.GetMultivariateModelAsync("<modelId>");
 ]]></code></example>
     </member>
     <member name="GetMultivariateModel(string,RequestContext)">
@@ -1561,14 +1207,6 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("modelId").ToString());
 Console.WriteLine(result.GetProperty("createdTime").ToString());
 Console.WriteLine(result.GetProperty("lastUpdatedTime").ToString());
-]]></code>
-This sample shows how to call GetMultivariateModel.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
-AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
-
-Response<AnomalyDetectionModel> response = client.GetMultivariateModel("<modelId>");
 ]]></code>
 This sample shows how to call GetMultivariateModel with all parameters and parse the result.
 <code><![CDATA[
@@ -1603,14 +1241,6 @@ Console.WriteLine(result.GetProperty("modelInfo").GetProperty("diagnosticsInfo")
 Console.WriteLine(result.GetProperty("modelInfo").GetProperty("diagnosticsInfo").GetProperty("variableStates")[0].GetProperty("effectiveCount").ToString());
 Console.WriteLine(result.GetProperty("modelInfo").GetProperty("diagnosticsInfo").GetProperty("variableStates")[0].GetProperty("firstTimestamp").ToString());
 Console.WriteLine(result.GetProperty("modelInfo").GetProperty("diagnosticsInfo").GetProperty("variableStates")[0].GetProperty("lastTimestamp").ToString());
-]]></code>
-This sample shows how to call GetMultivariateModel with all parameters.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
-AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
-
-Response<AnomalyDetectionModel> response = client.GetMultivariateModel("<modelId>");
 ]]></code></example>
     </member>
     <member name="DetectMultivariateBatchAnomalyAsync(string,MultivariateBatchDetectionOptions,CancellationToken)">
@@ -1681,15 +1311,6 @@ Console.WriteLine(result.GetProperty("summary").GetProperty("setupInfo").GetProp
 Console.WriteLine(result.GetProperty("summary").GetProperty("setupInfo").GetProperty("endTime").ToString());
 Console.WriteLine(result.GetProperty("results")[0].GetProperty("timestamp").ToString());
 ]]></code>
-This sample shows how to call DetectMultivariateBatchAnomalyAsync.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
-AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
-
-MultivariateBatchDetectionOptions options = new MultivariateBatchDetectionOptions(new Uri("http://localhost:3000"), 1234, DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"), DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
-Response<MultivariateDetectionResult> response = await client.DetectMultivariateBatchAnomalyAsync("<modelId>", options);
-]]></code>
 This sample shows how to call DetectMultivariateBatchAnomalyAsync with all parameters and request content and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -1728,15 +1349,6 @@ Console.WriteLine(result.GetProperty("results")[0].GetProperty("value").GetPrope
 Console.WriteLine(result.GetProperty("results")[0].GetProperty("value").GetProperty("interpretation")[0].GetProperty("correlationChanges").GetProperty("changedVariables")[0].ToString());
 Console.WriteLine(result.GetProperty("results")[0].GetProperty("errors")[0].GetProperty("code").ToString());
 Console.WriteLine(result.GetProperty("results")[0].GetProperty("errors")[0].GetProperty("message").ToString());
-]]></code>
-This sample shows how to call DetectMultivariateBatchAnomalyAsync with all parameters.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
-AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
-
-MultivariateBatchDetectionOptions options = new MultivariateBatchDetectionOptions(new Uri("http://localhost:3000"), 1234, DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"), DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
-Response<MultivariateDetectionResult> response = await client.DetectMultivariateBatchAnomalyAsync("<modelId>", options);
 ]]></code></example>
     </member>
     <member name="DetectMultivariateBatchAnomaly(string,RequestContent,RequestContext)">
@@ -1764,15 +1376,6 @@ Console.WriteLine(result.GetProperty("summary").GetProperty("setupInfo").GetProp
 Console.WriteLine(result.GetProperty("summary").GetProperty("setupInfo").GetProperty("startTime").ToString());
 Console.WriteLine(result.GetProperty("summary").GetProperty("setupInfo").GetProperty("endTime").ToString());
 Console.WriteLine(result.GetProperty("results")[0].GetProperty("timestamp").ToString());
-]]></code>
-This sample shows how to call DetectMultivariateBatchAnomaly.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
-AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
-
-MultivariateBatchDetectionOptions options = new MultivariateBatchDetectionOptions(new Uri("http://localhost:3000"), 1234, DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"), DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
-Response<MultivariateDetectionResult> response = client.DetectMultivariateBatchAnomaly("<modelId>", options);
 ]]></code>
 This sample shows how to call DetectMultivariateBatchAnomaly with all parameters and request content and parse the result.
 <code><![CDATA[
@@ -1812,15 +1415,6 @@ Console.WriteLine(result.GetProperty("results")[0].GetProperty("value").GetPrope
 Console.WriteLine(result.GetProperty("results")[0].GetProperty("value").GetProperty("interpretation")[0].GetProperty("correlationChanges").GetProperty("changedVariables")[0].ToString());
 Console.WriteLine(result.GetProperty("results")[0].GetProperty("errors")[0].GetProperty("code").ToString());
 Console.WriteLine(result.GetProperty("results")[0].GetProperty("errors")[0].GetProperty("message").ToString());
-]]></code>
-This sample shows how to call DetectMultivariateBatchAnomaly with all parameters.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
-AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
-
-MultivariateBatchDetectionOptions options = new MultivariateBatchDetectionOptions(new Uri("http://localhost:3000"), 1234, DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"), DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
-Response<MultivariateDetectionResult> response = client.DetectMultivariateBatchAnomaly("<modelId>", options);
 ]]></code></example>
     </member>
     <member name="DetectMultivariateLastAnomalyAsync(string,MultivariateLastDetectionOptions,CancellationToken)">
@@ -1909,18 +1503,6 @@ Response response = await client.DetectMultivariateLastAnomalyAsync("<modelId>",
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
-This sample shows how to call DetectMultivariateLastAnomalyAsync.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
-AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
-
-MultivariateLastDetectionOptions options = new MultivariateLastDetectionOptions(new VariableValues[]
-{
-    new VariableValues("<variable>", new string[]{"<timestamps>"}, new float[]{123.45F})
-}, 1234);
-Response<MultivariateLastDetectionResult> response = await client.DetectMultivariateLastAnomalyAsync("<modelId>", options);
-]]></code>
 This sample shows how to call DetectMultivariateLastAnomalyAsync with all parameters and request content and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -1963,18 +1545,6 @@ Console.WriteLine(result.GetProperty("results")[0].GetProperty("value").GetPrope
 Console.WriteLine(result.GetProperty("results")[0].GetProperty("value").GetProperty("interpretation")[0].GetProperty("correlationChanges").GetProperty("changedVariables")[0].ToString());
 Console.WriteLine(result.GetProperty("results")[0].GetProperty("errors")[0].GetProperty("code").ToString());
 Console.WriteLine(result.GetProperty("results")[0].GetProperty("errors")[0].GetProperty("message").ToString());
-]]></code>
-This sample shows how to call DetectMultivariateLastAnomalyAsync with all parameters.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
-AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
-
-MultivariateLastDetectionOptions options = new MultivariateLastDetectionOptions(new VariableValues[]
-{
-    new VariableValues("<variable>", new string[]{"<timestamps>"}, new float[]{123.45F})
-}, 1234);
-Response<MultivariateLastDetectionResult> response = await client.DetectMultivariateLastAnomalyAsync("<modelId>", options);
 ]]></code></example>
     </member>
     <member name="DetectMultivariateLastAnomaly(string,RequestContent,RequestContext)">
@@ -2008,18 +1578,6 @@ Response response = client.DetectMultivariateLastAnomaly("<modelId>", content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
-]]></code>
-This sample shows how to call DetectMultivariateLastAnomaly.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
-AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
-
-MultivariateLastDetectionOptions options = new MultivariateLastDetectionOptions(new VariableValues[]
-{
-    new VariableValues("<variable>", new string[]{"<timestamps>"}, new float[]{123.45F})
-}, 1234);
-Response<MultivariateLastDetectionResult> response = client.DetectMultivariateLastAnomaly("<modelId>", options);
 ]]></code>
 This sample shows how to call DetectMultivariateLastAnomaly with all parameters and request content and parse the result.
 <code><![CDATA[
@@ -2063,18 +1621,6 @@ Console.WriteLine(result.GetProperty("results")[0].GetProperty("value").GetPrope
 Console.WriteLine(result.GetProperty("results")[0].GetProperty("value").GetProperty("interpretation")[0].GetProperty("correlationChanges").GetProperty("changedVariables")[0].ToString());
 Console.WriteLine(result.GetProperty("results")[0].GetProperty("errors")[0].GetProperty("code").ToString());
 Console.WriteLine(result.GetProperty("results")[0].GetProperty("errors")[0].GetProperty("message").ToString());
-]]></code>
-This sample shows how to call DetectMultivariateLastAnomaly with all parameters.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
-AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
-
-MultivariateLastDetectionOptions options = new MultivariateLastDetectionOptions(new VariableValues[]
-{
-    new VariableValues("<variable>", new string[]{"<timestamps>"}, new float[]{123.45F})
-}, 1234);
-Response<MultivariateLastDetectionResult> response = client.DetectMultivariateLastAnomaly("<modelId>", options);
 ]]></code></example>
     </member>
     <member name="GetMultivariateModelsAsync(int?,int?,CancellationToken)">
@@ -2139,16 +1685,6 @@ await foreach (BinaryData item in client.GetMultivariateModelsAsync(null, null, 
     Console.WriteLine(result.GetProperty("lastUpdatedTime").ToString());
 }
 ]]></code>
-This sample shows how to call GetMultivariateModelsAsync.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
-AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
-
-await foreach (AnomalyDetectionModel item in client.GetMultivariateModelsAsync())
-{
-}
-]]></code>
 This sample shows how to call GetMultivariateModelsAsync with all parameters and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -2183,16 +1719,6 @@ await foreach (BinaryData item in client.GetMultivariateModelsAsync(1234, 1234, 
     Console.WriteLine(result.GetProperty("modelInfo").GetProperty("diagnosticsInfo").GetProperty("variableStates")[0].GetProperty("firstTimestamp").ToString());
     Console.WriteLine(result.GetProperty("modelInfo").GetProperty("diagnosticsInfo").GetProperty("variableStates")[0].GetProperty("lastTimestamp").ToString());
 }
-]]></code>
-This sample shows how to call GetMultivariateModelsAsync with all parameters.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
-AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
-
-await foreach (AnomalyDetectionModel item in client.GetMultivariateModelsAsync(skip: 1234, maxCount: 1234))
-{
-}
 ]]></code></example>
     </member>
     <member name="GetMultivariateModels(int?,int?,RequestContext)">
@@ -2209,16 +1735,6 @@ foreach (BinaryData item in client.GetMultivariateModels(null, null, null))
     Console.WriteLine(result.GetProperty("modelId").ToString());
     Console.WriteLine(result.GetProperty("createdTime").ToString());
     Console.WriteLine(result.GetProperty("lastUpdatedTime").ToString());
-}
-]]></code>
-This sample shows how to call GetMultivariateModels.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
-AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
-
-foreach (AnomalyDetectionModel item in client.GetMultivariateModels())
-{
 }
 ]]></code>
 This sample shows how to call GetMultivariateModels with all parameters and parse the result.
@@ -2254,16 +1770,6 @@ foreach (BinaryData item in client.GetMultivariateModels(1234, 1234, null))
     Console.WriteLine(result.GetProperty("modelInfo").GetProperty("diagnosticsInfo").GetProperty("variableStates")[0].GetProperty("effectiveCount").ToString());
     Console.WriteLine(result.GetProperty("modelInfo").GetProperty("diagnosticsInfo").GetProperty("variableStates")[0].GetProperty("firstTimestamp").ToString());
     Console.WriteLine(result.GetProperty("modelInfo").GetProperty("diagnosticsInfo").GetProperty("variableStates")[0].GetProperty("lastTimestamp").ToString());
-}
-]]></code>
-This sample shows how to call GetMultivariateModels with all parameters.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
-AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
-
-foreach (AnomalyDetectionModel item in client.GetMultivariateModels(skip: 1234, maxCount: 1234))
-{
 }
 ]]></code></example>
     </member>
