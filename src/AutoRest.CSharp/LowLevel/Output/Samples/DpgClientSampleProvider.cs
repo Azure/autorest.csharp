@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using AutoRest.CSharp.Common.Input;
@@ -19,6 +20,7 @@ using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Output.Samples.Models;
+using AutoRest.CSharp.Utilities;
 using Azure;
 using NUnit.Framework;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
@@ -34,6 +36,34 @@ namespace AutoRest.CSharp.LowLevel.Output.Samples
             Client = client;
             DefaultNamespace = $"{defaultNamespace}.Samples";
             DefaultName = $"Samples_{client.Declaration.Name}";
+            _samples = client.ClientMethods.SelectMany(m => m.Samples);
+        }
+
+        private readonly IEnumerable<DpgOperationSample> _samples;
+        private Dictionary<MethodSignature, List<DpgOperationSample>>? methodToSampleDict;
+        private Dictionary<MethodSignature, List<DpgOperationSample>> MethodToSampleDict => methodToSampleDict ??= BuildMethodToSampleCache();
+
+        private Dictionary<MethodSignature, List<DpgOperationSample>> BuildMethodToSampleCache()
+        {
+            var result = new Dictionary<MethodSignature, List<DpgOperationSample>>();
+            foreach (var sample in _samples)
+            {
+                result.AddInList(sample.OperationMethodSignature.WithAsync(false), sample);
+                result.AddInList(sample.OperationMethodSignature.WithAsync(true), sample);
+            }
+
+            return result;
+        }
+
+        public IEnumerable<(string ExampleInformation, string TestMethodName)> GetSampleInformation(MethodSignature signature, bool isAsync)
+        {
+            if (MethodToSampleDict.TryGetValue(signature, out var result))
+            {
+                foreach (var sample in result)
+                {
+                    yield return (sample.GetSampleInformation(isAsync), GetMethodName(sample, isAsync));
+                }
+            }
         }
 
         private bool? _isEmpty;
@@ -51,19 +81,32 @@ namespace AutoRest.CSharp.LowLevel.Output.Samples
             }
         }
 
-        protected virtual MethodSignature GetMethodSignature(DpgOperationSample sample, bool isAsync)
+        protected virtual string GetMethodName(DpgOperationSample sample, bool isAsync)
         {
-            var methodName = sample.GetMethodName(isAsync);
-            return new MethodSignature(
-                methodName,
-                null,
-                null,
-                isAsync ? MethodSignatureModifiers.Public | MethodSignatureModifiers.Async : MethodSignatureModifiers.Public,
-                isAsync ? typeof(Task) : (CSharpType?)null,
-                null,
-                Array.Empty<Parameter>(),
-                Attributes: _attributes);
+            var builder = new StringBuilder("Example_").Append(sample.OperationMethodSignature.Name);
+
+            builder.Append('_').Append(sample.ExampleKey);
+
+            if (sample.IsConvenienceSample)
+            {
+                builder.Append("_Convenience");
+            }
+            if (isAsync)
+            {
+                builder.Append("_Async");
+            }
+            return builder.ToString();
         }
+
+        protected virtual MethodSignature GetMethodSignature(DpgOperationSample sample, bool isAsync) => new(
+                Name: GetMethodName(sample, isAsync),
+                Summary: null,
+                Description: null,
+                Modifiers: isAsync ? MethodSignatureModifiers.Public | MethodSignatureModifiers.Async : MethodSignatureModifiers.Public,
+                ReturnType: isAsync ? typeof(Task) : (CSharpType?)null,
+                ReturnDescription: null,
+                Parameters: Array.Empty<Parameter>(),
+                Attributes: _attributes);
 
         private readonly CSharpAttribute[] _attributes = new[] { new CSharpAttribute(typeof(TestAttribute)), new CSharpAttribute(typeof(IgnoreAttribute), "Only validating compilation of examples") };
 

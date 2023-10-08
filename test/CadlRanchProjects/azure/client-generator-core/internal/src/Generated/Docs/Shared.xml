@@ -42,12 +42,6 @@ Response response = await client.PublicAsync("<name>", null);
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code>
-This sample shows how to call PublicAsync.
-<code><![CDATA[
-Shared client = new InternalClient().GetSharedClient();
-
-Response<SharedModel> response = await client.PublicAsync("<name>");
-]]></code>
 This sample shows how to call PublicAsync with all parameters and parse the result.
 <code><![CDATA[
 Shared client = new InternalClient().GetSharedClient();
@@ -56,12 +50,6 @@ Response response = await client.PublicAsync("<name>", null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
-]]></code>
-This sample shows how to call PublicAsync with all parameters.
-<code><![CDATA[
-Shared client = new InternalClient().GetSharedClient();
-
-Response<SharedModel> response = await client.PublicAsync("<name>");
 ]]></code></example>
     </member>
     <member name="Public(string,RequestContext)">
@@ -75,12 +63,6 @@ Response response = client.Public("<name>", null);
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code>
-This sample shows how to call Public.
-<code><![CDATA[
-Shared client = new InternalClient().GetSharedClient();
-
-Response<SharedModel> response = client.Public("<name>");
-]]></code>
 This sample shows how to call Public with all parameters and parse the result.
 <code><![CDATA[
 Shared client = new InternalClient().GetSharedClient();
@@ -89,12 +71,6 @@ Response response = client.Public("<name>", null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
-]]></code>
-This sample shows how to call Public with all parameters.
-<code><![CDATA[
-Shared client = new InternalClient().GetSharedClient();
-
-Response<SharedModel> response = client.Public("<name>");
 ]]></code></example>
     </member>
   </members>

@@ -42,12 +42,6 @@ Response response = await client.GetAvatarAsPngAsync(null);
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
-This sample shows how to call GetAvatarAsPngAsync.
-<code><![CDATA[
-SameBody client = new ContentNegotiationClient().GetSameBodyClient(apiVersion: "1.0.0");
-
-Response<BinaryData> response = await client.GetAvatarAsPngAsync();
-]]></code>
 This sample shows how to call GetAvatarAsPngAsync with all parameters and parse the result.
 <code><![CDATA[
 SameBody client = new ContentNegotiationClient().GetSameBodyClient(apiVersion: "1.0.0");
@@ -56,12 +50,6 @@ Response response = await client.GetAvatarAsPngAsync(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
-]]></code>
-This sample shows how to call GetAvatarAsPngAsync with all parameters.
-<code><![CDATA[
-SameBody client = new ContentNegotiationClient().GetSameBodyClient(apiVersion: "1.0.0");
-
-Response<BinaryData> response = await client.GetAvatarAsPngAsync();
 ]]></code></example>
     </member>
     <member name="GetAvatarAsPng(RequestContext)">
@@ -75,12 +63,6 @@ Response response = client.GetAvatarAsPng(null);
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
-This sample shows how to call GetAvatarAsPng.
-<code><![CDATA[
-SameBody client = new ContentNegotiationClient().GetSameBodyClient(apiVersion: "1.0.0");
-
-Response<BinaryData> response = client.GetAvatarAsPng();
-]]></code>
 This sample shows how to call GetAvatarAsPng with all parameters and parse the result.
 <code><![CDATA[
 SameBody client = new ContentNegotiationClient().GetSameBodyClient(apiVersion: "1.0.0");
@@ -89,12 +71,6 @@ Response response = client.GetAvatarAsPng(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
-]]></code>
-This sample shows how to call GetAvatarAsPng with all parameters.
-<code><![CDATA[
-SameBody client = new ContentNegotiationClient().GetSameBodyClient(apiVersion: "1.0.0");
-
-Response<BinaryData> response = client.GetAvatarAsPng();
 ]]></code></example>
     </member>
     <member name="GetAvatarAsJpegAsync(CancellationToken)">
@@ -138,12 +114,6 @@ Response response = await client.GetAvatarAsJpegAsync(null);
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
-This sample shows how to call GetAvatarAsJpegAsync.
-<code><![CDATA[
-SameBody client = new ContentNegotiationClient().GetSameBodyClient(apiVersion: "1.0.0");
-
-Response<BinaryData> response = await client.GetAvatarAsJpegAsync();
-]]></code>
 This sample shows how to call GetAvatarAsJpegAsync with all parameters and parse the result.
 <code><![CDATA[
 SameBody client = new ContentNegotiationClient().GetSameBodyClient(apiVersion: "1.0.0");
@@ -152,12 +122,6 @@ Response response = await client.GetAvatarAsJpegAsync(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
-]]></code>
-This sample shows how to call GetAvatarAsJpegAsync with all parameters.
-<code><![CDATA[
-SameBody client = new ContentNegotiationClient().GetSameBodyClient(apiVersion: "1.0.0");
-
-Response<BinaryData> response = await client.GetAvatarAsJpegAsync();
 ]]></code></example>
     </member>
     <member name="GetAvatarAsJpeg(RequestContext)">
@@ -171,12 +135,6 @@ Response response = client.GetAvatarAsJpeg(null);
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
-This sample shows how to call GetAvatarAsJpeg.
-<code><![CDATA[
-SameBody client = new ContentNegotiationClient().GetSameBodyClient(apiVersion: "1.0.0");
-
-Response<BinaryData> response = client.GetAvatarAsJpeg();
-]]></code>
 This sample shows how to call GetAvatarAsJpeg with all parameters and parse the result.
 <code><![CDATA[
 SameBody client = new ContentNegotiationClient().GetSameBodyClient(apiVersion: "1.0.0");
@@ -185,12 +143,6 @@ Response response = client.GetAvatarAsJpeg(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
-]]></code>
-This sample shows how to call GetAvatarAsJpeg with all parameters.
-<code><![CDATA[
-SameBody client = new ContentNegotiationClient().GetSameBodyClient(apiVersion: "1.0.0");
-
-Response<BinaryData> response = client.GetAvatarAsJpeg();
 ]]></code></example>
     </member>
   </members>

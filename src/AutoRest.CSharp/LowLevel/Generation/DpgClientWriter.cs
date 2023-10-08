@@ -29,23 +29,27 @@ using StatusCodes = AutoRest.CSharp.Output.Models.Responses.StatusCodes;
 
 namespace AutoRest.CSharp.Generation.Writers
 {
-    internal class LowLevelClientWriter : ClientWriter
+    internal class DpgClientWriter : ClientWriter
     {
         private static readonly FormattableString LroProcessMessageMethodName = $"{typeof(ProtocolOperationHelpers)}.{nameof(ProtocolOperationHelpers.ProcessMessage)}";
         private static readonly FormattableString LroProcessMessageMethodAsyncName = $"{typeof(ProtocolOperationHelpers)}.{nameof(ProtocolOperationHelpers.ProcessMessageAsync)}";
         private static readonly FormattableString LroProcessMessageWithoutResponseValueMethodName = $"{typeof(ProtocolOperationHelpers)}.{nameof(ProtocolOperationHelpers.ProcessMessageWithoutResponseValue)}";
         private static readonly FormattableString LroProcessMessageWithoutResponseValueMethodAsyncName = $"{typeof(ProtocolOperationHelpers)}.{nameof(ProtocolOperationHelpers.ProcessMessageWithoutResponseValueAsync)}";
 
+        private readonly DpgOutputLibrary _library;
         private readonly CodeWriter _writer;
         private readonly XmlDocWriter _xmlDocWriter;
         private readonly LowLevelClient _client;
 
-        public LowLevelClientWriter(CodeWriter writer, XmlDocWriter xmlDocWriter, LowLevelClient client)
+        public DpgClientWriter(DpgOutputLibrary library, LowLevelClient client)
         {
-            _writer = writer;
-            _xmlDocWriter = xmlDocWriter;
+            _writer = new CodeWriter();
+            _library = library;
+            _xmlDocWriter = new XmlDocWriter($"Docs/{client.Type.Name}.xml");
             _client = client;
         }
+
+        public XmlDocWriter XmlDocWriter => _xmlDocWriter;
 
         public void WriteClient()
         {
@@ -67,9 +71,9 @@ namespace AutoRest.CSharp.Generation.Writers
                         if (clientMethod.ConvenienceMethod is { } convenienceMethod)
                         {
                             var samples = clientMethod.Samples.Where(s => s.IsConvenienceSample);
-                            WriteConvenienceMethodDocumentationWithExternalXmlDoc(convenienceMethod, samples, true);
+                            WriteConvenienceMethodDocumentationWithExternalXmlDoc(convenienceMethod, true);
                             WriteConvenienceMethod(clientMethod, convenienceMethod, longRunning, pagingInfo, true);
-                            WriteConvenienceMethodDocumentationWithExternalXmlDoc(convenienceMethod, samples, false);
+                            WriteConvenienceMethodDocumentationWithExternalXmlDoc(convenienceMethod, false);
                             WriteConvenienceMethod(clientMethod, convenienceMethod, longRunning, pagingInfo, false);
                         }
 
@@ -541,7 +545,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
             WriteMethodDocumentation(_writer, methodSignature, clientMethod, isAsync);
 
-            WriteSampleRefsIfNecessary(methodSignature, clientMethod.Samples, isAsync);
+            WriteSampleRefsIfNecessary(methodSignature, isAsync);
         }
 
         private void WriteConvenienceMethodOmitReasonIfNecessary(ConvenienceMethodOmittingMessage? message)
@@ -553,29 +557,33 @@ namespace AutoRest.CSharp.Generation.Writers
             _writer.Line($"// {message.Message}");
         }
 
-        private void WriteConvenienceMethodDocumentationWithExternalXmlDoc(ConvenienceMethod convenienceMethod, IEnumerable<DpgOperationSample> samples, bool isAsync)
+        private void WriteConvenienceMethodDocumentationWithExternalXmlDoc(ConvenienceMethod convenienceMethod, bool isAsync)
         {
             var methodSignature = convenienceMethod.Signature.WithAsync(isAsync);
 
             _writer.WriteMethodDocumentation(methodSignature);
             _writer.WriteXmlDocumentation("remarks", methodSignature.DescriptionText);
 
-            WriteSampleRefsIfNecessary(methodSignature, samples, isAsync);
+            WriteSampleRefsIfNecessary(methodSignature, isAsync);
         }
 
-        private void WriteSampleRefsIfNecessary(MethodSignature methodSignature, IEnumerable<DpgOperationSample> samples, bool isAsync)
+        private void WriteSampleRefsIfNecessary(MethodSignature methodSignature, bool isAsync)
         {
-            // do not write this part when there is no samples
+            var sampleProvider = _library.GetSampleForClient(_client);
+            // do not write this part when there is no sample provider
+            if (sampleProvider == null)
+                return;
+
+            var samples = sampleProvider.GetSampleInformation(methodSignature, isAsync);
+            // do not write this part when there is no sample for this method
             if (!samples.Any())
                 return;
 
             var docRef = GetMethodSignatureString(methodSignature);
-            _writer.Line($"/// <include file=\"Docs/{_client.Type.Name}.xml\" path=\"doc/members/member[@name='{docRef}']/*\" />");
+            _writer.Line($"/// <include file=\"{XmlDocWriter.Filename}\" path=\"doc/members/member[@name='{docRef}']/*\" />");
 
             _xmlDocWriter.AddMember(docRef);
-            _xmlDocWriter.AddExamples(
-                samples.Select(s => (s.GetSampleInformation(isAsync), s.GetMethodName(isAsync)))
-                );
+            _xmlDocWriter.AddExamples(samples);
         }
 
         private static string GetMethodSignatureString(MethodSignature signature)
@@ -824,5 +832,9 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
+        public override string ToString()
+        {
+            return _writer.ToString();
+        }
     }
 }

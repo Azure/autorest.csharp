@@ -484,15 +484,6 @@ Response response = await client.FriendlyModelAsync(content);
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code>
-This sample shows how to call FriendlyModelAsync.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
-NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
-
-Friend notFriend = new Friend("<name>");
-Response<Friend> response = await client.FriendlyModelAsync(notFriend);
-]]></code>
 This sample shows how to call FriendlyModelAsync with all request content and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -507,15 +498,6 @@ Response response = await client.FriendlyModelAsync(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
-]]></code>
-This sample shows how to call FriendlyModelAsync with all parameters.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
-NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
-
-Friend notFriend = new Friend("<name>");
-Response<Friend> response = await client.FriendlyModelAsync(notFriend);
 ]]></code></example>
     </member>
     <member name="FriendlyModel(RequestContent,RequestContext)">
@@ -535,15 +517,6 @@ Response response = client.FriendlyModel(content);
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code>
-This sample shows how to call FriendlyModel.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
-NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
-
-Friend notFriend = new Friend("<name>");
-Response<Friend> response = client.FriendlyModel(notFriend);
-]]></code>
 This sample shows how to call FriendlyModel with all request content and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -558,15 +531,6 @@ Response response = client.FriendlyModel(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
-]]></code>
-This sample shows how to call FriendlyModel with all parameters.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
-NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
-
-Friend notFriend = new Friend("<name>");
-Response<Friend> response = client.FriendlyModel(notFriend);
 ]]></code></example>
     </member>
     <member name="AddTimeHeaderAsync(RequestContext)">
@@ -674,15 +638,6 @@ Response response = await client.StringFormatAsync(Guid.Parse("73f411fe-4f43-4b4
 
 Console.WriteLine(response.Status);
 ]]></code>
-This sample shows how to call StringFormatAsync.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
-NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
-
-ModelWithFormat body = new ModelWithFormat(new Uri("http://localhost:3000"), Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
-Response response = await client.StringFormatAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), body);
-]]></code>
 This sample shows how to call StringFormatAsync with all parameters and request content.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -697,15 +652,6 @@ RequestContent content = RequestContent.Create(new
 Response response = await client.StringFormatAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), content);
 
 Console.WriteLine(response.Status);
-]]></code>
-This sample shows how to call StringFormatAsync with all parameters.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
-NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
-
-ModelWithFormat body = new ModelWithFormat(new Uri("http://localhost:3000"), Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
-Response response = await client.StringFormatAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), body);
 ]]></code></example>
     </member>
     <member name="StringFormat(Guid,RequestContent,RequestContext)">
@@ -725,15 +671,6 @@ Response response = client.StringFormat(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828
 
 Console.WriteLine(response.Status);
 ]]></code>
-This sample shows how to call StringFormat.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
-NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
-
-ModelWithFormat body = new ModelWithFormat(new Uri("http://localhost:3000"), Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
-Response response = client.StringFormat(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), body);
-]]></code>
 This sample shows how to call StringFormat with all parameters and request content.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -748,15 +685,6 @@ RequestContent content = RequestContent.Create(new
 Response response = client.StringFormat(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), content);
 
 Console.WriteLine(response.Status);
-]]></code>
-This sample shows how to call StringFormat with all parameters.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-AzureKeyCredential credential = new AzureKeyCredential("<key>");
-NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
-
-ModelWithFormat body = new ModelWithFormat(new Uri("http://localhost:3000"), Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
-Response response = client.StringFormat(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), body);
 ]]></code></example>
     </member>
     <member name="SayHiAsync(string,string,string,RequestContext)">
