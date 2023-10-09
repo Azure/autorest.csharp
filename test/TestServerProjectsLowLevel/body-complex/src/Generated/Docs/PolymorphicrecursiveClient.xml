@@ -66,7 +66,7 @@ This sample shows how to call PutValidAsync.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PolymorphicrecursiveClient client = new PolymorphicrecursiveClient(credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     fishtype = "salmon",
     length = 123.45F,
@@ -80,7 +80,7 @@ This sample shows how to call PutValidAsync with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PolymorphicrecursiveClient client = new PolymorphicrecursiveClient(credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     location = "<location>",
     iswild = true,
@@ -104,7 +104,7 @@ This sample shows how to call PutValid.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PolymorphicrecursiveClient client = new PolymorphicrecursiveClient(credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     fishtype = "salmon",
     length = 123.45F,
@@ -118,7 +118,7 @@ This sample shows how to call PutValid with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PolymorphicrecursiveClient client = new PolymorphicrecursiveClient(credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     location = "<location>",
     iswild = true,

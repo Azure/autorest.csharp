@@ -66,7 +66,7 @@ This sample shows how to call PutValidAsync.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PolymorphismClient client = new PolymorphismClient(credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     fishtype = "salmon",
     length = 123.45F,
@@ -80,7 +80,7 @@ This sample shows how to call PutValidAsync with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PolymorphismClient client = new PolymorphismClient(credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     location = "<location>",
     iswild = true,
@@ -104,7 +104,7 @@ This sample shows how to call PutValid.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PolymorphismClient client = new PolymorphismClient(credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     fishtype = "salmon",
     length = 123.45F,
@@ -118,7 +118,7 @@ This sample shows how to call PutValid with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PolymorphismClient client = new PolymorphismClient(credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     location = "<location>",
     iswild = true,
@@ -388,7 +388,7 @@ This sample shows how to call PutComplicatedAsync.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PolymorphismClient client = new PolymorphismClient(credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     fishtype = "smart_salmon",
     length = 123.45F,
@@ -402,7 +402,7 @@ This sample shows how to call PutComplicatedAsync with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PolymorphismClient client = new PolymorphismClient(credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     college_degree = "<college_degree>",
     location = "<location>",
@@ -438,7 +438,7 @@ This sample shows how to call PutComplicated.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PolymorphismClient client = new PolymorphismClient(credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     fishtype = "smart_salmon",
     length = 123.45F,
@@ -452,7 +452,7 @@ This sample shows how to call PutComplicated with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PolymorphismClient client = new PolymorphismClient(credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     college_degree = "<college_degree>",
     location = "<location>",
@@ -488,7 +488,7 @@ This sample shows how to call PutMissingDiscriminatorAsync and parse the result.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PolymorphismClient client = new PolymorphismClient(credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     fishtype = "smart_salmon",
     length = 123.45F,
@@ -504,7 +504,7 @@ This sample shows how to call PutMissingDiscriminatorAsync with all request cont
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PolymorphismClient client = new PolymorphismClient(credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     college_degree = "<college_degree>",
     location = "<location>",
@@ -548,7 +548,7 @@ This sample shows how to call PutMissingDiscriminator and parse the result.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PolymorphismClient client = new PolymorphismClient(credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     fishtype = "smart_salmon",
     length = 123.45F,
@@ -564,7 +564,7 @@ This sample shows how to call PutMissingDiscriminator with all request content a
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PolymorphismClient client = new PolymorphismClient(credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     college_degree = "<college_degree>",
     location = "<location>",
@@ -608,7 +608,7 @@ This sample shows how to call PutValidMissingRequiredAsync.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PolymorphismClient client = new PolymorphismClient(credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     fishtype = "salmon",
     length = 123.45F,
@@ -622,7 +622,7 @@ This sample shows how to call PutValidMissingRequiredAsync with all request cont
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PolymorphismClient client = new PolymorphismClient(credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     location = "<location>",
     iswild = true,
@@ -646,7 +646,7 @@ This sample shows how to call PutValidMissingRequired.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PolymorphismClient client = new PolymorphismClient(credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     fishtype = "salmon",
     length = 123.45F,
@@ -660,7 +660,7 @@ This sample shows how to call PutValidMissingRequired with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PolymorphismClient client = new PolymorphismClient(credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     location = "<location>",
     iswild = true,

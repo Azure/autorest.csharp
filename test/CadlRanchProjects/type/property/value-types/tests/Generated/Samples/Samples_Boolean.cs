@@ -109,7 +109,7 @@ namespace _Type.Property.ValueTypes.Samples
         {
             Boolean client = new ValueTypesClient().GetBooleanClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 property = true,
             });
@@ -124,7 +124,7 @@ namespace _Type.Property.ValueTypes.Samples
         {
             Boolean client = new ValueTypesClient().GetBooleanClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 property = true,
             });
@@ -159,7 +159,7 @@ namespace _Type.Property.ValueTypes.Samples
         {
             Boolean client = new ValueTypesClient().GetBooleanClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 property = true,
             });
@@ -174,7 +174,7 @@ namespace _Type.Property.ValueTypes.Samples
         {
             Boolean client = new ValueTypesClient().GetBooleanClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 property = true,
             });

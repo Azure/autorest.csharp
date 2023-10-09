@@ -181,7 +181,7 @@ namespace dpg_update1_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ParamsClient client = new ParamsClient(credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 url = "<url>",
             });
@@ -198,7 +198,7 @@ namespace dpg_update1_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ParamsClient client = new ParamsClient(credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 url = "<url>",
             });
@@ -215,7 +215,7 @@ namespace dpg_update1_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ParamsClient client = new ParamsClient(credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 url = "<url>",
             });
@@ -232,7 +232,7 @@ namespace dpg_update1_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ParamsClient client = new ParamsClient(credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 url = "<url>",
             });

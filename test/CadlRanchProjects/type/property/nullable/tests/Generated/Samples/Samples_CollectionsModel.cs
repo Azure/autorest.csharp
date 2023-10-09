@@ -201,7 +201,7 @@ namespace _Type.Property.Nullable.Samples
         {
             CollectionsModel client = new NullableClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 requiredProperty = "<requiredProperty>",
                 nullableProperty = new object[]
@@ -223,7 +223,7 @@ property = "<property>",
         {
             CollectionsModel client = new NullableClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 requiredProperty = "<requiredProperty>",
                 nullableProperty = new object[]
@@ -245,7 +245,7 @@ property = "<property>",
         {
             CollectionsModel client = new NullableClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 requiredProperty = "<requiredProperty>",
                 nullableProperty = new object[]
@@ -267,7 +267,7 @@ property = "<property>",
         {
             CollectionsModel client = new NullableClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 requiredProperty = "<requiredProperty>",
                 nullableProperty = new object[]
@@ -289,7 +289,7 @@ property = "<property>",
         {
             CollectionsModel client = new NullableClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 requiredProperty = "<requiredProperty>",
                 nullableProperty = new object[]
@@ -311,7 +311,7 @@ property = "<property>",
         {
             CollectionsModel client = new NullableClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 requiredProperty = "<requiredProperty>",
                 nullableProperty = new object[]
@@ -333,7 +333,7 @@ property = "<property>",
         {
             CollectionsModel client = new NullableClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 requiredProperty = "<requiredProperty>",
                 nullableProperty = new object[]
@@ -355,7 +355,7 @@ property = "<property>",
         {
             CollectionsModel client = new NullableClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 requiredProperty = "<requiredProperty>",
                 nullableProperty = new object[]

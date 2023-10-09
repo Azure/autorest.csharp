@@ -109,7 +109,7 @@ namespace _Type._Dictionary.Samples
         {
             UnknownValue client = new DictionaryClient().GetUnknownValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 key = new object(),
             });
@@ -124,7 +124,7 @@ namespace _Type._Dictionary.Samples
         {
             UnknownValue client = new DictionaryClient().GetUnknownValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 key = new object(),
             });
@@ -163,7 +163,7 @@ namespace _Type._Dictionary.Samples
         {
             UnknownValue client = new DictionaryClient().GetUnknownValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 key = new object(),
             });
@@ -178,7 +178,7 @@ namespace _Type._Dictionary.Samples
         {
             UnknownValue client = new DictionaryClient().GetUnknownValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 key = new object(),
             });

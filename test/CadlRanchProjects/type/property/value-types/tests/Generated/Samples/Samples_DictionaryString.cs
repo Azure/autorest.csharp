@@ -110,7 +110,7 @@ namespace _Type.Property.ValueTypes.Samples
         {
             DictionaryString client = new ValueTypesClient().GetDictionaryStringClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 property = new
                 {
@@ -128,7 +128,7 @@ namespace _Type.Property.ValueTypes.Samples
         {
             DictionaryString client = new ValueTypesClient().GetDictionaryStringClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 property = new
                 {
@@ -172,7 +172,7 @@ namespace _Type.Property.ValueTypes.Samples
         {
             DictionaryString client = new ValueTypesClient().GetDictionaryStringClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 property = new
                 {
@@ -190,7 +190,7 @@ namespace _Type.Property.ValueTypes.Samples
         {
             DictionaryString client = new ValueTypesClient().GetDictionaryStringClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 property = new
                 {

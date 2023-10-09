@@ -27,7 +27,7 @@ namespace CustomizationsInTsp.Samples
         {
             CustomizationsInTspClient client = new CustomizationsInTspClient();
 
-            RequestContent content = RequestContent.Create(new object());
+            using RequestContent content = RequestContent.Create(new object());
             Response response = client.RoundTrip(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
@@ -40,7 +40,7 @@ namespace CustomizationsInTsp.Samples
         {
             CustomizationsInTspClient client = new CustomizationsInTspClient();
 
-            RequestContent content = RequestContent.Create(new object());
+            using RequestContent content = RequestContent.Create(new object());
             Response response = await client.RoundTripAsync(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
@@ -73,7 +73,7 @@ namespace CustomizationsInTsp.Samples
         {
             CustomizationsInTspClient client = new CustomizationsInTspClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 propertyExtensibleEnum = "Monday",
                 propertyModelToMakeInternal = new
@@ -164,7 +164,7 @@ key = "<badListOfDictionaryName>",
         {
             CustomizationsInTspClient client = new CustomizationsInTspClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 propertyExtensibleEnum = "Monday",
                 propertyModelToMakeInternal = new

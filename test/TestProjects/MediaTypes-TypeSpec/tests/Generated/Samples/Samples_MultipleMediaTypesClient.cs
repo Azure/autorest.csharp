@@ -25,7 +25,7 @@ namespace MultipleMediaTypes.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             MultipleMediaTypesClient client = new MultipleMediaTypesClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new object());
+            using RequestContent content = RequestContent.Create(new object());
             Response response = client.OneBinaryBodyTwoContentTypes(content, new ContentType("application/json"));
 
             Console.WriteLine(response.Status);
@@ -38,7 +38,7 @@ namespace MultipleMediaTypes.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             MultipleMediaTypesClient client = new MultipleMediaTypesClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new object());
+            using RequestContent content = RequestContent.Create(new object());
             Response response = await client.OneBinaryBodyTwoContentTypesAsync(content, new ContentType("application/json"));
 
             Console.WriteLine(response.Status);
@@ -71,7 +71,7 @@ namespace MultipleMediaTypes.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             MultipleMediaTypesClient client = new MultipleMediaTypesClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new object());
+            using RequestContent content = RequestContent.Create(new object());
             Response response = client.OneBinaryBodyTwoContentTypes(content, new ContentType("application/json"));
 
             Console.WriteLine(response.Status);
@@ -84,7 +84,7 @@ namespace MultipleMediaTypes.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             MultipleMediaTypesClient client = new MultipleMediaTypesClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new object());
+            using RequestContent content = RequestContent.Create(new object());
             Response response = await client.OneBinaryBodyTwoContentTypesAsync(content, new ContentType("application/json"));
 
             Console.WriteLine(response.Status);
@@ -117,7 +117,7 @@ namespace MultipleMediaTypes.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             MultipleMediaTypesClient client = new MultipleMediaTypesClient(endpoint);
 
-            RequestContent content = RequestContent.Create("<body>");
+            using RequestContent content = RequestContent.Create("<body>");
             Response response = client.OneStringBodyThreeContentTypes(content, new ContentType("application/json"));
 
             Console.WriteLine(response.Status);
@@ -130,7 +130,7 @@ namespace MultipleMediaTypes.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             MultipleMediaTypesClient client = new MultipleMediaTypesClient(endpoint);
 
-            RequestContent content = RequestContent.Create("<body>");
+            using RequestContent content = RequestContent.Create("<body>");
             Response response = await client.OneStringBodyThreeContentTypesAsync(content, new ContentType("application/json"));
 
             Console.WriteLine(response.Status);
@@ -163,7 +163,7 @@ namespace MultipleMediaTypes.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             MultipleMediaTypesClient client = new MultipleMediaTypesClient(endpoint);
 
-            RequestContent content = RequestContent.Create("<body>");
+            using RequestContent content = RequestContent.Create("<body>");
             Response response = client.OneStringBodyThreeContentTypes(content, new ContentType("application/json"));
 
             Console.WriteLine(response.Status);
@@ -176,7 +176,7 @@ namespace MultipleMediaTypes.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             MultipleMediaTypesClient client = new MultipleMediaTypesClient(endpoint);
 
-            RequestContent content = RequestContent.Create("<body>");
+            using RequestContent content = RequestContent.Create("<body>");
             Response response = await client.OneStringBodyThreeContentTypesAsync(content, new ContentType("application/json"));
 
             Console.WriteLine(response.Status);
@@ -209,7 +209,7 @@ namespace MultipleMediaTypes.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             MultipleMediaTypesClient client = new MultipleMediaTypesClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 id = "<id>",
             });
@@ -225,7 +225,7 @@ namespace MultipleMediaTypes.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             MultipleMediaTypesClient client = new MultipleMediaTypesClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 id = "<id>",
             });
@@ -263,7 +263,7 @@ namespace MultipleMediaTypes.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             MultipleMediaTypesClient client = new MultipleMediaTypesClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 id = "<id>",
             });
@@ -279,7 +279,7 @@ namespace MultipleMediaTypes.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             MultipleMediaTypesClient client = new MultipleMediaTypesClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 id = "<id>",
             });

@@ -109,7 +109,7 @@ namespace _Type.Property.ValueTypes.Samples
         {
             Never client = new ValueTypesClient().GetNeverClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new object());
+            using RequestContent content = RequestContent.Create(new object());
             Response response = client.Put(content);
 
             Console.WriteLine(response.Status);
@@ -121,7 +121,7 @@ namespace _Type.Property.ValueTypes.Samples
         {
             Never client = new ValueTypesClient().GetNeverClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new object());
+            using RequestContent content = RequestContent.Create(new object());
             Response response = await client.PutAsync(content);
 
             Console.WriteLine(response.Status);
@@ -153,7 +153,7 @@ namespace _Type.Property.ValueTypes.Samples
         {
             Never client = new ValueTypesClient().GetNeverClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new object());
+            using RequestContent content = RequestContent.Create(new object());
             Response response = client.Put(content);
 
             Console.WriteLine(response.Status);
@@ -165,7 +165,7 @@ namespace _Type.Property.ValueTypes.Samples
         {
             Never client = new ValueTypesClient().GetNeverClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new object());
+            using RequestContent content = RequestContent.Create(new object());
             Response response = await client.PutAsync(content);
 
             Console.WriteLine(response.Status);

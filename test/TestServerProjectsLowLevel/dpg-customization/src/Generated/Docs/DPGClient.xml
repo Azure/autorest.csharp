@@ -54,7 +54,7 @@ This sample shows how to call PostModelAsync and parse the result.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 DPGClient client = new DPGClient(credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     hello = "<hello>",
 });
@@ -68,7 +68,7 @@ This sample shows how to call PostModelAsync with all parameters and request con
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 DPGClient client = new DPGClient(credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     hello = "<hello>",
 });
@@ -85,7 +85,7 @@ This sample shows how to call PostModel and parse the result.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 DPGClient client = new DPGClient(credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     hello = "<hello>",
 });
@@ -99,7 +99,7 @@ This sample shows how to call PostModel with all parameters and request content 
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 DPGClient client = new DPGClient(credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     hello = "<hello>",
 });

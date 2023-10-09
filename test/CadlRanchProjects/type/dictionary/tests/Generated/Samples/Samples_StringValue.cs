@@ -109,7 +109,7 @@ namespace _Type._Dictionary.Samples
         {
             StringValue client = new DictionaryClient().GetStringValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 key = "<body>",
             });
@@ -124,7 +124,7 @@ namespace _Type._Dictionary.Samples
         {
             StringValue client = new DictionaryClient().GetStringValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 key = "<body>",
             });
@@ -163,7 +163,7 @@ namespace _Type._Dictionary.Samples
         {
             StringValue client = new DictionaryClient().GetStringValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 key = "<body>",
             });
@@ -178,7 +178,7 @@ namespace _Type._Dictionary.Samples
         {
             StringValue client = new DictionaryClient().GetStringValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 key = "<body>",
             });

@@ -58,7 +58,8 @@ namespace _Type.Model.Empty
             Argument.AssertNotNull(input, nameof(input));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await PutEmptyAsync(input.ToRequestContent(), context).ConfigureAwait(false);
+            using RequestContent content = input.ToRequestContent();
+            Response response = await PutEmptyAsync(content, context).ConfigureAwait(false);
             return response;
         }
 
@@ -71,7 +72,8 @@ namespace _Type.Model.Empty
             Argument.AssertNotNull(input, nameof(input));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = PutEmpty(input.ToRequestContent(), context);
+            using RequestContent content = input.ToRequestContent();
+            Response response = PutEmpty(content, context);
             return response;
         }
 
@@ -250,7 +252,8 @@ namespace _Type.Model.Empty
             Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await PostRoundTripEmptyAsync(body.ToRequestContent(), context).ConfigureAwait(false);
+            using RequestContent content = body.ToRequestContent();
+            Response response = await PostRoundTripEmptyAsync(content, context).ConfigureAwait(false);
             return Response.FromValue(EmptyInputOutput.FromResponse(response), response);
         }
 
@@ -263,7 +266,8 @@ namespace _Type.Model.Empty
             Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = PostRoundTripEmpty(body.ToRequestContent(), context);
+            using RequestContent content = body.ToRequestContent();
+            Response response = PostRoundTripEmpty(content, context);
             return Response.FromValue(EmptyInputOutput.FromResponse(response), response);
         }
 

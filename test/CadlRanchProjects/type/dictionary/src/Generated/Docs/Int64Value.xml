@@ -121,7 +121,7 @@ This sample shows how to call PutAsync.
 <code><![CDATA[
 Int64Value client = new DictionaryClient().GetInt64ValueClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     key = 1234L,
 });
@@ -133,7 +133,7 @@ This sample shows how to call PutAsync with all request content.
 <code><![CDATA[
 Int64Value client = new DictionaryClient().GetInt64ValueClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     key = 1234L,
 });
@@ -148,7 +148,7 @@ This sample shows how to call Put.
 <code><![CDATA[
 Int64Value client = new DictionaryClient().GetInt64ValueClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     key = 1234L,
 });
@@ -160,7 +160,7 @@ This sample shows how to call Put with all request content.
 <code><![CDATA[
 Int64Value client = new DictionaryClient().GetInt64ValueClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     key = 1234L,
 });

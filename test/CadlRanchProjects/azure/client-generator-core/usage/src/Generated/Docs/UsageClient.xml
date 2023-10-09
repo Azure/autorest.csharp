@@ -41,7 +41,7 @@ This sample shows how to call InputToInputOutputAsync.
 <code><![CDATA[
 UsageClient client = new UsageClient();
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     name = "<name>",
 });
@@ -53,7 +53,7 @@ This sample shows how to call InputToInputOutputAsync with all request content.
 <code><![CDATA[
 UsageClient client = new UsageClient();
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     name = "<name>",
 });
@@ -68,7 +68,7 @@ This sample shows how to call InputToInputOutput.
 <code><![CDATA[
 UsageClient client = new UsageClient();
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     name = "<name>",
 });
@@ -80,7 +80,7 @@ This sample shows how to call InputToInputOutput with all request content.
 <code><![CDATA[
 UsageClient client = new UsageClient();
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     name = "<name>",
 });

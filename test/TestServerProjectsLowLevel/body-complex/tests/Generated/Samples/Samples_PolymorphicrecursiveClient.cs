@@ -89,7 +89,7 @@ namespace body_complex_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PolymorphicrecursiveClient client = new PolymorphicrecursiveClient(credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 fishtype = "salmon",
                 length = 123.45F,
@@ -106,7 +106,7 @@ namespace body_complex_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PolymorphicrecursiveClient client = new PolymorphicrecursiveClient(credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 fishtype = "salmon",
                 length = 123.45F,
@@ -123,7 +123,7 @@ namespace body_complex_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PolymorphicrecursiveClient client = new PolymorphicrecursiveClient(credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 location = "<location>",
                 iswild = true,
@@ -147,7 +147,7 @@ null
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PolymorphicrecursiveClient client = new PolymorphicrecursiveClient(credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 location = "<location>",
                 iswild = true,

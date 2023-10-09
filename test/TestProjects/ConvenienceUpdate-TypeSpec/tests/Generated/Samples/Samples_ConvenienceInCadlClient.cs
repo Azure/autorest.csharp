@@ -109,7 +109,7 @@ namespace ConvenienceInCadl.Samples
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 id = "<id>",
             });
@@ -124,7 +124,7 @@ namespace ConvenienceInCadl.Samples
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 id = "<id>",
             });
@@ -159,7 +159,7 @@ namespace ConvenienceInCadl.Samples
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 id = "<id>",
             });
@@ -174,7 +174,7 @@ namespace ConvenienceInCadl.Samples
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 id = "<id>",
             });
@@ -257,7 +257,7 @@ namespace ConvenienceInCadl.Samples
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 id = "<id>",
             });
@@ -272,7 +272,7 @@ namespace ConvenienceInCadl.Samples
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 id = "<id>",
             });
@@ -287,7 +287,7 @@ namespace ConvenienceInCadl.Samples
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 id = "<id>",
             });
@@ -302,7 +302,7 @@ namespace ConvenienceInCadl.Samples
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 id = "<id>",
             });
@@ -317,7 +317,7 @@ namespace ConvenienceInCadl.Samples
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Response response = client.NoConvenienceOptionalBody(content);
 
             Console.WriteLine(response.Status);
@@ -329,7 +329,7 @@ namespace ConvenienceInCadl.Samples
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Response response = await client.NoConvenienceOptionalBodyAsync(content);
 
             Console.WriteLine(response.Status);
@@ -341,7 +341,7 @@ namespace ConvenienceInCadl.Samples
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 id = "<id>",
             });
@@ -356,7 +356,7 @@ namespace ConvenienceInCadl.Samples
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 id = "<id>",
             });
@@ -879,7 +879,7 @@ namespace ConvenienceInCadl.Samples
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Response response = client.ProtocolOptionalModel(content);
 
             Console.WriteLine(response.Status);
@@ -891,7 +891,7 @@ namespace ConvenienceInCadl.Samples
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Response response = await client.ProtocolOptionalModelAsync(content);
 
             Console.WriteLine(response.Status);
@@ -921,7 +921,7 @@ namespace ConvenienceInCadl.Samples
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 id = "<id>",
             });
@@ -936,7 +936,7 @@ namespace ConvenienceInCadl.Samples
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 id = "<id>",
             });
@@ -971,7 +971,7 @@ namespace ConvenienceInCadl.Samples
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 id = "<id>",
             });
@@ -986,7 +986,7 @@ namespace ConvenienceInCadl.Samples
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 id = "<id>",
             });
@@ -1021,7 +1021,7 @@ namespace ConvenienceInCadl.Samples
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 id = "<id>",
             });
@@ -1036,7 +1036,7 @@ namespace ConvenienceInCadl.Samples
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 id = "<id>",
             });
@@ -1407,7 +1407,7 @@ namespace ConvenienceInCadl.Samples
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Response response = client.ConvenienceOptionalModelWithOptional(content);
 
             Console.WriteLine(response.Status);
@@ -1419,7 +1419,7 @@ namespace ConvenienceInCadl.Samples
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Response response = await client.ConvenienceOptionalModelWithOptionalAsync(content);
 
             Console.WriteLine(response.Status);
@@ -1449,7 +1449,7 @@ namespace ConvenienceInCadl.Samples
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 id = "<id>",
             });
@@ -1464,7 +1464,7 @@ namespace ConvenienceInCadl.Samples
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 id = "<id>",
             });
@@ -1499,7 +1499,7 @@ namespace ConvenienceInCadl.Samples
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 id = "<id>",
             });
@@ -1514,7 +1514,7 @@ namespace ConvenienceInCadl.Samples
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 id = "<id>",
             });
@@ -1549,7 +1549,7 @@ namespace ConvenienceInCadl.Samples
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 id = "<id>",
             });
@@ -1564,7 +1564,7 @@ namespace ConvenienceInCadl.Samples
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 id = "<id>",
             });
@@ -1599,7 +1599,7 @@ namespace ConvenienceInCadl.Samples
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Response response = client.ConvenienceOptionalModelWithRequired(content);
 
             Console.WriteLine(response.Status);
@@ -1611,7 +1611,7 @@ namespace ConvenienceInCadl.Samples
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Response response = await client.ConvenienceOptionalModelWithRequiredAsync(content);
 
             Console.WriteLine(response.Status);
@@ -1641,7 +1641,7 @@ namespace ConvenienceInCadl.Samples
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 id = "<id>",
             });
@@ -1656,7 +1656,7 @@ namespace ConvenienceInCadl.Samples
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 id = "<id>",
             });
@@ -1691,7 +1691,7 @@ namespace ConvenienceInCadl.Samples
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 id = "<id>",
             });
@@ -1706,7 +1706,7 @@ namespace ConvenienceInCadl.Samples
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 id = "<id>",
             });
@@ -1741,7 +1741,7 @@ namespace ConvenienceInCadl.Samples
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 id = "<id>",
             });
@@ -1756,7 +1756,7 @@ namespace ConvenienceInCadl.Samples
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 id = "<id>",
             });

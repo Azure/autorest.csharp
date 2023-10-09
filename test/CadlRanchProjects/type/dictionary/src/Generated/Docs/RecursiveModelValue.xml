@@ -135,7 +135,7 @@ This sample shows how to call PutAsync.
 <code><![CDATA[
 RecursiveModelValue client = new DictionaryClient().GetRecursiveModelValueClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     key = new
     {
@@ -150,7 +150,7 @@ This sample shows how to call PutAsync with all request content.
 <code><![CDATA[
 RecursiveModelValue client = new DictionaryClient().GetRecursiveModelValueClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     key = new
     {
@@ -169,7 +169,7 @@ This sample shows how to call Put.
 <code><![CDATA[
 RecursiveModelValue client = new DictionaryClient().GetRecursiveModelValueClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     key = new
     {
@@ -184,7 +184,7 @@ This sample shows how to call Put with all request content.
 <code><![CDATA[
 RecursiveModelValue client = new DictionaryClient().GetRecursiveModelValueClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     key = new
     {

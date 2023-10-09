@@ -77,7 +77,7 @@ namespace body_complex_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object());
+            using RequestContent content = RequestContent.Create(new object());
             Response response = client.PutValid(content);
 
             Console.WriteLine(response.Status);
@@ -90,7 +90,7 @@ namespace body_complex_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object());
+            using RequestContent content = RequestContent.Create(new object());
             Response response = await client.PutValidAsync(content);
 
             Console.WriteLine(response.Status);
@@ -103,7 +103,7 @@ namespace body_complex_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 array = new object[]
             {
@@ -122,7 +122,7 @@ namespace body_complex_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 array = new object[]
             {
@@ -193,7 +193,7 @@ namespace body_complex_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object());
+            using RequestContent content = RequestContent.Create(new object());
             Response response = client.PutEmpty(content);
 
             Console.WriteLine(response.Status);
@@ -206,7 +206,7 @@ namespace body_complex_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object());
+            using RequestContent content = RequestContent.Create(new object());
             Response response = await client.PutEmptyAsync(content);
 
             Console.WriteLine(response.Status);
@@ -219,7 +219,7 @@ namespace body_complex_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 array = new object[]
             {
@@ -238,7 +238,7 @@ namespace body_complex_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 array = new object[]
             {
