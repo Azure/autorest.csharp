@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Generation.Writers;
-using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Models;
@@ -60,17 +59,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected override void WriteMethod(MgmtClientOperation clientOperation, bool isAsync)
         {
-            var requestPaths = clientOperation.Select(restOperation => restOperation.RequestPath);
-            var scopeResourceTypes = requestPaths.Select(requestPath => requestPath.GetParameterizedScopeResourceTypes() ?? Enumerable.Empty<ResourceTypeSegment>()).SelectMany(types => types).Distinct();
-            var scopeTypes = GetScopeTypeStrings(scopeResourceTypes);
-            var originalSignature = clientOperation.MethodSignature;
-            var signature = originalSignature with
+            using (_writer.WriteCommonMethod(clientOperation.MethodSignature, null, isAsync, This.Accessibility == "public", SkipParameterValidation))
             {
-                Parameters = GetScopeVersionMethodParameters(originalSignature.Parameters.Skip(1), scopeTypes)
-            };
-            using (_writer.WriteCommonMethod(signature, null, isAsync, This.Accessibility == "public", SkipParameterValidation))
-            {
-                WriteMethodBodyWrapper(signature, isAsync, clientOperation.IsPagingOperation);
+                WriteMethodBodyWrapper(clientOperation.MethodSignature, isAsync, clientOperation.IsPagingOperation);
             }
             _writer.Line();
         }
@@ -83,7 +74,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
             else
             {
-                var scopeTypes = GetScopeTypeStrings(resource.RequestPath.GetParameterizedScopeResourceTypes());
+                var scopeTypes = ResourceTypeBuilder.GetScopeTypeStrings(resource.RequestPath.GetParameterizedScopeResourceTypes());
                 var signature = new MethodSignature(
                     $"Get{resource.ResourceName}",
                     null,
@@ -106,7 +97,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
             else
             {
-                var scopeTypes = GetScopeTypeStrings(resource.RequestPath.GetParameterizedScopeResourceTypes());
+                var scopeTypes = ResourceTypeBuilder.GetScopeTypeStrings(resource.RequestPath.GetParameterizedScopeResourceTypes());
                 var resourceCollection = resource.ResourceCollection!;
                 var signature = new MethodSignature(
                     $"{GetResourceCollectionMethodName(resourceCollection)}",
@@ -131,7 +122,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
             else
             {
-                var scopeTypes = GetScopeTypeStrings(resourceCollection.RequestPath.GetParameterizedScopeResourceTypes());
+                var scopeTypes = ResourceTypeBuilder.GetScopeTypeStrings(resourceCollection.RequestPath.GetParameterizedScopeResourceTypes());
                 var getOperation = resourceCollection.GetOperation;
                 // Copy the original method signature with changes in name and modifier (e.g. when adding into extension class, the modifier should be static)
                 var signature = getOperation.MethodSignature with
@@ -149,14 +140,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     WriteMethodBodyWrapper(signature, isAsync, false);
                 }
             }
-        }
-
-        internal static ICollection<FormattableString>? GetScopeTypeStrings(IEnumerable<ResourceTypeSegment>? scopeTypes)
-        {
-            if (scopeTypes == null || !scopeTypes.Any() || scopeTypes.Contains(ResourceTypeSegment.Any))
-                return null;
-
-            return scopeTypes.Select(type => (FormattableString)$"{type}").ToArray();
         }
 
         /// <summary>

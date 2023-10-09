@@ -204,10 +204,6 @@ namespace MgmtScopeResource
         /// <description>ResourceLinks_ListAtSourceScope</description>
         /// </item>
         /// </list>
-        /// <item>
-        /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtScopeResourceArmClientMockingExtension.GetAllAsync(Filter?,CancellationToken)"/> instead.</description>
-        /// </item>
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="scope"> The scope that the resource will apply against. </param>
@@ -230,10 +226,6 @@ namespace MgmtScopeResource
         /// <description>ResourceLinks_ListAtSourceScope</description>
         /// </item>
         /// </list>
-        /// <item>
-        /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtScopeResourceArmMockingExtension.GetAll(Nullable{Filter},CancellationToken)"/> instead.</description>
-        /// </item>
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="scope"> The scope that the resource will apply against. </param>
@@ -256,10 +248,6 @@ namespace MgmtScopeResource
         /// <description>Marketplaces_List</description>
         /// </item>
         /// </list>
-        /// <item>
-        /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtScopeResourceArmMockingExtension.GetMarketplaces(string,int?,string,CancellationToken)"/> instead.</description>
-        /// </item>
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="scope"> The scope that the resource will apply against. </param>
@@ -284,10 +272,6 @@ namespace MgmtScopeResource
         /// <description>Marketplaces_List</description>
         /// </item>
         /// </list>
-        /// <item>
-        /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtScopeResourceArmMockingExtension.GetMarketplaces(string,int?,string,CancellationToken)"/> instead.</description>
-        /// </item>
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="scope"> The scope that the resource will apply against. </param>
@@ -660,10 +644,6 @@ namespace MgmtScopeResource
         /// <description>ResourceLinks_ListAtSubscription</description>
         /// </item>
         /// </list>
-        /// <item>
-        /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtScopeResourceSubscriptionMockingExtension.GetResourceLinks(string,CancellationToken)"/> instead.</description>
-        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="filter"> The filter to apply on the list resource links operation. The supported filter for list resource links is targetId. For example, $filter=targetId eq {value}. </param>
@@ -686,10 +666,6 @@ namespace MgmtScopeResource
         /// <description>ResourceLinks_ListAtSubscription</description>
         /// </item>
         /// </list>
-        /// <item>
-        /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtScopeResourceSubscriptionMockingExtension.GetResourceLinks(string,CancellationToken)"/> instead.</description>
-        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="filter"> The filter to apply on the list resource links operation. The supported filter for list resource links is targetId. For example, $filter=targetId eq {value}. </param>
@@ -824,10 +800,6 @@ namespace MgmtScopeResource
         /// <description>Deployments_CalculateTemplateHash</description>
         /// </item>
         /// </list>
-        /// <item>
-        /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtScopeResourceTenantMockingExtension.CalculateTemplateHashDeployment(BinaryData,CancellationToken)"/> instead.</description>
-        /// </item>
         /// </summary>
         /// <param name="tenantResource"> The <see cref="TenantResource" /> instance the method will execute against. </param>
         /// <param name="template"> The template provided to calculate hash. </param>
@@ -850,10 +822,6 @@ namespace MgmtScopeResource
         /// <description>Deployments_CalculateTemplateHash</description>
         /// </item>
         /// </list>
-        /// <item>
-        /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtScopeResourceTenantMockingExtension.CalculateTemplateHashDeployment(BinaryData,CancellationToken)"/> instead.</description>
-        /// </item>
         /// </summary>
         /// <param name="tenantResource"> The <see cref="TenantResource" /> instance the method will execute against. </param>
         /// <param name="template"> The template provided to calculate hash. </param>

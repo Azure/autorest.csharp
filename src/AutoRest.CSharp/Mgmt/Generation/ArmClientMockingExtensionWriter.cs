@@ -82,7 +82,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             {
                 var requestPaths = clientOperation.Select(restOperation => restOperation.RequestPath);
                 var scopeResourceTypes = requestPaths.Select(requestPath => requestPath.GetParameterizedScopeResourceTypes() ?? Enumerable.Empty<ResourceTypeSegment>()).SelectMany(types => types).Distinct();
-                var scopeTypes = ArmClientExtensionWriter.GetScopeTypeStrings(scopeResourceTypes);
+                var scopeTypes = ResourceTypeBuilder.GetScopeTypeStrings(scopeResourceTypes);
 
                 WriteScopeResourceTypesValidation(_scopeParameter.Name, scopeTypes);
 
@@ -98,7 +98,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         /// <param name="signature"></param>
         protected override void WriteSingletonResourceEntry(Resource resource, SingletonResourceSuffix singletonResourceIdSuffix, MethodSignature signature)
         {
-            var scopeTypes = ArmClientExtensionWriter.GetScopeTypeStrings(resource.RequestPath.GetParameterizedScopeResourceTypes());
+            var scopeTypes = ResourceTypeBuilder.GetScopeTypeStrings(resource.RequestPath.GetParameterizedScopeResourceTypes());
             WriteScopeResourceTypesValidation(_scopeParameter.Name, scopeTypes);
 
             _writer.Line($"return new {resource.Type.Name}({ArmClientReference}, {singletonResourceIdSuffix.BuildResourceIdentifier($"{MgmtTypeProvider.ScopeParameter.Name}")});");
@@ -111,7 +111,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         /// <param name="signature"></param>
         protected override void WriteResourceCollectionEntry(ResourceCollection resourceCollection, MethodSignature signature)
         {
-            var scopeTypes = ArmClientExtensionWriter.GetScopeTypeStrings(resourceCollection.RequestPath.GetParameterizedScopeResourceTypes());
+            var scopeTypes = ResourceTypeBuilder.GetScopeTypeStrings(resourceCollection.RequestPath.GetParameterizedScopeResourceTypes());
             WriteScopeResourceTypesValidation(_scopeParameter.Name, scopeTypes);
 
             // we cannot use GetCachedClient here because the Id of this instance will never change.

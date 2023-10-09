@@ -30,14 +30,24 @@ namespace AutoRest.CSharp.Mgmt.Models
     {
         private const int PropertyBagThreshold = 5;
         private readonly Parameter? _extensionParameter;
-        public static MgmtClientOperation? FromOperations(IReadOnlyList<MgmtRestOperation> operations, FormattableString idVariableName)
+        public static MgmtClientOperation? FromOperations(IReadOnlyList<MgmtRestOperation> operations, FormattableString idVariableName, Parameter? extensionParameter = null, bool isConvenientOperation = false)
         {
             if (operations.Count > 0)
             {
-                return new MgmtClientOperation(operations.OrderBy(operation => operation.Name).ToArray(), idVariableName, extensionParameter: null);
+                return new MgmtClientOperation(operations.OrderBy(operation => operation.Name).ToArray(), idVariableName, extensionParameter, isConvenientOperation);
             }
 
             return null;
+        }
+
+        public static MgmtClientOperation FromOperation(MgmtRestOperation operation, FormattableString idVariableName, Parameter? extensionParameter = null, bool isConvenientOperation = false)
+        {
+            return new MgmtClientOperation(new List<MgmtRestOperation> { operation }, idVariableName, extensionParameter, isConvenientOperation);
+        }
+
+        public static MgmtClientOperation FromClientOperation(MgmtClientOperation other, FormattableString idVariableName, Parameter? extensionParameter = null, bool isConvenientOperation = false, IReadOnlyList<Parameter>? parameterOverride = null)
+        {
+            return new MgmtClientOperation(other._operations, idVariableName, extensionParameter, isConvenientOperation, parameterOverride);
         }
 
         internal FormattableString IdVariableName { get; }
@@ -54,10 +64,6 @@ namespace AutoRest.CSharp.Mgmt.Models
         public IReadOnlyList<Parameter> MethodParameters => _methodParameters ??= EnsureMethodParameters();
 
         public IReadOnlyList<Parameter> PropertyBagUnderlyingParameters => IsPropertyBagOperation ? _passThroughParams : Array.Empty<Parameter>();
-        public static MgmtClientOperation FromOperation(MgmtRestOperation operation, FormattableString idVariableName, Parameter? extensionParameter = null, bool isConvenientOperation = false)
-        {
-            return new MgmtClientOperation(new List<MgmtRestOperation> { operation }, idVariableName, extensionParameter, isConvenientOperation);
-        }
 
         private readonly IReadOnlyList<MgmtRestOperation> _operations;
 
@@ -67,6 +73,11 @@ namespace AutoRest.CSharp.Mgmt.Models
             _extensionParameter = extensionParameter;
             IdVariableName = idVariableName;
             IsConvenientOperation = isConvenientOperation;
+        }
+
+        private MgmtClientOperation(IReadOnlyList<MgmtRestOperation> operations, FormattableString idVariableName, Parameter? extensionParameter, bool isConvenientOperation = false, IReadOnlyList<Parameter>? parameterOverride = null) : this(operations, idVariableName, extensionParameter, isConvenientOperation)
+        {
+            _methodParameters = parameterOverride;
         }
 
         public bool IsConvenientOperation { get; }
