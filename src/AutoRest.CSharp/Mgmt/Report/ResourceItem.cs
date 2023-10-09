@@ -23,7 +23,11 @@ namespace AutoRest.CSharp.Mgmt.Report
                 resource.AllOperations.SelectMany(cop => cop.Select(rop => rop.ContextualPath.ToString())).Distinct().ToList();
             this.RequestPath = resource.RequestPath.ToString();
             this.IsNonResource = !resource.OperationSet.IsResource();
-            this.Operations = resource.AllOperations.ToDictionary(op => op.MethodSignature.Name, op => op.Select(mrop => mrop.OperationId).ToList());
+            this.Operations = resource.AllOperations
+                .GroupBy(op => op.MethodSignature.Name)
+                .ToDictionary(
+                    g => g.Key,
+                    g => g.SelectMany(op => op.Select(mrop => mrop.OperationId)).Distinct().ToList());
             // assume there is no circle in resource hirachy. TODO: handle it if it's not true
             this.ChildResources = resource.ChildResources.ToDictionary(r => r.ResourceName, r => new ResourceItem(r));
         }

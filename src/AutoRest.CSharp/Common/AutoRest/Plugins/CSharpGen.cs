@@ -67,7 +67,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                     AutoRestLogger.Warning($"No usage transform detected: {t}").Wait();
             });
             string report = MgmtReport.Instance.GenerateReport();
-            project.AddPlainFiles("mgmt-codegen-report.log", report);
+            project.AddPlainFiles("_mgmt-codegen-report.log", report);
         }
 
         public async Task<GeneratedCodeWorkspace> ExecuteAsync(InputNamespace rootNamespace)
