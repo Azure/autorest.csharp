@@ -89,7 +89,7 @@ namespace PetStore.Tests
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             PetStoreClient client = CreatePetStoreClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
                 age = 1234,
@@ -115,7 +115,7 @@ namespace PetStore.Tests
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             PetStoreClient client = CreatePetStoreClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
                 tag = "<tag>",

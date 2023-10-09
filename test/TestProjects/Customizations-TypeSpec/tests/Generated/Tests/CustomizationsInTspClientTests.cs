@@ -29,7 +29,7 @@ namespace CustomizationsInTsp.Tests
         {
             CustomizationsInTspClient client = CreateCustomizationsInTspClient();
 
-            RequestContent content = RequestContent.Create(new object());
+            using RequestContent content = RequestContent.Create(new object());
             Response response = await client.RoundTripAsync(content);
         }
 
@@ -49,7 +49,7 @@ namespace CustomizationsInTsp.Tests
         {
             CustomizationsInTspClient client = CreateCustomizationsInTspClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 propertyExtensibleEnum = "Monday",
                 propertyModelToMakeInternal = new

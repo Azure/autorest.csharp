@@ -70,7 +70,7 @@ namespace ModelsTypeSpec.Tests
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = CreateModelsTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 requiredString = "<requiredString>",
                 requiredInt = 1234,
@@ -159,7 +159,7 @@ default
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = CreateModelsTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 requiredString = "<requiredString>",
                 requiredInt = 1234,
@@ -284,7 +284,7 @@ default
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = CreateModelsTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 requiredString = "<requiredString>",
                 requiredInt = 1234,
@@ -373,7 +373,7 @@ default
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = CreateModelsTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 requiredString = "<requiredString>",
                 requiredInt = 1234,
@@ -498,7 +498,7 @@ default
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = CreateModelsTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new object());
+            using RequestContent content = RequestContent.Create(new object());
             Response response = await client.InputToRoundTripOptionalAsync(content);
         }
 
@@ -520,7 +520,7 @@ default
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = CreateModelsTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 optionalString = "<optionalString>",
                 optionalInt = 1234,
@@ -640,7 +640,7 @@ default
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = CreateModelsTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 requiredString = "<requiredString>",
                 requiredInt = 1234,
@@ -738,7 +738,7 @@ default
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = CreateModelsTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 requiredString = "<requiredString>",
                 requiredInt = 1234,
@@ -874,7 +874,7 @@ default
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = CreateModelsTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 message = "<message>",
             });
@@ -899,7 +899,7 @@ default
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = CreateModelsTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 message = "<message>",
             });
@@ -927,7 +927,7 @@ default
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = CreateModelsTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 message = "<message>",
             });
@@ -952,7 +952,7 @@ default
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = CreateModelsTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 message = "<message>",
             });
@@ -1020,7 +1020,7 @@ default
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = CreateModelsTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 requiredList = new object[]
             {
@@ -1070,7 +1070,7 @@ default
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = CreateModelsTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 requiredList = new object[]
             {
@@ -1200,7 +1200,7 @@ default
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = CreateModelsTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 kind = "Int32Values",
                 values = new object[]
@@ -1231,7 +1231,7 @@ default
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = CreateModelsTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 kind = "Int32Values",
                 values = new object[]

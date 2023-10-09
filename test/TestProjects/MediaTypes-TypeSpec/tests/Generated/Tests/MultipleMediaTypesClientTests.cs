@@ -29,7 +29,7 @@ namespace MultipleMediaTypes.Tests
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             MultipleMediaTypesClient client = CreateMultipleMediaTypesClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new object());
+            using RequestContent content = RequestContent.Create(new object());
             Response response = await client.OneBinaryBodyTwoContentTypesAsync(content, new ContentType("application/json"));
         }
 
@@ -50,7 +50,7 @@ namespace MultipleMediaTypes.Tests
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             MultipleMediaTypesClient client = CreateMultipleMediaTypesClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new object());
+            using RequestContent content = RequestContent.Create(new object());
             Response response = await client.OneBinaryBodyTwoContentTypesAsync(content, new ContentType("application/json"));
         }
 
@@ -71,7 +71,7 @@ namespace MultipleMediaTypes.Tests
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             MultipleMediaTypesClient client = CreateMultipleMediaTypesClient(endpoint);
 
-            RequestContent content = RequestContent.Create("<body>");
+            using RequestContent content = RequestContent.Create("<body>");
             Response response = await client.OneStringBodyThreeContentTypesAsync(content, new ContentType("application/json"));
         }
 
@@ -92,7 +92,7 @@ namespace MultipleMediaTypes.Tests
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             MultipleMediaTypesClient client = CreateMultipleMediaTypesClient(endpoint);
 
-            RequestContent content = RequestContent.Create("<body>");
+            using RequestContent content = RequestContent.Create("<body>");
             Response response = await client.OneStringBodyThreeContentTypesAsync(content, new ContentType("application/json"));
         }
 
@@ -113,7 +113,7 @@ namespace MultipleMediaTypes.Tests
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             MultipleMediaTypesClient client = CreateMultipleMediaTypesClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 id = "<id>",
             });
@@ -138,7 +138,7 @@ namespace MultipleMediaTypes.Tests
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             MultipleMediaTypesClient client = CreateMultipleMediaTypesClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 id = "<id>",
             });

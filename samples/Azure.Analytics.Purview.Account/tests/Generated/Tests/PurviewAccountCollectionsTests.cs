@@ -51,7 +51,7 @@ namespace Azure.Analytics.Purview.Account.Tests
             TokenCredential credential = new DefaultAzureCredential();
             PurviewAccountCollections client = CreatePurviewAccountsClient(endpoint, credential).GetCollectionsClient("<CollectionName>");
 
-            RequestContent content = RequestContent.Create(new object());
+            using RequestContent content = RequestContent.Create(new object());
             Response response = await client.CreateOrUpdateCollectionAsync(content);
         }
 
@@ -63,7 +63,7 @@ namespace Azure.Analytics.Purview.Account.Tests
             TokenCredential credential = new DefaultAzureCredential();
             PurviewAccountCollections client = CreatePurviewAccountsClient(endpoint, credential).GetCollectionsClient("<CollectionName>");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 description = "<description>",
                 friendlyName = "<friendlyName>",

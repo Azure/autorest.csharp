@@ -196,7 +196,7 @@ namespace Azure.AI.DocumentTranslation.Tests
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             DocumentTranslationClient client = CreateDocumentTranslationClient("<Endpoint>", credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 inputs = new object[]
             {
@@ -227,7 +227,7 @@ language = "<language>",
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             DocumentTranslationClient client = CreateDocumentTranslationClient("<Endpoint>", credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 inputs = new object[]
             {

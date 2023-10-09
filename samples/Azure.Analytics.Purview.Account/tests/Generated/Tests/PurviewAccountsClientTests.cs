@@ -51,7 +51,7 @@ namespace Azure.Analytics.Purview.Account.Tests
             TokenCredential credential = new DefaultAzureCredential();
             PurviewAccountsClient client = CreatePurviewAccountsClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new object());
+            using RequestContent content = RequestContent.Create(new object());
             Response response = await client.UpdateAccountPropertiesAsync(content);
         }
 
@@ -63,7 +63,7 @@ namespace Azure.Analytics.Purview.Account.Tests
             TokenCredential credential = new DefaultAzureCredential();
             PurviewAccountsClient client = CreatePurviewAccountsClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 friendlyName = "<friendlyName>",
             });
@@ -100,7 +100,7 @@ namespace Azure.Analytics.Purview.Account.Tests
             TokenCredential credential = new DefaultAzureCredential();
             PurviewAccountsClient client = CreatePurviewAccountsClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new object());
+            using RequestContent content = RequestContent.Create(new object());
             Response response = await client.RegenerateAccessKeyAsync(content);
         }
 
@@ -112,7 +112,7 @@ namespace Azure.Analytics.Purview.Account.Tests
             TokenCredential credential = new DefaultAzureCredential();
             PurviewAccountsClient client = CreatePurviewAccountsClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 keyType = "PrimaryAtlasKafkaKey",
             });

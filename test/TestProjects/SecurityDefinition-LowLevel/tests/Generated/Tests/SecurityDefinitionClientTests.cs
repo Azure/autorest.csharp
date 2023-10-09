@@ -29,7 +29,7 @@ namespace SecurityDefinition_LowLevel.Tests
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             SecurityDefinitionClient client = CreateSecurityDefinitionClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new object());
+            using RequestContent content = RequestContent.Create(new object());
             Response response = await client.OperationAsync(content);
         }
 
@@ -41,7 +41,7 @@ namespace SecurityDefinition_LowLevel.Tests
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             SecurityDefinitionClient client = CreateSecurityDefinitionClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 Code = "<Code>",
                 Status = "<Status>",

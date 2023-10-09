@@ -29,7 +29,7 @@ namespace Accessibility_LowLevel.Tests
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AccessibilityClient client = CreateAccessibilityClient(endpoint, credential);
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Response response = await client.OperationAsync(content);
         }
 
@@ -41,7 +41,7 @@ namespace Accessibility_LowLevel.Tests
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AccessibilityClient client = CreateAccessibilityClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create("<body>");
+            using RequestContent content = RequestContent.Create("<body>");
             Response response = await client.OperationAsync(content);
         }
     }

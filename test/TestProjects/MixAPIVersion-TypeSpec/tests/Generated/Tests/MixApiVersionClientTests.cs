@@ -68,7 +68,7 @@ namespace MixApiVersion.Tests
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             MixApiVersionClient client = CreateMixApiVersionClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 age = 1234,
             });
@@ -82,7 +82,7 @@ namespace MixApiVersion.Tests
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             MixApiVersionClient client = CreateMixApiVersionClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 tag = "<tag>",
                 age = 1234,

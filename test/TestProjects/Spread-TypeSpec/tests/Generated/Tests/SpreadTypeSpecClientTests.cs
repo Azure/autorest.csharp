@@ -29,7 +29,7 @@ namespace SpreadTypeSpec.Tests
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SpreadTypeSpecClient client = CreateSpreadTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
                 age = 1234,
@@ -55,7 +55,7 @@ namespace SpreadTypeSpec.Tests
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SpreadTypeSpecClient client = CreateSpreadTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
                 age = 1234,
@@ -81,7 +81,7 @@ namespace SpreadTypeSpec.Tests
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SpreadTypeSpecClient client = CreateSpreadTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
                 age = 1234,
@@ -106,7 +106,7 @@ namespace SpreadTypeSpec.Tests
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SpreadTypeSpecClient client = CreateSpreadTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
                 age = 1234,
@@ -131,7 +131,7 @@ namespace SpreadTypeSpec.Tests
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SpreadTypeSpecClient client = CreateSpreadTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
                 age = 1234,
@@ -156,7 +156,7 @@ namespace SpreadTypeSpec.Tests
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SpreadTypeSpecClient client = CreateSpreadTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
                 age = 1234,
@@ -181,7 +181,7 @@ namespace SpreadTypeSpec.Tests
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SpreadTypeSpecClient client = CreateSpreadTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
                 age = 1234,
@@ -207,7 +207,7 @@ namespace SpreadTypeSpec.Tests
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SpreadTypeSpecClient client = CreateSpreadTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
                 age = 1234,
@@ -233,7 +233,7 @@ namespace SpreadTypeSpec.Tests
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SpreadTypeSpecClient client = CreateSpreadTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
                 age = 1234,
@@ -258,7 +258,7 @@ namespace SpreadTypeSpec.Tests
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SpreadTypeSpecClient client = CreateSpreadTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
                 age = 1234,
@@ -283,7 +283,7 @@ namespace SpreadTypeSpec.Tests
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SpreadTypeSpecClient client = CreateSpreadTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
                 items = new object[]
@@ -311,7 +311,7 @@ namespace SpreadTypeSpec.Tests
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SpreadTypeSpecClient client = CreateSpreadTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
                 color = "<color>",
@@ -345,7 +345,7 @@ namespace SpreadTypeSpec.Tests
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SpreadTypeSpecClient client = CreateSpreadTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 requiredStringList = new object[]
             {
@@ -372,7 +372,7 @@ namespace SpreadTypeSpec.Tests
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SpreadTypeSpecClient client = CreateSpreadTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 requiredStringList = new object[]
             {

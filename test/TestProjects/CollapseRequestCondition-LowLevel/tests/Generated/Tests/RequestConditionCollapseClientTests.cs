@@ -29,7 +29,7 @@ namespace CollapseRequestCondition_LowLevel.Tests
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             RequestConditionCollapseClient client = CreateRequestConditionCollapseClient(endpoint, credential);
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Response response = await client.CollapsePutAsync(content);
         }
 
@@ -41,7 +41,7 @@ namespace CollapseRequestCondition_LowLevel.Tests
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             RequestConditionCollapseClient client = CreateRequestConditionCollapseClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create("<body>");
+            using RequestContent content = RequestContent.Create("<body>");
             Response response = await client.CollapsePutAsync(content, requestConditions: null);
         }
 

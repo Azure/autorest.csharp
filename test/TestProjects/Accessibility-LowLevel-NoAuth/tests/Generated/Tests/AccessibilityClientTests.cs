@@ -28,7 +28,7 @@ namespace Accessibility_LowLevel_NoAuth.Tests
             Uri endpoint = null;
             AccessibilityClient client = CreateAccessibilityClient(endpoint);
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Response response = await client.OperationAsync(content);
         }
 
@@ -39,7 +39,7 @@ namespace Accessibility_LowLevel_NoAuth.Tests
             Uri endpoint = null;
             AccessibilityClient client = CreateAccessibilityClient(endpoint);
 
-            RequestContent content = RequestContent.Create("<body>");
+            using RequestContent content = RequestContent.Create("<body>");
             Response response = await client.OperationAsync(content);
         }
     }

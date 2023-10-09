@@ -30,7 +30,7 @@ namespace AnomalyDetector.Tests
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = CreateAnomalyDetectorClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 series = new object[]
             {
@@ -66,7 +66,7 @@ new TimeSeriesPoint(123.45F)
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = CreateAnomalyDetectorClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 series = new object[]
             {
@@ -122,7 +122,7 @@ Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = CreateAnomalyDetectorClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 series = new object[]
             {
@@ -158,7 +158,7 @@ new TimeSeriesPoint(123.45F)
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = CreateAnomalyDetectorClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 series = new object[]
             {
@@ -214,7 +214,7 @@ Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = CreateAnomalyDetectorClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 series = new object[]
             {
@@ -251,7 +251,7 @@ new TimeSeriesPoint(123.45F)
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = CreateAnomalyDetectorClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 series = new object[]
             {
@@ -346,7 +346,7 @@ Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = CreateAnomalyDetectorClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 dataSource = "<dataSource>",
                 startTime = "2022-05-10T14:57:31.2311892-04:00",
@@ -375,7 +375,7 @@ Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = CreateAnomalyDetectorClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 dataSource = "<dataSource>",
                 dataSchema = "OneTable",
@@ -543,7 +543,7 @@ LastTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = CreateAnomalyDetectorClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 dataSource = "http://localhost:3000",
                 topContributorCount = 1234,
@@ -573,7 +573,7 @@ LastTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = CreateAnomalyDetectorClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 dataSource = "http://localhost:3000",
                 topContributorCount = 1234,
@@ -603,7 +603,7 @@ LastTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = CreateAnomalyDetectorClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 variables = new object[]
             {
@@ -648,7 +648,7 @@ new VariableValues("<variable>", new string[]{"<timestamps>"}, new float[]{123.4
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = CreateAnomalyDetectorClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 variables = new object[]
             {

@@ -31,7 +31,7 @@ namespace BodyAndPath_LowLevel.Tests
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             BodyAndPathClient client = CreateBodyAndPathClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new object());
+            using RequestContent content = RequestContent.Create(new object());
             Response response = await client.CreateAsync("<itemName>", content);
         }
 
@@ -43,7 +43,7 @@ namespace BodyAndPath_LowLevel.Tests
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             BodyAndPathClient client = CreateBodyAndPathClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new object());
+            using RequestContent content = RequestContent.Create(new object());
             Response response = await client.CreateAsync("<itemName>", content);
         }
 
@@ -55,7 +55,7 @@ namespace BodyAndPath_LowLevel.Tests
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             BodyAndPathClient client = CreateBodyAndPathClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(File.OpenRead("<filePath>"));
+            using RequestContent content = RequestContent.Create(File.OpenRead("<filePath>"));
             Response response = await client.CreateStreamAsync("<itemNameStream>", content, new ContentType("application/json"));
         }
 
@@ -67,7 +67,7 @@ namespace BodyAndPath_LowLevel.Tests
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             BodyAndPathClient client = CreateBodyAndPathClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(File.OpenRead("<filePath>"));
+            using RequestContent content = RequestContent.Create(File.OpenRead("<filePath>"));
             Response response = await client.CreateStreamAsync("<itemNameStream>", content, new ContentType("application/json"), excluded: new string[] { "<excluded>" });
         }
 
@@ -79,7 +79,7 @@ namespace BodyAndPath_LowLevel.Tests
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             BodyAndPathClient client = CreateBodyAndPathClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new object());
+            using RequestContent content = RequestContent.Create(new object());
             Response response = await client.CreateEnumAsync("current", "latest", content);
         }
 
@@ -91,7 +91,7 @@ namespace BodyAndPath_LowLevel.Tests
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             BodyAndPathClient client = CreateBodyAndPathClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new object());
+            using RequestContent content = RequestContent.Create(new object());
             Response response = await client.CreateEnumAsync("current", "latest", content);
         }
 
@@ -147,7 +147,7 @@ namespace BodyAndPath_LowLevel.Tests
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             BodyAndPathClient client = CreateBodyAndPathClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new object());
+            using RequestContent content = RequestContent.Create(new object());
             Response response = await client.UpdateAsync("<item3>", "<item2>", "value", "<item4>", content);
         }
 
@@ -159,7 +159,7 @@ namespace BodyAndPath_LowLevel.Tests
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             BodyAndPathClient client = CreateBodyAndPathClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>
+            using RequestContent content = RequestContent.Create(new Dictionary<string, object>
             {
                 ["invalid-int-name"] = 1234
             });

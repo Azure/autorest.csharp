@@ -74,7 +74,7 @@ namespace FirstTestTypeSpec.Tests
             AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
                 requiredUnion = "<requiredUnion>",
@@ -99,7 +99,7 @@ namespace FirstTestTypeSpec.Tests
             AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
                 requiredUnion = "<requiredUnion>",
@@ -132,7 +132,7 @@ namespace FirstTestTypeSpec.Tests
             AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
                 requiredUnion = "<requiredUnion>",
@@ -157,7 +157,7 @@ namespace FirstTestTypeSpec.Tests
             AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
                 requiredUnion = "<requiredUnion>",
@@ -190,7 +190,7 @@ namespace FirstTestTypeSpec.Tests
             AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
             });
@@ -217,7 +217,7 @@ namespace FirstTestTypeSpec.Tests
             AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
             });
@@ -266,7 +266,7 @@ namespace FirstTestTypeSpec.Tests
             AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 sourceUrl = "http://localhost:3000",
                 guid = "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a",
@@ -294,7 +294,7 @@ namespace FirstTestTypeSpec.Tests
             AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 sourceUrl = "http://localhost:3000",
                 guid = "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a",
@@ -322,7 +322,7 @@ namespace FirstTestTypeSpec.Tests
             AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
             });
@@ -349,7 +349,7 @@ namespace FirstTestTypeSpec.Tests
             AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
             });
@@ -420,7 +420,7 @@ namespace FirstTestTypeSpec.Tests
             AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create("<body>");
+            using RequestContent content = RequestContent.Create("<body>");
             Response response = await client.StringBodyAsync(content);
         }
 
@@ -443,7 +443,7 @@ namespace FirstTestTypeSpec.Tests
             AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create("<body>");
+            using RequestContent content = RequestContent.Create("<body>");
             Response response = await client.StringBodyAsync(content);
         }
 
@@ -466,7 +466,7 @@ namespace FirstTestTypeSpec.Tests
             AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(true);
+            using RequestContent content = RequestContent.Create(true);
             Response response = await client.BoolBodyAsync(content);
         }
 
@@ -489,7 +489,7 @@ namespace FirstTestTypeSpec.Tests
             AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(true);
+            using RequestContent content = RequestContent.Create(true);
             Response response = await client.BoolBodyAsync(content);
         }
 
@@ -512,7 +512,7 @@ namespace FirstTestTypeSpec.Tests
             AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create("2022-05-10T14:57:31.2311892-04:00");
+            using RequestContent content = RequestContent.Create("2022-05-10T14:57:31.2311892-04:00");
             Response response = await client.DateTimeBodyAsync(content);
         }
 
@@ -535,7 +535,7 @@ namespace FirstTestTypeSpec.Tests
             AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create("2022-05-10T14:57:31.2311892-04:00");
+            using RequestContent content = RequestContent.Create("2022-05-10T14:57:31.2311892-04:00");
             Response response = await client.DateTimeBodyAsync(content);
         }
 
@@ -668,7 +668,7 @@ namespace FirstTestTypeSpec.Tests
             AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 requiredString = "<requiredString>",
                 requiredInt = 1234,
@@ -717,7 +717,7 @@ namespace FirstTestTypeSpec.Tests
             AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 requiredString = "<requiredString>",
                 requiredInt = 1234,
@@ -800,7 +800,7 @@ namespace FirstTestTypeSpec.Tests
             AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 requiredString = "<requiredString>",
                 requiredInt = 1234,
@@ -849,7 +849,7 @@ namespace FirstTestTypeSpec.Tests
             AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 requiredString = "<requiredString>",
                 requiredInt = 1234,
@@ -954,7 +954,7 @@ namespace FirstTestTypeSpec.Tests
             AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
                 requiredUnion = "<requiredUnion>",
@@ -979,7 +979,7 @@ namespace FirstTestTypeSpec.Tests
             AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
                 requiredUnion = "<requiredUnion>",

@@ -63,7 +63,7 @@ namespace ConvenienceInCadl.Tests
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 id = "<id>",
             });
@@ -86,7 +86,7 @@ namespace ConvenienceInCadl.Tests
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 id = "<id>",
             });
@@ -127,7 +127,7 @@ namespace ConvenienceInCadl.Tests
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 id = "<id>",
             });
@@ -140,7 +140,7 @@ namespace ConvenienceInCadl.Tests
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 id = "<id>",
             });
@@ -153,7 +153,7 @@ namespace ConvenienceInCadl.Tests
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Response response = await client.NoConvenienceOptionalBodyAsync(content);
         }
 
@@ -163,7 +163,7 @@ namespace ConvenienceInCadl.Tests
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 id = "<id>",
             });
@@ -392,7 +392,7 @@ namespace ConvenienceInCadl.Tests
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Response response = await client.ProtocolOptionalModelAsync(content);
         }
 
@@ -411,7 +411,7 @@ namespace ConvenienceInCadl.Tests
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 id = "<id>",
             });
@@ -434,7 +434,7 @@ namespace ConvenienceInCadl.Tests
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 id = "<id>",
             });
@@ -457,7 +457,7 @@ namespace ConvenienceInCadl.Tests
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 id = "<id>",
             });
@@ -624,7 +624,7 @@ namespace ConvenienceInCadl.Tests
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Response response = await client.ConvenienceOptionalModelWithOptionalAsync(content);
         }
 
@@ -643,7 +643,7 @@ namespace ConvenienceInCadl.Tests
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 id = "<id>",
             });
@@ -666,7 +666,7 @@ namespace ConvenienceInCadl.Tests
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 id = "<id>",
             });
@@ -689,7 +689,7 @@ namespace ConvenienceInCadl.Tests
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 id = "<id>",
             });
@@ -712,7 +712,7 @@ namespace ConvenienceInCadl.Tests
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Response response = await client.ConvenienceOptionalModelWithRequiredAsync(content);
         }
 
@@ -731,7 +731,7 @@ namespace ConvenienceInCadl.Tests
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 id = "<id>",
             });
@@ -754,7 +754,7 @@ namespace ConvenienceInCadl.Tests
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 id = "<id>",
             });
@@ -777,7 +777,7 @@ namespace ConvenienceInCadl.Tests
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 id = "<id>",
             });

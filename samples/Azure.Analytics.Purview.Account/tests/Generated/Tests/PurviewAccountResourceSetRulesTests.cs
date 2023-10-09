@@ -51,7 +51,7 @@ namespace Azure.Analytics.Purview.Account.Tests
             TokenCredential credential = new DefaultAzureCredential();
             PurviewAccountResourceSetRules client = CreatePurviewAccountsClient(endpoint, credential).GetResourceSetRulesClient();
 
-            RequestContent content = RequestContent.Create(new object());
+            using RequestContent content = RequestContent.Create(new object());
             Response response = await client.CreateOrUpdateResourceSetRuleAsync(content);
         }
 
@@ -63,7 +63,7 @@ namespace Azure.Analytics.Purview.Account.Tests
             TokenCredential credential = new DefaultAzureCredential();
             PurviewAccountResourceSetRules client = CreatePurviewAccountsClient(endpoint, credential).GetResourceSetRulesClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 advancedResourceSet = new
                 {

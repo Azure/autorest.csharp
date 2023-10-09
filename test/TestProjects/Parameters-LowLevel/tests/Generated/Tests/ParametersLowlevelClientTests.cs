@@ -51,7 +51,7 @@ namespace Parameters_LowLevel.Tests
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ParametersLowlevelClient client = CreateParametersLowlevelClient(endpoint, credential);
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Response response = await client.RequestBodyResponseBodyAsync(content);
         }
 
@@ -63,7 +63,7 @@ namespace Parameters_LowLevel.Tests
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ParametersLowlevelClient client = CreateParametersLowlevelClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 Code = "<Code>",
                 Status = "<Status>",
@@ -123,7 +123,7 @@ namespace Parameters_LowLevel.Tests
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ParametersLowlevelClient client = CreateParametersLowlevelClient(endpoint, credential);
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Response response = await client.RequestBodyNoResponseBodyAsync(content);
         }
 
@@ -135,7 +135,7 @@ namespace Parameters_LowLevel.Tests
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ParametersLowlevelClient client = CreateParametersLowlevelClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create("<stringBody>");
+            using RequestContent content = RequestContent.Create("<stringBody>");
             Response response = await client.RequestBodyNoResponseBodyAsync(content);
         }
 
@@ -191,7 +191,7 @@ namespace Parameters_LowLevel.Tests
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ParametersLowlevelClient client = CreateParametersLowlevelClient(endpoint, credential);
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Response response = await client.OptionalPathBodyParametersWithMixedSequenceAsync(default, "<name>", 1234, default, content);
         }
 
@@ -203,7 +203,7 @@ namespace Parameters_LowLevel.Tests
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ParametersLowlevelClient client = CreateParametersLowlevelClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 Code = "<Code>",
                 Status = "<Status>",
@@ -219,7 +219,7 @@ namespace Parameters_LowLevel.Tests
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ParametersLowlevelClient client = CreateParametersLowlevelClient(endpoint, credential);
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Response response = await client.RepeatableActionAsync(default, "<name>", content);
         }
 
@@ -231,7 +231,7 @@ namespace Parameters_LowLevel.Tests
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ParametersLowlevelClient client = CreateParametersLowlevelClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 Code = "<Code>",
                 Status = "<Status>",
