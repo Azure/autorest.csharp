@@ -8,6 +8,7 @@ This sample shows how to call GetClientRequestIdAsync.
 ClientRequestIdClient client = new ClientRequestIdClient();
 
 Response response = await client.GetClientRequestIdAsync();
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call GetClientRequestIdAsync with all request content.
@@ -15,6 +16,7 @@ This sample shows how to call GetClientRequestIdAsync with all request content.
 ClientRequestIdClient client = new ClientRequestIdClient();
 
 Response response = await client.GetClientRequestIdAsync();
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -25,6 +27,7 @@ This sample shows how to call GetClientRequestId.
 ClientRequestIdClient client = new ClientRequestIdClient();
 
 Response response = client.GetClientRequestId();
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call GetClientRequestId with all request content.
@@ -32,6 +35,7 @@ This sample shows how to call GetClientRequestId with all request content.
 ClientRequestIdClient client = new ClientRequestIdClient();
 
 Response response = client.GetClientRequestId();
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>

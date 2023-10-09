@@ -8,6 +8,7 @@ This sample shows how to call ForAsync.
 Operation client = new SpecialWordsClient().GetOperationClient(apiVersion: "1.0.0");
 
 Response response = await client.ForAsync();
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call ForAsync with all request content.
@@ -15,6 +16,7 @@ This sample shows how to call ForAsync with all request content.
 Operation client = new SpecialWordsClient().GetOperationClient(apiVersion: "1.0.0");
 
 Response response = await client.ForAsync();
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -25,6 +27,7 @@ This sample shows how to call For.
 Operation client = new SpecialWordsClient().GetOperationClient(apiVersion: "1.0.0");
 
 Response response = client.For();
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call For with all request content.
@@ -32,6 +35,7 @@ This sample shows how to call For with all request content.
 Operation client = new SpecialWordsClient().GetOperationClient(apiVersion: "1.0.0");
 
 Response response = client.For();
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>

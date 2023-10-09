@@ -17,56 +17,56 @@ using _Specs_.Azure.ClientGenerator.Core.Usage.Models;
 
 namespace _Specs_.Azure.ClientGenerator.Core.Usage.Samples
 {
-    public class Samples_UsageClient
+    public partial class Samples_UsageClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_InputToInputOutput()
+        public void Example_InputToInputOutput_ShortVersion()
         {
             UsageClient client = new UsageClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
             });
             Response response = client.InputToInputOutput(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_InputToInputOutput_Async()
+        public async Task Example_InputToInputOutput_ShortVersion_Async()
         {
             UsageClient client = new UsageClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
             });
             Response response = await client.InputToInputOutputAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_InputToInputOutput_Convenience()
+        public void Example_InputToInputOutput_ShortVersion_Convenience()
         {
             UsageClient client = new UsageClient();
 
             InputModel body = new InputModel("<name>");
             Response response = client.InputToInputOutput(body);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_InputToInputOutput_Convenience_Async()
+        public async Task Example_InputToInputOutput_ShortVersion_Convenience_Async()
         {
             UsageClient client = new UsageClient();
 
             InputModel body = new InputModel("<name>");
             Response response = await client.InputToInputOutputAsync(body);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -75,11 +75,12 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage.Samples
         {
             UsageClient client = new UsageClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
             });
             Response response = client.InputToInputOutput(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -89,11 +90,12 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage.Samples
         {
             UsageClient client = new UsageClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
             });
             Response response = await client.InputToInputOutputAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -105,7 +107,6 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage.Samples
 
             InputModel body = new InputModel("<name>");
             Response response = client.InputToInputOutput(body);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -116,12 +117,11 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage.Samples
 
             InputModel body = new InputModel("<name>");
             Response response = await client.InputToInputOutputAsync(body);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_OutputToInputOutput()
+        public void Example_OutputToInputOutput_ShortVersion()
         {
             UsageClient client = new UsageClient();
 
@@ -133,7 +133,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_OutputToInputOutput_Async()
+        public async Task Example_OutputToInputOutput_ShortVersion_Async()
         {
             UsageClient client = new UsageClient();
 
@@ -145,7 +145,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_OutputToInputOutput_Convenience()
+        public void Example_OutputToInputOutput_ShortVersion_Convenience()
         {
             UsageClient client = new UsageClient();
 
@@ -154,7 +154,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_OutputToInputOutput_Convenience_Async()
+        public async Task Example_OutputToInputOutput_ShortVersion_Convenience_Async()
         {
             UsageClient client = new UsageClient();
 

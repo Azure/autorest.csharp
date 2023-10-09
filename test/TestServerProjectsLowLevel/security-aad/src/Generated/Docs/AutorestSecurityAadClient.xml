@@ -9,6 +9,7 @@ TokenCredential credential = new DefaultAzureCredential();
 AutorestSecurityAadClient client = new AutorestSecurityAadClient(credential);
 
 Response response = await client.HeadAsync();
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call HeadAsync with all request content.
@@ -17,6 +18,7 @@ TokenCredential credential = new DefaultAzureCredential();
 AutorestSecurityAadClient client = new AutorestSecurityAadClient(credential);
 
 Response response = await client.HeadAsync();
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -28,6 +30,7 @@ TokenCredential credential = new DefaultAzureCredential();
 AutorestSecurityAadClient client = new AutorestSecurityAadClient(credential);
 
 Response response = client.Head();
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Head with all request content.
@@ -36,6 +39,7 @@ TokenCredential credential = new DefaultAzureCredential();
 AutorestSecurityAadClient client = new AutorestSecurityAadClient(credential);
 
 Response response = client.Head();
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>

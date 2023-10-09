@@ -8,6 +8,7 @@ using AutoRest.TestServer.Tests.Infrastructure;
 using Azure;
 using Azure.Core;
 using FirstTestTypeSpec;
+using FirstTestTypeSpec.Models;
 using NUnit.Framework;
 
 namespace CadlRanchProjects.Tests
@@ -77,5 +78,55 @@ namespace CadlRanchProjects.Tests
             Assert.AreEqual(123.45f, result.GetProperty("optionalLiteralFloat").GetSingle());
             Assert.AreEqual(false, result.GetProperty("optionalLiteralBool").GetBoolean());
         });
+        [Test]
+         public async Task FirstTest_StringBody() => await Test(async (host) =>
+         {
+            Response response = await new FirstTestTypeSpecClient(host).StringBodyAsync("test");
+            Assert.AreEqual(204, response.Status);
+         });
+        [Test]
+        public async Task FirstTest_BoolBody() => await Test(async (host) =>
+         {
+             Response response = await new FirstTestTypeSpecClient(host).BoolBodyAsync(true);
+            Assert.AreEqual(204, response.Status);
+        });
+
+        [Test]
+        public async Task FirstTest_DateTimeBody() => await Test(async (host) =>
+        {
+            DateTimeOffset data = DateTimeOffset.Parse("2022-08-26T18:38:00.000Z");
+            Response response = await new FirstTestTypeSpecClient(host).DateTimeBodyAsync(data);
+            Assert.AreEqual(204, response.Status);
+        });
+
+        [Test]
+        public async Task FirstTest_ReturnString() => await Test(async (host) =>
+        {
+            Response<string> response = await new FirstTestTypeSpecClient(host).ReturnStringAsync();
+            Assert.AreEqual("ok", response.Value);
+        });
+
+        [Test]
+        public async Task FirstTest_ReturnUnknown() => await Test(async (host) =>
+        {
+            Response<BinaryData> response = await new FirstTestTypeSpecClient(host).ReturnUnknownAsync();
+            Assert.AreEqual("completed", response.Value.ToObjectFromJson<string>());
+        });
+
+        /*
+        [Test]
+        public async Task FirstTest_ObjectAsHeader() => await Test(async (host) =>
+        {
+            Response response = await new FirstTestTypeSpecClient(host).ObjectAsHeaderAsync(new HeadModel("key1", "key2"));
+            Assert.AreEqual(204, response.Status);
+        });
+        */
+        [Test]
+        public void TestToObjectFromJson()
+        {
+            var content = BinaryData.FromString("\"pickle\"");
+            //content.ToObjectFromJson<BinaryData>();
+            content.ToObjectFromJson<string>();
+        }
     }
 }

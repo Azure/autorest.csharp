@@ -7,20 +7,16 @@ This sample shows how to call MultiAsync.
 <code><![CDATA[
 Query client = new CollectionFormatClient().GetQueryClient(apiVersion: "1.0.0");
 
-Response response = await client.MultiAsync(new List<string>()
-{
-    "<colors>"
-});
+Response response = await client.MultiAsync(new string[] { "<colors>" });
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call MultiAsync with all parameters.
 <code><![CDATA[
 Query client = new CollectionFormatClient().GetQueryClient(apiVersion: "1.0.0");
 
-Response response = await client.MultiAsync(new List<string>()
-{
-    "<colors>"
-});
+Response response = await client.MultiAsync(new string[] { "<colors>" });
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -30,20 +26,16 @@ This sample shows how to call Multi.
 <code><![CDATA[
 Query client = new CollectionFormatClient().GetQueryClient(apiVersion: "1.0.0");
 
-Response response = client.Multi(new List<string>()
-{
-    "<colors>"
-});
+Response response = client.Multi(new string[] { "<colors>" });
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Multi with all parameters.
 <code><![CDATA[
 Query client = new CollectionFormatClient().GetQueryClient(apiVersion: "1.0.0");
 
-Response response = client.Multi(new List<string>()
-{
-    "<colors>"
-});
+Response response = client.Multi(new string[] { "<colors>" });
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -53,20 +45,16 @@ This sample shows how to call SsvAsync.
 <code><![CDATA[
 Query client = new CollectionFormatClient().GetQueryClient(apiVersion: "1.0.0");
 
-Response response = await client.SsvAsync(new List<string>()
-{
-    "<colors>"
-});
+Response response = await client.SsvAsync(new string[] { "<colors>" });
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call SsvAsync with all parameters.
 <code><![CDATA[
 Query client = new CollectionFormatClient().GetQueryClient(apiVersion: "1.0.0");
 
-Response response = await client.SsvAsync(new List<string>()
-{
-    "<colors>"
-});
+Response response = await client.SsvAsync(new string[] { "<colors>" });
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -76,20 +64,16 @@ This sample shows how to call Ssv.
 <code><![CDATA[
 Query client = new CollectionFormatClient().GetQueryClient(apiVersion: "1.0.0");
 
-Response response = client.Ssv(new List<string>()
-{
-    "<colors>"
-});
+Response response = client.Ssv(new string[] { "<colors>" });
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Ssv with all parameters.
 <code><![CDATA[
 Query client = new CollectionFormatClient().GetQueryClient(apiVersion: "1.0.0");
 
-Response response = client.Ssv(new List<string>()
-{
-    "<colors>"
-});
+Response response = client.Ssv(new string[] { "<colors>" });
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -99,20 +83,16 @@ This sample shows how to call TsvAsync.
 <code><![CDATA[
 Query client = new CollectionFormatClient().GetQueryClient(apiVersion: "1.0.0");
 
-Response response = await client.TsvAsync(new List<string>()
-{
-    "<colors>"
-});
+Response response = await client.TsvAsync(new string[] { "<colors>" });
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call TsvAsync with all parameters.
 <code><![CDATA[
 Query client = new CollectionFormatClient().GetQueryClient(apiVersion: "1.0.0");
 
-Response response = await client.TsvAsync(new List<string>()
-{
-    "<colors>"
-});
+Response response = await client.TsvAsync(new string[] { "<colors>" });
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -122,20 +102,16 @@ This sample shows how to call Tsv.
 <code><![CDATA[
 Query client = new CollectionFormatClient().GetQueryClient(apiVersion: "1.0.0");
 
-Response response = client.Tsv(new List<string>()
-{
-    "<colors>"
-});
+Response response = client.Tsv(new string[] { "<colors>" });
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Tsv with all parameters.
 <code><![CDATA[
 Query client = new CollectionFormatClient().GetQueryClient(apiVersion: "1.0.0");
 
-Response response = client.Tsv(new List<string>()
-{
-    "<colors>"
-});
+Response response = client.Tsv(new string[] { "<colors>" });
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -145,20 +121,16 @@ This sample shows how to call PipesAsync.
 <code><![CDATA[
 Query client = new CollectionFormatClient().GetQueryClient(apiVersion: "1.0.0");
 
-Response response = await client.PipesAsync(new List<string>()
-{
-    "<colors>"
-});
+Response response = await client.PipesAsync(new string[] { "<colors>" });
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PipesAsync with all parameters.
 <code><![CDATA[
 Query client = new CollectionFormatClient().GetQueryClient(apiVersion: "1.0.0");
 
-Response response = await client.PipesAsync(new List<string>()
-{
-    "<colors>"
-});
+Response response = await client.PipesAsync(new string[] { "<colors>" });
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -168,20 +140,16 @@ This sample shows how to call Pipes.
 <code><![CDATA[
 Query client = new CollectionFormatClient().GetQueryClient(apiVersion: "1.0.0");
 
-Response response = client.Pipes(new List<string>()
-{
-    "<colors>"
-});
+Response response = client.Pipes(new string[] { "<colors>" });
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Pipes with all parameters.
 <code><![CDATA[
 Query client = new CollectionFormatClient().GetQueryClient(apiVersion: "1.0.0");
 
-Response response = client.Pipes(new List<string>()
-{
-    "<colors>"
-});
+Response response = client.Pipes(new string[] { "<colors>" });
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -191,20 +159,16 @@ This sample shows how to call CsvAsync.
 <code><![CDATA[
 Query client = new CollectionFormatClient().GetQueryClient(apiVersion: "1.0.0");
 
-Response response = await client.CsvAsync(new List<string>()
-{
-    "<colors>"
-});
+Response response = await client.CsvAsync(new string[] { "<colors>" });
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call CsvAsync with all parameters.
 <code><![CDATA[
 Query client = new CollectionFormatClient().GetQueryClient(apiVersion: "1.0.0");
 
-Response response = await client.CsvAsync(new List<string>()
-{
-    "<colors>"
-});
+Response response = await client.CsvAsync(new string[] { "<colors>" });
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -214,20 +178,16 @@ This sample shows how to call Csv.
 <code><![CDATA[
 Query client = new CollectionFormatClient().GetQueryClient(apiVersion: "1.0.0");
 
-Response response = client.Csv(new List<string>()
-{
-    "<colors>"
-});
+Response response = client.Csv(new string[] { "<colors>" });
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Csv with all parameters.
 <code><![CDATA[
 Query client = new CollectionFormatClient().GetQueryClient(apiVersion: "1.0.0");
 
-Response response = client.Csv(new List<string>()
-{
-    "<colors>"
-});
+Response response = client.Csv(new string[] { "<colors>" });
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>

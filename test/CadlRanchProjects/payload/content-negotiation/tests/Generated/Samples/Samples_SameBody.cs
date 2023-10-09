@@ -15,11 +15,11 @@ using Payload.ContentNegotiation;
 
 namespace Payload.ContentNegotiation.Samples
 {
-    internal class Samples_SameBody
+    public partial class Samples_SameBody
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetAvatarAsPng()
+        public void Example_GetAvatarAsPng_ShortVersion()
         {
             SameBody client = new ContentNegotiationClient().GetSameBodyClient(apiVersion: "1.0.0");
 
@@ -31,7 +31,7 @@ namespace Payload.ContentNegotiation.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetAvatarAsPng_Async()
+        public async Task Example_GetAvatarAsPng_ShortVersion_Async()
         {
             SameBody client = new ContentNegotiationClient().GetSameBodyClient(apiVersion: "1.0.0");
 
@@ -43,7 +43,7 @@ namespace Payload.ContentNegotiation.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetAvatarAsPng_Convenience()
+        public void Example_GetAvatarAsPng_ShortVersion_Convenience()
         {
             SameBody client = new ContentNegotiationClient().GetSameBodyClient(apiVersion: "1.0.0");
 
@@ -52,7 +52,7 @@ namespace Payload.ContentNegotiation.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetAvatarAsPng_Convenience_Async()
+        public async Task Example_GetAvatarAsPng_ShortVersion_Convenience_Async()
         {
             SameBody client = new ContentNegotiationClient().GetSameBodyClient(apiVersion: "1.0.0");
 
@@ -103,7 +103,7 @@ namespace Payload.ContentNegotiation.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetAvatarAsJpeg()
+        public void Example_GetAvatarAsJpeg_ShortVersion()
         {
             SameBody client = new ContentNegotiationClient().GetSameBodyClient(apiVersion: "1.0.0");
 
@@ -115,7 +115,7 @@ namespace Payload.ContentNegotiation.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetAvatarAsJpeg_Async()
+        public async Task Example_GetAvatarAsJpeg_ShortVersion_Async()
         {
             SameBody client = new ContentNegotiationClient().GetSameBodyClient(apiVersion: "1.0.0");
 
@@ -127,7 +127,7 @@ namespace Payload.ContentNegotiation.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetAvatarAsJpeg_Convenience()
+        public void Example_GetAvatarAsJpeg_ShortVersion_Convenience()
         {
             SameBody client = new ContentNegotiationClient().GetSameBodyClient(apiVersion: "1.0.0");
 
@@ -136,7 +136,7 @@ namespace Payload.ContentNegotiation.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetAvatarAsJpeg_Convenience_Async()
+        public async Task Example_GetAvatarAsJpeg_ShortVersion_Convenience_Async()
         {
             SameBody client = new ContentNegotiationClient().GetSameBodyClient(apiVersion: "1.0.0");
 

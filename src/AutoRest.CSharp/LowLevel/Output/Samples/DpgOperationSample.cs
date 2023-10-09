@@ -7,16 +7,18 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Input.Examples;
-using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Common.Output.Expressions.Statements;
+using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
+using AutoRest.CSharp.Common.Output.Models;
+using AutoRest.CSharp.LowLevel.Extensions;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Azure;
-using NUnit.Framework;
+using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
 namespace AutoRest.CSharp.Output.Samples.Models
 {
@@ -24,42 +26,42 @@ namespace AutoRest.CSharp.Output.Samples.Models
     {
         public DpgOperationSample(LowLevelClient client, LowLevelClientMethod method, IEnumerable<InputParameterExample> inputClientParameterExamples, InputOperationExample inputOperationExample, bool isConvenienceSample, string exampleKey)
         {
-            Client = client;
-            Method = method;
+            _client = client;
+            _method = method;
             _inputClientParameterExamples = inputClientParameterExamples;
             _inputOperationExample = inputOperationExample;
-            ClientInvocationChain = GetClientInvocationChain(client);
             IsConvenienceSample = isConvenienceSample;
-            _exampleKey = exampleKey;
-            _useAllParameters = exampleKey == ExampleMockValueBuilder.MockExampleAllParameterKey; // TODO -- only work around for the response usage building.
+            ExampleKey = exampleKey;
+            IsAllParametersUsed = exampleKey == ExampleMockValueBuilder.MockExampleAllParameterKey; // TODO -- only work around for the response usage building.
             _operationMethodSignature = isConvenienceSample ? method.ConvenienceMethod!.Signature : method.ProtocolMethodSignature;
         }
 
-        private readonly string _exampleKey;
-        private readonly bool _useAllParameters;
-        private readonly IEnumerable<InputParameterExample> _inputClientParameterExamples;
-        private readonly InputOperationExample _inputOperationExample;
+        protected internal readonly IEnumerable<InputParameterExample> _inputClientParameterExamples;
+        protected internal readonly InputOperationExample _inputOperationExample;
+        protected internal readonly LowLevelClient _client;
+        protected internal readonly LowLevelClientMethod _method;
         private readonly MethodSignature _operationMethodSignature;
-
+        public bool IsAllParametersUsed { get; }
+        public string ExampleKey { get; }
         public bool IsConvenienceSample { get; }
-        public LowLevelClient Client { get; }
-        public LowLevelClientMethod Method { get; }
 
         public MethodSignature OperationMethodSignature => _operationMethodSignature;
 
-        public bool IsLongRunning => IsConvenienceSample ? Method.ConvenienceMethod!.IsLongRunning : Method.LongRunning != null;
+        public bool IsLongRunning => IsConvenienceSample ? _method.ConvenienceMethod!.IsLongRunning : _method.LongRunning != null;
 
-        public bool IsPageable => IsConvenienceSample ? Method.ConvenienceMethod!.IsPageable : Method.PagingInfo != null;
+        public bool IsPageable => IsConvenienceSample ? _method.ConvenienceMethod!.IsPageable : _method.PagingInfo != null;
 
-        public IReadOnlyList<MethodSignatureBase> ClientInvocationChain { get; }
+        private IReadOnlyList<MethodSignatureBase>? _clientInvocationChain;
+        public IReadOnlyList<MethodSignatureBase> ClientInvocationChain => _clientInvocationChain ??= GetClientInvocationChain();
 
         /// <summary>
         /// Get the methods to be called to get the client, it should be like `Client(...).GetXXClient(..).GetYYClient(..)`.
         /// It's composed of a constructor of non-subclient and a optional list of subclient factory methods.
         /// </summary>
         /// <returns></returns>
-        private static IReadOnlyList<MethodSignatureBase> GetClientInvocationChain(LowLevelClient client)
+        private IReadOnlyList<MethodSignatureBase> GetClientInvocationChain()
         {
+            var client = _client;
             var callChain = new Stack<MethodSignatureBase>();
             while (client.FactoryMethod != null)
             {
@@ -73,36 +75,43 @@ namespace AutoRest.CSharp.Output.Samples.Models
             }
             callChain.Push(client.GetEffectiveCtor()!);
 
-            return callChain.ToList();
+            return callChain.ToArray();
         }
 
-        private string GetMethodName(bool isAsync)
+        public IEnumerable<ValueExpression> GetValueExpressionsForParameters(IEnumerable<Parameter> parameters, List<MethodBodyStatement> variableDeclarationStatements)
         {
-            var builder = new StringBuilder("Example_").Append(_operationMethodSignature.Name);
-            if (_useAllParameters)
+            foreach (var parameter in parameters)
             {
-                builder.Append("_AllParameters");
-            }
-            if (IsConvenienceSample)
-            {
-                builder.Append("_Convenience");
-            }
-            if (isAsync)
-            {
-                builder.Append("_Async");
-            }
-            return builder.ToString();
-        }
+                ValueExpression parameterExpression;
+                if (ParameterValueMapping.TryGetValue(parameter.Name, out var exampleValue))
+                {
+                    // if we could get an example value out of the map, we just use it.
+                    parameterExpression = ExampleValueSnippets.GetExpression(exampleValue, parameter.SerializationFormat);
+                }
+                else
+                {
+                    // if we cannot get an example value out of the map, we should skip it, unless it is required
+                    // in the required case, we should return the default value of the type.
+                    // but we should not abuse `default` because it might cause ambiguous calls which leads to compilation errors
+                    if (parameter.IsOptionalInSignature)
+                        continue;
 
-        public MethodSignature GetExampleMethodSignature(bool isAsync) => new MethodSignature(
-            GetMethodName(isAsync),
-            null,
-            null,
-            isAsync ? MethodSignatureModifiers.Public | MethodSignatureModifiers.Async : MethodSignatureModifiers.Public,
-            isAsync ? typeof(Task) : (CSharpType?)null,
-            null,
-            Array.Empty<Parameter>(),
-            Attributes: new CSharpAttribute[] { new CSharpAttribute(typeof(TestAttribute)), new CSharpAttribute(typeof(IgnoreAttribute), "Only validating compilation of examples") });
+                    parameterExpression = parameter.Type.IsValueType && !parameter.Type.IsNullable ? Snippets.Default : Snippets.Null;
+                }
+                if (IsInlineParameter(parameter))
+                {
+                    yield return parameter.IsOptionalInSignature ? new PositionalParameterReference(parameter.Name, parameterExpression) : parameterExpression;
+                }
+                else
+                {
+                    // when it is not inline parameter, we add the declaration of the parameter into the statements, and returns the parameter name reference
+                    var parameterReference = new VariableReference(parameter.Type, parameter.Name);
+                    var declaration = NeedsDispose(parameter) ? UsingDeclare(parameterReference, parameterExpression) : Declare(parameterReference, parameterExpression);
+                    variableDeclarationStatements.Add(declaration);
+                    yield return parameter.IsOptionalInSignature ? new PositionalParameterReference(parameter.Name, parameterReference) : parameterReference; // returns the parameter name reference
+                }
+            }
+        }
 
         private Dictionary<string, InputExampleParameterValue>? _parameterValueMapping;
         public Dictionary<string, InputExampleParameterValue> ParameterValueMapping => _parameterValueMapping ??= EnsureParameterValueMapping();
@@ -126,7 +135,7 @@ namespace AutoRest.CSharp.Output.Samples.Models
                     // if this is a required parameter and we did not find the corresponding parameter in the examples, we put the null
                     if (parameter.DefaultValue == null)
                     {
-                        result.Add(parameter.Name, new InputExampleParameterValue(parameter, $"null"));
+                        result.Add(parameter.Name, new InputExampleParameterValue(parameter, Null));
                     }
                     // if it is optional, we just do not put it in the map indicates that in the invocation we could omit it
                 }
@@ -155,7 +164,7 @@ namespace AutoRest.CSharp.Output.Samples.Models
                     yield return parameter;
             }
             // then we return all the parameters on this operation
-            var parameters = _useAllParameters ?
+            var parameters = IsAllParametersUsed ?
                 _operationMethodSignature.Parameters :
                 _operationMethodSignature.Parameters.Where(p => p.DefaultValue == null);
             foreach (var parameter in parameters)
@@ -179,7 +188,7 @@ namespace AutoRest.CSharp.Output.Samples.Models
         {
             if (parameter == KnownParameters.WaitForCompletion)
             {
-                result.Add(parameter.Name, new InputExampleParameterValue(parameter, $"{typeof(WaitUntil)}.{nameof(WaitUntil.Completed)}"));
+                result.Add(parameter.Name, new InputExampleParameterValue(parameter, new TypeReference(typeof(WaitUntil)).Property(nameof(WaitUntil.Completed))));
                 return true;
             }
 
@@ -192,7 +201,7 @@ namespace AutoRest.CSharp.Output.Samples.Models
             if (parameter == KnownParameters.RequestContextRequired)
             {
                 // we need the RequestContext to disambiguiate from the convenience method - but passing in a null value is allowed.
-                result.Add(parameter.Name, new InputExampleParameterValue(parameter, $"null"));
+                result.Add(parameter.Name, new InputExampleParameterValue(parameter, Null));
                 return true;
             }
 
@@ -213,20 +222,20 @@ namespace AutoRest.CSharp.Output.Samples.Models
             if (IsSameParameter(parameter, KnownParameters.RequestConditionsParameter) || IsSameParameter(parameter, KnownParameters.MatchConditionsParameter))
             {
                 // temporarily just return null value
-                result.Add(parameter.Name, new InputExampleParameterValue(parameter, $"null"));
+                result.Add(parameter.Name, new InputExampleParameterValue(parameter, Null));
                 return true;
             }
 
             // handle credentials
             if (parameter.Type.EqualsIgnoreNullable(KnownParameters.KeyAuth.Type))
             {
-                result.Add(parameter.Name, new InputExampleParameterValue(parameter, $"new {typeof(AzureKeyCredential)}({"<key>":L})"));
+                result.Add(parameter.Name, new InputExampleParameterValue(parameter, New.Instance(typeof(AzureKeyCredential), Literal("<key>"))));
                 return true;
             }
 
             if (parameter.Type.EqualsIgnoreNullable(KnownParameters.TokenAuth.Type))
             {
-                result.Add(parameter.Name, new InputExampleParameterValue(parameter, $"new DefaultAzureCredential()"));
+                result.Add(parameter.Name, new InputExampleParameterValue(parameter, new FormattableStringToExpression($"new DefaultAzureCredential()"))); // TODO -- we have to workaround here because we do not have the Azure.Identity dependency here
                 return true;
             }
 
@@ -283,7 +292,15 @@ namespace AutoRest.CSharp.Output.Samples.Models
             return InputExampleValue.Value(InputPrimitiveType.String, $"<{parameterName}>");
         }
 
-        public bool IsInlineParameter(Parameter parameter)
+        private bool NeedsDispose(Parameter parameter)
+        {
+            if (IsSameParameter(parameter, KnownParameters.RequestContent) || IsSameParameter(parameter, KnownParameters.RequestContentNullable))
+                return true;
+
+            return false;
+        }
+
+        private bool IsInlineParameter(Parameter parameter)
         {
             if (IsSameParameter(parameter, KnownParameters.RequestContent) || IsSameParameter(parameter, KnownParameters.RequestContentNullable))
                 return false;
@@ -306,7 +323,7 @@ namespace AutoRest.CSharp.Output.Samples.Models
         private InputExampleValue GetBodyParameterValue()
         {
             // we have a request body type
-            if (Method.RequestBodyType == null)
+            if (_method.RequestBodyType == null)
                 return InputExampleValue.Null(InputPrimitiveType.Object);
 
             //if (Method.RequestBodyType is InputPrimitiveType { Kind: InputTypeKind.Stream })
@@ -321,20 +338,23 @@ namespace AutoRest.CSharp.Output.Samples.Models
             }
             // there could be multiple body parameters especially when we have a multiform content type operation
             // if we have more than one body parameters which should happen very rarely, we just search the type in all parameters we have and get the first one that matches.
-            var bodyParameterExample = _inputOperationExample.Parameters.FirstOrDefault(e => e.Parameter.Type == Method.RequestBodyType);
+            var bodyParameterExample = _inputOperationExample.Parameters.FirstOrDefault(e => e.Parameter.Type == _method.RequestBodyType);
             if (bodyParameterExample != null)
             {
                 return bodyParameterExample.ExampleValue;
             }
 
-            return InputExampleValue.Null(Method.RequestBodyType);
+            return InputExampleValue.Null(_method.RequestBodyType);
         }
 
         private static bool IsSameParameter(Parameter parameter, Parameter knownParameter)
             => parameter.Name == knownParameter.Name && parameter.Type.EqualsIgnoreNullable(knownParameter.Type);
 
-        public bool HasResponseBody => Method.ResponseBodyType != null;
-        public bool IsResponseStream => Method.ResponseBodyType is InputPrimitiveType { Kind: InputTypeKind.Stream };
+        public bool HasResponseBody => _method.ResponseBodyType != null;
+        public bool IsResponseStream => _method.ResponseBodyType is InputPrimitiveType { Kind: InputTypeKind.Stream };
+
+        private InputType? _resultType;
+        public InputType? ResultType => _resultType ??= GetEffectiveResponseType();
 
         /// <summary>
         /// This method returns the Type we would like to deal with in the sample code.
@@ -344,93 +364,14 @@ namespace AutoRest.CSharp.Output.Samples.Models
         /// <returns></returns>
         private InputType? GetEffectiveResponseType()
         {
-            var responseType = Method.ResponseBodyType;
-            if (Method.PagingInfo == null)
+            var responseType = _method.ResponseBodyType;
+            if (_method.PagingInfo == null)
                 return responseType;
 
-            var pagingItemName = Method.PagingInfo.ItemName;
+            var pagingItemName = _method.PagingInfo.ItemName;
             var listResultType = responseType as InputModelType;
             var itemsArrayProperty = listResultType?.Properties.FirstOrDefault(p => p.SerializedName == pagingItemName && p.Type is InputListType);
-            return itemsArrayProperty?.Type as InputListType;
-        }
-
-        public IEnumerable<IEnumerable<FormattableString>> ComposeResponseParsingCode(FormattableString rootElementVar)
-        {
-            var responseType = GetEffectiveResponseType();
-            Debug.Assert(responseType != null);
-            var apiInvocationChainList = new List<IReadOnlyList<FormattableString>>();
-            ComposeResponseParsingCode(_useAllParameters, responseType, apiInvocationChainList, new Stack<FormattableString>(new FormattableString[] { rootElementVar }), new HashSet<InputType>());
-
-            return apiInvocationChainList;
-        }
-
-        private static void ComposeResponseParsingCode(bool useAllProperties, InputType type, List<IReadOnlyList<FormattableString>> apiInvocationChainList, Stack<FormattableString> currentApiInvocationChain, HashSet<InputType> visitedTypes)
-        {
-            switch (type)
-            {
-                case InputListType listType:
-                    if (visitedTypes.Contains(listType.ElementType))
-                        return;
-                    // {parentOp}[0]
-                    var parentOp = currentApiInvocationChain.Pop();
-                    currentApiInvocationChain.Push($"{parentOp}[0]");
-                    ComposeResponseParsingCode(useAllProperties, listType.ElementType, apiInvocationChainList, currentApiInvocationChain, visitedTypes);
-                    return;
-                case InputDictionaryType dictionaryType:
-                    if (visitedTypes.Contains(dictionaryType.ValueType))
-                        return;
-                    // .GetProrperty("<key>")
-                    currentApiInvocationChain.Push($"GetProperty({"<key>":L})");
-                    ComposeResponseParsingCode(useAllProperties, dictionaryType.ValueType, apiInvocationChainList, currentApiInvocationChain, visitedTypes);
-                    currentApiInvocationChain.Pop();
-                    return;
-                case InputModelType modelType:
-                    ComposeResponseParsingCodeForModel(useAllProperties, modelType, apiInvocationChainList, currentApiInvocationChain, visitedTypes);
-                    return;
-            }
-
-            // primitive types, return
-            AddApiInvocationChainResult(apiInvocationChainList, currentApiInvocationChain);
-        }
-
-        private static void ComposeResponseParsingCodeForModel(bool useAllProperties, InputModelType model, List<IReadOnlyList<FormattableString>> apiInvocationChainList, Stack<FormattableString> currentApiInvocationChain, HashSet<InputType> visitedTypes)
-        {
-            foreach (var modelOrBase in model.GetSelfAndBaseModels())
-            {
-                if (!modelOrBase.Properties.Any())
-                    continue;
-
-                var propertiesToExplore = useAllProperties ?
-                    modelOrBase.Properties :
-                    modelOrBase.Properties.Where(p => p.IsRequired);
-
-                if (!propertiesToExplore.Any()) // if you have a required property, but its child properties are all optional
-                {
-                    // return the object
-                    AddApiInvocationChainResult(apiInvocationChainList, currentApiInvocationChain);
-                    return;
-                }
-
-                foreach (var property in propertiesToExplore)
-                {
-                    if (!visitedTypes.Contains(property.Type))
-                    {
-                        // .GetProperty("{propertyName}")
-                        visitedTypes.Add(property.Type);
-                        currentApiInvocationChain.Push($"GetProperty({property.SerializedName:L})");
-                        ComposeResponseParsingCode(useAllProperties, property.Type, apiInvocationChainList, currentApiInvocationChain, visitedTypes);
-                        currentApiInvocationChain.Pop();
-                        visitedTypes.Remove(property.Type);
-                    }
-                }
-            }
-        }
-
-        private static void AddApiInvocationChainResult(List<IReadOnlyList<FormattableString>> apiInvocationChainList, Stack<FormattableString> currentApiInvocationChain)
-        {
-            var finalChain = currentApiInvocationChain.ToList();
-            finalChain.Reverse();
-            apiInvocationChainList.Add(finalChain);
+            return (itemsArrayProperty?.Type as InputListType)?.ElementType;
         }
 
         // TODO -- this needs a refactor when we consolidate things around customization code https://github.com/Azure/autorest.csharp/issues/3370
@@ -474,13 +415,13 @@ namespace AutoRest.CSharp.Output.Samples.Models
         }
 
         public string GetSampleInformation(bool isAsync) => IsConvenienceSample
-                ? GetSampleInformationForConvenience(Method.ConvenienceMethod!.Signature.WithAsync(isAsync))
-                : GetSampleInformationForProtocol(Method.ProtocolMethodSignature.WithAsync(isAsync));
+                ? GetSampleInformationForConvenience(_method.ConvenienceMethod!.Signature.WithAsync(isAsync))
+                : GetSampleInformationForProtocol(_method.ProtocolMethodSignature.WithAsync(isAsync));
 
         private string GetSampleInformationForConvenience(MethodSignature methodSignature)
         {
             var methodName = methodSignature.Name;
-            if (_useAllParameters)
+            if (IsAllParametersUsed)
             {
                 return $"This sample shows how to call {methodName} with all parameters.";
             }
@@ -491,7 +432,7 @@ namespace AutoRest.CSharp.Output.Samples.Models
         private string GetSampleInformationForProtocol(MethodSignature methodSignature)
         {
             var methodName = methodSignature.Name;
-            if (_useAllParameters)
+            if (IsAllParametersUsed)
             {
                 return $"This sample shows how to call {methodName} with all {GenerateParameterAndRequestContentDescription(methodSignature.Parameters)}{(HasResponseBody ? " and parse the result" : "")}.";
             }

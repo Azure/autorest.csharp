@@ -14,27 +14,29 @@ using custom_baseUrl_LowLevel;
 
 namespace custom_baseUrl_LowLevel.Samples
 {
-    public class Samples_PathsClient
+    public partial class Samples_PathsClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetEmpty()
+        public void Example_GetEmpty_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient("host", credential);
 
             Response response = client.GetEmpty("<accountName>");
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetEmpty_Async()
+        public async Task Example_GetEmpty_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient("host", credential);
 
             Response response = await client.GetEmptyAsync("<accountName>");
+
             Console.WriteLine(response.Status);
         }
 
@@ -46,6 +48,7 @@ namespace custom_baseUrl_LowLevel.Samples
             PathsClient client = new PathsClient("host", credential);
 
             Response response = client.GetEmpty("<accountName>");
+
             Console.WriteLine(response.Status);
         }
 
@@ -57,6 +60,7 @@ namespace custom_baseUrl_LowLevel.Samples
             PathsClient client = new PathsClient("host", credential);
 
             Response response = await client.GetEmptyAsync("<accountName>");
+
             Console.WriteLine(response.Status);
         }
     }

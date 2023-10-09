@@ -73,9 +73,5 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code></example>
     </member>
-    <member name="InternalAsync(string,CancellationToken)" />
-    <member name="Internal(string,CancellationToken)" />
-    <member name="InternalAsync(string,RequestContext)" />
-    <member name="Internal(string,RequestContext)" />
   </members>
 </doc>

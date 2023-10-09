@@ -15,27 +15,29 @@ using NUnit.Framework;
 
 namespace Authentication.OAuth2.Samples
 {
-    public class Samples_OAuth2Client
+    public partial class Samples_OAuth2Client
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Valid()
+        public void Example_Valid_ShortVersion()
         {
             TokenCredential credential = new DefaultAzureCredential();
             OAuth2Client client = new OAuth2Client(credential);
 
             Response response = client.Valid();
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Valid_Async()
+        public async Task Example_Valid_ShortVersion_Async()
         {
             TokenCredential credential = new DefaultAzureCredential();
             OAuth2Client client = new OAuth2Client(credential);
 
             Response response = await client.ValidAsync();
+
             Console.WriteLine(response.Status);
         }
 
@@ -47,6 +49,7 @@ namespace Authentication.OAuth2.Samples
             OAuth2Client client = new OAuth2Client(credential);
 
             Response response = client.Valid();
+
             Console.WriteLine(response.Status);
         }
 
@@ -58,28 +61,31 @@ namespace Authentication.OAuth2.Samples
             OAuth2Client client = new OAuth2Client(credential);
 
             Response response = await client.ValidAsync();
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Invalid()
+        public void Example_Invalid_ShortVersion()
         {
             TokenCredential credential = new DefaultAzureCredential();
             OAuth2Client client = new OAuth2Client(credential);
 
             Response response = client.Invalid();
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Invalid_Async()
+        public async Task Example_Invalid_ShortVersion_Async()
         {
             TokenCredential credential = new DefaultAzureCredential();
             OAuth2Client client = new OAuth2Client(credential);
 
             Response response = await client.InvalidAsync();
+
             Console.WriteLine(response.Status);
         }
 
@@ -91,6 +97,7 @@ namespace Authentication.OAuth2.Samples
             OAuth2Client client = new OAuth2Client(credential);
 
             Response response = client.Invalid();
+
             Console.WriteLine(response.Status);
         }
 
@@ -102,6 +109,7 @@ namespace Authentication.OAuth2.Samples
             OAuth2Client client = new OAuth2Client(credential);
 
             Response response = await client.InvalidAsync();
+
             Console.WriteLine(response.Status);
         }
     }

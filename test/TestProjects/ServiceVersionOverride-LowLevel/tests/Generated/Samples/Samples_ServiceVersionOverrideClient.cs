@@ -14,25 +14,27 @@ using ServiceVersionOverride_LowLevel;
 
 namespace ServiceVersionOverride_LowLevel.Samples
 {
-    public class Samples_ServiceVersionOverrideClient
+    public partial class Samples_ServiceVersionOverrideClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Operation()
+        public void Example_Operation_ShortVersion()
         {
             ServiceVersionOverrideClient client = new ServiceVersionOverrideClient();
 
             Response response = client.Operation("2.0");
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Operation_Async()
+        public async Task Example_Operation_ShortVersion_Async()
         {
             ServiceVersionOverrideClient client = new ServiceVersionOverrideClient();
 
             Response response = await client.OperationAsync("2.0");
+
             Console.WriteLine(response.Status);
         }
 
@@ -43,6 +45,7 @@ namespace ServiceVersionOverride_LowLevel.Samples
             ServiceVersionOverrideClient client = new ServiceVersionOverrideClient();
 
             Response response = client.Operation("2.0");
+
             Console.WriteLine(response.Status);
         }
 
@@ -53,6 +56,7 @@ namespace ServiceVersionOverride_LowLevel.Samples
             ServiceVersionOverrideClient client = new ServiceVersionOverrideClient();
 
             Response response = await client.OperationAsync("2.0");
+
             Console.WriteLine(response.Status);
         }
     }

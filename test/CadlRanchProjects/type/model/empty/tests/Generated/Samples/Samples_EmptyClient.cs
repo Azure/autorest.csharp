@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -16,50 +17,50 @@ using _Type.Model.Empty.Models;
 
 namespace _Type.Model.Empty.Samples
 {
-    public class Samples_EmptyClient
+    public partial class Samples_EmptyClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutEmpty()
+        public void Example_PutEmpty_ShortVersion()
         {
             EmptyClient client = new EmptyClient();
 
-            RequestContent content = RequestContent.Create(new object());
+            using RequestContent content = RequestContent.Create(new object());
             Response response = client.PutEmpty(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutEmpty_Async()
+        public async Task Example_PutEmpty_ShortVersion_Async()
         {
             EmptyClient client = new EmptyClient();
 
-            RequestContent content = RequestContent.Create(new object());
+            using RequestContent content = RequestContent.Create(new object());
             Response response = await client.PutEmptyAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutEmpty_Convenience()
+        public void Example_PutEmpty_ShortVersion_Convenience()
         {
             EmptyClient client = new EmptyClient();
 
             EmptyInput input = new EmptyInput();
             Response response = client.PutEmpty(input);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutEmpty_Convenience_Async()
+        public async Task Example_PutEmpty_ShortVersion_Convenience_Async()
         {
             EmptyClient client = new EmptyClient();
 
             EmptyInput input = new EmptyInput();
             Response response = await client.PutEmptyAsync(input);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -68,8 +69,9 @@ namespace _Type.Model.Empty.Samples
         {
             EmptyClient client = new EmptyClient();
 
-            RequestContent content = RequestContent.Create(new object());
+            using RequestContent content = RequestContent.Create(new object());
             Response response = client.PutEmpty(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -79,8 +81,9 @@ namespace _Type.Model.Empty.Samples
         {
             EmptyClient client = new EmptyClient();
 
-            RequestContent content = RequestContent.Create(new object());
+            using RequestContent content = RequestContent.Create(new object());
             Response response = await client.PutEmptyAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -92,7 +95,6 @@ namespace _Type.Model.Empty.Samples
 
             EmptyInput input = new EmptyInput();
             Response response = client.PutEmpty(input);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -103,34 +105,35 @@ namespace _Type.Model.Empty.Samples
 
             EmptyInput input = new EmptyInput();
             Response response = await client.PutEmptyAsync(input);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetEmpty()
+        public void Example_GetEmpty_ShortVersion()
         {
             EmptyClient client = new EmptyClient();
 
             Response response = client.GetEmpty(null);
 
-            Console.WriteLine(response.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetEmpty_Async()
+        public async Task Example_GetEmpty_ShortVersion_Async()
         {
             EmptyClient client = new EmptyClient();
 
             Response response = await client.GetEmptyAsync(null);
 
-            Console.WriteLine(response.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetEmpty_Convenience()
+        public void Example_GetEmpty_ShortVersion_Convenience()
         {
             EmptyClient client = new EmptyClient();
 
@@ -139,7 +142,7 @@ namespace _Type.Model.Empty.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetEmpty_Convenience_Async()
+        public async Task Example_GetEmpty_ShortVersion_Convenience_Async()
         {
             EmptyClient client = new EmptyClient();
 
@@ -154,7 +157,8 @@ namespace _Type.Model.Empty.Samples
 
             Response response = client.GetEmpty(null);
 
-            Console.WriteLine(response.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -165,7 +169,8 @@ namespace _Type.Model.Empty.Samples
 
             Response response = await client.GetEmptyAsync(null);
 
-            Console.WriteLine(response.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -188,31 +193,33 @@ namespace _Type.Model.Empty.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PostRoundTripEmpty()
+        public void Example_PostRoundTripEmpty_ShortVersion()
         {
             EmptyClient client = new EmptyClient();
 
-            RequestContent content = RequestContent.Create(new object());
+            using RequestContent content = RequestContent.Create(new object());
             Response response = client.PostRoundTripEmpty(content);
 
-            Console.WriteLine(response.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PostRoundTripEmpty_Async()
+        public async Task Example_PostRoundTripEmpty_ShortVersion_Async()
         {
             EmptyClient client = new EmptyClient();
 
-            RequestContent content = RequestContent.Create(new object());
+            using RequestContent content = RequestContent.Create(new object());
             Response response = await client.PostRoundTripEmptyAsync(content);
 
-            Console.WriteLine(response.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PostRoundTripEmpty_Convenience()
+        public void Example_PostRoundTripEmpty_ShortVersion_Convenience()
         {
             EmptyClient client = new EmptyClient();
 
@@ -222,7 +229,7 @@ namespace _Type.Model.Empty.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PostRoundTripEmpty_Convenience_Async()
+        public async Task Example_PostRoundTripEmpty_ShortVersion_Convenience_Async()
         {
             EmptyClient client = new EmptyClient();
 
@@ -236,10 +243,11 @@ namespace _Type.Model.Empty.Samples
         {
             EmptyClient client = new EmptyClient();
 
-            RequestContent content = RequestContent.Create(new object());
+            using RequestContent content = RequestContent.Create(new object());
             Response response = client.PostRoundTripEmpty(content);
 
-            Console.WriteLine(response.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -248,10 +256,11 @@ namespace _Type.Model.Empty.Samples
         {
             EmptyClient client = new EmptyClient();
 
-            RequestContent content = RequestContent.Create(new object());
+            using RequestContent content = RequestContent.Create(new object());
             Response response = await client.PostRoundTripEmptyAsync(content);
 
-            Console.WriteLine(response.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
