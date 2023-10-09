@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Builders;
+using AutoRest.CSharp.Output.Models.Types;
 
 namespace AutoRest.CSharp.Mgmt.Decorator;
 
@@ -143,5 +144,18 @@ internal static class SchemaExtensions
         else
             propertySerializedName = string.Join(".", property.FlattenedNames);
         return $"{schema.GetFullSerializedName()}.{propertySerializedName}";
+    }
+
+    internal static string GetFullSerializedName(this SchemaObjectType obj, Property property)
+    {
+        var parentSchema = obj.GetCombinedSchemas().FirstOrDefault(s => s.Properties.Contains(property));
+        if (parentSchema == null)
+        {
+            throw new InvalidOperationException($"Can't find parent object schema for property schema: '{obj.Declaration.Name}.{property.CSharpName()}'");
+        }
+        else
+        {
+            return parentSchema.GetFullSerializedName(property);
+        }
     }
 }

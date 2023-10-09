@@ -78,16 +78,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                     {
                         if (p.SchemaProperty != null)
                         {
-                            var parentSchema = mot.GetCombinedSchemas().FirstOrDefault(s => s.Properties.Contains(p.SchemaProperty));
-                            if (parentSchema == null)
-                            {
-                                AutoRestLogger.Warning($"Can't find parent object schema for property schema: '{mi.FullName}.{p.Declaration.Name}'").Wait();
-                                return "<NoObjectSchemaFound>";
-                            }
-                            else
-                            {
-                                return parentSchema.GetFullSerializedName(p.SchemaProperty!);
-                            }
+                            return mot.GetFullSerializedName(p.SchemaProperty);
                         }
                         else
                         {
@@ -153,7 +144,18 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 var name = model.Type.Name;
 
                 ObjectModelItem mi = new ObjectModelItem(model.Declaration.Namespace, model.Declaration.Name, model.ObjectSchema.GetFullSerializedName());
-                mi.Properties = model.Properties.ToDictionary(p => p.Declaration.Name, p => model.ObjectSchema.GetFullSerializedName(p.SchemaProperty!));
+                mi.Properties = model.Properties.ToDictionary(p => p.Declaration.Name, p =>
+                {
+                    if (p.SchemaProperty != null)
+                    {
+                        return model.GetFullSerializedName(p.SchemaProperty);
+                    }
+                    else
+                    {
+                        AutoRestLogger.Warning($"Ignore Resource Property '{mi.FullName}.{p.Declaration.Name}' without schema (i.e. AdditionalProperties)").Wait();
+                        return "<NoPropertySchemaFound>";
+                    }
+                });
                 MgmtReport.Instance.ObjectModelSection.Add(mi.FullName, mi);
 
                 WriteArmModel(project, model, serializeWriter, $"{name}.cs", $"Models/{name}.Serialization.cs");
