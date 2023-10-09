@@ -45,7 +45,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                     if (Configuration.MgmtTestConfiguration is not null)
                         await MgmtTestTarget.ExecuteAsync(project, codeModel, sourceInputModel);
                 }
-                GenerateTransformData(project);
+                GenerateMgmtReport(project);
             }
             else
             {
@@ -54,7 +54,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             return project;
         }
 
-        private void GenerateTransformData(GeneratedCodeWorkspace project)
+        private void GenerateMgmtReport(GeneratedCodeWorkspace project)
         {
             MgmtReport.Instance.TransformSection.ForEachTransform((t, usages) =>
             {
