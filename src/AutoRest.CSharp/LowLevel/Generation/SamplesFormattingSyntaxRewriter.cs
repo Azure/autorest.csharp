@@ -54,7 +54,7 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             if (IsSingleLine(node))
             {
-                return node;
+                return base.VisitObjectCreationExpression(node);
             }
 
             if (base.VisitObjectCreationExpression(node) is not ObjectCreationExpressionSyntax newNode)
@@ -95,8 +95,16 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             if (IsSingleLine(node))
             {
-                node = node.WithOpenBraceToken(node.OpenBraceToken.WithLeadingTrivia(SyntaxFactory.Space).WithTrailingTrivia(SyntaxFactory.Space));
-                return node.WithCloseBraceToken(node.CloseBraceToken.WithLeadingTrivia(SyntaxFactory.Space));
+                return node.Parent switch
+                {
+                    ArrayCreationExpressionSyntax => node
+                        .WithOpenBraceToken(node.OpenBraceToken.WithLeadingTrivia(SyntaxFactory.Space).WithTrailingTrivia(SyntaxFactory.Space))
+                        .WithCloseBraceToken(node.CloseBraceToken.WithLeadingTrivia(SyntaxFactory.Space)),
+
+                    _ => node
+                        .WithOpenBraceToken(node.OpenBraceToken.WithLeadingTrivia(SyntaxTriviaList.Empty).WithTrailingTrivia(SyntaxFactory.Space))
+                        .WithCloseBraceToken(node.CloseBraceToken.WithLeadingTrivia(SyntaxFactory.Space))
+                };
             }
 
             var parentLeadingTrivia = GetPreviousLevelTrivia(node);

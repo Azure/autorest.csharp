@@ -1427,7 +1427,7 @@ AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
 MultivariateLastDetectionOptions options = new MultivariateLastDetectionOptions(new VariableValues[]
 {
-    new VariableValues("<variable>", new string[]{"<timestamps>"}, new float[]{123.45F})
+    new VariableValues("<variable>", new string[] { "<timestamps>" }, new float[] { 123.45F })
 }, 1234);
 Response<MultivariateLastDetectionResult> response = await client.DetectMultivariateLastAnomalyAsync("<modelId>", options);
 ]]></code>
@@ -1439,7 +1439,7 @@ AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
 MultivariateLastDetectionOptions options = new MultivariateLastDetectionOptions(new VariableValues[]
 {
-    new VariableValues("<variable>", new string[]{"<timestamps>"}, new float[]{123.45F})
+    new VariableValues("<variable>", new string[] { "<timestamps>" }, new float[] { 123.45F })
 }, 1234);
 Response<MultivariateLastDetectionResult> response = await client.DetectMultivariateLastAnomalyAsync("<modelId>", options);
 ]]></code></example>
@@ -1454,7 +1454,7 @@ AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
 MultivariateLastDetectionOptions options = new MultivariateLastDetectionOptions(new VariableValues[]
 {
-    new VariableValues("<variable>", new string[]{"<timestamps>"}, new float[]{123.45F})
+    new VariableValues("<variable>", new string[] { "<timestamps>" }, new float[] { 123.45F })
 }, 1234);
 Response<MultivariateLastDetectionResult> response = client.DetectMultivariateLastAnomaly("<modelId>", options);
 ]]></code>
@@ -1466,7 +1466,7 @@ AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
 MultivariateLastDetectionOptions options = new MultivariateLastDetectionOptions(new VariableValues[]
 {
-    new VariableValues("<variable>", new string[]{"<timestamps>"}, new float[]{123.45F})
+    new VariableValues("<variable>", new string[] { "<timestamps>" }, new float[] { 123.45F })
 }, 1234);
 Response<MultivariateLastDetectionResult> response = client.DetectMultivariateLastAnomaly("<modelId>", options);
 ]]></code></example>

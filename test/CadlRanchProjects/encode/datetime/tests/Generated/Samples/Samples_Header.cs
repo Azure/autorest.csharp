@@ -22,7 +22,7 @@ namespace Encode.Datetime.Samples
         {
             Header client = new DatetimeClient().GetHeaderClient(apiVersion: "1.0.0");
 
-            Response response = client.Default(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
+            Response response = client.Default(DateTimeOffset.Parse("Tue, 10 May 2022 18:57:31 GMT"));
 
             Console.WriteLine(response.Status);
         }
@@ -33,7 +33,7 @@ namespace Encode.Datetime.Samples
         {
             Header client = new DatetimeClient().GetHeaderClient(apiVersion: "1.0.0");
 
-            Response response = await client.DefaultAsync(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
+            Response response = await client.DefaultAsync(DateTimeOffset.Parse("Tue, 10 May 2022 18:57:31 GMT"));
 
             Console.WriteLine(response.Status);
         }
@@ -44,7 +44,7 @@ namespace Encode.Datetime.Samples
         {
             Header client = new DatetimeClient().GetHeaderClient(apiVersion: "1.0.0");
 
-            Response response = client.Default(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
+            Response response = client.Default(DateTimeOffset.Parse("Tue, 10 May 2022 18:57:31 GMT"));
 
             Console.WriteLine(response.Status);
         }
@@ -55,7 +55,7 @@ namespace Encode.Datetime.Samples
         {
             Header client = new DatetimeClient().GetHeaderClient(apiVersion: "1.0.0");
 
-            Response response = await client.DefaultAsync(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
+            Response response = await client.DefaultAsync(DateTimeOffset.Parse("Tue, 10 May 2022 18:57:31 GMT"));
 
             Console.WriteLine(response.Status);
         }
