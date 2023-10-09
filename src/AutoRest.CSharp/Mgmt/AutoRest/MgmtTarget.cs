@@ -74,7 +74,27 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 if (model is MgmtObjectType mot)
                 {
                     ObjectModelItem mi = new ObjectModelItem(mot.Declaration.Namespace, mot.Declaration.Name, mot.ObjectSchema.GetFullSerializedName());
-                    mi.Properties = mot.Properties.ToDictionary(p => p.Declaration.Name, p => mot.ObjectSchema.GetFullSerializedName(p.SchemaProperty!));
+                    mi.Properties = mot.Properties.ToDictionary(p => p.Declaration.Name, p =>
+                    {
+                        if (p.SchemaProperty != null)
+                        {
+                            var parentSchema = mot.GetCombinedSchemas().FirstOrDefault(s => s.Properties.Contains(p.SchemaProperty));
+                            if (parentSchema == null)
+                            {
+                                AutoRestLogger.Warning($"Can't find parent object schema for property schema: '{mi.FullName}.{p.Declaration.Name}'").Wait();
+                                return "<NoObjectSchemaFound>";
+                            }
+                            else
+                            {
+                                return parentSchema.GetFullSerializedName(p.SchemaProperty!);
+                            }
+                        }
+                        else
+                        {
+                            AutoRestLogger.Warning($"Ignore Property '{mi.FullName}.{p.Declaration.Name}' without schema (i.e. AdditionalProperties)").Wait();
+                            return "<NoPropertySchemaFound>";
+                        }
+                    });
                     MgmtReport.Instance.ObjectModelSection.Add(mi.FullName, mi);
                 }
                 else if (model is EnumType et)
@@ -144,14 +164,13 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 var writer = ResourceWriter.GetWriter(resource);
                 writer.Write();
 
-                var ri = new ResourceItem(resource.ResourceName);
-                ri.ContextPaths =
-                    resource.GetOperation.Select(rop => rop.ContextualPath.ToString()).ToList() ??
-                    resource.ResourceCollection?.GetOperation.Select(rop => rop.ContextualPath.ToString()).ToList() ??
-                    new List<string>();
-                ri.IsNonResource = !resource.OperationSet.IsResource();
-                ri.Operations = resource.AllOperations.ToDictionary(op => op.MethodSignature.Name, op => op.Select(mrop => mrop.OperationId).ToList());
-                MgmtReport.Instance.ResourceSection.Add(ri.Name, ri);
+                // only care about Resource without parent, otherwise it should be tracked through it's parent
+                var parents = resource.GetParents().ToList();
+                if (parents.Count == 0 || parents.All(p => p is not Resource))
+                {
+                    var ri = new ResourceItem(resource);
+                    MgmtReport.Instance.ResourceSection.Add(ri.Name, ri);
+                }
 
                 AddGeneratedFile(project, $"{resource.Type.Name}.cs", writer.ToString());
             }
