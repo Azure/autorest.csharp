@@ -20,9 +20,7 @@ namespace AutoRest.CSharp.Mgmt.Report
             :this(resource.ResourceName)
         {
             this.ContextPaths =
-                resource.GetOperation.Select(rop => rop.ContextualPath.ToString()).ToList() ??
-                resource.ResourceCollection?.GetOperation.Select(rop => rop.ContextualPath.ToString()).ToList() ??
-                new List<string>();
+                resource.AllOperations.SelectMany(cop => cop.Select(rop => rop.ContextualPath.ToString())).Distinct().ToList();
             this.RequestPath = resource.RequestPath.ToString();
             this.IsNonResource = !resource.OperationSet.IsResource();
             this.Operations = resource.AllOperations.ToDictionary(op => op.MethodSignature.Name, op => op.Select(mrop => mrop.OperationId).ToList());
