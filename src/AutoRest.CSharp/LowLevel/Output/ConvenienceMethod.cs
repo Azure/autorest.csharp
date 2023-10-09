@@ -46,7 +46,7 @@ namespace AutoRest.CSharp.Output.Models
                     if (converter.ConvenienceSpread == null)
                     {
                         var parameter = convenienceParameter.GetConversionFormattable(protocolParameter.Type);
-                        if (protocolParameter.Type.EqualsIgnoreNullable(typeof(RequestContent)))
+                        if (protocolParameter.Type.EqualsIgnoreNullable(Configuration.ApiTypes.RequestContentType))
                         {
                             contentInfo = new RequestContentParameterInfo(new CodeWriterDeclaration(KnownParameters.RequestContent.Name), $"{parameter:I}");
                             parameters.Add($"{contentInfo.ContentVariable:I}");
@@ -112,7 +112,7 @@ namespace AutoRest.CSharp.Output.Models
 
         private static void WriteBodyToRequestContent(CodeWriter writer, CodeWriterDeclaration contentVariable, FormattableString requestContentValue)
         {
-            writer.Line($"using {typeof(RequestContent)} {contentVariable:D} = {requestContentValue};");
+            writer.Line($"using {Configuration.ApiTypes.RequestContentType} {contentVariable:D} = {requestContentValue};");
         }
 
         public bool IsDeprecatedForExamples()

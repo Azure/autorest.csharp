@@ -70,7 +70,8 @@ namespace OpenAI
             ClientUtilities.AssertNotNull(audio, nameof(audio));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
-            Result result = await CreateTranscriptionAsync(audio.ToRequestBody(), context).ConfigureAwait(false);
+            using RequestBody content = audio.ToRequestBody();
+            Result result = await CreateTranscriptionAsync(content, context).ConfigureAwait(false);
             return Result.FromValue(CreateTranscriptionResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -83,7 +84,8 @@ namespace OpenAI
             ClientUtilities.AssertNotNull(audio, nameof(audio));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
-            Result result = CreateTranscription(audio.ToRequestBody(), context);
+            using RequestBody content = audio.ToRequestBody();
+            Result result = CreateTranscription(content, context);
             return Result.FromValue(CreateTranscriptionResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -172,7 +174,8 @@ namespace OpenAI
             ClientUtilities.AssertNotNull(audio, nameof(audio));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
-            Result result = await CreateTranslationAsync(audio.ToRequestBody(), context).ConfigureAwait(false);
+            using RequestBody content = audio.ToRequestBody();
+            Result result = await CreateTranslationAsync(content, context).ConfigureAwait(false);
             return Result.FromValue(CreateTranslationResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -185,7 +188,8 @@ namespace OpenAI
             ClientUtilities.AssertNotNull(audio, nameof(audio));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
-            Result result = CreateTranslation(audio.ToRequestBody(), context);
+            using RequestBody content = audio.ToRequestBody();
+            Result result = CreateTranslation(content, context);
             return Result.FromValue(CreateTranslationResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -273,7 +277,8 @@ namespace OpenAI
             ClientUtilities.AssertNotNull(createChatCompletionRequest, nameof(createChatCompletionRequest));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
-            Result result = await CreateChatCompletionAsync(createChatCompletionRequest.ToRequestBody(), context).ConfigureAwait(false);
+            using RequestBody content = createChatCompletionRequest.ToRequestBody();
+            Result result = await CreateChatCompletionAsync(content, context).ConfigureAwait(false);
             return Result.FromValue(CreateChatCompletionResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -285,7 +290,8 @@ namespace OpenAI
             ClientUtilities.AssertNotNull(createChatCompletionRequest, nameof(createChatCompletionRequest));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
-            Result result = CreateChatCompletion(createChatCompletionRequest.ToRequestBody(), context);
+            using RequestBody content = createChatCompletionRequest.ToRequestBody();
+            Result result = CreateChatCompletion(content, context);
             return Result.FromValue(CreateChatCompletionResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -381,7 +387,8 @@ namespace OpenAI
             ClientUtilities.AssertNotNull(job, nameof(job));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
-            Result result = await CreateFineTuningJobAsync(job.ToRequestBody(), context).ConfigureAwait(false);
+            using RequestBody content = job.ToRequestBody();
+            Result result = await CreateFineTuningJobAsync(content, context).ConfigureAwait(false);
             return Result.FromValue(FineTuningJob.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -401,7 +408,8 @@ namespace OpenAI
             ClientUtilities.AssertNotNull(job, nameof(job));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
-            Result result = CreateFineTuningJob(job.ToRequestBody(), context);
+            using RequestBody content = job.ToRequestBody();
+            Result result = CreateFineTuningJob(content, context);
             return Result.FromValue(FineTuningJob.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -929,7 +937,8 @@ namespace OpenAI
             ClientUtilities.AssertNotNull(createCompletionRequest, nameof(createCompletionRequest));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
-            Result result = await CreateCompletionAsync(createCompletionRequest.ToRequestBody(), context).ConfigureAwait(false);
+            using RequestBody content = createCompletionRequest.ToRequestBody();
+            Result result = await CreateCompletionAsync(content, context).ConfigureAwait(false);
             return Result.FromValue(CreateCompletionResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -941,7 +950,8 @@ namespace OpenAI
             ClientUtilities.AssertNotNull(createCompletionRequest, nameof(createCompletionRequest));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
-            Result result = CreateCompletion(createCompletionRequest.ToRequestBody(), context);
+            using RequestBody content = createCompletionRequest.ToRequestBody();
+            Result result = CreateCompletion(content, context);
             return Result.FromValue(CreateCompletionResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -1030,7 +1040,8 @@ namespace OpenAI
             ClientUtilities.AssertNotNull(edit, nameof(edit));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
-            Result result = await CreateEditAsync(edit.ToRequestBody(), context).ConfigureAwait(false);
+            using RequestBody content = edit.ToRequestBody();
+            Result result = await CreateEditAsync(content, context).ConfigureAwait(false);
             return Result.FromValue(CreateEditResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -1043,7 +1054,8 @@ namespace OpenAI
             ClientUtilities.AssertNotNull(edit, nameof(edit));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
-            Result result = CreateEdit(edit.ToRequestBody(), context);
+            using RequestBody content = edit.ToRequestBody();
+            Result result = CreateEdit(content, context);
             return Result.FromValue(CreateEditResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -1134,7 +1146,8 @@ namespace OpenAI
             ClientUtilities.AssertNotNull(embedding, nameof(embedding));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
-            Result result = await CreateEmbeddingAsync(embedding.ToRequestBody(), context).ConfigureAwait(false);
+            using RequestBody content = embedding.ToRequestBody();
+            Result result = await CreateEmbeddingAsync(content, context).ConfigureAwait(false);
             return Result.FromValue(CreateEmbeddingResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -1147,7 +1160,8 @@ namespace OpenAI
             ClientUtilities.AssertNotNull(embedding, nameof(embedding));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
-            Result result = CreateEmbedding(embedding.ToRequestBody(), context);
+            using RequestBody content = embedding.ToRequestBody();
+            Result result = CreateEmbedding(content, context);
             return Result.FromValue(CreateEmbeddingResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -1322,7 +1336,8 @@ namespace OpenAI
             ClientUtilities.AssertNotNull(file, nameof(file));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
-            Result result = await CreateFileAsync(file.ToRequestBody(), context).ConfigureAwait(false);
+            using RequestBody content = file.ToRequestBody();
+            Result result = await CreateFileAsync(content, context).ConfigureAwait(false);
             return Result.FromValue(OpenAIFile.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -1335,7 +1350,8 @@ namespace OpenAI
             ClientUtilities.AssertNotNull(file, nameof(file));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
-            Result result = CreateFile(file.ToRequestBody(), context);
+            using RequestBody content = file.ToRequestBody();
+            Result result = CreateFile(content, context);
             return Result.FromValue(OpenAIFile.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -1749,7 +1765,8 @@ namespace OpenAI
             ClientUtilities.AssertNotNull(fineTune, nameof(fineTune));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
-            Result result = await CreateFineTuneAsync(fineTune.ToRequestBody(), context).ConfigureAwait(false);
+            using RequestBody content = fineTune.ToRequestBody();
+            Result result = await CreateFineTuneAsync(content, context).ConfigureAwait(false);
             return Result.FromValue(FineTune.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -1769,7 +1786,8 @@ namespace OpenAI
             ClientUtilities.AssertNotNull(fineTune, nameof(fineTune));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
-            Result result = CreateFineTune(fineTune.ToRequestBody(), context);
+            using RequestBody content = fineTune.ToRequestBody();
+            Result result = CreateFineTune(content, context);
             return Result.FromValue(FineTune.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -2650,7 +2668,8 @@ namespace OpenAI
             ClientUtilities.AssertNotNull(image, nameof(image));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
-            Result result = await CreateImageAsync(image.ToRequestBody(), context).ConfigureAwait(false);
+            using RequestBody content = image.ToRequestBody();
+            Result result = await CreateImageAsync(content, context).ConfigureAwait(false);
             return Result.FromValue(ImagesResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -2663,7 +2682,8 @@ namespace OpenAI
             ClientUtilities.AssertNotNull(image, nameof(image));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
-            Result result = CreateImage(image.ToRequestBody(), context);
+            using RequestBody content = image.ToRequestBody();
+            Result result = CreateImage(content, context);
             return Result.FromValue(ImagesResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -2752,7 +2772,8 @@ namespace OpenAI
             ClientUtilities.AssertNotNull(image, nameof(image));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
-            Result result = await CreateImageEditAsync(image.ToRequestBody(), context).ConfigureAwait(false);
+            using RequestBody content = image.ToRequestBody();
+            Result result = await CreateImageEditAsync(content, context).ConfigureAwait(false);
             return Result.FromValue(ImagesResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -2765,7 +2786,8 @@ namespace OpenAI
             ClientUtilities.AssertNotNull(image, nameof(image));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
-            Result result = CreateImageEdit(image.ToRequestBody(), context);
+            using RequestBody content = image.ToRequestBody();
+            Result result = CreateImageEdit(content, context);
             return Result.FromValue(ImagesResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -2854,7 +2876,8 @@ namespace OpenAI
             ClientUtilities.AssertNotNull(image, nameof(image));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
-            Result result = await CreateImageVariationAsync(image.ToRequestBody(), context).ConfigureAwait(false);
+            using RequestBody content = image.ToRequestBody();
+            Result result = await CreateImageVariationAsync(content, context).ConfigureAwait(false);
             return Result.FromValue(ImagesResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -2867,7 +2890,8 @@ namespace OpenAI
             ClientUtilities.AssertNotNull(image, nameof(image));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
-            Result result = CreateImageVariation(image.ToRequestBody(), context);
+            using RequestBody content = image.ToRequestBody();
+            Result result = CreateImageVariation(content, context);
             return Result.FromValue(ImagesResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -2956,7 +2980,8 @@ namespace OpenAI
             ClientUtilities.AssertNotNull(content, nameof(content));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
-            Result result = await CreateModerationAsync(content.ToRequestBody(), context).ConfigureAwait(false);
+            using RequestBody content0 = content.ToRequestBody();
+            Result result = await CreateModerationAsync(content0, context).ConfigureAwait(false);
             return Result.FromValue(CreateModerationResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -2969,7 +2994,8 @@ namespace OpenAI
             ClientUtilities.AssertNotNull(content, nameof(content));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
-            Result result = CreateModeration(content.ToRequestBody(), context);
+            using RequestBody content0 = content.ToRequestBody();
+            Result result = CreateModeration(content0, context);
             return Result.FromValue(CreateModerationResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 

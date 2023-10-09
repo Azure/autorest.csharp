@@ -284,7 +284,8 @@ namespace UnbrandedTypeSpec
             ClientUtilities.AssertNotNull(thing, nameof(thing));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
-            Result result = await AnonymousBodyAsync(thing.ToRequestBody(), context).ConfigureAwait(false);
+            using RequestBody content = thing.ToRequestBody();
+            Result result = await AnonymousBodyAsync(content, context).ConfigureAwait(false);
             return Result.FromValue(Thing.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -297,7 +298,8 @@ namespace UnbrandedTypeSpec
             ClientUtilities.AssertNotNull(thing, nameof(thing));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
-            Result result = AnonymousBody(thing.ToRequestBody(), context);
+            using RequestBody content = thing.ToRequestBody();
+            Result result = AnonymousBody(content, context);
             return Result.FromValue(Thing.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -386,7 +388,8 @@ namespace UnbrandedTypeSpec
             ClientUtilities.AssertNotNull(notFriend, nameof(notFriend));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
-            Result result = await FriendlyModelAsync(notFriend.ToRequestBody(), context).ConfigureAwait(false);
+            using RequestBody content = notFriend.ToRequestBody();
+            Result result = await FriendlyModelAsync(content, context).ConfigureAwait(false);
             return Result.FromValue(Friend.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -399,7 +402,8 @@ namespace UnbrandedTypeSpec
             ClientUtilities.AssertNotNull(notFriend, nameof(notFriend));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
-            Result result = FriendlyModel(notFriend.ToRequestBody(), context);
+            using RequestBody content = notFriend.ToRequestBody();
+            Result result = FriendlyModel(content, context);
             return Result.FromValue(Friend.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -547,7 +551,8 @@ namespace UnbrandedTypeSpec
             ClientUtilities.AssertNotNull(body, nameof(body));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
-            Result result = await StringFormatAsync(subscriptionId, body.ToRequestBody(), context).ConfigureAwait(false);
+            using RequestBody content = body.ToRequestBody();
+            Result result = await StringFormatAsync(subscriptionId, content, context).ConfigureAwait(false);
             return result;
         }
 
@@ -561,7 +566,8 @@ namespace UnbrandedTypeSpec
             ClientUtilities.AssertNotNull(body, nameof(body));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
-            Result result = StringFormat(subscriptionId, body.ToRequestBody(), context);
+            using RequestBody content = body.ToRequestBody();
+            Result result = StringFormat(subscriptionId, content, context);
             return result;
         }
 
@@ -652,7 +658,8 @@ namespace UnbrandedTypeSpec
             ClientUtilities.AssertNotNull(modelWithProjectedName, nameof(modelWithProjectedName));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
-            Result result = await ProjectedNameModelAsync(modelWithProjectedName.ToRequestBody(), context).ConfigureAwait(false);
+            using RequestBody content = modelWithProjectedName.ToRequestBody();
+            Result result = await ProjectedNameModelAsync(content, context).ConfigureAwait(false);
             return Result.FromValue(ProjectedModel.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -665,7 +672,8 @@ namespace UnbrandedTypeSpec
             ClientUtilities.AssertNotNull(modelWithProjectedName, nameof(modelWithProjectedName));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
-            Result result = ProjectedNameModel(modelWithProjectedName.ToRequestBody(), context);
+            using RequestBody content = modelWithProjectedName.ToRequestBody();
+            Result result = ProjectedNameModel(content, context);
             return Result.FromValue(ProjectedModel.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -989,7 +997,8 @@ namespace UnbrandedTypeSpec
             ClientUtilities.AssertNotNull(action, nameof(action));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
-            Result result = await HelloAgainAsync(p2, p1, action.ToRequestBody(), context).ConfigureAwait(false);
+            using RequestBody content = action.ToRequestBody();
+            Result result = await HelloAgainAsync(p2, p1, content, context).ConfigureAwait(false);
             return Result.FromValue(RoundTripModel.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -1007,7 +1016,8 @@ namespace UnbrandedTypeSpec
             ClientUtilities.AssertNotNull(action, nameof(action));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
-            Result result = HelloAgain(p2, p1, action.ToRequestBody(), context);
+            using RequestBody content = action.ToRequestBody();
+            Result result = HelloAgain(p2, p1, content, context);
             return Result.FromValue(RoundTripModel.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -1268,7 +1278,8 @@ namespace UnbrandedTypeSpec
             ClientUtilities.AssertNotNull(body, nameof(body));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
-            Result result = await CreateLiteralAsync(body.ToRequestBody(), context).ConfigureAwait(false);
+            using RequestBody content = body.ToRequestBody();
+            Result result = await CreateLiteralAsync(content, context).ConfigureAwait(false);
             return Result.FromValue(Thing.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -1281,7 +1292,8 @@ namespace UnbrandedTypeSpec
             ClientUtilities.AssertNotNull(body, nameof(body));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
-            Result result = CreateLiteral(body.ToRequestBody(), context);
+            using RequestBody content = body.ToRequestBody();
+            Result result = CreateLiteral(content, context);
             return Result.FromValue(Thing.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -1514,7 +1526,8 @@ namespace UnbrandedTypeSpec
             ClientUtilities.AssertNotNull(body, nameof(body));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
-            Result result = await InternalProtocolAsync(body.ToRequestBody(), context).ConfigureAwait(false);
+            using RequestBody content = body.ToRequestBody();
+            Result result = await InternalProtocolAsync(content, context).ConfigureAwait(false);
             return Result.FromValue(Thing.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -1527,7 +1540,8 @@ namespace UnbrandedTypeSpec
             ClientUtilities.AssertNotNull(body, nameof(body));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
-            Result result = InternalProtocol(body.ToRequestBody(), context);
+            using RequestBody content = body.ToRequestBody();
+            Result result = InternalProtocol(content, context);
             return Result.FromValue(Thing.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
