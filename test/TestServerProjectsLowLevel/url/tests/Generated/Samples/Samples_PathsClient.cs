@@ -20,7 +20,7 @@ namespace url_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetBooleanTrue_ShortVersion()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient(credential);
 
             Response response = client.GetBooleanTrue();
@@ -32,7 +32,7 @@ namespace url_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetBooleanTrue_ShortVersion_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient(credential);
 
             Response response = await client.GetBooleanTrueAsync();
@@ -44,7 +44,7 @@ namespace url_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetBooleanTrue_AllParameters()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient(credential);
 
             Response response = client.GetBooleanTrue();
@@ -56,7 +56,7 @@ namespace url_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetBooleanTrue_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient(credential);
 
             Response response = await client.GetBooleanTrueAsync();
@@ -68,7 +68,7 @@ namespace url_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetBooleanFalse_ShortVersion()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient(credential);
 
             Response response = client.GetBooleanFalse();
@@ -80,7 +80,7 @@ namespace url_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetBooleanFalse_ShortVersion_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient(credential);
 
             Response response = await client.GetBooleanFalseAsync();
@@ -92,7 +92,7 @@ namespace url_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetBooleanFalse_AllParameters()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient(credential);
 
             Response response = client.GetBooleanFalse();
@@ -104,7 +104,7 @@ namespace url_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetBooleanFalse_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient(credential);
 
             Response response = await client.GetBooleanFalseAsync();
@@ -116,7 +116,7 @@ namespace url_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetIntOneMillion_ShortVersion()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient(credential);
 
             Response response = client.GetIntOneMillion();
@@ -128,7 +128,7 @@ namespace url_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetIntOneMillion_ShortVersion_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient(credential);
 
             Response response = await client.GetIntOneMillionAsync();
@@ -140,7 +140,7 @@ namespace url_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetIntOneMillion_AllParameters()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient(credential);
 
             Response response = client.GetIntOneMillion();
@@ -152,7 +152,7 @@ namespace url_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetIntOneMillion_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient(credential);
 
             Response response = await client.GetIntOneMillionAsync();
@@ -164,7 +164,7 @@ namespace url_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetIntNegativeOneMillion_ShortVersion()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient(credential);
 
             Response response = client.GetIntNegativeOneMillion();
@@ -176,7 +176,7 @@ namespace url_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetIntNegativeOneMillion_ShortVersion_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient(credential);
 
             Response response = await client.GetIntNegativeOneMillionAsync();
@@ -188,7 +188,7 @@ namespace url_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetIntNegativeOneMillion_AllParameters()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient(credential);
 
             Response response = client.GetIntNegativeOneMillion();
@@ -200,7 +200,7 @@ namespace url_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetIntNegativeOneMillion_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient(credential);
 
             Response response = await client.GetIntNegativeOneMillionAsync();
@@ -212,7 +212,7 @@ namespace url_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetTenBillion_ShortVersion()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient(credential);
 
             Response response = client.GetTenBillion();
@@ -224,7 +224,7 @@ namespace url_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetTenBillion_ShortVersion_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient(credential);
 
             Response response = await client.GetTenBillionAsync();
@@ -236,7 +236,7 @@ namespace url_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetTenBillion_AllParameters()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient(credential);
 
             Response response = client.GetTenBillion();
@@ -248,7 +248,7 @@ namespace url_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetTenBillion_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient(credential);
 
             Response response = await client.GetTenBillionAsync();
@@ -260,7 +260,7 @@ namespace url_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetNegativeTenBillion_ShortVersion()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient(credential);
 
             Response response = client.GetNegativeTenBillion();
@@ -272,7 +272,7 @@ namespace url_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetNegativeTenBillion_ShortVersion_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient(credential);
 
             Response response = await client.GetNegativeTenBillionAsync();
@@ -284,7 +284,7 @@ namespace url_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetNegativeTenBillion_AllParameters()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient(credential);
 
             Response response = client.GetNegativeTenBillion();
@@ -296,7 +296,7 @@ namespace url_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetNegativeTenBillion_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient(credential);
 
             Response response = await client.GetNegativeTenBillionAsync();
@@ -308,7 +308,7 @@ namespace url_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_FloatScientificPositive_ShortVersion()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient(credential);
 
             Response response = client.FloatScientificPositive();
@@ -320,7 +320,7 @@ namespace url_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_FloatScientificPositive_ShortVersion_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient(credential);
 
             Response response = await client.FloatScientificPositiveAsync();
@@ -332,7 +332,7 @@ namespace url_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_FloatScientificPositive_AllParameters()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient(credential);
 
             Response response = client.FloatScientificPositive();
@@ -344,7 +344,7 @@ namespace url_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_FloatScientificPositive_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient(credential);
 
             Response response = await client.FloatScientificPositiveAsync();
@@ -356,7 +356,7 @@ namespace url_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_FloatScientificNegative_ShortVersion()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient(credential);
 
             Response response = client.FloatScientificNegative();
@@ -368,7 +368,7 @@ namespace url_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_FloatScientificNegative_ShortVersion_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient(credential);
 
             Response response = await client.FloatScientificNegativeAsync();
@@ -380,7 +380,7 @@ namespace url_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_FloatScientificNegative_AllParameters()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient(credential);
 
             Response response = client.FloatScientificNegative();
@@ -392,7 +392,7 @@ namespace url_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_FloatScientificNegative_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient(credential);
 
             Response response = await client.FloatScientificNegativeAsync();
@@ -404,7 +404,7 @@ namespace url_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_DoubleDecimalPositive_ShortVersion()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient(credential);
 
             Response response = client.DoubleDecimalPositive();
@@ -416,7 +416,7 @@ namespace url_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_DoubleDecimalPositive_ShortVersion_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient(credential);
 
             Response response = await client.DoubleDecimalPositiveAsync();
@@ -428,7 +428,7 @@ namespace url_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_DoubleDecimalPositive_AllParameters()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient(credential);
 
             Response response = client.DoubleDecimalPositive();
@@ -440,7 +440,7 @@ namespace url_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_DoubleDecimalPositive_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient(credential);
 
             Response response = await client.DoubleDecimalPositiveAsync();
@@ -452,7 +452,7 @@ namespace url_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_DoubleDecimalNegative_ShortVersion()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient(credential);
 
             Response response = client.DoubleDecimalNegative();
@@ -464,7 +464,7 @@ namespace url_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_DoubleDecimalNegative_ShortVersion_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient(credential);
 
             Response response = await client.DoubleDecimalNegativeAsync();
@@ -476,7 +476,7 @@ namespace url_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_DoubleDecimalNegative_AllParameters()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient(credential);
 
             Response response = client.DoubleDecimalNegative();
@@ -488,7 +488,7 @@ namespace url_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_DoubleDecimalNegative_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient(credential);
 
             Response response = await client.DoubleDecimalNegativeAsync();
@@ -500,7 +500,7 @@ namespace url_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_StringUnicode_ShortVersion()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient(credential);
 
             Response response = client.StringUnicode();
@@ -512,7 +512,7 @@ namespace url_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_StringUnicode_ShortVersion_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient(credential);
 
             Response response = await client.StringUnicodeAsync();
@@ -524,7 +524,7 @@ namespace url_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_StringUnicode_AllParameters()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient(credential);
 
             Response response = client.StringUnicode();
@@ -536,7 +536,7 @@ namespace url_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_StringUnicode_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient(credential);
 
             Response response = await client.StringUnicodeAsync();
@@ -548,7 +548,7 @@ namespace url_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_StringUrlEncoded_ShortVersion()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient(credential);
 
             Response response = client.StringUrlEncoded();
@@ -560,7 +560,7 @@ namespace url_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_StringUrlEncoded_ShortVersion_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient(credential);
 
             Response response = await client.StringUrlEncodedAsync();
@@ -572,7 +572,7 @@ namespace url_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_StringUrlEncoded_AllParameters()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient(credential);
 
             Response response = client.StringUrlEncoded();
@@ -584,7 +584,7 @@ namespace url_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_StringUrlEncoded_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient(credential);
 
             Response response = await client.StringUrlEncodedAsync();
@@ -596,7 +596,7 @@ namespace url_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_StringUrlNonEncoded_ShortVersion()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient(credential);
 
             Response response = client.StringUrlNonEncoded();
@@ -608,7 +608,7 @@ namespace url_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_StringUrlNonEncoded_ShortVersion_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient(credential);
 
             Response response = await client.StringUrlNonEncodedAsync();
@@ -620,7 +620,7 @@ namespace url_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_StringUrlNonEncoded_AllParameters()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient(credential);
 
             Response response = client.StringUrlNonEncoded();
@@ -632,7 +632,7 @@ namespace url_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_StringUrlNonEncoded_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient(credential);
 
             Response response = await client.StringUrlNonEncodedAsync();
@@ -644,7 +644,7 @@ namespace url_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_StringEmpty_ShortVersion()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient(credential);
 
             Response response = client.StringEmpty();
@@ -656,7 +656,7 @@ namespace url_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_StringEmpty_ShortVersion_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient(credential);
 
             Response response = await client.StringEmptyAsync();
@@ -668,7 +668,7 @@ namespace url_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_StringEmpty_AllParameters()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient(credential);
 
             Response response = client.StringEmpty();
@@ -680,7 +680,7 @@ namespace url_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_StringEmpty_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient(credential);
 
             Response response = await client.StringEmptyAsync();
@@ -692,7 +692,7 @@ namespace url_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_StringNull_ShortVersion()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient(credential);
 
             Response response = client.StringNull("<stringPath>");
@@ -704,7 +704,7 @@ namespace url_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_StringNull_ShortVersion_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient(credential);
 
             Response response = await client.StringNullAsync("<stringPath>");
@@ -716,7 +716,7 @@ namespace url_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_StringNull_AllParameters()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient(credential);
 
             Response response = client.StringNull("<stringPath>");
@@ -728,7 +728,7 @@ namespace url_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_StringNull_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient(credential);
 
             Response response = await client.StringNullAsync("<stringPath>");
@@ -740,7 +740,7 @@ namespace url_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_EnumValid_ShortVersion()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient(credential);
 
             Response response = client.EnumValid("red color");
@@ -752,7 +752,7 @@ namespace url_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_EnumValid_ShortVersion_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient(credential);
 
             Response response = await client.EnumValidAsync("red color");
@@ -764,7 +764,7 @@ namespace url_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_EnumValid_AllParameters()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient(credential);
 
             Response response = client.EnumValid("red color");
@@ -776,7 +776,7 @@ namespace url_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_EnumValid_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient(credential);
 
             Response response = await client.EnumValidAsync("red color");
@@ -788,7 +788,7 @@ namespace url_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_EnumNull_ShortVersion()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient(credential);
 
             Response response = client.EnumNull("red color");
@@ -800,7 +800,7 @@ namespace url_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_EnumNull_ShortVersion_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient(credential);
 
             Response response = await client.EnumNullAsync("red color");
@@ -812,7 +812,7 @@ namespace url_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_EnumNull_AllParameters()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient(credential);
 
             Response response = client.EnumNull("red color");
@@ -824,7 +824,7 @@ namespace url_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_EnumNull_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient(credential);
 
             Response response = await client.EnumNullAsync("red color");
@@ -836,7 +836,7 @@ namespace url_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ByteMultiByte_ShortVersion()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient(credential);
 
             Response response = client.ByteMultiByte(BinaryData.FromObjectAsJson(new object()));
@@ -848,7 +848,7 @@ namespace url_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ByteMultiByte_ShortVersion_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient(credential);
 
             Response response = await client.ByteMultiByteAsync(BinaryData.FromObjectAsJson(new object()));
@@ -860,7 +860,7 @@ namespace url_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ByteMultiByte_AllParameters()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient(credential);
 
             Response response = client.ByteMultiByte(BinaryData.FromObjectAsJson(new object()));
@@ -872,7 +872,7 @@ namespace url_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ByteMultiByte_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient(credential);
 
             Response response = await client.ByteMultiByteAsync(BinaryData.FromObjectAsJson(new object()));
@@ -884,7 +884,7 @@ namespace url_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ByteEmpty_ShortVersion()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient(credential);
 
             Response response = client.ByteEmpty();
@@ -896,7 +896,7 @@ namespace url_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ByteEmpty_ShortVersion_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient(credential);
 
             Response response = await client.ByteEmptyAsync();
@@ -908,7 +908,7 @@ namespace url_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ByteEmpty_AllParameters()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient(credential);
 
             Response response = client.ByteEmpty();
@@ -920,7 +920,7 @@ namespace url_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ByteEmpty_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient(credential);
 
             Response response = await client.ByteEmptyAsync();
@@ -932,7 +932,7 @@ namespace url_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ByteNull_ShortVersion()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient(credential);
 
             Response response = client.ByteNull(BinaryData.FromObjectAsJson(new object()));
@@ -944,7 +944,7 @@ namespace url_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ByteNull_ShortVersion_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient(credential);
 
             Response response = await client.ByteNullAsync(BinaryData.FromObjectAsJson(new object()));
@@ -956,7 +956,7 @@ namespace url_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ByteNull_AllParameters()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient(credential);
 
             Response response = client.ByteNull(BinaryData.FromObjectAsJson(new object()));
@@ -968,7 +968,7 @@ namespace url_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ByteNull_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient(credential);
 
             Response response = await client.ByteNullAsync(BinaryData.FromObjectAsJson(new object()));
@@ -980,7 +980,7 @@ namespace url_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_DateValid_ShortVersion()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient(credential);
 
             Response response = client.DateValid();
@@ -992,7 +992,7 @@ namespace url_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_DateValid_ShortVersion_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient(credential);
 
             Response response = await client.DateValidAsync();
@@ -1004,7 +1004,7 @@ namespace url_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_DateValid_AllParameters()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient(credential);
 
             Response response = client.DateValid();
@@ -1016,7 +1016,7 @@ namespace url_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_DateValid_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient(credential);
 
             Response response = await client.DateValidAsync();
@@ -1028,7 +1028,7 @@ namespace url_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_DateNull_ShortVersion()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient(credential);
 
             Response response = client.DateNull(DateTimeOffset.Parse("2022-05-10"));
@@ -1040,7 +1040,7 @@ namespace url_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_DateNull_ShortVersion_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient(credential);
 
             Response response = await client.DateNullAsync(DateTimeOffset.Parse("2022-05-10"));
@@ -1052,7 +1052,7 @@ namespace url_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_DateNull_AllParameters()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient(credential);
 
             Response response = client.DateNull(DateTimeOffset.Parse("2022-05-10"));
@@ -1064,7 +1064,7 @@ namespace url_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_DateNull_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient(credential);
 
             Response response = await client.DateNullAsync(DateTimeOffset.Parse("2022-05-10"));
@@ -1076,7 +1076,7 @@ namespace url_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_DateTimeValid_ShortVersion()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient(credential);
 
             Response response = client.DateTimeValid();
@@ -1088,7 +1088,7 @@ namespace url_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_DateTimeValid_ShortVersion_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient(credential);
 
             Response response = await client.DateTimeValidAsync();
@@ -1100,7 +1100,7 @@ namespace url_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_DateTimeValid_AllParameters()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient(credential);
 
             Response response = client.DateTimeValid();
@@ -1112,7 +1112,7 @@ namespace url_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_DateTimeValid_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient(credential);
 
             Response response = await client.DateTimeValidAsync();
@@ -1124,7 +1124,7 @@ namespace url_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_DateTimeNull_ShortVersion()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient(credential);
 
             Response response = client.DateTimeNull(DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"));
@@ -1136,7 +1136,7 @@ namespace url_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_DateTimeNull_ShortVersion_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient(credential);
 
             Response response = await client.DateTimeNullAsync(DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"));
@@ -1148,7 +1148,7 @@ namespace url_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_DateTimeNull_AllParameters()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient(credential);
 
             Response response = client.DateTimeNull(DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"));
@@ -1160,7 +1160,7 @@ namespace url_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_DateTimeNull_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient(credential);
 
             Response response = await client.DateTimeNullAsync(DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"));
@@ -1172,7 +1172,7 @@ namespace url_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Base64Url_ShortVersion()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient(credential);
 
             Response response = client.Base64Url(BinaryData.FromObjectAsJson(new object()));
@@ -1184,7 +1184,7 @@ namespace url_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Base64Url_ShortVersion_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient(credential);
 
             Response response = await client.Base64UrlAsync(BinaryData.FromObjectAsJson(new object()));
@@ -1196,7 +1196,7 @@ namespace url_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Base64Url_AllParameters()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient(credential);
 
             Response response = client.Base64Url(BinaryData.FromObjectAsJson(new object()));
@@ -1208,7 +1208,7 @@ namespace url_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Base64Url_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient(credential);
 
             Response response = await client.Base64UrlAsync(BinaryData.FromObjectAsJson(new object()));
@@ -1220,7 +1220,7 @@ namespace url_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ArrayCsvInPath_ShortVersion()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient(credential);
 
             Response response = client.ArrayCsvInPath(new string[] { "<arrayPath>" });
@@ -1232,7 +1232,7 @@ namespace url_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ArrayCsvInPath_ShortVersion_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient(credential);
 
             Response response = await client.ArrayCsvInPathAsync(new string[] { "<arrayPath>" });
@@ -1244,7 +1244,7 @@ namespace url_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ArrayCsvInPath_AllParameters()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient(credential);
 
             Response response = client.ArrayCsvInPath(new string[] { "<arrayPath>" });
@@ -1256,7 +1256,7 @@ namespace url_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ArrayCsvInPath_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient(credential);
 
             Response response = await client.ArrayCsvInPathAsync(new string[] { "<arrayPath>" });
@@ -1268,7 +1268,7 @@ namespace url_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_UnixTimeUrl_ShortVersion()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient(credential);
 
             Response response = client.UnixTimeUrl(DateTimeOffset.FromUnixTimeSeconds(1652209051L));
@@ -1280,7 +1280,7 @@ namespace url_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_UnixTimeUrl_ShortVersion_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient(credential);
 
             Response response = await client.UnixTimeUrlAsync(DateTimeOffset.FromUnixTimeSeconds(1652209051L));
@@ -1292,7 +1292,7 @@ namespace url_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_UnixTimeUrl_AllParameters()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient(credential);
 
             Response response = client.UnixTimeUrl(DateTimeOffset.FromUnixTimeSeconds(1652209051L));
@@ -1304,7 +1304,7 @@ namespace url_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_UnixTimeUrl_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient(credential);
 
             Response response = await client.UnixTimeUrlAsync(DateTimeOffset.FromUnixTimeSeconds(1652209051L));

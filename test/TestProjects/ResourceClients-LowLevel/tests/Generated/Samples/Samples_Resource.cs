@@ -21,7 +21,7 @@ namespace ResourceClients_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetItem_ShortVersion()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("Resource_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Resource client = new ResourceServiceClient(credential).GetResourceGroup("<GroupId>").GetResource("<ItemId>");
 
             Response response = client.GetItem(null);
@@ -34,7 +34,7 @@ namespace ResourceClients_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetItem_ShortVersion_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("Resource_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Resource client = new ResourceServiceClient(credential).GetResourceGroup("<GroupId>").GetResource("<ItemId>");
 
             Response response = await client.GetItemAsync(null);
@@ -47,7 +47,7 @@ namespace ResourceClients_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetItem_AllParameters()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("Resource_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Resource client = new ResourceServiceClient(credential).GetResourceGroup("<GroupId>").GetResource("<ItemId>");
 
             Response response = client.GetItem(null);
@@ -60,7 +60,7 @@ namespace ResourceClients_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetItem_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("Resource_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Resource client = new ResourceServiceClient(credential).GetResourceGroup("<GroupId>").GetResource("<ItemId>");
 
             Response response = await client.GetItemAsync(null);

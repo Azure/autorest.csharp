@@ -20,7 +20,7 @@ namespace HeadAsBooleanTrue_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Head200_ShortVersion()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HttpSuccessClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
 
             Response<bool> response = client.Head200();
@@ -32,7 +32,7 @@ namespace HeadAsBooleanTrue_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Head200_ShortVersion_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HttpSuccessClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
 
             Response<bool> response = await client.Head200Async();
@@ -44,7 +44,7 @@ namespace HeadAsBooleanTrue_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Head200_AllParameters()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HttpSuccessClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
 
             Response<bool> response = client.Head200();
@@ -56,7 +56,7 @@ namespace HeadAsBooleanTrue_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Head200_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HttpSuccessClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
 
             Response<bool> response = await client.Head200Async();
@@ -68,7 +68,7 @@ namespace HeadAsBooleanTrue_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Head204_ShortVersion()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HttpSuccessClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
 
             Response<bool> response = client.Head204();
@@ -80,7 +80,7 @@ namespace HeadAsBooleanTrue_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Head204_ShortVersion_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HttpSuccessClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
 
             Response<bool> response = await client.Head204Async();
@@ -92,7 +92,7 @@ namespace HeadAsBooleanTrue_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Head204_AllParameters()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HttpSuccessClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
 
             Response<bool> response = client.Head204();
@@ -104,7 +104,7 @@ namespace HeadAsBooleanTrue_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Head204_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HttpSuccessClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
 
             Response<bool> response = await client.Head204Async();
@@ -116,7 +116,7 @@ namespace HeadAsBooleanTrue_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Head404_ShortVersion()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HttpSuccessClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
 
             Response<bool> response = client.Head404();
@@ -128,7 +128,7 @@ namespace HeadAsBooleanTrue_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Head404_ShortVersion_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HttpSuccessClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
 
             Response<bool> response = await client.Head404Async();
@@ -140,7 +140,7 @@ namespace HeadAsBooleanTrue_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Head404_AllParameters()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HttpSuccessClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
 
             Response<bool> response = client.Head404();
@@ -152,7 +152,7 @@ namespace HeadAsBooleanTrue_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Head404_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HttpSuccessClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpSuccessClient client = new HttpSuccessClient(credential);
 
             Response<bool> response = await client.Head404Async();

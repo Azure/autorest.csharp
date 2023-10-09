@@ -21,7 +21,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Operation_ShortVersion()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("Client2_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Client2 client = new TopLevelClientWithOperationClient(credential).GetClient2Client();
 
             Response response = client.Operation(null);
@@ -34,7 +34,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Operation_ShortVersion_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("Client2_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Client2 client = new TopLevelClientWithOperationClient(credential).GetClient2Client();
 
             Response response = await client.OperationAsync(null);
@@ -47,7 +47,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Operation_AllParameters()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("Client2_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Client2 client = new TopLevelClientWithOperationClient(credential).GetClient2Client();
 
             Response response = client.Operation(null);
@@ -60,7 +60,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Operation_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("Client2_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Client2 client = new TopLevelClientWithOperationClient(credential).GetClient2Client();
 
             Response response = await client.OperationAsync(null);

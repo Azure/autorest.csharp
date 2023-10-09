@@ -5,7 +5,7 @@
       <example>
 This sample shows how to call GetValidAsync and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("FlattencomplexClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 FlattencomplexClient client = new FlattencomplexClient(credential);
 
 Response response = await client.GetValidAsync(null);
@@ -15,7 +15,7 @@ Console.WriteLine(result.GetProperty("kind").ToString());
 ]]></code>
 This sample shows how to call GetValidAsync with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("FlattencomplexClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 FlattencomplexClient client = new FlattencomplexClient(credential);
 
 Response response = await client.GetValidAsync(null);
@@ -30,7 +30,7 @@ Console.WriteLine(result.GetProperty("helper").GetProperty("propBH1").ToString()
       <example>
 This sample shows how to call GetValid and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("FlattencomplexClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 FlattencomplexClient client = new FlattencomplexClient(credential);
 
 Response response = client.GetValid(null);
@@ -40,7 +40,7 @@ Console.WriteLine(result.GetProperty("kind").ToString());
 ]]></code>
 This sample shows how to call GetValid with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("FlattencomplexClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 FlattencomplexClient client = new FlattencomplexClient(credential);
 
 Response response = client.GetValid(null);

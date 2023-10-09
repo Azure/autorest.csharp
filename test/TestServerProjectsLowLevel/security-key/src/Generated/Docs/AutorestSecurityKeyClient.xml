@@ -5,7 +5,7 @@
       <example>
 This sample shows how to call HeadAsync.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("AutorestSecurityKeyClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 AutorestSecurityKeyClient client = new AutorestSecurityKeyClient(credential);
 
 Response response = await client.HeadAsync();
@@ -14,7 +14,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call HeadAsync with all request content.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("AutorestSecurityKeyClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 AutorestSecurityKeyClient client = new AutorestSecurityKeyClient(credential);
 
 Response response = await client.HeadAsync();
@@ -26,7 +26,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call Head.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("AutorestSecurityKeyClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 AutorestSecurityKeyClient client = new AutorestSecurityKeyClient(credential);
 
 Response response = client.Head();
@@ -35,7 +35,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Head with all request content.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("AutorestSecurityKeyClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 AutorestSecurityKeyClient client = new AutorestSecurityKeyClient(credential);
 
 Response response = client.Head();

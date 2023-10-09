@@ -20,7 +20,7 @@ namespace custom_baseUrl_more_options_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetEmpty_ShortVersion()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient("host", "<SubscriptionId>", credential);
 
             Response response = client.GetEmpty("<vault>", "<secret>", "<keyName>");
@@ -32,7 +32,7 @@ namespace custom_baseUrl_more_options_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetEmpty_ShortVersion_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient("host", "<SubscriptionId>", credential);
 
             Response response = await client.GetEmptyAsync("<vault>", "<secret>", "<keyName>");
@@ -44,7 +44,7 @@ namespace custom_baseUrl_more_options_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetEmpty_AllParameters()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient("host", "<SubscriptionId>", credential);
 
             Response response = client.GetEmpty("<vault>", "<secret>", "<keyName>", keyVersion: "<keyVersion>");
@@ -56,7 +56,7 @@ namespace custom_baseUrl_more_options_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetEmpty_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PathsClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient("host", "<SubscriptionId>", credential);
 
             Response response = await client.GetEmptyAsync("<vault>", "<secret>", "<keyName>", keyVersion: "<keyVersion>");

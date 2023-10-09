@@ -21,7 +21,7 @@ namespace SubClients_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetSubParameter_ShortVersion()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("Parameter_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Parameter client = new RootClient(null, credential).GetParameterClient();
 
             Response response = client.GetSubParameter("<subParameter>", null);
@@ -34,7 +34,7 @@ namespace SubClients_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetSubParameter_ShortVersion_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("Parameter_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Parameter client = new RootClient(null, credential).GetParameterClient();
 
             Response response = await client.GetSubParameterAsync("<subParameter>", null);
@@ -47,7 +47,7 @@ namespace SubClients_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetSubParameter_AllParameters()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("Parameter_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Parameter client = new RootClient(null, credential).GetParameterClient();
 
             Response response = client.GetSubParameter("<subParameter>", null);
@@ -60,7 +60,7 @@ namespace SubClients_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetSubParameter_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("Parameter_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Parameter client = new RootClient(null, credential).GetParameterClient();
 
             Response response = await client.GetSubParameterAsync("<subParameter>", null);

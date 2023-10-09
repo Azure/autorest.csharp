@@ -5,7 +5,7 @@
       <example>
 This sample shows how to call GetIntAsync and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PrimitiveClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
 Response response = await client.GetIntAsync(null);
@@ -15,7 +15,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetIntAsync with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PrimitiveClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
 Response response = await client.GetIntAsync(null);
@@ -29,7 +29,7 @@ Console.WriteLine(result.GetProperty("field2").ToString());
       <example>
 This sample shows how to call GetInt and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PrimitiveClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
 Response response = client.GetInt(null);
@@ -39,7 +39,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetInt with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PrimitiveClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
 Response response = client.GetInt(null);
@@ -53,7 +53,7 @@ Console.WriteLine(result.GetProperty("field2").ToString());
       <example>
 This sample shows how to call PutIntAsync.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PrimitiveClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
 RequestContent content = RequestContent.Create(new object());
@@ -63,7 +63,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutIntAsync with all request content.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PrimitiveClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -80,7 +80,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call PutInt.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PrimitiveClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
 RequestContent content = RequestContent.Create(new object());
@@ -90,7 +90,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutInt with all request content.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PrimitiveClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -107,7 +107,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call GetLongAsync and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PrimitiveClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
 Response response = await client.GetLongAsync(null);
@@ -117,7 +117,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetLongAsync with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PrimitiveClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
 Response response = await client.GetLongAsync(null);
@@ -131,7 +131,7 @@ Console.WriteLine(result.GetProperty("field2").ToString());
       <example>
 This sample shows how to call GetLong and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PrimitiveClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
 Response response = client.GetLong(null);
@@ -141,7 +141,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetLong with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PrimitiveClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
 Response response = client.GetLong(null);
@@ -155,7 +155,7 @@ Console.WriteLine(result.GetProperty("field2").ToString());
       <example>
 This sample shows how to call PutLongAsync.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PrimitiveClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
 RequestContent content = RequestContent.Create(new object());
@@ -165,7 +165,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutLongAsync with all request content.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PrimitiveClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -182,7 +182,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call PutLong.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PrimitiveClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
 RequestContent content = RequestContent.Create(new object());
@@ -192,7 +192,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutLong with all request content.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PrimitiveClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -209,7 +209,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call GetFloatAsync and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PrimitiveClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
 Response response = await client.GetFloatAsync(null);
@@ -219,7 +219,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetFloatAsync with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PrimitiveClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
 Response response = await client.GetFloatAsync(null);
@@ -233,7 +233,7 @@ Console.WriteLine(result.GetProperty("field2").ToString());
       <example>
 This sample shows how to call GetFloat and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PrimitiveClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
 Response response = client.GetFloat(null);
@@ -243,7 +243,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetFloat with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PrimitiveClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
 Response response = client.GetFloat(null);
@@ -257,7 +257,7 @@ Console.WriteLine(result.GetProperty("field2").ToString());
       <example>
 This sample shows how to call PutFloatAsync.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PrimitiveClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
 RequestContent content = RequestContent.Create(new object());
@@ -267,7 +267,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutFloatAsync with all request content.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PrimitiveClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -284,7 +284,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call PutFloat.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PrimitiveClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
 RequestContent content = RequestContent.Create(new object());
@@ -294,7 +294,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutFloat with all request content.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PrimitiveClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -311,7 +311,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call GetDoubleAsync and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PrimitiveClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
 Response response = await client.GetDoubleAsync(null);
@@ -321,7 +321,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetDoubleAsync with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PrimitiveClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
 Response response = await client.GetDoubleAsync(null);
@@ -335,7 +335,7 @@ Console.WriteLine(result.GetProperty("field_56_zeros_after_the_dot_and_negative_
       <example>
 This sample shows how to call GetDouble and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PrimitiveClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
 Response response = client.GetDouble(null);
@@ -345,7 +345,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetDouble with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PrimitiveClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
 Response response = client.GetDouble(null);
@@ -359,7 +359,7 @@ Console.WriteLine(result.GetProperty("field_56_zeros_after_the_dot_and_negative_
       <example>
 This sample shows how to call PutDoubleAsync.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PrimitiveClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
 RequestContent content = RequestContent.Create(new object());
@@ -369,7 +369,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutDoubleAsync with all request content.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PrimitiveClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -386,7 +386,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call PutDouble.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PrimitiveClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
 RequestContent content = RequestContent.Create(new object());
@@ -396,7 +396,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutDouble with all request content.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PrimitiveClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -413,7 +413,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call GetBoolAsync and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PrimitiveClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
 Response response = await client.GetBoolAsync(null);
@@ -423,7 +423,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetBoolAsync with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PrimitiveClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
 Response response = await client.GetBoolAsync(null);
@@ -437,7 +437,7 @@ Console.WriteLine(result.GetProperty("field_false").ToString());
       <example>
 This sample shows how to call GetBool and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PrimitiveClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
 Response response = client.GetBool(null);
@@ -447,7 +447,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetBool with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PrimitiveClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
 Response response = client.GetBool(null);
@@ -461,7 +461,7 @@ Console.WriteLine(result.GetProperty("field_false").ToString());
       <example>
 This sample shows how to call PutBoolAsync.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PrimitiveClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
 RequestContent content = RequestContent.Create(new object());
@@ -471,7 +471,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutBoolAsync with all request content.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PrimitiveClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -488,7 +488,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call PutBool.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PrimitiveClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
 RequestContent content = RequestContent.Create(new object());
@@ -498,7 +498,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutBool with all request content.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PrimitiveClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -515,7 +515,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call GetStringAsync and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PrimitiveClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
 Response response = await client.GetStringAsync(null);
@@ -525,7 +525,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetStringAsync with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PrimitiveClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
 Response response = await client.GetStringAsync(null);
@@ -540,7 +540,7 @@ Console.WriteLine(result.GetProperty("null").ToString());
       <example>
 This sample shows how to call GetString and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PrimitiveClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
 Response response = client.GetString(null);
@@ -550,7 +550,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetString with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PrimitiveClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
 Response response = client.GetString(null);
@@ -565,7 +565,7 @@ Console.WriteLine(result.GetProperty("null").ToString());
       <example>
 This sample shows how to call PutStringAsync.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PrimitiveClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
 RequestContent content = RequestContent.Create(new object());
@@ -575,7 +575,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutStringAsync with all request content.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PrimitiveClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
 RequestContent content = RequestContent.Create(new Dictionary<string, object>
@@ -593,7 +593,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call PutString.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PrimitiveClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
 RequestContent content = RequestContent.Create(new object());
@@ -603,7 +603,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutString with all request content.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PrimitiveClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
 RequestContent content = RequestContent.Create(new Dictionary<string, object>
@@ -621,7 +621,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call GetDateAsync and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PrimitiveClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
 Response response = await client.GetDateAsync(null);
@@ -631,7 +631,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetDateAsync with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PrimitiveClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
 Response response = await client.GetDateAsync(null);
@@ -645,7 +645,7 @@ Console.WriteLine(result.GetProperty("leap").ToString());
       <example>
 This sample shows how to call GetDate and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PrimitiveClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
 Response response = client.GetDate(null);
@@ -655,7 +655,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetDate with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PrimitiveClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
 Response response = client.GetDate(null);
@@ -669,7 +669,7 @@ Console.WriteLine(result.GetProperty("leap").ToString());
       <example>
 This sample shows how to call PutDateAsync.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PrimitiveClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
 RequestContent content = RequestContent.Create(new object());
@@ -679,7 +679,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutDateAsync with all request content.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PrimitiveClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -696,7 +696,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call PutDate.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PrimitiveClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
 RequestContent content = RequestContent.Create(new object());
@@ -706,7 +706,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutDate with all request content.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PrimitiveClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -723,7 +723,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call GetDateTimeAsync and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PrimitiveClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
 Response response = await client.GetDateTimeAsync(null);
@@ -733,7 +733,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetDateTimeAsync with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PrimitiveClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
 Response response = await client.GetDateTimeAsync(null);
@@ -747,7 +747,7 @@ Console.WriteLine(result.GetProperty("now").ToString());
       <example>
 This sample shows how to call GetDateTime and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PrimitiveClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
 Response response = client.GetDateTime(null);
@@ -757,7 +757,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetDateTime with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PrimitiveClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
 Response response = client.GetDateTime(null);
@@ -771,7 +771,7 @@ Console.WriteLine(result.GetProperty("now").ToString());
       <example>
 This sample shows how to call PutDateTimeAsync.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PrimitiveClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
 RequestContent content = RequestContent.Create(new object());
@@ -781,7 +781,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutDateTimeAsync with all request content.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PrimitiveClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -798,7 +798,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call PutDateTime.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PrimitiveClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
 RequestContent content = RequestContent.Create(new object());
@@ -808,7 +808,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutDateTime with all request content.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PrimitiveClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -825,7 +825,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call GetDateTimeRfc1123Async and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PrimitiveClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
 Response response = await client.GetDateTimeRfc1123Async(null);
@@ -835,7 +835,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetDateTimeRfc1123Async with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PrimitiveClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
 Response response = await client.GetDateTimeRfc1123Async(null);
@@ -849,7 +849,7 @@ Console.WriteLine(result.GetProperty("now").ToString());
       <example>
 This sample shows how to call GetDateTimeRfc1123 and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PrimitiveClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
 Response response = client.GetDateTimeRfc1123(null);
@@ -859,7 +859,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetDateTimeRfc1123 with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PrimitiveClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
 Response response = client.GetDateTimeRfc1123(null);
@@ -873,7 +873,7 @@ Console.WriteLine(result.GetProperty("now").ToString());
       <example>
 This sample shows how to call PutDateTimeRfc1123Async.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PrimitiveClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
 RequestContent content = RequestContent.Create(new object());
@@ -883,7 +883,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutDateTimeRfc1123Async with all request content.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PrimitiveClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -900,7 +900,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call PutDateTimeRfc1123.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PrimitiveClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
 RequestContent content = RequestContent.Create(new object());
@@ -910,7 +910,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutDateTimeRfc1123 with all request content.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PrimitiveClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -927,7 +927,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call GetDurationAsync and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PrimitiveClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
 Response response = await client.GetDurationAsync(null);
@@ -937,7 +937,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetDurationAsync with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PrimitiveClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
 Response response = await client.GetDurationAsync(null);
@@ -950,7 +950,7 @@ Console.WriteLine(result.GetProperty("field").ToString());
       <example>
 This sample shows how to call GetDuration and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PrimitiveClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
 Response response = client.GetDuration(null);
@@ -960,7 +960,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetDuration with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PrimitiveClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
 Response response = client.GetDuration(null);
@@ -973,7 +973,7 @@ Console.WriteLine(result.GetProperty("field").ToString());
       <example>
 This sample shows how to call PutDurationAsync.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PrimitiveClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
 RequestContent content = RequestContent.Create(new object());
@@ -983,7 +983,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutDurationAsync with all request content.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PrimitiveClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -999,7 +999,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call PutDuration.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PrimitiveClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
 RequestContent content = RequestContent.Create(new object());
@@ -1009,7 +1009,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutDuration with all request content.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PrimitiveClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -1025,7 +1025,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call GetByteAsync and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PrimitiveClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
 Response response = await client.GetByteAsync(null);
@@ -1035,7 +1035,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetByteAsync with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PrimitiveClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
 Response response = await client.GetByteAsync(null);
@@ -1048,7 +1048,7 @@ Console.WriteLine(result.GetProperty("field").ToString());
       <example>
 This sample shows how to call GetByte and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PrimitiveClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
 Response response = client.GetByte(null);
@@ -1058,7 +1058,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetByte with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PrimitiveClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
 Response response = client.GetByte(null);
@@ -1071,7 +1071,7 @@ Console.WriteLine(result.GetProperty("field").ToString());
       <example>
 This sample shows how to call PutByteAsync.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PrimitiveClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
 RequestContent content = RequestContent.Create(new object());
@@ -1081,7 +1081,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutByteAsync with all request content.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PrimitiveClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -1097,7 +1097,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call PutByte.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PrimitiveClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
 RequestContent content = RequestContent.Create(new object());
@@ -1107,7 +1107,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutByte with all request content.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("PrimitiveClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
 RequestContent content = RequestContent.Create(new

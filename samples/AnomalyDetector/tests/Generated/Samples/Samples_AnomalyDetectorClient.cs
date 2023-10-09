@@ -24,7 +24,7 @@ namespace AnomalyDetector.Samples
         public void Example_DetectUnivariateEntireSeries_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("AnomalyDetectorClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
             RequestContent content = RequestContent.Create(new
@@ -54,7 +54,7 @@ value = 123.45F,
         public async Task Example_DetectUnivariateEntireSeries_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("AnomalyDetectorClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
             RequestContent content = RequestContent.Create(new
@@ -84,7 +84,7 @@ value = 123.45F,
         public void Example_DetectUnivariateEntireSeries_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("AnomalyDetectorClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
             UnivariateDetectionOptions options = new UnivariateDetectionOptions(new TimeSeriesPoint[]
@@ -99,7 +99,7 @@ new TimeSeriesPoint(123.45F)
         public async Task Example_DetectUnivariateEntireSeries_ShortVersion_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("AnomalyDetectorClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
             UnivariateDetectionOptions options = new UnivariateDetectionOptions(new TimeSeriesPoint[]
@@ -114,7 +114,7 @@ new TimeSeriesPoint(123.45F)
         public void Example_DetectUnivariateEntireSeries_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("AnomalyDetectorClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
             RequestContent content = RequestContent.Create(new
@@ -153,7 +153,7 @@ value = 123.45F,
         public async Task Example_DetectUnivariateEntireSeries_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("AnomalyDetectorClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
             RequestContent content = RequestContent.Create(new
@@ -192,7 +192,7 @@ value = 123.45F,
         public void Example_DetectUnivariateEntireSeries_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("AnomalyDetectorClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
             UnivariateDetectionOptions options = new UnivariateDetectionOptions(new TimeSeriesPoint[]
@@ -219,7 +219,7 @@ Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
         public async Task Example_DetectUnivariateEntireSeries_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("AnomalyDetectorClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
             UnivariateDetectionOptions options = new UnivariateDetectionOptions(new TimeSeriesPoint[]
@@ -246,7 +246,7 @@ Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
         public void Example_DetectUnivariateLastPoint_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("AnomalyDetectorClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
             RequestContent content = RequestContent.Create(new
@@ -277,7 +277,7 @@ value = 123.45F,
         public async Task Example_DetectUnivariateLastPoint_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("AnomalyDetectorClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
             RequestContent content = RequestContent.Create(new
@@ -308,7 +308,7 @@ value = 123.45F,
         public void Example_DetectUnivariateLastPoint_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("AnomalyDetectorClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
             UnivariateDetectionOptions options = new UnivariateDetectionOptions(new TimeSeriesPoint[]
@@ -323,7 +323,7 @@ new TimeSeriesPoint(123.45F)
         public async Task Example_DetectUnivariateLastPoint_ShortVersion_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("AnomalyDetectorClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
             UnivariateDetectionOptions options = new UnivariateDetectionOptions(new TimeSeriesPoint[]
@@ -338,7 +338,7 @@ new TimeSeriesPoint(123.45F)
         public void Example_DetectUnivariateLastPoint_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("AnomalyDetectorClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
             RequestContent content = RequestContent.Create(new
@@ -378,7 +378,7 @@ value = 123.45F,
         public async Task Example_DetectUnivariateLastPoint_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("AnomalyDetectorClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
             RequestContent content = RequestContent.Create(new
@@ -418,7 +418,7 @@ value = 123.45F,
         public void Example_DetectUnivariateLastPoint_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("AnomalyDetectorClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
             UnivariateDetectionOptions options = new UnivariateDetectionOptions(new TimeSeriesPoint[]
@@ -445,7 +445,7 @@ Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
         public async Task Example_DetectUnivariateLastPoint_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("AnomalyDetectorClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
             UnivariateDetectionOptions options = new UnivariateDetectionOptions(new TimeSeriesPoint[]
@@ -472,7 +472,7 @@ Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
         public void Example_DetectUnivariateChangePoint_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("AnomalyDetectorClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
             RequestContent content = RequestContent.Create(new
@@ -497,7 +497,7 @@ value = 123.45F,
         public async Task Example_DetectUnivariateChangePoint_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("AnomalyDetectorClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
             RequestContent content = RequestContent.Create(new
@@ -522,7 +522,7 @@ value = 123.45F,
         public void Example_DetectUnivariateChangePoint_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("AnomalyDetectorClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
             UnivariateChangePointDetectionOptions options = new UnivariateChangePointDetectionOptions(new TimeSeriesPoint[]
@@ -537,7 +537,7 @@ new TimeSeriesPoint(123.45F)
         public async Task Example_DetectUnivariateChangePoint_ShortVersion_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("AnomalyDetectorClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
             UnivariateChangePointDetectionOptions options = new UnivariateChangePointDetectionOptions(new TimeSeriesPoint[]
@@ -552,7 +552,7 @@ new TimeSeriesPoint(123.45F)
         public void Example_DetectUnivariateChangePoint_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("AnomalyDetectorClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
             RequestContent content = RequestContent.Create(new
@@ -584,7 +584,7 @@ value = 123.45F,
         public async Task Example_DetectUnivariateChangePoint_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("AnomalyDetectorClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
             RequestContent content = RequestContent.Create(new
@@ -616,7 +616,7 @@ value = 123.45F,
         public void Example_DetectUnivariateChangePoint_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("AnomalyDetectorClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
             UnivariateChangePointDetectionOptions options = new UnivariateChangePointDetectionOptions(new TimeSeriesPoint[]
@@ -640,7 +640,7 @@ Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
         public async Task Example_DetectUnivariateChangePoint_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("AnomalyDetectorClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
             UnivariateChangePointDetectionOptions options = new UnivariateChangePointDetectionOptions(new TimeSeriesPoint[]
@@ -664,7 +664,7 @@ Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
         public void Example_GetMultivariateBatchDetectionResult_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("AnomalyDetectorClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
             Response response = client.GetMultivariateBatchDetectionResult(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), null);
@@ -684,7 +684,7 @@ Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
         public async Task Example_GetMultivariateBatchDetectionResult_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("AnomalyDetectorClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
             Response response = await client.GetMultivariateBatchDetectionResultAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), null);
@@ -704,7 +704,7 @@ Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
         public void Example_GetMultivariateBatchDetectionResult_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("AnomalyDetectorClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
             Response<MultivariateDetectionResult> response = client.GetMultivariateBatchDetectionResult(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
@@ -715,7 +715,7 @@ Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
         public async Task Example_GetMultivariateBatchDetectionResult_ShortVersion_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("AnomalyDetectorClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
             Response<MultivariateDetectionResult> response = await client.GetMultivariateBatchDetectionResultAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
@@ -726,7 +726,7 @@ Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
         public void Example_GetMultivariateBatchDetectionResult_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("AnomalyDetectorClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
             Response response = client.GetMultivariateBatchDetectionResult(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), null);
@@ -761,7 +761,7 @@ Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
         public async Task Example_GetMultivariateBatchDetectionResult_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("AnomalyDetectorClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
             Response response = await client.GetMultivariateBatchDetectionResultAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), null);
@@ -796,7 +796,7 @@ Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
         public void Example_GetMultivariateBatchDetectionResult_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("AnomalyDetectorClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
             Response<MultivariateDetectionResult> response = client.GetMultivariateBatchDetectionResult(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
@@ -807,7 +807,7 @@ Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
         public async Task Example_GetMultivariateBatchDetectionResult_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("AnomalyDetectorClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
             Response<MultivariateDetectionResult> response = await client.GetMultivariateBatchDetectionResultAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
@@ -818,7 +818,7 @@ Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
         public void Example_TrainMultivariateModel_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("AnomalyDetectorClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
             RequestContent content = RequestContent.Create(new
@@ -840,7 +840,7 @@ Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
         public async Task Example_TrainMultivariateModel_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("AnomalyDetectorClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
             RequestContent content = RequestContent.Create(new
@@ -862,7 +862,7 @@ Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
         public void Example_TrainMultivariateModel_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("AnomalyDetectorClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
             ModelInfo modelInfo = new ModelInfo("<dataSource>", DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"), DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
@@ -874,7 +874,7 @@ Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
         public async Task Example_TrainMultivariateModel_ShortVersion_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("AnomalyDetectorClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
             ModelInfo modelInfo = new ModelInfo("<dataSource>", DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"), DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
@@ -886,7 +886,7 @@ Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
         public void Example_TrainMultivariateModel_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("AnomalyDetectorClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
             RequestContent content = RequestContent.Create(new
@@ -972,7 +972,7 @@ lastTimestamp = "2022-05-10T14:57:31.2311892-04:00",
         public async Task Example_TrainMultivariateModel_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("AnomalyDetectorClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
             RequestContent content = RequestContent.Create(new
@@ -1058,7 +1058,7 @@ lastTimestamp = "2022-05-10T14:57:31.2311892-04:00",
         public void Example_TrainMultivariateModel_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("AnomalyDetectorClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
             ModelInfo modelInfo = new ModelInfo("<dataSource>", DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"), DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"))
@@ -1100,7 +1100,7 @@ LastTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
         public async Task Example_TrainMultivariateModel_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("AnomalyDetectorClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
             ModelInfo modelInfo = new ModelInfo("<dataSource>", DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"), DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"))
@@ -1142,7 +1142,7 @@ LastTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
         public void Example_DeleteMultivariateModel_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("AnomalyDetectorClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
             Response response = client.DeleteMultivariateModel("<modelId>");
@@ -1155,7 +1155,7 @@ LastTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
         public async Task Example_DeleteMultivariateModel_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("AnomalyDetectorClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
             Response response = await client.DeleteMultivariateModelAsync("<modelId>");
@@ -1168,7 +1168,7 @@ LastTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
         public void Example_DeleteMultivariateModel_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("AnomalyDetectorClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
             Response response = client.DeleteMultivariateModel("<modelId>");
@@ -1181,7 +1181,7 @@ LastTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
         public async Task Example_DeleteMultivariateModel_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("AnomalyDetectorClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
             Response response = await client.DeleteMultivariateModelAsync("<modelId>");
@@ -1194,7 +1194,7 @@ LastTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
         public void Example_GetMultivariateModel_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("AnomalyDetectorClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
             Response response = client.GetMultivariateModel("<modelId>", null);
@@ -1210,7 +1210,7 @@ LastTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
         public async Task Example_GetMultivariateModel_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("AnomalyDetectorClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
             Response response = await client.GetMultivariateModelAsync("<modelId>", null);
@@ -1226,7 +1226,7 @@ LastTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
         public void Example_GetMultivariateModel_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("AnomalyDetectorClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
             Response<AnomalyDetectionModel> response = client.GetMultivariateModel("<modelId>");
@@ -1237,7 +1237,7 @@ LastTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
         public async Task Example_GetMultivariateModel_ShortVersion_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("AnomalyDetectorClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
             Response<AnomalyDetectionModel> response = await client.GetMultivariateModelAsync("<modelId>");
@@ -1248,7 +1248,7 @@ LastTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
         public void Example_GetMultivariateModel_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("AnomalyDetectorClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
             Response response = client.GetMultivariateModel("<modelId>", null);
@@ -1285,7 +1285,7 @@ LastTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
         public async Task Example_GetMultivariateModel_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("AnomalyDetectorClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
             Response response = await client.GetMultivariateModelAsync("<modelId>", null);
@@ -1322,7 +1322,7 @@ LastTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
         public void Example_GetMultivariateModel_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("AnomalyDetectorClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
             Response<AnomalyDetectionModel> response = client.GetMultivariateModel("<modelId>");
@@ -1333,7 +1333,7 @@ LastTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
         public async Task Example_GetMultivariateModel_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("AnomalyDetectorClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
             Response<AnomalyDetectionModel> response = await client.GetMultivariateModelAsync("<modelId>");
@@ -1344,7 +1344,7 @@ LastTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
         public void Example_DetectMultivariateBatchAnomaly_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("AnomalyDetectorClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
             RequestContent content = RequestContent.Create(new
@@ -1371,7 +1371,7 @@ LastTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
         public async Task Example_DetectMultivariateBatchAnomaly_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("AnomalyDetectorClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
             RequestContent content = RequestContent.Create(new
@@ -1398,7 +1398,7 @@ LastTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
         public void Example_DetectMultivariateBatchAnomaly_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("AnomalyDetectorClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
             MultivariateBatchDetectionOptions options = new MultivariateBatchDetectionOptions(new Uri("http://localhost:3000"), 1234, DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"), DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
@@ -1410,7 +1410,7 @@ LastTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
         public async Task Example_DetectMultivariateBatchAnomaly_ShortVersion_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("AnomalyDetectorClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
             MultivariateBatchDetectionOptions options = new MultivariateBatchDetectionOptions(new Uri("http://localhost:3000"), 1234, DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"), DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
@@ -1422,7 +1422,7 @@ LastTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
         public void Example_DetectMultivariateBatchAnomaly_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("AnomalyDetectorClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
             RequestContent content = RequestContent.Create(new
@@ -1464,7 +1464,7 @@ LastTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
         public async Task Example_DetectMultivariateBatchAnomaly_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("AnomalyDetectorClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
             RequestContent content = RequestContent.Create(new
@@ -1506,7 +1506,7 @@ LastTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
         public void Example_DetectMultivariateBatchAnomaly_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("AnomalyDetectorClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
             MultivariateBatchDetectionOptions options = new MultivariateBatchDetectionOptions(new Uri("http://localhost:3000"), 1234, DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"), DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
@@ -1518,7 +1518,7 @@ LastTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
         public async Task Example_DetectMultivariateBatchAnomaly_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("AnomalyDetectorClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
             MultivariateBatchDetectionOptions options = new MultivariateBatchDetectionOptions(new Uri("http://localhost:3000"), 1234, DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"), DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
@@ -1530,7 +1530,7 @@ LastTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
         public void Example_DetectMultivariateLastAnomaly_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("AnomalyDetectorClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
             RequestContent content = RequestContent.Create(new
@@ -1563,7 +1563,7 @@ values = new object[]
         public async Task Example_DetectMultivariateLastAnomaly_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("AnomalyDetectorClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
             RequestContent content = RequestContent.Create(new
@@ -1596,7 +1596,7 @@ values = new object[]
         public void Example_DetectMultivariateLastAnomaly_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("AnomalyDetectorClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
             MultivariateLastDetectionOptions options = new MultivariateLastDetectionOptions(new VariableValues[]
@@ -1611,7 +1611,7 @@ new VariableValues("<variable>", new string[]{"<timestamps>"}, new float[]{123.4
         public async Task Example_DetectMultivariateLastAnomaly_ShortVersion_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("AnomalyDetectorClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
             MultivariateLastDetectionOptions options = new MultivariateLastDetectionOptions(new VariableValues[]
@@ -1626,7 +1626,7 @@ new VariableValues("<variable>", new string[]{"<timestamps>"}, new float[]{123.4
         public void Example_DetectMultivariateLastAnomaly_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("AnomalyDetectorClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
             RequestContent content = RequestContent.Create(new
@@ -1672,7 +1672,7 @@ values = new object[]
         public async Task Example_DetectMultivariateLastAnomaly_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("AnomalyDetectorClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
             RequestContent content = RequestContent.Create(new
@@ -1718,7 +1718,7 @@ values = new object[]
         public void Example_DetectMultivariateLastAnomaly_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("AnomalyDetectorClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
             MultivariateLastDetectionOptions options = new MultivariateLastDetectionOptions(new VariableValues[]
@@ -1733,7 +1733,7 @@ new VariableValues("<variable>", new string[]{"<timestamps>"}, new float[]{123.4
         public async Task Example_DetectMultivariateLastAnomaly_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("AnomalyDetectorClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
             MultivariateLastDetectionOptions options = new MultivariateLastDetectionOptions(new VariableValues[]
@@ -1748,7 +1748,7 @@ new VariableValues("<variable>", new string[]{"<timestamps>"}, new float[]{123.4
         public void Example_GetMultivariateModels_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("AnomalyDetectorClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
             foreach (BinaryData item in client.GetMultivariateModels(null, null, null))
@@ -1765,7 +1765,7 @@ new VariableValues("<variable>", new string[]{"<timestamps>"}, new float[]{123.4
         public async Task Example_GetMultivariateModels_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("AnomalyDetectorClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
             await foreach (BinaryData item in client.GetMultivariateModelsAsync(null, null, null))
@@ -1782,7 +1782,7 @@ new VariableValues("<variable>", new string[]{"<timestamps>"}, new float[]{123.4
         public void Example_GetMultivariateModels_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("AnomalyDetectorClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
             foreach (AnomalyDetectionModel item in client.GetMultivariateModels())
@@ -1795,7 +1795,7 @@ new VariableValues("<variable>", new string[]{"<timestamps>"}, new float[]{123.4
         public async Task Example_GetMultivariateModels_ShortVersion_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("AnomalyDetectorClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
             await foreach (AnomalyDetectionModel item in client.GetMultivariateModelsAsync())
@@ -1808,7 +1808,7 @@ new VariableValues("<variable>", new string[]{"<timestamps>"}, new float[]{123.4
         public void Example_GetMultivariateModels_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("AnomalyDetectorClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
             foreach (BinaryData item in client.GetMultivariateModels(1234, 1234, null))
@@ -1846,7 +1846,7 @@ new VariableValues("<variable>", new string[]{"<timestamps>"}, new float[]{123.4
         public async Task Example_GetMultivariateModels_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("AnomalyDetectorClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
             await foreach (BinaryData item in client.GetMultivariateModelsAsync(1234, 1234, null))
@@ -1884,7 +1884,7 @@ new VariableValues("<variable>", new string[]{"<timestamps>"}, new float[]{123.4
         public void Example_GetMultivariateModels_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("AnomalyDetectorClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
             foreach (AnomalyDetectionModel item in client.GetMultivariateModels(skip: 1234, maxCount: 1234))
@@ -1897,7 +1897,7 @@ new VariableValues("<variable>", new string[]{"<timestamps>"}, new float[]{123.4
         public async Task Example_GetMultivariateModels_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("AnomalyDetectorClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
             await foreach (AnomalyDetectionModel item in client.GetMultivariateModelsAsync(skip: 1234, maxCount: 1234))

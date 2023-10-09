@@ -20,7 +20,7 @@ namespace security_key_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Head_ShortVersion()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("AutorestSecurityKeyClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AutorestSecurityKeyClient client = new AutorestSecurityKeyClient(credential);
 
             Response response = client.Head();
@@ -32,7 +32,7 @@ namespace security_key_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Head_ShortVersion_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("AutorestSecurityKeyClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AutorestSecurityKeyClient client = new AutorestSecurityKeyClient(credential);
 
             Response response = await client.HeadAsync();
@@ -44,7 +44,7 @@ namespace security_key_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Head_AllParameters()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("AutorestSecurityKeyClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AutorestSecurityKeyClient client = new AutorestSecurityKeyClient(credential);
 
             Response response = client.Head();
@@ -56,7 +56,7 @@ namespace security_key_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Head_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("AutorestSecurityKeyClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AutorestSecurityKeyClient client = new AutorestSecurityKeyClient(credential);
 
             Response response = await client.HeadAsync();

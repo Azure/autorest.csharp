@@ -20,7 +20,7 @@ namespace url_multi_collectionFormat_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ArrayStringMultiNull_ShortVersion()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("QueriesClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             QueriesClient client = new QueriesClient(credential);
 
             Response response = client.ArrayStringMultiNull();
@@ -32,7 +32,7 @@ namespace url_multi_collectionFormat_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ArrayStringMultiNull_ShortVersion_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("QueriesClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             QueriesClient client = new QueriesClient(credential);
 
             Response response = await client.ArrayStringMultiNullAsync();
@@ -44,7 +44,7 @@ namespace url_multi_collectionFormat_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ArrayStringMultiNull_AllParameters()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("QueriesClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             QueriesClient client = new QueriesClient(credential);
 
             Response response = client.ArrayStringMultiNull(arrayQuery: new string[] { "<arrayQuery>" });
@@ -56,7 +56,7 @@ namespace url_multi_collectionFormat_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ArrayStringMultiNull_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("QueriesClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             QueriesClient client = new QueriesClient(credential);
 
             Response response = await client.ArrayStringMultiNullAsync(arrayQuery: new string[] { "<arrayQuery>" });
@@ -68,7 +68,7 @@ namespace url_multi_collectionFormat_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ArrayStringMultiEmpty_ShortVersion()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("QueriesClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             QueriesClient client = new QueriesClient(credential);
 
             Response response = client.ArrayStringMultiEmpty();
@@ -80,7 +80,7 @@ namespace url_multi_collectionFormat_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ArrayStringMultiEmpty_ShortVersion_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("QueriesClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             QueriesClient client = new QueriesClient(credential);
 
             Response response = await client.ArrayStringMultiEmptyAsync();
@@ -92,7 +92,7 @@ namespace url_multi_collectionFormat_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ArrayStringMultiEmpty_AllParameters()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("QueriesClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             QueriesClient client = new QueriesClient(credential);
 
             Response response = client.ArrayStringMultiEmpty(arrayQuery: new string[] { "<arrayQuery>" });
@@ -104,7 +104,7 @@ namespace url_multi_collectionFormat_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ArrayStringMultiEmpty_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("QueriesClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             QueriesClient client = new QueriesClient(credential);
 
             Response response = await client.ArrayStringMultiEmptyAsync(arrayQuery: new string[] { "<arrayQuery>" });
@@ -116,7 +116,7 @@ namespace url_multi_collectionFormat_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ArrayStringMultiValid_ShortVersion()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("QueriesClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             QueriesClient client = new QueriesClient(credential);
 
             Response response = client.ArrayStringMultiValid();
@@ -128,7 +128,7 @@ namespace url_multi_collectionFormat_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ArrayStringMultiValid_ShortVersion_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("QueriesClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             QueriesClient client = new QueriesClient(credential);
 
             Response response = await client.ArrayStringMultiValidAsync();
@@ -140,7 +140,7 @@ namespace url_multi_collectionFormat_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ArrayStringMultiValid_AllParameters()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("QueriesClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             QueriesClient client = new QueriesClient(credential);
 
             Response response = client.ArrayStringMultiValid(arrayQuery: new string[] { "<arrayQuery>" });
@@ -152,7 +152,7 @@ namespace url_multi_collectionFormat_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ArrayStringMultiValid_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("QueriesClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             QueriesClient client = new QueriesClient(credential);
 
             Response response = await client.ArrayStringMultiValidAsync(arrayQuery: new string[] { "<arrayQuery>" });

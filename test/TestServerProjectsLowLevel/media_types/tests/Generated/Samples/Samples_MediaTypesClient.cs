@@ -23,7 +23,7 @@ namespace media_types_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_AnalyzeBody_ShortVersion()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("MediaTypesClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             MediaTypesClient client = new MediaTypesClient(credential);
 
             RequestContent content = null;
@@ -37,7 +37,7 @@ namespace media_types_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_AnalyzeBody_ShortVersion_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("MediaTypesClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             MediaTypesClient client = new MediaTypesClient(credential);
 
             RequestContent content = null;
@@ -51,7 +51,7 @@ namespace media_types_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_AnalyzeBody_AllParameters()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("MediaTypesClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             MediaTypesClient client = new MediaTypesClient(credential);
 
             RequestContent content = RequestContent.Create(File.OpenRead("<filePath>"));
@@ -65,7 +65,7 @@ namespace media_types_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_AnalyzeBody_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("MediaTypesClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             MediaTypesClient client = new MediaTypesClient(credential);
 
             RequestContent content = RequestContent.Create(File.OpenRead("<filePath>"));
@@ -79,7 +79,7 @@ namespace media_types_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_AnalyzeBodyNoAcceptHeader_ShortVersion()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("MediaTypesClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             MediaTypesClient client = new MediaTypesClient(credential);
 
             RequestContent content = null;
@@ -92,7 +92,7 @@ namespace media_types_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_AnalyzeBodyNoAcceptHeader_ShortVersion_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("MediaTypesClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             MediaTypesClient client = new MediaTypesClient(credential);
 
             RequestContent content = null;
@@ -105,7 +105,7 @@ namespace media_types_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_AnalyzeBodyNoAcceptHeader_AllParameters()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("MediaTypesClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             MediaTypesClient client = new MediaTypesClient(credential);
 
             RequestContent content = RequestContent.Create(File.OpenRead("<filePath>"));
@@ -118,7 +118,7 @@ namespace media_types_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_AnalyzeBodyNoAcceptHeader_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("MediaTypesClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             MediaTypesClient client = new MediaTypesClient(credential);
 
             RequestContent content = RequestContent.Create(File.OpenRead("<filePath>"));
@@ -131,7 +131,7 @@ namespace media_types_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ContentTypeWithEncoding_ShortVersion()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("MediaTypesClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             MediaTypesClient client = new MediaTypesClient(credential);
 
             RequestContent content = null;
@@ -145,7 +145,7 @@ namespace media_types_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ContentTypeWithEncoding_ShortVersion_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("MediaTypesClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             MediaTypesClient client = new MediaTypesClient(credential);
 
             RequestContent content = null;
@@ -159,7 +159,7 @@ namespace media_types_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ContentTypeWithEncoding_AllParameters()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("MediaTypesClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             MediaTypesClient client = new MediaTypesClient(credential);
 
             RequestContent content = RequestContent.Create("<input>");
@@ -173,7 +173,7 @@ namespace media_types_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ContentTypeWithEncoding_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("MediaTypesClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             MediaTypesClient client = new MediaTypesClient(credential);
 
             RequestContent content = RequestContent.Create("<input>");
@@ -187,7 +187,7 @@ namespace media_types_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_BinaryBodyWithTwoContentTypes_ShortVersion()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("MediaTypesClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             MediaTypesClient client = new MediaTypesClient(credential);
 
             RequestContent content = RequestContent.Create(File.OpenRead("<filePath>"));
@@ -201,7 +201,7 @@ namespace media_types_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_BinaryBodyWithTwoContentTypes_ShortVersion_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("MediaTypesClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             MediaTypesClient client = new MediaTypesClient(credential);
 
             RequestContent content = RequestContent.Create(File.OpenRead("<filePath>"));
@@ -215,7 +215,7 @@ namespace media_types_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_BinaryBodyWithTwoContentTypes_AllParameters()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("MediaTypesClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             MediaTypesClient client = new MediaTypesClient(credential);
 
             RequestContent content = RequestContent.Create(File.OpenRead("<filePath>"));
@@ -229,7 +229,7 @@ namespace media_types_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_BinaryBodyWithTwoContentTypes_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("MediaTypesClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             MediaTypesClient client = new MediaTypesClient(credential);
 
             RequestContent content = RequestContent.Create(File.OpenRead("<filePath>"));
@@ -243,7 +243,7 @@ namespace media_types_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_BinaryBodyWithThreeContentTypes_ShortVersion()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("MediaTypesClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             MediaTypesClient client = new MediaTypesClient(credential);
 
             RequestContent content = RequestContent.Create(File.OpenRead("<filePath>"));
@@ -257,7 +257,7 @@ namespace media_types_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_BinaryBodyWithThreeContentTypes_ShortVersion_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("MediaTypesClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             MediaTypesClient client = new MediaTypesClient(credential);
 
             RequestContent content = RequestContent.Create(File.OpenRead("<filePath>"));
@@ -271,7 +271,7 @@ namespace media_types_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_BinaryBodyWithThreeContentTypes_AllParameters()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("MediaTypesClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             MediaTypesClient client = new MediaTypesClient(credential);
 
             RequestContent content = RequestContent.Create(File.OpenRead("<filePath>"));
@@ -285,7 +285,7 @@ namespace media_types_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_BinaryBodyWithThreeContentTypes_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("MediaTypesClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             MediaTypesClient client = new MediaTypesClient(credential);
 
             RequestContent content = RequestContent.Create(File.OpenRead("<filePath>"));
@@ -299,7 +299,7 @@ namespace media_types_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_BodyThreeTypes_ShortVersion()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("MediaTypesClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             MediaTypesClient client = new MediaTypesClient(credential);
 
             RequestContent content = RequestContent.Create(File.OpenRead("<filePath>"));
@@ -313,7 +313,7 @@ namespace media_types_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_BodyThreeTypes_ShortVersion_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("MediaTypesClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             MediaTypesClient client = new MediaTypesClient(credential);
 
             RequestContent content = RequestContent.Create(File.OpenRead("<filePath>"));
@@ -327,7 +327,7 @@ namespace media_types_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_BodyThreeTypes_AllParameters()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("MediaTypesClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             MediaTypesClient client = new MediaTypesClient(credential);
 
             RequestContent content = RequestContent.Create(File.OpenRead("<filePath>"));
@@ -341,7 +341,7 @@ namespace media_types_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_BodyThreeTypes_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("MediaTypesClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             MediaTypesClient client = new MediaTypesClient(credential);
 
             RequestContent content = RequestContent.Create(File.OpenRead("<filePath>"));
@@ -355,7 +355,7 @@ namespace media_types_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_PutTextAndJsonBody_ShortVersion()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("MediaTypesClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             MediaTypesClient client = new MediaTypesClient(credential);
 
             RequestContent content = RequestContent.Create("<message>");
@@ -369,7 +369,7 @@ namespace media_types_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_PutTextAndJsonBody_ShortVersion_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("MediaTypesClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             MediaTypesClient client = new MediaTypesClient(credential);
 
             RequestContent content = RequestContent.Create("<message>");
@@ -383,7 +383,7 @@ namespace media_types_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_PutTextAndJsonBody_AllParameters()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("MediaTypesClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             MediaTypesClient client = new MediaTypesClient(credential);
 
             RequestContent content = RequestContent.Create("<message>");
@@ -397,7 +397,7 @@ namespace media_types_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_PutTextAndJsonBody_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("MediaTypesClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             MediaTypesClient client = new MediaTypesClient(credential);
 
             RequestContent content = RequestContent.Create("<message>");

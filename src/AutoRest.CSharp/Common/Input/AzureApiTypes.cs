@@ -108,5 +108,8 @@ namespace AutoRest.CSharp.Common.Input
         public override string EndPointSampleValue => "<https://my-service.azure.com>";
 
         public override string JsonElementVariableName => "result";
+
+        public override ValueExpression GetKeySampleExpression(string clientName)
+            => new StringLiteralExpression("<key>", false);
     }
 }

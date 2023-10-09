@@ -122,5 +122,8 @@ namespace AutoRest.CSharp.Common.Input
         public override string EndPointSampleValue => "https://my-service.com";
 
         public override string JsonElementVariableName => "element";
+
+        public override ValueExpression GetKeySampleExpression(string clientName)
+            => new InvokeStaticMethodExpression(typeof(Environment), nameof(Environment.GetEnvironmentVariable), new[] { new StringLiteralExpression($"{clientName}_KEY", false) });
     }
 }

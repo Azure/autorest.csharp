@@ -20,7 +20,7 @@ namespace Authentication.Http.Custom.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Valid_ShortVersion()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("CustomClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             CustomClient client = new CustomClient(credential);
 
             Response response = client.Valid();
@@ -32,7 +32,7 @@ namespace Authentication.Http.Custom.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Valid_ShortVersion_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("CustomClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             CustomClient client = new CustomClient(credential);
 
             Response response = await client.ValidAsync();
@@ -44,7 +44,7 @@ namespace Authentication.Http.Custom.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Valid_AllParameters()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("CustomClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             CustomClient client = new CustomClient(credential);
 
             Response response = client.Valid();
@@ -56,7 +56,7 @@ namespace Authentication.Http.Custom.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Valid_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("CustomClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             CustomClient client = new CustomClient(credential);
 
             Response response = await client.ValidAsync();
@@ -68,7 +68,7 @@ namespace Authentication.Http.Custom.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Invalid_ShortVersion()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("CustomClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             CustomClient client = new CustomClient(credential);
 
             Response response = client.Invalid();
@@ -80,7 +80,7 @@ namespace Authentication.Http.Custom.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Invalid_ShortVersion_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("CustomClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             CustomClient client = new CustomClient(credential);
 
             Response response = await client.InvalidAsync();
@@ -92,7 +92,7 @@ namespace Authentication.Http.Custom.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Invalid_AllParameters()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("CustomClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             CustomClient client = new CustomClient(credential);
 
             Response response = client.Invalid();
@@ -104,7 +104,7 @@ namespace Authentication.Http.Custom.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Invalid_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("CustomClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             CustomClient client = new CustomClient(credential);
 
             Response response = await client.InvalidAsync();

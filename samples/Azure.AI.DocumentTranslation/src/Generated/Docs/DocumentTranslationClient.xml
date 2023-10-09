@@ -5,7 +5,7 @@
       <example>
 This sample shows how to call GetDocumentStatusAsync and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("DocumentTranslationClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", credential);
 
 Response response = await client.GetDocumentStatusAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
@@ -21,7 +21,7 @@ Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code>
 This sample shows how to call GetDocumentStatusAsync with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("DocumentTranslationClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", credential);
 
 Response response = await client.GetDocumentStatusAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
@@ -48,7 +48,7 @@ Console.WriteLine(result.GetProperty("characterCharged").ToString());
       <example>
 This sample shows how to call GetDocumentStatus and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("DocumentTranslationClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", credential);
 
 Response response = client.GetDocumentStatus(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
@@ -64,7 +64,7 @@ Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code>
 This sample shows how to call GetDocumentStatus with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("DocumentTranslationClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", credential);
 
 Response response = client.GetDocumentStatus(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
@@ -91,7 +91,7 @@ Console.WriteLine(result.GetProperty("characterCharged").ToString());
       <example>
 This sample shows how to call GetTranslationStatusAsync and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("DocumentTranslationClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", credential);
 
 Response response = await client.GetTranslationStatusAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
@@ -111,7 +111,7 @@ Console.WriteLine(result.GetProperty("summary").GetProperty("totalCharacterCharg
 ]]></code>
 This sample shows how to call GetTranslationStatusAsync with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("DocumentTranslationClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", credential);
 
 Response response = await client.GetTranslationStatusAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
@@ -140,7 +140,7 @@ Console.WriteLine(result.GetProperty("summary").GetProperty("totalCharacterCharg
       <example>
 This sample shows how to call GetTranslationStatus and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("DocumentTranslationClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", credential);
 
 Response response = client.GetTranslationStatus(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
@@ -160,7 +160,7 @@ Console.WriteLine(result.GetProperty("summary").GetProperty("totalCharacterCharg
 ]]></code>
 This sample shows how to call GetTranslationStatus with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("DocumentTranslationClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", credential);
 
 Response response = client.GetTranslationStatus(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
@@ -189,7 +189,7 @@ Console.WriteLine(result.GetProperty("summary").GetProperty("totalCharacterCharg
       <example>
 This sample shows how to call CancelTranslationAsync and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("DocumentTranslationClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", credential);
 
 Response response = await client.CancelTranslationAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
@@ -209,7 +209,7 @@ Console.WriteLine(result.GetProperty("summary").GetProperty("totalCharacterCharg
 ]]></code>
 This sample shows how to call CancelTranslationAsync with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("DocumentTranslationClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", credential);
 
 Response response = await client.CancelTranslationAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
@@ -238,7 +238,7 @@ Console.WriteLine(result.GetProperty("summary").GetProperty("totalCharacterCharg
       <example>
 This sample shows how to call CancelTranslation and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("DocumentTranslationClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", credential);
 
 Response response = client.CancelTranslation(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
@@ -258,7 +258,7 @@ Console.WriteLine(result.GetProperty("summary").GetProperty("totalCharacterCharg
 ]]></code>
 This sample shows how to call CancelTranslation with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("DocumentTranslationClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", credential);
 
 Response response = client.CancelTranslation(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
@@ -287,7 +287,7 @@ Console.WriteLine(result.GetProperty("summary").GetProperty("totalCharacterCharg
       <example>
 This sample shows how to call GetSupportedDocumentFormatsAsync and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("DocumentTranslationClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", credential);
 
 Response response = await client.GetSupportedDocumentFormatsAsync();
@@ -299,7 +299,7 @@ Console.WriteLine(result.GetProperty("value")[0].GetProperty("contentTypes")[0].
 ]]></code>
 This sample shows how to call GetSupportedDocumentFormatsAsync with all request content and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("DocumentTranslationClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", credential);
 
 Response response = await client.GetSupportedDocumentFormatsAsync();
@@ -316,7 +316,7 @@ Console.WriteLine(result.GetProperty("value")[0].GetProperty("versions")[0].ToSt
       <example>
 This sample shows how to call GetSupportedDocumentFormats and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("DocumentTranslationClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", credential);
 
 Response response = client.GetSupportedDocumentFormats();
@@ -328,7 +328,7 @@ Console.WriteLine(result.GetProperty("value")[0].GetProperty("contentTypes")[0].
 ]]></code>
 This sample shows how to call GetSupportedDocumentFormats with all request content and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("DocumentTranslationClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", credential);
 
 Response response = client.GetSupportedDocumentFormats();
@@ -345,7 +345,7 @@ Console.WriteLine(result.GetProperty("value")[0].GetProperty("versions")[0].ToSt
       <example>
 This sample shows how to call GetSupportedGlossaryFormatsAsync and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("DocumentTranslationClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", credential);
 
 Response response = await client.GetSupportedGlossaryFormatsAsync();
@@ -357,7 +357,7 @@ Console.WriteLine(result.GetProperty("value")[0].GetProperty("contentTypes")[0].
 ]]></code>
 This sample shows how to call GetSupportedGlossaryFormatsAsync with all request content and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("DocumentTranslationClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", credential);
 
 Response response = await client.GetSupportedGlossaryFormatsAsync();
@@ -374,7 +374,7 @@ Console.WriteLine(result.GetProperty("value")[0].GetProperty("versions")[0].ToSt
       <example>
 This sample shows how to call GetSupportedGlossaryFormats and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("DocumentTranslationClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", credential);
 
 Response response = client.GetSupportedGlossaryFormats();
@@ -386,7 +386,7 @@ Console.WriteLine(result.GetProperty("value")[0].GetProperty("contentTypes")[0].
 ]]></code>
 This sample shows how to call GetSupportedGlossaryFormats with all request content and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("DocumentTranslationClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", credential);
 
 Response response = client.GetSupportedGlossaryFormats();
@@ -403,7 +403,7 @@ Console.WriteLine(result.GetProperty("value")[0].GetProperty("versions")[0].ToSt
       <example>
 This sample shows how to call GetSupportedStorageSourcesAsync and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("DocumentTranslationClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", credential);
 
 Response response = await client.GetSupportedStorageSourcesAsync();
@@ -413,7 +413,7 @@ Console.WriteLine(result.GetProperty("value")[0].ToString());
 ]]></code>
 This sample shows how to call GetSupportedStorageSourcesAsync with all request content and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("DocumentTranslationClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", credential);
 
 Response response = await client.GetSupportedStorageSourcesAsync();
@@ -426,7 +426,7 @@ Console.WriteLine(result.GetProperty("value")[0].ToString());
       <example>
 This sample shows how to call GetSupportedStorageSources and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("DocumentTranslationClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", credential);
 
 Response response = client.GetSupportedStorageSources();
@@ -436,7 +436,7 @@ Console.WriteLine(result.GetProperty("value")[0].ToString());
 ]]></code>
 This sample shows how to call GetSupportedStorageSources with all request content and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("DocumentTranslationClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", credential);
 
 Response response = client.GetSupportedStorageSources();
@@ -449,7 +449,7 @@ Console.WriteLine(result.GetProperty("value")[0].ToString());
       <example>
 This sample shows how to call GetTranslationsStatusAsync and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("DocumentTranslationClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", credential);
 
 await foreach (BinaryData item in client.GetTranslationsStatusAsync())
@@ -470,7 +470,7 @@ await foreach (BinaryData item in client.GetTranslationsStatusAsync())
 ]]></code>
 This sample shows how to call GetTranslationsStatusAsync with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("DocumentTranslationClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", credential);
 
 await foreach (BinaryData item in client.GetTranslationsStatusAsync(top: 1234, skip: 1234, maxpagesize: 1234, ids: new Guid[] { Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a") }, statuses: new string[] { "<statuses>" }, createdDateTimeUtcStart: DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"), createdDateTimeUtcEnd: DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"), orderBy: new string[] { "<orderBy>" }))
@@ -500,7 +500,7 @@ await foreach (BinaryData item in client.GetTranslationsStatusAsync(top: 1234, s
       <example>
 This sample shows how to call GetTranslationsStatus and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("DocumentTranslationClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", credential);
 
 foreach (BinaryData item in client.GetTranslationsStatus())
@@ -521,7 +521,7 @@ foreach (BinaryData item in client.GetTranslationsStatus())
 ]]></code>
 This sample shows how to call GetTranslationsStatus with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("DocumentTranslationClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", credential);
 
 foreach (BinaryData item in client.GetTranslationsStatus(top: 1234, skip: 1234, maxpagesize: 1234, ids: new Guid[] { Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a") }, statuses: new string[] { "<statuses>" }, createdDateTimeUtcStart: DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"), createdDateTimeUtcEnd: DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"), orderBy: new string[] { "<orderBy>" }))
@@ -551,7 +551,7 @@ foreach (BinaryData item in client.GetTranslationsStatus(top: 1234, skip: 1234, 
       <example>
 This sample shows how to call GetDocumentsStatusAsync and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("DocumentTranslationClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", credential);
 
 await foreach (BinaryData item in client.GetDocumentsStatusAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a")))
@@ -568,7 +568,7 @@ await foreach (BinaryData item in client.GetDocumentsStatusAsync(Guid.Parse("73f
 ]]></code>
 This sample shows how to call GetDocumentsStatusAsync with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("DocumentTranslationClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", credential);
 
 await foreach (BinaryData item in client.GetDocumentsStatusAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), top: 1234, skip: 1234, maxpagesize: 1234, ids: new Guid[] { Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a") }, statuses: new string[] { "<statuses>" }, createdDateTimeUtcStart: DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"), createdDateTimeUtcEnd: DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"), orderBy: new string[] { "<orderBy>" }))
@@ -596,7 +596,7 @@ await foreach (BinaryData item in client.GetDocumentsStatusAsync(Guid.Parse("73f
       <example>
 This sample shows how to call GetDocumentsStatus and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("DocumentTranslationClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", credential);
 
 foreach (BinaryData item in client.GetDocumentsStatus(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a")))
@@ -613,7 +613,7 @@ foreach (BinaryData item in client.GetDocumentsStatus(Guid.Parse("73f411fe-4f43-
 ]]></code>
 This sample shows how to call GetDocumentsStatus with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("DocumentTranslationClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", credential);
 
 foreach (BinaryData item in client.GetDocumentsStatus(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), top: 1234, skip: 1234, maxpagesize: 1234, ids: new Guid[] { Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a") }, statuses: new string[] { "<statuses>" }, createdDateTimeUtcStart: DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"), createdDateTimeUtcEnd: DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"), orderBy: new string[] { "<orderBy>" }))
@@ -641,7 +641,7 @@ foreach (BinaryData item in client.GetDocumentsStatus(Guid.Parse("73f411fe-4f43-
       <example>
 This sample shows how to call StartTranslationAsync.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("DocumentTranslationClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", credential);
 
 RequestContent content = RequestContent.Create(new
@@ -669,7 +669,7 @@ Operation operation = await client.StartTranslationAsync(WaitUntil.Completed, co
 ]]></code>
 This sample shows how to call StartTranslationAsync with all parameters and request content.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("DocumentTranslationClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", credential);
 
 RequestContent content = RequestContent.Create(new
@@ -720,7 +720,7 @@ Operation operation = await client.StartTranslationAsync(WaitUntil.Completed, co
       <example>
 This sample shows how to call StartTranslation.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("DocumentTranslationClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", credential);
 
 RequestContent content = RequestContent.Create(new
@@ -748,7 +748,7 @@ Operation operation = client.StartTranslation(WaitUntil.Completed, content, new 
 ]]></code>
 This sample shows how to call StartTranslation with all parameters and request content.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("DocumentTranslationClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", credential);
 
 RequestContent content = RequestContent.Create(new

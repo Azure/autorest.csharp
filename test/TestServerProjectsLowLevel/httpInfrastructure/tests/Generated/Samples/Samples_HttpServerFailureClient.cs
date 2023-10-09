@@ -21,7 +21,7 @@ namespace httpInfrastructure_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Head501_ShortVersion()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HttpServerFailureClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpServerFailureClient client = new HttpServerFailureClient(credential);
 
             Response response = client.Head501();
@@ -33,7 +33,7 @@ namespace httpInfrastructure_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Head501_ShortVersion_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HttpServerFailureClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpServerFailureClient client = new HttpServerFailureClient(credential);
 
             Response response = await client.Head501Async();
@@ -45,7 +45,7 @@ namespace httpInfrastructure_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Head501_AllParameters()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HttpServerFailureClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpServerFailureClient client = new HttpServerFailureClient(credential);
 
             Response response = client.Head501();
@@ -57,7 +57,7 @@ namespace httpInfrastructure_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Head501_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HttpServerFailureClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpServerFailureClient client = new HttpServerFailureClient(credential);
 
             Response response = await client.Head501Async();
@@ -69,7 +69,7 @@ namespace httpInfrastructure_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Get501_ShortVersion()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HttpServerFailureClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpServerFailureClient client = new HttpServerFailureClient(credential);
 
             Response response = client.Get501();
@@ -81,7 +81,7 @@ namespace httpInfrastructure_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Get501_ShortVersion_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HttpServerFailureClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpServerFailureClient client = new HttpServerFailureClient(credential);
 
             Response response = await client.Get501Async();
@@ -93,7 +93,7 @@ namespace httpInfrastructure_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Get501_AllParameters()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HttpServerFailureClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpServerFailureClient client = new HttpServerFailureClient(credential);
 
             Response response = client.Get501();
@@ -105,7 +105,7 @@ namespace httpInfrastructure_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Get501_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HttpServerFailureClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpServerFailureClient client = new HttpServerFailureClient(credential);
 
             Response response = await client.Get501Async();
@@ -117,7 +117,7 @@ namespace httpInfrastructure_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Post505_ShortVersion()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HttpServerFailureClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpServerFailureClient client = new HttpServerFailureClient(credential);
 
             RequestContent content = null;
@@ -130,7 +130,7 @@ namespace httpInfrastructure_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Post505_ShortVersion_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HttpServerFailureClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpServerFailureClient client = new HttpServerFailureClient(credential);
 
             RequestContent content = null;
@@ -143,7 +143,7 @@ namespace httpInfrastructure_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Post505_AllParameters()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HttpServerFailureClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpServerFailureClient client = new HttpServerFailureClient(credential);
 
             RequestContent content = RequestContent.Create("true");
@@ -156,7 +156,7 @@ namespace httpInfrastructure_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Post505_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HttpServerFailureClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpServerFailureClient client = new HttpServerFailureClient(credential);
 
             RequestContent content = RequestContent.Create("true");
@@ -169,7 +169,7 @@ namespace httpInfrastructure_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Delete505_ShortVersion()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HttpServerFailureClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpServerFailureClient client = new HttpServerFailureClient(credential);
 
             RequestContent content = null;
@@ -182,7 +182,7 @@ namespace httpInfrastructure_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Delete505_ShortVersion_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HttpServerFailureClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpServerFailureClient client = new HttpServerFailureClient(credential);
 
             RequestContent content = null;
@@ -195,7 +195,7 @@ namespace httpInfrastructure_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Delete505_AllParameters()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HttpServerFailureClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpServerFailureClient client = new HttpServerFailureClient(credential);
 
             RequestContent content = RequestContent.Create("true");
@@ -208,7 +208,7 @@ namespace httpInfrastructure_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Delete505_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HttpServerFailureClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpServerFailureClient client = new HttpServerFailureClient(credential);
 
             RequestContent content = RequestContent.Create("true");

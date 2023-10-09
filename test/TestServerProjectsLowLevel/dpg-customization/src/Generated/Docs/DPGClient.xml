@@ -5,7 +5,7 @@
       <example>
 This sample shows how to call GetModelAsync and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("DPGClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 DPGClient client = new DPGClient(credential);
 
 Response response = await client.GetModelAsync("<mode>", null);
@@ -15,7 +15,7 @@ Console.WriteLine(result.GetProperty("received").ToString());
 ]]></code>
 This sample shows how to call GetModelAsync with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("DPGClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 DPGClient client = new DPGClient(credential);
 
 Response response = await client.GetModelAsync("<mode>", null);
@@ -28,7 +28,7 @@ Console.WriteLine(result.GetProperty("received").ToString());
       <example>
 This sample shows how to call GetModel and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("DPGClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 DPGClient client = new DPGClient(credential);
 
 Response response = client.GetModel("<mode>", null);
@@ -38,7 +38,7 @@ Console.WriteLine(result.GetProperty("received").ToString());
 ]]></code>
 This sample shows how to call GetModel with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("DPGClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 DPGClient client = new DPGClient(credential);
 
 Response response = client.GetModel("<mode>", null);
@@ -51,7 +51,7 @@ Console.WriteLine(result.GetProperty("received").ToString());
       <example>
 This sample shows how to call PostModelAsync and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("DPGClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 DPGClient client = new DPGClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -65,7 +65,7 @@ Console.WriteLine(result.GetProperty("received").ToString());
 ]]></code>
 This sample shows how to call PostModelAsync with all parameters and request content and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("DPGClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 DPGClient client = new DPGClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -82,7 +82,7 @@ Console.WriteLine(result.GetProperty("received").ToString());
       <example>
 This sample shows how to call PostModel and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("DPGClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 DPGClient client = new DPGClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -96,7 +96,7 @@ Console.WriteLine(result.GetProperty("received").ToString());
 ]]></code>
 This sample shows how to call PostModel with all parameters and request content and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("DPGClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 DPGClient client = new DPGClient(credential);
 
 RequestContent content = RequestContent.Create(new
@@ -113,7 +113,7 @@ Console.WriteLine(result.GetProperty("received").ToString());
       <example>
 This sample shows how to call GetPagesAsync and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("DPGClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 DPGClient client = new DPGClient(credential);
 
 await foreach (BinaryData item in client.GetPagesAsync("<mode>", null))
@@ -124,7 +124,7 @@ await foreach (BinaryData item in client.GetPagesAsync("<mode>", null))
 ]]></code>
 This sample shows how to call GetPagesAsync with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("DPGClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 DPGClient client = new DPGClient(credential);
 
 await foreach (BinaryData item in client.GetPagesAsync("<mode>", null))
@@ -138,7 +138,7 @@ await foreach (BinaryData item in client.GetPagesAsync("<mode>", null))
       <example>
 This sample shows how to call GetPages and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("DPGClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 DPGClient client = new DPGClient(credential);
 
 foreach (BinaryData item in client.GetPages("<mode>", null))
@@ -149,7 +149,7 @@ foreach (BinaryData item in client.GetPages("<mode>", null))
 ]]></code>
 This sample shows how to call GetPages with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("DPGClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 DPGClient client = new DPGClient(credential);
 
 foreach (BinaryData item in client.GetPages("<mode>", null))
@@ -163,7 +163,7 @@ foreach (BinaryData item in client.GetPages("<mode>", null))
       <example>
 This sample shows how to call LroAsync and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("DPGClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 DPGClient client = new DPGClient(credential);
 
 Operation<BinaryData> operation = await client.LroAsync(WaitUntil.Completed, "<mode>", null);
@@ -175,7 +175,7 @@ Console.WriteLine(result.GetProperty("received").ToString());
 ]]></code>
 This sample shows how to call LroAsync with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("DPGClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 DPGClient client = new DPGClient(credential);
 
 Operation<BinaryData> operation = await client.LroAsync(WaitUntil.Completed, "<mode>", null);
@@ -190,7 +190,7 @@ Console.WriteLine(result.GetProperty("received").ToString());
       <example>
 This sample shows how to call Lro and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("DPGClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 DPGClient client = new DPGClient(credential);
 
 Operation<BinaryData> operation = client.Lro(WaitUntil.Completed, "<mode>", null);
@@ -202,7 +202,7 @@ Console.WriteLine(result.GetProperty("received").ToString());
 ]]></code>
 This sample shows how to call Lro with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("DPGClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 DPGClient client = new DPGClient(credential);
 
 Operation<BinaryData> operation = client.Lro(WaitUntil.Completed, "<mode>", null);

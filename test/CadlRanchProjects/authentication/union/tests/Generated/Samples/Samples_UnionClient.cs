@@ -20,7 +20,7 @@ namespace Authentication.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ValidKey_ShortVersion()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("UnionClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             UnionClient client = new UnionClient(credential);
 
             Response response = client.ValidKey();
@@ -32,7 +32,7 @@ namespace Authentication.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ValidKey_ShortVersion_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("UnionClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             UnionClient client = new UnionClient(credential);
 
             Response response = await client.ValidKeyAsync();
@@ -44,7 +44,7 @@ namespace Authentication.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ValidKey_AllParameters()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("UnionClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             UnionClient client = new UnionClient(credential);
 
             Response response = client.ValidKey();
@@ -56,7 +56,7 @@ namespace Authentication.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ValidKey_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("UnionClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             UnionClient client = new UnionClient(credential);
 
             Response response = await client.ValidKeyAsync();
@@ -68,7 +68,7 @@ namespace Authentication.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ValidToken_ShortVersion()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("UnionClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             UnionClient client = new UnionClient(credential);
 
             Response response = client.ValidToken();
@@ -80,7 +80,7 @@ namespace Authentication.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ValidToken_ShortVersion_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("UnionClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             UnionClient client = new UnionClient(credential);
 
             Response response = await client.ValidTokenAsync();
@@ -92,7 +92,7 @@ namespace Authentication.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ValidToken_AllParameters()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("UnionClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             UnionClient client = new UnionClient(credential);
 
             Response response = client.ValidToken();
@@ -104,7 +104,7 @@ namespace Authentication.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ValidToken_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("UnionClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             UnionClient client = new UnionClient(credential);
 
             Response response = await client.ValidTokenAsync();

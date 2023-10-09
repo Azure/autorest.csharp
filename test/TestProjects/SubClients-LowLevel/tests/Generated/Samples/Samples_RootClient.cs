@@ -21,7 +21,7 @@ namespace SubClients_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetCachedParameter_ShortVersion()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("RootClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             RootClient client = new RootClient("<CachedParameter>", credential);
 
             Response response = client.GetCachedParameter(null);
@@ -34,7 +34,7 @@ namespace SubClients_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetCachedParameter_ShortVersion_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("RootClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             RootClient client = new RootClient("<CachedParameter>", credential);
 
             Response response = await client.GetCachedParameterAsync(null);
@@ -47,7 +47,7 @@ namespace SubClients_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetCachedParameter_AllParameters()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("RootClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             RootClient client = new RootClient("<CachedParameter>", credential);
 
             Response response = client.GetCachedParameter(null);
@@ -60,7 +60,7 @@ namespace SubClients_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetCachedParameter_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("RootClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             RootClient client = new RootClient("<CachedParameter>", credential);
 
             Response response = await client.GetCachedParameterAsync(null);

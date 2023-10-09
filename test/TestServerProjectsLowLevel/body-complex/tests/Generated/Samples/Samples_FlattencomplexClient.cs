@@ -21,7 +21,7 @@ namespace body_complex_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetValid_ShortVersion()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("FlattencomplexClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             FlattencomplexClient client = new FlattencomplexClient(credential);
 
             Response response = client.GetValid(null);
@@ -34,7 +34,7 @@ namespace body_complex_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetValid_ShortVersion_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("FlattencomplexClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             FlattencomplexClient client = new FlattencomplexClient(credential);
 
             Response response = await client.GetValidAsync(null);
@@ -47,7 +47,7 @@ namespace body_complex_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetValid_AllParameters()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("FlattencomplexClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             FlattencomplexClient client = new FlattencomplexClient(credential);
 
             Response response = client.GetValid(null);
@@ -62,7 +62,7 @@ namespace body_complex_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetValid_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("FlattencomplexClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             FlattencomplexClient client = new FlattencomplexClient(credential);
 
             Response response = await client.GetValidAsync(null);

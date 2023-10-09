@@ -5,7 +5,7 @@
       <example>
 This sample shows how to call GetEmptyErrorAsync and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HttpFailureClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpFailureClient client = new HttpFailureClient(credential);
 
 Response response = await client.GetEmptyErrorAsync(null);
@@ -15,7 +15,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetEmptyErrorAsync with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HttpFailureClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpFailureClient client = new HttpFailureClient(credential);
 
 Response response = await client.GetEmptyErrorAsync(null);
@@ -28,7 +28,7 @@ Console.WriteLine(result.ToString());
       <example>
 This sample shows how to call GetEmptyError and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HttpFailureClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpFailureClient client = new HttpFailureClient(credential);
 
 Response response = client.GetEmptyError(null);
@@ -38,7 +38,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetEmptyError with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HttpFailureClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpFailureClient client = new HttpFailureClient(credential);
 
 Response response = client.GetEmptyError(null);
@@ -51,7 +51,7 @@ Console.WriteLine(result.ToString());
       <example>
 This sample shows how to call GetNoModelErrorAsync and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HttpFailureClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpFailureClient client = new HttpFailureClient(credential);
 
 Response response = await client.GetNoModelErrorAsync(null);
@@ -61,7 +61,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetNoModelErrorAsync with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HttpFailureClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpFailureClient client = new HttpFailureClient(credential);
 
 Response response = await client.GetNoModelErrorAsync(null);
@@ -74,7 +74,7 @@ Console.WriteLine(result.ToString());
       <example>
 This sample shows how to call GetNoModelError and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HttpFailureClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpFailureClient client = new HttpFailureClient(credential);
 
 Response response = client.GetNoModelError(null);
@@ -84,7 +84,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetNoModelError with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HttpFailureClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpFailureClient client = new HttpFailureClient(credential);
 
 Response response = client.GetNoModelError(null);
@@ -97,7 +97,7 @@ Console.WriteLine(result.ToString());
       <example>
 This sample shows how to call GetNoModelEmptyAsync and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HttpFailureClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpFailureClient client = new HttpFailureClient(credential);
 
 Response response = await client.GetNoModelEmptyAsync(null);
@@ -107,7 +107,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetNoModelEmptyAsync with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HttpFailureClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpFailureClient client = new HttpFailureClient(credential);
 
 Response response = await client.GetNoModelEmptyAsync(null);
@@ -120,7 +120,7 @@ Console.WriteLine(result.ToString());
       <example>
 This sample shows how to call GetNoModelEmpty and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HttpFailureClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpFailureClient client = new HttpFailureClient(credential);
 
 Response response = client.GetNoModelEmpty(null);
@@ -130,7 +130,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetNoModelEmpty with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("HttpFailureClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpFailureClient client = new HttpFailureClient(credential);
 
 Response response = client.GetNoModelEmpty(null);

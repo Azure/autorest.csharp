@@ -5,7 +5,7 @@
       <example>
 This sample shows how to call GetCachedParameterAsync and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("RootClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 RootClient client = new RootClient("<CachedParameter>", credential);
 
 Response response = await client.GetCachedParameterAsync(null);
@@ -15,7 +15,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetCachedParameterAsync with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("RootClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 RootClient client = new RootClient("<CachedParameter>", credential);
 
 Response response = await client.GetCachedParameterAsync(null);
@@ -28,7 +28,7 @@ Console.WriteLine(result.ToString());
       <example>
 This sample shows how to call GetCachedParameter and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("RootClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 RootClient client = new RootClient("<CachedParameter>", credential);
 
 Response response = client.GetCachedParameter(null);
@@ -38,7 +38,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetCachedParameter with all parameters and parse the result.
 <code><![CDATA[
-AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("RootClient_KEY"));
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
 RootClient client = new RootClient("<CachedParameter>", credential);
 
 Response response = client.GetCachedParameter(null);

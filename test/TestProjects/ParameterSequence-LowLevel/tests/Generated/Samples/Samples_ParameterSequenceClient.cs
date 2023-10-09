@@ -21,7 +21,7 @@ namespace ParameterSequence_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetItem_ShortVersion()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("ParameterSequenceClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ParameterSequenceClient client = new ParameterSequenceClient(credential);
 
             Response response = client.GetItem("<itemName>", "<origin>", null, null);
@@ -34,7 +34,7 @@ namespace ParameterSequence_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetItem_ShortVersion_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("ParameterSequenceClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ParameterSequenceClient client = new ParameterSequenceClient(credential);
 
             Response response = await client.GetItemAsync("<itemName>", "<origin>", null, null);
@@ -47,7 +47,7 @@ namespace ParameterSequence_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetItem_AllParameters()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("ParameterSequenceClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ParameterSequenceClient client = new ParameterSequenceClient(credential);
 
             Response response = client.GetItem("<itemName>", "<origin>", "<version>", null);
@@ -60,7 +60,7 @@ namespace ParameterSequence_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetItem_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("ParameterSequenceClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ParameterSequenceClient client = new ParameterSequenceClient(credential);
 
             Response response = await client.GetItemAsync("<itemName>", "<origin>", "<version>", null);
@@ -73,7 +73,7 @@ namespace ParameterSequence_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_SelectItem_ShortVersion()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("ParameterSequenceClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ParameterSequenceClient client = new ParameterSequenceClient(credential);
 
             Response response = client.SelectItem("<itemName>", "<origin>", null, null);
@@ -86,7 +86,7 @@ namespace ParameterSequence_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_SelectItem_ShortVersion_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("ParameterSequenceClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ParameterSequenceClient client = new ParameterSequenceClient(credential);
 
             Response response = await client.SelectItemAsync("<itemName>", "<origin>", null, null);
@@ -99,7 +99,7 @@ namespace ParameterSequence_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_SelectItem_AllParameters()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("ParameterSequenceClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ParameterSequenceClient client = new ParameterSequenceClient(credential);
 
             Response response = client.SelectItem("<itemName>", "<origin>", "<version>", null);
@@ -112,7 +112,7 @@ namespace ParameterSequence_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_SelectItem_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential(Environment.GetEnvironmentVariable("ParameterSequenceClient_KEY"));
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ParameterSequenceClient client = new ParameterSequenceClient(credential);
 
             Response response = await client.SelectItemAsync("<itemName>", "<origin>", "<version>", null);
