@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Mgmt.Decorator;
@@ -161,6 +162,11 @@ namespace AutoRest.CSharp.Mgmt.Output
             builder.Append(")");
 
             return builder.ToString();
+        }
+
+        protected override IEnumerable<Method> BuildMethods()
+        {
+            yield break;
         }
 
         internal record MgmtExtensionClientFactoryMethod(MethodSignature Signature, Action<CodeWriter> MethodBodyImplementation);

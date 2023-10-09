@@ -84,15 +84,6 @@ namespace Azure.ResourceManager.Sample
             return apiVersion;
         }
 
-        /// <summary> Gets a collection of VirtualMachineExtensionImageResources in the SubscriptionResource. </summary>
-        /// <param name="location"> The name of a supported Azure region. </param>
-        /// <param name="publisherName"> The String to use. </param>
-        /// <returns> An object representing collection of VirtualMachineExtensionImageResources and their operations over a VirtualMachineExtensionImageResource. </returns>
-        public virtual VirtualMachineExtensionImageCollection GetVirtualMachineExtensionImages(AzureLocation location, string publisherName)
-        {
-            return new VirtualMachineExtensionImageCollection(Client, Id, location, publisherName);
-        }
-
         /// <summary>
         /// Lists all availability sets in a subscription.
         /// <list type="bullet">

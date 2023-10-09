@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
@@ -53,6 +54,11 @@ namespace AutoRest.CSharp.Mgmt.Output
                     yield return operation;
                 }
             }
+        }
+
+        protected override IEnumerable<Method> BuildMethods()
+        {
+            yield break;
         }
     }
 }

@@ -80,7 +80,14 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             WritePrivateHelpers();
 
-            WriteChildResourceEntries();
+            _writer.Line(); // to minimize changes
+            foreach (var method in This.Methods)
+            {
+                _writer.WriteMethodDocumentation(method.Signature);
+                _writer.WriteMethod(method);
+            }
+
+            //WriteChildResourceEntries();
 
             WriteOperations();
 

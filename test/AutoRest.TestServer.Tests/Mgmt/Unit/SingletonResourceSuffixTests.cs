@@ -2,6 +2,7 @@
 // Licensed under the MIT License
 
 using System;
+using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Mgmt.Models;
 using NUnit.Framework;
@@ -16,11 +17,13 @@ namespace AutoRest.TestServer.Tests.Mgmt.Unit
         [TestCase("providers/Microsoft.Compute/test1/name/test2/name2/test3/default", @"Id.AppendProviderResource(""Microsoft.Compute"", ""test1"", ""name"").AppendChildResource(""test2"", ""name2"").AppendChildResource(""test3"", ""default"")")]
         public void ValidateBuildResourceIdentifier(string suffixString, string expected)
         {
+            var id = new MemberExpression(null, "Id");
             var segments = suffixString.Split('/', StringSplitOptions.RemoveEmptyEntries);
             var suffix = SingletonResourceSuffix.Parse(segments);
-            var result = suffix.BuildResourceIdentifier($"Id");
+            var result = suffix.BuildResourceIdentifier(id);
             var writer = new CodeWriter();
-            Assert.AreEqual(expected, writer.Append(result).ToString(false).Trim());
+            writer.WriteValueExpression(result);
+            Assert.AreEqual(expected, writer.ToString(false).Trim());
         }
     }
 }
