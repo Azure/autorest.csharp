@@ -176,7 +176,7 @@ This sample shows how to call PatchActionAsync and parse the result.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     name = "<name>",
     requiredUnion = "<requiredUnion>",
@@ -207,7 +207,7 @@ This sample shows how to call PatchActionAsync with all request content and pars
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     name = "<name>",
     requiredUnion = "<requiredUnion>",
@@ -254,7 +254,7 @@ This sample shows how to call PatchAction and parse the result.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     name = "<name>",
     requiredUnion = "<requiredUnion>",
@@ -285,7 +285,7 @@ This sample shows how to call PatchAction with all request content and parse the
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     name = "<name>",
     requiredUnion = "<requiredUnion>",
@@ -332,7 +332,7 @@ This sample shows how to call AnonymousBodyAsync and parse the result.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     name = "<name>",
     requiredUnion = "<requiredUnion>",
@@ -363,7 +363,7 @@ This sample shows how to call AnonymousBodyAsync with all request content and pa
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     name = "<name>",
     requiredUnion = "<requiredUnion>",
@@ -410,7 +410,7 @@ This sample shows how to call AnonymousBody and parse the result.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     name = "<name>",
     requiredUnion = "<requiredUnion>",
@@ -441,7 +441,7 @@ This sample shows how to call AnonymousBody with all request content and parse t
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     name = "<name>",
     requiredUnion = "<requiredUnion>",
@@ -526,7 +526,7 @@ This sample shows how to call FriendlyModelAsync and parse the result.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     name = "<name>",
 });
@@ -540,7 +540,7 @@ This sample shows how to call FriendlyModelAsync with all request content and pa
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     name = "<name>",
 });
@@ -557,7 +557,7 @@ This sample shows how to call FriendlyModel and parse the result.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     name = "<name>",
 });
@@ -571,7 +571,7 @@ This sample shows how to call FriendlyModel with all request content and parse t
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     name = "<name>",
 });
@@ -668,7 +668,7 @@ This sample shows how to call StringFormatAsync.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     sourceUrl = "http://localhost:3000",
     guid = "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a",
@@ -682,7 +682,7 @@ This sample shows how to call StringFormatAsync with all parameters and request 
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     sourceUrl = "http://localhost:3000",
     guid = "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a",
@@ -699,7 +699,7 @@ This sample shows how to call StringFormat.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     sourceUrl = "http://localhost:3000",
     guid = "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a",
@@ -713,7 +713,7 @@ This sample shows how to call StringFormat with all parameters and request conte
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     sourceUrl = "http://localhost:3000",
     guid = "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a",
@@ -768,7 +768,7 @@ This sample shows how to call ProjectedNameModelAsync and parse the result.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     name = "<name>",
 });
@@ -782,7 +782,7 @@ This sample shows how to call ProjectedNameModelAsync with all request content a
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     name = "<name>",
 });
@@ -799,7 +799,7 @@ This sample shows how to call ProjectedNameModel and parse the result.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     name = "<name>",
 });
@@ -813,7 +813,7 @@ This sample shows how to call ProjectedNameModel with all request content and pa
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     name = "<name>",
 });
@@ -952,7 +952,7 @@ This sample shows how to call StringBodyAsync.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-RequestContent content = RequestContent.Create("<body>");
+using RequestContent content = RequestContent.Create("<body>");
 Response response = await client.StringBodyAsync(content);
 
 Console.WriteLine(response.Status);
@@ -962,7 +962,7 @@ This sample shows how to call StringBodyAsync with all request content.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-RequestContent content = RequestContent.Create("<body>");
+using RequestContent content = RequestContent.Create("<body>");
 Response response = await client.StringBodyAsync(content);
 
 Console.WriteLine(response.Status);
@@ -975,7 +975,7 @@ This sample shows how to call StringBody.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-RequestContent content = RequestContent.Create("<body>");
+using RequestContent content = RequestContent.Create("<body>");
 Response response = client.StringBody(content);
 
 Console.WriteLine(response.Status);
@@ -985,7 +985,7 @@ This sample shows how to call StringBody with all request content.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-RequestContent content = RequestContent.Create("<body>");
+using RequestContent content = RequestContent.Create("<body>");
 Response response = client.StringBody(content);
 
 Console.WriteLine(response.Status);
@@ -1032,7 +1032,7 @@ This sample shows how to call BoolBodyAsync.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-RequestContent content = RequestContent.Create(true);
+using RequestContent content = RequestContent.Create(true);
 Response response = await client.BoolBodyAsync(content);
 
 Console.WriteLine(response.Status);
@@ -1042,7 +1042,7 @@ This sample shows how to call BoolBodyAsync with all request content.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-RequestContent content = RequestContent.Create(true);
+using RequestContent content = RequestContent.Create(true);
 Response response = await client.BoolBodyAsync(content);
 
 Console.WriteLine(response.Status);
@@ -1055,7 +1055,7 @@ This sample shows how to call BoolBody.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-RequestContent content = RequestContent.Create(true);
+using RequestContent content = RequestContent.Create(true);
 Response response = client.BoolBody(content);
 
 Console.WriteLine(response.Status);
@@ -1065,7 +1065,7 @@ This sample shows how to call BoolBody with all request content.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-RequestContent content = RequestContent.Create(true);
+using RequestContent content = RequestContent.Create(true);
 Response response = client.BoolBody(content);
 
 Console.WriteLine(response.Status);
@@ -1112,7 +1112,7 @@ This sample shows how to call DateTimeBodyAsync.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-RequestContent content = RequestContent.Create("2022-05-10T14:57:31.2311892-04:00");
+using RequestContent content = RequestContent.Create("2022-05-10T14:57:31.2311892-04:00");
 Response response = await client.DateTimeBodyAsync(content);
 
 Console.WriteLine(response.Status);
@@ -1122,7 +1122,7 @@ This sample shows how to call DateTimeBodyAsync with all request content.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-RequestContent content = RequestContent.Create("2022-05-10T14:57:31.2311892-04:00");
+using RequestContent content = RequestContent.Create("2022-05-10T14:57:31.2311892-04:00");
 Response response = await client.DateTimeBodyAsync(content);
 
 Console.WriteLine(response.Status);
@@ -1135,7 +1135,7 @@ This sample shows how to call DateTimeBody.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-RequestContent content = RequestContent.Create("2022-05-10T14:57:31.2311892-04:00");
+using RequestContent content = RequestContent.Create("2022-05-10T14:57:31.2311892-04:00");
 Response response = client.DateTimeBody(content);
 
 Console.WriteLine(response.Status);
@@ -1145,7 +1145,7 @@ This sample shows how to call DateTimeBody with all request content.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-RequestContent content = RequestContent.Create("2022-05-10T14:57:31.2311892-04:00");
+using RequestContent content = RequestContent.Create("2022-05-10T14:57:31.2311892-04:00");
 Response response = client.DateTimeBody(content);
 
 Console.WriteLine(response.Status);
@@ -1402,7 +1402,7 @@ This sample shows how to call HelloAgainAsync and parse the result.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     requiredString = "<requiredString>",
     requiredInt = 1234,
@@ -1467,7 +1467,7 @@ This sample shows how to call HelloAgainAsync with all parameters and request co
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     requiredString = "<requiredString>",
     requiredInt = 1234,
@@ -1586,7 +1586,7 @@ This sample shows how to call HelloAgain and parse the result.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     requiredString = "<requiredString>",
     requiredInt = 1234,
@@ -1651,7 +1651,7 @@ This sample shows how to call HelloAgain with all parameters and request content
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     requiredString = "<requiredString>",
     requiredInt = 1234,
@@ -1770,7 +1770,7 @@ This sample shows how to call NoContentTypeAsync and parse the result.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     requiredString = "<requiredString>",
     requiredInt = 1234,
@@ -1835,7 +1835,7 @@ This sample shows how to call NoContentTypeAsync with all parameters and request
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     requiredString = "<requiredString>",
     requiredInt = 1234,
@@ -1954,7 +1954,7 @@ This sample shows how to call NoContentType and parse the result.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     requiredString = "<requiredString>",
     requiredInt = 1234,
@@ -2019,7 +2019,7 @@ This sample shows how to call NoContentType with all parameters and request cont
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     requiredString = "<requiredString>",
     requiredInt = 1234,
@@ -2222,7 +2222,7 @@ This sample shows how to call CreateLiteralAsync and parse the result.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     name = "<name>",
     requiredUnion = "<requiredUnion>",
@@ -2253,7 +2253,7 @@ This sample shows how to call CreateLiteralAsync with all request content and pa
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     name = "<name>",
     requiredUnion = "<requiredUnion>",
@@ -2300,7 +2300,7 @@ This sample shows how to call CreateLiteral and parse the result.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     name = "<name>",
     requiredUnion = "<requiredUnion>",
@@ -2331,7 +2331,7 @@ This sample shows how to call CreateLiteral with all request content and parse t
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     name = "<name>",
     requiredUnion = "<requiredUnion>",

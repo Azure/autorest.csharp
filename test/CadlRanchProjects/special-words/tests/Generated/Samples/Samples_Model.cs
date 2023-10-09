@@ -110,7 +110,7 @@ namespace SpecialWords.Samples
         {
             Model client = new SpecialWordsClient().GetModelClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>
+            using RequestContent content = RequestContent.Create(new Dictionary<string, object>
             {
                 ["derived.name"] = "<derived.name>",
                 ["for"] = "<for>",
@@ -127,7 +127,7 @@ namespace SpecialWords.Samples
         {
             Model client = new SpecialWordsClient().GetModelClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>
+            using RequestContent content = RequestContent.Create(new Dictionary<string, object>
             {
                 ["derived.name"] = "<derived.name>",
                 ["for"] = "<for>",
@@ -164,7 +164,7 @@ namespace SpecialWords.Samples
         {
             Model client = new SpecialWordsClient().GetModelClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>
+            using RequestContent content = RequestContent.Create(new Dictionary<string, object>
             {
                 ["derived.name"] = "<derived.name>",
                 ["for"] = "<for>",
@@ -181,7 +181,7 @@ namespace SpecialWords.Samples
         {
             Model client = new SpecialWordsClient().GetModelClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>
+            using RequestContent content = RequestContent.Create(new Dictionary<string, object>
             {
                 ["derived.name"] = "<derived.name>",
                 ["for"] = "<for>",

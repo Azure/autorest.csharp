@@ -109,7 +109,7 @@ namespace _Type._Dictionary.Samples
         {
             Int64Value client = new DictionaryClient().GetInt64ValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 key = 1234L,
             });
@@ -124,7 +124,7 @@ namespace _Type._Dictionary.Samples
         {
             Int64Value client = new DictionaryClient().GetInt64ValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 key = 1234L,
             });
@@ -163,7 +163,7 @@ namespace _Type._Dictionary.Samples
         {
             Int64Value client = new DictionaryClient().GetInt64ValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 key = 1234L,
             });
@@ -178,7 +178,7 @@ namespace _Type._Dictionary.Samples
         {
             Int64Value client = new DictionaryClient().GetInt64ValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 key = 1234L,
             });

@@ -109,7 +109,7 @@ namespace _Type._Array.Samples
         {
             BooleanValue client = new ArrayClient().GetBooleanValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new object[]
+            using RequestContent content = RequestContent.Create(new object[]
             {
 true
             });
@@ -124,7 +124,7 @@ true
         {
             BooleanValue client = new ArrayClient().GetBooleanValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new object[]
+            using RequestContent content = RequestContent.Create(new object[]
             {
 true
             });
@@ -157,7 +157,7 @@ true
         {
             BooleanValue client = new ArrayClient().GetBooleanValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new object[]
+            using RequestContent content = RequestContent.Create(new object[]
             {
 true
             });
@@ -172,7 +172,7 @@ true
         {
             BooleanValue client = new ArrayClient().GetBooleanValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new object[]
+            using RequestContent content = RequestContent.Create(new object[]
             {
 true
             });

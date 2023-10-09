@@ -25,7 +25,7 @@ namespace _Specs_.Azure.Core.Basic.Samples
         {
             BasicClient client = new BasicClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
             });
@@ -43,7 +43,7 @@ namespace _Specs_.Azure.Core.Basic.Samples
         {
             BasicClient client = new BasicClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
             });
@@ -61,7 +61,7 @@ namespace _Specs_.Azure.Core.Basic.Samples
         {
             BasicClient client = new BasicClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
                 orders = new object[]
@@ -90,7 +90,7 @@ detail = "<detail>",
         {
             BasicClient client = new BasicClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
                 orders = new object[]
@@ -119,7 +119,7 @@ detail = "<detail>",
         {
             BasicClient client = new BasicClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
             });
@@ -137,7 +137,7 @@ detail = "<detail>",
         {
             BasicClient client = new BasicClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
             });
@@ -175,7 +175,7 @@ detail = "<detail>",
         {
             BasicClient client = new BasicClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
                 orders = new object[]
@@ -204,7 +204,7 @@ detail = "<detail>",
         {
             BasicClient client = new BasicClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
                 orders = new object[]

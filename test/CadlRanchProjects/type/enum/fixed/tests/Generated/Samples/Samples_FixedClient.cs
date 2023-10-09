@@ -109,7 +109,7 @@ namespace _Type._Enum.Fixed.Samples
         {
             FixedClient client = new FixedClient();
 
-            RequestContent content = RequestContent.Create("Monday");
+            using RequestContent content = RequestContent.Create("Monday");
             Response response = client.PutKnownValue(content);
 
             Console.WriteLine(response.Status);
@@ -121,7 +121,7 @@ namespace _Type._Enum.Fixed.Samples
         {
             FixedClient client = new FixedClient();
 
-            RequestContent content = RequestContent.Create("Monday");
+            using RequestContent content = RequestContent.Create("Monday");
             Response response = await client.PutKnownValueAsync(content);
 
             Console.WriteLine(response.Status);
@@ -151,7 +151,7 @@ namespace _Type._Enum.Fixed.Samples
         {
             FixedClient client = new FixedClient();
 
-            RequestContent content = RequestContent.Create("Monday");
+            using RequestContent content = RequestContent.Create("Monday");
             Response response = client.PutKnownValue(content);
 
             Console.WriteLine(response.Status);
@@ -163,7 +163,7 @@ namespace _Type._Enum.Fixed.Samples
         {
             FixedClient client = new FixedClient();
 
-            RequestContent content = RequestContent.Create("Monday");
+            using RequestContent content = RequestContent.Create("Monday");
             Response response = await client.PutKnownValueAsync(content);
 
             Console.WriteLine(response.Status);
@@ -193,7 +193,7 @@ namespace _Type._Enum.Fixed.Samples
         {
             FixedClient client = new FixedClient();
 
-            RequestContent content = RequestContent.Create("Monday");
+            using RequestContent content = RequestContent.Create("Monday");
             Response response = client.PutUnknownValue(content);
 
             Console.WriteLine(response.Status);
@@ -205,7 +205,7 @@ namespace _Type._Enum.Fixed.Samples
         {
             FixedClient client = new FixedClient();
 
-            RequestContent content = RequestContent.Create("Monday");
+            using RequestContent content = RequestContent.Create("Monday");
             Response response = await client.PutUnknownValueAsync(content);
 
             Console.WriteLine(response.Status);
@@ -235,7 +235,7 @@ namespace _Type._Enum.Fixed.Samples
         {
             FixedClient client = new FixedClient();
 
-            RequestContent content = RequestContent.Create("Monday");
+            using RequestContent content = RequestContent.Create("Monday");
             Response response = client.PutUnknownValue(content);
 
             Console.WriteLine(response.Status);
@@ -247,7 +247,7 @@ namespace _Type._Enum.Fixed.Samples
         {
             FixedClient client = new FixedClient();
 
-            RequestContent content = RequestContent.Create("Monday");
+            using RequestContent content = RequestContent.Create("Monday");
             Response response = await client.PutUnknownValueAsync(content);
 
             Console.WriteLine(response.Status);

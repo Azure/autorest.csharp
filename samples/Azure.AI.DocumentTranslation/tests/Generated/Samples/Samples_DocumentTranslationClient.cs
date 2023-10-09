@@ -709,7 +709,7 @@ namespace Azure.AI.DocumentTranslation.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 inputs = new object[]
             {
@@ -740,7 +740,7 @@ language = "<language>",
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 inputs = new object[]
             {
@@ -771,7 +771,7 @@ language = "<language>",
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 inputs = new object[]
             {
@@ -822,7 +822,7 @@ storageType = "Folder",
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 inputs = new object[]
             {

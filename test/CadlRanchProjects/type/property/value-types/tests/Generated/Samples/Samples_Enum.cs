@@ -109,7 +109,7 @@ namespace _Type.Property.ValueTypes.Samples
         {
             Enum client = new ValueTypesClient().GetEnumClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 property = "ValueOne",
             });
@@ -124,7 +124,7 @@ namespace _Type.Property.ValueTypes.Samples
         {
             Enum client = new ValueTypesClient().GetEnumClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 property = "ValueOne",
             });
@@ -159,7 +159,7 @@ namespace _Type.Property.ValueTypes.Samples
         {
             Enum client = new ValueTypesClient().GetEnumClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 property = "ValueOne",
             });
@@ -174,7 +174,7 @@ namespace _Type.Property.ValueTypes.Samples
         {
             Enum client = new ValueTypesClient().GetEnumClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 property = "ValueOne",
             });

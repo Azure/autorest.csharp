@@ -25,7 +25,7 @@ namespace _Type.Model.Empty.Samples
         {
             EmptyClient client = new EmptyClient();
 
-            RequestContent content = RequestContent.Create(new object());
+            using RequestContent content = RequestContent.Create(new object());
             Response response = client.PutEmpty(content);
 
             Console.WriteLine(response.Status);
@@ -37,7 +37,7 @@ namespace _Type.Model.Empty.Samples
         {
             EmptyClient client = new EmptyClient();
 
-            RequestContent content = RequestContent.Create(new object());
+            using RequestContent content = RequestContent.Create(new object());
             Response response = await client.PutEmptyAsync(content);
 
             Console.WriteLine(response.Status);
@@ -69,7 +69,7 @@ namespace _Type.Model.Empty.Samples
         {
             EmptyClient client = new EmptyClient();
 
-            RequestContent content = RequestContent.Create(new object());
+            using RequestContent content = RequestContent.Create(new object());
             Response response = client.PutEmpty(content);
 
             Console.WriteLine(response.Status);
@@ -81,7 +81,7 @@ namespace _Type.Model.Empty.Samples
         {
             EmptyClient client = new EmptyClient();
 
-            RequestContent content = RequestContent.Create(new object());
+            using RequestContent content = RequestContent.Create(new object());
             Response response = await client.PutEmptyAsync(content);
 
             Console.WriteLine(response.Status);
@@ -197,7 +197,7 @@ namespace _Type.Model.Empty.Samples
         {
             EmptyClient client = new EmptyClient();
 
-            RequestContent content = RequestContent.Create(new object());
+            using RequestContent content = RequestContent.Create(new object());
             Response response = client.PostRoundTripEmpty(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
@@ -210,7 +210,7 @@ namespace _Type.Model.Empty.Samples
         {
             EmptyClient client = new EmptyClient();
 
-            RequestContent content = RequestContent.Create(new object());
+            using RequestContent content = RequestContent.Create(new object());
             Response response = await client.PostRoundTripEmptyAsync(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
@@ -243,7 +243,7 @@ namespace _Type.Model.Empty.Samples
         {
             EmptyClient client = new EmptyClient();
 
-            RequestContent content = RequestContent.Create(new object());
+            using RequestContent content = RequestContent.Create(new object());
             Response response = client.PostRoundTripEmpty(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
@@ -256,7 +256,7 @@ namespace _Type.Model.Empty.Samples
         {
             EmptyClient client = new EmptyClient();
 
-            RequestContent content = RequestContent.Create(new object());
+            using RequestContent content = RequestContent.Create(new object());
             Response response = await client.PostRoundTripEmptyAsync(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;

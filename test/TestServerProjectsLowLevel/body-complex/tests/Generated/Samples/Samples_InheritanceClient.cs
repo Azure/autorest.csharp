@@ -89,7 +89,7 @@ namespace body_complex_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             InheritanceClient client = new InheritanceClient(credential);
 
-            RequestContent content = RequestContent.Create(new object());
+            using RequestContent content = RequestContent.Create(new object());
             Response response = client.PutValid(content);
 
             Console.WriteLine(response.Status);
@@ -102,7 +102,7 @@ namespace body_complex_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             InheritanceClient client = new InheritanceClient(credential);
 
-            RequestContent content = RequestContent.Create(new object());
+            using RequestContent content = RequestContent.Create(new object());
             Response response = await client.PutValidAsync(content);
 
             Console.WriteLine(response.Status);
@@ -115,7 +115,7 @@ namespace body_complex_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             InheritanceClient client = new InheritanceClient(credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 breed = "<breed>",
                 color = "<color>",
@@ -143,7 +143,7 @@ name = "<name>",
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             InheritanceClient client = new InheritanceClient(credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 breed = "<breed>",
                 color = "<color>",

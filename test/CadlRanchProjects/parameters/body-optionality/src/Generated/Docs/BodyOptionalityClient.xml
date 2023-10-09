@@ -41,7 +41,7 @@ This sample shows how to call RequiredExplicitAsync.
 <code><![CDATA[
 BodyOptionalityClient client = new BodyOptionalityClient();
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     name = "<name>",
 });
@@ -53,7 +53,7 @@ This sample shows how to call RequiredExplicitAsync with all request content.
 <code><![CDATA[
 BodyOptionalityClient client = new BodyOptionalityClient();
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     name = "<name>",
 });
@@ -68,7 +68,7 @@ This sample shows how to call RequiredExplicit.
 <code><![CDATA[
 BodyOptionalityClient client = new BodyOptionalityClient();
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     name = "<name>",
 });
@@ -80,7 +80,7 @@ This sample shows how to call RequiredExplicit with all request content.
 <code><![CDATA[
 BodyOptionalityClient client = new BodyOptionalityClient();
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     name = "<name>",
 });
@@ -129,7 +129,7 @@ This sample shows how to call RequiredImplicitAsync.
 <code><![CDATA[
 BodyOptionalityClient client = new BodyOptionalityClient();
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     name = "<name>",
 });
@@ -141,7 +141,7 @@ This sample shows how to call RequiredImplicitAsync with all request content.
 <code><![CDATA[
 BodyOptionalityClient client = new BodyOptionalityClient();
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     name = "<name>",
 });
@@ -156,7 +156,7 @@ This sample shows how to call RequiredImplicit.
 <code><![CDATA[
 BodyOptionalityClient client = new BodyOptionalityClient();
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     name = "<name>",
 });
@@ -168,7 +168,7 @@ This sample shows how to call RequiredImplicit with all request content.
 <code><![CDATA[
 BodyOptionalityClient client = new BodyOptionalityClient();
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     name = "<name>",
 });

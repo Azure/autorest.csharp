@@ -181,7 +181,7 @@ This sample shows how to call PutKnownValueAsync.
 <code><![CDATA[
 ExtensibleClient client = new ExtensibleClient();
 
-RequestContent content = RequestContent.Create("Monday");
+using RequestContent content = RequestContent.Create("Monday");
 Response response = await client.PutKnownValueAsync(content);
 
 Console.WriteLine(response.Status);
@@ -190,7 +190,7 @@ This sample shows how to call PutKnownValueAsync with all request content.
 <code><![CDATA[
 ExtensibleClient client = new ExtensibleClient();
 
-RequestContent content = RequestContent.Create("Monday");
+using RequestContent content = RequestContent.Create("Monday");
 Response response = await client.PutKnownValueAsync(content);
 
 Console.WriteLine(response.Status);
@@ -202,7 +202,7 @@ This sample shows how to call PutKnownValue.
 <code><![CDATA[
 ExtensibleClient client = new ExtensibleClient();
 
-RequestContent content = RequestContent.Create("Monday");
+using RequestContent content = RequestContent.Create("Monday");
 Response response = client.PutKnownValue(content);
 
 Console.WriteLine(response.Status);
@@ -211,7 +211,7 @@ This sample shows how to call PutKnownValue with all request content.
 <code><![CDATA[
 ExtensibleClient client = new ExtensibleClient();
 
-RequestContent content = RequestContent.Create("Monday");
+using RequestContent content = RequestContent.Create("Monday");
 Response response = client.PutKnownValue(content);
 
 Console.WriteLine(response.Status);
@@ -253,7 +253,7 @@ This sample shows how to call PutUnknownValueAsync.
 <code><![CDATA[
 ExtensibleClient client = new ExtensibleClient();
 
-RequestContent content = RequestContent.Create("Monday");
+using RequestContent content = RequestContent.Create("Monday");
 Response response = await client.PutUnknownValueAsync(content);
 
 Console.WriteLine(response.Status);
@@ -262,7 +262,7 @@ This sample shows how to call PutUnknownValueAsync with all request content.
 <code><![CDATA[
 ExtensibleClient client = new ExtensibleClient();
 
-RequestContent content = RequestContent.Create("Monday");
+using RequestContent content = RequestContent.Create("Monday");
 Response response = await client.PutUnknownValueAsync(content);
 
 Console.WriteLine(response.Status);
@@ -274,7 +274,7 @@ This sample shows how to call PutUnknownValue.
 <code><![CDATA[
 ExtensibleClient client = new ExtensibleClient();
 
-RequestContent content = RequestContent.Create("Monday");
+using RequestContent content = RequestContent.Create("Monday");
 Response response = client.PutUnknownValue(content);
 
 Console.WriteLine(response.Status);
@@ -283,7 +283,7 @@ This sample shows how to call PutUnknownValue with all request content.
 <code><![CDATA[
 ExtensibleClient client = new ExtensibleClient();
 
-RequestContent content = RequestContent.Create("Monday");
+using RequestContent content = RequestContent.Create("Monday");
 Response response = client.PutUnknownValue(content);
 
 Console.WriteLine(response.Status);

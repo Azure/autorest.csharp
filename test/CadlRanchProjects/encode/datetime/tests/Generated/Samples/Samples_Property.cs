@@ -25,7 +25,7 @@ namespace Encode.Datetime.Samples
         {
             Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 value = "2022-05-10T14:57:31.2311892-04:00",
             });
@@ -41,7 +41,7 @@ namespace Encode.Datetime.Samples
         {
             Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 value = "2022-05-10T14:57:31.2311892-04:00",
             });
@@ -77,7 +77,7 @@ namespace Encode.Datetime.Samples
         {
             Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 value = "2022-05-10T14:57:31.2311892-04:00",
             });
@@ -93,7 +93,7 @@ namespace Encode.Datetime.Samples
         {
             Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 value = "2022-05-10T14:57:31.2311892-04:00",
             });
@@ -129,7 +129,7 @@ namespace Encode.Datetime.Samples
         {
             Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 value = "2022-05-10T18:57:31.2311892Z",
             });
@@ -145,7 +145,7 @@ namespace Encode.Datetime.Samples
         {
             Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 value = "2022-05-10T18:57:31.2311892Z",
             });
@@ -181,7 +181,7 @@ namespace Encode.Datetime.Samples
         {
             Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 value = "2022-05-10T18:57:31.2311892Z",
             });
@@ -197,7 +197,7 @@ namespace Encode.Datetime.Samples
         {
             Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 value = "2022-05-10T18:57:31.2311892Z",
             });
@@ -233,7 +233,7 @@ namespace Encode.Datetime.Samples
         {
             Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 value = "Tue, 10 May 2022 18:57:31 GMT",
             });
@@ -249,7 +249,7 @@ namespace Encode.Datetime.Samples
         {
             Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 value = "Tue, 10 May 2022 18:57:31 GMT",
             });
@@ -285,7 +285,7 @@ namespace Encode.Datetime.Samples
         {
             Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 value = "Tue, 10 May 2022 18:57:31 GMT",
             });
@@ -301,7 +301,7 @@ namespace Encode.Datetime.Samples
         {
             Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 value = "Tue, 10 May 2022 18:57:31 GMT",
             });
@@ -337,7 +337,7 @@ namespace Encode.Datetime.Samples
         {
             Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 value = 1652209051,
             });
@@ -353,7 +353,7 @@ namespace Encode.Datetime.Samples
         {
             Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 value = 1652209051,
             });
@@ -389,7 +389,7 @@ namespace Encode.Datetime.Samples
         {
             Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 value = 1652209051,
             });
@@ -405,7 +405,7 @@ namespace Encode.Datetime.Samples
         {
             Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 value = 1652209051,
             });
@@ -441,7 +441,7 @@ namespace Encode.Datetime.Samples
         {
             Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 value = new object[]
             {
@@ -460,7 +460,7 @@ namespace Encode.Datetime.Samples
         {
             Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 value = new object[]
             {
@@ -499,7 +499,7 @@ namespace Encode.Datetime.Samples
         {
             Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 value = new object[]
             {
@@ -518,7 +518,7 @@ namespace Encode.Datetime.Samples
         {
             Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 value = new object[]
             {

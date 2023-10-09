@@ -191,7 +191,7 @@ This sample shows how to call PutAllAsync.
 <code><![CDATA[
 Bytes client = new OptionalClient().GetBytesClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new object());
+using RequestContent content = RequestContent.Create(new object());
 Response response = await client.PutAllAsync(content);
 
 Console.WriteLine(response.Status);
@@ -200,7 +200,7 @@ This sample shows how to call PutAllAsync with all request content.
 <code><![CDATA[
 Bytes client = new OptionalClient().GetBytesClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     property = new object(),
 });
@@ -215,7 +215,7 @@ This sample shows how to call PutAll.
 <code><![CDATA[
 Bytes client = new OptionalClient().GetBytesClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new object());
+using RequestContent content = RequestContent.Create(new object());
 Response response = client.PutAll(content);
 
 Console.WriteLine(response.Status);
@@ -224,7 +224,7 @@ This sample shows how to call PutAll with all request content.
 <code><![CDATA[
 Bytes client = new OptionalClient().GetBytesClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     property = new object(),
 });
@@ -279,7 +279,7 @@ This sample shows how to call PutDefaultAsync.
 <code><![CDATA[
 Bytes client = new OptionalClient().GetBytesClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new object());
+using RequestContent content = RequestContent.Create(new object());
 Response response = await client.PutDefaultAsync(content);
 
 Console.WriteLine(response.Status);
@@ -288,7 +288,7 @@ This sample shows how to call PutDefaultAsync with all request content.
 <code><![CDATA[
 Bytes client = new OptionalClient().GetBytesClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     property = new object(),
 });
@@ -303,7 +303,7 @@ This sample shows how to call PutDefault.
 <code><![CDATA[
 Bytes client = new OptionalClient().GetBytesClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new object());
+using RequestContent content = RequestContent.Create(new object());
 Response response = client.PutDefault(content);
 
 Console.WriteLine(response.Status);
@@ -312,7 +312,7 @@ This sample shows how to call PutDefault with all request content.
 <code><![CDATA[
 Bytes client = new OptionalClient().GetBytesClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     property = new object(),
 });

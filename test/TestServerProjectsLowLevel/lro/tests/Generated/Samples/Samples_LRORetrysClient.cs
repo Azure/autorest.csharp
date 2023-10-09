@@ -25,7 +25,7 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LRORetrysClient client = new LRORetrysClient(credential);
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Operation<BinaryData> operation = client.Put201CreatingSucceeded200(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
 
@@ -40,7 +40,7 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LRORetrysClient client = new LRORetrysClient(credential);
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Operation<BinaryData> operation = await client.Put201CreatingSucceeded200Async(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
 
@@ -55,7 +55,7 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LRORetrysClient client = new LRORetrysClient(credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 properties = new
                 {
@@ -87,7 +87,7 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LRORetrysClient client = new LRORetrysClient(credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 properties = new
                 {
@@ -119,7 +119,7 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LRORetrysClient client = new LRORetrysClient(credential);
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Operation<BinaryData> operation = client.PutAsyncRelativeRetrySucceeded(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
 
@@ -134,7 +134,7 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LRORetrysClient client = new LRORetrysClient(credential);
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Operation<BinaryData> operation = await client.PutAsyncRelativeRetrySucceededAsync(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
 
@@ -149,7 +149,7 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LRORetrysClient client = new LRORetrysClient(credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 properties = new
                 {
@@ -181,7 +181,7 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LRORetrysClient client = new LRORetrysClient(credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 properties = new
                 {
@@ -361,7 +361,7 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LRORetrysClient client = new LRORetrysClient(credential);
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Operation operation = client.Post202Retry200(WaitUntil.Completed, content);
         }
 
@@ -372,7 +372,7 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LRORetrysClient client = new LRORetrysClient(credential);
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Operation operation = await client.Post202Retry200Async(WaitUntil.Completed, content);
         }
 
@@ -383,7 +383,7 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LRORetrysClient client = new LRORetrysClient(credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 properties = new
                 {
@@ -405,7 +405,7 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LRORetrysClient client = new LRORetrysClient(credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 properties = new
                 {
@@ -427,7 +427,7 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LRORetrysClient client = new LRORetrysClient(credential);
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Operation operation = client.PostAsyncRelativeRetrySucceeded(WaitUntil.Completed, content);
         }
 
@@ -438,7 +438,7 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LRORetrysClient client = new LRORetrysClient(credential);
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Operation operation = await client.PostAsyncRelativeRetrySucceededAsync(WaitUntil.Completed, content);
         }
 
@@ -449,7 +449,7 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LRORetrysClient client = new LRORetrysClient(credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 properties = new
                 {
@@ -471,7 +471,7 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LRORetrysClient client = new LRORetrysClient(credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 properties = new
                 {

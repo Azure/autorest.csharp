@@ -109,7 +109,7 @@ This sample shows how to call PutAsync.
 <code><![CDATA[
 DurationValue client = new ArrayClient().GetDurationValueClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new object[]
+using RequestContent content = RequestContent.Create(new object[]
 {
     "PT1H23M45S"
 });
@@ -121,7 +121,7 @@ This sample shows how to call PutAsync with all request content.
 <code><![CDATA[
 DurationValue client = new ArrayClient().GetDurationValueClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new object[]
+using RequestContent content = RequestContent.Create(new object[]
 {
     "PT1H23M45S"
 });
@@ -136,7 +136,7 @@ This sample shows how to call Put.
 <code><![CDATA[
 DurationValue client = new ArrayClient().GetDurationValueClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new object[]
+using RequestContent content = RequestContent.Create(new object[]
 {
     "PT1H23M45S"
 });
@@ -148,7 +148,7 @@ This sample shows how to call Put with all request content.
 <code><![CDATA[
 DurationValue client = new ArrayClient().GetDurationValueClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new object[]
+using RequestContent content = RequestContent.Create(new object[]
 {
     "PT1H23M45S"
 });
