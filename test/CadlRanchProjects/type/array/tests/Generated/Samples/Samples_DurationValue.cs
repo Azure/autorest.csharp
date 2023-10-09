@@ -110,7 +110,7 @@ namespace _Type._Array.Samples
         {
             DurationValue client = new ArrayClient().GetDurationValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new object[]
+            using RequestContent content = RequestContent.Create(new object[]
             {
 "PT1H23M45S"
             });
@@ -125,7 +125,7 @@ namespace _Type._Array.Samples
         {
             DurationValue client = new ArrayClient().GetDurationValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new object[]
+            using RequestContent content = RequestContent.Create(new object[]
             {
 "PT1H23M45S"
             });
@@ -158,7 +158,7 @@ namespace _Type._Array.Samples
         {
             DurationValue client = new ArrayClient().GetDurationValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new object[]
+            using RequestContent content = RequestContent.Create(new object[]
             {
 "PT1H23M45S"
             });
@@ -173,7 +173,7 @@ namespace _Type._Array.Samples
         {
             DurationValue client = new ArrayClient().GetDurationValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new object[]
+            using RequestContent content = RequestContent.Create(new object[]
             {
 "PT1H23M45S"
             });

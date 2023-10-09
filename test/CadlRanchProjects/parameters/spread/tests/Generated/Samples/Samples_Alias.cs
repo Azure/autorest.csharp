@@ -23,7 +23,7 @@ namespace Parameters.Spread.Samples
         {
             Alias client = new SpreadClient().GetAliasClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
             });
@@ -38,7 +38,7 @@ namespace Parameters.Spread.Samples
         {
             Alias client = new SpreadClient().GetAliasClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
             });
@@ -71,7 +71,7 @@ namespace Parameters.Spread.Samples
         {
             Alias client = new SpreadClient().GetAliasClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
             });
@@ -86,7 +86,7 @@ namespace Parameters.Spread.Samples
         {
             Alias client = new SpreadClient().GetAliasClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
             });
@@ -119,7 +119,7 @@ namespace Parameters.Spread.Samples
         {
             Alias client = new SpreadClient().GetAliasClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
             });
@@ -134,7 +134,7 @@ namespace Parameters.Spread.Samples
         {
             Alias client = new SpreadClient().GetAliasClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
             });
@@ -167,7 +167,7 @@ namespace Parameters.Spread.Samples
         {
             Alias client = new SpreadClient().GetAliasClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
             });
@@ -182,7 +182,7 @@ namespace Parameters.Spread.Samples
         {
             Alias client = new SpreadClient().GetAliasClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
             });
@@ -215,7 +215,7 @@ namespace Parameters.Spread.Samples
         {
             Alias client = new SpreadClient().GetAliasClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 prop1 = "<prop1>",
                 prop2 = "<prop2>",
@@ -235,7 +235,7 @@ namespace Parameters.Spread.Samples
         {
             Alias client = new SpreadClient().GetAliasClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 prop1 = "<prop1>",
                 prop2 = "<prop2>",
@@ -273,7 +273,7 @@ namespace Parameters.Spread.Samples
         {
             Alias client = new SpreadClient().GetAliasClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 prop1 = "<prop1>",
                 prop2 = "<prop2>",
@@ -293,7 +293,7 @@ namespace Parameters.Spread.Samples
         {
             Alias client = new SpreadClient().GetAliasClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 prop1 = "<prop1>",
                 prop2 = "<prop2>",

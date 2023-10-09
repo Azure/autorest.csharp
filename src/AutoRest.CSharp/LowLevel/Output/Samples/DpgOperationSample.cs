@@ -105,7 +105,7 @@ namespace AutoRest.CSharp.Output.Samples.Models
                 {
                     // when it is not inline parameter, we add the declaration of the parameter into the statements, and returns the parameter name reference
                     var parameterReference = new VariableReference(parameter.Type, parameter.Name);
-                    var declaration = Snippets.Declare(parameterReference, parameterExpression);
+                    var declaration = NeedsDispose(parameter) ? UsingDeclare(parameterReference, parameterExpression) : Declare(parameterReference, parameterExpression);
                     variableDeclarationStatements.Add(declaration);
                     yield return parameter.IsOptionalInSignature ? new PositionalParameterReference(parameter.Name, parameterReference) : parameterReference; // returns the parameter name reference
                 }
@@ -289,6 +289,14 @@ namespace AutoRest.CSharp.Output.Samples.Models
 
             // sometimes, especially in swagger projects, the parameter used as endpoint in our client, does not have the `IsEndpoint` flag, we have to fallback here so that we could at least have a value for it.
             return InputExampleValue.Value(InputPrimitiveType.String, $"<{parameterName}>");
+        }
+
+        private bool NeedsDispose(Parameter parameter)
+        {
+            if (IsSameParameter(parameter, KnownParameters.RequestContent) || IsSameParameter(parameter, KnownParameters.RequestContentNullable))
+                return true;
+
+            return false;
         }
 
         private bool IsInlineParameter(Parameter parameter)

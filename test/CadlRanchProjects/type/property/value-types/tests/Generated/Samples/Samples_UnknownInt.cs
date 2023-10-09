@@ -109,7 +109,7 @@ namespace _Type.Property.ValueTypes.Samples
         {
             UnknownInt client = new ValueTypesClient().GetUnknownIntClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 property = new object(),
             });
@@ -124,7 +124,7 @@ namespace _Type.Property.ValueTypes.Samples
         {
             UnknownInt client = new ValueTypesClient().GetUnknownIntClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 property = new object(),
             });
@@ -159,7 +159,7 @@ namespace _Type.Property.ValueTypes.Samples
         {
             UnknownInt client = new ValueTypesClient().GetUnknownIntClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 property = new object(),
             });
@@ -174,7 +174,7 @@ namespace _Type.Property.ValueTypes.Samples
         {
             UnknownInt client = new ValueTypesClient().GetUnknownIntClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 property = new object(),
             });

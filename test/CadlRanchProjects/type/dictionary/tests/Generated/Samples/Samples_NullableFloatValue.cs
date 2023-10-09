@@ -109,7 +109,7 @@ namespace _Type._Dictionary.Samples
         {
             NullableFloatValue client = new DictionaryClient().GetNullableFloatValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 key = 123.45F,
             });
@@ -124,7 +124,7 @@ namespace _Type._Dictionary.Samples
         {
             NullableFloatValue client = new DictionaryClient().GetNullableFloatValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 key = 123.45F,
             });
@@ -163,7 +163,7 @@ namespace _Type._Dictionary.Samples
         {
             NullableFloatValue client = new DictionaryClient().GetNullableFloatValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 key = 123.45F,
             });
@@ -178,7 +178,7 @@ namespace _Type._Dictionary.Samples
         {
             NullableFloatValue client = new DictionaryClient().GetNullableFloatValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 key = 123.45F,
             });

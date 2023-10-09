@@ -89,7 +89,7 @@ namespace body_complex_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PolymorphismClient client = new PolymorphismClient(credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 fishtype = "salmon",
                 length = 123.45F,
@@ -106,7 +106,7 @@ namespace body_complex_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PolymorphismClient client = new PolymorphismClient(credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 fishtype = "salmon",
                 length = 123.45F,
@@ -123,7 +123,7 @@ namespace body_complex_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PolymorphismClient client = new PolymorphismClient(credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 location = "<location>",
                 iswild = true,
@@ -147,7 +147,7 @@ null
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PolymorphismClient client = new PolymorphismClient(credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 location = "<location>",
                 iswild = true,
@@ -441,7 +441,7 @@ null
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PolymorphismClient client = new PolymorphismClient(credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 fishtype = "smart_salmon",
                 length = 123.45F,
@@ -458,7 +458,7 @@ null
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PolymorphismClient client = new PolymorphismClient(credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 fishtype = "smart_salmon",
                 length = 123.45F,
@@ -475,7 +475,7 @@ null
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PolymorphismClient client = new PolymorphismClient(credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 college_degree = "<college_degree>",
                 location = "<location>",
@@ -511,7 +511,7 @@ null
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PolymorphismClient client = new PolymorphismClient(credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 college_degree = "<college_degree>",
                 location = "<location>",
@@ -547,7 +547,7 @@ null
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PolymorphismClient client = new PolymorphismClient(credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 fishtype = "smart_salmon",
                 length = 123.45F,
@@ -566,7 +566,7 @@ null
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PolymorphismClient client = new PolymorphismClient(credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 fishtype = "smart_salmon",
                 length = 123.45F,
@@ -585,7 +585,7 @@ null
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PolymorphismClient client = new PolymorphismClient(credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 college_degree = "<college_degree>",
                 location = "<location>",
@@ -629,7 +629,7 @@ null
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PolymorphismClient client = new PolymorphismClient(credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 college_degree = "<college_degree>",
                 location = "<location>",
@@ -673,7 +673,7 @@ null
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PolymorphismClient client = new PolymorphismClient(credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 fishtype = "salmon",
                 length = 123.45F,
@@ -690,7 +690,7 @@ null
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PolymorphismClient client = new PolymorphismClient(credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 fishtype = "salmon",
                 length = 123.45F,
@@ -707,7 +707,7 @@ null
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PolymorphismClient client = new PolymorphismClient(credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 location = "<location>",
                 iswild = true,
@@ -731,7 +731,7 @@ null
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PolymorphismClient client = new PolymorphismClient(credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 location = "<location>",
                 iswild = true,

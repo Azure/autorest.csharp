@@ -109,7 +109,7 @@ namespace _Type._Array.Samples
         {
             StringValue client = new ArrayClient().GetStringValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new object[]
+            using RequestContent content = RequestContent.Create(new object[]
             {
 "<body>"
             });
@@ -124,7 +124,7 @@ namespace _Type._Array.Samples
         {
             StringValue client = new ArrayClient().GetStringValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new object[]
+            using RequestContent content = RequestContent.Create(new object[]
             {
 "<body>"
             });
@@ -157,7 +157,7 @@ namespace _Type._Array.Samples
         {
             StringValue client = new ArrayClient().GetStringValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new object[]
+            using RequestContent content = RequestContent.Create(new object[]
             {
 "<body>"
             });
@@ -172,7 +172,7 @@ namespace _Type._Array.Samples
         {
             StringValue client = new ArrayClient().GetStringValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new object[]
+            using RequestContent content = RequestContent.Create(new object[]
             {
 "<body>"
             });

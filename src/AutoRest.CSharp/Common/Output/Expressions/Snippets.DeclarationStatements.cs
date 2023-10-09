@@ -54,6 +54,9 @@ namespace AutoRest.CSharp.Common.Output.Models
         public static DeclarationStatement Declare(VariableReference variable, ValueExpression value)
             => new DeclareVariableStatement(variable.Type, variable.Declaration, value);
 
+        public static DeclarationStatement UsingDeclare(VariableReference variable, ValueExpression value)
+            => new UsingDeclareVariableStatement(variable.Type, variable.Declaration, value);
+
         public static DeclarationStatement UsingVar(string name, HttpMessageExpression value, out HttpMessageExpression variable)
             => UsingVar(name, value, d => new HttpMessageExpression(d), out variable);
 

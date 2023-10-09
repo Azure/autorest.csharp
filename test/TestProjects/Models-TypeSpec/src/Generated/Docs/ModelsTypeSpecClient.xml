@@ -206,7 +206,7 @@ This sample shows how to call InputToRoundTripAsync and parse the result.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     requiredString = "<requiredString>",
     requiredInt = 1234,
@@ -286,7 +286,7 @@ This sample shows how to call InputToRoundTripAsync with all request content and
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     requiredString = "<requiredString>",
     requiredInt = 1234,
@@ -407,7 +407,7 @@ This sample shows how to call InputToRoundTrip and parse the result.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     requiredString = "<requiredString>",
     requiredInt = 1234,
@@ -487,7 +487,7 @@ This sample shows how to call InputToRoundTrip with all request content and pars
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     requiredString = "<requiredString>",
     requiredInt = 1234,
@@ -726,7 +726,7 @@ This sample shows how to call InputToRoundTripPrimitiveAsync and parse the resul
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     requiredString = "<requiredString>",
     requiredInt = 1234,
@@ -798,7 +798,7 @@ This sample shows how to call InputToRoundTripPrimitiveAsync with all request co
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     requiredString = "<requiredString>",
     requiredInt = 1234,
@@ -899,7 +899,7 @@ This sample shows how to call InputToRoundTripPrimitive and parse the result.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     requiredString = "<requiredString>",
     requiredInt = 1234,
@@ -971,7 +971,7 @@ This sample shows how to call InputToRoundTripPrimitive with all request content
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     requiredString = "<requiredString>",
     requiredInt = 1234,
@@ -1186,7 +1186,7 @@ This sample shows how to call InputToRoundTripOptionalAsync and parse the result
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-RequestContent content = RequestContent.Create(new object());
+using RequestContent content = RequestContent.Create(new object());
 Response response = await client.InputToRoundTripOptionalAsync(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
@@ -1197,7 +1197,7 @@ This sample shows how to call InputToRoundTripOptionalAsync with all request con
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     optionalString = "<optionalString>",
     optionalInt = 1234,
@@ -1282,7 +1282,7 @@ This sample shows how to call InputToRoundTripOptional and parse the result.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-RequestContent content = RequestContent.Create(new object());
+using RequestContent content = RequestContent.Create(new object());
 Response response = client.InputToRoundTripOptional(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
@@ -1293,7 +1293,7 @@ This sample shows how to call InputToRoundTripOptional with all request content 
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     optionalString = "<optionalString>",
     optionalInt = 1234,
@@ -1518,7 +1518,7 @@ This sample shows how to call RoundTripToOutputAsync and parse the result.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     requiredString = "<requiredString>",
     requiredInt = 1234,
@@ -1588,7 +1588,7 @@ This sample shows how to call RoundTripToOutputAsync with all request content an
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     requiredString = "<requiredString>",
     requiredInt = 1234,
@@ -1684,7 +1684,7 @@ This sample shows how to call RoundTripToOutput and parse the result.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     requiredString = "<requiredString>",
     requiredInt = 1234,
@@ -1754,7 +1754,7 @@ This sample shows how to call RoundTripToOutput with all request content and par
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     requiredString = "<requiredString>",
     requiredInt = 1234,
@@ -1894,7 +1894,7 @@ This sample shows how to call InputRecursiveAsync.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     message = "<message>",
 });
@@ -1907,7 +1907,7 @@ This sample shows how to call InputRecursiveAsync with all request content.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     message = "<message>",
 });
@@ -1923,7 +1923,7 @@ This sample shows how to call InputRecursive.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     message = "<message>",
 });
@@ -1936,7 +1936,7 @@ This sample shows how to call InputRecursive with all request content.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     message = "<message>",
 });
@@ -1996,7 +1996,7 @@ This sample shows how to call RoundTripRecursiveAsync and parse the result.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     message = "<message>",
 });
@@ -2010,7 +2010,7 @@ This sample shows how to call RoundTripRecursiveAsync with all request content a
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     message = "<message>",
 });
@@ -2028,7 +2028,7 @@ This sample shows how to call RoundTripRecursive and parse the result.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     message = "<message>",
 });
@@ -2042,7 +2042,7 @@ This sample shows how to call RoundTripRecursive with all request content and pa
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     message = "<message>",
 });
@@ -2216,7 +2216,7 @@ This sample shows how to call RoundTripToOutputWithNoUseBaseAsync and parse the 
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     requiredList = new object[]
     {
@@ -2246,7 +2246,7 @@ This sample shows how to call RoundTripToOutputWithNoUseBaseAsync with all reque
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     requiredList = new object[]
     {
@@ -2279,7 +2279,7 @@ This sample shows how to call RoundTripToOutputWithNoUseBase and parse the resul
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     requiredList = new object[]
     {
@@ -2309,7 +2309,7 @@ This sample shows how to call RoundTripToOutputWithNoUseBase with all request co
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     requiredList = new object[]
     {
@@ -2550,7 +2550,7 @@ This sample shows how to call GenericTypeAsync.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     kind = "Int32Values",
     values = new object[]
@@ -2569,7 +2569,7 @@ This sample shows how to call GenericTypeAsync with all request content.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     kind = "Int32Values",
     values = new object[]
@@ -2591,7 +2591,7 @@ This sample shows how to call GenericType.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     kind = "Int32Values",
     values = new object[]
@@ -2610,7 +2610,7 @@ This sample shows how to call GenericType with all request content.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     kind = "Int32Values",
     values = new object[]

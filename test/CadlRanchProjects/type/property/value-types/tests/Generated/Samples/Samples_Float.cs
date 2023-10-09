@@ -109,7 +109,7 @@ namespace _Type.Property.ValueTypes.Samples
         {
             Float client = new ValueTypesClient().GetFloatClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 property = 123.45F,
             });
@@ -124,7 +124,7 @@ namespace _Type.Property.ValueTypes.Samples
         {
             Float client = new ValueTypesClient().GetFloatClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 property = 123.45F,
             });
@@ -159,7 +159,7 @@ namespace _Type.Property.ValueTypes.Samples
         {
             Float client = new ValueTypesClient().GetFloatClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 property = 123.45F,
             });
@@ -174,7 +174,7 @@ namespace _Type.Property.ValueTypes.Samples
         {
             Float client = new ValueTypesClient().GetFloatClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 property = 123.45F,
             });

@@ -109,7 +109,7 @@ namespace _Type._Array.Samples
         {
             DatetimeValue client = new ArrayClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new object[]
+            using RequestContent content = RequestContent.Create(new object[]
             {
 "2022-05-10T14:57:31.2311892-04:00"
             });
@@ -124,7 +124,7 @@ namespace _Type._Array.Samples
         {
             DatetimeValue client = new ArrayClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new object[]
+            using RequestContent content = RequestContent.Create(new object[]
             {
 "2022-05-10T14:57:31.2311892-04:00"
             });
@@ -157,7 +157,7 @@ namespace _Type._Array.Samples
         {
             DatetimeValue client = new ArrayClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new object[]
+            using RequestContent content = RequestContent.Create(new object[]
             {
 "2022-05-10T14:57:31.2311892-04:00"
             });
@@ -172,7 +172,7 @@ namespace _Type._Array.Samples
         {
             DatetimeValue client = new ArrayClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new object[]
+            using RequestContent content = RequestContent.Create(new object[]
             {
 "2022-05-10T14:57:31.2311892-04:00"
             });

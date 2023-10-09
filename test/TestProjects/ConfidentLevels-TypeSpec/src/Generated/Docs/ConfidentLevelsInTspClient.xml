@@ -46,7 +46,7 @@ This sample shows how to call UnionInRequestPropertyAsync.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     unionProperty = "<unionProperty>",
 });
@@ -59,7 +59,7 @@ This sample shows how to call UnionInRequestPropertyAsync with all request conte
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     unionProperty = "<unionProperty>",
 });
@@ -75,7 +75,7 @@ This sample shows how to call UnionInRequestProperty.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     unionProperty = "<unionProperty>",
 });
@@ -88,7 +88,7 @@ This sample shows how to call UnionInRequestProperty with all request content.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     unionProperty = "<unionProperty>",
 });
@@ -148,7 +148,7 @@ This sample shows how to call UnionInResponsePropertyAsync and parse the result.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     name = "<name>",
     age = 1234,
@@ -163,7 +163,7 @@ This sample shows how to call UnionInResponsePropertyAsync with all request cont
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     name = "<name>",
     age = 1234,
@@ -182,7 +182,7 @@ This sample shows how to call UnionInResponseProperty and parse the result.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     name = "<name>",
     age = 1234,
@@ -197,7 +197,7 @@ This sample shows how to call UnionInResponseProperty with all request content a
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     name = "<name>",
     age = 1234,
@@ -266,7 +266,7 @@ This sample shows how to call UnionWithSelfReferenceAsync.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     name = "<name>",
     selfReference = new object[]
@@ -284,7 +284,7 @@ This sample shows how to call UnionWithSelfReferenceAsync with all request conte
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     name = "<name>",
     selfReference = new object[]
@@ -305,7 +305,7 @@ This sample shows how to call UnionWithSelfReference.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     name = "<name>",
     selfReference = new object[]
@@ -323,7 +323,7 @@ This sample shows how to call UnionWithSelfReference with all request content.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     name = "<name>",
     selfReference = new object[]
@@ -400,7 +400,7 @@ This sample shows how to call UnionWithInderictAsync.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     name = "<name>",
 });
@@ -413,7 +413,7 @@ This sample shows how to call UnionWithInderictAsync with all request content.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     name = "<name>",
     reference = new object[]
@@ -446,7 +446,7 @@ This sample shows how to call UnionWithInderict.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     name = "<name>",
 });
@@ -459,7 +459,7 @@ This sample shows how to call UnionWithInderict with all request content.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     name = "<name>",
     reference = new object[]
@@ -530,7 +530,7 @@ This sample shows how to call LiteralOfIntegerAsync.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     name = "<name>",
     id = 1,
@@ -544,7 +544,7 @@ This sample shows how to call LiteralOfIntegerAsync with all request content.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     name = "<name>",
     id = 1,
@@ -561,7 +561,7 @@ This sample shows how to call LiteralOfInteger.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     name = "<name>",
     id = 1,
@@ -575,7 +575,7 @@ This sample shows how to call LiteralOfInteger with all request content.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     name = "<name>",
     id = 1,
@@ -630,7 +630,7 @@ This sample shows how to call LiteralOfFloatAsync.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     name = "<name>",
     id = 3.141592F,
@@ -644,7 +644,7 @@ This sample shows how to call LiteralOfFloatAsync with all request content.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     name = "<name>",
     id = 3.141592F,
@@ -661,7 +661,7 @@ This sample shows how to call LiteralOfFloat.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     name = "<name>",
     id = 3.141592F,
@@ -675,7 +675,7 @@ This sample shows how to call LiteralOfFloat with all request content.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     name = "<name>",
     id = 3.141592F,
@@ -730,7 +730,7 @@ This sample shows how to call ConfidentOperationWithDiscriminatorAsync and parse
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     meow = "<meow>",
     kind = "cat",
@@ -747,7 +747,7 @@ This sample shows how to call ConfidentOperationWithDiscriminatorAsync with all 
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     meow = "<meow>",
     kind = "cat",
@@ -767,7 +767,7 @@ This sample shows how to call ConfidentOperationWithDiscriminator and parse the 
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     meow = "<meow>",
     kind = "cat",
@@ -784,7 +784,7 @@ This sample shows how to call ConfidentOperationWithDiscriminator with all reque
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     meow = "<meow>",
     kind = "cat",
@@ -842,7 +842,7 @@ This sample shows how to call PollutedBaseMethodAsync and parse the result.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     woof = "<woof>",
     color = "<color>",
@@ -860,7 +860,7 @@ This sample shows how to call PollutedBaseMethodAsync with all request content a
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     woof = "<woof>",
     color = "<color>",
@@ -881,7 +881,7 @@ This sample shows how to call PollutedBaseMethod and parse the result.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     woof = "<woof>",
     color = "<color>",
@@ -899,7 +899,7 @@ This sample shows how to call PollutedBaseMethod with all request content and pa
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     woof = "<woof>",
     color = "<color>",
@@ -958,7 +958,7 @@ This sample shows how to call PollutedDerivedMethodAsync and parse the result.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     woof = "<woof>",
     color = "<color>",
@@ -978,7 +978,7 @@ This sample shows how to call PollutedDerivedMethodAsync with all request conten
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     woof = "<woof>",
     color = "<color>",
@@ -1001,7 +1001,7 @@ This sample shows how to call PollutedDerivedMethod and parse the result.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     woof = "<woof>",
     color = "<color>",
@@ -1021,7 +1021,7 @@ This sample shows how to call PollutedDerivedMethod with all request content and
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     woof = "<woof>",
     color = "<color>",
@@ -1082,7 +1082,7 @@ This sample shows how to call UnpollutedDerivedMethodAsync and parse the result.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     meow = "<meow>",
     kind = "cat",
@@ -1100,7 +1100,7 @@ This sample shows how to call UnpollutedDerivedMethodAsync with all request cont
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     meow = "<meow>",
     kind = "cat",
@@ -1121,7 +1121,7 @@ This sample shows how to call UnpollutedDerivedMethod and parse the result.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     meow = "<meow>",
     kind = "cat",
@@ -1139,7 +1139,7 @@ This sample shows how to call UnpollutedDerivedMethod with all request content a
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     meow = "<meow>",
     kind = "cat",
@@ -1204,7 +1204,7 @@ This sample shows how to call UseDerivedModelAsync.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     name = "<name>",
 });
@@ -1217,7 +1217,7 @@ This sample shows how to call UseDerivedModelAsync with all request content.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     age = 1234,
     name = "<name>",
@@ -1235,7 +1235,7 @@ This sample shows how to call UseDerivedModel.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     name = "<name>",
 });
@@ -1248,7 +1248,7 @@ This sample shows how to call UseDerivedModel with all request content.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     age = 1234,
     name = "<name>",
@@ -1304,7 +1304,7 @@ This sample shows how to call UseDerivedModelWithUnionAsync.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     unionProperty = "<unionProperty>",
     name = "<name>",
@@ -1318,7 +1318,7 @@ This sample shows how to call UseDerivedModelWithUnionAsync with all request con
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     unionProperty = "<unionProperty>",
     name = "<name>",
@@ -1336,7 +1336,7 @@ This sample shows how to call UseDerivedModelWithUnion.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     unionProperty = "<unionProperty>",
     name = "<name>",
@@ -1350,7 +1350,7 @@ This sample shows how to call UseDerivedModelWithUnion with all request content.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     unionProperty = "<unionProperty>",
     name = "<name>",

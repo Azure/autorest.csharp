@@ -201,7 +201,7 @@ namespace _Type.Property.Nullable.Samples
         {
             CollectionsByte client = new NullableClient().GetCollectionsByteClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 requiredProperty = "<requiredProperty>",
                 nullableProperty = new object[]
@@ -220,7 +220,7 @@ new object()
         {
             CollectionsByte client = new NullableClient().GetCollectionsByteClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 requiredProperty = "<requiredProperty>",
                 nullableProperty = new object[]
@@ -239,7 +239,7 @@ new object()
         {
             CollectionsByte client = new NullableClient().GetCollectionsByteClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 requiredProperty = "<requiredProperty>",
                 nullableProperty = new object[]
@@ -258,7 +258,7 @@ new object()
         {
             CollectionsByte client = new NullableClient().GetCollectionsByteClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 requiredProperty = "<requiredProperty>",
                 nullableProperty = new object[]
@@ -277,7 +277,7 @@ new object()
         {
             CollectionsByte client = new NullableClient().GetCollectionsByteClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 requiredProperty = "<requiredProperty>",
                 nullableProperty = new object[]
@@ -296,7 +296,7 @@ new object()
         {
             CollectionsByte client = new NullableClient().GetCollectionsByteClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 requiredProperty = "<requiredProperty>",
                 nullableProperty = new object[]
@@ -315,7 +315,7 @@ new object()
         {
             CollectionsByte client = new NullableClient().GetCollectionsByteClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 requiredProperty = "<requiredProperty>",
                 nullableProperty = new object[]
@@ -334,7 +334,7 @@ new object()
         {
             CollectionsByte client = new NullableClient().GetCollectionsByteClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 requiredProperty = "<requiredProperty>",
                 nullableProperty = new object[]

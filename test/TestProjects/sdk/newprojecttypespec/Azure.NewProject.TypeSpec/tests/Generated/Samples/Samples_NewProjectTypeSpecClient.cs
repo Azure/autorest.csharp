@@ -248,7 +248,7 @@ namespace Azure.NewProject.TypeSpec.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
                 requiredUnion = "<requiredUnion>",
@@ -278,7 +278,7 @@ namespace Azure.NewProject.TypeSpec.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
                 requiredUnion = "<requiredUnion>",
@@ -308,7 +308,7 @@ namespace Azure.NewProject.TypeSpec.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
                 requiredUnion = "<requiredUnion>",
@@ -346,7 +346,7 @@ namespace Azure.NewProject.TypeSpec.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
                 requiredUnion = "<requiredUnion>",
@@ -384,7 +384,7 @@ namespace Azure.NewProject.TypeSpec.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
                 requiredUnion = "<requiredUnion>",
@@ -414,7 +414,7 @@ namespace Azure.NewProject.TypeSpec.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
                 requiredUnion = "<requiredUnion>",
@@ -468,7 +468,7 @@ namespace Azure.NewProject.TypeSpec.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
                 requiredUnion = "<requiredUnion>",
@@ -506,7 +506,7 @@ namespace Azure.NewProject.TypeSpec.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
                 requiredUnion = "<requiredUnion>",
@@ -580,7 +580,7 @@ namespace Azure.NewProject.TypeSpec.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
             });
@@ -598,7 +598,7 @@ namespace Azure.NewProject.TypeSpec.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
             });
@@ -640,7 +640,7 @@ namespace Azure.NewProject.TypeSpec.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
             });
@@ -658,7 +658,7 @@ namespace Azure.NewProject.TypeSpec.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
             });
@@ -752,7 +752,7 @@ namespace Azure.NewProject.TypeSpec.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 sourceUrl = "http://localhost:3000",
                 guid = "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a",
@@ -770,7 +770,7 @@ namespace Azure.NewProject.TypeSpec.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 sourceUrl = "http://localhost:3000",
                 guid = "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a",
@@ -812,7 +812,7 @@ namespace Azure.NewProject.TypeSpec.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 sourceUrl = "http://localhost:3000",
                 guid = "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a",
@@ -830,7 +830,7 @@ namespace Azure.NewProject.TypeSpec.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 sourceUrl = "http://localhost:3000",
                 guid = "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a",
@@ -960,7 +960,7 @@ namespace Azure.NewProject.TypeSpec.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 requiredString = "<requiredString>",
                 requiredInt = 1234,
@@ -1015,7 +1015,7 @@ namespace Azure.NewProject.TypeSpec.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 requiredString = "<requiredString>",
                 requiredInt = 1234,
@@ -1106,7 +1106,7 @@ namespace Azure.NewProject.TypeSpec.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 requiredString = "<requiredString>",
                 requiredInt = 1234,
@@ -1207,7 +1207,7 @@ namespace Azure.NewProject.TypeSpec.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 requiredString = "<requiredString>",
                 requiredInt = 1234,
@@ -1388,7 +1388,7 @@ namespace Azure.NewProject.TypeSpec.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 requiredString = "<requiredString>",
                 requiredInt = 1234,
@@ -1443,7 +1443,7 @@ namespace Azure.NewProject.TypeSpec.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 requiredString = "<requiredString>",
                 requiredInt = 1234,
@@ -1498,7 +1498,7 @@ namespace Azure.NewProject.TypeSpec.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 requiredString = "<requiredString>",
                 requiredInt = 1234,
@@ -1599,7 +1599,7 @@ namespace Azure.NewProject.TypeSpec.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 requiredString = "<requiredString>",
                 requiredInt = 1234,
@@ -1832,7 +1832,7 @@ namespace Azure.NewProject.TypeSpec.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
                 requiredUnion = "<requiredUnion>",
@@ -1862,7 +1862,7 @@ namespace Azure.NewProject.TypeSpec.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
                 requiredUnion = "<requiredUnion>",
@@ -1916,7 +1916,7 @@ namespace Azure.NewProject.TypeSpec.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
                 requiredUnion = "<requiredUnion>",
@@ -1954,7 +1954,7 @@ namespace Azure.NewProject.TypeSpec.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
                 requiredUnion = "<requiredUnion>",

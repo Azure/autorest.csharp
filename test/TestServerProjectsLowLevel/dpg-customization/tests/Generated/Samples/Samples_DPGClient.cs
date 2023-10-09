@@ -77,7 +77,7 @@ namespace dpg_customization_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             DPGClient client = new DPGClient(credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 hello = "<hello>",
             });
@@ -94,7 +94,7 @@ namespace dpg_customization_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             DPGClient client = new DPGClient(credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 hello = "<hello>",
             });
@@ -111,7 +111,7 @@ namespace dpg_customization_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             DPGClient client = new DPGClient(credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 hello = "<hello>",
             });
@@ -128,7 +128,7 @@ namespace dpg_customization_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             DPGClient client = new DPGClient(credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 hello = "<hello>",
             });
