@@ -21,7 +21,10 @@ namespace MgmtScopeResource.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(Template);
 #else
-                JsonSerializer.Serialize(writer, JsonDocument.Parse(Template.ToString()).RootElement);
+                using (JsonDocument document = JsonDocument.Parse(Template.ToString()))
+                {
+                    JsonSerializer.Serialize(writer, document.RootElement);
+                }
 #endif
             }
             if (Optional.IsDefined(Parameters))
@@ -30,7 +33,10 @@ namespace MgmtScopeResource.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(Parameters);
 #else
-                JsonSerializer.Serialize(writer, JsonDocument.Parse(Parameters.ToString()).RootElement);
+                using (JsonDocument document = JsonDocument.Parse(Parameters.ToString()))
+                {
+                    JsonSerializer.Serialize(writer, document.RootElement);
+                }
 #endif
             }
             writer.WritePropertyName("mode"u8);

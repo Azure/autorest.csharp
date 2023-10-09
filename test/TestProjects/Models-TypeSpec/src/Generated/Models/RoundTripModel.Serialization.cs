@@ -141,7 +141,10 @@ namespace ModelsTypeSpec.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(RequiredUnknown);
 #else
-            JsonSerializer.Serialize(writer, JsonDocument.Parse(RequiredUnknown.ToString()).RootElement);
+            using (JsonDocument document = JsonDocument.Parse(RequiredUnknown.ToString()))
+            {
+                JsonSerializer.Serialize(writer, document.RootElement);
+            }
 #endif
             if (Optional.IsDefined(OptionalUnknown))
             {
@@ -149,7 +152,10 @@ namespace ModelsTypeSpec.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(OptionalUnknown);
 #else
-                JsonSerializer.Serialize(writer, JsonDocument.Parse(OptionalUnknown.ToString()).RootElement);
+                using (JsonDocument document = JsonDocument.Parse(OptionalUnknown.ToString()))
+                {
+                    JsonSerializer.Serialize(writer, document.RootElement);
+                }
 #endif
             }
             writer.WritePropertyName("requiredInt8Array"u8);

@@ -290,14 +290,12 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     return utf8JsonWriter.WriteBase64StringValue(new BinaryDataExpression(value).ToArray(), valueSerialization.Format.ToFormatSpecifier());
                 }
 
-                var jsonDocumentVar = new VariableReference(typeof(JsonDocument), "document");
                 return new IfElsePreprocessorDirective
                 (
                     "NET6_0_OR_GREATER",
                     utf8JsonWriter.WriteRawValue(value),
-                    new[]
+                    new UsingScopeStatement(typeof(JsonDocument), "document", JsonDocumentExpression.Parse(value.InvokeToString()), out var jsonDocumentVar)
                     {
-                        UsingDeclare(jsonDocumentVar, JsonDocumentExpression.Parse(value.InvokeToString())),
                         InvokeJsonSerializerSerializeMethod(utf8JsonWriter, new JsonDocumentExpression(jsonDocumentVar).RootElement)
                     }
                 );

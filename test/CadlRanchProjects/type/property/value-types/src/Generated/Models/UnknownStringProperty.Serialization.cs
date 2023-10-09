@@ -21,7 +21,10 @@ namespace _Type.Property.ValueTypes.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(Property);
 #else
-            JsonSerializer.Serialize(writer, JsonDocument.Parse(Property.ToString()).RootElement);
+            using (JsonDocument document = JsonDocument.Parse(Property.ToString()))
+            {
+                JsonSerializer.Serialize(writer, document.RootElement);
+            }
 #endif
             writer.WriteEndObject();
         }

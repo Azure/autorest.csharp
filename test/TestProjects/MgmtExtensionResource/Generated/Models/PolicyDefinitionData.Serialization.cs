@@ -47,8 +47,10 @@ namespace MgmtExtensionResource
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(PolicyRule);
 #else
-                using JsonDocument document = JsonDocument.Parse(PolicyRule.ToString());
-                JsonSerializer.Serialize(writer, document.RootElement);
+                using (JsonDocument document = JsonDocument.Parse(PolicyRule.ToString()))
+                {
+                    JsonSerializer.Serialize(writer, document.RootElement);
+                }
 #endif
             }
             if (Optional.IsDefined(Metadata))
@@ -57,8 +59,10 @@ namespace MgmtExtensionResource
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(Metadata);
 #else
-                using JsonDocument document = JsonDocument.Parse(Metadata.ToString());
-                JsonSerializer.Serialize(writer, document.RootElement);
+                using (JsonDocument document = JsonDocument.Parse(Metadata.ToString()))
+                {
+                    JsonSerializer.Serialize(writer, document.RootElement);
+                }
 #endif
             }
             if (Optional.IsCollectionDefined(Parameters))
