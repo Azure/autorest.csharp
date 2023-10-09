@@ -10,7 +10,6 @@ using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input.Source;
-using AutoRest.CSharp.LowLevel.Output.Samples;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Samples.Models;
@@ -18,26 +17,23 @@ using NUnit.Framework;
 
 namespace AutoRest.CSharp.LowLevel.Output.Tests
 {
-    internal class DpgClientTestProvider : DpgClientSampleProvider
+    internal class DpgClientRecordedTestProvider : DpgClientTestProvider
     {
         private static readonly Parameter IsAsyncParameter = new("isAsync", null, typeof(bool), null, ValidationType.None, null);
 
         private readonly DpgTestBaseProvider _testBaseProvider;
 
-        public DpgClientTestProvider(string defaultNamespace, LowLevelClient client, DpgTestBaseProvider testBase, SourceInputModel? sourceInputModel) : base(defaultNamespace, client, sourceInputModel)
+        public DpgClientRecordedTestProvider(string defaultNamespace, LowLevelClient client, DpgTestBaseProvider testBase, SourceInputModel? sourceInputModel) : base($"{defaultNamespace}.Tests", $"{client.Declaration.Name}Tests", client, sourceInputModel)
         {
             _testBaseProvider = testBase;
-            DefaultNamespace = $"{defaultNamespace}.Tests";
-            DefaultName = $"{client.Declaration.Name}Tests";
         }
 
         public override CSharpType? Inherits => _testBaseProvider.Type;
 
-        protected override string DefaultNamespace { get; }
-
-        protected override string DefaultName { get; }
-
-        protected override string DefaultAccessibility => "public";
+        protected override IEnumerable<string> BuildUsings()
+        {
+            yield return "Azure.Identity"; // we need this using because we might need to call `new DefaultAzureCredential` from `Azure.Identity` package, but Azure.Identity package is not a dependency of the generator project.
+        }
 
         protected override IEnumerable<Method> BuildConstructors()
         {
@@ -56,7 +52,7 @@ namespace AutoRest.CSharp.LowLevel.Output.Tests
 
         protected override IEnumerable<Method> BuildMethods()
         {
-            foreach (var sample in Client.ClientMethods.SelectMany(m => m.Samples))
+            foreach (var sample in _client.ClientMethods.SelectMany(m => m.Samples))
             {
                 yield return BuildSampleMethod(sample, true);
             }

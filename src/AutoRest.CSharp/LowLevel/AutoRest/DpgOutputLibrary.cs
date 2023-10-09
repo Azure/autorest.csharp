@@ -71,15 +71,15 @@ namespace AutoRest.CSharp.Output.Models.Types
         private DpgTestEnvironmentProvider? _dpgTestEnvironment;
         public DpgTestEnvironmentProvider DpgTestEnvironment => _dpgTestEnvironment ??= new DpgTestEnvironmentProvider(Configuration.Namespace, _sourceInputModel);
 
-        private Dictionary<LowLevelClient, DpgClientTestProvider>? _dpgClientTestProviders;
-        private Dictionary<LowLevelClient, DpgClientTestProvider> DpgClientTestProviders => _dpgClientTestProviders ??= EnsureDpgClientTestProviders();
+        private Dictionary<LowLevelClient, DpgClientRecordedTestProvider>? _dpgClientTestProviders;
+        private Dictionary<LowLevelClient, DpgClientRecordedTestProvider> DpgClientTestProviders => _dpgClientTestProviders ??= EnsureDpgClientTestProviders();
 
-        private Dictionary<LowLevelClient, DpgClientTestProvider> EnsureDpgClientTestProviders()
+        private Dictionary<LowLevelClient, DpgClientRecordedTestProvider> EnsureDpgClientTestProviders()
         {
-            var result = new Dictionary<LowLevelClient, DpgClientTestProvider>();
+            var result = new Dictionary<LowLevelClient, DpgClientRecordedTestProvider>();
             foreach (var client in RestClients)
             {
-                var testCaseProvider = new DpgClientTestProvider(Configuration.Namespace, client, DpgTestBase, _sourceInputModel);
+                var testCaseProvider = new DpgClientRecordedTestProvider(Configuration.Namespace, client, DpgTestBase, _sourceInputModel);
                 if (!testCaseProvider.IsEmpty)
                 {
                     result.Add(client, testCaseProvider);
@@ -89,7 +89,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             return result;
         }
 
-        public DpgClientTestProvider? GetTestForClient(LowLevelClient client) => DpgClientTestProviders.TryGetValue(client, out var test) ? test : null;
+        public DpgClientRecordedTestProvider? GetTestForClient(LowLevelClient client) => DpgClientTestProviders.TryGetValue(client, out var test) ? test : null;
 
         private Dictionary<LowLevelClient, DpgClientSampleProvider>? _dpgClientSampleProviders;
         private Dictionary<LowLevelClient, DpgClientSampleProvider> DpgClientSampleProviders => _dpgClientSampleProviders ??= EnsureDpgSampleProviders();
