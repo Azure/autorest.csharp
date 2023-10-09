@@ -191,10 +191,6 @@ namespace MgmtExtensionCommonRestOperation
         /// <description>Common_ListTypeOnesBySubscription</description>
         /// </item>
         /// </list>
-        /// <item>
-        /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtExtensionCommonRestOperationSubscriptionMockingExtension.GetTypeOnes(CancellationToken)"/> instead.</description>
-        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -216,10 +212,6 @@ namespace MgmtExtensionCommonRestOperation
         /// <description>Common_ListTypeOnesBySubscription</description>
         /// </item>
         /// </list>
-        /// <item>
-        /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtExtensionCommonRestOperationSubscriptionMockingExtension.GetTypeOnes(CancellationToken)"/> instead.</description>
-        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -241,10 +233,6 @@ namespace MgmtExtensionCommonRestOperation
         /// <description>Common_ListTypeTwosBySubscription</description>
         /// </item>
         /// </list>
-        /// <item>
-        /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtExtensionCommonRestOperationSubscriptionMockingExtension.GetTypeTwos(CancellationToken)"/> instead.</description>
-        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -266,10 +254,6 @@ namespace MgmtExtensionCommonRestOperation
         /// <description>Common_ListTypeTwosBySubscription</description>
         /// </item>
         /// </list>
-        /// <item>
-        /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtExtensionCommonRestOperationSubscriptionMockingExtension.GetTypeTwos(CancellationToken)"/> instead.</description>
-        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>

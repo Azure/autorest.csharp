@@ -244,10 +244,6 @@ namespace MgmtExpandResourceTypes
         /// <description>Zones_List</description>
         /// </item>
         /// </list>
-        /// <item>
-        /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtExpandResourceTypesSubscriptionMockingExtension.GetZonesByDnszone(int?,CancellationToken)"/> instead.</description>
-        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="top"> The maximum number of DNS zones to return. If not specified, returns up to 100 zones. </param>
@@ -270,10 +266,6 @@ namespace MgmtExpandResourceTypes
         /// <description>Zones_List</description>
         /// </item>
         /// </list>
-        /// <item>
-        /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtExpandResourceTypesSubscriptionMockingExtension.GetZonesByDnszone(int?,CancellationToken)"/> instead.</description>
-        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="top"> The maximum number of DNS zones to return. If not specified, returns up to 100 zones. </param>
@@ -296,10 +288,6 @@ namespace MgmtExpandResourceTypes
         /// <description>DnsResourceReference_GetByTargetResources</description>
         /// </item>
         /// </list>
-        /// <item>
-        /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtExpandResourceTypesSubscriptionMockingExtension.GetByTargetResourcesDnsResourceReference(DnsResourceReferenceContent,CancellationToken)"/> instead.</description>
-        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="content"> Properties for dns resource reference request. </param>
@@ -322,10 +310,6 @@ namespace MgmtExpandResourceTypes
         /// <description>DnsResourceReference_GetByTargetResources</description>
         /// </item>
         /// </list>
-        /// <item>
-        /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtExpandResourceTypesSubscriptionMockingExtension.GetByTargetResourcesDnsResourceReference(DnsResourceReferenceContent,CancellationToken)"/> instead.</description>
-        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="content"> Properties for dns resource reference request. </param>

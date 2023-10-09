@@ -126,10 +126,6 @@ namespace MgmtConstants
         /// <description>Optionals_ListAll</description>
         /// </item>
         /// </list>
-        /// <item>
-        /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtConstantsSubscriptionMockingExtension.GetOptionalMachines(string,CancellationToken)"/> instead.</description>
-        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="statusOnly"> statusOnly=true enables fetching run time status of all Virtual Machines in the subscription. </param>
@@ -152,10 +148,6 @@ namespace MgmtConstants
         /// <description>Optionals_ListAll</description>
         /// </item>
         /// </list>
-        /// <item>
-        /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtConstantsSubscriptionMockingExtension.GetOptionalMachines(string,CancellationToken)"/> instead.</description>
-        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="statusOnly"> statusOnly=true enables fetching run time status of all Virtual Machines in the subscription. </param>

@@ -300,10 +300,6 @@ namespace MgmtAcronymMapping
         /// <description>VirtualMachines_ListByLocation</description>
         /// </item>
         /// </list>
-        /// <item>
-        /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtAcronymMappingSubscriptionMockingExtension.GetVirtualMachinesByLocation(AzureLocation,CancellationToken)"/> instead.</description>
-        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="location"> The location for which virtual machines under the subscription are queried. </param>
@@ -326,10 +322,6 @@ namespace MgmtAcronymMapping
         /// <description>VirtualMachines_ListByLocation</description>
         /// </item>
         /// </list>
-        /// <item>
-        /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtAcronymMappingSubscriptionMockingExtension.GetVirtualMachinesByLocation(AzureLocation,CancellationToken)"/> instead.</description>
-        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="location"> The location for which virtual machines under the subscription are queried. </param>
@@ -352,10 +344,6 @@ namespace MgmtAcronymMapping
         /// <description>VirtualMachines_ListAll</description>
         /// </item>
         /// </list>
-        /// <item>
-        /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtAcronymMappingSubscriptionMockingExtension.GetVirtualMachines(string,CancellationToken)"/> instead.</description>
-        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="statusOnly"> statusOnly=true enables fetching run time status of all Virtual Machines in the subscription. </param>
@@ -378,10 +366,6 @@ namespace MgmtAcronymMapping
         /// <description>VirtualMachines_ListAll</description>
         /// </item>
         /// </list>
-        /// <item>
-        /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtAcronymMappingSubscriptionMockingExtension.GetVirtualMachines(string,CancellationToken)"/> instead.</description>
-        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="statusOnly"> statusOnly=true enables fetching run time status of all Virtual Machines in the subscription. </param>
@@ -404,10 +388,6 @@ namespace MgmtAcronymMapping
         /// <description>Images_List</description>
         /// </item>
         /// </list>
-        /// <item>
-        /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtAcronymMappingSubscriptionMockingExtension.GetImages(CancellationToken)"/> instead.</description>
-        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -429,10 +409,6 @@ namespace MgmtAcronymMapping
         /// <description>Images_List</description>
         /// </item>
         /// </list>
-        /// <item>
-        /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtAcronymMappingSubscriptionMockingExtension.GetImages(CancellationToken)"/> instead.</description>
-        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -454,10 +430,6 @@ namespace MgmtAcronymMapping
         /// <description>VirtualMachineScaleSets_ListAll</description>
         /// </item>
         /// </list>
-        /// <item>
-        /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtAcronymMappingSubscriptionMockingExtension.GetVirtualMachineScaleSets(CancellationToken)"/> instead.</description>
-        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -479,10 +451,6 @@ namespace MgmtAcronymMapping
         /// <description>VirtualMachineScaleSets_ListAll</description>
         /// </item>
         /// </list>
-        /// <item>
-        /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtAcronymMappingSubscriptionMockingExtension.GetVirtualMachineScaleSets(CancellationToken)"/> instead.</description>
-        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -504,10 +472,6 @@ namespace MgmtAcronymMapping
         /// <description>LogAnalytics_ExportRequestRateByInterval</description>
         /// </item>
         /// </list>
-        /// <item>
-        /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtAcronymMappingSubscriptionMockingExtension.ExportRequestRateByIntervalLogAnalytic(WaitUntil,AzureLocation,RequestRateByIntervalContent,CancellationToken)"/> instead.</description>
-        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
@@ -532,10 +496,6 @@ namespace MgmtAcronymMapping
         /// <description>LogAnalytics_ExportRequestRateByInterval</description>
         /// </item>
         /// </list>
-        /// <item>
-        /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtAcronymMappingSubscriptionMockingExtension.ExportRequestRateByIntervalLogAnalytic(WaitUntil,AzureLocation,RequestRateByIntervalContent,CancellationToken)"/> instead.</description>
-        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
@@ -560,10 +520,6 @@ namespace MgmtAcronymMapping
         /// <description>LogAnalytics_ExportThrottledRequests</description>
         /// </item>
         /// </list>
-        /// <item>
-        /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtAcronymMappingSubscriptionMockingExtension.ExportThrottledRequestsLogAnalytic(WaitUntil,AzureLocation,ThrottledRequestsContent,CancellationToken)"/> instead.</description>
-        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
@@ -588,10 +544,6 @@ namespace MgmtAcronymMapping
         /// <description>LogAnalytics_ExportThrottledRequests</description>
         /// </item>
         /// </list>
-        /// <item>
-        /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtAcronymMappingSubscriptionMockingExtension.ExportThrottledRequestsLogAnalytic(WaitUntil,AzureLocation,ThrottledRequestsContent,CancellationToken)"/> instead.</description>
-        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>

@@ -161,10 +161,6 @@ namespace MgmtPartialResource
         /// <description>PublicIPAddresses_ListAll</description>
         /// </item>
         /// </list>
-        /// <item>
-        /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtPartialResourceSubscriptionMockingExtension.GetPublicIPAddresses(CancellationToken)"/> instead.</description>
-        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -186,10 +182,6 @@ namespace MgmtPartialResource
         /// <description>PublicIPAddresses_ListAll</description>
         /// </item>
         /// </list>
-        /// <item>
-        /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtPartialResourceSubscriptionMockingExtension.GetPublicIPAddresses(CancellationToken)"/> instead.</description>
-        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>

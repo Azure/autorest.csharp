@@ -252,10 +252,6 @@ namespace MgmtExactMatchFlattenInheritance
         /// <description>AzureResourceFlattenModel2s_List</description>
         /// </item>
         /// </list>
-        /// <item>
-        /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtExactMatchFlattenInheritanceResourceGroupMockingExtension.GetAzureResourceFlattenModel2s(CancellationToken)"/> instead.</description>
-        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -277,10 +273,6 @@ namespace MgmtExactMatchFlattenInheritance
         /// <description>AzureResourceFlattenModel2s_List</description>
         /// </item>
         /// </list>
-        /// <item>
-        /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtExactMatchFlattenInheritanceResourceGroupMockingExtension.GetAzureResourceFlattenModel2s(CancellationToken)"/> instead.</description>
-        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -302,10 +294,6 @@ namespace MgmtExactMatchFlattenInheritance
         /// <description>AzureResourceFlattenModel2s_Put</description>
         /// </item>
         /// </list>
-        /// <item>
-        /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtExactMatchFlattenInheritanceResourceGroupMockingExtension.PutAzureResourceFlattenModel2(string,AzureResourceFlattenModel2,CancellationToken)"/> instead.</description>
-        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="name"> The String to use. </param>
@@ -330,10 +318,6 @@ namespace MgmtExactMatchFlattenInheritance
         /// <description>AzureResourceFlattenModel2s_Put</description>
         /// </item>
         /// </list>
-        /// <item>
-        /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtExactMatchFlattenInheritanceResourceGroupMockingExtension.PutAzureResourceFlattenModel2(string,AzureResourceFlattenModel2,CancellationToken)"/> instead.</description>
-        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="name"> The String to use. </param>
@@ -358,10 +342,6 @@ namespace MgmtExactMatchFlattenInheritance
         /// <description>AzureResourceFlattenModel2s_Get</description>
         /// </item>
         /// </list>
-        /// <item>
-        /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtExactMatchFlattenInheritanceResourceGroupMockingExtension.GetAzureResourceFlattenModel2(string,CancellationToken)"/> instead.</description>
-        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="name"> The String to use. </param>
@@ -385,10 +365,6 @@ namespace MgmtExactMatchFlattenInheritance
         /// <description>AzureResourceFlattenModel2s_Get</description>
         /// </item>
         /// </list>
-        /// <item>
-        /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtExactMatchFlattenInheritanceResourceGroupMockingExtension.GetAzureResourceFlattenModel2(string,CancellationToken)"/> instead.</description>
-        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="name"> The String to use. </param>
@@ -412,10 +388,6 @@ namespace MgmtExactMatchFlattenInheritance
         /// <description>AzureResourceFlattenModel3s_List</description>
         /// </item>
         /// </list>
-        /// <item>
-        /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtExactMatchFlattenInheritanceResourceGroupMockingExtension.GetAzureResourceFlattenModel3s(CancellationToken)"/> instead.</description>
-        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -437,10 +409,6 @@ namespace MgmtExactMatchFlattenInheritance
         /// <description>AzureResourceFlattenModel3s_List</description>
         /// </item>
         /// </list>
-        /// <item>
-        /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtExactMatchFlattenInheritanceResourceGroupMockingExtension.GetAzureResourceFlattenModel3s(CancellationToken)"/> instead.</description>
-        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -462,10 +430,6 @@ namespace MgmtExactMatchFlattenInheritance
         /// <description>AzureResourceFlattenModel3s_Put</description>
         /// </item>
         /// </list>
-        /// <item>
-        /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtExactMatchFlattenInheritanceResourceGroupMockingExtension.PutAzureResourceFlattenModel3(string,AzureResourceFlattenModel3,CancellationToken)"/> instead.</description>
-        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="name"> The String to use. </param>
@@ -490,10 +454,6 @@ namespace MgmtExactMatchFlattenInheritance
         /// <description>AzureResourceFlattenModel3s_Put</description>
         /// </item>
         /// </list>
-        /// <item>
-        /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtExactMatchFlattenInheritanceResourceGroupMockingExtension.PutAzureResourceFlattenModel3(string,AzureResourceFlattenModel3,CancellationToken)"/> instead.</description>
-        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="name"> The String to use. </param>
@@ -518,10 +478,6 @@ namespace MgmtExactMatchFlattenInheritance
         /// <description>AzureResourceFlattenModel3s_Get</description>
         /// </item>
         /// </list>
-        /// <item>
-        /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtExactMatchFlattenInheritanceResourceGroupMockingExtension.GetAzureResourceFlattenModel3(string,CancellationToken)"/> instead.</description>
-        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="name"> The String to use. </param>
@@ -545,10 +501,6 @@ namespace MgmtExactMatchFlattenInheritance
         /// <description>AzureResourceFlattenModel3s_Get</description>
         /// </item>
         /// </list>
-        /// <item>
-        /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtExactMatchFlattenInheritanceResourceGroupMockingExtension.GetAzureResourceFlattenModel3(string,CancellationToken)"/> instead.</description>
-        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="name"> The String to use. </param>
@@ -572,10 +524,6 @@ namespace MgmtExactMatchFlattenInheritance
         /// <description>AzureResourceFlattenModel4s_List</description>
         /// </item>
         /// </list>
-        /// <item>
-        /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtExactMatchFlattenInheritanceResourceGroupMockingExtension.GetAzureResourceFlattenModel4s(CancellationToken)"/> instead.</description>
-        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -597,10 +545,6 @@ namespace MgmtExactMatchFlattenInheritance
         /// <description>AzureResourceFlattenModel4s_List</description>
         /// </item>
         /// </list>
-        /// <item>
-        /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtExactMatchFlattenInheritanceResourceGroupMockingExtension.GetAzureResourceFlattenModel4s(CancellationToken)"/> instead.</description>
-        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -622,10 +566,6 @@ namespace MgmtExactMatchFlattenInheritance
         /// <description>AzureResourceFlattenModel4s_Put</description>
         /// </item>
         /// </list>
-        /// <item>
-        /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtExactMatchFlattenInheritanceResourceGroupMockingExtension.PutAzureResourceFlattenModel4(string,AzureResourceFlattenModel4,CancellationToken)"/> instead.</description>
-        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="name"> The String to use. </param>
@@ -650,10 +590,6 @@ namespace MgmtExactMatchFlattenInheritance
         /// <description>AzureResourceFlattenModel4s_Put</description>
         /// </item>
         /// </list>
-        /// <item>
-        /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtExactMatchFlattenInheritanceResourceGroupMockingExtension.PutAzureResourceFlattenModel4(string,AzureResourceFlattenModel4,CancellationToken)"/> instead.</description>
-        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="name"> The String to use. </param>
@@ -678,10 +614,6 @@ namespace MgmtExactMatchFlattenInheritance
         /// <description>AzureResourceFlattenModel4s_Get</description>
         /// </item>
         /// </list>
-        /// <item>
-        /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtExactMatchFlattenInheritanceResourceGroupMockingExtension.GetAzureResourceFlattenModel4(string,CancellationToken)"/> instead.</description>
-        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="name"> The String to use. </param>
@@ -705,10 +637,6 @@ namespace MgmtExactMatchFlattenInheritance
         /// <description>AzureResourceFlattenModel4s_Get</description>
         /// </item>
         /// </list>
-        /// <item>
-        /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtExactMatchFlattenInheritanceResourceGroupMockingExtension.GetAzureResourceFlattenModel4(string,CancellationToken)"/> instead.</description>
-        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="name"> The String to use. </param>
@@ -732,10 +660,6 @@ namespace MgmtExactMatchFlattenInheritance
         /// <description>AzureResourceFlattenModel5s_List</description>
         /// </item>
         /// </list>
-        /// <item>
-        /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtExactMatchFlattenInheritanceResourceGroupMockingExtension.GetAzureResourceFlattenModel5s(CancellationToken)"/> instead.</description>
-        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -757,10 +681,6 @@ namespace MgmtExactMatchFlattenInheritance
         /// <description>AzureResourceFlattenModel5s_List</description>
         /// </item>
         /// </list>
-        /// <item>
-        /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtExactMatchFlattenInheritanceResourceGroupMockingExtension.GetAzureResourceFlattenModel5s(CancellationToken)"/> instead.</description>
-        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -782,10 +702,6 @@ namespace MgmtExactMatchFlattenInheritance
         /// <description>AzureResourceFlattenModel5s_Put</description>
         /// </item>
         /// </list>
-        /// <item>
-        /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtExactMatchFlattenInheritanceResourceGroupMockingExtension.PutAzureResourceFlattenModel5(string,int?,CancellationToken)"/> instead.</description>
-        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="name"> The String to use. </param>
@@ -810,10 +726,6 @@ namespace MgmtExactMatchFlattenInheritance
         /// <description>AzureResourceFlattenModel5s_Put</description>
         /// </item>
         /// </list>
-        /// <item>
-        /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtExactMatchFlattenInheritanceResourceGroupMockingExtension.PutAzureResourceFlattenModel5(string,int?,CancellationToken)"/> instead.</description>
-        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="name"> The String to use. </param>
@@ -838,10 +750,6 @@ namespace MgmtExactMatchFlattenInheritance
         /// <description>AzureResourceFlattenModel5s_Get</description>
         /// </item>
         /// </list>
-        /// <item>
-        /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtExactMatchFlattenInheritanceResourceGroupMockingExtension.GetAzureResourceFlattenModel5(string,CancellationToken)"/> instead.</description>
-        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="name"> The String to use. </param>
@@ -865,10 +773,6 @@ namespace MgmtExactMatchFlattenInheritance
         /// <description>AzureResourceFlattenModel5s_Get</description>
         /// </item>
         /// </list>
-        /// <item>
-        /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtExactMatchFlattenInheritanceResourceGroupMockingExtension.GetAzureResourceFlattenModel5(string,CancellationToken)"/> instead.</description>
-        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="name"> The String to use. </param>

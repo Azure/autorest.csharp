@@ -311,10 +311,6 @@ namespace MgmtSupersetInheritance
         /// <description>SupersetModel2s_Put</description>
         /// </item>
         /// </list>
-        /// <item>
-        /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtSupersetInheritanceResourceGroupMockingExtension.PutSupersetModel2(string,SupersetModel2,CancellationToken)"/> instead.</description>
-        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="supersetModel2SName"> The String to use. </param>
@@ -338,10 +334,6 @@ namespace MgmtSupersetInheritance
         /// <description>SupersetModel2s_Put</description>
         /// </item>
         /// </list>
-        /// <item>
-        /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtSupersetInheritanceResourceGroupMockingExtension.PutSupersetModel2(string,SupersetModel2,CancellationToken)"/> instead.</description>
-        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="supersetModel2SName"> The String to use. </param>
@@ -365,10 +357,6 @@ namespace MgmtSupersetInheritance
         /// <description>SupersetModel2s_Get</description>
         /// </item>
         /// </list>
-        /// <item>
-        /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtSupersetInheritanceResourceGroupMockingExtension.GetSupersetModel2(string,CancellationToken)"/> instead.</description>
-        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="supersetModel2SName"> The String to use. </param>
@@ -391,10 +379,6 @@ namespace MgmtSupersetInheritance
         /// <description>SupersetModel2s_Get</description>
         /// </item>
         /// </list>
-        /// <item>
-        /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtSupersetInheritanceResourceGroupMockingExtension.GetSupersetModel2(string,CancellationToken)"/> instead.</description>
-        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="supersetModel2SName"> The String to use. </param>
@@ -417,10 +401,6 @@ namespace MgmtSupersetInheritance
         /// <description>SupersetModel3s_Put</description>
         /// </item>
         /// </list>
-        /// <item>
-        /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtSupersetInheritanceResourceGroupMockingExtension.PutSupersetModel3(string,SupersetModel3,CancellationToken)"/> instead.</description>
-        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="supersetModel3SName"> The String to use. </param>
@@ -444,10 +424,6 @@ namespace MgmtSupersetInheritance
         /// <description>SupersetModel3s_Put</description>
         /// </item>
         /// </list>
-        /// <item>
-        /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtSupersetInheritanceResourceGroupMockingExtension.PutSupersetModel3(string,SupersetModel3,CancellationToken)"/> instead.</description>
-        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="supersetModel3SName"> The String to use. </param>
@@ -471,10 +447,6 @@ namespace MgmtSupersetInheritance
         /// <description>SupersetModel3s_Get</description>
         /// </item>
         /// </list>
-        /// <item>
-        /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtSupersetInheritanceResourceGroupMockingExtension.GetSupersetModel3(string,CancellationToken)"/> instead.</description>
-        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="supersetModel3SName"> The String to use. </param>
@@ -497,10 +469,6 @@ namespace MgmtSupersetInheritance
         /// <description>SupersetModel3s_Get</description>
         /// </item>
         /// </list>
-        /// <item>
-        /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MgmtSupersetInheritanceResourceGroupMockingExtension.GetSupersetModel3(string,CancellationToken)"/> instead.</description>
-        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="supersetModel3SName"> The String to use. </param>
