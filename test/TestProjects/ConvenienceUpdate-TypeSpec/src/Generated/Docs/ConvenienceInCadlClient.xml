@@ -113,7 +113,7 @@ This sample shows how to call ConvenienceOptionalBeforeRequiredAsync.
 <code><![CDATA[
 ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     id = "<id>",
 });
@@ -125,7 +125,7 @@ This sample shows how to call ConvenienceOptionalBeforeRequiredAsync with all pa
 <code><![CDATA[
 ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     id = "<id>",
 });
@@ -140,7 +140,7 @@ This sample shows how to call ConvenienceOptionalBeforeRequired.
 <code><![CDATA[
 ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     id = "<id>",
 });
@@ -152,7 +152,7 @@ This sample shows how to call ConvenienceOptionalBeforeRequired with all paramet
 <code><![CDATA[
 ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     id = "<id>",
 });
@@ -209,7 +209,7 @@ This sample shows how to call NoConvenienceRequiredBodyAsync.
 <code><![CDATA[
 ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     id = "<id>",
 });
@@ -221,7 +221,7 @@ This sample shows how to call NoConvenienceRequiredBodyAsync with all request co
 <code><![CDATA[
 ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     id = "<id>",
 });
@@ -236,7 +236,7 @@ This sample shows how to call NoConvenienceRequiredBody.
 <code><![CDATA[
 ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     id = "<id>",
 });
@@ -248,7 +248,7 @@ This sample shows how to call NoConvenienceRequiredBody with all request content
 <code><![CDATA[
 ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     id = "<id>",
 });
@@ -263,7 +263,7 @@ This sample shows how to call NoConvenienceOptionalBodyAsync.
 <code><![CDATA[
 ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-RequestContent content = null;
+using RequestContent content = null;
 Response response = await client.NoConvenienceOptionalBodyAsync(content);
 
 Console.WriteLine(response.Status);
@@ -272,7 +272,7 @@ This sample shows how to call NoConvenienceOptionalBodyAsync with all request co
 <code><![CDATA[
 ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     id = "<id>",
 });
@@ -287,7 +287,7 @@ This sample shows how to call NoConvenienceOptionalBody.
 <code><![CDATA[
 ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-RequestContent content = null;
+using RequestContent content = null;
 Response response = client.NoConvenienceOptionalBody(content);
 
 Console.WriteLine(response.Status);
@@ -296,7 +296,7 @@ This sample shows how to call NoConvenienceOptionalBody with all request content
 <code><![CDATA[
 ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     id = "<id>",
 });
@@ -779,7 +779,7 @@ This sample shows how to call ProtocolOptionalModelAsync.
 <code><![CDATA[
 ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-RequestContent content = null;
+using RequestContent content = null;
 Response response = await client.ProtocolOptionalModelAsync(content);
 
 Console.WriteLine(response.Status);
@@ -788,7 +788,7 @@ This sample shows how to call ProtocolOptionalModelAsync with all request conten
 <code><![CDATA[
 ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     id = "<id>",
 });
@@ -803,7 +803,7 @@ This sample shows how to call ProtocolOptionalModel.
 <code><![CDATA[
 ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-RequestContent content = null;
+using RequestContent content = null;
 Response response = client.ProtocolOptionalModel(content);
 
 Console.WriteLine(response.Status);
@@ -812,7 +812,7 @@ This sample shows how to call ProtocolOptionalModel with all request content.
 <code><![CDATA[
 ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     id = "<id>",
 });
@@ -861,7 +861,7 @@ This sample shows how to call ProtocolRequiredModelAsync.
 <code><![CDATA[
 ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     id = "<id>",
 });
@@ -873,7 +873,7 @@ This sample shows how to call ProtocolRequiredModelAsync with all request conten
 <code><![CDATA[
 ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     id = "<id>",
 });
@@ -888,7 +888,7 @@ This sample shows how to call ProtocolRequiredModel.
 <code><![CDATA[
 ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     id = "<id>",
 });
@@ -900,7 +900,7 @@ This sample shows how to call ProtocolRequiredModel with all request content.
 <code><![CDATA[
 ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     id = "<id>",
 });
@@ -1235,7 +1235,7 @@ This sample shows how to call ConvenienceOptionalModelWithOptionalAsync.
 <code><![CDATA[
 ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-RequestContent content = null;
+using RequestContent content = null;
 Response response = await client.ConvenienceOptionalModelWithOptionalAsync(content);
 
 Console.WriteLine(response.Status);
@@ -1244,7 +1244,7 @@ This sample shows how to call ConvenienceOptionalModelWithOptionalAsync with all
 <code><![CDATA[
 ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     id = "<id>",
 });
@@ -1259,7 +1259,7 @@ This sample shows how to call ConvenienceOptionalModelWithOptional.
 <code><![CDATA[
 ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-RequestContent content = null;
+using RequestContent content = null;
 Response response = client.ConvenienceOptionalModelWithOptional(content);
 
 Console.WriteLine(response.Status);
@@ -1268,7 +1268,7 @@ This sample shows how to call ConvenienceOptionalModelWithOptional with all requ
 <code><![CDATA[
 ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     id = "<id>",
 });
@@ -1317,7 +1317,7 @@ This sample shows how to call ConvenienceRequiredModelWithOptionalAsync.
 <code><![CDATA[
 ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     id = "<id>",
 });
@@ -1329,7 +1329,7 @@ This sample shows how to call ConvenienceRequiredModelWithOptionalAsync with all
 <code><![CDATA[
 ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     id = "<id>",
 });
@@ -1344,7 +1344,7 @@ This sample shows how to call ConvenienceRequiredModelWithOptional.
 <code><![CDATA[
 ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     id = "<id>",
 });
@@ -1356,7 +1356,7 @@ This sample shows how to call ConvenienceRequiredModelWithOptional with all requ
 <code><![CDATA[
 ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     id = "<id>",
 });
@@ -1403,7 +1403,7 @@ This sample shows how to call ConvenienceOptionalModelWithRequiredAsync.
 <code><![CDATA[
 ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-RequestContent content = null;
+using RequestContent content = null;
 Response response = await client.ConvenienceOptionalModelWithRequiredAsync(content);
 
 Console.WriteLine(response.Status);
@@ -1412,7 +1412,7 @@ This sample shows how to call ConvenienceOptionalModelWithRequiredAsync with all
 <code><![CDATA[
 ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     id = "<id>",
 });
@@ -1427,7 +1427,7 @@ This sample shows how to call ConvenienceOptionalModelWithRequired.
 <code><![CDATA[
 ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-RequestContent content = null;
+using RequestContent content = null;
 Response response = client.ConvenienceOptionalModelWithRequired(content);
 
 Console.WriteLine(response.Status);
@@ -1436,7 +1436,7 @@ This sample shows how to call ConvenienceOptionalModelWithRequired with all requ
 <code><![CDATA[
 ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     id = "<id>",
 });
@@ -1485,7 +1485,7 @@ This sample shows how to call ProtocolOptionalBeforeRequiredAsync.
 <code><![CDATA[
 ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     id = "<id>",
 });
@@ -1497,7 +1497,7 @@ This sample shows how to call ProtocolOptionalBeforeRequiredAsync with all param
 <code><![CDATA[
 ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     id = "<id>",
 });
@@ -1512,7 +1512,7 @@ This sample shows how to call ProtocolOptionalBeforeRequired.
 <code><![CDATA[
 ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     id = "<id>",
 });
@@ -1524,7 +1524,7 @@ This sample shows how to call ProtocolOptionalBeforeRequired with all parameters
 <code><![CDATA[
 ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     id = "<id>",
 });

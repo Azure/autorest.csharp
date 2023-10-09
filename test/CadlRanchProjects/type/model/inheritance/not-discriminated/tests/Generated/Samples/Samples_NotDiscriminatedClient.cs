@@ -25,7 +25,7 @@ namespace _Type.Model.Inheritance.NotDiscriminated.Samples
         {
             NotDiscriminatedClient client = new NotDiscriminatedClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 smart = true,
                 age = 1234,
@@ -42,7 +42,7 @@ namespace _Type.Model.Inheritance.NotDiscriminated.Samples
         {
             NotDiscriminatedClient client = new NotDiscriminatedClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 smart = true,
                 age = 1234,
@@ -79,7 +79,7 @@ namespace _Type.Model.Inheritance.NotDiscriminated.Samples
         {
             NotDiscriminatedClient client = new NotDiscriminatedClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 smart = true,
                 age = 1234,
@@ -96,7 +96,7 @@ namespace _Type.Model.Inheritance.NotDiscriminated.Samples
         {
             NotDiscriminatedClient client = new NotDiscriminatedClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 smart = true,
                 age = 1234,
@@ -225,7 +225,7 @@ namespace _Type.Model.Inheritance.NotDiscriminated.Samples
         {
             NotDiscriminatedClient client = new NotDiscriminatedClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 smart = true,
                 age = 1234,
@@ -245,7 +245,7 @@ namespace _Type.Model.Inheritance.NotDiscriminated.Samples
         {
             NotDiscriminatedClient client = new NotDiscriminatedClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 smart = true,
                 age = 1234,
@@ -285,7 +285,7 @@ namespace _Type.Model.Inheritance.NotDiscriminated.Samples
         {
             NotDiscriminatedClient client = new NotDiscriminatedClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 smart = true,
                 age = 1234,
@@ -305,7 +305,7 @@ namespace _Type.Model.Inheritance.NotDiscriminated.Samples
         {
             NotDiscriminatedClient client = new NotDiscriminatedClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 smart = true,
                 age = 1234,

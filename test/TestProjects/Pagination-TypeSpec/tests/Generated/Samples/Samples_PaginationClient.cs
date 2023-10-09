@@ -26,7 +26,7 @@ namespace Pagination.Samples
             TokenCredential credential = new DefaultAzureCredential();
             PaginationClient client = new PaginationClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 requiredString = "<requiredString>",
                 requiredInt = 1234,
@@ -48,7 +48,7 @@ namespace Pagination.Samples
             TokenCredential credential = new DefaultAzureCredential();
             PaginationClient client = new PaginationClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 requiredString = "<requiredString>",
                 requiredInt = 1234,
@@ -98,7 +98,7 @@ namespace Pagination.Samples
             TokenCredential credential = new DefaultAzureCredential();
             PaginationClient client = new PaginationClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 requiredString = "<requiredString>",
                 requiredInt = 1234,
@@ -120,7 +120,7 @@ namespace Pagination.Samples
             TokenCredential credential = new DefaultAzureCredential();
             PaginationClient client = new PaginationClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 requiredString = "<requiredString>",
                 requiredInt = 1234,

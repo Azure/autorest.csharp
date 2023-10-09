@@ -109,7 +109,7 @@ namespace _Type._Array.Samples
         {
             UnknownValue client = new ArrayClient().GetUnknownValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new object[]
+            using RequestContent content = RequestContent.Create(new object[]
             {
 new object()
             });
@@ -124,7 +124,7 @@ new object()
         {
             UnknownValue client = new ArrayClient().GetUnknownValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new object[]
+            using RequestContent content = RequestContent.Create(new object[]
             {
 new object()
             });
@@ -163,7 +163,7 @@ BinaryData.FromObjectAsJson(new object())
         {
             UnknownValue client = new ArrayClient().GetUnknownValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new object[]
+            using RequestContent content = RequestContent.Create(new object[]
             {
 new object()
             });
@@ -178,7 +178,7 @@ new object()
         {
             UnknownValue client = new ArrayClient().GetUnknownValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new object[]
+            using RequestContent content = RequestContent.Create(new object[]
             {
 new object()
             });

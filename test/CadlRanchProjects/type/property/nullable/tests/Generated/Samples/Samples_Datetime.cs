@@ -201,7 +201,7 @@ namespace _Type.Property.Nullable.Samples
         {
             Datetime client = new NullableClient().GetDatetimeClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 requiredProperty = "<requiredProperty>",
                 nullableProperty = "2022-05-10T14:57:31.2311892-04:00",
@@ -217,7 +217,7 @@ namespace _Type.Property.Nullable.Samples
         {
             Datetime client = new NullableClient().GetDatetimeClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 requiredProperty = "<requiredProperty>",
                 nullableProperty = "2022-05-10T14:57:31.2311892-04:00",
@@ -233,7 +233,7 @@ namespace _Type.Property.Nullable.Samples
         {
             Datetime client = new NullableClient().GetDatetimeClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 requiredProperty = "<requiredProperty>",
                 nullableProperty = "2022-05-10T14:57:31.2311892-04:00",
@@ -249,7 +249,7 @@ namespace _Type.Property.Nullable.Samples
         {
             Datetime client = new NullableClient().GetDatetimeClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 requiredProperty = "<requiredProperty>",
                 nullableProperty = "2022-05-10T14:57:31.2311892-04:00",
@@ -265,7 +265,7 @@ namespace _Type.Property.Nullable.Samples
         {
             Datetime client = new NullableClient().GetDatetimeClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 requiredProperty = "<requiredProperty>",
                 nullableProperty = "2022-05-10T14:57:31.2311892-04:00",
@@ -281,7 +281,7 @@ namespace _Type.Property.Nullable.Samples
         {
             Datetime client = new NullableClient().GetDatetimeClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 requiredProperty = "<requiredProperty>",
                 nullableProperty = "2022-05-10T14:57:31.2311892-04:00",
@@ -297,7 +297,7 @@ namespace _Type.Property.Nullable.Samples
         {
             Datetime client = new NullableClient().GetDatetimeClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 requiredProperty = "<requiredProperty>",
                 nullableProperty = "2022-05-10T14:57:31.2311892-04:00",
@@ -313,7 +313,7 @@ namespace _Type.Property.Nullable.Samples
         {
             Datetime client = new NullableClient().GetDatetimeClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 requiredProperty = "<requiredProperty>",
                 nullableProperty = "2022-05-10T14:57:31.2311892-04:00",

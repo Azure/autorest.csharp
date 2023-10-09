@@ -58,7 +58,8 @@ namespace Parameters.BodyOptionality
             Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await RequiredExplicitAsync(body.ToRequestContent(), context).ConfigureAwait(false);
+            using RequestContent content = body.ToRequestContent();
+            Response response = await RequiredExplicitAsync(content, context).ConfigureAwait(false);
             return response;
         }
 
@@ -71,7 +72,8 @@ namespace Parameters.BodyOptionality
             Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = RequiredExplicit(body.ToRequestContent(), context);
+            using RequestContent content = body.ToRequestContent();
+            Response response = RequiredExplicit(content, context);
             return response;
         }
 
@@ -162,7 +164,8 @@ namespace Parameters.BodyOptionality
             Argument.AssertNotNull(bodyModel, nameof(bodyModel));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await RequiredImplicitAsync(bodyModel.ToRequestContent(), context).ConfigureAwait(false);
+            using RequestContent content = bodyModel.ToRequestContent();
+            Response response = await RequiredImplicitAsync(content, context).ConfigureAwait(false);
             return response;
         }
 
@@ -175,7 +178,8 @@ namespace Parameters.BodyOptionality
             Argument.AssertNotNull(bodyModel, nameof(bodyModel));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = RequiredImplicit(bodyModel.ToRequestContent(), context);
+            using RequestContent content = bodyModel.ToRequestContent();
+            Response response = RequiredImplicit(content, context);
             return response;
         }
 

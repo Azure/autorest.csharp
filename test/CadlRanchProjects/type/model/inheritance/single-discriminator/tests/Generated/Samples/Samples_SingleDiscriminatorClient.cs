@@ -113,7 +113,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Samples
         {
             SingleDiscriminatorClient client = new SingleDiscriminatorClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 kind = "seagull",
                 wingspan = 1234,
@@ -129,7 +129,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Samples
         {
             SingleDiscriminatorClient client = new SingleDiscriminatorClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 kind = "seagull",
                 wingspan = 1234,
@@ -165,7 +165,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Samples
         {
             SingleDiscriminatorClient client = new SingleDiscriminatorClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 kind = "seagull",
                 wingspan = 1234,
@@ -181,7 +181,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Samples
         {
             SingleDiscriminatorClient client = new SingleDiscriminatorClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 kind = "seagull",
                 wingspan = 1234,
@@ -305,7 +305,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Samples
         {
             SingleDiscriminatorClient client = new SingleDiscriminatorClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 kind = "seagull",
                 wingspan = 1234,
@@ -321,7 +321,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Samples
         {
             SingleDiscriminatorClient client = new SingleDiscriminatorClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 kind = "seagull",
                 wingspan = 1234,
@@ -357,7 +357,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Samples
         {
             SingleDiscriminatorClient client = new SingleDiscriminatorClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 kind = "seagull",
                 wingspan = 1234,
@@ -373,7 +373,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Samples
         {
             SingleDiscriminatorClient client = new SingleDiscriminatorClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 kind = "seagull",
                 wingspan = 1234,

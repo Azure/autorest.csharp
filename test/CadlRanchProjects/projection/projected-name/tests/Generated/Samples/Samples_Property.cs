@@ -24,7 +24,7 @@ namespace Projection.ProjectedName.Samples
         {
             Property client = new ProjectedNameClient().GetPropertyClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 wireName = true,
             });
@@ -39,7 +39,7 @@ namespace Projection.ProjectedName.Samples
         {
             Property client = new ProjectedNameClient().GetPropertyClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 wireName = true,
             });
@@ -74,7 +74,7 @@ namespace Projection.ProjectedName.Samples
         {
             Property client = new ProjectedNameClient().GetPropertyClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 wireName = true,
             });
@@ -89,7 +89,7 @@ namespace Projection.ProjectedName.Samples
         {
             Property client = new ProjectedNameClient().GetPropertyClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 wireName = true,
             });
@@ -124,7 +124,7 @@ namespace Projection.ProjectedName.Samples
         {
             Property client = new ProjectedNameClient().GetPropertyClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 defaultName = true,
             });
@@ -139,7 +139,7 @@ namespace Projection.ProjectedName.Samples
         {
             Property client = new ProjectedNameClient().GetPropertyClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 defaultName = true,
             });
@@ -174,7 +174,7 @@ namespace Projection.ProjectedName.Samples
         {
             Property client = new ProjectedNameClient().GetPropertyClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 defaultName = true,
             });
@@ -189,7 +189,7 @@ namespace Projection.ProjectedName.Samples
         {
             Property client = new ProjectedNameClient().GetPropertyClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 defaultName = true,
             });
@@ -224,7 +224,7 @@ namespace Projection.ProjectedName.Samples
         {
             Property client = new ProjectedNameClient().GetPropertyClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 defaultName = true,
             });
@@ -239,7 +239,7 @@ namespace Projection.ProjectedName.Samples
         {
             Property client = new ProjectedNameClient().GetPropertyClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 defaultName = true,
             });
@@ -274,7 +274,7 @@ namespace Projection.ProjectedName.Samples
         {
             Property client = new ProjectedNameClient().GetPropertyClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 defaultName = true,
             });
@@ -289,7 +289,7 @@ namespace Projection.ProjectedName.Samples
         {
             Property client = new ProjectedNameClient().GetPropertyClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 defaultName = true,
             });
@@ -324,7 +324,7 @@ namespace Projection.ProjectedName.Samples
         {
             Property client = new ProjectedNameClient().GetPropertyClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 wireName = true,
             });
@@ -339,7 +339,7 @@ namespace Projection.ProjectedName.Samples
         {
             Property client = new ProjectedNameClient().GetPropertyClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 wireName = true,
             });
@@ -374,7 +374,7 @@ namespace Projection.ProjectedName.Samples
         {
             Property client = new ProjectedNameClient().GetPropertyClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 wireName = true,
             });
@@ -389,7 +389,7 @@ namespace Projection.ProjectedName.Samples
         {
             Property client = new ProjectedNameClient().GetPropertyClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 wireName = true,
             });

@@ -25,7 +25,7 @@ namespace _Type.Model.Usage.Samples
         {
             UsageClient client = new UsageClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 requiredProp = "<requiredProp>",
             });
@@ -40,7 +40,7 @@ namespace _Type.Model.Usage.Samples
         {
             UsageClient client = new UsageClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 requiredProp = "<requiredProp>",
             });
@@ -75,7 +75,7 @@ namespace _Type.Model.Usage.Samples
         {
             UsageClient client = new UsageClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 requiredProp = "<requiredProp>",
             });
@@ -90,7 +90,7 @@ namespace _Type.Model.Usage.Samples
         {
             UsageClient client = new UsageClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 requiredProp = "<requiredProp>",
             });
@@ -209,7 +209,7 @@ namespace _Type.Model.Usage.Samples
         {
             UsageClient client = new UsageClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 requiredProp = "<requiredProp>",
             });
@@ -225,7 +225,7 @@ namespace _Type.Model.Usage.Samples
         {
             UsageClient client = new UsageClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 requiredProp = "<requiredProp>",
             });
@@ -261,7 +261,7 @@ namespace _Type.Model.Usage.Samples
         {
             UsageClient client = new UsageClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 requiredProp = "<requiredProp>",
             });
@@ -277,7 +277,7 @@ namespace _Type.Model.Usage.Samples
         {
             UsageClient client = new UsageClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 requiredProp = "<requiredProp>",
             });

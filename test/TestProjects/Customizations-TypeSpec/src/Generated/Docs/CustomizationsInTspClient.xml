@@ -93,7 +93,7 @@ This sample shows how to call RoundTripAsync and parse the result.
 <code><![CDATA[
 CustomizationsInTspClient client = new CustomizationsInTspClient();
 
-RequestContent content = RequestContent.Create(new object());
+using RequestContent content = RequestContent.Create(new object());
 Response response = await client.RoundTripAsync(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
@@ -103,7 +103,7 @@ This sample shows how to call RoundTripAsync with all request content and parse 
 <code><![CDATA[
 CustomizationsInTspClient client = new CustomizationsInTspClient();
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     propertyExtensibleEnum = "Monday",
     propertyModelToMakeInternal = new
@@ -194,7 +194,7 @@ This sample shows how to call RoundTrip and parse the result.
 <code><![CDATA[
 CustomizationsInTspClient client = new CustomizationsInTspClient();
 
-RequestContent content = RequestContent.Create(new object());
+using RequestContent content = RequestContent.Create(new object());
 Response response = client.RoundTrip(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
@@ -204,7 +204,7 @@ This sample shows how to call RoundTrip with all request content and parse the r
 <code><![CDATA[
 CustomizationsInTspClient client = new CustomizationsInTspClient();
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     propertyExtensibleEnum = "Monday",
     propertyModelToMakeInternal = new

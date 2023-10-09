@@ -7,7 +7,7 @@ This sample shows how to call SendIntAsync.
 <code><![CDATA[
 UnionClient client = new UnionClient();
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     simpleUnion = 1234,
 });
@@ -19,7 +19,7 @@ This sample shows how to call SendIntAsync with all request content.
 <code><![CDATA[
 UnionClient client = new UnionClient();
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     simpleUnion = 1234,
 });
@@ -34,7 +34,7 @@ This sample shows how to call SendInt.
 <code><![CDATA[
 UnionClient client = new UnionClient();
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     simpleUnion = 1234,
 });
@@ -46,7 +46,7 @@ This sample shows how to call SendInt with all request content.
 <code><![CDATA[
 UnionClient client = new UnionClient();
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     simpleUnion = 1234,
 });
@@ -61,7 +61,7 @@ This sample shows how to call SendIntArrayAsync.
 <code><![CDATA[
 UnionClient client = new UnionClient();
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     simpleUnion = 1234,
 });
@@ -73,7 +73,7 @@ This sample shows how to call SendIntArrayAsync with all request content.
 <code><![CDATA[
 UnionClient client = new UnionClient();
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     simpleUnion = 1234,
 });
@@ -88,7 +88,7 @@ This sample shows how to call SendIntArray.
 <code><![CDATA[
 UnionClient client = new UnionClient();
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     simpleUnion = 1234,
 });
@@ -100,7 +100,7 @@ This sample shows how to call SendIntArray with all request content.
 <code><![CDATA[
 UnionClient client = new UnionClient();
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     simpleUnion = 1234,
 });
@@ -115,7 +115,7 @@ This sample shows how to call SendFirstNamedUnionValueAsync.
 <code><![CDATA[
 UnionClient client = new UnionClient();
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     namedUnion = new
     {
@@ -131,7 +131,7 @@ This sample shows how to call SendFirstNamedUnionValueAsync with all request con
 <code><![CDATA[
 UnionClient client = new UnionClient();
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     namedUnion = new
     {
@@ -150,7 +150,7 @@ This sample shows how to call SendFirstNamedUnionValue.
 <code><![CDATA[
 UnionClient client = new UnionClient();
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     namedUnion = new
     {
@@ -166,7 +166,7 @@ This sample shows how to call SendFirstNamedUnionValue with all request content.
 <code><![CDATA[
 UnionClient client = new UnionClient();
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     namedUnion = new
     {
@@ -185,7 +185,7 @@ This sample shows how to call SendSecondNamedUnionValueAsync.
 <code><![CDATA[
 UnionClient client = new UnionClient();
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     namedUnion = new
     {
@@ -201,7 +201,7 @@ This sample shows how to call SendSecondNamedUnionValueAsync with all request co
 <code><![CDATA[
 UnionClient client = new UnionClient();
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     namedUnion = new
     {
@@ -220,7 +220,7 @@ This sample shows how to call SendSecondNamedUnionValue.
 <code><![CDATA[
 UnionClient client = new UnionClient();
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     namedUnion = new
     {
@@ -236,7 +236,7 @@ This sample shows how to call SendSecondNamedUnionValue with all request content
 <code><![CDATA[
 UnionClient client = new UnionClient();
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     namedUnion = new
     {

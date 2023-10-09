@@ -79,7 +79,7 @@ namespace body_complex_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ReadonlypropertyClient client = new ReadonlypropertyClient(credential);
 
-            RequestContent content = RequestContent.Create(new object());
+            using RequestContent content = RequestContent.Create(new object());
             Response response = client.PutValid(content);
 
             Console.WriteLine(response.Status);
@@ -92,7 +92,7 @@ namespace body_complex_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ReadonlypropertyClient client = new ReadonlypropertyClient(credential);
 
-            RequestContent content = RequestContent.Create(new object());
+            using RequestContent content = RequestContent.Create(new object());
             Response response = await client.PutValidAsync(content);
 
             Console.WriteLine(response.Status);
@@ -105,7 +105,7 @@ namespace body_complex_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ReadonlypropertyClient client = new ReadonlypropertyClient(credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 size = 1234,
             });
@@ -121,7 +121,7 @@ namespace body_complex_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ReadonlypropertyClient client = new ReadonlypropertyClient(credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 size = 1234,
             });

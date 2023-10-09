@@ -109,7 +109,7 @@ namespace _Type._Array.Samples
         {
             NullableFloatValue client = new ArrayClient().GetNullableFloatValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new object[]
+            using RequestContent content = RequestContent.Create(new object[]
             {
 123.45F
             });
@@ -124,7 +124,7 @@ namespace _Type._Array.Samples
         {
             NullableFloatValue client = new ArrayClient().GetNullableFloatValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new object[]
+            using RequestContent content = RequestContent.Create(new object[]
             {
 123.45F
             });
@@ -157,7 +157,7 @@ namespace _Type._Array.Samples
         {
             NullableFloatValue client = new ArrayClient().GetNullableFloatValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new object[]
+            using RequestContent content = RequestContent.Create(new object[]
             {
 123.45F
             });
@@ -172,7 +172,7 @@ namespace _Type._Array.Samples
         {
             NullableFloatValue client = new ArrayClient().GetNullableFloatValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new object[]
+            using RequestContent content = RequestContent.Create(new object[]
             {
 123.45F
             });

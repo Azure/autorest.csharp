@@ -237,7 +237,8 @@ namespace _Type.Property.Optionality
             Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await PutAllAsync(body.ToRequestContent(), context).ConfigureAwait(false);
+            using RequestContent content = body.ToRequestContent();
+            Response response = await PutAllAsync(content, context).ConfigureAwait(false);
             return response;
         }
 
@@ -251,7 +252,8 @@ namespace _Type.Property.Optionality
             Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = PutAll(body.ToRequestContent(), context);
+            using RequestContent content = body.ToRequestContent();
+            Response response = PutAll(content, context);
             return response;
         }
 
@@ -343,7 +345,8 @@ namespace _Type.Property.Optionality
             Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await PutDefaultAsync(body.ToRequestContent(), context).ConfigureAwait(false);
+            using RequestContent content = body.ToRequestContent();
+            Response response = await PutDefaultAsync(content, context).ConfigureAwait(false);
             return response;
         }
 
@@ -357,7 +360,8 @@ namespace _Type.Property.Optionality
             Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = PutDefault(body.ToRequestContent(), context);
+            using RequestContent content = body.ToRequestContent();
+            Response response = PutDefault(content, context);
             return response;
         }
 

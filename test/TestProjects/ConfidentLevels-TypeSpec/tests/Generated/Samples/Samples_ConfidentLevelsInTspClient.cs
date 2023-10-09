@@ -26,7 +26,7 @@ namespace ConfidentLevelsInTsp.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 unionProperty = "<unionProperty>",
             });
@@ -42,7 +42,7 @@ namespace ConfidentLevelsInTsp.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 unionProperty = "<unionProperty>",
             });
@@ -58,7 +58,7 @@ namespace ConfidentLevelsInTsp.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 unionProperty = "<unionProperty>",
             });
@@ -74,7 +74,7 @@ namespace ConfidentLevelsInTsp.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 unionProperty = "<unionProperty>",
             });
@@ -90,7 +90,7 @@ namespace ConfidentLevelsInTsp.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
                 age = 1234,
@@ -108,7 +108,7 @@ namespace ConfidentLevelsInTsp.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
                 age = 1234,
@@ -126,7 +126,7 @@ namespace ConfidentLevelsInTsp.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
                 age = 1234,
@@ -145,7 +145,7 @@ namespace ConfidentLevelsInTsp.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
                 age = 1234,
@@ -164,7 +164,7 @@ namespace ConfidentLevelsInTsp.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
                 selfReference = new object[]
@@ -185,7 +185,7 @@ null
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
                 selfReference = new object[]
@@ -206,7 +206,7 @@ null
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
                 selfReference = new object[]
@@ -227,7 +227,7 @@ null
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
                 selfReference = new object[]
@@ -248,7 +248,7 @@ null
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
             });
@@ -264,7 +264,7 @@ null
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
             });
@@ -280,7 +280,7 @@ null
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
                 reference = new object[]
@@ -313,7 +313,7 @@ unionProperty = "<unionProperty>",
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
                 reference = new object[]
@@ -346,7 +346,7 @@ unionProperty = "<unionProperty>",
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
                 id = 1,
@@ -363,7 +363,7 @@ unionProperty = "<unionProperty>",
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
                 id = 1,
@@ -380,7 +380,7 @@ unionProperty = "<unionProperty>",
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
                 id = 1,
@@ -397,7 +397,7 @@ unionProperty = "<unionProperty>",
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
                 id = 1,
@@ -414,7 +414,7 @@ unionProperty = "<unionProperty>",
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
                 id = 3.141592F,
@@ -431,7 +431,7 @@ unionProperty = "<unionProperty>",
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
                 id = 3.141592F,
@@ -448,7 +448,7 @@ unionProperty = "<unionProperty>",
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
                 id = 3.141592F,
@@ -465,7 +465,7 @@ unionProperty = "<unionProperty>",
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
                 id = 3.141592F,
@@ -482,7 +482,7 @@ unionProperty = "<unionProperty>",
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 meow = "<meow>",
                 kind = "cat",
@@ -502,7 +502,7 @@ unionProperty = "<unionProperty>",
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 meow = "<meow>",
                 kind = "cat",
@@ -544,7 +544,7 @@ unionProperty = "<unionProperty>",
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 meow = "<meow>",
                 kind = "cat",
@@ -564,7 +564,7 @@ unionProperty = "<unionProperty>",
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 meow = "<meow>",
                 kind = "cat",
@@ -606,7 +606,7 @@ unionProperty = "<unionProperty>",
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 woof = "<woof>",
                 color = "<color>",
@@ -627,7 +627,7 @@ unionProperty = "<unionProperty>",
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 woof = "<woof>",
                 color = "<color>",
@@ -648,7 +648,7 @@ unionProperty = "<unionProperty>",
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 woof = "<woof>",
                 color = "<color>",
@@ -669,7 +669,7 @@ unionProperty = "<unionProperty>",
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 woof = "<woof>",
                 color = "<color>",
@@ -690,7 +690,7 @@ unionProperty = "<unionProperty>",
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 woof = "<woof>",
                 color = "<color>",
@@ -713,7 +713,7 @@ unionProperty = "<unionProperty>",
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 woof = "<woof>",
                 color = "<color>",
@@ -736,7 +736,7 @@ unionProperty = "<unionProperty>",
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 woof = "<woof>",
                 color = "<color>",
@@ -759,7 +759,7 @@ unionProperty = "<unionProperty>",
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 woof = "<woof>",
                 color = "<color>",
@@ -782,7 +782,7 @@ unionProperty = "<unionProperty>",
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 meow = "<meow>",
                 kind = "cat",
@@ -803,7 +803,7 @@ unionProperty = "<unionProperty>",
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 meow = "<meow>",
                 kind = "cat",
@@ -824,7 +824,7 @@ unionProperty = "<unionProperty>",
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 meow = "<meow>",
                 kind = "cat",
@@ -845,7 +845,7 @@ unionProperty = "<unionProperty>",
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 meow = "<meow>",
                 kind = "cat",
@@ -866,7 +866,7 @@ unionProperty = "<unionProperty>",
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
             });
@@ -882,7 +882,7 @@ unionProperty = "<unionProperty>",
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
             });
@@ -898,7 +898,7 @@ unionProperty = "<unionProperty>",
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 age = 1234,
                 name = "<name>",
@@ -916,7 +916,7 @@ unionProperty = "<unionProperty>",
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 age = 1234,
                 name = "<name>",
@@ -934,7 +934,7 @@ unionProperty = "<unionProperty>",
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 unionProperty = "<unionProperty>",
                 name = "<name>",
@@ -951,7 +951,7 @@ unionProperty = "<unionProperty>",
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 unionProperty = "<unionProperty>",
                 name = "<name>",
@@ -968,7 +968,7 @@ unionProperty = "<unionProperty>",
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 unionProperty = "<unionProperty>",
                 name = "<name>",
@@ -986,7 +986,7 @@ unionProperty = "<unionProperty>",
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 unionProperty = "<unionProperty>",
                 name = "<name>",

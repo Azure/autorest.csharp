@@ -109,7 +109,7 @@ namespace _Type._Array.Samples
         {
             Int64Value client = new ArrayClient().GetInt64ValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new object[]
+            using RequestContent content = RequestContent.Create(new object[]
             {
 1234L
             });
@@ -124,7 +124,7 @@ namespace _Type._Array.Samples
         {
             Int64Value client = new ArrayClient().GetInt64ValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new object[]
+            using RequestContent content = RequestContent.Create(new object[]
             {
 1234L
             });
@@ -157,7 +157,7 @@ namespace _Type._Array.Samples
         {
             Int64Value client = new ArrayClient().GetInt64ValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new object[]
+            using RequestContent content = RequestContent.Create(new object[]
             {
 1234L
             });
@@ -172,7 +172,7 @@ namespace _Type._Array.Samples
         {
             Int64Value client = new ArrayClient().GetInt64ValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new object[]
+            using RequestContent content = RequestContent.Create(new object[]
             {
 1234L
             });
