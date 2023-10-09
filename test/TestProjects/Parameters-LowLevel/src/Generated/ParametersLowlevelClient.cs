@@ -36,19 +36,19 @@ namespace Parameters_LowLevel
         /// <summary> Initializes a new instance of ParametersLowlevelClient. </summary>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
-        public ParametersLowlevelClient(AzureKeyCredential credential) : this(credential, new Uri("http://localhost:3000"), new ParametersLowlevelClientOptions())
+        public ParametersLowlevelClient(AzureKeyCredential credential) : this(new Uri("http://localhost:3000"), credential, new ParametersLowlevelClientOptions())
         {
         }
 
         /// <summary> Initializes a new instance of ParametersLowlevelClient. </summary>
-        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="endpoint"> server parameter. </param>
+        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="options"> The options for configuring the client. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> or <paramref name="endpoint"/> is null. </exception>
-        public ParametersLowlevelClient(AzureKeyCredential credential, Uri endpoint, ParametersLowlevelClientOptions options)
+        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
+        public ParametersLowlevelClient(Uri endpoint, AzureKeyCredential credential, ParametersLowlevelClientOptions options)
         {
-            Argument.AssertNotNull(credential, nameof(credential));
             Argument.AssertNotNull(endpoint, nameof(endpoint));
+            Argument.AssertNotNull(credential, nameof(credential));
             options ??= new ParametersLowlevelClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);

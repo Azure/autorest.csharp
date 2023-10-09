@@ -60,7 +60,8 @@ namespace _Azure.Lro.RpcLegacy
             Argument.AssertNotNull(jobData, nameof(jobData));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Operation<BinaryData> response = await CreateJobAsync(waitUntil, jobData.ToRequestContent(), context).ConfigureAwait(false);
+            using RequestContent content = jobData.ToRequestContent();
+            Operation<BinaryData> response = await CreateJobAsync(waitUntil, content, context).ConfigureAwait(false);
             return ProtocolOperationHelpers.Convert(response, JobResult.FromResponse, ClientDiagnostics, "LegacyClient.CreateJob");
         }
 
@@ -75,7 +76,8 @@ namespace _Azure.Lro.RpcLegacy
             Argument.AssertNotNull(jobData, nameof(jobData));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Operation<BinaryData> response = CreateJob(waitUntil, jobData.ToRequestContent(), context);
+            using RequestContent content = jobData.ToRequestContent();
+            Operation<BinaryData> response = CreateJob(waitUntil, content, context);
             return ProtocolOperationHelpers.Convert(response, JobResult.FromResponse, ClientDiagnostics, "LegacyClient.CreateJob");
         }
 

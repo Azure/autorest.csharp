@@ -79,21 +79,13 @@ This sample shows how to call PutAsync.
 <code><![CDATA[
 Float32Value client = new ArrayClient().GetFloat32ValueClient(apiVersion: "1.0.0");
 
-Response response = await client.PutAsync(new List<float>()
-{
-    123.45F
-});
-Console.WriteLine(response.Status);
+Response response = await client.PutAsync(new float[] { 123.45F });
 ]]></code>
 This sample shows how to call PutAsync with all parameters.
 <code><![CDATA[
 Float32Value client = new ArrayClient().GetFloat32ValueClient(apiVersion: "1.0.0");
 
-Response response = await client.PutAsync(new List<float>()
-{
-    123.45F
-});
-Console.WriteLine(response.Status);
+Response response = await client.PutAsync(new float[] { 123.45F });
 ]]></code></example>
     </member>
     <member name="Put(IEnumerable{float},CancellationToken)">
@@ -102,21 +94,13 @@ This sample shows how to call Put.
 <code><![CDATA[
 Float32Value client = new ArrayClient().GetFloat32ValueClient(apiVersion: "1.0.0");
 
-Response response = client.Put(new List<float>()
-{
-    123.45F
-});
-Console.WriteLine(response.Status);
+Response response = client.Put(new float[] { 123.45F });
 ]]></code>
 This sample shows how to call Put with all parameters.
 <code><![CDATA[
 Float32Value client = new ArrayClient().GetFloat32ValueClient(apiVersion: "1.0.0");
 
-Response response = client.Put(new List<float>()
-{
-    123.45F
-});
-Console.WriteLine(response.Status);
+Response response = client.Put(new float[] { 123.45F });
 ]]></code></example>
     </member>
     <member name="PutAsync(RequestContent,RequestContext)">
@@ -125,22 +109,24 @@ This sample shows how to call PutAsync.
 <code><![CDATA[
 Float32Value client = new ArrayClient().GetFloat32ValueClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new List<object>()
+using RequestContent content = RequestContent.Create(new object[]
 {
     123.45F
 });
 Response response = await client.PutAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutAsync with all request content.
 <code><![CDATA[
 Float32Value client = new ArrayClient().GetFloat32ValueClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new List<object>()
+using RequestContent content = RequestContent.Create(new object[]
 {
     123.45F
 });
 Response response = await client.PutAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -150,22 +136,24 @@ This sample shows how to call Put.
 <code><![CDATA[
 Float32Value client = new ArrayClient().GetFloat32ValueClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new List<object>()
+using RequestContent content = RequestContent.Create(new object[]
 {
     123.45F
 });
 Response response = client.Put(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Put with all request content.
 <code><![CDATA[
 Float32Value client = new ArrayClient().GetFloat32ValueClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new List<object>()
+using RequestContent content = RequestContent.Create(new object[]
 {
     123.45F
 });
 Response response = client.Put(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>

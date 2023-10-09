@@ -17,11 +17,11 @@ using _Type._Dictionary;
 
 namespace _Type._Dictionary.Samples
 {
-    internal class Samples_StringValue
+    public partial class Samples_StringValue
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetStringValue()
+        public void Example_GetStringValue_ShortVersion()
         {
             StringValue client = new DictionaryClient().GetStringValueClient(apiVersion: "1.0.0");
 
@@ -33,7 +33,7 @@ namespace _Type._Dictionary.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetStringValue_Async()
+        public async Task Example_GetStringValue_ShortVersion_Async()
         {
             StringValue client = new DictionaryClient().GetStringValueClient(apiVersion: "1.0.0");
 
@@ -45,7 +45,7 @@ namespace _Type._Dictionary.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetStringValue_Convenience()
+        public void Example_GetStringValue_ShortVersion_Convenience()
         {
             StringValue client = new DictionaryClient().GetStringValueClient(apiVersion: "1.0.0");
 
@@ -54,7 +54,7 @@ namespace _Type._Dictionary.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetStringValue_Convenience_Async()
+        public async Task Example_GetStringValue_ShortVersion_Convenience_Async()
         {
             StringValue client = new DictionaryClient().GetStringValueClient(apiVersion: "1.0.0");
 
@@ -105,56 +105,56 @@ namespace _Type._Dictionary.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put()
+        public void Example_Put_ShortVersion()
         {
             StringValue client = new DictionaryClient().GetStringValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 key = "<body>",
             });
             Response response = client.Put(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_Async()
+        public async Task Example_Put_ShortVersion_Async()
         {
             StringValue client = new DictionaryClient().GetStringValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 key = "<body>",
             });
             Response response = await client.PutAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put_Convenience()
+        public void Example_Put_ShortVersion_Convenience()
         {
             StringValue client = new DictionaryClient().GetStringValueClient(apiVersion: "1.0.0");
 
-            Response response = client.Put(new Dictionary<string, string>()
+            Response response = client.Put(new Dictionary<string, string>
             {
-                ["key"] = "<body>",
+                ["key"] = "<body>"
             });
-            Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_Convenience_Async()
+        public async Task Example_Put_ShortVersion_Convenience_Async()
         {
             StringValue client = new DictionaryClient().GetStringValueClient(apiVersion: "1.0.0");
 
-            Response response = await client.PutAsync(new Dictionary<string, string>()
+            Response response = await client.PutAsync(new Dictionary<string, string>
             {
-                ["key"] = "<body>",
+                ["key"] = "<body>"
             });
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -163,11 +163,12 @@ namespace _Type._Dictionary.Samples
         {
             StringValue client = new DictionaryClient().GetStringValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 key = "<body>",
             });
             Response response = client.Put(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -177,11 +178,12 @@ namespace _Type._Dictionary.Samples
         {
             StringValue client = new DictionaryClient().GetStringValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 key = "<body>",
             });
             Response response = await client.PutAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -191,11 +193,10 @@ namespace _Type._Dictionary.Samples
         {
             StringValue client = new DictionaryClient().GetStringValueClient(apiVersion: "1.0.0");
 
-            Response response = client.Put(new Dictionary<string, string>()
+            Response response = client.Put(new Dictionary<string, string>
             {
-                ["key"] = "<body>",
+                ["key"] = "<body>"
             });
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -204,11 +205,10 @@ namespace _Type._Dictionary.Samples
         {
             StringValue client = new DictionaryClient().GetStringValueClient(apiVersion: "1.0.0");
 
-            Response response = await client.PutAsync(new Dictionary<string, string>()
+            Response response = await client.PutAsync(new Dictionary<string, string>
             {
-                ["key"] = "<body>",
+                ["key"] = "<body>"
             });
-            Console.WriteLine(response.Status);
         }
     }
 }

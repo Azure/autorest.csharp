@@ -310,26 +310,34 @@
      "IsReadOnly": false
     }
    ]
+  },
+  {
+   "$id": "43",
+   "Name": "ListQueryParams",
+   "Namespace": "RenameGetList",
+   "IsNullable": false,
+   "Usage": "None",
+   "Properties": []
   }
  ],
  "Clients": [
   {
-   "$id": "43",
+   "$id": "44",
    "Name": "RenameGetListClient",
    "Description": "",
    "Operations": [
     {
-     "$id": "44",
+     "$id": "45",
      "Name": "get",
      "ResourceName": "Project",
      "Description": "Gets the details of a project.",
      "Parameters": [
       {
-       "$id": "45",
+       "$id": "46",
        "Name": "Endpoint",
        "NameInRequest": "Endpoint",
        "Type": {
-        "$id": "46",
+        "$id": "47",
         "Name": "Uri",
         "Kind": "Uri",
         "IsNullable": false
@@ -345,12 +353,12 @@
        "Kind": "Client"
       },
       {
-       "$id": "47",
+       "$id": "48",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Description": "",
        "Type": {
-        "$id": "48",
+        "$id": "49",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -365,9 +373,9 @@
        "Explode": false,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "49",
+        "$id": "50",
         "Type": {
-         "$id": "50",
+         "$id": "51",
          "Name": "String",
          "Kind": "String",
          "IsNullable": false
@@ -376,11 +384,11 @@
        }
       },
       {
-       "$id": "51",
+       "$id": "52",
        "Name": "projectName",
        "NameInRequest": "projectName",
        "Type": {
-        "$id": "52",
+        "$id": "53",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -396,11 +404,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "53",
+       "$id": "54",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "54",
+        "$id": "55",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -415,9 +423,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "55",
+        "$id": "56",
         "Type": {
-         "$ref": "54"
+         "$ref": "55"
         },
         "Value": "application/json"
        }
@@ -425,7 +433,7 @@
      ],
      "Responses": [
       {
-       "$id": "56",
+       "$id": "57",
        "StatusCodes": [
         200
        ],
@@ -446,23 +454,23 @@
      "GenerateConvenienceMethod": false
     },
     {
-     "$id": "57",
+     "$id": "58",
      "Name": "list",
      "ResourceName": "Project",
      "Description": "Lists the existing projects.",
      "Parameters": [
       {
-       "$ref": "45"
+       "$ref": "46"
       },
       {
-       "$ref": "47"
+       "$ref": "48"
       },
       {
-       "$id": "58",
+       "$id": "59",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "59",
+        "$id": "60",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -477,9 +485,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "60",
+        "$id": "61",
         "Type": {
-         "$ref": "59"
+         "$ref": "60"
         },
         "Value": "application/json"
        }
@@ -487,7 +495,7 @@
      ],
      "Responses": [
       {
-       "$id": "61",
+       "$id": "62",
        "StatusCodes": [
         200
        ],
@@ -505,7 +513,7 @@
      "Path": "/authoring/analyze-text/projects",
      "BufferResponse": true,
      "Paging": {
-      "$id": "62",
+      "$id": "63",
       "NextLinkName": "nextLink",
       "ItemName": "value"
      },
@@ -513,23 +521,23 @@
      "GenerateConvenienceMethod": false
     },
     {
-     "$id": "63",
+     "$id": "64",
      "Name": "get",
      "ResourceName": "Deployment",
      "Description": "Gets the details of a deployment.",
      "Parameters": [
       {
-       "$ref": "45"
+       "$ref": "46"
       },
       {
-       "$ref": "47"
+       "$ref": "48"
       },
       {
-       "$id": "64",
+       "$id": "65",
        "Name": "projectName",
        "NameInRequest": "projectName",
        "Type": {
-        "$id": "65",
+        "$id": "66",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -545,11 +553,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "66",
+       "$id": "67",
        "Name": "deploymentName",
        "NameInRequest": "deploymentName",
        "Type": {
-        "$id": "67",
+        "$id": "68",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -565,11 +573,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "68",
+       "$id": "69",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "69",
+        "$id": "70",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -584,9 +592,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "70",
+        "$id": "71",
         "Type": {
-         "$ref": "69"
+         "$ref": "70"
         },
         "Value": "application/json"
        }
@@ -594,7 +602,7 @@
      ],
      "Responses": [
       {
-       "$id": "71",
+       "$id": "72",
        "StatusCodes": [
         200
        ],
@@ -615,23 +623,23 @@
      "GenerateConvenienceMethod": false
     },
     {
-     "$id": "72",
+     "$id": "73",
      "Name": "list",
      "ResourceName": "Deployment",
      "Description": "Lists the existing deployments.",
      "Parameters": [
       {
-       "$ref": "45"
+       "$ref": "46"
       },
       {
-       "$ref": "47"
+       "$ref": "48"
       },
       {
-       "$id": "73",
+       "$id": "74",
        "Name": "projectName",
        "NameInRequest": "projectName",
        "Type": {
-        "$id": "74",
+        "$id": "75",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -647,11 +655,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "75",
+       "$id": "76",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "76",
+        "$id": "77",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -666,9 +674,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "77",
+        "$id": "78",
         "Type": {
-         "$ref": "76"
+         "$ref": "77"
         },
         "Value": "application/json"
        }
@@ -676,7 +684,7 @@
      ],
      "Responses": [
       {
-       "$id": "78",
+       "$id": "79",
        "StatusCodes": [
         200
        ],
@@ -694,7 +702,7 @@
      "Path": "/authoring/analyze-text/projects/{projectName}/deployments",
      "BufferResponse": true,
      "Paging": {
-      "$id": "79",
+      "$id": "80",
       "NextLinkName": "nextLink",
       "ItemName": "value"
      },
@@ -703,7 +711,7 @@
     }
    ],
    "Protocol": {
-    "$id": "80"
+    "$id": "81"
    },
    "Creatable": true
   }

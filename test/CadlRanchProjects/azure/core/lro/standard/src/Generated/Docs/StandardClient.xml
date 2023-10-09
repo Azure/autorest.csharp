@@ -45,7 +45,7 @@ This sample shows how to call CreateOrReplaceAsync and parse the result.
 <code><![CDATA[
 StandardClient client = new StandardClient();
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     role = "<role>",
 });
@@ -60,7 +60,7 @@ This sample shows how to call CreateOrReplaceAsync with all parameters and reque
 <code><![CDATA[
 StandardClient client = new StandardClient();
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     role = "<role>",
 });
@@ -78,7 +78,7 @@ This sample shows how to call CreateOrReplace and parse the result.
 <code><![CDATA[
 StandardClient client = new StandardClient();
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     role = "<role>",
 });
@@ -93,7 +93,7 @@ This sample shows how to call CreateOrReplace with all parameters and request co
 <code><![CDATA[
 StandardClient client = new StandardClient();
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     role = "<role>",
 });

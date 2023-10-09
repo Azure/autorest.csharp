@@ -17,11 +17,11 @@ using _Type._Dictionary;
 
 namespace _Type._Dictionary.Samples
 {
-    internal class Samples_DatetimeValue
+    public partial class Samples_DatetimeValue
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetDatetimeValue()
+        public void Example_GetDatetimeValue_ShortVersion()
         {
             DatetimeValue client = new DictionaryClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
@@ -33,7 +33,7 @@ namespace _Type._Dictionary.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetDatetimeValue_Async()
+        public async Task Example_GetDatetimeValue_ShortVersion_Async()
         {
             DatetimeValue client = new DictionaryClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
@@ -45,7 +45,7 @@ namespace _Type._Dictionary.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetDatetimeValue_Convenience()
+        public void Example_GetDatetimeValue_ShortVersion_Convenience()
         {
             DatetimeValue client = new DictionaryClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
@@ -54,7 +54,7 @@ namespace _Type._Dictionary.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetDatetimeValue_Convenience_Async()
+        public async Task Example_GetDatetimeValue_ShortVersion_Convenience_Async()
         {
             DatetimeValue client = new DictionaryClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
@@ -105,56 +105,56 @@ namespace _Type._Dictionary.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put()
+        public void Example_Put_ShortVersion()
         {
             DatetimeValue client = new DictionaryClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 key = "2022-05-10T14:57:31.2311892-04:00",
             });
             Response response = client.Put(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_Async()
+        public async Task Example_Put_ShortVersion_Async()
         {
             DatetimeValue client = new DictionaryClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 key = "2022-05-10T14:57:31.2311892-04:00",
             });
             Response response = await client.PutAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put_Convenience()
+        public void Example_Put_ShortVersion_Convenience()
         {
             DatetimeValue client = new DictionaryClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
-            Response response = client.Put(new Dictionary<string, DateTimeOffset>()
+            Response response = client.Put(new Dictionary<string, DateTimeOffset>
             {
-                ["key"] = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
+                ["key"] = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00")
             });
-            Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_Convenience_Async()
+        public async Task Example_Put_ShortVersion_Convenience_Async()
         {
             DatetimeValue client = new DictionaryClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
-            Response response = await client.PutAsync(new Dictionary<string, DateTimeOffset>()
+            Response response = await client.PutAsync(new Dictionary<string, DateTimeOffset>
             {
-                ["key"] = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
+                ["key"] = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00")
             });
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -163,11 +163,12 @@ namespace _Type._Dictionary.Samples
         {
             DatetimeValue client = new DictionaryClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 key = "2022-05-10T14:57:31.2311892-04:00",
             });
             Response response = client.Put(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -177,11 +178,12 @@ namespace _Type._Dictionary.Samples
         {
             DatetimeValue client = new DictionaryClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 key = "2022-05-10T14:57:31.2311892-04:00",
             });
             Response response = await client.PutAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -191,11 +193,10 @@ namespace _Type._Dictionary.Samples
         {
             DatetimeValue client = new DictionaryClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
-            Response response = client.Put(new Dictionary<string, DateTimeOffset>()
+            Response response = client.Put(new Dictionary<string, DateTimeOffset>
             {
-                ["key"] = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
+                ["key"] = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00")
             });
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -204,11 +205,10 @@ namespace _Type._Dictionary.Samples
         {
             DatetimeValue client = new DictionaryClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
-            Response response = await client.PutAsync(new Dictionary<string, DateTimeOffset>()
+            Response response = await client.PutAsync(new Dictionary<string, DateTimeOffset>
             {
-                ["key"] = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
+                ["key"] = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00")
             });
-            Console.WriteLine(response.Status);
         }
     }
 }

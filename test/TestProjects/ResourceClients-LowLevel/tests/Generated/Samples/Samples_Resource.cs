@@ -15,11 +15,11 @@ using ResourceClients_LowLevel;
 
 namespace ResourceClients_LowLevel.Samples
 {
-    internal class Samples_Resource
+    public partial class Samples_Resource
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetItem()
+        public void Example_GetItem_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Resource client = new ResourceServiceClient(credential).GetResourceGroup("<GroupId>").GetResource("<ItemId>");
@@ -32,7 +32,7 @@ namespace ResourceClients_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetItem_Async()
+        public async Task Example_GetItem_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Resource client = new ResourceServiceClient(credential).GetResourceGroup("<GroupId>").GetResource("<ItemId>");

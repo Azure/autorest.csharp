@@ -16,27 +16,29 @@ using httpInfrastructure_LowLevel;
 
 namespace httpInfrastructure_LowLevel.Samples
 {
-    public class Samples_HttpRetryClient
+    public partial class Samples_HttpRetryClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Head408()
+        public void Example_Head408_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpRetryClient client = new HttpRetryClient(credential);
 
             Response response = client.Head408();
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Head408_Async()
+        public async Task Example_Head408_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpRetryClient client = new HttpRetryClient(credential);
 
             Response response = await client.Head408Async();
+
             Console.WriteLine(response.Status);
         }
 
@@ -48,6 +50,7 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpRetryClient client = new HttpRetryClient(credential);
 
             Response response = client.Head408();
+
             Console.WriteLine(response.Status);
         }
 
@@ -59,30 +62,33 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpRetryClient client = new HttpRetryClient(credential);
 
             Response response = await client.Head408Async();
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put500()
+        public void Example_Put500_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpRetryClient client = new HttpRetryClient(credential);
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Response response = client.Put500(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put500_Async()
+        public async Task Example_Put500_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpRetryClient client = new HttpRetryClient(credential);
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Response response = await client.Put500Async(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -93,8 +99,9 @@ namespace httpInfrastructure_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpRetryClient client = new HttpRetryClient(credential);
 
-            RequestContent content = RequestContent.Create("true");
+            using RequestContent content = RequestContent.Create("true");
             Response response = client.Put500(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -105,32 +112,35 @@ namespace httpInfrastructure_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpRetryClient client = new HttpRetryClient(credential);
 
-            RequestContent content = RequestContent.Create("true");
+            using RequestContent content = RequestContent.Create("true");
             Response response = await client.Put500Async(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Patch500()
+        public void Example_Patch500_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpRetryClient client = new HttpRetryClient(credential);
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Response response = client.Patch500(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Patch500_Async()
+        public async Task Example_Patch500_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpRetryClient client = new HttpRetryClient(credential);
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Response response = await client.Patch500Async(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -141,8 +151,9 @@ namespace httpInfrastructure_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpRetryClient client = new HttpRetryClient(credential);
 
-            RequestContent content = RequestContent.Create("true");
+            using RequestContent content = RequestContent.Create("true");
             Response response = client.Patch500(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -153,30 +164,33 @@ namespace httpInfrastructure_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpRetryClient client = new HttpRetryClient(credential);
 
-            RequestContent content = RequestContent.Create("true");
+            using RequestContent content = RequestContent.Create("true");
             Response response = await client.Patch500Async(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Get502()
+        public void Example_Get502_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpRetryClient client = new HttpRetryClient(credential);
 
             Response response = client.Get502();
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Get502_Async()
+        public async Task Example_Get502_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpRetryClient client = new HttpRetryClient(credential);
 
             Response response = await client.Get502Async();
+
             Console.WriteLine(response.Status);
         }
 
@@ -188,6 +202,7 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpRetryClient client = new HttpRetryClient(credential);
 
             Response response = client.Get502();
+
             Console.WriteLine(response.Status);
         }
 
@@ -199,12 +214,13 @@ namespace httpInfrastructure_LowLevel.Samples
             HttpRetryClient client = new HttpRetryClient(credential);
 
             Response response = await client.Get502Async();
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Options502()
+        public void Example_Options502_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpRetryClient client = new HttpRetryClient(credential);
@@ -217,7 +233,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Options502_Async()
+        public async Task Example_Options502_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpRetryClient client = new HttpRetryClient(credential);
@@ -256,25 +272,27 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Post503()
+        public void Example_Post503_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpRetryClient client = new HttpRetryClient(credential);
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Response response = client.Post503(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Post503_Async()
+        public async Task Example_Post503_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpRetryClient client = new HttpRetryClient(credential);
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Response response = await client.Post503Async(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -285,8 +303,9 @@ namespace httpInfrastructure_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpRetryClient client = new HttpRetryClient(credential);
 
-            RequestContent content = RequestContent.Create("true");
+            using RequestContent content = RequestContent.Create("true");
             Response response = client.Post503(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -297,32 +316,35 @@ namespace httpInfrastructure_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpRetryClient client = new HttpRetryClient(credential);
 
-            RequestContent content = RequestContent.Create("true");
+            using RequestContent content = RequestContent.Create("true");
             Response response = await client.Post503Async(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Delete503()
+        public void Example_Delete503_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpRetryClient client = new HttpRetryClient(credential);
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Response response = client.Delete503(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Delete503_Async()
+        public async Task Example_Delete503_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpRetryClient client = new HttpRetryClient(credential);
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Response response = await client.Delete503Async(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -333,8 +355,9 @@ namespace httpInfrastructure_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpRetryClient client = new HttpRetryClient(credential);
 
-            RequestContent content = RequestContent.Create("true");
+            using RequestContent content = RequestContent.Create("true");
             Response response = client.Delete503(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -345,32 +368,35 @@ namespace httpInfrastructure_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpRetryClient client = new HttpRetryClient(credential);
 
-            RequestContent content = RequestContent.Create("true");
+            using RequestContent content = RequestContent.Create("true");
             Response response = await client.Delete503Async(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put504()
+        public void Example_Put504_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpRetryClient client = new HttpRetryClient(credential);
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Response response = client.Put504(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put504_Async()
+        public async Task Example_Put504_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpRetryClient client = new HttpRetryClient(credential);
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Response response = await client.Put504Async(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -381,8 +407,9 @@ namespace httpInfrastructure_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpRetryClient client = new HttpRetryClient(credential);
 
-            RequestContent content = RequestContent.Create("true");
+            using RequestContent content = RequestContent.Create("true");
             Response response = client.Put504(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -393,32 +420,35 @@ namespace httpInfrastructure_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpRetryClient client = new HttpRetryClient(credential);
 
-            RequestContent content = RequestContent.Create("true");
+            using RequestContent content = RequestContent.Create("true");
             Response response = await client.Put504Async(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Patch504()
+        public void Example_Patch504_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpRetryClient client = new HttpRetryClient(credential);
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Response response = client.Patch504(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Patch504_Async()
+        public async Task Example_Patch504_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpRetryClient client = new HttpRetryClient(credential);
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Response response = await client.Patch504Async(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -429,8 +459,9 @@ namespace httpInfrastructure_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpRetryClient client = new HttpRetryClient(credential);
 
-            RequestContent content = RequestContent.Create("true");
+            using RequestContent content = RequestContent.Create("true");
             Response response = client.Patch504(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -441,8 +472,9 @@ namespace httpInfrastructure_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpRetryClient client = new HttpRetryClient(credential);
 
-            RequestContent content = RequestContent.Create("true");
+            using RequestContent content = RequestContent.Create("true");
             Response response = await client.Patch504Async(content);
+
             Console.WriteLine(response.Status);
         }
     }

@@ -17,15 +17,15 @@ using _Azure.Lro.RpcLegacy.Models;
 
 namespace _Azure.Lro.RpcLegacy.Samples
 {
-    public class Samples_LegacyClient
+    public partial class Samples_LegacyClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_CreateJob()
+        public void Example_CreateJob_ShortVersion()
         {
             LegacyClient client = new LegacyClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 comment = "<comment>",
             });
@@ -40,11 +40,11 @@ namespace _Azure.Lro.RpcLegacy.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_CreateJob_Async()
+        public async Task Example_CreateJob_ShortVersion_Async()
         {
             LegacyClient client = new LegacyClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 comment = "<comment>",
             });
@@ -59,7 +59,7 @@ namespace _Azure.Lro.RpcLegacy.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_CreateJob_Convenience()
+        public void Example_CreateJob_ShortVersion_Convenience()
         {
             LegacyClient client = new LegacyClient();
 
@@ -70,7 +70,7 @@ namespace _Azure.Lro.RpcLegacy.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_CreateJob_Convenience_Async()
+        public async Task Example_CreateJob_ShortVersion_Convenience_Async()
         {
             LegacyClient client = new LegacyClient();
 
@@ -85,7 +85,7 @@ namespace _Azure.Lro.RpcLegacy.Samples
         {
             LegacyClient client = new LegacyClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 comment = "<comment>",
             });
@@ -109,7 +109,7 @@ namespace _Azure.Lro.RpcLegacy.Samples
         {
             LegacyClient client = new LegacyClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 comment = "<comment>",
             });

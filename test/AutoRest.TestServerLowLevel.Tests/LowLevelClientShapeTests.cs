@@ -29,14 +29,14 @@ namespace AutoRest.TestServer.Tests
         public void TokenAuthHasTokenCredential ()
         {
             var client = typeof(Accessibility_LowLevel_TokenAuth.AccessibilityClient);
-            Assert.NotNull(client.GetConstructor(new Type [] { typeof(Azure.Core.TokenCredential), typeof(Uri), typeof(Accessibility_LowLevel_TokenAuth.AccessibilityClientOptions) }));
+            Assert.NotNull(client.GetConstructor(new Type [] { typeof(Uri), typeof(Azure.Core.TokenCredential), typeof(Accessibility_LowLevel_TokenAuth.AccessibilityClientOptions) }));
         }
 
         [Test]
         public void KeyAuthHasAzureKeyCredential ()
         {
             var client = typeof(Accessibility_LowLevel.AccessibilityClient);
-            Assert.NotNull(client.GetConstructor(new Type [] { typeof(Azure.AzureKeyCredential), typeof(Uri), typeof(Accessibility_LowLevel.AccessibilityClientOptions) }));
+            Assert.NotNull(client.GetConstructor(new Type [] { typeof(Uri), typeof(Azure.AzureKeyCredential), typeof(Accessibility_LowLevel.AccessibilityClientOptions) }));
         }
     }
 }

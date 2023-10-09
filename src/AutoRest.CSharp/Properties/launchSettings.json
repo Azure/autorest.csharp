@@ -620,9 +620,17 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\authentication\\union\\src\\Generated -n"
     },
+    "typespec-azure/client-generator-core/access": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\azure\\client-generator-core\\access\\src\\Generated -n"
+    },
     "typespec-azure/client-generator-core/internal": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\azure\\client-generator-core\\internal\\src\\Generated -n"
+    },
+    "typespec-azure/client-generator-core/usage": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\azure\\client-generator-core\\usage\\src\\Generated -n"
     },
     "typespec-azure/core/basic": {
       "commandName": "Project",
@@ -639,6 +647,22 @@
     "typespec-azure/core/traits": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\azure\\core\\traits\\src\\Generated -n"
+    },
+    "typespec-client/structure/default": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\client\\structure\\default\\src\\Generated -n"
+    },
+    "typespec-client/structure/multi-client": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\client\\structure\\multi-client\\src\\Generated -n"
+    },
+    "typespec-client/structure/renamed-operation": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\client\\structure\\renamed-operation\\src\\Generated -n"
+    },
+    "typespec-client/structure/two-operation-group": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\client\\structure\\two-operation-group\\src\\Generated -n"
     },
     "typespec-encode/bytes": {
       "commandName": "Project",
@@ -664,6 +688,14 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\parameters\\spread\\src\\Generated -n"
     },
+    "typespec-payload/content-negotiation": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\payload\\content-negotiation\\src\\Generated -n"
+    },
+    "typespec-payload/pageable": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\payload\\pageable\\src\\Generated -n"
+    },
     "typespec-projection/projected-name": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\projection\\projected-name\\src\\Generated -n"
@@ -679,6 +711,10 @@
     "typespec-special-headers/client-request-id": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\special-headers\\client-request-id\\src\\Generated -n"
+    },
+    "typespec-special-headers/conditional-request": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\special-headers\\conditional-request\\src\\Generated -n"
     },
     "typespec-special-headers/repeatability": {
       "commandName": "Project",

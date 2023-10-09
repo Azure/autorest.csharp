@@ -17,11 +17,11 @@ using _Type._Dictionary;
 
 namespace _Type._Dictionary.Samples
 {
-    internal class Samples_BooleanValue
+    public partial class Samples_BooleanValue
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetBooleanValue()
+        public void Example_GetBooleanValue_ShortVersion()
         {
             BooleanValue client = new DictionaryClient().GetBooleanValueClient(apiVersion: "1.0.0");
 
@@ -33,7 +33,7 @@ namespace _Type._Dictionary.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetBooleanValue_Async()
+        public async Task Example_GetBooleanValue_ShortVersion_Async()
         {
             BooleanValue client = new DictionaryClient().GetBooleanValueClient(apiVersion: "1.0.0");
 
@@ -45,7 +45,7 @@ namespace _Type._Dictionary.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetBooleanValue_Convenience()
+        public void Example_GetBooleanValue_ShortVersion_Convenience()
         {
             BooleanValue client = new DictionaryClient().GetBooleanValueClient(apiVersion: "1.0.0");
 
@@ -54,7 +54,7 @@ namespace _Type._Dictionary.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetBooleanValue_Convenience_Async()
+        public async Task Example_GetBooleanValue_ShortVersion_Convenience_Async()
         {
             BooleanValue client = new DictionaryClient().GetBooleanValueClient(apiVersion: "1.0.0");
 
@@ -105,56 +105,56 @@ namespace _Type._Dictionary.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put()
+        public void Example_Put_ShortVersion()
         {
             BooleanValue client = new DictionaryClient().GetBooleanValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 key = true,
             });
             Response response = client.Put(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_Async()
+        public async Task Example_Put_ShortVersion_Async()
         {
             BooleanValue client = new DictionaryClient().GetBooleanValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 key = true,
             });
             Response response = await client.PutAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put_Convenience()
+        public void Example_Put_ShortVersion_Convenience()
         {
             BooleanValue client = new DictionaryClient().GetBooleanValueClient(apiVersion: "1.0.0");
 
-            Response response = client.Put(new Dictionary<string, bool>()
+            Response response = client.Put(new Dictionary<string, bool>
             {
-                ["key"] = true,
+                ["key"] = true
             });
-            Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_Convenience_Async()
+        public async Task Example_Put_ShortVersion_Convenience_Async()
         {
             BooleanValue client = new DictionaryClient().GetBooleanValueClient(apiVersion: "1.0.0");
 
-            Response response = await client.PutAsync(new Dictionary<string, bool>()
+            Response response = await client.PutAsync(new Dictionary<string, bool>
             {
-                ["key"] = true,
+                ["key"] = true
             });
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -163,11 +163,12 @@ namespace _Type._Dictionary.Samples
         {
             BooleanValue client = new DictionaryClient().GetBooleanValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 key = true,
             });
             Response response = client.Put(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -177,11 +178,12 @@ namespace _Type._Dictionary.Samples
         {
             BooleanValue client = new DictionaryClient().GetBooleanValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 key = true,
             });
             Response response = await client.PutAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -191,11 +193,10 @@ namespace _Type._Dictionary.Samples
         {
             BooleanValue client = new DictionaryClient().GetBooleanValueClient(apiVersion: "1.0.0");
 
-            Response response = client.Put(new Dictionary<string, bool>()
+            Response response = client.Put(new Dictionary<string, bool>
             {
-                ["key"] = true,
+                ["key"] = true
             });
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -204,11 +205,10 @@ namespace _Type._Dictionary.Samples
         {
             BooleanValue client = new DictionaryClient().GetBooleanValueClient(apiVersion: "1.0.0");
 
-            Response response = await client.PutAsync(new Dictionary<string, bool>()
+            Response response = await client.PutAsync(new Dictionary<string, bool>
             {
-                ["key"] = true,
+                ["key"] = true
             });
-            Console.WriteLine(response.Status);
         }
     }
 }

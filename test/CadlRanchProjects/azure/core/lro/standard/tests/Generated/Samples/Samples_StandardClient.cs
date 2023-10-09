@@ -17,15 +17,15 @@ using _Azure.Lro.Standard.Models;
 
 namespace _Azure.Lro.Standard.Samples
 {
-    public class Samples_StandardClient
+    public partial class Samples_StandardClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_CreateOrReplace()
+        public void Example_CreateOrReplace_ShortVersion()
         {
             StandardClient client = new StandardClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 role = "<role>",
             });
@@ -39,11 +39,11 @@ namespace _Azure.Lro.Standard.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_CreateOrReplace_Async()
+        public async Task Example_CreateOrReplace_ShortVersion_Async()
         {
             StandardClient client = new StandardClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 role = "<role>",
             });
@@ -57,7 +57,7 @@ namespace _Azure.Lro.Standard.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_CreateOrReplace_Convenience()
+        public void Example_CreateOrReplace_ShortVersion_Convenience()
         {
             StandardClient client = new StandardClient();
 
@@ -68,7 +68,7 @@ namespace _Azure.Lro.Standard.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_CreateOrReplace_Convenience_Async()
+        public async Task Example_CreateOrReplace_ShortVersion_Convenience_Async()
         {
             StandardClient client = new StandardClient();
 
@@ -83,7 +83,7 @@ namespace _Azure.Lro.Standard.Samples
         {
             StandardClient client = new StandardClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 role = "<role>",
             });
@@ -101,7 +101,7 @@ namespace _Azure.Lro.Standard.Samples
         {
             StandardClient client = new StandardClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 role = "<role>",
             });
@@ -137,7 +137,7 @@ namespace _Azure.Lro.Standard.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Delete()
+        public void Example_Delete_ShortVersion()
         {
             StandardClient client = new StandardClient();
 
@@ -146,7 +146,7 @@ namespace _Azure.Lro.Standard.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Delete_Async()
+        public async Task Example_Delete_ShortVersion_Async()
         {
             StandardClient client = new StandardClient();
 
@@ -173,7 +173,7 @@ namespace _Azure.Lro.Standard.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Export()
+        public void Example_Export_ShortVersion()
         {
             StandardClient client = new StandardClient();
 
@@ -187,7 +187,7 @@ namespace _Azure.Lro.Standard.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Export_Async()
+        public async Task Example_Export_ShortVersion_Async()
         {
             StandardClient client = new StandardClient();
 
@@ -201,7 +201,7 @@ namespace _Azure.Lro.Standard.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Export_Convenience()
+        public void Example_Export_ShortVersion_Convenience()
         {
             StandardClient client = new StandardClient();
 
@@ -211,7 +211,7 @@ namespace _Azure.Lro.Standard.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Export_Convenience_Async()
+        public async Task Example_Export_ShortVersion_Convenience_Async()
         {
             StandardClient client = new StandardClient();
 

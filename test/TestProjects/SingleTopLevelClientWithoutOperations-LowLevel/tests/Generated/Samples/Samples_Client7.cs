@@ -15,11 +15,11 @@ using SingleTopLevelClientWithoutOperations_LowLevel;
 
 namespace SingleTopLevelClientWithoutOperations_LowLevel.Samples
 {
-    internal class Samples_Client7
+    public partial class Samples_Client7
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Operation()
+        public void Example_Operation_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Client7 client = new TopLevelClientWithoutOperationClient(credential).GetClient7Client();
@@ -32,7 +32,7 @@ namespace SingleTopLevelClientWithoutOperations_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Operation_Async()
+        public async Task Example_Operation_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Client7 client = new TopLevelClientWithoutOperationClient(credential).GetClient7Client();

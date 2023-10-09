@@ -159,24 +159,26 @@ This sample shows how to call PatchNonNullAsync.
 <code><![CDATA[
 Datetime client = new NullableClient().GetDatetimeClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     requiredProperty = "<requiredProperty>",
     nullableProperty = "2022-05-10T14:57:31.2311892-04:00",
 });
 Response response = await client.PatchNonNullAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PatchNonNullAsync with all request content.
 <code><![CDATA[
 Datetime client = new NullableClient().GetDatetimeClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     requiredProperty = "<requiredProperty>",
     nullableProperty = "2022-05-10T14:57:31.2311892-04:00",
 });
 Response response = await client.PatchNonNullAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -186,24 +188,26 @@ This sample shows how to call PatchNonNull.
 <code><![CDATA[
 Datetime client = new NullableClient().GetDatetimeClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     requiredProperty = "<requiredProperty>",
     nullableProperty = "2022-05-10T14:57:31.2311892-04:00",
 });
 Response response = client.PatchNonNull(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PatchNonNull with all request content.
 <code><![CDATA[
 Datetime client = new NullableClient().GetDatetimeClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     requiredProperty = "<requiredProperty>",
     nullableProperty = "2022-05-10T14:57:31.2311892-04:00",
 });
 Response response = client.PatchNonNull(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -213,24 +217,26 @@ This sample shows how to call PatchNullAsync.
 <code><![CDATA[
 Datetime client = new NullableClient().GetDatetimeClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     requiredProperty = "<requiredProperty>",
     nullableProperty = "2022-05-10T14:57:31.2311892-04:00",
 });
 Response response = await client.PatchNullAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PatchNullAsync with all request content.
 <code><![CDATA[
 Datetime client = new NullableClient().GetDatetimeClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     requiredProperty = "<requiredProperty>",
     nullableProperty = "2022-05-10T14:57:31.2311892-04:00",
 });
 Response response = await client.PatchNullAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -240,24 +246,26 @@ This sample shows how to call PatchNull.
 <code><![CDATA[
 Datetime client = new NullableClient().GetDatetimeClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     requiredProperty = "<requiredProperty>",
     nullableProperty = "2022-05-10T14:57:31.2311892-04:00",
 });
 Response response = client.PatchNull(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PatchNull with all request content.
 <code><![CDATA[
 Datetime client = new NullableClient().GetDatetimeClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     requiredProperty = "<requiredProperty>",
     nullableProperty = "2022-05-10T14:57:31.2311892-04:00",
 });
 Response response = client.PatchNull(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>

@@ -7,20 +7,16 @@ This sample shows how to call CsvAsync.
 <code><![CDATA[
 Header client = new CollectionFormatClient().GetHeaderClient(apiVersion: "1.0.0");
 
-Response response = await client.CsvAsync(new List<string>()
-{
-    "<colors>"
-});
+Response response = await client.CsvAsync(new string[] { "<colors>" });
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call CsvAsync with all parameters.
 <code><![CDATA[
 Header client = new CollectionFormatClient().GetHeaderClient(apiVersion: "1.0.0");
 
-Response response = await client.CsvAsync(new List<string>()
-{
-    "<colors>"
-});
+Response response = await client.CsvAsync(new string[] { "<colors>" });
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -30,20 +26,16 @@ This sample shows how to call Csv.
 <code><![CDATA[
 Header client = new CollectionFormatClient().GetHeaderClient(apiVersion: "1.0.0");
 
-Response response = client.Csv(new List<string>()
-{
-    "<colors>"
-});
+Response response = client.Csv(new string[] { "<colors>" });
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Csv with all parameters.
 <code><![CDATA[
 Header client = new CollectionFormatClient().GetHeaderClient(apiVersion: "1.0.0");
 
-Response response = client.Csv(new List<string>()
-{
-    "<colors>"
-});
+Response response = client.Csv(new string[] { "<colors>" });
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>

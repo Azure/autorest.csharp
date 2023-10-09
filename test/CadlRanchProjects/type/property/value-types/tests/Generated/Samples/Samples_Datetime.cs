@@ -17,11 +17,11 @@ using _Type.Property.ValueTypes.Models;
 
 namespace _Type.Property.ValueTypes.Samples
 {
-    internal class Samples_Datetime
+    public partial class Samples_Datetime
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetDatetime()
+        public void Example_GetDatetime_ShortVersion()
         {
             Datetime client = new ValueTypesClient().GetDatetimeClient(apiVersion: "1.0.0");
 
@@ -33,7 +33,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetDatetime_Async()
+        public async Task Example_GetDatetime_ShortVersion_Async()
         {
             Datetime client = new ValueTypesClient().GetDatetimeClient(apiVersion: "1.0.0");
 
@@ -45,7 +45,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetDatetime_Convenience()
+        public void Example_GetDatetime_ShortVersion_Convenience()
         {
             Datetime client = new ValueTypesClient().GetDatetimeClient(apiVersion: "1.0.0");
 
@@ -54,7 +54,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetDatetime_Convenience_Async()
+        public async Task Example_GetDatetime_ShortVersion_Convenience_Async()
         {
             Datetime client = new ValueTypesClient().GetDatetimeClient(apiVersion: "1.0.0");
 
@@ -105,52 +105,52 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put()
+        public void Example_Put_ShortVersion()
         {
             Datetime client = new ValueTypesClient().GetDatetimeClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 property = "2022-05-10T14:57:31.2311892-04:00",
             });
             Response response = client.Put(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_Async()
+        public async Task Example_Put_ShortVersion_Async()
         {
             Datetime client = new ValueTypesClient().GetDatetimeClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 property = "2022-05-10T14:57:31.2311892-04:00",
             });
             Response response = await client.PutAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put_Convenience()
+        public void Example_Put_ShortVersion_Convenience()
         {
             Datetime client = new ValueTypesClient().GetDatetimeClient(apiVersion: "1.0.0");
 
             DatetimeProperty body = new DatetimeProperty(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
             Response response = client.Put(body);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_Convenience_Async()
+        public async Task Example_Put_ShortVersion_Convenience_Async()
         {
             Datetime client = new ValueTypesClient().GetDatetimeClient(apiVersion: "1.0.0");
 
             DatetimeProperty body = new DatetimeProperty(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
             Response response = await client.PutAsync(body);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -159,11 +159,12 @@ namespace _Type.Property.ValueTypes.Samples
         {
             Datetime client = new ValueTypesClient().GetDatetimeClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 property = "2022-05-10T14:57:31.2311892-04:00",
             });
             Response response = client.Put(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -173,11 +174,12 @@ namespace _Type.Property.ValueTypes.Samples
         {
             Datetime client = new ValueTypesClient().GetDatetimeClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 property = "2022-05-10T14:57:31.2311892-04:00",
             });
             Response response = await client.PutAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -189,7 +191,6 @@ namespace _Type.Property.ValueTypes.Samples
 
             DatetimeProperty body = new DatetimeProperty(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
             Response response = client.Put(body);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -200,7 +201,6 @@ namespace _Type.Property.ValueTypes.Samples
 
             DatetimeProperty body = new DatetimeProperty(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
             Response response = await client.PutAsync(body);
-            Console.WriteLine(response.Status);
         }
     }
 }

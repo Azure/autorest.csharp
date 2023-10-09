@@ -54,7 +54,8 @@ namespace CustomizationsInTsp
             Argument.AssertNotNull(input, nameof(input));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await RoundTripAsync(input.ToRequestContent(), context).ConfigureAwait(false);
+            using RequestContent content = input.ToRequestContent();
+            Response response = await RoundTripAsync(content, context).ConfigureAwait(false);
             return Response.FromValue(RootModel.FromResponse(response), response);
         }
 
@@ -68,7 +69,8 @@ namespace CustomizationsInTsp
             Argument.AssertNotNull(input, nameof(input));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = RoundTrip(input.ToRequestContent(), context);
+            using RequestContent content = input.ToRequestContent();
+            Response response = RoundTrip(content, context);
             return Response.FromValue(RootModel.FromResponse(response), response);
         }
 

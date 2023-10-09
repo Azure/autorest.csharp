@@ -56,8 +56,9 @@ This sample shows how to call PutValidAsync.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ReadonlypropertyClient client = new ReadonlypropertyClient(credential);
 
-RequestContent content = RequestContent.Create(new object());
+using RequestContent content = RequestContent.Create(new object());
 Response response = await client.PutValidAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutValidAsync with all request content.
@@ -65,11 +66,12 @@ This sample shows how to call PutValidAsync with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ReadonlypropertyClient client = new ReadonlypropertyClient(credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     size = 1234,
 });
 Response response = await client.PutValidAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -80,8 +82,9 @@ This sample shows how to call PutValid.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ReadonlypropertyClient client = new ReadonlypropertyClient(credential);
 
-RequestContent content = RequestContent.Create(new object());
+using RequestContent content = RequestContent.Create(new object());
 Response response = client.PutValid(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutValid with all request content.
@@ -89,11 +92,12 @@ This sample shows how to call PutValid with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ReadonlypropertyClient client = new ReadonlypropertyClient(credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     size = 1234,
 });
 Response response = client.PutValid(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>

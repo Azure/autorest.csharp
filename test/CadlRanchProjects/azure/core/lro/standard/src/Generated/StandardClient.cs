@@ -64,7 +64,8 @@ namespace _Azure.Lro.Standard
             Argument.AssertNotNull(resource, nameof(resource));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Operation<BinaryData> response = await CreateOrReplaceAsync(waitUntil, name, resource.ToRequestContent(), context).ConfigureAwait(false);
+            using RequestContent content = resource.ToRequestContent();
+            Operation<BinaryData> response = await CreateOrReplaceAsync(waitUntil, name, content, context).ConfigureAwait(false);
             return ProtocolOperationHelpers.Convert(response, User.FromResponse, ClientDiagnostics, "StandardClient.CreateOrReplace");
         }
 
@@ -83,7 +84,8 @@ namespace _Azure.Lro.Standard
             Argument.AssertNotNull(resource, nameof(resource));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Operation<BinaryData> response = CreateOrReplace(waitUntil, name, resource.ToRequestContent(), context);
+            using RequestContent content = resource.ToRequestContent();
+            Operation<BinaryData> response = CreateOrReplace(waitUntil, name, content, context);
             return ProtocolOperationHelpers.Convert(response, User.FromResponse, ClientDiagnostics, "StandardClient.CreateOrReplace");
         }
 

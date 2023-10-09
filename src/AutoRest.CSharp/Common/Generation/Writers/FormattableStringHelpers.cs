@@ -17,6 +17,12 @@ namespace AutoRest.CSharp.Generation.Writers
 {
     internal static class FormattableStringHelpers
     {
+        public static FormattableString? FromString(string? s) =>
+            s is null ? null : s.Length == 0 ? $"" : (FormattableString)$"{s}";
+
+        public static bool IsNullOrEmpty(this FormattableString? fs) =>
+            fs is null || string.IsNullOrEmpty(fs.Format) && fs.ArgumentCount == 0;
+
         public static bool IsEmpty(this FormattableString fs) =>
             string.IsNullOrEmpty(fs.Format) && fs.ArgumentCount == 0;
 
@@ -85,25 +91,25 @@ namespace AutoRest.CSharp.Generation.Writers
 
         public static FormattableString GetConversionFormattable(this Parameter parameter, CSharpType toType)
         {
-            if (TypeFactory.IsReadWriteDictionary(parameter.Type) && toType.EqualsIgnoreNullable(typeof(RequestContent)))
+            if (toType.EqualsIgnoreNullable(typeof(RequestContent)))
             {
-                return $"{typeof(RequestContentHelper)}.{nameof(RequestContentHelper.FromDictionary)}({parameter.Name})";
-            }
-
-            if (TypeFactory.IsList(parameter.Type) && toType.EqualsIgnoreNullable(typeof(RequestContent)))
-            {
-                return $"{typeof(RequestContentHelper)}.{nameof(RequestContentHelper.FromEnumerable)}({parameter.Name})";
-            }
-
-            if (parameter.Type is { IsFrameworkType: false, Implementation: EnumType enumType } && toType.EqualsIgnoreNullable(typeof(RequestContent)))
-            {
-                if (enumType.IsExtensible)
+                switch (parameter.Type)
                 {
-                    return $"{typeof(BinaryData)}.{nameof(BinaryData.FromObjectAsJson)}({parameter.Name}.{enumType.SerializationMethodName}())";
-                }
-                else
-                {
-                    return $"{typeof(BinaryData)}.{nameof(BinaryData.FromObjectAsJson)}({(enumType.IsIntValueType ? $"({enumType.ValueType}){parameter.Name}" : $"{parameter.Name}.{enumType.SerializationMethodName}()")})";
+                    case { IsFrameworkType: true } when TypeFactory.IsReadWriteDictionary(parameter.Type):
+                        return $"{typeof(RequestContentHelper)}.{nameof(RequestContentHelper.FromDictionary)}({parameter.Name})";
+                    case { IsFrameworkType: true } when TypeFactory.IsList(parameter.Type):
+                        return $"{typeof(RequestContentHelper)}.{nameof(RequestContentHelper.FromEnumerable)}({parameter.Name})";
+                    case { IsFrameworkType: false, Implementation: EnumType enumType }:
+                        if (enumType.IsExtensible)
+                        {
+                            return $"{typeof(BinaryData)}.{nameof(BinaryData.FromObjectAsJson)}({parameter.Name}.{enumType.SerializationMethodName}())";
+                        }
+                        else
+                        {
+                            return $"{typeof(BinaryData)}.{nameof(BinaryData.FromObjectAsJson)}({(enumType.IsIntValueType ? $"({enumType.ValueType}){parameter.Name}" : $"{parameter.Name}.{enumType.SerializationMethodName}()")})";
+                        }
+                    case { IsFrameworkType: true }:
+                        return $"{typeof(RequestContentHelper)}.{nameof(RequestContentHelper.FromObject)}({parameter.Name})";
                 }
             }
 

@@ -45,7 +45,7 @@ This sample shows how to call CreateJobAsync and parse the result.
 <code><![CDATA[
 LegacyClient client = new LegacyClient();
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     comment = "<comment>",
 });
@@ -61,7 +61,7 @@ This sample shows how to call CreateJobAsync with all parameters and request con
 <code><![CDATA[
 LegacyClient client = new LegacyClient();
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     comment = "<comment>",
 });
@@ -85,7 +85,7 @@ This sample shows how to call CreateJob and parse the result.
 <code><![CDATA[
 LegacyClient client = new LegacyClient();
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     comment = "<comment>",
 });
@@ -101,7 +101,7 @@ This sample shows how to call CreateJob with all parameters and request content 
 <code><![CDATA[
 LegacyClient client = new LegacyClient();
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     comment = "<comment>",
 });

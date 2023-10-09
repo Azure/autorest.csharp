@@ -179,7 +179,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             }
 
             return new ObjectTypeConstructor(
-                Type.Name,
+                Type,
                 IsInheritableCommonType ? Protected : Internal,
                 serializationConstructorParameters.ToArray(),
                 serializationInitializers.ToArray(),
@@ -285,7 +285,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             }
 
             return new ObjectTypeConstructor(
-                Type.Name,
+                Type,
                 IsAbstract ? Protected : _usage.HasFlag(SchemaTypeUsage.Input) ? Public : Internal,
                 defaultCtorParameters.ToArray(),
                 defaultCtorInitializers.ToArray(),
@@ -340,7 +340,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             if (ObjectSchema.DiscriminatorValue != null)
             {
-                value = BuilderHelpers.ParseConstant(ObjectSchema.DiscriminatorValue, property.Declaration.Type.GetNonNullable());
+                value = BuilderHelpers.ParseConstant(ObjectSchema.DiscriminatorValue, property.Declaration.Type.WithNullable(false));
             }
 
             return new ObjectTypeDiscriminator(

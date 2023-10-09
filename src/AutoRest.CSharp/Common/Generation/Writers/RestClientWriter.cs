@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Common.Output.Models.Responses;
@@ -36,12 +37,12 @@ namespace AutoRest.CSharp.Generation.Writers
                         var protocolMethod = restClient.ProtocolMethods.FirstOrDefault(m => m.RequestMethod.Operation.Equals(method.Operation));
                         if (protocolMethod != null)
                         {
-                            LowLevelClientWriter.WriteProtocolMethods(writer, restClient.Fields, protocolMethod);
+                            DpgClientWriter.WriteProtocolMethods(writer, restClient.Fields, protocolMethod);
                             responseClassifierTypes.Add(protocolMethod.RequestMethod.ResponseClassifierType);
                         }
                     }
 
-                    LowLevelClientWriter.WriteResponseClassifierMethod(writer, responseClassifierTypes);
+                    DpgClientWriter.WriteResponseClassifierMethod(writer, responseClassifierTypes);
                 }
             }
         }
@@ -79,7 +80,7 @@ namespace AutoRest.CSharp.Generation.Writers
             };
 
             var parameters = operation.Parameters.Where(p => p.Name != KnownParameters.RequestContext.Name).Append(KnownParameters.CancellationTokenParameter).ToArray();
-            var method = new MethodSignature($"{methodName ?? operation.Name}", $"{operation.Summary}", $"{operation.Description}", modifiers, returnType, null, parameters).WithAsync(async);
+            var method = new MethodSignature($"{methodName ?? operation.Name}", FormattableStringHelpers.FromString(operation.Summary), FormattableStringHelpers.FromString(operation.Description), modifiers, returnType, null, parameters).WithAsync(async);
 
             writer.WriteXmlDocumentationSummary(method.SummaryText)
                 .WriteXmlDocumentationParameters(method.Parameters)

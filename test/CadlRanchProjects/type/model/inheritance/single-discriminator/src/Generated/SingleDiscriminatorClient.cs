@@ -146,7 +146,8 @@ namespace _Type.Model.Inheritance.SingleDiscriminator
             Argument.AssertNotNull(input, nameof(input));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await PutModelAsync(input.ToRequestContent(), context).ConfigureAwait(false);
+            using RequestContent content = input.ToRequestContent();
+            Response response = await PutModelAsync(content, context).ConfigureAwait(false);
             return response;
         }
 
@@ -159,7 +160,8 @@ namespace _Type.Model.Inheritance.SingleDiscriminator
             Argument.AssertNotNull(input, nameof(input));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = PutModel(input.ToRequestContent(), context);
+            using RequestContent content = input.ToRequestContent();
+            Response response = PutModel(content, context);
             return response;
         }
 
@@ -338,7 +340,8 @@ namespace _Type.Model.Inheritance.SingleDiscriminator
             Argument.AssertNotNull(input, nameof(input));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await PutRecursiveModelAsync(input.ToRequestContent(), context).ConfigureAwait(false);
+            using RequestContent content = input.ToRequestContent();
+            Response response = await PutRecursiveModelAsync(content, context).ConfigureAwait(false);
             return response;
         }
 
@@ -351,7 +354,8 @@ namespace _Type.Model.Inheritance.SingleDiscriminator
             Argument.AssertNotNull(input, nameof(input));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = PutRecursiveModel(input.ToRequestContent(), context);
+            using RequestContent content = input.ToRequestContent();
+            Response response = PutRecursiveModel(content, context);
             return response;
         }
 

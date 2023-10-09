@@ -79,21 +79,19 @@ This sample shows how to call PutAsync.
 <code><![CDATA[
 Int64Value client = new DictionaryClient().GetInt64ValueClient(apiVersion: "1.0.0");
 
-Response response = await client.PutAsync(new Dictionary<string, long>()
+Response response = await client.PutAsync(new Dictionary<string, long>
 {
-    ["key"] = 1234L,
+    ["key"] = 1234L
 });
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutAsync with all parameters.
 <code><![CDATA[
 Int64Value client = new DictionaryClient().GetInt64ValueClient(apiVersion: "1.0.0");
 
-Response response = await client.PutAsync(new Dictionary<string, long>()
+Response response = await client.PutAsync(new Dictionary<string, long>
 {
-    ["key"] = 1234L,
+    ["key"] = 1234L
 });
-Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="Put(IDictionary{string,long},CancellationToken)">
@@ -102,21 +100,19 @@ This sample shows how to call Put.
 <code><![CDATA[
 Int64Value client = new DictionaryClient().GetInt64ValueClient(apiVersion: "1.0.0");
 
-Response response = client.Put(new Dictionary<string, long>()
+Response response = client.Put(new Dictionary<string, long>
 {
-    ["key"] = 1234L,
+    ["key"] = 1234L
 });
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Put with all parameters.
 <code><![CDATA[
 Int64Value client = new DictionaryClient().GetInt64ValueClient(apiVersion: "1.0.0");
 
-Response response = client.Put(new Dictionary<string, long>()
+Response response = client.Put(new Dictionary<string, long>
 {
-    ["key"] = 1234L,
+    ["key"] = 1234L
 });
-Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="PutAsync(RequestContent,RequestContext)">
@@ -125,22 +121,24 @@ This sample shows how to call PutAsync.
 <code><![CDATA[
 Int64Value client = new DictionaryClient().GetInt64ValueClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     key = 1234L,
 });
 Response response = await client.PutAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutAsync with all request content.
 <code><![CDATA[
 Int64Value client = new DictionaryClient().GetInt64ValueClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     key = 1234L,
 });
 Response response = await client.PutAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -150,22 +148,24 @@ This sample shows how to call Put.
 <code><![CDATA[
 Int64Value client = new DictionaryClient().GetInt64ValueClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     key = 1234L,
 });
 Response response = client.Put(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Put with all request content.
 <code><![CDATA[
 Int64Value client = new DictionaryClient().GetInt64ValueClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     key = 1234L,
 });
 Response response = client.Put(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>

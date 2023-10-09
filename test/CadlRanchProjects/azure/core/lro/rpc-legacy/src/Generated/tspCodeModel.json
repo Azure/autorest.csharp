@@ -53,11 +53,29 @@
    "IsExtensible": true,
    "IsNullable": false,
    "Usage": "Output"
+  },
+  {
+   "$id": "9",
+   "Name": "Versions",
+   "EnumValueType": "String",
+   "AllowedValues": [
+    {
+     "$id": "10",
+     "Name": "v2022_12_01_preview",
+     "Value": "2022-12-01-preview",
+     "Description": "2022-12-01-preview"
+    }
+   ],
+   "Namespace": "_Specs_.Azure.Core.Lro.Rpc.Legacy",
+   "Description": "Versions of the service",
+   "IsExtensible": true,
+   "IsNullable": false,
+   "Usage": "None"
   }
  ],
  "Models": [
   {
-   "$id": "9",
+   "$id": "11",
    "Name": "JobData",
    "Namespace": "_Specs_.Azure.Core.Lro.Rpc.Legacy",
    "Description": "Data of the job",
@@ -65,12 +83,12 @@
    "Usage": "Input",
    "Properties": [
     {
-     "$id": "10",
+     "$id": "12",
      "Name": "comment",
      "SerializedName": "comment",
      "Description": "Comment.",
      "Type": {
-      "$id": "11",
+      "$id": "13",
       "Name": "string",
       "Kind": "String",
       "IsNullable": false
@@ -81,7 +99,7 @@
    ]
   },
   {
-   "$id": "12",
+   "$id": "14",
    "Name": "JobResult",
    "Namespace": "_Specs_.Azure.Core.Lro.Rpc.Legacy",
    "Description": "Result of the job",
@@ -89,24 +107,10 @@
    "Usage": "Output",
    "Properties": [
     {
-     "$id": "13",
+     "$id": "15",
      "Name": "jobId",
      "SerializedName": "jobId",
      "Description": "A processing job identifier.",
-     "Type": {
-      "$id": "14",
-      "Name": "string",
-      "Kind": "String",
-      "IsNullable": false
-     },
-     "IsRequired": true,
-     "IsReadOnly": true
-    },
-    {
-     "$id": "15",
-     "Name": "comment",
-     "SerializedName": "comment",
-     "Description": "Comment.",
      "Type": {
       "$id": "16",
       "Name": "string",
@@ -118,6 +122,20 @@
     },
     {
      "$id": "17",
+     "Name": "comment",
+     "SerializedName": "comment",
+     "Description": "Comment.",
+     "Type": {
+      "$id": "18",
+      "Name": "string",
+      "Kind": "String",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": true
+    },
+    {
+     "$id": "19",
      "Name": "status",
      "SerializedName": "status",
      "Description": "The status of the processing job.",
@@ -128,15 +146,15 @@
      "IsReadOnly": true
     },
     {
-     "$id": "18",
+     "$id": "20",
      "Name": "errors",
      "SerializedName": "errors",
      "Description": "Error objects that describes the error when status is \"Failed\".",
      "Type": {
-      "$id": "19",
+      "$id": "21",
       "Name": "Array",
       "ElementType": {
-       "$id": "20",
+       "$id": "22",
        "Name": "ErrorResponse",
        "Namespace": "Azure.Core.Foundations",
        "Description": "A response containing error details.",
@@ -144,12 +162,12 @@
        "Usage": "Output",
        "Properties": [
         {
-         "$id": "21",
+         "$id": "23",
          "Name": "error",
          "SerializedName": "error",
          "Description": "The error object.",
          "Type": {
-          "$id": "22",
+          "$id": "24",
           "Name": "Error",
           "Namespace": "Azure.Core.Foundations",
           "Description": "The error object.",
@@ -157,24 +175,10 @@
           "Usage": "Output",
           "Properties": [
            {
-            "$id": "23",
+            "$id": "25",
             "Name": "code",
             "SerializedName": "code",
             "Description": "One of a server-defined set of error codes.",
-            "Type": {
-             "$id": "24",
-             "Name": "string",
-             "Kind": "String",
-             "IsNullable": false
-            },
-            "IsRequired": true,
-            "IsReadOnly": false
-           },
-           {
-            "$id": "25",
-            "Name": "message",
-            "SerializedName": "message",
-            "Description": "A human-readable representation of the error.",
             "Type": {
              "$id": "26",
              "Name": "string",
@@ -186,11 +190,25 @@
            },
            {
             "$id": "27",
+            "Name": "message",
+            "SerializedName": "message",
+            "Description": "A human-readable representation of the error.",
+            "Type": {
+             "$id": "28",
+             "Name": "string",
+             "Kind": "String",
+             "IsNullable": false
+            },
+            "IsRequired": true,
+            "IsReadOnly": false
+           },
+           {
+            "$id": "29",
             "Name": "target",
             "SerializedName": "target",
             "Description": "The target of the error.",
             "Type": {
-             "$id": "28",
+             "$id": "30",
              "Name": "string",
              "Kind": "String",
              "IsNullable": false
@@ -199,15 +217,15 @@
             "IsReadOnly": false
            },
            {
-            "$id": "29",
+            "$id": "31",
             "Name": "details",
             "SerializedName": "details",
             "Description": "An array of details about specific errors that led to this reported error.",
             "Type": {
-             "$id": "30",
+             "$id": "32",
              "Name": "Array",
              "ElementType": {
-              "$ref": "22"
+              "$ref": "24"
              },
              "IsNullable": false
             },
@@ -215,12 +233,12 @@
             "IsReadOnly": false
            },
            {
-            "$id": "31",
+            "$id": "33",
             "Name": "innererror",
             "SerializedName": "innererror",
             "Description": "An object containing more specific information than the current object about the error.",
             "Type": {
-             "$id": "32",
+             "$id": "34",
              "Name": "InnerError",
              "Namespace": "Azure.Core.Foundations",
              "Description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
@@ -228,12 +246,12 @@
              "Usage": "Output",
              "Properties": [
               {
-               "$id": "33",
+               "$id": "35",
                "Name": "code",
                "SerializedName": "code",
                "Description": "One of a server-defined set of error codes.",
                "Type": {
-                "$id": "34",
+                "$id": "36",
                 "Name": "string",
                 "Kind": "String",
                 "IsNullable": false
@@ -242,12 +260,12 @@
                "IsReadOnly": false
               },
               {
-               "$id": "35",
+               "$id": "37",
                "Name": "InnerErrorObject",
                "SerializedName": "innererror",
                "Description": "Inner error.",
                "Type": {
-                "$ref": "32"
+                "$ref": "34"
                },
                "IsRequired": false,
                "IsReadOnly": false
@@ -270,15 +288,15 @@
      "IsReadOnly": true
     },
     {
-     "$id": "36",
+     "$id": "38",
      "Name": "results",
      "SerializedName": "results",
      "Description": "The results.",
      "Type": {
-      "$id": "37",
+      "$id": "39",
       "Name": "Array",
       "ElementType": {
-       "$id": "38",
+       "$id": "40",
        "Name": "string",
        "Kind": "String",
        "IsNullable": false
@@ -291,34 +309,34 @@
    ]
   },
   {
-   "$ref": "20"
-  },
-  {
    "$ref": "22"
   },
   {
-   "$ref": "32"
+   "$ref": "24"
+  },
+  {
+   "$ref": "34"
   }
  ],
  "Clients": [
   {
-   "$id": "39",
+   "$id": "41",
    "Name": "LegacyClient",
    "Description": "POST to create resource, poll URL via operation-location header.",
    "Operations": [
     {
-     "$id": "40",
+     "$id": "42",
      "Name": "createJob",
      "ResourceName": "CreateResourcePollViaOperationLocation",
      "Description": "Creates a Job",
      "Parameters": [
       {
-       "$id": "41",
+       "$id": "43",
        "Name": "host",
        "NameInRequest": "host",
        "Description": "TestServer endpoint",
        "Type": {
-        "$id": "42",
+        "$id": "44",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -333,9 +351,9 @@
        "Explode": false,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "43",
+        "$id": "45",
         "Type": {
-         "$id": "44",
+         "$id": "46",
          "Name": "String",
          "Kind": "String",
          "IsNullable": false
@@ -344,12 +362,12 @@
        }
       },
       {
-       "$id": "45",
+       "$id": "47",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Description": "",
        "Type": {
-        "$id": "46",
+        "$id": "48",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -364,9 +382,9 @@
        "Explode": false,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "47",
+        "$id": "49",
         "Type": {
-         "$id": "48",
+         "$id": "50",
          "Name": "String",
          "Kind": "String",
          "IsNullable": false
@@ -375,12 +393,12 @@
        }
       },
       {
-       "$id": "49",
+       "$id": "51",
        "Name": "JobData",
        "NameInRequest": "JobData",
        "Description": "Data of the job",
        "Type": {
-        "$ref": "9"
+        "$ref": "11"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -393,11 +411,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "50",
+       "$id": "52",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "51",
+        "$id": "53",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -412,19 +430,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "52",
+        "$id": "54",
         "Type": {
-         "$ref": "51"
+         "$ref": "53"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "53",
+       "$id": "55",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "54",
+        "$id": "56",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -439,9 +457,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "55",
+        "$id": "57",
         "Type": {
-         "$ref": "54"
+         "$ref": "56"
         },
         "Value": "application/json"
        }
@@ -449,43 +467,43 @@
      ],
      "Responses": [
       {
-       "$id": "56",
+       "$id": "58",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "12"
+        "$ref": "14"
        },
        "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false
       },
       {
-       "$id": "57",
+       "$id": "59",
        "StatusCodes": [
         202
        ],
        "BodyMediaType": "Json",
        "Headers": [
         {
-         "$id": "58",
+         "$id": "60",
          "Name": "Operation-Location",
          "NameInResponse": "operationLocation",
          "Description": "The location for monitoring the operation state.",
          "Type": {
-          "$id": "59",
+          "$id": "61",
           "Name": "ResourceLocation",
           "Kind": "Uri",
           "IsNullable": false
          }
         },
         {
-         "$id": "60",
+         "$id": "62",
          "Name": "Retry-After",
          "NameInResponse": "retryAfter",
          "Description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
          "Type": {
-          "$id": "61",
+          "$id": "63",
           "Name": "int32",
           "Kind": "Int32",
           "IsNullable": false
@@ -504,15 +522,15 @@
      ],
      "BufferResponse": true,
      "LongRunning": {
-      "$id": "62",
+      "$id": "64",
       "FinalStateVia": 3,
       "FinalResponse": {
-       "$id": "63",
+       "$id": "65",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "12"
+        "$ref": "14"
        },
        "BodyMediaType": "Json"
       }
@@ -522,7 +540,7 @@
     }
    ],
    "Protocol": {
-    "$id": "64"
+    "$id": "66"
    },
    "Creatable": true
   }
