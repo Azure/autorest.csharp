@@ -14,25 +14,27 @@ using Projection.ProjectedName;
 
 namespace Projection.ProjectedName.Samples
 {
-    public class Samples_ProjectedNameClient
+    public partial class Samples_ProjectedNameClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Operation()
+        public void Example_Operation_ShortVersion()
         {
             ProjectedNameClient client = new ProjectedNameClient();
 
             Response response = client.Operation();
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Operation_Async()
+        public async Task Example_Operation_ShortVersion_Async()
         {
             ProjectedNameClient client = new ProjectedNameClient();
 
             Response response = await client.OperationAsync();
+
             Console.WriteLine(response.Status);
         }
 
@@ -43,6 +45,7 @@ namespace Projection.ProjectedName.Samples
             ProjectedNameClient client = new ProjectedNameClient();
 
             Response response = client.Operation();
+
             Console.WriteLine(response.Status);
         }
 
@@ -53,26 +56,29 @@ namespace Projection.ProjectedName.Samples
             ProjectedNameClient client = new ProjectedNameClient();
 
             Response response = await client.OperationAsync();
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Parameter()
+        public void Example_Parameter_ShortVersion()
         {
             ProjectedNameClient client = new ProjectedNameClient();
 
             Response response = client.Parameter("<default-name>");
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Parameter_Async()
+        public async Task Example_Parameter_ShortVersion_Async()
         {
             ProjectedNameClient client = new ProjectedNameClient();
 
             Response response = await client.ParameterAsync("<default-name>");
+
             Console.WriteLine(response.Status);
         }
 
@@ -83,6 +89,7 @@ namespace Projection.ProjectedName.Samples
             ProjectedNameClient client = new ProjectedNameClient();
 
             Response response = client.Parameter("<default-name>");
+
             Console.WriteLine(response.Status);
         }
 
@@ -93,6 +100,7 @@ namespace Projection.ProjectedName.Samples
             ProjectedNameClient client = new ProjectedNameClient();
 
             Response response = await client.ParameterAsync("<default-name>");
+
             Console.WriteLine(response.Status);
         }
     }

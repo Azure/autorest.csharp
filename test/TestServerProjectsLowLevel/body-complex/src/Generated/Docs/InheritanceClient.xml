@@ -66,8 +66,9 @@ This sample shows how to call PutValidAsync.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 InheritanceClient client = new InheritanceClient(credential);
 
-RequestContent content = RequestContent.Create(new object());
+using RequestContent content = RequestContent.Create(new object());
 Response response = await client.PutValidAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutValidAsync with all request content.
@@ -75,11 +76,11 @@ This sample shows how to call PutValidAsync with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 InheritanceClient client = new InheritanceClient(credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     breed = "<breed>",
     color = "<color>",
-    hates = new List<object>()
+    hates = new object[]
     {
         new
         {
@@ -92,6 +93,7 @@ RequestContent content = RequestContent.Create(new
     name = "<name>",
 });
 Response response = await client.PutValidAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -102,8 +104,9 @@ This sample shows how to call PutValid.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 InheritanceClient client = new InheritanceClient(credential);
 
-RequestContent content = RequestContent.Create(new object());
+using RequestContent content = RequestContent.Create(new object());
 Response response = client.PutValid(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutValid with all request content.
@@ -111,11 +114,11 @@ This sample shows how to call PutValid with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 InheritanceClient client = new InheritanceClient(credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     breed = "<breed>",
     color = "<color>",
-    hates = new List<object>()
+    hates = new object[]
     {
         new
         {
@@ -128,6 +131,7 @@ RequestContent content = RequestContent.Create(new
     name = "<name>",
 });
 Response response = client.PutValid(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>

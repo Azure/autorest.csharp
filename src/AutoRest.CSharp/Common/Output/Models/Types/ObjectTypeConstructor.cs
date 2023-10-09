@@ -3,9 +3,8 @@
 
 using System;
 using System.Linq;
-using AutoRest.CSharp.Output.Models.Requests;
+using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models.Shared;
-using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 
 namespace AutoRest.CSharp.Output.Models.Types
 {
@@ -18,11 +17,11 @@ namespace AutoRest.CSharp.Output.Models.Types
             BaseConstructor = baseConstructor;
         }
 
-        public ObjectTypeConstructor(string name, MethodSignatureModifiers modifiers, Parameter[] parameters, ObjectPropertyInitializer[] initializers, ObjectTypeConstructor? baseConstructor = null)
+        public ObjectTypeConstructor(CSharpType type, MethodSignatureModifiers modifiers, Parameter[] parameters, ObjectPropertyInitializer[] initializers, ObjectTypeConstructor? baseConstructor = null)
             : this(
                  new ConstructorSignature(
-                     name,
-                     $"Initializes a new instance of {name}",
+                     type,
+                     $"Initializes a new instance of {type.Name}",
                      null,
                      modifiers,
                      parameters,

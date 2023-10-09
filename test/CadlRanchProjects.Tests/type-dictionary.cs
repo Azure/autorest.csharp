@@ -201,5 +201,26 @@ namespace CadlRanchProjects.Tests
             });
             Assert.AreEqual(204, response.Status);
         });
+
+        [Test]
+        public Task Type_Dictionary_NullableFloatValue_get() => Test(async (host) =>
+        {
+            var response = await new DictionaryClient(host, null).GetNullableFloatValueClient().GetNullableFloatValueAsync();
+            Assert.AreEqual(1.2f, response.Value["k1"]);
+            Assert.AreEqual(0.5f, response.Value["k2"]);
+            Assert.AreEqual(null, response.Value["k3"]);
+        });
+
+        [Test]
+        public Task Type_Dictionary_NullableFloatValue_put() => Test(async (host) =>
+        {
+            var response = await new DictionaryClient(host, null).GetNullableFloatValueClient().PutAsync(new Dictionary<string, float?>()
+            {
+                {"k1", 1.2f },
+                {"k2", 0.5f },
+                {"k3", null }
+            });
+            Assert.AreEqual(204, response.Status);
+        });
     }
 }

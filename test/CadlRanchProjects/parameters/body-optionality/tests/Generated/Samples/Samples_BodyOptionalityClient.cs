@@ -16,56 +16,56 @@ using Parameters.BodyOptionality.Models;
 
 namespace Parameters.BodyOptionality.Samples
 {
-    public class Samples_BodyOptionalityClient
+    public partial class Samples_BodyOptionalityClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_RequiredExplicit()
+        public void Example_RequiredExplicit_ShortVersion()
         {
             BodyOptionalityClient client = new BodyOptionalityClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
             });
             Response response = client.RequiredExplicit(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_RequiredExplicit_Async()
+        public async Task Example_RequiredExplicit_ShortVersion_Async()
         {
             BodyOptionalityClient client = new BodyOptionalityClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
             });
             Response response = await client.RequiredExplicitAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_RequiredExplicit_Convenience()
+        public void Example_RequiredExplicit_ShortVersion_Convenience()
         {
             BodyOptionalityClient client = new BodyOptionalityClient();
 
             BodyModel body = new BodyModel("<name>");
             Response response = client.RequiredExplicit(body);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_RequiredExplicit_Convenience_Async()
+        public async Task Example_RequiredExplicit_ShortVersion_Convenience_Async()
         {
             BodyOptionalityClient client = new BodyOptionalityClient();
 
             BodyModel body = new BodyModel("<name>");
             Response response = await client.RequiredExplicitAsync(body);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -74,11 +74,12 @@ namespace Parameters.BodyOptionality.Samples
         {
             BodyOptionalityClient client = new BodyOptionalityClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
             });
             Response response = client.RequiredExplicit(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -88,11 +89,12 @@ namespace Parameters.BodyOptionality.Samples
         {
             BodyOptionalityClient client = new BodyOptionalityClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
             });
             Response response = await client.RequiredExplicitAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -104,7 +106,6 @@ namespace Parameters.BodyOptionality.Samples
 
             BodyModel body = new BodyModel("<name>");
             Response response = client.RequiredExplicit(body);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -115,57 +116,56 @@ namespace Parameters.BodyOptionality.Samples
 
             BodyModel body = new BodyModel("<name>");
             Response response = await client.RequiredExplicitAsync(body);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_RequiredImplicit()
+        public void Example_RequiredImplicit_ShortVersion()
         {
             BodyOptionalityClient client = new BodyOptionalityClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
             });
             Response response = client.RequiredImplicit(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_RequiredImplicit_Async()
+        public async Task Example_RequiredImplicit_ShortVersion_Async()
         {
             BodyOptionalityClient client = new BodyOptionalityClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
             });
             Response response = await client.RequiredImplicitAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_RequiredImplicit_Convenience()
+        public void Example_RequiredImplicit_ShortVersion_Convenience()
         {
             BodyOptionalityClient client = new BodyOptionalityClient();
 
             BodyModel bodyModel = new BodyModel("<name>");
             Response response = client.RequiredImplicit(bodyModel);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_RequiredImplicit_Convenience_Async()
+        public async Task Example_RequiredImplicit_ShortVersion_Convenience_Async()
         {
             BodyOptionalityClient client = new BodyOptionalityClient();
 
             BodyModel bodyModel = new BodyModel("<name>");
             Response response = await client.RequiredImplicitAsync(bodyModel);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -174,11 +174,12 @@ namespace Parameters.BodyOptionality.Samples
         {
             BodyOptionalityClient client = new BodyOptionalityClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
             });
             Response response = client.RequiredImplicit(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -188,11 +189,12 @@ namespace Parameters.BodyOptionality.Samples
         {
             BodyOptionalityClient client = new BodyOptionalityClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
             });
             Response response = await client.RequiredImplicitAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -204,7 +206,6 @@ namespace Parameters.BodyOptionality.Samples
 
             BodyModel bodyModel = new BodyModel("<name>");
             Response response = client.RequiredImplicit(bodyModel);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -215,7 +216,6 @@ namespace Parameters.BodyOptionality.Samples
 
             BodyModel bodyModel = new BodyModel("<name>");
             Response response = await client.RequiredImplicitAsync(bodyModel);
-            Console.WriteLine(response.Status);
         }
     }
 }

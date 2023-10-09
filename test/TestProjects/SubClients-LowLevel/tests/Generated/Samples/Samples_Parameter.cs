@@ -15,11 +15,11 @@ using SubClients_LowLevel;
 
 namespace SubClients_LowLevel.Samples
 {
-    internal class Samples_Parameter
+    public partial class Samples_Parameter
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetSubParameter()
+        public void Example_GetSubParameter_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Parameter client = new RootClient(null, credential).GetParameterClient();
@@ -32,7 +32,7 @@ namespace SubClients_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetSubParameter_Async()
+        public async Task Example_GetSubParameter_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Parameter client = new RootClient(null, credential).GetParameterClient();

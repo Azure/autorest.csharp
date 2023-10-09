@@ -14,25 +14,27 @@ using SpecialWords;
 
 namespace SpecialWords.Samples
 {
-    internal class Samples_Parameter
+    public partial class Samples_Parameter
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetWithIf()
+        public void Example_GetWithIf_ShortVersion()
         {
             Parameter client = new SpecialWordsClient().GetParameterClient(apiVersion: "1.0.0");
 
             Response response = client.GetWithIf("<if>");
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetWithIf_Async()
+        public async Task Example_GetWithIf_ShortVersion_Async()
         {
             Parameter client = new SpecialWordsClient().GetParameterClient(apiVersion: "1.0.0");
 
             Response response = await client.GetWithIfAsync("<if>");
+
             Console.WriteLine(response.Status);
         }
 
@@ -43,6 +45,7 @@ namespace SpecialWords.Samples
             Parameter client = new SpecialWordsClient().GetParameterClient(apiVersion: "1.0.0");
 
             Response response = client.GetWithIf("<if>");
+
             Console.WriteLine(response.Status);
         }
 
@@ -53,26 +56,29 @@ namespace SpecialWords.Samples
             Parameter client = new SpecialWordsClient().GetParameterClient(apiVersion: "1.0.0");
 
             Response response = await client.GetWithIfAsync("<if>");
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetWithFilter()
+        public void Example_GetWithFilter_ShortVersion()
         {
             Parameter client = new SpecialWordsClient().GetParameterClient(apiVersion: "1.0.0");
 
             Response response = client.GetWithFilter("<filter>");
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetWithFilter_Async()
+        public async Task Example_GetWithFilter_ShortVersion_Async()
         {
             Parameter client = new SpecialWordsClient().GetParameterClient(apiVersion: "1.0.0");
 
             Response response = await client.GetWithFilterAsync("<filter>");
+
             Console.WriteLine(response.Status);
         }
 
@@ -83,6 +89,7 @@ namespace SpecialWords.Samples
             Parameter client = new SpecialWordsClient().GetParameterClient(apiVersion: "1.0.0");
 
             Response response = client.GetWithFilter("<filter>");
+
             Console.WriteLine(response.Status);
         }
 
@@ -93,6 +100,7 @@ namespace SpecialWords.Samples
             Parameter client = new SpecialWordsClient().GetParameterClient(apiVersion: "1.0.0");
 
             Response response = await client.GetWithFilterAsync("<filter>");
+
             Console.WriteLine(response.Status);
         }
     }

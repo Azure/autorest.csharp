@@ -8,14 +8,12 @@ This sample shows how to call SpreadAsRequestBodyAsync.
 Alias client = new SpreadClient().GetAliasClient(apiVersion: "1.0.0");
 
 Response response = await client.SpreadAsRequestBodyAsync("<name>");
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call SpreadAsRequestBodyAsync with all parameters.
 <code><![CDATA[
 Alias client = new SpreadClient().GetAliasClient(apiVersion: "1.0.0");
 
 Response response = await client.SpreadAsRequestBodyAsync("<name>");
-Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="SpreadAsRequestBody(string,CancellationToken)">
@@ -25,14 +23,12 @@ This sample shows how to call SpreadAsRequestBody.
 Alias client = new SpreadClient().GetAliasClient(apiVersion: "1.0.0");
 
 Response response = client.SpreadAsRequestBody("<name>");
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call SpreadAsRequestBody with all parameters.
 <code><![CDATA[
 Alias client = new SpreadClient().GetAliasClient(apiVersion: "1.0.0");
 
 Response response = client.SpreadAsRequestBody("<name>");
-Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="SpreadAsRequestBodyAsync(RequestContent,RequestContext)">
@@ -41,22 +37,24 @@ This sample shows how to call SpreadAsRequestBodyAsync.
 <code><![CDATA[
 Alias client = new SpreadClient().GetAliasClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     name = "<name>",
 });
 Response response = await client.SpreadAsRequestBodyAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call SpreadAsRequestBodyAsync with all request content.
 <code><![CDATA[
 Alias client = new SpreadClient().GetAliasClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     name = "<name>",
 });
 Response response = await client.SpreadAsRequestBodyAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -66,22 +64,24 @@ This sample shows how to call SpreadAsRequestBody.
 <code><![CDATA[
 Alias client = new SpreadClient().GetAliasClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     name = "<name>",
 });
 Response response = client.SpreadAsRequestBody(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call SpreadAsRequestBody with all request content.
 <code><![CDATA[
 Alias client = new SpreadClient().GetAliasClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     name = "<name>",
 });
 Response response = client.SpreadAsRequestBody(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -92,14 +92,12 @@ This sample shows how to call SpreadAsRequestParameterAsync.
 Alias client = new SpreadClient().GetAliasClient(apiVersion: "1.0.0");
 
 Response response = await client.SpreadAsRequestParameterAsync("<id>", "<x-ms-test-header>", "<name>");
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call SpreadAsRequestParameterAsync with all parameters.
 <code><![CDATA[
 Alias client = new SpreadClient().GetAliasClient(apiVersion: "1.0.0");
 
 Response response = await client.SpreadAsRequestParameterAsync("<id>", "<x-ms-test-header>", "<name>");
-Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="SpreadAsRequestParameter(string,string,string,CancellationToken)">
@@ -109,14 +107,12 @@ This sample shows how to call SpreadAsRequestParameter.
 Alias client = new SpreadClient().GetAliasClient(apiVersion: "1.0.0");
 
 Response response = client.SpreadAsRequestParameter("<id>", "<x-ms-test-header>", "<name>");
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call SpreadAsRequestParameter with all parameters.
 <code><![CDATA[
 Alias client = new SpreadClient().GetAliasClient(apiVersion: "1.0.0");
 
 Response response = client.SpreadAsRequestParameter("<id>", "<x-ms-test-header>", "<name>");
-Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="SpreadAsRequestParameterAsync(string,string,RequestContent,RequestContext)">
@@ -125,22 +121,24 @@ This sample shows how to call SpreadAsRequestParameterAsync.
 <code><![CDATA[
 Alias client = new SpreadClient().GetAliasClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     name = "<name>",
 });
 Response response = await client.SpreadAsRequestParameterAsync("<id>", "<x-ms-test-header>", content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call SpreadAsRequestParameterAsync with all parameters and request content.
 <code><![CDATA[
 Alias client = new SpreadClient().GetAliasClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     name = "<name>",
 });
 Response response = await client.SpreadAsRequestParameterAsync("<id>", "<x-ms-test-header>", content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -150,22 +148,24 @@ This sample shows how to call SpreadAsRequestParameter.
 <code><![CDATA[
 Alias client = new SpreadClient().GetAliasClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     name = "<name>",
 });
 Response response = client.SpreadAsRequestParameter("<id>", "<x-ms-test-header>", content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call SpreadAsRequestParameter with all parameters and request content.
 <code><![CDATA[
 Alias client = new SpreadClient().GetAliasClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     name = "<name>",
 });
 Response response = client.SpreadAsRequestParameter("<id>", "<x-ms-test-header>", content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -176,14 +176,12 @@ This sample shows how to call SpreadWithMultipleParametersAsync.
 Alias client = new SpreadClient().GetAliasClient(apiVersion: "1.0.0");
 
 Response response = await client.SpreadWithMultipleParametersAsync("<id>", "<x-ms-test-header>", "<prop1>", "<prop2>", "<prop3>", "<prop4>", "<prop5>", "<prop6>");
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call SpreadWithMultipleParametersAsync with all parameters.
 <code><![CDATA[
 Alias client = new SpreadClient().GetAliasClient(apiVersion: "1.0.0");
 
 Response response = await client.SpreadWithMultipleParametersAsync("<id>", "<x-ms-test-header>", "<prop1>", "<prop2>", "<prop3>", "<prop4>", "<prop5>", "<prop6>");
-Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="SpreadWithMultipleParameters(string,string,string,string,string,string,string,string,CancellationToken)">
@@ -193,14 +191,12 @@ This sample shows how to call SpreadWithMultipleParameters.
 Alias client = new SpreadClient().GetAliasClient(apiVersion: "1.0.0");
 
 Response response = client.SpreadWithMultipleParameters("<id>", "<x-ms-test-header>", "<prop1>", "<prop2>", "<prop3>", "<prop4>", "<prop5>", "<prop6>");
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call SpreadWithMultipleParameters with all parameters.
 <code><![CDATA[
 Alias client = new SpreadClient().GetAliasClient(apiVersion: "1.0.0");
 
 Response response = client.SpreadWithMultipleParameters("<id>", "<x-ms-test-header>", "<prop1>", "<prop2>", "<prop3>", "<prop4>", "<prop5>", "<prop6>");
-Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="SpreadWithMultipleParametersAsync(string,string,RequestContent,RequestContext)">
@@ -209,7 +205,7 @@ This sample shows how to call SpreadWithMultipleParametersAsync.
 <code><![CDATA[
 Alias client = new SpreadClient().GetAliasClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     prop1 = "<prop1>",
     prop2 = "<prop2>",
@@ -219,13 +215,14 @@ RequestContent content = RequestContent.Create(new
     prop6 = "<prop6>",
 });
 Response response = await client.SpreadWithMultipleParametersAsync("<id>", "<x-ms-test-header>", content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call SpreadWithMultipleParametersAsync with all parameters and request content.
 <code><![CDATA[
 Alias client = new SpreadClient().GetAliasClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     prop1 = "<prop1>",
     prop2 = "<prop2>",
@@ -235,6 +232,7 @@ RequestContent content = RequestContent.Create(new
     prop6 = "<prop6>",
 });
 Response response = await client.SpreadWithMultipleParametersAsync("<id>", "<x-ms-test-header>", content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -244,7 +242,7 @@ This sample shows how to call SpreadWithMultipleParameters.
 <code><![CDATA[
 Alias client = new SpreadClient().GetAliasClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     prop1 = "<prop1>",
     prop2 = "<prop2>",
@@ -254,13 +252,14 @@ RequestContent content = RequestContent.Create(new
     prop6 = "<prop6>",
 });
 Response response = client.SpreadWithMultipleParameters("<id>", "<x-ms-test-header>", content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call SpreadWithMultipleParameters with all parameters and request content.
 <code><![CDATA[
 Alias client = new SpreadClient().GetAliasClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     prop1 = "<prop1>",
     prop2 = "<prop2>",
@@ -270,6 +269,7 @@ RequestContent content = RequestContent.Create(new
     prop6 = "<prop6>",
 });
 Response response = client.SpreadWithMultipleParameters("<id>", "<x-ms-test-header>", content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
