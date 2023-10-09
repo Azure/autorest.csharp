@@ -20,8 +20,7 @@ namespace Client.Structure.Service.rename.operation.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_RenamedOne_ShortVersion()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            RenamedOperationClient client = new RenamedOperationClient(endpoint, "default");
+            RenamedOperationClient client = new RenamedOperationClient("default");
 
             Response response = client.RenamedOne();
 
@@ -32,8 +31,7 @@ namespace Client.Structure.Service.rename.operation.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_RenamedOne_ShortVersion_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            RenamedOperationClient client = new RenamedOperationClient(endpoint, "default");
+            RenamedOperationClient client = new RenamedOperationClient("default");
 
             Response response = await client.RenamedOneAsync();
 
@@ -44,8 +42,7 @@ namespace Client.Structure.Service.rename.operation.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_RenamedOne_AllParameters()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            RenamedOperationClient client = new RenamedOperationClient(endpoint, "default");
+            RenamedOperationClient client = new RenamedOperationClient("default");
 
             Response response = client.RenamedOne();
 
@@ -56,8 +53,7 @@ namespace Client.Structure.Service.rename.operation.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_RenamedOne_AllParameters_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            RenamedOperationClient client = new RenamedOperationClient(endpoint, "default");
+            RenamedOperationClient client = new RenamedOperationClient("default");
 
             Response response = await client.RenamedOneAsync();
 
@@ -68,8 +64,7 @@ namespace Client.Structure.Service.rename.operation.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_RenamedThree_ShortVersion()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            RenamedOperationClient client = new RenamedOperationClient(endpoint, "default");
+            RenamedOperationClient client = new RenamedOperationClient("default");
 
             Response response = client.RenamedThree();
 
@@ -80,8 +75,7 @@ namespace Client.Structure.Service.rename.operation.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_RenamedThree_ShortVersion_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            RenamedOperationClient client = new RenamedOperationClient(endpoint, "default");
+            RenamedOperationClient client = new RenamedOperationClient("default");
 
             Response response = await client.RenamedThreeAsync();
 
@@ -92,8 +86,7 @@ namespace Client.Structure.Service.rename.operation.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_RenamedThree_AllParameters()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            RenamedOperationClient client = new RenamedOperationClient(endpoint, "default");
+            RenamedOperationClient client = new RenamedOperationClient("default");
 
             Response response = client.RenamedThree();
 
@@ -104,8 +97,7 @@ namespace Client.Structure.Service.rename.operation.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_RenamedThree_AllParameters_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            RenamedOperationClient client = new RenamedOperationClient(endpoint, "default");
+            RenamedOperationClient client = new RenamedOperationClient("default");
 
             Response response = await client.RenamedThreeAsync();
 
@@ -116,8 +108,7 @@ namespace Client.Structure.Service.rename.operation.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_RenamedFive_ShortVersion()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            RenamedOperationClient client = new RenamedOperationClient(endpoint, "default");
+            RenamedOperationClient client = new RenamedOperationClient("default");
 
             Response response = client.RenamedFive();
 
@@ -128,8 +119,7 @@ namespace Client.Structure.Service.rename.operation.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_RenamedFive_ShortVersion_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            RenamedOperationClient client = new RenamedOperationClient(endpoint, "default");
+            RenamedOperationClient client = new RenamedOperationClient("default");
 
             Response response = await client.RenamedFiveAsync();
 
@@ -140,8 +130,7 @@ namespace Client.Structure.Service.rename.operation.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_RenamedFive_AllParameters()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            RenamedOperationClient client = new RenamedOperationClient(endpoint, "default");
+            RenamedOperationClient client = new RenamedOperationClient("default");
 
             Response response = client.RenamedFive();
 
@@ -152,8 +141,7 @@ namespace Client.Structure.Service.rename.operation.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_RenamedFive_AllParameters_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            RenamedOperationClient client = new RenamedOperationClient(endpoint, "default");
+            RenamedOperationClient client = new RenamedOperationClient("default");
 
             Response response = await client.RenamedFiveAsync();
 

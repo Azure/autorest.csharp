@@ -22,7 +22,7 @@ namespace ConvenienceInCadl.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task UpdateConvenience_ShortVersion()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
@@ -31,7 +31,7 @@ namespace ConvenienceInCadl.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task UpdateConvenience_ShortVersion_Convenience()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
@@ -40,7 +40,7 @@ namespace ConvenienceInCadl.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task UpdateConvenience_AllParameters()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
@@ -49,7 +49,7 @@ namespace ConvenienceInCadl.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task UpdateConvenience_AllParameters_Convenience()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
@@ -58,7 +58,7 @@ namespace ConvenienceInCadl.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task ConvenienceOptionalBeforeRequired_ShortVersion()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
@@ -71,7 +71,7 @@ namespace ConvenienceInCadl.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task ConvenienceOptionalBeforeRequired_ShortVersion_Convenience()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
@@ -81,7 +81,7 @@ namespace ConvenienceInCadl.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task ConvenienceOptionalBeforeRequired_AllParameters()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
@@ -94,7 +94,7 @@ namespace ConvenienceInCadl.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task ConvenienceOptionalBeforeRequired_AllParameters_Convenience()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
@@ -104,7 +104,7 @@ namespace ConvenienceInCadl.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task NoConvenience_ShortVersion()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
@@ -113,7 +113,7 @@ namespace ConvenienceInCadl.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task NoConvenience_AllParameters()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
@@ -122,7 +122,7 @@ namespace ConvenienceInCadl.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task NoConvenienceRequiredBody_ShortVersion()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
@@ -135,7 +135,7 @@ namespace ConvenienceInCadl.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task NoConvenienceRequiredBody_AllParameters()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
@@ -148,7 +148,7 @@ namespace ConvenienceInCadl.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task NoConvenienceOptionalBody_ShortVersion()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
@@ -158,7 +158,7 @@ namespace ConvenienceInCadl.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task NoConvenienceOptionalBody_AllParameters()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
@@ -171,7 +171,7 @@ namespace ConvenienceInCadl.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task Protocol_ShortVersion()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
@@ -180,7 +180,7 @@ namespace ConvenienceInCadl.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task ProtocolValue_ShortVersion_Convenience()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
@@ -189,7 +189,7 @@ namespace ConvenienceInCadl.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task Protocol_AllParameters()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
@@ -198,7 +198,7 @@ namespace ConvenienceInCadl.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task ProtocolValue_AllParameters_Convenience()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
@@ -207,7 +207,7 @@ namespace ConvenienceInCadl.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task ConvenienceWithOptional_ShortVersion()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
@@ -216,7 +216,7 @@ namespace ConvenienceInCadl.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task ConvenienceWithOptionalValue_ShortVersion_Convenience()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
@@ -225,7 +225,7 @@ namespace ConvenienceInCadl.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task ConvenienceWithOptional_AllParameters()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
@@ -234,7 +234,7 @@ namespace ConvenienceInCadl.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task ConvenienceWithOptionalValue_AllParameters_Convenience()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
@@ -243,7 +243,7 @@ namespace ConvenienceInCadl.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task ConvenienceWithRequired_ShortVersion()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
@@ -252,7 +252,7 @@ namespace ConvenienceInCadl.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task ConvenienceWithRequired_ShortVersion_Convenience()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
@@ -261,7 +261,7 @@ namespace ConvenienceInCadl.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task ConvenienceWithRequired_AllParameters()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
@@ -270,7 +270,7 @@ namespace ConvenienceInCadl.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task ConvenienceWithRequired_AllParameters_Convenience()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
@@ -279,7 +279,7 @@ namespace ConvenienceInCadl.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task ConvenienceShouldNotGenerate_ShortVersion()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
@@ -288,7 +288,7 @@ namespace ConvenienceInCadl.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task ConvenienceShouldNotGenerate_AllParameters()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
@@ -297,7 +297,7 @@ namespace ConvenienceInCadl.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task ProtocolShouldNotGenerateConvenience_ShortVersion()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
@@ -306,7 +306,7 @@ namespace ConvenienceInCadl.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task ProtocolShouldNotGenerateConvenience_AllParameters()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
@@ -315,7 +315,7 @@ namespace ConvenienceInCadl.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task ProtocolOptionalQuery_ShortVersion()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
@@ -324,7 +324,7 @@ namespace ConvenienceInCadl.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task ProtocolOptionalQueryValue_ShortVersion_Convenience()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
@@ -333,7 +333,7 @@ namespace ConvenienceInCadl.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task ProtocolOptionalQuery_AllParameters()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
@@ -342,7 +342,7 @@ namespace ConvenienceInCadl.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task ProtocolOptionalQueryValue_AllParameters_Convenience()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
@@ -351,7 +351,7 @@ namespace ConvenienceInCadl.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task ProtocolRequiredQuery_ShortVersion()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
@@ -360,7 +360,7 @@ namespace ConvenienceInCadl.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task ProtocolRequiredQueryValue_ShortVersion_Convenience()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
@@ -369,7 +369,7 @@ namespace ConvenienceInCadl.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task ProtocolRequiredQuery_AllParameters()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
@@ -378,7 +378,7 @@ namespace ConvenienceInCadl.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task ProtocolRequiredQueryValue_AllParameters_Convenience()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
@@ -387,7 +387,7 @@ namespace ConvenienceInCadl.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task ProtocolOptionalModel_ShortVersion()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
@@ -397,7 +397,7 @@ namespace ConvenienceInCadl.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task ProtocolOptionalModel_ShortVersion_Convenience()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
@@ -406,7 +406,7 @@ namespace ConvenienceInCadl.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task ProtocolOptionalModel_AllParameters()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
@@ -419,7 +419,7 @@ namespace ConvenienceInCadl.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task ProtocolOptionalModel_AllParameters_Convenience()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
@@ -429,7 +429,7 @@ namespace ConvenienceInCadl.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task ProtocolRequiredModel_ShortVersion()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
@@ -442,7 +442,7 @@ namespace ConvenienceInCadl.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task ProtocolRequiredModel_ShortVersion_Convenience()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
@@ -452,7 +452,7 @@ namespace ConvenienceInCadl.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task ProtocolRequiredModel_AllParameters()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
@@ -465,7 +465,7 @@ namespace ConvenienceInCadl.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task ProtocolRequiredModel_AllParameters_Convenience()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
@@ -475,7 +475,7 @@ namespace ConvenienceInCadl.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task ConvenienceOptionalQueryWithOptional_ShortVersion()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
@@ -484,7 +484,7 @@ namespace ConvenienceInCadl.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task ConvenienceOptionalQueryWithOptionalValue_ShortVersion_Convenience()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
@@ -493,7 +493,7 @@ namespace ConvenienceInCadl.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task ConvenienceOptionalQueryWithOptional_AllParameters()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
@@ -502,7 +502,7 @@ namespace ConvenienceInCadl.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task ConvenienceOptionalQueryWithOptionalValue_AllParameters_Convenience()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
@@ -511,7 +511,7 @@ namespace ConvenienceInCadl.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task ConvenienceRequiredQueryWithOptional_ShortVersion()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
@@ -520,7 +520,7 @@ namespace ConvenienceInCadl.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task ConvenienceRequiredQueryWithOptionalValue_ShortVersion_Convenience()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
@@ -529,7 +529,7 @@ namespace ConvenienceInCadl.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task ConvenienceRequiredQueryWithOptional_AllParameters()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
@@ -538,7 +538,7 @@ namespace ConvenienceInCadl.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task ConvenienceRequiredQueryWithOptionalValue_AllParameters_Convenience()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
@@ -547,7 +547,7 @@ namespace ConvenienceInCadl.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task ConvenienceOptionalQueryWithRequired_ShortVersion()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
@@ -556,7 +556,7 @@ namespace ConvenienceInCadl.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task ConvenienceOptionalQueryWithRequired_ShortVersion_Convenience()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
@@ -565,7 +565,7 @@ namespace ConvenienceInCadl.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task ConvenienceOptionalQueryWithRequired_AllParameters()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
@@ -574,7 +574,7 @@ namespace ConvenienceInCadl.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task ConvenienceOptionalQueryWithRequired_AllParameters_Convenience()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
@@ -583,7 +583,7 @@ namespace ConvenienceInCadl.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task ConvenienceRequiredQueryWithRequired_ShortVersion()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
@@ -592,7 +592,7 @@ namespace ConvenienceInCadl.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task ConvenienceRequiredQueryWithRequired_ShortVersion_Convenience()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
@@ -601,7 +601,7 @@ namespace ConvenienceInCadl.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task ConvenienceRequiredQueryWithRequired_AllParameters()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
@@ -610,7 +610,7 @@ namespace ConvenienceInCadl.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task ConvenienceRequiredQueryWithRequired_AllParameters_Convenience()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
@@ -619,7 +619,7 @@ namespace ConvenienceInCadl.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task ConvenienceOptionalModelWithOptional_ShortVersion()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
@@ -629,7 +629,7 @@ namespace ConvenienceInCadl.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task ConvenienceOptionalModelWithOptional_ShortVersion_Convenience()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
@@ -638,7 +638,7 @@ namespace ConvenienceInCadl.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task ConvenienceOptionalModelWithOptional_AllParameters()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
@@ -651,7 +651,7 @@ namespace ConvenienceInCadl.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task ConvenienceOptionalModelWithOptional_AllParameters_Convenience()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
@@ -661,7 +661,7 @@ namespace ConvenienceInCadl.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task ConvenienceRequiredModelWithOptional_ShortVersion()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
@@ -674,7 +674,7 @@ namespace ConvenienceInCadl.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task ConvenienceRequiredModelWithOptional_ShortVersion_Convenience()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
@@ -684,7 +684,7 @@ namespace ConvenienceInCadl.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task ConvenienceRequiredModelWithOptional_AllParameters()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
@@ -697,7 +697,7 @@ namespace ConvenienceInCadl.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task ConvenienceRequiredModelWithOptional_AllParameters_Convenience()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
@@ -707,7 +707,7 @@ namespace ConvenienceInCadl.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task ConvenienceOptionalModelWithRequired_ShortVersion()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
@@ -717,7 +717,7 @@ namespace ConvenienceInCadl.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task ConvenienceOptionalModelWithRequired_ShortVersion_Convenience()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
@@ -726,7 +726,7 @@ namespace ConvenienceInCadl.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task ConvenienceOptionalModelWithRequired_AllParameters()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
@@ -739,7 +739,7 @@ namespace ConvenienceInCadl.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task ConvenienceOptionalModelWithRequired_AllParameters_Convenience()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
@@ -749,7 +749,7 @@ namespace ConvenienceInCadl.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task ProtocolOptionalBeforeRequired_ShortVersion()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
@@ -762,7 +762,7 @@ namespace ConvenienceInCadl.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task ProtocolOptionalBeforeRequired_ShortVersion_Convenience()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
@@ -772,7 +772,7 @@ namespace ConvenienceInCadl.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task ProtocolOptionalBeforeRequired_AllParameters()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
@@ -785,7 +785,7 @@ namespace ConvenienceInCadl.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task ProtocolOptionalBeforeRequired_AllParameters_Convenience()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();

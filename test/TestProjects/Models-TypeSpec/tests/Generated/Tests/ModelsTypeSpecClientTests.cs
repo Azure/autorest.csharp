@@ -24,7 +24,7 @@ namespace ModelsTypeSpec.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task GetOutputDiscriminatorModel_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -34,7 +34,7 @@ namespace ModelsTypeSpec.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task GetOutputDiscriminatorModel_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -44,7 +44,7 @@ namespace ModelsTypeSpec.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task GetOutputDiscriminatorModel_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -54,7 +54,7 @@ namespace ModelsTypeSpec.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task GetOutputDiscriminatorModel_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -64,7 +64,7 @@ namespace ModelsTypeSpec.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task InputToRoundTrip_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -127,7 +127,7 @@ null
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task InputToRoundTrip_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -153,7 +153,7 @@ default
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task InputToRoundTrip_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -242,7 +242,7 @@ null
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task InputToRoundTrip_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -278,7 +278,7 @@ default
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task InputToRoundTripPrimitive_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -341,7 +341,7 @@ null
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task InputToRoundTripPrimitive_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -367,7 +367,7 @@ default
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task InputToRoundTripPrimitive_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -456,7 +456,7 @@ null
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task InputToRoundTripPrimitive_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -492,7 +492,7 @@ default
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task InputToRoundTripOptional_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -503,7 +503,7 @@ default
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task InputToRoundTripOptional_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -514,7 +514,7 @@ default
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task InputToRoundTripOptional_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -585,7 +585,7 @@ null
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task InputToRoundTripOptional_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -634,7 +634,7 @@ default
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task RoundTripToOutput_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -703,7 +703,7 @@ null
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task RoundTripToOutput_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -732,7 +732,7 @@ default
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task RoundTripToOutput_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -824,7 +824,7 @@ null
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task RoundTripToOutput_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -868,7 +868,7 @@ default
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task InputRecursive_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -882,7 +882,7 @@ default
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task InputRecursive_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -893,7 +893,7 @@ default
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task InputRecursive_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -907,7 +907,7 @@ default
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task InputRecursive_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -921,7 +921,7 @@ default
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task RoundTripRecursive_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -935,7 +935,7 @@ default
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task RoundTripRecursive_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -946,7 +946,7 @@ default
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task RoundTripRecursive_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -960,7 +960,7 @@ default
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task RoundTripRecursive_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -974,7 +974,7 @@ default
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task SelfReference_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -984,7 +984,7 @@ default
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task SelfReference_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -994,7 +994,7 @@ default
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task SelfReference_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -1004,7 +1004,7 @@ default
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task SelfReference_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -1014,7 +1014,7 @@ default
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task RoundTripToOutputWithNoUseBase_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -1044,7 +1044,7 @@ null
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task RoundTripToOutputWithNoUseBase_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -1064,7 +1064,7 @@ default
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task RoundTripToOutputWithNoUseBase_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -1094,7 +1094,7 @@ null
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task RoundTripToOutputWithNoUseBase_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -1114,7 +1114,7 @@ default
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task AnalyzeConversation_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -1124,7 +1124,7 @@ default
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task AnalyzeConversation_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -1134,7 +1134,7 @@ default
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task AnalyzeConversation_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -1144,7 +1144,7 @@ default
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task AnalyzeConversation_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -1154,7 +1154,7 @@ default
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task GetSingleBase_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -1164,7 +1164,7 @@ default
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task GetSingleBase_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -1174,7 +1174,7 @@ default
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task GetSingleBase_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -1184,7 +1184,7 @@ default
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task GetSingleBase_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -1194,7 +1194,7 @@ default
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task GenericType_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -1214,7 +1214,7 @@ default
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task GenericType_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -1225,7 +1225,7 @@ default
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task GenericType_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -1245,7 +1245,7 @@ default
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task GenericType_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");

@@ -21,7 +21,7 @@ namespace HeadAsBooleanTrue_LowLevel.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task Head200_ShortVersion()
         {
             Uri endpoint = null;
@@ -32,7 +32,7 @@ namespace HeadAsBooleanTrue_LowLevel.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task Head200_AllParameters()
         {
             Uri endpoint = null;
@@ -43,7 +43,7 @@ namespace HeadAsBooleanTrue_LowLevel.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task Head204_ShortVersion()
         {
             Uri endpoint = null;
@@ -54,7 +54,7 @@ namespace HeadAsBooleanTrue_LowLevel.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task Head204_AllParameters()
         {
             Uri endpoint = null;
@@ -65,7 +65,7 @@ namespace HeadAsBooleanTrue_LowLevel.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task Head404_ShortVersion()
         {
             Uri endpoint = null;
@@ -76,7 +76,7 @@ namespace HeadAsBooleanTrue_LowLevel.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task Head404_AllParameters()
         {
             Uri endpoint = null;

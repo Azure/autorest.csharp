@@ -23,7 +23,7 @@ namespace Azure.NewProject.TypeSpec.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task TopAction_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -34,7 +34,7 @@ namespace Azure.NewProject.TypeSpec.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task TopAction_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -45,7 +45,7 @@ namespace Azure.NewProject.TypeSpec.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task TopAction2_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -56,7 +56,7 @@ namespace Azure.NewProject.TypeSpec.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task TopAction2_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -67,7 +67,7 @@ namespace Azure.NewProject.TypeSpec.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task PatchAction_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -88,7 +88,7 @@ namespace Azure.NewProject.TypeSpec.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task PatchAction_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -113,7 +113,7 @@ namespace Azure.NewProject.TypeSpec.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task AnonymousBody_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -134,7 +134,7 @@ namespace Azure.NewProject.TypeSpec.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task AnonymousBody_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -159,7 +159,7 @@ namespace Azure.NewProject.TypeSpec.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task FriendlyModel_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -174,7 +174,7 @@ namespace Azure.NewProject.TypeSpec.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task FriendlyModel_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -186,7 +186,7 @@ namespace Azure.NewProject.TypeSpec.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task FriendlyModel_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -201,7 +201,7 @@ namespace Azure.NewProject.TypeSpec.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task FriendlyModel_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -213,7 +213,7 @@ namespace Azure.NewProject.TypeSpec.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task AddTimeHeader_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -224,7 +224,7 @@ namespace Azure.NewProject.TypeSpec.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task AddTimeHeader_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -235,7 +235,7 @@ namespace Azure.NewProject.TypeSpec.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task StringFormat_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -251,7 +251,7 @@ namespace Azure.NewProject.TypeSpec.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task StringFormat_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -263,7 +263,7 @@ namespace Azure.NewProject.TypeSpec.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task StringFormat_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -279,7 +279,7 @@ namespace Azure.NewProject.TypeSpec.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task StringFormat_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -291,7 +291,7 @@ namespace Azure.NewProject.TypeSpec.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task SayHi_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -302,7 +302,7 @@ namespace Azure.NewProject.TypeSpec.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task SayHi_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -313,7 +313,7 @@ namespace Azure.NewProject.TypeSpec.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task HelloAgain_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -352,7 +352,7 @@ namespace Azure.NewProject.TypeSpec.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task HelloAgain_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -421,7 +421,7 @@ namespace Azure.NewProject.TypeSpec.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task NoContentType_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -460,7 +460,7 @@ namespace Azure.NewProject.TypeSpec.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task NoContentType_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -529,7 +529,7 @@ namespace Azure.NewProject.TypeSpec.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task HelloDemo2_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -540,7 +540,7 @@ namespace Azure.NewProject.TypeSpec.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task HelloDemo2_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -551,7 +551,7 @@ namespace Azure.NewProject.TypeSpec.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task CreateLiteral_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -572,7 +572,7 @@ namespace Azure.NewProject.TypeSpec.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task CreateLiteral_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -597,7 +597,7 @@ namespace Azure.NewProject.TypeSpec.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task HelloLiteral_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -608,7 +608,7 @@ namespace Azure.NewProject.TypeSpec.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task HelloLiteral_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -619,7 +619,7 @@ namespace Azure.NewProject.TypeSpec.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task GetUnknownValue_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -630,7 +630,7 @@ namespace Azure.NewProject.TypeSpec.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task GetUnknownValue_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");

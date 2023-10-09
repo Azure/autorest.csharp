@@ -21,7 +21,7 @@ namespace RenameGetList.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task GetProject_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -31,7 +31,7 @@ namespace RenameGetList.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task GetProject_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -41,7 +41,7 @@ namespace RenameGetList.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task GetDeployment_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -51,7 +51,7 @@ namespace RenameGetList.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task GetDeployment_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -61,7 +61,7 @@ namespace RenameGetList.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task GetProjects_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -73,7 +73,7 @@ namespace RenameGetList.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task GetProjects_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -85,7 +85,7 @@ namespace RenameGetList.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task GetDeployments_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -97,7 +97,7 @@ namespace RenameGetList.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task GetDeployments_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");

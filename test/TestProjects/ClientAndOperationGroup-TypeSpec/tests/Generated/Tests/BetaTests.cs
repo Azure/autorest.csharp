@@ -21,7 +21,7 @@ namespace ClientAndOperationGroup.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task Two_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -31,7 +31,7 @@ namespace ClientAndOperationGroup.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task Two_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -41,7 +41,7 @@ namespace ClientAndOperationGroup.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task Three_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -51,7 +51,7 @@ namespace ClientAndOperationGroup.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task Three_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");

@@ -22,7 +22,7 @@ namespace CollapseRequestCondition_LowLevel.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task CollapseGetWithHead_ShortVersion()
         {
             Uri endpoint = null;
@@ -33,7 +33,7 @@ namespace CollapseRequestCondition_LowLevel.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task CollapseGetWithHead_AllParameters()
         {
             Uri endpoint = null;
@@ -44,7 +44,7 @@ namespace CollapseRequestCondition_LowLevel.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task CollapsePut_ShortVersion()
         {
             Uri endpoint = null;
@@ -56,7 +56,7 @@ namespace CollapseRequestCondition_LowLevel.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task CollapsePut_AllParameters()
         {
             Uri endpoint = null;
@@ -68,7 +68,7 @@ namespace CollapseRequestCondition_LowLevel.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task CollapseGet_ShortVersion()
         {
             Uri endpoint = null;
@@ -79,7 +79,7 @@ namespace CollapseRequestCondition_LowLevel.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task CollapseGet_AllParameters()
         {
             Uri endpoint = null;

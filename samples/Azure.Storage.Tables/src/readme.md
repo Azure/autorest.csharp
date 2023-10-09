@@ -12,4 +12,5 @@ input-file:
   - https://github.com/shurd/azure-rest-api-specs/blob/f5cb6fb416ae0a06329599db9dc17c8fdd7f95c7/specification/cosmos-db/data-plane/Microsoft.TablesStorage/preview/2018-10-10/table.json
 namespace: Azure.Storage.Tables
 include-csproj: disable
+generate-tests: false # disable this because this is not dpg project
 ```

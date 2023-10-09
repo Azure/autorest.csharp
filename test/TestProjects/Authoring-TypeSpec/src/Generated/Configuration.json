@@ -8,5 +8,5 @@
   ],
   "use-overloads-between-protocol-and-convenience": true,
   "keep-non-overloadable-protocol-signature": true,
-  "generate-test-scaffolding": true
+  "generate-tests": true
 }

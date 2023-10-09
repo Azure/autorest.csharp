@@ -21,7 +21,7 @@ namespace ResourceClients_LowLevel.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task GetParameters_ShortVersion()
         {
             Uri endpoint = null;
@@ -32,7 +32,7 @@ namespace ResourceClients_LowLevel.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task GetParameters_AllParameters()
         {
             Uri endpoint = null;
@@ -43,7 +43,7 @@ namespace ResourceClients_LowLevel.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task GetGroups_ShortVersion()
         {
             Uri endpoint = null;
@@ -56,7 +56,7 @@ namespace ResourceClients_LowLevel.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task GetGroups_AllParameters()
         {
             Uri endpoint = null;
@@ -69,7 +69,7 @@ namespace ResourceClients_LowLevel.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task GetAllItems_ShortVersion()
         {
             Uri endpoint = null;
@@ -82,7 +82,7 @@ namespace ResourceClients_LowLevel.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task GetAllItems_AllParameters()
         {
             Uri endpoint = null;

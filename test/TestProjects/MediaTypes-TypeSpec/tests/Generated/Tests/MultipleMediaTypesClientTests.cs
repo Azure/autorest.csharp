@@ -23,7 +23,7 @@ namespace MultipleMediaTypes.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task OneBinaryBodyTwoContentTypes_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -34,7 +34,7 @@ namespace MultipleMediaTypes.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task OneBinaryBodyTwoContentTypes_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -44,7 +44,7 @@ namespace MultipleMediaTypes.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task OneBinaryBodyTwoContentTypes_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -55,7 +55,7 @@ namespace MultipleMediaTypes.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task OneBinaryBodyTwoContentTypes_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -65,7 +65,7 @@ namespace MultipleMediaTypes.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task OneStringBodyThreeContentTypes_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -76,7 +76,7 @@ namespace MultipleMediaTypes.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task OneStringBodyThreeContentTypes_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -86,7 +86,7 @@ namespace MultipleMediaTypes.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task OneStringBodyThreeContentTypes_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -97,7 +97,7 @@ namespace MultipleMediaTypes.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task OneStringBodyThreeContentTypes_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -107,7 +107,7 @@ namespace MultipleMediaTypes.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task OneModelBodyOneContentType_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -121,7 +121,7 @@ namespace MultipleMediaTypes.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task OneModelBodyOneContentType_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -132,7 +132,7 @@ namespace MultipleMediaTypes.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task OneModelBodyOneContentType_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -146,7 +146,7 @@ namespace MultipleMediaTypes.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task OneModelBodyOneContentType_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");

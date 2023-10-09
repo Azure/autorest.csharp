@@ -23,7 +23,7 @@ namespace AnomalyDetector.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task DetectUnivariateEntireSeries_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -44,7 +44,7 @@ value = 123.45F,
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task DetectUnivariateEntireSeries_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -59,7 +59,7 @@ new TimeSeriesPoint(123.45F)
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task DetectUnivariateEntireSeries_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -88,7 +88,7 @@ value = 123.45F,
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task DetectUnivariateEntireSeries_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -115,7 +115,7 @@ Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task DetectUnivariateLastPoint_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -136,7 +136,7 @@ value = 123.45F,
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task DetectUnivariateLastPoint_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -151,7 +151,7 @@ new TimeSeriesPoint(123.45F)
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task DetectUnivariateLastPoint_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -180,7 +180,7 @@ value = 123.45F,
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task DetectUnivariateLastPoint_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -207,7 +207,7 @@ Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task DetectUnivariateChangePoint_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -229,7 +229,7 @@ value = 123.45F,
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task DetectUnivariateChangePoint_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -244,7 +244,7 @@ new TimeSeriesPoint(123.45F)
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task DetectUnivariateChangePoint_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -271,7 +271,7 @@ value = 123.45F,
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task DetectUnivariateChangePoint_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -295,7 +295,7 @@ Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task GetMultivariateBatchDetectionResult_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -306,7 +306,7 @@ Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task GetMultivariateBatchDetectionResult_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -317,7 +317,7 @@ Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task GetMultivariateBatchDetectionResult_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -328,7 +328,7 @@ Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task GetMultivariateBatchDetectionResult_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -339,7 +339,7 @@ Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task TrainMultivariateModel_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -356,7 +356,7 @@ Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task TrainMultivariateModel_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -368,7 +368,7 @@ Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task TrainMultivariateModel_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -428,7 +428,7 @@ lastTimestamp = "2022-05-10T14:57:31.2311892-04:00",
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task TrainMultivariateModel_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -470,7 +470,7 @@ LastTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task DeleteMultivariateModel_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -481,7 +481,7 @@ LastTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task DeleteMultivariateModel_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -492,7 +492,7 @@ LastTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task GetMultivariateModel_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -503,7 +503,7 @@ LastTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task GetMultivariateModel_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -514,7 +514,7 @@ LastTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task GetMultivariateModel_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -525,7 +525,7 @@ LastTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task GetMultivariateModel_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -536,7 +536,7 @@ LastTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task DetectMultivariateBatchAnomaly_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -554,7 +554,7 @@ LastTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task DetectMultivariateBatchAnomaly_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -566,7 +566,7 @@ LastTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task DetectMultivariateBatchAnomaly_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -584,7 +584,7 @@ LastTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task DetectMultivariateBatchAnomaly_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -596,7 +596,7 @@ LastTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task DetectMultivariateLastAnomaly_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -626,7 +626,7 @@ values = new object[]
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task DetectMultivariateLastAnomaly_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -641,7 +641,7 @@ new VariableValues("<variable>", new string[]{"<timestamps>"}, new float[]{123.4
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task DetectMultivariateLastAnomaly_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -671,7 +671,7 @@ values = new object[]
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task DetectMultivariateLastAnomaly_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -686,7 +686,7 @@ new VariableValues("<variable>", new string[]{"<timestamps>"}, new float[]{123.4
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task GetMultivariateModels_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -699,7 +699,7 @@ new VariableValues("<variable>", new string[]{"<timestamps>"}, new float[]{123.4
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task GetMultivariateModels_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -712,7 +712,7 @@ new VariableValues("<variable>", new string[]{"<timestamps>"}, new float[]{123.4
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task GetMultivariateModels_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -725,7 +725,7 @@ new VariableValues("<variable>", new string[]{"<timestamps>"}, new float[]{123.4
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task GetMultivariateModels_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");

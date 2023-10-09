@@ -10,7 +10,7 @@
   "public-clients": true,
   "head-as-boolean": true,
   "skip-csproj-packagereference": true,
-  "generate-test-scaffolding": true,
+  "generate-tests": true,
   "RequestPathToParent": {
     "/subscriptions/{subscriptionId}/providers/Microsoft.Storage/deletedAccounts": "/subscriptions/{subscriptionId}/providers/Microsoft.Storage/locations/{location}/deletedAccounts/{deletedAccountName}",
     "/subscriptions/{subscriptionId}/providers/Microsoft.Storage/checkNameAvailability": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}"

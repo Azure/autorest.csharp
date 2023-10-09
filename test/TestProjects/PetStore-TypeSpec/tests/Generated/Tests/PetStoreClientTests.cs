@@ -23,7 +23,7 @@ namespace PetStore.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task Delete_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -33,7 +33,7 @@ namespace PetStore.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task Delete_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -43,7 +43,7 @@ namespace PetStore.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task Read_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -53,7 +53,7 @@ namespace PetStore.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task Read_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -63,7 +63,7 @@ namespace PetStore.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task Read_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -73,7 +73,7 @@ namespace PetStore.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task Read_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -83,7 +83,7 @@ namespace PetStore.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task Create_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -98,7 +98,7 @@ namespace PetStore.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task Create_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -109,7 +109,7 @@ namespace PetStore.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task Create_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -125,7 +125,7 @@ namespace PetStore.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task Create_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -139,7 +139,7 @@ namespace PetStore.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task GetPetByKind_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -149,7 +149,7 @@ namespace PetStore.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task GetPetByKind_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -159,7 +159,7 @@ namespace PetStore.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task GetPetByKind_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -169,7 +169,7 @@ namespace PetStore.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task GetPetByKind_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -179,7 +179,7 @@ namespace PetStore.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task GetFirstPet_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -189,7 +189,7 @@ namespace PetStore.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task GetFirstPet_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -199,7 +199,7 @@ namespace PetStore.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task GetFirstPet_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -209,7 +209,7 @@ namespace PetStore.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task GetFirstPet_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -219,7 +219,7 @@ namespace PetStore.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task GetFish_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -229,7 +229,7 @@ namespace PetStore.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task GetFish_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -239,7 +239,7 @@ namespace PetStore.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task GetFish_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -249,7 +249,7 @@ namespace PetStore.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task GetFish_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");

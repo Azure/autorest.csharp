@@ -22,7 +22,7 @@ namespace CollapseRequestCondition_LowLevel.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task IfMatchPut_ShortVersion()
         {
             Uri endpoint = null;
@@ -34,7 +34,7 @@ namespace CollapseRequestCondition_LowLevel.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task IfMatchPut_AllParameters()
         {
             Uri endpoint = null;
@@ -46,7 +46,7 @@ namespace CollapseRequestCondition_LowLevel.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task IfNoneMatchPut_ShortVersion()
         {
             Uri endpoint = null;
@@ -58,7 +58,7 @@ namespace CollapseRequestCondition_LowLevel.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task IfNoneMatchPut_AllParameters()
         {
             Uri endpoint = null;

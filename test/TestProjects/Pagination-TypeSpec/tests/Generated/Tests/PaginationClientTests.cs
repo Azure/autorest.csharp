@@ -22,7 +22,7 @@ namespace Pagination.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task GetPaginationLedgerEntries_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -40,7 +40,7 @@ namespace Pagination.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task GetPaginationLedgerEntries_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -54,7 +54,7 @@ namespace Pagination.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task GetPaginationLedgerEntries_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -72,7 +72,7 @@ namespace Pagination.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task GetPaginationLedgerEntries_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -86,7 +86,7 @@ namespace Pagination.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task GetMetricDimensionValues_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -99,7 +99,7 @@ namespace Pagination.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task GetMetricDimensionValues_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -112,7 +112,7 @@ namespace Pagination.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task GetMetricDimensionValues_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -125,7 +125,7 @@ namespace Pagination.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task GetMetricDimensionValues_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -138,7 +138,7 @@ namespace Pagination.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task GetLedgerEntries_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -151,7 +151,7 @@ namespace Pagination.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task GetLedgerEntries_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -164,7 +164,7 @@ namespace Pagination.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task GetLedgerEntries_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -177,7 +177,7 @@ namespace Pagination.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task GetLedgerEntries_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -190,7 +190,7 @@ namespace Pagination.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task GetTextBlocklists_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -203,7 +203,7 @@ namespace Pagination.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task GetTextBlocklists_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -216,7 +216,7 @@ namespace Pagination.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task GetTextBlocklists_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -229,7 +229,7 @@ namespace Pagination.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task GetTextBlocklists_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -242,7 +242,7 @@ namespace Pagination.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task GetTextBlocklistItems_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -255,7 +255,7 @@ namespace Pagination.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task GetTextBlocklistItems_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -268,7 +268,7 @@ namespace Pagination.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task GetTextBlocklistItems_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -281,7 +281,7 @@ namespace Pagination.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task GetTextBlocklistItems_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");

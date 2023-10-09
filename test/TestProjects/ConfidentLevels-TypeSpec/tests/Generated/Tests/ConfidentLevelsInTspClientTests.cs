@@ -23,7 +23,7 @@ namespace ConfidentLevelsInTsp.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task UnionInRequestProperty_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -37,7 +37,7 @@ namespace ConfidentLevelsInTsp.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task UnionInRequestProperty_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -51,7 +51,7 @@ namespace ConfidentLevelsInTsp.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task UnionInResponseProperty_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -66,7 +66,7 @@ namespace ConfidentLevelsInTsp.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task UnionInResponseProperty_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -82,7 +82,7 @@ namespace ConfidentLevelsInTsp.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task UnionWithSelfReference_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -101,7 +101,7 @@ null
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task UnionWithSelfReference_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -120,7 +120,7 @@ null
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task UnionWithInderict_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -134,7 +134,7 @@ null
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task UnionWithInderict_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -165,7 +165,7 @@ unionProperty = "<unionProperty>",
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task LiteralOfInteger_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -180,7 +180,7 @@ unionProperty = "<unionProperty>",
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task LiteralOfInteger_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -195,7 +195,7 @@ unionProperty = "<unionProperty>",
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task LiteralOfFloat_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -210,7 +210,7 @@ unionProperty = "<unionProperty>",
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task LiteralOfFloat_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -225,7 +225,7 @@ unionProperty = "<unionProperty>",
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task ConfidentOperationWithDiscriminator_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -241,7 +241,7 @@ unionProperty = "<unionProperty>",
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task ConfidentOperationWithDiscriminator_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -252,7 +252,7 @@ unionProperty = "<unionProperty>",
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task ConfidentOperationWithDiscriminator_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -268,7 +268,7 @@ unionProperty = "<unionProperty>",
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task ConfidentOperationWithDiscriminator_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -279,7 +279,7 @@ unionProperty = "<unionProperty>",
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task PollutedBaseMethod_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -296,7 +296,7 @@ unionProperty = "<unionProperty>",
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task PollutedBaseMethod_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -313,7 +313,7 @@ unionProperty = "<unionProperty>",
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task PollutedDerivedMethod_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -330,7 +330,7 @@ unionProperty = "<unionProperty>",
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task PollutedDerivedMethod_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -347,7 +347,7 @@ unionProperty = "<unionProperty>",
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task UnpollutedDerivedMethod_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -363,7 +363,7 @@ unionProperty = "<unionProperty>",
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task UnpollutedDerivedMethod_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -379,7 +379,7 @@ unionProperty = "<unionProperty>",
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task UseDerivedModel_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -393,7 +393,7 @@ unionProperty = "<unionProperty>",
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task UseDerivedModel_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -409,7 +409,7 @@ unionProperty = "<unionProperty>",
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task UseDerivedModelWithUnion_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -424,7 +424,7 @@ unionProperty = "<unionProperty>",
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task UseDerivedModelWithUnion_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");

@@ -24,7 +24,7 @@ namespace BodyAndPath_LowLevel.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task Create_ShortVersion()
         {
             Uri endpoint = null;
@@ -36,7 +36,7 @@ namespace BodyAndPath_LowLevel.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task Create_AllParameters()
         {
             Uri endpoint = null;
@@ -48,7 +48,7 @@ namespace BodyAndPath_LowLevel.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task CreateStream_ShortVersion()
         {
             Uri endpoint = null;
@@ -60,7 +60,7 @@ namespace BodyAndPath_LowLevel.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task CreateStream_AllParameters()
         {
             Uri endpoint = null;
@@ -72,7 +72,7 @@ namespace BodyAndPath_LowLevel.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task CreateEnum_ShortVersion()
         {
             Uri endpoint = null;
@@ -84,7 +84,7 @@ namespace BodyAndPath_LowLevel.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task CreateEnum_AllParameters()
         {
             Uri endpoint = null;
@@ -96,7 +96,7 @@ namespace BodyAndPath_LowLevel.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task GetBodyAndPaths_ShortVersion()
         {
             Uri endpoint = null;
@@ -107,7 +107,7 @@ namespace BodyAndPath_LowLevel.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task GetBodyAndPaths_AllParameters()
         {
             Uri endpoint = null;
@@ -118,7 +118,7 @@ namespace BodyAndPath_LowLevel.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task GetItems_ShortVersion()
         {
             Uri endpoint = null;
@@ -129,7 +129,7 @@ namespace BodyAndPath_LowLevel.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task GetItems_AllParameters()
         {
             Uri endpoint = null;
@@ -140,7 +140,7 @@ namespace BodyAndPath_LowLevel.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task Update_ShortVersion()
         {
             Uri endpoint = null;
@@ -152,7 +152,7 @@ namespace BodyAndPath_LowLevel.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task Update_AllParameters()
         {
             Uri endpoint = null;

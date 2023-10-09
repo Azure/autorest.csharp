@@ -21,7 +21,7 @@ namespace ParameterSequence_LowLevel.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task GetItem_ShortVersion()
         {
             Uri endpoint = null;
@@ -32,7 +32,7 @@ namespace ParameterSequence_LowLevel.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task GetItem_AllParameters()
         {
             Uri endpoint = null;
@@ -43,7 +43,7 @@ namespace ParameterSequence_LowLevel.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task SelectItem_ShortVersion()
         {
             Uri endpoint = null;
@@ -54,7 +54,7 @@ namespace ParameterSequence_LowLevel.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task SelectItem_AllParameters()
         {
             Uri endpoint = null;

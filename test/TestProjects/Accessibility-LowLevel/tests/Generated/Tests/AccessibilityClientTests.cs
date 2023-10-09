@@ -22,7 +22,7 @@ namespace Accessibility_LowLevel.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task Operation_ShortVersion()
         {
             Uri endpoint = null;
@@ -34,7 +34,7 @@ namespace Accessibility_LowLevel.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task Operation_AllParameters()
         {
             Uri endpoint = null;

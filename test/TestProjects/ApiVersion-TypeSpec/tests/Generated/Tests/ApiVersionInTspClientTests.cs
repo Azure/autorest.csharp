@@ -22,7 +22,7 @@ namespace ApiVersionInTsp.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task GetBatchDetectionResult_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -33,7 +33,7 @@ namespace ApiVersionInTsp.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task GetBatchDetectionResult_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -44,7 +44,7 @@ namespace ApiVersionInTsp.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task GetBatchDetectionResult_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -55,7 +55,7 @@ namespace ApiVersionInTsp.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task GetBatchDetectionResult_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");

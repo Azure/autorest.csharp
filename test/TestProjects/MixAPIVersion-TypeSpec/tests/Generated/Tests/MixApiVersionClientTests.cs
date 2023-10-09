@@ -22,7 +22,7 @@ namespace MixApiVersion.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task Delete_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -32,7 +32,7 @@ namespace MixApiVersion.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task Delete_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -42,7 +42,7 @@ namespace MixApiVersion.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task Read_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -52,7 +52,7 @@ namespace MixApiVersion.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task Read_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -62,7 +62,7 @@ namespace MixApiVersion.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task Create_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -76,7 +76,7 @@ namespace MixApiVersion.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task Create_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -91,7 +91,7 @@ namespace MixApiVersion.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task GetPets_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -103,7 +103,7 @@ namespace MixApiVersion.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task GetPets_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");

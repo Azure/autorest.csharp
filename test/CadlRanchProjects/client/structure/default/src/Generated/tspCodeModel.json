@@ -53,30 +53,8 @@
      "Parameters": [
       {
        "$id": "9",
-       "Name": "endpoint",
-       "NameInRequest": "endpoint",
-       "Description": "Need to be set as 'http://localhost:3000' in client.",
-       "Type": {
-        "$id": "10",
-        "Name": "Uri",
-        "Kind": "Uri",
-        "IsNullable": false
-       },
-       "Location": "Uri",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": true,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Client"
-      },
-      {
-       "$id": "11",
        "Name": "client",
        "NameInRequest": "client",
-       "Description": "Need to be set as 'default', 'multi-client', 'renamed-operation', 'two-operation-group' in client.",
        "Type": {
         "$ref": "2"
        },
@@ -91,11 +69,11 @@
        "Kind": "Client"
       },
       {
-       "$id": "12",
+       "$id": "10",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "13",
+        "$id": "11",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -110,20 +88,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "14",
+        "$id": "12",
         "Type": {
-         "$ref": "13"
+         "$ref": "11"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "15",
+       "$id": "13",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Description": "",
        "Type": {
-        "$id": "16",
+        "$id": "14",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -138,9 +116,9 @@
        "Explode": false,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "17",
+        "$id": "15",
         "Type": {
-         "$id": "18",
+         "$id": "16",
          "Name": "String",
          "Kind": "String",
          "IsNullable": false
@@ -151,7 +129,7 @@
      ],
      "Responses": [
       {
-       "$id": "19",
+       "$id": "17",
        "StatusCodes": [
         204
        ],
@@ -162,14 +140,14 @@
      ],
      "HttpMethod": "POST",
      "RequestBodyMediaType": "None",
-     "Uri": "{endpoint}/client/structure/{client}",
+     "Uri": "http://localhost:3000/client/structure/{client}",
      "Path": "/one",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "20",
+     "$id": "18",
      "Name": "two",
      "ResourceName": "Service",
      "Parameters": [
@@ -177,14 +155,11 @@
        "$ref": "9"
       },
       {
-       "$ref": "11"
-      },
-      {
-       "$id": "21",
+       "$id": "19",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "22",
+        "$id": "20",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -199,20 +174,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "23",
+        "$id": "21",
         "Type": {
-         "$ref": "22"
+         "$ref": "20"
         },
         "Value": "application/json"
        }
       },
       {
-       "$ref": "15"
+       "$ref": "13"
       }
      ],
      "Responses": [
       {
-       "$id": "24",
+       "$id": "22",
        "StatusCodes": [
         204
        ],
@@ -223,14 +198,14 @@
      ],
      "HttpMethod": "POST",
      "RequestBodyMediaType": "None",
-     "Uri": "{endpoint}/client/structure/{client}",
+     "Uri": "http://localhost:3000/client/structure/{client}",
      "Path": "/two",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "25",
+     "$id": "23",
      "Name": "three",
      "ResourceName": "Foo",
      "Parameters": [
@@ -238,14 +213,11 @@
        "$ref": "9"
       },
       {
-       "$ref": "11"
-      },
-      {
-       "$id": "26",
+       "$id": "24",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "27",
+        "$id": "25",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -260,20 +232,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "28",
+        "$id": "26",
         "Type": {
-         "$ref": "27"
+         "$ref": "25"
         },
         "Value": "application/json"
        }
       },
       {
-       "$ref": "15"
+       "$ref": "13"
       }
      ],
      "Responses": [
       {
-       "$id": "29",
+       "$id": "27",
        "StatusCodes": [
         204
        ],
@@ -284,14 +256,14 @@
      ],
      "HttpMethod": "POST",
      "RequestBodyMediaType": "None",
-     "Uri": "{endpoint}/client/structure/{client}",
+     "Uri": "http://localhost:3000/client/structure/{client}",
      "Path": "/three",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "30",
+     "$id": "28",
      "Name": "four",
      "ResourceName": "Foo",
      "Parameters": [
@@ -299,14 +271,11 @@
        "$ref": "9"
       },
       {
-       "$ref": "11"
-      },
-      {
-       "$id": "31",
+       "$id": "29",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "32",
+        "$id": "30",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -321,20 +290,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "33",
+        "$id": "31",
         "Type": {
-         "$ref": "32"
+         "$ref": "30"
         },
         "Value": "application/json"
        }
       },
       {
-       "$ref": "15"
+       "$ref": "13"
       }
      ],
      "Responses": [
       {
-       "$id": "34",
+       "$id": "32",
        "StatusCodes": [
         204
        ],
@@ -345,14 +314,14 @@
      ],
      "HttpMethod": "POST",
      "RequestBodyMediaType": "None",
-     "Uri": "{endpoint}/client/structure/{client}",
+     "Uri": "http://localhost:3000/client/structure/{client}",
      "Path": "/four",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "35",
+     "$id": "33",
      "Name": "five",
      "ResourceName": "Bar",
      "Parameters": [
@@ -360,14 +329,11 @@
        "$ref": "9"
       },
       {
-       "$ref": "11"
-      },
-      {
-       "$id": "36",
+       "$id": "34",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "37",
+        "$id": "35",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -382,20 +348,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "38",
+        "$id": "36",
         "Type": {
-         "$ref": "37"
+         "$ref": "35"
         },
         "Value": "application/json"
        }
       },
       {
-       "$ref": "15"
+       "$ref": "13"
       }
      ],
      "Responses": [
       {
-       "$id": "39",
+       "$id": "37",
        "StatusCodes": [
         204
        ],
@@ -406,14 +372,14 @@
      ],
      "HttpMethod": "POST",
      "RequestBodyMediaType": "None",
-     "Uri": "{endpoint}/client/structure/{client}",
+     "Uri": "http://localhost:3000/client/structure/{client}",
      "Path": "/five",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "40",
+     "$id": "38",
      "Name": "six",
      "ResourceName": "Bar",
      "Parameters": [
@@ -421,14 +387,11 @@
        "$ref": "9"
       },
       {
-       "$ref": "11"
-      },
-      {
-       "$id": "41",
+       "$id": "39",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "42",
+        "$id": "40",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -443,20 +406,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "43",
+        "$id": "41",
         "Type": {
-         "$ref": "42"
+         "$ref": "40"
         },
         "Value": "application/json"
        }
       },
       {
-       "$ref": "15"
+       "$ref": "13"
       }
      ],
      "Responses": [
       {
-       "$id": "44",
+       "$id": "42",
        "StatusCodes": [
         204
        ],
@@ -467,7 +430,7 @@
      ],
      "HttpMethod": "POST",
      "RequestBodyMediaType": "None",
-     "Uri": "{endpoint}/client/structure/{client}",
+     "Uri": "http://localhost:3000/client/structure/{client}",
      "Path": "/six",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
@@ -475,7 +438,7 @@
     }
    ],
    "Protocol": {
-    "$id": "45"
+    "$id": "43"
    },
    "Creatable": true
   }

@@ -24,7 +24,7 @@ namespace CustomizationsInTsp.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task RoundTrip_ShortVersion()
         {
             CustomizationsInTspClient client = CreateCustomizationsInTspClient();
@@ -34,7 +34,7 @@ namespace CustomizationsInTsp.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task RoundTrip_ShortVersion_Convenience()
         {
             CustomizationsInTspClient client = CreateCustomizationsInTspClient();
@@ -44,7 +44,7 @@ namespace CustomizationsInTsp.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task RoundTrip_AllParameters()
         {
             CustomizationsInTspClient client = CreateCustomizationsInTspClient();
@@ -111,7 +111,7 @@ key = "<badListOfDictionaryName>",
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task RoundTrip_AllParameters_Convenience()
         {
             CustomizationsInTspClient client = CreateCustomizationsInTspClient();

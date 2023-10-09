@@ -7,5 +7,5 @@
     "../../../../../../../artifacts/bin/AutoRest.CSharp/Debug/net6.0/Azure.Core.Shared"
   ],
   "use-overloads-between-protocol-and-convenience": true,
-  "generate-test-scaffolding": true
+  "generate-tests": true
 }

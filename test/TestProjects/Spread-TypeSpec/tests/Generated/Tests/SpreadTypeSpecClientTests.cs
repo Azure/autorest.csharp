@@ -23,7 +23,7 @@ namespace SpreadTypeSpec.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task SpreadModel_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -38,7 +38,7 @@ namespace SpreadTypeSpec.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task SpreadModel_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -49,7 +49,7 @@ namespace SpreadTypeSpec.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task SpreadModel_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -64,7 +64,7 @@ namespace SpreadTypeSpec.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task SpreadModel_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -75,7 +75,7 @@ namespace SpreadTypeSpec.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task SpreadAlias_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -90,7 +90,7 @@ namespace SpreadTypeSpec.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task SpreadAlias_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -100,7 +100,7 @@ namespace SpreadTypeSpec.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task SpreadAlias_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -115,7 +115,7 @@ namespace SpreadTypeSpec.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task SpreadAlias_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -125,7 +125,7 @@ namespace SpreadTypeSpec.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task SpreadMultiTargetAlias_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -140,7 +140,7 @@ namespace SpreadTypeSpec.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task SpreadMultiTargetAlias_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -150,7 +150,7 @@ namespace SpreadTypeSpec.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task SpreadMultiTargetAlias_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -165,7 +165,7 @@ namespace SpreadTypeSpec.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task SpreadMultiTargetAlias_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -175,7 +175,7 @@ namespace SpreadTypeSpec.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task SpreadAliasWithModel_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -190,7 +190,7 @@ namespace SpreadTypeSpec.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task SpreadAliasWithModel_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -201,7 +201,7 @@ namespace SpreadTypeSpec.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task SpreadAliasWithModel_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -216,7 +216,7 @@ namespace SpreadTypeSpec.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task SpreadAliasWithModel_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -227,7 +227,7 @@ namespace SpreadTypeSpec.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task SpreadAliasWithSpreadAlias_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -242,7 +242,7 @@ namespace SpreadTypeSpec.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task SpreadAliasWithSpreadAlias_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -252,7 +252,7 @@ namespace SpreadTypeSpec.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task SpreadAliasWithSpreadAlias_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -267,7 +267,7 @@ namespace SpreadTypeSpec.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task SpreadAliasWithSpreadAlias_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -277,7 +277,7 @@ namespace SpreadTypeSpec.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task SpreadAliasWithOptionalProps_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -295,7 +295,7 @@ namespace SpreadTypeSpec.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task SpreadAliasWithOptionalProps_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -305,7 +305,7 @@ namespace SpreadTypeSpec.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task SpreadAliasWithOptionalProps_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -329,7 +329,7 @@ namespace SpreadTypeSpec.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task SpreadAliasWithOptionalProps_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -339,7 +339,7 @@ namespace SpreadTypeSpec.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task SpreadAliasWithCollections_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -356,7 +356,7 @@ namespace SpreadTypeSpec.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task SpreadAliasWithCollections_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -366,7 +366,7 @@ namespace SpreadTypeSpec.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task SpreadAliasWithCollections_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -387,7 +387,7 @@ namespace SpreadTypeSpec.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task SpreadAliasWithCollections_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");

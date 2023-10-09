@@ -22,7 +22,7 @@ namespace Azure.Analytics.Purview.Account.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task GetResourceSetRule_ShortVersion()
         {
             Uri endpoint = new Uri("<endpoint>");
@@ -33,7 +33,7 @@ namespace Azure.Analytics.Purview.Account.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task GetResourceSetRule_AllParameters()
         {
             Uri endpoint = new Uri("<endpoint>");
@@ -44,7 +44,7 @@ namespace Azure.Analytics.Purview.Account.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task CreateOrUpdateResourceSetRule_ShortVersion()
         {
             Uri endpoint = new Uri("<endpoint>");
@@ -56,7 +56,7 @@ namespace Azure.Analytics.Purview.Account.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task CreateOrUpdateResourceSetRule_AllParameters()
         {
             Uri endpoint = new Uri("<endpoint>");
@@ -178,7 +178,7 @@ storeType = "<storeType>",
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task DeleteResourceSetRule_ShortVersion()
         {
             Uri endpoint = new Uri("<endpoint>");
@@ -189,7 +189,7 @@ storeType = "<storeType>",
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task DeleteResourceSetRule_AllParameters()
         {
             Uri endpoint = new Uri("<endpoint>");

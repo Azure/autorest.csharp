@@ -97,7 +97,7 @@ namespace AutoRest.CSharp.LowLevel.Output.Tests
 
         protected override IEnumerable<MethodBodyStatement> BuildResponseStatements(DpgOperationSample sample, VariableReference resultVar)
         {
-            // for test methods, we never generate response handling for them
+            // TODO -- for test methods, we need the response values to generate response validations
             yield break;
         }
     }

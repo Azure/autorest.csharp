@@ -22,7 +22,7 @@ namespace CollapseRequestCondition_LowLevel.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task CollapsePut_ShortVersion()
         {
             Uri endpoint = null;
@@ -34,7 +34,7 @@ namespace CollapseRequestCondition_LowLevel.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task CollapsePut_AllParameters()
         {
             Uri endpoint = null;
@@ -46,7 +46,7 @@ namespace CollapseRequestCondition_LowLevel.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task CollapseGet_ShortVersion()
         {
             Uri endpoint = null;
@@ -57,7 +57,7 @@ namespace CollapseRequestCondition_LowLevel.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task CollapseGet_AllParameters()
         {
             Uri endpoint = null;
@@ -68,7 +68,7 @@ namespace CollapseRequestCondition_LowLevel.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task MissIfNoneMatchGet_ShortVersion()
         {
             Uri endpoint = null;
@@ -79,7 +79,7 @@ namespace CollapseRequestCondition_LowLevel.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task MissIfNoneMatchGet_AllParameters()
         {
             Uri endpoint = null;
@@ -90,7 +90,7 @@ namespace CollapseRequestCondition_LowLevel.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task MissIfMatchGet_ShortVersion()
         {
             Uri endpoint = null;
@@ -101,7 +101,7 @@ namespace CollapseRequestCondition_LowLevel.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task MissIfMatchGet_AllParameters()
         {
             Uri endpoint = null;
@@ -112,7 +112,7 @@ namespace CollapseRequestCondition_LowLevel.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task MissIfModifiedSinceGet_ShortVersion()
         {
             Uri endpoint = null;
@@ -123,7 +123,7 @@ namespace CollapseRequestCondition_LowLevel.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task MissIfModifiedSinceGet_AllParameters()
         {
             Uri endpoint = null;
@@ -134,7 +134,7 @@ namespace CollapseRequestCondition_LowLevel.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task MissIfUnmodifiedSinceGet_ShortVersion()
         {
             Uri endpoint = null;
@@ -145,7 +145,7 @@ namespace CollapseRequestCondition_LowLevel.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task MissIfUnmodifiedSinceGet_AllParameters()
         {
             Uri endpoint = null;
@@ -156,7 +156,7 @@ namespace CollapseRequestCondition_LowLevel.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task MissIfMatchIfNoneMatchGet_ShortVersion()
         {
             Uri endpoint = null;
@@ -167,7 +167,7 @@ namespace CollapseRequestCondition_LowLevel.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task MissIfMatchIfNoneMatchGet_AllParameters()
         {
             Uri endpoint = null;
@@ -178,7 +178,7 @@ namespace CollapseRequestCondition_LowLevel.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task IfModifiedSinceGet_ShortVersion()
         {
             Uri endpoint = null;
@@ -189,7 +189,7 @@ namespace CollapseRequestCondition_LowLevel.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task IfModifiedSinceGet_AllParameters()
         {
             Uri endpoint = null;
@@ -200,7 +200,7 @@ namespace CollapseRequestCondition_LowLevel.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task IfUnmodifiedSinceGet_ShortVersion()
         {
             Uri endpoint = null;
@@ -211,7 +211,7 @@ namespace CollapseRequestCondition_LowLevel.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task IfUnmodifiedSinceGet_AllParameters()
         {
             Uri endpoint = null;

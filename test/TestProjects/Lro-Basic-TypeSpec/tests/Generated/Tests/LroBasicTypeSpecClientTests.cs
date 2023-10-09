@@ -23,7 +23,7 @@ namespace LroBasicTypeSpec.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task CreateProject_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -34,7 +34,7 @@ namespace LroBasicTypeSpec.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task CreateProject_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -45,7 +45,7 @@ namespace LroBasicTypeSpec.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task CreateProject_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -60,7 +60,7 @@ namespace LroBasicTypeSpec.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task CreateProject_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -75,7 +75,7 @@ namespace LroBasicTypeSpec.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task UpdateProject_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -87,7 +87,7 @@ namespace LroBasicTypeSpec.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task UpdateProject_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -99,7 +99,7 @@ namespace LroBasicTypeSpec.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task UpdateProject_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -115,7 +115,7 @@ namespace LroBasicTypeSpec.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task UpdateProject_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -131,7 +131,7 @@ namespace LroBasicTypeSpec.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task CreateThing_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -146,7 +146,7 @@ namespace LroBasicTypeSpec.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task CreateThing_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -158,7 +158,7 @@ namespace LroBasicTypeSpec.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task CreateThing_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -173,7 +173,7 @@ namespace LroBasicTypeSpec.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task CreateThing_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");

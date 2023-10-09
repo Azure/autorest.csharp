@@ -21,7 +21,7 @@ namespace ParametersCadl.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task Operation_ShortVersion()
         {
             ParametersCadlClient client = CreateParametersCadlClient();
@@ -30,7 +30,7 @@ namespace ParametersCadl.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task Operation_ShortVersion_Convenience()
         {
             ParametersCadlClient client = CreateParametersCadlClient();
@@ -39,7 +39,7 @@ namespace ParametersCadl.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task Operation_AllParameters()
         {
             ParametersCadlClient client = CreateParametersCadlClient();
@@ -48,7 +48,7 @@ namespace ParametersCadl.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task Operation_AllParameters_Convenience()
         {
             ParametersCadlClient client = CreateParametersCadlClient();
@@ -57,7 +57,7 @@ namespace ParametersCadl.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task Operation2_ShortVersion()
         {
             ParametersCadlClient client = CreateParametersCadlClient();
@@ -66,7 +66,7 @@ namespace ParametersCadl.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task Operation2_ShortVersion_Convenience()
         {
             ParametersCadlClient client = CreateParametersCadlClient();
@@ -75,7 +75,7 @@ namespace ParametersCadl.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task Operation2_AllParameters()
         {
             ParametersCadlClient client = CreateParametersCadlClient();
@@ -84,7 +84,7 @@ namespace ParametersCadl.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task Operation2_AllParameters_Convenience()
         {
             ParametersCadlClient client = CreateParametersCadlClient();

@@ -21,7 +21,7 @@ namespace PaginationParams_LowLevel.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task GetPaginationParams_ShortVersion()
         {
             Uri endpoint = null;
@@ -34,7 +34,7 @@ namespace PaginationParams_LowLevel.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task GetPaginationParams_AllParameters()
         {
             Uri endpoint = null;
@@ -47,7 +47,7 @@ namespace PaginationParams_LowLevel.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task Get2s_ShortVersion()
         {
             Uri endpoint = null;
@@ -60,7 +60,7 @@ namespace PaginationParams_LowLevel.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task Get2s_AllParameters()
         {
             Uri endpoint = null;
@@ -73,7 +73,7 @@ namespace PaginationParams_LowLevel.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task Get3s_ShortVersion()
         {
             Uri endpoint = null;
@@ -86,7 +86,7 @@ namespace PaginationParams_LowLevel.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task Get3s_AllParameters()
         {
             Uri endpoint = null;
@@ -99,7 +99,7 @@ namespace PaginationParams_LowLevel.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task Get4s_ShortVersion()
         {
             Uri endpoint = null;
@@ -112,7 +112,7 @@ namespace PaginationParams_LowLevel.Tests
         }
 
         [Test]
-        [Ignore("Only validating compilation of test scaffoldings")]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task Get4s_AllParameters()
         {
             Uri endpoint = null;
