@@ -690,6 +690,10 @@ namespace Azure.ResourceManager.Sample
         /// <description>AvailabilitySets_ListBySubscription</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="SampleSubscriptionMockingExtension.GetAvailabilitySets(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="expand"> The expand expression to apply to the operation. Allowed values are 'instanceView'. </param>
@@ -712,6 +716,10 @@ namespace Azure.ResourceManager.Sample
         /// <description>AvailabilitySets_ListBySubscription</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="SampleSubscriptionMockingExtension.GetAvailabilitySets(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="expand"> The expand expression to apply to the operation. Allowed values are 'instanceView'. </param>
@@ -734,6 +742,10 @@ namespace Azure.ResourceManager.Sample
         /// <description>ProximityPlacementGroups_ListBySubscription</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="SampleSubscriptionMockingExtension.GetProximityPlacementGroups(CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -755,6 +767,10 @@ namespace Azure.ResourceManager.Sample
         /// <description>ProximityPlacementGroups_ListBySubscription</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="SampleSubscriptionMockingExtension.GetProximityPlacementGroups(CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -776,6 +792,10 @@ namespace Azure.ResourceManager.Sample
         /// <description>DedicatedHostGroups_ListBySubscription</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="SampleSubscriptionMockingExtension.GetDedicatedHostGroups(CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -797,6 +817,10 @@ namespace Azure.ResourceManager.Sample
         /// <description>DedicatedHostGroups_ListBySubscription</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="SampleSubscriptionMockingExtension.GetDedicatedHostGroups(CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -818,6 +842,10 @@ namespace Azure.ResourceManager.Sample
         /// <description>SshPublicKeys_ListBySubscription</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="SampleSubscriptionMockingExtension.GetSshPublicKeys(CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -839,6 +867,10 @@ namespace Azure.ResourceManager.Sample
         /// <description>SshPublicKeys_ListBySubscription</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="SampleSubscriptionMockingExtension.GetSshPublicKeys(CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -860,6 +892,10 @@ namespace Azure.ResourceManager.Sample
         /// <description>VirtualMachineImages_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="SampleSubscriptionMockingExtension.GetVirtualMachineImage(AzureLocation,string,string,string,string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="location"> The name of a supported Azure region. </param>
@@ -887,6 +923,10 @@ namespace Azure.ResourceManager.Sample
         /// <description>VirtualMachineImages_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="SampleSubscriptionMockingExtension.GetVirtualMachineImage(AzureLocation,string,string,string,string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="location"> The name of a supported Azure region. </param>
@@ -914,6 +954,10 @@ namespace Azure.ResourceManager.Sample
         /// <description>VirtualMachineImages_List</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="SampleSubscriptionMockingExtension.GetVirtualMachineImages(SubscriptionResourceGetVirtualMachineImagesOptions,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="options"> A property bag which contains all the parameters of this method except the LRO qualifier and request context parameter. </param>
@@ -937,6 +981,10 @@ namespace Azure.ResourceManager.Sample
         /// <description>VirtualMachineImages_List</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="SampleSubscriptionMockingExtension.GetVirtualMachineImages(SubscriptionResourceGetVirtualMachineImagesOptions,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="options"> A property bag which contains all the parameters of this method except the LRO qualifier and request context parameter. </param>
@@ -960,6 +1008,10 @@ namespace Azure.ResourceManager.Sample
         /// <description>VirtualMachineImages_ListOffers</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="SampleSubscriptionMockingExtension.GetOffersVirtualMachineImages(AzureLocation,string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="location"> The name of a supported Azure region. </param>
@@ -985,6 +1037,10 @@ namespace Azure.ResourceManager.Sample
         /// <description>VirtualMachineImages_ListOffers</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="SampleSubscriptionMockingExtension.GetOffersVirtualMachineImages(AzureLocation,string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="location"> The name of a supported Azure region. </param>
@@ -1010,6 +1066,10 @@ namespace Azure.ResourceManager.Sample
         /// <description>VirtualMachineImages_ListPublishers</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="SampleSubscriptionMockingExtension.GetPublishersVirtualMachineImages(AzureLocation,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="location"> The name of a supported Azure region. </param>
@@ -1032,6 +1092,10 @@ namespace Azure.ResourceManager.Sample
         /// <description>VirtualMachineImages_ListPublishers</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="SampleSubscriptionMockingExtension.GetPublishersVirtualMachineImages(AzureLocation,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="location"> The name of a supported Azure region. </param>
@@ -1054,6 +1118,10 @@ namespace Azure.ResourceManager.Sample
         /// <description>VirtualMachineImages_ListSkus</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="SampleSubscriptionMockingExtension.GetSkusVirtualMachineImages(AzureLocation,string,string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="location"> The name of a supported Azure region. </param>
@@ -1080,6 +1148,10 @@ namespace Azure.ResourceManager.Sample
         /// <description>VirtualMachineImages_ListSkus</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="SampleSubscriptionMockingExtension.GetSkusVirtualMachineImages(AzureLocation,string,string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="location"> The name of a supported Azure region. </param>
@@ -1106,6 +1178,10 @@ namespace Azure.ResourceManager.Sample
         /// <description>Usage_List</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="SampleSubscriptionMockingExtension.GetUsages(AzureLocation,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="location"> The location for which resource usage is queried. </param>
@@ -1128,6 +1204,10 @@ namespace Azure.ResourceManager.Sample
         /// <description>Usage_List</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="SampleSubscriptionMockingExtension.GetUsages(AzureLocation,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="location"> The location for which resource usage is queried. </param>
@@ -1150,6 +1230,10 @@ namespace Azure.ResourceManager.Sample
         /// <description>VirtualMachines_ListByLocation</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="SampleSubscriptionMockingExtension.GetVirtualMachinesByLocation(AzureLocation,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="location"> The location for which virtual machines under the subscription are queried. </param>
@@ -1172,6 +1256,10 @@ namespace Azure.ResourceManager.Sample
         /// <description>VirtualMachines_ListByLocation</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="SampleSubscriptionMockingExtension.GetVirtualMachinesByLocation(AzureLocation,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="location"> The location for which virtual machines under the subscription are queried. </param>
@@ -1194,6 +1282,10 @@ namespace Azure.ResourceManager.Sample
         /// <description>VirtualMachines_ListAll</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="SampleSubscriptionMockingExtension.GetVirtualMachines(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="statusOnly"> statusOnly=true enables fetching run time status of all Virtual Machines in the subscription. </param>
@@ -1216,6 +1308,10 @@ namespace Azure.ResourceManager.Sample
         /// <description>VirtualMachines_ListAll</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="SampleSubscriptionMockingExtension.GetVirtualMachines(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="statusOnly"> statusOnly=true enables fetching run time status of all Virtual Machines in the subscription. </param>
@@ -1238,6 +1334,10 @@ namespace Azure.ResourceManager.Sample
         /// <description>VirtualMachineSizes_List</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="SampleSubscriptionMockingExtension.GetVirtualMachineSizes(AzureLocation,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="location"> The location upon which virtual-machine-sizes is queried. </param>
@@ -1260,6 +1360,10 @@ namespace Azure.ResourceManager.Sample
         /// <description>VirtualMachineSizes_List</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="SampleSubscriptionMockingExtension.GetVirtualMachineSizes(AzureLocation,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="location"> The location upon which virtual-machine-sizes is queried. </param>
@@ -1282,6 +1386,10 @@ namespace Azure.ResourceManager.Sample
         /// <description>Images_List</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="SampleSubscriptionMockingExtension.GetImages(CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -1303,6 +1411,10 @@ namespace Azure.ResourceManager.Sample
         /// <description>Images_List</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="SampleSubscriptionMockingExtension.GetImages(CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -1324,6 +1436,10 @@ namespace Azure.ResourceManager.Sample
         /// <description>VirtualMachineScaleSets_ListAll</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="SampleSubscriptionMockingExtension.GetVirtualMachineScaleSets(CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -1345,6 +1461,10 @@ namespace Azure.ResourceManager.Sample
         /// <description>VirtualMachineScaleSets_ListAll</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="SampleSubscriptionMockingExtension.GetVirtualMachineScaleSets(CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -1366,6 +1486,10 @@ namespace Azure.ResourceManager.Sample
         /// <description>LogAnalytics_ExportRequestRateByInterval</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="SampleSubscriptionMockingExtension.ExportRequestRateByIntervalLogAnalytic(WaitUntil,AzureLocation,RequestRateByIntervalContent,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
@@ -1390,6 +1514,10 @@ namespace Azure.ResourceManager.Sample
         /// <description>LogAnalytics_ExportRequestRateByInterval</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="SampleSubscriptionMockingExtension.ExportRequestRateByIntervalLogAnalytic(WaitUntil,AzureLocation,RequestRateByIntervalContent,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
@@ -1414,6 +1542,10 @@ namespace Azure.ResourceManager.Sample
         /// <description>LogAnalytics_ExportThrottledRequests</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="SampleSubscriptionMockingExtension.ExportThrottledRequestsLogAnalytic(WaitUntil,AzureLocation,ThrottledRequestsContent,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
@@ -1438,6 +1570,10 @@ namespace Azure.ResourceManager.Sample
         /// <description>LogAnalytics_ExportThrottledRequests</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="SampleSubscriptionMockingExtension.ExportThrottledRequestsLogAnalytic(WaitUntil,AzureLocation,ThrottledRequestsContent,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>

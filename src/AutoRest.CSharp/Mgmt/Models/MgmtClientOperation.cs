@@ -143,9 +143,6 @@ namespace AutoRest.CSharp.Mgmt.Models
 </item>";
             }
 
-            // TODO -- temp
-            mockingInformation = null;
-
             FormattableString extraInformation = mockingInformation != null ? $"{pathInformation}{Environment.NewLine}{mockingInformation}" : pathInformation;
             var descriptionOfOperation = _operations.First().Description;
             if (descriptionOfOperation != null)

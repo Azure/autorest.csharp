@@ -179,6 +179,10 @@ namespace MgmtExactMatchInheritance
         /// <description>ExactMatchModel2s_Put</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtExactMatchInheritanceResourceGroupMockingExtension.PutExactMatchModel2(string,ExactMatchModel2,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="exactMatchModel2SName"> The String to use. </param>
@@ -202,6 +206,10 @@ namespace MgmtExactMatchInheritance
         /// <description>ExactMatchModel2s_Put</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtExactMatchInheritanceResourceGroupMockingExtension.PutExactMatchModel2(string,ExactMatchModel2,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="exactMatchModel2SName"> The String to use. </param>
@@ -225,6 +233,10 @@ namespace MgmtExactMatchInheritance
         /// <description>ExactMatchModel3s_List</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtExactMatchInheritanceResourceGroupMockingExtension.GetExactMatchModel3s(CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -245,6 +257,10 @@ namespace MgmtExactMatchInheritance
         /// <description>ExactMatchModel3s_List</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtExactMatchInheritanceResourceGroupMockingExtension.GetExactMatchModel3s(CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -265,6 +281,10 @@ namespace MgmtExactMatchInheritance
         /// <description>ExactMatchModel3s_Put</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtExactMatchInheritanceResourceGroupMockingExtension.PutExactMatchModel3(string,ExactMatchModel3,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="exactMatchModel3SName"> The String to use. </param>
@@ -288,6 +308,10 @@ namespace MgmtExactMatchInheritance
         /// <description>ExactMatchModel3s_Put</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtExactMatchInheritanceResourceGroupMockingExtension.PutExactMatchModel3(string,ExactMatchModel3,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="exactMatchModel3SName"> The String to use. </param>
@@ -311,6 +335,10 @@ namespace MgmtExactMatchInheritance
         /// <description>ExactMatchModel3s_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtExactMatchInheritanceResourceGroupMockingExtension.GetExactMatchModel3(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="exactMatchModel3SName"> The String to use. </param>
@@ -333,6 +361,10 @@ namespace MgmtExactMatchInheritance
         /// <description>ExactMatchModel3s_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtExactMatchInheritanceResourceGroupMockingExtension.GetExactMatchModel3(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="exactMatchModel3SName"> The String to use. </param>
@@ -355,6 +387,10 @@ namespace MgmtExactMatchInheritance
         /// <description>ExactMatchModel4s_Put</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtExactMatchInheritanceResourceGroupMockingExtension.PutExactMatchModel4(string,ExactMatchModel4,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="exactMatchModel4SName"> The String to use. </param>
@@ -378,6 +414,10 @@ namespace MgmtExactMatchInheritance
         /// <description>ExactMatchModel4s_Put</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtExactMatchInheritanceResourceGroupMockingExtension.PutExactMatchModel4(string,ExactMatchModel4,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="exactMatchModel4SName"> The String to use. </param>

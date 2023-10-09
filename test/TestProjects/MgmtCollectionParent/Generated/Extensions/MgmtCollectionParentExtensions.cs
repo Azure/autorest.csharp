@@ -125,6 +125,10 @@ namespace MgmtCollectionParent
         /// <description>ListOrderAtSubscriptionLevel</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtCollectionParentSubscriptionMockingExtension.GetOrderResources(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="skipToken"> $skipToken is supported on Get list of order, which provides the next page in the list of order. </param>
@@ -147,6 +151,10 @@ namespace MgmtCollectionParent
         /// <description>ListOrderAtSubscriptionLevel</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtCollectionParentSubscriptionMockingExtension.GetOrderResources(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="skipToken"> $skipToken is supported on Get list of order, which provides the next page in the list of order. </param>

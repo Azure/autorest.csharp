@@ -1239,6 +1239,10 @@ namespace MgmtListMethods
         /// <description>FakeParentWithAncestorWithNonResChWithLocs_ListBySubscription</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtListMethodsSubscriptionMockingExtension.GetFakeParentWithAncestorWithNonResourceChWithLoc(CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -1260,6 +1264,10 @@ namespace MgmtListMethods
         /// <description>FakeParentWithAncestorWithNonResChWithLocs_ListBySubscription</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtListMethodsSubscriptionMockingExtension.GetFakeParentWithAncestorWithNonResourceChWithLoc(CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -1281,6 +1289,10 @@ namespace MgmtListMethods
         /// <description>FakeParentWithAncestorWithNonResChWithLocs_ListTestByLocations</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtListMethodsSubscriptionMockingExtension.GetTestByLocationsFakeParentWithAncestorWithNonResChWithLocs(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="location"> The location for which virtual machines under the subscription are queried. </param>
@@ -1305,6 +1317,10 @@ namespace MgmtListMethods
         /// <description>FakeParentWithAncestorWithNonResChWithLocs_ListTestByLocations</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtListMethodsSubscriptionMockingExtension.GetTestByLocationsFakeParentWithAncestorWithNonResChWithLocs(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="location"> The location for which virtual machines under the subscription are queried. </param>
@@ -1329,6 +1345,10 @@ namespace MgmtListMethods
         /// <description>FakeParentWithAncestorWithNonResChes_ListBySubscription</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtListMethodsSubscriptionMockingExtension.GetFakeParentWithAncestorWithNonResChes(CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -1350,6 +1370,10 @@ namespace MgmtListMethods
         /// <description>FakeParentWithAncestorWithNonResChes_ListBySubscription</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtListMethodsSubscriptionMockingExtension.GetFakeParentWithAncestorWithNonResChes(CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -1371,6 +1395,10 @@ namespace MgmtListMethods
         /// <description>FakeParentWithAncestorWithLocs_ListBySubscription</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtListMethodsSubscriptionMockingExtension.GetFakeParentWithAncestorWithLocs(CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -1392,6 +1420,10 @@ namespace MgmtListMethods
         /// <description>FakeParentWithAncestorWithLocs_ListBySubscription</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtListMethodsSubscriptionMockingExtension.GetFakeParentWithAncestorWithLocs(CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -1413,6 +1445,10 @@ namespace MgmtListMethods
         /// <description>FakeParentWithAncestorWithLocs_ListTestByLocations</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtListMethodsSubscriptionMockingExtension.GetFakeParentWithAncestorWithLocsByLocation(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="location"> The location for which virtual machines under the subscription are queried. </param>
@@ -1437,6 +1473,10 @@ namespace MgmtListMethods
         /// <description>FakeParentWithAncestorWithLocs_ListTestByLocations</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtListMethodsSubscriptionMockingExtension.GetFakeParentWithAncestorWithLocsByLocation(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="location"> The location for which virtual machines under the subscription are queried. </param>
@@ -1461,6 +1501,10 @@ namespace MgmtListMethods
         /// <description>FakeParentWithAncestors_ListBySubscription</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtListMethodsSubscriptionMockingExtension.GetFakeParentWithAncestors(CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -1482,6 +1526,10 @@ namespace MgmtListMethods
         /// <description>FakeParentWithAncestors_ListBySubscription</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtListMethodsSubscriptionMockingExtension.GetFakeParentWithAncestors(CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -1503,6 +1551,10 @@ namespace MgmtListMethods
         /// <description>ResGrpParentWithAncestorWithNonResChWithLocs_ListBySubscription</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtListMethodsSubscriptionMockingExtension.GetResGrpParentWithAncestorWithNonResChWithLocs(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="expand"> The expand expression to apply to the operation. Allowed values are 'instanceView'. </param>
@@ -1525,6 +1577,10 @@ namespace MgmtListMethods
         /// <description>ResGrpParentWithAncestorWithNonResChWithLocs_ListBySubscription</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtListMethodsSubscriptionMockingExtension.GetResGrpParentWithAncestorWithNonResChWithLocs(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="expand"> The expand expression to apply to the operation. Allowed values are 'instanceView'. </param>
@@ -1547,6 +1603,10 @@ namespace MgmtListMethods
         /// <description>ResGrpParentWithAncestorWithNonResChes_ListBySubscription</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtListMethodsSubscriptionMockingExtension.GetResGrpParentWithAncestorWithNonResChes(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="expand"> The expand expression to apply to the operation. Allowed values are 'instanceView'. </param>
@@ -1569,6 +1629,10 @@ namespace MgmtListMethods
         /// <description>ResGrpParentWithAncestorWithNonResChes_ListBySubscription</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtListMethodsSubscriptionMockingExtension.GetResGrpParentWithAncestorWithNonResChes(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="expand"> The expand expression to apply to the operation. Allowed values are 'instanceView'. </param>
@@ -1591,6 +1655,10 @@ namespace MgmtListMethods
         /// <description>ResGrpParentWithAncestorWithLocs_ListTest</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtListMethodsSubscriptionMockingExtension.GetResGrpParentWithAncestorWithLocs(CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -1612,6 +1680,10 @@ namespace MgmtListMethods
         /// <description>ResGrpParentWithAncestorWithLocs_ListTest</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtListMethodsSubscriptionMockingExtension.GetResGrpParentWithAncestorWithLocs(CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -1633,6 +1705,10 @@ namespace MgmtListMethods
         /// <description>ResGrpParentWithAncestorWithLocs_ListAll</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtListMethodsSubscriptionMockingExtension.GetResGrpParentWithAncestorWithNonResChWithLocsByLocationResGrpParentWithAncestorWithLoc(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="location"> The location for which virtual machines under the subscription are queried. </param>
@@ -1657,6 +1733,10 @@ namespace MgmtListMethods
         /// <description>ResGrpParentWithAncestorWithLocs_ListAll</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtListMethodsSubscriptionMockingExtension.GetResGrpParentWithAncestorWithNonResChWithLocsByLocationResGrpParentWithAncestorWithLoc(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="location"> The location for which virtual machines under the subscription are queried. </param>
@@ -1681,6 +1761,10 @@ namespace MgmtListMethods
         /// <description>ResGrpParentWithAncestors_NonPageableListBySubscription</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtListMethodsSubscriptionMockingExtension.GetResGrpParentWithAncestors(CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -1702,6 +1786,10 @@ namespace MgmtListMethods
         /// <description>ResGrpParentWithAncestors_NonPageableListBySubscription</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtListMethodsSubscriptionMockingExtension.GetResGrpParentWithAncestors(CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -1723,6 +1811,10 @@ namespace MgmtListMethods
         /// <description>Quotas_Update</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtListMethodsSubscriptionMockingExtension.UpdateAllQuota(string,QuotaUpdateContent,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="location"> The location for update quota is queried. </param>
@@ -1748,6 +1840,10 @@ namespace MgmtListMethods
         /// <description>Quotas_Update</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtListMethodsSubscriptionMockingExtension.UpdateAllQuota(string,QuotaUpdateContent,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="location"> The location for update quota is queried. </param>
