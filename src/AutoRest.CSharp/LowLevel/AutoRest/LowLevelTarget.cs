@@ -68,7 +68,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 project.AddGeneratedFile($"{modelFactoryProvider.Type.Name}.cs", modelFactoryWriter.ToString());
             }
 
-            if (Configuration.GenerateTestScaffolding)
+            if (Configuration.GenerateTests)
             {
                 // write test base and test env
                 var testBaseWriter = new ExpressionTypeProviderWriter(library.DpgTestBase);

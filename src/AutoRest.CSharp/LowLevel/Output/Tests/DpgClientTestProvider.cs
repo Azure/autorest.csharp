@@ -64,7 +64,7 @@ namespace AutoRest.CSharp.LowLevel.Output.Tests
 
         protected override string GetMethodName(DpgOperationSample sample, bool isAsync)
         {
-            var builder = new StringBuilder().Append(sample.OperationMethodSignature.Name);
+            var builder = new StringBuilder(sample.OperationMethodSignature.Name);
 
             builder.Append('_').Append(sample.ExampleKey);
 
@@ -80,7 +80,7 @@ namespace AutoRest.CSharp.LowLevel.Output.Tests
 
         protected override CSharpAttribute[] GetMethodAttributes() => _attributes;
 
-        private static readonly CSharpAttribute[] _attributes = new[] { new CSharpAttribute(typeof(TestAttribute)), new CSharpAttribute(typeof(IgnoreAttribute), "Only validating compilation of test scaffoldings") };
+        private static readonly CSharpAttribute[] _attributes = new[] { new CSharpAttribute(typeof(TestAttribute)), new CSharpAttribute(typeof(IgnoreAttribute), "Please remove the Ignore attribute to let the test method run") };
 
         protected override MethodBodyStatement BuildGetClientStatement(DpgOperationSample sample, IReadOnlyList<MethodSignatureBase> methodsToCall, List<MethodBodyStatement> variableDeclarations, out VariableReference clientVar)
         {

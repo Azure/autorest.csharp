@@ -9,5 +9,5 @@
   "use-overloads-between-protocol-and-convenience": true,
   "head-as-boolean": true,
   "deserialize-null-collection-as-null-value": true,
-  "generate-test-scaffolding": true
+  "generate-tests": true
 }

@@ -31,7 +31,7 @@ export type NetEmitterOptions = {
     logLevel?: string;
     "package-dir"?: string;
     "head-as-boolean"?: boolean;
-    "generate-test-scaffolding"?: boolean;
+    "generate-tests"?: boolean;
 } & SdkEmitterOptions;
 
 export const NetEmitterOptionsSchema: JSONSchemaType<NetEmitterOptions> = {
@@ -104,7 +104,7 @@ export const NetEmitterOptionsSchema: JSONSchemaType<NetEmitterOptions> = {
         },
         "package-dir": { type: "string", nullable: true },
         "head-as-boolean": { type: "boolean", nullable: true },
-        "generate-test-scaffolding": { type: "boolean", nullable: true }
+        "generate-tests": { type: "boolean", nullable: true }
     },
     required: []
 };
