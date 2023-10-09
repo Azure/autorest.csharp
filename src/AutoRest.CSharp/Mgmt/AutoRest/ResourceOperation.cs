@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AutoRest.CSharp.Mgmt.Models;
 
 namespace AutoRest.CSharp.Mgmt.AutoRest
 {
@@ -14,5 +15,8 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         public string? Path { get; set; }
         public string? Method { get; set; }
         public string? OperationID { get; set; }
+        public bool IsLongRunning { get; set; }
+        public PagingMetadata? PagingMetadata { get; set; }
+        public string? Description { get; set; }
     }
 }

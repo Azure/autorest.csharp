@@ -24,6 +24,8 @@ using Azure.ResourceManager.Models;
 using Azure.ResourceManager.Resources;
 using Humanizer.Localisation;
 using Microsoft.CodeAnalysis;
+using System.Diagnostics;
+
 
 namespace AutoRest.CSharp.AutoRest.Plugins
 {
@@ -124,7 +126,13 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
                 var resourceModel = new ResourceModel();
                 resourceModel.Operations = new List<ResourceOperation>();
-                resource.AllOperations.Concat(resource.ResourceCollection?.AllOperations ?? Enumerable.Empty<MgmtClientOperation>()).SelectMany(o => o).ToList().ForEach(r =>
+                var subscriptionExtension = MgmtContext.Library.GetExtension(typeof(SubscriptionResource)).AllOperations.Where(o => o.Resource?.ResourceName == resource.ResourceName);
+                var resourceGroupExtension = MgmtContext.Library.GetExtension(typeof(ResourceGroupResource)).AllOperations.Where(o => o.Resource?.ResourceName == resource.ResourceName);
+                var tenantExtension = MgmtContext.Library.GetExtension(typeof(TenantResource)).AllOperations.Where(o => o.Resource?.ResourceName == resource.ResourceName);
+                var managementGroupExtension = MgmtContext.Library.GetExtension(typeof(ManagementGroupResource)).AllOperations.Where(o => o.Resource?.ResourceName == resource.ResourceName);
+                var extensions = subscriptionExtension.Concat(resourceGroupExtension).Concat(tenantExtension).Concat(managementGroupExtension);
+                resource.AllOperations.ToList().ForEach(o => o.ToList().ForEach(op => Console.WriteLine(op.OperationId)));
+                resource.AllOperations.Concat(extensions).Concat(resource.ResourceCollection?.AllOperations ?? Enumerable.Empty<MgmtClientOperation>()).SelectMany(o => o).ToList().ForEach(r =>
                 {
                     if (!resourceModel.Operations.Any(o => o.OperationID == r.OperationId))
                     {
@@ -132,6 +140,20 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                         resourceOperation.OperationID = r.OperationId;
                         resourceOperation.Method = r.Method.Request.HttpMethod.ToString();
                         resourceOperation.Path = r.RequestPath;
+                        resourceOperation.IsLongRunning = r.IsLongRunningOperation;
+                        resourceOperation.Description = r.Description;
+
+                        if (r.PagingMethod != null)
+                        {
+                            resourceOperation.PagingMetadata = new PagingMetadata()
+                            {
+                                ItemName = r.PagingMethod.ItemName,
+                                Method = r.PagingMethod.Method.Name,
+                                NextLinkName = r.PagingMethod.NextLinkName,
+                                NextPageMethod = r.PagingMethod.NextPageMethod?.Name
+                            };
+                        }
+
                         resourceModel.Operations.Add(resourceOperation);
                     }
                 });
@@ -140,7 +162,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 resourceModel.SwaggerModelName = resource.ResourceData.ObjectSchema.Language.Default.SerializedName ?? resource.ResourceData.ObjectSchema.Language.Default.Name;
                 resourceModel.ResourceType = resource.ResourceType.ToString();
                 resourceModel.ResourceKeySegment = resource.ResourceType.Last().ConstantValue;
-                resourceModel.ResourceKey = resource.RequestPath.Last().IsReference? resource.RequestPath.Last().ReferenceName : resource.RequestPath.Last().ConstantValue;
+                resourceModel.ResourceKey = resource.RequestPath.Last().IsReference ? resource.RequestPath.Last().ReferenceName : resource.RequestPath.Last().ConstantValue;
 
                 resourceModel.Parents = resource.GetParents().Select(p => p.ResourceName).ToList();
                 resourceModel.IsTrackedResource = resource.ResourceData.Inherits?.EqualsByName(typeof(TrackedResourceData)) ?? false;
