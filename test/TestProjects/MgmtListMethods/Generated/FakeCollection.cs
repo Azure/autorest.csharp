@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
+using Autorest.CSharp.Core;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
@@ -231,7 +232,7 @@ namespace MgmtListMethods
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _fakeRestClient.CreateListRequest(Id.SubscriptionId, optionalParam);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _fakeRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId, optionalParam);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new FakeResource(Client, FakeData.DeserializeFakeData(e)), _fakeClientDiagnostics, Pipeline, "FakeCollection.GetAll", "value", "nextLink", cancellationToken);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new FakeResource(Client, FakeData.DeserializeFakeData(e)), _fakeClientDiagnostics, Pipeline, "FakeCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
@@ -254,7 +255,7 @@ namespace MgmtListMethods
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _fakeRestClient.CreateListRequest(Id.SubscriptionId, optionalParam);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _fakeRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId, optionalParam);
-            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new FakeResource(Client, FakeData.DeserializeFakeData(e)), _fakeClientDiagnostics, Pipeline, "FakeCollection.GetAll", "value", "nextLink", cancellationToken);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new FakeResource(Client, FakeData.DeserializeFakeData(e)), _fakeClientDiagnostics, Pipeline, "FakeCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
@@ -321,6 +322,82 @@ namespace MgmtListMethods
             {
                 var response = _fakeRestClient.Get(Id.SubscriptionId, fakeName, expand, cancellationToken: cancellationToken);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Tries to get details for this resource from the service.
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/providers/Microsoft.Fake/fakes/{fakeName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Fakes_Get</description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="fakeName"> The name of the fake. </param>
+        /// <param name="expand"> May be used to expand the participants. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="fakeName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="fakeName"/> is null. </exception>
+        public virtual async Task<NullableResponse<FakeResource>> GetIfExistsAsync(string fakeName, string expand = null, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNullOrEmpty(fakeName, nameof(fakeName));
+
+            using var scope = _fakeClientDiagnostics.CreateScope("FakeCollection.GetIfExists");
+            scope.Start();
+            try
+            {
+                var response = await _fakeRestClient.GetAsync(Id.SubscriptionId, fakeName, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
+                if (response.Value == null)
+                    return new NoValueResponse<FakeResource>(response.GetRawResponse());
+                return Response.FromValue(new FakeResource(Client, response.Value), response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Tries to get details for this resource from the service.
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/providers/Microsoft.Fake/fakes/{fakeName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Fakes_Get</description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="fakeName"> The name of the fake. </param>
+        /// <param name="expand"> May be used to expand the participants. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="fakeName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="fakeName"/> is null. </exception>
+        public virtual NullableResponse<FakeResource> GetIfExists(string fakeName, string expand = null, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNullOrEmpty(fakeName, nameof(fakeName));
+
+            using var scope = _fakeClientDiagnostics.CreateScope("FakeCollection.GetIfExists");
+            scope.Start();
+            try
+            {
+                var response = _fakeRestClient.Get(Id.SubscriptionId, fakeName, expand, cancellationToken: cancellationToken);
+                if (response.Value == null)
+                    return new NoValueResponse<FakeResource>(response.GetRawResponse());
+                return Response.FromValue(new FakeResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
+using Autorest.CSharp.Core;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
@@ -224,7 +225,7 @@ namespace MgmtPagination
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _pageSizeInt32ModelRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, pageSizeHint);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _pageSizeInt32ModelRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, pageSizeHint);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new PageSizeInt32ModelResource(Client, PageSizeInt32ModelData.DeserializePageSizeInt32ModelData(e)), _pageSizeInt32ModelClientDiagnostics, Pipeline, "PageSizeInt32ModelCollection.GetAll", "value", "nextLink", cancellationToken);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new PageSizeInt32ModelResource(Client, PageSizeInt32ModelData.DeserializePageSizeInt32ModelData(e)), _pageSizeInt32ModelClientDiagnostics, Pipeline, "PageSizeInt32ModelCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
@@ -246,7 +247,7 @@ namespace MgmtPagination
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _pageSizeInt32ModelRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, pageSizeHint);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _pageSizeInt32ModelRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, pageSizeHint);
-            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new PageSizeInt32ModelResource(Client, PageSizeInt32ModelData.DeserializePageSizeInt32ModelData(e)), _pageSizeInt32ModelClientDiagnostics, Pipeline, "PageSizeInt32ModelCollection.GetAll", "value", "nextLink", cancellationToken);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new PageSizeInt32ModelResource(Client, PageSizeInt32ModelData.DeserializePageSizeInt32ModelData(e)), _pageSizeInt32ModelClientDiagnostics, Pipeline, "PageSizeInt32ModelCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
@@ -311,6 +312,80 @@ namespace MgmtPagination
             {
                 var response = _pageSizeInt32ModelRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken: cancellationToken);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Tries to get details for this resource from the service.
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/pageSizeInt32Model/{name}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>PageSizeInt32Models_Get</description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="name"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        public virtual async Task<NullableResponse<PageSizeInt32ModelResource>> GetIfExistsAsync(string name, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNullOrEmpty(name, nameof(name));
+
+            using var scope = _pageSizeInt32ModelClientDiagnostics.CreateScope("PageSizeInt32ModelCollection.GetIfExists");
+            scope.Start();
+            try
+            {
+                var response = await _pageSizeInt32ModelRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken: cancellationToken).ConfigureAwait(false);
+                if (response.Value == null)
+                    return new NoValueResponse<PageSizeInt32ModelResource>(response.GetRawResponse());
+                return Response.FromValue(new PageSizeInt32ModelResource(Client, response.Value), response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Tries to get details for this resource from the service.
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/pageSizeInt32Model/{name}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>PageSizeInt32Models_Get</description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="name"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        public virtual NullableResponse<PageSizeInt32ModelResource> GetIfExists(string name, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNullOrEmpty(name, nameof(name));
+
+            using var scope = _pageSizeInt32ModelClientDiagnostics.CreateScope("PageSizeInt32ModelCollection.GetIfExists");
+            scope.Start();
+            try
+            {
+                var response = _pageSizeInt32ModelRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken: cancellationToken);
+                if (response.Value == null)
+                    return new NoValueResponse<PageSizeInt32ModelResource>(response.GetRawResponse());
+                return Response.FromValue(new PageSizeInt32ModelResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

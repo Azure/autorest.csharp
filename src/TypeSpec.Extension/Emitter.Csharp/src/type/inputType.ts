@@ -49,26 +49,55 @@ export interface InputModelType extends InputType {
     BaseModel?: InputModelType;
     DiscriminatorPropertyName?: string;
     DiscriminatorValue?: string;
+    DerivedModels?: InputModelType[];
+}
+
+export function isInputModelType(type: InputType): type is InputModelType {
+    return (type as InputModelType).Properties !== undefined;
 }
 
 export interface InputEnumType extends InputType {
+    EnumValueType: string;
+    AllowedValues: InputEnumTypeValue[];
     Namespace?: string;
     Accessibility?: string;
     Deprecated?: string;
     Description: string;
-    EnumValueType: string;
-    AllowedValues: InputEnumTypeValue[];
     IsExtensible: boolean;
     Usage: string;
+}
+
+export function isInputEnumType(type: InputType): type is InputEnumType {
+    return (
+        (type as InputEnumType).AllowedValues !== undefined &&
+        (type as InputEnumType).EnumValueType !== undefined
+    );
 }
 
 export interface InputListType extends InputType {
     ElementType: InputType;
 }
 
+export function isInputListType(type: InputType): type is InputListType {
+    return (
+        type.Name === "Array" &&
+        (type as InputListType).ElementType !== undefined
+    );
+}
+
 export interface InputDictionaryType extends InputType {
     KeyType: InputType;
     ValueType: InputType;
+}
+
+export function isInputDictionaryType(
+    type: InputType
+): type is InputDictionaryType {
+    return (
+        type.Name === "Dictionary" &&
+        (type as InputDictionaryType).KeyType !== undefined &&
+        (type as InputDictionaryType).ValueType !== undefined
+    );
 }
 
 export interface InputIntrinsicType extends InputType {

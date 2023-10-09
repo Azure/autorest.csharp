@@ -65,8 +65,11 @@ function Add-TestServer-Swagger ([string]$testName, [string]$projectSuffix, [str
     Add-Swagger "$testName$projectSuffix" $projectDirectory "--require=$configurationPath --try-require=$inputReadme --input-file=$inputFile $additionalArgs --clear-output-folder=true"
 }
 
-function Add-CadlRanch-TypeSpec([string]$testName, [string]$projectPrefix, [string]$cadlRanchProjectsDirectory) {
+function Add-CadlRanch-TypeSpec([string]$testName, [string]$projectPrefix, [string]$cadlRanchProjectsDirectory, [string]$outputProjectDir="") {
     $projectDirectory = Join-Path $cadlRanchProjectsDirectory $testName
+    if ($outputProjectDir -ne "") {
+        $projectDirectory = $outputProjectDir
+    }
     $configFile = Join-Path $projectDirectory "tspconfig.yaml"
     if (Test-Path $configFile) {
         $configString = "--config=$configFile "
@@ -257,9 +260,8 @@ if (!($Exclude -contains "CadlRanchProjects")) {
     }
 }
 
-# TODO: remove later after cadl-ranch fixes the discriminator tests
-Add-TypeSpec "inheritance-typespec" (Join-Path $cadlRanchProjectDirectory "inheritance")
-
+# add Head-As-Boolen project
+Add-CadlRanch-TypeSpec "server/path/single" "headAsBoolean-typespec-" $cadlRanchProjectDirectory "$cadlRanchProjectDirectory/server/path/single-headAsBoolean"
 # Smoke tests
 if (!($Exclude -contains "SmokeTests")) {
     foreach ($input in Get-Content (Join-Path $PSScriptRoot "SmokeTestInputs.txt")) {
@@ -308,10 +310,6 @@ foreach ($key in Sort-FileSafe ($testProjectEntries.Keys)) {
         continue;
     }
 
-    # TODO: remove later after candl ranch fixes the discriminator test
-    if ($definition.output.Contains("\CadlRanchProjects\inheritance")) {
-        continue;
-    }
 
     $outputPath = Join-Path $definition.output "Generated"
     if ($key -eq "TypeSchemaMapping") {

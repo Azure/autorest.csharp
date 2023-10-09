@@ -6,14 +6,13 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
+using _Azure.Lro.Standard;
 using _Azure.Lro.Standard.Models;
 
 namespace _Azure.Lro.Standard.Samples
@@ -24,35 +23,15 @@ namespace _Azure.Lro.Standard.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_CreateOrReplace()
         {
-            var client = new StandardClient();
+            StandardClient client = new StandardClient();
 
-            var data = new
+            RequestContent content = RequestContent.Create(new
             {
                 role = "<role>",
-            };
-
-            var operation = client.CreateOrReplace(WaitUntil.Completed, "<name>", RequestContent.Create(data));
-
+            });
+            Operation<BinaryData> operation = client.CreateOrReplace(WaitUntil.Completed, "<name>", content);
             BinaryData responseData = operation.Value;
-            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
-            Console.WriteLine(result.GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("role").ToString());
-        }
 
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_CreateOrReplace_AllParameters()
-        {
-            var client = new StandardClient();
-
-            var data = new
-            {
-                role = "<role>",
-            };
-
-            var operation = client.CreateOrReplace(WaitUntil.Completed, "<name>", RequestContent.Create(data));
-
-            BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("role").ToString());
@@ -62,16 +41,55 @@ namespace _Azure.Lro.Standard.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_CreateOrReplace_Async()
         {
-            var client = new StandardClient();
+            StandardClient client = new StandardClient();
 
-            var data = new
+            RequestContent content = RequestContent.Create(new
             {
                 role = "<role>",
-            };
-
-            var operation = await client.CreateOrReplaceAsync(WaitUntil.Completed, "<name>", RequestContent.Create(data));
-
+            });
+            Operation<BinaryData> operation = await client.CreateOrReplaceAsync(WaitUntil.Completed, "<name>", content);
             BinaryData responseData = operation.Value;
+
+            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+            Console.WriteLine(result.GetProperty("name").ToString());
+            Console.WriteLine(result.GetProperty("role").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_CreateOrReplace_Convenience()
+        {
+            StandardClient client = new StandardClient();
+
+            User resource = new User("<role>");
+            Operation<User> operation = client.CreateOrReplace(WaitUntil.Completed, "<name>", resource);
+            User responseData = operation.Value;
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_CreateOrReplace_Convenience_Async()
+        {
+            StandardClient client = new StandardClient();
+
+            User resource = new User("<role>");
+            Operation<User> operation = await client.CreateOrReplaceAsync(WaitUntil.Completed, "<name>", resource);
+            User responseData = operation.Value;
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_CreateOrReplace_AllParameters()
+        {
+            StandardClient client = new StandardClient();
+
+            RequestContent content = RequestContent.Create(new
+            {
+                role = "<role>",
+            });
+            Operation<BinaryData> operation = client.CreateOrReplace(WaitUntil.Completed, "<name>", content);
+            BinaryData responseData = operation.Value;
+
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("role").ToString());
@@ -81,16 +99,15 @@ namespace _Azure.Lro.Standard.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_CreateOrReplace_AllParameters_Async()
         {
-            var client = new StandardClient();
+            StandardClient client = new StandardClient();
 
-            var data = new
+            RequestContent content = RequestContent.Create(new
             {
                 role = "<role>",
-            };
-
-            var operation = await client.CreateOrReplaceAsync(WaitUntil.Completed, "<name>", RequestContent.Create(data));
-
+            });
+            Operation<BinaryData> operation = await client.CreateOrReplaceAsync(WaitUntil.Completed, "<name>", content);
             BinaryData responseData = operation.Value;
+
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("role").ToString());
@@ -98,81 +115,71 @@ namespace _Azure.Lro.Standard.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_CreateOrReplace_Convenience_Async()
+        public void Example_CreateOrReplace_AllParameters_Convenience()
         {
-            var client = new StandardClient();
+            StandardClient client = new StandardClient();
 
-            var resource = new User("<role>");
-            var operation = await client.CreateOrReplaceAsync(WaitUntil.Completed, "<name>", resource);
+            User resource = new User("<role>");
+            Operation<User> operation = client.CreateOrReplace(WaitUntil.Completed, "<name>", resource);
+            User responseData = operation.Value;
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_CreateOrReplace_AllParameters_Convenience_Async()
+        {
+            StandardClient client = new StandardClient();
+
+            User resource = new User("<role>");
+            Operation<User> operation = await client.CreateOrReplaceAsync(WaitUntil.Completed, "<name>", resource);
+            User responseData = operation.Value;
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_Delete()
         {
-            var client = new StandardClient();
+            StandardClient client = new StandardClient();
 
-            var operation = client.Delete(WaitUntil.Completed, "<name>");
-
-            Console.WriteLine(operation.GetRawResponse().Status);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_Delete_AllParameters()
-        {
-            var client = new StandardClient();
-
-            var operation = client.Delete(WaitUntil.Completed, "<name>");
-
-            Console.WriteLine(operation.GetRawResponse().Status);
+            Operation operation = client.Delete(WaitUntil.Completed, "<name>");
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Delete_Async()
         {
-            var client = new StandardClient();
+            StandardClient client = new StandardClient();
 
-            var operation = await client.DeleteAsync(WaitUntil.Completed, "<name>");
+            Operation operation = await client.DeleteAsync(WaitUntil.Completed, "<name>");
+        }
 
-            Console.WriteLine(operation.GetRawResponse().Status);
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Delete_AllParameters()
+        {
+            StandardClient client = new StandardClient();
+
+            Operation operation = client.Delete(WaitUntil.Completed, "<name>");
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Delete_AllParameters_Async()
         {
-            var client = new StandardClient();
+            StandardClient client = new StandardClient();
 
-            var operation = await client.DeleteAsync(WaitUntil.Completed, "<name>");
-
-            Console.WriteLine(operation.GetRawResponse().Status);
+            Operation operation = await client.DeleteAsync(WaitUntil.Completed, "<name>");
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_Export()
         {
-            var client = new StandardClient();
+            StandardClient client = new StandardClient();
 
-            var operation = client.Export(WaitUntil.Completed, "<name>", "<format>", new RequestContext());
-
+            Operation<BinaryData> operation = client.Export(WaitUntil.Completed, "<name>", "<format>", null);
             BinaryData responseData = operation.Value;
-            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
-            Console.WriteLine(result.GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("resourceUri").ToString());
-        }
 
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_Export_AllParameters()
-        {
-            var client = new StandardClient();
-
-            var operation = client.Export(WaitUntil.Completed, "<name>", "<format>", new RequestContext());
-
-            BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("resourceUri").ToString());
@@ -182,11 +189,45 @@ namespace _Azure.Lro.Standard.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Export_Async()
         {
-            var client = new StandardClient();
+            StandardClient client = new StandardClient();
 
-            var operation = await client.ExportAsync(WaitUntil.Completed, "<name>", "<format>", new RequestContext());
-
+            Operation<BinaryData> operation = await client.ExportAsync(WaitUntil.Completed, "<name>", "<format>", null);
             BinaryData responseData = operation.Value;
+
+            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+            Console.WriteLine(result.GetProperty("name").ToString());
+            Console.WriteLine(result.GetProperty("resourceUri").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Export_Convenience()
+        {
+            StandardClient client = new StandardClient();
+
+            Operation<ExportedUser> operation = client.Export(WaitUntil.Completed, "<name>", "<format>");
+            ExportedUser responseData = operation.Value;
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Export_Convenience_Async()
+        {
+            StandardClient client = new StandardClient();
+
+            Operation<ExportedUser> operation = await client.ExportAsync(WaitUntil.Completed, "<name>", "<format>");
+            ExportedUser responseData = operation.Value;
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Export_AllParameters()
+        {
+            StandardClient client = new StandardClient();
+
+            Operation<BinaryData> operation = client.Export(WaitUntil.Completed, "<name>", "<format>", null);
+            BinaryData responseData = operation.Value;
+
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("resourceUri").ToString());
@@ -196,11 +237,11 @@ namespace _Azure.Lro.Standard.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Export_AllParameters_Async()
         {
-            var client = new StandardClient();
+            StandardClient client = new StandardClient();
 
-            var operation = await client.ExportAsync(WaitUntil.Completed, "<name>", "<format>", new RequestContext());
-
+            Operation<BinaryData> operation = await client.ExportAsync(WaitUntil.Completed, "<name>", "<format>", null);
             BinaryData responseData = operation.Value;
+
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("resourceUri").ToString());
@@ -208,11 +249,22 @@ namespace _Azure.Lro.Standard.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Export_Convenience_Async()
+        public void Example_Export_AllParameters_Convenience()
         {
-            var client = new StandardClient();
+            StandardClient client = new StandardClient();
 
-            var operation = await client.ExportAsync(WaitUntil.Completed, "<name>", "<format>");
+            Operation<ExportedUser> operation = client.Export(WaitUntil.Completed, "<name>", "<format>");
+            ExportedUser responseData = operation.Value;
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Export_AllParameters_Convenience_Async()
+        {
+            StandardClient client = new StandardClient();
+
+            Operation<ExportedUser> operation = await client.ExportAsync(WaitUntil.Completed, "<name>", "<format>");
+            ExportedUser responseData = operation.Value;
         }
     }
 }

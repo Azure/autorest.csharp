@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Autorest.CSharp.Core;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
@@ -248,25 +249,25 @@ namespace MgmtScopeResource
             {
                 HttpMessage FirstPageRequest(int? pageSizeHint) => _fakePolicyAssignmentRestClient.CreateListForResourceGroupRequest(Id.SubscriptionId, Id.ResourceGroupName, filter, top);
                 HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _fakePolicyAssignmentRestClient.CreateListForResourceGroupNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, filter, top);
-                return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new FakePolicyAssignmentResource(Client, FakePolicyAssignmentData.DeserializeFakePolicyAssignmentData(e)), _fakePolicyAssignmentClientDiagnostics, Pipeline, "FakePolicyAssignmentCollection.GetAll", "value", "nextLink", cancellationToken);
+                return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new FakePolicyAssignmentResource(Client, FakePolicyAssignmentData.DeserializeFakePolicyAssignmentData(e)), _fakePolicyAssignmentClientDiagnostics, Pipeline, "FakePolicyAssignmentCollection.GetAll", "value", "nextLink", cancellationToken);
             }
             else if (Id.ResourceType == ManagementGroupResource.ResourceType)
             {
                 HttpMessage FirstPageRequest(int? pageSizeHint) => _fakePolicyAssignmentRestClient.CreateListForManagementGroupRequest(Id.Name, filter, top);
                 HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _fakePolicyAssignmentRestClient.CreateListForManagementGroupNextPageRequest(nextLink, Id.Name, filter, top);
-                return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new FakePolicyAssignmentResource(Client, FakePolicyAssignmentData.DeserializeFakePolicyAssignmentData(e)), _fakePolicyAssignmentClientDiagnostics, Pipeline, "FakePolicyAssignmentCollection.GetAll", "value", "nextLink", cancellationToken);
+                return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new FakePolicyAssignmentResource(Client, FakePolicyAssignmentData.DeserializeFakePolicyAssignmentData(e)), _fakePolicyAssignmentClientDiagnostics, Pipeline, "FakePolicyAssignmentCollection.GetAll", "value", "nextLink", cancellationToken);
             }
             else if (Id.ResourceType == SubscriptionResource.ResourceType)
             {
                 HttpMessage FirstPageRequest(int? pageSizeHint) => _fakePolicyAssignmentRestClient.CreateListRequest(Id.SubscriptionId, filter, top);
                 HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _fakePolicyAssignmentRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId, filter, top);
-                return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new FakePolicyAssignmentResource(Client, FakePolicyAssignmentData.DeserializeFakePolicyAssignmentData(e)), _fakePolicyAssignmentClientDiagnostics, Pipeline, "FakePolicyAssignmentCollection.GetAll", "value", "nextLink", cancellationToken);
+                return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new FakePolicyAssignmentResource(Client, FakePolicyAssignmentData.DeserializeFakePolicyAssignmentData(e)), _fakePolicyAssignmentClientDiagnostics, Pipeline, "FakePolicyAssignmentCollection.GetAll", "value", "nextLink", cancellationToken);
             }
             else
             {
                 HttpMessage FirstPageRequest(int? pageSizeHint) => _fakePolicyAssignmentRestClient.CreateListForResourceRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.ResourceType.Namespace, Id.Parent.SubstringAfterProviderNamespace(), Id.ResourceType.GetLastType(), Id.Name, filter, top);
                 HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _fakePolicyAssignmentRestClient.CreateListForResourceNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.ResourceType.Namespace, Id.Parent.SubstringAfterProviderNamespace(), Id.ResourceType.GetLastType(), Id.Name, filter, top);
-                return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new FakePolicyAssignmentResource(Client, FakePolicyAssignmentData.DeserializeFakePolicyAssignmentData(e)), _fakePolicyAssignmentClientDiagnostics, Pipeline, "FakePolicyAssignmentCollection.GetAll", "value", "nextLink", cancellationToken);
+                return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new FakePolicyAssignmentResource(Client, FakePolicyAssignmentData.DeserializeFakePolicyAssignmentData(e)), _fakePolicyAssignmentClientDiagnostics, Pipeline, "FakePolicyAssignmentCollection.GetAll", "value", "nextLink", cancellationToken);
             }
         }
 
@@ -317,25 +318,25 @@ namespace MgmtScopeResource
             {
                 HttpMessage FirstPageRequest(int? pageSizeHint) => _fakePolicyAssignmentRestClient.CreateListForResourceGroupRequest(Id.SubscriptionId, Id.ResourceGroupName, filter, top);
                 HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _fakePolicyAssignmentRestClient.CreateListForResourceGroupNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, filter, top);
-                return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new FakePolicyAssignmentResource(Client, FakePolicyAssignmentData.DeserializeFakePolicyAssignmentData(e)), _fakePolicyAssignmentClientDiagnostics, Pipeline, "FakePolicyAssignmentCollection.GetAll", "value", "nextLink", cancellationToken);
+                return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new FakePolicyAssignmentResource(Client, FakePolicyAssignmentData.DeserializeFakePolicyAssignmentData(e)), _fakePolicyAssignmentClientDiagnostics, Pipeline, "FakePolicyAssignmentCollection.GetAll", "value", "nextLink", cancellationToken);
             }
             else if (Id.ResourceType == ManagementGroupResource.ResourceType)
             {
                 HttpMessage FirstPageRequest(int? pageSizeHint) => _fakePolicyAssignmentRestClient.CreateListForManagementGroupRequest(Id.Name, filter, top);
                 HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _fakePolicyAssignmentRestClient.CreateListForManagementGroupNextPageRequest(nextLink, Id.Name, filter, top);
-                return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new FakePolicyAssignmentResource(Client, FakePolicyAssignmentData.DeserializeFakePolicyAssignmentData(e)), _fakePolicyAssignmentClientDiagnostics, Pipeline, "FakePolicyAssignmentCollection.GetAll", "value", "nextLink", cancellationToken);
+                return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new FakePolicyAssignmentResource(Client, FakePolicyAssignmentData.DeserializeFakePolicyAssignmentData(e)), _fakePolicyAssignmentClientDiagnostics, Pipeline, "FakePolicyAssignmentCollection.GetAll", "value", "nextLink", cancellationToken);
             }
             else if (Id.ResourceType == SubscriptionResource.ResourceType)
             {
                 HttpMessage FirstPageRequest(int? pageSizeHint) => _fakePolicyAssignmentRestClient.CreateListRequest(Id.SubscriptionId, filter, top);
                 HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _fakePolicyAssignmentRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId, filter, top);
-                return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new FakePolicyAssignmentResource(Client, FakePolicyAssignmentData.DeserializeFakePolicyAssignmentData(e)), _fakePolicyAssignmentClientDiagnostics, Pipeline, "FakePolicyAssignmentCollection.GetAll", "value", "nextLink", cancellationToken);
+                return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new FakePolicyAssignmentResource(Client, FakePolicyAssignmentData.DeserializeFakePolicyAssignmentData(e)), _fakePolicyAssignmentClientDiagnostics, Pipeline, "FakePolicyAssignmentCollection.GetAll", "value", "nextLink", cancellationToken);
             }
             else
             {
                 HttpMessage FirstPageRequest(int? pageSizeHint) => _fakePolicyAssignmentRestClient.CreateListForResourceRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.ResourceType.Namespace, Id.Parent.SubstringAfterProviderNamespace(), Id.ResourceType.GetLastType(), Id.Name, filter, top);
                 HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _fakePolicyAssignmentRestClient.CreateListForResourceNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.ResourceType.Namespace, Id.Parent.SubstringAfterProviderNamespace(), Id.ResourceType.GetLastType(), Id.Name, filter, top);
-                return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new FakePolicyAssignmentResource(Client, FakePolicyAssignmentData.DeserializeFakePolicyAssignmentData(e)), _fakePolicyAssignmentClientDiagnostics, Pipeline, "FakePolicyAssignmentCollection.GetAll", "value", "nextLink", cancellationToken);
+                return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new FakePolicyAssignmentResource(Client, FakePolicyAssignmentData.DeserializeFakePolicyAssignmentData(e)), _fakePolicyAssignmentClientDiagnostics, Pipeline, "FakePolicyAssignmentCollection.GetAll", "value", "nextLink", cancellationToken);
             }
         }
 
@@ -401,6 +402,80 @@ namespace MgmtScopeResource
             {
                 var response = _fakePolicyAssignmentRestClient.Get(Id, policyAssignmentName, cancellationToken: cancellationToken);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Tries to get details for this resource from the service.
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/{scope}/providers/Microsoft.Authorization/policyAssignments/{policyAssignmentName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>FakePolicyAssignments_Get</description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="policyAssignmentName"> The name of the policy assignment to get. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="policyAssignmentName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="policyAssignmentName"/> is null. </exception>
+        public virtual async Task<NullableResponse<FakePolicyAssignmentResource>> GetIfExistsAsync(string policyAssignmentName, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNullOrEmpty(policyAssignmentName, nameof(policyAssignmentName));
+
+            using var scope = _fakePolicyAssignmentClientDiagnostics.CreateScope("FakePolicyAssignmentCollection.GetIfExists");
+            scope.Start();
+            try
+            {
+                var response = await _fakePolicyAssignmentRestClient.GetAsync(Id, policyAssignmentName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                if (response.Value == null)
+                    return new NoValueResponse<FakePolicyAssignmentResource>(response.GetRawResponse());
+                return Response.FromValue(new FakePolicyAssignmentResource(Client, response.Value), response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Tries to get details for this resource from the service.
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/{scope}/providers/Microsoft.Authorization/policyAssignments/{policyAssignmentName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>FakePolicyAssignments_Get</description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="policyAssignmentName"> The name of the policy assignment to get. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="policyAssignmentName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="policyAssignmentName"/> is null. </exception>
+        public virtual NullableResponse<FakePolicyAssignmentResource> GetIfExists(string policyAssignmentName, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNullOrEmpty(policyAssignmentName, nameof(policyAssignmentName));
+
+            using var scope = _fakePolicyAssignmentClientDiagnostics.CreateScope("FakePolicyAssignmentCollection.GetIfExists");
+            scope.Start();
+            try
+            {
+                var response = _fakePolicyAssignmentRestClient.Get(Id, policyAssignmentName, cancellationToken: cancellationToken);
+                if (response.Value == null)
+                    return new NoValueResponse<FakePolicyAssignmentResource>(response.GetRawResponse());
+                return Response.FromValue(new FakePolicyAssignmentResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

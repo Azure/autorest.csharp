@@ -10,8 +10,8 @@ using AutoRest.TestServer.Tests.Infrastructure;
 using Azure;
 using Azure.Core;
 using NUnit.Framework;
-using _Azure.Lro.Rpc.Legacy;
-using _Azure.Lro.Rpc.Legacy.Models;
+using _Azure.Lro.RpcLegacy;
+using _Azure.Lro.RpcLegacy.Models;
 using System.Net;
 
 namespace CadlRanchProjects.Tests

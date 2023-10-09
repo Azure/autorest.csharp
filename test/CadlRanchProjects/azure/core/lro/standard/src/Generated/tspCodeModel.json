@@ -9,8 +9,6 @@
   {
    "$id": "2",
    "Name": "OperationState",
-   "Namespace": "Azure.Core.Foundations",
-   "Description": "Enum describing allowed operation states.",
    "EnumValueType": "String",
    "AllowedValues": [
     {
@@ -38,6 +36,8 @@
      "Description": "The operation has been canceled by the user."
     }
    ],
+   "Namespace": "Azure.Core.Foundations",
+   "Description": "Enum describing allowed operation states.",
    "IsExtensible": true,
    "IsNullable": false,
    "Usage": "Output"
@@ -88,7 +88,7 @@
    "Namespace": "Azure.Core",
    "Description": "Provides status details for long running operations.",
    "IsNullable": false,
-   "Usage": "None",
+   "Usage": "Output",
    "Properties": [
     {
      "$id": "13",

@@ -2,108 +2,172 @@
 <doc>
   <members>
     <member name="GetInt32ValueAsync(CancellationToken)">
-<example>
+      <example>
 This sample shows how to call GetInt32ValueAsync.
 <code><![CDATA[
-var client = new DictionaryClient().GetInt32ValueClient("1.0.0");
+Int32Value client = new DictionaryClient().GetInt32ValueClient(apiVersion: "1.0.0");
 
-var result = await client.GetInt32ValueAsync();
+Response<IReadOnlyDictionary<string, int>> response = await client.GetInt32ValueAsync();
 ]]></code>
-</example>
+This sample shows how to call GetInt32ValueAsync with all parameters.
+<code><![CDATA[
+Int32Value client = new DictionaryClient().GetInt32ValueClient(apiVersion: "1.0.0");
+
+Response<IReadOnlyDictionary<string, int>> response = await client.GetInt32ValueAsync();
+]]></code></example>
     </member>
     <member name="GetInt32Value(CancellationToken)">
-<example>
+      <example>
 This sample shows how to call GetInt32Value.
 <code><![CDATA[
-var client = new DictionaryClient().GetInt32ValueClient("1.0.0");
+Int32Value client = new DictionaryClient().GetInt32ValueClient(apiVersion: "1.0.0");
 
-var result = client.GetInt32Value();
+Response<IReadOnlyDictionary<string, int>> response = client.GetInt32Value();
 ]]></code>
-</example>
+This sample shows how to call GetInt32Value with all parameters.
+<code><![CDATA[
+Int32Value client = new DictionaryClient().GetInt32ValueClient(apiVersion: "1.0.0");
+
+Response<IReadOnlyDictionary<string, int>> response = client.GetInt32Value();
+]]></code></example>
     </member>
     <member name="GetInt32ValueAsync(RequestContext)">
-<example>
-This sample shows how to call GetInt32ValueAsync with required parameters and parse the result.
+      <example>
+This sample shows how to call GetInt32ValueAsync and parse the result.
 <code><![CDATA[
-var client = new DictionaryClient().GetInt32ValueClient("1.0.0");
+Int32Value client = new DictionaryClient().GetInt32ValueClient(apiVersion: "1.0.0");
 
-Response response = await client.GetInt32ValueAsync(new RequestContext());
+Response response = await client.GetInt32ValueAsync(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("<test>").ToString());
+Console.WriteLine(result.GetProperty("<key>").ToString());
 ]]></code>
-</example>
+This sample shows how to call GetInt32ValueAsync with all parameters and parse the result.
+<code><![CDATA[
+Int32Value client = new DictionaryClient().GetInt32ValueClient(apiVersion: "1.0.0");
+
+Response response = await client.GetInt32ValueAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("<key>").ToString());
+]]></code></example>
     </member>
     <member name="GetInt32Value(RequestContext)">
-<example>
-This sample shows how to call GetInt32Value with required parameters and parse the result.
+      <example>
+This sample shows how to call GetInt32Value and parse the result.
 <code><![CDATA[
-var client = new DictionaryClient().GetInt32ValueClient("1.0.0");
+Int32Value client = new DictionaryClient().GetInt32ValueClient(apiVersion: "1.0.0");
 
-Response response = client.GetInt32Value(new RequestContext());
+Response response = client.GetInt32Value(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("<test>").ToString());
+Console.WriteLine(result.GetProperty("<key>").ToString());
 ]]></code>
-</example>
+This sample shows how to call GetInt32Value with all parameters and parse the result.
+<code><![CDATA[
+Int32Value client = new DictionaryClient().GetInt32ValueClient(apiVersion: "1.0.0");
+
+Response response = client.GetInt32Value(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("<key>").ToString());
+]]></code></example>
     </member>
     <member name="PutAsync(IDictionary{string,int},CancellationToken)">
-<example>
-This sample shows how to call PutAsync with required parameters.
+      <example>
+This sample shows how to call PutAsync.
 <code><![CDATA[
-var client = new DictionaryClient().GetInt32ValueClient("1.0.0");
+Int32Value client = new DictionaryClient().GetInt32ValueClient(apiVersion: "1.0.0");
 
-var body = new Dictionary<string, int>
+Response response = await client.PutAsync(new Dictionary<string, int>()
 {
     ["key"] = 1234,
-};
-var result = await client.PutAsync(body);
+});
+Console.WriteLine(response.Status);
 ]]></code>
-</example>
+This sample shows how to call PutAsync with all parameters.
+<code><![CDATA[
+Int32Value client = new DictionaryClient().GetInt32ValueClient(apiVersion: "1.0.0");
+
+Response response = await client.PutAsync(new Dictionary<string, int>()
+{
+    ["key"] = 1234,
+});
+Console.WriteLine(response.Status);
+]]></code></example>
     </member>
     <member name="Put(IDictionary{string,int},CancellationToken)">
-<example>
-This sample shows how to call Put with required parameters.
+      <example>
+This sample shows how to call Put.
 <code><![CDATA[
-var client = new DictionaryClient().GetInt32ValueClient("1.0.0");
+Int32Value client = new DictionaryClient().GetInt32ValueClient(apiVersion: "1.0.0");
 
-var body = new Dictionary<string, int>
+Response response = client.Put(new Dictionary<string, int>()
 {
     ["key"] = 1234,
-};
-var result = client.Put(body);
+});
+Console.WriteLine(response.Status);
 ]]></code>
-</example>
+This sample shows how to call Put with all parameters.
+<code><![CDATA[
+Int32Value client = new DictionaryClient().GetInt32ValueClient(apiVersion: "1.0.0");
+
+Response response = client.Put(new Dictionary<string, int>()
+{
+    ["key"] = 1234,
+});
+Console.WriteLine(response.Status);
+]]></code></example>
     </member>
     <member name="PutAsync(RequestContent,RequestContext)">
-<example>
-This sample shows how to call PutAsync with required request content.
+      <example>
+This sample shows how to call PutAsync.
 <code><![CDATA[
-var client = new DictionaryClient().GetInt32ValueClient("1.0.0");
+Int32Value client = new DictionaryClient().GetInt32ValueClient(apiVersion: "1.0.0");
 
-var data = new {
+RequestContent content = RequestContent.Create(new
+{
     key = 1234,
-};
-
-Response response = await client.PutAsync(RequestContent.Create(data));
+});
+Response response = await client.PutAsync(content);
 Console.WriteLine(response.Status);
 ]]></code>
-</example>
+This sample shows how to call PutAsync with all request content.
+<code><![CDATA[
+Int32Value client = new DictionaryClient().GetInt32ValueClient(apiVersion: "1.0.0");
+
+RequestContent content = RequestContent.Create(new
+{
+    key = 1234,
+});
+Response response = await client.PutAsync(content);
+Console.WriteLine(response.Status);
+]]></code></example>
     </member>
     <member name="Put(RequestContent,RequestContext)">
-<example>
-This sample shows how to call Put with required request content.
+      <example>
+This sample shows how to call Put.
 <code><![CDATA[
-var client = new DictionaryClient().GetInt32ValueClient("1.0.0");
+Int32Value client = new DictionaryClient().GetInt32ValueClient(apiVersion: "1.0.0");
 
-var data = new {
+RequestContent content = RequestContent.Create(new
+{
     key = 1234,
-};
-
-Response response = client.Put(RequestContent.Create(data));
+});
+Response response = client.Put(content);
 Console.WriteLine(response.Status);
 ]]></code>
-</example>
+This sample shows how to call Put with all request content.
+<code><![CDATA[
+Int32Value client = new DictionaryClient().GetInt32ValueClient(apiVersion: "1.0.0");
+
+RequestContent content = RequestContent.Create(new
+{
+    key = 1234,
+});
+Response response = client.Put(content);
+Console.WriteLine(response.Status);
+]]></code></example>
     </member>
   </members>
 </doc>

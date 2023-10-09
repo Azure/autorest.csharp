@@ -73,7 +73,7 @@ namespace media_types_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/MediaTypesClient.xml" path="doc/members/member[@name='AnalyzeBodyAsync(RequestContent,ContentType,RequestContext)']/*" />
-        public virtual async Task<Response> AnalyzeBodyAsync(RequestContent content, ContentType contentType, RequestContext context)
+        public virtual async Task<Response> AnalyzeBodyAsync(RequestContent content, ContentType contentType, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MediaTypesClient.AnalyzeBody");
             scope.Start();
@@ -105,7 +105,7 @@ namespace media_types_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/MediaTypesClient.xml" path="doc/members/member[@name='AnalyzeBody(RequestContent,ContentType,RequestContext)']/*" />
-        public virtual Response AnalyzeBody(RequestContent content, ContentType contentType, RequestContext context)
+        public virtual Response AnalyzeBody(RequestContent content, ContentType contentType, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MediaTypesClient.AnalyzeBody");
             scope.Start();
@@ -137,7 +137,7 @@ namespace media_types_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/MediaTypesClient.xml" path="doc/members/member[@name='AnalyzeBodyNoAcceptHeaderAsync(RequestContent,ContentType,RequestContext)']/*" />
-        public virtual async Task<Response> AnalyzeBodyNoAcceptHeaderAsync(RequestContent content, ContentType contentType, RequestContext context)
+        public virtual async Task<Response> AnalyzeBodyNoAcceptHeaderAsync(RequestContent content, ContentType contentType, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MediaTypesClient.AnalyzeBodyNoAcceptHeader");
             scope.Start();
@@ -169,7 +169,7 @@ namespace media_types_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/MediaTypesClient.xml" path="doc/members/member[@name='AnalyzeBodyNoAcceptHeader(RequestContent,ContentType,RequestContext)']/*" />
-        public virtual Response AnalyzeBodyNoAcceptHeader(RequestContent content, ContentType contentType, RequestContext context)
+        public virtual Response AnalyzeBodyNoAcceptHeader(RequestContent content, ContentType contentType, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MediaTypesClient.AnalyzeBodyNoAcceptHeader");
             scope.Start();
@@ -200,7 +200,7 @@ namespace media_types_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/MediaTypesClient.xml" path="doc/members/member[@name='ContentTypeWithEncodingAsync(RequestContent,RequestContext)']/*" />
-        public virtual async Task<Response> ContentTypeWithEncodingAsync(RequestContent content, RequestContext context)
+        public virtual async Task<Response> ContentTypeWithEncodingAsync(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MediaTypesClient.ContentTypeWithEncoding");
             scope.Start();
@@ -231,7 +231,7 @@ namespace media_types_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/MediaTypesClient.xml" path="doc/members/member[@name='ContentTypeWithEncoding(RequestContent,RequestContext)']/*" />
-        public virtual Response ContentTypeWithEncoding(RequestContent content, RequestContext context)
+        public virtual Response ContentTypeWithEncoding(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MediaTypesClient.ContentTypeWithEncoding");
             scope.Start();
@@ -388,6 +388,76 @@ namespace media_types_LowLevel
         }
 
         /// <summary>
+        /// [Protocol Method] Body with three types. Can be stream, string, or JSON. Pass in string 'hello, world' with content type 'text/plain', {'hello': world'} with content type 'application/json' and a byte string for 'application/octet-stream'.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="contentType"> Upload file type. Allowed values: "application/json" | "application/octet-stream" | "text/plain". </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/MediaTypesClient.xml" path="doc/members/member[@name='BodyThreeTypesAsync(RequestContent,ContentType,RequestContext)']/*" />
+        public virtual async Task<Response> BodyThreeTypesAsync(RequestContent content, ContentType contentType, RequestContext context = null)
+        {
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("MediaTypesClient.BodyThreeTypes");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateBodyThreeTypesRequest(content, contentType, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// [Protocol Method] Body with three types. Can be stream, string, or JSON. Pass in string 'hello, world' with content type 'text/plain', {'hello': world'} with content type 'application/json' and a byte string for 'application/octet-stream'.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="contentType"> Upload file type. Allowed values: "application/json" | "application/octet-stream" | "text/plain". </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/MediaTypesClient.xml" path="doc/members/member[@name='BodyThreeTypes(RequestContent,ContentType,RequestContext)']/*" />
+        public virtual Response BodyThreeTypes(RequestContent content, ContentType contentType, RequestContext context = null)
+        {
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("MediaTypesClient.BodyThreeTypes");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateBodyThreeTypesRequest(content, contentType, context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary>
         /// [Protocol Method] Body that's either text/plain or application/json
         /// <list type="bullet">
         /// <item>
@@ -524,6 +594,21 @@ namespace media_types_LowLevel
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/mediatypes/binaryBodyThreeContentTypes", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "text/plain");
+            request.Headers.Add("Content-Type", contentType.ToString());
+            request.Content = content;
+            return message;
+        }
+
+        internal HttpMessage CreateBodyThreeTypesRequest(RequestContent content, ContentType contentType, RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
+            var request = message.Request;
+            request.Method = RequestMethod.Post;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/mediatypes/bodyThreeTypes", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "text/plain");
             request.Headers.Add("Content-Type", contentType.ToString());

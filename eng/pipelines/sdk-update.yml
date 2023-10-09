@@ -23,7 +23,7 @@ resources:
     - repository: azure-sdk-build-tools
       type: git
       name: internal/azure-sdk-build-tools
-      ref: refs/tags/azure-sdk-build-tools_20230307.1
+      ref: refs/tags/azure-sdk-build-tools_20230829.1
 
 stages:
   - stage: 'Build_and_Test'
@@ -145,23 +145,23 @@ stages:
       jobs:
       - template: check-code-generation.yml
         parameters:
-          name: Check_Code_Generation_A_C
+          name: Check_Code_Generation_A_B
           filter: "^[a-b]"
           usePackageJsonFromArtifacts: true
       - template: check-code-generation.yml
         parameters:
-          name: Check_Code_Generation_C_I
-          filter: "^[c-i]"
+          name: Check_Code_Generation_C_L
+          filter: "^[c-l]"
           usePackageJsonFromArtifacts: true
       - template: check-code-generation.yml
         parameters:
-          name: Check_Code_Generation_J_R
-          filter: "^[j-r]"
+          name: Check_Code_Generation_M
+          filter: "^m"
           usePackageJsonFromArtifacts: true
       - template: check-code-generation.yml
         parameters:
-          name: Check_Code_Generation_S_Z
-          filter: "^[s-z]"
+          name: Check_Code_Generation_N_Z
+          filter: "^[o-z]"
           usePackageJsonFromArtifacts: true
   - stage: 'Update_azure_sdk_for_net'
     dependsOn:

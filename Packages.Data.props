@@ -3,8 +3,8 @@
   <!-- Dependency versions to mimic azure-sdk-for-net build system. -->
 
   <!-- Test only dependencies. -->
-  <ItemGroup Condition="'$(IsTestGenerationTestProjet)' == 'true'">
-    <PackageReference Update="Moq" Version="4.18.2" />
+  <ItemGroup Condition="'$(IsTestGenerationTestProject)' == 'true'">
+    <PackageReference Update="Moq" Version="[4.18.2]" />
   </ItemGroup>
 
   <ItemGroup Condition="$(MSBuildProjectName.EndsWith('.Tests'))">
@@ -16,6 +16,11 @@
   <!-- Library only dependencies. -->
   <ItemGroup Condition="'$(IsTestGenerationSrcProject)' == 'true'">
     <PackageReference Update="System.Text.Json" Version="4.7.2" />
+  
+    <!-- Include analyzers so that we see issues in this repo before we do a regen preview-->
+    <PackageReference Update="Azure.ClientSdk.Analyzers" Version="0.1.1-dev.20230822.1" PrivateAssets="All" />
+    <PackageReference Update="Microsoft.CodeAnalysis.NetAnalyzers" Version="7.0.1" PrivateAssets="All" />
+    <PackageReference Update="Microsoft.CodeAnalysis.BannedApiAnalyzers" Version="3.3.2" PrivateAssets="All" />
   </ItemGroup>
 
   <!-- All csproj dependencies. -->

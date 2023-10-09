@@ -8,8 +8,6 @@
   {
    "$id": "2",
    "Name": "ProjectKind",
-   "Namespace": "AuthoringTypeSpec",
-   "Description": "Represents the project kind.",
    "EnumValueType": "String",
    "AllowedValues": [
     {
@@ -31,6 +29,8 @@
      "Description": "For building an extraction model to identify your domain categories using your own data."
     }
    ],
+   "Namespace": "AuthoringTypeSpec",
+   "Description": "Represents the project kind.",
    "IsExtensible": true,
    "IsNullable": false,
    "Usage": "None"
@@ -38,8 +38,6 @@
   {
    "$id": "6",
    "Name": "OperationState",
-   "Namespace": "Azure.Core.Foundations",
-   "Description": "Enum describing allowed operation states.",
    "EnumValueType": "String",
    "AllowedValues": [
     {
@@ -67,6 +65,8 @@
      "Description": "The operation has been canceled by the user."
     }
    ],
+   "Namespace": "Azure.Core.Foundations",
+   "Description": "Enum describing allowed operation states.",
    "IsExtensible": true,
    "IsNullable": false,
    "Usage": "None"
@@ -74,8 +74,6 @@
   {
    "$id": "11",
    "Name": "JobStatus",
-   "Namespace": "AuthoringTypeSpec",
-   "Description": "Represents the job status values.",
    "EnumValueType": "String",
    "AllowedValues": [
     {
@@ -114,6 +112,8 @@
      "Value": "partiallyCompleted"
     }
    ],
+   "Namespace": "AuthoringTypeSpec",
+   "Description": "Represents the job status values.",
    "IsExtensible": true,
    "IsNullable": false,
    "Usage": "Output"
@@ -293,7 +293,7 @@
   },
   {
    "$id": "43",
-   "Name": "CustomPageProject",
+   "Name": "PagedProject",
    "Namespace": "Azure.Core.Foundations",
    "Description": "Paged collection of Project items",
    "IsNullable": false,
@@ -540,7 +540,7 @@
   },
   {
    "$id": "73",
-   "Name": "CustomPageDeployment",
+   "Name": "PagedDeployment",
    "Namespace": "Azure.Core.Foundations",
    "Description": "Paged collection of Deployment items",
    "IsNullable": false,

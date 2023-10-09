@@ -173,6 +173,7 @@ namespace _Azure.Lro.Standard
             }
         }
 
+        // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
         /// [Protocol Method] Deletes a user.
         /// <list type="bullet">
@@ -209,6 +210,7 @@ namespace _Azure.Lro.Standard
             }
         }
 
+        // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
         /// [Protocol Method] Deletes a user.
         /// <list type="bullet">

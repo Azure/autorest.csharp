@@ -63,6 +63,8 @@ namespace ModelsTypeSpec.Models
             }
             writer.WritePropertyName("requiredModel"u8);
             writer.WriteObjectValue(RequiredModel);
+            writer.WritePropertyName("requiredModel2"u8);
+            writer.WriteObjectValue(RequiredModel2);
             writer.WritePropertyName("requiredIntList"u8);
             writer.WriteStartArray();
             foreach (var item in RequiredIntList)

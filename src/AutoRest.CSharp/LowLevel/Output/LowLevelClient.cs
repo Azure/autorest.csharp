@@ -7,6 +7,7 @@ using System.Collections.Immutable;
 using System.Linq;
 using System.Text.RegularExpressions;
 using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Input.Examples;
 using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Common.Output.Models.Responses;
 using AutoRest.CSharp.Generation.Types;
@@ -27,6 +28,7 @@ namespace AutoRest.CSharp.Output.Models
         private readonly string _libraryName;
         private readonly TypeFactory _typeFactory;
         private readonly IEnumerable<InputParameter> _clientParameters;
+        private readonly IReadOnlyDictionary<string, InputClientExample> _clientParameterExamples;
         private readonly InputAuth _authorization;
         private readonly IEnumerable<InputOperation> _operations;
         private readonly SourceInputModel? _sourceInputModel;
@@ -49,7 +51,7 @@ namespace AutoRest.CSharp.Output.Models
         private bool? _isResourceClient;
         public bool IsResourceClient => _isResourceClient ??= Parameters.Any(p => p.IsResourceIdentifier);
 
-        public LowLevelClient(string name, string ns, string description, string libraryName, LowLevelClient? parentClient, IEnumerable<InputOperation> operations, IEnumerable<InputParameter> clientParameters, InputAuth authorization, SourceInputModel? sourceInputModel, ClientOptionsTypeProvider clientOptions, TypeFactory typeFactory)
+        public LowLevelClient(string name, string ns, string description, string libraryName, LowLevelClient? parentClient, IEnumerable<InputOperation> operations, IEnumerable<InputParameter> clientParameters, InputAuth authorization, SourceInputModel? sourceInputModel, ClientOptionsTypeProvider clientOptions, IReadOnlyDictionary<string, InputClientExample> examples, TypeFactory typeFactory)
             : base(ns, sourceInputModel)
         {
             _libraryName = libraryName;
@@ -62,6 +64,7 @@ namespace AutoRest.CSharp.Output.Models
             ClientOptions = clientOptions;
 
             _clientParameters = clientParameters;
+            _clientParameterExamples = examples;
             _authorization = authorization;
             _operations = operations;
             _sourceInputModel = sourceInputModel;
@@ -81,7 +84,7 @@ namespace AutoRest.CSharp.Output.Models
         public ConstructorSignature[] SecondaryConstructors => Constructors.SecondaryConstructors;
 
         private IReadOnlyList<LowLevelClientMethod>? _allClientMethods;
-        private IReadOnlyList<LowLevelClientMethod> AllClientMethods => _allClientMethods ??= BuildMethods(_typeFactory, _operations, Fields, Declaration.Namespace, Declaration.Name, _sourceInputModel).ToArray();
+        private IReadOnlyList<LowLevelClientMethod> AllClientMethods => _allClientMethods ??= BuildMethods(this, _typeFactory, _operations, Fields, Declaration.Namespace, Declaration.Name, _sourceInputModel).ToArray();
 
         private IReadOnlyList<LowLevelClientMethod>? _clientMethods;
         public IReadOnlyList<LowLevelClientMethod> ClientMethods => _clientMethods ??= AllClientMethods
@@ -107,9 +110,9 @@ namespace AutoRest.CSharp.Output.Models
         }
 
 
-        public static IEnumerable<LowLevelClientMethod> BuildMethods(TypeFactory typeFactory, IEnumerable<InputOperation> operations, ClientFields fields, string namespaceName, string clientName, SourceInputModel? sourceInputModel)
+        public static IEnumerable<LowLevelClientMethod> BuildMethods(LowLevelClient? client, TypeFactory typeFactory, IEnumerable<InputOperation> operations, ClientFields fields, string namespaceName, string clientName, SourceInputModel? sourceInputModel)
         {
-            var builders = operations.ToDictionary(o => o, o => new OperationMethodChainBuilder(o, namespaceName, clientName, fields, typeFactory, sourceInputModel));
+            var builders = operations.ToDictionary(o => o, o => new OperationMethodChainBuilder(client, o, namespaceName, clientName, fields, typeFactory, sourceInputModel, client?._clientParameterExamples));
             foreach (var (_, builder) in builders)
             {
                 builder.BuildNextPageMethod(builders);
@@ -204,7 +207,7 @@ namespace AutoRest.CSharp.Output.Models
         {
             return new Parameter(
                 "credential",
-                "A credential used to authenticate to an Azure Service.",
+                $"A credential used to authenticate to an Azure Service.",
                 type,
                 null,
                 ValidationType.AssertNotNull,
@@ -217,7 +220,7 @@ namespace AutoRest.CSharp.Output.Models
         private Parameter CreateOptionsParameter()
         {
             var clientOptionsType = ClientOptions.Type.WithNullable(true);
-            return new Parameter("options", "The options for configuring the client.", clientOptionsType, Constant.Default(clientOptionsType), ValidationType.None, Constant.NewInstanceOf(clientOptionsType).GetConstantFormattable());
+            return new Parameter("options", $"The options for configuring the client.", clientOptionsType, Constant.Default(clientOptionsType), ValidationType.None, Constant.NewInstanceOf(clientOptionsType).GetConstantFormattable());
         }
 
         private ConstructorSignature BuildSubClientInternalConstructor()
@@ -301,7 +304,7 @@ namespace AutoRest.CSharp.Output.Models
                         modifiers,
                         parameters.Select(p => new Parameter(
                             p.Name,
-                            p.GetDocumentationCommentXml(),
+                            $"{p.GetDocumentationCommentXml()}",
                             ((INamedTypeSymbol)p.Type).GetCSharpType(_typeFactory)!,
                             null,
                             ValidationType.None,
@@ -314,7 +317,7 @@ namespace AutoRest.CSharp.Output.Models
             return candidates.OrderBy(c => c.Parameters.Count).FirstOrDefault();
         }
 
-        private string? GetSummaryPortion(string? xmlComment)
+        private FormattableString? GetSummaryPortion(string? xmlComment)
         {
             if (xmlComment is null)
                 return null;
@@ -327,7 +330,7 @@ namespace AutoRest.CSharp.Output.Models
             int end = span.IndexOf("</summary>");
             if (end == -1)
                 return null;
-            return span.Slice(start, end - start).Trim().ToString();
+            return $"{span.Slice(start, end - start).Trim().ToString()}";
         }
 
         private bool IsParamMatch(IReadOnlyList<Parameter> methodParameters, INamedTypeSymbol[] suppressionParameters)

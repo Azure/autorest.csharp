@@ -75,5 +75,15 @@ namespace MgmtMockAndSample.Tests.Mock
             {
             }
         }
+
+        [RecordedTest]
+        public async Task GetIfExists()
+        {
+            // Example: Get a guest configuration assignment
+
+            ResourceIdentifier scope = new ResourceIdentifier(string.Format("/subscriptions/{0}/resourceGroups/{1}/providers/Microsoft.Compute/virtualMachines/{2}", "00000000-0000-0000-0000-000000000000", "myResourceGroupName", "myVMName"));
+            var collection = GetArmClient().GetGuestConfigurationAssignments(scope);
+            await collection.GetIfExistsAsync("SecureProtocol");
+        }
     }
 }

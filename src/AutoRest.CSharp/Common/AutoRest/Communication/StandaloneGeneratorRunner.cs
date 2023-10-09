@@ -62,7 +62,7 @@ namespace AutoRest.CSharp.AutoRest.Communication
                 workspace = await new CSharpGen().ExecuteAsync(codeModel);
                 if (options.IsNewProject)
                 {
-                    new CSharpProj().Execute(Configuration.Namespace, outputPath, (yaml.Contains("x-ms-format: dfe-", StringComparison.Ordinal)));
+                    new CSharpProj().Execute(Configuration.Namespace, outputPath, (yaml.Contains("x-ms-format: dfe-", StringComparison.Ordinal)), Configuration.ToCSharpProjConfiguration());
                 }
             }
             else

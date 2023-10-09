@@ -252,24 +252,6 @@ schemas: !Schemas
           name: FlattenedProductPropertiesProvisioningStateValues
           description: ''
       protocol: !Protocols {}
-    - !ChoiceSchema &ref_19
-      choices:
-        - !ChoiceValue 
-          value: Large
-          language:
-            default:
-              name: Large
-              description: ''
-      type: choice
-      apiVersions:
-        - !ApiVersion 
-          version: 1.0.0
-      choiceType: *ref_0
-      language: !Languages 
-        default:
-          name: SimpleProductPropertiesMaxProductCapacity
-          description: Capacity of product. For example, 4 people.
-      protocol: !Protocols {}
   constants:
     - !ConstantSchema &ref_41
       type: constant
@@ -290,6 +272,19 @@ schemas: !Schemas
         default:
           name: Accept
           description: 'Accept: application/json'
+      protocol: !Protocols {}
+    - !ConstantSchema &ref_19
+      type: constant
+      apiVersions:
+        - !ApiVersion 
+          version: 1.0.0
+      value: !ConstantValue 
+        value: Large
+      valueType: *ref_0
+      language: !Languages 
+        default:
+          name: SimpleProductPropertiesMaxProductCapacity
+          description: Capacity of product. For example, 4 people.
       protocol: !Protocols {}
   dictionaries:
     - !DictionarySchema &ref_5
@@ -463,7 +458,7 @@ schemas: !Schemas
         - !GroupProperty 
           schema: *ref_1
           originalParameter:
-            - !Parameter &ref_68
+            - !Parameter &ref_67
               schema: *ref_1
               groupedBy: !Parameter &ref_22
                 schema: *ref_13
@@ -627,7 +622,7 @@ schemas: !Schemas
         - !GroupProperty 
           schema: *ref_15
           originalParameter:
-            - !VirtualParameter &ref_69
+            - !VirtualParameter &ref_68
               schema: *ref_15
               groupedBy: *ref_22
               implementation: Method
@@ -651,7 +646,7 @@ schemas: !Schemas
         - !GroupProperty 
           schema: *ref_16
           originalParameter:
-            - !VirtualParameter &ref_70
+            - !VirtualParameter &ref_69
               schema: *ref_16
               groupedBy: *ref_22
               implementation: Method
@@ -675,7 +670,7 @@ schemas: !Schemas
         - !GroupProperty 
           schema: *ref_18
           originalParameter:
-            - !VirtualParameter &ref_71
+            - !VirtualParameter &ref_70
               schema: *ref_18
               groupedBy: *ref_22
               implementation: Method
@@ -697,7 +692,7 @@ schemas: !Schemas
         - !GroupProperty 
           schema: *ref_19
           originalParameter:
-            - !VirtualParameter &ref_72
+            - !VirtualParameter &ref_71
               schema: *ref_19
               groupedBy: *ref_22
               implementation: Method
@@ -719,7 +714,7 @@ schemas: !Schemas
         - !GroupProperty 
           schema: *ref_20
           originalParameter:
-            - !VirtualParameter &ref_73
+            - !VirtualParameter &ref_72
               schema: *ref_20
               groupedBy: *ref_22
               implementation: Method
@@ -741,7 +736,7 @@ schemas: !Schemas
         - !GroupProperty 
           schema: *ref_21
           originalParameter:
-            - !VirtualParameter &ref_74
+            - !VirtualParameter &ref_73
               schema: *ref_21
               groupedBy: *ref_22
               implementation: Method
@@ -1816,7 +1811,7 @@ operationGroups:
         parameters:
           - *ref_40
         requestMediaTypes:
-          application/json: !Request &ref_67
+          application/json: !Request &ref_66
             parameters:
               - !Parameter 
                 schema: *ref_41
@@ -1894,7 +1889,7 @@ operationGroups:
                     name: maxProductDisplayName
                     description: Display name of product.
                 protocol: !Protocols {}
-              - !VirtualParameter &ref_64
+              - !VirtualParameter 
                 schema: *ref_19
                 implementation: Method
                 originalParameter: *ref_60
@@ -1905,7 +1900,7 @@ operationGroups:
                     name: capacity
                     description: Capacity of product. For example, 4 people.
                 protocol: !Protocols {}
-              - !VirtualParameter &ref_65
+              - !VirtualParameter &ref_64
                 schema: *ref_20
                 implementation: Method
                 originalParameter: *ref_60
@@ -1916,7 +1911,7 @@ operationGroups:
                     name: genericValue
                     description: Generic URL value.
                 protocol: !Protocols {}
-              - !VirtualParameter &ref_66
+              - !VirtualParameter &ref_65
                 schema: *ref_21
                 implementation: Method
                 originalParameter: *ref_60
@@ -1933,7 +1928,6 @@ operationGroups:
               - *ref_63
               - *ref_64
               - *ref_65
-              - *ref_66
             language: !Languages 
               default:
                 name: ''
@@ -1947,7 +1941,7 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         requests:
-          - *ref_67
+          - *ref_66
         signatureParameters: []
         responses:
           - !SchemaResponse 
@@ -1991,9 +1985,9 @@ operationGroups:
           url: http://tempuri.org
         parameters:
           - *ref_40
-          - *ref_68
+          - *ref_67
         requestMediaTypes:
-          application/json: !Request &ref_75
+          application/json: !Request &ref_74
             parameters:
               - !Parameter 
                 schema: *ref_41
@@ -2022,12 +2016,12 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
+              - *ref_68
               - *ref_69
               - *ref_70
               - *ref_71
               - *ref_72
               - *ref_73
-              - *ref_74
               - *ref_22
             signatureParameters:
               - *ref_22
@@ -2044,7 +2038,7 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         requests:
-          - *ref_75
+          - *ref_74
         signatureParameters: []
         responses:
           - !SchemaResponse 

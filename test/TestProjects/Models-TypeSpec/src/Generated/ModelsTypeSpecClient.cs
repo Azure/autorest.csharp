@@ -1086,6 +1086,288 @@ namespace ModelsTypeSpec
             }
         }
 
+        /// <summary> Resource collection action operation template. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <include file="Docs/ModelsTypeSpecClient.xml" path="doc/members/member[@name='AnalyzeConversationAsync(CancellationToken)']/*" />
+        public virtual async Task<Response<BaseModelWithDiscriminator>> AnalyzeConversationAsync(CancellationToken cancellationToken = default)
+        {
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await AnalyzeConversationAsync(context).ConfigureAwait(false);
+            return Response.FromValue(BaseModelWithDiscriminator.FromResponse(response), response);
+        }
+
+        /// <summary> Resource collection action operation template. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <include file="Docs/ModelsTypeSpecClient.xml" path="doc/members/member[@name='AnalyzeConversation(CancellationToken)']/*" />
+        public virtual Response<BaseModelWithDiscriminator> AnalyzeConversation(CancellationToken cancellationToken = default)
+        {
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = AnalyzeConversation(context);
+            return Response.FromValue(BaseModelWithDiscriminator.FromResponse(response), response);
+        }
+
+        /// <summary>
+        /// [Protocol Method] Resource collection action operation template.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="AnalyzeConversationAsync(CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ModelsTypeSpecClient.xml" path="doc/members/member[@name='AnalyzeConversationAsync(RequestContext)']/*" />
+        public virtual async Task<Response> AnalyzeConversationAsync(RequestContext context)
+        {
+            using var scope = ClientDiagnostics.CreateScope("ModelsTypeSpecClient.AnalyzeConversation");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateAnalyzeConversationRequest(context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// [Protocol Method] Resource collection action operation template.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="AnalyzeConversation(CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ModelsTypeSpecClient.xml" path="doc/members/member[@name='AnalyzeConversation(RequestContext)']/*" />
+        public virtual Response AnalyzeConversation(RequestContext context)
+        {
+            using var scope = ClientDiagnostics.CreateScope("ModelsTypeSpecClient.AnalyzeConversation");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateAnalyzeConversationRequest(context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <include file="Docs/ModelsTypeSpecClient.xml" path="doc/members/member[@name='GetSingleBaseAsync(CancellationToken)']/*" />
+        public virtual async Task<Response<SingleBase>> GetSingleBaseAsync(CancellationToken cancellationToken = default)
+        {
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await GetSingleBaseAsync(context).ConfigureAwait(false);
+            return Response.FromValue(SingleBase.FromResponse(response), response);
+        }
+
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <include file="Docs/ModelsTypeSpecClient.xml" path="doc/members/member[@name='GetSingleBase(CancellationToken)']/*" />
+        public virtual Response<SingleBase> GetSingleBase(CancellationToken cancellationToken = default)
+        {
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = GetSingleBase(context);
+            return Response.FromValue(SingleBase.FromResponse(response), response);
+        }
+
+        /// <summary>
+        /// [Protocol Method]
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="GetSingleBaseAsync(CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ModelsTypeSpecClient.xml" path="doc/members/member[@name='GetSingleBaseAsync(RequestContext)']/*" />
+        public virtual async Task<Response> GetSingleBaseAsync(RequestContext context)
+        {
+            using var scope = ClientDiagnostics.CreateScope("ModelsTypeSpecClient.GetSingleBase");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetSingleBaseRequest(context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// [Protocol Method]
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="GetSingleBase(CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ModelsTypeSpecClient.xml" path="doc/members/member[@name='GetSingleBase(RequestContext)']/*" />
+        public virtual Response GetSingleBase(RequestContext context)
+        {
+            using var scope = ClientDiagnostics.CreateScope("ModelsTypeSpecClient.GetSingleBase");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetSingleBaseRequest(context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <param name="input"> The Int32ValuesFacet to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
+        /// <include file="Docs/ModelsTypeSpecClient.xml" path="doc/members/member[@name='GenericTypeAsync(Int32ValuesFacet,CancellationToken)']/*" />
+        public virtual async Task<Response> GenericTypeAsync(Int32ValuesFacet input, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(input, nameof(input));
+
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await GenericTypeAsync(input.ToRequestContent(), context).ConfigureAwait(false);
+            return response;
+        }
+
+        /// <param name="input"> The Int32ValuesFacet to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
+        /// <include file="Docs/ModelsTypeSpecClient.xml" path="doc/members/member[@name='GenericType(Int32ValuesFacet,CancellationToken)']/*" />
+        public virtual Response GenericType(Int32ValuesFacet input, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(input, nameof(input));
+
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = GenericType(input.ToRequestContent(), context);
+            return response;
+        }
+
+        /// <summary>
+        /// [Protocol Method]
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="GenericTypeAsync(Int32ValuesFacet,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ModelsTypeSpecClient.xml" path="doc/members/member[@name='GenericTypeAsync(RequestContent,RequestContext)']/*" />
+        public virtual async Task<Response> GenericTypeAsync(RequestContent content, RequestContext context = null)
+        {
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("ModelsTypeSpecClient.GenericType");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGenericTypeRequest(content, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// [Protocol Method]
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="GenericType(Int32ValuesFacet,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ModelsTypeSpecClient.xml" path="doc/members/member[@name='GenericType(RequestContent,RequestContext)']/*" />
+        public virtual Response GenericType(RequestContent content, RequestContext context = null)
+        {
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("ModelsTypeSpecClient.GenericType");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGenericTypeRequest(content, context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
         internal HttpMessage CreateGetOutputDiscriminatorModelRequest(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -1242,6 +1524,50 @@ namespace ModelsTypeSpec
             return message;
         }
 
+        internal HttpMessage CreateAnalyzeConversationRequest(RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
+            var request = message.Request;
+            request.Method = RequestMethod.Post;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/items:analyzeConversation", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            return message;
+        }
+
+        internal HttpMessage CreateGetSingleBaseRequest(RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/single", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            return message;
+        }
+
+        internal HttpMessage CreateGenericTypeRequest(RequestContent content, RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context, ResponseClassifier204);
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/genericType", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
+            request.Content = content;
+            return message;
+        }
+
         private static RequestContext DefaultRequestContext = new RequestContext();
         internal static RequestContext FromCancellationToken(CancellationToken cancellationToken = default)
         {
@@ -1255,5 +1581,7 @@ namespace ModelsTypeSpec
 
         private static ResponseClassifier _responseClassifier200;
         private static ResponseClassifier ResponseClassifier200 => _responseClassifier200 ??= new StatusCodeClassifier(stackalloc ushort[] { 200 });
+        private static ResponseClassifier _responseClassifier204;
+        private static ResponseClassifier ResponseClassifier204 => _responseClassifier204 ??= new StatusCodeClassifier(stackalloc ushort[] { 204 });
     }
 }

@@ -10,7 +10,6 @@
   {
    "$id": "2",
    "Name": "APIVersion",
-   "Namespace": "ApiVersionInTsp",
    "EnumValueType": "String",
    "AllowedValues": [
     {
@@ -24,6 +23,7 @@
      "Value": "v1.2"
     }
    ],
+   "Namespace": "ApiVersionInTsp",
    "IsExtensible": true,
    "IsNullable": false,
    "Usage": "None"

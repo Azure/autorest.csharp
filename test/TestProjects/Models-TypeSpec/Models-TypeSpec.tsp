@@ -2,6 +2,13 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-client-generator-core";
 import "@azure-tools/typespec-azure-core";
+import "@typespec/versioning";
+
+using TypeSpec.Http;
+using TypeSpec.Rest;
+using Azure.ClientGenerator.Core;
+using Azure.Core;
+using TypeSpec.Versioning;
 
 @service(
     {
@@ -16,13 +23,9 @@ import "@azure-tools/typespec-azure-core";
         endpoint: string,
     }
 )
+@useDependency(Azure.Core.Versions.v1_0_Preview_1)
 @doc("CADL project to test various types of models.")
 namespace ModelsTypeSpec;
-
-using TypeSpec.Http;
-using TypeSpec.Rest;
-using Azure.ClientGenerator.Core;
-using Azure.Core;
 
 @doc("Base model")
 model BaseModel {
@@ -269,6 +272,9 @@ model InputModel {
 
   @doc("Required model")
   requiredModel: BaseModel;
+
+  @doc("Required model")
+  requiredModel2: BaseModel;
 
   @doc("Required primitive value type collection")
   requiredIntList: int32[];
@@ -607,3 +613,54 @@ model RoundTripOnNoUse extends NoUseBase {
 @get
 @convenientAPI(true)
 op roundTripToOutputWithNoUseBase(@body input: RoundTripOnNoUse): RoundTripOnNoUse;
+
+@doc("This is a model.")
+@resource("items")
+model Foo {
+  @doc("id of Foo")
+  @key
+  @visibility("read","create","query")
+  id: string;
+  @doc("name of Foo")
+  name: string;
+}
+
+@convenientAPI(true)
+op analyzeConversation is Azure.Core.StandardResourceOperations.ResourceCollectionAction<
+  Foo,
+  {},
+  BaseModelWithDiscriminator
+>;
+
+@doc("Single base model without any child model.")
+@discriminator("kind")
+model SingleBase {
+    size: int32;
+}
+
+@route("/single")
+@get
+@convenientAPI(true)
+op getSingleBase(): SingleBase;
+@doc("Facet")
+model Facet {
+   @doc("A field to facet by, where the field is attributed as 'facetable'")
+   field: string;  
+}
+
+model NumericValuesFacet<T extends numeric> extends Facet {
+  @doc("The facet ranges to produce. The values must be listed in ascending order to get the expected results. For example, values=10,20 produces three buckets: one for base rate 0 up to but not including 10, one for 10 up to but not including 20, and one for 20 and higher.")
+  values: T[];
+  value: T;
+}
+
+@doc("Facets an int32 field by the specified value ranges.")
+model Int32ValuesFacet extends NumericValuesFacet<int32> {
+  @doc("The facet type.")
+  kind: "Int32Values";
+}
+
+@route("/genericType")
+@get
+@convenientAPI(true)
+op genericType(@body input: Int32ValuesFacet): void;

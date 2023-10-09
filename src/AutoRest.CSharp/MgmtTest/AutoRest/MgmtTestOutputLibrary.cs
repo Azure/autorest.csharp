@@ -25,13 +25,6 @@ namespace AutoRest.CSharp.MgmtTest.AutoRest
         private readonly MgmtTestConfiguration _mgmtTestConfiguration;
         public MgmtTestOutputLibrary(CodeModel codeModel, SourceInputModel sourceInputModel)
         {
-            MgmtContext.Initialize(new BuildContext<MgmtOutputLibrary>(codeModel, sourceInputModel));
-
-            // force trigger the model initialization
-            foreach (var _ in MgmtContext.Library.ResourceSchemaMap)
-            {
-            }
-
             _mockTestModel = MgmtContext.CodeModel.TestModel!.MockTest;
             _mgmtTestConfiguration = Configuration.MgmtTestConfiguration!;
         }

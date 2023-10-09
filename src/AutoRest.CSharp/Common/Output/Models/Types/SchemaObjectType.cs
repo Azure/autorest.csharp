@@ -624,9 +624,9 @@ namespace AutoRest.CSharp.Output.Models.Types
             return objectProperty != null;
         }
 
-        protected override string CreateDescription()
+        protected override FormattableString CreateDescription()
         {
-            return ObjectSchema.CreateDescription();
+            return $"{ObjectSchema.CreateDescription()}";
         }
 
         protected override bool EnsureHasJsonSerialization()

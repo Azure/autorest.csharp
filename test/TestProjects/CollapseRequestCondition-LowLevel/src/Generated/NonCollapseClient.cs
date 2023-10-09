@@ -73,7 +73,7 @@ namespace CollapseRequestCondition_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/NonCollapseClient.xml" path="doc/members/member[@name='IfMatchPutAsync(RequestContent,ETag?,RequestContext)']/*" />
-        public virtual async Task<Response> IfMatchPutAsync(RequestContent content, ETag? ifMatch, RequestContext context)
+        public virtual async Task<Response> IfMatchPutAsync(RequestContent content, ETag? ifMatch = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("NonCollapseClient.IfMatchPut");
             scope.Start();
@@ -105,7 +105,7 @@ namespace CollapseRequestCondition_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/NonCollapseClient.xml" path="doc/members/member[@name='IfMatchPut(RequestContent,ETag?,RequestContext)']/*" />
-        public virtual Response IfMatchPut(RequestContent content, ETag? ifMatch, RequestContext context)
+        public virtual Response IfMatchPut(RequestContent content, ETag? ifMatch = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("NonCollapseClient.IfMatchPut");
             scope.Start();
@@ -137,7 +137,7 @@ namespace CollapseRequestCondition_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/NonCollapseClient.xml" path="doc/members/member[@name='IfNoneMatchPutAsync(RequestContent,ETag?,RequestContext)']/*" />
-        public virtual async Task<Response> IfNoneMatchPutAsync(RequestContent content, ETag? ifNoneMatch, RequestContext context)
+        public virtual async Task<Response> IfNoneMatchPutAsync(RequestContent content, ETag? ifNoneMatch = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("NonCollapseClient.IfNoneMatchPut");
             scope.Start();
@@ -169,7 +169,7 @@ namespace CollapseRequestCondition_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/NonCollapseClient.xml" path="doc/members/member[@name='IfNoneMatchPut(RequestContent,ETag?,RequestContext)']/*" />
-        public virtual Response IfNoneMatchPut(RequestContent content, ETag? ifNoneMatch, RequestContext context)
+        public virtual Response IfNoneMatchPut(RequestContent content, ETag? ifNoneMatch = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("NonCollapseClient.IfNoneMatchPut");
             scope.Start();

@@ -9,8 +9,6 @@
   {
    "$id": "2",
    "Name": "EnumToRename",
-   "Namespace": "CustomizationsInTsp",
-   "Description": "Renamed enum (original name: EnumToRename)",
    "EnumValueType": "String",
    "AllowedValues": [
     {
@@ -29,6 +27,8 @@
      "Value": "3"
     }
    ],
+   "Namespace": "CustomizationsInTsp",
+   "Description": "Renamed enum (original name: EnumToRename)",
    "IsExtensible": false,
    "IsNullable": false,
    "Usage": "RoundTrip"
@@ -36,8 +36,6 @@
   {
    "$id": "6",
    "Name": "EnumWithValueToRename",
-   "Namespace": "CustomizationsInTsp",
-   "Description": "Enum with renamed value (original name: ValueToRename)",
    "EnumValueType": "String",
    "AllowedValues": [
     {
@@ -56,6 +54,8 @@
      "Value": "3"
     }
    ],
+   "Namespace": "CustomizationsInTsp",
+   "Description": "Enum with renamed value (original name: ValueToRename)",
    "IsExtensible": false,
    "IsNullable": false,
    "Usage": "RoundTrip"
@@ -63,8 +63,6 @@
   {
    "$id": "10",
    "Name": "EnumToBeMadeExtensible",
-   "Namespace": "CustomizationsInTsp",
-   "Description": "Extensible enum",
    "EnumValueType": "String",
    "AllowedValues": [
     {
@@ -83,6 +81,8 @@
      "Value": "3"
     }
    ],
+   "Namespace": "CustomizationsInTsp",
+   "Description": "Extensible enum",
    "IsExtensible": true,
    "IsNullable": false,
    "Usage": "RoundTrip"
@@ -90,8 +90,6 @@
   {
    "$id": "14",
    "Name": "NormalEnum",
-   "Namespace": "CustomizationsInTsp",
-   "Description": "A normal enum",
    "EnumValueType": "String",
    "AllowedValues": [
     {
@@ -105,6 +103,8 @@
      "Value": "b"
     }
    ],
+   "Namespace": "CustomizationsInTsp",
+   "Description": "A normal enum",
    "IsExtensible": true,
    "IsNullable": false,
    "Usage": "RoundTrip"

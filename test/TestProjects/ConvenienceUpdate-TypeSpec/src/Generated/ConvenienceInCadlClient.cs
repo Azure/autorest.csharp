@@ -387,7 +387,7 @@ namespace ConvenienceInCadl
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='NoConvenienceOptionalBodyAsync(RequestContent,RequestContext)']/*" />
-        public virtual async Task<Response> NoConvenienceOptionalBodyAsync(RequestContent content, RequestContext context)
+        public virtual async Task<Response> NoConvenienceOptionalBodyAsync(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ConvenienceInCadlClient.NoConvenienceOptionalBody");
             scope.Start();
@@ -418,7 +418,7 @@ namespace ConvenienceInCadl
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='NoConvenienceOptionalBody(RequestContent,RequestContext)']/*" />
-        public virtual Response NoConvenienceOptionalBody(RequestContent content, RequestContext context)
+        public virtual Response NoConvenienceOptionalBody(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ConvenienceInCadlClient.NoConvenienceOptionalBody");
             scope.Start();
@@ -744,6 +744,7 @@ namespace ConvenienceInCadl
             }
         }
 
+        // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
         /// [Protocol Method] Operation has protocol method marked with convenience method, but the convenience method should not be generated.
         /// <list type="bullet">
@@ -774,6 +775,7 @@ namespace ConvenienceInCadl
             }
         }
 
+        // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
         /// [Protocol Method] Operation has protocol method marked with convenience method, but the convenience method should not be generated.
         /// <list type="bullet">
@@ -804,6 +806,7 @@ namespace ConvenienceInCadl
             }
         }
 
+        // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
         /// [Protocol Method] Initial operation only has protocol method, but the convenience method should not be generated even it marks the convenience decorator.
         /// <list type="bullet">
@@ -834,6 +837,7 @@ namespace ConvenienceInCadl
             }
         }
 
+        // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
         /// [Protocol Method] Initial operation only has protocol method, but the convenience method should not be generated even it marks the convenience decorator.
         /// <list type="bullet">
@@ -1095,43 +1099,23 @@ namespace ConvenienceInCadl
         /// <summary> Initial operation only has protocol method with optional model parameter. In the updated version, we add the convenience method. </summary>
         /// <param name="optional"> The Model to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ProtocolOptionalModelValueAsync(Model,CancellationToken)']/*" />
-        public virtual async Task<Response> ProtocolOptionalModelValueAsync(Model optional = null, CancellationToken cancellationToken = default)
+        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ProtocolOptionalModelAsync(Model,CancellationToken)']/*" />
+        public virtual async Task<Response> ProtocolOptionalModelAsync(Model optional = null, CancellationToken cancellationToken = default)
         {
-            using var scope = ClientDiagnostics.CreateScope("ConvenienceInCadlClient.ProtocolOptionalModelValue");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = await ProtocolOptionalModelAsync(optional?.ToRequestContent(), context).ConfigureAwait(false);
-                return response;
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await ProtocolOptionalModelAsync(optional?.ToRequestContent(), context).ConfigureAwait(false);
+            return response;
         }
 
         /// <summary> Initial operation only has protocol method with optional model parameter. In the updated version, we add the convenience method. </summary>
         /// <param name="optional"> The Model to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ProtocolOptionalModelValue(Model,CancellationToken)']/*" />
-        public virtual Response ProtocolOptionalModelValue(Model optional = null, CancellationToken cancellationToken = default)
+        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ProtocolOptionalModel(Model,CancellationToken)']/*" />
+        public virtual Response ProtocolOptionalModel(Model optional = null, CancellationToken cancellationToken = default)
         {
-            using var scope = ClientDiagnostics.CreateScope("ConvenienceInCadlClient.ProtocolOptionalModelValue");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = ProtocolOptionalModel(optional?.ToRequestContent(), context);
-                return response;
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = ProtocolOptionalModel(optional?.ToRequestContent(), context);
+            return response;
         }
 
         /// <summary>
@@ -1144,7 +1128,7 @@ namespace ConvenienceInCadl
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="ProtocolOptionalModelValueAsync(Model,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="ProtocolOptionalModelAsync(Model,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -1180,7 +1164,7 @@ namespace ConvenienceInCadl
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="ProtocolOptionalModelValue(Model,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="ProtocolOptionalModel(Model,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -1731,43 +1715,23 @@ namespace ConvenienceInCadl
         /// <summary> Operation has protocol method with optional body parameter and optional RequestContext and convenience method. </summary>
         /// <param name="optional"> The Model to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceOptionalModelWithOptionalValueAsync(Model,CancellationToken)']/*" />
-        public virtual async Task<Response> ConvenienceOptionalModelWithOptionalValueAsync(Model optional = null, CancellationToken cancellationToken = default)
+        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceOptionalModelWithOptionalAsync(Model,CancellationToken)']/*" />
+        public virtual async Task<Response> ConvenienceOptionalModelWithOptionalAsync(Model optional = null, CancellationToken cancellationToken = default)
         {
-            using var scope = ClientDiagnostics.CreateScope("ConvenienceInCadlClient.ConvenienceOptionalModelWithOptionalValue");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = await ConvenienceOptionalModelWithOptionalAsync(optional?.ToRequestContent(), context).ConfigureAwait(false);
-                return response;
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await ConvenienceOptionalModelWithOptionalAsync(optional?.ToRequestContent(), context).ConfigureAwait(false);
+            return response;
         }
 
         /// <summary> Operation has protocol method with optional body parameter and optional RequestContext and convenience method. </summary>
         /// <param name="optional"> The Model to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceOptionalModelWithOptionalValue(Model,CancellationToken)']/*" />
-        public virtual Response ConvenienceOptionalModelWithOptionalValue(Model optional = null, CancellationToken cancellationToken = default)
+        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceOptionalModelWithOptional(Model,CancellationToken)']/*" />
+        public virtual Response ConvenienceOptionalModelWithOptional(Model optional = null, CancellationToken cancellationToken = default)
         {
-            using var scope = ClientDiagnostics.CreateScope("ConvenienceInCadlClient.ConvenienceOptionalModelWithOptionalValue");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = ConvenienceOptionalModelWithOptional(optional?.ToRequestContent(), context);
-                return response;
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = ConvenienceOptionalModelWithOptional(optional?.ToRequestContent(), context);
+            return response;
         }
 
         /// <summary>
@@ -1780,7 +1744,7 @@ namespace ConvenienceInCadl
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="ConvenienceOptionalModelWithOptionalValueAsync(Model,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="ConvenienceOptionalModelWithOptionalAsync(Model,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -1816,7 +1780,7 @@ namespace ConvenienceInCadl
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="ConvenienceOptionalModelWithOptionalValue(Model,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="ConvenienceOptionalModelWithOptional(Model,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -1990,7 +1954,7 @@ namespace ConvenienceInCadl
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceOptionalModelWithRequiredAsync(RequestContent,RequestContext)']/*" />
-        public virtual async Task<Response> ConvenienceOptionalModelWithRequiredAsync(RequestContent content, RequestContext context)
+        public virtual async Task<Response> ConvenienceOptionalModelWithRequiredAsync(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ConvenienceInCadlClient.ConvenienceOptionalModelWithRequired");
             scope.Start();
@@ -2026,7 +1990,7 @@ namespace ConvenienceInCadl
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceOptionalModelWithRequired(RequestContent,RequestContext)']/*" />
-        public virtual Response ConvenienceOptionalModelWithRequired(RequestContent content, RequestContext context)
+        public virtual Response ConvenienceOptionalModelWithRequired(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ConvenienceInCadlClient.ConvenienceOptionalModelWithRequired");
             scope.Start();

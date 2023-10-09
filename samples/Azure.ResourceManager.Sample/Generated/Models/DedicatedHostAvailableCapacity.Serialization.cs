@@ -19,7 +19,7 @@ namespace Azure.ResourceManager.Sample.Models
             {
                 return null;
             }
-            Optional<IReadOnlyList<DedicatedHostAllocatableVM>> allocatableVMs = default;
+            Optional<IReadOnlyList<DedicatedHostAllocatableVm>> allocatableVms = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("allocatableVMs"u8))
@@ -28,16 +28,16 @@ namespace Azure.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    List<DedicatedHostAllocatableVM> array = new List<DedicatedHostAllocatableVM>();
+                    List<DedicatedHostAllocatableVm> array = new List<DedicatedHostAllocatableVm>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(DedicatedHostAllocatableVM.DeserializeDedicatedHostAllocatableVM(item));
+                        array.Add(DedicatedHostAllocatableVm.DeserializeDedicatedHostAllocatableVm(item));
                     }
-                    allocatableVMs = array;
+                    allocatableVms = array;
                     continue;
                 }
             }
-            return new DedicatedHostAvailableCapacity(Optional.ToList(allocatableVMs));
+            return new DedicatedHostAvailableCapacity(Optional.ToList(allocatableVms));
         }
     }
 }

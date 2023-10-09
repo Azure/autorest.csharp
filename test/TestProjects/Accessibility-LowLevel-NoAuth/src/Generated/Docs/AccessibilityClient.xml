@@ -2,34 +2,44 @@
 <doc>
   <members>
     <member name="OperationAsync(RequestContent,RequestContext)">
-<example>
-This sample shows how to call OperationAsync with required parameters and request content.
+      <example>
+This sample shows how to call OperationAsync.
 <code><![CDATA[
-var client = new AccessibilityClient();
+AccessibilityClient client = new AccessibilityClient();
 
-var data = "<String>";
-
-Response response = await client.OperationAsync(RequestContent.Create(data), new RequestContext());
+RequestContent content = null;
+Response response = await client.OperationAsync(content);
 Console.WriteLine(response.Status);
 ]]></code>
-</example>
+This sample shows how to call OperationAsync with all request content.
+<code><![CDATA[
+AccessibilityClient client = new AccessibilityClient();
+
+RequestContent content = RequestContent.Create("<body>");
+Response response = await client.OperationAsync(content);
+Console.WriteLine(response.Status);
+]]></code></example>
     </member>
     <member name="Operation(RequestContent,RequestContext)">
-<example>
-This sample shows how to call Operation with required parameters and request content.
+      <example>
+This sample shows how to call Operation.
 <code><![CDATA[
-var client = new AccessibilityClient();
+AccessibilityClient client = new AccessibilityClient();
 
-var data = "<String>";
-
-Response response = client.Operation(RequestContent.Create(data), new RequestContext());
+RequestContent content = null;
+Response response = client.Operation(content);
 Console.WriteLine(response.Status);
 ]]></code>
-</example>
+This sample shows how to call Operation with all request content.
+<code><![CDATA[
+AccessibilityClient client = new AccessibilityClient();
+
+RequestContent content = RequestContent.Create("<body>");
+Response response = client.Operation(content);
+Console.WriteLine(response.Status);
+]]></code></example>
     </member>
-    <member name="OperationInternalAsync(RequestContent,RequestContext)">
-    </member>
-    <member name="OperationInternal(RequestContent,RequestContext)">
-    </member>
+    <member name="OperationInternalAsync(RequestContent,RequestContext)" />
+    <member name="OperationInternal(RequestContent,RequestContext)" />
   </members>
 </doc>

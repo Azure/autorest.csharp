@@ -18,6 +18,7 @@ Scenarios.Models_InputToRoundTripPrimitive = passOnSuccess([
             requiredNullableString: null,
             requiredNullableInt: null,
             requiredModel: {},
+            requiredModel2: {},
             requiredIntList: [],
             requiredStringList: [null, "test"],
             requiredModelList: [null],
@@ -69,6 +70,7 @@ Scenarios.Models_InputToRoundTripReadOnly = passOnSuccess([
             requiredNullableString: null,
             requiredNullableInt: null,
             requiredModel: { requiredList: [null] },
+            requiredModel2: { requiredList: [null] },
             requiredIntList: [1, 2],
             requiredStringList: ["a", null],
             requiredModelList: [{ requiredModelRecord: {} }],
@@ -106,6 +108,19 @@ Scenarios.Models_InputToRoundTripReadOnly = passOnSuccess([
                     false,
                     true,
                 ],
+            }),
+        };
+    }),
+]);
+
+// Test only single base model
+Scenarios.Models_SingleBase = passOnSuccess([
+    mockapi.get("/single", (req) => {
+        return {
+            status: 200,
+            body: json({
+                kind: "foo",
+                size: 123
             }),
         };
     }),

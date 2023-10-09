@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
+using Autorest.CSharp.Core;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
@@ -222,7 +223,7 @@ namespace MgmtResourceName
         public virtual AsyncPageable<DisplayResource> GetAllAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _displayResourceRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new DisplayResource(Client, DisplayResourceData.DeserializeDisplayResourceData(e)), _displayResourceClientDiagnostics, Pipeline, "DisplayResourceCollection.GetAll", "value", null, cancellationToken);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new DisplayResource(Client, DisplayResourceData.DeserializeDisplayResourceData(e)), _displayResourceClientDiagnostics, Pipeline, "DisplayResourceCollection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>
@@ -242,7 +243,7 @@ namespace MgmtResourceName
         public virtual Pageable<DisplayResource> GetAll(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _displayResourceRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => new DisplayResource(Client, DisplayResourceData.DeserializeDisplayResourceData(e)), _displayResourceClientDiagnostics, Pipeline, "DisplayResourceCollection.GetAll", "value", null, cancellationToken);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, null, e => new DisplayResource(Client, DisplayResourceData.DeserializeDisplayResourceData(e)), _displayResourceClientDiagnostics, Pipeline, "DisplayResourceCollection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>
@@ -307,6 +308,80 @@ namespace MgmtResourceName
             {
                 var response = _displayResourceRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, displayResourceName, cancellationToken: cancellationToken);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Tries to get details for this resource from the service.
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/displayResources/{displayResourceName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>displayResources_Get</description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="displayResourceName"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="displayResourceName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="displayResourceName"/> is null. </exception>
+        public virtual async Task<NullableResponse<DisplayResource>> GetIfExistsAsync(string displayResourceName, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNullOrEmpty(displayResourceName, nameof(displayResourceName));
+
+            using var scope = _displayResourceClientDiagnostics.CreateScope("DisplayResourceCollection.GetIfExists");
+            scope.Start();
+            try
+            {
+                var response = await _displayResourceRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, displayResourceName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                if (response.Value == null)
+                    return new NoValueResponse<DisplayResource>(response.GetRawResponse());
+                return Response.FromValue(new DisplayResource(Client, response.Value), response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Tries to get details for this resource from the service.
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/displayResources/{displayResourceName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>displayResources_Get</description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="displayResourceName"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="displayResourceName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="displayResourceName"/> is null. </exception>
+        public virtual NullableResponse<DisplayResource> GetIfExists(string displayResourceName, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNullOrEmpty(displayResourceName, nameof(displayResourceName));
+
+            using var scope = _displayResourceClientDiagnostics.CreateScope("DisplayResourceCollection.GetIfExists");
+            scope.Start();
+            try
+            {
+                var response = _displayResourceRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, displayResourceName, cancellationToken: cancellationToken);
+                if (response.Value == null)
+                    return new NoValueResponse<DisplayResource>(response.GetRawResponse());
+                return Response.FromValue(new DisplayResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

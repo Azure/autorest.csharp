@@ -246,12 +246,12 @@ namespace AutoRest.CSharp.Mgmt.Output
                         "Exists",
                         typeof(bool),
                         $"Checks to see if the resource exists in azure.")));
-                //result.Add(MgmtClientOperation.FromOperation(
-                //    new MgmtRestOperation(
-                //        getMgmtRestOperation,
-                //        "GetIfExists",
-                //        getMgmtRestOperation.MgmtReturnType,
-                //        $"Tries to get details for this resource from the service.")));
+                result.Add(MgmtClientOperation.FromOperation(
+                    new MgmtRestOperation(
+                        getMgmtRestOperation,
+                        "GetIfExists",
+                        getMgmtRestOperation.MgmtReturnType,
+                        $"Tries to get details for this resource from the service.")));
             }
 
             return result;
@@ -310,6 +310,6 @@ namespace AutoRest.CSharp.Mgmt.Output
             Description = $"The resource representing the parent resource."
         };
 
-        protected override string IdParamDescription => $"The identifier of the parent resource that is the target of operations.";
+        protected override FormattableString IdParamDescription => $"The identifier of the parent resource that is the target of operations.";
     }
 }
