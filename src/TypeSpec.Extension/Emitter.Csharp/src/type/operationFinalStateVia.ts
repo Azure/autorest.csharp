@@ -6,7 +6,9 @@ export enum OperationFinalStateVia {
     AzureAsyncOperation,
     Location,
     OriginalUri,
-    OperationLocation
+    OperationLocation,
+    CustomLink,
+    CustomOperationReference
 }
 
 export function convertLroFinalStateVia(
@@ -15,6 +17,15 @@ export function convertLroFinalStateVia(
     switch (finalStateValue) {
         case FinalStateValue.azureAsyncOperation:
             return OperationFinalStateVia.AzureAsyncOperation;
+        // TODO: we don't have implementation of custom-link and custom-operation-reference yet
+        // case FinalStateValue.customLink:
+        //     return OperationFinalStateVia.CustomLink;
+
+        // And right now some existing API specs are not correctly defined so that they are parsed
+        // into `custom-operation-reference` which should be `operation-location`.
+        // so let's fallback `custom-operation-reference` into `operation-location` as a work-around
+        case FinalStateValue.customOperationReference:
+            return OperationFinalStateVia.OperationLocation;
         case FinalStateValue.location:
             return OperationFinalStateVia.Location;
         case FinalStateValue.originalUri:

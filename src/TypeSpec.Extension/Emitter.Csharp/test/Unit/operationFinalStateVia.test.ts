@@ -30,10 +30,7 @@ describe("convertLroFinalStateVia()", () => {
     });
 
     describe("unsupported inputs", () => {
-        const unsupportedInputs = [
-            FinalStateValue.customLink,
-            FinalStateValue.customOperationReference
-        ];
+        const unsupportedInputs = [FinalStateValue.customLink];
         for (const input of unsupportedInputs) {
             it(`should throw exception for unsupported input '${input}'`, function () {
                 assert.throws(
