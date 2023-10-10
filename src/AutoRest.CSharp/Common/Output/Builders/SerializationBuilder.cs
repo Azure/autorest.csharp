@@ -77,10 +77,16 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
         public static ObjectSerialization Build(BodyMediaType bodyMediaType, InputType inputType, CSharpType type) => bodyMediaType switch
         {
-            BodyMediaType.Json => BuildJsonSerialization(inputType, type, false),
-            BodyMediaType.Xml => BuildXmlElementSerialization(inputType, type, null, true),
+            BodyMediaType.Json => BuildJsonSerialization(inputType, type),
+            BodyMediaType.Xml => BuildXmlSerialization(inputType, type),
             _ => throw new NotImplementedException(bodyMediaType.ToString())
         };
+
+        public static JsonSerialization BuildJsonSerialization(InputType inputType, CSharpType valueType)
+            => BuildJsonSerialization(inputType, valueType, false);
+
+        public static XmlElementSerialization BuildXmlSerialization(InputType inputType, CSharpType valueType)
+            => BuildXmlElementSerialization(inputType, valueType, null, true);
 
         private static XmlElementSerialization BuildXmlElementSerialization(InputType inputType, CSharpType type, string? name, bool isRoot)
         {

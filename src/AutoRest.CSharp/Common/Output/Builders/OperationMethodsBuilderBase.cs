@@ -72,7 +72,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             _clientNamespace = args.ClientNamespace;
             _statusCodeSwitchBuilder = args.StatusCodeSwitchBuilder;
             _operationSampleBuilder = args.OperationSampleBuilder;
-            _parametersBuilder = new MethodParametersBuilder(args.Operation, args.TypeFactory);
+            _parametersBuilder = new MethodParametersBuilder(args.Operation, args.Fields, args.TypeFactory);
             _typeFactory = args.TypeFactory;
             _sourceInputModel = args.SourceInputModel;
 
@@ -115,7 +115,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             }
 
             var requestContext = new RequestContextExpression(KnownParameters.RequestContext);
-            var createMessageBuilder = new CreateMessageMethodBuilder(_fields, parameters.RequestParts, parameters.CreateMessage, requestContext, Operation.RequestBodyMediaType);
+            var createMessageBuilder = new CreateMessageMethodBuilder(_fields, parameters.RequestParts, requestContext, Operation.RequestBodyMediaType);
 
             var createMessageMethod = BuildCreateRequestMethod(parameters.CreateMessage, createMessageBuilder);
             var createNextPageMessageMethodSignature = BuildCreateNextPageMessageSignature(parameters.CreateMessage);
@@ -191,13 +191,14 @@ namespace AutoRest.CSharp.Common.Output.Builders
         public RestClientOperationMethods BuildLegacy()
         {
             var parameters = _parametersBuilder.BuildParameters();
-            var createMessageBuilder = new CreateMessageMethodBuilder(_fields, parameters.RequestParts, parameters.CreateMessage, null, Operation.RequestBodyMediaType);
+            var createMessageBuilder = new CreateMessageMethodBuilder(_fields, parameters.RequestParts, null, Operation.RequestBodyMediaType);
 
             var createRequestMessageMethod = BuildCreateRequestMethod(parameters.CreateMessage, createMessageBuilder);
             var createNextPageMessageMethodSignature = BuildCreateNextPageMessageSignature(parameters.CreateMessage);
             var createNextPageMessageMethod = BuildCreateNextPageMessageMethod(createNextPageMessageMethodSignature, parameters, null);
 
             var order = Operation.LongRunning is not null ? 2 : Operation.Paging is not null ? 1 : 0;
+            var convenienceMethodSignature = CreateMethodSignature(ProtocolMethodName, ConvenienceModifiers, parameters.Convenience, RestClientConvenienceMethodReturnType, null);
 
             return new RestClientOperationMethods
             (
@@ -205,8 +206,8 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 createNextPageMessageMethod,
                 null,
                 null,
-                BuildLegacyConvenienceMethod(ProtocolMethodName, parameters.Convenience, InvokeCreateRequestMethod(createRequestMessageMethod.Signature), _statusCodeSwitchBuilder, false),
-                BuildLegacyConvenienceMethod(ProtocolMethodName, parameters.Convenience, InvokeCreateRequestMethod(createRequestMessageMethod.Signature), _statusCodeSwitchBuilder, true),
+                BuildLegacyConvenienceMethod(convenienceMethodSignature, InvokeCreateRequestMethod(createRequestMessageMethod.Signature), _statusCodeSwitchBuilder, false),
+                BuildLegacyConvenienceMethod(convenienceMethodSignature, InvokeCreateRequestMethod(createRequestMessageMethod.Signature), _statusCodeSwitchBuilder, true),
                 BuildLegacyNextPageConvenienceMethod(parameters.Convenience, createNextPageMessageMethod, false),
                 BuildLegacyNextPageConvenienceMethod(parameters.Convenience, createNextPageMessageMethod, true),
                 _statusCodeSwitchBuilder.ResponseClassifier,
@@ -258,7 +259,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 return null;
             }
 
-            var builder = new CreateMessageMethodBuilder(_fields, parameters.RequestParts, signature.Parameters, requestContext, Operation.RequestBodyMediaType);
+            var builder = new CreateMessageMethodBuilder(_fields, parameters.RequestParts, requestContext, Operation.RequestBodyMediaType);
             var body = BuildCreateNextPageMessageMethodBody(builder, signature);
             return body is not null ? new Method(signature, body) : null;
         }
@@ -284,18 +285,17 @@ namespace AutoRest.CSharp.Common.Output.Builders
         {
             var body = new[]
             {
-                new ParameterValidationBlock(parameters.Convenience),
+                new ParameterValidationBlock(signature.Parameters, IsLegacy: !Configuration.AzureArm && Configuration.Generation1ConvenienceClient),
                 CreateConvenienceMethodBody(signature.Name, parameters, createNextPageMessageSignature, async)
             };
             return new Method(signature.WithAsync(async), body);
         }
 
-        protected Method BuildLegacyConvenienceMethod(string methodName, IReadOnlyList<Parameter> parameters, HttpMessageExpression invokeCreateRequestMethod, StatusCodeSwitchBuilder statusCodeSwitchBuilder, bool async)
+        protected Method BuildLegacyConvenienceMethod(MethodSignature signature, HttpMessageExpression invokeCreateRequestMethod, StatusCodeSwitchBuilder statusCodeSwitchBuilder, bool async)
         {
-            var signature = CreateMethodSignature(methodName, ConvenienceModifiers, parameters, RestClientConvenienceMethodReturnType, null);
             var body = new[]
             {
-                new ParameterValidationBlock(signature.Parameters, IsLegacy: !Configuration.AzureArm),
+                new ParameterValidationBlock(signature.Parameters, IsLegacy: !Configuration.AzureArm && Configuration.Generation1ConvenienceClient),
                 UsingVar("message", invokeCreateRequestMethod, out var message),
                 EnableHttpRedirectIfSupported(message),
                 PipelineField.Send(message, new CancellationTokenExpression(KnownParameters.CancellationTokenParameter), async),
@@ -307,7 +307,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
         protected abstract Method? BuildLegacyNextPageConvenienceMethod(IReadOnlyList<Parameter> parameters, Method? createRequestMethod, bool async);
 
-        private MethodSignature CreateMethodSignature(string name, MethodSignatureModifiers accessibility, IReadOnlyList<Parameter> parameters, CSharpType returnType, string? nonDocumentComment)
+        protected MethodSignature CreateMethodSignature(string name, MethodSignatureModifiers accessibility, IReadOnlyList<Parameter> parameters, CSharpType returnType, string? nonDocumentComment)
         {
             var attributes = Operation.Deprecated is { } deprecated
                 ? new[] { new CSharpAttribute(typeof(ObsoleteAttribute), deprecated) }

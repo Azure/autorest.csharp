@@ -60,7 +60,8 @@ namespace AutoRest.CSharp.Output.Models
                 .ToArray();
 
             var invokeCreateRequestMethod = InvokeCreateRequestMethod(createRequestMethod.Signature);
-            return BuildLegacyConvenienceMethod(nextPageMethodName, nextPageParameters, invokeCreateRequestMethod, _nextPageStatusCodeSwitchBuilder, async);
+            var methodSignature = CreateMethodSignature(nextPageMethodName, ConvenienceModifiers, nextPageParameters, RestClientConvenienceMethodReturnType, null);
+            return BuildLegacyConvenienceMethod(methodSignature, invokeCreateRequestMethod, _nextPageStatusCodeSwitchBuilder, async);
         }
 
         protected override MethodSignature? BuildCreateNextPageMessageSignature(IReadOnlyList<Parameter> createMessageParameters)
@@ -78,7 +79,7 @@ namespace AutoRest.CSharp.Output.Models
         }
 
         private IReadOnlyList<Parameter> BuildNextLinkOperationCreateMessageParameters(InputOperation nextLinkOperation)
-            => new MethodParametersBuilder(nextLinkOperation, _typeFactory).BuildParameters().CreateMessage;
+            => new MethodParametersBuilder(nextLinkOperation, null, _typeFactory).BuildParameters().CreateMessage;
 
         protected override MethodBodyStatement? BuildCreateNextPageMessageMethodBody(CreateMessageMethodBuilder builder, MethodSignature signature)
         {

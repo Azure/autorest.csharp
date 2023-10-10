@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
-using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Serialization;
 using AutoRest.CSharp.Output.Models.Shared;
 
@@ -13,7 +12,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
 {
     internal record RestClientMethodParameters
     (
-        IReadOnlyList<RequestPartSource> RequestParts,
+        RequestParts RequestParts,
         IReadOnlyList<Parameter> CreateMessage,
         IReadOnlyList<Parameter> Protocol,
         IReadOnlyList<Parameter> Convenience,
@@ -51,6 +50,8 @@ namespace AutoRest.CSharp.Common.Output.Builders
             };
         }
     }
+
+    internal record RequestParts(IReadOnlyList<RequestPart> UriParts, IReadOnlyList<RequestPart> PathParts, IReadOnlyList<RequestPart> QueryParts, IReadOnlyList<RequestPart> HeaderParts, IReadOnlyList<RequestPart> ContentHeaderParts, IReadOnlyList<RequestPart> BodyParts);
 
     internal record RequestPart(string? NameInRequest, TypedValueExpression Value, MethodBodyStatement? Conversion, SerializationFormat SerializationFormat, string? ArraySerializationDelimiter = null, bool Explode = false, bool Escape = false, bool SkipNullCheck = false, bool CheckUndefinedCollection = false);
 

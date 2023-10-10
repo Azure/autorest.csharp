@@ -44,8 +44,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             return WrapInDiagnosticScope(ProtocolMethodName, body);
         }
 
-        protected override MethodBodyStatement CreateConvenienceMethodBody(string methodName,
-            RestClientMethodParameters parameters, MethodSignature? createNextPageMessageSignature, bool async)
+        protected override MethodBodyStatement CreateConvenienceMethodBody(string methodName, RestClientMethodParameters parameters, MethodSignature? createNextPageMessageSignature, bool async)
             => throw new NotSupportedException("LRO Paging isn't supported yet!");
     }
 }
