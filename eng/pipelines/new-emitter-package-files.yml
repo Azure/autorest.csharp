@@ -14,7 +14,7 @@ steps:
 - pwsh: |
     $feedUrl = "https://pkgs.dev.azure.com/azure-sdk/public/_packaging/azure-sdk-for-js-test-autorest@local/npm/registry"
 
-    $overridesPath = "${{ parameters.OutputDirectory }}/overrides.json}} "
+    $overridesPath = "${{ parameters.OutputDirectory }}/overrides.json"
 
     $overrides = @{
       "@autorest/csharp" = "$feedUrl/@autorest/csharp/-/csharp-${{ parameters.AutorestCSharpVersion }}.tgz"
