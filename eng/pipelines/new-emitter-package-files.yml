@@ -25,7 +25,7 @@ steps:
 
     & ${{ parameters.ToolsRepositoryPath }}/eng/scripts/autorest/New-EmitterPackageJson.ps1 `
       -PackageJsonPath '${{ parameters.EmitterPackageJsonPath }}' `
-      -OverridesPath '$(overridesPath)' `
+      -OverridesPath $overridesPath `
       -OutputDirectory '${{ parameters.OutputDirectory }}'
 
     & ${{ parameters.ToolsRepositoryPath }}/eng/scripts/autorest/New-EmitterPackageLock.ps1 `
