@@ -23,12 +23,12 @@ steps:
 
     $overrides | ConvertTo-Json | Set-Content $overridesPath
 
-    & ${{ parameters.ToolsRepositoryPath }}/eng/scripts/autorest/New-EmitterPackageJson.ps1
-      -PackageJsonPath '${{ parameters.EmitterPackageJsonPath }}'
-      -OverridesPath '$(overridesPath)'
+    & ${{ parameters.ToolsRepositoryPath }}/eng/scripts/autorest/New-EmitterPackageJson.ps1 `
+      -PackageJsonPath '${{ parameters.EmitterPackageJsonPath }}' `
+      -OverridesPath '$(overridesPath)' `
       -OutputDirectory '${{ parameters.OutputDirectory }}'
 
-    & ${{ parameters.ToolsRepositoryPath }}/eng/scripts/autorest/New-EmitterPackageLock.ps1
-    -EmitterPackageJsonPath '${{ parameters.OutputDirectory }}/emitter-package.json'
-    -OutputDirectory '${{ parameters.OutputDirectory }}'
+    & ${{ parameters.ToolsRepositoryPath }}/eng/scripts/autorest/New-EmitterPackageLock.ps1 `
+      -EmitterPackageJsonPath '${{ parameters.OutputDirectory }}/emitter-package.json' `
+      -OutputDirectory '${{ parameters.OutputDirectory }}'
   displayName: Create emitter-package.json

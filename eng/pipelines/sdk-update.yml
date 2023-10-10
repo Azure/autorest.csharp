@@ -53,9 +53,9 @@ stages:
               displayName: "Use 'next' TypeSpec dependencies"
               workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
             - pwsh: |
-                $dir = New-Item -ItemType Directory -Path $(Build.ArtifactStagingDirectory)/package-json -Verbose
+                $dir = New-Item -ItemType Directory -Path $(Build.ArtifactStagingDirectory)/package-json/emitter -Verbose
                 Copy-Item ./package*.json $(Build.ArtifactStagingDirectory)/package-json -Verbose
-                Copy-Item ./src/TypeSpec.Extension/Emitter.Csharp/package.json $(Build.ArtifactStagingDirectory)/package-json/emitter-package.json -Verbose
+                Copy-Item ./src/TypeSpec.Extension/Emitter.Csharp/package.json $(Build.ArtifactStagingDirectory)/package-json/emitter/package.json -Verbose
               workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
               displayName: 'Stage package-json artifact'
               condition: succeededOrFailed()
