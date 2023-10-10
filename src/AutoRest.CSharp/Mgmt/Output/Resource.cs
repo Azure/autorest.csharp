@@ -480,15 +480,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         public Parameter ResourceParameter => new(Name: "resource", Description: $"The client parameters to use in these operations.", Type: typeof(ArmResource), DefaultValue: null, ValidationType.None, null);
         public Parameter ResourceDataParameter => new(Name: "data", Description: $"The resource that is the target of operations.", Type: ResourceData.Type, DefaultValue: null, ValidationType.None, null);
 
-        protected override IEnumerable<Method> BuildMethods()
-        {
-            foreach (var method in BuildChildResourceEntryMethods())
-            {
-                yield return method;
-            }
-        }
-
-        private IEnumerable<Method> BuildChildResourceEntryMethods()
+        protected override IEnumerable<Method> BuildChildResourceEntryMethods()
         {
             foreach (var resource in ChildResources)
             {
@@ -503,105 +495,11 @@ namespace AutoRest.CSharp.Mgmt.Output
 
                     if (HasChildResourceGetMethods)
                     {
-                        yield return BuildGetChildResurceMethod(resource.ResourceCollection, getCollectionMethod.Signature, true);
-                        yield return BuildGetChildResurceMethod(resource.ResourceCollection, getCollectionMethod.Signature, false);
+                        yield return BuildGetChildResourceMethod(resource.ResourceCollection, getCollectionMethod.Signature, true);
+                        yield return BuildGetChildResourceMethod(resource.ResourceCollection, getCollectionMethod.Signature, false);
                     }
                 }
             }
         }
-
-        private Method BuildGetSingletonResourceMethod(Resource resource)
-        {
-            var signature = new MethodSignature(
-                        $"Get{resource.ResourceName}",
-                        null,
-                        $"Gets an object representing a {resource.Type.Name} along with the instance operations that can be performed on it in the {ResourceName}.",
-                        Public | Virtual,
-                        resource.Type,
-                        $"Returns a <see cref=\"{resource.Type}\" /> object.",
-                        Array.Empty<Parameter>());
-            var methodBody = Snippets.Return(
-                Snippets.New.Instance(
-                    resource.Type,
-                    _clientProperty,
-                    resource.SingletonResourceIdSuffix!.BuildResourceIdentifier(_idProperty)));
-            return new(signature, methodBody);
-        }
-
-        private Method BuildGetResourceCollectionMethod(ResourceCollection collection)
-        {
-            var resource = collection.Resource;
-            var signature = new MethodSignature(
-                $"Get{resource.ResourceName.ResourceNameToPlural()}",
-            null,
-                $"Gets a collection of {resource.Type.Name.LastWordToPlural()} in the {ResourceName}.",
-            Public | Virtual,
-                collection.Type,
-            $"An object representing collection of {resource.Type.Name.LastWordToPlural()} and their operations over a {resource.Type.Name}.",
-            collection.ExtraConstructorParameters.ToArray());
-            var methodBody = BuildGetResourceCollectionMethodBody(collection);
-            return new(signature, methodBody);
-        }
-
-        private MethodBodyStatement BuildGetResourceCollectionMethodBody(ResourceCollection collection)
-        {
-            // when there are extra ctor parameters, we cannot use the GetCachedClient method to cache the collection instance
-            if (collection.ExtraConstructorParameters.Any())
-            {
-                var parameters = new List<ValueExpression>
-                {
-                    _clientProperty,
-                    _idProperty
-                };
-                parameters.AddRange(collection.ExtraConstructorParameters.Select(p => (ValueExpression)p));
-                return Snippets.Return(
-                    Snippets.New.Instance(
-                        collection.Type,
-                        parameters.ToArray()));
-            }
-            else
-            {
-                var clientArgument = new VariableReference(typeof(ArmClient), "client");
-                return Snippets.Return(
-                    new InvokeInstanceMethodExpression(
-                        null,
-                        nameof(ArmResource.GetCachedClient),
-                        new[] {
-                            new FuncExpression(new[] { clientArgument.Declaration }, Snippets.New.Instance(collection.Type, clientArgument, _idProperty))
-                        },
-                        null,
-                        false));
-            }
-        }
-
-        private Method BuildGetChildResurceMethod(ResourceCollection collection, MethodSignatureBase getCollectionMethodSignature, bool isAsync)
-        {
-            var getOperation= collection.GetOperation;
-            // construct the method signature
-            var signature = getOperation.MethodSignature with
-            {
-                // name after `Get{ResourceName}`
-                Name = $"Get{collection.Resource.ResourceName}",
-                Modifiers = Public | Virtual,
-                // the parameter of this method should be the parameters on the collection's ctor + parameters on the Get method
-                // also the validations of parameters will be skipped
-                Parameters = getCollectionMethodSignature.Parameters.Concat(getOperation.MethodSignature.Parameters).ToArray(),
-                Attributes = new[] { new CSharpAttribute(typeof(ForwardsClientCallsAttribute)) }
-            };
-            var callGetCollection = new InvokeInstanceMethodExpression(
-                    null,
-                    getCollectionMethodSignature.Name,
-                    getCollectionMethodSignature.Parameters.Select(p => (ValueExpression)p).ToArray(),
-                    null,
-                    getCollectionMethodSignature.Modifiers.HasFlag(Async));
-            var callGetOperation = callGetCollection.Invoke(getOperation.MethodSignature.WithAsync(isAsync));
-            var methodBody = Snippets.Return(callGetOperation);
-
-            return new(signature.WithAsync(isAsync), methodBody);
-        }
-
-        private readonly ValueExpression _clientProperty = new MemberExpression(null, "Client"); // this refers to ArmResource.Client which is protected internal therefore we have to hardcode in plain string here instead of using nameof
-
-        private readonly ValueExpression _idProperty = new MemberExpression(null, nameof(ArmResource.Id));
     }
 }

@@ -7,13 +7,10 @@ using System.Linq;
 using System.Text;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Output.Models;
-using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Utilities;
-using Azure.Core;
 using Azure.ResourceManager;
 using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 
@@ -49,67 +46,6 @@ namespace AutoRest.CSharp.Mgmt.Output
                     isBase: true,
                     arguments: new[] { ArmClientParameter, ResourceIdentifierParameter }));
         }
-
-        private string? _factoryMethodName;
-        public string FactoryMethodName => _factoryMethodName ??= $"Get{Declaration.Name}";
-
-        private IEnumerable<MgmtExtensionClientFactoryMethod>? _factoryMethods;
-        public IEnumerable<MgmtExtensionClientFactoryMethod> FactoryMethods => _factoryMethods ??= EnsureFactoryMethods();
-
-        private IEnumerable<MgmtExtensionClientFactoryMethod> EnsureFactoryMethods()
-        {
-            var resourceExtensionMethod = new MethodSignature(
-                FactoryMethodName,
-                null,
-                null,
-                Private | Static,
-                Type,
-                null,
-                new[] { _generalExtensionParameter });
-            Action<CodeWriter> resourceExtensionMethodBody = writer =>
-            {
-                using (writer.Scope($"return {_generalExtensionParameter.Name}.GetCachedClient(client =>", newLine: false))
-                {
-                    writer.Line($"return new {Type}(client, {_generalExtensionParameter.Name}.Id);");
-                }
-                writer.LineRaw(");");
-            };
-            yield return new(resourceExtensionMethod, resourceExtensionMethodBody);
-
-            var scopeExtensionMethod = new MethodSignature(
-                FactoryMethodName,
-                null,
-                null,
-                Private | Static,
-                Type,
-                null,
-                new[] { ArmClientParameter, _scopeParameter });
-            Action<CodeWriter> scopeExtensionMethodBody = writer =>
-            {
-                using (writer.Scope($"return {ArmClientParameter.Name}.GetResourceClient(() => ", newLine: false))
-                {
-                    writer.Line($"return new {Type}({ArmClientParameter.Name}, {_scopeParameter.Name});");
-                }
-                writer.LineRaw(");");
-            };
-            yield return new(scopeExtensionMethod, scopeExtensionMethodBody);
-        }
-
-        private Parameter _generalExtensionParameter = new Parameter(
-            "resource",
-            $"The resource parameters to use in these operations.",
-            typeof(ArmResource),
-            null,
-            ValidationType.None,
-            null);
-
-        private Parameter _scopeParameter = new Parameter(
-            "scope",
-            $"The scope to use in these operations",
-            typeof(ResourceIdentifier),
-            null,
-            ValidationType.None,
-            null);
 
         protected override IEnumerable<MgmtClientOperation> EnsureClientOperations()
         {
@@ -164,11 +100,9 @@ namespace AutoRest.CSharp.Mgmt.Output
             return builder.ToString();
         }
 
-        protected override IEnumerable<Method> BuildMethods()
+        protected override IEnumerable<Method> BuildChildResourceEntryMethods()
         {
             yield break;
         }
-
-        internal record MgmtExtensionClientFactoryMethod(MethodSignature Signature, Action<CodeWriter> MethodBodyImplementation);
     }
 }

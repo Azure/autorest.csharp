@@ -5,12 +5,19 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Models;
+using AutoRest.CSharp.Output.Models;
+using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
+using Azure.Core;
+using Azure.ResourceManager;
+using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 
 namespace AutoRest.CSharp.Mgmt.Output
 {
@@ -60,5 +67,70 @@ namespace AutoRest.CSharp.Mgmt.Output
         {
             yield break;
         }
+
+        private IEnumerable<Method>? _clientFactoryMethods;
+        public IEnumerable<Method> ClientFactoryMethods => _clientFactoryMethods ??= BuildClientFactoryMethods();
+
+        private IEnumerable<Method> BuildClientFactoryMethods()
+        {
+            var clientArgument = new VariableReference(typeof(ArmClient), "client");
+            var clientParameter = (ValueExpression)ArmClientParameter;
+            var extensionParameter = (ValueExpression)_generalExtensionParameter;
+            foreach (var client in ExtensionClients)
+            {
+                if (client.IsEmpty)
+                    continue;
+
+                var factoryMethodName = $"Get{client.Declaration.Name}";
+
+                var resourceExtensionMethod = new MethodSignature(
+                    factoryMethodName,
+                    null,
+                    null,
+                    Private | Static,
+                    client.Type,
+                    null,
+                    new[] { _generalExtensionParameter });
+                var resourceExtensionMethodBody = Snippets.Return(
+                    extensionParameter.Invoke(
+                            nameof(ArmResource.GetCachedClient),
+                            new FuncExpression(new[] { clientArgument.Declaration }, Snippets.New.Instance(client.Type, clientArgument, extensionParameter.Property(nameof(ArmResource.Id))))
+                    )); // TODO -- update FuncExpression to make it could accept a block
+
+                yield return new(resourceExtensionMethod, resourceExtensionMethodBody);
+
+                var scopeExtensionMethod = new MethodSignature(
+                    factoryMethodName,
+                    null,
+                    null,
+                    Private | Static,
+                    client.Type,
+                    null,
+                    new[] { ArmClientParameter, _scopeParameter });
+                var scopeExtensionMethodBody = Snippets.Return(
+                    clientParameter.Invoke(
+                        nameof(ArmClient.GetResourceClient),
+                        new FuncExpression(Array.Empty<CodeWriterDeclaration>(), Snippets.New.Instance(client.Type, clientParameter, _scopeParameter))
+                    ));
+
+                yield return new(scopeExtensionMethod, scopeExtensionMethodBody);
+            }
+        }
+
+        private Parameter _generalExtensionParameter = new Parameter(
+            "resource",
+            $"The resource parameters to use in these operations.",
+            typeof(ArmResource),
+            null,
+            ValidationType.None,
+            null);
+
+        private Parameter _scopeParameter = new Parameter(
+            "scope",
+            $"The scope to use in these operations",
+            typeof(ResourceIdentifier),
+            null,
+            ValidationType.None,
+            null);
     }
 }

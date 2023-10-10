@@ -21,20 +21,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected override void WritePrivateHelpers()
         {
-            foreach (var extensionClient in This.ExtensionClients)
+            foreach (var method in This.ClientFactoryMethods)
             {
-                if (extensionClient.IsEmpty)
-                    continue;
-
-                foreach (var method in extensionClient.FactoryMethods)
-                {
-                    _writer.Line();
-
-                    using (_writer.WriteMethodDeclaration(method.Signature))
-                    {
-                        method.MethodBodyImplementation(_writer);
-                    }
-                }
+                _writer.WriteMethod(method);
             }
 
             base.WritePrivateHelpers();

@@ -158,6 +158,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
             return null;
         }
+
         public MgmtExtensionClient GetExtensionClient(CSharpType? resourceType)
         {
             if (resourceType != null && Cache.TryGetValue(resourceType, out var extensionClient))
@@ -173,9 +174,32 @@ namespace AutoRest.CSharp.Mgmt.Output
             extensionClient => extensionClient.ExtendedResourceType,
             extensionClient => extensionClient);
 
-        protected override IEnumerable<Method> BuildMethods()
+        protected override MethodSignatureModifiers MethodModifiers => MethodSignatureModifiers.Public | MethodSignatureModifiers.Static;
+
+        protected override Method BuildGetSingletonResourceMethod(Resource resource)
         {
-            yield break;
+            if (IsArmCore)
+                return base.BuildGetSingletonResourceMethod(resource);
+
+            // need to find the extension client factory method here.
+
+            return base.BuildGetSingletonResourceMethod(resource);
+        }
+
+        protected override Method BuildGetResourceCollectionMethod(ResourceCollection collection)
+        {
+            if (IsArmCore)
+                return base.BuildGetResourceCollectionMethod(collection);
+
+            return base.BuildGetResourceCollectionMethod(collection);
+        }
+
+        protected override Method BuildGetChildResourceMethod(ResourceCollection collection, MethodSignatureBase getCollectionMethodSignature, bool isAsync)
+        {
+            if (IsArmCore)
+                return base.BuildGetChildResourceMethod(collection, getCollectionMethodSignature, isAsync);
+
+            return base.BuildGetChildResourceMethod(collection, getCollectionMethodSignature, isAsync);
         }
     }
 }

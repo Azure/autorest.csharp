@@ -4,6 +4,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using AutoRest.CSharp.Common.Output.Expressions.Statements;
+using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
@@ -212,6 +214,130 @@ namespace AutoRest.CSharp.Mgmt.Output
         /// </summary>
         public virtual IEnumerable<Resource> ChildResources => _childResources ??= MgmtContext.Library.ArmResources.Where(resource => resource.GetParents().Contains(this));
 
+        protected virtual IEnumerable<Method> BuildChildResourceEntryMethods()
+        {
+            foreach (var resource in ChildResources)
+            {
+                if (resource.IsSingleton)
+                {
+                    yield return BuildGetSingletonResourceMethod(resource);
+                }
+                else if (resource.ResourceCollection is not null)
+                {
+                    var getCollectionMethod = BuildGetResourceCollectionMethod(resource.ResourceCollection);
+                    yield return getCollectionMethod;
+
+                    if (HasChildResourceGetMethods)
+                    {
+                        yield return BuildGetChildResourceMethod(resource.ResourceCollection, getCollectionMethod.Signature, true);
+                        yield return BuildGetChildResourceMethod(resource.ResourceCollection, getCollectionMethod.Signature, false);
+                    }
+                }
+            }
+        }
+
+
+        private readonly ValueExpression _clientProperty = new MemberExpression(null, "Client"); // this refers to ArmResource.Client which is protected internal therefore we have to hardcode in plain string here instead of using nameof
+
+        protected readonly ValueExpression _idProperty = new MemberExpression(null, nameof(ArmResource.Id));
+
+        protected virtual ValueExpression ClientProperty => _clientProperty;
+
+        protected virtual ValueExpression IdProperty => _idProperty;
+
+        protected virtual MethodSignatureModifiers MethodModifiers => Public | Virtual;
+
+        protected virtual Method BuildGetSingletonResourceMethod(Resource resource)
+        {
+            var signature = new MethodSignature(
+                        $"Get{resource.ResourceName}",
+                        null,
+                        $"Gets an object representing a {resource.Type.Name} along with the instance operations that can be performed on it in the {ResourceName}.",
+                        MethodModifiers,
+                        resource.Type,
+                        $"Returns a <see cref=\"{resource.Type}\" /> object.",
+                        Array.Empty<Parameter>());
+            var methodBody = Snippets.Return(
+                Snippets.New.Instance(
+                    resource.Type,
+                    ClientProperty,
+                    resource.SingletonResourceIdSuffix!.BuildResourceIdentifier(IdProperty)));
+            return new(signature, methodBody);
+        }
+
+
+        protected virtual Method BuildGetResourceCollectionMethod(ResourceCollection collection)
+        {
+            var resource = collection.Resource;
+            var signature = new MethodSignature(
+                $"Get{resource.ResourceName.ResourceNameToPlural()}",
+                null,
+                $"Gets a collection of {resource.Type.Name.LastWordToPlural()} in the {ResourceName}.",
+                MethodModifiers,
+                collection.Type,
+                $"An object representing collection of {resource.Type.Name.LastWordToPlural()} and their operations over a {resource.Type.Name}.",
+            collection.ExtraConstructorParameters.ToArray());
+            var methodBody = BuildGetResourceCollectionMethodBody(collection);
+            return new(signature, methodBody);
+        }
+
+        private MethodBodyStatement BuildGetResourceCollectionMethodBody(ResourceCollection collection)
+        {
+            // when there are extra ctor parameters, we cannot use the GetCachedClient method to cache the collection instance
+            if (collection.ExtraConstructorParameters.Any())
+            {
+                var parameters = new List<ValueExpression>
+                {
+                    ClientProperty,
+                    IdProperty
+                };
+                parameters.AddRange(collection.ExtraConstructorParameters.Select(p => (ValueExpression)p));
+                return Snippets.Return(
+                    Snippets.New.Instance(
+                        collection.Type,
+                        parameters.ToArray()));
+            }
+            else
+            {
+                var clientArgument = new VariableReference(typeof(ArmClient), "client");
+                return Snippets.Return(
+                    new InvokeInstanceMethodExpression(
+                        null,
+                        nameof(ArmResource.GetCachedClient),
+                        new[] {
+                            new FuncExpression(new[] { clientArgument.Declaration }, Snippets.New.Instance(collection.Type, clientArgument, IdProperty))
+                        },
+                        null,
+                        false));
+            }
+        }
+
+        protected virtual Method BuildGetChildResourceMethod(ResourceCollection collection, MethodSignatureBase getCollectionMethodSignature, bool isAsync)
+        {
+            var getOperation = collection.GetOperation;
+            // construct the method signature
+            var signature = getOperation.MethodSignature with
+            {
+                // name after `Get{ResourceName}`
+                Name = $"Get{collection.Resource.ResourceName}",
+                Modifiers = MethodModifiers,
+                // the parameter of this method should be the parameters on the collection's ctor + parameters on the Get method
+                // also the validations of parameters will be skipped
+                Parameters = getCollectionMethodSignature.Parameters.Concat(getOperation.MethodSignature.Parameters).ToArray(),
+                Attributes = new[] { new CSharpAttribute(typeof(ForwardsClientCallsAttribute)) }
+            };
+            var callGetCollection = new InvokeInstanceMethodExpression(
+                    null,
+                    getCollectionMethodSignature.Name,
+                    getCollectionMethodSignature.Parameters.Select(p => (ValueExpression)p).ToArray(),
+                    null,
+                    getCollectionMethodSignature.Modifiers.HasFlag(Async));
+            var callGetOperation = callGetCollection.Invoke(getOperation.MethodSignature.WithAsync(isAsync));
+            var methodBody = Snippets.Return(callGetOperation);
+
+            return new(signature.WithAsync(isAsync), methodBody);
+        }
+
         protected string GetOperationName(Operation operation, string clientResourceName)
         {
             // search the configuration for a override of this operation
@@ -283,6 +409,12 @@ namespace AutoRest.CSharp.Mgmt.Output
         private IEnumerable<Method>? _methods;
         public IEnumerable<Method> Methods => _methods ??= BuildMethods();
 
-        protected abstract IEnumerable<Method> BuildMethods();
+        protected virtual IEnumerable<Method> BuildMethods()
+        {
+            foreach (var method in BuildChildResourceEntryMethods())
+            {
+                yield return method;
+            }
+        }
     }
 }
