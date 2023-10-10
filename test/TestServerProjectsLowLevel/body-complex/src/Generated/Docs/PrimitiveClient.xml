@@ -56,7 +56,7 @@ This sample shows how to call PutIntAsync.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
-RequestContent content = RequestContent.Create(new object());
+using RequestContent content = RequestContent.Create(new object());
 Response response = await client.PutIntAsync(content);
 
 Console.WriteLine(response.Status);
@@ -66,7 +66,7 @@ This sample shows how to call PutIntAsync with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     field1 = 1234,
     field2 = 1234,
@@ -83,7 +83,7 @@ This sample shows how to call PutInt.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
-RequestContent content = RequestContent.Create(new object());
+using RequestContent content = RequestContent.Create(new object());
 Response response = client.PutInt(content);
 
 Console.WriteLine(response.Status);
@@ -93,7 +93,7 @@ This sample shows how to call PutInt with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     field1 = 1234,
     field2 = 1234,
@@ -158,7 +158,7 @@ This sample shows how to call PutLongAsync.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
-RequestContent content = RequestContent.Create(new object());
+using RequestContent content = RequestContent.Create(new object());
 Response response = await client.PutLongAsync(content);
 
 Console.WriteLine(response.Status);
@@ -168,7 +168,7 @@ This sample shows how to call PutLongAsync with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     field1 = 1234L,
     field2 = 1234L,
@@ -185,7 +185,7 @@ This sample shows how to call PutLong.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
-RequestContent content = RequestContent.Create(new object());
+using RequestContent content = RequestContent.Create(new object());
 Response response = client.PutLong(content);
 
 Console.WriteLine(response.Status);
@@ -195,7 +195,7 @@ This sample shows how to call PutLong with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     field1 = 1234L,
     field2 = 1234L,
@@ -260,7 +260,7 @@ This sample shows how to call PutFloatAsync.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
-RequestContent content = RequestContent.Create(new object());
+using RequestContent content = RequestContent.Create(new object());
 Response response = await client.PutFloatAsync(content);
 
 Console.WriteLine(response.Status);
@@ -270,7 +270,7 @@ This sample shows how to call PutFloatAsync with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     field1 = 123.45F,
     field2 = 123.45F,
@@ -287,7 +287,7 @@ This sample shows how to call PutFloat.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
-RequestContent content = RequestContent.Create(new object());
+using RequestContent content = RequestContent.Create(new object());
 Response response = client.PutFloat(content);
 
 Console.WriteLine(response.Status);
@@ -297,7 +297,7 @@ This sample shows how to call PutFloat with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     field1 = 123.45F,
     field2 = 123.45F,
@@ -362,7 +362,7 @@ This sample shows how to call PutDoubleAsync.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
-RequestContent content = RequestContent.Create(new object());
+using RequestContent content = RequestContent.Create(new object());
 Response response = await client.PutDoubleAsync(content);
 
 Console.WriteLine(response.Status);
@@ -372,7 +372,7 @@ This sample shows how to call PutDoubleAsync with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     field1 = 123.45,
     field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose = 123.45,
@@ -389,7 +389,7 @@ This sample shows how to call PutDouble.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
-RequestContent content = RequestContent.Create(new object());
+using RequestContent content = RequestContent.Create(new object());
 Response response = client.PutDouble(content);
 
 Console.WriteLine(response.Status);
@@ -399,7 +399,7 @@ This sample shows how to call PutDouble with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     field1 = 123.45,
     field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose = 123.45,
@@ -464,7 +464,7 @@ This sample shows how to call PutBoolAsync.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
-RequestContent content = RequestContent.Create(new object());
+using RequestContent content = RequestContent.Create(new object());
 Response response = await client.PutBoolAsync(content);
 
 Console.WriteLine(response.Status);
@@ -474,7 +474,7 @@ This sample shows how to call PutBoolAsync with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     field_true = true,
     field_false = true,
@@ -491,7 +491,7 @@ This sample shows how to call PutBool.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
-RequestContent content = RequestContent.Create(new object());
+using RequestContent content = RequestContent.Create(new object());
 Response response = client.PutBool(content);
 
 Console.WriteLine(response.Status);
@@ -501,7 +501,7 @@ This sample shows how to call PutBool with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     field_true = true,
     field_false = true,
@@ -568,7 +568,7 @@ This sample shows how to call PutStringAsync.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
-RequestContent content = RequestContent.Create(new object());
+using RequestContent content = RequestContent.Create(new object());
 Response response = await client.PutStringAsync(content);
 
 Console.WriteLine(response.Status);
@@ -578,7 +578,7 @@ This sample shows how to call PutStringAsync with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>
+using RequestContent content = RequestContent.Create(new Dictionary<string, object>
 {
     ["field"] = "<field>",
     ["empty"] = "<empty>",
@@ -596,7 +596,7 @@ This sample shows how to call PutString.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
-RequestContent content = RequestContent.Create(new object());
+using RequestContent content = RequestContent.Create(new object());
 Response response = client.PutString(content);
 
 Console.WriteLine(response.Status);
@@ -606,7 +606,7 @@ This sample shows how to call PutString with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>
+using RequestContent content = RequestContent.Create(new Dictionary<string, object>
 {
     ["field"] = "<field>",
     ["empty"] = "<empty>",
@@ -672,7 +672,7 @@ This sample shows how to call PutDateAsync.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
-RequestContent content = RequestContent.Create(new object());
+using RequestContent content = RequestContent.Create(new object());
 Response response = await client.PutDateAsync(content);
 
 Console.WriteLine(response.Status);
@@ -682,7 +682,7 @@ This sample shows how to call PutDateAsync with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     field = "2022-05-10",
     leap = "2022-05-10",
@@ -699,7 +699,7 @@ This sample shows how to call PutDate.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
-RequestContent content = RequestContent.Create(new object());
+using RequestContent content = RequestContent.Create(new object());
 Response response = client.PutDate(content);
 
 Console.WriteLine(response.Status);
@@ -709,7 +709,7 @@ This sample shows how to call PutDate with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     field = "2022-05-10",
     leap = "2022-05-10",
@@ -774,7 +774,7 @@ This sample shows how to call PutDateTimeAsync.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
-RequestContent content = RequestContent.Create(new object());
+using RequestContent content = RequestContent.Create(new object());
 Response response = await client.PutDateTimeAsync(content);
 
 Console.WriteLine(response.Status);
@@ -784,7 +784,7 @@ This sample shows how to call PutDateTimeAsync with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     field = "2022-05-10T18:57:31.2311892Z",
     now = "2022-05-10T18:57:31.2311892Z",
@@ -801,7 +801,7 @@ This sample shows how to call PutDateTime.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
-RequestContent content = RequestContent.Create(new object());
+using RequestContent content = RequestContent.Create(new object());
 Response response = client.PutDateTime(content);
 
 Console.WriteLine(response.Status);
@@ -811,7 +811,7 @@ This sample shows how to call PutDateTime with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     field = "2022-05-10T18:57:31.2311892Z",
     now = "2022-05-10T18:57:31.2311892Z",
@@ -876,7 +876,7 @@ This sample shows how to call PutDateTimeRfc1123Async.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
-RequestContent content = RequestContent.Create(new object());
+using RequestContent content = RequestContent.Create(new object());
 Response response = await client.PutDateTimeRfc1123Async(content);
 
 Console.WriteLine(response.Status);
@@ -886,7 +886,7 @@ This sample shows how to call PutDateTimeRfc1123Async with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     field = "Tue, 10 May 2022 18:57:31 GMT",
     now = "Tue, 10 May 2022 18:57:31 GMT",
@@ -903,7 +903,7 @@ This sample shows how to call PutDateTimeRfc1123.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
-RequestContent content = RequestContent.Create(new object());
+using RequestContent content = RequestContent.Create(new object());
 Response response = client.PutDateTimeRfc1123(content);
 
 Console.WriteLine(response.Status);
@@ -913,7 +913,7 @@ This sample shows how to call PutDateTimeRfc1123 with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     field = "Tue, 10 May 2022 18:57:31 GMT",
     now = "Tue, 10 May 2022 18:57:31 GMT",
@@ -976,7 +976,7 @@ This sample shows how to call PutDurationAsync.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
-RequestContent content = RequestContent.Create(new object());
+using RequestContent content = RequestContent.Create(new object());
 Response response = await client.PutDurationAsync(content);
 
 Console.WriteLine(response.Status);
@@ -986,7 +986,7 @@ This sample shows how to call PutDurationAsync with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     field = "PT1H23M45S",
 });
@@ -1002,7 +1002,7 @@ This sample shows how to call PutDuration.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
-RequestContent content = RequestContent.Create(new object());
+using RequestContent content = RequestContent.Create(new object());
 Response response = client.PutDuration(content);
 
 Console.WriteLine(response.Status);
@@ -1012,7 +1012,7 @@ This sample shows how to call PutDuration with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     field = "PT1H23M45S",
 });
@@ -1074,7 +1074,7 @@ This sample shows how to call PutByteAsync.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
-RequestContent content = RequestContent.Create(new object());
+using RequestContent content = RequestContent.Create(new object());
 Response response = await client.PutByteAsync(content);
 
 Console.WriteLine(response.Status);
@@ -1084,7 +1084,7 @@ This sample shows how to call PutByteAsync with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     field = new object(),
 });
@@ -1100,7 +1100,7 @@ This sample shows how to call PutByte.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
-RequestContent content = RequestContent.Create(new object());
+using RequestContent content = RequestContent.Create(new object());
 Response response = client.PutByte(content);
 
 Console.WriteLine(response.Status);
@@ -1110,7 +1110,7 @@ This sample shows how to call PutByte with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PrimitiveClient client = new PrimitiveClient(credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     field = new object(),
 });

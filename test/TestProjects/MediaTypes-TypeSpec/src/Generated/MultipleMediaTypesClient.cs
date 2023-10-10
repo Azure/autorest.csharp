@@ -66,7 +66,8 @@ namespace MultipleMediaTypes
             Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await OneBinaryBodyTwoContentTypesAsync(RequestContentHelper.FromObject(body), contentType, context).ConfigureAwait(false);
+            using RequestContent content = RequestContentHelper.FromObject(body);
+            Response response = await OneBinaryBodyTwoContentTypesAsync(content, contentType, context).ConfigureAwait(false);
             return response;
         }
 
@@ -80,7 +81,8 @@ namespace MultipleMediaTypes
             Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = OneBinaryBodyTwoContentTypes(RequestContentHelper.FromObject(body), contentType, context);
+            using RequestContent content = RequestContentHelper.FromObject(body);
+            Response response = OneBinaryBodyTwoContentTypes(content, contentType, context);
             return response;
         }
 
@@ -175,7 +177,8 @@ namespace MultipleMediaTypes
             Argument.AssertNotNullOrEmpty(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await OneStringBodyThreeContentTypesAsync(RequestContentHelper.FromObject(body), contentType, context).ConfigureAwait(false);
+            using RequestContent content = RequestContentHelper.FromObject(body);
+            Response response = await OneStringBodyThreeContentTypesAsync(content, contentType, context).ConfigureAwait(false);
             return response;
         }
 
@@ -190,7 +193,8 @@ namespace MultipleMediaTypes
             Argument.AssertNotNullOrEmpty(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = OneStringBodyThreeContentTypes(RequestContentHelper.FromObject(body), contentType, context);
+            using RequestContent content = RequestContentHelper.FromObject(body);
+            Response response = OneStringBodyThreeContentTypes(content, contentType, context);
             return response;
         }
 
@@ -283,7 +287,8 @@ namespace MultipleMediaTypes
             Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await OneModelBodyOneContentTypeAsync(body.ToRequestContent(), context).ConfigureAwait(false);
+            using RequestContent content = body.ToRequestContent();
+            Response response = await OneModelBodyOneContentTypeAsync(content, context).ConfigureAwait(false);
             return response;
         }
 
@@ -296,7 +301,8 @@ namespace MultipleMediaTypes
             Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = OneModelBodyOneContentType(body.ToRequestContent(), context);
+            using RequestContent content = body.ToRequestContent();
+            Response response = OneModelBodyOneContentType(content, context);
             return response;
         }
 

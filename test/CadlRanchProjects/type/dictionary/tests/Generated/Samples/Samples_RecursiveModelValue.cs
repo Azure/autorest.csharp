@@ -112,7 +112,7 @@ namespace _Type._Dictionary.Samples
         {
             RecursiveModelValue client = new DictionaryClient().GetRecursiveModelValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 key = new
                 {
@@ -130,7 +130,7 @@ namespace _Type._Dictionary.Samples
         {
             RecursiveModelValue client = new DictionaryClient().GetRecursiveModelValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 key = new
                 {
@@ -172,7 +172,7 @@ namespace _Type._Dictionary.Samples
         {
             RecursiveModelValue client = new DictionaryClient().GetRecursiveModelValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 key = new
                 {
@@ -191,7 +191,7 @@ namespace _Type._Dictionary.Samples
         {
             RecursiveModelValue client = new DictionaryClient().GetRecursiveModelValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 key = new
                 {

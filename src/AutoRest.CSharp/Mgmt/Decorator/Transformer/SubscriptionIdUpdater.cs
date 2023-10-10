@@ -27,8 +27,8 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
                             p.Implementation = ImplementationLocation.Method;
                             p.Schema.Type = AllSchemaTypes.String;
                         }
-                        // update the apiVersion parameter to be 'client' method
-                        if (p.Language.Default.Name.Equals("apiVersion", StringComparison.OrdinalIgnoreCase))
+                        // update the apiVersion parameter to be 'client' parameter
+                        if (p.Origin is not null && p.Origin.Equals("modelerfour:synthesized/api-version", StringComparison.OrdinalIgnoreCase))
                         {
                             p.Implementation = ImplementationLocation.Client;
                         }

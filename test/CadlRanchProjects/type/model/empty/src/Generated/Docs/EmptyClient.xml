@@ -41,7 +41,7 @@ This sample shows how to call PutEmptyAsync.
 <code><![CDATA[
 EmptyClient client = new EmptyClient();
 
-RequestContent content = RequestContent.Create(new object());
+using RequestContent content = RequestContent.Create(new object());
 Response response = await client.PutEmptyAsync(content);
 
 Console.WriteLine(response.Status);
@@ -50,7 +50,7 @@ This sample shows how to call PutEmptyAsync with all request content.
 <code><![CDATA[
 EmptyClient client = new EmptyClient();
 
-RequestContent content = RequestContent.Create(new object());
+using RequestContent content = RequestContent.Create(new object());
 Response response = await client.PutEmptyAsync(content);
 
 Console.WriteLine(response.Status);
@@ -62,7 +62,7 @@ This sample shows how to call PutEmpty.
 <code><![CDATA[
 EmptyClient client = new EmptyClient();
 
-RequestContent content = RequestContent.Create(new object());
+using RequestContent content = RequestContent.Create(new object());
 Response response = client.PutEmpty(content);
 
 Console.WriteLine(response.Status);
@@ -71,7 +71,7 @@ This sample shows how to call PutEmpty with all request content.
 <code><![CDATA[
 EmptyClient client = new EmptyClient();
 
-RequestContent content = RequestContent.Create(new object());
+using RequestContent content = RequestContent.Create(new object());
 Response response = client.PutEmpty(content);
 
 Console.WriteLine(response.Status);
@@ -189,7 +189,7 @@ This sample shows how to call PostRoundTripEmptyAsync and parse the result.
 <code><![CDATA[
 EmptyClient client = new EmptyClient();
 
-RequestContent content = RequestContent.Create(new object());
+using RequestContent content = RequestContent.Create(new object());
 Response response = await client.PostRoundTripEmptyAsync(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
@@ -199,7 +199,7 @@ This sample shows how to call PostRoundTripEmptyAsync with all request content a
 <code><![CDATA[
 EmptyClient client = new EmptyClient();
 
-RequestContent content = RequestContent.Create(new object());
+using RequestContent content = RequestContent.Create(new object());
 Response response = await client.PostRoundTripEmptyAsync(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
@@ -212,7 +212,7 @@ This sample shows how to call PostRoundTripEmpty and parse the result.
 <code><![CDATA[
 EmptyClient client = new EmptyClient();
 
-RequestContent content = RequestContent.Create(new object());
+using RequestContent content = RequestContent.Create(new object());
 Response response = client.PostRoundTripEmpty(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
@@ -222,7 +222,7 @@ This sample shows how to call PostRoundTripEmpty with all request content and pa
 <code><![CDATA[
 EmptyClient client = new EmptyClient();
 
-RequestContent content = RequestContent.Create(new object());
+using RequestContent content = RequestContent.Create(new object());
 Response response = client.PostRoundTripEmpty(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;

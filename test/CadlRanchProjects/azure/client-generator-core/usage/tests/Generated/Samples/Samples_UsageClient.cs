@@ -25,7 +25,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage.Samples
         {
             UsageClient client = new UsageClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
             });
@@ -40,7 +40,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage.Samples
         {
             UsageClient client = new UsageClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
             });
@@ -75,7 +75,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage.Samples
         {
             UsageClient client = new UsageClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
             });
@@ -90,7 +90,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage.Samples
         {
             UsageClient client = new UsageClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
             });

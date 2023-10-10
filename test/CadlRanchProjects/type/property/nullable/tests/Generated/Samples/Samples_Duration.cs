@@ -201,7 +201,7 @@ namespace _Type.Property.Nullable.Samples
         {
             Duration client = new NullableClient().GetDurationClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 requiredProperty = "<requiredProperty>",
                 nullableProperty = "PT1H23M45S",
@@ -217,7 +217,7 @@ namespace _Type.Property.Nullable.Samples
         {
             Duration client = new NullableClient().GetDurationClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 requiredProperty = "<requiredProperty>",
                 nullableProperty = "PT1H23M45S",
@@ -233,7 +233,7 @@ namespace _Type.Property.Nullable.Samples
         {
             Duration client = new NullableClient().GetDurationClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 requiredProperty = "<requiredProperty>",
                 nullableProperty = "PT1H23M45S",
@@ -249,7 +249,7 @@ namespace _Type.Property.Nullable.Samples
         {
             Duration client = new NullableClient().GetDurationClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 requiredProperty = "<requiredProperty>",
                 nullableProperty = "PT1H23M45S",
@@ -265,7 +265,7 @@ namespace _Type.Property.Nullable.Samples
         {
             Duration client = new NullableClient().GetDurationClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 requiredProperty = "<requiredProperty>",
                 nullableProperty = "PT1H23M45S",
@@ -281,7 +281,7 @@ namespace _Type.Property.Nullable.Samples
         {
             Duration client = new NullableClient().GetDurationClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 requiredProperty = "<requiredProperty>",
                 nullableProperty = "PT1H23M45S",
@@ -297,7 +297,7 @@ namespace _Type.Property.Nullable.Samples
         {
             Duration client = new NullableClient().GetDurationClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 requiredProperty = "<requiredProperty>",
                 nullableProperty = "PT1H23M45S",
@@ -313,7 +313,7 @@ namespace _Type.Property.Nullable.Samples
         {
             Duration client = new NullableClient().GetDurationClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 requiredProperty = "<requiredProperty>",
                 nullableProperty = "PT1H23M45S",

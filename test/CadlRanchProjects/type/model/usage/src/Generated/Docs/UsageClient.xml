@@ -41,7 +41,7 @@ This sample shows how to call InputAsync.
 <code><![CDATA[
 UsageClient client = new UsageClient();
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     requiredProp = "<requiredProp>",
 });
@@ -53,7 +53,7 @@ This sample shows how to call InputAsync with all request content.
 <code><![CDATA[
 UsageClient client = new UsageClient();
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     requiredProp = "<requiredProp>",
 });
@@ -68,7 +68,7 @@ This sample shows how to call Input.
 <code><![CDATA[
 UsageClient client = new UsageClient();
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     requiredProp = "<requiredProp>",
 });
@@ -80,7 +80,7 @@ This sample shows how to call Input with all request content.
 <code><![CDATA[
 UsageClient client = new UsageClient();
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     requiredProp = "<requiredProp>",
 });
@@ -201,7 +201,7 @@ This sample shows how to call InputAndOutputAsync and parse the result.
 <code><![CDATA[
 UsageClient client = new UsageClient();
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     requiredProp = "<requiredProp>",
 });
@@ -214,7 +214,7 @@ This sample shows how to call InputAndOutputAsync with all request content and p
 <code><![CDATA[
 UsageClient client = new UsageClient();
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     requiredProp = "<requiredProp>",
 });
@@ -230,7 +230,7 @@ This sample shows how to call InputAndOutput and parse the result.
 <code><![CDATA[
 UsageClient client = new UsageClient();
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     requiredProp = "<requiredProp>",
 });
@@ -243,7 +243,7 @@ This sample shows how to call InputAndOutput with all request content and parse 
 <code><![CDATA[
 UsageClient client = new UsageClient();
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     requiredProp = "<requiredProp>",
 });

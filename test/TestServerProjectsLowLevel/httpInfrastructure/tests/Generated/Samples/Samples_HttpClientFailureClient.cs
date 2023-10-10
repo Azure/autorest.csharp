@@ -168,7 +168,7 @@ namespace httpInfrastructure_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Response response = client.Put400(content);
 
             Console.WriteLine(response.Status);
@@ -181,7 +181,7 @@ namespace httpInfrastructure_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Response response = await client.Put400Async(content);
 
             Console.WriteLine(response.Status);
@@ -194,7 +194,7 @@ namespace httpInfrastructure_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
-            RequestContent content = RequestContent.Create("true");
+            using RequestContent content = RequestContent.Create("true");
             Response response = client.Put400(content);
 
             Console.WriteLine(response.Status);
@@ -207,7 +207,7 @@ namespace httpInfrastructure_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
-            RequestContent content = RequestContent.Create("true");
+            using RequestContent content = RequestContent.Create("true");
             Response response = await client.Put400Async(content);
 
             Console.WriteLine(response.Status);
@@ -220,7 +220,7 @@ namespace httpInfrastructure_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Response response = client.Patch400(content);
 
             Console.WriteLine(response.Status);
@@ -233,7 +233,7 @@ namespace httpInfrastructure_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Response response = await client.Patch400Async(content);
 
             Console.WriteLine(response.Status);
@@ -246,7 +246,7 @@ namespace httpInfrastructure_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
-            RequestContent content = RequestContent.Create("true");
+            using RequestContent content = RequestContent.Create("true");
             Response response = client.Patch400(content);
 
             Console.WriteLine(response.Status);
@@ -259,7 +259,7 @@ namespace httpInfrastructure_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
-            RequestContent content = RequestContent.Create("true");
+            using RequestContent content = RequestContent.Create("true");
             Response response = await client.Patch400Async(content);
 
             Console.WriteLine(response.Status);
@@ -272,7 +272,7 @@ namespace httpInfrastructure_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Response response = client.Post400(content);
 
             Console.WriteLine(response.Status);
@@ -285,7 +285,7 @@ namespace httpInfrastructure_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Response response = await client.Post400Async(content);
 
             Console.WriteLine(response.Status);
@@ -298,7 +298,7 @@ namespace httpInfrastructure_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
-            RequestContent content = RequestContent.Create("true");
+            using RequestContent content = RequestContent.Create("true");
             Response response = client.Post400(content);
 
             Console.WriteLine(response.Status);
@@ -311,7 +311,7 @@ namespace httpInfrastructure_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
-            RequestContent content = RequestContent.Create("true");
+            using RequestContent content = RequestContent.Create("true");
             Response response = await client.Post400Async(content);
 
             Console.WriteLine(response.Status);
@@ -324,7 +324,7 @@ namespace httpInfrastructure_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Response response = client.Delete400(content);
 
             Console.WriteLine(response.Status);
@@ -337,7 +337,7 @@ namespace httpInfrastructure_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Response response = await client.Delete400Async(content);
 
             Console.WriteLine(response.Status);
@@ -350,7 +350,7 @@ namespace httpInfrastructure_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
-            RequestContent content = RequestContent.Create("true");
+            using RequestContent content = RequestContent.Create("true");
             Response response = client.Delete400(content);
 
             Console.WriteLine(response.Status);
@@ -363,7 +363,7 @@ namespace httpInfrastructure_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
-            RequestContent content = RequestContent.Create("true");
+            using RequestContent content = RequestContent.Create("true");
             Response response = await client.Delete400Async(content);
 
             Console.WriteLine(response.Status);
@@ -568,7 +568,7 @@ namespace httpInfrastructure_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Response response = client.Put404(content);
 
             Console.WriteLine(response.Status);
@@ -581,7 +581,7 @@ namespace httpInfrastructure_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Response response = await client.Put404Async(content);
 
             Console.WriteLine(response.Status);
@@ -594,7 +594,7 @@ namespace httpInfrastructure_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
-            RequestContent content = RequestContent.Create("true");
+            using RequestContent content = RequestContent.Create("true");
             Response response = client.Put404(content);
 
             Console.WriteLine(response.Status);
@@ -607,7 +607,7 @@ namespace httpInfrastructure_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
-            RequestContent content = RequestContent.Create("true");
+            using RequestContent content = RequestContent.Create("true");
             Response response = await client.Put404Async(content);
 
             Console.WriteLine(response.Status);
@@ -620,7 +620,7 @@ namespace httpInfrastructure_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Response response = client.Patch405(content);
 
             Console.WriteLine(response.Status);
@@ -633,7 +633,7 @@ namespace httpInfrastructure_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Response response = await client.Patch405Async(content);
 
             Console.WriteLine(response.Status);
@@ -646,7 +646,7 @@ namespace httpInfrastructure_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
-            RequestContent content = RequestContent.Create("true");
+            using RequestContent content = RequestContent.Create("true");
             Response response = client.Patch405(content);
 
             Console.WriteLine(response.Status);
@@ -659,7 +659,7 @@ namespace httpInfrastructure_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
-            RequestContent content = RequestContent.Create("true");
+            using RequestContent content = RequestContent.Create("true");
             Response response = await client.Patch405Async(content);
 
             Console.WriteLine(response.Status);
@@ -672,7 +672,7 @@ namespace httpInfrastructure_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Response response = client.Post406(content);
 
             Console.WriteLine(response.Status);
@@ -685,7 +685,7 @@ namespace httpInfrastructure_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Response response = await client.Post406Async(content);
 
             Console.WriteLine(response.Status);
@@ -698,7 +698,7 @@ namespace httpInfrastructure_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
-            RequestContent content = RequestContent.Create("true");
+            using RequestContent content = RequestContent.Create("true");
             Response response = client.Post406(content);
 
             Console.WriteLine(response.Status);
@@ -711,7 +711,7 @@ namespace httpInfrastructure_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
-            RequestContent content = RequestContent.Create("true");
+            using RequestContent content = RequestContent.Create("true");
             Response response = await client.Post406Async(content);
 
             Console.WriteLine(response.Status);
@@ -724,7 +724,7 @@ namespace httpInfrastructure_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Response response = client.Delete407(content);
 
             Console.WriteLine(response.Status);
@@ -737,7 +737,7 @@ namespace httpInfrastructure_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Response response = await client.Delete407Async(content);
 
             Console.WriteLine(response.Status);
@@ -750,7 +750,7 @@ namespace httpInfrastructure_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
-            RequestContent content = RequestContent.Create("true");
+            using RequestContent content = RequestContent.Create("true");
             Response response = client.Delete407(content);
 
             Console.WriteLine(response.Status);
@@ -763,7 +763,7 @@ namespace httpInfrastructure_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
-            RequestContent content = RequestContent.Create("true");
+            using RequestContent content = RequestContent.Create("true");
             Response response = await client.Delete407Async(content);
 
             Console.WriteLine(response.Status);
@@ -776,7 +776,7 @@ namespace httpInfrastructure_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Response response = client.Put409(content);
 
             Console.WriteLine(response.Status);
@@ -789,7 +789,7 @@ namespace httpInfrastructure_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Response response = await client.Put409Async(content);
 
             Console.WriteLine(response.Status);
@@ -802,7 +802,7 @@ namespace httpInfrastructure_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
-            RequestContent content = RequestContent.Create("true");
+            using RequestContent content = RequestContent.Create("true");
             Response response = client.Put409(content);
 
             Console.WriteLine(response.Status);
@@ -815,7 +815,7 @@ namespace httpInfrastructure_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
-            RequestContent content = RequestContent.Create("true");
+            using RequestContent content = RequestContent.Create("true");
             Response response = await client.Put409Async(content);
 
             Console.WriteLine(response.Status);
@@ -1020,7 +1020,7 @@ namespace httpInfrastructure_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Response response = client.Put413(content);
 
             Console.WriteLine(response.Status);
@@ -1033,7 +1033,7 @@ namespace httpInfrastructure_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Response response = await client.Put413Async(content);
 
             Console.WriteLine(response.Status);
@@ -1046,7 +1046,7 @@ namespace httpInfrastructure_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
-            RequestContent content = RequestContent.Create("true");
+            using RequestContent content = RequestContent.Create("true");
             Response response = client.Put413(content);
 
             Console.WriteLine(response.Status);
@@ -1059,7 +1059,7 @@ namespace httpInfrastructure_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
-            RequestContent content = RequestContent.Create("true");
+            using RequestContent content = RequestContent.Create("true");
             Response response = await client.Put413Async(content);
 
             Console.WriteLine(response.Status);
@@ -1072,7 +1072,7 @@ namespace httpInfrastructure_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Response response = client.Patch414(content);
 
             Console.WriteLine(response.Status);
@@ -1085,7 +1085,7 @@ namespace httpInfrastructure_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Response response = await client.Patch414Async(content);
 
             Console.WriteLine(response.Status);
@@ -1098,7 +1098,7 @@ namespace httpInfrastructure_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
-            RequestContent content = RequestContent.Create("true");
+            using RequestContent content = RequestContent.Create("true");
             Response response = client.Patch414(content);
 
             Console.WriteLine(response.Status);
@@ -1111,7 +1111,7 @@ namespace httpInfrastructure_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
-            RequestContent content = RequestContent.Create("true");
+            using RequestContent content = RequestContent.Create("true");
             Response response = await client.Patch414Async(content);
 
             Console.WriteLine(response.Status);
@@ -1124,7 +1124,7 @@ namespace httpInfrastructure_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Response response = client.Post415(content);
 
             Console.WriteLine(response.Status);
@@ -1137,7 +1137,7 @@ namespace httpInfrastructure_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Response response = await client.Post415Async(content);
 
             Console.WriteLine(response.Status);
@@ -1150,7 +1150,7 @@ namespace httpInfrastructure_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
-            RequestContent content = RequestContent.Create("true");
+            using RequestContent content = RequestContent.Create("true");
             Response response = client.Post415(content);
 
             Console.WriteLine(response.Status);
@@ -1163,7 +1163,7 @@ namespace httpInfrastructure_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
-            RequestContent content = RequestContent.Create("true");
+            using RequestContent content = RequestContent.Create("true");
             Response response = await client.Post415Async(content);
 
             Console.WriteLine(response.Status);
@@ -1224,7 +1224,7 @@ namespace httpInfrastructure_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Response response = client.Delete417(content);
 
             Console.WriteLine(response.Status);
@@ -1237,7 +1237,7 @@ namespace httpInfrastructure_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Response response = await client.Delete417Async(content);
 
             Console.WriteLine(response.Status);
@@ -1250,7 +1250,7 @@ namespace httpInfrastructure_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
-            RequestContent content = RequestContent.Create("true");
+            using RequestContent content = RequestContent.Create("true");
             Response response = client.Delete417(content);
 
             Console.WriteLine(response.Status);
@@ -1263,7 +1263,7 @@ namespace httpInfrastructure_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpClientFailureClient client = new HttpClientFailureClient(credential);
 
-            RequestContent content = RequestContent.Create("true");
+            using RequestContent content = RequestContent.Create("true");
             Response response = await client.Delete417Async(content);
 
             Console.WriteLine(response.Status);
