@@ -185,7 +185,7 @@ export function createModelForService(
     for (const client of clients) {
         for (const op of client.Operations) {
             const apiVersionIndex = op.Parameters.findIndex(
-                (value) => value.IsApiVersion
+                (value: InputParameter) => value.IsApiVersion
             );
             if (apiVersionIndex !== -1) {
                 const apiVersionInOperation = op.Parameters[apiVersionIndex];
