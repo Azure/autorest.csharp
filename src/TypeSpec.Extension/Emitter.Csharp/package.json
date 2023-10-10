@@ -52,7 +52,7 @@
         "@autorest/csharp": "3.0.0-beta.20230309.1",
         "@azure-tools/typespec-azure-core": "0.34.0",
         "@azure-tools/typespec-client-generator-core": "0.34.0",
-        "@typespec/compiler": "0.48.0",
+        "@typespec/compiler": "0.48.1",
         "@typespec/eslint-config-typespec": "0.48.0",
         "@typespec/eslint-plugin": "0.48.0",
         "@typespec/http": "0.48.0",
