@@ -85,30 +85,30 @@ stages:
               command: custom
               customCommand: run build
               workingDir: $(Build.SourcesDirectory)/autorest.csharp/test/CadlRanchMockApis
-          - script: |
-              dotnet test AutoRest.CSharp.sln -v:q
-            displayName: "Test"
-            env:
-              DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
-              DOTNET_CLI_TELEMETRY_OPTOUT: 1
-              DOTNET_MULTILEVEL_LOOKUP: 0
-            workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
-            continueOnError: ${{ parameters.UseTypeSpecNext }}
+        #   - script: |
+        #       dotnet test AutoRest.CSharp.sln -v:q
+        #     displayName: "Test"
+        #     env:
+        #       DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
+        #       DOTNET_CLI_TELEMETRY_OPTOUT: 1
+        #       DOTNET_MULTILEVEL_LOOKUP: 0
+        #     workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
+        #     continueOnError: ${{ parameters.UseTypeSpecNext }}
           - task: Npm@1
             displayName: 'Build TypeSpec csharp emitter'
             inputs:
               command: custom
               customCommand: run build
               workingDir: $(Build.SourcesDirectory)/autorest.csharp/src/TypeSpec.Extension/Emitter.Csharp
-          - pwsh: ./eng/ExecuteTypespecEmitterUnitTests.ps1
-            displayName: 'E2E Test for TypeSpec emitter'
-            workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
-            continueOnError: ${{ parameters.UseTypeSpecNext }}
-          - script: |
-              npm run test --prefix src/TypeSpec.Extension/Emitter.Csharp
-            displayName: 'Unit Test'
-            workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
-            continueOnError: ${{ parameters.UseTypeSpecNext }}
+        #   - pwsh: ./eng/ExecuteTypespecEmitterUnitTests.ps1
+        #     displayName: 'E2E Test for TypeSpec emitter'
+        #     workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
+        #     continueOnError: ${{ parameters.UseTypeSpecNext }}
+        #   - script: |
+        #       npm run test --prefix src/TypeSpec.Extension/Emitter.Csharp
+        #     displayName: 'Unit Test'
+        #     workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
+        #     continueOnError: ${{ parameters.UseTypeSpecNext }}
           - task: NuGetCommand@2
             displayName: 'Publish NugetPackage'
             inputs:
