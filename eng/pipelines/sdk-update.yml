@@ -14,7 +14,7 @@ resources:
       type: github
       name: Azure/azure-sdk-tools
       endpoint: azure
-      ref: refs/tags/azure-sdk-tools_20231010.1
+      ref: main
     - repository: azure-sdk-for-net
       type: github
       name: Azure/azure-sdk-for-net
