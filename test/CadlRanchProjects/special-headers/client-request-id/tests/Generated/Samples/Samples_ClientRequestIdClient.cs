@@ -14,25 +14,27 @@ using SpecialHeaders.ClientRequestId;
 
 namespace SpecialHeaders.ClientRequestId.Samples
 {
-    public class Samples_ClientRequestIdClient
+    public partial class Samples_ClientRequestIdClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetClientRequestId()
+        public void Example_GetClientRequestId_ShortVersion()
         {
             ClientRequestIdClient client = new ClientRequestIdClient();
 
             Response response = client.GetClientRequestId();
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetClientRequestId_Async()
+        public async Task Example_GetClientRequestId_ShortVersion_Async()
         {
             ClientRequestIdClient client = new ClientRequestIdClient();
 
             Response response = await client.GetClientRequestIdAsync();
+
             Console.WriteLine(response.Status);
         }
 
@@ -43,6 +45,7 @@ namespace SpecialHeaders.ClientRequestId.Samples
             ClientRequestIdClient client = new ClientRequestIdClient();
 
             Response response = client.GetClientRequestId();
+
             Console.WriteLine(response.Status);
         }
 
@@ -53,6 +56,7 @@ namespace SpecialHeaders.ClientRequestId.Samples
             ClientRequestIdClient client = new ClientRequestIdClient();
 
             Response response = await client.GetClientRequestIdAsync();
+
             Console.WriteLine(response.Status);
         }
     }

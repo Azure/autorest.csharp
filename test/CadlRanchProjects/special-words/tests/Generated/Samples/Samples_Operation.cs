@@ -14,25 +14,27 @@ using SpecialWords;
 
 namespace SpecialWords.Samples
 {
-    internal class Samples_Operation
+    public partial class Samples_Operation
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_For()
+        public void Example_For_ShortVersion()
         {
             Operation client = new SpecialWordsClient().GetOperationClient(apiVersion: "1.0.0");
 
             Response response = client.For();
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_For_Async()
+        public async Task Example_For_ShortVersion_Async()
         {
             Operation client = new SpecialWordsClient().GetOperationClient(apiVersion: "1.0.0");
 
             Response response = await client.ForAsync();
+
             Console.WriteLine(response.Status);
         }
 
@@ -43,6 +45,7 @@ namespace SpecialWords.Samples
             Operation client = new SpecialWordsClient().GetOperationClient(apiVersion: "1.0.0");
 
             Response response = client.For();
+
             Console.WriteLine(response.Status);
         }
 
@@ -53,6 +56,7 @@ namespace SpecialWords.Samples
             Operation client = new SpecialWordsClient().GetOperationClient(apiVersion: "1.0.0");
 
             Response response = await client.ForAsync();
+
             Console.WriteLine(response.Status);
         }
     }

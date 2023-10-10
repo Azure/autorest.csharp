@@ -58,7 +58,8 @@ namespace _Type.Model.Inheritance.NotDiscriminated
             Argument.AssertNotNull(input, nameof(input));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await PostValidAsync(input.ToRequestContent(), context).ConfigureAwait(false);
+            using RequestContent content = input.ToRequestContent();
+            Response response = await PostValidAsync(content, context).ConfigureAwait(false);
             return response;
         }
 
@@ -71,7 +72,8 @@ namespace _Type.Model.Inheritance.NotDiscriminated
             Argument.AssertNotNull(input, nameof(input));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = PostValid(input.ToRequestContent(), context);
+            using RequestContent content = input.ToRequestContent();
+            Response response = PostValid(content, context);
             return response;
         }
 
@@ -250,7 +252,8 @@ namespace _Type.Model.Inheritance.NotDiscriminated
             Argument.AssertNotNull(input, nameof(input));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await PutValidAsync(input.ToRequestContent(), context).ConfigureAwait(false);
+            using RequestContent content = input.ToRequestContent();
+            Response response = await PutValidAsync(content, context).ConfigureAwait(false);
             return Response.FromValue(Siamese.FromResponse(response), response);
         }
 
@@ -263,7 +266,8 @@ namespace _Type.Model.Inheritance.NotDiscriminated
             Argument.AssertNotNull(input, nameof(input));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = PutValid(input.ToRequestContent(), context);
+            using RequestContent content = input.ToRequestContent();
+            Response response = PutValid(content, context);
             return Response.FromValue(Siamese.FromResponse(response), response);
         }
 

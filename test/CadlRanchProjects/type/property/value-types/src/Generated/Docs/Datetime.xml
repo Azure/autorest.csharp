@@ -81,7 +81,6 @@ Datetime client = new ValueTypesClient().GetDatetimeClient(apiVersion: "1.0.0");
 
 DatetimeProperty body = new DatetimeProperty(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
 Response response = await client.PutAsync(body);
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutAsync with all parameters.
 <code><![CDATA[
@@ -89,7 +88,6 @@ Datetime client = new ValueTypesClient().GetDatetimeClient(apiVersion: "1.0.0");
 
 DatetimeProperty body = new DatetimeProperty(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
 Response response = await client.PutAsync(body);
-Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="Put(DatetimeProperty,CancellationToken)">
@@ -100,7 +98,6 @@ Datetime client = new ValueTypesClient().GetDatetimeClient(apiVersion: "1.0.0");
 
 DatetimeProperty body = new DatetimeProperty(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
 Response response = client.Put(body);
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Put with all parameters.
 <code><![CDATA[
@@ -108,7 +105,6 @@ Datetime client = new ValueTypesClient().GetDatetimeClient(apiVersion: "1.0.0");
 
 DatetimeProperty body = new DatetimeProperty(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
 Response response = client.Put(body);
-Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="PutAsync(RequestContent,RequestContext)">
@@ -117,22 +113,24 @@ This sample shows how to call PutAsync.
 <code><![CDATA[
 Datetime client = new ValueTypesClient().GetDatetimeClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     property = "2022-05-10T14:57:31.2311892-04:00",
 });
 Response response = await client.PutAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutAsync with all request content.
 <code><![CDATA[
 Datetime client = new ValueTypesClient().GetDatetimeClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     property = "2022-05-10T14:57:31.2311892-04:00",
 });
 Response response = await client.PutAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -142,22 +140,24 @@ This sample shows how to call Put.
 <code><![CDATA[
 Datetime client = new ValueTypesClient().GetDatetimeClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     property = "2022-05-10T14:57:31.2311892-04:00",
 });
 Response response = client.Put(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Put with all request content.
 <code><![CDATA[
 Datetime client = new ValueTypesClient().GetDatetimeClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     property = "2022-05-10T14:57:31.2311892-04:00",
 });
 Response response = client.Put(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>

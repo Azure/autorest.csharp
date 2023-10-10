@@ -58,7 +58,8 @@ namespace _Type.Model.Usage
             Argument.AssertNotNull(input, nameof(input));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await InputAsync(input.ToRequestContent(), context).ConfigureAwait(false);
+            using RequestContent content = input.ToRequestContent();
+            Response response = await InputAsync(content, context).ConfigureAwait(false);
             return response;
         }
 
@@ -71,7 +72,8 @@ namespace _Type.Model.Usage
             Argument.AssertNotNull(input, nameof(input));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = Input(input.ToRequestContent(), context);
+            using RequestContent content = input.ToRequestContent();
+            Response response = Input(content, context);
             return response;
         }
 
@@ -250,7 +252,8 @@ namespace _Type.Model.Usage
             Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await InputAndOutputAsync(body.ToRequestContent(), context).ConfigureAwait(false);
+            using RequestContent content = body.ToRequestContent();
+            Response response = await InputAndOutputAsync(content, context).ConfigureAwait(false);
             return Response.FromValue(InputOutputRecord.FromResponse(response), response);
         }
 
@@ -263,7 +266,8 @@ namespace _Type.Model.Usage
             Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = InputAndOutput(body.ToRequestContent(), context);
+            using RequestContent content = body.ToRequestContent();
+            Response response = InputAndOutput(content, context);
             return Response.FromValue(InputOutputRecord.FromResponse(response), response);
         }
 

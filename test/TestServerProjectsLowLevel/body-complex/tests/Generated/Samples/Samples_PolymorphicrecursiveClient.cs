@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
@@ -17,11 +16,11 @@ using body_complex_LowLevel;
 
 namespace body_complex_LowLevel.Samples
 {
-    public class Samples_PolymorphicrecursiveClient
+    public partial class Samples_PolymorphicrecursiveClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetValid()
+        public void Example_GetValid_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PolymorphicrecursiveClient client = new PolymorphicrecursiveClient(credential);
@@ -35,7 +34,7 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetValid_Async()
+        public async Task Example_GetValid_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PolymorphicrecursiveClient client = new PolymorphicrecursiveClient(credential);
@@ -85,33 +84,35 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutValid()
+        public void Example_PutValid_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PolymorphicrecursiveClient client = new PolymorphicrecursiveClient(credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 fishtype = "salmon",
                 length = 123.45F,
             });
             Response response = client.PutValid(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutValid_Async()
+        public async Task Example_PutValid_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PolymorphicrecursiveClient client = new PolymorphicrecursiveClient(credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 fishtype = "salmon",
                 length = 123.45F,
             });
             Response response = await client.PutValidAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -122,19 +123,20 @@ namespace body_complex_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PolymorphicrecursiveClient client = new PolymorphicrecursiveClient(credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 location = "<location>",
                 iswild = true,
                 fishtype = "salmon",
                 species = "<species>",
                 length = 123.45F,
-                siblings = new List<object>()
-{
+                siblings = new object[]
+            {
 null
-},
+            },
             });
             Response response = client.PutValid(content);
+
             Console.WriteLine(response.Status);
         }
 
@@ -145,19 +147,20 @@ null
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PolymorphicrecursiveClient client = new PolymorphicrecursiveClient(credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 location = "<location>",
                 iswild = true,
                 fishtype = "salmon",
                 species = "<species>",
                 length = 123.45F,
-                siblings = new List<object>()
-{
+                siblings = new object[]
+            {
 null
-},
+            },
             });
             Response response = await client.PutValidAsync(content);
+
             Console.WriteLine(response.Status);
         }
     }

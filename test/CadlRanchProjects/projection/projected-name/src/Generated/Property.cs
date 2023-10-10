@@ -56,7 +56,8 @@ namespace Projection.ProjectedName
             Argument.AssertNotNull(jsonProjectedNameModel, nameof(jsonProjectedNameModel));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await JsonAsync(jsonProjectedNameModel.ToRequestContent(), context).ConfigureAwait(false);
+            using RequestContent content = jsonProjectedNameModel.ToRequestContent();
+            Response response = await JsonAsync(content, context).ConfigureAwait(false);
             return response;
         }
 
@@ -69,7 +70,8 @@ namespace Projection.ProjectedName
             Argument.AssertNotNull(jsonProjectedNameModel, nameof(jsonProjectedNameModel));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = Json(jsonProjectedNameModel.ToRequestContent(), context);
+            using RequestContent content = jsonProjectedNameModel.ToRequestContent();
+            Response response = Json(content, context);
             return response;
         }
 
@@ -160,7 +162,8 @@ namespace Projection.ProjectedName
             Argument.AssertNotNull(clientProjectedNameModel, nameof(clientProjectedNameModel));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await ClientAsync(clientProjectedNameModel.ToRequestContent(), context).ConfigureAwait(false);
+            using RequestContent content = clientProjectedNameModel.ToRequestContent();
+            Response response = await ClientAsync(content, context).ConfigureAwait(false);
             return response;
         }
 
@@ -173,7 +176,8 @@ namespace Projection.ProjectedName
             Argument.AssertNotNull(clientProjectedNameModel, nameof(clientProjectedNameModel));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = Client(clientProjectedNameModel.ToRequestContent(), context);
+            using RequestContent content = clientProjectedNameModel.ToRequestContent();
+            Response response = Client(content, context);
             return response;
         }
 
@@ -264,7 +268,8 @@ namespace Projection.ProjectedName
             Argument.AssertNotNull(languageProjectedNameModel, nameof(languageProjectedNameModel));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await LanguageAsync(languageProjectedNameModel.ToRequestContent(), context).ConfigureAwait(false);
+            using RequestContent content = languageProjectedNameModel.ToRequestContent();
+            Response response = await LanguageAsync(content, context).ConfigureAwait(false);
             return response;
         }
 
@@ -277,7 +282,8 @@ namespace Projection.ProjectedName
             Argument.AssertNotNull(languageProjectedNameModel, nameof(languageProjectedNameModel));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = Language(languageProjectedNameModel.ToRequestContent(), context);
+            using RequestContent content = languageProjectedNameModel.ToRequestContent();
+            Response response = Language(content, context);
             return response;
         }
 
@@ -368,7 +374,8 @@ namespace Projection.ProjectedName
             Argument.AssertNotNull(jsonAndClientProjectedNameModel, nameof(jsonAndClientProjectedNameModel));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await JsonAndClientAsync(jsonAndClientProjectedNameModel.ToRequestContent(), context).ConfigureAwait(false);
+            using RequestContent content = jsonAndClientProjectedNameModel.ToRequestContent();
+            Response response = await JsonAndClientAsync(content, context).ConfigureAwait(false);
             return response;
         }
 
@@ -381,7 +388,8 @@ namespace Projection.ProjectedName
             Argument.AssertNotNull(jsonAndClientProjectedNameModel, nameof(jsonAndClientProjectedNameModel));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = JsonAndClient(jsonAndClientProjectedNameModel.ToRequestContent(), context);
+            using RequestContent content = jsonAndClientProjectedNameModel.ToRequestContent();
+            Response response = JsonAndClient(content, context);
             return response;
         }
 

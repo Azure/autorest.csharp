@@ -15,11 +15,11 @@ using SubClients_LowLevel;
 
 namespace SubClients_LowLevel.Samples
 {
-    public class Samples_RootClient
+    public partial class Samples_RootClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetCachedParameter()
+        public void Example_GetCachedParameter_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             RootClient client = new RootClient("<CachedParameter>", credential);
@@ -32,7 +32,7 @@ namespace SubClients_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetCachedParameter_Async()
+        public async Task Example_GetCachedParameter_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             RootClient client = new RootClient("<CachedParameter>", credential);

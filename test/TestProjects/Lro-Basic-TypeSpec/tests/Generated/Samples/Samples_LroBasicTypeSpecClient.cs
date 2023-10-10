@@ -17,33 +17,33 @@ using NUnit.Framework;
 
 namespace LroBasicTypeSpec.Samples
 {
-    public class Samples_LroBasicTypeSpecClient
+    public partial class Samples_LroBasicTypeSpecClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_CreateProject()
+        public void Example_CreateProject_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             LroBasicTypeSpecClient client = new LroBasicTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new object());
+            using RequestContent content = RequestContent.Create(new object());
             Operation operation = client.CreateProject(WaitUntil.Completed, content);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_CreateProject_Async()
+        public async Task Example_CreateProject_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             LroBasicTypeSpecClient client = new LroBasicTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new object());
+            using RequestContent content = RequestContent.Create(new object());
             Operation operation = await client.CreateProjectAsync(WaitUntil.Completed, content);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_CreateProject_Convenience()
+        public void Example_CreateProject_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             LroBasicTypeSpecClient client = new LroBasicTypeSpecClient(endpoint);
@@ -54,7 +54,7 @@ namespace LroBasicTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_CreateProject_Convenience_Async()
+        public async Task Example_CreateProject_ShortVersion_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             LroBasicTypeSpecClient client = new LroBasicTypeSpecClient(endpoint);
@@ -70,7 +70,7 @@ namespace LroBasicTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             LroBasicTypeSpecClient client = new LroBasicTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 description = "<description>",
                 name = "<name>",
@@ -85,7 +85,7 @@ namespace LroBasicTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             LroBasicTypeSpecClient client = new LroBasicTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 description = "<description>",
                 name = "<name>",
@@ -100,7 +100,7 @@ namespace LroBasicTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             LroBasicTypeSpecClient client = new LroBasicTypeSpecClient(endpoint);
 
-            Project resource = new Project()
+            Project resource = new Project
             {
                 Description = "<description>",
                 Name = "<name>",
@@ -115,7 +115,7 @@ namespace LroBasicTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             LroBasicTypeSpecClient client = new LroBasicTypeSpecClient(endpoint);
 
-            Project resource = new Project()
+            Project resource = new Project
             {
                 Description = "<description>",
                 Name = "<name>",
@@ -125,12 +125,12 @@ namespace LroBasicTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_UpdateProject()
+        public void Example_UpdateProject_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             LroBasicTypeSpecClient client = new LroBasicTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new object());
+            using RequestContent content = RequestContent.Create(new object());
             Operation<BinaryData> operation = client.UpdateProject(WaitUntil.Completed, "<id>", content);
             BinaryData responseData = operation.Value;
 
@@ -140,12 +140,12 @@ namespace LroBasicTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_UpdateProject_Async()
+        public async Task Example_UpdateProject_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             LroBasicTypeSpecClient client = new LroBasicTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new object());
+            using RequestContent content = RequestContent.Create(new object());
             Operation<BinaryData> operation = await client.UpdateProjectAsync(WaitUntil.Completed, "<id>", content);
             BinaryData responseData = operation.Value;
 
@@ -155,7 +155,7 @@ namespace LroBasicTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_UpdateProject_Convenience()
+        public void Example_UpdateProject_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             LroBasicTypeSpecClient client = new LroBasicTypeSpecClient(endpoint);
@@ -167,7 +167,7 @@ namespace LroBasicTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_UpdateProject_Convenience_Async()
+        public async Task Example_UpdateProject_ShortVersion_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             LroBasicTypeSpecClient client = new LroBasicTypeSpecClient(endpoint);
@@ -184,7 +184,7 @@ namespace LroBasicTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             LroBasicTypeSpecClient client = new LroBasicTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 description = "<description>",
                 name = "<name>",
@@ -205,7 +205,7 @@ namespace LroBasicTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             LroBasicTypeSpecClient client = new LroBasicTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 description = "<description>",
                 name = "<name>",
@@ -226,7 +226,7 @@ namespace LroBasicTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             LroBasicTypeSpecClient client = new LroBasicTypeSpecClient(endpoint);
 
-            Project resource = new Project()
+            Project resource = new Project
             {
                 Description = "<description>",
                 Name = "<name>",
@@ -242,7 +242,7 @@ namespace LroBasicTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             LroBasicTypeSpecClient client = new LroBasicTypeSpecClient(endpoint);
 
-            Project resource = new Project()
+            Project resource = new Project
             {
                 Description = "<description>",
                 Name = "<name>",
@@ -253,12 +253,12 @@ namespace LroBasicTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_CreateThing()
+        public void Example_CreateThing_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             LroBasicTypeSpecClient client = new LroBasicTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
             });
@@ -271,12 +271,12 @@ namespace LroBasicTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_CreateThing_Async()
+        public async Task Example_CreateThing_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             LroBasicTypeSpecClient client = new LroBasicTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
             });
@@ -289,7 +289,7 @@ namespace LroBasicTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_CreateThing_Convenience()
+        public void Example_CreateThing_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             LroBasicTypeSpecClient client = new LroBasicTypeSpecClient(endpoint);
@@ -301,7 +301,7 @@ namespace LroBasicTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_CreateThing_Convenience_Async()
+        public async Task Example_CreateThing_ShortVersion_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             LroBasicTypeSpecClient client = new LroBasicTypeSpecClient(endpoint);
@@ -318,7 +318,7 @@ namespace LroBasicTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             LroBasicTypeSpecClient client = new LroBasicTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
             });
@@ -336,7 +336,7 @@ namespace LroBasicTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             LroBasicTypeSpecClient client = new LroBasicTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
             });

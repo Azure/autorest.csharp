@@ -54,8 +54,9 @@ This sample shows how to call PutNotExpandableAsync.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 EnumClient client = new EnumClient(credential);
 
-RequestContent content = RequestContent.Create("red color");
+using RequestContent content = RequestContent.Create("red color");
 Response response = await client.PutNotExpandableAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutNotExpandableAsync with all request content.
@@ -63,8 +64,9 @@ This sample shows how to call PutNotExpandableAsync with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 EnumClient client = new EnumClient(credential);
 
-RequestContent content = RequestContent.Create("red color");
+using RequestContent content = RequestContent.Create("red color");
 Response response = await client.PutNotExpandableAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -75,8 +77,9 @@ This sample shows how to call PutNotExpandable.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 EnumClient client = new EnumClient(credential);
 
-RequestContent content = RequestContent.Create("red color");
+using RequestContent content = RequestContent.Create("red color");
 Response response = client.PutNotExpandable(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutNotExpandable with all request content.
@@ -84,8 +87,9 @@ This sample shows how to call PutNotExpandable with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 EnumClient client = new EnumClient(credential);
 
-RequestContent content = RequestContent.Create("red color");
+using RequestContent content = RequestContent.Create("red color");
 Response response = client.PutNotExpandable(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -142,8 +146,9 @@ This sample shows how to call PutReferencedAsync.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 EnumClient client = new EnumClient(credential);
 
-RequestContent content = RequestContent.Create("red color");
+using RequestContent content = RequestContent.Create("red color");
 Response response = await client.PutReferencedAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutReferencedAsync with all request content.
@@ -151,8 +156,9 @@ This sample shows how to call PutReferencedAsync with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 EnumClient client = new EnumClient(credential);
 
-RequestContent content = RequestContent.Create("red color");
+using RequestContent content = RequestContent.Create("red color");
 Response response = await client.PutReferencedAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -163,8 +169,9 @@ This sample shows how to call PutReferenced.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 EnumClient client = new EnumClient(credential);
 
-RequestContent content = RequestContent.Create("red color");
+using RequestContent content = RequestContent.Create("red color");
 Response response = client.PutReferenced(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutReferenced with all request content.
@@ -172,8 +179,9 @@ This sample shows how to call PutReferenced with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 EnumClient client = new EnumClient(credential);
 
-RequestContent content = RequestContent.Create("red color");
+using RequestContent content = RequestContent.Create("red color");
 Response response = client.PutReferenced(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -232,11 +240,12 @@ This sample shows how to call PutReferencedConstantAsync.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 EnumClient client = new EnumClient(credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     ColorConstant = "green-color",
 });
 Response response = await client.PutReferencedConstantAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutReferencedConstantAsync with all request content.
@@ -244,12 +253,13 @@ This sample shows how to call PutReferencedConstantAsync with all request conten
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 EnumClient client = new EnumClient(credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     ColorConstant = "green-color",
     field1 = "<field1>",
 });
 Response response = await client.PutReferencedConstantAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -260,11 +270,12 @@ This sample shows how to call PutReferencedConstant.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 EnumClient client = new EnumClient(credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     ColorConstant = "green-color",
 });
 Response response = client.PutReferencedConstant(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutReferencedConstant with all request content.
@@ -272,12 +283,13 @@ This sample shows how to call PutReferencedConstant with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 EnumClient client = new EnumClient(credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     ColorConstant = "green-color",
     field1 = "<field1>",
 });
 Response response = client.PutReferencedConstant(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>

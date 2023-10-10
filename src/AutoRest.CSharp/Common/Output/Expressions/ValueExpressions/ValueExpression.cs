@@ -24,6 +24,9 @@ namespace AutoRest.CSharp.Common.Output.Expressions.ValueExpressions
         public ValueExpression NullableStructValue(CSharpType candidateType) => this is not ConstantExpression && candidateType is { IsNullable: true, IsValueType: true } ? new MemberExpression(this, nameof(Nullable<int>.Value)) : this;
         public StringExpression InvokeToString() => new(Invoke(nameof(ToString)));
 
+        public virtual ValueExpression Property(string propertyName)
+            => new MemberExpression(this, propertyName);
+
         public ValueExpression Invoke(string methodName)
             => new InvokeInstanceMethodExpression(this, methodName, Array.Empty<ValueExpression>(), null, false);
 
@@ -37,10 +40,10 @@ namespace AutoRest.CSharp.Common.Output.Expressions.ValueExpressions
             => new InvokeInstanceMethodExpression(this, methodName, arguments, null, false);
 
         public ValueExpression Invoke(MethodSignature method)
-            => new InvokeInstanceMethodExpression(this, method.Name, method.Parameters.Select(p => (ValueExpression)p).ToList(), null, false);
+            => new InvokeInstanceMethodExpression(this, method.Name, method.Parameters.Select(p => (ValueExpression)p).ToList(), null, method.Modifiers.HasFlag(MethodSignatureModifiers.Async));
 
-        public ValueExpression Invoke(MethodSignature method, bool async)
-            => new InvokeInstanceMethodExpression(this, method.Name, method.Parameters.Select(p => (ValueExpression)p).ToList(), null, async);
+        public ValueExpression Invoke(MethodSignature method, IReadOnlyList<ValueExpression> arguments, bool addConfigureAwaitFalse = true)
+            => new InvokeInstanceMethodExpression(this, method.Name, arguments, null, method.Modifiers.HasFlag(MethodSignatureModifiers.Async), AddConfigureAwaitFalse: addConfigureAwaitFalse);
 
         public ValueExpression Invoke(string methodName, bool async)
             => new InvokeInstanceMethodExpression(this, methodName, Array.Empty<ValueExpression>(), null, async);

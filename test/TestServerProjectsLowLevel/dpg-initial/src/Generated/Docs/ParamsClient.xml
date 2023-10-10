@@ -146,7 +146,7 @@ This sample shows how to call PostParametersAsync and parse the result.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ParamsClient client = new ParamsClient(credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     url = "<url>",
 });
@@ -160,7 +160,7 @@ This sample shows how to call PostParametersAsync with all request content and p
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ParamsClient client = new ParamsClient(credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     url = "<url>",
 });
@@ -177,7 +177,7 @@ This sample shows how to call PostParameters and parse the result.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ParamsClient client = new ParamsClient(credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     url = "<url>",
 });
@@ -191,7 +191,7 @@ This sample shows how to call PostParameters with all request content and parse 
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ParamsClient client = new ParamsClient(credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     url = "<url>",
 });
