@@ -81,7 +81,7 @@ namespace MgmtSupersetFlattenInheritance.Mocking
         /// <returns> An object representing collection of ResourceModel1Resources and their operations over a ResourceModel1Resource. </returns>
         public virtual ResourceModel1Collection GetResourceModel1s()
         {
-            return GetCachedClient(Client => new ResourceModel1Collection(Client, Id));
+            return GetCachedClient(client => new ResourceModel1Collection(client, Id));
         }
 
         /// <summary>
@@ -98,8 +98,8 @@ namespace MgmtSupersetFlattenInheritance.Mocking
         /// </summary>
         /// <param name="resourceModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="resourceModel1SName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceModel1SName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="resourceModel1SName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<ResourceModel1Resource>> GetResourceModel1Async(string resourceModel1SName, CancellationToken cancellationToken = default)
         {
@@ -120,8 +120,8 @@ namespace MgmtSupersetFlattenInheritance.Mocking
         /// </summary>
         /// <param name="resourceModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="resourceModel1SName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceModel1SName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="resourceModel1SName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual Response<ResourceModel1Resource> GetResourceModel1(string resourceModel1SName, CancellationToken cancellationToken = default)
         {
@@ -132,7 +132,7 @@ namespace MgmtSupersetFlattenInheritance.Mocking
         /// <returns> An object representing collection of TrackedResourceModel1Resources and their operations over a TrackedResourceModel1Resource. </returns>
         public virtual TrackedResourceModel1Collection GetTrackedResourceModel1s()
         {
-            return GetCachedClient(Client => new TrackedResourceModel1Collection(Client, Id));
+            return GetCachedClient(client => new TrackedResourceModel1Collection(client, Id));
         }
 
         /// <summary>
@@ -149,8 +149,8 @@ namespace MgmtSupersetFlattenInheritance.Mocking
         /// </summary>
         /// <param name="trackedResourceModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="trackedResourceModel1SName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="trackedResourceModel1SName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="trackedResourceModel1SName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<TrackedResourceModel1Resource>> GetTrackedResourceModel1Async(string trackedResourceModel1SName, CancellationToken cancellationToken = default)
         {
@@ -171,8 +171,8 @@ namespace MgmtSupersetFlattenInheritance.Mocking
         /// </summary>
         /// <param name="trackedResourceModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="trackedResourceModel1SName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="trackedResourceModel1SName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="trackedResourceModel1SName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual Response<TrackedResourceModel1Resource> GetTrackedResourceModel1(string trackedResourceModel1SName, CancellationToken cancellationToken = default)
         {

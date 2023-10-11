@@ -63,38 +63,6 @@ namespace AutoRest.CSharp.Mgmt.Output
         private string? _factoryMethodName;
         public string FactoryMethodName => _factoryMethodName ??= $"Get{Declaration.Name}";
 
-        private MgmtExtensionClientFactoryMethod? _factoryMethod;
-        public MgmtExtensionClientFactoryMethod FactoryMethod => _factoryMethod ??= EnsureFactoryMethod();
-
-        protected virtual MgmtExtensionClientFactoryMethod EnsureFactoryMethod()
-        {
-            var resourceExtensionMethod = new MethodSignature(
-                FactoryMethodName,
-                null,
-                null,
-                Private | Static,
-                Type,
-                null,
-                new[] { _generalExtensionParameter });
-            Action<CodeWriter> resourceExtensionMethodBody = writer =>
-            {
-                using (writer.Scope($"return {_generalExtensionParameter.Name}.GetCachedClient(client =>", newLine: false))
-                {
-                    writer.Line($"return new {Type}(client, {_generalExtensionParameter.Name}.Id);");
-                }
-                writer.LineRaw(");");
-            };
-            return new(resourceExtensionMethod, resourceExtensionMethodBody);
-        }
-
-        private Parameter _generalExtensionParameter = new Parameter(
-            "resource",
-            $"The resource parameters to use in these operations.",
-            typeof(ArmResource),
-            null,
-            ValidationType.None,
-            null);
-
         protected override IEnumerable<MgmtClientOperation> EnsureClientOperations()
         {
             // here we have to capsulate the MgmtClientOperation again to remove the extra "extension parameter" we added when constructing them in MgmtExtension.EnsureClientOperations
@@ -151,6 +119,4 @@ namespace AutoRest.CSharp.Mgmt.Output
             return builder.ToString();
         }
     }
-
-    internal record MgmtExtensionClientFactoryMethod(MethodSignature Signature, Action<CodeWriter> MethodBodyImplementation);
 }

@@ -40,7 +40,7 @@ namespace MgmtSingletonResource.Mocking
         /// <returns> An object representing collection of CarResources and their operations over a CarResource. </returns>
         public virtual CarCollection GetCars()
         {
-            return GetCachedClient(Client => new CarCollection(Client, Id));
+            return GetCachedClient(client => new CarCollection(client, Id));
         }
 
         /// <summary>
@@ -57,8 +57,8 @@ namespace MgmtSingletonResource.Mocking
         /// </summary>
         /// <param name="carName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="carName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="carName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="carName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<CarResource>> GetCarAsync(string carName, CancellationToken cancellationToken = default)
         {
@@ -79,8 +79,8 @@ namespace MgmtSingletonResource.Mocking
         /// </summary>
         /// <param name="carName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="carName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="carName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="carName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual Response<CarResource> GetCar(string carName, CancellationToken cancellationToken = default)
         {
@@ -91,7 +91,7 @@ namespace MgmtSingletonResource.Mocking
         /// <returns> An object representing collection of ParentResources and their operations over a ParentResource. </returns>
         public virtual ParentResourceCollection GetParentResources()
         {
-            return GetCachedClient(Client => new ParentResourceCollection(Client, Id));
+            return GetCachedClient(client => new ParentResourceCollection(client, Id));
         }
 
         /// <summary>
@@ -109,8 +109,8 @@ namespace MgmtSingletonResource.Mocking
         /// </summary>
         /// <param name="parentName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="parentName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="parentName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="parentName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<ParentResource>> GetParentResourceAsync(string parentName, CancellationToken cancellationToken = default)
         {
@@ -132,8 +132,8 @@ namespace MgmtSingletonResource.Mocking
         /// </summary>
         /// <param name="parentName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="parentName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="parentName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="parentName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual Response<ParentResource> GetParentResource(string parentName, CancellationToken cancellationToken = default)
         {

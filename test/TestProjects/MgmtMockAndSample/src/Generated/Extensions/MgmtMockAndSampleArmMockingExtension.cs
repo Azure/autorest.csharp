@@ -40,7 +40,7 @@ namespace MgmtMockAndSample.Mocking
         /// <returns> An object representing collection of RoleAssignmentResources and their operations over a RoleAssignmentResource. </returns>
         public virtual RoleAssignmentCollection GetRoleAssignments()
         {
-            return GetCachedClient(Client => new RoleAssignmentCollection(Client, Id));
+            return GetCachedClient(client => new RoleAssignmentCollection(client, Id));
         }
 
         /// <summary>
@@ -58,8 +58,8 @@ namespace MgmtMockAndSample.Mocking
         /// </summary>
         /// <param name="roleAssignmentName"> The name of the role assignment to get. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="roleAssignmentName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="roleAssignmentName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="roleAssignmentName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<RoleAssignmentResource>> GetRoleAssignmentAsync(string roleAssignmentName, CancellationToken cancellationToken = default)
         {
@@ -81,8 +81,8 @@ namespace MgmtMockAndSample.Mocking
         /// </summary>
         /// <param name="roleAssignmentName"> The name of the role assignment to get. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="roleAssignmentName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="roleAssignmentName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="roleAssignmentName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual Response<RoleAssignmentResource> GetRoleAssignment(string roleAssignmentName, CancellationToken cancellationToken = default)
         {

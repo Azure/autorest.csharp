@@ -49,7 +49,7 @@ namespace MgmtOmitOperationGroups.Mocking
         /// <returns> An object representing collection of Model2Resources and their operations over a Model2Resource. </returns>
         public virtual Model2Collection GetModel2s()
         {
-            return GetCachedClient(Client => new Model2Collection(Client, Id));
+            return GetCachedClient(client => new Model2Collection(client, Id));
         }
 
         /// <summary>
@@ -66,8 +66,8 @@ namespace MgmtOmitOperationGroups.Mocking
         /// </summary>
         /// <param name="model2SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="model2SName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="model2SName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="model2SName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<Model2Resource>> GetModel2Async(string model2SName, CancellationToken cancellationToken = default)
         {
@@ -88,8 +88,8 @@ namespace MgmtOmitOperationGroups.Mocking
         /// </summary>
         /// <param name="model2SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="model2SName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="model2SName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="model2SName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual Response<Model2Resource> GetModel2(string model2SName, CancellationToken cancellationToken = default)
         {

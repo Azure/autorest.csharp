@@ -41,7 +41,7 @@ namespace MgmtPropertyBag.Mocking
         /// <returns> An object representing collection of FooResources and their operations over a FooResource. </returns>
         public virtual FooCollection GetFoos()
         {
-            return GetCachedClient(Client => new FooCollection(Client, Id));
+            return GetCachedClient(client => new FooCollection(client, Id));
         }
 
         /// <summary>
@@ -92,7 +92,7 @@ namespace MgmtPropertyBag.Mocking
         /// <returns> An object representing collection of BarResources and their operations over a BarResource. </returns>
         public virtual BarCollection GetBars()
         {
-            return GetCachedClient(Client => new BarCollection(Client, Id));
+            return GetCachedClient(client => new BarCollection(client, Id));
         }
 
         /// <summary>

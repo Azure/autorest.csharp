@@ -40,7 +40,7 @@ namespace MgmtExtensionResource.Mocking
         /// <returns> An object representing collection of BuiltInPolicyDefinitionResources and their operations over a BuiltInPolicyDefinitionResource. </returns>
         public virtual BuiltInPolicyDefinitionCollection GetBuiltInPolicyDefinitions()
         {
-            return GetCachedClient(Client => new BuiltInPolicyDefinitionCollection(Client, Id));
+            return GetCachedClient(client => new BuiltInPolicyDefinitionCollection(client, Id));
         }
 
         /// <summary>
@@ -58,8 +58,8 @@ namespace MgmtExtensionResource.Mocking
         /// </summary>
         /// <param name="policyDefinitionName"> The name of the built-in policy definition to get. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="policyDefinitionName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="policyDefinitionName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="policyDefinitionName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<BuiltInPolicyDefinitionResource>> GetBuiltInPolicyDefinitionAsync(string policyDefinitionName, CancellationToken cancellationToken = default)
         {
@@ -81,8 +81,8 @@ namespace MgmtExtensionResource.Mocking
         /// </summary>
         /// <param name="policyDefinitionName"> The name of the built-in policy definition to get. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="policyDefinitionName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="policyDefinitionName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="policyDefinitionName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual Response<BuiltInPolicyDefinitionResource> GetBuiltInPolicyDefinition(string policyDefinitionName, CancellationToken cancellationToken = default)
         {

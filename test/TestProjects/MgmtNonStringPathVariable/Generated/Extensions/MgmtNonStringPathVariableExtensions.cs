@@ -21,18 +21,12 @@ namespace MgmtNonStringPathVariable
     {
         private static MgmtNonStringPathVariableArmClientMockingExtension GetMgmtNonStringPathVariableArmClientMockingExtension(ArmClient client)
         {
-            return client.GetCachedClient(client =>
-            {
-                return new MgmtNonStringPathVariableArmClientMockingExtension(client);
-            });
+            return client.GetCachedClient(client0 => new MgmtNonStringPathVariableArmClientMockingExtension(client0));
         }
 
         private static MgmtNonStringPathVariableResourceGroupMockingExtension GetMgmtNonStringPathVariableResourceGroupMockingExtension(ArmResource resource)
         {
-            return resource.GetCachedClient(client =>
-            {
-                return new MgmtNonStringPathVariableResourceGroupMockingExtension(client, resource.Id);
-            });
+            return resource.GetCachedClient(client => new MgmtNonStringPathVariableResourceGroupMockingExtension(client, resource.Id));
         }
 
         /// <summary>

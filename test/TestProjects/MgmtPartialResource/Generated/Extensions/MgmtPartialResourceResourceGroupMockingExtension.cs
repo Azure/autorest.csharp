@@ -40,7 +40,7 @@ namespace MgmtPartialResource.Mocking
         /// <returns> An object representing collection of PublicIPAddressResources and their operations over a PublicIPAddressResource. </returns>
         public virtual PublicIPAddressCollection GetPublicIPAddresses()
         {
-            return GetCachedClient(Client => new PublicIPAddressCollection(Client, Id));
+            return GetCachedClient(client => new PublicIPAddressCollection(client, Id));
         }
 
         /// <summary>
@@ -59,8 +59,8 @@ namespace MgmtPartialResource.Mocking
         /// <param name="publicIpAddressName"> The name of the public IP address. </param>
         /// <param name="expand"> Expands referenced resources. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="publicIpAddressName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="publicIpAddressName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="publicIpAddressName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<PublicIPAddressResource>> GetPublicIPAddressAsync(string publicIpAddressName, string expand = null, CancellationToken cancellationToken = default)
         {
@@ -83,8 +83,8 @@ namespace MgmtPartialResource.Mocking
         /// <param name="publicIpAddressName"> The name of the public IP address. </param>
         /// <param name="expand"> Expands referenced resources. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="publicIpAddressName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="publicIpAddressName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="publicIpAddressName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual Response<PublicIPAddressResource> GetPublicIPAddress(string publicIpAddressName, string expand = null, CancellationToken cancellationToken = default)
         {

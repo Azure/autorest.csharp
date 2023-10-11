@@ -21,26 +21,17 @@ namespace MgmtPartialResource
     {
         private static MgmtPartialResourceArmClientMockingExtension GetMgmtPartialResourceArmClientMockingExtension(ArmClient client)
         {
-            return client.GetCachedClient(client =>
-            {
-                return new MgmtPartialResourceArmClientMockingExtension(client);
-            });
+            return client.GetCachedClient(client0 => new MgmtPartialResourceArmClientMockingExtension(client0));
         }
 
         private static MgmtPartialResourceResourceGroupMockingExtension GetMgmtPartialResourceResourceGroupMockingExtension(ArmResource resource)
         {
-            return resource.GetCachedClient(client =>
-            {
-                return new MgmtPartialResourceResourceGroupMockingExtension(client, resource.Id);
-            });
+            return resource.GetCachedClient(client => new MgmtPartialResourceResourceGroupMockingExtension(client, resource.Id));
         }
 
         private static MgmtPartialResourceSubscriptionMockingExtension GetMgmtPartialResourceSubscriptionMockingExtension(ArmResource resource)
         {
-            return resource.GetCachedClient(client =>
-            {
-                return new MgmtPartialResourceSubscriptionMockingExtension(client, resource.Id);
-            });
+            return resource.GetCachedClient(client => new MgmtPartialResourceSubscriptionMockingExtension(client, resource.Id));
         }
 
         /// <summary>
@@ -116,8 +107,8 @@ namespace MgmtPartialResource
         /// <param name="publicIpAddressName"> The name of the public IP address. </param>
         /// <param name="expand"> Expands referenced resources. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="publicIpAddressName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="publicIpAddressName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="publicIpAddressName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public static async Task<Response<PublicIPAddressResource>> GetPublicIPAddressAsync(this ResourceGroupResource resourceGroupResource, string publicIpAddressName, string expand = null, CancellationToken cancellationToken = default)
         {
@@ -141,8 +132,8 @@ namespace MgmtPartialResource
         /// <param name="publicIpAddressName"> The name of the public IP address. </param>
         /// <param name="expand"> Expands referenced resources. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="publicIpAddressName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="publicIpAddressName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="publicIpAddressName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public static Response<PublicIPAddressResource> GetPublicIPAddress(this ResourceGroupResource resourceGroupResource, string publicIpAddressName, string expand = null, CancellationToken cancellationToken = default)
         {

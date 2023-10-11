@@ -4,11 +4,14 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
+using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Models;
+using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
 using Azure.Core;
 using Azure.ResourceManager;
@@ -74,6 +77,76 @@ namespace AutoRest.CSharp.Mgmt.Output
             {
                 Description = $"{_scopeParameter.Description} Expected resource type includes the following: {types.Join(", ", " or ")}"
             };
+        }
+
+        protected override Method BuildMockingExtensionFactoryMethod()
+        {
+            var signature = new MethodSignature(
+                MockingExtension.FactoryMethodName,
+                null,
+                null,
+                MethodSignatureModifiers.Private | MethodSignatureModifiers.Static,
+                MockingExtension.Type,
+                null,
+                new[] { ArmClientParameter });
+
+            var extensionVariable = (ValueExpression)ArmClientParameter;
+            var clientVariable = new VariableReference(typeof(ArmClient), "client");
+            var body = Snippets.Return(
+                extensionVariable.Invoke(nameof(ArmClient.GetCachedClient),
+                new FuncExpression(new[] { clientVariable.Declaration }, Snippets.New.Instance(MockingExtension.Type, clientVariable))
+                ));
+            return new(signature, body);
+        }
+
+        protected override Method BuildGetSingletonResourceMethod(Resource resource)
+        {
+            var originalMethod = base.BuildGetSingletonResourceMethod(resource);
+            if (IsArmCore)
+                return originalMethod;
+
+            // we need to add a scope parameter inside the method signature
+            var originalSignature = (MethodSignature)originalMethod.Signature;
+            var scopeTypes = ResourceTypeBuilder.GetScopeTypeStrings(resource.RequestPath.GetParameterizedScopeResourceTypes());
+            var parameters = new List<Parameter>()
+            {
+                // add the first parameter, which is the extension parameter
+                originalSignature.Parameters[0],
+                // then we add the scope parameter
+                GetScopeParameter(scopeTypes)
+            };
+            parameters.AddRange(originalSignature.Parameters.Skip(1)); // add all remaining parameters
+            var signature = originalSignature with
+            {
+                Parameters = parameters
+            };
+
+            return BuildRedirectCallToMockingExtension(signature, false);
+        }
+
+        protected override Method BuildGetChildCollectionMethod(ResourceCollection collection)
+        {
+            var originalMethod = base.BuildGetChildCollectionMethod(collection);
+            if (IsArmCore)
+                return originalMethod;
+
+            // we need to add a scope parameter inside the method signature
+            var originalSignature = (MethodSignature)originalMethod.Signature;
+            var scopeTypes = ResourceTypeBuilder.GetScopeTypeStrings(collection.RequestPath.GetParameterizedScopeResourceTypes());
+            var parameters = new List<Parameter>()
+            {
+                // add the first parameter, which is the extension parameter
+                originalSignature.Parameters[0],
+                // then we add the scope parameter
+                GetScopeParameter(scopeTypes)
+            };
+            parameters.AddRange(originalSignature.Parameters.Skip(1)); // add all remaining parameters
+            var signature = originalSignature with
+            {
+                Parameters = parameters
+            };
+
+            return BuildRedirectCallToMockingExtension(signature, false);
         }
     }
 }

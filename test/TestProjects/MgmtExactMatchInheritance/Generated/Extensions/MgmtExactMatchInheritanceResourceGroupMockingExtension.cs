@@ -57,7 +57,7 @@ namespace MgmtExactMatchInheritance.Mocking
         /// <returns> An object representing collection of ExactMatchModel1Resources and their operations over a ExactMatchModel1Resource. </returns>
         public virtual ExactMatchModel1Collection GetExactMatchModel1s()
         {
-            return GetCachedClient(Client => new ExactMatchModel1Collection(Client, Id));
+            return GetCachedClient(client => new ExactMatchModel1Collection(client, Id));
         }
 
         /// <summary>
@@ -74,8 +74,8 @@ namespace MgmtExactMatchInheritance.Mocking
         /// </summary>
         /// <param name="exactMatchModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="exactMatchModel1SName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel1SName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="exactMatchModel1SName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<ExactMatchModel1Resource>> GetExactMatchModel1Async(string exactMatchModel1SName, CancellationToken cancellationToken = default)
         {
@@ -96,8 +96,8 @@ namespace MgmtExactMatchInheritance.Mocking
         /// </summary>
         /// <param name="exactMatchModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="exactMatchModel1SName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel1SName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="exactMatchModel1SName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual Response<ExactMatchModel1Resource> GetExactMatchModel1(string exactMatchModel1SName, CancellationToken cancellationToken = default)
         {
@@ -108,7 +108,7 @@ namespace MgmtExactMatchInheritance.Mocking
         /// <returns> An object representing collection of ExactMatchModel5Resources and their operations over a ExactMatchModel5Resource. </returns>
         public virtual ExactMatchModel5Collection GetExactMatchModel5s()
         {
-            return GetCachedClient(Client => new ExactMatchModel5Collection(Client, Id));
+            return GetCachedClient(client => new ExactMatchModel5Collection(client, Id));
         }
 
         /// <summary>
@@ -125,8 +125,8 @@ namespace MgmtExactMatchInheritance.Mocking
         /// </summary>
         /// <param name="exactMatchModel5SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="exactMatchModel5SName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel5SName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="exactMatchModel5SName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<ExactMatchModel5Resource>> GetExactMatchModel5Async(string exactMatchModel5SName, CancellationToken cancellationToken = default)
         {
@@ -147,8 +147,8 @@ namespace MgmtExactMatchInheritance.Mocking
         /// </summary>
         /// <param name="exactMatchModel5SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="exactMatchModel5SName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel5SName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="exactMatchModel5SName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual Response<ExactMatchModel5Resource> GetExactMatchModel5(string exactMatchModel5SName, CancellationToken cancellationToken = default)
         {

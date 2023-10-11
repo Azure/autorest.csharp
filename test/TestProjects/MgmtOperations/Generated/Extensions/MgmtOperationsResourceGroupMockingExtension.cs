@@ -48,7 +48,7 @@ namespace MgmtOperations.Mocking
         /// <returns> An object representing collection of AvailabilitySetResources and their operations over a AvailabilitySetResource. </returns>
         public virtual AvailabilitySetCollection GetAvailabilitySets()
         {
-            return GetCachedClient(Client => new AvailabilitySetCollection(Client, Id));
+            return GetCachedClient(client => new AvailabilitySetCollection(client, Id));
         }
 
         /// <summary>
@@ -67,8 +67,8 @@ namespace MgmtOperations.Mocking
         /// <param name="availabilitySetName"> The name of the availability set. </param>
         /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="availabilitySetName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="availabilitySetName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<AvailabilitySetResource>> GetAvailabilitySetAsync(string availabilitySetName, string expand = null, CancellationToken cancellationToken = default)
         {
@@ -91,8 +91,8 @@ namespace MgmtOperations.Mocking
         /// <param name="availabilitySetName"> The name of the availability set. </param>
         /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="availabilitySetName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="availabilitySetName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual Response<AvailabilitySetResource> GetAvailabilitySet(string availabilitySetName, string expand = null, CancellationToken cancellationToken = default)
         {
@@ -103,7 +103,7 @@ namespace MgmtOperations.Mocking
         /// <returns> An object representing collection of UnpatchableResources and their operations over a UnpatchableResource. </returns>
         public virtual UnpatchableResourceCollection GetUnpatchableResources()
         {
-            return GetCachedClient(Client => new UnpatchableResourceCollection(Client, Id));
+            return GetCachedClient(client => new UnpatchableResourceCollection(client, Id));
         }
 
         /// <summary>
@@ -122,8 +122,8 @@ namespace MgmtOperations.Mocking
         /// <param name="name"> The name of the UnpatchableResource. </param>
         /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<UnpatchableResource>> GetUnpatchableResourceAsync(string name, string expand = null, CancellationToken cancellationToken = default)
         {
@@ -146,8 +146,8 @@ namespace MgmtOperations.Mocking
         /// <param name="name"> The name of the UnpatchableResource. </param>
         /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual Response<UnpatchableResource> GetUnpatchableResource(string name, string expand = null, CancellationToken cancellationToken = default)
         {

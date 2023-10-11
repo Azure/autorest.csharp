@@ -40,7 +40,7 @@ namespace MgmtXmlDeserialization.Mocking
         /// <returns> An object representing collection of XmlInstanceResources and their operations over a XmlInstanceResource. </returns>
         public virtual XmlInstanceCollection GetXmlInstances()
         {
-            return GetCachedClient(Client => new XmlInstanceCollection(Client, Id));
+            return GetCachedClient(client => new XmlInstanceCollection(client, Id));
         }
 
         /// <summary>
@@ -58,8 +58,8 @@ namespace MgmtXmlDeserialization.Mocking
         /// </summary>
         /// <param name="xmlName"> The name of the API Management service. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="xmlName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="xmlName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="xmlName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<XmlInstanceResource>> GetXmlInstanceAsync(string xmlName, CancellationToken cancellationToken = default)
         {
@@ -81,8 +81,8 @@ namespace MgmtXmlDeserialization.Mocking
         /// </summary>
         /// <param name="xmlName"> The name of the API Management service. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="xmlName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="xmlName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="xmlName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual Response<XmlInstanceResource> GetXmlInstance(string xmlName, CancellationToken cancellationToken = default)
         {

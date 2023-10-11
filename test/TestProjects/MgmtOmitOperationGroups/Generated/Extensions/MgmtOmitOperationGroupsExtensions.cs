@@ -22,18 +22,12 @@ namespace MgmtOmitOperationGroups
     {
         private static MgmtOmitOperationGroupsArmClientMockingExtension GetMgmtOmitOperationGroupsArmClientMockingExtension(ArmClient client)
         {
-            return client.GetCachedClient(client =>
-            {
-                return new MgmtOmitOperationGroupsArmClientMockingExtension(client);
-            });
+            return client.GetCachedClient(client0 => new MgmtOmitOperationGroupsArmClientMockingExtension(client0));
         }
 
         private static MgmtOmitOperationGroupsResourceGroupMockingExtension GetMgmtOmitOperationGroupsResourceGroupMockingExtension(ArmResource resource)
         {
-            return resource.GetCachedClient(client =>
-            {
-                return new MgmtOmitOperationGroupsResourceGroupMockingExtension(client, resource.Id);
-            });
+            return resource.GetCachedClient(client => new MgmtOmitOperationGroupsResourceGroupMockingExtension(client, resource.Id));
         }
 
         /// <summary>
@@ -71,8 +65,8 @@ namespace MgmtOmitOperationGroups
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="model2SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="model2SName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="model2SName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="model2SName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public static async Task<Response<Model2Resource>> GetModel2Async(this ResourceGroupResource resourceGroupResource, string model2SName, CancellationToken cancellationToken = default)
         {
@@ -94,8 +88,8 @@ namespace MgmtOmitOperationGroups
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="model2SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="model2SName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="model2SName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="model2SName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public static Response<Model2Resource> GetModel2(this ResourceGroupResource resourceGroupResource, string model2SName, CancellationToken cancellationToken = default)
         {

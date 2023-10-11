@@ -61,7 +61,7 @@ namespace MgmtExactMatchFlattenInheritance.Mocking
         /// <returns> An object representing collection of AzureResourceFlattenModel1Resources and their operations over a AzureResourceFlattenModel1Resource. </returns>
         public virtual AzureResourceFlattenModel1Collection GetAzureResourceFlattenModel1s()
         {
-            return GetCachedClient(Client => new AzureResourceFlattenModel1Collection(Client, Id));
+            return GetCachedClient(client => new AzureResourceFlattenModel1Collection(client, Id));
         }
 
         /// <summary>
@@ -79,8 +79,8 @@ namespace MgmtExactMatchFlattenInheritance.Mocking
         /// </summary>
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<AzureResourceFlattenModel1Resource>> GetAzureResourceFlattenModel1Async(string name, CancellationToken cancellationToken = default)
         {
@@ -102,8 +102,8 @@ namespace MgmtExactMatchFlattenInheritance.Mocking
         /// </summary>
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual Response<AzureResourceFlattenModel1Resource> GetAzureResourceFlattenModel1(string name, CancellationToken cancellationToken = default)
         {
@@ -114,7 +114,7 @@ namespace MgmtExactMatchFlattenInheritance.Mocking
         /// <returns> An object representing collection of CustomModel2Resources and their operations over a CustomModel2Resource. </returns>
         public virtual CustomModel2Collection GetCustomModel2s()
         {
-            return GetCachedClient(Client => new CustomModel2Collection(Client, Id));
+            return GetCachedClient(client => new CustomModel2Collection(client, Id));
         }
 
         /// <summary>
@@ -132,8 +132,8 @@ namespace MgmtExactMatchFlattenInheritance.Mocking
         /// </summary>
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<CustomModel2Resource>> GetCustomModel2Async(string name, CancellationToken cancellationToken = default)
         {
@@ -155,8 +155,8 @@ namespace MgmtExactMatchFlattenInheritance.Mocking
         /// </summary>
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual Response<CustomModel2Resource> GetCustomModel2(string name, CancellationToken cancellationToken = default)
         {
@@ -167,7 +167,7 @@ namespace MgmtExactMatchFlattenInheritance.Mocking
         /// <returns> An object representing collection of CustomModel3Resources and their operations over a CustomModel3Resource. </returns>
         public virtual CustomModel3Collection GetCustomModel3s()
         {
-            return GetCachedClient(Client => new CustomModel3Collection(Client, Id));
+            return GetCachedClient(client => new CustomModel3Collection(client, Id));
         }
 
         /// <summary>
@@ -185,8 +185,8 @@ namespace MgmtExactMatchFlattenInheritance.Mocking
         /// </summary>
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<CustomModel3Resource>> GetCustomModel3Async(string name, CancellationToken cancellationToken = default)
         {
@@ -208,8 +208,8 @@ namespace MgmtExactMatchFlattenInheritance.Mocking
         /// </summary>
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual Response<CustomModel3Resource> GetCustomModel3(string name, CancellationToken cancellationToken = default)
         {

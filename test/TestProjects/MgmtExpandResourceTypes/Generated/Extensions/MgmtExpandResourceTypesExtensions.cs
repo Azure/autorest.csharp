@@ -22,26 +22,17 @@ namespace MgmtExpandResourceTypes
     {
         private static MgmtExpandResourceTypesArmClientMockingExtension GetMgmtExpandResourceTypesArmClientMockingExtension(ArmClient client)
         {
-            return client.GetCachedClient(client =>
-            {
-                return new MgmtExpandResourceTypesArmClientMockingExtension(client);
-            });
+            return client.GetCachedClient(client0 => new MgmtExpandResourceTypesArmClientMockingExtension(client0));
         }
 
         private static MgmtExpandResourceTypesResourceGroupMockingExtension GetMgmtExpandResourceTypesResourceGroupMockingExtension(ArmResource resource)
         {
-            return resource.GetCachedClient(client =>
-            {
-                return new MgmtExpandResourceTypesResourceGroupMockingExtension(client, resource.Id);
-            });
+            return resource.GetCachedClient(client => new MgmtExpandResourceTypesResourceGroupMockingExtension(client, resource.Id));
         }
 
         private static MgmtExpandResourceTypesSubscriptionMockingExtension GetMgmtExpandResourceTypesSubscriptionMockingExtension(ArmResource resource)
         {
-            return resource.GetCachedClient(client =>
-            {
-                return new MgmtExpandResourceTypesSubscriptionMockingExtension(client, resource.Id);
-            });
+            return resource.GetCachedClient(client => new MgmtExpandResourceTypesSubscriptionMockingExtension(client, resource.Id));
         }
 
         /// <summary>
@@ -200,8 +191,8 @@ namespace MgmtExpandResourceTypes
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="zoneName"> The name of the DNS zone (without a terminating dot). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="zoneName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="zoneName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="zoneName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public static async Task<Response<ZoneResource>> GetZoneAsync(this ResourceGroupResource resourceGroupResource, string zoneName, CancellationToken cancellationToken = default)
         {
@@ -224,8 +215,8 @@ namespace MgmtExpandResourceTypes
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="zoneName"> The name of the DNS zone (without a terminating dot). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="zoneName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="zoneName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="zoneName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public static Response<ZoneResource> GetZone(this ResourceGroupResource resourceGroupResource, string zoneName, CancellationToken cancellationToken = default)
         {

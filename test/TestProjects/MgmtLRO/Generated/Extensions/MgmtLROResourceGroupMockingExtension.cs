@@ -40,7 +40,7 @@ namespace MgmtLRO.Mocking
         /// <returns> An object representing collection of FakeResources and their operations over a FakeResource. </returns>
         public virtual FakeCollection GetFakes()
         {
-            return GetCachedClient(Client => new FakeCollection(Client, Id));
+            return GetCachedClient(client => new FakeCollection(client, Id));
         }
 
         /// <summary>
@@ -59,8 +59,8 @@ namespace MgmtLRO.Mocking
         /// <param name="fakeName"> The name of the fake. </param>
         /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="fakeName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="fakeName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="fakeName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<FakeResource>> GetFakeAsync(string fakeName, string expand = null, CancellationToken cancellationToken = default)
         {
@@ -83,8 +83,8 @@ namespace MgmtLRO.Mocking
         /// <param name="fakeName"> The name of the fake. </param>
         /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="fakeName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="fakeName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="fakeName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual Response<FakeResource> GetFake(string fakeName, string expand = null, CancellationToken cancellationToken = default)
         {
@@ -95,7 +95,7 @@ namespace MgmtLRO.Mocking
         /// <returns> An object representing collection of BarResources and their operations over a BarResource. </returns>
         public virtual BarCollection GetBars()
         {
-            return GetCachedClient(Client => new BarCollection(Client, Id));
+            return GetCachedClient(client => new BarCollection(client, Id));
         }
 
         /// <summary>
@@ -113,8 +113,8 @@ namespace MgmtLRO.Mocking
         /// </summary>
         /// <param name="barName"> The name of the fake. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="barName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="barName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="barName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<BarResource>> GetBarAsync(string barName, CancellationToken cancellationToken = default)
         {
@@ -136,8 +136,8 @@ namespace MgmtLRO.Mocking
         /// </summary>
         /// <param name="barName"> The name of the fake. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="barName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="barName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="barName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual Response<BarResource> GetBar(string barName, CancellationToken cancellationToken = default)
         {

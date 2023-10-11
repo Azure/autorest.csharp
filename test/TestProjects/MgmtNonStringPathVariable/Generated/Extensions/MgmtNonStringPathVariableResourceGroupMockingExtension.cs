@@ -40,7 +40,7 @@ namespace MgmtNonStringPathVariable.Mocking
         /// <returns> An object representing collection of FakeResources and their operations over a FakeResource. </returns>
         public virtual FakeCollection GetFakes()
         {
-            return GetCachedClient(Client => new FakeCollection(Client, Id));
+            return GetCachedClient(client => new FakeCollection(client, Id));
         }
 
         /// <summary>
@@ -91,7 +91,7 @@ namespace MgmtNonStringPathVariable.Mocking
         /// <returns> An object representing collection of BarResources and their operations over a BarResource. </returns>
         public virtual BarCollection GetBars()
         {
-            return GetCachedClient(Client => new BarCollection(Client, Id));
+            return GetCachedClient(client => new BarCollection(client, Id));
         }
 
         /// <summary>

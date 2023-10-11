@@ -40,7 +40,7 @@ namespace MgmtListMethods.Mocking
         /// <returns> An object representing collection of ResGrpParentWithAncestorWithNonResChWithLocResources and their operations over a ResGrpParentWithAncestorWithNonResChWithLocResource. </returns>
         public virtual ResGrpParentWithAncestorWithNonResChWithLocCollection GetResGrpParentWithAncestorWithNonResChWithLocs()
         {
-            return GetCachedClient(Client => new ResGrpParentWithAncestorWithNonResChWithLocCollection(Client, Id));
+            return GetCachedClient(client => new ResGrpParentWithAncestorWithNonResChWithLocCollection(client, Id));
         }
 
         /// <summary>
@@ -58,8 +58,8 @@ namespace MgmtListMethods.Mocking
         /// </summary>
         /// <param name="resGrpParentWithAncestorWithNonResChWithLocName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="resGrpParentWithAncestorWithNonResChWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="resGrpParentWithAncestorWithNonResChWithLocName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="resGrpParentWithAncestorWithNonResChWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<ResGrpParentWithAncestorWithNonResChWithLocResource>> GetResGrpParentWithAncestorWithNonResChWithLocAsync(string resGrpParentWithAncestorWithNonResChWithLocName, CancellationToken cancellationToken = default)
         {
@@ -81,8 +81,8 @@ namespace MgmtListMethods.Mocking
         /// </summary>
         /// <param name="resGrpParentWithAncestorWithNonResChWithLocName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="resGrpParentWithAncestorWithNonResChWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="resGrpParentWithAncestorWithNonResChWithLocName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="resGrpParentWithAncestorWithNonResChWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual Response<ResGrpParentWithAncestorWithNonResChWithLocResource> GetResGrpParentWithAncestorWithNonResChWithLoc(string resGrpParentWithAncestorWithNonResChWithLocName, CancellationToken cancellationToken = default)
         {
@@ -93,7 +93,7 @@ namespace MgmtListMethods.Mocking
         /// <returns> An object representing collection of ResGrpParentWithAncestorWithNonResChResources and their operations over a ResGrpParentWithAncestorWithNonResChResource. </returns>
         public virtual ResGrpParentWithAncestorWithNonResChCollection GetResGrpParentWithAncestorWithNonResChes()
         {
-            return GetCachedClient(Client => new ResGrpParentWithAncestorWithNonResChCollection(Client, Id));
+            return GetCachedClient(client => new ResGrpParentWithAncestorWithNonResChCollection(client, Id));
         }
 
         /// <summary>
@@ -111,8 +111,8 @@ namespace MgmtListMethods.Mocking
         /// </summary>
         /// <param name="resGrpParentWithAncestorWithNonResChName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="resGrpParentWithAncestorWithNonResChName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="resGrpParentWithAncestorWithNonResChName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="resGrpParentWithAncestorWithNonResChName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<ResGrpParentWithAncestorWithNonResChResource>> GetResGrpParentWithAncestorWithNonResChAsync(string resGrpParentWithAncestorWithNonResChName, CancellationToken cancellationToken = default)
         {
@@ -134,8 +134,8 @@ namespace MgmtListMethods.Mocking
         /// </summary>
         /// <param name="resGrpParentWithAncestorWithNonResChName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="resGrpParentWithAncestorWithNonResChName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="resGrpParentWithAncestorWithNonResChName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="resGrpParentWithAncestorWithNonResChName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual Response<ResGrpParentWithAncestorWithNonResChResource> GetResGrpParentWithAncestorWithNonResCh(string resGrpParentWithAncestorWithNonResChName, CancellationToken cancellationToken = default)
         {
@@ -146,7 +146,7 @@ namespace MgmtListMethods.Mocking
         /// <returns> An object representing collection of ResGrpParentWithAncestorWithLocResources and their operations over a ResGrpParentWithAncestorWithLocResource. </returns>
         public virtual ResGrpParentWithAncestorWithLocCollection GetResGrpParentWithAncestorWithLocs()
         {
-            return GetCachedClient(Client => new ResGrpParentWithAncestorWithLocCollection(Client, Id));
+            return GetCachedClient(client => new ResGrpParentWithAncestorWithLocCollection(client, Id));
         }
 
         /// <summary>
@@ -164,8 +164,8 @@ namespace MgmtListMethods.Mocking
         /// </summary>
         /// <param name="resGrpParentWithAncestorWithLocName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="resGrpParentWithAncestorWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="resGrpParentWithAncestorWithLocName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="resGrpParentWithAncestorWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<ResGrpParentWithAncestorWithLocResource>> GetResGrpParentWithAncestorWithLocAsync(string resGrpParentWithAncestorWithLocName, CancellationToken cancellationToken = default)
         {
@@ -187,8 +187,8 @@ namespace MgmtListMethods.Mocking
         /// </summary>
         /// <param name="resGrpParentWithAncestorWithLocName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="resGrpParentWithAncestorWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="resGrpParentWithAncestorWithLocName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="resGrpParentWithAncestorWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual Response<ResGrpParentWithAncestorWithLocResource> GetResGrpParentWithAncestorWithLoc(string resGrpParentWithAncestorWithLocName, CancellationToken cancellationToken = default)
         {
@@ -199,7 +199,7 @@ namespace MgmtListMethods.Mocking
         /// <returns> An object representing collection of ResGrpParentWithAncestorResources and their operations over a ResGrpParentWithAncestorResource. </returns>
         public virtual ResGrpParentWithAncestorCollection GetResGrpParentWithAncestors()
         {
-            return GetCachedClient(Client => new ResGrpParentWithAncestorCollection(Client, Id));
+            return GetCachedClient(client => new ResGrpParentWithAncestorCollection(client, Id));
         }
 
         /// <summary>
@@ -217,8 +217,8 @@ namespace MgmtListMethods.Mocking
         /// </summary>
         /// <param name="resGrpParentWithAncestorName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="resGrpParentWithAncestorName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="resGrpParentWithAncestorName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="resGrpParentWithAncestorName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<ResGrpParentWithAncestorResource>> GetResGrpParentWithAncestorAsync(string resGrpParentWithAncestorName, CancellationToken cancellationToken = default)
         {
@@ -240,8 +240,8 @@ namespace MgmtListMethods.Mocking
         /// </summary>
         /// <param name="resGrpParentWithAncestorName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="resGrpParentWithAncestorName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="resGrpParentWithAncestorName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="resGrpParentWithAncestorName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual Response<ResGrpParentWithAncestorResource> GetResGrpParentWithAncestor(string resGrpParentWithAncestorName, CancellationToken cancellationToken = default)
         {
@@ -252,7 +252,7 @@ namespace MgmtListMethods.Mocking
         /// <returns> An object representing collection of ResGrpParentWithNonResChResources and their operations over a ResGrpParentWithNonResChResource. </returns>
         public virtual ResGrpParentWithNonResChCollection GetResGrpParentWithNonResChes()
         {
-            return GetCachedClient(Client => new ResGrpParentWithNonResChCollection(Client, Id));
+            return GetCachedClient(client => new ResGrpParentWithNonResChCollection(client, Id));
         }
 
         /// <summary>
@@ -270,8 +270,8 @@ namespace MgmtListMethods.Mocking
         /// </summary>
         /// <param name="resGrpParentWithNonResChName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="resGrpParentWithNonResChName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="resGrpParentWithNonResChName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="resGrpParentWithNonResChName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<ResGrpParentWithNonResChResource>> GetResGrpParentWithNonResChAsync(string resGrpParentWithNonResChName, CancellationToken cancellationToken = default)
         {
@@ -293,8 +293,8 @@ namespace MgmtListMethods.Mocking
         /// </summary>
         /// <param name="resGrpParentWithNonResChName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="resGrpParentWithNonResChName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="resGrpParentWithNonResChName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="resGrpParentWithNonResChName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual Response<ResGrpParentWithNonResChResource> GetResGrpParentWithNonResCh(string resGrpParentWithNonResChName, CancellationToken cancellationToken = default)
         {
@@ -305,7 +305,7 @@ namespace MgmtListMethods.Mocking
         /// <returns> An object representing collection of ResGrpParentResources and their operations over a ResGrpParentResource. </returns>
         public virtual ResGrpParentCollection GetResGrpParents()
         {
-            return GetCachedClient(Client => new ResGrpParentCollection(Client, Id));
+            return GetCachedClient(client => new ResGrpParentCollection(client, Id));
         }
 
         /// <summary>
@@ -323,8 +323,8 @@ namespace MgmtListMethods.Mocking
         /// </summary>
         /// <param name="resGrpParentName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="resGrpParentName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="resGrpParentName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="resGrpParentName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<ResGrpParentResource>> GetResGrpParentAsync(string resGrpParentName, CancellationToken cancellationToken = default)
         {
@@ -346,8 +346,8 @@ namespace MgmtListMethods.Mocking
         /// </summary>
         /// <param name="resGrpParentName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="resGrpParentName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="resGrpParentName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="resGrpParentName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual Response<ResGrpParentResource> GetResGrpParent(string resGrpParentName, CancellationToken cancellationToken = default)
         {

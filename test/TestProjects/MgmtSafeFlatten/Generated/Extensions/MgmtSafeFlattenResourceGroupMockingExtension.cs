@@ -40,7 +40,7 @@ namespace MgmtSafeFlatten.Mocking
         /// <returns> An object representing collection of TypeOneResources and their operations over a TypeOneResource. </returns>
         public virtual TypeOneCollection GetTypeOnes()
         {
-            return GetCachedClient(Client => new TypeOneCollection(Client, Id));
+            return GetCachedClient(client => new TypeOneCollection(client, Id));
         }
 
         /// <summary>
@@ -58,8 +58,8 @@ namespace MgmtSafeFlatten.Mocking
         /// </summary>
         /// <param name="typeOneName"> The name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="typeOneName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="typeOneName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="typeOneName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<TypeOneResource>> GetTypeOneAsync(string typeOneName, CancellationToken cancellationToken = default)
         {
@@ -81,8 +81,8 @@ namespace MgmtSafeFlatten.Mocking
         /// </summary>
         /// <param name="typeOneName"> The name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="typeOneName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="typeOneName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="typeOneName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual Response<TypeOneResource> GetTypeOne(string typeOneName, CancellationToken cancellationToken = default)
         {
@@ -93,7 +93,7 @@ namespace MgmtSafeFlatten.Mocking
         /// <returns> An object representing collection of TypeTwoResources and their operations over a TypeTwoResource. </returns>
         public virtual TypeTwoCollection GetTypeTwos()
         {
-            return GetCachedClient(Client => new TypeTwoCollection(Client, Id));
+            return GetCachedClient(client => new TypeTwoCollection(client, Id));
         }
 
         /// <summary>
@@ -111,8 +111,8 @@ namespace MgmtSafeFlatten.Mocking
         /// </summary>
         /// <param name="typeTwoName"> The name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="typeTwoName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="typeTwoName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="typeTwoName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<TypeTwoResource>> GetTypeTwoAsync(string typeTwoName, CancellationToken cancellationToken = default)
         {
@@ -134,8 +134,8 @@ namespace MgmtSafeFlatten.Mocking
         /// </summary>
         /// <param name="typeTwoName"> The name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="typeTwoName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="typeTwoName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="typeTwoName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual Response<TypeTwoResource> GetTypeTwo(string typeTwoName, CancellationToken cancellationToken = default)
         {

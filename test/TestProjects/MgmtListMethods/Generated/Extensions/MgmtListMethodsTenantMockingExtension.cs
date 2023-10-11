@@ -40,7 +40,7 @@ namespace MgmtListMethods.Mocking
         /// <returns> An object representing collection of TenantTestResources and their operations over a TenantTestResource. </returns>
         public virtual TenantTestCollection GetTenantTests()
         {
-            return GetCachedClient(Client => new TenantTestCollection(Client, Id));
+            return GetCachedClient(client => new TenantTestCollection(client, Id));
         }
 
         /// <summary>
@@ -59,8 +59,8 @@ namespace MgmtListMethods.Mocking
         /// <param name="tenantTestName"> The ID that uniquely identifies a billing account. </param>
         /// <param name="expand"> May be used to expand the soldTo, invoice sections and billing profiles. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="tenantTestName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="tenantTestName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="tenantTestName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<TenantTestResource>> GetTenantTestAsync(string tenantTestName, string expand = null, CancellationToken cancellationToken = default)
         {
@@ -83,8 +83,8 @@ namespace MgmtListMethods.Mocking
         /// <param name="tenantTestName"> The ID that uniquely identifies a billing account. </param>
         /// <param name="expand"> May be used to expand the soldTo, invoice sections and billing profiles. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="tenantTestName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="tenantTestName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="tenantTestName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual Response<TenantTestResource> GetTenantTest(string tenantTestName, string expand = null, CancellationToken cancellationToken = default)
         {

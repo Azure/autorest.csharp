@@ -22,26 +22,17 @@ namespace MgmtPropertyBag
     {
         private static MgmtPropertyBagArmClientMockingExtension GetMgmtPropertyBagArmClientMockingExtension(ArmClient client)
         {
-            return client.GetCachedClient(client =>
-            {
-                return new MgmtPropertyBagArmClientMockingExtension(client);
-            });
+            return client.GetCachedClient(client0 => new MgmtPropertyBagArmClientMockingExtension(client0));
         }
 
         private static MgmtPropertyBagResourceGroupMockingExtension GetMgmtPropertyBagResourceGroupMockingExtension(ArmResource resource)
         {
-            return resource.GetCachedClient(client =>
-            {
-                return new MgmtPropertyBagResourceGroupMockingExtension(client, resource.Id);
-            });
+            return resource.GetCachedClient(client => new MgmtPropertyBagResourceGroupMockingExtension(client, resource.Id));
         }
 
         private static MgmtPropertyBagSubscriptionMockingExtension GetMgmtPropertyBagSubscriptionMockingExtension(ArmResource resource)
         {
-            return resource.GetCachedClient(client =>
-            {
-                return new MgmtPropertyBagSubscriptionMockingExtension(client, resource.Id);
-            });
+            return resource.GetCachedClient(client => new MgmtPropertyBagSubscriptionMockingExtension(client, resource.Id));
         }
 
         /// <summary>

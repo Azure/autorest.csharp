@@ -48,7 +48,7 @@ namespace MgmtScopeResource.Mocking
         /// <returns> An object representing collection of DeploymentExtendedResources and their operations over a DeploymentExtendedResource. </returns>
         public virtual DeploymentExtendedCollection GetDeploymentExtendeds()
         {
-            return GetCachedClient(Client => new DeploymentExtendedCollection(Client, Id));
+            return GetCachedClient(client => new DeploymentExtendedCollection(client, Id));
         }
 
         /// <summary>
@@ -66,8 +66,8 @@ namespace MgmtScopeResource.Mocking
         /// </summary>
         /// <param name="deploymentName"> The name of the deployment. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="deploymentName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="deploymentName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="deploymentName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<DeploymentExtendedResource>> GetDeploymentExtendedAsync(string deploymentName, CancellationToken cancellationToken = default)
         {
@@ -89,8 +89,8 @@ namespace MgmtScopeResource.Mocking
         /// </summary>
         /// <param name="deploymentName"> The name of the deployment. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="deploymentName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="deploymentName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="deploymentName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual Response<DeploymentExtendedResource> GetDeploymentExtended(string deploymentName, CancellationToken cancellationToken = default)
         {
@@ -103,8 +103,6 @@ namespace MgmtScopeResource.Mocking
         /// <returns> An object representing collection of ResourceLinkResources and their operations over a ResourceLinkResource. </returns>
         public virtual ResourceLinkCollection GetResourceLinks(string scope)
         {
-            Argument.AssertNotNull(scope, nameof(scope));
-
             return new ResourceLinkCollection(Client, Id, scope);
         }
 

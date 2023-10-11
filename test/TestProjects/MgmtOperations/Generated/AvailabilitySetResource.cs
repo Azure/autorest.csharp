@@ -93,7 +93,7 @@ namespace MgmtOperations
         /// <returns> An object representing collection of AvailabilitySetChildResources and their operations over a AvailabilitySetChildResource. </returns>
         public virtual AvailabilitySetChildCollection GetAvailabilitySetChildren()
         {
-            return GetCachedClient(Client => new AvailabilitySetChildCollection(Client, Id));
+            return GetCachedClient(client => new AvailabilitySetChildCollection(client, Id));
         }
 
         /// <summary>
@@ -111,8 +111,8 @@ namespace MgmtOperations
         /// </summary>
         /// <param name="availabilitySetChildName"> The name of the availability set child. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="availabilitySetChildName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetChildName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="availabilitySetChildName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<AvailabilitySetChildResource>> GetAvailabilitySetChildAsync(string availabilitySetChildName, CancellationToken cancellationToken = default)
         {
@@ -134,8 +134,8 @@ namespace MgmtOperations
         /// </summary>
         /// <param name="availabilitySetChildName"> The name of the availability set child. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="availabilitySetChildName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetChildName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="availabilitySetChildName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual Response<AvailabilitySetChildResource> GetAvailabilitySetChild(string availabilitySetChildName, CancellationToken cancellationToken = default)
         {

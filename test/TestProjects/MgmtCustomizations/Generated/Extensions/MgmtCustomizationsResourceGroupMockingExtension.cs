@@ -40,7 +40,7 @@ namespace MgmtCustomizations.Mocking
         /// <returns> An object representing collection of PetStoreResources and their operations over a PetStoreResource. </returns>
         public virtual PetStoreCollection GetPetStores()
         {
-            return GetCachedClient(Client => new PetStoreCollection(Client, Id));
+            return GetCachedClient(client => new PetStoreCollection(client, Id));
         }
 
         /// <summary>
@@ -58,8 +58,8 @@ namespace MgmtCustomizations.Mocking
         /// </summary>
         /// <param name="name"> Name of the endpoint under the profile which is unique globally. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<PetStoreResource>> GetPetStoreAsync(string name, CancellationToken cancellationToken = default)
         {
@@ -81,8 +81,8 @@ namespace MgmtCustomizations.Mocking
         /// </summary>
         /// <param name="name"> Name of the endpoint under the profile which is unique globally. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual Response<PetStoreResource> GetPetStore(string name, CancellationToken cancellationToken = default)
         {

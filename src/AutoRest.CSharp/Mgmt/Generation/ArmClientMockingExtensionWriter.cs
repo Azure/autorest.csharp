@@ -9,7 +9,6 @@ using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Mgmt.Output;
-using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
 using Azure.Core;
 
@@ -90,40 +89,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
             };
         }
 
-        /// <summary>
-        /// In ArmClientExtensionClient, its `Id` property is actually dummy, therefore we need to override this method to use `scope` instead of using the `Id` property
-        /// </summary>
-        /// <param name="resource"></param>
-        /// <param name="singletonResourceIdSuffix"></param>
-        /// <param name="signature"></param>
-        protected override void WriteSingletonResourceEntry(Resource resource, SingletonResourceSuffix singletonResourceIdSuffix, MethodSignature signature)
-        {
-            var scopeTypes = ResourceTypeBuilder.GetScopeTypeStrings(resource.RequestPath.GetParameterizedScopeResourceTypes());
-            WriteScopeResourceTypesValidation(_scopeParameter.Name, scopeTypes);
-
-            _writer.Line($"return new {resource.Type.Name}({ArmClientReference}, {singletonResourceIdSuffix.BuildResourceIdentifier($"{MgmtTypeProvider.ScopeParameter.Name}")});");
-        }
-
-        /// <summary>
-        /// In ArmClientExtensionClient, its `Id` property is actually dummy, therefore we need to override this method to use `scope` instead of using the `Id` property
-        /// </summary>
-        /// <param name="resourceCollection"></param>
-        /// <param name="signature"></param>
-        protected override void WriteResourceCollectionEntry(ResourceCollection resourceCollection, MethodSignature signature)
-        {
-            var scopeTypes = ResourceTypeBuilder.GetScopeTypeStrings(resourceCollection.RequestPath.GetParameterizedScopeResourceTypes());
-            WriteScopeResourceTypesValidation(_scopeParameter.Name, scopeTypes);
-
-            // we cannot use GetCachedClient here because the Id of this instance will never change.
-            _writer.Append($"return new {resourceCollection.Type}({ArmClientReference}, {MgmtTypeProvider.ScopeParameter.Name}, ");
-            foreach (var parameter in resourceCollection.ExtraConstructorParameters)
-            {
-                _writer.Append($"{parameter.Name}, ");
-            }
-            _writer.RemoveTrailingComma();
-            _writer.LineRaw(");");
-        }
-
         private void WriteScopeResourceTypesValidation(string parameterName, ICollection<FormattableString>? types)
         {
             if (types == null)
@@ -156,26 +121,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
         {
             _writer.Line($"{resource.Type.Name}.ValidateResourceId(id);");
             _writer.Line($"return new {resource.Type.Name}({armVariable}, id);");
-        }
-
-
-        /// <summary>
-        /// Override this method to prepend the `scope` parameter
-        /// </summary>
-        /// <returns></returns>
-        protected override Parameter[] GetParametersForSingletonEntry()
-        {
-            return base.GetParametersForSingletonEntry().Prepend(MgmtTypeProvider.ScopeParameter).ToArray();
-        }
-
-        /// <summary>
-        /// Override this method to prepend the `scope` parameter
-        /// </summary>
-        /// <param name="resourceCollection"></param>
-        /// <returns></returns>
-        protected override Parameter[] GetParametersForCollectionEntry(ResourceCollection resourceCollection)
-        {
-            return base.GetParametersForCollectionEntry(resourceCollection).Prepend(MgmtTypeProvider.ScopeParameter).ToArray();
         }
     }
 }

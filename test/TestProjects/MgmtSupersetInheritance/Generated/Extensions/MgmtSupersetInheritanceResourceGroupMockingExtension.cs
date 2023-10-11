@@ -52,7 +52,7 @@ namespace MgmtSupersetInheritance.Mocking
         /// <returns> An object representing collection of SupersetModel1Resources and their operations over a SupersetModel1Resource. </returns>
         public virtual SupersetModel1Collection GetSupersetModel1s()
         {
-            return GetCachedClient(Client => new SupersetModel1Collection(Client, Id));
+            return GetCachedClient(client => new SupersetModel1Collection(client, Id));
         }
 
         /// <summary>
@@ -69,8 +69,8 @@ namespace MgmtSupersetInheritance.Mocking
         /// </summary>
         /// <param name="supersetModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="supersetModel1SName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="supersetModel1SName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="supersetModel1SName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<SupersetModel1Resource>> GetSupersetModel1Async(string supersetModel1SName, CancellationToken cancellationToken = default)
         {
@@ -91,8 +91,8 @@ namespace MgmtSupersetInheritance.Mocking
         /// </summary>
         /// <param name="supersetModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="supersetModel1SName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="supersetModel1SName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="supersetModel1SName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual Response<SupersetModel1Resource> GetSupersetModel1(string supersetModel1SName, CancellationToken cancellationToken = default)
         {
@@ -103,7 +103,7 @@ namespace MgmtSupersetInheritance.Mocking
         /// <returns> An object representing collection of SupersetModel4Resources and their operations over a SupersetModel4Resource. </returns>
         public virtual SupersetModel4Collection GetSupersetModel4s()
         {
-            return GetCachedClient(Client => new SupersetModel4Collection(Client, Id));
+            return GetCachedClient(client => new SupersetModel4Collection(client, Id));
         }
 
         /// <summary>
@@ -120,8 +120,8 @@ namespace MgmtSupersetInheritance.Mocking
         /// </summary>
         /// <param name="supersetModel4SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="supersetModel4SName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="supersetModel4SName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="supersetModel4SName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<SupersetModel4Resource>> GetSupersetModel4Async(string supersetModel4SName, CancellationToken cancellationToken = default)
         {
@@ -142,8 +142,8 @@ namespace MgmtSupersetInheritance.Mocking
         /// </summary>
         /// <param name="supersetModel4SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="supersetModel4SName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="supersetModel4SName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="supersetModel4SName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual Response<SupersetModel4Resource> GetSupersetModel4(string supersetModel4SName, CancellationToken cancellationToken = default)
         {
@@ -154,7 +154,7 @@ namespace MgmtSupersetInheritance.Mocking
         /// <returns> An object representing collection of SupersetModel6Resources and their operations over a SupersetModel6Resource. </returns>
         public virtual SupersetModel6Collection GetSupersetModel6s()
         {
-            return GetCachedClient(Client => new SupersetModel6Collection(Client, Id));
+            return GetCachedClient(client => new SupersetModel6Collection(client, Id));
         }
 
         /// <summary>
@@ -171,8 +171,8 @@ namespace MgmtSupersetInheritance.Mocking
         /// </summary>
         /// <param name="supersetModel6SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="supersetModel6SName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="supersetModel6SName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="supersetModel6SName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<SupersetModel6Resource>> GetSupersetModel6Async(string supersetModel6SName, CancellationToken cancellationToken = default)
         {
@@ -193,8 +193,8 @@ namespace MgmtSupersetInheritance.Mocking
         /// </summary>
         /// <param name="supersetModel6SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="supersetModel6SName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="supersetModel6SName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="supersetModel6SName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual Response<SupersetModel6Resource> GetSupersetModel6(string supersetModel6SName, CancellationToken cancellationToken = default)
         {
@@ -205,7 +205,7 @@ namespace MgmtSupersetInheritance.Mocking
         /// <returns> An object representing collection of SupersetModel7Resources and their operations over a SupersetModel7Resource. </returns>
         public virtual SupersetModel7Collection GetSupersetModel7s()
         {
-            return GetCachedClient(Client => new SupersetModel7Collection(Client, Id));
+            return GetCachedClient(client => new SupersetModel7Collection(client, Id));
         }
 
         /// <summary>
@@ -222,8 +222,8 @@ namespace MgmtSupersetInheritance.Mocking
         /// </summary>
         /// <param name="supersetModel7SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="supersetModel7SName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="supersetModel7SName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="supersetModel7SName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<SupersetModel7Resource>> GetSupersetModel7Async(string supersetModel7SName, CancellationToken cancellationToken = default)
         {
@@ -244,8 +244,8 @@ namespace MgmtSupersetInheritance.Mocking
         /// </summary>
         /// <param name="supersetModel7SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="supersetModel7SName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="supersetModel7SName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="supersetModel7SName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual Response<SupersetModel7Resource> GetSupersetModel7(string supersetModel7SName, CancellationToken cancellationToken = default)
         {

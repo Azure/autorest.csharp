@@ -40,7 +40,7 @@ namespace MgmtSubscriptionNameParameter.Mocking
         /// <returns> An object representing collection of SBSubscriptionResources and their operations over a SBSubscriptionResource. </returns>
         public virtual SBSubscriptionCollection GetSBSubscriptions()
         {
-            return GetCachedClient(Client => new SBSubscriptionCollection(Client, Id));
+            return GetCachedClient(client => new SBSubscriptionCollection(client, Id));
         }
 
         /// <summary>
@@ -58,8 +58,8 @@ namespace MgmtSubscriptionNameParameter.Mocking
         /// </summary>
         /// <param name="subscriptionName"> The subscription name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="subscriptionName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subscriptionName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<SBSubscriptionResource>> GetSBSubscriptionAsync(string subscriptionName, CancellationToken cancellationToken = default)
         {
@@ -81,8 +81,8 @@ namespace MgmtSubscriptionNameParameter.Mocking
         /// </summary>
         /// <param name="subscriptionName"> The subscription name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="subscriptionName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subscriptionName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual Response<SBSubscriptionResource> GetSBSubscription(string subscriptionName, CancellationToken cancellationToken = default)
         {

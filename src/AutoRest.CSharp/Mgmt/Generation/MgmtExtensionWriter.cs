@@ -1,17 +1,12 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-using System;
 using System.Linq;
 using AutoRest.CSharp.Generation.Writers;
-using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
-using AutoRest.CSharp.Output.Models.Shared;
-using Azure.Core;
-using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 
 namespace AutoRest.CSharp.Mgmt.Generation
 {
@@ -62,49 +57,5 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 .AppendRawIf(".ConfigureAwait(false)", isAsync && !isPaging)
                 .LineRaw(";");
         }
-
-        protected override void WriteResourceCollectionEntry(ResourceCollection resourceCollection, MethodSignature signature)
-        {
-            if (IsArmCore)
-            {
-                base.WriteResourceCollectionEntry(resourceCollection, signature);
-            }
-            else
-            {
-                WriteMethodBodyWrapper(signature, false, false);
-            }
-        }
-
-        protected override void WriteSingletonResourceEntry(Resource resource, SingletonResourceSuffix singletonResourceSuffix, MethodSignature signature)
-        {
-            _writer.UseNamespace(typeof(ResourceIdentifier).Namespace!);
-            if (IsArmCore)
-            {
-                base.WriteSingletonResourceEntry(resource, singletonResourceSuffix, signature);
-            }
-            else
-            {
-                WriteMethodBodyWrapper(signature, false, false);
-            }
-        }
-
-        protected override void WriteResourceEntry(ResourceCollection resourceCollection, MethodSignature methodSignature, bool isAsync)
-        {
-            if (IsArmCore)
-            {
-                base.WriteResourceEntry(resourceCollection, methodSignature, isAsync);
-            }
-            else
-            {
-                WriteMethodBodyWrapper(methodSignature, isAsync, false);
-            }
-        }
-
-        protected override MethodSignatureModifiers GetMethodModifiers() => IsArmCore ? base.GetMethodModifiers() : Public | Static | Extension;
-
-        protected override Parameter[] GetParametersForSingletonEntry() => IsArmCore ? base.GetParametersForSingletonEntry() : new[] { This.ExtensionParameter };
-
-        protected override Parameter[] GetParametersForCollectionEntry(ResourceCollection resourceCollection)
-            => IsArmCore ? base.GetParametersForCollectionEntry(resourceCollection) : resourceCollection.ExtraConstructorParameters.Prepend(This.ExtensionParameter).ToArray();
     }
 }

@@ -40,7 +40,7 @@ namespace MgmtPagination.Mocking
         /// <returns> An object representing collection of PageSizeIntegerModelResources and their operations over a PageSizeIntegerModelResource. </returns>
         public virtual PageSizeIntegerModelCollection GetPageSizeIntegerModels()
         {
-            return GetCachedClient(Client => new PageSizeIntegerModelCollection(Client, Id));
+            return GetCachedClient(client => new PageSizeIntegerModelCollection(client, Id));
         }
 
         /// <summary>
@@ -57,8 +57,8 @@ namespace MgmtPagination.Mocking
         /// </summary>
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<PageSizeIntegerModelResource>> GetPageSizeIntegerModelAsync(string name, CancellationToken cancellationToken = default)
         {
@@ -79,8 +79,8 @@ namespace MgmtPagination.Mocking
         /// </summary>
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual Response<PageSizeIntegerModelResource> GetPageSizeIntegerModel(string name, CancellationToken cancellationToken = default)
         {
@@ -91,7 +91,7 @@ namespace MgmtPagination.Mocking
         /// <returns> An object representing collection of PageSizeInt64ModelResources and their operations over a PageSizeInt64ModelResource. </returns>
         public virtual PageSizeInt64ModelCollection GetPageSizeInt64Models()
         {
-            return GetCachedClient(Client => new PageSizeInt64ModelCollection(Client, Id));
+            return GetCachedClient(client => new PageSizeInt64ModelCollection(client, Id));
         }
 
         /// <summary>
@@ -108,8 +108,8 @@ namespace MgmtPagination.Mocking
         /// </summary>
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<PageSizeInt64ModelResource>> GetPageSizeInt64ModelAsync(string name, CancellationToken cancellationToken = default)
         {
@@ -130,8 +130,8 @@ namespace MgmtPagination.Mocking
         /// </summary>
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual Response<PageSizeInt64ModelResource> GetPageSizeInt64Model(string name, CancellationToken cancellationToken = default)
         {
@@ -142,7 +142,7 @@ namespace MgmtPagination.Mocking
         /// <returns> An object representing collection of PageSizeInt32ModelResources and their operations over a PageSizeInt32ModelResource. </returns>
         public virtual PageSizeInt32ModelCollection GetPageSizeInt32Models()
         {
-            return GetCachedClient(Client => new PageSizeInt32ModelCollection(Client, Id));
+            return GetCachedClient(client => new PageSizeInt32ModelCollection(client, Id));
         }
 
         /// <summary>
@@ -159,8 +159,8 @@ namespace MgmtPagination.Mocking
         /// </summary>
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<PageSizeInt32ModelResource>> GetPageSizeInt32ModelAsync(string name, CancellationToken cancellationToken = default)
         {
@@ -181,8 +181,8 @@ namespace MgmtPagination.Mocking
         /// </summary>
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual Response<PageSizeInt32ModelResource> GetPageSizeInt32Model(string name, CancellationToken cancellationToken = default)
         {
@@ -193,7 +193,7 @@ namespace MgmtPagination.Mocking
         /// <returns> An object representing collection of PageSizeNumericModelResources and their operations over a PageSizeNumericModelResource. </returns>
         public virtual PageSizeNumericModelCollection GetPageSizeNumericModels()
         {
-            return GetCachedClient(Client => new PageSizeNumericModelCollection(Client, Id));
+            return GetCachedClient(client => new PageSizeNumericModelCollection(client, Id));
         }
 
         /// <summary>
@@ -210,8 +210,8 @@ namespace MgmtPagination.Mocking
         /// </summary>
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<PageSizeNumericModelResource>> GetPageSizeNumericModelAsync(string name, CancellationToken cancellationToken = default)
         {
@@ -232,8 +232,8 @@ namespace MgmtPagination.Mocking
         /// </summary>
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual Response<PageSizeNumericModelResource> GetPageSizeNumericModel(string name, CancellationToken cancellationToken = default)
         {
@@ -244,7 +244,7 @@ namespace MgmtPagination.Mocking
         /// <returns> An object representing collection of PageSizeFloatModelResources and their operations over a PageSizeFloatModelResource. </returns>
         public virtual PageSizeFloatModelCollection GetPageSizeFloatModels()
         {
-            return GetCachedClient(Client => new PageSizeFloatModelCollection(Client, Id));
+            return GetCachedClient(client => new PageSizeFloatModelCollection(client, Id));
         }
 
         /// <summary>
@@ -261,8 +261,8 @@ namespace MgmtPagination.Mocking
         /// </summary>
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<PageSizeFloatModelResource>> GetPageSizeFloatModelAsync(string name, CancellationToken cancellationToken = default)
         {
@@ -283,8 +283,8 @@ namespace MgmtPagination.Mocking
         /// </summary>
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual Response<PageSizeFloatModelResource> GetPageSizeFloatModel(string name, CancellationToken cancellationToken = default)
         {
@@ -295,7 +295,7 @@ namespace MgmtPagination.Mocking
         /// <returns> An object representing collection of PageSizeDoubleModelResources and their operations over a PageSizeDoubleModelResource. </returns>
         public virtual PageSizeDoubleModelCollection GetPageSizeDoubleModels()
         {
-            return GetCachedClient(Client => new PageSizeDoubleModelCollection(Client, Id));
+            return GetCachedClient(client => new PageSizeDoubleModelCollection(client, Id));
         }
 
         /// <summary>
@@ -312,8 +312,8 @@ namespace MgmtPagination.Mocking
         /// </summary>
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<PageSizeDoubleModelResource>> GetPageSizeDoubleModelAsync(string name, CancellationToken cancellationToken = default)
         {
@@ -334,8 +334,8 @@ namespace MgmtPagination.Mocking
         /// </summary>
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual Response<PageSizeDoubleModelResource> GetPageSizeDoubleModel(string name, CancellationToken cancellationToken = default)
         {
@@ -346,7 +346,7 @@ namespace MgmtPagination.Mocking
         /// <returns> An object representing collection of PageSizeDecimalModelResources and their operations over a PageSizeDecimalModelResource. </returns>
         public virtual PageSizeDecimalModelCollection GetPageSizeDecimalModels()
         {
-            return GetCachedClient(Client => new PageSizeDecimalModelCollection(Client, Id));
+            return GetCachedClient(client => new PageSizeDecimalModelCollection(client, Id));
         }
 
         /// <summary>
@@ -363,8 +363,8 @@ namespace MgmtPagination.Mocking
         /// </summary>
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<PageSizeDecimalModelResource>> GetPageSizeDecimalModelAsync(string name, CancellationToken cancellationToken = default)
         {
@@ -385,8 +385,8 @@ namespace MgmtPagination.Mocking
         /// </summary>
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual Response<PageSizeDecimalModelResource> GetPageSizeDecimalModel(string name, CancellationToken cancellationToken = default)
         {
@@ -397,7 +397,7 @@ namespace MgmtPagination.Mocking
         /// <returns> An object representing collection of PageSizeStringModelResources and their operations over a PageSizeStringModelResource. </returns>
         public virtual PageSizeStringModelCollection GetPageSizeStringModels()
         {
-            return GetCachedClient(Client => new PageSizeStringModelCollection(Client, Id));
+            return GetCachedClient(client => new PageSizeStringModelCollection(client, Id));
         }
 
         /// <summary>
@@ -414,8 +414,8 @@ namespace MgmtPagination.Mocking
         /// </summary>
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<PageSizeStringModelResource>> GetPageSizeStringModelAsync(string name, CancellationToken cancellationToken = default)
         {
@@ -436,8 +436,8 @@ namespace MgmtPagination.Mocking
         /// </summary>
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual Response<PageSizeStringModelResource> GetPageSizeStringModel(string name, CancellationToken cancellationToken = default)
         {

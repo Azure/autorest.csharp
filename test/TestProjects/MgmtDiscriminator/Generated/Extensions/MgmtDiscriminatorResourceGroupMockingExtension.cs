@@ -40,7 +40,7 @@ namespace MgmtDiscriminator.Mocking
         /// <returns> An object representing collection of DeliveryRuleResources and their operations over a DeliveryRuleResource. </returns>
         public virtual DeliveryRuleCollection GetDeliveryRules()
         {
-            return GetCachedClient(Client => new DeliveryRuleCollection(Client, Id));
+            return GetCachedClient(client => new DeliveryRuleCollection(client, Id));
         }
 
         /// <summary>
@@ -58,8 +58,8 @@ namespace MgmtDiscriminator.Mocking
         /// </summary>
         /// <param name="name"> Name of the endpoint under the profile which is unique globally. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<DeliveryRuleResource>> GetDeliveryRuleAsync(string name, CancellationToken cancellationToken = default)
         {
@@ -81,8 +81,8 @@ namespace MgmtDiscriminator.Mocking
         /// </summary>
         /// <param name="name"> Name of the endpoint under the profile which is unique globally. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual Response<DeliveryRuleResource> GetDeliveryRule(string name, CancellationToken cancellationToken = default)
         {

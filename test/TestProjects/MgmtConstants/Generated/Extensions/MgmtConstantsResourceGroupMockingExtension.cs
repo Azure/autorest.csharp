@@ -41,7 +41,7 @@ namespace MgmtConstants.Mocking
         /// <returns> An object representing collection of OptionalMachineResources and their operations over a OptionalMachineResource. </returns>
         public virtual OptionalMachineCollection GetOptionalMachines()
         {
-            return GetCachedClient(Client => new OptionalMachineCollection(Client, Id));
+            return GetCachedClient(client => new OptionalMachineCollection(client, Id));
         }
 
         /// <summary>
@@ -60,8 +60,8 @@ namespace MgmtConstants.Mocking
         /// <param name="name"> The name of the virtual machine. </param>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<OptionalMachineResource>> GetOptionalMachineAsync(string name, OptionalMachineExpand? expand = null, CancellationToken cancellationToken = default)
         {
@@ -84,8 +84,8 @@ namespace MgmtConstants.Mocking
         /// <param name="name"> The name of the virtual machine. </param>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual Response<OptionalMachineResource> GetOptionalMachine(string name, OptionalMachineExpand? expand = null, CancellationToken cancellationToken = default)
         {

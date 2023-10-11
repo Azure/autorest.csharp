@@ -4,6 +4,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
+using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
@@ -12,6 +14,7 @@ using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Utilities;
+using Azure.ResourceManager;
 
 namespace AutoRest.CSharp.Mgmt.Output
 {
@@ -33,6 +36,17 @@ namespace AutoRest.CSharp.Mgmt.Output
             ContextualPath = contextualPath ?? RequestPath.GetContextualPath(armCoreType);
             ArmCoreNamespace = ArmCoreType.Namespace!;
             ChildResources = !Configuration.MgmtConfiguration.IsArmCore || ArmCoreType.Namespace != MgmtContext.Context.DefaultNamespace ? base.ChildResources : Enumerable.Empty<Resource>();
+            ExtensionParameter = new Parameter(
+                VariableName,
+                $"The <see cref=\"{ArmCoreType}\" /> instance the method will execute against.",
+                ArmCoreType,
+                null,
+                ValidationType.None,
+                null);
+
+            MethodModifiers = IsArmCore ?
+                MethodSignatureModifiers.Public | MethodSignatureModifiers.Virtual :
+                MethodSignatureModifiers.Public | MethodSignatureModifiers.Static | MethodSignatureModifiers.Extension;
         }
 
         protected override ConstructorSignature? EnsureMockingCtor()
@@ -42,18 +56,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         public override FormattableString BranchIdVariableName => $"{ExtensionParameter.Name}.Id";
 
-        private Parameter? _extensionParameter;
-        public Parameter ExtensionParameter => _extensionParameter ??= EnsureExtensionParameter();
-        private Parameter EnsureExtensionParameter()
-        {
-            return new Parameter(
-                VariableName,
-                $"The <see cref=\"{ArmCoreType}\" /> instance the method will execute against.",
-                ArmCoreType,
-                null,
-                ValidationType.None,
-                null);
-        }
+        public Parameter ExtensionParameter { get; }
 
         protected virtual string VariableName => Configuration.MgmtConfiguration.IsArmCore ? "this" : ArmCoreType.Name.ToVariableName();
 
@@ -159,6 +162,39 @@ namespace AutoRest.CSharp.Mgmt.Output
             return null;
         }
 
+        private Method? _mockingExtensionFactoryMethod;
+        public Method MockingExtensionFactoryMethod => _mockingExtensionFactoryMethod ??= BuildMockingExtensionFactoryMethod();
+
+        protected virtual Method BuildMockingExtensionFactoryMethod()
+        {
+            var signature = new MethodSignature(
+                MockingExtension.FactoryMethodName,
+                null,
+                null,
+                MethodSignatureModifiers.Private | MethodSignatureModifiers.Static,
+                MockingExtension.Type,
+                null,
+                new[] { _generalExtensionParameter });
+
+            var extensionVariable = (ValueExpression)_generalExtensionParameter;
+            var clientVariable = new VariableReference(typeof(ArmClient), "client");
+            var body = Snippets.Return(
+                extensionVariable.Invoke(
+                    nameof(ArmResource.GetCachedClient),
+                    new FuncExpression(new[] { clientVariable.Declaration }, Snippets.New.Instance(MockingExtension.Type, clientVariable, extensionVariable.Property(nameof(ArmResource.Id))))
+                ));
+
+            return new(signature, body);
+        }
+
+        private readonly Parameter _generalExtensionParameter = new Parameter(
+            "resource",
+            $"The resource parameters to use in these operations.",
+            typeof(ArmResource),
+            null,
+            ValidationType.None,
+            null);
+
         public MgmtMockingExtension MockingExtension => Cache[ArmCoreType];
 
         private readonly IEnumerable<MgmtMockingExtension> _mockingExtensions;
@@ -167,5 +203,70 @@ namespace AutoRest.CSharp.Mgmt.Output
         private Dictionary<CSharpType, MgmtMockingExtension> Cache => _cache ??= _mockingExtensions.ToDictionary(
             extensionClient => extensionClient.ExtendedResourceType,
             extensionClient => extensionClient);
+
+        /// <summary>
+        /// Build the implementation of methods in the extension.
+        /// It calls the factory method of the mocking extension first, and then calls the method wtih the same name and parameter list on the mocking extension
+        /// </summary>
+        /// <param name="signature"></param>
+        /// <param name="isAsync"></param>
+        /// <returns></returns>
+        protected Method BuildRedirectCallToMockingExtension(MethodSignature signature, bool isAsync)
+        {
+            var callFactoryMethod = new InvokeInstanceMethodExpression(null, (MethodSignature)MockingExtensionFactoryMethod.Signature, new[] { (ValueExpression)signature.Parameters[0] }, false);
+
+            var signatureOnMockingExtension = signature.WithAsync(false) with
+            {
+                Modifiers = MethodSignatureModifiers.Public | MethodSignatureModifiers.Virtual,
+                Parameters = signature.Parameters.Skip(1).ToArray()
+            };
+            var callMethodOnMockingExtension = callFactoryMethod.Invoke(signatureOnMockingExtension.WithAsync(isAsync));
+
+            var methodBody = Snippets.Return(callMethodOnMockingExtension);
+
+            return new(signature, methodBody);
+        }
+
+        protected override Method BuildGetSingletonResourceMethod(Resource resource)
+        {
+            var originalMethod = base.BuildGetSingletonResourceMethod(resource);
+            if (IsArmCore)
+                return originalMethod;
+
+            // if it not arm core, we should generate these methods in a static extension way
+            var originalSignature = (MethodSignature)originalMethod.Signature;
+            var signature = originalSignature with
+            {
+                Parameters = originalSignature.Parameters.Prepend(ExtensionParameter).ToArray()
+            };
+
+            return BuildRedirectCallToMockingExtension(signature, false);
+        }
+
+        protected override Method BuildGetChildCollectionMethod(ResourceCollection collection)
+        {
+            var originalMethod = base.BuildGetChildCollectionMethod(collection);
+            if (IsArmCore)
+                return originalMethod;
+
+            // if it not arm core, we should generate these methods in a static extension way
+            var originalSignature = (MethodSignature)originalMethod.Signature;
+            var signature = originalSignature with
+            {
+                Parameters = originalSignature.Parameters.Prepend(ExtensionParameter).ToArray()
+            };
+
+            return BuildRedirectCallToMockingExtension(signature, false);
+        }
+
+        protected override Method BuildGetChildResourceMethod(ResourceCollection collection, MethodSignatureBase getCollectionMethodSignature, bool isAsync)
+        {
+            var originalMethod = base.BuildGetChildResourceMethod(collection, getCollectionMethodSignature, isAsync);
+            if (IsArmCore)
+                return originalMethod;
+
+            // if it not arm core, we should generate these methods in a static extension way
+            return BuildRedirectCallToMockingExtension((MethodSignature)originalMethod.Signature, isAsync);
+        }
     }
 }

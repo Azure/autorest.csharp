@@ -81,7 +81,7 @@ namespace MgmtListMethods.Mocking
         /// <returns> An object representing collection of FakeResources and their operations over a FakeResource. </returns>
         public virtual FakeCollection GetFakes()
         {
-            return GetCachedClient(Client => new FakeCollection(Client, Id));
+            return GetCachedClient(client => new FakeCollection(client, Id));
         }
 
         /// <summary>
@@ -100,8 +100,8 @@ namespace MgmtListMethods.Mocking
         /// <param name="fakeName"> The name of the fake. </param>
         /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="fakeName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="fakeName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="fakeName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<FakeResource>> GetFakeAsync(string fakeName, string expand = null, CancellationToken cancellationToken = default)
         {
@@ -124,8 +124,8 @@ namespace MgmtListMethods.Mocking
         /// <param name="fakeName"> The name of the fake. </param>
         /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="fakeName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="fakeName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="fakeName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual Response<FakeResource> GetFake(string fakeName, string expand = null, CancellationToken cancellationToken = default)
         {
@@ -136,7 +136,7 @@ namespace MgmtListMethods.Mocking
         /// <returns> An object representing collection of SubParentWithNonResChWithLocResources and their operations over a SubParentWithNonResChWithLocResource. </returns>
         public virtual SubParentWithNonResChWithLocCollection GetSubParentWithNonResChWithLocs()
         {
-            return GetCachedClient(Client => new SubParentWithNonResChWithLocCollection(Client, Id));
+            return GetCachedClient(client => new SubParentWithNonResChWithLocCollection(client, Id));
         }
 
         /// <summary>
@@ -154,8 +154,8 @@ namespace MgmtListMethods.Mocking
         /// </summary>
         /// <param name="subParentWithNonResChWithLocName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="subParentWithNonResChWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="subParentWithNonResChWithLocName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subParentWithNonResChWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<SubParentWithNonResChWithLocResource>> GetSubParentWithNonResChWithLocAsync(string subParentWithNonResChWithLocName, CancellationToken cancellationToken = default)
         {
@@ -177,8 +177,8 @@ namespace MgmtListMethods.Mocking
         /// </summary>
         /// <param name="subParentWithNonResChWithLocName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="subParentWithNonResChWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="subParentWithNonResChWithLocName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subParentWithNonResChWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual Response<SubParentWithNonResChWithLocResource> GetSubParentWithNonResChWithLoc(string subParentWithNonResChWithLocName, CancellationToken cancellationToken = default)
         {
@@ -189,7 +189,7 @@ namespace MgmtListMethods.Mocking
         /// <returns> An object representing collection of SubParentWithNonResChResources and their operations over a SubParentWithNonResChResource. </returns>
         public virtual SubParentWithNonResChCollection GetSubParentWithNonResChes()
         {
-            return GetCachedClient(Client => new SubParentWithNonResChCollection(Client, Id));
+            return GetCachedClient(client => new SubParentWithNonResChCollection(client, Id));
         }
 
         /// <summary>
@@ -207,8 +207,8 @@ namespace MgmtListMethods.Mocking
         /// </summary>
         /// <param name="subParentWithNonResChName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="subParentWithNonResChName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="subParentWithNonResChName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subParentWithNonResChName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<SubParentWithNonResChResource>> GetSubParentWithNonResChAsync(string subParentWithNonResChName, CancellationToken cancellationToken = default)
         {
@@ -230,8 +230,8 @@ namespace MgmtListMethods.Mocking
         /// </summary>
         /// <param name="subParentWithNonResChName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="subParentWithNonResChName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="subParentWithNonResChName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subParentWithNonResChName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual Response<SubParentWithNonResChResource> GetSubParentWithNonResCh(string subParentWithNonResChName, CancellationToken cancellationToken = default)
         {
@@ -242,7 +242,7 @@ namespace MgmtListMethods.Mocking
         /// <returns> An object representing collection of SubParentWithLocResources and their operations over a SubParentWithLocResource. </returns>
         public virtual SubParentWithLocCollection GetSubParentWithLocs()
         {
-            return GetCachedClient(Client => new SubParentWithLocCollection(Client, Id));
+            return GetCachedClient(client => new SubParentWithLocCollection(client, Id));
         }
 
         /// <summary>
@@ -260,8 +260,8 @@ namespace MgmtListMethods.Mocking
         /// </summary>
         /// <param name="subParentWithLocName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="subParentWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="subParentWithLocName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subParentWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<SubParentWithLocResource>> GetSubParentWithLocAsync(string subParentWithLocName, CancellationToken cancellationToken = default)
         {
@@ -283,8 +283,8 @@ namespace MgmtListMethods.Mocking
         /// </summary>
         /// <param name="subParentWithLocName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="subParentWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="subParentWithLocName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subParentWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual Response<SubParentWithLocResource> GetSubParentWithLoc(string subParentWithLocName, CancellationToken cancellationToken = default)
         {
@@ -295,7 +295,7 @@ namespace MgmtListMethods.Mocking
         /// <returns> An object representing collection of SubParentResources and their operations over a SubParentResource. </returns>
         public virtual SubParentCollection GetSubParents()
         {
-            return GetCachedClient(Client => new SubParentCollection(Client, Id));
+            return GetCachedClient(client => new SubParentCollection(client, Id));
         }
 
         /// <summary>
@@ -313,8 +313,8 @@ namespace MgmtListMethods.Mocking
         /// </summary>
         /// <param name="subParentName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="subParentName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="subParentName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subParentName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<SubParentResource>> GetSubParentAsync(string subParentName, CancellationToken cancellationToken = default)
         {
@@ -336,8 +336,8 @@ namespace MgmtListMethods.Mocking
         /// </summary>
         /// <param name="subParentName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="subParentName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="subParentName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subParentName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual Response<SubParentResource> GetSubParent(string subParentName, CancellationToken cancellationToken = default)
         {
