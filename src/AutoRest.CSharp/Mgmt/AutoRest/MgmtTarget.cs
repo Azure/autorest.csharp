@@ -63,8 +63,9 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             MgmtContext.Initialize(new BuildContext<MgmtOutputLibrary>(codeModel, sourceInputModel));
             var serializeWriter = new SerializationWriter();
             var isArmCore = Configuration.MgmtConfiguration.IsArmCore;
+            var onlyGenerateMetadata = Configuration.MgmtConfiguration.MgmtDebug.OnlyGenerateMetadata;
 
-            if (!isArmCore)
+            if (!isArmCore && !onlyGenerateMetadata)
             {
                 var utilCodeWriter = new CodeWriter();
                 var staticUtilWriter = new StaticUtilWriter(utilCodeWriter);
@@ -72,46 +73,49 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 AddGeneratedFile(project, $"ProviderConstants.cs", utilCodeWriter.ToString());
             }
 
-            foreach (var model in MgmtContext.Library.Models)
+            if (!onlyGenerateMetadata)
             {
-                if (ShouldSkipModelGeneration(model))
-                    continue;
+                foreach (var model in MgmtContext.Library.Models)
+                {
+                    if (ShouldSkipModelGeneration(model))
+                        continue;
 
-                var name = model.Type.Name;
-                WriteArmModel(project, model, serializeWriter, $"Models/{name}.cs", $"Models/{name}.Serialization.cs");
-            }
+                    var name = model.Type.Name;
+                    WriteArmModel(project, model, serializeWriter, $"Models/{name}.cs", $"Models/{name}.Serialization.cs");
+                }
 
-            foreach (var client in MgmtContext.Library.RestClients)
-            {
-                var restCodeWriter = new CodeWriter();
-                new MgmtRestClientWriter().WriteClient(restCodeWriter, client);
+                foreach (var client in MgmtContext.Library.RestClients)
+                {
+                    var restCodeWriter = new CodeWriter();
+                    new MgmtRestClientWriter().WriteClient(restCodeWriter, client);
 
-                AddGeneratedFile(project, $"RestOperations/{client.Type.Name}.cs", restCodeWriter.ToString());
-            }
+                    AddGeneratedFile(project, $"RestOperations/{client.Type.Name}.cs", restCodeWriter.ToString());
+                }
 
-            foreach (var resourceCollection in MgmtContext.Library.ResourceCollections)
-            {
-                var writer = new ResourceCollectionWriter(resourceCollection);
-                writer.Write();
+                foreach (var resourceCollection in MgmtContext.Library.ResourceCollections)
+                {
+                    var writer = new ResourceCollectionWriter(resourceCollection);
+                    writer.Write();
 
-                AddGeneratedFile(project, $"{resourceCollection.Type.Name}.cs", writer.ToString());
-            }
+                    AddGeneratedFile(project, $"{resourceCollection.Type.Name}.cs", writer.ToString());
+                }
 
-            foreach (var model in MgmtContext.Library.ResourceData)
-            {
-                if (model is EmptyResourceData)
-                    continue;
+                foreach (var model in MgmtContext.Library.ResourceData)
+                {
+                    if (model is EmptyResourceData)
+                        continue;
 
-                var name = model.Type.Name;
-                WriteArmModel(project, model, serializeWriter, $"{name}.cs", $"Models/{name}.Serialization.cs");
-            }
+                    var name = model.Type.Name;
+                    WriteArmModel(project, model, serializeWriter, $"{name}.cs", $"Models/{name}.Serialization.cs");
+                }
 
-            foreach (var resource in MgmtContext.Library.ArmResources)
-            {
-                var writer = ResourceWriter.GetWriter(resource);
-                writer.Write();
+                foreach (var resource in MgmtContext.Library.ArmResources)
+                {
+                    var writer = ResourceWriter.GetWriter(resource);
+                    writer.Write();
 
-                AddGeneratedFile(project, $"{resource.Type.Name}.cs", writer.ToString());
+                    AddGeneratedFile(project, $"{resource.Type.Name}.cs", writer.ToString());
+                }
             }
 
             // generate metadata for converter
@@ -176,49 +180,53 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             }
             AddGeneratedFile(project, "metadata.json", JsonSerializer.Serialize(metadata));
 
-            // write extension class
-            WriteExtensions(project, isArmCore, MgmtContext.Library.ExtensionWrapper, MgmtContext.Library.Extensions, MgmtContext.Library.ExtensionClients);
-
-            var lroWriter = new MgmtLongRunningOperationWriter(true);
-            lroWriter.Write();
-            AddGeneratedFile(project, lroWriter.Filename, lroWriter.ToString());
-            lroWriter = new MgmtLongRunningOperationWriter(false);
-            lroWriter.Write();
-            AddGeneratedFile(project, lroWriter.Filename, lroWriter.ToString());
-
-            foreach (var interimOperation in MgmtContext.Library.InterimOperations.Distinct(LongRunningInterimOperation.LongRunningInterimOperationComparer))
+            if (!onlyGenerateMetadata)
             {
-                var writer = new MgmtLongRunningInterimOperationWriter(interimOperation);
-                writer.Write();
-                AddGeneratedFile(project, $"LongRunningOperation/{interimOperation.TypeName}.cs", writer.ToString());
+                // write extension class
+                WriteExtensions(project, isArmCore, MgmtContext.Library.ExtensionWrapper, MgmtContext.Library.Extensions, MgmtContext.Library.ExtensionClients);
+
+                var lroWriter = new MgmtLongRunningOperationWriter(true);
+                lroWriter.Write();
+                AddGeneratedFile(project, lroWriter.Filename, lroWriter.ToString());
+                lroWriter = new MgmtLongRunningOperationWriter(false);
+                lroWriter.Write();
+                AddGeneratedFile(project, lroWriter.Filename, lroWriter.ToString());
+
+                foreach (var interimOperation in MgmtContext.Library.InterimOperations.Distinct(LongRunningInterimOperation.LongRunningInterimOperationComparer))
+                {
+                    var writer = new MgmtLongRunningInterimOperationWriter(interimOperation);
+                    writer.Write();
+                    AddGeneratedFile(project, $"LongRunningOperation/{interimOperation.TypeName}.cs", writer.ToString());
+                }
+
+                foreach (var operationSource in MgmtContext.Library.OperationSources)
+                {
+                    var writer = new OperationSourceWriter(operationSource);
+                    writer.Write();
+                    AddGeneratedFile(project, $"LongRunningOperation/{operationSource.TypeName}.cs", writer.ToString());
+                }
+
+                foreach (var model in MgmtContext.Library.PropertyBagModels)
+                {
+                    var name = model.Type.Name;
+                    WriteArmModel(project, model, serializeWriter, $"Models/{name}.cs", $"Models/{name}.Serialization.cs");
+                }
+
+                var modelFactoryProvider = MgmtContext.Library.ModelFactory;
+                if (modelFactoryProvider != null)
+                {
+                    var modelFactoryWriter = new ModelFactoryWriter(modelFactoryProvider);
+                    modelFactoryWriter.Write();
+                    AddGeneratedFile(project, $"{modelFactoryProvider.Type.Name}.cs", modelFactoryWriter.ToString());
+                }
+
+
+                if (_overriddenProjectFilenames.TryGetValue(project, out var overriddenFilenames))
+                    throw new InvalidOperationException($"At least one file was overridden during the generation process. Filenames are: {string.Join(", ", overriddenFilenames)}");
+
+                var modelsToKeep = Configuration.MgmtConfiguration.KeepOrphanedModels.ToImmutableHashSet();
+                await project.PostProcessAsync(new MgmtPostProcessor(modelsToKeep, modelFactoryProvider?.FullName));
             }
-
-            foreach (var operationSource in MgmtContext.Library.OperationSources)
-            {
-                var writer = new OperationSourceWriter(operationSource);
-                writer.Write();
-                AddGeneratedFile(project, $"LongRunningOperation/{operationSource.TypeName}.cs", writer.ToString());
-            }
-
-            foreach (var model in MgmtContext.Library.PropertyBagModels)
-            {
-                var name = model.Type.Name;
-                WriteArmModel(project, model, serializeWriter, $"Models/{name}.cs", $"Models/{name}.Serialization.cs");
-            }
-
-            var modelFactoryProvider = MgmtContext.Library.ModelFactory;
-            if (modelFactoryProvider != null)
-            {
-                var modelFactoryWriter = new ModelFactoryWriter(modelFactoryProvider);
-                modelFactoryWriter.Write();
-                AddGeneratedFile(project, $"{modelFactoryProvider.Type.Name}.cs", modelFactoryWriter.ToString());
-            }
-
-            if (_overriddenProjectFilenames.TryGetValue(project, out var overriddenFilenames))
-                throw new InvalidOperationException($"At least one file was overridden during the generation process. Filenames are: {string.Join(", ", overriddenFilenames)}");
-
-            var modelsToKeep = Configuration.MgmtConfiguration.KeepOrphanedModels.ToImmutableHashSet();
-            await project.PostProcessAsync(new MgmtPostProcessor(modelsToKeep, modelFactoryProvider?.FullName));
         }
 
         private static void WriteExtensions(GeneratedCodeWorkspace project, bool isArmCore, MgmtExtensionWrapper extensionWrapper, IEnumerable<MgmtExtension> extensions, IEnumerable<MgmtExtensionClient> extensionClients)
