@@ -138,5 +138,7 @@ namespace AutoRest.CSharp.Common.Input
         public abstract string JsonElementVariableName { get; }
 
         public abstract ValueExpression GetKeySampleExpression(string clientName);
+
+        public abstract string LiscenseString { get; }
     }
 }
