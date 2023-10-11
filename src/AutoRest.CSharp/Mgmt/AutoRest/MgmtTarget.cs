@@ -25,7 +25,8 @@ using Azure.ResourceManager.Resources;
 using Humanizer.Localisation;
 using Microsoft.CodeAnalysis;
 using System.Diagnostics;
-
+using System.Text.RegularExpressions;
+using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.AutoRest.Plugins
 {
@@ -166,7 +167,8 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 resourceModel.SwaggerModelName = resource.ResourceData.ObjectSchema.Language.Default.SerializedName ?? resource.ResourceData.ObjectSchema.Language.Default.Name;
                 resourceModel.ResourceType = resource.ResourceType.ToString();
                 resourceModel.ResourceKeySegment = resource.ResourceType.Last().ConstantValue;
-                resourceModel.ResourceKey = resource.RequestPath.Last().IsReference ? resource.RequestPath.Last().ReferenceName : resource.RequestPath.Last().ConstantValue;
+                var pattern = $"\\/{resourceModel.ResourceKeySegment}\\/([^\\/]+)";
+                resourceModel.ResourceKey = Regex.Match(resource.OperationSet.RequestPath, pattern).Groups[1].Value.ReplaceFirst("{", "").ReplaceLast("}", "");
 
                 resourceModel.Parents = resource.GetParents().Select(p => p.ResourceName).ToList();
                 resourceModel.IsTrackedResource = resource.ResourceData.Inherits?.EqualsByName(typeof(TrackedResourceData)) ?? false;
