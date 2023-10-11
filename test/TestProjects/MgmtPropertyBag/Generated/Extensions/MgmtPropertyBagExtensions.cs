@@ -59,7 +59,13 @@ namespace MgmtPropertyBag
             return GetMgmtPropertyBagArmClientMockingExtension(client).GetBarResource(id);
         }
 
-        /// <summary> Gets a collection of FooResources in the ResourceGroupResource. </summary>
+        /// <summary>
+        /// Gets a collection of FooResources in the ResourceGroupResource.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtPropertyBagResourceGroupMockingExtension.GetFoos()"/> instead.</description>
+        /// </item>
+        /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of FooResources and their operations over a FooResource. </returns>
         public static FooCollection GetFoos(this ResourceGroupResource resourceGroupResource)
@@ -79,6 +85,10 @@ namespace MgmtPropertyBag
         /// <description>Foos_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtPropertyBagResourceGroupMockingExtension.GetFooAsync(FooCollectionGetOptions,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="options"> A property bag which contains all the parameters of this method except the LRO qualifier and request context parameter. </param>
@@ -102,6 +112,10 @@ namespace MgmtPropertyBag
         /// <description>Foos_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtPropertyBagResourceGroupMockingExtension.GetFoo(FooCollectionGetOptions,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="options"> A property bag which contains all the parameters of this method except the LRO qualifier and request context parameter. </param>
@@ -113,7 +127,13 @@ namespace MgmtPropertyBag
             return GetMgmtPropertyBagResourceGroupMockingExtension(resourceGroupResource).GetFoo(options, cancellationToken);
         }
 
-        /// <summary> Gets a collection of BarResources in the ResourceGroupResource. </summary>
+        /// <summary>
+        /// Gets a collection of BarResources in the ResourceGroupResource.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtPropertyBagResourceGroupMockingExtension.GetBars()"/> instead.</description>
+        /// </item>
+        /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of BarResources and their operations over a BarResource. </returns>
         public static BarCollection GetBars(this ResourceGroupResource resourceGroupResource)
@@ -133,6 +153,10 @@ namespace MgmtPropertyBag
         /// <description>Bars_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtPropertyBagResourceGroupMockingExtension.GetBarAsync(BarCollectionGetOptions,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="options"> A property bag which contains all the parameters of this method except the LRO qualifier and request context parameter. </param>
@@ -156,6 +180,10 @@ namespace MgmtPropertyBag
         /// <description>Bars_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtPropertyBagResourceGroupMockingExtension.GetBar(BarCollectionGetOptions,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="options"> A property bag which contains all the parameters of this method except the LRO qualifier and request context parameter. </param>

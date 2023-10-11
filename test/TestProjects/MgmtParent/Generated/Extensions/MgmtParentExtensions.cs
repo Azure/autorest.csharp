@@ -83,7 +83,13 @@ namespace MgmtParent
             return GetMgmtParentArmClientMockingExtension(client).GetVirtualMachineExtensionImageResource(id);
         }
 
-        /// <summary> Gets a collection of AvailabilitySetResources in the ResourceGroupResource. </summary>
+        /// <summary>
+        /// Gets a collection of AvailabilitySetResources in the ResourceGroupResource.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtParentResourceGroupMockingExtension.GetAvailabilitySets()"/> instead.</description>
+        /// </item>
+        /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of AvailabilitySetResources and their operations over a AvailabilitySetResource. </returns>
         public static AvailabilitySetCollection GetAvailabilitySets(this ResourceGroupResource resourceGroupResource)
@@ -103,6 +109,10 @@ namespace MgmtParent
         /// <description>AvailabilitySets_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtParentResourceGroupMockingExtension.GetAvailabilitySetAsync(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="availabilitySetName"> The name of the availability set. </param>
@@ -127,6 +137,10 @@ namespace MgmtParent
         /// <description>AvailabilitySets_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtParentResourceGroupMockingExtension.GetAvailabilitySet(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="availabilitySetName"> The name of the availability set. </param>
@@ -139,7 +153,13 @@ namespace MgmtParent
             return GetMgmtParentResourceGroupMockingExtension(resourceGroupResource).GetAvailabilitySet(availabilitySetName, cancellationToken);
         }
 
-        /// <summary> Gets a collection of DedicatedHostGroupResources in the ResourceGroupResource. </summary>
+        /// <summary>
+        /// Gets a collection of DedicatedHostGroupResources in the ResourceGroupResource.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtParentResourceGroupMockingExtension.GetDedicatedHostGroups()"/> instead.</description>
+        /// </item>
+        /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of DedicatedHostGroupResources and their operations over a DedicatedHostGroupResource. </returns>
         public static DedicatedHostGroupCollection GetDedicatedHostGroups(this ResourceGroupResource resourceGroupResource)
@@ -159,6 +179,10 @@ namespace MgmtParent
         /// <description>DedicatedHostGroups_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtParentResourceGroupMockingExtension.GetDedicatedHostGroupAsync(string,InstanceViewType?,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="hostGroupName"> The name of the dedicated host group. </param>
@@ -184,6 +208,10 @@ namespace MgmtParent
         /// <description>DedicatedHostGroups_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtParentResourceGroupMockingExtension.GetDedicatedHostGroup(string,InstanceViewType?,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="hostGroupName"> The name of the dedicated host group. </param>
@@ -197,7 +225,13 @@ namespace MgmtParent
             return GetMgmtParentResourceGroupMockingExtension(resourceGroupResource).GetDedicatedHostGroup(hostGroupName, expand, cancellationToken);
         }
 
-        /// <summary> Gets a collection of VirtualMachineExtensionImageResources in the SubscriptionResource. </summary>
+        /// <summary>
+        /// Gets a collection of VirtualMachineExtensionImageResources in the SubscriptionResource.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtParentSubscriptionMockingExtension.GetVirtualMachineExtensionImages(string,string)"/> instead.</description>
+        /// </item>
+        /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="location"> The name of a supported Azure region. </param>
         /// <param name="publisherName"> The String to use. </param>
@@ -221,6 +255,10 @@ namespace MgmtParent
         /// <description>VirtualMachineExtensionImages_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtParentSubscriptionMockingExtension.GetVirtualMachineExtensionImageAsync(string,string,string,string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="location"> The name of a supported Azure region. </param>
@@ -248,6 +286,10 @@ namespace MgmtParent
         /// <description>VirtualMachineExtensionImages_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtParentSubscriptionMockingExtension.GetVirtualMachineExtensionImage(string,string,string,string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="location"> The name of a supported Azure region. </param>

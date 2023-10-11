@@ -82,7 +82,13 @@ namespace MgmtPartialResource
             return GetMgmtPartialResourceArmClientMockingExtension(client).GetVirtualMachineMgmtPartialResource(id);
         }
 
-        /// <summary> Gets a collection of PublicIPAddressResources in the ResourceGroupResource. </summary>
+        /// <summary>
+        /// Gets a collection of PublicIPAddressResources in the ResourceGroupResource.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtPartialResourceResourceGroupMockingExtension.GetPublicIPAddresses()"/> instead.</description>
+        /// </item>
+        /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of PublicIPAddressResources and their operations over a PublicIPAddressResource. </returns>
         public static PublicIPAddressCollection GetPublicIPAddresses(this ResourceGroupResource resourceGroupResource)
@@ -102,6 +108,10 @@ namespace MgmtPartialResource
         /// <description>PublicIPAddresses_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtPartialResourceResourceGroupMockingExtension.GetPublicIPAddressAsync(string,string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="publicIpAddressName"> The name of the public IP address. </param>
@@ -127,6 +137,10 @@ namespace MgmtPartialResource
         /// <description>PublicIPAddresses_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtPartialResourceResourceGroupMockingExtension.GetPublicIPAddress(string,string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="publicIpAddressName"> The name of the public IP address. </param>

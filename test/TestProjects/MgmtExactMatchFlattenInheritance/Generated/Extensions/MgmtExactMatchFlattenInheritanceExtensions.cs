@@ -66,7 +66,13 @@ namespace MgmtExactMatchFlattenInheritance
             return GetMgmtExactMatchFlattenInheritanceArmClientMockingExtension(client).GetCustomModel3Resource(id);
         }
 
-        /// <summary> Gets a collection of AzureResourceFlattenModel1Resources in the ResourceGroupResource. </summary>
+        /// <summary>
+        /// Gets a collection of AzureResourceFlattenModel1Resources in the ResourceGroupResource.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtExactMatchFlattenInheritanceResourceGroupMockingExtension.GetAzureResourceFlattenModel1s()"/> instead.</description>
+        /// </item>
+        /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of AzureResourceFlattenModel1Resources and their operations over a AzureResourceFlattenModel1Resource. </returns>
         public static AzureResourceFlattenModel1Collection GetAzureResourceFlattenModel1s(this ResourceGroupResource resourceGroupResource)
@@ -86,6 +92,10 @@ namespace MgmtExactMatchFlattenInheritance
         /// <description>AzureResourceFlattenModel1s_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtExactMatchFlattenInheritanceResourceGroupMockingExtension.GetAzureResourceFlattenModel1Async(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="name"> The String to use. </param>
@@ -110,6 +120,10 @@ namespace MgmtExactMatchFlattenInheritance
         /// <description>AzureResourceFlattenModel1s_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtExactMatchFlattenInheritanceResourceGroupMockingExtension.GetAzureResourceFlattenModel1(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="name"> The String to use. </param>
@@ -122,7 +136,13 @@ namespace MgmtExactMatchFlattenInheritance
             return GetMgmtExactMatchFlattenInheritanceResourceGroupMockingExtension(resourceGroupResource).GetAzureResourceFlattenModel1(name, cancellationToken);
         }
 
-        /// <summary> Gets a collection of CustomModel2Resources in the ResourceGroupResource. </summary>
+        /// <summary>
+        /// Gets a collection of CustomModel2Resources in the ResourceGroupResource.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtExactMatchFlattenInheritanceResourceGroupMockingExtension.GetCustomModel2s()"/> instead.</description>
+        /// </item>
+        /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of CustomModel2Resources and their operations over a CustomModel2Resource. </returns>
         public static CustomModel2Collection GetCustomModel2s(this ResourceGroupResource resourceGroupResource)
@@ -142,6 +162,10 @@ namespace MgmtExactMatchFlattenInheritance
         /// <description>CustomModel2s_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtExactMatchFlattenInheritanceResourceGroupMockingExtension.GetCustomModel2Async(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="name"> The String to use. </param>
@@ -166,6 +190,10 @@ namespace MgmtExactMatchFlattenInheritance
         /// <description>CustomModel2s_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtExactMatchFlattenInheritanceResourceGroupMockingExtension.GetCustomModel2(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="name"> The String to use. </param>
@@ -178,7 +206,13 @@ namespace MgmtExactMatchFlattenInheritance
             return GetMgmtExactMatchFlattenInheritanceResourceGroupMockingExtension(resourceGroupResource).GetCustomModel2(name, cancellationToken);
         }
 
-        /// <summary> Gets a collection of CustomModel3Resources in the ResourceGroupResource. </summary>
+        /// <summary>
+        /// Gets a collection of CustomModel3Resources in the ResourceGroupResource.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtExactMatchFlattenInheritanceResourceGroupMockingExtension.GetCustomModel3s()"/> instead.</description>
+        /// </item>
+        /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of CustomModel3Resources and their operations over a CustomModel3Resource. </returns>
         public static CustomModel3Collection GetCustomModel3s(this ResourceGroupResource resourceGroupResource)
@@ -198,6 +232,10 @@ namespace MgmtExactMatchFlattenInheritance
         /// <description>CustomModel3s_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtExactMatchFlattenInheritanceResourceGroupMockingExtension.GetCustomModel3Async(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="name"> The String to use. </param>
@@ -222,6 +260,10 @@ namespace MgmtExactMatchFlattenInheritance
         /// <description>CustomModel3s_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtExactMatchFlattenInheritanceResourceGroupMockingExtension.GetCustomModel3(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="name"> The String to use. </param>

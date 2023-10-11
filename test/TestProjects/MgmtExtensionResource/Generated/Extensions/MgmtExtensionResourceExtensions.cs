@@ -89,7 +89,13 @@ namespace MgmtExtensionResource
             return GetMgmtExtensionResourceArmClientMockingExtension(client).GetManagementGroupPolicyDefinitionResource(id);
         }
 
-        /// <summary> Gets a collection of ManagementGroupPolicyDefinitionResources in the ManagementGroupResource. </summary>
+        /// <summary>
+        /// Gets a collection of ManagementGroupPolicyDefinitionResources in the ManagementGroupResource.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtExtensionResourceManagementGroupMockingExtension.GetManagementGroupPolicyDefinitions()"/> instead.</description>
+        /// </item>
+        /// </summary>
         /// <param name="managementGroupResource"> The <see cref="ManagementGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of ManagementGroupPolicyDefinitionResources and their operations over a ManagementGroupPolicyDefinitionResource. </returns>
         public static ManagementGroupPolicyDefinitionCollection GetManagementGroupPolicyDefinitions(this ManagementGroupResource managementGroupResource)
@@ -109,6 +115,10 @@ namespace MgmtExtensionResource
         /// <description>PolicyDefinitions_GetAtManagementGroup</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtExtensionResourceManagementGroupMockingExtension.GetManagementGroupPolicyDefinitionAsync(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="managementGroupResource"> The <see cref="ManagementGroupResource" /> instance the method will execute against. </param>
         /// <param name="policyDefinitionName"> The name of the policy definition to get. </param>
@@ -133,6 +143,10 @@ namespace MgmtExtensionResource
         /// <description>PolicyDefinitions_GetAtManagementGroup</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtExtensionResourceManagementGroupMockingExtension.GetManagementGroupPolicyDefinition(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="managementGroupResource"> The <see cref="ManagementGroupResource" /> instance the method will execute against. </param>
         /// <param name="policyDefinitionName"> The name of the policy definition to get. </param>
@@ -145,7 +159,13 @@ namespace MgmtExtensionResource
             return GetMgmtExtensionResourceManagementGroupMockingExtension(managementGroupResource).GetManagementGroupPolicyDefinition(policyDefinitionName, cancellationToken);
         }
 
-        /// <summary> Gets an object representing a SubSingletonResource along with the instance operations that can be performed on it in the SubscriptionResource. </summary>
+        /// <summary>
+        /// Gets an object representing a SubSingletonResource along with the instance operations that can be performed on it in the SubscriptionResource.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtExtensionResourceSubscriptionMockingExtension.GetSubSingleton()"/> instead.</description>
+        /// </item>
+        /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <returns> Returns a <see cref="SubSingletonResource" /> object. </returns>
         public static SubSingletonResource GetSubSingleton(this SubscriptionResource subscriptionResource)
@@ -153,7 +173,13 @@ namespace MgmtExtensionResource
             return GetMgmtExtensionResourceSubscriptionMockingExtension(subscriptionResource).GetSubSingleton();
         }
 
-        /// <summary> Gets a collection of SubscriptionPolicyDefinitionResources in the SubscriptionResource. </summary>
+        /// <summary>
+        /// Gets a collection of SubscriptionPolicyDefinitionResources in the SubscriptionResource.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtExtensionResourceSubscriptionMockingExtension.GetSubscriptionPolicyDefinitions()"/> instead.</description>
+        /// </item>
+        /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of SubscriptionPolicyDefinitionResources and their operations over a SubscriptionPolicyDefinitionResource. </returns>
         public static SubscriptionPolicyDefinitionCollection GetSubscriptionPolicyDefinitions(this SubscriptionResource subscriptionResource)
@@ -173,6 +199,10 @@ namespace MgmtExtensionResource
         /// <description>PolicyDefinitions_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtExtensionResourceSubscriptionMockingExtension.GetSubscriptionPolicyDefinitionAsync(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="policyDefinitionName"> The name of the policy definition to get. </param>
@@ -197,6 +227,10 @@ namespace MgmtExtensionResource
         /// <description>PolicyDefinitions_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtExtensionResourceSubscriptionMockingExtension.GetSubscriptionPolicyDefinition(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="policyDefinitionName"> The name of the policy definition to get. </param>
@@ -317,7 +351,13 @@ namespace MgmtExtensionResource
             return GetMgmtExtensionResourceSubscriptionMockingExtension(subscriptionResource).ValidateSomethingOrphanedPost(content, cancellationToken);
         }
 
-        /// <summary> Gets a collection of BuiltInPolicyDefinitionResources in the TenantResource. </summary>
+        /// <summary>
+        /// Gets a collection of BuiltInPolicyDefinitionResources in the TenantResource.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtExtensionResourceTenantMockingExtension.GetBuiltInPolicyDefinitions()"/> instead.</description>
+        /// </item>
+        /// </summary>
         /// <param name="tenantResource"> The <see cref="TenantResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of BuiltInPolicyDefinitionResources and their operations over a BuiltInPolicyDefinitionResource. </returns>
         public static BuiltInPolicyDefinitionCollection GetBuiltInPolicyDefinitions(this TenantResource tenantResource)
@@ -337,6 +377,10 @@ namespace MgmtExtensionResource
         /// <description>PolicyDefinitions_GetBuiltIn</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtExtensionResourceTenantMockingExtension.GetBuiltInPolicyDefinitionAsync(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="tenantResource"> The <see cref="TenantResource" /> instance the method will execute against. </param>
         /// <param name="policyDefinitionName"> The name of the built-in policy definition to get. </param>
@@ -361,6 +405,10 @@ namespace MgmtExtensionResource
         /// <description>PolicyDefinitions_GetBuiltIn</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtExtensionResourceTenantMockingExtension.GetBuiltInPolicyDefinition(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="tenantResource"> The <see cref="TenantResource" /> instance the method will execute against. </param>
         /// <param name="policyDefinitionName"> The name of the built-in policy definition to get. </param>

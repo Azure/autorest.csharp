@@ -54,7 +54,13 @@ namespace MgmtSupersetFlattenInheritance
             return GetMgmtSupersetFlattenInheritanceArmClientMockingExtension(client).GetTrackedResourceModel1Resource(id);
         }
 
-        /// <summary> Gets a collection of ResourceModel1Resources in the ResourceGroupResource. </summary>
+        /// <summary>
+        /// Gets a collection of ResourceModel1Resources in the ResourceGroupResource.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtSupersetFlattenInheritanceResourceGroupMockingExtension.GetResourceModel1s()"/> instead.</description>
+        /// </item>
+        /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of ResourceModel1Resources and their operations over a ResourceModel1Resource. </returns>
         public static ResourceModel1Collection GetResourceModel1s(this ResourceGroupResource resourceGroupResource)
@@ -73,6 +79,10 @@ namespace MgmtSupersetFlattenInheritance
         /// <description>ResourceModel1s_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtSupersetFlattenInheritanceResourceGroupMockingExtension.GetResourceModel1Async(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="resourceModel1SName"> The String to use. </param>
@@ -96,6 +106,10 @@ namespace MgmtSupersetFlattenInheritance
         /// <description>ResourceModel1s_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtSupersetFlattenInheritanceResourceGroupMockingExtension.GetResourceModel1(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="resourceModel1SName"> The String to use. </param>
@@ -108,7 +122,13 @@ namespace MgmtSupersetFlattenInheritance
             return GetMgmtSupersetFlattenInheritanceResourceGroupMockingExtension(resourceGroupResource).GetResourceModel1(resourceModel1SName, cancellationToken);
         }
 
-        /// <summary> Gets a collection of TrackedResourceModel1Resources in the ResourceGroupResource. </summary>
+        /// <summary>
+        /// Gets a collection of TrackedResourceModel1Resources in the ResourceGroupResource.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtSupersetFlattenInheritanceResourceGroupMockingExtension.GetTrackedResourceModel1s()"/> instead.</description>
+        /// </item>
+        /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of TrackedResourceModel1Resources and their operations over a TrackedResourceModel1Resource. </returns>
         public static TrackedResourceModel1Collection GetTrackedResourceModel1s(this ResourceGroupResource resourceGroupResource)
@@ -127,6 +147,10 @@ namespace MgmtSupersetFlattenInheritance
         /// <description>TrackedResourceModel1s_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtSupersetFlattenInheritanceResourceGroupMockingExtension.GetTrackedResourceModel1Async(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="trackedResourceModel1SName"> The String to use. </param>
@@ -150,6 +174,10 @@ namespace MgmtSupersetFlattenInheritance
         /// <description>TrackedResourceModel1s_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtSupersetFlattenInheritanceResourceGroupMockingExtension.GetTrackedResourceModel1(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="trackedResourceModel1SName"> The String to use. </param>

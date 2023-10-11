@@ -203,7 +203,13 @@ namespace Azure.ResourceManager.Sample
             return GetSampleArmClientMockingExtension(client).GetVirtualMachineScaleSetVmResource(id);
         }
 
-        /// <summary> Gets a collection of AvailabilitySetResources in the ResourceGroupResource. </summary>
+        /// <summary>
+        /// Gets a collection of AvailabilitySetResources in the ResourceGroupResource.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="SampleResourceGroupMockingExtension.GetAvailabilitySets()"/> instead.</description>
+        /// </item>
+        /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of AvailabilitySetResources and their operations over a AvailabilitySetResource. </returns>
         public static AvailabilitySetCollection GetAvailabilitySets(this ResourceGroupResource resourceGroupResource)
@@ -223,6 +229,10 @@ namespace Azure.ResourceManager.Sample
         /// <description>AvailabilitySets_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="SampleResourceGroupMockingExtension.GetAvailabilitySetAsync(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="availabilitySetName"> The name of the availability set. </param>
@@ -247,6 +257,10 @@ namespace Azure.ResourceManager.Sample
         /// <description>AvailabilitySets_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="SampleResourceGroupMockingExtension.GetAvailabilitySet(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="availabilitySetName"> The name of the availability set. </param>
@@ -259,7 +273,13 @@ namespace Azure.ResourceManager.Sample
             return GetSampleResourceGroupMockingExtension(resourceGroupResource).GetAvailabilitySet(availabilitySetName, cancellationToken);
         }
 
-        /// <summary> Gets a collection of ProximityPlacementGroupResources in the ResourceGroupResource. </summary>
+        /// <summary>
+        /// Gets a collection of ProximityPlacementGroupResources in the ResourceGroupResource.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="SampleResourceGroupMockingExtension.GetProximityPlacementGroups()"/> instead.</description>
+        /// </item>
+        /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of ProximityPlacementGroupResources and their operations over a ProximityPlacementGroupResource. </returns>
         public static ProximityPlacementGroupCollection GetProximityPlacementGroups(this ResourceGroupResource resourceGroupResource)
@@ -279,6 +299,10 @@ namespace Azure.ResourceManager.Sample
         /// <description>ProximityPlacementGroups_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="SampleResourceGroupMockingExtension.GetProximityPlacementGroupAsync(string,string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="proximityPlacementGroupName"> The name of the proximity placement group. </param>
@@ -304,6 +328,10 @@ namespace Azure.ResourceManager.Sample
         /// <description>ProximityPlacementGroups_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="SampleResourceGroupMockingExtension.GetProximityPlacementGroup(string,string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="proximityPlacementGroupName"> The name of the proximity placement group. </param>
@@ -317,7 +345,13 @@ namespace Azure.ResourceManager.Sample
             return GetSampleResourceGroupMockingExtension(resourceGroupResource).GetProximityPlacementGroup(proximityPlacementGroupName, includeColocationStatus, cancellationToken);
         }
 
-        /// <summary> Gets a collection of DedicatedHostGroupResources in the ResourceGroupResource. </summary>
+        /// <summary>
+        /// Gets a collection of DedicatedHostGroupResources in the ResourceGroupResource.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="SampleResourceGroupMockingExtension.GetDedicatedHostGroups()"/> instead.</description>
+        /// </item>
+        /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of DedicatedHostGroupResources and their operations over a DedicatedHostGroupResource. </returns>
         public static DedicatedHostGroupCollection GetDedicatedHostGroups(this ResourceGroupResource resourceGroupResource)
@@ -337,6 +371,10 @@ namespace Azure.ResourceManager.Sample
         /// <description>DedicatedHostGroups_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="SampleResourceGroupMockingExtension.GetDedicatedHostGroupAsync(string,InstanceViewType?,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="hostGroupName"> The name of the dedicated host group. </param>
@@ -362,6 +400,10 @@ namespace Azure.ResourceManager.Sample
         /// <description>DedicatedHostGroups_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="SampleResourceGroupMockingExtension.GetDedicatedHostGroup(string,InstanceViewType?,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="hostGroupName"> The name of the dedicated host group. </param>
@@ -375,7 +417,13 @@ namespace Azure.ResourceManager.Sample
             return GetSampleResourceGroupMockingExtension(resourceGroupResource).GetDedicatedHostGroup(hostGroupName, expand, cancellationToken);
         }
 
-        /// <summary> Gets a collection of SshPublicKeyResources in the ResourceGroupResource. </summary>
+        /// <summary>
+        /// Gets a collection of SshPublicKeyResources in the ResourceGroupResource.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="SampleResourceGroupMockingExtension.GetSshPublicKeys()"/> instead.</description>
+        /// </item>
+        /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of SshPublicKeyResources and their operations over a SshPublicKeyResource. </returns>
         public static SshPublicKeyCollection GetSshPublicKeys(this ResourceGroupResource resourceGroupResource)
@@ -395,6 +443,10 @@ namespace Azure.ResourceManager.Sample
         /// <description>SshPublicKeys_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="SampleResourceGroupMockingExtension.GetSshPublicKeyAsync(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="sshPublicKeyName"> The name of the SSH public key. </param>
@@ -419,6 +471,10 @@ namespace Azure.ResourceManager.Sample
         /// <description>SshPublicKeys_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="SampleResourceGroupMockingExtension.GetSshPublicKey(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="sshPublicKeyName"> The name of the SSH public key. </param>
@@ -431,7 +487,13 @@ namespace Azure.ResourceManager.Sample
             return GetSampleResourceGroupMockingExtension(resourceGroupResource).GetSshPublicKey(sshPublicKeyName, cancellationToken);
         }
 
-        /// <summary> Gets a collection of VirtualMachineResources in the ResourceGroupResource. </summary>
+        /// <summary>
+        /// Gets a collection of VirtualMachineResources in the ResourceGroupResource.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="SampleResourceGroupMockingExtension.GetVirtualMachines()"/> instead.</description>
+        /// </item>
+        /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of VirtualMachineResources and their operations over a VirtualMachineResource. </returns>
         public static VirtualMachineCollection GetVirtualMachines(this ResourceGroupResource resourceGroupResource)
@@ -451,6 +513,10 @@ namespace Azure.ResourceManager.Sample
         /// <description>VirtualMachines_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="SampleResourceGroupMockingExtension.GetVirtualMachineAsync(string,InstanceViewType?,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="vmName"> The name of the virtual machine. </param>
@@ -476,6 +542,10 @@ namespace Azure.ResourceManager.Sample
         /// <description>VirtualMachines_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="SampleResourceGroupMockingExtension.GetVirtualMachine(string,InstanceViewType?,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="vmName"> The name of the virtual machine. </param>
@@ -489,7 +559,13 @@ namespace Azure.ResourceManager.Sample
             return GetSampleResourceGroupMockingExtension(resourceGroupResource).GetVirtualMachine(vmName, expand, cancellationToken);
         }
 
-        /// <summary> Gets a collection of ImageResources in the ResourceGroupResource. </summary>
+        /// <summary>
+        /// Gets a collection of ImageResources in the ResourceGroupResource.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="SampleResourceGroupMockingExtension.GetImages()"/> instead.</description>
+        /// </item>
+        /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of ImageResources and their operations over a ImageResource. </returns>
         public static ImageCollection GetImages(this ResourceGroupResource resourceGroupResource)
@@ -509,6 +585,10 @@ namespace Azure.ResourceManager.Sample
         /// <description>Images_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="SampleResourceGroupMockingExtension.GetImageAsync(string,string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="imageName"> The name of the image. </param>
@@ -534,6 +614,10 @@ namespace Azure.ResourceManager.Sample
         /// <description>Images_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="SampleResourceGroupMockingExtension.GetImage(string,string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="imageName"> The name of the image. </param>
@@ -547,7 +631,13 @@ namespace Azure.ResourceManager.Sample
             return GetSampleResourceGroupMockingExtension(resourceGroupResource).GetImage(imageName, expand, cancellationToken);
         }
 
-        /// <summary> Gets a collection of VirtualMachineScaleSetResources in the ResourceGroupResource. </summary>
+        /// <summary>
+        /// Gets a collection of VirtualMachineScaleSetResources in the ResourceGroupResource.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="SampleResourceGroupMockingExtension.GetVirtualMachineScaleSets()"/> instead.</description>
+        /// </item>
+        /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of VirtualMachineScaleSetResources and their operations over a VirtualMachineScaleSetResource. </returns>
         public static VirtualMachineScaleSetCollection GetVirtualMachineScaleSets(this ResourceGroupResource resourceGroupResource)
@@ -567,6 +657,10 @@ namespace Azure.ResourceManager.Sample
         /// <description>VirtualMachineScaleSets_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="SampleResourceGroupMockingExtension.GetVirtualMachineScaleSetAsync(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="vmScaleSetName"> The name of the VM scale set. </param>
@@ -591,6 +685,10 @@ namespace Azure.ResourceManager.Sample
         /// <description>VirtualMachineScaleSets_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="SampleResourceGroupMockingExtension.GetVirtualMachineScaleSet(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="vmScaleSetName"> The name of the VM scale set. </param>
@@ -603,7 +701,13 @@ namespace Azure.ResourceManager.Sample
             return GetSampleResourceGroupMockingExtension(resourceGroupResource).GetVirtualMachineScaleSet(vmScaleSetName, cancellationToken);
         }
 
-        /// <summary> Gets a collection of VirtualMachineExtensionImageResources in the SubscriptionResource. </summary>
+        /// <summary>
+        /// Gets a collection of VirtualMachineExtensionImageResources in the SubscriptionResource.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="SampleSubscriptionMockingExtension.GetVirtualMachineExtensionImages(AzureLocation,string)"/> instead.</description>
+        /// </item>
+        /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="location"> The name of a supported Azure region. </param>
         /// <param name="publisherName"> The String to use. </param>
@@ -627,6 +731,10 @@ namespace Azure.ResourceManager.Sample
         /// <description>VirtualMachineExtensionImages_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="SampleSubscriptionMockingExtension.GetVirtualMachineExtensionImageAsync(AzureLocation,string,string,string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="location"> The name of a supported Azure region. </param>
@@ -654,6 +762,10 @@ namespace Azure.ResourceManager.Sample
         /// <description>VirtualMachineExtensionImages_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="SampleSubscriptionMockingExtension.GetVirtualMachineExtensionImage(AzureLocation,string,string,string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="location"> The name of a supported Azure region. </param>

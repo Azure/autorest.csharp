@@ -42,7 +42,13 @@ namespace MgmtPropertyChooser
             return GetMgmtPropertyChooserArmClientMockingExtension(client).GetVirtualMachineResource(id);
         }
 
-        /// <summary> Gets a collection of VirtualMachineResources in the ResourceGroupResource. </summary>
+        /// <summary>
+        /// Gets a collection of VirtualMachineResources in the ResourceGroupResource.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtPropertyChooserResourceGroupMockingExtension.GetVirtualMachines()"/> instead.</description>
+        /// </item>
+        /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of VirtualMachineResources and their operations over a VirtualMachineResource. </returns>
         public static VirtualMachineCollection GetVirtualMachines(this ResourceGroupResource resourceGroupResource)
@@ -62,6 +68,10 @@ namespace MgmtPropertyChooser
         /// <description>VirtualMachines_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtPropertyChooserResourceGroupMockingExtension.GetVirtualMachineAsync(string,InstanceViewType?,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="vmName"> The name of the virtual machine. </param>
@@ -87,6 +97,10 @@ namespace MgmtPropertyChooser
         /// <description>VirtualMachines_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtPropertyChooserResourceGroupMockingExtension.GetVirtualMachine(string,InstanceViewType?,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="vmName"> The name of the virtual machine. </param>

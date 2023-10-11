@@ -15,6 +15,7 @@ using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
 using Azure.Core;
 using Azure.ResourceManager;
+using Humanizer.Localisation;
 
 namespace AutoRest.CSharp.Mgmt.Output
 {
@@ -116,12 +117,18 @@ namespace AutoRest.CSharp.Mgmt.Output
                 GetScopeParameter(scopeTypes)
             };
             parameters.AddRange(originalSignature.Parameters.Skip(1)); // add all remaining parameters
+            var signatureOnMockingExtension = originalSignature with
+            {
+                Modifiers = MethodSignatureModifiers.Public | MethodSignatureModifiers.Virtual,
+                Parameters = parameters.Skip(1).ToArray()
+            };
             var signature = originalSignature with
             {
+                Description = $"{BuildDescriptionForSingletonResource(resource)}{Environment.NewLine}{BuildMockingExtraDescription(signatureOnMockingExtension)}",
                 Parameters = parameters
             };
 
-            return BuildRedirectCallToMockingExtension(signature, false);
+            return BuildRedirectCallToMockingExtension(signature, signatureOnMockingExtension);
         }
 
         protected override Method BuildGetChildCollectionMethod(ResourceCollection collection)
@@ -141,12 +148,18 @@ namespace AutoRest.CSharp.Mgmt.Output
                 GetScopeParameter(scopeTypes)
             };
             parameters.AddRange(originalSignature.Parameters.Skip(1)); // add all remaining parameters
+            var signatureOnMockingExtension = originalSignature with
+            {
+                Modifiers = MethodSignatureModifiers.Public | MethodSignatureModifiers.Virtual,
+                Parameters = parameters.Skip(1).ToArray()
+            };
             var signature = originalSignature with
             {
+                Description = $"{BuildDescriptionForChildCollection(collection)}{Environment.NewLine}{BuildMockingExtraDescription(signatureOnMockingExtension)}",
                 Parameters = parameters
             };
 
-            return BuildRedirectCallToMockingExtension(signature, false);
+            return BuildRedirectCallToMockingExtension(signature, signatureOnMockingExtension);
         }
     }
 }

@@ -54,7 +54,13 @@ namespace MgmtExactMatchInheritance
             return GetMgmtExactMatchInheritanceArmClientMockingExtension(client).GetExactMatchModel5Resource(id);
         }
 
-        /// <summary> Gets a collection of ExactMatchModel1Resources in the ResourceGroupResource. </summary>
+        /// <summary>
+        /// Gets a collection of ExactMatchModel1Resources in the ResourceGroupResource.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtExactMatchInheritanceResourceGroupMockingExtension.GetExactMatchModel1s()"/> instead.</description>
+        /// </item>
+        /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of ExactMatchModel1Resources and their operations over a ExactMatchModel1Resource. </returns>
         public static ExactMatchModel1Collection GetExactMatchModel1s(this ResourceGroupResource resourceGroupResource)
@@ -73,6 +79,10 @@ namespace MgmtExactMatchInheritance
         /// <description>ExactMatchModel1s_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtExactMatchInheritanceResourceGroupMockingExtension.GetExactMatchModel1Async(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="exactMatchModel1SName"> The String to use. </param>
@@ -96,6 +106,10 @@ namespace MgmtExactMatchInheritance
         /// <description>ExactMatchModel1s_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtExactMatchInheritanceResourceGroupMockingExtension.GetExactMatchModel1(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="exactMatchModel1SName"> The String to use. </param>
@@ -108,7 +122,13 @@ namespace MgmtExactMatchInheritance
             return GetMgmtExactMatchInheritanceResourceGroupMockingExtension(resourceGroupResource).GetExactMatchModel1(exactMatchModel1SName, cancellationToken);
         }
 
-        /// <summary> Gets a collection of ExactMatchModel5Resources in the ResourceGroupResource. </summary>
+        /// <summary>
+        /// Gets a collection of ExactMatchModel5Resources in the ResourceGroupResource.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtExactMatchInheritanceResourceGroupMockingExtension.GetExactMatchModel5s()"/> instead.</description>
+        /// </item>
+        /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of ExactMatchModel5Resources and their operations over a ExactMatchModel5Resource. </returns>
         public static ExactMatchModel5Collection GetExactMatchModel5s(this ResourceGroupResource resourceGroupResource)
@@ -127,6 +147,10 @@ namespace MgmtExactMatchInheritance
         /// <description>ExactMatchModel5s_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtExactMatchInheritanceResourceGroupMockingExtension.GetExactMatchModel5Async(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="exactMatchModel5SName"> The String to use. </param>
@@ -150,6 +174,10 @@ namespace MgmtExactMatchInheritance
         /// <description>ExactMatchModel5s_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtExactMatchInheritanceResourceGroupMockingExtension.GetExactMatchModel5(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="exactMatchModel5SName"> The String to use. </param>

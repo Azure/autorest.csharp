@@ -45,7 +45,13 @@ namespace MgmtMockAndSample
             return resource.GetCachedClient(client => new MgmtMockAndSampleTenantMockingExtension(client, resource.Id));
         }
 
-        /// <summary> Gets a collection of RoleAssignmentResources in the ArmClient. </summary>
+        /// <summary>
+        /// Gets a collection of RoleAssignmentResources in the ArmClient.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtMockAndSampleArmClientMockingExtension.GetRoleAssignments(ResourceIdentifier)"/> instead.</description>
+        /// </item>
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="scope"> The scope that the resource will apply against. </param>
         /// <returns> An object representing collection of RoleAssignmentResources and their operations over a RoleAssignmentResource. </returns>
@@ -66,6 +72,10 @@ namespace MgmtMockAndSample
         /// <description>RoleAssignments_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtMockAndSampleArmClientMockingExtension.GetRoleAssignmentAsync(ResourceIdentifier,string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="scope"> The scope that the resource will apply against. </param>
@@ -91,6 +101,10 @@ namespace MgmtMockAndSample
         /// <description>RoleAssignments_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtMockAndSampleArmClientMockingExtension.GetRoleAssignment(ResourceIdentifier,string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="scope"> The scope that the resource will apply against. </param>
@@ -104,7 +118,13 @@ namespace MgmtMockAndSample
             return GetMgmtMockAndSampleArmClientMockingExtension(client).GetRoleAssignment(scope, roleAssignmentName, cancellationToken);
         }
 
-        /// <summary> Gets a collection of GuestConfigurationAssignmentResources in the ArmClient. </summary>
+        /// <summary>
+        /// Gets a collection of GuestConfigurationAssignmentResources in the ArmClient.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtMockAndSampleArmClientMockingExtension.GetGuestConfigurationAssignments(ResourceIdentifier)"/> instead.</description>
+        /// </item>
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="scope"> The scope that the resource will apply against. Expected resource type includes the following: Microsoft.Compute/virtualMachines. </param>
         /// <returns> An object representing collection of GuestConfigurationAssignmentResources and their operations over a GuestConfigurationAssignmentResource. </returns>
@@ -125,6 +145,10 @@ namespace MgmtMockAndSample
         /// <description>GuestConfigurationAssignments_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtMockAndSampleArmClientMockingExtension.GetGuestConfigurationAssignmentAsync(ResourceIdentifier,string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="scope"> The scope that the resource will apply against. Expected resource type includes the following: Microsoft.Compute/virtualMachines. </param>
@@ -150,6 +174,10 @@ namespace MgmtMockAndSample
         /// <description>GuestConfigurationAssignments_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtMockAndSampleArmClientMockingExtension.GetGuestConfigurationAssignment(ResourceIdentifier,string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="scope"> The scope that the resource will apply against. Expected resource type includes the following: Microsoft.Compute/virtualMachines. </param>
@@ -307,7 +335,13 @@ namespace MgmtMockAndSample
             return GetMgmtMockAndSampleArmClientMockingExtension(client).GetGuestConfigurationAssignmentResource(id);
         }
 
-        /// <summary> Gets a collection of RoleAssignmentResources in the ArmResource. </summary>
+        /// <summary>
+        /// Gets a collection of RoleAssignmentResources in the ArmResource.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtMockAndSampleArmMockingExtension.GetRoleAssignments()"/> instead.</description>
+        /// </item>
+        /// </summary>
         /// <param name="armResource"> The <see cref="ArmResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of RoleAssignmentResources and their operations over a RoleAssignmentResource. </returns>
         public static RoleAssignmentCollection GetRoleAssignments(this ArmResource armResource)
@@ -327,6 +361,10 @@ namespace MgmtMockAndSample
         /// <description>RoleAssignments_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtMockAndSampleArmMockingExtension.GetRoleAssignmentAsync(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="armResource"> The <see cref="ArmResource" /> instance the method will execute against. </param>
         /// <param name="roleAssignmentName"> The name of the role assignment to get. </param>
@@ -351,6 +389,10 @@ namespace MgmtMockAndSample
         /// <description>RoleAssignments_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtMockAndSampleArmMockingExtension.GetRoleAssignment(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="armResource"> The <see cref="ArmResource" /> instance the method will execute against. </param>
         /// <param name="roleAssignmentName"> The name of the role assignment to get. </param>
@@ -363,7 +405,13 @@ namespace MgmtMockAndSample
             return GetMgmtMockAndSampleArmMockingExtension(armResource).GetRoleAssignment(roleAssignmentName, cancellationToken);
         }
 
-        /// <summary> Gets a collection of VaultResources in the ResourceGroupResource. </summary>
+        /// <summary>
+        /// Gets a collection of VaultResources in the ResourceGroupResource.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtMockAndSampleResourceGroupMockingExtension.GetVaults()"/> instead.</description>
+        /// </item>
+        /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of VaultResources and their operations over a VaultResource. </returns>
         public static VaultCollection GetVaults(this ResourceGroupResource resourceGroupResource)
@@ -383,6 +431,10 @@ namespace MgmtMockAndSample
         /// <description>Vaults_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtMockAndSampleResourceGroupMockingExtension.GetVaultAsync(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="vaultName"> The name of the vault. </param>
@@ -407,6 +459,10 @@ namespace MgmtMockAndSample
         /// <description>Vaults_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtMockAndSampleResourceGroupMockingExtension.GetVault(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="vaultName"> The name of the vault. </param>
@@ -419,7 +475,13 @@ namespace MgmtMockAndSample
             return GetMgmtMockAndSampleResourceGroupMockingExtension(resourceGroupResource).GetVault(vaultName, cancellationToken);
         }
 
-        /// <summary> Gets a collection of DiskEncryptionSetResources in the ResourceGroupResource. </summary>
+        /// <summary>
+        /// Gets a collection of DiskEncryptionSetResources in the ResourceGroupResource.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtMockAndSampleResourceGroupMockingExtension.GetDiskEncryptionSets()"/> instead.</description>
+        /// </item>
+        /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of DiskEncryptionSetResources and their operations over a DiskEncryptionSetResource. </returns>
         public static DiskEncryptionSetCollection GetDiskEncryptionSets(this ResourceGroupResource resourceGroupResource)
@@ -439,6 +501,10 @@ namespace MgmtMockAndSample
         /// <description>DiskEncryptionSets_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtMockAndSampleResourceGroupMockingExtension.GetDiskEncryptionSetAsync(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="diskEncryptionSetName"> The name of the disk encryption set that is being created. The name can't be changed after the disk encryption set is created. Supported characters for the name are a-z, A-Z, 0-9, _ and -. The maximum name length is 80 characters. </param>
@@ -463,6 +529,10 @@ namespace MgmtMockAndSample
         /// <description>DiskEncryptionSets_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtMockAndSampleResourceGroupMockingExtension.GetDiskEncryptionSet(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="diskEncryptionSetName"> The name of the disk encryption set that is being created. The name can't be changed after the disk encryption set is created. Supported characters for the name are a-z, A-Z, 0-9, _ and -. The maximum name length is 80 characters. </param>
@@ -475,7 +545,13 @@ namespace MgmtMockAndSample
             return GetMgmtMockAndSampleResourceGroupMockingExtension(resourceGroupResource).GetDiskEncryptionSet(diskEncryptionSetName, cancellationToken);
         }
 
-        /// <summary> Gets a collection of ManagedHsmResources in the ResourceGroupResource. </summary>
+        /// <summary>
+        /// Gets a collection of ManagedHsmResources in the ResourceGroupResource.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtMockAndSampleResourceGroupMockingExtension.GetManagedHsms()"/> instead.</description>
+        /// </item>
+        /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of ManagedHsmResources and their operations over a ManagedHsmResource. </returns>
         public static ManagedHsmCollection GetManagedHsms(this ResourceGroupResource resourceGroupResource)
@@ -495,6 +571,10 @@ namespace MgmtMockAndSample
         /// <description>ManagedHsms_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtMockAndSampleResourceGroupMockingExtension.GetManagedHsmAsync(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="name"> The name of the managed HSM Pool. </param>
@@ -519,6 +599,10 @@ namespace MgmtMockAndSample
         /// <description>ManagedHsms_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtMockAndSampleResourceGroupMockingExtension.GetManagedHsm(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="name"> The name of the managed HSM Pool. </param>
@@ -531,7 +615,13 @@ namespace MgmtMockAndSample
             return GetMgmtMockAndSampleResourceGroupMockingExtension(resourceGroupResource).GetManagedHsm(name, cancellationToken);
         }
 
-        /// <summary> Gets a collection of FirewallPolicyResources in the ResourceGroupResource. </summary>
+        /// <summary>
+        /// Gets a collection of FirewallPolicyResources in the ResourceGroupResource.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtMockAndSampleResourceGroupMockingExtension.GetFirewallPolicies()"/> instead.</description>
+        /// </item>
+        /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of FirewallPolicyResources and their operations over a FirewallPolicyResource. </returns>
         public static FirewallPolicyCollection GetFirewallPolicies(this ResourceGroupResource resourceGroupResource)
@@ -551,6 +641,10 @@ namespace MgmtMockAndSample
         /// <description>FirewallPolicies_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtMockAndSampleResourceGroupMockingExtension.GetFirewallPolicyAsync(string,string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="firewallPolicyName"> The name of the Firewall Policy. </param>
@@ -576,6 +670,10 @@ namespace MgmtMockAndSample
         /// <description>FirewallPolicies_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtMockAndSampleResourceGroupMockingExtension.GetFirewallPolicy(string,string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="firewallPolicyName"> The name of the Firewall Policy. </param>
@@ -589,7 +687,13 @@ namespace MgmtMockAndSample
             return GetMgmtMockAndSampleResourceGroupMockingExtension(resourceGroupResource).GetFirewallPolicy(firewallPolicyName, expand, cancellationToken);
         }
 
-        /// <summary> Gets a collection of DeletedVaultResources in the SubscriptionResource. </summary>
+        /// <summary>
+        /// Gets a collection of DeletedVaultResources in the SubscriptionResource.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtMockAndSampleSubscriptionMockingExtension.GetDeletedVaults()"/> instead.</description>
+        /// </item>
+        /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of DeletedVaultResources and their operations over a DeletedVaultResource. </returns>
         public static DeletedVaultCollection GetDeletedVaults(this SubscriptionResource subscriptionResource)
@@ -609,6 +713,10 @@ namespace MgmtMockAndSample
         /// <description>Vaults_GetDeleted</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtMockAndSampleSubscriptionMockingExtension.GetDeletedVaultAsync(AzureLocation,string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="location"> The location of the deleted vault. </param>
@@ -634,6 +742,10 @@ namespace MgmtMockAndSample
         /// <description>Vaults_GetDeleted</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtMockAndSampleSubscriptionMockingExtension.GetDeletedVault(AzureLocation,string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="location"> The location of the deleted vault. </param>
@@ -647,7 +759,13 @@ namespace MgmtMockAndSample
             return GetMgmtMockAndSampleSubscriptionMockingExtension(subscriptionResource).GetDeletedVault(location, vaultName, cancellationToken);
         }
 
-        /// <summary> Gets a collection of VirtualMachineExtensionImageResources in the SubscriptionResource. </summary>
+        /// <summary>
+        /// Gets a collection of VirtualMachineExtensionImageResources in the SubscriptionResource.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtMockAndSampleSubscriptionMockingExtension.GetVirtualMachineExtensionImages(AzureLocation,string)"/> instead.</description>
+        /// </item>
+        /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="location"> The name of a supported Azure region. </param>
         /// <param name="publisherName"> The String to use. </param>
@@ -671,6 +789,10 @@ namespace MgmtMockAndSample
         /// <description>VirtualMachineExtensionImages_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtMockAndSampleSubscriptionMockingExtension.GetVirtualMachineExtensionImageAsync(AzureLocation,string,string,string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="location"> The name of a supported Azure region. </param>
@@ -698,6 +820,10 @@ namespace MgmtMockAndSample
         /// <description>VirtualMachineExtensionImages_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtMockAndSampleSubscriptionMockingExtension.GetVirtualMachineExtensionImage(AzureLocation,string,string,string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="location"> The name of a supported Azure region. </param>
@@ -713,7 +839,13 @@ namespace MgmtMockAndSample
             return GetMgmtMockAndSampleSubscriptionMockingExtension(subscriptionResource).GetVirtualMachineExtensionImage(location, publisherName, type, version, cancellationToken);
         }
 
-        /// <summary> Gets a collection of DeletedManagedHsmResources in the SubscriptionResource. </summary>
+        /// <summary>
+        /// Gets a collection of DeletedManagedHsmResources in the SubscriptionResource.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtMockAndSampleSubscriptionMockingExtension.GetDeletedManagedHsms()"/> instead.</description>
+        /// </item>
+        /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of DeletedManagedHsmResources and their operations over a DeletedManagedHsmResource. </returns>
         public static DeletedManagedHsmCollection GetDeletedManagedHsms(this SubscriptionResource subscriptionResource)
@@ -733,6 +865,10 @@ namespace MgmtMockAndSample
         /// <description>ManagedHsms_GetDeleted</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtMockAndSampleSubscriptionMockingExtension.GetDeletedManagedHsmAsync(AzureLocation,string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="location"> The location of the deleted managed HSM. </param>
@@ -758,6 +894,10 @@ namespace MgmtMockAndSample
         /// <description>ManagedHsms_GetDeleted</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtMockAndSampleSubscriptionMockingExtension.GetDeletedManagedHsm(AzureLocation,string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="location"> The location of the deleted managed HSM. </param>

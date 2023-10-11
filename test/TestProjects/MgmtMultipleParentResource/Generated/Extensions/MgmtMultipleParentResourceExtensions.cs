@@ -89,7 +89,13 @@ namespace MgmtMultipleParentResource
             return GetMgmtMultipleParentResourceArmClientMockingExtension(client).GetSubParentResource(id);
         }
 
-        /// <summary> Gets a collection of AnotherParentResources in the ResourceGroupResource. </summary>
+        /// <summary>
+        /// Gets a collection of AnotherParentResources in the ResourceGroupResource.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtMultipleParentResourceResourceGroupMockingExtension.GetAnotherParents()"/> instead.</description>
+        /// </item>
+        /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of AnotherParentResources and their operations over a AnotherParentResource. </returns>
         public static AnotherParentCollection GetAnotherParents(this ResourceGroupResource resourceGroupResource)
@@ -109,6 +115,10 @@ namespace MgmtMultipleParentResource
         /// <description>AnotherParents_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtMultipleParentResourceResourceGroupMockingExtension.GetAnotherParentAsync(string,string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="anotherName"> The name of the virtual machine containing the run command. </param>
@@ -134,6 +144,10 @@ namespace MgmtMultipleParentResource
         /// <description>AnotherParents_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtMultipleParentResourceResourceGroupMockingExtension.GetAnotherParent(string,string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="anotherName"> The name of the virtual machine containing the run command. </param>
@@ -147,7 +161,13 @@ namespace MgmtMultipleParentResource
             return GetMgmtMultipleParentResourceResourceGroupMockingExtension(resourceGroupResource).GetAnotherParent(anotherName, expand, cancellationToken);
         }
 
-        /// <summary> Gets a collection of TheParentResources in the ResourceGroupResource. </summary>
+        /// <summary>
+        /// Gets a collection of TheParentResources in the ResourceGroupResource.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtMultipleParentResourceResourceGroupMockingExtension.GetTheParents()"/> instead.</description>
+        /// </item>
+        /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of TheParentResources and their operations over a TheParentResource. </returns>
         public static TheParentCollection GetTheParents(this ResourceGroupResource resourceGroupResource)
@@ -167,6 +187,10 @@ namespace MgmtMultipleParentResource
         /// <description>TheParents_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtMultipleParentResourceResourceGroupMockingExtension.GetTheParentAsync(string,string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="theParentName"> The name of the VM scale set. </param>
@@ -192,6 +216,10 @@ namespace MgmtMultipleParentResource
         /// <description>TheParents_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtMultipleParentResourceResourceGroupMockingExtension.GetTheParent(string,string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="theParentName"> The name of the VM scale set. </param>

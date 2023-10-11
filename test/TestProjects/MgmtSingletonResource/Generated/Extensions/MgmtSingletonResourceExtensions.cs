@@ -89,7 +89,13 @@ namespace MgmtSingletonResource
             return GetMgmtSingletonResourceArmClientMockingExtension(client).GetParentResource(id);
         }
 
-        /// <summary> Gets a collection of CarResources in the ResourceGroupResource. </summary>
+        /// <summary>
+        /// Gets a collection of CarResources in the ResourceGroupResource.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtSingletonResourceResourceGroupMockingExtension.GetCars()"/> instead.</description>
+        /// </item>
+        /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of CarResources and their operations over a CarResource. </returns>
         public static CarCollection GetCars(this ResourceGroupResource resourceGroupResource)
@@ -108,6 +114,10 @@ namespace MgmtSingletonResource
         /// <description>Cars_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtSingletonResourceResourceGroupMockingExtension.GetCarAsync(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="carName"> The String to use. </param>
@@ -131,6 +141,10 @@ namespace MgmtSingletonResource
         /// <description>Cars_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtSingletonResourceResourceGroupMockingExtension.GetCar(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="carName"> The String to use. </param>
@@ -143,7 +157,13 @@ namespace MgmtSingletonResource
             return GetMgmtSingletonResourceResourceGroupMockingExtension(resourceGroupResource).GetCar(carName, cancellationToken);
         }
 
-        /// <summary> Gets a collection of ParentResources in the ResourceGroupResource. </summary>
+        /// <summary>
+        /// Gets a collection of ParentResources in the ResourceGroupResource.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtSingletonResourceResourceGroupMockingExtension.GetParentResources()"/> instead.</description>
+        /// </item>
+        /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of ParentResources and their operations over a ParentResource. </returns>
         public static ParentResourceCollection GetParentResources(this ResourceGroupResource resourceGroupResource)
@@ -163,6 +183,10 @@ namespace MgmtSingletonResource
         /// <description>ParentResources_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtSingletonResourceResourceGroupMockingExtension.GetParentResourceAsync(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="parentName"> The String to use. </param>
@@ -187,6 +211,10 @@ namespace MgmtSingletonResource
         /// <description>ParentResources_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtSingletonResourceResourceGroupMockingExtension.GetParentResource(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="parentName"> The String to use. </param>

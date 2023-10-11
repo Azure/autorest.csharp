@@ -41,7 +41,13 @@ namespace MgmtCustomizations
             return GetMgmtCustomizationsArmClientMockingExtension(client).GetPetStoreResource(id);
         }
 
-        /// <summary> Gets a collection of PetStoreResources in the ResourceGroupResource. </summary>
+        /// <summary>
+        /// Gets a collection of PetStoreResources in the ResourceGroupResource.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtCustomizationsResourceGroupMockingExtension.GetPetStores()"/> instead.</description>
+        /// </item>
+        /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of PetStoreResources and their operations over a PetStoreResource. </returns>
         public static PetStoreCollection GetPetStores(this ResourceGroupResource resourceGroupResource)
@@ -61,6 +67,10 @@ namespace MgmtCustomizations
         /// <description>PetStores_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtCustomizationsResourceGroupMockingExtension.GetPetStoreAsync(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="name"> Name of the endpoint under the profile which is unique globally. </param>
@@ -85,6 +95,10 @@ namespace MgmtCustomizations
         /// <description>PetStores_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtCustomizationsResourceGroupMockingExtension.GetPetStore(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="name"> Name of the endpoint under the profile which is unique globally. </param>

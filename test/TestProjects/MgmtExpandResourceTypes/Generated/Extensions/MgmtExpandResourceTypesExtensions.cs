@@ -167,7 +167,13 @@ namespace MgmtExpandResourceTypes
             return GetMgmtExpandResourceTypesArmClientMockingExtension(client).GetZoneResource(id);
         }
 
-        /// <summary> Gets a collection of ZoneResources in the ResourceGroupResource. </summary>
+        /// <summary>
+        /// Gets a collection of ZoneResources in the ResourceGroupResource.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtExpandResourceTypesResourceGroupMockingExtension.GetZones()"/> instead.</description>
+        /// </item>
+        /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of ZoneResources and their operations over a ZoneResource. </returns>
         public static ZoneCollection GetZones(this ResourceGroupResource resourceGroupResource)
@@ -187,6 +193,10 @@ namespace MgmtExpandResourceTypes
         /// <description>Zones_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtExpandResourceTypesResourceGroupMockingExtension.GetZoneAsync(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="zoneName"> The name of the DNS zone (without a terminating dot). </param>
@@ -211,6 +221,10 @@ namespace MgmtExpandResourceTypes
         /// <description>Zones_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtExpandResourceTypesResourceGroupMockingExtension.GetZone(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="zoneName"> The name of the DNS zone (without a terminating dot). </param>

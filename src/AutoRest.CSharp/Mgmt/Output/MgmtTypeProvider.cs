@@ -20,6 +20,7 @@ using AutoRest.CSharp.Utilities;
 using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
+using Humanizer.Localisation;
 using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 
 namespace AutoRest.CSharp.Mgmt.Output
@@ -335,12 +336,15 @@ namespace AutoRest.CSharp.Mgmt.Output
             }
         }
 
+        protected FormattableString BuildDescriptionForSingletonResource(Resource resource)
+            => $"Gets an object representing a {resource.Type.Name} along with the instance operations that can be performed on it in the {ResourceName}.";
+
         protected virtual Method BuildGetSingletonResourceMethod(Resource resource)
         {
             var signature = new MethodSignature(
                         $"Get{resource.ResourceName}",
                         null,
-                        $"Gets an object representing a {resource.Type.Name} along with the instance operations that can be performed on it in the {ResourceName}.",
+                        BuildDescriptionForSingletonResource(resource),
                         MethodModifiers,
                         resource.Type,
                         $"Returns a <see cref=\"{resource.Type}\" /> object.",
@@ -353,17 +357,20 @@ namespace AutoRest.CSharp.Mgmt.Output
             return new(signature, methodBody);
         }
 
+        protected FormattableString BuildDescriptionForChildCollection(ResourceCollection collection)
+            => $"Gets a collection of {collection.Resource.Type.Name.LastWordToPlural()} in the {ResourceName}.";
+
         protected virtual Method BuildGetChildCollectionMethod(ResourceCollection collection)
         {
             var resource = collection.Resource;
             var signature = new MethodSignature(
-    $"Get{resource.ResourceName.ResourceNameToPlural()}",
-    null,
-    $"Gets a collection of {resource.Type.Name.LastWordToPlural()} in the {ResourceName}.",
-    MethodModifiers,
-    collection.Type,
-    $"An object representing collection of {resource.Type.Name.LastWordToPlural()} and their operations over a {resource.Type.Name}.",
-collection.ExtraConstructorParameters.ToArray());
+                $"Get{resource.ResourceName.ResourceNameToPlural()}",
+                null,
+                BuildDescriptionForChildCollection(collection),
+                MethodModifiers,
+                collection.Type,
+                $"An object representing collection of {resource.Type.Name.LastWordToPlural()} and their operations over a {resource.Type.Name}.",
+            collection.ExtraConstructorParameters.ToArray());
             var methodBody = BuildGetResourceCollectionMethodBody(collection);
             return new(signature, methodBody);
         }
@@ -398,6 +405,9 @@ collection.ExtraConstructorParameters.ToArray());
             }
         }
 
+        protected FormattableString BuildDescriptionForChildResource(ResourceCollection collection)
+            => collection.GetOperation.Description;
+
         protected virtual Method BuildGetChildResourceMethod(ResourceCollection collection, MethodSignatureBase getCollectionMethodSignature, bool isAsync)
         {
             var getOperation = collection.GetOperation;
@@ -406,6 +416,7 @@ collection.ExtraConstructorParameters.ToArray());
             {
                 // name after `Get{ResourceName}`
                 Name = $"Get{collection.Resource.ResourceName}",
+                Description = BuildDescriptionForChildResource(collection),
                 Modifiers = MethodModifiers,
                 // the parameter of this method should be the parameters on the collection's ctor + parameters on the Get method
                 // also the validations of parameters will be skipped

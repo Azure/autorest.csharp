@@ -41,7 +41,13 @@ namespace MgmtXmlDeserialization
             return GetMgmtXmlDeserializationArmClientMockingExtension(client).GetXmlInstanceResource(id);
         }
 
-        /// <summary> Gets a collection of XmlInstanceResources in the ResourceGroupResource. </summary>
+        /// <summary>
+        /// Gets a collection of XmlInstanceResources in the ResourceGroupResource.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtXmlDeserializationResourceGroupMockingExtension.GetXmlInstances()"/> instead.</description>
+        /// </item>
+        /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of XmlInstanceResources and their operations over a XmlInstanceResource. </returns>
         public static XmlInstanceCollection GetXmlInstances(this ResourceGroupResource resourceGroupResource)
@@ -61,6 +67,10 @@ namespace MgmtXmlDeserialization
         /// <description>XmlDeserialization_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtXmlDeserializationResourceGroupMockingExtension.GetXmlInstanceAsync(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="xmlName"> The name of the API Management service. </param>
@@ -85,6 +95,10 @@ namespace MgmtXmlDeserialization
         /// <description>XmlDeserialization_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtXmlDeserializationResourceGroupMockingExtension.GetXmlInstance(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="xmlName"> The name of the API Management service. </param>

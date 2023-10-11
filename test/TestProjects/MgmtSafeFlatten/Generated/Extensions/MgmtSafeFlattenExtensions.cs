@@ -58,7 +58,13 @@ namespace MgmtSafeFlatten
             return GetMgmtSafeFlattenArmClientMockingExtension(client).GetTypeTwoResource(id);
         }
 
-        /// <summary> Gets a collection of TypeOneResources in the ResourceGroupResource. </summary>
+        /// <summary>
+        /// Gets a collection of TypeOneResources in the ResourceGroupResource.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtSafeFlattenResourceGroupMockingExtension.GetTypeOnes()"/> instead.</description>
+        /// </item>
+        /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of TypeOneResources and their operations over a TypeOneResource. </returns>
         public static TypeOneCollection GetTypeOnes(this ResourceGroupResource resourceGroupResource)
@@ -78,6 +84,10 @@ namespace MgmtSafeFlatten
         /// <description>Common_GetTypeOne</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtSafeFlattenResourceGroupMockingExtension.GetTypeOneAsync(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="typeOneName"> The name. </param>
@@ -102,6 +112,10 @@ namespace MgmtSafeFlatten
         /// <description>Common_GetTypeOne</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtSafeFlattenResourceGroupMockingExtension.GetTypeOne(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="typeOneName"> The name. </param>
@@ -114,7 +128,13 @@ namespace MgmtSafeFlatten
             return GetMgmtSafeFlattenResourceGroupMockingExtension(resourceGroupResource).GetTypeOne(typeOneName, cancellationToken);
         }
 
-        /// <summary> Gets a collection of TypeTwoResources in the ResourceGroupResource. </summary>
+        /// <summary>
+        /// Gets a collection of TypeTwoResources in the ResourceGroupResource.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtSafeFlattenResourceGroupMockingExtension.GetTypeTwos()"/> instead.</description>
+        /// </item>
+        /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of TypeTwoResources and their operations over a TypeTwoResource. </returns>
         public static TypeTwoCollection GetTypeTwos(this ResourceGroupResource resourceGroupResource)
@@ -134,6 +154,10 @@ namespace MgmtSafeFlatten
         /// <description>Common_GetTypeTwo</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtSafeFlattenResourceGroupMockingExtension.GetTypeTwoAsync(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="typeTwoName"> The name. </param>
@@ -158,6 +182,10 @@ namespace MgmtSafeFlatten
         /// <description>Common_GetTypeTwo</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtSafeFlattenResourceGroupMockingExtension.GetTypeTwo(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="typeTwoName"> The name. </param>

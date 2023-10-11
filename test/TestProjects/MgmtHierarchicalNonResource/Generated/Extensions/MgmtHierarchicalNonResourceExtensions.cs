@@ -41,7 +41,13 @@ namespace MgmtHierarchicalNonResource
             return GetMgmtHierarchicalNonResourceArmClientMockingExtension(client).GetSharedGalleryResource(id);
         }
 
-        /// <summary> Gets a collection of SharedGalleryResources in the SubscriptionResource. </summary>
+        /// <summary>
+        /// Gets a collection of SharedGalleryResources in the SubscriptionResource.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtHierarchicalNonResourceSubscriptionMockingExtension.GetSharedGalleries(string)"/> instead.</description>
+        /// </item>
+        /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="location"> Resource location. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
@@ -64,6 +70,10 @@ namespace MgmtHierarchicalNonResource
         /// <description>SharedGalleries_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtHierarchicalNonResourceSubscriptionMockingExtension.GetSharedGalleryAsync(string,string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="location"> Resource location. </param>
@@ -89,6 +99,10 @@ namespace MgmtHierarchicalNonResource
         /// <description>SharedGalleries_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtHierarchicalNonResourceSubscriptionMockingExtension.GetSharedGallery(string,string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="location"> Resource location. </param>

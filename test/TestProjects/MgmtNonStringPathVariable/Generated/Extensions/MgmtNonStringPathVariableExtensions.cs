@@ -53,7 +53,13 @@ namespace MgmtNonStringPathVariable
             return GetMgmtNonStringPathVariableArmClientMockingExtension(client).GetBarResource(id);
         }
 
-        /// <summary> Gets a collection of FakeResources in the ResourceGroupResource. </summary>
+        /// <summary>
+        /// Gets a collection of FakeResources in the ResourceGroupResource.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtNonStringPathVariableResourceGroupMockingExtension.GetFakes()"/> instead.</description>
+        /// </item>
+        /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of FakeResources and their operations over a FakeResource. </returns>
         public static FakeCollection GetFakes(this ResourceGroupResource resourceGroupResource)
@@ -73,6 +79,10 @@ namespace MgmtNonStringPathVariable
         /// <description>Fakes_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtNonStringPathVariableResourceGroupMockingExtension.GetFakeAsync(FakeNameAsEnum,string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="fakeName"> The name of the fake. </param>
@@ -96,6 +106,10 @@ namespace MgmtNonStringPathVariable
         /// <description>Fakes_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtNonStringPathVariableResourceGroupMockingExtension.GetFake(FakeNameAsEnum,string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="fakeName"> The name of the fake. </param>
@@ -107,7 +121,13 @@ namespace MgmtNonStringPathVariable
             return GetMgmtNonStringPathVariableResourceGroupMockingExtension(resourceGroupResource).GetFake(fakeName, expand, cancellationToken);
         }
 
-        /// <summary> Gets a collection of BarResources in the ResourceGroupResource. </summary>
+        /// <summary>
+        /// Gets a collection of BarResources in the ResourceGroupResource.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtNonStringPathVariableResourceGroupMockingExtension.GetBars()"/> instead.</description>
+        /// </item>
+        /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of BarResources and their operations over a BarResource. </returns>
         public static BarCollection GetBars(this ResourceGroupResource resourceGroupResource)
@@ -127,6 +147,10 @@ namespace MgmtNonStringPathVariable
         /// <description>Bars_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtNonStringPathVariableResourceGroupMockingExtension.GetBarAsync(int,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="barName"> The name of the fake. </param>
@@ -149,6 +173,10 @@ namespace MgmtNonStringPathVariable
         /// <description>Bars_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtNonStringPathVariableResourceGroupMockingExtension.GetBar(int,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="barName"> The name of the fake. </param>

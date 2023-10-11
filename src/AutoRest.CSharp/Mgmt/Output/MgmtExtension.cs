@@ -15,6 +15,7 @@ using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Utilities;
 using Azure.ResourceManager;
+using Humanizer.Localisation;
 
 namespace AutoRest.CSharp.Mgmt.Output
 {
@@ -209,22 +210,27 @@ namespace AutoRest.CSharp.Mgmt.Output
         /// It calls the factory method of the mocking extension first, and then calls the method wtih the same name and parameter list on the mocking extension
         /// </summary>
         /// <param name="signature"></param>
+        /// <param name="signatureOnMockingExtension"></param>
         /// <param name="isAsync"></param>
         /// <returns></returns>
-        protected Method BuildRedirectCallToMockingExtension(MethodSignature signature, bool isAsync)
+        protected Method BuildRedirectCallToMockingExtension(MethodSignature signature, MethodSignature signatureOnMockingExtension)
         {
             var callFactoryMethod = new InvokeInstanceMethodExpression(null, (MethodSignature)MockingExtensionFactoryMethod.Signature, new[] { (ValueExpression)signature.Parameters[0] }, false);
 
-            var signatureOnMockingExtension = signature.WithAsync(false) with
-            {
-                Modifiers = MethodSignatureModifiers.Public | MethodSignatureModifiers.Virtual,
-                Parameters = signature.Parameters.Skip(1).ToArray()
-            };
-            var callMethodOnMockingExtension = callFactoryMethod.Invoke(signatureOnMockingExtension.WithAsync(isAsync));
+            var callMethodOnMockingExtension = callFactoryMethod.Invoke(signatureOnMockingExtension);
 
             var methodBody = Snippets.Return(callMethodOnMockingExtension);
 
             return new(signature, methodBody);
+        }
+
+        protected FormattableString BuildMockingExtraDescription(MethodSignature signatureOnMockingExtension)
+        {
+            var methodRef = signatureOnMockingExtension.ToStringForDocs();
+            return $@"<item>
+<term>Mocking</term>
+<description>To mock this method, please mock <see cref=""{MockingExtension.Type}.{methodRef}""/> instead.</description>
+</item>";
         }
 
         protected override Method BuildGetSingletonResourceMethod(Resource resource)
@@ -235,12 +241,17 @@ namespace AutoRest.CSharp.Mgmt.Output
 
             // if it not arm core, we should generate these methods in a static extension way
             var originalSignature = (MethodSignature)originalMethod.Signature;
+            var signatureOnMockingExtension = originalSignature with
+            {
+                Modifiers = MethodSignatureModifiers.Public | MethodSignatureModifiers.Virtual
+            };
             var signature = originalSignature with
             {
+                Description = $"{BuildDescriptionForSingletonResource(resource)}{Environment.NewLine}{BuildMockingExtraDescription(signatureOnMockingExtension)}",
                 Parameters = originalSignature.Parameters.Prepend(ExtensionParameter).ToArray()
             };
 
-            return BuildRedirectCallToMockingExtension(signature, false);
+            return BuildRedirectCallToMockingExtension(signature, signatureOnMockingExtension);
         }
 
         protected override Method BuildGetChildCollectionMethod(ResourceCollection collection)
@@ -251,12 +262,17 @@ namespace AutoRest.CSharp.Mgmt.Output
 
             // if it not arm core, we should generate these methods in a static extension way
             var originalSignature = (MethodSignature)originalMethod.Signature;
+            var signatureOnMockingExtension = originalSignature with
+            {
+                Modifiers = MethodSignatureModifiers.Public | MethodSignatureModifiers.Virtual
+            };
             var signature = originalSignature with
             {
+                Description = $"{BuildDescriptionForChildCollection(collection)}{Environment.NewLine}{BuildMockingExtraDescription(signatureOnMockingExtension)}",
                 Parameters = originalSignature.Parameters.Prepend(ExtensionParameter).ToArray()
             };
 
-            return BuildRedirectCallToMockingExtension(signature, false);
+            return BuildRedirectCallToMockingExtension(signature, signatureOnMockingExtension);
         }
 
         protected override Method BuildGetChildResourceMethod(ResourceCollection collection, MethodSignatureBase getCollectionMethodSignature, bool isAsync)
@@ -265,8 +281,19 @@ namespace AutoRest.CSharp.Mgmt.Output
             if (IsArmCore)
                 return originalMethod;
 
+            var originalSignature = (MethodSignature)originalMethod.Signature;
+            var signatureOnMockingExtension = (originalSignature.WithAsync(false) with
+            {
+                Modifiers = MethodSignatureModifiers.Public | MethodSignatureModifiers.Virtual,
+                Parameters = originalSignature.Parameters.Skip(1).ToArray()
+            }).WithAsync(isAsync);
+            var signature = originalSignature with
+            {
+                Description = $"{BuildDescriptionForChildResource(collection)}{Environment.NewLine}{BuildMockingExtraDescription(signatureOnMockingExtension)}"
+            };
+
             // if it not arm core, we should generate these methods in a static extension way
-            return BuildRedirectCallToMockingExtension((MethodSignature)originalMethod.Signature, isAsync);
+            return BuildRedirectCallToMockingExtension(signature, signatureOnMockingExtension);
         }
     }
 }

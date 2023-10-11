@@ -125,7 +125,13 @@ namespace MgmtPagination
             return GetMgmtPaginationArmClientMockingExtension(client).GetPageSizeStringModelResource(id);
         }
 
-        /// <summary> Gets a collection of PageSizeIntegerModelResources in the ResourceGroupResource. </summary>
+        /// <summary>
+        /// Gets a collection of PageSizeIntegerModelResources in the ResourceGroupResource.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtPaginationResourceGroupMockingExtension.GetPageSizeIntegerModels()"/> instead.</description>
+        /// </item>
+        /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of PageSizeIntegerModelResources and their operations over a PageSizeIntegerModelResource. </returns>
         public static PageSizeIntegerModelCollection GetPageSizeIntegerModels(this ResourceGroupResource resourceGroupResource)
@@ -144,6 +150,10 @@ namespace MgmtPagination
         /// <description>PageSizeIntegerModels_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtPaginationResourceGroupMockingExtension.GetPageSizeIntegerModelAsync(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="name"> The String to use. </param>
@@ -167,6 +177,10 @@ namespace MgmtPagination
         /// <description>PageSizeIntegerModels_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtPaginationResourceGroupMockingExtension.GetPageSizeIntegerModel(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="name"> The String to use. </param>
@@ -179,7 +193,13 @@ namespace MgmtPagination
             return GetMgmtPaginationResourceGroupMockingExtension(resourceGroupResource).GetPageSizeIntegerModel(name, cancellationToken);
         }
 
-        /// <summary> Gets a collection of PageSizeInt64ModelResources in the ResourceGroupResource. </summary>
+        /// <summary>
+        /// Gets a collection of PageSizeInt64ModelResources in the ResourceGroupResource.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtPaginationResourceGroupMockingExtension.GetPageSizeInt64Models()"/> instead.</description>
+        /// </item>
+        /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of PageSizeInt64ModelResources and their operations over a PageSizeInt64ModelResource. </returns>
         public static PageSizeInt64ModelCollection GetPageSizeInt64Models(this ResourceGroupResource resourceGroupResource)
@@ -198,6 +218,10 @@ namespace MgmtPagination
         /// <description>PageSizeInt64Models_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtPaginationResourceGroupMockingExtension.GetPageSizeInt64ModelAsync(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="name"> The String to use. </param>
@@ -221,6 +245,10 @@ namespace MgmtPagination
         /// <description>PageSizeInt64Models_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtPaginationResourceGroupMockingExtension.GetPageSizeInt64Model(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="name"> The String to use. </param>
@@ -233,7 +261,13 @@ namespace MgmtPagination
             return GetMgmtPaginationResourceGroupMockingExtension(resourceGroupResource).GetPageSizeInt64Model(name, cancellationToken);
         }
 
-        /// <summary> Gets a collection of PageSizeInt32ModelResources in the ResourceGroupResource. </summary>
+        /// <summary>
+        /// Gets a collection of PageSizeInt32ModelResources in the ResourceGroupResource.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtPaginationResourceGroupMockingExtension.GetPageSizeInt32Models()"/> instead.</description>
+        /// </item>
+        /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of PageSizeInt32ModelResources and their operations over a PageSizeInt32ModelResource. </returns>
         public static PageSizeInt32ModelCollection GetPageSizeInt32Models(this ResourceGroupResource resourceGroupResource)
@@ -252,6 +286,10 @@ namespace MgmtPagination
         /// <description>PageSizeInt32Models_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtPaginationResourceGroupMockingExtension.GetPageSizeInt32ModelAsync(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="name"> The String to use. </param>
@@ -275,6 +313,10 @@ namespace MgmtPagination
         /// <description>PageSizeInt32Models_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtPaginationResourceGroupMockingExtension.GetPageSizeInt32Model(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="name"> The String to use. </param>
@@ -287,7 +329,13 @@ namespace MgmtPagination
             return GetMgmtPaginationResourceGroupMockingExtension(resourceGroupResource).GetPageSizeInt32Model(name, cancellationToken);
         }
 
-        /// <summary> Gets a collection of PageSizeNumericModelResources in the ResourceGroupResource. </summary>
+        /// <summary>
+        /// Gets a collection of PageSizeNumericModelResources in the ResourceGroupResource.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtPaginationResourceGroupMockingExtension.GetPageSizeNumericModels()"/> instead.</description>
+        /// </item>
+        /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of PageSizeNumericModelResources and their operations over a PageSizeNumericModelResource. </returns>
         public static PageSizeNumericModelCollection GetPageSizeNumericModels(this ResourceGroupResource resourceGroupResource)
@@ -306,6 +354,10 @@ namespace MgmtPagination
         /// <description>PageSizeNumericModels_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtPaginationResourceGroupMockingExtension.GetPageSizeNumericModelAsync(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="name"> The String to use. </param>
@@ -329,6 +381,10 @@ namespace MgmtPagination
         /// <description>PageSizeNumericModels_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtPaginationResourceGroupMockingExtension.GetPageSizeNumericModel(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="name"> The String to use. </param>
@@ -341,7 +397,13 @@ namespace MgmtPagination
             return GetMgmtPaginationResourceGroupMockingExtension(resourceGroupResource).GetPageSizeNumericModel(name, cancellationToken);
         }
 
-        /// <summary> Gets a collection of PageSizeFloatModelResources in the ResourceGroupResource. </summary>
+        /// <summary>
+        /// Gets a collection of PageSizeFloatModelResources in the ResourceGroupResource.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtPaginationResourceGroupMockingExtension.GetPageSizeFloatModels()"/> instead.</description>
+        /// </item>
+        /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of PageSizeFloatModelResources and their operations over a PageSizeFloatModelResource. </returns>
         public static PageSizeFloatModelCollection GetPageSizeFloatModels(this ResourceGroupResource resourceGroupResource)
@@ -360,6 +422,10 @@ namespace MgmtPagination
         /// <description>PageSizeFloatModels_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtPaginationResourceGroupMockingExtension.GetPageSizeFloatModelAsync(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="name"> The String to use. </param>
@@ -383,6 +449,10 @@ namespace MgmtPagination
         /// <description>PageSizeFloatModels_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtPaginationResourceGroupMockingExtension.GetPageSizeFloatModel(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="name"> The String to use. </param>
@@ -395,7 +465,13 @@ namespace MgmtPagination
             return GetMgmtPaginationResourceGroupMockingExtension(resourceGroupResource).GetPageSizeFloatModel(name, cancellationToken);
         }
 
-        /// <summary> Gets a collection of PageSizeDoubleModelResources in the ResourceGroupResource. </summary>
+        /// <summary>
+        /// Gets a collection of PageSizeDoubleModelResources in the ResourceGroupResource.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtPaginationResourceGroupMockingExtension.GetPageSizeDoubleModels()"/> instead.</description>
+        /// </item>
+        /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of PageSizeDoubleModelResources and their operations over a PageSizeDoubleModelResource. </returns>
         public static PageSizeDoubleModelCollection GetPageSizeDoubleModels(this ResourceGroupResource resourceGroupResource)
@@ -414,6 +490,10 @@ namespace MgmtPagination
         /// <description>PageSizeDoubleModels_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtPaginationResourceGroupMockingExtension.GetPageSizeDoubleModelAsync(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="name"> The String to use. </param>
@@ -437,6 +517,10 @@ namespace MgmtPagination
         /// <description>PageSizeDoubleModels_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtPaginationResourceGroupMockingExtension.GetPageSizeDoubleModel(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="name"> The String to use. </param>
@@ -449,7 +533,13 @@ namespace MgmtPagination
             return GetMgmtPaginationResourceGroupMockingExtension(resourceGroupResource).GetPageSizeDoubleModel(name, cancellationToken);
         }
 
-        /// <summary> Gets a collection of PageSizeDecimalModelResources in the ResourceGroupResource. </summary>
+        /// <summary>
+        /// Gets a collection of PageSizeDecimalModelResources in the ResourceGroupResource.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtPaginationResourceGroupMockingExtension.GetPageSizeDecimalModels()"/> instead.</description>
+        /// </item>
+        /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of PageSizeDecimalModelResources and their operations over a PageSizeDecimalModelResource. </returns>
         public static PageSizeDecimalModelCollection GetPageSizeDecimalModels(this ResourceGroupResource resourceGroupResource)
@@ -468,6 +558,10 @@ namespace MgmtPagination
         /// <description>PageSizeDecimalModels_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtPaginationResourceGroupMockingExtension.GetPageSizeDecimalModelAsync(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="name"> The String to use. </param>
@@ -491,6 +585,10 @@ namespace MgmtPagination
         /// <description>PageSizeDecimalModels_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtPaginationResourceGroupMockingExtension.GetPageSizeDecimalModel(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="name"> The String to use. </param>
@@ -503,7 +601,13 @@ namespace MgmtPagination
             return GetMgmtPaginationResourceGroupMockingExtension(resourceGroupResource).GetPageSizeDecimalModel(name, cancellationToken);
         }
 
-        /// <summary> Gets a collection of PageSizeStringModelResources in the ResourceGroupResource. </summary>
+        /// <summary>
+        /// Gets a collection of PageSizeStringModelResources in the ResourceGroupResource.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtPaginationResourceGroupMockingExtension.GetPageSizeStringModels()"/> instead.</description>
+        /// </item>
+        /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of PageSizeStringModelResources and their operations over a PageSizeStringModelResource. </returns>
         public static PageSizeStringModelCollection GetPageSizeStringModels(this ResourceGroupResource resourceGroupResource)
@@ -522,6 +626,10 @@ namespace MgmtPagination
         /// <description>PageSizeStringModels_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtPaginationResourceGroupMockingExtension.GetPageSizeStringModelAsync(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="name"> The String to use. </param>
@@ -545,6 +653,10 @@ namespace MgmtPagination
         /// <description>PageSizeStringModels_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtPaginationResourceGroupMockingExtension.GetPageSizeStringModel(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="name"> The String to use. </param>

@@ -41,7 +41,13 @@ namespace MgmtDiscriminator
             return GetMgmtDiscriminatorArmClientMockingExtension(client).GetDeliveryRuleResource(id);
         }
 
-        /// <summary> Gets a collection of DeliveryRuleResources in the ResourceGroupResource. </summary>
+        /// <summary>
+        /// Gets a collection of DeliveryRuleResources in the ResourceGroupResource.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtDiscriminatorResourceGroupMockingExtension.GetDeliveryRules()"/> instead.</description>
+        /// </item>
+        /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of DeliveryRuleResources and their operations over a DeliveryRuleResource. </returns>
         public static DeliveryRuleCollection GetDeliveryRules(this ResourceGroupResource resourceGroupResource)
@@ -61,6 +67,10 @@ namespace MgmtDiscriminator
         /// <description>DeliveryRules_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtDiscriminatorResourceGroupMockingExtension.GetDeliveryRuleAsync(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="name"> Name of the endpoint under the profile which is unique globally. </param>
@@ -85,6 +95,10 @@ namespace MgmtDiscriminator
         /// <description>DeliveryRules_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtDiscriminatorResourceGroupMockingExtension.GetDeliveryRule(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="name"> Name of the endpoint under the profile which is unique globally. </param>

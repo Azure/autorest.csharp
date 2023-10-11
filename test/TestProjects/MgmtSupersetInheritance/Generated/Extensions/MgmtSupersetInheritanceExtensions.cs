@@ -78,7 +78,13 @@ namespace MgmtSupersetInheritance
             return GetMgmtSupersetInheritanceArmClientMockingExtension(client).GetSupersetModel7Resource(id);
         }
 
-        /// <summary> Gets a collection of SupersetModel1Resources in the ResourceGroupResource. </summary>
+        /// <summary>
+        /// Gets a collection of SupersetModel1Resources in the ResourceGroupResource.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtSupersetInheritanceResourceGroupMockingExtension.GetSupersetModel1s()"/> instead.</description>
+        /// </item>
+        /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of SupersetModel1Resources and their operations over a SupersetModel1Resource. </returns>
         public static SupersetModel1Collection GetSupersetModel1s(this ResourceGroupResource resourceGroupResource)
@@ -97,6 +103,10 @@ namespace MgmtSupersetInheritance
         /// <description>SupersetModel1s_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtSupersetInheritanceResourceGroupMockingExtension.GetSupersetModel1Async(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="supersetModel1SName"> The String to use. </param>
@@ -120,6 +130,10 @@ namespace MgmtSupersetInheritance
         /// <description>SupersetModel1s_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtSupersetInheritanceResourceGroupMockingExtension.GetSupersetModel1(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="supersetModel1SName"> The String to use. </param>
@@ -132,7 +146,13 @@ namespace MgmtSupersetInheritance
             return GetMgmtSupersetInheritanceResourceGroupMockingExtension(resourceGroupResource).GetSupersetModel1(supersetModel1SName, cancellationToken);
         }
 
-        /// <summary> Gets a collection of SupersetModel4Resources in the ResourceGroupResource. </summary>
+        /// <summary>
+        /// Gets a collection of SupersetModel4Resources in the ResourceGroupResource.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtSupersetInheritanceResourceGroupMockingExtension.GetSupersetModel4s()"/> instead.</description>
+        /// </item>
+        /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of SupersetModel4Resources and their operations over a SupersetModel4Resource. </returns>
         public static SupersetModel4Collection GetSupersetModel4s(this ResourceGroupResource resourceGroupResource)
@@ -151,6 +171,10 @@ namespace MgmtSupersetInheritance
         /// <description>SupersetModel4s_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtSupersetInheritanceResourceGroupMockingExtension.GetSupersetModel4Async(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="supersetModel4SName"> The String to use. </param>
@@ -174,6 +198,10 @@ namespace MgmtSupersetInheritance
         /// <description>SupersetModel4s_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtSupersetInheritanceResourceGroupMockingExtension.GetSupersetModel4(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="supersetModel4SName"> The String to use. </param>
@@ -186,7 +214,13 @@ namespace MgmtSupersetInheritance
             return GetMgmtSupersetInheritanceResourceGroupMockingExtension(resourceGroupResource).GetSupersetModel4(supersetModel4SName, cancellationToken);
         }
 
-        /// <summary> Gets a collection of SupersetModel6Resources in the ResourceGroupResource. </summary>
+        /// <summary>
+        /// Gets a collection of SupersetModel6Resources in the ResourceGroupResource.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtSupersetInheritanceResourceGroupMockingExtension.GetSupersetModel6s()"/> instead.</description>
+        /// </item>
+        /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of SupersetModel6Resources and their operations over a SupersetModel6Resource. </returns>
         public static SupersetModel6Collection GetSupersetModel6s(this ResourceGroupResource resourceGroupResource)
@@ -205,6 +239,10 @@ namespace MgmtSupersetInheritance
         /// <description>SupersetModel6s_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtSupersetInheritanceResourceGroupMockingExtension.GetSupersetModel6Async(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="supersetModel6SName"> The String to use. </param>
@@ -228,6 +266,10 @@ namespace MgmtSupersetInheritance
         /// <description>SupersetModel6s_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtSupersetInheritanceResourceGroupMockingExtension.GetSupersetModel6(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="supersetModel6SName"> The String to use. </param>
@@ -240,7 +282,13 @@ namespace MgmtSupersetInheritance
             return GetMgmtSupersetInheritanceResourceGroupMockingExtension(resourceGroupResource).GetSupersetModel6(supersetModel6SName, cancellationToken);
         }
 
-        /// <summary> Gets a collection of SupersetModel7Resources in the ResourceGroupResource. </summary>
+        /// <summary>
+        /// Gets a collection of SupersetModel7Resources in the ResourceGroupResource.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtSupersetInheritanceResourceGroupMockingExtension.GetSupersetModel7s()"/> instead.</description>
+        /// </item>
+        /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of SupersetModel7Resources and their operations over a SupersetModel7Resource. </returns>
         public static SupersetModel7Collection GetSupersetModel7s(this ResourceGroupResource resourceGroupResource)
@@ -259,6 +307,10 @@ namespace MgmtSupersetInheritance
         /// <description>SupersetModel7s_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtSupersetInheritanceResourceGroupMockingExtension.GetSupersetModel7Async(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="supersetModel7SName"> The String to use. </param>
@@ -282,6 +334,10 @@ namespace MgmtSupersetInheritance
         /// <description>SupersetModel7s_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtSupersetInheritanceResourceGroupMockingExtension.GetSupersetModel7(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="supersetModel7SName"> The String to use. </param>

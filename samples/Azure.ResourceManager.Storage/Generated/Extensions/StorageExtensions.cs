@@ -179,7 +179,13 @@ namespace Azure.ResourceManager.Storage
             return GetStorageArmClientMockingExtension(client).GetEncryptionScopeResource(id);
         }
 
-        /// <summary> Gets a collection of StorageAccountResources in the ResourceGroupResource. </summary>
+        /// <summary>
+        /// Gets a collection of StorageAccountResources in the ResourceGroupResource.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="StorageResourceGroupMockingExtension.GetStorageAccounts()"/> instead.</description>
+        /// </item>
+        /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of StorageAccountResources and their operations over a StorageAccountResource. </returns>
         public static StorageAccountCollection GetStorageAccounts(this ResourceGroupResource resourceGroupResource)
@@ -199,6 +205,10 @@ namespace Azure.ResourceManager.Storage
         /// <description>StorageAccounts_GetProperties</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="StorageResourceGroupMockingExtension.GetStorageAccountAsync(string,StorageAccountExpand?,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
@@ -224,6 +234,10 @@ namespace Azure.ResourceManager.Storage
         /// <description>StorageAccounts_GetProperties</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="StorageResourceGroupMockingExtension.GetStorageAccount(string,StorageAccountExpand?,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
@@ -237,7 +251,13 @@ namespace Azure.ResourceManager.Storage
             return GetStorageResourceGroupMockingExtension(resourceGroupResource).GetStorageAccount(accountName, expand, cancellationToken);
         }
 
-        /// <summary> Gets a collection of DeletedAccountResources in the SubscriptionResource. </summary>
+        /// <summary>
+        /// Gets a collection of DeletedAccountResources in the SubscriptionResource.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="StorageSubscriptionMockingExtension.GetDeletedAccounts()"/> instead.</description>
+        /// </item>
+        /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of DeletedAccountResources and their operations over a DeletedAccountResource. </returns>
         public static DeletedAccountCollection GetDeletedAccounts(this SubscriptionResource subscriptionResource)
@@ -257,6 +277,10 @@ namespace Azure.ResourceManager.Storage
         /// <description>DeletedAccounts_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="StorageSubscriptionMockingExtension.GetDeletedAccountAsync(AzureLocation,string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="location"> The location of the deleted storage account. </param>
@@ -282,6 +306,10 @@ namespace Azure.ResourceManager.Storage
         /// <description>DeletedAccounts_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="StorageSubscriptionMockingExtension.GetDeletedAccount(AzureLocation,string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="location"> The location of the deleted storage account. </param>

@@ -47,7 +47,13 @@ namespace MgmtConstants
             return GetMgmtConstantsArmClientMockingExtension(client).GetOptionalMachineResource(id);
         }
 
-        /// <summary> Gets a collection of OptionalMachineResources in the ResourceGroupResource. </summary>
+        /// <summary>
+        /// Gets a collection of OptionalMachineResources in the ResourceGroupResource.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtConstantsResourceGroupMockingExtension.GetOptionalMachines()"/> instead.</description>
+        /// </item>
+        /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of OptionalMachineResources and their operations over a OptionalMachineResource. </returns>
         public static OptionalMachineCollection GetOptionalMachines(this ResourceGroupResource resourceGroupResource)
@@ -67,6 +73,10 @@ namespace MgmtConstants
         /// <description>Optionals_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtConstantsResourceGroupMockingExtension.GetOptionalMachineAsync(string,OptionalMachineExpand?,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="name"> The name of the virtual machine. </param>
@@ -92,6 +102,10 @@ namespace MgmtConstants
         /// <description>Optionals_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtConstantsResourceGroupMockingExtension.GetOptionalMachine(string,OptionalMachineExpand?,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="name"> The name of the virtual machine. </param>

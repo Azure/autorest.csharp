@@ -46,7 +46,13 @@ namespace MgmtCollectionParent
             return GetMgmtCollectionParentArmClientMockingExtension(client).GetOrderResource(id);
         }
 
-        /// <summary> Gets a collection of OrderResources in the ResourceGroupResource. </summary>
+        /// <summary>
+        /// Gets a collection of OrderResources in the ResourceGroupResource.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtCollectionParentResourceGroupMockingExtension.GetOrderResources()"/> instead.</description>
+        /// </item>
+        /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of OrderResources and their operations over a OrderResource. </returns>
         public static OrderResourceCollection GetOrderResources(this ResourceGroupResource resourceGroupResource)
@@ -66,6 +72,10 @@ namespace MgmtCollectionParent
         /// <description>GetOrderByName</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtCollectionParentResourceGroupMockingExtension.GetOrderResourceAsync(string,string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="location"> The name of Azure region. </param>
@@ -91,6 +101,10 @@ namespace MgmtCollectionParent
         /// <description>GetOrderByName</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtCollectionParentResourceGroupMockingExtension.GetOrderResource(string,string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="location"> The name of Azure region. </param>

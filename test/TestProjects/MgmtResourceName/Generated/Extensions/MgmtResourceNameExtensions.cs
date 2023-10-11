@@ -106,7 +106,13 @@ namespace MgmtResourceName
             return GetMgmtResourceNameArmClientMockingExtension(client).GetProviderOperationResource(id);
         }
 
-        /// <summary> Gets a collection of MachineResources in the ResourceGroupResource. </summary>
+        /// <summary>
+        /// Gets a collection of MachineResources in the ResourceGroupResource.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtResourceNameResourceGroupMockingExtension.GetMachines()"/> instead.</description>
+        /// </item>
+        /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of MachineResources and their operations over a MachineResource. </returns>
         public static MachineCollection GetMachines(this ResourceGroupResource resourceGroupResource)
@@ -125,6 +131,10 @@ namespace MgmtResourceName
         /// <description>Machines_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtResourceNameResourceGroupMockingExtension.GetMachineAsync(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="machineName"> The String to use. </param>
@@ -148,6 +158,10 @@ namespace MgmtResourceName
         /// <description>Machines_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtResourceNameResourceGroupMockingExtension.GetMachine(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="machineName"> The String to use. </param>
@@ -160,7 +174,13 @@ namespace MgmtResourceName
             return GetMgmtResourceNameResourceGroupMockingExtension(resourceGroupResource).GetMachine(machineName, cancellationToken);
         }
 
-        /// <summary> Gets a collection of Disks in the ResourceGroupResource. </summary>
+        /// <summary>
+        /// Gets a collection of Disks in the ResourceGroupResource.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtResourceNameResourceGroupMockingExtension.GetDisks()"/> instead.</description>
+        /// </item>
+        /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of Disks and their operations over a Disk. </returns>
         public static DiskCollection GetDisks(this ResourceGroupResource resourceGroupResource)
@@ -179,6 +199,10 @@ namespace MgmtResourceName
         /// <description>Disks_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtResourceNameResourceGroupMockingExtension.GetDiskAsync(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="diskResourceName"> The String to use. </param>
@@ -202,6 +226,10 @@ namespace MgmtResourceName
         /// <description>Disks_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtResourceNameResourceGroupMockingExtension.GetDisk(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="diskResourceName"> The String to use. </param>
@@ -214,7 +242,13 @@ namespace MgmtResourceName
             return GetMgmtResourceNameResourceGroupMockingExtension(resourceGroupResource).GetDisk(diskResourceName, cancellationToken);
         }
 
-        /// <summary> Gets a collection of Memories in the ResourceGroupResource. </summary>
+        /// <summary>
+        /// Gets a collection of Memories in the ResourceGroupResource.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtResourceNameResourceGroupMockingExtension.GetMemories()"/> instead.</description>
+        /// </item>
+        /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of Memories and their operations over a Memory. </returns>
         public static MemoryCollection GetMemories(this ResourceGroupResource resourceGroupResource)
@@ -233,6 +267,10 @@ namespace MgmtResourceName
         /// <description>MemoryResources_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtResourceNameResourceGroupMockingExtension.GetMemoryAsync(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="memoryResourceName"> The String to use. </param>
@@ -256,6 +294,10 @@ namespace MgmtResourceName
         /// <description>MemoryResources_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtResourceNameResourceGroupMockingExtension.GetMemory(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="memoryResourceName"> The String to use. </param>
@@ -268,7 +310,13 @@ namespace MgmtResourceName
             return GetMgmtResourceNameResourceGroupMockingExtension(resourceGroupResource).GetMemory(memoryResourceName, cancellationToken);
         }
 
-        /// <summary> Gets a collection of NetworkResources in the ResourceGroupResource. </summary>
+        /// <summary>
+        /// Gets a collection of NetworkResources in the ResourceGroupResource.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtResourceNameResourceGroupMockingExtension.GetNetworks()"/> instead.</description>
+        /// </item>
+        /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of NetworkResources and their operations over a NetworkResource. </returns>
         public static NetworkCollection GetNetworks(this ResourceGroupResource resourceGroupResource)
@@ -287,6 +335,10 @@ namespace MgmtResourceName
         /// <description>networkResources_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtResourceNameResourceGroupMockingExtension.GetNetworkAsync(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="networkResourceName"> The String to use. </param>
@@ -310,6 +362,10 @@ namespace MgmtResourceName
         /// <description>networkResources_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtResourceNameResourceGroupMockingExtension.GetNetwork(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="networkResourceName"> The String to use. </param>
@@ -322,7 +378,13 @@ namespace MgmtResourceName
             return GetMgmtResourceNameResourceGroupMockingExtension(resourceGroupResource).GetNetwork(networkResourceName, cancellationToken);
         }
 
-        /// <summary> Gets a collection of DisplayResources in the ResourceGroupResource. </summary>
+        /// <summary>
+        /// Gets a collection of DisplayResources in the ResourceGroupResource.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtResourceNameResourceGroupMockingExtension.GetDisplayResources()"/> instead.</description>
+        /// </item>
+        /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of DisplayResources and their operations over a DisplayResource. </returns>
         public static DisplayResourceCollection GetDisplayResources(this ResourceGroupResource resourceGroupResource)
@@ -341,6 +403,10 @@ namespace MgmtResourceName
         /// <description>displayResources_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtResourceNameResourceGroupMockingExtension.GetDisplayResourceAsync(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="displayResourceName"> The String to use. </param>
@@ -364,6 +430,10 @@ namespace MgmtResourceName
         /// <description>displayResources_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtResourceNameResourceGroupMockingExtension.GetDisplayResource(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="displayResourceName"> The String to use. </param>
@@ -376,7 +446,13 @@ namespace MgmtResourceName
             return GetMgmtResourceNameResourceGroupMockingExtension(resourceGroupResource).GetDisplayResource(displayResourceName, cancellationToken);
         }
 
-        /// <summary> Gets a collection of ProviderOperationResources in the TenantResource. </summary>
+        /// <summary>
+        /// Gets a collection of ProviderOperationResources in the TenantResource.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtResourceNameTenantMockingExtension.GetProviderOperations()"/> instead.</description>
+        /// </item>
+        /// </summary>
         /// <param name="tenantResource"> The <see cref="TenantResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of ProviderOperationResources and their operations over a ProviderOperationResource. </returns>
         public static ProviderOperationCollection GetProviderOperations(this TenantResource tenantResource)
@@ -396,6 +472,10 @@ namespace MgmtResourceName
         /// <description>ProviderOperations_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtResourceNameTenantMockingExtension.GetProviderOperationAsync(string,string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="tenantResource"> The <see cref="TenantResource" /> instance the method will execute against. </param>
         /// <param name="resourceProviderNamespace"> The namespace of the resource provider. </param>
@@ -421,6 +501,10 @@ namespace MgmtResourceName
         /// <description>ProviderOperations_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtResourceNameTenantMockingExtension.GetProviderOperation(string,string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="tenantResource"> The <see cref="TenantResource" /> instance the method will execute against. </param>
         /// <param name="resourceProviderNamespace"> The namespace of the resource provider. </param>

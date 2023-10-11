@@ -53,7 +53,13 @@ namespace MgmtLRO
             return GetMgmtLROArmClientMockingExtension(client).GetBarResource(id);
         }
 
-        /// <summary> Gets a collection of FakeResources in the ResourceGroupResource. </summary>
+        /// <summary>
+        /// Gets a collection of FakeResources in the ResourceGroupResource.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtLROResourceGroupMockingExtension.GetFakes()"/> instead.</description>
+        /// </item>
+        /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of FakeResources and their operations over a FakeResource. </returns>
         public static FakeCollection GetFakes(this ResourceGroupResource resourceGroupResource)
@@ -73,6 +79,10 @@ namespace MgmtLRO
         /// <description>Fakes_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtLROResourceGroupMockingExtension.GetFakeAsync(string,string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="fakeName"> The name of the fake. </param>
@@ -98,6 +108,10 @@ namespace MgmtLRO
         /// <description>Fakes_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtLROResourceGroupMockingExtension.GetFake(string,string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="fakeName"> The name of the fake. </param>
@@ -111,7 +125,13 @@ namespace MgmtLRO
             return GetMgmtLROResourceGroupMockingExtension(resourceGroupResource).GetFake(fakeName, expand, cancellationToken);
         }
 
-        /// <summary> Gets a collection of BarResources in the ResourceGroupResource. </summary>
+        /// <summary>
+        /// Gets a collection of BarResources in the ResourceGroupResource.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtLROResourceGroupMockingExtension.GetBars()"/> instead.</description>
+        /// </item>
+        /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of BarResources and their operations over a BarResource. </returns>
         public static BarCollection GetBars(this ResourceGroupResource resourceGroupResource)
@@ -131,6 +151,10 @@ namespace MgmtLRO
         /// <description>Bars_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtLROResourceGroupMockingExtension.GetBarAsync(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="barName"> The name of the fake. </param>
@@ -155,6 +179,10 @@ namespace MgmtLRO
         /// <description>Bars_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtLROResourceGroupMockingExtension.GetBar(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="barName"> The name of the fake. </param>

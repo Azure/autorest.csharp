@@ -370,7 +370,13 @@ namespace MgmtListMethods
             return GetMgmtListMethodsArmClientMockingExtension(client).GetFakeConfigurationResource(id);
         }
 
-        /// <summary> Gets a collection of MgmtGrpParentWithNonResChWithLocResources in the ManagementGroupResource. </summary>
+        /// <summary>
+        /// Gets a collection of MgmtGrpParentWithNonResChWithLocResources in the ManagementGroupResource.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtListMethodsManagementGroupMockingExtension.GetMgmtGrpParentWithNonResChWithLocs()"/> instead.</description>
+        /// </item>
+        /// </summary>
         /// <param name="managementGroupResource"> The <see cref="ManagementGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of MgmtGrpParentWithNonResChWithLocResources and their operations over a MgmtGrpParentWithNonResChWithLocResource. </returns>
         public static MgmtGrpParentWithNonResChWithLocCollection GetMgmtGrpParentWithNonResChWithLocs(this ManagementGroupResource managementGroupResource)
@@ -390,6 +396,10 @@ namespace MgmtListMethods
         /// <description>MgmtGrpParentWithNonResChWithLocs_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtListMethodsManagementGroupMockingExtension.GetMgmtGrpParentWithNonResChWithLocAsync(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="managementGroupResource"> The <see cref="ManagementGroupResource" /> instance the method will execute against. </param>
         /// <param name="mgmtGrpParentWithNonResChWithLocName"> Name. </param>
@@ -414,6 +424,10 @@ namespace MgmtListMethods
         /// <description>MgmtGrpParentWithNonResChWithLocs_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtListMethodsManagementGroupMockingExtension.GetMgmtGrpParentWithNonResChWithLoc(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="managementGroupResource"> The <see cref="ManagementGroupResource" /> instance the method will execute against. </param>
         /// <param name="mgmtGrpParentWithNonResChWithLocName"> Name. </param>
@@ -426,7 +440,13 @@ namespace MgmtListMethods
             return GetMgmtListMethodsManagementGroupMockingExtension(managementGroupResource).GetMgmtGrpParentWithNonResChWithLoc(mgmtGrpParentWithNonResChWithLocName, cancellationToken);
         }
 
-        /// <summary> Gets a collection of MgmtGrpParentWithNonResChResources in the ManagementGroupResource. </summary>
+        /// <summary>
+        /// Gets a collection of MgmtGrpParentWithNonResChResources in the ManagementGroupResource.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtListMethodsManagementGroupMockingExtension.GetMgmtGrpParentWithNonResChes()"/> instead.</description>
+        /// </item>
+        /// </summary>
         /// <param name="managementGroupResource"> The <see cref="ManagementGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of MgmtGrpParentWithNonResChResources and their operations over a MgmtGrpParentWithNonResChResource. </returns>
         public static MgmtGrpParentWithNonResChCollection GetMgmtGrpParentWithNonResChes(this ManagementGroupResource managementGroupResource)
@@ -446,6 +466,10 @@ namespace MgmtListMethods
         /// <description>MgmtGrpParentWithNonResChes_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtListMethodsManagementGroupMockingExtension.GetMgmtGrpParentWithNonResChAsync(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="managementGroupResource"> The <see cref="ManagementGroupResource" /> instance the method will execute against. </param>
         /// <param name="mgmtGrpParentWithNonResChName"> Name. </param>
@@ -470,6 +494,10 @@ namespace MgmtListMethods
         /// <description>MgmtGrpParentWithNonResChes_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtListMethodsManagementGroupMockingExtension.GetMgmtGrpParentWithNonResCh(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="managementGroupResource"> The <see cref="ManagementGroupResource" /> instance the method will execute against. </param>
         /// <param name="mgmtGrpParentWithNonResChName"> Name. </param>
@@ -482,7 +510,13 @@ namespace MgmtListMethods
             return GetMgmtListMethodsManagementGroupMockingExtension(managementGroupResource).GetMgmtGrpParentWithNonResCh(mgmtGrpParentWithNonResChName, cancellationToken);
         }
 
-        /// <summary> Gets a collection of MgmtGrpParentWithLocResources in the ManagementGroupResource. </summary>
+        /// <summary>
+        /// Gets a collection of MgmtGrpParentWithLocResources in the ManagementGroupResource.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtListMethodsManagementGroupMockingExtension.GetMgmtGrpParentWithLocs()"/> instead.</description>
+        /// </item>
+        /// </summary>
         /// <param name="managementGroupResource"> The <see cref="ManagementGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of MgmtGrpParentWithLocResources and their operations over a MgmtGrpParentWithLocResource. </returns>
         public static MgmtGrpParentWithLocCollection GetMgmtGrpParentWithLocs(this ManagementGroupResource managementGroupResource)
@@ -502,6 +536,10 @@ namespace MgmtListMethods
         /// <description>MgmtGrpParentWithLocs_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtListMethodsManagementGroupMockingExtension.GetMgmtGrpParentWithLocAsync(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="managementGroupResource"> The <see cref="ManagementGroupResource" /> instance the method will execute against. </param>
         /// <param name="mgmtGrpParentWithLocName"> Name. </param>
@@ -526,6 +564,10 @@ namespace MgmtListMethods
         /// <description>MgmtGrpParentWithLocs_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtListMethodsManagementGroupMockingExtension.GetMgmtGrpParentWithLoc(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="managementGroupResource"> The <see cref="ManagementGroupResource" /> instance the method will execute against. </param>
         /// <param name="mgmtGrpParentWithLocName"> Name. </param>
@@ -538,7 +580,13 @@ namespace MgmtListMethods
             return GetMgmtListMethodsManagementGroupMockingExtension(managementGroupResource).GetMgmtGrpParentWithLoc(mgmtGrpParentWithLocName, cancellationToken);
         }
 
-        /// <summary> Gets a collection of MgmtGroupParentResources in the ManagementGroupResource. </summary>
+        /// <summary>
+        /// Gets a collection of MgmtGroupParentResources in the ManagementGroupResource.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtListMethodsManagementGroupMockingExtension.GetMgmtGroupParents()"/> instead.</description>
+        /// </item>
+        /// </summary>
         /// <param name="managementGroupResource"> The <see cref="ManagementGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of MgmtGroupParentResources and their operations over a MgmtGroupParentResource. </returns>
         public static MgmtGroupParentCollection GetMgmtGroupParents(this ManagementGroupResource managementGroupResource)
@@ -558,6 +606,10 @@ namespace MgmtListMethods
         /// <description>MgmtGroupParents_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtListMethodsManagementGroupMockingExtension.GetMgmtGroupParentAsync(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="managementGroupResource"> The <see cref="ManagementGroupResource" /> instance the method will execute against. </param>
         /// <param name="mgmtGroupParentName"> Name. </param>
@@ -582,6 +634,10 @@ namespace MgmtListMethods
         /// <description>MgmtGroupParents_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtListMethodsManagementGroupMockingExtension.GetMgmtGroupParent(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="managementGroupResource"> The <see cref="ManagementGroupResource" /> instance the method will execute against. </param>
         /// <param name="mgmtGroupParentName"> Name. </param>
@@ -594,7 +650,13 @@ namespace MgmtListMethods
             return GetMgmtListMethodsManagementGroupMockingExtension(managementGroupResource).GetMgmtGroupParent(mgmtGroupParentName, cancellationToken);
         }
 
-        /// <summary> Gets a collection of ResGrpParentWithAncestorWithNonResChWithLocResources in the ResourceGroupResource. </summary>
+        /// <summary>
+        /// Gets a collection of ResGrpParentWithAncestorWithNonResChWithLocResources in the ResourceGroupResource.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtListMethodsResourceGroupMockingExtension.GetResGrpParentWithAncestorWithNonResChWithLocs()"/> instead.</description>
+        /// </item>
+        /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of ResGrpParentWithAncestorWithNonResChWithLocResources and their operations over a ResGrpParentWithAncestorWithNonResChWithLocResource. </returns>
         public static ResGrpParentWithAncestorWithNonResChWithLocCollection GetResGrpParentWithAncestorWithNonResChWithLocs(this ResourceGroupResource resourceGroupResource)
@@ -614,6 +676,10 @@ namespace MgmtListMethods
         /// <description>ResGrpParentWithAncestorWithNonResChWithLocs_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtListMethodsResourceGroupMockingExtension.GetResGrpParentWithAncestorWithNonResChWithLocAsync(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="resGrpParentWithAncestorWithNonResChWithLocName"> Name. </param>
@@ -638,6 +704,10 @@ namespace MgmtListMethods
         /// <description>ResGrpParentWithAncestorWithNonResChWithLocs_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtListMethodsResourceGroupMockingExtension.GetResGrpParentWithAncestorWithNonResChWithLoc(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="resGrpParentWithAncestorWithNonResChWithLocName"> Name. </param>
@@ -650,7 +720,13 @@ namespace MgmtListMethods
             return GetMgmtListMethodsResourceGroupMockingExtension(resourceGroupResource).GetResGrpParentWithAncestorWithNonResChWithLoc(resGrpParentWithAncestorWithNonResChWithLocName, cancellationToken);
         }
 
-        /// <summary> Gets a collection of ResGrpParentWithAncestorWithNonResChResources in the ResourceGroupResource. </summary>
+        /// <summary>
+        /// Gets a collection of ResGrpParentWithAncestorWithNonResChResources in the ResourceGroupResource.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtListMethodsResourceGroupMockingExtension.GetResGrpParentWithAncestorWithNonResChes()"/> instead.</description>
+        /// </item>
+        /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of ResGrpParentWithAncestorWithNonResChResources and their operations over a ResGrpParentWithAncestorWithNonResChResource. </returns>
         public static ResGrpParentWithAncestorWithNonResChCollection GetResGrpParentWithAncestorWithNonResChes(this ResourceGroupResource resourceGroupResource)
@@ -670,6 +746,10 @@ namespace MgmtListMethods
         /// <description>ResGrpParentWithAncestorWithNonResChes_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtListMethodsResourceGroupMockingExtension.GetResGrpParentWithAncestorWithNonResChAsync(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="resGrpParentWithAncestorWithNonResChName"> Name. </param>
@@ -694,6 +774,10 @@ namespace MgmtListMethods
         /// <description>ResGrpParentWithAncestorWithNonResChes_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtListMethodsResourceGroupMockingExtension.GetResGrpParentWithAncestorWithNonResCh(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="resGrpParentWithAncestorWithNonResChName"> Name. </param>
@@ -706,7 +790,13 @@ namespace MgmtListMethods
             return GetMgmtListMethodsResourceGroupMockingExtension(resourceGroupResource).GetResGrpParentWithAncestorWithNonResCh(resGrpParentWithAncestorWithNonResChName, cancellationToken);
         }
 
-        /// <summary> Gets a collection of ResGrpParentWithAncestorWithLocResources in the ResourceGroupResource. </summary>
+        /// <summary>
+        /// Gets a collection of ResGrpParentWithAncestorWithLocResources in the ResourceGroupResource.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtListMethodsResourceGroupMockingExtension.GetResGrpParentWithAncestorWithLocs()"/> instead.</description>
+        /// </item>
+        /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of ResGrpParentWithAncestorWithLocResources and their operations over a ResGrpParentWithAncestorWithLocResource. </returns>
         public static ResGrpParentWithAncestorWithLocCollection GetResGrpParentWithAncestorWithLocs(this ResourceGroupResource resourceGroupResource)
@@ -726,6 +816,10 @@ namespace MgmtListMethods
         /// <description>ResGrpParentWithAncestorWithLocs_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtListMethodsResourceGroupMockingExtension.GetResGrpParentWithAncestorWithLocAsync(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="resGrpParentWithAncestorWithLocName"> Name. </param>
@@ -750,6 +844,10 @@ namespace MgmtListMethods
         /// <description>ResGrpParentWithAncestorWithLocs_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtListMethodsResourceGroupMockingExtension.GetResGrpParentWithAncestorWithLoc(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="resGrpParentWithAncestorWithLocName"> Name. </param>
@@ -762,7 +860,13 @@ namespace MgmtListMethods
             return GetMgmtListMethodsResourceGroupMockingExtension(resourceGroupResource).GetResGrpParentWithAncestorWithLoc(resGrpParentWithAncestorWithLocName, cancellationToken);
         }
 
-        /// <summary> Gets a collection of ResGrpParentWithAncestorResources in the ResourceGroupResource. </summary>
+        /// <summary>
+        /// Gets a collection of ResGrpParentWithAncestorResources in the ResourceGroupResource.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtListMethodsResourceGroupMockingExtension.GetResGrpParentWithAncestors()"/> instead.</description>
+        /// </item>
+        /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of ResGrpParentWithAncestorResources and their operations over a ResGrpParentWithAncestorResource. </returns>
         public static ResGrpParentWithAncestorCollection GetResGrpParentWithAncestors(this ResourceGroupResource resourceGroupResource)
@@ -782,6 +886,10 @@ namespace MgmtListMethods
         /// <description>ResGrpParentWithAncestors_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtListMethodsResourceGroupMockingExtension.GetResGrpParentWithAncestorAsync(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="resGrpParentWithAncestorName"> Name. </param>
@@ -806,6 +914,10 @@ namespace MgmtListMethods
         /// <description>ResGrpParentWithAncestors_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtListMethodsResourceGroupMockingExtension.GetResGrpParentWithAncestor(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="resGrpParentWithAncestorName"> Name. </param>
@@ -818,7 +930,13 @@ namespace MgmtListMethods
             return GetMgmtListMethodsResourceGroupMockingExtension(resourceGroupResource).GetResGrpParentWithAncestor(resGrpParentWithAncestorName, cancellationToken);
         }
 
-        /// <summary> Gets a collection of ResGrpParentWithNonResChResources in the ResourceGroupResource. </summary>
+        /// <summary>
+        /// Gets a collection of ResGrpParentWithNonResChResources in the ResourceGroupResource.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtListMethodsResourceGroupMockingExtension.GetResGrpParentWithNonResChes()"/> instead.</description>
+        /// </item>
+        /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of ResGrpParentWithNonResChResources and their operations over a ResGrpParentWithNonResChResource. </returns>
         public static ResGrpParentWithNonResChCollection GetResGrpParentWithNonResChes(this ResourceGroupResource resourceGroupResource)
@@ -838,6 +956,10 @@ namespace MgmtListMethods
         /// <description>ResGrpParentWithNonResChes_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtListMethodsResourceGroupMockingExtension.GetResGrpParentWithNonResChAsync(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="resGrpParentWithNonResChName"> Name. </param>
@@ -862,6 +984,10 @@ namespace MgmtListMethods
         /// <description>ResGrpParentWithNonResChes_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtListMethodsResourceGroupMockingExtension.GetResGrpParentWithNonResCh(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="resGrpParentWithNonResChName"> Name. </param>
@@ -874,7 +1000,13 @@ namespace MgmtListMethods
             return GetMgmtListMethodsResourceGroupMockingExtension(resourceGroupResource).GetResGrpParentWithNonResCh(resGrpParentWithNonResChName, cancellationToken);
         }
 
-        /// <summary> Gets a collection of ResGrpParentResources in the ResourceGroupResource. </summary>
+        /// <summary>
+        /// Gets a collection of ResGrpParentResources in the ResourceGroupResource.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtListMethodsResourceGroupMockingExtension.GetResGrpParents()"/> instead.</description>
+        /// </item>
+        /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of ResGrpParentResources and their operations over a ResGrpParentResource. </returns>
         public static ResGrpParentCollection GetResGrpParents(this ResourceGroupResource resourceGroupResource)
@@ -894,6 +1026,10 @@ namespace MgmtListMethods
         /// <description>ResGrpParents_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtListMethodsResourceGroupMockingExtension.GetResGrpParentAsync(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="resGrpParentName"> Name. </param>
@@ -918,6 +1054,10 @@ namespace MgmtListMethods
         /// <description>ResGrpParents_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtListMethodsResourceGroupMockingExtension.GetResGrpParent(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="resGrpParentName"> Name. </param>
@@ -930,7 +1070,13 @@ namespace MgmtListMethods
             return GetMgmtListMethodsResourceGroupMockingExtension(resourceGroupResource).GetResGrpParent(resGrpParentName, cancellationToken);
         }
 
-        /// <summary> Gets a collection of FakeResources in the SubscriptionResource. </summary>
+        /// <summary>
+        /// Gets a collection of FakeResources in the SubscriptionResource.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtListMethodsSubscriptionMockingExtension.GetFakes()"/> instead.</description>
+        /// </item>
+        /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of FakeResources and their operations over a FakeResource. </returns>
         public static FakeCollection GetFakes(this SubscriptionResource subscriptionResource)
@@ -950,6 +1096,10 @@ namespace MgmtListMethods
         /// <description>Fakes_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtListMethodsSubscriptionMockingExtension.GetFakeAsync(string,string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="fakeName"> The name of the fake. </param>
@@ -975,6 +1125,10 @@ namespace MgmtListMethods
         /// <description>Fakes_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtListMethodsSubscriptionMockingExtension.GetFake(string,string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="fakeName"> The name of the fake. </param>
@@ -988,7 +1142,13 @@ namespace MgmtListMethods
             return GetMgmtListMethodsSubscriptionMockingExtension(subscriptionResource).GetFake(fakeName, expand, cancellationToken);
         }
 
-        /// <summary> Gets a collection of SubParentWithNonResChWithLocResources in the SubscriptionResource. </summary>
+        /// <summary>
+        /// Gets a collection of SubParentWithNonResChWithLocResources in the SubscriptionResource.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtListMethodsSubscriptionMockingExtension.GetSubParentWithNonResChWithLocs()"/> instead.</description>
+        /// </item>
+        /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of SubParentWithNonResChWithLocResources and their operations over a SubParentWithNonResChWithLocResource. </returns>
         public static SubParentWithNonResChWithLocCollection GetSubParentWithNonResChWithLocs(this SubscriptionResource subscriptionResource)
@@ -1008,6 +1168,10 @@ namespace MgmtListMethods
         /// <description>SubParentWithNonResChWithLocs_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtListMethodsSubscriptionMockingExtension.GetSubParentWithNonResChWithLocAsync(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="subParentWithNonResChWithLocName"> Name. </param>
@@ -1032,6 +1196,10 @@ namespace MgmtListMethods
         /// <description>SubParentWithNonResChWithLocs_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtListMethodsSubscriptionMockingExtension.GetSubParentWithNonResChWithLoc(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="subParentWithNonResChWithLocName"> Name. </param>
@@ -1044,7 +1212,13 @@ namespace MgmtListMethods
             return GetMgmtListMethodsSubscriptionMockingExtension(subscriptionResource).GetSubParentWithNonResChWithLoc(subParentWithNonResChWithLocName, cancellationToken);
         }
 
-        /// <summary> Gets a collection of SubParentWithNonResChResources in the SubscriptionResource. </summary>
+        /// <summary>
+        /// Gets a collection of SubParentWithNonResChResources in the SubscriptionResource.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtListMethodsSubscriptionMockingExtension.GetSubParentWithNonResChes()"/> instead.</description>
+        /// </item>
+        /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of SubParentWithNonResChResources and their operations over a SubParentWithNonResChResource. </returns>
         public static SubParentWithNonResChCollection GetSubParentWithNonResChes(this SubscriptionResource subscriptionResource)
@@ -1064,6 +1238,10 @@ namespace MgmtListMethods
         /// <description>SubParentWithNonResChes_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtListMethodsSubscriptionMockingExtension.GetSubParentWithNonResChAsync(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="subParentWithNonResChName"> Name. </param>
@@ -1088,6 +1266,10 @@ namespace MgmtListMethods
         /// <description>SubParentWithNonResChes_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtListMethodsSubscriptionMockingExtension.GetSubParentWithNonResCh(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="subParentWithNonResChName"> Name. </param>
@@ -1100,7 +1282,13 @@ namespace MgmtListMethods
             return GetMgmtListMethodsSubscriptionMockingExtension(subscriptionResource).GetSubParentWithNonResCh(subParentWithNonResChName, cancellationToken);
         }
 
-        /// <summary> Gets a collection of SubParentWithLocResources in the SubscriptionResource. </summary>
+        /// <summary>
+        /// Gets a collection of SubParentWithLocResources in the SubscriptionResource.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtListMethodsSubscriptionMockingExtension.GetSubParentWithLocs()"/> instead.</description>
+        /// </item>
+        /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of SubParentWithLocResources and their operations over a SubParentWithLocResource. </returns>
         public static SubParentWithLocCollection GetSubParentWithLocs(this SubscriptionResource subscriptionResource)
@@ -1120,6 +1308,10 @@ namespace MgmtListMethods
         /// <description>SubParentWithLocs_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtListMethodsSubscriptionMockingExtension.GetSubParentWithLocAsync(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="subParentWithLocName"> Name. </param>
@@ -1144,6 +1336,10 @@ namespace MgmtListMethods
         /// <description>SubParentWithLocs_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtListMethodsSubscriptionMockingExtension.GetSubParentWithLoc(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="subParentWithLocName"> Name. </param>
@@ -1156,7 +1352,13 @@ namespace MgmtListMethods
             return GetMgmtListMethodsSubscriptionMockingExtension(subscriptionResource).GetSubParentWithLoc(subParentWithLocName, cancellationToken);
         }
 
-        /// <summary> Gets a collection of SubParentResources in the SubscriptionResource. </summary>
+        /// <summary>
+        /// Gets a collection of SubParentResources in the SubscriptionResource.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtListMethodsSubscriptionMockingExtension.GetSubParents()"/> instead.</description>
+        /// </item>
+        /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of SubParentResources and their operations over a SubParentResource. </returns>
         public static SubParentCollection GetSubParents(this SubscriptionResource subscriptionResource)
@@ -1176,6 +1378,10 @@ namespace MgmtListMethods
         /// <description>SubParents_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtListMethodsSubscriptionMockingExtension.GetSubParentAsync(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="subParentName"> Name. </param>
@@ -1200,6 +1406,10 @@ namespace MgmtListMethods
         /// <description>SubParents_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtListMethodsSubscriptionMockingExtension.GetSubParent(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="subParentName"> Name. </param>
@@ -1842,7 +2052,13 @@ namespace MgmtListMethods
             return GetMgmtListMethodsSubscriptionMockingExtension(subscriptionResource).UpdateAllQuota(location, content, cancellationToken);
         }
 
-        /// <summary> Gets a collection of TenantTestResources in the TenantResource. </summary>
+        /// <summary>
+        /// Gets a collection of TenantTestResources in the TenantResource.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtListMethodsTenantMockingExtension.GetTenantTests()"/> instead.</description>
+        /// </item>
+        /// </summary>
         /// <param name="tenantResource"> The <see cref="TenantResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of TenantTestResources and their operations over a TenantTestResource. </returns>
         public static TenantTestCollection GetTenantTests(this TenantResource tenantResource)
@@ -1862,6 +2078,10 @@ namespace MgmtListMethods
         /// <description>TenantTests_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtListMethodsTenantMockingExtension.GetTenantTestAsync(string,string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="tenantResource"> The <see cref="TenantResource" /> instance the method will execute against. </param>
         /// <param name="tenantTestName"> The ID that uniquely identifies a billing account. </param>
@@ -1887,6 +2107,10 @@ namespace MgmtListMethods
         /// <description>TenantTests_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtListMethodsTenantMockingExtension.GetTenantTest(string,string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="tenantResource"> The <see cref="TenantResource" /> instance the method will execute against. </param>
         /// <param name="tenantTestName"> The ID that uniquely identifies a billing account. </param>

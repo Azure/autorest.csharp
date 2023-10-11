@@ -41,7 +41,13 @@ namespace MgmtSubscriptionNameParameter
             return GetMgmtSubscriptionNameParameterArmClientMockingExtension(client).GetSBSubscriptionResource(id);
         }
 
-        /// <summary> Gets a collection of SBSubscriptionResources in the ResourceGroupResource. </summary>
+        /// <summary>
+        /// Gets a collection of SBSubscriptionResources in the ResourceGroupResource.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtSubscriptionNameParameterResourceGroupMockingExtension.GetSBSubscriptions()"/> instead.</description>
+        /// </item>
+        /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of SBSubscriptionResources and their operations over a SBSubscriptionResource. </returns>
         public static SBSubscriptionCollection GetSBSubscriptions(this ResourceGroupResource resourceGroupResource)
@@ -61,6 +67,10 @@ namespace MgmtSubscriptionNameParameter
         /// <description>Subscriptions_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtSubscriptionNameParameterResourceGroupMockingExtension.GetSBSubscriptionAsync(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="subscriptionName"> The subscription name. </param>
@@ -85,6 +95,10 @@ namespace MgmtSubscriptionNameParameter
         /// <description>Subscriptions_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtSubscriptionNameParameterResourceGroupMockingExtension.GetSBSubscription(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="subscriptionName"> The subscription name. </param>

@@ -78,7 +78,13 @@ namespace MgmtOperations
             return GetMgmtOperationsArmClientMockingExtension(client).GetUnpatchableResource(id);
         }
 
-        /// <summary> Gets a collection of AvailabilitySetResources in the ResourceGroupResource. </summary>
+        /// <summary>
+        /// Gets a collection of AvailabilitySetResources in the ResourceGroupResource.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtOperationsResourceGroupMockingExtension.GetAvailabilitySets()"/> instead.</description>
+        /// </item>
+        /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of AvailabilitySetResources and their operations over a AvailabilitySetResource. </returns>
         public static AvailabilitySetCollection GetAvailabilitySets(this ResourceGroupResource resourceGroupResource)
@@ -98,6 +104,10 @@ namespace MgmtOperations
         /// <description>AvailabilitySets_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtOperationsResourceGroupMockingExtension.GetAvailabilitySetAsync(string,string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="availabilitySetName"> The name of the availability set. </param>
@@ -123,6 +133,10 @@ namespace MgmtOperations
         /// <description>AvailabilitySets_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtOperationsResourceGroupMockingExtension.GetAvailabilitySet(string,string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="availabilitySetName"> The name of the availability set. </param>
@@ -136,7 +150,13 @@ namespace MgmtOperations
             return GetMgmtOperationsResourceGroupMockingExtension(resourceGroupResource).GetAvailabilitySet(availabilitySetName, expand, cancellationToken);
         }
 
-        /// <summary> Gets a collection of UnpatchableResources in the ResourceGroupResource. </summary>
+        /// <summary>
+        /// Gets a collection of UnpatchableResources in the ResourceGroupResource.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtOperationsResourceGroupMockingExtension.GetUnpatchableResources()"/> instead.</description>
+        /// </item>
+        /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of UnpatchableResources and their operations over a UnpatchableResource. </returns>
         public static UnpatchableResourceCollection GetUnpatchableResources(this ResourceGroupResource resourceGroupResource)
@@ -156,6 +176,10 @@ namespace MgmtOperations
         /// <description>UnpatchableResources_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtOperationsResourceGroupMockingExtension.GetUnpatchableResourceAsync(string,string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="name"> The name of the UnpatchableResource. </param>
@@ -181,6 +205,10 @@ namespace MgmtOperations
         /// <description>UnpatchableResources_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtOperationsResourceGroupMockingExtension.GetUnpatchableResource(string,string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="name"> The name of the UnpatchableResource. </param>

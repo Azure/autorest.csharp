@@ -42,7 +42,13 @@ namespace MgmtOmitOperationGroups
             return GetMgmtOmitOperationGroupsArmClientMockingExtension(client).GetModel2Resource(id);
         }
 
-        /// <summary> Gets a collection of Model2Resources in the ResourceGroupResource. </summary>
+        /// <summary>
+        /// Gets a collection of Model2Resources in the ResourceGroupResource.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtOmitOperationGroupsResourceGroupMockingExtension.GetModel2s()"/> instead.</description>
+        /// </item>
+        /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of Model2Resources and their operations over a Model2Resource. </returns>
         public static Model2Collection GetModel2s(this ResourceGroupResource resourceGroupResource)
@@ -61,6 +67,10 @@ namespace MgmtOmitOperationGroups
         /// <description>Model2s_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtOmitOperationGroupsResourceGroupMockingExtension.GetModel2Async(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="model2SName"> The String to use. </param>
@@ -84,6 +94,10 @@ namespace MgmtOmitOperationGroups
         /// <description>Model2s_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtOmitOperationGroupsResourceGroupMockingExtension.GetModel2(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="model2SName"> The String to use. </param>
