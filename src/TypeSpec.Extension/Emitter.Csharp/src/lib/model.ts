@@ -840,9 +840,9 @@ export function getUsages(
             effectiveType = getEffectiveSchemaType(context, type) as Model;
             typeName = getModelName(context, effectiveType);
         }
-        const affectTypes: string[] = [];
+        const affectTypes: Set<string> = new Set<string>();
         if (typeName !== "") {
-            affectTypes.push(typeName);
+            affectTypes.add(typeName);
             if (effectiveType.kind === "Model") {
                 if (effectiveType.templateMapper?.args) {
                     for (const arg of effectiveType.templateMapper.args) {
@@ -851,13 +851,20 @@ export function getUsages(
                             "name" in arg &&
                             arg.name !== ""
                         ) {
-                            affectTypes.push(getModelName(context, arg));
+                            getAllEffectedModels(
+                                arg,
+                                new Set<string>()
+                            ).forEach((element) => {
+                                affectTypes.add(element);
+                            });
                         }
                     }
                 }
                 /*propagate to sub models and composite models*/
-                affectTypes.push(
-                    ...getAllEffectedModels(effectiveType, new Set<string>())
+                getAllEffectedModels(effectiveType, new Set<string>()).forEach(
+                    (element) => {
+                        affectTypes.add(element);
+                    }
                 );
             }
         }
@@ -877,10 +884,10 @@ export function getUsages(
         const resourceOperation = getResourceOperation(program, op.operation);
         if (!op.parameters.body?.parameter && op.parameters.body?.type) {
             var effectiveBodyType = undefined;
-            var affectedTypes: string[] = [];
+            const affectTypes: Set<string> = new Set<string>();
             if (resourceOperation) {
                 effectiveBodyType = resourceOperation.resourceType;
-                affectedTypes.push(effectiveBodyType.name);
+                affectTypes.add(effectiveBodyType.name);
             } else {
                 effectiveBodyType = getEffectiveSchemaType(
                     context,
@@ -893,26 +900,23 @@ export function getUsages(
                             op.operation.name
                         )}Request`;
                     }
-                    affectedTypes.push(
-                        getModelName(context, effectiveBodyType)
-                    );
                 }
             }
             if (effectiveBodyType.kind === "Model") {
                 /*propagate to sub models and composite models*/
-                affectedTypes.push(
-                    ...getAllEffectedModels(
-                        effectiveBodyType,
-                        new Set<string>()
-                    )
-                );
+                getAllEffectedModels(
+                    effectiveBodyType,
+                    new Set<string>()
+                ).forEach((element) => {
+                    affectTypes.add(element);
+                });
             }
-            for (const name of affectedTypes) {
+            for (const name of affectTypes) {
                 appendUsage(name, UsageFlags.Input);
             }
         }
         /* handle response type usage. */
-        var affectedReturnTypes: string[] = [];
+        const affectedReturnTypes: Set<string> = new Set<string>();
         for (const res of op.responses) {
             const resBody = res.responses[0]?.body;
             if (resBody?.type) {
@@ -935,15 +939,15 @@ export function getUsages(
                     }
                     /*propagate to sub models and composite models*/
                     if (effectiveReturnType.kind === "Model") {
-                        affectedReturnTypes.push(
-                            ...getAllEffectedModels(
-                                effectiveReturnType,
-                                new Set<string>()
-                            )
-                        );
+                        getAllEffectedModels(
+                            effectiveReturnType,
+                            new Set<string>()
+                        ).forEach((element) => {
+                            affectedReturnTypes.add(element);
+                        });
                     }
                 }
-                affectedReturnTypes.push(returnType);
+                affectedReturnTypes.add(returnType);
                 for (const name of affectedReturnTypes) {
                     appendUsage(name, UsageFlags.Output);
                 }
