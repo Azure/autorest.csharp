@@ -66,7 +66,8 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
                 methodsToKeepClientDefaultValue: Array.Empty<string>(),
                 mgmtConfiguration: null,
                 mgmtTestConfiguration: null,
-                branded: true);
+                branded: true,
+                generateTestProject: true);
         }
 
 
