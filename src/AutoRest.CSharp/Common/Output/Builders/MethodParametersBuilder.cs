@@ -391,7 +391,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             {
                 _arguments[protocolMethodParameter] = convenienceMethodParameter;
             }
-            else if (inputParameter.Location == RequestLocation.Body && protocolMethodParameter.Type.EqualsIgnoreNullable(typeof(RequestContent)) && convenienceMethodParameter.Type is {Implementation: ModelTypeProvider { HasToRequestContentMethod: false }})
+            else if (inputParameter.Location == RequestLocation.Body && protocolMethodParameter.Type.EqualsIgnoreNullable(typeof(RequestContent)) && convenienceMethodParameter.Type is {IsFrameworkType: false, Implementation: ModelTypeProvider { HasToRequestContentMethod: false }})
             {
                 CreateConversionToRequestContent(inputParameter, convenienceMethodParameter, new Dictionary<InputParameter, Parameter>(), true, out var content, out var conversions);
                 _arguments[protocolMethodParameter] = content;
