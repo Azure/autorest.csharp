@@ -210,7 +210,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                         if (count != 1)
                         {
                             //even if it has multiple uses for a model type we should normalize the param name just not change the type
-                            BodyParameterNormalizer.UpdateParameterNameOnly(bodyParam, ResourceDataSchemaNameToOperationSets);
+                            BodyParameterNormalizer.UpdateParameterNameOnly(bodyParam, ResourceDataSchemaNameToOperationSets, operation);
                             continue;
                         }
                         if (resourceDataSchema is not null)
@@ -222,11 +222,11 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                                 throw new InvalidOperationException($"Found expandable path in UpdatePatchParameterNames for {operationGroup.Key}.{operation.CSharpName()} : {requestPath}");
                             var name = GetResourceName(resourceDataSchema.Name, operationSet, requestPath);
                             updatedModels.Add(bodyParam.Schema);
-                            BodyParameterNormalizer.Update(httpRequest.Method, operation.CSharpName(), bodyParam, name);
+                            BodyParameterNormalizer.Update(httpRequest.Method, operation.CSharpName(), bodyParam, name, operation);
                         }
                         else
                         {
-                            BodyParameterNormalizer.UpdateUsingReplacement(bodyParam, ResourceDataSchemaNameToOperationSets);
+                            BodyParameterNormalizer.UpdateUsingReplacement(bodyParam, ResourceDataSchemaNameToOperationSets, operation);
                         }
                     }
                 }
@@ -247,7 +247,14 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                             if (param.Schema is not ObjectSchema objectSchema)
                                 continue;
 
+                            string oriName = param.Language.Default.Name;
                             param.Language.Default.Name = NormalizeParamNames.GetNewName(param.Language.Default.Name, objectSchema.Name, ResourceDataSchemaNameToOperationSets);
+
+                            string fullSerializedName = operation.GetFullSerializedName(param);
+                            MgmtReport.Instance.TransformSection.AddTransformLogForApplyChange(
+                                new TransformItem(BodyParameterNormalizer.UpdateBodyParameterTransformType, fullSerializedName),
+                                fullSerializedName, "SetBodyParameterNameOnThirdPass", oriName, param.Language.Default.Name);
+
                         }
                     }
                 }
@@ -319,7 +326,12 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             // third, update the entries in cache maps with the new model instances
             foreach (var replacedType in replacedTypes)
             {
+                var oriModel = _schemaOrNameToModels[replacedType.ObjectSchema];
                 _schemaOrNameToModels[replacedType.ObjectSchema] = replacedType;
+                MgmtReport.Instance.TransformSection.AddTransformLogForApplyChange(
+                    new TransformItem("type-replacement-when-initializing-model", replacedType.ObjectSchema.GetFullSerializedName()),
+                    replacedType.ObjectSchema.GetFullSerializedName(),
+                    "ReplaceType", oriModel.Declaration.FullName, replacedType.Declaration.FullName);
             }
 
             return _schemaOrNameToModels;

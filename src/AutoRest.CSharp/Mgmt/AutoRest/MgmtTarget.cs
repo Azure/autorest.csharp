@@ -26,8 +26,19 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         private static IDictionary<GeneratedCodeWorkspace, ISet<string>> _addedProjectFilenames = new Dictionary<GeneratedCodeWorkspace, ISet<string>>();
         private static IDictionary<GeneratedCodeWorkspace, IList<string>> _overriddenProjectFilenames = new Dictionary<GeneratedCodeWorkspace, IList<string>>();
 
+        private static bool _reportOnlyModeWarningLogged = false;
         private static void AddGeneratedFile(GeneratedCodeWorkspace project, string filename, string text)
         {
+            if (Configuration.MgmtConfiguration.MgmtDebug.ReportOnly)
+            {
+                if (!_reportOnlyModeWarningLogged)
+                {
+                    AutoRestLogger.Warning("codegen-report-only is set to true. Skip adding source code file to output.").Wait();
+                    _reportOnlyModeWarningLogged = true;
+                }
+                return;
+            }
+
             if (!_addedProjectFilenames.TryGetValue(project, out var addedFileNames))
             {
                 addedFileNames = new HashSet<string>();
@@ -73,17 +84,17 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
                 if (model is MgmtObjectType mot)
                 {
-                    ObjectModelItem mi = new ObjectModelItem(mot.Declaration.Namespace, mot.Declaration.Name, mot.ObjectSchema.GetFullSerializedName());
+                    ObjectModelItem mi = new ObjectModelItem(mot.Declaration.Namespace, mot.Declaration.Name, mot.ObjectSchema.GetFullSerializedName(), MgmtReport.Instance.TransformSection);
                     mi.Properties = mot.Properties.ToDictionary(p => p.Declaration.Name, p =>
                     {
                         if (p.SchemaProperty != null)
                         {
-                            return mot.GetFullSerializedName(p.SchemaProperty);
+                            return new PropertyItem(p.Declaration.Name, mot.GetFullSerializedName(p.SchemaProperty), MgmtReport.Instance.TransformSection);
                         }
                         else
                         {
                             AutoRestLogger.Warning($"Ignore Property '{mi.FullName}.{p.Declaration.Name}' without schema (i.e. AdditionalProperties)").Wait();
-                            return "<NoPropertySchemaFound>";
+                            return new PropertyItem(p.Declaration.Name, "<NoPropertySchemaFound>", MgmtReport.Instance.TransformSection);
                         }
                     });
                     MgmtReport.Instance.ObjectModelSection.Add(mi.FullName, mi);
@@ -98,7 +109,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                         _ => throw new InvalidOperationException("Unexpected Schema type for EnumType: " + schema.GetType())
                     };
 
-                    EnumModelItem mi = new EnumModelItem(et.Declaration.Namespace, et.Declaration.Name, schema.GetFullSerializedName());
+                    EnumModelItem mi = new EnumModelItem(et.Declaration.Namespace, et.Declaration.Name, schema.GetFullSerializedName(), MgmtReport.Instance.TransformSection);
                     mi.Values = et.Values.ToDictionary(v => v.Declaration.Name, v =>
                     {
                         var found = choices.FirstOrDefault(c => c.Value == v.Value.Value?.ToString());
@@ -106,9 +117,9 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                         {
                             var allValues = string.Join(",", choices.Select(c => c.Value ?? "<null>"));
                             AutoRestLogger.Warning($"Can't find matching enumvalue '{v.Value}' in '{allValues}'").Wait();
-                            return "<no matching enum value found>";
+                            return new EnumValueItem(v.Declaration.Name, "<no matching enum value found>", MgmtReport.Instance.TransformSection);
                         }
-                        return schema.GetFullSerializedName(found);
+                        return new EnumValueItem(v.Declaration.Name, schema.GetFullSerializedName(found), MgmtReport.Instance.TransformSection);
                     });
                     MgmtReport.Instance.EnumModelSection.Add(mi.FullName, mi);
                 }
@@ -143,17 +154,17 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
                 var name = model.Type.Name;
 
-                ObjectModelItem mi = new ObjectModelItem(model.Declaration.Namespace, model.Declaration.Name, model.ObjectSchema.GetFullSerializedName());
+                ObjectModelItem mi = new ObjectModelItem(model.Declaration.Namespace, model.Declaration.Name, model.ObjectSchema.GetFullSerializedName(), MgmtReport.Instance.TransformSection);
                 mi.Properties = model.Properties.ToDictionary(p => p.Declaration.Name, p =>
                 {
                     if (p.SchemaProperty != null)
                     {
-                        return model.GetFullSerializedName(p.SchemaProperty);
+                        return new PropertyItem(p.Declaration.Name, model.GetFullSerializedName(p.SchemaProperty), MgmtReport.Instance.TransformSection);
                     }
                     else
                     {
                         AutoRestLogger.Warning($"Ignore Resource Property '{mi.FullName}.{p.Declaration.Name}' without schema (i.e. AdditionalProperties)").Wait();
-                        return "<NoPropertySchemaFound>";
+                        return new PropertyItem(p.Declaration.Name, "<NoPropertySchemaFound>", MgmtReport.Instance.TransformSection);
                     }
                 });
                 MgmtReport.Instance.ObjectModelSection.Add(mi.FullName, mi);
@@ -166,13 +177,8 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 var writer = ResourceWriter.GetWriter(resource);
                 writer.Write();
 
-                // only care about Resource without parent, otherwise it should be tracked through it's parent
-                var parents = resource.GetParents().ToList();
-                if (parents.Count == 0 || parents.All(p => p is not Resource))
-                {
-                    var ri = new ResourceItem(resource);
-                    MgmtReport.Instance.ResourceSection.Add(ri.Name, ri);
-                }
+                var ri = new ResourceItem(resource, MgmtReport.Instance.TransformSection);
+                MgmtReport.Instance.ResourceSection.Add(ri.Name, ri);
 
                 AddGeneratedFile(project, $"{resource.Type.Name}.cs", writer.ToString());
             }

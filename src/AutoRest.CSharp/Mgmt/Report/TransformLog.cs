@@ -20,5 +20,10 @@ namespace AutoRest.CSharp.Mgmt.Report
         {
             return $"[{Index}][{TargetFullSerializedName}]: {LogMessage}";
         }
+
+        public TransformLog Clone()
+        {
+            return new TransformLog(Index, TargetFullSerializedName, LogMessage);
+        }
     }
 }

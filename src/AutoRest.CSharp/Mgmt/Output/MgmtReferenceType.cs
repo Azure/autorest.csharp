@@ -2,13 +2,12 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
+using AutoRest.CSharp.Mgmt.Report;
 using AutoRest.CSharp.Output.Models.Types;
 
 namespace AutoRest.CSharp.Mgmt.Output
@@ -34,7 +33,16 @@ namespace AutoRest.CSharp.Mgmt.Output
 
             if (objectTypeProperty.ValueType != null && objectTypeProperty.ValueType.IsFrameworkType)
             {
-                propertyTypeToUse = ReferenceTypePropertyChooser.GetExactMatchForReferenceType(objectTypeProperty, objectTypeProperty.ValueType.FrameworkType, MgmtContext.Context) ?? propertyTypeToUse;
+                var newProperty = ReferenceTypePropertyChooser.GetExactMatchForReferenceType(objectTypeProperty, objectTypeProperty.ValueType.FrameworkType, MgmtContext.Context);
+                if (newProperty != null)
+                {
+                    string fullSerializedName = this.GetFullSerializedName(objectTypeProperty);
+                    MgmtReport.Instance.TransformSection.AddTransformLogForApplyChange(
+                        new TransformItem(PROPERTY_TYPE_REPLACEMENT_TRANSFORM_TYPE, fullSerializedName),
+                       fullSerializedName,
+                        "ReplacePropertyType", propertyTypeToUse.Declaration.Type.ToString(), newProperty.Declaration.Type.ToString());
+                    propertyTypeToUse = newProperty;
+                }
             }
 
             return propertyTypeToUse;

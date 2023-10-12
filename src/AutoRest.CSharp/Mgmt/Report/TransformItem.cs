@@ -36,12 +36,7 @@ namespace AutoRest.CSharp.Mgmt.Report
 
         public override string ToString()
         {
-            var str = $"[{TransformType}] {Key}";
-            if (this.Arguments.Length > 0)
-                str += $":{this.ArgumentsAsString}";
-            if (!this.IsFromConfig)
-                str += "!";
-            return str;
+            return $"<{TransformType}> {Key}{(this.Arguments.Length > 0 ? $":{this.ArgumentsAsString}" : "")}{(this.IsFromConfig ? "" : "!")}";
         }
 
         public override bool Equals(object? obj)

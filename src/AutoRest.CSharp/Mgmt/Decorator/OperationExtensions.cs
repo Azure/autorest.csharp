@@ -59,7 +59,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 MgmtReport.Instance.TransformSection.AddTransformLog(
                     new TransformItem(MgmtConfiguration.ConfigName.OverrideOperationName, operation.OperationId!, name),
                     operation.GetFullSerializedName(),
-                    $"OverrideOperationName to '{name}' for '{operation.OperationId}'");
+                    $"OverrideOperationName from '{operation.Language.Default.Name}' to '{name}' for '{operation.OperationId}'");
                 return true;
             }
             return false;
@@ -235,7 +235,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
         internal static string GetFullSerializedName(this Operation operation)
         {
-            return operation.Language.Default.SerializedName ?? operation.Language.Default.Name;
+            return operation.OperationId ?? operation.Language.Default.SerializedName ?? operation.Language.Default.Name;
         }
 
         internal static string GetFullSerializedName(this Operation operation, RequestParameter parameter)

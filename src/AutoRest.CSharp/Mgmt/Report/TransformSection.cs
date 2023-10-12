@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
 using AutoRest.CSharp.Common.Utilities;
 
 namespace AutoRest.CSharp.Mgmt.Report
@@ -17,6 +16,21 @@ namespace AutoRest.CSharp.Mgmt.Report
         public TransformSection(string name)
             : base(name)
         {
+        }
+
+        public IEnumerable<(TransformItem Transfom, TransformLog Log)> GetAppliedTransformLogs(string targetSerializedName, List<string>? transformTypes = null)
+        {
+            foreach (var (transform, logs) in _transformItemDict)
+            {
+                if (transformTypes == null || transformTypes.Contains(transform.TransformType))
+                {
+                    foreach (var log in logs)
+                    {
+                        if (log.TargetFullSerializedName == targetSerializedName)
+                            yield return (transform, log);
+                    }
+                }
+            }
         }
 
         public override Dictionary<string, object?> GenerateSection()

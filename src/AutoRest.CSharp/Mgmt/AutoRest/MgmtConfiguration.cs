@@ -25,15 +25,20 @@ namespace AutoRest.CSharp.Input
 
             public bool SkipCodeGen { get; }
 
+            public bool ReportOnly { get; }
+
             public MgmtDebugConfiguration(
                 JsonElement? suppressListException = default,
                 JsonElement? showSerializedNames = default,
-                JsonElement? skipCodeGen = default
+                JsonElement? skipCodeGen = default,
+                JsonElement? reportOnly = default,
+                JsonElement? reportChildResourceAsRoot = default
             )
             {
                 SuppressListException = Configuration.DeserializeBoolean(suppressListException, false);
                 ShowSerializedNames = Configuration.DeserializeBoolean(showSerializedNames, false);
                 SkipCodeGen = Configuration.DeserializeBoolean(skipCodeGen, false);
+                ReportOnly = Configuration.DeserializeBoolean(reportOnly, false);
             }
 
             internal static MgmtDebugConfiguration LoadConfiguration(JsonElement root)
@@ -44,11 +49,13 @@ namespace AutoRest.CSharp.Input
                 root.TryGetProperty(nameof(SuppressListException), out var suppressListException);
                 root.TryGetProperty(nameof(ShowSerializedNames), out var showSerializedNames);
                 root.TryGetProperty(nameof(SkipCodeGen), out var skipCodeGen);
+                root.TryGetProperty(nameof(ReportOnly), out var reportOnly);
 
                 return new MgmtDebugConfiguration(
                     suppressListException: suppressListException,
                     showSerializedNames: showSerializedNames,
-                    skipCodeGen: skipCodeGen
+                    skipCodeGen: skipCodeGen,
+                    reportOnly: reportOnly
                 );
             }
 
@@ -57,7 +64,8 @@ namespace AutoRest.CSharp.Input
                 return new MgmtDebugConfiguration(
                     suppressListException: autoRest.GetValue<JsonElement?>(string.Format(MgmtDebugOptionsFormat, "suppress-list-exception")).GetAwaiter().GetResult(),
                     showSerializedNames: autoRest.GetValue<JsonElement?>(string.Format(MgmtDebugOptionsFormat, "show-serialized-names")).GetAwaiter().GetResult(),
-                    skipCodeGen: autoRest.GetValue<JsonElement?>(string.Format(MgmtDebugOptionsFormat, "skip-codegen")).GetAwaiter().GetResult()
+                    skipCodeGen: autoRest.GetValue<JsonElement?>(string.Format(MgmtDebugOptionsFormat, "skip-codegen")).GetAwaiter().GetResult(),
+                    reportOnly: autoRest.GetValue<JsonElement?>(string.Format(MgmtDebugOptionsFormat, "report-only")).GetAwaiter().GetResult()
                 );
             }
 

@@ -6,18 +6,17 @@ using YamlDotNet.Serialization;
 
 namespace AutoRest.CSharp.Mgmt.Report
 {
-    internal class EnumModelItem
+    internal class EnumModelItem : TransformableItem
     {
-        public EnumModelItem(string @namespace, string name, string serializedName)
+        public EnumModelItem(string @namespace, string name, string serializedName, TransformSection transformSection)
+            :base(serializedName, transformSection)
         {
             FullName = string.IsNullOrEmpty(@namespace) ? name : $"{@namespace}.{name}";
-            SerializedName = serializedName;
         }
 
         [YamlIgnore]
         public string FullName { get; set; }
-        public string SerializedName { get; set; }
 
-        public Dictionary<string, string> Values { get; set; } = new Dictionary<string, string>();
+        public Dictionary<string, EnumValueItem> Values { get; set; } = new Dictionary<string, EnumValueItem>();
     }
 }
