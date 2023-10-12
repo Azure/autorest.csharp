@@ -49,6 +49,17 @@ namespace AutoRest.CSharp.Output.Models
         private bool? _isResourceClient;
         public bool IsResourceClient => _isResourceClient ??= Parameters.Any(p => p.IsResourceIdentifier);
 
+        private LowLevelClient? _topLevelClient;
+        public LowLevelClient TopLevelClient => _topLevelClient ??= GetTopLevelClient(this);
+
+        private LowLevelClient GetTopLevelClient(LowLevelClient client)
+        {
+            if (client.ParentClient is null)
+                return client;
+
+            return GetTopLevelClient(client.ParentClient);
+        }
+
         public LowLevelClient(string name, string ns, string description, string libraryName, LowLevelClient? parentClient, IEnumerable<InputOperation> operations, IEnumerable<InputParameter> clientParameters, InputAuth authorization, SourceInputModel? sourceInputModel, ClientOptionsTypeProvider clientOptions, IReadOnlyDictionary<string, InputClientExample> examples, TypeFactory typeFactory)
             : base(ns, sourceInputModel)
         {

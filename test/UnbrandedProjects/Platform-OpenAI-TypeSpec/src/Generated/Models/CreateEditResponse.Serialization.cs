@@ -19,7 +19,7 @@ namespace OpenAI.Models
             }
             CreateEditResponseObject @object = default;
             DateTimeOffset created = default;
-            IReadOnlyList<CreateEditChoice> choices = default;
+            IReadOnlyList<CreateEditResponseChoice> choices = default;
             CompletionUsage usage = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -35,10 +35,10 @@ namespace OpenAI.Models
                 }
                 if (property.NameEquals("choices"u8))
                 {
-                    List<CreateEditChoice> array = new List<CreateEditChoice>();
+                    List<CreateEditResponseChoice> array = new List<CreateEditResponseChoice>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(CreateEditChoice.DeserializeCreateEditChoice(item));
+                        array.Add(CreateEditResponseChoice.DeserializeCreateEditResponseChoice(item));
                     }
                     choices = array;
                     continue;

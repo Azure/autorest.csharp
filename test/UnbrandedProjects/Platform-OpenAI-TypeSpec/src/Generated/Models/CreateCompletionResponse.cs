@@ -22,7 +22,7 @@ namespace OpenAI.Models
         /// <param name="model"> The model used for the completion. </param>
         /// <param name="choices"> The list of completion choices the model generated for the input. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/>, <paramref name="object"/>, <paramref name="model"/> or <paramref name="choices"/> is null. </exception>
-        internal CreateCompletionResponse(string id, string @object, DateTimeOffset created, string model, IEnumerable<CreateCompletionChoice> choices)
+        internal CreateCompletionResponse(string id, string @object, DateTimeOffset created, string model, IEnumerable<CreateCompletionResponseChoice> choices)
         {
             ClientUtilities.AssertNotNull(id, nameof(id));
             ClientUtilities.AssertNotNull(@object, nameof(@object));
@@ -43,7 +43,7 @@ namespace OpenAI.Models
         /// <param name="model"> The model used for the completion. </param>
         /// <param name="choices"> The list of completion choices the model generated for the input. </param>
         /// <param name="usage"></param>
-        internal CreateCompletionResponse(string id, string @object, DateTimeOffset created, string model, IReadOnlyList<CreateCompletionChoice> choices, CompletionUsage usage)
+        internal CreateCompletionResponse(string id, string @object, DateTimeOffset created, string model, IReadOnlyList<CreateCompletionResponseChoice> choices, CompletionUsage usage)
         {
             Id = id;
             Object = @object;
@@ -62,7 +62,7 @@ namespace OpenAI.Models
         /// <summary> The model used for the completion. </summary>
         public string Model { get; }
         /// <summary> The list of completion choices the model generated for the input. </summary>
-        public IReadOnlyList<CreateCompletionChoice> Choices { get; }
+        public IReadOnlyList<CreateCompletionResponseChoice> Choices { get; }
         /// <summary> Gets the usage. </summary>
         public CompletionUsage Usage { get; }
     }
