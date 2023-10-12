@@ -9,16 +9,22 @@ parameters:
   type: string
 - name: OutputDirectory
   type: string
+- name: OutputDirectory
+  type: string
+- name: UseInternalFeed
+  type: boolean
 
 steps:
 - pwsh: |
-    $feedUrl = "https://pkgs.dev.azure.com/azure-sdk/public/_packaging/azure-sdk-for-js-test-autorest@local/npm/registry"
+    $useInternalFeed = '${{ parameters.UseInternalFeed }}' -eq 'true'
+    $overridesPath = '${{ parameters.OutputDirectory }}/overrides.json'
 
-    $overridesPath = "${{ parameters.OutputDirectory }}/overrides.json"
+    $overrides = @{}
 
-    $overrides = @{
-      "@autorest/csharp" = "$feedUrl/@autorest/csharp/-/csharp-${{ parameters.AutorestCSharpVersion }}.tgz"
-      "@azure-tools/typespec-csharp" = "$feedUrl/@azure-tools/typespec-csharp/-/typespec-csharp-${{ parameters.TypeSpecEmitterVersion }}.tgz"
+    if($useInternalFeed) {
+      $feedUrl = "https://pkgs.dev.azure.com/azure-sdk/public/_packaging/azure-sdk-for-js-test-autorest@local/npm/registry"
+      $overrides["@autorest/csharp"] = "$feedUrl/@autorest/csharp/-/csharp-${{ parameters.AutorestCSharpVersion }}.tgz"
+      $overrides["@azure-tools/typespec-csharp"] = "$feedUrl/@azure-tools/typespec-csharp/-/typespec-csharp-${{ parameters.TypeSpecEmitterVersion }}.tgz"
     }
 
     $overrides | ConvertTo-Json | Set-Content $overridesPath
