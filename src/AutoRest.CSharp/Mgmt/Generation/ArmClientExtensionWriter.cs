@@ -14,7 +14,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 {
     internal sealed class ArmClientExtensionWriter : MgmtExtensionWriter
     {
-        private MgmtExtension This { get; }
+        private ArmClientExtension This { get; }
 
         public ArmClientExtensionWriter(ArmClientExtension extension) : this(new CodeWriter(), extension)
         {
@@ -29,10 +29,10 @@ namespace AutoRest.CSharp.Mgmt.Generation
         {
             base.WriteImplementations();
 
-            foreach (var resource in MgmtContext.Library.ArmResources)
+            foreach (var method in This.ArmResourceMethods)
             {
-                WriteGetResourceFromIdMethod(resource);
-                _writer.Line();
+                _writer.WriteMethodDocumentation(method.Signature);
+                _writer.WriteMethod(method);
             }
         }
 

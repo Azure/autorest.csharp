@@ -17,9 +17,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
     internal sealed class ArmClientMockingExtensionWriter : MgmtExtensionClientWriter
     {
         private readonly Parameter _scopeParameter;
-        private MgmtMockingExtension This { get; }
+        private ArmClientMockingExtension This { get; }
 
-        public ArmClientMockingExtensionWriter(MgmtMockingExtension extensionClient) : base(extensionClient)
+        public ArmClientMockingExtensionWriter(ArmClientMockingExtension extensionClient) : base(extensionClient)
         {
             This = extensionClient;
             _scopeParameter = new Parameter(
@@ -55,10 +55,10 @@ namespace AutoRest.CSharp.Mgmt.Generation
         {
             base.WriteImplementations();
 
-            foreach (var resource in MgmtContext.Library.ArmResources)
+            foreach (var method in This.ArmResourceMethods)
             {
-                WriteGetResourceFromIdMethod(resource);
-                _writer.Line();
+                _writer.WriteMethodDocumentation(method.Signature);
+                _writer.WriteMethod(method);
             }
         }
 

@@ -37,6 +37,10 @@ namespace MgmtResourceName
         /// <summary>
         /// Gets an object representing a <see cref="MachineResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="MachineResource.CreateResourceIdentifier" /> to create a <see cref="MachineResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtResourceNameArmClientMockingExtension.GetMachineResource(ResourceIdentifier)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
@@ -49,6 +53,10 @@ namespace MgmtResourceName
         /// <summary>
         /// Gets an object representing a <see cref="Disk" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="Disk.CreateResourceIdentifier" /> to create a <see cref="Disk" /> <see cref="ResourceIdentifier" /> from its components.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtResourceNameArmClientMockingExtension.GetDisk(ResourceIdentifier)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
@@ -61,6 +69,10 @@ namespace MgmtResourceName
         /// <summary>
         /// Gets an object representing a <see cref="Memory" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="Memory.CreateResourceIdentifier" /> to create a <see cref="Memory" /> <see cref="ResourceIdentifier" /> from its components.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtResourceNameArmClientMockingExtension.GetMemory(ResourceIdentifier)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
@@ -73,6 +85,10 @@ namespace MgmtResourceName
         /// <summary>
         /// Gets an object representing a <see cref="NetworkResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="NetworkResource.CreateResourceIdentifier" /> to create a <see cref="NetworkResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtResourceNameArmClientMockingExtension.GetNetworkResource(ResourceIdentifier)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
@@ -85,6 +101,10 @@ namespace MgmtResourceName
         /// <summary>
         /// Gets an object representing a <see cref="DisplayResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="DisplayResource.CreateResourceIdentifier" /> to create a <see cref="DisplayResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtResourceNameArmClientMockingExtension.GetDisplayResource(ResourceIdentifier)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
@@ -97,6 +117,10 @@ namespace MgmtResourceName
         /// <summary>
         /// Gets an object representing a <see cref="ProviderOperationResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="ProviderOperationResource.CreateResourceIdentifier" /> to create a <see cref="ProviderOperationResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtResourceNameArmClientMockingExtension.GetProviderOperationResource(ResourceIdentifier)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>

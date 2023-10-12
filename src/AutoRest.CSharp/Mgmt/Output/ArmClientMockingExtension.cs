@@ -16,7 +16,6 @@ using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
 using Azure.Core;
-using Humanizer.Localisation;
 
 namespace AutoRest.CSharp.Mgmt.Output
 {
@@ -50,7 +49,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             {
                 BuildScopeResourceTypeValidations(scopeTypes),
                 Snippets.Return(
-                    Snippets.New.Instance(resource.Type, ClientProperty, resource.SingletonResourceIdSuffix!.BuildResourceIdentifier(_scopeParameter)))
+                    Snippets.New.Instance(resource.Type, ArmClientProperty, resource.SingletonResourceIdSuffix!.BuildResourceIdentifier(_scopeParameter)))
             };
 
             return new(signature, methodBody);
@@ -72,7 +71,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             var scopeTypes = collection.RequestPath.GetParameterizedScopeResourceTypes();
             var ctorArguments = new List<ValueExpression>
             {
-                ClientProperty,
+                ArmClientProperty,
                 _scopeParameter
             };
             ctorArguments.AddRange(originalSignature.Parameters.Select(p => (ValueExpression)p));
@@ -120,12 +119,61 @@ namespace AutoRest.CSharp.Mgmt.Output
             };
         }
 
+        private IEnumerable<Method>? _armResourceMethods;
+        public IEnumerable<Method> ArmResourceMethods => _armResourceMethods ??= BuildArmResourceMethods();
+
+        private IEnumerable<Method> BuildArmResourceMethods()
+        {
+            foreach (var resource in MgmtContext.Library.ArmResources)
+            {
+                yield return BuildArmResourceMethod(resource);
+            }
+        }
+
+        private Method BuildArmResourceMethod(Resource resource)
+        {
+            var lines = new List<FormattableString>();
+            string an = resource.Type.Name.StartsWithVowel() ? "an" : "a";
+            lines.Add($"Gets an object representing {an} <see cref=\"{resource.Type}\" /> along with the instance operations that can be performed on it but with no data.");
+            lines.Add($"You can use <see cref=\"{resource.Type}.CreateResourceIdentifier\" /> to create {an} <see cref=\"{resource.Type}\" /> <see cref=\"{typeof(ResourceIdentifier)}\" /> from its components.");
+            var description = FormattableStringHelpers.Join(lines, Environment.NewLine);
+
+            var parameters = new List<Parameter>
+            {
+                _resourceIdParameter
+            };
+
+            var signature = new MethodSignature(
+                $"Get{resource.Type.Name}",
+                null,
+                description,
+                MethodModifiers,
+                resource.Type,
+                $"Returns a <see cref=\"{resource.Type.Name}\" /> object.",
+                parameters);
+
+            var methodBody = new MethodBodyStatement[]{
+                    new InvokeStaticMethodStatement(resource.Type, "ValidateResourceId", _resourceIdParameter),
+                    Snippets.Return(Snippets.New.Instance(resource.Type, ArmClientProperty, _resourceIdParameter))
+                };
+
+            return new(signature, methodBody);
+        }
+
+        private readonly Parameter _resourceIdParameter = new(
+            Name: "id",
+            Description: $"The resource ID of the resource to get.",
+            Type: typeof(ResourceIdentifier),
+            DefaultValue: null,
+            Validation: ValidationType.None,
+            Initializer: null);
+
         private readonly Parameter _scopeParameter = new Parameter(
-                Name: "scope",
-                Description: $"The scope that the resource will apply against.",
-                Type: typeof(ResourceIdentifier),
-                DefaultValue: null,
-                Validation: ValidationType.None,
-                Initializer: null);
+            Name: "scope",
+            Description: $"The scope that the resource will apply against.",
+            Type: typeof(ResourceIdentifier),
+            DefaultValue: null,
+            Validation: ValidationType.None,
+            Initializer: null);
     }
 }

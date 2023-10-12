@@ -32,6 +32,10 @@ namespace MgmtPagination
         /// <summary>
         /// Gets an object representing a <see cref="PageSizeIntegerModelResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="PageSizeIntegerModelResource.CreateResourceIdentifier" /> to create a <see cref="PageSizeIntegerModelResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtPaginationArmClientMockingExtension.GetPageSizeIntegerModelResource(ResourceIdentifier)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
@@ -44,6 +48,10 @@ namespace MgmtPagination
         /// <summary>
         /// Gets an object representing a <see cref="PageSizeInt64ModelResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="PageSizeInt64ModelResource.CreateResourceIdentifier" /> to create a <see cref="PageSizeInt64ModelResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtPaginationArmClientMockingExtension.GetPageSizeInt64ModelResource(ResourceIdentifier)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
@@ -56,6 +64,10 @@ namespace MgmtPagination
         /// <summary>
         /// Gets an object representing a <see cref="PageSizeInt32ModelResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="PageSizeInt32ModelResource.CreateResourceIdentifier" /> to create a <see cref="PageSizeInt32ModelResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtPaginationArmClientMockingExtension.GetPageSizeInt32ModelResource(ResourceIdentifier)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
@@ -68,6 +80,10 @@ namespace MgmtPagination
         /// <summary>
         /// Gets an object representing a <see cref="PageSizeNumericModelResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="PageSizeNumericModelResource.CreateResourceIdentifier" /> to create a <see cref="PageSizeNumericModelResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtPaginationArmClientMockingExtension.GetPageSizeNumericModelResource(ResourceIdentifier)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
@@ -80,6 +96,10 @@ namespace MgmtPagination
         /// <summary>
         /// Gets an object representing a <see cref="PageSizeFloatModelResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="PageSizeFloatModelResource.CreateResourceIdentifier" /> to create a <see cref="PageSizeFloatModelResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtPaginationArmClientMockingExtension.GetPageSizeFloatModelResource(ResourceIdentifier)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
@@ -92,6 +112,10 @@ namespace MgmtPagination
         /// <summary>
         /// Gets an object representing a <see cref="PageSizeDoubleModelResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="PageSizeDoubleModelResource.CreateResourceIdentifier" /> to create a <see cref="PageSizeDoubleModelResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtPaginationArmClientMockingExtension.GetPageSizeDoubleModelResource(ResourceIdentifier)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
@@ -104,6 +128,10 @@ namespace MgmtPagination
         /// <summary>
         /// Gets an object representing a <see cref="PageSizeDecimalModelResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="PageSizeDecimalModelResource.CreateResourceIdentifier" /> to create a <see cref="PageSizeDecimalModelResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtPaginationArmClientMockingExtension.GetPageSizeDecimalModelResource(ResourceIdentifier)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
@@ -116,6 +144,10 @@ namespace MgmtPagination
         /// <summary>
         /// Gets an object representing a <see cref="PageSizeStringModelResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="PageSizeStringModelResource.CreateResourceIdentifier" /> to create a <see cref="PageSizeStringModelResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtPaginationArmClientMockingExtension.GetPageSizeStringModelResource(ResourceIdentifier)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>

@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Writers;
@@ -15,7 +16,6 @@ using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
 using Azure.Core;
 using Azure.ResourceManager;
-using Humanizer.Localisation;
 
 namespace AutoRest.CSharp.Mgmt.Output
 {
@@ -34,7 +34,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             }
         }
 
-        public override bool IsEmpty => !MgmtContext.Library.ArmResources.Any();
+        public override bool IsEmpty => !MgmtContext.Library.ArmResources.Any() && base.IsEmpty;
 
         protected override string VariableName => Configuration.MgmtConfiguration.IsArmCore ? "this" : "client";
 
@@ -161,5 +161,68 @@ namespace AutoRest.CSharp.Mgmt.Output
 
             return BuildRedirectCallToMockingExtension(signature, signatureOnMockingExtension);
         }
+
+        private IEnumerable<Method>? _armResourceMethods;
+        public IEnumerable<Method> ArmResourceMethods => _armResourceMethods ??= BuildArmResourceMethods();
+
+        private IEnumerable<Method> BuildArmResourceMethods()
+        {
+            foreach (var resource in MgmtContext.Library.ArmResources)
+            {
+                yield return BuildArmResourceMethod(resource);
+            }
+        }
+
+        private Method BuildArmResourceMethod(Resource resource)
+        {
+            var lines = new List<FormattableString>();
+            string an = resource.Type.Name.StartsWithVowel() ? "an" : "a";
+            lines.Add($"Gets an object representing {an} <see cref=\"{resource.Type}\" /> along with the instance operations that can be performed on it but with no data.");
+            lines.Add($"You can use <see cref=\"{resource.Type}.CreateResourceIdentifier\" /> to create {an} <see cref=\"{resource.Type}\" /> <see cref=\"{typeof(ResourceIdentifier)}\" /> from its components.");
+            var description = FormattableStringHelpers.Join(lines, Environment.NewLine);
+
+            var parameters = new List<Parameter>
+            {
+                _resourceIdParameter
+            };
+
+            var signatureOnMockingExtension = new MethodSignature(
+                $"Get{resource.Type.Name}",
+                null,
+                description,
+                MethodSignatureModifiers.Public | MethodSignatureModifiers.Virtual,
+                resource.Type,
+                $"Returns a <see cref=\"{resource.Type.Name}\" /> object.",
+                parameters);
+
+            if (IsArmCore)
+            {
+                var methodBody = new MethodBodyStatement[]{
+                    new InvokeStaticMethodStatement(resource.Type, "ValidateResourceId", _resourceIdParameter),
+                    Snippets.Return(Snippets.New.Instance(resource.Type, Snippets.This, _resourceIdParameter))
+                };
+
+                return new(signatureOnMockingExtension, methodBody);
+            }
+            else
+            {
+                var signature = signatureOnMockingExtension with
+                {
+                    Description = $"{description}{Environment.NewLine}{BuildMockingExtraDescription(signatureOnMockingExtension)}",
+                    Modifiers = MethodModifiers,
+                    Parameters = parameters.Prepend(ExtensionParameter).ToArray()
+                };
+
+                return BuildRedirectCallToMockingExtension(signature, signatureOnMockingExtension);
+            }
+        }
+
+        private readonly Parameter _resourceIdParameter = new(
+            Name: "id",
+            Description: $"The resource ID of the resource to get.",
+            Type: typeof(ResourceIdentifier),
+            DefaultValue: null,
+            Validation: ValidationType.None,
+            Initializer: null);
     }
 }

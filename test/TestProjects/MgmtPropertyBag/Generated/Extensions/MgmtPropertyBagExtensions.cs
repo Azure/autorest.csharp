@@ -38,6 +38,10 @@ namespace MgmtPropertyBag
         /// <summary>
         /// Gets an object representing a <see cref="FooResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="FooResource.CreateResourceIdentifier" /> to create a <see cref="FooResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtPropertyBagArmClientMockingExtension.GetFooResource(ResourceIdentifier)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
@@ -50,6 +54,10 @@ namespace MgmtPropertyBag
         /// <summary>
         /// Gets an object representing a <see cref="BarResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="BarResource.CreateResourceIdentifier" /> to create a <see cref="BarResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MgmtPropertyBagArmClientMockingExtension.GetBarResource(ResourceIdentifier)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>

@@ -80,7 +80,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             WritePrivateHelpers();
 
             _writer.Line(); // TODO -- add this here to minimize the amount of code changes, this could be removed after future refactor
-            foreach (var method in This.Methods)
+            foreach (var method in This.ChildResourceEntryMethods)
             {
                 _writer.WriteMethodDocumentation(method.Signature);
                 _writer.WriteMethod(method);

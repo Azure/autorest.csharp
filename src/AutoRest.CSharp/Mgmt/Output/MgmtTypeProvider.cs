@@ -38,12 +38,12 @@ namespace AutoRest.CSharp.Mgmt.Output
             ResourceName = resourceName;
             IsArmCore = Configuration.MgmtConfiguration.IsArmCore;
             IsStatic = !IsArmCore && BaseType is null;
-            ClientProperty = new MemberExpression(null, "Client"); // this refers to ArmResource.Client which is protected internal therefore we have to hardcode in plain string here instead of using nameof
+            ArmClientProperty = new MemberExpression(null, "Client"); // this refers to ArmResource.Client which is protected internal therefore we have to hardcode in plain string here instead of using nameof
             IdProperty = new MemberExpression(null, nameof(ArmResource.Id));
             MethodModifiers = Public | Virtual;
         }
 
-        protected ValueExpression ClientProperty { get; init; }
+        protected ValueExpression ArmClientProperty { get; init; }
 
         protected ValueExpression IdProperty { get; init; }
 
@@ -305,16 +305,8 @@ namespace AutoRest.CSharp.Mgmt.Output
             return uniqueSets;
         }
 
-        private IEnumerable<Method>? _methods;
-        public IEnumerable<Method> Methods => _methods ??= BuildMethods();
-
-        protected virtual IEnumerable<Method> BuildMethods()
-        {
-            foreach (var method in BuildChildResourceEntries())
-            {
-                yield return method;
-            }
-        }
+        private IEnumerable<Method>? _childResourceEntryMethods;
+        public IEnumerable<Method> ChildResourceEntryMethods => _childResourceEntryMethods ??= BuildChildResourceEntries();
 
         protected virtual IEnumerable<Method> BuildChildResourceEntries()
         {
@@ -352,7 +344,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             var methodBody = Snippets.Return(
                 Snippets.New.Instance(
                     resource.Type,
-                    ClientProperty,
+                    ArmClientProperty,
                     resource.SingletonResourceIdSuffix!.BuildResourceIdentifier(IdProperty)));
             return new(signature, methodBody);
         }
@@ -370,7 +362,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                 MethodModifiers,
                 collection.Type,
                 $"An object representing collection of {resource.Type.Name.LastWordToPlural()} and their operations over a {resource.Type.Name}.",
-            collection.ExtraConstructorParameters.ToArray());
+                collection.ExtraConstructorParameters.ToArray());
             var methodBody = BuildGetResourceCollectionMethodBody(collection);
             return new(signature, methodBody);
         }
@@ -381,7 +373,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             {
                 var parameters = new List<ValueExpression>
                 {
-                    ClientProperty,
+                    ArmClientProperty,
                     IdProperty
                 };
                 parameters.AddRange(collection.ExtraConstructorParameters.Select(p => (ValueExpression)p));
