@@ -844,6 +844,7 @@ export function getUsages(
         if (typeName !== "") {
             affectTypes.add(typeName);
             if (effectiveType.kind === "Model") {
+                /*
                 if (effectiveType.templateMapper?.args) {
                     for (const arg of effectiveType.templateMapper.args) {
                         if (
@@ -860,6 +861,7 @@ export function getUsages(
                         }
                     }
                 }
+                */
                 /*propagate to sub models and composite models*/
                 getAllEffectedModels(effectiveType, new Set<string>()).forEach(
                     (element) => {
