@@ -12,7 +12,7 @@ parameters:
 - name: OutputDirectory
   type: string
 - name: UseInternalFeed
-  type: bool
+  type: boolean
 
 steps:
 - pwsh: |
