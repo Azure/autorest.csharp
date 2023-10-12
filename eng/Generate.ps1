@@ -102,7 +102,7 @@ function Get-TypeSpec-Entry([System.IO.DirectoryInfo]$directory) {
         return $projectNamePath
     }
     
-    throw "There is no client.tsp or main.tsp or other tsp file named after project name" 
+    throw "There is no client.tsp or main.tsp or other tsp file named after project name in project $($tspDirectory.Name)" 
 }
 
 $testData = Get-Content $testProjectDataFile -Encoding utf8 -Raw | ConvertFrom-Json

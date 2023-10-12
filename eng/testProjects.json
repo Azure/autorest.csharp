@@ -20,7 +20,6 @@
         "azure/core/basic",
         "azure/core/traits",
         "azure/client-generator-core/access",
-        "azure/client-generator-core/internal",
         "azure/client-generator-core/usage",
         "encode/bytes",
         "encode/datetime",

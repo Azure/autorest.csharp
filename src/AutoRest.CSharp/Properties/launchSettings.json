@@ -628,10 +628,6 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\azure\\client-generator-core\\access\\src\\Generated -n"
     },
-    "typespec-azure/client-generator-core/internal": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\azure\\client-generator-core\\internal\\src\\Generated -n"
-    },
     "typespec-azure/client-generator-core/usage": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\azure\\client-generator-core\\usage\\src\\Generated -n"
