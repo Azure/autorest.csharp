@@ -1,0 +1,34 @@
+parameters:
+- name: EmitterPackageJsonPath
+  type: string
+- name: AutorestCSharpVersion
+  type: string
+- name: TypeSpecEmitterVersion
+  type: string
+- name: ToolsRepositoryPath
+  type: string
+- name: OutputDirectory
+  type: string
+
+steps:
+- pwsh: |
+    $feedUrl = "https://pkgs.dev.azure.com/azure-sdk/public/_packaging/azure-sdk-for-js-test-autorest@local/npm/registry"
+
+    $overridesPath = "${{ parameters.OutputDirectory }}/overrides.json"
+
+    $overrides = @{
+      "@autorest/csharp" = "$feedUrl/@autorest/csharp/-/csharp-${{ parameters.AutorestCSharpVersion }}.tgz"
+      "@azure-tools/typespec-csharp" = "$feedUrl/@azure-tools/typespec-csharp/-/typespec-csharp-${{ parameters.TypeSpecEmitterVersion }}.tgz"
+    }
+
+    $overrides | ConvertTo-Json | Set-Content $overridesPath
+
+    & ${{ parameters.ToolsRepositoryPath }}/eng/scripts/autorest/New-EmitterPackageJson.ps1 `
+      -PackageJsonPath '${{ parameters.EmitterPackageJsonPath }}' `
+      -OverridesPath $overridesPath `
+      -OutputDirectory '${{ parameters.OutputDirectory }}'
+
+    & ${{ parameters.ToolsRepositoryPath }}/eng/scripts/autorest/New-EmitterPackageLock.ps1 `
+      -EmitterPackageJsonPath '${{ parameters.OutputDirectory }}/emitter-package.json' `
+      -OutputDirectory '${{ parameters.OutputDirectory }}'
+  displayName: Create emitter-package.json
