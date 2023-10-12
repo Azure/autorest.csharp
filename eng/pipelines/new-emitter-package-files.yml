@@ -16,8 +16,8 @@ parameters:
 
 steps:
 - pwsh: |
-    $useInternalFeed = '${{ parameters.UseInternalFeed }}' -eq 'true
-    $overridesPath = "${{ parameters.OutputDirectory }}/overrides.json"
+    $useInternalFeed = '${{ parameters.UseInternalFeed }}' -eq 'true'
+    $overridesPath = '${{ parameters.OutputDirectory }}/overrides.json'
 
     $overrides = @{}
 
