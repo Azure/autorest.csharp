@@ -395,7 +395,10 @@ export function loadOperation(
                         ? undefined
                         : getInputType(
                               context,
-                              getFormattedType(program, metadata.logicalResult),
+                              getFormattedType(
+                                  program,
+                                  metadata.envelopeResult
+                              ),
                               models,
                               enums
                           ),
