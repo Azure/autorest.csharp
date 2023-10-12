@@ -797,8 +797,9 @@
         200
        ],
        "BodyType": {
-        "$ref": "34"
+        "$ref": "14"
        },
+       "ResultPath": "result",
        "BodyMediaType": "Json"
       }
      },

@@ -30,7 +30,7 @@ namespace AutoRest.CSharp.Output.Models.Requests
             FinalStateVia = operation.LongRunning.FinalStateVia;
 
             var finalResponse = operation.LongRunning.FinalResponse;
-            var finalResponseType = finalResponse.BodyType;
+            var finalResponseType = finalResponse.ReturnType;
 
             if (finalResponseType != null)
             {

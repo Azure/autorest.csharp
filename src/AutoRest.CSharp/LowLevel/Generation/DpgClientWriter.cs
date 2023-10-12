@@ -360,10 +360,24 @@ namespace AutoRest.CSharp.Generation.Writers
                         .LineRaw(";");
                     // return ProtocolOperationHelpers.Convert(response, r => responseType.FromResponse(r), ClientDiagnostics, scopeName);
                     var diagnostic = convenienceMethod.Diagnostic ?? clientMethod.ProtocolMethodDiagnostic;
-                    _writer.Line($"return {typeof(ProtocolOperationHelpers)}.{nameof(ProtocolOperationHelpers.Convert)}({responseVariable:I}, {responseType}.FromResponse, {fields.ClientDiagnosticsProperty.Name}, {diagnostic.ScopeName:L});");
+                    _writer.Line($"return {typeof(ProtocolOperationHelpers)}.{nameof(ProtocolOperationHelpers.Convert)}({responseVariable:I}, {GetConvertMethodStatement(clientMethod.LongRunning!, responseType)}, {fields.ClientDiagnosticsProperty.Name}, {diagnostic.ScopeName:L});");
                 }
             }
             _writer.Line();
+        }
+
+        private string GetConvertMethodStatement(OperationLongRunning longRunning, CSharpType responseType)
+        {
+            if (longRunning.FinalResponse.ResultPath.IsNullOrEmpty())
+            {
+                return $"{responseType.Name}.FromResponse";
+            }
+
+            var bodyType = longRunning.FinalResponse.BodyType!;
+            return @$"r => {{
+                {bodyType.Name} rawResponse = {bodyType.Name}.FromResponse(r);
+                return rawResponse.{longRunning.FinalResponse.ResultPath!.ToCleanName()};
+            }}";
         }
 
         private void WriteConveniencePageableMethod(LowLevelClientMethod clientMethod, ConvenienceMethod convenienceMethod, ProtocolMethodPaging pagingInfo, ClientFields fields, bool async)

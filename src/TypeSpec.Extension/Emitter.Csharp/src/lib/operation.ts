@@ -388,7 +388,9 @@ export function loadOperation(
         if (op.verb !== "delete") {
             const formattedType = getFormattedType(
                 program,
-                metadata.logicalResult
+                metadata.logicalPath
+                    ? metadata.envelopeResult
+                    : metadata.logicalResult
             );
             bodyType = getInputType(context, formattedType, models, enums);
         }
@@ -400,6 +402,7 @@ export function loadOperation(
                 // for now, let assume we don't allow return type
                 StatusCodes: op.verb === "delete" ? [204] : [200],
                 BodyType: bodyType,
+                ResultPath: metadata.logicalPath,
                 BodyMediaType: BodyMediaType.Json
             } as OperationResponse
         } as OperationLongRunning;

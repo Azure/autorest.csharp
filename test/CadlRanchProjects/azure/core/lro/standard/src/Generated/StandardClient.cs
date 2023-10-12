@@ -265,7 +265,11 @@ namespace _Azure.Lro.Standard
 
             RequestContext context = FromCancellationToken(cancellationToken);
             Operation<BinaryData> response = await ExportAsync(waitUntil, name, format, context).ConfigureAwait(false);
-            return ProtocolOperationHelpers.Convert(response, ExportedUser.FromResponse, ClientDiagnostics, "StandardClient.Export");
+            return ProtocolOperationHelpers.Convert(response, r =>
+            {
+                ResourceOperationStatusUserExportedUserError rawResponse = ResourceOperationStatusUserExportedUserError.FromResponse(r);
+                return rawResponse.Result;
+            }, ClientDiagnostics, "StandardClient.Export");
         }
 
         /// <summary> Exports a user. </summary>
@@ -284,7 +288,11 @@ namespace _Azure.Lro.Standard
 
             RequestContext context = FromCancellationToken(cancellationToken);
             Operation<BinaryData> response = Export(waitUntil, name, format, context);
-            return ProtocolOperationHelpers.Convert(response, ExportedUser.FromResponse, ClientDiagnostics, "StandardClient.Export");
+            return ProtocolOperationHelpers.Convert(response, r =>
+            {
+                ResourceOperationStatusUserExportedUserError rawResponse = ResourceOperationStatusUserExportedUserError.FromResponse(r);
+                return rawResponse.Result;
+            }, ClientDiagnostics, "StandardClient.Export");
         }
 
         /// <summary>

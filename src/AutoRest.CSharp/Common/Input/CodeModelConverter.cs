@@ -146,6 +146,7 @@ namespace AutoRest.CSharp.Common.Input
         public OperationResponse CreateOperationResponse(ServiceResponse response) => new(
             StatusCodes: response.HttpResponse.IntStatusCodes.ToList(),
             BodyType: GetResponseBodyType(response),
+            ResultPath: null,
             BodyMediaType: GetBodyFormat(response.HttpResponse.KnownMediaType),
             Headers: GetResponseHeaders(response.HttpResponse.Headers),
             IsErrorResponse: false
