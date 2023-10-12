@@ -847,24 +847,6 @@ export function getUsages(
                 effectiveType.kind === "Model" &&
                 (!modelMap || modelMap.has(typeName))
             ) {
-                /*
-                if (effectiveType.templateMapper?.args) {
-                    for (const arg of effectiveType.templateMapper.args) {
-                        if (
-                            arg.kind === "Model" &&
-                            "name" in arg &&
-                            arg.name !== ""
-                        ) {
-                            getAllEffectedModels(
-                                arg,
-                                new Set<string>()
-                            ).forEach((element) => {
-                                affectTypes.add(element);
-                            });
-                        }
-                    }
-                }
-                */
                 /*propagate to sub models and composite models*/
                 getAllEffectedModels(effectiveType, new Set<string>()).forEach(
                     (element) => {
