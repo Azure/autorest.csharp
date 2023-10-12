@@ -30,10 +30,11 @@ namespace AutoRest.CSharp.Generation.Writers
                         WriteMethod(writer, methods.ConvenienceAsync);
                         WriteMethod(writer, methods.Convenience);
 
-                        if (restClient.ProtocolMethods?.FirstOrDefault(m => m.Operation == methods.Operation) is {} protocolMethod)
+                        if (methods is { Protocol: {} protocol, ProtocolAsync: {} protocolAsync })
                         {
-                            DpgClientWriter.WriteProtocolMethods(writer, restClient.Fields, protocolMethod);
-                            responseClassifierTypes.Add(protocolMethod.ResponseClassifier);
+                            DpgClientWriter.WriteProtocolMethod(writer, protocolAsync, methods);
+                            DpgClientWriter.WriteProtocolMethod(writer, protocol, methods);
+                            responseClassifierTypes.Add(methods.ResponseClassifier);
                         }
                     }
 

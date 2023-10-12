@@ -38,7 +38,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             foreach (var operation in _operations)
             {
                 var builder = SelectBuilder(operation, fields, sampleBuilder, clientName, clientNamespace);
-                yield return Configuration.AzureArm || (Configuration.Generation1ConvenienceClient/* && !requireProtocolMethods.Contains(operation)*/) ? builder.BuildLegacy() : builder.Build();
+                yield return Configuration.AzureArm || (Configuration.Generation1ConvenienceClient && !requireProtocolMethods.Contains(operation)) ? builder.BuildLegacy() : builder.Build();
             }
         }
 

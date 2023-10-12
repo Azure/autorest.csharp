@@ -22,24 +22,5 @@ namespace AutoRest.CSharp.Common.Output.Builders
         protected override MethodBodyStatement? BuildCreateNextPageMessageMethodBody(CreateMessageMethodBuilder builder, MethodSignature methodSignature) => null;
 
         protected override Method? BuildLegacyNextPageConvenienceMethod(IReadOnlyList<Parameter> parameters, Method? createRequestMethod, bool async) => null;
-
-        protected IEnumerable<MethodBodyStatement> AddProtocolMethodArguments(RestClientMethodParameters parameters, List<ValueExpression> protocolMethodArguments)
-        {
-            foreach (var protocolParameter in parameters.Protocol)
-            {
-                if (parameters.Arguments.TryGetValue(protocolParameter, out var argument))
-                {
-                    protocolMethodArguments.Add(argument);
-                    if (parameters.Conversions.TryGetValue(protocolParameter, out var conversion))
-                    {
-                        yield return conversion;
-                    }
-                }
-                else
-                {
-                    protocolMethodArguments.Add(protocolParameter);
-                }
-            }
-        }
     }
 }

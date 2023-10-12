@@ -59,9 +59,8 @@ namespace AutoRest.CSharp.Output.Models
                 .Prepend(NextPageUrlParameter)
                 .ToArray();
 
-            var invokeCreateRequestMethod = InvokeCreateRequestMethod(createRequestMethod.Signature);
             var methodSignature = CreateMethodSignature(nextPageMethodName, ConvenienceModifiers, nextPageParameters, RestClientConvenienceMethodReturnType, null);
-            return BuildLegacyConvenienceMethod(methodSignature, invokeCreateRequestMethod, _nextPageStatusCodeSwitchBuilder, async);
+            return BuildConvenienceMethod(methodSignature, CreateLegacyConvenienceMethodBody(createRequestMethod.Signature, _nextPageStatusCodeSwitchBuilder, async), async);
         }
 
         protected override MethodSignature? BuildCreateNextPageMessageSignature(IReadOnlyList<Parameter> createMessageParameters)

@@ -84,14 +84,10 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        public static void WriteProtocolMethods(CodeWriter writer, ClientFields fields, RestClientOperationMethods operationMethods)
+        public static void WriteProtocolMethod(CodeWriter writer, Method method, RestClientOperationMethods operationMethods)
         {
-            writer.WriteMethod(operationMethods.CreateRequest);
-
-            WriteProtocolMethodDocumentation(writer, operationMethods, (MethodSignature)operationMethods.ProtocolAsync!.Signature);
-            writer.WriteMethod(operationMethods.ProtocolAsync);
-            WriteProtocolMethodDocumentation(writer, operationMethods, (MethodSignature)operationMethods.Protocol!.Signature);
-            writer.WriteMethod(operationMethods.Protocol);
+            WriteProtocolMethodDocumentation(writer, operationMethods, method.Signature);
+            writer.WriteMethod(method);
         }
 
         private void WriteDPGIdentificationComment() => _writer.Line($"// Data plane generated {(_client.IsSubClient ? "sub-client" : "client")}.");
@@ -375,9 +371,9 @@ namespace AutoRest.CSharp.Generation.Writers
         private static string GetMethodSignatureString(MethodSignatureBase signature)
             => $"{signature.Name}({string.Join(",", signature.Parameters.Select(p => p.Type.ToStringForDocs()))})";
 
-        private static void WriteProtocolMethodDocumentation(CodeWriter writer, RestClientOperationMethods operationMethods, MethodSignature methodSignature)
+        private static void WriteProtocolMethodDocumentation(CodeWriter writer, RestClientOperationMethods operationMethods, MethodSignatureBase methodSignature)
         {
-            WriteMethodDocumentation(writer, methodSignature, null, operationMethods);
+            WriteMethodDocumentation(writer, (MethodSignature)methodSignature, null, operationMethods);
             WriteDocumentationRemarks((tag, text) => writer.WriteXmlDocumentation(tag, text), operationMethods, methodSignature, false);
         }
 
@@ -469,7 +465,7 @@ namespace AutoRest.CSharp.Generation.Writers
             codeWriter.WriteXmlDocumentationReturns(text);
         }
 
-        private static void WriteDocumentationRemarks(Action<string, FormattableString?> writeXmlDocumentation, RestClientOperationMethods operationMethods, MethodSignature methodSignature, bool addDescription)
+        private static void WriteDocumentationRemarks(Action<string, FormattableString?> writeXmlDocumentation, RestClientOperationMethods operationMethods, MethodSignatureBase methodSignature, bool addDescription)
         {
             if (operationMethods.Operation.ExternalDocsUrl == null)
             {

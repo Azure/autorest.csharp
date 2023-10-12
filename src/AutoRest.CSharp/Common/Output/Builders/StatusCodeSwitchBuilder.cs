@@ -167,13 +167,35 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
         public MethodBodyStatement Build(HttpMessageExpression httpMessage, bool async)
         {
+            if (_successResponses is [{StatusCodes: {} statusCodes, Type: {} type} _] && type.Equals(typeof(Stream)))
+            {
+                return new SwitchStatement
+                (
+                    httpMessage.Response.Status,
+                    new[]
+                    {
+                        new(statusCodes.Select(Int).ToList(), new MethodBodyStatement[]
+                        {
+                            Var("value", httpMessage.ExtractResponseContent(), out var value),
+                            Return(ResponseExpression.FromValue(value, httpMessage.Response))
+                        }, AddScope: true),
+                        SwitchCase.Default(Throw(New.RequestFailedException(httpMessage.Response)))
+                    }
+                );
+            }
+
+            return Build(httpMessage.Response, async);
+        }
+
+        public MethodBodyStatement Build(ResponseExpression response, bool async)
+        {
             if (_successResponses is null)
             {
-                return new SwitchStatement(httpMessage.Response.Status)
+                return new SwitchStatement(response.Status)
                 {
-                    new(new[]{new FormattableStringToExpression($"int s when s >= 200 && s < 300")}, BuildHeadAsBooleanSwitchCaseStatement(httpMessage, True), AddScope: true),
-                    new(new[]{new FormattableStringToExpression($"int s when s >= 400 && s < 500")}, BuildHeadAsBooleanSwitchCaseStatement(httpMessage, False), AddScope: true),
-                    SwitchCase.Default(Throw(New.RequestFailedException(httpMessage.Response)))
+                    new(new[]{new FormattableStringToExpression($"int s when s >= 200 && s < 300")}, BuildHeadAsBooleanSwitchCaseStatement(response, True), AddScope: true),
+                    new(new[]{new FormattableStringToExpression($"int s when s >= 400 && s < 500")}, BuildHeadAsBooleanSwitchCaseStatement(response, False), AddScope: true),
+                    SwitchCase.Default(Throw(New.RequestFailedException(response)))
                 };
             }
 
@@ -181,10 +203,10 @@ namespace AutoRest.CSharp.Common.Output.Builders
             {
                 return new SwitchStatement
                 (
-                    httpMessage.Response.Status,
+                    response.Status,
                     _successResponses
-                        .Select(r => new SwitchCase(r.StatusCodes.Select(Int).ToList(), BuildStatusCodeSwitchCaseStatement(r.Type, r.Serialization, httpMessage, async), AddScope: r.Type is not null))
-                        .Append(SwitchCase.Default(Throw(New.RequestFailedException(httpMessage.Response))))
+                        .Select(r => new SwitchCase(r.StatusCodes.Select(Int).ToList(), BuildStatusCodeSwitchCaseStatement(r.Type, r.Serialization, response, async), AddScope: r.Type is not null))
+                        .Append(SwitchCase.Default(Throw(New.RequestFailedException(response))))
                         .ToArray()
                 );
             }
@@ -192,13 +214,13 @@ namespace AutoRest.CSharp.Common.Output.Builders
             var headers = new VariableReference(_headerModelType, "headers");
             return new MethodBodyStatement[]
             {
-                new DeclareVariableStatement(null, headers.Declaration, New.Instance(_headerModelType, httpMessage.Response)),
+                new DeclareVariableStatement(null, headers.Declaration, New.Instance(_headerModelType, response)),
                 new SwitchStatement
                 (
-                    httpMessage.Response.Status,
+                    response.Status,
                     _successResponses
-                        .Select(r => new SwitchCase(r.StatusCodes.Select(Int).ToList(), BuildStatusCodeSwitchCaseStatement(r.Type, r.Serialization, httpMessage, headers, async), AddScope: r.Type is not null))
-                        .Append(SwitchCase.Default(Throw(New.RequestFailedException(httpMessage.Response))))
+                        .Select(r => new SwitchCase(r.StatusCodes.Select(Int).ToList(), BuildStatusCodeSwitchCaseStatement(r.Type, r.Serialization, response, headers, async), AddScope: r.Type is not null))
+                        .Append(SwitchCase.Default(Throw(New.RequestFailedException(response))))
                         .ToArray()
                 )
             };
@@ -290,52 +312,52 @@ namespace AutoRest.CSharp.Common.Output.Builders
             };
         }
 
-        private static MethodBodyStatement BuildHeadAsBooleanSwitchCaseStatement(HttpMessageExpression httpMessage, BoolExpression valueConstant)
+        private static MethodBodyStatement BuildHeadAsBooleanSwitchCaseStatement(ResponseExpression response, BoolExpression valueConstant)
         {
             return new MethodBodyStatement[]
             {
                 Declare("value", valueConstant, out var value),
-                Return(ResponseExpression.FromValue(value, httpMessage.Response))
+                Return(ResponseExpression.FromValue(value, response))
             };
         }
 
-        private MethodBodyStatement BuildStatusCodeSwitchCaseStatement(CSharpType? type, ObjectSerialization? serialization, HttpMessageExpression httpMessage, bool async)
+        private MethodBodyStatement BuildStatusCodeSwitchCaseStatement(CSharpType? type, ObjectSerialization? serialization, ResponseExpression response, bool async)
         {
             if (type is null)
             {
                 return ResponseType != null
-                    ? Return(ResponseExpression.FromValue(new CastExpression(Null, ResponseType), httpMessage.Response))
-                    : Return(httpMessage.Response);
+                    ? Return(ResponseExpression.FromValue(new CastExpression(Null, ResponseType), response))
+                    : Return(response);
             }
 
-            var valueStatement = BuildStatusCodeSwitchCaseValueStatement(type, serialization, httpMessage, async, out TypedValueExpression value);
+            var valueStatement = BuildStatusCodeSwitchCaseValueStatement(type, serialization, response, async, out TypedValueExpression value);
 
             var returnStatement = ResponseType is not null && !ResponseType.EqualsIgnoreNullable(type)
-                ? Return(ResponseExpression.FromValue(ResponseType, value, httpMessage.Response))
-                : Return(ResponseExpression.FromValue(value, httpMessage.Response));
+                ? Return(ResponseExpression.FromValue(ResponseType, value, response))
+                : Return(ResponseExpression.FromValue(value, response));
 
             return new[] { valueStatement, returnStatement };
         }
 
-        private MethodBodyStatement BuildStatusCodeSwitchCaseStatement(CSharpType? type, ObjectSerialization? serialization, HttpMessageExpression httpMessage, ValueExpression headers, bool async)
+        private MethodBodyStatement BuildStatusCodeSwitchCaseStatement(CSharpType? type, ObjectSerialization? serialization, ResponseExpression response, ValueExpression headers, bool async)
         {
             if (type is null)
             {
                 return ResponseType != null
-                    ? Return(ResponseWithHeadersExpression.FromValue(new CastExpression(Null, ResponseType), headers, httpMessage.Response))
-                    : Return(ResponseWithHeadersExpression.FromValue(headers, httpMessage.Response));
+                    ? Return(ResponseWithHeadersExpression.FromValue(new CastExpression(Null, ResponseType), headers, response))
+                    : Return(ResponseWithHeadersExpression.FromValue(headers, response));
             }
 
-            var valueStatement = BuildStatusCodeSwitchCaseValueStatement(type, serialization, httpMessage, async, out TypedValueExpression value);
+            var valueStatement = BuildStatusCodeSwitchCaseValueStatement(type, serialization, response, async, out TypedValueExpression value);
 
             var returnStatement = ResponseType is not null && !ResponseType.EqualsIgnoreNullable(type)
-                    ? Return(ResponseWithHeadersExpression.FromValue(ResponseType, value, headers, httpMessage.Response))
-                    : Return(ResponseWithHeadersExpression.FromValue(value, headers, httpMessage.Response));
+                    ? Return(ResponseWithHeadersExpression.FromValue(ResponseType, value, headers, response))
+                    : Return(ResponseWithHeadersExpression.FromValue(value, headers, response));
 
             return new[] { valueStatement, returnStatement };
         }
 
-        private static MethodBodyStatement BuildStatusCodeSwitchCaseValueStatement(CSharpType type, ObjectSerialization? serialization, HttpMessageExpression httpMessage, bool async, out TypedValueExpression value)
+        private static MethodBodyStatement BuildStatusCodeSwitchCaseValueStatement(CSharpType type, ObjectSerialization? serialization, ResponseExpression response, bool async, out TypedValueExpression value)
         {
             if (serialization is not null)
             {
@@ -344,8 +366,8 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     Declare(type, "value", Snippets.Default, out value),
                     serialization switch
                     {
-                        JsonSerialization jsonSerialization => JsonSerializationMethodsBuilder.BuildDeserializationForMethods(jsonSerialization, async, value, httpMessage.Response, type.Equals(typeof(BinaryData))),
-                        XmlElementSerialization xmlSerialization => XmlSerializationMethodsBuilder.BuildDeserializationForMethods(xmlSerialization, value, httpMessage.Response),
+                        JsonSerialization jsonSerialization => JsonSerializationMethodsBuilder.BuildDeserializationForMethods(jsonSerialization, async, value, response, type.Equals(typeof(BinaryData))),
+                        XmlElementSerialization xmlSerialization => XmlSerializationMethodsBuilder.BuildDeserializationForMethods(xmlSerialization, value, response),
                         _ => throw new NotImplementedException(serialization?.ToString() ?? $"No serialization for type {type}")
                     }
                 };
@@ -353,14 +375,14 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
             if (type.Equals(typeof(Stream)))
             {
-                return Var("value", httpMessage.ExtractResponseContent(), out value);
+                throw new InvalidOperationException("Stream not supported");
             }
 
             if (type.Equals(typeof(string)))
             {
                 return new[]
                 {
-                    Declare("streamReader", New.StreamReader(httpMessage.Response.ContentStream), out StreamReaderExpression streamReader),
+                    Declare("streamReader", New.StreamReader(response.ContentStream), out StreamReaderExpression streamReader),
                     Declare("value", streamReader.ReadToEnd(async), out value)
                 };
             }

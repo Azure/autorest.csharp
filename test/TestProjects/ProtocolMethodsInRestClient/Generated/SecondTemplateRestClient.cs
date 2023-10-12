@@ -155,9 +155,9 @@ namespace ProtocolMethodsInRestClient
             }
         }
 
-        internal HttpMessage CreateGetRequest(string resourceId)
+        internal HttpMessage CreateGetRequest(string resourceId, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -180,19 +180,19 @@ namespace ProtocolMethodsInRestClient
                 throw new ArgumentNullException(nameof(resourceId));
             }
 
-            using var message = CreateGetRequest(resourceId);
-            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-            switch (message.Response.Status)
+            RequestContext context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
+            Response response = await GetAsync(resourceId, context).ConfigureAwait(false);
+            switch (response.Status)
             {
                 case 200:
                     {
                         Resource value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                         value = Resource.DeserializeResource(document.RootElement);
-                        return Response.FromValue(value, message.Response);
+                        return Response.FromValue(value, response);
                     }
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw new RequestFailedException(response);
             }
         }
 
@@ -207,34 +207,20 @@ namespace ProtocolMethodsInRestClient
                 throw new ArgumentNullException(nameof(resourceId));
             }
 
-            using var message = CreateGetRequest(resourceId);
-            _pipeline.Send(message, cancellationToken);
-            switch (message.Response.Status)
+            RequestContext context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
+            Response response = Get(resourceId, context);
+            switch (response.Status)
             {
                 case 200:
                     {
                         Resource value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(response.ContentStream);
                         value = Resource.DeserializeResource(document.RootElement);
-                        return Response.FromValue(value, message.Response);
+                        return Response.FromValue(value, response);
                     }
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw new RequestFailedException(response);
             }
-        }
-
-        internal HttpMessage CreateGetRequest(string resourceId, RequestContext context)
-        {
-            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
-            var request = message.Request;
-            request.Method = RequestMethod.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/secondTemplate/resources/", false);
-            uri.AppendPath(resourceId, true);
-            request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
-            return message;
         }
 
         /// <summary>

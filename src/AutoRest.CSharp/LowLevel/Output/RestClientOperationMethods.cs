@@ -24,7 +24,6 @@ namespace AutoRest.CSharp.Output.Models
 
         int Order,
         InputOperation Operation,
-        InputType? RequestBodyType,
         CSharpType? ResponseType,
         CSharpType? PageItemType,
         IReadOnlyList<DpgOperationSample> Samples,

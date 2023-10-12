@@ -17,7 +17,6 @@ namespace AutoRest.CSharp.Output.Models
         public ClientFields Fields { get; }
         public IReadOnlyList<Parameter> Parameters { get; }
         public IReadOnlyList<RestClientOperationMethods> Methods { get; }
-        public IReadOnlyList<RestClientOperationMethods>? ProtocolMethods { get; }
         public ConstructorSignature Constructor { get; }
 
         public string Key { get; }
@@ -39,8 +38,6 @@ namespace AutoRest.CSharp.Output.Models
             Constructor = new ConstructorSignature(Type, $"Initializes a new instance of {Declaration.Name}", null, MethodSignatureModifiers.Public, Parameters.ToArray());
 
             Methods = clientMethodsBuilder.Build(Fields, new DpgOperationSampleBuilder(), clientPrefix + GetClientSuffix(), Declaration.Namespace, Key).ToList();
-
-            ProtocolMethods = null;
         }
     }
 }

@@ -64,6 +64,12 @@ namespace AutoRest.CSharp.Common.Output.Models
         public static DeclarationStatement Declare(string name, StreamReaderExpression value, out StreamReaderExpression variable)
             => Declare(name, value, d => new StreamReaderExpression(d), out variable);
 
+        public static DeclarationStatement Declare(string name, Utf8JsonRequestContentExpression value, out Utf8JsonRequestContentExpression variable)
+            => Declare(name, value, d => new Utf8JsonRequestContentExpression(d), out variable);
+
+        public static DeclarationStatement Declare(string name, XmlWriterContentExpression value, out XmlWriterContentExpression variable)
+            => Declare(name, value, d => new XmlWriterContentExpression(d), out variable);
+
         public static DeclarationStatement Declare(string name, TypedValueExpression value, out TypedValueExpression variable)
         {
             var declaration = new VariableReference(value.Type, name);

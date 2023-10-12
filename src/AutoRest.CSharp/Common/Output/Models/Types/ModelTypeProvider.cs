@@ -177,15 +177,19 @@ namespace AutoRest.CSharp.Output.Models.Types
             return name;
         }
 
+        public bool HasFromResponseMethod => Methods.Any(m => m.Signature.Name == "FromResponse");
+
+        public bool HasToRequestContentMethod => Methods.Any(m => m.Signature.Name == "ToRequestContent");
+
         private MethodSignatureModifiers GetFromResponseModifiers()
         {
             var signatures = MethodSignatureModifiers.Internal | MethodSignatureModifiers.Static;
             var parent = GetBaseObjectType();
-            if (parent is ModelTypeProvider parentModelType)
+            if (parent is ModelTypeProvider { HasFromResponseMethod: true })
             {
-                if (parentModelType.Methods.Any(m => m.Signature.Name == "FromResponse"))
-                    signatures |= MethodSignatureModifiers.New;
+                signatures |= MethodSignatureModifiers.New;
             }
+
             return signatures;
         }
 
@@ -200,7 +204,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             }
             else if (parent is ModelTypeProvider parentModelType)
             {
-                signatures |= (parentModelType.Methods.Any(m => m.Signature.Name == "ToRequestContent"))
+                signatures |= parentModelType.HasToRequestContentMethod
                     ? MethodSignatureModifiers.Override
                     : MethodSignatureModifiers.Virtual;
             }

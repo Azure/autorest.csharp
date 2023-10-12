@@ -51,6 +51,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
         public InputOperation Operation { get; }
 
+        protected bool ShouldWrapInDiagnosticScope { get; }
         protected ValueExpression ClientDiagnosticsProperty { get; }
         protected HttpPipelineExpression PipelineField { get; }
 
@@ -99,17 +100,8 @@ namespace AutoRest.CSharp.Common.Output.Builders
         {
             var parameters = _parametersBuilder.BuildParameters();
 
-            var convenienceMethodIsMeaningless = parameters.Convenience.Where(p => p != KnownParameters.CancellationTokenParameter)
-                .SequenceEqual(parameters.Protocol.Where(p => p != KnownParameters.RequestContext)) && ConvenienceMethodReturnType.Equals(ProtocolMethodReturnType);
-
-            var makeAllProtocolParametersRequired =
-                !Configuration.KeepNonOverloadableProtocolSignature &&
-                Configuration.UseOverloadsBetweenProtocolAndConvenience &&
-                !ExistingProtocolMethodHasOptionalParameters(_clientNamespace, _clientName, parameters.Protocol) &&
-                !convenienceMethodIsMeaningless &&
-                parameters.HasAmbiguityBetweenProtocolAndConvenience;
-
-            if (makeAllProtocolParametersRequired)
+            var convenienceMethodIsMeaningless = IsConvenienceMethodMeaningless(parameters);
+            if (MakeAllProtocolParametersRequired(parameters, convenienceMethodIsMeaningless))
             {
                 parameters = parameters.MakeAllProtocolParametersRequired();
             }
@@ -152,13 +144,23 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     }
 
                     convenienceMethodSignature = CreateMethodSignature(convenienceMethodName, modifiers, parameters.Convenience, ConvenienceMethodReturnType, null);
-                    convenience = BuildConvenienceMethod(convenienceMethodSignature, parameters, createNextPageMessageMethodSignature, false);
-                    convenienceAsync = BuildConvenienceMethod(convenienceMethodSignature, parameters, createNextPageMessageMethodSignature, true);
+
+                    var convenienceBody = CreateConvenienceMethodBody(convenienceMethodSignature.Name, parameters, createNextPageMessageMethodSignature, false);
+                    convenience = BuildConvenienceMethod(convenienceMethodSignature, convenienceBody, false);
+                    var convenienceBodyAsync = CreateConvenienceMethodBody(convenienceMethodSignature.Name, parameters, createNextPageMessageMethodSignature, true);
+                    convenienceAsync = BuildConvenienceMethod(convenienceMethodSignature, convenienceBodyAsync, true);
                 }
                 else if (Operation.GenerateProtocolMethod)
                 {
                     protocolMethodNonDocumentComment = ConvenienceMethodIsMeaningless;
                 }
+            }
+            else if (Configuration.Generation1ConvenienceClient || Configuration.AzureArm)
+            {
+                convenienceMethodSignature = CreateMethodSignature(ProtocolMethodName, ConvenienceModifiers, parameters.Convenience, RestClientConvenienceMethodReturnType, null);
+
+                convenience = BuildConvenienceMethod(convenienceMethodSignature, CreateConvenienceMethodBodyForLegacyRestClient(parameters, _statusCodeSwitchBuilder, false), false);
+                convenienceAsync = BuildConvenienceMethod(convenienceMethodSignature, CreateConvenienceMethodBodyForLegacyRestClient(parameters, _statusCodeSwitchBuilder, true), true);
             }
 
             var protocolMethodSignature = CreateMethodSignature(ProtocolMethodName, _protocolAccessibility | MethodSignatureModifiers.Virtual, parameters.Protocol, ProtocolMethodReturnType, protocolMethodNonDocumentComment);
@@ -180,7 +182,6 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
                 order,
                 Operation,
-                requestBodyType,
                 ResponseType,
                 _statusCodeSwitchBuilder.PageItemType,
                 samples,
@@ -188,9 +189,35 @@ namespace AutoRest.CSharp.Common.Output.Builders
             );
         }
 
+        private bool IsConvenienceMethodMeaningless(RestClientMethodParameters parameters)
+        {
+            if (Configuration.Generation1ConvenienceClient || Configuration.AzureArm)
+            {
+                return false;
+            }
+
+            return parameters.Convenience
+                .Where(p => p != KnownParameters.CancellationTokenParameter)
+                .SequenceEqual(parameters.Protocol.Where(p => p != KnownParameters.RequestContext)) && ConvenienceMethodReturnType.Equals(ProtocolMethodReturnType);
+        }
+
+        private bool MakeAllProtocolParametersRequired(RestClientMethodParameters parameters, bool convenienceMethodIsMeaningless)
+        {
+            if (Configuration.Generation1ConvenienceClient || Configuration.AzureArm)
+            {
+                return true;
+            }
+
+            return !Configuration.KeepNonOverloadableProtocolSignature &&
+                   Configuration.UseOverloadsBetweenProtocolAndConvenience &&
+                   !ExistingProtocolMethodHasOptionalParameters(_clientNamespace, _clientName, parameters.Protocol) &&
+                   !convenienceMethodIsMeaningless &&
+                   parameters.HasAmbiguityBetweenProtocolAndConvenience;
+        }
+
         public RestClientOperationMethods BuildLegacy()
         {
-            var parameters = _parametersBuilder.BuildParameters();
+            var parameters = _parametersBuilder.BuildParametersLegacy();
             var createMessageBuilder = new CreateMessageMethodBuilder(_fields, parameters.RequestParts, null, Operation.RequestBodyMediaType);
 
             var createRequestMessageMethod = BuildCreateRequestMethod(parameters.CreateMessage, createMessageBuilder);
@@ -206,15 +233,14 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 createNextPageMessageMethod,
                 null,
                 null,
-                BuildLegacyConvenienceMethod(convenienceMethodSignature, InvokeCreateRequestMethod(createRequestMessageMethod.Signature), _statusCodeSwitchBuilder, false),
-                BuildLegacyConvenienceMethod(convenienceMethodSignature, InvokeCreateRequestMethod(createRequestMessageMethod.Signature), _statusCodeSwitchBuilder, true),
+                BuildConvenienceMethod(convenienceMethodSignature, CreateLegacyConvenienceMethodBody(createRequestMessageMethod.Signature, _statusCodeSwitchBuilder, false), false),
+                BuildConvenienceMethod(convenienceMethodSignature, CreateLegacyConvenienceMethodBody(createRequestMessageMethod.Signature, _statusCodeSwitchBuilder, true), true),
                 BuildLegacyNextPageConvenienceMethod(parameters.Convenience, createNextPageMessageMethod, false),
                 BuildLegacyNextPageConvenienceMethod(parameters.Convenience, createNextPageMessageMethod, true),
-                _statusCodeSwitchBuilder.ResponseClassifier,
+                ResponseClassifier,
 
                 order,
                 Operation,
-                null,
                 ResponseType,
                 _statusCodeSwitchBuilder.PageItemType,
                 Array.Empty<DpgOperationSample>(),
@@ -281,28 +307,35 @@ namespace AutoRest.CSharp.Common.Output.Builders
             return new Method(signature.WithAsync(async), body);
         }
 
-        private Method BuildConvenienceMethod(MethodSignature signature, RestClientMethodParameters parameters, MethodSignature? createNextPageMessageSignature, bool async)
+        protected Method BuildConvenienceMethod(MethodSignature signature, MethodBodyStatement body, bool async)
         {
-            var body = new[]
+            return new Method(signature.WithAsync(async), new[]
             {
                 new ParameterValidationBlock(signature.Parameters, IsLegacy: !Configuration.AzureArm && Configuration.Generation1ConvenienceClient),
-                CreateConvenienceMethodBody(signature.Name, parameters, createNextPageMessageSignature, async)
-            };
-            return new Method(signature.WithAsync(async), body);
+                body
+            });
         }
 
-        protected Method BuildLegacyConvenienceMethod(MethodSignature signature, HttpMessageExpression invokeCreateRequestMethod, StatusCodeSwitchBuilder statusCodeSwitchBuilder, bool async)
+        private MethodBodyStatement CreateConvenienceMethodBodyForLegacyRestClient(RestClientMethodParameters parameters, StatusCodeSwitchBuilder statusCodeSwitchBuilder, bool async)
         {
-            var body = new[]
+            var protocolMethodArguments = new List<ValueExpression>();
+            return new[]
             {
-                new ParameterValidationBlock(signature.Parameters, IsLegacy: !Configuration.AzureArm && Configuration.Generation1ConvenienceClient),
-                UsingVar("message", invokeCreateRequestMethod, out var message),
+                AddProtocolMethodArguments(parameters, protocolMethodArguments).ToArray(),
+                Declare(ProtocolMethodReturnType, "response", InvokeProtocolMethod(null, protocolMethodArguments, async), out var response),
+                statusCodeSwitchBuilder.Build(response, async)
+            };
+        }
+
+        protected MethodBodyStatement CreateLegacyConvenienceMethodBody(MethodSignatureBase createRequestMessageMethodSignature, StatusCodeSwitchBuilder statusCodeSwitchBuilder, bool async)
+        {
+            return new[]
+            {
+                UsingVar("message", InvokeCreateRequestMethod(createRequestMessageMethodSignature), out var message),
                 EnableHttpRedirectIfSupported(message),
                 PipelineField.Send(message, new CancellationTokenExpression(KnownParameters.CancellationTokenParameter), async),
                 statusCodeSwitchBuilder.Build(message, async)
             };
-
-            return new Method(signature.WithAsync(async), body);
         }
 
         protected abstract Method? BuildLegacyNextPageConvenienceMethod(IReadOnlyList<Parameter> parameters, Method? createRequestMethod, bool async);
@@ -338,6 +371,25 @@ namespace AutoRest.CSharp.Common.Output.Builders
         {
             var arguments = new ValueExpression[]{ response, SerializableObjectTypeExpression.FromResponseDelegate(responseType), _fields.ClientDiagnosticsProperty, Literal(scopeName) };
             return new InvokeStaticMethodExpression(typeof(ProtocolOperationHelpers), nameof(ProtocolOperationHelpers.Convert), arguments);
+        }
+
+        protected IEnumerable<MethodBodyStatement> AddProtocolMethodArguments(RestClientMethodParameters parameters, List<ValueExpression> protocolMethodArguments)
+        {
+            foreach (var protocolParameter in parameters.Protocol)
+            {
+                if (parameters.Arguments.TryGetValue(protocolParameter, out var argument))
+                {
+                    protocolMethodArguments.Add(argument);
+                    if (parameters.Conversions.TryGetValue(protocolParameter, out var conversion))
+                    {
+                        yield return conversion;
+                    }
+                }
+                else
+                {
+                    protocolMethodArguments.Add(protocolParameter);
+                }
+            }
         }
 
         private static MethodSignatureModifiers GetAccessibility(string? accessibility) => accessibility switch
