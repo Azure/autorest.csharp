@@ -1,42 +1,25 @@
 # Update `autorest.csharp` and TypeSpec emitter versions
 
 parameters:
-  - name: Name
-    type: string
-  - name: AutorestCSharpVersion
-    type: string
-  - name: BranchName
-    type: string
+  AutorestCSharpVersion: ""
+  TypeSpecEmitterVersion: ""
+  IsInternalFeed: false
 
 jobs:
-- job: ${{ parameters.Name }}
+- job: Update_Generator_Versions
   pool:
     name: azsdk-pool-mms-ubuntu-2004-general
     vmImage: ubuntu-20.04
   steps:
   - checkout: self
     fetchDepth: 1
+  - checkout: azure-sdk-for-net
   - checkout: azure-sdk-tools
     fetchDepth: 1
-  - template: eng/common/pipelines/templates/steps/sparse-checkout.yml@azure-sdk-tools
-    parameters:
-      Paths:
-      - "/*"
-      - "!SessionRecords"
-      Repositories:
-      - Name: Azure/azure-sdk-for-net
-        WorkingDirectory: $(Build.SourcesDirectory)/azure-sdk-for-net
-      SkipCheckoutNone: true
-  - download: current
-    artifact: build_artifacts
-  - pwsh: |
-        Write-Host "Deleting existing emitter-package files"
-        Remove-Item emitter-package*.json -Force
-
-        Write-Host "Copying emitter-package files"
-        Copy-Item $(Pipeline.Workspace)/build_artifacts/emitter-package*.json .
-    displayName: Copy emitter-package files
-    workingDirectory: $(Build.SourcesDirectory)/azure-sdk-for-net/eng
+  - ${{ if eq(parameters.IsInternalFeed, true) }}:
+    - pwsh: ./eng/GenerateInternalNpmrc.ps1 -ContainingFolder $(Build.SourcesDirectory)/azure-sdk-for-net
+      displayName: "Generate Internal Npmrc"
+      workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
   - task: Powershell@2
     displayName: Update SDK Generator Versions
     inputs:
@@ -44,11 +27,19 @@ jobs:
       filePath: $(Build.SourcesDirectory)/autorest.csharp/eng/UpdateGeneratorMetadata.ps1
       arguments: >
         -AutorestCSharpVersion ${{parameters.AutorestCSharpVersion}}
+        -TypeSpecEmitterVersion ${{parameters.TypeSpecEmitterVersion}}
         -SdkRepoRoot $(Build.SourcesDirectory)/azure-sdk-for-net
+        -UseInternalFeed $${{parameters.IsInternalFeed}}
       workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
+  - ${{ if eq(parameters.IsInternalFeed, true) }}: # This stage needs to be remove after https://github.com/Azure/autorest.csharp/issues/3216
+    - pwsh: |
+        git restore eng/common/scripts/TypeSpec-Project-Generate.ps1
+        rm .npmrc
+      displayName: Discard Internal Change
+      workingDirectory: $(Build.SourcesDirectory)/azure-sdk-for-net
   - template: /eng/common/pipelines/templates/steps/git-push-changes.yml@azure-sdk-tools
     parameters:
-      BaseRepoBranch: ${{ parameters.BranchName }}
+      BaseRepoBranch: auto-update-autorest-${{parameters.AutorestCSharpVersion}}
       BaseRepoOwner: azure-sdk
       CommitMsg: Update Generator Version ${{parameters.AutorestCSharpVersion}}
       TargetRepoOwner: Azure

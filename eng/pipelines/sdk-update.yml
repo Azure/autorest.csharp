@@ -14,12 +14,16 @@ resources:
       type: github
       name: Azure/azure-sdk-tools
       endpoint: azure
-      ref: main
+      ref: refs/tags/azure-sdk-tools_20230428.1
     - repository: azure-sdk-for-net
       type: github
       name: Azure/azure-sdk-for-net
       endpoint: azure
       ref: main
+    - repository: azure-sdk-build-tools
+      type: git
+      name: internal/azure-sdk-build-tools
+      ref: refs/tags/azure-sdk-build-tools_20230829.1
 
 stages:
   - stage: 'Build_and_Test'
@@ -49,9 +53,9 @@ stages:
               displayName: "Use 'next' TypeSpec dependencies"
               workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
             - pwsh: |
-                $dir = New-Item -ItemType Directory -Path $(Build.ArtifactStagingDirectory)/package-json/emitter -Verbose
+                $dir = New-Item -ItemType Directory -Path $(Build.ArtifactStagingDirectory)/package-json -Verbose
                 Copy-Item ./package*.json $(Build.ArtifactStagingDirectory)/package-json -Verbose
-                Copy-Item ./src/TypeSpec.Extension/Emitter.Csharp/package.json $(Build.ArtifactStagingDirectory)/package-json/emitter/package.json -Verbose
+                Copy-Item ./src/TypeSpec.Extension/Emitter.Csharp/package.json $(Build.ArtifactStagingDirectory)/package-json/emitter-package.json -Verbose
               workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
               displayName: 'Stage package-json artifact'
               condition: succeededOrFailed()
@@ -119,7 +123,7 @@ stages:
               workingDir: '$(Build.SourcesDirectory)/autorest.csharp/artifacts/bin/AutoRest.CSharp/Release/net6.0'
               publishRegistry: 'useFeed'
               publishFeed: '29ec6040-b234-4e31-b139-33dc4287b756/05efbea8-6e52-49dd-ad3d-ac3d4aa65036'
-          - pwsh: ./eng/PackEmitter.ps1 -BuildNumber $(Build.BuildNumber) -AutorestVersion $(Package.AutorestCSharpVersion) -StagingDirectory $(Build.ArtifactStagingDirectory)/packages
+          - pwsh: ./eng/PackEmitter.ps1 -BuildNumber $(Build.BuildNumber) -AutorestVersion $(Package.autorestVersion) -StagingDirectory $(Build.ArtifactStagingDirectory)/packages
             name: PackEmitter
             displayName: "Pack Emitter"
             workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
@@ -130,17 +134,10 @@ stages:
               workingDir: '$(Build.SourcesDirectory)/autorest.csharp/src/TypeSpec.Extension/Emitter.Csharp'
               publishRegistry: 'useFeed'
               publishFeed: '29ec6040-b234-4e31-b139-33dc4287b756/05efbea8-6e52-49dd-ad3d-ac3d4aa65036'
-          - template: new-emitter-package-files.yml
-            parameters:
-              EmitterPackageJsonPath: '$(Build.SourcesDirectory)/autorest.csharp/src/TypeSpec.Extension/Emitter.Csharp/package.json'
-              AutorestCSharpVersion: $(Package.AutorestCSharpVersion)
-              TypeSpecEmitterVersion: $(PackEmitter.TypeSpecEmitterVersion)
-              OutputDirectory: $(Build.ArtifactStagingDirectory)
-              ToolsRepositoryPath: $(Build.SourcesDirectory)/azure-sdk-tools
-          - publish: $(Build.ArtifactStagingDirectory)
-            artifact: build_artifacts
+          - publish: $(Build.ArtifactStagingDirectory)/packages
+            artifact: packages
             condition: succeededOrFailed()
-            displayName: "Publish build artifacts"
+            displayName: "Publish packages artifact"
   - ${{ if eq(parameters.UseTypeSpecNext, 'true') }}:
     - stage: 'Check_Code_Generation'
       dependsOn:
@@ -170,30 +167,30 @@ stages:
     dependsOn:
       - Build_and_Test
     variables:
-      AutorestCSharpVersion: $[stageDependencies.Build_and_Test.Build.outputs['Package.AutorestCSharpVersion']]
-      TypeSpecEmitterVersion: $[stageDependencies.Build_and_Test.Build.outputs['PackEmitter.TypeSpecEmitterVersion']]
-      BranchName: "auto-update-autorest-$(AutorestCSharpVersion)"
+      AutorestCSharpVersion: $[stageDependencies.Build_and_Test.Build.outputs['Package.autorestVersion']]
+      TypeSpecEmitterVersion: $[stageDependencies.Build_and_Test.Build.outputs['PackEmitter.emitterVersion']]
     jobs:
       - template: update-generator-versions.yml
         parameters:
-          Name: Update_Generator_Version
           AutorestCSharpVersion: $(AutorestCSharpVersion)
-          BranchName: $(BranchName)
+          TypeSpecEmitterVersion: $(TypeSpecEmitterVersion)
+          IsInternalFeed: true
       - template: generate-sdk-job-matrix-files.yml
         parameters:
           Name: Generate_Job_Matrix
-          DependsOn: Update_Generator_Version
           JobCount: 7
-          BranchName: $(BranchName)
       - template: update-azure-sdk-for-net-codes.yml
         parameters:
           Name: Update_Code
-          DependsOn: Generate_Job_Matrix
           Matrix: $[dependencies.Generate_Job_Matrix.outputs['generate_job_matrix.matrix']]
           AutorestCSharpVersion: $(AutorestCSharpVersion)
-          BranchName: $(BranchName)
+          TypeSpecEmitterVersion: $(TypeSpecEmitterVersion)
+          IsInternalFeed: true
+          DependsOn: Generate_Job_Matrix
       - job: Create_PR
-        dependsOn: Update_Code
+        dependsOn: 
+          - Update_Generator_Versions
+          - Update_Code
         steps:
           - checkout: self
             fetchDepth: 1
@@ -213,7 +210,7 @@ stages:
                 -RepoName "azure-sdk-for-net"
                 -BaseBranch "main"
                 -PROwner "azure-sdk"
-                -PRBranch "$(BranchName)"
+                -PRBranch "auto-update-autorest-$(AutorestCSharpVersion)"
                 -AuthToken "$(azuresdk-github-pat)"
                 -PRTitle "Autorest Regen Preview to $(AutorestCSharpVersion) by $(Build.QueuedBy) from $(Build.SourceBranch)"
                 -PRBody "Triggered from $(PRUrl.PRUrl)"

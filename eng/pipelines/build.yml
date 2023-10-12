@@ -19,7 +19,7 @@ resources:
       type: github
       name: Azure/azure-sdk-tools
       endpoint: azure
-      ref: refs/tags/azure-sdk-tools_20231010.1
+      ref: refs/tags/azure-sdk-tools_20230428.1
     - repository: azure-sdk-for-net
       type: github
       name: Azure/azure-sdk-for-net
@@ -65,7 +65,7 @@ stages:
               npm run prettier
             displayName: "Emitter format check"
             workingDirectory: $(Build.SourcesDirectory)/autorest.csharp/src/TypeSpec.Extension/Emitter.Csharp
-          - script: 'dotnet pack src/AutoRest.CSharp/AutoRest.CSharp.csproj -o $(Build.ArtifactStagingDirectory)/packages -warnaserror -c Release'
+          - script: 'dotnet pack src/AutoRest.CSharp/AutoRest.CSharp.csproj -o $(Build.ArtifactStagingDirectory) -warnaserror -c Release'
             name: Package
             displayName: 'Package'
             workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
@@ -111,6 +111,11 @@ stages:
               npm run test --prefix src/TypeSpec.Extension/Emitter.Csharp
             displayName: 'Unit Test'
             workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
+          - task: PublishBuildArtifacts@1
+            condition: succeededOrFailed()
+            displayName: 'Publish Artifacts'
+            inputs:
+              ArtifactName: packages
           - ${{if and(ne(variables['Build.Reason'], 'PullRequest'), eq(variables['System.TeamProject'], 'internal'))}}:
             - pwsh: >
                 ./eng/PublishRelease.ps1
@@ -139,18 +144,6 @@ stages:
                 scriptLocation: "inlineScript"
                 inlineScript: npx cadl-ranch upload-coverage --coverageFile ./artifacts/coverage/cadl-ranch-coverage-csharp.json --generatorName csharp --storageAccountName azuresdkcadlranch --generatorVersion $(node -p -e "require('./src/TypeSpec.Extension/Emitter.Csharp/package.json').version")
                 workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
-          - ${{if and(ne(variables['Build.Reason'], 'PullRequest'), eq(variables['System.TeamProject'], 'internal'))}}:
-            - template: new-emitter-package-files.yml
-              parameters:
-                EmitterPackageJsonPath: '$(Build.SourcesDirectory)/autorest.csharp/src/TypeSpec.Extension/Emitter.Csharp/package.json'
-                AutorestCSharpVersion: $(Package.AutorestCSharpVersion)
-                TypeSpecEmitterVersion: $(Publish.TypeSpecEmitterVersion)
-                OutputDirectory: $(Build.ArtifactStagingDirectory)
-                ToolsRepositoryPath: $(Build.SourcesDirectory)/azure-sdk-tools
-          - publish: $(Build.ArtifactStagingDirectory)
-            artifact: build_artifacts
-            condition: succeededOrFailed()
-            displayName: "Publish build artifacts"
       - template: check-code-generation.yml
         parameters:
           name: Check_Code_Generation_A_B
@@ -180,28 +173,25 @@ stages:
       variables:
         AutorestCSharpVersion: $[stageDependencies.Build_and_Test.Build.outputs['Package.AutorestCSharpVersion']]
         TypeSpecEmitterVersion: $[stageDependencies.Build_and_Test.Build.outputs['Publish.TypeSpecEmitterVersion']]
-        BranchName: "auto-update-autorest-$(AutorestCSharpVersion)"
       jobs:
         - template: update-generator-versions.yml
           parameters:
-            Name: Update_Generator_Version
             AutorestCSharpVersion: $(AutorestCSharpVersion)
-            BranchName: $(BranchName)
+            TypeSpecEmitterVersion: $(TypeSpecEmitterVersion)
         - template: generate-sdk-job-matrix-files.yml
           parameters:
             Name: Generate_Job_Matrix
-            DependsOn: Update_Generator_Version
             JobCount: 7
-            BranchName: $(BranchName)
         - template: update-azure-sdk-for-net-codes.yml
           parameters:
             Name: Update_Code
-            DependsOn: Generate_Job_Matrix
             Matrix: $[dependencies.Generate_Job_Matrix.outputs['generate_job_matrix.matrix']]
             AutorestCSharpVersion: $(AutorestCSharpVersion)
-            BranchName: $(BranchName)
+            TypeSpecEmitterVersion: $(TypeSpecEmitterVersion)
+            DependsOn: Generate_Job_Matrix
         - job: Create_PR
-          dependsOn: Update_Code
+          dependsOn:
+            - Update_Code
           steps:
             - checkout: self
             - checkout: azure-sdk-tools
@@ -215,7 +205,7 @@ stages:
                   -RepoName "azure-sdk-for-net"
                   -BaseBranch "main"
                   -PROwner "azure-sdk"
-                  -PRBranch $(BranchName)
+                  -PRBranch "auto-update-autorest-$(AutorestCSharpVersion)"
                   -AuthToken "$(azuresdk-github-pat)"
                   -PRTitle "Update AutoRest C# version to $(AutorestCSharpVersion)"
                   -PRBody "Update AutoRest C# version to $(AutorestCSharpVersion)"

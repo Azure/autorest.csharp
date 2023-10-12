@@ -15,7 +15,7 @@ import {
 import { InputTypeKind } from "../type/inputTypeKind.js";
 import { RequestLocation } from "../type/requestLocation.js";
 import { getInputType, getFormattedType } from "./model.js";
-import { SdkContext } from "@azure-tools/typespec-client-generator-core";
+import { SdkContext } from "@azure-tools/typespec-client-generator-core/dist/src/interfaces.js";
 
 export interface TypeSpecServer {
     url: string;
