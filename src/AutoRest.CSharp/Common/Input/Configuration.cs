@@ -53,6 +53,7 @@ namespace AutoRest.CSharp.Common.Input
             public const string DeserializeNullCollectionAsNullValue = "deserialize-null-collection-as-null-value";
             public const string UseCoreDataFactoryReplacements = "use-core-datafactory-replacements";
             public const string Branded = "branded";
+            public const string GenerateTestProject = "generateTestProject";
         }
 
         public enum UnreferencedTypesHandlingOption
@@ -95,7 +96,8 @@ namespace AutoRest.CSharp.Common.Input
             IReadOnlyList<string> methodsToKeepClientDefaultValue,
             MgmtConfiguration mgmtConfiguration,
             MgmtTestConfiguration? mgmtTestConfiguration,
-            bool branded)
+            bool branded,
+            bool generateTestProject)
         {
             _outputFolder = outputFolder;
             _namespace = ns;
@@ -155,6 +157,7 @@ namespace AutoRest.CSharp.Common.Input
             _intrinsicTypesToTreatEmptyStringAsNull.UnionWith(additionalIntrinsicTypesToTreatEmptyStringAsNull);
             _methodsToKeepClientDefaultValue = methodsToKeepClientDefaultValue ?? Array.Empty<string>();
             _apiTypes = branded ? new AzureApiTypes() : new SystemApiTypes();
+            GenerateTestProject = generateTestProject;
         }
 
         internal static (string AbsoluteProjectFolder, string RelativeProjectFolder) ParseProjectFolders(string outputFolder, string projectFolder)
@@ -208,6 +211,8 @@ namespace AutoRest.CSharp.Common.Input
 
             return null;
         }
+
+        public static bool GenerateTestProject { get; private set; }
 
         private static ApiTypes? _apiTypes;
         public static ApiTypes ApiTypes => _apiTypes ?? new AzureApiTypes();
@@ -324,7 +329,8 @@ namespace AutoRest.CSharp.Common.Input
                 methodsToKeepClientDefaultValue: autoRest.GetValue<string[]?>(Options.MethodsToKeepClientDefaultValue).GetAwaiter().GetResult() ?? Array.Empty<string>(),
                 mgmtConfiguration: MgmtConfiguration.GetConfiguration(autoRest),
                 mgmtTestConfiguration: MgmtTestConfiguration.GetConfiguration(autoRest),
-                branded: GetOptionBoolValue(autoRest, Options.Branded)
+                branded: GetOptionBoolValue(autoRest, Options.Branded),
+                generateTestProject: GetOptionBoolValue(autoRest, Options.GenerateTestProject)
             );
         }
 
@@ -394,6 +400,8 @@ namespace AutoRest.CSharp.Common.Input
                 case Options.UseCoreDataFactoryReplacements:
                     return true;
                 case Options.Branded:
+                    return true;
+                case Options.GenerateTestProject:
                     return true;
                 default:
                     return null;
@@ -480,7 +488,8 @@ namespace AutoRest.CSharp.Common.Input
                 methodsToKeepClientDefaultValue,
                 MgmtConfiguration.LoadConfiguration(root),
                 MgmtTestConfiguration.LoadConfiguration(root),
-                ReadOption(root, Options.Branded)
+                ReadOption(root, Options.Branded),
+                ReadOption(root, Options.GenerateTestProject)
             );
         }
 
@@ -541,6 +550,7 @@ namespace AutoRest.CSharp.Common.Input
                 MgmtTestConfiguration.SaveConfiguration(writer);
             }
             WriteIfNotDefault(writer, Options.Branded, ApiTypes is AzureApiTypes);
+            WriteIfNotDefault(writer, Options.GenerateTestProject, GenerateTestProject);
 
             writer.WriteEndObject();
         }

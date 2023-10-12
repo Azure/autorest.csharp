@@ -54,7 +54,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 }
                 else
                 {
-                    if (sampleProvider is not null)
+                    if (Configuration.GenerateTestProject && sampleProvider is not null)
                     {
                         var smokeTestWriter = new SmokeTestWriter(client, sampleProvider);
                         smokeTestWriter.Write();

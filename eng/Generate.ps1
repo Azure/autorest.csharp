@@ -197,6 +197,12 @@ function Add-TestProjects-Directory($directory) {
         if ($directory.FullName.Contains(".NewProject.")) {
             $launchSettingsArgs = "-n"
         }
+        if ($directory.FullName.Contains("\UnbrandedProjects\")) {
+            if ($directoryToUse.Name -ne "src") {
+                $directoryToUse = Join-Path $directoryToUse "src"
+            }
+            $launchSettingsArgs = "-n"
+        }
         Add-TypeSpec $testName $directoryToUse "" "" $launchSettingsArgs
     }
     elseif (Test-Path $readmeConfigurationPath) {
