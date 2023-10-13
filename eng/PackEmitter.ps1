@@ -28,4 +28,4 @@ finally {
     Pop-Location
 }
 
-Write-Host "##vso[task.setvariable variable=emitterVersion;isoutput=true]$alphaVersion"
+Write-Host "##vso[task.setvariable variable=TypeSpecEmitterVersion;isoutput=true]$alphaVersion"
