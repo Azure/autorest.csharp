@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Reflection;
+using System.Threading;
 using System.Threading.Tasks;
 using AutoRest.TestServer.Tests.Infrastructure;
 using Azure;
@@ -10,13 +10,6 @@ namespace CadlRanchProjects.Tests
 {
     public class SpecialWordsTests : CadlRanchTestBase
     {
-        [Test]
-        public Task SpecialWords_Operations_for() => Test(async (host) =>
-        {
-            Response response = await new SpecialWordsClient(host, null).GetOperationsClient().ForAsync();
-            NUnit.Framework.Assert.AreEqual(204, response.Status);
-        });
-
         [TestCase("AndAsync")]
         [TestCase("AsAsync")]
         [TestCase("AssertAsync")]
@@ -57,36 +50,97 @@ namespace CadlRanchProjects.Tests
             NUnit.Framework.Assert.AreEqual(204, response.Status);
         });
 
-        [TestCase("WithAndAsync", "and")]
-        public Task SpecialWords_Parameters(string methodName, string parameterName) => Test(async (host) =>
+        [TestCase("WithAndAsync")]
+        [TestCase("WithAndAsync")]
+        [TestCase("WithAsAsync")]
+        [TestCase("WithAssertAsync")]
+        [TestCase("WithAsyncAsync")]
+        [TestCase("WithAwaitAsync")]
+        [TestCase("WithBreakAsync")]
+        [TestCase("WithClassAsync")]
+        [TestCase("WithConstructorAsync")]
+        [TestCase("WithContinueAsync")]
+        [TestCase("WithDefAsync")]
+        [TestCase("WithDelAsync")]
+        [TestCase("WithElifAsync")]
+        [TestCase("WithElseAsync")]
+        [TestCase("WithExceptAsync")]
+        [TestCase("WithExecAsync")]
+        [TestCase("WithFinallyAsync")]
+        [TestCase("WithForAsync")]
+        [TestCase("WithFromAsync")]
+        [TestCase("WithGlobalAsync")]
+        [TestCase("WithIfAsync")]
+        [TestCase("WithImportAsync")]
+        [TestCase("WithInAsync")]
+        [TestCase("WithIsAsync")]
+        [TestCase("WithLambdaAsync")]
+        [TestCase("WithNotAsync")]
+        [TestCase("WithOrAsync")]
+        [TestCase("WithPassAsync")]
+        [TestCase("WithRaiseAsync")]
+        [TestCase("WithReturnAsync")]
+        [TestCase("WithTryAsync")]
+        [TestCase("WithWhileAsync")]
+        [TestCase("WithWithAsync")]
+        [TestCase("WithYieldAsync")]
+        public Task SpecialWords_Parameters(string methodName) => Test(async (host) =>
         {
             var client = new SpecialWordsClient(host, null).GetParametersClient();
-            Response response = await (Task<Response>)typeof(Operations).GetMethod(methodName).Invoke(client, new object[] { "and", new RequestContext() });
+            Response response = await (Task<Response>)typeof(SpecialWords.Parameters).GetMethod(methodName).Invoke(client, new Object[] { "ok", new RequestContext() });
             NUnit.Framework.Assert.AreEqual(204, response.Status);
         });
 
         [Test]
-        public Task SpecialWords_Parameter_getWithFilter() => Test(async (host) =>
+        public Task SpecialWords_ModelProperties_SameAsModelAsync() => Test(async (host) =>
         {
-            Response response = await new SpecialWordsClient(host, null).GetParametersClient().WithIfAsync("abc*.");
+            SameAsModel body = new SameAsModel("ok");
+            Response response = await new SpecialWordsClient(host, null).GetModelPropertiesClient().SameAsModelAsync(body);
             NUnit.Framework.Assert.AreEqual(204, response.Status);
-        });
-        /*
-        [Test]
-        public Task SpecialWords_Model_get() => Test(async (host) =>
-        {
-            var response = await new SpecialWordsClient(host, null).GetModelsClient().GetModelValueAsync();
-            NUnit.Framework.Assert.AreEqual("derived", (response.Value as DerivedModel).ModelKind);
-            NUnit.Framework.Assert.AreEqual("my.name", (response.Value as DerivedModel).DerivedName);
-            NUnit.Framework.Assert.AreEqual("value", (response.Value as DerivedModel).For);
         });
 
-        [Test]
-        public Task SpecialWords_Model_put() => Test(async (host) =>
+        public static object[] ModelsClientCases =
         {
-            var response = await new SpecialWordsClient(host, null).GetModelClient().PutAsync(new DerivedModel("derived", "my.name", "value"));
+            new object[] { new And("ok"), "WithAndAsync" },
+            new object[] { new As("ok"), "WithAsAsync" },
+            new object[] { new SpecialWords.Assert("ok"), "WithAssertAsync" },
+            new object[] { new Async("ok"), "WithAsyncAsync" },
+            new object[] { new Await("ok"), "WithAwaitAsync" },
+            new object[] { new Break("ok"), "WithBreakAsync" },
+            new object[] { new Class("ok"), "WithClassAsync" },
+            new object[] { new Constructor("ok"), "WithConstructorAsync" },
+            new object[] { new Continue("ok"), "WithContinueAsync" },
+            new object[] { new Def("ok"), "WithDefAsync" },
+            new object[] { new Del("ok"), "WithDelAsync" },
+            new object[] { new Elif("ok"), "WithElifAsync" },
+            new object[] { new Else("ok"), "WithElseAsync" },
+            new object[] { new Except("ok"), "WithExceptAsync" },
+            new object[] { new Exec("ok"), "WithExecAsync" },
+            new object[] { new Finally("ok"), "WithFinallyAsync" },
+            new object[] { new For("ok"), "WithForAsync" },
+            new object[] { new From("ok"), "WithFromAsync" },
+            new object[] { new Global("ok"), "WithGlobalAsync" },
+            new object[] { new If("ok"), "WithIfAsync" },
+            new object[] { new Import("ok"), "WithImportAsync" },
+            new object[] { new In("ok"), "WithInAsync" },
+            new object[] { new SpecialWords.Is("ok"), "WithIsAsync" },
+            new object[] { new Lambda("ok"), "WithLambdaAsync" },
+            new object[] { new Not("ok"), "WithNotAsync" },
+            new object[] { new Or("ok"), "WithOrAsync" },
+            new object[] { new Pass("ok"), "WithPassAsync" },
+            new object[] { new Raise("ok"), "WithRaiseAsync" },
+            new object[] { new Return("ok"), "WithReturnAsync" },
+            new object[] { new Try("ok"), "WithTryAsync" },
+            new object[] { new While("ok"), "WithWhileAsync" },
+            new object[] { new With("ok"), "WithWithAsync" },
+            new object[] { new Yield("ok"), "WithYieldAsync" },
+    };
+        [TestCaseSource(nameof(ModelsClientCases))]
+        public Task SpecialWords_Models<T>(T body, string methodName) => Test(async (host) =>
+        {
+            var client = new SpecialWordsClient(host, null).GetModelsClient();
+            Response response = await (Task<Response>)typeof(SpecialWords.Models).GetMethod(methodName, new Type[] {typeof(T), typeof(CancellationToken) }).Invoke(client, new Object[] { body, CancellationToken.None});
             NUnit.Framework.Assert.AreEqual(204, response.Status);
         });
-        */
     }
 }
