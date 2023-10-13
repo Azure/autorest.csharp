@@ -76,6 +76,7 @@ namespace ProtocolMethodsInRestClient
             Utf8JsonRequestContent content = null;
             if (resource != null)
             {
+                content = new Utf8JsonRequestContent();
                 content.JsonWriter.WriteObjectValue(resource);
             }
             RequestContext context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
@@ -109,6 +110,7 @@ namespace ProtocolMethodsInRestClient
             Utf8JsonRequestContent content = null;
             if (resource != null)
             {
+                content = new Utf8JsonRequestContent();
                 content.JsonWriter.WriteObjectValue(resource);
             }
             RequestContext context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;

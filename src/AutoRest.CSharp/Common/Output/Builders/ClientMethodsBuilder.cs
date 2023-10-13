@@ -37,18 +37,20 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
             foreach (var operation in _operations)
             {
-                var builder = SelectBuilder(operation, fields, sampleBuilder, clientName, clientNamespace);
-                yield return Configuration.AzureArm || (Configuration.Generation1ConvenienceClient && !requireProtocolMethods.Contains(operation)) ? builder.BuildLegacy() : builder.Build();
+                var generateProtocolMethods = !Configuration.AzureArm && !Configuration.Generation1ConvenienceClient || requireProtocolMethods.Contains(operation);
+                var builder = SelectBuilder(operation, fields, sampleBuilder, clientName, clientNamespace, generateProtocolMethods);
+                yield return builder.Build();
             }
         }
 
-        private OperationMethodsBuilderBase SelectBuilder(InputOperation operation, ClientFields fields, DpgOperationSampleBuilder sampleBuilder, string clientName, string clientNamespace)
+        private OperationMethodsBuilderBase SelectBuilder(InputOperation operation, ClientFields fields, DpgOperationSampleBuilder sampleBuilder, string clientName, string clientNamespace, bool generateProtocolMethods)
         {
             var statusCodeSwitchBuilder = operation.HttpMethod == RequestMethod.Head && Configuration.HeadAsBoolean
                 ? StatusCodeSwitchBuilder.CreateHeadAsBooleanOperationSwitch()
                 : StatusCodeSwitchBuilder.CreateSwitch(operation, _library, _typeFactory);
 
-            var args = new OperationMethodsBuilderBaseArgs(operation, fields, clientNamespace, clientName, statusCodeSwitchBuilder, sampleBuilder, _typeFactory, _sourceInputModel);
+
+            var args = new OperationMethodsBuilderBaseArgs(operation, fields, clientNamespace, clientName, generateProtocolMethods, statusCodeSwitchBuilder, sampleBuilder, _typeFactory, _sourceInputModel);
 
             return (operation.Paging, operation.LongRunning) switch
             {

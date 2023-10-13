@@ -14,6 +14,7 @@ namespace AutoRest.CSharp.Output.Models
         ClientFields Fields,
         string ClientNamespace,
         string ClientName,
+        bool GenerateProtocolMethods,
         StatusCodeSwitchBuilder StatusCodeSwitchBuilder,
         DpgOperationSampleBuilder OperationSampleBuilder,
         TypeFactory TypeFactory,

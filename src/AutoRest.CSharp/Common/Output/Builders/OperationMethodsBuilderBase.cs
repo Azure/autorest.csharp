@@ -59,6 +59,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
         protected string CreateMessageMethodName { get; }
         protected string ProtocolMethodName { get; }
+        protected bool GenerateProtocolMethods { get; }
 
         protected CSharpType? ResponseType { get; }
         protected CSharpType ProtocolMethodReturnType { get; }
@@ -78,6 +79,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             _sourceInputModel = args.SourceInputModel;
 
             Operation = args.Operation;
+            GenerateProtocolMethods = args.GenerateProtocolMethods;
             ClientDiagnosticsProperty = _fields.ClientDiagnosticsProperty;
             PipelineField = new HttpPipelineExpression(_fields.PipelineField);
 
@@ -98,7 +100,12 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
         public RestClientOperationMethods Build()
         {
-            var parameters = _parametersBuilder.BuildParameters();
+            if (!GenerateProtocolMethods && (Configuration.Generation1ConvenienceClient || Configuration.AzureArm))
+            {
+                return BuildLegacy();
+            }
+
+            var parameters = _parametersBuilder.BuildParameters(true);
 
             var convenienceMethodIsMeaningless = IsConvenienceMethodMeaningless(parameters);
             if (MakeAllProtocolParametersRequired(parameters, convenienceMethodIsMeaningless))
@@ -215,9 +222,9 @@ namespace AutoRest.CSharp.Common.Output.Builders
                    parameters.HasAmbiguityBetweenProtocolAndConvenience;
         }
 
-        public RestClientOperationMethods BuildLegacy()
+        private RestClientOperationMethods BuildLegacy()
         {
-            var parameters = _parametersBuilder.BuildParametersLegacy();
+            var parameters = _parametersBuilder.BuildParameters(false);
             var createMessageBuilder = new CreateMessageMethodBuilder(_fields, parameters.RequestParts, null, Operation.RequestBodyMediaType);
 
             var createRequestMessageMethod = BuildCreateRequestMethod(parameters.CreateMessage, createMessageBuilder);

@@ -78,7 +78,7 @@ namespace AutoRest.CSharp.Output.Models
         }
 
         private IReadOnlyList<Parameter> BuildNextLinkOperationCreateMessageParameters(InputOperation nextLinkOperation)
-            => new MethodParametersBuilder(nextLinkOperation, null, _typeFactory).BuildParameters().CreateMessage;
+            => new MethodParametersBuilder(nextLinkOperation, null, _typeFactory).BuildParameters(GenerateProtocolMethods).CreateMessage;
 
         protected override MethodBodyStatement? BuildCreateNextPageMessageMethodBody(CreateMessageMethodBuilder builder, MethodSignature signature)
         {

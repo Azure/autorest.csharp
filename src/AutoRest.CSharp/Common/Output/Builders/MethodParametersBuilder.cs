@@ -72,8 +72,13 @@ namespace AutoRest.CSharp.Common.Output.Builders
             _requestPartsBuilder = new RequestPartBuilder();
         }
 
-        public RestClientMethodParameters BuildParameters()
+        public RestClientMethodParameters BuildParameters(bool buildParametersForProtocolMethods)
         {
+            if (!buildParametersForProtocolMethods)
+            {
+                return BuildParametersLegacy(Configuration.AzureArm ? GetSortedParameters() : GetLegacySortedParameters());
+            }
+
             var sortedParameters = GetSortedParameters();
 
             var requestConditionHeaders = RequestConditionHeaders.None;
@@ -123,9 +128,6 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 HasAmbiguityBetweenProtocolAndConvenience()
             );
         }
-
-        public RestClientMethodParameters BuildParametersLegacy()
-            => BuildParametersLegacy(Configuration.AzureArm ? GetSortedParameters() : GetLegacySortedParameters());
 
         private RestClientMethodParameters BuildParametersLegacy(IEnumerable<InputParameter> sortedParameters)
         {
