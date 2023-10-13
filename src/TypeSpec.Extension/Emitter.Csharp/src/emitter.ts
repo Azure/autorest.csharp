@@ -155,8 +155,14 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
                 "deserialize-null-collection-as-null-value":
                     options["deserialize-null-collection-as-null-value"],
                 //only emit these if they are not the default values
-                branded: options["branded"] === true ? undefined : options["branded"],
-                generateTestProject: options["generateTestProject"] === true ? undefined : options["generateTestProject"]
+                branded:
+                    options["branded"] === true
+                        ? undefined
+                        : options["branded"],
+                generateTestProject:
+                    options["generateTestProject"] === true
+                        ? undefined
+                        : options["generateTestProject"]
             } as Configuration;
 
             await program.host.writeFile(
