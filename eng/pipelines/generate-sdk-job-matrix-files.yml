@@ -26,9 +26,9 @@ jobs:
       - "/*"
       - "!SessionRecords"
       Repositories:
-      - Name: Azure/azure-sdk-for-net
+      - Name: azure-sdk/azure-sdk-for-net
         WorkingDirectory: $(Build.SourcesDirectory)/azure-sdk-for-net
-        Committish: refs/heads/${{ parameters.BranchName}}
+        Commitish: refs/heads/${{ parameters.BranchName}}
       SkipCheckoutNone: true
   - pwsh: ./eng/GenerateSdkForNetCodeGenerationMatrix.ps1 -SdkForNetPath $(Build.SourcesDirectory)/azure-sdk-for-net -GroupCount ${{ parameters.JobCount }} -OutputFolder $(System.DefaultWorkingDirectory)/output
     displayName: "Generate Matrix Files"
