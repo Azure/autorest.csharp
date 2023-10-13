@@ -4,6 +4,9 @@ parameters:
   - name: UseTypeSpecNext
     type: boolean
     default: false
+  - name: RunTests
+    type: boolean
+    default: true
 
 variables:
   nugetMultiFeedWarnLevel: 'none'
@@ -67,44 +70,47 @@ stages:
               npm ls -a
             displayName: "List packages"
             workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
-          - script: |
-              npm run prettier
-            displayName: "Emitter format check"
-            workingDirectory: $(Build.SourcesDirectory)/autorest.csharp/src/TypeSpec.Extension/Emitter.Csharp
+          - ${{ if eq(parameters.RunTests, 'true') }}:
+            - script: |
+                npm run prettier
+              displayName: "Emitter format check"
+              workingDirectory: $(Build.SourcesDirectory)/autorest.csharp/src/TypeSpec.Extension/Emitter.Csharp
           - pwsh: ./eng/PackArtifacts.ps1 -BuildNumber $(Build.BuildNumber) -StagingDirectory $(Build.ArtifactStagingDirectory)/packages
             name: Package
             displayName: "Pack Artifacts"
             workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
-          - task: Npm@1
-            displayName: 'Build CADL Ranch Mock Api project'
-            inputs:
-              command: custom
-              customCommand: run build
-              workingDir: $(Build.SourcesDirectory)/autorest.csharp/test/CadlRanchMockApis
-          - script: |
-              dotnet test AutoRest.CSharp.sln -v:q
-            displayName: "Test"
-            env:
-              DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
-              DOTNET_CLI_TELEMETRY_OPTOUT: 1
-              DOTNET_MULTILEVEL_LOOKUP: 0
-            workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
-            continueOnError: ${{ parameters.UseTypeSpecNext }}
+          - ${{ if eq(parameters.RunTests, 'true') }}:
+            - task: Npm@1
+              displayName: 'Build CADL Ranch Mock Api project'
+              inputs:
+                command: custom
+                customCommand: run build
+                workingDir: $(Build.SourcesDirectory)/autorest.csharp/test/CadlRanchMockApis
+            - script: |
+                dotnet test AutoRest.CSharp.sln -v:q
+              displayName: "Test"
+              env:
+                DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
+                DOTNET_CLI_TELEMETRY_OPTOUT: 1
+                DOTNET_MULTILEVEL_LOOKUP: 0
+              workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
+              continueOnError: ${{ parameters.UseTypeSpecNext }}
           - task: Npm@1
             displayName: 'Build TypeSpec csharp emitter'
             inputs:
               command: custom
               customCommand: run build
               workingDir: $(Build.SourcesDirectory)/autorest.csharp/src/TypeSpec.Extension/Emitter.Csharp
-          - pwsh: ./eng/ExecuteTypespecEmitterUnitTests.ps1
-            displayName: 'E2E Test for TypeSpec emitter'
-            workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
-            continueOnError: ${{ parameters.UseTypeSpecNext }}
-          - script: |
-              npm run test --prefix src/TypeSpec.Extension/Emitter.Csharp
-            displayName: 'Unit Test'
-            workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
-            continueOnError: ${{ parameters.UseTypeSpecNext }}
+          - ${{ if eq(parameters.RunTests, 'true') }}:
+            - pwsh: ./eng/ExecuteTypespecEmitterUnitTests.ps1
+              displayName: 'E2E Test for TypeSpec emitter'
+              workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
+              continueOnError: ${{ parameters.UseTypeSpecNext }}
+            - script: |
+                npm run test --prefix src/TypeSpec.Extension/Emitter.Csharp
+              displayName: 'Unit Test'
+              workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
+              continueOnError: ${{ parameters.UseTypeSpecNext }}
           - task: NuGetCommand@2
             displayName: 'Publish NugetPackage'
             inputs:
@@ -142,7 +148,7 @@ stages:
             artifact: build_artifacts
             condition: succeededOrFailed()
             displayName: "Publish build artifacts"
-  - ${{ if eq(parameters.UseTypeSpecNext, 'true') }}:
+  - ${{ if and(eq(parameters.UseTypeSpecNext, 'true'), eq(parameters.RunTests, 'true')) }}:
     - stage: 'Check_Code_Generation'
       dependsOn:
         - Build_and_Test
