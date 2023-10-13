@@ -704,8 +704,14 @@ namespace AuthoringTypeSpec.Samples
             BinaryData responseData = operation.Value;
 
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
-            Console.WriteLine(result.GetProperty("status").ToString());
+            Console.WriteLine(result.GetProperty("projectName").ToString());
+            Console.WriteLine(result.GetProperty("projectKind").ToString());
+            Console.WriteLine(result.GetProperty("storageInputContainerName").ToString());
+            Console.WriteLine(result.GetProperty("language").ToString());
+            Console.WriteLine(result.GetProperty("createdDateTime").ToString());
+            Console.WriteLine(result.GetProperty("lastModifiedDateTime").ToString());
+            Console.WriteLine(result.GetProperty("lastTrainedDateTime").ToString());
+            Console.WriteLine(result.GetProperty("lastDeployedDateTime").ToString());
         }
 
         [Test]
@@ -725,8 +731,14 @@ namespace AuthoringTypeSpec.Samples
             BinaryData responseData = operation.Value;
 
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
-            Console.WriteLine(result.GetProperty("status").ToString());
+            Console.WriteLine(result.GetProperty("projectName").ToString());
+            Console.WriteLine(result.GetProperty("projectKind").ToString());
+            Console.WriteLine(result.GetProperty("storageInputContainerName").ToString());
+            Console.WriteLine(result.GetProperty("language").ToString());
+            Console.WriteLine(result.GetProperty("createdDateTime").ToString());
+            Console.WriteLine(result.GetProperty("lastModifiedDateTime").ToString());
+            Console.WriteLine(result.GetProperty("lastTrainedDateTime").ToString());
+            Console.WriteLine(result.GetProperty("lastDeployedDateTime").ToString());
         }
 
         [Test]
@@ -752,23 +764,17 @@ namespace AuthoringTypeSpec.Samples
             BinaryData responseData = operation.Value;
 
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
-            Console.WriteLine(result.GetProperty("status").ToString());
-            Console.WriteLine(result.GetProperty("error").GetProperty("code").ToString());
-            Console.WriteLine(result.GetProperty("error").GetProperty("message").ToString());
-            Console.WriteLine(result.GetProperty("error").GetProperty("target").ToString());
-            Console.WriteLine(result.GetProperty("error").GetProperty("innererror").GetProperty("code").ToString());
-            Console.WriteLine(result.GetProperty("result").GetProperty("projectName").ToString());
-            Console.WriteLine(result.GetProperty("result").GetProperty("projectKind").ToString());
-            Console.WriteLine(result.GetProperty("result").GetProperty("storageInputContainerName").ToString());
-            Console.WriteLine(result.GetProperty("result").GetProperty("settings").GetProperty("<key>").ToString());
-            Console.WriteLine(result.GetProperty("result").GetProperty("multilingual").ToString());
-            Console.WriteLine(result.GetProperty("result").GetProperty("description").ToString());
-            Console.WriteLine(result.GetProperty("result").GetProperty("language").ToString());
-            Console.WriteLine(result.GetProperty("result").GetProperty("createdDateTime").ToString());
-            Console.WriteLine(result.GetProperty("result").GetProperty("lastModifiedDateTime").ToString());
-            Console.WriteLine(result.GetProperty("result").GetProperty("lastTrainedDateTime").ToString());
-            Console.WriteLine(result.GetProperty("result").GetProperty("lastDeployedDateTime").ToString());
+            Console.WriteLine(result.GetProperty("projectName").ToString());
+            Console.WriteLine(result.GetProperty("projectKind").ToString());
+            Console.WriteLine(result.GetProperty("storageInputContainerName").ToString());
+            Console.WriteLine(result.GetProperty("settings").GetProperty("<key>").ToString());
+            Console.WriteLine(result.GetProperty("multilingual").ToString());
+            Console.WriteLine(result.GetProperty("description").ToString());
+            Console.WriteLine(result.GetProperty("language").ToString());
+            Console.WriteLine(result.GetProperty("createdDateTime").ToString());
+            Console.WriteLine(result.GetProperty("lastModifiedDateTime").ToString());
+            Console.WriteLine(result.GetProperty("lastTrainedDateTime").ToString());
+            Console.WriteLine(result.GetProperty("lastDeployedDateTime").ToString());
         }
 
         [Test]
@@ -794,23 +800,17 @@ namespace AuthoringTypeSpec.Samples
             BinaryData responseData = operation.Value;
 
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
-            Console.WriteLine(result.GetProperty("status").ToString());
-            Console.WriteLine(result.GetProperty("error").GetProperty("code").ToString());
-            Console.WriteLine(result.GetProperty("error").GetProperty("message").ToString());
-            Console.WriteLine(result.GetProperty("error").GetProperty("target").ToString());
-            Console.WriteLine(result.GetProperty("error").GetProperty("innererror").GetProperty("code").ToString());
-            Console.WriteLine(result.GetProperty("result").GetProperty("projectName").ToString());
-            Console.WriteLine(result.GetProperty("result").GetProperty("projectKind").ToString());
-            Console.WriteLine(result.GetProperty("result").GetProperty("storageInputContainerName").ToString());
-            Console.WriteLine(result.GetProperty("result").GetProperty("settings").GetProperty("<key>").ToString());
-            Console.WriteLine(result.GetProperty("result").GetProperty("multilingual").ToString());
-            Console.WriteLine(result.GetProperty("result").GetProperty("description").ToString());
-            Console.WriteLine(result.GetProperty("result").GetProperty("language").ToString());
-            Console.WriteLine(result.GetProperty("result").GetProperty("createdDateTime").ToString());
-            Console.WriteLine(result.GetProperty("result").GetProperty("lastModifiedDateTime").ToString());
-            Console.WriteLine(result.GetProperty("result").GetProperty("lastTrainedDateTime").ToString());
-            Console.WriteLine(result.GetProperty("result").GetProperty("lastDeployedDateTime").ToString());
+            Console.WriteLine(result.GetProperty("projectName").ToString());
+            Console.WriteLine(result.GetProperty("projectKind").ToString());
+            Console.WriteLine(result.GetProperty("storageInputContainerName").ToString());
+            Console.WriteLine(result.GetProperty("settings").GetProperty("<key>").ToString());
+            Console.WriteLine(result.GetProperty("multilingual").ToString());
+            Console.WriteLine(result.GetProperty("description").ToString());
+            Console.WriteLine(result.GetProperty("language").ToString());
+            Console.WriteLine(result.GetProperty("createdDateTime").ToString());
+            Console.WriteLine(result.GetProperty("lastModifiedDateTime").ToString());
+            Console.WriteLine(result.GetProperty("lastTrainedDateTime").ToString());
+            Console.WriteLine(result.GetProperty("lastDeployedDateTime").ToString());
         }
 
         [Test]
@@ -1085,8 +1085,7 @@ namespace AuthoringTypeSpec.Samples
             BinaryData responseData = operation.Value;
 
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
-            Console.WriteLine(result.GetProperty("status").ToString());
+            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]
@@ -1101,8 +1100,7 @@ namespace AuthoringTypeSpec.Samples
             BinaryData responseData = operation.Value;
 
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
-            Console.WriteLine(result.GetProperty("status").ToString());
+            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]
@@ -1117,12 +1115,7 @@ namespace AuthoringTypeSpec.Samples
             BinaryData responseData = operation.Value;
 
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
-            Console.WriteLine(result.GetProperty("status").ToString());
-            Console.WriteLine(result.GetProperty("error").GetProperty("code").ToString());
-            Console.WriteLine(result.GetProperty("error").GetProperty("message").ToString());
-            Console.WriteLine(result.GetProperty("error").GetProperty("target").ToString());
-            Console.WriteLine(result.GetProperty("error").GetProperty("innererror").GetProperty("code").ToString());
+            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]
@@ -1137,12 +1130,7 @@ namespace AuthoringTypeSpec.Samples
             BinaryData responseData = operation.Value;
 
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
-            Console.WriteLine(result.GetProperty("status").ToString());
-            Console.WriteLine(result.GetProperty("error").GetProperty("code").ToString());
-            Console.WriteLine(result.GetProperty("error").GetProperty("message").ToString());
-            Console.WriteLine(result.GetProperty("error").GetProperty("target").ToString());
-            Console.WriteLine(result.GetProperty("error").GetProperty("innererror").GetProperty("code").ToString());
+            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]
