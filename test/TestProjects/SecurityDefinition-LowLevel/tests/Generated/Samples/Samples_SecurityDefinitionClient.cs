@@ -25,7 +25,7 @@ namespace SecurityDefinition_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             SecurityDefinitionClient client = new SecurityDefinitionClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new object());
+            using RequestContent content = RequestContent.Create(new object());
             Response response = client.Operation(content);
 
             Console.WriteLine(response.Status);
@@ -39,7 +39,7 @@ namespace SecurityDefinition_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             SecurityDefinitionClient client = new SecurityDefinitionClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new object());
+            using RequestContent content = RequestContent.Create(new object());
             Response response = await client.OperationAsync(content);
 
             Console.WriteLine(response.Status);
@@ -53,7 +53,7 @@ namespace SecurityDefinition_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             SecurityDefinitionClient client = new SecurityDefinitionClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 Code = "<Code>",
                 Status = "<Status>",
@@ -71,7 +71,7 @@ namespace SecurityDefinition_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             SecurityDefinitionClient client = new SecurityDefinitionClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 Code = "<Code>",
                 Status = "<Status>",

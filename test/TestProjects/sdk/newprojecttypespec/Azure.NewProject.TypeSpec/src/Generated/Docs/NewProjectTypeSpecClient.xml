@@ -173,7 +173,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     name = "<name>",
     requiredUnion = "<requiredUnion>",
@@ -200,7 +200,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     name = "<name>",
     requiredUnion = "<requiredUnion>",
@@ -238,7 +238,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     name = "<name>",
     requiredUnion = "<requiredUnion>",
@@ -265,7 +265,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     name = "<name>",
     requiredUnion = "<requiredUnion>",
@@ -303,7 +303,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     name = "<name>",
     requiredUnion = "<requiredUnion>",
@@ -330,7 +330,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     name = "<name>",
     requiredUnion = "<requiredUnion>",
@@ -368,7 +368,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     name = "<name>",
     requiredUnion = "<requiredUnion>",
@@ -395,7 +395,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     name = "<name>",
     requiredUnion = "<requiredUnion>",
@@ -475,7 +475,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     name = "<name>",
 });
@@ -490,7 +490,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     name = "<name>",
 });
@@ -508,7 +508,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     name = "<name>",
 });
@@ -523,7 +523,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     name = "<name>",
 });
@@ -629,7 +629,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     sourceUrl = "http://localhost:3000",
     guid = "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a",
@@ -644,7 +644,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     sourceUrl = "http://localhost:3000",
     guid = "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a",
@@ -662,7 +662,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     sourceUrl = "http://localhost:3000",
     guid = "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a",
@@ -677,7 +677,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     sourceUrl = "http://localhost:3000",
     guid = "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a",
@@ -777,7 +777,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     requiredString = "<requiredString>",
     requiredInt = 1234,
@@ -829,7 +829,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     requiredString = "<requiredString>",
     requiredInt = 1234,
@@ -930,7 +930,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     requiredString = "<requiredString>",
     requiredInt = 1234,
@@ -982,7 +982,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     requiredString = "<requiredString>",
     requiredInt = 1234,
@@ -1083,7 +1083,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     requiredString = "<requiredString>",
     requiredInt = 1234,
@@ -1135,7 +1135,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     requiredString = "<requiredString>",
     requiredInt = 1234,
@@ -1236,7 +1236,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     requiredString = "<requiredString>",
     requiredInt = 1234,
@@ -1288,7 +1288,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     requiredString = "<requiredString>",
     requiredInt = 1234,
@@ -1471,7 +1471,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     name = "<name>",
     requiredUnion = "<requiredUnion>",
@@ -1498,7 +1498,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     name = "<name>",
     requiredUnion = "<requiredUnion>",
@@ -1536,7 +1536,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     name = "<name>",
     requiredUnion = "<requiredUnion>",
@@ -1563,7 +1563,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     name = "<name>",
     requiredUnion = "<requiredUnion>",

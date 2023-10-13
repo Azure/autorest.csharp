@@ -180,7 +180,7 @@ This sample shows how to call Put301Async.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Response response = await client.Put301Async(content);
 
 Console.WriteLine(response.Status);
@@ -190,7 +190,7 @@ This sample shows how to call Put301Async with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
-RequestContent content = RequestContent.Create("true");
+using RequestContent content = RequestContent.Create("true");
 Response response = await client.Put301Async(content);
 
 Console.WriteLine(response.Status);
@@ -203,7 +203,7 @@ This sample shows how to call Put301.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Response response = client.Put301(content);
 
 Console.WriteLine(response.Status);
@@ -213,7 +213,7 @@ This sample shows how to call Put301 with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
-RequestContent content = RequestContent.Create("true");
+using RequestContent content = RequestContent.Create("true");
 Response response = client.Put301(content);
 
 Console.WriteLine(response.Status);
@@ -310,7 +310,7 @@ This sample shows how to call Patch302Async.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Response response = await client.Patch302Async(content);
 
 Console.WriteLine(response.Status);
@@ -320,7 +320,7 @@ This sample shows how to call Patch302Async with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
-RequestContent content = RequestContent.Create("true");
+using RequestContent content = RequestContent.Create("true");
 Response response = await client.Patch302Async(content);
 
 Console.WriteLine(response.Status);
@@ -333,7 +333,7 @@ This sample shows how to call Patch302.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Response response = client.Patch302(content);
 
 Console.WriteLine(response.Status);
@@ -343,7 +343,7 @@ This sample shows how to call Patch302 with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
-RequestContent content = RequestContent.Create("true");
+using RequestContent content = RequestContent.Create("true");
 Response response = client.Patch302(content);
 
 Console.WriteLine(response.Status);
@@ -356,7 +356,7 @@ This sample shows how to call Post303Async.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Response response = await client.Post303Async(content);
 
 Console.WriteLine(response.Status);
@@ -366,7 +366,7 @@ This sample shows how to call Post303Async with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
-RequestContent content = RequestContent.Create("true");
+using RequestContent content = RequestContent.Create("true");
 Response response = await client.Post303Async(content);
 
 Console.WriteLine(response.Status);
@@ -379,7 +379,7 @@ This sample shows how to call Post303.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Response response = client.Post303(content);
 
 Console.WriteLine(response.Status);
@@ -389,7 +389,7 @@ This sample shows how to call Post303 with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
-RequestContent content = RequestContent.Create("true");
+using RequestContent content = RequestContent.Create("true");
 Response response = client.Post303(content);
 
 Console.WriteLine(response.Status);
@@ -528,7 +528,7 @@ This sample shows how to call Put307Async.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Response response = await client.Put307Async(content);
 
 Console.WriteLine(response.Status);
@@ -538,7 +538,7 @@ This sample shows how to call Put307Async with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
-RequestContent content = RequestContent.Create("true");
+using RequestContent content = RequestContent.Create("true");
 Response response = await client.Put307Async(content);
 
 Console.WriteLine(response.Status);
@@ -551,7 +551,7 @@ This sample shows how to call Put307.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Response response = client.Put307(content);
 
 Console.WriteLine(response.Status);
@@ -561,7 +561,7 @@ This sample shows how to call Put307 with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
-RequestContent content = RequestContent.Create("true");
+using RequestContent content = RequestContent.Create("true");
 Response response = client.Put307(content);
 
 Console.WriteLine(response.Status);
@@ -574,7 +574,7 @@ This sample shows how to call Patch307Async.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Response response = await client.Patch307Async(content);
 
 Console.WriteLine(response.Status);
@@ -584,7 +584,7 @@ This sample shows how to call Patch307Async with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
-RequestContent content = RequestContent.Create("true");
+using RequestContent content = RequestContent.Create("true");
 Response response = await client.Patch307Async(content);
 
 Console.WriteLine(response.Status);
@@ -597,7 +597,7 @@ This sample shows how to call Patch307.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Response response = client.Patch307(content);
 
 Console.WriteLine(response.Status);
@@ -607,7 +607,7 @@ This sample shows how to call Patch307 with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
-RequestContent content = RequestContent.Create("true");
+using RequestContent content = RequestContent.Create("true");
 Response response = client.Patch307(content);
 
 Console.WriteLine(response.Status);
@@ -620,7 +620,7 @@ This sample shows how to call Post307Async.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Response response = await client.Post307Async(content);
 
 Console.WriteLine(response.Status);
@@ -630,7 +630,7 @@ This sample shows how to call Post307Async with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
-RequestContent content = RequestContent.Create("true");
+using RequestContent content = RequestContent.Create("true");
 Response response = await client.Post307Async(content);
 
 Console.WriteLine(response.Status);
@@ -643,7 +643,7 @@ This sample shows how to call Post307.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Response response = client.Post307(content);
 
 Console.WriteLine(response.Status);
@@ -653,7 +653,7 @@ This sample shows how to call Post307 with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
-RequestContent content = RequestContent.Create("true");
+using RequestContent content = RequestContent.Create("true");
 Response response = client.Post307(content);
 
 Console.WriteLine(response.Status);
@@ -666,7 +666,7 @@ This sample shows how to call Delete307Async.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Response response = await client.Delete307Async(content);
 
 Console.WriteLine(response.Status);
@@ -676,7 +676,7 @@ This sample shows how to call Delete307Async with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
-RequestContent content = RequestContent.Create("true");
+using RequestContent content = RequestContent.Create("true");
 Response response = await client.Delete307Async(content);
 
 Console.WriteLine(response.Status);
@@ -689,7 +689,7 @@ This sample shows how to call Delete307.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
-RequestContent content = null;
+using RequestContent content = null;
 Response response = client.Delete307(content);
 
 Console.WriteLine(response.Status);
@@ -699,7 +699,7 @@ This sample shows how to call Delete307 with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
-RequestContent content = RequestContent.Create("true");
+using RequestContent content = RequestContent.Create("true");
 Response response = client.Delete307(content);
 
 Console.WriteLine(response.Status);

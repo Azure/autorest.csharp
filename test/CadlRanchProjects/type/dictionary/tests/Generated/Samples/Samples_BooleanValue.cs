@@ -109,7 +109,7 @@ namespace _Type._Dictionary.Samples
         {
             BooleanValue client = new DictionaryClient().GetBooleanValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 key = true,
             });
@@ -124,7 +124,7 @@ namespace _Type._Dictionary.Samples
         {
             BooleanValue client = new DictionaryClient().GetBooleanValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 key = true,
             });
@@ -163,7 +163,7 @@ namespace _Type._Dictionary.Samples
         {
             BooleanValue client = new DictionaryClient().GetBooleanValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 key = true,
             });
@@ -178,7 +178,7 @@ namespace _Type._Dictionary.Samples
         {
             BooleanValue client = new DictionaryClient().GetBooleanValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 key = true,
             });

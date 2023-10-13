@@ -56,8 +56,8 @@ namespace MultipleMediaTypes
             _apiVersion = options.Version;
         }
 
-        /// <param name="body"> The BinaryData to use. </param>
-        /// <param name="contentType"> The ContentType to use. Allowed values: "application/json" | "application/octet-stream". </param>
+        /// <param name="body"> The Bytes to use. </param>
+        /// <param name="contentType"> The Union to use. Allowed values: "application/json" | "application/octet-stream". </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/MultipleMediaTypesClient.xml" path="doc/members/member[@name='OneBinaryBodyTwoContentTypesAsync(BinaryData,ContentType,CancellationToken)']/*" />
@@ -66,12 +66,13 @@ namespace MultipleMediaTypes
             Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await OneBinaryBodyTwoContentTypesAsync(body, contentType, context).ConfigureAwait(false);
+            using RequestContent content = RequestContentHelper.FromObject(body);
+            Response response = await OneBinaryBodyTwoContentTypesAsync(content, contentType, context).ConfigureAwait(false);
             return response;
         }
 
-        /// <param name="body"> The BinaryData to use. </param>
-        /// <param name="contentType"> The ContentType to use. Allowed values: "application/json" | "application/octet-stream". </param>
+        /// <param name="body"> The Bytes to use. </param>
+        /// <param name="contentType"> The Union to use. Allowed values: "application/json" | "application/octet-stream". </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/MultipleMediaTypesClient.xml" path="doc/members/member[@name='OneBinaryBodyTwoContentTypes(BinaryData,ContentType,CancellationToken)']/*" />
@@ -80,7 +81,8 @@ namespace MultipleMediaTypes
             Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = OneBinaryBodyTwoContentTypes(body, contentType, context);
+            using RequestContent content = RequestContentHelper.FromObject(body);
+            Response response = OneBinaryBodyTwoContentTypes(content, contentType, context);
             return response;
         }
 
@@ -100,7 +102,7 @@ namespace MultipleMediaTypes
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="contentType"> The ContentType to use. Allowed values: "application/json" | "application/octet-stream". </param>
+        /// <param name="contentType"> The Union to use. Allowed values: "application/json" | "application/octet-stream". </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -140,7 +142,7 @@ namespace MultipleMediaTypes
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="contentType"> The ContentType to use. Allowed values: "application/json" | "application/octet-stream". </param>
+        /// <param name="contentType"> The Union to use. Allowed values: "application/json" | "application/octet-stream". </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -165,7 +167,7 @@ namespace MultipleMediaTypes
         }
 
         /// <param name="body"> The String to use. </param>
-        /// <param name="contentType"> The ContentType to use. Allowed values: "application/json" | "application/octet-stream" | "text/plain". </param>
+        /// <param name="contentType"> The Union to use. Allowed values: "application/json" | "application/octet-stream" | "text/plain". </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="body"/> is an empty string, and was expected to be non-empty. </exception>
@@ -175,12 +177,13 @@ namespace MultipleMediaTypes
             Argument.AssertNotNullOrEmpty(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await OneStringBodyThreeContentTypesAsync(RequestContentHelper.FromObject(body), contentType, context).ConfigureAwait(false);
+            using RequestContent content = RequestContentHelper.FromObject(body);
+            Response response = await OneStringBodyThreeContentTypesAsync(content, contentType, context).ConfigureAwait(false);
             return response;
         }
 
         /// <param name="body"> The String to use. </param>
-        /// <param name="contentType"> The ContentType to use. Allowed values: "application/json" | "application/octet-stream" | "text/plain". </param>
+        /// <param name="contentType"> The Union to use. Allowed values: "application/json" | "application/octet-stream" | "text/plain". </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="body"/> is an empty string, and was expected to be non-empty. </exception>
@@ -190,7 +193,8 @@ namespace MultipleMediaTypes
             Argument.AssertNotNullOrEmpty(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = OneStringBodyThreeContentTypes(RequestContentHelper.FromObject(body), contentType, context);
+            using RequestContent content = RequestContentHelper.FromObject(body);
+            Response response = OneStringBodyThreeContentTypes(content, contentType, context);
             return response;
         }
 
@@ -210,7 +214,7 @@ namespace MultipleMediaTypes
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="contentType"> The ContentType to use. Allowed values: "application/json" | "application/octet-stream" | "text/plain". </param>
+        /// <param name="contentType"> The Union to use. Allowed values: "application/json" | "application/octet-stream" | "text/plain". </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -250,7 +254,7 @@ namespace MultipleMediaTypes
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="contentType"> The ContentType to use. Allowed values: "application/json" | "application/octet-stream" | "text/plain". </param>
+        /// <param name="contentType"> The Union to use. Allowed values: "application/json" | "application/octet-stream" | "text/plain". </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -283,7 +287,8 @@ namespace MultipleMediaTypes
             Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await OneModelBodyOneContentTypeAsync(body.ToRequestContent(), context).ConfigureAwait(false);
+            using RequestContent content = body.ToRequestContent();
+            Response response = await OneModelBodyOneContentTypeAsync(content, context).ConfigureAwait(false);
             return response;
         }
 
@@ -296,7 +301,8 @@ namespace MultipleMediaTypes
             Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = OneModelBodyOneContentType(body.ToRequestContent(), context);
+            using RequestContent content = body.ToRequestContent();
+            Response response = OneModelBodyOneContentType(content, context);
             return response;
         }
 

@@ -216,7 +216,7 @@ This sample shows how to call GetSinglePagesWithBodyParamsAsync and parse the re
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PagingClient client = new PagingClient(credential);
 
-RequestContent content = RequestContent.Create(new object());
+using RequestContent content = RequestContent.Create(new object());
 await foreach (BinaryData item in client.GetSinglePagesWithBodyParamsAsync(content))
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
@@ -228,7 +228,7 @@ This sample shows how to call GetSinglePagesWithBodyParamsAsync with all request
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PagingClient client = new PagingClient(credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     name = "<name>",
 });
@@ -247,7 +247,7 @@ This sample shows how to call GetSinglePagesWithBodyParams and parse the result.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PagingClient client = new PagingClient(credential);
 
-RequestContent content = RequestContent.Create(new object());
+using RequestContent content = RequestContent.Create(new object());
 foreach (BinaryData item in client.GetSinglePagesWithBodyParams(content))
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
@@ -259,7 +259,7 @@ This sample shows how to call GetSinglePagesWithBodyParams with all request cont
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PagingClient client = new PagingClient(credential);
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     name = "<name>",
 });

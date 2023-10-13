@@ -111,7 +111,7 @@ namespace _Specs_.Azure.Core.Traits.Samples
         {
             TraitsClient client = new TraitsClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 userActionValue = "<userActionValue>",
             });
@@ -127,7 +127,7 @@ namespace _Specs_.Azure.Core.Traits.Samples
         {
             TraitsClient client = new TraitsClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 userActionValue = "<userActionValue>",
             });
@@ -163,7 +163,7 @@ namespace _Specs_.Azure.Core.Traits.Samples
         {
             TraitsClient client = new TraitsClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 userActionValue = "<userActionValue>",
             });
@@ -179,7 +179,7 @@ namespace _Specs_.Azure.Core.Traits.Samples
         {
             TraitsClient client = new TraitsClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 userActionValue = "<userActionValue>",
             });

@@ -25,7 +25,7 @@ namespace Encode.Bytes.Samples
         {
             Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 value = new object(),
             });
@@ -41,7 +41,7 @@ namespace Encode.Bytes.Samples
         {
             Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 value = new object(),
             });
@@ -77,7 +77,7 @@ namespace Encode.Bytes.Samples
         {
             Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 value = new object(),
             });
@@ -93,7 +93,7 @@ namespace Encode.Bytes.Samples
         {
             Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 value = new object(),
             });
@@ -129,7 +129,7 @@ namespace Encode.Bytes.Samples
         {
             Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 value = new object(),
             });
@@ -145,7 +145,7 @@ namespace Encode.Bytes.Samples
         {
             Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 value = new object(),
             });
@@ -181,7 +181,7 @@ namespace Encode.Bytes.Samples
         {
             Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 value = new object(),
             });
@@ -197,7 +197,7 @@ namespace Encode.Bytes.Samples
         {
             Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 value = new object(),
             });
@@ -233,7 +233,7 @@ namespace Encode.Bytes.Samples
         {
             Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 value = new object(),
             });
@@ -249,7 +249,7 @@ namespace Encode.Bytes.Samples
         {
             Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 value = new object(),
             });
@@ -285,7 +285,7 @@ namespace Encode.Bytes.Samples
         {
             Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 value = new object(),
             });
@@ -301,7 +301,7 @@ namespace Encode.Bytes.Samples
         {
             Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 value = new object(),
             });
@@ -337,7 +337,7 @@ namespace Encode.Bytes.Samples
         {
             Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 value = new object[]
             {
@@ -356,7 +356,7 @@ new object()
         {
             Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 value = new object[]
             {
@@ -401,7 +401,7 @@ BinaryData.FromObjectAsJson(new object())
         {
             Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 value = new object[]
             {
@@ -420,7 +420,7 @@ new object()
         {
             Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 value = new object[]
             {

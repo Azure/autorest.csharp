@@ -77,7 +77,7 @@ namespace body_string_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             EnumClient client = new EnumClient(credential);
 
-            RequestContent content = RequestContent.Create("red color");
+            using RequestContent content = RequestContent.Create("red color");
             Response response = client.PutNotExpandable(content);
 
             Console.WriteLine(response.Status);
@@ -90,7 +90,7 @@ namespace body_string_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             EnumClient client = new EnumClient(credential);
 
-            RequestContent content = RequestContent.Create("red color");
+            using RequestContent content = RequestContent.Create("red color");
             Response response = await client.PutNotExpandableAsync(content);
 
             Console.WriteLine(response.Status);
@@ -103,7 +103,7 @@ namespace body_string_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             EnumClient client = new EnumClient(credential);
 
-            RequestContent content = RequestContent.Create("red color");
+            using RequestContent content = RequestContent.Create("red color");
             Response response = client.PutNotExpandable(content);
 
             Console.WriteLine(response.Status);
@@ -116,7 +116,7 @@ namespace body_string_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             EnumClient client = new EnumClient(credential);
 
-            RequestContent content = RequestContent.Create("red color");
+            using RequestContent content = RequestContent.Create("red color");
             Response response = await client.PutNotExpandableAsync(content);
 
             Console.WriteLine(response.Status);
@@ -181,7 +181,7 @@ namespace body_string_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             EnumClient client = new EnumClient(credential);
 
-            RequestContent content = RequestContent.Create("red color");
+            using RequestContent content = RequestContent.Create("red color");
             Response response = client.PutReferenced(content);
 
             Console.WriteLine(response.Status);
@@ -194,7 +194,7 @@ namespace body_string_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             EnumClient client = new EnumClient(credential);
 
-            RequestContent content = RequestContent.Create("red color");
+            using RequestContent content = RequestContent.Create("red color");
             Response response = await client.PutReferencedAsync(content);
 
             Console.WriteLine(response.Status);
@@ -207,7 +207,7 @@ namespace body_string_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             EnumClient client = new EnumClient(credential);
 
-            RequestContent content = RequestContent.Create("red color");
+            using RequestContent content = RequestContent.Create("red color");
             Response response = client.PutReferenced(content);
 
             Console.WriteLine(response.Status);
@@ -220,7 +220,7 @@ namespace body_string_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             EnumClient client = new EnumClient(credential);
 
-            RequestContent content = RequestContent.Create("red color");
+            using RequestContent content = RequestContent.Create("red color");
             Response response = await client.PutReferencedAsync(content);
 
             Console.WriteLine(response.Status);
@@ -287,7 +287,7 @@ namespace body_string_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             EnumClient client = new EnumClient(credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 ColorConstant = "green-color",
             });
@@ -303,7 +303,7 @@ namespace body_string_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             EnumClient client = new EnumClient(credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 ColorConstant = "green-color",
             });
@@ -319,7 +319,7 @@ namespace body_string_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             EnumClient client = new EnumClient(credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 ColorConstant = "green-color",
                 field1 = "<field1>",
@@ -336,7 +336,7 @@ namespace body_string_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             EnumClient client = new EnumClient(credential);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 ColorConstant = "green-color",
                 field1 = "<field1>",

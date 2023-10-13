@@ -221,7 +221,7 @@ namespace httpInfrastructure_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Response response = client.Put301(content);
 
             Console.WriteLine(response.Status);
@@ -234,7 +234,7 @@ namespace httpInfrastructure_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Response response = await client.Put301Async(content);
 
             Console.WriteLine(response.Status);
@@ -247,7 +247,7 @@ namespace httpInfrastructure_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
-            RequestContent content = RequestContent.Create("true");
+            using RequestContent content = RequestContent.Create("true");
             Response response = client.Put301(content);
 
             Console.WriteLine(response.Status);
@@ -260,7 +260,7 @@ namespace httpInfrastructure_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
-            RequestContent content = RequestContent.Create("true");
+            using RequestContent content = RequestContent.Create("true");
             Response response = await client.Put301Async(content);
 
             Console.WriteLine(response.Status);
@@ -369,7 +369,7 @@ namespace httpInfrastructure_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Response response = client.Patch302(content);
 
             Console.WriteLine(response.Status);
@@ -382,7 +382,7 @@ namespace httpInfrastructure_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Response response = await client.Patch302Async(content);
 
             Console.WriteLine(response.Status);
@@ -395,7 +395,7 @@ namespace httpInfrastructure_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
-            RequestContent content = RequestContent.Create("true");
+            using RequestContent content = RequestContent.Create("true");
             Response response = client.Patch302(content);
 
             Console.WriteLine(response.Status);
@@ -408,7 +408,7 @@ namespace httpInfrastructure_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
-            RequestContent content = RequestContent.Create("true");
+            using RequestContent content = RequestContent.Create("true");
             Response response = await client.Patch302Async(content);
 
             Console.WriteLine(response.Status);
@@ -421,7 +421,7 @@ namespace httpInfrastructure_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Response response = client.Post303(content);
 
             Console.WriteLine(response.Status);
@@ -434,7 +434,7 @@ namespace httpInfrastructure_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Response response = await client.Post303Async(content);
 
             Console.WriteLine(response.Status);
@@ -447,7 +447,7 @@ namespace httpInfrastructure_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
-            RequestContent content = RequestContent.Create("true");
+            using RequestContent content = RequestContent.Create("true");
             Response response = client.Post303(content);
 
             Console.WriteLine(response.Status);
@@ -460,7 +460,7 @@ namespace httpInfrastructure_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
-            RequestContent content = RequestContent.Create("true");
+            using RequestContent content = RequestContent.Create("true");
             Response response = await client.Post303Async(content);
 
             Console.WriteLine(response.Status);
@@ -617,7 +617,7 @@ namespace httpInfrastructure_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Response response = client.Put307(content);
 
             Console.WriteLine(response.Status);
@@ -630,7 +630,7 @@ namespace httpInfrastructure_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Response response = await client.Put307Async(content);
 
             Console.WriteLine(response.Status);
@@ -643,7 +643,7 @@ namespace httpInfrastructure_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
-            RequestContent content = RequestContent.Create("true");
+            using RequestContent content = RequestContent.Create("true");
             Response response = client.Put307(content);
 
             Console.WriteLine(response.Status);
@@ -656,7 +656,7 @@ namespace httpInfrastructure_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
-            RequestContent content = RequestContent.Create("true");
+            using RequestContent content = RequestContent.Create("true");
             Response response = await client.Put307Async(content);
 
             Console.WriteLine(response.Status);
@@ -669,7 +669,7 @@ namespace httpInfrastructure_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Response response = client.Patch307(content);
 
             Console.WriteLine(response.Status);
@@ -682,7 +682,7 @@ namespace httpInfrastructure_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Response response = await client.Patch307Async(content);
 
             Console.WriteLine(response.Status);
@@ -695,7 +695,7 @@ namespace httpInfrastructure_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
-            RequestContent content = RequestContent.Create("true");
+            using RequestContent content = RequestContent.Create("true");
             Response response = client.Patch307(content);
 
             Console.WriteLine(response.Status);
@@ -708,7 +708,7 @@ namespace httpInfrastructure_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
-            RequestContent content = RequestContent.Create("true");
+            using RequestContent content = RequestContent.Create("true");
             Response response = await client.Patch307Async(content);
 
             Console.WriteLine(response.Status);
@@ -721,7 +721,7 @@ namespace httpInfrastructure_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Response response = client.Post307(content);
 
             Console.WriteLine(response.Status);
@@ -734,7 +734,7 @@ namespace httpInfrastructure_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Response response = await client.Post307Async(content);
 
             Console.WriteLine(response.Status);
@@ -747,7 +747,7 @@ namespace httpInfrastructure_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
-            RequestContent content = RequestContent.Create("true");
+            using RequestContent content = RequestContent.Create("true");
             Response response = client.Post307(content);
 
             Console.WriteLine(response.Status);
@@ -760,7 +760,7 @@ namespace httpInfrastructure_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
-            RequestContent content = RequestContent.Create("true");
+            using RequestContent content = RequestContent.Create("true");
             Response response = await client.Post307Async(content);
 
             Console.WriteLine(response.Status);
@@ -773,7 +773,7 @@ namespace httpInfrastructure_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Response response = client.Delete307(content);
 
             Console.WriteLine(response.Status);
@@ -786,7 +786,7 @@ namespace httpInfrastructure_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
-            RequestContent content = null;
+            using RequestContent content = null;
             Response response = await client.Delete307Async(content);
 
             Console.WriteLine(response.Status);
@@ -799,7 +799,7 @@ namespace httpInfrastructure_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
-            RequestContent content = RequestContent.Create("true");
+            using RequestContent content = RequestContent.Create("true");
             Response response = client.Delete307(content);
 
             Console.WriteLine(response.Status);
@@ -812,7 +812,7 @@ namespace httpInfrastructure_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpRedirectsClient client = new HttpRedirectsClient(credential);
 
-            RequestContent content = RequestContent.Create("true");
+            using RequestContent content = RequestContent.Create("true");
             Response response = await client.Delete307Async(content);
 
             Console.WriteLine(response.Status);

@@ -201,7 +201,7 @@ namespace _Type.Property.Nullable.Samples
         {
             Bytes client = new NullableClient().GetBytesClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 requiredProperty = "<requiredProperty>",
                 nullableProperty = new object(),
@@ -217,7 +217,7 @@ namespace _Type.Property.Nullable.Samples
         {
             Bytes client = new NullableClient().GetBytesClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 requiredProperty = "<requiredProperty>",
                 nullableProperty = new object(),
@@ -233,7 +233,7 @@ namespace _Type.Property.Nullable.Samples
         {
             Bytes client = new NullableClient().GetBytesClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 requiredProperty = "<requiredProperty>",
                 nullableProperty = new object(),
@@ -249,7 +249,7 @@ namespace _Type.Property.Nullable.Samples
         {
             Bytes client = new NullableClient().GetBytesClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 requiredProperty = "<requiredProperty>",
                 nullableProperty = new object(),
@@ -265,7 +265,7 @@ namespace _Type.Property.Nullable.Samples
         {
             Bytes client = new NullableClient().GetBytesClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 requiredProperty = "<requiredProperty>",
                 nullableProperty = new object(),
@@ -281,7 +281,7 @@ namespace _Type.Property.Nullable.Samples
         {
             Bytes client = new NullableClient().GetBytesClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 requiredProperty = "<requiredProperty>",
                 nullableProperty = new object(),
@@ -297,7 +297,7 @@ namespace _Type.Property.Nullable.Samples
         {
             Bytes client = new NullableClient().GetBytesClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 requiredProperty = "<requiredProperty>",
                 nullableProperty = new object(),
@@ -313,7 +313,7 @@ namespace _Type.Property.Nullable.Samples
         {
             Bytes client = new NullableClient().GetBytesClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 requiredProperty = "<requiredProperty>",
                 nullableProperty = new object(),

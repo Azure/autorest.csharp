@@ -159,7 +159,7 @@ This sample shows how to call PatchNonNullAsync.
 <code><![CDATA[
 String client = new NullableClient().GetStringClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     requiredProperty = "<requiredProperty>",
     nullableProperty = "<nullableProperty>",
@@ -172,7 +172,7 @@ This sample shows how to call PatchNonNullAsync with all request content.
 <code><![CDATA[
 String client = new NullableClient().GetStringClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     requiredProperty = "<requiredProperty>",
     nullableProperty = "<nullableProperty>",
@@ -188,7 +188,7 @@ This sample shows how to call PatchNonNull.
 <code><![CDATA[
 String client = new NullableClient().GetStringClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     requiredProperty = "<requiredProperty>",
     nullableProperty = "<nullableProperty>",
@@ -201,7 +201,7 @@ This sample shows how to call PatchNonNull with all request content.
 <code><![CDATA[
 String client = new NullableClient().GetStringClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     requiredProperty = "<requiredProperty>",
     nullableProperty = "<nullableProperty>",
@@ -217,7 +217,7 @@ This sample shows how to call PatchNullAsync.
 <code><![CDATA[
 String client = new NullableClient().GetStringClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     requiredProperty = "<requiredProperty>",
     nullableProperty = "<nullableProperty>",
@@ -230,7 +230,7 @@ This sample shows how to call PatchNullAsync with all request content.
 <code><![CDATA[
 String client = new NullableClient().GetStringClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     requiredProperty = "<requiredProperty>",
     nullableProperty = "<nullableProperty>",
@@ -246,7 +246,7 @@ This sample shows how to call PatchNull.
 <code><![CDATA[
 String client = new NullableClient().GetStringClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     requiredProperty = "<requiredProperty>",
     nullableProperty = "<nullableProperty>",
@@ -259,7 +259,7 @@ This sample shows how to call PatchNull with all request content.
 <code><![CDATA[
 String client = new NullableClient().GetStringClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     requiredProperty = "<requiredProperty>",
     nullableProperty = "<nullableProperty>",

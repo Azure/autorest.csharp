@@ -145,7 +145,8 @@ namespace ConvenienceInCadl
             Argument.AssertNotNull(required, nameof(required));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await ConvenienceOptionalBeforeRequiredAsync(required.ToRequestContent(), optional, context).ConfigureAwait(false);
+            using RequestContent content = required.ToRequestContent();
+            Response response = await ConvenienceOptionalBeforeRequiredAsync(content, optional, context).ConfigureAwait(false);
             return response;
         }
 
@@ -160,7 +161,8 @@ namespace ConvenienceInCadl
             Argument.AssertNotNull(required, nameof(required));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = ConvenienceOptionalBeforeRequired(required.ToRequestContent(), optional, context);
+            using RequestContent content = required.ToRequestContent();
+            Response response = ConvenienceOptionalBeforeRequired(content, optional, context);
             return response;
         }
 
@@ -1103,7 +1105,8 @@ namespace ConvenienceInCadl
         public virtual async Task<Response> ProtocolOptionalModelAsync(Model optional = null, CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await ProtocolOptionalModelAsync(optional?.ToRequestContent(), context).ConfigureAwait(false);
+            using RequestContent content = optional?.ToRequestContent();
+            Response response = await ProtocolOptionalModelAsync(content, context).ConfigureAwait(false);
             return response;
         }
 
@@ -1114,7 +1117,8 @@ namespace ConvenienceInCadl
         public virtual Response ProtocolOptionalModel(Model optional = null, CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = ProtocolOptionalModel(optional?.ToRequestContent(), context);
+            using RequestContent content = optional?.ToRequestContent();
+            Response response = ProtocolOptionalModel(content, context);
             return response;
         }
 
@@ -1200,7 +1204,8 @@ namespace ConvenienceInCadl
             Argument.AssertNotNull(required, nameof(required));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await ProtocolRequiredModelAsync(required.ToRequestContent(), context).ConfigureAwait(false);
+            using RequestContent content = required.ToRequestContent();
+            Response response = await ProtocolRequiredModelAsync(content, context).ConfigureAwait(false);
             return response;
         }
 
@@ -1214,7 +1219,8 @@ namespace ConvenienceInCadl
             Argument.AssertNotNull(required, nameof(required));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = ProtocolRequiredModel(required.ToRequestContent(), context);
+            using RequestContent content = required.ToRequestContent();
+            Response response = ProtocolRequiredModel(content, context);
             return response;
         }
 
@@ -1719,7 +1725,8 @@ namespace ConvenienceInCadl
         public virtual async Task<Response> ConvenienceOptionalModelWithOptionalAsync(Model optional = null, CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await ConvenienceOptionalModelWithOptionalAsync(optional?.ToRequestContent(), context).ConfigureAwait(false);
+            using RequestContent content = optional?.ToRequestContent();
+            Response response = await ConvenienceOptionalModelWithOptionalAsync(content, context).ConfigureAwait(false);
             return response;
         }
 
@@ -1730,7 +1737,8 @@ namespace ConvenienceInCadl
         public virtual Response ConvenienceOptionalModelWithOptional(Model optional = null, CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = ConvenienceOptionalModelWithOptional(optional?.ToRequestContent(), context);
+            using RequestContent content = optional?.ToRequestContent();
+            Response response = ConvenienceOptionalModelWithOptional(content, context);
             return response;
         }
 
@@ -1816,7 +1824,8 @@ namespace ConvenienceInCadl
             Argument.AssertNotNull(required, nameof(required));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await ConvenienceRequiredModelWithOptionalAsync(required.ToRequestContent(), context).ConfigureAwait(false);
+            using RequestContent content = required.ToRequestContent();
+            Response response = await ConvenienceRequiredModelWithOptionalAsync(content, context).ConfigureAwait(false);
             return response;
         }
 
@@ -1830,7 +1839,8 @@ namespace ConvenienceInCadl
             Argument.AssertNotNull(required, nameof(required));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = ConvenienceRequiredModelWithOptional(required.ToRequestContent(), context);
+            using RequestContent content = required.ToRequestContent();
+            Response response = ConvenienceRequiredModelWithOptional(content, context);
             return response;
         }
 
@@ -1919,7 +1929,8 @@ namespace ConvenienceInCadl
         public virtual async Task<Response> ConvenienceOptionalModelWithRequiredAsync(Model optional = null, CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await ConvenienceOptionalModelWithRequiredAsync(optional?.ToRequestContent(), context).ConfigureAwait(false);
+            using RequestContent content = optional?.ToRequestContent();
+            Response response = await ConvenienceOptionalModelWithRequiredAsync(content, context).ConfigureAwait(false);
             return response;
         }
 
@@ -1930,7 +1941,8 @@ namespace ConvenienceInCadl
         public virtual Response ConvenienceOptionalModelWithRequired(Model optional = null, CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = ConvenienceOptionalModelWithRequired(optional?.ToRequestContent(), context);
+            using RequestContent content = optional?.ToRequestContent();
+            Response response = ConvenienceOptionalModelWithRequired(content, context);
             return response;
         }
 
@@ -2017,7 +2029,8 @@ namespace ConvenienceInCadl
             Argument.AssertNotNull(required, nameof(required));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await ProtocolOptionalBeforeRequiredAsync(required.ToRequestContent(), optional, context).ConfigureAwait(false);
+            using RequestContent content = required.ToRequestContent();
+            Response response = await ProtocolOptionalBeforeRequiredAsync(content, optional, context).ConfigureAwait(false);
             return response;
         }
 
@@ -2032,7 +2045,8 @@ namespace ConvenienceInCadl
             Argument.AssertNotNull(required, nameof(required));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = ProtocolOptionalBeforeRequired(required.ToRequestContent(), optional, context);
+            using RequestContent content = required.ToRequestContent();
+            Response response = ProtocolOptionalBeforeRequired(content, optional, context);
             return response;
         }
 

@@ -24,7 +24,7 @@ namespace Parameters.BodyOptionality.Samples
         {
             BodyOptionalityClient client = new BodyOptionalityClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
             });
@@ -39,7 +39,7 @@ namespace Parameters.BodyOptionality.Samples
         {
             BodyOptionalityClient client = new BodyOptionalityClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
             });
@@ -74,7 +74,7 @@ namespace Parameters.BodyOptionality.Samples
         {
             BodyOptionalityClient client = new BodyOptionalityClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
             });
@@ -89,7 +89,7 @@ namespace Parameters.BodyOptionality.Samples
         {
             BodyOptionalityClient client = new BodyOptionalityClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
             });
@@ -124,7 +124,7 @@ namespace Parameters.BodyOptionality.Samples
         {
             BodyOptionalityClient client = new BodyOptionalityClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
             });
@@ -139,7 +139,7 @@ namespace Parameters.BodyOptionality.Samples
         {
             BodyOptionalityClient client = new BodyOptionalityClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
             });
@@ -174,7 +174,7 @@ namespace Parameters.BodyOptionality.Samples
         {
             BodyOptionalityClient client = new BodyOptionalityClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
             });
@@ -189,7 +189,7 @@ namespace Parameters.BodyOptionality.Samples
         {
             BodyOptionalityClient client = new BodyOptionalityClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
             });

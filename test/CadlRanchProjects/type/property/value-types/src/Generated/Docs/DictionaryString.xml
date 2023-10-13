@@ -125,7 +125,7 @@ This sample shows how to call PutAsync.
 <code><![CDATA[
 DictionaryString client = new ValueTypesClient().GetDictionaryStringClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     property = new
     {
@@ -140,7 +140,7 @@ This sample shows how to call PutAsync with all request content.
 <code><![CDATA[
 DictionaryString client = new ValueTypesClient().GetDictionaryStringClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     property = new
     {
@@ -158,7 +158,7 @@ This sample shows how to call Put.
 <code><![CDATA[
 DictionaryString client = new ValueTypesClient().GetDictionaryStringClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     property = new
     {
@@ -173,7 +173,7 @@ This sample shows how to call Put with all request content.
 <code><![CDATA[
 DictionaryString client = new ValueTypesClient().GetDictionaryStringClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     property = new
     {

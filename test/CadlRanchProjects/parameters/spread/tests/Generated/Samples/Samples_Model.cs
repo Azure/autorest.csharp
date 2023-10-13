@@ -24,7 +24,7 @@ namespace Parameters.Spread.Samples
         {
             Model client = new SpreadClient().GetModelClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
             });
@@ -39,7 +39,7 @@ namespace Parameters.Spread.Samples
         {
             Model client = new SpreadClient().GetModelClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
             });
@@ -74,7 +74,7 @@ namespace Parameters.Spread.Samples
         {
             Model client = new SpreadClient().GetModelClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
             });
@@ -89,7 +89,7 @@ namespace Parameters.Spread.Samples
         {
             Model client = new SpreadClient().GetModelClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
             });

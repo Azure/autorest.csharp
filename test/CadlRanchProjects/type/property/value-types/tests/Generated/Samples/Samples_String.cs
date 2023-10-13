@@ -109,7 +109,7 @@ namespace _Type.Property.ValueTypes.Samples
         {
             String client = new ValueTypesClient().GetStringClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 property = "<property>",
             });
@@ -124,7 +124,7 @@ namespace _Type.Property.ValueTypes.Samples
         {
             String client = new ValueTypesClient().GetStringClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 property = "<property>",
             });
@@ -159,7 +159,7 @@ namespace _Type.Property.ValueTypes.Samples
         {
             String client = new ValueTypesClient().GetStringClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 property = "<property>",
             });
@@ -174,7 +174,7 @@ namespace _Type.Property.ValueTypes.Samples
         {
             String client = new ValueTypesClient().GetStringClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 property = "<property>",
             });

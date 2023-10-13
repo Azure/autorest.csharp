@@ -41,7 +41,7 @@ This sample shows how to call SpreadAsRequestBodyAsync.
 <code><![CDATA[
 Model client = new SpreadClient().GetModelClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     name = "<name>",
 });
@@ -53,7 +53,7 @@ This sample shows how to call SpreadAsRequestBodyAsync with all request content.
 <code><![CDATA[
 Model client = new SpreadClient().GetModelClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     name = "<name>",
 });
@@ -68,7 +68,7 @@ This sample shows how to call SpreadAsRequestBody.
 <code><![CDATA[
 Model client = new SpreadClient().GetModelClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     name = "<name>",
 });
@@ -80,7 +80,7 @@ This sample shows how to call SpreadAsRequestBody with all request content.
 <code><![CDATA[
 Model client = new SpreadClient().GetModelClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     name = "<name>",
 });
