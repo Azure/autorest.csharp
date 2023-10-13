@@ -16,7 +16,7 @@ using SpecialWords.Models;
 
 namespace SpecialWords.Samples
 {
-    public partial class SamplesModelProperties
+    public partial class Samples_ModelProperties
     {
         [Test]
         [Ignore("Only validating compilation of examples")]

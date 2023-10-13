@@ -7,7 +7,6 @@ using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Builders;
-using AutoRest.CSharp.Utilities;
 using Microsoft.CodeAnalysis;
 
 namespace AutoRest.CSharp.Output.Models.Types
@@ -46,7 +45,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         private TypeDeclarationOptions BuildType()
         {
             return BuilderHelpers.CreateTypeAttributes(
-                DefaultName.ToCleanName(),
+                DefaultName,
                 DefaultNamespace,
                 DefaultAccessibility,
                 ExistingType,

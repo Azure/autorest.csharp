@@ -14,7 +14,7 @@ using SpecialWords;
 
 namespace SpecialWords.Samples
 {
-    public partial class SamplesParameters
+    public partial class Samples_Parameters
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
