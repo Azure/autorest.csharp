@@ -137,6 +137,7 @@ stages:
               TypeSpecEmitterVersion: $(PackEmitter.TypeSpecEmitterVersion)
               OutputDirectory: $(Build.ArtifactStagingDirectory)
               ToolsRepositoryPath: $(Build.SourcesDirectory)/azure-sdk-tools
+              UseInternalFeed: true
           - publish: $(Build.ArtifactStagingDirectory)
             artifact: build_artifacts
             condition: succeededOrFailed()
