@@ -387,7 +387,7 @@
       {
        "$id": "44",
        "StatusCodes": [
-        201
+        200
        ],
        "BodyType": {
         "$ref": "2"
@@ -412,7 +412,7 @@
       {
        "$id": "47",
        "StatusCodes": [
-        200
+        201
        ],
        "BodyType": {
         "$ref": "2"

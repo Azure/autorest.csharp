@@ -31,4 +31,5 @@ model Error {
 @doc("Manage your pets. You can delete or get the Pet from pet store.")
 @summary("Manage your pets.")
 @route("/pets")
+@doc("List pets.")
 op list(@query nextLink?: string): Pet[] | Error;
