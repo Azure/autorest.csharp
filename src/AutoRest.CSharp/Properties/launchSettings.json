@@ -624,10 +624,6 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\azure\\client-generator-core\\access\\src\\Generated -n"
     },
-    "typespec-azure/client-generator-core/internal": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\azure\\client-generator-core\\internal\\src\\Generated -n"
-    },
     "typespec-azure/client-generator-core/usage": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\azure\\client-generator-core\\usage\\src\\Generated -n"
@@ -719,10 +715,6 @@
     "typespec-special-headers/repeatability": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\special-headers\\repeatability\\src\\Generated -n"
-    },
-    "typespec-special-words": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\special-words\\src\\Generated -n"
     },
     "typespec-type/array": {
       "commandName": "Project",
