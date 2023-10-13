@@ -19,7 +19,7 @@ resources:
       type: github
       name: Azure/azure-sdk-tools
       endpoint: azure
-      ref: refs/tags/azure-sdk-tools_20231010.1
+      ref: refs/heads/main
     - repository: azure-sdk-for-net
       type: github
       name: Azure/azure-sdk-for-net
@@ -147,10 +147,15 @@ stages:
                 TypeSpecEmitterVersion: $(Publish.TypeSpecEmitterVersion)
                 OutputDirectory: $(Build.ArtifactStagingDirectory)
                 ToolsRepositoryPath: $(Build.SourcesDirectory)/azure-sdk-tools
+                UseInternalFeed: false
           - publish: $(Build.ArtifactStagingDirectory)
             artifact: build_artifacts
             condition: succeededOrFailed()
             displayName: "Publish build artifacts"
+          - publish: $(Build.ArtifactStagingDirectory)/packages
+            artifact: packages
+            condition: succeededOrFailed()
+            displayName: "Publish packages artifact"
       - template: check-code-generation.yml
         parameters:
           name: Check_Code_Generation_A_B
