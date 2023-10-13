@@ -321,8 +321,8 @@ extends:
 </Project>
 ";
 
-            var contentToUs = Configuration.IsBranded ? srcBrandedCsprojContent : srcUnbrandedCsprojContent;
-            return string.Format(contentToUs, Configuration.Namespace);
+            var contentToUse = Configuration.IsBranded ? srcBrandedCsprojContent : srcUnbrandedCsprojContent;
+            return string.Format(contentToUse, Configuration.Namespace);
         }
 
         private string GetTestCsproj()
