@@ -152,6 +152,10 @@ stages:
             artifact: build_artifacts
             condition: succeededOrFailed()
             displayName: "Publish build artifacts"
+          - publish: $(Build.ArtifactStagingDirectory)
+            artifact: packages
+            condition: succeededOrFailed()
+            displayName: "Publish packages artifact"
       - template: check-code-generation.yml
         parameters:
           name: Check_Code_Generation_A_B
