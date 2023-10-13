@@ -46,11 +46,11 @@ namespace SpecialWords
         /// <summary> Initializes a new instance of Models. </summary>
         /// <param name="apiVersion"> The String to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
-        public virtual SpecialWords.Models GetModelsClient(string apiVersion = "1.0.0")
+        public virtual Models GetModelsClient(string apiVersion = "1.0.0")
         {
             Argument.AssertNotNull(apiVersion, nameof(apiVersion));
 
-            return new SpecialWords.Models(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
+            return new Models(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
         }
 
         /// <summary> Initializes a new instance of ModelProperties. </summary>

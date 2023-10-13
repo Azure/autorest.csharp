@@ -40,8 +40,20 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             var visitedMembers = new HashSet<ISymbol>(SymbolEqualityComparer.Default);
 
-            foreach (var inputModelProperty in inputModel.Properties)
+            foreach (var property in inputModel.Properties)
             {
+                var inputModelProperty = property;
+                var name = BuilderHelpers.DisambiguateName(inputModel.Name.ToCleanName(), property.Name);
+                if (property.Name != name) // the previous name is ambiguous, need to update the name
+                {
+                    inputModelProperty = new InputModelProperty(name,
+                        property.SerializedName,
+                        property.Description,
+                        property.Type,
+                        property.IsRequired,
+                        property.IsReadOnly,
+                        property.IsDiscriminator);
+                }
                 var originalFieldName = inputModelProperty.Name.ToCleanName();
                 var propertyType = GetPropertyDefaultType(inputModel.Usage, inputModelProperty, typeFactory);
 

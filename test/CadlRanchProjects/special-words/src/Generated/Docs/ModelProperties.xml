@@ -7,14 +7,14 @@ This sample shows how to call SameAsModelAsync.
 <code><![CDATA[
 ModelProperties client = new SpecialWordsClient().GetModelPropertiesClient(apiVersion: "1.0.0");
 
-SpecialWords.Models.SameAsModel body = new SpecialWords.Models.SameAsModel("<SameAsModel>");
+SameAsModel body = new SameAsModel("<SameAsModel>");
 Response response = await client.SameAsModelAsync(body);
 ]]></code>
 This sample shows how to call SameAsModelAsync with all parameters.
 <code><![CDATA[
 ModelProperties client = new SpecialWordsClient().GetModelPropertiesClient(apiVersion: "1.0.0");
 
-SpecialWords.Models.SameAsModel body = new SpecialWords.Models.SameAsModel("<SameAsModel>");
+SameAsModel body = new SameAsModel("<SameAsModel>");
 Response response = await client.SameAsModelAsync(body);
 ]]></code></example>
     </member>
@@ -24,14 +24,14 @@ This sample shows how to call SameAsModel.
 <code><![CDATA[
 ModelProperties client = new SpecialWordsClient().GetModelPropertiesClient(apiVersion: "1.0.0");
 
-SpecialWords.Models.SameAsModel body = new SpecialWords.Models.SameAsModel("<SameAsModel>");
+SameAsModel body = new SameAsModel("<SameAsModel>");
 Response response = client.SameAsModel(body);
 ]]></code>
 This sample shows how to call SameAsModel with all parameters.
 <code><![CDATA[
 ModelProperties client = new SpecialWordsClient().GetModelPropertiesClient(apiVersion: "1.0.0");
 
-SpecialWords.Models.SameAsModel body = new SpecialWords.Models.SameAsModel("<SameAsModel>");
+SameAsModel body = new SameAsModel("<SameAsModel>");
 Response response = client.SameAsModel(body);
 ]]></code></example>
     </member>

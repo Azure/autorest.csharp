@@ -12,7 +12,6 @@ using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
 using SpecialWords;
-using SpecialWords.Models;
 
 namespace SpecialWords.Samples
 {
@@ -54,7 +53,7 @@ namespace SpecialWords.Samples
         {
             ModelProperties client = new SpecialWordsClient().GetModelPropertiesClient(apiVersion: "1.0.0");
 
-            SpecialWords.Models.SameAsModel body = new SpecialWords.Models.SameAsModel("<SameAsModel>");
+            SameAsModel body = new SameAsModel("<SameAsModel>");
             Response response = client.SameAsModel(body);
         }
 
@@ -64,7 +63,7 @@ namespace SpecialWords.Samples
         {
             ModelProperties client = new SpecialWordsClient().GetModelPropertiesClient(apiVersion: "1.0.0");
 
-            SpecialWords.Models.SameAsModel body = new SpecialWords.Models.SameAsModel("<SameAsModel>");
+            SameAsModel body = new SameAsModel("<SameAsModel>");
             Response response = await client.SameAsModelAsync(body);
         }
 
@@ -104,7 +103,7 @@ namespace SpecialWords.Samples
         {
             ModelProperties client = new SpecialWordsClient().GetModelPropertiesClient(apiVersion: "1.0.0");
 
-            SpecialWords.Models.SameAsModel body = new SpecialWords.Models.SameAsModel("<SameAsModel>");
+            SameAsModel body = new SameAsModel("<SameAsModel>");
             Response response = client.SameAsModel(body);
         }
 
@@ -114,7 +113,7 @@ namespace SpecialWords.Samples
         {
             ModelProperties client = new SpecialWordsClient().GetModelPropertiesClient(apiVersion: "1.0.0");
 
-            SpecialWords.Models.SameAsModel body = new SpecialWords.Models.SameAsModel("<SameAsModel>");
+            SameAsModel body = new SameAsModel("<SameAsModel>");
             Response response = await client.SameAsModelAsync(body);
         }
     }

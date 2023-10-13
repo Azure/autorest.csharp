@@ -11,7 +11,6 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using SpecialWords.Models;
 
 namespace SpecialWords
 {
@@ -51,7 +50,7 @@ namespace SpecialWords
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/ModelProperties.xml" path="doc/members/member[@name='SameAsModelAsync(SameAsModel,CancellationToken)']/*" />
-        public virtual async Task<Response> SameAsModelAsync(SpecialWords.Models.SameAsModel body, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> SameAsModelAsync(SameAsModel body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
 
@@ -65,7 +64,7 @@ namespace SpecialWords
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/ModelProperties.xml" path="doc/members/member[@name='SameAsModel(SameAsModel,CancellationToken)']/*" />
-        public virtual Response SameAsModel(SpecialWords.Models.SameAsModel body, CancellationToken cancellationToken = default)
+        public virtual Response SameAsModel(SameAsModel body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
 

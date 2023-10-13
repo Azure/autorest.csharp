@@ -11,13 +11,12 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using SpecialWords.Models;
 
 namespace SpecialWords
 {
     // Data plane generated sub-client.
     /// <summary> Verify model names. </summary>
-    internal partial class Models
+    public partial class Models
     {
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
@@ -51,7 +50,7 @@ namespace SpecialWords
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithAndAsync(And,CancellationToken)']/*" />
-        public virtual async Task<Response> WithAndAsync(SpecialWords.Models.And body, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> WithAndAsync(And body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
 
@@ -65,7 +64,7 @@ namespace SpecialWords
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithAnd(And,CancellationToken)']/*" />
-        public virtual Response WithAnd(SpecialWords.Models.And body, CancellationToken cancellationToken = default)
+        public virtual Response WithAnd(And body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
 
@@ -157,7 +156,7 @@ namespace SpecialWords
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithAsAsync(As,CancellationToken)']/*" />
-        public virtual async Task<Response> WithAsAsync(SpecialWords.Models.As body, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> WithAsAsync(As body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
 
@@ -171,7 +170,7 @@ namespace SpecialWords
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithAs(As,CancellationToken)']/*" />
-        public virtual Response WithAs(SpecialWords.Models.As body, CancellationToken cancellationToken = default)
+        public virtual Response WithAs(As body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
 
@@ -263,7 +262,7 @@ namespace SpecialWords
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithAssertAsync(Assert,CancellationToken)']/*" />
-        public virtual async Task<Response> WithAssertAsync(SpecialWords.Models.Assert body, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> WithAssertAsync(Assert body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
 
@@ -277,7 +276,7 @@ namespace SpecialWords
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithAssert(Assert,CancellationToken)']/*" />
-        public virtual Response WithAssert(SpecialWords.Models.Assert body, CancellationToken cancellationToken = default)
+        public virtual Response WithAssert(Assert body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
 
@@ -369,7 +368,7 @@ namespace SpecialWords
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithAsyncAsync(Async,CancellationToken)']/*" />
-        public virtual async Task<Response> WithAsyncAsync(SpecialWords.Models.Async body, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> WithAsyncAsync(Async body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
 
@@ -383,7 +382,7 @@ namespace SpecialWords
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithAsync(Async,CancellationToken)']/*" />
-        public virtual Response WithAsync(SpecialWords.Models.Async body, CancellationToken cancellationToken = default)
+        public virtual Response WithAsync(Async body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
 
@@ -475,7 +474,7 @@ namespace SpecialWords
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithAwaitAsync(Await,CancellationToken)']/*" />
-        public virtual async Task<Response> WithAwaitAsync(SpecialWords.Models.Await body, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> WithAwaitAsync(Await body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
 
@@ -489,7 +488,7 @@ namespace SpecialWords
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithAwait(Await,CancellationToken)']/*" />
-        public virtual Response WithAwait(SpecialWords.Models.Await body, CancellationToken cancellationToken = default)
+        public virtual Response WithAwait(Await body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
 
@@ -581,7 +580,7 @@ namespace SpecialWords
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithBreakAsync(Break,CancellationToken)']/*" />
-        public virtual async Task<Response> WithBreakAsync(SpecialWords.Models.Break body, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> WithBreakAsync(Break body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
 
@@ -595,7 +594,7 @@ namespace SpecialWords
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithBreak(Break,CancellationToken)']/*" />
-        public virtual Response WithBreak(SpecialWords.Models.Break body, CancellationToken cancellationToken = default)
+        public virtual Response WithBreak(Break body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
 
@@ -687,7 +686,7 @@ namespace SpecialWords
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithClassAsync(Class,CancellationToken)']/*" />
-        public virtual async Task<Response> WithClassAsync(SpecialWords.Models.Class body, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> WithClassAsync(Class body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
 
@@ -701,7 +700,7 @@ namespace SpecialWords
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithClass(Class,CancellationToken)']/*" />
-        public virtual Response WithClass(SpecialWords.Models.Class body, CancellationToken cancellationToken = default)
+        public virtual Response WithClass(Class body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
 
@@ -793,7 +792,7 @@ namespace SpecialWords
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithConstructorAsync(Constructor,CancellationToken)']/*" />
-        public virtual async Task<Response> WithConstructorAsync(SpecialWords.Models.Constructor body, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> WithConstructorAsync(Constructor body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
 
@@ -807,7 +806,7 @@ namespace SpecialWords
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithConstructor(Constructor,CancellationToken)']/*" />
-        public virtual Response WithConstructor(SpecialWords.Models.Constructor body, CancellationToken cancellationToken = default)
+        public virtual Response WithConstructor(Constructor body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
 
@@ -899,7 +898,7 @@ namespace SpecialWords
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithContinueAsync(Continue,CancellationToken)']/*" />
-        public virtual async Task<Response> WithContinueAsync(SpecialWords.Models.Continue body, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> WithContinueAsync(Continue body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
 
@@ -913,7 +912,7 @@ namespace SpecialWords
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithContinue(Continue,CancellationToken)']/*" />
-        public virtual Response WithContinue(SpecialWords.Models.Continue body, CancellationToken cancellationToken = default)
+        public virtual Response WithContinue(Continue body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
 
@@ -1005,7 +1004,7 @@ namespace SpecialWords
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithDefAsync(Def,CancellationToken)']/*" />
-        public virtual async Task<Response> WithDefAsync(SpecialWords.Models.Def body, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> WithDefAsync(Def body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
 
@@ -1019,7 +1018,7 @@ namespace SpecialWords
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithDef(Def,CancellationToken)']/*" />
-        public virtual Response WithDef(SpecialWords.Models.Def body, CancellationToken cancellationToken = default)
+        public virtual Response WithDef(Def body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
 
@@ -1111,7 +1110,7 @@ namespace SpecialWords
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithDelAsync(Del,CancellationToken)']/*" />
-        public virtual async Task<Response> WithDelAsync(SpecialWords.Models.Del body, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> WithDelAsync(Del body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
 
@@ -1125,7 +1124,7 @@ namespace SpecialWords
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithDel(Del,CancellationToken)']/*" />
-        public virtual Response WithDel(SpecialWords.Models.Del body, CancellationToken cancellationToken = default)
+        public virtual Response WithDel(Del body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
 
@@ -1217,7 +1216,7 @@ namespace SpecialWords
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithElifAsync(Elif,CancellationToken)']/*" />
-        public virtual async Task<Response> WithElifAsync(SpecialWords.Models.Elif body, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> WithElifAsync(Elif body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
 
@@ -1231,7 +1230,7 @@ namespace SpecialWords
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithElif(Elif,CancellationToken)']/*" />
-        public virtual Response WithElif(SpecialWords.Models.Elif body, CancellationToken cancellationToken = default)
+        public virtual Response WithElif(Elif body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
 
@@ -1323,7 +1322,7 @@ namespace SpecialWords
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithElseAsync(Else,CancellationToken)']/*" />
-        public virtual async Task<Response> WithElseAsync(SpecialWords.Models.Else body, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> WithElseAsync(Else body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
 
@@ -1337,7 +1336,7 @@ namespace SpecialWords
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithElse(Else,CancellationToken)']/*" />
-        public virtual Response WithElse(SpecialWords.Models.Else body, CancellationToken cancellationToken = default)
+        public virtual Response WithElse(Else body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
 
@@ -1429,7 +1428,7 @@ namespace SpecialWords
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithExceptAsync(Except,CancellationToken)']/*" />
-        public virtual async Task<Response> WithExceptAsync(SpecialWords.Models.Except body, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> WithExceptAsync(Except body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
 
@@ -1443,7 +1442,7 @@ namespace SpecialWords
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithExcept(Except,CancellationToken)']/*" />
-        public virtual Response WithExcept(SpecialWords.Models.Except body, CancellationToken cancellationToken = default)
+        public virtual Response WithExcept(Except body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
 
@@ -1535,7 +1534,7 @@ namespace SpecialWords
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithExecAsync(Exec,CancellationToken)']/*" />
-        public virtual async Task<Response> WithExecAsync(SpecialWords.Models.Exec body, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> WithExecAsync(Exec body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
 
@@ -1549,7 +1548,7 @@ namespace SpecialWords
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithExec(Exec,CancellationToken)']/*" />
-        public virtual Response WithExec(SpecialWords.Models.Exec body, CancellationToken cancellationToken = default)
+        public virtual Response WithExec(Exec body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
 
@@ -1641,7 +1640,7 @@ namespace SpecialWords
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithFinallyAsync(Finally,CancellationToken)']/*" />
-        public virtual async Task<Response> WithFinallyAsync(SpecialWords.Models.Finally body, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> WithFinallyAsync(Finally body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
 
@@ -1655,7 +1654,7 @@ namespace SpecialWords
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithFinally(Finally,CancellationToken)']/*" />
-        public virtual Response WithFinally(SpecialWords.Models.Finally body, CancellationToken cancellationToken = default)
+        public virtual Response WithFinally(Finally body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
 
@@ -1747,7 +1746,7 @@ namespace SpecialWords
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithForAsync(For,CancellationToken)']/*" />
-        public virtual async Task<Response> WithForAsync(SpecialWords.Models.For body, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> WithForAsync(For body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
 
@@ -1761,7 +1760,7 @@ namespace SpecialWords
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithFor(For,CancellationToken)']/*" />
-        public virtual Response WithFor(SpecialWords.Models.For body, CancellationToken cancellationToken = default)
+        public virtual Response WithFor(For body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
 
@@ -1853,7 +1852,7 @@ namespace SpecialWords
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithFromAsync(From,CancellationToken)']/*" />
-        public virtual async Task<Response> WithFromAsync(SpecialWords.Models.From body, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> WithFromAsync(From body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
 
@@ -1867,7 +1866,7 @@ namespace SpecialWords
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithFrom(From,CancellationToken)']/*" />
-        public virtual Response WithFrom(SpecialWords.Models.From body, CancellationToken cancellationToken = default)
+        public virtual Response WithFrom(From body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
 
@@ -1959,7 +1958,7 @@ namespace SpecialWords
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithGlobalAsync(Global,CancellationToken)']/*" />
-        public virtual async Task<Response> WithGlobalAsync(SpecialWords.Models.Global body, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> WithGlobalAsync(Global body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
 
@@ -1973,7 +1972,7 @@ namespace SpecialWords
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithGlobal(Global,CancellationToken)']/*" />
-        public virtual Response WithGlobal(SpecialWords.Models.Global body, CancellationToken cancellationToken = default)
+        public virtual Response WithGlobal(Global body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
 
@@ -2065,7 +2064,7 @@ namespace SpecialWords
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithIfAsync(If,CancellationToken)']/*" />
-        public virtual async Task<Response> WithIfAsync(SpecialWords.Models.If body, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> WithIfAsync(If body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
 
@@ -2079,7 +2078,7 @@ namespace SpecialWords
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithIf(If,CancellationToken)']/*" />
-        public virtual Response WithIf(SpecialWords.Models.If body, CancellationToken cancellationToken = default)
+        public virtual Response WithIf(If body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
 
@@ -2171,7 +2170,7 @@ namespace SpecialWords
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithImportAsync(Import,CancellationToken)']/*" />
-        public virtual async Task<Response> WithImportAsync(SpecialWords.Models.Import body, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> WithImportAsync(Import body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
 
@@ -2185,7 +2184,7 @@ namespace SpecialWords
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithImport(Import,CancellationToken)']/*" />
-        public virtual Response WithImport(SpecialWords.Models.Import body, CancellationToken cancellationToken = default)
+        public virtual Response WithImport(Import body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
 
@@ -2277,7 +2276,7 @@ namespace SpecialWords
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithInAsync(In,CancellationToken)']/*" />
-        public virtual async Task<Response> WithInAsync(SpecialWords.Models.In body, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> WithInAsync(In body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
 
@@ -2291,7 +2290,7 @@ namespace SpecialWords
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithIn(In,CancellationToken)']/*" />
-        public virtual Response WithIn(SpecialWords.Models.In body, CancellationToken cancellationToken = default)
+        public virtual Response WithIn(In body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
 
@@ -2383,7 +2382,7 @@ namespace SpecialWords
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithIsAsync(Is,CancellationToken)']/*" />
-        public virtual async Task<Response> WithIsAsync(SpecialWords.Models.Is body, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> WithIsAsync(Is body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
 
@@ -2397,7 +2396,7 @@ namespace SpecialWords
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithIs(Is,CancellationToken)']/*" />
-        public virtual Response WithIs(SpecialWords.Models.Is body, CancellationToken cancellationToken = default)
+        public virtual Response WithIs(Is body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
 
@@ -2489,7 +2488,7 @@ namespace SpecialWords
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithLambdaAsync(Lambda,CancellationToken)']/*" />
-        public virtual async Task<Response> WithLambdaAsync(SpecialWords.Models.Lambda body, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> WithLambdaAsync(Lambda body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
 
@@ -2503,7 +2502,7 @@ namespace SpecialWords
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithLambda(Lambda,CancellationToken)']/*" />
-        public virtual Response WithLambda(SpecialWords.Models.Lambda body, CancellationToken cancellationToken = default)
+        public virtual Response WithLambda(Lambda body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
 
@@ -2595,7 +2594,7 @@ namespace SpecialWords
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithNotAsync(Not,CancellationToken)']/*" />
-        public virtual async Task<Response> WithNotAsync(SpecialWords.Models.Not body, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> WithNotAsync(Not body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
 
@@ -2609,7 +2608,7 @@ namespace SpecialWords
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithNot(Not,CancellationToken)']/*" />
-        public virtual Response WithNot(SpecialWords.Models.Not body, CancellationToken cancellationToken = default)
+        public virtual Response WithNot(Not body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
 
@@ -2701,7 +2700,7 @@ namespace SpecialWords
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithOrAsync(Or,CancellationToken)']/*" />
-        public virtual async Task<Response> WithOrAsync(SpecialWords.Models.Or body, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> WithOrAsync(Or body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
 
@@ -2715,7 +2714,7 @@ namespace SpecialWords
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithOr(Or,CancellationToken)']/*" />
-        public virtual Response WithOr(SpecialWords.Models.Or body, CancellationToken cancellationToken = default)
+        public virtual Response WithOr(Or body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
 
@@ -2807,7 +2806,7 @@ namespace SpecialWords
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithPassAsync(Pass,CancellationToken)']/*" />
-        public virtual async Task<Response> WithPassAsync(SpecialWords.Models.Pass body, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> WithPassAsync(Pass body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
 
@@ -2821,7 +2820,7 @@ namespace SpecialWords
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithPass(Pass,CancellationToken)']/*" />
-        public virtual Response WithPass(SpecialWords.Models.Pass body, CancellationToken cancellationToken = default)
+        public virtual Response WithPass(Pass body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
 
@@ -2913,7 +2912,7 @@ namespace SpecialWords
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithRaiseAsync(Raise,CancellationToken)']/*" />
-        public virtual async Task<Response> WithRaiseAsync(SpecialWords.Models.Raise body, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> WithRaiseAsync(Raise body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
 
@@ -2927,7 +2926,7 @@ namespace SpecialWords
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithRaise(Raise,CancellationToken)']/*" />
-        public virtual Response WithRaise(SpecialWords.Models.Raise body, CancellationToken cancellationToken = default)
+        public virtual Response WithRaise(Raise body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
 
@@ -3019,7 +3018,7 @@ namespace SpecialWords
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithReturnAsync(Return,CancellationToken)']/*" />
-        public virtual async Task<Response> WithReturnAsync(SpecialWords.Models.Return body, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> WithReturnAsync(Return body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
 
@@ -3033,7 +3032,7 @@ namespace SpecialWords
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithReturn(Return,CancellationToken)']/*" />
-        public virtual Response WithReturn(SpecialWords.Models.Return body, CancellationToken cancellationToken = default)
+        public virtual Response WithReturn(Return body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
 
@@ -3125,7 +3124,7 @@ namespace SpecialWords
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithTryAsync(Try,CancellationToken)']/*" />
-        public virtual async Task<Response> WithTryAsync(SpecialWords.Models.Try body, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> WithTryAsync(Try body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
 
@@ -3139,7 +3138,7 @@ namespace SpecialWords
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithTry(Try,CancellationToken)']/*" />
-        public virtual Response WithTry(SpecialWords.Models.Try body, CancellationToken cancellationToken = default)
+        public virtual Response WithTry(Try body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
 
@@ -3231,7 +3230,7 @@ namespace SpecialWords
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithWhileAsync(While,CancellationToken)']/*" />
-        public virtual async Task<Response> WithWhileAsync(SpecialWords.Models.While body, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> WithWhileAsync(While body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
 
@@ -3245,7 +3244,7 @@ namespace SpecialWords
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithWhile(While,CancellationToken)']/*" />
-        public virtual Response WithWhile(SpecialWords.Models.While body, CancellationToken cancellationToken = default)
+        public virtual Response WithWhile(While body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
 
@@ -3337,7 +3336,7 @@ namespace SpecialWords
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithWithAsync(With,CancellationToken)']/*" />
-        public virtual async Task<Response> WithWithAsync(SpecialWords.Models.With body, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> WithWithAsync(With body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
 
@@ -3351,7 +3350,7 @@ namespace SpecialWords
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithWith(With,CancellationToken)']/*" />
-        public virtual Response WithWith(SpecialWords.Models.With body, CancellationToken cancellationToken = default)
+        public virtual Response WithWith(With body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
 
@@ -3443,7 +3442,7 @@ namespace SpecialWords
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithYieldAsync(Yield,CancellationToken)']/*" />
-        public virtual async Task<Response> WithYieldAsync(SpecialWords.Models.Yield body, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> WithYieldAsync(Yield body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
 
@@ -3457,7 +3456,7 @@ namespace SpecialWords
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithYield(Yield,CancellationToken)']/*" />
-        public virtual Response WithYield(SpecialWords.Models.Yield body, CancellationToken cancellationToken = default)
+        public virtual Response WithYield(Yield body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
 
