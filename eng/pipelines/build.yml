@@ -152,7 +152,7 @@ stages:
             artifact: build_artifacts
             condition: succeededOrFailed()
             displayName: "Publish build artifacts"
-          - publish: $(Build.ArtifactStagingDirectory)
+          - publish: $(Build.ArtifactStagingDirectory)/packages
             artifact: packages
             condition: succeededOrFailed()
             displayName: "Publish packages artifact"
