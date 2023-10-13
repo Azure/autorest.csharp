@@ -32,7 +32,7 @@ jobs:
       - "/*"
       - "!SessionRecords"
       Repositories:
-      - Name: Azure/azure-sdk-for-net
+      - Name: azure-sdk/azure-sdk-for-net
         WorkingDirectory: $(Build.SourcesDirectory)/azure-sdk-for-net
         Commitish: refs/heads/${{ parameters.BranchName }}}
       SkipCheckoutNone: true
