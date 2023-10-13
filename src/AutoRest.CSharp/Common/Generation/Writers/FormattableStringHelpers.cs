@@ -88,7 +88,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 return $"new {constant.Type}()";
             }
 
-            if (constant is { Type: { IsFrameworkType: false }, Value: EnumTypeValue enumTypeValue })
+            if (constant is { Type.IsFrameworkType: false, Value: EnumTypeValue enumTypeValue })
             {
                 return $"{constant.Type}.{enumTypeValue.Declaration.Name}";
             }

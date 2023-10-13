@@ -186,7 +186,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                         _requestPartsBuilder.AddBodyPart(inputParameter, value);
                         break;
                     case RequestLocation.Body:
-                        CreateConversionToRequestContent(inputParameter, value, parameters, false, out var content, out var conversions);
+                        CreateConversionToRequestContent(inputParameter, value, parameters, out var content, out var conversions);
                         _requestPartsBuilder.AddBodyPart(value, conversions, content, inputParameter.Kind != InputOperationParameterKind.Method);
                         break;
                 }
@@ -389,34 +389,36 @@ namespace AutoRest.CSharp.Common.Output.Builders
             _protocolParameters.Add(protocolMethodParameter);
             _convenienceParameters.Add(convenienceMethodParameter);
 
-            if (protocolMethodParameter.Equals(convenienceMethodParameter))
+            if (protocolMethodParameter.Equals(convenienceMethodParameter) || protocolMethodParameter.Type.Equals(convenienceMethodParameter.Type))
             {
                 _arguments[protocolMethodParameter] = convenienceMethodParameter;
+                return;
             }
-            else if (inputParameter.Location == RequestLocation.Body && protocolMethodParameter.Type.EqualsIgnoreNullable(typeof(RequestContent)) && convenienceMethodParameter.Type is {IsFrameworkType: false, Implementation: ModelTypeProvider { HasToRequestContentMethod: false }})
+
+            if (protocolMethodParameter.Type.EqualsIgnoreNullable(typeof(string)) && convenienceMethodParameter.Type is {IsFrameworkType: false, Implementation: EnumType enumType})
             {
-                CreateConversionToRequestContent(inputParameter, convenienceMethodParameter, new Dictionary<InputParameter, Parameter>(), true, out var content, out var conversions);
-                _arguments[protocolMethodParameter] = content;
+                _arguments[protocolMethodParameter] = new EnumExpression(enumType, NullConditional(convenienceMethodParameter)).ToSerial();
+                return;
+            }
+
+            if (protocolMethodParameter.Type.EqualsIgnoreNullable(typeof(RequestContent)))
+            {
+                CreateConversionToRequestContent(inputParameter, NullConditional(convenienceMethodParameter), new Dictionary<InputParameter, Parameter>(), out var argument, out var conversions);
                 if (conversions is not null)
                 {
-                    _conversions[protocolMethodParameter] = conversions;
-                }
-            }
-            else
-            {
-                var argumentConversion = CreateConversion(convenienceMethodParameter, protocolMethodParameter);
-                // in paging methods, every request parameter is used twice, so even conversions that can be inlined must be cached
-                // Exception from this rule is extensible enum ToString call (it returns underlying value and doesn't allocate any additional memory)
-                if (_operation.Paging is not null && convenienceMethodParameter.Type is not { IsFrameworkType: false, Implementation: EnumType { IsExtensible: true, SerializationMethod: null } })
-                {
-                    _conversions[protocolMethodParameter] = Declare(protocolMethodParameter.Type, protocolMethodParameter.Name, argumentConversion, out var argument);
                     _arguments[protocolMethodParameter] = argument;
+                    _conversions[protocolMethodParameter] = conversions;
                 }
                 else
                 {
-                    _arguments[protocolMethodParameter] = argumentConversion;
+                    _conversions[protocolMethodParameter] = UsingDeclare("content", argument, out var content);
+                    _arguments[protocolMethodParameter] = content;
                 }
+
+                return;
             }
+
+            throw new InvalidOperationException($"Unexpected conversion from '{convenienceMethodParameter.Name}' parameter to '{protocolMethodParameter.Name}' parameter in '{_operation.Name}' operation.");
         }
 
         private void CreateSpreadParameters(InputParameter inputParameter, Parameter protocolMethodParameter)
@@ -535,12 +537,6 @@ namespace AutoRest.CSharp.Common.Output.Builders
         private static RequestContextExpression IfCancellationTokenCanBeCanceled(CancellationTokenExpression cancellationToken)
             => new(new TernaryConditionalOperator(cancellationToken.CanBeCanceled, New.RequestContext(cancellationToken), Null));
 
-        private static ValueExpression CreateConversion(Parameter fromParameter, Parameter toParameter)
-        {
-            ValueExpression fromExpression = NullConditional(fromParameter);
-            return Parameter.CreateConversion(fromExpression, fromParameter.Type, toParameter.Type);
-        }
-
         private IEnumerable<InputParameter> GetLegacySortedParameters()
             => _unsortedParameters.OrderByDescending(p => p is { IsRequired: true, DefaultValue: null });
 
@@ -657,9 +653,15 @@ namespace AutoRest.CSharp.Common.Output.Builders
             }
         }
 
-        private void CreateConversionToRequestContent(InputParameter inputParameter, TypedValueExpression value, IReadOnlyDictionary<InputParameter, Parameter> parameters, bool checkNullable, out RequestContentExpression content, out MethodBodyStatement? conversions)
+        private void CreateConversionToRequestContent(InputParameter inputParameter, TypedValueExpression value, IReadOnlyDictionary<InputParameter, Parameter> parameters, out RequestContentExpression content, out MethodBodyStatement? conversions)
         {
             conversions = null;
+            if (value.Type is { IsFrameworkType: false, Implementation: ModelTypeProvider { HasToRequestContentMethod: true } model })
+            {
+                content = new SerializableObjectTypeExpression(model, value).ToRequestContent();
+                return;
+            }
+
             switch (_operation.RequestBodyMediaType)
             {
                 case BodyMediaType.Binary:
@@ -675,11 +677,15 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     break;
 
                 case BodyMediaType.Json:
-                    CreateConversionToUtf8JsonRequestContent(inputParameter, value, checkNullable, out content, out conversions);
+                    CreateConversionToUtf8JsonRequestContent(inputParameter, value, out content, out conversions);
                     break;
 
                 case BodyMediaType.Xml:
-                    CreateConversionToXmlWriterRequestContent(inputParameter, value, checkNullable, out content, out conversions);
+                    CreateConversionToXmlWriterRequestContent(inputParameter, value, out content, out conversions);
+                    break;
+
+                case var _ when value.Type is { IsFrameworkType: true }:
+                    content = RequestContentExpression.CreateFromFrameworkType(value);
                     break;
 
                 default:
@@ -687,59 +693,25 @@ namespace AutoRest.CSharp.Common.Output.Builders
             }
         }
 
-        private static void CreateConversionToUtf8JsonRequestContent(InputParameter inputParameter, TypedValueExpression value, bool checkNullable, out RequestContentExpression content, out MethodBodyStatement conversions)
+        private static void CreateConversionToUtf8JsonRequestContent(InputParameter inputParameter, TypedValueExpression value, out RequestContentExpression content, out MethodBodyStatement conversions)
         {
             var jsonSerialization = SerializationBuilder.BuildJsonSerialization(inputParameter.Type, value.Type);
-            Utf8JsonRequestContentExpression utf8JsonContent;
-
-            if (checkNullable && value.Type.IsNullable)
+            conversions = new[]
             {
-                conversions = new MethodBodyStatement[]
-                {
-                    Declare("content", new Utf8JsonRequestContentExpression(Null), out utf8JsonContent),
-                    new IfStatement(NotEqual(value, Null)) {
-                        Assign(utf8JsonContent, New.Utf8JsonRequestContent()),
-                        JsonSerializationMethodsBuilder.SerializeExpression(utf8JsonContent.JsonWriter, jsonSerialization, RemoveAllNullConditional(value))
-                    }
-                };
-            }
-            else
-            {
-                conversions = new[]
-                {
-                    Var("content", New.Utf8JsonRequestContent(), out utf8JsonContent),
-                    JsonSerializationMethodsBuilder.SerializeExpression(utf8JsonContent.JsonWriter, jsonSerialization, RemoveAllNullConditional(value)),
-                };
-            }
-
+                Var("content", New.Utf8JsonRequestContent(), out Utf8JsonRequestContentExpression utf8JsonContent),
+                JsonSerializationMethodsBuilder.SerializeExpression(utf8JsonContent.JsonWriter, jsonSerialization, RemoveAllNullConditional(value)),
+            };
             content = utf8JsonContent;
         }
 
-        private static void CreateConversionToXmlWriterRequestContent(InputParameter inputParameter, TypedValueExpression value, bool checkNullable, out RequestContentExpression content, out MethodBodyStatement conversions)
+        private static void CreateConversionToXmlWriterRequestContent(InputParameter inputParameter, TypedValueExpression value, out RequestContentExpression content, out MethodBodyStatement conversions)
         {
             var xmlSerialization = SerializationBuilder.BuildXmlSerialization(inputParameter.Type, value.Type);
-            XmlWriterContentExpression xmlWriterContent;
-
-            if (checkNullable && value.Type.IsNullable)
+            conversions = new[]
             {
-                conversions = new MethodBodyStatement[]
-                {
-                    Declare("content", new XmlWriterContentExpression(Null), out xmlWriterContent),
-                    new IfStatement(NotEqual(value, Null))
-                    {
-                        Assign(xmlWriterContent, New.XmlWriterContent()),
-                        XmlSerializationMethodsBuilder.SerializeExpression(xmlWriterContent.XmlWriter, xmlSerialization, RemoveAllNullConditional(value)),
-                    }
-                };
-            }
-            else
-            {
-                conversions = new[]
-                {
-                    Var("content", New.XmlWriterContent(), out xmlWriterContent),
-                    XmlSerializationMethodsBuilder.SerializeExpression(xmlWriterContent.XmlWriter, xmlSerialization, RemoveAllNullConditional(value)),
-                };
-            }
+                Var("content", New.XmlWriterContent(), out XmlWriterContentExpression xmlWriterContent),
+                XmlSerializationMethodsBuilder.SerializeExpression(xmlWriterContent.XmlWriter, xmlSerialization, RemoveAllNullConditional(value)),
+            };
             content = xmlWriterContent;
         }
 

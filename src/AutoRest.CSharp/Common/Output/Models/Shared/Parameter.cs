@@ -88,51 +88,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
                 return null;
             }
 
-            var constant = new ConstantExpression(defaultValue.Value);
-            return CreateConversion(constant, defaultValue.Value.Type, parameterType);
-        }
-
-        public static ValueExpression CreateConversion(ValueExpression fromExpression, CSharpType fromType, CSharpType toType)
-        {
-            return fromType.IsFrameworkType
-                ? CreateConversion(fromExpression, fromType.FrameworkType, toType)
-                : CreateConversion(fromExpression, fromType.Implementation, toType);
-        }
-
-        private static ValueExpression CreateConversion(ValueExpression fromExpression, Type fromFrameworkType, CSharpType toType)
-        {
-            if (toType.EqualsIgnoreNullable(typeof(RequestContent)))
-            {
-                if (fromFrameworkType == typeof(BinaryData))
-                {
-                    return fromExpression;
-                }
-
-                if (TypeFactory.IsList(fromFrameworkType))
-                {
-                    return RequestContentExpression.FromEnumerable(fromExpression);
-                }
-
-                if (TypeFactory.IsDictionary(fromFrameworkType))
-                {
-                    return RequestContentExpression.FromDictionary(fromExpression);
-                }
-
-                return RequestContentExpression.FromObject(fromExpression);
-            }
-
-            return fromExpression;
-        }
-
-        private static ValueExpression CreateConversion(ValueExpression fromExpression, TypeProvider fromTypeImplementation, CSharpType toType)
-        {
-            return fromTypeImplementation switch
-            {
-                EnumType enumType           when toType.EqualsIgnoreNullable(typeof(RequestContent)) => BinaryDataExpression.FromObjectAsJson(new EnumExpression(enumType, fromExpression).ToSerial()),
-                EnumType enumType           when toType.EqualsIgnoreNullable(typeof(string)) => new EnumExpression(enumType, fromExpression).ToSerial(),
-                SerializableObjectType type when toType.EqualsIgnoreNullable(typeof(RequestContent)) => new SerializableObjectTypeExpression(type, fromExpression).ToRequestContent(),
-                _ => fromExpression
-            };
+            return new ConstantExpression(defaultValue.Value);
         }
 
         public static string CreateDescription(InputParameter operationParameter, CSharpType type, IEnumerable<string>? values, Constant? defaultValue = null)

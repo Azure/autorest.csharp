@@ -462,7 +462,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                     yield return jsonDeserialize;
                 }
 
-                if (!Configuration.Generation1ConvenienceClient)
+                if (!Configuration.Generation1ConvenienceClient || Configuration.ProtocolMethodList.Any())
                 {
                     if (IncludeDeserializer)
                     {

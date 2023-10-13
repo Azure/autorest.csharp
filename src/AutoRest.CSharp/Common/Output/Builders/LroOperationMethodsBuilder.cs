@@ -59,7 +59,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
         private IEnumerable<MethodBodyStatement> CreateConvenienceMethodLogic(string methodName, RestClientMethodParameters parameters, bool async)
         {
             var protocolMethodArguments = new List<ValueExpression>();
-            yield return AddProtocolMethodArguments(parameters, protocolMethodArguments).ToArray();
+            yield return AddProtocolMethodArguments(parameters, protocolMethodArguments).Reverse().ToArray();
 
             if (ResponseType == null)
             {

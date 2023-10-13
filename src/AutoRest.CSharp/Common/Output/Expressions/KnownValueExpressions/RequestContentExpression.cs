@@ -1,7 +1,9 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
+using AutoRest.CSharp.Generation.Types;
 using Azure.Core;
 
 namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions
@@ -18,5 +20,25 @@ namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions
         public static implicit operator RequestContentExpression(StringRequestContentExpression stringRequestContentExpression) => new(stringRequestContentExpression.Untyped);
         public static implicit operator RequestContentExpression(Utf8JsonRequestContentExpression utf8JsonRequestContent) => new(utf8JsonRequestContent.Untyped);
         public static implicit operator RequestContentExpression(XmlWriterContentExpression xmlWriterContent) => new(xmlWriterContent.Untyped);
+
+        public static RequestContentExpression CreateFromFrameworkType(TypedValueExpression expression)
+        {
+            if (expression.Type.FrameworkType == typeof(BinaryData))
+            {
+                return new RequestContentExpression(expression);
+            }
+
+            if (TypeFactory.IsList(expression.Type))
+            {
+                return FromEnumerable(expression);
+            }
+
+            if (TypeFactory.IsDictionary(expression.Type))
+            {
+                return FromDictionary(expression);
+            }
+
+            return FromObject(expression);
+        }
     }
 }

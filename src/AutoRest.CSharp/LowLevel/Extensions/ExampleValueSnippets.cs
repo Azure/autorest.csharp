@@ -204,15 +204,13 @@ namespace AutoRest.CSharp.LowLevel.Extensions
 
         private static ValueExpression GetExpressionForRequestContent(InputExampleValue value)
         {
-            if (value is InputExampleRawValue rawValue && rawValue.RawValue == null)
+            if (value is InputExampleRawValue { RawValue: null })
             {
                 return Null;
             }
-            else
-            {
-                var freeFormObjectExpression = GetExpressionForFreeFormObject(value, includeCollectionInitialization: true);
-                return RequestContentExpression.Create(freeFormObjectExpression);
-            }
+
+            var freeFormObjectExpression = GetExpressionForFreeFormObject(value, includeCollectionInitialization: true);
+            return RequestContentExpression.Create(freeFormObjectExpression);
         }
 
         private static ValueExpression GetExpressionForList(CSharpType listType, InputExampleValue exampleValue, SerializationFormat serializationFormat, bool includeCollectionInitialization = true)

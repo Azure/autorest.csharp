@@ -19,6 +19,7 @@ using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Azure;
+using Azure.Core;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
 namespace AutoRest.CSharp.Output.Samples.Models
@@ -84,7 +85,7 @@ namespace AutoRest.CSharp.Output.Samples.Models
                 {
                     // when it is not inline parameter, we add the declaration of the parameter into the statements, and returns the parameter name reference
                     var parameterReference = new VariableReference(parameter.Type, parameter.Name);
-                    var declaration = Declare(parameterReference, parameterExpression);
+                    var declaration = parameter.Type.Equals(typeof(RequestContent)) ? UsingDeclare(parameterReference, parameterExpression) : Declare(parameterReference, parameterExpression);
                     variableDeclarationStatements.Add(declaration);
                     yield return parameter.IsOptionalInSignature ? new PositionalParameterReference(parameter.Name, parameterReference) : parameterReference; // returns the parameter name reference
                 }

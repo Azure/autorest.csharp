@@ -19,6 +19,12 @@ namespace AutoRest.CSharp.Common.Output.Models
         public static DeclarationStatement UsingDeclare(string name, HttpMessageExpression value, out HttpMessageExpression variable)
             => UsingDeclare(name, value, d => new HttpMessageExpression(d), out variable);
 
+        public static DeclarationStatement UsingDeclare(string name, RequestContentExpression value, out RequestContentExpression variable)
+            => UsingDeclare(name, value, d => new RequestContentExpression(d), out variable);
+
+        public static DeclarationStatement UsingDeclare(VariableReference variable, ValueExpression value)
+            => new UsingDeclareVariableStatement(variable.Type, variable.Declaration, value);
+
         public static DeclarationStatement Declare(CSharpType operationType, string name, OperationExpression value, out OperationExpression operation)
         {
             var variable = new VariableReference(operationType, name);
@@ -79,9 +85,6 @@ namespace AutoRest.CSharp.Common.Output.Models
 
         public static DeclarationStatement Declare(VariableReference variable, ValueExpression value)
             => new DeclareVariableStatement(variable.Type, variable.Declaration, value);
-
-        public static DeclarationStatement UsingDeclare(VariableReference variable, ValueExpression value)
-            => new UsingDeclareVariableStatement(variable.Type, variable.Declaration, value);
 
         public static DeclarationStatement UsingVar(string name, HttpMessageExpression value, out HttpMessageExpression variable)
             => UsingVar(name, value, d => new HttpMessageExpression(d), out variable);

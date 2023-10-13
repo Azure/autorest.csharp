@@ -34,7 +34,7 @@ namespace AutoRest.CSharp.Common.Output.Models
         public static ValueExpression Nameof(ValueExpression expression) => new InvokeInstanceMethodExpression(null, "nameof", new[]{expression}, null, false);
         public static ValueExpression ThrowExpression(ValueExpression expression) => new KeywordExpression("throw", expression);
 
-        public static ValueExpression NullConditional(Parameter parameter) => ((TypedValueExpression)parameter).NullConditional();
+        public static TypedValueExpression NullConditional(Parameter parameter) => parameter.IsOptionalInSignature ? ((TypedValueExpression)parameter).NullConditional() : parameter;
         public static ValueExpression NullCoalescing(ValueExpression left, ValueExpression right) => new BinaryOperatorExpression("??", left, right);
         public static ValueExpression EnumValue(EnumType type, EnumTypeValue value) => new MemberExpression(new TypeReference(type.Type), value.Declaration.Name);
         public static ValueExpression FrameworkEnumValue<TEnum>(TEnum value) where TEnum : struct, Enum => new MemberExpression(new TypeReference(typeof(TEnum)), Enum.GetName(value)!);
@@ -42,14 +42,19 @@ namespace AutoRest.CSharp.Common.Output.Models
         public static ValueExpression RemoveAllNullConditional(ValueExpression expression)
             => expression switch
             {
-                NullConditionalExpression nullConditional => nullConditional.Inner,
+                NullConditionalExpression nullConditional => RemoveAllNullConditional(nullConditional.Inner),
                 MemberExpression { Inner: {} inner } member => member with {Inner = RemoveAllNullConditional(inner)},
-                TypedValueExpression typed => RemoveAllNullConditional(typed),
+                TypedValueExpression typed => typed with {Untyped = RemoveAllNullConditional(typed.Untyped)},
                 _ => expression
             };
 
         public static TypedValueExpression RemoveAllNullConditional(TypedValueExpression expression)
-            => expression with {Untyped = RemoveAllNullConditional(expression.Untyped)};
+            => expression switch
+            {
+                TypedNullConditionalExpression nullConditional => RemoveAllNullConditional(nullConditional.Inner),
+                TypedMemberExpression { Inner: {} inner } member => member with {Inner = RemoveAllNullConditional(inner)},
+                _ => expression with {Untyped = RemoveAllNullConditional(expression.Untyped)}
+            };
 
         public static ValueExpression Literal(object? value) => new FormattableStringToExpression($"{value:L}");
 

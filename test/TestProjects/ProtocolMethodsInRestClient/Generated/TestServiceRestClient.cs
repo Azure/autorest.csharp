@@ -73,12 +73,7 @@ namespace ProtocolMethodsInRestClient
                 throw new ArgumentNullException(nameof(grouped));
             }
 
-            Utf8JsonRequestContent content = null;
-            if (resource != null)
-            {
-                content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteObjectValue(resource);
-            }
+            using RequestContent content = resource?.ToRequestContent();
             RequestContext context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
             Response response = await CreateAsync(grouped.Second, content, grouped.First, context).ConfigureAwait(false);
             switch (response.Status)
@@ -107,12 +102,7 @@ namespace ProtocolMethodsInRestClient
                 throw new ArgumentNullException(nameof(grouped));
             }
 
-            Utf8JsonRequestContent content = null;
-            if (resource != null)
-            {
-                content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteObjectValue(resource);
-            }
+            using RequestContent content = resource?.ToRequestContent();
             RequestContext context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
             Response response = Create(grouped.Second, content, grouped.First, context);
             switch (response.Status)
