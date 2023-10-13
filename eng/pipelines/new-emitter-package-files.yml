@@ -9,8 +9,6 @@ parameters:
   type: string
 - name: OutputDirectory
   type: string
-- name: OutputDirectory
-  type: string
 - name: UseInternalFeed
   type: boolean
 
