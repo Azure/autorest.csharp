@@ -626,14 +626,8 @@ Operation<BinaryData> operation = await client.CreateOrUpdateAsync(WaitUntil.Com
 BinaryData responseData = operation.Value;
 
 JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
-Console.WriteLine(result.GetProperty("projectName").ToString());
-Console.WriteLine(result.GetProperty("projectKind").ToString());
-Console.WriteLine(result.GetProperty("storageInputContainerName").ToString());
-Console.WriteLine(result.GetProperty("language").ToString());
-Console.WriteLine(result.GetProperty("createdDateTime").ToString());
-Console.WriteLine(result.GetProperty("lastModifiedDateTime").ToString());
-Console.WriteLine(result.GetProperty("lastTrainedDateTime").ToString());
-Console.WriteLine(result.GetProperty("lastDeployedDateTime").ToString());
+Console.WriteLine(result.GetProperty("id").ToString());
+Console.WriteLine(result.GetProperty("status").ToString());
 ]]></code>
 This sample shows how to call CreateOrUpdateAsync with all parameters and request content and parse the result.
 <code><![CDATA[
@@ -656,17 +650,23 @@ Operation<BinaryData> operation = await client.CreateOrUpdateAsync(WaitUntil.Com
 BinaryData responseData = operation.Value;
 
 JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
-Console.WriteLine(result.GetProperty("projectName").ToString());
-Console.WriteLine(result.GetProperty("projectKind").ToString());
-Console.WriteLine(result.GetProperty("storageInputContainerName").ToString());
-Console.WriteLine(result.GetProperty("settings").GetProperty("<key>").ToString());
-Console.WriteLine(result.GetProperty("multilingual").ToString());
-Console.WriteLine(result.GetProperty("description").ToString());
-Console.WriteLine(result.GetProperty("language").ToString());
-Console.WriteLine(result.GetProperty("createdDateTime").ToString());
-Console.WriteLine(result.GetProperty("lastModifiedDateTime").ToString());
-Console.WriteLine(result.GetProperty("lastTrainedDateTime").ToString());
-Console.WriteLine(result.GetProperty("lastDeployedDateTime").ToString());
+Console.WriteLine(result.GetProperty("id").ToString());
+Console.WriteLine(result.GetProperty("status").ToString());
+Console.WriteLine(result.GetProperty("error").GetProperty("code").ToString());
+Console.WriteLine(result.GetProperty("error").GetProperty("message").ToString());
+Console.WriteLine(result.GetProperty("error").GetProperty("target").ToString());
+Console.WriteLine(result.GetProperty("error").GetProperty("innererror").GetProperty("code").ToString());
+Console.WriteLine(result.GetProperty("result").GetProperty("projectName").ToString());
+Console.WriteLine(result.GetProperty("result").GetProperty("projectKind").ToString());
+Console.WriteLine(result.GetProperty("result").GetProperty("storageInputContainerName").ToString());
+Console.WriteLine(result.GetProperty("result").GetProperty("settings").GetProperty("<key>").ToString());
+Console.WriteLine(result.GetProperty("result").GetProperty("multilingual").ToString());
+Console.WriteLine(result.GetProperty("result").GetProperty("description").ToString());
+Console.WriteLine(result.GetProperty("result").GetProperty("language").ToString());
+Console.WriteLine(result.GetProperty("result").GetProperty("createdDateTime").ToString());
+Console.WriteLine(result.GetProperty("result").GetProperty("lastModifiedDateTime").ToString());
+Console.WriteLine(result.GetProperty("result").GetProperty("lastTrainedDateTime").ToString());
+Console.WriteLine(result.GetProperty("result").GetProperty("lastDeployedDateTime").ToString());
 ]]></code></example>
     </member>
     <member name="CreateOrUpdate(WaitUntil,string,RequestContent,RequestContext)">
@@ -686,14 +686,8 @@ Operation<BinaryData> operation = client.CreateOrUpdate(WaitUntil.Completed, "<p
 BinaryData responseData = operation.Value;
 
 JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
-Console.WriteLine(result.GetProperty("projectName").ToString());
-Console.WriteLine(result.GetProperty("projectKind").ToString());
-Console.WriteLine(result.GetProperty("storageInputContainerName").ToString());
-Console.WriteLine(result.GetProperty("language").ToString());
-Console.WriteLine(result.GetProperty("createdDateTime").ToString());
-Console.WriteLine(result.GetProperty("lastModifiedDateTime").ToString());
-Console.WriteLine(result.GetProperty("lastTrainedDateTime").ToString());
-Console.WriteLine(result.GetProperty("lastDeployedDateTime").ToString());
+Console.WriteLine(result.GetProperty("id").ToString());
+Console.WriteLine(result.GetProperty("status").ToString());
 ]]></code>
 This sample shows how to call CreateOrUpdate with all parameters and request content and parse the result.
 <code><![CDATA[
@@ -716,17 +710,23 @@ Operation<BinaryData> operation = client.CreateOrUpdate(WaitUntil.Completed, "<p
 BinaryData responseData = operation.Value;
 
 JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
-Console.WriteLine(result.GetProperty("projectName").ToString());
-Console.WriteLine(result.GetProperty("projectKind").ToString());
-Console.WriteLine(result.GetProperty("storageInputContainerName").ToString());
-Console.WriteLine(result.GetProperty("settings").GetProperty("<key>").ToString());
-Console.WriteLine(result.GetProperty("multilingual").ToString());
-Console.WriteLine(result.GetProperty("description").ToString());
-Console.WriteLine(result.GetProperty("language").ToString());
-Console.WriteLine(result.GetProperty("createdDateTime").ToString());
-Console.WriteLine(result.GetProperty("lastModifiedDateTime").ToString());
-Console.WriteLine(result.GetProperty("lastTrainedDateTime").ToString());
-Console.WriteLine(result.GetProperty("lastDeployedDateTime").ToString());
+Console.WriteLine(result.GetProperty("id").ToString());
+Console.WriteLine(result.GetProperty("status").ToString());
+Console.WriteLine(result.GetProperty("error").GetProperty("code").ToString());
+Console.WriteLine(result.GetProperty("error").GetProperty("message").ToString());
+Console.WriteLine(result.GetProperty("error").GetProperty("target").ToString());
+Console.WriteLine(result.GetProperty("error").GetProperty("innererror").GetProperty("code").ToString());
+Console.WriteLine(result.GetProperty("result").GetProperty("projectName").ToString());
+Console.WriteLine(result.GetProperty("result").GetProperty("projectKind").ToString());
+Console.WriteLine(result.GetProperty("result").GetProperty("storageInputContainerName").ToString());
+Console.WriteLine(result.GetProperty("result").GetProperty("settings").GetProperty("<key>").ToString());
+Console.WriteLine(result.GetProperty("result").GetProperty("multilingual").ToString());
+Console.WriteLine(result.GetProperty("result").GetProperty("description").ToString());
+Console.WriteLine(result.GetProperty("result").GetProperty("language").ToString());
+Console.WriteLine(result.GetProperty("result").GetProperty("createdDateTime").ToString());
+Console.WriteLine(result.GetProperty("result").GetProperty("lastModifiedDateTime").ToString());
+Console.WriteLine(result.GetProperty("result").GetProperty("lastTrainedDateTime").ToString());
+Console.WriteLine(result.GetProperty("result").GetProperty("lastDeployedDateTime").ToString());
 ]]></code></example>
     </member>
     <member name="DeleteAsync(WaitUntil,string,RequestContext)">
@@ -977,7 +977,8 @@ Operation<BinaryData> operation = await client.DeployProjectAsync(WaitUntil.Comp
 BinaryData responseData = operation.Value;
 
 JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
-Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("id").ToString());
+Console.WriteLine(result.GetProperty("status").ToString());
 ]]></code>
 This sample shows how to call DeployProjectAsync with all parameters and request content and parse the result.
 <code><![CDATA[
@@ -989,7 +990,12 @@ Operation<BinaryData> operation = await client.DeployProjectAsync(WaitUntil.Comp
 BinaryData responseData = operation.Value;
 
 JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
-Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("id").ToString());
+Console.WriteLine(result.GetProperty("status").ToString());
+Console.WriteLine(result.GetProperty("error").GetProperty("code").ToString());
+Console.WriteLine(result.GetProperty("error").GetProperty("message").ToString());
+Console.WriteLine(result.GetProperty("error").GetProperty("target").ToString());
+Console.WriteLine(result.GetProperty("error").GetProperty("innererror").GetProperty("code").ToString());
 ]]></code></example>
     </member>
     <member name="DeployProject(WaitUntil,string,string,RequestContent,RequestContext)">
@@ -1004,7 +1010,8 @@ Operation<BinaryData> operation = client.DeployProject(WaitUntil.Completed, "<pr
 BinaryData responseData = operation.Value;
 
 JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
-Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("id").ToString());
+Console.WriteLine(result.GetProperty("status").ToString());
 ]]></code>
 This sample shows how to call DeployProject with all parameters and request content and parse the result.
 <code><![CDATA[
@@ -1016,7 +1023,12 @@ Operation<BinaryData> operation = client.DeployProject(WaitUntil.Completed, "<pr
 BinaryData responseData = operation.Value;
 
 JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
-Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("id").ToString());
+Console.WriteLine(result.GetProperty("status").ToString());
+Console.WriteLine(result.GetProperty("error").GetProperty("code").ToString());
+Console.WriteLine(result.GetProperty("error").GetProperty("message").ToString());
+Console.WriteLine(result.GetProperty("error").GetProperty("target").ToString());
+Console.WriteLine(result.GetProperty("error").GetProperty("innererror").GetProperty("code").ToString());
 ]]></code></example>
     </member>
     <member name="DeleteDeploymentAsync(WaitUntil,string,string,RequestContext)">
