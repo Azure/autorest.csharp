@@ -384,24 +384,22 @@ export function loadOperation(
             return undefined;
         }
 
+        var bodyType = undefined;
+        if (op.verb !== "delete") {
+            const formattedType = getFormattedType(
+                program,
+                metadata.logicalResult
+            );
+            bodyType = getInputType(context, formattedType, models, enums);
+        }
+
         return {
             FinalStateVia: convertLroFinalStateVia(metadata.finalStateVia),
             FinalResponse: {
                 // in swagger, we allow delete to return some meaningful body content
                 // for now, let assume we don't allow return type
                 StatusCodes: op.verb === "delete" ? [204] : [200],
-                BodyType:
-                    op.verb === "delete"
-                        ? undefined
-                        : getInputType(
-                              context,
-                              getFormattedType(
-                                  program,
-                                  metadata.envelopeResult
-                              ),
-                              models,
-                              enums
-                          ),
+                BodyType: bodyType,
                 BodyMediaType: BodyMediaType.Json
             } as OperationResponse
         } as OperationLongRunning;
