@@ -28,7 +28,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
                 if (enumsToKeepPlural.Contains(schemaName))
                 {
                     MgmtReport.Instance.TransformSection.AddTransformLog(
-                        new TransformItem(MgmtConfiguration.ConfigName.KeepPluralEnums, schemaName),
+                        new TransformItem(TransformTypeName.KeepPluralEnums, schemaName),
                         schema.GetOriginalName(), $"Keep Enum {schemaName} Plural");
                     continue;
                 }

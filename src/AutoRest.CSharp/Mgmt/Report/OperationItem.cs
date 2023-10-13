@@ -1,11 +1,11 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-using System.Collections.Generic;
 using System.Linq;
+using AutoRest.CSharp.Common.Utilities;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Models;
-using AutoRest.CSharp.Mgmt.Output;
+using AutoRest.CSharp.Output.Builders;
 using YamlDotNet.Serialization;
 
 namespace AutoRest.CSharp.Mgmt.Report
@@ -18,9 +18,35 @@ namespace AutoRest.CSharp.Mgmt.Report
             this.OperationId = operation.OperationId;
             this.IsLongRunningOperation = operation.IsLongRunningOperation;
             this.IsPageableOperation = operation.IsPagingOperation;
+
+            var bodyParam = operation.Parameters.FirstOrDefault(p => p.RequestLocation == Common.Input.RequestLocation.Body);
+            if (bodyParam != null)
+            {
+                var bodyRequestParam = operation.Operation.GetBodyParameter();
+                string? paramFullSerializedName;
+                if (bodyRequestParam == null)
+                {
+                    paramFullSerializedName = $"{operation.Operation.GetFullSerializedName()}.{bodyParam.Name}";
+                    string warning = $"Can't find corresponding RequestParameter for Parameter {operation.Name}.{bodyParam.Name}. OperationId = {operation.OperationId}. Try to use Parameter.Name to parse fullSerializedName as {paramFullSerializedName}";
+                    AutoRestLogger.Warning(warning).Wait();
+                }
+                else if (bodyRequestParam.CSharpName() != bodyParam.Name)
+                {
+                    paramFullSerializedName = operation.Operation.GetFullSerializedName(bodyRequestParam);
+                    string warning = $"Name mismatch between Parameter and RequestParameter. OperationId = {operation.OperationId}. Parameter.Name = {bodyParam.Name}, RequestParameter.CSharpName = {bodyRequestParam.CSharpName()}. Try to use RequestParameter to parse fullSerializedName as {paramFullSerializedName}";
+                    AutoRestLogger.Warning(warning).Wait();
+                }
+                else
+                {
+                    paramFullSerializedName = operation.Operation.GetFullSerializedName(bodyRequestParam);
+                }
+                this.BodyParameter = new ParameterItem(bodyParam, paramFullSerializedName, transformSection);
+            }
         }
 
         public string OperationId { get; set; }
+        [YamlMember(DefaultValuesHandling = DefaultValuesHandling.OmitNull)]
+        public ParameterItem? BodyParameter { get; set; }
         [YamlMember(DefaultValuesHandling = DefaultValuesHandling.OmitDefaults)]
         public bool IsLongRunningOperation { get; set; }
         [YamlMember(DefaultValuesHandling = DefaultValuesHandling.OmitDefaults)]

@@ -16,7 +16,6 @@ namespace AutoRest.CSharp.Mgmt.Decorator
     internal static class BodyParameterNormalizer
     {
         private static readonly string Content = "Content";
-        public static readonly string UpdateBodyParameterTransformType = "update-body-parameter";
 
         internal static void Update(HttpMethod method, string methodName, RequestParameter bodyParameter, string resourceName, Operation operation)
         {
@@ -58,7 +57,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             bodyParam.Language.Default.Name = NormalizeParamNames.GetNewName(bodyParam.Language.Default.Name, bodyParam.Schema.Name, resourceDataDictionary);
             string fullSerializedName = operation.GetFullSerializedName(bodyParam);
             MgmtReport.Instance.TransformSection.AddTransformLogForApplyChange(
-                new TransformItem(UpdateBodyParameterTransformType, fullSerializedName),
+                new TransformItem(TransformTypeName.UpdateBodyParameter, fullSerializedName),
                 fullSerializedName, "UpdateParameterNameOnly", oriName, bodyParam.Language.Default.Name);
         }
 
@@ -69,7 +68,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             parameter.Language.Default.Name = parameterName;
             string fullSerializedName = operation.GetFullSerializedName(parameter);
             MgmtReport.Instance.TransformSection.AddTransformLogForApplyChange(
-                new TransformItem(UpdateBodyParameterTransformType, fullSerializedName),
+                new TransformItem(TransformTypeName.UpdateBodyParameter, fullSerializedName),
                 fullSerializedName, "UpdateParameterName", oriParameterName, parameter.Language.Default.Name);
 
             string oriSchemaName = parameter.Schema.Language.Default.Name;
@@ -77,7 +76,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             parameter.Schema.Language.Default.Name = schemaName;
             fullSerializedName = parameter.Schema.GetFullSerializedName();
             MgmtReport.Instance.TransformSection.AddTransformLogForApplyChange(
-                new TransformItem(UpdateBodyParameterTransformType, fullSerializedName),
+                new TransformItem(TransformTypeName.UpdateBodyParameter, fullSerializedName),
                 fullSerializedName, "UpdateParameterSchemaName", oriSchemaName, parameter.Schema.Language.Default.Name);
 
             if (parameter.Schema is ChoiceSchema ||

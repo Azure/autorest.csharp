@@ -3,10 +3,11 @@
 
 using System;
 using System.Collections.Generic;
+using AutoRest.CSharp.Generation.Types;
 
 namespace AutoRest.CSharp.Mgmt.Report
 {
-    internal static class TransformStoreExtension
+    internal static class ReportExtension
     {
         public static T AddToTransformerStore<T>(this T items, string transformerType, bool fromConfig) where T : IEnumerable<string>
         {
@@ -28,6 +29,11 @@ namespace AutoRest.CSharp.Mgmt.Report
                 MgmtReport.Instance.TransformSection.AddTransformers(items);
             }
             return dict;
+        }
+
+        public static string GetNameForReport(this CSharpType type)
+        {
+            return type.ToString().Trim().Replace("global::", "");
         }
     }
 }

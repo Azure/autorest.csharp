@@ -89,12 +89,12 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                     {
                         if (p.SchemaProperty != null)
                         {
-                            return new PropertyItem(p.Declaration.Name, mot.GetFullSerializedName(p.SchemaProperty), MgmtReport.Instance.TransformSection);
+                            return new PropertyItem(p.Declaration.Name, p.Declaration.Type.GetNameForReport(), mot.GetFullSerializedName(p.SchemaProperty), MgmtReport.Instance.TransformSection);
                         }
                         else
                         {
                             AutoRestLogger.Warning($"Ignore Property '{mi.FullName}.{p.Declaration.Name}' without schema (i.e. AdditionalProperties)").Wait();
-                            return new PropertyItem(p.Declaration.Name, "<NoPropertySchemaFound>", MgmtReport.Instance.TransformSection);
+                            return new PropertyItem(p.Declaration.Name, p.Declaration.Type.GetNameForReport(),"<NoPropertySchemaFound>", MgmtReport.Instance.TransformSection);
                         }
                     });
                     MgmtReport.Instance.ObjectModelSection.Add(mi.FullName, mi);
@@ -159,12 +159,12 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 {
                     if (p.SchemaProperty != null)
                     {
-                        return new PropertyItem(p.Declaration.Name, model.GetFullSerializedName(p.SchemaProperty), MgmtReport.Instance.TransformSection);
+                        return new PropertyItem(p.Declaration.Name, p.Declaration.Type.GetNameForReport(),model.GetFullSerializedName(p.SchemaProperty), MgmtReport.Instance.TransformSection);
                     }
                     else
                     {
                         AutoRestLogger.Warning($"Ignore Resource Property '{mi.FullName}.{p.Declaration.Name}' without schema (i.e. AdditionalProperties)").Wait();
-                        return new PropertyItem(p.Declaration.Name, "<NoPropertySchemaFound>", MgmtReport.Instance.TransformSection);
+                        return new PropertyItem(p.Declaration.Name, p.Declaration.Type.GetNameForReport(), "<NoPropertySchemaFound>", MgmtReport.Instance.TransformSection);
                     }
                 });
                 MgmtReport.Instance.ObjectModelSection.Add(mi.FullName, mi);

@@ -38,7 +38,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                 {
                     string fullSerializedName = this.GetFullSerializedName(objectTypeProperty);
                     MgmtReport.Instance.TransformSection.AddTransformLogForApplyChange(
-                        new TransformItem(PROPERTY_TYPE_REPLACEMENT_TRANSFORM_TYPE, fullSerializedName),
+                        new TransformItem(TransformTypeName.ReplacePropertyType, fullSerializedName),
                        fullSerializedName,
                         "ReplacePropertyType", propertyTypeToUse.Declaration.Type.ToString(), newProperty.Declaration.Type.ToString());
                     propertyTypeToUse = newProperty;

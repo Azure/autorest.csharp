@@ -106,7 +106,7 @@ namespace AutoRest.CSharp.Utilities
                 {
                     var finalName = ToCleanName(applyStep.NewName.VariableName, isCamelCase: false);
                     MgmtReport.Instance.TransformSection.AddTransformLogForApplyChange(
-                        MgmtConfiguration.ConfigName.AcronymMapping, applyStep.MappingKey, applyStep.MappingValue.RawValue,
+                        TransformTypeName.AcronymMapping, applyStep.MappingKey, applyStep.MappingValue.RawValue,
                         $"Variables.{name}",
                         $"ApplyAcronymMappingOnVariable", tempName, $"{applyStep.NewName.VariableName}(ToCleanName={finalName})");
                     tempName = applyStep.NewName.VariableName;

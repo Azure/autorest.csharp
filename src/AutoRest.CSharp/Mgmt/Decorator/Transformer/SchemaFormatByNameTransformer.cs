@@ -71,7 +71,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
         private IEnumerable<Schema> allGeneralSchemas;
         private IEnumerable<OperationGroup> allOperationGroups;
         private IReadOnlyDictionary<string, string> allFormatByNameRules;
-        private Dictionary<Schema, string> schemaCache = new();
+        private Dictionary<Schema, (string CSharpName, TransformItem? Transform, string TransformLogMessage)> schemaCache = new();
 
         internal SchemaFormatByNameTransformer(
             IEnumerable<Schema> generalSchemas,
@@ -134,9 +134,9 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
                         var oriFormat = parameter.Extensions.Format;
                         parameter.Extensions.Format = formatPattern.ExtensionType;
                         MgmtReport.Instance.TransformSection.AddTransformLogForApplyChange(
-                            MgmtConfiguration.ConfigName.FormatByNameRules, curRule.NamePattern.RawValue, curRule.FormatPattern.RawValue,
+                            TransformTypeName.FormatByNameRules, curRule.NamePattern.RawValue, curRule.FormatPattern.RawValue,
                             operation.GetFullSerializedName(parameter),
-                            "ApplyNewExFormat", oriFormat, parameter.Extensions.Format);
+                            "ApplyNewExFormatOnOperationParameter", oriFormat, parameter.Extensions.Format);
                     }
                 }
             }
@@ -147,35 +147,39 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
             foreach (var property in objectSchema.Properties)
             {
                 if (property.Schema is ArraySchema propertyArraySchema)
-                    TryUpdateSchemaFormat(property.CSharpName(), propertyArraySchema.ElementType, rules);
+                    TryUpdateSchemaFormat(property.CSharpName(), propertyArraySchema.ElementType, rules, objectSchema.GetFullSerializedName(property));
                 else
-                    TryUpdateSchemaFormat(property.CSharpName(), property.Schema, rules);
+                    TryUpdateSchemaFormat(property.CSharpName(), property.Schema, rules, objectSchema.GetFullSerializedName(property));
             }
         }
 
-        private int TryUpdateSchemaFormat(string name, Schema schema, IReadOnlyList<FormatRule> rules)
+        private int TryUpdateSchemaFormat(string name, Schema schema, IReadOnlyList<FormatRule> rules, string targetFullSerializedName)
         {
             int ruleIdx = -1;
             if (schema is not PrimitiveSchema)
                 return ruleIdx;
-            if (schemaCache.ContainsKey(schema))
+            if (schemaCache.TryGetValue(schema, out var cache))
             {
-                if (!name.Equals(schemaCache[schema]))
-                    Console.Error.WriteLine($"WARNING: The schema '{schema.CSharpName()}' is shared by '{name}' and '{schemaCache[schema]}' which is unexpected.");
+                if (!name.Equals(cache.CSharpName))
+                    Console.Error.WriteLine($"WARNING: The schema '{schema.CSharpName()}' is shared by '{name}' and '{cache.CSharpName}' which is unexpected.");
+                if (cache.Transform != null)
+                    MgmtReport.Instance.TransformSection.AddTransformLog(cache.Transform, targetFullSerializedName, cache.TransformLogMessage);
                 return ruleIdx;
             }
             ruleIdx = CheckRules(name, rules);
+            TransformItem? transform = null;
+            string transformLogMessage = "";
             if (ruleIdx >= 0)
             {
                 var curRule = rules[ruleIdx];
                 var formatPattern = curRule.FormatPattern;
+                transform = new TransformItem(TransformTypeName.FormatByNameRules, curRule.NamePattern.RawValue, curRule.FormatPattern.RawValue);
                 if (formatPattern.IsPrimitiveType)
                 {
                     var oriType = schema.Type;
                     schema.Type = formatPattern.PrimitiveType!.Value;
-                    MgmtReport.Instance.TransformSection.AddTransformLogForApplyChange(MgmtConfiguration.ConfigName.FormatByNameRules, curRule.NamePattern.RawValue, curRule.FormatPattern.RawValue,
-                        schema.GetFullSerializedName(),
-                        "ApplyNewType", oriType.ToString(), schema.Type.ToString());
+                    transformLogMessage = $"ApplyNewType '{oriType}' --> '{schema.Type}'";
+                    MgmtReport.Instance.TransformSection.AddTransformLog(transform, targetFullSerializedName, transformLogMessage);
                 }
                 else
                 {
@@ -183,12 +187,11 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
                         schema.Extensions = new RecordOfStringAndAny();
                     string? oriExFormat = schema.Extensions.Format;
                     schema.Extensions.Format = formatPattern.ExtensionType!;
-                    MgmtReport.Instance.TransformSection.AddTransformLogForApplyChange(MgmtConfiguration.ConfigName.FormatByNameRules, curRule.NamePattern.RawValue, curRule.FormatPattern.RawValue,
-                        schema.GetFullSerializedName(),
-                        "ApplyNewExFormat", oriExFormat, schema.Extensions.Format);
+                    transformLogMessage = $"ApplyNewExFormat '{oriExFormat ?? "<null>"}' --> '{schema.Extensions.Format ?? "<null>"}'";
+                    MgmtReport.Instance.TransformSection.AddTransformLog(transform, targetFullSerializedName, transformLogMessage);
                 }
             }
-            schemaCache[schema] = name;
+            schemaCache[schema] = (CSharpName: name, Transform: transform, TransformLogMessage: transformLogMessage);
             return ruleIdx;
         }
 

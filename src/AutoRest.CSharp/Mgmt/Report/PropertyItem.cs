@@ -8,13 +8,15 @@ namespace AutoRest.CSharp.Mgmt.Report
 {
     internal class PropertyItem : TransformableItem
     {
-        public PropertyItem(string name, string serializedName, TransformSection transformSection)
+        public PropertyItem(string name, string type, string serializedName, TransformSection transformSection)
             :base(serializedName, transformSection)
         {
             Name = name;
+            Type = type;
         }
 
         [YamlIgnore]
         public string Name { get; set; }
+        public string Type { get; set; }
     }
 }

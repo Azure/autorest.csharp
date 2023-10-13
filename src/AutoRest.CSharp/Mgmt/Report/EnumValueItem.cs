@@ -12,11 +12,9 @@ namespace AutoRest.CSharp.Mgmt.Report
             :base(serializedName, transformSection)
         {
             Name = name;
-            SerializedName = serializedName;
         }
 
         [YamlIgnore]
         public string Name { get; set; }
-        public string SerializedName { get; set; }
     }
 }

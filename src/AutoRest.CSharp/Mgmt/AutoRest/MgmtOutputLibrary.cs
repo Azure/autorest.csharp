@@ -252,7 +252,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
                             string fullSerializedName = operation.GetFullSerializedName(param);
                             MgmtReport.Instance.TransformSection.AddTransformLogForApplyChange(
-                                new TransformItem(BodyParameterNormalizer.UpdateBodyParameterTransformType, fullSerializedName),
+                                new TransformItem(TransformTypeName.UpdateBodyParameter, fullSerializedName),
                                 fullSerializedName, "SetBodyParameterNameOnThirdPass", oriName, param.Language.Default.Name);
 
                         }
@@ -329,7 +329,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 var oriModel = _schemaOrNameToModels[replacedType.ObjectSchema];
                 _schemaOrNameToModels[replacedType.ObjectSchema] = replacedType;
                 MgmtReport.Instance.TransformSection.AddTransformLogForApplyChange(
-                    new TransformItem("type-replacement-when-initializing-model", replacedType.ObjectSchema.GetFullSerializedName()),
+                    new TransformItem(TransformTypeName.ReplaceTypeWhenInitializingModel, replacedType.ObjectSchema.GetFullSerializedName()),
                     replacedType.ObjectSchema.GetFullSerializedName(),
                     "ReplaceType", oriModel.Declaration.FullName, replacedType.Declaration.FullName);
             }
@@ -881,7 +881,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                     else
                     {
                         MgmtReport.Instance.TransformSection.AddTransformLog(
-                            new TransformItem(MgmtConfiguration.ConfigName.KeepPluralResourceData, schemaName),
+                            new TransformItem(TransformTypeName.KeepPluralResourceData, schemaName),
                             resourceDataSchema.GetFullSerializedName(), $"Keep ObjectName as Plural: {schemaName}");
                     }
                     // if this operation set corresponds to a SDK resource, we add it to the map

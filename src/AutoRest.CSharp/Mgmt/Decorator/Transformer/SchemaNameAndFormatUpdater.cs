@@ -49,7 +49,7 @@ internal static class SchemaNameAndFormatUpdater
     {
         foreach ((var key, var value) in Configuration.MgmtConfiguration.RenameMapping)
         {
-            yield return new RenameAndReformatTarget(MgmtConfiguration.ConfigName.RenameMapping, key, value);
+            yield return new RenameAndReformatTarget(TransformTypeName.RenameMapping, key, value);
         }
     }
 
@@ -58,7 +58,7 @@ internal static class SchemaNameAndFormatUpdater
         var result = new Dictionary<string, RenameAndReformatTarget>();
         foreach ((var key, var value) in rawMapping)
         {
-            result.Add(key, new RenameAndReformatTarget(MgmtConfiguration.ConfigName.ParameterRenameMapping, key, value));
+            result.Add(key, new RenameAndReformatTarget(TransformTypeName.ParameterRenameMapping, key, value));
         }
 
         return result;
@@ -395,7 +395,7 @@ internal static class SchemaNameAndFormatUpdater
         var tempName = originalName;
         var result = NameTransformer.Instance.EnsureNameCase(originalName, (applyStep) =>
         {
-            MgmtReport.Instance.TransformSection.AddTransformLogForApplyChange(MgmtConfiguration.ConfigName.AcronymMapping, applyStep.MappingKey, applyStep.MappingValue.RawValue, targetFullSerializedName,
+            MgmtReport.Instance.TransformSection.AddTransformLogForApplyChange(TransformTypeName.AcronymMapping, applyStep.MappingKey, applyStep.MappingValue.RawValue, targetFullSerializedName,
                 "ApplyAcronymMapping", tempName, applyStep.NewName.Name);
             tempName = applyStep.NewName.Name;
         });

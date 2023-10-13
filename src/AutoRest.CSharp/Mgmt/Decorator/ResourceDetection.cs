@@ -64,7 +64,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             if (Configuration.MgmtConfiguration.RequestPathIsNonResource.Contains(set.RequestPath))
             {
                 MgmtReport.Instance.TransformSection.AddTransformLog(
-                    new TransformItem(MgmtConfiguration.ConfigName.RequestPathIsNonResource, set.RequestPath), set.RequestPath, "Path marked as non-resource: " + set.RequestPath);
+                    new TransformItem(TransformTypeName.RequestPathIsNonResource, set.RequestPath), set.RequestPath, "Path marked as non-resource: " + set.RequestPath);
                 _resourceDataSchemaCache.TryAdd(set.RequestPath, null);
                 return false;
             }

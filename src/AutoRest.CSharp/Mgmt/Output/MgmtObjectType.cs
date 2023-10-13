@@ -17,8 +17,6 @@ namespace AutoRest.CSharp.Mgmt.Output
 {
     internal class MgmtObjectType : SchemaObjectType
     {
-        internal const string PROPERTY_TYPE_REPLACEMENT_TRANSFORM_TYPE = "type-replacement-for-property";
-        internal const string BASE_TYPE_REPLACEMENT_TRANSFORM_TYPE = "type-replacement-for-base-type";
         private ObjectTypeProperty[]? _myProperties;
 
         public MgmtObjectType(ObjectSchema objectSchema)
@@ -138,7 +136,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                         {
                             string fullSerializedName = this.GetFullSerializedName(objectTypeProperty, i);
                             MgmtReport.Instance.TransformSection.AddTransformLogForApplyChange(
-                                new TransformItem(PROPERTY_TYPE_REPLACEMENT_TRANSFORM_TYPE, fullSerializedName),
+                                new TransformItem(TransformTypeName.ReplacePropertyType, fullSerializedName),
                                fullSerializedName,
                                 "ReplacePropertyType", typeToReplace.Declaration.FullName, $"{match.Namespace}.{match.Name}");
                             objectTypeProperty.ValueType.Arguments[i] = match;
@@ -158,7 +156,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                         propertyType = ReferenceTypePropertyChooser.GetObjectTypeProperty(objectTypeProperty, match);
                         string fullSerializedName = this.GetFullSerializedName(objectTypeProperty);
                         MgmtReport.Instance.TransformSection.AddTransformLogForApplyChange(
-                            new TransformItem(PROPERTY_TYPE_REPLACEMENT_TRANSFORM_TYPE, fullSerializedName),
+                            new TransformItem(TransformTypeName.ReplacePropertyType, fullSerializedName),
                            fullSerializedName,
                             "ReplacePropertyType", typeToReplace.Declaration.FullName, $"{match.Namespace}.{match.Name}");
                     }
@@ -248,9 +246,9 @@ namespace AutoRest.CSharp.Mgmt.Output
                 {
                     string fullSerializedName = this.GetFullSerializedName();
                     MgmtReport.Instance.TransformSection.AddTransformLogForApplyChange(
-                        new TransformItem(BASE_TYPE_REPLACEMENT_TRANSFORM_TYPE, fullSerializedName),
+                        new TransformItem(TransformTypeName.ReplaceBaseType, fullSerializedName),
                         fullSerializedName,
-                        "ReplaceBaseTypeByExactMatch", inheritedType?.ToString().Trim() ?? "<no base type>", match.ToString().Trim());
+                        "ReplaceBaseTypeByExactMatch", inheritedType?.GetNameForReport() ?? "<no base type>", match.GetNameForReport());
                     inheritedType = match;
                 }
             }
@@ -261,9 +259,9 @@ namespace AutoRest.CSharp.Mgmt.Output
             {
                 string fullSerializedName = this.GetFullSerializedName();
                 MgmtReport.Instance.TransformSection.AddTransformLogForApplyChange(
-                    new TransformItem(BASE_TYPE_REPLACEMENT_TRANSFORM_TYPE, fullSerializedName),
+                    new TransformItem(TransformTypeName.ReplaceBaseType, fullSerializedName),
                     fullSerializedName,
-                    "ReplaceBaseTypeBySupersetMatch", inheritedType?.ToString().Trim() ?? "<no base type>", supersetBaseType.ToString().Trim());
+                    "ReplaceBaseTypeBySupersetMatch", inheritedType?.GetNameForReport() ?? "<no base type>", supersetBaseType.GetNameForReport());
                 inheritedType = supersetBaseType;
             }
 

@@ -56,10 +56,10 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         {
             if (Configuration.MgmtConfiguration.OverrideOperationName.TryGetValue(operation.OperationId!, out name))
             {
-                MgmtReport.Instance.TransformSection.AddTransformLog(
-                    new TransformItem(MgmtConfiguration.ConfigName.OverrideOperationName, operation.OperationId!, name),
+                MgmtReport.Instance.TransformSection.AddTransformLogForApplyChange(
+                    new TransformItem(TransformTypeName.OverrideOperationName, operation.OperationId!, name),
                     operation.GetFullSerializedName(),
-                    $"OverrideOperationName from '{operation.Language.Default.Name}' to '{name}' for '{operation.OperationId}'");
+                    "OverrideOperationName", operation.Language.Default.Name, name);
                 return true;
             }
             return false;

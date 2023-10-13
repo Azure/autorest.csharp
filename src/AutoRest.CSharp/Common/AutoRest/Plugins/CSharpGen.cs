@@ -60,8 +60,8 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             {
                 string[] ignoreNoUsage = new string[]
                 {
-                    MgmtConfiguration.ConfigName.AcronymMapping,
-                    MgmtConfiguration.ConfigName.FormatByNameRules
+                    TransformTypeName.AcronymMapping,
+                    TransformTypeName.FormatByNameRules
                 };
                 if (usages.Count == 0 && !ignoreNoUsage.Contains(t.TransformType))
                     AutoRestLogger.Warning($"No usage transform detected: {t}").Wait();

@@ -172,7 +172,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                 {
                     if (!loggedForDefaultName)
                     {
-                        MgmtReport.Instance.TransformSection.AddTransformLog(new TransformItem(MgmtConfiguration.ConfigName.NoResourceSuffix, ResourceName), ResourceName, $"NoResourceSuffix for {ResourceName}");
+                        MgmtReport.Instance.TransformSection.AddTransformLog(new TransformItem(TransformTypeName.NoResourceSuffix, ResourceName), ResourceName, $"NoResourceSuffix for {ResourceName}");
                         loggedForDefaultName = true;
                     }
                     return ResourceName;

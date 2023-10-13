@@ -63,7 +63,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             }
             else
             {
-                MgmtReport.Instance.TransformSection.AddTransformLog(new TransformItem(MgmtConfiguration.ConfigName.NoPropertyTypeReplacement, typeToReplace.Type.Name), typeToReplace.Type.Name, "NoReplaceForType:" + typeToReplace.Type.Name);
+                MgmtReport.Instance.TransformSection.AddTransformLog(new TransformItem(TransformTypeName.NoPropertyTypeReplacement, typeToReplace.Type.Name), typeToReplace.Type.Name, "NoReplaceForType:" + typeToReplace.Type.Name);
             }
             _valueCache.TryAdd(typeToReplace.ObjectSchema, null);
             return null;
