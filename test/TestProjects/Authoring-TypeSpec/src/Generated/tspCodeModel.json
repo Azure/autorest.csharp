@@ -1276,7 +1276,7 @@
       {
        "$id": "164",
        "StatusCodes": [
-        200
+        201
        ],
        "BodyType": {
         "$ref": "14"
@@ -1301,7 +1301,7 @@
       {
        "$id": "167",
        "StatusCodes": [
-        201
+        200
        ],
        "BodyType": {
         "$ref": "14"
@@ -2153,7 +2153,7 @@
       {
        "$id": "246",
        "StatusCodes": [
-        200
+        201
        ],
        "BodyType": {
         "$ref": "46"
@@ -2178,7 +2178,7 @@
       {
        "$id": "249",
        "StatusCodes": [
-        201
+        200
        ],
        "BodyType": {
         "$ref": "46"
