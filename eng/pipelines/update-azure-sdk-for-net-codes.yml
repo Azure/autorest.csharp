@@ -64,7 +64,7 @@ jobs:
     workingDirectory: $(Build.SourcesDirectory)/azure-sdk-for-net
   - template: /eng/common/pipelines/templates/steps/git-push-changes.yml@azure-sdk-tools
     parameters:
-      BaseRepoBranch: ${{ parameters.BranchName }}}
+      BaseRepoBranch: ${{ parameters.BranchName }}
       BaseRepoOwner: azure-sdk
       CommitMsg: Update SDK codes $(JobKey)
       TargetRepoOwner: Azure
