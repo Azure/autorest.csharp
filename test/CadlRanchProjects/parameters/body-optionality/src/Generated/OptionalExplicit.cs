@@ -52,8 +52,8 @@ namespace Parameters.BodyOptionality
         /// <include file="Docs/OptionalExplicit.xml" path="doc/members/member[@name='SetAsync(BodyModel,CancellationToken)']/*" />
         public virtual async Task<Response> SetAsync(BodyModel body = null, CancellationToken cancellationToken = default)
         {
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body?.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await SetAsync(content, context).ConfigureAwait(false);
             return response;
         }
@@ -63,8 +63,8 @@ namespace Parameters.BodyOptionality
         /// <include file="Docs/OptionalExplicit.xml" path="doc/members/member[@name='Set(BodyModel,CancellationToken)']/*" />
         public virtual Response Set(BodyModel body = null, CancellationToken cancellationToken = default)
         {
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body?.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = Set(content, context);
             return response;
         }
@@ -146,8 +146,8 @@ namespace Parameters.BodyOptionality
         /// <include file="Docs/OptionalExplicit.xml" path="doc/members/member[@name='OmitAsync(BodyModel,CancellationToken)']/*" />
         public virtual async Task<Response> OmitAsync(BodyModel body = null, CancellationToken cancellationToken = default)
         {
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body?.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await OmitAsync(content, context).ConfigureAwait(false);
             return response;
         }
@@ -157,8 +157,8 @@ namespace Parameters.BodyOptionality
         /// <include file="Docs/OptionalExplicit.xml" path="doc/members/member[@name='Omit(BodyModel,CancellationToken)']/*" />
         public virtual Response Omit(BodyModel body = null, CancellationToken cancellationToken = default)
         {
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body?.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = Omit(content, context);
             return response;
         }

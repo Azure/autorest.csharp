@@ -656,7 +656,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             conversions = null;
             if (value.Type.Equals(typeof(BinaryData)))
             {
-                content = new BinaryDataExpression(value);
+                content = RequestContentExpression.Create(value);
                 return;
             }
 

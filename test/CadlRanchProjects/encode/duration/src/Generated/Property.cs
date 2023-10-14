@@ -55,8 +55,8 @@ namespace Encode.Duration
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await DefaultAsync(content, context).ConfigureAwait(false);
             return Response.FromValue(DefaultDurationProperty.FromResponse(response), response);
         }
@@ -69,8 +69,8 @@ namespace Encode.Duration
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = Default(content, context);
             return Response.FromValue(DefaultDurationProperty.FromResponse(response), response);
         }
@@ -161,8 +161,8 @@ namespace Encode.Duration
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await Iso8601Async(content, context).ConfigureAwait(false);
             return Response.FromValue(ISO8601DurationProperty.FromResponse(response), response);
         }
@@ -175,8 +175,8 @@ namespace Encode.Duration
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = Iso8601(content, context);
             return Response.FromValue(ISO8601DurationProperty.FromResponse(response), response);
         }
@@ -267,8 +267,8 @@ namespace Encode.Duration
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await Int32SecondsAsync(content, context).ConfigureAwait(false);
             return Response.FromValue(Int32SecondsDurationProperty.FromResponse(response), response);
         }
@@ -281,8 +281,8 @@ namespace Encode.Duration
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = Int32Seconds(content, context);
             return Response.FromValue(Int32SecondsDurationProperty.FromResponse(response), response);
         }
@@ -373,8 +373,8 @@ namespace Encode.Duration
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await FloatSecondsAsync(content, context).ConfigureAwait(false);
             return Response.FromValue(FloatSecondsDurationProperty.FromResponse(response), response);
         }
@@ -387,8 +387,8 @@ namespace Encode.Duration
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = FloatSeconds(content, context);
             return Response.FromValue(FloatSecondsDurationProperty.FromResponse(response), response);
         }
@@ -479,8 +479,8 @@ namespace Encode.Duration
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await FloatSecondsArrayAsync(content, context).ConfigureAwait(false);
             return Response.FromValue(FloatSecondsDurationArrayProperty.FromResponse(response), response);
         }
@@ -493,8 +493,8 @@ namespace Encode.Duration
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Response response = FloatSecondsArray(content, context);
             return Response.FromValue(FloatSecondsDurationArrayProperty.FromResponse(response), response);
         }
