@@ -41,7 +41,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
         {
             var protocolMethodArguments = new List<ValueExpression>();
 
-            yield return AddProtocolMethodArguments(parameters, protocolMethodArguments).Reverse().ToArray();
+            yield return AddProtocolMethodArguments(parameters, protocolMethodArguments).ToArray();
             yield return Declare(ProtocolMethodReturnType, "response", InvokeProtocolMethod(null, protocolMethodArguments, async), out var response);
 
             if (ResponseType is null)

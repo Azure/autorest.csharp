@@ -654,19 +654,16 @@ namespace AutoRest.CSharp.Common.Output.Builders
         private void CreateConversionToRequestContent(InputParameter inputParameter, TypedValueExpression value, IReadOnlyDictionary<InputParameter, Parameter> parameters, out RequestContentExpression content, out MethodBodyStatement? conversions)
         {
             conversions = null;
-            if (!value.Type.IsFrameworkType)
+            if (value.Type.Equals(typeof(BinaryData)))
             {
-                if (value.Type is { Implementation: ModelTypeProvider { HasToRequestContentMethod: true } model })
-                {
-                    content = new SerializableObjectTypeExpression(model, value).ToRequestContent();
-                    return;
-                }
+                content = new BinaryDataExpression(value);
+                return;
+            }
 
-                if (value.Type is { Implementation: EnumType enumType })
-                {
-                    content = BinaryDataExpression.FromObjectAsJson(new EnumExpression(enumType, value).ToSerial());
-                    return;
-                }
+            if (value.Type is { IsFrameworkType: false, Implementation: ModelTypeProvider { HasToRequestContentMethod: true } model })
+            {
+                content = new SerializableObjectTypeExpression(model, value).ToRequestContent();
+                return;
             }
 
             switch (_operation.RequestBodyMediaType)
@@ -683,7 +680,8 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     GetConversionsForFlattenedParameter(parameters, out content, out conversions);
                     break;
 
-                case var _ when value.Type is { IsFrameworkType: true }:
+                // [TODO] This case is added to minimize amount of changes
+                case var _ when value.Type is { IsFrameworkType: true } && !Configuration.Generation1ConvenienceClient && !Configuration.AzureArm:
                     content = CreateRequestContentFromFrameworkType(value);
                     break;
 
@@ -693,6 +691,14 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
                 case BodyMediaType.Xml:
                     CreateConversionToXmlWriterRequestContent(inputParameter, value, out content, out conversions);
+                    break;
+
+                case var _ when value.Type is { IsFrameworkType: true }:
+                    content = CreateRequestContentFromFrameworkType(value);
+                    break;
+
+                case var _ when value.Type is { Implementation: EnumType enumType }:
+                    content = BinaryDataExpression.FromObjectAsJson(new EnumExpression(enumType, value).ToSerial());
                     break;
 
                 default:
