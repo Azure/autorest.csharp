@@ -62,7 +62,9 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             _deprecated = inputModel.Deprecated;
             _derivedTypes = inputModel.DerivedModels;
-            _defaultDerivedType = defaultDerivedType ?? (inputModel.IsUnknownDiscriminatorModel ? this : null);
+            _defaultDerivedType = inputModel.DerivedModels.Any() && inputModel.BaseModel is not null
+                ? this //if I have children and parents then I am my own defaultDerivedType
+                : defaultDerivedType ?? (inputModel.IsUnknownDiscriminatorModel ? this : null);
 
             DefaultName = GetValidIdentifier(inputModel.Name); // TODO -- this is only a workaround only to solve the anonymous model names, in other cases, the name is unchanged.
             DefaultAccessibility = inputModel.Accessibility ?? "public";
