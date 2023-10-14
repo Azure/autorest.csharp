@@ -66,8 +66,11 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 if (usages.Count == 0 && !ignoreNoUsage.Contains(t.TransformType))
                     AutoRestLogger.Warning($"No usage transform detected: {t}").Wait();
             });
-            string report = MgmtReport.Instance.GenerateReport();
-            project.AddPlainFiles("_mgmt-codegen-report.log", report);
+            if (Configuration.MgmtConfiguration.MgmtDebug.GenerateReport)
+            {
+                string report = MgmtReport.Instance.GenerateReport(Configuration.MgmtConfiguration.MgmtDebug.ReportFormat);
+                project.AddPlainFiles("_mgmt-codegen-report.log", report);
+            }
         }
 
         public async Task<GeneratedCodeWorkspace> ExecuteAsync(InputNamespace rootNamespace)

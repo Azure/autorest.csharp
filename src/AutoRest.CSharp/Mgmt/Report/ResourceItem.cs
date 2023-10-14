@@ -3,6 +3,7 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json.Serialization;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Output;
 using YamlDotNet.Serialization;
@@ -33,13 +34,16 @@ namespace AutoRest.CSharp.Mgmt.Report
         }
 
         [YamlIgnore]
+        [JsonIgnore]
         public string Name { get; set; }
         public List<string> ContextPaths { get; set; } = new List<string>();
         public string RequestPath { get; set; } = string.Empty;
         public string ResourceType { get; set; } = "";
         [YamlMember(DefaultValuesHandling = DefaultValuesHandling.OmitDefaults)]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool IsSingleton { get; set; } = false;
         [YamlMember(DefaultValuesHandling = DefaultValuesHandling.OmitNull)]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? SingletonSuffix { get; set; }
         public Dictionary<string, List<OperationItem>> Operations { get; set; } = new Dictionary<string, List<OperationItem>>();
         public List<string> ChildResources { get; set; } = new List<string>();

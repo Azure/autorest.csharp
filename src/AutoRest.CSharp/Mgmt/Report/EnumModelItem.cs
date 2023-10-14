@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 using YamlDotNet.Serialization;
 
 namespace AutoRest.CSharp.Mgmt.Report
@@ -15,6 +16,7 @@ namespace AutoRest.CSharp.Mgmt.Report
         }
 
         [YamlIgnore]
+        [JsonIgnore]
         public string FullName { get; set; }
 
         public Dictionary<string, EnumValueItem> Values { get; set; } = new Dictionary<string, EnumValueItem>();

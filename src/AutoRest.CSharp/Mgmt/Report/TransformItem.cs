@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 using YamlDotNet.Serialization;
 
 namespace AutoRest.CSharp.Mgmt.Report
@@ -28,6 +29,7 @@ namespace AutoRest.CSharp.Mgmt.Report
         public string Key { get; set; }
         public string[] Arguments { get; set; }
         [YamlIgnore]
+        [JsonIgnore]
         public string ArgumentsAsString
         {
             get { return string.Join(SEP, this.Arguments); }
