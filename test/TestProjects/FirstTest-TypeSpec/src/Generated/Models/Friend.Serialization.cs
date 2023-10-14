@@ -5,15 +5,17 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace FirstTestTypeSpec.Models
 {
-    public partial class Friend : IUtf8JsonSerializable
+    public partial class Friend : IUtf8JsonSerializable, IModelJsonSerializable<Friend>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IModelJsonSerializable<Friend>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("name"u8);
@@ -21,7 +23,31 @@ namespace FirstTestTypeSpec.Models
             writer.WriteEndObject();
         }
 
-        internal static Friend DeserializeFriend(JsonElement element)
+        Friend IModelJsonSerializable<Friend>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeFriend(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<Friend>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        Friend IModelSerializable<Friend>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.Parse(data);
+            return DeserializeFriend(doc.RootElement, options);
+        }
+
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<Friend>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        internal static Friend DeserializeFriend(JsonElement element, ModelSerializerOptions options)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -44,7 +70,7 @@ namespace FirstTestTypeSpec.Models
         internal static Friend FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeFriend(document.RootElement);
+            return DeserializeFriend(document.RootElement, ModelSerializerOptions.DefaultWireOptions);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

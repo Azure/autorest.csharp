@@ -10,12 +10,13 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace FirstTestTypeSpec.Models
 {
-    internal partial class RoundTripModel : IUtf8JsonSerializable
+    internal partial class RoundTripModel : IUtf8JsonSerializable, IModelJsonSerializable<RoundTripModel>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IModelJsonSerializable<RoundTripModel>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("requiredString"u8);
@@ -178,7 +179,31 @@ namespace FirstTestTypeSpec.Models
             writer.WriteEndObject();
         }
 
-        internal static RoundTripModel DeserializeRoundTripModel(JsonElement element)
+        RoundTripModel IModelJsonSerializable<RoundTripModel>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeRoundTripModel(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<RoundTripModel>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        RoundTripModel IModelSerializable<RoundTripModel>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.Parse(data);
+            return DeserializeRoundTripModel(doc.RootElement, options);
+        }
+
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<RoundTripModel>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        internal static RoundTripModel DeserializeRoundTripModel(JsonElement element, ModelSerializerOptions options)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -253,7 +278,7 @@ namespace FirstTestTypeSpec.Models
                 }
                 if (property.NameEquals("requiredModel"u8))
                 {
-                    requiredModel = Thing.DeserializeThing(property.Value);
+                    requiredModel = Thing.DeserializeThing(property.Value, default);
                     continue;
                 }
                 if (property.NameEquals("intExtensibleEnum"u8))
@@ -450,7 +475,7 @@ namespace FirstTestTypeSpec.Models
                 }
                 if (property.NameEquals("modelWithRequiredNullable"u8))
                 {
-                    modelWithRequiredNullable = ModelWithRequiredNullableProperties.DeserializeModelWithRequiredNullableProperties(property.Value);
+                    modelWithRequiredNullable = ModelWithRequiredNullableProperties.DeserializeModelWithRequiredNullableProperties(property.Value, default);
                     continue;
                 }
             }
@@ -462,7 +487,7 @@ namespace FirstTestTypeSpec.Models
         internal static RoundTripModel FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeRoundTripModel(document.RootElement);
+            return DeserializeRoundTripModel(document.RootElement, ModelSerializerOptions.DefaultWireOptions);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

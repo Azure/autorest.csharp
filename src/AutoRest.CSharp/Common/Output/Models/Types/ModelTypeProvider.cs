@@ -45,8 +45,6 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public override ObjectTypeProperty? AdditionalPropertiesProperty => throw new NotImplementedException();
 
-        public bool IsPropertyBag => _inputModel.IsPropertyBag;
-
         public ModelTypeProvider(InputModelType inputModel, string defaultNamespace, SourceInputModel? sourceInputModel, TypeFactory? typeFactory = null, InputModelType[]? derivedTypes = null, ObjectType? defaultDerivedType = null)
             : base(defaultNamespace, sourceInputModel)
         {
@@ -59,6 +57,8 @@ namespace AutoRest.CSharp.Output.Models.Types
             _deprecated = inputModel.Deprecated;
             _derivedTypes = derivedTypes;
             _defaultDerivedType = defaultDerivedType ?? (inputModel.IsUnknownDiscriminatorModel ? this : null);
+
+            IsPropertyBag = inputModel.IsPropertyBag;
         }
 
         // TODO -- this is only a workaround. We introduce this method only to solve the issue on model names when the model is anonymous where we take the id of the model as its name, and it is digits.
@@ -160,7 +160,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             {
                 foreach (var property in objType.Properties)
                 {
-                    if (property.InputModelProperty is not {} inputModelProperty)
+                    if (property.InputModelProperty is not { } inputModelProperty)
                         continue;
 
                     var declaredName = property.Declaration.Name;
@@ -177,7 +177,8 @@ namespace AutoRest.CSharp.Output.Models.Types
                         ShouldSkipSerialization(property, inputModelProperty),
                         false,
                         customSerializationMethodName: property.SerializationMapping?.SerializationValueHook,
-                        customDeserializationMethodName: property.SerializationMapping?.DeserializationValueHook);;
+                        customDeserializationMethodName: property.SerializationMapping?.DeserializationValueHook);
+                    ;
                 }
             }
         }
@@ -340,16 +341,6 @@ namespace AutoRest.CSharp.Output.Models.Types
             return false;
         }
 
-        protected override bool EnsureIncludeSerializer()
-        {
-            return _inputModel.Usage.HasFlag(InputModelTypeUsage.Input);
-        }
-
-        protected override bool EnsureIncludeDeserializer()
-        {
-            return _inputModel.Usage.HasFlag(InputModelTypeUsage.Output);
-        }
-
         protected override JsonObjectSerialization EnsureJsonSerialization()
         {
             // Serialization uses field and property names that first need to verified for uniqueness
@@ -364,10 +355,9 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         protected override IEnumerable<Method> BuildMethods()
         {
-            if (EnsureIncludeDeserializer())
-                yield return JsonSerializationMethodsBuilder.BuildFromResponse(this, GetFromResponseModifiers());
-            if (EnsureIncludeSerializer())
-                yield return JsonSerializationMethodsBuilder.BuildToRequestContent(GetToRequestContentModifiers());
+            yield return JsonSerializationMethodsBuilder.BuildFromResponse(this, GetFromResponseModifiers());
+
+            yield return JsonSerializationMethodsBuilder.BuildToRequestContent(GetToRequestContentModifiers());
         }
 
         public ObjectTypeProperty GetPropertyBySerializedName(string serializedName, bool includeParents = false)

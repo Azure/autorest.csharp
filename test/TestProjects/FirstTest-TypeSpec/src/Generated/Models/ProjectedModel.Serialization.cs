@@ -5,15 +5,17 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace FirstTestTypeSpec.Models
 {
-    public partial class ProjectedModel : IUtf8JsonSerializable
+    public partial class ProjectedModel : IUtf8JsonSerializable, IModelJsonSerializable<ProjectedModel>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IModelJsonSerializable<ProjectedModel>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("name"u8);
@@ -21,7 +23,31 @@ namespace FirstTestTypeSpec.Models
             writer.WriteEndObject();
         }
 
-        internal static ProjectedModel DeserializeProjectedModel(JsonElement element)
+        ProjectedModel IModelJsonSerializable<ProjectedModel>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeProjectedModel(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<ProjectedModel>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        ProjectedModel IModelSerializable<ProjectedModel>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.Parse(data);
+            return DeserializeProjectedModel(doc.RootElement, options);
+        }
+
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<ProjectedModel>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        internal static ProjectedModel DeserializeProjectedModel(JsonElement element, ModelSerializerOptions options)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -44,7 +70,7 @@ namespace FirstTestTypeSpec.Models
         internal static ProjectedModel FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeProjectedModel(document.RootElement);
+            return DeserializeProjectedModel(document.RootElement, ModelSerializerOptions.DefaultWireOptions);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

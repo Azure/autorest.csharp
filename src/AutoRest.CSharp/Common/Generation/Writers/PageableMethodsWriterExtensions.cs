@@ -244,7 +244,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 return $"e => {BinaryDataType}.{nameof(BinaryData.FromString)}(e.{nameof(JsonElement.GetRawText)}())";
             }
 
-            if (!pageItemType.IsFrameworkType && pageItemType.Implementation is SerializableObjectType { JsonSerialization: { }, IncludeDeserializer: true } type)
+            if (!pageItemType.IsFrameworkType && pageItemType.Implementation is SerializableObjectType { JsonSerialization: { } } type)
             {
                 return $"{type.Type}.Deserialize{type.Declaration.Name}";
             }

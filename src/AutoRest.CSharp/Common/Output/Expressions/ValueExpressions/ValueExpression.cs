@@ -51,6 +51,10 @@ namespace AutoRest.CSharp.Common.Output.Expressions.ValueExpressions
         public ValueExpression Invoke(string methodName, IReadOnlyList<ValueExpression> arguments, bool async)
             => new InvokeInstanceMethodExpression(this, methodName, arguments, null, async);
 
+        public CastExpression Cast(CSharpType to) => new CastExpression(this, to);
+
+        public ParenthesizedExpression Wrap() => new ParenthesizedExpression(this);
+
         private string GetDebuggerDisplay()
         {
             using var writer = new DebuggerCodeWriter();

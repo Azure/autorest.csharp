@@ -165,13 +165,13 @@ namespace AutoRest.CSharp.Generation.Writers
                     var optionalSerializeOptions = options == JsonSerializationOptions.UseManagedServiceIdentityV3 ? ", serializeOptions" : string.Empty;
                     return $"{typeof(JsonSerializer)}.{nameof(JsonSerializer.Deserialize)}<{implementation.Type}>({element}.GetRawText(){optionalSerializeOptions})";
 
-                case Resource { ResourceData: SerializableObjectType { JsonSerialization: { }, IncludeDeserializer: true } resourceDataType } resource:
+                case Resource { ResourceData: SerializableObjectType { JsonSerialization: { } } resourceDataType } resource:
                     return $"new {resource.Type}(Client, {resourceDataType.Type}.Deserialize{resourceDataType.Declaration.Name}({element}))";
 
                 case MgmtObjectType mgmtObjectType when TypeReferenceTypeChooser.HasMatch(mgmtObjectType.ObjectSchema):
                     return $"{typeof(JsonSerializer)}.{nameof(JsonSerializer.Deserialize)}<{implementation.Type}>({element}.GetRawText())";
 
-                case SerializableObjectType { JsonSerialization: { }, IncludeDeserializer: true } type:
+                case SerializableObjectType { JsonSerialization: { } } type:
                     return $"{type.Type}.Deserialize{type.Declaration.Name}({element})";
 
                 case EnumType clientEnum:

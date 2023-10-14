@@ -5,16 +5,18 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace FirstTestTypeSpec.Models
 {
-    internal partial class Thing : IUtf8JsonSerializable
+    internal partial class Thing : IUtf8JsonSerializable, IModelJsonSerializable<Thing>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IModelJsonSerializable<Thing>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("name"u8);
@@ -85,7 +87,31 @@ namespace FirstTestTypeSpec.Models
             writer.WriteEndObject();
         }
 
-        internal static Thing DeserializeThing(JsonElement element)
+        Thing IModelJsonSerializable<Thing>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeThing(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<Thing>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        Thing IModelSerializable<Thing>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.Parse(data);
+            return DeserializeThing(doc.RootElement, options);
+        }
+
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<Thing>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        internal static Thing DeserializeThing(JsonElement element, ModelSerializerOptions options)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -216,7 +242,7 @@ namespace FirstTestTypeSpec.Models
         internal static Thing FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeThing(document.RootElement);
+            return DeserializeThing(document.RootElement, ModelSerializerOptions.DefaultWireOptions);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

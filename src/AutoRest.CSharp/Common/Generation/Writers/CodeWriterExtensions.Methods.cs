@@ -543,12 +543,18 @@ namespace AutoRest.CSharp.Generation.Writers
                     writer.AppendRaw(" : ");
                     writer.WriteValueExpression(ternary.Alternative);
                     break;
+                case ParenthesizedExpression(var inner):
+                    writer.AppendRaw("(");
+                    writer.WriteValueExpression(inner);
+                    writer.AppendRaw(")");
+                    break;
                 case PositionalParameterReference(var parameterName, var value):
                     writer.Append($"{parameterName}: ");
                     writer.WriteValueExpression(value);
                     break;
-                case ParameterReference parameterReference:
-                    writer.Append($"{parameterReference.Parameter.Name:I}");
+                case ParameterReference(var parameter):
+                    writer.AppendRawIf("ref ", parameter.IsRef);
+                    writer.Append($"{parameter.Name:I}");
                     break;
                 case FormattableStringToExpression formattableString:
                     writer.Append(formattableString.Value);

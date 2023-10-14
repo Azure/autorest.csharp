@@ -4,7 +4,6 @@
 using System.Text.Json;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
-using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
 
 namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions
@@ -12,6 +11,8 @@ namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions
     internal sealed record JsonDocumentExpression(ValueExpression Untyped) : TypedValueExpression<JsonDocument>(Untyped)
     {
         public JsonElementExpression RootElement => new(Property(nameof(JsonDocument.RootElement)));
+
+        public static JsonDocumentExpression ParseValue(ValueExpression reader) => new(InvokeStatic(nameof(JsonDocument.ParseValue), reader));
 
         public static JsonDocumentExpression Parse(ValueExpression json) => new(InvokeStatic(nameof(JsonDocument.Parse), json));
 

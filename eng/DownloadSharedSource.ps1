@@ -19,8 +19,8 @@ Write-Host "git sparse-checkout init"
 git sparse-checkout init
 Write-Host "git sparse-checkout set --no-cone $azCoreSharedPath $armCoreSharedPath"
 git sparse-checkout set --no-cone $azCoreSharedPath $armCoreSharedPath
-Write-Host "git checkout"
-git checkout
+Write-Host "git checkout feature/modelSerializer"
+git checkout feature/modelSerializer
 Pop-Location
 
 function CopyAll([string[]]$files, [string]$source, [string]$destination)
@@ -36,7 +36,8 @@ $files = @('AsyncLockWithValue.cs', 'ClientDiagnostics.cs', 'DiagnosticScope.cs'
     'OperationInternalBase.cs', 'OperationInternal.cs', 'OperationInternalOfT.cs', 'TaskExtensions.cs', 'Argument.cs', 'Multipart/MultipartFormDataContent.cs',
     'Multipart/MultipartContent.cs', 'AzureKeyCredentialPolicy.cs', 'AppContextSwitchHelper.cs',
     'OperationPoller.cs', 'FixedDelayWithNoJitterStrategy.cs', 'SequentialDelayStrategy.cs',
-    'ForwardsClientCallsAttribute.cs', 'AsyncLockWithValue.cs', 'VoidValue.cs', 'AzureResourceProviderNamespaceAttribute.cs',
+    'ForwardsClientCallsAttribute.cs', 'VoidValue.cs', 'AzureResourceProviderNamespaceAttribute.cs',
+    'ModelSerializerHelper.cs',
     'ChangeTrackingDictionary.cs',
     'ChangeTrackingList.cs',
     'FormUrlEncodedContent.cs',

@@ -5,15 +5,17 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace FirstTestTypeSpec.Models
 {
-    internal partial class ModelWithRequiredNullableProperties : IUtf8JsonSerializable
+    internal partial class ModelWithRequiredNullableProperties : IUtf8JsonSerializable, IModelJsonSerializable<ModelWithRequiredNullableProperties>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IModelJsonSerializable<ModelWithRequiredNullableProperties>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (RequiredNullablePrimitive != null)
@@ -46,7 +48,31 @@ namespace FirstTestTypeSpec.Models
             writer.WriteEndObject();
         }
 
-        internal static ModelWithRequiredNullableProperties DeserializeModelWithRequiredNullableProperties(JsonElement element)
+        ModelWithRequiredNullableProperties IModelJsonSerializable<ModelWithRequiredNullableProperties>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeModelWithRequiredNullableProperties(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<ModelWithRequiredNullableProperties>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        ModelWithRequiredNullableProperties IModelSerializable<ModelWithRequiredNullableProperties>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.Parse(data);
+            return DeserializeModelWithRequiredNullableProperties(doc.RootElement, options);
+        }
+
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<ModelWithRequiredNullableProperties>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        internal static ModelWithRequiredNullableProperties DeserializeModelWithRequiredNullableProperties(JsonElement element, ModelSerializerOptions options)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -96,7 +122,7 @@ namespace FirstTestTypeSpec.Models
         internal static ModelWithRequiredNullableProperties FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeModelWithRequiredNullableProperties(document.RootElement);
+            return DeserializeModelWithRequiredNullableProperties(document.RootElement, ModelSerializerOptions.DefaultWireOptions);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

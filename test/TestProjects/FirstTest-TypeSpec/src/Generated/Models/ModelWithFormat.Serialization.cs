@@ -5,14 +5,17 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
+using Azure;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace FirstTestTypeSpec.Models
 {
-    public partial class ModelWithFormat : IUtf8JsonSerializable
+    public partial class ModelWithFormat : IUtf8JsonSerializable, IModelJsonSerializable<ModelWithFormat>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IModelJsonSerializable<ModelWithFormat>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("sourceUrl"u8);
@@ -20,6 +23,62 @@ namespace FirstTestTypeSpec.Models
             writer.WritePropertyName("guid"u8);
             writer.WriteStringValue(Guid);
             writer.WriteEndObject();
+        }
+
+        ModelWithFormat IModelJsonSerializable<ModelWithFormat>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeModelWithFormat(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<ModelWithFormat>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        ModelWithFormat IModelSerializable<ModelWithFormat>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.Parse(data);
+            return DeserializeModelWithFormat(doc.RootElement, options);
+        }
+
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<ModelWithFormat>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        internal static ModelWithFormat DeserializeModelWithFormat(JsonElement element, ModelSerializerOptions options)
+        {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
+            Uri sourceUrl = default;
+            Guid guid = default;
+            foreach (var property in element.EnumerateObject())
+            {
+                if (property.NameEquals("sourceUrl"u8))
+                {
+                    sourceUrl = new Uri(property.Value.GetString());
+                    continue;
+                }
+                if (property.NameEquals("guid"u8))
+                {
+                    guid = property.Value.GetGuid();
+                    continue;
+                }
+            }
+            return new ModelWithFormat(sourceUrl, guid);
+        }
+
+        /// <summary> Deserializes the model from a raw response. </summary>
+        /// <param name="response"> The response to deserialize the model from. </param>
+        internal static ModelWithFormat FromResponse(Response response)
+        {
+            using var document = JsonDocument.Parse(response.Content);
+            return DeserializeModelWithFormat(document.RootElement, ModelSerializerOptions.DefaultWireOptions);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

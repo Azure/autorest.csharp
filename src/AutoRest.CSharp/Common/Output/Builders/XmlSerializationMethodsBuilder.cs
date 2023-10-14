@@ -376,7 +376,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             switch (type.Implementation)
             {
                 case SerializableObjectType serializableObjectType:
-                    return SerializableObjectTypeExpression.Deserialize(serializableObjectType, value);
+                    return SerializableObjectTypeExpression.Deserialize(serializableObjectType, value, Default); // TODO -- verify
 
                 case EnumType clientEnum when value is XElementExpression xe:
                     return EnumExpression.ToEnum(clientEnum, xe.Value);

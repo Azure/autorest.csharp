@@ -2,22 +2,18 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using System.Xml;
 using System.Xml.Linq;
 using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Serialization.Json;
 using AutoRest.CSharp.Output.Models.Serialization.Xml;
 using AutoRest.CSharp.Output.Models.Types;
-using AutoRest.CSharp.Utilities;
-using Azure;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace AutoRest.CSharp.Generation.Writers
 {
@@ -28,10 +24,7 @@ namespace AutoRest.CSharp.Generation.Writers
             switch (schema)
             {
                 case SerializableObjectType objectSchema:
-                    if (objectSchema.IncludeSerializer || objectSchema.IncludeDeserializer)
-                    {
-                        WriteObjectSerialization(writer, objectSchema);
-                    }
+                    WriteObjectSerialization(writer, objectSchema);
                     break;
                 case EnumType { IsExtensible: false } sealedChoiceSchema:
                     WriteEnumSerialization(writer, sealedChoiceSchema);
@@ -40,10 +33,11 @@ namespace AutoRest.CSharp.Generation.Writers
         }
 
         private void WriteObjectSerialization(CodeWriter writer, SerializableObjectType model)
-            => WriteObjectSerialization(writer, model, model.Declaration, model.JsonSerialization, model.XmlSerialization, model.IsStruct, model.IncludeSerializer, model.IncludeDeserializer);
-
-        private void WriteObjectSerialization(CodeWriter writer, SerializableObjectType model, TypeDeclarationOptions declaration, JsonObjectSerialization? jsonSerialization, XmlObjectSerialization? xmlSerialization, bool isStruct, bool includeSerializer, bool includeDeserializer)
         {
+            var declaration = model.Declaration;
+            var jsonSerialization = model.JsonSerialization;
+            var xmlSerialization = model.XmlSerialization;
+            var isStruct = model.IsStruct;
             var hasJson = jsonSerialization != null;
             var hasXml = xmlSerialization != null;
 
@@ -58,45 +52,27 @@ namespace AutoRest.CSharp.Generation.Writers
                 {
                     writer.Append($"[{typeof(JsonConverter)}(typeof({declaration.Name}Converter))]");
                 }
+                // TODO -- write the serialization proxy attribute here
 
                 writer.Append($"{declaration.Accessibility} partial {(isStruct ? "struct" : "class")} {declaration.Name}");
 
-                if (includeSerializer)
-                {
-                    writer
-                        .AppendIf($": ", hasJson || hasXml)
-                        .AppendIf($"{typeof(IUtf8JsonSerializable)}, ", hasJson)
-                        .AppendIf($"{typeof(IXmlSerializable)}, ", hasXml)
-                        .RemoveTrailingComma();
-                }
+                writer
+                    .AppendIf($": ", hasJson || hasXml)
+                    .AppendIf($"{typeof(IUtf8JsonSerializable)}, {new CSharpType(typeof(IModelJsonSerializable<>), model.Type)}", hasJson)
+                    .AppendIf($"{typeof(IXmlSerializable)}, ", hasXml)
+                    .RemoveTrailingComma();
 
                 writer.Line();
                 using (writer.Scope())
                 {
                     if (xmlSerialization != null)
                     {
-                        if (includeSerializer)
-                        {
-                            WriteXmlSerialize(writer, xmlSerialization);
-                        }
-
-                        if (includeDeserializer)
-                        {
-                            WriteXmlDeserialize(writer, declaration, xmlSerialization);
-                        }
+                        WriteXmlSerialize(writer, declaration, xmlSerialization);
                     }
 
                     if (jsonSerialization != null)
                     {
-                        if (includeSerializer)
-                        {
-                            WriteJsonSerialize(writer, jsonSerialization);
-                        }
-
-                        if (includeDeserializer)
-                        {
-                            WriteJsonDeserialize(writer, declaration, jsonSerialization, model);
-                        }
+                        WriteJsonSerialize(writer, model, jsonSerialization);
                     }
 
                     foreach (var method in model.Methods)
@@ -108,66 +84,62 @@ namespace AutoRest.CSharp.Generation.Writers
 
                     if (jsonSerialization is { IncludeConverter: true })
                     {
-                        WriteCustomJsonConverter(writer, declaration, jsonSerialization.Type, includeSerializer, includeDeserializer);
+                        WriteCustomJsonConverter(writer, declaration, jsonSerialization.Type);
                     }
                 }
             }
         }
 
-        private static void WriteCustomJsonConverter(CodeWriter writer, TypeDeclarationOptions declaration, CSharpType type, bool includeSerializer, bool includeDeserializer)
+        private static void WriteCustomJsonConverter(CodeWriter writer, TypeDeclarationOptions declaration, CSharpType type)
         {
             writer.Append($"internal partial class {declaration.Name}Converter : {typeof(JsonConverter)}<{type}>");
             using (writer.Scope())
             {
                 using (writer.Scope($"public override void  Write({typeof(Utf8JsonWriter)} writer, {type} model, {typeof(JsonSerializerOptions)} options)"))
                 {
-                    if (includeSerializer)
-                    {
-                        writer.Append($"writer.{nameof(Utf8JsonWriterExtensions.WriteObjectValue)}(model);");
-                    }
-                    else
-                    {
-                        writer.Append($"throw new {typeof(NotImplementedException)}();");
-                    }
+                    writer.Append($"writer.{nameof(Utf8JsonWriterExtensions.WriteObjectValue)}(model);");
                 }
 
                 using (writer.Scope($"public override {type} Read(ref {typeof(Utf8JsonReader)} reader, {typeof(Type)} typeToConvert, {typeof(JsonSerializerOptions)} options)"))
                 {
-                    if (includeDeserializer)
-                    {
-                        var document = new CodeWriterDeclaration("document");
-                        writer.Line($"using var {document:D} = {typeof(JsonDocument)}.ParseValue(ref reader);");
-                        writer.Line($"return Deserialize{declaration.Name}({document}.RootElement);");
-                    }
-                    else
-                    {
-                        writer.Append($"throw new {typeof(NotImplementedException)}();");
-                    }
+                    var document = new CodeWriterDeclaration("document");
+                    writer.Line($"using var {document:D} = {typeof(JsonDocument)}.ParseValue(ref reader);");
+                    writer.Line($"return Deserialize{declaration.Name}({document}.RootElement);");
                 }
             }
         }
 
-        private static void WriteXmlSerialize(CodeWriter writer, XmlObjectSerialization serialization)
+        private static void WriteXmlSerialize(CodeWriter writer, TypeDeclarationOptions declaration, XmlObjectSerialization serialization)
         {
             writer.WriteMethod(XmlSerializationMethodsBuilder.BuildXmlSerializableWrite(serialization));
-        }
-
-        private static void WriteXmlDeserialize(CodeWriter writer, TypeDeclarationOptions declaration, XmlObjectSerialization serialization)
-        {
             writer.WriteMethod(XmlSerializationMethodsBuilder.BuildDeserialize(declaration, serialization));
         }
 
-        private static void WriteJsonDeserialize(CodeWriter writer, TypeDeclarationOptions declaration, JsonObjectSerialization serialization, SerializableObjectType model)
+        private static void WriteJsonSerialize(CodeWriter writer, SerializableObjectType model, JsonObjectSerialization jsonSerialization)
         {
-            if (JsonSerializationMethodsBuilder.BuildDeserialize(declaration, serialization, model.GetExistingType()) is {} deserialize)
+            var modelSerializableType = new CSharpType(typeof(IModelSerializable<>), model.Type);
+            var modelJsonSerializableType = new CSharpType(typeof(IModelJsonSerializable<>), model.Type);
+
+            // the methods that implement the interface IModelJsonSerializable<T> (do not include inherited methods)
+            foreach (var method in JsonSerializationMethodsBuilder.BuildModelJsonSerializableMethods(model, jsonSerialization, modelJsonSerializableType))
+            {
+                writer.WriteMethod(method);
+            }
+
+            // the methods that implement the interface IModelSerializable<T>
+            foreach (var method in JsonSerializationMethodsBuilder.BuildModelSerializableMethods(jsonSerialization, modelSerializableType))
+            {
+                writer.WriteMethod(method);
+            }
+
+            // the method that implements IUtf8JsonSerializable
+            writer.WriteMethod(JsonSerializationMethodsBuilder.BuildUtf8JsonSerializableWrite(jsonSerialization, modelJsonSerializableType));
+
+            // the deserialize static method
+            if (JsonSerializationMethodsBuilder.BuildDeserialize(model.Declaration, jsonSerialization, model.GetExistingType()) is { } deserialize)
             {
                 writer.WriteMethod(deserialize);
             }
-        }
-
-        private static void WriteJsonSerialize(CodeWriter writer, JsonObjectSerialization jsonSerialization)
-        {
-            writer.WriteMethod(JsonSerializationMethodsBuilder.BuildUtf8JsonSerializableWrite(jsonSerialization));
         }
 
         public static void WriteEnumSerialization(CodeWriter writer, EnumType enumType)

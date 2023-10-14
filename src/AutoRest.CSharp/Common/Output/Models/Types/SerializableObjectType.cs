@@ -25,12 +25,6 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
 
         public INamedTypeSymbol? GetExistingType() => ExistingType;
 
-        private bool? _includeSerializer;
-        public bool IncludeSerializer => _includeSerializer ??= EnsureIncludeSerializer();
-
-        private bool? _includeDeserializer;
-        public bool IncludeDeserializer => _includeDeserializer ??= EnsureIncludeDeserializer();
-
         private JsonObjectSerialization? _jsonSerialization;
         public JsonObjectSerialization? JsonSerialization => HasJsonSerialization ? _jsonSerialization ??= EnsureJsonSerialization() : null;
 
@@ -45,8 +39,6 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
 
         protected abstract bool EnsureHasJsonSerialization();
         protected abstract bool EnsureHasXmlSerialization();
-        protected abstract bool EnsureIncludeSerializer();
-        protected abstract bool EnsureIncludeDeserializer();
         protected abstract JsonObjectSerialization? EnsureJsonSerialization();
         protected abstract XmlObjectSerialization? EnsureXmlSerialization();
     }
