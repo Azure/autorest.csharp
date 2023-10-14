@@ -208,7 +208,7 @@ namespace AutoRest.CSharp.Generation.Types
             if (IsReadOnlyDictionary(type) || IsReadWriteDictionary(type))
             {
                 keyType = type.Arguments[0];
-                valueType = type.Arguments[0];
+                valueType = type.Arguments[1];
                 return true;
             }
 
