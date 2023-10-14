@@ -10,10 +10,8 @@ using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
-using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
-using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Serialization;
 using AutoRest.CSharp.Output.Models.Shared;
@@ -656,10 +654,19 @@ namespace AutoRest.CSharp.Common.Output.Builders
         private void CreateConversionToRequestContent(InputParameter inputParameter, TypedValueExpression value, IReadOnlyDictionary<InputParameter, Parameter> parameters, out RequestContentExpression content, out MethodBodyStatement? conversions)
         {
             conversions = null;
-            if (value.Type is { IsFrameworkType: false, Implementation: ModelTypeProvider { HasToRequestContentMethod: true } model })
+            if (!value.Type.IsFrameworkType)
             {
-                content = new SerializableObjectTypeExpression(model, value).ToRequestContent();
-                return;
+                if (value.Type is { Implementation: ModelTypeProvider { HasToRequestContentMethod: true } model })
+                {
+                    content = new SerializableObjectTypeExpression(model, value).ToRequestContent();
+                    return;
+                }
+
+                if (value.Type is { Implementation: EnumType enumType })
+                {
+                    content = BinaryDataExpression.FromObjectAsJson(new EnumExpression(enumType, value).ToSerial());
+                    return;
+                }
             }
 
             switch (_operation.RequestBodyMediaType)
@@ -676,6 +683,10 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     GetConversionsForFlattenedParameter(parameters, out content, out conversions);
                     break;
 
+                case var _ when value.Type is { IsFrameworkType: true }:
+                    content = CreateRequestContentFromFrameworkType(value);
+                    break;
+
                 case BodyMediaType.Json:
                     CreateConversionToUtf8JsonRequestContent(inputParameter, value, out content, out conversions);
                     break;
@@ -684,13 +695,29 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     CreateConversionToXmlWriterRequestContent(inputParameter, value, out content, out conversions);
                     break;
 
-                case var _ when value.Type is { IsFrameworkType: true }:
-                    content = RequestContentExpression.CreateFromFrameworkType(value);
-                    break;
-
                 default:
                     throw new InvalidOperationException($"Unexpected body media type: {_operation.RequestBodyMediaType}");
             }
+        }
+
+        private static RequestContentExpression CreateRequestContentFromFrameworkType(TypedValueExpression value)
+        {
+            if (value.Type.FrameworkType == typeof(BinaryData))
+            {
+                return new RequestContentExpression(value);
+            }
+
+            if (TypeFactory.IsList(value.Type))
+            {
+                return RequestContentExpression.FromEnumerable(value);
+            }
+
+            if (TypeFactory.IsDictionary(value.Type))
+            {
+                return RequestContentExpression.FromDictionary(value);
+            }
+
+            return RequestContentExpression.FromObject(value);
         }
 
         private static void CreateConversionToUtf8JsonRequestContent(InputParameter inputParameter, TypedValueExpression value, out RequestContentExpression content, out MethodBodyStatement conversions)
