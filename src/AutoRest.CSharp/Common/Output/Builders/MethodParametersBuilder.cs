@@ -409,7 +409,9 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 }
                 else
                 {
-                    _conversions[protocolMethodParameter] = UsingDeclare("content", argument, out var content);
+                    RequestContentExpression content;
+                    // Don't dispose content for pageables
+                    _conversions[protocolMethodParameter] = _operation.Paging is not null ? Declare("content", argument, out content) : UsingDeclare("content", argument, out content);
                     _arguments[protocolMethodParameter] = content;
                 }
 
@@ -654,12 +656,6 @@ namespace AutoRest.CSharp.Common.Output.Builders
         private void CreateConversionToRequestContent(InputParameter inputParameter, TypedValueExpression value, IReadOnlyDictionary<InputParameter, Parameter> parameters, out RequestContentExpression content, out MethodBodyStatement? conversions)
         {
             conversions = null;
-            if (value.Type.Equals(typeof(BinaryData)))
-            {
-                content = RequestContentExpression.Create(value);
-                return;
-            }
-
             if (value.Type is { IsFrameworkType: false, Implementation: ModelTypeProvider { HasToRequestContentMethod: true } model })
             {
                 content = new SerializableObjectTypeExpression(model, value).ToRequestContent();
