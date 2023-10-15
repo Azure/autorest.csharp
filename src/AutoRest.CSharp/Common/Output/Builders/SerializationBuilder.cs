@@ -418,7 +418,10 @@ namespace AutoRest.CSharp.Common.Output.Builders
             {
                 foreach (var objectTypeProperty in objectTypeLevel.Properties)
                 {
-                    propertyBag.Properties.Add(objectTypeProperty);
+                    if (objectTypeProperty != objectTypeLevel.AdditionalPropertiesProperty)
+                    {
+                        propertyBag.Properties.Add(objectTypeProperty);
+                    }
                 }
             }
 
