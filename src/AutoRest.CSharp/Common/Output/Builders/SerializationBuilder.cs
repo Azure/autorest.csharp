@@ -164,6 +164,21 @@ namespace AutoRest.CSharp.Common.Output.Builders
             };
         }
 
+        private static JsonSerialization BuildJsonSerializationFromValue(CSharpType valueType, bool isCollectionElement)
+        {
+            if (TypeFactory.IsList(valueType, out var elementType))
+            {
+                return new JsonArraySerialization(valueType, BuildJsonSerializationFromValue(elementType, true), valueType.IsNullable || (isCollectionElement && !valueType.IsValueType));
+            }
+
+            if (TypeFactory.IsDictionary(valueType, out _, out var dictionaryValueType))
+            {
+                return new  JsonDictionarySerialization(valueType, BuildJsonSerializationFromValue(dictionaryValueType, true), valueType.IsNullable || (isCollectionElement && !valueType.IsValueType));
+            }
+
+            return new JsonValueSerialization(valueType, GetDefaultSerializationFormat(valueType), valueType.IsNullable || (isCollectionElement && !valueType.IsValueType));
+        }
+
         public static JsonSerialization BuildSerialization(Schema schema, CSharpType type, bool isCollectionElement)
         {
             if (type.IsFrameworkType && type.FrameworkType == typeof(JsonElement))
@@ -338,19 +353,33 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
         private static JsonPropertySerialization? CreateJsonPropertySerializationFromInputModelProperty(ObjectTypeProperty property, TypeFactory typeFactory)
         {
+            var declaredName = property.Declaration.Name;
+            var propertyType = property.Declaration.Type;
+            var name = declaredName.ToVariableName();
+
             if (property.InputModelProperty is not {} inputModelProperty)
             {
-                return null;
+                // Property is not part of specification,
+                return new JsonPropertySerialization(
+                    name,
+                    new TypedMemberExpression(null, declaredName, propertyType),
+                    property.SerializationMapping?.SerializationPath?.Last() ?? name,
+                    propertyType,
+                    BuildJsonSerializationFromValue(propertyType, false),
+                    property.IsRequired,
+                    property.IsReadOnly,
+                    false,
+                    customSerializationMethodName: property.SerializationMapping?.SerializationValueHook,
+                    customDeserializationMethodName: property.SerializationMapping?.DeserializationValueHook);
             }
 
-            var declaredName = property.Declaration.Name;
+            var valueSerialization = BuildJsonSerialization(inputModelProperty.Type, propertyType, false);
             var serializedName = inputModelProperty.SerializedName;
-            var valueSerialization = BuildJsonSerialization(inputModelProperty.Type, property.Declaration.Type, false);
             var serializedType = typeFactory.CreateType(inputModelProperty.Type);
 
             return new JsonPropertySerialization(
-                declaredName.ToVariableName(),
-                new TypedMemberExpression(null, declaredName, property.Declaration.Type),
+                name,
+                new TypedMemberExpression(null, declaredName, propertyType),
                 serializedName,
                 serializedType,
                 valueSerialization,
@@ -389,10 +418,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             {
                 foreach (var objectTypeProperty in objectTypeLevel.Properties)
                 {
-                    if (objectTypeProperty.SchemaProperty is not null || objectTypeProperty.InputModelProperty is not null)
-                    {
-                        propertyBag.Properties.Add(objectTypeProperty);
-                    }
+                    propertyBag.Properties.Add(objectTypeProperty);
                 }
             }
 

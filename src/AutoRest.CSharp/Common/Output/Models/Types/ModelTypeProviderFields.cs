@@ -56,8 +56,13 @@ namespace AutoRest.CSharp.Output.Models.Types
                                              !TypeFactory.IsCollectionType(propertyType);
 
                 var serialization = sourceTypeMapping?.GetForMemberSerialization(existingMember);
+                if (optionalViaNullability)
+                {
+                    propertyType = propertyType.WithNullable(true);
+                }
+
                 var field = existingMember is not null
-                    ? CreateFieldFromExisting(existingMember, serialization, propertyType, inputModelProperty, typeFactory, optionalViaNullability)
+                    ? CreateFieldFromExisting(existingMember, serialization, propertyType, GetPropertyDefaultValue(propertyType, inputModelProperty), typeFactory, inputModelProperty.IsRequired, optionalViaNullability)
                     : CreateField(originalFieldName, propertyType, inputModelUsage, inputModelProperty, isStruct, isPropertyBag, optionalViaNullability);
 
                 fields.Add(field);
@@ -138,19 +143,15 @@ namespace AutoRest.CSharp.Output.Models.Types
                     {
                         continue;
                     }
-                    var isReadOnly = IsReadOnly(serializationMapping.ExistingMember);
-                    var name = serializationMapping.ExistingMember.Name;
-                    var inputModelProperty = new InputModelProperty(name, serializationMapping.SerializationPath?.Last() ?? name, "to be removed by post process", InputPrimitiveType.Object, null, false, isReadOnly, false);
-                    // we put the original type typeof(object) here as fallback. We do not really care about what type we get here, just to ensure there is a type generated
-                    // therefore the top type here is reasonable
+
+                    // since the property doesn't exist in the input type, we use type of existing member both as original and field type
                     // the serialization will be generated for this type and it might has issues if the type is not recognized properly.
                     // but customer could always use the `CodeGenMemberSerializationHooks` attribute to override those incorrect serialization/deserialization code.
-                    var field = CreateFieldFromExisting(serializationMapping.ExistingMember, serializationMapping, typeof(object), inputModelProperty, typeFactory, false);
-                    var parameter = new Parameter(field.Name.FirstCharToLowerCase(), BuilderHelpers.EscapeXmlDocDescription(inputModelProperty.Description), field.Type, null, Validation.None, null);
+                    var originalType = BuilderHelpers.GetTypeFromExisting(serializationMapping.ExistingMember, typeof(object), typeFactory);
+                    var field = CreateFieldFromExisting(serializationMapping.ExistingMember, serializationMapping, originalType, null, typeFactory, false, false);
+                    var parameter = new Parameter(field.Name.FirstCharToLowerCase(), "to be removed by post process", field.Type, null, Validation.None, null);
 
                     fields.Add(field);
-                    fieldsToInputs[field] = inputModelProperty;
-
                     serializationParameters.Add(parameter);
                 }
             }
@@ -172,11 +173,6 @@ namespace AutoRest.CSharp.Output.Models.Types
         private static FieldDeclaration CreateField(string fieldName, CSharpType originalType, InputModelTypeUsage usage, InputModelProperty inputModelProperty, bool isStruct, bool isPropertyBag, bool optionalViaNullability)
         {
             var propertyIsDiscriminator = inputModelProperty.IsDiscriminator;
-            if (optionalViaNullability)
-            {
-                originalType = originalType.WithNullable(true);
-            }
-
             FieldModifiers fieldModifiers;
             FieldModifiers? setterModifiers = null;
             if (propertyIsDiscriminator)
@@ -251,16 +247,11 @@ namespace AutoRest.CSharp.Output.Models.Types
         }
 
 
-        private static FieldDeclaration CreateFieldFromExisting(ISymbol existingMember, SourcePropertySerializationMapping? serialization, CSharpType originalType, InputModelProperty inputModelProperty, TypeFactory typeFactory, bool optionalViaNullability)
+        private static FieldDeclaration CreateFieldFromExisting(ISymbol existingMember, SourcePropertySerializationMapping? serialization, CSharpType originalType, FormattableString? defaultValue, TypeFactory typeFactory, bool isRequired, bool optionalViaNullability)
         {
-            if (optionalViaNullability)
-            {
-                originalType = originalType.WithNullable(true);
-            }
-
             var fieldType = BuilderHelpers.GetTypeFromExisting(existingMember, originalType, typeFactory);
             var fieldModifiers = GetAccessModifiers(existingMember);
-            if (existingMember is IFieldSymbol { IsReadOnly: true } or IPropertySymbol { IsReadOnly: true })
+            if (IsReadOnly(existingMember))
             {
                 fieldModifiers |= ReadOnly;
             }
@@ -274,8 +265,8 @@ namespace AutoRest.CSharp.Output.Models.Types
                 Modifiers: fieldModifiers,
                 Type: fieldType,
                 Declaration: declaration,
-                DefaultValue: GetPropertyDefaultValue(originalType, inputModelProperty),
-                IsRequired: inputModelProperty.IsRequired,
+                DefaultValue: defaultValue,
+                IsRequired: isRequired,
                 WriteAsProperty: writeAsProperty,
                 OptionalViaNullability: optionalViaNullability,
                 SerializationMapping: serialization);
