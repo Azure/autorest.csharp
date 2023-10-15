@@ -281,12 +281,26 @@
       "application/merge-patch+json"
      ],
      "BufferResponse": true,
+     "LongRunning": {
+      "$id": "33",
+      "FinalStateVia": 3,
+      "FinalResponse": {
+       "$id": "34",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "2"
+       },
+       "BodyMediaType": "Json"
+      }
+     },
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": false
     }
    ],
    "Protocol": {
-    "$id": "33"
+    "$id": "35"
    },
    "Creatable": true
   }

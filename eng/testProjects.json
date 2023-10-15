@@ -18,6 +18,8 @@
         "authentication/oauth2",
         "authentication/union",
         "azure/core/basic",
+        "azure/core/lro/rpc-legacy",
+        "azure/core/lro/standard",
         "azure/core/traits",
         "azure/client-generator-core/access",
         "azure/client-generator-core/usage",
