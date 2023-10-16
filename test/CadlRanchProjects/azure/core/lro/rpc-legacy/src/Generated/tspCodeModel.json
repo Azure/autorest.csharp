@@ -469,40 +469,6 @@
       {
        "$id": "58",
        "StatusCodes": [
-        202
-       ],
-       "BodyMediaType": "Json",
-       "Headers": [
-        {
-         "$id": "59",
-         "Name": "Operation-Location",
-         "NameInResponse": "operationLocation",
-         "Description": "The location for monitoring the operation state.",
-         "Type": {
-          "$id": "60",
-          "Name": "ResourceLocation",
-          "Kind": "Uri",
-          "IsNullable": false
-         }
-        },
-        {
-         "$id": "61",
-         "Name": "Retry-After",
-         "NameInResponse": "retryAfter",
-         "Description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
-         "Type": {
-          "$id": "62",
-          "Name": "int32",
-          "Kind": "Int32",
-          "IsNullable": false
-         }
-        }
-       ],
-       "IsErrorResponse": false
-      },
-      {
-       "$id": "63",
-       "StatusCodes": [
         200
        ],
        "BodyType": {
@@ -510,6 +476,40 @@
        },
        "BodyMediaType": "Json",
        "Headers": [],
+       "IsErrorResponse": false
+      },
+      {
+       "$id": "59",
+       "StatusCodes": [
+        202
+       ],
+       "BodyMediaType": "Json",
+       "Headers": [
+        {
+         "$id": "60",
+         "Name": "Operation-Location",
+         "NameInResponse": "operationLocation",
+         "Description": "The location for monitoring the operation state.",
+         "Type": {
+          "$id": "61",
+          "Name": "ResourceLocation",
+          "Kind": "Uri",
+          "IsNullable": false
+         }
+        },
+        {
+         "$id": "62",
+         "Name": "Retry-After",
+         "NameInResponse": "retryAfter",
+         "Description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+         "Type": {
+          "$id": "63",
+          "Name": "int32",
+          "Kind": "Int32",
+          "IsNullable": false
+         }
+        }
+       ],
        "IsErrorResponse": false
       }
      ],

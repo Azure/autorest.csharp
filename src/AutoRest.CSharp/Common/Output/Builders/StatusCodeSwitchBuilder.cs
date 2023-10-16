@@ -43,10 +43,80 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
         public static StatusCodeSwitchBuilder CreateSwitch(InputOperation operation, OutputLibrary? library, TypeFactory typeFactory)
         {
-            var headerModelType = (library as DataPlaneOutputLibrary)?.FindHeaderModel(operation)?.Type;
-            var isLro = operation.LongRunning is not null;
-            var successStatusCodes = new List<int>();
+            var successInputResponses = GetNonLroSuccessInputResponses(operation, library, typeFactory);
+            var commonResponseInputType = successInputResponses.Count(r => r.Type is not null) switch
+            {
+                0 => null,
+                1 => successInputResponses.First(r => r.Type is not null).Type,
+                _ => InputPrimitiveType.Object
+            };
 
+            var pageItemInputType = GetPageItemType(commonResponseInputType, operation);
+            if (operation.LongRunning is { } lro)
+            {
+                var response = GetLroSuccessInputResponse(operation, lro);
+                successInputResponses = new[] { response };
+                commonResponseInputType = response.Type;
+            }
+
+            var commonResponseType = commonResponseInputType is null
+                ? null
+                : TypeFactory.GetOutputType(typeFactory.CreateType(commonResponseInputType));
+            var pageItemType = pageItemInputType is null
+                ? null
+                : TypeFactory.GetOutputType(typeFactory.CreateType(pageItemInputType));
+
+            var successResponses = new List<(CSharpType? Type, ObjectSerialization? Serialization, IReadOnlyList<int> StatusCodes)>();
+            foreach (var (inputType, bodyMediaType, statusCodes) in successInputResponses)
+            {
+                if (inputType is null)
+                {
+                    successResponses.Add((null, null, statusCodes.ToList()));
+                }
+                else
+                {
+                    var type = TypeFactory.GetOutputType(typeFactory.CreateType(inputType));
+                    var serialization = bodyMediaType.HasValue ? SerializationBuilder.Build(bodyMediaType.Value, inputType, type) : null;
+                    successResponses.Add((type, serialization, statusCodes.ToList()));
+                }
+            }
+
+            var headerModelType = (library as DataPlaneOutputLibrary)?.FindHeaderModel(operation)?.Type;
+
+            return new StatusCodeSwitchBuilder
+            (
+                successResponses,
+                headerModelType,
+                commonResponseType,
+                GetProtocolReturnType(commonResponseType is not null, operation.LongRunning is not null, operation.Paging is not null),
+                GetRestClientConvenienceReturnType(commonResponseType, headerModelType),
+                pageItemType,
+                GetClientConvenienceReturnType(commonResponseType, pageItemType, operation.LongRunning is not null),
+                new ResponseClassifierType(successInputResponses.SelectMany(s => s.StatusCodes).Distinct().Select(c => new StatusCodes(c, null)).OrderBy(c => c.Code))
+            );
+        }
+
+        private static (InputType? Type, BodyMediaType? BodyMediaType, IEnumerable<int> StatusCodes) GetLroSuccessInputResponse(InputOperation operation, OperationLongRunning lro)
+        {
+            var successStatusCodes = operation.Responses
+                .Where(r => !r.IsErrorResponse)
+                .SelectMany(r => r.StatusCodes);
+
+            if (Configuration.AzureArm || Configuration.Generation1ConvenienceClient)
+            {
+                return (null, BodyMediaType.None, successStatusCodes.Distinct().ToList());
+            }
+
+            //[TODO]: Should we include status codes from FinalResponse?
+            //if (!lro.FinalResponse.IsErrorResponse)
+            //{
+            //    successStatusCodes = successStatusCodes.Concat(lro.FinalResponse.StatusCodes);
+            //}
+            return (lro.FinalResponse.BodyType, lro.FinalResponse.BodyMediaType, successStatusCodes.Distinct().ToList());
+        }
+
+        private static IReadOnlyList<(InputType? Type, BodyMediaType? BodyMediaType, IEnumerable<int> StatusCodes)> GetNonLroSuccessInputResponses(InputOperation operation, OutputLibrary? library, TypeFactory typeFactory)
+        {
             var successInputResponses = new List<(InputType? Type, BodyMediaType? BodyMediaType, IEnumerable<int> StatusCodes)>();
             foreach (var (statusCodes, bodyType, bodyMediaType, _, isErrorResponse) in operation.Responses)
             {
@@ -55,7 +125,6 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     continue;
                 }
 
-                successStatusCodes.AddRange(statusCodes);
                 if (bodyType == null)
                 {
                     successInputResponses.Add((null, null, statusCodes));
@@ -87,59 +156,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 .Select(g => (g.Key, g.First().BodyMediaType, g.SelectMany(r => r.StatusCodes).Distinct()))
                 .ToList();
 
-            var commonResponseInputType = successInputResponses.Count(r => r.Type is not null) switch
-            {
-                0 => null,
-                1 => successInputResponses.First(r => r.Type is not null).Type,
-                _ => InputPrimitiveType.Object
-            };
-
-            var pageItemInputType = GetPageItemType(commonResponseInputType, operation);
-
-            if (isLro && (Configuration.AzureArm || Configuration.Generation1ConvenienceClient))
-            {
-                successStatusCodes = operation.Responses
-                    .Where(r => !r.IsErrorResponse)
-                    .SelectMany(r => r.StatusCodes)
-                    .ToList();
-
-                successInputResponses = new(){ (null, BodyMediaType.None, successStatusCodes.Distinct().ToList()) };
-                commonResponseInputType = null;
-            }
-
-            var commonResponseType = commonResponseInputType is null
-                ? null
-                : TypeFactory.GetOutputType(typeFactory.CreateType(commonResponseInputType));
-            var pageItemType = pageItemInputType is null
-                ? null
-                : TypeFactory.GetOutputType(typeFactory.CreateType(pageItemInputType));
-
-            var successResponses = new List<(CSharpType? Type, ObjectSerialization? Serialization, IReadOnlyList<int> StatusCodes)>();
-            foreach (var (inputType, bodyMediaType, statusCodes) in successInputResponses)
-            {
-                if (inputType is null)
-                {
-                    successResponses.Add((null, null, statusCodes.ToList()));
-                }
-                else
-                {
-                    var type = TypeFactory.GetOutputType(typeFactory.CreateType(inputType));
-                    var serialization = bodyMediaType.HasValue ? SerializationBuilder.Build(bodyMediaType.Value, inputType, type) : null;
-                    successResponses.Add((type, serialization, statusCodes.ToList()));
-                }
-            }
-
-            return new StatusCodeSwitchBuilder
-            (
-                successResponses,
-                headerModelType,
-                commonResponseType,
-                GetProtocolReturnType(commonResponseType is not null, isLro, operation.Paging is not null),
-                GetRestClientConvenienceReturnType(commonResponseType, headerModelType),
-                pageItemType,
-                GetClientConvenienceReturnType(commonResponseType, pageItemType, isLro),
-                new ResponseClassifierType(successStatusCodes.Distinct().Select(c => new StatusCodes(c, null)).OrderBy(c => c.Code))
-            );
+            return successInputResponses;
         }
 
         public static StatusCodeSwitchBuilder CreateHeadAsBooleanOperationSwitch() => new(null, null, typeof(bool), typeof(Response<bool>), typeof(Response<bool>), null, typeof(Response<bool>), new ResponseClassifierType(new[]{ new StatusCodes(null, 2), new StatusCodes(null, 4) }.OrderBy(c => c.Code)));

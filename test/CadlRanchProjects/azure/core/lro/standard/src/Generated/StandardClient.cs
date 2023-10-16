@@ -63,8 +63,8 @@ namespace _Azure.Lro.Standard
             Argument.AssertNotNullOrEmpty(name, nameof(name));
             Argument.AssertNotNull(resource, nameof(resource));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = resource.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Operation<BinaryData> response = await CreateOrReplaceAsync(waitUntil, name, content, context).ConfigureAwait(false);
             return ProtocolOperationHelpers.Convert(response, User.FromResponse, ClientDiagnostics, "StandardClient.CreateOrReplace");
         }
@@ -83,8 +83,8 @@ namespace _Azure.Lro.Standard
             Argument.AssertNotNullOrEmpty(name, nameof(name));
             Argument.AssertNotNull(resource, nameof(resource));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = resource.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
             Operation<BinaryData> response = CreateOrReplace(waitUntil, name, content, context);
             return ProtocolOperationHelpers.Convert(response, User.FromResponse, ClientDiagnostics, "StandardClient.CreateOrReplace");
         }
@@ -415,8 +415,8 @@ namespace _Azure.Lro.Standard
             uri.AppendPath("/azure/core/lro/standard/users/", false);
             uri.AppendPath(name, true);
             uri.AppendPath(":export", false);
-            uri.AppendQuery("format", format, true);
             uri.AppendQuery("api-version", _apiVersion, true);
+            uri.AppendQuery("format", format, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
