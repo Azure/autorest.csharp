@@ -99,7 +99,7 @@ namespace _Azure.Lro.RpcLegacy.Samples
             Console.WriteLine(result.GetProperty("errors")[0].GetProperty("error").GetProperty("code").ToString());
             Console.WriteLine(result.GetProperty("errors")[0].GetProperty("error").GetProperty("message").ToString());
             Console.WriteLine(result.GetProperty("errors")[0].GetProperty("error").GetProperty("target").ToString());
-            Console.WriteLine(result.GetProperty("errors")[0].GetProperty("error").GetProperty("innererror").GetProperty("code").ToString());
+            Console.WriteLine(result.GetProperty("errors")[0].GetProperty("error").GetProperty("details")[0].ToString());
             Console.WriteLine(result.GetProperty("results")[0].ToString());
         }
 
@@ -123,7 +123,7 @@ namespace _Azure.Lro.RpcLegacy.Samples
             Console.WriteLine(result.GetProperty("errors")[0].GetProperty("error").GetProperty("code").ToString());
             Console.WriteLine(result.GetProperty("errors")[0].GetProperty("error").GetProperty("message").ToString());
             Console.WriteLine(result.GetProperty("errors")[0].GetProperty("error").GetProperty("target").ToString());
-            Console.WriteLine(result.GetProperty("errors")[0].GetProperty("error").GetProperty("innererror").GetProperty("code").ToString());
+            Console.WriteLine(result.GetProperty("errors")[0].GetProperty("error").GetProperty("details")[0].ToString());
             Console.WriteLine(result.GetProperty("results")[0].ToString());
         }
 

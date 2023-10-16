@@ -237,7 +237,7 @@ using RequestContent content = RequestContent.Create(new
             },
         }
     },
-    requiredModelRecord = new { },
+    requiredModelRecord = new{},
     requiredCollectionWithNullableFloatElement = new object[]
     {
         123.45F
@@ -319,7 +319,7 @@ using RequestContent content = RequestContent.Create(new
             },
         }
     },
-    requiredModelRecord = new { },
+    requiredModelRecord = new{},
     requiredCollectionWithNullableFloatElement = new object[]
     {
         123.45F
@@ -438,7 +438,7 @@ using RequestContent content = RequestContent.Create(new
             },
         }
     },
-    requiredModelRecord = new { },
+    requiredModelRecord = new{},
     requiredCollectionWithNullableFloatElement = new object[]
     {
         123.45F
@@ -520,7 +520,7 @@ using RequestContent content = RequestContent.Create(new
             },
         }
     },
-    requiredModelRecord = new { },
+    requiredModelRecord = new{},
     requiredCollectionWithNullableFloatElement = new object[]
     {
         123.45F
@@ -757,7 +757,7 @@ using RequestContent content = RequestContent.Create(new
             },
         }
     },
-    requiredModelRecord = new { },
+    requiredModelRecord = new{},
     requiredCollectionWithNullableFloatElement = new object[]
     {
         123.45F
@@ -831,7 +831,7 @@ using RequestContent content = RequestContent.Create(new
             },
         }
     },
-    requiredModelRecord = new { },
+    requiredModelRecord = new{},
     requiredCollectionWithNullableFloatElement = new object[]
     {
         123.45F
@@ -930,7 +930,7 @@ using RequestContent content = RequestContent.Create(new
             },
         }
     },
-    requiredModelRecord = new { },
+    requiredModelRecord = new{},
     requiredCollectionWithNullableFloatElement = new object[]
     {
         123.45F
@@ -1004,7 +1004,7 @@ using RequestContent content = RequestContent.Create(new
             },
         }
     },
-    requiredModelRecord = new { },
+    requiredModelRecord = new{},
     requiredCollectionWithNullableFloatElement = new object[]
     {
         123.45F
