@@ -29,14 +29,8 @@ namespace AutoRest.CSharp.Output.Models.Serialization
 
         public bool IsRequired { get; }
         public bool ShouldSkipSerialization { get; }
-        public bool ShouldSkipDeserialization { get; }
 
-        protected PropertySerialization(string parameterName, TypedValueExpression value, string serializedName, CSharpType? serializedType, bool isRequired, bool shouldSkipSerialization) :
-            this(parameterName, value, serializedName, serializedType, isRequired, shouldSkipSerialization, false)
-        {
-        }
-
-        protected PropertySerialization(string parameterName, TypedValueExpression value, string serializedName, CSharpType? serializedType, bool isRequired, bool shouldSkipSerialization, bool shouldSkipDeserialization)
+        protected PropertySerialization(string parameterName, TypedValueExpression value, string serializedName, CSharpType? serializedType, bool isRequired, bool shouldSkipSerialization)
         {
             SerializationConstructorParameterName = parameterName;
             Value = value;
@@ -44,7 +38,6 @@ namespace AutoRest.CSharp.Output.Models.Serialization
             SerializedType = serializedType;
             IsRequired = isRequired;
             ShouldSkipSerialization = shouldSkipSerialization;
-            ShouldSkipDeserialization = shouldSkipDeserialization;
         }
     }
 }

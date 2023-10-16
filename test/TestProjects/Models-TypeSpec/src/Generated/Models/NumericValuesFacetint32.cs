@@ -31,13 +31,11 @@ namespace ModelsTypeSpec.Models
 
         /// <summary> Initializes a new instance of NumericValuesFacetint32. </summary>
         /// <param name="field"> A field to facet by, where the field is attributed as 'facetable'. </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="values"> The facet ranges to produce. The values must be listed in ascending order to get the expected results. For example, values=10,20 produces three buckets: one for base rate 0 up to but not including 10, one for 10 up to but not including 20, and one for 20 and higher. </param>
         /// <param name="value"></param>
-        /// <exception cref="ArgumentNullException"> <paramref name="field"/> is null. </exception>
-        internal NumericValuesFacetint32(string field, IReadOnlyList<int> values, int value) : base(field)
+        internal NumericValuesFacetint32(string field, IDictionary<string, BinaryData> serializedAdditionalRawData, IReadOnlyList<int> values, int value) : base(field, serializedAdditionalRawData)
         {
-            Argument.AssertNotNull(field, nameof(field));
-
             Values = values;
             Value = value;
         }

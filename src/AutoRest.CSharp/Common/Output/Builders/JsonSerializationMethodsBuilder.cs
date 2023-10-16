@@ -559,7 +559,6 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
         private static MethodBodyStatement DeserializeIntoObjectProperties(IEnumerable<JsonPropertySerialization> propertySerializations, JsonPropertyExpression jsonProperty, IReadOnlyDictionary<JsonPropertySerialization, VariableReference> propertyVariables, bool shouldTreatEmptyStringAsNull)
             => propertySerializations
-                .Where(p => !p.ShouldSkipDeserialization)
                 .Select(p => new IfStatement(jsonProperty.NameEquals(p.SerializedName))
                 {
                     DeserializeIntoObjectProperty(p, jsonProperty, propertyVariables, shouldTreatEmptyStringAsNull)
@@ -693,7 +692,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
         /// Collects a list of properties being read from all level of object hierarchy
         private static void CollectPropertiesForDeserialization(IDictionary<JsonPropertySerialization, VariableReference> propertyVariables, IEnumerable<JsonPropertySerialization> jsonProperties)
         {
-            foreach (JsonPropertySerialization jsonProperty in jsonProperties.Where(p => !p.ShouldSkipDeserialization))
+            foreach (JsonPropertySerialization jsonProperty in jsonProperties)
             {
                 if (jsonProperty.SerializedType is { } type)
                 {

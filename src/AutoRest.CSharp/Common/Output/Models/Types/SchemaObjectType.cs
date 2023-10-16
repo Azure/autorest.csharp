@@ -409,10 +409,10 @@ namespace AutoRest.CSharp.Output.Models.Types
                 }
             }
 
-            //if (AdditionalPropertiesProperty is ObjectTypeProperty additionalPropertiesProperty)
-            //{
-            //    yield return additionalPropertiesProperty;
-            //}
+            if (AdditionalPropertiesProperty is ObjectTypeProperty additionalPropertiesProperty)
+            {
+                yield return additionalPropertiesProperty;
+            }
         }
 
         protected ObjectTypeProperty CreateProperty(Property property)

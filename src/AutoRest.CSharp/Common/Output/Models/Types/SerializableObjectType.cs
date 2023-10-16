@@ -1,6 +1,9 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using AutoRest.CSharp.Generation.Types;
+using System.Collections.Generic;
+using System;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Models.Serialization.Json;
 using AutoRest.CSharp.Output.Models.Serialization.Xml;
@@ -50,5 +53,9 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
 
             return true;
         }
+
+        protected readonly string _privateAdditionalPropertiesPropertyDescription = "Keeps track of any properties unknown to the library.";
+        protected readonly string _privateAdditionalPropertiesPropertyName = "_serializedAdditionalRawData";
+        protected readonly CSharpType _privateAdditionalPropertiesPropertyType = new CSharpType(typeof(IDictionary<,>), typeof(string), typeof(BinaryData));
     }
 }

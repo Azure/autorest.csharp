@@ -5,15 +5,19 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace ModelsTypeSpec.Models
 {
-    public partial class BaseModelWithDiscriminator : IUtf8JsonSerializable
+    public partial class BaseModelWithDiscriminator : IUtf8JsonSerializable, IModelJsonSerializable<BaseModelWithDiscriminator>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<BaseModelWithDiscriminator>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<BaseModelWithDiscriminator>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("discriminatorProperty"u8);
@@ -25,11 +29,44 @@ namespace ModelsTypeSpec.Models
             }
             writer.WritePropertyName("requiredPropertyOnBase"u8);
             writer.WriteNumberValue(RequiredPropertyOnBase);
+            foreach (var item in _serializedAdditionalRawData)
+            {
+                writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+#endif
+            }
             writer.WriteEndObject();
         }
 
-        internal static BaseModelWithDiscriminator DeserializeBaseModelWithDiscriminator(JsonElement element)
+        BaseModelWithDiscriminator IModelJsonSerializable<BaseModelWithDiscriminator>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeBaseModelWithDiscriminator(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<BaseModelWithDiscriminator>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        BaseModelWithDiscriminator IModelSerializable<BaseModelWithDiscriminator>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeBaseModelWithDiscriminator(document.RootElement, options);
+        }
+
+        internal static BaseModelWithDiscriminator DeserializeBaseModelWithDiscriminator(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -50,15 +87,13 @@ namespace ModelsTypeSpec.Models
         internal static BaseModelWithDiscriminator FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeBaseModelWithDiscriminator(document.RootElement);
+            return DeserializeBaseModelWithDiscriminator(document.RootElement, ModelSerializerOptions.DefaultWireOptions);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>
         internal virtual RequestContent ToRequestContent()
         {
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
-            return content;
+            return RequestContent.Create(this, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

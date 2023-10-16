@@ -7,13 +7,15 @@
 
 using System;
 using System.Collections.Generic;
+using Azure.Core;
 
 namespace FirstTestTypeSpec.Models
 {
     /// <summary> A model with a few required nullable properties. </summary>
     internal partial class ModelWithRequiredNullableProperties
     {
-        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
         /// <summary> Initializes a new instance of ModelWithRequiredNullableProperties. </summary>
         /// <param name="requiredNullablePrimitive"> required nullable primitive type. </param>
         /// <param name="requiredExtensibleEnum"> required nullable extensible enum type. </param>
@@ -23,6 +25,20 @@ namespace FirstTestTypeSpec.Models
             RequiredNullablePrimitive = requiredNullablePrimitive;
             RequiredExtensibleEnum = requiredExtensibleEnum;
             RequiredFixedEnum = requiredFixedEnum;
+            _serializedAdditionalRawData = new ChangeTrackingDictionary<string, BinaryData>();
+        }
+
+        /// <summary> Initializes a new instance of ModelWithRequiredNullableProperties. </summary>
+        /// <param name="requiredNullablePrimitive"> required nullable primitive type. </param>
+        /// <param name="requiredExtensibleEnum"> required nullable extensible enum type. </param>
+        /// <param name="requiredFixedEnum"> required nullable fixed enum type. </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ModelWithRequiredNullableProperties(int? requiredNullablePrimitive, StringExtensibleEnum? requiredExtensibleEnum, StringFixedEnum? requiredFixedEnum, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        {
+            RequiredNullablePrimitive = requiredNullablePrimitive;
+            RequiredExtensibleEnum = requiredExtensibleEnum;
+            RequiredFixedEnum = requiredFixedEnum;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> required nullable primitive type. </summary>

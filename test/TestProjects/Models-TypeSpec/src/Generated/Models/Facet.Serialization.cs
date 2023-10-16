@@ -14,20 +14,15 @@ using Azure.Core.Serialization;
 
 namespace ModelsTypeSpec.Models
 {
-    public partial class DerivedModel : IUtf8JsonSerializable, IModelJsonSerializable<DerivedModel>
+    public partial class Facet : IUtf8JsonSerializable, IModelJsonSerializable<Facet>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<DerivedModel>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<Facet>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
 
-        void IModelJsonSerializable<DerivedModel>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IModelJsonSerializable<Facet>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("requiredList"u8);
-            writer.WriteStartArray();
-            foreach (var item in RequiredList)
-            {
-                writer.WriteObjectValue(item);
-            }
-            writer.WriteEndArray();
+            writer.WritePropertyName("field"u8);
+            writer.WriteStringValue(Field);
             foreach (var item in _serializedAdditionalRawData)
             {
                 writer.WritePropertyName(item.Key);
@@ -40,29 +35,29 @@ namespace ModelsTypeSpec.Models
             writer.WriteEndObject();
         }
 
-        DerivedModel IModelJsonSerializable<DerivedModel>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        Facet IModelJsonSerializable<Facet>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
             using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeDerivedModel(doc.RootElement, options);
+            return DeserializeFacet(doc.RootElement, options);
         }
 
-        BinaryData IModelSerializable<DerivedModel>.Serialize(ModelSerializerOptions options)
+        BinaryData IModelSerializable<Facet>.Serialize(ModelSerializerOptions options)
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
             return ModelSerializer.SerializeCore(this, options);
         }
 
-        DerivedModel IModelSerializable<DerivedModel>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        Facet IModelSerializable<Facet>.Deserialize(BinaryData data, ModelSerializerOptions options)
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
             using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeDerivedModel(document.RootElement, options);
+            return DeserializeFacet(document.RootElement, options);
         }
 
-        internal static DerivedModel DeserializeDerivedModel(JsonElement element, ModelSerializerOptions options = null)
+        internal static Facet DeserializeFacet(JsonElement element, ModelSerializerOptions options = null)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
 
@@ -70,37 +65,32 @@ namespace ModelsTypeSpec.Models
             {
                 return null;
             }
-            IList<CollectionItem> requiredList = default;
+            string field = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("requiredList"u8))
+                if (property.NameEquals("field"u8))
                 {
-                    List<CollectionItem> array = new List<CollectionItem>();
-                    foreach (var item in property.Value.EnumerateArray())
-                    {
-                        array.Add(CollectionItem.DeserializeCollectionItem(item));
-                    }
-                    requiredList = array;
+                    field = property.Value.GetString();
                     continue;
                 }
                 additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new DerivedModel(serializedAdditionalRawData, requiredList);
+            return new Facet(field, serializedAdditionalRawData);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
-        internal static new DerivedModel FromResponse(Response response)
+        internal static Facet FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeDerivedModel(document.RootElement, ModelSerializerOptions.DefaultWireOptions);
+            return DeserializeFacet(document.RootElement, ModelSerializerOptions.DefaultWireOptions);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>
-        internal override RequestContent ToRequestContent()
+        internal virtual RequestContent ToRequestContent()
         {
             return RequestContent.Create(this, ModelSerializerOptions.DefaultWireOptions);
         }

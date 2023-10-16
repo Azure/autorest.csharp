@@ -14,7 +14,8 @@ namespace FirstTestTypeSpec.Models
     /// <summary> The ModelWithFormat. </summary>
     public partial class ModelWithFormat
     {
-        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
         /// <summary> Initializes a new instance of ModelWithFormat. </summary>
         /// <param name="sourceUrl"> url format. </param>
         /// <param name="guid"> uuid format. </param>
@@ -25,6 +26,18 @@ namespace FirstTestTypeSpec.Models
 
             SourceUrl = sourceUrl;
             Guid = guid;
+            _serializedAdditionalRawData = new ChangeTrackingDictionary<string, BinaryData>();
+        }
+
+        /// <summary> Initializes a new instance of ModelWithFormat. </summary>
+        /// <param name="sourceUrl"> url format. </param>
+        /// <param name="guid"> uuid format. </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ModelWithFormat(Uri sourceUrl, Guid guid, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        {
+            SourceUrl = sourceUrl;
+            Guid = guid;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> url format. </summary>

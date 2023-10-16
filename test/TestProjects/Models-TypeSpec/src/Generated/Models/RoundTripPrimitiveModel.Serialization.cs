@@ -10,12 +10,15 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace ModelsTypeSpec.Models
 {
-    public partial class RoundTripPrimitiveModel : IUtf8JsonSerializable
+    public partial class RoundTripPrimitiveModel : IUtf8JsonSerializable, IModelJsonSerializable<RoundTripPrimitiveModel>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<RoundTripPrimitiveModel>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<RoundTripPrimitiveModel>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("requiredString"u8);
@@ -48,11 +51,44 @@ namespace ModelsTypeSpec.Models
                 writer.WriteNumberValue(item.Value);
             }
             writer.WriteEndArray();
+            foreach (var item in _serializedAdditionalRawData)
+            {
+                writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+#endif
+            }
             writer.WriteEndObject();
         }
 
-        internal static RoundTripPrimitiveModel DeserializeRoundTripPrimitiveModel(JsonElement element)
+        RoundTripPrimitiveModel IModelJsonSerializable<RoundTripPrimitiveModel>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeRoundTripPrimitiveModel(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<RoundTripPrimitiveModel>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        RoundTripPrimitiveModel IModelSerializable<RoundTripPrimitiveModel>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeRoundTripPrimitiveModel(document.RootElement, options);
+        }
+
+        internal static RoundTripPrimitiveModel DeserializeRoundTripPrimitiveModel(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -67,6 +103,8 @@ namespace ModelsTypeSpec.Models
             DateTimeOffset requiredDateTimeOffset = default;
             TimeSpan requiredTimeSpan = default;
             IList<float?> requiredCollectionWithNullableFloatElement = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("requiredString"u8))
@@ -131,24 +169,24 @@ namespace ModelsTypeSpec.Models
                     requiredCollectionWithNullableFloatElement = array;
                     continue;
                 }
+                additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
             }
-            return new RoundTripPrimitiveModel(requiredString, requiredInt, requiredInt64, requiredSafeInt, requiredFloat, requiredDouble, requiredBoolean, requiredDateTimeOffset, requiredTimeSpan, requiredCollectionWithNullableFloatElement);
+            serializedAdditionalRawData = additionalPropertiesDictionary;
+            return new RoundTripPrimitiveModel(serializedAdditionalRawData, requiredString, requiredInt, requiredInt64, requiredSafeInt, requiredFloat, requiredDouble, requiredBoolean, requiredDateTimeOffset, requiredTimeSpan, requiredCollectionWithNullableFloatElement);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
-        internal static RoundTripPrimitiveModel FromResponse(Response response)
+        internal static new RoundTripPrimitiveModel FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeRoundTripPrimitiveModel(document.RootElement);
+            return DeserializeRoundTripPrimitiveModel(document.RootElement, ModelSerializerOptions.DefaultWireOptions);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>
         internal override RequestContent ToRequestContent()
         {
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
-            return content;
+            return RequestContent.Create(this, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

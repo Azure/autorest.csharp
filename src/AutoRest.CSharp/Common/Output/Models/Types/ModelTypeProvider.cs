@@ -58,20 +58,30 @@ namespace AutoRest.CSharp.Output.Models.Types
                 if (!ShouldHaveRawData)
                     return null;
 
+                // TODO -- when this model has derived types, the accessibility should change from private to `protected internal`
+                string accessibility = HasDerivedTypes() ? "protected internal" : "private";
+
                 _additionalPropertiesProperty = new ObjectTypeProperty(
                     BuilderHelpers.CreateMemberDeclaration(_privateAdditionalPropertiesPropertyName,
-                        _privateAdditionalPropertiesPropertyType, "private", null, _typeFactory),
-                    "Keeps track of any properties unknown to the library.",
+                        _privateAdditionalPropertiesPropertyType, accessibility, null, _typeFactory),
+                    _privateAdditionalPropertiesPropertyDescription,
                     true,
-                    null
-                    );
+                    null);
 
                 return _additionalPropertiesProperty;
             }
         }
 
-        private readonly string _privateAdditionalPropertiesPropertyName = "_serializedAdditionalRawData";
-        private readonly CSharpType _privateAdditionalPropertiesPropertyType = new CSharpType(typeof(Dictionary<,>), typeof(string), typeof(BinaryData));
+        private bool HasDerivedTypes()
+        {
+            if (_derivedTypes is not null && _derivedTypes.Any())
+                return true;
+
+            if (_inputModel.DiscriminatorPropertyName is not null)
+                return true;
+
+            return false;
+        }
 
         public ModelTypeProvider(InputModelType inputModel, string defaultNamespace, SourceInputModel? sourceInputModel, TypeFactory? typeFactory = null, InputModelType[]? derivedTypes = null, ObjectType? defaultDerivedType = null)
             : base(defaultNamespace, sourceInputModel)
@@ -168,8 +178,23 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private ConstructorSignature EnsureSerializationConstructorSignature()
         {
+            // if there is additional properties property, we need to append it to the parameter list
+            var parameters = Fields.SerializationParameters;
+            if (AdditionalPropertiesProperty != null)
+            {
+                var deserializationParameter = new Parameter(
+                    AdditionalPropertiesProperty.Declaration.Name.ToVariableName(),
+                    AdditionalPropertiesProperty.ParameterDescription,
+                    AdditionalPropertiesProperty.Declaration.Type,
+                    null,
+                    ValidationType.None,
+                    null
+                );
+                parameters = parameters.Append(deserializationParameter).ToList();
+            }
+
             //get base public ctor params
-            GetConstructorParameters(Fields.SerializationParameters, out var fullParameterList, out var parametersToPassToBase, false, CreateSerializationConstructorParameter);
+            GetConstructorParameters(parameters, out var fullParameterList, out var parametersToPassToBase, false, CreateSerializationConstructorParameter);
 
             FormattableString[] baseInitializers = GetInitializersFromParameters(parametersToPassToBase);
 
@@ -203,7 +228,6 @@ namespace AutoRest.CSharp.Output.Models.Types
                         valueSerialization,
                         property.IsRequired,
                         ShouldSkipSerialization(property, inputModelProperty),
-                        false,
                         customSerializationMethodName: property.SerializationMapping?.SerializationValueHook,
                         customDeserializationMethodName: property.SerializationMapping?.DeserializationValueHook);
                     ;
@@ -352,6 +376,9 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             foreach (var field in Fields)
                 yield return new ObjectTypeProperty(field, Fields.GetInputByField(field));
+
+            if (AdditionalPropertiesProperty is { } property)
+                yield return property;
         }
 
         protected override IEnumerable<ObjectTypeConstructor> BuildConstructors()

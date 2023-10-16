@@ -5,25 +5,35 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+using Azure.Core;
+
 namespace ModelsTypeSpec.Models
 {
     /// <summary> Single base model without any child model. </summary>
     public abstract partial class SingleBase
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        protected internal IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
         /// <summary> Initializes a new instance of SingleBase. </summary>
         /// <param name="size"></param>
         protected SingleBase(int size)
         {
             Size = size;
+            _serializedAdditionalRawData = new ChangeTrackingDictionary<string, BinaryData>();
         }
 
         /// <summary> Initializes a new instance of SingleBase. </summary>
         /// <param name="kind"> Discriminator. </param>
         /// <param name="size"></param>
-        internal SingleBase(string kind, int size)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal SingleBase(string kind, int size, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Kind = kind;
             Size = size;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Discriminator. </summary>

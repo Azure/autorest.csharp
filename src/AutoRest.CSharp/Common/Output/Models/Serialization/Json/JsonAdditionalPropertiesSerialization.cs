@@ -13,7 +13,7 @@ namespace AutoRest.CSharp.Output.Models.Serialization.Json
         public CSharpType Type { get; }
 
         public JsonAdditionalPropertiesSerialization(ObjectTypeProperty property, JsonSerialization valueSerialization, CSharpType type)
-            : base(property.Declaration.Name.ToVariableName(), new TypedMemberExpression(null, property.Declaration.Name, property.Declaration.Type), property.Declaration.Name, property.ValueType, valueSerialization, true, property.IsReadOnly, false)
+            : base(property.Declaration.Name.ToVariableName(), new TypedMemberExpression(null, property.Declaration.Name, property.Declaration.Type), property.Declaration.Name, property.ValueType, valueSerialization, true, property.IsReadOnly)
         {
             Type = type;
         }

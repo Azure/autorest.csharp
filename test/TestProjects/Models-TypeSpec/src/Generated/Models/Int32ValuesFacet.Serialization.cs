@@ -5,14 +5,20 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
 using System.Text.Json;
+using Azure;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace ModelsTypeSpec.Models
 {
-    public partial class Int32ValuesFacet : IUtf8JsonSerializable
+    public partial class Int32ValuesFacet : IUtf8JsonSerializable, IModelJsonSerializable<Int32ValuesFacet>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<Int32ValuesFacet>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<Int32ValuesFacet>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("kind"u8);
@@ -28,15 +34,99 @@ namespace ModelsTypeSpec.Models
             writer.WriteNumberValue(Value);
             writer.WritePropertyName("field"u8);
             writer.WriteStringValue(Field);
+            foreach (var item in _serializedAdditionalRawData)
+            {
+                writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+#endif
+            }
             writer.WriteEndObject();
         }
 
-        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
-        internal virtual RequestContent ToRequestContent()
+        Int32ValuesFacet IModelJsonSerializable<Int32ValuesFacet>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
-            return content;
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeInt32ValuesFacet(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<Int32ValuesFacet>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        Int32ValuesFacet IModelSerializable<Int32ValuesFacet>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeInt32ValuesFacet(document.RootElement, options);
+        }
+
+        internal static Int32ValuesFacet DeserializeInt32ValuesFacet(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
+            Int32ValuesFacetKind kind = default;
+            IReadOnlyList<int> values = default;
+            int value = default;
+            string field = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
+            foreach (var property in element.EnumerateObject())
+            {
+                if (property.NameEquals("kind"u8))
+                {
+                    kind = new Int32ValuesFacetKind(property.Value.GetString());
+                    continue;
+                }
+                if (property.NameEquals("values"u8))
+                {
+                    List<int> array = new List<int>();
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        array.Add(item.GetInt32());
+                    }
+                    values = array;
+                    continue;
+                }
+                if (property.NameEquals("value"u8))
+                {
+                    value = property.Value.GetInt32();
+                    continue;
+                }
+                if (property.NameEquals("field"u8))
+                {
+                    field = property.Value.GetString();
+                    continue;
+                }
+                additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+            }
+            serializedAdditionalRawData = additionalPropertiesDictionary;
+            return new Int32ValuesFacet(field, serializedAdditionalRawData, values, value, kind);
+        }
+
+        /// <summary> Deserializes the model from a raw response. </summary>
+        /// <param name="response"> The response to deserialize the model from. </param>
+        internal static new Int32ValuesFacet FromResponse(Response response)
+        {
+            using var document = JsonDocument.Parse(response.Content);
+            return DeserializeInt32ValuesFacet(document.RootElement, ModelSerializerOptions.DefaultWireOptions);
+        }
+
+        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
+        internal override RequestContent ToRequestContent()
+        {
+            return RequestContent.Create(this, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

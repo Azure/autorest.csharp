@@ -5,16 +5,20 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace ModelsTypeSpec.Models
 {
-    public partial class DerivedModelWithProperties : IUtf8JsonSerializable
+    public partial class DerivedModelWithProperties : IUtf8JsonSerializable, IModelJsonSerializable<DerivedModelWithProperties>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<DerivedModelWithProperties>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<DerivedModelWithProperties>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("requiredList"u8);
@@ -29,17 +33,52 @@ namespace ModelsTypeSpec.Models
                 writer.WritePropertyName("optionalPropertyOnBase"u8);
                 writer.WriteStringValue(OptionalPropertyOnBase);
             }
+            foreach (var item in _serializedAdditionalRawData)
+            {
+                writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+#endif
+            }
             writer.WriteEndObject();
         }
 
-        internal static DerivedModelWithProperties DeserializeDerivedModelWithProperties(JsonElement element)
+        DerivedModelWithProperties IModelJsonSerializable<DerivedModelWithProperties>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeDerivedModelWithProperties(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<DerivedModelWithProperties>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        DerivedModelWithProperties IModelSerializable<DerivedModelWithProperties>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeDerivedModelWithProperties(document.RootElement, options);
+        }
+
+        internal static DerivedModelWithProperties DeserializeDerivedModelWithProperties(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
             }
             IList<CollectionItem> requiredList = default;
             Optional<string> optionalPropertyOnBase = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("requiredList"u8))
@@ -57,24 +96,24 @@ namespace ModelsTypeSpec.Models
                     optionalPropertyOnBase = property.Value.GetString();
                     continue;
                 }
+                additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
             }
-            return new DerivedModelWithProperties(optionalPropertyOnBase.Value, requiredList);
+            serializedAdditionalRawData = additionalPropertiesDictionary;
+            return new DerivedModelWithProperties(optionalPropertyOnBase.Value, serializedAdditionalRawData, requiredList);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
-        internal static DerivedModelWithProperties FromResponse(Response response)
+        internal static new DerivedModelWithProperties FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeDerivedModelWithProperties(document.RootElement);
+            return DeserializeDerivedModelWithProperties(document.RootElement, ModelSerializerOptions.DefaultWireOptions);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>
-        internal virtual RequestContent ToRequestContent()
+        internal override RequestContent ToRequestContent()
         {
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
-            return content;
+            return RequestContent.Create(this, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

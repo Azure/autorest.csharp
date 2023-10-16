@@ -23,10 +23,10 @@ namespace AutoRest.CSharp.Generation.Writers
                 case ObjectType objectSchema:
                     WriteObjectSchema(writer, objectSchema);
                     break;
-                case EnumType {IsExtensible: true} e:
+                case EnumType { IsExtensible: true } e:
                     WriteExtensibleEnum(writer, e);
                     break;
-                case EnumType {IsExtensible: false} e:
+                case EnumType { IsExtensible: false } e:
                     WriteEnum(writer, e);
                     break;
                 default:
@@ -82,23 +82,31 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             foreach (var property in schema.Properties)
             {
-                WriteProperty(writer, property);
+                if (property == schema.AdditionalPropertiesProperty)
+                {
+                    WriteAdditionalPropertiesProperty(writer, schema.AdditionalPropertiesProperty);
+                }
+                else
+                {
+                    WriteProperty(writer, property);
 
-                if (property.FlattenedProperty != null)
-                    WriteProperty(writer, property.FlattenedProperty);
+                    if (property.FlattenedProperty != null)
+                        WriteProperty(writer, property.FlattenedProperty);
+                }
             }
-
-            WriteAdditionalPropertiesProperty(writer, schema.AdditionalPropertiesProperty);
         }
 
+        // TODO -- this is workaround
         private void WritePrivateAdditionalPropertiesProperty(CodeWriter writer, ObjectTypeProperty? additionalPropertiesProperty)
         {
             if (additionalPropertiesProperty is null || additionalPropertiesProperty.Declaration.Accessibility == "public")
                 return;
 
+            writer.WriteXmlDocumentationSummary($"{additionalPropertiesProperty.Description}");
             writer.Append($"{additionalPropertiesProperty.Declaration.Accessibility} ")
-                .Append($"{additionalPropertiesProperty.Declaration.Type} {additionalPropertiesProperty.Declaration.Name};")
-                .Line();
+                .Line($"{additionalPropertiesProperty.Declaration.Type} {additionalPropertiesProperty.Declaration.Name};");
+
+            writer.Line();
         }
 
         private void WriteAdditionalPropertiesProperty(CodeWriter writer, ObjectTypeProperty? additionalPropertiesProperty)

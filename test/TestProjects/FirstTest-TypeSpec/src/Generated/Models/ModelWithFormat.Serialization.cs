@@ -69,7 +69,7 @@ namespace FirstTestTypeSpec.Models
             }
             Uri sourceUrl = default;
             Guid guid = default;
-            Dictionary<string, BinaryData> serializedAdditionalRawData = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
@@ -86,7 +86,7 @@ namespace FirstTestTypeSpec.Models
                 additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new ModelWithFormat(sourceUrl, guid);
+            return new ModelWithFormat(sourceUrl, guid, serializedAdditionalRawData);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>

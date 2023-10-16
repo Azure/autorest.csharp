@@ -281,7 +281,6 @@ namespace AutoRest.CSharp.Output.Builders
                     serialization,
                     isRequired,
                     isReadOnly,
-                    false,
                     customSerializationMethodName: property.SerializationMapping?.SerializationValueHook,
                     customDeserializationMethodName: property.SerializationMapping?.DeserializationValueHook);
             }

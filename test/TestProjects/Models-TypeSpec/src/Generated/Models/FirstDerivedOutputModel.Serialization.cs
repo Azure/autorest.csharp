@@ -5,21 +5,72 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
+using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace ModelsTypeSpec.Models
 {
-    public partial class FirstDerivedOutputModel
+    public partial class FirstDerivedOutputModel : IUtf8JsonSerializable, IModelJsonSerializable<FirstDerivedOutputModel>
     {
-        internal static FirstDerivedOutputModel DeserializeFirstDerivedOutputModel(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<FirstDerivedOutputModel>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<FirstDerivedOutputModel>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            writer.WritePropertyName("first"u8);
+            writer.WriteBooleanValue(First);
+            writer.WritePropertyName("kind"u8);
+            writer.WriteStringValue(Kind);
+            foreach (var item in _serializedAdditionalRawData)
+            {
+                writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+#endif
+            }
+            writer.WriteEndObject();
+        }
+
+        FirstDerivedOutputModel IModelJsonSerializable<FirstDerivedOutputModel>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeFirstDerivedOutputModel(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<FirstDerivedOutputModel>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        FirstDerivedOutputModel IModelSerializable<FirstDerivedOutputModel>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeFirstDerivedOutputModel(document.RootElement, options);
+        }
+
+        internal static FirstDerivedOutputModel DeserializeFirstDerivedOutputModel(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
             }
             bool first = default;
             string kind = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("first"u8))
@@ -32,8 +83,10 @@ namespace ModelsTypeSpec.Models
                     kind = property.Value.GetString();
                     continue;
                 }
+                additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
             }
-            return new FirstDerivedOutputModel(kind, first);
+            serializedAdditionalRawData = additionalPropertiesDictionary;
+            return new FirstDerivedOutputModel(kind, serializedAdditionalRawData, first);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>
@@ -41,7 +94,13 @@ namespace ModelsTypeSpec.Models
         internal static new FirstDerivedOutputModel FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeFirstDerivedOutputModel(document.RootElement);
+            return DeserializeFirstDerivedOutputModel(document.RootElement, ModelSerializerOptions.DefaultWireOptions);
+        }
+
+        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
+        internal override RequestContent ToRequestContent()
+        {
+            return RequestContent.Create(this, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

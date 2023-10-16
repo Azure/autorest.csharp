@@ -141,7 +141,7 @@ namespace FirstTestTypeSpec.Models
             string requiredBadDescription = default;
             Optional<IList<int>> optionalNullableList = default;
             IList<int> requiredNullableList = default;
-            Dictionary<string, BinaryData> serializedAdditionalRawData = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
@@ -249,7 +249,7 @@ namespace FirstTestTypeSpec.Models
                 additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new Thing(name, requiredUnion, requiredLiteralString, requiredLiteralInt, requiredLiteralFloat, requiredLiteralBool, Optional.ToNullable(optionalLiteralString), Optional.ToNullable(optionalLiteralInt), Optional.ToNullable(optionalLiteralFloat), Optional.ToNullable(optionalLiteralBool), requiredBadDescription, Optional.ToList(optionalNullableList), requiredNullableList);
+            return new Thing(name, requiredUnion, requiredLiteralString, requiredLiteralInt, requiredLiteralFloat, requiredLiteralBool, Optional.ToNullable(optionalLiteralString), Optional.ToNullable(optionalLiteralInt), Optional.ToNullable(optionalLiteralFloat), Optional.ToNullable(optionalLiteralBool), requiredBadDescription, Optional.ToList(optionalNullableList), requiredNullableList, serializedAdditionalRawData);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>

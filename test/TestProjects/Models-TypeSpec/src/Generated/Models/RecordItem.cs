@@ -23,8 +23,9 @@ namespace ModelsTypeSpec.Models
         }
 
         /// <summary> Initializes a new instance of RecordItem. </summary>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="requiredList"> Required collection. </param>
-        internal RecordItem(IList<CollectionItem> requiredList) : base(requiredList)
+        internal RecordItem(IDictionary<string, BinaryData> serializedAdditionalRawData, IList<CollectionItem> requiredList) : base(serializedAdditionalRawData, requiredList)
         {
         }
     }

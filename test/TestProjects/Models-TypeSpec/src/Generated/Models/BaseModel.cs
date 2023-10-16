@@ -5,14 +5,29 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+using Azure.Core;
+
 namespace ModelsTypeSpec.Models
 {
     /// <summary> Base model. </summary>
     public partial class BaseModel
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        protected internal IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
         /// <summary> Initializes a new instance of BaseModel. </summary>
         public BaseModel()
         {
+            _serializedAdditionalRawData = new ChangeTrackingDictionary<string, BinaryData>();
+        }
+
+        /// <summary> Initializes a new instance of BaseModel. </summary>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal BaseModel(IDictionary<string, BinaryData> serializedAdditionalRawData)
+        {
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
     }
 }

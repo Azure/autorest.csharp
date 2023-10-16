@@ -5,16 +5,69 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace ModelsTypeSpec.Models
 {
-    internal partial class UnknownBaseModelWithDiscriminator
+    internal partial class UnknownBaseModelWithDiscriminator : IUtf8JsonSerializable, IModelJsonSerializable<UnknownBaseModelWithDiscriminator>
     {
-        internal static UnknownBaseModelWithDiscriminator DeserializeUnknownBaseModelWithDiscriminator(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<UnknownBaseModelWithDiscriminator>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<UnknownBaseModelWithDiscriminator>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            writer.WritePropertyName("discriminatorProperty"u8);
+            writer.WriteStringValue(DiscriminatorProperty);
+            if (Optional.IsDefined(OptionalPropertyOnBase))
+            {
+                writer.WritePropertyName("optionalPropertyOnBase"u8);
+                writer.WriteStringValue(OptionalPropertyOnBase);
+            }
+            writer.WritePropertyName("requiredPropertyOnBase"u8);
+            writer.WriteNumberValue(RequiredPropertyOnBase);
+            foreach (var item in _serializedAdditionalRawData)
+            {
+                writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
+#endif
+            }
+            writer.WriteEndObject();
+        }
+
+        UnknownBaseModelWithDiscriminator IModelJsonSerializable<UnknownBaseModelWithDiscriminator>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeUnknownBaseModelWithDiscriminator(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<UnknownBaseModelWithDiscriminator>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        UnknownBaseModelWithDiscriminator IModelSerializable<UnknownBaseModelWithDiscriminator>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeUnknownBaseModelWithDiscriminator(document.RootElement, options);
+        }
+
+        internal static UnknownBaseModelWithDiscriminator DeserializeUnknownBaseModelWithDiscriminator(JsonElement element, ModelSerializerOptions options = null)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -22,6 +75,8 @@ namespace ModelsTypeSpec.Models
             string discriminatorProperty = "Unknown";
             Optional<string> optionalPropertyOnBase = default;
             int requiredPropertyOnBase = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("discriminatorProperty"u8))
@@ -39,8 +94,10 @@ namespace ModelsTypeSpec.Models
                     requiredPropertyOnBase = property.Value.GetInt32();
                     continue;
                 }
+                additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
             }
-            return new UnknownBaseModelWithDiscriminator(discriminatorProperty, optionalPropertyOnBase.Value, requiredPropertyOnBase);
+            serializedAdditionalRawData = additionalPropertiesDictionary;
+            return new UnknownBaseModelWithDiscriminator(discriminatorProperty, optionalPropertyOnBase.Value, requiredPropertyOnBase, serializedAdditionalRawData);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>
@@ -48,7 +105,13 @@ namespace ModelsTypeSpec.Models
         internal static new UnknownBaseModelWithDiscriminator FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeUnknownBaseModelWithDiscriminator(document.RootElement);
+            return DeserializeUnknownBaseModelWithDiscriminator(document.RootElement, ModelSerializerOptions.DefaultWireOptions);
+        }
+
+        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
+        internal override RequestContent ToRequestContent()
+        {
+            return RequestContent.Create(this, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

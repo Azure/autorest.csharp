@@ -93,7 +93,7 @@ namespace FirstTestTypeSpec.Models
             int? requiredNullablePrimitive = default;
             StringExtensibleEnum? requiredExtensibleEnum = default;
             StringFixedEnum? requiredFixedEnum = default;
-            Dictionary<string, BinaryData> serializedAdditionalRawData = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
@@ -130,7 +130,7 @@ namespace FirstTestTypeSpec.Models
                 additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new ModelWithRequiredNullableProperties(requiredNullablePrimitive, requiredExtensibleEnum, requiredFixedEnum);
+            return new ModelWithRequiredNullableProperties(requiredNullablePrimitive, requiredExtensibleEnum, requiredFixedEnum, serializedAdditionalRawData);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>

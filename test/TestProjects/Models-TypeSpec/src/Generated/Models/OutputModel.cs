@@ -15,6 +15,9 @@ namespace ModelsTypeSpec.Models
     /// <summary> Model used only as output. </summary>
     public partial class OutputModel
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
         /// <summary> Initializes a new instance of OutputModel. </summary>
         /// <param name="requiredString"> Required string. </param>
         /// <param name="requiredInt"> Required int. </param>
@@ -38,6 +41,7 @@ namespace ModelsTypeSpec.Models
             OptionalNullableList = new ChangeTrackingList<CollectionItem>();
             OptionalRecord = new ChangeTrackingDictionary<string, RecordItem>();
             OptionalNullableRecord = new ChangeTrackingDictionary<string, RecordItem>();
+            _serializedAdditionalRawData = new ChangeTrackingDictionary<string, BinaryData>();
         }
 
         /// <summary> Initializes a new instance of OutputModel. </summary>
@@ -50,7 +54,8 @@ namespace ModelsTypeSpec.Models
         /// <param name="optionalNullableList"> Optional model nullable collection. </param>
         /// <param name="optionalRecord"> Optional model record. </param>
         /// <param name="optionalNullableRecord"> Optional model nullable record. </param>
-        internal OutputModel(string requiredString, int requiredInt, DerivedModel requiredModel, IReadOnlyList<CollectionItem> requiredList, IReadOnlyDictionary<string, RecordItem> requiredModelRecord, IReadOnlyList<CollectionItem> optionalList, IReadOnlyList<CollectionItem> optionalNullableList, IReadOnlyDictionary<string, RecordItem> optionalRecord, IReadOnlyDictionary<string, RecordItem> optionalNullableRecord)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal OutputModel(string requiredString, int requiredInt, DerivedModel requiredModel, IReadOnlyList<CollectionItem> requiredList, IReadOnlyDictionary<string, RecordItem> requiredModelRecord, IReadOnlyList<CollectionItem> optionalList, IReadOnlyList<CollectionItem> optionalNullableList, IReadOnlyDictionary<string, RecordItem> optionalRecord, IReadOnlyDictionary<string, RecordItem> optionalNullableRecord, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             RequiredString = requiredString;
             RequiredInt = requiredInt;
@@ -61,6 +66,7 @@ namespace ModelsTypeSpec.Models
             OptionalNullableList = optionalNullableList;
             OptionalRecord = optionalRecord;
             OptionalNullableRecord = optionalNullableRecord;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Required string. </summary>

@@ -14,7 +14,8 @@ namespace FirstTestTypeSpec.Models
     /// <summary> this is a model with a projected name. </summary>
     public partial class ProjectedModel
     {
-        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
         /// <summary> Initializes a new instance of ProjectedModel. </summary>
         /// <param name="name"> name of the ModelWithProjectedName. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
@@ -23,6 +24,16 @@ namespace FirstTestTypeSpec.Models
             Argument.AssertNotNull(name, nameof(name));
 
             Name = name;
+            _serializedAdditionalRawData = new ChangeTrackingDictionary<string, BinaryData>();
+        }
+
+        /// <summary> Initializes a new instance of ProjectedModel. </summary>
+        /// <param name="name"> name of the ModelWithProjectedName. </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ProjectedModel(string name, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        {
+            Name = name;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> name of the ModelWithProjectedName. </summary>

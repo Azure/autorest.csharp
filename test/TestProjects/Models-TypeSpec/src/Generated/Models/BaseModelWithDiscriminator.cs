@@ -5,6 +5,10 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+using Azure.Core;
+
 namespace ModelsTypeSpec.Models
 {
     /// <summary>
@@ -14,22 +18,28 @@ namespace ModelsTypeSpec.Models
     /// </summary>
     public abstract partial class BaseModelWithDiscriminator
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
+        protected internal IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
         /// <summary> Initializes a new instance of BaseModelWithDiscriminator. </summary>
         /// <param name="requiredPropertyOnBase"> Required property on base. </param>
         protected BaseModelWithDiscriminator(int requiredPropertyOnBase)
         {
             RequiredPropertyOnBase = requiredPropertyOnBase;
+            _serializedAdditionalRawData = new ChangeTrackingDictionary<string, BinaryData>();
         }
 
         /// <summary> Initializes a new instance of BaseModelWithDiscriminator. </summary>
         /// <param name="discriminatorProperty"> Discriminator. </param>
         /// <param name="optionalPropertyOnBase"> Optional property on base. </param>
         /// <param name="requiredPropertyOnBase"> Required property on base. </param>
-        internal BaseModelWithDiscriminator(string discriminatorProperty, string optionalPropertyOnBase, int requiredPropertyOnBase)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal BaseModelWithDiscriminator(string discriminatorProperty, string optionalPropertyOnBase, int requiredPropertyOnBase, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             DiscriminatorProperty = discriminatorProperty;
             OptionalPropertyOnBase = optionalPropertyOnBase;
             RequiredPropertyOnBase = requiredPropertyOnBase;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Discriminator. </summary>
