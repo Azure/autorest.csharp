@@ -37,7 +37,8 @@ namespace AutoRest.CSharp.Mgmt.Report
             {
                 { "1", "If the transform configuration has a '!' postfix (i.e. 'ProxyResource!'), it means the config is not from *.md config file (i.e. it's built-in through hard code)" },
                 { "2", "[{num}] in transform log is the index the transform is applied" },
-                { "3", "[=] in transform log means the value (target FullSerializedName) is the same as the key (transform configuration)" }
+                { "3", "[=] in transform log means the value (target FullSerializedName) is the same as the key (transform configuration)" },
+                { "4", "Supported configuration: mgmt-debug.generate-report=true|false, mgmt-debug.report-only=true|false, mgmt-debug.report-format=yaml|json"}
             });
 
             switch (format.ToLower())
