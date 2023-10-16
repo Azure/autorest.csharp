@@ -54,7 +54,6 @@ namespace AutoRest.CSharp.Common.Output.Builders
             }
 
             // short version samples
-            var hasResponseBody = operation.Responses.Any(r => r is { IsErrorResponse: false, BodyType: {} });
             var shouldGenerateShortVersion = ShouldGenerateShortVersion(protocolMethodSignature, convenienceMethodSignature);
             var samples = new List<DpgOperationSample>();
             foreach (var (exampleKey, clientParameters) in _clientExamples)
@@ -67,12 +66,12 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 if (operation.Examples.FirstOrDefault(e => e.Key == exampleKey) is {} operationExample)
                 {
                     // add protocol method sample
-                    samples.Add(new(_clientInvocationChain, protocolMethodSignature, requestBodyType, responseType, pageItemType, clientParameters, operationExample, false, hasResponseBody, exampleKey));
+                    samples.Add(new(_clientInvocationChain, protocolMethodSignature, requestBodyType, responseType, pageItemType, clientParameters, operationExample, false, exampleKey));
 
                     // add convenience method sample
                     if (convenienceMethodSignature != null && convenienceMethodSignature.Modifiers.HasFlag(MethodSignatureModifiers.Public))
                     {
-                        samples.Add(new(_clientInvocationChain, convenienceMethodSignature, requestBodyType, responseType, pageItemType, clientParameters, operationExample, true, hasResponseBody, exampleKey));
+                        samples.Add(new(_clientInvocationChain, convenienceMethodSignature, requestBodyType, responseType, pageItemType, clientParameters, operationExample, true, exampleKey));
                     }
                 }
             }

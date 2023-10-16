@@ -31,7 +31,7 @@ namespace AutoRest.CSharp.Output.Samples.Models
         public bool IsLongRunning { get; }
         public bool IsAllParametersUsed { get; }
         public bool IsConvenienceSample { get; }
-        public bool HasResponseBody { get; }
+        public bool BuildResponseParsing { get; }
         public string ExampleKey { get; }
         public CSharpType? ResponseType { get; }
         public CSharpType? PageItemType { get; }
@@ -40,13 +40,13 @@ namespace AutoRest.CSharp.Output.Samples.Models
         private readonly IEnumerable<InputParameterExample> _inputClientParameterExamples;
         private readonly InputOperationExample _inputOperationExample;
 
-        public DpgOperationSample(IReadOnlyList<MethodSignatureBase> clientInvocationChain, MethodSignature signature, InputType? requestBodyType, CSharpType? responseType, CSharpType? pageItemType, IEnumerable<InputParameterExample> inputClientParameterExamples, InputOperationExample inputOperationExample, bool isConvenienceSample, bool hasResponseBody, string exampleKey)
+        public DpgOperationSample(IReadOnlyList<MethodSignatureBase> clientInvocationChain, MethodSignature signature, InputType? requestBodyType, CSharpType? responseType, CSharpType? pageItemType, IEnumerable<InputParameterExample> inputClientParameterExamples, InputOperationExample inputOperationExample, bool isConvenienceSample, string exampleKey)
         {
             _requestBodyType = requestBodyType;
             _inputClientParameterExamples = inputClientParameterExamples;
             _inputOperationExample = inputOperationExample;
             IsConvenienceSample = isConvenienceSample;
-            HasResponseBody = hasResponseBody;
+            BuildResponseParsing = ResponseType is not null && !ResponseType.Equals(typeof(bool));
             ExampleKey = exampleKey;
             IsAllParametersUsed = exampleKey == ExampleMockValueBuilder.MockExampleAllParameterKey; // TODO -- only work around for the response usage building.
 
@@ -352,10 +352,10 @@ namespace AutoRest.CSharp.Output.Samples.Models
             var methodName = methodSignature.Name;
             if (IsAllParametersUsed)
             {
-                return $"This sample shows how to call {methodName} with all {GenerateParameterAndRequestContentDescription(methodSignature.Parameters)}{(ResponseType is not null ? " and parse the result" : "")}.";
+                return $"This sample shows how to call {methodName} with all {GenerateParameterAndRequestContentDescription(methodSignature.Parameters)}{(BuildResponseParsing ? " and parse the result" : "")}.";
             }
 
-            return $"This sample shows how to call {methodName}{(ResponseType is not null ? " and parse the result" : string.Empty)}.";
+            return $"This sample shows how to call {methodName}{(BuildResponseParsing ? " and parse the result" : string.Empty)}.";
         }
 
         // RequestContext is excluded
