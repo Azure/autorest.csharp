@@ -155,7 +155,7 @@ using RequestContent content = RequestContent.Create(new
     key = new
     {
         property = "<property>",
-        children = new { },
+        children = new{},
     },
 });
 Response response = await client.PutAsync(content);
@@ -189,7 +189,7 @@ using RequestContent content = RequestContent.Create(new
     key = new
     {
         property = "<property>",
-        children = new { },
+        children = new{},
     },
 });
 Response response = client.Put(content);

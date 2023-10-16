@@ -968,7 +968,7 @@ namespace FirstTestTypeSpec.Samples
 
             Response<bool> response = client.HeadAsBoolean("<id>");
 
-            Console.WriteLine(response.GetRawResponse().Status);
+            Console.WriteLine(response.Value);
         }
 
         [Test]
@@ -980,7 +980,7 @@ namespace FirstTestTypeSpec.Samples
 
             Response<bool> response = await client.HeadAsBooleanAsync("<id>");
 
-            Console.WriteLine(response.GetRawResponse().Status);
+            Console.WriteLine(response.Value);
         }
 
         [Test]
@@ -992,7 +992,7 @@ namespace FirstTestTypeSpec.Samples
 
             Response<bool> response = client.HeadAsBoolean("<id>");
 
-            Console.WriteLine(response.GetRawResponse().Status);
+            Console.WriteLine(response.Value);
         }
 
         [Test]
@@ -1004,7 +1004,7 @@ namespace FirstTestTypeSpec.Samples
 
             Response<bool> response = await client.HeadAsBooleanAsync("<id>");
 
-            Console.WriteLine(response.GetRawResponse().Status);
+            Console.WriteLine(response.Value);
         }
 
         [Test]

@@ -46,7 +46,7 @@ namespace AutoRest.CSharp.Output.Samples.Models
             _inputClientParameterExamples = inputClientParameterExamples;
             _inputOperationExample = inputOperationExample;
             IsConvenienceSample = isConvenienceSample;
-            BuildResponseParsing = responseType is not null && !responseType.Equals(typeof(bool));
+            BuildResponseParsing = responseType is not null && !signature.ReturnType!.Equals(typeof(Response<bool>));
             ExampleKey = exampleKey;
             IsAllParametersUsed = exampleKey == ExampleMockValueBuilder.MockExampleAllParameterKey; // TODO -- only work around for the response usage building.
 

@@ -200,7 +200,7 @@ Console.WriteLine(result.GetProperty("warnings")[0].GetProperty("message").ToStr
 Console.WriteLine(result.GetProperty("errors").GetProperty("code").ToString());
 Console.WriteLine(result.GetProperty("errors").GetProperty("message").ToString());
 Console.WriteLine(result.GetProperty("errors").GetProperty("target").ToString());
-Console.WriteLine(result.GetProperty("errors").GetProperty("innererror").GetProperty("code").ToString());
+Console.WriteLine(result.GetProperty("errors").GetProperty("details")[0].ToString());
 Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code></example>
     </member>
@@ -243,7 +243,7 @@ Console.WriteLine(result.GetProperty("warnings")[0].GetProperty("message").ToStr
 Console.WriteLine(result.GetProperty("errors").GetProperty("code").ToString());
 Console.WriteLine(result.GetProperty("errors").GetProperty("message").ToString());
 Console.WriteLine(result.GetProperty("errors").GetProperty("target").ToString());
-Console.WriteLine(result.GetProperty("errors").GetProperty("innererror").GetProperty("code").ToString());
+Console.WriteLine(result.GetProperty("errors").GetProperty("details")[0].ToString());
 Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code></example>
     </member>
@@ -320,7 +320,7 @@ Console.WriteLine(result.GetProperty("warnings")[0].GetProperty("message").ToStr
 Console.WriteLine(result.GetProperty("errors").GetProperty("code").ToString());
 Console.WriteLine(result.GetProperty("errors").GetProperty("message").ToString());
 Console.WriteLine(result.GetProperty("errors").GetProperty("target").ToString());
-Console.WriteLine(result.GetProperty("errors").GetProperty("innererror").GetProperty("code").ToString());
+Console.WriteLine(result.GetProperty("errors").GetProperty("details")[0].ToString());
 Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code></example>
     </member>
@@ -363,7 +363,7 @@ Console.WriteLine(result.GetProperty("warnings")[0].GetProperty("message").ToStr
 Console.WriteLine(result.GetProperty("errors").GetProperty("code").ToString());
 Console.WriteLine(result.GetProperty("errors").GetProperty("message").ToString());
 Console.WriteLine(result.GetProperty("errors").GetProperty("target").ToString());
-Console.WriteLine(result.GetProperty("errors").GetProperty("innererror").GetProperty("code").ToString());
+Console.WriteLine(result.GetProperty("errors").GetProperty("details")[0].ToString());
 Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code></example>
     </member>
@@ -791,7 +791,7 @@ Console.WriteLine(result.GetProperty("status").ToString());
 Console.WriteLine(result.GetProperty("error").GetProperty("code").ToString());
 Console.WriteLine(result.GetProperty("error").GetProperty("message").ToString());
 Console.WriteLine(result.GetProperty("error").GetProperty("target").ToString());
-Console.WriteLine(result.GetProperty("error").GetProperty("innererror").GetProperty("code").ToString());
+Console.WriteLine(result.GetProperty("error").GetProperty("details")[0].ToString());
 ]]></code></example>
     </member>
     <member name="Export(WaitUntil,string,string,RequestContext)">
@@ -822,7 +822,7 @@ Console.WriteLine(result.GetProperty("status").ToString());
 Console.WriteLine(result.GetProperty("error").GetProperty("code").ToString());
 Console.WriteLine(result.GetProperty("error").GetProperty("message").ToString());
 Console.WriteLine(result.GetProperty("error").GetProperty("target").ToString());
-Console.WriteLine(result.GetProperty("error").GetProperty("innererror").GetProperty("code").ToString());
+Console.WriteLine(result.GetProperty("error").GetProperty("details")[0].ToString());
 ]]></code></example>
     </member>
     <member name="ImportxAsync(WaitUntil,string,RequestContext)">
@@ -853,7 +853,7 @@ Console.WriteLine(result.GetProperty("status").ToString());
 Console.WriteLine(result.GetProperty("error").GetProperty("code").ToString());
 Console.WriteLine(result.GetProperty("error").GetProperty("message").ToString());
 Console.WriteLine(result.GetProperty("error").GetProperty("target").ToString());
-Console.WriteLine(result.GetProperty("error").GetProperty("innererror").GetProperty("code").ToString());
+Console.WriteLine(result.GetProperty("error").GetProperty("details")[0].ToString());
 ]]></code></example>
     </member>
     <member name="Importx(WaitUntil,string,RequestContext)">
@@ -884,7 +884,7 @@ Console.WriteLine(result.GetProperty("status").ToString());
 Console.WriteLine(result.GetProperty("error").GetProperty("code").ToString());
 Console.WriteLine(result.GetProperty("error").GetProperty("message").ToString());
 Console.WriteLine(result.GetProperty("error").GetProperty("target").ToString());
-Console.WriteLine(result.GetProperty("error").GetProperty("innererror").GetProperty("code").ToString());
+Console.WriteLine(result.GetProperty("error").GetProperty("details")[0].ToString());
 ]]></code></example>
     </member>
     <member name="TrainAsync(WaitUntil,string,RequestContent,RequestContext)">
@@ -923,7 +923,7 @@ Console.WriteLine(result.GetProperty("status").ToString());
 Console.WriteLine(result.GetProperty("error").GetProperty("code").ToString());
 Console.WriteLine(result.GetProperty("error").GetProperty("message").ToString());
 Console.WriteLine(result.GetProperty("error").GetProperty("target").ToString());
-Console.WriteLine(result.GetProperty("error").GetProperty("innererror").GetProperty("code").ToString());
+Console.WriteLine(result.GetProperty("error").GetProperty("details")[0].ToString());
 ]]></code></example>
     </member>
     <member name="Train(WaitUntil,string,RequestContent,RequestContext)">
@@ -962,7 +962,7 @@ Console.WriteLine(result.GetProperty("status").ToString());
 Console.WriteLine(result.GetProperty("error").GetProperty("code").ToString());
 Console.WriteLine(result.GetProperty("error").GetProperty("message").ToString());
 Console.WriteLine(result.GetProperty("error").GetProperty("target").ToString());
-Console.WriteLine(result.GetProperty("error").GetProperty("innererror").GetProperty("code").ToString());
+Console.WriteLine(result.GetProperty("error").GetProperty("details")[0].ToString());
 ]]></code></example>
     </member>
     <member name="DeployProjectAsync(WaitUntil,string,string,RequestContent,RequestContext)">
@@ -1091,7 +1091,7 @@ Console.WriteLine(result.GetProperty("status").ToString());
 Console.WriteLine(result.GetProperty("error").GetProperty("code").ToString());
 Console.WriteLine(result.GetProperty("error").GetProperty("message").ToString());
 Console.WriteLine(result.GetProperty("error").GetProperty("target").ToString());
-Console.WriteLine(result.GetProperty("error").GetProperty("innererror").GetProperty("code").ToString());
+Console.WriteLine(result.GetProperty("error").GetProperty("details")[0].ToString());
 ]]></code></example>
     </member>
     <member name="SwapDeployments(WaitUntil,string,RequestContent,RequestContext)">
@@ -1132,7 +1132,7 @@ Console.WriteLine(result.GetProperty("status").ToString());
 Console.WriteLine(result.GetProperty("error").GetProperty("code").ToString());
 Console.WriteLine(result.GetProperty("error").GetProperty("message").ToString());
 Console.WriteLine(result.GetProperty("error").GetProperty("target").ToString());
-Console.WriteLine(result.GetProperty("error").GetProperty("innererror").GetProperty("code").ToString());
+Console.WriteLine(result.GetProperty("error").GetProperty("details")[0].ToString());
 ]]></code></example>
     </member>
   </members>

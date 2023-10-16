@@ -10,7 +10,7 @@ SingleClient client = new SingleClient(endpoint);
 
 Response<bool> response = await client.MyOpAsync();
 
-Console.WriteLine(response.GetRawResponse().Status);
+Console.WriteLine(response.Value);
 ]]></code>
 This sample shows how to call MyOpAsync with all request content.
 <code><![CDATA[
@@ -19,7 +19,7 @@ SingleClient client = new SingleClient(endpoint);
 
 Response<bool> response = await client.MyOpAsync();
 
-Console.WriteLine(response.GetRawResponse().Status);
+Console.WriteLine(response.Value);
 ]]></code></example>
     </member>
     <member name="MyOp(RequestContext)">
@@ -31,7 +31,7 @@ SingleClient client = new SingleClient(endpoint);
 
 Response<bool> response = client.MyOp();
 
-Console.WriteLine(response.GetRawResponse().Status);
+Console.WriteLine(response.Value);
 ]]></code>
 This sample shows how to call MyOp with all request content.
 <code><![CDATA[
@@ -40,7 +40,7 @@ SingleClient client = new SingleClient(endpoint);
 
 Response<bool> response = client.MyOp();
 
-Console.WriteLine(response.GetRawResponse().Status);
+Console.WriteLine(response.Value);
 ]]></code></example>
     </member>
   </members>
